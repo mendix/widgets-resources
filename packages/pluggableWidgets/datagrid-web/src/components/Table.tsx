@@ -6,9 +6,11 @@ import { InfiniteBody } from "./InfiniteBody";
 import {
     ColumnInterface,
     ColumnWithStrictAccessor,
+    Filters,
     FilterValue,
     IdType,
     Row,
+    SortingRule,
     useColumnOrder,
     useFilters,
     useFlexLayout,
@@ -17,7 +19,7 @@ import {
     useSortBy,
     useTable
 } from "react-table";
-import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
+import { ColumnsPreviewType, ColumnsType, FilterMethodEnum } from "../../typings/DatagridProps";
 
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
 
@@ -44,6 +46,7 @@ export interface TableProps<T> {
     valueForFilter: (value: T, columnIndex: number) => string | undefined;
     valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
+    filterMethod: FilterMethodEnum;
 }
 
 export function Table<T>(props: TableProps<T>): ReactElement {
@@ -51,19 +54,43 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const isInfinite = !props.paging && !isSortingOrFiltering;
     const [dragOver, setDragOver] = useState("");
     const [columnSelectorWidth, setColumnSelectorWidth] = useState(0);
+    const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
+    const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
+        (props.columns
+            .map((c, i) => (c.hidable === "hidden" ? i.toString() : undefined))
+            .filter(Boolean) as string[]) ?? []
+    );
+    const [paginationIndex, setPaginationIndex] = useState<number>(0);
+    const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
+    const [filters, setFilters] = useState<Filters<object>>([]);
 
     const filterTypes = useMemo(
         () => ({
             text: (rows: Array<Row<object>>, id: IdType<object>, filterValue: FilterValue) => {
                 return rows.filter(row => {
                     const value = props.valueForFilter(row.values[id], Number(id));
-                    return value !== undefined
-                        ? value.toLowerCase().startsWith(String(filterValue).toLowerCase())
-                        : true;
+                    if (!filterValue) {
+                        return true;
+                    }
+
+                    if (!value) {
+                        return false;
+                    }
+
+                    switch (props.filterMethod) {
+                        case "contains":
+                            return value.toLowerCase().includes(String(filterValue).toLowerCase());
+                        case "endsWith":
+                            return value.toLowerCase().endsWith(String(filterValue).toLowerCase());
+                        case "startsWith":
+                            return value.toLowerCase().startsWith(String(filterValue).toLowerCase());
+                        default:
+                            return false;
+                    }
                 });
             }
         }),
-        [props.columns]
+        [props.columns, props.filterMethod, props.valueForFilter]
     );
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
@@ -116,13 +143,30 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
         () => ({
-            Filter: ({ column: { filterValue, setFilter } }): ReactElement => (
+            Filter: ({ column: { filterValue, setFilter, id } }): ReactElement => (
                 <div className="filter">
                     <input
                         className="form-control"
                         value={filterValue || ""}
                         onChange={e => {
-                            setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+                            const value = e.target.value || undefined; // Set undefined to remove the filter entirely
+                            setFilter(value);
+                            setFilters(prev => {
+                                if (value) {
+                                    const previousFilter = prev.find(c => c.id === id);
+                                    if (previousFilter) {
+                                        previousFilter.value = value;
+                                    } else {
+                                        prev.push({ id, value });
+                                    }
+                                } else {
+                                    prev.splice(
+                                        prev.findIndex(c => c.id === id),
+                                        1
+                                    );
+                                }
+                                return [...prev];
+                            });
                         }}
                     />
                 </div>
@@ -146,7 +190,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         prepareRow,
         getTableBodyProps,
         allColumns,
-        setColumnOrder,
+        setColumnOrder: setOrder,
         visibleColumns,
         state: { pageIndex },
         gotoPage,
@@ -163,8 +207,16 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             disableResizing: !props.columnsResizable,
             disableSortBy: !props.columnsSortable,
             disableFilters: !props.columnsFilterable,
-            initialState: { pageSize: props.pageSize },
-            disableMultiSort: true
+            initialState: {
+                pageSize: props.pageSize,
+                columnOrder,
+                hiddenColumns,
+                pageIndex: paginationIndex,
+                sortBy,
+                filters
+            },
+            disableMultiSort: true,
+            autoResetSortBy: false
         },
         useFilters,
         useSortBy,
@@ -196,6 +248,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 page={pageIndex}
                 pageSize={props.pageSize}
                 previousPage={previousPage}
+                setPaginationIndex={setPaginationIndex}
             />
         )
     ) : null;
@@ -216,8 +269,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     dragOver={dragOver}
                                     filterable={props.columnsFilterable}
                                     resizable={props.columnsResizable}
-                                    setColumnOrder={setColumnOrder}
+                                    setColumnOrder={(newOrder: Array<IdType<object>>) => {
+                                        setOrder(newOrder);
+                                        setColumnOrder(newOrder);
+                                    }}
                                     setDragOver={setDragOver}
+                                    setSortBy={setSortBy}
                                     sortable={props.columnsSortable}
                                     visibleColumns={visibleColumns}
                                 />
@@ -227,6 +284,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     allColumns={allColumns}
                                     width={columnSelectorWidth}
                                     setWidth={setColumnSelectorWidth}
+                                    setHiddenColumns={setHiddenColumns}
                                 />
                             )}
                         </div>

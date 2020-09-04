@@ -1,5 +1,14 @@
-import { createElement, Dispatch, ReactElement, SetStateAction, DragEvent, DragEventHandler, useCallback } from "react";
-import { ColumnInstance, HeaderGroup, IdType, TableHeaderProps } from "react-table";
+import {
+    createElement,
+    Dispatch,
+    ReactElement,
+    SetStateAction,
+    DragEvent,
+    DragEventHandler,
+    useCallback,
+    MouseEvent
+} from "react";
+import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } from "react-table";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
@@ -12,32 +21,23 @@ export interface HeaderProps<D extends object> {
     draggable: boolean;
     dragOver: string;
     visibleColumns: Array<ColumnInstance<D>>;
-    setColumnOrder: (updater: ((columnOrder: Array<IdType<D>>) => Array<IdType<D>>) | Array<IdType<D>>) => void;
+    setColumnOrder: (updater: Array<IdType<D>>) => void;
     setDragOver: Dispatch<SetStateAction<string>>;
+    setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>;
 }
 
-export function Header<D extends object>({
-    column,
-    sortable,
-    resizable,
-    filterable,
-    draggable,
-    dragOver,
-    visibleColumns,
-    setColumnOrder,
-    setDragOver
-}: HeaderProps<D>): ReactElement {
-    const canSort = sortable && column.canSort;
-    const canDrag = draggable && (column.canDrag ?? false);
-    const draggableProps = useDraggable(canDrag, visibleColumns, setColumnOrder, setDragOver);
+export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
+    const canSort = props.sortable && props.column.canSort;
+    const canDrag = props.draggable && (props.column.canDrag ?? false);
+    const draggableProps = useDraggable(canDrag, props.visibleColumns, props.setColumnOrder, props.setDragOver);
 
-    const { onClick, style, ...rest } = column.getHeaderProps(
-        canSort ? column.getSortByToggleProps() : undefined
-    ) as TableHeaderProps & { onClick: () => void };
+    const { onClick, style, ...rest } = props.column.getHeaderProps(
+        canSort ? props.column.getSortByToggleProps() : undefined
+    ) as TableHeaderProps & { onClick: (e: MouseEvent<HTMLDivElement>) => void };
 
     const sortIcon = canSort
-        ? column.isSorted
-            ? column.isSortedDesc
+        ? props.column.isSorted
+            ? props.column.isSortedDesc
                 ? faLongArrowAltDown
                 : faLongArrowAltUp
             : faArrowsAltV
@@ -49,31 +49,55 @@ export function Header<D extends object>({
             {...rest}
             style={{
                 ...style,
-                ...(!resizable ? { flex: "1 1 0px" } : {}),
-                ...(!sortable || !column.canSort ? { cursor: "unset" } : {})
+                ...(!props.resizable ? { flex: "1 1 0px" } : {}),
+                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {})
             }}
+            title={props.column.render("Header") as string}
         >
             <div
-                id={column.id}
-                className={classNames("column-container", canDrag && column.id === dragOver ? "dragging" : "")}
+                id={props.column.id}
+                className={classNames(
+                    "column-container",
+                    canDrag && props.column.id === props.dragOver ? "dragging" : ""
+                )}
                 {...draggableProps}
             >
                 <div
-                    id={column.id}
+                    id={props.column.id}
                     className={classNames("column-header", canSort ? "clickable" : "")}
-                    onClick={canSort ? onClick : undefined}
+                    onClick={
+                        canSort
+                            ? e => {
+                                  /**
+                                   * Always analyse previous values to predict the next
+                                   * 1 - !props.column.isSorted turns to asc
+                                   * 2 - isSortedDesc === false && props.column.isSorted turns to desc
+                                   * 3 - isSortedDesc === true && props.column.isSorted turns to unsorted
+                                   * If multisort is allowed in the future this should be changed to append instead of just return a new array
+                                   */
+                                  if (!props.column.isSorted) {
+                                      props.setSortBy([{ id: props.column.id, desc: false }]);
+                                  } else if (props.column.isSorted && !props.column.isSortedDesc) {
+                                      props.setSortBy([{ id: props.column.id, desc: true }]);
+                                  } else {
+                                      props.setSortBy([]);
+                                  }
+                                  onClick(e);
+                              }
+                            : undefined
+                    }
                 >
-                    {column.render("Header")}
+                    {props.column.render("Header")}
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
-                {filterable &&
-                    column.canFilter &&
-                    (column.customFilter ? column.customFilter : column.render("Filter"))}
+                {props.filterable &&
+                    props.column.canFilter &&
+                    (props.column.customFilter ? props.column.customFilter : props.column.render("Filter"))}
             </div>
-            {resizable && column.canResize && (
+            {props.resizable && props.column.canResize && (
                 <div
-                    {...column.getResizerProps()}
-                    className={`column-resizer ${column.isResizing ? "isResizing" : ""}`}
+                    {...props.column.getResizerProps()}
+                    className={`column-resizer ${props.column.isResizing ? "isResizing" : ""}`}
                 />
             )}
         </div>

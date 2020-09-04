@@ -25,6 +25,8 @@ export interface ColumnsType {
 
 export type PagingPositionEnum = "bottom" | "top";
 
+export type FilterMethodEnum = "startsWith" | "contains" | "endsWith";
+
 export interface ColumnsPreviewType {
     attribute: string;
     header: string;
@@ -54,6 +56,7 @@ export interface DatagridContainerProps {
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
     columnsFilterable: boolean;
+    filterMethod: FilterMethodEnum;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
@@ -73,6 +76,7 @@ export interface DatagridPreviewProps {
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
     columnsFilterable: boolean;
+    filterMethod: FilterMethodEnum;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
