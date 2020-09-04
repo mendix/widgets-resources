@@ -1,33 +1,36 @@
-import { ReactElement } from "react";
-// import { ValueStatus } from "mendix";
+import { createElement, ReactElement, useState, useEffect } from "react";
+import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
+import { ValueStatus } from "mendix";
 
-// import { Charts as ChartsComponent } from "./components/LineChart";
-// import { LineChartProps } from "../typings/LineChartProps";
+import { LineChartProps } from "../typings/LineChartProps";
 
-export function LineChart(): ReactElement | null {
-    // const { data, xAttribute, yAttribute } = props;
+export function LineChart(props: LineChartProps<undefined>): ReactElement | null {
+    const { series } = props;
 
-    // const [chartData, setChartData] = useState<Array<{ x: any; y: any }>>([]);
+    const [chartSeries, setChartSeries] = useState<Array<LineChartSeries>>([]);
 
-    // useEffect(() => {
-    //     // console.warn("effect", data.status);
-    //     // console.warn(data.totalCount);
-    //     if (data.status === ValueStatus.Available) {
-    //         setChartData(
-    //             data.items!.map(item => {
-    //                 const xValue = xAttribute(item);
-    //                 const yValue = yAttribute(item);
-    //                 if (xValue.status === ValueStatus.Available && yValue.status === ValueStatus.Available) {
-    //                     return { x: xValue.value, y: yValue.value };
-    //                 }
-    //                 return { x: 0, y: 0 };
-    //             })
-    //         );
-    //     }
-    // }, [data, xAttribute, yAttribute]);
+    useEffect(() => {
+        setChartSeries(
+            series.map(series => {
+                const { dataSource, xValue, yValue } = series;
 
-    // // console.warn(chartData);
+                if (dataSource.status !== ValueStatus.Available) {
+                    return { dataPoints: [] };
+                }
 
-    // return <ChartsComponent data={chartData} />;
-    return null;
+                return {
+                    dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
+                        const x = xValue(item);
+                        const y = yValue(item);
+                        if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
+                            result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+                        }
+                        return result;
+                    }, [])
+                };
+            })
+        );
+    }, [series]);
+
+    return <LineChartComponent series={chartSeries} />;
 }
