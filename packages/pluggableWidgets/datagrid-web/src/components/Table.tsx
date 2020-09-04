@@ -79,7 +79,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
                     switch (props.filterMethod) {
                         case "contains":
-                            return value.toLowerCase().indexOf(String(filterValue).toLowerCase()) !== -1;
+                            return value.toLowerCase().includes(String(filterValue).toLowerCase());
                         case "endsWith":
                             return value.toLowerCase().endsWith(String(filterValue).toLowerCase());
                         case "startsWith":
