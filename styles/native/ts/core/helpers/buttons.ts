@@ -85,6 +85,8 @@ export const btnIcon: ActionButtonType = {
     container: {
         borderWidth: 0,
         backgroundColor: "transparent",
+        width: font.sizeLarge,
+        height: font.sizeLarge,
         minWidth: undefined,
         minHeight: undefined,
         paddingVertical: 0,

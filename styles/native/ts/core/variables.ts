@@ -4,12 +4,12 @@ import adjustFont, { height, width }             from "./helpers/_functions/adju
 import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge                                     from "./helpers/_functions/mergeobjects";
 import {
-    VairablesContainer,
     VariablesBackground,
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
-    VariablesButton, VariablesContainer,
+    VariablesButton,
+    VariablesContainer,
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,

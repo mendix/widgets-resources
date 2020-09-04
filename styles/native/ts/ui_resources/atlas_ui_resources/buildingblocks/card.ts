@@ -36,8 +36,8 @@ export const card = {
 export const cardImage = {
     container: {
         overflow: "hidden",
-        borderTopLeftRadius: border.radiusSmall,
-        borderTopRightRadius: border.radiusSmall,
+        borderTopLeftRadius: border.radiusLarge,
+        borderTopRightRadius: border.radiusLarge,
     },
     image: {
         width: "100%",
@@ -48,8 +48,8 @@ export const cardImage = {
 export const cardImageBackground = {
     container: {
         ...cardImage.container,
-        borderBottomLeftRadius: border.radiusSmall,
-        borderBottomRightRadius: border.radiusSmall,
+        borderBottomLeftRadius: border.radiusLarge,
+        borderBottomRightRadius: border.radiusLarge,
     },
     image: {
         width: "100%",

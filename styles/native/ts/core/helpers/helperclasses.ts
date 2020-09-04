@@ -74,11 +74,13 @@ export const borderBottom: Helperclass = {
 };
 export const borderRadiusSmall: Helperclass = {
     container: {
+        overflow: "hidden",
         borderRadius: border.radiusSmall,
     },
 };
 export const borderRadiusLarge: Helperclass = {
     container: {
+        overflow: "hidden",
         borderRadius: border.radiusLarge,
     },
 };
@@ -90,6 +92,16 @@ export const absoluteBottom: Helperclass = {
         bottom: 0,
         width: "100%",
         maxWidth: "100%",
-        zIndex: 999999,
+        zIndex: 99,
     },
 };
+export const absoluteTop: Helperclass = {
+    container: {
+        position: "absolute",
+        top: 0,
+        width: "100%",
+        maxWidth: "100%",
+        zIndex: 99,
+    },
+};
+
