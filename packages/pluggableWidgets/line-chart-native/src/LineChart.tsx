@@ -11,24 +11,27 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
 
     useEffect(() => {
         setChartSeries(
-            series.map(series => {
-                const { dataSource, xValue, yValue } = series;
+            series
+                .map(series => {
+                    const { dataSource, xValue, yValue } = series;
 
-                if (dataSource.status !== ValueStatus.Available) {
-                    return { dataPoints: [] };
-                }
+                    if (dataSource.status !== ValueStatus.Available) {
+                        return { dataPoints: [] };
+                    }
 
-                return {
-                    dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
-                        const x = xValue(item);
-                        const y = yValue(item);
-                        if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
-                            result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
-                        }
-                        return result;
-                    }, [])
-                };
-            })
+                    return {
+                        dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
+                            const x = xValue(item);
+                            const y = yValue(item);
+                            if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
+                                // Maybe don't render series at all when one of the datapoints isn't available
+                                result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+                            }
+                            return result;
+                        }, [])
+                    };
+                })
+                .reverse()
         );
     }, [series]);
 
