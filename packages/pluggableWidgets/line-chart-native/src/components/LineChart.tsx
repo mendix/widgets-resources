@@ -1,12 +1,14 @@
 import { createElement, ReactElement, useMemo } from "react";
-import { VictoryChart, VictoryLine, VictoryTheme } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryTheme, VictoryGroup, VictoryScatter } from "victory-native";
 
 export interface LineChartProps {
     series: Array<LineChartSeries>;
 }
 
 export interface LineChartSeries {
+    id: number;
     dataPoints: Array<LineChartDataPoint>;
+    showMarkers: "false" | "underneath" | "onTop";
 }
 
 export interface LineChartDataPoint {
@@ -21,15 +23,25 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     const chartLines = useMemo(
         () =>
-            props.series.map(series => (
-                <VictoryLine
-                    style={{
-                        data: { stroke: "#c43a31" },
-                        parent: { border: "1px solid #ccc" }
-                    }}
-                    data={series.dataPoints}
-                /> // add a key for performance optimalization
-            )),
+            props.series.map(series => {
+                const markers = (
+                    <VictoryScatter data={series.dataPoints} size={5} style={{ data: { fill: "tomato" } }} />
+                );
+
+                return (
+                    <VictoryGroup key={series.id}>
+                        {series.showMarkers === "underneath" ? markers : null}
+                        <VictoryLine
+                            style={{
+                                data: { stroke: "#c43a31" },
+                                parent: { border: "1px solid #ccc" }
+                            }}
+                            data={series.dataPoints}
+                        />
+                        {series.showMarkers === "onTop" ? markers : null}
+                    </VictoryGroup>
+                );
+            }),
         [props.series]
     );
 

@@ -12,14 +12,15 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
     useEffect(() => {
         setChartSeries(
             series
-                .map(series => {
+                .map((series, index) => {
                     const { dataSource, xValue, yValue } = series;
 
                     if (dataSource.status !== ValueStatus.Available) {
-                        return { dataPoints: [] };
+                        return { id: index, dataPoints: [], showMarkers: series.showMarkers };
                     }
 
                     return {
+                        id: index,
                         dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
                             const x = xValue(item);
                             const y = yValue(item);
@@ -28,12 +29,15 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
                                 result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
                             }
                             return result;
-                        }, [])
+                        }, []),
+                        showMarkers: series.showMarkers
                     };
                 })
                 .reverse()
         );
     }, [series]);
+
+    console.warn(chartSeries);
 
     return <LineChartComponent series={chartSeries} />;
 }
