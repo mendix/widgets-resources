@@ -3,6 +3,7 @@ export const listActionWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export interface ActionsType {
@@ -18,8 +19,9 @@ export interface ActionsPreviewType {
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    id: string;
+    style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     actions: ActionsType[];
 }
 

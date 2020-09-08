@@ -3,13 +3,15 @@ export const fileWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue } from "mendix";
 
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    id: string;
+    style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     file: DynamicValue<FileValue>;
     file2?: DynamicValue<FileValue>;
     description: EditableValue<string>;

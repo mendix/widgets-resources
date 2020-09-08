@@ -130,6 +130,7 @@ export const webResultGroup = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
@@ -153,8 +154,9 @@ export interface ActionsPreviewType {
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    id: string;
+    style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     valueAttribute?: EditableValue<string | BigJs.Big>;
     mywidgetValue: string;
     valueExpression?: DynamicValue<string>;

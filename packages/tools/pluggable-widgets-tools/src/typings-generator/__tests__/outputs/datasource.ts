@@ -3,7 +3,7 @@ export const datasourceWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType } from "react";
+import { ComponentType, CSSProperties } from "react";
 import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
 export interface DatasourcePropertiesType {
@@ -21,8 +21,9 @@ export interface DatasourcePropertiesPreviewType {
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    id: string;
+    style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     contentSource: ListValue;
     content: ListWidgetValue;
     markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;

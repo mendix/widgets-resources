@@ -19,8 +19,13 @@ ${generateClientTypeBody(properties, true, results)}
             : `export interface ${widgetName}ContainerProps {
     name: string;
     class: string;
-    ${isLabeled ? `id: string;` : `style?: CSSProperties;`}
-    tabIndex?: number;
+    style?: CSSProperties;
+    tabIndex?: number;${
+        isLabeled
+            ? `
+    id: string;`
+            : ``
+    }
 ${generateClientTypeBody(properties, false, results)}
 }`
     );

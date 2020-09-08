@@ -3,6 +3,7 @@ export const iconWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { DynamicValue, WebIcon } from "mendix";
 
 export interface IconsType {
@@ -18,8 +19,9 @@ export interface IconsPreviewType {
 export interface MyWidgetContainerProps {
     name: string;
     class: string;
-    id: string;
+    style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     icons: IconsType[];
 }
 
