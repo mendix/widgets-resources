@@ -1,13 +1,14 @@
-import { Property } from "./WidgetXml";
+import { Property, SystemProperty } from "./WidgetXml";
 import { capitalizeFirstLetter, extractProperties } from "./helpers";
 
 export function generateClientTypes(
     widgetName: string,
     properties: Property[],
-    isNative: boolean,
-    isLabeled: boolean
+    systemProperties: SystemProperty[],
+    isNative: boolean
 ): string[] {
     const results = Array.of<string>();
+    const isLabeled = systemProperties.some(p => p.$.key === "Label");
     results.push(
         isNative
             ? `export interface ${widgetName}Props<Style> {
@@ -26,7 +27,7 @@ ${generateClientTypeBody(properties, false, results)}
     return results;
 }
 
-function generateClientTypeBody(properties: Property[], isNative: boolean, generatedTypes: string[]) {
+function generateClientTypeBody(properties: Property[], isNative: boolean, generatedTypes: string[]): string {
     return properties
         .map(prop => {
             const isOptional =
@@ -37,7 +38,7 @@ function generateClientTypeBody(properties: Property[], isNative: boolean, gener
         .join("\n");
 }
 
-function toClientPropType(prop: Property, isNative: boolean, generatedTypes: string[]) {
+function toClientPropType(prop: Property, isNative: boolean, generatedTypes: string[]): string {
     switch (prop.$.type) {
         case "boolean":
             return "boolean";
@@ -98,7 +99,7 @@ ${generateClientTypeBody(extractProperties(prop.properties[0]), isNative, genera
     }
 }
 
-function generateEnum(typeName: string, prop: Property) {
+function generateEnum(typeName: string, prop: Property): string {
     if (!prop.enumerationValues?.length || !prop.enumerationValues[0].enumerationValue?.length) {
         throw new Error("[XML] Enumeration property requires enumerations element");
     }

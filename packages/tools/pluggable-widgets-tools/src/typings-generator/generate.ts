@@ -32,14 +32,13 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
         ? extractSystemProperties(widgetXml.widget.properties[0])
         : []
     ).filter(prop => prop && prop.$ && prop.$.key);
-    const isLabeled = systemProperties.some(p => p.$.key === "Label");
 
     const properties = (widgetXml.widget.properties.length > 0
         ? extractProperties(widgetXml.widget.properties[0])
         : []
     ).filter(prop => prop && prop.$ && prop.$.key);
 
-    const clientTypes = generateClientTypes(widgetName, properties, isNative, isLabeled);
+    const clientTypes = generateClientTypes(widgetName, properties, systemProperties, isNative);
     const modelerTypes = generatePreviewTypes(widgetName, properties);
 
     const generatedTypesCode = clientTypes
