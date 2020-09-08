@@ -9,6 +9,27 @@ export type TypeEnum = "static" | "dynamic";
 
 export type ShowMarkersEnum = "false" | "underneath" | "onTop";
 
+export type InterpolationEnum =
+    | "basis"
+    | "basisClosed"
+    | "basisOpen"
+    | "bundle"
+    | "cardinal"
+    | "cardinalClosed"
+    | "cardinalOpen"
+    | "catmullRom"
+    | "catmullRomClosed"
+    | "catmullRomOpen"
+    | "linear"
+    | "linearClosed"
+    | "monotoneX"
+    | "monotoneY"
+    | "natural"
+    | "radial"
+    | "step"
+    | "stepAfter"
+    | "stepBefore";
+
 export interface SeriesType {
     type: TypeEnum;
     dataSource: ListValue;
@@ -16,6 +37,7 @@ export interface SeriesType {
     xValue: ListAttributeValue<BigJs.Big>;
     yValue: ListAttributeValue<BigJs.Big>;
     showMarkers: ShowMarkersEnum;
+    interpolation: InterpolationEnum;
 }
 
 export interface SeriesPreviewType {
@@ -25,6 +47,7 @@ export interface SeriesPreviewType {
     xValue: string;
     yValue: string;
     showMarkers: ShowMarkersEnum;
+    interpolation: InterpolationEnum;
 }
 
 export interface LineChartProps<Style> {

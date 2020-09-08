@@ -1,5 +1,6 @@
 import { createElement, ReactElement, useMemo } from "react";
 import { VictoryChart, VictoryLine, VictoryTheme, VictoryGroup, VictoryScatter } from "victory-native";
+import { InterpolationPropType } from "victory-core";
 
 export interface LineChartProps {
     series: Array<LineChartSeries>;
@@ -9,6 +10,7 @@ export interface LineChartSeries {
     id: number;
     dataPoints: Array<LineChartDataPoint>;
     showMarkers: "false" | "underneath" | "onTop";
+    interpolation: InterpolationPropType;
 }
 
 export interface LineChartDataPoint {
@@ -37,6 +39,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                 parent: { border: "1px solid #ccc" }
                             }}
                             data={series.dataPoints}
+                            interpolation={series.interpolation}
                         />
                         {series.showMarkers === "onTop" ? markers : null}
                     </VictoryGroup>
