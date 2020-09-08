@@ -63,6 +63,31 @@
                                     <enumerationValue key="onTop">On top of line</enumerationValue>
                                 </enumerationValues>
                             </property>
+                            <property key="interpolation" type="enumeration" defaultValue="linear" required="true">
+                                <caption>Interpolation</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="basis">Basis</enumerationValue>
+                                    <enumerationValue key="basisClosed">Basis closed</enumerationValue>
+                                    <enumerationValue key="basisOpen">Basis open</enumerationValue>
+                                    <enumerationValue key="bundle">Bundle</enumerationValue>
+                                    <enumerationValue key="cardinal">Cardinal</enumerationValue>
+                                    <enumerationValue key="cardinalClosed">Cardinal closed</enumerationValue>
+                                    <enumerationValue key="cardinalOpen">Cardinal open</enumerationValue>
+                                    <enumerationValue key="catmullRom">Catmull rom</enumerationValue>
+                                    <enumerationValue key="catmullRomClosed">Catmull rom closed</enumerationValue>
+                                    <enumerationValue key="catmullRomOpen">Catmull rom open</enumerationValue>
+                                    <enumerationValue key="linear">linear</enumerationValue>
+                                    <enumerationValue key="linearClosed">linear closed</enumerationValue>
+                                    <enumerationValue key="monotoneX">Monotone x</enumerationValue>
+                                    <enumerationValue key="monotoneY">Monotone y</enumerationValue>
+                                    <enumerationValue key="natural">Natural</enumerationValue>
+                                    <enumerationValue key="radial">radial</enumerationValue>
+                                    <enumerationValue key="step">Step</enumerationValue>
+                                    <enumerationValue key="stepAfter">Step after</enumerationValue>
+                                    <enumerationValue key="stepBefore">Step before</enumerationValue>
+                                </enumerationValues>
+                            </property>
                         </propertyGroup>
 
                     </properties>

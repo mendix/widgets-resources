@@ -16,7 +16,12 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
                     const { dataSource, xValue, yValue } = series;
 
                     if (dataSource.status !== ValueStatus.Available) {
-                        return { id: index, dataPoints: [], showMarkers: series.showMarkers };
+                        return {
+                            id: index,
+                            dataPoints: [],
+                            showMarkers: series.showMarkers,
+                            interpolation: series.interpolation
+                        };
                     }
 
                     return {
@@ -30,7 +35,8 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
                             }
                             return result;
                         }, []),
-                        showMarkers: series.showMarkers
+                        showMarkers: series.showMarkers,
+                        interpolation: series.interpolation
                     };
                 })
                 .reverse()
