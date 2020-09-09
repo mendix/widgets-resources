@@ -97,6 +97,16 @@
                     </properties>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Chart settings">
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
+                    <description />
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
                 <systemProperty key="Visibility" />

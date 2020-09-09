@@ -7,6 +7,8 @@ import { LineChartStyle } from "../ui/Styles";
 export interface LineChartProps {
     series: Array<LineChartSeries>;
     style: LineChartStyle;
+    xAxisLabel?: string;
+    yAxisLabel?: string;
 }
 
 export interface LineChartSeries {
@@ -59,14 +61,18 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         <VictoryChart padding={props.style.chart?.padding}>
             <VictoryAxis
                 style={props.style.xAxis}
-                axisLabelComponent={<VictoryLabel dy={props.style.xAxis?.axisLabel?.verticalOffset} />}
-                label={"Quarters 2019"}
+                axisLabelComponent={
+                    props.xAxisLabel ? <VictoryLabel dy={props.style.xAxis?.axisLabel?.verticalOffset} /> : undefined
+                }
+                label={props.xAxisLabel}
             />
             <VictoryAxis
                 dependentAxis
                 style={props.style.yAxis}
-                axisLabelComponent={<VictoryLabel dy={props.style.yAxis?.axisLabel?.horizontalOffset} />}
-                label={"Profit (€)"}
+                axisLabelComponent={
+                    props.yAxisLabel ? <VictoryLabel dy={props.style.yAxis?.axisLabel?.horizontalOffset} /> : undefined
+                }
+                label={props.yAxisLabel}
             />
             {chartLines}
         </VictoryChart>
