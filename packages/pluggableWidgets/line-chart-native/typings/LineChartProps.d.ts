@@ -38,6 +38,7 @@ export interface SeriesType {
     yValue: ListAttributeValue<BigJs.Big>;
     showMarkers: ShowMarkersEnum;
     interpolation: InterpolationEnum;
+    stylePropertyName: string;
 }
 
 export interface SeriesPreviewType {
@@ -48,6 +49,7 @@ export interface SeriesPreviewType {
     yValue: string;
     showMarkers: ShowMarkersEnum;
     interpolation: InterpolationEnum;
+    stylePropertyName: string;
 }
 
 export interface LineChartProps<Style> {
