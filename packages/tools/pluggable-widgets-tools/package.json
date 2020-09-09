@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "8.12.3",
+  "version": "8.13.0",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology BV",
@@ -81,6 +81,7 @@
     "json-source-map": "^0.6.1",
     "map-stream": "^0.0.7",
     "mendix": "^8.12.0",
+    "metro-react-native-babel-preset": "~0.61.0",
     "node-fetch": "^2.6.0",
     "plugin-error": "^1.0.1",
     "prettier": "^1.19.1",
@@ -119,6 +120,7 @@
     "shelljs": "^0.8.4",
     "shx": "^0.3.2",
     "tree-kill": "^1.2.2",
+    "wdio-image-comparison-service": "^1.13.6",
     "yeoman-test": "^2.6.0"
   },
   "scripts": {

@@ -24,7 +24,12 @@ const widgetConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader"
+                loader: "ts-loader",
+                options: {
+                    compilerOptions: {
+                        target: "es2019"
+                    }
+                }
             },
             {
                 test: /\.jsx?$/,
@@ -33,7 +38,7 @@ const widgetConfig = {
                     loader: "babel-loader",
                     options: {
                         cacheDirectory: true,
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        presets: ["module:metro-react-native-babel-preset", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
@@ -48,7 +53,7 @@ const widgetConfig = {
                     loader: "babel-loader",
                     options: {
                         cacheDirectory: true,
-                        presets: ["@babel/preset-env", "@babel/preset-react"],
+                        presets: ["module:metro-react-native-babel-preset", "@babel/preset-react"],
                         plugins: [
                             ["@babel/plugin-proposal-class-properties", { loose: true }],
                             "@babel/plugin-transform-react-jsx"
@@ -76,6 +81,7 @@ const widgetConfig = {
         "react-native-device-info",
         "react-native-firebase",
         "react-native-geocoder",
+        /react-native-gesture-handler\/*/,
         "react-native-image-picker",
         "react-native-inappbrowser-reborn",
         "react-native-localize",
@@ -88,7 +94,6 @@ const widgetConfig = {
         "react-native-video",
         "react-native-view-shot",
         "react-native-webview",
-        /react-native-gesture-handler\/*/,
         "react-navigation"
     ],
     plugins: [

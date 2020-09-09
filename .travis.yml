@@ -42,16 +42,17 @@ jobs:
           script:
               - npm run test:scripts -- $SINCE_ARG
         - name: "Run automated end-to-end tests"
-          dist: trusty
+          dist: bionic
           addons:
               firefox: latest
           git:
               submodules: true
           services:
               - docker
+              - xvfb
           env:
               - BROWSER=firefox
-              - MOZ_HEADLESS=1
+              - DISPLAY=:99.0
           script:
               - set -e
               - npm run release -- $SINCE_ARG

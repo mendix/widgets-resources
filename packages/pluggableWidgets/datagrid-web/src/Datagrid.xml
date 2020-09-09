@@ -46,11 +46,11 @@
                         </propertyGroup>
                         <propertyGroup caption="Interactions">
                             <property key="sortable" type="boolean" defaultValue="true">
-                                <caption>Can sort</caption>
+                                <caption>Sorting</caption>
                                 <description/>
                             </property>
                             <property key="filterable" type="enumeration" defaultValue="yes">
-                                <caption>Can filter</caption>
+                                <caption>Filtering</caption>
                                 <description/>
                                 <enumerationValues>
                                     <enumerationValue key="yes">Yes</enumerationValue>
@@ -63,15 +63,15 @@
                                 <description/>
                             </property>
                             <property key="resizable" type="boolean" defaultValue="true">
-                                <caption>Can resize</caption>
+                                <caption>Resizing</caption>
                                 <description/>
                             </property>
                             <property key="draggable" type="boolean" defaultValue="true">
-                                <caption>Can reorder</caption>
+                                <caption>Reordering</caption>
                                 <description/>
                             </property>
                             <property key="hidable" type="enumeration" defaultValue="yes">
-                                <caption>Can hide</caption>
+                                <caption>Hiding</caption>
                                 <description/>
                                 <enumerationValues>
                                     <enumerationValue key="yes">Yes</enumerationValue>
@@ -131,6 +131,15 @@
                 <property key="columnsFilterable" type="boolean" defaultValue="false">
                     <caption>Filtering</caption>
                     <description/>
+                </property>
+                <property key="filterMethod" type="enumeration" defaultValue="startsWith">
+                    <caption>Filter method</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="startsWith">Starts with</enumerationValue>
+                        <enumerationValue key="contains">Contains</enumerationValue>
+                        <enumerationValue key="endsWith">Ends with</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="columnsResizable" type="boolean" defaultValue="false">
                     <caption>Resizing</caption>

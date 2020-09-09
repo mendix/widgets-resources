@@ -25,9 +25,6 @@ exports.config = {
             browserName,
             "goog:chromeOptions": {
                 args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"]
-            },
-            "moz:firefoxOptions": {
-                args: debug ? [] : ["-headless"]
             }
         }
     ],
@@ -40,7 +37,23 @@ exports.config = {
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
     connectionRetryCount: 0,
-    services: ["selenium-standalone"],
+    services: [
+        ["selenium-standalone"],
+        [
+            "image-comparison",
+            // The options for image-comparison
+            {
+                baselineFolder: e2ePath + "/tests/screenshot-baseline/",
+                formatImageName: "{logName}-{width}x{height}--{browserName}",
+                screenshotPath: e2ePath + "/tests/screenshot/",
+                savePerInstance: false,
+                autoSaveBaseline: true,
+                blockOutStatusBar: true,
+                blockOutToolBar: true,
+                hideScrollBars: true
+            }
+        ]
+    ],
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,

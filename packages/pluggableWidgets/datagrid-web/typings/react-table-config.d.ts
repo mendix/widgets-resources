@@ -11,7 +11,10 @@ import {
     UseColumnOrderInstanceProps,
     UseResizeColumnsColumnProps,
     UsePaginationInstanceProps,
-    UseFiltersColumnProps
+    UseFiltersColumnProps,
+    UseColumnOrderState,
+    UseSortByState,
+    UseFiltersState
 } from "react-table";
 import { ReactNode } from "react";
 
@@ -33,7 +36,11 @@ declare module "react-table" {
         customFilter?: ReactNode;
     }
 
-    export interface TableState<D extends object = {}> extends UsePaginationState<D> {}
+    export interface TableState<D extends object = {}>
+        extends UsePaginationState<D>,
+            UseColumnOrderState<D>,
+            UseSortByState<D>,
+            UseFiltersState<D> {}
 
     export interface TableInstance<D extends object = {}>
         extends UseSortByInstanceProps<D>,

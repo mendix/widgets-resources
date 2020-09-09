@@ -139,12 +139,13 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 border-bottom-width: 1px;
                 border-bottom-style: solid;
                 background-color: $background-color;
+                overflow: hidden;
 
                 &:focus {
                     outline: none;
                 }
 
-                > .td-text {
+                > .td-text, * {
                     text-overflow: ellipsis;
                     overflow: hidden;
                 }
