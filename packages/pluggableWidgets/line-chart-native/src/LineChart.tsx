@@ -1,15 +1,18 @@
 import { createElement, ReactElement, useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { all } from "deepmerge";
 import { ValueStatus } from "mendix";
 
 import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
+import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 
 import { LineChartProps } from "../typings/LineChartProps";
 
-export function LineChart(props: LineChartProps<undefined>): ReactElement | null {
+export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
     const { series, style } = props;
 
-    const styles = StyleSheet.flatten(style);
+    const customStyles = style ? style.filter(o => o != null) : [];
+    const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
+
     const [chartSeries, setChartSeries] = useState<Array<LineChartSeries>>([]);
 
     useEffect(() => {

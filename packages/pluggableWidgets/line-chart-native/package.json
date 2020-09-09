@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",
+    "deepmerge": "^4.1.1",
     "victory-native": "^35.0.1"
   },
   "devDependencies": {

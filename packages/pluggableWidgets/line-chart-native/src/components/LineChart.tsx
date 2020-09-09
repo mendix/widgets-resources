@@ -1,10 +1,12 @@
 import { createElement, ReactElement, useMemo } from "react";
-import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
 import { InterpolationPropType } from "victory-core";
+import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
+
+import { LineChartStyle } from "../ui/Styles";
 
 export interface LineChartProps {
     series: Array<LineChartSeries>;
-    style: any;
+    style: LineChartStyle;
 }
 
 export interface LineChartSeries {
@@ -28,11 +30,13 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     const chartLines = useMemo(
         () =>
             props.series.map(series => {
+                const seriesStyle = props.style.series ? props.style.series[series.stylePropertyName] : undefined;
+
                 const markers = (
                     <VictoryScatter
                         data={series.dataPoints}
-                        style={props.style.series[series.stylePropertyName]?.markers}
-                        size={props.style.series[series.stylePropertyName]?.markers?.data?.size}
+                        style={seriesStyle?.markers}
+                        size={seriesStyle?.markers?.size}
                     />
                 );
 
@@ -40,7 +44,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                     <VictoryGroup key={series.id}>
                         {series.showMarkers === "underneath" ? markers : null}
                         <VictoryLine
-                            style={props.style.series[series.stylePropertyName]?.line}
+                            style={seriesStyle?.line}
                             data={series.dataPoints}
                             interpolation={series.interpolation}
                         />
@@ -52,9 +56,18 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     );
 
     return (
-        <VictoryChart>
-            <VictoryAxis style={props.style.xAxis} />
-            <VictoryAxis dependentAxis style={props.style.yAxis} />
+        <VictoryChart padding={props.style.chart?.padding}>
+            <VictoryAxis
+                style={props.style.xAxis}
+                axisLabelComponent={<VictoryLabel dy={props.style.xAxis?.axisLabel?.verticalOffset} />}
+                label={"Quarters 2019"}
+            />
+            <VictoryAxis
+                dependentAxis
+                style={props.style.yAxis}
+                axisLabelComponent={<VictoryLabel dy={props.style.yAxis?.axisLabel?.horizontalOffset} />}
+                label={"Profit (€)"}
+            />
             {chartLines}
         </VictoryChart>
     );
