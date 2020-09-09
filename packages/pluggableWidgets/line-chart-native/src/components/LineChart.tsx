@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useMemo } from "react";
-import { VictoryChart, VictoryLine, VictoryTheme, VictoryGroup, VictoryScatter } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
 import { InterpolationPropType } from "victory-core";
 
 export interface LineChartProps {
@@ -51,5 +51,11 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         [props.series, props.style]
     );
 
-    return <VictoryChart theme={VictoryTheme.material}>{chartLines}</VictoryChart>;
+    return (
+        <VictoryChart>
+            <VictoryAxis style={props.style.xAxis} />
+            <VictoryAxis dependentAxis style={props.style.yAxis} />
+            {chartLines}
+        </VictoryChart>
+    );
 }
