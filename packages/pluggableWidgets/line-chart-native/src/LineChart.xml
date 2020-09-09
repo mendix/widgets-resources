@@ -88,6 +88,10 @@
                                     <enumerationValue key="stepBefore">Step before</enumerationValue>
                                 </enumerationValues>
                             </property>
+                            <property key="stylePropertyName" type="string" required="false" multiline="false">
+                                <caption>Style property name</caption>
+                                <description />
+                            </property>
                         </propertyGroup>
 
                     </properties>

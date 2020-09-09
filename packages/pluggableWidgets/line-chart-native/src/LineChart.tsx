@@ -1,12 +1,15 @@
 import { createElement, ReactElement, useState, useEffect } from "react";
-import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
+import { StyleSheet } from "react-native";
 import { ValueStatus } from "mendix";
+
+import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
 
 import { LineChartProps } from "../typings/LineChartProps";
 
 export function LineChart(props: LineChartProps<undefined>): ReactElement | null {
-    const { series } = props;
+    const { series, style } = props;
 
+    const styles = StyleSheet.flatten(style);
     const [chartSeries, setChartSeries] = useState<Array<LineChartSeries>>([]);
 
     useEffect(() => {
@@ -20,7 +23,8 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
                             id: index,
                             dataPoints: [],
                             showMarkers: series.showMarkers,
-                            interpolation: series.interpolation
+                            interpolation: series.interpolation,
+                            stylePropertyName: series.stylePropertyName
                         };
                     }
 
@@ -36,14 +40,13 @@ export function LineChart(props: LineChartProps<undefined>): ReactElement | null
                             return result;
                         }, []),
                         showMarkers: series.showMarkers,
-                        interpolation: series.interpolation
+                        interpolation: series.interpolation,
+                        stylePropertyName: series.stylePropertyName
                     };
                 })
                 .reverse()
         );
     }, [series]);
 
-    console.warn(chartSeries);
-
-    return <LineChartComponent series={chartSeries} />;
+    return <LineChartComponent series={chartSeries} style={styles} />;
 }
