@@ -56,10 +56,14 @@ export interface LineChartProps<Style> {
     name: string;
     style: Style[];
     series: SeriesType[];
+    xAxisLabel?: DynamicValue<string>;
+    yAxisLabel?: DynamicValue<string>;
 }
 
 export interface LineChartPreviewProps {
     class: string;
     style: string;
     series: SeriesPreviewType[];
+    xAxisLabel: string;
+    yAxisLabel: string;
 }
