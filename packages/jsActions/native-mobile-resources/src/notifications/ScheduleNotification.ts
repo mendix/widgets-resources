@@ -7,11 +7,14 @@
 import { NativeModules } from "react-native";
 import ReactNativeFirebase from "react-native-firebase";
 
+type RepeatInterval = "minute" | "hour" | "day" | "week";
+
 /**
  * Displays the specified notification at a future moment in time.
  *
  * Note: It is not possible to display a notification whilst the app is in the foreground on iOS 9.
  * @param {Date} date - This field is required.
+ * @param {RepeatInterval} repeatInterval - Empty for no repeat.
  * @param {string} body - This field is required.
  * @param {string} title
  * @param {string} subtitle
@@ -23,6 +26,7 @@ import ReactNativeFirebase from "react-native-firebase";
  */
 export async function ScheduleNotification(
     date?: Date,
+    repeatInterval?: RepeatInterval,
     body?: string,
     title?: string,
     subtitle?: string,
@@ -82,9 +86,15 @@ export async function ScheduleNotification(
         notification.setNotificationId(notificationId);
     }
 
-    return firebase.notifications().scheduleNotification(notification, {
+    const schedule: any = {
         fireDate: date.getTime()
-    });
+    };
+
+    if (repeatInterval) {
+        schedule.repeatInterval = repeatInterval;
+    }
+
+    return firebase.notifications().scheduleNotification(notification, schedule);
 
     // END USER CODE
 }
