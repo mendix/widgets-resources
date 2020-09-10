@@ -19,7 +19,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         setChartSeries(
             series
                 .reduce<Array<LineChartSeries>>((result, series) => {
-                    const { dataSource, groupByAttribute, type, xValue, yValue } = series;
+                    const { dataSource, groupByAttribute, stylePropertyNameAttribute, type, xValue, yValue } = series;
 
                     if (dataSource.status !== ValueStatus.Available) {
                         result.push({
@@ -50,9 +50,14 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                     }
 
                     const groupedDataSourceItems = dataSource.items!.reduce<
-                        Array<{ groupByAttributeValue: string; items: Array<ObjectItem> }>
+                        Array<{
+                            groupByAttributeValue: string;
+                            stylePropertyNameAttributeValue: string;
+                            items: Array<ObjectItem>;
+                        }>
                     >((result, item) => {
                         const groupByAttributeValue = groupByAttribute!(item);
+
                         if (groupByAttributeValue.status === ValueStatus.Available) {
                             const group = result.find(
                                 group => group.groupByAttributeValue === groupByAttributeValue.value
@@ -61,7 +66,14 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                             if (group) {
                                 group.items.push(item);
                             } else {
-                                result.push({ groupByAttributeValue: groupByAttributeValue.value!, items: [item] });
+                                const stylePropertyNameAttributeValue = stylePropertyNameAttribute!(item);
+                                if (stylePropertyNameAttributeValue.status === ValueStatus.Available) {
+                                }
+                                result.push({
+                                    groupByAttributeValue: groupByAttributeValue.value!,
+                                    stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value!,
+                                    items: [item]
+                                });
                             }
 
                             return result;
@@ -83,7 +95,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                             }, []),
                             showMarkers: series.showMarkers, // TODO: use attribute
                             interpolation: series.interpolation, // TODO: use attribute
-                            stylePropertyName: series.stylePropertyName // TODO: use attribute
+                            stylePropertyName: itemGroup.stylePropertyNameAttributeValue // TODO: use attribute
                         });
                     });
 

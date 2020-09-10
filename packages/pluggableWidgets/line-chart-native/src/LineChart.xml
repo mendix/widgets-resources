@@ -39,10 +39,16 @@
                                     <attributeType name="AutoNumber" /> -->
                                 </attributeTypes>
                             </property>
-
-                            <property key="name" type="textTemplate" required="true" multiline="false">
+                            <property key="seriesName" type="textTemplate" required="false" multiline="false">
                                 <caption>Series name</caption>
                                 <description />
+                            </property>
+                            <property key="seriesNameAttribute" type="attribute" required="false" dataSource="dataSource">
+                                <caption>Series name</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                </attributeTypes>
                             </property>
 
                             <property key="xValue" type="attribute" required="true" dataSource="dataSource">
@@ -109,6 +115,13 @@
                             <property key="stylePropertyName" type="string" required="false" multiline="false">
                                 <caption>Style property name</caption>
                                 <description />
+                            </property>
+                            <property key="stylePropertyNameAttribute" type="attribute" required="false" dataSource="dataSource">
+                                <caption>Style property name</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                </attributeTypes>
                             </property>
                         </propertyGroup>
 

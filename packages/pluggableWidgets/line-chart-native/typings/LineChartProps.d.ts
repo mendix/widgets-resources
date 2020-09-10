@@ -34,24 +34,28 @@ export interface SeriesType {
     type: TypeEnum;
     dataSource: ListValue;
     groupByAttribute?: ListAttributeValue<string>;
-    name: DynamicValue<string>;
+    seriesName?: DynamicValue<string>;
+    seriesNameAttribute?: ListAttributeValue<string>;
     xValue: ListAttributeValue<BigJs.Big>;
     yValue: ListAttributeValue<BigJs.Big>;
     showMarkers: ShowMarkersEnum;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
+    stylePropertyNameAttribute?: ListAttributeValue<string>;
 }
 
 export interface SeriesPreviewType {
     type: TypeEnum;
     dataSource: {} | null;
     groupByAttribute: string;
-    name: string;
+    seriesName: string;
+    seriesNameAttribute: string;
     xValue: string;
     yValue: string;
     showMarkers: ShowMarkersEnum;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
+    stylePropertyNameAttribute: string;
 }
 
 export interface LineChartProps<Style> {
