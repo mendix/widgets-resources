@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useState, useEffect } from "react";
 import { all } from "deepmerge";
-import { ValueStatus } from "mendix";
+import { ObjectItem, ValueStatus } from "mendix";
 
 import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
 import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
@@ -18,35 +18,85 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     useEffect(() => {
         setChartSeries(
             series
-                .map((series, index) => {
-                    const { dataSource, xValue, yValue } = series;
+                .reduce<Array<LineChartSeries>>((result, series) => {
+                    const { dataSource, groupByAttribute, type, xValue, yValue } = series;
 
                     if (dataSource.status !== ValueStatus.Available) {
-                        return {
-                            id: index,
+                        result.push({
                             dataPoints: [],
                             showMarkers: series.showMarkers,
                             interpolation: series.interpolation,
                             stylePropertyName: series.stylePropertyName
-                        };
+                        });
+                        return result;
                     }
 
-                    return {
-                        id: index,
-                        dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
-                            const x = xValue(item);
-                            const y = yValue(item);
-                            if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
-                                // Maybe don't render series at all when one of the datapoints isn't available
-                                result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+                    if (type === "static") {
+                        result.push({
+                            dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
+                                const x = xValue(item);
+                                const y = yValue(item);
+                                if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
+                                    // Maybe don't render series at all when one of the datapoints isn't available
+                                    result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+                                }
+                                return result;
+                            }, []),
+                            showMarkers: series.showMarkers,
+                            interpolation: series.interpolation,
+                            stylePropertyName: series.stylePropertyName
+                        });
+                        return result;
+                    }
+
+                    const groupedDataSourceItems = dataSource.items!.reduce<
+                        Array<{ groupByAttributeValue: string; items: Array<ObjectItem> }>
+                    >((result, item) => {
+                        const groupByAttributeValue = groupByAttribute!(item);
+                        if (groupByAttributeValue.status === ValueStatus.Available) {
+                            const group = result.find(
+                                group => group.groupByAttributeValue === groupByAttributeValue.value
+                            );
+
+                            if (group) {
+                                group.items.push(item);
+                            } else {
+                                result.push({ groupByAttributeValue: groupByAttributeValue.value!, items: [item] });
                             }
+
                             return result;
-                        }, []),
-                        showMarkers: series.showMarkers,
-                        interpolation: series.interpolation,
-                        stylePropertyName: series.stylePropertyName
-                    };
-                })
+                        }
+
+                        return result;
+                    }, []);
+
+                    groupedDataSourceItems.forEach(itemGroup => {
+                        result.push({
+                            dataPoints: itemGroup.items.reduce<Array<LineChartDataPoint>>((result, item) => {
+                                const x = xValue(item);
+                                const y = yValue(item);
+                                if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
+                                    // Maybe don't render series at all when one of the datapoints isn't available
+                                    result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+                                }
+                                return result;
+                            }, []),
+                            showMarkers: series.showMarkers, // TODO: use attribute
+                            interpolation: series.interpolation, // TODO: use attribute
+                            stylePropertyName: series.stylePropertyName // TODO: use attribute
+                        });
+                    });
+
+                    // 1. group data by group attr
+                    // 2. get serie group value
+                    // 3. check existing groups
+                    // 4. drop dss item in array of group
+                    // 5. For each array create a line chart series and push onto the chartSeries array
+
+                    // How are you going to deal with styles? Have a special attribute that contains the style property name.
+
+                    return result;
+                }, [])
                 .reverse()
         );
     }, [series]);
