@@ -33,6 +33,7 @@ export type InterpolationEnum =
 export interface SeriesType {
     type: TypeEnum;
     dataSource: ListValue;
+    groupByAttribute?: ListAttributeValue<string>;
     name: DynamicValue<string>;
     xValue: ListAttributeValue<BigJs.Big>;
     yValue: ListAttributeValue<BigJs.Big>;
@@ -44,6 +45,7 @@ export interface SeriesType {
 export interface SeriesPreviewType {
     type: TypeEnum;
     dataSource: {} | null;
+    groupByAttribute: string;
     name: string;
     xValue: string;
     yValue: string;

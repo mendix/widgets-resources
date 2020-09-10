@@ -12,7 +12,6 @@ export interface LineChartProps {
 }
 
 export interface LineChartSeries {
-    id: number;
     dataPoints: Array<LineChartDataPoint>;
     showMarkers: "false" | "underneath" | "onTop";
     interpolation: InterpolationPropType;
@@ -31,7 +30,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     const chartLines = useMemo(
         () =>
-            props.series.map(series => {
+            props.series.map((series, index) => {
                 const seriesStyle = props.style.series ? props.style.series[series.stylePropertyName] : undefined;
 
                 const markers = (
@@ -43,7 +42,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 );
 
                 return (
-                    <VictoryGroup key={series.id}>
+                    <VictoryGroup key={index}>
                         {series.showMarkers === "underneath" ? markers : null}
                         <VictoryLine
                             style={seriesStyle?.line}
