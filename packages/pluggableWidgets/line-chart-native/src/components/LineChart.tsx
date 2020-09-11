@@ -13,7 +13,6 @@ export interface LineChartProps {
 
 export interface LineChartSeries {
     dataPoints: Array<LineChartDataPoint>;
-    showMarkers: "false" | "underneath" | "onTop";
     interpolation: InterpolationPropType;
     stylePropertyName: string;
 }
@@ -33,23 +32,26 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             props.series.map((series, index) => {
                 const seriesStyle = props.style.series ? props.style.series[series.stylePropertyName] : undefined;
 
-                const markers = (
-                    <VictoryScatter
-                        data={series.dataPoints}
-                        style={seriesStyle?.markers}
-                        size={seriesStyle?.markers?.size}
-                    />
-                );
+                const markers =
+                    seriesStyle?.markers?.display !== "false" ? (
+                        <VictoryScatter
+                            data={series.dataPoints}
+                            style={seriesStyle?.markers}
+                            size={seriesStyle?.markers?.size}
+                        />
+                    ) : (
+                        undefined
+                    );
 
                 return (
                     <VictoryGroup key={index}>
-                        {series.showMarkers === "underneath" ? markers : null}
+                        {markers && seriesStyle?.markers?.display === "underneath" ? markers : null}
                         <VictoryLine
                             style={seriesStyle?.line}
                             data={series.dataPoints}
                             interpolation={series.interpolation}
                         />
-                        {series.showMarkers === "onTop" ? markers : null}
+                        {markers && seriesStyle?.markers?.display === "onTop" ? markers : null}
                     </VictoryGroup>
                 );
             }),

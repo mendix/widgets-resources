@@ -11,7 +11,10 @@ export interface LineChartStyle {
 
 export interface LineChartSeriesStyle {
     line?: VictoryLineProps["style"];
-    markers?: VictoryScatterProps["style"] & { size?: VictoryScatterProps["size"] };
+    markers?: VictoryScatterProps["style"] & {
+        display?: "false" | "underneath" | "onTop";
+        size?: VictoryScatterProps["size"];
+    };
 }
 
 export const defaultLineChartStyle: LineChartStyle = {
