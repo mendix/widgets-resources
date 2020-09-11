@@ -78,15 +78,6 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
-                            <property key="showMarkers" type="enumeration" defaultValue="false" required="true">
-                                <caption>Show markers</caption>
-                                <description></description>
-                                <enumerationValues>
-                                    <enumerationValue key="false">No</enumerationValue>
-                                    <enumerationValue key="underneath">Underneath line</enumerationValue>
-                                    <enumerationValue key="onTop">On top of line</enumerationValue>
-                                </enumerationValues>
-                            </property>
                             <property key="interpolation" type="enumeration" defaultValue="linear" required="true">
                                 <caption>Interpolation</caption>
                                 <description />

@@ -7,8 +7,6 @@ import { DynamicValue, ListValue, ListAttributeValue } from "mendix";
 
 export type TypeEnum = "static" | "dynamic";
 
-export type ShowMarkersEnum = "false" | "underneath" | "onTop";
-
 export type InterpolationEnum =
     | "basis"
     | "basisClosed"
@@ -38,7 +36,6 @@ export interface SeriesType {
     seriesNameAttribute?: ListAttributeValue<string>;
     xValue: ListAttributeValue<BigJs.Big>;
     yValue: ListAttributeValue<BigJs.Big>;
-    showMarkers: ShowMarkersEnum;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
     stylePropertyNameAttribute?: ListAttributeValue<string>;
@@ -52,7 +49,6 @@ export interface SeriesPreviewType {
     seriesNameAttribute: string;
     xValue: string;
     yValue: string;
-    showMarkers: ShowMarkersEnum;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
     stylePropertyNameAttribute: string;

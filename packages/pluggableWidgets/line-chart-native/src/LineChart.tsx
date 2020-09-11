@@ -24,7 +24,6 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                     if (dataSource.status !== ValueStatus.Available) {
                         result.push({
                             dataPoints: [],
-                            showMarkers: series.showMarkers,
                             interpolation: series.interpolation,
                             stylePropertyName: series.stylePropertyName
                         });
@@ -42,7 +41,6 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                                 }
                                 return result;
                             }, []),
-                            showMarkers: series.showMarkers,
                             interpolation: series.interpolation,
                             stylePropertyName: series.stylePropertyName
                         });
@@ -93,7 +91,6 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                                 }
                                 return result;
                             }, []),
-                            showMarkers: series.showMarkers, // TODO: use attribute
                             interpolation: series.interpolation, // TODO: use attribute
                             stylePropertyName: itemGroup.stylePropertyNameAttributeValue // TODO: use attribute
                         });
