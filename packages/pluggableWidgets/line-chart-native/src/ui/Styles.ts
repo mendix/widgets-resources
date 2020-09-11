@@ -1,8 +1,11 @@
+import { TextStyle, ViewStyle } from "react-native";
 import { VictoryAxisCommonProps, VictoryCommonProps, VictoryLabelProps } from "victory-core";
 import { VictoryLineProps } from "victory-line";
 import { VictoryScatterProps } from "victory-scatter";
 
 export interface LineChartStyle {
+    container?: ViewStyle;
+    title?: TextStyle;
     chart?: { padding?: VictoryCommonProps["padding"] };
     xAxis?: VictoryAxisCommonProps["style"] & { axisLabel?: { verticalOffset?: VictoryLabelProps["dy"] } };
     yAxis?: VictoryAxisCommonProps["style"] & { axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"] } };
@@ -18,6 +21,11 @@ export interface LineChartSeriesStyle {
 }
 
 export const defaultLineChartStyle: LineChartStyle = {
+    title: {
+        fontSize: 16,
+        fontWeight: "bold",
+        textAlign: "center"
+    },
     chart: {
         padding: { left: 75, top: 25, bottom: 50, right: 25 }
     },
