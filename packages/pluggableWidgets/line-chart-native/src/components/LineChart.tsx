@@ -3,10 +3,12 @@ import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
 
 import { LineChartStyle } from "../ui/Styles";
+import { Text, View } from "react-native";
 
 export interface LineChartProps {
     series: Array<LineChartSeries>;
     style: LineChartStyle;
+    title?: string;
     xAxisLabel?: string;
     yAxisLabel?: string;
 }
@@ -59,23 +61,34 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     );
 
     return (
-        <VictoryChart padding={props.style.chart?.padding}>
-            <VictoryAxis
-                style={props.style.xAxis}
-                axisLabelComponent={
-                    props.xAxisLabel ? <VictoryLabel dy={props.style.xAxis?.axisLabel?.verticalOffset} /> : undefined
-                }
-                label={props.xAxisLabel}
-            />
-            <VictoryAxis
-                dependentAxis
-                style={props.style.yAxis}
-                axisLabelComponent={
-                    props.yAxisLabel ? <VictoryLabel dy={props.style.yAxis?.axisLabel?.horizontalOffset} /> : undefined
-                }
-                label={props.yAxisLabel}
-            />
-            {chartLines}
-        </VictoryChart>
+        <View style={props.style.container}>
+            {props.title ? <Text style={props.style.title}>{props.title}</Text> : null}
+            <VictoryChart padding={props.style.chart?.padding}>
+                <VictoryAxis
+                    style={props.style.xAxis}
+                    axisLabelComponent={
+                        props.xAxisLabel ? (
+                            <VictoryLabel dy={props.style.xAxis?.axisLabel?.verticalOffset} />
+                        ) : (
+                            undefined
+                        )
+                    }
+                    label={props.xAxisLabel}
+                />
+                <VictoryAxis
+                    dependentAxis
+                    style={props.style.yAxis}
+                    axisLabelComponent={
+                        props.yAxisLabel ? (
+                            <VictoryLabel dy={props.style.yAxis?.axisLabel?.horizontalOffset} />
+                        ) : (
+                            undefined
+                        )
+                    }
+                    label={props.yAxisLabel}
+                />
+                {chartLines}
+            </VictoryChart>
+        </View>
     );
 }

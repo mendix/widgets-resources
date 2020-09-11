@@ -120,6 +120,10 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Chart settings">
+                <property key="title" type="textTemplate" required="false" multiline="false">
+                    <caption>Title</caption>
+                    <description />
+                </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
                     <description />
