@@ -4,11 +4,13 @@ import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, V
 
 import { LineChartStyle } from "../ui/Styles";
 import { Text, View } from "react-native";
+import { Legend } from "./Legend";
 
 export interface LineChartProps {
     series: Array<LineChartSeries>;
     style: LineChartStyle;
     title?: string;
+    showLegend: boolean;
     xAxisLabel?: string;
     yAxisLabel?: string;
 }
@@ -16,7 +18,8 @@ export interface LineChartProps {
 export interface LineChartSeries {
     dataPoints: Array<LineChartDataPoint>;
     interpolation: InterpolationPropType;
-    stylePropertyName: string;
+    name?: string;
+    stylePropertyName?: string;
 }
 
 export interface LineChartDataPoint {
@@ -32,7 +35,10 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     const chartLines = useMemo(
         () =>
             props.series.map((series, index) => {
-                const seriesStyle = props.style.series ? props.style.series[series.stylePropertyName] : undefined;
+                const seriesStyle =
+                    props.style.series && series.stylePropertyName
+                        ? props.style.series[series.stylePropertyName]
+                        : undefined;
 
                 const markers =
                     seriesStyle?.markers?.display !== "false" ? (
@@ -89,6 +95,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 />
                 {chartLines}
             </VictoryChart>
+            {props.showLegend ? <Legend style={props.style} series={props.series} /> : null}
         </View>
     );
 }

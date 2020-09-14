@@ -6,6 +6,7 @@ import { VictoryScatterProps } from "victory-scatter";
 export interface LineChartStyle {
     container?: ViewStyle;
     title?: TextStyle;
+    legend?: LineChartLegendStyle;
     chart?: { padding?: VictoryCommonProps["padding"] };
     xAxis?: VictoryAxisCommonProps["style"] & { axisLabel?: { verticalOffset?: VictoryLabelProps["dy"] } };
     yAxis?: VictoryAxisCommonProps["style"] & { axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"] } };
@@ -20,11 +21,38 @@ export interface LineChartSeriesStyle {
     };
 }
 
+export interface LineChartLegendStyle {
+    container?: ViewStyle;
+    item?: ViewStyle;
+    indicator?: ViewStyle;
+    label?: TextStyle;
+}
+
 export const defaultLineChartStyle: LineChartStyle = {
     title: {
         fontSize: 16,
         fontWeight: "bold",
         textAlign: "center"
+    },
+    legend: {
+        container: {
+            borderColor: "black",
+            borderWidth: 1,
+            flexDirection: "row",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            margin: 10
+        },
+        item: {
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 10
+        },
+        indicator: {
+            marginRight: 5,
+            height: 5,
+            width: 10
+        }
     },
     chart: {
         padding: { left: 75, top: 25, bottom: 50, right: 25 }

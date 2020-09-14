@@ -59,6 +59,7 @@ export interface LineChartProps<Style> {
     style: Style[];
     series: SeriesType[];
     title?: DynamicValue<string>;
+    showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
 }
@@ -68,6 +69,7 @@ export interface LineChartPreviewProps {
     style: string;
     series: SeriesPreviewType[];
     title: string;
+    showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
 }

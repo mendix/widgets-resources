@@ -8,7 +8,7 @@ import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 import { LineChartProps } from "../typings/LineChartProps";
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
-    const { series, style, title, xAxisLabel, yAxisLabel } = props;
+    const { series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
@@ -19,7 +19,16 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         setChartSeries(
             series
                 .reduce<Array<LineChartSeries>>((result, series) => {
-                    const { dataSource, groupByAttribute, stylePropertyNameAttribute, type, xValue, yValue } = series;
+                    const {
+                        dataSource,
+                        groupByAttribute,
+                        seriesName,
+                        seriesNameAttribute,
+                        stylePropertyNameAttribute,
+                        type,
+                        xValue,
+                        yValue
+                    } = series;
 
                     if (dataSource.status !== ValueStatus.Available) {
                         result.push({
@@ -42,6 +51,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                                 return result;
                             }, []),
                             interpolation: series.interpolation,
+                            name: seriesName?.value,
                             stylePropertyName: series.stylePropertyName
                         });
                         return result;
@@ -50,7 +60,8 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                     const groupedDataSourceItems = dataSource.items!.reduce<
                         Array<{
                             groupByAttributeValue: string;
-                            stylePropertyNameAttributeValue: string;
+                            seriesNameAttributeValue?: string;
+                            stylePropertyNameAttributeValue?: string;
                             items: Array<ObjectItem>;
                         }>
                     >((result, item) => {
@@ -64,14 +75,19 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                             if (group) {
                                 group.items.push(item);
                             } else {
+                                const seriesNameAttributeValue = seriesNameAttribute!(item);
                                 const stylePropertyNameAttributeValue = stylePropertyNameAttribute!(item);
-                                if (stylePropertyNameAttributeValue.status === ValueStatus.Available) {
+                                if (
+                                    stylePropertyNameAttributeValue.status === ValueStatus.Available &&
+                                    seriesNameAttributeValue.status === ValueStatus.Available
+                                ) {
+                                    result.push({
+                                        groupByAttributeValue: groupByAttributeValue.value!,
+                                        seriesNameAttributeValue: seriesNameAttributeValue.value,
+                                        stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
+                                        items: [item]
+                                    });
                                 }
-                                result.push({
-                                    groupByAttributeValue: groupByAttributeValue.value!,
-                                    stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value!,
-                                    items: [item]
-                                });
                             }
 
                             return result;
@@ -92,6 +108,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                                 return result;
                             }, []),
                             interpolation: series.interpolation, // TODO: use attribute
+                            name: itemGroup.seriesNameAttributeValue,
                             stylePropertyName: itemGroup.stylePropertyNameAttributeValue // TODO: use attribute
                         });
                     });
@@ -115,6 +132,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             series={chartSeries}
             style={styles}
             title={title?.value}
+            showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}
             yAxisLabel={yAxisLabel?.value}
         />
