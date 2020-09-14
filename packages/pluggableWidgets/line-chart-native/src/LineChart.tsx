@@ -1,6 +1,7 @@
 import { createElement, ReactElement, useState, useEffect } from "react";
 import { all } from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
+import { InterpolationPropType } from "victory-core";
 
 import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
 import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
@@ -8,7 +9,7 @@ import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 import { LineChartProps } from "../typings/LineChartProps";
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
-    const { series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
+    const { configMode, series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
@@ -22,6 +23,8 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                     const {
                         dataSource,
                         groupByAttribute,
+                        interpolation,
+                        lineStyle,
                         seriesName,
                         seriesNameAttribute,
                         stylePropertyNameAttribute,
@@ -30,10 +33,22 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                         yValue
                     } = series;
 
+                    let interpolationSetting: InterpolationPropType;
+
+                    if (configMode === "basic") {
+                        if (lineStyle === "straight") {
+                            interpolationSetting = "linear";
+                        } else {
+                            interpolationSetting = "catmullRom";
+                        }
+                    } else {
+                        interpolationSetting = interpolation;
+                    }
+
                     if (dataSource.status !== ValueStatus.Available) {
                         result.push({
                             dataPoints: [],
-                            interpolation: series.interpolation,
+                            interpolation: interpolationSetting,
                             stylePropertyName: series.stylePropertyName
                         });
                         return result;
@@ -50,7 +65,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                                 }
                                 return result;
                             }, []),
-                            interpolation: series.interpolation,
+                            interpolation: interpolationSetting,
                             name: seriesName?.value,
                             stylePropertyName: series.stylePropertyName
                         });
@@ -107,7 +122,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                                 }
                                 return result;
                             }, []),
-                            interpolation: series.interpolation, // TODO: use attribute
+                            interpolation: interpolationSetting, // TODO: use attribute
                             name: itemGroup.seriesNameAttributeValue,
                             stylePropertyName: itemGroup.stylePropertyNameAttributeValue // TODO: use attribute
                         });
