@@ -18,27 +18,29 @@ export function Legend(props: LegendProps): ReactElement | null {
 
     const legendItems = useMemo(
         () =>
-            series.map((series, index) => {
+            series.reduce<Array<ReactElement>>((result, series, index) => {
                 if (!(series.name && series.stylePropertyName && style.series)) {
-                    return null;
+                    return result;
                 }
 
                 const seriesStyle = style.series[series.stylePropertyName];
                 const backgroundColor = seriesStyle?.line?.data?.stroke;
 
                 if (!(typeof backgroundColor === "string")) {
-                    return null;
+                    return result;
                 }
 
-                return (
+                result.push(
                     <View key={index} style={style.legend?.item}>
                         <View style={[{ backgroundColor: backgroundColor }, style.legend?.indicator]} />
                         <Text style={style.legend?.label}>{series.name}</Text>
                     </View>
                 );
-            }),
+
+                return result;
+            }, []),
         [series]
     );
 
-    return <View style={style.legend?.container}>{legendItems}</View>;
+    return legendItems.length > 0 ? <View style={style.legend?.container}>{legendItems}</View> : null;
 }
