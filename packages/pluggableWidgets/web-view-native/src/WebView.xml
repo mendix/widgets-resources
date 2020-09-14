@@ -33,6 +33,10 @@
                 <caption>Open links externally</caption>
                 <description>If true, links embedded in source document will be opened in external browser instead of inside this widget.</description>
             </property>
+            <property key="useSharedCookies" type="boolean" defaultValue="false">
+                <caption>Use shared cookies</caption>
+                <description>Only has effect on iOS. If true, the webview will use the cookies from [NSHTTPCookieStorage sharedHTTPCookieStorage].</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>

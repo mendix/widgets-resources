@@ -14,6 +14,7 @@ export interface WebViewProps<Style> {
     onError?: ActionValue;
     userAgent: string;
     openLinksExternally: boolean;
+    useSharedCookies: boolean;
 }
 
 export interface WebViewPreviewProps {
@@ -25,4 +26,5 @@ export interface WebViewPreviewProps {
     onError: {} | null;
     userAgent: string;
     openLinksExternally: boolean;
+    useSharedCookies: boolean;
 }
