@@ -30,6 +30,9 @@ export interface LineChartLegendStyle {
 }
 
 export const defaultLineChartStyle: LineChartStyle = {
+    container: {
+        flex: 1
+    },
     title: {
         fontSize: 16,
         fontWeight: "bold",
