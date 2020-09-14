@@ -124,6 +124,10 @@
                     <caption>Title</caption>
                     <description />
                 </property>
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
                     <description />
