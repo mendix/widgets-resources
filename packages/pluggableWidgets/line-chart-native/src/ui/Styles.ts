@@ -9,8 +9,12 @@ export interface LineChartStyle {
     title?: TextStyle;
     legend?: LineChartLegendStyle;
     chart?: VictoryChartProps["style"] & { padding?: VictoryCommonProps["padding"] };
-    xAxis?: VictoryAxisCommonProps["style"] & { axisLabel?: { verticalOffset?: VictoryLabelProps["dy"] } };
-    yAxis?: VictoryAxisCommonProps["style"] & { axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"] } };
+    xAxis?: VictoryAxisCommonProps["style"] & {
+        axisLabel?: { horizontalOffset?: VictoryLabelProps["dx"]; verticalOffset?: VictoryLabelProps["dy"] };
+    };
+    yAxis?: VictoryAxisCommonProps["style"] & {
+        axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"]; verticalOffset?: VictoryLabelProps["dx"] };
+    };
     series?: { [key: string]: LineChartSeriesStyle };
 }
 

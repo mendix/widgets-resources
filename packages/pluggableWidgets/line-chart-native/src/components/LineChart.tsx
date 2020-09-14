@@ -88,7 +88,10 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                             style={style.xAxis}
                             axisLabelComponent={
                                 xAxisLabel ? (
-                                    <VictoryLabel dy={style.xAxis?.axisLabel?.verticalOffset} /> // expose styles
+                                    <VictoryLabel
+                                        dx={style.xAxis?.axisLabel?.horizontalOffset}
+                                        dy={style.xAxis?.axisLabel?.verticalOffset}
+                                    />
                                 ) : (
                                     undefined
                                 )
@@ -100,7 +103,10 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                             style={style.yAxis}
                             axisLabelComponent={
                                 yAxisLabel ? (
-                                    <VictoryLabel dy={style.yAxis?.axisLabel?.horizontalOffset} /> // exppose styles
+                                    <VictoryLabel
+                                        dx={style.yAxis?.axisLabel?.verticalOffset}
+                                        dy={style.yAxis?.axisLabel?.horizontalOffset}
+                                    />
                                 ) : (
                                     undefined
                                 )
