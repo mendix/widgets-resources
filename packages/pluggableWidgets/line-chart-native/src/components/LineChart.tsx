@@ -1,5 +1,5 @@
-import { createElement, ReactElement, useMemo } from "react";
-import { Text, View } from "react-native";
+import { createElement, ReactElement, useMemo, useCallback, useState } from "react";
+import { Text, View, LayoutChangeEvent } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
 
@@ -66,35 +66,52 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         [series, style]
     );
 
+    const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
+
+    const updateChartDimensions = useCallback((event: LayoutChangeEvent) => {
+        const { height, width } = event.nativeEvent.layout;
+        setChartDimensions({ height, width });
+    }, []);
+
     return (
         <View style={style.container}>
             {title ? <Text style={style.title}>{title}</Text> : null}
-            <VictoryChart padding={style.chart?.padding} style={style.chart}>
-                <VictoryAxis
-                    style={style.xAxis}
-                    axisLabelComponent={
-                        xAxisLabel ? (
-                            <VictoryLabel dy={style.xAxis?.axisLabel?.verticalOffset} /> // expose styles
-                        ) : (
-                            undefined
-                        )
-                    }
-                    label={xAxisLabel}
-                />
-                <VictoryAxis
-                    dependentAxis
-                    style={style.yAxis}
-                    axisLabelComponent={
-                        yAxisLabel ? (
-                            <VictoryLabel dy={style.yAxis?.axisLabel?.horizontalOffset} /> // exppose styles
-                        ) : (
-                            undefined
-                        )
-                    }
-                    label={yAxisLabel}
-                />
-                {chartLines}
-            </VictoryChart>
+            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
+                {chartDimensions ? (
+                    <VictoryChart
+                        height={chartDimensions?.height}
+                        width={chartDimensions?.width}
+                        padding={style.chart?.padding}
+                        style={style.chart}
+                    >
+                        <VictoryAxis
+                            style={style.xAxis}
+                            axisLabelComponent={
+                                xAxisLabel ? (
+                                    <VictoryLabel dy={style.xAxis?.axisLabel?.verticalOffset} /> // expose styles
+                                ) : (
+                                    undefined
+                                )
+                            }
+                            label={xAxisLabel}
+                        />
+                        <VictoryAxis
+                            dependentAxis
+                            style={style.yAxis}
+                            axisLabelComponent={
+                                yAxisLabel ? (
+                                    <VictoryLabel dy={style.yAxis?.axisLabel?.horizontalOffset} /> // exppose styles
+                                ) : (
+                                    undefined
+                                )
+                            }
+                            label={yAxisLabel}
+                        />
+                        {chartLines}
+                    </VictoryChart>
+                ) : null}
+            </View>
+
             {showLegend ? <Legend style={style} series={series} /> : null}
         </View>
     );
