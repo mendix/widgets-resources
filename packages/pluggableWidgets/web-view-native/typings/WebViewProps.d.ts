@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ActionValue, DynamicValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export interface WebViewProps<Style> {
     name: string;
@@ -12,6 +12,8 @@ export interface WebViewProps<Style> {
     content?: DynamicValue<string>;
     onLoad?: ActionValue;
     onError?: ActionValue;
+    onMessage?: ActionValue;
+    onMessageInput?: EditableValue<string>;
     userAgent: string;
     openLinksExternally: boolean;
     useSharedCookies: boolean;
@@ -24,6 +26,8 @@ export interface WebViewPreviewProps {
     content: string;
     onLoad: {} | null;
     onError: {} | null;
+    onMessage: {} | null;
+    onMessageInput: string;
     userAgent: string;
     openLinksExternally: boolean;
     useSharedCookies: boolean;
