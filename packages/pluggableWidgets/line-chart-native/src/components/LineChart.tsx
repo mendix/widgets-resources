@@ -1,9 +1,9 @@
 import { createElement, ReactElement, useMemo } from "react";
+import { Text, View } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
 
 import { LineChartStyle } from "../ui/Styles";
-import { Text, View } from "react-native";
 import { Legend } from "./Legend";
 
 export interface LineChartProps {
@@ -28,17 +28,17 @@ export interface LineChartDataPoint {
 }
 
 export function LineChart(props: LineChartProps): ReactElement | null {
-    if (props.series.length === 0) {
+    const { series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
+
+    if (series.length === 0) {
         return null;
     }
 
     const chartLines = useMemo(
         () =>
-            props.series.map((series, index) => {
+            series.map((series, index) => {
                 const seriesStyle =
-                    props.style.series && series.stylePropertyName
-                        ? props.style.series[series.stylePropertyName]
-                        : undefined;
+                    style.series && series.stylePropertyName ? style.series[series.stylePropertyName] : undefined;
 
                 const markers =
                     seriesStyle?.markers?.display !== "false" ? (
@@ -63,39 +63,39 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                     </VictoryGroup>
                 );
             }),
-        [props.series, props.style]
+        [series, style]
     );
 
     return (
-        <View style={props.style.container}>
-            {props.title ? <Text style={props.style.title}>{props.title}</Text> : null}
-            <VictoryChart padding={props.style.chart?.padding}>
+        <View style={style.container}>
+            {title ? <Text style={style.title}>{title}</Text> : null}
+            <VictoryChart padding={style.chart?.padding} style={style.chart}>
                 <VictoryAxis
-                    style={props.style.xAxis}
+                    style={style.xAxis}
                     axisLabelComponent={
-                        props.xAxisLabel ? (
-                            <VictoryLabel dy={props.style.xAxis?.axisLabel?.verticalOffset} />
+                        xAxisLabel ? (
+                            <VictoryLabel dy={style.xAxis?.axisLabel?.verticalOffset} /> // expose styles
                         ) : (
                             undefined
                         )
                     }
-                    label={props.xAxisLabel}
+                    label={xAxisLabel}
                 />
                 <VictoryAxis
                     dependentAxis
-                    style={props.style.yAxis}
+                    style={style.yAxis}
                     axisLabelComponent={
-                        props.yAxisLabel ? (
-                            <VictoryLabel dy={props.style.yAxis?.axisLabel?.horizontalOffset} />
+                        yAxisLabel ? (
+                            <VictoryLabel dy={style.yAxis?.axisLabel?.horizontalOffset} /> // exppose styles
                         ) : (
                             undefined
                         )
                     }
-                    label={props.yAxisLabel}
+                    label={yAxisLabel}
                 />
                 {chartLines}
             </VictoryChart>
-            {props.showLegend ? <Legend style={props.style} series={props.series} /> : null}
+            {showLegend ? <Legend style={style} series={series} /> : null}
         </View>
     );
 }
