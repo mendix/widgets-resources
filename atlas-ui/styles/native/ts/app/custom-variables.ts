@@ -2,7 +2,6 @@ import { NativeModules, Platform } from "react-native";
 import adjustFont from "../core/helpers/_functions/adjustfont";
 import { setContrastScale } from "../core/helpers/_functions/convertcolors";
 import {
-    VairablesContainer,
     VariablesBackground,
     VariablesBadge,
     VariablesBorder,
