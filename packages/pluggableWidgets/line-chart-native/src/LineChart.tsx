@@ -17,129 +17,161 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     const [chartSeries, setChartSeries] = useState<Array<LineChartSeries>>([]);
 
     useEffect(() => {
-        setChartSeries(
-            series
-                .reduce<Array<LineChartSeries>>((result, series) => {
-                    const {
-                        dataSource,
-                        groupByAttribute,
-                        interpolation,
-                        lineStyle,
-                        seriesName,
-                        seriesNameAttribute,
-                        stylePropertyNameAttribute,
-                        type,
-                        xValue,
-                        yValue
-                    } = series;
+        // 1) Set ready to true
+        // 2) Prepare series
+        // 3) Stop as soon as something is not available. (set ready to false & return result)
 
-                    let interpolationSetting: InterpolationPropType;
+        let allDataAvailable = true;
 
-                    if (configMode === "basic") {
-                        if (lineStyle === "straight") {
-                            interpolationSetting = "linear";
-                        } else {
-                            interpolationSetting = "catmullRom";
-                        }
-                    } else {
-                        interpolationSetting = interpolation;
-                    }
+        const chartSeriesResult = series.reduce<Array<LineChartSeries>>((result, series) => {
+            if (!allDataAvailable) {
+                return result;
+            }
 
-                    if (dataSource.status !== ValueStatus.Available) {
-                        result.push({
-                            dataPoints: [],
-                            interpolation: interpolationSetting,
-                            stylePropertyName: series.stylePropertyName
-                        });
-                        return result;
-                    }
+            const {
+                dataSource,
+                groupByAttribute,
+                interpolation,
+                lineStyle,
+                seriesName,
+                seriesNameAttribute,
+                stylePropertyNameAttribute,
+                type,
+                xValue,
+                yValue
+            } = series;
 
-                    if (type === "static") {
-                        result.push({
-                            dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((result, item) => {
-                                const x = xValue(item);
-                                const y = yValue(item);
-                                if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
-                                    // Maybe don't render series at all when one of the datapoints isn't available
-                                    result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
-                                }
-                                return result;
-                            }, []),
-                            interpolation: interpolationSetting,
-                            name: seriesName?.value,
-                            stylePropertyName: series.stylePropertyName
-                        });
-                        return result;
-                    }
+            let interpolationSetting: InterpolationPropType;
 
-                    const groupedDataSourceItems = dataSource.items!.reduce<
-                        Array<{
-                            groupByAttributeValue: string;
-                            seriesNameAttributeValue?: string;
-                            stylePropertyNameAttributeValue?: string;
-                            items: Array<ObjectItem>;
-                        }>
-                    >((result, item) => {
-                        const groupByAttributeValue = groupByAttribute!(item);
+            if (configMode === "basic") {
+                if (lineStyle === "straight") {
+                    interpolationSetting = "linear";
+                } else {
+                    interpolationSetting = "catmullRom";
+                }
+            } else {
+                interpolationSetting = interpolation;
+            }
 
-                        if (groupByAttributeValue.status === ValueStatus.Available) {
-                            const group = result.find(
-                                group => group.groupByAttributeValue === groupByAttributeValue.value
-                            );
+            if (dataSource.status !== ValueStatus.Available) {
+                allDataAvailable = false;
+                return result;
+            }
 
-                            if (group) {
-                                group.items.push(item);
-                            } else {
-                                const seriesNameAttributeValue = seriesNameAttribute!(item);
-                                const stylePropertyNameAttributeValue = stylePropertyNameAttribute!(item);
-                                if (
-                                    stylePropertyNameAttributeValue.status === ValueStatus.Available &&
-                                    seriesNameAttributeValue.status === ValueStatus.Available
-                                ) {
-                                    result.push({
-                                        groupByAttributeValue: groupByAttributeValue.value!,
-                                        seriesNameAttributeValue: seriesNameAttributeValue.value,
-                                        stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
-                                        items: [item]
-                                    });
-                                }
-                            }
-
-                            return result;
+            if (type === "static") {
+                result.push({
+                    dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((dataPointsResult, item) => {
+                        if (!allDataAvailable) {
+                            return dataPointsResult;
                         }
 
-                        return result;
-                    }, []);
+                        const x = xValue(item);
+                        const y = yValue(item);
 
-                    groupedDataSourceItems.forEach(itemGroup => {
-                        result.push({
-                            dataPoints: itemGroup.items.reduce<Array<LineChartDataPoint>>((result, item) => {
-                                const x = xValue(item);
-                                const y = yValue(item);
-                                if (x.status === ValueStatus.Available && y.status === ValueStatus.Available) {
-                                    // Maybe don't render series at all when one of the datapoints isn't available
-                                    result.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
-                                }
-                                return result;
-                            }, []),
-                            interpolation: interpolationSetting, // TODO: use attribute
-                            name: itemGroup.seriesNameAttributeValue,
-                            stylePropertyName: itemGroup.stylePropertyNameAttributeValue // TODO: use attribute
-                        });
+                        if (x.status !== ValueStatus.Available || y.status !== ValueStatus.Available) {
+                            allDataAvailable = false;
+                            return dataPointsResult;
+                        }
+
+                        dataPointsResult.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+
+                        return dataPointsResult;
+                    }, []),
+                    interpolation: interpolationSetting,
+                    name: seriesName?.value,
+                    stylePropertyName: series.stylePropertyName
+                });
+                return result;
+            }
+
+            const groupedDataSourceItems = dataSource.items!.reduce<
+                Array<{
+                    groupByAttributeValue: string;
+                    seriesNameAttributeValue?: string;
+                    stylePropertyNameAttributeValue?: string;
+                    items: Array<ObjectItem>;
+                }>
+            >((dataSourceItemsResult, item) => {
+                if (!allDataAvailable) {
+                    return dataSourceItemsResult;
+                }
+
+                const groupByAttributeValue = groupByAttribute!(item);
+
+                if (groupByAttributeValue.status !== ValueStatus.Available) {
+                    allDataAvailable = false;
+                    return dataSourceItemsResult;
+                }
+
+                const group = dataSourceItemsResult.find(
+                    group => group.groupByAttributeValue === groupByAttributeValue.value
+                );
+
+                if (group) {
+                    group.items.push(item);
+                } else {
+                    const seriesNameAttributeValue = seriesNameAttribute!(item);
+                    const stylePropertyNameAttributeValue = stylePropertyNameAttribute!(item);
+
+                    if (
+                        stylePropertyNameAttributeValue.status !== ValueStatus.Available ||
+                        seriesNameAttributeValue.status !== ValueStatus.Available
+                    ) {
+                        allDataAvailable = false;
+                        return dataSourceItemsResult;
+                    }
+
+                    dataSourceItemsResult.push({
+                        groupByAttributeValue: groupByAttributeValue.value!,
+                        seriesNameAttributeValue: seriesNameAttributeValue.value,
+                        stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
+                        items: [item]
                     });
+                }
 
-                    // 1. group data by group attr
-                    // 2. get serie group value
-                    // 3. check existing groups
-                    // 4. drop dss item in array of group
-                    // 5. For each array create a line chart series and push onto the chartSeries array
+                return dataSourceItemsResult;
+            }, []);
 
-                    // How are you going to deal with styles? Have a special attribute that contains the style property name.
+            groupedDataSourceItems.forEach(itemGroup => {
+                result.push({
+                    dataPoints: itemGroup.items.reduce<Array<LineChartDataPoint>>((dataPointsResult, item) => {
+                        if (!allDataAvailable) {
+                            return dataPointsResult;
+                        }
 
-                    return result;
-                }, [])
-                .reverse()
-        );
+                        const x = xValue(item);
+                        const y = yValue(item);
+
+                        if (x.status !== ValueStatus.Available || y.status !== ValueStatus.Available) {
+                            allDataAvailable = false;
+                            return dataPointsResult;
+                        }
+
+                        dataPointsResult.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+
+                        return dataPointsResult;
+                    }, []),
+                    interpolation: interpolationSetting, // TODO: use attribute
+                    name: itemGroup.seriesNameAttributeValue,
+                    stylePropertyName: itemGroup.stylePropertyNameAttributeValue // TODO: use attribute
+                });
+            });
+
+            // 1. group data by group attr
+            // 2. get serie group value
+            // 3. check existing groups
+            // 4. drop dss item in array of group
+            // 5. For each array create a line chart series and push onto the chartSeries array
+
+            // How are you going to deal with styles? Have a special attribute that contains the style property name.
+
+            return result;
+        }, []);
+
+        if (allDataAvailable) {
+            chartSeriesResult.reverse();
+            setChartSeries(chartSeriesResult);
+        }
     }, [series]);
 
     return (
