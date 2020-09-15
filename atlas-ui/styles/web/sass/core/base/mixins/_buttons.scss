@@ -1,0 +1,71 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin button-variant($color, $background, $border, $hover) {
+    color: $color;
+    border-color: $border;
+    background-color: $background;
+
+    &:hover,
+    &:focus,
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        color: $color;
+        border-color: $hover;
+        background-color: $hover;
+    }
+    &:active,
+    &.active,
+    .open > &.dropdown-toggle {
+        background-image: none;
+    }
+    &.disabled,
+    &[disabled],
+    &[aria-disabled],
+    fieldset[disabled] {
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            border-color: $border;
+            background-color: $background;
+        }
+    }
+    // Button bordered
+    &.btn-bordered {
+        background-color: transparent;
+        @if $color != $btn-default-color {
+            color: $border;
+        }
+
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        .open > &.dropdown-toggle {
+            color: $color;
+            border-color: $border;
+            background-color: $border;
+        }
+    }
+    // Button as link
+    &.btn-link {
+        text-decoration: none;
+        border-color: transparent;
+        background-color: transparent;
+        @if $color != $btn-default-color {
+            color: $background;
+        }
+
+        &:hover {
+            border-color: $btn-link-bg-hover;
+            background-color: $btn-link-bg-hover;
+        }
+    }
+}

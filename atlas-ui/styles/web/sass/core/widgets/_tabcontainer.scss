@@ -1,0 +1,97 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Tab Container
+
+   Default Mendix Tab Container Widget. Tab containers are used to show information categorized into multiple tab pages.
+   This can be very useful if the amount of information that has to be displayed is larger than the amount of space on the screen
+========================================================================== */
+
+.mx-tabcontainer {
+    .mx-tabcontainer-tabs {
+        margin-bottom: 20px;
+        border-color: $tabs-border-color;
+        & > li > a {
+            margin-right: 0;
+            -webkit-transition: all 0.2s ease-in-out;
+            -moz-transition: all 0.2s ease-in-out;
+            -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            color: $tabs-color;
+            font-weight: $font-weight-normal;
+            &:hover,
+            &:focus {
+                background-color: $tabs-bg-hover;
+            }
+        }
+        & > li.active > a,
+        & > li.active > a:hover,
+        & > li.active > a:focus {
+            color: $tabs-color-active;
+            border: 1px solid $tabs-border-color;
+            border-bottom-color: transparent;
+            background-color: $tabs-bg;
+        }
+    }
+}
+
+// Tab Styling Specific for mobile
+.tab-mobile.mx-tabcontainer {
+    & > .mx-tabcontainer-tabs {
+        margin: 0;
+        text-align: center;
+        border-style: none;
+        background-color: $brand-primary;
+        li {
+            display: table-cell;
+            float: none;
+            width: 1%;
+            margin: 0;
+            text-align: center;
+            border-style: none;
+            border-radius: 0;
+            a {
+                padding: 15px;
+                text-transform: uppercase;
+                color: #ffffff;
+                border-width: 0 1px 0 0;
+                border-style: solid;
+                border-color: rgba(255, 255, 255, 0.3);
+                border-radius: 0;
+                font-size: 12px;
+                font-weight: $font-weight-normal;
+                &:hover,
+                &:focus {
+                    background-color: inherit;
+                }
+            }
+            &:last-child a {
+                border-right: none;
+            }
+            &.active > a,
+            &.active > a:hover,
+            &.active > a:focus {
+                color: #ffffff;
+                border-style: none;
+                border-radius: 0;
+                background-color: mix($brand-primary, #000000, 80%);
+            }
+        }
+    }
+}
+
+.mx-tabcontainer-badge {
+    margin-left: 8px;
+    border-radius: $font-size-small;
+    background-color: $label-primary-bg;
+    color: $label-primary-color;
+    font-size: $font-size-small;
+    font-weight: $font-weight-bold;
+    line-height: 1;
+    padding: 3px 7px;
+}

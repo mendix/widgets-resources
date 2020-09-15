@@ -1,0 +1,122 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Navigation
+
+   Default Mendix Navigation Tree
+========================================================================== */
+.mx-navigationtree {
+    background-color: $navigation-bg;
+
+    /* Every navigation item */
+    .navbar-inner > ul {
+        margin: 0;
+        padding-left: 0;
+
+        & > li {
+            padding: 0;
+            border-style: none;
+
+            & > a {
+                display: flex;
+                align-items: center;
+                height: $navigation-item-height;
+                padding: $navigation-item-padding;
+                color: $navigation-color;
+                //border-bottom: 1px solid $navigation-border-color;
+                //border-radius: 0;
+                background-color: $navigation-bg;
+                text-shadow: none;
+                font-size: $navigation-font-size;
+                font-weight: $font-weight-normal;
+
+                .caret {
+                    border-top-color: $navigation-color;
+                    border-bottom-color: $navigation-color;
+                }
+
+                img {
+                    width: 20px; // Default size
+                    height: auto;
+                    margin-right: 0.5em;
+                }
+
+                .glyphicon {
+                    top: 0;
+                    margin-right: 0.5em;
+                    vertical-align: middle;
+                    font-size: $navigation-glyph-size;
+                }
+            }
+
+            a:hover,
+            a:focus,
+            a.active {
+                text-decoration: none;
+                color: $navigation-color-hover;
+                background-color: $navigation-bg-hover;
+
+                .caret {
+                    border-top-color: $navigation-color-active;
+                    border-bottom-color: $navigation-color-active;
+                }
+            }
+
+            a.active {
+                color: $navigation-color-active;
+                border-left-color: $navigation-color-active;
+                background-color: $navigation-bg-active;
+            }
+        }
+    }
+
+    /* Sub navigation item specific */
+    li.mx-navigationtree-has-items {
+        & > ul {
+            margin: 0;
+            padding-left: 0;
+            background-color: $navigation-sub-bg;
+
+            li {
+                margin: 0;
+                padding: 0;
+                border: 0;
+
+                a {
+                    padding: 12px 20px 12px 25px;
+                    text-decoration: none;
+                    color: $navigation-sub-color;
+                    border: 0;
+                    background-color: $navigation-sub-bg;
+                    text-shadow: none;
+                    font-size: $navigation-sub-font-size;
+                    font-weight: $font-weight-normal;
+
+                    &:hover,
+                    &:focus,
+                    &.active {
+                        color: $navigation-sub-color-hover;
+                        outline: 0;
+                        background-color: $navigation-sub-bg-hover;
+                    }
+
+                    &.active {
+                        color: $navigation-sub-color-active;
+                        border: 0;
+                        background-color: $navigation-sub-bg-active;
+                    }
+                }
+            }
+        }
+    }
+
+    /* remove focus */
+    &:focus {
+        outline: 0;
+    }
+}

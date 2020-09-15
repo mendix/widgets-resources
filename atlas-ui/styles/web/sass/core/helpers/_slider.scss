@@ -1,0 +1,37 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Slider
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+========================================================================== */
+
+.widget-slider-primary .rc-slider-track {
+    background-color: $brand-primary;
+}
+
+.widget-slider-info .rc-slider-track {
+    background-color: $brand-info;
+}
+
+.widget-slider-success .rc-slider-track {
+    background-color: $brand-success;
+}
+
+.widget-slider-warning .rc-slider-track {
+    background-color: $brand-warning;
+}
+
+.widget-slider-danger .rc-slider-track {
+    background-color: $brand-danger;
+}
+
+.widget-slider-inverse .rc-slider-track {
+    background-color: $brand-inverse;
+}

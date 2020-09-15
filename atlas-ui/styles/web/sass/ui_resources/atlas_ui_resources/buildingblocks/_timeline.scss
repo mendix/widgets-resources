@@ -1,0 +1,84 @@
+// Timeline
+
+.timeline-header {
+    display: inline-block;
+    width: 110px;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid $border-color-default;
+    border-radius: 30px;
+}
+
+.timeline-header ~ .timeline-itemwrapper.mx-listview {
+    margin-left: 55px;
+
+    & > ul > li {
+        &:first-child .timeline-item {
+            padding-top: $spacing-large;
+        }
+
+        &:last-child .timeline-item {
+            border-left: 1px solid $border-color-default;
+        }
+    }
+}
+
+.timeline-itemwrapper.mx-listview {
+    margin-bottom: 0;
+    //margin-left: 55px;
+    //padding: $spacing-large 0;
+    margin-left: 9px;
+
+    & > ul > li {
+        .timeline-item {
+            position: relative;
+            padding-left: ($gutter-size * 2);
+
+            &::before {
+                position: absolute;
+                left: -9px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 18px;
+                height: 18px;
+                content: "";
+                color: #ffffff;
+                border-radius: 50%;
+                background-color: $border-color-default;
+                font-size: $font-size-small;
+            }
+        }
+
+        &:first-child,
+        & + li {
+            .timeline-item,
+            .timeline-item-complete {
+                padding-bottom: $spacing-large;
+            }
+        }
+
+        &:not(:last-child) .timeline-item {
+            border-left: 1px solid $border-color-default;
+        }
+
+        .timeline-item-complete {
+            @extend .timeline-item;
+
+            &::before {
+                content: "✓";
+                background-color: $brand-success;
+            }
+        }
+    }
+}
+
+//== Variations
+//-------------------------------------------------------------------------------------------------------------------//
+//.timeline2 {
+//    .timeline-itemwrapper.mx-listview {
+//        .timeline-item {
+//            padding-left: $gutter-size;
+//        }
+//    }
+//}

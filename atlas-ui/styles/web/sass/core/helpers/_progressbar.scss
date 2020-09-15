@@ -1,0 +1,49 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Progress Bar
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+========================================================================== */
+
+.widget-progress-bar .progress-bar-default {
+    background-color: $brand-default;
+}
+
+.widget-progress-bar .progress-bar-primary {
+    background-color: $brand-primary;
+}
+
+.widget-progress-bar .progress-bar-success {
+    background-color: $brand-success;
+}
+
+.widget-progress-bar .progress-bar-info {
+    background-color: $brand-info;
+}
+
+.widget-progress-bar .progress-bar-warning {
+    background-color: $brand-warning;
+}
+
+.widget-progress-bar .progress-bar-danger {
+    background-color: $brand-danger;
+}
+
+.widget-progress-bar .progress-bar-inverse {
+    background-color: $brand-inverse;
+}
+
+.widget-progress-bar-alert.widget-progress-bar-text-contrast .progress-bar {
+    color: $color-danger-darker;
+}
+
+.widget-progress-bar-text-contrast .progress-bar {
+    color: $font-color-default;
+}

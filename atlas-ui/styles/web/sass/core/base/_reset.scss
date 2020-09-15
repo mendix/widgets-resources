@@ -1,0 +1,40 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+// Basic styling Scroll container
+// .mx-scrollcontainer {
+//     .mx-scrollcontainer-wrapper {
+//         padding: 0;
+//         // Convert width to max-width when in scroll container to make sure you dont get scrollbars
+//         .mx-layoutgrid-fixed {
+//             width: 100%;
+//             margin: auto;
+//             @media (min-width: $screen-md) {
+//                 max-width: 750px;
+//             }
+//             @media (min-width: $screen-lg) {
+//                 max-width: 970px;
+//             }
+//             @media (min-width: $screen-xl) {
+//                 max-width: 1170px;
+//             }
+//         }
+//     }
+// }
+
+.mx-scrollcontainer .mx-placeholder {
+    width: 100%;
+    height: 100%;
+    .mx-layoutgrid,
+    .mx-layoutgrid-fluid {
+        @include layout-spacing($type: padding, $direction: all, $device: responsive);
+        .mx-layoutgrid,
+        .mx-layoutgrid-fluid {
+            padding: 0;
+        }
+    }
+}
