@@ -25,8 +25,10 @@ export function Signature(props: Props): ReactElement {
         "activeOpacity",
         "underlayColor"
     ]);
-    const buttonCaptionClear = props.buttonCaptionClear?.value ?? "Clear";
-    const buttonCaptionSave = props.buttonCaptionSave?.value ?? "Save";
+    const buttonCaptionClear =
+        props.buttonCaptionClear && props.buttonCaptionClear.value ? props.buttonCaptionClear.value : "Clear";
+    const buttonCaptionSave =
+        props.buttonCaptionSave && props.buttonCaptionSave.value ? props.buttonCaptionSave.value : "Save";
     const webStyles = `
                     .m-signature-pad {
                         border: none;
