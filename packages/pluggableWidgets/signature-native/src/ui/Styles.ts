@@ -34,12 +34,13 @@ const buttonContainer: ButtonContainerType = {
 export const defaultSignatureStyle: SignatureStyle = {
     container: {
         // penColor and all ViewStyle properties are allowed
-        penColor: "blue",
+        penColor: "black",
         backgroundColor: "white"
     },
     buttonWrapper: {
         // All ViewStyle properties are allowed
-        flexDirection: "row"
+        flexDirection: "row",
+        paddingTop: 16
     },
     buttonClearContainer: {
         // rippleColor, underlayColor, activeOpacity and all ViewStyle properties are allowed
