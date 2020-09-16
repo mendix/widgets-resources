@@ -18,14 +18,38 @@
                         <attributeType name="String"/>
                     </attributeTypes>
                 </property>
-                <property key="javascriptAction" type="action">
-                    <caption>Javascript Action</caption>
-                    <description/>
+            </propertyGroup>
+            <propertyGroup caption="Buttons">
+                <property key="buttonCaptionClear" type="textTemplate" required="false">
+                    <caption>Button caption clear</caption>
+                    <description>The caption for the clear button.</description>
+                </property>
+                <property key="buttonCaptionSave" type="textTemplate" required="false">
+                    <caption>Button caption save</caption>
+                    <description>The caption for the save button.</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onClear" type="action" required="false">
+                <caption>On clear</caption>
+                <description>Fired when the clear button is clicked.</description>
+            </property>
+            <property key="onSave" type="action" required="false">
+                <caption>On save</caption>
+                <description>Fired when the save button is clicked.</description>
+            </property>
+            <property key="onEnd" type="action" required="false">
+                <caption>On end</caption>
+                <description>Fired when the stroke has ended.</description>
+            </property>
+            <property key="onEmpty" type="action" required="false">
+                <caption>On empty</caption>
+                <description>Fired when the save button is clicked and the canvas is empty.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Name"/>
         </propertyGroup>
     </properties>
 </widget>
