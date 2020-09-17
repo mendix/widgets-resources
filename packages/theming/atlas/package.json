@@ -7,7 +7,7 @@
         "bump:patch": "node ./scripts/bump-patch.js",
         "bump:minor": "node ./scripts/bump-minor.js",
         "bump:major": "node ./scripts/bump-major.js",
-        "build:css": "sass --embed-sources --no-charset -s compressed ./styles/web/sass/main.scss ./styles/web/css/main.css",
+        "build:css": "sass --embed-sources --no-charset -s compressed src/web/sass/main.scss src/web/css/main.css",
         "build:js": "tsc -p ./tsconfig.json",
         "build": "npm run build:css && npm run build:js"
     },

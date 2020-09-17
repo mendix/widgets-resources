@@ -1,6 +1,8 @@
 {
     "extends": "../../tools/pluggable-widgets-tools/configs/tsconfig.base",
-    "include": ["./styles/native/**/*.ts"],
+    "include": [
+      "./src/native/**/*.ts"
+    ],
     "exclude": [],
     "compilerOptions": {
         "baseUrl": "./",
@@ -16,7 +18,7 @@
         "removeComments": false,
         "allowJs": true,
         "checkJs": true,
-        "outDir": "./styles/native/js",
+        "outDir": "./src/native/js",
         "newLine": "CRLF"
     }
 }

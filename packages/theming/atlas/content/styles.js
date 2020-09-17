@@ -1,6 +1,6 @@
-import * as custom from "../styles/native/js/app/custom";
-import mergeobjects from "../styles/native/js/core/helpers/_functions/mergeobjects";
-import * as main from "../styles/native/js/main";
+import * as custom from "../src/native/js/app/custom";
+import mergeobjects from "../src/native/js/core/helpers/_functions/mergeobjects";
+import * as main from "../src/native/js/main";
 
 Object.keys(custom).forEach(key => {
     if (main[key]) {
