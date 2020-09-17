@@ -8,7 +8,8 @@
         "bump:minor": "node ./scripts/bump-minor.js",
         "bump:major": "node ./scripts/bump-major.js",
         "build:css:dev": "sass --embed-sources --no-charset --watch ./styles/web/sass/main.scss ./styles/web/css/main.css",
-        "build:css": "sass --embed-sources --no-charset -s compressed ./styles/web/sass/main.scss ./styles/web/css/main.css"
+        "build:css": "sass --embed-sources --no-charset -s compressed ./styles/web/sass/main.scss ./styles/web/css/main.css",
+        "build:js": "tsc -p ./tsconfig.json"
     },
     "repository": {
         "type": "git",
@@ -19,7 +20,8 @@
     "devDependencies": {
         "@types/react-native": "^0.61.19",
         "react-native-device-info": "^5.5.3",
-        "sass": "^1.26.10"
+        "sass": "^1.26.10",
+        "typescript": "^3.8.3"
     },
     "dependencies": {}
 }
