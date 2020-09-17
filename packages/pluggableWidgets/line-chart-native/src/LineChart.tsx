@@ -3,6 +3,8 @@ import { all } from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
 import { InterpolationPropType } from "victory-core";
 
+import { ensure } from "@mendix/pluggable-widgets-tools";
+
 import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
 import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 
@@ -76,7 +78,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                     return dataPointsResult;
                 }
 
-                dataPointsResult.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+                dataPointsResult.push({ x: Number(ensure(x.value).toFixed()), y: Number(ensure(y.value).toFixed()) });
 
                 return dataPointsResult;
             }, []);
@@ -99,7 +101,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             }
 
             loadedSeries.push({
-                dataPoints: convertToDataPoints(dataSource.items!, series, allDataAvailable),
+                dataPoints: convertToDataPoints(ensure(dataSource.items), series, allDataAvailable),
                 interpolation,
                 name: seriesName ? seriesName.value : undefined,
                 stylePropertyName: series.stylePropertyName
@@ -116,7 +118,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     }> => {
         const { dataSource, groupByAttribute, seriesNameAttribute, stylePropertyNameAttribute } = series;
 
-        return dataSource.items!.reduce<
+        return ensure(dataSource.items).reduce<
             Array<{
                 groupByAttributeValue: string;
                 seriesNameAttributeValue?: string;
@@ -128,7 +130,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 return dataSourceItemsResult;
             }
 
-            const groupByAttributeValue = groupByAttribute!(item);
+            const groupByAttributeValue = ensure(groupByAttribute)(item);
 
             if (groupByAttributeValue.status !== ValueStatus.Available) {
                 allDataAvailable = false;
@@ -142,8 +144,8 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             if (group) {
                 group.items.push(item);
             } else {
-                const seriesNameAttributeValue = seriesNameAttribute!(item);
-                const stylePropertyNameAttributeValue = stylePropertyNameAttribute!(item);
+                const seriesNameAttributeValue = ensure(seriesNameAttribute)(item);
+                const stylePropertyNameAttributeValue = ensure(stylePropertyNameAttribute)(item);
 
                 if (
                     stylePropertyNameAttributeValue.status !== ValueStatus.Available ||
@@ -154,7 +156,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 }
 
                 dataSourceItemsResult.push({
-                    groupByAttributeValue: groupByAttributeValue.value!,
+                    groupByAttributeValue: ensure(groupByAttributeValue.value),
                     seriesNameAttributeValue: seriesNameAttributeValue.value,
                     stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
                     items: [item]
