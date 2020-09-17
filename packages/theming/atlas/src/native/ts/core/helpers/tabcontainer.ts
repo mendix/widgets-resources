@@ -14,8 +14,8 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // Enable scroll for the tab bar
 export const tabContainerScroll = {
     tabBar: {
-        scrollEnabled: true,
-    },
+        scrollEnabled: true
+    }
 };
 //
 //== Extra Classes
@@ -24,10 +24,10 @@ export const tabContainerScroll = {
 // Tab container as content of page
 export const tabContainerMinimal = {
     container: {
-        backgroundColor: "transparent",
+        backgroundColor: "transparent"
     },
     tabBar: {
         backgroundColor: "transparent",
-        elevation: 0,
-    },
+        elevation: 0
+    }
 };

@@ -16,17 +16,17 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_rating_Rating: RatingType = {
     container: {
         // All ViewStyle properties are allowed
-        justifyContent: "center",
+        justifyContent: "center"
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        opacity: rating.containerDisabled.opacity,
+        opacity: rating.containerDisabled.opacity
     },
     icon: {
         // Size, color, selectedColor & all ViewStyle properties are allowed
         size: rating.icon.size,
         marginRight: spacing.smaller,
         color: rating.icon.color,
-        selectedColor: rating.icon.selectedColor,
-    },
+        selectedColor: rating.icon.selectedColor
+    }
 };

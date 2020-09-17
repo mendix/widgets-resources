@@ -15,7 +15,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const TabContainer: TabContainerType = {
     container: {
         // All ViewStyle properties are allowed
-        flex: 1,
+        flex: 1
     },
     tabBar: {
         // bounces, pressColor, pressOpacity, scrollEnabled and all ViewStyle properties are allowed
@@ -25,18 +25,18 @@ export const TabContainer: TabContainerType = {
         pressColor: tabContainer.tabBar.pressColor,
         backgroundColor: tabContainer.tabBar.backgroundColor,
         height: 48,
-        justifyContent: "center",
+        justifyContent: "center"
     },
     indicator: {
         // All ViewStyle properties are allowed
         backgroundColor: tabContainer.indicator.backgroundColor,
-        height: tabContainer.indicator.height,
+        height: tabContainer.indicator.height
     },
     tab: {
         // All ViewStyle properties are allowed
         padding: undefined,
         minHeight: undefined,
-        paddingVertical: tabContainer.tab.paddingVertical,
+        paddingVertical: tabContainer.tab.paddingVertical
     },
     label: {
         // All TextStyle properties are allowed
@@ -44,7 +44,7 @@ export const TabContainer: TabContainerType = {
         fontSize: tabContainer.label.fontSize,
         fontFamily: font.family,
         fontWeight: tabContainer.label.fontWeight,
-        textTransform: tabContainer.label.textTransform,
+        textTransform: tabContainer.label.textTransform
     },
     activeLabel: {
         // All TextStyle properties are allowed
@@ -52,7 +52,7 @@ export const TabContainer: TabContainerType = {
         fontSize: tabContainer.activeLabel.fontSize,
         fontFamily: font.family,
         fontWeight: tabContainer.activeLabel.fontWeight,
-        textTransform: tabContainer.activeLabel.textTransform,
+        textTransform: tabContainer.activeLabel.textTransform
     },
     badgeContainer: {
         // All ViewStyle properties are allowed
@@ -60,7 +60,7 @@ export const TabContainer: TabContainerType = {
         backgroundColor: badge.default.backgroundColor,
         paddingVertical: badge.paddingVertical,
         paddingHorizontal: badge.paddingHorizontal,
-        marginLeft: 8,
+        marginLeft: 8
     },
     badgeCaption: {
         // All TextStyle properties are allowed
@@ -68,6 +68,6 @@ export const TabContainer: TabContainerType = {
         color: badge.default.color,
         fontFamily: font.family,
         fontWeight: badge.fontWeight,
-        marginTop: -1,
-    },
+        marginTop: -1
+    }
 };

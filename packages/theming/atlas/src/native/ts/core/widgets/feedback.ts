@@ -26,17 +26,17 @@ export const com_mendix_widget_native_feedback_Feedback: FeedbackType = {
         shadowRadius: 10,
         shadowOffset: {
             width: 0,
-            height: 2,
-        },
+            height: 2
+        }
     },
     dialog: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     title: {
         // All TextStyle properties are allowed
         color: font.colorTitle,
-        fontFamily: font.family,
+        fontFamily: font.family
     },
     textAreaInput: {
         // placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
@@ -57,13 +57,13 @@ export const com_mendix_widget_native_feedback_Feedback: FeedbackType = {
 
         textAlignVertical: "top",
         paddingVertical: input.input.paddingVertical,
-        paddingHorizontal: input.input.paddingHorizontal,
+        paddingHorizontal: input.input.paddingHorizontal
     },
     switchLabel: {
         // All TextStyle properties are allowed
         color: input.label.color,
         fontSize: input.label.fontSize,
-        fontFamily: font.family,
+        fontFamily: font.family
     },
     switchInput: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -73,16 +73,16 @@ export const com_mendix_widget_native_feedback_Feedback: FeedbackType = {
         thumbColorOn: background.primary,
         trackColorOn: brand.success,
         thumbColorOff: contrast.regular,
-        trackColorOff: contrast.lower,
+        trackColorOff: contrast.lower
     },
     button: {
         // Just these 3 properties are allowed
         color: brand.primary,
         borderColor: border.color, // Required for IOS
-        borderWidth: border.width, // Required for IOS
+        borderWidth: border.width // Required for IOS
     },
     activityIndicator: {
         // Only color is allowed
-        color: font.colorTitle,
-    },
+        color: font.colorTitle
+    }
 };

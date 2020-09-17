@@ -25,19 +25,19 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet: BottomSheetType =
         shadowRadius: 6,
         shadowOffset: {
             width: 0,
-            height: -4,
-        },
+            height: -4
+        }
     },
     containerWhenExpandedFullscreen: {
         // All ViewStyle properties are allowed
         height: "100%",
         alignSelf: "stretch",
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     modal: {
         // All ViewStyle properties are allowed
         margin: 0,
-        justifyContent: "flex-end",
+        justifyContent: "flex-end"
     },
     modalItems: {
         container: {
@@ -45,27 +45,27 @@ export const com_mendix_widget_native_bottomsheet_BottomSheet: BottomSheetType =
             height: 50,
             marginTop: 0,
             rippleColor: contrast.lower,
-            backgroundColor: background.primary,
+            backgroundColor: background.primary
         },
         defaultStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: font.colorTitle,
+            color: font.colorTitle
         },
         primaryStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: brand.primary,
+            color: brand.primary
         },
         dangerStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: brand.danger,
+            color: brand.danger
         },
         customStyle: {
             // All TextStyle properties are allowed
             fontSize: 16,
-            color: font.colorTitle,
-        },
-    },
+            color: font.colorTitle
+        }
+    }
 };

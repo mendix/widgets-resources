@@ -15,96 +15,96 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // Text Colors
 export const textTitle = {
     text: {
-        color: font.colorTitle,
-    },
+        color: font.colorTitle
+    }
 };
 export const textParagraph = {
     text: {
-        color: font.colorParagraph,
-    },
+        color: font.colorParagraph
+    }
 };
 export const textDisabled = {
     text: {
-        color: font.colorDisabled,
-    },
+        color: font.colorDisabled
+    }
 };
 export const textWhite = {
     text: {
-        color: "#FFF",
-    },
+        color: "#FFF"
+    }
 };
 export const textPrimary = {
     text: {
-        color: brand.primary,
-    },
+        color: brand.primary
+    }
 };
 export const textSuccess = {
     text: {
-        color: brand.success,
-    },
+        color: brand.success
+    }
 };
 export const textWarning = {
     text: {
-        color: brand.warning,
-    },
+        color: brand.warning
+    }
 };
 export const textDanger = {
     text: {
-        color: brand.danger,
-    },
+        color: brand.danger
+    }
 };
 //
 // Text Alignment
 export const textLeft = {
     text: {
-        textAlign: "left",
-    },
+        textAlign: "left"
+    }
 };
 export const textCenter = {
     text: {
-        textAlign: "center",
-    },
+        textAlign: "center"
+    }
 };
 export const textRight = {
     text: {
-        textAlign: "right",
-    },
+        textAlign: "right"
+    }
 };
 //
 // Text Weights
 export const textLight = {
     text: {
-        fontWeight: font.weightLight,
-    },
+        fontWeight: font.weightLight
+    }
 };
 export const textNormal = {
     text: {
-        fontWeight: font.weightNormal,
-    },
+        fontWeight: font.weightNormal
+    }
 };
 export const textSemiBold = {
     text: {
-        fontWeight: font.weightSemiBold,
-    },
+        fontWeight: font.weightSemiBold
+    }
 };
 export const textBold = {
     text: {
-        fontWeight: font.weightBold,
-    },
+        fontWeight: font.weightBold
+    }
 };
 //
 // Text Sizes
 export const textSmall = {
     text: {
         fontSize: font.sizeSmall,
-        lineHeight: font.lineHeightSmall,
-    },
+        lineHeight: font.lineHeightSmall
+    }
 };
 export const textLarge = {
     text: {
         fontSize: font.sizeLarge,
-        lineHeight: font.lineHeightLarge,
-    },
+        lineHeight: font.lineHeightLarge
+    }
 };
 //
 //== Extra Classes
@@ -114,26 +114,26 @@ export const textLarge = {
 // Text Transformations
 export const textLowercase = {
     text: {
-        textTransform: "lowercase",
-    },
+        textTransform: "lowercase"
+    }
 };
 export const textUppercase = {
     text: {
-        textTransform: "uppercase",
-    },
+        textTransform: "uppercase"
+    }
 };
 export const textCapitalize = {
     text: {
-        textTransform: "capitalize",
-    },
+        textTransform: "capitalize"
+    }
 };
 export const textUnderline = {
     text: {
-        textDecorationLine: "underline",
-    },
+        textDecorationLine: "underline"
+    }
 };
 export const textLineThrough = {
     text: {
-        textDecorationLine: "line-through",
-    },
+        textDecorationLine: "line-through"
+    }
 };

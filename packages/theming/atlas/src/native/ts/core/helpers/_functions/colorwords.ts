@@ -154,7 +154,7 @@ const colors: ColorsType = {
     white: { r: 255, g: 255, b: 255 },
     whitesmoke: { r: 245, g: 245, b: 245 },
     yellow: { r: 255, g: 255, b: 0 },
-    yellowgreen: { r: 154, g: 205, b: 50 },
+    yellowgreen: { r: 154, g: 205, b: 50 }
 };
 //
 export default colors;

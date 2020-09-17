@@ -15,7 +15,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton: FloatingActionButtonType = {
     container: {
         // All ViewStyle properties are allowed
-        margin: floatingActionButton.container.margin,
+        margin: floatingActionButton.container.margin
     },
     button: {
         // Size, ripplecolor and all ViewStyle properties are allowed
@@ -33,13 +33,13 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton:
         shadowRadius: 4,
         shadowOffset: {
             width: 0,
-            height: 2,
-        },
+            height: 2
+        }
     },
     buttonIcon: {
         // Size and color are allowed
         size: floatingActionButton.buttonIcon.size,
-        color: floatingActionButton.buttonIcon.color,
+        color: floatingActionButton.buttonIcon.color
     },
     secondaryButton: {
         // Size and all ViewStyle properties are allowed
@@ -51,19 +51,19 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton:
         shadowRadius: 4,
         shadowOffset: {
             width: 0,
-            height: 2,
-        },
+            height: 2
+        }
     },
     secondaryButtonIcon: {
         // Size and color are allowed
         size: floatingActionButton.secondaryButtonIcon.size,
-        color: floatingActionButton.secondaryButtonIcon.color,
+        color: floatingActionButton.secondaryButtonIcon.color
     },
     secondaryButtonCaption: {
         // All TextStyle properties are allowed
         color: floatingActionButton.secondaryButtonCaption.color,
         fontSize: floatingActionButton.secondaryButtonCaption.fontSize,
-        fontFamily: font.family,
+        fontFamily: font.family
     },
     secondaryButtonCaptionContainer: {
         // All ViewStyle properties are allowed
@@ -74,7 +74,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton:
         shadowRadius: 4,
         shadowOffset: {
             width: 0,
-            height: 2,
-        },
-    },
+            height: 2
+        }
+    }
 };

@@ -15,79 +15,79 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const ReferenceSelector: DropDownType = {
     container: {
         // All ViewStyle properties are allowed
-        ...DropDown.container,
+        ...DropDown.container
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        ...DropDown.containerDisabled,
+        ...DropDown.containerDisabled
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
-        ...DropDown.label,
+        ...DropDown.label
     },
     labelDisabled: {
         // All TextStyle properties are allowed
-        ...DropDown.labelDisabled,
+        ...DropDown.labelDisabled
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
-        ...DropDown.value,
+        ...DropDown.value
     },
     valueDisabled: {
         // All TextStyle properties are allowed
-        ...DropDown.valueDisabled,
+        ...DropDown.valueDisabled
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...DropDown.validationMessage,
+        ...DropDown.validationMessage
     },
     /*  New dropdown styles start */
     valueContainer: {
         // All ViewStyle properties & rippleColor are allowed
-        ...DropDown.valueContainer,
+        ...DropDown.valueContainer
     },
     valueContainerDisabled: {
         // All ViewStyle properties are allowed
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
-        ...DropDown.menuWrapper,
+        ...DropDown.menuWrapper
     },
     itemContainer: {
         // All ViewStyle properties are allowed
-        ...DropDown.itemContainer,
+        ...DropDown.itemContainer
     },
     item: {
         // All TextStyle properties are allowed
-        ...DropDown.item,
+        ...DropDown.item
     },
     selectedItem: {
         // All TextStyle properties are allowed
-        ...DropDown.selectedItem,
+        ...DropDown.selectedItem
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
-        ...DropDown.selectedItemContainer,
+        ...DropDown.selectedItemContainer
     },
     /*  New dropdown styles end */
     useUniformDesign: DropDown.useUniformDesign,
     /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
-        ...DropDown.pickerIOS,
+        ...DropDown.pickerIOS
     },
     pickerItemIOS: {
         // All TextStyle properties are allowed
-        ...DropDown.pickerItemIOS,
+        ...DropDown.pickerItemIOS
     },
     pickerBackdropIOS: {
         // All ViewStyle properties are allowed
-        ...DropDown.pickerBackdropIOS,
+        ...DropDown.pickerBackdropIOS
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        ...DropDown.pickerTopIOS,
-    },
+        ...DropDown.pickerTopIOS
+    }
     /*  Old dropdown styles end */
 };
 export const ReferenceSelectorVertical: DropDownType = {
@@ -103,5 +103,5 @@ export const ReferenceSelectorVertical: DropDownType = {
     pickerIOS: DropDownVertical.pickerIOS,
     pickerItemIOS: DropDownVertical.pickerItemIOS,
     pickerBackdropIOS: DropDownVertical.pickerBackdropIOS,
-    pickerTopIOS: DropDownVertical.pickerTopIOS,
+    pickerTopIOS: DropDownVertical.pickerTopIOS
 };

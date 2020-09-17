@@ -13,8 +13,8 @@ export const cardShadow = {
     shadowRadius: 10,
     shadowOffset: {
         width: 0,
-        height: 2,
-    },
+        height: 2
+    }
 };
 export const card = {
     container: {
@@ -24,11 +24,11 @@ export const card = {
         ...Platform.select({
             android: {
                 borderWidth: 1,
-                borderColor: contrast.lowest,
-            },
+                borderColor: contrast.lowest
+            }
         }),
-        ...cardShadow,
-    },
+        ...cardShadow
+    }
 };
 //
 //== Elements
@@ -37,25 +37,25 @@ export const cardImage = {
     container: {
         overflow: "hidden",
         borderTopLeftRadius: border.radiusLarge,
-        borderTopRightRadius: border.radiusLarge,
+        borderTopRightRadius: border.radiusLarge
     },
     image: {
         width: "100%",
         height: 128,
-        resizeMode: "cover",
-    },
+        resizeMode: "cover"
+    }
 };
 export const cardImageBackground = {
     container: {
         ...cardImage.container,
         borderBottomLeftRadius: border.radiusLarge,
-        borderBottomRightRadius: border.radiusLarge,
+        borderBottomRightRadius: border.radiusLarge
     },
     image: {
         width: "100%",
         height: 300,
-        resizeMode: "cover",
-    },
+        resizeMode: "cover"
+    }
 };
 export const cardBodyAbsolute = {
     container: {
@@ -63,8 +63,8 @@ export const cardBodyAbsolute = {
         end: 0,
         start: 0,
         bottom: 0,
-        backgroundColor: "transparent",
-    },
+        backgroundColor: "transparent"
+    }
 };
 //
 //== Variations
@@ -78,15 +78,15 @@ export const cardAction = {
         borderColor: border.color,
         borderRadius: border.radiusLarge,
         padding: spacing.regular,
-        ...cardShadow,
-    },
+        ...cardShadow
+    }
 };
 
 export const cardActionImage = {
     image: {
         maxHeight: 70,
-        resizeMode: "contain",
-    },
+        resizeMode: "contain"
+    }
 };
 //
 //-------------------------------------------------------------------------------------------------------------------//
@@ -94,11 +94,11 @@ export const cardActionImage = {
 export const cardPaymentImage = {
     container: {
         flex: -1,
-        maxHeight: 250,
+        maxHeight: 250
     },
     image: {
         width: "100%",
         maxHeight: 250,
-        resizeMode: "contain",
-    },
+        resizeMode: "contain"
+    }
 };

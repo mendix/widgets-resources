@@ -19,19 +19,19 @@ export const CheckBox: CheckBoxType = {
         // All ViewStyle properties are allowed
         ...TextBox.container,
         paddingVertical: spacing.smallest,
-        justifyContent: "center",
+        justifyContent: "center"
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        ...TextBox.containerDisabled,
+        ...TextBox.containerDisabled
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
-        ...TextBox.label,
+        ...TextBox.label
     },
     labelDisabled: {
         // All TextStyle properties are allowed
-        ...TextBox.labelDisabled,
+        ...TextBox.labelDisabled
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -40,14 +40,14 @@ export const CheckBox: CheckBoxType = {
         thumbColorOn: background.primary,
         trackColorOn: brand.primary,
         thumbColorOff: "#FFF",
-        trackColorOff: border.color,
+        trackColorOff: border.color
     },
     inputDisabled: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         thumbColorOn: background.gray,
         trackColorOn: font.colorDisabled,
         thumbColorOff: background.gray,
-        trackColorOff: border.color,
+        trackColorOff: border.color
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
@@ -55,22 +55,22 @@ export const CheckBox: CheckBoxType = {
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
         thumbColorOff: contrast.low,
-        trackColorOff: brand.danger,
+        trackColorOff: brand.danger
     },
     validationMessage: {
         // All TextStyle properties are allowed
         ...TextBox.validationMessage,
-        alignSelf: "stretch",
-    },
+        alignSelf: "stretch"
+    }
 };
 export const CheckBoxVertical: CheckBoxType = {
     container: TextBoxVertical.container,
     label: {
-        ...TextBoxVertical.label,
+        ...TextBoxVertical.label
     },
     input: {
         ...CheckBox.input,
-        alignSelf: "flex-start",
+        alignSelf: "flex-start"
     },
     inputDisabled: CheckBox.inputDisabled,
     inputError: {
@@ -78,10 +78,10 @@ export const CheckBoxVertical: CheckBoxType = {
         thumbColorOn: background.primary,
         trackColorOn: brand.danger,
         thumbColorOff: contrast.low,
-        trackColorOff: brand.danger,
+        trackColorOff: brand.danger
     },
     validationMessage: {
         ...TextBoxVertical.validationMessage,
-        alignSelf: "stretch",
-    },
+        alignSelf: "stretch"
+    }
 };

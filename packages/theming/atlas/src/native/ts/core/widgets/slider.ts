@@ -16,28 +16,28 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_slider_Slider: SliderType = {
     container: {
         // All ViewStyle properties are allowed
-        alignSelf: "stretch",
+        alignSelf: "stretch"
     },
     track: {
         // All ViewStyle properties are allowed
         height: slider.track.height,
-        backgroundColor: slider.track.backgroundColor,
+        backgroundColor: slider.track.backgroundColor
     },
     trackDisabled: {
         // All ViewStyle properties are allowed
         height: slider.track.height,
         backgroundColor: slider.trackDisabled.backgroundColor,
-        opacity: slider.trackDisabled.opacity,
+        opacity: slider.trackDisabled.opacity
     },
     highlight: {
         // All ViewStyle properties are allowed
         height: slider.track.height,
-        backgroundColor: slider.highlight.backgroundColor,
+        backgroundColor: slider.highlight.backgroundColor
     },
     highlightDisabled: {
         // All ViewStyle properties are allowed
         height: slider.track.height,
-        backgroundColor: slider.highlightDisabled.backgroundColor,
+        backgroundColor: slider.highlightDisabled.backgroundColor
     },
     marker: {
         // All ViewStyle properties are allowed
@@ -49,14 +49,14 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
         elevation: 2,
         shadowColor: "#000",
         shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 1 },
+        shadowOffset: { width: 0, height: 1 }
     },
     markerActive: {
         // All ViewStyle properties are allowed
         width: slider.markerActive.size,
         height: slider.markerActive.size,
         borderRadius: slider.markerActive.size / 2,
-        borderWidth: 0,
+        borderWidth: 0
     },
     markerDisabled: {
         // All ViewStyle properties are allowed
@@ -68,10 +68,10 @@ export const com_mendix_widget_native_slider_Slider: SliderType = {
         elevation: 2,
         shadowColor: "#000",
         shadowOpacity: 0.1,
-        shadowOffset: { width: 0, height: 1 },
+        shadowOffset: { width: 0, height: 1 }
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage,
-    },
+        ...TextBox.validationMessage
+    }
 };

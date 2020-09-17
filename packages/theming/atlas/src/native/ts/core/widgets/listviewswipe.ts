@@ -19,7 +19,7 @@ export const com_mendix_widget_native_listviewswipe_ListViewSwipe: ListViewSwipe
         flex: 1,
         alignItems: "stretch",
         justifyContent: "space-between",
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     leftAction: {
         // PanelSize & All ViewStyle properties are allowed
@@ -27,7 +27,7 @@ export const com_mendix_widget_native_listviewswipe_ListViewSwipe: ListViewSwipe
         flex: 1,
         flexDirection: "row",
         alignItems: "stretch",
-        backgroundColor: listViewSwipe.leftAction.backgroundColor,
+        backgroundColor: listViewSwipe.leftAction.backgroundColor
     },
     rightAction: {
         // PanelSize & All ViewStyle properties are allowed
@@ -35,6 +35,6 @@ export const com_mendix_widget_native_listviewswipe_ListViewSwipe: ListViewSwipe
         flex: 1,
         flexDirection: "row",
         alignItems: "stretch",
-        backgroundColor: listViewSwipe.rightAction.backgroundColor,
-    },
+        backgroundColor: listViewSwipe.rightAction.backgroundColor
+    }
 };

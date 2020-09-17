@@ -16,7 +16,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 const carouselFullWidthLayout: CarouselLayoutType = {
     slideItem: {
         // All ViewStyle properties are allowed
-        height: 250,
+        height: 250
     },
     inactiveSlideItem: {
         // Only opacity and scale are allowed
@@ -29,7 +29,7 @@ const carouselFullWidthLayout: CarouselLayoutType = {
             width: "100%",
             justifyContent: "center",
             paddingHorizontal: spacing.regular,
-            paddingBottom: spacing.regular,
+            paddingBottom: spacing.regular
         },
         text: {
             // All TextStyle properties are allowed
@@ -41,23 +41,23 @@ const carouselFullWidthLayout: CarouselLayoutType = {
             textShadowRadius: 3,
             textShadowOffset: {
                 width: 0,
-                height: 1,
-            },
+                height: 1
+            }
         },
         dotContainerStyle: {
             // All ViewStyle properties are allowed
-            marginHorizontal: 3,
+            marginHorizontal: 3
         },
         dotStyle: {
             // Color and all ViewStyle properties are allowed
-            color: "#FFF",
+            color: "#FFF"
         },
         inactiveDotStyle: {
             // Only opacity, scale and color are allowed
             color: "rgba(255, 255, 255, 0.45)",
-            scale: 1,
-        },
-    },
+            scale: 1
+        }
+    }
 };
 
 const carouselCardLayout: CarouselLayoutType = {
@@ -73,40 +73,40 @@ const carouselCardLayout: CarouselLayoutType = {
         shadowRadius: 6,
         shadowOffset: {
             width: 0,
-            height: 4,
-        },
+            height: 4
+        }
     },
     inactiveSlideItem: {
         // Only opacity and scale are allowed
-        opacity: 0.8,
+        opacity: 0.8
     },
     pagination: {
         container: {
             // All ViewStyle properties are allowed
             paddingHorizontal: spacing.regular,
-            paddingBottom: spacing.smaller,
+            paddingBottom: spacing.smaller
         },
         text: {
             // All TextStyle properties are allowed
             color: font.colorTitle,
             fontSize: font.size,
             fontFamily: font.family,
-            textAlign: "center",
+            textAlign: "center"
         },
         dotContainerStyle: {
             // All ViewStyle properties are allowed
-            marginHorizontal: 3,
+            marginHorizontal: 3
         },
         dotStyle: {
             // Color and all ViewStyle properties are allowed
-            color: brand.primary,
+            color: brand.primary
         },
         inactiveDotStyle: {
             // Only opacity, scale and color are allowed
             color: contrast.lower,
-            scale: 1,
-        },
-    },
+            scale: 1
+        }
+    }
 };
 export const com_mendix_widget_native_carousel_Carousel: CarouselType = {
     container: {
@@ -116,6 +116,6 @@ export const com_mendix_widget_native_carousel_Carousel: CarouselType = {
     cardLayout: carouselCardLayout,
     activityIndicator: {
         // Only color is allowed
-        color: font.colorTitle,
-    },
+        color: font.colorTitle
+    }
 };

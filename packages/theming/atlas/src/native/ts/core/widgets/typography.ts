@@ -21,8 +21,8 @@ export const Text: TextType = {
         color: font.colorTitle,
         fontSize: font.size,
         fontFamily: font.family,
-        lineHeight: font.lineHeight,
-    },
+        lineHeight: font.lineHeight
+    }
 };
 
 export const TextHeading1: TextType = {
@@ -31,8 +31,8 @@ export const TextHeading1: TextType = {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH1,
         fontFamily: font.family,
-        lineHeight: font.lineHeightH1,
-    },
+        lineHeight: font.lineHeightH1
+    }
 };
 export const TextHeading2: TextType = {
     container: {},
@@ -40,8 +40,8 @@ export const TextHeading2: TextType = {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH2,
         fontFamily: font.family,
-        lineHeight: font.lineHeightH2,
-    },
+        lineHeight: font.lineHeightH2
+    }
 };
 export const TextHeading3: TextType = {
     container: {},
@@ -49,8 +49,8 @@ export const TextHeading3: TextType = {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH3,
         fontFamily: font.family,
-        lineHeight: font.lineHeightH3,
-    },
+        lineHeight: font.lineHeightH3
+    }
 };
 export const TextHeading4: TextType = {
     container: {},
@@ -58,8 +58,8 @@ export const TextHeading4: TextType = {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH4,
         fontFamily: font.family,
-        lineHeight: font.lineHeightH4,
-    },
+        lineHeight: font.lineHeightH4
+    }
 };
 export const TextHeading5: TextType = {
     container: {},
@@ -67,8 +67,8 @@ export const TextHeading5: TextType = {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH5,
         fontFamily: font.family,
-        lineHeight: font.lineHeightH5,
-    },
+        lineHeight: font.lineHeightH5
+    }
 };
 export const TextHeading6: TextType = {
     container: {},
@@ -76,6 +76,6 @@ export const TextHeading6: TextType = {
         fontWeight: font.weightSemiBold,
         fontSize: font.sizeH6,
         fontFamily: font.family,
-        lineHeight: font.lineHeightH6,
-    },
+        lineHeight: font.lineHeightH6
+    }
 };

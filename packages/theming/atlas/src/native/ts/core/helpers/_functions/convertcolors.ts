@@ -47,7 +47,7 @@ function hexToRgb(hex: string): RGB {
         r: parseInt("0x" + hex[0] + hex[1], 16),
         g: parseInt("0x" + hex[2] + hex[3], 16),
         b: parseInt("0x" + hex[4] + hex[5], 16),
-        a: parseInt("0x" + hex[6] + hex[7], 16) / 255 || 1,
+        a: parseInt("0x" + hex[6] + hex[7], 16) / 255 || 1
     });
 }
 
@@ -127,7 +127,7 @@ function hslToRgb(hsl: string): RGB {
         r: Math.round((r + m) * 255),
         g: Math.round((g + m) * 255),
         b: Math.round((b + m) * 255),
-        a,
+        a
     });
 }
 

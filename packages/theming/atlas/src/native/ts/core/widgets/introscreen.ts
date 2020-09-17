@@ -24,12 +24,12 @@ export const introScreenButtonPaginationAbove: IntroScreenButtonType = {
         alignItems: "center",
         justifyContent: "center",
         paddingVertical: introScreen.buttonPaginationAbove.container.paddingVertical,
-        backgroundColor: introScreen.buttonPaginationAbove.container.backgroundColor,
+        backgroundColor: introScreen.buttonPaginationAbove.container.backgroundColor
     },
     icon: {
         // Size and color are allowed
         color: introScreen.button.icon.color,
-        size: introScreen.button.icon.size,
+        size: introScreen.button.icon.size
     },
     caption: {
         // All TextStyle properties are allowed
@@ -38,8 +38,8 @@ export const introScreenButtonPaginationAbove: IntroScreenButtonType = {
         fontFamily: font.family,
         fontWeight: introScreen.button.caption.fontWeight,
         textTransform: introScreen.button.caption.textTransform,
-        paddingHorizontal: introScreen.button.caption.paddingHorizontal,
-    },
+        paddingHorizontal: introScreen.button.caption.paddingHorizontal
+    }
 };
 // Button styles when the chose to show the indicator between the buttons
 export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
@@ -47,12 +47,12 @@ export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
         // Ripplecolor and all ViewStyle properties are allowed
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center"
     },
     icon: {
         // Size and color are allowed
         color: introScreen.button.icon.color,
-        size: introScreen.button.icon.size,
+        size: introScreen.button.icon.size
     },
     caption: {
         // All TextStyle properties are allowed
@@ -61,20 +61,20 @@ export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
         fontFamily: font.family,
         fontWeight: introScreen.button.caption.fontWeight,
         textTransform: introScreen.button.caption.textTransform,
-        paddingHorizontal: introScreen.button.caption.paddingHorizontal,
-    },
+        paddingHorizontal: introScreen.button.caption.paddingHorizontal
+    }
 };
 // Default styles
 export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType = {
     fullscreenContainer: {
         // All ViewStyle properties are allowed
-        backgroundColor: introScreen.fullscreenContainer.backgroundColor,
+        backgroundColor: introScreen.fullscreenContainer.backgroundColor
     },
     popupContainer: {
         // All ViewStyle properties are allowed
         paddingVertical: introScreen.popupContainer.paddingVertical,
         paddingHorizontal: introScreen.popupContainer.paddingHorizontal,
-        backgroundColor: introScreen.popupContainer.backgroundColor,
+        backgroundColor: introScreen.popupContainer.backgroundColor
     },
 
     // Pagination styles
@@ -87,25 +87,25 @@ export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType =
         marginTop: spacing.largest,
         bottom: isIphoneWithNotch ? 22 : 0,
         justifyContent: "space-between",
-        alignItems: "center",
+        alignItems: "center"
     },
     paginationText: {
         // All TextStyle properties are allowed
         color: introScreen.pagination.text.color,
         fontSize: introScreen.pagination.text.fontSize,
-        fontFamily: font.family,
+        fontFamily: font.family
     },
     dotStyle: {
         // All ViewStyle properties are allowed
         width: introScreen.pagination.dotStyle.size,
         height: introScreen.pagination.dotStyle.size,
-        backgroundColor: introScreen.pagination.dotStyle.backgroundColor,
+        backgroundColor: introScreen.pagination.dotStyle.backgroundColor
     },
     activeDotStyle: {
         // All ViewStyle properties are allowed
         width: introScreen.pagination.activeDotStyle.size,
         height: introScreen.pagination.activeDotStyle.size,
-        backgroundColor: introScreen.pagination.activeDotStyle.backgroundColor,
+        backgroundColor: introScreen.pagination.activeDotStyle.backgroundColor
     },
 
     // Button styles
@@ -115,17 +115,17 @@ export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType =
             flex: 1,
             flexDirection: "row",
             justifyContent: "center",
-            width: "100%",
+            width: "100%"
         },
         buttonSkip: introScreenButtonPaginationAbove,
         buttonPrevious: introScreenButtonPaginationAbove,
         buttonNext: introScreenButtonPaginationAbove,
-        buttonDone: introScreenButtonPaginationAbove,
+        buttonDone: introScreenButtonPaginationAbove
     },
     paginationBetween: {
         buttonSkip: introScreenButtonPaginationBetween,
         buttonPrevious: introScreenButtonPaginationBetween,
         buttonNext: introScreenButtonPaginationBetween,
-        buttonDone: introScreenButtonPaginationBetween,
-    },
+        buttonDone: introScreenButtonPaginationBetween
+    }
 };

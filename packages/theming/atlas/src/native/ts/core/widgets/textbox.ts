@@ -26,11 +26,11 @@ export const TextBox: TextBoxType = {
         fontSize: input.label.fontSize,
         fontFamily: font.family,
         textAlign: input.label.textAlign,
-        marginRight: spacing.small,
+        marginRight: spacing.small
     },
     labelDisabled: {
         // TextStyle properties are allowed
-        color: input.labelDisabled.color,
+        color: input.labelDisabled.color
     },
     input: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
@@ -49,27 +49,27 @@ export const TextBox: TextBoxType = {
         minWidth: input.input.minWidth,
         minHeight: input.input.minHeight,
         paddingHorizontal: input.input.paddingHorizontal,
-        paddingVertical: input.input.paddingVertical,
+        paddingVertical: input.input.paddingVertical
     },
     inputDisabled: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         color: input.inputDisabled.color,
         borderColor: input.inputDisabled.borderColor,
-        backgroundColor: input.inputDisabled.backgroundColor,
+        backgroundColor: input.inputDisabled.backgroundColor
     },
     inputError: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         color: input.inputError.color,
         borderColor: input.inputError.borderColor,
         placeholderTextColor: input.inputError.placeholderTextColor,
-        underlineColorAndroid: "transparent",
+        underlineColorAndroid: "transparent"
     },
     validationMessage: {
         // All TextStyle properties are allowed
         color: input.validationMessage.color,
         fontSize: input.validationMessage.fontSize,
-        fontFamily: font.family,
-    },
+        fontFamily: font.family
+    }
 };
 export const TextBoxVertical: TextBoxType = {
     container: {},
@@ -79,10 +79,10 @@ export const TextBoxVertical: TextBoxType = {
         fontSize: input.label.fontSize,
         fontFamily: font.family,
         textAlign: input.label.textAlign,
-        marginBottom: spacing.smallest,
+        marginBottom: spacing.smallest
     },
     labelDisabled: {
-        color: input.labelDisabled.color,
+        color: input.labelDisabled.color
     },
     input: {
         color: input.input.color,
@@ -100,13 +100,13 @@ export const TextBoxVertical: TextBoxType = {
         minWidth: input.input.minWidth,
         minHeight: input.input.minHeight,
         paddingHorizontal: input.input.paddingHorizontal,
-        paddingVertical: input.input.paddingVertical,
+        paddingVertical: input.input.paddingVertical
     },
     inputDisabled: {
         color: input.inputDisabled.color,
         borderColor: input.inputDisabled.borderColor,
-        backgroundColor: input.inputDisabled.backgroundColor,
+        backgroundColor: input.inputDisabled.backgroundColor
     },
     inputError: TextBox.inputError,
-    validationMessage: TextBox.validationMessage,
+    validationMessage: TextBox.validationMessage
 };

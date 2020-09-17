@@ -15,29 +15,29 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // Floating Action Button Colors
 export const floatingActionButtonSecondary = {
     button: {
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     buttonIcon: {
-        color: brand.primary,
-    },
+        color: brand.primary
+    }
 };
 export const floatingActionButtonSuccess = {
     button: {
         backgroundColor: brand.success,
-        borderColor: brand.success,
-    },
+        borderColor: brand.success
+    }
 };
 
 export const floatingActionButtonWarning = {
     button: {
         backgroundColor: brand.warning,
-        borderColor: brand.warning,
-    },
+        borderColor: brand.warning
+    }
 };
 
 export const floatingActionButtonDanger = {
     button: {
         backgroundColor: brand.danger,
-        borderColor: brand.danger,
-    },
+        borderColor: brand.danger
+    }
 };

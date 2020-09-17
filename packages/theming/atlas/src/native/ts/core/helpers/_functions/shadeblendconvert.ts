@@ -24,7 +24,7 @@
 export function shadeBlendConvert(
     c: number | undefined,
     fromValue: string | undefined,
-    toValue: string | undefined = undefined,
+    toValue: string | undefined = undefined
 ): string {
     if (
         typeof c != "number" ||

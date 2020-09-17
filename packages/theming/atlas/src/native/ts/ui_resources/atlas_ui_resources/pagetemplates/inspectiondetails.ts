@@ -9,22 +9,22 @@
 export const carouselCardImage = {
     container: {
         borderRadius: 10,
-        overflow: "hidden",
+        overflow: "hidden"
     },
     image: {
         width: "100%",
-        height: "100%",
-    },
+        height: "100%"
+    }
 };
 
 export const carouselFullWidthImage = {
     container: {
-        height: 280,
+        height: 280
     },
     image: {
         width: "100%",
-        height: "100%",
-    },
+        height: "100%"
+    }
 };
 //
 //== Variations

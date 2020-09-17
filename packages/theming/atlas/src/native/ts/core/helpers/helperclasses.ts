@@ -12,77 +12,77 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // Hide on Android
 export const hideOnAndroid: Helperclass = {
     container: {
-        display: Platform.select({ ios: "flex", android: "none" }),
-    },
+        display: Platform.select({ ios: "flex", android: "none" })
+    }
 };
 // Hide on iOS
 export const hideOnIos: Helperclass = {
     container: {
-        display: Platform.select({ ios: "none", android: "flex" }),
-    },
+        display: Platform.select({ ios: "none", android: "flex" })
+    }
 };
 //
 //== Background Colors
 export const backgroundPrimary: Helperclass = {
     container: {
-        backgroundColor: background.primary,
-    },
+        backgroundColor: background.primary
+    }
 };
 export const backgroundGray: Helperclass = {
     container: {
-        backgroundColor: background.gray,
-    },
+        backgroundColor: background.gray
+    }
 };
 export const backgroundBrandPrimary: Helperclass = {
     container: {
-        backgroundColor: background.brandPrimary,
-    },
+        backgroundColor: background.brandPrimary
+    }
 };
 export const backgroundBrandSuccess: Helperclass = {
     container: {
-        backgroundColor: background.brandSuccess,
-    },
+        backgroundColor: background.brandSuccess
+    }
 };
 export const backgroundBrandWarning: Helperclass = {
     container: {
-        backgroundColor: background.brandWarning,
-    },
+        backgroundColor: background.brandWarning
+    }
 };
 export const backgroundBrandDanger: Helperclass = {
     container: {
-        backgroundColor: background.brandDanger,
-    },
+        backgroundColor: background.brandDanger
+    }
 };
 export const backgroundBrandInfo: Helperclass = {
     container: {
-        backgroundColor: background.brandInfo,
-    },
+        backgroundColor: background.brandInfo
+    }
 };
 //
 // borders
 export const borderTop: Helperclass = {
     container: {
         borderColor: border.color,
-        borderTopWidth: border.width,
-    },
+        borderTopWidth: border.width
+    }
 };
 export const borderBottom: Helperclass = {
     container: {
         borderColor: border.color,
-        borderBottomWidth: border.width,
-    },
+        borderBottomWidth: border.width
+    }
 };
 export const borderRadiusSmall: Helperclass = {
     container: {
         overflow: "hidden",
-        borderRadius: border.radiusSmall,
-    },
+        borderRadius: border.radiusSmall
+    }
 };
 export const borderRadiusLarge: Helperclass = {
     container: {
         overflow: "hidden",
-        borderRadius: border.radiusLarge,
-    },
+        borderRadius: border.radiusLarge
+    }
 };
 //
 // Positioning
@@ -92,8 +92,8 @@ export const absoluteBottom: Helperclass = {
         bottom: 0,
         width: "100%",
         maxWidth: "100%",
-        zIndex: 99,
-    },
+        zIndex: 99
+    }
 };
 export const absoluteTop: Helperclass = {
     container: {
@@ -101,6 +101,6 @@ export const absoluteTop: Helperclass = {
         top: 0,
         width: "100%",
         maxWidth: "100%",
-        zIndex: 99,
-    },
+        zIndex: 99
+    }
 };

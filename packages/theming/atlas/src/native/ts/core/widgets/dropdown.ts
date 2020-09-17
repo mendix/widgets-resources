@@ -16,19 +16,19 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const DropDown: DropDownType = {
     container: {
         // All ViewStyle properties are allowed
-        ...TextBox.container,
+        ...TextBox.container
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        ...TextBox.containerDisabled,
+        ...TextBox.containerDisabled
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
-        ...TextBox.label,
+        ...TextBox.label
     },
     labelDisabled: {
         // All TextStyle properties are allowed
-        ...TextBox.labelDisabled,
+        ...TextBox.labelDisabled
     },
     value: {
         // All TextStyle properties & placeholderTextColor are allowed
@@ -48,22 +48,22 @@ export const DropDown: DropDownType = {
         minWidth: input.input.minWidth,
         minHeight: input.input.minHeight,
         paddingHorizontal: input.input.paddingHorizontal,
-        paddingVertical: input.input.paddingVertical,
+        paddingVertical: input.input.paddingVertical
     },
     valueDisabled: {
         // All TextStyle properties are allowed
         color: TextBox.inputDisabled?.color,
         borderColor: TextBox.inputDisabled?.borderColor,
-        backgroundColor: TextBox.inputDisabled?.backgroundColor,
+        backgroundColor: TextBox.inputDisabled?.backgroundColor
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage,
+        ...TextBox.validationMessage
     },
     /*  New dropdown styles start */
     valueContainer: {
         // All ViewStyle properties & rippleColor are allowed
-        rippleColor: input.valueContainer.rippleColor,
+        rippleColor: input.valueContainer.rippleColor
     },
     valueContainerDisabled: {
         // All ViewStyle properties are allowed
@@ -75,39 +75,39 @@ export const DropDown: DropDownType = {
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,
-        elevation: 16,
+        elevation: 16
     },
     itemContainer: {
         // All ViewStyle properties are allowed
         maxWidth: input.itemContainer.maxWidth,
         paddingVertical: input.itemContainer.paddingVertical,
         paddingHorizontal: input.itemContainer.paddingHorizontal,
-        backgroundColor: input.itemContainer.backgroundColor,
+        backgroundColor: input.itemContainer.backgroundColor
     },
     item: {
         // All TextStyle properties are allowed
         color: input.item.color,
-        fontSize: input.item.fontSize,
+        fontSize: input.item.fontSize
     },
     selectedItem: {
         // All TextStyle properties are allowed
         color: input.selectedItem.color,
         fontSize: input.selectedItem.fontSize,
-        backgroundColor: "transparent",
+        backgroundColor: "transparent"
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
         borderWidth: input.selectedItemContainer.borderWidth,
         borderRadius: input.selectedItemContainer.borderRadius,
         borderColor: input.selectedItemContainer.borderColor,
-        backgroundColor: input.selectedItemContainer.backgroundColor,
+        backgroundColor: input.selectedItemContainer.backgroundColor
     },
     /*  New dropdown styles end */
     useUniformDesign: true,
     /*  Old dropdown styles start */
     pickerIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.input.backgroundColor,
+        backgroundColor: input.input.backgroundColor
     },
     pickerItemIOS: {
         // All TextStyle properties are allowed
@@ -117,8 +117,8 @@ export const DropDown: DropDownType = {
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: input.input.backgroundColor,
-    },
+        backgroundColor: input.input.backgroundColor
+    }
     /*  Old dropdown styles end */
 };
 export const DropDownVertical: DropDownType = {
@@ -134,5 +134,5 @@ export const DropDownVertical: DropDownType = {
     pickerIOS: DropDown.pickerIOS,
     pickerItemIOS: DropDown.pickerItemIOS,
     pickerBackdropIOS: DropDown.pickerBackdropIOS,
-    pickerTopIOS: DropDown.pickerTopIOS,
+    pickerTopIOS: DropDown.pickerTopIOS
 };

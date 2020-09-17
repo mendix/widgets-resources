@@ -16,14 +16,14 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const listItemBorderBottom = {
     listItem: {
         borderColor: listView.border.color,
-        borderBottomWidth: listView.border.width,
-    },
+        borderBottomWidth: listView.border.width
+    }
 };
 export const listItemBorderRight = {
     listItem: {
         borderColor: listView.border.color,
-        borderRightWidth: listView.border.width,
-    },
+        borderRightWidth: listView.border.width
+    }
 };
 //
 //== Extra Classes
@@ -36,12 +36,12 @@ export const listItemImage = {
         overflow: "hidden",
         backgroundColor: background.primary,
         borderRadius: border.radiusLarge,
-        marginRight: spacing.regular,
-    },
+        marginRight: spacing.regular
+    }
 };
 
 export const horizontalListItemCard = {
     container: {
-        width: 280,
-    },
+        width: 280
+    }
 };

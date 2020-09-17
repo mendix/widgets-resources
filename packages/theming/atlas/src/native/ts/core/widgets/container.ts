@@ -18,12 +18,12 @@ export const Container: ContainerType = {
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        opacity: container.containerDisabled.opacity,
-    },
+        opacity: container.containerDisabled.opacity
+    }
 };
 
 export const ScrollContainer: ContainerType = {
     container: {
         // All ViewStyle properties are allowed
-    },
+    }
 };

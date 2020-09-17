@@ -25,7 +25,7 @@ import {
     VariablesRating,
     VariablesSlider,
     VariablesSpacing,
-    VariablesTabContainer,
+    VariablesTabContainer
 } from "../types/variables";
 //
 //
@@ -47,7 +47,7 @@ let brand: VariablesBrand = {
     successLight: `rgba(${anyColorToRgbString("#76CA02")}, 0.14)`,
     warningLight: `rgba(${anyColorToRgbString("#f99b1d")}, 0.14)`,
     dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
-    infoLight: "",
+    infoLight: ""
 };
 brand = merge(brand, custom.brand || ({} as any));
 //
@@ -59,7 +59,7 @@ let background: VariablesBackground = {
     brandSuccess: brand.success,
     brandWarning: brand.warning,
     brandDanger: brand.danger,
-    brandInfo: brand.info,
+    brandInfo: brand.info
 };
 background = merge(background, custom.background || ({} as any));
 //
@@ -71,7 +71,7 @@ let contrast: VariablesContrast = {
     regular: setContrastScale(0.5, background.primary),
     low: setContrastScale(0.35, background.primary),
     lower: setContrastScale(0.2, background.primary),
-    lowest: setContrastScale(0.05, background.primary),
+    lowest: setContrastScale(0.05, background.primary)
 };
 contrast = merge(contrast, custom.contrast || ({} as any));
 //
@@ -80,7 +80,7 @@ let border: VariablesBorder = {
     color: setContrastScale(0.17, background.primary),
     width: 1,
     radiusSmall: 5,
-    radiusLarge: 5,
+    radiusLarge: 5
 };
 border = merge(border, custom.border || ({} as any));
 //
@@ -111,7 +111,7 @@ let font: VariablesFont = {
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
-    family: Platform.select({ ios: "System", android: "normal" }) as string,
+    family: Platform.select({ ios: "System", android: "normal" }) as string
 };
 font = merge(font, custom.font || ({} as any));
 //
@@ -123,7 +123,7 @@ let spacing: VariablesSpacing = {
     regular: 20,
     large: 25,
     larger: 30,
-    largest: 40,
+    largest: 40
 };
 spacing = merge(spacing, custom.spacing || ({} as any));
 //
@@ -135,24 +135,24 @@ let button: VariablesButton = {
         minWidth: 48,
         minHeight: 48,
         paddingVertical: spacing.small,
-        paddingHorizontal: spacing.small,
+        paddingHorizontal: spacing.small
     },
     containerDisabled: {
         borderColor: border.color,
-        backgroundColor: border.color,
+        backgroundColor: border.color
     },
     icon: {
-        size: font.sizeSmall,
+        size: font.sizeSmall
     },
     iconDisabled: {
-        color: font.colorDisabled,
+        color: font.colorDisabled
     },
     caption: {
         fontSize: font.sizeSmall,
-        fontWeight: font.weightBold,
+        fontWeight: font.weightBold
     },
     captionDisabled: {
-        color: font.colorDisabled,
+        color: font.colorDisabled
     },
 
     header: {
@@ -162,34 +162,34 @@ let button: VariablesButton = {
         fontSize: font.sizeSmall,
         fontSizeIcon: font.sizeSmall,
         paddingLeft: 0,
-        paddingRight: 10,
+        paddingRight: 10
     },
     primary: {
         color: "#FFF",
         borderColor: brand.primary,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
         backgroundColor: "transparent",
-        inversedColor: "#FFF",
+        inversedColor: "#FFF"
     },
     success: {
         color: "#FFF",
         borderColor: brand.success,
-        backgroundColor: brand.success,
+        backgroundColor: brand.success
     },
     warning: {
         color: "#FFF",
         borderColor: brand.warning,
-        backgroundColor: brand.warning,
+        backgroundColor: brand.warning
     },
     danger: {
         color: "#FFF",
         borderColor: brand.danger,
-        backgroundColor: brand.danger,
-    },
+        backgroundColor: brand.danger
+    }
 };
 button = merge(button, custom.button || ({} as any));
 //
@@ -199,10 +199,10 @@ let input: VariablesInput = {
         numberOfLines: 1,
         color: font.colorTitle,
         fontSize: font.size,
-        textAlign: "left",
+        textAlign: "left"
     },
     labelDisabled: {
-        color: font.colorTitle,
+        color: font.colorTitle
     },
     input: {
         color: font.colorTitle,
@@ -219,48 +219,48 @@ let input: VariablesInput = {
         minWidth: 48,
         minHeight: 48,
         paddingVertical: spacing.small,
-        paddingHorizontal: spacing.small,
+        paddingHorizontal: spacing.small
     },
     inputDisabled: {
         color: font.colorDisabled,
         borderColor: border.color,
-        backgroundColor: background.gray,
+        backgroundColor: background.gray
     },
     inputError: {
         color: brand.danger,
         borderColor: brand.danger,
         placeholderTextColor: brand.danger,
-        backgroundColor: brand.dangerLight,
+        backgroundColor: brand.dangerLight
     },
     validationMessage: {
         color: brand.danger,
-        fontSize: font.size,
+        fontSize: font.size
     },
 
     // Dropdown & Reference selector only
     valueContainer: {
-        rippleColor: contrast.lowest,
+        rippleColor: contrast.lowest
     },
     itemContainer: {
         maxWidth: 500,
         paddingVertical: 12,
         paddingHorizontal: spacing.regular,
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     item: {
         color: font.colorTitle,
-        fontSize: font.size,
+        fontSize: font.size
     },
     selectedItemContainer: {
         borderWidth: border.width,
         borderRadius: border.radiusLarge,
         borderColor: brand.primary,
-        backgroundColor: "transparent",
+        backgroundColor: "transparent"
     },
     selectedItem: {
         color: font.colorTitle,
-        fontSize: font.size,
-    },
+        fontSize: font.size
+    }
 };
 input = merge(input, custom.input || ({} as any));
 //
@@ -270,12 +270,12 @@ let image: VariablesImage = {
         small: 24,
         medium: 40,
         large: 56,
-        larger: 72,
+        larger: 72
     },
     imageDisabled: {
-        opacity: 0.6,
+        opacity: 0.6
     },
-    icon: 24,
+    icon: 24
 };
 image = merge(image, custom.image || ({} as any));
 //
@@ -283,13 +283,13 @@ image = merge(image, custom.image || ({} as any));
 let navigation: VariablesNavigation = {
     statusBar: {
         backgroundColor: background.primary,
-        barStyle: custom.darkMode ? "light-content" : "dark-content",
+        barStyle: custom.darkMode ? "light-content" : "dark-content"
     },
     topBar: {
         backgroundColor: background.primary,
         backButtonColor: contrast.highest,
         titleColor: contrast.highest,
-        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }) as number,
+        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }) as number
     },
     bottomBar: {
         color: contrast.high,
@@ -297,7 +297,7 @@ let navigation: VariablesNavigation = {
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
         fontSize: font.sizeSmall,
-        iconSize: font.sizeSmall,
+        iconSize: font.sizeSmall
     },
     progressOverlay: {
         color: font.colorTitle,
@@ -305,16 +305,16 @@ let navigation: VariablesNavigation = {
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
         containerBackgroundColor: background.gray,
         shadowColor: "#000", // Only for iOS
-        fontSize: font.size,
-    },
+        fontSize: font.size
+    }
 };
 navigation = merge(navigation, custom.navigation || ({} as any));
 //
 // Container Styles
 let container: VariablesContainer = {
     containerDisabled: {
-        opacity: 0.6,
-    },
+        opacity: 0.6
+    }
 };
 container = merge(container, custom.container || ({} as any));
 //
@@ -322,45 +322,45 @@ container = merge(container, custom.container || ({} as any));
 let tabContainer: VariablesTabContainer = {
     tabBar: {
         pressColor: contrast.lower,
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     tab: {
-        paddingVertical: spacing.smaller,
+        paddingVertical: spacing.smaller
     },
     indicator: {
         backgroundColor: brand.primary,
-        height: Platform.select({ ios: 2, android: 2 }) as number,
+        height: Platform.select({ ios: 2, android: 2 }) as number
     },
     label: {
         color: contrast.highest,
         fontSize: font.size,
         fontWeight: font.weightBold,
-        textTransform: "uppercase",
+        textTransform: "uppercase"
     },
     activeLabel: {
         color: brand.primary,
         fontSize: font.size,
         fontWeight: font.weightBold,
-        textTransform: "uppercase",
-    },
+        textTransform: "uppercase"
+    }
 };
 tabContainer = merge(tabContainer, custom.tabContainer || ({} as any));
 //
 // Listview Styles
 let listView: VariablesListView = {
     listItemDisabled: {
-        opacity: 0.6,
+        opacity: 0.6
     },
     border: {
         color: border.color,
-        width: border.width,
-    },
+        width: border.width
+    }
 };
 listView = merge(listView, custom.listView || ({} as any));
 //
 // Layoutgrid Styles
 let layoutGrid: VariablesLayoutgrid = {
-    gutterSize: 15,
+    gutterSize: 15
 };
 layoutGrid = merge(layoutGrid, custom.layoutGrid || ({} as any));
 //
@@ -375,103 +375,103 @@ let badge: VariablesBadge = {
 
     default: {
         color: contrast.higher,
-        backgroundColor: contrast.lower,
+        backgroundColor: contrast.lower
     },
     primary: {
         color: brand.primary,
-        backgroundColor: brand.primaryLight,
+        backgroundColor: brand.primaryLight
     },
     success: {
         color: brand.success,
-        backgroundColor: brand.successLight,
+        backgroundColor: brand.successLight
     },
     warning: {
         color: brand.warning,
-        backgroundColor: brand.warningLight,
+        backgroundColor: brand.warningLight
     },
     danger: {
         color: brand.danger,
-        backgroundColor: brand.dangerLight,
-    },
+        backgroundColor: brand.dangerLight
+    }
 };
 badge = merge(badge, custom.badge || ({} as any));
 //
 // Floating Action Button Styles
 let floatingActionButton: VariablesFloatingActionButton = {
     container: {
-        margin: 30,
+        margin: 30
     },
     button: {
         size: 50,
         rippleColor: contrast.lowest,
         borderColor: brand.primary,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     buttonIcon: {
         size: font.sizeLarge,
-        color: contrast.lowest,
+        color: contrast.lowest
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.gray,
+        backgroundColor: background.gray
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
-        color: contrast.high,
+        color: contrast.high
     },
     secondaryButtonCaption: {
         color: font.colorTitle,
-        fontSize: font.size,
+        fontSize: font.size
     },
     secondaryButtonCaptionContainer: {
-        backgroundColor: background.primary,
-    },
+        backgroundColor: background.primary
+    }
 };
 floatingActionButton = merge(floatingActionButton, custom.floatingActionButton || ({} as any));
 //
 // Intro Screen Styles
 let introScreen: VariablesIntroScreen = {
     fullscreenContainer: {
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     popupContainer: {
         paddingVertical: 150,
         paddingHorizontal: 50,
-        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`
     },
     pagination: {
         text: {
             color: font.colorTitle,
-            fontSize: font.size,
+            fontSize: font.size
         },
         dotStyle: {
             size: spacing.small,
-            backgroundColor: contrast.lower,
+            backgroundColor: contrast.lower
         },
         activeDotStyle: {
             size: spacing.small,
-            backgroundColor: font.colorTitle,
-        },
+            backgroundColor: font.colorTitle
+        }
     },
     button: {
         icon: {
             color: font.colorTitle,
-            size: button.icon.size,
+            size: button.icon.size
         },
         caption: {
             color: font.colorTitle,
             fontSize: button.caption.fontSize,
             fontWeight: font.weightBold,
             textTransform: "uppercase",
-            paddingHorizontal: spacing.smallest,
-        },
+            paddingHorizontal: spacing.smallest
+        }
     },
     buttonPaginationAbove: {
         container: {
             paddingVertical: spacing.regular,
-            backgroundColor: button.primary.backgroundColor,
-        },
-    },
+            backgroundColor: button.primary.backgroundColor
+        }
+    }
 };
 introScreen = merge(introScreen, custom.introScreen || ({} as any));
 //
@@ -481,14 +481,14 @@ let listViewSwipe: VariablesListViewSwipe = {
         panelSize: 144,
         panelSizeSmall: 108,
         panelSizeLarge: 216,
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     rightAction: {
         panelSize: 144,
         panelSizeSmall: 108,
         panelSizeLarge: 216,
-        backgroundColor: background.primary,
-    },
+        backgroundColor: background.primary
+    }
 };
 listViewSwipe = merge(listViewSwipe, custom.listViewSwipe || ({} as any));
 //
@@ -498,42 +498,42 @@ let progressBar: VariablesProgressBar = {
         height: 8,
         heightSmall: 4,
         heightLarge: 12,
-        backgroundColor: contrast.lowest,
+        backgroundColor: contrast.lowest
     },
     fill: {
-        backgroundColor: brand.primary,
-    },
+        backgroundColor: brand.primary
+    }
 };
 progressBar = merge(progressBar, custom.progressBar || ({} as any));
 //
 // Progress Circle Styles
 let progressCircle: VariablesProgressCircle = {
     circle: {
-        size: 64,
+        size: 64
     },
     fill: {
         width: 4,
         lineCapRounded: true,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     text: {
         color: contrast.regular,
         fontSize: font.size,
-        fontWeight: font.weightSemiBold,
-    },
+        fontWeight: font.weightSemiBold
+    }
 };
 progressCircle = merge(progressCircle, custom.progressCircle || ({} as any));
 //
 // Rating Styles
 let rating: VariablesRating = {
     containerDisabled: {
-        opacity: 0.5,
+        opacity: 0.5
     },
     icon: {
         size: 24,
         color: contrast.lower,
-        selectedColor: brand.warning,
-    },
+        selectedColor: brand.warning
+    }
 };
 rating = merge(rating, custom.rating || ({} as any));
 //
@@ -541,31 +541,31 @@ rating = merge(rating, custom.rating || ({} as any));
 let slider: VariablesSlider = {
     track: {
         height: 4,
-        backgroundColor: contrast.lowest,
+        backgroundColor: contrast.lowest
     },
     trackDisabled: {
         backgroundColor: contrast.lower,
-        opacity: 0.4,
+        opacity: 0.4
     },
     highlight: {
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     highlightDisabled: {
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray,
+        backgroundColor: background.gray
     },
     markerActive: {
-        size: 32,
+        size: 32
     },
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray,
-    },
+        backgroundColor: background.gray
+    }
 };
 slider = merge(slider, custom.slider || ({} as any));
 //
@@ -590,5 +590,5 @@ export {
     listViewSwipe,
     progressBar,
     progressCircle,
-    slider,
+    slider
 };

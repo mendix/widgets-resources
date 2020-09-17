@@ -23,31 +23,31 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const DatePicker: DatePickerType = {
     container: {
         // All ViewStyle properties are allowed
-        ...TextBox.container,
+        ...TextBox.container
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        ...TextBox.containerDisabled,
+        ...TextBox.containerDisabled
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
-        ...TextBox.label,
+        ...TextBox.label
     },
     labelDisabled: {
         // All TextStyle properties are allowed
-        ...TextBox.labelDisabled,
+        ...TextBox.labelDisabled
     },
     pickerIOS: {
         // All ViewStyle properties & "color" (type: string) are allowed
         backgroundColor: background.primary,
-        color: font.colorTitle,
+        color: font.colorTitle
     },
     pickerBackdropIOS: {
         // All ViewStyle properties are allowed
     },
     pickerTopIOS: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     value: {
         // All TextStyle properties are allowed
@@ -65,31 +65,31 @@ export const DatePicker: DatePickerType = {
         minWidth: input.input.minWidth,
         minHeight: input.input.minHeight,
         paddingHorizontal: input.input.paddingHorizontal,
-        paddingVertical: input.input.paddingVertical,
+        paddingVertical: input.input.paddingVertical
     },
     valueDisabled: {
         // All TextStyle properties are allowed
         color: TextBox.inputDisabled?.color,
         borderColor: TextBox.inputDisabled?.borderColor,
-        backgroundColor: TextBox.inputDisabled?.backgroundColor,
+        backgroundColor: TextBox.inputDisabled?.backgroundColor
     },
     placeholder: {
         // All TextStyle properties are allowed
-        color: input.input.placeholderTextColor,
+        color: input.input.placeholderTextColor
     },
     placeholderDisabled: {
         // All TextStyle properties are allowed
-        color: TextBox.inputDisabled?.color,
+        color: TextBox.inputDisabled?.color
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage,
-    },
+        ...TextBox.validationMessage
+    }
 };
 export const DatePickerVertical: DatePickerType = {
     container: TextBoxVertical.container,
     label: TextBoxVertical.label,
     value: DatePicker.value,
     placeholder: DatePicker.placeholder,
-    validationMessage: TextBoxVertical.validationMessage,
+    validationMessage: TextBoxVertical.validationMessage
 };

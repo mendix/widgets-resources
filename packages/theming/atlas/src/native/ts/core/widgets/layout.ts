@@ -36,7 +36,7 @@ export const Layout: LayoutType = {
     statusBar: {
         // Only backgroundColor and barStyle are allowed
         backgroundColor: navigation.statusBar.backgroundColor, // Android only
-        barStyle: statusBarStyle,
+        barStyle: statusBarStyle
     },
     header: {
         container: {
@@ -45,27 +45,27 @@ export const Layout: LayoutType = {
             elevation: 0,
             shadowOpacity: 0,
             shadowOffset: undefined,
-            borderBottomWidth: undefined,
+            borderBottomWidth: undefined
         },
         title: {
             // All TextStyle properties are allowed
             color: navigation.topBar.titleColor,
             fontSize: navigation.topBar.titleFontSize,
             fontFamily: font.family,
-            fontWeight: font.weightBold,
+            fontWeight: font.weightBold
         },
         backButtonText: {
             // All TextStyle properties are allowed
             color: navigation.topBar.backButtonColor,
-            fontFamily: font.family,
+            fontFamily: font.family
         },
         backButtonIcon: {
             // All ImageStyle properties are allowed
-            tintColor: navigation.topBar.backButtonColor,
-        },
+            tintColor: navigation.topBar.backButtonColor
+        }
     },
     container: {
         // All ViewStyle properties are allowed
-        backgroundColor: background.primary,
-    },
+        backgroundColor: background.primary
+    }
 };

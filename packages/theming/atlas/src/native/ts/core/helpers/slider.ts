@@ -15,25 +15,25 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // Slider Color
 export const sliderSuccess = {
     highlight: {
-        backgroundColor: brand.success,
+        backgroundColor: brand.success
     },
     highlightDisabled: {
-        backgroundColor: brand.success,
-    },
+        backgroundColor: brand.success
+    }
 };
 export const sliderWarning = {
     highlight: {
-        backgroundColor: brand.warning,
+        backgroundColor: brand.warning
     },
     highlightDisabled: {
-        backgroundColor: brand.warning,
-    },
+        backgroundColor: brand.warning
+    }
 };
 export const sliderDanger = {
     highlight: {
-        backgroundColor: brand.danger,
+        backgroundColor: brand.danger
     },
     highlightDisabled: {
-        backgroundColor: brand.danger,
-    },
+        backgroundColor: brand.danger
+    }
 };

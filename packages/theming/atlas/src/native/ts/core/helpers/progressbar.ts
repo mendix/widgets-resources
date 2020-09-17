@@ -15,30 +15,30 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // Progress Bar Color
 export const progressBarSuccess = {
     fill: {
-        backgroundColor: brand.success,
-    },
+        backgroundColor: brand.success
+    }
 };
 export const progressBarWarning = {
     fill: {
-        backgroundColor: brand.warning,
-    },
+        backgroundColor: brand.warning
+    }
 };
 export const progressBarDanger = {
     fill: {
-        backgroundColor: brand.danger,
-    },
+        backgroundColor: brand.danger
+    }
 };
 //
 // Progress Bar Size
 export const progressBarSmall = {
     bar: {
         height: progressBar.bar.heightSmall,
-        borderRadius: progressBar.bar.heightSmall / 2,
-    },
+        borderRadius: progressBar.bar.heightSmall / 2
+    }
 };
 export const progressBarLarge = {
     bar: {
         height: progressBar.bar.heightLarge,
-        borderRadius: progressBar.bar.heightLarge / 2,
-    },
+        borderRadius: progressBar.bar.heightLarge / 2
+    }
 };

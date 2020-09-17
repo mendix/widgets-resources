@@ -20,6 +20,6 @@ export const ListView: ListViewType = {
     },
     listItemDisabled: {
         // All ViewStyle properties are allowed
-        opacity: 0.6,
-    },
+        opacity: 0.6
+    }
 };

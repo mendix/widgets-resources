@@ -18,38 +18,38 @@ export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtons
         // All ViewStyle properties are allowed
         backgroundColor: background.gray,
         borderRadius: 16,
-        alignSelf: "stretch",
+        alignSelf: "stretch"
     },
     containerDisabled: {
         opacity: 0.6,
-        alignSelf: "stretch",
+        alignSelf: "stretch"
     },
     button: {
         // All ViewStyle properties are allowed
         backgroundColor: "transparent",
         borderColor: "transparent",
-        borderRadius: 16,
+        borderRadius: 16
     },
     text: {
         // All TextStyle properties are allowed
         color: contrast.low,
         fontSize: font.size,
-        fontFamily: font.family,
+        fontFamily: font.family
     },
     activeButton: {
         // All ViewStyle properties are allowed
         backgroundColor: brand.primary,
         borderColor: brand.primary,
-        borderRadius: 16,
+        borderRadius: 16
     },
     activeButtonText: {
         // All TextStyle properties are allowed
         color: "#FFF",
         fontSize: font.size,
-        fontFamily: font.family,
+        fontFamily: font.family
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage,
-    },
+        ...TextBox.validationMessage
+    }
 };

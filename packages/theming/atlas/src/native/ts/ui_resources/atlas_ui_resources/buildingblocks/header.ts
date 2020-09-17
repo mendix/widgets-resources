@@ -9,21 +9,21 @@ export const header = {
     container: {
         height: 280,
         backgroundColor: background.primary,
-        marginBottom: spacing.regular,
-    },
+        marginBottom: spacing.regular
+    }
 };
 //
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
 export const headerImageFull = {
     container: {
-        overflow: "hidden",
+        overflow: "hidden"
     },
     image: {
         width: "100%",
         height: 280,
-        resizeMode: "cover",
-    },
+        resizeMode: "cover"
+    }
 };
 export const headerBody = {
     container: {
@@ -31,8 +31,8 @@ export const headerBody = {
         zIndex: 11,
         width: "100%",
         position: "absolute",
-        backgroundColor: "transparent",
-    },
+        backgroundColor: "transparent"
+    }
 };
 //
 //== Variations

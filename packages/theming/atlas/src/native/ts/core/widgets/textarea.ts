@@ -16,11 +16,11 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const TextArea: TextBoxType = {
     container: {
         // All ViewStyle properties are allowed
-        ...TextBox.container,
+        ...TextBox.container
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
-        ...TextBox.containerDisabled,
+        ...TextBox.containerDisabled
     },
     label: {
         // numberOfLines and all TextStyle properties are allowed
@@ -28,31 +28,31 @@ export const TextArea: TextBoxType = {
         lineHeight: input.input.lineHeight,
         height: "100%",
         textAlignVertical: "top",
-        paddingVertical: TextBox.input?.paddingVertical,
+        paddingVertical: TextBox.input?.paddingVertical
     },
     labelDisabled: {
-        color: TextBox.labelDisabled?.color,
+        color: TextBox.labelDisabled?.color
     },
     input: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.input,
         textAlignVertical: "top",
-        paddingTop: TextBox.input?.paddingVertical,
+        paddingTop: TextBox.input?.paddingVertical
     },
     inputDisabled: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         backgroundColor: TextBox.inputDisabled?.backgroundColor,
         borderColor: TextBox.inputDisabled?.borderColor,
-        color: TextBox.inputDisabled?.color,
+        color: TextBox.inputDisabled?.color
     },
     inputError: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
-        ...TextBox.inputError,
+        ...TextBox.inputError
     },
     validationMessage: {
         // All TextStyle properties are allowed
-        ...TextBox.validationMessage,
-    },
+        ...TextBox.validationMessage
+    }
 };
 export const TextAreaVertical: TextBoxType = {
     container: TextBoxVertical.container,
@@ -60,12 +60,12 @@ export const TextAreaVertical: TextBoxType = {
         ...TextBoxVertical.label,
         height: undefined,
         paddingVertical: undefined,
-        textAlignVertical: undefined,
+        textAlignVertical: undefined
     },
     input: {
         ...TextBoxVertical.input,
-        lineHeight: input.input.lineHeight,
+        lineHeight: input.input.lineHeight
     },
     inputError: TextBoxVertical.inputError,
-    validationMessage: TextBoxVertical.validationMessage,
+    validationMessage: TextBoxVertical.validationMessage
 };

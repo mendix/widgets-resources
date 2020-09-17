@@ -18,5 +18,5 @@ export const com_mendix_widget_native_backgroundimage_BackgroundImage: Backgroun
     },
     image: {
         // svgColor and all ImageStyle properties are allowed
-    },
+    }
 };

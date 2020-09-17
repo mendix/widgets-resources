@@ -16,22 +16,22 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const listViewSwipeSmallPanels = {
     leftAction: {
         // PanelSize & All ViewStyle properties are allowed
-        panelSize: listViewSwipe.leftAction.panelSizeSmall,
+        panelSize: listViewSwipe.leftAction.panelSizeSmall
     },
     rightAction: {
         // PanelSize & All ViewStyle properties are allowed
-        panelSize: listViewSwipe.rightAction.panelSizeSmall,
-    },
+        panelSize: listViewSwipe.rightAction.panelSizeSmall
+    }
 };
 export const listViewSwipeLargePanels = {
     leftAction: {
         // PanelSize & All ViewStyle properties are allowed
-        panelSize: listViewSwipe.leftAction.panelSizeLarge,
+        panelSize: listViewSwipe.leftAction.panelSizeLarge
     },
     rightAction: {
         // PanelSize & All ViewStyle properties are allowed
-        panelSize: listViewSwipe.rightAction.panelSizeLarge,
-    },
+        panelSize: listViewSwipe.rightAction.panelSizeLarge
+    }
 };
 //
 //== Extra Classes

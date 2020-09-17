@@ -13,14 +13,14 @@ export const mapsBackground = {
         position: "absolute",
         height: "100%",
         width: "100%",
-        zIndex: 0,
-    },
+        zIndex: 0
+    }
 };
 export const mapsFooter = {
     container: {
         bottom: 0,
-        position: "absolute",
-    },
+        position: "absolute"
+    }
 };
 export const mapsFooterSendLocation = {
     container: {
@@ -36,9 +36,9 @@ export const mapsFooterSendLocation = {
         shadowRadius: 8,
         shadowOffset: {
             width: 0,
-            height: 2,
-        },
-    },
+            height: 2
+        }
+    }
 };
 export const mapsListItemImage = {
     container: {
@@ -53,12 +53,12 @@ export const mapsListItemImage = {
         shadowRadius: 8,
         shadowOffset: {
             width: 0,
-            height: 2,
-        },
+            height: 2
+        }
     },
     image: {
-        borderRadius: border.radiusSmall,
-    },
+        borderRadius: border.radiusSmall
+    }
 };
 //
 //== Variations

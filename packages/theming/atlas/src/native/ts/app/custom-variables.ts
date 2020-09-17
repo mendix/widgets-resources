@@ -22,7 +22,7 @@ import {
     VariablesRating,
     VariablesSlider,
     VariablesSpacing,
-    VariablesTabContainer,
+    VariablesTabContainer
 } from "../types/variables";
 /*
 
@@ -45,7 +45,7 @@ export const brand: VariablesBrand = {
     successLight: `#F1FCF1`,
     warningLight: `#FFF9E6`,
     dangerLight: `#FFEEF0`,
-    infoLight: `#ECF9FF`,
+    infoLight: `#ECF9FF`
 };
 //
 // Dark Mode - Inherits OS theme if possible
@@ -66,7 +66,7 @@ export const background: VariablesBackground = {
     brandSuccess: brand.success,
     brandWarning: brand.warning,
     brandDanger: brand.danger,
-    brandInfo: brand.info,
+    brandInfo: brand.info
 };
 //
 // Contrast (Gray) colors based on background.primary
@@ -77,7 +77,7 @@ export const contrast: VariablesContrast = {
     regular: setContrastScale(0.5, background.primary),
     low: setContrastScale(0.35, background.primary),
     lower: setContrastScale(0.2, background.primary),
-    lowest: setContrastScale(0.05, background.primary),
+    lowest: setContrastScale(0.05, background.primary)
 };
 //
 // Border Style
@@ -85,7 +85,7 @@ export const border: VariablesBorder = {
     color: darkMode ? "#3B4251" : "#CED0D3",
     width: 1,
     radiusSmall: 4,
-    radiusLarge: 8,
+    radiusLarge: 8
 };
 //
 // Font Styles
@@ -115,7 +115,7 @@ export const font: VariablesFont = {
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
     weightBold: "bold",
-    family: Platform.select({ ios: "System", android: "normal" }) as string,
+    family: Platform.select({ ios: "System", android: "normal" }) as string
 };
 //
 // Spacing
@@ -126,7 +126,7 @@ export const spacing: VariablesSpacing = {
     regular: 16,
     large: 24,
     larger: 32,
-    largest: 40,
+    largest: 40
 };
 //
 // Button Styles
@@ -138,24 +138,24 @@ export const button: VariablesButton = {
         minWidth: 48,
         minHeight: 48,
         paddingVertical: spacing.small,
-        paddingHorizontal: spacing.small,
+        paddingHorizontal: spacing.small
     },
     containerDisabled: {
         borderColor: border.color,
-        backgroundColor: border.color,
+        backgroundColor: border.color
     },
     icon: {
-        size: font.sizeSmall,
+        size: font.sizeSmall
     },
     iconDisabled: {
-        color: font.colorDisabled,
+        color: font.colorDisabled
     },
     caption: {
         fontSize: font.sizeSmall,
-        fontWeight: font.weightBold,
+        fontWeight: font.weightBold
     },
     captionDisabled: {
-        color: font.colorDisabled,
+        color: font.colorDisabled
     },
     // End default styles
 
@@ -166,34 +166,34 @@ export const button: VariablesButton = {
         fontSize: font.sizeSmall,
         fontSizeIcon: font.sizeSmall,
         paddingLeft: 0,
-        paddingRight: 10,
+        paddingRight: 10
     },
     primary: {
         color: "#FFF",
         borderColor: brand.primary,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     secondary: {
         color: brand.primary,
         borderColor: brand.primary,
         backgroundColor: "transparent",
-        inversedColor: "#FFF",
+        inversedColor: "#FFF"
     },
     success: {
         color: "#FFF",
         borderColor: brand.success,
-        backgroundColor: brand.success,
+        backgroundColor: brand.success
     },
     warning: {
         color: "#FFF",
         borderColor: brand.warning,
-        backgroundColor: brand.warning,
+        backgroundColor: brand.warning
     },
     danger: {
         color: "#FFF",
         borderColor: brand.danger,
-        backgroundColor: brand.danger,
-    },
+        backgroundColor: brand.danger
+    }
 };
 //
 // Input Styles
@@ -202,10 +202,10 @@ export const input: VariablesInput = {
         numberOfLines: 1,
         color: font.colorTitle,
         fontSize: font.sizeSmall,
-        textAlign: "left",
+        textAlign: "left"
     },
     labelDisabled: {
-        color: font.colorTitle,
+        color: font.colorTitle
     },
     input: {
         color: font.colorTitle,
@@ -222,48 +222,48 @@ export const input: VariablesInput = {
         minWidth: 48,
         minHeight: 48,
         paddingVertical: spacing.small,
-        paddingHorizontal: spacing.small,
+        paddingHorizontal: spacing.small
     },
     inputDisabled: {
         color: font.colorDisabled,
         borderColor: border.color,
-        backgroundColor: background.gray,
+        backgroundColor: background.gray
     },
     inputError: {
         color: brand.danger,
         borderColor: brand.danger,
         placeholderTextColor: brand.danger,
-        backgroundColor: brand.dangerLight,
+        backgroundColor: brand.dangerLight
     },
     validationMessage: {
         color: brand.danger,
-        fontSize: font.size,
+        fontSize: font.size
     },
 
     // Only used for the DropDown & ReferenceSelector
     valueContainer: {
-        rippleColor: contrast.lowest,
+        rippleColor: contrast.lowest
     },
     itemContainer: {
         maxWidth: 500,
         paddingVertical: 12,
         paddingHorizontal: spacing.regular,
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     item: {
         color: font.colorTitle,
-        fontSize: font.size,
+        fontSize: font.size
     },
     selectedItemContainer: {
         borderWidth: border.width,
         borderRadius: border.radiusLarge,
         borderColor: brand.primary,
-        backgroundColor: "transparent",
+        backgroundColor: "transparent"
     },
     selectedItem: {
         color: font.colorTitle,
-        fontSize: font.size,
-    },
+        fontSize: font.size
+    }
 };
 
 export const image: VariablesImage = {
@@ -271,25 +271,25 @@ export const image: VariablesImage = {
         small: 24,
         medium: 40,
         large: 56,
-        larger: 72,
+        larger: 72
     },
     imageDisabled: {
-        opacity: 0.6,
+        opacity: 0.6
     },
-    icon: 16,
+    icon: 16
 };
 //
 // Navigation Styles
 export const navigation: VariablesNavigation = {
     statusBar: {
         backgroundColor: background.primary,
-        barStyle: darkMode ? "light-content" : "dark-content",
+        barStyle: darkMode ? "light-content" : "dark-content"
     },
     topBar: {
         backgroundColor: brand.primary,
         backButtonColor: "#FFF",
         titleColor: "#FFF",
-        titleFontSize: font.sizeH6,
+        titleFontSize: font.sizeH6
     },
     bottomBar: {
         color: contrast.high,
@@ -297,7 +297,7 @@ export const navigation: VariablesNavigation = {
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
         fontSize: font.sizeSmall,
-        iconSize: font.sizeSmall,
+        iconSize: font.sizeSmall
     },
     progressOverlay: {
         color: font.colorTitle,
@@ -305,58 +305,58 @@ export const navigation: VariablesNavigation = {
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
         containerBackgroundColor: background.gray,
         shadowColor: "#000", // Only for iOS
-        fontSize: font.size,
-    },
+        fontSize: font.size
+    }
 };
 //
 // Container Styles
 export const container: VariablesContainer = {
     containerDisabled: {
-        opacity: 0.6,
-    },
+        opacity: 0.6
+    }
 };
 //
 // Tabcontainer Styles
 export const tabContainer: VariablesTabContainer = {
     tabBar: {
         pressColor: contrast.lower,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     tab: {
-        paddingVertical: 12,
+        paddingVertical: 12
     },
     indicator: {
         backgroundColor: background.primary,
-        height: Platform.select({ ios: 2, android: 2 }) as number,
+        height: Platform.select({ ios: 2, android: 2 }) as number
     },
     label: {
         color: background.primary,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
-        textTransform: "capitalize",
+        textTransform: "capitalize"
     },
     activeLabel: {
         color: background.gray,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
-        textTransform: "capitalize",
-    },
+        textTransform: "capitalize"
+    }
 };
 //
 // ListView Styles
 export const listView: VariablesListView = {
     listItemDisabled: {
-        opacity: 0.6,
+        opacity: 0.6
     },
     border: {
         color: border.color,
-        width: border.width,
-    },
+        width: border.width
+    }
 };
 //
 // Layoutgrid Styles
 export const layoutGrid = {
-    gutterSize: 16,
+    gutterSize: 16
 };
 //
 //
@@ -371,101 +371,101 @@ export const badge: VariablesBadge = {
 
     default: {
         color: contrast.high,
-        backgroundColor: contrast.lowest,
+        backgroundColor: contrast.lowest
     },
     primary: {
         color: brand.primary,
-        backgroundColor: brand.primaryLight,
+        backgroundColor: brand.primaryLight
     },
     success: {
         color: brand.success,
-        backgroundColor: brand.successLight,
+        backgroundColor: brand.successLight
     },
     warning: {
         color: brand.warning,
-        backgroundColor: brand.warningLight,
+        backgroundColor: brand.warningLight
     },
     danger: {
         color: brand.danger,
-        backgroundColor: brand.dangerLight,
-    },
+        backgroundColor: brand.dangerLight
+    }
 };
 //
 // Floating Action Button Styles
 export const floatingActionButton: VariablesFloatingActionButton = {
     container: {
-        margin: 30,
+        margin: 30
     },
     button: {
         size: 50,
         rippleColor: contrast.lowest,
         borderColor: brand.primary,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     buttonIcon: {
         size: font.sizeLarge,
-        color: contrast.lowest,
+        color: contrast.lowest
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.gray,
+        backgroundColor: background.gray
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
-        color: contrast.high,
+        color: contrast.high
     },
     secondaryButtonCaption: {
         color: contrast.high,
-        fontSize: font.sizeSmall,
+        fontSize: font.sizeSmall
     },
     secondaryButtonCaptionContainer: {
-        backgroundColor: background.primary,
-    },
+        backgroundColor: background.primary
+    }
 };
 //
 // Intro Screen Styles
 export const introScreen: VariablesIntroScreen = {
     fullscreenContainer: {
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     popupContainer: {
         paddingVertical: 150,
         paddingHorizontal: 50,
-        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        backgroundColor: `rgba(0, 0, 0, 0.5)`
     },
     pagination: {
         text: {
             color: font.colorTitle,
-            fontSize: font.size,
+            fontSize: font.size
         },
         dotStyle: {
             size: spacing.small,
-            backgroundColor: contrast.lower,
+            backgroundColor: contrast.lower
         },
         activeDotStyle: {
             size: spacing.small,
-            backgroundColor: font.colorTitle,
-        },
+            backgroundColor: font.colorTitle
+        }
     },
     button: {
         icon: {
             color: font.colorTitle,
-            size: button.icon.size,
+            size: button.icon.size
         },
         caption: {
             color: font.colorTitle,
             fontSize: button.caption.fontSize,
             fontWeight: font.weightBold,
             textTransform: "uppercase",
-            paddingHorizontal: spacing.smallest,
-        },
+            paddingHorizontal: spacing.smallest
+        }
     },
     buttonPaginationAbove: {
         container: {
             paddingVertical: spacing.regular,
-            backgroundColor: button.primary.backgroundColor,
-        },
-    },
+            backgroundColor: button.primary.backgroundColor
+        }
+    }
 };
 //
 // List View Swipe Styles
@@ -474,14 +474,14 @@ export const listViewSwipe: VariablesListViewSwipe = {
         panelSize: 160,
         panelSizeSmall: 80,
         panelSizeLarge: 240,
-        backgroundColor: background.primary,
+        backgroundColor: background.primary
     },
     rightAction: {
         panelSize: 160,
         panelSizeSmall: 80,
         panelSizeLarge: 240,
-        backgroundColor: background.primary,
-    },
+        backgroundColor: background.primary
+    }
 };
 //
 // Progress Bar Styles
@@ -490,69 +490,69 @@ export const progressBar: VariablesProgressBar = {
         height: 8,
         heightSmall: 4,
         heightLarge: 12,
-        backgroundColor: contrast.lowest,
+        backgroundColor: contrast.lowest
     },
     fill: {
-        backgroundColor: brand.primary,
-    },
+        backgroundColor: brand.primary
+    }
 };
 //
 // Progress Circle Styles
 export const progressCircle: VariablesProgressCircle = {
     circle: {
-        size: 64,
+        size: 64
     },
     fill: {
         width: 4,
         lineCapRounded: true,
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     text: {
         color: contrast.regular,
         fontSize: font.size,
-        fontWeight: font.weightSemiBold,
-    },
+        fontWeight: font.weightSemiBold
+    }
 };
 //
 // Rating Styles
 export const rating: VariablesRating = {
     containerDisabled: {
-        opacity: 0.5,
+        opacity: 0.5
     },
     icon: {
         size: 24,
         color: contrast.lower,
-        selectedColor: brand.warning,
-    },
+        selectedColor: brand.warning
+    }
 };
 //
 // (Range)Slider styles
 export const slider: VariablesSlider = {
     track: {
         height: 4,
-        backgroundColor: contrast.lowest,
+        backgroundColor: contrast.lowest
     },
     trackDisabled: {
         backgroundColor: contrast.lower,
-        opacity: 0.4,
+        opacity: 0.4
     },
     highlight: {
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     highlightDisabled: {
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     },
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray,
+        backgroundColor: background.gray
     },
     markerActive: {
-        size: 32,
+        size: 32
     },
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray,
-    },
+        backgroundColor: background.gray
+    }
 };

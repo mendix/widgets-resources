@@ -27,21 +27,21 @@ export const ActionButton: ActionButtonType = {
         minWidth: button.container.minWidth,
         minHeight: button.container.minHeight,
         paddingVertical: button.container.paddingVertical,
-        paddingHorizontal: button.container.paddingHorizontal,
+        paddingHorizontal: button.container.paddingHorizontal
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
         borderColor: button.containerDisabled.borderColor,
-        backgroundColor: button.containerDisabled.backgroundColor,
+        backgroundColor: button.containerDisabled.backgroundColor
     },
     icon: {
         // Size and color are allowed
         color: button.primary.color,
-        size: button.icon.size,
+        size: button.icon.size
     },
     iconDisabled: {
         // Size and color are allowed
-        color: button.iconDisabled.color,
+        color: button.iconDisabled.color
     },
     caption: {
         // All TextStyle properties are allowed
@@ -49,12 +49,12 @@ export const ActionButton: ActionButtonType = {
         fontSize: button.caption.fontSize,
         fontFamily: font.family,
         fontWeight: button.caption.fontWeight,
-        lineHeight: font.lineHeight,
+        lineHeight: font.lineHeight
     },
     captionDisabled: {
         // All TextStyle properties are allowed
-        color: button.captionDisabled.color,
-    },
+        color: button.captionDisabled.color
+    }
 };
 //
 // Default style for button inside a header
@@ -63,15 +63,15 @@ export const ActionButtonHeader: ActionButtonType = {
         borderColor: button.header.borderColor,
         backgroundColor: button.header.backgroundColor,
         paddingLeft: button.header.paddingLeft,
-        paddingRight: button.header.paddingRight,
+        paddingRight: button.header.paddingRight
     },
     icon: {
         color: button.header.color,
-        size: button.header.fontSizeIcon,
+        size: button.header.fontSizeIcon
     },
     caption: {
         color: button.header.color,
         fontSize: button.header.fontSize,
-        fontFamily: font.family,
-    },
+        fontFamily: font.family
+    }
 };
