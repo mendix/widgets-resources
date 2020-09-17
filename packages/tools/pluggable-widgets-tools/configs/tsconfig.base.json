@@ -8,7 +8,6 @@
         "types": ["big.js", "jest"],
         "moduleResolution": "node",
         "declaration": false,
-        "removeComments": true,
         "noLib": false,
         "watch": false,
         "forceConsistentCasingInFileNames": true,

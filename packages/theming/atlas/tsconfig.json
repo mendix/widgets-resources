@@ -3,22 +3,10 @@
     "include": [
       "./src/native/**/*.ts"
     ],
-    "exclude": [],
     "compilerOptions": {
-        "baseUrl": "./",
-        "typeRoots": ["./node_modules/@types"],
-        "types": ["react-native", "react-native-device-info"],
-        "paths": {
-            "react-native": ["./node_modules/@types/react-native"],
-            "react-native-device-info": ["./node_modules/react-native-device-info/lib/typescript"]
-        },
-        "target": "ESNext",
+        "target": "ES2019",
         "lib": ["ES2017"],
         "sourceMap": false,
-        "removeComments": false,
-        "allowJs": true,
-        "checkJs": true,
-        "outDir": "./src/native/js",
-        "newLine": "CRLF"
+        "outDir": "./src/native/js"
     }
 }
