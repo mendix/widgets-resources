@@ -1,27 +1,2 @@
-# SASS cache
-**/.sass-cache
-**/.sass-cache/*
-
-**/directoryList*.md
-
-# Mac OS file
-.DS_Store
-
-# Windows File
-.thumb
-
-# VS Code
-.vscode/
-
-# Git
-.gitlab/
-.github/
-
-# Zips
-**/*.zip
-
-# Modules
-node_modules
-
-# Compiled TS
 styles/native/js
+styles/web/css

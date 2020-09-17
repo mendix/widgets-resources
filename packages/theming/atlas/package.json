@@ -1,5 +1,5 @@
 {
-    "name": "atlas-ui-framework",
+    "name": "@mendix/atlas-ui-framework",
     "version": "3.0.0",
     "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
     "main": "",
@@ -7,10 +7,9 @@
         "bump:patch": "node ./scripts/bump-patch.js",
         "bump:minor": "node ./scripts/bump-minor.js",
         "bump:major": "node ./scripts/bump-major.js",
-        "build:css:dev": "sass --embed-sources --no-charset --watch ./styles/web/sass/main.scss ./styles/web/css/main.css",
-        "build:css:prod": "sass --embed-sources --no-charset -s compressed ./styles/web/sass/main.scss ./styles/web/css/main.css",
+        "build:css": "sass --embed-sources --no-charset -s compressed ./styles/web/sass/main.scss ./styles/web/css/main.css",
         "build:js": "tsc -p ./tsconfig.json",
-        "build": "npm run build:css:prod && npm run build:js"
+        "build": "npm run build:css && npm run build:js"
     },
     "repository": {
         "type": "git",
