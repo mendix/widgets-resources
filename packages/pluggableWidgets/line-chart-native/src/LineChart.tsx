@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useState, useEffect } from "react";
+import { createElement, ReactElement, useState, useEffect, useCallback } from "react";
 import { all } from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
 import { InterpolationPropType } from "victory-core";
@@ -6,7 +6,7 @@ import { InterpolationPropType } from "victory-core";
 import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } from "./components/LineChart";
 import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 
-import { LineChartProps } from "../typings/LineChartProps";
+import { LineChartProps, SeriesType } from "../typings/LineChartProps";
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
     const { configMode, series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
@@ -33,7 +33,6 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 groupByAttribute,
                 interpolation,
                 lineStyle,
-                seriesName,
                 seriesNameAttribute,
                 stylePropertyNameAttribute,
                 type,
@@ -59,28 +58,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             }
 
             if (type === "static") {
-                result.push({
-                    dataPoints: dataSource.items!.reduce<Array<LineChartDataPoint>>((dataPointsResult, item) => {
-                        if (!allDataAvailable) {
-                            return dataPointsResult;
-                        }
-
-                        const x = xValue(item);
-                        const y = yValue(item);
-
-                        if (x.status !== ValueStatus.Available || y.status !== ValueStatus.Available) {
-                            allDataAvailable = false;
-                            return dataPointsResult;
-                        }
-
-                        dataPointsResult.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
-
-                        return dataPointsResult;
-                    }, []),
-                    interpolation: interpolationSetting,
-                    name: seriesName?.value,
-                    stylePropertyName: series.stylePropertyName
-                });
+                loadStaticSeries(result, allDataAvailable, series, interpolationSetting);
                 return result;
             }
 
@@ -173,6 +151,55 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             setChartSeries(chartSeriesResult);
         }
     }, [series]);
+
+    const convertToDataPoints = useCallback(
+        (items: Array<ObjectItem>, series: SeriesType, allDataAvailable: boolean): Array<LineChartDataPoint> => {
+            const { xValue, yValue } = series;
+
+            return items.reduce<Array<LineChartDataPoint>>((dataPointsResult, item) => {
+                if (!allDataAvailable) {
+                    return dataPointsResult;
+                }
+
+                const x = xValue(item);
+                const y = yValue(item);
+
+                if (x.status !== ValueStatus.Available || y.status !== ValueStatus.Available) {
+                    allDataAvailable = false;
+                    return dataPointsResult;
+                }
+
+                dataPointsResult.push({ x: Number(x.value!.toFixed()), y: Number(y.value!.toFixed()) });
+
+                return dataPointsResult;
+            }, []);
+        },
+        []
+    );
+
+    const loadStaticSeries = useCallback(
+        (
+            loadedSeries: LineChartSeries[],
+            allDataAvailable: boolean,
+            series: SeriesType,
+            interpolationSetting: InterpolationPropType
+        ): void => {
+            const { dataSource, seriesName } = series;
+
+            if (seriesName && seriesName.status !== ValueStatus.Available) {
+                allDataAvailable = false;
+                return;
+            }
+
+            loadedSeries.push({
+                dataPoints: convertToDataPoints(dataSource.items!, series, allDataAvailable),
+                interpolation: interpolationSetting,
+                name: seriesName ? seriesName.value : undefined,
+                stylePropertyName: series.stylePropertyName
+            });
+        },
+        [convertToDataPoints]
+    );
 
     return (
         <LineChartComponent
