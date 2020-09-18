@@ -19,7 +19,7 @@ interface GroupedDataSourceItem {
 }
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
-    const { configMode, series, showLegend, style, xAxisLabel, yAxisLabel } = props;
+    const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
@@ -34,19 +34,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 return result;
             }
 
-            const { dataSource, interpolation, lineStyle, type } = series;
-
-            let interpolationSetting: InterpolationPropType;
-
-            if (configMode === "basic") {
-                if (lineStyle === "straight") {
-                    interpolationSetting = "linear";
-                } else {
-                    interpolationSetting = "catmullRom";
-                }
-            } else {
-                interpolationSetting = interpolation;
-            }
+            const { dataSource, interpolation, type } = series;
 
             if (dataSource.status !== ValueStatus.Available) {
                 allDataAvailable = false;
@@ -54,12 +42,12 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             }
 
             if (type === "static") {
-                loadStaticSeries(result, allDataAvailable, series, interpolationSetting);
+                loadStaticSeries(result, allDataAvailable, series, interpolation);
                 return result;
             }
 
             const groupedDataSourceItems = groupDataSourceItems(series, allDataAvailable);
-            loadDynamicSeries(result, allDataAvailable, series, interpolationSetting, groupedDataSourceItems);
+            loadDynamicSeries(result, allDataAvailable, series, interpolation, groupedDataSourceItems);
             return result;
         }, []);
 
