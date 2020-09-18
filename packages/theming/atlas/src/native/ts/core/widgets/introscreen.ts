@@ -65,6 +65,7 @@ export const introScreenButtonPaginationBetween: IntroScreenButtonType = {
     }
 };
 // Default styles
+// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_introscreen_IntroScreen: IntroScreenType = {
     fullscreenContainer: {
         // All ViewStyle properties are allowed

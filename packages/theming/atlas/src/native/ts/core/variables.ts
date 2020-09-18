@@ -525,6 +525,7 @@ let progressCircle: VariablesProgressCircle = {
 progressCircle = merge(progressCircle, custom.progressCircle || ({} as any));
 //
 // Rating Styles
+// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 let rating: VariablesRating = {
     containerDisabled: {
         opacity: 0.5

@@ -13,7 +13,7 @@ import { BottomSheetType } from "../../types/widgets";
 
     Default Class For Mendix Bottom Sheet Widget
 ========================================================================== */
-
+// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_bottomsheet_BottomSheet: BottomSheetType = {
     container: {
         // All ViewStyle properties are allowed

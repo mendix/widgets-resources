@@ -108,6 +108,8 @@ const carouselCardLayout: CarouselLayoutType = {
         }
     }
 };
+
+// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_carousel_Carousel: CarouselType = {
     container: {
         // All ViewStyle properties are allowed

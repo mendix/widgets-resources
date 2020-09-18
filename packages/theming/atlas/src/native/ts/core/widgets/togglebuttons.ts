@@ -13,6 +13,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 
     Default Class For Mendix Segmented Controls Widget
 ========================================================================== */
+// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_togglebuttons_ToggleButtons: ToggleButtonsType = {
     container: {
         // All ViewStyle properties are allowed

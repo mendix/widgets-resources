@@ -9,7 +9,7 @@ const pixelRatio = PixelRatio.get();
  *
  * @return  {number} Returns adjusted font size
  */
-function adjustFont(size: number) {
+function adjustFont(size: number): number {
     if (pixelRatio === 2) {
         // iphone 5s and older Androids
         if (width < 360) {

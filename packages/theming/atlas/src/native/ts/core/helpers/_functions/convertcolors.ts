@@ -29,6 +29,7 @@ function RgbToHex(r: ColorPartial, g: ColorPartial | undefined, b: ColorPartial 
         const color = r.replace(/rgb[(]|[)]/gm, "");
         [r, g, b] = color.split(",");
     }
+    // eslint-disable-next-line no-bitwise
     return "#" + ((1 << 24) + (Number(r) << 16) + (Number(g) << 8) + Number(b)).toString(16).slice(1);
 }
 
@@ -84,10 +85,13 @@ function hslToRgb(hsl: string): RGB {
     const a: ColorPartial = 1;
 
     // Strip label and convert to degrees (if necessary)
+    // eslint-disable-next-line no-bitwise
     if (~h.indexOf("deg")) {
         h = h.substr(0, h.length - 3);
+        // eslint-disable-next-line no-bitwise
     } else if (~h.indexOf("rad")) {
         h = Math.round(Number(h.substr(0, h.length - 3)) * (180 / Math.PI));
+        // eslint-disable-next-line no-bitwise
     } else if (~h.indexOf("turn")) {
         h = Math.round(Number(h.substr(0, h.length - 4)) * 360);
     }
@@ -148,6 +152,7 @@ function hslToRgb(hsl: string): RGB {
 function rgbStringToRgb(rgb: string): RGB {
     const color = rgb.replace(/rgb[(]|[)]/gm, "");
     // if RGB has hex color definition
+    // eslint-disable-next-line no-bitwise
     if (~rgb.indexOf("#")) {
         return hexToRgb(color);
     }
@@ -174,7 +179,7 @@ function rgbStringToRgb(rgb: string): RGB {
 function rgbaToRgb(rgba: RGBA | string): RGB {
     let newAlpha = 1;
     let RGB = typeof rgba === "object" ? rgba : { r: 255, g: 255, b: 255 };
-    const calc = (val: number) => Math.round(newAlpha * (val / 255) * 255); // Calc best color contrast values
+    const calc = (val: number): number => Math.round(newAlpha * (val / 255) * 255); // Calc best color contrast values
     // const calc = val => Math.round((RGB.a * (val / 255) + (RGB.a * ( 0 / 255))) * 255); // Calc best color contrast values
 
     if (typeof rgba === "string") {
@@ -215,10 +220,13 @@ function checkColor(color: string): RGB {
         return colors[color.toLowerCase()];
     } else if (color[0] === "#") {
         return hexToRgb(color);
+        // eslint-disable-next-line no-bitwise
     } else if (~color.indexOf("hsl")) {
         return hslToRgb(color);
+        // eslint-disable-next-line no-bitwise
     } else if (~color.indexOf("rgba")) {
         return rgbaToRgb(color);
+        // eslint-disable-next-line no-bitwise
     } else if (~color.indexOf("rgb")) {
         return rgbStringToRgb(color);
     }
