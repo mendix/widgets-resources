@@ -65,7 +65,6 @@ export interface LineChartProps<Style> {
     style: Style[];
     configMode: ConfigModeEnum;
     series: SeriesType[];
-    title?: DynamicValue<string>;
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
@@ -76,7 +75,6 @@ export interface LineChartPreviewProps {
     style: string;
     configMode: ConfigModeEnum;
     series: SeriesPreviewType[];
-    title: string;
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;

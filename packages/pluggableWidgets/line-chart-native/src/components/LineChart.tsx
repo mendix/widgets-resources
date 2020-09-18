@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useMemo, useCallback, useState } from "react";
-import { Text, View, LayoutChangeEvent } from "react-native";
+import { View, LayoutChangeEvent } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
 
@@ -9,7 +9,6 @@ import { Legend } from "./Legend";
 export interface LineChartProps {
     series: LineChartSeries[];
     style: LineChartStyle;
-    title?: string;
     showLegend: boolean;
     xAxisLabel?: string;
     yAxisLabel?: string;
@@ -28,7 +27,7 @@ export interface LineChartDataPoint {
 }
 
 export function LineChart(props: LineChartProps): ReactElement | null {
-    const { series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
+    const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
     if (series.length === 0) {
         return null;
@@ -75,7 +74,6 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     return (
         <View style={style.container}>
-            {title ? <Text style={style.title}>{title}</Text> : null}
             <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
                 {chartDimensions ? (
                     <VictoryChart
