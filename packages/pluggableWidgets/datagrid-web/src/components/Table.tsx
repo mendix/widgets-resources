@@ -49,6 +49,10 @@ export interface TableProps<T> {
     filterMethod: FilterMethodEnum;
 }
 
+export interface ColumnSize {
+    [key: string]: number;
+}
+
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
@@ -63,6 +67,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [paginationIndex, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [filters, setFilters] = useState<Filters<object>>([]);
+    const [columnSizes, setColumnSizes] = useState<ColumnSize>({});
+    const minWidth = 15;
+    const width = 150;
+    const maxWidth = 200;
 
     const filterTypes = useMemo(
         () => ({
@@ -128,7 +136,17 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         (children: ReactNode) => (
                             <div
                                 {...cell.getCellProps()}
-                                {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
+                                {...(!props.columnsResizable || !cell.column.canResize
+                                    ? {
+                                          style: {
+                                              flex: `${cell.column.weight == null ? 1 : cell.column.weight} 1 ${
+                                                  cell.column.weight === 0
+                                                      ? columnSizes[cell.column.weight] ?? width
+                                                      : 0
+                                              }px`
+                                          }
+                                      }
+                                    : {})}
                                 className="td"
                             >
                                 {children}
@@ -136,9 +154,16 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         ),
                         value,
                         index
-                    )
+                    ),
+                ...(props.columnsResizable && column.resizable
+                    ? {
+                          width: column.defaultWidth || width,
+                          maxWidth: column.maxWidth || maxWidth,
+                          minWidth: column.minWidth || minWidth
+                      }
+                    : { weight: column.defaultWeight == null ? 1 : column.defaultWeight })
             })),
-        [props.columns]
+        [props.columns, columnSizes]
     );
 
     const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
@@ -170,14 +195,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         }}
                     />
                 </div>
-            ),
-            ...(props.columnsResizable
-                ? {
-                      width: 150, // width is used for both the flex-basis and flex-grow
-                      maxWidth: 200, // maxWidth is only used as a limit for resizing
-                      minWidth: 15 // minWidth is only used as a limit for resizing
-                  }
-                : {})
+            )
         }),
         [props.columns]
     );
@@ -273,10 +291,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                         setOrder(newOrder);
                                         setColumnOrder(newOrder);
                                     }}
+                                    setColumnSizes={setColumnSizes}
                                     setDragOver={setDragOver}
                                     setSortBy={setSortBy}
                                     sortable={props.columnsSortable}
                                     visibleColumns={visibleColumns}
+                                    weight={column.weight}
                                 />
                             ))}
                             {props.columnsHidable && (

@@ -12,6 +12,7 @@ import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } fr
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
+import { ColumnSize } from "./Table";
 
 export interface HeaderProps<D extends object> {
     column: HeaderGroup<D>;
@@ -22,8 +23,10 @@ export interface HeaderProps<D extends object> {
     dragOver: string;
     visibleColumns: Array<ColumnInstance<D>>;
     setColumnOrder: (updater: Array<IdType<D>>) => void;
+    setColumnSizes: Dispatch<SetStateAction<ColumnSize>>;
     setDragOver: Dispatch<SetStateAction<string>>;
     setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>;
+    weight?: number;
 }
 
 export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
@@ -43,14 +46,34 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             : faArrowsAltV
         : undefined;
 
+    const weight = props.weight ?? 1;
+
     return (
         <div
+            ref={ref => {
+                if (
+                    (!props.resizable || !props.column.canResize) &&
+                    (weight === 0 || weight <= 0) &&
+                    ref &&
+                    ref.clientWidth
+                ) {
+                    props.setColumnSizes((prev: ColumnSize) => {
+                        const id = props.column.id as string;
+                        if (prev[id] !== ref.clientWidth) {
+                            prev[id] = ref.clientWidth;
+                            return { ...prev };
+                        }
+                        return prev;
+                    });
+                }
+            }}
             className="th"
             {...rest}
             style={{
                 ...style,
-                ...(!props.resizable ? { flex: "1 1 0px" } : {}),
-                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {})
+                ...(!props.resizable ? { flex: `${props.weight == null ? 1 : props.weight} 1 auto` } : {}),
+                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {}),
+                ...(!props.resizable && props.weight === 0 ? { width: "unset" } : {})
             }}
             title={props.column.render("Header") as string}
         >

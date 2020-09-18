@@ -7,7 +7,7 @@ exports[`Header renders the structure correctly 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
+      "flex": "1 1 auto",
     }
   }
   title="Test"
@@ -31,7 +31,7 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
+      "flex": "1 1 auto",
     }
   }
   title="Test"
@@ -60,7 +60,7 @@ exports[`Header renders the structure correctly when filterable 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
+      "flex": "1 1 auto",
     }
   }
   title="Test"
@@ -85,7 +85,7 @@ exports[`Header renders the structure correctly when filterable and with custom 
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
+      "flex": "1 1 auto",
     }
   }
   title="Test"
@@ -143,7 +143,7 @@ exports[`Header renders the structure correctly when sortable 1`] = `
   role="Test"
   style={
     Object {
-      "flex": "1 1 0px",
+      "flex": "1 1 auto",
     }
   }
   title="Test"

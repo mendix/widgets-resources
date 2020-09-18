@@ -34,6 +34,7 @@ declare module "react-table" {
         canDrag?: boolean;
         hidden?: boolean;
         customFilter?: ReactNode;
+        weight?: number;
     }
 
     export interface TableState<D extends object = {}>
