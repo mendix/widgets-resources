@@ -16,12 +16,12 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     const customStyles = style ? style.filter(o => o != null) : [];
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
 
-    const [chartSeries, setChartSeries] = useState<Array<LineChartSeries>>([]);
+    const [chartSeries, setChartSeries] = useState<LineChartSeries[]>([]);
 
     useEffect(() => {
         let allDataAvailable = true;
 
-        const chartSeriesResult = series.reduce<Array<LineChartSeries>>((result, series) => {
+        const chartSeriesResult = series.reduce<LineChartSeries[]>((result, series) => {
             if (!allDataAvailable) {
                 return result;
             }
@@ -62,10 +62,10 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     }, [series]);
 
     const convertToDataPoints = useCallback(
-        (items: Array<ObjectItem>, series: SeriesType, allDataAvailable: boolean): Array<LineChartDataPoint> => {
+        (items: ObjectItem[], series: SeriesType, allDataAvailable: boolean): LineChartDataPoint[] => {
             const { xValue, yValue } = series;
 
-            return items.reduce<Array<LineChartDataPoint>>((dataPointsResult, item) => {
+            return items.reduce<LineChartDataPoint[]>((dataPointsResult, item) => {
                 if (!allDataAvailable) {
                     return dataPointsResult;
                 }
@@ -111,19 +111,19 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     );
 
     const groupDataSourceItems = useCallback((series: SeriesType, allDataAvailable: boolean): Array<{
-        groupByAttributeValue: string;
+        groupByAttributeValue: string | boolean;
         seriesNameAttributeValue?: string;
         stylePropertyNameAttributeValue?: string;
-        items: Array<ObjectItem>;
+        items: ObjectItem[];
     }> => {
         const { dataSource, groupByAttribute, seriesNameAttribute, stylePropertyNameAttribute } = series;
 
         return ensure(dataSource.items).reduce<
             Array<{
-                groupByAttributeValue: string;
+                groupByAttributeValue: string | boolean;
                 seriesNameAttributeValue?: string;
                 stylePropertyNameAttributeValue?: string;
-                items: Array<ObjectItem>;
+                items: ObjectItem[];
             }>
         >((dataSourceItemsResult, item) => {
             if (!allDataAvailable) {
@@ -174,10 +174,10 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             series: SeriesType,
             interpolation: InterpolationPropType,
             groupedDataSourceItems: Array<{
-                groupByAttributeValue: string;
+                groupByAttributeValue: string | boolean;
                 seriesNameAttributeValue?: string;
                 stylePropertyNameAttributeValue?: string;
-                items: Array<ObjectItem>;
+                items: ObjectItem[];
             }>
         ): void => {
             groupedDataSourceItems.forEach(itemGroup => {

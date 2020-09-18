@@ -7,7 +7,7 @@ import { LineChartStyle } from "../ui/Styles";
 import { Legend } from "./Legend";
 
 export interface LineChartProps {
-    series: Array<LineChartSeries>;
+    series: LineChartSeries[];
     style: LineChartStyle;
     title?: string;
     showLegend: boolean;
@@ -16,7 +16,7 @@ export interface LineChartProps {
 }
 
 export interface LineChartSeries {
-    dataPoints: Array<LineChartDataPoint>;
+    dataPoints: LineChartDataPoint[];
     interpolation: InterpolationPropType;
     name?: string;
     stylePropertyName?: string;
