@@ -5,32 +5,9 @@
  */
 import { DynamicValue, ListValue, ListAttributeValue } from "mendix";
 
-export type ConfigModeEnum = "basic" | "advanced";
-
 export type TypeEnum = "static" | "dynamic";
 
-export type LineStyleEnum = "straight" | "curved";
-
-export type InterpolationEnum =
-    | "basis"
-    | "basisClosed"
-    | "basisOpen"
-    | "bundle"
-    | "cardinal"
-    | "cardinalClosed"
-    | "cardinalOpen"
-    | "catmullRom"
-    | "catmullRomClosed"
-    | "catmullRomOpen"
-    | "linear"
-    | "linearClosed"
-    | "monotoneX"
-    | "monotoneY"
-    | "natural"
-    | "radial"
-    | "step"
-    | "stepAfter"
-    | "stepBefore";
+export type InterpolationEnum = "linear" | "catmullRom";
 
 export interface SeriesType {
     type: TypeEnum;
@@ -40,7 +17,6 @@ export interface SeriesType {
     seriesNameAttribute?: ListAttributeValue<string>;
     xValue: ListAttributeValue<BigJs.Big>;
     yValue: ListAttributeValue<BigJs.Big>;
-    lineStyle: LineStyleEnum;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
     stylePropertyNameAttribute?: ListAttributeValue<string>;
@@ -54,7 +30,6 @@ export interface SeriesPreviewType {
     seriesNameAttribute: string;
     xValue: string;
     yValue: string;
-    lineStyle: LineStyleEnum;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
     stylePropertyNameAttribute: string;
@@ -63,7 +38,6 @@ export interface SeriesPreviewType {
 export interface LineChartProps<Style> {
     name: string;
     style: Style[];
-    configMode: ConfigModeEnum;
     series: SeriesType[];
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
@@ -73,7 +47,6 @@ export interface LineChartProps<Style> {
 export interface LineChartPreviewProps {
     class: string;
     style: string;
-    configMode: ConfigModeEnum;
     series: SeriesPreviewType[];
     showLegend: boolean;
     xAxisLabel: string;

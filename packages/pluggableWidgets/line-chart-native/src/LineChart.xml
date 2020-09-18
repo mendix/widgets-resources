@@ -5,16 +5,6 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
-                <property key="configMode" type="enumeration" defaultValue="basic" required="true">
-                    <caption>Configuration mode</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="basic">Basic</enumerationValue>
-                        <enumerationValue key="advanced">Advanced</enumerationValue>
-                    </enumerationValues>
-                </property>
-            </propertyGroup>
             <propertyGroup caption="Data source">
                 <property key="series" type="object" isList="true" required="true">
                     <caption>Series</caption>
@@ -84,38 +74,13 @@
                                     <!-- <attributeType name="AutoNumber" /> -->
                                 </attributeTypes>
                             </property>
-                            <property key="lineStyle" type="enumeration" defaultValue="straight" required="true">
-                                <caption>Line style</caption>
-                                <description />
-                                <enumerationValues>
-                                    <enumerationValue key="straight">Straight line</enumerationValue>
-                                    <enumerationValue key="curved">Curved line</enumerationValue>
-
-                                </enumerationValues>
-                            </property>
                             <property key="interpolation" type="enumeration" defaultValue="linear" required="true">
                                 <caption>Interpolation</caption>
                                 <description />
                                 <enumerationValues>
-                                    <enumerationValue key="basis">Basis</enumerationValue>
-                                    <enumerationValue key="basisClosed">Basis closed</enumerationValue>
-                                    <enumerationValue key="basisOpen">Basis open</enumerationValue>
-                                    <enumerationValue key="bundle">Bundle</enumerationValue>
-                                    <enumerationValue key="cardinal">Cardinal</enumerationValue>
-                                    <enumerationValue key="cardinalClosed">Cardinal closed</enumerationValue>
-                                    <enumerationValue key="cardinalOpen">Cardinal open</enumerationValue>
-                                    <enumerationValue key="catmullRom">Catmull rom</enumerationValue>
-                                    <enumerationValue key="catmullRomClosed">Catmull rom closed</enumerationValue>
-                                    <enumerationValue key="catmullRomOpen">Catmull rom open</enumerationValue>
-                                    <enumerationValue key="linear">linear</enumerationValue>
-                                    <enumerationValue key="linearClosed">linear closed</enumerationValue>
-                                    <enumerationValue key="monotoneX">Monotone x</enumerationValue>
-                                    <enumerationValue key="monotoneY">Monotone y</enumerationValue>
-                                    <enumerationValue key="natural">Natural</enumerationValue>
-                                    <enumerationValue key="radial">radial</enumerationValue>
-                                    <enumerationValue key="step">Step</enumerationValue>
-                                    <enumerationValue key="stepAfter">Step after</enumerationValue>
-                                    <enumerationValue key="stepBefore">Step before</enumerationValue>
+                                    <enumerationValue key="linear">Linear</enumerationValue>
+                                    <enumerationValue key="catmullRom">Curved</enumerationValue>
+
                                 </enumerationValues>
                             </property>
                         </propertyGroup>
