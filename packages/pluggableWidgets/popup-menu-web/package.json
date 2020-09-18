@@ -1,0 +1,36 @@
+{
+  "name": "popupmenu-web",
+  "widgetName": "PopupMenu",
+  "version": "1.0.0",
+  "copyright": "Mendix Technology B.V.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}

@@ -1,0 +1,180 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+/* ==========================================================================
+   Flex
+
+   Flex classes
+========================================================================== */
+$important-flex-value: if($important-flex, ' !important', '');
+
+// Flex layout
+.flexcontainer {
+    display: flex;
+    overflow: hidden;
+    flex: 1;
+    flex-direction: row;
+
+    .flexitem {
+        margin-right: $gutter-size;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    .flexitem-main {
+        overflow: hidden;
+        flex: 1;
+    }
+}
+
+// These classes define the order of the children
+.flex-row {
+    flex-direction: row #{$important-flex-value};
+}
+
+.flex-column {
+    flex-direction: column #{$important-flex-value};
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse #{$important-flex-value};
+}
+
+.flex-column-reverse {
+    flex-direction: column-reverse #{$important-flex-value};
+}
+
+.flex-wrap {
+    flex-wrap: wrap #{$important-flex-value};
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap #{$important-flex-value};
+}
+
+.flex-wrap-reverse {
+    flex-wrap: wrap-reverse #{$important-flex-value};
+}
+
+// Align children in both directions
+.flex-center {
+    align-items: center #{$important-flex-value};
+    justify-content: center #{$important-flex-value};
+}
+
+// These classes define the alignment of the children
+.justify-content-start {
+    justify-content: flex-start #{$important-flex-value};
+}
+
+.justify-content-end {
+    justify-content: flex-end #{$important-flex-value};
+}
+
+.justify-content-center {
+    justify-content: center #{$important-flex-value};
+}
+
+.justify-content-between {
+    justify-content: space-between #{$important-flex-value};
+}
+
+.justify-content-around {
+    justify-content: space-around #{$important-flex-value};
+}
+
+.justify-content-evenly {
+    // Not Supported in IE11
+    justify-content: space-evenly #{$important-flex-value};
+}
+
+.justify-content-stretch {
+    justify-content: stretch #{$important-flex-value};
+}
+
+/// These classes define the alignment of the children in the cross-direction
+.align-children-start {
+    align-items: flex-start #{$important-flex-value};
+}
+
+.align-children-end {
+    align-items: flex-end #{$important-flex-value};
+}
+
+.align-children-center {
+    align-items: center #{$important-flex-value};
+}
+
+.align-children-baseline {
+    align-items: baseline #{$important-flex-value};
+}
+
+.align-children-stretch {
+    align-items: stretch #{$important-flex-value};
+}
+
+/// These classes define the alignment of the rows of children in the cross-direction
+.align-content-start {
+    align-content: flex-start #{$important-flex-value};
+}
+
+.align-content-end {
+    align-content: flex-end #{$important-flex-value};
+}
+
+.align-content-center {
+    align-content: center #{$important-flex-value};
+}
+
+.align-content-between {
+    align-content: space-between #{$important-flex-value};
+}
+
+.align-content-around {
+    align-content: space-around #{$important-flex-value};
+}
+
+.align-content-stretch {
+    align-content: stretch #{$important-flex-value};
+}
+
+/// These classes allow the default alignment to be overridden for individual items
+.align-self-auto {
+    align-self: auto #{$important-flex-value};
+}
+
+.align-self-start {
+    align-self: flex-start #{$important-flex-value};
+}
+
+.align-self-end {
+    align-self: flex-end #{$important-flex-value};
+}
+
+.align-self-center {
+    align-self: center #{$important-flex-value};
+}
+
+.align-self-baseline {
+    align-self: baseline #{$important-flex-value};
+}
+
+.align-self-stretch {
+    align-self: stretch #{$important-flex-value};
+}
+
+/// These classes define the percentage of available free space within a flex container a flex item will take.
+@mixin flex-items($number) {
+    @for $i from 1 through $number {
+        .flexitem-#{$i} {
+            flex: #{$i} #{$i} 1%;
+        }
+    }
+}
+
+@include flex-items($number: 12);

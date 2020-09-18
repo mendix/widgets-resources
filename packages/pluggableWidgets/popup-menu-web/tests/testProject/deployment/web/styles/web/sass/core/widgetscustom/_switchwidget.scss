@@ -1,0 +1,157 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+$default-android-color: #6FBEB5;
+$default-ios-color: rgb(100, 189, 99);
+
+@mixin bootstrap-style-ios($brand-style) {
+    border-color: $brand-style;
+    background-color: $brand-style;
+    box-shadow: $brand-style 0 0 0 16px inset;
+}
+
+@mixin bootstrap-style-android($brand-style) {
+    background-color: lighten($brand-style, 10%);
+}
+
+@mixin ios {
+    .widget-switch-btn-wrapper {
+        &.checked {
+            &.widget-switch-btn-wrapper-default {
+                @include bootstrap-style-ios($default-ios-color);
+            }
+
+            &.widget-switch-btn-wrapper-success {
+                @include bootstrap-style-ios($brand-success);
+            }
+
+            &.widget-switch-btn-wrapper-info {
+                @include bootstrap-style-ios($brand-info);
+            }
+
+            &.widget-switch-btn-wrapper-primary {
+                @include bootstrap-style-ios($brand-primary);
+            }
+
+            &.widget-switch-btn-wrapper-warning {
+                @include bootstrap-style-ios($brand-warning);
+            }
+
+            &.widget-switch-btn-wrapper-danger {
+                @include bootstrap-style-ios($brand-danger);
+            }
+
+            &.widget-switch-btn-wrapper-inverse {
+                @include bootstrap-style-ios($brand-inverse);
+            }
+        }
+    }
+}
+
+@mixin android {
+    .widget-switch-btn-wrapper {
+        &.checked {
+            &.widget-switch-btn-wrapper-default {
+                @include bootstrap-style-android($default-android-color);
+
+                .widget-switch-btn {
+                    background: $default-android-color;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-success {
+                @include bootstrap-style-android($brand-success);
+
+                .widget-switch-btn {
+                    background: $brand-success;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-info {
+                @include bootstrap-style-android($brand-info);
+
+                .widget-switch-btn {
+                    background: $brand-info;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-primary {
+                @include bootstrap-style-android($brand-primary);
+
+                .widget-switch-btn {
+                    background: $brand-primary;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-warning {
+                @include bootstrap-style-android($brand-warning);
+
+                .widget-switch-btn {
+                    background: $brand-warning;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-danger {
+                @include bootstrap-style-android($brand-danger);
+
+                .widget-switch-btn {
+                    background: $brand-danger;
+                }
+            }
+
+            &.widget-switch-btn-wrapper-inverse {
+                @include bootstrap-style-android($brand-inverse);
+
+                .widget-switch-btn {
+                    background: $brand-inverse;
+                }
+            }
+        }
+    }
+}
+
+.widget-switch-btn-wrapper {
+    &:focus {
+        outline: 1px solid $brand-primary;
+    }
+}
+
+div {
+    &.widget-switch {
+        &.iOS {
+            @include ios;
+        }
+
+        &.android {
+            @include android;
+        }
+
+        &.auto {
+            @include ios;
+        }
+    }
+}
+
+html {
+    div {
+        &.dj_android {
+            .widget-switch {
+                &.auto {
+                    @include android;
+                }
+            }
+        }
+
+        &.dj_ios {
+            .widget-switch {
+                &.auto {
+                    @include ios;
+                }
+            }
+        }
+    }
+}

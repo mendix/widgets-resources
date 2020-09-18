@@ -1,0 +1,346 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Helpers
+
+   Default Mendix Helpers
+========================================================================== */
+$important-helpers-value: if($important-helpers, ' !important', '');
+
+// Display properties
+.d-none {
+    display: none #{$important-helpers-value};
+}
+
+.d-flex {
+    display: flex #{$important-helpers-value};
+}
+
+.d-inline-flex {
+    display: inline-flex #{$important-helpers-value};
+}
+
+.d-inline {
+    display: inline #{$important-helpers-value};
+}
+
+.d-inline-block {
+    display: inline-block #{$important-helpers-value};
+}
+
+.show,
+.d-block {
+    display: block #{$important-helpers-value};
+}
+
+.table,
+.d-table {
+    display: table #{$important-helpers-value};
+}
+
+.table-row,
+.d-table-row {
+    display: table-row #{$important-helpers-value};
+}
+
+.table-cell,
+.d-table-cell {
+    display: table-cell #{$important-helpers-value};
+}
+
+.hide,
+.hidden {
+    display: none #{$important-helpers-value};
+    visibility: hidden #{$important-helpers-value};
+}
+
+.invisible {
+    visibility: hidden #{$important-helpers-value};
+}
+
+.display-ie8-only:not([attr*=""]) {
+    display: none #{$important-helpers-value};
+    padding: 0 #{$important-helpers-value};
+}
+
+.list-nostyle {
+    ul {
+        margin: 0 #{$important-helpers-value};
+        padding: 0 #{$important-helpers-value};
+
+        li {
+            list-style-type: none #{$important-helpers-value};
+        }
+    }
+}
+
+.nowrap,
+.nowrap * {
+    overflow: hidden #{$important-helpers-value};
+    // Star for inside an element, IE8 span > a
+    white-space: nowrap #{$important-helpers-value};
+    text-overflow: ellipsis #{$important-helpers-value};
+}
+
+// Render DIV as Table Cells
+.table {
+    display: table #{$important-helpers-value};
+}
+
+.table-row {
+    display: table-row #{$important-helpers-value};
+}
+
+.table-cell {
+    display: table-cell #{$important-helpers-value};
+}
+
+// Quick floats
+.pull-left {
+    float: left #{$important-helpers-value};
+}
+
+.pull-right {
+    float: right #{$important-helpers-value};
+}
+
+// Align options
+.align-top {
+    vertical-align: top #{$important-helpers-value};
+}
+
+.align-middle {
+    vertical-align: middle #{$important-helpers-value};
+}
+
+.align-bottom {
+    vertical-align: bottom #{$important-helpers-value};
+}
+
+// Flex alignments
+.row-left {
+    display: flex #{$important-helpers-value};
+    align-items: center #{$important-helpers-value};
+    flex-flow: row #{$important-helpers-value};
+    justify-content: flex-start #{$important-helpers-value};
+}
+
+.row-center {
+    display: flex #{$important-helpers-value};
+    align-items: center #{$important-helpers-value};
+    flex-flow: row #{$important-helpers-value};
+    justify-content: center #{$important-helpers-value};
+}
+
+.row-right {
+    display: flex #{$important-helpers-value};
+    align-items: center #{$important-helpers-value};
+    flex-flow: row #{$important-helpers-value};
+    justify-content: flex-end #{$important-helpers-value};
+}
+
+.col-left {
+    display: flex #{$important-helpers-value};
+    align-items: flex-start #{$important-helpers-value};
+    flex-direction: column #{$important-helpers-value};
+    justify-content: center #{$important-helpers-value};
+}
+
+.col-center {
+    display: flex #{$important-helpers-value};
+    align-items: center #{$important-helpers-value};
+    flex-direction: column #{$important-helpers-value};
+    justify-content: center #{$important-helpers-value};
+}
+
+.col-right {
+    display: flex #{$important-helpers-value};
+    align-items: flex-end #{$important-helpers-value};
+    flex-direction: column #{$important-helpers-value};
+    justify-content: center #{$important-helpers-value};
+}
+
+// Media
+@media (max-width: $screen-sm-max) {
+    .hide-phone {
+        display: none #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .hide-tablet {
+        display: none #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-lg) {
+    .hide-desktop {
+        display: none #{$important-helpers-value};
+    }
+}
+
+
+@media (max-width: $screen-xs-max) {
+    .hide-xs,
+    .hidden-xs,
+    .d-xs-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-xs-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-xs-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-xs-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-xs-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-xs-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-xs-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-xs-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-xs-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .hide-sm,
+    .hidden-sm,
+    .d-sm-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-sm-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-sm-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-sm-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-sm-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-sm-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-sm-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-sm-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-sm-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-md) and (max-width: $screen-md-max) {
+    .hide-md,
+    .hidden-md,
+    .d-md-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-md-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-md-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-md-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-md-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-md-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-md-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-md-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-md-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-lg) and (max-width: $screen-xl) {
+    .hide-lg,
+    .hidden-lg,
+    .d-lg-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-lg-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-lg-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-lg-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-lg-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-lg-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-lg-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-lg-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-lg-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}
+
+@media (min-width: $screen-xl) {
+    .hide-xl,
+    .hidden-xl,
+    .d-xl-none {
+        display: none #{$important-helpers-value};
+    }
+    .d-xl-flex {
+        display: flex #{$important-helpers-value};
+    }
+    .d-xl-inline-flex {
+        display: inline-flex #{$important-helpers-value};
+    }
+    .d-xl-inline {
+        display: inline #{$important-helpers-value};
+    }
+    .d-xl-inline-block {
+        display: inline-block #{$important-helpers-value};
+    }
+    .d-xl-block {
+        display: block #{$important-helpers-value};
+    }
+    .d-xl-table {
+        display: table #{$important-helpers-value};
+    }
+    .d-xl-table-row {
+        display: table-row #{$important-helpers-value};
+    }
+    .d-xl-table-cell {
+        display: table-cell #{$important-helpers-value};
+    }
+}

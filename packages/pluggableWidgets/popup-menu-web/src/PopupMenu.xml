@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.popupmenu.PopupMenu" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+    <name>Pop-up menu</name>
+    <description>Displays a set of pre-defined items within the pop up menu</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABp1BMVEUAAABV//9mzP9LtP9Ms/9Jtv9NsvdJsfpLtPpJsfdJsfhJsvhJsvdKsvdJsPhKsPhJsfdJsPhJsfdIsfhJsfdIsPdJsfhJsfhJsPhJsPhIsfhIsPdJsPdKsPdKsfdNsvdOsvdPs/dQs/dRtPdStPdTtPdUtfdWtvdXtvdauPdcuPdeufdeufhguvhiu/hju/hkvPhmvfhnvfhpvvhrv/huwPhvwfhxwfhywvhzwvh4xfl5xfl6xfl8xvl9xvl9x/mByPmCyfmFyvmGyvmJzPmKzPmLzfmNzvqPzvqQz/qT0PqU0PqU0fqX0vqY0vqa0/qe1fqg1vqj1/uk1/un2fup2vut2/uv3Puw3Puw3fuz3vu13/u23/u34Pu44Pu64fu64fy84vy94vy+4/y/4/zD5fzE5fzG5vzH5vzI5/zK6PzL6PzR6/zT7P3U7P3V7f3W7f3Y7v3Z7v3c8P3e8f3f8f3g8f3i8v3l8/3l9P3n9P3r9v7t9/7u9/7v+P7w+P7x+f7y+f70+v71+v74/P75/P76/f77/f78/f78/v79/v7+/v7////6dMsRAAAAG3RSTlMAAwURGxwhMTNic3SEh4iVp7XBzejt7vH5/f6PsMNWAAABsklEQVR4AWIYfGAUjIJRMAqYuYREJKWJAqLCPGwY+jnFpEkBEryMqPr5pEkFgkwo9kuTDviR/S9GhgFSHAgDuKXJAQIIA4TIMkAcEY4i0mQBVrgBkuQZwA43QJo8wIFhQEhEOIBQOutHJozDOP5Crp4e1RhkJ0tKGJFd6oNEdtmJyEIzpaZl5nrRZgaHM/2Pf5/vwXXfyagXgG93bwSAlEolowLMm9w83gibhXH2gKKVdD67gTnWjwCk+VVjMQS4suSnnjMLRVFc9sAHvAX2A9fySaXNBMbEZVUWscaHIMRuqwBgD8hDEbnsRmfjUKJkAQZGCTlO/xWBwIADQLIZBlY441MvfoF1xlFS/4fy+bzXKh4dgNJE7L3eh3tmtuWa+AMcMIY3dgUvZQpGEYmMw2kD7HC+R29UqyoXLaBd0QZxzgXgikLLDSqJTKU5HOcS0MsbA9jPqtwCRvXm2eorBbNIJBw3KJ9O4Yl+AAXdnyaLt7PWN3jRWLvzmAVp94zO5+n41/onfo/UpExxZqI0O7NQr0DhIq9Io7hQpbRYp7hiobRqo6ByFcNWuY6CUTAKRgEAo8X0lBD3V30AAAAASUVORK5CYII=
+    </icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="menuTrigger" type="widgets" required="false">
+                    <caption>Clickable area to show menu</caption>
+                    <description>Responsible for toggling the Pop-up menu</description>
+                </property>
+                <property key="trigger" type="enumeration" defaultValue="onclick">
+                    <caption>Trigger</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="onclick">On click</enumerationValue>
+                        <enumerationValue key="onhover">On hover</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="renderMode" type="enumeration" defaultValue="basic">
+                    <caption>Render</caption>
+                    <description>Basic: creates the menu based on the configured options. Custom: free to model menu.
+                    </description>
+                    <enumerationValues>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="position" type="enumeration" defaultValue="bottom">
+                    <caption>Position</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
+                        <enumerationValue key="top">Top</enumerationValue>
+                        <enumerationValue key="bottom">Bottom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="basicItems" type="object" isList="true" required="false">
+                    <caption>Items</caption>
+                    <description/>
+                    <properties>
+                        <property key="itemType" type="enumeration" defaultValue="item">
+                            <caption>Item type</caption>
+                            <category>General</category>
+                            <description/>
+                            <enumerationValues>
+                                <enumerationValue key="item">Item</enumerationValue>
+                                <enumerationValue key="divider">Divider</enumerationValue>
+                            </enumerationValues>
+                        </property>
+                        <property key="caption" type="string" required="false">
+                            <caption>Caption</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                        <property key="action" type="action" required="false">
+                            <caption>Action</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                        <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
+                            <caption>Style</caption>
+                            <category>General</category>
+                            <description/>
+                            <enumerationValues>
+                                <enumerationValue key="defaultStyle">Default</enumerationValue>
+                                <enumerationValue key="primaryStyle">Primary</enumerationValue>
+                                <enumerationValue key="dangerStyle">Danger</enumerationValue>
+                                <enumerationValue key="customStyle">Custom</enumerationValue>
+                            </enumerationValues>
+                        </property>
+                    </properties>
+                </property>
+                <property key="customItems" type="object" isList="true" required="false">
+                    <caption>Items</caption>
+                    <description>To make sure the popup closes correctly after a click, do not configure clickable
+                        widgets inside the placeholders, but use the action property of this widget.
+                    </description>
+                    <properties>
+                        <property key="content" type="widgets">
+                            <caption>Content</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                        <property key="action" type="action" required="false">
+                            <caption>Action</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                    </properties>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

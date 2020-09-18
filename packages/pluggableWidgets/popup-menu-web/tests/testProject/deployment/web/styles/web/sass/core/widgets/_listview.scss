@@ -1,0 +1,102 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+/* ==========================================================================
+   Listview
+
+   Default Mendix Listview Widget. The list view shows a list of objects arranged vertically. Each object is shown using a template
+========================================================================== */
+.mx-listview {
+    // Remove widget padding
+    padding: 0;
+    /* Clear search button (overrides load more button stying) */
+    // Search bar
+    .mx-listview-searchbar {
+        margin-bottom: $gutter-size;
+
+        .btn {
+            width: auto;
+        }
+    }
+
+    /* Load more button */
+    & > .btn {
+        width: 100%;
+        margin: 10px auto;
+    }
+
+    & > ul {
+        margin: 0;
+
+        .mx-listview-empty {
+            border-style: none;
+            background-color: transparent;
+        }
+
+        & > li {
+            @include transition();
+            padding: $listview-padding-top $listview-padding-right $listview-padding-bottom $listview-padding-left;
+            border-width: 1px 0 0 0;
+            border-style: solid;
+            border-color: $grid-border-color;
+            background-color: $grid-bg;
+
+            &:first-child {
+                border-radius: 0; // Reset mxui listview style
+            }
+
+            &:last-child {
+                border-bottom: 1px solid $grid-border-color;
+                border-radius: 0; // Reset mxui listview style
+            }
+
+            &:focus,
+            &:active {
+                outline: 0;
+                background-color: $grid-bg-hover;
+            }
+
+            &.selected {
+                background-color: $grid-bg-selected;
+            }
+        }
+    }
+
+    .mx-layoutgrid {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+//== Phone specific
+//-------------------------------------------------------------------------------------------------------------------//
+.profile-phone .mx-listview {
+    .mx-listview-searchbar {
+        margin-bottom: 3px;
+        background: #FFFFFF;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+
+        input {
+            padding: 14px 15px;
+            color: #555555;
+            border-style: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .btn {
+            padding: 14px 15px;
+            color: inherit;
+            border-style: none;
+        }
+    }
+
+    & > ul > li {
+        &:first-child {
+            border-top: none;
+        }
+    }
+}
