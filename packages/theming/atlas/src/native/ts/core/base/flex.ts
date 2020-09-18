@@ -7,7 +7,7 @@ Customizing core files will make updating Atlas much more difficult in the futur
 To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
 */
-//== Flex layout
+// == Flex layout
 export const flexMain: Helperclass = {
     container: {
         // flex 1 will take all available space not taken by flexItems.

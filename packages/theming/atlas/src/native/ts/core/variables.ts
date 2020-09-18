@@ -29,9 +29,9 @@ import {
 } from "../types/variables";
 //
 //
-//== Global variables
-//## Variables to be used during styling
-//-------------------------------------------------------------------------------------------------------------------//
+// == Global variables
+// ## Variables to be used during styling
+// -------------------------------------------------------------------------------------------------------------------//
 // System defined read-only values
 export const deviceHeight = height;
 export const deviceWidth = width;
@@ -193,7 +193,7 @@ let button: VariablesButton = {
 };
 button = merge(button, custom.button || ({} as any));
 //
-//Input Styles
+// Input Styles
 let input: VariablesInput = {
     label: {
         numberOfLines: 1,
@@ -364,8 +364,8 @@ let layoutGrid: VariablesLayoutgrid = {
 };
 layoutGrid = merge(layoutGrid, custom.layoutGrid || ({} as any));
 //
-//## Pluggable Widgets
-//-------------------------------------------------------------------------------------------------------------------//
+// ## Pluggable Widgets
+// -------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
 let badge: VariablesBadge = {
     fontWeight: font.weightBold,

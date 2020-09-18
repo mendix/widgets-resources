@@ -76,9 +76,9 @@ export const btnPrimaryInversed: ActionButtonType = {
     }
 };
 //
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
+// == Extra Classes
+// ## Helper classes to change the look and feel of the widget
+// -------------------------------------------------------------------------------------------------------------------//
 //
 // Button Icon Only
 export const btnIcon: ActionButtonType = {

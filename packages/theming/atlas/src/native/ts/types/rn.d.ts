@@ -56,7 +56,7 @@ interface SkewYTransform {
 }
 
 export interface TransformsStyle {
-    transform?: (
+    transform?: Array<
         | PerspectiveTransform
         | RotateTransform
         | RotateXTransform
@@ -69,8 +69,8 @@ export interface TransformsStyle {
         | TranslateYTransform
         | SkewXTransform
         | SkewYTransform
-    )[];
-    transformMatrix?: Array<number>;
+    >;
+    transformMatrix?: number[];
     rotation?: number;
     scaleX?: number;
     scaleY?: number;

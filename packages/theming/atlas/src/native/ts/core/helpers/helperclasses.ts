@@ -22,7 +22,7 @@ export const hideOnIos: Helperclass = {
     }
 };
 //
-//== Background Colors
+// == Background Colors
 export const backgroundPrimary: Helperclass = {
     container: {
         backgroundColor: background.primary

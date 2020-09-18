@@ -18,9 +18,9 @@ export const tabContainerScroll = {
     }
 };
 //
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
+// == Extra Classes
+// ## Helper classes to change the look and feel of the widget
+// -------------------------------------------------------------------------------------------------------------------//
 // Tab container as content of page
 export const tabContainerMinimal = {
     container: {

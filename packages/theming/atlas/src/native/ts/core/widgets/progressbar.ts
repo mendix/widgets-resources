@@ -26,7 +26,7 @@ export const com_mendix_widget_native_progressbar_ProgressBar: ProgressBarType =
         backgroundColor: progressBar.bar.backgroundColor
     },
     fill: {
-        //Only the backgroundColor property is allowed
+        // Only the backgroundColor property is allowed
         backgroundColor: progressBar.fill.backgroundColor
     },
     validationMessage: {

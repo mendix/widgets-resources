@@ -27,28 +27,33 @@ export function shadeBlendConvert(
     toValue: string | undefined = undefined
 ): string {
     if (
-        typeof c != "number" ||
+        typeof c !== "number" ||
         c < -1 ||
         c > 1 ||
-        typeof fromValue != "string" ||
+        typeof fromValue !== "string" ||
         (fromValue[0] != "r" && fromValue[0] != "#") ||
-        (toValue && typeof toValue != "string")
-    )
-        return "red"; //ErrorCheck
+        (toValue && typeof toValue !== "string")
+    ) {
+        return "red";
+    } // ErrorCheck
     const sbcRip = (value: string): number[] | null => {
-        const l = value.length,
-            RGB = [];
+        const l = value.length;
+        const RGB = [];
         if (l > 9) {
             const d = value.split(",");
-            if (d.length < 3 || d.length > 4) return null; //ErrorCheck
+            if (d.length < 3 || d.length > 4) {
+                return null;
+            } // ErrorCheck
             (RGB[0] = i(d[0].split("(")[1])),
                 (RGB[1] = i(d[1])),
                 (RGB[2] = i(d[2])),
                 (RGB[3] = d[3] ? parseFloat(d[3]) : -1);
         } else {
             let hex = "";
-            if (l == 8 || l == 6 || l < 4) return null; //ErrorCheck
-            if (l == 4 || l == 5)
+            if (l == 8 || l == 6 || l < 4) {
+                return null;
+            } // ErrorCheck
+            if (l == 4 || l == 5) {
                 hex =
                     "#" +
                     value[1] +
@@ -57,8 +62,9 @@ export function shadeBlendConvert(
                     value[2] +
                     value[3] +
                     value[3] +
-                    (l > 4 ? value[4] + "" + value[4] : ""); //3 or 4 digit
-            let d = i(hex.slice(1), 16);
+                    (l > 4 ? value[4] + "" + value[4] : "");
+            } // 3 or 4 digit
+            const d = i(hex.slice(1), 16);
             RGB[0] = (d >> 16) & 255;
             RGB[1] = (d >> 8) & 255;
             RGB[2] = d & 255;
@@ -72,17 +78,19 @@ export function shadeBlendConvert(
         }
         return RGB;
     };
-    let i = parseInt,
-        r = Math.round,
-        th = fromValue.length > 9,
-        h = typeof toValue == "string" ? (toValue.length > 9 ? true : toValue == "c" ? !th : false) : th,
-        b = c < 0,
-        p = b ? c * -1 : c,
-        to = toValue && toValue != "c" ? toValue : b ? "#000000" : "#FFFFFF",
-        f = sbcRip(fromValue),
-        t = sbcRip(to);
-    if (!f || !t) return "red"; //ErrorCheck
-    if (h)
+    const i = parseInt;
+    const r = Math.round;
+    const th = fromValue.length > 9;
+    const h = typeof toValue === "string" ? (toValue.length > 9 ? true : toValue == "c" ? !th : false) : th;
+    const b = c < 0;
+    const p = b ? c * -1 : c;
+    const to = toValue && toValue != "c" ? toValue : b ? "#000000" : "#FFFFFF";
+    const f = sbcRip(fromValue);
+    const t = sbcRip(to);
+    if (!f || !t) {
+        return "red";
+    } // ErrorCheck
+    if (h) {
         return (
             "rgb" +
             (f[3] > -1 || t[3] > -1 ? "a(" : "(") +
@@ -97,7 +105,7 @@ export function shadeBlendConvert(
                   (f[3] > -1 && t[3] > -1 ? r(((t[3] - f[3]) * p + f[3]) * 10000) / 10000 : t[3] < 0 ? f[3] : t[3]) +
                   ")")
         );
-    else
+    } else {
         return (
             "#" +
             (
@@ -116,4 +124,5 @@ export function shadeBlendConvert(
                 .toString(16)
                 .slice(1, f[3] > -1 || t[3] > -1 ? undefined : -2)
         );
+    }
 }

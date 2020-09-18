@@ -176,8 +176,8 @@ export interface VariablesLayoutgrid {
     gutterSize?: number;
 }
 
-//## Pluggable Widgets
-//-------------------------------------------------------------------------------------------------------------------//
+// ## Pluggable Widgets
+// -------------------------------------------------------------------------------------------------------------------//
 
 interface VariablesBadgeStyles {
     color?: string;

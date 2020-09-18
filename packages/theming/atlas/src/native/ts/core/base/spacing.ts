@@ -8,7 +8,7 @@ Customizing core files will make updating Atlas much more difficult in the futur
 To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
 */
-//== Inner Spacing
+// == Inner Spacing
 export const spacingInnerSmallest: Helperclass = {
     container: {
         padding: spacing.smallest
@@ -256,7 +256,7 @@ export const spacingInnerBottomLargest: Helperclass = {
 };
 //
 //
-//== Outer Spacing
+// == Outer Spacing
 export const spacingOuterSmallest: Helperclass = {
     container: {
         margin: spacing.smallest

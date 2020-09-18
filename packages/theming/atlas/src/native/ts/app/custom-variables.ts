@@ -31,9 +31,9 @@ import {
 ==> DO NOT change the core variable file (or any other file in core), as that makes updating Atlas a lot harder in the future.
 
 */
-//== Global variables
-//## Variables to be used during styling
-//-------------------------------------------------------------------------------------------------------------------//
+// == Global variables
+// ## Variables to be used during styling
+// -------------------------------------------------------------------------------------------------------------------//
 // Brand Styles
 export const brand: VariablesBrand = {
     primary: "#264AE5",
@@ -360,8 +360,8 @@ export const layoutGrid = {
 };
 //
 //
-//== Pluggable Widgets
-//-------------------------------------------------------------------------------------------------------------------//
+// == Pluggable Widgets
+// -------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
 export const badge: VariablesBadge = {
     fontWeight: font.weightNormal,

@@ -14,9 +14,9 @@ To customize any core styling, copy the part you want to customize to styles/nat
 ========================================================================== */
 //
 //
-//== Extra Classes
-//## Helper classes to change the look and feel of the widget
-//-------------------------------------------------------------------------------------------------------------------//
+// == Extra Classes
+// ## Helper classes to change the look and feel of the widget
+// -------------------------------------------------------------------------------------------------------------------//
 // Image Overlay
 export const imageOverlay = {
     container: {
