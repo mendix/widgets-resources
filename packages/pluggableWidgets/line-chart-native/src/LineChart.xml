@@ -38,9 +38,8 @@
                                 <description>Data points within the same group form one series</description>
                                 <attributeTypes>
                                     <attributeType name="String" />
-                                    <!-- <attributeType name="Binary" />
                                     <attributeType name="Boolean" />
-                                    <attributeType name="DateTime" />
+                                    <!-- <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Enum" />
                                     <attributeType name="HashString" />

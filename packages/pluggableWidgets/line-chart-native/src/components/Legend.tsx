@@ -4,7 +4,7 @@ import { Text, View } from "react-native";
 import { LineChartStyle } from "../ui/Styles";
 
 export interface LegendProps {
-    series: Array<LegendSeries>;
+    series: LegendSeries[];
     style: LineChartStyle;
 }
 
@@ -18,7 +18,7 @@ export function Legend(props: LegendProps): ReactElement | null {
 
     const legendItems = useMemo(
         () =>
-            series.reduce<Array<ReactElement>>((result, series, index) => {
+            series.reduce<ReactElement[]>((result, series, index) => {
                 if (!(series.name && series.stylePropertyName && style.series)) {
                     return result;
                 }
@@ -32,7 +32,7 @@ export function Legend(props: LegendProps): ReactElement | null {
 
                 result.push(
                     <View key={index} style={style.legend?.item}>
-                        <View style={[{ backgroundColor: backgroundColor }, style.legend?.indicator]} />
+                        <View style={[{ backgroundColor }, style.legend?.indicator]} />
                         <Text style={style.legend?.label}>{series.name}</Text>
                     </View>
                 );
