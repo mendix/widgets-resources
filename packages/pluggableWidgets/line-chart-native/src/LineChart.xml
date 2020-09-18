@@ -18,7 +18,7 @@
             <propertyGroup caption="Data source">
                 <property key="series" type="object" isList="true" required="true">
                     <caption>Series</caption>
-                    <description></description>
+                    <description />
                     <properties>
                         <propertyGroup caption="General">
                             <property key="type" type="enumeration" defaultValue="static" required="true">
@@ -137,10 +137,6 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Chart settings">
-                <property key="title" type="textTemplate" required="false" multiline="false">
-                    <caption>Title</caption>
-                    <description />
-                </property>
                 <property key="showLegend" type="boolean" defaultValue="true">
                     <caption>Show legend</caption>
                     <description />

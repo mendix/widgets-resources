@@ -6,7 +6,6 @@ import { VictoryScatterProps } from "victory-scatter";
 
 export interface LineChartStyle {
     container?: ViewStyle;
-    title?: TextStyle;
     legend?: LineChartLegendStyle;
     chart?: VictoryChartProps["style"] & { padding?: VictoryCommonProps["padding"] };
     xAxis?: VictoryAxisCommonProps["style"] & {
@@ -36,11 +35,6 @@ export interface LineChartLegendStyle {
 export const defaultLineChartStyle: LineChartStyle = {
     container: {
         flex: 1
-    },
-    title: {
-        fontSize: 16,
-        fontWeight: "bold",
-        textAlign: "center"
     },
     legend: {
         container: {

@@ -19,7 +19,7 @@ interface GroupedDataSourceItem {
 }
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
-    const { configMode, series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
+    const { configMode, series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
@@ -198,7 +198,6 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         <LineChartComponent
             series={chartSeries}
             style={styles}
-            title={title?.value}
             showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}
             yAxisLabel={yAxisLabel?.value}
