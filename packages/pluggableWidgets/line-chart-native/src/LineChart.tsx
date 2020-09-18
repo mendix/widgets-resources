@@ -1,4 +1,5 @@
 import { createElement, ReactElement, useState, useEffect, useCallback } from "react";
+import { Big } from "big.js";
 import { all } from "deepmerge";
 import { ObjectItem, ValueStatus } from "mendix";
 import { InterpolationPropType } from "victory-core";
@@ -9,6 +10,13 @@ import { LineChart as LineChartComponent, LineChartSeries, LineChartDataPoint } 
 import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 
 import { LineChartProps, SeriesType } from "../typings/LineChartProps";
+
+interface GroupedDataSourceItem {
+    groupByAttributeValue: string | boolean | Date | Big;
+    seriesNameAttributeValue?: string;
+    stylePropertyNameAttributeValue?: string;
+    items: ObjectItem[];
+}
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
     const { configMode, series, showLegend, style, title, xAxisLabel, yAxisLabel } = props;
@@ -110,62 +118,61 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         [convertToDataPoints]
     );
 
-    const groupDataSourceItems = useCallback((series: SeriesType, allDataAvailable: boolean): Array<{
-        groupByAttributeValue: string | boolean;
-        seriesNameAttributeValue?: string;
-        stylePropertyNameAttributeValue?: string;
-        items: ObjectItem[];
-    }> => {
-        const { dataSource, groupByAttribute, seriesNameAttribute, stylePropertyNameAttribute } = series;
+    const groupDataSourceItems = useCallback(
+        (series: SeriesType, allDataAvailable: boolean): GroupedDataSourceItem[] => {
+            const { dataSource, groupByAttribute, seriesNameAttribute, stylePropertyNameAttribute } = series;
 
-        return ensure(dataSource.items).reduce<
-            Array<{
-                groupByAttributeValue: string | boolean;
-                seriesNameAttributeValue?: string;
-                stylePropertyNameAttributeValue?: string;
-                items: ObjectItem[];
-            }>
-        >((dataSourceItemsResult, item) => {
-            if (!allDataAvailable) {
-                return dataSourceItemsResult;
-            }
+            return ensure(dataSource.items).reduce<GroupedDataSourceItem[]>((dataSourceItemsResult, item) => {
+                if (!allDataAvailable) {
+                    return dataSourceItemsResult;
+                }
 
-            const groupByAttributeValue = ensure(groupByAttribute)(item);
+                const groupByAttributeValue = ensure(groupByAttribute)(item);
 
-            if (groupByAttributeValue.status !== ValueStatus.Available) {
-                allDataAvailable = false;
-                return dataSourceItemsResult;
-            }
-
-            const group = dataSourceItemsResult.find(
-                group => group.groupByAttributeValue === groupByAttributeValue.value
-            );
-
-            if (group) {
-                group.items.push(item);
-            } else {
-                const seriesNameAttributeValue = ensure(seriesNameAttribute)(item);
-                const stylePropertyNameAttributeValue = ensure(stylePropertyNameAttribute)(item);
-
-                if (
-                    stylePropertyNameAttributeValue.status !== ValueStatus.Available ||
-                    seriesNameAttributeValue.status !== ValueStatus.Available
-                ) {
+                if (groupByAttributeValue.status !== ValueStatus.Available) {
                     allDataAvailable = false;
                     return dataSourceItemsResult;
                 }
 
-                dataSourceItemsResult.push({
-                    groupByAttributeValue: ensure(groupByAttributeValue.value),
-                    seriesNameAttributeValue: seriesNameAttributeValue.value,
-                    stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
-                    items: [item]
+                const group = dataSourceItemsResult.find(group => {
+                    if (groupByAttributeValue.value instanceof Date && group.groupByAttributeValue instanceof Date) {
+                        return group.groupByAttributeValue.getTime() === ensure(groupByAttributeValue.value).getTime();
+                    } else if (
+                        groupByAttributeValue.value instanceof Big &&
+                        group.groupByAttributeValue instanceof Big
+                    ) {
+                        return group.groupByAttributeValue.eq(ensure(groupByAttributeValue.value));
+                    }
+                    return group.groupByAttributeValue === groupByAttributeValue.value;
                 });
-            }
 
-            return dataSourceItemsResult;
-        }, []);
-    }, []);
+                if (group) {
+                    group.items.push(item);
+                } else {
+                    const seriesNameAttributeValue = ensure(seriesNameAttribute)(item);
+                    const stylePropertyNameAttributeValue = ensure(stylePropertyNameAttribute)(item);
+
+                    if (
+                        stylePropertyNameAttributeValue.status !== ValueStatus.Available ||
+                        seriesNameAttributeValue.status !== ValueStatus.Available
+                    ) {
+                        allDataAvailable = false;
+                        return dataSourceItemsResult;
+                    }
+
+                    dataSourceItemsResult.push({
+                        groupByAttributeValue: ensure(groupByAttributeValue.value),
+                        seriesNameAttributeValue: seriesNameAttributeValue.value,
+                        stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
+                        items: [item]
+                    });
+                }
+
+                return dataSourceItemsResult;
+            }, []);
+        },
+        []
+    );
 
     const loadDynamicSeries = useCallback(
         (
@@ -173,12 +180,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             allDataAvailable: boolean,
             series: SeriesType,
             interpolation: InterpolationPropType,
-            groupedDataSourceItems: Array<{
-                groupByAttributeValue: string | boolean;
-                seriesNameAttributeValue?: string;
-                stylePropertyNameAttributeValue?: string;
-                items: ObjectItem[];
-            }>
+            groupedDataSourceItems: GroupedDataSourceItem[]
         ): void => {
             groupedDataSourceItems.forEach(itemGroup => {
                 loadedSeries.push({
