@@ -1,13 +1,13 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 import { executeAction } from "@widgets-resources/piw-utils";
-import { createElement, ReactElement, useRef } from "react";
+import { createElement, ReactElement, useCallback, useRef } from "react";
 import { View, Text } from "react-native";
 import SignatureScreen, { SignatureViewRef } from "react-native-signature-canvas";
 import { extractStyles } from "../../../tools/util-widgets/src/styles";
 import { Touchable } from "../components/Touchable";
 
 import { SignatureProps } from "../typings/SignatureProps";
-import { SignatureStyle, defaultSignatureStyle } from "./ui/Styles";
+import { SignatureStyle, defaultSignatureStyle, webStyles } from "./ui/Styles";
 
 export type Props = SignatureProps<SignatureStyle>;
 
@@ -29,42 +29,14 @@ export function Signature(props: Props): ReactElement {
         props.buttonCaptionClear && props.buttonCaptionClear.value ? props.buttonCaptionClear.value : "Clear";
     const buttonCaptionSave =
         props.buttonCaptionSave && props.buttonCaptionSave.value ? props.buttonCaptionSave.value : "Save";
-    const webStyles = `
-                    .m-signature-pad {
-                        border: none;
-                    }
-                    .m-signature-pad--body {
-                      left: 0;
-                      right: 0;
-                      top: 0;
-                      bottom: 0;
-                      border: none;
-                    }
-                    .m-signature-pad--body canvas {
-                        border-radius: 0;
-                        box-shadow: none;
-                    }
-                    .m-signature-pad--footer {
-                        display: none;
-                    }
-                `;
 
-    const handleSignature = (base64signature: string): void => {
-        props.imageAttribute.setValue(base64signature);
-        executeAction(props.onSave);
-    };
-
-    const handleEmpty = (): void => {
-        executeAction(props.onEmpty);
-    };
-
-    const handleEnd = (): void => {
-        executeAction(props.onEnd);
-    };
-
-    const handleClear = (): void => {
-        executeAction(props.onClear);
-    };
+    const handleSignature = useCallback(
+        (base64signature: string): void => {
+            props.imageAttribute.setValue(base64signature);
+            executeAction(props.onSave);
+        },
+        [props.imageAttribute, props.onSave]
+    );
 
     const onPressClearHandler = (): void => {
         ref.current?.clearSignature();
@@ -79,10 +51,10 @@ export function Signature(props: Props): ReactElement {
             <SignatureScreen
                 ref={ref}
                 autoClear
-                onEmpty={handleEmpty}
-                onEnd={handleEnd}
+                onEmpty={() => executeAction(props.onEmpty)}
+                onEnd={() => executeAction(props.onEnd)}
                 onOK={handleSignature}
-                onClear={handleClear}
+                onClear={() => executeAction(props.onClear)}
                 webStyle={webStyles}
                 {...signatureProps}
             />

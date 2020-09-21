@@ -26,7 +26,6 @@ const buttonContainer: ButtonContainerType = {
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 8,
-
     paddingVertical: 8,
     paddingHorizontal: 8
 };
@@ -71,3 +70,23 @@ export const defaultSignatureStyle: SignatureStyle = {
         fontWeight: "bold"
     }
 };
+
+export const webStyles = `
+                    .m-signature-pad {
+                        border: none;
+                    }
+                    .m-signature-pad--body {
+                      left: 0;
+                      right: 0;
+                      top: 0;
+                      bottom: 0;
+                      border: none;
+                    }
+                    .m-signature-pad--body canvas {
+                        border-radius: 0;
+                        box-shadow: none;
+                    }
+                    .m-signature-pad--footer {
+                        display: none;
+                    }
+                `;
