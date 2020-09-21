@@ -892,6 +892,7 @@ exports[`Signature Android renders with custom styles 1`] = `
       Object {
         "backgroundColor": "red",
         "flexDirection": "row",
+        "paddingTop": 16,
       }
     }
   >
@@ -1819,7 +1820,7 @@ exports[`Signature Android renders with default styles 1`] = `
     signaturePad = new SignaturePad(canvas, {
         onBegin: () => window.ReactNativeWebView.postMessage(\\"BEGIN\\"),
         onEnd: () => window.ReactNativeWebView.postMessage(\\"END\\"),
-        penColor: 'blue',
+        penColor: 'black',
         backgroundColor: 'white',
     });
 
@@ -1898,6 +1899,7 @@ exports[`Signature Android renders with default styles 1`] = `
     style={
       Object {
         "flexDirection": "row",
+        "paddingTop": 16,
       }
     }
   >
