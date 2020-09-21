@@ -1,0 +1,11 @@
+{
+    "extends": "../../../tools/pluggable-widgets-tools/configs/tsconfig.base",
+    "include": [
+      "./dev-mode.ts"
+    ],
+    "compilerOptions": {
+        "target": "ES2019",
+        "lib": ["ES2017"],
+        "module": "CommonJS"
+    }
+}
