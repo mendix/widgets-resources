@@ -15,7 +15,7 @@ describe("Timeline", () => {
 
     const basicItem: BasicItemType = {
         description: "Basic description",
-        eventDateTime: new Date(1453, 4, 29).toDateString(),
+        eventDateTime: "Basic event Time",
         title: "Basic title"
     };
 

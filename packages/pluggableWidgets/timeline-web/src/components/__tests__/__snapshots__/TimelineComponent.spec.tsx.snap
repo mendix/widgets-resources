@@ -31,7 +31,7 @@ exports[`Timeline hides the timeline header 1`] = `
               className="date-time-wrapper"
             >
               <p>
-                Sun May 29 1453
+                Basic event Time
               </p>
             </div>
             <div
@@ -74,7 +74,7 @@ exports[`Timeline hides the timeline header 1`] = `
               className="date-time-wrapper"
             >
               <p>
-                Sun May 29 1453
+                Basic event Time
               </p>
             </div>
             <div
@@ -137,7 +137,7 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
               className="date-time-wrapper"
             >
               <p>
-                Sun May 29 1453
+                Basic event Time
               </p>
             </div>
             <div
@@ -180,7 +180,7 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
               className="date-time-wrapper"
             >
               <p>
-                Sun May 29 1453
+                Basic event Time
               </p>
             </div>
             <div

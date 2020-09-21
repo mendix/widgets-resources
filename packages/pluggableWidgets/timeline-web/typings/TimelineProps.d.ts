@@ -26,9 +26,10 @@ export interface TimelineContainerProps {
     renderMode: RenderModeEnum;
     data: ListValue;
     eventTime: ListAttributeValue<Date>;
+    onPress?: ListActionValue;
     showGroupDivider: boolean;
     groupByKey: GroupByKeyEnum;
-    onPress?: ListActionValue;
+    time?: ListExpressionValue<string>;
     title?: ListExpressionValue<string>;
     description?: ListExpressionValue<string>;
     icon?: DynamicValue<WebIcon>;
@@ -45,9 +46,10 @@ export interface TimelinePreviewProps {
     renderMode: RenderModeEnum;
     data: {} | null;
     eventTime: string;
+    onPress: {} | null;
     showGroupDivider: boolean;
     groupByKey: GroupByKeyEnum;
-    onPress: {} | null;
+    time: string;
     title: string;
     description: string;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;

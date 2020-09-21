@@ -22,12 +22,18 @@
                     <description/>
                 </property>
                 <property key="eventTime" type="attribute" dataSource="data">
-                    <caption>Event date time attribute</caption>
+                    <caption>Event date attribute</caption>
                     <description>Will be used for grouping events based on date.</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
                     </attributeTypes>
                 </property>
+                <property key="onPress" type="action" dataSource="data" required="false">
+                    <caption>On press</caption>
+                    <description>Fired when the event is clicked.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Content">
                 <property key="showGroupDivider" type="boolean" defaultValue="true">
                     <caption>Show group divider</caption>
                     <description/>
@@ -41,12 +47,10 @@
                         <enumerationValue key="year">Year</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="onPress" type="action" dataSource="data" required="false">
-                    <caption>On press</caption>
-                    <description>Fired when the event is clicked.</description>
+                <property key="time" type="textTemplate" dataSource="data" required="false">
+                    <caption>Time</caption>
+                    <description />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Event">
                 <property key="title" type="textTemplate" dataSource="data" required="false">
                     <caption>Title</caption>
                     <description />

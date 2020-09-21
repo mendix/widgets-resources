@@ -60,12 +60,14 @@ function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
                 {event.icon?.value ? <Icon icon={event.icon.value} /> : <div className="timeline-icon-circle" />}
             </div>
             <div className="flex-container content-wrapper">
-                <div className="date-time-wrapper">
-                    <p>{event.eventDateTime}</p>
-                </div>
+                {event.eventDateTime && (
+                    <div className="date-time-wrapper">
+                        <p>{event.eventDateTime}</p>
+                    </div>
+                )}
                 <div className="flex-container info-wrapper">
-                    <p className="title">{event.title}</p>
-                    <p className="description">{event.description}</p>
+                    {event.title && <p className="title">{event.title}</p>}
+                    {event.description && <p className="description">{event.description}</p>}
                 </div>
             </div>
         </li>

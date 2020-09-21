@@ -37,19 +37,17 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
             let dateFormatter = eventTime.formatter;
             let monthFormatter = eventTime.formatter;
             let yearFormatter = eventTime.formatter;
-            let timeFormatter = eventTime.formatter;
 
             if (dateFormatter?.type === "datetime") {
                 dateFormatter = dateFormatter.withConfig({ type: "date" });
                 monthFormatter = dateFormatter.withConfig({ type: "custom", pattern: "MMM" });
                 yearFormatter = dateFormatter.withConfig({ type: "custom", pattern: "YYYY" });
-                timeFormatter = dateFormatter.withConfig({ type: "time" });
             }
             if (props.renderMode === "basic") {
                 constructedItem = {
                     icon: props.icon,
                     title: props.title?.(item)?.value,
-                    eventDateTime: timeFormatter?.format(date),
+                    eventDateTime: props.time?.(item)?.value,
                     description: props.description?.(item)?.value,
                     action: props.onPress?.(item)?.execute
                 };

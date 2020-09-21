@@ -3,7 +3,7 @@ import { TimelinePreviewProps } from "../typings/TimelineProps";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
     if (values.renderMode === "custom") {
-        hidePropertiesIn(defaultProperties, values, ["title", "description", "icon"]);
+        hidePropertiesIn(defaultProperties, values, ["title", "description", "icon", "time"]);
     } else {
         hidePropertiesIn(defaultProperties, values, [
             "customIcon",

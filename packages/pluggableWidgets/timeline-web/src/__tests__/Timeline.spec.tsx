@@ -19,6 +19,7 @@ describe("Timeline", () => {
         showGroupDivider: true,
         title: () => dynamicValue<string>("title1"),
         description: () => dynamicValue<string>("description"),
+        time: () => dynamicValue<string>("time"),
         customIcon: () => <img src={"test"} />,
         customGroupDivider: () => <p>Custom Divider</p>,
         customTitle: () => <p>Custom Title</p>,
