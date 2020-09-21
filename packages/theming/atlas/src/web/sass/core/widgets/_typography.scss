@@ -1,0 +1,75 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Typography
+========================================================================== */
+
+p {
+    line-height: $line-height-base * 1.25;
+}
+
+.mx-title {
+    margin: $font-header-margin;
+    color: $font-color-header;
+    font-size: $font-size-h1;
+    font-weight: $font-weight-header;
+}
+
+h1,
+.h1,
+.h1 > * {
+    font-size: $font-size-h1;
+}
+
+h2,
+.h2,
+.h2 > * {
+    font-size: $font-size-h2;
+}
+
+h3,
+.h3,
+.h3 > * {
+    font-size: $font-size-h3;
+}
+
+h4,
+.h4,
+.h4 > * {
+    font-size: $font-size-h4;
+}
+
+h5,
+.h5,
+.h5 > * {
+    font-size: $font-size-h5;
+}
+
+h6,
+.h6,
+.h6 > * {
+    font-size: $font-size-h6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    margin: $font-header-margin;
+    color: $font-color-header;
+    font-weight: $font-weight-header;
+    line-height: 1.3;
+}

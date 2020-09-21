@@ -1,0 +1,28 @@
+{
+    "name": "@mendix/atlas-ui-framework",
+    "version": "3.0.0",
+    "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
+    "main": "",
+    "scripts": {
+        "bump:patch": "node ./scripts/bump-patch.js",
+        "bump:minor": "node ./scripts/bump-minor.js",
+        "bump:major": "node ./scripts/bump-major.js",
+        "clean:css": "shx rm -rf ./src/web/css",
+        "copy:css:assets": "shx mkdir -p ./src/web/css/fonts && shx cp ./src/web/sass/core/_legacy/bootstrap/fonts/* ./src/web/css/fonts",
+        "build:css": "sass --embed-sources --no-charset -s compressed ./src/web/sass/main.scss ./src/web/css/main.css",
+        "build:js": "tsc -p ./tsconfig.json",
+        "build": "npm run clean:css && npm run copy:css:assets && npm run build:css && npm run build:js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
+    "author": "Mendix",
+    "license": "MIT",
+    "devDependencies": {
+        "sass": "^1.26.10",
+        "typescript": "^3.8.3",
+        "shx": "^0.3.2"
+    },
+    "dependencies": {}
+}

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap --hoist --strict",
-    "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx,scss}\"",
     "format": "pretty-quick --staged",
     "lint": "npm run lint:src && lerna run lint --stream --concurrency 1",
     "lint:src": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages/*/*/src",
