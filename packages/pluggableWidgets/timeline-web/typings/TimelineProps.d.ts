@@ -4,7 +4,15 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties } from "react";
-import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue, WebIcon } from "mendix";
+import {
+    DynamicValue,
+    ListValue,
+    ListActionValue,
+    ListAttributeValue,
+    ListExpressionValue,
+    ListWidgetValue,
+    WebIcon
+} from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
 
@@ -20,8 +28,9 @@ export interface TimelineContainerProps {
     eventTime: ListAttributeValue<Date>;
     showGroupDivider: boolean;
     groupByKey: GroupByKeyEnum;
-    title?: ListAttributeValue<string>;
-    description?: ListAttributeValue<string>;
+    onPress?: ListActionValue;
+    title?: ListExpressionValue<string>;
+    description?: ListExpressionValue<string>;
     icon?: DynamicValue<WebIcon>;
     customIcon?: ListWidgetValue;
     customGroupDivider?: ListWidgetValue;
@@ -38,6 +47,7 @@ export interface TimelinePreviewProps {
     eventTime: string;
     showGroupDivider: boolean;
     groupByKey: GroupByKeyEnum;
+    onPress: {} | null;
     title: string;
     description: string;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;

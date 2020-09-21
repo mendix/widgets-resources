@@ -1,13 +1,14 @@
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 import TimelineComponent from "./components/TimelineComponent";
-import { createElement, ReactNode } from "react";
-import { ItemType } from "./Timeline";
+import { createElement } from "react";
+import { BasicItemType, CustomItemType, ItemType } from "./Timeline";
+import { dynamicValue } from "@widgets-resources/piw-utils";
 
 declare function require(name: string): string;
 
 export function preview(props: TimelinePreviewProps) {
     const structuredEvents = () => {
-        const eventsMap = new Map<string | ReactNode, ItemType[]>();
+        const eventsMap = new Map<string, ItemType[]>();
 
         Array.from({ length: 5 }).forEach(() => {
             let constructedItem: ItemType;
@@ -19,11 +20,11 @@ export function preview(props: TimelinePreviewProps) {
 
             if (props.renderMode === "basic") {
                 constructedItem = {
-                    icon: props.icon,
+                    icon: dynamicValue(props.icon),
                     title: props.title,
-                    time: date,
+                    eventDateTime: date,
                     description: props.description
-                };
+                } as BasicItemType;
             } else {
                 constructedItem = {
                     icon: (
@@ -51,7 +52,7 @@ export function preview(props: TimelinePreviewProps) {
                             <div />
                         </props.customDescription.renderer>
                     )
-                };
+                } as CustomItemType;
             }
 
             const currentDates = eventsMap.get(date);

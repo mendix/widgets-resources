@@ -5,7 +5,7 @@ $description-color: #6c717c;
 $spacing-large: 30px;
 $gutter-size: 15px;
 $icon-size: 18px;
-$icon-position-left: -($icon-size / 2);
+$icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
 
 .timeline-date-header {
     display: inline-block;
@@ -31,8 +31,18 @@ $icon-position-left: -($icon-size / 2);
 
 .timeline-event {
     position: relative;
-    padding-left: ($gutter-size * 2);
-    padding-bottom: 20px;
+    margin-left: ($gutter-size * 2);
+    margin-bottom: 20px;
+
+    &.clickable {
+        cursor: pointer;
+        color: #0595db;
+        transition: background 0.8s;
+        &:hover {
+            text-decoration: underline;
+            color: #036290;
+        }
+    }
 }
 
 .icon-wrapper {

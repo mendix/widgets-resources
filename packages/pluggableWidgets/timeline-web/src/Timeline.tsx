@@ -7,23 +7,25 @@ import TimelineComponent from "./components/TimelineComponent";
 export interface BasicItemType {
     icon?: DynamicValue<WebIcon>;
     title?: string;
-    time?: string;
+    eventDateTime?: string;
     description?: string;
+    action?: () => void;
 }
 
 export interface CustomItemType {
     icon?: ReactNode;
-    groupDivider?: ReactNode;
     title?: ReactNode;
     eventDateTime?: ReactNode;
     description?: ReactNode;
+    action?: () => void;
+    groupDivider?: ReactNode;
 }
 
 export type ItemType = BasicItemType | CustomItemType;
 
 export default function Timeline(props: TimelineContainerProps): ReactElement {
-    const structuredEvents = useMemo((): Map<string | ReactNode, ItemType[]> => {
-        const eventsMap = new Map<string | ReactNode, ItemType[]>();
+    const structuredEvents = useMemo((): Map<string, ItemType[]> => {
+        const eventsMap = new Map<string, ItemType[]>();
 
         props.data.items?.forEach(item => {
             let constructedItem: ItemType;
@@ -43,13 +45,13 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                 yearFormatter = dateFormatter.withConfig({ type: "custom", pattern: "YYYY" });
                 timeFormatter = dateFormatter.withConfig({ type: "time" });
             }
-
             if (props.renderMode === "basic") {
                 constructedItem = {
                     icon: props.icon,
-                    title: props.title?.(item).displayValue,
-                    time: timeFormatter?.format(eventTime.value),
-                    description: props.description?.(item).displayValue
+                    title: props.title?.(item)?.value,
+                    eventDateTime: timeFormatter?.format(date),
+                    description: props.description?.(item)?.value,
+                    action: props.onPress?.(item)?.execute
                 };
             } else {
                 constructedItem = {
@@ -57,20 +59,21 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                     groupDivider: props.customGroupDivider?.(item),
                     title: props.customTitle?.(item),
                     eventDateTime: props.customEventDateTime?.(item),
-                    description: props.customDescription?.(item)
+                    description: props.customDescription?.(item),
+                    action: props.onPress?.(item)?.execute
                 };
             }
 
             let groupKey: string;
             switch (props.groupByKey) {
                 case "month":
-                    groupKey = `${monthFormatter.format(eventTime.value)} / ${yearFormatter.format(eventTime.value)}`;
+                    groupKey = `${monthFormatter.format(date)} / ${yearFormatter.format(date)}`;
                     break;
                 case "year":
-                    groupKey = yearFormatter.format(eventTime.value);
+                    groupKey = yearFormatter.format(date);
                     break;
                 default:
-                    groupKey = dateFormatter?.format(eventTime.value);
+                    groupKey = dateFormatter?.format(date);
                     break;
             }
 

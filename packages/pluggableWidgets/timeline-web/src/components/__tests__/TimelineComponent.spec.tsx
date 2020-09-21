@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import { createElement, ReactNode } from "react";
+import { createElement } from "react";
 import { dynamicValue } from "@widgets-resources/piw-utils";
 import TimelineComponent, { TimelineComponentProps } from "../TimelineComponent";
 import { BasicItemType, CustomItemType } from "../../Timeline";
@@ -11,11 +11,11 @@ jest.mock("mendix/components/web/Icon", () =>
 
 describe("Timeline", () => {
     const basicData = new Map<string, BasicItemType[]>();
-    const customData = new Map<ReactNode, CustomItemType[]>();
+    const customData = new Map<string, CustomItemType[]>();
 
     const basicItem: BasicItemType = {
         description: "Basic description",
-        time: new Date(1453, 4, 29).toDateString(),
+        eventDateTime: new Date(1453, 4, 29).toDateString(),
         title: "Basic title"
     };
 

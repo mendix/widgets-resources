@@ -15,6 +15,7 @@ exports[`Timeline hides the timeline header 1`] = `
         <li
           className="timeline-event"
           key="0"
+          onClick={[Function]}
         >
           <div
             className="icon-wrapper"
@@ -52,6 +53,7 @@ exports[`Timeline hides the timeline header 1`] = `
         <li
           className="timeline-event"
           key="1"
+          onClick={[Function]}
         >
           <div
             className="icon-wrapper"
@@ -119,6 +121,7 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
         <li
           className="timeline-event"
           key="0"
+          onClick={[Function]}
         >
           <div
             className="icon-wrapper"
@@ -156,6 +159,7 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
         <li
           className="timeline-event"
           key="1"
+          onClick={[Function]}
         >
           <div
             className="icon-wrapper"
@@ -223,6 +227,7 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
         <li
           className="timeline-event"
           key="0"
+          onClick={[Function]}
         >
           <div
             className="icon-wrapper"
@@ -256,6 +261,7 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
         <li
           className="timeline-event"
           key="1"
+          onClick={[Function]}
         >
           <div
             className="icon-wrapper"
