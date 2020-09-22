@@ -7,6 +7,6 @@
         "target": "ES2019",
         "lib": ["ES2017"],
         "sourceMap": false,
-        "outDir": "./dist/native/js"
+        "outDir": "./dist/theme/styles/native"
     }
 }

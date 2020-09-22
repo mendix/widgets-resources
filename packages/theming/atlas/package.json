@@ -6,12 +6,8 @@
         "bump:patch": "node ./scripts/bump-patch.js",
         "bump:minor": "node ./scripts/bump-minor.js",
         "bump:major": "node ./scripts/bump-major.js",
-        "clean:dist": "shx rm -rf ./dist",
-        "copy:css:assets": "shx mkdir -p ./dist/web/css/fonts && shx cp ./src/web/sass/core/_legacy/bootstrap/fonts/* ./dist/web/css/fonts",
-        "build:css": "sass --embed-sources --no-charset -s compressed ./src/web/sass/main.scss ./dist/web/css/main.css",
-        "build:js": "tsc -p ./tsconfig.json",
-        "build": "npm run clean:dist && npm run copy:css:assets && npm run build:css && npm run build:js",
-        "start": "ts-node --project ./scripts/tsconfig.json ./scripts/dev-mode.ts"
+        "build": "node ./scripts/build.js",
+        "start": "node ./scripts/build.js development"
     },
     "repository": {
         "type": "git",
@@ -21,13 +17,11 @@
     "license": "MIT",
     "devDependencies": {
         "sass": "^1.26.10",
-        "@types/sass": "^1.16.0",
-        "@types/fibers": "^3.1.0",
         "typescript": "^3.8.3",
         "shx": "^0.3.2",
-        "fibers": "^5.0.0",
-        "ts-node": "^8.10.2",
-        "chokidar": "^3.4.2"
+        "shelljs": "^0.8.4",
+        "copy-and-watch": "^0.1.5",
+        "concurrently": "^5.0.1"
     },
     "dependencies": {}
 }
