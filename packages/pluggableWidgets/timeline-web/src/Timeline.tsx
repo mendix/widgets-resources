@@ -49,7 +49,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                     title: props.title?.(item)?.value,
                     eventDateTime: props.time?.(item)?.value,
                     description: props.description?.(item)?.value,
-                    action: props.onPress?.(item)?.execute
+                    action: props.onClick?.(item)?.execute
                 };
             } else {
                 constructedItem = {
@@ -58,7 +58,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                     title: props.customTitle?.(item),
                     eventDateTime: props.customEventDateTime?.(item),
                     description: props.customDescription?.(item),
-                    action: props.onPress?.(item)?.execute
+                    action: props.onClick?.(item)?.execute
                 };
             }
 

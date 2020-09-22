@@ -11,45 +11,24 @@
             <propertyGroup caption="General">
                 <property key="renderMode" type="enumeration" defaultValue="basic">
                     <caption>Render</caption>
-                    <description>Basic: creates a timeline based on the title, description and icon attributes. Custom: free to model timeline.</description>
+                    <description>Basic: basic timeline based on the configured properties. Custom: free to model timeline.</description>
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Data source">
                 <property key="data" type="datasource" isList="true">
                     <caption>Data source</caption>
                     <description/>
                 </property>
                 <property key="eventTime" type="attribute" dataSource="data">
-                    <caption>Event date attribute</caption>
+                    <caption>Datetime attribute</caption>
                     <description>Will be used for grouping events based on date.</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
                     </attributeTypes>
-                </property>
-                <property key="onPress" type="action" dataSource="data" required="false">
-                    <caption>On press</caption>
-                    <description>Fired when the event is clicked.</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Content">
-                <property key="showGroupDivider" type="boolean" defaultValue="true">
-                    <caption>Show group divider</caption>
-                    <description/>
-                </property>
-                <property key="groupByKey" type="enumeration" defaultValue="day">
-                    <caption>Group By</caption>
-                    <description>Group events based on day, month or year.</description>
-                    <enumerationValues>
-                        <enumerationValue key="day">Day</enumerationValue>
-                        <enumerationValue key="month">Month</enumerationValue>
-                        <enumerationValue key="year">Year</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="time" type="textTemplate" dataSource="data" required="false">
-                    <caption>Time</caption>
-                    <description />
                 </property>
                 <property key="title" type="textTemplate" dataSource="data" required="false">
                     <caption>Title</caption>
@@ -59,9 +38,34 @@
                     <caption>Description</caption>
                     <description />
                 </property>
+                <property key="time" type="textTemplate" dataSource="data" required="false">
+                    <caption>Event date/time</caption>
+                    <description />
+                </property>
                 <property key="icon" type="icon" required="false">
                     <caption>Icon</caption>
                     <description>If no icon is configured, a circle will be rendered.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Appearance">
+                <property key="groupByKey" type="enumeration" defaultValue="day">
+                    <caption>Group by</caption>
+                    <description>Group events based on day, month or year.</description>
+                    <enumerationValues>
+                        <enumerationValue key="day">Day</enumerationValue>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="year">Year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="showGroupDivider" type="boolean" defaultValue="true">
+                    <caption>Show group divider</caption>
+                    <description>Shows a text between grouped events based on group by option.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action" dataSource="data" required="false">
+                    <caption>On click</caption>
+                    <description/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Custom">
@@ -87,5 +91,6 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+
     </properties>
 </widget>

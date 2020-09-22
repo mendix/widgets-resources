@@ -9,7 +9,7 @@ export interface TimelineComponentProps {
     data: Map<string, ItemType[]>;
     renderMode: RenderModeEnum;
     showGroupDivider: boolean;
-    onPress?: ActionValue;
+    onClick?: ActionValue;
 }
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
