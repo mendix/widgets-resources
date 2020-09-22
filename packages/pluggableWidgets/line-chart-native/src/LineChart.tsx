@@ -30,37 +30,6 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
     const [chartSeries, setChartSeries] = useState<LineChartSeries[]>([]);
 
-    useEffect(() => {
-        const dataLoadingStatus: DataLoadingStatus = { dataAvailable: true };
-
-        const chartSeriesResult = series.reduce<LineChartSeries[]>((result, series) => {
-            if (!dataLoadingStatus.dataAvailable) {
-                return result;
-            }
-
-            const { dataSource, interpolation, type } = series;
-
-            if (dataSource.status !== ValueStatus.Available) {
-                dataLoadingStatus.dataAvailable = false;
-                return result;
-            }
-
-            if (type === "static") {
-                loadStaticSeries(result, dataLoadingStatus, series, interpolation);
-                return result;
-            }
-
-            const groupedDataSourceItems = groupDataSourceItems(series, dataLoadingStatus);
-            loadDynamicSeries(result, dataLoadingStatus, series, interpolation, groupedDataSourceItems);
-            return result;
-        }, []);
-
-        if (dataLoadingStatus.dataAvailable) {
-            chartSeriesResult.reverse();
-            setChartSeries(chartSeriesResult);
-        }
-    }, [series]);
-
     const convertToDataPoints = useCallback(
         (items: ObjectItem[], series: SeriesType, dataLoadingStatus: DataLoadingStatus): LineChartDataPoint[] => {
             const { xValue, yValue } = series;
@@ -185,6 +154,37 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         },
         [convertToDataPoints]
     );
+
+    useEffect(() => {
+        const dataLoadingStatus: DataLoadingStatus = { dataAvailable: true };
+
+        const chartSeriesResult = series.reduce<LineChartSeries[]>((result, series) => {
+            if (!dataLoadingStatus.dataAvailable) {
+                return result;
+            }
+
+            const { dataSource, interpolation, type } = series;
+
+            if (dataSource.status !== ValueStatus.Available) {
+                dataLoadingStatus.dataAvailable = false;
+                return result;
+            }
+
+            if (type === "static") {
+                loadStaticSeries(result, dataLoadingStatus, series, interpolation);
+                return result;
+            }
+
+            const groupedDataSourceItems = groupDataSourceItems(series, dataLoadingStatus);
+            loadDynamicSeries(result, dataLoadingStatus, series, interpolation, groupedDataSourceItems);
+            return result;
+        }, []);
+
+        if (dataLoadingStatus.dataAvailable) {
+            chartSeriesResult.reverse();
+            setChartSeries(chartSeriesResult);
+        }
+    }, [series, loadStaticSeries, groupDataSourceItems, loadDynamicSeries, setChartSeries]);
 
     return (xAxisLabel?.status === ValueStatus.Loading && !xAxisLabel.value) ||
         (yAxisLabel?.status === ValueStatus.Loading && !yAxisLabel.value) ? null : (
