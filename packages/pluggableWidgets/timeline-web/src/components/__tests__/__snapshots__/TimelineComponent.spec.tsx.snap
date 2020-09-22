@@ -9,41 +9,43 @@ exports[`Timeline hides the timeline header 1`] = `
     key="Sun May 29 1453"
   >
     <div
-      className="timeline-events no-divider"
+      className="widget-timeline-events widget-timeline-no-divider"
     >
       <ul>
         <li
-          className="timeline-event"
+          className="widget-timeline-event"
           key="0"
           onClick={[Function]}
         >
           <div
-            className="icon-wrapper"
+            className="widget-timeline-icon-wrapper"
           >
             <div
-              className="timeline-icon-circle"
+              className="widget-timeline-icon-circle"
             />
           </div>
           <div
-            className="flex-container content-wrapper"
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
           >
             <div
-              className="date-time-wrapper"
+              className="widget-timeline-date-time-wrapper"
             >
-              <p>
+              <p
+                className="widget-eventTime"
+              >
                 Basic event Time
               </p>
             </div>
             <div
-              className="flex-container info-wrapper"
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
             >
               <p
-                className="title"
+                className="widget-timeline-title"
               >
                 Basic title
               </p>
               <p
-                className="description"
+                className="widget-timeline-description"
               >
                 Basic description
               </p>
@@ -51,12 +53,12 @@ exports[`Timeline hides the timeline header 1`] = `
           </div>
         </li>
         <li
-          className="timeline-event"
+          className="widget-timeline-event"
           key="1"
           onClick={[Function]}
         >
           <div
-            className="icon-wrapper"
+            className="widget-timeline-icon-wrapper"
           >
             <Component
               icon={
@@ -68,25 +70,27 @@ exports[`Timeline hides the timeline header 1`] = `
             />
           </div>
           <div
-            className="flex-container content-wrapper"
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
           >
             <div
-              className="date-time-wrapper"
+              className="widget-timeline-date-time-wrapper"
             >
-              <p>
+              <p
+                className="widget-eventTime"
+              >
                 Basic event Time
               </p>
             </div>
             <div
-              className="flex-container info-wrapper"
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
             >
               <p
-                className="title"
+                className="widget-timeline-title"
               >
                 Basic title
               </p>
               <p
-                className="description"
+                className="widget-timeline-description"
               >
                 Basic description
               </p>
@@ -108,48 +112,50 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
     key="Sun May 29 1453"
   >
     <div
-      className="timeline-date-header"
+      className="widget-timeline-date-header"
     >
       <span>
         Sun May 29 1453
       </span>
     </div>
     <div
-      className="timeline-events"
+      className="widget-timeline-events"
     >
       <ul>
         <li
-          className="timeline-event"
+          className="widget-timeline-event"
           key="0"
           onClick={[Function]}
         >
           <div
-            className="icon-wrapper"
+            className="widget-timeline-icon-wrapper"
           >
             <div
-              className="timeline-icon-circle"
+              className="widget-timeline-icon-circle"
             />
           </div>
           <div
-            className="flex-container content-wrapper"
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
           >
             <div
-              className="date-time-wrapper"
+              className="widget-timeline-date-time-wrapper"
             >
-              <p>
+              <p
+                className="widget-eventTime"
+              >
                 Basic event Time
               </p>
             </div>
             <div
-              className="flex-container info-wrapper"
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
             >
               <p
-                className="title"
+                className="widget-timeline-title"
               >
                 Basic title
               </p>
               <p
-                className="description"
+                className="widget-timeline-description"
               >
                 Basic description
               </p>
@@ -157,12 +163,12 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
           </div>
         </li>
         <li
-          className="timeline-event"
+          className="widget-timeline-event"
           key="1"
           onClick={[Function]}
         >
           <div
-            className="icon-wrapper"
+            className="widget-timeline-icon-wrapper"
           >
             <Component
               icon={
@@ -174,25 +180,27 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
             />
           </div>
           <div
-            className="flex-container content-wrapper"
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
           >
             <div
-              className="date-time-wrapper"
+              className="widget-timeline-date-time-wrapper"
             >
-              <p>
+              <p
+                className="widget-eventTime"
+              >
                 Basic event Time
               </p>
             </div>
             <div
-              className="flex-container info-wrapper"
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
             >
               <p
-                className="title"
+                className="widget-timeline-title"
               >
                 Basic title
               </p>
               <p
-                className="description"
+                className="widget-timeline-description"
               >
                 Basic description
               </p>
@@ -214,40 +222,40 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
     key="Sun May 29 1453"
   >
     <div
-      className="timeline-date-header"
+      className="widget-timeline-date-header"
     >
       <p>
         Day Divider
       </p>
     </div>
     <div
-      className="timeline-events"
+      className="widget-timeline-events"
     >
       <ul>
         <li
-          className="timeline-event"
+          className="widget-timeline-event"
           key="0"
           onClick={[Function]}
         >
           <div
-            className="icon-wrapper"
+            className="widget-timeline-icon-wrapper"
           >
             <div
-              className="timeline-icon-circle"
+              className="widget-timeline-icon-circle"
             />
           </div>
           <div
-            className="flexcontainer content-wrapper"
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
           >
             <div
-              className="date-time-wrapper"
+              className="widget-timeline-date-time-wrapper"
             >
               <p>
                 Date Time
               </p>
             </div>
             <div
-              className="flexcontainer info-wrapper"
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
             >
               <p>
                 Title
@@ -259,29 +267,29 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
           </div>
         </li>
         <li
-          className="timeline-event"
+          className="widget-timeline-event"
           key="1"
           onClick={[Function]}
         >
           <div
-            className="icon-wrapper"
+            className="widget-timeline-icon-wrapper"
           >
             <div
-              className="timeline-icon-circle"
+              className="widget-timeline-icon-circle"
             />
           </div>
           <div
-            className="flexcontainer content-wrapper"
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
           >
             <div
-              className="date-time-wrapper"
+              className="widget-timeline-date-time-wrapper"
             >
               <p>
                 Date Time
               </p>
             </div>
             <div
-              className="flexcontainer info-wrapper"
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
             >
               <p>
                 Title
