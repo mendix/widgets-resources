@@ -18,6 +18,10 @@ interface GroupedDataSourceItem {
     items: ObjectItem[];
 }
 
+interface DataLoadingStatus {
+    dataAvailable: boolean;
+}
+
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
     const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
@@ -27,42 +31,42 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     const [chartSeries, setChartSeries] = useState<LineChartSeries[]>([]);
 
     useEffect(() => {
-        let allDataAvailable = true;
+        const dataLoadingStatus: DataLoadingStatus = { dataAvailable: true };
 
         const chartSeriesResult = series.reduce<LineChartSeries[]>((result, series) => {
-            if (!allDataAvailable) {
+            if (!dataLoadingStatus.dataAvailable) {
                 return result;
             }
 
             const { dataSource, interpolation, type } = series;
 
             if (dataSource.status !== ValueStatus.Available) {
-                allDataAvailable = false;
+                dataLoadingStatus.dataAvailable = false;
                 return result;
             }
 
             if (type === "static") {
-                loadStaticSeries(result, allDataAvailable, series, interpolation);
+                loadStaticSeries(result, dataLoadingStatus, series, interpolation);
                 return result;
             }
 
-            const groupedDataSourceItems = groupDataSourceItems(series, allDataAvailable);
-            loadDynamicSeries(result, allDataAvailable, series, interpolation, groupedDataSourceItems);
+            const groupedDataSourceItems = groupDataSourceItems(series, dataLoadingStatus);
+            loadDynamicSeries(result, dataLoadingStatus, series, interpolation, groupedDataSourceItems);
             return result;
         }, []);
 
-        if (allDataAvailable) {
+        if (dataLoadingStatus.dataAvailable) {
             chartSeriesResult.reverse();
             setChartSeries(chartSeriesResult);
         }
     }, [series]);
 
     const convertToDataPoints = useCallback(
-        (items: ObjectItem[], series: SeriesType, allDataAvailable: boolean): LineChartDataPoint[] => {
+        (items: ObjectItem[], series: SeriesType, dataLoadingStatus: DataLoadingStatus): LineChartDataPoint[] => {
             const { xValue, yValue } = series;
 
             return items.reduce<LineChartDataPoint[]>((dataPointsResult, item) => {
-                if (!allDataAvailable) {
+                if (!dataLoadingStatus.dataAvailable) {
                     return dataPointsResult;
                 }
 
@@ -70,7 +74,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 const y = yValue(item);
 
                 if (x.status !== ValueStatus.Available || y.status !== ValueStatus.Available) {
-                    allDataAvailable = false;
+                    dataLoadingStatus.dataAvailable = false;
                     return dataPointsResult;
                 }
 
@@ -85,19 +89,19 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     const loadStaticSeries = useCallback(
         (
             loadedSeries: LineChartSeries[],
-            allDataAvailable: boolean,
+            dataLoadingStatus: DataLoadingStatus,
             series: SeriesType,
             interpolation: InterpolationPropType
         ): void => {
             const { dataSource, seriesName } = series;
 
             if (seriesName && seriesName.status !== ValueStatus.Available) {
-                allDataAvailable = false;
+                dataLoadingStatus.dataAvailable = false;
                 return;
             }
 
             loadedSeries.push({
-                dataPoints: convertToDataPoints(ensure(dataSource.items), series, allDataAvailable),
+                dataPoints: convertToDataPoints(ensure(dataSource.items), series, dataLoadingStatus),
                 interpolation,
                 name: seriesName ? seriesName.value : undefined,
                 stylePropertyName: series.stylePropertyName
@@ -107,18 +111,18 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     );
 
     const groupDataSourceItems = useCallback(
-        (series: SeriesType, allDataAvailable: boolean): GroupedDataSourceItem[] => {
+        (series: SeriesType, dataLoadingStatus: DataLoadingStatus): GroupedDataSourceItem[] => {
             const { dataSource, groupByAttribute, seriesNameAttribute, stylePropertyNameAttribute } = series;
 
             return ensure(dataSource.items).reduce<GroupedDataSourceItem[]>((dataSourceItemsResult, item) => {
-                if (!allDataAvailable) {
+                if (!dataLoadingStatus.dataAvailable) {
                     return dataSourceItemsResult;
                 }
 
                 const groupByAttributeValue = ensure(groupByAttribute)(item);
 
                 if (groupByAttributeValue.status !== ValueStatus.Available) {
-                    allDataAvailable = false;
+                    dataLoadingStatus.dataAvailable = false;
                     return dataSourceItemsResult;
                 }
 
@@ -144,7 +148,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                         stylePropertyNameAttributeValue.status !== ValueStatus.Available ||
                         seriesNameAttributeValue.status !== ValueStatus.Available
                     ) {
-                        allDataAvailable = false;
+                        dataLoadingStatus.dataAvailable = false;
                         return dataSourceItemsResult;
                     }
 
@@ -165,14 +169,14 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     const loadDynamicSeries = useCallback(
         (
             loadedSeries: LineChartSeries[],
-            allDataAvailable: boolean,
+            dataLoadingStatus: DataLoadingStatus,
             series: SeriesType,
             interpolation: InterpolationPropType,
             groupedDataSourceItems: GroupedDataSourceItem[]
         ): void => {
             groupedDataSourceItems.forEach(itemGroup => {
                 loadedSeries.push({
-                    dataPoints: convertToDataPoints(itemGroup.items, series, allDataAvailable),
+                    dataPoints: convertToDataPoints(itemGroup.items, series, dataLoadingStatus),
                     interpolation,
                     name: itemGroup.seriesNameAttributeValue,
                     stylePropertyName: itemGroup.stylePropertyNameAttributeValue
@@ -182,7 +186,8 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         [convertToDataPoints]
     );
 
-    return (
+    return (xAxisLabel?.status === ValueStatus.Loading && !xAxisLabel.value) ||
+        (yAxisLabel?.status === ValueStatus.Loading && !yAxisLabel.value) ? null : (
         <LineChartComponent
             series={chartSeries}
             style={styles}
