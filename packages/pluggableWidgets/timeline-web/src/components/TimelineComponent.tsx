@@ -39,7 +39,12 @@ export function getItems(
         const constructedDiv = (
             <div className="timeline-date" key={groupKey}>
                 {showGroupDivider && <div className="widget-timeline-date-header">{groupDivider}</div>}
-                <div className={classNames("widget-timeline-events", !showGroupDivider ? "no-divider" : undefined)}>
+                <div
+                    className={classNames(
+                        "widget-timeline-events",
+                        !showGroupDivider ? "widget-timeline-no-divider" : undefined
+                    )}
+                >
                     <ul>{events}</ul>
                 </div>
             </div>
@@ -85,11 +90,11 @@ function getCustomEventsFromDay(eventsOfDay: CustomItemType[]) {
                 <div className="widget-timeline-icon-wrapper">
                     {hasChildren(event.icon) ? event.icon : <div className="widget-timeline-icon-circle" />}
                 </div>
-                <div className="flexcontainer widget-timeline-content-wrapper">
+                <div className="widget-timeline-flex-container widget-timeline-content-wrapper">
                     {hasChildren(event.eventDateTime) && (
                         <div className="widget-timeline-date-time-wrapper">{event.eventDateTime}</div>
                     )}
-                    <div className="flexcontainer widget-timeline-info-wrapper">
+                    <div className="widget-timeline-flex-container widget-timeline-info-wrapper">
                         {event.title}
                         {event.description}
                     </div>

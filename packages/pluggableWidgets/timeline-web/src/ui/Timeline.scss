@@ -1,4 +1,4 @@
-$primary-color: #264ae5;
+$primary-color: #dadcde;
 $border-color: #dadcde;
 $title-color: #0a1325;
 $description-color: #6c717c;
@@ -47,7 +47,7 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
 
         &:hover {
             .widget-timeline-title {
-                color: #264ae5;
+                color: #dadcde;
             }
         }
     }
