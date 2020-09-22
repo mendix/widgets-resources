@@ -11,7 +11,9 @@ function build() {
         exec("shx cp ./src/web/sass/core/_legacy/bootstrap/fonts/* ./dist/theme/styles/web/css/fonts");
         exec("shx cp -R ./content/. ./dist/theme/");
         exec(
-            "sass --embed-sources --no-charset -s compressed ./src/web/sass/main.scss ./dist/theme/styles/web/css/main.css"
+            "concurrently -n 'sass,tsc'" +
+                " 'sass --embed-sources --no-charset -s compressed ./src/web/sass/main.scss ./dist/theme/styles/web/css/main.css'" +
+                " 'tsc -p ./tsconfig.json'"
         );
         exec("tsc -p ./tsconfig.json");
         console.info("Done.");
