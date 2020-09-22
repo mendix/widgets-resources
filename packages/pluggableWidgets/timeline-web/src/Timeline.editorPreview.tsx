@@ -75,5 +75,5 @@ export function preview(props: TimelinePreviewProps) {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Timeline.scss");
+    return require("./ui/TimelinePreview.scss");
 }

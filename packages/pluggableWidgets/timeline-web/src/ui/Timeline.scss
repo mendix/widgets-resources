@@ -7,7 +7,7 @@ $gutter-size: 15px;
 $icon-size: 18px;
 $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
 
-.timeline-date-header {
+.widget-timeline-date-header {
     display: inline-block;
     width: 110px;
     overflow-wrap: break-word;
@@ -17,7 +17,7 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     border-radius: 30px;
 }
 
-.timeline-events {
+.widget-timeline-events {
     margin-bottom: 0;
     margin-left: 55px;
     padding: 35px 0;
@@ -29,14 +29,14 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     }
 }
 
-.title {
+.widget-timeline-title {
     color: $title-color;
 }
-.description {
+.widget-timeline-description {
     color: $description-color;
 }
 
-.timeline-event {
+.widget-timeline-event {
     position: relative;
     margin-left: ($gutter-size * 2);
     margin-bottom: 20px;
@@ -46,14 +46,14 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
         transition: background 0.8s;
 
         &:hover {
-            .title {
+            .widget-timeline-title {
                 color: #264ae5;
             }
         }
     }
 }
 
-.icon-wrapper {
+.widget-timeline-icon-wrapper {
     position: absolute;
     top: 3px;
     left: $icon-position-left;
@@ -72,28 +72,28 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     }
 }
 
-.content-wrapper {
-    .date-time-wrapper {
+.widget-timeline-content-wrapper {
+    .widget-timeline-date-time-wrapper {
         margin-right: 15px;
     }
-    .info-wrapper {
+    .widget-timeline-info-wrapper {
         flex-direction: column;
     }
 }
 
-.timeline-icon-circle {
+.widget-timeline-icon-circle {
     width: $icon-size;
     height: $icon-size;
     border-radius: 50%;
     background-color: $primary-color;
 }
 
-.no-divider {
+.widget-timeline-no-divider {
     padding-bottom: 0;
     padding-top: 0;
 }
 
-.flex-container {
+.widget-timeline-flex-container {
     display: flex;
     overflow: hidden;
     flex: 1;

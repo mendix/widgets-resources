@@ -38,8 +38,8 @@ export function getItems(
 
         const constructedDiv = (
             <div className="timeline-date" key={groupKey}>
-                {showGroupDivider && <div className="timeline-date-header">{groupDivider}</div>}
-                <div className={classNames("timeline-events", !showGroupDivider ? "no-divider" : undefined)}>
+                {showGroupDivider && <div className="widget-timeline-date-header">{groupDivider}</div>}
+                <div className={classNames("widget-timeline-events", !showGroupDivider ? "no-divider" : undefined)}>
                     <ul>{events}</ul>
                 </div>
             </div>
@@ -54,20 +54,20 @@ function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
         <li
             key={index}
             onClick={() => event.action}
-            className={classNames("timeline-event", event.action ? "clickable" : undefined)}
+            className={classNames("widget-timeline-event", event.action ? "clickable" : undefined)}
         >
-            <div className="icon-wrapper">
-                {event.icon?.value ? <Icon icon={event.icon.value} /> : <div className="timeline-icon-circle" />}
+            <div className="widget-timeline-icon-wrapper">
+                {event.icon?.value ? <Icon icon={event.icon.value} /> : <div className="widget-timeline-icon-circle" />}
             </div>
-            <div className="flex-container content-wrapper">
+            <div className="widget-timeline-flex-container widget-timeline-content-wrapper">
                 {event.eventDateTime && (
-                    <div className="date-time-wrapper">
-                        <p>{event.eventDateTime}</p>
+                    <div className="widget-timeline-date-time-wrapper">
+                        <p className="widget-eventTime">{event.eventDateTime}</p>
                     </div>
                 )}
-                <div className="flex-container info-wrapper">
-                    {event.title && <p className="title">{event.title}</p>}
-                    {event.description && <p className="description">{event.description}</p>}
+                <div className="widget-timeline-flex-container widget-timeline-info-wrapper">
+                    {event.title && <p className="widget-timeline-title">{event.title}</p>}
+                    {event.description && <p className="widget-timeline-description">{event.description}</p>}
                 </div>
             </div>
         </li>
@@ -80,14 +80,16 @@ function getCustomEventsFromDay(eventsOfDay: CustomItemType[]) {
             <li
                 key={index}
                 onClick={() => event.action}
-                className={classNames("timeline-event", event.action ? "clickable" : undefined)}
+                className={classNames("widget-timeline-event", event.action ? "clickable" : undefined)}
             >
-                <div className="icon-wrapper">
-                    {hasChildren(event.icon) ? event.icon : <div className="timeline-icon-circle" />}
+                <div className="widget-timeline-icon-wrapper">
+                    {hasChildren(event.icon) ? event.icon : <div className="widget-timeline-icon-circle" />}
                 </div>
-                <div className="flexcontainer content-wrapper">
-                    {hasChildren(event.eventDateTime) && <div className="date-time-wrapper">{event.eventDateTime}</div>}
-                    <div className="flexcontainer info-wrapper">
+                <div className="flexcontainer widget-timeline-content-wrapper">
+                    {hasChildren(event.eventDateTime) && (
+                        <div className="widget-timeline-date-time-wrapper">{event.eventDateTime}</div>
+                    )}
+                    <div className="flexcontainer widget-timeline-info-wrapper">
                         {event.title}
                         {event.description}
                     </div>
