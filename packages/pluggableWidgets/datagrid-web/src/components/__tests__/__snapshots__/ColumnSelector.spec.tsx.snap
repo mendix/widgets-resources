@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Column Selector renders the structure correctly 1`] = `
-<div
+<td
   className="th column-selector"
+  width="1px"
 >
   <button
     className="btn btn-default"
@@ -40,5 +41,5 @@ exports[`Column Selector renders the structure correctly 1`] = `
       transform={null}
     />
   </button>
-</div>
+</td>
 `;

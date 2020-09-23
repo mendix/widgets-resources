@@ -52,8 +52,6 @@ export interface ColumnSize {
     [key: string]: number;
 }
 
-export const width = 100;
-
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
@@ -180,9 +178,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         }}
                     />
                 </div>
-            ),
-            minWidth: 15,
-            width
+            )
         }),
         [props.columns]
     );

@@ -4,30 +4,18 @@ exports[`Table renders the structure correctly 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -169,7 +157,6 @@ exports[`Table renders the structure correctly 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -308,27 +295,19 @@ exports[`Table renders the structure correctly 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={true}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -2358,7 +2337,6 @@ exports[`Table renders the structure correctly 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -3978,12 +3956,9 @@ exports[`Table renders the structure correctly 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;
 
@@ -3991,30 +3966,18 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -4159,7 +4122,6 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -4301,27 +4263,19 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={false}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -6411,7 +6365,6 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -8094,12 +8047,9 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;
 
@@ -8107,30 +8057,18 @@ exports[`Table renders the structure correctly with dragging 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -8272,7 +8210,6 @@ exports[`Table renders the structure correctly with dragging 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -8411,27 +8348,19 @@ exports[`Table renders the structure correctly with dragging 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={true}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -10461,7 +10390,6 @@ exports[`Table renders the structure correctly with dragging 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -12081,12 +12009,9 @@ exports[`Table renders the structure correctly with dragging 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;
 
@@ -12094,30 +12019,18 @@ exports[`Table renders the structure correctly with filtering 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -12259,7 +12172,6 @@ exports[`Table renders the structure correctly with filtering 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -12398,27 +12310,19 @@ exports[`Table renders the structure correctly with filtering 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={false}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -14448,7 +14352,6 @@ exports[`Table renders the structure correctly with filtering 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -16068,12 +15971,9 @@ exports[`Table renders the structure correctly with filtering 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;
 
@@ -16081,30 +15981,18 @@ exports[`Table renders the structure correctly with hiding 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -16246,7 +16134,6 @@ exports[`Table renders the structure correctly with hiding 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -16385,7 +16272,6 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               },
             ]
           }
-          weight={1}
         />
         <ColumnSelector
           allColumns={
@@ -16524,28 +16410,19 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             ]
           }
           setHiddenColumns={[Function]}
-          setWidth={[Function]}
-          width={0}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={true}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -18575,7 +18452,6 @@ exports[`Table renders the structure correctly with hiding 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -20195,20 +20071,12 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             ]
           }
         />
-        <div
+        <td
           className="td column-selector"
-          style={
-            Object {
-              "width": 0,
-            }
-          }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;
 
@@ -20216,30 +20084,18 @@ exports[`Table renders the structure correctly with paging 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -20381,7 +20237,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -20520,27 +20375,19 @@ exports[`Table renders the structure correctly with paging 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={false}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -22570,7 +22417,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -24190,22 +24036,18 @@ exports[`Table renders the structure correctly with paging 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    >
-      <Pagination
-        canNextPage={false}
-        canPreviousPage={true}
-        gotoPage={[Function]}
-        nextPage={[Function]}
-        page={1}
-        pageSize={10}
-        previousPage={[Function]}
-      />
-    </div>
-  </div>
+  </table>
+  <Pagination
+    canNextPage={false}
+    canPreviousPage={true}
+    gotoPage={[Function]}
+    nextPage={[Function]}
+    page={1}
+    pageSize={10}
+    previousPage={[Function]}
+  />
 </div>
 `;
 
@@ -24213,30 +24055,18 @@ exports[`Table renders the structure correctly with resizing 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -24378,7 +24208,6 @@ exports[`Table renders the structure correctly with resizing 1`] = `
           key="headers_column_0"
           resizable={true}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={false}
@@ -24517,27 +24346,19 @@ exports[`Table renders the structure correctly with resizing 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={true}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -26567,7 +26388,6 @@ exports[`Table renders the structure correctly with resizing 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -28187,12 +28007,9 @@ exports[`Table renders the structure correctly with resizing 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;
 
@@ -28200,30 +28017,18 @@ exports[`Table renders the structure correctly with sorting 1`] = `
 <div
   className="test"
 >
-  <div
-    className="table"
+  <table
+    className="table-grid"
     role="table"
-    style={
-      Object {
-        "minWidth": "150px",
-      }
-    }
   >
-    <div
+    <thead
       className="thead"
       role="rowgroup"
     >
-      <div
+      <tr
         className="tr"
         key="headers_row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Header
           column={
@@ -28365,7 +28170,6 @@ exports[`Table renders the structure correctly with sorting 1`] = `
           key="headers_column_0"
           resizable={false}
           setColumnOrder={[Function]}
-          setColumnSizes={[Function]}
           setDragOver={[Function]}
           setSortBy={[Function]}
           sortable={true}
@@ -28504,27 +28308,19 @@ exports[`Table renders the structure correctly with sorting 1`] = `
               },
             ]
           }
-          weight={1}
         />
-      </div>
-    </div>
+      </tr>
+    </thead>
     <InfiniteBody
       hasMoreItems={false}
       isInfinite={false}
       role="rowgroup"
       setPage={[MockFunction]}
     >
-      <div
+      <tr
         className="tr"
         key="row_0"
         role="row"
-        style={
-          Object {
-            "display": "flex",
-            "flex": "1 0 auto",
-            "minWidth": "0px",
-          }
-        }
       >
         <Cell
           allColumns={
@@ -30554,7 +30350,6 @@ exports[`Table renders the structure correctly with sorting 1`] = `
               [Function],
               [Function],
               [Function],
-              [Function],
             ]
           }
           preFilteredFlatRows={
@@ -32174,11 +31969,8 @@ exports[`Table renders the structure correctly with sorting 1`] = `
             ]
           }
         />
-      </div>
+      </tr>
     </InfiniteBody>
-    <div
-      className="tfoot"
-    />
-  </div>
+  </table>
 </div>
 `;

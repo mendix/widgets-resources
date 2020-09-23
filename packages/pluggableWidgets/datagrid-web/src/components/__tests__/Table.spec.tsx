@@ -56,10 +56,8 @@ describe("Table", () => {
                 resizable: false,
                 draggable: false,
                 hidable: "no" as const,
-                minWidth: 15,
-                maxWidth: 300,
-                defaultWidth: 150,
-                defaultWeight: 1
+                width: "autoFill" as const,
+                size: 1
             }
         ];
         const component = shallow(<Table {...mockTableProps()} columns={columns} columnsFilterable />);
@@ -78,10 +76,8 @@ function mockTableProps(): TableProps<ObjectItem> {
             resizable: false,
             draggable: false,
             hidable: "no" as const,
-            minWidth: 15,
-            maxWidth: 300,
-            defaultWidth: 150,
-            defaultWeight: 1
+            width: "autoFill" as const,
+            size: 1
         }
     ];
     return {

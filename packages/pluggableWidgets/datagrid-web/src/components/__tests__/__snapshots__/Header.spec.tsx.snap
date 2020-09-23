@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Header renders the structure correctly 1`] = `
-<div
+<td
   className="th"
   role="Test"
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 auto",
     }
   }
   title="Test"
+  width="1px"
 >
   <div
     className="column-container"
@@ -21,20 +21,20 @@ exports[`Header renders the structure correctly 1`] = `
       Test
     </div>
   </div>
-</div>
+</td>
 `;
 
 exports[`Header renders the structure correctly when draggable 1`] = `
-<div
+<td
   className="th"
   role="Test"
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 auto",
     }
   }
   title="Test"
+  width="1px"
 >
   <div
     className="column-container"
@@ -50,20 +50,20 @@ exports[`Header renders the structure correctly when draggable 1`] = `
       Test
     </div>
   </div>
-</div>
+</td>
 `;
 
 exports[`Header renders the structure correctly when filterable 1`] = `
-<div
+<td
   className="th"
   role="Test"
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 auto",
     }
   }
   title="Test"
+  width="1px"
 >
   <div
     className="column-container"
@@ -75,20 +75,20 @@ exports[`Header renders the structure correctly when filterable 1`] = `
     </div>
     Test
   </div>
-</div>
+</td>
 `;
 
 exports[`Header renders the structure correctly when filterable and with custom filter 1`] = `
-<div
+<td
   className="th"
   role="Test"
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 auto",
     }
   }
   title="Test"
+  width="1px"
 >
   <div
     className="column-container"
@@ -107,11 +107,11 @@ exports[`Header renders the structure correctly when filterable and with custom 
       />
     </div>
   </div>
-</div>
+</td>
 `;
 
 exports[`Header renders the structure correctly when resizable 1`] = `
-<div
+<td
   className="th"
   role="Test"
   style={
@@ -120,6 +120,7 @@ exports[`Header renders the structure correctly when resizable 1`] = `
     }
   }
   title="Test"
+  width="1px"
 >
   <div
     className="column-container"
@@ -134,19 +135,16 @@ exports[`Header renders the structure correctly when resizable 1`] = `
     className="column-resizer "
     resizableProps=""
   />
-</div>
+</td>
 `;
 
 exports[`Header renders the structure correctly when sortable 1`] = `
-<div
+<td
   className="th"
   role="Test"
-  style={
-    Object {
-      "flex": "1 1 auto",
-    }
-  }
+  style={Object {}}
   title="Test"
+  width="1px"
 >
   <div
     className="column-container"
@@ -189,5 +187,5 @@ exports[`Header renders the structure correctly when sortable 1`] = `
       />
     </div>
   </div>
-</div>
+</td>
 `;
