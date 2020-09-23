@@ -21,6 +21,14 @@ concurrently(
             command: `copy-and-watch ${watchArg} 'content/**/*' '${outputDir}'`
         },
         {
+            name: "web-sass-and-manifest",
+            command: `copy-and-watch ${watchArg} 'src/web/sass/**/*' '${outputDir}/styles/web/sass'`
+        },
+        {
+            name: "native-manifest",
+            command: `copy-and-watch ${watchArg} src/native/ts/core/manifest.json '${outputDir}/styles/native/core'`
+        },
+        {
             name: "fonts",
             command: `copy-and-watch ${watchArg} ./src/web/sass/core/_legacy/bootstrap/fonts/* '${outputDir}/styles/web/css/fonts'`
         },
