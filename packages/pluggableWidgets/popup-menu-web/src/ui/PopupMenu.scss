@@ -7,6 +7,7 @@
 }
 
 .popupmenu-menu {
+    flex-direction: column;
     position: absolute;
     z-index: 999;
     background-color: #fff;
@@ -60,11 +61,16 @@
         border-color: #f5f6f6;
         background-color: #f5f6f6;
     }
+
+    &-primary {
+        color: #0595db;
+    }
+    &-danger {
+        color: #ed1c24;
+    }
 }
 
 .popupmenu-custom-item {
-    //padding: 8px 16px;
-
     &:hover,
     &:focus,
     &:active {

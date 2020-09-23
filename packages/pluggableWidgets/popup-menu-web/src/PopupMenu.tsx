@@ -3,24 +3,24 @@ import {
     isBehindElement,
     isBehindRandomElement,
     isElementPartiallyOffScreen,
-    isElementVisible,
-    moveElementOnScreen,
+    isElementVisibleByUser,
+    moveAbsoluteElementOnScreen,
     unBlockAbsoluteElement
 } from "../../../tools/pluggable-widgets-tools/src/index";
-import { ReactNode, useState, createElement, useCallback, RefObject, useEffect, useRef } from "react";
+import { ReactElement, useState, createElement, useCallback, RefObject, useEffect, useRef } from "react";
 import { executeAction } from "@widgets-resources/piw-utils";
 import { ActionValue } from "mendix";
 
 import { PopupMenuContainerProps } from "../typings/PopupMenuProps";
 import "./ui/PopupMenu.scss";
 
-export default function PopupMenu(props: PopupMenuContainerProps): ReactNode {
+export default function PopupMenu(props: PopupMenuContainerProps): ReactElement {
     const ref = useRef<HTMLDivElement>(null);
     useOnClickOutside(ref, () => setVisibility(false));
     const [visibility, setVisibility] = useState(false);
     useEffect(() => {
         const element = (ref.current as HTMLDivElement).querySelector(".popupmenu-menu") as HTMLDivElement;
-        element.style.visibility = visibility ? "visible" : "hidden";
+        element.style.display = visibility ? "flex" : "none";
         if (visibility) {
             correctPosition(element);
         }
@@ -32,9 +32,7 @@ export default function PopupMenu(props: PopupMenuContainerProps): ReactNode {
     const handleOnClickItem = useCallback(
         (itemAction?: ActionValue): void => {
             setVisibility(false);
-            setTimeout(() => {
-                executeAction(itemAction);
-            }, 500);
+            executeAction(itemAction);
         },
         [setVisibility]
     );
@@ -55,11 +53,11 @@ export default function PopupMenu(props: PopupMenuContainerProps): ReactNode {
             : {};
 
     return (
-        <div ref={ref} className={"popupmenu"} {...onHover}>
+        <div ref={ref} className={"popupmenu " + props.class} {...onHover}>
             <div className={"popupmenu-trigger"} {...onClick}>
                 {props.menuTrigger}
             </div>
-            <div className={`popupmenu-menu popupmenu-position-${props.position}`} style={{ visibility: "hidden" }}>
+            <div className={`popupmenu-menu popupmenu-position-${props.position}`} style={{ display: "none" }}>
                 {menuOptions}
             </div>
         </div>
@@ -69,15 +67,25 @@ export default function PopupMenu(props: PopupMenuContainerProps): ReactNode {
 function createMenuOptions(
     props: PopupMenuContainerProps,
     handleOnClickItem: (itemAction?: ActionValue) => void
-): ReactNode[] {
-    let menuOptions: ReactNode[];
+): ReactElement[] {
+    let menuOptions: ReactElement[];
 
     if (props.renderMode === "basic") {
         menuOptions = props.basicItems.map((item, index) => {
+            const pickedStyle =
+                item.styleClass !== "defaultStyle"
+                    ? "popupmenu-basic-item-" + item.styleClass.replace("Style", "")
+                    : "";
             return item.itemType === "divider" ? (
                 <div key={index} className={"popupmenu-basic-divider"} />
             ) : (
-                <div key={index} className={"popupmenu-basic-item"} onClick={() => handleOnClickItem(item.action)}>
+                <div
+                    key={index}
+                    className={`popupmenu-basic-item ${pickedStyle}`}
+                    onClick={() => {
+                        handleOnClickItem(item.action);
+                    }}
+                >
                     {item.caption}
                 </div>
             );
@@ -112,17 +120,19 @@ function useOnClickOutside(ref: RefObject<HTMLDivElement>, handler: () => void):
 
 function correctPosition(element: HTMLElement): void {
     const isOffScreen = isElementPartiallyOffScreen(element);
+    console.log(isOffScreen);
     if (isOffScreen) {
-        moveElementOnScreen(element);
+        moveAbsoluteElementOnScreen(element);
     }
     const boundingRect: DOMRect = element.getBoundingClientRect();
-    const blockingElement = isBehindRandomElement(element, boundingRect, 2);
-    if (blockingElement && isElementVisible(blockingElement)) {
+    const blockingElement = isBehindRandomElement(element, boundingRect, 3, "popupmenu");
+    console.log(blockingElement);
+    if (blockingElement && isElementVisibleByUser(blockingElement)) {
         unBlockAbsoluteElement(element, boundingRect, blockingElement.getBoundingClientRect());
     } else if (blockingElement) {
         let node = blockingElement;
         do {
-            if (isBehindElement(element, node, 1) && isElementVisible(node)) {
+            if (isBehindElement(element, node, 1) && isElementVisibleByUser(node)) {
                 unBlockAbsoluteElement(element, boundingRect, node.getBoundingClientRect());
                 return;
             } else {

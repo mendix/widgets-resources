@@ -10,12 +10,14 @@ export function unBlockAbsoluteElement(
         boundingRect.y + boundingRect.height < window.innerHeight
     ) {
         // Top of element is blocked
+        console.log("Top of element is blocked");
         if (
             boundingRect.left < blockingElementRect.right &&
             boundingRect.right >= blockingElementRect.right &&
             boundingRect.left >= blockingElementRect.left
         ) {
             // Top left of element is blocked
+            console.log("Top left of element is blocked");
             element.style.top =
                 getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
             element.style.left =
@@ -26,6 +28,7 @@ export function unBlockAbsoluteElement(
             boundingRect.right <= blockingElementRect.right
         ) {
             // Top right of element is blocked
+            console.log("Top right of element is blocked");
             element.style.top =
                 getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
             element.style.right =
@@ -41,12 +44,14 @@ export function unBlockAbsoluteElement(
         boundingRect.y - boundingRect.height > 0
     ) {
         // Bottom of element is blocked
+        console.log("Bottom of element is blocked");
         if (
             boundingRect.left < blockingElementRect.right &&
             boundingRect.right >= blockingElementRect.right &&
             boundingRect.left >= blockingElementRect.left
         ) {
             // Bottom left of element is blocked
+            console.log("Bottom left of element is blocked");
             element.style.bottom =
                 getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
             element.style.left =
@@ -57,6 +62,7 @@ export function unBlockAbsoluteElement(
             boundingRect.right <= blockingElementRect.right
         ) {
             // Bottom right of element is blocked
+            console.log("Bottom right of element is blocked");
             element.style.bottom =
                 getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
             element.style.right =
@@ -71,6 +77,7 @@ export function unBlockAbsoluteElement(
         boundingRect.right >= blockingElementRect.right
     ) {
         // Left of element is blocked
+        console.log("Left of element is blocked");
         element.style.left =
             getPixelValueAsNumber(element, "left") + blockingElementRect.right - boundingRect.left + "px";
     } else if (
@@ -79,6 +86,7 @@ export function unBlockAbsoluteElement(
         boundingRect.right <= blockingElementRect.right
     ) {
         // Right of element is blocked
+        console.log("Right of element is blocked");
         element.style.right =
             getPixelValueAsNumber(element, "right") + blockingElementRect.left - boundingRect.right + "px";
     }
@@ -93,8 +101,10 @@ export function getPixelValueAsNumber(element: HTMLElement, prop: keyof CSSStyle
 export function isBehindRandomElement(
     elementSource: HTMLElement,
     boundingRect: DOMRect,
-    offset = 3
+    offset = 3,
+    excludeElementWithClass = ""
 ): HTMLElement | false {
+    let excludeElements: HTMLElement[] = [];
     const left = boundingRect.left + offset;
     const right = boundingRect.right - offset;
     const top = boundingRect.top + offset;
@@ -103,17 +113,51 @@ export function isBehindRandomElement(
     const elementTopRight = document.elementFromPoint(right, top) as HTMLElement;
     const elementBottomLeft = document.elementFromPoint(left, bottom) as HTMLElement;
     const elementBottomRight = document.elementFromPoint(right, bottom) as HTMLElement;
+    if (excludeElementWithClass) {
+        excludeElementWithClass = excludeElementWithClass.replace(/\./g, "");
+        excludeElements = [...(document.querySelectorAll(`.${excludeElementWithClass}`) as any)];
+    }
 
-    if (elementTopLeft && elementTopLeft !== elementSource && !elementSource.contains(elementTopLeft)) {
+    if (
+        elementTopLeft &&
+        elementTopLeft !== elementSource &&
+        !elementTopLeft.classList.contains(excludeElementWithClass) &&
+        (!excludeElements ||
+            !excludeElements.map((elem: HTMLElement) => elem.contains(elementTopLeft)).filter(elem => elem).length) &&
+        !elementSource.contains(elementTopLeft)
+    ) {
         return elementTopLeft;
     }
-    if (elementTopRight && elementTopRight !== elementSource && !elementSource.contains(elementTopRight)) {
+    if (
+        elementTopRight &&
+        elementTopRight !== elementSource &&
+        !elementTopRight.classList.contains(excludeElementWithClass) &&
+        (!excludeElements ||
+            !excludeElements.map((elem: HTMLElement) => elem.contains(elementTopRight)).filter(elem => elem).length) &&
+        !elementSource.contains(elementTopRight)
+    ) {
         return elementTopRight;
     }
-    if (elementBottomLeft && elementBottomLeft !== elementSource && !elementSource.contains(elementBottomLeft)) {
+    if (
+        elementBottomLeft &&
+        elementBottomLeft !== elementSource &&
+        !elementBottomLeft.classList.contains(excludeElementWithClass) &&
+        (!excludeElements ||
+            !excludeElements.map((elem: HTMLElement) => elem.contains(elementBottomLeft)).filter(elem => elem)
+                .length) &&
+        !elementSource.contains(elementBottomLeft)
+    ) {
         return elementBottomLeft;
     }
-    if (elementBottomRight && elementBottomRight !== elementSource && !elementSource.contains(elementBottomRight)) {
+    if (
+        elementBottomRight &&
+        elementBottomRight !== elementSource &&
+        !elementBottomLeft.classList.contains(excludeElementWithClass) &&
+        (!excludeElements ||
+            !excludeElements.map((elem: HTMLElement) => elem.contains(elementBottomLeft)).filter(elem => elem)
+                .length) &&
+        !elementSource.contains(elementBottomRight)
+    ) {
         return elementBottomRight;
     }
 
@@ -136,7 +180,7 @@ export function isBehindElement(element: HTMLElement, blockingElement: HTMLEleme
     );
 }
 
-export function isElementVisible(element: HTMLElement): boolean {
+export function isElementVisibleByUser(element: HTMLElement): boolean {
     const style: CSSStyleDeclaration = getComputedStyle(element);
     if (style.display === "none") return false;
     if (style.visibility && style.visibility !== "visible") return false;
@@ -174,12 +218,9 @@ export function isElementPartiallyOffScreen(element: HTMLElement): boolean {
     return (
         rect.x < 0 || rect.y < 0 || rect.x + rect.width > window.innerWidth || rect.y + rect.height > window.innerHeight
     );
-    // return (
-    //     rect.x + rect.width < 0 || rect.y + rect.height < 0 || rect.x > window.innerWidth || rect.y > window.innerHeight
-    // );
 }
 
-export function moveElementOnScreen(element: HTMLElement): void {
+export function moveAbsoluteElementOnScreen(element: HTMLElement): void {
     const rect = element.getBoundingClientRect();
     if (rect.x < 0) {
         element.style.left = Math.round(getPixelValueAsNumber(element, "left") - rect.x) + "px";
