@@ -49,7 +49,7 @@ concurrently(
                   },
                   {
                       name: "sass-deployment",
-                      command: `sass --watch --embed-sources ${compressArg} --no-charset src/web/sass/main.scss '${projectDeployDir}/styles/web/css/main.css'`
+                      command: `sass --watch --embed-sources --no-charset src/web/sass/main.scss '${projectDeployDir}/styles/web/css/main.css'`
                   },
                   {
                       name: "content-deployment",
