@@ -17,35 +17,45 @@ rm("-rf", outputDir);
 concurrently(
     [
         {
-            name: "content",
+            name: "content-theme",
             command: `copy-and-watch ${watchArg} 'content/**/*' '${outputDir}'`
         },
         {
-            name: "web-sass-and-manifest",
+            name: "web-sass-and-manifest-theme",
             command: `copy-and-watch ${watchArg} 'src/web/sass/**/*' '${outputDir}/styles/web/sass'`
         },
         {
-            name: "native-manifest",
+            name: "native-manifest-theme",
             command: `copy-and-watch ${watchArg} src/native/ts/core/manifest.json '${outputDir}/styles/native/core'`
         },
         {
-            name: "fonts",
+            name: "fonts-theme",
             command: `copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*' '${outputDir}/styles/web/css/fonts'`
         },
         {
-            name: "sass",
+            name: "sass-theme",
             command: `sass ${watchArg} --embed-sources ${compressArg} --no-charset src/web/sass/main.scss '${outputDir}/styles/web/css/main.css'`
         },
         {
-            name: "tsc",
+            name: "tsc-theme",
             command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputDir}/styles/native'`
         }
     ].concat(
         projectDeployDir
-            ? {
-                  name: "project",
-                  command: `copy-and-watch --watch '${outputDir}/' '${projectDeployDir}'`
-              }
+            ? [
+                  {
+                      name: "fonts-deployment",
+                      command: `copy-and-watch --watch 'src/web/sass/core/_legacy/bootstrap/fonts/*' '${projectDeployDir}/styles/web/css/fonts'`
+                  },
+                  {
+                      name: "sass-deployment",
+                      command: `sass --watch --embed-sources ${compressArg} --no-charset src/web/sass/main.scss '${projectDeployDir}/styles/web/css/main.css'`
+                  },
+                  {
+                      name: "content-deployment",
+                      command: `copy-and-watch --watch 'content/**/*' '${projectDeployDir}'`
+                  }
+              ]
             : []
     )
 );
