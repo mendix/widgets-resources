@@ -13,13 +13,12 @@ import {
     SortingRule,
     useColumnOrder,
     useFilters,
-    useFlexLayout,
     usePagination,
     useResizeColumns,
     useSortBy,
     useTable
 } from "react-table";
-import { ColumnsPreviewType, ColumnsType, FilterMethodEnum } from "../../typings/DatagridProps";
+import { ColumnsPreviewType, ColumnsType, FilterMethodEnum, WidthEnum } from "../../typings/DatagridProps";
 
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
 
@@ -53,11 +52,12 @@ export interface ColumnSize {
     [key: string]: number;
 }
 
+export const width = 100;
+
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
     const [dragOver, setDragOver] = useState("");
-    const [columnSelectorWidth, setColumnSelectorWidth] = useState(0);
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
     const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
         (props.columns
@@ -67,10 +67,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [paginationIndex, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [filters, setFilters] = useState<Filters<object>>([]);
-    const [columnSizes, setColumnSizes] = useState<ColumnSize>({});
-    const minWidth = 15;
-    const width = 150;
-    const maxWidth = 200;
 
     const filterTypes = useMemo(
         () => ({
@@ -102,68 +98,57 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     );
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
-            props.columns.map((column, index) => ({
-                id: index.toString(),
-                accessor: "item",
-                Header: typeof column.header === "object" ? column.header.value : column.header,
-                filter: "text",
-                hidden: column.hidable === "hidden",
-                canHide: column.hidable !== "no",
-                canDrag: column.draggable,
-                customFilter:
-                    column.filterable === "custom"
-                        ? props.filterRenderer((children: ReactNode) => <div className="filter">{children}</div>, index)
-                        : null,
-                disableSortBy: !column.sortable,
-                disableResizing: !column.resizable,
-                disableFilters: column.filterable === "no",
-                sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
-                    const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
-                    const valueB = props.valueForSort(rowB.values[columnId], Number(columnId)) || "";
-                    // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
-                    if (typeof valueA === "string" && typeof valueB === "string") {
-                        return valueA.localeCompare(valueB);
-                    } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
-                        // True first
-                        return valueA === valueB ? 0 : valueA ? -1 : 1;
-                    } else if (valueA instanceof Date && valueB instanceof Date) {
-                        return (valueA as Date).getTime() - (valueB as Date).getTime();
-                    }
-                    return Number(valueA) - Number(valueB);
-                },
-                Cell: ({ cell, value }) =>
-                    props.cellRenderer(
-                        (children: ReactNode) => (
-                            <div
-                                {...cell.getCellProps()}
-                                {...(!props.columnsResizable || !cell.column.canResize
-                                    ? {
-                                          style: {
-                                              flex: `${cell.column.weight == null ? 1 : cell.column.weight} 1 ${
-                                                  cell.column.weight === 0
-                                                      ? columnSizes[cell.column.weight] ?? width
-                                                      : 0
-                                              }px`
-                                          }
-                                      }
-                                    : {})}
-                                className="td"
-                            >
-                                {children}
-                            </div>
+            props.columns.map((column, index) => {
+                const weight = getWeight(column.width, column.size ?? 1);
+                const totalWeight = props.columns.reduce((p, c) => p + getWeight(c.width, c.size ?? 0), 0);
+                return {
+                    id: index.toString(),
+                    accessor: "item",
+                    Header: typeof column.header === "object" ? column.header.value : column.header,
+                    filter: "text",
+                    hidden: column.hidable === "hidden",
+                    canHide: column.hidable !== "no",
+                    canDrag: column.draggable,
+                    customFilter:
+                        column.filterable === "custom"
+                            ? props.filterRenderer(
+                                  (children: ReactNode) => <div className="filter">{children}</div>,
+                                  index
+                              )
+                            : null,
+                    disableSortBy: !column.sortable,
+                    disableResizing: !column.resizable,
+                    disableFilters: column.filterable === "no",
+                    sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
+                        const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
+                        const valueB = props.valueForSort(rowB.values[columnId], Number(columnId)) || "";
+                        // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
+                        if (typeof valueA === "string" && typeof valueB === "string") {
+                            return valueA.localeCompare(valueB);
+                        } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
+                            // True first
+                            return valueA === valueB ? 0 : valueA ? -1 : 1;
+                        } else if (valueA instanceof Date && valueB instanceof Date) {
+                            return (valueA as Date).getTime() - (valueB as Date).getTime();
+                        }
+                        return Number(valueA) - Number(valueB);
+                    },
+                    Cell: ({ cell, value }) =>
+                        props.cellRenderer(
+                            (children: ReactNode) => {
+                                return (
+                                    <td {...cell.getCellProps()} className="td">
+                                        {children}
+                                    </td>
+                                );
+                            },
+                            value,
+                            index
                         ),
-                        value,
-                        index
-                    ),
-                ...(props.columnsResizable && column.resizable
-                    ? {
-                          width: column.defaultWidth || width,
-                          maxWidth: column.maxWidth || maxWidth,
-                          minWidth: column.minWidth || minWidth
-                      }
-                    : { weight: column.defaultWeight == null ? 1 : column.defaultWeight })
-            })),
-        [props.columns, columnSizes]
+                    weight: column.width === "manual" ? weight * (100 / totalWeight) : weight
+                };
+            }),
+        [props.columns]
     );
 
     const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
@@ -195,7 +180,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         }}
                     />
                 </div>
-            )
+            ),
+            minWidth: 15,
+            width
         }),
         [props.columns]
     );
@@ -240,7 +227,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         useSortBy,
         usePagination,
         useColumnOrder,
-        useFlexLayout,
         useResizeColumns
     );
 
@@ -273,12 +259,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     return (
         <div className={props.className} style={props.styles}>
-            <div {...getTableProps()} className="table">
-                <div role="rowgroup" className="thead">
-                    {props.headerWidgets}
-                    {props.pagingPosition === "top" && pagination}
+            {props.headerWidgets}
+            {props.pagingPosition === "top" && pagination}
+            <table {...getTableProps()} className="table-grid">
+                <thead role="rowgroup" className="thead">
                     {headerGroups.map((headerGroup, index: number) => (
-                        <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
+                        <tr {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
                             {headerGroup.headers.map((column, index) => (
                                 <Header
                                     column={column}
@@ -291,25 +277,18 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                         setOrder(newOrder);
                                         setColumnOrder(newOrder);
                                     }}
-                                    setColumnSizes={setColumnSizes}
                                     setDragOver={setDragOver}
                                     setSortBy={setSortBy}
                                     sortable={props.columnsSortable}
                                     visibleColumns={visibleColumns}
-                                    weight={column.weight}
                                 />
                             ))}
                             {props.columnsHidable && (
-                                <ColumnSelector
-                                    allColumns={allColumns}
-                                    width={columnSelectorWidth}
-                                    setWidth={setColumnSelectorWidth}
-                                    setHiddenColumns={setHiddenColumns}
-                                />
+                                <ColumnSelector allColumns={allColumns} setHiddenColumns={setHiddenColumns} />
                             )}
-                        </div>
+                        </tr>
                     ))}
-                </div>
+                </thead>
                 <InfiniteBody
                     isInfinite={isInfinite}
                     hasMoreItems={props.hasMoreItems}
@@ -319,20 +298,27 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, index) => {
                         prepareRow(row);
                         return (
-                            <div {...row.getRowProps()} key={`row_${index}`} className="tr">
+                            <tr {...row.getRowProps()} key={`row_${index}`} className="tr">
                                 {row.cells.map(cell => cell.render("Cell"))}
-                                {props.columnsHidable && (
-                                    <div className="td column-selector" style={{ width: columnSelectorWidth }} />
-                                )}
-                            </div>
+                                {props.columnsHidable && <td className="td column-selector" />}
+                            </tr>
                         );
                     })}
                 </InfiniteBody>
-                <div className="tfoot">
-                    {props.pagingPosition === "bottom" && pagination}
-                    {props.footerWidgets}
-                </div>
-            </div>
+            </table>
+            {props.pagingPosition === "bottom" && pagination}
+            {props.footerWidgets}
         </div>
     );
+}
+
+function getWeight(width: WidthEnum, size: number) {
+    switch (width) {
+        case "autoFill":
+            return 1;
+        case "autoFit":
+            return 0;
+        case "manual":
+            return size;
+    }
 }

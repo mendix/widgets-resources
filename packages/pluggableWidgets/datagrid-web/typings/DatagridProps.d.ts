@@ -6,6 +6,8 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
+export type WidthEnum = "autoFill" | "autoFit" | "manual";
+
 export type FilterableEnum = "yes" | "no" | "custom";
 
 export type HidableEnum = "yes" | "hidden" | "no";
@@ -15,16 +17,14 @@ export interface ColumnsType {
     header: DynamicValue<string>;
     hasWidgets: boolean;
     content?: ListWidgetValue;
+    width: WidthEnum;
+    size: number;
     sortable: boolean;
     filterable: FilterableEnum;
     customFilter?: ReactNode;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
-    minWidth: number;
-    maxWidth: number;
-    defaultWidth: number;
-    defaultWeight: number;
 }
 
 export type PagingPositionEnum = "bottom" | "top";
@@ -36,16 +36,14 @@ export interface ColumnsPreviewType {
     header: string;
     hasWidgets: boolean;
     content: { widgetCount: number; renderer: ComponentType };
+    width: WidthEnum;
+    size: number | null;
     sortable: boolean;
     filterable: FilterableEnum;
     customFilter: { widgetCount: number; renderer: ComponentType };
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
-    minWidth: number | null;
-    maxWidth: number | null;
-    defaultWidth: number | null;
-    defaultWeight: number | null;
 }
 
 export interface DatagridContainerProps {

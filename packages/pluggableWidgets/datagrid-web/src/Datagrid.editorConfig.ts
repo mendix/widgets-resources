@@ -6,13 +6,6 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         if (!column.hasWidgets) {
             hidePropertyIn(defaultProperties, values, "columns", index, "content");
         }
-        if (!values.columnsResizable || !column.resizable) {
-            hidePropertyIn(defaultProperties, values, "columns", index, "minWidth");
-            hidePropertyIn(defaultProperties, values, "columns", index, "maxWidth");
-            hidePropertyIn(defaultProperties, values, "columns", index, "defaultWidth");
-        } else {
-            hidePropertyIn(defaultProperties, values, "columns", index, "defaultWeight");
-        }
         if (!values.columnsSortable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "sortable");
         }
@@ -31,6 +24,9 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         }
         if (!values.columnsHidable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "hidable");
+        }
+        if (column.width !== "manual") {
+            hidePropertyIn(defaultProperties, values, "columns", index, "size");
         }
     });
     if (!values.pagingEnabled) {

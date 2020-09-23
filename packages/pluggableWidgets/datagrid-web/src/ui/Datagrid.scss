@@ -6,17 +6,18 @@ $pagination-button-color: #3b4251;
 $pagination-caption-color: #0a1325;
 $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
-.table {
+.table-grid {
     position: relative;
     border-width: 0;
     background-color: transparent;
+    border-collapse: unset;
+    border-spacing: 0;
+    min-width: 100%;
 
     /* Table header */
     .thead {
         .th {
-            display: flex;
-            flex: 1 1 auto;
-            align-items: flex-start;
+            text-align: left;
             font-weight: 600;
             border-style: solid;
             border-color: $border-color;
@@ -26,9 +27,14 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             border-left: 0;
             background-color: $background-color;
             padding: 16px 8px;
+            vertical-align: top;
 
             .clickable {
                 cursor: pointer;
+            }
+
+            &.dragging {
+                border-left: 4px solid $dragging-color-effect;
             }
 
             .column-resizer {
@@ -51,10 +57,6 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-
-                &.dragging {
-                    border-left: 4px solid $dragging-color-effect;
-                }
             }
 
             .column-header {
@@ -65,6 +67,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
                 svg {
                     color: $icon-color;
+                    margin-left: 5px;
                 }
             }
 
@@ -86,9 +89,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             }
         }
         .column-selector {
-            flex: unset;
             padding-left: 0;
             padding-right: 0;
+            text-align: right;
+
             button {
                 padding: 8px;
                 align-self: flex-end;
@@ -129,85 +133,66 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         .tr {
             position: relative;
             .td {
-                display: flex;
-                flex: 1 1 0;
-                justify-content: space-between;
-                align-items: center;
-                padding: 16px 8px;
+                text-align: left;
+                vertical-align: middle;
                 border-width: 0;
                 border-color: $border-color;
                 border-bottom-width: 1px;
                 border-bottom-style: solid;
                 background-color: $background-color;
                 overflow: hidden;
+                padding: 16px 8px;
+                max-width: 0;
 
                 &:focus {
                     outline: none;
                 }
-
-                > .td-text,
-                * {
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
             }
 
             .column-selector {
-                flex: unset;
                 padding-left: 0;
                 padding-right: 0;
             }
         }
     }
 
-    /* Table Footer */
-    .tfoot {
-        > .tr > .th {
-            display: flex;
-            padding: 16px;
-            border-width: 0;
-            background-color: $background-color;
-        }
-
-        > .tr > .td {
-            display: flex;
-            padding: 16px;
-            border-width: 0;
-            background-color: $background-color;
-        }
+    .td-text, * {
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     & *:focus {
         outline: 0;
     }
+}
 
-    .pagination {
-        display: flex;
-        justify-content: flex-end;
-        white-space: nowrap;
-        align-items: baseline;
-        margin: 16px;
-        color: $pagination-caption-color;
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    align-items: baseline;
+    margin: 16px;
+    color: $pagination-caption-color;
 
-        .paging-status {
-            padding: 0 8px 8px;
-        }
-
-        button {
-            padding: 6px;
-            color: $pagination-button-color;
-            border-color: transparent;
-            background-color: transparent;
-
-            &:hover {
-                color: $primary-color;
-                border-color: transparent;
-                background-color: transparent;
-            }
-        }
+    .paging-status {
+        padding: 0 8px 8px;
     }
 
-    .tr {
-        display: flex;
+    button {
+        padding: 6px;
+        color: $pagination-button-color;
+        border-color: transparent;
+        background-color: transparent;
+
+        &:disabled {
+            border-color: transparent;
+            background-color: transparent;
+        }
+
+        &:hover {
+            color: $primary-color;
+            border-color: transparent;
+            background-color: transparent;
+        }
     }
 }

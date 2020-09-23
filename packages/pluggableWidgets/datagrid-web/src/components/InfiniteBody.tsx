@@ -39,7 +39,7 @@ export function InfiniteBody({
     );
 
     return (
-        <div
+        <tbody
             {...rest}
             className={classNames("tbody", isInfinite ? "infinite-loading" : "")}
             ref={calculateBodyHeight}
@@ -47,6 +47,6 @@ export function InfiniteBody({
             style={isInfinite && bodySize > 0 ? { maxHeight: bodySize } : {}}
         >
             {children}
-        </div>
+        </tbody>
     );
 }

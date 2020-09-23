@@ -5,32 +5,23 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
-    width: number;
     setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>;
-    setWidth: Dispatch<SetStateAction<number>>;
 }
 
 export function ColumnSelector<D extends object>({
     allColumns,
-    width,
-    setHiddenColumns,
-    setWidth
+    setHiddenColumns
 }: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
     const listRef = useRef<HTMLUListElement>(null);
     useOnClickOutside(listRef, () => setShow(false));
     const visibleColumns = allColumns.filter(column => column.isVisible).length;
     return (
-        <div className="th column-selector">
+        <td className="th column-selector" width="1px">
             <button
                 className="btn btn-default"
                 onClick={() => {
                     setShow(show => !show);
-                }}
-                ref={ref => {
-                    if (ref && ref.clientWidth && width !== ref.clientWidth) {
-                        setWidth(ref.clientWidth);
-                    }
                 }}
             >
                 <FontAwesomeIcon icon={faEye} />
@@ -67,7 +58,7 @@ export function ColumnSelector<D extends object>({
                     })}
                 </ul>
             )}
-        </div>
+        </td>
     );
 }
 
