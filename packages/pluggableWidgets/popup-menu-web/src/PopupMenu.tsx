@@ -57,9 +57,7 @@ export default function PopupMenu(props: PopupMenuContainerProps): ReactElement 
             <div className={"popupmenu-trigger"} {...onClick}>
                 {props.menuTrigger}
             </div>
-            <div className={`popupmenu-menu popupmenu-position-${props.position}`} style={{ display: "none" }}>
-                {menuOptions}
-            </div>
+            <div className={`popupmenu-menu popupmenu-position-${props.position}`}>{menuOptions}</div>
         </div>
     );
 }
