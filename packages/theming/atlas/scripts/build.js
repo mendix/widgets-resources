@@ -30,15 +30,15 @@ concurrently(
         },
         {
             name: "fonts",
-            command: `copy-and-watch ${watchArg} ./src/web/sass/core/_legacy/bootstrap/fonts/* '${outputDir}/styles/web/css/fonts'`
+            command: `copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*' '${outputDir}/styles/web/css/fonts'`
         },
         {
             name: "sass",
-            command: `sass ${watchArg} --embed-sources ${compressArg} --no-charset ./src/web/sass/main.scss '${outputDir}/styles/web/css/main.css'`
+            command: `sass ${watchArg} --embed-sources ${compressArg} --no-charset src/web/sass/main.scss '${outputDir}/styles/web/css/main.css'`
         },
         {
             name: "tsc",
-            command: `tsc ${watchArg} --project ./tsconfig.json --outDir '${outputDir}/styles/native'`
+            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputDir}/styles/native'`
         }
     ].concat(
         projectDeployDir
