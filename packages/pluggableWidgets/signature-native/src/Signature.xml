@@ -22,11 +22,11 @@
             <propertyGroup caption="Buttons">
                 <property key="buttonCaptionClear" type="textTemplate" required="false">
                     <caption>Button caption clear</caption>
-                    <description>The caption for the clear button.</description>
+                    <description />
                 </property>
                 <property key="buttonCaptionSave" type="textTemplate" required="false">
                     <caption>Button caption save</caption>
-                    <description>The caption for the save button.</description>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

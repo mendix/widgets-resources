@@ -38,14 +38,6 @@ export function Signature(props: Props): ReactElement {
         [props.imageAttribute, props.onSave]
     );
 
-    const onPressClearHandler = (): void => {
-        ref.current?.clearSignature();
-    };
-
-    const onPressSaveHandler = (): void => {
-        ref.current?.readSignature();
-    };
-
     return (
         <View style={[{ flex: 1 }, containerStyles]}>
             <SignatureScreen
@@ -61,7 +53,7 @@ export function Signature(props: Props): ReactElement {
             <View style={styles.buttonWrapper}>
                 <Touchable
                     testID={`${buttonCaptionClear}$Touchable`}
-                    onPress={onPressClearHandler}
+                    onPress={() => ref.current?.clearSignature()}
                     accessible={false}
                     style={buttonClearContainerStyles}
                     {...buttonClearContainerProps}
@@ -72,7 +64,7 @@ export function Signature(props: Props): ReactElement {
                 </Touchable>
                 <Touchable
                     testID={`${buttonCaptionSave}$Touchable`}
-                    onPress={onPressSaveHandler}
+                    onPress={() => ref.current?.readSignature()}
                     accessible={false}
                     style={buttonSaveContainerStyles}
                     {...buttonSaveContainerProps}

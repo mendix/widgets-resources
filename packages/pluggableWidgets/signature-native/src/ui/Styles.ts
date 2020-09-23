@@ -72,21 +72,21 @@ export const defaultSignatureStyle: SignatureStyle = {
 };
 
 export const webStyles = `
-                    .m-signature-pad {
-                        border: none;
-                    }
-                    .m-signature-pad--body {
-                      left: 0;
-                      right: 0;
-                      top: 0;
-                      bottom: 0;
-                      border: none;
-                    }
-                    .m-signature-pad--body canvas {
-                        border-radius: 0;
-                        box-shadow: none;
-                    }
-                    .m-signature-pad--footer {
-                        display: none;
-                    }
-                `;
+    .m-signature-pad {
+        border: none;
+    }
+    .m-signature-pad--body {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border: none;
+    }
+    .m-signature-pad--body canvas {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .m-signature-pad--footer {
+        display: none;
+    }
+`;
