@@ -83,5 +83,4 @@ Run `npm run build` to build and output assets to `dist/theme`.
 
 Configure the environment variable `ATLAS_MX_PROJECT_PATH` with an absolute path to a Mendix project directory. 
 Run `npm run start` to build with watch mode active, re-building assets when you make changes. 
-Assets will be copied to the configured Mendix project's `theme` directory in the correct structure. 
-You can then re-deploy your Mendix app to receive updates styles.   
+Assets will be output to the configured Mendix project's `theme` directory as well as the `deployment` in the correct structure.   
