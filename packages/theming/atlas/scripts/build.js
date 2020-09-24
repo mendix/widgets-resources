@@ -11,6 +11,9 @@ const projectDeployDir = mode !== "production" && MX_PROJECT_PATH ? join(MX_PROJ
 console.info(`Building for ${mode}...`);
 const watchArg = mode !== "production" ? "--watch" : "";
 const compressArg = mode === "production" ? "--style compressed" : "";
+const copyAndWatchFonts = command(`copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*'`);
+const copyAndWatchContent = command(`copy-and-watch ${watchArg} 'content/**/*'`);
+const compileSass = command(`sass ${watchArg} --embed-sources ${compressArg} --no-charset src/web/sass/main.scss`);
 
 cd(join(__dirname, ".."));
 rm("-rf", outputDir);
@@ -18,7 +21,7 @@ concurrently(
     [
         {
             name: "content-theme",
-            command: `copy-and-watch ${watchArg} 'content/**/*' '${outputDir}'`
+            command: copyAndWatchContent(outputDir)
         },
         {
             name: "web-sass-and-manifest-theme",
@@ -30,11 +33,11 @@ concurrently(
         },
         {
             name: "fonts-theme",
-            command: `copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*' '${outputDir}/styles/web/css/fonts'`
+            command: copyAndWatchFonts(`${outputDir}/styles/web/css/fonts`)
         },
         {
             name: "sass-theme",
-            command: `sass ${watchArg} --embed-sources ${compressArg} --no-charset src/web/sass/main.scss '${outputDir}/styles/web/css/main.css'`
+            command: compileSass(`${outputDir}/styles/web/css/main.css`)
         },
         {
             name: "tsc-theme",
@@ -45,17 +48,23 @@ concurrently(
             ? [
                   {
                       name: "fonts-deployment",
-                      command: `copy-and-watch --watch 'src/web/sass/core/_legacy/bootstrap/fonts/*' '${projectDeployDir}/styles/web/css/fonts'`
+                      command: copyAndWatchFonts(`${projectDeployDir}/styles/web/css/fonts`)
                   },
                   {
                       name: "sass-deployment",
-                      command: `sass --watch --embed-sources --no-charset src/web/sass/main.scss '${projectDeployDir}/styles/web/css/main.css'`
+                      command: compileSass(`${projectDeployDir}/styles/web/css/main.css`)
                   },
                   {
                       name: "content-deployment",
-                      command: `copy-and-watch --watch 'content/**/*' '${projectDeployDir}'`
+                      command: copyAndWatchContent(projectDeployDir)
                   }
               ]
             : []
     )
 );
+
+function command(command) {
+    return function(outputPath) {
+        return `${command} '${outputPath}'`;
+    };
+}

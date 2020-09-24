@@ -1,26 +1,26 @@
 {
-    "name": "@mendix/atlas-ui-framework",
-    "version": "3.0.0",
-    "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
-    "scripts": {
-        "bump:patch": "node ./scripts/bump-patch.js",
-        "bump:minor": "node ./scripts/bump-minor.js",
-        "bump:major": "node ./scripts/bump-major.js",
-        "build": "node ./scripts/build.js",
-        "start": "node ./scripts/build.js development"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/mendix/widgets-resources.git"
-    },
-    "author": "Mendix",
-    "license": "MIT",
-    "devDependencies": {
-        "sass": "^1.26.10",
-        "typescript": "^3.8.3",
-        "shelljs": "^0.8.4",
-        "copy-and-watch": "^0.1.5",
-        "concurrently": "^5.0.1"
-    },
-    "dependencies": {}
+  "name": "@mendix/atlas-ui",
+  "version": "3.0.0",
+  "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
+  "scripts": {
+    "bump:patch": "node ./scripts/bump-patch.js",
+    "bump:minor": "node ./scripts/bump-minor.js",
+    "bump:major": "node ./scripts/bump-major.js",
+    "build": "node ./scripts/build.js",
+    "start": "node ./scripts/build.js development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "author": "Mendix",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.26.10",
+    "typescript": "^3.8.3",
+    "shelljs": "^0.8.4",
+    "copy-and-watch": "^0.1.5",
+    "concurrently": "^5.0.1"
+  },
+  "dependencies": {}
 }
