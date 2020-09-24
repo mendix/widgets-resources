@@ -30,13 +30,21 @@
                         <attributeType name="DateTime"/>
                     </attributeTypes>
                 </property>
-                <property key="title" type="textTemplate" dataSource="data" required="false">
+            </propertyGroup>
+            <propertyGroup caption="Fields">
+                <property key="title" type="attribute" dataSource="data" required="false">
                     <caption>Title</caption>
-                    <description />
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
                 </property>
-                <property key="description" type="textTemplate" dataSource="data" required="false">
+                <property key="description" type="attribute" dataSource="data" required="false">
                     <caption>Description</caption>
-                    <description />
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
                 </property>
                 <property key="time" type="textTemplate" dataSource="data" required="false">
                     <caption>Event date/time</caption>
@@ -57,15 +65,26 @@
                         <enumerationValue key="year">Year</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="showGroupDivider" type="boolean" defaultValue="true">
-                    <caption>Show group divider</caption>
-                    <description>Shows a text between grouped events based on group by option.</description>
+                <property key="showGroupHeader" type="boolean" defaultValue="true">
+                    <caption>Show group header</caption>
+                    <description>Shows a header between grouped events based on event date.</description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Events">
-                <property key="onClick" type="action" dataSource="data" required="false">
-                    <caption>On click</caption>
+                <property key="groupByDayOptions" type="enumeration" defaultValue="dayName">
+                    <caption>Format</caption>
+                    <description>Format group header with current language's format</description>
+                    <enumerationValues>
+                        <enumerationValue key="dayName">Day name</enumerationValue>
+                        <enumerationValue key="dayMonth">Day number and month</enumerationValue>
+                        <enumerationValue key="fullDate">Day number, month and year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="groupByMonthOptions" type="enumeration" defaultValue="month">
+                    <caption>Format</caption>
                     <description/>
+                    <enumerationValues>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="monthYear">Month and year</enumerationValue>
+                    </enumerationValues>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Custom">
@@ -73,9 +92,9 @@
                     <caption>Icon</caption>
                     <description>Content of the icon</description>
                 </property>
-                <property key="customGroupDivider" type="widgets" dataSource="data" required="false">
-                    <caption>Group divider</caption>
-                    <description>Content of the group divider</description>
+                <property key="customGroupHeader" type="widgets" dataSource="data" required="false">
+                    <caption>Group header</caption>
+                    <description>Content of the group header</description>
                 </property>
                 <property key="customTitle" type="widgets" dataSource="data" required="false">
                     <caption>Title</caption>
@@ -91,6 +110,11 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-
+        <propertyGroup caption="Events">
+            <property key="onClick" type="action" dataSource="data" required="false">
+                <caption>On click</caption>
+                <description/>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

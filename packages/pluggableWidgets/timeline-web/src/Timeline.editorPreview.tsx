@@ -33,9 +33,9 @@ export function preview(props: TimelinePreviewProps) {
                         </props.customIcon.renderer>
                     ),
                     groupDivider: (
-                        <props.customGroupDivider.renderer>
+                        <props.customGroupHeader.renderer>
                             <div />
-                        </props.customGroupDivider.renderer>
+                        </props.customGroupHeader.renderer>
                     ),
                     title: (
                         <props.customTitle.renderer>
@@ -69,7 +69,7 @@ export function preview(props: TimelinePreviewProps) {
         <TimelineComponent
             data={structuredEvents()}
             renderMode={props.renderMode}
-            showGroupDivider={props.showGroupDivider}
+            showGroupHeader={props.showGroupHeader}
         />
     );
 }

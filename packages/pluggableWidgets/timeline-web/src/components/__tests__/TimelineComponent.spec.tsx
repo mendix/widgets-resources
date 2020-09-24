@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
-import { dynamicValue } from "@widgets-resources/piw-utils";
-import TimelineComponent, { TimelineComponentProps } from "../TimelineComponent";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
+import TimelineComponent, { getGroupHeaderByType, TimelineComponentProps } from "../TimelineComponent";
 import { BasicItemType, CustomItemType } from "../../Timeline";
 import { WebIcon } from "mendix";
 
@@ -25,7 +25,7 @@ describe("Timeline", () => {
     };
 
     const customItem: CustomItemType = {
-        groupDivider: <p>Day Divider</p>,
+        groupHeader: <p>Day Divider</p>,
         title: <p>Title</p>,
         eventDateTime: <p>Date Time</p>,
         description: <p>Description</p>
@@ -42,12 +42,12 @@ describe("Timeline", () => {
     const basicRenderProps: TimelineComponentProps = {
         data: basicData,
         renderMode: "basic",
-        showGroupDivider: true
+        showGroupHeader: true
     };
     const customRenderProps: TimelineComponentProps = {
         data: customData,
         renderMode: "custom",
-        showGroupDivider: true
+        showGroupHeader: true
     };
 
     it("renders timeline with basic configuration", () => {
@@ -59,7 +59,110 @@ describe("Timeline", () => {
         expect(component).toMatchSnapshot();
     });
     it("hides the timeline header", () => {
-        const component = shallow(<TimelineComponent {...basicRenderProps} showGroupDivider={false} />);
+        const component = shallow(<TimelineComponent {...basicRenderProps} showGroupHeader={false} />);
         expect(component).toMatchSnapshot();
+    });
+
+    it("calls correct formatter with fulldate", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "fullDate");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "date" });
+    });
+
+    it("calls correct formatter with day", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "day");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "date" });
+    });
+
+    it("calls correct formatter with dayName", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "dayName");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "custom", pattern: "EEEE" });
+    });
+
+    it("calls correct formatter with dayMonth", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "dayMonth");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "custom", pattern: "EE MMMM" });
+    });
+
+    it("calls correct formatter with month", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "month");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "custom", pattern: "MMMM" });
+    });
+
+    it("calls correct formatter with monthYear", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "monthYear");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "custom", pattern: "MMM YYYY" });
+    });
+
+    it("calls correct formatter with year", () => {
+        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
+        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "year");
+
+        expect(date.formatter.withConfig).toBeCalledWith({ type: "custom", pattern: "YYYY" });
+    });
+
+    describe("with action set", () => {
+        it("renders with clickable styles", () => {
+            const action = actionValue(true, false);
+            const basicItemWithAction: BasicItemType = {
+                ...basicItem,
+                icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false),
+                action
+            };
+            basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
+
+            const basicPropsWithAction = { ...basicRenderProps, data: basicData };
+            const component = shallow(<TimelineComponent {...basicPropsWithAction} />);
+
+            const clickableItem = component.find(".clickable");
+
+            expect(clickableItem).toHaveLength(1);
+            expect(component).toMatchSnapshot();
+        });
+        it("triggers actions when clicked", () => {
+            const action = actionValue(true, false);
+            const basicItemWithAction: BasicItemType = {
+                ...basicItem,
+                icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false),
+                action
+            };
+            basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
+
+            const basicPropsWithAction = { ...basicRenderProps, data: basicData };
+            const component = shallow(<TimelineComponent {...basicPropsWithAction} />);
+
+            const clickableItem = component.find(".clickable");
+            clickableItem.simulate("click");
+
+            expect(action.execute).toBeCalled();
+        });
+        it("change style when hovered", () => {
+            const action = actionValue(true, false);
+            const basicItemWithAction: BasicItemType = {
+                ...basicItem,
+                icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false),
+                action
+            };
+            basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
+
+            const basicPropsWithAction = { ...basicRenderProps, data: basicData };
+            const component = shallow(<TimelineComponent {...basicPropsWithAction} />);
+
+            const clickableItem = component.find(".clickable");
+            clickableItem.simulate("mouseover");
+
+            expect(component).toMatchSnapshot();
+        });
     });
 });

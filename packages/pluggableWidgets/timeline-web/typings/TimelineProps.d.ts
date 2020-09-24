@@ -18,6 +18,10 @@ export type RenderModeEnum = "basic" | "custom";
 
 export type GroupByKeyEnum = "day" | "month" | "year";
 
+export type GroupByDayOptionsEnum = "dayName" | "dayMonth" | "fullDate";
+
+export type GroupByMonthOptionsEnum = "month" | "monthYear";
+
 export interface TimelineContainerProps {
     name: string;
     class: string;
@@ -26,18 +30,20 @@ export interface TimelineContainerProps {
     renderMode: RenderModeEnum;
     data: ListValue;
     eventTime: ListAttributeValue<Date>;
-    title?: ListExpressionValue<string>;
-    description?: ListExpressionValue<string>;
+    title?: ListAttributeValue<string>;
+    description?: ListAttributeValue<string>;
     time?: ListExpressionValue<string>;
     icon?: DynamicValue<WebIcon>;
     groupByKey: GroupByKeyEnum;
-    showGroupDivider: boolean;
-    onClick?: ListActionValue;
+    showGroupHeader: boolean;
+    groupByDayOptions: GroupByDayOptionsEnum;
+    groupByMonthOptions: GroupByMonthOptionsEnum;
     customIcon?: ListWidgetValue;
-    customGroupDivider?: ListWidgetValue;
+    customGroupHeader?: ListWidgetValue;
     customTitle?: ListWidgetValue;
     customEventDateTime?: ListWidgetValue;
     customDescription?: ListWidgetValue;
+    onClick?: ListActionValue;
 }
 
 export interface TimelinePreviewProps {
@@ -51,11 +57,13 @@ export interface TimelinePreviewProps {
     time: string;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     groupByKey: GroupByKeyEnum;
-    showGroupDivider: boolean;
-    onClick: {} | null;
+    showGroupHeader: boolean;
+    groupByDayOptions: GroupByDayOptionsEnum;
+    groupByMonthOptions: GroupByMonthOptionsEnum;
     customIcon: { widgetCount: number; renderer: ComponentType };
-    customGroupDivider: { widgetCount: number; renderer: ComponentType };
+    customGroupHeader: { widgetCount: number; renderer: ComponentType };
     customTitle: { widgetCount: number; renderer: ComponentType };
     customEventDateTime: { widgetCount: number; renderer: ComponentType };
     customDescription: { widgetCount: number; renderer: ComponentType };
+    onClick: {} | null;
 }

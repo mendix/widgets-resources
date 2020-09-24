@@ -1,17 +1,39 @@
-import { hidePropertiesIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
     if (values.renderMode === "custom") {
-        hidePropertiesIn(defaultProperties, values, ["title", "description", "icon", "time"]);
+        hidePropertiesIn(defaultProperties, values, [
+            "title",
+            "description",
+            "icon",
+            "time",
+            "groupByDayOptions",
+            "groupByMonthOptions"
+        ]);
     } else {
         hidePropertiesIn(defaultProperties, values, [
             "customIcon",
             "customTitle",
             "customEventDateTime",
             "customDescription",
-            "customGroupDivider"
+            "customGroupHeader"
         ]);
+    }
+    if (!values.showGroupHeader) {
+        hidePropertiesIn(defaultProperties, values, ["groupByDayOptions", "groupByMonthOptions"]);
+        hidePropertyIn(defaultProperties, values, "customGroupHeader");
+    }
+    switch (values.groupByKey) {
+        case "day":
+            hidePropertyIn(defaultProperties, values, "groupByMonthOptions");
+            break;
+        case "month":
+            hidePropertyIn(defaultProperties, values, "groupByDayOptions");
+            break;
+        default:
+            hidePropertiesIn(defaultProperties, values, ["groupByDayOptions", "groupByMonthOptions"]);
+            break;
     }
     return defaultProperties;
 }
@@ -24,14 +46,6 @@ export function check(values: TimelinePreviewProps): Problem[] {
                 property: "title",
                 severity: "error",
                 message: "Title is required for 'Basic' timeline",
-                url: ""
-            });
-        }
-        if (!values.description) {
-            errors.push({
-                property: "description",
-                severity: "error",
-                message: "Description is required for 'Basic' timeline",
                 url: ""
             });
         }
