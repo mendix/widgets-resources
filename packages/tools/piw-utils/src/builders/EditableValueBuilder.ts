@@ -2,17 +2,21 @@ import { ValueStatus } from "mendix";
 
 type Option<T> = T | undefined;
 
+interface EditableValueFormatter {
+    type: string;
+    format: any;
+    parse: any;
+    getFormatPlaceholder: any;
+    withConfig: () => void;
+}
+
 interface EditableValue<T> {
     status: ValueStatus;
     readOnly: boolean;
     value: Option<T>;
     displayValue: string;
     validation: Option<string>;
-    formatter: {
-        format: any;
-        parse: any;
-        getFormatPlaceholder: any;
-    };
+    formatter: EditableValueFormatter;
     setValidator: () => void;
     setValue: (value: T) => void;
     setTextValue: (value: string) => void;
@@ -30,7 +34,9 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
         formatter: {
             format: jest.fn(name => `Formatted ${name}`),
             parse: jest.fn(),
-            getFormatPlaceholder: jest.fn()
+            withConfig: jest.fn(() => new EditableValueBuilder().build().formatter),
+            getFormatPlaceholder: jest.fn(),
+            type: "datetime"
         },
         setValidator: jest.fn(),
         setValue: jest.fn((value: T) => this.withValue(value)),
@@ -41,6 +47,11 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
     withValue(value?: T): EditableValueBuilder<T> {
         this.editableValue.value = value;
         this.editableValue.displayValue = this.editableValue.formatter.format(value);
+        return this;
+    }
+
+    withFormatter(formatter: EditableValueFormatter): EditableValueBuilder<T> {
+        this.editableValue.formatter = formatter;
         return this;
     }
 
