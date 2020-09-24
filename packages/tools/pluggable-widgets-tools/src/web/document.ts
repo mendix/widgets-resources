@@ -1,3 +1,5 @@
+import { RefObject, useEffect } from "react";
+
 export function unBlockAbsoluteElement(
     element: HTMLElement,
     boundingRect: DOMRect,
@@ -10,14 +12,12 @@ export function unBlockAbsoluteElement(
         boundingRect.y + boundingRect.height < window.innerHeight
     ) {
         // Top of element is blocked
-        console.log("Top of element is blocked");
         if (
             boundingRect.left < blockingElementRect.right &&
             boundingRect.right >= blockingElementRect.right &&
             boundingRect.left >= blockingElementRect.left
         ) {
             // Top left of element is blocked
-            console.log("Top left of element is blocked");
             element.style.top =
                 getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
             element.style.left =
@@ -28,7 +28,6 @@ export function unBlockAbsoluteElement(
             boundingRect.right <= blockingElementRect.right
         ) {
             // Top right of element is blocked
-            console.log("Top right of element is blocked");
             element.style.top =
                 getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
             element.style.right =
@@ -44,14 +43,12 @@ export function unBlockAbsoluteElement(
         boundingRect.y - boundingRect.height > 0
     ) {
         // Bottom of element is blocked
-        console.log("Bottom of element is blocked");
         if (
             boundingRect.left < blockingElementRect.right &&
             boundingRect.right >= blockingElementRect.right &&
             boundingRect.left >= blockingElementRect.left
         ) {
             // Bottom left of element is blocked
-            console.log("Bottom left of element is blocked");
             element.style.bottom =
                 getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
             element.style.left =
@@ -62,7 +59,6 @@ export function unBlockAbsoluteElement(
             boundingRect.right <= blockingElementRect.right
         ) {
             // Bottom right of element is blocked
-            console.log("Bottom right of element is blocked");
             element.style.bottom =
                 getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
             element.style.right =
@@ -77,7 +73,6 @@ export function unBlockAbsoluteElement(
         boundingRect.right >= blockingElementRect.right
     ) {
         // Left of element is blocked
-        console.log("Left of element is blocked");
         element.style.left =
             getPixelValueAsNumber(element, "left") + blockingElementRect.right - boundingRect.left + "px";
     } else if (
@@ -86,7 +81,6 @@ export function unBlockAbsoluteElement(
         boundingRect.right <= blockingElementRect.right
     ) {
         // Right of element is blocked
-        console.log("Right of element is blocked");
         element.style.right =
             getPixelValueAsNumber(element, "right") + blockingElementRect.left - boundingRect.right + "px";
     }
@@ -236,4 +230,21 @@ export function moveAbsoluteElementOnScreen(element: HTMLElement): void {
         element.style.bottom =
             getPixelValueAsNumber(element, "bottom") + (rect.y + rect.height - window.innerHeight) + "px";
     }
+}
+
+export function handleOnClickOutsideElement(ref: RefObject<HTMLDivElement>, handler: () => void): void {
+    useEffect(() => {
+        const listener = (event: MouseEvent & { target: Node | null }): void => {
+            if (!ref.current || ref.current.contains(event.target)) {
+                return;
+            }
+            handler();
+        };
+        document.addEventListener("mousedown", listener);
+        document.addEventListener("touchstart", listener);
+        return () => {
+            document.removeEventListener("mousedown", listener);
+            document.removeEventListener("touchstart", listener);
+        };
+    }, [ref, handler]);
 }

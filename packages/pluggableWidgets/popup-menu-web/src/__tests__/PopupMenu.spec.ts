@@ -7,7 +7,7 @@ import PopupMenu from "../PopupMenu";
 jest.useFakeTimers();
 
 describe("Popup menu", () => {
-    const createPopupMenu = (props: PopupMenuContainerProps): ShallowWrapper<PopupMenuContainerProps, any> =>
+    const createPopupMenu = (props: PopupMenuContainerProps): ShallowWrapper<PopupMenuContainerProps, {}> =>
         shallow(createElement(PopupMenu, props));
     const basicItemProps: BasicItemsType = { itemType: "item", caption: "Caption", styleClass: "defaultStyle" };
     const customItemProps: CustomItemsType = { content: createElement("div", null, null) };

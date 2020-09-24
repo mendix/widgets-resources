@@ -1,13 +1,13 @@
-// import { isBehindRandomElement, unBlockElement } from "@mendix/pluggable-widgets-tools";
 import {
     isBehindElement,
     isBehindRandomElement,
     isElementPartiallyOffScreen,
     isElementVisibleByUser,
     moveAbsoluteElementOnScreen,
-    unBlockAbsoluteElement
+    unBlockAbsoluteElement,
+    handleOnClickOutsideElement
 } from "../../../tools/pluggable-widgets-tools/src/index";
-import { ReactElement, useState, createElement, useCallback, RefObject, useEffect, useRef } from "react";
+import { ReactElement, useState, createElement, useCallback, useEffect, useRef } from "react";
 import { executeAction } from "@widgets-resources/piw-utils";
 import { ActionValue } from "mendix";
 
@@ -16,10 +16,10 @@ import "./ui/PopupMenu.scss";
 
 export default function PopupMenu(props: PopupMenuContainerProps): ReactElement {
     const ref = useRef<HTMLDivElement>(null);
-    useOnClickOutside(ref, () => setVisibility(false));
+    handleOnClickOutsideElement(ref, () => setVisibility(false));
     const [visibility, setVisibility] = useState(false);
     useEffect(() => {
-        const element = (ref.current as HTMLDivElement).querySelector(".popupmenu-menu") as HTMLDivElement;
+        const element = ref.current?.querySelector(".popupmenu-menu") as HTMLDivElement;
         element.style.display = visibility ? "flex" : "none";
         if (visibility) {
             correctPosition(element);
@@ -66,10 +66,8 @@ function createMenuOptions(
     props: PopupMenuContainerProps,
     handleOnClickItem: (itemAction?: ActionValue) => void
 ): ReactElement[] {
-    let menuOptions: ReactElement[];
-
     if (props.renderMode === "basic") {
-        menuOptions = props.basicItems.map((item, index) => {
+        return props.basicItems.map((item, index) => {
             const pickedStyle =
                 item.styleClass !== "defaultStyle"
                     ? "popupmenu-basic-item-" + item.styleClass.replace("Style", "")
@@ -89,42 +87,21 @@ function createMenuOptions(
             );
         });
     } else {
-        menuOptions = props.customItems.map((item, index) => (
+        return props.customItems.map((item, index) => (
             <div key={index} className={"popupmenu-custom-item"} onClick={() => handleOnClickItem(item.action)}>
                 {item.content}
             </div>
         ));
     }
-
-    return menuOptions;
-}
-
-function useOnClickOutside(ref: RefObject<HTMLDivElement>, handler: () => void): void {
-    useEffect(() => {
-        const listener = (event: MouseEvent & { target: Node | null }): void => {
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
-            handler();
-        };
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
-        return () => {
-            document.removeEventListener("mousedown", listener);
-            document.removeEventListener("touchstart", listener);
-        };
-    }, [ref, handler]);
 }
 
 function correctPosition(element: HTMLElement): void {
     const isOffScreen = isElementPartiallyOffScreen(element);
-    console.log(isOffScreen);
     if (isOffScreen) {
         moveAbsoluteElementOnScreen(element);
     }
     const boundingRect: DOMRect = element.getBoundingClientRect();
     const blockingElement = isBehindRandomElement(element, boundingRect, 3, "popupmenu");
-    console.log(blockingElement);
     if (blockingElement && isElementVisibleByUser(blockingElement)) {
         unBlockAbsoluteElement(element, boundingRect, blockingElement.getBoundingClientRect());
     } else if (blockingElement) {
