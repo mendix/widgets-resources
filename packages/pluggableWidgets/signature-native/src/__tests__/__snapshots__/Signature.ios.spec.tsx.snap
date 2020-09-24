@@ -219,24 +219,24 @@ exports[`Signature iOS renders with custom styles 1`] = `
         }
     }
     
-                    .m-signature-pad {
-                        border: none;
-                    }
-                    .m-signature-pad--body {
-                      left: 0;
-                      right: 0;
-                      top: 0;
-                      bottom: 0;
-                      border: none;
-                    }
-                    .m-signature-pad--body canvas {
-                        border-radius: 0;
-                        box-shadow: none;
-                    }
-                    .m-signature-pad--footer {
-                        display: none;
-                    }
-                
+    .m-signature-pad {
+        border: none;
+    }
+    .m-signature-pad--body {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border: none;
+    }
+    .m-signature-pad--body canvas {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .m-signature-pad--footer {
+        display: none;
+    }
+
     </style>
 </head>
 <body onselectstart=\\"return false\\">
@@ -1221,24 +1221,24 @@ exports[`Signature iOS renders with default styles 1`] = `
         }
     }
     
-                    .m-signature-pad {
-                        border: none;
-                    }
-                    .m-signature-pad--body {
-                      left: 0;
-                      right: 0;
-                      top: 0;
-                      bottom: 0;
-                      border: none;
-                    }
-                    .m-signature-pad--body canvas {
-                        border-radius: 0;
-                        box-shadow: none;
-                    }
-                    .m-signature-pad--footer {
-                        display: none;
-                    }
-                
+    .m-signature-pad {
+        border: none;
+    }
+    .m-signature-pad--body {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border: none;
+    }
+    .m-signature-pad--body canvas {
+        border-radius: 0;
+        box-shadow: none;
+    }
+    .m-signature-pad--footer {
+        display: none;
+    }
+
     </style>
 </head>
 <body onselectstart=\\"return false\\">
