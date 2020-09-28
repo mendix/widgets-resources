@@ -65,9 +65,9 @@ export const CheckBox: CheckBoxType = {
 };
 export const CheckBoxVertical: CheckBoxType = {
     container: TextBoxVertical.container,
-    label: {
-        ...TextBoxVertical.label
-    },
+    containerDisabled: TextBoxVertical.containerDisabled,
+    label: TextBoxVertical.label,
+    labelDisabled: TextBoxVertical.labelDisabled,
     input: {
         ...CheckBox.input,
         alignSelf: "flex-start"

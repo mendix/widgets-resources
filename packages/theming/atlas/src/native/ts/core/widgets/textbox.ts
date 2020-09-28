@@ -57,6 +57,9 @@ export const TextBox: TextBoxType = {
         borderColor: input.inputDisabled.borderColor,
         backgroundColor: input.inputDisabled.backgroundColor
     },
+    inputFocused: {
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+    },
     inputError: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         color: input.inputError.color,
@@ -73,6 +76,7 @@ export const TextBox: TextBoxType = {
 };
 export const TextBoxVertical: TextBoxType = {
     container: {},
+    containerDisabled: {},
     label: {
         numberOfLines: input.label.numberOfLines,
         color: input.label.color,
@@ -102,11 +106,8 @@ export const TextBoxVertical: TextBoxType = {
         paddingHorizontal: input.input.paddingHorizontal,
         paddingVertical: input.input.paddingVertical
     },
-    inputDisabled: {
-        color: input.inputDisabled.color,
-        borderColor: input.inputDisabled.borderColor,
-        backgroundColor: input.inputDisabled.backgroundColor
-    },
+    inputDisabled: TextBox.inputDisabled,
+    inputFocused: TextBox.inputFocused,
     inputError: TextBox.inputError,
     validationMessage: TextBox.validationMessage
 };

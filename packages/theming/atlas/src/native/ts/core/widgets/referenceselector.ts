@@ -37,6 +37,10 @@ export const ReferenceSelector: DropDownType = {
         // All TextStyle properties are allowed
         ...DropDown.valueDisabled
     },
+    valueFocused: {
+        // All TextStyle properties are allowed
+        ...DropDown.valueFocused
+    },
     validationMessage: {
         // All TextStyle properties are allowed
         ...DropDown.validationMessage
@@ -48,6 +52,14 @@ export const ReferenceSelector: DropDownType = {
     },
     valueContainerDisabled: {
         // All ViewStyle properties are allowed
+    },
+    valueContainerFocused: {
+        // All ViewStyle properties are allowed
+        ...DropDown.valueContainerFocused
+    },
+    iconStyle: {
+        // All TextStyle properties are allowed
+        ...DropDown.iconStyle
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
@@ -94,8 +106,11 @@ export const ReferenceSelectorVertical: DropDownType = {
     container: DropDownVertical.container,
     label: DropDownVertical.label,
     value: DropDownVertical.value,
+    valueFocused: DropDownVertical.valueFocused,
     validationMessage: DropDownVertical.validationMessage,
     valueContainer: DropDownVertical.valueContainer,
+    valueContainerFocused: DropDownVertical.valueContainerFocused,
+    iconStyle: DropDownVertical.iconStyle,
     menuWrapper: DropDownVertical.menuWrapper,
     itemContainer: DropDownVertical.itemContainer,
     item: DropDownVertical.item,
