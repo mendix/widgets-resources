@@ -19,10 +19,13 @@ export default function PopupMenu(props: PopupMenuContainerProps): ReactElement 
     handleOnClickOutsideElement(ref, () => setVisibility(false));
     const [visibility, setVisibility] = useState(false);
     useEffect(() => {
-        const element = ref.current?.querySelector(".popupmenu-menu") as HTMLDivElement;
-        element.style.display = visibility ? "flex" : "none";
-        if (visibility) {
-            correctPosition(element);
+        const currentRef: HTMLElement | null = ref.current;
+        if (currentRef) {
+            const element = currentRef.querySelector(".popupmenu-menu") as HTMLDivElement;
+            element.style.display = visibility ? "flex" : "none";
+            if (visibility) {
+                correctPosition(element);
+            }
         }
     }, [visibility]);
     // Events
