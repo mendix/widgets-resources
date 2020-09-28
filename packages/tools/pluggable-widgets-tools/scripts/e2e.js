@@ -6,6 +6,8 @@ const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
 const { cat, cp, ls, mkdir } = require("shelljs");
 
+const isNativeEnabled = process.argv.includes("--native");
+
 main().catch(e => {
     console.error(e);
     process.exit(-1);
@@ -49,43 +51,73 @@ async function main() {
         );
     }
 
-    // Build testProject via mxbuild
-    const projectFile = ls("tests/testProject/*.mpr").toString();
-    execSync(
-        `docker run -t -v ${process.cwd()}:/source ` +
-            `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
-        { stdio: "inherit" }
-    );
-
-    // Spin up the runtime and run testProject
-    const freePort = await findFreePort(3000);
-    const runtimeContainerId = execSync(
-        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
-            `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
-            `mendix/runtime-base:${latestMendixVersion}-rhel /shared/runtime.sh`
-    ).toString();
-
-    let attempts = 60;
-    for (; attempts > 0; --attempts) {
-        try {
-            const response = await fetch(`http://localhost:${freePort}`);
-            if (response.ok) {
-                break;
-            }
-        } catch (e) {
-            console.log(`Could not reach http://localhost:${freePort}, trying again...`);
-        }
-        await new Promise(resolve => setTimeout(resolve, 3000));
-    }
-
+    let mxbuildServerContainerId;
+    let runtimeContainerId;
     try {
-        if (attempts === 0) {
-            throw new Error("Runtime didn't start in time, existing now...");
+        const projectFile = ls("tests/testProject/*.mpr").toString();
+        const nativePackagerPort = await findFreePort(8083);
+
+        // Build testProject via mxbuild
+        if (isNativeEnabled) {
+            const mxbuildServerPort = await findFreePort(6543);
+
+            mxbuildServerContainerId = execSync(
+                `docker run -td -v ${process.cwd()}:/source -p ${mxbuildServerPort}:6543 -p ${nativePackagerPort}:8083 ` +
+                    `--rm mxbuild:${latestMendixVersion} ` +
+                    `--serve --host=* --native-packager-host=*`
+            ).toString();
+            await waitForAvailability(`http://localhost:${mxbuildServerPort}`, "mxbuild");
+            console.log("MxBuild server started!");
+
+            const mxbuildResult = await fetch(`http://localhost:${mxbuildServerPort}/build`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    target: "Deploy",
+                    projectFilePath: `/source/${projectFile}`,
+                    useLooseVersionCheck: true
+                })
+            });
+
+            if (!mxbuildResult.ok) {
+                throw new Error(`Cannot deploy an app response status: ${mxbuildResult.status}`);
+            }
+
+            const resultJson = await mxbuildResult.json();
+            if (resultJson.status !== "Success") {
+                throw new Error(`Cannot deploy an app: ${JSON.stringify(resultJson)} is not successful`);
+            }
+
+            await waitForAvailability(
+                `http://localhost:${nativePackagerPort}/index.bundle?platform=ios&dev=false&minify=true`,
+                "packager"
+            );
+            console.log("Application deployed!");
+        } else {
+            execSync(
+                `docker run -t -v ${process.cwd()}:/source ` +
+                    `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
+                { stdio: "inherit" }
+            );
         }
-        execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
-            stdio: "inherit",
-            env: { ...process.env, URL: `http://localhost:${freePort}` }
-        });
+
+        // Spin up the runtime and run testProject
+        const runtimePort = await findFreePort(3000);
+        runtimeContainerId = execSync(
+            `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${runtimePort}:8080 ` +
+                `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
+                `mendix/runtime-base:${latestMendixVersion}-bionic /shared/runtime.sh`
+        ).toString();
+        await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
+
+        if (isNativeEnabled) {
+            console.warn("====================================Executing======================");
+        } else {
+            execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
+                stdio: "inherit",
+                env: { ...process.env, URL: `http://localhost:${freePort}` }
+            });
+        }
     } catch (e) {
         try {
             execSync(`docker logs ${runtimeContainerId.trim()}`, { stdio: "inherit" });
@@ -93,7 +125,12 @@ async function main() {
         console.log(cat("results/runtime.log").toString());
         throw e;
     } finally {
-        execSync(`docker rm -f ${runtimeContainerId.trim()}`);
+        if (runtimeContainerId) {
+            execSync(`docker rm -f ${runtimeContainerId.trim()}`);
+        }
+        if (mxbuildServerContainerId) {
+            execSync(`docker rm -f ${mxbuildServerContainerId.trim()}`);
+        }
     }
 }
 
@@ -125,4 +162,19 @@ async function getLatestMendixVersion() {
     }
 
     return latestMendixVersion;
+}
+
+async function waitForAvailability(url, description) {
+    let attempts = 60;
+    for (; attempts > 0; --attempts) {
+        try {
+            await fetch(url);
+            break;
+        } catch (e) {}
+        console.log(`Could not reach ${description} at ${url}, trying again...`);
+        await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+    if (attempts === 0) {
+        throw new Error(`${description} didn't start in time, exiting now...`);
+    }
 }

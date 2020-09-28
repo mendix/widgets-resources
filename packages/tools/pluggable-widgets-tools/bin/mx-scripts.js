@@ -77,6 +77,10 @@ function getRealCommand(cmd, toolsRoot) {
         case "test:e2e:ts":
         case "test:e2e:js":
             return `wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
+        case "test:e2e:native":
+            return `node ${join(toolsRoot, "scripts/e2e.js")} --native`;
+        case "test:e2e:native:dev":
+            return `detox test --configuration ios.simulator`;
         case "test:e2e:web:dev":
             return `cross-env DEBUG=true wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
         case "test:e2e:web":

@@ -23,6 +23,9 @@ mxruntime:
     DatabaseName: default
     DatabasePassword: ""
     BuiltInDatabasePath: /source/tests/testProject/deployment/data/database
+    // Change packer host and port
+    com.mendix.nativeui.NativePackagerHost: http://mxbuild-server
+    com.mendix.nativeui.NativePackagerPort: 8083
 logging:
     - type: file
       name: FileSubscriber
