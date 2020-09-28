@@ -23,7 +23,7 @@ async function createParamObject(entity: string, url: string): Promise<mendix.li
 }
 
 function splitUrlToObject(url: string): Records {
-    const urlObject = new UrlParse(url);
+    const urlObject = new UrlParse(url, true);
     const queryValues: Records = {};
     const query = urlObject.query;
 
