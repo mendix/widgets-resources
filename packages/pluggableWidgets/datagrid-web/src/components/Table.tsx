@@ -94,11 +94,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         }),
         [props.columns, props.filterMethod, props.valueForFilter]
     );
+
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
             props.columns.map((column, index) => {
-                const weight = getWeight(column.width, column.size ?? 1);
-                const totalWeight = props.columns.reduce((p, c) => p + getWeight(c.width, c.size ?? 0), 0);
                 return {
                     id: index.toString(),
                     accessor: "item",
@@ -107,6 +106,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     hidden: column.hidable === "hidden",
                     canHide: column.hidable !== "no",
                     canDrag: column.draggable,
+                    canResize: column.resizable,
                     customFilter:
                         column.filterable === "custom"
                             ? props.filterRenderer(
@@ -115,7 +115,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                               )
                             : null,
                     disableSortBy: !column.sortable,
-                    disableResizing: !column.resizable,
                     disableFilters: column.filterable === "no",
                     sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
                         const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
@@ -143,7 +142,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             value,
                             index
                         ),
-                    weight: column.width === "manual" ? weight * (100 / totalWeight) : weight
+                    width: column.width,
+                    weight: getWeight(column.width, column.size ?? 1)
                 };
             }),
         [props.columns]
@@ -205,7 +205,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
             defaultColumn,
             filterTypes,
-            disableResizing: !props.columnsResizable,
             disableSortBy: !props.columnsSortable,
             disableFilters: !props.columnsFilterable,
             initialState: {
@@ -255,8 +254,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     return (
         <div className={props.className} style={props.styles}>
-            {props.headerWidgets}
-            {props.pagingPosition === "top" && pagination}
+            <div className="table-grid-header">
+                {props.headerWidgets}
+                {props.pagingPosition === "top" && pagination}
+            </div>
             <table {...getTableProps()} className="table-grid">
                 <thead role="rowgroup" className="thead">
                     {headerGroups.map((headerGroup, index: number) => (
@@ -302,8 +303,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     })}
                 </InfiniteBody>
             </table>
-            {props.pagingPosition === "bottom" && pagination}
-            {props.footerWidgets}
+            <div className="table-grid-footer">
+                {props.pagingPosition === "bottom" && pagination}
+                {props.footerWidgets}
+            </div>
         </div>
     );
 }

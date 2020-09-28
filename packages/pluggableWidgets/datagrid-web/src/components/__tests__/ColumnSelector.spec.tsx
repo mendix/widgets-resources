@@ -21,8 +21,8 @@ function mockColumnSelectorProps(): ColumnSelectorProps<object> {
                 isVisible: false,
                 canHide: false,
                 canDrag: false,
+                canResize: false,
                 disableSortBy: false,
-                disableResizing: false,
                 disableFilters: false
             }
         ] as Array<ColumnInstance<object>>,

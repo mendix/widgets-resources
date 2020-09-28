@@ -6,7 +6,8 @@ import {
     DragEvent,
     DragEventHandler,
     useCallback,
-    MouseEvent
+    MouseEvent,
+    useMemo
 } from "react";
 import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } from "react-table";
 import classNames from "classnames";
@@ -30,6 +31,9 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
     const canSort = props.sortable && props.column.canSort;
     const canDrag = props.draggable && (props.column.canDrag ?? false);
     const draggableProps = useDraggable(canDrag, props.visibleColumns, props.setColumnOrder, props.setDragOver);
+    const totalWeight = useMemo(() => props.visibleColumns.reduce((p, c) => p + (c.weight ?? 1), 0), [
+        props.visibleColumns
+    ]);
 
     const { onClick, style, ...rest } = props.column.getHeaderProps(
         canSort ? props.column.getSortByToggleProps() : undefined
@@ -44,19 +48,22 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
         : undefined;
 
     return (
-        <td
+        <th
             className={classNames("th", canDrag && props.column.id === props.dragOver ? "dragging" : "")}
             {...rest}
             style={{
                 ...style,
-                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {})
+                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {}),
+                ...{
+                    width:
+                        props.column.width === "manual" && props.column.weight
+                            ? `${props.column.weight * (100 / totalWeight)}%`
+                            : props.column.width === "autoFit"
+                            ? "1px"
+                            : undefined
+                }
             }}
             title={props.column.render("Header") as string}
-            {...(props.column.weight !== 1
-                ? {
-                      width: props.column.weight && props.column.weight > 1 ? `${props.column.weight}%` : "1px"
-                  }
-                : {})}
         >
             <div id={props.column.id} className="column-container" {...draggableProps}>
                 <div
@@ -97,7 +104,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     className={`column-resizer ${props.column.isResizing ? "isResizing" : ""}`}
                 />
             )}
-        </td>
+        </th>
     );
 }
 

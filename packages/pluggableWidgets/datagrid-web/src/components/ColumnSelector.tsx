@@ -17,7 +17,7 @@ export function ColumnSelector<D extends object>({
     useOnClickOutside(listRef, () => setShow(false));
     const visibleColumns = allColumns.filter(column => column.isVisible).length;
     return (
-        <td className="th column-selector" width="1px">
+        <th className="th column-selector" style={{ width: "1px" }}>
             <button
                 className="btn btn-default"
                 onClick={() => {
@@ -58,7 +58,7 @@ export function ColumnSelector<D extends object>({
                     })}
                 </ul>
             )}
-        </td>
+        </th>
     );
 }
 
