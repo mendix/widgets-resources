@@ -6,7 +6,7 @@ import {
     moveAbsoluteElementOnScreen,
     unBlockAbsoluteElement,
     handleOnClickOutsideElement
-} from "../../../tools/pluggable-widgets-tools/src/index";
+} from "./utils/document";
 import { ReactElement, useState, createElement, useCallback, useEffect, useRef } from "react";
 import { executeAction } from "@widgets-resources/piw-utils";
 import { ActionValue } from "mendix";
@@ -19,9 +19,8 @@ export default function PopupMenu(props: PopupMenuContainerProps): ReactElement 
     handleOnClickOutsideElement(ref, () => setVisibility(false));
     const [visibility, setVisibility] = useState(false);
     useEffect(() => {
-        const currentRef: HTMLElement | null = ref.current;
-        if (currentRef) {
-            const element = currentRef.querySelector(".popupmenu-menu") as HTMLDivElement;
+        const element = ref.current?.querySelector(".popupmenu-menu") as HTMLDivElement | null;
+        if (element) {
             element.style.display = visibility ? "flex" : "none";
             if (visibility) {
                 correctPosition(element);
