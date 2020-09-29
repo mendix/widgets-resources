@@ -11,9 +11,20 @@ mkdir /opt/mendix/${MENDIX_VERSION}
 mv /opt/mendix/runtime /opt/mendix/${MENDIX_VERSION}/
 echo "Installing runtime dependencies done!"
 
+## Do the yml tricks start
+
+if [ "${NATIVE_ENABLED}" = "true" ]; then
+  cp shared/m2eeNative.yaml /tmp/m2ee.yaml
+  echo "We have native enabled"
+  sed -i 's/__PACKAGER_PORT__/'"${PACKAGER_PORT}"'/g' /tmp/m2ee.yaml
+  echo /tmp/m2ee.yaml
+fi
+
+## Do the yml tricks end
+
 echo "Starting runtime..."
 # printf is needed to issue "create database" command that is not available via CLI
-printf "c\nc\n" | m2ee -c /shared/m2ee.yml --yolo start
+printf "c\nc\n" | m2ee -c /tmp/m2ee.yml --yolo start
 echo "Starting runtime done!"
 
 while :; do sleep 15; done

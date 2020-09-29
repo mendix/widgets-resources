@@ -57,6 +57,12 @@ async function main() {
         const projectFile = ls("tests/testProject/*.mpr").toString();
         const nativePackagerPort = await findFreePort(8083);
 
+        /**
+         * Create container network in order for runtime and mxserver to communicate
+         because of native packager
+         */
+        execSync(`docker network create docker-network`);
+
         // Build testProject via mxbuild
         if (isNativeEnabled) {
             const mxbuildServerPort = await findFreePort(6543);
@@ -66,6 +72,7 @@ async function main() {
                     `--rm mxbuild:${latestMendixVersion} ` +
                     `--serve --host=* --native-packager-host=*`
             ).toString();
+            execSync(`docker network connect docker-network ${mxbuildServerContainerId}`);
             await waitForAvailability(`http://localhost:${mxbuildServerPort}`, "mxbuild");
             console.log("MxBuild server started!");
 
@@ -90,7 +97,8 @@ async function main() {
 
             await waitForAvailability(
                 `http://localhost:${nativePackagerPort}/index.bundle?platform=ios&dev=false&minify=true`,
-                "packager"
+                "packager",
+                6000
             );
             console.log("Application deployed!");
         } else {
@@ -105,7 +113,8 @@ async function main() {
         const runtimePort = await findFreePort(3000);
         runtimeContainerId = execSync(
             `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${runtimePort}:8080 ` +
-                `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
+                `-u root -e MENDIX_VERSION=${latestMendixVersion} --network=docker-network ` +
+                `-e NATIVE_ENABLED=${isNativeEnabled} -e PACKAGER_PORT=${nativePackagerPort} --entrypoint /bin/bash ` +
                 `mendix/runtime-base:${latestMendixVersion}-bionic /shared/runtime.sh`
         ).toString();
         await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
@@ -131,6 +140,7 @@ async function main() {
         if (mxbuildServerContainerId) {
             execSync(`docker rm -f ${mxbuildServerContainerId.trim()}`);
         }
+        execSync(`docker network rm docker-network`);
     }
 }
 
@@ -164,7 +174,7 @@ async function getLatestMendixVersion() {
     return latestMendixVersion;
 }
 
-async function waitForAvailability(url, description) {
+async function waitForAvailability(url, description, timeout = 3000) {
     let attempts = 60;
     for (; attempts > 0; --attempts) {
         try {
@@ -172,7 +182,7 @@ async function waitForAvailability(url, description) {
             break;
         } catch (e) {}
         console.log(`Could not reach ${description} at ${url}, trying again...`);
-        await new Promise(resolve => setTimeout(resolve, 3000));
+        await new Promise(resolve => setTimeout(resolve, timeout));
     }
     if (attempts === 0) {
         throw new Error(`${description} didn't start in time, exiting now...`);

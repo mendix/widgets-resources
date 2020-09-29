@@ -14,7 +14,7 @@ m2ee:
             "-Xms512M",
             "-Djava.io.tmpdir=/source/tests/testProject/deployment/data/tmp",
         ]
-    javabin: /usr/bin/java
+    javabin: /opt/java/openjdk/bin/java
     pidfile: /var/run/m2ee.pid
 mxruntime:
     DTAPMode: T
@@ -23,6 +23,8 @@ mxruntime:
     DatabaseName: default
     DatabasePassword: ""
     BuiltInDatabasePath: /source/tests/testProject/deployment/data/database
+    com.mendix.nativeui.NativePackagerHost: http://0.0.0.0
+    com.mendix.nativeui.NativePackagerPort: __PACKAGER_PORT__
 logging:
     - type: file
       name: FileSubscriber
