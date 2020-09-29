@@ -97,55 +97,50 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
-            props.columns.map((column, index) => {
-                return {
-                    id: index.toString(),
-                    accessor: "item",
-                    Header: typeof column.header === "object" ? column.header.value : column.header,
-                    filter: "text",
-                    hidden: column.hidable === "hidden",
-                    canHide: column.hidable !== "no",
-                    canDrag: column.draggable,
-                    canResize: column.resizable,
-                    customFilter:
-                        column.filterable === "custom"
-                            ? props.filterRenderer(
-                                  (children: ReactNode) => <div className="filter">{children}</div>,
-                                  index
-                              )
-                            : null,
-                    disableSortBy: !column.sortable,
-                    disableFilters: column.filterable === "no",
-                    sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
-                        const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
-                        const valueB = props.valueForSort(rowB.values[columnId], Number(columnId)) || "";
-                        // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
-                        if (typeof valueA === "string" && typeof valueB === "string") {
-                            return valueA.localeCompare(valueB);
-                        } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
-                            // True first
-                            return valueA === valueB ? 0 : valueA ? -1 : 1;
-                        } else if (valueA instanceof Date && valueB instanceof Date) {
-                            return (valueA as Date).getTime() - (valueB as Date).getTime();
-                        }
-                        return Number(valueA) - Number(valueB);
-                    },
-                    Cell: ({ cell, value }) =>
-                        props.cellRenderer(
-                            (children: ReactNode) => {
-                                return (
-                                    <td {...cell.getCellProps()} className="td">
-                                        {children}
-                                    </td>
-                                );
-                            },
-                            value,
-                            index
-                        ),
-                    width: column.width,
-                    weight: getWeight(column.width, column.size ?? 1)
-                };
-            }),
+            props.columns.map((column, index) => ({
+                id: index.toString(),
+                accessor: "item",
+                Header: typeof column.header === "object" ? column.header.value : column.header,
+                filter: "text",
+                hidden: column.hidable === "hidden",
+                canHide: column.hidable !== "no",
+                canDrag: column.draggable,
+                canResize: column.resizable,
+                customFilter:
+                    column.filterable === "custom"
+                        ? props.filterRenderer((children: ReactNode) => <div className="filter">{children}</div>, index)
+                        : null,
+                disableSortBy: !column.sortable,
+                disableFilters: column.filterable === "no",
+                sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
+                    const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
+                    const valueB = props.valueForSort(rowB.values[columnId], Number(columnId)) || "";
+                    // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
+                    if (typeof valueA === "string" && typeof valueB === "string") {
+                        return valueA.localeCompare(valueB);
+                    } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
+                        // True first
+                        return valueA === valueB ? 0 : valueA ? -1 : 1;
+                    } else if (valueA instanceof Date && valueB instanceof Date) {
+                        return (valueA as Date).getTime() - (valueB as Date).getTime();
+                    }
+                    return Number(valueA) - Number(valueB);
+                },
+                Cell: ({ cell, value }) =>
+                    props.cellRenderer(
+                        (children: ReactNode) => {
+                            return (
+                                <td {...cell.getCellProps()} className="td">
+                                    {children}
+                                </td>
+                            );
+                        },
+                        value,
+                        index
+                    ),
+                width: column.width,
+                weight: getWeight(column.width, column.size ?? 1)
+            })),
         [props.columns]
     );
 

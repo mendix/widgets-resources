@@ -87,6 +87,142 @@ describe("Header", () => {
         clickableRegion.simulate("click");
         expect(mockedFunction).toBeCalledWith([{ id: "sortable", desc: false }]);
     });
+
+    it("calculates the size of a column when same weight is applied for other column", () => {
+        const column = {
+            id: "0",
+            render: () => "My sortable column",
+            weight: 1,
+            width: "manual",
+            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
+        } as any;
+        const visibleColumns = [
+            {
+                id: "0",
+                weight: 1
+            },
+            {
+                id: "1",
+                weight: 1
+            }
+        ] as any[];
+
+        const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
+
+        expect(component.prop("style").width).toEqual("50%");
+    });
+
+    it("calculates the size of a column when different weights are applied for other columns", () => {
+        const column = {
+            id: "0",
+            render: () => "My sortable column",
+            weight: 1,
+            width: "manual",
+            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
+        } as any;
+        const visibleColumns = [
+            {
+                id: "0",
+                weight: 1
+            },
+            {
+                id: "1",
+                weight: 2
+            },
+            {
+                id: "2",
+                weight: 2
+            }
+        ] as any[];
+
+        const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
+
+        expect(component.prop("style").width).toEqual("20%");
+    });
+
+    it("calculates the size of a column when different weights are applied for other columns and a column became hidden", () => {
+        const column = {
+            id: "0",
+            render: () => "My sortable column",
+            weight: 1,
+            width: "manual",
+            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
+        } as any;
+        const visibleColumns = [
+            {
+                id: "0",
+                weight: 1
+            },
+            {
+                id: "1",
+                weight: 2
+            },
+            {
+                id: "2",
+                weight: 2
+            }
+        ] as any[];
+
+        const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
+
+        expect(component.prop("style").width).toEqual("20%");
+
+        component.setProps({
+            visibleColumns: [
+                {
+                    id: "0",
+                    weight: 1
+                },
+                {
+                    id: "1",
+                    weight: 2
+                }
+            ] as any[]
+        });
+        component.update();
+
+        expect(component.prop("style").width).toContain("33.333");
+    });
+
+    it("applies undefined width when a columns is defined as auto fill", () => {
+        const column = {
+            id: "0",
+            render: () => "My sortable column",
+            weight: 1,
+            width: "autoFill",
+            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
+        } as any;
+        const visibleColumns = [
+            {
+                id: "0",
+                weight: 1
+            }
+        ] as any[];
+
+        const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
+
+        expect(component.prop("style").width).toBeUndefined();
+    });
+
+    it("applies 1px width when a column is defined as auto fit to content", () => {
+        const column = {
+            id: "0",
+            render: () => "My sortable column",
+            weight: 1,
+            width: "autoFit",
+            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
+        } as any;
+        const visibleColumns = [
+            {
+                id: "0",
+                weight: 1
+            }
+        ] as any[];
+
+        const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
+
+        expect(component.prop("style").width).toEqual("1px");
+    });
 });
 
 function mockHeaderProps(): HeaderProps<object> {
