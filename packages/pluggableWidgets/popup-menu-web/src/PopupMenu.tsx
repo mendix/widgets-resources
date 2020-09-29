@@ -70,23 +70,23 @@ function createMenuOptions(
 ): ReactElement[] {
     if (props.renderMode === "basic") {
         return props.basicItems.map((item, index) => {
-            const pickedStyle =
-                item.styleClass !== "defaultStyle"
-                    ? "popupmenu-basic-item-" + item.styleClass.replace("Style", "")
-                    : "";
-            return item.itemType === "divider" ? (
-                <div key={index} className={"popupmenu-basic-divider"} />
-            ) : (
-                <div
-                    key={index}
-                    className={`popupmenu-basic-item ${pickedStyle}`}
-                    onClick={() => {
-                        handleOnClickItem(item.action);
-                    }}
-                >
-                    {item.caption}
-                </div>
-            );
+            if (item.itemType === "divider") {
+                return <div key={index} className={"popupmenu-basic-divider"} />;
+            } else {
+                const pickedStyle =
+                    item.styleClass !== "defaultStyle"
+                        ? "popupmenu-basic-item-" + item.styleClass.replace("Style", "")
+                        : "";
+                return (
+                    <div
+                        key={index}
+                        className={`popupmenu-basic-item ${pickedStyle}`}
+                        onClick={() => handleOnClickItem(item.action)}
+                    >
+                        {item.caption}
+                    </div>
+                );
+            }
         });
     } else {
         return props.customItems.map((item, index) => (
@@ -98,11 +98,12 @@ function createMenuOptions(
 }
 
 function correctPosition(element: HTMLElement): void {
-    const isOffScreen = isElementPartiallyOffScreen(element);
+    let boundingRect: DOMRect = element.getBoundingClientRect();
+    const isOffScreen = isElementPartiallyOffScreen(boundingRect);
     if (isOffScreen) {
-        moveAbsoluteElementOnScreen(element);
+        boundingRect = moveAbsoluteElementOnScreen(element, boundingRect);
     }
-    const boundingRect: DOMRect = element.getBoundingClientRect();
+
     const blockingElement = isBehindRandomElement(element, boundingRect, 3, "popupmenu");
     if (blockingElement && isElementVisibleByUser(blockingElement)) {
         unBlockAbsoluteElement(element, boundingRect, blockingElement.getBoundingClientRect());

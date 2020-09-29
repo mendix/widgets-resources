@@ -8,7 +8,6 @@ export function unBlockAbsoluteElement(
     if (
         boundingRect.top < blockingElementRect.bottom &&
         boundingRect.bottom >= blockingElementRect.bottom &&
-        boundingRect.top >= blockingElementRect.top &&
         boundingRect.y + boundingRect.height < window.innerHeight
     ) {
         // Top of element is blocked
@@ -39,7 +38,6 @@ export function unBlockAbsoluteElement(
     } else if (
         boundingRect.bottom > blockingElementRect.top &&
         boundingRect.top <= blockingElementRect.top &&
-        boundingRect.bottom <= blockingElementRect.bottom &&
         boundingRect.y - boundingRect.height > 0
     ) {
         // Bottom of element is blocked
@@ -179,18 +177,13 @@ export function isElementVisibleByUser(element: HTMLElement): boolean {
     if (style.display === "none") return false;
     if (style.visibility && style.visibility !== "visible") return false;
     if (style.opacity && Number(style.opacity) < 0.1) return false;
-    if (
-        element.offsetWidth +
-            element.offsetHeight +
-            element.getBoundingClientRect().height +
-            element.getBoundingClientRect().width ===
-        0
-    ) {
+    const rect = element.getBoundingClientRect();
+    if (element.offsetWidth + element.offsetHeight + rect.height + rect.width === 0) {
         return false;
     }
     const elementCenter = {
-        x: element.getBoundingClientRect().left + element.offsetWidth / 2,
-        y: element.getBoundingClientRect().top + element.offsetHeight / 2
+        x: rect.left + element.offsetWidth / 2,
+        y: rect.top + element.offsetHeight / 2
     };
     if (elementCenter.x < 0) return false;
     if (elementCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;
@@ -207,29 +200,38 @@ export function isElementVisibleByUser(element: HTMLElement): boolean {
     return false;
 }
 
-export function isElementPartiallyOffScreen(element: HTMLElement): boolean {
-    const rect = element.getBoundingClientRect();
+export function isElementPartiallyOffScreen(rect: DOMRect): boolean {
     return (
         rect.x < 0 || rect.y < 0 || rect.x + rect.width > window.innerWidth || rect.y + rect.height > window.innerHeight
     );
 }
 
-export function moveAbsoluteElementOnScreen(element: HTMLElement): void {
-    const rect = element.getBoundingClientRect();
+export function moveAbsoluteElementOnScreen(element: HTMLElement, rect: DOMRect): DOMRect {
     if (rect.x < 0) {
-        element.style.left = Math.round(getPixelValueAsNumber(element, "left") - rect.x) + "px";
+        const leftValue = Math.round(getPixelValueAsNumber(element, "left") - rect.x);
+        element.style.left = leftValue + "px";
+        rect.x += leftValue;
     }
     if (rect.y < 0) {
-        element.style.top = getPixelValueAsNumber(element, "top") - rect.y + "px";
+        const topValue = Math.round(getPixelValueAsNumber(element, "top") - rect.y);
+        element.style.top = topValue + "px";
+        rect.y += topValue;
     }
     if (rect.x + rect.width > window.innerWidth) {
-        element.style.right =
-            getPixelValueAsNumber(element, "right") + (rect.x + rect.width - window.innerWidth) + "px";
+        const rightValue = Math.round(
+            getPixelValueAsNumber(element, "right") + (rect.x + rect.width - window.innerWidth)
+        );
+        element.style.right = rightValue + "px";
+        rect.x -= rightValue;
     }
     if (rect.y + rect.height > window.innerHeight) {
-        element.style.bottom =
-            getPixelValueAsNumber(element, "bottom") + (rect.y + rect.height - window.innerHeight) + "px";
+        const bottomValue = Math.round(
+            getPixelValueAsNumber(element, "bottom") + (rect.y + rect.height - window.innerHeight)
+        );
+        element.style.bottom = bottomValue + "px";
+        rect.y -= bottomValue;
     }
+    return DOMRect.fromRect(rect);
 }
 
 export function handleOnClickOutsideElement(ref: RefObject<HTMLDivElement>, handler: () => void): void {
