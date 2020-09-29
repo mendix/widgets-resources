@@ -42,6 +42,7 @@ async function exists(filePath) {
     }
 }
 
+// todo: remove this when mxbuild includes tool to update widget definition (8.15)
 async function temp() {
     const atlasV = "2.6.1";
     const url = "https://files.appstore.mendix.com/5/104730/2.6.1/Atlas_UI_Resources_2.6.1.mpk";
