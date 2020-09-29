@@ -47,6 +47,13 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             : faArrowsAltV
         : undefined;
 
+    const width =
+        props.column.width === "manual" && props.column.weight
+            ? `${props.column.weight * (100 / totalWeight)}%`
+            : props.column.width === "autoFit" && props.visibleColumns.length > 1
+            ? "1px"
+            : undefined;
+
     return (
         <th
             className={classNames("th", canDrag && props.column.id === props.dragOver ? "dragging" : "")}
@@ -54,14 +61,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             style={{
                 ...style,
                 ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {}),
-                ...{
-                    width:
-                        props.column.width === "manual" && props.column.weight
-                            ? `${props.column.weight * (100 / totalWeight)}%`
-                            : props.column.width === "autoFit"
-                            ? "1px"
-                            : undefined
-                }
+                width
             }}
             title={props.column.render("Header") as string}
         >

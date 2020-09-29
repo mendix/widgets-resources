@@ -204,7 +204,31 @@ describe("Header", () => {
         expect(component.prop("style").width).toBeUndefined();
     });
 
-    it("applies 1px width when a column is defined as auto fit to content", () => {
+    it("applies 1px width when a column is defined as auto fit to content and there are more visible columns", () => {
+        const column = {
+            id: "0",
+            render: () => "My sortable column",
+            weight: 1,
+            width: "autoFit",
+            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
+        } as any;
+        const visibleColumns = [
+            {
+                id: "0",
+                weight: 1
+            },
+            {
+                id: "1",
+                weight: 1
+            }
+        ] as any[];
+
+        const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
+
+        expect(component.prop("style").width).toEqual("1px");
+    });
+
+    it("applies undefined width when a column is defined as auto fit to content and there are no more visible columns", () => {
         const column = {
             id: "0",
             render: () => "My sortable column",
@@ -221,7 +245,7 @@ describe("Header", () => {
 
         const component = shallow(<Header {...mockHeaderProps()} visibleColumns={visibleColumns} column={column} />);
 
-        expect(component.prop("style").width).toEqual("1px");
+        expect(component.prop("style").width).toBeUndefined();
     });
 });
 
