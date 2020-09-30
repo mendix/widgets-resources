@@ -1,6 +1,0 @@
-<?xml version='1.1'?>
-
-<component name="system.UserActionsRegistrar" immediate="true">
-  <implementation class="system.UserActionsRegistrar"/>
-  <reference name="registeractions" cardinality="1..1" interface="com.mendix.core.actionmanagement.IActionRegistrator" bind="registerActions"/>
-</component>

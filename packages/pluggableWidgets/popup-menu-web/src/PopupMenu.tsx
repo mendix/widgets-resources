@@ -111,8 +111,7 @@ function correctPosition(element: HTMLElement): void {
         let node = blockingElement;
         do {
             if (isBehindElement(element, node, 1) && isElementVisibleByUser(node)) {
-                unBlockAbsoluteElement(element, boundingRect, node.getBoundingClientRect());
-                return;
+                return unBlockAbsoluteElement(element, boundingRect, node.getBoundingClientRect());
             } else {
                 node = node.parentElement as HTMLElement;
             }

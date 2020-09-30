@@ -1,9 +1,0 @@
-Buildfile: Y:\Documents\development\work\repos\widgets-resources\packages\pluggableWidgets\popup-menu-web\tests\testProject\deployment\build_core.xml
-
-deploy:
-     [copy] Copying 33 files to Y:\Documents\development\work\repos\widgets-resources\packages\pluggableWidgets\popup-menu-web\tests\testProject\deployment
-
-BUILD SUCCESSFUL
-Total time: 0 seconds
-
-
