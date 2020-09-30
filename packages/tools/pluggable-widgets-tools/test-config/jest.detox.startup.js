@@ -1,4 +1,4 @@
-const { by, cleanup, init, device, element } = require("detox");
+const { by, cleanup, init, device, element, waitFor } = require("detox");
 const adapter = require("detox/runners/jest/adapter");
 const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");

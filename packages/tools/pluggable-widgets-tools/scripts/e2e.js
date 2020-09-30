@@ -74,16 +74,21 @@ async function main() {
 
         if (isNativeEnabled) {
             // TODO: Clone the already build detoxApp so we can copy over bundles
+            // Question: Does this mean we are cloning the app for every single widget test runs
             const appSource = join(process.cwd(), "tests/detoxApp/ios/nativeTemplate.app");
 
+            // TODO: Do we still need this because we might not have parallel tests ?
             // Multiple tests can run parallel, copying will prevent changing the same folder
             const tmpApp = join(tempdir(), `nativeApp_${Math.round(Math.random() * 10000)}.app`);
             const tmpAppBundle = join(tmpApp, "Bundle/");
+            const tmpAppPlist = join(tmpApp, "Info");
             const bundleSource = join("tests/testProject", "deployment/native/bundle/iOS/");
 
             cp("-R", appSource, tmpApp);
             cp(join(bundleSource, "index.ios.bundle"), tmpAppBundle);
             cp("-R", join(bundleSource, "assets"), tmpAppBundle);
+
+            execSync(`defaults write ${tmpAppPlist} "Runtime url" 'http://localhost:${runtimePort}'`);
 
             // TODO: The port that nativeTemplate is inside of the binary, and this port is dynamic.
             // Since we might not run tests on parallel maybe set the runtime port to fixed
