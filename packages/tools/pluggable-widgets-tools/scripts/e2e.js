@@ -1,10 +1,15 @@
 const { execSync } = require("child_process");
 const findFreePort = require("find-free-port");
-const { access, readFile } = require("fs").promises;
+const {
+    createWriteStream,
+    promises: { access, readFile }
+} = require("fs");
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { cat, cp, ls, mkdir, tempdir } = require("shelljs");
+const { cat, cp, ls, mkdir, rm, tempdir } = require("shelljs");
+const { pipeline } = require("stream");
+const { promisify } = require("util");
 
 const isNativeEnabled = process.argv.includes("--native");
 
@@ -61,6 +66,7 @@ async function main() {
     );
     console.log("MxBuild server started!");
 
+    let nativeApp;
     let runtimeContainerId;
     try {
         // Spin up the runtime and run testProject
@@ -73,28 +79,17 @@ async function main() {
         await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
 
         if (isNativeEnabled) {
-            // TODO: Clone the already build detoxApp so we can copy over bundles
-            // Question: Does this mean we are cloning the app for every single widget test runs
-            const appSource = join(process.cwd(), "tests/detoxApp/ios/nativeTemplate.app");
+            nativeApp = await downlaodNativeIOSApp();
 
-            // TODO: Do we still need this because we might not have parallel tests ?
-            // Multiple tests can run parallel, copying will prevent changing the same folder
-            const tmpApp = join(tempdir(), `nativeApp_${Math.round(Math.random() * 10000)}.app`);
-            const tmpAppBundle = join(tmpApp, "Bundle/");
-            const tmpAppPlist = join(tmpApp, "Info");
-            const bundleSource = join("tests/testProject", "deployment/native/bundle/iOS/");
+            const appBundle = join(nativeApp, "Bundle/");
+            const bundleSource = join(process.cwd(), "tests/testProject", "deployment/native/bundle/iOS/");
+            cp(join(bundleSource, "index.ios.bundle"), appBundle);
+            cp("-R", join(bundleSource, "assets"), appBundle);
+            execSync(`defaults write ${join(nativeApp, "Info")} "Runtime url" 'http://localhost:${runtimePort}'`);
 
-            cp("-R", appSource, tmpApp);
-            cp(join(bundleSource, "index.ios.bundle"), tmpAppBundle);
-            cp("-R", join(bundleSource, "assets"), tmpAppBundle);
-
-            execSync(`defaults write ${tmpAppPlist} "Runtime url" 'http://localhost:${runtimePort}'`);
-
-            // TODO: The port that nativeTemplate is inside of the binary, and this port is dynamic.
-            // Since we might not run tests on parallel maybe set the runtime port to fixed
             execSync(`detox test --configuration ios.simulator`, {
                 stdio: "inherit",
-                env: { ...process.env, TEST_NATIVE_APP: tmpApp }
+                env: { ...process.env, TEST_NATIVE_APP: nativeApp }
             });
         } else {
             execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
@@ -111,6 +106,9 @@ async function main() {
     } finally {
         if (runtimeContainerId) {
             execSync(`docker rm -f ${runtimeContainerId.trim()}`);
+        }
+        if (nativeApp) {
+            rm("-f", nativeApp);
         }
     }
 }
@@ -158,4 +156,16 @@ async function waitForAvailability(url, description, timeout = 3000) {
     if (attempts === 0) {
         throw new Error(`${description} didn't start in time, exiting now...`);
     }
+}
+
+async function downlaodNativeIOSApp() {
+    const downloadedArchivePath = join(tempdir(), "NativeTemplate.zip");
+    if (!(await exists(downloadedArchivePath))) {
+        const nativeTemplateUrl = "https://srv-file22.gofile.io/downloadStore/srv-store2/ld1E8I/NativeTemplate.zip";
+        await promisify(pipeline)((await fetch(nativeTemplateUrl)).body, createWriteStream(downloadedArchivePath));
+    }
+
+    const appSource = join(tempdir(), `nativeApp_${Math.round(Math.random() * 10000)}`);
+    execSync(`unzip -q ${downloadedArchivePath} -d ${appSource}`);
+    return join(appSource, "nativeTemplate.app");
 }
