@@ -21,13 +21,9 @@ beforeAll(async () => {
         permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES" }
     });
 
-    // TODO: port is dynamic because its coming from runtime
-    await element(by.type("UITextField")).typeText("localhost:8080");
-    await device.setURLBlacklist(["http://localhost:8080/components.json"]);
-    await element(by.type("UIButton"))
-        .atIndex(0)
-        .tap();
-    await device.setURLBlacklist([]);
+    await waitFor(element(by.id("$screen")).atIndex(0))
+        .toBeVisible()
+        .withTimeout(20000);
 }, 120000);
 
 beforeEach(async () => {
