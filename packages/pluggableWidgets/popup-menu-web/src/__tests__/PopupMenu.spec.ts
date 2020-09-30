@@ -34,7 +34,7 @@ describe("Popup menu", () => {
         it("renders", () => {
             const popupMenu = createPopupMenu(defaultProps);
 
-            expect(popupMenu.find(".popupmenu-basic-item").length).toEqual(1);
+            expect(popupMenu.find(".popupmenu-basic-item")).toHaveLength(1);
         });
 
         it("triggers action", () => {
@@ -50,19 +50,19 @@ describe("Popup menu", () => {
             basicItemProps.styleClass = "primaryStyle";
             const popupMenu = createPopupMenu(defaultProps);
 
-            expect(popupMenu.find(".popupmenu-basic-item-primary").length).toEqual(1);
+            expect(popupMenu.find(".popupmenu-basic-item-primary")).toHaveLength(1);
         });
         it("renders with style Danger", () => {
             basicItemProps.styleClass = "dangerStyle";
             const popupMenu = createPopupMenu(defaultProps);
 
-            expect(popupMenu.find(".popupmenu-basic-item-danger").length).toEqual(1);
+            expect(popupMenu.find(".popupmenu-basic-item-danger")).toHaveLength(1);
         });
         it("renders with style Custom", () => {
             basicItemProps.styleClass = "customStyle";
             const popupMenu = createPopupMenu(defaultProps);
 
-            expect(popupMenu.find(".popupmenu-basic-item-custom").length).toEqual(1);
+            expect(popupMenu.find(".popupmenu-basic-item-custom")).toHaveLength(1);
         });
     });
 
@@ -74,7 +74,7 @@ describe("Popup menu", () => {
         it("renders", () => {
             const popupMenu = createPopupMenu(defaultProps);
 
-            expect(popupMenu.find(".popupmenu-custom-item").length).toEqual(1);
+            expect(popupMenu.find(".popupmenu-custom-item")).toHaveLength(1);
         });
 
         it("triggers action", () => {

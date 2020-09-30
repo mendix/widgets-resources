@@ -174,9 +174,15 @@ export function isBehindElement(element: HTMLElement, blockingElement: HTMLEleme
 
 export function isElementVisibleByUser(element: HTMLElement): boolean {
     const style: CSSStyleDeclaration = getComputedStyle(element);
-    if (style.display === "none") return false;
-    if (style.visibility && style.visibility !== "visible") return false;
-    if (style.opacity && Number(style.opacity) < 0.1) return false;
+    if (style.display === "none") {
+        return false;
+    }
+    if (style.visibility && style.visibility !== "visible") {
+        return false;
+    }
+    if (style.opacity && Number(style.opacity) < 0.1) {
+        return false;
+    }
     const rect = element.getBoundingClientRect();
     if (element.offsetWidth + element.offsetHeight + rect.height + rect.width === 0) {
         return false;
@@ -185,10 +191,18 @@ export function isElementVisibleByUser(element: HTMLElement): boolean {
         x: rect.left + element.offsetWidth / 2,
         y: rect.top + element.offsetHeight / 2
     };
-    if (elementCenter.x < 0) return false;
-    if (elementCenter.x > (document.documentElement.clientWidth || window.innerWidth)) return false;
-    if (elementCenter.y < 0) return false;
-    if (elementCenter.y > (document.documentElement.clientHeight || window.innerHeight)) return false;
+    if (elementCenter.x < 0) {
+        return false;
+    }
+    if (elementCenter.x > (document.documentElement.clientWidth || window.innerWidth)) {
+        return false;
+    }
+    if (elementCenter.y < 0) {
+        return false;
+    }
+    if (elementCenter.y > (document.documentElement.clientHeight || window.innerHeight)) {
+        return false;
+    }
     let pointContainer = document.elementFromPoint(elementCenter.x, elementCenter.y) as HTMLElement;
     do {
         if (pointContainer === element) {

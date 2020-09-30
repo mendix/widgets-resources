@@ -14,11 +14,6 @@ exports[`Popup menu renders popup menu 1`] = `
   </div>
   <div
     className="popupmenu-menu popupmenu-position-bottom"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
   >
     <div
       className="popupmenu-basic-item "
