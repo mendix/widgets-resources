@@ -23,3 +23,24 @@ export function mergeNativeStyles<T extends Style>(defaultStyle: T, overrideStyl
 function flattenObjects<T extends object>(objects: T[]): T {
     return objects.reduce((merged, object) => ({ ...merged, ...object }), {} as T);
 }
+
+export function extractStyles<TObj extends {}, TKeys extends Array<keyof TObj>>(
+    source: TObj | undefined,
+    extractionKeys: TKeys
+): [Pick<TObj, typeof extractionKeys[number]>, Omit<TObj, typeof extractionKeys[number]>] {
+    if (!source) {
+        return [{}, {}] as any;
+    }
+
+    return Object.entries(source).reduce<[Record<string, unknown>, Record<string, unknown>]>(
+        ([extracted, rest]: [any, any], [key, value]: [string, any]) => {
+            if (extractionKeys.includes(key as keyof TObj)) {
+                extracted[key] = value;
+            } else {
+                rest[key] = value;
+            }
+            return [extracted, rest];
+        },
+        [{}, {}]
+    ) as any;
+}

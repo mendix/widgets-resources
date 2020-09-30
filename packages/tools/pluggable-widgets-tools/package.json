@@ -124,7 +124,7 @@
     "yeoman-test": "^2.6.0"
   },
   "scripts": {
-    "prepare": "shx rm -rf dist && tsc",
+    "build": "shx rm -rf dist && tsc",
     "test": "npm run test:src && cross-env LIMIT_TESTS=true npm run test:scripts",
     "test:src": "jest",
     "test:scripts": "npm run prepare && node tests/commands.js"

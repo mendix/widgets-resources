@@ -1,9 +1,8 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { mergeNativeStyles, extractStyles } from "@mendix/pluggable-widgets-tools";
 import { executeAction } from "@widgets-resources/piw-utils";
 import { createElement, ReactElement, useCallback, useRef } from "react";
 import { View, Text } from "react-native";
 import SignatureScreen, { SignatureViewRef } from "react-native-signature-canvas";
-import { extractStyles } from "../../../tools/util-widgets/src/styles";
 import { Touchable } from "../components/Touchable";
 
 import { SignatureProps } from "../typings/SignatureProps";
@@ -13,7 +12,7 @@ export type Props = SignatureProps<SignatureStyle>;
 
 export function Signature(props: Props): ReactElement {
     const ref = useRef<SignatureViewRef>(null);
-    const styles = flattenStyles(defaultSignatureStyle, props.style);
+    const styles = mergeNativeStyles(defaultSignatureStyle, props.style);
     const [signatureProps, containerStyles] = extractStyles(styles.container, ["penColor", "backgroundColor"]);
     const [buttonClearContainerProps, buttonClearContainerStyles] = extractStyles(styles.buttonClearContainer, [
         "rippleColor",
@@ -25,10 +24,10 @@ export function Signature(props: Props): ReactElement {
         "activeOpacity",
         "underlayColor"
     ]);
-    const buttonCaptionClear =
-        props.buttonCaptionClear && props.buttonCaptionClear.value ? props.buttonCaptionClear.value : "Clear";
-    const buttonCaptionSave =
-        props.buttonCaptionSave && props.buttonCaptionSave.value ? props.buttonCaptionSave.value : "Save";
+    const buttonCaptionClear = props.buttonCaptionClear?.value ?? "Clear";
+    const buttonCaptionSave = props.buttonCaptionSave?.value ?? "Save";
+    const buttonCaptionClearTestID = buttonCaptionClear.replace(/ /g, "");
+    const buttonCaptionSaveTestID = buttonCaptionSave.replace(/ /g, "");
 
     const handleSignature = useCallback(
         (base64signature: string): void => {
@@ -52,24 +51,24 @@ export function Signature(props: Props): ReactElement {
             />
             <View style={styles.buttonWrapper}>
                 <Touchable
-                    testID={`${buttonCaptionClear}$Touchable`}
+                    testID={`${buttonCaptionClearTestID}$Touchable`}
                     onPress={() => ref.current?.clearSignature()}
                     accessible={false}
                     style={buttonClearContainerStyles}
                     {...buttonClearContainerProps}
                 >
-                    <Text testID={`${buttonCaptionClear}$caption`} style={styles.buttonClearCaption}>
+                    <Text testID={`${buttonCaptionClearTestID}$caption`} style={styles.buttonClearCaption}>
                         {buttonCaptionClear}
                     </Text>
                 </Touchable>
                 <Touchable
-                    testID={`${buttonCaptionSave}$Touchable`}
+                    testID={`${buttonCaptionSaveTestID}$Touchable`}
                     onPress={() => ref.current?.readSignature()}
                     accessible={false}
                     style={buttonSaveContainerStyles}
                     {...buttonSaveContainerProps}
                 >
-                    <Text testID={`${buttonCaptionSave}$caption`} style={styles.buttonSaveCaption}>
+                    <Text testID={`${buttonCaptionSaveTestID}$caption`} style={styles.buttonSaveCaption}>
                         {buttonCaptionSave}
                     </Text>
                 </Touchable>

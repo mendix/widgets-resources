@@ -10,7 +10,7 @@ import {
     TouchableHighlightProps,
     View
 } from "react-native";
-import { extractStyles } from "../../../tools/util-widgets/src/styles";
+import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 const DEFAULT_RIPPLE_COLOR = "rgba(0, 0, 0, 0.2)";
 const isAndroid = Platform.OS === "android";
