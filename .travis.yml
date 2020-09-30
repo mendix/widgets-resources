@@ -41,7 +41,7 @@ jobs:
         - name: "Script tests (Node latest, linux)"
           script:
               - npm run test:scripts -- $SINCE_ARG
-        - name: "Run automated end-to-end tests"
+        - name: "Run automated end-to-end web tests"
           dist: bionic
           addons:
               firefox: latest
@@ -55,8 +55,18 @@ jobs:
               - DISPLAY=:99.0
           script:
               - set -e
-              - npm run release -- $SINCE_ARG
-              - npm run test:e2e -- $SINCE_ARG
+              - npm run release -- --scope '*-web' $SINCE_ARG
+              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
+        - name: "Run automated end-to-end native tests"
+          os: osx
+          git:
+              submodules: true
+          services:
+              - docker
+          script:
+              - set -e
+              - npm run release -- --scope '*-native' $SINCE_ARG
+              - npm run test:e2e -- --scope '*-native' $SINCE_ARG
         - stage: deploy
           name: "Release npm package"
           script:
