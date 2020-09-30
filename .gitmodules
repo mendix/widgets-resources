@@ -22,6 +22,10 @@
 	path = packages/pluggableWidgets/badge-button-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = badge-button-web
+[submodule "packages/pluggableWidgets/popup-menu-web/tests/testProject"]
+	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = popupmenu-web
 [submodule "packages/pluggableWidgets/signature-native/tests/testProject"]
 	path = packages/pluggableWidgets/signature-native/tests/testProject
 	url = https://github.com/mendix/testProjects.git
