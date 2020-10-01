@@ -11,10 +11,10 @@ import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 
 import { LineChartProps, SeriesType } from "../typings/LineChartProps";
 
-interface GroupedDataSourceItem {
+interface DataSourceItemGroup {
     groupByAttributeValue: string | boolean | Date | Big;
-    seriesNameAttributeValue?: string;
-    stylePropertyNameAttributeValue?: string;
+    dynamicSeriesNameValue?: string;
+    dynamicStylePropertyNameValue?: string;
     items: ObjectItem[];
 }
 
@@ -80,22 +80,22 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     );
 
     const groupDataSourceItems = useCallback(
-        (series: SeriesType, dataLoadingStatus: DataLoadingStatus): GroupedDataSourceItem[] => {
-            const { dataSource, dynamicSeriesName, groupByAttribute, stylePropertyNameAttribute } = series;
+        (series: SeriesType, dataLoadingStatus: DataLoadingStatus): DataSourceItemGroup[] => {
+            const { dataSource, dynamicSeriesName, groupByAttribute, dynamicStylePropertyName } = series;
 
-            return ensure(dataSource.items).reduce<GroupedDataSourceItem[]>((dataSourceItemsResult, item) => {
+            return ensure(dataSource.items).reduce<DataSourceItemGroup[]>((dataSourceItemGroupsResult, item) => {
                 if (!dataLoadingStatus.dataAvailable) {
-                    return dataSourceItemsResult;
+                    return dataSourceItemGroupsResult;
                 }
 
                 const groupByAttributeValue = ensure(groupByAttribute)(item);
 
                 if (groupByAttributeValue.status !== ValueStatus.Available) {
                     dataLoadingStatus.dataAvailable = false;
-                    return dataSourceItemsResult;
+                    return dataSourceItemGroupsResult;
                 }
 
-                const group = dataSourceItemsResult.find(group => {
+                const group = dataSourceItemGroupsResult.find(group => {
                     if (groupByAttributeValue.value instanceof Date && group.groupByAttributeValue instanceof Date) {
                         return group.groupByAttributeValue.getTime() === ensure(groupByAttributeValue.value).getTime();
                     } else if (
@@ -110,7 +110,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 if (group) {
                     group.items.push(item);
                 } else {
-                    const newDataSourceItemGroup: GroupedDataSourceItem = {
+                    const newDataSourceItemGroup: DataSourceItemGroup = {
                         groupByAttributeValue: ensure(groupByAttributeValue.value),
                         items: [item]
                     };
@@ -120,27 +120,27 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
                         if (dynamicSeriesNameValue.status !== ValueStatus.Available) {
                             dataLoadingStatus.dataAvailable = false;
-                            return dataSourceItemsResult;
+                            return dataSourceItemGroupsResult;
                         }
 
-                        newDataSourceItemGroup.seriesNameAttributeValue = dynamicSeriesNameValue.value;
+                        newDataSourceItemGroup.dynamicSeriesNameValue = dynamicSeriesNameValue.value;
                     }
 
-                    if (stylePropertyNameAttribute) {
-                        const stylePropertyNameAttributeValue = stylePropertyNameAttribute(item);
+                    if (dynamicStylePropertyName) {
+                        const stylePropertyNameAttributeValue = dynamicStylePropertyName(item);
 
                         if (stylePropertyNameAttributeValue.status !== ValueStatus.Available) {
                             dataLoadingStatus.dataAvailable = false;
-                            return dataSourceItemsResult;
+                            return dataSourceItemGroupsResult;
                         }
 
-                        newDataSourceItemGroup.stylePropertyNameAttributeValue = stylePropertyNameAttributeValue.value;
+                        newDataSourceItemGroup.dynamicStylePropertyNameValue = stylePropertyNameAttributeValue.value;
                     }
 
-                    dataSourceItemsResult.push(newDataSourceItemGroup);
+                    dataSourceItemGroupsResult.push(newDataSourceItemGroup);
                 }
 
-                return dataSourceItemsResult;
+                return dataSourceItemGroupsResult;
             }, []);
         },
         []
@@ -152,14 +152,14 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             dataLoadingStatus: DataLoadingStatus,
             series: SeriesType,
             interpolation: InterpolationPropType,
-            groupedDataSourceItems: GroupedDataSourceItem[]
+            dataSourceItemGroups: DataSourceItemGroup[]
         ): void => {
-            groupedDataSourceItems.forEach(itemGroup => {
+            dataSourceItemGroups.forEach(itemGroup => {
                 loadedSeries.push({
                     dataPoints: convertToDataPoints(itemGroup.items, series, dataLoadingStatus),
                     interpolation,
-                    name: itemGroup.seriesNameAttributeValue,
-                    stylePropertyName: itemGroup.stylePropertyNameAttributeValue
+                    name: itemGroup.dynamicSeriesNameValue,
+                    stylePropertyName: itemGroup.dynamicStylePropertyNameValue
                 });
             });
         },
@@ -186,8 +186,8 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 return result;
             }
 
-            const groupedDataSourceItems = groupDataSourceItems(series, dataLoadingStatus);
-            loadDynamicSeries(result, dataLoadingStatus, series, interpolation, groupedDataSourceItems);
+            const dataSourceItemGroups = groupDataSourceItems(series, dataLoadingStatus);
+            loadDynamicSeries(result, dataLoadingStatus, series, interpolation, dataSourceItemGroups);
             return result;
         }, []);
 
