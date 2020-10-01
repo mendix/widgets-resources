@@ -41,14 +41,10 @@
                                 <caption>Series name</caption>
                                 <description />
                             </property>
-                            <property key="seriesNameAttribute" type="attribute" required="false" dataSource="dataSource">
+                            <property key="dynamicSeriesName" type="textTemplate" required="false" dataSource="dataSource">
                                 <caption>Series name</caption>
                                 <description />
-                                <attributeTypes>
-                                    <attributeType name="String" />
-                                </attributeTypes>
                             </property>
-
                             <property key="xValue" type="attribute" required="true" dataSource="dataSource">
                                 <caption>X value</caption>
                                 <description />
