@@ -6,7 +6,7 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
     values.series.forEach((series, index) => {
         if (series.type === "static") {
             hidePropertyIn(defaultProperties, values, "series", index, "groupByAttribute");
-            hidePropertyIn(defaultProperties, values, "series", index, "seriesNameAttribute");
+            hidePropertyIn(defaultProperties, values, "series", index, "dynamicSeriesName");
             hidePropertyIn(defaultProperties, values, "series", index, "stylePropertyNameAttribute");
         } else {
             hidePropertyIn(defaultProperties, values, "series", index, "seriesName");

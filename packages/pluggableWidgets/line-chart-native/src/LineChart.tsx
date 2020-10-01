@@ -81,7 +81,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
     const groupDataSourceItems = useCallback(
         (series: SeriesType, dataLoadingStatus: DataLoadingStatus): GroupedDataSourceItem[] => {
-            const { dataSource, groupByAttribute, seriesNameAttribute, stylePropertyNameAttribute } = series;
+            const { dataSource, dynamicSeriesName, groupByAttribute, stylePropertyNameAttribute } = series;
 
             return ensure(dataSource.items).reduce<GroupedDataSourceItem[]>((dataSourceItemsResult, item) => {
                 if (!dataLoadingStatus.dataAvailable) {
@@ -110,23 +110,34 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 if (group) {
                     group.items.push(item);
                 } else {
-                    const seriesNameAttributeValue = ensure(seriesNameAttribute)(item);
-                    const stylePropertyNameAttributeValue = ensure(stylePropertyNameAttribute)(item);
+                    const newDataSourceItemGroup: GroupedDataSourceItem = {
+                        groupByAttributeValue: ensure(groupByAttributeValue.value),
+                        items: [item]
+                    };
 
-                    if (
-                        stylePropertyNameAttributeValue.status !== ValueStatus.Available ||
-                        seriesNameAttributeValue.status !== ValueStatus.Available
-                    ) {
-                        dataLoadingStatus.dataAvailable = false;
-                        return dataSourceItemsResult;
+                    if (dynamicSeriesName) {
+                        const dynamicSeriesNameValue = dynamicSeriesName(item);
+
+                        if (dynamicSeriesNameValue.status !== ValueStatus.Available) {
+                            dataLoadingStatus.dataAvailable = false;
+                            return dataSourceItemsResult;
+                        }
+
+                        newDataSourceItemGroup.seriesNameAttributeValue = dynamicSeriesNameValue.value;
                     }
 
-                    dataSourceItemsResult.push({
-                        groupByAttributeValue: ensure(groupByAttributeValue.value),
-                        seriesNameAttributeValue: seriesNameAttributeValue.value,
-                        stylePropertyNameAttributeValue: stylePropertyNameAttributeValue.value,
-                        items: [item]
-                    });
+                    if (stylePropertyNameAttribute) {
+                        const stylePropertyNameAttributeValue = stylePropertyNameAttribute(item);
+
+                        if (stylePropertyNameAttributeValue.status !== ValueStatus.Available) {
+                            dataLoadingStatus.dataAvailable = false;
+                            return dataSourceItemsResult;
+                        }
+
+                        newDataSourceItemGroup.stylePropertyNameAttributeValue = stylePropertyNameAttributeValue.value;
+                    }
+
+                    dataSourceItemsResult.push(newDataSourceItemGroup);
                 }
 
                 return dataSourceItemsResult;

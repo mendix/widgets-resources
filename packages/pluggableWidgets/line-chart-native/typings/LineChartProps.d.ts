@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { DynamicValue, ListValue, ListAttributeValue } from "mendix";
+import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 
 export type TypeEnum = "static" | "dynamic";
 
@@ -14,7 +14,7 @@ export interface SeriesType {
     dataSource: ListValue;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
     seriesName?: DynamicValue<string>;
-    seriesNameAttribute?: ListAttributeValue<string>;
+    dynamicSeriesName?: ListExpressionValue<string>;
     xValue: ListAttributeValue<BigJs.Big>;
     yValue: ListAttributeValue<BigJs.Big>;
     interpolation: InterpolationEnum;
@@ -27,7 +27,7 @@ export interface SeriesPreviewType {
     dataSource: {} | null;
     groupByAttribute: string;
     seriesName: string;
-    seriesNameAttribute: string;
+    dynamicSeriesName: string;
     xValue: string;
     yValue: string;
     interpolation: InterpolationEnum;
