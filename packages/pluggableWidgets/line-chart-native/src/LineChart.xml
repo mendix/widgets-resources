@@ -85,7 +85,7 @@
                                 <caption>Style property name</caption>
                                 <description />
                             </property>
-                            <property key="stylePropertyNameAttribute" type="attribute" required="false" dataSource="dataSource">
+                            <property key="dynamicStylePropertyName" type="attribute" required="false" dataSource="dataSource">
                                 <caption>Style property name</caption>
                                 <description />
                                 <attributeTypes>

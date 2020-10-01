@@ -19,7 +19,7 @@ export interface SeriesType {
     yValue: ListAttributeValue<BigJs.Big>;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
-    stylePropertyNameAttribute?: ListAttributeValue<string>;
+    dynamicStylePropertyName?: ListAttributeValue<string>;
 }
 
 export interface SeriesPreviewType {
@@ -32,7 +32,7 @@ export interface SeriesPreviewType {
     yValue: string;
     interpolation: InterpolationEnum;
     stylePropertyName: string;
-    stylePropertyNameAttribute: string;
+    dynamicStylePropertyName: string;
 }
 
 export interface LineChartProps<Style> {
