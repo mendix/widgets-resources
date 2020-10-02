@@ -18,6 +18,7 @@ export interface LineChartSeries {
     dataPoints: LineChartDataPoint[];
     interpolation: InterpolationPropType;
     name?: string;
+    lineStyle: "line" | "lineWithMarkers" | "custom";
     stylePropertyName?: string;
 }
 
@@ -36,13 +37,15 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     const chartLines = useMemo(
         () =>
             series.map((series, index) => {
-                const seriesStyle =
-                    style.series && series.stylePropertyName ? style.series[series.stylePropertyName] : undefined;
+                const { dataPoints, interpolation, lineStyle, stylePropertyName } = series;
+
+                const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
 
                 const markers =
-                    seriesStyle?.markers?.display !== "false" ? (
+                    lineStyle === "lineWithMarkers" ||
+                    (lineStyle === "custom" && seriesStyle?.markers?.display !== "false") ? (
                         <VictoryScatter
-                            data={series.dataPoints}
+                            data={dataPoints}
                             style={seriesStyle?.markers}
                             size={seriesStyle?.markers?.size}
                         />
@@ -52,12 +55,10 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
                 return (
                     <VictoryGroup key={index}>
-                        {markers && seriesStyle?.markers?.display === "underneath" ? markers : null}
-                        <VictoryLine
-                            style={seriesStyle?.line}
-                            data={series.dataPoints}
-                            interpolation={series.interpolation}
-                        />
+                        {markers && (!seriesStyle?.markers?.display || seriesStyle.markers.display !== "onTop")
+                            ? markers
+                            : null}
+                        <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
                         {markers && seriesStyle?.markers?.display === "onTop" ? markers : null}
                     </VictoryGroup>
                 );
