@@ -17,23 +17,25 @@ import {
     UseFiltersState
 } from "react-table";
 import { ReactNode } from "react";
+import { WidthEnum } from "./DatagridProps";
 
 declare module "react-table" {
     export interface TableOptions<D extends object>
         extends UseFiltersOptions<D>,
             UsePaginationOptions<D>,
-            UseResizeColumnsOptions<D>,
             UseSortByColumnOptions<D>,
             UseSortByOptions<D> {}
 
     export interface ColumnInterface<D extends object = {}>
         extends UseFiltersColumnOptions<D>,
-            UseSortByColumnOptions<D>,
-            UseResizeColumnsOptions<D> {
+            UseSortByColumnOptions<D> {
         canHide?: boolean;
         canDrag?: boolean;
+        canResize?: boolean;
         hidden?: boolean;
         customFilter?: ReactNode;
+        weight?: number;
+        width?: WidthEnum;
     }
 
     export interface TableState<D extends object = {}>
@@ -47,8 +49,5 @@ declare module "react-table" {
             UseColumnOrderInstanceProps<D>,
             UsePaginationInstanceProps<D> {}
 
-    export interface ColumnInstance<D extends object>
-        extends UseFiltersColumnProps<D>,
-            UseSortByColumnProps<D>,
-            UseResizeColumnsColumnProps<D> {}
+    export interface ColumnInstance<D extends object> extends UseFiltersColumnProps<D>, UseSortByColumnProps<D> {}
 }

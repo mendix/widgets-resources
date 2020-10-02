@@ -6,6 +6,7 @@ interface InfiniteBodyProps {
     hasMoreItems: boolean;
     setPage?: (computePage: (prevPage: number) => number) => void;
     isInfinite: boolean;
+    style?: any;
 }
 
 export function InfiniteBody({
@@ -13,13 +14,17 @@ export function InfiniteBody({
     hasMoreItems,
     setPage,
     isInfinite,
+    style,
     ...rest
 }: InfiniteBodyProps): ReactElement {
     const [bodySize, setBodySize] = useState(0);
 
     const trackScrolling = useCallback(
         e => {
-            const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+            /**
+             * In Windows OS the result of first expression returns a non integer and result in never loading more, require floor to solve.
+             */
+            const bottom = Math.floor(e.target.scrollHeight - e.target.scrollTop) === Math.floor(e.target.clientHeight);
             if (bottom) {
                 if (hasMoreItems && setPage) {
                     setPage(prev => prev + 1);
@@ -44,7 +49,7 @@ export function InfiniteBody({
             className={classNames("tbody", isInfinite ? "infinite-loading" : "")}
             ref={calculateBodyHeight}
             onScroll={isInfinite ? trackScrolling : undefined}
-            style={isInfinite && bodySize > 0 ? { maxHeight: bodySize } : {}}
+            style={isInfinite && bodySize > 0 ? { ...style, maxHeight: bodySize } : style}
         >
             {children}
         </div>

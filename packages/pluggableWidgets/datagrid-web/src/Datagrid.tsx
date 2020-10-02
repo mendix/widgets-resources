@@ -45,9 +45,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columnsSortable={props.columnsSortable}
             data={props.datasource.items ?? []}
             filterMethod={props.filterMethod}
-            footerWidgets={<div className="header">{props.footerWidgets}</div>}
+            footerWidgets={<div className="footer">{props.footerWidgets}</div>}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
-            headerWidgets={<div className="footer">{props.headerWidgets}</div>}
+            headerWidgets={<div className="header">{props.headerWidgets}</div>}
             numberOfItems={props.datasource.totalCount}
             page={currentPage}
             pageSize={props.pageSize}

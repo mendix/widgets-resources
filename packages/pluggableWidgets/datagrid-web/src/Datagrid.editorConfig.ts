@@ -25,6 +25,9 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         if (!values.columnsHidable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "hidable");
         }
+        if (column.width !== "manual") {
+            hidePropertyIn(defaultProperties, values, "columns", index, "size");
+        }
     });
     if (!values.pagingEnabled) {
         hidePropertyIn(defaultProperties, values, "pagingPosition");

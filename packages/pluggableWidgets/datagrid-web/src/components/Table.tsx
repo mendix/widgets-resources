@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, ReactElement, ReactNode, useMemo, useState } from "react";
+import { createElement, CSSProperties, ReactElement, ReactNode, useMemo, useState, Fragment } from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
@@ -13,15 +13,21 @@ import {
     SortingRule,
     useColumnOrder,
     useFilters,
-    useFlexLayout,
     usePagination,
-    useResizeColumns,
     useSortBy,
     useTable
 } from "react-table";
 import { ColumnsPreviewType, ColumnsType, FilterMethodEnum } from "../../typings/DatagridProps";
+import ReactResizeDetector from "react-resize-detector";
 
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
+
+export interface HeaderSize {
+    [key: string]: {
+        resized: boolean;
+        width: number;
+    };
+}
 
 export interface TableProps<T> {
     className: string;
@@ -53,7 +59,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
     const [dragOver, setDragOver] = useState("");
-    const [columnSelectorWidth, setColumnSelectorWidth] = useState(0);
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
     const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
         (props.columns
@@ -63,6 +68,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [paginationIndex, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [filters, setFilters] = useState<Filters<object>>([]);
+    const [headerSizes, setHeaderSizes] = useState<HeaderSize>(
+        props.columns
+            .map((_c, index) => ({ [index.toString()]: { resized: false, width: 0 } }))
+            .reduce((p, c) => ({ ...p, ...c }), {})
+    );
 
     const filterTypes = useMemo(
         () => ({
@@ -102,6 +112,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
+                canResize: column.resizable,
                 customFilter:
                     column.filterable === "custom"
                         ? props.filterRenderer((children: ReactNode) => <div className="filter">{children}</div>, index)
@@ -125,18 +136,46 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 },
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
-                        (children: ReactNode) => (
-                            <div
-                                {...cell.getCellProps()}
-                                {...(!props.columnsResizable ? { style: { flex: "1 1 0px" } } : {})}
-                                className="td"
-                            >
-                                {children}
-                            </div>
-                        ),
+                        (children: ReactNode) => {
+                            const content = (
+                                <div {...cell.getCellProps()} className="td">
+                                    {children}
+                                </div>
+                            );
+
+                            /**
+                             * Checks if column is not the only one visible to set size
+                             */
+                            if (cell.row.index === 0 && cell.column.width === "autoFit" && cell.row.cells.length > 1) {
+                                return (
+                                    <ReactResizeDetector handleWidth handleHeight>
+                                        {({ width }: { width: number }) => {
+                                            if (width > 0) {
+                                                setHeaderSizes(prev => {
+                                                    const previousValue = prev[cell.column.id];
+                                                    if (
+                                                        previousValue &&
+                                                        !previousValue.resized &&
+                                                        previousValue.width !== width
+                                                    ) {
+                                                        previousValue.width = width;
+                                                        return { ...prev };
+                                                    }
+                                                    return prev;
+                                                });
+                                            }
+                                            return content;
+                                        }}
+                                    </ReactResizeDetector>
+                                );
+                            }
+                            return content;
+                        },
                         value,
                         index
-                    )
+                    ),
+                width: column.width,
+                weight: column.size ?? 1
             })),
         [props.columns]
     );
@@ -170,14 +209,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         }}
                     />
                 </div>
-            ),
-            ...(props.columnsResizable
-                ? {
-                      width: 150, // width is used for both the flex-basis and flex-grow
-                      maxWidth: 200, // maxWidth is only used as a limit for resizing
-                      minWidth: 15 // minWidth is only used as a limit for resizing
-                  }
-                : {})
+            )
         }),
         [props.columns]
     );
@@ -204,7 +236,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
             defaultColumn,
             filterTypes,
-            disableResizing: !props.columnsResizable,
             disableSortBy: !props.columnsSortable,
             disableFilters: !props.columnsFilterable,
             initialState: {
@@ -221,9 +252,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         useFilters,
         useSortBy,
         usePagination,
-        useColumnOrder,
-        useFlexLayout,
-        useResizeColumns
+        useColumnOrder
     );
 
     const pagination = props.paging ? (
@@ -253,14 +282,40 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         )
     ) : null;
 
+    const cssGridStyles = useMemo(() => {
+        const columnSizes = visibleColumns
+            .map(c => {
+                switch (c.width) {
+                    case "autoFit":
+                        /**
+                         * If auto fit column is the only column, it should fit the space
+                         */
+                        if (visibleColumns.length === 1) {
+                            return "1fr";
+                        }
+                        return "fit-content(100%)";
+                    case "manual":
+                        return `${c.weight}fr`;
+                    default:
+                        return "1fr";
+                }
+            })
+            .join(" ");
+        return {
+            "grid-template-columns": columnSizes + (props.columnsHidable ? ` fit-content(100px)` : "")
+        } as any;
+    }, [visibleColumns, props.columnsHidable]);
+
     return (
         <div className={props.className} style={props.styles}>
+            <div className="table-header">
+                {props.headerWidgets}
+                {props.pagingPosition === "top" && pagination}
+            </div>
             <div {...getTableProps()} className="table">
-                <div role="rowgroup" className="thead">
-                    {props.headerWidgets}
-                    {props.pagingPosition === "top" && pagination}
+                <div role="rowgroup" className="thead" style={cssGridStyles}>
                     {headerGroups.map((headerGroup, index: number) => (
-                        <div {...headerGroup.getHeaderGroupProps({})} key={`headers_row_${index}`} className="tr">
+                        <Fragment key={`headers_row_${index}`}>
                             {headerGroup.headers.map((column, index) => (
                                 <Header
                                     column={column}
@@ -268,6 +323,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     draggable={props.columnsDraggable}
                                     dragOver={dragOver}
                                     filterable={props.columnsFilterable}
+                                    headerSizes={headerSizes}
                                     resizable={props.columnsResizable}
                                     setColumnOrder={(newOrder: Array<IdType<object>>) => {
                                         setOrder(newOrder);
@@ -280,38 +336,32 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 />
                             ))}
                             {props.columnsHidable && (
-                                <ColumnSelector
-                                    allColumns={allColumns}
-                                    width={columnSelectorWidth}
-                                    setWidth={setColumnSelectorWidth}
-                                    setHiddenColumns={setHiddenColumns}
-                                />
+                                <ColumnSelector allColumns={allColumns} setHiddenColumns={setHiddenColumns} />
                             )}
-                        </div>
+                        </Fragment>
                     ))}
                 </div>
                 <InfiniteBody
                     isInfinite={isInfinite}
                     hasMoreItems={props.hasMoreItems}
                     setPage={props.setPage}
+                    style={cssGridStyles}
                     {...getTableBodyProps()}
                 >
-                    {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, index) => {
+                    {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, rowIndex) => {
                         prepareRow(row);
                         return (
-                            <div {...row.getRowProps()} key={`row_${index}`} className="tr">
+                            <Fragment key={`row_${rowIndex}`}>
                                 {row.cells.map(cell => cell.render("Cell"))}
-                                {props.columnsHidable && (
-                                    <div className="td column-selector" style={{ width: columnSelectorWidth }} />
-                                )}
-                            </div>
+                                {props.columnsHidable && <div className="td column-selector" />}
+                            </Fragment>
                         );
                     })}
                 </InfiniteBody>
-                <div className="tfoot">
-                    {props.pagingPosition === "bottom" && pagination}
-                    {props.footerWidgets}
-                </div>
+            </div>
+            <div className="table-footer">
+                {props.pagingPosition === "bottom" && pagination}
+                {props.footerWidgets}
             </div>
         </div>
     );
