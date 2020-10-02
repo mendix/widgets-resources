@@ -318,54 +318,6 @@ let container: VariablesContainer = {
 };
 container = merge(container, custom.container || ({} as any));
 //
-// Tabcontainer Styles
-let tabContainer: VariablesTabContainer = {
-    tabBar: {
-        pressColor: contrast.lower,
-        backgroundColor: background.primary
-    },
-    tab: {
-        paddingVertical: spacing.smaller
-    },
-    indicator: {
-        backgroundColor: brand.primary,
-        height: Platform.select({ ios: 2, android: 2 }) as number
-    },
-    label: {
-        color: contrast.highest,
-        fontSize: font.size,
-        fontWeight: font.weightBold,
-        textTransform: "uppercase"
-    },
-    activeLabel: {
-        color: brand.primary,
-        fontSize: font.size,
-        fontWeight: font.weightBold,
-        textTransform: "uppercase"
-    }
-};
-tabContainer = merge(tabContainer, custom.tabContainer || ({} as any));
-//
-// Listview Styles
-let listView: VariablesListView = {
-    listItemDisabled: {
-        opacity: 0.6
-    },
-    border: {
-        color: border.color,
-        width: border.width
-    }
-};
-listView = merge(listView, custom.listView || ({} as any));
-//
-// Layoutgrid Styles
-let layoutGrid: VariablesLayoutgrid = {
-    gutterSize: 15
-};
-layoutGrid = merge(layoutGrid, custom.layoutGrid || ({} as any));
-//
-// ## Pluggable Widgets
-// -------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
 let badge: VariablesBadge = {
     fontWeight: font.weightBold,
@@ -395,6 +347,65 @@ let badge: VariablesBadge = {
     }
 };
 badge = merge(badge, custom.badge || ({} as any));
+//
+// Tabcontainer Styles
+let tabContainer: VariablesTabContainer = {
+    tabBar: {
+        pressColor: contrast.lower,
+        backgroundColor: background.primary
+    },
+    tab: {
+        paddingVertical: spacing.smaller
+    },
+    indicator: {
+        backgroundColor: brand.primary,
+        height: Platform.select({ ios: 2, android: 2 }) as number
+    },
+    label: {
+        color: contrast.highest,
+        fontSize: font.size,
+        fontWeight: font.weightBold,
+        textTransform: "uppercase"
+    },
+    activeLabel: {
+        color: brand.primary,
+        fontSize: font.size,
+        fontWeight: font.weightBold,
+        textTransform: "uppercase"
+    },
+    badgeContainer: {
+        borderRadius: badge.borderRadius,
+        backgroundColor: badge.default.backgroundColor,
+        paddingVertical: badge.paddingVertical,
+        paddingHorizontal: badge.paddingHorizontal,
+        marginLeft: 8
+    },
+    badgeCaption: {
+        fontSize: font.size,
+        color: badge.default.color,
+        fontWeight: badge.fontWeight
+    }
+};
+tabContainer = merge(tabContainer, custom.tabContainer || ({} as any));
+//
+// Listview Styles
+let listView: VariablesListView = {
+    listItemDisabled: {
+        opacity: 0.6
+    },
+    border: {
+        color: border.color,
+        width: border.width
+    }
+};
+listView = merge(listView, custom.listView || ({} as any));
+//
+// Layoutgrid Styles
+let layoutGrid: VariablesLayoutgrid = {
+    gutterSize: 15
+};
+layoutGrid = merge(layoutGrid, custom.layoutGrid || ({} as any));
+//
 //
 // Floating Action Button Styles
 let floatingActionButton: VariablesFloatingActionButton = {
