@@ -81,6 +81,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             loadedSeries.push({
                 dataPoints: convertToDataPoints(ensure(ensure(staticDataSource).items), series, dataLoadingStatus),
                 interpolation,
+                lineStyle: series.staticLineStyle,
                 name: staticSeriesName ? staticSeriesName.value : undefined,
                 stylePropertyName: staticStylePropertyName
             });
@@ -176,6 +177,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 loadedSeries.push({
                     dataPoints: convertToDataPoints(itemGroup.items, series, dataLoadingStatus),
                     interpolation,
+                    lineStyle: series.dynamicLineStyle,
                     name: itemGroup.dynamicSeriesNameValue,
                     stylePropertyName: itemGroup.dynamicStylePropertyNameValue
                 });

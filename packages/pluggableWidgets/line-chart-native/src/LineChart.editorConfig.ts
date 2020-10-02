@@ -10,12 +10,14 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicSeriesName");
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicXValue");
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicYValue");
+            hidePropertyIn(defaultProperties, values, "series", index, "dynamicLineStyle");
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicStylePropertyName");
         } else {
             hidePropertyIn(defaultProperties, values, "series", index, "staticDataSource");
             hidePropertyIn(defaultProperties, values, "series", index, "staticSeriesName");
             hidePropertyIn(defaultProperties, values, "series", index, "staticXValue");
             hidePropertyIn(defaultProperties, values, "series", index, "staticYValue");
+            hidePropertyIn(defaultProperties, values, "series", index, "staticLineStyle");
             hidePropertyIn(defaultProperties, values, "series", index, "staticStylePropertyName");
         }
     });

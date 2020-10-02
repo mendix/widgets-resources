@@ -110,6 +110,23 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
+                            <property key="staticLineStyle" type="enumeration" defaultValue="line" required="true">
+                                <caption>Line style</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="line">Line</enumerationValue>
+                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="dynamicLineStyle" type="enumeration" defaultValue="line" required="true">
+                                <caption>Line style</caption>
+                                <description>Custom allows to style individual series via styling</description>
+                                <enumerationValues>
+                                    <enumerationValue key="line">Line</enumerationValue>
+                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
+                                </enumerationValues>
+                            </property>
                             <property key="staticStylePropertyName" type="string" required="false" multiline="false">
                                 <caption>Style property name</caption>
                                 <description />
@@ -122,7 +139,6 @@
                                 </attributeTypes>
                             </property>
                         </propertyGroup>
-
                     </properties>
                 </property>
             </propertyGroup>

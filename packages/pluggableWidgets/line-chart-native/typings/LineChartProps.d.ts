@@ -9,6 +9,10 @@ export type TypeEnum = "static" | "dynamic";
 
 export type InterpolationEnum = "linear" | "catmullRom";
 
+export type StaticLineStyleEnum = "line" | "lineWithMarkers";
+
+export type DynamicLineStyleEnum = "line" | "lineWithMarkers" | "custom";
+
 export interface SeriesType {
     type: TypeEnum;
     staticDataSource?: ListValue;
@@ -21,6 +25,8 @@ export interface SeriesType {
     staticYValue?: ListAttributeValue<BigJs.Big>;
     dynamicYValue?: ListAttributeValue<BigJs.Big>;
     interpolation: InterpolationEnum;
+    staticLineStyle: StaticLineStyleEnum;
+    dynamicLineStyle: DynamicLineStyleEnum;
     staticStylePropertyName: string;
     dynamicStylePropertyName?: ListAttributeValue<string>;
 }
@@ -37,6 +43,8 @@ export interface SeriesPreviewType {
     staticYValue: string;
     dynamicYValue: string;
     interpolation: InterpolationEnum;
+    staticLineStyle: StaticLineStyleEnum;
+    dynamicLineStyle: DynamicLineStyleEnum;
     staticStylePropertyName: string;
     dynamicStylePropertyName: string;
 }
