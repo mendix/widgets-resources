@@ -316,52 +316,6 @@ export const container: VariablesContainer = {
     }
 };
 //
-// Tabcontainer Styles
-export const tabContainer: VariablesTabContainer = {
-    tabBar: {
-        pressColor: contrast.lower,
-        backgroundColor: brand.primary
-    },
-    tab: {
-        paddingVertical: 12
-    },
-    indicator: {
-        backgroundColor: background.primary,
-        height: Platform.select({ ios: 2, android: 2 }) as number
-    },
-    label: {
-        color: background.primary,
-        fontSize: font.size,
-        fontWeight: font.weightSemiBold,
-        textTransform: "capitalize"
-    },
-    activeLabel: {
-        color: background.gray,
-        fontSize: font.size,
-        fontWeight: font.weightSemiBold,
-        textTransform: "capitalize"
-    }
-};
-//
-// ListView Styles
-export const listView: VariablesListView = {
-    listItemDisabled: {
-        opacity: 0.6
-    },
-    border: {
-        color: border.color,
-        width: border.width
-    }
-};
-//
-// Layoutgrid Styles
-export const layoutGrid = {
-    gutterSize: 16
-};
-//
-//
-// == Pluggable Widgets
-// -------------------------------------------------------------------------------------------------------------------//
 // Badge Styles
 export const badge: VariablesBadge = {
     fontWeight: font.weightNormal,
@@ -390,6 +344,62 @@ export const badge: VariablesBadge = {
         backgroundColor: brand.dangerLight
     }
 };
+//
+// Tabcontainer Styles
+export const tabContainer: VariablesTabContainer = {
+    tabBar: {
+        pressColor: contrast.lower,
+        backgroundColor: brand.primary
+    },
+    tab: {
+        paddingVertical: 12
+    },
+    indicator: {
+        backgroundColor: background.primary,
+        height: Platform.select({ ios: 2, android: 2 }) as number
+    },
+    label: {
+        color: background.primary,
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
+        textTransform: "capitalize"
+    },
+    activeLabel: {
+        color: background.gray,
+        fontSize: font.size,
+        fontWeight: font.weightSemiBold,
+        textTransform: "capitalize"
+    },
+    badgeContainer: {
+        borderRadius: badge.borderRadius,
+        backgroundColor: badge.default.backgroundColor,
+        paddingVertical: badge.paddingVertical,
+        paddingHorizontal: badge.paddingHorizontal,
+        marginLeft: 8
+    },
+    badgeCaption: {
+        fontSize: font.size,
+        color: badge.default.color,
+        fontWeight: badge.fontWeight
+    }
+};
+//
+// ListView Styles
+export const listView: VariablesListView = {
+    listItemDisabled: {
+        opacity: 0.6
+    },
+    border: {
+        color: border.color,
+        width: border.width
+    }
+};
+//
+// Layoutgrid Styles
+export const layoutGrid = {
+    gutterSize: 16
+};
+//
 //
 // Floating Action Button Styles
 export const floatingActionButton: VariablesFloatingActionButton = {
