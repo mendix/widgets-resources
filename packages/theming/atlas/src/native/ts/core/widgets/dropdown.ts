@@ -75,7 +75,8 @@ export const DropDown: DropDownType = {
         shadowColor: "#000",
         shadowOpacity: 0.2,
         shadowRadius: 10,
-        elevation: 16
+        elevation: 16,
+        backgroundColor: input.input.backgroundColor
     },
     itemContainer: {
         // All ViewStyle properties are allowed
