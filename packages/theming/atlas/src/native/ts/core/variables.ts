@@ -304,8 +304,12 @@ let navigation: VariablesNavigation = {
         activityIndicatorColor: font.colorTitle,
         backgroundColor: `rgba(0, 0, 0, 0.5)`,
         containerBackgroundColor: background.gray,
+        fontSize: font.size,
+        borderRadius: border.radiusSmall,
+        elevation: 1.5, // Only for Android
         shadowColor: "#000", // Only for iOS
-        fontSize: font.size
+        shadowOpacity: 0.1, // Only for iOS
+        shadowRadius: 10 // Only for iOS
     }
 };
 navigation = merge(navigation, custom.navigation || ({} as any));

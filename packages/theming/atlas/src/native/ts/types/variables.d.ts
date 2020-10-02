@@ -242,8 +242,12 @@ export interface VariablesNavigation {
         activityIndicatorColor: string;
         backgroundColor: string;
         containerBackgroundColor: string;
-        shadowColor: string;
         fontSize: number;
+        borderRadius: number;
+        elevation: number;
+        shadowColor: string;
+        shadowOpacity: number;
+        shadowRadius: number;
     };
 }
 
