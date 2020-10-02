@@ -19,11 +19,15 @@
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="dataSource" type="datasource" required="true" isList="true">
+                            <property key="staticDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
-                                <description>Data points for static series and series for dynamic series</description>
+                                <description>Data points for a single series</description>
                             </property>
-                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dataSource">
+                            <property key="dynamicDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for all series which will be divided into single series based on the Group by attribute value</description>
+                            </property>
+                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
                                 <description>Data points within the same group form one series</description>
                                 <attributeTypes>
@@ -37,15 +41,15 @@
                                     <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
-                            <property key="seriesName" type="textTemplate" required="false" multiline="false">
+                            <property key="staticSeriesName" type="textTemplate" required="false" multiline="false">
                                 <caption>Series name</caption>
                                 <description />
                             </property>
-                            <property key="dynamicSeriesName" type="textTemplate" required="false" dataSource="dataSource">
+                            <property key="dynamicSeriesName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
                                 <caption>Series name</caption>
                                 <description />
                             </property>
-                            <property key="xValue" type="attribute" required="true" dataSource="dataSource">
+                            <property key="staticXValue" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>X value</caption>
                                 <description />
                                 <attributeTypes>
@@ -56,7 +60,32 @@
                                     <!-- <attributeType name="AutoNumber" /> -->
                                 </attributeTypes>
                             </property>
-                            <property key="yValue" type="attribute" required="true" dataSource="dataSource">
+                            <property key="dynamicXValue" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>X value</caption>
+                                <description />
+                                <attributeTypes>
+                                    <!-- <attributeType name="DateTime" /> -->
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <!-- <attributeType name="AutoNumber" /> -->
+                                </attributeTypes>
+                            </property>
+                            <property key="staticYValue" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>Y value</caption>
+                                <description></description>
+                                <attributeTypes>
+                                    <!-- <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" /> -->
+                                    <attributeType name="Decimal" />
+                                    <!-- <attributeType name="Enum" /> -->
+                                    <!-- <attributeType name="HashString" /> -->
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <!-- <attributeType name="AutoNumber" /> -->
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicYValue" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Y value</caption>
                                 <description></description>
                                 <attributeTypes>
@@ -81,11 +110,11 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
-                            <property key="stylePropertyName" type="string" required="false" multiline="false">
+                            <property key="staticStylePropertyName" type="string" required="false" multiline="false">
                                 <caption>Style property name</caption>
                                 <description />
                             </property>
-                            <property key="dynamicStylePropertyName" type="attribute" required="false" dataSource="dataSource">
+                            <property key="dynamicStylePropertyName" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Style property name</caption>
                                 <description />
                                 <attributeTypes>
