@@ -1,31 +1,16 @@
-import { ValueStatus } from "mendix";
+import { ValueStatus, EditableValue } from "mendix";
 
-type Option<T> = T | undefined;
+type Writable<T> = {
+    -readonly [K in keyof T]: T[K];
+};
 
-interface EditableValueFormatter {
-    type: string;
-    format: any;
-    parse: any;
-    getFormatPlaceholder: any;
-    withConfig: () => void;
-}
-
-interface EditableValue<T> {
-    status: ValueStatus;
-    readOnly: boolean;
-    value: Option<T>;
-    displayValue: string;
-    validation: Option<string>;
-    formatter: EditableValueFormatter;
-    setValidator: () => void;
-    setValue: (value: T) => void;
-    setTextValue: (value: string) => void;
-    setFormatter: (formatter: any) => void;
-    universe?: T[];
+export enum FormatterType {
+    Number = "number",
+    DateTime = "datetime"
 }
 
 export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big> {
-    private readonly editableValue: EditableValue<T> = {
+    private readonly editableValue: Writable<EditableValue<T>> = {
         value: undefined,
         displayValue: "",
         status: ValueStatus.Available,
@@ -34,9 +19,10 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
         formatter: {
             format: jest.fn(name => `Formatted ${name}`),
             parse: jest.fn(),
-            withConfig: jest.fn(() => new EditableValueBuilder().build().formatter),
+            withConfig: jest.fn(() => new EditableValueBuilder().build().formatter) as any,
             getFormatPlaceholder: jest.fn(),
-            type: "datetime"
+            type: FormatterType.DateTime as any,
+            config: {} as any
         },
         setValidator: jest.fn(),
         setValue: jest.fn((value: T) => this.withValue(value)),
@@ -50,7 +36,7 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
         return this;
     }
 
-    withFormatter(formatter: EditableValueFormatter): EditableValueBuilder<T> {
+    withFormatter(formatter: EditableValue<T>["formatter"]): EditableValueBuilder<T> {
         this.editableValue.formatter = formatter;
         return this;
     }
