@@ -79,6 +79,19 @@ async function main() {
         await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
 
         if (isNativeEnabled) {
+            // Android starts
+
+            // download the apk
+            // cd tempdir()
+            // writeFile("10.0.2.2:${runtimePort}", "res/raw/runtime_url")
+            // execSync("zip -u apk res/raw/runtime_url")
+
+            // Verify how to find the build tools in travis
+            // execSync("~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/.android/debug.keystore app-appstore-debug.apk")
+
+            // Android ends
+
+            // IOS jungling starts
             nativeApp = await downlaodNativeIOSApp();
 
             const appBundle = join(nativeApp, "Bundle/");
@@ -91,6 +104,7 @@ async function main() {
                 stdio: "inherit",
                 env: { ...process.env, TEST_NATIVE_APP: nativeApp }
             });
+            // IOS jungling ends
         } else {
             execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
                 stdio: "inherit",
