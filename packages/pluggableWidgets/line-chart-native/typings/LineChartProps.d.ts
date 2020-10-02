@@ -11,27 +11,33 @@ export type InterpolationEnum = "linear" | "catmullRom";
 
 export interface SeriesType {
     type: TypeEnum;
-    dataSource: ListValue;
+    staticDataSource?: ListValue;
+    dynamicDataSource?: ListValue;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
-    seriesName?: DynamicValue<string>;
+    staticSeriesName?: DynamicValue<string>;
     dynamicSeriesName?: ListExpressionValue<string>;
-    xValue: ListAttributeValue<BigJs.Big>;
-    yValue: ListAttributeValue<BigJs.Big>;
+    staticXValue?: ListAttributeValue<BigJs.Big>;
+    dynamicXValue?: ListAttributeValue<BigJs.Big>;
+    staticYValue?: ListAttributeValue<BigJs.Big>;
+    dynamicYValue?: ListAttributeValue<BigJs.Big>;
     interpolation: InterpolationEnum;
-    stylePropertyName: string;
+    staticStylePropertyName: string;
     dynamicStylePropertyName?: ListAttributeValue<string>;
 }
 
 export interface SeriesPreviewType {
     type: TypeEnum;
-    dataSource: {} | null;
+    staticDataSource: {} | null;
+    dynamicDataSource: {} | null;
     groupByAttribute: string;
-    seriesName: string;
+    staticSeriesName: string;
     dynamicSeriesName: string;
-    xValue: string;
-    yValue: string;
+    staticXValue: string;
+    dynamicXValue: string;
+    staticYValue: string;
+    dynamicYValue: string;
     interpolation: InterpolationEnum;
-    stylePropertyName: string;
+    staticStylePropertyName: string;
     dynamicStylePropertyName: string;
 }
 

@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useState, useEffect, useCallback } from "react";
 import { Big } from "big.js";
 import { all } from "deepmerge";
-import { ObjectItem, ValueStatus } from "mendix";
+import { ObjectItem, ListAttributeValue, ValueStatus } from "mendix";
 import { InterpolationPropType } from "victory-core";
 
 import { ensure } from "@mendix/pluggable-widgets-tools";
@@ -32,7 +32,16 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
     const convertToDataPoints = useCallback(
         (items: ObjectItem[], series: SeriesType, dataLoadingStatus: DataLoadingStatus): LineChartDataPoint[] => {
-            const { xValue, yValue } = series;
+            let xValue: ListAttributeValue<BigJs.Big>;
+            let yValue: ListAttributeValue<BigJs.Big>;
+
+            if (series.type === "static") {
+                xValue = ensure(series.staticXValue);
+                yValue = ensure(series.staticYValue);
+            } else {
+                xValue = ensure(series.dynamicXValue);
+                yValue = ensure(series.dynamicYValue);
+            }
 
             return items.reduce<LineChartDataPoint[]>((dataPointsResult, item) => {
                 if (!dataLoadingStatus.dataAvailable) {
@@ -62,18 +71,18 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             series: SeriesType,
             interpolation: InterpolationPropType
         ): void => {
-            const { dataSource, seriesName } = series;
+            const { staticDataSource, staticSeriesName, staticStylePropertyName } = series;
 
-            if (seriesName && seriesName.status !== ValueStatus.Available) {
+            if (staticSeriesName && staticSeriesName.status !== ValueStatus.Available) {
                 dataLoadingStatus.dataAvailable = false;
                 return;
             }
 
             loadedSeries.push({
-                dataPoints: convertToDataPoints(ensure(dataSource.items), series, dataLoadingStatus),
+                dataPoints: convertToDataPoints(ensure(ensure(staticDataSource).items), series, dataLoadingStatus),
                 interpolation,
-                name: seriesName ? seriesName.value : undefined,
-                stylePropertyName: series.stylePropertyName
+                name: staticSeriesName ? staticSeriesName.value : undefined,
+                stylePropertyName: staticStylePropertyName
             });
         },
         [convertToDataPoints]
@@ -81,67 +90,76 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
     const groupDataSourceItems = useCallback(
         (series: SeriesType, dataLoadingStatus: DataLoadingStatus): DataSourceItemGroup[] => {
-            const { dataSource, dynamicSeriesName, groupByAttribute, dynamicStylePropertyName } = series;
+            const { dynamicDataSource, dynamicSeriesName, groupByAttribute, dynamicStylePropertyName } = series;
 
-            return ensure(dataSource.items).reduce<DataSourceItemGroup[]>((dataSourceItemGroupsResult, item) => {
-                if (!dataLoadingStatus.dataAvailable) {
-                    return dataSourceItemGroupsResult;
-                }
-
-                const groupByAttributeValue = ensure(groupByAttribute)(item);
-
-                if (groupByAttributeValue.status !== ValueStatus.Available) {
-                    dataLoadingStatus.dataAvailable = false;
-                    return dataSourceItemGroupsResult;
-                }
-
-                const group = dataSourceItemGroupsResult.find(group => {
-                    if (groupByAttributeValue.value instanceof Date && group.groupByAttributeValue instanceof Date) {
-                        return group.groupByAttributeValue.getTime() === ensure(groupByAttributeValue.value).getTime();
-                    } else if (
-                        groupByAttributeValue.value instanceof Big &&
-                        group.groupByAttributeValue instanceof Big
-                    ) {
-                        return group.groupByAttributeValue.eq(ensure(groupByAttributeValue.value));
+            return ensure(ensure(dynamicDataSource).items).reduce<DataSourceItemGroup[]>(
+                (dataSourceItemGroupsResult, item) => {
+                    if (!dataLoadingStatus.dataAvailable) {
+                        return dataSourceItemGroupsResult;
                     }
-                    return group.groupByAttributeValue === groupByAttributeValue.value;
-                });
 
-                if (group) {
-                    group.items.push(item);
-                } else {
-                    const newDataSourceItemGroup: DataSourceItemGroup = {
-                        groupByAttributeValue: ensure(groupByAttributeValue.value),
-                        items: [item]
-                    };
+                    const groupByAttributeValue = ensure(groupByAttribute)(item);
 
-                    if (dynamicSeriesName) {
-                        const dynamicSeriesNameValue = dynamicSeriesName(item);
+                    if (groupByAttributeValue.status !== ValueStatus.Available) {
+                        dataLoadingStatus.dataAvailable = false;
+                        return dataSourceItemGroupsResult;
+                    }
 
-                        if (dynamicSeriesNameValue.status !== ValueStatus.Available) {
-                            dataLoadingStatus.dataAvailable = false;
-                            return dataSourceItemGroupsResult;
+                    const group = dataSourceItemGroupsResult.find(group => {
+                        if (
+                            groupByAttributeValue.value instanceof Date &&
+                            group.groupByAttributeValue instanceof Date
+                        ) {
+                            return (
+                                group.groupByAttributeValue.getTime() === ensure(groupByAttributeValue.value).getTime()
+                            );
+                        } else if (
+                            groupByAttributeValue.value instanceof Big &&
+                            group.groupByAttributeValue instanceof Big
+                        ) {
+                            return group.groupByAttributeValue.eq(ensure(groupByAttributeValue.value));
+                        }
+                        return group.groupByAttributeValue === groupByAttributeValue.value;
+                    });
+
+                    if (group) {
+                        group.items.push(item);
+                    } else {
+                        const newDataSourceItemGroup: DataSourceItemGroup = {
+                            groupByAttributeValue: ensure(groupByAttributeValue.value),
+                            items: [item]
+                        };
+
+                        if (dynamicSeriesName) {
+                            const dynamicSeriesNameValue = dynamicSeriesName(item);
+
+                            if (dynamicSeriesNameValue.status !== ValueStatus.Available) {
+                                dataLoadingStatus.dataAvailable = false;
+                                return dataSourceItemGroupsResult;
+                            }
+
+                            newDataSourceItemGroup.dynamicSeriesNameValue = dynamicSeriesNameValue.value;
                         }
 
-                        newDataSourceItemGroup.dynamicSeriesNameValue = dynamicSeriesNameValue.value;
-                    }
+                        if (dynamicStylePropertyName) {
+                            const stylePropertyNameAttributeValue = dynamicStylePropertyName(item);
 
-                    if (dynamicStylePropertyName) {
-                        const stylePropertyNameAttributeValue = dynamicStylePropertyName(item);
+                            if (stylePropertyNameAttributeValue.status !== ValueStatus.Available) {
+                                dataLoadingStatus.dataAvailable = false;
+                                return dataSourceItemGroupsResult;
+                            }
 
-                        if (stylePropertyNameAttributeValue.status !== ValueStatus.Available) {
-                            dataLoadingStatus.dataAvailable = false;
-                            return dataSourceItemGroupsResult;
+                            newDataSourceItemGroup.dynamicStylePropertyNameValue =
+                                stylePropertyNameAttributeValue.value;
                         }
 
-                        newDataSourceItemGroup.dynamicStylePropertyNameValue = stylePropertyNameAttributeValue.value;
+                        dataSourceItemGroupsResult.push(newDataSourceItemGroup);
                     }
 
-                    dataSourceItemGroupsResult.push(newDataSourceItemGroup);
-                }
-
-                return dataSourceItemGroupsResult;
-            }, []);
+                    return dataSourceItemGroupsResult;
+                },
+                []
+            );
         },
         []
     );
@@ -174,15 +192,20 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
                 return result;
             }
 
-            const { dataSource, interpolation, type } = series;
+            const { staticDataSource, dynamicDataSource, interpolation, type } = series;
 
-            if (dataSource.status !== ValueStatus.Available) {
-                dataLoadingStatus.dataAvailable = false;
+            if (type === "static") {
+                if (ensure(staticDataSource).status !== ValueStatus.Available) {
+                    dataLoadingStatus.dataAvailable = false;
+                    return result;
+                }
+
+                loadStaticSeries(result, dataLoadingStatus, series, interpolation);
                 return result;
             }
 
-            if (type === "static") {
-                loadStaticSeries(result, dataLoadingStatus, series, interpolation);
+            if (ensure(dynamicDataSource).status !== ValueStatus.Available) {
+                dataLoadingStatus.dataAvailable = false;
                 return result;
             }
 
