@@ -11,112 +11,9 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
     border-width: 0;
     background-color: transparent;
 
-    /* Table header */
+    /* Table Header */
     .thead {
         display: grid;
-        .th {
-            align-items: flex-start;
-            font-weight: 600;
-            border-style: solid;
-            border-color: $border-color;
-            border-top-width: 0;
-            border-right: 0;
-            border-bottom-width: 1px;
-            border-left: 0;
-            background-color: $background-color;
-            padding: 16px 8px;
-
-            .clickable {
-                cursor: pointer;
-            }
-
-            .column-resizer {
-                min-width: 4px;
-                margin: 0 4px;
-                height: 100%;
-                cursor: col-resize;
-
-                &:hover {
-                    background-color: $primary-color;
-                }
-                &:active {
-                    background-color: $primary-color;
-                }
-            }
-
-            .column-container {
-                flex-grow: 1;
-                align-self: stretch;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                &.dragging {
-                    border-left: 4px solid $dragging-color-effect;
-                }
-            }
-
-            .column-header {
-                display: flex;
-                flex-grow: 1;
-                justify-content: space-between;
-                align-items: center;
-
-                svg {
-                    color: $icon-color;
-                }
-            }
-
-            .filter {
-                display: flex;
-                margin-top: 4px;
-                input {
-                    font-weight: normal;
-                    flex-grow: 1;
-                    width: 100%;
-                }
-                > .form-group {
-                    margin-bottom: 0;
-                }
-                > .form-control {
-                    flex: unset;
-                    min-width: unset;
-                }
-            }
-        }
-        .column-selector {
-            flex: unset;
-            padding-left: 0;
-            padding-right: 0;
-            button {
-                padding: 8px;
-                align-self: flex-end;
-            }
-            .column-selectors {
-                position: absolute;
-                right: 0;
-                margin-top: 45px;
-                padding: 0 16px;
-                background: $background-color;
-                z-index: 99;
-                border-radius: 3px;
-                border: 1px solid transparent;
-                list-style-type: none;
-                -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
-                -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
-                box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
-
-                li {
-                    display: flex;
-                    align-items: center;
-
-                    label {
-                        margin: 8px;
-                        font-weight: normal;
-                    }
-                }
-            }
-        }
     }
 
     /* Table Body */
@@ -126,63 +23,180 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         &.infinite-loading {
             overflow-y: scroll;
         }
+    }
 
-            .td {
-                justify-content: space-between;
-                align-items: center;
-                padding: 16px 8px;
-                border-width: 0;
-                border-color: $border-color;
-                border-bottom-width: 1px;
-                border-bottom-style: solid;
-                background-color: $background-color;
-                overflow: hidden;
+    /* Column Header */
+    .th {
+        align-items: flex-start;
+        font-weight: 600;
+        border-style: solid;
+        border-color: $border-color;
+        border-top-width: 0;
+        border-right: 0;
+        border-bottom-width: 1px;
+        border-left: 0;
+        background-color: $background-color;
+        padding: 16px 8px;
 
-                &:focus {
-                    outline: none;
-                }
+        /* Clickable column header (Sortable) */
+        .clickable {
+            cursor: pointer;
+        }
 
-                > .td-text,
-                * {
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
+        /* Column resizer when column is resizable */
+        .column-resizer {
+            min-width: 4px;
+            margin: 0 4px;
+            height: 100%;
+            cursor: col-resize;
+
+            &:hover {
+                background-color: $primary-color;
             }
+            &:active {
+                background-color: $primary-color;
+            }
+        }
 
-            .column-selector {
+        /* Content of the column header */
+        .column-container {
+            flex-grow: 1;
+            align-self: stretch;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            /* Styles while dragging another column */
+            &.dragging {
+                border-left: 4px solid $dragging-color-effect;
+            }
+        }
+
+        /* Header text */
+        .column-header {
+            display: flex;
+            flex-grow: 1;
+            justify-content: space-between;
+            align-items: center;
+
+            svg {
+                color: $icon-color;
+            }
+        }
+
+        /* Header filter */
+        .filter {
+            display: flex;
+            margin-top: 4px;
+            input {
+                font-weight: normal;
+                flex-grow: 1;
+                width: 100%;
+            }
+            > .form-group {
+                margin-bottom: 0;
+            }
+            > .form-control {
                 flex: unset;
-                padding-left: 0;
-                padding-right: 0;
+                min-width: unset;
             }
+        }
+    }
+
+    /* Column selector for hidable columns */
+    .column-selector {
+        padding-left: 0;
+        padding-right: 0;
+
+        /* Button containing the eye icon */
+        .column-selector-button {
+            padding: 8px;
+            margin: 0 8px;
+            align-self: flex-end;
+        }
+
+        /* List of columns to select */
+        .column-selectors {
+            position: absolute;
+            right: 0;
+            margin-top: 45px;
+            padding: 0 16px;
+            background: $background-color;
+            z-index: 99;
+            border-radius: 3px;
+            border: 1px solid transparent;
+            list-style-type: none;
+            -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+            -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+            box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+
+            li {
+                display: flex;
+                align-items: center;
+
+                label {
+                    margin: 8px;
+                    font-weight: normal;
+                }
+            }
+        }
+    }
+
+    /* Column content */
+    .td {
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 8px;
+        border-width: 0;
+        border-color: $border-color;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        background-color: $background-color;
+        overflow: hidden;
+
+        &:focus {
+            outline: none;
+        }
+
+        > .td-text,
+        * {
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
     }
 
     & *:focus {
         outline: 0;
     }
+}
 
-    .pagination {
-        display: flex;
-        justify-content: flex-end;
-        white-space: nowrap;
-        align-items: baseline;
-        margin: 16px;
-        color: $pagination-caption-color;
+.pagination {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    align-items: baseline;
+    margin: 16px;
+    color: $pagination-caption-color;
 
-        .paging-status {
-            padding: 0 8px 8px;
-        }
+    .paging-status {
+        padding: 0 8px 8px;
+    }
 
-        button {
-            padding: 6px;
-            color: $pagination-button-color;
+    .pagination-button {
+        padding: 6px;
+        color: $pagination-button-color;
+        border-color: transparent;
+        background-color: transparent;
+
+        &:hover {
+            color: $primary-color;
             border-color: transparent;
             background-color: transparent;
+        }
 
-            &:hover {
-                color: $primary-color;
-                border-color: transparent;
-                background-color: transparent;
-            }
+        &:disabled{
+            border-color: transparent;
+            background-color: transparent;
         }
     }
 }
