@@ -26,7 +26,6 @@ function mockColumnSelectorProps(): ColumnSelectorProps<object> {
                 disableFilters: false
             }
         ] as Array<ColumnInstance<object>>,
-        setColumnSelectorWidth: jest.fn(),
         setHiddenColumns: jest.fn()
     };
 }

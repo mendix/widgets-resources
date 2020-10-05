@@ -12,7 +12,6 @@ import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } fr
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
-import { HeaderSize } from "./Table";
 
 export interface HeaderProps<D extends object> {
     column: HeaderGroup<D>;
@@ -21,7 +20,6 @@ export interface HeaderProps<D extends object> {
     filterable: boolean;
     draggable: boolean;
     dragOver: string;
-    headerSizes: HeaderSize;
     visibleColumns: Array<ColumnInstance<D>>;
     setColumnOrder: (updater: Array<IdType<D>>) => void;
     setDragOver: Dispatch<SetStateAction<string>>;
@@ -45,8 +43,6 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             : faArrowsAltV
         : undefined;
 
-    const headerSize = props.headerSizes[props.column.id];
-
     return (
         <div
             className="th"
@@ -63,9 +59,6 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     "column-container",
                     canDrag && props.column.id === props.dragOver ? "dragging" : ""
                 )}
-                style={{
-                    width: headerSize && headerSize.width ? `${headerSize.width}px` : undefined
-                }}
                 {...draggableProps}
             >
                 <div

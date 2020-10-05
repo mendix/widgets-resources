@@ -13,11 +13,6 @@ exports[`Header renders the structure correctly 1`] = `
 >
   <div
     className="column-container"
-    style={
-      Object {
-        "width": undefined,
-      }
-    }
   >
     <div
       className="column-header"
@@ -46,11 +41,6 @@ exports[`Header renders the structure correctly when draggable 1`] = `
     onDragOver={[Function]}
     onDragStart={[Function]}
     onDrop={[Function]}
-    style={
-      Object {
-        "width": undefined,
-      }
-    }
   >
     <div
       className="column-header"
@@ -74,11 +64,6 @@ exports[`Header renders the structure correctly when filterable 1`] = `
 >
   <div
     className="column-container"
-    style={
-      Object {
-        "width": undefined,
-      }
-    }
   >
     <div
       className="column-header"
@@ -103,11 +88,6 @@ exports[`Header renders the structure correctly when filterable and with custom 
 >
   <div
     className="column-container"
-    style={
-      Object {
-        "width": undefined,
-      }
-    }
   >
     <div
       className="column-header"
@@ -135,11 +115,6 @@ exports[`Header renders the structure correctly when sortable 1`] = `
 >
   <div
     className="column-container"
-    style={
-      Object {
-        "width": undefined,
-      }
-    }
   >
     <div
       className="column-header clickable"

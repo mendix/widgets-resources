@@ -46,7 +46,7 @@ export function InfiniteBody({
     return (
         <div
             {...rest}
-            className={classNames("tbody", isInfinite ? "infinite-loading" : "")}
+            className={classNames("table-content", isInfinite ? "infinite-loading" : "")}
             ref={calculateBodyHeight}
             onScroll={isInfinite ? trackScrolling : undefined}
             style={isInfinite && bodySize > 0 ? { ...style, maxHeight: bodySize } : style}

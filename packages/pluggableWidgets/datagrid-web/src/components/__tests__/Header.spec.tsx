@@ -87,72 +87,6 @@ describe("Header", () => {
         clickableRegion.simulate("click");
         expect(mockedFunction).toBeCalledWith([{ id: "sortable", desc: false }]);
     });
-
-    it("renders a columns with fixed size when is fit to content and table has more visible columns", () => {
-        const column = {
-            id: "0",
-            render: () => "My column",
-            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
-        } as any;
-        const visibleColumns = [
-            {
-                id: "0"
-            },
-            {
-                id: "1"
-            }
-        ] as any[];
-        const headerSizes = {
-            "0": {
-                resized: false,
-                width: 100
-            }
-        };
-
-        const component = shallow(
-            <Header {...mockHeaderProps()} headerSizes={headerSizes} visibleColumns={visibleColumns} column={column} />
-        );
-
-        expect(component.find(".column-container").prop("style")?.width).toEqual("100px");
-    });
-
-    it("renders a columns with fixed size when is fit to content and table has more visible columns and the content changes the size", () => {
-        const column = {
-            id: "0",
-            render: () => "My column",
-            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
-        } as any;
-        const visibleColumns = [
-            {
-                id: "0"
-            },
-            {
-                id: "1"
-            }
-        ] as any[];
-        const headerSizes = {
-            "0": {
-                resized: false,
-                width: 100
-            }
-        };
-
-        const component = shallow(
-            <Header {...mockHeaderProps()} headerSizes={headerSizes} visibleColumns={visibleColumns} column={column} />
-        );
-
-        component.setProps({
-            headerSizes: {
-                "0": {
-                    resized: false,
-                    width: 150
-                }
-            }
-        });
-        component.update();
-
-        expect(component.find(".column-container").prop("style")?.width).toEqual("150px");
-    });
 });
 
 function mockHeaderProps(): HeaderProps<object> {
@@ -164,7 +98,6 @@ function mockHeaderProps(): HeaderProps<object> {
         draggable: false,
         dragOver: "",
         filterable: false,
-        headerSizes: {},
         resizable: false,
         sortable: false,
         setColumnOrder: jest.fn(),

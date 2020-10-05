@@ -5,15 +5,17 @@ exports[`Table renders the structure correctly 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -156,14 +158,6 @@ exports[`Table renders the structure correctly 1`] = `
         dragOver=""
         draggable={false}
         filterable={false}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -305,18 +299,6 @@ exports[`Table renders the structure correctly 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={true}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -3918,10 +3900,10 @@ exports[`Table renders the structure correctly 1`] = `
         }
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;
 
@@ -3930,15 +3912,17 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -4084,14 +4068,6 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
         dragOver=""
         draggable={false}
         filterable={true}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -4236,18 +4212,6 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={false}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -7972,10 +7936,10 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
         }
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;
 
@@ -7984,15 +7948,17 @@ exports[`Table renders the structure correctly with dragging 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -8135,14 +8101,6 @@ exports[`Table renders the structure correctly with dragging 1`] = `
         dragOver=""
         draggable={true}
         filterable={false}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -8284,18 +8242,6 @@ exports[`Table renders the structure correctly with dragging 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={true}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -11897,10 +11843,10 @@ exports[`Table renders the structure correctly with dragging 1`] = `
         }
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;
 
@@ -11909,15 +11855,17 @@ exports[`Table renders the structure correctly with filtering 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -12060,14 +12008,6 @@ exports[`Table renders the structure correctly with filtering 1`] = `
         dragOver=""
         draggable={false}
         filterable={true}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -12209,18 +12149,6 @@ exports[`Table renders the structure correctly with filtering 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={false}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -15822,10 +15750,10 @@ exports[`Table renders the structure correctly with filtering 1`] = `
         }
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;
 
@@ -15834,15 +15762,17 @@ exports[`Table renders the structure correctly with hiding 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr fit-content(50px)",
@@ -15985,14 +15915,6 @@ exports[`Table renders the structure correctly with hiding 1`] = `
         dragOver=""
         draggable={false}
         filterable={false}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -16269,21 +16191,8 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             },
           ]
         }
-        setColumnSelectorWith={[Function]}
         setHiddenColumns={[Function]}
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={true}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr fit-content(50px)",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -19888,10 +19797,10 @@ exports[`Table renders the structure correctly with hiding 1`] = `
         className="td column-selector"
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;
 
@@ -19900,15 +19809,17 @@ exports[`Table renders the structure correctly with paging 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -20051,14 +19962,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
         dragOver=""
         draggable={false}
         filterable={false}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -20200,18 +20103,6 @@ exports[`Table renders the structure correctly with paging 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={false}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -23813,19 +23704,19 @@ exports[`Table renders the structure correctly with paging 1`] = `
         }
       />
     </InfiniteBody>
-  </div>
-  <div
-    className="table-footer"
-  >
-    <Pagination
-      canNextPage={false}
-      canPreviousPage={true}
-      gotoPage={[Function]}
-      nextPage={[Function]}
-      page={1}
-      pageSize={10}
-      previousPage={[Function]}
-    />
+    <div
+      className="table-footer"
+    >
+      <Pagination
+        canNextPage={false}
+        canPreviousPage={true}
+        gotoPage={[Function]}
+        nextPage={[Function]}
+        page={1}
+        pageSize={10}
+        previousPage={[Function]}
+      />
+    </div>
   </div>
 </div>
 `;
@@ -23835,15 +23726,17 @@ exports[`Table renders the structure correctly with resizing 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={true}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -23986,14 +23879,6 @@ exports[`Table renders the structure correctly with resizing 1`] = `
         dragOver=""
         draggable={false}
         filterable={false}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={true}
         setColumnOrder={[Function]}
@@ -24135,18 +24020,6 @@ exports[`Table renders the structure correctly with resizing 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={true}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -27748,10 +27621,10 @@ exports[`Table renders the structure correctly with resizing 1`] = `
         }
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;
 
@@ -27760,15 +27633,17 @@ exports[`Table renders the structure correctly with sorting 1`] = `
   className="test"
 >
   <div
-    className="table-header"
-  />
-  <div
     className="table"
     role="table"
   >
     <div
-      className="thead"
+      className="table-header"
+    />
+    <InfiniteBody
+      hasMoreItems={false}
+      isInfinite={false}
       role="rowgroup"
+      setPage={[MockFunction]}
       style={
         Object {
           "grid-template-columns": "1fr",
@@ -27911,14 +27786,6 @@ exports[`Table renders the structure correctly with sorting 1`] = `
         dragOver=""
         draggable={false}
         filterable={false}
-        headerSizes={
-          Object {
-            "0": Object {
-              "resized": false,
-              "width": 0,
-            },
-          }
-        }
         key="headers_column_0"
         resizable={false}
         setColumnOrder={[Function]}
@@ -28060,18 +27927,6 @@ exports[`Table renders the structure correctly with sorting 1`] = `
           ]
         }
       />
-    </div>
-    <InfiniteBody
-      hasMoreItems={false}
-      isInfinite={false}
-      role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "grid-template-columns": "1fr",
-        }
-      }
-    >
       <Cell
         allColumns={
           Array [
@@ -31673,9 +31528,9 @@ exports[`Table renders the structure correctly with sorting 1`] = `
         }
       />
     </InfiniteBody>
+    <div
+      className="table-footer"
+    />
   </div>
-  <div
-    className="table-footer"
-  />
 </div>
 `;

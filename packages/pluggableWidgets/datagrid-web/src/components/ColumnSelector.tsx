@@ -5,7 +5,6 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
-    setColumnSelectorWidth: Dispatch<SetStateAction<number>>;
     setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>;
 }
 
@@ -15,19 +14,7 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
     useOnClickOutside(listRef, () => setShow(false));
     const visibleColumns = props.allColumns.filter(column => column.isVisible).length;
     return (
-        <div
-            className="th column-selector"
-            ref={ref => {
-                if (ref && ref.clientWidth) {
-                    props.setColumnSelectorWidth(prev => {
-                        if (prev !== ref.clientWidth) {
-                            prev = ref.clientWidth;
-                        }
-                        return prev;
-                    });
-                }
-            }}
-        >
+        <div className="th column-selector">
             <button
                 className="btn btn-default column-selector-button"
                 onClick={() => {

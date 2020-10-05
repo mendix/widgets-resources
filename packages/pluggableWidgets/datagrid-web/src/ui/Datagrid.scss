@@ -11,14 +11,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
     border-width: 0;
     background-color: transparent;
 
-    /* Table Header */
-    .thead {
+    /* Table Content */
+    .table-content {
         display: grid;
-    }
-
-    /* Table Body */
-    .tbody {
-        display: grid;
+        position: relative;
 
         &.infinite-loading {
             overflow-y: scroll;
@@ -37,6 +33,8 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         border-left: 0;
         background-color: $background-color;
         padding: 16px 8px;
+        position: sticky;
+        top: 0;
 
         /* Clickable column header (Sortable) */
         .clickable {
@@ -105,7 +103,6 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
     /* Column selector for hidable columns */
     .column-selector {
-        position: relative;
         padding-left: 0;
         padding-right: 0;
 
