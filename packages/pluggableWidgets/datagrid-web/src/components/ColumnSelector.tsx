@@ -5,7 +5,7 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
-    setColumnSelectorWith: Dispatch<SetStateAction<number>>;
+    setColumnSelectorWidth: Dispatch<SetStateAction<number>>;
     setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>;
 }
 
@@ -19,7 +19,7 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
             className="th column-selector"
             ref={ref => {
                 if (ref && ref.clientWidth) {
-                    props.setColumnSelectorWith(prev => {
+                    props.setColumnSelectorWidth(prev => {
                         if (prev !== ref.clientWidth) {
                             prev = ref.clientWidth;
                         }

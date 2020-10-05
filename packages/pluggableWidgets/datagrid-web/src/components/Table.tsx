@@ -327,7 +327,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             {props.columnsHidable && (
                                 <ColumnSelector
                                     allColumns={allColumns}
-                                    setColumnSelectorWith={setColumnSelectorWidth}
+                                    setColumnSelectorWidth={setColumnSelectorWidth}
                                     setHiddenColumns={setHiddenColumns}
                                 />
                             )}
