@@ -32,7 +32,7 @@ export function preview(props: TimelinePreviewProps) {
                             <div />
                         </props.customIcon.renderer>
                     ),
-                    groupDivider: (
+                    groupHeader: (
                         <props.customGroupHeader.renderer>
                             <div />
                         </props.customGroupHeader.renderer>
