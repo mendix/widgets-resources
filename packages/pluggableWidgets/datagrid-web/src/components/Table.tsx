@@ -24,7 +24,6 @@ export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "at
 
 export interface HeaderSize {
     [key: string]: {
-        resized: boolean;
         width: number;
     };
 }
@@ -60,6 +59,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const isInfinite = !props.paging && !isSortingOrFiltering;
     const [dragOver, setDragOver] = useState("");
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
+    const [columnSelectorWidth, setColumnSelectorWidth] = useState<number>(0);
     const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
         (props.columns
             .map((c, i) => (c.hidable === "hidden" ? i.toString() : undefined))
@@ -143,21 +143,14 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 </div>
                             );
 
-                            /**
-                             * Checks if column is not the only one visible to set size
-                             */
-                            if (cell.row.index === 0 && cell.column.width === "autoFit" && cell.row.cells.length > 1) {
+                            if (cell.row.index === 0 && cell.column.width === "autoFit") {
                                 return (
-                                    <ReactResizeDetector handleWidth handleHeight>
+                                    <ReactResizeDetector handleWidth>
                                         {({ width }: { width: number }) => {
                                             if (width > 0) {
                                                 setHeaderSizes(prev => {
                                                     const previousValue = prev[cell.column.id];
-                                                    if (
-                                                        previousValue &&
-                                                        !previousValue.resized &&
-                                                        previousValue.width !== width
-                                                    ) {
+                                                    if (previousValue && previousValue.width !== width) {
                                                         previousValue.width = width;
                                                         return { ...prev };
                                                     }
@@ -287,12 +280,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             .map(c => {
                 switch (c.width) {
                     case "autoFit":
-                        /**
-                         * If auto fit column is the only column, it should fit the space
-                         */
-                        if (visibleColumns.length === 1) {
-                            return "1fr";
-                        }
                         return "fit-content(100%)";
                     case "manual":
                         return `${c.weight}fr`;
@@ -302,8 +289,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             })
             .join(" ");
         return {
-            "grid-template-columns": columnSizes + (props.columnsHidable ? ` fit-content(100px)` : "")
-        } as any;
+            "grid-template-columns":
+                columnSizes +
+                (props.columnsHidable ? (columnSelectorWidth ? ` ${columnSelectorWidth}px` : " fit-content(50px)") : "")
+        } as CSSProperties;
     }, [visibleColumns, props.columnsHidable]);
 
     return (
@@ -336,7 +325,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 />
                             ))}
                             {props.columnsHidable && (
-                                <ColumnSelector allColumns={allColumns} setHiddenColumns={setHiddenColumns} />
+                                <ColumnSelector
+                                    allColumns={allColumns}
+                                    setColumnSelectorWith={setColumnSelectorWidth}
+                                    setHiddenColumns={setHiddenColumns}
+                                />
                             )}
                         </Fragment>
                     ))}

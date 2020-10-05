@@ -1,4 +1,4 @@
-import { createElement, ReactElement, ReactNode, useCallback, useState } from "react";
+import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, useState } from "react";
 import classNames from "classnames";
 
 interface InfiniteBodyProps {
@@ -6,7 +6,7 @@ interface InfiniteBodyProps {
     hasMoreItems: boolean;
     setPage?: (computePage: (prevPage: number) => number) => void;
     isInfinite: boolean;
-    style?: any;
+    style?: CSSProperties;
 }
 
 export function InfiniteBody({

@@ -105,6 +105,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
     /* Column selector for hidable columns */
     .column-selector {
+        position: relative;
         padding-left: 0;
         padding-right: 0;
 
@@ -118,8 +119,9 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         /* List of columns to select */
         .column-selectors {
             position: absolute;
+            width: max-content;
             right: 0;
-            margin-top: 45px;
+            margin: 8px;
             padding: 0 16px;
             background: $background-color;
             z-index: 99;

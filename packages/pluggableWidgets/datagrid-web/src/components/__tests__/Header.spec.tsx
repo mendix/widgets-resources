@@ -153,31 +153,6 @@ describe("Header", () => {
 
         expect(component.find(".column-container").prop("style")?.width).toEqual("150px");
     });
-
-    it("renders a columns with undefined width when is fit to content and table has only one visible column", () => {
-        const column = {
-            id: "0",
-            render: () => "My column",
-            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any)
-        } as any;
-        const visibleColumns = [
-            {
-                id: "0"
-            }
-        ] as any[];
-        const headerSizes = {
-            "0": {
-                resized: false,
-                width: 100
-            }
-        };
-
-        const component = shallow(
-            <Header {...mockHeaderProps()} headerSizes={headerSizes} visibleColumns={visibleColumns} column={column} />
-        );
-
-        expect(component.find(".column-container").prop("style")?.width).toBeUndefined();
-    });
 });
 
 function mockHeaderProps(): HeaderProps<object> {

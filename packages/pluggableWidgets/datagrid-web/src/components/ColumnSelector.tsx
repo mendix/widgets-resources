@@ -5,19 +5,29 @@ import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
+    setColumnSelectorWith: Dispatch<SetStateAction<number>>;
     setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>;
 }
 
-export function ColumnSelector<D extends object>({
-    allColumns,
-    setHiddenColumns
-}: ColumnSelectorProps<D>): ReactElement {
+export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
     const listRef = useRef<HTMLUListElement>(null);
     useOnClickOutside(listRef, () => setShow(false));
-    const visibleColumns = allColumns.filter(column => column.isVisible).length;
+    const visibleColumns = props.allColumns.filter(column => column.isVisible).length;
     return (
-        <div className="th column-selector">
+        <div
+            className="th column-selector"
+            ref={ref => {
+                if (ref && ref.clientWidth) {
+                    props.setColumnSelectorWith(prev => {
+                        if (prev !== ref.clientWidth) {
+                            prev = ref.clientWidth;
+                        }
+                        return prev;
+                    });
+                }
+            }}
+        >
             <button
                 className="btn btn-default column-selector-button"
                 onClick={() => {
@@ -28,7 +38,7 @@ export function ColumnSelector<D extends object>({
             </button>
             {show && (
                 <ul className="column-selectors" ref={listRef}>
-                    {allColumns.map((column, index) => {
+                    {props.allColumns.map((column, index) => {
                         return column.canHide ? (
                             <li key={index}>
                                 <input
@@ -36,7 +46,7 @@ export function ColumnSelector<D extends object>({
                                     type="checkbox"
                                     checked={column.isVisible}
                                     onClick={() => {
-                                        setHiddenColumns(prev => {
+                                        props.setHiddenColumns(prev => {
                                             if (!column.isVisible) {
                                                 prev.splice(
                                                     prev.findIndex(v => v === column.id),

@@ -64,10 +64,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     canDrag && props.column.id === props.dragOver ? "dragging" : ""
                 )}
                 style={{
-                    width:
-                        props.visibleColumns.length > 1 && headerSize && headerSize.width
-                            ? `${headerSize.width}px`
-                            : undefined
+                    width: headerSize && headerSize.width ? `${headerSize.width}px` : undefined
                 }}
                 {...draggableProps}
             >
