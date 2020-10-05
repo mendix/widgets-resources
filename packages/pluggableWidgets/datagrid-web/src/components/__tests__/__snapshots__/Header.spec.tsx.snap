@@ -7,13 +7,17 @@ exports[`Header renders the structure correctly 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
     }
   }
   title="Test"
 >
   <div
     className="column-container"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
   >
     <div
       className="column-header"
@@ -31,7 +35,6 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
     }
   }
   title="Test"
@@ -43,6 +46,11 @@ exports[`Header renders the structure correctly when draggable 1`] = `
     onDragOver={[Function]}
     onDragStart={[Function]}
     onDrop={[Function]}
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
   >
     <div
       className="column-header"
@@ -60,13 +68,17 @@ exports[`Header renders the structure correctly when filterable 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
     }
   }
   title="Test"
 >
   <div
     className="column-container"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
   >
     <div
       className="column-header"
@@ -85,13 +97,17 @@ exports[`Header renders the structure correctly when filterable and with custom 
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
     }
   }
   title="Test"
 >
   <div
     className="column-container"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
   >
     <div
       className="column-header"
@@ -110,46 +126,20 @@ exports[`Header renders the structure correctly when filterable and with custom 
 </div>
 `;
 
-exports[`Header renders the structure correctly when resizable 1`] = `
-<div
-  className="th"
-  role="Test"
-  style={
-    Object {
-      "cursor": "unset",
-    }
-  }
-  title="Test"
->
-  <div
-    className="column-container"
-  >
-    <div
-      className="column-header"
-    >
-      Test
-    </div>
-  </div>
-  <div
-    className="column-resizer "
-    resizableProps=""
-  />
-</div>
-`;
-
 exports[`Header renders the structure correctly when sortable 1`] = `
 <div
   className="th"
   role="Test"
-  style={
-    Object {
-      "flex": "1 1 0px",
-    }
-  }
+  style={Object {}}
   title="Test"
 >
   <div
     className="column-container"
+    style={
+      Object {
+        "width": undefined,
+      }
+    }
   >
     <div
       className="column-header clickable"

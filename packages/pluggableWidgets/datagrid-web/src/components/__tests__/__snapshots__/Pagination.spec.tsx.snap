@@ -5,7 +5,7 @@ exports[`Pagination disables first page button if is first page 1`] = `
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -14,7 +14,7 @@ exports[`Pagination disables first page button if is first page 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -32,7 +32,7 @@ exports[`Pagination disables first page button if is first page 1`] = `
     of 25
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -41,7 +41,7 @@ exports[`Pagination disables first page button if is first page 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -57,7 +57,7 @@ exports[`Pagination disables next button if is last page 1`] = `
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -66,7 +66,7 @@ exports[`Pagination disables next button if is last page 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -84,7 +84,7 @@ exports[`Pagination disables next button if is last page 1`] = `
     of 25
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -93,7 +93,7 @@ exports[`Pagination disables next button if is last page 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -109,7 +109,7 @@ exports[`Pagination disables previous button if is first page 1`] = `
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -118,7 +118,7 @@ exports[`Pagination disables previous button if is first page 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -136,7 +136,7 @@ exports[`Pagination disables previous button if is first page 1`] = `
     of 25
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -145,7 +145,7 @@ exports[`Pagination disables previous button if is first page 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -161,7 +161,7 @@ exports[`Pagination renders the current page correctly 1`] = `
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -170,7 +170,7 @@ exports[`Pagination renders the current page correctly 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -188,7 +188,7 @@ exports[`Pagination renders the current page correctly 1`] = `
     of 25
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -197,7 +197,7 @@ exports[`Pagination renders the current page correctly 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -213,7 +213,7 @@ exports[`Pagination renders the current page correctly with server side paging 1
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -222,7 +222,7 @@ exports[`Pagination renders the current page correctly with server side paging 1
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -239,7 +239,7 @@ exports[`Pagination renders the current page correctly with server side paging 1
      
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -255,7 +255,7 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -264,7 +264,7 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -282,7 +282,7 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
     of 0
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -291,7 +291,7 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -307,7 +307,7 @@ exports[`Pagination renders the structure correctly 1`] = `
   className="pagination"
 >
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={true}
     onClick={[Function]}
   >
@@ -316,7 +316,7 @@ exports[`Pagination renders the structure correctly 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -334,7 +334,7 @@ exports[`Pagination renders the structure correctly 1`] = `
     of 25
   </div>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
@@ -343,7 +343,7 @@ exports[`Pagination renders the structure correctly 1`] = `
     />
   </button>
   <button
-    className="btn"
+    className="btn pagination-button"
     disabled={false}
     onClick={[Function]}
   >
