@@ -33,6 +33,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         border-left: 0;
         background-color: $background-color;
         padding: 16px 8px;
+        position: -webkit-sticky; /* Safari */
         position: sticky;
         top: 0;
 
