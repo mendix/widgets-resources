@@ -134,7 +134,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 width: column.width,
                 weight: column.size ?? 1
             })),
-        [props.columns]
+        [props.columns, props.cellRenderer, props.filterRenderer, props.valueForFilter, props.valueForSort]
     );
 
     const defaultColumn: ColumnInterface<{ item: T }> = useMemo(
@@ -253,8 +253,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             })
             .join(" ");
         return {
-            "grid-template-columns": columnSizes + (props.columnsHidable ? " fit-content(50px)" : "")
-        } as CSSProperties;
+            gridTemplateColumns: columnSizes + (props.columnsHidable ? " fit-content(50px)" : "")
+        };
     }, [visibleColumns, props.columnsHidable]);
 
     return (
@@ -300,7 +300,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         prepareRow(row);
                         return (
                             <Fragment key={`row_${rowIndex}`}>
-                                {row.cells.map(cell => cell.render("Cell"))}
+                                {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex }))}
                                 {props.columnsHidable && <div className="td column-selector" />}
                             </Fragment>
                         );
