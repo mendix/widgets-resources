@@ -74,7 +74,7 @@ async function main() {
         runtimeContainerId = execSync(
             `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${runtimePort}:8080 ` +
                 `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
-                `mendix/runtime-base:${latestMendixVersion}-bionic /shared/runtime.sh`
+                `mendix/runtime-base:${latestMendixVersion}-rhel /shared/runtime.sh`
         ).toString();
         await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
 
