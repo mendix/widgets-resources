@@ -4,6 +4,8 @@ import { DatagridContainerProps } from "../typings/DatagridProps";
 import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
 import classNames from "classnames";
+import { MySuperWidget } from "./components/MySuperWidget";
+import { FilterContext, FilterFunction } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
@@ -35,6 +37,14 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         [props.datasource, props.pageSize, isInfiniteLoad, currentPage]
     );
 
+    const customFiltersState = props.columns.map(() => useState<FilterFunction>());
+    const items = (props.datasource.items ?? []).filter(item =>
+        customFiltersState.every(
+            ([customFilter], columnIndex) =>
+                !customFilter || customFilter.filter(item, props.columns[columnIndex].attribute)
+        )
+    );
+
     return (
         <Table
             className={props.class}
@@ -44,7 +54,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columnsHidable={props.columnsHidable}
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
-            data={props.datasource.items ?? []}
+            data={items}
             filterMethod={props.filterMethod}
             footerWidgets={<div className="footer">{props.footerWidgets}</div>}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
@@ -85,11 +95,13 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 [props.columns]
             )}
             filterRenderer={useCallback(
-                (renderWrapper, columnIndex) => {
-                    const column = props.columns[columnIndex];
-                    return renderWrapper(column.customFilter);
-                },
-                [props.columns]
+                (renderWrapper, columnIndex) =>
+                    renderWrapper(
+                        <FilterContext.Provider value={customFiltersState[columnIndex][1]}>
+                            <MySuperWidget />
+                        </FilterContext.Provider>
+                    ),
+                [props.columns, props.datasource]
             )}
             settings={props.configurationAttribute}
         />
