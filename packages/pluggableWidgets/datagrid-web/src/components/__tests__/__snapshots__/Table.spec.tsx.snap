@@ -18,7 +18,7 @@ exports[`Table renders the structure correctly 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -2145,6 +2145,7 @@ exports[`Table renders the structure correctly 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -3925,7 +3926,7 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -6112,6 +6113,7 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -7961,7 +7963,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -10088,6 +10090,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -11868,7 +11871,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -13995,6 +13998,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -15775,7 +15779,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr fit-content(50px)",
+          "gridTemplateColumns": "1fr fit-content(50px)",
         }
       }
     >
@@ -18039,6 +18043,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -19822,7 +19827,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -21949,6 +21954,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -23739,7 +23745,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -25866,6 +25872,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
@@ -27646,7 +27653,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
       setPage={[MockFunction]}
       style={
         Object {
-          "grid-template-columns": "1fr",
+          "gridTemplateColumns": "1fr",
         }
       }
     >
@@ -29773,6 +29780,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
             "sortBy": Array [],
           }
         }
+        key="0"
         nextPage={[Function]}
         page={
           Array [
