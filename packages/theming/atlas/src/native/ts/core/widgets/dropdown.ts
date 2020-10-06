@@ -1,6 +1,7 @@
 import { font, input } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DropDownType } from "../../types/widgets";
+import { background } from "../../app/custom-variables";
 /*
 
 DISCLAIMER:
@@ -113,7 +114,7 @@ export const DropDown: DropDownType = {
         borderWidth: input.selectedItemContainer.borderWidth,
         borderRadius: input.selectedItemContainer.borderRadius,
         borderColor: input.selectedItemContainer.borderColor,
-        backgroundColor: input.selectedItemContainer.backgroundColor
+        backgroundColor: background.primary
     },
     /*  New dropdown styles end */
     useUniformDesign: true,
