@@ -14,7 +14,7 @@ describe("Pagination", () => {
 
         expect(
             component
-                .find(".btn")
+                .find(".pagination-button")
                 .at(1)
                 .prop("disabled")
         ).toBeTruthy();
@@ -27,7 +27,7 @@ describe("Pagination", () => {
 
         expect(
             component
-                .find(".btn")
+                .find(".pagination-button")
                 .first()
                 .prop("disabled")
         ).toBeTruthy();
@@ -40,7 +40,7 @@ describe("Pagination", () => {
 
         expect(
             component
-                .find(".btn")
+                .find(".pagination-button")
                 .at(2)
                 .prop("disabled")
         ).toBeTruthy();

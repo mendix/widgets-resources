@@ -49,7 +49,6 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             {...rest}
             style={{
                 ...style,
-                ...(!props.resizable ? { flex: "1 1 0px" } : {}),
                 ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {})
             }}
             title={props.column.render("Header") as string}
@@ -94,12 +93,13 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     props.column.canFilter &&
                     (props.column.customFilter ? props.column.customFilter : props.column.render("Filter"))}
             </div>
-            {props.resizable && props.column.canResize && (
-                <div
-                    {...props.column.getResizerProps()}
-                    className={`column-resizer ${props.column.isResizing ? "isResizing" : ""}`}
-                />
-            )}
+            {/* TODO: Fix resizing considering flex fractions */}
+            {/* {props.resizable && props.column.canResize && ( */}
+            {/*    <div*/}
+            {/*        {...props.column.getResizerProps()}*/}
+            {/*        className={`column-resizer ${props.column.isResizing ? "isResizing" : ""}`}*/}
+            {/*    />*/}
+            {/* )} */}
         </div>
     );
 }

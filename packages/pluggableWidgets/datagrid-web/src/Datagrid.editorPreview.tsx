@@ -20,13 +20,13 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             data={data}
             footerWidgets={
                 <props.footerWidgets.renderer>
-                    <div className="header" />
+                    <div className="footer" />
                 </props.footerWidgets.renderer>
             }
             hasMoreItems={false}
             headerWidgets={
                 <props.headerWidgets.renderer>
-                    <div className="footer" />
+                    <div className="header" />
                 </props.headerWidgets.renderer>
             }
             numberOfItems={5}

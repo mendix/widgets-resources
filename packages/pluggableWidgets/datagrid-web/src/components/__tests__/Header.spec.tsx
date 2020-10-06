@@ -20,16 +20,16 @@ describe("Header", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it("renders the structure correctly when resizable", () => {
-        const props = mockHeaderProps();
-        props.column.canResize = true;
-        props.column.getResizerProps = () => ({ resizableProps: "" });
-        props.resizable = true;
-
-        const component = shallow(<Header {...props} />);
-
-        expect(component).toMatchSnapshot();
-    });
+    // it("renders the structure correctly when resizable", () => {
+    //     const props = mockHeaderProps();
+    //     props.column.canResize = true;
+    //     props.column.getResizerProps = () => ({ resizableProps: "" });
+    //     props.resizable = true;
+    //
+    //     const component = shallow(<Header {...props} />);
+    //
+    //     expect(component).toMatchSnapshot();
+    // });
 
     it("renders the structure correctly when draggable", () => {
         const props = mockHeaderProps();

@@ -54,6 +54,7 @@ exports[`Signature renders the structure correctly 1`] = `
     refreshRate={1000}
     skipOnMount={false}
     targetDomEl={null}
+    targetRef={null}
   />
 </SizeContainer>
 `;
