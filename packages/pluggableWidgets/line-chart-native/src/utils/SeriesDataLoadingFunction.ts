@@ -1,9 +1,16 @@
-import { ObjectItem } from "mendix";
 import { ensure } from "@mendix/pluggable-widgets-tools";
+import { Big } from "big.js";
+import { ObjectItem } from "mendix";
 
 import { SeriesType } from "../../typings/LineChartProps";
 import { LineChartDataPoint, LineChartSeries } from "../components/LineChart";
-import { Big } from "big.js";
+
+interface DataSourceItemGroup {
+    groupByAttributeValue: string | boolean | Date | Big;
+    dynamicSeriesNameValue?: string;
+    dynamicStylePropertyNameValue?: string;
+    items: ObjectItem[];
+}
 
 export function loadSeries(series: SeriesType[]): LineChartSeries[] | null {
     const loadedSeries: LineChartSeries[] = [];
@@ -57,42 +64,38 @@ function loadStaticSeries(series: SeriesType): LineChartSeries | null {
     };
 }
 
-function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): LineChartDataPoint[] | null {
-    const xValue = series.type === "static" ? ensure(series.staticXValue) : ensure(series.dynamicXValue);
-    const yValue = series.type === "static" ? ensure(series.staticYValue) : ensure(series.dynamicYValue);
+function loadDynamicSeries(series: SeriesType): LineChartSeries[] | null {
+    const { dynamicLineStyle, interpolation, type } = series;
 
-    if (!dataSourceItems) {
-        const dataSource =
-            series.type === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
+    if (type !== "dynamic") {
+        throw Error("Expected series to be dynamic");
+    }
 
-        if (!dataSource.items) {
+    const dataSourceItemGroups = groupDataSourceItems(series);
+
+    if (!dataSourceItemGroups) {
+        return null;
+    }
+
+    const loadedSeries: LineChartSeries[] = [];
+
+    for (const itemGroup of dataSourceItemGroups) {
+        const dataPoints = extractDataPoints(series, itemGroup.items);
+
+        if (!dataPoints) {
             return null;
         }
 
-        dataSourceItems = dataSource.items;
+        loadedSeries.push({
+            dataPoints,
+            interpolation,
+            lineStyle: dynamicLineStyle,
+            name: itemGroup.dynamicSeriesNameValue,
+            stylePropertyName: itemGroup.dynamicStylePropertyNameValue
+        });
     }
 
-    const dataPoints: LineChartDataPoint[] = [];
-
-    for (const item of dataSourceItems) {
-        const x = xValue(item);
-        const y = yValue(item);
-
-        if (!x.value || !y.value) {
-            return null;
-        }
-
-        dataPoints.push({ x: Number(x.value.toFixed()), y: Number(y.value.toFixed()) });
-    }
-
-    return dataPoints;
-}
-
-interface DataSourceItemGroup {
-    groupByAttributeValue: string | boolean | Date | Big;
-    dynamicSeriesNameValue?: string;
-    dynamicStylePropertyNameValue?: string;
-    items: ObjectItem[];
+    return loadedSeries;
 }
 
 function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null {
@@ -165,36 +168,33 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
     return dataSourceItemGroupsResult;
 }
 
-function loadDynamicSeries(series: SeriesType): LineChartSeries[] | null {
-    const { dynamicLineStyle, interpolation, type } = series;
+function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): LineChartDataPoint[] | null {
+    const xValue = series.type === "static" ? ensure(series.staticXValue) : ensure(series.dynamicXValue);
+    const yValue = series.type === "static" ? ensure(series.staticYValue) : ensure(series.dynamicYValue);
 
-    if (type !== "dynamic") {
-        throw Error("Expected series to be dynamic");
-    }
+    if (!dataSourceItems) {
+        const dataSource =
+            series.type === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
 
-    const dataSourceItemGroups = groupDataSourceItems(series);
-
-    if (!dataSourceItemGroups) {
-        return null;
-    }
-
-    const loadedSeries: LineChartSeries[] = [];
-
-    for (const itemGroup of dataSourceItemGroups) {
-        const dataPoints = extractDataPoints(series, itemGroup.items);
-
-        if (!dataPoints) {
+        if (!dataSource.items) {
             return null;
         }
 
-        loadedSeries.push({
-            dataPoints,
-            interpolation,
-            lineStyle: dynamicLineStyle,
-            name: itemGroup.dynamicSeriesNameValue,
-            stylePropertyName: itemGroup.dynamicStylePropertyNameValue
-        });
+        dataSourceItems = dataSource.items;
     }
 
-    return loadedSeries;
+    const dataPoints: LineChartDataPoint[] = [];
+
+    for (const item of dataSourceItems) {
+        const x = xValue(item);
+        const y = yValue(item);
+
+        if (!x.value || !y.value) {
+            return null;
+        }
+
+        dataPoints.push({ x: Number(x.value.toFixed()), y: Number(y.value.toFixed()) });
+    }
+
+    return dataPoints;
 }
