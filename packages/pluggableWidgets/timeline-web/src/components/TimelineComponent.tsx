@@ -11,6 +11,7 @@ import { Icon } from "mendix/components/web/Icon";
 import { ActionValue } from "mendix";
 
 export interface TimelineComponentProps {
+    name?: string;
     data: Map<string, ItemType[]>;
     renderMode: RenderModeEnum;
     showGroupHeader: boolean;
@@ -19,7 +20,9 @@ export interface TimelineComponentProps {
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
     return (
-        <div className="widget-timeline-wrapper">{getItems(props.data, props.renderMode, props.showGroupHeader)}</div>
+        <div className={classNames("widget-timeline-wrapper", props.name)}>
+            {getItems(props.data, props.renderMode, props.showGroupHeader)}
+        </div>
     );
 }
 

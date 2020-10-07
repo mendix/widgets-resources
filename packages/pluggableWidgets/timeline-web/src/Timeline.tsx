@@ -76,6 +76,11 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
     }, [props.data]);
 
     return (
-        <TimelineComponent data={groupedEvents} showGroupHeader={props.showGroupHeader} renderMode={props.renderMode} />
+        <TimelineComponent
+            name={props.name}
+            data={groupedEvents}
+            showGroupHeader={props.showGroupHeader}
+            renderMode={props.renderMode}
+        />
     );
 }
