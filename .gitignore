@@ -15,4 +15,3 @@ detox/*.log
 **/results
 mendixProject
 **/screenshot
-**/testProject/**
