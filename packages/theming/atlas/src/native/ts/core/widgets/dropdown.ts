@@ -1,7 +1,7 @@
 import { font, input } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DropDownType } from "../../types/widgets";
-import { background } from "../../app/custom-variables";
+import { contrast } from "../../app/custom-variables";
 /*
 
 DISCLAIMER:
@@ -96,7 +96,10 @@ export const DropDown: DropDownType = {
         maxWidth: input.itemContainer.maxWidth,
         paddingVertical: input.itemContainer.paddingVertical,
         paddingHorizontal: input.itemContainer.paddingHorizontal,
-        backgroundColor: input.itemContainer.backgroundColor
+        backgroundColor: input.itemContainer.backgroundColor,
+        borderRadius: input.itemContainer.borderRadius,
+        underlayColor: contrast.low,
+        overflow: "hidden"
     },
     item: {
         // All TextStyle properties are allowed
@@ -114,7 +117,7 @@ export const DropDown: DropDownType = {
         borderWidth: input.selectedItemContainer.borderWidth,
         borderRadius: input.selectedItemContainer.borderRadius,
         borderColor: input.selectedItemContainer.borderColor,
-        backgroundColor: background.primary
+        backgroundColor: input.selectedItemContainer.backgroundColor
     },
     /*  New dropdown styles end */
     useUniformDesign: true,

@@ -188,6 +188,7 @@ export interface VariablesInput {
         paddingVertical: number;
         paddingHorizontal: number;
         backgroundColor: string;
+        borderRadius: number;
     };
     item: {
         color: string;

@@ -244,6 +244,7 @@ let input: VariablesInput = {
     itemContainer: {
         maxWidth: 500,
         paddingVertical: 12,
+        borderRadius: border.radiusLarge,
         paddingHorizontal: spacing.regular,
         backgroundColor: background.primary
     },
