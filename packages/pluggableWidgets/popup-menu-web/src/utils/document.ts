@@ -1,84 +1,70 @@
 import { RefObject, useEffect } from "react";
+import { dynamicDocument, dynamicWindow } from "../PopupMenu.editorPreview";
 
-export function unBlockAbsoluteElement(
+function isElementBlockedTop(srcRect: DOMRect, blockingRect: DOMRect) {
+    return (
+        srcRect.top < blockingRect.bottom &&
+        srcRect.bottom >= blockingRect.bottom &&
+        srcRect.y + srcRect.height < dynamicWindow.innerHeight
+    );
+}
+
+function isElementBlockedBottom(srcRect: DOMRect, blockingRect: DOMRect) {
+    return srcRect.bottom > blockingRect.top && srcRect.top <= blockingRect.top && srcRect.y - srcRect.height > 0;
+}
+
+function isElementBlockedLeft(srcRect: DOMRect, blockingRect: DOMRect) {
+    return (
+        srcRect.left < blockingRect.right && srcRect.right >= blockingRect.right && srcRect.left >= blockingRect.left
+    );
+}
+
+function isElementBlockedRight(srcRect: DOMRect, blockingRect: DOMRect) {
+    return (
+        srcRect.right > blockingRect.left && srcRect.left <= blockingRect.left && srcRect.right <= blockingRect.right
+    );
+}
+
+export function unBlockAbsoluteElementTop(
     element: HTMLElement,
     boundingRect: DOMRect,
     blockingElementRect: DOMRect
 ): void {
-    if (
-        boundingRect.top < blockingElementRect.bottom &&
-        boundingRect.bottom >= blockingElementRect.bottom &&
-        boundingRect.y + boundingRect.height < window.innerHeight
-    ) {
-        // Top of element is blocked
-        if (
-            boundingRect.left < blockingElementRect.right &&
-            boundingRect.right >= blockingElementRect.right &&
-            boundingRect.left >= blockingElementRect.left
-        ) {
-            // Top left of element is blocked
-            element.style.top =
-                getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
-            element.style.left =
-                getPixelValueAsNumber(element, "left") + blockingElementRect.right - boundingRect.left + "px";
-        } else if (
-            boundingRect.right > blockingElementRect.left &&
-            boundingRect.left <= blockingElementRect.left &&
-            boundingRect.right <= blockingElementRect.right
-        ) {
-            // Top right of element is blocked
-            element.style.top =
-                getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
-            element.style.right =
-                getPixelValueAsNumber(element, "right") + blockingElementRect.left - boundingRect.right + "px";
-        } else {
-            element.style.top =
-                getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
-        }
-    } else if (
-        boundingRect.bottom > blockingElementRect.top &&
-        boundingRect.top <= blockingElementRect.top &&
-        boundingRect.y - boundingRect.height > 0
-    ) {
-        // Bottom of element is blocked
-        if (
-            boundingRect.left < blockingElementRect.right &&
-            boundingRect.right >= blockingElementRect.right &&
-            boundingRect.left >= blockingElementRect.left
-        ) {
-            // Bottom left of element is blocked
-            element.style.bottom =
-                getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
-            element.style.left =
-                getPixelValueAsNumber(element, "left") + blockingElementRect.right - boundingRect.left + "px";
-        } else if (
-            boundingRect.right > blockingElementRect.left &&
-            boundingRect.left <= blockingElementRect.left &&
-            boundingRect.right <= blockingElementRect.right
-        ) {
-            // Bottom right of element is blocked
-            element.style.bottom =
-                getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
-            element.style.right =
-                getPixelValueAsNumber(element, "right") + blockingElementRect.left - boundingRect.right + "px";
-        } else {
-            element.style.bottom =
-                getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
-        }
-    } else if (
-        boundingRect.left < blockingElementRect.right &&
-        boundingRect.left >= blockingElementRect.left &&
-        boundingRect.right >= blockingElementRect.right
-    ) {
-        // Left of element is blocked
+    if (isElementBlockedTop(boundingRect, blockingElementRect)) {
+        element.style.top =
+            getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
+    }
+}
+
+export function unBlockAbsoluteElementBottom(
+    element: HTMLElement,
+    boundingRect: DOMRect,
+    blockingElementRect: DOMRect
+): void {
+    if (isElementBlockedBottom(boundingRect, blockingElementRect)) {
+        element.style.top = "unset"; // Unset top defined in PopupMenu.scss
+        element.style.bottom =
+            getPixelValueAsNumber(element, "bottom") + blockingElementRect.top - boundingRect.bottom + "px";
+    }
+}
+
+export function unBlockAbsoluteElementLeft(
+    element: HTMLElement,
+    boundingRect: DOMRect,
+    blockingElementRect: DOMRect
+): void {
+    if (isElementBlockedLeft(boundingRect, blockingElementRect)) {
         element.style.left =
             getPixelValueAsNumber(element, "left") + blockingElementRect.right - boundingRect.left + "px";
-    } else if (
-        boundingRect.right > blockingElementRect.left &&
-        boundingRect.left <= blockingElementRect.left &&
-        boundingRect.right <= blockingElementRect.right
-    ) {
-        // Right of element is blocked
+    }
+}
+
+export function unBlockAbsoluteElementRight(
+    element: HTMLElement,
+    boundingRect: DOMRect,
+    blockingElementRect: DOMRect
+): void {
+    if (isElementBlockedRight(boundingRect, blockingElementRect)) {
         element.style.right =
             getPixelValueAsNumber(element, "right") + blockingElementRect.left - boundingRect.right + "px";
     }
@@ -97,17 +83,17 @@ export function isBehindRandomElement(
     excludeElementWithClass = ""
 ): HTMLElement | false {
     let excludeElements: HTMLElement[] = [];
-    const left = boundingRect.left + offset;
-    const right = boundingRect.right - offset;
-    const top = boundingRect.top + offset;
-    const bottom = boundingRect.bottom - offset;
-    const elementTopLeft = document.elementFromPoint(left, top) as HTMLElement;
-    const elementTopRight = document.elementFromPoint(right, top) as HTMLElement;
-    const elementBottomLeft = document.elementFromPoint(left, bottom) as HTMLElement;
-    const elementBottomRight = document.elementFromPoint(right, bottom) as HTMLElement;
+    const left = Math.round(boundingRect.left + offset);
+    const right = Math.round(boundingRect.right - offset);
+    const top = Math.round(boundingRect.top + offset);
+    const bottom = Math.round(boundingRect.bottom - offset);
+    const elementTopLeft = dynamicDocument.elementFromPoint(left, top) as HTMLElement;
+    const elementTopRight = dynamicDocument.elementFromPoint(right, top) as HTMLElement;
+    const elementBottomLeft = dynamicDocument.elementFromPoint(left, bottom) as HTMLElement;
+    const elementBottomRight = dynamicDocument.elementFromPoint(right, bottom) as HTMLElement;
     if (excludeElementWithClass) {
         excludeElementWithClass = excludeElementWithClass.replace(/\./g, "");
-        excludeElements = [...(document.querySelectorAll(`.${excludeElementWithClass}`) as any)];
+        excludeElements = [...(dynamicDocument.querySelectorAll(`.${excludeElementWithClass}`) as any)];
     }
 
     if (
@@ -184,68 +170,78 @@ export function isElementVisibleByUser(element: HTMLElement): boolean {
         return false;
     }
     const rect = element.getBoundingClientRect();
-    if (element.offsetWidth + element.offsetHeight + rect.height + rect.width === 0) {
+    if (Math.round(element.offsetWidth + element.offsetHeight + rect.height + rect.width) === 0) {
         return false;
     }
     const elementCenter = {
-        x: rect.left + element.offsetWidth / 2,
-        y: rect.top + element.offsetHeight / 2
+        x: Math.round(rect.left + element.offsetWidth / 2),
+        y: Math.round(rect.top + element.offsetHeight / 2)
     };
+    if (!elementCenter.x || !elementCenter.y) {
+        return false;
+    }
     if (elementCenter.x < 0) {
         return false;
     }
-    if (elementCenter.x > (document.documentElement.clientWidth || window.innerWidth)) {
+    if (elementCenter.x > (dynamicDocument.documentElement.clientWidth || dynamicWindow.innerWidth)) {
         return false;
     }
     if (elementCenter.y < 0) {
         return false;
     }
-    if (elementCenter.y > (document.documentElement.clientHeight || window.innerHeight)) {
+    if (elementCenter.y > (dynamicDocument.documentElement.clientHeight || dynamicWindow.innerHeight)) {
         return false;
     }
-    let pointContainer = document.elementFromPoint(elementCenter.x, elementCenter.y) as HTMLElement;
-    do {
-        if (pointContainer === element) {
-            return true;
-        } else {
-            pointContainer = pointContainer.parentElement as HTMLElement;
-        }
-    } while (pointContainer.parentElement);
+    let pointContainer: Element | null = dynamicDocument.elementFromPoint(elementCenter.x, elementCenter.y);
+    if (pointContainer) {
+        do {
+            if (pointContainer === element) {
+                return true;
+            } else {
+                pointContainer = pointContainer.parentElement as HTMLElement;
+            }
+        } while (pointContainer.parentElement);
+    }
     return false;
 }
 
 export function isElementPartiallyOffScreen(rect: DOMRect): boolean {
     return (
-        rect.x < 0 || rect.y < 0 || rect.x + rect.width > window.innerWidth || rect.y + rect.height > window.innerHeight
+        rect.x < 0 ||
+        rect.y < 0 ||
+        rect.x + rect.width > dynamicWindow.innerWidth ||
+        rect.y + rect.height > dynamicWindow.innerHeight
     );
 }
 
-export function moveAbsoluteElementOnScreen(element: HTMLElement, rect: DOMRect): DOMRect {
-    if (rect.x < 0) {
-        const leftValue = Math.round(getPixelValueAsNumber(element, "left") - rect.x);
+export function moveAbsoluteElementOnScreen(element: HTMLElement, boundingRect: DOMRect): DOMRect {
+    if (boundingRect.x < 0) {
+        const leftValue = Math.round(getPixelValueAsNumber(element, "left") - boundingRect.x);
         element.style.left = leftValue + "px";
-        rect.x += leftValue;
+        boundingRect.x += leftValue;
     }
-    if (rect.y < 0) {
-        const topValue = Math.round(getPixelValueAsNumber(element, "top") - rect.y);
+    if (boundingRect.y < 0) {
+        const topValue = Math.round(getPixelValueAsNumber(element, "top") - boundingRect.y);
         element.style.top = topValue + "px";
-        rect.y += topValue;
+        boundingRect.y += topValue;
     }
-    if (rect.x + rect.width > window.innerWidth) {
+    if (boundingRect.x + boundingRect.width > dynamicWindow.innerWidth) {
         const rightValue = Math.round(
-            getPixelValueAsNumber(element, "right") + (rect.x + rect.width - window.innerWidth)
+            getPixelValueAsNumber(element, "right") + (boundingRect.x + boundingRect.width - dynamicWindow.innerWidth)
         );
         element.style.right = rightValue + "px";
-        rect.x -= rightValue;
+        boundingRect.x -= rightValue;
     }
-    if (rect.y + rect.height > window.innerHeight) {
+    if (boundingRect.y + boundingRect.height > dynamicWindow.innerHeight) {
         const bottomValue = Math.round(
-            getPixelValueAsNumber(element, "bottom") + (rect.y + rect.height - window.innerHeight)
+            getPixelValueAsNumber(element, "bottom") +
+                (boundingRect.y + boundingRect.height - dynamicWindow.innerHeight)
         );
+        element.style.top = "unset"; // Unset top defined in PopupMenu.scss
         element.style.bottom = bottomValue + "px";
-        rect.y -= bottomValue;
+        boundingRect.y -= bottomValue;
     }
-    return DOMRect.fromRect(rect);
+    return boundingRect;
 }
 
 export function handleOnClickOutsideElement(ref: RefObject<HTMLDivElement>, handler: () => void): void {
@@ -256,11 +252,11 @@ export function handleOnClickOutsideElement(ref: RefObject<HTMLDivElement>, hand
             }
             handler();
         };
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
+        dynamicDocument.addEventListener("mousedown", listener);
+        dynamicDocument.addEventListener("touchstart", listener);
         return () => {
-            document.removeEventListener("mousedown", listener);
-            document.removeEventListener("touchstart", listener);
+            dynamicDocument.removeEventListener("mousedown", listener);
+            dynamicDocument.removeEventListener("touchstart", listener);
         };
     }, [ref, handler]);
 }

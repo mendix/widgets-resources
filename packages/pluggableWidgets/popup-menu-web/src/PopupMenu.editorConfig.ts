@@ -1,7 +1,14 @@
 import { hidePropertyIn, Properties } from "@widgets-resources/piw-utils";
 import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
-export function getProperties(values: PopupMenuPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(
+    values: PopupMenuPreviewProps,
+    defaultProperties: Properties,
+    target: "web" | "desktop"
+): Properties {
+    if (target === "desktop") {
+        hidePropertyIn(defaultProperties, values, "menuToggle");
+    }
     if (values.renderMode === "basic") {
         hidePropertyIn(defaultProperties, values, "customItems");
 

@@ -6,11 +6,7 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue } from "mendix";
 
-export type TriggerEnum = "onclick" | "onhover";
-
 export type RenderModeEnum = "basic" | "custom";
-
-export type PositionEnum = "left" | "right" | "top" | "bottom";
 
 export type ItemTypeEnum = "item" | "divider";
 
@@ -27,6 +23,10 @@ export interface CustomItemsType {
     content: ReactNode;
     action?: ActionValue;
 }
+
+export type TriggerEnum = "onclick" | "onhover";
+
+export type PositionEnum = "left" | "right" | "top" | "bottom";
 
 export interface BasicItemsPreviewType {
     itemType: ItemTypeEnum;
@@ -45,21 +45,23 @@ export interface PopupMenuContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex: number;
+    menuToggle: boolean;
     menuTrigger?: ReactNode;
-    trigger: TriggerEnum;
     renderMode: RenderModeEnum;
-    position: PositionEnum;
     basicItems: BasicItemsType[];
     customItems: CustomItemsType[];
+    trigger: TriggerEnum;
+    position: PositionEnum;
 }
 
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
+    menuToggle: boolean;
     menuTrigger: { widgetCount: number; renderer: ComponentType };
-    trigger: TriggerEnum;
     renderMode: RenderModeEnum;
-    position: PositionEnum;
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];
+    trigger: TriggerEnum;
+    position: PositionEnum;
 }
