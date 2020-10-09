@@ -97,7 +97,6 @@ export const DropDown: DropDownType = {
         paddingVertical: input.itemContainer.paddingVertical,
         paddingHorizontal: input.itemContainer.paddingHorizontal,
         backgroundColor: input.itemContainer.backgroundColor,
-        borderRadius: input.itemContainer.borderRadius,
         underlayColor: contrast.low,
         overflow: "hidden"
     },

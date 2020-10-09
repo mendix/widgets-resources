@@ -248,7 +248,6 @@ export const input: VariablesInput = {
         maxWidth: 500,
         paddingVertical: 12,
         paddingHorizontal: spacing.regular,
-        borderRadius: border.radiusLarge,
         backgroundColor: background.primary
     },
     item: {
