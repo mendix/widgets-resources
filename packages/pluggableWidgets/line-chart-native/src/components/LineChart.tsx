@@ -47,7 +47,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             return null;
         }
 
-        series.map((series, index) => {
+        return series.map((series, index) => {
             const { dataPoints, interpolation, lineStyle, stylePropertyName } = series;
 
             const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
