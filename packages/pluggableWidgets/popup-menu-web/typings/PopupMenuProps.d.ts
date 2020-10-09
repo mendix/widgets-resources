@@ -45,23 +45,23 @@ export interface PopupMenuContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex: number;
-    menuToggle: boolean;
     menuTrigger?: ReactNode;
     renderMode: RenderModeEnum;
     basicItems: BasicItemsType[];
     customItems: CustomItemsType[];
     trigger: TriggerEnum;
     position: PositionEnum;
+    menuToggle: boolean;
 }
 
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
-    menuToggle: boolean;
     menuTrigger: { widgetCount: number; renderer: ComponentType };
     renderMode: RenderModeEnum;
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];
     trigger: TriggerEnum;
     position: PositionEnum;
+    menuToggle: boolean;
 }

@@ -76,6 +76,22 @@ export function getPixelValueAsNumber(element: HTMLElement, prop: keyof CSSStyle
     return value ? num : 0;
 }
 
+function isBehindRandomElementCheck(
+    element: HTMLElement,
+    blockingElement: HTMLElement,
+    excludeElements: HTMLElement[],
+    excludeElementWithClass: string
+) {
+    return (
+        blockingElement &&
+        blockingElement !== element &&
+        !blockingElement.classList.contains(excludeElementWithClass) &&
+        (!excludeElements ||
+            !excludeElements.map((elem: HTMLElement) => elem.contains(blockingElement)).filter(elem => elem).length) &&
+        !element.contains(blockingElement)
+    );
+}
+
 export function isBehindRandomElement(
     elementSource: HTMLElement,
     boundingRect: DOMRect,
@@ -96,46 +112,16 @@ export function isBehindRandomElement(
         excludeElements = [...(dynamicDocument.querySelectorAll(`.${excludeElementWithClass}`) as any)];
     }
 
-    if (
-        elementTopLeft &&
-        elementTopLeft !== elementSource &&
-        !elementTopLeft.classList.contains(excludeElementWithClass) &&
-        (!excludeElements ||
-            !excludeElements.map((elem: HTMLElement) => elem.contains(elementTopLeft)).filter(elem => elem).length) &&
-        !elementSource.contains(elementTopLeft)
-    ) {
+    if (isBehindRandomElementCheck(elementSource, elementTopLeft, excludeElements, excludeElementWithClass)) {
         return elementTopLeft;
     }
-    if (
-        elementTopRight &&
-        elementTopRight !== elementSource &&
-        !elementTopRight.classList.contains(excludeElementWithClass) &&
-        (!excludeElements ||
-            !excludeElements.map((elem: HTMLElement) => elem.contains(elementTopRight)).filter(elem => elem).length) &&
-        !elementSource.contains(elementTopRight)
-    ) {
+    if (isBehindRandomElementCheck(elementSource, elementTopRight, excludeElements, excludeElementWithClass)) {
         return elementTopRight;
     }
-    if (
-        elementBottomLeft &&
-        elementBottomLeft !== elementSource &&
-        !elementBottomLeft.classList.contains(excludeElementWithClass) &&
-        (!excludeElements ||
-            !excludeElements.map((elem: HTMLElement) => elem.contains(elementBottomLeft)).filter(elem => elem)
-                .length) &&
-        !elementSource.contains(elementBottomLeft)
-    ) {
+    if (isBehindRandomElementCheck(elementSource, elementBottomLeft, excludeElements, excludeElementWithClass)) {
         return elementBottomLeft;
     }
-    if (
-        elementBottomRight &&
-        elementBottomRight !== elementSource &&
-        !elementBottomLeft.classList.contains(excludeElementWithClass) &&
-        (!excludeElements ||
-            !excludeElements.map((elem: HTMLElement) => elem.contains(elementBottomLeft)).filter(elem => elem)
-                .length) &&
-        !elementSource.contains(elementBottomRight)
-    ) {
+    if (isBehindRandomElementCheck(elementSource, elementBottomRight, excludeElements, excludeElementWithClass)) {
         return elementBottomRight;
     }
 

@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import {
     isBehindElement,
     isBehindRandomElement,
@@ -24,8 +25,9 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
     const preview = !!props.preview;
     const [visibility, setVisibility] = useState(preview && props.menuToggle);
     const ref = useRef<HTMLDivElement>(null);
-    if (!preview) handleOnClickOutsideElement(ref, () => setVisibility(false));
-    // Events
+    if (!preview) {
+        handleOnClickOutsideElement(ref, () => setVisibility(false));
+    }
     const handleOnClickTrigger = useCallback((): void => {
         setVisibility(prev => !prev);
     }, [visibility, setVisibility]);
@@ -37,7 +39,6 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
         [setVisibility]
     );
     const menuOptions = createMenuOptions(props, handleOnClickItem);
-    // Properties
     const onHover =
         props.trigger === "onhover" && !preview
             ? {
@@ -66,11 +67,11 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
     }, [props.menuToggle]);
 
     return (
-        <div ref={ref} className={"popupmenu " + (props.class?.length ? props.class : "")} {...onHover}>
+        <div ref={ref} className={classNames("popupmenu", props.class)} {...onHover}>
             <div className={"popupmenu-trigger"} {...onClick}>
                 {props.menuTrigger}
             </div>
-            <div className={`popupmenu-menu popupmenu-position-${props.position}`}>{menuOptions}</div>
+            <div className={classNames("popupmenu-menu", `popupmenu-position-${props.position}`)}>{menuOptions}</div>
         </div>
     );
 }
@@ -91,7 +92,7 @@ function createMenuOptions(
                 return (
                     <div
                         key={index}
-                        className={`popupmenu-basic-item ${pickedStyle}`}
+                        className={classNames("popupmenu-basic-item", pickedStyle)}
                         onClick={() => handleOnClickItem(item.action)}
                     >
                         {item.caption}
@@ -109,22 +110,21 @@ function createMenuOptions(
 }
 
 function correctPosition(element: HTMLElement, position: PositionEnum): void {
-    let elem: HTMLElement = element;
     let boundingRect: DOMRect = element.getBoundingClientRect();
     const isOffScreen = isElementPartiallyOffScreen(boundingRect);
     if (isOffScreen) {
-        moveAbsoluteElementOnScreen(elem, boundingRect);
+        moveAbsoluteElementOnScreen(element, boundingRect);
     }
 
     boundingRect = element.getBoundingClientRect();
-    const blockingElement = isBehindRandomElement(elem, boundingRect, 3, "popupmenu");
+    const blockingElement = isBehindRandomElement(element, boundingRect, 3, "popupmenu");
     if (!!blockingElement && isElementVisibleByUser(blockingElement)) {
-        unBlockAbsoluteElement(elem, boundingRect, blockingElement.getBoundingClientRect(), position);
+        unBlockAbsoluteElement(element, boundingRect, blockingElement.getBoundingClientRect(), position);
     } else if (!!blockingElement) {
         let node = blockingElement;
         do {
-            if (isBehindElement(elem, node, 3) && isElementVisibleByUser(node)) {
-                return unBlockAbsoluteElement(elem, boundingRect, node.getBoundingClientRect(), position);
+            if (isBehindElement(element, node, 3) && isElementVisibleByUser(node)) {
+                return unBlockAbsoluteElement(element, boundingRect, node.getBoundingClientRect(), position);
             } else {
                 node = node.parentElement as HTMLElement;
             }

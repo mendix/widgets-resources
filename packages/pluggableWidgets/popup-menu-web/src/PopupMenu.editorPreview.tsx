@@ -24,25 +24,23 @@ export function preview(props: PopupMenuPreviewProps) {
 
     if (props.renderMode === "basic") {
         props.basicItems.forEach(item => {
-            let constructedItem = {
+            basicItems.push({
                 itemType: item.itemType,
                 caption: item.caption,
                 action: undefined,
                 styleClass: item.styleClass
-            };
-            basicItems.push(constructedItem);
+            });
         });
     } else {
         props.customItems.forEach(item => {
-            let constructedItem = {
+            customItems.push({
                 action: undefined,
                 content: (
                     <item.content.renderer>
                         <div />
                     </item.content.renderer>
                 )
-            };
-            customItems.push(constructedItem);
+            });
         });
     }
 
@@ -57,7 +55,7 @@ export function preview(props: PopupMenuPreviewProps) {
                 </props.menuTrigger.renderer>
             }
             name="Popup Menu"
-            preview={true}
+            preview
             style={styles}
             tabIndex={0}
         />
