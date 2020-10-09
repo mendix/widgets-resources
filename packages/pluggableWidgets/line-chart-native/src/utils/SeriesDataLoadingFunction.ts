@@ -3,7 +3,7 @@ import { Big } from "big.js";
 import { ObjectItem } from "mendix";
 
 import { SeriesType } from "../../typings/LineChartProps";
-import { LineChartDataPoint, LineChartSeries } from "../components/LineChart";
+import { LineChartDataPoints, LineChartSeries } from "../components/LineChart";
 
 interface DataSourceItemGroup {
     groupByAttributeValue: string | boolean | Date | Big;
@@ -168,7 +168,7 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
     return dataSourceItemGroupsResult;
 }
 
-function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): LineChartDataPoint[] | null {
+function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): LineChartDataPoints | null {
     const xValue = series.type === "static" ? ensure(series.staticXValue) : ensure(series.dynamicXValue);
     const yValue = series.type === "static" ? ensure(series.staticYValue) : ensure(series.dynamicYValue);
 
@@ -183,7 +183,7 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
         dataSourceItems = dataSource.items;
     }
 
-    const dataPoints: LineChartDataPoint[] = [];
+    const dataPoints: LineChartDataPoints = [];
 
     for (const item of dataSourceItems) {
         const x = xValue(item);
@@ -193,7 +193,10 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
             return null;
         }
 
-        dataPoints.push({ x: Number(x.value.toFixed()), y: Number(y.value.toFixed()) });
+        dataPoints.push({
+            x: x.value instanceof Date ? x.value : (Number(x.value.toFixed()) as any), // Cast as any because data type will never differ for data points within a series
+            y: y.value instanceof Date ? y.value : (Number(y.value.toFixed()) as any) // Cast as any because data type will never differ for data points within a series
+        });
     }
 
     return dataPoints;

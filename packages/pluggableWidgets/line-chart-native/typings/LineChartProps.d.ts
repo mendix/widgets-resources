@@ -20,10 +20,10 @@ export interface SeriesType {
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
     staticSeriesName?: DynamicValue<string>;
     dynamicSeriesName?: ListExpressionValue<string>;
-    staticXValue?: ListAttributeValue<BigJs.Big>;
-    dynamicXValue?: ListAttributeValue<BigJs.Big>;
-    staticYValue?: ListAttributeValue<BigJs.Big>;
-    dynamicYValue?: ListAttributeValue<BigJs.Big>;
+    staticXValue?: ListAttributeValue<Date | BigJs.Big>;
+    dynamicXValue?: ListAttributeValue<Date | BigJs.Big>;
+    staticYValue?: ListAttributeValue<Date | BigJs.Big>;
+    dynamicYValue?: ListAttributeValue<Date | BigJs.Big>;
     interpolation: InterpolationEnum;
     staticLineStyle: StaticLineStyleEnum;
     dynamicLineStyle: DynamicLineStyleEnum;
