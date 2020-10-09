@@ -814,6 +814,8 @@ exports[`Signature Android renders with custom styles 1`] = `
         onEnd: () => window.ReactNativeWebView.postMessage(\\"END\\"),
         penColor: 'black',
         backgroundColor: 'green',
+        dotSize: 0,
+        minWidth: 0.5,
     });
 
     function clearSignature (event) {
@@ -915,7 +917,7 @@ exports[`Signature Android renders with custom styles 1`] = `
           "paddingVertical": 8,
         }
       }
-      testID="Clear$Touchable"
+      testID="signature-test$ClearButton$Touchable"
       useForeground={true}
     >
       <View
@@ -945,7 +947,7 @@ exports[`Signature Android renders with custom styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Clear$caption"
+          testID="signature-test$ClearButton$caption"
         >
           Clear
         </Text>
@@ -970,7 +972,7 @@ exports[`Signature Android renders with custom styles 1`] = `
           "paddingVertical": 8,
         }
       }
-      testID="Save$Touchable"
+      testID="signature-test$SaveButton$Touchable"
       useForeground={true}
     >
       <View
@@ -1000,7 +1002,7 @@ exports[`Signature Android renders with custom styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Save$caption"
+          testID="signature-test$SaveButton$caption"
         >
           Save
         </Text>
@@ -1822,6 +1824,8 @@ exports[`Signature Android renders with default styles 1`] = `
         onEnd: () => window.ReactNativeWebView.postMessage(\\"END\\"),
         penColor: 'black',
         backgroundColor: 'white',
+        dotSize: 0,
+        minWidth: 0.5,
     });
 
     function clearSignature (event) {
@@ -1922,7 +1926,7 @@ exports[`Signature Android renders with default styles 1`] = `
           "paddingVertical": 8,
         }
       }
-      testID="Clear$Touchable"
+      testID="signature-test$ClearButton$Touchable"
       useForeground={true}
     >
       <View
@@ -1952,7 +1956,7 @@ exports[`Signature Android renders with default styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Clear$caption"
+          testID="signature-test$ClearButton$caption"
         >
           Clear
         </Text>
@@ -1977,7 +1981,7 @@ exports[`Signature Android renders with default styles 1`] = `
           "paddingVertical": 8,
         }
       }
-      testID="Save$Touchable"
+      testID="signature-test$SaveButton$Touchable"
       useForeground={true}
     >
       <View
@@ -2007,7 +2011,7 @@ exports[`Signature Android renders with default styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Save$caption"
+          testID="signature-test$SaveButton$caption"
         >
           Save
         </Text>

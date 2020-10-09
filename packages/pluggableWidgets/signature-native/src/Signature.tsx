@@ -26,8 +26,6 @@ export function Signature(props: Props): ReactElement {
     ]);
     const buttonCaptionClear = props.buttonCaptionClear?.value ?? "Clear";
     const buttonCaptionSave = props.buttonCaptionSave?.value ?? "Save";
-    const buttonCaptionClearTestID = buttonCaptionClear.replace(/ /g, "");
-    const buttonCaptionSaveTestID = buttonCaptionSave.replace(/ /g, "");
 
     const handleSignature = useCallback(
         (base64signature: string): void => {

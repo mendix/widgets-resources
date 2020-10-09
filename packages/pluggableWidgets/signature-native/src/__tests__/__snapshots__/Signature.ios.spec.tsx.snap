@@ -814,6 +814,8 @@ exports[`Signature iOS renders with custom styles 1`] = `
         onEnd: () => window.ReactNativeWebView.postMessage(\\"END\\"),
         penColor: 'black',
         backgroundColor: 'green',
+        dotSize: 0,
+        minWidth: 0.5,
     });
 
     function clearSignature (event) {
@@ -919,7 +921,7 @@ exports[`Signature iOS renders with custom styles 1`] = `
           "opacity": 1,
         }
       }
-      testID="Clear$Touchable"
+      testID="signature-test$ClearButton$Touchable"
     >
       <View
         style={
@@ -942,7 +944,7 @@ exports[`Signature iOS renders with custom styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Clear$caption"
+          testID="signature-test$ClearButton$caption"
         >
           Clear
         </Text>
@@ -971,7 +973,7 @@ exports[`Signature iOS renders with custom styles 1`] = `
           "opacity": 1,
         }
       }
-      testID="Save$Touchable"
+      testID="signature-test$SaveButton$Touchable"
     >
       <View
         style={
@@ -994,7 +996,7 @@ exports[`Signature iOS renders with custom styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Save$caption"
+          testID="signature-test$SaveButton$caption"
         >
           Save
         </Text>
@@ -1816,6 +1818,8 @@ exports[`Signature iOS renders with default styles 1`] = `
         onEnd: () => window.ReactNativeWebView.postMessage(\\"END\\"),
         penColor: 'black',
         backgroundColor: 'white',
+        dotSize: 0,
+        minWidth: 0.5,
     });
 
     function clearSignature (event) {
@@ -1920,7 +1924,7 @@ exports[`Signature iOS renders with default styles 1`] = `
           "opacity": 1,
         }
       }
-      testID="Clear$Touchable"
+      testID="signature-test$ClearButton$Touchable"
     >
       <View
         style={
@@ -1943,7 +1947,7 @@ exports[`Signature iOS renders with default styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Clear$caption"
+          testID="signature-test$ClearButton$caption"
         >
           Clear
         </Text>
@@ -1972,7 +1976,7 @@ exports[`Signature iOS renders with default styles 1`] = `
           "opacity": 1,
         }
       }
-      testID="Save$Touchable"
+      testID="signature-test$SaveButton$Touchable"
     >
       <View
         style={
@@ -1995,7 +1999,7 @@ exports[`Signature iOS renders with default styles 1`] = `
               "lineHeight": 18,
             }
           }
-          testID="Save$caption"
+          testID="signature-test$SaveButton$caption"
         >
           Save
         </Text>
