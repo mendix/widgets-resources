@@ -51,24 +51,24 @@ export function Signature(props: Props): ReactElement {
             />
             <View style={styles.buttonWrapper}>
                 <Touchable
-                    testID={`${buttonCaptionClearTestID}$Touchable`}
+                    testID={`${props.name}$ClearButton$Touchable`}
                     onPress={() => ref.current?.clearSignature()}
                     accessible={false}
                     style={buttonClearContainerStyles}
                     {...buttonClearContainerProps}
                 >
-                    <Text testID={`${buttonCaptionClearTestID}$caption`} style={styles.buttonClearCaption}>
+                    <Text testID={`${props.name}$ClearButton$caption`} style={styles.buttonClearCaption}>
                         {buttonCaptionClear}
                     </Text>
                 </Touchable>
                 <Touchable
-                    testID={`${buttonCaptionSaveTestID}$Touchable`}
+                    testID={`${props.name}$SaveButton$Touchable`}
                     onPress={() => ref.current?.readSignature()}
                     accessible={false}
                     style={buttonSaveContainerStyles}
                     {...buttonSaveContainerProps}
                 >
-                    <Text testID={`${buttonCaptionSaveTestID}$caption`} style={styles.buttonSaveCaption}>
+                    <Text testID={`${props.name}$SaveButton$caption`} style={styles.buttonSaveCaption}>
                         {buttonCaptionSave}
                     </Text>
                 </Touchable>
