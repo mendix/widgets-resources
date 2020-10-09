@@ -53,50 +53,44 @@
                                 <caption>X value</caption>
                                 <description />
                                 <attributeTypes>
-                                    <!-- <attributeType name="DateTime" /> -->
+                                    <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
-                                    <!-- <attributeType name="AutoNumber" /> -->
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicXValue" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>X value</caption>
                                 <description />
                                 <attributeTypes>
-                                    <!-- <attributeType name="DateTime" /> -->
+                                    <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
-                                    <!-- <attributeType name="AutoNumber" /> -->
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="staticYValue" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>Y value</caption>
-                                <description></description>
+                                <description />
                                 <attributeTypes>
-                                    <!-- <attributeType name="Boolean" />
-                                    <attributeType name="DateTime" /> -->
+                                    <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
-                                    <!-- <attributeType name="Enum" /> -->
-                                    <!-- <attributeType name="HashString" /> -->
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
-                                    <!-- <attributeType name="AutoNumber" /> -->
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicYValue" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Y value</caption>
-                                <description></description>
+                                <description />
                                 <attributeTypes>
-                                    <!-- <attributeType name="Boolean" />
-                                    <attributeType name="DateTime" /> -->
+                                    <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
-                                    <!-- <attributeType name="Enum" /> -->
-                                    <!-- <attributeType name="HashString" /> -->
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
-                                    <!-- <attributeType name="AutoNumber" /> -->
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="interpolation" type="enumeration" defaultValue="linear" required="true">

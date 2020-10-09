@@ -1,5 +1,5 @@
-import { createElement, ReactElement, useMemo, useCallback, useState } from "react";
-import { View, LayoutChangeEvent } from "react-native";
+import { createElement, ReactElement, useMemo, useCallback, useState, Fragment } from "react";
+import { View, LayoutChangeEvent, Text } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
 
@@ -15,16 +15,22 @@ export interface LineChartProps {
 }
 
 export interface LineChartSeries {
-    dataPoints: LineChartDataPoint[];
+    dataPoints: LineChartDataPoints;
     interpolation: InterpolationPropType;
     name?: string;
     lineStyle: "line" | "lineWithMarkers" | "custom";
     stylePropertyName?: string;
 }
 
-export interface LineChartDataPoint {
-    x: number;
-    y: number;
+export type LineChartDataPoints =
+    | Array<LineChartDataPoint<number, number>>
+    | Array<LineChartDataPoint<number, Date>>
+    | Array<LineChartDataPoint<Date, number>>
+    | Array<LineChartDataPoint<Date, Date>>;
+
+export interface LineChartDataPoint<X extends number | Date, Y extends number | Date> {
+    x: X;
+    y: Y;
 }
 
 export function LineChart(props: LineChartProps): ReactElement | null {
@@ -34,37 +40,37 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         return null;
     }
 
-    const chartLines = useMemo(
-        () =>
-            series.map((series, index) => {
-                const { dataPoints, interpolation, lineStyle, stylePropertyName } = series;
+    const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
-                const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
+    const chartLines = useMemo(() => {
+        if (!dataTypesResult || dataTypesResult instanceof Error) {
+            return null;
+        }
 
-                const markers =
-                    lineStyle === "lineWithMarkers" ||
-                    (lineStyle === "custom" && seriesStyle?.markers?.display !== "false") ? (
-                        <VictoryScatter
-                            data={dataPoints}
-                            style={seriesStyle?.markers}
-                            size={seriesStyle?.markers?.size}
-                        />
-                    ) : (
-                        undefined
-                    );
+        series.map((series, index) => {
+            const { dataPoints, interpolation, lineStyle, stylePropertyName } = series;
 
-                return (
-                    <VictoryGroup key={index}>
-                        {markers && (!seriesStyle?.markers?.display || seriesStyle.markers.display !== "onTop")
-                            ? markers
-                            : null}
-                        <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
-                        {markers && seriesStyle?.markers?.display === "onTop" ? markers : null}
-                    </VictoryGroup>
+            const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
+
+            const markers =
+                lineStyle === "lineWithMarkers" ||
+                (lineStyle === "custom" && seriesStyle?.markers?.display !== "false") ? (
+                    <VictoryScatter data={dataPoints} style={seriesStyle?.markers} size={seriesStyle?.markers?.size} />
+                ) : (
+                    undefined
                 );
-            }),
-        [series, style]
-    );
+
+            return (
+                <VictoryGroup key={index}>
+                    {markers && (!seriesStyle?.markers?.display || seriesStyle.markers.display !== "onTop")
+                        ? markers
+                        : null}
+                    <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
+                    {markers && seriesStyle?.markers?.display === "onTop" ? markers : null}
+                </VictoryGroup>
+            );
+        });
+    }, [dataTypesResult, series, style]);
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
@@ -75,49 +81,83 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     return (
         <View style={style.container}>
-            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
-                {chartDimensions ? (
-                    <VictoryChart
-                        height={chartDimensions?.height}
-                        width={chartDimensions?.width}
-                        padding={style.chart?.padding}
-                        style={style.chart}
-                    >
-                        <VictoryAxis
-                            style={style.xAxis}
-                            axisLabelComponent={
-                                xAxisLabel ? (
-                                    <VictoryLabel
-                                        dx={style.xAxis?.axisLabel?.horizontalOffset}
-                                        dy={style.xAxis?.axisLabel?.verticalOffset}
-                                    />
-                                ) : (
-                                    undefined
-                                )
-                            }
-                            label={xAxisLabel}
-                        />
-                        <VictoryAxis
-                            dependentAxis
-                            style={style.yAxis}
-                            axisLabelComponent={
-                                yAxisLabel ? (
-                                    <VictoryLabel
-                                        dx={style.yAxis?.axisLabel?.verticalOffset}
-                                        dy={style.yAxis?.axisLabel?.horizontalOffset}
-                                    />
-                                ) : (
-                                    undefined
-                                )
-                            }
-                            label={yAxisLabel}
-                        />
-                        {chartLines}
-                    </VictoryChart>
-                ) : null}
-            </View>
+            {dataTypesResult instanceof Error ? (
+                <Text>{dataTypesResult.message}</Text>
+            ) : (
+                <Fragment>
+                    <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
+                        {chartDimensions ? (
+                            <VictoryChart
+                                height={chartDimensions?.height}
+                                width={chartDimensions?.width}
+                                padding={style.chart?.padding}
+                                scale={
+                                    dataTypesResult
+                                        ? {
+                                              x: dataTypesResult.x === "number" ? "linear" : "time",
+                                              y: dataTypesResult.y === "number" ? "linear" : "time"
+                                          }
+                                        : undefined
+                                }
+                                style={style.chart}
+                            >
+                                <VictoryAxis
+                                    style={style.xAxis}
+                                    axisLabelComponent={
+                                        xAxisLabel ? (
+                                            <VictoryLabel
+                                                dx={style.xAxis?.axisLabel?.horizontalOffset}
+                                                dy={style.xAxis?.axisLabel?.verticalOffset}
+                                            />
+                                        ) : (
+                                            undefined
+                                        )
+                                    }
+                                    label={xAxisLabel}
+                                />
+                                <VictoryAxis
+                                    dependentAxis
+                                    style={style.yAxis}
+                                    axisLabelComponent={
+                                        yAxisLabel ? (
+                                            <VictoryLabel
+                                                dx={style.yAxis?.axisLabel?.verticalOffset}
+                                                dy={style.yAxis?.axisLabel?.horizontalOffset}
+                                            />
+                                        ) : (
+                                            undefined
+                                        )
+                                    }
+                                    label={yAxisLabel}
+                                />
+                                {chartLines}
+                            </VictoryChart>
+                        ) : null}
+                    </View>
 
-            {showLegend ? <Legend style={style} series={series} /> : null}
+                    {showLegend ? <Legend style={style} series={series} /> : null}
+                </Fragment>
+            )}
         </View>
     );
+}
+
+function getDataTypes(series: LineChartSeries[]): { x: string; y: string } | Error | undefined {
+    let dataTypes: { x: string; y: string } | undefined;
+
+    for (const element of series) {
+        const { dataPoints } = element;
+
+        if (dataPoints.length > 0) {
+            const xDataType = typeof dataPoints[0].x;
+            const yDataType = typeof dataPoints[0].y;
+
+            if (!dataTypes) {
+                dataTypes = { x: xDataType, y: yDataType };
+            } else if (dataTypes && (dataTypes.x !== xDataType || dataTypes.y !== yDataType)) {
+                return new Error("Data types of data points belonging to different series aren't equal");
+            }
+        }
+    }
+    return dataTypes;
 }
