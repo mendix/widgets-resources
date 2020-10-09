@@ -7,7 +7,7 @@ describe("Popup-menu-web", () => {
 
     describe("using basic option", () => {
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the top left position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton10");
             button.click();
@@ -17,7 +17,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuTopLeft")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the left position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton12");
             button.click();
@@ -28,7 +28,7 @@ describe("Popup-menu-web", () => {
         });
 
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the top position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton15");
             button.click();
@@ -38,7 +38,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuTop")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the top right position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton13");
             button.click();
@@ -48,7 +48,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuTopRight")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the right position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton14");
             button.click();
@@ -58,7 +58,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuRight")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the bottom right position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton20");
             button.click();
@@ -68,7 +68,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuBottomRight")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the bottom left position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton18");
             button.click();
@@ -78,7 +78,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuBottomLeft")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the bottom position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton19");
             button.click();
@@ -110,7 +110,7 @@ describe("Popup-menu-web", () => {
     });
     describe("using custom option", () => {
         it("compares with a screenshot baseline and checks if custom popupmenu is rendered in the top left position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton11");
             button.click();
@@ -120,7 +120,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "customPopUpMenuTopLeft")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if custom popupmenu is rendered in the left position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton17");
             button.click();
@@ -131,7 +131,7 @@ describe("Popup-menu-web", () => {
         });
 
         it("compares with a screenshot baseline and checks if custom popupmenu is rendered in the top position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton24");
             button.click();
@@ -141,7 +141,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "customPopUpMenuTop")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if custom popupmenu is rendered in the top right position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton23");
             button.click();
@@ -151,7 +151,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "customPopUpMenuTopRight")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if custom popupmenu is rendered in the right position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton26");
             button.click();
@@ -161,7 +161,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "customPopUpMenuRight")).toEqual(0);
         });
         it("compares with a screenshot baseline and checks if custom popupmenu is rendered in the bottom position", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton29");
             button.click();
