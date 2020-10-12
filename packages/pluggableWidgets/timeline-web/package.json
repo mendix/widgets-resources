@@ -1,10 +1,10 @@
 {
-  "name": "timeline",
+  "name": "timeline-web",
   "widgetName": "Timeline",
   "version": "1.0.0",
   "description": "Shows timeline",
   "copyright": "Mendix BV",
-  "author": "Mehmet Ali IZCI",
+  "author": "Mendix",
   "config": {
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
