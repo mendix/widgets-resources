@@ -2,6 +2,7 @@ import {
     GroupByDayOptionsEnum,
     GroupByKeyEnum,
     GroupByMonthOptionsEnum,
+    OrphanEventsPlacementEnum,
     RenderModeEnum
 } from "../../typings/TimelineProps";
 import { Children, createElement, ReactElement, ReactNode } from "react";
@@ -16,12 +17,13 @@ export interface TimelineComponentProps {
     renderMode: RenderModeEnum;
     showGroupHeader: boolean;
     onClick?: ActionValue;
+    orphanEventsPlacement: OrphanEventsPlacementEnum;
 }
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
     return (
         <div className={classNames("widget-timeline-wrapper", props.name)}>
-            {getItems(props.data, props.renderMode, props.showGroupHeader)}
+            {getItems(props.data, props.renderMode, props.showGroupHeader, props.orphanEventsPlacement)}
         </div>
     );
 }
@@ -29,9 +31,11 @@ export default function TimelineComponent(props: TimelineComponentProps): ReactE
 export function getItems(
     structuredEvents: Map<string, ItemType[]>,
     renderMode: RenderModeEnum,
-    showGroupHeader: boolean
+    showGroupHeader: boolean,
+    orphanEventsPlacement: OrphanEventsPlacementEnum
 ): ReactNode[] {
     const days: ReactNode[] = [];
+    const orphanDays: ReactNode[] = [];
     structuredEvents.forEach((eventsOfDay: ItemType[], groupKey: string) => {
         let events;
         let groupHeader: ReactNode = <span>{groupKey}</span>;
@@ -59,8 +63,17 @@ export function getItems(
                 </div>
             </div>
         );
-        days.push(constructedDiv);
+        if (!groupKey) {
+            orphanDays.push(constructedDiv);
+        } else {
+            days.push(constructedDiv);
+        }
     });
+    if (orphanEventsPlacement === "beginning") {
+        days.unshift(orphanDays);
+    } else {
+        days.push(orphanDays);
+    }
     return days;
 }
 

@@ -29,10 +29,18 @@
                 </property>
                 <property key="eventTime" type="attribute" dataSource="data" required="false">
                     <caption>Date and time attribute</caption>
-                    <description>Will be used for grouping events, as a group header value. If events that has no value, they will be added at the end</description>
+                    <description>Will be used for grouping events, as a group header value. If events has no date time value, use "Orphan events placement" to control rendering.</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
                     </attributeTypes>
+                </property>
+                <property key="orphanEventsPlacement" type="enumeration" defaultValue="end">
+                    <caption>Orphan events placement</caption>
+                    <description>Will be used to place events that has no date time</description>
+                    <enumerationValues>
+                        <enumerationValue key="beginning">Beginning of the timeline</enumerationValue>
+                        <enumerationValue key="end">End of the timeline</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="groupByKey" type="enumeration" defaultValue="day">
                     <caption>Group by</caption>

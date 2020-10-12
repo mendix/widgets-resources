@@ -77,6 +77,7 @@ export function preview(props: TimelinePreviewProps) {
             data={structuredEvents()}
             renderMode={props.renderMode}
             showGroupHeader={props.showGroupHeader}
+            orphanEventsPlacement={props.orphanEventsPlacement}
         />
     );
 }

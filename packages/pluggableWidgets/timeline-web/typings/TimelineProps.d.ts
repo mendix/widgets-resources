@@ -16,6 +16,8 @@ import {
 
 export type RenderModeEnum = "basic" | "custom";
 
+export type OrphanEventsPlacementEnum = "beginning" | "end";
+
 export type GroupByKeyEnum = "day" | "month" | "year";
 
 export type GroupByDayOptionsEnum = "dayName" | "dayMonth" | "fullDate";
@@ -31,6 +33,7 @@ export interface TimelineContainerProps {
     data: ListValue;
     showGroupHeader: boolean;
     eventTime?: ListAttributeValue<Date>;
+    orphanEventsPlacement: OrphanEventsPlacementEnum;
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
@@ -53,6 +56,7 @@ export interface TimelinePreviewProps {
     data: {} | null;
     showGroupHeader: boolean;
     eventTime: string;
+    orphanEventsPlacement: OrphanEventsPlacementEnum;
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;

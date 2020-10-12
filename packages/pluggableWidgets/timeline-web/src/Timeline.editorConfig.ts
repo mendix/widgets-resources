@@ -26,6 +26,7 @@ export function getProperties(values: TimelinePreviewProps, defaultProperties: P
             "groupByKey",
             "groupByDayOptions",
             "groupByMonthOptions",
+            "orphanEventsPlacement",
             "customGroupHeader"
         ]);
     }

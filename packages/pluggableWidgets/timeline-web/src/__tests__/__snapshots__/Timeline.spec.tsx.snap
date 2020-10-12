@@ -23,6 +23,7 @@ exports[`Timeline renders correctly with basic props 1`] = `
     }
   }
   name="timeline"
+  orphanEventsPlacement="end"
   renderMode="basic"
   showGroupHeader={true}
 />
