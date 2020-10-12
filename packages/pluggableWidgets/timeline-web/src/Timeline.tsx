@@ -78,7 +78,6 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
             data={groupedEvents}
             showGroupHeader={props.showGroupHeader}
             renderMode={props.renderMode}
-            eventOrder={props.eventOrder}
         />
     );
 }

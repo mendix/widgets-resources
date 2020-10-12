@@ -41,14 +41,12 @@ describe("Timeline", () => {
     const basicRenderProps: TimelineComponentProps = {
         data: basicData,
         renderMode: "basic",
-        showGroupHeader: true,
-        eventOrder: "descending"
+        showGroupHeader: true
     };
     const customRenderProps: TimelineComponentProps = {
         data: customData,
         renderMode: "custom",
-        showGroupHeader: true,
-        eventOrder: "descending"
+        showGroupHeader: true
     };
 
     it("renders timeline with basic configuration", () => {

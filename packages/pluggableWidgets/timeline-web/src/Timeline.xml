@@ -28,7 +28,7 @@
                     <description>Shows a header between grouped events based on event date.</description>
                 </property>
                 <property key="eventTime" type="attribute" dataSource="data" required="false">
-                    <caption>Datetime attribute</caption>
+                    <caption>Date and time attribute</caption>
                     <description>Will be used for grouping events, as a group header value. If events that has no value, they will be added at the end</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
@@ -58,14 +58,6 @@
                     <enumerationValues>
                         <enumerationValue key="month">Month</enumerationValue>
                         <enumerationValue key="monthYear">Month &amp; year</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="eventOrder" type="enumeration" defaultValue="ascending">
-                    <caption>Event order</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="ascending">Ascending</enumerationValue>
-                        <enumerationValue key="descending">Descending</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>

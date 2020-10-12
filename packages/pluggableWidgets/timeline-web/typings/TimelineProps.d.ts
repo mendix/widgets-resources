@@ -22,8 +22,6 @@ export type GroupByDayOptionsEnum = "dayName" | "dayMonth" | "fullDate";
 
 export type GroupByMonthOptionsEnum = "month" | "monthYear";
 
-export type EventOrderEnum = "ascending" | "descending";
-
 export interface TimelineContainerProps {
     name: string;
     class: string;
@@ -36,7 +34,6 @@ export interface TimelineContainerProps {
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
-    eventOrder: EventOrderEnum;
     title?: ListAttributeValue<string>;
     description?: ListAttributeValue<string>;
     time?: ListExpressionValue<string>;
@@ -59,7 +56,6 @@ export interface TimelinePreviewProps {
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
-    eventOrder: EventOrderEnum;
     title: string;
     description: string;
     time: string;

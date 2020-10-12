@@ -1,5 +1,4 @@
 import {
-    EventOrderEnum,
     GroupByDayOptionsEnum,
     GroupByKeyEnum,
     GroupByMonthOptionsEnum,
@@ -17,19 +16,12 @@ export interface TimelineComponentProps {
     renderMode: RenderModeEnum;
     showGroupHeader: boolean;
     onClick?: ActionValue;
-    eventOrder: EventOrderEnum;
 }
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
     return (
         <div className={classNames("widget-timeline-wrapper", props.name)}>
-            {getItems(
-                props.eventOrder === "descending"
-                    ? new Map<string, ItemType[]>(Array.from(props.data).reverse())
-                    : props.data,
-                props.renderMode,
-                props.showGroupHeader
-            )}
+            {getItems(props.data, props.renderMode, props.showGroupHeader)}
         </div>
     );
 }

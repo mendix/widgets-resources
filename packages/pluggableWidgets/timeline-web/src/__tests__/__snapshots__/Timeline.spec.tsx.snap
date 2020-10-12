@@ -22,7 +22,6 @@ exports[`Timeline renders correctly with basic props 1`] = `
       ],
     }
   }
-  eventOrder="descending"
   name="timeline"
   renderMode="basic"
   showGroupHeader={true}

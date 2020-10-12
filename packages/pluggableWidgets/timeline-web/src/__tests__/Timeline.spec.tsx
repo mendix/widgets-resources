@@ -26,8 +26,7 @@ describe("Timeline", () => {
         customEventDateTime: () => <p>Custom Event Date Time</p>,
         customDescription: () => <p>Custom Description</p>,
         groupByMonthOptions: "month",
-        groupByDayOptions: "dayName",
-        eventOrder: "descending"
+        groupByDayOptions: "dayName"
     };
     it("renders correctly with basic props", () => {
         const component = shallow(<Timeline {...defaultProps} />);
