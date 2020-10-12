@@ -22,6 +22,8 @@ export type GroupByDayOptionsEnum = "dayName" | "dayMonth" | "fullDate";
 
 export type GroupByMonthOptionsEnum = "month" | "monthYear";
 
+export type EventOrderEnum = "ascending" | "descending";
+
 export interface TimelineContainerProps {
     name: string;
     class: string;
@@ -29,15 +31,16 @@ export interface TimelineContainerProps {
     tabIndex: number;
     renderMode: RenderModeEnum;
     data: ListValue;
-    eventTime: ListAttributeValue<Date>;
+    showGroupHeader: boolean;
+    eventTime?: ListAttributeValue<Date>;
+    groupByKey: GroupByKeyEnum;
+    groupByDayOptions: GroupByDayOptionsEnum;
+    groupByMonthOptions: GroupByMonthOptionsEnum;
+    eventOrder: EventOrderEnum;
     title?: ListAttributeValue<string>;
     description?: ListAttributeValue<string>;
     time?: ListExpressionValue<string>;
     icon?: DynamicValue<WebIcon>;
-    groupByKey: GroupByKeyEnum;
-    showGroupHeader: boolean;
-    groupByDayOptions: GroupByDayOptionsEnum;
-    groupByMonthOptions: GroupByMonthOptionsEnum;
     customIcon?: ListWidgetValue;
     customGroupHeader?: ListWidgetValue;
     customTitle?: ListWidgetValue;
@@ -51,15 +54,16 @@ export interface TimelinePreviewProps {
     style: string;
     renderMode: RenderModeEnum;
     data: {} | null;
+    showGroupHeader: boolean;
     eventTime: string;
+    groupByKey: GroupByKeyEnum;
+    groupByDayOptions: GroupByDayOptionsEnum;
+    groupByMonthOptions: GroupByMonthOptionsEnum;
+    eventOrder: EventOrderEnum;
     title: string;
     description: string;
     time: string;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
-    groupByKey: GroupByKeyEnum;
-    showGroupHeader: boolean;
-    groupByDayOptions: GroupByDayOptionsEnum;
-    groupByMonthOptions: GroupByMonthOptionsEnum;
     customIcon: { widgetCount: number; renderer: ComponentType };
     customGroupHeader: { widgetCount: number; renderer: ComponentType };
     customTitle: { widgetCount: number; renderer: ComponentType };

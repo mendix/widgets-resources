@@ -21,8 +21,13 @@ export function getProperties(values: TimelinePreviewProps, defaultProperties: P
         ]);
     }
     if (!values.showGroupHeader) {
-        hidePropertiesIn(defaultProperties, values, ["groupByDayOptions", "groupByMonthOptions"]);
-        hidePropertyIn(defaultProperties, values, "customGroupHeader");
+        hidePropertiesIn(defaultProperties, values, [
+            "eventTime",
+            "groupByKey",
+            "groupByDayOptions",
+            "groupByMonthOptions",
+            "customGroupHeader"
+        ]);
     }
     switch (values.groupByKey) {
         case "day":
@@ -46,6 +51,14 @@ export function check(values: TimelinePreviewProps): Problem[] {
                 property: "title",
                 severity: "error",
                 message: "A title is required for the Basic timeline. You can set it in properties.",
+                url: ""
+            });
+        }
+        if (values.showGroupHeader && !values.eventTime) {
+            errors.push({
+                property: "title",
+                severity: "error",
+                message: "An event time attribute is required when showGroupHeader set to true",
                 url: ""
             });
         }

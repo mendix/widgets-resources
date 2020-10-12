@@ -23,12 +23,50 @@
                     <caption>Data source</caption>
                     <description/>
                 </property>
-                <property key="eventTime" type="attribute" dataSource="data">
+                <property key="showGroupHeader" type="boolean" defaultValue="true">
+                    <caption>Show group header</caption>
+                    <description>Shows a header between grouped events based on event date.</description>
+                </property>
+                <property key="eventTime" type="attribute" dataSource="data" required="false">
                     <caption>Datetime attribute</caption>
-                    <description>Will be used for grouping events based on date.</description>
+                    <description>Will be used for grouping events, as a group header value. If events that has no value, they will be added at the end</description>
                     <attributeTypes>
                         <attributeType name="DateTime"/>
                     </attributeTypes>
+                </property>
+                <property key="groupByKey" type="enumeration" defaultValue="day">
+                    <caption>Group by</caption>
+                    <description>Group events based on day, month or year.</description>
+                    <enumerationValues>
+                        <enumerationValue key="day">Day</enumerationValue>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="year">Year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="groupByDayOptions" type="enumeration" defaultValue="dayName">
+                    <caption>Format</caption>
+                    <description>Format group header with current language's format</description>
+                    <enumerationValues>
+                        <enumerationValue key="dayName">Day name</enumerationValue>
+                        <enumerationValue key="dayMonth">Day &amp; month</enumerationValue>
+                        <enumerationValue key="fullDate">Day, month, year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="groupByMonthOptions" type="enumeration" defaultValue="month">
+                    <caption>Format</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="monthYear">Month &amp; year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="eventOrder" type="enumeration" defaultValue="ascending">
+                    <caption>Event order</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="ascending">Ascending</enumerationValue>
+                        <enumerationValue key="descending">Descending</enumerationValue>
+                    </enumerationValues>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Fields">
@@ -53,38 +91,6 @@
                 <property key="icon" type="icon" required="false">
                     <caption>Icon</caption>
                     <description>If no icon is configured, a circle will be rendered.</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Appearance">
-                <property key="groupByKey" type="enumeration" defaultValue="day">
-                    <caption>Group by</caption>
-                    <description>Group events based on day, month or year.</description>
-                    <enumerationValues>
-                        <enumerationValue key="day">Day</enumerationValue>
-                        <enumerationValue key="month">Month</enumerationValue>
-                        <enumerationValue key="year">Year</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="showGroupHeader" type="boolean" defaultValue="true">
-                    <caption>Show group header</caption>
-                    <description>Shows a header between grouped events based on event date.</description>
-                </property>
-                <property key="groupByDayOptions" type="enumeration" defaultValue="dayName">
-                    <caption>Format</caption>
-                    <description>Format group header with current language's format</description>
-                    <enumerationValues>
-                        <enumerationValue key="dayName">Day name</enumerationValue>
-                        <enumerationValue key="dayMonth">Day &amp; month</enumerationValue>
-                        <enumerationValue key="fullDate">Day, month, year</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="groupByMonthOptions" type="enumeration" defaultValue="month">
-                    <caption>Format</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="month">Month</enumerationValue>
-                        <enumerationValue key="monthYear">Month &amp; year</enumerationValue>
-                    </enumerationValues>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Custom">

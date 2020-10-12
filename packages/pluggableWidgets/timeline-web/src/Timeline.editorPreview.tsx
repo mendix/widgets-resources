@@ -77,11 +77,12 @@ export function preview(props: TimelinePreviewProps) {
             data={structuredEvents()}
             renderMode={props.renderMode}
             showGroupHeader={props.showGroupHeader}
+            eventOrder={props.eventOrder}
         />
     );
 }
 
-export function getGroupHeaderByType(option: GroupByDayOptionsEnum | GroupByMonthOptionsEnum | GroupByKeyEnum) {
+function getGroupHeaderByType(option: GroupByDayOptionsEnum | GroupByMonthOptionsEnum | GroupByKeyEnum) {
     switch (option) {
         case "fullDate":
         case "day":

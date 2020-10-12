@@ -1,4 +1,5 @@
 import {
+    EventOrderEnum,
     GroupByDayOptionsEnum,
     GroupByKeyEnum,
     GroupByMonthOptionsEnum,
@@ -16,12 +17,19 @@ export interface TimelineComponentProps {
     renderMode: RenderModeEnum;
     showGroupHeader: boolean;
     onClick?: ActionValue;
+    eventOrder: EventOrderEnum;
 }
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
     return (
         <div className={classNames("widget-timeline-wrapper", props.name)}>
-            {getItems(props.data, props.renderMode, props.showGroupHeader)}
+            {getItems(
+                props.eventOrder === "descending"
+                    ? new Map<string, ItemType[]>(Array.from(props.data).reverse())
+                    : props.data,
+                props.renderMode,
+                props.showGroupHeader
+            )}
         </div>
     );
 }
@@ -48,11 +56,11 @@ export function getItems(
 
         const constructedDiv = (
             <div className="timeline-date" key={groupKey}>
-                {showGroupHeader && <div className="widget-timeline-date-header">{groupHeader}</div>}
+                {showGroupHeader && groupKey && <div className="widget-timeline-date-header">{groupHeader}</div>}
                 <div
                     className={classNames(
-                        "widget-timeline-events",
-                        !showGroupHeader ? "widget-timeline-no-divider" : undefined
+                        "widget-timeline-events-wrapper",
+                        !showGroupHeader || !groupKey ? "widget-timeline-no-divider" : undefined
                     )}
                 >
                     <ul>{events}</ul>
@@ -118,8 +126,8 @@ function hasChildren(element: any): boolean {
 
 export function getGroupHeaderByType(
     formatter: any,
-    date: Date,
-    option: GroupByDayOptionsEnum | GroupByMonthOptionsEnum | GroupByKeyEnum
+    option: GroupByDayOptionsEnum | GroupByMonthOptionsEnum | GroupByKeyEnum,
+    date?: Date
 ) {
     if (formatter && formatter.type === "datetime") {
         switch (option) {

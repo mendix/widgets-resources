@@ -17,10 +17,11 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     border-radius: 30px;
 }
 
-.widget-timeline-events {
-    margin-bottom: 0;
+.widget-timeline-events-wrapper {
+    display: flex;
+    flex: 1;
     margin-left: 55px;
-    padding: 35px 0;
+    padding: 35px 0 0 0;
     border-left: 1px solid $border-color;
     ul {
         padding: 0;
@@ -97,5 +98,4 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     display: flex;
     overflow: hidden;
     flex: 1;
-    flex-direction: row;
 }

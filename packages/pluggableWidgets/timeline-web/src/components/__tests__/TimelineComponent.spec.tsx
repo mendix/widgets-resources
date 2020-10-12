@@ -64,49 +64,49 @@ describe("Timeline", () => {
 
     it("calls correct formatter with fulldate", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "fullDate");
+        getGroupHeaderByType(date.formatter, "fullDate", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "date" });
     });
 
     it("calls correct formatter with day", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "day");
+        getGroupHeaderByType(date.formatter, "day", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "date" });
     });
 
     it("calls correct formatter with dayName", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "dayName");
+        getGroupHeaderByType(date.formatter, "dayName", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "EEEE" });
     });
 
     it("calls correct formatter with dayMonth", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "dayMonth");
+        getGroupHeaderByType(date.formatter, "dayMonth", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "EE MMMM" });
     });
 
     it("calls correct formatter with month", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "month");
+        getGroupHeaderByType(date.formatter, "month", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "MMMM" });
     });
 
     it("calls correct formatter with monthYear", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "monthYear");
+        getGroupHeaderByType(date.formatter, "monthYear", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "MMM YYYY" });
     });
 
     it("calls correct formatter with year", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, new Date(1453, 4, 30), "year");
+        getGroupHeaderByType(date.formatter, "year", new Date(1453, 4, 30));
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "YYYY" });
     });
