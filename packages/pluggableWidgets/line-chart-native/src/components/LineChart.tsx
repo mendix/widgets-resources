@@ -114,6 +114,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                         )
                                     }
                                     label={xAxisLabel}
+                                    orientation={"bottom"}
                                 />
                                 <VictoryAxis
                                     dependentAxis
@@ -129,6 +130,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                         )
                                     }
                                     label={yAxisLabel}
+                                    orientation={"left"}
                                 />
                                 {chartLines}
                             </VictoryChart>
