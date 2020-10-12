@@ -106,6 +106,32 @@ exports[`Header renders the structure correctly when filterable and with custom 
 </div>
 `;
 
+exports[`Header renders the structure correctly when resizable 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+    >
+      Test
+    </div>
+  </div>
+  <ColumnResizer
+    setColumnWidth={[MockFunction]}
+  />
+</div>
+`;
+
 exports[`Header renders the structure correctly when sortable 1`] = `
 <div
   className="th"

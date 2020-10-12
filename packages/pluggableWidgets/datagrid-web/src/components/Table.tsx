@@ -47,6 +47,10 @@ export interface TableProps<T> {
     filterMethod: FilterMethodEnum;
 }
 
+interface ColumnWidth {
+    [key: string]: number | undefined;
+}
+
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
@@ -60,6 +64,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [paginationIndex, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [filters, setFilters] = useState<Filters<object>>([]);
+    const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
+        props.columns.map((_c, index) => ({ [index.toString()]: undefined })).reduce((p, c) => ({ ...p, ...c }), {})
+    );
 
     const filterTypes = useMemo(
         () => ({
@@ -242,6 +249,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const cssGridStyles = useMemo(() => {
         const columnSizes = visibleColumns
             .map(c => {
+                const columnResizedSize = columnsWidth[c.id];
+                if (columnResizedSize) {
+                    return `${columnResizedSize}px`;
+                }
                 switch (c.width) {
                     case "autoFit":
                         return "fit-content(100%)";
@@ -255,7 +266,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         return {
             gridTemplateColumns: columnSizes + (props.columnsHidable ? " fit-content(50px)" : "")
         };
-    }, [visibleColumns, props.columnsHidable]);
+    }, [columnsWidth, visibleColumns, props.columnsHidable]);
 
     return (
         <div className={props.className} style={props.styles}>
@@ -285,6 +296,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                         setOrder(newOrder);
                                         setColumnOrder(newOrder);
                                     }}
+                                    setColumnWidth={(width: number) =>
+                                        setColumnsWidth(prev => {
+                                            prev[column.id] = width;
+                                            return { ...prev };
+                                        })
+                                    }
                                     setDragOver={setDragOver}
                                     setSortBy={setSortBy}
                                     sortable={props.columnsSortable}
