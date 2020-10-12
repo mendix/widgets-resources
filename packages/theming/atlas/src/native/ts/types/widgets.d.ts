@@ -171,12 +171,15 @@ export interface DropDownType {
         placeholderTextColor?: string;
     } & TextStyle;
     valueDisabled?: TextStyle;
+    valueFocused?: ViewStyle;
     validationMessage?: TextStyle;
     /*  New dropdown styles start */
     valueContainer?: {
         rippleColor?: string;
     } & ViewStyle;
     valueContainerDisabled?: ViewStyle;
+    valueContainerFocused?: ViewStyle;
+    iconStyle?: TextStyle;
     menuWrapper?: ViewStyle;
     item?: TextStyle;
     itemContainer?: ViewStyle;
@@ -457,6 +460,7 @@ export interface TextBoxType {
     labelDisabled?: TextStyle;
     input?: InputType;
     inputDisabled?: InputType;
+    inputFocused?: InputType;
     inputError?: InputType;
     validationMessage?: TextStyle;
 }

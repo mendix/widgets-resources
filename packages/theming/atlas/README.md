@@ -43,7 +43,7 @@ Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more
                     └── layouts
 ```
 
-## Overview 
+## Overview
 
 Atlas targets two environments, web and native. The file structure is similar between the two environments.
 
@@ -73,14 +73,14 @@ between pages.
 
 ### Prerequisite
 
-Run `npm install` to install dependencies.
+Run `npm install` in the root of `mendix/widgets-resources` to install the dependencies.
 
 ### Production
 
-Run `npm run build` to build and output assets to `dist/theme`.  
+Run `npm run build` to build and output assets to `dist/theme`.
 
 ### Development
 
-Configure the environment variable `ATLAS_MX_PROJECT_PATH` with an absolute path to a Mendix project directory. 
-Run `npm run start` to build with watch mode active, re-building assets when you make changes. 
-Assets will be output to the configured Mendix project's `theme` directory as well as the `deployment` in the correct structure.   
+Configure the environment variable `ATLAS_MX_PROJECT_PATH` with an absolute path to a Mendix project directory.
+Run `npm run start` to build with watch mode active, re-building assets when you make changes.
+Assets will be output to the configured Mendix project's `theme` directory as well as the `deployment` in the correct structure.

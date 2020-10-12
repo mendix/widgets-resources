@@ -45,6 +45,9 @@ export const TextArea: TextBoxType = {
         borderColor: TextBox.inputDisabled?.borderColor,
         color: TextBox.inputDisabled?.color
     },
+    inputFocused: {
+        // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
+    },
     inputError: {
         // autoCapitalize, placeholderTextColor, selectionColor, underlineColorAndroid and all TextStyle properties are allowed
         ...TextBox.inputError
@@ -56,8 +59,15 @@ export const TextArea: TextBoxType = {
 };
 export const TextAreaVertical: TextBoxType = {
     container: TextBoxVertical.container,
+    containerDisabled: TextBoxVertical.containerDisabled,
     label: {
         ...TextBoxVertical.label,
+        height: undefined,
+        paddingVertical: undefined,
+        textAlignVertical: undefined
+    },
+    labelDisabled: {
+        ...TextBoxVertical.labelDisabled,
         height: undefined,
         paddingVertical: undefined,
         textAlignVertical: undefined
@@ -66,6 +76,8 @@ export const TextAreaVertical: TextBoxType = {
         ...TextBoxVertical.input,
         lineHeight: input.input.lineHeight
     },
+    inputDisabled: TextBoxVertical.inputDisabled,
+    inputFocused: TextBoxVertical.inputFocused,
     inputError: TextBoxVertical.inputError,
     validationMessage: TextBoxVertical.validationMessage
 };
