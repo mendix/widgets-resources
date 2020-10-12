@@ -74,8 +74,8 @@
                     <description>Format group header with current language's format</description>
                     <enumerationValues>
                         <enumerationValue key="dayName">Day name</enumerationValue>
-                        <enumerationValue key="dayMonth">Day number and month</enumerationValue>
-                        <enumerationValue key="fullDate">Day number, month and year</enumerationValue>
+                        <enumerationValue key="dayMonth">Day &amp; month</enumerationValue>
+                        <enumerationValue key="fullDate">Day, month, year</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="groupByMonthOptions" type="enumeration" defaultValue="month">
@@ -83,7 +83,7 @@
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="month">Month</enumerationValue>
-                        <enumerationValue key="monthYear">Month and year</enumerationValue>
+                        <enumerationValue key="monthYear">Month &amp; year</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>

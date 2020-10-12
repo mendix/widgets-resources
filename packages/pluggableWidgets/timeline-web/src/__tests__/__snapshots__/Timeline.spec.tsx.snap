@@ -22,6 +22,7 @@ exports[`Timeline renders correctly with basic props 1`] = `
       ],
     }
   }
+  name="timeline"
   renderMode="basic"
   showGroupHeader={true}
 />

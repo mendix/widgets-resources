@@ -1,11 +1,11 @@
 import { createElement, ReactElement, ReactNode, useMemo } from "react";
 import { TimelineContainerProps } from "../typings/TimelineProps";
 import "./ui/Timeline.scss";
-import { ActionValue, DynamicValue, WebIcon } from "mendix";
+import { ActionValue, WebIcon } from "mendix";
 import TimelineComponent, { getGroupHeaderByType } from "./components/TimelineComponent";
 
 export interface BasicItemType {
-    icon?: DynamicValue<WebIcon>;
+    icon?: WebIcon;
     title?: string;
     eventDateTime?: string;
     description?: string;
@@ -46,7 +46,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
 
                 groupKey = getGroupHeaderByType(eventTime.formatter, date, headerOption);
                 constructedItem = {
-                    icon: props.icon,
+                    icon: props.icon?.value,
                     title: props.title?.(item)?.displayValue,
                     eventDateTime: props.time?.(item)?.value,
                     description: props.description?.(item)?.displayValue,

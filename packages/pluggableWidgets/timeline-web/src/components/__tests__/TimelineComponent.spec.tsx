@@ -1,9 +1,8 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
-import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
+import { actionValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 import TimelineComponent, { getGroupHeaderByType, TimelineComponentProps } from "../TimelineComponent";
 import { BasicItemType, CustomItemType } from "../../Timeline";
-import { WebIcon } from "mendix";
 
 jest.mock("mendix/components/web/Icon", () =>
     jest.requireActual("../../__tests__/__mocks__/mendix/components/web/Icon")
@@ -21,7 +20,7 @@ describe("Timeline", () => {
 
     const basicItemWithIcon: BasicItemType = {
         ...basicItem,
-        icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false)
+        icon: { type: "image", iconUrl: "iconUrl" }
     };
 
     const customItem: CustomItemType = {
@@ -117,7 +116,7 @@ describe("Timeline", () => {
             const action = actionValue(true, false);
             const basicItemWithAction: BasicItemType = {
                 ...basicItem,
-                icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false),
+                icon: { type: "image", iconUrl: "iconUrl" },
                 action
             };
             basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
@@ -134,7 +133,7 @@ describe("Timeline", () => {
             const action = actionValue(true, false);
             const basicItemWithAction: BasicItemType = {
                 ...basicItem,
-                icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false),
+                icon: { type: "image", iconUrl: "iconUrl" },
                 action
             };
             basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
@@ -151,7 +150,7 @@ describe("Timeline", () => {
             const action = actionValue(true, false);
             const basicItemWithAction: BasicItemType = {
                 ...basicItem,
-                icon: dynamicValue<WebIcon>({ type: "image", iconUrl: "iconUrl" }, false),
+                icon: { type: "image", iconUrl: "iconUrl" },
                 action
             };
             basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);

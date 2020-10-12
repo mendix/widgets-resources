@@ -72,7 +72,7 @@ function getBasicEventsFromDay(eventsOfDay: BasicItemType[]): ReactNode[] {
             className={classNames("widget-timeline-event", event.action ? "clickable" : undefined)}
         >
             <div className="widget-timeline-icon-wrapper">
-                {event.icon?.value ? <Icon icon={event.icon.value} /> : <div className="widget-timeline-icon-circle" />}
+                {event.icon ? <Icon icon={event.icon} /> : <div className="widget-timeline-icon-circle" />}
             </div>
             <div className="widget-timeline-flex-container widget-timeline-content-wrapper">
                 {event.eventDateTime && (
