@@ -23,7 +23,7 @@
                 </property>
                 <property key="basicItems" type="object" isList="true" required="false">
                     <caption>Menu items</caption>
-                    <description>The popup menu items</description>
+                    <description>The popup menu items.</description>
                     <properties>
                         <property key="itemType" type="enumeration" defaultValue="item">
                             <caption>Item type</caption>

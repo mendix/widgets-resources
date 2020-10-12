@@ -1,7 +1,6 @@
 import { RefObject, useEffect } from "react";
-import { dynamicDocument, dynamicWindow } from "../PopupMenu.editorPreview";
 
-function isElementBlockedTop(srcRect: DOMRect, blockingRect: DOMRect) {
+function isElementBlockedTop(dynamicWindow: Window, srcRect: DOMRect, blockingRect: DOMRect) {
     return (
         srcRect.top < blockingRect.bottom &&
         srcRect.bottom >= blockingRect.bottom &&
@@ -30,7 +29,8 @@ export function unBlockAbsoluteElementTop(
     boundingRect: DOMRect,
     blockingElementRect: DOMRect
 ): void {
-    if (isElementBlockedTop(boundingRect, blockingElementRect)) {
+    const dynamicWindow = element.ownerDocument.defaultView as Window;
+    if (isElementBlockedTop(dynamicWindow, boundingRect, blockingElementRect)) {
         element.style.top =
             getPixelValueAsNumber(element, "top") + blockingElementRect.bottom - boundingRect.top + "px";
     }
@@ -93,7 +93,8 @@ function isBehindRandomElementCheck(
 }
 
 export function isBehindRandomElement(
-    elementSource: HTMLElement,
+    dynamicDocument: Document,
+    element: HTMLElement,
     boundingRect: DOMRect,
     offset = 3,
     excludeElementWithClass = ""
@@ -112,16 +113,16 @@ export function isBehindRandomElement(
         excludeElements = [...(dynamicDocument.querySelectorAll(`.${excludeElementWithClass}`) as any)];
     }
 
-    if (isBehindRandomElementCheck(elementSource, elementTopLeft, excludeElements, excludeElementWithClass)) {
+    if (isBehindRandomElementCheck(element, elementTopLeft, excludeElements, excludeElementWithClass)) {
         return elementTopLeft;
     }
-    if (isBehindRandomElementCheck(elementSource, elementTopRight, excludeElements, excludeElementWithClass)) {
+    if (isBehindRandomElementCheck(element, elementTopRight, excludeElements, excludeElementWithClass)) {
         return elementTopRight;
     }
-    if (isBehindRandomElementCheck(elementSource, elementBottomLeft, excludeElements, excludeElementWithClass)) {
+    if (isBehindRandomElementCheck(element, elementBottomLeft, excludeElements, excludeElementWithClass)) {
         return elementBottomLeft;
     }
-    if (isBehindRandomElementCheck(elementSource, elementBottomRight, excludeElements, excludeElementWithClass)) {
+    if (isBehindRandomElementCheck(element, elementBottomRight, excludeElements, excludeElementWithClass)) {
         return elementBottomRight;
     }
 
@@ -144,7 +145,11 @@ export function isBehindElement(element: HTMLElement, blockingElement: HTMLEleme
     );
 }
 
-export function isElementVisibleByUser(element: HTMLElement): boolean {
+export function isElementVisibleByUser(
+    dynamicDocument: Document,
+    dynamicWindow: Window,
+    element: HTMLElement
+): boolean {
     const style: CSSStyleDeclaration = getComputedStyle(element);
     if (style.display === "none") {
         return false;
@@ -191,7 +196,7 @@ export function isElementVisibleByUser(element: HTMLElement): boolean {
     return false;
 }
 
-export function isElementPartiallyOffScreen(rect: DOMRect): boolean {
+export function isElementPartiallyOffScreen(dynamicWindow: Window, rect: DOMRect): boolean {
     return (
         rect.x < 0 ||
         rect.y < 0 ||
@@ -200,7 +205,11 @@ export function isElementPartiallyOffScreen(rect: DOMRect): boolean {
     );
 }
 
-export function moveAbsoluteElementOnScreen(element: HTMLElement, boundingRect: DOMRect): DOMRect {
+export function moveAbsoluteElementOnScreen(
+    dynamicWindow: Window,
+    element: HTMLElement,
+    boundingRect: DOMRect
+): DOMRect {
     if (boundingRect.x < 0) {
         const leftValue = Math.round(getPixelValueAsNumber(element, "left") - boundingRect.x);
         element.style.left = leftValue + "px";
@@ -238,11 +247,11 @@ export function handleOnClickOutsideElement(ref: RefObject<HTMLDivElement>, hand
             }
             handler();
         };
-        dynamicDocument.addEventListener("mousedown", listener);
-        dynamicDocument.addEventListener("touchstart", listener);
+        ref.current?.ownerDocument.addEventListener("mousedown", listener);
+        ref.current?.ownerDocument.addEventListener("touchstart", listener);
         return () => {
-            dynamicDocument.removeEventListener("mousedown", listener);
-            dynamicDocument.removeEventListener("touchstart", listener);
+            ref.current?.ownerDocument.removeEventListener("mousedown", listener);
+            ref.current?.ownerDocument.removeEventListener("touchstart", listener);
         };
     }, [ref, handler]);
 }

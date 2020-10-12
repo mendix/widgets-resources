@@ -5,22 +5,13 @@ import { PopupMenu as PopupMenuComponent } from "./components/PopupMenu";
 import { BasicItemsType, CustomItemsType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
 export function getPreviewCss(): string {
-    return require("./ui/PopupMenu.scss");
+    return require("./ui/PopupMenu.scss") + require("./ui/PopupMenuPreview.scss");
 }
-
-export let dynamicDocument: Document = document;
-export let dynamicWindow: Window = window;
 
 export function preview(props: PopupMenuPreviewProps) {
     const basicItems: BasicItemsType[] = [];
     const customItems: CustomItemsType[] = [];
     const styles = parseStyle(props.style);
-
-    const iframe: HTMLIFrameElement | null = document.querySelector(".page-editor-iframe");
-    const iframeWindow = iframe?.contentWindow;
-    const iframeDocument = iframe?.contentDocument;
-    dynamicWindow = preview && iframeWindow ? iframeWindow : window;
-    dynamicDocument = preview && iframeDocument ? iframeDocument : document;
 
     if (props.renderMode === "basic") {
         props.basicItems.forEach(item => {

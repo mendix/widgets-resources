@@ -16,7 +16,7 @@ exports[`Popup menu renders popup menu 1`] = `
     className="popupmenu-menu popupmenu-position-bottom"
   >
     <div
-      className="popupmenu-basic-item "
+      className="popupmenu-basic-item"
       key="0"
       onClick={[Function]}
     >

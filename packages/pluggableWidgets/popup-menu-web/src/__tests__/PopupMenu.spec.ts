@@ -2,7 +2,7 @@ import { shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
 import { actionValue } from "../../../../tools/util-widgets/dist";
 import { BasicItemsType, CustomItemsType, PopupMenuContainerProps } from "../../typings/PopupMenuProps";
-import PopupMenu from "../PopupMenu";
+import { PopupMenu } from "../components/PopupMenu";
 
 jest.useFakeTimers();
 
@@ -17,6 +17,7 @@ describe("Popup menu", () => {
         class: "mx-popup-menu",
         tabIndex: -1,
         trigger: "onclick",
+        menuToggle: false,
         menuTrigger: createElement("button", null, "Trigger"),
         renderMode: "basic",
         position: "bottom",

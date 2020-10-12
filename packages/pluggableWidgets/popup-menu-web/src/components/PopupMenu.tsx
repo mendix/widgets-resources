@@ -17,7 +17,7 @@ import { ActionValue } from "mendix";
 
 import { PopupMenuContainerProps, PositionEnum } from "../../typings/PopupMenuProps";
 
-interface PopupMenuProps extends PopupMenuContainerProps {
+export interface PopupMenuProps extends PopupMenuContainerProps {
     preview?: boolean;
 }
 
@@ -110,20 +110,22 @@ function createMenuOptions(
 }
 
 function correctPosition(element: HTMLElement, position: PositionEnum): void {
+    const dynamicDocument: Document = element.ownerDocument;
+    const dynamicWindow = dynamicDocument.defaultView as Window;
     let boundingRect: DOMRect = element.getBoundingClientRect();
-    const isOffScreen = isElementPartiallyOffScreen(boundingRect);
+    const isOffScreen = isElementPartiallyOffScreen(dynamicWindow, boundingRect);
     if (isOffScreen) {
-        moveAbsoluteElementOnScreen(element, boundingRect);
+        moveAbsoluteElementOnScreen(dynamicWindow, element, boundingRect);
     }
 
     boundingRect = element.getBoundingClientRect();
-    const blockingElement = isBehindRandomElement(element, boundingRect, 3, "popupmenu");
-    if (!!blockingElement && isElementVisibleByUser(blockingElement)) {
+    const blockingElement = isBehindRandomElement(dynamicDocument, element, boundingRect, 3, "popupmenu");
+    if (!!blockingElement && isElementVisibleByUser(dynamicDocument, dynamicWindow, blockingElement)) {
         unBlockAbsoluteElement(element, boundingRect, blockingElement.getBoundingClientRect(), position);
     } else if (!!blockingElement) {
         let node = blockingElement;
         do {
-            if (isBehindElement(element, node, 3) && isElementVisibleByUser(node)) {
+            if (isBehindElement(element, node, 3) && isElementVisibleByUser(dynamicDocument, dynamicWindow, node)) {
                 return unBlockAbsoluteElement(element, boundingRect, node.getBoundingClientRect(), position);
             } else {
                 node = node.parentElement as HTMLElement;
