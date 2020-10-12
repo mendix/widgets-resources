@@ -45,7 +45,7 @@ export function check(values: TimelinePreviewProps): Problem[] {
             errors.push({
                 property: "title",
                 severity: "error",
-                message: "Title is required for 'Basic' timeline",
+                message: "A title is required for the Basic timeline. You can set it in properties.",
                 url: ""
             });
         }
