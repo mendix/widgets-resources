@@ -163,6 +163,9 @@ export interface VariablesInput {
         paddingVertical: number;
         paddingHorizontal: number;
     };
+    inputContainer: {
+        underlayColor: string;
+    };
     inputDisabled: {
         color: string;
         borderColor: string;

@@ -1,7 +1,6 @@
 import { font, input } from "../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DropDownType } from "../../types/widgets";
-import { contrast } from "../../app/custom-variables";
 /*
 
 DISCLAIMER:
@@ -97,7 +96,7 @@ export const DropDown: DropDownType = {
         paddingVertical: input.itemContainer.paddingVertical,
         paddingHorizontal: input.itemContainer.paddingHorizontal,
         backgroundColor: input.itemContainer.backgroundColor,
-        underlayColor: contrast.low,
+        underlayColor: input.inputContainer.underlayColor,
         overflow: "hidden"
     },
     item: {

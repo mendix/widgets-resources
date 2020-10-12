@@ -221,6 +221,9 @@ let input: VariablesInput = {
         paddingVertical: spacing.small,
         paddingHorizontal: spacing.small
     },
+    inputContainer: {
+        underlayColor: `rgba(${anyColorToRgbString(contrast.low)},0.4)`
+    },
     inputDisabled: {
         color: font.colorDisabled,
         borderColor: border.color,
