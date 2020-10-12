@@ -40,9 +40,7 @@ export const DropDown: DropDownType = {
         fontFamily: font.family,
 
         overflow: "hidden",
-        textAlignVertical: "center",
-        minWidth: input.input.minWidth,
-        minHeight: input.input.minHeight
+        textAlignVertical: "center"
     },
     valueDisabled: {
         // All TextStyle properties are allowed
@@ -69,7 +67,9 @@ export const DropDown: DropDownType = {
         paddingHorizontal: input.input.paddingHorizontal,
         paddingVertical: input.input.paddingVertical,
         backgroundColor: input.input.backgroundColor,
-        borderColor: input.input.borderColor
+        borderColor: input.input.borderColor,
+        minWidth: input.input.minWidth,
+        minHeight: input.input.minHeight
     },
     valueContainerDisabled: {
         // All ViewStyle properties are allowed
