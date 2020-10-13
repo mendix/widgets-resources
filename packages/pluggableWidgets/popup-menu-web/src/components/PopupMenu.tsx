@@ -120,9 +120,9 @@ function correctPosition(element: HTMLElement, position: PositionEnum): void {
 
     boundingRect = element.getBoundingClientRect();
     const blockingElement = isBehindRandomElement(dynamicDocument, element, boundingRect, 3, "popupmenu");
-    if (!!blockingElement && isElementVisibleByUser(dynamicDocument, dynamicWindow, blockingElement)) {
+    if (blockingElement && isElementVisibleByUser(dynamicDocument, dynamicWindow, blockingElement)) {
         unBlockAbsoluteElement(element, boundingRect, blockingElement.getBoundingClientRect(), position);
-    } else if (!!blockingElement) {
+    } else if (blockingElement) {
         let node = blockingElement;
         do {
             if (isBehindElement(element, node, 3) && isElementVisibleByUser(dynamicDocument, dynamicWindow, node)) {
