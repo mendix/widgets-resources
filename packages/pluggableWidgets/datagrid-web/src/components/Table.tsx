@@ -18,6 +18,7 @@ import {
     useTable
 } from "react-table";
 import { ColumnsPreviewType, ColumnsType, FilterMethodEnum } from "../../typings/DatagridProps";
+import classNames from "classnames";
 
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
 
@@ -40,7 +41,11 @@ export interface TableProps<T> {
     setPage?: (computePage: (prevPage: number) => number) => void;
     styles?: CSSProperties;
     hasMoreItems: boolean;
-    cellRenderer: (renderWrapper: (children: ReactNode) => ReactElement, value: T, columnIndex: number) => ReactElement;
+    cellRenderer: (
+        renderWrapper: (children: ReactNode, className?: string) => ReactElement,
+        value: T,
+        columnIndex: number
+    ) => ReactElement;
     valueForFilter: (value: T, columnIndex: number) => string | undefined;
     valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
@@ -130,11 +135,13 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 },
                 Cell: ({ cell, value }) =>
                     props.cellRenderer(
-                        (children: ReactNode) => (
-                            <div {...cell.getCellProps()} className="td">
-                                {children}
-                            </div>
-                        ),
+                        (children, className) => {
+                            return (
+                                <div {...cell.getCellProps()} className={classNames("td", className)}>
+                                    {children}
+                                </div>
+                            );
+                        },
                         value,
                         index
                     ),
