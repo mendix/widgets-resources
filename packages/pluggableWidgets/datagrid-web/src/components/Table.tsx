@@ -65,7 +65,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [filters, setFilters] = useState<Filters<object>>([]);
     const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
-        props.columns.map((_c, index) => ({ [index.toString()]: undefined })).reduce((p, c) => ({ ...p, ...c }), {})
+        Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
     );
 
     const filterTypes = useMemo(
