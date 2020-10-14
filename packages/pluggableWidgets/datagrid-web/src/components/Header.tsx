@@ -12,6 +12,7 @@ import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } fr
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
+import { ColumnResizer } from "./ColumnResizer";
 
 export interface HeaderProps<D extends object> {
     column: HeaderGroup<D>;
@@ -22,6 +23,7 @@ export interface HeaderProps<D extends object> {
     dragOver: string;
     visibleColumns: Array<ColumnInstance<D>>;
     setColumnOrder: (updater: Array<IdType<D>>) => void;
+    setColumnWidth: (width: number) => void;
     setDragOver: Dispatch<SetStateAction<string>>;
     setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>;
 }
@@ -93,13 +95,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     props.column.canFilter &&
                     (props.column.customFilter ? props.column.customFilter : props.column.render("Filter"))}
             </div>
-            {/* TODO: Fix resizing considering flex fractions */}
-            {/* {props.resizable && props.column.canResize && ( */}
-            {/*    <div*/}
-            {/*        {...props.column.getResizerProps()}*/}
-            {/*        className={`column-resizer ${props.column.isResizing ? "isResizing" : ""}`}*/}
-            {/*    />*/}
-            {/* )} */}
+            {props.resizable && props.column.canResize && <ColumnResizer setColumnWidth={props.setColumnWidth} />}
         </div>
     );
 }

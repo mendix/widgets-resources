@@ -15,46 +15,48 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
     const visibleColumns = props.allColumns.filter(column => column.isVisible).length;
     return (
         <div className="th column-selector">
-            <button
-                className="btn btn-default column-selector-button"
-                onClick={() => {
-                    setShow(show => !show);
-                }}
-            >
-                <FontAwesomeIcon icon={faEye} />
-            </button>
-            {show && (
-                <ul className="column-selectors" ref={listRef}>
-                    {props.allColumns.map((column, index) => {
-                        return column.canHide ? (
-                            <li key={index}>
-                                <input
-                                    id={`checkbox_toggle_${index}`}
-                                    type="checkbox"
-                                    checked={column.isVisible}
-                                    onClick={() => {
-                                        props.setHiddenColumns(prev => {
-                                            if (!column.isVisible) {
-                                                prev.splice(
-                                                    prev.findIndex(v => v === column.id),
-                                                    1
-                                                );
-                                                return [...prev];
-                                            } else {
-                                                return [...prev, column.id];
-                                            }
-                                        });
-                                        column.toggleHidden();
-                                    }}
-                                    disabled={column.isVisible && visibleColumns === 1}
-                                    {...column.getToggleHiddenProps()}
-                                />
-                                <label htmlFor={`checkbox_toggle_${index}`}>{column.render("Header")}</label>
-                            </li>
-                        ) : null;
-                    })}
-                </ul>
-            )}
+            <div className="column-selector-content">
+                <button
+                    className="btn btn-default column-selector-button"
+                    onClick={() => {
+                        setShow(show => !show);
+                    }}
+                >
+                    <FontAwesomeIcon icon={faEye} />
+                </button>
+                {show && (
+                    <ul className="column-selectors" ref={listRef}>
+                        {props.allColumns.map((column, index) => {
+                            return column.canHide ? (
+                                <li key={index}>
+                                    <input
+                                        id={`checkbox_toggle_${index}`}
+                                        type="checkbox"
+                                        checked={column.isVisible}
+                                        onClick={() => {
+                                            props.setHiddenColumns(prev => {
+                                                if (!column.isVisible) {
+                                                    prev.splice(
+                                                        prev.findIndex(v => v === column.id),
+                                                        1
+                                                    );
+                                                    return [...prev];
+                                                } else {
+                                                    return [...prev, column.id];
+                                                }
+                                            });
+                                            column.toggleHidden();
+                                        }}
+                                        disabled={column.isVisible && visibleColumns === 1}
+                                        {...column.getToggleHiddenProps()}
+                                    />
+                                    <label htmlFor={`checkbox_toggle_${index}`}>{column.render("Header")}</label>
+                                </li>
+                            ) : null;
+                        })}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }
