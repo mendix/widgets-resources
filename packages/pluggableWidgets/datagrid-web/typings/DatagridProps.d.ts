@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
+import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 
 export type WidthEnum = "autoFill" | "autoFit" | "manual";
 
@@ -19,6 +19,7 @@ export interface ColumnsType {
     content?: ListWidgetValue;
     width: WidthEnum;
     size: number;
+    columnClass?: ListExpressionValue<string>;
     sortable: boolean;
     filterable: FilterableEnum;
     customFilter?: ReactNode;
@@ -38,6 +39,7 @@ export interface ColumnsPreviewType {
     content: { widgetCount: number; renderer: ComponentType };
     width: WidthEnum;
     size: number | null;
+    columnClass: string;
     sortable: boolean;
     filterable: FilterableEnum;
     customFilter: { widgetCount: number; renderer: ComponentType };
@@ -53,6 +55,7 @@ export interface DatagridContainerProps {
     tabIndex: number;
     datasource: ListValue;
     columns: ColumnsType[];
+    rowClass?: ListExpressionValue<string>;
     showHeader: boolean;
     headerWidgets?: ReactNode;
     showFooter: boolean;
@@ -73,6 +76,7 @@ export interface DatagridPreviewProps {
     style: string;
     datasource: {} | null;
     columns: ColumnsPreviewType[];
+    rowClass: string;
     showHeader: boolean;
     headerWidgets: { widgetCount: number; renderer: ComponentType };
     showFooter: boolean;

@@ -3,6 +3,7 @@ import { DatagridContainerProps } from "../typings/DatagridProps";
 
 import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
+import classNames from "classnames";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
@@ -63,10 +64,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                             column.content(value)
                         ) : (
                             <span className="td-text">{column.attribute(value).displayValue}</span>
-                        )
+                        ),
+                        classNames(props.rowClass?.(value)?.value, column.columnClass?.(value)?.value)
                     );
                 },
-                [props.columns]
+                [props.columns, props.rowClass]
             )}
             valueForFilter={useCallback(
                 (value, columnIndex) => {
