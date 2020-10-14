@@ -35,7 +35,7 @@
                     </attributeTypes>
                 </property>
                 <property key="orphanEventsPlacement" type="enumeration" defaultValue="end">
-                    <caption>Orphan events placement</caption>
+                    <caption>Unscheduled events placement</caption>
                     <description>Will be used to place events that has no date time</description>
                     <enumerationValues>
                         <enumerationValue key="beginning">Beginning of the timeline</enumerationValue>
