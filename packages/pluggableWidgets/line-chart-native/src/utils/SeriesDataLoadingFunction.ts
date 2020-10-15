@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Big } from "big.js";
 import { ObjectItem } from "mendix";
@@ -18,30 +19,38 @@ interface DataPointsExtraction {
     yFormatter?: (yValue: number | Date) => string;
 }
 
-export function loadSeries(series: SeriesType[]): LineChartSeries[] | null {
-    const loadedSeries: LineChartSeries[] = [];
+export function useSeries(series: SeriesType[]): LineChartSeries[] | null {
+    const [chartSeries, setChartSeries] = useState<LineChartSeries[] | null>(null);
 
-    for (const element of series) {
-        if (element.type === "static") {
-            const result = loadStaticSeries(element);
+    useEffect(() => {
+        const loadedSeries: LineChartSeries[] = [];
 
-            if (!result) {
-                return null;
+        for (const element of series) {
+            if (element.type === "static") {
+                const result = loadStaticSeries(element);
+
+                if (!result) {
+                    setChartSeries(null);
+                    return;
+                }
+
+                loadedSeries.push(result);
+            } else {
+                const result = loadDynamicSeries(element);
+
+                if (!result) {
+                    setChartSeries(null);
+                    return;
+                }
+
+                loadedSeries.push(...result);
             }
-
-            loadedSeries.push(result);
-        } else {
-            const result = loadDynamicSeries(element);
-
-            if (!result) {
-                return null;
-            }
-
-            loadedSeries.push(...result);
         }
-    }
 
-    return loadedSeries;
+        setChartSeries(loadedSeries);
+    }, [series]);
+
+    return chartSeries;
 }
 
 function loadStaticSeries(series: SeriesType): LineChartSeries | null {
