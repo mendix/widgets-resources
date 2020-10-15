@@ -3,7 +3,6 @@
     "baseUrl": "./",
     "include": ["./src/components/__tests__"],
     "compilerOptions": {
-        "types": ["jest"],
-        "lib": ["dom"]
+        "types": ["jest"]
     }
 }
