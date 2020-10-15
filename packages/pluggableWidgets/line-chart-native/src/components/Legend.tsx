@@ -18,27 +18,25 @@ export function Legend(props: LegendProps): ReactElement | null {
 
     const legendItems = useMemo(
         () =>
-            series.reduce<ReactElement[]>((result, series, index) => {
-                if (!(series.name && series.stylePropertyName && style.series)) {
-                    return result;
+            series.flatMap((series, index) => {
+                if (!series.name || !series.stylePropertyName || !style.series) {
+                    return [];
                 }
 
                 const seriesStyle = style.series[series.stylePropertyName];
                 const backgroundColor = seriesStyle?.line?.data?.stroke;
 
                 if (!(typeof backgroundColor === "string")) {
-                    return result;
+                    return [];
                 }
 
-                result.push(
+                return [
                     <View key={index} style={style.legend?.item}>
                         <View style={[{ backgroundColor }, style.legend?.indicator]} />
                         <Text style={style.legend?.label}>{series.name}</Text>
                     </View>
-                );
-
-                return result;
-            }, []),
+                ];
+            }),
         [series]
     );
 

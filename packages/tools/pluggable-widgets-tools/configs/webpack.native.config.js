@@ -24,12 +24,7 @@ const widgetConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader",
-                options: {
-                    compilerOptions: {
-                        target: "es2019"
-                    }
-                }
+                loader: "ts-loader"
             },
             {
                 test: /\.jsx?$/,
