@@ -1,6 +1,5 @@
 import { createElement, ReactElement, useState, useEffect } from "react";
 import { all } from "deepmerge";
-import { ValueStatus } from "mendix";
 
 import { LineChartProps } from "../typings/LineChartProps";
 import { LineChart as LineChartComponent, LineChartSeries } from "./components/LineChart";
@@ -20,8 +19,11 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
         setChartSeries(chartSeriesResult ? chartSeriesResult.reverse() : []);
     }, [series]);
 
-    return (xAxisLabel?.status === ValueStatus.Loading && !xAxisLabel.value) ||
-        (yAxisLabel?.status === ValueStatus.Loading && !yAxisLabel.value) ? null : (
+    if ((xAxisLabel && !xAxisLabel.value) || (yAxisLabel && !yAxisLabel.value)) {
+        return null;
+    }
+
+    return (
         <LineChartComponent
             series={chartSeries}
             style={styles}
