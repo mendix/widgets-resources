@@ -4,7 +4,7 @@ import { all } from "deepmerge";
 import { LineChartProps } from "../typings/LineChartProps";
 import { LineChart as LineChartComponent } from "./components/LineChart";
 import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
-import { useSeries } from "./utils/SeriesDataLoadingFunction";
+import { useSeries } from "./utils/SeriesLoaderHook";
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
     const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
