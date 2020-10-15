@@ -16,6 +16,8 @@ export interface LineChartProps {
 
 export interface LineChartSeries {
     dataPoints: LineChartDataPoints;
+    xFormatter?: (xValue: number | Date) => string;
+    yFormatter?: (yValue: number | Date) => string;
     interpolation: InterpolationPropType;
     name?: string;
     lineStyle: "line" | "lineWithMarkers" | "custom";
@@ -115,6 +117,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     }
                                     label={xAxisLabel}
                                     orientation={"bottom"}
+                                    {...(series[0].xFormatter ? { tickFormat: series[0].xFormatter } : undefined)}
                                 />
                                 <VictoryAxis
                                     dependentAxis
@@ -131,6 +134,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     }
                                     label={yAxisLabel}
                                     orientation={"left"}
+                                    {...(series[0].yFormatter ? { tickFormat: series[0].yFormatter } : undefined)}
                                 />
                                 {chartLines}
                             </VictoryChart>

@@ -12,6 +12,12 @@ interface DataSourceItemGroup {
     items: ObjectItem[];
 }
 
+interface DataPointsExtraction {
+    dataPoints: LineChartDataPoints;
+    xFormatter?: (xValue: number | Date) => string;
+    yFormatter?: (yValue: number | Date) => string;
+}
+
 export function loadSeries(series: SeriesType[]): LineChartSeries[] | null {
     const loadedSeries: LineChartSeries[] = [];
 
@@ -49,14 +55,16 @@ function loadStaticSeries(series: SeriesType): LineChartSeries | null {
         return null;
     }
 
-    const dataPoints = extractDataPoints(series);
+    const dataPointsExtraction = extractDataPoints(series);
 
-    if (!dataPoints) {
+    if (!dataPointsExtraction) {
         return null;
     }
 
     return {
-        dataPoints,
+        dataPoints: dataPointsExtraction.dataPoints,
+        xFormatter: dataPointsExtraction.xFormatter,
+        yFormatter: dataPointsExtraction.yFormatter,
         interpolation,
         lineStyle: staticLineStyle,
         name: staticSeriesName ? staticSeriesName.value : undefined,
@@ -80,14 +88,16 @@ function loadDynamicSeries(series: SeriesType): LineChartSeries[] | null {
     const loadedSeries: LineChartSeries[] = [];
 
     for (const itemGroup of dataSourceItemGroups) {
-        const dataPoints = extractDataPoints(series, itemGroup.items);
+        const dataPointsExtraction = extractDataPoints(series, itemGroup.items);
 
-        if (!dataPoints) {
+        if (!dataPointsExtraction) {
             return null;
         }
 
         loadedSeries.push({
-            dataPoints,
+            dataPoints: dataPointsExtraction.dataPoints,
+            xFormatter: dataPointsExtraction.xFormatter,
+            yFormatter: dataPointsExtraction.yFormatter,
             interpolation,
             lineStyle: dynamicLineStyle,
             name: itemGroup.dynamicSeriesNameValue,
@@ -168,7 +178,7 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
     return dataSourceItemGroupsResult;
 }
 
-function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): LineChartDataPoints | null {
+function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): DataPointsExtraction | null {
     const xValue = series.type === "static" ? ensure(series.staticXValue) : ensure(series.dynamicXValue);
     const yValue = series.type === "static" ? ensure(series.staticYValue) : ensure(series.dynamicYValue);
 
@@ -183,7 +193,7 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
         dataSourceItems = dataSource.items;
     }
 
-    const dataPoints: LineChartDataPoints = [];
+    const dataPointsExtraction: DataPointsExtraction = { dataPoints: [] };
 
     for (const item of dataSourceItems) {
         const x = xValue(item);
@@ -193,11 +203,19 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
             return null;
         }
 
-        dataPoints.push({
+        if (!dataPointsExtraction.xFormatter && !dataPointsExtraction.yFormatter) {
+            dataPointsExtraction.xFormatter = (xValue: number | Date) => {
+                return x.formatter.format(typeof xValue === "number" ? new Big(xValue) : xValue);
+            };
+            dataPointsExtraction.yFormatter = (yValue: number | Date) =>
+                y.formatter.format(typeof yValue === "number" ? new Big(yValue) : yValue);
+        }
+
+        dataPointsExtraction.dataPoints.push({
             x: x.value instanceof Date ? x.value : (Number(x.value.toFixed()) as any), // Cast as any because data type will never differ for data points within a series
             y: y.value instanceof Date ? y.value : (Number(y.value.toFixed()) as any) // Cast as any because data type will never differ for data points within a series
         });
     }
 
-    return dataPoints;
+    return dataPointsExtraction;
 }
