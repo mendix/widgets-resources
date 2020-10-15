@@ -212,8 +212,8 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
         }
 
         dataPointsExtraction.dataPoints.push({
-            x: x.value instanceof Date ? x.value : (Number(x.value.toFixed()) as any), // Cast as any because data type will never differ for data points within a series
-            y: y.value instanceof Date ? y.value : (Number(y.value.toFixed()) as any) // Cast as any because data type will never differ for data points within a series
+            x: x.value instanceof Date ? x.value : (Number(x.value.toString()) as any), // Cast as any because data type will never differ for data points within a series
+            y: y.value instanceof Date ? y.value : (Number(y.value.toString()) as any) // Cast as any because data type will never differ for data points within a series
         });
     }
 
