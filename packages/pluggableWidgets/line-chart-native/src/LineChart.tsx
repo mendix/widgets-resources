@@ -17,7 +17,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
     useEffect(() => {
         const chartSeriesResult = loadSeries(series);
         setChartSeries(chartSeriesResult ? chartSeriesResult.reverse() : []);
-    }, [series]);
+    }, [series, setChartSeries]);
 
     if ((xAxisLabel && !xAxisLabel.value) || (yAxisLabel && !yAxisLabel.value)) {
         return null;
