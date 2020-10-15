@@ -38,10 +38,6 @@ export interface LineChartDataPoint<X extends number | Date, Y extends number | 
 export function LineChart(props: LineChartProps): ReactElement | null {
     const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
-    if (series.length === 0) {
-        return null;
-    }
-
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
     const chartLines = useMemo(() => {
@@ -117,7 +113,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     }
                                     label={xAxisLabel}
                                     orientation={"bottom"}
-                                    {...(series[0].xFormatter ? { tickFormat: series[0].xFormatter } : undefined)}
+                                    {...(series[0]?.xFormatter ? { tickFormat: series[0].xFormatter } : undefined)}
                                 />
                                 <VictoryAxis
                                     dependentAxis
@@ -134,7 +130,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     }
                                     label={yAxisLabel}
                                     orientation={"left"}
-                                    {...(series[0].yFormatter ? { tickFormat: series[0].yFormatter } : undefined)}
+                                    {...(series[0]?.yFormatter ? { tickFormat: series[0].yFormatter } : undefined)}
                                 />
                                 {chartLines}
                             </VictoryChart>
