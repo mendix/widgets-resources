@@ -2,7 +2,7 @@ import { parseInlineStyle } from "../common";
 
 describe("parseInlineStyle", () => {
     it("parses without an inline style", () => {
-        expect(Object.keys(parseInlineStyle())).toHaveLength(0);
+        expect(Object.keys(parseInlineStyle()).length).toBe(0);
     });
 
     it("parses an inline style", () => {
@@ -14,7 +14,7 @@ describe("parseInlineStyle", () => {
 
         const result = parseInlineStyle(input);
         expect(result).toMatchObject(expectedResult);
-        expect(Object.keys(result)).toHaveLength(Object.keys(expectedResult).length);
+        expect(Object.keys(result).length).toBe(Object.keys(expectedResult).length);
     });
 
     it("parses an inline style without a semicolon", () => {
@@ -25,6 +25,6 @@ describe("parseInlineStyle", () => {
 
         const result = parseInlineStyle(input);
         expect(result).toMatchObject(expectedResult);
-        expect(Object.keys(result)).toHaveLength(Object.keys(expectedResult).length);
+        expect(Object.keys(result).length).toBe(Object.keys(expectedResult).length);
     });
 });

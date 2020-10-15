@@ -4,6 +4,7 @@
     "include": ["./src", "./typings"],
     "exclude": ["./dist/", "./node_modules/", "./src/**/__tests__"],
     "compilerOptions": {
-        "jsx": "react"
+        "jsx": "react",
+        "lib": ["dom"]
     }
 }
