@@ -60,7 +60,7 @@ function loadStaticSeries(series: SeriesType): LineChartSeries | null {
         throw Error("Expected series to be static");
     }
 
-    if (staticSeriesName && !staticSeriesName.value && typeof staticSeriesName.value !== "string") {
+    if (staticSeriesName && staticSeriesName.value === undefined) {
         return null;
     }
 
@@ -135,11 +135,7 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
     for (const item of dataSource.items) {
         const groupByAttributeValue = ensure(groupByAttribute)(item);
 
-        if (
-            !groupByAttributeValue.value &&
-            typeof groupByAttributeValue.value !== "string" &&
-            typeof groupByAttributeValue.value !== "boolean"
-        ) {
+        if (groupByAttributeValue.value === undefined) {
             return null;
         }
 
@@ -163,7 +159,7 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
             if (dynamicSeriesName) {
                 const dynamicSeriesNameValue = dynamicSeriesName(item);
 
-                if (!dynamicSeriesNameValue.value && typeof dynamicSeriesNameValue.value !== "string") {
+                if (dynamicSeriesNameValue.value === undefined) {
                     return null;
                 }
 
@@ -173,7 +169,7 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
             if (dynamicStylePropertyName) {
                 const dynamicStylePropertyNameValue = dynamicStylePropertyName(item);
 
-                if (!dynamicStylePropertyNameValue.value && typeof dynamicStylePropertyNameValue.value !== "string") {
+                if (dynamicStylePropertyNameValue.value === undefined) {
                     return null;
                 }
 
