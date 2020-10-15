@@ -6,12 +6,12 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="series" type="object" isList="true" required="true">
+                <property key="series" type="object" isList="true">
                     <caption>Series</caption>
                     <description />
                     <properties>
                         <propertyGroup caption="General">
-                            <property key="type" type="enumeration" defaultValue="static" required="true">
+                            <property key="type" type="enumeration" defaultValue="static">
                                 <caption>Type</caption>
                                 <description/>
                                 <enumerationValues>
@@ -93,7 +93,7 @@
                                     <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
-                            <property key="interpolation" type="enumeration" defaultValue="linear" required="true">
+                            <property key="interpolation" type="enumeration" defaultValue="linear">
                                 <caption>Interpolation</caption>
                                 <description />
                                 <enumerationValues>
@@ -104,7 +104,7 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
-                            <property key="staticLineStyle" type="enumeration" defaultValue="line" required="true">
+                            <property key="staticLineStyle" type="enumeration" defaultValue="line">
                                 <caption>Line style</caption>
                                 <description />
                                 <enumerationValues>
@@ -112,7 +112,7 @@
                                     <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="dynamicLineStyle" type="enumeration" defaultValue="line" required="true">
+                            <property key="dynamicLineStyle" type="enumeration" defaultValue="line">
                                 <caption>Line style</caption>
                                 <description>Custom allows to style individual series via styling</description>
                                 <enumerationValues>
