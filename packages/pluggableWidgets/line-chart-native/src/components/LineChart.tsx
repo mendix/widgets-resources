@@ -72,10 +72,13 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
-    const updateChartDimensions = useCallback((event: LayoutChangeEvent) => {
-        const { height, width } = event.nativeEvent.layout;
-        setChartDimensions({ height, width });
-    }, []);
+    const updateChartDimensions = useCallback(
+        (event: LayoutChangeEvent) => {
+            const { height, width } = event.nativeEvent.layout;
+            setChartDimensions({ height, width });
+        },
+        [setChartDimensions]
+    );
 
     return (
         <View style={style.container}>
