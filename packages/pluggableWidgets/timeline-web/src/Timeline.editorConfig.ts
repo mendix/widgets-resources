@@ -2,12 +2,12 @@ import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
-    if (values.renderMode === "custom") {
+    if (values.customVisualization) {
         hidePropertiesIn(defaultProperties, values, [
             "title",
             "description",
             "icon",
-            "time",
+            "timeIndication",
             "groupByDayOptions",
             "groupByMonthOptions"
         ]);
@@ -20,13 +20,13 @@ export function getProperties(values: TimelinePreviewProps, defaultProperties: P
             "customGroupHeader"
         ]);
     }
-    if (!values.showGroupHeader) {
+    if (!values.groupEvents) {
         hidePropertiesIn(defaultProperties, values, [
-            "eventTime",
+            "groupAttribute",
             "groupByKey",
             "groupByDayOptions",
             "groupByMonthOptions",
-            "orphanEventsPlacement",
+            "ungroupedEventsPosition",
             "customGroupHeader"
         ]);
     }
@@ -46,7 +46,7 @@ export function getProperties(values: TimelinePreviewProps, defaultProperties: P
 
 export function check(values: TimelinePreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (values.renderMode === "basic") {
+    if (!values.customVisualization) {
         if (!values.title) {
             errors.push({
                 property: "title",
@@ -55,11 +55,11 @@ export function check(values: TimelinePreviewProps): Problem[] {
                 url: ""
             });
         }
-        if (values.showGroupHeader && !values.eventTime) {
+        if (values.groupEvents && !values.groupAttribute) {
             errors.push({
                 property: "title",
                 severity: "error",
-                message: "An event time attribute is required when showGroupHeader set to true",
+                message: "A Group attribute is required when the Group Events option is enabled.",
                 url: ""
             });
         }

@@ -14,33 +14,31 @@ import {
     WebIcon
 } from "mendix";
 
-export type RenderModeEnum = "basic" | "custom";
-
-export type OrphanEventsPlacementEnum = "beginning" | "end";
-
 export type GroupByKeyEnum = "day" | "month" | "year";
 
 export type GroupByDayOptionsEnum = "dayName" | "dayMonth" | "fullDate";
 
 export type GroupByMonthOptionsEnum = "month" | "monthYear";
 
+export type UngroupedEventsPositionEnum = "beginning" | "end";
+
 export interface TimelineContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
-    renderMode: RenderModeEnum;
     data: ListValue;
-    showGroupHeader: boolean;
-    eventTime?: ListAttributeValue<Date>;
-    orphanEventsPlacement: OrphanEventsPlacementEnum;
+    title?: ListExpressionValue<string>;
+    description?: ListExpressionValue<string>;
+    timeIndication?: ListExpressionValue<string>;
+    customVisualization: boolean;
+    icon?: DynamicValue<WebIcon>;
+    groupEvents: boolean;
+    groupAttribute?: ListAttributeValue<Date>;
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
-    title?: ListExpressionValue<string>;
-    description?: ListExpressionValue<string>;
-    time?: ListExpressionValue<string>;
-    icon?: DynamicValue<WebIcon>;
+    ungroupedEventsPosition: UngroupedEventsPositionEnum;
     customIcon?: ListWidgetValue;
     customGroupHeader?: ListWidgetValue;
     customTitle?: ListWidgetValue;
@@ -52,18 +50,18 @@ export interface TimelineContainerProps {
 export interface TimelinePreviewProps {
     class: string;
     style: string;
-    renderMode: RenderModeEnum;
     data: {} | null;
-    showGroupHeader: boolean;
-    eventTime: string;
-    orphanEventsPlacement: OrphanEventsPlacementEnum;
+    title: string;
+    description: string;
+    timeIndication: string;
+    customVisualization: boolean;
+    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    groupEvents: boolean;
+    groupAttribute: string;
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
-    title: string;
-    description: string;
-    time: string;
-    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    ungroupedEventsPosition: UngroupedEventsPositionEnum;
     customIcon: { widgetCount: number; renderer: ComponentType };
     customGroupHeader: { widgetCount: number; renderer: ComponentType };
     customTitle: { widgetCount: number; renderer: ComponentType };

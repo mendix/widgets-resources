@@ -40,15 +40,15 @@ describe("Timeline", () => {
 
     const basicRenderProps: TimelineComponentProps = {
         data: basicData,
-        renderMode: "basic",
-        showGroupHeader: true,
-        orphanEventsPlacement: "end"
+        customVisualization: false,
+        groupEvents: true,
+        ungroupedEventsPosition: "end"
     };
     const customRenderProps: TimelineComponentProps = {
         data: customData,
-        renderMode: "custom",
-        showGroupHeader: true,
-        orphanEventsPlacement: "end"
+        customVisualization: true,
+        groupEvents: true,
+        ungroupedEventsPosition: "end"
     };
 
     it("renders timeline with basic configuration", () => {
@@ -60,7 +60,7 @@ describe("Timeline", () => {
         expect(component).toMatchSnapshot();
     });
     it("hides the timeline header", () => {
-        const component = shallow(<TimelineComponent {...basicRenderProps} showGroupHeader={false} />);
+        const component = shallow(<TimelineComponent {...basicRenderProps} groupEvents={false} />);
         expect(component).toMatchSnapshot();
     });
 
@@ -89,7 +89,7 @@ describe("Timeline", () => {
         const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
         getGroupHeaderByType(date.formatter, "dayMonth", new Date(1453, 4, 30));
 
-        expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "EE MMMM" });
+        expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "dd MMMM" });
     });
 
     it("calls correct formatter with month", () => {

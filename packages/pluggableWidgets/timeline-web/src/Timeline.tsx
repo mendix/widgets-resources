@@ -29,11 +29,11 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
 
         props.data.items?.forEach(item => {
             let constructedItem: ItemType;
-            const eventTime = props.eventTime?.(item);
-            const date = eventTime?.value;
+            const groupAttribute = props.groupAttribute?.(item);
+            const date = groupAttribute?.value;
             let groupKey;
 
-            if (props.renderMode === "basic") {
+            if (!props.customVisualization) {
                 const headerOption =
                     props.groupByKey === "day"
                         ? props.groupByDayOptions
@@ -41,16 +41,16 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                         ? props.groupByMonthOptions
                         : "year";
 
-                groupKey = getGroupHeaderByType(eventTime?.formatter, headerOption, date);
+                groupKey = getGroupHeaderByType(groupAttribute?.formatter, headerOption, date);
                 constructedItem = {
                     icon: props.icon?.value,
                     title: props.title?.(item)?.value,
-                    eventDateTime: props.time?.(item)?.value,
+                    eventDateTime: props.timeIndication?.(item)?.value,
                     description: props.description?.(item)?.value,
                     action: props.onClick?.(item)
                 };
             } else {
-                groupKey = getGroupHeaderByType(eventTime?.formatter, props.groupByKey, date);
+                groupKey = getGroupHeaderByType(groupAttribute?.formatter, props.groupByKey, date);
                 constructedItem = {
                     icon: props.customIcon?.(item),
                     groupHeader: props.customGroupHeader?.(item),
@@ -76,9 +76,9 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
         <TimelineComponent
             name={props.name}
             data={groupedEvents}
-            showGroupHeader={props.showGroupHeader}
-            renderMode={props.renderMode}
-            orphanEventsPlacement={props.orphanEventsPlacement}
+            groupEvents={props.groupEvents}
+            customVisualization={props.customVisualization}
+            ungroupedEventsPosition={props.ungroupedEventsPosition}
         />
     );
 }

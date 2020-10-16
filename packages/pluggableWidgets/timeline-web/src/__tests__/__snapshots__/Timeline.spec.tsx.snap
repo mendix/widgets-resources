@@ -2,29 +2,29 @@
 
 exports[`Timeline renders correctly with basic props 1`] = `
 <TimelineComponent
+  customVisualization={false}
   data={
     Map {
       "Formatted Sun May 29 1453 00:00:00 GMT+0019 (Central European Summer Time)" => Array [
         Object {
           "action": undefined,
-          "description": "Formatted description",
+          "description": "description",
           "eventDateTime": "time",
           "icon": undefined,
-          "title": "Formatted title",
+          "title": "title1",
         },
         Object {
           "action": undefined,
-          "description": "Formatted description",
+          "description": "description",
           "eventDateTime": "time",
           "icon": undefined,
-          "title": "Formatted title",
+          "title": "title1",
         },
       ],
     }
   }
+  groupEvents={true}
   name="timeline"
-  orphanEventsPlacement="end"
-  renderMode="basic"
-  showGroupHeader={true}
+  ungroupedEventsPosition="end"
 />
 `;

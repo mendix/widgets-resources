@@ -12,14 +12,14 @@ describe("Timeline", () => {
         name: "timeline",
         class: "test",
         tabIndex: 0,
-        renderMode: "basic",
+        customVisualization: false,
         groupByKey: "day",
         data: listValueBuilder.simple(),
-        eventTime: () => new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build(),
-        showGroupHeader: true,
-        title: () => new EditableValueBuilder<string>().withValue("title").build(),
-        description: () => new EditableValueBuilder<string>().withValue("description").build(),
-        time: () => dynamicValue<string>("time"),
+        groupAttribute: () => new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build(),
+        groupEvents: true,
+        title: () => dynamicValue<string>("title1"),
+        description: () => dynamicValue<string>("description"),
+        timeIndication: () => dynamicValue<string>("time"),
         customIcon: () => <img src={"test"} />,
         customGroupHeader: () => <p>Custom Divider</p>,
         customTitle: () => <p>Custom Title</p>,
@@ -27,7 +27,7 @@ describe("Timeline", () => {
         customDescription: () => <p>Custom Description</p>,
         groupByMonthOptions: "month",
         groupByDayOptions: "dayName",
-        orphanEventsPlacement: "end"
+        ungroupedEventsPosition: "end"
     };
     it("renders correctly with basic props", () => {
         const component = shallow(<Timeline {...defaultProps} />);

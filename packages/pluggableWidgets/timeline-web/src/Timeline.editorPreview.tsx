@@ -17,7 +17,7 @@ export function preview(props: TimelinePreviewProps) {
 
         Array.from({ length: 5 }).forEach(() => {
             let constructedItem: ItemType;
-            if (props.renderMode === "basic") {
+            if (!props.customVisualization) {
                 groupKey = getGroupHeaderByType(
                     props.groupByKey === "day"
                         ? props.groupByDayOptions
@@ -28,7 +28,8 @@ export function preview(props: TimelinePreviewProps) {
                 constructedItem = {
                     icon: props.icon,
                     title: props.title === String.fromCharCode(160) ? "Title" : props.title,
-                    eventDateTime: props.time === String.fromCharCode(160) ? "Optional Time" : props.time,
+                    eventDateTime:
+                        props.timeIndication === String.fromCharCode(160) ? "Optional Time" : props.timeIndication,
                     description:
                         props.description === String.fromCharCode(160) ? "Optional Description" : props.description
                 } as BasicItemType;
@@ -76,9 +77,9 @@ export function preview(props: TimelinePreviewProps) {
     return (
         <TimelineComponent
             data={structuredEvents()}
-            renderMode={props.renderMode}
-            showGroupHeader={props.showGroupHeader}
-            orphanEventsPlacement={props.orphanEventsPlacement}
+            customVisualization={props.customVisualization}
+            groupEvents={props.groupEvents}
+            ungroupedEventsPosition={props.ungroupedEventsPosition}
         />
     );
 }

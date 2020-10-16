@@ -2,8 +2,7 @@ import {
     GroupByDayOptionsEnum,
     GroupByKeyEnum,
     GroupByMonthOptionsEnum,
-    OrphanEventsPlacementEnum,
-    RenderModeEnum
+    UngroupedEventsPositionEnum
 } from "../../typings/TimelineProps";
 import { Children, createElement, ReactElement, ReactNode } from "react";
 import classNames from "classnames";
@@ -14,25 +13,25 @@ import { ActionValue } from "mendix";
 export interface TimelineComponentProps {
     name?: string;
     data: Map<string, ItemType[]>;
-    renderMode: RenderModeEnum;
-    showGroupHeader: boolean;
+    customVisualization: boolean;
+    groupEvents: boolean;
     onClick?: ActionValue;
-    orphanEventsPlacement: OrphanEventsPlacementEnum;
+    ungroupedEventsPosition: UngroupedEventsPositionEnum;
 }
 
 export default function TimelineComponent(props: TimelineComponentProps): ReactElement {
     return (
         <div className={classNames("widget-timeline-wrapper", props.name)}>
-            {getItems(props.data, props.renderMode, props.showGroupHeader, props.orphanEventsPlacement)}
+            {getItems(props.data, props.customVisualization, props.groupEvents, props.ungroupedEventsPosition)}
         </div>
     );
 }
 
 export function getItems(
     structuredEvents: Map<string, ItemType[]>,
-    renderMode: RenderModeEnum,
-    showGroupHeader: boolean,
-    orphanEventsPlacement: OrphanEventsPlacementEnum
+    customVisualization: boolean,
+    groupEvents: boolean,
+    orphanEventsPlacement: UngroupedEventsPositionEnum
 ): ReactNode[] {
     const days: ReactNode[] = [];
     const orphanDays: ReactNode[] = [];
@@ -40,7 +39,7 @@ export function getItems(
         let events;
         let groupHeader: ReactNode = <span>{groupKey}</span>;
 
-        if (renderMode === "basic") {
+        if (!customVisualization) {
             events = getBasicEventsFromDay(eventsOfDay as BasicItemType[]);
         } else {
             events = getCustomEventsFromDay(eventsOfDay as CustomItemType[]);
@@ -52,11 +51,11 @@ export function getItems(
 
         const constructedDiv = (
             <div className="timeline-date" key={groupKey}>
-                {showGroupHeader && groupKey && <div className="widget-timeline-date-header">{groupHeader}</div>}
+                {groupEvents && groupKey && <div className="widget-timeline-date-header">{groupHeader}</div>}
                 <div
                     className={classNames(
                         "widget-timeline-events-wrapper",
-                        !showGroupHeader || !groupKey ? "widget-timeline-no-divider" : undefined
+                        !groupEvents || !groupKey ? "widget-timeline-no-divider" : undefined
                     )}
                 >
                     <ul>{events}</ul>
@@ -142,7 +141,7 @@ export function getGroupHeaderByType(
             case "dayName":
                 return formatter.withConfig({ type: "custom", pattern: "EEEE" }).format(date);
             case "dayMonth":
-                return formatter.withConfig({ type: "custom", pattern: "EE MMMM" }).format(date);
+                return formatter.withConfig({ type: "custom", pattern: "dd MMMM" }).format(date);
             case "month":
                 return formatter.withConfig({ type: "custom", pattern: "MMMM" }).format(date);
             case "monthYear":
