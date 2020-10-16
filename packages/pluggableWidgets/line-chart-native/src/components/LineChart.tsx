@@ -70,8 +70,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         });
     }, [dataTypesResult, series, style]);
 
-    const xAxisFormatter = series[0]?.xFormatter;
-    const yAxisFormatter = series[0]?.yFormatter;
+    const [firstSeries] = series;
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
@@ -119,7 +118,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     }
                                     label={xAxisLabel}
                                     orientation={"bottom"}
-                                    {...(xAxisFormatter ? { tickFormat: xAxisFormatter } : undefined)}
+                                    {...(firstSeries?.xFormatter ? { tickFormat: firstSeries.xFormatter } : undefined)}
                                 />
                                 <VictoryAxis
                                     dependentAxis
@@ -136,7 +135,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     }
                                     label={yAxisLabel}
                                     orientation={"left"}
-                                    {...(yAxisFormatter ? { tickFormat: yAxisFormatter } : undefined)}
+                                    {...(firstSeries.yFormatter ? { tickFormat: firstSeries.yFormatter } : undefined)}
                                 />
                                 {chartLines}
                             </VictoryChart>
