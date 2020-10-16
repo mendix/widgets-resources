@@ -79,6 +79,7 @@ export const DropDown: DropDownType = {
     },
     iconStyle: {
         // All TextStyle properties are allowed
+        color: input.input.color
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
