@@ -1,6 +1,6 @@
 import { NativeModules, Platform } from "react-native";
 import adjustFont from "../core/helpers/_functions/adjustfont";
-import { setContrastScale } from "../core/helpers/_functions/convertcolors";
+import { anyColorToRgbString, setContrastScale } from "../core/helpers/_functions/convertcolors";
 import {
     VariablesBackground,
     VariablesBadge,
@@ -223,6 +223,9 @@ export const input: VariablesInput = {
         minHeight: 48,
         paddingVertical: spacing.small,
         paddingHorizontal: spacing.small
+    },
+    inputContainer: {
+        underlayColor: `rgba(${anyColorToRgbString(contrast.low)},0.4)`
     },
     inputDisabled: {
         color: font.colorDisabled,

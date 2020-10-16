@@ -57,7 +57,7 @@ export const DropDown: DropDownType = {
     },
     /*  New dropdown styles start */
     valueContainer: {
-        // All ViewStyle properties & rippleColor are allowed
+        // All ViewStyle properties & rippleColor & activeOpacity & underlayColor are allowed
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -91,11 +91,13 @@ export const DropDown: DropDownType = {
         backgroundColor: input.input.backgroundColor
     },
     itemContainer: {
-        // All ViewStyle properties are allowed
+        // All ViewStyle properties & rippleColor & activeOpacity & underlayColor are allowed
         maxWidth: input.itemContainer.maxWidth,
         paddingVertical: input.itemContainer.paddingVertical,
         paddingHorizontal: input.itemContainer.paddingHorizontal,
-        backgroundColor: input.itemContainer.backgroundColor
+        backgroundColor: input.itemContainer.backgroundColor,
+        underlayColor: input.inputContainer.underlayColor,
+        overflow: "hidden"
     },
     item: {
         // All TextStyle properties are allowed
