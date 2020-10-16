@@ -157,8 +157,9 @@ function getDataTypes(series: LineChartSeries[]): { x: string; y: string } | Err
         const { dataPoints } = element;
 
         if (dataPoints.length > 0) {
-            const xDataType = typeof dataPoints[0].x;
-            const yDataType = typeof dataPoints[0].y;
+            const { x, y } = dataPoints[0];
+            const xDataType = typeof x;
+            const yDataType = typeof y;
 
             if (!dataTypes) {
                 dataTypes = { x: xDataType, y: yDataType };
