@@ -27,9 +27,10 @@ export function preview(props: TimelinePreviewProps) {
                 );
                 constructedItem = {
                     icon: props.icon,
-                    title: props.title === "" ? "(Empty)" : props.title,
-                    eventDateTime: props.time,
-                    description: props.description
+                    title: props.title === String.fromCharCode(160) ? "Title" : props.title,
+                    eventDateTime: props.time === String.fromCharCode(160) ? "Optional Time" : props.time,
+                    description:
+                        props.description === String.fromCharCode(160) ? "Optional Description" : props.description
                 } as BasicItemType;
             } else {
                 groupKey = props.groupByKey;

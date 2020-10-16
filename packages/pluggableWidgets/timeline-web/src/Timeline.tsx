@@ -44,9 +44,9 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                 groupKey = getGroupHeaderByType(eventTime?.formatter, headerOption, date);
                 constructedItem = {
                     icon: props.icon?.value,
-                    title: props.title?.(item)?.displayValue,
+                    title: props.title?.(item)?.value,
                     eventDateTime: props.time?.(item)?.value,
-                    description: props.description?.(item)?.displayValue,
+                    description: props.description?.(item)?.value,
                     action: props.onClick?.(item)
                 };
             } else {

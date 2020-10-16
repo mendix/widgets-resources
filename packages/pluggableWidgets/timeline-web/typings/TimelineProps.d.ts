@@ -37,8 +37,8 @@ export interface TimelineContainerProps {
     groupByKey: GroupByKeyEnum;
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
-    title?: ListAttributeValue<string>;
-    description?: ListAttributeValue<string>;
+    title?: ListExpressionValue<string>;
+    description?: ListExpressionValue<string>;
     time?: ListExpressionValue<string>;
     icon?: DynamicValue<WebIcon>;
     customIcon?: ListWidgetValue;
