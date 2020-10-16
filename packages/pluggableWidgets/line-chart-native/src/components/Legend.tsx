@@ -18,16 +18,16 @@ export function Legend(props: LegendProps): ReactElement | null {
 
     const legendItems = useMemo(
         () =>
-            series.flatMap((series, index) => {
+            series.map((series, index) => {
                 if (!series.name || !series.stylePropertyName || !style.series) {
-                    return [];
+                    return null;
                 }
 
                 const seriesStyle = style.series[series.stylePropertyName];
                 const backgroundColor = seriesStyle?.line?.data?.stroke;
 
                 if (!(typeof backgroundColor === "string")) {
-                    return [];
+                    return null;
                 }
 
                 return [
