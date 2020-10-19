@@ -184,8 +184,8 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
 }
 
 function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): DataPointsExtraction | null {
-    const xValue = series.type === "static" ? ensure(series.staticXValue) : ensure(series.dynamicXValue);
-    const yValue = series.type === "static" ? ensure(series.staticYValue) : ensure(series.dynamicYValue);
+    const xValue = series.type === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
+    const yValue = series.type === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
 
     if (!dataSourceItems) {
         const dataSource =
