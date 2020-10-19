@@ -5,7 +5,7 @@ import { HidableEnum } from "../../../typings/DatagridProps";
 import { renderHook } from "@testing-library/react-hooks";
 
 describe("useSettings Hook", () => {
-    it("should load correct values into hooks", () => {
+    it("loads correct values into hooks", () => {
         const props = mockProperties();
 
         renderHook(() =>
@@ -31,7 +31,7 @@ describe("useSettings Hook", () => {
         expect(props.setWidths).toHaveBeenCalledTimes(1);
     });
 
-    it("should call state functions with correct values", () => {
+    it("calls state functions with correct values", () => {
         const props = mockProperties();
         const columns = [
             {
@@ -91,7 +91,7 @@ describe("useSettings Hook", () => {
         expect(props.setWidths).toHaveBeenCalledWith({ "0": undefined, "1": 120 });
     });
 
-    it("should change the settings when some property changes", () => {
+    it("changes the settings when some property changes", () => {
         const props = mockProperties();
 
         const { rerender } = renderHook(

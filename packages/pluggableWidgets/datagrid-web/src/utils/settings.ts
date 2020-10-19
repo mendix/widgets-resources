@@ -112,5 +112,5 @@ export function useSettings(
                 settings.setValue(newSettings);
             }
         }
-    }, [columnOrder, hiddenColumns, sortBy, filters, widths]);
+    }, [columnOrder, hiddenColumns, sortBy, filters, widths, settings]);
 }
