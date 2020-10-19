@@ -15,7 +15,7 @@ interface NativeBottomSheetProps {
 }
 
 export const NativeBottomSheet = (props: NativeBottomSheetProps): ReactElement => {
-    const bottomSheetRef = useRef<ActionSheet>(null);
+    const bottomSheetRef = useRef<ActionSheet & ActionSheetCustom>(null);
     const [currentStatus, setCurrentStatus] = useState<boolean>(false);
 
     useEffect(() => {
