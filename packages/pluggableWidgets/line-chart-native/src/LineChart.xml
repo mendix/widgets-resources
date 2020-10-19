@@ -49,8 +49,8 @@
                                 <caption>Series name</caption>
                                 <description />
                             </property>
-                            <property key="staticXValue" type="attribute" required="false" dataSource="staticDataSource">
-                                <caption>X value</caption>
+                            <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>X attribute</caption>
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="DateTime" />
@@ -60,8 +60,8 @@
                                     <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
-                            <property key="dynamicXValue" type="attribute" required="false" dataSource="dynamicDataSource">
-                                <caption>X value</caption>
+                            <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>X attribute</caption>
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="DateTime" />
@@ -71,8 +71,8 @@
                                     <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
-                            <property key="staticYValue" type="attribute" required="false" dataSource="staticDataSource">
-                                <caption>Y value</caption>
+                            <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>Y attribute</caption>
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="DateTime" />
@@ -82,8 +82,8 @@
                                     <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
-                            <property key="dynamicYValue" type="attribute" required="false" dataSource="dynamicDataSource">
-                                <caption>Y value</caption>
+                            <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Y attribute</caption>
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="DateTime" />

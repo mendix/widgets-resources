@@ -8,15 +8,15 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicDataSource");
             hidePropertyIn(defaultProperties, values, "series", index, "groupByAttribute");
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicSeriesName");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicXValue");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicYValue");
+            hidePropertyIn(defaultProperties, values, "series", index, "dynamicXAttribute");
+            hidePropertyIn(defaultProperties, values, "series", index, "dynamicYAttribute");
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicLineStyle");
             hidePropertyIn(defaultProperties, values, "series", index, "dynamicStylePropertyName");
         } else {
             hidePropertyIn(defaultProperties, values, "series", index, "staticDataSource");
             hidePropertyIn(defaultProperties, values, "series", index, "staticSeriesName");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticXValue");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticYValue");
+            hidePropertyIn(defaultProperties, values, "series", index, "staticXAttribute");
+            hidePropertyIn(defaultProperties, values, "series", index, "staticYAttribute");
             hidePropertyIn(defaultProperties, values, "series", index, "staticLineStyle");
             hidePropertyIn(defaultProperties, values, "series", index, "staticStylePropertyName");
         }
@@ -36,7 +36,8 @@ export function check(values: LineChartPreviewProps): Problem[] {
 
     values.series.forEach((series, index) => {
         if (series.type === "static") {
-            if (!series.staticDataSource) {
+            // @ts-ignore
+            if (series.staticDataSource.type === "null") {
                 errors.push({
                     property: "staticDataSource",
                     severity: "error",
@@ -44,23 +45,24 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.staticXValue) {
+            if (!series.staticXAttribute) {
                 errors.push({
-                    property: "staticXValue",
+                    property: "staticXAttribute",
                     severity: "error",
                     message: `No X attribute configured for static series located at position ${index + 1}.`
                 });
             }
 
-            if (!series.staticYValue) {
+            if (!series.staticYAttribute) {
                 errors.push({
-                    property: "staticYValue",
+                    property: "staticYAttribute",
                     severity: "error",
                     message: `No Y attribute configured for static series located at position ${index + 1}.`
                 });
             }
         } else {
-            if (!series.dynamicDataSource) {
+            // @ts-ignore
+            if (series.dynamicDataSource.type === "null") {
                 errors.push({
                     property: "dynamicDataSource",
                     severity: "error",
@@ -68,17 +70,17 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.dynamicXValue) {
+            if (!series.dynamicXAttribute) {
                 errors.push({
-                    property: "dynamicXValue",
+                    property: "dynamicXAttribute",
                     severity: "error",
                     message: `No X attribute configured for dynamic series located at position ${index + 1}.`
                 });
             }
 
-            if (!series.dynamicYValue) {
+            if (!series.dynamicYAttribute) {
                 errors.push({
-                    property: "dynamicYValue",
+                    property: "dynamicYAttribute",
                     severity: "error",
                     message: `No Y attribute configured for dynamic series located at position ${index + 1}.`
                 });
@@ -98,5 +100,3 @@ export function check(values: LineChartPreviewProps): Problem[] {
 
     return errors;
 }
-
-// TODO: Add consistency checks
