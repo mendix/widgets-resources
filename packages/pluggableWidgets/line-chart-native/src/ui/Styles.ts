@@ -1,6 +1,6 @@
 import { TextStyle, ViewStyle } from "react-native";
 import { VictoryChartProps } from "victory-chart";
-import { VictoryAxisCommonProps, VictoryCommonProps, VictoryLabelProps } from "victory-core";
+import { VictoryAxisCommonProps, VictoryCommonProps } from "victory-core";
 import { VictoryLineProps } from "victory-line";
 import { VictoryScatterProps } from "victory-scatter";
 
@@ -24,10 +24,10 @@ export interface LineChartStyle {
     legend?: LineChartLegendStyle;
     chart?: VictoryChartProps["style"] & { padding?: VictoryCommonProps["padding"] };
     xAxis?: VictoryAxisCommonProps["style"] & {
-        axisLabel?: { horizontalOffset?: VictoryLabelProps["dx"]; verticalOffset?: VictoryLabelProps["dy"] };
+        axisLabel?: TextStyle;
     };
     yAxis?: VictoryAxisCommonProps["style"] & {
-        axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"]; verticalOffset?: VictoryLabelProps["dx"] };
+        axisLabel?: TextStyle;
     };
     series?: { [key: string]: LineChartSeriesStyle };
 }
@@ -60,9 +60,9 @@ export const defaultLineChartStyle: LineChartStyle = {
         padding: { left: 75, top: 25, bottom: 50, right: 25 }
     },
     xAxis: {
-        axisLabel: { verticalOffset: 10 }
+        // axisLabel: { verticalOffset: 10 }
     },
     yAxis: {
-        axisLabel: { horizontalOffset: -10 }
+        // axisLabel: { horizontalOffset: -10 }
     }
 };
