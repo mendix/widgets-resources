@@ -67,11 +67,14 @@ export class Slider extends Component<Props, State> {
     }
 
     private onSlide(values: number[]): void {
+        if (values[0] === null) {
+            return;
+        }
         this.props.valueAttribute.setValue(new Big(values[0]));
     }
 
     private onChange(values: number[]): void {
-        if (this.lastValue != null && this.lastValue === values[0]) {
+        if (values[0] === null || (this.lastValue != null && this.lastValue === values[0])) {
             return;
         }
 
