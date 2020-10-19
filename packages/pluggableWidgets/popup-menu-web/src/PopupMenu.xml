@@ -34,7 +34,7 @@
                                 <enumerationValue key="divider">Divider</enumerationValue>
                             </enumerationValues>
                         </property>
-                        <property key="caption" type="string" required="false">
+                        <property key="caption" type="textTemplate" required="false">
                             <caption>Caption</caption>
                             <category>General</category>
                             <description/>
