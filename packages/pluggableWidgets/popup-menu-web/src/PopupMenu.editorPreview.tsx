@@ -1,5 +1,6 @@
 import { parseStyle } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
+import { dynamicValue } from "../../../tools/util-widgets/dist";
 import { PopupMenu as PopupMenuComponent } from "./components/PopupMenu";
 
 import { BasicItemsType, CustomItemsType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
@@ -17,7 +18,7 @@ export function preview(props: PopupMenuPreviewProps) {
         props.basicItems.forEach(item => {
             basicItems.push({
                 itemType: item.itemType,
-                caption: item.caption,
+                caption: dynamicValue(item.caption),
                 action: undefined,
                 styleClass: item.styleClass
             });

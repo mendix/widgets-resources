@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue } from "mendix";
+import { ActionValue, DynamicValue } from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
 
@@ -14,7 +14,7 @@ export type StyleClassEnum = "defaultStyle" | "primaryStyle" | "dangerStyle" | "
 
 export interface BasicItemsType {
     itemType: ItemTypeEnum;
-    caption: string;
+    caption?: DynamicValue<string>;
     action?: ActionValue;
     styleClass: StyleClassEnum;
 }

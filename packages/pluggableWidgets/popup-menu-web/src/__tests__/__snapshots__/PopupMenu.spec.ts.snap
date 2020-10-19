@@ -20,7 +20,7 @@ exports[`Popup menu renders popup menu 1`] = `
       key="0"
       onClick={[Function]}
     >
-      Caption
+      <Component />
     </div>
     <div
       className="popupmenu-basic-divider"

@@ -95,7 +95,7 @@ function createMenuOptions(
                         className={classNames("popupmenu-basic-item", pickedStyle)}
                         onClick={() => handleOnClickItem(item.action)}
                     >
-                        {item.caption}
+                        {item.caption?.value ?? ""}
                     </div>
                 );
             }
