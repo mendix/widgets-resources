@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useMemo, useCallback, useState, Fragment } from "react";
 import { View, LayoutChangeEvent, Text } from "react-native";
 import { InterpolationPropType } from "victory-core";
-import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
 
 import { LineChartStyle } from "../ui/Styles";
 import { Legend } from "./Legend";
@@ -106,34 +106,12 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                             >
                                 <VictoryAxis
                                     style={style.xAxis}
-                                    axisLabelComponent={
-                                        xAxisLabel ? (
-                                            <VictoryLabel
-                                                dx={style.xAxis?.axisLabel?.horizontalOffset}
-                                                dy={style.xAxis?.axisLabel?.verticalOffset}
-                                            />
-                                        ) : (
-                                            undefined
-                                        )
-                                    }
-                                    label={xAxisLabel}
                                     orientation={"bottom"}
                                     {...(firstSeries?.xFormatter ? { tickFormat: firstSeries.xFormatter } : undefined)}
                                 />
                                 <VictoryAxis
                                     dependentAxis
                                     style={style.yAxis}
-                                    axisLabelComponent={
-                                        yAxisLabel ? (
-                                            <VictoryLabel
-                                                dx={style.yAxis?.axisLabel?.verticalOffset}
-                                                dy={style.yAxis?.axisLabel?.horizontalOffset}
-                                            />
-                                        ) : (
-                                            undefined
-                                        )
-                                    }
-                                    label={yAxisLabel}
                                     orientation={"left"}
                                     {...(firstSeries.yFormatter ? { tickFormat: firstSeries.yFormatter } : undefined)}
                                 />
@@ -142,6 +120,8 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                         ) : null}
                     </View>
 
+                    {xAxisLabel ? <Text>{xAxisLabel}</Text> : null}
+                    {yAxisLabel ? <Text>{yAxisLabel}</Text> : null}
                     {showLegend ? <Legend style={style} series={series} /> : null}
                 </Fragment>
             )}
