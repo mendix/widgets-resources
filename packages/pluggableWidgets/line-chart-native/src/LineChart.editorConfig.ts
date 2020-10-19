@@ -27,13 +27,6 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
 export function check(values: LineChartPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    // property?: string; // key of the property, at which the problem exists
-    // severity?: "error" | "warning" | "deprecation"; // default = "error"
-    // message: string; // description of the problem
-    // studioMessage?: string; // studio-specific message, defaults to message
-    // url?: string; // link with more information about the problem
-    // studioUrl?: string; // studio-specific link
-
     values.series.forEach((series, index) => {
         if (series.type === "static") {
             // @ts-ignore
@@ -95,8 +88,6 @@ export function check(values: LineChartPreviewProps): Problem[] {
             }
         }
     });
-
-    // check inter series datatypes
 
     return errors;
 }
