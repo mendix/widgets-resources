@@ -85,20 +85,37 @@ export function preview(props: TimelinePreviewProps) {
 }
 
 function getGroupHeaderByType(option: GroupByDayOptionsEnum | GroupByMonthOptionsEnum | GroupByKeyEnum) {
+    const currentDate = new Date();
     switch (option) {
         case "fullDate":
         case "day":
-            return "9/23/2020, 12:00 AM";
+            return new Intl.DateTimeFormat("en-GB", {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric"
+            }).format(currentDate);
         case "dayName":
-            return "Thursday";
+            return new Intl.DateTimeFormat("en-GB", {
+                weekday: "long"
+            }).format(currentDate);
         case "dayMonth":
-            return "09 October";
+            return new Intl.DateTimeFormat("en-GB", {
+                month: "long",
+                day: "numeric"
+            }).format(currentDate);
         case "month":
-            return "October";
+            return new Intl.DateTimeFormat("en-GB", {
+                month: "long"
+            }).format(currentDate);
         case "monthYear":
-            return "Oct 2020";
+            return new Intl.DateTimeFormat("en-GB", {
+                year: "numeric",
+                month: "short"
+            }).format(currentDate);
         default:
-            return "2020";
+            return new Intl.DateTimeFormat("en-GB", {
+                year: "numeric"
+            }).format(currentDate);
     }
 }
 

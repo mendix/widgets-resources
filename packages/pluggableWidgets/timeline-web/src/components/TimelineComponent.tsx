@@ -44,7 +44,7 @@ export function getItems(
         } else {
             events = getCustomEventsFromDay(eventsOfDay as CustomItemType[]);
             const firstEvent = eventsOfDay[0] as CustomItemType;
-            if ((eventsOfDay[0] as CustomItemType)?.groupHeader) {
+            if (firstEvent?.groupHeader) {
                 groupHeader = firstEvent.groupHeader;
             }
         }
