@@ -85,12 +85,19 @@ export class RangeSlider extends Component<Props, State> {
     }
 
     private onSlide(values: number[]): void {
+        if (values[0] === null || values[1] === null) {
+            return;
+        }
         this.props.lowerValueAttribute.setValue(new Big(values[0]));
         this.props.upperValueAttribute.setValue(new Big(values[1]));
     }
 
     private onChange(values: number[]): void {
-        if (this.lastLowerValue === values[0] && this.lastUpperValue === values[1]) {
+        if (
+            values[0] === null ||
+            values[1] === null ||
+            (this.lastLowerValue === values[0] && this.lastUpperValue === values[1])
+        ) {
             return;
         }
 
