@@ -55,7 +55,7 @@
                 </attributeTypes>
             </property>
             <property key="action" type="attribute" required="false">
-                <caption>Subtitle</caption>
+                <caption>Actions</caption>
                 <description>If the notification has actions, this attribute will get the name of all actions joined by spaces.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
