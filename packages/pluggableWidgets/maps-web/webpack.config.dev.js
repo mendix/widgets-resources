@@ -1,5 +1,5 @@
 const { merge } = require("webpack-merge");
-const baseConfig = require("../../../configs/webpack.dev.js");
+const baseConfig = require("@mendix/pluggable-widgets-tools/configs/webpack.config.dev");
 
 const customConfig = {
     output: {

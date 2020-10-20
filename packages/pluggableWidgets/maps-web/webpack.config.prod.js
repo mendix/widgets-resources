@@ -1,5 +1,5 @@
 const { merge } = require("webpack-merge");
-const baseConfig = require("../../../configs/webpack.prod.js");
+const baseConfig = require("@mendix/pluggable-widgets-tools/configs/webpack.config.prod");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const customConfig = {
