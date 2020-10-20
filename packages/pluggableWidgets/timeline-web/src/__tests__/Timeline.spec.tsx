@@ -15,7 +15,7 @@ describe("Timeline", () => {
         customVisualization: false,
         groupByKey: "day",
         data: listValueBuilder.simple(),
-        groupAttribute: () => new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build(),
+        groupAttribute: () => new EditableValueBuilder<Date>().withValue(new Date(Date.UTC(1453, 4, 29))).build(),
         groupEvents: true,
         title: () => dynamicValue<string>("title1"),
         description: () => dynamicValue<string>("description"),

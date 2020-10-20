@@ -8,6 +8,9 @@ jest.mock("mendix/components/web/Icon", () =>
     jest.requireActual("../../__tests__/__mocks__/mendix/components/web/Icon")
 );
 
+const firstDate = new Date(Date.UTC(1453, 4, 29));
+const secondDate = new Date(Date.UTC(1453, 4, 30));
+
 describe("Timeline", () => {
     const basicData = new Map<string, BasicItemType[]>();
     const customData = new Map<string, CustomItemType[]>();
@@ -35,8 +38,8 @@ describe("Timeline", () => {
         icon: <img src="customIcon" />
     };
 
-    basicData.set(new Date(1453, 4, 29).toDateString(), [basicItem, basicItemWithIcon]);
-    customData.set(new Date(1453, 4, 29).toDateString(), [customItem, customItemWithIcon]);
+    basicData.set(firstDate.toDateString(), [basicItem, basicItemWithIcon]);
+    customData.set(secondDate.toDateString(), [customItem, customItemWithIcon]);
 
     const basicRenderProps: TimelineComponentProps = {
         data: basicData,
@@ -65,50 +68,50 @@ describe("Timeline", () => {
     });
 
     it("calls correct formatter with fulldate", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "fullDate", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "fullDate", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "date" });
     });
 
     it("calls correct formatter with day", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "day", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "day", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "date" });
     });
 
     it("calls correct formatter with dayName", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "dayName", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "dayName", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "EEEE" });
     });
 
     it("calls correct formatter with dayMonth", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "dayMonth", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "dayMonth", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "dd MMMM" });
     });
 
     it("calls correct formatter with month", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "month", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "month", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "MMMM" });
     });
 
     it("calls correct formatter with monthYear", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "monthYear", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "monthYear", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "MMM YYYY" });
     });
 
     it("calls correct formatter with year", () => {
-        const date = new EditableValueBuilder<Date>().withValue(new Date(1453, 4, 29)).build();
-        getGroupHeaderByType(date.formatter, "year", new Date(1453, 4, 30));
+        const date = new EditableValueBuilder<Date>().withValue(firstDate).build();
+        getGroupHeaderByType(date.formatter, "year", secondDate);
 
         expect((date.formatter as any).withConfig).toBeCalledWith({ type: "custom", pattern: "YYYY" });
     });
@@ -121,7 +124,7 @@ describe("Timeline", () => {
                 icon: { type: "image", iconUrl: "iconUrl" },
                 action
             };
-            basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
+            basicData.set(secondDate.toDateString(), [basicItemWithAction]);
 
             const basicPropsWithAction = { ...basicRenderProps, data: basicData };
             const component = shallow(<TimelineComponent {...basicPropsWithAction} />);
@@ -138,7 +141,7 @@ describe("Timeline", () => {
                 icon: { type: "image", iconUrl: "iconUrl" },
                 action
             };
-            basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
+            basicData.set(secondDate.toDateString(), [basicItemWithAction]);
 
             const basicPropsWithAction = { ...basicRenderProps, data: basicData };
             const component = shallow(<TimelineComponent {...basicPropsWithAction} />);
@@ -155,7 +158,7 @@ describe("Timeline", () => {
                 icon: { type: "image", iconUrl: "iconUrl" },
                 action
             };
-            basicData.set(new Date(2000, 4, 30).toDateString(), [basicItemWithAction]);
+            basicData.set(secondDate.toDateString(), [basicItemWithAction]);
 
             const basicPropsWithAction = { ...basicRenderProps, data: basicData };
             const component = shallow(<TimelineComponent {...basicPropsWithAction} />);

@@ -219,7 +219,7 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
 >
   <div
     className="timeline-date"
-    key="Sun May 29 1453"
+    key="Mon May 30 1453"
   >
     <div
       className="widget-timeline-date-header"
@@ -415,13 +415,13 @@ exports[`Timeline with action set change style when hovered 1`] = `
   </div>
   <div
     className="timeline-date"
-    key="Tue May 30 2000"
+    key="Mon May 30 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Tue May 30 2000
+        Mon May 30 1453
       </span>
     </div>
     <div
@@ -588,13 +588,13 @@ exports[`Timeline with action set renders with clickable styles 1`] = `
   </div>
   <div
     className="timeline-date"
-    key="Tue May 30 2000"
+    key="Mon May 30 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Tue May 30 2000
+        Mon May 30 1453
       </span>
     </div>
     <div
