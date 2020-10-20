@@ -22,7 +22,7 @@ describe("timeline-web", () => {
             button.waitForDisplayed();
             button.click();
             const timeline = page.getElement(".timelineBasic");
-            const item = page.getElement(".widget-eventTime", timeline);
+            const item = page.getElement(".clickable", timeline);
             item.click();
             const dialog = page.modalDialog;
             dialog.waitForDisplayed();
