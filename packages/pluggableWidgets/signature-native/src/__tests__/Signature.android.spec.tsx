@@ -1,10 +1,10 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import { createElement, ReactElement } from "react";
 import { View } from "react-native";
 import SignatureScreen from "react-native-signature-canvas";
 import { fireEvent, render } from "react-native-testing-library";
 
 import { Signature, Props } from "../Signature";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 
 jest.mock("react-native/Libraries/Utilities/Platform", () => {
     const Platform = jest.requireActual("react-native/Libraries/Utilities/Platform");
