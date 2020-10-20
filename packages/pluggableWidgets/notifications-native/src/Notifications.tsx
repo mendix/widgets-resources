@@ -54,6 +54,9 @@ export class Notifications extends Component<NotificationsProps<undefined>> {
         getHandler: (action: ActionsType) => ActionValue | undefined
     ): void {
         const data: NotificationData = notification.data;
+        const body: string = notification.body;
+        const title: string = notification.title;
+        const subtitle: string = notification.subtitle ? notification.subtitle : "";
         const actions = this.props.actions.filter(item => item.name === data.actionName);
 
         if (actions.length === 0) {
@@ -62,6 +65,18 @@ export class Notifications extends Component<NotificationsProps<undefined>> {
 
         if (this.props.guid) {
             this.props.guid.setValue(data.guid);
+        }
+        if (this.props.title) {
+            this.props.title.setValue(title);
+        }
+        if (this.props.subtitle) {
+            this.props.subtitle.setValue(subtitle);
+        }
+        if (this.props.body) {
+            this.props.body.setValue(body);
+        }
+        if (this.props.action) {
+            this.props.action.setValue(actions.join(" "));
         }
 
         actions.forEach(action => {
