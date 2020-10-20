@@ -96,6 +96,12 @@ const previewConfig = {
                         ]
                     }
                 }
+            },
+            {
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                use: {
+                    loader: "url-loader"
+                }
             }
         ]
     },

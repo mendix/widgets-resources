@@ -7,21 +7,4 @@ const customConfig = {
     }
 };
 
-const customPreviewConfig = {
-    module: {
-        rules: [
-            {
-                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-                use: [{ loader: "url-loader", options: { limit: 100000 } }]
-            }
-        ]
-    }
-};
-
-const customConfigurations = [merge(baseConfig[0], customConfig), merge(baseConfig[1], customPreviewConfig)];
-
-if (baseConfig.length === 3) {
-    customConfigurations.push(baseConfig[2]);
-}
-
-module.exports = customConfigurations;
+module.exports = [merge(baseConfig[0], customConfig), ...baseConfig.slice(1)];
