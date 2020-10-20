@@ -1,26 +1,24 @@
 import { MarkerProps } from "@ptomasroos/react-native-multi-slider";
-import { Component, createElement } from "react";
+import { createElement, ReactElement } from "react";
 import { Platform, StyleSheet, TouchableHighlight, View } from "react-native";
 
-export class Marker extends Component<MarkerProps & { testID: string }> {
-    render(): JSX.Element {
-        return (
-            <TouchableHighlight testID={this.props.testID}>
-                <View
-                    style={
-                        this.props.enabled
-                            ? [
-                                  styles.markerStyle,
-                                  this.props.markerStyle,
-                                  this.props.pressed && styles.pressedMarkerStyle,
-                                  this.props.pressed && this.props.pressedMarkerStyle
-                              ]
-                            : [styles.markerStyle, styles.disabled, this.props.markerStyle]
-                    }
-                />
-            </TouchableHighlight>
-        );
-    }
+export function Marker(props: MarkerProps & { testID: string }): ReactElement {
+    return (
+        <TouchableHighlight testID={props.testID}>
+            <View
+                style={
+                    props.enabled
+                        ? [
+                              styles.markerStyle,
+                              props.markerStyle,
+                              props.pressed && styles.pressedMarkerStyle,
+                              props.pressed && props.pressedMarkerStyle
+                          ]
+                        : [styles.markerStyle, styles.disabled, props.markerStyle]
+                }
+            />
+        </TouchableHighlight>
+    );
 }
 
 const styles = StyleSheet.create({
