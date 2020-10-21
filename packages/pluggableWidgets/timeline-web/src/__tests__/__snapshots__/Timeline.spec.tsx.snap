@@ -5,7 +5,7 @@ exports[`Timeline renders correctly with basic props 1`] = `
   customVisualization={false}
   data={
     Map {
-      "Formatted Sun May 29 1453 00:19:32 GMT+0019 (Central European Summer Time)" => Array [
+      "" => Array [
         Object {
           "action": undefined,
           "description": "description",

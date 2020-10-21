@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { TimelineContainerProps } from "../../typings/TimelineProps";
-import { dynamicValue, EditableValueBuilder, ListValueBuilder } from "@widgets-resources/piw-utils";
+import { dynamicValue, ListValueBuilder } from "@widgets-resources/piw-utils";
 import Timeline from "../Timeline";
 
 jest.mock("mendix/components/web/Icon", () => jest.requireActual("./__mocks__/mendix/components/web/Icon"));
@@ -15,7 +15,6 @@ describe("Timeline", () => {
         customVisualization: false,
         groupByKey: "day",
         data: listValueBuilder.simple(),
-        groupAttribute: () => new EditableValueBuilder<Date>().withValue(new Date(Date.UTC(1453, 4, 29))).build(),
         groupEvents: true,
         title: () => dynamicValue<string>("title1"),
         description: () => dynamicValue<string>("description"),
