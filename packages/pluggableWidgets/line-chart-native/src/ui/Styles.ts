@@ -21,14 +21,16 @@ export interface LineChartSeriesStyle {
 
 export interface LineChartStyle {
     container?: ViewStyle;
+    chart?: ViewStyle;
+    gridLabelWrapper?: ViewStyle;
+    grid?: VictoryChartProps["style"] & {
+        padding?: VictoryCommonProps["padding"];
+        xAxis?: VictoryAxisCommonProps["style"];
+        yAxis?: VictoryAxisCommonProps["style"];
+    };
+    xAxisLabel?: TextStyle;
+    yAxisLabel?: TextStyle;
     legend?: LineChartLegendStyle;
-    chart?: VictoryChartProps["style"] & { padding?: VictoryCommonProps["padding"] };
-    xAxis?: VictoryAxisCommonProps["style"] & {
-        axisLabel?: TextStyle;
-    };
-    yAxis?: VictoryAxisCommonProps["style"] & {
-        axisLabel?: TextStyle;
-    };
     series?: { [key: string]: LineChartSeriesStyle };
 }
 
@@ -36,6 +38,14 @@ export const defaultLineChartStyle: LineChartStyle = {
     container: {
         flex: 1
     },
+    chart: {},
+    gridLabelWrapper: {
+        flexDirection: "row"
+    },
+    xAxisLabel: {
+        // alignSelf: "center"
+    },
+    yAxisLabel: {},
     legend: {
         container: {
             borderColor: "black",
@@ -56,13 +66,7 @@ export const defaultLineChartStyle: LineChartStyle = {
             width: 10
         }
     },
-    chart: {
+    grid: {
         padding: { left: 75, top: 25, bottom: 50, right: 25 }
-    },
-    xAxis: {
-        // axisLabel: { verticalOffset: 10 }
-    },
-    yAxis: {
-        // axisLabel: { horizontalOffset: -10 }
     }
 };

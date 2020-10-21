@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useMemo, useCallback, useState, Fragment } from "react";
+import { createElement, ReactElement, useMemo, useCallback, useState } from "react";
 import { View, LayoutChangeEvent, Text } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
@@ -87,43 +87,51 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             {dataTypesResult instanceof Error ? (
                 <Text>{dataTypesResult.message}</Text>
             ) : (
-                <Fragment>
-                    <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
-                        {chartDimensions ? (
-                            <VictoryChart
-                                height={chartDimensions?.height}
-                                width={chartDimensions?.width}
-                                padding={style.chart?.padding}
-                                scale={
-                                    dataTypesResult
-                                        ? {
-                                              x: dataTypesResult.x === "number" ? "linear" : "time",
-                                              y: dataTypesResult.y === "number" ? "linear" : "time"
-                                          }
-                                        : undefined
-                                }
-                                style={style.chart}
-                            >
-                                <VictoryAxis
-                                    style={style.xAxis}
-                                    orientation={"bottom"}
-                                    {...(firstSeries?.xFormatter ? { tickFormat: firstSeries.xFormatter } : undefined)}
-                                />
-                                <VictoryAxis
-                                    dependentAxis
-                                    style={style.yAxis}
-                                    orientation={"left"}
-                                    {...(firstSeries.yFormatter ? { tickFormat: firstSeries.yFormatter } : undefined)}
-                                />
-                                {chartLines}
-                            </VictoryChart>
-                        ) : null}
+                <View style={{ ...style.chart, flex: 1 }}>
+                    <View style={{ ...style.gridLabelWrapper, flex: 1 }}>
+                        {yAxisLabel ? <Text style={style.yAxisLabel}>{yAxisLabel}</Text> : null}
+
+                        <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
+                            {chartDimensions ? (
+                                <VictoryChart
+                                    height={chartDimensions?.height}
+                                    width={chartDimensions?.width}
+                                    padding={style.grid?.padding}
+                                    scale={
+                                        dataTypesResult
+                                            ? {
+                                                  x: dataTypesResult.x === "number" ? "linear" : "time",
+                                                  y: dataTypesResult.y === "number" ? "linear" : "time"
+                                              }
+                                            : undefined
+                                    }
+                                    style={style.grid}
+                                >
+                                    <VictoryAxis
+                                        style={style.grid?.xAxis}
+                                        orientation={"bottom"}
+                                        {...(firstSeries?.xFormatter
+                                            ? { tickFormat: firstSeries.xFormatter }
+                                            : undefined)}
+                                    />
+                                    <VictoryAxis
+                                        dependentAxis
+                                        style={style.grid?.yAxis}
+                                        orientation={"left"}
+                                        {...(firstSeries.yFormatter
+                                            ? { tickFormat: firstSeries.yFormatter }
+                                            : undefined)}
+                                    />
+                                    {chartLines}
+                                </VictoryChart>
+                            ) : null}
+                        </View>
+
+                        {xAxisLabel ? <Text style={style.xAxisLabel}>{xAxisLabel}</Text> : null}
                     </View>
 
-                    {xAxisLabel ? <Text>{xAxisLabel}</Text> : null}
-                    {yAxisLabel ? <Text>{yAxisLabel}</Text> : null}
                     {showLegend ? <Legend style={style} series={series} /> : null}
-                </Fragment>
+                </View>
             )}
         </View>
     );
