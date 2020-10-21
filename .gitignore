@@ -1,7 +1,6 @@
 .DS_Store
 .idea
 dist
-!**/dist/e2e/tests/screenshot-baseline
 node_modules
 .env
 *.log
