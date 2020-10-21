@@ -2,6 +2,9 @@
     "version": "independent",
     "packages": ["packages/*/*"],
     "command": {
+        "bootstrap": {
+            "npmClientArgs": ["--package-lock"]
+        },
         "version": {
             "ignoreChanges": ["*.md"],
             "message": "chore: release",
