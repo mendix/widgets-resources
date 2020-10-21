@@ -74,3 +74,7 @@
 	path = packages/customWidgets/slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = slider-web
+[submodule "packages/pluggableWidgets/popup-menu-web/tests/testProject"]
+	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = popupmenu-web
