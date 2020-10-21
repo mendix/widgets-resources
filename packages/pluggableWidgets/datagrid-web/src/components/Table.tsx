@@ -19,6 +19,8 @@ import {
 } from "react-table";
 import { ColumnsPreviewType, ColumnsType, FilterMethodEnum } from "../../typings/DatagridProps";
 import classNames from "classnames";
+import { EditableValue } from "mendix";
+import { useSettings } from "../utils/settings";
 
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
 
@@ -50,9 +52,10 @@ export interface TableProps<T> {
     valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
     filterMethod: FilterMethodEnum;
+    settings?: EditableValue<string>;
 }
 
-interface ColumnWidth {
+export interface ColumnWidth {
     [key: string]: number | undefined;
 }
 
@@ -71,6 +74,21 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [filters, setFilters] = useState<Filters<object>>([]);
     const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
+    );
+
+    useSettings(
+        props.settings,
+        props.columns,
+        columnOrder,
+        setColumnOrder,
+        hiddenColumns,
+        setHiddenColumns,
+        sortBy,
+        setSortBy,
+        filters,
+        setFilters,
+        columnsWidth,
+        setColumnsWidth
     );
 
     const filterTypes = useMemo(
@@ -177,6 +195,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 }
                                 return [...prev];
                             });
+                            setPaginationIndex(0);
                         }}
                     />
                 </div>
@@ -218,7 +237,18 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 filters
             },
             disableMultiSort: true,
-            autoResetSortBy: false
+            autoResetSortBy: false,
+            useControlledState: state =>
+                useMemo(
+                    () => ({
+                        ...state,
+                        columnOrder,
+                        hiddenColumns,
+                        sortBy,
+                        filters
+                    }),
+                    [state, columnOrder, hiddenColumns, sortBy, filters]
+                )
         },
         useFilters,
         useSortBy,

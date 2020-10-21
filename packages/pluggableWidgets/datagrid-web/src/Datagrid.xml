@@ -145,7 +145,7 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Capabilities">
+        <propertyGroup caption="Personalization">
             <propertyGroup caption="Capabilities">
                 <property key="columnsSortable" type="boolean" defaultValue="true">
                     <caption>Sorting</caption>
@@ -175,6 +175,15 @@
                 <property key="columnsHidable" type="boolean" defaultValue="false">
                     <caption>Hiding</caption>
                     <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Configuration">
+                <property key="configurationAttribute" type="attribute" required="false">
+                    <caption>Attribute</caption>
+                    <description>Attribute containing the personalized configuration of the capabilities. This configuration is automatically stored and loaded. The attribute requires Unlimited String.</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
                 </property>
             </propertyGroup>
         </propertyGroup>
