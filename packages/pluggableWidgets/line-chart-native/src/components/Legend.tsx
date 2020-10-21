@@ -38,7 +38,7 @@ export function Legend(props: LegendProps): ReactElement | null {
                         </View>
                     ];
                 })
-                .filter(item => item),
+                .filter(Boolean),
         [series]
     );
 
