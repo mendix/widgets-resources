@@ -1,5 +1,5 @@
-import { ActionValue } from "mendix";
-import { Component } from "react";
+import { ActionValue, ValueStatus } from "mendix";
+import { useEffect, useRef, useState } from "react";
 import firebase, { RNFirebase } from "react-native-firebase";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
@@ -10,73 +10,38 @@ interface NotificationData {
     guid?: string;
 }
 
-export class Notifications extends Component<NotificationsProps<undefined>> {
-    private listeners: Array<() => void> = [];
+export function Notifications(props: NotificationsProps<undefined>) {
+    const listeners = useRef<Array<() => void>>([]);
+    const [loadNotifications, setLoadNotifications] = useState(false);
 
-    componentDidMount(): void {
-        this.checkForInitialNotification();
-
-        this.listeners = [
-            firebase.notifications().onNotification(notification => this.onReceive(notification)),
-            firebase.notifications().onNotificationOpened(notificationOpen => this.onOpen(notificationOpen))
-        ];
-    }
-
-    componentWillUnmount(): void {
-        this.listeners.forEach(unsubscribe => unsubscribe());
-    }
-
-    render(): null {
-        return null;
-    }
-
-    private checkForInitialNotification(): Promise<void> {
-        return firebase
-            .notifications()
-            .getInitialNotification()
-            .then(notificationOpen => {
-                if (notificationOpen) {
-                    this.onOpen(notificationOpen);
-                }
-            });
-    }
-
-    private onReceive(notification: RNFirebase.notifications.Notification): void {
-        this.handleNotification(notification, action => action.onReceive);
-    }
-
-    private onOpen(notificationOpen: RNFirebase.notifications.NotificationOpen): void {
-        this.handleNotification(notificationOpen.notification, action => action.onOpen);
-    }
-
-    private handleNotification(
+    const handleNotification = (
         notification: RNFirebase.notifications.Notification,
         getHandler: (action: ActionsType) => ActionValue | undefined
-    ): void {
+    ): void => {
         const data: NotificationData = notification.data;
         const body: string = notification.body;
         const title: string = notification.title;
         const subtitle: string = notification.subtitle ? notification.subtitle : "";
-        const actions = this.props.actions.filter(item => item.name === data.actionName);
+        const actions = props.actions.filter(item => item.name === data.actionName);
 
         if (actions.length === 0) {
             return;
         }
 
-        if (this.props.guid) {
-            this.props.guid.setValue(data.guid);
+        if (props.guid) {
+            props.guid.setValue(data.guid);
         }
-        if (this.props.title) {
-            this.props.title.setValue(title);
+        if (props.title) {
+            props.title.setValue(title);
         }
-        if (this.props.subtitle) {
-            this.props.subtitle.setValue(subtitle);
+        if (props.subtitle) {
+            props.subtitle.setValue(subtitle);
         }
-        if (this.props.body) {
-            this.props.body.setValue(body);
+        if (props.body) {
+            props.body.setValue(body);
         }
-        if (this.props.action) {
-            this.props.action.setValue(actions.join(" "));
+        if (props.action) {
+            props.action.setValue(actions.join(" "));
         }
 
         actions.forEach(action => {
@@ -87,5 +52,53 @@ export class Notifications extends Component<NotificationsProps<undefined>> {
         if (notification.notificationId) {
             firebase.notifications().removeDeliveredNotification(notification.notificationId);
         }
-    }
+    };
+
+    const onReceive = (notification: RNFirebase.notifications.Notification): void => {
+        handleNotification(notification, action => action.onReceive);
+    };
+
+    const onOpen = (notificationOpen: RNFirebase.notifications.NotificationOpen): void => {
+        handleNotification(notificationOpen.notification, action => action.onOpen);
+    };
+
+    const checkForInitialNotification = (): Promise<void> => {
+        return firebase
+            .notifications()
+            .getInitialNotification()
+            .then(notificationOpen => {
+                if (notificationOpen) {
+                    onOpen(notificationOpen);
+                }
+            });
+    };
+
+    useEffect(() => {
+        if (loadNotifications) {
+            checkForInitialNotification();
+            listeners.current = [
+                firebase.notifications().onNotification(notification => onReceive(notification)),
+                firebase.notifications().onNotificationOpened(notificationOpen => onOpen(notificationOpen))
+            ];
+            return () => {
+                listeners.current.forEach(unsubscribe => unsubscribe());
+            };
+        }
+    }, [loadNotifications]);
+
+    useEffect(() => {
+        if (
+            (props.guid && props.guid.status !== ValueStatus.Available) ||
+            (props.title && props.title.status !== ValueStatus.Available) ||
+            (props.subtitle && props.subtitle.status !== ValueStatus.Available) ||
+            (props.body && props.body.status !== ValueStatus.Available) ||
+            (props.action && props.action.status !== ValueStatus.Available)
+        ) {
+            setLoadNotifications(false);
+            return;
+        }
+        setLoadNotifications(true);
+    }, [props.guid, props.title, props.subtitle, props.body, props.action]);
+
+    return null;
 }
