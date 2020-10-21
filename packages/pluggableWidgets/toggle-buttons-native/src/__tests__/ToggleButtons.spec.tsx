@@ -28,7 +28,7 @@ describe("ToggleButtons", () => {
     it("renders captions", () => {
         const component = render(<ToggleButtons {...defaultProps} />);
 
-        const textComponents = component.getAllByType(Text);
+        const textComponents = component.UNSAFE_getAllByType(Text);
         expect(textComponents).toHaveLength(2);
         expect(textComponents[0].props.children).toEqual("Formatted a");
         expect(textComponents[1].props.children).toEqual("Formatted b");

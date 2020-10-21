@@ -176,7 +176,7 @@ describe("Color Picker", () => {
     }
 
     function getSliders(component: RenderAPI): ReactTestInstance[] {
-        return component.getAllByType(Slider);
+        return component.UNSAFE_getAllByType(Slider);
     }
 });
 

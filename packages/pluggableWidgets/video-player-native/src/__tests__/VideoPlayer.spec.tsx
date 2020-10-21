@@ -67,7 +67,7 @@ describe("VideoPlayer", () => {
         fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 1080, height: 554 } });
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(component.getByType(View).props.style).toEqual({
+        expect(component.UNSAFE_getByType(View).props.style).toEqual({
             alignItems: "center",
             aspectRatio: 1.9494584837545126,
             backgroundColor: "black",
@@ -80,7 +80,7 @@ describe("VideoPlayer", () => {
 
         fireEvent(component.getByTestId("video-player-test"), "error");
 
-        expect(component.getByType(Text).props.style).toEqual({ color: "white" });
-        expect(component.getByType(Text).props.children).toEqual("The video failed to load :(");
+        expect(component.UNSAFE_getByType(Text).props.style).toEqual({ color: "white" });
+        expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load :(");
     });
 });

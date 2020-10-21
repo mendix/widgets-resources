@@ -67,7 +67,7 @@ describe("Signature Android", () => {
         it("on clear", () => {
             const onClearAction = actionValue();
             const component = render(<Signature {...defaultProps} onClear={onClearAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onClear");
             expect(onClearAction.execute).toHaveBeenCalledTimes(1);
@@ -75,7 +75,7 @@ describe("Signature Android", () => {
         it("on save", () => {
             const onSaveAction = actionValue();
             const component = render(<Signature {...defaultProps} onSave={onSaveAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onOK");
             expect(onSaveAction.execute).toHaveBeenCalledTimes(1);
@@ -83,7 +83,7 @@ describe("Signature Android", () => {
         it("on empty", () => {
             const onEmptyAction = actionValue();
             const component = render(<Signature {...defaultProps} onEmpty={onEmptyAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onEmpty");
             expect(onEmptyAction.execute).toHaveBeenCalledTimes(1);
@@ -91,7 +91,7 @@ describe("Signature Android", () => {
         it("on end", () => {
             const onEndAction = actionValue();
             const component = render(<Signature {...defaultProps} onEnd={onEndAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onEnd");
             expect(onEndAction.execute).toHaveBeenCalledTimes(1);

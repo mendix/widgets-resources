@@ -58,7 +58,7 @@ describe("Badge", () => {
             it("executes the action when pressed", () => {
                 const onClickAction = actionValue();
                 const component = render(<Badge {...defaultProps} onClick={onClickAction} />);
-                fireEvent.press(component.getByType(Text));
+                fireEvent.press(component.UNSAFE_getByType(Text));
                 expect(onClickAction.execute).toHaveBeenCalledTimes(1);
             });
         });
@@ -78,7 +78,7 @@ describe("Badge", () => {
             it("executes the action when pressed", () => {
                 const onClickAction = actionValue();
                 const component = render(<Badge {...defaultProps} onClick={onClickAction} />);
-                fireEvent.press(component.getByType(Text));
+                fireEvent.press(component.UNSAFE_getByType(Text));
                 expect(onClickAction.execute).toHaveBeenCalledTimes(1);
             });
         });

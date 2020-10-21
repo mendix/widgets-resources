@@ -42,7 +42,7 @@ describe("Popup menu", () => {
 
         it("triggers action", () => {
             const component = render(<PopupMenu {...defaultProps} />);
-            fireEvent.press(component.getByType(MenuItem));
+            fireEvent.press(component.UNSAFE_getByType(MenuItem));
 
             expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
         });
@@ -78,7 +78,7 @@ describe("Popup menu", () => {
 
         it("triggers action", () => {
             const component = render(<PopupMenu {...defaultProps} />);
-            fireEvent.press(component.getAllByType(TouchableOpacity).pop()!);
+            fireEvent.press(component.UNSAFE_getAllByType(TouchableOpacity).pop()!);
 
             expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
         });

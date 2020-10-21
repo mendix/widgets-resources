@@ -94,7 +94,7 @@ describe("BarcodeScanner", () => {
 });
 
 function detectBarcode(component: RenderAPI, barcode: string): void {
-    fireEvent(component.getByType(RNCamera), "barCodeRead", {
+    fireEvent(component.UNSAFE_getByType(RNCamera), "barCodeRead", {
         data: barcode,
         type: "qr",
         bounds: [
