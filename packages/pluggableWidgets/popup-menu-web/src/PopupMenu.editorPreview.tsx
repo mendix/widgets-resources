@@ -1,6 +1,5 @@
-import { parseStyle } from "@widgets-resources/piw-utils";
+import { parseStyle, dynamicValue } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
-import { dynamicValue } from "../../../tools/util-widgets/dist";
 import { PopupMenu as PopupMenuComponent } from "./components/PopupMenu";
 
 import { BasicItemsType, CustomItemsType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
