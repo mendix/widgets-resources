@@ -1,0 +1,326 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Repeater renders correctly 1`] = `
+Array [
+  <View
+    style={Object {}}
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={Object {}}
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={Object {}}
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={Object {}}
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={Object {}}
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+]
+`;
+
+exports[`Repeater renders correctly containing action 1`] = `
+Array [
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+]
+`;
+
+exports[`Repeater renders correctly containing action and custom styles 1`] = `
+Array [
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "green",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "green",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "green",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "green",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    accessible={true}
+    focusable={true}
+    isTVSelectable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "green",
+        "opacity": 1,
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+]
+`;
+
+exports[`Repeater renders correctly with custom styles 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+      }
+    }
+  >
+    <Text>
+      Item
+    </Text>
+  </View>,
+]
+`;
