@@ -55,14 +55,14 @@ export function check(values: TimelinePreviewProps): Problem[] {
                 url: ""
             });
         }
-        if (values.groupEvents && !values.groupAttribute) {
-            errors.push({
-                property: "title",
-                severity: "error",
-                message: "A Group attribute is required when the Group Events option is enabled.",
-                url: ""
-            });
-        }
+    }
+    if (values.groupEvents && !values.groupAttribute) {
+        errors.push({
+            property: "title",
+            severity: "error",
+            message: "A Group attribute is required when the Group Events option is enabled.",
+            url: ""
+        });
     }
     return errors;
 }
