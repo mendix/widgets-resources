@@ -64,7 +64,7 @@ async function main() {
             `-o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
         { stdio: "inherit" }
     );
-    console.log("MxBuild server started!");
+    console.log("Bundle created!");
 
     let nativeApp;
     let runtimeContainerId;
@@ -79,6 +79,8 @@ async function main() {
         await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
 
         if (isNativeEnabled) {
+            const nativeApps = await downloadNativeApps();
+
             // Android starts
 
             // download the apk
@@ -92,17 +94,19 @@ async function main() {
             // Android ends
 
             // IOS jungling starts
-            nativeApp = await downlaodNativeIOSApp();
 
-            const appBundle = join(nativeApp, "Bundle/");
+            const appBundle = join(nativeApps.iosPath, "Bundle/");
             const bundleSource = join(process.cwd(), "tests/testProject", "deployment/native/bundle/iOS/");
+
             cp(join(bundleSource, "index.ios.bundle"), appBundle);
             cp("-R", join(bundleSource, "assets"), appBundle);
-            execSync(`defaults write ${join(nativeApp, "Info")} "Runtime url" 'http://localhost:${runtimePort}'`);
+            execSync(
+                `defaults write ${join(nativeApps.iosPath, "Info")} "Runtime url" 'http://localhost:${runtimePort}'`
+            );
 
             execSync(`detox test --configuration ios.simulator`, {
                 stdio: "inherit",
-                env: { ...process.env, TEST_NATIVE_APP: nativeApp }
+                env: { ...process.env, TEST_NATIVE_APP_IOS: nativeApps.iosPath }
             });
             // IOS jungling ends
         } else {
@@ -172,14 +176,38 @@ async function waitForAvailability(url, description, timeout = 3000) {
     }
 }
 
-async function downlaodNativeIOSApp() {
-    const downloadedArchivePath = join(tempdir(), "NativeTemplate.zip");
-    if (!(await exists(downloadedArchivePath))) {
-        const nativeTemplateUrl = "https://srv-file22.gofile.io/downloadStore/srv-store2/ld1E8I/NativeTemplate.zip";
-        await promisify(pipeline)((await fetch(nativeTemplateUrl)).body, createWriteStream(downloadedArchivePath));
-    }
+async function downloadArchive(BASE_URL, latestReleaseVersion, destination) {
+    const downloadedArchivePath = join(tempdir(), `${Math.round(Math.random() * 10000)}_${destination}`);
+    const nativeTemplateUrl = `${BASE_URL}/${latestReleaseVersion}/${destination}`;
+
+    await promisify(pipeline)((await fetch(nativeTemplateUrl)).body, createWriteStream(downloadedArchivePath));
+
+    return downloadedArchivePath;
+}
+
+async function downloadNativeApps() {
+    const BASE_URL = "https://github.com/mendix/travisNativeTemplateBuilder";
+    const DETOX_APK = "app-appstore-debug-androidTest.apk";
+    const ANDROID_APK = "app-appstore-debug.apk";
+    const IOS_IPA = "NativeTemplate.zip";
+
+    const latestReleaseVersion = execSync(
+        `git -c 'versionsort.suffix=-' ls-remote --exit-code --refs --sort='version:refname' --tags ${BASE_URL} '*.*.*'  | tail -n 1 | cut -d "/" -f 3`
+    )
+        .toString()
+        .trim();
+    const iosPath = await downloadArchive(BASE_URL + "/releases/download", latestReleaseVersion, IOS_IPA);
+    const androidTestBinaryPath = await downloadArchive(
+        BASE_URL + "/releases/download",
+        latestReleaseVersion,
+        DETOX_APK
+    );
+    const androidPath = await downloadArchive(BASE_URL + "/releases/download", latestReleaseVersion, ANDROID_APK);
 
     const appSource = join(tempdir(), `nativeApp_${Math.round(Math.random() * 10000)}`);
-    execSync(`unzip -q ${downloadedArchivePath} -d ${appSource}`);
-    return join(appSource, "nativeTemplate.app");
+
+    // Unzip ios zip to get .app
+    execSync(`unzip -q ${iosPath} -d ${appSource}`);
+
+    return { iosPath: join(appSource, "NativeTemplate.app"), androidPath, androidTestBinaryPath };
 }

@@ -77,3 +77,9 @@ In your `package.json` scripts, use the following command with the desired task:
 React-hot-loader is not anymore needed to provide auto refresh functionality. That is, you can remove its usage from the code: your main entry point can simply be `export default MyWidget;` instead of `export default hot(MyWidget);`.
 
 **If you do not change your widget, hot will be replaced with a noop function that has no effect.**
+
+## Running e2e tests locally
+
+process.env.TEST_NATIVE_APP_IOS
+process.env.TEST_NATIVE_APP_ANDROID,
+process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
