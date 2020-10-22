@@ -14,7 +14,7 @@ export function preview(props: PopupMenuPreviewProps) {
     const customItems: CustomItemsType[] = [];
     const styles = parseStyle(props.style);
 
-    if (props.renderMode === "basic") {
+    if (!props.advancedMode) {
         props.basicItems.forEach(item => {
             basicItems.push({
                 itemType: item.itemType,

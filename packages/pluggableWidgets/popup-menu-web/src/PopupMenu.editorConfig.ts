@@ -9,7 +9,7 @@ export function getProperties(
     if (target === "desktop") {
         hidePropertyIn(defaultProperties, values, "menuToggle");
     }
-    if (values.renderMode === "basic") {
+    if (!values.advancedMode) {
         hidePropertyIn(defaultProperties, values, "customItems");
 
         values.basicItems.forEach((item: BasicItemsPreviewType, index: number) => {
@@ -42,12 +42,18 @@ export function getProperties(
                     "styleClass"
                 );
             }
-            if (item.styleClass === "primaryStyle") {
+            if (item.styleClass === "inverseStyle") {
+                changeStyleDescription("inverse");
+            } else if (item.styleClass === "primaryStyle") {
                 changeStyleDescription("primary");
+            } else if (item.styleClass === "infoStyle") {
+                changeStyleDescription("info");
+            } else if (item.styleClass === "successStyle") {
+                changeStyleDescription("success");
+            } else if (item.styleClass === "warningStyle") {
+                changeStyleDescription("warning");
             } else if (item.styleClass === "dangerStyle") {
                 changeStyleDescription("danger");
-            } else if (item.styleClass === "customStyle") {
-                changeStyleDescription("custom");
             }
         });
     } else {
@@ -59,7 +65,7 @@ export function getProperties(
 export function check(values: PopupMenuPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (values.renderMode === "basic") {
+    if (!values.advancedMode) {
         if (!values.basicItems.length) {
             errors.push({
                 property: "basicItems",
@@ -74,7 +80,7 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
                 });
             }
         });
-    } else if (values.renderMode === "custom") {
+    } else {
         if (!values.customItems.length) {
             errors.push({
                 property: "customItems",

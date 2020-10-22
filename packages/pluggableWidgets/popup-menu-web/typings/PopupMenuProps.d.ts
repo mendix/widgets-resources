@@ -6,11 +6,16 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue } from "mendix";
 
-export type RenderModeEnum = "basic" | "custom";
-
 export type ItemTypeEnum = "item" | "divider";
 
-export type StyleClassEnum = "defaultStyle" | "primaryStyle" | "dangerStyle" | "customStyle";
+export type StyleClassEnum =
+    | "defaultStyle"
+    | "inverseStyle"
+    | "primaryStyle"
+    | "infoStyle"
+    | "successStyle"
+    | "warningStyle"
+    | "dangerStyle";
 
 export interface BasicItemsType {
     itemType: ItemTypeEnum;
@@ -46,11 +51,11 @@ export interface PopupMenuContainerProps {
     style?: CSSProperties;
     tabIndex: number;
     menuTrigger?: ReactNode;
-    renderMode: RenderModeEnum;
     basicItems: BasicItemsType[];
     customItems: CustomItemsType[];
     trigger: TriggerEnum;
     position: PositionEnum;
+    advancedMode: boolean;
     menuToggle: boolean;
 }
 
@@ -58,10 +63,10 @@ export interface PopupMenuPreviewProps {
     class: string;
     style: string;
     menuTrigger: { widgetCount: number; renderer: ComponentType };
-    renderMode: RenderModeEnum;
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];
     trigger: TriggerEnum;
     position: PositionEnum;
+    advancedMode: boolean;
     menuToggle: boolean;
 }
