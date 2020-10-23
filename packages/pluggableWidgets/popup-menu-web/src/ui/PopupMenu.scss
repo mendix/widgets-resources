@@ -73,10 +73,21 @@
         background-color: #f5f6f6;
     }
 
+    &-inverse {
+        color: #252c36;
+    }
     &-primary {
         color: #0595db;
     }
-
+    &-info {
+        color: #48b0f7;
+    }
+    &-success {
+        color: #76ca02;
+    }
+    &-warning {
+        color: #f99b1d;
+    }
     &-danger {
         color: #ed1c24;
     }

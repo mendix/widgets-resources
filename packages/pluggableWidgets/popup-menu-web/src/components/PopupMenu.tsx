@@ -80,7 +80,7 @@ function createMenuOptions(
     props: PopupMenuContainerProps,
     handleOnClickItem: (itemAction?: ActionValue) => void
 ): ReactElement[] {
-    if (props.renderMode === "basic") {
+    if (!props.advancedMode) {
         return props.basicItems.map((item, index) => {
             if (item.itemType === "divider") {
                 return <div key={index} className={"popupmenu-basic-divider"} />;

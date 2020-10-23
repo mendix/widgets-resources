@@ -23,7 +23,7 @@ describe("Popup menu", () => {
         trigger: "onclick",
         menuToggle: false,
         menuTrigger: createElement("button", null, "Trigger"),
-        renderMode: "basic",
+        advancedMode: false,
         position: "bottom",
         basicItems: [
             basicItemProps,
@@ -54,11 +54,35 @@ describe("Popup menu", () => {
             expect(basicItemProps.action.execute).toHaveBeenCalledTimes(1);
         });
 
+        it("renders with style Inverse", () => {
+            basicItemProps.styleClass = "inverseStyle";
+            const popupMenu = createPopupMenu(defaultProps);
+
+            expect(popupMenu.find(".popupmenu-basic-item-inverse")).toHaveLength(1);
+        });
         it("renders with style Primary", () => {
             basicItemProps.styleClass = "primaryStyle";
             const popupMenu = createPopupMenu(defaultProps);
 
             expect(popupMenu.find(".popupmenu-basic-item-primary")).toHaveLength(1);
+        });
+        it("renders with style Info", () => {
+            basicItemProps.styleClass = "infoStyle";
+            const popupMenu = createPopupMenu(defaultProps);
+
+            expect(popupMenu.find(".popupmenu-basic-item-info")).toHaveLength(1);
+        });
+        it("renders with style Success", () => {
+            basicItemProps.styleClass = "successStyle";
+            const popupMenu = createPopupMenu(defaultProps);
+
+            expect(popupMenu.find(".popupmenu-basic-item-success")).toHaveLength(1);
+        });
+        it("renders with style Warning", () => {
+            basicItemProps.styleClass = "warningStyle";
+            const popupMenu = createPopupMenu(defaultProps);
+
+            expect(popupMenu.find(".popupmenu-basic-item-warning")).toHaveLength(1);
         });
         it("renders with style Danger", () => {
             basicItemProps.styleClass = "dangerStyle";
@@ -66,17 +90,11 @@ describe("Popup menu", () => {
 
             expect(popupMenu.find(".popupmenu-basic-item-danger")).toHaveLength(1);
         });
-        it("renders with style Custom", () => {
-            basicItemProps.styleClass = "customStyle";
-            const popupMenu = createPopupMenu(defaultProps);
-
-            expect(popupMenu.find(".popupmenu-basic-item-custom")).toHaveLength(1);
-        });
     });
 
     describe("with custom items", () => {
         beforeEach(() => {
-            defaultProps.renderMode = "custom";
+            defaultProps.advancedMode = true;
         });
 
         it("renders", () => {
