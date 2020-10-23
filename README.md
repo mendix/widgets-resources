@@ -140,3 +140,9 @@ means:
 -   Update the necessary widgets to the Mendix `Native Mobile Resources` app and push the changes
 -   Export the module, include every dependency
 -   Create a manual tag for the exported module "Native Mobile Resources - AppStore release vx.x.x" and add the Exported Module as asset
+
+## Commiting submodules
+
+-   Change the test project
+-   Commit and push the test project in testProjects' corresponding branch
+-   Go back to monorepo, commit the shown testProjects change and push
