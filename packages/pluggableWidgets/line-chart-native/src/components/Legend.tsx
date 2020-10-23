@@ -31,12 +31,12 @@ export function Legend(props: LegendProps): ReactElement | null {
                         return undefined;
                     }
 
-                    return [
+                    return (
                         <View key={index} style={style.legend?.item}>
                             <View style={[{ backgroundColor }, style.legend?.indicator]} />
                             <Text style={style.legend?.label}>{series.name}</Text>
                         </View>
-                    ];
+                    );
                 })
                 .filter(Boolean),
         [series]

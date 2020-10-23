@@ -4,6 +4,21 @@ import { VictoryAxisCommonProps, VictoryCommonProps, VictoryLabelProps } from "v
 import { VictoryLineProps } from "victory-line";
 import { VictoryScatterProps } from "victory-scatter";
 
+export interface LineChartLegendStyle {
+    container?: ViewStyle;
+    item?: ViewStyle;
+    indicator?: ViewStyle;
+    label?: TextStyle;
+}
+
+export interface LineChartSeriesStyle {
+    line?: VictoryLineProps["style"];
+    markers?: VictoryScatterProps["style"] & {
+        display?: "false" | "underneath" | "onTop";
+        size?: VictoryScatterProps["size"];
+    };
+}
+
 export interface LineChartStyle {
     container?: ViewStyle;
     legend?: LineChartLegendStyle;
@@ -15,21 +30,6 @@ export interface LineChartStyle {
         axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"]; verticalOffset?: VictoryLabelProps["dx"] };
     };
     series?: { [key: string]: LineChartSeriesStyle };
-}
-
-export interface LineChartSeriesStyle {
-    line?: VictoryLineProps["style"];
-    markers?: VictoryScatterProps["style"] & {
-        display?: "false" | "underneath" | "onTop";
-        size?: VictoryScatterProps["size"];
-    };
-}
-
-export interface LineChartLegendStyle {
-    container?: ViewStyle;
-    item?: ViewStyle;
-    indicator?: ViewStyle;
-    label?: TextStyle;
 }
 
 export const defaultLineChartStyle: LineChartStyle = {

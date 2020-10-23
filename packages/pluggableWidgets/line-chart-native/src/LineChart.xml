@@ -99,7 +99,6 @@
                                 <enumerationValues>
                                     <enumerationValue key="linear">Linear</enumerationValue>
                                     <enumerationValue key="catmullRom">Curved</enumerationValue>
-
                                 </enumerationValues>
                             </property>
                         </propertyGroup>

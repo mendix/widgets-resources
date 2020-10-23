@@ -1,24 +1,28 @@
-import { hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hideNestedPropertiesIn, Problem, Properties } from "@widgets-resources/piw-utils";
 
 import { LineChartPreviewProps } from "../typings/LineChartProps";
 
 export function getProperties(values: LineChartPreviewProps, defaultProperties: Properties): Properties {
     values.series.forEach((series, index) => {
         if (series.type === "static") {
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicDataSource");
-            hidePropertyIn(defaultProperties, values, "series", index, "groupByAttribute");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicSeriesName");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicXAttribute");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicYAttribute");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicLineStyle");
-            hidePropertyIn(defaultProperties, values, "series", index, "dynamicStylePropertyName");
+            hideNestedPropertiesIn(defaultProperties, values, "series", index, [
+                "dynamicDataSource",
+                "groupByAttribute",
+                "dynamicSeriesName",
+                "dynamicXAttribute",
+                "dynamicYAttribute",
+                "dynamicLineStyle",
+                "dynamicStylePropertyName"
+            ]);
         } else {
-            hidePropertyIn(defaultProperties, values, "series", index, "staticDataSource");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticSeriesName");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticXAttribute");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticYAttribute");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticLineStyle");
-            hidePropertyIn(defaultProperties, values, "series", index, "staticStylePropertyName");
+            hideNestedPropertiesIn(defaultProperties, values, "series", index, [
+                "staticDataSource",
+                "staticSeriesName",
+                "staticXAttribute",
+                "staticYAttribute",
+                "staticLineStyle",
+                "staticStylePropertyName"
+            ]);
         }
     });
     return defaultProperties;
