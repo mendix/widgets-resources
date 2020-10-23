@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { Text } from "react-native";
 import { render } from "react-native-testing-library";
-import { dynamicValue } from "@native-mobile-resources/util-widgets";
+import { dynamicValue } from "@widgets-resources/piw-utils";
 
 import { BackgroundImage } from "../BackgroundImage";
 import { BackgroundImageProps } from "../../typings/BackgroundImageProps";

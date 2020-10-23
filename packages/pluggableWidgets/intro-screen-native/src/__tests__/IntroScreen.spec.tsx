@@ -4,7 +4,7 @@ import { IntroScreen } from "../IntroScreen";
 import { IntroScreenProps } from "../../typings/IntroScreenProps";
 import { IntroScreenStyle } from "../ui/Styles";
 import { View } from "react-native";
-import { EditableValueBuilder } from "@native-mobile-resources/util-widgets";
+import { EditableValueBuilder } from "@widgets-resources/piw-utils";
 import { Big } from "big.js";
 
 jest.mock("mendix/components/native/Icon", () => jest.requireActual("./__mocks__/mendix/components/native/Icon"));

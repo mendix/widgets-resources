@@ -3,7 +3,7 @@ import { FloatingActionButtonStyle } from "../ui/styles";
 import { render } from "react-native-testing-library";
 import { createElement } from "react";
 import { FloatingActionButton } from "../FloatingActionButton";
-import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
+import { actionValue, dynamicValue } from "@widgets-resources/piw-utils";
 
 describe("FloatingActionButton", () => {
     let defaultProps: FloatingActionButtonProps<FloatingActionButtonStyle>;

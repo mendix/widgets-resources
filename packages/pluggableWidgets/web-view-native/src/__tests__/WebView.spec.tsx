@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
+import { actionValue, dynamicValue } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
 import { fireEvent, render } from "react-native-testing-library";
 import { WebView as RNWebView } from "react-native-webview";
@@ -37,7 +37,7 @@ describe("WebView", () => {
         const onLoadAction = actionValue();
         const component = render(<WebView {...defaultProps} onLoad={onLoadAction} />);
 
-        fireEvent(component.getByType(RNWebView), "load");
+        fireEvent(component.UNSAFE_getByType(RNWebView), "load");
 
         expect(onLoadAction.execute).toHaveBeenCalledTimes(1);
     });
@@ -46,7 +46,7 @@ describe("WebView", () => {
         const onErrorAction = actionValue();
         const component = render(<WebView {...defaultProps} onError={onErrorAction} />);
 
-        fireEvent(component.getByType(RNWebView), "error");
+        fireEvent(component.UNSAFE_getByType(RNWebView), "error");
 
         expect(onErrorAction.execute).toHaveBeenCalledTimes(1);
     });

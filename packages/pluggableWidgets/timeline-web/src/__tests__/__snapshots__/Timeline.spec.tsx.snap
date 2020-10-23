@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline renders correctly with basic props 1`] = `
+<TimelineComponent
+  customVisualization={false}
+  data={
+    Map {
+      "" => Array [
+        Object {
+          "action": undefined,
+          "description": "description",
+          "eventDateTime": "time",
+          "icon": undefined,
+          "title": "title1",
+        },
+        Object {
+          "action": undefined,
+          "description": "description",
+          "eventDateTime": "time",
+          "icon": undefined,
+          "title": "title1",
+        },
+      ],
+    }
+  }
+  groupEvents={true}
+  name="timeline"
+  ungroupedEventsPosition="end"
+/>
+`;

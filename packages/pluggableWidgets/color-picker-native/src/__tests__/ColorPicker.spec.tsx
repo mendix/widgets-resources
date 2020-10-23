@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
+import { actionValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
 import { View } from "react-native";
 import Slider from "react-native-slider";
@@ -176,7 +176,7 @@ describe("Color Picker", () => {
     }
 
     function getSliders(component: RenderAPI): ReactTestInstance[] {
-        return component.getAllByType(Slider);
+        return component.UNSAFE_getAllByType(Slider);
     }
 });
 

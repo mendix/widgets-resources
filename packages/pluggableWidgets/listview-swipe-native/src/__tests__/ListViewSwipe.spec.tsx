@@ -4,7 +4,7 @@ import { render } from "react-native-testing-library";
 import { ListViewSwipe } from "../ListViewSwipe";
 import { ListViewSwipeProps } from "../../typings/ListViewSwipeProps";
 import { ListViewSwipeStyle } from "../ui/styles";
-import { actionValue } from "@native-mobile-resources/util-widgets";
+import { actionValue } from "@widgets-resources/piw-utils";
 import { RectButton } from "react-native-gesture-handler";
 
 describe("List View Swipe", () => {

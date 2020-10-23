@@ -1,9 +1,9 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
 import { createElement } from "react";
 import SignatureScreen from "react-native-signature-canvas";
 import { fireEvent, render } from "react-native-testing-library";
 
 import { Signature, Props } from "../Signature";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 
 jest.mock("react-native/Libraries/Utilities/Platform", () => {
     const Platform = jest.requireActual("react-native/Libraries/Utilities/Platform");
@@ -54,7 +54,7 @@ describe("Signature iOS", () => {
         it("on clear", () => {
             const onClearAction = actionValue();
             const component = render(<Signature {...defaultProps} onClear={onClearAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onClear");
             expect(onClearAction.execute).toHaveBeenCalledTimes(1);
@@ -62,7 +62,7 @@ describe("Signature iOS", () => {
         it("on save", () => {
             const onSaveAction = actionValue();
             const component = render(<Signature {...defaultProps} onSave={onSaveAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onOK");
             expect(onSaveAction.execute).toHaveBeenCalledTimes(1);
@@ -70,7 +70,7 @@ describe("Signature iOS", () => {
         it("on empty", () => {
             const onEmptyAction = actionValue();
             const component = render(<Signature {...defaultProps} onEmpty={onEmptyAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onEmpty");
             expect(onEmptyAction.execute).toHaveBeenCalledTimes(1);
@@ -78,7 +78,7 @@ describe("Signature iOS", () => {
         it("on end", () => {
             const onEndAction = actionValue();
             const component = render(<Signature {...defaultProps} onEnd={onEndAction} />);
-            const canvas = component.getByType(SignatureScreen);
+            const canvas = component.UNSAFE_getByType(SignatureScreen);
 
             fireEvent(canvas, "onEnd");
             expect(onEndAction.execute).toHaveBeenCalledTimes(1);

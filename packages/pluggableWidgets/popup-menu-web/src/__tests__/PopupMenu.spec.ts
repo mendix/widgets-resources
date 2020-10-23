@@ -1,8 +1,8 @@
 import { shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
-import { actionValue, dynamicValue } from "../../../../tools/util-widgets/dist";
 import { BasicItemsType, CustomItemsType, PopupMenuContainerProps } from "../../typings/PopupMenuProps";
 import { PopupMenu } from "../components/PopupMenu";
+import { actionValue, dynamicValue } from "@widgets-resources/piw-utils";
 
 jest.useFakeTimers();
 

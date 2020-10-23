@@ -1,4 +1,4 @@
-import { EditableValueBuilder } from "@native-mobile-resources/util-widgets";
+import { EditableValueBuilder } from "@widgets-resources/piw-utils";
 import { render } from "react-native-testing-library";
 import { createElement } from "react";
 import { BottomSheet } from "../BottomSheet";

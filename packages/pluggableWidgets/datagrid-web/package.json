@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@native-mobile-resources/util-widgets": "1.0.0",
     "@testing-library/react-hooks": "^3.4.2",
     "@types/react-table": "^7.0.20"
   }

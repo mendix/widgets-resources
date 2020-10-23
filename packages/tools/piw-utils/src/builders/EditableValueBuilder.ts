@@ -1,38 +1,16 @@
-import { ActionValue, DynamicValue, ValueStatus } from "mendix";
+import { ValueStatus, EditableValue } from "mendix";
 
-export function dynamicValue<T>(value?: T, loading?: boolean): DynamicValue<T> {
-    if (loading) {
-        return { status: ValueStatus.Loading, value };
-    }
-    return value ? { status: ValueStatus.Available, value } : { status: ValueStatus.Unavailable, value: undefined };
-}
+type Writable<T> = {
+    -readonly [K in keyof T]: T[K];
+};
 
-export function actionValue(canExecute = true, isExecuting = false): ActionValue {
-    return { canExecute, isExecuting, execute: jest.fn() };
-}
-
-declare type Option<T> = T | undefined;
-
-declare interface EditableValue<T> {
-    status: ValueStatus;
-    readOnly: boolean;
-    value: Option<T>;
-    displayValue: string;
-    validation: Option<string>;
-    formatter: {
-        format: any;
-        parse: any;
-        getFormatPlaceholder: any;
-    };
-    setValidator: () => void;
-    setValue: (value: T) => void;
-    setTextValue: (value: string) => void;
-    setFormatter: (formatter: any) => void;
-    universe?: T[];
+export enum FormatterType {
+    Number = "number",
+    DateTime = "datetime"
 }
 
 export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big> {
-    private readonly editableValue: EditableValue<T> = {
+    private readonly editableValue: Writable<EditableValue<T>> = {
         value: undefined,
         displayValue: "",
         status: ValueStatus.Available,
@@ -41,7 +19,10 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
         formatter: {
             format: jest.fn(name => `Formatted ${name}`),
             parse: jest.fn(),
-            getFormatPlaceholder: jest.fn()
+            withConfig: jest.fn(() => new EditableValueBuilder().build().formatter) as any,
+            getFormatPlaceholder: jest.fn(),
+            type: FormatterType.DateTime as any,
+            config: {} as any
         },
         setValidator: jest.fn(),
         setValue: jest.fn((value: T) => this.withValue(value)),
@@ -52,6 +33,11 @@ export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big>
     withValue(value?: T): EditableValueBuilder<T> {
         this.editableValue.value = value;
         this.editableValue.displayValue = this.editableValue.formatter.format(value);
+        return this;
+    }
+
+    withFormatter(formatter: EditableValue<T>["formatter"]): EditableValueBuilder<T> {
+        this.editableValue.formatter = formatter;
         return this;
     }
 

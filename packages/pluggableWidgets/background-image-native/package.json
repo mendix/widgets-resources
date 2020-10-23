@@ -22,6 +22,7 @@
     "@native-mobile-resources/util-widgets": "^1.0.0"
   },
   "devDependencies": {
+    "@widgets-resources/piw-utils": "1.0.0",
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
   }
 }

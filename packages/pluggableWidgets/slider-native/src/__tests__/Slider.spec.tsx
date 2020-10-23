@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
@@ -37,14 +37,16 @@ describe("Slider", () => {
 
     it("renders an error when the minimum is greater than the maximum", () => {
         const component = render(<Slider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
-        expect(component.getByType(Text).props.children).toBe(
+        expect(component.UNSAFE_getByType(Text).props.children).toBe(
             "The minimum value can not be greater than the maximum value."
         );
     });
 
     it("renders an error when the step size is negative", () => {
         const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.getByType(Text).props.children).toBe("The step size can not be zero or less than zero.");
+        expect(component.UNSAFE_getByType(Text).props.children).toBe(
+            "The step size can not be zero or less than zero."
+        );
     });
 
     it("renders an error when the value is less than the minimum", () => {
@@ -54,7 +56,7 @@ describe("Slider", () => {
                 valueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(-50)).build()}
             />
         );
-        expect(component.getByType(Text).props.children).toBe(
+        expect(component.UNSAFE_getByType(Text).props.children).toBe(
             "The current value can not be less than the minimum value."
         );
     });
@@ -66,7 +68,7 @@ describe("Slider", () => {
                 valueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(300)).build()}
             />
         );
-        expect(component.getByType(Text).props.children).toBe(
+        expect(component.UNSAFE_getByType(Text).props.children).toBe(
             "The current value can not be greater than the maximum value."
         );
     });
@@ -90,8 +92,8 @@ describe("Slider", () => {
                 ]}
             />
         );
-        fireEvent(component.getByType(View), "layout", { nativeEvent: { layout: { width: 100 } } });
-        expect(component.getByType(MultiSlider).props.sliderLength).toBe(100);
+        fireEvent(component.UNSAFE_getByType(View), "layout", { nativeEvent: { layout: { width: 100 } } });
+        expect(component.UNSAFE_getByType(MultiSlider).props.sliderLength).toBe(100);
     });
 
     it("renders a validation message", () => {
@@ -103,7 +105,7 @@ describe("Slider", () => {
 
     it("handles an invalid step size", () => {
         const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.getByType(MultiSlider).props.step).toBe(1);
+        expect(component.UNSAFE_getByType(MultiSlider).props.step).toBe(1);
     });
 
     it("changes the value when swiping", () => {
@@ -135,7 +137,7 @@ describe("Slider", () => {
 });
 
 function getHandle(component: RenderAPI): ReactTestInstance {
-    return component.getAllByType(View).filter(instance => instance.props.onMoveShouldSetResponder)[0];
+    return component.UNSAFE_getAllByType(View).filter(instance => instance.props.onMoveShouldSetResponder)[0];
 }
 
 function responderMove(dx: number): any {
