@@ -1,6 +1,6 @@
 import { ActionValue, ValueStatus } from "mendix";
 import { useEffect, useRef, useState } from "react";
-import firebase, { RNFirebase } from "react-native-firebase";
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
 import { executeAction } from "@widgets-resources/piw-utils";
@@ -15,21 +15,21 @@ export function Notifications(props: NotificationsProps<undefined>) {
     const [loadNotifications, setLoadNotifications] = useState(false);
 
     const handleNotification = (
-        notification: RNFirebase.notifications.Notification,
+        notification: FirebaseMessagingTypes.Notification,
+        data: NotificationData | undefined,
         getHandler: (action: ActionsType) => ActionValue | undefined
     ): void => {
-        const data: NotificationData = notification.data;
-        const body: string = notification.body;
-        const title: string = notification.title;
-        const subtitle: string = notification.subtitle ? notification.subtitle : "";
-        const actions = props.actions.filter(item => item.name === data.actionName);
+        const body: string = notification.body ?? "";
+        const title: string = notification.title ?? "";
+        const subtitle: string = notification.ios?.subtitle ? notification.ios?.subtitle : "";
+        const actions = props.actions.filter(item => item.name === data?.actionName);
 
         if (actions.length === 0) {
             return;
         }
 
         if (props.guid) {
-            props.guid.setValue(data.guid);
+            props.guid.setValue(data?.guid);
         }
         if (props.title) {
             props.title.setValue(title);
@@ -48,37 +48,41 @@ export function Notifications(props: NotificationsProps<undefined>) {
             const handler = getHandler(action);
             executeAction(handler);
         });
+    };
 
-        if (notification.notificationId) {
-            firebase.notifications().removeDeliveredNotification(notification.notificationId);
+    const onReceive = (notification: FirebaseMessagingTypes.RemoteMessage): void => {
+        if (notification.notification) {
+            handleNotification(notification.notification, notification.data, action => action.onReceive);
         }
     };
 
-    const onReceive = (notification: RNFirebase.notifications.Notification): void => {
-        handleNotification(notification, action => action.onReceive);
-    };
-
-    const onOpen = (notificationOpen: RNFirebase.notifications.NotificationOpen): void => {
-        handleNotification(notificationOpen.notification, action => action.onOpen);
-    };
-
-    const checkForInitialNotification = (): Promise<void> => {
-        return firebase
-            .notifications()
-            .getInitialNotification()
-            .then(notificationOpen => {
-                if (notificationOpen) {
-                    onOpen(notificationOpen);
-                }
-            });
+    const onOpen = (notificationOpen: FirebaseMessagingTypes.RemoteMessage): void => {
+        if (notificationOpen.notification) {
+            handleNotification(notificationOpen.notification, notificationOpen.data, action => action.onOpen);
+        }
     };
 
     useEffect(() => {
         if (loadNotifications) {
-            checkForInitialNotification();
+            if (!messaging().isDeviceRegisteredForRemoteMessages) {
+                messaging()
+                    .registerDeviceForRemoteMessages()
+                    .then(() => {});
+            }
+            messaging()
+                .getInitialNotification()
+                .then((notificationOpen: FirebaseMessagingTypes.RemoteMessage) => {
+                    if (notificationOpen) {
+                        onOpen(notificationOpen);
+                    }
+                });
             listeners.current = [
-                firebase.notifications().onNotification(notification => onReceive(notification)),
-                firebase.notifications().onNotificationOpened(notificationOpen => onOpen(notificationOpen))
+                messaging().onMessage(async (notification: FirebaseMessagingTypes.RemoteMessage) =>
+                    onReceive(notification)
+                ),
+                messaging().onNotificationOpenedApp(async (notificationOpen: FirebaseMessagingTypes.RemoteMessage) =>
+                    onOpen(notificationOpen)
+                )
             ];
             return () => {
                 listeners.current.forEach(unsubscribe => unsubscribe());
