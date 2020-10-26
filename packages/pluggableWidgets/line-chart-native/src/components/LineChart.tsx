@@ -87,47 +87,49 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             {dataTypesResult instanceof Error ? (
                 <Text>{dataTypesResult.message}</Text>
             ) : (
-                <View style={{ ...style.chart, flex: 1 }}>
-                    <View style={{ ...style.gridLabelWrapper, flex: 1 }}>
-                        {yAxisLabel ? <Text style={style.yAxisLabel}>{yAxisLabel}</Text> : null}
+                <View style={style.chart}>
+                    <View style={style.gridLabelCol}>
+                        <View style={style.gridRow}>
+                            {yAxisLabel ? <Text style={style.yAxisLabel}>{yAxisLabel}</Text> : null}
 
-                        <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
-                            {chartDimensions ? (
-                                <VictoryChart
-                                    height={chartDimensions?.height}
-                                    width={chartDimensions?.width}
-                                    padding={style.grid?.padding}
-                                    scale={
-                                        dataTypesResult
-                                            ? {
-                                                  x: dataTypesResult.x === "number" ? "linear" : "time",
-                                                  y: dataTypesResult.y === "number" ? "linear" : "time"
-                                              }
-                                            : undefined
-                                    }
-                                    style={style.grid}
-                                >
-                                    <VictoryAxis
-                                        style={style.grid?.xAxis}
-                                        orientation={"bottom"}
-                                        {...(firstSeries?.xFormatter
-                                            ? { tickFormat: firstSeries.xFormatter }
-                                            : undefined)}
-                                    />
-                                    <VictoryAxis
-                                        dependentAxis
-                                        style={style.grid?.yAxis}
-                                        orientation={"left"}
-                                        {...(firstSeries.yFormatter
-                                            ? { tickFormat: firstSeries.yFormatter }
-                                            : undefined)}
-                                    />
-                                    {chartLines}
-                                </VictoryChart>
-                            ) : null}
+                            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
+                                {chartDimensions ? (
+                                    <VictoryChart
+                                        height={chartDimensions?.height}
+                                        width={chartDimensions?.width}
+                                        padding={style.grid?.padding}
+                                        scale={
+                                            dataTypesResult
+                                                ? {
+                                                      x: dataTypesResult.x === "number" ? "linear" : "time",
+                                                      y: dataTypesResult.y === "number" ? "linear" : "time"
+                                                  }
+                                                : undefined
+                                        }
+                                        style={style.grid}
+                                    >
+                                        <VictoryAxis
+                                            style={style.grid?.xAxis}
+                                            orientation={"bottom"}
+                                            {...(firstSeries?.xFormatter
+                                                ? { tickFormat: firstSeries.xFormatter }
+                                                : undefined)}
+                                        />
+                                        <VictoryAxis
+                                            dependentAxis
+                                            style={style.grid?.yAxis}
+                                            orientation={"left"}
+                                            {...(firstSeries.yFormatter
+                                                ? { tickFormat: firstSeries.yFormatter }
+                                                : undefined)}
+                                        />
+                                        {chartLines}
+                                    </VictoryChart>
+                                ) : null}
+                            </View>
+
+                            {xAxisLabel ? <Text style={style.xAxisLabel}>{xAxisLabel}</Text> : null}
                         </View>
-
-                        {xAxisLabel ? <Text style={style.xAxisLabel}>{xAxisLabel}</Text> : null}
                     </View>
 
                     {showLegend ? <Legend style={style} series={series} /> : null}
