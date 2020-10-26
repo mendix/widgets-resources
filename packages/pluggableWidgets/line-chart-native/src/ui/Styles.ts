@@ -22,7 +22,8 @@ export interface LineChartSeriesStyle {
 export interface LineChartStyle {
     container?: ViewStyle;
     chart?: ViewStyle;
-    gridLabelWrapper?: ViewStyle;
+    gridLabelCol?: ViewStyle;
+    gridRow?: ViewStyle;
     grid?: VictoryChartProps["style"] & {
         padding?: VictoryCommonProps["padding"];
         xAxis?: VictoryAxisCommonProps["style"];
@@ -38,14 +39,16 @@ export const defaultLineChartStyle: LineChartStyle = {
     container: {
         flex: 1
     },
-    chart: {},
-    gridLabelWrapper: {
+    chart: {
+        flex: 1
+    },
+    gridLabelCol: {
+        flex: 1
+    },
+    gridRow: {
+        flex: 1,
         flexDirection: "row"
     },
-    xAxisLabel: {
-        // alignSelf: "center"
-    },
-    yAxisLabel: {},
     legend: {
         container: {
             borderColor: "black",
