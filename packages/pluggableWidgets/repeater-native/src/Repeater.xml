@@ -14,10 +14,6 @@
                     <caption>Content</caption>
                     <description/>
                 </property>
-                <property key="onClick" type="action" dataSource="datasource" required="false">
-                    <caption>On click</caption>
-                    <description />
-                </property>
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
