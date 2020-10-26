@@ -52,7 +52,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
             const markers =
                 lineStyle === "lineWithMarkers" ||
-                (lineStyle === "custom" && seriesStyle?.markers?.display !== "false") ? (
+                (lineStyle === "custom" && seriesStyle?.markers?.display && seriesStyle.markers.display !== "false") ? (
                     <VictoryScatter data={dataPoints} style={seriesStyle?.markers} size={seriesStyle?.markers?.size} />
                 ) : (
                     undefined
@@ -60,11 +60,11 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
             return (
                 <VictoryGroup key={index}>
-                    {markers && (!seriesStyle?.markers?.display || seriesStyle.markers.display !== "onTop")
+                    {markers && seriesStyle?.markers?.display === "underneath" ? markers : null}
+                    <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
+                    {markers && (!seriesStyle?.markers?.display || seriesStyle?.markers?.display !== "underneath")
                         ? markers
                         : null}
-                    <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
-                    {markers && seriesStyle?.markers?.display === "onTop" ? markers : null}
                 </VictoryGroup>
             );
         });
