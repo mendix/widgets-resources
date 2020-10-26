@@ -72,6 +72,29 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     const [firstSeries] = series;
 
+    let xAxisLabelStyle;
+    let yAxisLabelStyle;
+    let xAxisLabelRelativePositionGrid;
+    let yAxisLabelRelativePositionGrid;
+
+    if (style.xAxisLabel?.relativePositionGrid) {
+        const { relativePositionGrid: _xAxisLabelRelativePositionGrid, ..._xAxisLabelStyle } = style.xAxisLabel;
+        xAxisLabelStyle = _xAxisLabelStyle;
+        xAxisLabelRelativePositionGrid = _xAxisLabelRelativePositionGrid;
+    } else {
+        xAxisLabelStyle = style.xAxisLabel;
+        xAxisLabelRelativePositionGrid = "bottom";
+    }
+
+    if (style.yAxisLabel?.relativePositionGrid) {
+        const { relativePositionGrid: _yAxisLabelRelativePositionGrid, ..._yAxisLabelStyle } = style.yAxisLabel;
+        yAxisLabelStyle = _yAxisLabelStyle;
+        yAxisLabelRelativePositionGrid = _yAxisLabelRelativePositionGrid;
+    } else {
+        yAxisLabelStyle = style.yAxisLabel;
+        yAxisLabelRelativePositionGrid = "top";
+    }
+
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
     const updateChartDimensions = useCallback(
@@ -89,12 +112,12 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             ) : (
                 <View style={style.chart}>
                     <View style={style.gridLabelCol}>
-                        {yAxisLabel && style.yAxisLabel?.relativePositionGrid === "top" ? (
-                            <Text style={style.yAxisLabel}>{yAxisLabel}</Text>
+                        {yAxisLabel && yAxisLabelRelativePositionGrid === "top" ? (
+                            <Text style={yAxisLabelStyle}>{yAxisLabel}</Text>
                         ) : null}
                         <View style={style.gridRow}>
-                            {yAxisLabel && style.yAxisLabel?.relativePositionGrid === "left" ? (
-                                <Text style={style.yAxisLabel}>{yAxisLabel}</Text>
+                            {yAxisLabel && yAxisLabelRelativePositionGrid === "left" ? (
+                                <Text style={yAxisLabelStyle}>{yAxisLabel}</Text>
                             ) : null}
 
                             <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
@@ -133,12 +156,12 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                 ) : null}
                             </View>
 
-                            {xAxisLabel && style.xAxisLabel?.relativePositionGrid === "right" ? (
-                                <Text style={style.xAxisLabel}>{xAxisLabel}</Text>
+                            {xAxisLabel && xAxisLabelRelativePositionGrid === "right" ? (
+                                <Text style={xAxisLabelStyle}>{xAxisLabel}</Text>
                             ) : null}
                         </View>
-                        {xAxisLabel && style.xAxisLabel?.relativePositionGrid === "bottom" ? (
-                            <Text style={style.xAxisLabel}>{xAxisLabel}</Text>
+                        {xAxisLabel && xAxisLabelRelativePositionGrid === "bottom" ? (
+                            <Text style={xAxisLabelStyle}>{xAxisLabel}</Text>
                         ) : null}
                     </View>
 

@@ -53,12 +53,6 @@ export const defaultLineChartStyle: LineChartStyle = {
         flex: 1,
         flexDirection: "row"
     },
-    xAxisLabel: {
-        relativePositionGrid: "bottom"
-    },
-    yAxisLabel: {
-        relativePositionGrid: "top"
-    },
     legend: {
         container: {
             borderColor: "black",
