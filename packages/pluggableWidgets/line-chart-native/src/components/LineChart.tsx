@@ -111,7 +111,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 <Text>{dataTypesResult.message}</Text>
             ) : (
                 <View style={style.chart}>
-                    <View style={style.gridLabelCol}>
+                    <View style={style.gridAndLabelsRow}>
                         {yAxisLabel && yAxisLabelRelativePositionGrid === "top" ? (
                             <Text style={yAxisLabelStyle}>{yAxisLabel}</Text>
                         ) : null}
