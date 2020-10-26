@@ -29,8 +29,12 @@ export interface LineChartStyle {
         xAxis?: VictoryAxisCommonProps["style"];
         yAxis?: VictoryAxisCommonProps["style"];
     };
-    xAxisLabel?: TextStyle;
-    yAxisLabel?: TextStyle;
+    xAxisLabel?: TextStyle & {
+        relativePositionGrid?: "bottom" | "right";
+    };
+    yAxisLabel?: TextStyle & {
+        relativePositionGrid?: "top" | "left";
+    };
     legend?: LineChartLegendStyle;
     series?: { [key: string]: LineChartSeriesStyle };
 }
@@ -48,6 +52,12 @@ export const defaultLineChartStyle: LineChartStyle = {
     gridRow: {
         flex: 1,
         flexDirection: "row"
+    },
+    xAxisLabel: {
+        relativePositionGrid: "bottom"
+    },
+    yAxisLabel: {
+        relativePositionGrid: "top"
     },
     legend: {
         container: {
@@ -68,8 +78,5 @@ export const defaultLineChartStyle: LineChartStyle = {
             height: 5,
             width: 10
         }
-    },
-    grid: {
-        padding: { left: 75, top: 25, bottom: 50, right: 25 }
     }
 };

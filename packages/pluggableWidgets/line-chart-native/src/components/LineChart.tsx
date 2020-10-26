@@ -89,8 +89,13 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             ) : (
                 <View style={style.chart}>
                     <View style={style.gridLabelCol}>
+                        {yAxisLabel && style.yAxisLabel?.relativePositionGrid === "top" ? (
+                            <Text style={style.yAxisLabel}>{yAxisLabel}</Text>
+                        ) : null}
                         <View style={style.gridRow}>
-                            {yAxisLabel ? <Text style={style.yAxisLabel}>{yAxisLabel}</Text> : null}
+                            {yAxisLabel && style.yAxisLabel?.relativePositionGrid === "left" ? (
+                                <Text style={style.yAxisLabel}>{yAxisLabel}</Text>
+                            ) : null}
 
                             <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
                                 {chartDimensions ? (
@@ -128,8 +133,13 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                 ) : null}
                             </View>
 
-                            {xAxisLabel ? <Text style={style.xAxisLabel}>{xAxisLabel}</Text> : null}
+                            {xAxisLabel && style.xAxisLabel?.relativePositionGrid === "right" ? (
+                                <Text style={style.xAxisLabel}>{xAxisLabel}</Text>
+                            ) : null}
                         </View>
+                        {xAxisLabel && style.xAxisLabel?.relativePositionGrid === "bottom" ? (
+                            <Text style={style.xAxisLabel}>{xAxisLabel}</Text>
+                        ) : null}
                     </View>
 
                     {showLegend ? <Legend style={style} series={series} /> : null}
