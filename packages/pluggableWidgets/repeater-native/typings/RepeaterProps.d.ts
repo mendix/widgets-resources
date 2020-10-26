@@ -4,14 +4,13 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType } from "react";
-import { ListValue, ListActionValue, ListWidgetValue } from "mendix";
+import { ListValue, ListWidgetValue } from "mendix";
 
 export interface RepeaterProps<Style> {
     name: string;
     style: Style[];
     datasource: ListValue;
     content: ListWidgetValue;
-    onClick?: ListActionValue;
 }
 
 export interface RepeaterPreviewProps {
@@ -19,5 +18,4 @@ export interface RepeaterPreviewProps {
     style: string;
     datasource: {} | null;
     content: { widgetCount: number; renderer: ComponentType };
-    onClick: {} | null;
 }
