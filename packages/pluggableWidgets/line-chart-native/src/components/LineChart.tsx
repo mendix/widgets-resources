@@ -44,6 +44,30 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
+    // Line Chart user-styling may be missing for certain series. A palette is passed, any missing line colours
+    // fallback to a colour from the palette.
+    const normalisedLineColors: string[] = useMemo(() => {
+        const result: string[] = [];
+        let index = 0;
+
+        for (const _series of series) {
+            const configuredStyle = !_series.stylePropertyName
+                ? null
+                : style.series?.[_series.stylePropertyName]?.line?.data?.stroke;
+
+            if (typeof configuredStyle !== "string") {
+                result.push(style.lineColorPalette?.[index] || "black");
+                if (style.lineColorPalette) {
+                    index = index + 1 === style.lineColorPalette.length ? 0 : index + 1;
+                }
+            } else {
+                result.push(configuredStyle);
+            }
+        }
+
+        return result;
+    }, [series, style]);
+
     const chartLines = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
             return null;
@@ -186,7 +210,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                                 ? { tickFormat: firstSeries.yFormatter }
                                                 : undefined)}
                                         />
-                                        {chartLines}
+                                        <VictoryGroup colorScale={normalisedLineColors}>{chartLines}</VictoryGroup>
                                     </VictoryChart>
                                 ) : null}
                             </View>
@@ -200,7 +224,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                             : null}
                     </View>
 
-                    {showLegend ? <Legend style={style} series={series} /> : null}
+                    {showLegend ? <Legend style={style} series={series} colorScale={normalisedLineColors} /> : null}
                 </View>
             )}
         </View>

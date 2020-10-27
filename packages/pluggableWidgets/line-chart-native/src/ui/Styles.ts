@@ -37,6 +37,7 @@ export interface LineChartStyle {
     };
     legend?: LineChartLegendStyle;
     series?: { [key: string]: LineChartSeriesStyle };
+    lineColorPalette?: string[];
 }
 
 export const defaultLineChartStyle: LineChartStyle = {
@@ -72,5 +73,6 @@ export const defaultLineChartStyle: LineChartStyle = {
             height: 5,
             width: 10
         }
-    }
+    },
+    lineColorPalette: ["black"]
 };
