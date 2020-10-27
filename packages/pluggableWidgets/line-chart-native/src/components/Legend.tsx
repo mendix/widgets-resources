@@ -6,6 +6,7 @@ import { LineChartStyle } from "../ui/Styles";
 export interface LegendProps {
     series: LegendSeries[];
     style: LineChartStyle;
+    colorScale: string[];
 }
 
 export interface LegendSeries {
@@ -14,30 +15,19 @@ export interface LegendSeries {
 }
 
 export function Legend(props: LegendProps): ReactElement | null {
-    const { series, style } = props;
+    const { series, style, colorScale } = props;
 
     const legendItems = useMemo(
         () =>
             series
-                .map((series, index) => {
-                    if (!series.name || !series.stylePropertyName || !style.series) {
-                        return undefined;
-                    }
-
-                    const seriesStyle = style.series[series.stylePropertyName];
-                    const backgroundColor = seriesStyle?.line?.data?.stroke;
-
-                    if (!(typeof backgroundColor === "string")) {
-                        return undefined;
-                    }
-
-                    return (
+                .map((series, index) =>
+                    series.name !== undefined ? (
                         <View key={index} style={style.legend?.item}>
-                            <View style={[{ backgroundColor }, style.legend?.indicator]} />
+                            <View style={[{ backgroundColor: colorScale[index] }, style.legend?.indicator]} />
                             <Text style={style.legend?.label}>{series.name}</Text>
                         </View>
-                    );
-                })
+                    ) : null
+                )
                 .filter(Boolean),
         [series]
     );
