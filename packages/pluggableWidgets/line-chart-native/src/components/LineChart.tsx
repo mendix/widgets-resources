@@ -2,6 +2,7 @@ import { createElement, ReactElement, useMemo, useCallback, useState } from "rea
 import { View, LayoutChangeEvent, Text } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
+import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { LineChartStyle } from "../ui/Styles";
 import { Legend } from "./Legend";
@@ -72,28 +73,19 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     const [firstSeries] = series;
 
-    let xAxisLabelStyle;
-    let yAxisLabelStyle;
-    let xAxisLabelRelativePositionGrid;
-    let yAxisLabelRelativePositionGrid;
+    const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxisLabel, ["relativePositionGrid"]);
+    const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxisLabel, ["relativePositionGrid"]);
 
-    if (style.xAxisLabel?.relativePositionGrid) {
-        const { relativePositionGrid: _xAxisLabelRelativePositionGrid, ..._xAxisLabelStyle } = style.xAxisLabel;
-        xAxisLabelStyle = _xAxisLabelStyle;
-        xAxisLabelRelativePositionGrid = _xAxisLabelRelativePositionGrid;
-    } else {
-        xAxisLabelStyle = style.xAxisLabel;
-        xAxisLabelRelativePositionGrid = "bottom";
+    if (!extractedXAxisLabelStyle.relativePositionGrid) {
+        extractedXAxisLabelStyle.relativePositionGrid = "bottom";
     }
 
-    if (style.yAxisLabel?.relativePositionGrid) {
-        const { relativePositionGrid: _yAxisLabelRelativePositionGrid, ..._yAxisLabelStyle } = style.yAxisLabel;
-        yAxisLabelStyle = _yAxisLabelStyle;
-        yAxisLabelRelativePositionGrid = _yAxisLabelRelativePositionGrid;
-    } else {
-        yAxisLabelStyle = style.yAxisLabel;
-        yAxisLabelRelativePositionGrid = "top";
+    if (!extractedYAxisLabelStyle.relativePositionGrid) {
+        extractedYAxisLabelStyle.relativePositionGrid = "top";
     }
+
+    const xAxisLabelComponent = xAxisLabel ? <Text style={xAxisLabelStyle}>{xAxisLabel}</Text> : null;
+    const yAxisLabelComponent = yAxisLabel ? <Text style={yAxisLabelStyle}>{yAxisLabel}</Text> : null;
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
@@ -112,13 +104,9 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             ) : (
                 <View style={style.chart}>
                     <View style={style.gridAndLabelsRow}>
-                        {yAxisLabel && yAxisLabelRelativePositionGrid === "top" ? (
-                            <Text style={yAxisLabelStyle}>{yAxisLabel}</Text>
-                        ) : null}
+                        {extractedYAxisLabelStyle.relativePositionGrid === "top" ? yAxisLabelComponent : null}
                         <View style={style.gridRow}>
-                            {yAxisLabel && yAxisLabelRelativePositionGrid === "left" ? (
-                                <Text style={yAxisLabelStyle}>{yAxisLabel}</Text>
-                            ) : null}
+                            {extractedYAxisLabelStyle.relativePositionGrid === "left" ? yAxisLabelComponent : null}
 
                             <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
                                 {chartDimensions ? (
@@ -156,13 +144,9 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                 ) : null}
                             </View>
 
-                            {xAxisLabel && xAxisLabelRelativePositionGrid === "right" ? (
-                                <Text style={xAxisLabelStyle}>{xAxisLabel}</Text>
-                            ) : null}
+                            {extractedXAxisLabelStyle.relativePositionGrid === "right" ? xAxisLabelComponent : null}
                         </View>
-                        {xAxisLabel && xAxisLabelRelativePositionGrid === "bottom" ? (
-                            <Text style={xAxisLabelStyle}>{xAxisLabel}</Text>
-                        ) : null}
+                        {extractedXAxisLabelStyle.relativePositionGrid === "bottom" ? xAxisLabelComponent : null}
                     </View>
 
                     {showLegend ? <Legend style={style} series={series} /> : null}
