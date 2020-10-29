@@ -26,7 +26,7 @@ export function Pagination(props: PaginationProps): ReactElement {
         }
     };
     return (
-        <div className="pagination">
+        <div className="pagination-bar">
             <button
                 className="btn pagination-button"
                 onClick={() => {
