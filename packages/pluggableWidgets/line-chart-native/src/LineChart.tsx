@@ -7,7 +7,7 @@ import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 import { useSeries } from "./utils/SeriesLoader";
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
-    const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
+    const { name, series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
@@ -25,6 +25,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
             showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}
             yAxisLabel={yAxisLabel?.value}
+            warningPrefix={`[${name}]: `}
         />
     );
 }
