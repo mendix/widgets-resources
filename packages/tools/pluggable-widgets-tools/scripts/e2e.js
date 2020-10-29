@@ -7,7 +7,7 @@ const {
 const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
-const { cat, cp, ls, mkdir, rm, tempdir } = require("shelljs");
+const { cat, cp, ls, mkdir, rm, tempdir, touch } = require("shelljs");
 const { pipeline } = require("stream");
 const { promisify } = require("util");
 
@@ -58,9 +58,12 @@ async function main() {
 
     const projectFile = ls("tests/testProject/*.mpr").toString();
 
+    const nativePlatforms = process.env.TRAVIS === "true" ? "=android" : "";
     execSync(
         `docker run -t -v ${process.cwd()}:/source --rm mxbuild:${latestMendixVersion} ` +
-            (isNativeEnabled ? "--native-packager --native-packager-platform=ios --disable-native-animations " : "") +
+            (isNativeEnabled
+                ? `--native-packager --native-packager-platform${nativePlatforms} --disable-native-animations `
+                : "") +
             `-o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
         { stdio: "inherit" }
     );
@@ -79,36 +82,72 @@ async function main() {
         await waitForAvailability(`http://localhost:${runtimePort}`, "runtime");
 
         if (isNativeEnabled) {
-            const nativeApps = await downloadNativeApps();
+            const nativeAppPaths = await downloadNativeApps();
 
             // Android starts
+            mkdir("-p", "res/raw");
+            touch("res/raw/runtime_url");
+            execSync(`echo http://10.0.2.2:${runtimePort} > res/raw/runtime_url`);
+            execSync(`zip -u ${nativeAppPaths.androidPath} res/raw/runtime_url`);
 
-            // download the apk
-            // cd tempdir()
-            // writeFile("10.0.2.2:${runtimePort}", "res/raw/runtime_url")
-            // execSync("zip -u apk res/raw/runtime_url")
+            mkdir("-p", "assets");
+            cp(
+                join(
+                    process.cwd(),
+                    "tests/testProject",
+                    "deployment/native/bundle/android/assets/index.android.bundle"
+                ),
+                "assets"
+            );
 
-            // Verify how to find the build tools in travis
-            // execSync("~/Library/Android/sdk/build-tools/29.0.3/apksigner sign --ks ~/.android/debug.keystore app-appstore-debug.apk")
+            execSync(`zip -ur ${nativeAppPaths.androidPath} assets`);
+            execSync(`zip -ur ${nativeAppPaths.androidPath} res`);
+
+            execSync(
+                `echo android | $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS/apksigner sign --ks $HOME/.android/debug.keystore ${nativeAppPaths.androidPath}`
+            );
+
+            // Resign the binary because it needs to be signed with the same signer as real apk
+            execSync(
+                `echo android | $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS/apksigner sign --ks $HOME/.android/debug.keystore ${nativeAppPaths.androidTestBinaryPath}`
+            );
+
+            console.warn(nativeAppPaths.androidPath);
+            execSync(`export TEST_NATIVE_APP_ANDROID=${nativeAppPaths.androidPath}`);
+            execSync(`export TEST_NATIVE_APP_ANDROID_TEST_BINARY=${nativeAppPaths.androidTestBinaryPath}`);
 
             // Android ends
 
-            // IOS jungling starts
-
-            const appBundle = join(nativeApps.iosPath, "Bundle/");
-            const bundleSource = join(process.cwd(), "tests/testProject", "deployment/native/bundle/iOS/");
-
-            cp(join(bundleSource, "index.ios.bundle"), appBundle);
-            cp("-R", join(bundleSource, "assets"), appBundle);
-            execSync(
-                `defaults write ${join(nativeApps.iosPath, "Info")} "Runtime url" 'http://localhost:${runtimePort}'`
-            );
-
-            execSync(`detox test --configuration ios.simulator`, {
+            execSync(`detox test --configuration android`, {
                 stdio: "inherit",
-                env: { ...process.env, TEST_NATIVE_APP_IOS: nativeApps.iosPath }
+                env: {
+                    ...process.env,
+                    TEST_NATIVE_APP_ANDROID: nativeAppPaths.androidPath,
+                    TEST_NATIVE_APP_ANDROID_TEST_BINARY: nativeAppPaths.androidTestBinaryPath
+                }
             });
-            // IOS jungling ends
+
+            // Execute ios detox
+            if (!process.env.TRAVIS) {
+                // IOS jungling starts
+                const appBundle = join(nativeAppPaths.iosPath, "Bundle/");
+                const bundleSource = join(process.cwd(), "tests/testProject", "deployment/native/bundle/iOS/");
+
+                cp(join(bundleSource, "index.ios.bundle"), appBundle);
+                cp("-R", join(bundleSource, "assets"), appBundle);
+                execSync(
+                    `defaults write ${join(
+                        nativeAppPaths.iosPath,
+                        "Info"
+                    )} "Runtime url" 'http://localhost:${runtimePort}'`
+                );
+                // IOS jungling ends
+
+                execSync(`detox test --configuration ios.simulator`, {
+                    stdio: "inherit",
+                    env: { ...process.env, TEST_NATIVE_APP_IOS: nativeAppPaths.iosPath }
+                });
+            }
         } else {
             execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
                 stdio: "inherit",
@@ -123,10 +162,10 @@ async function main() {
         throw e;
     } finally {
         if (runtimeContainerId) {
-            execSync(`docker rm -f ${runtimeContainerId.trim()}`);
+            // execSync(`docker rm -f ${runtimeContainerId.trim()}`);
         }
         if (nativeApp) {
-            rm("-f", nativeApp);
+            // rm("-f", nativeApp);
         }
     }
 }

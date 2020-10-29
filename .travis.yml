@@ -16,6 +16,13 @@ env:
         - PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
         # Set arguments so lerna only runs scripts in changed packages
         - SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $TRAVIS_BRANCH"; else echo ""; fi)
+        # Android
+        - COMPILE_API=29
+        - ANDROID_BUILD_TOOLS=29.0.2
+        - ANDROID_HOME=${HOME}/android-sdk
+        - ANDROID_TOOLS_URL="https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip"
+        # PATH order is incredibly important. e.g. the 'emulator' script exists in more than one place!
+        - PATH=${ANDROID_HOME}:${ANDROID_HOME}/emulator:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools:${PATH}
 stages:
     - name: test
       if: tag IS blank
@@ -58,15 +65,25 @@ jobs:
               - npm run release -- --scope '*-web' $SINCE_ARG
               - npm run test:e2e -- --scope '*-web' $SINCE_ARG
         - name: "Run automated end-to-end native tests"
-          os: osx
-          git:
-              submodules: true
-          services:
-              - docker
+          before_install:
+              # Set up JDK 8 for Android SDK - Java is universally needed: codacy, unit tests, emulators
+              - ./tools/pluggable-widgets-tools/scripts/install-android-tools.sh
+              - echo y | sdkmanager --no_https "emulator" >/dev/null # duh
+              - echo y | sdkmanager --no_https "system-images;android-${COMPILE_API};google_apis;x86_64" # install our emulator
+          install:
+              # Set up KVM on linux for hardware acceleration. Manually here so it only happens for emulator tests, takes ~30s
+              - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder >/dev/null
+              - sudo adduser $USER libvirt
+              - sudo adduser $USER kvm
+              - echo no | avdmanager create avd --force -n Pixel_2_API_29 -k "system-images;android-${COMPILE_API};google_apis;x86_64" -c 100M # create device
+              - sudo -E sudo -u "$USER" -E bash -c "${ANDROID_HOME}/emulator/emulator -avd Pixel_2_API_29 -no-snapshot -no-window -no-boot-anim -camera-back none -camera-front none -selinux permissive -qemu -m 2048 &"
+              - echo 'Emu created'
+              - ./tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
+              - adb shell input keyevent 82 & # unlocking the device
           script:
               - set -e
-              - npm run release -- --scope '*-native' $SINCE_ARG
-              - npm run test:e2e -- --scope '*-native' $SINCE_ARG
+              - npm run release -- --scope 'badge-native'
+              - npm run test:e2e -- --scope 'badge-native'
         - stage: deploy
           name: "Release npm package"
           script:
