@@ -31,43 +31,43 @@ stages:
 jobs:
     fast_finish: true
     include:
-        - name: "Run unit tests"
-          script:
-              - set -e
-              - npm run lint -- $SINCE_ARG
-              - npm run test -- $SINCE_ARG
-        - name: "Script tests (Node 10, windows)"
-          node_js: 10
-          os: windows
-          script:
-              - npm run test:scripts -- $SINCE_ARG
-        - name: "Script tests (Node latest, windows)"
-          os: windows
-          script:
-              - npm run test:scripts -- $SINCE_ARG
-        - name: "Script tests (Node latest, linux)"
-          script:
-              - npm run test:scripts -- $SINCE_ARG
-        - name: "Run automated end-to-end web tests"
-          dist: bionic
-          addons:
-              firefox: latest
-          git:
-              submodules: true
-          services:
-              - docker
-              - xvfb
-          env:
-              - BROWSER=firefox
-              - DISPLAY=:99.0
-          script:
-              - set -e
-              - npm run release -- --scope '*-web' $SINCE_ARG
-              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
+        #        - name: "Run unit tests"
+        #          script:
+        #              - set -e
+        #              - npm run lint -- $SINCE_ARG
+        #              - npm run test -- $SINCE_ARG
+        #        - name: "Script tests (Node 10, windows)"
+        #          node_js: 10
+        #          os: windows
+        #          script:
+        #              - npm run test:scripts -- $SINCE_ARG
+        #        - name: "Script tests (Node latest, windows)"
+        #          os: windows
+        #          script:
+        #              - npm run test:scripts -- $SINCE_ARG
+        #        - name: "Script tests (Node latest, linux)"
+        #          script:
+        #              - npm run test:scripts -- $SINCE_ARG
+        #        - name: "Run automated end-to-end web tests"
+        #          dist: bionic
+        #          addons:
+        #              firefox: latest
+        #          git:
+        #              submodules: true
+        #          services:
+        #              - docker
+        #              - xvfb
+        #          env:
+        #              - BROWSER=firefox
+        #              - DISPLAY=:99.0
+        #          script:
+        #              - set -e
+        #              - npm run release -- --scope '*-web' $SINCE_ARG
+        #              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
         - name: "Run automated end-to-end native tests"
           before_install:
               # Set up JDK 8 for Android SDK - Java is universally needed: codacy, unit tests, emulators
-              - ./tools/pluggable-widgets-tools/scripts/install-android-tools.sh
+              - ./packages/tools/pluggable-widgets-tools/scripts/install-android-tools.sh
               - echo y | sdkmanager --no_https "emulator" >/dev/null # duh
               - echo y | sdkmanager --no_https "system-images;android-${COMPILE_API};google_apis;x86_64" # install our emulator
           install:
@@ -78,7 +78,7 @@ jobs:
               - echo no | avdmanager create avd --force -n Pixel_2_API_29 -k "system-images;android-${COMPILE_API};google_apis;x86_64" -c 100M # create device
               - sudo -E sudo -u "$USER" -E bash -c "${ANDROID_HOME}/emulator/emulator -avd Pixel_2_API_29 -no-snapshot -no-window -no-boot-anim -camera-back none -camera-front none -selinux permissive -qemu -m 2048 &"
               - echo 'Emu created'
-              - ./tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
+              - ./packages/tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
               - adb shell input keyevent 82 & # unlocking the device
           script:
               - set -e
