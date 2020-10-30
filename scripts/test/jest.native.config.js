@@ -14,7 +14,7 @@ module.exports = {
     testMatch: [`${cwd}/src/**/*.spec.{ts,tsx}`],
     globals: {
         "ts-jest": {
-            tsConfig: `${cwd}/tsconfig.spec.json`
+            tsconfig: `${cwd}/tsconfig.spec.json`
         }
     },
     collectCoverage: true,
