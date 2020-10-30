@@ -14,13 +14,17 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
     const chartSeries = useSeries(series);
 
-    if (!chartSeries || (xAxisLabel && !xAxisLabel.value) || (yAxisLabel && !yAxisLabel.value)) {
+    if (
+        !chartSeries ||
+        (xAxisLabel && xAxisLabel.value === undefined) ||
+        (yAxisLabel && yAxisLabel.value === undefined)
+    ) {
         return null;
     }
 
     return (
         <LineChartComponent
-            series={chartSeries.reverse()}
+            series={chartSeries}
             style={styles}
             showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}

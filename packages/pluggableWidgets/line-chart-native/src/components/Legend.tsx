@@ -1,11 +1,11 @@
 import { createElement, ReactElement, useMemo } from "react";
 import { Text, View } from "react-native";
 
-import { LineChartStyle } from "../ui/Styles";
+import { LineChartLegendStyle } from "../ui/Styles";
 
 export interface LegendProps {
     series: LegendSeries[];
-    style: LineChartStyle;
+    style?: LineChartLegendStyle;
     colorScale: string[];
 }
 
@@ -22,9 +22,9 @@ export function Legend(props: LegendProps): ReactElement | null {
             series
                 .map((series, index) =>
                     series.name !== undefined ? (
-                        <View key={index} style={style.legend?.item}>
-                            <View style={[{ backgroundColor: colorScale[index] }, style.legend?.indicator]} />
-                            <Text style={style.legend?.label}>{series.name}</Text>
+                        <View key={index} style={style?.item}>
+                            <View style={[{ backgroundColor: colorScale[index] }, style?.indicator]} />
+                            <Text style={style?.label}>{series.name}</Text>
                         </View>
                     ) : null
                 )
@@ -32,5 +32,5 @@ export function Legend(props: LegendProps): ReactElement | null {
         [series]
     );
 
-    return legendItems.length > 0 ? <View style={style.legend?.container}>{legendItems}</View> : null;
+    return legendItems.length > 0 ? <View style={style?.container}>{legendItems}</View> : null;
 }
