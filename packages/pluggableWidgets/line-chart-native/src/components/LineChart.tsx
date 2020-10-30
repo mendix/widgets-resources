@@ -224,7 +224,9 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                             : null}
                     </View>
 
-                    {showLegend ? <Legend style={style} series={series} colorScale={normalisedLineColors} /> : null}
+                    {showLegend ? (
+                        <Legend style={style.legend} series={series} colorScale={normalisedLineColors} />
+                    ) : null}
                 </View>
             )}
         </View>

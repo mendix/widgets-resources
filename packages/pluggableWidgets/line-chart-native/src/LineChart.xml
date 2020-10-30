@@ -8,7 +8,7 @@
             <propertyGroup caption="Data source">
                 <property key="series" type="object" isList="true">
                     <caption>Series</caption>
-                    <description />
+                    <description>Add one or more series (lines). The order influences how lines overlay one another: the first series (from the top) is drawn lowest and other lines are drawn on top of it.</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="type" type="enumeration" defaultValue="static">
