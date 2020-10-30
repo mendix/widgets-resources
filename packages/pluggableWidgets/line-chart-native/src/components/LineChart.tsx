@@ -52,6 +52,19 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
             const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
 
+            const displayMarker = seriesStyle?.markers?.display;
+
+            if (
+                displayMarker !== undefined &&
+                !(displayMarker === "false" || displayMarker === "underneath" || displayMarker === "onTop")
+            ) {
+                console.warn(
+                    `${
+                        warningPrefix ? warningPrefix + "i" : "I"
+                    }nvalid value for series marker style property, display, valid values are "false", "underneath" and "onTop".`
+                );
+            }
+
             const markers =
                 lineStyle === "lineWithMarkers" ||
                 (lineStyle === "custom" && seriesStyle?.markers?.display && seriesStyle.markers.display !== "false") ? (
@@ -88,7 +101,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 console.warn(
                     `${
                         warningPrefix ? warningPrefix + "i" : "I"
-                    }nvalid value for x axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
+                    }nvalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
                 );
             }
 
@@ -105,7 +118,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 console.warn(
                     `${
                         warningPrefix ? warningPrefix + "i" : "I"
-                    }nvalid value for y axis label style property, relativePositionGrid, valid values are "top" and "left".`
+                    }nvalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
                 );
             }
 
