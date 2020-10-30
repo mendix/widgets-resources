@@ -51,7 +51,25 @@ export async function ScheduleNotification(
     const notification = { message: body } as PushNotificationScheduleObject;
 
     if (!isIOS) {
-        notification.channelId = "mendix-local-notifications";
+        const channelId = "mendix-local-notifications";
+        const channelExists = await new Promise(resolve =>
+            RNPushNotification.channelExists(channelId, (exists: boolean) => resolve(exists))
+        );
+        if (!channelExists) {
+            const channel = await new Promise(resolve =>
+                RNPushNotification.createChannel(
+                    {
+                        channelId,
+                        channelName: "Local notifications"
+                    },
+                    created => resolve(created)
+                )
+            );
+            if (!channel) {
+                return Promise.reject(new Error("Could not create the local notifications channel"));
+            }
+        }
+        notification.channelId = channelId;
     }
 
     if (notificationId && Number(notificationId)) {
