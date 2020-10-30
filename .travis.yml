@@ -66,7 +66,7 @@ jobs:
         #              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
         - name: "Run automated end-to-end native tests"
           dist: bionic
-          language: node_js
+          language: java
           jdk:
               - openjdk8
           before_install:
@@ -74,6 +74,7 @@ jobs:
               - ./packages/tools/pluggable-widgets-tools/scripts/install-android-tools.sh
               - echo y | sdkmanager --no_https "emulator" >/dev/null # duh
               - echo y | sdkmanager --no_https "system-images;android-${COMPILE_API};google_apis;x86_64" # install our emulator
+              - nvm install 14
           install:
               # Set up KVM on linux for hardware acceleration. Manually here so it only happens for emulator tests, takes ~30s
               - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder >/dev/null
@@ -85,7 +86,6 @@ jobs:
               - ./packages/tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
               - adb shell input keyevent 82 & # unlocking the device
               - npm install
-              - node --version
           script:
               - set -e
               - npm run release -- --scope 'badge-native'
