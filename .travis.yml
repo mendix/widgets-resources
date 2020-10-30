@@ -65,8 +65,8 @@ jobs:
         #              - npm run release -- --scope '*-web' $SINCE_ARG
         #              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
         - name: "Run automated end-to-end native tests"
-          dist: xenial
-          language: java
+          dist: bionic
+          language: node_js
           jdk:
               - openjdk8
           before_install:
