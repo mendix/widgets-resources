@@ -65,7 +65,7 @@ jobs:
         #              - npm run release -- --scope '*-web' $SINCE_ARG
         #              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
         - name: "Run automated end-to-end native tests"
-          dist: bionic
+          dist: xenial
           language: java
           jdk:
               - openjdk8
@@ -85,6 +85,7 @@ jobs:
               - ./packages/tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
               - adb shell input keyevent 82 & # unlocking the device
               - npm install
+              - node --version
           script:
               - set -e
               - npm run release -- --scope 'badge-native'
