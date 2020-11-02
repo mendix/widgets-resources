@@ -1,7 +1,7 @@
 {
-    "extends": "../../../../configs/e2e/tsconfig.json",
+    "extends": "../../../../../configs/e2e/tsconfig.json",
     "compilerOptions": {
-        "baseUrl": ".",
+        "baseUrl": "./",
         "rootDir": "./"
     },
     "include": ["./"],

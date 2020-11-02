@@ -25,17 +25,17 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server --open",
-    "dev": "pluggable-widgets-tools start:web",
-    "build": "pluggable-widgets-tools build:web",
-    "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "..\"/../node_modules/.bin/jest\" --config ../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://fieldset-sandbox.mxapps.io ../../scripts/test/projectup.sh",
+    "start": "node_modules/.bin/pluggable-widgets-tools start:server --open",
+    "dev": "node_modules/.bin/pluggable-widgets-tools start:web",
+    "build": "node_modules/.bin/pluggable-widgets-tools build:web",
+    "format": "node_modules/.bin/pluggable-widgets-tools format",
+    "lint": "..\\\"/../node_modules/.bin/eslint\\\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\\\"/../node_modules/.bin/jest\\\" --config ../../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "..\\\"/../node_modules/.bin/cross-env\\\" URL=https://fieldset-sandbox.mxapps.io ../../../scripts/test/projectup.sh",
     "test:e2e": "..\"/../node_modules/.bin/cross-env\" URL=https://fieldset-sandbox.mxapps.io/ ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-    "test:e2e:dev": "..\"/../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-    "release": "pluggable-widgets-tools release:web",
-    "svncheckout": "..\"/../node_modules/.bin/ts-node\" --project ../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
+    "test:e2e:dev": "..\\\"/../node_modules/.bin/cross-env\\\" DEBUG=true node ../../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "node_modules/.bin/pluggable-widgets-tools release:web",
+    "svncheckout": "..\\\"/../node_modules/.bin/ts-node\\\" --project ../../../scripts/tsconfig.json ../../scripts/svn/CheckoutProject.ts"
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0"
