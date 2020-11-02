@@ -40,6 +40,8 @@ export interface LineChartDataPoint<X extends number | Date, Y extends number | 
 export function LineChart(props: LineChartProps): ReactElement | null {
     const { series, showLegend, style, warningPrefix, xAxisLabel, yAxisLabel } = props;
 
+    const warningMessagePrefix = useMemo(() => (warningPrefix ? warningPrefix + "i" : "I"), [warningPrefix]);
+
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
     const chartLines = useMemo(() => {
@@ -59,9 +61,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 !(displayMarker === "false" || displayMarker === "underneath" || displayMarker === "onTop")
             ) {
                 console.warn(
-                    `${
-                        warningPrefix ? warningPrefix + "i" : "I"
-                    }nvalid value for series marker style property, display, valid values are "false", "underneath" and "onTop".`
+                    `${warningMessagePrefix}nvalid value for series marker style property, display, valid values are "false", "underneath" and "onTop".`
                 );
             }
 
@@ -83,7 +83,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 </VictoryGroup>
             );
         });
-    }, [dataTypesResult, series, style]);
+    }, [dataTypesResult, series, style, warningMessagePrefix]);
 
     const [firstSeries] = series;
 
@@ -99,9 +99,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         ) {
             if (extractedXAxisLabelStyle.relativePositionGrid !== undefined) {
                 console.warn(
-                    `${
-                        warningPrefix ? warningPrefix + "i" : "I"
-                    }nvalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
+                    `${warningMessagePrefix}nvalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
                 );
             }
 
@@ -116,9 +114,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         ) {
             if (extractedYAxisLabelStyle.relativePositionGrid !== undefined) {
                 console.warn(
-                    `${
-                        warningPrefix ? warningPrefix + "i" : "I"
-                    }nvalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
+                    `${warningMessagePrefix}nvalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
                 );
             }
 
@@ -131,7 +127,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             extractedYAxisLabelStyle,
             yAxisLabelStyle
         };
-    }, [style]);
+    }, [style, warningMessagePrefix]);
 
     const xAxisLabelComponent = xAxisLabel ? <Text style={axisLabelStyles.xAxisLabelStyle}>{xAxisLabel}</Text> : null;
     const yAxisLabelComponent = yAxisLabel ? <Text style={axisLabelStyles.yAxisLabelStyle}>{yAxisLabel}</Text> : null;
