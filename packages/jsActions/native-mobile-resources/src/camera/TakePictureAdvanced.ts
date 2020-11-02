@@ -141,7 +141,7 @@ export async function TakePictureAdvanced(
         const { maxWidth, maxHeight } = getPictureQuality();
 
         return {
-            mediaType: "photo" as "photo",
+            mediaType: "photo" as const,
             maxWidth,
             maxHeight,
             noData: true,

@@ -13,7 +13,6 @@ To customize any core styling, copy the part you want to customize to styles/nat
 
     Default Class For Mendix Slider Widget
 ========================================================================== */
-// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_slider_Slider: SliderType = {
     container: {
         // All ViewStyle properties are allowed

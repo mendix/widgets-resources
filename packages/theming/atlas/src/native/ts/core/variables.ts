@@ -543,7 +543,6 @@ let progressCircle: VariablesProgressCircle = {
 progressCircle = merge(progressCircle, custom.progressCircle || ({} as any));
 //
 // Rating Styles
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
 let rating: VariablesRating = {
     containerDisabled: {
         opacity: 0.5
@@ -554,6 +553,7 @@ let rating: VariablesRating = {
         selectedColor: brand.warning
     }
 };
+// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 rating = merge(rating, custom.rating || ({} as any));
 //
 // (Range)Slider Styles

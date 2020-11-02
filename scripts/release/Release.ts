@@ -89,13 +89,11 @@ async function releaseWithAuth(auth: TokenData, projectPackage: any): Promise<st
     }`;
 
     const options = {
-        // eslint-disable-next-line @typescript-eslint/camelcase
         tag_name: `${projectPackage.name}-v${projectPackage.version}`,
         name: tagName,
         assets: assets.filter(asset => existsSync(projectPackage.path + "/" + asset)),
         auth,
         workpath: projectPackage.path,
-        // eslint-disable-next-line @typescript-eslint/camelcase
         target_commitish: "master",
         draft: true
     };

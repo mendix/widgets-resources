@@ -67,6 +67,7 @@ export function Notifications(props: NotificationsProps<undefined>) {
             if (!messaging().isDeviceRegisteredForRemoteMessages) {
                 messaging()
                     .registerDeviceForRemoteMessages()
+                    // eslint-disable-next-line @typescript-eslint/no-empty-function
                     .then(() => {});
             }
             messaging()
