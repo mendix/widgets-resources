@@ -60,14 +60,14 @@ async function main() {
 
     const nativePlatforms = process.env.TRAVIS === "true" ? "=android" : "";
     execSync(
-        `docker run -t -v ${process.cwd()}:/source --rm mxbuild:${latestMendixVersion} ` +
+        `docker run -t -v ${process.cwd()}:/source --rm mxbuild:${latestMendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
             (isNativeEnabled
                 ? `--native-packager --native-packager-platform${nativePlatforms} --disable-native-animations `
                 : "") +
-            `-o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
+            `-o /tmp/automation.mda /source/${projectFile}"`,
         { stdio: "inherit" }
     );
-    console.log("Bundle created!");
+    console.log("Bundle created and all the widgets are updated");
 
     let nativeApp;
     let runtimeContainerId;
