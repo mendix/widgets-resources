@@ -7,24 +7,13 @@ describe("Slider widget", () => {
             page.open();
             const sliderWidget = new SliderWidget("sliderContext");
 
-            const minimumValue = page
-                .getWidget("textBoxMinimumValue")
-                .$("input")
-                .getValue();
+            const minimumValue = page.getWidget("textBoxMinimumValue").$("input").getValue();
             expect(sliderWidget.getMinimumMarker().label.getText()).toBe(minimumValue);
 
-            const maximumValue = page
-                .getWidget("textBoxMaximumValue")
-                .$("input")
-                .getValue();
+            const maximumValue = page.getWidget("textBoxMaximumValue").$("input").getValue();
             expect(sliderWidget.getMaximumMarker().label.getText()).toBe(maximumValue);
 
-            expect(
-                page
-                    .getWidget("textBoxValue")
-                    .$("input")
-                    .getValue()
-            ).toBe("10");
+            expect(page.getWidget("textBoxValue").$("input").getValue()).toBe("10");
             expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 50%;");
         });
 
@@ -65,8 +54,7 @@ describe("Slider widget", () => {
                 () => {
                     return modalDialogText.getText() === "Slider Value is 0";
                 },
-                1000,
-                "expected text to be different after 1s"
+                { timeout: 1000, timeoutMsg: "expected text to be different after 1s" }
             );
             expect(modalDialogText.getText()).toContain("0");
         });
@@ -83,8 +71,7 @@ describe("Slider widget", () => {
                 () => {
                     return modalDialogText.getText() === "Slider Value is 0";
                 },
-                1000,
-                "expected text to be different after 1s"
+                { timeout: 1000, timeoutMsg: "expected text to be different after 1s" }
             );
             expect(modalDialogText.getText()).toContain("0");
         });
@@ -109,7 +96,7 @@ describe("Slider widget", () => {
             const sliderWidget = new SliderWidget("slider");
 
             const markers = sliderWidget.getMarkers();
-            expect(markers.length).toBe(10);
+            expect(markers).toHaveLength(10);
             expect(markers[0].dot.getCSSProperty("left").value).toBe("0px");
             expect(markers[0].label.getText()).toBe("0");
             expect(markers[markers.length - 1].dot.getAttribute("style")).toContain("left: 100%;");

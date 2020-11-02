@@ -58,6 +58,7 @@ exports.config = {
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
     jasmineNodeOpts: {
+        helpers: [require("@babel/register")],
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
     afterTest: test => {
