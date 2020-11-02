@@ -96,11 +96,12 @@ describe("Slider widget", () => {
             const sliderWidget = new SliderWidget("slider");
 
             const markers = sliderWidget.getMarkers();
-            expect(markers).toHaveLength(10);
+            const markerSize = markers.length;
+            expect(markerSize).toBe(10);
             expect(markers[0].dot.getCSSProperty("left").value).toBe("0px");
             expect(markers[0].label.getText()).toBe("0");
-            expect(markers[markers.length - 1].dot.getAttribute("style")).toContain("left: 100%;");
-            expect(markers[markers.length - 1].label.getText()).toBe("20");
+            expect(markers[markerSize - 1].dot.getAttribute("style")).toContain("left: 100%;");
+            expect(markers[markerSize - 1].label.getText()).toBe("20");
             expect(markers[3].dot.getAttribute("style")).toContain("left: 33.5%;");
             expect(markers[3].label.getText()).toBe("6.7");
         });
