@@ -78,8 +78,12 @@ React-hot-loader is not anymore needed to provide auto refresh functionality. Th
 
 **If you do not change your widget, hot will be replaced with a noop function that has no effect.**
 
-## Running e2e tests locally
+## Running native e2e tests locally
 
-process.env.TEST_NATIVE_APP_IOS
-process.env.TEST_NATIVE_APP_ANDROID,
-process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
+In travis currently only android native tests are be able to run,
+
+export ANDROID_HOME=yourAndroidHome usually ~/Library/Android/sdk
+export ANDROID_BUILD_TOOLS=29.0.2
+export TEST_NATIVE_APP_IOS=ios .app test path
+export TEST_NATIVE_APP_ANDROID=android apk path
+export TEST_NATIVE_APP_ANDROID_TEST_BINARY=android detox apk path

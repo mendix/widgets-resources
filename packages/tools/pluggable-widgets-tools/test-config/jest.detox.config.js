@@ -1,6 +1,9 @@
 module.exports = {
     preset: "ts-jest",
-    reporters: ["detox/runners/jest/streamlineReporter", ["jest-junit", { outputDirectory: "./results" }]],
+    reporters: [
+        "detox/runners/jest/streamlineReporter",
+        ["jest-junit", { outputDirectory: `${process.cwd()}/results` }]
+    ],
     rootDir: process.cwd(),
     setupFilesAfterEnv: [`${__dirname}/jest.detox.startup.js`],
     testMatch: ["<rootDir>/**/e2e/*.spec.{js,jsx,ts,tsx}"],

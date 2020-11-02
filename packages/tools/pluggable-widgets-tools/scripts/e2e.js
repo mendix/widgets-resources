@@ -143,7 +143,7 @@ async function main() {
                 );
                 // IOS jungling ends
 
-                execSync(`detox test --configuration ios.simulator`, {
+                execSync(`sudo detox test --configuration ios.simulator`, {
                     stdio: "inherit",
                     env: { ...process.env, TEST_NATIVE_APP_IOS: nativeAppPaths.iosPath }
                 });
@@ -162,10 +162,10 @@ async function main() {
         throw e;
     } finally {
         if (runtimeContainerId) {
-            // execSync(`docker rm -f ${runtimeContainerId.trim()}`);
+            execSync(`docker rm -f ${runtimeContainerId.trim()}`);
         }
         if (nativeApp) {
-            // rm("-f", nativeApp);
+            rm("-f", nativeApp);
         }
     }
 }

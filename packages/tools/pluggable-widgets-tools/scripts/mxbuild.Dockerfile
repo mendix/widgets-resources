@@ -21,10 +21,8 @@ RUN \
 \
     echo "#!/bin/bash -x" >/bin/mxbuild && \
     echo "mono /tmp/mxbuild/modeler/mxbuild.exe --java-home=/usr/lib/jvm/jdk-11.0.2 --java-exe-path=/usr/lib/jvm/jdk-11.0.2/bin/java $(printf '%s\n' '$@')" >>/bin/mxbuild && \
-    cat /bin/mxbuild && \
     chmod +x /bin/mxbuild && \
 \
     echo "#!/bin/bash -x" >/bin/mx && \
     echo "mono /tmp/mxbuild/modeler/mx.exe $(printf '%s\n' '$@')" >>/bin/mx && \
-    cat /bin/mx && \
     chmod +x /bin/mx
