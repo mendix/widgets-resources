@@ -21,7 +21,7 @@
   "dependencies": {
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0",
-    "react-native-gesture-handler": "1.6.0"
+    "react-native-gesture-handler": "1.8.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
