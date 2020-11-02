@@ -104,12 +104,12 @@ async function main() {
             execSync(`zip -ur ${nativeAppPaths.androidPath} res`);
 
             execSync(
-                `echo android | $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS/apksigner sign --ks $HOME/.android/debug.keystore ${nativeAppPaths.androidPath}`
+                `echo android | $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS/apksigner sign --ks ../../tools/pluggable-widgets-tools/src/native/debug.keystore ${nativeAppPaths.androidPath}`
             );
 
             // Resign the binary because it needs to be signed with the same signer as real apk
             execSync(
-                `echo android | $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS/apksigner sign --ks $HOME/.android/debug.keystore ${nativeAppPaths.androidTestBinaryPath}`
+                `echo android | $ANDROID_HOME/build-tools/$ANDROID_BUILD_TOOLS/apksigner sign --ks ../../tools/pluggable-widgets-tools/src/native/debug.keystore ${nativeAppPaths.androidTestBinaryPath}`
             );
 
             console.warn(nativeAppPaths.androidPath);
