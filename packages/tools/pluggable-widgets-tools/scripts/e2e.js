@@ -143,7 +143,7 @@ async function main() {
                 );
                 // IOS jungling ends
 
-                execSync(`sudo detox test --configuration ios.simulator`, {
+                execSync(`detox test --configuration ios.simulator`, {
                     stdio: "inherit",
                     env: { ...process.env, TEST_NATIVE_APP_IOS: nativeAppPaths.iosPath }
                 });

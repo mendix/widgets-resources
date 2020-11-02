@@ -87,7 +87,7 @@ jobs:
               - echo 'Emu created'
               - ./packages/tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
               - adb shell input keyevent 82 & # unlocking the device
-              - npm install
+              - npm ci
           script:
               - set -e
               - npm run release -- --scope 'badge-native' $SINCE_ARG
