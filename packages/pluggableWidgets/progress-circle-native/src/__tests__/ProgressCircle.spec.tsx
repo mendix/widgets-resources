@@ -78,7 +78,7 @@ No current value provided.`
 
     it("renders no text", () => {
         const component = render(<ProgressCircle {...createProps(50, 0, 100)} circleText={"none"} />);
-        expect(component.queryByType(Text)).toBeNull();
+        expect(component.UNSAFE_queryByType(Text)).toBeNull();
     });
 });
 

@@ -32,7 +32,7 @@ describe("Slider", () => {
         const component = render(
             <Slider {...defaultProps} valueAttribute={new EditableValueBuilder<BigJs.Big>().isLoading().build()} />
         );
-        expect(component.queryByType(Text)).toBeNull();
+        expect(component.UNSAFE_queryByType(Text)).toBeNull();
     });
 
     it("renders an error when the minimum is greater than the maximum", () => {

@@ -901,7 +901,6 @@ exports[`Signature iOS renders with custom styles 1`] = `
     <View
       accessible={false}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -953,7 +952,6 @@ exports[`Signature iOS renders with custom styles 1`] = `
     <View
       accessible={false}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -1904,7 +1902,6 @@ exports[`Signature iOS renders with default styles 1`] = `
     <View
       accessible={false}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -1956,7 +1953,6 @@ exports[`Signature iOS renders with default styles 1`] = `
     <View
       accessible={false}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}

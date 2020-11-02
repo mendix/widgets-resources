@@ -8,7 +8,6 @@ exports[`Popup menu renders menu triggerer 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -106,7 +105,6 @@ exports[`Popup menu renders menu triggerer 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -114,7 +112,6 @@ exports[`Popup menu renders menu triggerer 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              style={null}
             >
               <View
                 style={
@@ -178,7 +175,6 @@ exports[`Popup menu with basic items renders 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -272,7 +268,6 @@ exports[`Popup menu with basic items renders 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -280,7 +275,6 @@ exports[`Popup menu with basic items renders 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              style={null}
             >
               <View
                 style={
@@ -344,7 +338,6 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -438,7 +431,6 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -446,7 +438,6 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              style={null}
             >
               <View
                 style={
@@ -512,7 +503,6 @@ exports[`Popup menu with custom items renders 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -606,7 +596,6 @@ exports[`Popup menu with custom items renders 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -614,7 +603,6 @@ exports[`Popup menu with custom items renders 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              style={null}
             >
               <Text>
                 Yolo
@@ -636,7 +624,6 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
     <View
       accessible={true}
       focusable={true}
-      isTVSelectable={true}
       onClick={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -730,7 +717,6 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
             <View
               accessible={true}
               focusable={true}
-              isTVSelectable={true}
               onClick={[Function]}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -738,7 +724,6 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
               onResponderTerminate={[Function]}
               onResponderTerminationRequest={[Function]}
               onStartShouldSetResponder={[Function]}
-              style={null}
             >
               <Text>
                 Yolo

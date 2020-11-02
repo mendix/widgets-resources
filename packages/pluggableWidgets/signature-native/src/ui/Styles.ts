@@ -10,6 +10,7 @@ interface ButtonContainerType extends ViewStyle {
 export interface SignatureStyle extends Style {
     container: ViewStyle & {
         penColor?: string;
+        backgroundColor?: string;
     };
     buttonWrapper: ViewStyle;
     buttonClearContainer: ButtonContainerType;
