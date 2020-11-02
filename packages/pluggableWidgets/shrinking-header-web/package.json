@@ -1,5 +1,5 @@
 {
-  "name": "shrinking-header",
+  "name": "shrinking-header-web",
   "widgetName": "ShrinkingHeader",
   "version": "1.0.0",
   "description": "A fixed header that shrinks when scrolling down a page",
