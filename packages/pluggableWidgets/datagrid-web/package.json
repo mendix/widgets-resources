@@ -1,0 +1,39 @@
+{
+  "name": "datagrid-web",
+  "widgetName": "Datagrid",
+  "version": "1.0.0",
+  "description": "",
+  "copyright": "Mendix B.V.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "release": "pluggable-widgets-tools release:ts"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.29",
+    "@fortawesome/free-solid-svg-icons": "^5.13.1",
+    "@fortawesome/free-regular-svg-icons": "^5.13.1",
+    "@fortawesome/react-fontawesome": "^0.1.11",
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "react-table": "^7.5.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@testing-library/react-hooks": "^3.4.2",
+    "@types/react-table": "^7.0.20"
+  }
+}

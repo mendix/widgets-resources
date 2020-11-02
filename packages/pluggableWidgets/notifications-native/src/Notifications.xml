@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.notifications.Notifications" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Notifications</name>
+    <description>Trigger actions based on incoming notifications.</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAFIAAABICAYAAABlYaJmAAAEJGlDQ1BJQ0MgUHJvZmlsZQAAOBGFVd9v21QUPolvUqQWPyBYR4eKxa9VU1u5GxqtxgZJk6XtShal6dgqJOQ6N4mpGwfb6baqT3uBNwb8AUDZAw9IPCENBmJ72fbAtElThyqqSUh76MQPISbtBVXhu3ZiJ1PEXPX6yznfOec7517bRD1fabWaGVWIlquunc8klZOnFpSeTYrSs9RLA9Sr6U4tkcvNEi7BFffO6+EdigjL7ZHu/k72I796i9zRiSJPwG4VHX0Z+AxRzNRrtksUvwf7+Gm3BtzzHPDTNgQCqwKXfZwSeNHHJz1OIT8JjtAq6xWtCLwGPLzYZi+3YV8DGMiT4VVuG7oiZpGzrZJhcs/hL49xtzH/Dy6bdfTsXYNY+5yluWO4D4neK/ZUvok/17X0HPBLsF+vuUlhfwX4j/rSfAJ4H1H0qZJ9dN7nR19frRTeBt4Fe9FwpwtN+2p1MXscGLHR9SXrmMgjONd1ZxKzpBeA71b4tNhj6JGoyFNp4GHgwUp9qplfmnFW5oTdy7NamcwCI49kv6fN5IAHgD+0rbyoBc3SOjczohbyS1drbq6pQdqumllRC/0ymTtej8gpbbuVwpQfyw66dqEZyxZKxtHpJn+tZnpnEdrYBbueF9qQn93S7HQGGHnYP7w6L+YGHNtd1FJitqPAR+hERCNOFi1i1alKO6RQnjKUxL1GNjwlMsiEhcPLYTEiT9ISbN15OY/jx4SMshe9LaJRpTvHr3C/ybFYP1PZAfwfYrPsMBtnE6SwN9ib7AhLwTrBDgUKcm06FSrTfSj187xPdVQWOk5Q8vxAfSiIUc7Z7xr6zY/+hpqwSyv0I0/QMTRb7RMgBxNodTfSPqdraz/sDjzKBrv4zu2+a2t0/HHzjd2Lbcc2sG7GtsL42K+xLfxtUgI7YHqKlqHK8HbCCXgjHT1cAdMlDetv4FnQ2lLasaOl6vmB0CMmwT/IPszSueHQqv6i/qluqF+oF9TfO2qEGTumJH0qfSv9KH0nfS/9TIp0Wboi/SRdlb6RLgU5u++9nyXYe69fYRPdil1o1WufNSdTTsp75BfllPy8/LI8G7AUuV8ek6fkvfDsCfbNDP0dvRh0CrNqTbV7LfEEGDQPJQadBtfGVMWEq3QWWdufk6ZSNsjG2PQjp3ZcnOWWing6noonSInvi0/Ex+IzAreevPhe+CawpgP1/pMTMDo64G0sTCXIM+KdOnFWRfQKdJvQzV1+Bt8OokmrdtY2yhVX2a+qrykJfMq4Ml3VR4cVzTQVz+UoNne4vcKLoyS+gyKO6EHe+75Fdt0Mbe5bRIf/wjvrVmhbqBN97RD1vxrahvBOfOYzoosH9bq94uejSOQGkVM6sN/7HelL4t10t9F4gPdVzydEOx83Gv+uNxo7XyL/FtFl8z9ZAHF4bBsrEwAAAAlwSFlzAAALEwAACxMBAJqcGAAABShJREFUeAHtml1IHFcUgI+7brdG4240RtIaK1uqL32oD0kLESUPkUKkIOlLCn0oJWlJWiM0QQqx+GCo5KWJpUXNQ9r3oAVLwSKFuq20IWCEvmgSUTfVjTXVXU2W1f3JnGl24kx0d37OzL3N3gvL3nN/zrnnm3Pnzty5BdFoNA0iWSbgsqxBKJAJCJBEgSBACpBEBIjUiIgUIIkIEKkREfk8g3S52F9fo2NgP2JNRKADqVRKU+q8iGMwArPQ+SFmt7gVYmJuBlb6euHhjRvZOxHVFh86BHs+boPCVwKyxq1jyWWigNdXRIS4cOYkpGKxXD6Q1ruKiuClb64qMPUq525qZwaOkeg0RLSNNtG20cQtSKem83bAzNjmFuR2DvJcJkASXR3uVm0KvwrLy+CFqipIRSKwsbAIqY0NCrVZdTxXIMtaWqDy7Hko9JWpnI78/CMsfn0ZNu/fV5VTCkxBxqQVsr+/H2ZmZmSfAoEAtLe3m/Kv+mIP+I4e27avr7kFShqOwN0TrRBfXNy2jdVCpvfIrRDRkQxQo07taW5WQVz96Qe413kOIiPDkE4kZHXuXcXwctdFo6p1t2cakWbBab3b+/6HStH6n79DqKtTlldGRqBybhb2nfpUlovrD4J7925Irq0p7akyTCOSxAnp3dwbeE1RFQ3+ouQxEw3+qpK9NdUqmUpgEpHj4+MwOTlJ40NBAcye+UDRFbtzR8ljxlNerpJT649UMpXgKMjR0VEYkaZbPB6nGj9AMgnrt3a+KL6jbyu2Eg/+gY3QPUWmzDgCcnl5GQYGBiAcDlOOPaeu0oYG8B9rVdotXeuDVGJTkSkztoMMhULQ29tLG4U6CHj2VUBVV4/Scv2P3+DB9euKTJ2xdbHBSGQBEVfmmit94C71ybzi87MQ6uyQtnbs2zC2FSROZ9L7oY4wckv7iTVXvoUXX62VWydW/oW5sx9BIhLV0dt8E9tADg8PO35PdHk8UH3pK9j1+hsykaT05jTbdgrify+YJ6Szpy0g8dVvbGxM5xCImrldcKC7B0rePCwrTEuLSuiz0xCbmiIykF2NLSAnJiacndLSs+SBz7+A0iPN/0FMpyF04Rys3byZ3XvCWltWbbKHbZ2O7j/9CfjfOa60TiyFoeTgW/JPKXyS2QwvwNL332mLLcu2gKR6h9brXcnhJlVTT+V+KDt+QlWWER79dcsWkLZMbadX6gwklv/kEYkLjdPp9nvvOm3yGXu2ROQzVvKggBxkkfRAnI+JHGQ+QkSfBUiiK88tSDzQxCqZsc0tSDwVhgeanE5oE20bTdyBHBwclH3Ao3V4KsxMdBiFkGmPtsycRMP+5M+RmUGZ/Q8Gg9DU1ATl0rcWhFnx5WWoMKvMYj8jh165i8ik9A2mu7sbMpFpkYXp7kYgohFbDpq2tRm/x5jxGHffeUncRSQvYIyOgxzklEMbqeiok7ZygSUHOT09ncsmWb2TtnINmhQkfnp18hMD2kKbPCTLiw1um83PzwNGBzrm9F6k1+uFxsZGqK2thbq6OmZMSUB2dEjfjDlILFdxy1M7X7fNtHFjOSK1CvNVthyR+QpO6zezd+1cbz8s73daSHpkZhHp9/t3HF+2uh07Ma5gBrK19em5RS2DbHXatrzIzKZ2fX29zGBoaAhWV1flPEYiQszU8QJJzzjEqq2Hko42zKa2jrH9r5oIkESXS4AUIIkIEKkRESlAEhEgUiMiUoAkIkCkRkSkAElEgEiNiEgBkogAkRoRkUQgHwMD6ISmSLyh0gAAAABJRU5ErkJggg==</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="actions" type="object" isList="true">
+                <caption>Actions</caption>
+                <description/>
+                <properties>
+                    <property key="name" type="string">
+                        <caption>Action name</caption>
+                        <category>Action</category>
+                        <description>Unique identifier for the action (Should match the notification action name provided in the 'Send message' action).</description>
+                    </property>
+                    <property key="onReceive" type="action" required="false">
+                        <caption>On receive</caption>
+                        <category>Action</category>
+                        <description>Called when the notification is received while the application is running.</description>
+                    </property>
+                    <property key="onOpen" type="action" required="false">
+                        <caption>On open</caption>
+                        <category>Action</category>
+                        <description>Called when the application is opened by tapping the notification. By default the application opens without further action.</description>
+                    </property>
+                </properties>
+            </property>
+            <property key="guid" type="attribute" required="false">
+                <caption>GUID</caption>
+                <description>If a handled notification includes an object, the GUID of that object will be set on this attribute.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="title" type="attribute" required="false">
+                <caption>Title</caption>
+                <description>If the notification has a title, this attribute will get that value.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="subtitle" type="attribute" required="false">
+                <caption>Subtitle</caption>
+                <description>If the notification has a subtitle, this attribute will get that value.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="body" type="attribute" required="false">
+                <caption>Body</caption>
+                <description>If the notification has a body, this attribute will get that value.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="action" type="attribute" required="false">
+                <caption>Actions</caption>
+                <description>If the notification has actions, this attribute will get the name of all actions joined by spaces.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

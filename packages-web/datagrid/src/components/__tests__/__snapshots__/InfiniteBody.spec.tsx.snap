@@ -1,8 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Infinite Body renders the structure correctly 1`] = `
-<div
-  className="tbody"
-  style={Object {}}
-/>
-`;

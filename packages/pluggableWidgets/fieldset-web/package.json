@@ -1,0 +1,35 @@
+{
+  "name": "fieldset-web",
+  "widgetName": "Fieldset",
+  "version": "1.0.0",
+  "description": "A container to group several controls within a web form",
+  "copyright": "Mendix B.V.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server --open",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+  }
+}

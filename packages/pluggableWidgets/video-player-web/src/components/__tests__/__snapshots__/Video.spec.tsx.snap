@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Video Player Renders the structure of dailymotion tags 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://www.dailymotion.com/embed/video/123456?sharing-enable=false&autoplay=false&mute=false&controls=false"
+>
+  <div />
+</iframe>
+`;
+
+exports[`Video Player Renders the structure of html5 player tags 1`] = `
+<div
+  className="widget-video-player-html5-container"
+>
+  <div
+    className="video-error-label-html5"
+  >
+    The video failed to load :(
+  </div>
+  <video
+    autoPlay={false}
+    className="widget-video-player-html5"
+    controls={false}
+    height="100%"
+    loop={false}
+    muted={false}
+    poster=""
+    preload="auto"
+  >
+    <source
+      onError={[Function]}
+      onLoad={[Function]}
+      src="http://ext.com/video.mp4"
+      type="video/mp4"
+    />
+    <div />
+  </video>
+</div>
+`;
+
+exports[`Video Player Renders the structure of vimeo tags 1`] = `
+<iframe
+  allow="autoplay; fullscreen"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="https://player.vimeo.com/video/123456?dnt=1&autoplay=0&muted=0&loop=0"
+>
+  <div />
+</iframe>
+`;
+
+exports[`Video Player Renders the structure of youtube tags 1`] = `
+<iframe
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+  allowFullScreen={true}
+  className="widget-video-player-iframe"
+  frameBorder="0"
+  src="http://youtube.com/video/123456"
+>
+  <div />
+</iframe>
+`;

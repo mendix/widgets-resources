@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.signature.Signature" supportedPlatform="Native" needsEntityContext="true"
+        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Signature</name>
+    <description>Display signature.</description>
+    <icon>
+             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
+    </icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="imageAttribute" type="attribute">
+                    <caption>Attribute</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Buttons">
+                <property key="buttonCaptionClear" type="textTemplate" required="false">
+                    <caption>Button caption clear</caption>
+                    <description />
+                </property>
+                <property key="buttonCaptionSave" type="textTemplate" required="false">
+                    <caption>Button caption save</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onClear" type="action" required="false">
+                <caption>On clear</caption>
+                <description>Fired when the clear button is clicked.</description>
+            </property>
+            <property key="onSave" type="action" required="false">
+                <caption>On save</caption>
+                <description>Fired when the save button is clicked.</description>
+            </property>
+            <property key="onEnd" type="action" required="false">
+                <caption>On end</caption>
+                <description>Fired when the stroke has ended.</description>
+            </property>
+            <property key="onEmpty" type="action" required="false">
+                <caption>On empty</caption>
+                <description>Fired when the save button is clicked and the canvas is empty.</description>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Name"/>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,9 @@
+{
+    "extends": "@widgets-resources/utils-react-widgets/test-configs/e2e/tsconfig",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "rootDir": "./"
+    },
+    "include": ["./"],
+    "exclude": ["../../node_modules", "../../../../node_modules"]
+}

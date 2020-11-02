@@ -2,10 +2,13 @@ dist: xenial
 language: node_js
 node_js: 14
 cache: npm
+git:
+    submodules: false
 branches:
     only:
         - master
         - /^pluggable-widgets-tools-v*/
+        - /^generator-widget-v*/
 env:
     global:
         # Build only touched packages for pull requests when no shared files were touched
@@ -21,49 +24,45 @@ stages:
 jobs:
     fast_finish: true
     include:
-        - name: "Lint"
-          script:
-              - npm run lint -- $SINCE_ARG
-        - name: "Build on Linux"
-          script:
-              - npm run build -- $SINCE_ARG
         - name: "Run unit tests"
           script:
+              - set -e
+              - npm run lint -- $SINCE_ARG
               - npm run test -- $SINCE_ARG
-        - name: "Cross-platform tests (Node 10, windows)"
+        - name: "Script tests (Node 10, windows)"
           node_js: 10
           os: windows
           script:
-              - npm run test:cross-platform -- $SINCE_ARG
-        - name: "Cross-platform tests (Node 10, linux)"
-          node_js: 10
-          script:
-              - npm run test:cross-platform -- $SINCE_ARG
-        - name: "Cross-platform tests (Node latest, windows)"
+              - npm run test:scripts -- $SINCE_ARG
+        - name: "Script tests (Node latest, windows)"
           os: windows
           script:
-              - npm run test:cross-platform -- $SINCE_ARG
-        - name: "Cross-platform tests (Node latest, linux)"
+              - npm run test:scripts -- $SINCE_ARG
+        - name: "Script tests (Node latest, linux)"
           script:
-              - npm run test:cross-platform -- $SINCE_ARG
-        - name: "Run end-to-end tests"
-          dist: trusty
+              - npm run test:scripts -- $SINCE_ARG
+        - name: "Run automated end-to-end tests"
+          dist: bionic
           addons:
               firefox: latest
+          git:
+              submodules: true
           services:
+              - docker
               - xvfb
-          before_install:
-              - export DISPLAY=:99.0
-              - sh -e /etc/init.d/xvfb start
-              - sleep 3
+          env:
+              - BROWSER=firefox
+              - DISPLAY=:99.0
           script:
+              - set -e
+              - npm run release -- $SINCE_ARG
               - npm run test:e2e -- $SINCE_ARG
         - stage: deploy
-          name: "Release tools npm package"
+          name: "Release npm package"
           script:
               - echo "Ready to deploy!"
           before_deploy:
-              - cd packages-common/pluggable-widgets-tools
+              - if [[ "$TRAVIS_TAG" =~ ^pluggable-widgets-tools-v* ]]; then cd packages/tools/pluggable-widgets-tools; else cd packages/tools/generator-widget; fi
           deploy:
               skip_cleanup: true
               provider: npm

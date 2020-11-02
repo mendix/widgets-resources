@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.accessibilityhelper.AccessibilityHelper" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Accessibility helper</name>
+    <description/>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/accessibility-helper</helpUrl>
+    <icon>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</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <property key="targetSelector" type="string">
+                <caption>Target selector</caption>
+                <description>Selector to find the first HTML element you want to target which must be a valid CSS selector like '.mx-name-texbox1 input'</description>
+            </property>
+            <property key="content" type="widgets">
+                <caption>Content</caption>
+                <description/>
+            </property>
+            <property key="attributesList" type="object" isList="true" required="false">
+                <caption>HTML Attributes</caption>
+                <description />
+                <properties>
+                    <property key="attribute" type="string">
+                        <caption>HTML attribute</caption>
+                        <category>General</category>
+                        <description>The HTML attribute to be set based on the condition. The following attributes are not allowed: 'class', 'style', 'widgetid', 'data-mendix-id'.</description>
+                    </property>
+                    <property key="valueSourceType" type="enumeration" defaultValue="text">
+                        <caption>Source type</caption>
+                        <category>General</category>
+                        <description/>
+                        <enumerationValues>
+                            <enumerationValue key="text">Text</enumerationValue>
+                            <enumerationValue key="expression">Expression</enumerationValue>
+                        </enumerationValues>
+                    </property>
+                    <property key="valueExpression" type="expression" required="false">
+                        <caption>Expression value</caption>
+                        <category>General</category>
+                        <description/>
+                        <returnType type="String" />
+                    </property>
+                    <property key="valueText" type="textTemplate" required="false">
+                        <caption>Text value</caption>
+                        <category>General</category>
+                        <description/>
+                    </property>
+                    <property key="attributeCondition" type="expression" defaultValue="true">
+                        <caption>Condition</caption>
+                        <category>General</category>
+                        <description>Condition to determine if the HTML attribute must be set or not</description>
+                        <returnType type="Boolean" />
+                    </property>
+                </properties>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Pageheader
+
+========================================================================== */
+.heroheader {
+    border-bottom: 1px solid $border-color-default;
+    background: $header-bg-color;
+}
+
+//== Elements
+//-------------------------------------------------------------------------------------------------------------------//
+.heroheader-title {
+    margin: 0 0 10px 0;
+}
+
+.heroheader-subtitle {
+    margin: 0;
+    padding: 0 15px;
+
+    &::before {
+        display: block;
+        max-width: 330px;
+        height: 1px;
+        margin: auto auto 10px auto;
+        content: "";
+        background-color: lighten($border-color-default, 4);
+    }
+}
+
+//== Variations
+//-------------------------------------------------------------------------------------------------------------------//
+.heroheader1 {
+    background-image: $brand-gradient;
+
+    .heroheader-title {
+        margin-bottom: 10px;
+        color: #ffffff;
+    }
+
+    .heroheader-subtitle {
+        padding: 0;
+        color: #ffffff;
+
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.heroheadermap {
+    padding: 0 !important;
+}
+
+.heroheadermap-controls {
+    padding: $spacing-large;
+    background: $header-bg-color;
+}
+
+.heroheaderproduct {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    background-color: #000000;
+
+    .heroheaderproduct-backgroundimage {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        width: 100%;
+        opacity: 0.7;
+        filter: blur(5px);
+    }
+
+    .heroheaderproduct-overlay {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.heroheaderexpense {
+    .heroheaderexpense-title {
+        font-size: 72px;
+    }
+
+    .heroheaderexpense-type {
+        align-items: center;
+
+        &::before {
+            flex-grow: 1;
+            height: 1px;
+            margin-right: 10px;
+            content: "";
+            background-color: #d2d2d2;
+        }
+    }
+}

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.timeline.Timeline" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Web"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Timeline</name>
+    <description>Shows vertical timeline with events</description>
+    <icon>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</icon>
+    <properties>
+        <propertyGroup caption="Data Source">
+            <propertyGroup caption="Data source">
+                <property key="data" type="datasource" isList="true">
+                    <caption>Data source</caption>
+                    <description/>
+                </property>
+                <property key="title" type="textTemplate" dataSource="data" required="false">
+                    <caption>Title</caption>
+                    <description/>
+                </property>
+                <property key="description" type="textTemplate" dataSource="data" required="false">
+                    <caption>Description</caption>
+                    <description/>
+                </property>
+                <property key="timeIndication" type="textTemplate" dataSource="data" required="false">
+                    <caption>Time Indication</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="customVisualization" type="boolean" defaultValue="false">
+                    <caption>Custom Visualization</caption>
+                    <description>Enables free to model timeline.</description>
+                </property>
+                <property key="icon" type="icon" required="false">
+                    <caption>Icon</caption>
+                    <description>If no icon is configured, a circle will be rendered.</description>
+                </property>
+                <property key="groupEvents" type="boolean" defaultValue="true">
+                    <caption>Group Events</caption>
+                    <description>Shows a header between grouped events based on event date.</description>
+                </property>
+                <property key="groupAttribute" type="attribute" dataSource="data" required="false">
+                    <caption>Group Attribute</caption>
+                    <description>Will be used for grouping events, as a group header value. If events have no date time value, use "Unscheduled events placement" to control rendering.</description>
+                    <attributeTypes>
+                        <attributeType name="DateTime"/>
+                    </attributeTypes>
+                </property>
+                <property key="groupByKey" type="enumeration" defaultValue="day">
+                    <caption>Group by</caption>
+                    <description>Group events based on day, month or year.</description>
+                    <enumerationValues>
+                        <enumerationValue key="day">Day</enumerationValue>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="year">Year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="groupByDayOptions" type="enumeration" defaultValue="dayName">
+                    <caption>Format</caption>
+                    <description>Format group header with current language's format</description>
+                    <enumerationValues>
+                        <enumerationValue key="dayName">Day name</enumerationValue>
+                        <enumerationValue key="dayMonth">Day &amp; month</enumerationValue>
+                        <enumerationValue key="fullDate">Day, month, year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="groupByMonthOptions" type="enumeration" defaultValue="month">
+                    <caption>Format</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="month">Month</enumerationValue>
+                        <enumerationValue key="monthYear">Month &amp; year</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="ungroupedEventsPosition" type="enumeration" defaultValue="end">
+                    <caption>Ungrouped events position</caption>
+                    <description>Position in the list of events without a date &amp; time</description>
+                    <enumerationValues>
+                        <enumerationValue key="beginning">Beginning of the timeline</enumerationValue>
+                        <enumerationValue key="end">End of the timeline</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Custom">
+                <property key="customIcon" type="widgets" dataSource="data" required="false">
+                    <caption>Icon</caption>
+                    <description>Content of the icon</description>
+                </property>
+                <property key="customGroupHeader" type="widgets" dataSource="data" required="false">
+                    <caption>Group header</caption>
+                    <description>Content of the group header</description>
+                </property>
+                <property key="customTitle" type="widgets" dataSource="data" required="false">
+                    <caption>Title</caption>
+                    <description>Content of the title</description>
+                </property>
+                <property key="customEventDateTime" type="widgets" dataSource="data" required="false">
+                    <caption>Event time</caption>
+                    <description>Content of the event time</description>
+                </property>
+                <property key="customDescription" type="widgets" dataSource="data" required="false">
+                    <caption>Content</caption>
+                    <description>Content of the description</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onClick" type="action" dataSource="data" required="false">
+                <caption>On click</caption>
+                <description/>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

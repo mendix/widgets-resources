@@ -1,0 +1,50 @@
+{
+  "name": "hybrid-mobile-actions",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "..\"/../../node_modules/.bin/concurrently\" \"npm:watch-*\"",
+    "watch-ts": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json --watch ",
+    "watch-copy": "npm-watch",
+    "build": "npm run build:tsc",
+    "prebuild:tsc": "..\"/../../node_modules/.bin/rimraf\" dist/tsc",
+    "build:tsc": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json",
+    "postbuild": "node ../../../scripts/modules/copyActionsToTestProject.js",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
+    "lint:scripts": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "config": {
+    "moduleName": "HybridMobileActions",
+    "testProjectId": "0bfcffca-d976-4389-b93b-582c90a1a898",
+    "projectName": "HybridMobileActionsTestProject.mpr",
+    "testProjects": [
+      {
+        "branch": "trunk",
+        "path": "./tests/TestProjects/Mendix8",
+        "mendixVersion": "8.3.0.61600"
+      }
+    ]
+  },
+  "watch": {
+    "postbuild": "dist/tsc/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "dependencies": {
+    "cordova-plugin-camera": "^4.1.0",
+    "cordova-plugin-contacts": "^3.0.1",
+    "cordova-plugin-file": "^6.0.2",
+    "cordova-plugin-media": "^5.0.3",
+    "cordova-plugin-network-information": "^2.0.2",
+    "cordova-plugin-statusbar": "^2.4.3"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/cordova": "^0.0.34",
+    "@types/cordova-plugin-app-version": "^0.1.35",
+    "npm-watch": "^0.6.0"
+  }
+}

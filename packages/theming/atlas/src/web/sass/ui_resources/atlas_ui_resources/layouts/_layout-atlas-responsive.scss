@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Atlas layout
+
+   Extra styling for responsive layouts
+========================================================================== */
+.layout-atlas-responsive,
+.layout-atlas-responsive-default {
+    $sidebar-width: 40px;
+
+    @media (min-width: $screen-md) {
+        .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+            width: $sidebar-width !important;
+
+            .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
+                &.mx-navigationtree-has-items:hover {
+                    a {
+                        background-color: $navsidebar-sub-bg;
+                    }
+
+                    ul {
+                        position: absolute;
+                        z-index: 100;
+                        top: 0;
+                        bottom: 0;
+                        left: $sidebar-width;
+                        display: block;
+                        overflow-y: auto;
+                        min-width: 200px;
+                        padding-top: 10px;
+                    }
+                }
+
+                &.mx-navigationtree-collapsed,
+                &.mx-navigationtree-has-items {
+                    ul {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    .mx-scrollcontainer-slide {
+        &:not(.mx-scrollcontainer-open) > .region-sidebar {
+            overflow: hidden;
+        }
+
+        &.mx-scrollcontainer-open > .region-sidebar {
+            width: $sidebar-width !important;
+
+            & > .mx-scrollcontainer-wrapper {
+                position: relative;
+            }
+        }
+
+        .region-sidebar > .mx-scrollcontainer-wrapper {
+            z-index: 2;
+            left: 0 !important;
+            background-color: inherit;
+        }
+    }
+
+    // Push aside for mobile
+    @media (max-width: $screen-sm-max) {
+        .mx-scrollcontainer-open:not(.mx-scrollcontainer-slide) {
+            width: 1100px;
+        }
+
+        .mx-scrollcontainer-slide .toggle-btn {
+            display: inline-block !important;
+        }
+    }
+
+    .mx-scrollcontainer-slide,
+    .mx-scrollcontainer-push {
+        &:not(.mx-scrollcontainer-open) > .region-sidebar {
+            visibility: hidden;
+        }
+    }
+
+    // Sidebar
+    .region-sidebar {
+        .toggle-btn {
+            width: $sidebar-width;
+            height: 60px;
+            border-color: transparent;
+            border-radius: 0;
+            background: transparent;
+        }
+
+        .mx-scrollcontainer-wrapper > .mx-navigationtree {
+            .navbar-inner > ul > li {
+                & > a {
+                    height: $sidebar-width;
+                    padding: $spacing-small;
+                    // Glyph icon
+                    .glyphicon {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 40px;
+                        height: 40px;
+                        margin-left: -$spacing-small;
+                        padding: 10px;
+                        border-radius: 3px;
+                    }
+                }
+            }
+        }
+    }
+
+    // Topbar
+    .region-topbar {
+    }
+}
+
+// Topbar variant
+.layout-atlas-responsive-topbar {
+}
+
+// All responsive layouts
+.layout-atlas-responsive,
+.layout-atlas-responsive-default,
+.layout-atlas-responsive-topbar {
+    // Topbar
+    .region-topbar {
+        .toggle-btn {
+            display: none;
+
+            @media (max-width: $screen-sm-max) {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+// Fix Safari issue of sidebar disappearing
+.profile-tablet {
+    .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+        overflow-y: hidden;
+
+        .mx-scrollcontainer-wrapper {
+            overflow: visible;
+        }
+    }
+}

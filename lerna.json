@@ -1,7 +1,10 @@
 {
     "version": "independent",
-    "packages": ["packages-common/*", "packages-native/*", "packages-web/*", "packages-hybrid/*"],
+    "packages": ["packages/*/*"],
     "command": {
+        "bootstrap": {
+            "npmClientArgs": ["--package-lock"]
+        },
         "version": {
             "ignoreChanges": ["*.md"],
             "message": "chore: release",

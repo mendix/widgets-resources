@@ -1,0 +1,33 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Slider
+
+   Default Mendix Slider Widget.
+========================================================================== */
+
+.widget-slider {
+    margin-bottom: 15px;
+    padding: 5px 10px;
+
+    .rc-slider-handle,
+    .rc-slider-dot-active {
+        border-color: #dddddd;
+    }
+
+    .rc-slider.rc-slider-with-marks {
+        padding-bottom: 25px;
+    }
+
+    &.has-error {
+        .rc-slider-track,
+        .rc-slider-rail {
+            background-color: $brand-danger;
+        }
+    }
+}

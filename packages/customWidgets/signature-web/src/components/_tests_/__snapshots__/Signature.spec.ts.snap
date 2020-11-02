@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signature renders the structure correctly 1`] = `
+<SizeContainer
+  alertMessage=""
+  className="widget-signature custom-class"
+  classNameInner="widget-signature-wrapper form-control mx-textarea-input mx-textarea"
+  clearSignature={false}
+  gridBorderColor="#777"
+  gridBorderWidth={1}
+  gridCellHeight={50}
+  gridCellWidth={50}
+  height={50}
+  heightUnit="percentageOfWidth"
+  penColor="#000"
+  penType="fountain"
+  readOnly={false}
+  showGrid={true}
+  style={Object {}}
+  width={100}
+  widthUnit="percentage"
+  wrapperStyle={Object {}}
+>
+  <Alert
+    bootstrapStyle="danger"
+  />
+  <Grid
+    alertMessage=""
+    className="custom-class"
+    clearSignature={false}
+    gridBorderColor="#777"
+    gridBorderWidth={1}
+    gridCellHeight={50}
+    gridCellWidth={50}
+    height={50}
+    heightUnit="percentageOfWidth"
+    penColor="#000"
+    penType="fountain"
+    readOnly={false}
+    showGrid={true}
+    width={100}
+    widthUnit="percentage"
+    wrapperStyle={Object {}}
+  />
+  <canvas
+    className="widget-signature-canvas"
+  />
+  <ResizeDetector
+    handleHeight={true}
+    handleWidth={true}
+    nodeType="div"
+    onResize={[Function]}
+    querySelector={null}
+    refreshRate={1000}
+    skipOnMount={false}
+    targetDomEl={null}
+    targetRef={null}
+  />
+</SizeContainer>
+`;

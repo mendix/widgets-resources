@@ -1,0 +1,15 @@
+{
+    "extends": "./configs/tsconfig.base",
+    "include": ["./src"],
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": ["es2015"],
+        "target": "es2015",
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "outDir": "./dist",
+        "declaration": true,
+        "sourceMap": false
+    }
+}

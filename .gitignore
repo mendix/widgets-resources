@@ -1,3 +1,4 @@
+.DS_Store
 .idea
 dist
 node_modules
@@ -8,9 +9,9 @@ node_modules
 mxproject
 coverage
 
-**/TestProjects
-
 detox/ios/NativeComponents.app
 detox/ios/nativeTemplate.app
 detox/*.log
 **/results
+mendixProject
+**/screenshot

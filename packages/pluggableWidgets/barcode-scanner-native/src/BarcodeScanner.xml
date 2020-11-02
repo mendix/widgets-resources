@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.barcodescanner.BarcodeScanner" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Barcode scanner</name>
+    <description>Scan barcode and QR code values.</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAElBMVEUAAABXV1dVVVVJsPhIsPdVVVWcEer3AAAABHRSTlMASeP9eof+WwAAAHJJREFUeAHtlzEKxTAMQ239r/tfuaHtFEpxIkog6C1e7AchixQXJsET5OQ2eIMo8LDNOQE7wegTOkEMspsAJGKE/iaBjDrlG7OAf6M89xdYYIEFBb4XtPF7n/sL1v2CWYoespSY56ysFw698uilS6995gADwwwpR7MpFwAAAABJRU5ErkJggg==</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="barcode" type="attribute">
+                    <caption>Barcode</caption>
+                    <description>The attribute that will receive the scanned barcode value.</description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Mask">
+                <property key="showMask" type="boolean" required="true" defaultValue="false">
+                    <caption>Show barcode mask</caption>
+                    <description />
+                </property>
+                <property key="showAnimatedLine" type="boolean" required="true" defaultValue="false">
+                    <caption>Show animated line</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onDetect" type="action" required="false">
+                    <caption>On detect</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

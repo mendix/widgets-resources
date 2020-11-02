@@ -1,0 +1,18 @@
+{
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "compilerOptions": {
+        "outDir": "../dist/tsc",
+        "target": "es2017",
+        "lib": ["es2017", "dom"],
+        "moduleResolution": "node",
+        "sourceMap": false,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "removeComments": false,
+        "newLine": "CRLF",
+        "noUnusedLocals": false
+    },
+    "baseUrl": "./",
+    "include": ["./"],
+    "exclude": []
+}

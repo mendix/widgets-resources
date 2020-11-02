@@ -1,0 +1,12 @@
+import { Component, ReactNode, createElement } from "react";
+import { HelloWorldSample } from "./components/HelloWorldSample";
+
+import { <%- name %>ContainerProps } from "../typings/<%- name %>Props";
+
+import "./ui/<%- name %>.css";
+
+export default class <%- name %> extends Component<<%- name %>ContainerProps> {
+    render(): ReactNode {
+        return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} />;
+    }
+}

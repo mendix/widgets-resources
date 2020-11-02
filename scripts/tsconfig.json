@@ -10,7 +10,7 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "forceConsistentCasingInFileNames": true,
-        "types": ["node", "dotenv", "readline-sync"],
+        "types": ["node"],
         "esModuleInterop": true
     }
 }
