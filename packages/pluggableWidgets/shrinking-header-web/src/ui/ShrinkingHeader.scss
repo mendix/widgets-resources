@@ -9,16 +9,42 @@
     }
 }
 
-.widget-wrapper-min-max {
-    max-height: 100vh;
-    overflow: scroll;
+//.widget-wrapper-min-max {
+//    max-height: 100vh;
+//    overflow: scroll;
+//
+//    & > header {
+//        position: fixed;
+//        width: 100%;
+//    }
+//
+//    & > div {
+//        margin-top: 100px;
+//    }
+//}
 
-    & > header {
-        position: fixed;
-        width: 100%;
+.shrinking-header-min-max {
+    width: 100%;
+    height: 100%;
+
+    .header {
+        position: relative;
+        background-color: green;
+        z-index: 10;
     }
 
-    & > div {
-        margin-top: 100px;
+    .scroll-container {
+        padding-top: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: scroll;
+
+        div {
+            position: relative;
+            z-index: 9;
+        }
     }
 }

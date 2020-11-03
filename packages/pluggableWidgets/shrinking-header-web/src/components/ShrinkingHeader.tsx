@@ -11,6 +11,7 @@ import {
 import classNames from "classnames";
 
 import "../ui/ShrinkingHeader.scss";
+import { ShrinkingHeaderMinMax } from "./ShrinkingHeaderMinMax";
 
 export interface ShrinkingHeaderProps {
     name?: string;
@@ -63,6 +64,10 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
                     headerRef.current.style.height = `${maxHeight -
                         (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)}px`;
                 }
+                if (scrollableDivRef.current) {
+                    scrollableDivRef.current.style.paddingTop = `${maxHeight -
+                        (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)}px`;
+                }
             }
         }
 
@@ -81,10 +86,14 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
         }
     }, [className, scrollableDivRef.current, shrinkClassName, shrinkThreshold]);
 
-    return (
-        <div ref={wrapperRef} id={name} className={resClassName} style={style} tabIndex={tabIndex}>
-            <header ref={headerRef}>{headerContent}</header>
-            <div ref={scrollableDivRef}>{scrollableContent}</div>
-        </div>
-    );
+    if (shrinkAtThreshold) {
+        return (
+            <div ref={wrapperRef} id={name} className={resClassName} style={style} tabIndex={tabIndex}>
+                <header ref={headerRef}>{headerContent}</header>
+                <div ref={scrollableDivRef}>{scrollableContent}</div>
+            </div>
+        );
+    } else {
+        return <ShrinkingHeaderMinMax {...props} />;
+    }
 }
