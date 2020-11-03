@@ -82,7 +82,7 @@ jobs:
               - sudo adduser $USER libvirt
               - sudo adduser $USER kvm
               - echo no | avdmanager create avd --force -n Pixel_2_API_29 -k "system-images;android-${COMPILE_API};google_apis;x86_64" -c 100M # create device
-              - sudo -E sudo -u "$USER" -E bash -c "${ANDROID_HOME}/emulator/emulator -avd Pixel_2_API_29 -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048 &"
+              - sudo -E sudo -u "$USER" -E bash -c "${ANDROID_HOME}/emulator/emulator -avd Pixel_2_API_29 -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 5120 &"
               - echo 'Emu created'
               - ./packages/tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
               - adb start-server
