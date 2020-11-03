@@ -10,10 +10,10 @@
                     <caption>On load</caption>
                     <description>This action is immediately triggered when this widget is created.</description>
                 </property>
-<property key="onUnloadAction" type="action" required="false">
-  <caption>On unload</caption>
-  <description>This action is immediately triggered when this widget is about to unmount.</description>
-</property>
+                <property key="onUnloadAction" type="action" required="false">
+                  <caption>On unload</caption>
+                  <description>This action is immediately triggered when this widget is about to unmount.</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="App resume">
                 <property key="onResumeAction" type="action" required="false">
