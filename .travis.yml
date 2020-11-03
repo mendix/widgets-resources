@@ -66,8 +66,8 @@ jobs:
         #              - npm run test:e2e -- --scope '*-web' $SINCE_ARG
         - name: "Run automated end-to-end native tests"
           dist: bionic
-          git:
-              submodules: true
+          #          git:
+          #              submodules: true
           language: java
           jdk:
               - openjdk8
@@ -78,14 +78,15 @@ jobs:
               - echo y | sdkmanager --no_https "system-images;android-${COMPILE_API};google_apis;x86_64" # install our emulator
           install:
               # Set up KVM on linux for hardware acceleration. Manually here so it only happens for emulator tests, takes ~30s
-              - npm ci & sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder >/dev/null
+              - sudo -E apt-get -yq --no-install-suggests --no-install-recommends install bridge-utils libpulse0 libvirt-bin qemu-kvm virtinst ubuntu-vm-builder >/dev/null
               - sudo adduser $USER libvirt
               - sudo adduser $USER kvm
               - echo no | avdmanager create avd --force -n Pixel_2_API_29 -k "system-images;android-${COMPILE_API};google_apis;x86_64" -c 100M # create device
-              - sudo -E sudo -u "$USER" -E bash -c "${ANDROID_HOME}/emulator/emulator -avd Pixel_2_API_29 -no-snapshot -no-window -no-boot-anim -camera-back none -camera-front none -selinux permissive -qemu -m 2048 &"
+              - sudo -E sudo -u "$USER" -E bash -c "${ANDROID_HOME}/emulator/emulator -avd Pixel_2_API_29 -no-snapshot -no-window -camera-back none -camera-front none -selinux permissive -qemu -m 2048 &"
               - echo 'Emu created'
               - ./packages/tools/pluggable-widgets-tools/scripts/android-wait-for-emulator.sh
               - adb start-server
+              - npm ci
           script:
               - set -e
               - npm run release -- --scope 'badge-native' $SINCE_ARG
