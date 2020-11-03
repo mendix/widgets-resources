@@ -22,6 +22,10 @@ async function main() {
     const latestMendixVersion = await getLatestMendixVersion();
 
     if (!(await exists("tests/testProject"))) {
+        if (process.env.TRAVIS === "true") {
+            console.log("No e2e test project found in test/testProject, skipping e2e tests.");
+            return;
+        }
         throw new Error("No e2e test project found locally in tests/testProject!");
     }
     try {
