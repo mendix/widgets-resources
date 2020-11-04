@@ -170,6 +170,61 @@ describe("useSettings Hook", () => {
             ])
         );
     });
+
+    it("doesnt change the settings when same properties are applied", () => {
+        const props = mockProperties();
+        const initialProps = {
+            settings: props.settings,
+            columns: props.columns,
+            columnOrder: ["0"],
+            setColumnOrder: props.setColumnOrder,
+            hiddenColumns: [],
+            setHiddenColumns: props.setHiddenColumns,
+            sortBy: [{ id: "0", desc: true }],
+            setSortBy: props.setSortBy,
+            filters: [{ id: "0", value: "ABC" }],
+            setFilters: props.setFilters,
+            widths: { "0": undefined } as ColumnWidth,
+            setWidths: props.setWidths
+        };
+
+        const { rerender } = renderHook(
+            ({
+                settings,
+                columns,
+                columnOrder,
+                setColumnOrder,
+                hiddenColumns,
+                setHiddenColumns,
+                sortBy,
+                setSortBy,
+                filters,
+                setFilters,
+                widths,
+                setWidths
+            }) =>
+                useSettings(
+                    settings,
+                    columns,
+                    columnOrder,
+                    setColumnOrder,
+                    hiddenColumns,
+                    setHiddenColumns,
+                    sortBy,
+                    setSortBy,
+                    filters,
+                    setFilters,
+                    widths,
+                    setWidths
+                ),
+            {
+                initialProps
+            }
+        );
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        rerender(initialProps);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+    });
 });
 
 function mockProperties(): any {

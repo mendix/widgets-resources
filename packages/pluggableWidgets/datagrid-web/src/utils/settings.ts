@@ -1,7 +1,6 @@
 import { Filters, IdType, SortingRule } from "react-table";
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react";
 import { EditableValue, ValueStatus } from "mendix";
-import deepEqual from "deep-equal";
 import { ColumnWidth, TableColumn } from "../components/Table";
 
 declare type Option<T> = T | undefined;
@@ -53,7 +52,7 @@ export function useSettings(
     widths: ColumnWidth,
     setWidths: Dispatch<SetStateAction<ColumnWidth>>
 ): void {
-    const [loaded, setLoaded] = useState(false);
+    const previousSettings = useRef<string>();
 
     const filteredColumns = useMemo(
         () =>
@@ -66,7 +65,12 @@ export function useSettings(
     );
 
     useEffect(() => {
-        if (settings && settings.status !== ValueStatus.Loading && settings.value && !loaded) {
+        if (
+            settings &&
+            settings.status !== ValueStatus.Loading &&
+            settings.value &&
+            settings.value !== previousSettings.current
+        ) {
             const newSettings = JSON.parse(settings.value) as PersistedSettings[];
             const columns = newSettings.map(columnSettings => ({
                 ...columnSettings,
@@ -90,9 +94,8 @@ export function useSettings(
             setSortBy(extractedSettings.sortBy);
             setFilters(extractedSettings.filters);
             setWidths(extractedSettings.widths);
-            setLoaded(true);
         }
-    }, [settings, loaded, filteredColumns]);
+    }, [settings, filteredColumns, previousSettings.current]);
 
     useEffect(() => {
         if (settings && settings.status === ValueStatus.Available) {
@@ -108,9 +111,10 @@ export function useSettings(
                     filteredColumns
                 ) ?? []
             );
-            if (!deepEqual(settings.value, newSettings, { strict: true })) {
+            if (previousSettings.current !== newSettings && settings.value !== newSettings) {
                 settings.setValue(newSettings);
+                previousSettings.current = newSettings;
             }
         }
-    }, [columnOrder, hiddenColumns, sortBy, filters, widths, settings]);
+    }, [columnOrder, hiddenColumns, sortBy, filters, widths, settings, previousSettings.current]);
 }
