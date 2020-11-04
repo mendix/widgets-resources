@@ -8,6 +8,7 @@ module.exports = deepmerge(base, {
     rules: {
         "@typescript-eslint/ban-ts-ignore": "off",
         "no-unused-expressions": "off",
-        "@typescript-eslint/no-unused-expressions": "error"
+        "@typescript-eslint/no-unused-expressions": "error",
+        "no-undef": "off"
     }
 });
