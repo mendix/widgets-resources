@@ -121,7 +121,7 @@
         "no-useless-catch": "error",
         "no-useless-computed-key": "error",
         "no-useless-return": "error",
-        "no-undef": "off",
+        "no-undef": "warn",
         "no-undef-init": "error",
         "no-var": "error",
         "no-void": "error",
