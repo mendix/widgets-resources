@@ -27,15 +27,18 @@ export function createSettings(
     { columnOrder, hiddenColumns, sortBy, filters, widths }: Settings,
     columns: Array<{ header: string; id: string }>
 ): PersistedSettings[] {
-    return columns.map(column => ({
-        column: column.header,
-        sort: !!sortBy.find(s => s.id === column.id),
-        sortMethod: sortBy.find(s => s.id === column.id)?.desc ? "desc" : "asc",
-        filter: filters.find(f => f.id === column.id)?.value ?? "",
-        hidden: !!hiddenColumns.find(h => h === column.id),
-        order: columnOrder.findIndex(o => o === column.id),
-        width: widths[column.id]
-    }));
+    return columns.map((column, index) => {
+        const columnIndex = columnOrder.findIndex(o => o === column.id);
+        return {
+            column: column.header,
+            sort: !!sortBy.find(s => s.id === column.id),
+            sortMethod: sortBy.find(s => s.id === column.id)?.desc ? "desc" : "asc",
+            filter: filters.find(f => f.id === column.id)?.value ?? "",
+            hidden: !!hiddenColumns.find(h => h === column.id),
+            order: columnIndex > -1 ? columnIndex : index,
+            width: widths[column.id]
+        };
+    });
 }
 
 export function useSettings(
@@ -52,7 +55,7 @@ export function useSettings(
     widths: ColumnWidth,
     setWidths: Dispatch<SetStateAction<ColumnWidth>>
 ): void {
-    const previousSettings = useRef<string>();
+    const previousLoadedSettings = useRef<string>();
 
     const filteredColumns = useMemo(
         () =>
@@ -69,7 +72,7 @@ export function useSettings(
             settings &&
             settings.status !== ValueStatus.Loading &&
             settings.value &&
-            settings.value !== previousSettings.current
+            settings.value !== previousLoadedSettings.current
         ) {
             const newSettings = JSON.parse(settings.value) as PersistedSettings[];
             const columns = newSettings.map(columnSettings => ({
@@ -95,7 +98,7 @@ export function useSettings(
             setFilters(extractedSettings.filters);
             setWidths(extractedSettings.widths);
         }
-    }, [settings, filteredColumns, previousSettings.current]);
+    }, [settings, filteredColumns, previousLoadedSettings.current]);
 
     useEffect(() => {
         if (settings && settings.status === ValueStatus.Available) {
@@ -111,10 +114,10 @@ export function useSettings(
                     filteredColumns
                 ) ?? []
             );
-            if (previousSettings.current !== newSettings && settings.value !== newSettings) {
+            if (previousLoadedSettings.current !== newSettings && settings.value !== newSettings) {
                 settings.setValue(newSettings);
-                previousSettings.current = newSettings;
+                previousLoadedSettings.current = newSettings;
             }
         }
-    }, [columnOrder, hiddenColumns, sortBy, filters, widths, settings, previousSettings.current]);
+    }, [columnOrder, hiddenColumns, sortBy, filters, widths, settings, previousLoadedSettings.current]);
 }
