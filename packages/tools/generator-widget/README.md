@@ -13,73 +13,54 @@
 
 This generator uses the Yeoman scaffolding tool to let you quickly create a [Mendix Pluggable Widget](https://docs.mendix.com/howto/extensibility/pluggable-widgets).
 
----
-
 ## Installation
 
-First, install [Yeoman](http://yeoman.io) and @mendix/widget using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+1. Install [node.js](https://nodejs.org/) (version >= 10.15).
+1. Install [Yeoman](http://yeoman.io):
 
-```bash
-npm install -g yo
-npm install -g @mendix/generator-widget
-```
+    ```bash
+    npm install -g yo
+    ```
 
----
+1. Install Pluggable Widgets Generator:
 
-Then generate your new project inside an empty folder:
+    ```bash
+    npm install -g @mendix/generator-widget
+    ```
 
-```bash
-yo @mendix/widget
-```
+## Scaffold a widget project
 
-or automatically create the folder using:
+1. Generate your new project inside an empty folder:
 
-```bash
-yo @mendix/widget widget name
-```
+    ```bash
+    yo @mendix/widget
+    ```
 
-## Scaffold a widget
+    or automatically create the folder using:
 
-### 1. Provide the following information about your widget:
+    ```bash
+    yo @mendix/widget MyWidgetName
+    ```
 
-The following information needs to be provided about your widget:
+    Note that `MyWidgetName` can consist of space characters as well.
 
--   name
--   description
--   organization
--   copyright
--   license
--   version
--   author
--   Mendix Project path
--   programming language
--   platform
+1. Provide the following information about your widget project (press <Enter> if you want to skip and use the default values):
 
-Press <Enter> if you want to skip and use default values.
+    - Widget name
+    - Description
+    - Organization
+    - Copyright
+    - License
+    - Version
+    - Author
+    - Mendix project path
+    - Programming language
+    - Platform
+    - Template
+    - Add unit tests
+    - Add end to end tests
 
-### 2.1. Using the task runner
-
-The widget generator will include the necessary files and tasks to your package.json for running the tasks over The Pluggable Widgets Tools.
-
-If necessary you can run the tasks using the commands
-
-```bash
-npm start
-```
-
-```bash
-npm run build
-```
-
-```bash
-npm run release
-```
-
----
-
-For more information, visit our [Mendix Pluggable Widget Tools repository](https://github.com/mendix/widgets-resources/tree/master/packages/tools/pluggable-widgets-tools).
-
-### 2.2. Which template do you want to use for the widget?
+### Template
 
 #### Full boilerplate
 
@@ -94,27 +75,43 @@ It has the following features:
 
 The empty template is a Mendix React hello world widget recommended for more experienced developers.
 
-### 2.3 Add unit tests for the widget ?
+### Add unit tests
 
 If `Yes` is selected, unit tests are included to ensure individual units of the component are tested to determine whether they are fit for use. Default value is `No`.
 
-### 2.4 Add end to end tests for the widget ?
+### Add end to end tests
 
-If Yes is selected, end to end tests are included to ensure that the integrated components of an application function as expected. Default value is `No`.
+If `Yes` is selected, end to end tests are included to ensure that the integrated components of an application function as expected. Default value is `No`.
 
 Note: Both `Unit` and `End to end` tests apply only to the Full Boilerplate. `End to End` is exclusive for web and hybrid mobile apps.
 
 The tool will then create copied files, and run `npm install` to install development dependencies.
 
-### NOTE
+## Using the task runner
 
-To use the webpack-dev-server while developing:
+The widget generator will include the necessary files and tasks to your package.json for running the tasks over the [Pluggable Widgets Tools](https://github.com/mendix/widgets-resources/tree/master/packages/tools/pluggable-widgets-tools).
 
--   Start Mendix Studio Pro from your Mendix project path or by default `/dist/MxTestProject` and run:
+If necessary you can run the tasks using the commands:
 
 ```bash
 npm start
 ```
+
+```bash
+npm run build
+```
+
+```bash
+npm run release
+```
+
+## Note
+
+-   To build and watch for source code changes while developing, run the Mendix project located at the specified `Mendix project path` and run:
+
+    ```bash
+    npm start
+    ```
 
 -   If you are running the generator through multiple operating systems (e.g. running a virtualized OS with Parallels on MacOS or any other virtualization software), make sure you have the right privileges and use the same OS for generation and file manipulation.
 
