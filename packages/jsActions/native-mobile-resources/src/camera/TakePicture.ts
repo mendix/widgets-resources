@@ -12,6 +12,10 @@ type PictureSource = "camera" | "imageLibrary" | "either";
 type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
 /**
+ * Take a picture using the camera or import one from the image library on the device.
+ *
+ * When the result is true, the picture has been saved in the Picture object
+ *
  * @param {MxObject} picture - This field is required.
  * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.

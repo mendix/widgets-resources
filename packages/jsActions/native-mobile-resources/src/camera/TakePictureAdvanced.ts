@@ -12,6 +12,14 @@ type PictureSource = "camera" | "imageLibrary" | "either";
 type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
 /**
+ * Take a picture using the camera or import one from the image library on the device.
+ *
+ * The result is an ImageMetaData object. Most items are self-explanatory.
+ *
+ * The FileType is not the extension but the mime type, for example image/jpeg when the image is a jpg file
+ * You can get the right extension from the FileName:
+ * substring($ImageMetaData/FileName, findLast($ImageMetaData/FileName, '.'))
+ *
  * @param {MxObject} picture - This field is required.
  * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.

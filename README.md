@@ -57,6 +57,7 @@ widgets on Native Mobile Resources module.
 |                | Is biometric authentication supported |
 | Camera         | Save to picture library               |
 |                | Take picture                          |
+|                | Take picture advanced                 |
 | Clipboard      | Get clipboard content                 |
 |                | Set clipboard content                 |
 | Network        | Is cellular connection                |
