@@ -43,6 +43,10 @@ export class AppEvents extends Component<Props> {
     }
 
     componentWillUnmount(): void {
+        if (this.props.onUnloadAction && this.props.onUnloadAction.canExecute) {
+            executeAction(this.props.onUnloadAction);
+        }
+
         if (this.props.onResumeAction) {
             AppState.removeEventListener("change", this.onAppStateChangeHandler);
         }
