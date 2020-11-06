@@ -49,6 +49,7 @@ export async function ScheduleNotification(
     }
 
     const notification = { message: body } as PushNotificationScheduleObject;
+    const notificationIdNumber = Number(notificationId);
 
     if (!isIOS) {
         const channelId = "mendix-local-notifications";
@@ -72,8 +73,8 @@ export async function ScheduleNotification(
         notification.channelId = channelId;
     }
 
-    if (notificationId && Number(notificationId)) {
-        notification.id = Number(notificationId);
+    if (notificationIdNumber) {
+        notification.id = notificationIdNumber;
     }
 
     if (title) {

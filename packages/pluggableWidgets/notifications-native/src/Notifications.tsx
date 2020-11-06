@@ -21,7 +21,7 @@ export function Notifications(props: NotificationsProps<undefined>) {
     ): void => {
         const body: string = notification.body ?? "";
         const title: string = notification.title ?? "";
-        const subtitle: string = notification.ios?.subtitle ? notification.ios?.subtitle : "";
+        const subtitle: string = notification.ios?.subtitle ?? "";
         const actions = props.actions.filter(item => item.name === data?.actionName);
 
         if (actions.length === 0) {
@@ -65,10 +65,7 @@ export function Notifications(props: NotificationsProps<undefined>) {
     useEffect(() => {
         if (loadNotifications) {
             if (!messaging().isDeviceRegisteredForRemoteMessages) {
-                messaging()
-                    .registerDeviceForRemoteMessages()
-                    // eslint-disable-next-line @typescript-eslint/no-empty-function
-                    .then(() => {});
+                messaging().registerDeviceForRemoteMessages();
             }
             messaging()
                 .getInitialNotification()
