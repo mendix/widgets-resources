@@ -50,10 +50,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             align-self: stretch;
             cursor: col-resize;
 
-            &:hover .column-resizer-bar{
+            &:hover .column-resizer-bar {
                 background-color: $primary-color;
             }
-            &:active .column-resizer-bar{
+            &:active .column-resizer-bar {
                 background-color: $primary-color;
             }
 
@@ -205,7 +205,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             background-color: transparent;
         }
 
-        &:disabled{
+        &:disabled {
             border-color: transparent;
             background-color: transparent;
         }
