@@ -233,8 +233,10 @@ async function main() {
             } finally {
                 try {
                     await promisify(kill)(startProcess.pid);
-                } catch (_) {}
-                await new Promise(resolve => setTimeout(resolve, 2000)); // give time for processes to die
+                } catch (_) {
+                    console.warn(`[${widgetName}] Error while killing start process`);
+                }
+                await new Promise(resolve => setTimeout(resolve, 5000)); // give time for processes to die
             }
         }
     }
