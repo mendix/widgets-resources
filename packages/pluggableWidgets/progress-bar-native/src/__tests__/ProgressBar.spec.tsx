@@ -17,7 +17,7 @@ describe("ProgressBar", () => {
     it("renders progress bar with minimum value with undefined values", () => {
         const component = render(<ProgressBar {...createProps()} />);
         expect(component.UNSAFE_getByType(Bar).props.progress).toBe(0);
-        expect(component.queryByType(Text)).toBeDefined();
+        expect(component.UNSAFE_queryByType(Text)).toBeDefined();
     });
 
     it("renders progress bar with minimum value when minimum equals maximum", () => {
@@ -38,13 +38,13 @@ describe("ProgressBar", () => {
     it("renders correct progress with decimal values", () => {
         const component = render(<ProgressBar {...createProps(2.5, 0, 10)} />);
         expect(component.UNSAFE_getByType(Bar).props.progress).toBe(0.25);
-        expect(component.queryByType(Text)).toBeNull();
+        expect(component.UNSAFE_queryByType(Text)).toBeNull();
     });
 
     it("renders correct progress with negative values", () => {
         const component = render(<ProgressBar {...createProps(-30, -100, 0)} />);
         expect(component.UNSAFE_getByType(Bar).props.progress).toBe(0.7);
-        expect(component.queryByType(Text)).toBeNull();
+        expect(component.UNSAFE_queryByType(Text)).toBeNull();
     });
 });
 

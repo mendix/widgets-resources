@@ -42,14 +42,7 @@ async function main() {
     console.log("Preparing...");
 
     const { stdout: packOutput } = await execAsync("npm pack", join(__dirname, ".."));
-    const toolsPackagePath = join(
-        __dirname,
-        "..",
-        packOutput
-            .trim()
-            .split(/\n/g)
-            .pop()
-    );
+    const toolsPackagePath = join(__dirname, "..", packOutput.trim().split(/\n/g).pop());
 
     const workDirs = [];
     const workDirSemaphore = new Semaphore(PARALLELISM);
@@ -170,10 +163,10 @@ async function main() {
 
         async function testTest() {
             if (platform === "native") {
-                await execFailedAsync("npm test", workDir);
-                await execAsync("npm test -- -u", workDir);
+                await execFailedAsync("npm test -- --forceExit", workDir);
+                await execAsync("npm test -- -u --forceExit", workDir);
             } else {
-                await execAsync("npm test", workDir);
+                await execAsync("npm test -- --forceExit", workDir);
             }
         }
 
@@ -192,7 +185,7 @@ async function main() {
         }
 
         async function testTestUnit() {
-            await execAsync("npm run test:unit", workDir);
+            await execAsync("npm run test:unit -- --forceExit", workDir);
             if (!existsSync(join(workDir, `/dist/coverage/clover.xml`))) {
                 throw new Error("Expected coverage file to be generated, but it wasn't.");
             }
@@ -240,8 +233,10 @@ async function main() {
             } finally {
                 try {
                     await promisify(kill)(startProcess.pid);
-                } catch (_) {}
-                await new Promise(resolve => setTimeout(resolve, 2000)); // give time for processes to die
+                } catch (_) {
+                    console.warn(`[${widgetName}] Error while killing start process`);
+                }
+                await new Promise(resolve => setTimeout(resolve, 5000)); // give time for processes to die
             }
         }
     }

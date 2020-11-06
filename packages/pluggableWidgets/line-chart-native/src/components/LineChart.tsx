@@ -69,9 +69,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 lineStyle === "lineWithMarkers" ||
                 (lineStyle === "custom" && seriesStyle?.markers?.display && seriesStyle.markers.display !== "false") ? (
                     <VictoryScatter data={dataPoints} style={seriesStyle?.markers} size={seriesStyle?.markers?.size} />
-                ) : (
-                    undefined
-                );
+                ) : undefined;
 
             return (
                 <VictoryGroup key={index}>

@@ -54,8 +54,8 @@ describe("Badge", () => {
     });
 
     it("with a click action should respond to click events", () => {
-        const badgeProps: BadgeSampleProps = { onClickAction: jasmine.createSpy("onClick"), type: "badge" };
-        const onClick = badgeProps.onClickAction = jasmine.createSpy("onClick");
+        const badgeProps: BadgeSampleProps = { onClickAction: jest.fn(), type: "badge" };
+        const onClick = badgeProps.onClickAction = jest.fn();
         const badge = createBadge(badgeProps);
 
         badge.simulate("click");

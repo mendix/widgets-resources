@@ -11,7 +11,6 @@ To customize any core styling, copy the part you want to customize to styles/nat
 
     Default Class For Mendix Video Player Widget
 ========================================================================== */
-// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_videoplayer_VideoPlayer: VideoPlayerType = {
     container: {
         // All ViewStyle properties are allowed

@@ -22,7 +22,7 @@
     "@react-native-community/async-storage": "1.8.1",
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0",
-    "react-native-device-info": "5.5.3"
+    "react-native-device-info": "7.0.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

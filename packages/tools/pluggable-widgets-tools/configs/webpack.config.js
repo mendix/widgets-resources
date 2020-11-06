@@ -3,7 +3,7 @@ const { join } = require("path");
 const variables = require("./variables");
 
 module.exports = env => {
-    env = env ? env : "prod";
+    env = env && env.dev ? "dev" : "prod";
 
     const pathWebpack = join(variables.sourcePath, `webpack.config.${env}.js`);
     if (existsSync(pathWebpack)) {

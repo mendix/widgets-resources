@@ -12,5 +12,4 @@ To customize any core styling, copy the part you want to customize to styles/nat
 
     Default Class For Mendix Range Slider Widget
 ========================================================================== */
-// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_rangeslider_RangeSlider: SliderType = Slider;

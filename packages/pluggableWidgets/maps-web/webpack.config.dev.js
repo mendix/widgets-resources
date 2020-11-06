@@ -1,4 +1,4 @@
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const baseConfig = require("../../../configs/webpack.dev.js");
 
 const customConfig = {
@@ -9,7 +9,12 @@ const customConfig = {
 
 const customPreviewConfig = {
     module: {
-        rules: [{ test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, loader: "url-loader?limit=100000" }]
+        rules: [
+            {
+                test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+                use: [{ loader: "url-loader", options: { limit: 100000 } }]
+            }
+        ]
     }
 };
 

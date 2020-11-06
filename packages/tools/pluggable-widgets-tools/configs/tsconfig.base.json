@@ -4,7 +4,7 @@
         "sourceMap": true,
         "module": "esnext",
         "target": "es5",
-        "lib": ["es2019", "dom"],
+        "lib": ["esnext", "dom"],
         "types": ["big.js", "jest"],
         "moduleResolution": "node",
         "declaration": false,

@@ -5,7 +5,7 @@ interface CustomStyle {
 }
 
 export interface Style {
-    [key: string]: CustomStyle | ViewStyle | TextStyle | ImageStyle;
+    [key: string]: CustomStyle | ViewStyle | TextStyle | ImageStyle | object;
 }
 
 export function mergeNativeStyles<T extends Style>(defaultStyle: T, overrideStyles: Array<T | undefined>): T {

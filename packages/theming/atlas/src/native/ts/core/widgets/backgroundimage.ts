@@ -11,7 +11,6 @@ import { BackgroundImageType } from "../../types/widgets";
 
     Default Class For Mendix Background Image Widget
 ========================================================================== */
-// eslint-disable-next-line @typescript-eslint/camelcase
 export const com_mendix_widget_native_backgroundimage_BackgroundImage: BackgroundImageType = {
     container: {
         // All ViewStyle properties are allowed

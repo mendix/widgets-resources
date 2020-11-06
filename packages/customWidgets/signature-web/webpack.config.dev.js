@@ -1,4 +1,4 @@
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const baseConfig = require("@widgets-resources/utils-react-widgets/configs/webpack.config.dev");
 
 const customConfig = {

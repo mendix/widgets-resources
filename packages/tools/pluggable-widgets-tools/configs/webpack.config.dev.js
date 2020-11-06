@@ -1,5 +1,5 @@
 const commonConfig = require("./webpack.config.common");
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const variables = require("./variables");
 const webpack = require("webpack");
 
@@ -48,20 +48,20 @@ const devConfig = {
                 test: /\.(sa|sc|c)ss$/,
                 use: ["style-loader", "css-loader", "sass-loader"]
             },
-            { test: /\.png$/, loader: "url-loader?limit=100000" },
+            { test: /\.png$/, use: [{ loader: "url-loader", options: { limit: 100000 } }] },
             { test: /\.jpg$/, loader: "file-loader" },
             {
                 test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+                use: [{ loader: "url-loader", options: { limit: 100000, mimetype: "application/font-woff" } }]
             },
             {
                 test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader?limit=10000&mimetype=application/octet-stream"
+                use: [{ loader: "url-loader", options: { limit: 100000, mimetype: "application/octet-stream" } }]
             },
             { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader: "url-loader?limit=10000&mimetype=image/svg+xml"
+                use: [{ loader: "url-loader", options: { limit: 100000, mimetype: "image/svg+xml" } }]
             }
         ]
     }

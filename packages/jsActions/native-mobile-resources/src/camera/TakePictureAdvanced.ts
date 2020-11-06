@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import { Alert, Linking, NativeModules } from "react-native";
-import ImagePicker from "react-native-image-picker";
+import ImagePicker, { ImagePickerOptions, ImagePickerResponse } from "react-native-image-picker";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
@@ -121,8 +121,10 @@ export async function TakePictureAdvanced(
         });
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function getPictureMethod() {
+    function getPictureMethod(): (
+        options: ImagePickerOptions,
+        callback: (response: ImagePickerResponse) => void
+    ) => void {
         const source = pictureSource ? pictureSource : "either";
 
         switch (source) {
@@ -136,12 +138,11 @@ export async function TakePictureAdvanced(
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function getOptions() {
+    function getOptions(): ImagePickerOptions {
         const { maxWidth, maxHeight } = getPictureQuality();
 
         return {
-            mediaType: "photo" as "photo",
+            mediaType: "photo" as const,
             maxWidth,
             maxHeight,
             noData: true,
@@ -228,8 +229,7 @@ export async function TakePictureAdvanced(
         );
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function createMxObject(entity: string) {
+    function createMxObject(entity: string): Promise<mendix.lib.MxObject> {
         return new Promise((resolve, reject) => {
             mx.data.create({
                 entity,

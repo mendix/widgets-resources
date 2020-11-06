@@ -5,7 +5,7 @@ const webConfig = {
     rootDir: "../../../../",
     globals: {
         "ts-jest": {
-            tsConfig: {
+            tsconfig: {
                 module: "commonjs"
             }
         }
