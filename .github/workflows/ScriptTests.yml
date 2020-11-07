@@ -1,0 +1,60 @@
+name: Script tests
+
+on:
+  push:
+    branches: [ master, /^pluggable-widgets-tools-v*/, /^generator-widget-v*/ ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  windows_node10:
+    name: "Script tests (Node 10, windows)"
+    runs-on: windows-latest
+
+    steps:
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+      - run: export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+      - run: export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
+      - run: set -e
+      - run: npm install
+      - run: npm run test:scripts -- $SINCE_ARG
+  windows_latest:
+    name: "Script tests (Node latest, windows)"
+    runs-on: windows-latest
+
+    steps:
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+      - run: export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+      - run: export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+      - run: export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
+      - run: set -e
+      - run: npm install
+      - run: npm run test:scripts -- $SINCE_ARG
+  linux_latest:
+    name: "Script tests (Node latest, linux)"
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: files
+        uses: jitterbit/get-changed-files@v1
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+      - run: export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+      - run: export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+      - run: export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
+      - run: set -e
+      - run: npm install
+      - run: npm run test:scripts -- $SINCE_ARG
