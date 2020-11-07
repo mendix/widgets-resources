@@ -1,36 +1,39 @@
-name: Run unit tests
+name: Run automated end-to-end tests
 
 on:
   push:
-    branches: [ master, /^pluggable-widgets-tools-v*/, /^generator-widget-v*/ ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
   test:
-    name: "Unit tests"
+    name: "Web Automated"
     runs-on: ubuntu-latest
+    env:
+      BROWSER: firefox
 
     steps:
       - id: files
         uses: jitterbit/get-changed-files@v1
       - uses: actions/checkout@v2
         with:
-          submodules: false
+          submodules: true
       - run: export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
       - run: export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
       - run: export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
       - run: set -e
+      - run: sudo apt install firefox
       - uses: actions/cache@v2
-          env:
-            cache-name: cache-node-modules
-          with:
-            path: ~/.npm
-            key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-            restore-keys: |
-              ${{ runner.os }}-build-${{ env.cache-name }}-
-              ${{ runner.os }}-build-
-              ${{ runner.os }}-
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
       - run: npm install
-      - run: npm run lint -- $SINCE_ARG
-      - run: npm run test -- $SINCE_ARG
+      - run: npm run release -- $SINCE_ARG
+      - run: npm run test:e2e -- $SINCE_ARG
