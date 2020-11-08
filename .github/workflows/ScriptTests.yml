@@ -48,20 +48,21 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - id: files
+            - name: "Checking changed files"
+              id: files
               uses: jitterbit/get-changed-files@v1
-            - uses: actions/checkout@v2
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
               with:
                   submodules: false
-            - run: export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
-            - run:
-                  export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ];
-                  then echo "true"; else echo "false"; fi)
-            - run:
-                  export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo "";
-                  fi)
+            - name: "Defining environment variables"
+              run: |
+                export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+                export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
+                export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
             - run: set -e
-            - uses: actions/cache@v2
+            - name: "Defining cache"
+              uses: actions/cache@v2
               env:
                   cache-name: cache-node-modules
               with:
@@ -71,5 +72,7 @@ jobs:
                       ${{ runner.os }}-build-${{ env.cache-name }}-
                       ${{ runner.os }}-build-
                       ${{ runner.os }}-
-            - run: npm install
-            - run: npm run test:scripts -- $SINCE_ARG
+            - name: "Installing dependencies"
+              run: npm install
+            - name: "Running PIW-Tools commands tests"
+              run: npm run test:scripts -- $SINCE_ARG
