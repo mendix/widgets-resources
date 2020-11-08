@@ -23,7 +23,6 @@ jobs:
       - run: export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
       - run: export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
       - run: set -e
-      - run: sudo apt install firefox
       - uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -36,4 +35,5 @@ jobs:
             ${{ runner.os }}-
       - run: npm install
       - run: npm run release -- $SINCE_ARG
+      - run: docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox:81.0
       - run: npm run test:e2e -- $SINCE_ARG
