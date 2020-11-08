@@ -5,6 +5,7 @@ const fetch = require("node-fetch");
 const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
 const { cat, cp, ls, mkdir } = require("shelljs");
+const nodeIp = require("ip");
 
 main().catch(e => {
     console.error(e);
@@ -13,6 +14,11 @@ main().catch(e => {
 
 async function main() {
     const latestMendixVersion = await getLatestMendixVersion();
+    const ip = nodeIp.address();
+
+    if (!ip) {
+        throw new Error("Could not determine local ip address!");
+    }
 
     if (!(await exists("tests/testProject"))) {
         throw new Error("No e2e test project found locally in tests/testProject!");
@@ -36,9 +42,7 @@ async function main() {
     cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
 
     // Create reusable mxbuild image
-    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`)
-        .toString()
-        .trim();
+    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
@@ -63,17 +67,27 @@ async function main() {
         `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
             `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
             `mendix/runtime-base:${latestMendixVersion}-rhel /shared/runtime.sh`
-    ).toString();
+    )
+        .toString()
+        .trim();
+
+    // Spin up the standalone selenium firefox
+    const freePortFirefox = await findFreePort(4444);
+    const firefoxContainerId = execSync(
+        `docker run -d -p ${freePortFirefox}:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox`
+    )
+        .toString()
+        .trim();
 
     let attempts = 60;
     for (; attempts > 0; --attempts) {
         try {
-            const response = await fetch(`http://localhost:${freePort}`);
+            const response = await fetch(`http://${ip}:${freePort}`);
             if (response.ok) {
                 break;
             }
         } catch (e) {
-            console.log(`Could not reach http://localhost:${freePort}, trying again...`);
+            console.log(`Could not reach http://${ip}:${freePort}, trying again...`);
         }
         await new Promise(resolve => setTimeout(resolve, 3000));
     }
@@ -84,16 +98,22 @@ async function main() {
         }
         execSync(`wdio ${join(__dirname, "../test-config/wdio.conf.js")}`, {
             stdio: "inherit",
-            env: { ...process.env, URL: `http://localhost:${freePort}` }
+            env: {
+                ...process.env,
+                URL: `http://${ip}:${freePort}`,
+                SERVER_IP: ip,
+                SERVER_PORT: freePortFirefox
+            }
         });
     } catch (e) {
         try {
-            execSync(`docker logs ${runtimeContainerId.trim()}`, { stdio: "inherit" });
+            execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
         } catch (_) {}
         console.log(cat("results/runtime.log").toString());
         throw e;
     } finally {
-        execSync(`docker rm -f ${runtimeContainerId.trim()}`);
+        execSync(`docker rm -f ${runtimeContainerId}`);
+        execSync(`docker rm -f ${firefoxContainerId}`);
     }
 }
 

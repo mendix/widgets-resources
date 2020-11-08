@@ -3,6 +3,8 @@ const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
 const browserName = process.env.BROWSER || "firefox";
 const url = process.env.URL || "http://localhost:8080/";
+const serverIp = process.env.SERVER_IP || "127.0.0.1";
+const serverPort = process.env.SERVER_PORT || 4444;
 
 const e2ePath = join(process.cwd(), "dist/e2e/");
 if (!existsSync(e2ePath)) {
@@ -16,8 +18,8 @@ exports.config = {
         require("@babel/register");
         require("ts-node").register({ files: true, project: join(process.cwd(), "./tests/e2e/tsconfig.json") });
     },
-    host: "127.0.0.1",
-    port: 4444,
+    host: serverIp,
+    port: serverPort,
     specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
     maxInstances: 1,
     capabilities: [
