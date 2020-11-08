@@ -43,6 +43,4 @@ jobs:
       - name: "Building package in production mode"
         run: npm run release -- $SINCE_ARG
       - name: "Executing E2E tests"
-        uses: ianwalter/puppeteer@master
-        with:
-          args: npm run test:e2e -- $SINCE_ARG
+        run: npm run test:e2e -- $SINCE_ARG
