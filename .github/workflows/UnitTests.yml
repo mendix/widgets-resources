@@ -2,9 +2,9 @@ name: Run unit tests
 
 on:
     push:
-        branches: [master, /^pluggable-widgets-tools-v*/, /^generator-widget-v*/]
+        branches: [ master ]
     pull_request:
-        branches: [master]
+        branches: [ master ]
 
 jobs:
     test:
