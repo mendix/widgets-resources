@@ -43,9 +43,17 @@ jobs:
     #      - run: set -e
     #      - run: npm install
     #      - run: npm run test:scripts -- $SINCE_ARG
-    linux_latest:
-        name: "Script tests (Node latest, linux)"
-        runs-on: ubuntu-latest
+    test:
+        name: "Script tests (Node ${{ matrix.node }}, ${{ matrix.os }})"
+        runs-on: ${{ matrix.os }}
+        strategy:
+          matrix:
+            node: [14]
+            os: [windows-latest, ubuntu-latest]
+            include:
+              - node: 10
+                os: windows-2019
+                experimental: true
 
         steps:
             - name: "Checking changed files"
@@ -56,6 +64,13 @@ jobs:
               with:
                   submodules: false
             - name: "Defining environment variables"
+              if: startsWith(matrix.os,'windows')
+              run: |
+                echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
+                echo "PARTIAL_BUILD=$(If ($CHANGED_GLOBAL_FILES -eq ''){ echo 'true' } Else { echo 'false' })" >> $GITHUB_ENV
+                echo "SINCE_ARG=$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since $GITHUB_SHA' } Else { echo '' })" >> $GITHUB_ENV
+            - name: "Defining environment variables"
+              if: startsWith(matrix.os,'ubuntu')
               run: |
                 echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
                 echo "PARTIAL_BUILD=$(if [ '$CHANGED_GLOBAL_FILES' = '' ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
