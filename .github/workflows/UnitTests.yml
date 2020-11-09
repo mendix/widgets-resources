@@ -21,9 +21,9 @@ jobs:
                   submodules: false
             - name: "Defining environment variables"
               run: |
-                export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
-                export PARTIAL_BUILD=$(if [ "$CHANGED_GLOBAL_FILES" = "" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then echo "true"; else echo "false"; fi)
-                export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since $GITHUB_SHA"; else echo ""; fi)
+                echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
+                echo "PARTIAL_BUILD=$(if [ '$CHANGED_GLOBAL_FILES' = '' ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
+                echo "SINCE_ARG=$(if [ '$PARTIAL_BUILD' = 'true' ]; then echo '--since $GITHUB_SHA'; else echo ''; fi)" >> $GITHUB_ENV
             - run: set -e
             - name: "Defining cache"
               uses: actions/cache@v2
