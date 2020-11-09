@@ -21,9 +21,11 @@ export interface LineChartSeriesStyle {
 
 export interface LineChartStyle {
     container?: ViewStyle;
+    errorMessage?: TextStyle;
     chart?: ViewStyle;
     gridAndLabelsRow?: ViewStyle;
     gridRow?: ViewStyle;
+    gridWrapper?: ViewStyle;
     grid?: VictoryChartProps["style"] & {
         padding?: VictoryCommonProps["padding"];
         xAxis?: VictoryAxisCommonProps["style"];
@@ -44,6 +46,9 @@ export const defaultLineChartStyle: LineChartStyle = {
     container: {
         flex: 1
     },
+    errorMessage: {
+        color: "red"
+    },
     chart: {
         flex: 1
     },
@@ -54,10 +59,14 @@ export const defaultLineChartStyle: LineChartStyle = {
         flex: 1,
         flexDirection: "row"
     },
+    gridWrapper: {
+        flex: 1
+    },
+    xAxisLabel: {
+        alignSelf: "center"
+    },
     legend: {
         container: {
-            borderColor: "black",
-            borderWidth: 1,
             flexDirection: "row",
             justifyContent: "center",
             flexWrap: "wrap",
@@ -70,9 +79,8 @@ export const defaultLineChartStyle: LineChartStyle = {
         },
         indicator: {
             marginRight: 5,
-            height: 5,
+            height: 10,
             width: 10
         }
-    },
-    lineColorPalette: ["black"]
+    }
 };
