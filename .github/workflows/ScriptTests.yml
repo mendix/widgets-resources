@@ -86,8 +86,10 @@ jobs:
                       ${{ runner.os }}-build-${{ env.cache-name }}-
                       ${{ runner.os }}-build-
                       ${{ runner.os }}-
-            - name: "Checking node version"
-              run: node -v
+            - name: "Defining node version"
+              uses: actions/setup-node@v1
+              with:
+                node-version: ${{ matrix.node }}
             - name: "Installing dependencies"
               run: npm install
             - name: "Running PIW-Tools commands tests"
