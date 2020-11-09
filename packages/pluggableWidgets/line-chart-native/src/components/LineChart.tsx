@@ -167,7 +167,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     return (
         <View style={style.container}>
             {dataTypesResult instanceof Error ? (
-                <Text>{dataTypesResult.message}</Text>
+                <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (
                 <View style={style.chart}>
                     <View style={style.gridAndLabelsRow}>
@@ -179,7 +179,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                 ? yAxisLabelComponent
                                 : null}
 
-                            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
+                            <View onLayout={updateChartDimensions} style={style.gridWrapper}>
                                 {chartDimensions ? (
                                     <VictoryChart
                                         height={chartDimensions?.height}
