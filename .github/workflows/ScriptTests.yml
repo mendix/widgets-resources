@@ -52,7 +52,7 @@ jobs:
             os: [windows-latest, ubuntu-latest]
             include:
               - node: 10
-                os: windows-2019
+                os: windows-latest
                 experimental: true
 
         steps:
@@ -86,6 +86,8 @@ jobs:
                       ${{ runner.os }}-build-${{ env.cache-name }}-
                       ${{ runner.os }}-build-
                       ${{ runner.os }}-
+            - name: "Checking node version"
+              run: node -v
             - name: "Installing dependencies"
               run: npm install
             - name: "Running PIW-Tools commands tests"

@@ -19,12 +19,12 @@ jobs:
       - name: "Defining Environment Variables"
         run: echo "TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
       - name: "Targeting Pluggable Widgets Tools"
-        if: ${{env.TAG}} =~ ^pluggable-widgets-tools-v*
+        if: contains(env.TAG, 'pluggable-widgets-tools-v')
         run: |
           npm install
           cd packages/tools/pluggable-widgets-tools
       - name: "Targeting Pluggable Widgets Generator"
-        if: ${{env.TAG}} =~ ^generator-widget-v*
+        if: contains(env.TAG, 'generator-widget-v')
         run: |
           npm install
           cd packages/tools/generator-widget
