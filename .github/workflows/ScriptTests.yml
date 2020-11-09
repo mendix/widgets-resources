@@ -31,14 +31,14 @@ jobs:
               if: startsWith(matrix.os,'windows')
               run: |
                 echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
-                echo "PARTIAL_BUILD=$(If ($CHANGED_GLOBAL_FILES -eq ''){ echo 'true' } Else { echo 'false' })" >> $GITHUB_ENV
-                echo "SINCE_ARG=$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since $GITHUB_SHA' } Else { echo '' })" >> $GITHUB_ENV
+                echo "PARTIAL_BUILD=$(If ($CHANGED_GLOBAL_FILES -eq '' -AND $GITHUB_EVENT_NAME -eq 'pull_request'){ echo 'true' } Else { echo 'false' })" >> $GITHUB_ENV
+                echo "SINCE_ARG=$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since ${{ github.event.pull_request.base.ref }}' } Else { echo '' })" >> $GITHUB_ENV
             - name: "Defining environment variables"
               if: startsWith(matrix.os,'ubuntu')
               run: |
                 echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
-                echo "PARTIAL_BUILD=$(if [ '$CHANGED_GLOBAL_FILES' = '' ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
-                echo "SINCE_ARG=$(if [ '$PARTIAL_BUILD' = 'true' ]; then echo '--since $GITHUB_SHA'; else echo ''; fi)" >> $GITHUB_ENV
+                echo "PARTIAL_BUILD=$(if [ '$CHANGED_GLOBAL_FILES' = '' ] && [ '$GITHUB_EVENT_NAME' = 'pull_request' ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
+                echo "SINCE_ARG=$(if [ '$PARTIAL_BUILD' = 'true' ]; then echo '--since ${{ github.event.pull_request.base.ref }}'; else echo ''; fi)" >> $GITHUB_ENV
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
