@@ -1,10 +1,10 @@
 name: Publish npm packages
 
 on:
-  create:
+  push:
     tags:
-      - "/^pluggable-widgets-tools-v*/"
-      - "/^generator-widget-v*/"
+      - "pluggable-widgets-tools-v*"
+      - "generator-widget-v*"
 
 jobs:
   publish:
