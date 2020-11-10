@@ -1,0 +1,43 @@
+name: Run unit tests
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+
+jobs:
+    test:
+        name: "Unit tests"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checking changed files"
+              id: files
+              uses: jitterbit/get-changed-files@v1
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
+              with:
+                  submodules: false
+            - name: "Defining environment variables"
+              run: |
+                echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
+                echo "PARTIAL_BUILD=$(if [ '$CHANGED_GLOBAL_FILES' = '' ] && [ '$GITHUB_EVENT_NAME' = 'pull_request' ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
+                echo "SINCE_ARG=$(if [ '$PARTIAL_BUILD' = 'true' ]; then echo '--since ${{ github.event.pull_request.base.ref }}'; else echo ''; fi)" >> $GITHUB_ENV
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.os }}-build-${{ env.cache-name }}-
+                      ${{ runner.os }}-build-
+                      ${{ runner.os }}-
+            - name: "Installing dependencies"
+              run: npm install
+            - name: "Linting code"
+              run: npm run lint -- $SINCE_ARG
+            - name: "Running unit tests"
+              run: npm run test -- $SINCE_ARG

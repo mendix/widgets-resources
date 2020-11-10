@@ -1,0 +1,32 @@
+name: Publish npm packages
+
+on:
+  create:
+    tags:
+      - "/^pluggable-widgets-tools-v*/"
+      - "/^generator-widget-v*/"
+
+jobs:
+  publish:
+    name: "Publish NPM packages"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+      - name: "Defining Environment Variables"
+        run: echo "TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
+      - name: "Installing dependencies"
+        run: npm install
+      - name: "Targeting Pluggable Widgets Tools"
+        if: contains(env.TAG, 'pluggable-widgets-tools-v')
+        run: cd packages/tools/pluggable-widgets-tools
+      - name: "Targeting Pluggable Widgets Generator"
+        if: contains(env.TAG, 'generator-widget-v')
+        run: cd packages/tools/generator-widget
+      - name: "Publishing to NPMJs"
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
