@@ -21,7 +21,7 @@ jobs:
                   submodules: false
             - name: "Defining environment variables"
               run: |
-                echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep -v '^packages')" >> $GITHUB_ENV
+                echo "CHANGED_GLOBAL_FILES=$(echo '${{ steps.files.outputs.all }}' | grep '^packages')" >> $GITHUB_ENV
                 echo "PARTIAL_BUILD=$(if [ '$CHANGED_GLOBAL_FILES' = '' ] && [ '${{ github.event_name }}' = 'pull_request' ]; then echo 'true'; else echo 'false'; fi)" >> $GITHUB_ENV
                 echo "SINCE_ARG=$(if [ '$PARTIAL_BUILD' = 'true' ]; then echo '--since ${{ github.event.pull_request.base.ref }}'; else echo ''; fi)" >> $GITHUB_ENV
             - name: "Defining cache"
