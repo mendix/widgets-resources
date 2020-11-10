@@ -30,9 +30,9 @@ jobs:
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'windows')
               run: |
-                echo CHANGED_PACKAGES_FILES=$(echo '${{ steps.files.outputs.all }}' | findstr 'packages') >> $GITHUB_ENV
-                echo PARTIAL_BUILD=$(If ($CHANGED_PACKAGES_FILES -ne '' -AND '${{ github.event_name }}' -eq 'pull_request'){ echo 'true' } Else { echo 'false' }) >> $GITHUB_ENV
-                echo SINCE_ARG=$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since ${{ github.event.pull_request.base.ref }}' } Else { echo '' }) >> $GITHUB_ENV
+                echo "CHANGED_PACKAGES_FILES=$(echo '${{ steps.files.outputs.all }}' | findstr 'packages')" >> $GITHUB_ENV
+                echo "PARTIAL_BUILD=$(If ($CHANGED_PACKAGES_FILES -ne '' -AND '${{ github.event_name }}' -eq 'pull_request'){ echo 'true' } Else { echo 'false' })" >> $GITHUB_ENV
+                echo "SINCE_ARG=$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since ${{ github.event.pull_request.base.ref }}' } Else { echo '' })" >> $GITHUB_ENV
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'ubuntu')
               run: |
