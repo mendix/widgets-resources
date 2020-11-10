@@ -23,7 +23,7 @@ export interface LineChartSeries {
     interpolation: InterpolationPropType;
     name?: string;
     lineStyle: "line" | "lineWithMarkers" | "custom";
-    stylePropertyName?: string;
+    customLineStyle?: string;
 }
 
 export type LineChartDataPoints =
@@ -51,9 +51,9 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         let index = 0;
 
         for (const _series of series) {
-            const configuredStyle = !_series.stylePropertyName
+            const configuredStyle = !_series.customLineStyle
                 ? null
-                : style.series?.[_series.stylePropertyName]?.line?.data?.stroke;
+                : style.lineStyles?.[_series.customLineStyle]?.line?.data?.stroke;
 
             if (typeof configuredStyle !== "string") {
                 result.push(style.lineColorPalette?.[index] || "black");
@@ -74,9 +74,9 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         }
 
         return series.map((series, index) => {
-            const { dataPoints, interpolation, lineStyle, stylePropertyName } = series;
+            const { dataPoints, interpolation, lineStyle, customLineStyle } = series;
 
-            const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
+            const seriesStyle = style.lineStyles && customLineStyle ? style.lineStyles[customLineStyle] : undefined;
 
             const displayMarker = seriesStyle?.markers?.display;
 

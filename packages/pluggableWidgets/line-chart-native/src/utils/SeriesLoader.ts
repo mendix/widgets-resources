@@ -9,7 +9,7 @@ import { LineChartDataPoints, LineChartSeries } from "../components/LineChart";
 interface DataSourceItemGroup {
     groupByAttributeValue: string | boolean | Date | Big;
     dynamicSeriesNameValue?: string;
-    dynamicStylePropertyNameValue?: string;
+    dynamicCustomLineStyleValue?: string;
     items: ObjectItem[];
 }
 
@@ -26,7 +26,7 @@ export function useSeries(series: SeriesType[]): LineChartSeries[] | null {
         const loadedSeries: LineChartSeries[] = [];
 
         for (const element of series) {
-            if (element.type === "static") {
+            if (element.dataSet === "static") {
                 const result = loadStaticSeries(element);
 
                 if (!result) {
@@ -54,9 +54,9 @@ export function useSeries(series: SeriesType[]): LineChartSeries[] | null {
 }
 
 function loadStaticSeries(series: SeriesType): LineChartSeries | null {
-    const { interpolation, staticLineStyle, staticSeriesName, staticStylePropertyName, type } = series;
+    const { interpolation, staticLineStyle, staticSeriesName, staticCustomLineStyle, dataSet } = series;
 
-    if (type !== "static") {
+    if (dataSet !== "static") {
         throw Error("Expected series to be static");
     }
 
@@ -77,14 +77,14 @@ function loadStaticSeries(series: SeriesType): LineChartSeries | null {
         interpolation,
         lineStyle: staticLineStyle,
         name: staticSeriesName ? staticSeriesName.value : undefined,
-        stylePropertyName: staticStylePropertyName
+        customLineStyle: staticCustomLineStyle
     };
 }
 
 function loadDynamicSeries(series: SeriesType): LineChartSeries[] | null {
-    const { dynamicLineStyle, interpolation, type } = series;
+    const { dynamicLineStyle, interpolation, dataSet } = series;
 
-    if (type !== "dynamic") {
+    if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
     }
 
@@ -110,7 +110,7 @@ function loadDynamicSeries(series: SeriesType): LineChartSeries[] | null {
             interpolation,
             lineStyle: dynamicLineStyle,
             name: itemGroup.dynamicSeriesNameValue,
-            stylePropertyName: itemGroup.dynamicStylePropertyNameValue
+            customLineStyle: itemGroup.dynamicCustomLineStyleValue
         });
     }
 
@@ -118,9 +118,9 @@ function loadDynamicSeries(series: SeriesType): LineChartSeries[] | null {
 }
 
 function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null {
-    const { dynamicDataSource, dynamicSeriesName, dynamicStylePropertyName, groupByAttribute, type } = series;
+    const { dynamicDataSource, dynamicSeriesName, dynamicCustomLineStyle, groupByAttribute, dataSet } = series;
 
-    if (type !== "dynamic") {
+    if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
     }
 
@@ -166,14 +166,14 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
                 newDataSourceItemGroup.dynamicSeriesNameValue = dynamicSeriesNameValue.value;
             }
 
-            if (dynamicStylePropertyName) {
-                const dynamicStylePropertyNameValue = dynamicStylePropertyName(item);
+            if (dynamicCustomLineStyle) {
+                const dynamicCustomLineStyleValue = dynamicCustomLineStyle(item);
 
-                if (dynamicStylePropertyNameValue.value === undefined) {
+                if (dynamicCustomLineStyleValue.value === undefined) {
                     return null;
                 }
 
-                newDataSourceItemGroup.dynamicStylePropertyNameValue = dynamicStylePropertyNameValue.value;
+                newDataSourceItemGroup.dynamicCustomLineStyleValue = dynamicCustomLineStyleValue.value;
             }
 
             dataSourceItemGroupsResult.push(newDataSourceItemGroup);
@@ -184,12 +184,12 @@ function groupDataSourceItems(series: SeriesType): DataSourceItemGroup[] | null 
 }
 
 function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): DataPointsExtraction | null {
-    const xValue = series.type === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
-    const yValue = series.type === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
+    const xValue = series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
+    const yValue = series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
 
     if (!dataSourceItems) {
         const dataSource =
-            series.type === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
+            series.dataSet === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
 
         if (!dataSource.items) {
             return null;

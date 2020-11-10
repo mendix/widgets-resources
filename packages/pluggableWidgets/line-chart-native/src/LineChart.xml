@@ -7,12 +7,12 @@
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
                 <property key="series" type="object" isList="true">
-                    <caption>Series</caption>
-                    <description>Add one or more series (lines). The order influences how lines overlay one another: the first series (from the top) is drawn lowest and other lines are drawn on top of it.</description>
+                    <caption>Lines</caption>
+                    <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
                     <properties>
                         <propertyGroup caption="General">
-                            <property key="type" type="enumeration" defaultValue="static">
-                                <caption>Type</caption>
+                            <property key="dataSet" type="enumeration" defaultValue="static">
+                                <caption>Data set</caption>
                                 <description/>
                                 <enumerationValues>
                                     <enumerationValue key="static">Static</enumerationValue>
@@ -21,15 +21,15 @@
                             </property>
                             <property key="staticDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
-                                <description>Data points for a single series</description>
+                                <description>Data points for a single series.</description>
                             </property>
                             <property key="dynamicDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
-                                <description>Data points for all series which will be divided into single series based on the Group by attribute value</description>
+                                <description>Data points for all series which will be divided into single series based on the Group by attribute value.</description>
                             </property>
                             <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
-                                <description>Data points within the same group form one series</description>
+                                <description>Data points within the same group form one series.</description>
                                 <attributeTypes>
                                     <attributeType name="String" />
                                     <attributeType name="Boolean" />
@@ -113,20 +113,20 @@
                             </property>
                             <property key="dynamicLineStyle" type="enumeration" defaultValue="line">
                                 <caption>Line style</caption>
-                                <description>Custom allows to style individual series via styling</description>
+                                <description>Custom allows to style individual lines via styling.</description>
                                 <enumerationValues>
                                     <enumerationValue key="line">Line</enumerationValue>
                                     <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
                                     <enumerationValue key="custom">Custom</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="staticStylePropertyName" type="string" required="false" multiline="false">
-                                <caption>Style property name</caption>
-                                <description />
+                            <property key="staticCustomLineStyle" type="string" required="false" multiline="false">
+                                <caption>Custom line style</caption>
+                                <description>Link a line style defined in the styles of this widget.</description>
                             </property>
-                            <property key="dynamicStylePropertyName" type="attribute" required="false" dataSource="dynamicDataSource">
-                                <caption>Style property name</caption>
-                                <description />
+                            <property key="dynamicCustomLineStyle" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Custom line style</caption>
+                                <description>Link a line style defined in the styles of this widget.</description>
                                 <attributeTypes>
                                     <attributeType name="String" />
                                 </attributeTypes>

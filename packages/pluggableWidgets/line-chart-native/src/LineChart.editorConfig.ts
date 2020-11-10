@@ -4,7 +4,7 @@ import { LineChartPreviewProps } from "../typings/LineChartProps";
 
 export function getProperties(values: LineChartPreviewProps, defaultProperties: Properties): Properties {
     values.series.forEach((series, index) => {
-        if (series.type === "static") {
+        if (series.dataSet === "static") {
             hideNestedPropertiesIn(defaultProperties, values, "series", index, [
                 "dynamicDataSource",
                 "groupByAttribute",
@@ -12,7 +12,7 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
                 "dynamicXAttribute",
                 "dynamicYAttribute",
                 "dynamicLineStyle",
-                "dynamicStylePropertyName"
+                "dynamicCustomLineStyle"
             ]);
         } else {
             hideNestedPropertiesIn(defaultProperties, values, "series", index, [
@@ -21,7 +21,7 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
                 "staticXAttribute",
                 "staticYAttribute",
                 "staticLineStyle",
-                "staticStylePropertyName"
+                "staticCustomLineStyle"
             ]);
         }
     });
@@ -32,7 +32,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
     values.series.forEach((series, index) => {
-        if (series.type === "static") {
+        if (series.dataSet === "static") {
             // @ts-ignore
             if (series.staticDataSource.type === "null") {
                 errors.push({
