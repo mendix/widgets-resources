@@ -232,7 +232,7 @@ async function main() {
                 });
             } finally {
                 try {
-                    await promisify(kill)(startProcess.pid);
+                    await promisify(kill)(startProcess.pid, "SIGKILL");
                 } catch (_) {
                     console.warn(`[${widgetName}] Error while killing start process`);
                 }
