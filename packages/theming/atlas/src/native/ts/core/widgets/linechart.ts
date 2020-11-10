@@ -1,4 +1,4 @@
-import { brand } from "../variables";
+import { brand, font } from "../variables";
 import { LineChartStyle } from "../../../../../../../pluggableWidgets/line-chart-native/src/ui/Styles";
 /*
 
@@ -19,6 +19,8 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartStyle = {
     },
     errorMessage: {
         // All TextStyle properties are allowed
+        fontFamily: font.family,
+        fontSize: font.sizeSmall
     },
     chart: {
         // All ViewStyle properties are allowed
@@ -36,11 +38,13 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartStyle = {
         padding: { top: 8, right: 8, bottom: 32, left: 32 },
         xAxis: {
             grid: { stroke: "#CED0D3" },
-            axis: { stroke: "#CED0D3" }
+            axis: { stroke: "#CED0D3" },
+            tickLabels: { fontFamily: font.family, fontSize: font.sizeSmall }
         },
         yAxis: {
             grid: { stroke: "#CED0D3" },
-            axis: { stroke: "#CED0D3" }
+            axis: { stroke: "#CED0D3" },
+            tickLabels: { fontFamily: font.family, fontSize: font.sizeSmall }
         }
     },
     xAxisLabel: {
@@ -48,13 +52,17 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartStyle = {
         color: "#6C717C",
         alignSelf: "center",
         marginHorizontal: 0,
-        marginVertical: 8
+        marginVertical: 8,
+        fontFamily: font.family,
+        fontSize: font.sizeSmall
     },
     yAxisLabel: {
         // All TextStyle properties are allowed & relativePositionGrid property ("top" or "left")
         color: "#6C717C",
         marginHorizontal: 0,
-        marginVertical: 8
+        marginVertical: 8,
+        fontFamily: font.family,
+        fontSize: font.sizeSmall
     },
     lineStyles: {},
     legend: {
@@ -75,6 +83,8 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartStyle = {
         },
         label: {
             // All TextStyle properties are allowed
+            fontFamily: font.family,
+            fontSize: font.sizeSmall
         }
     },
     lineColorPalette: Object.values(brand) // Array of color strings
