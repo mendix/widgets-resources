@@ -5,7 +5,7 @@
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 
-export type TypeEnum = "static" | "dynamic";
+export type DataSetEnum = "static" | "dynamic";
 
 export type InterpolationEnum = "linear" | "catmullRom";
 
@@ -14,7 +14,7 @@ export type StaticLineStyleEnum = "line" | "lineWithMarkers";
 export type DynamicLineStyleEnum = "line" | "lineWithMarkers" | "custom";
 
 export interface SeriesType {
-    type: TypeEnum;
+    dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
@@ -27,12 +27,12 @@ export interface SeriesType {
     interpolation: InterpolationEnum;
     staticLineStyle: StaticLineStyleEnum;
     dynamicLineStyle: DynamicLineStyleEnum;
-    staticStylePropertyName: string;
-    dynamicStylePropertyName?: ListAttributeValue<string>;
+    staticCustomLineStyle: string;
+    dynamicCustomLineStyle?: ListAttributeValue<string>;
 }
 
 export interface SeriesPreviewType {
-    type: TypeEnum;
+    dataSet: DataSetEnum;
     staticDataSource: {} | null;
     dynamicDataSource: {} | null;
     groupByAttribute: string;
@@ -45,8 +45,8 @@ export interface SeriesPreviewType {
     interpolation: InterpolationEnum;
     staticLineStyle: StaticLineStyleEnum;
     dynamicLineStyle: DynamicLineStyleEnum;
-    staticStylePropertyName: string;
-    dynamicStylePropertyName: string;
+    staticCustomLineStyle: string;
+    dynamicCustomLineStyle: string;
 }
 
 export interface LineChartProps<Style> {

@@ -11,7 +11,7 @@ export interface LineChartLegendStyle {
     label?: TextStyle;
 }
 
-export interface LineChartSeriesStyle {
+export interface LineChartLineStyle {
     line?: VictoryLineProps["style"];
     markers?: VictoryScatterProps["style"] & {
         display?: "false" | "underneath" | "onTop";
@@ -38,7 +38,7 @@ export interface LineChartStyle {
         relativePositionGrid?: "top" | "left";
     };
     legend?: LineChartLegendStyle;
-    series?: { [key: string]: LineChartSeriesStyle };
+    lineStyles?: { [key: string]: LineChartLineStyle };
     lineColorPalette?: string[];
 }
 

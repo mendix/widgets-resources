@@ -56,7 +56,7 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartStyle = {
         marginHorizontal: 0,
         marginVertical: 8
     },
-    series: {},
+    lineStyles: {},
     legend: {
         container: {
             // All ViewStyle properties are allowed
