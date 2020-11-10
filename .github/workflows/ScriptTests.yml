@@ -30,15 +30,15 @@ jobs:
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'windows')
               run: |
-                echo "CHANGED_PACKAGES_FILES=$('${{ steps.files.outputs.all }}' | Select-String 'packages')" >> $GITHUB_ENV
-                echo "PARTIAL_BUILD=$(If ($CHANGED_PACKAGES_FILES -ne '' -AND '${{ github.event_name }}' -eq 'pull_request'){ echo 'true' } Else { echo 'false' })" >> $GITHUB_ENV
-                echo "SINCE_ARG=$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since ${{ github.event.pull_request.base.ref }}' } Else { echo '' })" >> $GITHUB_ENV
+                $CHANGED_GLOBAL_FILES = "$('${{ steps.files.outputs.all }}' | Select-String -Pattern '^packages' -NotMatch)"
+                $PARTIAL_BUILD = "$(If ($CHANGED_GLOBAL_FILES -eq '' -AND '${{ github.event_name }}' -eq 'pull_request'){ echo 'true' } Else { echo 'false' })"
+                $SINCE_ARG = "$(If ($PARTIAL_BUILD -eq 'true' ){ echo '--since ${{ github.event.pull_request.base.ref }}' } Else { echo '' })"
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'ubuntu')
               run: |
-                echo CHANGED_PACKAGES_FILES=$(echo "${{ steps.files.outputs.all }}" | grep "packages") >> $GITHUB_ENV
-                echo PARTIAL_BUILD=$(if [ -n "$CHANGED_PACKAGES_FILES" ] && [ "${{ github.event_name }}" = "pull_request" ]; then echo "true"; else echo "false"; fi) >> $GITHUB_ENV
-                echo SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since ${{ github.event.pull_request.base.ref }}"; else echo ""; fi) >> $GITHUB_ENV
+                export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+                export PARTIAL_BUILD=$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && [ "${{ github.event_name }}" = "pull_request" ]; then echo "true"; else echo "false"; fi)
+                export SINCE_ARG=$(if [ "$PARTIAL_BUILD" = "true" ]; then echo "--since ${{ github.event.pull_request.base.ref }}"; else echo ""; fi)
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
