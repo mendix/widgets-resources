@@ -16,7 +16,7 @@ jobs:
             os: [windows-latest, ubuntu-latest]
             include:
               - node: 10
-                os: windows-latest
+                os: ubuntu-latest
                 experimental: true
 
         steps:
