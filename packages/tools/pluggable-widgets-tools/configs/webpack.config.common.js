@@ -75,12 +75,7 @@ const previewConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader",
-                options: {
-                    compilerOptions: {
-                        module: "CommonJS"
-                    }
-                }
+                loader: "ts-loader"
             },
             {
                 test: /\.jsx?$/,
@@ -118,12 +113,7 @@ const editorConfigConfig = {
         rules: [
             {
                 test: /\.ts$/,
-                loader: "ts-loader",
-                options: {
-                    compilerOptions: {
-                        module: "CommonJS"
-                    }
-                }
+                loader: "ts-loader"
             },
             {
                 test: /\.js$/,
