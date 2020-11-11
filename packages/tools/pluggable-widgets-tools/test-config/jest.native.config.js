@@ -15,10 +15,11 @@ module.exports = {
     setupFilesAfterEnv: [__dirname + "/test-index-native.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
-    transformIgnorePatterns: ["/node_modules/(?!react-native)"],
+    transformIgnorePatterns: ["node_modules/(?!.*react-native)"],
     transform: {
+        "node_modules.*\\.jsx?$": "react-native/jest/preprocessor.js",
         "\\.tsx?$": "ts-jest",
-        "\\.jsx?$": "react-native/jest/preprocessor.js"
+        "\\.jsx?$": __dirname + "/transform-native.js"
     },
     moduleNameMapper: {
         "mendix/components/native/Icon": __dirname + "/__mocks__/NativeIcon",
