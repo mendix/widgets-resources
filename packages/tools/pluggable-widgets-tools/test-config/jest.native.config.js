@@ -1,7 +1,4 @@
-const { existsSync } = require("fs");
-
 const projectDir = process.cwd();
-const testTsconfigPath = `${projectDir}/tsconfig.spec.json`;
 
 module.exports = {
     preset: "react-native",
@@ -9,7 +6,7 @@ module.exports = {
     rootDir: projectDir,
     globals: {
         "ts-jest": {
-            tsconfig: existsSync(testTsconfigPath) ? testTsconfigPath : { module: "commonjs" }
+            tsconfig: { module: "commonjs" }
         }
     },
     setupFilesAfterEnv: [
