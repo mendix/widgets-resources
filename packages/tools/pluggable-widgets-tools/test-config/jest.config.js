@@ -1,11 +1,14 @@
+const { existsSync } = require("fs");
+
 const projectDir = process.cwd();
+const testTsconfigPath = `${projectDir}/tsconfig.spec.json`;
 
 module.exports = {
     clearMocks: true,
     rootDir: projectDir,
     globals: {
         "ts-jest": {
-            tsconfig: `${projectDir}/tsconfig.spec.json`
+            tsconfig: existsSync(testTsconfigPath) ? testTsconfigPath : { module: "commonjs" }
         }
     },
     setupFilesAfterEnv: [__dirname + "/test-index.js"],
