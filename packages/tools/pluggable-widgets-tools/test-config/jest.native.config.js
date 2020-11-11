@@ -17,6 +17,10 @@ module.exports = {
         "\\.tsx?$": "ts-jest",
         "\\.jsx?$": "react-native/jest/preprocessor.js"
     },
+    moduleNameMapper: {
+        "mendix/components/native/Icon": __dirname + "/__mocks__/NativeIcon",
+        "mendix/components/native/Image": __dirname + "/__mocks__/NativeImage"
+    },
     collectCoverage: true,
     coverageDirectory: "<rootDir>/dist/coverage"
 };

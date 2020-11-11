@@ -16,7 +16,8 @@ module.exports = {
         "\\.jsx?$": __dirname + "/transform.js"
     },
     moduleNameMapper: {
-        "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+        "mendix/components/web/Icon": __dirname + "/__mocks__/WebIcon"
     },
     collectCoverage: true,
     coverageDirectory: "<rootDir>/dist/coverage"
