@@ -16,6 +16,9 @@ module.exports = {
         "^.+\\.tsx?$": "ts-jest",
         "^.+\\.jsx?$": __dirname + "/transform.js"
     },
+    moduleNameMapper: {
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
     collectCoverage: true,
     coverageDirectory: "<rootDir>/dist/coverage"
 };
