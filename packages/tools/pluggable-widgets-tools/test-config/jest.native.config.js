@@ -12,7 +12,10 @@ module.exports = {
             tsconfig: existsSync(testTsconfigPath) ? testTsconfigPath : { module: "commonjs" }
         }
     },
-    setupFilesAfterEnv: [__dirname + "/test-index-native.js"],
+    setupFilesAfterEnv: [
+        __dirname + "/test-index-native.js",
+        ...(hasDependency("react-native-gesture-handler") ? ["react-native-gesture-handler/jestSetup.js"] : [])
+    ],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
     transformIgnorePatterns: ["node_modules/(?!.*react-native)"],
@@ -28,3 +31,12 @@ module.exports = {
     collectCoverage: true,
     coverageDirectory: "<rootDir>/dist/coverage"
 };
+
+function hasDependency(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
