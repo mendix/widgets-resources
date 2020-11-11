@@ -74,7 +74,7 @@ const previewDevConfig = {
         rules: [
             {
                 test: /\.(sa|sc|c)ss$/,
-                use: ["to-string-loader", "css-loader", "sass-loader"]
+                use: ["to-string-loader", { loader: "css-loader", options: { esModule: false } }, "sass-loader"]
             }
         ]
     }
