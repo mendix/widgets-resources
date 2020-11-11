@@ -1,23 +1,19 @@
-const nativeConfig = {
+const projectDir = process.cwd();
+
+module.exports = {
     preset: "react-native",
 
-    name: "native",
-    displayName: "Native Client",
     clearMocks: true,
-    rootDir: "../../../../",
+    rootDir: projectDir,
     globals: {
         "ts-jest": {
-            tsconfig: {
-                module: "commonjs"
-            }
+            tsconfig: `${projectDir}/tsconfig.spec.json`
         }
     },
     haste: {
         defaultPlatform: "android",
         platforms: ["android", "ios", "native"]
     },
-    modulePathIgnorePatterns: ["<rootDir>/node_modules/react-native/Libraries/react-native/"],
-    reporters: ["default"],
     setupFilesAfterEnv: [__dirname + "/test-index-native.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
@@ -27,7 +23,6 @@ const nativeConfig = {
         "^.+\\.tsx?$": "ts-jest",
         "^.+\\.jsx?$": __dirname + "/transform-native.js"
     },
+    collectCoverage: true,
     coverageDirectory: "<rootDir>/dist/coverage"
 };
-
-module.exports = nativeConfig;

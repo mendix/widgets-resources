@@ -1,25 +1,21 @@
-const webConfig = {
-    name: "web",
-    displayName: "Web Client",
+const projectDir = process.cwd();
+
+module.exports = {
     clearMocks: true,
-    rootDir: "../../../../",
+    rootDir: projectDir,
     globals: {
         "ts-jest": {
-            tsconfig: {
-                module: "commonjs"
-            }
+            tsconfig: `${projectDir}/tsconfig.spec.json`
         }
     },
     setupFilesAfterEnv: [__dirname + "/test-index.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
     testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
-    reporters: ["default"],
     transform: {
         "^.+\\.tsx?$": "ts-jest",
         "^.+\\.jsx?$": __dirname + "/transform.js"
     },
+    collectCoverage: true,
     coverageDirectory: "<rootDir>/dist/coverage"
 };
-
-module.exports = webConfig;
