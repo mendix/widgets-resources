@@ -11,10 +11,9 @@ module.exports = {
     setupFilesAfterEnv: [__dirname + "/test-index.js"],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
-    testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
     transform: {
-        "^.+\\.tsx?$": "ts-jest",
-        "^.+\\.jsx?$": __dirname + "/transform.js"
+        "\\.tsx?$": "ts-jest",
+        "\\.jsx?$": __dirname + "/transform.js"
     },
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy"
