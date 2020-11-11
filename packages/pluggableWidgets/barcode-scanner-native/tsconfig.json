@@ -1,5 +1,4 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
-    "include": ["./src"],
-    "exclude": ["./src/__tests__"]
+    "include": ["./src"]
 }

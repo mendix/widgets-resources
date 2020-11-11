@@ -21,7 +21,5 @@
         "jsxFactory": "createElement",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true
-    },
-    "include": ["../../../../src"],
-    "exclude": ["../../../../dist/", "../../../../node_modules/"]
+    }
 }

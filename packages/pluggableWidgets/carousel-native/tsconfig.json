@@ -1,6 +1,5 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
-    "include": ["./src", "./typings", "react-native-snap-carousel"],
-    "exclude": ["./dist/", "./node_modules/", "./src/**/__tests__"]
+    "include": ["./src", "./typings", "react-native-snap-carousel"]
 }
