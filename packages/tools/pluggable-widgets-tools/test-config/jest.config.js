@@ -1,24 +1,26 @@
+const { join } = require("path");
+
 const projectDir = process.cwd();
 
 module.exports = {
     clearMocks: true,
-    rootDir: projectDir,
+    rootDir: join(projectDir, "src"),
     globals: {
         "ts-jest": {
             tsconfig: { module: "commonjs" }
         }
     },
-    setupFilesAfterEnv: [__dirname + "/test-index.js"],
+    setupFilesAfterEnv: [join(__dirname, "test-index.js")],
     snapshotSerializers: ["enzyme-to-json/serializer"],
-    testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
+    testMatch: ["<rootDir>/**/*.spec.{js,jsx,ts,tsx}"],
     transform: {
         "\\.tsx?$": "ts-jest",
-        "\\.jsx?$": __dirname + "/transform.js"
+        "\\.jsx?$": join(__dirname, "transform.js")
     },
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-        "mendix/components/web/Icon": __dirname + "/__mocks__/WebIcon"
+        "mendix/components/web/Icon": join(__dirname, "__mocks__/WebIcon")
     },
     collectCoverage: true,
-    coverageDirectory: "<rootDir>/dist/coverage"
+    coverageDirectory: "<rootDir>/../dist/coverage"
 };
