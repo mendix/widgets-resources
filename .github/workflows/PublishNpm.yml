@@ -17,14 +17,15 @@ jobs:
         with:
           submodules: false
       - name: "Defining Environment Variables"
-        run: echo "TAG=$(git tag --points-at HEAD)" >> $GITHUB_ENV
+        id: variables
+        run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
       - name: "Installing dependencies"
         run: npm install
       - name: "Targeting Pluggable Widgets Tools"
-        if: contains(env.TAG, "pluggable-widgets-tools-v")
+        if: contains(steps.variables.outputs.tag, "pluggable-widgets-tools-v")
         run: cd packages/tools/pluggable-widgets-tools
       - name: "Targeting Pluggable Widgets Generator"
-        if: contains(env.TAG, "generator-widget-v")
+        if: contains(steps.variables.outputs.tag, "generator-widget-v")
         run: cd packages/tools/generator-widget
       - name: "Publishing to NPMJs"
         uses: JS-DevTools/npm-publish@v1
