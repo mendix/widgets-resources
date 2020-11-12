@@ -1,6 +1,6 @@
 import { PopupMenuProps } from "../../typings/PopupMenuProps";
 import { PopupMenuStyle } from "../ui/Styles";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableHighlight } from "react-native";
 import { createElement } from "react";
 import { actionValue } from "@widgets-resources/piw-utils";
 import { fireEvent, render } from "react-native-testing-library";
@@ -78,7 +78,7 @@ describe("Popup menu", () => {
 
         it("triggers action", () => {
             const component = render(<PopupMenu {...defaultProps} />);
-            fireEvent.press(component.UNSAFE_getAllByType(TouchableOpacity).pop()!);
+            fireEvent.press(component.UNSAFE_getAllByType(TouchableHighlight).pop()!);
 
             expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 500);
         });

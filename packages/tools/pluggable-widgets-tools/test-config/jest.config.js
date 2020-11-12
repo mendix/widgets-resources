@@ -1,25 +1,26 @@
-const webConfig = {
-    name: "web",
-    displayName: "Web Client",
+const { join } = require("path");
+
+const projectDir = process.cwd();
+
+module.exports = {
     clearMocks: true,
-    rootDir: "../../../../",
+    rootDir: join(projectDir, "src"),
     globals: {
         "ts-jest": {
-            tsconfig: {
-                module: "commonjs"
-            }
+            tsconfig: { module: "commonjs" }
         }
     },
-    setupFilesAfterEnv: [__dirname + "/test-index.js"],
+    setupFilesAfterEnv: [join(__dirname, "test-index.js")],
     snapshotSerializers: ["enzyme-to-json/serializer"],
-    testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
-    testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
-    reporters: ["default"],
+    testMatch: ["<rootDir>/**/*.spec.{js,jsx,ts,tsx}"],
     transform: {
-        "^.+\\.tsx?$": "ts-jest",
-        "^.+\\.jsx?$": __dirname + "/transform.js"
+        "\\.tsx?$": "ts-jest",
+        "\\.jsx?$": join(__dirname, "transform.js")
     },
-    coverageDirectory: "<rootDir>/dist/coverage"
+    moduleNameMapper: {
+        "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+        "mendix/components/web/Icon": join(__dirname, "__mocks__/WebIcon")
+    },
+    collectCoverage: true,
+    coverageDirectory: "<rootDir>/../dist/coverage"
 };
-
-module.exports = webConfig;

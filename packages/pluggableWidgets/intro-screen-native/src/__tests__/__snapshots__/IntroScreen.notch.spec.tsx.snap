@@ -163,7 +163,11 @@ exports[`Intro Screen renders 1`] = `
                   "alignSelf": "center",
                 }
               }
-            />
+            >
+              <View
+                testId="icon"
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -347,7 +351,11 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
                       "alignSelf": "center",
                     }
                   }
-                />
+                >
+                  <View
+                    testId="icon"
+                  />
+                </View>
               </View>
             </View>
           </View>
@@ -533,7 +541,11 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
                       "alignSelf": "center",
                     }
                   }
-                />
+                >
+                  <View
+                    testId="icon"
+                  />
+                </View>
               </View>
             </View>
           </View>
@@ -707,7 +719,11 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
                   "alignSelf": "center",
                 }
               }
-            />
+            >
+              <View
+                testId="icon"
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -879,7 +895,11 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
                   "alignSelf": "center",
                 }
               }
-            />
+            >
+              <View
+                testId="icon"
+              />
+            </View>
           </View>
         </View>
       </View>

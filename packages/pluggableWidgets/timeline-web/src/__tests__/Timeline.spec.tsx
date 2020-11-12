@@ -4,8 +4,6 @@ import { TimelineContainerProps } from "../../typings/TimelineProps";
 import { dynamicValue, ListValueBuilder } from "@widgets-resources/piw-utils";
 import Timeline from "../Timeline";
 
-jest.mock("mendix/components/web/Icon", () => jest.requireActual("./__mocks__/mendix/components/web/Icon"));
-
 describe("Timeline", () => {
     const listValueBuilder = ListValueBuilder();
     const defaultProps: TimelineContainerProps = {

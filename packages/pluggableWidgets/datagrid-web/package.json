@@ -20,7 +20,7 @@
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "test": "pluggable-widgets-tools test:unit:web",
     "release": "pluggable-widgets-tools release:ts"
   },
   "dependencies": {

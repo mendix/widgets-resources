@@ -160,7 +160,11 @@ exports[`FloatingActionButton renders floating action button 1`] = `
                   },
                 ]
               }
-            />
+            >
+              <View
+                testId="icon"
+              />
+            </View>
           </View>
         </View>
       </View>
@@ -329,7 +333,11 @@ exports[`FloatingActionButton renders with secondary buttons 1`] = `
                   },
                 ]
               }
-            />
+            >
+              <View
+                testId="icon"
+              />
+            </View>
           </View>
         </View>
       </View>
