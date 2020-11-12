@@ -3,7 +3,7 @@
         "noEmitOnError": true,
         "sourceMap": true,
         "module": "esnext",
-        "target": "es5",
+        "target": "es6",
         "lib": ["esnext", "dom"],
         "types": ["big.js", "jest"],
         "moduleResolution": "node",
