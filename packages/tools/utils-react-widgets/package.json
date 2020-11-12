@@ -23,6 +23,7 @@
     "@wdio/spec-reporter": "^6.7.0",
     "@wdio/sync": "^6.7.1",
     "base64-image-loader": "^1.2.1",
+    "babel-loader": "^8.2.1",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^6.2.1",
     "core-js": "^3.6.5",
