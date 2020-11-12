@@ -129,7 +129,7 @@ const editorConfigConfig = {
                 loader: "ts-loader",
                 options: {
                     compilerOptions: {
-                        module: "CommonJS"
+                        target: "es5"
                     }
                 }
             },
