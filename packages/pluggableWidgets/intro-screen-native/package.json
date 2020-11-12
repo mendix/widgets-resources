@@ -19,7 +19,7 @@
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.8.1",
+    "@react-native-community/async-storage": "1.12.0",
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0",
     "react-native-device-info": "7.0.2"
