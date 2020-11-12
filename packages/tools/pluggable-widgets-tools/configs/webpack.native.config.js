@@ -126,7 +126,12 @@ const editorConfigConfig = {
         rules: [
             {
                 test: /\.ts$/,
-                loader: "ts-loader"
+                loader: "ts-loader",
+                options: {
+                    compilerOptions: {
+                        target: "es6"
+                    }
+                }
             },
             {
                 test: /\.js$/,

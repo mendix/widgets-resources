@@ -75,7 +75,12 @@ const previewConfig = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader"
+                loader: "ts-loader",
+                options: {
+                    compilerOptions: {
+                        target: "es6"
+                    }
+                }
             },
             {
                 test: /\.jsx?$/,
@@ -113,7 +118,12 @@ const editorConfigConfig = {
         rules: [
             {
                 test: /\.ts$/,
-                loader: "ts-loader"
+                loader: "ts-loader",
+                options: {
+                    compilerOptions: {
+                        target: "es6"
+                    }
+                }
             },
             {
                 test: /\.js$/,
