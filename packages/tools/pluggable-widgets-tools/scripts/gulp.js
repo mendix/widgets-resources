@@ -5,9 +5,8 @@ const colors = require("colors/safe");
 const del = require("del");
 const gulp = require("gulp");
 const zip = require("gulp-zip");
-const webpack = require("webpack");
-
-let webpackCompiler;
+const rollup = require("rollup");
+const loadConfigFile = require("rollup/dist/loadConfigFile");
 
 const variables = require("../configs/variables");
 
@@ -60,67 +59,33 @@ function copyToDeployment() {
     }
 }
 
-function runWebpack(env, cb) {
-    let config;
-
-    if (isNative) {
-        config = require("../configs/webpack.native.config");
-        if (env === "prod") {
-            config = config.map(c => ({ ...c, mode: "production", devtool: false }));
-        }
-    } else {
-        config = require(`../configs/webpack.config.${env}`);
-    }
-
-    try {
-        const customWebpackConfigPath = join(variables.sourcePath, `webpack.config.${env}.js`);
-        if (existsSync(customWebpackConfigPath)) {
-            config = require(customWebpackConfigPath);
-            console.log(colors.magenta(`Using custom webpack configuration from ${customWebpackConfigPath}`));
-        }
-    } catch (err) {
-        handleError(`Wrong configuration found at webpack.config.${env}.js. Technical error: ${err.toString()}`);
-    }
-
-    if (!variables.editorConfigEntry) {
-        config.splice(-1, 1);
-    }
-    if (!isNative) {
-        if (!variables.previewEntry) {
-            config.splice(1, 1);
-            console.log(colors.yellow("Preview file was not found. No preview will be available"));
-        } else if (variables.previewEntry.indexOf(".webmodeler.") !== -1) {
-            console.log(
-                colors.yellow(
-                    `Preview file ${variables.previewEntry} uses old name 'webmodeler', it should be renamed to 'editorPreview' to keep compatibility with future versions of Studio/Studio Pro`
-                )
-            );
-        }
-    }
-
-    if (!webpackCompiler) {
-        webpackCompiler = webpack(config);
-    }
-
-    webpackCompiler.run((err, stats) => {
-        if (err) {
-            handleError(err);
-            cb(new Error(`Webpack: ${err}`));
-        }
-        const output = stats.toString({ colors: true, modules: false });
-        console.log(`Webpack output:\n${output}`);
-        cb();
-    });
-}
-
 function generateTypings() {
     if (!variables.isTypescript || process.env.MX_SKIP_TYPEGENERATOR) {
         return gulp.src(".", { allowEmpty: true });
     }
-    return gulp
-        .src(join(variables.sourcePath, "/src/package.xml"))
-        .pipe(typingGenerator())
-        .on("error", handleError);
+    return gulp.src(join(variables.sourcePath, "/src/package.xml")).pipe(typingGenerator()).on("error", handleError);
+}
+
+async function runRollup(runOrWatch, mode) {
+    try {
+        const { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
+            configPlatform: isNative ? "native" : "web",
+            configProd: mode === "prod"
+        });
+
+        if (runOrWatch === "watch") {
+            rollup.watch(options);
+        } else {
+            await Promise.all(
+                options.map(async optionsObj => {
+                    const bundle = await rollup.rollup(optionsObj);
+                    await Promise.all(optionsObj.output.map(bundle.write));
+                })
+            );
+        }
+    } catch (e) {
+        handleError(e);
+    }
 }
 
 function handleError(err) {
@@ -128,9 +93,22 @@ function handleError(err) {
     process.exit(1);
 }
 
-exports.build = gulp.series(clean, generateTypings, runWebpack.bind(null, "dev"), createMpkFile, copyToDeployment);
-exports.release = gulp.series(clean, generateTypings, runWebpack.bind(null, "prod"), createMpkFile);
-exports.watch = function() {
+exports.build = gulp.series(
+    clean,
+    generateTypings,
+    cb => runRollup("run", "dev").then(cb, cb),
+    createMpkFile,
+    copyToDeployment
+);
+exports.release = gulp.series(clean, generateTypings, cb => runRollup("run", "prod").then(cb), createMpkFile);
+exports.watch = function () {
     console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
-    return gulp.watch("src/**/*", { ignoreInitial: false, cwd: variables.sourcePath }, exports.build);
+    clean();
+    gulp.watch("src/**/*.xml", { ignoreInitial: false, cwd: variables.sourcePath }, generateTypings);
+    runRollup("watch", "dev");
+    gulp.watch(
+        "dist/tmp/**/*",
+        { ignoreInitial: false, cwd: variables.sourcePath },
+        gulp.series(createMpkFile, copyToDeployment)
+    );
 };
