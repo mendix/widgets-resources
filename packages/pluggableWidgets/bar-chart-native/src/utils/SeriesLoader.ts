@@ -28,7 +28,7 @@ export function useSeries(series: BarSeriesType[]): BarChartSeries[] | null {
         const loadedSeries: BarChartSeries[] = [];
 
         for (const element of series) {
-            if (element.type === "static") {
+            if (element.dataSet === "static") {
                 const result = loadStaticSeries(element);
 
                 if (!result) {
@@ -56,9 +56,9 @@ export function useSeries(series: BarSeriesType[]): BarChartSeries[] | null {
 }
 
 function loadStaticSeries(series: BarSeriesType): BarChartSeries | null {
-    const { staticSeriesName, type } = series;
+    const { staticSeriesName, dataSet } = series;
 
-    if (type !== "static") {
+    if (dataSet !== "static") {
         throw Error("Expected series to be static");
     }
 
@@ -81,9 +81,9 @@ function loadStaticSeries(series: BarSeriesType): BarChartSeries | null {
 }
 
 function loadDynamicSeries(series: BarSeriesType): BarChartSeries[] | null {
-    const { type } = series;
+    const { dataSet } = series;
 
-    if (type !== "dynamic") {
+    if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
     }
 
@@ -115,9 +115,9 @@ function loadDynamicSeries(series: BarSeriesType): BarChartSeries[] | null {
 
 // todo: note, perhaps it's worth noting in UI that series can be grouped by X or Y attributes.
 function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | null {
-    const { dynamicDataSource, dynamicSeriesName, groupByAttribute, type } = series;
+    const { dynamicDataSource, dynamicSeriesName, groupByAttribute, dataSet } = series;
 
-    if (type !== "dynamic") {
+    if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
     }
 
@@ -175,7 +175,7 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
     if (!dataSourceItems) {
         // todo: why is this check here? dataSourceItems are only passed for dynamic items.
         const dataSource =
-            series.type === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
+            series.dataSet === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
 
         if (!dataSource.items) {
             return null;
@@ -187,8 +187,12 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
     const dataPointsExtraction: DataPointsExtraction = { dataPoints: [] };
 
     for (const item of dataSourceItems) {
-        const x = (series.type === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute))(item);
-        const y = (series.type === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute))(item);
+        const x = (series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute))(
+            item
+        );
+        const y = (series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute))(
+            item
+        );
 
         if (!x.value || !y.value) {
             return null;

@@ -10,17 +10,18 @@ export function BarChart(props: BarChartProps<BarChartStyle>): ReactElement | nu
     const { name, barSeries, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
+
     const styles = all<BarChartStyle>([defaultBarChartStyle, ...customStyles]);
 
-    const chartSeries = useSeries(barSeries);
+    const series = useSeries(barSeries);
 
-    if (!chartSeries || (xAxisLabel && !xAxisLabel.value) || (yAxisLabel && !yAxisLabel.value)) {
+    if (!series || (xAxisLabel && xAxisLabel.value === undefined) || (yAxisLabel && yAxisLabel.value === undefined)) {
         return null;
     }
 
     return (
         <BarChartComponent
-            series={chartSeries}
+            series={series}
             style={styles}
             showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}

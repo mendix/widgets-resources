@@ -4,7 +4,7 @@ import { BarChartPreviewProps } from "../typings/BarChartProps";
 
 export function getProperties(values: BarChartPreviewProps, defaultProperties: Properties): Properties {
     values.barSeries.forEach((series, index) => {
-        if (series.type === "static") {
+        if (series.dataSet === "static") {
             hideNestedPropertiesIn(defaultProperties, values, "barSeries", index, [
                 "dynamicDataSource",
                 "groupByAttribute",
@@ -28,7 +28,8 @@ export function check(values: BarChartPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
     values.barSeries.forEach((series, index) => {
-        if (series.type === "static") {
+        if (series.dataSet === "static") {
+            // todo: why this?
             // @ts-ignore
             if (series.staticDataSource.type === "null") {
                 errors.push({
@@ -54,6 +55,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
                 });
             }
         } else {
+            // todo: why this?
             // @ts-ignore
             if (series.dynamicDataSource.type === "null") {
                 errors.push({

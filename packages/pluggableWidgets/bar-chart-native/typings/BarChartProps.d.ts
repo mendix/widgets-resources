@@ -5,10 +5,10 @@
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 
-export type TypeEnum = "static" | "dynamic";
+export type DataSetEnum = "static" | "dynamic";
 
 export interface BarSeriesType {
-    type: TypeEnum;
+    dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
@@ -21,7 +21,7 @@ export interface BarSeriesType {
 }
 
 export interface BarSeriesPreviewType {
-    type: TypeEnum;
+    dataSet: DataSetEnum;
     staticDataSource: {} | null;
     dynamicDataSource: {} | null;
     groupByAttribute: string;
