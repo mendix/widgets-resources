@@ -19,7 +19,7 @@ const outWidgetFile = join(
 
 export default args => {
     const platform = args.configPlatform;
-    const production = Boolean(args.configProd);
+    const production = Boolean(args.configProduction);
     if (!["web", "native"].includes(platform)) {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }

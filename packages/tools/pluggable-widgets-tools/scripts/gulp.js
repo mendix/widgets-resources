@@ -68,10 +68,20 @@ function generateTypings() {
 
 async function runRollup(runOrWatch, mode) {
     try {
-        const { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
+        let { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
             configPlatform: isNative ? "native" : "web",
-            configProd: mode === "prod"
+            configProduction: mode === "prod"
         });
+
+        const customConfigPath = join(variables.sourcePath, "rollup.config.js");
+        if (existsSync(customConfigPath)) {
+            const customConfig = await loadConfigFile(customConfigPath, {
+                configDefaultConfig: options,
+                configProduction: mode === "prod"
+            });
+            customConfig.warnings.flush();
+            options = customConfig.options;
+        }
 
         if (runOrWatch === "watch") {
             rollup.watch(options);
