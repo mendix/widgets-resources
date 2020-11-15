@@ -1,6 +1,7 @@
 import { join } from "path";
 import { babel } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
@@ -17,6 +18,9 @@ const outWidgetFile = join(
     `${variables.package.widgetName}.js`
 );
 
+const webExtensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
+const nativeExtensions = [".native.js", ".js", ".jsx", ".ts", ".tsx"];
+
 export default args => {
     const platform = args.configPlatform;
     const production = Boolean(args.configProduction);
@@ -24,8 +28,7 @@ export default args => {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }
 
-    const extensions = [".tsx", ".ts", ".jsx", ".js", ".scss", ".sass", ".css"];
-    const widgetConfig = {
+    const webWidgetConfig = {
         input: variables.widgetEntry,
         output: {
             format: "amd",
@@ -38,16 +41,15 @@ export default args => {
             scss({ failOnError: true, sass: require("sass") }),
             nodeResolve({
                 browser: true,
-                extensions,
-                mainFields: ["browser", "module", "main"],
+                extensions: webExtensions,
                 preferBuiltins: false
             }),
-            commonjs({ extensions, transformMixedEsModules: true }),
             replace({
                 "process.env.NODE_ENV": production ? "'production'" : "'development'"
             }),
             babel({
                 sourceMaps: !production,
+                babelrc: false,
                 presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
                 babelHelpers: "bundled",
                 plugins: [
@@ -56,6 +58,77 @@ export default args => {
                 ]
             }),
             typescript({ noEmitOnError: true, sourceMap: !production, inlineSources: !production }),
+            commonjs({ extensions: webExtensions, transformMixedEsModules: true }),
+            ...(production ? [terser()] : []),
+            copy({
+                targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
+            })
+        ],
+        onwarn
+    };
+
+    const nativeWidgetConfig = {
+        input: variables.widgetEntry,
+        output: {
+            format: "es",
+            file: join(outDir, outWidgetFile)
+        },
+        treeshake: { moduleSideEffects: false },
+        external: [
+            /^mendix\//,
+            "@react-native-community/art",
+            "@react-native-community/async-storage",
+            "@react-native-community/cameraroll",
+            "@react-native-community/geolocation",
+            "@react-native-community/netinfo",
+            "@react-native-firebase/analytics",
+            "@react-native-firebase/app",
+            "@react-native-firebase/crashlytics",
+            "@react-native-firebase/messaging",
+            "@react-native-firebase/ml-vision",
+            "big.js",
+            "react",
+            "react-native",
+            "react-native-camera",
+            "react-native-device-info",
+            "react-native-firebase",
+            "react-native-geocoder",
+            /react-native-gesture-handler\/*/,
+            "react-native-image-picker",
+            "react-native-inappbrowser-reborn",
+            "react-native-localize",
+            "react-native-maps",
+            "react-native-reanimated",
+            "react-native-sound",
+            "react-native-svg",
+            "react-native-touch-id",
+            "react-native-vector-icons",
+            "react-native-video",
+            "react-native-view-shot",
+            "react-native-webview",
+            "react-navigation"
+        ],
+        plugins: [
+            json(),
+            nodeResolve({
+                browser: true,
+                extensions: nativeExtensions,
+                preferBuiltins: false
+            }),
+            replace({
+                "process.env.NODE_ENV": production ? "'production'" : "'development'"
+            }),
+            babel({
+                babelHelpers: "bundled",
+                babelrc: false,
+                plugins: [
+                    "@babel/plugin-proposal-class-properties",
+                    "@babel/plugin-transform-flow-strip-types",
+                    "@babel/plugin-transform-react-jsx"
+                ]
+            }),
+            typescript({ noEmitOnError: true, target: "es2019", sourceMap: false }),
+            commonjs({ extensions: nativeExtensions, transformMixedEsModules: true }),
             ...(production ? [terser()] : []),
             copy({
                 targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
@@ -65,17 +138,17 @@ export default args => {
     };
 
     const previewConfig = {
-        ...widgetConfig,
+        ...webWidgetConfig,
         input: variables.previewEntry,
         output: {
             format: "commonjs",
             file: join(outDir, `${variables.package.widgetName}.editorPreview.js`),
             sourcemap: !production ? "inline" : false
         },
-        external: widgetConfig.external.slice(0, 3),
+        external: webWidgetConfig.external.slice(0, 3),
         plugins: [
             scss({ output: false, failOnError: true, sass: require("sass") }),
-            ...widgetConfig.plugins.slice(1, -1)
+            ...webWidgetConfig.plugins.slice(1, -1)
         ]
     };
 
@@ -99,7 +172,11 @@ export default args => {
         onwarn
     };
 
-    return [widgetConfig, previewConfig, editorConfig].filter(c => c.input);
+    return [
+        platform === "web" ? webWidgetConfig : nativeWidgetConfig,
+        ...(platform === "web" && variables.previewEntry ? [previewConfig] : []),
+        ...(variables.editorConfigEntry ? [editorConfig] : [])
+    ];
 };
 
 function onwarn(warning, warn) {
