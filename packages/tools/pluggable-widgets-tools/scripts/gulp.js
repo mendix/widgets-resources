@@ -23,8 +23,7 @@ const isNative = process.argv.indexOf("--native") !== -1;
 function clean() {
     return del(
         [
-            join(variables.sourcePath, "dist", variables.package.version),
-            join(variables.sourcePath, "dist/tmp"),
+            join(variables.sourcePath, "dist"),
             join(widgetsFolder, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`)
         ],
         { force: true }
@@ -66,36 +65,38 @@ function generateTypings() {
     return gulp.src(join(variables.sourcePath, "/src/package.xml")).pipe(typingGenerator()).on("error", handleError);
 }
 
-async function runRollup(runOrWatch, mode) {
-    try {
-        let { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
-            configPlatform: isNative ? "native" : "web",
+function getRollupCodeStep(mode) {
+    return function rollupCode(cb) {
+        getRollupOptions(mode)
+            .then(options =>
+                Promise.all(
+                    options.map(async optionsObj => {
+                        const bundle = await rollup.rollup(optionsObj);
+                        await Promise.all(optionsObj.output.map(bundle.write));
+                    })
+                )
+            )
+            .then(() => cb(), cb);
+    };
+}
+
+async function getRollupOptions(mode) {
+    let { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
+        configPlatform: isNative ? "native" : "web",
+        configProduction: mode === "prod"
+    });
+
+    const customConfigPath = join(variables.sourcePath, "rollup.config.js");
+    if (existsSync(customConfigPath)) {
+        const customConfig = await loadConfigFile(customConfigPath, {
+            configDefaultConfig: options,
             configProduction: mode === "prod"
         });
-
-        const customConfigPath = join(variables.sourcePath, "rollup.config.js");
-        if (existsSync(customConfigPath)) {
-            const customConfig = await loadConfigFile(customConfigPath, {
-                configDefaultConfig: options,
-                configProduction: mode === "prod"
-            });
-            customConfig.warnings.flush();
-            options = customConfig.options;
-        }
-
-        if (runOrWatch === "watch") {
-            rollup.watch(options);
-        } else {
-            await Promise.all(
-                options.map(async optionsObj => {
-                    const bundle = await rollup.rollup(optionsObj);
-                    await Promise.all(optionsObj.output.map(bundle.write));
-                })
-            );
-        }
-    } catch (e) {
-        handleError(e);
+        customConfig.warnings.flush();
+        options = customConfig.options;
     }
+
+    return options;
 }
 
 function handleError(err) {
@@ -103,19 +104,15 @@ function handleError(err) {
     process.exit(1);
 }
 
-exports.build = gulp.series(
-    clean,
-    generateTypings,
-    cb => runRollup("run", "dev").then(cb, cb),
-    createMpkFile,
-    copyToDeployment
-);
-exports.release = gulp.series(clean, generateTypings, cb => runRollup("run", "prod").then(cb), createMpkFile);
+exports.build = gulp.series(clean, generateTypings, getRollupCodeStep("dev"), createMpkFile, copyToDeployment);
+exports.release = gulp.series(clean, generateTypings, getRollupCodeStep("prod"), createMpkFile);
 exports.watch = function () {
     console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
     clean();
     gulp.watch("src/**/*.xml", { ignoreInitial: false, cwd: variables.sourcePath }, generateTypings);
-    runRollup("watch", "dev");
+    getRollupOptions("dev")
+        .then(options => rollup.watch(options))
+        .catch(handleError);
     gulp.watch(
         "dist/tmp/**/*",
         { ignoreInitial: false, cwd: variables.sourcePath },
