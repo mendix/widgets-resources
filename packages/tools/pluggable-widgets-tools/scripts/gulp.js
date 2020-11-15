@@ -34,7 +34,7 @@ function createMpkFile() {
     return gulp
         .src(join(variables.sourcePath, "dist/tmp/widgets/**/*"))
         .pipe(zip(`${variables.package.packagePath}.${variables.package.widgetName}.mpk`))
-        .pipe(gulp.dest(widgetsFolder))
+        .pipe(existsSync(widgetsFolder) ? gulp.dest(widgetsFolder) : noop())
         .pipe(gulp.dest(join(variables.sourcePath, `dist/${variables.package.version}`)))
         .on("error", handleError);
 }
@@ -55,12 +55,13 @@ function copyToDeployment() {
                 `Widget is not copied into project because no Mendix Test Project is available in ${projectPath}`
             )
         );
+        return noop();
     }
 }
 
 function generateTypings() {
     if (!variables.isTypescript || process.env.MX_SKIP_TYPEGENERATOR) {
-        return gulp.src(".", { allowEmpty: true });
+        return noop();
     }
     return gulp.src(join(variables.sourcePath, "/src/package.xml")).pipe(typingGenerator()).on("error", handleError);
 }
@@ -102,6 +103,10 @@ async function getRollupOptions(mode) {
 function handleError(err) {
     console.log(colors.red(err.toString()));
     process.exit(1);
+}
+
+function noop() {
+    return gulp.src(".", { allowEmpty: true });
 }
 
 exports.build = gulp.series(clean, generateTypings, getRollupCodeStep("dev"), createMpkFile, copyToDeployment);
