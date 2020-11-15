@@ -30,7 +30,7 @@ export default args => {
         output: {
             format: "amd",
             file: join(outDir, outWidgetFile),
-            sourcemap: !production
+            sourcemap: !production ? "inline" : false
         },
         treeshake: { moduleSideEffects: false },
         external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
@@ -43,7 +43,11 @@ export default args => {
                 preferBuiltins: false
             }),
             commonjs({ extensions, transformMixedEsModules: true }),
+            replace({
+                "process.env.NODE_ENV": production ? "'production'" : "'development'"
+            }),
             babel({
+                sourceMaps: !production,
                 presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
                 babelHelpers: "bundled",
                 plugins: [
@@ -51,11 +55,8 @@ export default args => {
                     ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                 ]
             }),
-            typescript({ noEmitOnError: true, sourceMap: !production }),
-            replace({
-                "process.env.NODE_ENV": production ? "'production'" : "'development'"
-            }),
-           ...(production ? [terser()] : []),
+            typescript({ noEmitOnError: true, sourceMap: !production, inlineSources: !production }),
+            ...(production ? [terser()] : []),
             copy({
                 targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
             })
@@ -69,7 +70,7 @@ export default args => {
         output: {
             format: "commonjs",
             file: join(outDir, `${variables.package.widgetName}.editorPreview.js`),
-            sourcemap: !production
+            sourcemap: !production ? "inline" : false
         },
         external: widgetConfig.external.slice(0, 3),
         plugins: [
