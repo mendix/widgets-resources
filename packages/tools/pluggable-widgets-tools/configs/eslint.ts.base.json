@@ -144,15 +144,7 @@
     },
     "overrides": [
         {
-            "files": [
-                "webpack.config.dev.js",
-                "webpack.config.prod.js",
-                "prettier.config.js",
-                "*.webmodeler.*",
-                "*.editorPreview.*",
-                ".eslintrc.js",
-                "wdio.conf.js"
-            ],
+            "files": ["prettier.config.js", "*.webmodeler.*", "*.editorPreview.*", ".eslintrc.js", "wdio.conf.js"],
             "rules": {
                 "@typescript-eslint/no-var-requires": "off",
                 "@typescript-eslint/class-name-casing": "off"
