@@ -1,5 +1,5 @@
-const { existsSync, readdirSync } = require("fs");
-const { join, normalize } = require("path");
+const { existsSync } = require("fs");
+const { join } = require("path");
 const typingGenerator = require("../dist/typings-generator");
 const colors = require("colors/safe");
 const del = require("del");
@@ -9,23 +9,11 @@ const rollup = require("rollup");
 const loadConfigFile = require("rollup/dist/loadConfigFile");
 
 const variables = require("../configs/variables");
-
-require("dotenv").config({ path: join(variables.sourcePath, ".env") });
-
-const projectPath = normalize(
-    process.env.MX_PROJECT_PATH ||
-        variables.package.config.projectPath ||
-        join(variables.sourcePath, "tests/testProject")
-);
-const widgetsFolder = join(projectPath, "widgets");
 const isNative = process.argv.indexOf("--native") !== -1;
 
 function clean() {
     return del(
-        [
-            join(variables.sourcePath, "dist"),
-            join(widgetsFolder, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`)
-        ],
+        [join(variables.sourcePath, "dist", variables.package.version), join(variables.sourcePath, "dist/tmp")],
         { force: true }
     );
 }
@@ -34,27 +22,25 @@ function createMpkFile() {
     return gulp
         .src(join(variables.sourcePath, "dist/tmp/widgets/**/*"))
         .pipe(zip(`${variables.package.packagePath}.${variables.package.widgetName}.mpk`))
-        .pipe(existsSync(widgetsFolder) ? gulp.dest(widgetsFolder) : noop())
+        .pipe(variables.projectPath ? gulp.dest(join(variables.projectPath, "widgets")) : noop())
         .pipe(gulp.dest(join(variables.sourcePath, `dist/${variables.package.version}`)))
         .on("error", handleError);
 }
 
 function copyToDeployment() {
-    if (existsSync(projectPath) && readdirSync(projectPath).length > 0) {
+    if (variables.projectPath) {
         return gulp
             .src([
                 join(variables.sourcePath, "dist/tmp/widgets/**/*"),
                 "!" + join(variables.sourcePath, "dist/tmp/widgets/**/package.xml")
             ])
-            .pipe(gulp.dest(join(projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
+            .pipe(gulp.dest(join(variables.projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
             .on("error", handleError)
-            .on("finish", () => console.log(colors.green(`Files generated in dist and ${projectPath} folder`)));
+            .on("finish", () =>
+                console.log(colors.green(`Files generated in dist and ${variables.projectPath} folder`))
+            );
     } else {
-        console.log(
-            colors.yellow(
-                `Widget is not copied into project because no Mendix Test Project is available in ${projectPath}`
-            )
-        );
+        console.log(colors.yellow("Widget is not copied into project because no Mendix Test Project is available"));
         return noop();
     }
 }

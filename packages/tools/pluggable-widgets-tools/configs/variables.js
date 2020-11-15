@@ -1,4 +1,4 @@
-const { readdirSync } = require("fs");
+const { existsSync, readdirSync } = require("fs");
 const { join } = require("path");
 
 const sourcePath = process.cwd();
@@ -25,7 +25,18 @@ const previewEntry = widgetSrcFiles.filter(file =>
 
 const isTypescript = [widgetEntry, editorConfigEntry, previewEntry].some(file => file && /\.tsx?$/.test(file));
 
-module.exports = { sourcePath, package, widgetEntry, previewEntry, editorConfigEntry, isTypescript };
+require("dotenv").config({ path: join(sourcePath, ".env") });
+const projectPath = process.env.MX_PROJECT_PATH || package.config.projectPath || join(sourcePath, "tests/testProject");
+
+module.exports = {
+    sourcePath,
+    package,
+    widgetEntry,
+    previewEntry,
+    editorConfigEntry,
+    isTypescript,
+    projectPath: existsSync(projectPath) ? projectPath : undefined
+};
 
 function escape(str) {
     return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
