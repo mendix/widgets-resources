@@ -3,7 +3,7 @@ import { executeAction } from "@widgets-resources/piw-utils";
 import { createElement, ReactElement, useCallback, useRef } from "react";
 import { View, Text } from "react-native";
 import SignatureScreen, { SignatureViewRef } from "react-native-signature-canvas";
-import { Touchable } from "../components/Touchable";
+import { Touchable } from "./components/Touchable";
 
 import { SignatureProps } from "../typings/SignatureProps";
 import { SignatureStyle, defaultSignatureStyle, webStyles } from "./ui/Styles";
