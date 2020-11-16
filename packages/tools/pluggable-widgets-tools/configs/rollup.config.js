@@ -1,4 +1,5 @@
 import { join } from "path";
+import alias from "@rollup/plugin-alias";
 import { babel } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
@@ -39,6 +40,11 @@ export default args => {
         external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
         plugins: [
             scss({ failOnError: true, sass: require("sass") }),
+            alias({
+                entries: {
+                    "react-hot-loader/root": join(__dirname, "hot")
+                }
+            }),
             nodeResolve({
                 browser: true,
                 extensions: webExtensions,
@@ -148,7 +154,7 @@ export default args => {
         external: webWidgetConfig.external.slice(0, 3),
         plugins: [
             scss({ output: false, failOnError: true, sass: require("sass") }),
-            ...webWidgetConfig.plugins.slice(1, -1)
+            ...webWidgetConfig.plugins.slice(2, -1)
         ]
     };
 
