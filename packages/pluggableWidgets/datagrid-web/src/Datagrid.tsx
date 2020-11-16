@@ -4,7 +4,6 @@ import { DatagridContainerProps } from "../typings/DatagridProps";
 import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
 import classNames from "classnames";
-import { MySuperWidget } from "./components/MySuperWidget";
 import { FilterContext, FilterFunction } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
@@ -95,12 +94,13 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 [props.columns]
             )}
             filterRenderer={useCallback(
-                (renderWrapper, columnIndex) =>
-                    renderWrapper(
-                        <FilterContext.Provider value={customFiltersState[columnIndex][1]}>
-                            <MySuperWidget />
-                        </FilterContext.Provider>
-                    ),
+                (renderWrapper, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    const [, setValue] = customFiltersState[columnIndex];
+                    return renderWrapper(
+                        <FilterContext.Provider value={setValue}>{column.customFilter}</FilterContext.Provider>
+                    );
+                },
                 [props.columns, props.datasource]
             )}
             settings={props.configurationAttribute}

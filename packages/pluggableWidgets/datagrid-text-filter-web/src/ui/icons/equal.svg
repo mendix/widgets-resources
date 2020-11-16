@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="9px" viewBox="0 0 14 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>equal</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Equal" transform="translate(-9.000000, -12.000000)" fill="#264AE5" fill-rule="nonzero">
+            <path d="M22,18 L10,18 C9.4478125,18 9,18.4478125 9,19 L9,20 C9,20.5521875 9.4478125,21 10,21 L22,21 C22.5521875,21 23,20.5521875 23,20 L23,19 C23,18.4478125 22.5521875,18 22,18 Z M22,12 L10,12 C9.4478125,12 9,12.4478125 9,13 L9,14 C9,14.5521875 9.4478125,15 10,15 L22,15 C22.5521875,15 23,14.5521875 23,14 L23,13 C23,12.4478125 22.5521875,12 22,12 Z" id="equal"></path>
+        </g>
+    </g>
+</svg>

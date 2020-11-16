@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter selector renders correctly 1`] = `
+<div
+  className="filter-container"
+>
+  <FilterSelector
+    onChange={[Function]}
+  />
+  <input
+    className="form-control"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;

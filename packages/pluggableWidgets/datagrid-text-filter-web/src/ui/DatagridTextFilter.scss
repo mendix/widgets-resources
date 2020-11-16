@@ -1,0 +1,91 @@
+$primary-color: #264ae5;
+$hover-color: #ddd;
+$background-color: #fff;
+$selected-color: #c6c6c6;
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.filter-selector {
+    padding-left: 0;
+    padding-right: 0;
+
+    .filter-selector-content {
+        align-self: flex-end;
+
+        .filter-selector-button {
+            padding: 8px 16px;
+            margin: 0 8px 0 0;
+
+            &.contains {
+                background: url("./icons/contains.svg") no-repeat center;
+            }
+            &.endsWith {
+                background: url("./icons/endsWith.svg") no-repeat center;
+            }
+            &.equal {
+                background: url("./icons/equal.svg") no-repeat center;
+            }
+            &.greater {
+                background: url("./icons/greater.svg") no-repeat center;
+            }
+            &.greaterEqual {
+                background: url("./icons/greaterEqual.svg") no-repeat center;
+            }
+            &.less {
+                 background: url("./icons/less.svg") no-repeat center;
+            }
+            &.less {
+                background: url("./icons/lessEqual.svg") no-repeat center;
+            }
+            &.notEqual {
+                background: url("./icons/notEqual.svg") no-repeat center;
+            }
+            &.smaller {
+                background: url("./icons/smaller.svg") no-repeat center;
+            }
+            &.smallerEqual {
+                background: url("./icons/smallerEqual.svg") no-repeat center;
+            }
+            &.startsWith {
+                background: url("./icons/startsWith.svg") no-repeat center;
+            }
+        }
+
+        .filter-selectors {
+            position: absolute;
+            width: max-content;
+            left: 0;
+            margin: 8px;
+            padding: 0;
+            background: $background-color;
+            z-index: 99;
+            border-radius: 3px;
+            border: 1px solid transparent;
+            list-style-type: none;
+            -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+            -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+            box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+
+            li {
+                display: flex;
+                align-items: center;
+                padding: 8px;
+                font-weight: normal;
+
+                &.filter-selected {
+                    background-color: $selected-color;
+                    font-weight: bold;
+                }
+
+                &:hover {
+                    background-color: $hover-color;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
