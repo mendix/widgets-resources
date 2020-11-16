@@ -9,6 +9,7 @@ import typescript from "@rollup/plugin-typescript";
 import copy from "rollup-plugin-copy";
 import scss from "rollup-plugin-scss";
 import { terser } from "rollup-plugin-terser";
+import { duplicateOutput } from "./rollup-plugin-duplicate-output";
 
 const variables = require("./variables");
 
@@ -55,7 +56,10 @@ export default args => {
                 }),
                 copy({
                     targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-                })
+                }),
+                !production && variables.projectPath
+                    ? duplicateOutput({ from: outDir, to: join(variables.projectPath, "deployment/web/widgets") })
+                    : null
             ],
             onwarn
         });
@@ -86,7 +90,10 @@ export default args => {
                 }),
                 copy({
                     targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-                })
+                }),
+                !production && variables.projectPath
+                    ? duplicateOutput({ from: outDir, to: join(variables.projectPath, "deployment/native/widgets") })
+                    : null
             ],
             onwarn
         });

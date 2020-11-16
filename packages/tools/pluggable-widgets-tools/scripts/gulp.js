@@ -27,24 +27,6 @@ function createMpkFile() {
         .on("error", handleError);
 }
 
-function copyToDeployment() {
-    if (variables.projectPath) {
-        return gulp
-            .src([
-                join(variables.sourcePath, "dist/tmp/widgets/**/*"),
-                "!" + join(variables.sourcePath, "dist/tmp/widgets/**/package.xml")
-            ])
-            .pipe(gulp.dest(join(variables.projectPath, `deployment/${isNative ? "native" : "web"}/widgets`)))
-            .on("error", handleError)
-            .on("finish", () =>
-                console.log(colors.green(`Files generated in dist and ${variables.projectPath} folder`))
-            );
-    } else {
-        console.log(colors.yellow("Widget is not copied into project because no Mendix Test Project is available"));
-        return noop();
-    }
-}
-
 function generateTypings() {
     if (!variables.isTypescript || process.env.MX_SKIP_TYPEGENERATOR) {
         return noop();
@@ -95,7 +77,7 @@ function noop() {
     return gulp.src(".", { allowEmpty: true });
 }
 
-exports.build = gulp.series(clean, generateTypings, getRollupCodeStep("dev"), createMpkFile, copyToDeployment);
+exports.build = gulp.series(clean, generateTypings, getRollupCodeStep("dev"), createMpkFile);
 exports.release = gulp.series(clean, generateTypings, getRollupCodeStep("prod"), createMpkFile);
 exports.watch = function () {
     console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
@@ -104,9 +86,5 @@ exports.watch = function () {
     getRollupOptions("dev")
         .then(options => rollup.watch(options))
         .catch(handleError);
-    gulp.watch(
-        "dist/tmp/**/*",
-        { ignoreInitial: false, cwd: variables.sourcePath },
-        gulp.series(createMpkFile, copyToDeployment)
-    );
+    gulp.watch("dist/tmp/**/*", { ignoreInitial: false, cwd: variables.sourcePath }, gulp.series(createMpkFile));
 };
