@@ -9,13 +9,13 @@ describe("Filter selector", () => {
         expect(component).toMatchSnapshot();
     });
 
-    // it("calls filterDispatcher when value changes", () => {
-    //     const filterDispatcher = jest.fn();
-    //     const component = shallow(<FilterComponent filterDispatcher={filterDispatcher} />);
-    //
-    //     const input = component.find("input");
-    //     input.simulate("change", { target: { value: "test" } });
-    //
-    //     expect(filterDispatcher).toBeCalled();
-    // });
+    it("calls filterDispatcher when value changes", () => {
+        const filterDispatcher = jest.fn();
+        const component = shallow(<FilterComponent filterDispatcher={filterDispatcher} />);
+
+        const input = component.find("input");
+        input.simulate("change", { target: { value: "test" } });
+
+        expect(filterDispatcher).toBeCalled();
+    });
 });
