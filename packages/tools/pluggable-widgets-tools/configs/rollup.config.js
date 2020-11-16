@@ -63,7 +63,9 @@ export default args => {
                     ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
                 ]
             }),
-            typescript({ noEmitOnError: true, sourceMap: !production, inlineSources: !production }),
+            ...(variables.isTypescript
+                ? [typescript({ noEmitOnError: true, sourceMap: !production, inlineSources: !production })]
+                : []),
             commonjs({ extensions: webExtensions, transformMixedEsModules: true }),
             ...(production ? [terser()] : []),
             copy({
@@ -133,7 +135,9 @@ export default args => {
                     "@babel/plugin-transform-react-jsx"
                 ]
             }),
-            typescript({ noEmitOnError: true, target: "es2019", sourceMap: false }),
+            ...(variables.isTypescript
+                ? [typescript({ noEmitOnError: true, target: "es2019", sourceMap: false })]
+                : []),
             commonjs({ extensions: nativeExtensions, transformMixedEsModules: true }),
             ...(production ? [terser()] : []),
             copy({
