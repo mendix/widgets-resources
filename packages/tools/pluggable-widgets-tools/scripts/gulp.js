@@ -11,13 +11,6 @@ const loadConfigFile = require("rollup/dist/loadConfigFile");
 const variables = require("../configs/variables");
 const isNative = process.argv.indexOf("--native") !== -1;
 
-function clean() {
-    return del(
-        [join(variables.sourcePath, "dist", variables.package.version), join(variables.sourcePath, "dist/tmp")],
-        { force: true }
-    );
-}
-
 function createMpkFile() {
     return gulp
         .src(join(variables.sourcePath, "dist/tmp/widgets/**/*"))
@@ -77,11 +70,10 @@ function noop() {
     return gulp.src(".", { allowEmpty: true });
 }
 
-exports.build = gulp.series(clean, generateTypings, getRollupCodeStep("dev"), createMpkFile);
-exports.release = gulp.series(clean, generateTypings, getRollupCodeStep("prod"), createMpkFile);
+exports.build = gulp.series(generateTypings, getRollupCodeStep("dev"), createMpkFile);
+exports.release = gulp.series(generateTypings, getRollupCodeStep("prod"), createMpkFile);
 exports.watch = function () {
     console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
-    clean();
     gulp.watch("src/**/*.xml", { ignoreInitial: false, cwd: variables.sourcePath }, generateTypings);
     getRollupOptions("dev")
         .then(options => rollup.watch(options))

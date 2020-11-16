@@ -6,6 +6,7 @@ import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
+import clear from "rollup-plugin-clear";
 import copy from "rollup-plugin-copy";
 import scss from "rollup-plugin-scss";
 import { terser } from "rollup-plugin-terser";
@@ -19,6 +20,7 @@ const outWidgetFile = join(
     variables.package.widgetName.toLowerCase(),
     `${variables.package.widgetName}.js`
 );
+const mpkDir = join(variables.sourcePath, "dist", variables.package.version);
 
 export default args => {
     const platform = args.configPlatform;
@@ -54,12 +56,7 @@ export default args => {
                         plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
                     }
                 }),
-                copy({
-                    targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-                }),
-                !production && variables.projectPath
-                    ? duplicateOutput({ from: outDir, to: join(variables.projectPath, "deployment/web/widgets") })
-                    : null
+                ...getMainFilePlugins({ platform, production })
             ],
             onwarn
         });
@@ -88,12 +85,7 @@ export default args => {
                         ]
                     }
                 }),
-                copy({
-                    targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-                }),
-                !production && variables.projectPath
-                    ? duplicateOutput({ from: outDir, to: join(variables.projectPath, "deployment/native/widgets") })
-                    : null
+                ...getMainFilePlugins({ platform, production })
             ],
             onwarn
         });
@@ -173,6 +165,21 @@ function getSharedPlugins(config) {
         }),
         commonjs({ extensions: config.extensions, transformMixedEsModules: true }),
         config.production ? terser() : null
+    ];
+}
+
+function getMainFilePlugins(config) {
+    return [
+        clear({ targets: [outDir, mpkDir] }),
+        copy({
+            targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
+        }),
+        !config.production && variables.projectPath
+            ? duplicateOutput({
+                  from: outDir,
+                  to: join(variables.projectPath, `deployment/${config.platform}/widgets`)
+              })
+            : null
     ];
 }
 
