@@ -19,175 +19,155 @@ const outWidgetFile = join(
     `${variables.package.widgetName}.js`
 );
 
-const webExtensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
-const nativeExtensions = [".native.js", ".js", ".jsx", ".ts", ".tsx"];
-
 export default args => {
     const platform = args.configPlatform;
     const production = Boolean(args.configProduction);
     if (!["web", "native"].includes(platform)) {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }
+    const result = [];
 
-    const webWidgetConfig = {
-        input: variables.widgetEntry,
-        output: {
-            format: "amd",
-            file: join(outDir, outWidgetFile),
-            sourcemap: !production ? "inline" : false
-        },
-        treeshake: { moduleSideEffects: false },
-        external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
-        plugins: [
-            scss({ failOnError: true, sass: require("sass") }),
-            alias({
-                entries: {
-                    "react-hot-loader/root": join(__dirname, "hot")
-                }
-            }),
-            nodeResolve({
-                browser: true,
-                extensions: webExtensions,
-                preferBuiltins: false
-            }),
-            replace({
-                "process.env.NODE_ENV": production ? "'production'" : "'development'"
-            }),
-            babel({
-                sourceMaps: !production,
-                babelrc: false,
-                presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
-                babelHelpers: "bundled",
-                plugins: [
-                    ["@babel/plugin-proposal-class-properties"],
-                    ["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]
-                ]
-            }),
-            ...(variables.isTypescript
-                ? [typescript({ noEmitOnError: true, sourceMap: !production, inlineSources: !production })]
-                : []),
-            commonjs({ extensions: webExtensions, transformMixedEsModules: true }),
-            ...(production ? [terser()] : []),
-            copy({
-                targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-            })
-        ],
-        onwarn
-    };
+    if (platform === "web") {
+        result.push({
+            input: variables.widgetEntry,
+            output: {
+                format: "amd",
+                file: join(outDir, outWidgetFile),
+                sourcemap: !production ? "inline" : false
+            },
+            treeshake: { moduleSideEffects: false },
+            external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
+            plugins: [
+                scss({ failOnError: true, sass: require("sass") }),
+                alias({
+                    entries: {
+                        "react-hot-loader/root": join(__dirname, "hot")
+                    }
+                }),
+                ...getSharedPlugins({
+                    production,
+                    extensions: webExtensions,
+                    typescriptConfig: { sourceMap: !production, inlineSources: !production },
+                    babelConfig: {
+                        presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
+                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
+                    }
+                }),
+                copy({
+                    targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
+                })
+            ],
+            onwarn
+        });
+    }
 
-    const nativeWidgetConfig = {
-        input: variables.widgetEntry,
-        output: {
-            format: "es",
-            file: join(outDir, outWidgetFile)
-        },
-        treeshake: { moduleSideEffects: false },
-        external: [
-            /^mendix\//,
-            "@react-native-community/art",
-            "@react-native-community/async-storage",
-            "@react-native-community/cameraroll",
-            "@react-native-community/geolocation",
-            "@react-native-community/netinfo",
-            "@react-native-firebase/analytics",
-            "@react-native-firebase/app",
-            "@react-native-firebase/crashlytics",
-            "@react-native-firebase/messaging",
-            "@react-native-firebase/ml-vision",
-            "big.js",
-            "react",
-            "react-native",
-            "react-native-camera",
-            "react-native-device-info",
-            "react-native-firebase",
-            "react-native-geocoder",
-            /react-native-gesture-handler\/*/,
-            "react-native-image-picker",
-            "react-native-inappbrowser-reborn",
-            "react-native-localize",
-            "react-native-maps",
-            "react-native-reanimated",
-            "react-native-sound",
-            "react-native-svg",
-            "react-native-touch-id",
-            "react-native-vector-icons",
-            "react-native-video",
-            "react-native-view-shot",
-            "react-native-webview",
-            "react-navigation"
-        ],
-        plugins: [
-            json(),
-            nodeResolve({
-                browser: true,
-                extensions: nativeExtensions,
-                preferBuiltins: false
-            }),
-            replace({
-                "process.env.NODE_ENV": production ? "'production'" : "'development'"
-            }),
-            babel({
-                babelHelpers: "bundled",
-                babelrc: false,
-                plugins: [
-                    "@babel/plugin-proposal-class-properties",
-                    "@babel/plugin-transform-flow-strip-types",
-                    "@babel/plugin-transform-react-jsx"
-                ]
-            }),
-            ...(variables.isTypescript
-                ? [typescript({ noEmitOnError: true, target: "es2019", sourceMap: false })]
-                : []),
-            commonjs({ extensions: nativeExtensions, transformMixedEsModules: true }),
-            ...(production ? [terser()] : []),
-            copy({
-                targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-            })
-        ],
-        onwarn
-    };
+    if (platform === "native") {
+        result.push({
+            input: variables.widgetEntry,
+            output: {
+                format: "es",
+                file: join(outDir, outWidgetFile)
+            },
+            treeshake: { moduleSideEffects: false },
+            external: nativeExternal,
+            plugins: [
+                json(),
+                ...getSharedPlugins({
+                    production,
+                    extensions: nativeExtensions,
+                    typescriptConfig: { target: "es2019" },
+                    babelConfig: {
+                        plugins: [
+                            "@babel/plugin-proposal-class-properties",
+                            "@babel/plugin-transform-flow-strip-types",
+                            "@babel/plugin-transform-react-jsx"
+                        ]
+                    }
+                }),
+                copy({
+                    targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
+                })
+            ],
+            onwarn
+        });
+    }
 
-    const previewConfig = {
-        ...webWidgetConfig,
-        input: variables.previewEntry,
-        output: {
-            format: "commonjs",
-            file: join(outDir, `${variables.package.widgetName}.editorPreview.js`),
-            sourcemap: !production ? "inline" : false
-        },
-        external: webWidgetConfig.external.slice(0, 3),
-        plugins: [
-            scss({ output: false, failOnError: true, sass: require("sass") }),
-            ...webWidgetConfig.plugins.slice(2, -1)
-        ]
-    };
+    if (platform === "web" && variables.previewEntry) {
+        result.push({
+            input: variables.previewEntry,
+            output: {
+                format: "commonjs",
+                file: join(outDir, `${variables.package.widgetName}.editorPreview.js`),
+                sourcemap: !production ? "inline" : false
+            },
+            treeshake: { moduleSideEffects: false },
+            external: [/^mendix($|\/)/, "react", "react-dom"],
+            plugins: [
+                scss({ output: false, failOnError: true, sass: require("sass") }),
+                ...getSharedPlugins({
+                    production,
+                    extensions: webExtensions,
+                    typescriptConfig: { sourceMap: !production, inlineSources: !production },
+                    babelConfig: {
+                        presets: [["@babel/preset-env", { targets: { safari: "12" }, modules: false }]],
+                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
+                    }
+                })
+            ]
+        });
+    }
 
-    const editorConfig = {
-        input: variables.editorConfigEntry,
-        output: {
-            format: "commonjs",
-            file: join(outDir, `${variables.package.widgetName}.editorConfig.js`)
-        },
-        treeshake: { moduleSideEffects: false },
-        plugins: [
-            nodeResolve({ preferBuiltins: false }),
-            commonjs({ transformMixedEsModules: true }),
-            babel({
-                presets: [["@babel/preset-env", { targets: { ie: "11" } }]],
-                babelHelpers: "bundled",
-                plugins: ["@babel/plugin-proposal-class-properties"]
-            }),
-            typescript({ noEmitOnError: true, sourceMap: false })
-        ],
-        onwarn
-    };
+    if (variables.editorConfigEntry) {
+        result.push({
+            input: variables.editorConfigEntry,
+            output: {
+                format: "commonjs",
+                file: join(outDir, `${variables.package.widgetName}.editorConfig.js`),
+                sourcemap: false // target engine does not support it
+            },
+            treeshake: { moduleSideEffects: false },
+            plugins: [
+                ...getSharedPlugins({
+                    production: false,
+                    extensions: webExtensions,
+                    typescriptConfig: { target: "es5" },
+                    babelConfig: {}
+                }),
+                babel({
+                    babelHelpers: "bundled",
+                    presets: [["@babel/preset-env", { targets: { ie: "11" } }]] // this rewrite should be done after commonjs, because it breaks it
+                })
+            ],
+            onwarn
+        });
+    }
 
-    return [
-        platform === "web" ? webWidgetConfig : nativeWidgetConfig,
-        ...(platform === "web" && variables.previewEntry ? [previewConfig] : []),
-        ...(variables.editorConfigEntry ? [editorConfig] : [])
-    ];
+    return result;
 };
+
+function getSharedPlugins(config) {
+    return [
+        replace({
+            "process.env.NODE_ENV": config.production ? "'production'" : "'development'"
+        }),
+        nodeResolve({
+            browser: true,
+            extensions: config.extensions,
+            preferBuiltins: false
+        }),
+        variables.isTypescript
+            ? typescript({ noEmitOnError: true, sourceMap: false, ...config.typescriptConfig })
+            : null,
+        babel({
+            sourceMaps: !config.production,
+            babelrc: false,
+            babelHelpers: "bundled",
+            ...config.babelConfig
+        }),
+        commonjs({ extensions: config.extensions, transformMixedEsModules: true }),
+        config.production ? terser() : null
+    ];
+}
 
 function onwarn(warning, warn) {
     if (["CIRCULAR_DEPENDENCY", "THIS_IS_UNDEFINED", "UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
@@ -197,3 +177,40 @@ function onwarn(warning, warn) {
         process.exit(1);
     }
 }
+
+const webExtensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
+const nativeExtensions = [".native.js", ".js", ".jsx", ".ts", ".tsx"];
+const nativeExternal = [
+    /^mendix\//,
+    "@react-native-community/art",
+    "@react-native-community/async-storage",
+    "@react-native-community/cameraroll",
+    "@react-native-community/geolocation",
+    "@react-native-community/netinfo",
+    "@react-native-firebase/analytics",
+    "@react-native-firebase/app",
+    "@react-native-firebase/crashlytics",
+    "@react-native-firebase/messaging",
+    "@react-native-firebase/ml-vision",
+    "big.js",
+    "react",
+    "react-native",
+    "react-native-camera",
+    "react-native-device-info",
+    "react-native-firebase",
+    "react-native-geocoder",
+    /react-native-gesture-handler\/*/,
+    "react-native-image-picker",
+    "react-native-inappbrowser-reborn",
+    "react-native-localize",
+    "react-native-maps",
+    "react-native-reanimated",
+    "react-native-sound",
+    "react-native-svg",
+    "react-native-touch-id",
+    "react-native-vector-icons",
+    "react-native-video",
+    "react-native-view-shot",
+    "react-native-webview",
+    "react-navigation"
+];
