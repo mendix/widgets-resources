@@ -9,9 +9,10 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     const filterDispatcher = useFilterDispatcher();
     return (
         <FilterComponent
-            value={props.defaultValue?.value}
-            placeholder={props.placeholder?.value}
+            defaultFilter={props.defaultFilter}
             filterDispatcher={filterDispatcher}
+            placeholder={props.placeholder?.value}
+            value={props.defaultValue?.value}
         />
     );
 }

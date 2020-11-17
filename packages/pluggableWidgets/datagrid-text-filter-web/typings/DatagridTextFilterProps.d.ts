@@ -6,12 +6,15 @@
 import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
 
+export type DefaultFilterEnum = "contains" | "startsWith" | "endsWith" | "greater" | "greaterEqual" | "equal" | "notEqual" | "smaller" | "smallerEqual";
+
 export interface DatagridTextFilterContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex: number;
     defaultValue?: DynamicValue<string>;
+    defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
 }
 
@@ -19,5 +22,6 @@ export interface DatagridTextFilterPreviewProps {
     class: string;
     style: string;
     defaultValue: string;
+    defaultFilter: DefaultFilterEnum;
     placeholder: string;
 }

@@ -5,13 +5,13 @@ exports[`Filter selector renders correctly 1`] = `
   className="filter-container"
 >
   <FilterSelector
+    defaultFilter="contains"
     onChange={[Function]}
   />
   <input
     className="form-control"
     onChange={[Function]}
     type="text"
-    value=""
   />
 </div>
 `;

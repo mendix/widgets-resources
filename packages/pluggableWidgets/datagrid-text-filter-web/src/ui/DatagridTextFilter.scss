@@ -1,7 +1,20 @@
 $primary-color: #264ae5;
-$hover-color: #ddd;
+$hover-color: #f8f8f8;
 $background-color: #fff;
-$selected-color: #c6c6c6;
+$selected-color: #dadcde;
+$border-color: #ced0d3;
+
+@font-face {
+    font-family: 'datagrid-filters';
+    src: url('./fonts/datagrid-filters.eot?88455198');
+    src: url('./fonts/datagrid-filters.eot?88455198#iefix') format('embedded-opentype'),
+    url('./fonts/datagrid-filters.woff2?88455198') format('woff2'),
+    url('./fonts/datagrid-filters.woff?88455198') format('woff'),
+    url('./fonts/datagrid-filters.ttf?88455198') format('truetype'),
+    url('./fonts/datagrid-filters.svg?88455198#datagrid-filters') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .filter-container {
     display: flex;
@@ -19,40 +32,6 @@ $selected-color: #c6c6c6;
         .filter-selector-button {
             padding: 8px 16px;
             margin: 0 8px 0 0;
-
-            &.contains {
-                background: url("./icons/contains.svg") no-repeat center;
-            }
-            &.endsWith {
-                background: url("./icons/endsWith.svg") no-repeat center;
-            }
-            &.equal {
-                background: url("./icons/equal.svg") no-repeat center;
-            }
-            &.greater {
-                background: url("./icons/greater.svg") no-repeat center;
-            }
-            &.greaterEqual {
-                background: url("./icons/greaterEqual.svg") no-repeat center;
-            }
-            &.less {
-                 background: url("./icons/less.svg") no-repeat center;
-            }
-            &.less {
-                background: url("./icons/lessEqual.svg") no-repeat center;
-            }
-            &.notEqual {
-                background: url("./icons/notEqual.svg") no-repeat center;
-            }
-            &.smaller {
-                background: url("./icons/smaller.svg") no-repeat center;
-            }
-            &.smallerEqual {
-                background: url("./icons/smallerEqual.svg") no-repeat center;
-            }
-            &.startsWith {
-                background: url("./icons/startsWith.svg") no-repeat center;
-            }
         }
 
         .filter-selectors {
@@ -63,21 +42,27 @@ $selected-color: #c6c6c6;
             padding: 0;
             background: $background-color;
             z-index: 99;
-            border-radius: 3px;
-            border: 1px solid transparent;
+            border-radius: 5px;
+            border: 1px solid $border-color;
             list-style-type: none;
-            -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
-            -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
-            box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+            -webkit-box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.24);
+            -moz-box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.24);
+            box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.24);
+            overflow: hidden;
 
             li {
                 display: flex;
                 align-items: center;
-                padding: 8px;
                 font-weight: normal;
+                line-height: 32px;
+
+                .filter-label {
+                    padding-right: 8px;
+                }
 
                 &.filter-selected {
-                    background-color: $selected-color;
+                    background-color: $hover-color;
+                    color: $primary-color;
                     font-weight: bold;
                 }
 
@@ -88,4 +73,57 @@ $selected-color: #c6c6c6;
             }
         }
     }
+}
+
+/**
+Icons
+ */
+
+.filter-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    margin: 6px 8px;
+    font-family: "datagrid-filters";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "datagrid-filters";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.contains:before {
+    content: "\e807";
+}
+.endsWith:before {
+    content: "\e806";
+}
+.equal:before {
+    content: "\e805";
+}
+.greater:before {
+    content: "\e803";
+}
+.greaterEqual:before {
+    content: "\e800";
+}
+.notEqual:before {
+    content: "\e804";
+}
+.smaller:before {
+    content: "\e802";
+}
+.smallerEqual:before {
+    content: "\e801";
+}
+.startsWith:before {
+    content: "\e808";
 }

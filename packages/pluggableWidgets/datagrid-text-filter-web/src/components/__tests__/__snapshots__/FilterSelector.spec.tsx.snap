@@ -16,3 +16,20 @@ exports[`Filter selector renders correctly 1`] = `
   </div>
 </div>
 `;
+
+exports[`Filter selector renders correctly with another default filter 1`] = `
+<div
+  className="filter-selector"
+>
+  <div
+    className="filter-selector-content"
+  >
+    <button
+      className="btn btn-default filter-selector-button equal"
+      onClick={[Function]}
+    >
+       
+    </button>
+  </div>
+</div>
+`;

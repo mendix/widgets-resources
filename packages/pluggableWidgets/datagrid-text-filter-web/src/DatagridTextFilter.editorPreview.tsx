@@ -3,7 +3,14 @@ import { DatagridTextFilterPreviewProps } from "../typings/DatagridTextFilterPro
 import { FilterComponent } from "./components/FilterComponent";
 
 export function preview(props: DatagridTextFilterPreviewProps): ReactElement {
-    return <FilterComponent value={props.defaultValue} placeholder={props.placeholder} filterDispatcher={() => ({})} />;
+    return (
+        <FilterComponent
+            defaultFilter={props.defaultFilter}
+            filterDispatcher={() => ({})}
+            placeholder={props.placeholder}
+            value={props.defaultValue}
+        />
+    );
 }
 
 export function getPreviewCss(): string {
