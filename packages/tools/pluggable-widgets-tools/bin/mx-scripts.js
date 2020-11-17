@@ -29,39 +29,39 @@ for (const subCommand of realCommand.split(/&&/g)) {
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
     const prettierCommand = 'prettier --config prettier.config.js "{src,tests}/**/*.{js,jsx,ts,tsx}"';
-    const gulpCommand = `gulp --gulpfile "${join(toolsRoot, "scripts/gulp.js")}" --cwd "${process.cwd()}"`;
+    const rollupCommand = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
 
     switch (cmd) {
         case "start:server":
-            return `webpack serve --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev`;
+        // return `webpack serve --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev`;
         case "start:web":
         case "start:js":
         case "start:ts":
         case "dev:js":
         case "dev:ts":
-            return `${gulpCommand} watch`;
+            return `${rollupCommand} --watch --configPlatform=web`;
         case "start:native":
         case "start:js:native":
         case "start:ts:native":
         case "dev:js:native":
         case "dev:ts:native":
-            return `${gulpCommand} watch --native`;
+            return `${rollupCommand} --watch --configPlatform=native`;
         case "build:web":
         case "build:js":
         case "build:ts":
-            return `${gulpCommand} build`;
+            return `${rollupCommand} --configPlatform=web`;
         case "build:native":
         case "build:js:native":
         case "build:ts:native":
-            return `${gulpCommand} build --native`;
+            return `${rollupCommand} --configPlatform=native`;
         case "release:web":
         case "release:js":
         case "release:ts":
-            return `${gulpCommand} release --silent`;
+            return `${rollupCommand} --configPlatform=web --configProduction`;
         case "release:native":
         case "release:js:native":
         case "release:ts:native":
-            return `${gulpCommand} release --native --silent`;
+            return `${rollupCommand} --configPlatform=native --configProduction`;
         case "lint":
             return `${prettierCommand} --check && ${eslintCommand}`;
         case "lint:fix":
