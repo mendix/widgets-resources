@@ -8,7 +8,7 @@ exports[`Filter selector renders correctly 1`] = `
     className="filter-selector-content"
   >
     <button
-      className="btn btn-default filter-selector-button contains"
+      className="btn btn-default filter-selector-button button-icon contains"
       onClick={[Function]}
     >
        
@@ -25,7 +25,7 @@ exports[`Filter selector renders correctly with another default filter 1`] = `
     className="filter-selector-content"
   >
     <button
-      className="btn btn-default filter-selector-button equal"
+      className="btn btn-default filter-selector-button button-icon equal"
       onClick={[Function]}
     >
        
