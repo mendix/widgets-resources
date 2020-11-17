@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 import { join } from "path";
 import alias from "@rollup/plugin-alias";
 import { babel } from "@rollup/plugin-babel";
@@ -6,6 +7,7 @@ import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
+import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import copy from "rollup-plugin-copy";
 import copyAfterBuild from "rollup-plugin-cpy";
@@ -24,7 +26,7 @@ const outWidgetFile = join(
 const mpkDir = join(variables.sourcePath, "dist", variables.package.version);
 const mpkFile = join(mpkDir, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`);
 
-export default args => {
+export default async args => {
     const platform = args.configPlatform;
     const production = Boolean(args.configProduction);
     if (!["web", "native"].includes(platform)) {
@@ -141,6 +143,13 @@ export default args => {
             ],
             onwarn
         });
+    }
+
+    const customConfigPath = join(variables.sourcePath, "rollup.config.js");
+    if (existsSync(customConfigPath)) {
+        const customConfig = await loadConfigFile(customConfigPath, { ...args, configDefaultConfig: result });
+        customConfig.warnings.flush();
+        return customConfig.options;
     }
 
     return result;

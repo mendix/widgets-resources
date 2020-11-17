@@ -1,4 +1,3 @@
-const { existsSync } = require("fs");
 const { join } = require("path");
 const typingGenerator = require("../dist/typings-generator");
 const colors = require("colors/safe");
@@ -32,21 +31,10 @@ function getRollupCodeStep(mode) {
 }
 
 async function getRollupOptions(mode) {
-    let { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
+    const { options } = await loadConfigFile(join(__dirname, "../configs/rollup.config.js"), {
         configPlatform: isNative ? "native" : "web",
         configProduction: mode === "prod"
     });
-
-    const customConfigPath = join(variables.sourcePath, "rollup.config.js");
-    if (existsSync(customConfigPath)) {
-        const customConfig = await loadConfigFile(customConfigPath, {
-            configDefaultConfig: options,
-            configProduction: mode === "prod"
-        });
-        customConfig.warnings.flush();
-        options = customConfig.options;
-    }
-
     return options;
 }
 
