@@ -2,23 +2,12 @@ const { existsSync } = require("fs");
 const { join } = require("path");
 const typingGenerator = require("../dist/typings-generator");
 const colors = require("colors/safe");
-const del = require("del");
 const gulp = require("gulp");
-const zip = require("gulp-zip");
 const rollup = require("rollup");
 const loadConfigFile = require("rollup/dist/loadConfigFile");
 
 const variables = require("../configs/variables");
 const isNative = process.argv.indexOf("--native") !== -1;
-
-function createMpkFile() {
-    return gulp
-        .src(join(variables.sourcePath, "dist/tmp/widgets/**/*"))
-        .pipe(zip(`${variables.package.packagePath}.${variables.package.widgetName}.mpk`))
-        .pipe(variables.projectPath ? gulp.dest(join(variables.projectPath, "widgets")) : noop())
-        .pipe(gulp.dest(join(variables.sourcePath, `dist/${variables.package.version}`)))
-        .on("error", handleError);
-}
 
 function generateTypings() {
     if (!variables.isTypescript || process.env.MX_SKIP_TYPEGENERATOR) {
@@ -70,13 +59,12 @@ function noop() {
     return gulp.src(".", { allowEmpty: true });
 }
 
-exports.build = gulp.series(generateTypings, getRollupCodeStep("dev"), createMpkFile);
-exports.release = gulp.series(generateTypings, getRollupCodeStep("prod"), createMpkFile);
+exports.build = gulp.series(generateTypings, getRollupCodeStep("dev"));
+exports.release = gulp.series(generateTypings, getRollupCodeStep("prod"));
 exports.watch = function () {
     console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
     gulp.watch("src/**/*.xml", { ignoreInitial: false, cwd: variables.sourcePath }, generateTypings);
     getRollupOptions("dev")
         .then(options => rollup.watch(options))
         .catch(handleError);
-    gulp.watch("dist/tmp/**/*", { ignoreInitial: false, cwd: variables.sourcePath }, gulp.series(createMpkFile));
 };

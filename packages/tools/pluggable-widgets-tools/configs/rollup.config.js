@@ -11,6 +11,7 @@ import copy from "rollup-plugin-copy";
 import copyAfterBuild from "rollup-plugin-cpy";
 import scss from "rollup-plugin-scss";
 import { terser } from "rollup-plugin-terser";
+import { zip } from "./rollup-plugin-zip";
 
 const variables = require("./variables");
 
@@ -21,6 +22,7 @@ const outWidgetFile = join(
     `${variables.package.widgetName}.js`
 );
 const mpkDir = join(variables.sourcePath, "dist", variables.package.version);
+const mpkFile = join(mpkDir, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`);
 
 export default args => {
     const platform = args.configPlatform;
@@ -164,7 +166,8 @@ function getSharedPlugins(config) {
             ...config.babelConfig
         }),
         commonjs({ extensions: config.extensions, transformMixedEsModules: true }),
-        config.production ? terser() : null
+        config.production ? terser() : null,
+        zip({ sourceDir: outDir, file: mpkFile })
     ];
 }
 
