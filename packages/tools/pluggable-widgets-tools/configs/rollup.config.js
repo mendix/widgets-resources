@@ -165,7 +165,7 @@ function getSharedPlugins(config) {
             babelHelpers: "bundled",
             ...config.babelConfig
         }),
-        commonjs({ extensions: config.extensions, transformMixedEsModules: true }),
+        commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
         config.production ? terser() : null,
         zip({ sourceDir: outDir, file: mpkFile })
     ];
