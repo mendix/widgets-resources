@@ -8,9 +8,9 @@ import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
 import clear from "rollup-plugin-clear";
 import copy from "rollup-plugin-copy";
+import copyAfterBuild from "rollup-plugin-cpy";
 import scss from "rollup-plugin-scss";
 import { terser } from "rollup-plugin-terser";
-import { duplicateOutput } from "./rollup-plugin-duplicate-output";
 
 const variables = require("./variables");
 
@@ -175,10 +175,13 @@ function getMainFilePlugins(config) {
             targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
         }),
         !config.production && variables.projectPath
-            ? duplicateOutput({
-                  from: outDir,
-                  to: join(variables.projectPath, `deployment/${config.platform}/widgets`)
-              })
+            ? copyAfterBuild([
+                  {
+                      files: join(outDir, "**/*.{js,css}").replace("\\", "/"),
+                      dest: join(variables.projectPath, `deployment/${config.platform}/widgets`),
+                      options: { parents: true }
+                  }
+              ])
             : null
     ];
 }
