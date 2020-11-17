@@ -1,6 +1,7 @@
 import { createWriteStream, promises as fs } from "fs";
-import { dirname, join, relative } from "path";
+import { dirname, relative } from "path";
 import { ZipFile } from "yazl";
+import { listDir } from "./shared";
 
 // We need to zip the whole folder and not only the results of a compilation.
 // This is because there are multiple compilations happening in parallel _and_
@@ -42,12 +43,4 @@ async function acquireLock(file) {
 
     lockedFiles.add(file);
     return () => lockedFiles.delete(file);
-}
-
-async function listDir(path) {
-    const entries = await fs.readdir(path, { withFileTypes: true });
-    return entries
-        .filter(e => e.isFile())
-        .map(e => join(path, e.name))
-        .concat(...(await Promise.all(entries.filter(e => e.isDirectory()).map(e => listDir(join(path, e.name))))));
 }

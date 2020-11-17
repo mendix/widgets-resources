@@ -1,5 +1,4 @@
 const { join } = require("path");
-const typingGenerator = require("../dist/typings-generator");
 const colors = require("colors/safe");
 const gulp = require("gulp");
 const rollup = require("rollup");
@@ -7,13 +6,6 @@ const loadConfigFile = require("rollup/dist/loadConfigFile");
 
 const variables = require("../configs/variables");
 const isNative = process.argv.indexOf("--native") !== -1;
-
-function generateTypings() {
-    if (!variables.isTypescript || process.env.MX_SKIP_TYPEGENERATOR) {
-        return noop();
-    }
-    return gulp.src(join(variables.sourcePath, "/src/package.xml")).pipe(typingGenerator()).on("error", handleError);
-}
 
 function getRollupCodeStep(mode) {
     return function rollupCode(cb) {
@@ -43,15 +35,10 @@ function handleError(err) {
     process.exit(1);
 }
 
-function noop() {
-    return gulp.src(".", { allowEmpty: true });
-}
-
-exports.build = gulp.series(generateTypings, getRollupCodeStep("dev"));
-exports.release = gulp.series(generateTypings, getRollupCodeStep("prod"));
+exports.build = getRollupCodeStep("dev");
+exports.release = getRollupCodeStep("prod");
 exports.watch = function () {
     console.log(colors.green(`Watching files in: ${variables.sourcePath}/src`));
-    gulp.watch("src/**/*.xml", { ignoreInitial: false, cwd: variables.sourcePath }, generateTypings);
     getRollupOptions("dev")
         .then(options => rollup.watch(options))
         .catch(handleError);

@@ -1,25 +1,53 @@
-import PluginError from "plugin-error";
-import File from "vinyl";
-import map from "map-stream";
-import { transformPackage } from "./transformPackage";
+import { promises } from "fs";
+import { join } from "path";
+import { promisify } from "util";
+import { parseString } from "xml2js";
+import { PackageXml } from "./PackageXml";
+import { WidgetXml } from "./WidgetXml";
+import { generateForWidget } from "./generate";
 
-function generateTypings(file: File, cb: (error: Error | null) => void): void {
-    if (!file || file.isNull() || !file.contents) {
-        return cb(
-            new PluginError(
-                "pluggable-widgets-typing-generator",
-                "Empty XML, please check your src folder for file package.xml"
-            )
-        );
-    }
-    if (file.isStream()) {
-        return cb(new PluginError("pluggable-widgets-typing-generator", "Streaming not supported"));
+const { mkdir, readFile, stat, writeFile } = promises;
+const parseStringAsync = promisify(parseString);
+
+export async function transformPackage(content: string, basePath: string) {
+    const contentXml = (await parseStringAsync(content)) as PackageXml;
+    if (!contentXml) {
+        throw new Error("Empty XML, please check your src folder for file package.xml");
     }
 
-    transformPackage(file.contents!.toString("utf8"), file.base).then(
-        () => cb(null),
-        err => cb(new PluginError("pluggable-widgets-typing-generator", err))
-    );
+    const resultBasePath = join(basePath, "../typings/");
+    try {
+        await stat(resultBasePath);
+    } catch {
+        await mkdir(resultBasePath);
+    }
+
+    const widgetFileXmls = contentXml.package.clientModule[0].widgetFiles
+        .map(wf => wf.widgetFile)
+        .reduce((a, e) => a.concat(e), [])
+        .filter(wfXml => wfXml.$.path);
+
+    for (const widgetFileXml of widgetFileXmls) {
+        const sourcePath = widgetFileXml.$.path;
+        const source = await readFile(join(basePath, sourcePath), "utf-8");
+
+        let generatedContent;
+        try {
+            const sourceXml = (await parseStringAsync(source)) as WidgetXml;
+            generatedContent = generateForWidget(sourceXml, toWidgetName(sourcePath));
+        } catch (err) {
+            throw new Error(
+                `Incorrect widget xml file ${sourcePath}, please check Mendix Documentation: ${err.message}`
+            );
+        }
+
+        const resultPath = sourcePath.replace(/(\.xml)?$/, "Props.d.ts");
+        await writeFile(join(resultBasePath, resultPath), generatedContent);
+    }
 }
 
-export = () => map(generateTypings);
+function toWidgetName(file: string) {
+    file = file.replace(".xml", "");
+    const parts = file.split("/");
+    return parts.length > 0 ? parts[parts.length - 1] : "";
+}

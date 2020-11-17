@@ -13,6 +13,7 @@ import copy from "rollup-plugin-copy";
 import copyAfterBuild from "rollup-plugin-cpy";
 import scss from "rollup-plugin-scss";
 import { terser } from "rollup-plugin-terser";
+import { widgetTyping } from "./rollup-plugin-widget-typing";
 import { zip } from "./rollup-plugin-zip";
 
 const variables = require("./variables");
@@ -182,6 +183,7 @@ function getSharedPlugins(config) {
 
 function getMainFilePlugins(config) {
     return [
+        variables.isTypescript ? widgetTyping({ sourceDir: join(variables.sourcePath, "src") }) : null,
         clear({ targets: [outDir, mpkDir] }),
         copy({
             targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
