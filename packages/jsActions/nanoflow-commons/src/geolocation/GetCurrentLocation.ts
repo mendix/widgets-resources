@@ -52,8 +52,8 @@ export async function GetCurrentLocation(
         }
 
         function getOptions(): GeolocationOptions {
-            const timeoutNumber = timeout ? Number(timeout.toString()) : 10000;
-            const maximumAgeNumber = maximumAge ? Number(maximumAge.toString()) : 10000;
+            const timeoutNumber = timeout ? Number(timeout.toString()) : 30000;
+            const maximumAgeNumber = maximumAge && Number(maximumAge.toString());
 
             return {
                 timeout: timeoutNumber,
