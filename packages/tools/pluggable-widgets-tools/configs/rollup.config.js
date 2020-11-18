@@ -1,4 +1,4 @@
-import { existsSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
 import { join } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
@@ -9,12 +9,13 @@ import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
+import command from "rollup-plugin-command";
 import copy from "rollup-plugin-copy";
 import copyAfterBuild from "rollup-plugin-cpy";
 import sass from "rollup-plugin-sass";
 import { terser } from "rollup-plugin-terser";
+import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
-import { zip } from "./rollup-plugin-zip";
 import {
     editorConfigEntry,
     isTypescript,
@@ -195,7 +196,17 @@ export default async args => {
                   })
                 : null,
             production ? terser() : null,
-            zip({ sourceDir: outDir, file: mpkFile })
+            // Re-create a zip file when any of the config finishes. We must do it because in watch mode only
+            // configurations affected by a change are recompiled.
+            command(
+                [
+                    async () => {
+                        mkdirSync(mpkDir, { recursive: true });
+                        await zip(outDir, mpkFile);
+                    }
+                ],
+                { exitOnFail: true, wait: true }
+            )
         ];
     }
 
