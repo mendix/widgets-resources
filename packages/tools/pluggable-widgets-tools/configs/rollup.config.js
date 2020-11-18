@@ -1,7 +1,7 @@
 import { existsSync } from "fs";
 import { join } from "path";
 import alias from "@rollup/plugin-alias";
-import { babel } from "@rollup/plugin-babel";
+import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
@@ -11,7 +11,7 @@ import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import copy from "rollup-plugin-copy";
 import copyAfterBuild from "rollup-plugin-cpy";
-import scss from "rollup-plugin-scss";
+import sass from "rollup-plugin-sass";
 import { terser } from "rollup-plugin-terser";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import { zip } from "./rollup-plugin-zip";
@@ -32,6 +32,10 @@ const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLower
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, `${widgetPackage}.${widgetName}.mpk`);
 
+// Notes for future me:
+// - plugins that transform non-js code to js should go before plugins that work with js
+// - for editorConfig we target JS engine in Studio Pro, which supports only es5 and no source maps
+
 export default async args => {
     const platform = args.configPlatform;
     const production = Boolean(args.configProduction);
@@ -48,25 +52,26 @@ export default async args => {
                 file: join(outDir, outWidgetFile),
                 sourcemap: !production ? "inline" : false
             },
-            treeshake: { moduleSideEffects: false },
             external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
             plugins: [
-                scss({ failOnError: true, sass: require("sass") }),
+                sass({ output: true, include: /\.(css|sass|scss)$/ }),
                 alias({
                     entries: {
                         "react-hot-loader/root": join(__dirname, "hot")
                     }
                 }),
                 ...getCommonPlugins({
-                    production,
+                    sourceMaps: !production,
                     extensions: webExtensions,
-                    typescriptConfig: { sourceMap: !production, inlineSources: !production },
-                    babelConfig: {
-                        presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
-                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
-                    }
+                    typescriptConfig: {},
+                    babelConfig: production
+                        ? {
+                              presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
+                              allowAllFormats: true
+                          }
+                        : undefined
                 }),
-                ...(await getMainFilePlugins({ platform, production }))
+                ...getMainFilePlugins()
             ],
             onwarn
         });
@@ -77,25 +82,18 @@ export default async args => {
             input: widgetEntry,
             output: {
                 format: "es",
-                file: join(outDir, outWidgetFile)
+                file: join(outDir, outWidgetFile),
+                sourcemap: !production ? "inline" : false
             },
-            treeshake: { moduleSideEffects: false },
             external: nativeExternal,
             plugins: [
                 json(),
                 ...getCommonPlugins({
-                    production,
+                    sourceMaps: !production,
                     extensions: nativeExtensions,
-                    typescriptConfig: { target: "es2019" },
-                    babelConfig: {
-                        plugins: [
-                            "@babel/plugin-proposal-class-properties",
-                            "@babel/plugin-transform-flow-strip-types",
-                            "@babel/plugin-transform-react-jsx"
-                        ]
-                    }
+                    typescriptConfig: { target: "es2019" }
                 }),
-                ...(await getMainFilePlugins({ platform, production }))
+                ...getMainFilePlugins()
             ],
             onwarn
         });
@@ -109,20 +107,19 @@ export default async args => {
                 file: join(outDir, `${widgetName}.editorPreview.js`),
                 sourcemap: !production ? "inline" : false
             },
-            treeshake: { moduleSideEffects: false },
             external: [/^mendix($|\/)/, "react", "react-dom"],
             plugins: [
-                scss({ output: false, failOnError: true, sass: require("sass") }),
+                sass({ output: false, include: /\.(css|sass|scss)$/ }),
                 ...getCommonPlugins({
-                    production,
+                    sourceMaps: !production,
                     extensions: webExtensions,
                     typescriptConfig: { sourceMap: !production, inlineSources: !production },
-                    babelConfig: {
-                        presets: [["@babel/preset-env", { targets: { safari: "12" }, modules: false }]],
-                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
-                    }
+                    babelConfig: production
+                        ? { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] }
+                        : undefined
                 })
-            ]
+            ],
+            onwarn
         });
     }
 
@@ -132,19 +129,17 @@ export default async args => {
             output: {
                 format: "commonjs",
                 file: join(outDir, `${widgetName}.editorConfig.js`),
-                sourcemap: false // target engine does not support it
+                sourcemap: false
             },
             treeshake: { moduleSideEffects: false },
             plugins: [
                 ...getCommonPlugins({
-                    production: false,
+                    sourceMaps: false,
                     extensions: webExtensions,
                     typescriptConfig: { target: "es5" },
-                    babelConfig: {}
-                }),
-                babel({
-                    babelHelpers: "bundled",
-                    presets: [["@babel/preset-env", { targets: { ie: "11" } }]] // this rewrite should be done after commonjs, because it breaks it
+                    babelConfig: {
+                        presets: [["@babel/preset-env", { targets: { ie: "11" } }]]
+                    }
                 })
             ],
             onwarn
@@ -159,49 +154,70 @@ export default async args => {
     }
 
     return result;
+
+    function getCommonPlugins(config) {
+        return [
+            nodeResolve({ browser: true, extensions: config.extensions, preferBuiltins: false }),
+            isTypescript
+                ? typescript({
+                      noEmitOnError: true,
+                      sourceMap: config.sourceMaps,
+                      inlineSources: config.sourceMaps,
+                      ...config.typescriptConfig
+                  })
+                : null,
+            getBabelInputPlugin({
+                sourceMaps: config.sourceMaps,
+                babelrc: false,
+                babelHelpers: "bundled",
+                plugins: ["@babel/plugin-proposal-class-properties"],
+                overrides: [
+                    {
+                        test: /node_modules/,
+                        plugins: ["@babel/plugin-transform-flow-strip-types", "@babel/plugin-transform-react-jsx"]
+                    },
+                    {
+                        exclude: /node_modules/,
+                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
+                    }
+                ]
+            }),
+            commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
+            replace({
+                "process.env.NODE_ENV": production ? "'production'" : "'development'"
+            }),
+            config.babelConfig
+                ? getBabelOutputPlugin({
+                      sourceMaps: config.sourceMaps,
+                      babelrc: false,
+                      compact: false,
+                      ...config.babelConfig
+                  })
+                : null,
+            production ? terser() : null,
+            zip({ sourceDir: outDir, file: mpkFile })
+        ];
+    }
+
+    function getMainFilePlugins() {
+        return [
+            isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
+            clear({ targets: [outDir, mpkDir] }),
+            copy({
+                targets: [{ src: join(sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
+            }),
+            !production && projectPath
+                ? copyAfterBuild([
+                      {
+                          files: join(outDir, "**/*.{js,css}").replace("\\", "/"),
+                          dest: join(projectPath, `deployment/${platform}/widgets`),
+                          options: { parents: true }
+                      }
+                  ])
+                : null
+        ];
+    }
 };
-
-function getCommonPlugins(config) {
-    return [
-        replace({
-            "process.env.NODE_ENV": config.production ? "'production'" : "'development'"
-        }),
-        nodeResolve({
-            browser: true,
-            extensions: config.extensions,
-            preferBuiltins: false
-        }),
-        isTypescript ? typescript({ noEmitOnError: true, sourceMap: false, ...config.typescriptConfig }) : null,
-        babel({
-            sourceMaps: !config.production,
-            babelrc: false,
-            babelHelpers: "bundled",
-            ...config.babelConfig
-        }),
-        commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
-        config.production ? terser() : null,
-        zip({ sourceDir: outDir, file: mpkFile })
-    ];
-}
-
-async function getMainFilePlugins(config) {
-    return [
-        isTypescript ? await widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-        clear({ targets: [outDir, mpkDir] }),
-        copy({
-            targets: [{ src: join(sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-        }),
-        !config.production && projectPath
-            ? copyAfterBuild([
-                  {
-                      files: join(outDir, "**/*.{js,css}").replace("\\", "/"),
-                      dest: join(projectPath, `deployment/${config.platform}/widgets`),
-                      options: { parents: true }
-                  }
-              ])
-            : null
-    ];
-}
 
 function onwarn(warning, warn) {
     if (["CIRCULAR_DEPENDENCY", "THIS_IS_UNDEFINED", "UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
