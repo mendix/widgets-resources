@@ -54,7 +54,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             <input
                 placeholder={props.placeholder}
                 value={value}
-                className="form-control"
+                className="form-control filter-input"
                 onChange={e => setValue(e.target.value)}
                 type="text"
             />
