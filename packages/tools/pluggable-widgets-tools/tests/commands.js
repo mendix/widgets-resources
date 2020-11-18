@@ -1,6 +1,7 @@
 const { Mutex, Semaphore } = require("async-mutex");
 const { exec } = require("child_process");
 const { copy, existsSync, readJson, writeJson } = require("fs-extra");
+const pty = require("node-pty");
 const { join } = require("path");
 const { ls, mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
@@ -208,20 +209,26 @@ async function main() {
         }
 
         async function testStart() {
-            const startProcess = exec("npm start", { cwd: workDir });
+            const startProcess =
+                process.platform === "win32"
+                    ? pty.spawn("C:\\Windows\\system32\\cmd.exe", ["/c", "npm start"], {
+                          cwd: workDir,
+                          env: process.env
+                      })
+                    : pty.spawn("npm", ["start"], { cwd: workDir, env: process.env });
 
             try {
                 await new Promise((resolve, reject) => {
-                    startProcess.stderr.on("data", data => {
-                        if (/\berror\b/i.test(data)) {
+                    startProcess.onData(data => {
+                        if (/error/i.test(data)) {
                             reject(new Error(`Received error ${data}`));
                         } else if (data.includes("waiting for changes...")) {
                             console.log(`[${widgetName}] Start succeeded!`);
                             resolve();
                         }
                     });
-                    startProcess.on("exit", code => {
-                        reject(new Error(`Exited with status ${code}`));
+                    startProcess.onExit(({ exitCode }) => {
+                        reject(new Error(`Exited with status ${exitCode}`));
                     });
                 });
             } finally {
