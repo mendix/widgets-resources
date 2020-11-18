@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useMemo, useState } from "react";
+import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
 import { VictoryChart, VictoryBar, VictoryStack, VictoryGroup } from "victory-native";
 
@@ -46,37 +46,35 @@ export function BarChart(props: BarChartProps): ReactElement | null {
 
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
-    const bars = useMemo(() => {
+    const groupedOrStacked = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
             return null;
         }
 
-        if (presentation === "stacked") {
-            return (
-                <VictoryStack colorScale="qualitative">
-                    {series.map((series, index) => {
+        const bars = series.map((series, index) => {
                         const { dataPoints } = series;
-                        // todo: should sorting be allowed?
-                        // todo: y0
-                        return <VictoryBar horizontal key={index} data={dataPoints} />;
-                    })}
-                </VictoryStack>
-            );
-        } else if (presentation === "grouped") {
+            return <VictoryBar horizontal key={index} data={dataPoints} labels={({ datum }) => datum.y} />;
+        });
+
+        if (presentation === "grouped") {
             return (
                 <VictoryGroup colorScale="qualitative" offset={20}>
-                    {series.map((series, index) => {
-                        const { dataPoints } = series;
-                        // todo: should sorting be allowed?
-                        // todo: y0
-                        return <VictoryBar horizontal key={index} data={dataPoints} />;
-                    })}
+                    {bars}
                 </VictoryGroup>
             );
         }
 
-        return null;
+        return <VictoryStack colorScale="qualitative">{bars}</VictoryStack>;
     }, [dataTypesResult, series, style, warningMessagePrefix]);
+
+    const onLayout = useCallback(
+        (event: LayoutChangeEvent) =>
+            setChartDimensions({
+                height: event.nativeEvent.layout.height,
+                width: event.nativeEvent.layout.width
+            }),
+        []
+    );
 
     return (
         <View style={style.container}>
@@ -86,16 +84,7 @@ export function BarChart(props: BarChartProps): ReactElement | null {
                 <View style={style.chart}>
                     <View style={style.gridAndLabelsRow}>
                         <View style={style.gridRow}>
-                            <View
-                                // todo: LC doesn't need this useCallback. See note in https://reactjs.org/docs/hooks-reference.html#usestate
-                                onLayout={(event: LayoutChangeEvent) =>
-                                    setChartDimensions({
-                                        height: event.nativeEvent.layout.height,
-                                        width: event.nativeEvent.layout.width
-                                    })
-                                }
-                                style={{ flex: 1 }}
-                            >
+                            <View onLayout={onLayout} style={{ flex: 1 }}>
                                 {chartDimensions ? (
                                     <VictoryChart
                                         height={chartDimensions?.height}
@@ -103,15 +92,12 @@ export function BarChart(props: BarChartProps): ReactElement | null {
                                         padding={style.grid?.padding}
                                         scale={
                                             dataTypesResult
-                                                ? {
-                                                      x: dataTypesResult.x === "number" ? "linear" : "time",
-                                                      y: dataTypesResult.y === "number" ? "linear" : "time"
-                                                  }
+                                                ? { x: getScale(dataTypesResult.x), y: getScale(dataTypesResult.y) }
                                                 : undefined
                                         }
                                         style={style.grid}
                                     >
-                                        {bars}
+                                        {groupedOrStacked}
                                     </VictoryChart>
                                 ) : null}
                             </View>
@@ -123,10 +109,10 @@ export function BarChart(props: BarChartProps): ReactElement | null {
     );
 }
 
-// todo: i think this should not be the responsibility of the LineChart, instead some higher layer which handles data.
-// todo: can this be a simpler reduce?
-function getDataTypes(series: BarChartSeries[]): { x: string; y: string } | Error | undefined {
-    let dataTypes: { x: string; y: string } | undefined;
+type DataTypeResult = { x: string; y: string };
+
+function getDataTypes(series: BarChartSeries[]): DataTypeResult | Error | undefined {
+    let dataTypes: DataTypeResult | undefined;
 
     for (const _series of series) {
         const { dataPoints } = _series;
@@ -146,3 +132,13 @@ function getDataTypes(series: BarChartSeries[]): { x: string; y: string } | Erro
 
     return dataTypes;
 }
+
+const getScale = (dataTypesResult: string): "linear" | "time" | undefined => {
+    if (dataTypesResult === "number" || dataTypesResult === "string") {
+        return "linear";
+    } else if (dataTypesResult === "object") {
+        return "time";
+    }
+
+    return undefined;
+};

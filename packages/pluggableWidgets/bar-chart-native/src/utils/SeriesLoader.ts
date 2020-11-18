@@ -113,7 +113,6 @@ function loadDynamicSeries(series: BarSeriesType): BarChartSeries[] | null {
     return loadedSeries;
 }
 
-// todo: note, perhaps it's worth noting in UI that series can be grouped by X or Y attributes.
 function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | null {
     const { dynamicDataSource, dynamicSeriesName, groupByAttribute, dataSet } = series;
 
