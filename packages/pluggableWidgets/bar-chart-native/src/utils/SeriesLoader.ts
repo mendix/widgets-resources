@@ -15,8 +15,8 @@ interface DataSourceItemGroup {
 
 interface DataPointsExtraction {
     dataPoints: BarDataPoints;
-    xFormatter?: (xValue: number | Date) => string;
-    yFormatter?: (yValue: number | Date) => string;
+    xFormatter?: (xValue: number | Date | string) => string;
+    yFormatter?: (yValue: number | Date | string) => string;
 }
 
 // todo: test this hook.
@@ -199,17 +199,20 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
         }
 
         if (!dataPointsExtraction.xFormatter && !dataPointsExtraction.yFormatter) {
-            dataPointsExtraction.xFormatter = (xValue: number | Date) =>
+            dataPointsExtraction.xFormatter = (xValue: number | Date | string) =>
                 x.formatter.format(typeof xValue === "number" ? new Big(xValue) : xValue);
-            dataPointsExtraction.yFormatter = (yValue: number | Date) =>
+            dataPointsExtraction.yFormatter = (yValue: number | Date | string) =>
                 y.formatter.format(typeof yValue === "number" ? new Big(yValue) : yValue);
         }
 
         // todo: this could be a problem. what if a LARGE number is passed to client, precision will be lost with Number.
+        // note: switch X and Y because bar chart is horizontal.
         dataPointsExtraction.dataPoints.push({
-            x: x.value instanceof Date ? x.value : (Number(x.value.toString()) as any), // Cast as any because data type will never differ for data points within a series
-            y: y.value instanceof Date ? y.value : (Number(y.value.toString()) as any) // Cast as any because data type will never differ for data points within a series
-        });
+            y: x.value instanceof Date || typeof x.value === "string" ? x.value : Number(x.value.toString()),
+            x: y.value instanceof Date || typeof y.value === "string" ? y.value : Number(y.value.toString())
+            // todo: not sure how to get these types right after adding string support
+            // // Cast as any because data type will never differ for data points within a series
+        } as any);
     }
 
     return dataPointsExtraction;

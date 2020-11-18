@@ -68,6 +68,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
+                                    <attributeType name="String"/>
+                                    <attributeType name="Enum"/>
                                 </attributeTypes>
                             </property>
                             <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
@@ -79,6 +81,9 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
+                                    <attributeType name="String"/>
+                                    <attributeType name="Enum"/>
+
                                 </attributeTypes>
                             </property>
                             <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
@@ -90,6 +95,9 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
+                                    <attributeType name="String"/>
+                                    <attributeType name="Enum"/>
+
                                 </attributeTypes>
                             </property>
                             <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
@@ -101,6 +109,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
+                                    <attributeType name="String"/>
+                                    <attributeType name="Enum"/>
                                 </attributeTypes>
                             </property>
                         </propertyGroup>

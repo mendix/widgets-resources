@@ -16,8 +16,8 @@ export interface BarChartProps {
 
 export interface BarChartSeries {
     dataPoints: BarDataPoints;
-    xFormatter?: (xValue: number | Date) => string;
-    yFormatter?: (yValue: number | Date) => string;
+    xFormatter?: (xValue: number | Date | string) => string;
+    yFormatter?: (yValue: number | Date | string) => string;
     name?: string;
 }
 
@@ -25,9 +25,14 @@ export type BarDataPoints =
     | Array<BarDataPoint<number, number>>
     | Array<BarDataPoint<number, Date>>
     | Array<BarDataPoint<Date, number>>
-    | Array<BarDataPoint<Date, Date>>;
+    | Array<BarDataPoint<Date, Date>>
+    | Array<BarDataPoint<string, string>>
+    | Array<BarDataPoint<string, number>>
+    | Array<BarDataPoint<string, Date>>
+    | Array<BarDataPoint<number, string>>
+    | Array<BarDataPoint<Date, string>>;
 
-export interface BarDataPoint<X extends number | Date, Y extends number | Date> {
+export interface BarDataPoint<X extends number | Date | string, Y extends number | Date | string> {
     x: X;
     y: Y;
 }

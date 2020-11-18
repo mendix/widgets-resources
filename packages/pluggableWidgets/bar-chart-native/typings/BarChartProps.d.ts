@@ -16,10 +16,10 @@ export interface BarSeriesType {
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
     staticSeriesName?: DynamicValue<string>;
     dynamicSeriesName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | BigJs.Big>;
-    dynamicXAttribute?: ListAttributeValue<Date | BigJs.Big>;
-    staticYAttribute?: ListAttributeValue<Date | BigJs.Big>;
-    dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big>;
+    staticXAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
+    dynamicXAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
+    staticYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
+    dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
 }
 
 export interface BarSeriesPreviewType {
