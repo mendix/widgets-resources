@@ -212,19 +212,13 @@ async function main() {
 
             try {
                 await new Promise((resolve, reject) => {
-                    startProcess.stdout.on("data", data => {
+                    startProcess.stderr.on("data", data => {
                         if (/\berror\b/i.test(data)) {
                             reject(new Error(`Received error ${data}`));
-                        } else if (
-                            data.includes("Finished 'copyToDeployment'") ||
-                            data.includes("Project is running at http://localhost:3000/")
-                        ) {
+                        } else if (data.includes("waiting for changes...")) {
                             console.log(`[${widgetName}] Start succeeded!`);
                             resolve();
                         }
-                    });
-                    startProcess.stderr.on("data", data => {
-                        reject(new Error(`Received error output: ${data}`));
                     });
                     startProcess.on("exit", code => {
                         reject(new Error(`Exited with status ${code}`));

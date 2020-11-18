@@ -32,11 +32,10 @@ function getRealCommand(cmd, toolsRoot) {
     const rollupCommand = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
 
     switch (cmd) {
-        case "start:server":
-        // return `webpack serve --config ${join(toolsRoot, "configs/webpack.config.js")} --env=dev`;
         case "start:web":
         case "start:js":
         case "start:ts":
+        case "start:server":
         case "dev:js":
         case "dev:ts":
             return `${rollupCommand} --watch --configPlatform=web`;

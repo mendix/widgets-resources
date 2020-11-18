@@ -10,6 +10,7 @@ import typescript from "@rollup/plugin-typescript";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
+import livereload from "rollup-plugin-livereload";
 import sass from "rollup-plugin-sass";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
@@ -217,7 +218,8 @@ export default async args => {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             clear({ targets: [outDir, mpkDir] }),
-            command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)], { exitOnFail: true, wait: true })
+            command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)], { exitOnFail: true, wait: true }),
+            args.watch && platform === "web" && !production && projectPath ? livereload() : null
         ];
     }
 };
