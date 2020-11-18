@@ -66,7 +66,7 @@ export default async args => {
                         plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
                     }
                 }),
-                ...getMainFilePlugins({ platform, production })
+                ...(await getMainFilePlugins({ platform, production }))
             ],
             onwarn
         });
@@ -95,7 +95,7 @@ export default async args => {
                         ]
                     }
                 }),
-                ...getMainFilePlugins({ platform, production })
+                ...(await getMainFilePlugins({ platform, production }))
             ],
             onwarn
         });
@@ -184,9 +184,9 @@ function getCommonPlugins(config) {
     ];
 }
 
-function getMainFilePlugins(config) {
+async function getMainFilePlugins(config) {
     return [
-        isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
+        isTypescript ? await widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
         clear({ targets: [outDir, mpkDir] }),
         copy({
             targets: [{ src: join(sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
