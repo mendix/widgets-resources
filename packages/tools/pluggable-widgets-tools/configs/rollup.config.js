@@ -15,17 +15,22 @@ import scss from "rollup-plugin-scss";
 import { terser } from "rollup-plugin-terser";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import { zip } from "./rollup-plugin-zip";
+import {
+    editorConfigEntry,
+    isTypescript,
+    previewEntry,
+    projectPath,
+    sourcePath,
+    widgetEntry,
+    widgetName,
+    widgetPackage,
+    widgetVersion
+} from "./shared";
 
-const variables = require("./variables");
-
-const outDir = join(variables.sourcePath, "/dist/tmp/widgets/");
-const outWidgetFile = join(
-    variables.package.packagePath.replace(/\./g, "/"),
-    variables.package.widgetName.toLowerCase(),
-    `${variables.package.widgetName}.js`
-);
-const mpkDir = join(variables.sourcePath, "dist", variables.package.version);
-const mpkFile = join(mpkDir, `${variables.package.packagePath}.${variables.package.widgetName}.mpk`);
+const outDir = join(sourcePath, "/dist/tmp/widgets/");
+const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}.js`);
+const mpkDir = join(sourcePath, "dist", widgetVersion);
+const mpkFile = join(mpkDir, `${widgetPackage}.${widgetName}.mpk`);
 
 export default async args => {
     const platform = args.configPlatform;
@@ -37,7 +42,7 @@ export default async args => {
 
     if (platform === "web") {
         result.push({
-            input: variables.widgetEntry,
+            input: widgetEntry,
             output: {
                 format: "amd",
                 file: join(outDir, outWidgetFile),
@@ -52,7 +57,7 @@ export default async args => {
                         "react-hot-loader/root": join(__dirname, "hot")
                     }
                 }),
-                ...getSharedPlugins({
+                ...getCommonPlugins({
                     production,
                     extensions: webExtensions,
                     typescriptConfig: { sourceMap: !production, inlineSources: !production },
@@ -69,7 +74,7 @@ export default async args => {
 
     if (platform === "native") {
         result.push({
-            input: variables.widgetEntry,
+            input: widgetEntry,
             output: {
                 format: "es",
                 file: join(outDir, outWidgetFile)
@@ -78,7 +83,7 @@ export default async args => {
             external: nativeExternal,
             plugins: [
                 json(),
-                ...getSharedPlugins({
+                ...getCommonPlugins({
                     production,
                     extensions: nativeExtensions,
                     typescriptConfig: { target: "es2019" },
@@ -96,19 +101,19 @@ export default async args => {
         });
     }
 
-    if (platform === "web" && variables.previewEntry) {
+    if (platform === "web" && previewEntry) {
         result.push({
-            input: variables.previewEntry,
+            input: previewEntry,
             output: {
                 format: "commonjs",
-                file: join(outDir, `${variables.package.widgetName}.editorPreview.js`),
+                file: join(outDir, `${widgetName}.editorPreview.js`),
                 sourcemap: !production ? "inline" : false
             },
             treeshake: { moduleSideEffects: false },
             external: [/^mendix($|\/)/, "react", "react-dom"],
             plugins: [
                 scss({ output: false, failOnError: true, sass: require("sass") }),
-                ...getSharedPlugins({
+                ...getCommonPlugins({
                     production,
                     extensions: webExtensions,
                     typescriptConfig: { sourceMap: !production, inlineSources: !production },
@@ -121,17 +126,17 @@ export default async args => {
         });
     }
 
-    if (variables.editorConfigEntry) {
+    if (editorConfigEntry) {
         result.push({
-            input: variables.editorConfigEntry,
+            input: editorConfigEntry,
             output: {
                 format: "commonjs",
-                file: join(outDir, `${variables.package.widgetName}.editorConfig.js`),
+                file: join(outDir, `${widgetName}.editorConfig.js`),
                 sourcemap: false // target engine does not support it
             },
             treeshake: { moduleSideEffects: false },
             plugins: [
-                ...getSharedPlugins({
+                ...getCommonPlugins({
                     production: false,
                     extensions: webExtensions,
                     typescriptConfig: { target: "es5" },
@@ -146,7 +151,7 @@ export default async args => {
         });
     }
 
-    const customConfigPath = join(variables.sourcePath, "rollup.config.js");
+    const customConfigPath = join(sourcePath, "rollup.config.js");
     if (existsSync(customConfigPath)) {
         const customConfig = await loadConfigFile(customConfigPath, { ...args, configDefaultConfig: result });
         customConfig.warnings.flush();
@@ -156,7 +161,7 @@ export default async args => {
     return result;
 };
 
-function getSharedPlugins(config) {
+function getCommonPlugins(config) {
     return [
         replace({
             "process.env.NODE_ENV": config.production ? "'production'" : "'development'"
@@ -166,9 +171,7 @@ function getSharedPlugins(config) {
             extensions: config.extensions,
             preferBuiltins: false
         }),
-        variables.isTypescript
-            ? typescript({ noEmitOnError: true, sourceMap: false, ...config.typescriptConfig })
-            : null,
+        isTypescript ? typescript({ noEmitOnError: true, sourceMap: false, ...config.typescriptConfig }) : null,
         babel({
             sourceMaps: !config.production,
             babelrc: false,
@@ -183,16 +186,16 @@ function getSharedPlugins(config) {
 
 function getMainFilePlugins(config) {
     return [
-        variables.isTypescript ? widgetTyping({ sourceDir: join(variables.sourcePath, "src") }) : null,
+        isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
         clear({ targets: [outDir, mpkDir] }),
         copy({
-            targets: [{ src: join(variables.sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
+            targets: [{ src: join(sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
         }),
-        !config.production && variables.projectPath
+        !config.production && projectPath
             ? copyAfterBuild([
                   {
                       files: join(outDir, "**/*.{js,css}").replace("\\", "/"),
-                      dest: join(variables.projectPath, `deployment/${config.platform}/widgets`),
+                      dest: join(projectPath, `deployment/${config.platform}/widgets`),
                       options: { parents: true }
                   }
               ])
