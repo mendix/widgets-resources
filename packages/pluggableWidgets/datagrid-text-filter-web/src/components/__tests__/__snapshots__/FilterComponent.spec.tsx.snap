@@ -9,7 +9,7 @@ exports[`Filter selector renders correctly 1`] = `
     onChange={[Function]}
   />
   <input
-    className="form-control"
+    className="form-control filter-input"
     onChange={[Function]}
     type="text"
   />
