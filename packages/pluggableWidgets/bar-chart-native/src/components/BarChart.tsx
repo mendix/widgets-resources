@@ -1,12 +1,13 @@
 import { createElement, ReactElement, useMemo, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
-import { VictoryChart, VictoryBar } from "victory-native";
+import { VictoryChart, VictoryBar, VictoryStack, VictoryGroup } from "victory-native";
 
 import { BarChartStyle } from "../ui/Styles";
 
 export interface BarChartProps {
     series: BarChartSeries[];
     style: BarChartStyle;
+    presentation: string;
     showLegend: boolean;
     xAxisLabel?: string;
     yAxisLabel?: string;
@@ -32,7 +33,7 @@ export interface BarDataPoint<X extends number | Date, Y extends number | Date> 
 }
 
 export function BarChart(props: BarChartProps): ReactElement | null {
-    const { series, style, warningPrefix } = props;
+    const { series, style, warningPrefix, presentation } = props;
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
@@ -45,11 +46,31 @@ export function BarChart(props: BarChartProps): ReactElement | null {
             return null;
         }
 
-        return series.map((series, i) => {
-            const { dataPoints } = series;
+        if (presentation === "stacked") {
+            return (
+                <VictoryStack colorScale="qualitative">
+                    {series.map((series, index) => {
+                        const { dataPoints } = series;
+                        // todo: should sorting be allowed?
+                        // todo: y0
+                        return <VictoryBar horizontal key={index} data={dataPoints} />;
+                    })}
+                </VictoryStack>
+            );
+        } else if (presentation === "grouped") {
+            return (
+                <VictoryGroup colorScale="qualitative" offset={20}>
+                    {series.map((series, index) => {
+                        const { dataPoints } = series;
+                        // todo: should sorting be allowed?
+                        // todo: y0
+                        return <VictoryBar horizontal key={index} data={dataPoints} />;
+                    })}
+                </VictoryGroup>
+            );
+        }
 
-            return <VictoryBar horizontal key={i} data={dataPoints} />;
-        });
+        return null;
     }, [dataTypesResult, series, style, warningMessagePrefix]);
 
     return (

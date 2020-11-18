@@ -5,6 +5,8 @@
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 
+export type PresentationEnum = "grouped" | "stacked";
+
 export type DataSetEnum = "static" | "dynamic";
 
 export interface BarSeriesType {
@@ -36,6 +38,7 @@ export interface BarSeriesPreviewType {
 export interface BarChartProps<Style> {
     name: string;
     style: Style[];
+    presentation: PresentationEnum;
     barSeries: BarSeriesType[];
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
@@ -45,6 +48,7 @@ export interface BarChartProps<Style> {
 export interface BarChartPreviewProps {
     class: string;
     style: string;
+    presentation: PresentationEnum;
     barSeries: BarSeriesPreviewType[];
     showLegend: boolean;
     xAxisLabel: string;

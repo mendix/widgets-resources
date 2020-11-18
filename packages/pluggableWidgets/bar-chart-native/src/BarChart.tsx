@@ -7,7 +7,7 @@ import { BarChartStyle, defaultBarChartStyle } from "./ui/Styles";
 import { useSeries } from "./utils/SeriesLoader";
 
 export function BarChart(props: BarChartProps<BarChartStyle>): ReactElement | null {
-    const { name, barSeries, showLegend, style, xAxisLabel, yAxisLabel } = props;
+    const { name, barSeries, showLegend, style, xAxisLabel, yAxisLabel, presentation } = props;
 
     const customStyles = style ? style.filter(o => o != null) : [];
 
@@ -23,6 +23,7 @@ export function BarChart(props: BarChartProps<BarChartStyle>): ReactElement | nu
         <BarChartComponent
             series={series}
             style={styles}
+            presentation={presentation}
             showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}
             yAxisLabel={yAxisLabel?.value}
