@@ -10,10 +10,9 @@ import typescript from "@rollup/plugin-typescript";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
-import copy from "rollup-plugin-copy";
-import copyAfterBuild from "rollup-plugin-cpy";
 import sass from "rollup-plugin-sass";
 import { terser } from "rollup-plugin-terser";
+import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
 import {
@@ -55,6 +54,7 @@ export default async args => {
             },
             external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
             plugins: [
+                ...getMainFilePlugins(),
                 sass({ output: true, include: /\.(css|sass|scss)$/ }),
                 alias({
                     entries: {
@@ -71,8 +71,7 @@ export default async args => {
                               allowAllFormats: true
                           }
                         : undefined
-                }),
-                ...getMainFilePlugins()
+                })
             ],
             onwarn
         });
@@ -88,13 +87,13 @@ export default async args => {
             },
             external: nativeExternal,
             plugins: [
+                ...getMainFilePlugins(),
                 json(),
                 ...getCommonPlugins({
                     sourceMaps: !production,
                     extensions: nativeExtensions,
                     typescriptConfig: { target: "es2019" }
-                }),
-                ...getMainFilePlugins()
+                })
             ],
             onwarn
         });
@@ -196,17 +195,21 @@ export default async args => {
                   })
                 : null,
             production ? terser() : null,
-            // Re-create a zip file when any of the config finishes. We must do it because in watch mode only
-            // configurations affected by a change are recompiled.
-            command(
-                [
-                    async () => {
-                        mkdirSync(mpkDir, { recursive: true });
-                        await zip(outDir, mpkFile);
+            // We need to create .mpk and copy results to test project after bundling is finished.
+            // In case of a regular build is it is on `writeBundle` of the last config we define
+            // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only
+            // configs affected by a change => we cannot know in advance which one will be "the last".
+            // So we run the same logic for all configs, letting the last one win.
+            command([
+                async () => {
+                    mkdirSync(mpkDir, { recursive: true });
+                    await zip(outDir, mpkFile);
+                    if (!production && projectPath) {
+                        cp("-r", join(outDir, "*"), join(projectPath, `deployment/${platform}/widgets`));
+                        cp(mpkFile, join(projectPath, "widgets"));
                     }
-                ],
-                { exitOnFail: true, wait: true }
-            )
+                }
+            ])
         ];
     }
 
@@ -214,18 +217,7 @@ export default async args => {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             clear({ targets: [outDir, mpkDir] }),
-            copy({
-                targets: [{ src: join(sourcePath, "src/**/*.xml").replace("\\", "/"), dest: outDir }]
-            }),
-            !production && projectPath
-                ? copyAfterBuild([
-                      {
-                          files: join(outDir, "**/*.{js,css}").replace("\\", "/"),
-                          dest: join(projectPath, `deployment/${platform}/widgets`),
-                          options: { parents: true }
-                      }
-                  ])
-                : null
+            command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)], { exitOnFail: true, wait: true })
         ];
     }
 };
