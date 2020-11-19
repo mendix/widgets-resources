@@ -38,7 +38,7 @@ function getProjectPaths() {
     } else if (variables.package.config.testProjects) {
         return variables.package.config.testProjects.map(testProject => fixSlashes(checkPath(testProject.path)));
     }
-    return [fixSlashes(path.join(__dirname, `${variables.path}/tests/TestProject`))];
+    return [fixSlashes(`${variables.path}/tests/testProject`)];
 }
 function fixSlashes(tmpPath) {
     tmpPath = gulpSlash(tmpPath);
