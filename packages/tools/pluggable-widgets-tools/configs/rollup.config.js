@@ -86,8 +86,7 @@ export default async args => {
                 json(),
                 ...getCommonPlugins({
                     sourceMaps: !production,
-                    extensions: nativeExtensions,
-                    typescriptConfig: { target: "es2019" }
+                    extensions: nativeExtensions
                 })
             ],
             onwarn
@@ -131,7 +130,6 @@ export default async args => {
                     sourceMaps: false,
                     extensions: webExtensions,
                     transpile: true,
-                    typescriptConfig: { target: "es5" },
                     babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] }
                 })
             ],
@@ -156,7 +154,7 @@ export default async args => {
                       noEmitOnError: true,
                       sourceMap: config.sourceMaps,
                       inlineSources: config.sourceMaps,
-                      ...(config.typescriptConfig || {})
+                      target: "es2019" // we transpile the result with babel anyway, see below
                   })
                 : null,
             // Babel can transpile source JS and resulting JS, hence are input/output plugins. The good
