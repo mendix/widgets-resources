@@ -56,7 +56,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     return (
         <div className="filter-container">
-            <FilterSelector defaultFilter={props.defaultFilter} onChange={v => setType(v)} />
+            <FilterSelector defaultFilter={props.defaultFilter} onChange={setType} />
             <input
                 placeholder={props.placeholder}
                 value={value}
