@@ -33,10 +33,6 @@ const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLower
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, `${widgetPackage}.${widgetName}.mpk`);
 
-// Notes for future me:
-// - plugins that transform non-js code to js should go before plugins that work with js
-// - for editorConfig we target JS engine in Studio Pro, which supports only es5 and no source maps
-
 export default async args => {
     const platform = args.configPlatform;
     const production = Boolean(args.configProduction);
@@ -55,7 +51,7 @@ export default async args => {
             },
             external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
             plugins: [
-                ...getMainFilePlugins(),
+                ...getClientComponentPlugins(),
                 sass({ output: true, include: /\.(css|sass|scss)$/ }),
                 alias({
                     entries: {
@@ -65,13 +61,11 @@ export default async args => {
                 ...getCommonPlugins({
                     sourceMaps: !production,
                     extensions: webExtensions,
-                    typescriptConfig: {},
-                    babelConfig: production
-                        ? {
-                              presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
-                              allowAllFormats: true
-                          }
-                        : undefined
+                    transpile: production,
+                    babelConfig: {
+                        presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
+                        allowAllFormats: true
+                    }
                 })
             ],
             onwarn
@@ -88,7 +82,7 @@ export default async args => {
             },
             external: nativeExternal,
             plugins: [
-                ...getMainFilePlugins(),
+                ...getClientComponentPlugins(),
                 json(),
                 ...getCommonPlugins({
                     sourceMaps: !production,
@@ -114,10 +108,8 @@ export default async args => {
                 ...getCommonPlugins({
                     sourceMaps: !production,
                     extensions: webExtensions,
-                    typescriptConfig: { sourceMap: !production, inlineSources: !production },
-                    babelConfig: production
-                        ? { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] }
-                        : undefined
+                    transpile: production,
+                    babelConfig: { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] }
                 })
             ],
             onwarn
@@ -125,6 +117,7 @@ export default async args => {
     }
 
     if (editorConfigEntry) {
+        // We target Studio Pro's JS engine that supports only es5 and no source maps
         result.push({
             input: editorConfigEntry,
             output: {
@@ -137,10 +130,9 @@ export default async args => {
                 ...getCommonPlugins({
                     sourceMaps: false,
                     extensions: webExtensions,
+                    transpile: true,
                     typescriptConfig: { target: "es5" },
-                    babelConfig: {
-                        presets: [["@babel/preset-env", { targets: { ie: "11" } }]]
-                    }
+                    babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] }
                 })
             ],
             onwarn
@@ -164,9 +156,13 @@ export default async args => {
                       noEmitOnError: true,
                       sourceMap: config.sourceMaps,
                       inlineSources: config.sourceMaps,
-                      ...config.typescriptConfig
+                      ...(config.typescriptConfig || {})
                   })
                 : null,
+            // Babel can transpile source JS and resulting JS, hence are input/output plugins. The good
+            // practice is to do the most of conversions on resulting code, since then we ensure that
+            // babel doesn't interfere with `import`s and `require`s used by rollup/commonjs plugin;
+            // also resulting code includes generated code that deserve transpilation as well.
             getBabelInputPlugin({
                 sourceMaps: config.sourceMaps,
                 babelrc: false,
@@ -187,12 +183,12 @@ export default async args => {
             replace({
                 "process.env.NODE_ENV": production ? "'production'" : "'development'"
             }),
-            config.babelConfig
+            config.transpile
                 ? getBabelOutputPlugin({
                       sourceMaps: config.sourceMaps,
                       babelrc: false,
                       compact: false,
-                      ...config.babelConfig
+                      ...(config.babelConfig || {})
                   })
                 : null,
             production ? terser() : null,
@@ -214,11 +210,11 @@ export default async args => {
         ];
     }
 
-    function getMainFilePlugins() {
+    function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             clear({ targets: [outDir, mpkDir] }),
-            command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)], { exitOnFail: true, wait: true }),
+            command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)]),
             args.watch && platform === "web" && !production && projectPath ? livereload() : null
         ];
     }

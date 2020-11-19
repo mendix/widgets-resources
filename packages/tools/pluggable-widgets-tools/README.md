@@ -21,8 +21,8 @@ In your `package.json` scripts, use the following command with the desired task:
 
 ### Available tasks
 
--   `start:web` Build and watch the changes of your Web widget. It will refresh your browser automatically once building is done, but only if you run this command on the same machine where Studio Pro is running.
--   `start:native` Build and watch the changes of your Native widget. Your native app will reload automatically.
+-   `start:web` Build and watch the changes of your Web widget. Your web app will reload automatically to reflect changes. You need to run the command on the same machine as Studio Pro.
+-   `start:native` Build and watch the changes of your Native widget. Your native app will reload automatically to reflect changes.
 -   `build:web` Build your Web widget
 -   `build:native` Build your Native widget
 -   `release:web` Create a release build of your Web widget
