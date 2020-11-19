@@ -3,9 +3,11 @@ import { LayoutChangeEvent, Text, View } from "react-native";
 import { VictoryChart, VictoryBar, VictoryStack, VictoryGroup } from "victory-native";
 
 import { BarChartStyle } from "../ui/Styles";
+import { SortOrderEnum } from "../../typings/BarChartProps";
 
 export interface BarChartProps {
     series: BarChartSeries[];
+    sortOrder: SortOrderEnum;
     style: BarChartStyle;
     presentation: string;
     showLegend: boolean;
@@ -38,7 +40,7 @@ export interface BarDataPoint<X extends number | Date | string, Y extends number
 }
 
 export function BarChart(props: BarChartProps): ReactElement | null {
-    const { series, style, warningPrefix, presentation } = props;
+    const { series, style, warningPrefix, presentation, sortOrder } = props;
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
@@ -46,25 +48,36 @@ export function BarChart(props: BarChartProps): ReactElement | null {
 
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
+    const sort = useMemo(() => (sortOrder !== "noSort" ? { sortOrder, sortKey: "y" } : undefined), [sortOrder]);
+
+    const colorScale = { colorScale: "qualitative" } as { colorScale: "qualitative" };
+
+    const conditionalProps = useMemo(
+        () => ({
+            ...colorScale,
+            ...sort
+        }),
+        [colorScale.colorScale, sort]
+    );
+
     const groupedOrStacked = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
             return null;
         }
 
-        const bars = series.map((series, index) => {
-                        const { dataPoints } = series;
-            return <VictoryBar horizontal key={index} data={dataPoints} labels={({ datum }) => datum.y} />;
-        });
+        const bars = series.map((series, index) => (
+            <VictoryBar horizontal key={index} data={series.dataPoints} labels={({ datum }) => datum.y} />
+        ));
 
         if (presentation === "grouped") {
             return (
-                <VictoryGroup colorScale="qualitative" offset={20}>
+                <VictoryGroup offset={20} {...conditionalProps}>
                     {bars}
                 </VictoryGroup>
             );
         }
 
-        return <VictoryStack colorScale="qualitative">{bars}</VictoryStack>;
+        return <VictoryStack {...conditionalProps}>{bars}</VictoryStack>;
     }, [dataTypesResult, series, style, warningMessagePrefix]);
 
     const onLayout = useCallback(

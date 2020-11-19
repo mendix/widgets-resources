@@ -2,10 +2,10 @@ import { hideNestedPropertiesIn, Problem, Properties } from "@widgets-resources/
 
 import { BarChartPreviewProps } from "../typings/BarChartProps";
 
-export function getProperties(values: BarChartPreviewProps, defaultProperties: Properties): Properties {
-    values.barSeries.forEach((series, index) => {
+export function getProperties(widget: BarChartPreviewProps, defaultProperties: Properties): Properties {
+    widget.barSeries.forEach((series, index) => {
         if (series.dataSet === "static") {
-            hideNestedPropertiesIn(defaultProperties, values, "barSeries", index, [
+            hideNestedPropertiesIn(defaultProperties, widget, "barSeries", index, [
                 "dynamicDataSource",
                 "groupByAttribute",
                 "dynamicSeriesName",
@@ -13,7 +13,7 @@ export function getProperties(values: BarChartPreviewProps, defaultProperties: P
                 "dynamicYAttribute"
             ]);
         } else {
-            hideNestedPropertiesIn(defaultProperties, values, "barSeries", index, [
+            hideNestedPropertiesIn(defaultProperties, widget, "barSeries", index, [
                 "staticDataSource",
                 "staticSeriesName",
                 "staticXAttribute",
@@ -21,6 +21,7 @@ export function getProperties(values: BarChartPreviewProps, defaultProperties: P
             ]);
         }
     });
+
     return defaultProperties;
 }
 

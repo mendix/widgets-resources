@@ -116,6 +116,15 @@
                         </propertyGroup>
                     </properties>
                 </property>
+                <property key="sortOrder" type="enumeration" defaultValue="noSort">
+                    <caption>Sort order</caption>
+                    <description>Applicable only to Y axis attributes.</description>
+                    <enumerationValues>
+                        <enumerationValue key="noSort" >Do not sort data</enumerationValue>
+                        <enumerationValue key="ascending" >Ascending</enumerationValue>
+                        <enumerationValue key="descending">Descending</enumerationValue>
+                    </enumerationValues>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Chart settings">
                 <property key="showLegend" type="boolean" defaultValue="true">

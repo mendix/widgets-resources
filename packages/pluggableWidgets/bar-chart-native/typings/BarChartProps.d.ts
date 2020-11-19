@@ -22,6 +22,8 @@ export interface BarSeriesType {
     dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
 }
 
+export type SortOrderEnum = "noSort" | "ascending" | "descending";
+
 export interface BarSeriesPreviewType {
     dataSet: DataSetEnum;
     staticDataSource: {} | null;
@@ -40,6 +42,7 @@ export interface BarChartProps<Style> {
     style: Style[];
     presentation: PresentationEnum;
     barSeries: BarSeriesType[];
+    sortOrder: SortOrderEnum;
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
@@ -50,6 +53,7 @@ export interface BarChartPreviewProps {
     style: string;
     presentation: PresentationEnum;
     barSeries: BarSeriesPreviewType[];
+    sortOrder: SortOrderEnum;
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
