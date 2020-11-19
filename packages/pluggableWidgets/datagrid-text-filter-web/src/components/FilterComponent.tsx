@@ -12,7 +12,13 @@ interface FilterComponentProps {
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
-    const [value, setValue] = useState(props.value);
+    const [value, setValue] = useState("");
+
+    useEffect(() => {
+        if (props.value) {
+            setValue(props.value);
+        }
+    }, [props.value]);
 
     useEffect(() => {
         if (props.filterDispatcher) {
