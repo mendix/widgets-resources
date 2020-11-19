@@ -149,7 +149,7 @@ export default async args => {
 
     function getCommonPlugins(config) {
         return [
-            nodeResolve({ browser: true, extensions: config.extensions, preferBuiltins: false }),
+            nodeResolve({ browser: true, preferBuiltins: false }),
             isTypescript
                 ? typescript({
                       noEmitOnError: true,
