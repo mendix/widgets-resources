@@ -1,7 +1,6 @@
 const { Mutex, Semaphore } = require("async-mutex");
 const { exec } = require("child_process");
 const { copy, existsSync, readJson, writeJson } = require("fs-extra");
-const pty = require("node-pty");
 const { join } = require("path");
 const { ls, mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
@@ -70,6 +69,7 @@ async function main() {
         )
     ).filter(f => f);
 
+    console.log("All done!");
     rm("-r", toolsPackagePath, ...workDirs);
 
     if (failures.length) {
@@ -209,27 +209,31 @@ async function main() {
         }
 
         async function testStart() {
-            const startProcess =
-                process.platform === "win32"
-                    ? pty.spawn("C:\\Windows\\system32\\cmd.exe", ["/c", "npm start"], {
-                          cwd: workDir,
-                          env: process.env
-                      })
-                    : pty.spawn("npm", ["start"], { cwd: workDir, env: process.env });
+            const startProcess = exec("npm start", { cwd: workDir, env: { ...process.env, NO_COLOR: "true" } });
 
             try {
                 await new Promise((resolve, reject) => {
-                    startProcess.onData(data => {
-                        if (/error/i.test(data)) {
-                            reject(new Error(`Received error ${data}`));
-                        } else if (data.includes("waiting for changes...")) {
-                            console.log(`[${widgetName}] Start succeeded!`);
-                            resolve();
-                        }
-                    });
-                    startProcess.onExit(({ exitCode }) => {
+                    let inProgress = false;
+                    startProcess.stdout.on("data", onOutput);
+                    startProcess.stderr.on("data", onOutput);
+                    startProcess.on("exit", exitCode => {
                         reject(new Error(`Exited with status ${exitCode}`));
                     });
+                    function onOutput(data) {
+                        if (/error/i.test(data)) {
+                            reject(new Error(`Received error ${data}`));
+                        } else if (/\bbundles /.test(data)) {
+                            inProgress = true;
+                        } else if (/\bcreated .* in /.test(data)) {
+                            inProgress = false;
+                            setTimeout(() => {
+                                if (!inProgress) {
+                                    console.log(`[${widgetName}] Start succeeded!`);
+                                    resolve();
+                                }
+                            }, 100);
+                        }
+                    }
                 });
             } finally {
                 try {
