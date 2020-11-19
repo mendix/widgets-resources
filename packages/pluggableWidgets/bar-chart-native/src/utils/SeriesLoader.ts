@@ -204,14 +204,11 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
                 y.formatter.format(typeof yValue === "number" ? new Big(yValue) : yValue);
         }
 
-        // todo: this could be a problem. what if a LARGE number is passed to client, precision will be lost with Number.
-        // note: switch X and Y because bar chart is horizontal.
         dataPointsExtraction.dataPoints.push({
-            y: x.value instanceof Date || typeof x.value === "string" ? x.value : Number(x.value.toString()),
-            x: y.value instanceof Date || typeof y.value === "string" ? y.value : Number(y.value.toString())
-            // todo: not sure how to get these types right after adding string support
-            // // Cast as any because data type will never differ for data points within a series
-        } as any);
+            x: x.value instanceof Date || typeof x.value === "string" ? x.value : Number(x.value.toString()),
+            y: y.value instanceof Date || typeof y.value === "string" ? y.value : Number(y.value.toString())
+            // Cast as any because data types will never differ for data points within a series
+        } as any); // todo(jordan): is this cast appropriate?
     }
 
     return dataPointsExtraction;

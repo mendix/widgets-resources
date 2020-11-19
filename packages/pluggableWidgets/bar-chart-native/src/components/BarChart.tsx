@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
-import { VictoryChart, VictoryBar, VictoryStack, VictoryGroup } from "victory-native";
+import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryStack } from "victory-native";
 
 import { BarChartStyle } from "../ui/Styles";
 import { SortOrderEnum } from "../../typings/BarChartProps";
@@ -80,6 +80,8 @@ export function BarChart(props: BarChartProps): ReactElement | null {
         return <VictoryStack {...conditionalProps}>{bars}</VictoryStack>;
     }, [dataTypesResult, series, style, warningMessagePrefix]);
 
+    const [firstSeries] = series;
+
     const onLayout = useCallback(
         (event: LayoutChangeEvent) =>
             setChartDimensions({
@@ -110,6 +112,19 @@ export function BarChart(props: BarChartProps): ReactElement | null {
                                         }
                                         style={style.grid}
                                     >
+                                        <VictoryAxis
+                                            orientation={"bottom"}
+                                            {...(firstSeries?.xFormatter
+                                                ? { tickFormat: firstSeries.xFormatter }
+                                                : undefined)}
+                                        />
+                                        <VictoryAxis
+                                            dependentAxis
+                                            orientation={"left"}
+                                            {...(firstSeries.yFormatter
+                                                ? { tickFormat: firstSeries.yFormatter }
+                                                : undefined)}
+                                        />
                                         {groupedOrStacked}
                                     </VictoryChart>
                                 ) : null}
