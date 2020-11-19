@@ -402,11 +402,13 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.setState({ events: nextEvents });
         const mxEventObject = this.state.eventCache.filter(object => object.getGuid() === eventInfo.event.guid)[0];
         if (mxEventObject) {
-            mxEventObject.set(this.props.titleAttribute, eventInfo.event.title);
-            mxEventObject.set(this.props.eventColor, eventInfo.event.color);
-            mxEventObject.set(this.props.startAttribute, eventInfo.start);
-            mxEventObject.set(this.props.endAttribute, eventInfo.end);
-            this.executeOnDropAction(mxEventObject);
+            setTimeout(() => {
+                mxEventObject.set(this.props.titleAttribute, eventInfo.event.title);
+                mxEventObject.set(this.props.eventColor, eventInfo.event.color);
+                mxEventObject.set(this.props.startAttribute, eventInfo.start);
+                mxEventObject.set(this.props.endAttribute, eventInfo.end);
+                this.executeOnDropAction(mxEventObject);
+            }, 50);
         }
     };
 
