@@ -78,15 +78,16 @@ export default async args => {
             output: {
                 format: "es",
                 file: join(outDir, outWidgetFile),
-                sourcemap: !production ? "inline" : false
+                sourcemap: false
             },
             external: nativeExternal,
             plugins: [
                 ...getClientComponentPlugins(),
                 json(),
                 ...getCommonPlugins({
-                    sourceMaps: !production,
-                    extensions: nativeExtensions
+                    sourceMaps: false,
+                    extensions: nativeExtensions,
+                    transpile: false
                 })
             ],
             onwarn
