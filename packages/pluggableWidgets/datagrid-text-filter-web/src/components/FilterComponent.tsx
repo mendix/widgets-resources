@@ -9,6 +9,7 @@ interface FilterComponentProps {
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     name?: string;
     placeholder?: string;
+    tabIndex?: number;
     value?: string;
 }
 
@@ -57,7 +58,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.filterDispatcher, value, type]);
 
     return (
-        <div className="filter-container">
+        <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             <FilterSelector name={props.name} defaultFilter={props.defaultFilter} onChange={setType} />
             <input
                 placeholder={props.placeholder}

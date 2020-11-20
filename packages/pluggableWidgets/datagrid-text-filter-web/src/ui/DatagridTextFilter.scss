@@ -70,6 +70,7 @@ $border-color: #ced0d3;
                 align-items: center;
                 font-weight: normal;
                 line-height: 32px;
+                cursor: pointer;
 
                 .filter-label {
                     padding-right: 8px;
@@ -81,7 +82,7 @@ $border-color: #ced0d3;
                     font-weight: bold;
                 }
 
-                &:hover {
+                &:hover, &:focus {
                     background-color: $hover-color;
                     font-weight: 400;
                 }

@@ -36,9 +36,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
             <div className="filter-selector-content">
                 <button
                     className={`btn btn-default filter-selector-button button-icon ${value}`}
-                    onClick={() => {
-                        setShow(show => !show);
-                    }}
+                    onClick={() => setShow(show => !show)}
                     aria-haspopup
                     aria-expanded={show}
                     aria-controls={`${props.name}-filter-selectors`}
@@ -46,7 +44,13 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                     &nbsp;
                 </button>
                 {show && (
-                    <ul id={`${props.name}-filter-selectors`} className="filter-selectors" ref={listRef} role="menu">
+                    <ul
+                        id={`${props.name}-filter-selectors`}
+                        className="filter-selectors"
+                        ref={listRef}
+                        role="menu"
+                        data-focusindex={0}
+                    >
                         {options.map((option, index) => (
                             <li
                                 className={value === option.value ? "filter-selected" : ""}
@@ -59,9 +63,9 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                                     }
                                 }}
                                 role="menuitem"
-                                tabIndex={-1}
+                                tabIndex={0}
                             >
-                                <div className={`filter-icon ${option.value}`} />
+                                <div className={`filter-icon ${option.value}`} aria-hidden />
                                 <div className="filter-label">{option.label}</div>
                             </li>
                         ))}

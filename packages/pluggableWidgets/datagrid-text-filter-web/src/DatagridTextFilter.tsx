@@ -14,6 +14,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
             filterDispatcher={filterDispatcher}
             name={props.name}
             placeholder={props.placeholder?.value}
+            tabIndex={props.tabIndex}
             value={props.defaultValue?.value}
         />
     );
