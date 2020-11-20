@@ -4,20 +4,20 @@ import { FilterSelector } from "../FilterSelector";
 
 describe("Filter selector", () => {
     it("renders correctly", () => {
-        const component = shallow(<FilterSelector defaultFilter="contains" onChange={jest.fn()} />);
+        const component = shallow(<FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders correctly with another default filter", () => {
-        const component = shallow(<FilterSelector defaultFilter="equal" onChange={jest.fn()} />);
+        const component = shallow(<FilterSelector defaultFilter="equal" onChange={jest.fn()} name="test" />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("calls onChange when type changes", () => {
         const onChange = jest.fn();
-        const component = shallow(<FilterSelector defaultFilter="contains" onChange={onChange} />);
+        const component = shallow(<FilterSelector defaultFilter="contains" onChange={onChange} name="test" />);
 
         const button = component.find("button");
         button.simulate("click");

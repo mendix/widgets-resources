@@ -9,6 +9,14 @@ describe("Filter selector", () => {
         expect(component).toMatchSnapshot();
     });
 
+    it("renders correctly with ariaLabel", () => {
+        const component = shallow(
+            <FilterComponent ariaLabel="my label" defaultFilter="contains" filterDispatcher={jest.fn()} />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
     it("calls filterDispatcher when value changes", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(<FilterComponent defaultFilter="contains" filterDispatcher={filterDispatcher} />);

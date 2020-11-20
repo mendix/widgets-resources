@@ -16,6 +16,7 @@ export interface DatagridTextFilterContainerProps {
     defaultValue?: DynamicValue<string>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
+    ariaLabel?: DynamicValue<string>;
 }
 
 export interface DatagridTextFilterPreviewProps {
@@ -24,4 +25,5 @@ export interface DatagridTextFilterPreviewProps {
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;
     placeholder: string;
+    ariaLabel: string;
 }

@@ -4,10 +4,12 @@ import { ObjectItem, ListAttributeValue } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 
 interface FilterComponentProps {
+    ariaLabel?: string;
     defaultFilter: DefaultFilterEnum;
-    value?: string;
-    placeholder?: string;
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
+    name?: string;
+    placeholder?: string;
+    value?: string;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -56,13 +58,14 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     return (
         <div className="filter-container">
-            <FilterSelector defaultFilter={props.defaultFilter} onChange={setType} />
+            <FilterSelector name={props.name} defaultFilter={props.defaultFilter} onChange={setType} />
             <input
                 placeholder={props.placeholder}
                 value={value}
                 className="form-control filter-input"
                 onChange={e => setValue(e.target.value)}
                 type="text"
+                aria-label={props.ariaLabel}
             />
         </div>
     );

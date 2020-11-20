@@ -8,6 +8,9 @@ exports[`Filter selector renders correctly 1`] = `
     className="filter-selector-content"
   >
     <button
+      aria-controls="test-filter-selectors"
+      aria-expanded={false}
+      aria-haspopup={true}
       className="btn btn-default filter-selector-button button-icon contains"
       onClick={[Function]}
     >
@@ -25,6 +28,9 @@ exports[`Filter selector renders correctly with another default filter 1`] = `
     className="filter-selector-content"
   >
     <button
+      aria-controls="test-filter-selectors"
+      aria-expanded={false}
+      aria-haspopup={true}
       className="btn btn-default filter-selector-button button-icon equal"
       onClick={[Function]}
     >

@@ -1,4 +1,4 @@
-import { createElement, ReactElement, RefObject, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 
 const options: Array<{ value: DefaultFilterEnum; label: string }> = [
@@ -14,6 +14,7 @@ const options: Array<{ value: DefaultFilterEnum; label: string }> = [
 ];
 
 interface FilterSelectorProps {
+    name?: string;
     defaultFilter: DefaultFilterEnum;
     onChange: (value: DefaultFilterEnum) => void;
 }
@@ -23,6 +24,13 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
     const [show, setShow] = useState(false);
     const listRef = useRef<HTMLUListElement>(null);
     useOnClickOutside(listRef, () => setShow(false));
+    const onClick = useCallback(
+        (value: DefaultFilterEnum) => {
+            setValue(value);
+            props.onChange(value);
+        },
+        [props.onChange]
+    );
     return (
         <div className="filter-selector">
             <div className="filter-selector-content">
@@ -31,19 +39,27 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                     onClick={() => {
                         setShow(show => !show);
                     }}
+                    aria-haspopup
+                    aria-expanded={show}
+                    aria-controls={`${props.name}-filter-selectors`}
                 >
                     &nbsp;
                 </button>
                 {show && (
-                    <ul className="filter-selectors" ref={listRef}>
+                    <ul id={`${props.name}-filter-selectors`} className="filter-selectors" ref={listRef} role="menu">
                         {options.map((option, index) => (
                             <li
-                                key={index}
-                                onClick={() => {
-                                    setValue(option.value);
-                                    props.onChange(option.value);
-                                }}
                                 className={value === option.value ? "filter-selected" : ""}
+                                key={index}
+                                onClick={() => onClick(option.value)}
+                                onKeyDown={e => {
+                                    if (e.key === "Enter" || e.key === " ") {
+                                        e.preventDefault();
+                                        onClick(option.value);
+                                    }
+                                }}
+                                role="menuitem"
+                                tabIndex={-1}
                             >
                                 <div className={`filter-icon ${option.value}`} />
                                 <div className="filter-label">{option.label}</div>

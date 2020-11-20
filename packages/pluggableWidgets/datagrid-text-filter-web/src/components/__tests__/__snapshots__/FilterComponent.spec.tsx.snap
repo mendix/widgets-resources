@@ -16,3 +16,21 @@ exports[`Filter selector renders correctly 1`] = `
   />
 </div>
 `;
+
+exports[`Filter selector renders correctly with ariaLabel 1`] = `
+<div
+  className="filter-container"
+>
+  <FilterSelector
+    defaultFilter="contains"
+    onChange={[Function]}
+  />
+  <input
+    aria-label="my label"
+    className="form-control filter-input"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;
