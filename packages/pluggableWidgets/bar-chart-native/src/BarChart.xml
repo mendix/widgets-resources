@@ -116,11 +116,10 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="sortOrder" type="enumeration" defaultValue="noSort">
+                <property key="sortOrder" type="enumeration" defaultValue="ascending">
                     <caption>Sort order</caption>
-                    <description>Applicable only to Y axis attributes.</description>
+                    <description>Applicable only to Y axis attributes</description>
                     <enumerationValues>
-                        <enumerationValue key="noSort" >Do not sort data</enumerationValue>
                         <enumerationValue key="ascending" >Ascending</enumerationValue>
                         <enumerationValue key="descending">Descending</enumerationValue>
                     </enumerationValues>

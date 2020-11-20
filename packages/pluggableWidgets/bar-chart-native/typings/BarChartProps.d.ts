@@ -22,7 +22,7 @@ export interface BarSeriesType {
     dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
 }
 
-export type SortOrderEnum = "noSort" | "ascending" | "descending";
+export type SortOrderEnum = "ascending" | "descending";
 
 export interface BarSeriesPreviewType {
     dataSet: DataSetEnum;

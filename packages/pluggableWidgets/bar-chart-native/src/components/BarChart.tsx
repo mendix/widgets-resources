@@ -48,7 +48,8 @@ export function BarChart(props: BarChartProps): ReactElement | null {
 
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
-    const sort = useMemo(() => (sortOrder !== "noSort" ? { sortOrder, sortKey: "y" } : undefined), [sortOrder]);
+    // todo(jordan): why isnt sort working on strings :<
+    const sort = useMemo(() => ({ sortOrder, sortKey: "y" }), [sortOrder]);
 
     const colorScale = { colorScale: "qualitative" } as { colorScale: "qualitative" };
 
