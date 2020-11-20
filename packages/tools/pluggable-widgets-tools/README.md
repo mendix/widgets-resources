@@ -73,5 +73,6 @@ In your `package.json` scripts, use the following command with the desired task:
 ## Migrating from previous versions
 
 -   Webpack bundler is changed to a Rollup. You must migrate your custom configuration.
+-   Update `pluggable-widgets-tools` commands used in your `package.json` file to one of the described in this readme. In particular `start:js`, `start:ts`, and `start:server` commands should be changed to `start:web`.
 -   You now can use named exports in your widget. That is, you can write `export MyWidget;` instead of `export default MyWidget;`.
 -   You should not use react-hot-loader anymore. You can remove the call it, which is anyway replaced with a noop function.

@@ -33,8 +33,6 @@ function getRealCommand(cmd, toolsRoot) {
 
     switch (cmd) {
         case "start:web":
-        case "start:js":
-        case "start:ts":
         case "start:server":
         case "dev:js":
         case "dev:ts":
@@ -80,6 +78,9 @@ function getRealCommand(cmd, toolsRoot) {
             return `cross-env DEBUG=true wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
         case "test:e2e:web":
             return `node ${join(toolsRoot, "scripts/e2e.js")}`;
+        case "start:js":
+        case "start:ts":
+            return "echo This command has no effect, use pluggable-widgets-tools start:web instead!";
         default:
             console.error(`Unknown command passed to MX Widgets Tools script: '${cmd}'`);
             process.exit(1);
