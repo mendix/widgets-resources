@@ -7,6 +7,7 @@ import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
+import url from "@rollup/plugin-url";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
@@ -52,6 +53,7 @@ export default async args => {
             external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
             plugins: [
                 ...getClientComponentPlugins(),
+                url({ include: imagesAndFonts, limit: 100000 }),
                 sass({ output: true, include: /\.(css|sass|scss)$/ }),
                 alias({
                     entries: {
@@ -229,6 +231,16 @@ function onwarn(warning, warn) {
 }
 
 const webExtensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
+const imagesAndFonts = [
+    "**/*.svg",
+    "**/*.png",
+    "**/*.jp(e)?g",
+    "**/*.gif",
+    "**/*.webp",
+    "**/*.ttf",
+    "**/*.woff(2)?",
+    "**/*.eot"
+];
 const nativeExtensions = [".native.js", ".js", ".jsx", ".ts", ".tsx"];
 const nativeExternal = [
     /^mendix\//,
