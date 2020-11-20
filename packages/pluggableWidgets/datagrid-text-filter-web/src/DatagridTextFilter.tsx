@@ -11,6 +11,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
         <FilterComponent
             ariaLabel={props.ariaLabel?.value}
             defaultFilter={props.defaultFilter}
+            delay={props.delay}
             filterDispatcher={filterDispatcher}
             name={props.name}
             placeholder={props.placeholder?.value}

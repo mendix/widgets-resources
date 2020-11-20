@@ -33,6 +33,12 @@
                     <description />
                 </property>
             </propertyGroup>
+            <propertyGroup caption="On change behavior">
+                <property key="delay" type="integer" defaultValue="500">
+                    <caption>Apply after (ms)</caption>
+                    <description>Wait this period before applying then change(s) to the filter</description>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Accessibility">
                 <property key="ariaLabel" type="textTemplate" required="false">
                     <caption>Screen reader caption</caption>

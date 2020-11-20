@@ -1,11 +1,13 @@
-import { createElement, Dispatch, ReactElement, useEffect, useState } from "react";
+import { createElement, Dispatch, ReactElement, useCallback, useEffect, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
 import { ObjectItem, ListAttributeValue } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
+import { debounce } from "../utils/utils";
 
 interface FilterComponentProps {
     ariaLabel?: string;
     defaultFilter: DefaultFilterEnum;
+    delay: number;
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     name?: string;
     placeholder?: string;
@@ -16,9 +18,11 @@ interface FilterComponentProps {
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
     const [value, setValue] = useState("");
+    const [valueInput, setValueInput] = useState("");
 
     useEffect(() => {
         if (props.value) {
+            setValueInput(props.value);
             setValue(props.value);
         }
     }, [props.value]);
@@ -57,16 +61,24 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         }
     }, [props.filterDispatcher, value, type]);
 
+    const onChange = useCallback(
+        debounce((value: string) => setValue(value), props.delay),
+        [props.delay]
+    );
+
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             <FilterSelector name={props.name} defaultFilter={props.defaultFilter} onChange={setType} />
             <input
-                placeholder={props.placeholder}
-                value={value}
-                className="form-control filter-input"
-                onChange={e => setValue(e.target.value)}
-                type="text"
                 aria-label={props.ariaLabel}
+                className="form-control filter-input"
+                onChange={e => {
+                    setValueInput(e.target.value);
+                    onChange(e.target.value);
+                }}
+                placeholder={props.placeholder}
+                type="text"
+                value={valueInput}
             />
         </div>
     );
