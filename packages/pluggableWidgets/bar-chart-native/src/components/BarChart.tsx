@@ -4,6 +4,7 @@ import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryStack } fro
 
 import { BarChartStyle } from "../ui/Styles";
 import { SortOrderEnum } from "../../typings/BarChartProps";
+import { Legend } from "../../../line-chart-native/src/components/Legend";
 
 export interface BarChartProps {
     series: BarChartSeries[];
@@ -11,6 +12,7 @@ export interface BarChartProps {
     style: BarChartStyle;
     presentation: string;
     showLegend: boolean;
+    showLabels: boolean;
     xAxisLabel?: string;
     yAxisLabel?: string;
     warningPrefix?: string;
@@ -39,9 +41,15 @@ export interface BarDataPoint<X extends number | Date | string, Y extends number
     y: Y;
 }
 
-export function BarChart(props: BarChartProps): ReactElement | null {
-    const { series, style, warningPrefix, presentation, sortOrder } = props;
-
+export function BarChart({
+    presentation,
+    series,
+    showLabels,
+    showLegend,
+    sortOrder,
+    style,
+    warningPrefix
+}: BarChartProps): ReactElement | null {
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
     const warningMessagePrefix = useMemo(() => (warningPrefix ? warningPrefix + "i" : "I"), [warningPrefix]);
@@ -67,15 +75,16 @@ export function BarChart(props: BarChartProps): ReactElement | null {
         }
 
         const bars = series.map((series, index) => (
-            <VictoryBar horizontal key={index} data={series.dataPoints} labels={({ datum }) => datum.y} />
+            <VictoryBar
+                horizontal
+                key={index}
+                data={series.dataPoints}
+                {...(showLabels ? { labels: ({ datum }: { datum: any }) => datum.x } : undefined)}
+            />
         ));
 
         if (presentation === "grouped") {
-            return (
-                <VictoryGroup offset={20} {...conditionalProps}>
-                    {bars}
-                </VictoryGroup>
-            );
+            return <VictoryGroup {...conditionalProps}>{bars}</VictoryGroup>;
         }
 
         return <VictoryStack {...conditionalProps}>{bars}</VictoryStack>;
@@ -132,6 +141,7 @@ export function BarChart(props: BarChartProps): ReactElement | null {
                             </View>
                         </View>
                     </View>
+                    {showLegend ? <Legend style={style} series={series} /> : null}
                 </View>
             )}
         </View>

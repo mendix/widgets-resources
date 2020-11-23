@@ -126,6 +126,10 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Chart settings">
+                <property key="showlabels" type="boolean" defaultValue="true">
+                    <caption>Show labels</caption>
+                    <description />
+                </property>
                 <property key="showLegend" type="boolean" defaultValue="true">
                     <caption>Show legend</caption>
                     <description />

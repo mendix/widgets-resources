@@ -43,6 +43,7 @@ export interface BarChartProps<Style> {
     presentation: PresentationEnum;
     barSeries: BarSeriesType[];
     sortOrder: SortOrderEnum;
+    showlabels: boolean;
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
@@ -54,6 +55,7 @@ export interface BarChartPreviewProps {
     presentation: PresentationEnum;
     barSeries: BarSeriesPreviewType[];
     sortOrder: SortOrderEnum;
+    showlabels: boolean;
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
