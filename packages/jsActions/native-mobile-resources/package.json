@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@react-native-community/cameraroll": "1.4.1",
-    "@react-native-firebase/messaging": "^7.9.1",
+    "@react-native-firebase/messaging": "^8.0.1",
     "react-native-device-info": "7.0.2",
     "react-native-image-picker": "2.3.1",
     "react-native-inappbrowser-reborn": "3.3.4",

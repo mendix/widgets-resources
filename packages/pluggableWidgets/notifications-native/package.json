@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",
-    "@react-native-firebase/messaging": "^7.9.1"
+    "@react-native-firebase/messaging": "^8.0.1"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
