@@ -1,0 +1,59 @@
+$primary-color: #264ae5;
+$hover-color: #f8f8f8;
+$background-color: #fff;
+$selected-color: #dadcde;
+$border-color: #ced0d3;
+
+.dropdown-container {
+    flex: 1;
+
+    .dropdown-triggerer {
+        caret-color: transparent;
+        cursor: pointer;
+    }
+
+    .dropdown-list {
+        position: absolute;
+        width: max-content;
+        left: 0;
+        margin: 0 8px;
+        padding: 0;
+        background: $background-color;
+        z-index: 99;
+        border-radius: 8px;
+        border: 1px solid $border-color;
+        list-style-type: none;
+        -webkit-box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
+            0 5px 5px -3px rgba(0, 0, 0, 0.08);
+        -moz-box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
+            0 5px 5px -3px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
+            0 5px 5px -3px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+
+        li {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            line-height: 32px;
+            cursor: pointer;
+            padding: 0 8px;
+
+            .filter-label {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            &.filter-selected {
+                background-color: $hover-color;
+                color: $primary-color;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: $hover-color;
+            }
+        }
+    }
+}
