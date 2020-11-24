@@ -67,34 +67,32 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 aria-expanded={show}
                 aria-controls={`${props.name}-dropdown-list`}
             />
-            {show && (
-                <ul
-                    id={`${props.name}-dropdown-list`}
-                    className="dropdown-list"
-                    ref={listRef}
-                    style={{ width: dropdownWidth }}
-                    role="menu"
-                    data-focusindex={0}
-                >
-                    {props.options.map((option, index) => (
-                        <li
-                            className={value === option.value ? "filter-selected" : ""}
-                            key={index}
-                            onClick={() => onClick(option)}
-                            onKeyDown={e => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    e.preventDefault();
-                                    onClick(option);
-                                }
-                            }}
-                            role="menuitem"
-                            tabIndex={0}
-                        >
-                            <div className="filter-label">{option.caption}</div>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <ul
+                id={`${props.name}-dropdown-list`}
+                className={`dropdown-list ${show && "dropdown-list-visible"}`}
+                ref={listRef}
+                style={{ width: dropdownWidth }}
+                role="menu"
+                data-focusindex={0}
+            >
+                {options.map((option, index) => (
+                    <li
+                        className={value === option.value ? "filter-selected" : ""}
+                        key={index}
+                        onClick={() => onClick(option)}
+                        onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                onClick(option);
+                            }
+                        }}
+                        role="menuitem"
+                        tabIndex={0}
+                    >
+                        <div className="filter-label">{option.caption}</div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }

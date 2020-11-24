@@ -38,12 +38,18 @@ $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='
         box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
             0 5px 5px -3px rgba(0, 0, 0, 0.08);
         overflow: hidden;
+        display: none;
+
+        &.dropdown-list-visible {
+            display: block;
+        }
 
         li {
             display: flex;
             align-items: center;
             font-weight: normal;
             line-height: 32px;
+            min-height: 32px;
             cursor: pointer;
             padding: 0 8px;
 
