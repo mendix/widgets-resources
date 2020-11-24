@@ -2,12 +2,17 @@ import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, 
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { useOnClickOutside } from "../utils/utils";
 
+interface Option {
+    caption: string;
+    value: string;
+}
+
 interface FilterComponentProps {
     ariaLabel?: string;
     emptyOptionCaption?: string;
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     name?: string;
-    options: Array<{ caption: string; value: string }>;
+    options: Option[];
     tabIndex?: number;
     value?: string;
 }
@@ -21,12 +26,17 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [dropdownWidth, setDropdownWidth] = useState(0);
     useOnClickOutside(listRef, () => setShow(false));
 
+    const [options, setOptions] = useState<Option[]>([{ caption: "", value: "" }]);
+
     useEffect(() => {
-        if (props.value) {
-            setValueInput(props.value);
-            setValue(props.value);
-        }
-    }, [props.value]);
+        setOptions([{ caption: props.emptyOptionCaption ?? "", value: "" }, ...props.options]);
+    }, [props.options, props.emptyOptionCaption]);
+
+    useEffect(() => {
+        const selectedOption = options.find(option => option.value === props.value) ?? options[0];
+        setValueInput(selectedOption.caption);
+        setValue(selectedOption.value);
+    }, [props.value, options]);
 
     useEffect(() => {
         if (props.filterDispatcher) {
@@ -45,7 +55,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         }
     }, [props.filterDispatcher, value]);
 
-    const onClick = useCallback((option: { caption: string; value: string }) => {
+    const onClick = useCallback((option: Option) => {
         setValueInput(option.caption);
         setValue(option.value);
         setShow(false);
