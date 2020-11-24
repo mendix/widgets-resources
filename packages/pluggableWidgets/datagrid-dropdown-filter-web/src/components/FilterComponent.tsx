@@ -41,16 +41,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                filter: (item, attr): boolean => {
-                    if (!value) {
-                        return true;
-                    }
-                    const dataValue = attr(item).displayValue.toLowerCase();
-                    const filterValue = value.toLowerCase();
-                    console.warn(dataValue, filterValue);
-                    // TODO: filter using selected option.value
-                    return true;
-                }
+                filter: (item, attr): boolean =>
+                    value ? attr(item).value?.toString().toLocaleLowerCase() === value.toLocaleLowerCase() : true
             });
         }
     }, [props.filterDispatcher, value]);
@@ -61,6 +53,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         setShow(false);
     }, []);
 
+    // TODO: after selecting via keyboard, it jumps to end
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0}>
             <input
