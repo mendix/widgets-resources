@@ -3,6 +3,7 @@ $hover-color: #f8f8f8;
 $background-color: #fff;
 $selected-color: #dadcde;
 $border-color: #ced0d3;
+$arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
 
 .dropdown-container {
     flex: 1;
@@ -10,6 +11,13 @@ $border-color: #ced0d3;
     .dropdown-triggerer {
         caret-color: transparent;
         cursor: pointer;
+
+        background-image: url($arrow);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-position-x: right;
+        background-position-y: center;
+        background-origin: content-box;
     }
 
     .dropdown-list {
