@@ -93,20 +93,15 @@ export const getPreview = (values: DatagridPreviewProps): any => {
                 borders: true,
                 grow: column.width === "manual" ? column.size : 1,
                 children: [
-                    {
-                        type: "Container",
-                        children: [
-                            { type: "text", bold: true, fontSize: 10, content: header.length > 0 ? header : "Header" },
-                            ...(values.columnsFilterable && column.filterable === "custom"
-                                ? [
-                                      {
-                                          type: "DropZone",
-                                          property: column.customFilter
-                                      }
-                                  ]
-                                : [])
-                        ]
-                    }
+                    { type: "text", bold: true, fontSize: 10, content: header.length > 0 ? header : "Header" },
+                    ...(values.columnsFilterable && column.filterable === "custom"
+                        ? [
+                              {
+                                  type: "DropZone",
+                                  property: column.customFilter
+                              }
+                          ]
+                        : [])
                 ]
             };
             return values.columns.length > 0
