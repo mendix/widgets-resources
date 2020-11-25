@@ -29,6 +29,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
         (value: DefaultFilterEnum) => {
             setValue(value);
             props.onChange(value);
+            setShow(false);
         },
         [props.onChange]
     );
