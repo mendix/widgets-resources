@@ -1,4 +1,11 @@
-import { hidePropertyIn, Properties } from "@widgets-resources/piw-utils";
+import {
+    ContainerProps,
+    DropZoneProps,
+    hidePropertyIn,
+    Properties,
+    RowLayoutProps,
+    StructurePreviewProps
+} from "@widgets-resources/piw-utils";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
 export function getProperties(values: DatagridPreviewProps, defaultProperties: Properties): Properties {
@@ -41,7 +48,7 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
     return defaultProperties;
 }
 
-export const getPreview = (values: DatagridPreviewProps): any => {
+export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps => {
     const columnProps: ColumnsPreviewType[] =
         values.columns && values.columns.length > 0
             ? values.columns
@@ -62,44 +69,47 @@ export const getPreview = (values: DatagridPreviewProps): any => {
                       sortable: false
                   }
               ];
-    const columns = {
+    const columns: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        children: columnProps.map(column => ({
-            type: "Container",
-            borders: true,
-            grow: column.width === "manual" ? column.size : 1,
-            children: [
-                column.hasWidgets
-                    ? {
-                          type: "DropZone",
-                          property: column.content
-                      }
-                    : {
-                          type: "text",
-                          content: `{${column.attribute ?? "Attribute"}}`,
-                          fontSize: 10
-                      }
-            ]
-        }))
+        children: columnProps.map(
+            column =>
+                ({
+                    type: "Container",
+                    borders: true,
+                    grow: column.width === "manual" && column.size ? column.size : 1,
+                    children: [
+                        column.hasWidgets
+                            ? {
+                                  type: "DropZone",
+                                  property: column.content
+                              }
+                            : {
+                                  type: "text",
+                                  content: `{${column.attribute ?? "Attribute"}}`,
+                                  fontSize: 10
+                              }
+                    ]
+                } as ContainerProps)
+        )
     };
-    const headers = {
+    const headers: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
         children: columnProps.map(column => {
             const header = column.header.trim();
-            const content = {
+            const content: ContainerProps = {
                 type: "Container",
                 borders: true,
-                grow: column.width === "manual" ? column.size : 1,
+                grow: column.width === "manual" && column.size ? column.size : 1,
                 children: [
-                    { type: "text", bold: true, fontSize: 10, content: header.length > 0 ? header : "Header" },
+                    { type: "Text", bold: true, fontSize: 10, content: header.length > 0 ? header : "Header" },
                     ...(values.columnsFilterable && column.filterable === "custom"
                         ? [
                               {
                                   type: "DropZone",
                                   property: column.customFilter
-                              }
+                              } as DropZoneProps
                           ]
                         : [])
                 ]
@@ -110,7 +120,7 @@ export const getPreview = (values: DatagridPreviewProps): any => {
                       object: column,
                       child: {
                           type: "Container",
-                          grow: column.width === "manual" ? column.size : 1,
+                          grow: column.width === "manual" && column.size ? column.size : 1,
                           children: [content]
                       }
                   }
