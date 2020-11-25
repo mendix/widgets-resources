@@ -26,14 +26,9 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         display: flex;
         align-items: flex-start;
         font-weight: 600;
-        border-style: solid;
-        border-color: $border-color;
-        border-top-width: 0;
-        border-right: 0;
-        border-bottom-width: 1px;
-        border-left: 0;
         background-color: $background-color;
-        padding: 16px 8px;
+        padding: 16px 8px 0 8px;
+        margin-bottom: 16px;
         position: -webkit-sticky; /* Safari */
         position: sticky;
         top: 0;
@@ -164,6 +159,11 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         border-bottom-style: solid;
         background-color: $background-color;
         overflow: hidden;
+
+        &.td-borders {
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
 
         &:focus {
             outline: none;
