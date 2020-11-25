@@ -6,14 +6,30 @@ jest.useFakeTimers();
 
 describe("Filter component", () => {
     it("renders correctly", () => {
-        const component = shallow(<FilterComponent defaultFilter="equal" delay={500} filterDispatcher={jest.fn()} />);
+        const component = shallow(
+            <FilterComponent adjustable defaultFilter="equal" delay={500} filterDispatcher={jest.fn()} />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("renders correctly when not adjustable by user", () => {
+        const component = shallow(
+            <FilterComponent adjustable={false} defaultFilter="equal" delay={500} filterDispatcher={jest.fn()} />
+        );
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders correctly with ariaLabel", () => {
         const component = shallow(
-            <FilterComponent ariaLabel="my label" defaultFilter="equal" delay={500} filterDispatcher={jest.fn()} />
+            <FilterComponent
+                ariaLabel="my label"
+                adjustable
+                defaultFilter="equal"
+                delay={500}
+                filterDispatcher={jest.fn()}
+            />
         );
 
         expect(component).toMatchSnapshot();
@@ -22,7 +38,7 @@ describe("Filter component", () => {
     it("calls filterDispatcher when value changes", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(
-            <FilterComponent defaultFilter="equal" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent defaultFilter="equal" adjustable delay={500} filterDispatcher={filterDispatcher} />
         );
 
         const input = component.find("input");
@@ -34,7 +50,7 @@ describe("Filter component", () => {
     it("debounces calls for filterDispatcher when value changes with numbers", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(
-            <FilterComponent defaultFilter="equal" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent defaultFilter="equal" adjustable delay={500} filterDispatcher={filterDispatcher} />
         );
 
         // Initial call with default filter
@@ -58,7 +74,7 @@ describe("Filter component", () => {
     it("debounces calls for filterDispatcher when value changes with decimals", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(
-            <FilterComponent defaultFilter="equal" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent adjustable defaultFilter="equal" delay={500} filterDispatcher={filterDispatcher} />
         );
 
         // Initial call with default filter
@@ -82,7 +98,7 @@ describe("Filter component", () => {
     it("debounces calls for filterDispatcher when value changes with invalid input", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(
-            <FilterComponent defaultFilter="equal" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent adjustable defaultFilter="equal" delay={500} filterDispatcher={filterDispatcher} />
         );
 
         // Initial call with default filter

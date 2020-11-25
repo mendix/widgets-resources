@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",
-    "big.js": "^5.2.2"
+    "big.js": "^5.2.2",
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

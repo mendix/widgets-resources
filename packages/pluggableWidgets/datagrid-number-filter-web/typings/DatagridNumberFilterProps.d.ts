@@ -16,6 +16,7 @@ export interface DatagridNumberFilterContainerProps {
     defaultValue?: DynamicValue<BigJs.Big>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
+    adjustable: boolean;
     delay: number;
     ariaLabel?: DynamicValue<string>;
 }
@@ -26,6 +27,7 @@ export interface DatagridNumberFilterPreviewProps {
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;
     placeholder: string;
+    adjustable: boolean;
     delay: number | null;
     ariaLabel: string;
 }

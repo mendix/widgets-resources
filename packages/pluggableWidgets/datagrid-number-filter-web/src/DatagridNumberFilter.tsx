@@ -9,6 +9,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     const filterDispatcher = useFilterDispatcher();
     return (
         <FilterComponent
+            adjustable={props.adjustable}
             ariaLabel={props.ariaLabel?.value}
             defaultFilter={props.defaultFilter}
             delay={props.delay}

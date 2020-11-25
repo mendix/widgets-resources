@@ -6,6 +6,7 @@ import Big from "big.js";
 export function preview(props: DatagridNumberFilterPreviewProps): ReactElement {
     return (
         <FilterComponent
+            adjustable={props.adjustable}
             defaultFilter={props.defaultFilter}
             delay={props.delay ?? 500}
             filterDispatcher={() => ({})}

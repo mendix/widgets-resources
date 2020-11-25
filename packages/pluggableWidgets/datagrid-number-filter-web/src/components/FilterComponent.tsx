@@ -4,8 +4,10 @@ import { ListAttributeValue, ObjectItem } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
 import Big from "big.js";
+import classNames from "classnames";
 
 interface FilterComponentProps {
+    adjustable: boolean;
     ariaLabel?: string;
     defaultFilter: DefaultFilterEnum;
     delay: number;
@@ -63,10 +65,19 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
-            <FilterSelector name={props.name} defaultFilter={props.defaultFilter} onChange={setType} />
+            {props.adjustable && (
+                <FilterSelector
+                    name={props.name}
+                    defaultFilter={props.defaultFilter}
+                    onChange={type => {
+                        setType(type);
+                        focusInput();
+                    }}
+                />
+            )}
             <input
                 aria-label={props.ariaLabel}
-                className="form-control filter-input"
+                className={classNames("form-control", { "filter-input": props.adjustable })}
                 onChange={e => {
                     const value = e.target.value;
                     if (value && !isNaN(Number(value))) {
