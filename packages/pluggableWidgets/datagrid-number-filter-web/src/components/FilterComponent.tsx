@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, useCallback, useEffect, useState } from "react";
+import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
@@ -22,6 +22,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
     const [value, setValue] = useState<BigJs.Big | undefined>(undefined);
     const [valueInput, setValueInput] = useState<string | undefined>(undefined);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         if (props.value) {
@@ -63,6 +64,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         [props.delay]
     );
 
+    const focusInput = useCallback(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [inputRef]);
+
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             {props.adjustable && (
@@ -89,6 +96,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     }
                 }}
                 placeholder={props.placeholder}
+                ref={inputRef}
                 type="number"
                 value={valueInput}
             />
