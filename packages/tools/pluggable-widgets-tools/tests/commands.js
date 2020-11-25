@@ -69,6 +69,7 @@ async function main() {
         )
     ).filter(f => f);
 
+    console.log("All done!");
     rm("-r", toolsPackagePath, ...workDirs);
 
     if (failures.length) {
@@ -208,27 +209,31 @@ async function main() {
         }
 
         async function testStart() {
-            const startProcess = exec("npm start", { cwd: workDir });
+            const startProcess = exec("npm start", { cwd: workDir, env: { ...process.env, NO_COLOR: "true" } });
 
             try {
                 await new Promise((resolve, reject) => {
-                    startProcess.stdout.on("data", data => {
-                        if (/\berror\b/i.test(data)) {
+                    let inProgress = false;
+                    startProcess.stdout.on("data", onOutput);
+                    startProcess.stderr.on("data", onOutput);
+                    startProcess.on("exit", exitCode => {
+                        reject(new Error(`Exited with status ${exitCode}`));
+                    });
+                    function onOutput(data) {
+                        if (/error/i.test(data)) {
                             reject(new Error(`Received error ${data}`));
-                        } else if (
-                            data.includes("Finished 'copyToDeployment'") ||
-                            data.includes("Project is running at http://localhost:3000/")
-                        ) {
-                            console.log(`[${widgetName}] Start succeeded!`);
-                            resolve();
+                        } else if (/\bbundles /.test(data)) {
+                            inProgress = true;
+                        } else if (/\bcreated .* in /.test(data)) {
+                            inProgress = false;
+                            setTimeout(() => {
+                                if (!inProgress) {
+                                    console.log(`[${widgetName}] Start succeeded!`);
+                                    resolve();
+                                }
+                            }, 100);
                         }
-                    });
-                    startProcess.stderr.on("data", data => {
-                        reject(new Error(`Received error output: ${data}`));
-                    });
-                    startProcess.on("exit", code => {
-                        reject(new Error(`Exited with status ${code}`));
-                    });
+                    }
                 });
             } finally {
                 try {

@@ -59,5 +59,8 @@ jobs:
                 node-version: ${{ matrix.node }}
             - name: "Installing dependencies"
               run: npm install
+            - name: Increase number of watchers
+              if: startsWith(matrix.os, 'ubuntu')
+              run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
             - name: "Running PIW-Tools commands tests"
               run: npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
