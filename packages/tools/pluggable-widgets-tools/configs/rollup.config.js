@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync } from "fs";
-import { join } from "path";
+import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
@@ -8,6 +8,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
+import { red, yellow } from "colors";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
@@ -154,7 +155,7 @@ export default async args => {
             nodeResolve({ browser: true, preferBuiltins: false }),
             isTypescript
                 ? typescript({
-                      noEmitOnError: true,
+                      noEmitOnError: !args.watch,
                       sourceMap: config.sourceMaps,
                       inlineSources: config.sourceMaps,
                       target: "es2019" // we transpile the result with babel anyway, see below
@@ -219,16 +220,29 @@ export default async args => {
             args.watch && platform === "web" && !production && projectPath ? livereload() : null
         ];
     }
-};
 
-function onwarn(warning, warn) {
-    if (["CIRCULAR_DEPENDENCY", "THIS_IS_UNDEFINED", "UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
-        warn(warning);
-    } else {
-        console.error(warning);
-        process.exit(1);
+    function onwarn(warning) {
+        const description =
+            (warning.plugin ? `(${warning.plugin} plugin) ` : "") +
+            (warning.loc
+                ? `${relative(sourcePath, warning.loc.file)} (${warning.loc.line}:${warning.loc.column}) `
+                : "") +
+            `Error: ${warning.message}` +
+            (warning.frame ? warning.frame : "");
+
+        // Many rollup warnings are indication of some critical issue, so we should treat them as errors,
+        // except a short white-list which we know is safe _and_ not easily fixable.
+        if (["CIRCULAR_DEPENDENCY", "THIS_IS_UNDEFINED", "UNUSED_EXTERNAL_IMPORT"].includes(warning.code)) {
+            console.warn(yellow(description));
+        } else if (args.watch) {
+            // Do not break watch mode because of an error. Also don't use console.error, since it is overwritten by rollup
+            console.warn(red(description));
+        } else {
+            console.error(red(description));
+            process.exit(1);
+        }
     }
-}
+};
 
 const webExtensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
 const imagesAndFonts = [
