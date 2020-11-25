@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Filter selector renders correctly 1`] = `
+exports[`Filter component renders correctly 1`] = `
 <div
   className="filter-container"
   data-focusindex={0}
@@ -18,7 +18,7 @@ exports[`Filter selector renders correctly 1`] = `
 </div>
 `;
 
-exports[`Filter selector renders correctly when not adjustable by user 1`] = `
+exports[`Filter component renders correctly when not adjustable by user 1`] = `
 <div
   className="filter-container"
   data-focusindex={0}
@@ -32,7 +32,7 @@ exports[`Filter selector renders correctly when not adjustable by user 1`] = `
 </div>
 `;
 
-exports[`Filter selector renders correctly with ariaLabel 1`] = `
+exports[`Filter component renders correctly with ariaLabel 1`] = `
 <div
   className="filter-container"
   data-focusindex={0}

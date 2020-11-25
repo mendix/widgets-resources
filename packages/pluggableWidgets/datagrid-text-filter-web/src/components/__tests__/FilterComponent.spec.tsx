@@ -4,7 +4,7 @@ import { FilterComponent } from "../FilterComponent";
 
 jest.useFakeTimers();
 
-describe("Filter selector", () => {
+describe("Filter component", () => {
     it("renders correctly", () => {
         const component = shallow(
             <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
