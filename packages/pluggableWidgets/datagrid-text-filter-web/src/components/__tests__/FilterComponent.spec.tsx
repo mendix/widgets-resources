@@ -7,7 +7,15 @@ jest.useFakeTimers();
 describe("Filter selector", () => {
     it("renders correctly", () => {
         const component = shallow(
-            <FilterComponent defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
+            <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("renders correctly when not adjustable by user", () => {
+        const component = shallow(
+            <FilterComponent adjustable={false} defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
         );
 
         expect(component).toMatchSnapshot();
@@ -15,7 +23,13 @@ describe("Filter selector", () => {
 
     it("renders correctly with ariaLabel", () => {
         const component = shallow(
-            <FilterComponent ariaLabel="my label" defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
+            <FilterComponent
+                adjustable
+                ariaLabel="my label"
+                defaultFilter="contains"
+                delay={500}
+                filterDispatcher={jest.fn()}
+            />
         );
 
         expect(component).toMatchSnapshot();
@@ -24,7 +38,7 @@ describe("Filter selector", () => {
     it("calls filterDispatcher when value changes", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(
-            <FilterComponent defaultFilter="contains" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={filterDispatcher} />
         );
 
         const input = component.find("input");
@@ -36,7 +50,7 @@ describe("Filter selector", () => {
     it("debounces calls for filterDispatcher when value changes", () => {
         const filterDispatcher = jest.fn();
         const component = shallow(
-            <FilterComponent defaultFilter="contains" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={filterDispatcher} />
         );
 
         // Initial call with default filter

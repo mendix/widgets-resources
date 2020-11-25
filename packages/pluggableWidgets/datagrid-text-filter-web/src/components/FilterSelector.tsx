@@ -1,5 +1,6 @@
 import { createElement, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
+import classNames from "classnames";
 
 const options: Array<{ value: DefaultFilterEnum; label: string }> = [
     { value: "contains", label: "Contains" },
@@ -35,7 +36,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
         <div className="filter-selector">
             <div className="filter-selector-content">
                 <button
-                    className={`btn btn-default filter-selector-button button-icon ${value}`}
+                    className={classNames("btn btn-default filter-selector-button button-icon", value)}
                     onClick={() => setShow(show => !show)}
                     aria-haspopup
                     aria-expanded={show}
@@ -53,7 +54,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                     >
                         {options.map((option, index) => (
                             <li
-                                className={value === option.value ? "filter-selected" : ""}
+                                className={classNames({ "filter-selected": value === option.value })}
                                 key={index}
                                 onClick={() => onClick(option.value)}
                                 onKeyDown={e => {
@@ -65,7 +66,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                                 role="menuitem"
                                 tabIndex={0}
                             >
-                                <div className={`filter-icon ${option.value}`} aria-hidden />
+                                <div className={classNames("filter-icon", option.value)} aria-hidden />
                                 <div className="filter-label">{option.label}</div>
                             </li>
                         ))}

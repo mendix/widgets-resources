@@ -32,6 +32,10 @@
                     <caption>Placeholder</caption>
                     <description />
                 </property>
+                <property key="adjustable" type="boolean" defaultValue="true">
+                    <caption>Adjustable by user</caption>
+                    <description />
+                </property>
             </propertyGroup>
             <propertyGroup caption="On change behavior">
                 <property key="delay" type="integer" defaultValue="500">
@@ -39,6 +43,8 @@
                     <description>Wait this period before applying then change(s) to the filter</description>
                 </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
             <propertyGroup caption="Accessibility">
                 <property key="ariaLabel" type="textTemplate" required="false">
                     <caption>Screen reader caption</caption>

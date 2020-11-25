@@ -9,6 +9,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     const filterDispatcher = useFilterDispatcher();
     return (
         <FilterComponent
+            adjustable={props.adjustable}
             ariaLabel={props.ariaLabel?.value}
             defaultFilter={props.defaultFilter}
             delay={props.delay}

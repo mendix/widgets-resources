@@ -3,8 +3,10 @@ import { FilterSelector } from "./FilterSelector";
 import { ObjectItem, ListAttributeValue } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 import { debounce } from "../utils/utils";
+import classNames from "classnames";
 
 interface FilterComponentProps {
+    adjustable: boolean;
     ariaLabel?: string;
     defaultFilter: DefaultFilterEnum;
     delay: number;
@@ -68,10 +70,19 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
-            <FilterSelector name={props.name} defaultFilter={props.defaultFilter} onChange={setType} />
+            {props.adjustable && (
+                <FilterSelector
+                    name={props.name}
+                    defaultFilter={props.defaultFilter}
+                    onChange={type => {
+                        setType(type);
+                        focusInput();
+                    }}
+                />
+            )}
             <input
                 aria-label={props.ariaLabel}
-                className="form-control filter-input"
+                className={classNames("form-control", { "filter-input": props.adjustable })}
                 onChange={e => {
                     setValueInput(e.target.value);
                     onChange(e.target.value);

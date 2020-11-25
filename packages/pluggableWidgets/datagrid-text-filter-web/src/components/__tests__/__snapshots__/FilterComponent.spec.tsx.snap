@@ -18,6 +18,20 @@ exports[`Filter selector renders correctly 1`] = `
 </div>
 `;
 
+exports[`Filter selector renders correctly when not adjustable by user 1`] = `
+<div
+  className="filter-container"
+  data-focusindex={0}
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;
+
 exports[`Filter selector renders correctly with ariaLabel 1`] = `
 <div
   className="filter-container"
