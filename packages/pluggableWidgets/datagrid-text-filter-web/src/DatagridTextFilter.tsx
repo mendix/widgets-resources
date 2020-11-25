@@ -3,7 +3,7 @@ import { DatagridTextFilterContainerProps } from "../typings/DatagridTextFilterP
 
 import "./ui/DatagridTextFilter.scss";
 import { FilterComponent } from "./components/FilterComponent";
-import { useFilterDispatcher } from "../../datagrid-web/src/components/provider";
+import { useFilterDispatcher } from "./utils/provider";
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {
     const filterDispatcher = useFilterDispatcher();
