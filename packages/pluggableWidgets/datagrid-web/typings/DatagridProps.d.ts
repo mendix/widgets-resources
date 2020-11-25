@@ -8,21 +8,18 @@ import { DynamicValue, EditableValue, ListValue, ListAttributeValue, ListExpress
 
 export type WidthEnum = "autoFill" | "autoFit" | "manual";
 
-export type FilterableEnum = "yes" | "no" | "custom";
-
 export type HidableEnum = "yes" | "hidden" | "no";
 
 export interface ColumnsType {
     attribute: ListAttributeValue<string | BigJs.Big | boolean | Date>;
     header: DynamicValue<string>;
     hasWidgets: boolean;
+    filter?: ReactNode;
     content?: ListWidgetValue;
     width: WidthEnum;
     size: number;
     columnClass?: ListExpressionValue<string>;
     sortable: boolean;
-    filterable: FilterableEnum;
-    customFilter?: ReactNode;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
@@ -30,19 +27,16 @@ export interface ColumnsType {
 
 export type PagingPositionEnum = "bottom" | "top";
 
-export type FilterMethodEnum = "startsWith" | "contains" | "endsWith";
-
 export interface ColumnsPreviewType {
     attribute: string;
     header: string;
     hasWidgets: boolean;
+    filter: { widgetCount: number; renderer: ComponentType };
     content: { widgetCount: number; renderer: ComponentType };
     width: WidthEnum;
     size: number | null;
     columnClass: string;
     sortable: boolean;
-    filterable: FilterableEnum;
-    customFilter: { widgetCount: number; renderer: ComponentType };
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
@@ -56,16 +50,11 @@ export interface DatagridContainerProps {
     datasource: ListValue;
     columns: ColumnsType[];
     rowClass?: ListExpressionValue<string>;
-    showHeader: boolean;
-    headerWidgets?: ReactNode;
-    showFooter: boolean;
-    footerWidgets?: ReactNode;
+    columnsFilterable: boolean;
     pageSize: number;
     pagingEnabled: boolean;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
-    columnsFilterable: boolean;
-    filterMethod: FilterMethodEnum;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
@@ -78,16 +67,11 @@ export interface DatagridPreviewProps {
     datasource: {} | null;
     columns: ColumnsPreviewType[];
     rowClass: string;
-    showHeader: boolean;
-    headerWidgets: { widgetCount: number; renderer: ComponentType };
-    showFooter: boolean;
-    footerWidgets: { widgetCount: number; renderer: ComponentType };
+    columnsFilterable: boolean;
     pageSize: number | null;
     pagingEnabled: boolean;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
-    columnsFilterable: boolean;
-    filterMethod: FilterMethodEnum;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;

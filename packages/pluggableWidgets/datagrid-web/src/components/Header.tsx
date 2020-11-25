@@ -91,9 +91,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     {props.column.render("Header")}
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
-                {props.filterable &&
-                    props.column.canFilter &&
-                    (props.column.customFilter ? props.column.customFilter : props.column.render("Filter"))}
+                {props.filterable && props.column.customFilter ? props.column.customFilter : null}
             </div>
             {props.resizable && props.column.canResize && <ColumnResizer setColumnWidth={props.setColumnWidth} />}
         </div>

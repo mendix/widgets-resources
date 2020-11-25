@@ -17,13 +17,11 @@ function mockColumnSelectorProps(): ColumnSelectorProps<object> {
             {
                 id: "id",
                 Header: "Test",
-                filter: "text",
                 isVisible: false,
                 canHide: false,
                 canDrag: false,
                 canResize: false,
-                disableSortBy: false,
-                disableFilters: false
+                disableSortBy: false
             }
         ] as Array<ColumnInstance<object>>,
         setHiddenColumns: jest.fn()

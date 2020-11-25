@@ -54,10 +54,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={items}
-            filterMethod={props.filterMethod}
-            footerWidgets={<div className="footer">{props.footerWidgets}</div>}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
-            headerWidgets={<div className="header">{props.headerWidgets}</div>}
             numberOfItems={props.datasource.totalCount}
             page={currentPage}
             pageSize={props.pageSize}
@@ -79,13 +76,6 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 },
                 [props.columns, props.rowClass]
             )}
-            valueForFilter={useCallback(
-                (value, columnIndex) => {
-                    const column = props.columns[columnIndex];
-                    return column.attribute(value).displayValue;
-                },
-                [props.columns]
-            )}
             valueForSort={useCallback(
                 (value, columnIndex) => {
                     const column = props.columns[columnIndex];
@@ -98,7 +88,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     const column = props.columns[columnIndex];
                     const [, setValue] = customFiltersState[columnIndex];
                     return renderWrapper(
-                        <FilterContext.Provider value={setValue}>{column.customFilter}</FilterContext.Provider>
+                        <FilterContext.Provider value={setValue}>{column.filter}</FilterContext.Provider>
                     );
                 },
                 [props.columns, props.datasource]
