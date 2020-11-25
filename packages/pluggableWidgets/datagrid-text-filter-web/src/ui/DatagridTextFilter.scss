@@ -79,12 +79,10 @@ $border-color: #ced0d3;
                 &.filter-selected {
                     background-color: $hover-color;
                     color: $primary-color;
-                    font-weight: bold;
                 }
 
                 &:hover, &:focus {
                     background-color: $hover-color;
-                    font-weight: 400;
                 }
             }
         }
