@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, useCallback, useEffect, useState } from "react";
+import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
 import { ObjectItem, ListAttributeValue } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
@@ -21,6 +21,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
     const [value, setValue] = useState("");
     const [valueInput, setValueInput] = useState("");
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         if (props.value) {
@@ -68,6 +69,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         [props.delay]
     );
 
+    const focusInput = useCallback(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+        }
+    }, [inputRef]);
+
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             {props.adjustable && (
@@ -88,6 +95,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     onChange(e.target.value);
                 }}
                 placeholder={props.placeholder}
+                ref={inputRef}
                 type="text"
                 value={valueInput}
             />
