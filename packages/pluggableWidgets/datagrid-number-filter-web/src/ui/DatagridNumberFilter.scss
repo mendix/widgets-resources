@@ -1,0 +1,140 @@
+$primary-color: #264ae5;
+$hover-color: #f8f8f8;
+$background-color: #fff;
+$selected-color: #dadcde;
+$border-color: #ced0d3;
+
+@font-face {
+    font-family: 'datagrid-filters';
+    src: url('src/ui/fonts/datagrid-filters.eot');
+    src: url('src/ui/fonts/datagrid-filters.eot') format('embedded-opentype'),
+    url('src/ui/fonts/datagrid-filters.woff2') format('woff2'),
+    url('src/ui/fonts/datagrid-filters.woff') format('woff'),
+    url('src/ui/fonts/datagrid-filters.ttf') format('truetype'),
+    url('src/ui/fonts/datagrid-filters.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .filter-input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+.filter-selector {
+    padding-left: 0;
+    padding-right: 0;
+
+    .filter-selector-content {
+        align-self: flex-end;
+
+        .filter-selector-button {
+            padding: 8px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+
+            &:before {
+                display: flex;
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                padding-left: 4px; /* The font has spaces in the right side, so to align in the middle we need this */
+            }
+        }
+
+        .filter-selectors {
+            position: absolute;
+            width: max-content;
+            left: 0;
+            margin: 0 8px;
+            padding: 0;
+            background: $background-color;
+            z-index: 99;
+            border-radius: 8px;
+            border: 1px solid $border-color;
+            list-style-type: none;
+            -webkit-box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
+                0 5px 5px -3px rgba(0, 0, 0, 0.08);
+            -moz-box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
+                0 5px 5px -3px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
+                0 5px 5px -3px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+
+            li {
+                display: flex;
+                align-items: center;
+                font-weight: normal;
+                line-height: 32px;
+                cursor: pointer;
+
+                .filter-label {
+                    padding-right: 8px;
+                }
+
+                &.filter-selected {
+                    background-color: $hover-color;
+                    color: $primary-color;
+                    font-weight: bold;
+                }
+
+                &:hover,
+                &:focus {
+                    background-color: $hover-color;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+
+/**
+Icons
+ */
+
+.filter-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    margin: 6px 8px;
+    font-family: "datagrid-filters";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "datagrid-filters";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.equal:before {
+    content: "\e809";
+}
+.greater:before {
+    content: "\e80a";
+}
+.greaterEqual:before {
+    content: "\e80b";
+}
+.notEqual:before {
+    content: "\e80c";
+}
+.smaller:before {
+    content: "\e80d";
+}
+.smallerEqual:before {
+    content: "\e80e";
+}
