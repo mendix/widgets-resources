@@ -19804,7 +19804,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
         }
       />
       <div
-        className="td column-selector"
+        className="td column-selector td-borders"
       />
     </InfiniteBody>
     <div

@@ -155,7 +155,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     props.cellRenderer(
                         (children, className) => {
                             return (
-                                <div {...cell.getCellProps()} className={classNames("td", className)}>
+                                <div
+                                    {...cell.getCellProps()}
+                                    className={classNames("td", { "td-borders": cell.row.index === 0 }, className)}
+                                >
                                     {children}
                                 </div>
                             );
@@ -355,7 +358,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         return (
                             <Fragment key={`row_${rowIndex}`}>
                                 {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex }))}
-                                {props.columnsHidable && <div className="td column-selector" />}
+                                {props.columnsHidable && (
+                                    <div
+                                        className={classNames("td column-selector", { "td-borders": rowIndex === 0 })}
+                                    />
+                                )}
                             </Fragment>
                         );
                     })}
