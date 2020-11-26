@@ -1,7 +1,7 @@
 {
   "name": "timeline-web",
   "widgetName": "Timeline",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shows timeline",
   "copyright": "Mendix BV",
   "author": "Mendix",
