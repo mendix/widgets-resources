@@ -1,6 +1,5 @@
 ![Build Status](https://travis-ci.org/mendix/widgets-resources.svg?branch=master)
 ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
-![GitHub issues](https://img.shields.io/github/issues/mendix/widgets-resources)
 
 # Widgets resources
 
@@ -146,3 +145,6 @@ means:
 -   Change the test project
 -   Commit and push the test project in testProjects' corresponding branch
 -   Go back to monorepo, commit the shown testProjects change and push
+
+## Raising problems/issues
+-   We encourage everyone to open a Support ticket on [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools)
