@@ -81,6 +81,8 @@
     "mendix": "^8.15.7685",
     "metro-react-native-babel-preset": "~0.63.0",
     "node-fetch": "^2.6.1",
+    "postcss": "^8.1.10",
+    "postcss-url": "^10.1.0",
     "prettier": "^2.1.2",
     "react": "~17.0.1",
     "react-dom": "~17.0.1",

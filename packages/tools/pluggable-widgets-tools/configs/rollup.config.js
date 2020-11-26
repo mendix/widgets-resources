@@ -9,6 +9,8 @@ import replace from "@rollup/plugin-replace";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
 import { red, yellow } from "colors";
+import postcss from "postcss";
+import postcssUrl from "postcss-url";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
@@ -55,7 +57,7 @@ export default async args => {
             plugins: [
                 ...getClientComponentPlugins(),
                 url({ include: imagesAndFonts, limit: 100000 }),
-                sass({ output: true, include: /\.(css|sass|scss)$/ }),
+                sass({ output: production, insert: !production, include: /\.(css|sass|scss)$/, processor }),
                 alias({
                     entries: {
                         "react-hot-loader/root": join(__dirname, "hot")
@@ -107,7 +109,7 @@ export default async args => {
             },
             external: [/^mendix($|\/)/, "react", "react-dom"],
             plugins: [
-                sass({ output: false, include: /\.(css|sass|scss)$/ }),
+                sass({ output: false, include: /\.(css|sass|scss)$/, processor }),
                 ...getCommonPlugins({
                     sourceMaps: !production,
                     extensions: webExtensions,
@@ -241,6 +243,13 @@ export default async args => {
             console.error(red(description));
             process.exit(1);
         }
+    }
+
+    async function processor(css) {
+        const result = await postcss()
+            .use(postcssUrl({ url: "inline" }))
+            .process(css);
+        return result.css;
     }
 };
 
