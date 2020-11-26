@@ -10,12 +10,13 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     return (
         <FilterComponent
             adjustable={props.adjustable}
-            ariaLabel={props.ariaLabel?.value}
             defaultFilter={props.defaultFilter}
             delay={props.delay}
             filterDispatcher={filterDispatcher}
             name={props.name}
             placeholder={props.placeholder?.value}
+            screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
+            screenReaderInputCaption={props.screenReaderInputCaption?.value}
             tabIndex={props.tabIndex}
             value={props.defaultValue?.value}
         />

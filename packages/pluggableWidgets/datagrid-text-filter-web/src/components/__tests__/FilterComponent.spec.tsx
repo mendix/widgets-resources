@@ -21,11 +21,12 @@ describe("Filter component", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it("renders correctly with ariaLabel", () => {
+    it("renders correctly with aria labels", () => {
         const component = shallow(
             <FilterComponent
                 adjustable
-                ariaLabel="my label"
+                screenReaderButtonCaption="my label"
+                screenReaderInputCaption="my label"
                 defaultFilter="contains"
                 delay={500}
                 filterDispatcher={jest.fn()}

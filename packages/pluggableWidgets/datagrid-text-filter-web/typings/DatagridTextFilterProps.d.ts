@@ -18,7 +18,8 @@ export interface DatagridTextFilterContainerProps {
     placeholder?: DynamicValue<string>;
     adjustable: boolean;
     delay: number;
-    ariaLabel?: DynamicValue<string>;
+    screenReaderButtonCaption?: DynamicValue<string>;
+    screenReaderInputCaption?: DynamicValue<string>;
 }
 
 export interface DatagridTextFilterPreviewProps {
@@ -29,5 +30,6 @@ export interface DatagridTextFilterPreviewProps {
     placeholder: string;
     adjustable: boolean;
     delay: number | null;
-    ariaLabel: string;
+    screenReaderButtonCaption: string;
+    screenReaderInputCaption: string;
 }

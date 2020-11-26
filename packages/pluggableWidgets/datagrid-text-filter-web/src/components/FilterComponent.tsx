@@ -7,13 +7,14 @@ import classNames from "classnames";
 
 interface FilterComponentProps {
     adjustable: boolean;
-    ariaLabel?: string;
     defaultFilter: DefaultFilterEnum;
     delay: number;
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     name?: string;
     placeholder?: string;
     tabIndex?: number;
+    screenReaderButtonCaption?: string;
+    screenReaderInputCaption?: string;
     value?: string;
 }
 
@@ -88,7 +89,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 />
             )}
             <input
-                aria-label={props.ariaLabel}
+                aria-label={props.screenReaderInputCaption}
                 className={classNames("form-control", { "filter-input": props.adjustable })}
                 onChange={e => {
                     setValueInput(e.target.value);
