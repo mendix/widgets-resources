@@ -3,19 +3,20 @@ import { DatagridNumberFilterContainerProps } from "../typings/DatagridNumberFil
 
 import "./ui/DatagridNumberFilter.scss";
 import { FilterComponent } from "./components/FilterComponent";
-import { useFilterDispatcher } from "../../datagrid-web/src/components/provider";
+import { useFilterDispatcher } from "./utils/provider";
 
 export default function DatagridNumberFilter(props: DatagridNumberFilterContainerProps): ReactElement {
     const filterDispatcher = useFilterDispatcher();
     return (
         <FilterComponent
             adjustable={props.adjustable}
-            ariaLabel={props.ariaLabel?.value}
             defaultFilter={props.defaultFilter}
             delay={props.delay}
             filterDispatcher={filterDispatcher}
             name={props.name}
             placeholder={props.placeholder?.value}
+            screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
+            screenReaderInputCaption={props.screenReaderInputCaption?.value}
             tabIndex={props.tabIndex}
             value={props.defaultValue?.value}
         />

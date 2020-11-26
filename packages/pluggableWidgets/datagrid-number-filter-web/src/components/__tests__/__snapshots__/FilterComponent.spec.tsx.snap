@@ -30,12 +30,13 @@ exports[`Filter component renders correctly when not adjustable by user 1`] = `
 </div>
 `;
 
-exports[`Filter component renders correctly with ariaLabel 1`] = `
+exports[`Filter component renders correctly with aria labels 1`] = `
 <div
   className="filter-container"
   data-focusindex={0}
 >
   <FilterSelector
+    ariaLabel="my label"
     defaultFilter="equal"
     onChange={[Function]}
   />

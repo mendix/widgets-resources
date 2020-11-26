@@ -39,3 +39,24 @@ exports[`Filter selector renders correctly with another default filter 1`] = `
   </div>
 </div>
 `;
+
+exports[`Filter selector renders correctly with aria-label 1`] = `
+<div
+  className="filter-selector"
+>
+  <div
+    className="filter-selector-content"
+  >
+    <button
+      aria-controls="test-filter-selectors"
+      aria-expanded={false}
+      aria-haspopup={true}
+      aria-label="my label"
+      className="btn btn-default filter-selector-button button-icon equal"
+      onClick={[Function]}
+    >
+       
+    </button>
+  </div>
+</div>
+`;

@@ -8,12 +8,13 @@ import classNames from "classnames";
 
 interface FilterComponentProps {
     adjustable: boolean;
-    ariaLabel?: string;
     defaultFilter: DefaultFilterEnum;
     delay: number;
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     name?: string;
     placeholder?: string;
+    screenReaderButtonCaption?: string;
+    screenReaderInputCaption?: string;
     tabIndex?: number;
     value?: BigJs.Big;
 }
@@ -74,6 +75,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             {props.adjustable && (
                 <FilterSelector
+                    ariaLabel={props.screenReaderButtonCaption}
                     name={props.name}
                     defaultFilter={props.defaultFilter}
                     onChange={type => {
@@ -83,7 +85,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 />
             )}
             <input
-                aria-label={props.ariaLabel}
+                aria-label={props.screenReaderInputCaption}
                 className={classNames("form-control", { "filter-input": props.adjustable })}
                 onChange={e => {
                     const value = e.target.value;

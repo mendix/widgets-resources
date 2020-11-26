@@ -12,6 +12,7 @@ const options: Array<{ value: DefaultFilterEnum; label: string }> = [
 ];
 
 interface FilterSelectorProps {
+    ariaLabel?: string;
     name?: string;
     defaultFilter: DefaultFilterEnum;
     onChange: (value: DefaultFilterEnum) => void;
@@ -34,11 +35,12 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
         <div className="filter-selector">
             <div className="filter-selector-content">
                 <button
+                    aria-label={props.ariaLabel}
+                    aria-controls={`${props.name}-filter-selectors`}
+                    aria-expanded={show}
+                    aria-haspopup
                     className={classNames("btn btn-default filter-selector-button button-icon", value)}
                     onClick={() => setShow(show => !show)}
-                    aria-haspopup
-                    aria-expanded={show}
-                    aria-controls={`${props.name}-filter-selectors`}
                 >
                     &nbsp;
                 </button>

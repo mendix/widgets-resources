@@ -5,13 +5,13 @@ $selected-color: #dadcde;
 $border-color: #ced0d3;
 
 @font-face {
-    font-family: "datagrid-filters";
-    src: url("./fonts/datagrid-filters.eot?88455198");
-    src: url("./fonts/datagrid-filters.eot?88455198#iefix") format("embedded-opentype"),
-        url("./fonts/datagrid-filters.woff2?88455198") format("woff2"),
-        url("./fonts/datagrid-filters.woff?88455198") format("woff"),
-        url("./fonts/datagrid-filters.ttf?88455198") format("truetype"),
-        url("./fonts/datagrid-filters.svg?88455198#datagrid-filters") format("svg");
+    font-family: 'datagrid-filters';
+    src: url('src/ui/fonts/datagrid-filters.eot');
+    src: url('src/ui/fonts/datagrid-filters.eot') format('embedded-opentype'),
+    url('src/ui/fonts/datagrid-filters.woff2') format('woff2'),
+    url('src/ui/fonts/datagrid-filters.woff') format('woff'),
+    url('src/ui/fonts/datagrid-filters.ttf') format('truetype'),
+    url('src/ui/fonts/datagrid-filters.svg') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -120,12 +120,6 @@ Icons
     -moz-osx-font-smoothing: grayscale;
 }
 
-.contains:before {
-    content: "\e808";
-}
-.endsWith:before {
-    content: "\e806";
-}
 .equal:before {
     content: "\e809";
 }
@@ -143,7 +137,4 @@ Icons
 }
 .smallerEqual:before {
     content: "\e80e";
-}
-.startsWith:before {
-    content: "\e807";
 }
