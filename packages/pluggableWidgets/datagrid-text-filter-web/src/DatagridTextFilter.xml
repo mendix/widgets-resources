@@ -45,13 +45,13 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Accessibility">
-            <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Screen reader">
                 <property key="screenReaderButtonCaption" type="textTemplate" required="false">
-                    <caption>Screen reader button caption</caption>
+                    <caption>Button caption</caption>
                     <description />
                 </property>
                 <property key="screenReaderInputCaption" type="textTemplate" required="false">
-                    <caption>Screen reader input caption</caption>
+                    <caption>Input caption</caption>
                     <description />
                 </property>
             </propertyGroup>
