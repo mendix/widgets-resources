@@ -1,11 +1,13 @@
-$primary-color: #dadcde;
-$border-color: #dadcde;
-$title-color: #0a1325;
-$description-color: #6c717c;
-$spacing-large: 30px;
-$gutter-size: 15px;
-$icon-size: 18px;
-$icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
+// Colors
+$timeline-icon-color: #264ae5;
+$timeline-border-color: #dadcde;
+
+$timeline-color-header: #0a1325;
+$timeline-color-detail: #6c717c;
+
+// Sizes
+$timeline-icon-size: 18px;
+$spacing-large: 24px;
 
 .widget-timeline-date-header {
     display: inline-block;
@@ -13,7 +15,7 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     overflow-wrap: break-word;
     padding: 8px;
     text-align: center;
-    border: 1px solid $border-color;
+    border: 1px solid $timeline-border-color;
     border-radius: 30px;
 }
 
@@ -21,8 +23,8 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     display: flex;
     flex: 1;
     margin-left: 55px;
-    padding: 35px 0 0 0;
-    border-left: 1px solid $border-color;
+    padding-top: 35px;
+
     ul {
         padding: 0;
         list-style: none;
@@ -31,16 +33,24 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
 }
 
 .widget-timeline-title {
-    color: $title-color;
+    color: $timeline-color-header;
+    font-weight: 600;
+    margin: 0 0 10px 0;
 }
+
 .widget-timeline-description {
-    color: $description-color;
+    color: $timeline-color-detail;
 }
 
 .widget-timeline-event {
     position: relative;
-    margin-left: ($gutter-size * 2);
-    margin-bottom: 20px;
+    margin-left: $timeline-icon-size / 2;
+    padding-left: $spacing-large;
+    padding-bottom: 20px;
+
+    &:not(:last-of-type) {
+        border-left: 1px solid $timeline-border-color;
+    }
 
     &.clickable {
         cursor: pointer;
@@ -56,20 +66,22 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
 
 .widget-timeline-icon-wrapper {
     position: absolute;
-    top: 3px;
-    left: $icon-position-left;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $icon-size;
-    height: $icon-size;
+    width: $timeline-icon-size;
+    height: $timeline-icon-size;
+    transform: translateX(-50%);
 
     .glyphicon {
-        font-size: $icon-size;
+        font-size: $timeline-icon-size;
     }
+
     img {
-        max-width: $icon-size;
-        max-height: $icon-size;
+        max-width: $timeline-icon-size;
+        max-height: $timeline-icon-size;
     }
 }
 
@@ -77,25 +89,25 @@ $icon-position-left: -(($icon-size / 2) + $gutter-size * 2);
     .widget-timeline-date-time-wrapper {
         margin-right: 15px;
     }
+
     .widget-timeline-info-wrapper {
         flex-direction: column;
     }
 }
 
 .widget-timeline-icon-circle {
-    width: $icon-size;
-    height: $icon-size;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    background-color: $primary-color;
+    background-color: $timeline-icon-color;
 }
 
 .widget-timeline-no-divider {
     padding-bottom: 0;
     padding-top: 0;
+    margin-left: 0;
 }
 
 .widget-timeline-flex-container {
     display: flex;
-    overflow: hidden;
-    flex: 1;
 }
