@@ -80,6 +80,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             {props.adjustable && (
                 <FilterSelector
+                    ariaLabel={props.screenReaderButtonCaption}
                     name={props.name}
                     defaultFilter={props.defaultFilter}
                     onChange={type => {

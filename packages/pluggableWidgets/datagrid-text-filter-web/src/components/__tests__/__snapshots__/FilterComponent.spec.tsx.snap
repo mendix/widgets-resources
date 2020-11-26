@@ -38,6 +38,7 @@ exports[`Filter component renders correctly with aria labels 1`] = `
   data-focusindex={0}
 >
   <FilterSelector
+    ariaLabel="my label"
     defaultFilter="contains"
     onChange={[Function]}
   />
