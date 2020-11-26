@@ -28,3 +28,59 @@ export type ObjectProperties = {
     properties: PropertyGroup[];
     captions?: string[]; // used for customizing object grids
 };
+
+/**
+ * Structure preview typings
+ */
+
+type BaseProps = {
+    type: string;
+    grow?: number;
+};
+
+export type StructurePreviewProps =
+    | ImageProps
+    | ContainerProps
+    | RowLayoutProps
+    | TextProps
+    | DropZoneProps
+    | SelectableProps;
+
+export type ImageProps = BaseProps & {
+    type: "image";
+    document: string; // svg image
+    data: string; // base64 image. Will only be read if no svg image is passed
+    width?: number; // sets a fixed maximum width
+    height?: number; // sets a fixed maximum height
+};
+
+export type ContainerProps = BaseProps & {
+    type: "Container";
+    children: StructurePreviewProps[];
+    borders?: boolean;
+};
+
+export type RowLayoutProps = BaseProps & {
+    type: "RowLayout";
+    children: StructurePreviewProps[];
+    borders?: boolean;
+    columnSize?: "fixed" | "grow";
+};
+
+export type TextProps = BaseProps & {
+    type: "Text";
+    content: string;
+    fontSize?: number;
+    bold?: boolean;
+    italic?: boolean;
+};
+
+export type DropZoneProps = BaseProps & {
+    type: "DropZone";
+    property: object;
+};
+
+export type SelectableProps = BaseProps & {
+    object: object;
+    child: StructurePreviewProps;
+};
