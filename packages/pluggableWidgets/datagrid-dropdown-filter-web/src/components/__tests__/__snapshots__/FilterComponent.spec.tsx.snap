@@ -36,3 +36,664 @@ exports[`Filter selector renders correctly with ariaLabel 1`] = `
   />
 </div>
 `;
+
+exports[`Filter selector with multi selection renders correctly with ariaLabel 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className=""
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_0"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_0"
+      >
+        1
+      </label>
+    </li>
+    <li
+      className=""
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_1"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_1"
+      >
+        2
+      </label>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_2"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_2"
+      >
+        3
+      </label>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with multi selection renders correctly with emptyOptioncaption 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value="find me"
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className=""
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_0"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_0"
+      >
+        1
+      </label>
+    </li>
+    <li
+      className=""
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_1"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_1"
+      >
+        2
+      </label>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_2"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_2"
+      >
+        3
+      </label>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with multi selection renders correctly with no options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  />
+</div>
+`;
+
+exports[`Filter selector with multi selection renders correctly with options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className=""
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_0"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_0"
+      >
+        1
+      </label>
+    </li>
+    <li
+      className=""
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_1"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_1"
+      >
+        2
+      </label>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <input
+        checked={false}
+        id="checkbox_toggle_2"
+        type="checkbox"
+      />
+      <label
+        htmlFor="checkbox_toggle_2"
+      >
+        3
+      </label>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with ariaLabel 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className="filter-selected"
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      />
+    </li>
+    <li
+      className=""
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        1
+      </div>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        2
+      </div>
+    </li>
+    <li
+      className=""
+      key="3"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        3
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with emptyOptioncaption 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value="find me"
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className="filter-selected"
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        find me
+      </div>
+    </li>
+    <li
+      className=""
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        1
+      </div>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        2
+      </div>
+    </li>
+    <li
+      className=""
+      key="3"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        3
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with no options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className="filter-selected"
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      />
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className="filter-selected"
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      />
+    </li>
+    <li
+      className=""
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        1
+      </div>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        2
+      </div>
+    </li>
+    <li
+      className=""
+      key="3"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        3
+      </div>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Filter selector with single selection selects default option 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value="1"
+  />
+  <ul
+    className="dropdown-list false"
+    data-focusindex={0}
+    id="undefined-dropdown-list"
+    role="menu"
+    style={
+      Object {
+        "width": 0,
+      }
+    }
+  >
+    <li
+      className=""
+      key="0"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      />
+    </li>
+    <li
+      className="filter-selected"
+      key="1"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        1
+      </div>
+    </li>
+    <li
+      className=""
+      key="2"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        2
+      </div>
+    </li>
+    <li
+      className=""
+      key="3"
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="menuitem"
+      tabIndex={0}
+    >
+      <div
+        className="filter-label"
+      >
+        3
+      </div>
+    </li>
+  </ul>
+</div>
+`;
