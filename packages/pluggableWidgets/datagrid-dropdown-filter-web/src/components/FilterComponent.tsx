@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, Dispatch, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { useOnClickOutside } from "../utils/utils";
 
@@ -49,7 +49,6 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setSelectedFilters(option.value ? [option] : []);
                 setShow(false);
             }
-            inputRef.current.nextSibling().focus();
         },
         [selectedFilters, props.emptyOptionCaption]
     );
@@ -128,35 +127,34 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 role="menu"
                 data-focusindex={0}
             >
-                {options.map((option, index) =>
-                    props.multiSelect ? (
-                        <li key={index}>
-                            <input
-                                id={`checkbox_toggle_${index}`}
-                                type="checkbox"
-                                checked={selectedFilters.includes(option)}
-                                onClick={() => onClick(option)}
-                            />
-                            <label htmlFor={`checkbox_toggle_${index}`}>{option.caption}</label>
-                        </li>
-                    ) : (
-                        <li
-                            className={selectedFilters.includes(option) ? "filter-selected" : ""}
-                            key={index}
-                            onClick={() => onClick(option)}
-                            onKeyDown={e => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    e.preventDefault();
-                                    onClick(option);
-                                }
-                            }}
-                            role="menuitem"
-                            tabIndex={0}
-                        >
+                {options.map((option, index) => (
+                    <li
+                        className={!props.multiSelect && selectedFilters.includes(option) ? "filter-selected" : ""}
+                        key={index}
+                        onClick={() => onClick(option)}
+                        onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                onClick(option);
+                            }
+                        }}
+                        role="menuitem"
+                        tabIndex={0}
+                    >
+                        {props.multiSelect ? (
+                            <Fragment>
+                                <input
+                                    id={`checkbox_toggle_${index}`}
+                                    type="checkbox"
+                                    checked={selectedFilters.includes(option)}
+                                />
+                                <label htmlFor={`checkbox_toggle_${index}`}>{option.caption}</label>
+                            </Fragment>
+                        ) : (
                             <div className="filter-label">{option.caption}</div>
-                        </li>
-                    )
-                )}
+                        )}
+                    </li>
+                ))}
             </ul>
         </div>
     );

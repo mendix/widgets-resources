@@ -3,7 +3,7 @@ import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdow
 import { ValueStatus } from "mendix";
 import "./ui/DatagridDropdownFilter.scss";
 import { FilterComponent } from "./components/FilterComponent";
-import { useFilterDispatcher } from "../../datagrid-web/src/components/provider";
+import { useFilterDispatcher } from "./utils/provider";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
     const filterDispatcher = useFilterDispatcher();
