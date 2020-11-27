@@ -1,4 +1,4 @@
-import { Filters, IdType, SortingRule } from "react-table";
+import { IdType, SortingRule } from "react-table";
 import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react";
 import { EditableValue, ValueStatus } from "mendix";
 import { ColumnWidth, TableColumn } from "../components/Table";
@@ -9,7 +9,6 @@ interface Settings {
     columnOrder: Array<IdType<object>>;
     hiddenColumns: Array<IdType<object>>;
     sortBy: Array<SortingRule<object>>;
-    filters: Filters<object>;
     widths: ColumnWidth;
 }
 
@@ -17,14 +16,13 @@ interface PersistedSettings {
     column: string;
     sort: boolean;
     sortMethod: "asc" | "desc";
-    filter: string;
     hidden: boolean;
     order: number;
     width: number | undefined;
 }
 
 export function createSettings(
-    { columnOrder, hiddenColumns, sortBy, filters, widths }: Settings,
+    { columnOrder, hiddenColumns, sortBy, widths }: Settings,
     columns: Array<{ header: string; id: string }>
 ): PersistedSettings[] {
     return columns.map((column, index) => {
@@ -33,7 +31,6 @@ export function createSettings(
             column: column.header,
             sort: !!sortBy.find(s => s.id === column.id),
             sortMethod: sortBy.find(s => s.id === column.id)?.desc ? "desc" : "asc",
-            filter: filters.find(f => f.id === column.id)?.value ?? "",
             hidden: !!hiddenColumns.find(h => h === column.id),
             order: columnIndex > -1 ? columnIndex : index,
             width: widths[column.id]
@@ -50,8 +47,6 @@ export function useSettings(
     setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>,
     sortBy: Array<SortingRule<object>>,
     setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>,
-    filters: Filters<object>,
-    setFilters: Dispatch<SetStateAction<Filters<object>>>,
     widths: ColumnWidth,
     setWidths: Dispatch<SetStateAction<ColumnWidth>>
 ): void {
@@ -89,13 +84,11 @@ export function useSettings(
                         id: s.columnId,
                         desc: s.sortMethod === "desc"
                     })),
-                filters: columns.filter(s => s.filter).map(s => ({ id: s.columnId, value: s.filter })),
                 widths: Object.fromEntries(columns.map(s => [s.columnId, s.width]))
             };
             setColumnOrder(extractedSettings.columnOrder);
             setHiddenColumns(extractedSettings.hiddenColumns);
             setSortBy(extractedSettings.sortBy);
-            setFilters(extractedSettings.filters);
             setWidths(extractedSettings.widths);
         }
     }, [settings, filteredColumns, previousLoadedSettings.current]);
@@ -108,7 +101,6 @@ export function useSettings(
                         columnOrder,
                         hiddenColumns,
                         sortBy,
-                        filters,
                         widths
                     },
                     filteredColumns
@@ -119,5 +111,5 @@ export function useSettings(
                 previousLoadedSettings.current = newSettings;
             }
         }
-    }, [columnOrder, hiddenColumns, sortBy, filters, widths, settings, previousLoadedSettings.current]);
+    }, [columnOrder, hiddenColumns, sortBy, widths, settings, previousLoadedSettings.current]);
 }

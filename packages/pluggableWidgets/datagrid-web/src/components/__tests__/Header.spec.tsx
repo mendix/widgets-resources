@@ -40,9 +40,8 @@ describe("Header", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it("renders the structure correctly when filterable", () => {
+    it("renders the structure correctly when filterable with no custom filter", () => {
         const props = mockHeaderProps();
-        props.column.canFilter = true;
         props.filterable = true;
 
         const component = shallow(<Header {...props} />);
@@ -50,9 +49,8 @@ describe("Header", () => {
         expect(component).toMatchSnapshot();
     });
 
-    it("renders the structure correctly when filterable and with custom filter", () => {
+    it("renders the structure correctly when filterable with custom filter", () => {
         const props = mockHeaderProps();
-        props.column.canFilter = true;
         props.column.customFilter = (
             <div>
                 <label>Date picker filter</label>

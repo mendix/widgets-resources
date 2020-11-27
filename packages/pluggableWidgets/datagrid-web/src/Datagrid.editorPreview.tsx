@@ -16,8 +16,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                       attribute: "{Attribute}",
                       width: "autoFill",
                       columnClass: "",
-                      filterable: "no",
-                      customFilter: { renderer: () => <div />, widgetCount: 0 },
+                      filter: { renderer: () => <div />, widgetCount: 0 },
                       resizable: false,
                       hasWidgets: false,
                       content: { renderer: () => <div />, widgetCount: 0 },
@@ -38,17 +37,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={data}
-            footerWidgets={
-                <props.footerWidgets.renderer>
-                    <div className="footer" />
-                </props.footerWidgets.renderer>
-            }
             hasMoreItems={false}
-            headerWidgets={
-                <props.headerWidgets.renderer>
-                    <div className="header" />
-                </props.headerWidgets.renderer>
-            }
             numberOfItems={5}
             page={0}
             pageSize={props.pageSize ?? 5}
@@ -66,14 +55,12 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [props.columns]
             )}
-            valueForFilter={useCallback(() => undefined, [])}
             valueForSort={useCallback(() => undefined, [])}
-            filterMethod={props.filterMethod}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = columns[columnIndex];
-                    return column.customFilter ? (
-                        <column.customFilter.renderer>{renderWrapper(null)}</column.customFilter.renderer>
+                    return column.filter ? (
+                        <column.filter.renderer>{renderWrapper(null)}</column.filter.renderer>
                     ) : (
                         renderWrapper(null)
                     );

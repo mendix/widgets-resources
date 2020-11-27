@@ -17,11 +17,7 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
             hidePropertyIn(defaultProperties, values, "columns", index, "sortable");
         }
         if (!values.columnsFilterable) {
-            hidePropertyIn(defaultProperties, values, "columns", index, "filterable");
-            hidePropertyIn(defaultProperties, values, "columns", index, "customFilter");
-            hidePropertyIn(defaultProperties, values, "filterMethod");
-        } else if (column.filterable !== "custom") {
-            hidePropertyIn(defaultProperties, values, "columns", index, "customFilter");
+            hidePropertyIn(defaultProperties, values, "columns", index, "filter");
         }
         if (!values.columnsResizable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "resizable");
@@ -39,12 +35,6 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
     if (!values.pagingEnabled) {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
     }
-    if (!values.showHeader) {
-        hidePropertyIn(defaultProperties, values, "headerWidgets");
-    }
-    if (!values.showFooter) {
-        hidePropertyIn(defaultProperties, values, "footerWidgets");
-    }
     return defaultProperties;
 }
 
@@ -58,8 +48,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                       attribute: "Attribute",
                       width: "autoFit",
                       columnClass: "",
-                      filterable: "no",
-                      customFilter: { widgetCount: 0, renderer: () => null },
+                      filter: { widgetCount: 0, renderer: () => null },
                       resizable: false,
                       hasWidgets: false,
                       content: { widgetCount: 0, renderer: () => null },
@@ -104,11 +93,11 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                 grow: column.width === "manual" && column.size ? column.size : 1,
                 children: [
                     { type: "Text", bold: true, fontSize: 10, content: header.length > 0 ? header : "Header" },
-                    ...(values.columnsFilterable && column.filterable === "custom"
+                    ...(values.columnsFilterable
                         ? [
                               {
                                   type: "DropZone",
-                                  property: column.customFilter
+                                  property: column.filter
                               } as DropZoneProps
                           ]
                         : [])

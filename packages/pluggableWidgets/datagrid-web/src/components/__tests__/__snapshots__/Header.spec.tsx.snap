@@ -51,31 +51,7 @@ exports[`Header renders the structure correctly when draggable 1`] = `
 </div>
 `;
 
-exports[`Header renders the structure correctly when filterable 1`] = `
-<div
-  className="th"
-  role="Test"
-  style={
-    Object {
-      "cursor": "unset",
-    }
-  }
-  title="Test"
->
-  <div
-    className="column-container"
-  >
-    <div
-      className="column-header"
-    >
-      Test
-    </div>
-    Test
-  </div>
-</div>
-`;
-
-exports[`Header renders the structure correctly when filterable and with custom filter 1`] = `
+exports[`Header renders the structure correctly when filterable with custom filter 1`] = `
 <div
   className="th"
   role="Test"
@@ -101,6 +77,29 @@ exports[`Header renders the structure correctly when filterable and with custom 
       <input
         type="date"
       />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when filterable with no custom filter 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+    >
+      Test
     </div>
   </div>
 </div>
