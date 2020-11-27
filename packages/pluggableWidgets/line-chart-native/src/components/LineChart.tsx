@@ -2,10 +2,12 @@ import { createElement, ReactElement, useMemo, useCallback, useState } from "rea
 import { View, LayoutChangeEvent, Text } from "react-native";
 import { InterpolationPropType } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
+
 import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
-import { LineChartStyle } from "../ui/Styles";
 import { Legend } from "./Legend";
+import { LineChartStyle } from "../ui/Styles";
+import { mapLineStyleToLib } from "../utils/StyleMappers";
 
 export interface LineChartProps {
     series: LineChartSeries[];
@@ -53,7 +55,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         for (const _series of series) {
             const configuredStyle = !_series.customLineStyle
                 ? null
-                : style.lineStyles?.[_series.customLineStyle]?.line?.data?.stroke;
+                : style.lineStyles?.[_series.customLineStyle]?.line?.color;
 
             if (typeof configuredStyle !== "string") {
                 result.push(style.lineColorPalette?.[index] || "black");
@@ -98,7 +100,11 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             return (
                 <VictoryGroup key={index}>
                     {markers && seriesStyle?.markers?.display === "underneath" ? markers : null}
-                    <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
+                    <VictoryLine
+                        style={mapLineStyleToLib(seriesStyle?.line)}
+                        data={dataPoints}
+                        interpolation={interpolation}
+                    />
                     {markers && (!seriesStyle?.markers?.display || seriesStyle?.markers?.display !== "underneath")
                         ? markers
                         : null}

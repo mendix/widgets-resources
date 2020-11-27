@@ -1,7 +1,6 @@
 import { TextStyle, ViewStyle } from "react-native";
 import { VictoryChartProps } from "victory-chart";
 import { VictoryAxisCommonProps, VictoryCommonProps } from "victory-core";
-import { VictoryLineProps } from "victory-line";
 import { VictoryScatterProps } from "victory-scatter";
 
 export interface LineChartLegendStyle {
@@ -12,7 +11,12 @@ export interface LineChartLegendStyle {
 }
 
 export interface LineChartLineStyle {
-    line?: VictoryLineProps["style"];
+    line?: {
+        color?: string;
+        dashArray?: string;
+        ending?: "flat" | "round";
+        width?: number;
+    };
     markers?: VictoryScatterProps["style"] & {
         display?: "false" | "underneath" | "onTop";
         size?: VictoryScatterProps["size"];
@@ -55,6 +59,17 @@ export const defaultLineChartStyle: LineChartStyle = {
     },
     xAxisLabel: {
         alignSelf: "center"
+    },
+    // TODO Remove this temp linestyle
+    lineStyles: {
+        mendix: {
+            line: {
+                color: "rgba(255,0,0,0.3)",
+                dashArray: "10,3",
+                ending: "flat",
+                width: 15
+            }
+        }
     },
     legend: {
         container: {
