@@ -7,7 +7,7 @@ import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { Legend } from "./Legend";
 import { LineChartStyle } from "../ui/Styles";
-import { mapLineStyleToLib } from "../utils/StyleMappers";
+import { mapLineStyleToLib, mapMarkerStyleToLib } from "../utils/StyleMappers";
 
 export interface LineChartProps {
     series: LineChartSeries[];
@@ -94,7 +94,12 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             const markers =
                 lineStyle === "lineWithMarkers" ||
                 (lineStyle === "custom" && seriesStyle?.markers?.display && seriesStyle.markers.display !== "false") ? (
-                    <VictoryScatter data={dataPoints} style={seriesStyle?.markers} size={seriesStyle?.markers?.size} />
+                    <VictoryScatter
+                        data={dataPoints}
+                        style={mapMarkerStyleToLib(seriesStyle?.markers)}
+                        size={seriesStyle?.markers?.size}
+                        symbol={seriesStyle?.markers?.symbol}
+                    />
                 ) : undefined;
 
             return (
