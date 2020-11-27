@@ -47,21 +47,6 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     return (
         <Table
             className={props.class}
-            columns={props.columns}
-            columnsDraggable={props.columnsDraggable}
-            columnsFilterable={props.columnsFilterable}
-            columnsHidable={props.columnsHidable}
-            columnsResizable={props.columnsResizable}
-            columnsSortable={props.columnsSortable}
-            data={items}
-            hasMoreItems={props.datasource.hasMoreItems ?? false}
-            numberOfItems={props.datasource.totalCount}
-            page={currentPage}
-            pageSize={props.pageSize}
-            paging={props.pagingEnabled}
-            pagingPosition={props.pagingPosition}
-            setPage={setPage}
-            styles={props.style}
             cellRenderer={useCallback(
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
@@ -76,13 +61,16 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 },
                 [props.columns, props.rowClass]
             )}
-            valueForSort={useCallback(
-                (value, columnIndex) => {
-                    const column = props.columns[columnIndex];
-                    return column.attribute(value).value;
-                },
-                [props.columns]
-            )}
+            columns={props.columns}
+            columnsDraggable={props.columnsDraggable}
+            columnsFilterable={props.columnsFilterable}
+            columnsHidable={props.columnsHidable}
+            columnsResizable={props.columnsResizable}
+            columnsSortable={props.columnsSortable}
+            data={items}
+            emptyPlaceholderRenderer={useCallback(renderWrapper => renderWrapper(props.emptyPlaceholder), [
+                props.emptyPlaceholder
+            ])}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = props.columns[columnIndex];
@@ -93,7 +81,22 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 },
                 [props.columns, props.datasource]
             )}
+            hasMoreItems={props.datasource.hasMoreItems ?? false}
+            numberOfItems={props.datasource.totalCount}
+            page={currentPage}
+            pageSize={props.pageSize}
+            paging={props.pagingEnabled}
+            pagingPosition={props.pagingPosition}
             settings={props.configurationAttribute}
+            setPage={setPage}
+            styles={props.style}
+            valueForSort={useCallback(
+                (value, columnIndex) => {
+                    const column = props.columns[columnIndex];
+                    return column.attribute(value).value;
+                },
+                [props.columns]
+            )}
         />
     );
 }

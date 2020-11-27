@@ -91,6 +91,14 @@
                         </propertyGroup>
                     </properties>
                 </property>
+                <property key="showEmptyPlaceholder" type="boolean" defaultValue="false">
+                    <caption>Show empty placeholder</caption>
+                    <description/>
+                </property>
+                <property key="emptyPlaceholder" type="widgets" required="false">
+                    <caption>Empty placeholder</caption>
+                    <description/>
+                </property>
                 <property key="rowClass" type="expression" required="false" dataSource="datasource">
                     <caption>Dynamic row class</caption>
                     <description />

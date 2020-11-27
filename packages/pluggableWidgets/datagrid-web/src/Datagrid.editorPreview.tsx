@@ -30,20 +30,6 @@ export function preview(props: DatagridPreviewProps): ReactElement {
     return (
         <Table
             className={props.class}
-            columns={columns}
-            columnsDraggable={props.columnsDraggable}
-            columnsFilterable={props.columnsFilterable}
-            columnsHidable={props.columnsHidable}
-            columnsResizable={props.columnsResizable}
-            columnsSortable={props.columnsSortable}
-            data={data}
-            hasMoreItems={false}
-            numberOfItems={5}
-            page={0}
-            pageSize={props.pageSize ?? 5}
-            paging={props.pagingEnabled}
-            pagingPosition={props.pagingPosition}
-            styles={parseStyle(props.style)}
             cellRenderer={useCallback(
                 (renderWrapper, _, columnIndex) => {
                     const column = columns[columnIndex];
@@ -55,7 +41,19 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [props.columns]
             )}
-            valueForSort={useCallback(() => undefined, [])}
+            columns={columns}
+            columnsDraggable={props.columnsDraggable}
+            columnsFilterable={props.columnsFilterable}
+            columnsHidable={props.columnsHidable}
+            columnsResizable={props.columnsResizable}
+            columnsSortable={props.columnsSortable}
+            data={data}
+            emptyPlaceholderRenderer={useCallback(
+                renderWrapper => (
+                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                ),
+                [props.emptyPlaceholder]
+            )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = columns[columnIndex];
@@ -67,6 +65,15 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [props.columns]
             )}
+            hasMoreItems={false}
+            numberOfItems={5}
+            page={0}
+            pageSize={props.pageSize ?? 5}
+            paging={props.pagingEnabled}
+            pagingPosition={props.pagingPosition}
+            preview
+            styles={parseStyle(props.style)}
+            valueForSort={useCallback(() => undefined, [])}
         />
     );
 }
