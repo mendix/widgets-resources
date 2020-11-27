@@ -23,8 +23,6 @@ export interface LineChartStyle {
     container?: ViewStyle;
     errorMessage?: TextStyle;
     chart?: ViewStyle;
-    gridAndLabelsRow?: ViewStyle;
-    gridRow?: ViewStyle;
     gridWrapper?: ViewStyle;
     grid?: VictoryChartProps["style"] & {
         padding?: VictoryCommonProps["padding"];
@@ -51,13 +49,6 @@ export const defaultLineChartStyle: LineChartStyle = {
     },
     chart: {
         flex: 1
-    },
-    gridAndLabelsRow: {
-        flex: 1
-    },
-    gridRow: {
-        flex: 1,
-        flexDirection: "row"
     },
     gridWrapper: {
         flex: 1

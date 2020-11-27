@@ -170,11 +170,11 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (
                 <View style={style.chart}>
-                    <View style={style.gridAndLabelsRow}>
+                    <View style={{ flex: 1 }}>
                         {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "top"
                             ? yAxisLabelComponent
                             : null}
-                        <View style={style.gridRow}>
+                        <View style={{ flex: 1, flexDirection: "row" }}>
                             {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "left"
                                 ? yAxisLabelComponent
                                 : null}
