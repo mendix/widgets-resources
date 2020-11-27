@@ -23,10 +23,11 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
             ariaLabel={props.ariaLabel?.value}
             emptyOptionCaption={props.emptyOptionCaption?.value}
             filterDispatcher={filterDispatcher}
+            multiSelect={props.multiSelect}
             name={props.name}
             options={parsedOptions}
             tabIndex={props.tabIndex}
-            value={props.defaultValue?.value}
+            defaultValue={props.defaultValue?.value}
         />
     );
 }

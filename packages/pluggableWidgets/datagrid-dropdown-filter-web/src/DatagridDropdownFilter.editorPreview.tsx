@@ -7,7 +7,7 @@ export function preview(props: DatagridDropdownFilterPreviewProps): ReactElement
         <FilterComponent
             options={[{ caption: "yolo1", value: "yolo1" }]}
             filterDispatcher={() => ({})}
-            value={props.defaultValue}
+            defaultValue={props.defaultValue}
         />
     );
 }

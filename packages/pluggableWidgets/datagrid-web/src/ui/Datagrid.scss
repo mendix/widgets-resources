@@ -93,7 +93,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         .filter {
             display: flex;
             margin-top: 4px;
-            input {
+            input:not([type="checkbox"]) {
                 font-weight: normal;
                 flex-grow: 1;
                 width: 100%;

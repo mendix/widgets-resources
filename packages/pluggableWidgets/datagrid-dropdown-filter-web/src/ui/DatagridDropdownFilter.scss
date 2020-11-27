@@ -18,6 +18,7 @@ $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='
         background-position-x: right;
         background-position-y: center;
         background-origin: content-box;
+        text-overflow: ellipsis;
     }
 
     .dropdown-list {
@@ -37,8 +38,9 @@ $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='
             0 5px 5px -3px rgba(0, 0, 0, 0.08);
         box-shadow: 0 3px 14px 2px rgba(0, 0, 0, 0.02), 0 8px 10px 1px rgba(0, 0, 0, 0.04),
             0 5px 5px -3px rgba(0, 0, 0, 0.08);
-        overflow: hidden;
+        overflow-x: hidden;
         display: none;
+        max-height: 40vh;
 
         &.dropdown-list-visible {
             display: block;
@@ -48,7 +50,6 @@ $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='
             display: flex;
             align-items: center;
             font-weight: normal;
-            line-height: 32px;
             min-height: 32px;
             cursor: pointer;
             padding: 0 8px;
@@ -67,6 +68,15 @@ $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='
             &:hover,
             &:focus {
                 background-color: $hover-color;
+            }
+
+            label {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                margin: 8px;
+                font-weight: normal;
+                width: calc(100% - 32px);
             }
         }
     }

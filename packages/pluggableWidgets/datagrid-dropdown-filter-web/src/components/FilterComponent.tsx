@@ -11,49 +11,99 @@ interface FilterComponentProps {
     ariaLabel?: string;
     emptyOptionCaption?: string;
     filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
+    multiSelect?: boolean;
     name?: string;
     options: Option[];
     tabIndex?: number;
-    value?: string;
+    defaultValue?: string;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [valueInput, setValueInput] = useState("");
-
-    const [value, setValue] = useState(props.value);
+    const [options, setOptions] = useState<Option[]>([]);
+    const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
     const [show, setShow] = useState(false);
-    const listRef = useRef<HTMLUListElement>(null);
     const [dropdownWidth, setDropdownWidth] = useState(0);
+
+    const listRef = useRef<HTMLUListElement>(null);
+
+    const setMultiSelectFilters = useCallback(
+        (selectedOptions: Option[]) => {
+            if (selectedOptions?.length === 0) {
+                setValueInput(props.emptyOptionCaption ?? "");
+                setSelectedFilters([]);
+            } else {
+                setValueInput(selectedOptions.map(option => option.caption).join(","));
+                setSelectedFilters(selectedOptions);
+            }
+        },
+        [props.emptyOptionCaption]
+    );
+
+    const onClick = useCallback(
+        (option: Option) => {
+            if (props.multiSelect) {
+                setMultiSelectFilters(toggleFilter(selectedFilters, option));
+            } else {
+                setValueInput(option.caption);
+                setSelectedFilters(option.value ? [option] : []);
+                setShow(false);
+            }
+            inputRef.current.nextSibling().focus();
+        },
+        [selectedFilters, props.emptyOptionCaption]
+    );
+
     useOnClickOutside(listRef, () => setShow(false));
 
-    const [options, setOptions] = useState<Option[]>([{ caption: "", value: "" }]);
-
+    // Select the first option Or default option on load
     useEffect(() => {
-        setOptions([{ caption: props.emptyOptionCaption ?? "", value: "" }, ...props.options]);
-    }, [props.options, props.emptyOptionCaption]);
+        if (props.multiSelect) {
+            if (props.defaultValue) {
+                const initialOptions = props.defaultValue
+                    .split(",")
+                    .map(value => props.options.find(option => option.value === value))
+                    .filter(Boolean) as Option[];
 
-    useEffect(() => {
-        const selectedOption = options.find(option => option.value === props.value) ?? options[0];
-        setValueInput(selectedOption.caption);
-        setValue(selectedOption.value);
-    }, [props.value, options]);
+                // User can set anything, but it could not match so we have to set to empty or ""
+                setMultiSelectFilters(initialOptions);
+            } else {
+                setValueInput(props.emptyOptionCaption ?? "");
+            }
+
+            setOptions(props.options);
+        } else {
+            // We want to add empty option caption
+            const optionsWithEmptyCaption = [{ caption: props.emptyOptionCaption ?? "", value: "" }, ...props.options];
+            const initialOption =
+                optionsWithEmptyCaption.find(option => option.value === props.defaultValue) ??
+                optionsWithEmptyCaption[0];
+
+            setValueInput(initialOption?.caption ?? "");
+            setSelectedFilters([initialOption]);
+            setOptions(optionsWithEmptyCaption);
+        }
+    }, [props.defaultValue, props.options, props.emptyOptionCaption]);
 
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                filter: (item, attr): boolean =>
-                    value ? attr(item).value?.toString().toLocaleLowerCase() === value.toLocaleLowerCase() : true
+                filter: (item, attr): boolean => {
+                    if (selectedFilters.length > 0) {
+                        return selectedFilters.some(
+                            selectedFilter =>
+                                attr(item).value?.toString().toLocaleLowerCase() ===
+                                selectedFilter.value?.toString().toLocaleLowerCase()
+                        );
+                    }
+                    return true;
+                }
             });
         }
-    }, [props.filterDispatcher, value]);
-
-    const onClick = useCallback((option: Option) => {
-        setValueInput(option.caption);
-        setValue(option.value);
-        setShow(false);
-    }, []);
+    }, [props.filterDispatcher, selectedFilters]);
 
     // TODO: after selecting via keyboard, it jumps to end
+    // TODO: Multi select, tests, dropdown tests
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0}>
             <input
@@ -78,24 +128,48 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 role="menu"
                 data-focusindex={0}
             >
-                {options.map((option, index) => (
-                    <li
-                        className={value === option.value ? "filter-selected" : ""}
-                        key={index}
-                        onClick={() => onClick(option)}
-                        onKeyDown={e => {
-                            if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                onClick(option);
-                            }
-                        }}
-                        role="menuitem"
-                        tabIndex={0}
-                    >
-                        <div className="filter-label">{option.caption}</div>
-                    </li>
-                ))}
+                {options.map((option, index) =>
+                    props.multiSelect ? (
+                        <li key={index}>
+                            <input
+                                id={`checkbox_toggle_${index}`}
+                                type="checkbox"
+                                checked={selectedFilters.includes(option)}
+                                onClick={() => onClick(option)}
+                            />
+                            <label htmlFor={`checkbox_toggle_${index}`}>{option.caption}</label>
+                        </li>
+                    ) : (
+                        <li
+                            className={selectedFilters.includes(option) ? "filter-selected" : ""}
+                            key={index}
+                            onClick={() => onClick(option)}
+                            onKeyDown={e => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    onClick(option);
+                                }
+                            }}
+                            role="menuitem"
+                            tabIndex={0}
+                        >
+                            <div className="filter-label">{option.caption}</div>
+                        </li>
+                    )
+                )}
             </ul>
         </div>
     );
+}
+
+function toggleFilter(filters: Option[], filterToToggle: Option): Option[] {
+    const alteredFilters = [...filters];
+    const index = filters.indexOf(filterToToggle);
+    if (index > -1) {
+        alteredFilters.splice(index, 1);
+    } else {
+        alteredFilters.push(filterToToggle);
+    }
+
+    return alteredFilters;
 }
