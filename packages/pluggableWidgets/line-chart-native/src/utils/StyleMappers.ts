@@ -1,9 +1,35 @@
+import { VictoryChartProps } from "victory-chart";
+import { VictoryAxisCommonProps } from "victory-core";
 import { VictoryLineProps } from "victory-line";
 import { VictoryScatterProps } from "victory-scatter";
 
-import { LineChartLineStyle } from "../ui/Styles";
+import { LineChartAxisStyle, LineChartGridStyle, LineChartLineStyle } from "../ui/Styles";
 
-export function mapLineStyleToLib(lineStyle: LineChartLineStyle["line"]): VictoryLineProps["style"] {
+// TODO Unit test
+export function mapToGridStyle(gridStyle?: LineChartGridStyle): VictoryChartProps["style"] {
+    return {
+        background: {
+            fill: gridStyle?.backgroundColor
+        }
+    };
+}
+export function mapToAxisStyle<T extends "X" | "Y">(
+    gridStyle?: LineChartGridStyle,
+    axisStyle?: LineChartAxisStyle<T>
+): VictoryAxisCommonProps["style"] {
+    return {
+        axis: { stroke: axisStyle?.color, strokeWidth: axisStyle?.width },
+        grid: { stroke: gridStyle?.color, strokeDasharray: gridStyle?.dashArray },
+        tickLabels: {
+            fontFamily: axisStyle?.fontFamily,
+            fontSize: axisStyle?.fontSize,
+            fontStyle: axisStyle?.fontStyle,
+            fontWeight: axisStyle?.fontWeight
+        }
+    };
+}
+
+export function mapToLineStyle(lineStyle: LineChartLineStyle["line"]): VictoryLineProps["style"] {
     return {
         data: {
             stroke: lineStyle?.color,
@@ -13,7 +39,7 @@ export function mapLineStyleToLib(lineStyle: LineChartLineStyle["line"]): Victor
         }
     };
 }
-export function mapMarkerStyleToLib(markersStyle: LineChartLineStyle["markers"]): VictoryScatterProps["style"] {
+export function mapToMarkerStyle(markersStyle: LineChartLineStyle["markers"]): VictoryScatterProps["style"] {
     return {
         data: {
             fill: markersStyle?.backgroundColor,

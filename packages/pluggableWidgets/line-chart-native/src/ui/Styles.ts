@@ -1,12 +1,25 @@
 import { TextStyle, ViewStyle } from "react-native";
-import { VictoryChartProps } from "victory-chart";
-import { VictoryAxisCommonProps, VictoryCommonProps } from "victory-core";
 
-export interface LineChartLegendStyle {
-    container?: ViewStyle;
-    item?: ViewStyle;
-    indicator?: ViewStyle;
-    label?: TextStyle;
+export interface LineChartGridStyle {
+    backgroundColor?: string;
+    color?: string;
+    dashArray?: string; // TODO check whether this works on axis
+    paddingBottom?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+}
+
+export interface LineChartAxisStyle<T extends "X" | "Y"> {
+    color?: string;
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    label: TextStyle & {
+        relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
+    };
+    width?: number;
 }
 
 export interface LineChartLineStyle {
@@ -17,7 +30,7 @@ export interface LineChartLineStyle {
         width?: number;
     };
     markers?: {
-        backgroundColor?: string;
+        backgroundColor?: string; // TODO test opacity
         borderColor?: string;
         borderWidth?: number;
         display?: "false" | "underneath" | "onTop";
@@ -26,22 +39,21 @@ export interface LineChartLineStyle {
     };
 }
 
+export interface LineChartLegendStyle {
+    container?: ViewStyle;
+    item?: ViewStyle;
+    indicator?: ViewStyle;
+    label?: TextStyle;
+}
+
 export interface LineChartStyle {
     container?: ViewStyle;
     errorMessage?: TextStyle;
     chart?: ViewStyle;
     gridWrapper?: ViewStyle;
-    grid?: VictoryChartProps["style"] & {
-        padding?: VictoryCommonProps["padding"];
-        xAxis?: VictoryAxisCommonProps["style"];
-        yAxis?: VictoryAxisCommonProps["style"];
-    };
-    xAxisLabel?: TextStyle & {
-        relativePositionGrid?: "bottom" | "right";
-    };
-    yAxisLabel?: TextStyle & {
-        relativePositionGrid?: "top" | "left";
-    };
+    grid?: LineChartGridStyle;
+    xAxis?: LineChartAxisStyle<"X">;
+    yAxis?: LineChartAxisStyle<"Y">;
     legend?: LineChartLegendStyle;
     lineStyles?: { [key: string]: LineChartLineStyle };
     lineColorPalette?: string[];
@@ -60,8 +72,16 @@ export const defaultLineChartStyle: LineChartStyle = {
     gridWrapper: {
         flex: 1
     },
-    xAxisLabel: {
-        alignSelf: "center"
+    grid: {
+        paddingBottom: 30,
+        paddingLeft: 30,
+        paddingRight: 10,
+        paddingTop: 10
+    },
+    xAxis: {
+        label: {
+            alignSelf: "center"
+        }
     },
     // TODO Remove this temp linestyle
     lineStyles: {

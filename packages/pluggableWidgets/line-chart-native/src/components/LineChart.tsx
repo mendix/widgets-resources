@@ -7,7 +7,7 @@ import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { Legend } from "./Legend";
 import { LineChartStyle } from "../ui/Styles";
-import { mapLineStyleToLib, mapMarkerStyleToLib } from "../utils/StyleMappers";
+import { mapToAxisStyle, mapToGridStyle, mapToLineStyle, mapToMarkerStyle } from "../utils/StyleMappers";
 
 export interface LineChartProps {
     series: LineChartSeries[];
@@ -96,7 +96,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 (lineStyle === "custom" && seriesStyle?.markers?.display && seriesStyle.markers.display !== "false") ? (
                     <VictoryScatter
                         data={dataPoints}
-                        style={mapMarkerStyleToLib(seriesStyle?.markers)}
+                        style={mapToMarkerStyle(seriesStyle?.markers)}
                         size={seriesStyle?.markers?.size}
                         symbol={seriesStyle?.markers?.symbol}
                     />
@@ -106,7 +106,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 <VictoryGroup key={index}>
                     {markers && seriesStyle?.markers?.display === "underneath" ? markers : null}
                     <VictoryLine
-                        style={mapLineStyleToLib(seriesStyle?.line)}
+                        style={mapToLineStyle(seriesStyle?.line)}
                         data={dataPoints}
                         interpolation={interpolation}
                     />
@@ -121,8 +121,8 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     const [firstSeries] = series;
 
     const axisLabelStyles = useMemo(() => {
-        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxisLabel, ["relativePositionGrid"]);
-        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxisLabel, ["relativePositionGrid"]);
+        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
+        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxis?.label, ["relativePositionGrid"]);
 
         if (
             !(
@@ -195,7 +195,12 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     <VictoryChart
                                         height={chartDimensions?.height}
                                         width={chartDimensions?.width}
-                                        padding={style.grid?.padding}
+                                        padding={{
+                                            top: style.grid?.paddingTop,
+                                            right: style.grid?.paddingRight,
+                                            bottom: style.grid?.paddingBottom,
+                                            left: style.grid?.paddingLeft
+                                        }}
                                         scale={
                                             dataTypesResult
                                                 ? {
@@ -204,10 +209,10 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                                   }
                                                 : undefined
                                         }
-                                        style={style.grid}
+                                        style={mapToGridStyle(style.grid)}
                                     >
                                         <VictoryAxis
-                                            style={style.grid?.xAxis}
+                                            style={mapToAxisStyle(style.grid, style.xAxis)}
                                             orientation={"bottom"}
                                             {...(firstSeries?.xFormatter
                                                 ? { tickFormat: firstSeries.xFormatter }
@@ -215,7 +220,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                         />
                                         <VictoryAxis
                                             dependentAxis
-                                            style={style.grid?.yAxis}
+                                            style={mapToAxisStyle(style.grid, style.yAxis)}
                                             orientation={"left"}
                                             {...(firstSeries.yFormatter
                                                 ? { tickFormat: firstSeries.yFormatter }
