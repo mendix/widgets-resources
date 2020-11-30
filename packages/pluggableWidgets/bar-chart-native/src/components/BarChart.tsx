@@ -56,17 +56,22 @@ export function BarChart({
 
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
-    // todo(jordan): why isnt sort working on strings :<
-    const sort = useMemo(() => ({ sortOrder, sortKey: "y" }), [sortOrder]);
+    const sort = useMemo(() => ({ sortOrder, sortKey: "x" }), [sortOrder]);
 
     const colorScale = { colorScale: "qualitative" } as { colorScale: "qualitative" };
 
-    const conditionalProps = useMemo(
+    const colorScaleProp = useMemo(
         () => ({
-            ...colorScale,
+            ...colorScale
+        }),
+        [colorScale.colorScale]
+    );
+
+    const sortProp = useMemo(
+        () => ({
             ...sort
         }),
-        [colorScale.colorScale, sort]
+        [sort]
     );
 
     const groupedOrStacked = useMemo(() => {
@@ -79,15 +84,18 @@ export function BarChart({
                 horizontal
                 key={index}
                 data={series.dataPoints}
-                {...(showLabels ? { labels: ({ datum }: { datum: any }) => datum.x } : undefined)}
+                {...sortProp}
             />
         ));
 
         if (presentation === "grouped") {
-            return <VictoryGroup {...conditionalProps}>{bars}</VictoryGroup>;
+            return (
+                // todo: configure offset
+                <VictoryGroup {...colorScaleProp}>{bars}</VictoryGroup>
+            );
         }
 
-        return <VictoryStack {...conditionalProps}>{bars}</VictoryStack>;
+        return <VictoryStack {...colorScaleProp}>{bars}</VictoryStack>;
     }, [dataTypesResult, series, style, warningMessagePrefix]);
 
     const [firstSeries] = series;
