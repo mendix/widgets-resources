@@ -5,7 +5,6 @@ import { VictoryScatterProps } from "victory-scatter";
 
 import { LineChartAxisStyle, LineChartGridStyle, LineChartLineStyle } from "../ui/Styles";
 
-// TODO Unit test
 export function mapToGridStyle(gridStyle?: LineChartGridStyle): VictoryChartProps["style"] {
     return {
         background: {
@@ -13,6 +12,7 @@ export function mapToGridStyle(gridStyle?: LineChartGridStyle): VictoryChartProp
         }
     };
 }
+
 export function mapToAxisStyle<T extends "X" | "Y">(
     gridStyle?: LineChartGridStyle,
     axisStyle?: LineChartAxisStyle<T>
