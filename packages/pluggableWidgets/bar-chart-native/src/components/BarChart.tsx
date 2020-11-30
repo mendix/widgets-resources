@@ -139,7 +139,7 @@ export function BarChart({
                                         <VictoryAxis
                                             dependentAxis
                                             orientation={"left"}
-                                            {...(firstSeries.yFormatter
+                                            {...(firstSeries?.yFormatter
                                                 ? { tickFormat: firstSeries.yFormatter }
                                                 : undefined)}
                                         />
