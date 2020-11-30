@@ -154,7 +154,7 @@ export default async args => {
 
     function getCommonPlugins(config) {
         return [
-            nodeResolve({ browser: true, preferBuiltins: false }),
+            nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] }),
             isTypescript
                 ? typescript({
                       noEmitOnError: !args.watch,
