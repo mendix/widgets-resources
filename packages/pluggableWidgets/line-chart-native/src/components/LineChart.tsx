@@ -190,7 +190,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                 ? yAxisLabelComponent
                                 : null}
 
-                            <View onLayout={updateChartDimensions} style={style.gridWrapper}>
+                            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
                                 {chartDimensions ? (
                                     <VictoryChart
                                         height={chartDimensions?.height}

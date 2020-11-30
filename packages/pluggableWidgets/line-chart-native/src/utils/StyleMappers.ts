@@ -18,8 +18,8 @@ export function mapToAxisStyle<T extends "X" | "Y">(
     axisStyle?: LineChartAxisStyle<T>
 ): VictoryAxisCommonProps["style"] {
     return {
-        axis: { stroke: axisStyle?.color, strokeWidth: axisStyle?.width },
-        grid: { stroke: gridStyle?.color, strokeDasharray: gridStyle?.dashArray },
+        axis: { stroke: axisStyle?.color, strokeDasharray: axisStyle?.dashArray, strokeWidth: axisStyle?.width },
+        grid: { stroke: gridStyle?.color, strokeDasharray: gridStyle?.dashArray, strokeWidth: gridStyle?.width },
         tickLabels: {
             fontFamily: axisStyle?.fontFamily,
             fontSize: axisStyle?.fontSize,
