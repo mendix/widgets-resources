@@ -22,30 +22,32 @@ import { useSettings } from "../utils/settings";
 export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
 
 export interface TableProps<T> {
+    cellRenderer: (
+        renderWrapper: (children: ReactNode, className?: string) => ReactElement,
+        value: T,
+        columnIndex: number
+    ) => ReactElement;
     className: string;
-    data: T[];
     columns: TableColumn[];
     columnsFilterable: boolean;
     columnsSortable: boolean;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
+    data: T[];
+    emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
+    filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
+    hasMoreItems: boolean;
     numberOfItems?: number;
     paging: boolean;
     page: number;
     pageSize: number;
     pagingPosition: string;
+    preview?: boolean;
     setPage?: (computePage: (prevPage: number) => number) => void;
-    styles?: CSSProperties;
-    hasMoreItems: boolean;
-    cellRenderer: (
-        renderWrapper: (children: ReactNode, className?: string) => ReactElement,
-        value: T,
-        columnIndex: number
-    ) => ReactElement;
-    valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
-    filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
     settings?: EditableValue<string>;
+    styles?: CSSProperties;
+    valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
 }
 
 export interface ColumnWidth {
@@ -282,6 +284,18 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             </Fragment>
                         );
                     })}
+                    {(props.data.length === 0 || props.preview) &&
+                        props.emptyPlaceholderRenderer &&
+                        props.emptyPlaceholderRenderer(children => (
+                            <div
+                                className={classNames("td", "td-borders")}
+                                style={{
+                                    gridColumn: `span ${props.columns.length + (props.columnsHidable ? 1 : 0)}`
+                                }}
+                            >
+                                {children}
+                            </div>
+                        ))}
                 </InfiniteBody>
                 <div className="table-footer">{props.pagingPosition === "bottom" && pagination}</div>
             </div>

@@ -116,8 +116,22 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                 : content;
         })
     };
+    const footer = values.showEmptyPlaceholder
+        ? [
+              {
+                  type: "RowLayout",
+                  columnSize: "fixed",
+                  children: [
+                      {
+                          type: "DropZone",
+                          property: values.emptyPlaceholder
+                      } as DropZoneProps
+                  ]
+              } as RowLayoutProps
+          ]
+        : [];
     return {
         type: "Container",
-        children: [headers, ...Array.from({ length: 5 }).map(() => columns)]
+        children: [headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
     };
 };

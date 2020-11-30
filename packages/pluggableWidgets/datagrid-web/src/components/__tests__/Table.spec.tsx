@@ -64,6 +64,14 @@ describe("Table", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly with empty placeholder", () => {
+        const component = shallow(
+            <Table {...mockTableProps()} emptyPlaceholderRenderer={renderWrapper => renderWrapper(<div />)} />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockTableProps(): TableProps<ObjectItem> {

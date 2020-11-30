@@ -49,6 +49,8 @@ export interface DatagridContainerProps {
     tabIndex: number;
     datasource: ListValue;
     columns: ColumnsType[];
+    showEmptyPlaceholder: boolean;
+    emptyPlaceholder?: ReactNode;
     rowClass?: ListExpressionValue<string>;
     columnsFilterable: boolean;
     pageSize: number;
@@ -66,6 +68,8 @@ export interface DatagridPreviewProps {
     style: string;
     datasource: {} | null;
     columns: ColumnsPreviewType[];
+    showEmptyPlaceholder: boolean;
+    emptyPlaceholder: { widgetCount: number; renderer: ComponentType };
     rowClass: string;
     columnsFilterable: boolean;
     pageSize: number | null;
