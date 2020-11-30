@@ -1,10 +1,11 @@
 import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryStack } from "victory-native";
+import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { BarChartStyle } from "../ui/Styles";
 import { SortOrderEnum } from "../../typings/BarChartProps";
-import { Legend } from "../../../line-chart-native/src/components/Legend";
+import { Legend } from "./Legend";
 
 export interface BarChartProps {
     series: BarChartSeries[];
@@ -45,6 +46,8 @@ export function BarChart({
     presentation,
     series,
     showLabels,
+    xAxisLabel,
+    yAxisLabel,
     showLegend,
     sortOrder,
     style,
@@ -79,12 +82,14 @@ export function BarChart({
             return null;
         }
 
+        // datum.y is actually the X axis data points due to the way Victory handles horizontal charts
         const bars = series.map((series, index) => (
             <VictoryBar
                 horizontal
                 key={index}
                 data={series.dataPoints}
                 {...sortProp}
+                {...(showLabels ? { labels: ({ datum }: { datum: any }) => datum.y } : undefined)}
             />
         ));
 
@@ -99,6 +104,51 @@ export function BarChart({
     }, [dataTypesResult, series, style, warningMessagePrefix]);
 
     const [firstSeries] = series;
+
+    const axisLabelStyles = useMemo(() => {
+        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxisLabel, ["relativePositionGrid"]);
+        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxisLabel, ["relativePositionGrid"]);
+
+        if (
+            !(
+                extractedXAxisLabelStyle.relativePositionGrid === "bottom" ||
+                extractedXAxisLabelStyle.relativePositionGrid === "right"
+            )
+        ) {
+            if (extractedXAxisLabelStyle.relativePositionGrid !== undefined) {
+                console.warn(
+                    `${warningMessagePrefix}nvalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
+                );
+            }
+
+            extractedXAxisLabelStyle.relativePositionGrid = "bottom";
+        }
+
+        if (
+            !(
+                extractedYAxisLabelStyle.relativePositionGrid === "top" ||
+                extractedYAxisLabelStyle.relativePositionGrid === "left"
+            )
+        ) {
+            if (extractedYAxisLabelStyle.relativePositionGrid !== undefined) {
+                console.warn(
+                    `${warningMessagePrefix}nvalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
+                );
+            }
+
+            extractedYAxisLabelStyle.relativePositionGrid = "top";
+        }
+
+        return {
+            extractedXAxisLabelStyle,
+            xAxisLabelStyle,
+            extractedYAxisLabelStyle,
+            yAxisLabelStyle
+        };
+    }, [style, warningMessagePrefix]);
+
+    const xAxisLabelComponent = <Text style={axisLabelStyles.xAxisLabelStyle}>{xAxisLabel}</Text>;
+    const yAxisLabelComponent = <Text style={axisLabelStyles.yAxisLabelStyle}>{yAxisLabel}</Text>;
 
     const onLayout = useCallback(
         (event: LayoutChangeEvent) =>
@@ -116,7 +166,13 @@ export function BarChart({
             ) : (
                 <View style={style.chart}>
                     <View style={style.gridAndLabelsRow}>
+                        {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "top"
+                            ? yAxisLabelComponent
+                            : null}
                         <View style={style.gridRow}>
+                            {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "left"
+                                ? yAxisLabelComponent
+                                : null}
                             <View onLayout={onLayout} style={{ flex: 1 }}>
                                 {chartDimensions ? (
                                     <VictoryChart
@@ -132,12 +188,14 @@ export function BarChart({
                                     >
                                         <VictoryAxis
                                             orientation={"bottom"}
+                                            dependentAxis
+                                            style={style.grid?.xAxis}
                                             {...(firstSeries?.xFormatter
                                                 ? { tickFormat: firstSeries.xFormatter }
                                                 : undefined)}
                                         />
                                         <VictoryAxis
-                                            dependentAxis
+                                            style={style.grid?.yAxis}
                                             orientation={"left"}
                                             {...(firstSeries?.yFormatter
                                                 ? { tickFormat: firstSeries.yFormatter }
@@ -147,7 +205,13 @@ export function BarChart({
                                     </VictoryChart>
                                 ) : null}
                             </View>
+                            {axisLabelStyles.extractedXAxisLabelStyle.relativePositionGrid === "right"
+                                ? xAxisLabelComponent
+                                : null}
                         </View>
+                        {axisLabelStyles.extractedXAxisLabelStyle.relativePositionGrid === "bottom"
+                            ? xAxisLabelComponent
+                            : null}
                     </View>
                     {showLegend ? <Legend style={style} series={series} /> : null}
                 </View>
