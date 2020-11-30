@@ -3,20 +3,22 @@ import { TextStyle, ViewStyle } from "react-native";
 export interface LineChartGridStyle {
     backgroundColor?: string;
     color?: string;
-    dashArray?: string; // TODO check whether this works on axis
+    dashArray?: string;
     paddingBottom?: number;
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
+    width?: number;
 }
 
 export interface LineChartAxisStyle<T extends "X" | "Y"> {
     color?: string;
+    dashArray?: string;
     fontFamily?: string;
     fontSize?: number;
     fontStyle?: "normal" | "italic";
     fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
-    label: TextStyle & {
+    label?: TextStyle & {
         relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
     };
     width?: number;
@@ -30,7 +32,7 @@ export interface LineChartLineStyle {
         width?: number;
     };
     markers?: {
-        backgroundColor?: string; // TODO test opacity
+        backgroundColor?: string;
         borderColor?: string;
         borderWidth?: number;
         display?: "false" | "underneath" | "onTop";
@@ -50,7 +52,6 @@ export interface LineChartStyle {
     container?: ViewStyle;
     errorMessage?: TextStyle;
     chart?: ViewStyle;
-    gridWrapper?: ViewStyle;
     grid?: LineChartGridStyle;
     xAxis?: LineChartAxisStyle<"X">;
     yAxis?: LineChartAxisStyle<"Y">;
@@ -69,9 +70,6 @@ export const defaultLineChartStyle: LineChartStyle = {
     chart: {
         flex: 1
     },
-    gridWrapper: {
-        flex: 1
-    },
     grid: {
         paddingBottom: 30,
         paddingLeft: 30,
@@ -81,25 +79,6 @@ export const defaultLineChartStyle: LineChartStyle = {
     xAxis: {
         label: {
             alignSelf: "center"
-        }
-    },
-    // TODO Remove this temp linestyle
-    lineStyles: {
-        mendix: {
-            line: {
-                color: "rgba(255,0,0,0.3)",
-                dashArray: "10,3",
-                ending: "flat",
-                width: 15
-            },
-            markers: {
-                backgroundColor: "blue",
-                borderColor: "red",
-                borderWidth: 3,
-                display: "onTop",
-                size: 10,
-                symbol: "diamond"
-            }
         }
     },
     legend: {
