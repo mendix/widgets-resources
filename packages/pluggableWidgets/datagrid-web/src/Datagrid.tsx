@@ -56,7 +56,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                         ) : (
                             <span className="td-text">{column.attribute(value).displayValue}</span>
                         ),
-                        classNames(props.rowClass?.(value)?.value, column.columnClass?.(value)?.value)
+                        classNames(
+                            column.alignment ? `align-column-${column.alignment}` : "",
+                            props.rowClass?.(value)?.value,
+                            column.columnClass?.(value)?.value
+                        )
                     );
                 },
                 [props.columns, props.rowClass]

@@ -15,6 +15,7 @@ import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome
 import { ColumnResizer } from "./ColumnResizer";
 
 export interface HeaderProps<D extends object> {
+    className?: string;
     column: HeaderGroup<D>;
     sortable: boolean;
     resizable: boolean;
@@ -65,7 +66,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             >
                 <div
                     id={props.column.id}
-                    className={classNames("column-header", canSort ? "clickable" : "")}
+                    className={classNames("column-header", canSort ? "clickable" : "", props.className)}
                     onClick={
                         canSort
                             ? e => {
@@ -88,7 +89,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                             : undefined
                     }
                 >
-                    {props.column.render("Header")}
+                    <span>{props.column.render("Header")}</span>
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
                 {props.filterable && props.column.customFilter ? props.column.customFilter : null}

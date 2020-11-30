@@ -27,6 +27,7 @@ declare module "react-table" {
         customFilter?: ReactNode;
         weight?: number;
         width?: WidthEnum;
+        alignment?: string;
     }
 
     export interface TableState<D extends object = {}>

@@ -84,6 +84,15 @@ describe("Header", () => {
         clickableRegion.simulate("click");
         expect(mockedFunction).toBeCalledWith([{ id: "sortable", desc: false }]);
     });
+
+    it("renders the structure correctly when filterable with custom classes", () => {
+        const props = mockHeaderProps();
+        props.filterable = true;
+
+        const component = shallow(<Header {...props} className="my-custom-class" />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockHeaderProps(): HeaderProps<object> {

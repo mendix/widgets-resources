@@ -76,10 +76,15 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         .column-header {
             display: flex;
             flex-grow: 1;
-            justify-content: space-between;
             align-items: center;
 
+            span {
+                display: flex;
+                flex-grow: 1;
+            }
+
             svg {
+                flex-grow: 0;
                 color: $icon-color;
             }
         }
@@ -178,6 +183,30 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
 
     & *:focus {
         outline: 0;
+    }
+
+    .align-column-left {
+        justify-content: flex-start;
+
+        span {
+            justify-content: flex-start;
+        }
+    }
+
+    .align-column-center {
+        justify-content: center;
+
+        span {
+            justify-content: center;
+        }
+    }
+
+    .align-column-right {
+        justify-content: flex-end;
+
+        span {
+            justify-content: flex-end;
+        }
     }
 }
 

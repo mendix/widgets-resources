@@ -60,6 +60,15 @@
                                 <caption>Column size</caption>
                                 <description />
                             </property>
+                            <property key="alignment" type="enumeration" defaultValue="left">
+                                <caption>Alignment</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="left">Left</enumerationValue>
+                                    <enumerationValue key="center">Center</enumerationValue>
+                                    <enumerationValue key="right">Right</enumerationValue>
+                                </enumerationValues>
+                            </property>
                             <property key="columnClass" type="expression" required="false" dataSource="../datasource">
                                 <caption>Dynamic cell class</caption>
                                 <description />

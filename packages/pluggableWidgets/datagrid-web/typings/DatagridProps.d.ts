@@ -8,6 +8,8 @@ import { DynamicValue, EditableValue, ListValue, ListAttributeValue, ListExpress
 
 export type WidthEnum = "autoFill" | "autoFit" | "manual";
 
+export type AlignmentEnum = "left" | "center" | "right";
+
 export type HidableEnum = "yes" | "hidden" | "no";
 
 export interface ColumnsType {
@@ -18,6 +20,7 @@ export interface ColumnsType {
     content?: ListWidgetValue;
     width: WidthEnum;
     size: number;
+    alignment: AlignmentEnum;
     columnClass?: ListExpressionValue<string>;
     sortable: boolean;
     resizable: boolean;
@@ -35,6 +38,7 @@ export interface ColumnsPreviewType {
     content: { widgetCount: number; renderer: ComponentType };
     width: WidthEnum;
     size: number | null;
+    alignment: AlignmentEnum;
     columnClass: string;
     sortable: boolean;
     resizable: boolean;
