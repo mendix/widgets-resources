@@ -1,5 +1,5 @@
 import { brand, font } from "../variables";
-import { LineChartStyle } from "../../../../../../../pluggableWidgets/line-chart-native/src/ui/Styles";
+import { LineChartType } from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -8,11 +8,11 @@ Customizing core files will make updating Atlas much more difficult in the futur
 To customize any core styling, copy the part you want to customize to styles/native/app/ so the core styling is overwritten.
 
 ==========================================================================
-    Slider
+    Line Chart
 
     Default Class For Mendix Line Chart Widget
 ========================================================================== */
-export const com_mendix_widget_native_linechart_LineChart: LineChartStyle = {
+export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
     container: {
         // All ViewStyle properties are allowed
     },
