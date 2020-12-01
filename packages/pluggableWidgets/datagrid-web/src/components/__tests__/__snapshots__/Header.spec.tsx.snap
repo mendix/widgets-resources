@@ -17,7 +17,9 @@ exports[`Header renders the structure correctly 1`] = `
     <div
       className="column-header"
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
   </div>
 </div>
@@ -45,7 +47,34 @@ exports[`Header renders the structure correctly when draggable 1`] = `
     <div
       className="column-header"
     >
-      Test
+      <span>
+        Test
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when filterable with custom classes 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header my-custom-class"
+    >
+      <span>
+        Test
+      </span>
     </div>
   </div>
 </div>
@@ -68,7 +97,9 @@ exports[`Header renders the structure correctly when filterable with custom filt
     <div
       className="column-header"
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
     <div>
       <label>
@@ -99,7 +130,9 @@ exports[`Header renders the structure correctly when filterable with no custom f
     <div
       className="column-header"
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
   </div>
 </div>
@@ -122,7 +155,9 @@ exports[`Header renders the structure correctly when resizable 1`] = `
     <div
       className="column-header"
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
   </div>
   <ColumnResizer
@@ -145,7 +180,9 @@ exports[`Header renders the structure correctly when sortable 1`] = `
       className="column-header clickable"
       onClick={[Function]}
     >
-      Test
+      <span>
+        Test
+      </span>
       <FontAwesomeIcon
         border={false}
         className=""

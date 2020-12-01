@@ -23,7 +23,8 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                       draggable: false,
                       hidable: "no",
                       size: 1,
-                      sortable: false
+                      sortable: false,
+                      alignment: "left"
                   }
               ];
 
@@ -33,10 +34,11 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             cellRenderer={useCallback(
                 (renderWrapper, _, columnIndex) => {
                     const column = columns[columnIndex];
+                    const className = column.alignment ? `align-column-${column.alignment}` : "";
                     return column.hasWidgets ? (
-                        <column.content.renderer>{renderWrapper(null)}</column.content.renderer>
+                        <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>
                     ) : (
-                        renderWrapper(<span className="td-text">{column.attribute}</span>)
+                        renderWrapper(<span className="td-text">{column.attribute}</span>, className)
                     );
                 },
                 [props.columns]

@@ -20,6 +20,7 @@ declare module "react-table" {
             UseSortByOptions<D> {}
 
     export interface ColumnInterface<D extends object = {}> extends UseSortByColumnOptions<D> {
+        alignment: string;
         canHide?: boolean;
         canDrag?: boolean;
         canResize?: boolean;

@@ -88,6 +88,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             props.columns.map((column, index) => ({
                 id: index.toString(),
                 accessor: "item",
+                alignment: column.alignment,
                 Header: typeof column.header === "object" ? column.header.value : column.header,
                 hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
@@ -244,6 +245,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         <Fragment key={`headers_row_${index}`}>
                             {headerGroup.headers.map((column, index) => (
                                 <Header
+                                    className={`align-column-${column.alignment}`}
                                     column={column}
                                     key={`headers_column_${index}`}
                                     draggable={props.columnsDraggable}

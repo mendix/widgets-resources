@@ -57,7 +57,8 @@ describe("Table", () => {
                 draggable: false,
                 hidable: "no" as const,
                 width: "autoFill" as const,
-                size: 1
+                size: 1,
+                alignment: "left" as const
             }
         ];
         const component = shallow(<Table {...mockTableProps()} columns={columns} columnsFilterable />);
@@ -69,6 +70,39 @@ describe("Table", () => {
         const component = shallow(
             <Table {...mockTableProps()} emptyPlaceholderRenderer={renderWrapper => renderWrapper(<div />)} />
         );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("renders the structure correctly with column alignments", () => {
+        const columns = [
+            {
+                header: "Test",
+                hasWidgets: false,
+                sortable: false,
+                filterable: "custom" as const,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const,
+                width: "autoFill" as const,
+                size: 1,
+                alignment: "center" as const
+            },
+            {
+                header: "Test 2",
+                hasWidgets: false,
+                sortable: false,
+                filterable: "custom" as const,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const,
+                width: "autoFill" as const,
+                size: 1,
+                alignment: "right" as const
+            }
+        ];
+
+        const component = shallow(<Table {...mockTableProps()} columns={columns} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -85,7 +119,8 @@ function mockTableProps(): TableProps<ObjectItem> {
             draggable: false,
             hidable: "no" as const,
             width: "autoFill" as const,
-            size: 1
+            size: 1,
+            alignment: "left" as const
         }
     ];
     return {

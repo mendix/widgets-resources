@@ -55,7 +55,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                       draggable: false,
                       hidable: "no",
                       size: 1,
-                      sortable: false
+                      sortable: false,
+                      alignment: "left"
                   }
               ];
     const columns: RowLayoutProps = {
