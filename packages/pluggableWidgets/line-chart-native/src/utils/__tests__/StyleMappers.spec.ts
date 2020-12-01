@@ -6,8 +6,8 @@ describe("StyleMappers", () => {
         it("maps the relevant styles", () => {
             const gridStyle = {
                 backgroundColor: "orange",
-                color: "transparent",
                 dashArray: "5,5",
+                lineColor: "transparent",
                 paddingBottom: 30,
                 paddingLeft: 30,
                 paddingRight: 10,
@@ -29,8 +29,8 @@ describe("StyleMappers", () => {
         it("maps the relevant styles", () => {
             const gridStyle = {
                 backgroundColor: "orange",
-                color: "transparent",
                 dashArray: "5,5",
+                lineColor: "transparent",
                 paddingBottom: 30,
                 paddingLeft: 30,
                 paddingRight: 10,
@@ -49,21 +49,23 @@ describe("StyleMappers", () => {
                     relativePositionGrid: "left",
                     alignSelf: "center"
                 },
+                lineColor: "purple",
                 width: 5
             };
 
             const expectedResult = {
                 axis: {
-                    stroke: axisStyle?.color,
+                    stroke: axisStyle?.lineColor,
                     strokeDasharray: axisStyle?.dashArray,
                     strokeWidth: axisStyle?.width
                 },
                 grid: {
-                    stroke: gridStyle?.color,
+                    stroke: gridStyle?.lineColor,
                     strokeDasharray: gridStyle?.dashArray,
                     strokeWidth: gridStyle?.width
                 },
                 tickLabels: {
+                    fill: axisStyle.color,
                     fontFamily: axisStyle?.fontFamily,
                     fontSize: axisStyle?.fontSize,
                     fontStyle: axisStyle?.fontStyle,
@@ -78,15 +80,15 @@ describe("StyleMappers", () => {
     describe("mapToLineStyle", () => {
         it("maps the relevant styles", () => {
             const lineStyle: LineChartLineStyle["line"] = {
-                color: "rgba(255,0,0,0.3)",
                 dashArray: "10,3",
                 ending: "flat",
+                lineColor: "rgba(255,0,0,0.3)",
                 width: 15
             };
 
             const expectedResult = {
                 data: {
-                    stroke: lineStyle?.color,
+                    stroke: lineStyle?.lineColor,
                     strokeDasharray: lineStyle?.dashArray,
                     strokeLinecap: lineStyle?.ending,
                     strokeWidth: lineStyle?.width
