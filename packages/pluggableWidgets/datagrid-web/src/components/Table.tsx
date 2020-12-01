@@ -245,7 +245,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         <Fragment key={`headers_row_${index}`}>
                             {headerGroup.headers.map((column, index) => (
                                 <Header
-                                    className={column.alignment ? `align-column-${column.alignment}` : ""}
+                                    className={`align-column-${column.alignment}`}
                                     column={column}
                                     key={`headers_column_${index}`}
                                     draggable={props.columnsDraggable}
