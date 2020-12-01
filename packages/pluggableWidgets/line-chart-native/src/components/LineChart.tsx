@@ -55,7 +55,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         for (const _series of series) {
             const configuredStyle = !_series.customLineStyle
                 ? null
-                : style.lineStyles?.[_series.customLineStyle]?.line?.color;
+                : style.lineStyles?.[_series.customLineStyle]?.line?.lineColor;
 
             if (typeof configuredStyle !== "string") {
                 result.push(style.lineColorPalette?.[index] || "black");
