@@ -87,6 +87,7 @@
 .btn-icon-right {
     & > img,
     & > .glyphicon {
+        top: 4px;
         float: right;
         margin-left: 5px;
     }
