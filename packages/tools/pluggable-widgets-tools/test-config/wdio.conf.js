@@ -63,15 +63,15 @@ exports.config = {
         helpers: [require("@babel/register")],
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
-    afterTest: test => {
-        if (test.passed) {
-            return;
+    afterTest(test, context, { error }) {
+        // take a screenshot anytime a test fails
+        if (error) {
+            const timestamp = new Date().toJSON().replace(/:/g, "-");
+            const testName = test.fullName.replace(/ /g, "_");
+            const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
+            const filePath = join(e2ePath, filename);
+            browser.saveScreenshot(filePath);
+            console.log("Saved screenshot: ", filePath);
         }
-        const timestamp = new Date().toJSON().replace(/:/g, "-");
-        const testName = test.fullName.replace(/ /g, "_");
-        const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
-        const filePath = join(e2ePath, filename);
-        browser.saveScreenshot(filePath);
-        console.log("Saved screenshot: ", filePath);
     }
 };

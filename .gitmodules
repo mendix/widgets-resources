@@ -82,3 +82,7 @@
 	branch = popupmenu-web
 	url = https://github.com/mendix/testProjects.git
 	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+[submodule "packages/pluggableWidgets/datagrid-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-web
