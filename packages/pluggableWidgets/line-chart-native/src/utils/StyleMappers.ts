@@ -18,9 +18,10 @@ export function mapToAxisStyle<T extends "X" | "Y">(
     axisStyle?: LineChartAxisStyle<T>
 ): VictoryAxisCommonProps["style"] {
     return {
-        axis: { stroke: axisStyle?.color, strokeDasharray: axisStyle?.dashArray, strokeWidth: axisStyle?.width },
-        grid: { stroke: gridStyle?.color, strokeDasharray: gridStyle?.dashArray, strokeWidth: gridStyle?.width },
+        axis: { stroke: axisStyle?.lineColor, strokeDasharray: axisStyle?.dashArray, strokeWidth: axisStyle?.width },
+        grid: { stroke: gridStyle?.lineColor, strokeDasharray: gridStyle?.dashArray, strokeWidth: gridStyle?.width },
         tickLabels: {
+            fill: axisStyle?.color,
             fontFamily: axisStyle?.fontFamily,
             fontSize: axisStyle?.fontSize,
             fontStyle: axisStyle?.fontStyle,
@@ -32,7 +33,7 @@ export function mapToAxisStyle<T extends "X" | "Y">(
 export function mapToLineStyle(lineStyle: LineChartLineStyle["line"]): VictoryLineProps["style"] {
     return {
         data: {
-            stroke: lineStyle?.color,
+            stroke: lineStyle?.lineColor,
             strokeDasharray: lineStyle?.dashArray,
             strokeLinecap: lineStyle?.ending,
             strokeWidth: lineStyle?.width

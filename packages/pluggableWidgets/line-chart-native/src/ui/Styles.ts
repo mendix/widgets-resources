@@ -2,8 +2,8 @@ import { TextStyle, ViewStyle } from "react-native";
 
 export interface LineChartGridStyle {
     backgroundColor?: string;
-    color?: string;
     dashArray?: string;
+    lineColor?: string;
     paddingBottom?: number;
     paddingLeft?: number;
     paddingRight?: number;
@@ -21,14 +21,15 @@ export interface LineChartAxisStyle<T extends "X" | "Y"> {
     label?: TextStyle & {
         relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
     };
+    lineColor?: string;
     width?: number;
 }
 
 export interface LineChartLineStyle {
     line?: {
-        color?: string;
         dashArray?: string;
         ending?: "flat" | "round";
+        lineColor?: string;
         width?: number;
     };
     markers?: {

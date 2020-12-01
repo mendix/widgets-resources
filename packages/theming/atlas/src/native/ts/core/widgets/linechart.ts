@@ -1,4 +1,4 @@
-import { brand, font } from "../variables";
+import { border, brand, font } from "../variables";
 import { LineChartType } from "../../types/widgets";
 /*
 
@@ -26,42 +26,44 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
         // All ViewStyle properties are allowed
     },
     grid: {
-        color: "#CED0D3",
+        lineColor: border.color,
         paddingBottom: 32,
         paddingLeft: 32,
         paddingRight: 8,
         paddingTop: 8
     },
     xAxis: {
-        color: "#CED0D3",
+        color: font.colorTitle,
         fontFamily: font.family,
         fontSize: font.sizeSmall,
         fontWeight: font.weightNormal,
         label: {
             // All TextStyle properties are allowed & relativePositionGrid property ("bottom" or "right")
-            color: "#6C717C",
+            color: font.colorParagraph,
             alignSelf: "center",
             marginHorizontal: 0,
             marginVertical: 8,
             fontFamily: font.family,
             fontSize: font.sizeSmall,
             fontWeight: font.weightNormal
-        }
+        },
+        lineColor: border.color
     },
     yAxis: {
-        color: "#CED0D3",
+        color: font.colorTitle,
         fontFamily: font.family,
         fontSize: font.sizeSmall,
         fontWeight: font.weightNormal,
         label: {
             // All TextStyle properties are allowed & relativePositionGrid property ("top" or "left")
-            color: "#6C717C",
+            color: font.colorParagraph,
             marginHorizontal: 0,
             marginVertical: 8,
             fontFamily: font.family,
             fontSize: font.sizeSmall,
             fontWeight: font.weightNormal
-        }
+        },
+        lineColor: border.color
     },
     lineStyles: {},
     legend: {
@@ -82,8 +84,10 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
         },
         label: {
             // All TextStyle properties are allowed
+            color: font.colorTitle,
             fontFamily: font.family,
-            fontSize: font.sizeSmall
+            fontSize: font.sizeSmall,
+            fontWeight: font.weightNormal
         }
     },
     lineColorPalette: Object.values(brand) // Array of color strings
