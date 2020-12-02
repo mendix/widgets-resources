@@ -48,26 +48,27 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
     // Line Chart user-styling may be missing for certain series. A palette is passed, any missing line colours
     // fallback to a colour from the palette.
-    const normalisedLineColors: string[] = useMemo(() => {
-        const result: string[] = [];
-        let index = 0;
+    const normalizedLineColors: string[] = useMemo(() => {
+        let lineColorPaletteIndex = 0;
 
-        for (const _series of series) {
+        return series.map(_series => {
             const configuredStyle = !_series.customLineStyle
                 ? null
                 : style.lineStyles?.[_series.customLineStyle]?.line?.lineColor;
 
             if (typeof configuredStyle !== "string") {
-                result.push(style.lineColorPalette?.[index] || "black");
-                if (style.lineColorPalette) {
-                    index = index + 1 === style.lineColorPalette.length ? 0 : index + 1;
-                }
-            } else {
-                result.push(configuredStyle);
-            }
-        }
+                const lineColor = style.lineColorPalette?.[lineColorPaletteIndex] || "black";
 
-        return result;
+                if (style.lineColorPalette) {
+                    lineColorPaletteIndex =
+                        lineColorPaletteIndex + 1 === style.lineColorPalette.length ? 0 : lineColorPaletteIndex + 1;
+                }
+
+                return lineColor;
+            }
+
+            return configuredStyle;
+        });
     }, [series, style]);
 
     const chartLines = useMemo(() => {
@@ -226,7 +227,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                                 ? { tickFormat: firstSeries.yFormatter }
                                                 : undefined)}
                                         />
-                                        <VictoryGroup colorScale={normalisedLineColors}>{chartLines}</VictoryGroup>
+                                        <VictoryGroup colorScale={normalizedLineColors}>{chartLines}</VictoryGroup>
                                     </VictoryChart>
                                 ) : null}
                             </View>
@@ -241,7 +242,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                     </View>
 
                     {showLegend ? (
-                        <Legend style={style.legend} series={series} seriesColors={normalisedLineColors} />
+                        <Legend style={style.legend} series={series} seriesColors={normalizedLineColors} />
                     ) : null}
                 </View>
             )}
