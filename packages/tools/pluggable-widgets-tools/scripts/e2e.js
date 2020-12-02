@@ -57,9 +57,11 @@ async function main() {
     const projectFile = ls("tests/testProject/*.mpr").toString();
     execSync(
         `docker run -t -v ${process.cwd()}:/source ` +
-            `--rm mxbuild:${latestMendixVersion} -o /tmp/automation.mda --loose-version-check /source/${projectFile}`,
+            `--rm mxbuild:${latestMendixVersion} bash -c " mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
+            `-o /tmp/automation.mda /source/${projectFile}"`,
         { stdio: "inherit" }
     );
+    console.log("Bundle created and all the widgets are updated");
 
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);

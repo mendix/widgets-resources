@@ -26,8 +26,7 @@ async function main() {
         throw new Error("This script requires unzip command to be available on the PATH!");
     }
 
-    // const atlasArchive = await getLatestAtlasArchive();
-    const atlasArchive = await temp();
+    const atlasArchive = await getLatestAtlasArchive();
     rm("-rf", "tests/testProject/theme");
     rm("-rf", "tests/testProject/widgets");
     execSync(`unzip ${atlasArchive} -x '*.mpr' '*.xml' -d tests/testProject`);
@@ -39,24 +38,6 @@ async function exists(filePath) {
         return true;
     } catch (e) {
         return false;
-    }
-}
-
-// todo: remove this when mxbuild includes tool to update widget definition (8.15)
-async function temp() {
-    const atlasV = "2.6.1";
-    const url = "https://files.appstore.mendix.com/5/104730/2.6.1/Atlas_UI_Resources_2.6.1.mpk";
-    const path = join(tmpdir(), `${atlasV}.mpk`);
-    if (await exists(path)) {
-        return path;
-    }
-
-    try {
-        await promisify(pipeline)((await fetch(url)).body, createWriteStream(path));
-        return path;
-    } catch (e) {
-        console.log(`Url is not available :(`);
-        rm("-f", path);
     }
 }
 
