@@ -1,9 +1,6 @@
 @import "~react-datepicker/src/stylesheets/datepicker";
-$primary-color: #264ae5;
-$hover-color: #f8f8f8;
-$background-color: #fff;
-$selected-color: #dadcde;
-$border-color: #ced0d3;
+@import "DatePicker";
+@import "variables";
 
 @font-face {
     font-family: "datagrid-filters";
@@ -25,6 +22,10 @@ $border-color: #ced0d3;
     .filter-input {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+
+    .btn-calendar {
+      margin-left: 5px; //Review in atlas, the current date picker is also 5px
     }
 }
 

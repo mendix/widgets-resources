@@ -2,9 +2,11 @@ import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, 
 import { FilterSelector } from "./FilterSelector";
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
-import DatePicker from "react-datepicker";
+import { isValid, isDate } from "date-fns";
 
-import classNames from "classnames";
+import { changeTimeOfDate } from "../utils/utils";
+import DatePickerComponent from "react-datepicker";
+import { DatePicker } from "./DatePicker";
 
 interface FilterComponentProps {
     adjustable: boolean;
@@ -15,15 +17,15 @@ interface FilterComponentProps {
     locale?: string;
     name?: string;
     placeholder?: string;
-    tabIndex?: number;
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
+    tabIndex?: number;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
-    const [value, setValue] = useState<Date | null>(new Date());
-    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [value, setValue] = useState<Date | null>(null);
+    const pickerRef = useRef<DatePickerComponent | null>(null);
 
     useEffect(() => {
         if (props.defaultValue) {
@@ -32,53 +34,53 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.defaultValue]);
 
     useEffect(() => {
-        if (props.filterDispatcher) {
-            props.filterDispatcher({
-                filter: (item, attr): any => {
-                    if (!value) {
-                        return true;
-                    }
-                    const dataValue = attr(item).displayValue.toLowerCase();
-                    console.log(dataValue);
+        props.filterDispatcher({
+            filter: (item, attr): any => {
+                const dateValue = attr(item).value as Date;
+
+                if (!value || !isDate(dateValue) || !isValid(dateValue)) {
                     return true;
-                    // TODO: actually filter
-                    // const filterValue = value.toLowerCase();
-                    // switch (type) {
-                    //     case "greater":
-                    //         return dataValue > filterValue;
-                    //     case "greaterEqual":
-                    //         return dataValue >= filterValue;
-                    //     case "equal":
-                    //         return dataValue === filterValue;
-                    //     case "notEqual":s
-                    //         return dataValue !== filterValue;
-                    //     case "smaller":
-                    //         return dataValue < filterValue;
-                    //     case "smallerEqual":
-                    //         return dataValue <= filterValue;
-                    // }
                 }
-            });
-        }
+
+                const utcDateValue = dateValue.getTime();
+
+                switch (type) {
+                    case "greater":
+                        return utcDateValue > changeTimeOfDate(value, 23, 59, 59).getTime();
+                    case "greaterEqual":
+                        return utcDateValue >= changeTimeOfDate(value, 0, 0, 0).getTime();
+                    case "equal":
+                        return (
+                            changeTimeOfDate(dateValue, 0, 0, 0).getTime() ===
+                            changeTimeOfDate(value, 0, 0, 0).getTime()
+                        );
+                    case "notEqual":
+                        return (
+                            changeTimeOfDate(dateValue, 0, 0, 0).getTime() !==
+                            changeTimeOfDate(value, 0, 0, 0).getTime()
+                        );
+                    case "smaller":
+                        return utcDateValue < changeTimeOfDate(value, 0, 0, 0).getTime();
+                    case "smallerEqual":
+                        return utcDateValue <= changeTimeOfDate(value, 23, 59, 59).getTime();
+                }
+            }
+        });
     }, [props.filterDispatcher, value, type]);
 
     const focusInput = useCallback(() => {
-        if (inputRef.current) {
-            inputRef.current.focus();
+        if (pickerRef.current) {
+            pickerRef.current.setFocus();
         }
-    }, [inputRef]);
-
-    const InputButton = (inputProps: any) => (
-        <input aria-label={props.screenReaderInputCaption} ref={inputRef} type="text" {...inputProps} />
-    );
+    }, [pickerRef]);
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
             {props.adjustable && (
                 <FilterSelector
                     ariaLabel={props.screenReaderButtonCaption}
-                    name={props.name}
                     defaultFilter={props.defaultFilter}
+                    name={props.name}
                     onChange={type => {
                         setType(type);
                         focusInput();
@@ -86,16 +88,15 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 />
             )}
             <DatePicker
+                adjustable={props.adjustable}
                 dateFormat={props.dateFormat}
                 locale={props.locale}
-                className={classNames("form-control", { "filter-input": props.adjustable })}
-                placeholderText={props.placeholder}
-                selected={value}
-                onChange={date => {
-                    // TODO: this is being triggered if you type, so set if it is valid
-                    setValue(date as Date);
-                }}
-                customInput={<InputButton />}
+                name={props.name}
+                placeholder={props.placeholder}
+                ref={pickerRef}
+                screenReaderInputCaption={props.screenReaderInputCaption}
+                setValue={setValue}
+                value={value}
             />
         </div>
     );

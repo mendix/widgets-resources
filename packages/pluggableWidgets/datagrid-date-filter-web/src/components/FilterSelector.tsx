@@ -1,6 +1,7 @@
-import { createElement, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 import classNames from "classnames";
+import { useOnClickOutside } from "@widgets-resources/piw-utils";
 
 const options: Array<{ value: DefaultFilterEnum; label: string }> = [
     { value: "greater", label: "Greater than" },
@@ -75,21 +76,4 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
             </div>
         </div>
     );
-}
-
-export function useOnClickOutside(ref: RefObject<HTMLUListElement>, handler: () => void): void {
-    useEffect(() => {
-        const listener = (event: MouseEvent & { target: Node | null }): void => {
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
-            handler();
-        };
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
-        return () => {
-            document.removeEventListener("mousedown", listener);
-            document.removeEventListener("touchstart", listener);
-        };
-    }, [ref, handler]);
 }
