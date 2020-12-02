@@ -50,7 +50,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setShow(false);
             }
         },
-        [selectedFilters, props.emptyOptionCaption]
+        [selectedFilters, props.emptyOptionCaption, props.multiSelect]
     );
 
     useOnClickOutside(listRef, () => setShow(false));
