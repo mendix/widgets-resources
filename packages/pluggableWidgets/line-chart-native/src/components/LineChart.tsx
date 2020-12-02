@@ -1,12 +1,12 @@
 import { createElement, ReactElement, useMemo, useCallback, useState } from "react";
 import { View, LayoutChangeEvent, Text } from "react-native";
-import { InterpolationPropType } from "victory-core";
+import { InterpolationPropType, VictoryCommonProps } from "victory-core";
 import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
 
 import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { Legend } from "./Legend";
-import { LineChartStyle } from "../ui/Styles";
+import { LineChartGridStyle, LineChartStyle } from "../ui/Styles";
 import { mapToAxisStyle, mapToGridStyle, mapToLineStyle, mapToMarkerStyle } from "../utils/StyleMappers";
 
 export interface LineChartProps {
@@ -196,12 +196,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                                     <VictoryChart
                                         height={chartDimensions?.height}
                                         width={chartDimensions?.width}
-                                        padding={{
-                                            top: style.grid?.paddingTop,
-                                            right: style.grid?.paddingRight,
-                                            bottom: style.grid?.paddingBottom,
-                                            left: style.grid?.paddingLeft
-                                        }}
+                                        padding={aggregateGridPadding(style.grid)}
                                         scale={
                                             dataTypesResult
                                                 ? {
@@ -248,6 +243,29 @@ export function LineChart(props: LineChartProps): ReactElement | null {
             )}
         </View>
     );
+}
+
+function aggregateGridPadding(gridStyle?: LineChartGridStyle): VictoryCommonProps["padding"] {
+    if (!gridStyle) {
+        return;
+    }
+
+    const {
+        padding,
+        paddingHorizontal,
+        paddingVertical,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+        paddingLeft
+    } = gridStyle;
+
+    return {
+        top: paddingTop ?? paddingVertical ?? padding,
+        right: paddingRight ?? paddingHorizontal ?? padding,
+        bottom: paddingBottom ?? paddingVertical ?? padding,
+        left: paddingLeft ?? paddingHorizontal ?? padding
+    };
 }
 
 function getDataTypes(series: LineChartSeries[]): { x: string; y: string } | Error | undefined {
