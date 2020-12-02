@@ -9,10 +9,7 @@ describe("Legend", () => {
 
     beforeEach(() => {
         defaultProps = {
-            series: [
-                { name: "Line 1", stylePropertyName: "line1" },
-                { name: "Line 2", stylePropertyName: "line2" }
-            ],
+            series: [{ name: "Line 1" }, { name: "Line 2" }],
             style: {
                 ...defaultLineChartStyle.legend
             },

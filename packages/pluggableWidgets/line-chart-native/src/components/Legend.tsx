@@ -11,7 +11,6 @@ export interface LegendProps {
 
 export interface LegendSeries {
     name?: string;
-    stylePropertyName?: string;
 }
 
 export function Legend(props: LegendProps): ReactElement | null {
