@@ -4,10 +4,13 @@ export interface LineChartGridStyle {
     backgroundColor?: string;
     dashArray?: string;
     lineColor?: string;
+    padding?: number;
     paddingBottom?: number;
+    paddingHorizontal?: number;
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
+    paddingVertical?: number;
     width?: number;
 }
 
