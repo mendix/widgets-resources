@@ -84,6 +84,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         }
     }, [props.defaultValue, props.options, props.emptyOptionCaption]);
 
+    // Filter
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
@@ -92,7 +93,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                         return selectedFilters.some(
                             selectedFilter =>
                                 attr(item).value?.toString().toLocaleLowerCase() ===
-                                selectedFilter.value?.toString().toLocaleLowerCase()
+                                    selectedFilter.value?.toString().toLocaleLowerCase() ||
+                                selectedFilter.value?.toString() === ""
                         );
                     }
                     return true;
@@ -101,8 +103,6 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         }
     }, [props.filterDispatcher, selectedFilters]);
 
-    // TODO: after selecting via keyboard, it jumps to end
-    // TODO: Multi select, tests, dropdown tests
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0}>
             <input

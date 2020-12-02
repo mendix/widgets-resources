@@ -10,7 +10,7 @@
             <propertyGroup caption="General">
                 <property key="defaultValue" type="expression" required="false">
                     <caption>Default value</caption>
-                    <description />
+                    <description>Empty option caption will be shown by default or if configured default value matches none of the options</description>
                     <returnType type="String" />
                 </property>
                 <property key="filterOptions" type="object" isList="true">
