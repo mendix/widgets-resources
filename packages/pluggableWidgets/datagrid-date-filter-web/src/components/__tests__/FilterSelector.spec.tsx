@@ -35,9 +35,9 @@ describe("Filter selector", () => {
         lis.at(0).simulate("click");
 
         expect(onChange).toBeCalled();
-        expect(onChange).toBeCalledWith("equal");
+        expect(onChange).toBeCalledWith("greater");
 
         lis.at(1).simulate("click");
-        expect(onChange).toBeCalledWith("startsWith");
+        expect(onChange).toBeCalledWith("greaterEqual");
     });
 });

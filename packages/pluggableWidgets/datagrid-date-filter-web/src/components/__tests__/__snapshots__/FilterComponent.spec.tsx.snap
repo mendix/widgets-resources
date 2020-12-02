@@ -6,14 +6,13 @@ exports[`Filter component renders correctly 1`] = `
   data-focusindex={0}
 >
   <FilterSelector
-    defaultFilter="contains"
+    defaultFilter="equal"
     onChange={[Function]}
   />
-  <input
-    className="form-control filter-input"
-    onChange={[Function]}
-    type="text"
-    value=""
+  <DatePicker
+    adjustable={true}
+    setValue={[Function]}
+    value={null}
   />
 </div>
 `;
@@ -23,11 +22,10 @@ exports[`Filter component renders correctly when not adjustable by user 1`] = `
   className="filter-container"
   data-focusindex={0}
 >
-  <input
-    className="form-control"
-    onChange={[Function]}
-    type="text"
-    value=""
+  <DatePicker
+    adjustable={false}
+    setValue={[Function]}
+    value={null}
   />
 </div>
 `;
@@ -39,15 +37,14 @@ exports[`Filter component renders correctly with aria labels 1`] = `
 >
   <FilterSelector
     ariaLabel="my label"
-    defaultFilter="contains"
+    defaultFilter="equal"
     onChange={[Function]}
   />
-  <input
-    aria-label="my label"
-    className="form-control filter-input"
-    onChange={[Function]}
-    type="text"
-    value=""
+  <DatePicker
+    adjustable={true}
+    screenReaderInputCaption="my label"
+    setValue={[Function]}
+    value={null}
   />
 </div>
 `;

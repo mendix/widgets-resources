@@ -2,8 +2,6 @@ import { shallow } from "enzyme";
 import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
 
-jest.useFakeTimers();
-
 describe("Filter component", () => {
     it("renders correctly", () => {
         const component = shallow(<FilterComponent adjustable defaultFilter="equal" filterDispatcher={jest.fn()} />);
@@ -31,41 +29,5 @@ describe("Filter component", () => {
         );
 
         expect(component).toMatchSnapshot();
-    });
-
-    it("calls filterDispatcher when value changes", () => {
-        const filterDispatcher = jest.fn();
-        const component = shallow(
-            <FilterComponent adjustable defaultFilter="equal" filterDispatcher={filterDispatcher} />
-        );
-
-        const input = component.find("input");
-        input.simulate("change", { target: { value: "test" } });
-
-        expect(filterDispatcher).toBeCalled();
-    });
-
-    it("debounces calls for filterDispatcher when value changes", () => {
-        const filterDispatcher = jest.fn();
-        const component = shallow(
-            <FilterComponent adjustable defaultFilter="equal" filterDispatcher={filterDispatcher} />
-        );
-
-        // Initial call with default filter
-        expect(filterDispatcher).toBeCalledTimes(1);
-
-        const input = component.find("input");
-        input.simulate("change", { target: { value: "test" } });
-        jest.advanceTimersByTime(499);
-        input.simulate("change", { target: { value: "test2" } });
-        input.simulate("change", { target: { value: "test3" } });
-        jest.advanceTimersByTime(500);
-
-        expect(filterDispatcher).toBeCalledTimes(2);
-
-        input.simulate("change", { target: { value: "test" } });
-        jest.advanceTimersByTime(500);
-
-        expect(filterDispatcher).toBeCalledTimes(3);
     });
 });
