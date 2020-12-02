@@ -1,5 +1,5 @@
 import { VictoryChartProps } from "victory-chart";
-import { VictoryAxisCommonProps } from "victory-core";
+import { VictoryAxisCommonProps, VictoryCommonProps } from "victory-core";
 import { VictoryLineProps } from "victory-line";
 import { VictoryScatterProps } from "victory-scatter";
 
@@ -47,5 +47,28 @@ export function mapToMarkerStyle(markersStyle: LineChartLineStyle["markers"]): V
             stroke: markersStyle?.borderColor,
             strokeWidth: markersStyle?.borderWidth
         }
+    };
+}
+
+export function aggregateGridPadding(gridStyle?: LineChartGridStyle): VictoryCommonProps["padding"] {
+    if (!gridStyle) {
+        return;
+    }
+
+    const {
+        padding,
+        paddingHorizontal,
+        paddingVertical,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+        paddingLeft
+    } = gridStyle;
+
+    return {
+        top: paddingTop ?? paddingVertical ?? padding,
+        right: paddingRight ?? paddingHorizontal ?? padding,
+        bottom: paddingBottom ?? paddingVertical ?? padding,
+        left: paddingLeft ?? paddingHorizontal ?? padding
     };
 }

@@ -1,5 +1,5 @@
-import { mapToAxisStyle, mapToGridStyle, mapToLineStyle, mapToMarkerStyle } from "../StyleMappers";
-import { LineChartAxisStyle, LineChartLineStyle } from "../../ui/Styles";
+import { aggregateGridPadding, mapToAxisStyle, mapToGridStyle, mapToLineStyle, mapToMarkerStyle } from "../StyleUtils";
+import { LineChartAxisStyle, LineChartGridStyle, LineChartLineStyle } from "../../ui/Styles";
 
 describe("StyleMappers", () => {
     describe("mapToGridStyle", () => {
@@ -126,5 +126,60 @@ describe("StyleMappers", () => {
 
             expect(mapToMarkerStyle(markersStyle)).toStrictEqual(expectedResult);
         });
+    });
+});
+
+describe("aggregateGridPadding", () => {
+    let gridStyle: LineChartGridStyle;
+
+    beforeEach(() => {
+        gridStyle = {
+            backgroundColor: "blue",
+            padding: 10
+        };
+    });
+
+    it("aggregates top padding with correct precedence", () => {
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ top: 10 });
+
+        gridStyle.paddingVertical = 5;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ top: 5 });
+
+        gridStyle.paddingTop = 1;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ top: 1 });
+    });
+
+    it("aggregates bottom padding with correct precedence", () => {
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ bottom: 10 });
+
+        gridStyle.paddingVertical = 5;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ bottom: 5 });
+
+        gridStyle.paddingBottom = 1;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ bottom: 1 });
+    });
+
+    it("aggregates left padding with correct precedence", () => {
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ left: 10 });
+
+        gridStyle.paddingHorizontal = 5;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ left: 5 });
+
+        gridStyle.paddingLeft = 1;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ left: 1 });
+    });
+
+    it("aggregates right padding with correct precedence", () => {
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ right: 10 });
+
+        gridStyle.paddingHorizontal = 5;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ right: 5 });
+
+        gridStyle.paddingRight = 1;
+        expect(aggregateGridPadding(gridStyle)).toMatchObject({ right: 1 });
+    });
+
+    it("returns undefined when no grid style is passed", () => {
+        expect(aggregateGridPadding(undefined)).toBeUndefined();
     });
 });
