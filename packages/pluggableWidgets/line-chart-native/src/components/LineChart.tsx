@@ -60,8 +60,8 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 const lineColor = style.lineColorPalette?.[lineColorPaletteIndex] || "black";
 
                 if (style.lineColorPalette) {
-                    lineColorPaletteIndex =
-                        lineColorPaletteIndex + 1 === style.lineColorPalette.length ? 0 : lineColorPaletteIndex + 1;
+                    const indexIncrement = lineColorPaletteIndex + 1;
+                    lineColorPaletteIndex = indexIncrement === style.lineColorPalette.length ? 0 : indexIncrement;
                 }
 
                 return lineColor;
