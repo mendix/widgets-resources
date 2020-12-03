@@ -21,11 +21,11 @@ export interface LineChartAxisStyle<T extends "X" | "Y"> {
     fontSize?: number;
     fontStyle?: "normal" | "italic";
     fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    lineColor?: string;
+    width?: number;
     label?: TextStyle & {
         relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
     };
-    lineColor?: string;
-    width?: number;
 }
 
 export interface LineChartLineStyle {
