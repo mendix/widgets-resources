@@ -1,29 +1,29 @@
 import { createElement, ReactElement, useMemo } from "react";
 import { Text, View } from "react-native";
 
-import { BarChartStyle } from "../ui/Styles";
+import { BarChartLegendStyle } from "../ui/Styles";
 
 export interface LegendProps {
     series: LegendSeries[];
-    style: BarChartStyle;
+    style?: BarChartLegendStyle;
+    seriesColors: string[];
 }
 
 export interface LegendSeries {
     name?: string;
-    stylePropertyName?: string;
 }
 
 export function Legend(props: LegendProps): ReactElement | null {
-    const { series, style } = props;
+    const { series, style, seriesColors } = props;
 
     const legendItems = useMemo(
         () =>
             series
                 .map((series, index) =>
                     series.name !== undefined ? (
-                        <View key={index}>
-                            <View />
-                            <Text>{series.name}</Text>
+                        <View key={index} style={style?.item}>
+                            <View style={[{ backgroundColor: seriesColors[index] }, style?.indicator]} />
+                            <Text style={style?.label}>{series.name}</Text>
                         </View>
                     ) : null
                 )

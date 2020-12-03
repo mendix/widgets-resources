@@ -20,6 +20,8 @@ export interface BarSeriesType {
     dynamicXAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
     staticYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
     dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
+    staticCustomBarStyle: string;
+    dynamicCustomBarStyle?: ListAttributeValue<string>;
 }
 
 export type SortOrderEnum = "ascending" | "descending";
@@ -35,6 +37,8 @@ export interface BarSeriesPreviewType {
     dynamicXAttribute: string;
     staticYAttribute: string;
     dynamicYAttribute: string;
+    staticCustomBarStyle: string;
+    dynamicCustomBarStyle: string;
 }
 
 export interface BarChartProps<Style> {

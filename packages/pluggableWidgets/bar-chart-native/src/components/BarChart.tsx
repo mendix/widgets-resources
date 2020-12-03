@@ -1,11 +1,13 @@
 import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
 import { VictoryAxis, VictoryBar, VictoryChart, VictoryGroup, VictoryStack } from "victory-native";
+import { BarProps } from "victory-bar";
 import { extractStyles } from "@mendix/pluggable-widgets-tools";
 
 import { BarChartStyle } from "../ui/Styles";
 import { SortOrderEnum } from "../../typings/BarChartProps";
 import { Legend } from "./Legend";
+import { mapToAxisStyle, mapToBarLabelStyle, mapToBarStyle, mapToGridStyle } from "../utils/StyleMappers";
 
 export interface BarChartProps {
     series: BarChartSeries[];
@@ -24,6 +26,7 @@ export interface BarChartSeries {
     xFormatter?: (xValue: number | Date | string) => string;
     yFormatter?: (yValue: number | Date | string) => string;
     name?: string;
+    customBarStyle?: string;
 }
 
 export type BarDataPoints =
@@ -59,16 +62,34 @@ export function BarChart({
 
     const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
 
+    // Bar Chart user-styling may be missing for certain series. A palette is passed, any missing colours
+    // fallback to a colour from the palette.
+    const normalisedBarColors: string[] = useMemo(() => {
+        const result: string[] = [];
+        let index = 0;
+
+        for (const _series of series) {
+            const configuredStyle = !_series.customBarStyle
+                ? null
+                : style.barStyles?.[_series.customBarStyle]?.barColor;
+
+            console.info("configuredStyle", configuredStyle);
+
+            if (typeof configuredStyle !== "string") {
+                result.push(style.barColorPalette?.[index] || "black");
+
+                if (style.barColorPalette) {
+                    index = index + 1 === style.barColorPalette.length ? 0 : index + 1;
+                }
+            } else {
+                result.push(configuredStyle);
+            }
+        }
+
+        return result;
+    }, [series, style]);
+
     const sort = useMemo(() => ({ sortOrder, sortKey: "x" }), [sortOrder]);
-
-    const colorScale = { colorScale: "qualitative" } as { colorScale: "qualitative" };
-
-    const colorScaleProp = useMemo(
-        () => ({
-            ...colorScale
-        }),
-        [colorScale.colorScale]
-    );
 
     const sortProp = useMemo(
         () => ({
@@ -83,31 +104,50 @@ export function BarChart({
         }
 
         // datum.y is actually the X axis data points due to the way Victory handles horizontal charts
-        const bars = series.map((series, index) => (
-            <VictoryBar
-                horizontal
-                key={index}
-                data={series.dataPoints}
-                {...sortProp}
-                {...(showLabels ? { labels: ({ datum }: { datum: any }) => datum.y } : undefined)}
-            />
-        ));
+        const bars = series.map(({ customBarStyle, dataPoints }, index) => {
+            const seriesStyle = style.barStyles && customBarStyle ? style.barStyles[customBarStyle] : undefined;
+
+            // todo: test cornerRadius
+            return (
+                <VictoryBar
+                    horizontal
+                    key={index}
+                    data={dataPoints}
+                    width={seriesStyle?.width}
+                    cornerRadius={
+                        seriesStyle?.ending === "round"
+                            ? typeof seriesStyle.width === "number"
+                                ? seriesStyle.width / 2
+                                : undefined
+                            : undefined
+                    }
+                    style={{
+                        ...mapToBarStyle(normalisedBarColors[index], seriesStyle),
+                        ...mapToBarLabelStyle(normalisedBarColors[index], seriesStyle)
+                    }}
+                    {...sortProp}
+                    {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
+                />
+            );
+        });
 
         if (presentation === "grouped") {
             return (
                 // todo: configure offset
-                <VictoryGroup {...colorScaleProp}>{bars}</VictoryGroup>
+                <VictoryGroup offset={20} colorScale={normalisedBarColors}>
+                    {bars}
+                </VictoryGroup>
             );
         }
 
-        return <VictoryStack {...colorScaleProp}>{bars}</VictoryStack>;
-    }, [dataTypesResult, series, style, warningMessagePrefix]);
+        return <VictoryStack colorScale={normalisedBarColors}>{bars}</VictoryStack>;
+    }, [dataTypesResult, series, style, warningMessagePrefix, sortProp, showLabels, normalisedBarColors, presentation]);
 
     const [firstSeries] = series;
 
     const axisLabelStyles = useMemo(() => {
-        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxisLabel, ["relativePositionGrid"]);
-        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxisLabel, ["relativePositionGrid"]);
+        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
+        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxis?.label, ["relativePositionGrid"]);
 
         if (
             !(
@@ -156,20 +196,21 @@ export function BarChart({
                 height: event.nativeEvent.layout.height,
                 width: event.nativeEvent.layout.width
             }),
-        []
+        [setChartDimensions]
     );
 
     return (
         <View style={style.container}>
             {dataTypesResult instanceof Error ? (
-                <Text>{dataTypesResult.message}</Text>
+                <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (
+                // todo: support domain padding through atlas.
                 <View style={style.chart}>
-                    <View style={style.gridAndLabelsRow}>
+                    <View style={{ flex: 1 }}>
                         {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "top"
                             ? yAxisLabelComponent
                             : null}
-                        <View style={style.gridRow}>
+                        <View style={{ flex: 1, flexDirection: "row" }}>
                             {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "left"
                                 ? yAxisLabelComponent
                                 : null}
@@ -178,24 +219,29 @@ export function BarChart({
                                     <VictoryChart
                                         height={chartDimensions?.height}
                                         width={chartDimensions?.width}
-                                        padding={style.grid?.padding}
+                                        padding={{
+                                            top: style.grid?.paddingTop,
+                                            right: style.grid?.paddingRight,
+                                            bottom: style.grid?.paddingBottom,
+                                            left: style.grid?.paddingLeft
+                                        }}
                                         scale={
                                             dataTypesResult
                                                 ? { x: getScale(dataTypesResult.x), y: getScale(dataTypesResult.y) }
                                                 : undefined
                                         }
-                                        style={style.grid}
+                                        style={mapToGridStyle(style.grid)}
                                     >
                                         <VictoryAxis
                                             orientation={"bottom"}
                                             dependentAxis
-                                            style={style.grid?.xAxis}
+                                            style={mapToAxisStyle(style.grid, style.xAxis)}
                                             {...(firstSeries?.xFormatter
                                                 ? { tickFormat: firstSeries.xFormatter }
                                                 : undefined)}
                                         />
                                         <VictoryAxis
-                                            style={style.grid?.yAxis}
+                                            style={mapToAxisStyle(style.grid, style.yAxis)}
                                             orientation={"left"}
                                             {...(firstSeries?.yFormatter
                                                 ? { tickFormat: firstSeries.yFormatter }
@@ -213,7 +259,9 @@ export function BarChart({
                             ? xAxisLabelComponent
                             : null}
                     </View>
-                    {showLegend ? <Legend style={style} series={series} /> : null}
+                    {showLegend ? (
+                        <Legend style={style.legend} series={series} seriesColors={normalisedBarColors} />
+                    ) : null}
                 </View>
             )}
         </View>

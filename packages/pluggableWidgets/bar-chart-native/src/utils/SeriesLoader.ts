@@ -9,7 +9,7 @@ import { BarChartSeries, BarDataPoints } from "../components/BarChart";
 interface DataSourceItemGroup {
     groupByAttributeValue: string | boolean | Date | Big;
     dynamicSeriesNameValue?: string;
-    dynamicStylePropertyNameValue?: string;
+    dynamicCustomBarStyleValue?: string;
     items: ObjectItem[];
 }
 
@@ -56,7 +56,7 @@ export function useSeries(series: BarSeriesType[]): BarChartSeries[] | null {
 }
 
 function loadStaticSeries(series: BarSeriesType): BarChartSeries | null {
-    const { staticSeriesName, dataSet } = series;
+    const { staticSeriesName, dataSet, staticCustomBarStyle } = series;
 
     if (dataSet !== "static") {
         throw Error("Expected series to be static");
@@ -76,7 +76,8 @@ function loadStaticSeries(series: BarSeriesType): BarChartSeries | null {
         dataPoints: dataPointsExtraction.dataPoints,
         xFormatter: dataPointsExtraction.xFormatter,
         yFormatter: dataPointsExtraction.yFormatter,
-        name: staticSeriesName ? staticSeriesName.value : undefined
+        name: staticSeriesName ? staticSeriesName.value : undefined,
+        customBarStyle: staticCustomBarStyle
     };
 }
 
@@ -106,7 +107,8 @@ function loadDynamicSeries(series: BarSeriesType): BarChartSeries[] | null {
             dataPoints: dataPointsExtraction.dataPoints,
             xFormatter: dataPointsExtraction.xFormatter,
             yFormatter: dataPointsExtraction.yFormatter,
-            name: itemGroup.dynamicSeriesNameValue
+            name: itemGroup.dynamicSeriesNameValue,
+            customBarStyle: itemGroup.dynamicCustomBarStyleValue
         });
     }
 
@@ -114,7 +116,7 @@ function loadDynamicSeries(series: BarSeriesType): BarChartSeries[] | null {
 }
 
 function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | null {
-    const { dynamicDataSource, dynamicSeriesName, groupByAttribute, dataSet } = series;
+    const { dynamicDataSource, dynamicSeriesName, dynamicCustomBarStyle, groupByAttribute, dataSet } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -161,6 +163,16 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
                 }
 
                 newDataSourceItemGroup.dynamicSeriesNameValue = dynamicSeriesNameValue.value;
+            }
+
+            if (dynamicCustomBarStyle) {
+                const dynamicCustomBarStyleValue = dynamicCustomBarStyle(item);
+
+                if (dynamicCustomBarStyleValue.value === undefined) {
+                    return null;
+                }
+
+                newDataSourceItemGroup.dynamicCustomBarStyleValue = dynamicCustomBarStyleValue.value;
             }
 
             dataSourceItemGroupsResult.push(newDataSourceItemGroup);

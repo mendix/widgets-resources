@@ -39,7 +39,7 @@
                             </property>
                             <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
-                                <description>Data points within the same group form one series.</description>
+                                <description>Data points within the same group are grouped together and presented either in groups or stacks.</description>
                                 <attributeTypes>
                                     <attributeType name="String" />
                                     <attributeType name="Boolean" />
@@ -114,11 +114,24 @@
                                 </attributeTypes>
                             </property>
                         </propertyGroup>
+                        <propertyGroup caption="Appearance">
+                            <property key="staticCustomBarStyle" type="string" required="false" multiline="false">
+                                <caption>Custom bar style</caption>
+                                <description>Link a bar style defined in the styles of this widget.</description>
+                            </property>
+                            <property key="dynamicCustomBarStyle" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Custom bar style</caption>
+                                <description>Link a bar style defined in the styles of this widget.</description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
                     </properties>
                 </property>
                 <property key="sortOrder" type="enumeration" defaultValue="ascending">
                     <caption>Sort order</caption>
-                    <description>Applicable only to Y axis attributes</description>
+                    <description>Applicable only to X axis attributes.</description>
                     <enumerationValues>
                         <enumerationValue key="ascending" >Ascending</enumerationValue>
                         <enumerationValue key="descending">Descending</enumerationValue>

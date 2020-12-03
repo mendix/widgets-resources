@@ -1,6 +1,43 @@
 import { TextStyle, ViewStyle } from "react-native";
-import { VictoryChartProps } from "victory-chart";
-import { VictoryAxisCommonProps, VictoryCommonProps } from "victory-core";
+
+export interface BarChartGridStyle {
+    backgroundColor?: string;
+    dashArray?: string;
+    lineColor?: string;
+    paddingBottom?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    width?: number;
+}
+
+export interface BarChartAxisStyle<T extends "X" | "Y"> {
+    color?: string;
+    dashArray?: string;
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    label?: TextStyle & {
+        relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
+    };
+    lineColor?: string;
+    width?: number;
+}
+
+export interface BarChartBarStyle {
+    ending?: "flat" | "round";
+    barColor?: string;
+    width?: number;
+}
+
+interface BarChartBarLabelStyle {
+    // color is the same as bar color
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+}
 
 export interface BarChartLegendStyle {
     container?: ViewStyle;
@@ -9,43 +46,56 @@ export interface BarChartLegendStyle {
     label?: TextStyle;
 }
 
-export interface BarChartSeriesStyle {}
-
 export interface BarChartStyle {
     container?: ViewStyle;
+    errorMessage?: TextStyle;
     chart?: ViewStyle;
-    gridAndLabelsRow?: ViewStyle;
-    gridRow?: ViewStyle;
-    grid?: VictoryChartProps["style"] & {
-        padding?: VictoryCommonProps["padding"];
-        xAxis?: VictoryAxisCommonProps["style"];
-        yAxis?: VictoryAxisCommonProps["style"];
-    };
-    xAxisLabel?: TextStyle & {
-        relativePositionGrid?: "bottom" | "right";
-    };
-    yAxisLabel?: TextStyle & {
-        relativePositionGrid?: "top" | "left";
-    };
+    grid?: BarChartGridStyle;
+    xAxis?: BarChartAxisStyle<"X">;
+    yAxis?: BarChartAxisStyle<"Y">;
     legend?: BarChartLegendStyle;
-    series?: { [key: string]: BarChartSeriesStyle };
+    barStyles?: { [key: string]: BarChartBarStyle & BarChartBarLabelStyle };
+    barColorPalette?: string[];
 }
 
 export const defaultBarChartStyle: BarChartStyle = {
     container: {
         flex: 1
     },
+    errorMessage: {
+        color: "red"
+    },
     chart: {
         flex: 1
     },
-    gridAndLabelsRow: {
-        flex: 1
-    },
-    gridRow: {
-        flex: 1,
-        flexDirection: "row"
-    },
     grid: {
-        padding: 120
+        paddingBottom: 30,
+        paddingLeft: 30,
+        paddingRight: 10,
+        paddingTop: 10
+    },
+    // todo: why not yAxis default?
+    xAxis: {
+        label: {
+            alignSelf: "center"
+        }
+    },
+    legend: {
+        container: {
+            flexDirection: "row",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            margin: 10
+        },
+        item: {
+            flexDirection: "row",
+            alignItems: "center",
+            padding: 10
+        },
+        indicator: {
+            marginRight: 5,
+            height: 10,
+            width: 10
+        }
     }
 };

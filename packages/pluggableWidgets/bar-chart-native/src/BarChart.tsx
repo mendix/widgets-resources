@@ -9,7 +9,7 @@ import { useSeries } from "./utils/SeriesLoader";
 export function BarChart(props: BarChartProps<BarChartStyle>): ReactElement | null {
     const { name, barSeries, style, xAxisLabel, yAxisLabel, showLabels, ...rest } = props;
 
-    const customStyles = style ? style.filter(o => o != null) : [];
+    const customStyles = style.filter(o => o != null) ?? [];
 
     const styles = all<BarChartStyle>([defaultBarChartStyle, ...customStyles]);
 
