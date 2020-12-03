@@ -6,9 +6,10 @@ const url = process.env.URL || "http://localhost:8080/";
 const serverIp = process.env.SERVER_IP || "127.0.0.1";
 const serverPort = process.env.SERVER_PORT || 4444;
 
-const e2ePath = join(process.cwd(), "dist/e2e/");
-if (!existsSync(e2ePath)) {
-    mkdirSync(e2ePath, { recursive: true });
+const resultsPath = join(process.cwd(), "tests/e2e/screenshot-results");
+const baselinePath = join(process.cwd(), "tests/e2e/screenshot-baseline");
+if (!existsSync(resultsPath)) {
+    mkdirSync(resultsPath, { recursive: true });
 }
 
 console.warn("Starting wdio with ", url, browserName);
@@ -34,7 +35,7 @@ exports.config = {
     logLevel: "silent",
     coloredLogs: true,
     bail: 0,
-    screenshotPath: e2ePath,
+    screenshotPath: resultsPath,
     baseUrl: url,
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
@@ -45,9 +46,9 @@ exports.config = {
             "image-comparison",
             // The options for image-comparison
             {
-                baselineFolder: e2ePath + "/tests/screenshot-baseline/",
+                baselineFolder: baselinePath,
                 formatImageName: "{tag}-{logName}-{browserName}",
-                screenshotPath: e2ePath + "/tests/screenshot/",
+                screenshotPath: resultsPath,
                 savePerInstance: false,
                 autoSaveBaseline: true,
                 blockOutStatusBar: true,
@@ -63,13 +64,12 @@ exports.config = {
         helpers: [require("@babel/register")],
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
-    afterTest(test, context, { error }) {
+    afterTest: (test, context, { error }) => {
         // take a screenshot anytime a test fails
         if (error) {
             const timestamp = new Date().toJSON().replace(/:/g, "-");
             const testName = test.fullName.replace(/ /g, "_");
-            const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
-            const filePath = join(e2ePath, filename);
+            const filePath = join(resultsPath, `TESTFAIL_${browserName}_${testName}_${timestamp}.png`);
             browser.saveScreenshot(filePath);
             console.log("Saved screenshot: ", filePath);
         }
