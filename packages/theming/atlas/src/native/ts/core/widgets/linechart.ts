@@ -70,7 +70,7 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
             color: font.colorParagraph,
             alignSelf: "center",
             marginHorizontal: 0,
-            marginVertical: 8,
+            marginVertical: spacing.small,
             fontFamily: font.family,
             fontSize: font.sizeSmall,
             fontWeight: font.weightNormal
@@ -100,7 +100,7 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
            */
             color: font.colorParagraph,
             marginHorizontal: 0,
-            marginVertical: 8,
+            marginVertical: spacing.small,
             fontFamily: font.family,
             fontSize: font.sizeSmall,
             fontWeight: font.weightNormal
