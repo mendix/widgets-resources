@@ -35,13 +35,15 @@
         "no-unused-vars": [
             "error",
             {
-                "varsIgnorePattern": "createElement"
+                "varsIgnorePattern": "createElement",
+                "args":  "none"
             }
         ],
         "@typescript-eslint/no-unused-vars": [
             "error",
             {
-                "varsIgnorePattern": "createElement"
+                "varsIgnorePattern": "createElement",
+                "args":  "none"
             }
         ],
         "@typescript-eslint/ban-types": "warn",
