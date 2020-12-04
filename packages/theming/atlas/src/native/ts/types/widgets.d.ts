@@ -291,7 +291,7 @@ export interface LayoutGridType {
 }
 
 // Line chart
-export interface LineChartGridStyle {
+interface LineChartGridStyle {
     backgroundColor?: string;
     dashArray?: string;
     lineColor?: string;

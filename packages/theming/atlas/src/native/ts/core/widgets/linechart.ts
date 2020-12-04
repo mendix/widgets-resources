@@ -110,25 +110,27 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
         }
     },
     lineStyles: {
-        line: {
-            /*
-                Allowed properties:
-                  -  dashArray (string)
-                  -  ending ("flat" or "round")
-                  -  lineColor (string)
-                  -  width (number)
-            */
-        },
-        marker: {
-            /*
-                Allowed properties:
-                  -  backgroundColor (string)
-                  -  borderColor (string)
-                  -  borderWidth (number)
-                  -  display ("false" or "underneath" or "onTop")
-                  -  size (number)
-                  -  symbol ("circle" or "diamond" or "plus" or "minus" or "square" or "star" or "triangleDown" or "triangleUp")
-            */
+        your_custom_line_style_name: {
+            line: {
+                /*
+                    Allowed properties:
+                      -  dashArray (string)
+                      -  ending ("flat" or "round")
+                      -  lineColor (string)
+                      -  width (number)
+                */
+            },
+            markers: {
+                /*
+                    Allowed properties:
+                      -  backgroundColor (string)
+                      -  borderColor (string)
+                      -  borderWidth (number)
+                      -  display ("false" or "underneath" or "onTop")
+                      -  size (number)
+                      -  symbol ("circle" or "diamond" or "plus" or "minus" or "square" or "star" or "triangleDown" or "triangleUp")
+                */
+            }
         }
     },
     legend: {
