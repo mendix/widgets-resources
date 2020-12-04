@@ -39,6 +39,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                     <FilterComponent
                         adjustable={props.adjustable}
                         defaultFilter={props.defaultFilter}
+                        defaultValue={props.defaultValue?.value}
                         dateFormat={patterns.date}
                         filterDispatcher={filterDispatcher}
                         locale={language}
@@ -47,7 +48,6 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
-                        defaultValue={props.defaultValue?.value}
                     />
                 ) : (
                     alertMessage
