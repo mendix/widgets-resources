@@ -30,10 +30,15 @@
 }
 
 .filter-selector {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
     padding-left: 0;
     padding-right: 0;
 
     .filter-selector-content {
+        display: flex;
+        flex: 1;
         align-self: flex-end;
 
         .filter-selector-button {

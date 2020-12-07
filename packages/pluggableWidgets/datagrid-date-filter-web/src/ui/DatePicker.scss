@@ -8,13 +8,19 @@ $outside-month-color: #c8c8c8;
 $text-color: #fff;
 $border-color: #D7D7D7;
 
-.react-datepicker-wrapper {
-  flex: 1;
-}
-
 .react-datepicker {
   font-size: 1em;
   border: 1px solid $border-color;
+}
+
+.react-datepicker-wrapper {
+  display: flex;
+  flex: 1;
+}
+
+.react-datepicker__input-container {
+  display: flex;
+  flex: 1;
 }
 
 .react-datepicker__header {
