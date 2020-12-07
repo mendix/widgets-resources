@@ -1,6 +1,6 @@
 {
-  "name": "datagrid-number-filter-web",
-  "widgetName": "DatagridNumberFilter",
+  "name": "datagrid-dropdown-filter-web",
+  "widgetName": "DatagridDropdownFilter",
   "version": "1.0.0",
   "description": "",
   "copyright": "Mendix Technology B.V.",
@@ -24,9 +24,7 @@
     "release": "pluggable-widgets-tools release:ts"
   },
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0",
-    "big.js": "^5.2.2",
-    "classnames": "^2.2.6"
+    "@widgets-resources/piw-utils": "^1.0.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
