@@ -118,6 +118,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 }}
                 aria-expanded={show}
                 aria-controls={`${props.name}-dropdown-list`}
+                aria-label={props.ariaLabel}
             />
             <ul
                 id={`${props.name}-dropdown-list`}

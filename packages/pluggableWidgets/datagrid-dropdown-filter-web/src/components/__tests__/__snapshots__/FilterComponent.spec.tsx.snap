@@ -9,6 +9,7 @@ exports[`Filter selector with multi selection renders correctly with ariaLabel 1
     aria-controls="undefined-dropdown-list"
     aria-expanded={false}
     aria-haspopup={true}
+    aria-label="my label"
     className="form-control dropdown-triggerer"
     onClick={[Function]}
     onFocus={[Function]}
@@ -295,6 +296,7 @@ exports[`Filter selector with single selection renders correctly with ariaLabel 
     aria-controls="undefined-dropdown-list"
     aria-expanded={false}
     aria-haspopup={true}
+    aria-label="my label"
     className="form-control dropdown-triggerer"
     onClick={[Function]}
     onFocus={[Function]}
