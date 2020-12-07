@@ -55,19 +55,20 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     // Line Chart user-styling may be missing for certain series. A palette is passed, any missing line colours
     // fallback to a colour from the palette.
     const normalizedLineColors: string[] = useMemo(() => {
+        const lineColorPalette = style.lines?.lineColorPalette?.split(";");
         let lineColorPaletteIndex = 0;
 
         return series.map(_series => {
             const configuredStyle = !_series.customLineStyle
                 ? null
-                : style.lineStyles?.[_series.customLineStyle]?.line?.lineColor;
+                : style.lines?.customLineStyles?.[_series.customLineStyle]?.line?.lineColor;
 
             if (typeof configuredStyle !== "string") {
-                const lineColor = style.lineColorPalette?.[lineColorPaletteIndex] || "black";
+                const lineColor = lineColorPalette?.[lineColorPaletteIndex] || "black";
 
-                if (style.lineColorPalette) {
+                if (lineColorPalette) {
                     const indexIncrement = lineColorPaletteIndex + 1;
-                    lineColorPaletteIndex = indexIncrement === style.lineColorPalette.length ? 0 : indexIncrement;
+                    lineColorPaletteIndex = indexIncrement === lineColorPalette.length ? 0 : indexIncrement;
                 }
 
                 return lineColor;
@@ -85,7 +86,10 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         return series.map((series, index) => {
             const { dataPoints, interpolation, lineStyle, customLineStyle } = series;
 
-            const seriesStyle = style.lineStyles && customLineStyle ? style.lineStyles[customLineStyle] : undefined;
+            const seriesStyle =
+                style.lines?.customLineStyles && customLineStyle
+                    ? style.lines.customLineStyles[customLineStyle]
+                    : undefined;
 
             const displayMarker = seriesStyle?.markers?.display;
 

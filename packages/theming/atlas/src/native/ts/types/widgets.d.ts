@@ -351,8 +351,12 @@ export interface LineChartType {
     xAxis?: LineChartAxisStyle<"X">;
     yAxis?: LineChartAxisStyle<"Y">;
     legend?: LineChartLegendStyle;
-    lineStyles?: { [key: string]: LineChartLineStyle };
-    lineColorPalette?: string[];
+    lines?: {
+        lineColorPalette?: string;
+        customLineStyles?: {
+            [key: string]: LineChartLineStyle;
+        };
+    };
 }
 
 // List view

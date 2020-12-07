@@ -109,19 +109,27 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
             relativePositionGrid: "top"
         }
     },
-    lineStyles: {
-        your_custom_line_style_name: {
-            line: {
-                /*
+    lines: {
+        /*
+            Allowed properties:
+              -  lineColorPalette (string with array of colors separated by ';')
+        */
+        lineColorPalette: Object.values(brand)
+            .map((color, index, brandColors) => (index === brandColors.length - 1 ? color : `${color};`))
+            .join(""),
+        customLineStyles: {
+            any_custom_line_style_name: {
+                line: {
+                    /*
                     Allowed properties:
                       -  dashArray (string)
                       -  ending ("flat" or "round")
                       -  lineColor (string)
                       -  width (number)
                 */
-            },
-            markers: {
-                /*
+                },
+                markers: {
+                    /*
                     Allowed properties:
                       -  backgroundColor (string)
                       -  borderColor (string)
@@ -130,6 +138,7 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
                       -  size (number)
                       -  symbol ("circle" or "diamond" or "plus" or "minus" or "square" or "star" or "triangleDown" or "triangleUp")
                 */
+                }
             }
         }
     },
@@ -156,6 +165,5 @@ export const com_mendix_widget_native_linechart_LineChart: LineChartType = {
             fontSize: font.sizeSmall,
             fontWeight: font.weightNormal
         }
-    },
-    lineColorPalette: Object.values(brand) // Array of color strings
+    }
 };
