@@ -18,8 +18,16 @@ export function mapToAxisStyle<T extends "X" | "Y">(
     axisStyle?: LineChartAxisStyle<T>
 ): VictoryAxisCommonProps["style"] {
     return {
-        axis: { stroke: axisStyle?.lineColor, strokeDasharray: axisStyle?.dashArray, strokeWidth: axisStyle?.width },
-        grid: { stroke: gridStyle?.lineColor, strokeDasharray: gridStyle?.dashArray, strokeWidth: gridStyle?.width },
+        axis: {
+            stroke: axisStyle?.lineColor,
+            strokeDasharray: axisStyle?.dashArray,
+            strokeWidth: axisStyle?.lineWidth
+        },
+        grid: {
+            stroke: gridStyle?.lineColor,
+            strokeDasharray: gridStyle?.dashArray,
+            strokeWidth: gridStyle?.lineWidth
+        },
         tickLabels: {
             fill: axisStyle?.color,
             fontFamily: axisStyle?.fontFamily,
@@ -36,7 +44,7 @@ export function mapToLineStyle(lineStyle: LineChartLineStyle["line"]): VictoryLi
             stroke: lineStyle?.lineColor,
             strokeDasharray: lineStyle?.dashArray,
             strokeLinecap: lineStyle?.ending,
-            strokeWidth: lineStyle?.width
+            strokeWidth: lineStyle?.lineWidth
         }
     };
 }

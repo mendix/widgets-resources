@@ -8,14 +8,14 @@ describe("StyleMappers", () => {
                 backgroundColor: "orange",
                 dashArray: "5,5",
                 lineColor: "transparent",
+                lineWidth: 10,
                 padding: 1,
                 paddingHorizontal: 2,
                 paddingVertical: 3,
                 paddingBottom: 30,
                 paddingLeft: 30,
                 paddingRight: 10,
-                paddingTop: 10,
-                width: 10
+                paddingTop: 10
             };
 
             const expectedResult = {
@@ -34,14 +34,14 @@ describe("StyleMappers", () => {
                 backgroundColor: "orange",
                 dashArray: "5,5",
                 lineColor: "transparent",
+                lineWidth: 10,
                 padding: 1,
                 paddingHorizontal: 2,
                 paddingVertical: 3,
                 paddingBottom: 30,
                 paddingLeft: 30,
                 paddingRight: 10,
-                paddingTop: 10,
-                width: 10
+                paddingTop: 10
             };
 
             const axisStyle: LineChartAxisStyle<"Y"> = {
@@ -51,24 +51,24 @@ describe("StyleMappers", () => {
                 fontSize: 20,
                 fontStyle: "italic",
                 fontWeight: "100",
+                lineColor: "purple",
+                lineWidth: 5,
                 label: {
                     relativePositionGrid: "left",
                     alignSelf: "center"
-                },
-                lineColor: "purple",
-                width: 5
+                }
             };
 
             const expectedResult = {
                 axis: {
                     stroke: axisStyle?.lineColor,
                     strokeDasharray: axisStyle?.dashArray,
-                    strokeWidth: axisStyle?.width
+                    strokeWidth: axisStyle?.lineWidth
                 },
                 grid: {
                     stroke: gridStyle?.lineColor,
                     strokeDasharray: gridStyle?.dashArray,
-                    strokeWidth: gridStyle?.width
+                    strokeWidth: gridStyle?.lineWidth
                 },
                 tickLabels: {
                     fill: axisStyle.color,
@@ -89,7 +89,7 @@ describe("StyleMappers", () => {
                 dashArray: "10,3",
                 ending: "flat",
                 lineColor: "rgba(255,0,0,0.3)",
-                width: 15
+                lineWidth: 15
             };
 
             const expectedResult = {
@@ -97,7 +97,7 @@ describe("StyleMappers", () => {
                     stroke: lineStyle?.lineColor,
                     strokeDasharray: lineStyle?.dashArray,
                     strokeLinecap: lineStyle?.ending,
-                    strokeWidth: lineStyle?.width
+                    strokeWidth: lineStyle?.lineWidth
                 }
             };
 

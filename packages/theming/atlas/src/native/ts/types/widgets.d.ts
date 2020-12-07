@@ -295,6 +295,7 @@ interface LineChartGridStyle {
     backgroundColor?: string;
     dashArray?: string;
     lineColor?: string;
+    lineWidth?: number;
     padding?: number;
     paddingBottom?: number;
     paddingHorizontal?: number;
@@ -302,7 +303,6 @@ interface LineChartGridStyle {
     paddingRight?: number;
     paddingTop?: number;
     paddingVertical?: number;
-    width?: number;
 }
 
 interface LineChartAxisStyle<T extends "X" | "Y"> {
@@ -313,7 +313,7 @@ interface LineChartAxisStyle<T extends "X" | "Y"> {
     fontStyle?: "normal" | "italic";
     fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
     lineColor?: string;
-    width?: number;
+    lineWidth?: number;
     label?: TextStyle & {
         relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
     };
@@ -324,7 +324,7 @@ interface LineChartLineStyle {
         dashArray?: string;
         ending?: "flat" | "round";
         lineColor?: string;
-        width?: number;
+        lineWidth?: number;
     };
     markers?: {
         backgroundColor?: string;
