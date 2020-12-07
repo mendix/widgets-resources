@@ -60,8 +60,12 @@ export interface LineChartStyle {
     xAxis?: LineChartAxisStyle<"X">;
     yAxis?: LineChartAxisStyle<"Y">;
     legend?: LineChartLegendStyle;
-    lineStyles?: { [key: string]: LineChartLineStyle };
-    lineColorPalette?: string[];
+    lines?: {
+        lineColorPalette?: string;
+        customLineStyles?: {
+            [key: string]: LineChartLineStyle;
+        };
+    };
 }
 
 export const defaultLineChartStyle: LineChartStyle = {
