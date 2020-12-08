@@ -30,15 +30,11 @@
 }
 
 .filter-selector {
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
     padding-left: 0;
     padding-right: 0;
 
     .filter-selector-content {
-        display: flex;
-        flex: 1;
+        height: 100%;
         align-self: flex-end;
 
         .filter-selector-button {
@@ -46,9 +42,9 @@
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             border-right: none;
+            height: 100%;
 
             &:before {
-                display: flex;
                 justify-content: center;
                 width: 20px;
                 height: 20px;
@@ -65,7 +61,6 @@
             background: $background-color;
             z-index: 99;
             border-radius: 8px;
-            border: 1px solid $border-color;
             list-style-type: none;
             box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
             overflow: hidden;
