@@ -5,8 +5,8 @@
 //== Default
 //-------------------------------------------------------------------------------------------------------------------//
 .pageheader {
-    border-bottom: 1px solid $border-color-default;
     background: $header-bg-color;
+    //removed border
 }
 
 // Check if it is part of a inner layoutgrid

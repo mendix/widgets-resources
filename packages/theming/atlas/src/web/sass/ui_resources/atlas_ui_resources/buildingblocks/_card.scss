@@ -3,11 +3,16 @@
 
 ========================================================================== */
 .card {
-    padding: 30px;
     border: 0;
     border-radius: $border-radius-default;
     background-color: #ffffff;
     box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05);
+    //padding removed
+}
+
+.card-with-padding {
+    padding: $spacing-large;
+    //added padding class
 }
 
 //== Elements
@@ -20,11 +25,36 @@
 
 //== Variations
 //-------------------------------------------------------------------------------------------------------------------//
+.card-with-image {
+    overflow: hidden;
+    .card-image {
+        width: 100%;
+        height: auto;
+    }
+    .card-title {
+        margin: $spacing-large 0;
+    }
+}
+
 .cardaction {
     .card-image {
         .glyphicon {
             font-size: 58px;
         }
+    }
+}
+
+.carddashboard {
+    padding: 0;
+    overflow: hidden;
+
+    .card-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .card-title {
+        margin: $spacing-large 0;
     }
 }
 

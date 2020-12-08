@@ -465,6 +465,29 @@
                 "type": "Toggle",
                 "description": "Align the image in the center of an element.",
                 "class": "img-center"
+            },
+            {
+                "name": "Fit",
+                "type": "Dropdown",
+                "description": "Choose the image fit.",
+                "options": [
+                    {
+                        "name": "Fill",
+                        "class": "img-fill"
+                    },
+                    {
+                        "name": "Contain",
+                        "class": "img-contain"
+                    },
+                    {
+                        "name": "Cover",
+                        "class": "img-cover"
+                    },
+                    {
+                        "name": "Scale-down",
+                        "class": "img-scale-down"
+                    }
+                ]
             }
         ],
         "DynamicImageViewer": [
@@ -492,6 +515,29 @@
                 "type": "Toggle",
                 "description": "Align the image in the center of an element.",
                 "class": "img-center"
+            },
+            {
+                "name": "Fit",
+                "type": "Dropdown",
+                "description": "Choose the image fit.",
+                "options": [
+                    {
+                        "name": "Fill",
+                        "class": "img-fill"
+                    },
+                    {
+                        "name": "Contain",
+                        "class": "img-contain"
+                    },
+                    {
+                        "name": "Cover",
+                        "class": "img-cover"
+                    },
+                    {
+                        "name": "Scale-down",
+                        "class": "img-scale-down"
+                    }
+                ]
             }
         ],
         "Label": [
@@ -538,10 +584,167 @@
                 ]
             }
         ],
+        "TabContainer": [
+            {
+                "name": "Style",
+                "type": "Dropdown",
+                "description": "Change the appearance of the tab container",
+                "options": [
+                    {
+                        "name": "Pills",
+                        "class": "tab-pills"
+                    },
+                    {
+                        "name": "Lined",
+                        "class": "tab-lined"
+                    },
+                    {
+                        "name": "Bordered",
+                        "class": "tab-bordered"
+                    },
+                    {
+                        "name": "Wizard",
+                        "class": "tab-wizard"
+                    }
+                ]
+            },
+            {
+                "name": "Tab Position",
+                "type": "Dropdown",
+                "description": "Change the position of the tabs",
+                "options": [
+                    {
+                        "name": "Left",
+                        "class": "tab-left"
+                    },
+                    {
+                        "name": "Center",
+                        "class": "tab-center"
+                    },
+                    {
+                        "name": "Right",
+                        "class": "tab-right"
+                    }
+                ]
+            },
+            {
+                "name": "Justify",
+                "type": "Toggle",
+                "description": "Justify the tabs to 100%",
+                "class": "tab-justified"
+            },
+            {
+                "name": "Tab spacing top",
+                "type": "Dropdown",
+                "description": "The spacing above this tab bar.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "tab-spacing-outer-top-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "tab-spacing-outer-top"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "tab-spacing-outer-top-medium"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "tab-spacing-outer-top-large"
+                    }
+                ]
+            },
+            {
+                "name": "Tab spacing bottom",
+                "type": "Dropdown",
+                "description": "The spacing below this tab.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "tab-spacing-outer-bottom-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "tab-spacing-outer-bottom"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "tab-spacing-outer-bottom-medium"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "tab-spacing-outer-bottom-large"
+                    }
+                ]
+            },
+            {
+                "name": "Tab spacing left",
+                "type": "Dropdown",
+                "description": "The spacing to the left of this tab.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "tab-spacing-outer-left-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "tab-spacing-outer-left"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "tab-spacing-outer-left-medium"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "tab-spacing-outer-left-large"
+                    }
+                ]
+            },
+            {
+                "name": "Tab spacing right",
+                "type": "Dropdown",
+                "description": "The spacing to the right of this tab.",
+                "options": [
+                    {
+                        "name": "None",
+                        "class": "tab-spacing-outer-right-none"
+                    },
+                    {
+                        "name": "Small",
+                        "class": "tab-spacing-outer-right"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "tab-spacing-outer-right-medium"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "tab-spacing-outer-right-large"
+                    }
+                ]
+            }
+        ],
         "DynamicText": [
             {
-                "name": "Font Weight",
-                "oldNames": ["Weight"],
+                "name": "Size",
+                "type": "Dropdown",
+                "description": "Make the text smaller or larger.",
+                "options": [
+                    {
+                        "name": "Small",
+                        "class": "text-small"
+                    },
+                    {
+                        "name": "Large",
+                        "class": "text-large"
+                    }
+                ]
+            },
+            {
+                "name": "Weight",
+                "oldNames": ["Font Weight"],
                 "type": "Dropdown",
                 "description": "Emphasize the text with a heavier or lighter font weight",
                 "options": [

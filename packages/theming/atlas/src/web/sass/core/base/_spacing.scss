@@ -73,6 +73,16 @@ $important-spacing-value: if($important-spacing, " !important", "");
     padding-left: $spacing-small #{$important-spacing-value};
 }
 
+.spacing-inner-vertical {
+    padding-top: $spacing-small #{$important-spacing-value};
+    padding-bottom: $spacing-small #{$important-spacing-value};
+}
+
+.spacing-inner-horizontal {
+    padding-left: $spacing-small #{$important-spacing-value};
+    padding-right: $spacing-small #{$important-spacing-value};
+}
+
 .spacing-outer {
     margin: $spacing-small #{$important-spacing-value};
 }
@@ -91,6 +101,16 @@ $important-spacing-value: if($important-spacing, " !important", "");
 
 .spacing-outer-left {
     margin-left: $spacing-small #{$important-spacing-value};
+}
+
+.spacing-outer-vertical {
+    margin-top: $spacing-small #{$important-spacing-value};
+    margin-bottom: $spacing-small #{$important-spacing-value};
+}
+
+.spacing-outer-horizontal {
+    margin-left: $spacing-small #{$important-spacing-value};
+    margin-right: $spacing-small #{$important-spacing-value};
 }
 
 // Spacing Medium
@@ -126,6 +146,28 @@ $important-spacing-value: if($important-spacing, " !important", "");
     );
 }
 
+.spacing-inner-vertical-medium {
+    @include get-responsive-spacing-medium($type: padding, $direction: top, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-medium(
+        $type: padding,
+        $direction: bottom,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
+.spacing-inner-horizontal-medium {
+    @include get-responsive-spacing-medium(
+        $type: padding,
+        $direction: left,
+        $is_important: #{$important-spacing-value}
+    );
+    @include get-responsive-spacing-medium(
+        $type: padding,
+        $direction: right,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
 .spacing-outer-medium {
     @include get-responsive-spacing-medium($type: margin, $direction: all, $is_important: #{$important-spacing-value});
 }
@@ -152,6 +194,24 @@ $important-spacing-value: if($important-spacing, " !important", "");
 
 .spacing-outer-left-medium {
     @include get-responsive-spacing-medium($type: margin, $direction: left, $is_important: #{$important-spacing-value});
+}
+
+.spacing-outer-vertical-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: top, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-medium(
+        $type: margin,
+        $direction: bottom,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
+.spacing-outer-horizontal-medium {
+    @include get-responsive-spacing-medium($type: margin, $direction: left, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-medium(
+        $type: margin,
+        $direction: right,
+        $is_important: #{$important-spacing-value}
+    );
 }
 
 // Spacing Large
@@ -183,6 +243,24 @@ $important-spacing-value: if($important-spacing, " !important", "");
     @include get-responsive-spacing-large($type: padding, $direction: left, $is_important: #{$important-spacing-value});
 }
 
+.spacing-inner-vertical-large {
+    @include get-responsive-spacing-large($type: padding, $direction: top, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-large(
+        $type: padding,
+        $direction: bottom,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
+.spacing-inner-horizontal-large {
+    @include get-responsive-spacing-large($type: padding, $direction: left, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-large(
+        $type: padding,
+        $direction: right,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
 .spacing-outer-large {
     @include get-responsive-spacing-large($type: margin, $direction: all, $is_important: #{$important-spacing-value});
 }
@@ -205,6 +283,20 @@ $important-spacing-value: if($important-spacing, " !important", "");
 
 .spacing-outer-left-large {
     @include get-responsive-spacing-large($type: margin, $direction: left, $is_important: #{$important-spacing-value});
+}
+
+.spacing-outer-vertical-large {
+    @include get-responsive-spacing-large($type: margin, $direction: top, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-large(
+        $type: margin,
+        $direction: bottom,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
+.spacing-outer-horizontal-large {
+    @include get-responsive-spacing-large($type: margin, $direction: left, $is_important: #{$important-spacing-value});
+    @include get-responsive-spacing-large($type: margin, $direction: right, $is_important: #{$important-spacing-value});
 }
 
 // Spacing layouts
@@ -253,6 +345,35 @@ $important-spacing-value: if($important-spacing, " !important", "");
     );
 }
 
+.spacing-inner-vertical-layout {
+    @include layout-spacing(
+        $type: padding,
+        $direction: top,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+    @include layout-spacing(
+        $type: padding,
+        $direction: bottom,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+}
+.spacing-inner-horizontal-layout {
+    @include layout-spacing(
+        $type: padding,
+        $direction: left,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+    @include layout-spacing(
+        $type: padding,
+        $direction: right,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
 .spacing-outer-layout {
     @include layout-spacing(
         $type: margin,
@@ -293,6 +414,35 @@ $important-spacing-value: if($important-spacing, " !important", "");
     @include layout-spacing(
         $type: margin,
         $direction: left,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+}
+
+.spacing-outer-vertical-layout {
+    @include layout-spacing(
+        $type: margin,
+        $direction: top,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+    @include layout-spacing(
+        $type: margin,
+        $direction: bottom,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+}
+.spacing-outer-horizontal-layout {
+    @include layout-spacing(
+        $type: margin,
+        $direction: left,
+        $device: responsive,
+        $is_important: #{$important-spacing-value}
+    );
+    @include layout-spacing(
+        $type: margin,
+        $direction: right,
         $device: responsive,
         $is_important: #{$important-spacing-value}
     );
