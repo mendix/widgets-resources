@@ -52,12 +52,12 @@
                                 </attributeTypes>
                             </property>
                             <property key="staticSeriesName" type="textTemplate" required="false" multiline="false">
-                                <caption>Series name</caption>
-                                <description />
+                                <caption>Name</caption>
+                                <description>The bar or group name displayed in the legend.</description>
                             </property>
                             <property key="dynamicSeriesName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
-                                <caption>Series name</caption>
-                                <description />
+                                <caption>Name</caption>
+                                <description>The bar or group name displayed in the legend.</description>
                             </property>
                             <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>X attribute</caption>

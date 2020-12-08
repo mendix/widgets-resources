@@ -4,10 +4,13 @@ export interface BarChartGridStyle {
     backgroundColor?: string;
     dashArray?: string;
     lineColor?: string;
+    padding?: number;
     paddingBottom?: number;
+    paddingHorizontal?: number;
     paddingLeft?: number;
     paddingRight?: number;
     paddingTop?: number;
+    paddingVertical?: number;
     width?: number;
 }
 
@@ -25,8 +28,8 @@ export interface BarChartAxisStyle<T extends "X" | "Y"> {
     width?: number;
 }
 
-export interface BarChartBarStyle {
-    ending?: "flat" | "round";
+interface BarChartBarStyle {
+    ending?: number;
     barColor?: string;
     width?: number;
 }
@@ -54,8 +57,19 @@ export interface BarChartStyle {
     xAxis?: BarChartAxisStyle<"X">;
     yAxis?: BarChartAxisStyle<"Y">;
     legend?: BarChartLegendStyle;
-    barStyles?: { [key: string]: BarChartBarStyle & BarChartBarLabelStyle };
-    barColorPalette?: string[];
+    domain?: {
+        padding?: { x?: number; y?: number };
+    };
+    bars?: {
+        barColorPalette?: string;
+        barsOffset?: number; // only applicable to Grouped presentation mode
+        customBarStyles?: {
+            [key: string]: {
+                bar?: BarChartBarStyle;
+                label?: BarChartBarLabelStyle;
+            };
+        };
+    };
 }
 
 export const defaultBarChartStyle: BarChartStyle = {
@@ -74,7 +88,6 @@ export const defaultBarChartStyle: BarChartStyle = {
         paddingRight: 10,
         paddingTop: 10
     },
-    // todo: why not yAxis default?
     xAxis: {
         label: {
             alignSelf: "center"

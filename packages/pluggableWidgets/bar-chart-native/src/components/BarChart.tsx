@@ -7,7 +7,7 @@ import { extractStyles } from "@mendix/pluggable-widgets-tools";
 import { BarChartStyle } from "../ui/Styles";
 import { SortOrderEnum } from "../../typings/BarChartProps";
 import { Legend } from "./Legend";
-import { mapToAxisStyle, mapToBarLabelStyle, mapToBarStyle, mapToGridStyle } from "../utils/StyleMappers";
+import { aggregateGridPadding, mapToAxisStyle, mapToGridStyle, mapToBarStyles } from "../utils/StyleMappers";
 
 export interface BarChartProps {
     series: BarChartSeries[];
@@ -64,29 +64,25 @@ export function BarChart({
 
     // Bar Chart user-styling may be missing for certain series. A palette is passed, any missing colours
     // fallback to a colour from the palette.
-    const normalisedBarColors: string[] = useMemo(() => {
-        const result: string[] = [];
+    const normalizedBarColors: string[] = useMemo(() => {
+        const barColorPalette = style.bars?.barColorPalette?.split(";");
         let index = 0;
 
-        for (const _series of series) {
+        return series.map(_series => {
             const configuredStyle = !_series.customBarStyle
                 ? null
-                : style.barStyles?.[_series.customBarStyle]?.barColor;
-
-            console.info("configuredStyle", configuredStyle);
+                : style.bars?.customBarStyles?.[_series.customBarStyle]?.bar?.barColor;
 
             if (typeof configuredStyle !== "string") {
-                result.push(style.barColorPalette?.[index] || "black");
-
-                if (style.barColorPalette) {
-                    index = index + 1 === style.barColorPalette.length ? 0 : index + 1;
+                if (barColorPalette) {
+                    index = index + 1 === barColorPalette.length ? 0 : index + 1;
                 }
-            } else {
-                result.push(configuredStyle);
-            }
-        }
 
-        return result;
+                return barColorPalette?.[index] || "black";
+            }
+
+            return configuredStyle;
+        });
     }, [series, style]);
 
     const sort = useMemo(() => ({ sortOrder, sortKey: "x" }), [sortOrder]);
@@ -105,25 +101,25 @@ export function BarChart({
 
         // datum.y is actually the X axis data points due to the way Victory handles horizontal charts
         const bars = series.map(({ customBarStyle, dataPoints }, index) => {
-            const seriesStyle = style.barStyles && customBarStyle ? style.barStyles[customBarStyle] : undefined;
+            const seriesStyle =
+                style.bars?.customBarStyles && customBarStyle ? style.bars.customBarStyles[customBarStyle] : undefined;
 
-            // todo: test cornerRadius
+            const barStyles = mapToBarStyles(normalizedBarColors[index], seriesStyle);
+
             return (
                 <VictoryBar
                     horizontal
                     key={index}
                     data={dataPoints}
-                    width={seriesStyle?.width}
-                    cornerRadius={
-                        seriesStyle?.ending === "round"
-                            ? typeof seriesStyle.width === "number"
-                                ? seriesStyle.width / 2
-                                : undefined
-                            : undefined
-                    }
+                    width={barStyles.width}
+                    cornerRadius={barStyles.cornerRadius}
                     style={{
-                        ...mapToBarStyle(normalisedBarColors[index], seriesStyle),
-                        ...mapToBarLabelStyle(normalisedBarColors[index], seriesStyle)
+                        data: {
+                            ...barStyles.bar
+                        },
+                        labels: {
+                            ...barStyles.labels
+                        }
                     }}
                     {...sortProp}
                     {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
@@ -133,15 +129,14 @@ export function BarChart({
 
         if (presentation === "grouped") {
             return (
-                // todo: configure offset
-                <VictoryGroup offset={20} colorScale={normalisedBarColors}>
+                <VictoryGroup offset={style.bars?.barsOffset} colorScale={normalizedBarColors}>
                     {bars}
                 </VictoryGroup>
             );
         }
 
-        return <VictoryStack colorScale={normalisedBarColors}>{bars}</VictoryStack>;
-    }, [dataTypesResult, series, style, warningMessagePrefix, sortProp, showLabels, normalisedBarColors, presentation]);
+        return <VictoryStack colorScale={normalizedBarColors}>{bars}</VictoryStack>;
+    }, [dataTypesResult, series, style, warningMessagePrefix, sortProp, showLabels, normalizedBarColors, presentation]);
 
     const [firstSeries] = series;
 
@@ -204,7 +199,6 @@ export function BarChart({
             {dataTypesResult instanceof Error ? (
                 <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (
-                // todo: support domain padding through atlas.
                 <View style={style.chart}>
                     <View style={{ flex: 1 }}>
                         {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "top"
@@ -217,14 +211,10 @@ export function BarChart({
                             <View onLayout={onLayout} style={{ flex: 1 }}>
                                 {chartDimensions ? (
                                     <VictoryChart
+                                        domainPadding={style.domain?.padding}
                                         height={chartDimensions?.height}
                                         width={chartDimensions?.width}
-                                        padding={{
-                                            top: style.grid?.paddingTop,
-                                            right: style.grid?.paddingRight,
-                                            bottom: style.grid?.paddingBottom,
-                                            left: style.grid?.paddingLeft
-                                        }}
+                                        padding={aggregateGridPadding(style.grid)}
                                         scale={
                                             dataTypesResult
                                                 ? { x: getScale(dataTypesResult.x), y: getScale(dataTypesResult.y) }
@@ -260,7 +250,7 @@ export function BarChart({
                             : null}
                     </View>
                     {showLegend ? (
-                        <Legend style={style.legend} series={series} seriesColors={normalisedBarColors} />
+                        <Legend style={style.legend} series={series} seriesColors={normalizedBarColors} />
                     ) : null}
                 </View>
             )}

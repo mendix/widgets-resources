@@ -32,6 +32,7 @@ export * from "./core/widgets/layout";
 export * from "./core/widgets/layoutgrid";
 export * from "./core/widgets/linechart";
 export * from "./core/helpers/linechart";
+export * from "./core/widgets/barchart";
 export * from "./core/widgets/listviews";
 export * from "./core/helpers/listviews";
 export * from "./core/widgets/listviewswipe";

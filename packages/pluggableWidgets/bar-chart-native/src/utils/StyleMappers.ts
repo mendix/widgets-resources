@@ -1,8 +1,8 @@
 import { VictoryChartProps } from "victory-chart";
-import { VictoryAxisCommonProps } from "victory-core";
+import { VictoryAxisCommonProps, VictoryCommonProps } from "victory-core";
 import { VictoryBarProps } from "victory-bar";
 
-import { BarChartAxisStyle, BarChartGridStyle, BarChartBarStyle, BarChartStyle } from "../ui/Styles";
+import { BarChartAxisStyle, BarChartGridStyle, BarChartStyle } from "../ui/Styles";
 
 export function mapToGridStyle(
     gridStyle?: BarChartGridStyle
@@ -39,30 +39,61 @@ export function mapToAxisStyle<T extends "X" | "Y">(
     };
 }
 
-export function mapToBarStyle(
+function mapToBarStyle(
     fallbackColor: string,
-    style?: BarChartBarStyle
-): { data: NonNullable<VictoryBarProps["style"]>["data"] } {
+    style?: NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]
+): NonNullable<VictoryBarProps["style"]>["data"] {
     return {
-        data: {
-            fill: style?.barColor ?? fallbackColor
-        }
+        fill: style?.bar?.barColor ?? fallbackColor
     };
 }
 
-export function mapToBarLabelStyle(
+function mapToBarLabelStyle(
     fallbackColor: string,
-    style?: NonNullable<BarChartStyle["barStyles"]>["key"]
-): { labels: NonNullable<VictoryBarProps["style"]>["labels"] } {
-    const fill = style?.barColor ?? fallbackColor;
+    style?: NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]
+): NonNullable<VictoryBarProps["style"]>["labels"] {
+    const fill = style?.bar?.barColor ?? fallbackColor;
 
     return {
-        labels: {
-            fill,
-            fontSize: style?.fontSize,
-            fontFamily: style?.fontFamily,
-            fontStyle: style?.fontStyle,
-            fontWeight: style?.fontWeight
-        }
+        fill,
+        fontSize: style?.label?.fontSize,
+        fontFamily: style?.label?.fontFamily,
+        fontStyle: style?.label?.fontStyle,
+        fontWeight: style?.label?.fontWeight
+    };
+}
+
+export function mapToBarStyles(
+    fallbackColor: string,
+    style?: NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]
+) {
+    return {
+        bar: mapToBarStyle(fallbackColor, style),
+        labels: mapToBarLabelStyle(fallbackColor, style),
+        cornerRadius: style?.bar?.ending,
+        width: style?.bar?.width
+    };
+}
+
+export function aggregateGridPadding(gridStyle?: BarChartGridStyle): VictoryCommonProps["padding"] {
+    if (!gridStyle) {
+        return;
+    }
+
+    const {
+        padding,
+        paddingHorizontal,
+        paddingVertical,
+        paddingTop,
+        paddingRight,
+        paddingBottom,
+        paddingLeft
+    } = gridStyle;
+
+    return {
+        top: paddingTop ?? paddingVertical ?? padding,
+        right: paddingRight ?? paddingHorizontal ?? padding,
+        bottom: paddingBottom ?? paddingVertical ?? padding,
+        left: paddingLeft ?? paddingHorizontal ?? padding
     };
 }
