@@ -1,6 +1,6 @@
 import { createElement, Dispatch, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { ListAttributeValue, ObjectItem } from "mendix";
-import { useOnClickOutside } from "../utils/utils";
+import { useOnClickOutside } from "@widgets-resources/piw-utils";
 
 interface Option {
     caption: string;
