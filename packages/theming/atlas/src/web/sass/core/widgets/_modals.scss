@@ -37,6 +37,9 @@
                 filter: alpha(opacity=100);
             }
         }
+        .modal-body {
+            padding: 24px;
+        }
 
         .modal-footer {
             display: flex;
@@ -82,7 +85,7 @@
 }
 
 .mx-dialog .modal-body {
-    padding: 20px;
+    padding: 24px;
 }
 
 // Login modal

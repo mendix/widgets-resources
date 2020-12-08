@@ -57,3 +57,23 @@ img.img-icon {
     padding: 2px;
     border-radius: 50%;
 }
+
+img.img-fill,
+.img-fill img {
+    object-fit: fill;
+}
+
+img.img-contain,
+.img-contain img {
+    object-fit: contain;
+}
+
+img.img-cover,
+.img-cover img {
+    object-fit: cover;
+}
+
+img.img-scale-down,
+.img-scale-down img {
+    object-fit: scale-down;
+}

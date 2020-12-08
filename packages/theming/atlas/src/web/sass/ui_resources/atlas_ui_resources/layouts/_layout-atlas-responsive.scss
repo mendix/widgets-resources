@@ -5,7 +5,7 @@
 ========================================================================== */
 .layout-atlas-responsive,
 .layout-atlas-responsive-default {
-    $sidebar-width: 40px;
+    $sidebar-width: 52px;
 
     @media (min-width: $screen-md) {
         .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
@@ -82,14 +82,33 @@
     .region-sidebar {
         .toggle-btn {
             width: $sidebar-width;
-            height: 60px;
             border-color: transparent;
             border-radius: 0;
             background: transparent;
         }
 
-        .mx-scrollcontainer-wrapper > .mx-navigationtree {
-            .navbar-inner > ul > li {
+        .mx-scrollcontainer-wrapper {
+            .toggle-btn-wrapper {
+                display: flex;
+                padding: $spacing-small;
+                align-items: center;
+                min-height: $topbar-minimalheight + 4px;
+                background: $navsidebar-sub-bg;
+            }
+            .toggle-btn {
+                margin-left: -$spacing-small;
+                padding: $spacing-small;
+
+                img {
+                    width: 24px;
+                    height: 24px;
+                }
+            }
+            .toggle-text {
+                color: #fff;
+                font-weight: bold;
+            }
+            & > .mx-navigationtree .navbar-inner > ul > li {
                 & > a {
                     height: $sidebar-width;
                     padding: $spacing-small;
@@ -98,8 +117,8 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 40px;
-                        height: 40px;
+                        width: 52px;
+                        height: 52px;
                         margin-left: -$spacing-small;
                         padding: 10px;
                         border-radius: 3px;
