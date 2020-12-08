@@ -75,9 +75,15 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                   property: column.content
                               }
                             : {
-                                  type: "text",
-                                  content: `{${column.attribute ?? "Attribute"}}`,
-                                  fontSize: 10
+                                  type: "Container",
+                                  padding: 8,
+                                  children: [
+                                      {
+                                          type: "Text",
+                                          content: `{${column.attribute ?? "Attribute"}}`,
+                                          fontSize: 10
+                                      }
+                                  ]
                               }
                     ]
                 } as ContainerProps)
@@ -91,9 +97,27 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
             const content: ContainerProps = {
                 type: "Container",
                 borders: true,
-                grow: column.width === "manual" && column.size ? column.size : 1,
+                grow:
+                    values.columns.length > 0
+                        ? column.width === "manual" && column.size
+                            ? column.size
+                            : 1
+                        : undefined,
+                backgroundColor: "#F5F5F5",
                 children: [
-                    { type: "Text", bold: true, fontSize: 10, content: header.length > 0 ? header : "Header" },
+                    {
+                        type: "Container",
+                        padding: 8,
+                        children: [
+                            {
+                                type: "Text",
+                                bold: true,
+                                fontSize: 10,
+                                content: header.length > 0 ? header : "Header",
+                                fontColor: header.length === 0 ? "#F5F5F5" : undefined
+                            }
+                        ]
+                    },
                     ...(values.columnsFilterable
                         ? [
                               {
@@ -108,9 +132,9 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                 ? {
                       type: "Selectable",
                       object: column,
+                      grow: column.width === "manual" && column.size ? column.size : 1,
                       child: {
                           type: "Container",
-                          grow: column.width === "manual" && column.size ? column.size : 1,
                           children: [content]
                       }
                   }
@@ -133,6 +157,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         : [];
     return {
         type: "Container",
+        borders: true,
         children: [headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
     };
 };
