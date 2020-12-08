@@ -51,6 +51,9 @@ export function DatePicker(props: DatePickerProps): ReactElement {
                         enabled: true,
                         escapeWithReference: false,
                         boundariesElement: "viewport"
+                    },
+                    flip: {
+                        enabled: false
                     }
                 }}
                 preventOpenOnFocus
