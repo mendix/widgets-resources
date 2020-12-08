@@ -14,3 +14,7 @@ export function preview(props: DatagridDateFilterPreviewProps): ReactElement {
         />
     );
 }
+
+export function getPreviewCss(): string {
+    return require("./ui/DatagridDateFilter.scss");
+}
