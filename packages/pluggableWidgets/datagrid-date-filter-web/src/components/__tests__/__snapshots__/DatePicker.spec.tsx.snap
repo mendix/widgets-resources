@@ -39,6 +39,9 @@ exports[`Date picker component renders correctly 1`] = `
     open={false}
     popperModifiers={
       Object {
+        "flip": Object {
+          "enabled": false,
+        },
         "offset": Object {
           "enabled": true,
           "offset": "0, 0",
@@ -127,6 +130,9 @@ exports[`Date picker component renders correctly when is not adjustable 1`] = `
     open={false}
     popperModifiers={
       Object {
+        "flip": Object {
+          "enabled": false,
+        },
         "offset": Object {
           "enabled": true,
           "offset": "0, 0",
@@ -215,6 +221,9 @@ exports[`Date picker component renders correctly with different locale and date 
     open={false}
     popperModifiers={
       Object {
+        "flip": Object {
+          "enabled": false,
+        },
         "offset": Object {
           "enabled": true,
           "offset": "0, 0",
