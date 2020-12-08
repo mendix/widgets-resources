@@ -1,12 +1,9 @@
 import { createElement, ReactElement, useCallback, useRef, useState } from "react";
-import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
-import { useOnClickOutside } from "@widgets-resources/piw-utils";
+import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 import classNames from "classnames";
+import { useOnClickOutside } from "@widgets-resources/piw-utils";
 
 const options: Array<{ value: DefaultFilterEnum; label: string }> = [
-    { value: "contains", label: "Contains" },
-    { value: "startsWith", label: "Starts with" },
-    { value: "endsWith", label: "Ends with" },
     { value: "greater", label: "Greater than" },
     { value: "greaterEqual", label: "Greater than or equal" },
     { value: "equal", label: "Equal" },

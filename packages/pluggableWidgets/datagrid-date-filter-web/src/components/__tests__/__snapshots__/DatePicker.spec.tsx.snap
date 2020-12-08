@@ -1,0 +1,274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Date picker component renders correctly 1`] = `
+<Fragment>
+  <span
+    className="sr-only"
+    id="undefined-label"
+  />
+  <a
+    allowSameDay={false}
+    ariaLabelledBy="undefined-label"
+    autoFocus={false}
+    className="form-control filter-input"
+    customTimeInput={null}
+    dateFormat="dd/MM/yyyy"
+    dateFormatCalendar="LLLL yyyy"
+    disabled={false}
+    disabledKeyboardNavigation={false}
+    dropdownMode="select"
+    enableTabLoop={true}
+    excludeScrollbar={true}
+    focusSelectedMonth={false}
+    locale="nl-NL"
+    monthsShown={1}
+    nextMonthButtonLabel="Next Month"
+    nextYearButtonLabel="Next Year"
+    onBlur={[Function]}
+    onCalendarClose={[Function]}
+    onCalendarOpen={[Function]}
+    onChange={[Function]}
+    onClickOutside={[Function]}
+    onFocus={[Function]}
+    onInputClick={[Function]}
+    onInputError={[Function]}
+    onKeyDown={[Function]}
+    onMonthChange={[Function]}
+    onSelect={[Function]}
+    onYearChange={[Function]}
+    open={false}
+    popperModifiers={
+      Object {
+        "flip": Object {
+          "enabled": false,
+        },
+        "offset": Object {
+          "enabled": true,
+          "offset": "0, 0",
+        },
+        "preventOverflow": Object {
+          "boundariesElement": "viewport",
+          "enabled": true,
+          "escapeWithReference": false,
+        },
+      }
+    }
+    popperPlacement="bottom-start"
+    preventOpenOnFocus={true}
+    previousMonthButtonLabel="Previous Month"
+    previousYearButtonLabel="Previous Year"
+    readOnly={false}
+    renderDayContents={[Function]}
+    selected={null}
+    shouldCloseOnSelect={false}
+    showFullMonthYearPicker={false}
+    showMonthDropdown={true}
+    showMonthYearPicker={false}
+    showPopperArrow={false}
+    showPreviousMonths={false}
+    showQuarterYearPicker={false}
+    showTimeInput={false}
+    showTimeSelect={false}
+    showTwoColumnMonthYearPicker={false}
+    showYearDropdown={true}
+    showYearPicker={false}
+    strictParsing={true}
+    timeCaption="Time"
+    timeInputLabel="Time"
+    timeIntervals={30}
+    useWeekdaysShort={true}
+    withPortal={false}
+    yearItemNumber={12}
+  />
+  <button
+    className="btn btn-default btn-calendar"
+    onClick={[Function]}
+  >
+    <span
+      className="glyphicon glyphicon-calendar"
+    />
+  </button>
+</Fragment>
+`;
+
+exports[`Date picker component renders correctly when is not adjustable 1`] = `
+<Fragment>
+  <span
+    className="sr-only"
+    id="undefined-label"
+  />
+  <a
+    allowSameDay={false}
+    ariaLabelledBy="undefined-label"
+    autoFocus={false}
+    className="form-control"
+    customTimeInput={null}
+    dateFormat="dd/MM/yyyy"
+    dateFormatCalendar="LLLL yyyy"
+    disabled={false}
+    disabledKeyboardNavigation={false}
+    dropdownMode="select"
+    enableTabLoop={true}
+    excludeScrollbar={true}
+    focusSelectedMonth={false}
+    locale="nl-NL"
+    monthsShown={1}
+    nextMonthButtonLabel="Next Month"
+    nextYearButtonLabel="Next Year"
+    onBlur={[Function]}
+    onCalendarClose={[Function]}
+    onCalendarOpen={[Function]}
+    onChange={[Function]}
+    onClickOutside={[Function]}
+    onFocus={[Function]}
+    onInputClick={[Function]}
+    onInputError={[Function]}
+    onKeyDown={[Function]}
+    onMonthChange={[Function]}
+    onSelect={[Function]}
+    onYearChange={[Function]}
+    open={false}
+    popperModifiers={
+      Object {
+        "flip": Object {
+          "enabled": false,
+        },
+        "offset": Object {
+          "enabled": true,
+          "offset": "0, 0",
+        },
+        "preventOverflow": Object {
+          "boundariesElement": "viewport",
+          "enabled": true,
+          "escapeWithReference": false,
+        },
+      }
+    }
+    popperPlacement="bottom-start"
+    preventOpenOnFocus={true}
+    previousMonthButtonLabel="Previous Month"
+    previousYearButtonLabel="Previous Year"
+    readOnly={false}
+    renderDayContents={[Function]}
+    selected={null}
+    shouldCloseOnSelect={false}
+    showFullMonthYearPicker={false}
+    showMonthDropdown={true}
+    showMonthYearPicker={false}
+    showPopperArrow={false}
+    showPreviousMonths={false}
+    showQuarterYearPicker={false}
+    showTimeInput={false}
+    showTimeSelect={false}
+    showTwoColumnMonthYearPicker={false}
+    showYearDropdown={true}
+    showYearPicker={false}
+    strictParsing={true}
+    timeCaption="Time"
+    timeInputLabel="Time"
+    timeIntervals={30}
+    useWeekdaysShort={true}
+    withPortal={false}
+    yearItemNumber={12}
+  />
+  <button
+    className="btn btn-default btn-calendar"
+    onClick={[Function]}
+  >
+    <span
+      className="glyphicon glyphicon-calendar"
+    />
+  </button>
+</Fragment>
+`;
+
+exports[`Date picker component renders correctly with different locale and date format 1`] = `
+<Fragment>
+  <span
+    className="sr-only"
+    id="undefined-label"
+  />
+  <a
+    allowSameDay={false}
+    ariaLabelledBy="undefined-label"
+    autoFocus={false}
+    className="form-control"
+    customTimeInput={null}
+    dateFormat="yyyy-MM-dd"
+    dateFormatCalendar="LLLL yyyy"
+    disabled={false}
+    disabledKeyboardNavigation={false}
+    dropdownMode="select"
+    enableTabLoop={true}
+    excludeScrollbar={true}
+    focusSelectedMonth={false}
+    locale="pt-BR"
+    monthsShown={1}
+    nextMonthButtonLabel="Next Month"
+    nextYearButtonLabel="Next Year"
+    onBlur={[Function]}
+    onCalendarClose={[Function]}
+    onCalendarOpen={[Function]}
+    onChange={[Function]}
+    onClickOutside={[Function]}
+    onFocus={[Function]}
+    onInputClick={[Function]}
+    onInputError={[Function]}
+    onKeyDown={[Function]}
+    onMonthChange={[Function]}
+    onSelect={[Function]}
+    onYearChange={[Function]}
+    open={false}
+    popperModifiers={
+      Object {
+        "flip": Object {
+          "enabled": false,
+        },
+        "offset": Object {
+          "enabled": true,
+          "offset": "0, 0",
+        },
+        "preventOverflow": Object {
+          "boundariesElement": "viewport",
+          "enabled": true,
+          "escapeWithReference": false,
+        },
+      }
+    }
+    popperPlacement="bottom-start"
+    preventOpenOnFocus={true}
+    previousMonthButtonLabel="Previous Month"
+    previousYearButtonLabel="Previous Year"
+    readOnly={false}
+    renderDayContents={[Function]}
+    selected={null}
+    shouldCloseOnSelect={false}
+    showFullMonthYearPicker={false}
+    showMonthDropdown={true}
+    showMonthYearPicker={false}
+    showPopperArrow={false}
+    showPreviousMonths={false}
+    showQuarterYearPicker={false}
+    showTimeInput={false}
+    showTimeSelect={false}
+    showTwoColumnMonthYearPicker={false}
+    showYearDropdown={true}
+    showYearPicker={false}
+    strictParsing={true}
+    timeCaption="Time"
+    timeInputLabel="Time"
+    timeIntervals={30}
+    useWeekdaysShort={true}
+    withPortal={false}
+    yearItemNumber={12}
+  />
+  <button
+    className="btn btn-default btn-calendar"
+    onClick={[Function]}
+  >
+    <span
+      className="glyphicon glyphicon-calendar"
+    />
+  </button>
+</Fragment>
+`;

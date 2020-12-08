@@ -25,14 +25,12 @@ export class BaseMapPage extends Page {
 
     get googleMarkers(): WebdriverIO.Element[] {
         browser.pause(1000);
-        return this.getElements("img[src*='gstatic.com/mapfiles/api-3/images/spotlight-poi']").filter(e =>
-            e.getAttribute("usemap")
-        );
+        return this.getElements("img[src*='gstatic.com/mapfiles']").filter(e => e.getAttribute("usemap"));
     }
 
     get googleMarker(): WebdriverIO.Element {
         browser.pause(1000);
-        return this.getElements("img[src*='gstatic.com/mapfiles/api-3/images/spotlight-poi']")
+        return this.getElements("img[src*='gstatic.com/mapfiles']")
             .filter(e => e.getAttribute("usemap"))
             .pop();
     }
