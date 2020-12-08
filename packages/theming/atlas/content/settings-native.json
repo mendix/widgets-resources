@@ -1231,6 +1231,130 @@
         ],
         "LayoutGridRow": [
             {
+                "name": "Spacing top",
+                "type": "Dropdown",
+                "description": "The spacing above this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerTopSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerTopMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerTopLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterTopSmaller"
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterTopMedium"
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterTopLarger"
+                    }
+                ]
+            },
+            {
+                "name": "Spacing bottom",
+                "type": "Dropdown",
+                "description": "The spacing below this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerBottomSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerBottomMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerBottomLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterBottomSmaller"
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterBottomMedium"
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterBottomLarger"
+                    }
+                ]
+            },
+            {
+                "name": "Spacing left",
+                "type": "Dropdown",
+                "description": "The spacing to the left of this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerLeftSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerLeftMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerLeftLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterLeftSmaller"
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterLeftMedium"
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterLeftLarger"
+                    }
+                ]
+            },
+            {
+                "name": "Spacing right",
+                "type": "Dropdown",
+                "description": "The spacing to the right of this element.",
+                "options": [
+                    {
+                        "name": "Inner small",
+                        "class": "spacingInnerRightSmaller"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacingInnerRightMedium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacingInnerRightLarger"
+                    },
+                    {
+                        "name": "Outer small",
+                        "class": "spacingOuterRightSmaller"
+                    },
+                    {
+                        "name": "Outer medium",
+                        "class": "spacingOuterRightMedium"
+                    },
+                    {
+                        "name": "Outer large",
+                        "class": "spacingOuterRightLarger"
+                    }
+                ]
+            },
+            {
                 "name": "Background color",
                 "type": "Dropdown",
                 "description": "Change the background color of the container.",
