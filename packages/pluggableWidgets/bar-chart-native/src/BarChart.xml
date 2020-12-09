@@ -140,7 +140,7 @@
             </propertyGroup>
             <propertyGroup caption="Chart settings">
                 <property key="showLabels" type="boolean" defaultValue="true">
-                    <caption>Show labels</caption>
+                    <caption>Show bar labels</caption>
                     <description />
                 </property>
                 <property key="showLegend" type="boolean" defaultValue="true">
