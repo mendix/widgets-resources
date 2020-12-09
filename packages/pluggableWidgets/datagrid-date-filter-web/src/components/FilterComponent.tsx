@@ -72,7 +72,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         if (pickerRef.current) {
             pickerRef.current.setFocus();
         }
-    }, [pickerRef]);
+    }, [pickerRef.current]);
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>

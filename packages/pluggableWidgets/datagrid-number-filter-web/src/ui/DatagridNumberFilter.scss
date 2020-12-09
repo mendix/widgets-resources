@@ -32,6 +32,7 @@ $border-color: #ced0d3;
     padding-right: 0;
 
     .filter-selector-content {
+        height: 100%;
         align-self: flex-end;
 
         .filter-selector-button {
@@ -39,9 +40,9 @@ $border-color: #ced0d3;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             border-right: none;
+            height: 100%;
 
             &:before {
-                display: flex;
                 justify-content: center;
                 width: 20px;
                 height: 20px;
@@ -76,13 +77,11 @@ $border-color: #ced0d3;
                 &.filter-selected {
                     background-color: $hover-color;
                     color: $primary-color;
-                    font-weight: bold;
                 }
 
                 &:hover,
                 &:focus {
                     background-color: $hover-color;
-                    font-weight: 400;
                 }
             }
         }

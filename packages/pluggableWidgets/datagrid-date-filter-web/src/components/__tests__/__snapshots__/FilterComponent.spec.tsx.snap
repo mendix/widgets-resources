@@ -9,7 +9,7 @@ exports[`Filter component renders correctly 1`] = `
     defaultFilter="equal"
     onChange={[Function]}
   />
-  <DatePicker
+  <ForwardRef
     adjustable={true}
     setValue={[Function]}
     value={null}
@@ -22,7 +22,7 @@ exports[`Filter component renders correctly when not adjustable by user 1`] = `
   className="filter-container"
   data-focusindex={0}
 >
-  <DatePicker
+  <ForwardRef
     adjustable={false}
     setValue={[Function]}
     value={null}
@@ -40,7 +40,7 @@ exports[`Filter component renders correctly with aria labels 1`] = `
     defaultFilter="equal"
     onChange={[Function]}
   />
-  <DatePicker
+  <ForwardRef
     adjustable={true}
     screenReaderInputCaption="my label"
     setValue={[Function]}
