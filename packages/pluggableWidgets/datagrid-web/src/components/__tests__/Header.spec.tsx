@@ -110,6 +110,7 @@ function mockHeaderProps(): HeaderProps<object> {
         setColumnWidth: jest.fn(),
         setDragOver: jest.fn(),
         visibleColumns: [],
-        setSortBy: jest.fn()
+        setSortBy: jest.fn(),
+        setIsDragging: jest.fn()
     };
 }
