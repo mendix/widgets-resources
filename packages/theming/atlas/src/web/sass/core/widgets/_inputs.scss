@@ -121,7 +121,7 @@ textarea.form-control {
 
     .mx-validation-message {
         flex-basis: 100%;
-        margin-top: 5px;
+        margin-top: 8px;
     }
 }
 
@@ -152,7 +152,7 @@ textarea.form-control {
     // Label
     .control-label {
         overflow: hidden;
-        margin-bottom: 5px;
+        margin-bottom: 8px;
         text-align: left;
         text-overflow: ellipsis;
         color: $form-label-color;

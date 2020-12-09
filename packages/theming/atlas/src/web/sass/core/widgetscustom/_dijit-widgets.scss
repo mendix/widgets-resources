@@ -30,16 +30,16 @@
         background: #ffffff;
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
         .mx-tooltip-content {
-            padding: 10px;
+            padding: 18px;
         }
         .form-group {
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
     }
     .dijitTooltipConnector {
         width: 0;
         height: 0;
-        margin-left: -10px;
+        margin-left: -8px;
         border-width: 10px 10px 10px 0;
         border-style: solid;
         border-color: transparent;
@@ -54,7 +54,7 @@
  */
 
 .dijitBorderContainer {
-    padding: 5px;
+    padding: 8px;
     background-color: #fcfcfc;
     .dijitSplitterV,
     .dijitGutterV {
@@ -108,7 +108,7 @@
     }
     .dijitSplitContainer-dijitContentPane,
     .dijitBorderContainer-dijitContentPane {
-        padding: 5px;
+        padding: 8px;
         background-color: #ffffff;
     }
 }
@@ -125,7 +125,7 @@
         display: block;
         width: 200px !important;
         margin-top: 0; // No top margin because there is no parent with margin bottom
-        padding: 12px 10px;
+        padding: 12px 8px;
         border-radius: 3px;
         background: $brand-inverse;
         &:after {
@@ -134,11 +134,11 @@
             left: 20px;
             width: 0;
             height: 0;
-            margin-left: -10px;
+            margin-left: -8px;
             content: " ";
             pointer-events: none;
             border: medium solid transparent;
-            border-width: 10px;
+            border-width: 8px;
             border-bottom-color: $brand-inverse;
         }
         // Menu item
@@ -148,7 +148,7 @@
                 display: block;
                 overflow: hidden;
                 width: 180px !important;
-                padding: 10px;
+                padding: 8px;
                 text-overflow: ellipsis;
                 color: #ffffff;
                 border-radius: 3px;
