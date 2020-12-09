@@ -7,7 +7,7 @@ import { extractStyles } from "@mendix/pluggable-widgets-tools";
 import { BarChartStyle } from "../ui/Styles";
 import { SortOrderEnum } from "../../typings/BarChartProps";
 import { Legend } from "./Legend";
-import { aggregateGridPadding, mapToAxisStyle, mapToGridStyle, mapToBarStyles } from "../utils/StyleMappers";
+import { aggregateGridPadding, mapToAxisStyle, mapToGridStyle, mapToBarStyles } from "../utils/StyleUtils";
 
 export interface BarChartProps {
     series: BarChartSeries[];
