@@ -58,7 +58,7 @@
             /* Dropdown */
             .mx-navbar-submenu::before {
                 position: absolute;
-                top: -9px;
+                top: -8px;
                 left: 15px;
                 width: 0;
                 height: 0;
@@ -116,7 +116,7 @@
     }
     @media (max-width: $screen-md) {
         ul.nav > li.mx-navbar-item > a {
-            padding: 10px 20px;
+            padding: 10px 24px;
         }
         .mx-navbar-item.open .dropdown-menu {
             padding: 0;
@@ -124,7 +124,7 @@
             background-color: $navigation-sub-bg;
 
             & > li.mx-navbar-subitem > a {
-                padding: 10px 20px;
+                padding: 10px 24px;
                 color: $navigation-sub-color;
                 border-radius: 0;
                 font-size: $navigation-sub-font-size;

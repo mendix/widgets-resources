@@ -38,7 +38,7 @@ table.mx-table {
                     font-weight: $form-label-weight;
                 }
                 > label {
-                    padding-top: 7px;
+                    padding-top: 8px;
                     padding-bottom: 6px; // Aligns label in the middle if there is no input field next to it.
                 }
             }
@@ -48,7 +48,7 @@ table.mx-table {
                     $padding-table-cell-left;
                 > div > label,
                 .mx-referenceselector-input-wrapper label {
-                    padding-top: 7px;
+                    padding-top: 8px;
                     padding-bottom: 6px; // Aligns label in the middle if there is no input field next to it.
                 }
             }
