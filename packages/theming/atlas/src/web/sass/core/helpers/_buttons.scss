@@ -85,10 +85,12 @@
 }
 
 .btn-icon-right {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
     & > img,
     & > .glyphicon {
-        top: 4px;
-        float: right;
+        top: 0;
         margin-left: 5px;
     }
 }

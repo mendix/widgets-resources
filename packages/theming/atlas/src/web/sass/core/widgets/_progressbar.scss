@@ -15,10 +15,12 @@
     overflow: hidden;
     height: 16px;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
 .progress-bar {
-    float: left;
+    align-self: flex-start;
     width: 0;
     height: 100%;
     transition: width 0.6s ease;

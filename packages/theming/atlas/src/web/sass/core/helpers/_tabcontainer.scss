@@ -85,7 +85,7 @@
 
         & > li {
             display: table-cell;
-            float: none;
+            float: none; // reset bootstrap
             width: 1%;
             margin: 0;
             @media (max-width: $screen-sm-max) {
@@ -135,7 +135,7 @@
 
         & > li {
             position: relative;
-            float: none;
+            float: none; // reset bootstrap
             width: 100%;
             text-align: center;
 

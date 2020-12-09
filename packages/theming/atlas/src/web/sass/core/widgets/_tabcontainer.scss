@@ -46,7 +46,7 @@
         background-color: $brand-primary;
         li {
             display: table-cell;
-            float: none;
+            float: none; // reset bootstrap
             width: 1%;
             margin: 0;
             text-align: center;
