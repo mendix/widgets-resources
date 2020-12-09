@@ -145,15 +145,15 @@
                     <caption>Sorting</caption>
                     <description/>
                 </property>
-                <property key="columnsResizable" type="boolean" defaultValue="false">
+                <property key="columnsResizable" type="boolean" defaultValue="true">
                     <caption>Resizing</caption>
                     <description/>
                 </property>
-                <property key="columnsDraggable" type="boolean" defaultValue="false">
+                <property key="columnsDraggable" type="boolean" defaultValue="true">
                     <caption>Reordering</caption>
                     <description/>
                 </property>
-                <property key="columnsHidable" type="boolean" defaultValue="false">
+                <property key="columnsHidable" type="boolean" defaultValue="true">
                     <caption>Hiding</caption>
                     <description />
                 </property>
