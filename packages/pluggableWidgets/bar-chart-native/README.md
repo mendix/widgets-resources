@@ -30,6 +30,7 @@ series can be group or stacked.
 1. Select whether bars should have labels for X-axis values (default: "Yes").
 1. Select whether the legend should be shown (default: "Yes").
 1. Configure X and Y axis labels. If either is missing the chart will not render. 
+1. When adding this widget inside a scroll container widget, make sure to apply a fixed height to the chart through styles or configure the chart size design property to square.
 1. Run the Mendix application to check out the chart.
 
 ### Custom styling
