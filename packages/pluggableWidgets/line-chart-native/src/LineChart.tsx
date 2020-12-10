@@ -9,7 +9,7 @@ import { useSeries } from "./utils/SeriesLoader";
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
     const { name, series, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
-    const customStyles = style ? style.filter(o => o != null) : [];
+    const customStyles = style.filter(o => o != null);
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
 
     const chartSeries = useSeries(series);

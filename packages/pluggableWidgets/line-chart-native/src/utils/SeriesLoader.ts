@@ -188,8 +188,7 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
     const yValue = series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
 
     if (!dataSourceItems) {
-        const dataSource =
-            series.dataSet === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
+        const dataSource = ensure(series.staticDataSource);
 
         if (!dataSource.items) {
             return null;
@@ -209,17 +208,17 @@ function extractDataPoints(series: SeriesType, dataSourceItems?: ObjectItem[]): 
         }
 
         if (!dataPointsExtraction.xFormatter && !dataPointsExtraction.yFormatter) {
-            dataPointsExtraction.xFormatter = (xValue: number | Date) => {
-                return x.formatter.format(typeof xValue === "number" ? new Big(xValue) : xValue);
-            };
+            dataPointsExtraction.xFormatter = (xValue: number | Date) =>
+                x.formatter.format(typeof xValue === "number" ? new Big(xValue) : xValue);
+
             dataPointsExtraction.yFormatter = (yValue: number | Date) =>
                 y.formatter.format(typeof yValue === "number" ? new Big(yValue) : yValue);
         }
 
         dataPointsExtraction.dataPoints.push({
-            x: x.value instanceof Date ? x.value : (Number(x.value.toString()) as any), // Cast as any because data type will never differ for data points within a series
-            y: y.value instanceof Date ? y.value : (Number(y.value.toString()) as any) // Cast as any because data type will never differ for data points within a series
-        });
+            x: x.value instanceof Date ? x.value : Number(x.value.toString()),
+            y: y.value instanceof Date ? y.value : Number(y.value.toString())
+        } as any); // Cast as any because data type will never differ for data points within one series
     }
 
     return dataPointsExtraction;
