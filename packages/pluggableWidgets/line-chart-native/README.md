@@ -22,6 +22,7 @@ a dynamic number of lines to be displayed in a chart.
     1. Select a group by attribute that will be used to group data points to create multiple lines.
     1. Configure an X and Y attribute.
 
+1. When adding this widget inside a scroll container widget, make sure to apply a fixed height to the chart through styles or configure the chart size design property to square.
 1. Run the Mendix application to check out the chart.
 
 ### Custom styling
