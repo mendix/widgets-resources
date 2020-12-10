@@ -222,8 +222,7 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
             // in the implementation such as labels.
             y: x.value instanceof Date || typeof x.value === "string" ? x.value : Number(x.value.toString()),
             x: y.value instanceof Date || typeof y.value === "string" ? y.value : Number(y.value.toString())
-            // Cast as any because data types will never differ for data points within a series
-        } as any); // todo(jordan): is this cast appropriate?
+        } as any); // Cast as any because data types will never differ for data points within a series
     }
 
     return dataPointsExtraction;
