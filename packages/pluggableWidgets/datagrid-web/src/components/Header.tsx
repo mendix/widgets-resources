@@ -140,10 +140,14 @@ function useDraggable<D extends object>(
         }
     }, []);
 
+    const handleDragEnd = useCallback((): void => {
+        setIsDragging(false);
+        setDragOver("");
+    }, []);
+
     const handleOnDrop = useCallback(
         (e: DragEvent<HTMLDivElement>): void => {
-            setIsDragging(false);
-            setDragOver("");
+            handleDragEnd();
             const { id: colOrigin } = e.target as HTMLDivElement;
             const colDestination = e.dataTransfer.getData("colDestination");
 
@@ -159,11 +163,6 @@ function useDraggable<D extends object>(
         },
         [visibleColumns]
     );
-
-    const handleDragEnd = useCallback((): void => {
-        setIsDragging(false);
-        setDragOver("");
-    }, []);
 
     return columnsDraggable
         ? {
