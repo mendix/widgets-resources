@@ -210,8 +210,10 @@ export function BarChart({
                                 : null}
                             <View onLayout={onLayout} style={{ flex: 1 }}>
                                 {chartDimensions ? (
+                                    // flip the domain padding x and y axis values due to how victory library handles
+                                    // horizontal charts.
                                     <VictoryChart
-                                        domainPadding={style.domain?.padding}
+                                        domainPadding={{ x: style.domain?.padding?.y, y: style.domain?.padding?.x }}
                                         height={chartDimensions?.height}
                                         width={chartDimensions?.width}
                                         padding={aggregateGridPadding(style.grid)}
