@@ -17,8 +17,8 @@
             </propertyGroup>
             <propertyGroup caption="Data source">
                 <property key="barSeries" type="object" isList="true">
-                    <caption>Bars</caption>
-                    <description>Add one or more bars.</description>
+                    <caption>Bar series</caption>
+                    <description>Add one or more bar series.</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
@@ -35,7 +35,7 @@
                             </property>
                             <property key="dynamicDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
-                                <description>Data points for one or more series which may be divided into separate series based on the "Group by" attribute value.</description>
+                                <description>Data points which may be divided into separate series based on the "Group by" attribute value.</description>
                             </property>
                             <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
@@ -53,11 +53,11 @@
                             </property>
                             <property key="staticSeriesName" type="textTemplate" required="false" multiline="false">
                                 <caption>Name</caption>
-                                <description>The bar or group name displayed in the legend.</description>
+                                <description>The series name displayed in the legend.</description>
                             </property>
                             <property key="dynamicSeriesName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
                                 <caption>Name</caption>
-                                <description>The bar or group name displayed in the legend.</description>
+                                <description>The series name displayed in the legend.</description>
                             </property>
                             <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>X attribute</caption>
