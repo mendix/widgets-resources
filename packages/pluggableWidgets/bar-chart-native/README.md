@@ -1,8 +1,9 @@
 # Bar chart
 
 The bar chart widget renders a horizontal bar graph based on static and dynamic data sets. A static data set contains
-data points for a single bar series, whilst a dynamic data set can be configured with a "group by" attribute to produce 
-multiple bar series. Based on the configuration, bar series can be group or stacked.
+data points for a single bar series, whilst a dynamic data set requires a "group by" attribute to be configured to group 
+series based on a certain attribute value, producing potentially multiple bar series. Based on the configuration, bar 
+series can be group or stacked.
 
 ## Usage
 
