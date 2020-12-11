@@ -35,7 +35,7 @@ exports[`Legend doesn't render series when there is no series name 1`] = `
       }
     />
     <Text>
-      Line 2
+      Bar 2
     </Text>
   </View>
 </View>
@@ -78,7 +78,7 @@ exports[`Legend renders 1`] = `
       }
     />
     <Text>
-      Line 1
+      Bar 1
     </Text>
   </View>
   <View
@@ -105,7 +105,7 @@ exports[`Legend renders 1`] = `
       }
     />
     <Text>
-      Line 2
+      Bar 2
     </Text>
   </View>
 </View>

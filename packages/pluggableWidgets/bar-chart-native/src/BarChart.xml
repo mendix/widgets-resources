@@ -37,7 +37,7 @@
                                 <caption>Data source</caption>
                                 <description>Data points which may be divided into separate series based on the "Group by" attribute value.</description>
                             </property>
-                            <property key="groupByAttribute" type="attribute" required="true" dataSource="dynamicDataSource">
+                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
                                 <description>Data points within the same group are grouped together and presented either in groups or stacks.</description>
                                 <attributeTypes>

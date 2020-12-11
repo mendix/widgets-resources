@@ -74,25 +74,20 @@ export function BarChart({
                 : style.bars?.customBarStyles?.[_series.customBarStyle]?.bar?.barColor;
 
             if (typeof configuredStyle !== "string") {
+                const barColor = barColorPalette?.[index] || "black";
+
                 if (barColorPalette) {
                     index = index + 1 === barColorPalette.length ? 0 : index + 1;
                 }
 
-                return barColorPalette?.[index] || "black";
+                return barColor;
             }
 
             return configuredStyle;
         });
     }, [series, style]);
 
-    const sort = useMemo(() => ({ sortOrder, sortKey: "x" }), [sortOrder]);
-
-    const sortProp = useMemo(
-        () => ({
-            ...sort
-        }),
-        [sort]
-    );
+    const sortProps = useMemo(() => ({ sortOrder, sortKey: "x" }), [sortOrder]);
 
     const groupedOrStacked = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
@@ -121,7 +116,7 @@ export function BarChart({
                             ...barStyles.labels
                         }
                     }}
-                    {...sortProp}
+                    {...sortProps}
                     {...(showLabels ? { labels: ({ datum }: { datum: BarProps["datum"] }) => datum.y } : undefined)}
                 />
             );
@@ -136,7 +131,16 @@ export function BarChart({
         }
 
         return <VictoryStack colorScale={normalizedBarColors}>{bars}</VictoryStack>;
-    }, [dataTypesResult, series, style, warningMessagePrefix, sortProp, showLabels, normalizedBarColors, presentation]);
+    }, [
+        dataTypesResult,
+        series,
+        style,
+        warningMessagePrefix,
+        sortProps,
+        showLabels,
+        normalizedBarColors,
+        presentation
+    ]);
 
     const [firstSeries] = series;
 
@@ -185,7 +189,7 @@ export function BarChart({
     const xAxisLabelComponent = <Text style={axisLabelStyles.xAxisLabelStyle}>{xAxisLabel}</Text>;
     const yAxisLabelComponent = <Text style={axisLabelStyles.yAxisLabelStyle}>{yAxisLabel}</Text>;
 
-    const onLayout = useCallback(
+    const updateChartDimensions = useCallback(
         (event: LayoutChangeEvent) =>
             setChartDimensions({
                 height: event.nativeEvent.layout.height,
@@ -208,7 +212,7 @@ export function BarChart({
                             {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "left"
                                 ? yAxisLabelComponent
                                 : null}
-                            <View onLayout={onLayout} style={{ flex: 1 }}>
+                            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
                                 {chartDimensions ? (
                                     // flip the domain padding x and y axis values due to how victory library handles
                                     // horizontal charts.

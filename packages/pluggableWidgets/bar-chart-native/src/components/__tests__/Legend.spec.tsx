@@ -9,7 +9,7 @@ describe("Legend", () => {
 
     beforeEach(() => {
         defaultProps = {
-            series: [{ name: "Line 1" }, { name: "Line 2" }],
+            series: [{ name: "Bar 1" }, { name: "Bar 2" }],
             style: {
                 ...defaultBarChartStyle.legend
             },

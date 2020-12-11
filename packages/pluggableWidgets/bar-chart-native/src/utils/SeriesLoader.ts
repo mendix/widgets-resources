@@ -184,9 +184,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
 
 function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]): DataPointsExtraction | null {
     if (!dataSourceItems) {
-        // todo: why is this check here? dataSourceItems are only passed for dynamic items.
-        const dataSource =
-            series.dataSet === "static" ? ensure(series.staticDataSource) : ensure(series.dynamicDataSource);
+        const dataSource = ensure(series.staticDataSource);
 
         if (!dataSource.items) {
             return null;
@@ -222,7 +220,7 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
             // in the implementation such as labels.
             y: x.value instanceof Date || typeof x.value === "string" ? x.value : Number(x.value.toString()),
             x: y.value instanceof Date || typeof y.value === "string" ? y.value : Number(y.value.toString())
-        } as any); // Cast as any because data types will never differ for data points within a series
+        } as any); // Cast as any because data types will never differ for data points within one series.
     }
 
     return dataPointsExtraction;

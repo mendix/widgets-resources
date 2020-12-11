@@ -13,7 +13,7 @@ export interface BarSeriesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
-    groupByAttribute: ListAttributeValue<string | boolean | Date | BigJs.Big>;
+    groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
     staticSeriesName?: DynamicValue<string>;
     dynamicSeriesName?: ListExpressionValue<string>;
     staticXAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
