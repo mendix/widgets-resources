@@ -108,6 +108,10 @@
                     <caption>Empty placeholder</caption>
                     <description/>
                 </property>
+                <property key="onClick" type="action" required="false" dataSource="datasource">
+                    <caption>On click action</caption>
+                    <description />
+                </property>
                 <property key="rowClass" type="expression" required="false" dataSource="datasource">
                     <caption>Dynamic row class</caption>
                     <description />

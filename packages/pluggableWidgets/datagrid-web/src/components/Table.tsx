@@ -23,7 +23,7 @@ export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "at
 
 export interface TableProps<T> {
     cellRenderer: (
-        renderWrapper: (children: ReactNode, className?: string) => ReactElement,
+        renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
         value: T,
         columnIndex: number
     ) => ReactElement;
@@ -123,14 +123,31 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 },
                 Cell: ({ cell, value, rowIndex }) =>
                     props.cellRenderer(
-                        (children, className) => (
-                            <div
-                                {...cell.getCellProps()}
-                                className={classNames("td", { "td-borders": rowIndex === 0 }, className)}
-                            >
-                                {children}
-                            </div>
-                        ),
+                        (children, className, onClick) => {
+                            return (
+                                <div
+                                    {...cell.getCellProps()}
+                                    className={classNames("td", { "td-borders": rowIndex === 0 }, className, {
+                                        clickable: !!onClick
+                                    })}
+                                    onClick={onClick}
+                                    onKeyDown={
+                                        onClick
+                                            ? e => {
+                                                  if (e.key === "Enter" || e.key === " ") {
+                                                      e.preventDefault();
+                                                      onClick();
+                                                  }
+                                              }
+                                            : undefined
+                                    }
+                                    role={onClick ? "button" : undefined}
+                                    tabIndex={onClick ? 0 : undefined}
+                                >
+                                    {children}
+                                </div>
+                            );
+                        },
                         value,
                         index
                     ),

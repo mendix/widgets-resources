@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, EditableValue, ListValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 
 export type WidthEnum = "autoFill" | "autoFit" | "manual";
 
@@ -55,6 +55,7 @@ export interface DatagridContainerProps {
     columns: ColumnsType[];
     showEmptyPlaceholder: boolean;
     emptyPlaceholder?: ReactNode;
+    onClick?: ListActionValue;
     rowClass?: ListExpressionValue<string>;
     columnsFilterable: boolean;
     pageSize: number;
@@ -74,6 +75,7 @@ export interface DatagridPreviewProps {
     columns: ColumnsPreviewType[];
     showEmptyPlaceholder: boolean;
     emptyPlaceholder: { widgetCount: number; renderer: ComponentType };
+    onClick: {} | null;
     rowClass: string;
     columnsFilterable: boolean;
     pageSize: number | null;

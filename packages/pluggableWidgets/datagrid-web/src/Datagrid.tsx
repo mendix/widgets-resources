@@ -60,10 +60,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                             `align-column-${column.alignment}`,
                             props.rowClass?.(value)?.value,
                             column.columnClass?.(value)?.value
-                        )
+                        ),
+                        props.onClick ? useCallback(() => props.onClick?.(value).execute(), [props.onClick]) : undefined
                     );
                 },
-                [props.columns, props.rowClass]
+                [props.columns, props.rowClass, props.onClick]
             )}
             columns={props.columns}
             columnsDraggable={props.columnsDraggable}
