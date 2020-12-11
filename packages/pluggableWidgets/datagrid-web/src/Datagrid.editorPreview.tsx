@@ -38,7 +38,14 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     return column.hasWidgets ? (
                         <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>
                     ) : (
-                        renderWrapper(<span className="td-text">{column.attribute}</span>, className)
+                        renderWrapper(
+                            <span className="td-text">
+                                {"{"}
+                                {column.attribute}
+                                {"}"}
+                            </span>,
+                            className
+                        )
                     );
                 },
                 [props.columns]
@@ -53,10 +60,10 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             emptyPlaceholderRenderer={
                 props.showEmptyPlaceholder
                     ? useCallback(
-                renderWrapper => (
-                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
-                ),
-                [props.emptyPlaceholder]
+                          renderWrapper => (
+                              <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                          ),
+                          [props.emptyPlaceholder]
                       )
                     : undefined
             }
