@@ -47,7 +47,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setMultiSelectFilters(toggleFilter(selectedFilters, option));
             } else {
                 setValueInput(option.caption);
-                setSelectedFilters(option.value ? [option] : []);
+                setSelectedFilters([option]);
                 setShow(false);
             }
         },
