@@ -6,6 +6,7 @@ import {
     MutableRefObject,
     ReactElement,
     SetStateAction,
+    useRef,
     useState
 } from "react";
 import DatePickerComponent from "react-datepicker";
@@ -26,6 +27,7 @@ interface DatePickerProps {
 export const DatePicker = forwardRef(
     (props: DatePickerProps, ref: MutableRefObject<DatePickerComponent> | null): ReactElement => {
         const [open, setOpen] = useState(false);
+        const buttonRef = useRef<HTMLButtonElement>(null);
         return (
             <Fragment>
                 <span className="sr-only" id={`${props.name}-label`}>
@@ -48,7 +50,12 @@ export const DatePicker = forwardRef(
                         }
                     }}
                     open={open}
-                    onClickOutside={() => setOpen(false)}
+                    onClickOutside={event => {
+                        if (!buttonRef.current || buttonRef.current.contains(event.target as Node)) {
+                            return;
+                        }
+                        setOpen(false);
+                    }}
                     placeholderText={props.placeholder}
                     popperPlacement="bottom-start"
                     popperModifiers={{
@@ -75,7 +82,7 @@ export const DatePicker = forwardRef(
                     strictParsing
                     useWeekdaysShort
                 />
-                <button className="btn btn-default btn-calendar" onClick={() => setOpen(true)}>
+                <button ref={buttonRef} className="btn btn-default btn-calendar" onClick={() => setOpen(prev => !prev)}>
                     <span className="glyphicon glyphicon-calendar" />
                 </button>
             </Fragment>

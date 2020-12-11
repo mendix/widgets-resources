@@ -25,7 +25,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [show, setShow] = useState(false);
     const [dropdownWidth, setDropdownWidth] = useState(0);
 
-    const listRef = useRef<HTMLUListElement>(null);
+    const componentRef = useRef<HTMLDivElement>(null);
 
     const setMultiSelectFilters = useCallback(
         (selectedOptions: Option[]) => {
@@ -53,7 +53,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         [selectedFilters, props.emptyOptionCaption, props.multiSelect]
     );
 
-    useOnClickOutside(listRef, () => setShow(false));
+    useOnClickOutside(componentRef, () => setShow(false));
 
     // Select the first option Or default option on load
     useEffect(() => {
@@ -104,7 +104,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.filterDispatcher, selectedFilters]);
 
     return (
-        <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0}>
+        <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
             <input
                 value={valueInput}
                 className="form-control dropdown-triggerer"
