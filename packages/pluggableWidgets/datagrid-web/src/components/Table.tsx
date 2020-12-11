@@ -121,18 +121,16 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     }
                     return Number(valueA) - Number(valueB);
                 },
-                Cell: ({ cell, value }) =>
+                Cell: ({ cell, value, rowIndex }) =>
                     props.cellRenderer(
-                        (children, className) => {
-                            return (
-                                <div
-                                    {...cell.getCellProps()}
-                                    className={classNames("td", { "td-borders": cell.row.index === 0 }, className)}
-                                >
-                                    {children}
-                                </div>
-                            );
-                        },
+                        (children, className) => (
+                            <div
+                                {...cell.getCellProps()}
+                                className={classNames("td", { "td-borders": rowIndex === 0 }, className)}
+                            >
+                                {children}
+                            </div>
+                        ),
                         value,
                         index
                     ),
@@ -294,7 +292,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         prepareRow(row);
                         return (
                             <Fragment key={`row_${rowIndex}`}>
-                                {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex }))}
+                                {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex, rowIndex }))}
                                 {props.columnsHidable && (
                                     <div
                                         className={classNames("td column-selector", { "td-borders": rowIndex === 0 })}
