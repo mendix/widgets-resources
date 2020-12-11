@@ -16,6 +16,11 @@ exports[`Header renders the structure correctly 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test
@@ -39,6 +44,7 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   <div
     className="column-container"
     draggable={true}
+    onDragEnd={[Function]}
     onDragEnter={[Function]}
     onDragOver={[Function]}
     onDragStart={[Function]}
@@ -46,6 +52,11 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test
@@ -71,6 +82,11 @@ exports[`Header renders the structure correctly when filterable with custom clas
   >
     <div
       className="column-header my-custom-class"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test
@@ -96,6 +112,11 @@ exports[`Header renders the structure correctly when filterable with custom filt
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test
@@ -129,6 +150,11 @@ exports[`Header renders the structure correctly when filterable with no custom f
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test
@@ -154,6 +180,11 @@ exports[`Header renders the structure correctly when resizable 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test
@@ -179,6 +210,11 @@ exports[`Header renders the structure correctly when sortable 1`] = `
     <div
       className="column-header clickable"
       onClick={[Function]}
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
       <span>
         Test

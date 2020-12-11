@@ -57,6 +57,7 @@ export interface ColumnWidth {
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
     const isInfinite = !props.paging && !isSortingOrFiltering;
+    const [isDragging, setIsDragging] = useState(false);
     const [dragOver, setDragOver] = useState("");
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
     const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
@@ -95,7 +96,14 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 canDrag: column.draggable,
                 canResize: column.resizable,
                 customFilter: props.columnsFilterable
-                    ? props.filterRenderer((children: ReactNode) => <div className="filter">{children}</div>, index)
+                    ? props.filterRenderer(
+                          (children: ReactNode) => (
+                              <div className="filter" style={{ pointerEvents: isDragging ? "none" : undefined }}>
+                                  {children}
+                              </div>
+                          ),
+                          index
+                      )
                     : null,
                 disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
@@ -131,7 +139,14 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 width: column.width,
                 weight: column.size ?? 1
             })),
-        [props.columns, props.cellRenderer, props.filterRenderer, props.valueForSort, props.columnsFilterable]
+        [
+            props.columns,
+            props.cellRenderer,
+            props.filterRenderer,
+            props.valueForSort,
+            props.columnsFilterable,
+            isDragging
+        ]
     );
 
     const {
@@ -251,6 +266,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     draggable={props.columnsDraggable}
                                     dragOver={dragOver}
                                     filterable={props.columnsFilterable}
+                                    isDragging={isDragging}
                                     resizable={props.columnsResizable}
                                     setColumnOrder={(newOrder: Array<IdType<object>>) => {
                                         setOrder(newOrder);
@@ -263,6 +279,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                         })
                                     }
                                     setDragOver={setDragOver}
+                                    setIsDragging={setIsDragging}
                                     setSortBy={setSortBy}
                                     sortable={props.columnsSortable}
                                     visibleColumns={visibleColumns}
