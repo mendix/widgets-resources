@@ -38,7 +38,9 @@ declare module "react-table" {
     export interface TableInstance<D extends object = {}>
         extends UseSortByInstanceProps<D>,
             UseColumnOrderInstanceProps<D>,
-            UsePaginationInstanceProps<D> {}
+            UsePaginationInstanceProps<D> {
+        rowIndex: number;
+    }
 
     export interface ColumnInstance<D extends object> extends UseSortByColumnProps<D> {}
 }
