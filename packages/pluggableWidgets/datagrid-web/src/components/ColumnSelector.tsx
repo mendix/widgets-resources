@@ -1,7 +1,8 @@
-import { createElement, Dispatch, ReactElement, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction, useRef, useState } from "react";
 import { ColumnInstance, IdType } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { useOnClickOutside } from "@widgets-resources/piw-utils";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;
@@ -10,12 +11,12 @@ export interface ColumnSelectorProps<D extends object> {
 
 export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>): ReactElement {
     const [show, setShow] = useState(false);
-    const listRef = useRef<HTMLUListElement>(null);
-    useOnClickOutside(listRef, () => setShow(false));
+    const componentRef = useRef<HTMLDivElement>(null);
+    useOnClickOutside(componentRef, () => setShow(false));
     const visibleColumns = props.allColumns.filter(column => column.isVisible).length;
     return (
         <div className="th column-selector">
-            <div className="column-selector-content">
+            <div className="column-selector-content" ref={componentRef}>
                 <button
                     className="btn btn-default column-selector-button"
                     onClick={() => {
@@ -25,7 +26,7 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
                     <FontAwesomeIcon icon={faEye} />
                 </button>
                 {show && (
-                    <ul className="column-selectors" ref={listRef}>
+                    <ul className="column-selectors">
                         {props.allColumns.map((column, index) => {
                             return column.canHide ? (
                                 <li key={index}>
@@ -59,21 +60,4 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
             </div>
         </div>
     );
-}
-
-function useOnClickOutside(ref: RefObject<HTMLUListElement>, handler: () => void): void {
-    useEffect(() => {
-        const listener = (event: MouseEvent & { target: Node | null }): void => {
-            if (!ref.current || ref.current.contains(event.target)) {
-                return;
-            }
-            handler();
-        };
-        document.addEventListener("mousedown", listener);
-        document.addEventListener("touchstart", listener);
-        return () => {
-            document.removeEventListener("mousedown", listener);
-            document.removeEventListener("touchstart", listener);
-        };
-    }, [ref, handler]);
 }

@@ -60,10 +60,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                             `align-column-${column.alignment}`,
                             props.rowClass?.(value)?.value,
                             column.columnClass?.(value)?.value
-                        )
+                        ),
+                        props.onClick ? useCallback(() => props.onClick?.(value).execute(), [props.onClick]) : undefined
                     );
                 },
-                [props.columns, props.rowClass]
+                [props.columns, props.rowClass, props.onClick]
             )}
             columns={props.columns}
             columnsDraggable={props.columnsDraggable}
@@ -72,9 +73,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={items}
-            emptyPlaceholderRenderer={useCallback(renderWrapper => renderWrapper(props.emptyPlaceholder), [
-                props.emptyPlaceholder
-            ])}
+            emptyPlaceholderRenderer={
+                props.showEmptyPlaceholder
+                    ? useCallback(renderWrapper => renderWrapper(props.emptyPlaceholder), [props.emptyPlaceholder])
+                    : undefined
+            }
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = props.columns[columnIndex];

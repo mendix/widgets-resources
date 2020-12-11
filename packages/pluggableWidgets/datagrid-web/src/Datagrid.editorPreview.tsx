@@ -38,7 +38,14 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     return column.hasWidgets ? (
                         <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>
                     ) : (
-                        renderWrapper(<span className="td-text">{column.attribute}</span>, className)
+                        renderWrapper(
+                            <span className="td-text">
+                                {"{"}
+                                {column.attribute}
+                                {"}"}
+                            </span>,
+                            className
+                        )
                     );
                 },
                 [props.columns]
@@ -50,12 +57,16 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={data}
-            emptyPlaceholderRenderer={useCallback(
-                renderWrapper => (
-                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
-                ),
-                [props.emptyPlaceholder]
-            )}
+            emptyPlaceholderRenderer={
+                props.showEmptyPlaceholder
+                    ? useCallback(
+                          renderWrapper => (
+                              <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                          ),
+                          [props.emptyPlaceholder]
+                      )
+                    : undefined
+            }
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = columns[columnIndex];

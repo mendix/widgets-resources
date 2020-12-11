@@ -23,7 +23,7 @@ export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "at
 
 export interface TableProps<T> {
     cellRenderer: (
-        renderWrapper: (children: ReactNode, className?: string) => ReactElement,
+        renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
         value: T,
         columnIndex: number
     ) => ReactElement;
@@ -121,13 +121,28 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     }
                     return Number(valueA) - Number(valueB);
                 },
-                Cell: ({ cell, value }) =>
+                Cell: ({ cell, value, rowIndex }) =>
                     props.cellRenderer(
-                        (children, className) => {
+                        (children, className, onClick) => {
                             return (
                                 <div
                                     {...cell.getCellProps()}
-                                    className={classNames("td", { "td-borders": cell.row.index === 0 }, className)}
+                                    className={classNames("td", { "td-borders": rowIndex === 0 }, className, {
+                                        clickable: !!onClick
+                                    })}
+                                    onClick={onClick}
+                                    onKeyDown={
+                                        onClick
+                                            ? e => {
+                                                  if (e.key === "Enter" || e.key === " ") {
+                                                      e.preventDefault();
+                                                      onClick();
+                                                  }
+                                              }
+                                            : undefined
+                                    }
+                                    role={onClick ? "button" : undefined}
+                                    tabIndex={onClick ? 0 : undefined}
                                 >
                                     {children}
                                 </div>
@@ -294,7 +309,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                         prepareRow(row);
                         return (
                             <Fragment key={`row_${rowIndex}`}>
-                                {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex }))}
+                                {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex, rowIndex }))}
                                 {props.columnsHidable && (
                                     <div
                                         className={classNames("td column-selector", { "td-borders": rowIndex === 0 })}

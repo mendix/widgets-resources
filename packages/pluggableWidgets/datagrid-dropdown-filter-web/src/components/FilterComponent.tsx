@@ -1,6 +1,7 @@
 import { createElement, Dispatch, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { useOnClickOutside } from "@widgets-resources/piw-utils";
+import classNames from "classnames";
 
 interface Option {
     caption: string;
@@ -25,7 +26,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [show, setShow] = useState(false);
     const [dropdownWidth, setDropdownWidth] = useState(0);
 
-    const listRef = useRef<HTMLUListElement>(null);
+    const componentRef = useRef<HTMLDivElement>(null);
 
     const setMultiSelectFilters = useCallback(
         (selectedOptions: Option[]) => {
@@ -46,14 +47,14 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setMultiSelectFilters(toggleFilter(selectedFilters, option));
             } else {
                 setValueInput(option.caption);
-                setSelectedFilters(option.value ? [option] : []);
+                setSelectedFilters([option]);
                 setShow(false);
             }
         },
         [selectedFilters, props.emptyOptionCaption, props.multiSelect]
     );
 
-    useOnClickOutside(listRef, () => setShow(false));
+    useOnClickOutside(componentRef, () => setShow(false));
 
     // Select the first option Or default option on load
     useEffect(() => {
@@ -103,10 +104,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         }
     }, [props.filterDispatcher, selectedFilters]);
 
+    const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
+
     return (
-        <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0}>
+        <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
             <input
-                value={valueInput}
+                value={!showPlaceholder ? valueInput : ""}
+                placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
                 className="form-control dropdown-triggerer"
                 onClick={() => setShow(true)}
                 onFocus={() => setShow(true)}
@@ -120,43 +124,48 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 aria-controls={`${props.name}-dropdown-list`}
                 aria-label={props.ariaLabel}
             />
-            <ul
-                id={`${props.name}-dropdown-list`}
-                className={`dropdown-list ${show && "dropdown-list-visible"}`}
-                ref={listRef}
-                style={{ width: dropdownWidth }}
-                role="menu"
-                data-focusindex={0}
-            >
-                {options.map((option, index) => (
-                    <li
-                        className={!props.multiSelect && selectedFilters.includes(option) ? "filter-selected" : ""}
-                        key={index}
-                        onClick={() => onClick(option)}
-                        onKeyDown={e => {
-                            if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                onClick(option);
-                            }
-                        }}
-                        role="menuitem"
-                        tabIndex={0}
-                    >
-                        {props.multiSelect ? (
-                            <Fragment>
-                                <input
-                                    id={`checkbox_toggle_${index}`}
-                                    type="checkbox"
-                                    checked={selectedFilters.includes(option)}
-                                />
-                                <label htmlFor={`checkbox_toggle_${index}`}>{option.caption}</label>
-                            </Fragment>
-                        ) : (
-                            <div className="filter-label">{option.caption}</div>
-                        )}
-                    </li>
-                ))}
-            </ul>
+            {show && (
+                <ul
+                    id={`${props.name}-dropdown-list`}
+                    className="dropdown-list"
+                    style={{ width: dropdownWidth }}
+                    role="menu"
+                    data-focusindex={0}
+                >
+                    {options.map((option, index) => (
+                        <li
+                            className={classNames({
+                                "filter-selected": !props.multiSelect && selectedFilters.includes(option)
+                            })}
+                            key={index}
+                            onClick={() => onClick(option)}
+                            onKeyDown={e => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    e.preventDefault();
+                                    onClick(option);
+                                }
+                            }}
+                            role="menuitem"
+                            tabIndex={0}
+                        >
+                            {props.multiSelect ? (
+                                <Fragment>
+                                    <input
+                                        id={`checkbox_toggle_${index}`}
+                                        type="checkbox"
+                                        checked={selectedFilters.includes(option)}
+                                    />
+                                    <label htmlFor={`checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
+                                        {option.caption}
+                                    </label>
+                                </Fragment>
+                            ) : (
+                                <div className="filter-label">{option.caption}</div>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 }

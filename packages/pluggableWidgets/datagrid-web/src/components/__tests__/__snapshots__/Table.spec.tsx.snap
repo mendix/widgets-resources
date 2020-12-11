@@ -3093,6 +3093,7 @@ exports[`Table renders the structure correctly 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -14172,6 +14173,7 @@ exports[`Table renders the structure correctly with column alignments 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -24111,6 +24113,7 @@ exports[`Table renders the structure correctly with column alignments 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -29060,6 +29063,7 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -32902,6 +32906,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -36717,6 +36722,7 @@ exports[`Table renders the structure correctly with empty placeholder 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -40634,6 +40640,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -44611,6 +44618,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -48429,6 +48437,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -52254,6 +52263,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {
@@ -56069,6 +56079,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
             },
           }
         }
+        rowIndex={0}
         rows={
           Array [
             Object {

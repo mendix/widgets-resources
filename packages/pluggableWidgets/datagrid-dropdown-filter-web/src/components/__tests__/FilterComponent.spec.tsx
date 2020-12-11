@@ -40,7 +40,7 @@ describe("Filter selector", () => {
                 );
 
                 expect(component).toMatchSnapshot();
-                expect(component.find("input").first().prop("value")).toBe("find me");
+                expect(component.find("input").first().prop("placeholder")).toBe("find me");
             });
         });
         it("selects default option", () => {
@@ -65,6 +65,9 @@ describe("Filter selector", () => {
                     <FilterComponent options={defaultOptions} filterDispatcher={filterDispatcher} />
                 );
 
+                const input = component.find("input");
+                input.simulate("click");
+
                 const item = component.find("li").first();
                 item.simulate("click");
 
@@ -79,6 +82,10 @@ describe("Filter selector", () => {
                         defaultValue={defaultOption.value}
                     />
                 );
+
+                const input = component.find("input");
+                input.simulate("click");
+
                 expect(component.find("input").first().prop("value")).toBe(defaultOption.caption);
 
                 const item = component.find("li").last(); // [cap 3: val:_3]
@@ -126,7 +133,7 @@ describe("Filter selector", () => {
                 );
 
                 expect(component).toMatchSnapshot();
-                expect(component.find("input").first().prop("value")).toBe("find me");
+                expect(component.find("input").first().prop("placeholder")).toBe("find me");
             });
         });
 
@@ -190,6 +197,9 @@ describe("Filter selector", () => {
                     <FilterComponent multiSelect options={defaultOptions} filterDispatcher={filterDispatcher} />
                 );
 
+                const input = component.find("input");
+                input.simulate("click");
+
                 const item = component.find("li").first();
                 item.simulate("click");
 
@@ -199,6 +209,9 @@ describe("Filter selector", () => {
                 const component = shallow(
                     <FilterComponent multiSelect options={defaultOptions} filterDispatcher={jest.fn()} />
                 );
+
+                const input = component.find("input");
+                input.simulate("click");
 
                 const item = component.find("li").at(1);
                 item.simulate("click");

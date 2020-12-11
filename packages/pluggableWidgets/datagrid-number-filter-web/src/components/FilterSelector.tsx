@@ -22,8 +22,8 @@ interface FilterSelectorProps {
 export function FilterSelector(props: FilterSelectorProps): ReactElement {
     const [value, setValue] = useState(props.defaultFilter);
     const [show, setShow] = useState(false);
-    const listRef = useRef<HTMLUListElement>(null);
-    useOnClickOutside(listRef, () => setShow(false));
+    const componentRef = useRef<HTMLDivElement>(null);
+    useOnClickOutside(componentRef, () => setShow(false));
     const onClick = useCallback(
         (value: DefaultFilterEnum) => {
             setValue(value);
@@ -34,7 +34,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
     );
     return (
         <div className="filter-selector">
-            <div className="filter-selector-content">
+            <div className="filter-selector-content" ref={componentRef}>
                 <button
                     aria-label={props.ariaLabel}
                     aria-controls={`${props.name}-filter-selectors`}
@@ -49,7 +49,6 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                     <ul
                         id={`${props.name}-filter-selectors`}
                         className="filter-selectors"
-                        ref={listRef}
                         role="menu"
                         data-focusindex={0}
                     >

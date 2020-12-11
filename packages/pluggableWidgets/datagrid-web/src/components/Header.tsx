@@ -6,7 +6,8 @@ import {
     DragEvent,
     DragEventHandler,
     useCallback,
-    MouseEvent
+    MouseEvent,
+    KeyboardEvent
 } from "react";
 import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } from "react-table";
 import classNames from "classnames";
@@ -44,7 +45,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
 
     const { onClick, style, ...rest } = props.column.getHeaderProps(
         canSort ? props.column.getSortByToggleProps() : undefined
-    ) as TableHeaderProps & { onClick: (e: MouseEvent<HTMLDivElement>) => void };
+    ) as TableHeaderProps & { onClick: (e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void };
 
     const sortIcon = canSort
         ? props.column.isSorted
@@ -97,6 +98,18 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                               }
                             : undefined
                     }
+                    onKeyDown={
+                        canSort
+                            ? e => {
+                                  if (e.key === "Enter" || e.key === " ") {
+                                      e.preventDefault();
+                                      onClick(e);
+                                  }
+                              }
+                            : undefined
+                    }
+                    role={canSort ? "button" : undefined}
+                    tabIndex={canSort ? 0 : undefined}
                 >
                     <span>{props.column.render("Header")}</span>
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
