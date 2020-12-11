@@ -36,10 +36,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         if (props.filterDispatcher) {
             props.filterDispatcher({
                 filter: (item, attr): boolean => {
-                    if (!value || isNaN(Number(attr(item).value))) {
+                    if (!value) {
                         return true;
                     }
                     const dataValue = attr(item).value as Big;
+                    if (!dataValue || isNaN(Number(dataValue))) {
+                        return false;
+                    }
                     const filterValue = new Big(value);
                     switch (type) {
                         case "greater":

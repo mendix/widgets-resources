@@ -38,8 +38,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             filter: (item, attr): any => {
                 const dateValue = attr(item).value as Date;
 
-                if (!value || !isDate(dateValue) || !isValid(dateValue)) {
+                if (!value) {
                     return true;
+                }
+
+                if (!dateValue || !isDate(dateValue) || !isValid(dateValue)) {
+                    return false;
                 }
 
                 const utcDateValue = dateValue.getTime();

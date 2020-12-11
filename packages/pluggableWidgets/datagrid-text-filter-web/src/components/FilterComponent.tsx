@@ -39,6 +39,9 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                         return true;
                     }
                     const dataValue = attr(item).displayValue.toLowerCase();
+                    if (!dataValue) {
+                        return false;
+                    }
                     const filterValue = value.toLowerCase();
                     switch (type) {
                         case "contains":
