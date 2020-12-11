@@ -9,7 +9,7 @@ export type DataSetEnum = "static" | "dynamic";
 
 export type InterpolationEnum = "linear" | "catmullRom";
 
-export type StaticLineStyleEnum = "line" | "lineWithMarkers";
+export type StaticLineStyleEnum = "line" | "lineWithMarkers" | "custom";
 
 export type DynamicLineStyleEnum = "line" | "lineWithMarkers" | "custom";
 
