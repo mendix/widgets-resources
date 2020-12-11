@@ -72,9 +72,11 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={items}
-            emptyPlaceholderRenderer={useCallback(renderWrapper => renderWrapper(props.emptyPlaceholder), [
-                props.emptyPlaceholder
-            ])}
+            emptyPlaceholderRenderer={
+                props.showEmptyPlaceholder
+                    ? useCallback(renderWrapper => renderWrapper(props.emptyPlaceholder), [props.emptyPlaceholder])
+                    : undefined
+            }
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = props.columns[columnIndex];
