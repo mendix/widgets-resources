@@ -31,12 +31,7 @@ $arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='
         list-style-type: none;
         box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
         overflow-x: hidden;
-        display: none;
         max-height: 40vh;
-
-        &.dropdown-list-visible {
-            display: block;
-        }
 
         li {
             display: flex;
