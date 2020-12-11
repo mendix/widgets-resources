@@ -105,15 +105,16 @@
                         <propertyGroup caption="Appearance">
                             <property key="staticLineStyle" type="enumeration" defaultValue="line">
                                 <caption>Line style</caption>
-                                <description />
+                                <description>Custom allows the line to be styled with or without markers through native styles.</description>
                                 <enumerationValues>
                                     <enumerationValue key="line">Line</enumerationValue>
                                     <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
                                 </enumerationValues>
                             </property>
                             <property key="dynamicLineStyle" type="enumeration" defaultValue="line">
                                 <caption>Line style</caption>
-                                <description>Custom allows to style individual lines via styling.</description>
+                                <description>Custom allows each line to be styled with or without markers individually through native styles.</description>
                                 <enumerationValues>
                                     <enumerationValue key="line">Line</enumerationValue>
                                     <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
