@@ -38,7 +38,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "staticDataSource",
                     severity: "error",
-                    message: `No data source configured for static series located at position ${index + 1}.`
+                    message: `No data source configured for static line located at position ${index + 1}.`
                 });
             }
 
@@ -46,7 +46,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "staticXAttribute",
                     severity: "error",
-                    message: `No X attribute configured for static series located at position ${index + 1}.`
+                    message: `No X attribute configured for static line located at position ${index + 1}.`
                 });
             }
 
@@ -54,7 +54,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "staticYAttribute",
                     severity: "error",
-                    message: `No Y attribute configured for static series located at position ${index + 1}.`
+                    message: `No Y attribute configured for static line located at position ${index + 1}.`
                 });
             }
         } else {
@@ -63,7 +63,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "dynamicDataSource",
                     severity: "error",
-                    message: `No data source configured for dynamic series located at position ${index + 1}.`
+                    message: `No data source configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
 
@@ -71,7 +71,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "dynamicXAttribute",
                     severity: "error",
-                    message: `No X attribute configured for dynamic series located at position ${index + 1}.`
+                    message: `No X attribute configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
 
@@ -79,7 +79,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "dynamicYAttribute",
                     severity: "error",
-                    message: `No Y attribute configured for dynamic series located at position ${index + 1}.`
+                    message: `No Y attribute configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
 
@@ -87,7 +87,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 errors.push({
                     property: "groupByAttribute",
                     severity: "error",
-                    message: `No group by attribute configured for dynamic series located at position ${index + 1}.`
+                    message: `No group by attribute configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
         }
