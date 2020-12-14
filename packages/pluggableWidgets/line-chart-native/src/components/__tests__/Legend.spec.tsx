@@ -9,11 +9,11 @@ describe("Legend", () => {
 
     beforeEach(() => {
         defaultProps = {
-            series: [{ name: "Line 1" }, { name: "Line 2" }],
+            items: [{ name: "Line 1" }, { name: "Line 2" }],
             style: {
                 ...defaultLineChartStyle.legend
             },
-            seriesColors: ["#0595DB", "green"]
+            itemColors: ["#0595DB", "green"]
         };
     });
 
@@ -23,13 +23,13 @@ describe("Legend", () => {
     });
 
     it("doesn't render series when there is no series name", () => {
-        defaultProps.series[0].name = undefined;
+        defaultProps.items[0].name = undefined;
         const component = render(<Legend {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("doesn't render when there are no series", () => {
-        defaultProps.series = [];
+        defaultProps.items = [];
         const component = render(<Legend {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });

@@ -16,7 +16,7 @@ import {
 } from "../utils/StyleUtils";
 
 export interface LineChartProps {
-    series: LineChartSeries[];
+    lines: LineChartSeries[];
     style: LineChartStyle;
     showLegend: boolean;
     xAxisLabel?: string;
@@ -46,11 +46,11 @@ export interface LineChartDataPoint<X extends number | Date, Y extends number | 
 }
 
 export function LineChart(props: LineChartProps): ReactElement | null {
-    const { series, showLegend, style, warningPrefix, xAxisLabel, yAxisLabel } = props;
+    const { lines, showLegend, style, warningPrefix, xAxisLabel, yAxisLabel } = props;
 
     const warningMessagePrefix = useMemo(() => (warningPrefix ? warningPrefix + "i" : "I"), [warningPrefix]);
 
-    const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
+    const dataTypesResult = useMemo(() => getDataTypes(lines), [lines]);
 
     // Line Chart user-styling may be missing for certain series. A palette is passed, any missing line colours
     // fallback to a colour from the palette.
@@ -58,7 +58,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
         const lineColorPalette = style.lines?.lineColorPalette?.split(";");
         let lineColorPaletteIndex = 0;
 
-        return series.map(_series => {
+        return lines.map(_series => {
             const configuredStyle = !_series.customLineStyle
                 ? null
                 : style.lines?.customLineStyles?.[_series.customLineStyle]?.line?.lineColor;
@@ -76,14 +76,14 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 
             return configuredStyle;
         });
-    }, [series, style]);
+    }, [lines, style]);
 
     const chartLines = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
             return null;
         }
 
-        return series.map((series, index) => {
+        return lines.map((series, index) => {
             const { dataPoints, interpolation, lineStyle, customLineStyle } = series;
 
             const seriesStyle =
@@ -127,9 +127,9 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                 </VictoryGroup>
             );
         });
-    }, [dataTypesResult, series, style, warningMessagePrefix]);
+    }, [dataTypesResult, lines, style, warningMessagePrefix]);
 
-    const [firstSeries] = series;
+    const [firstSeries] = lines;
 
     const axisLabelStyles = useMemo(() => {
         const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
@@ -247,7 +247,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
                     </View>
 
                     {showLegend ? (
-                        <Legend style={style.legend} series={series} seriesColors={normalizedLineColors} />
+                        <Legend style={style.legend} items={lines} itemColors={normalizedLineColors} />
                     ) : null}
                 </View>
             )}

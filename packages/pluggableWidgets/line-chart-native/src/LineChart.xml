@@ -6,7 +6,7 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="series" type="object" isList="true">
+                <property key="lines" type="object" isList="true">
                     <caption>Lines</caption>
                     <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
                     <properties>
@@ -41,11 +41,11 @@
                                     <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
-                            <property key="staticSeriesName" type="textTemplate" required="false" multiline="false">
+                            <property key="staticName" type="textTemplate" required="false" multiline="false">
                                 <caption>Name</caption>
                                 <description>The line name displayed in the legend.</description>
                             </property>
-                            <property key="dynamicSeriesName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                            <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
                                 <caption>Name</caption>
                                 <description>The line name displayed in the legend.</description>
                             </property>
