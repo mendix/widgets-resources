@@ -4,31 +4,31 @@ import { Text, View } from "react-native";
 import { LineChartLegendStyle } from "../ui/Styles";
 
 export interface LegendProps {
-    series: LegendSeries[];
+    items: LegendItem[];
     style?: LineChartLegendStyle;
-    seriesColors: string[];
+    itemColors: string[];
 }
 
-export interface LegendSeries {
+export interface LegendItem {
     name?: string;
 }
 
 export function Legend(props: LegendProps): ReactElement | null {
-    const { series, style, seriesColors } = props;
+    const { items, style, itemColors } = props;
 
     const legendItems = useMemo(
         () =>
-            series
+            items
                 .map((series, index) =>
                     series.name !== undefined ? (
                         <View key={index} style={style?.item}>
-                            <View style={[{ backgroundColor: seriesColors[index] }, style?.indicator]} />
+                            <View style={[{ backgroundColor: itemColors[index] }, style?.indicator]} />
                             <Text style={style?.label}>{series.name}</Text>
                         </View>
                     ) : null
                 )
                 .filter(Boolean),
-        [series]
+        [items]
     );
 
     return legendItems.length > 0 ? <View style={style?.container}>{legendItems}</View> : null;

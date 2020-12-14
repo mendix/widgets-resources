@@ -3,21 +3,21 @@ import { hideNestedPropertiesIn, Problem, Properties } from "@widgets-resources/
 import { LineChartPreviewProps } from "../typings/LineChartProps";
 
 export function getProperties(values: LineChartPreviewProps, defaultProperties: Properties): Properties {
-    values.series.forEach((series, index) => {
-        if (series.dataSet === "static") {
-            hideNestedPropertiesIn(defaultProperties, values, "series", index, [
+    values.lines.forEach((lines, index) => {
+        if (lines.dataSet === "static") {
+            hideNestedPropertiesIn(defaultProperties, values, "lines", index, [
                 "dynamicDataSource",
                 "groupByAttribute",
-                "dynamicSeriesName",
+                "dynamicName",
                 "dynamicXAttribute",
                 "dynamicYAttribute",
                 "dynamicLineStyle",
                 "dynamicCustomLineStyle"
             ]);
         } else {
-            hideNestedPropertiesIn(defaultProperties, values, "series", index, [
+            hideNestedPropertiesIn(defaultProperties, values, "lines", index, [
                 "staticDataSource",
-                "staticSeriesName",
+                "staticName",
                 "staticXAttribute",
                 "staticYAttribute",
                 "staticLineStyle",
@@ -31,10 +31,10 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
 export function check(values: LineChartPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    values.series.forEach((series, index) => {
-        if (series.dataSet === "static") {
+    values.lines.forEach((lines, index) => {
+        if (lines.dataSet === "static") {
             // @ts-ignore
-            if (series.staticDataSource.type === "null") {
+            if (lines.staticDataSource.type === "null") {
                 errors.push({
                     property: "staticDataSource",
                     severity: "error",
@@ -42,7 +42,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.staticXAttribute) {
+            if (!lines.staticXAttribute) {
                 errors.push({
                     property: "staticXAttribute",
                     severity: "error",
@@ -50,7 +50,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.staticYAttribute) {
+            if (!lines.staticYAttribute) {
                 errors.push({
                     property: "staticYAttribute",
                     severity: "error",
@@ -59,7 +59,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
             }
         } else {
             // @ts-ignore
-            if (series.dynamicDataSource.type === "null") {
+            if (lines.dynamicDataSource.type === "null") {
                 errors.push({
                     property: "dynamicDataSource",
                     severity: "error",
@@ -67,7 +67,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.dynamicXAttribute) {
+            if (!lines.dynamicXAttribute) {
                 errors.push({
                     property: "dynamicXAttribute",
                     severity: "error",
@@ -75,7 +75,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.dynamicYAttribute) {
+            if (!lines.dynamicYAttribute) {
                 errors.push({
                     property: "dynamicYAttribute",
                     severity: "error",
@@ -83,7 +83,7 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
 
-            if (!series.groupByAttribute) {
+            if (!lines.groupByAttribute) {
                 errors.push({
                     property: "groupByAttribute",
                     severity: "error",
