@@ -258,7 +258,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
 type DataTypeResult = { x: string; y: string };
 
 function getDataTypes(series: LineChartSeries[]): DataTypeResult | Error | undefined {
-    let dataTypes: { x: string; y: string } | undefined;
+    let dataTypes: DataTypeResult | undefined;
 
     for (const element of series) {
         const { dataPoints } = element;
