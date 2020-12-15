@@ -4,12 +4,26 @@ const concurrently = require("concurrently");
 
 const mode = process.argv[2] || "production";
 const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
-const outputDir =
-    mode !== "production" && MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "theme") : join(__dirname, "../dist/theme");
-const projectDeployDir = mode !== "production" && MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "deployment/web") : null;
+let outputDir;
+let projectDeployDir;
+
+switch (mode) {
+    case "test":
+        outputDir = join(__dirname, "../tests/testProject/theme");
+        break;
+    case "production":
+        outputDir = join(__dirname, "../dist/theme");
+        break;
+    case "development":
+        outputDir = MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "theme") : join(__dirname, "../dist/theme");
+        projectDeployDir = MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "deployment/web") : null;
+        break;
+    default:
+        throw new Error("No mode specified. Exiting now...");
+}
 
 console.info(`Building for ${mode}...`);
-const watchArg = mode !== "production" ? "--watch" : "";
+const watchArg = mode === "development" ? "--watch" : "";
 const compressArg = mode === "production" ? "--style compressed" : "";
 const copyAndWatchFonts = command(`copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*'`);
 const copyAndWatchContent = command(`copy-and-watch ${watchArg} 'content/**/*'`);
@@ -64,7 +78,7 @@ concurrently(
 );
 
 function command(command) {
-    return function(outputPath) {
+    return function (outputPath) {
         return `${command} '${outputPath}'`;
     };
 }

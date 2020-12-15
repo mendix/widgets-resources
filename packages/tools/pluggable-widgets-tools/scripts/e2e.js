@@ -31,15 +31,19 @@ async function main() {
 
     const packageConf = JSON.parse(await readFile("package.json"));
     const widgetVersion = packageConf?.version;
-    const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
 
-    if (!widgetMpk) {
-        throw new Error("No widgets founds in dist folder. Please execute `npm run release` before start e2e tests.");
+    if (packageConf?.name !== "@mendix/atlas-ui") {
+        const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
+        if (!widgetMpk) {
+            throw new Error(
+                "No widgets founds in dist folder. Please execute `npm run release` before start e2e tests."
+            );
+        }
+
+        // Copy the built widget to test project
+        mkdir("-p", "tests/testProject/widgets");
+        cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
     }
-
-    // Copy the built widget to test project
-    mkdir("-p", "tests/testProject/widgets");
-    cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
 
     // Create reusable mxbuild image
     const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`).toString().trim();
