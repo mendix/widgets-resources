@@ -1,7 +1,7 @@
 {
   "name": "web-view-native",
   "widgetName": "WebView",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
