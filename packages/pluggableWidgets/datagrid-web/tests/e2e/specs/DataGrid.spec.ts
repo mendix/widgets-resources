@@ -1,4 +1,5 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
+import datagrid from "../objects/datagrid.widget";
 
 describe("datagrid-web", () => {
     beforeAll(() => {
@@ -7,42 +8,79 @@ describe("datagrid-web", () => {
 
     describe("capabilities: sorting", () => {
         it("changes order of data to ASC when clicking sort option", () => {
-            const datagrid = page.getWidget("datagrid1");
-            const column = page.getElement(".column-header*=First Name", datagrid);
+            const grid = page.getWidget("datagrid1");
+            const column = page.getElement(".column-header*=First Name", grid);
             const icon = page.getElement("svg", column);
-            const item = page.getElement(".td", datagrid);
+            const items = page.getElements(".td", grid);
 
             expect(icon.getAttribute("data-icon")).toContain("arrows-alt-v");
 
-            expect(item.getText()).toContain("10");
+            expect(datagrid.getAllRows(items)).toEqual([
+                "10",
+                "test",
+                "test",
+                "",
+                "11",
+                "test2",
+                "test2",
+                "",
+                "12",
+                "test3",
+                "test3",
+                ""
+            ]);
 
             column.click();
 
             expect(icon.getAttribute("data-icon")).toContain("long-arrow-alt-up");
 
-            expect(item.getText()).toContain("10");
+            expect(datagrid.getAllRows(items)).toEqual([
+                "10",
+                "test",
+                "test",
+                "",
+                "11",
+                "test2",
+                "test2",
+                "",
+                "12",
+                "test3",
+                "test3",
+                ""
+            ]);
         });
 
         it("changes order of data to DESC when clicking sort option", () => {
-            const datagrid = page.getWidget("datagrid1");
-            const column = page.getElement(".column-header*=First Name", datagrid);
+            const grid = page.getWidget("datagrid1");
+            const column = page.getElement(".column-header*=First Name", grid);
             const icon = page.getElement("svg", column);
-            const item = page.getElement(".td:nth-child(6)", datagrid);
-
-            expect(item.getText()).toContain("test");
+            const items = page.getElements(".td", grid);
 
             column.click();
 
             expect(icon.getAttribute("data-icon")).toContain("long-arrow-alt-down");
 
-            expect(item.getText()).toContain("test3");
+            expect(datagrid.getAllRows(items)).toEqual([
+                "12",
+                "test3",
+                "test3",
+                "",
+                "11",
+                "test2",
+                "test2",
+                "",
+                "10",
+                "test",
+                "test",
+                ""
+            ]);
         });
     });
 
     describe("capabilities: resizing", () => {
         it("changes the size of the column", () => {
-            const datagrid = page.getWidget("datagrid1");
-            const column = page.getElement(".th*=Age", datagrid);
+            const grid = page.getWidget("datagrid1");
+            const column = page.getElement(".th*=Age", grid);
             const resizer = page.getElement(".column-resizer", column);
             const initialSize = Math.round(column.getSize("width"));
             resizer.dragAndDrop({ x: 30, y: 0 });
@@ -54,12 +92,12 @@ describe("datagrid-web", () => {
 
     describe("capabilities: hiding", () => {
         it("hides a selected column", () => {
-            const datagrid = page.getWidget("datagrid1");
-            const column = page.getElement(".column-header*=Age", datagrid);
+            const grid = page.getWidget("datagrid1");
+            const column = page.getElement(".column-header*=Age", grid);
             expect(column.isDisplayed()).toBeTruthy();
-            const columnSelector = page.getElement(".column-selector-button", datagrid);
+            const columnSelector = page.getElement(".column-selector-button", grid);
             columnSelector.click();
-            const columnItem = page.getElement(".column-selectors>li>label", datagrid);
+            const columnItem = page.getElement(".column-selectors>li>label", grid);
             columnItem.click();
 
             expect(column.isDisplayed()).toBeFalsy();
