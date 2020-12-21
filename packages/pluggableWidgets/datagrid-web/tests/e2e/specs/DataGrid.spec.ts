@@ -2,7 +2,7 @@ import page from "../../../../../../configs/e2e/src/pages/page";
 import datagrid from "../objects/datagrid.widget";
 
 describe("datagrid-web", () => {
-    beforeAll(() => {
+    beforeEach(() => {
         page.open(); // resets page
     });
 
@@ -55,7 +55,7 @@ describe("datagrid-web", () => {
             const column = page.getElement(".column-header*=First Name", grid);
             const icon = page.getElement("svg", column);
             const items = page.getElements(".td", grid);
-
+            column.click();
             column.click();
 
             expect(icon.getAttribute("data-icon")).toContain("long-arrow-alt-down");
@@ -94,7 +94,9 @@ describe("datagrid-web", () => {
         it("hides a selected column", () => {
             const grid = page.getWidget("datagrid1");
             const column = page.getElement(".column-header*=Age", grid);
+
             expect(column.isDisplayed()).toBeTruthy();
+
             const columnSelector = page.getElement(".column-selector-button", grid);
             columnSelector.click();
             const columnItem = page.getElement(".column-selectors>li>label", grid);
