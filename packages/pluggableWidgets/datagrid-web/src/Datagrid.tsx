@@ -36,6 +36,10 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         [props.datasource, props.pageSize, isInfiniteLoad, currentPage]
     );
 
+    const onConfigurationChange = useCallback(() => {
+        props.onConfigurationChange?.execute();
+    }, [props.onConfigurationChange]);
+
     const customFiltersState = props.columns.map(() => useState<FilterFunction>());
     const items = (props.datasource.items ?? []).filter(item =>
         customFiltersState.every(
@@ -95,6 +99,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
             settings={props.configurationAttribute}
+            onSettingsChange={onConfigurationChange}
             setPage={setPage}
             styles={props.style}
             valueForSort={useCallback(

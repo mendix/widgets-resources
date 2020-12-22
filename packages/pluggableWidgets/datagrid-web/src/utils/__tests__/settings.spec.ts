@@ -11,6 +11,7 @@ describe("useSettings Hook", () => {
         renderHook(() =>
             useSettings(
                 props.settings,
+                props.onSettingsChange,
                 props.columns,
                 props.columnOrder,
                 props.setColumnOrder,
@@ -66,6 +67,7 @@ describe("useSettings Hook", () => {
         renderHook(() =>
             useSettings(
                 settings,
+                props.onSettingsChange,
                 columns,
                 props.columnOrder,
                 props.setColumnOrder,
@@ -88,6 +90,7 @@ describe("useSettings Hook", () => {
 
         const { rerender } = renderUseSettingsHook({
             settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -101,6 +104,7 @@ describe("useSettings Hook", () => {
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
         rerender({
             settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -130,6 +134,7 @@ describe("useSettings Hook", () => {
         const props = mockProperties();
         const initialProps = {
             settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -151,6 +156,7 @@ describe("useSettings Hook", () => {
         const props = mockProperties();
         const initialProps = {
             settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -212,6 +218,7 @@ function mockProperties(): any {
                 ])
             )
             .build(),
+        onSettingsChange: jest.fn(),
         columns: [
             {
                 header: "Column 1",
@@ -231,6 +238,7 @@ function mockProperties(): any {
 
 function renderUseSettingsHook(initialProps: {
     settings: any;
+    onSettingsChange: () => void;
     hiddenColumns: any[];
     columnOrder: string[];
     columns: any;
@@ -244,6 +252,7 @@ function renderUseSettingsHook(initialProps: {
     return renderHook(
         ({
             settings,
+            onSettingsChange,
             columns,
             columnOrder,
             setColumnOrder,
@@ -256,6 +265,7 @@ function renderUseSettingsHook(initialProps: {
         }) =>
             useSettings(
                 settings,
+                onSettingsChange,
                 columns,
                 columnOrder,
                 setColumnOrder,
