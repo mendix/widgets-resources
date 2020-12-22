@@ -99,7 +99,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
             settings={props.configurationAttribute}
-            onSettingsChange={onConfigurationChange}
+            onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             setPage={setPage}
             styles={props.style}
             valueForSort={useCallback(
