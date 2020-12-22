@@ -46,6 +46,7 @@ export interface TableProps<T> {
     preview?: boolean;
     setPage?: (computePage: (prevPage: number) => number) => void;
     settings?: EditableValue<string>;
+    onSettingsChange?: () => void;
     styles?: CSSProperties;
     valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
 }
@@ -73,6 +74,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     useSettings(
         props.settings,
+        props.onSettingsChange,
         props.columns,
         columnOrder,
         setColumnOrder,

@@ -4,7 +4,16 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import {
+    ActionValue,
+    DynamicValue,
+    EditableValue,
+    ListValue,
+    ListActionValue,
+    ListAttributeValue,
+    ListExpressionValue,
+    ListWidgetValue
+} from "mendix";
 
 export type WidthEnum = "autoFill" | "autoFit" | "manual";
 
@@ -66,6 +75,7 @@ export interface DatagridContainerProps {
     columnsDraggable: boolean;
     columnsHidable: boolean;
     configurationAttribute?: EditableValue<string>;
+    onConfigurationChange?: ActionValue;
 }
 
 export interface DatagridPreviewProps {
@@ -86,4 +96,5 @@ export interface DatagridPreviewProps {
     columnsDraggable: boolean;
     columnsHidable: boolean;
     configurationAttribute: string;
+    onConfigurationChange: {} | null;
 }
