@@ -26,6 +26,7 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         display: flex;
         align-items: flex-start;
         font-weight: 600;
+        background-color: $background-color;
         padding: 16px 8px 0 8px;
         margin-bottom: 16px;
         position: -webkit-sticky; /* Safari */
