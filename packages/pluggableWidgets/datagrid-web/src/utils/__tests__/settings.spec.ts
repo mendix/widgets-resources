@@ -102,6 +102,7 @@ describe("useSettings Hook", () => {
             setWidths: props.setWidths
         });
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
         rerender({
             settings: props.settings,
             onSettingsChange: props.onSettingsChange,
@@ -128,6 +129,7 @@ describe("useSettings Hook", () => {
                 }
             ])
         );
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
     });
 
     it("doesnt change the settings when same properties are applied", () => {
@@ -148,8 +150,10 @@ describe("useSettings Hook", () => {
 
         const { rerender } = renderUseSettingsHook(initialProps);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
         rerender(initialProps);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
     });
 
     it("doesnt change the hooks when same properties are applied", () => {
@@ -175,12 +179,14 @@ describe("useSettings Hook", () => {
         expect(props.setSortBy).toHaveBeenCalledTimes(1);
         expect(props.setWidths).toHaveBeenCalledTimes(1);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
         rerender(initialProps);
         expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
         expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
         expect(props.setSortBy).toHaveBeenCalledTimes(1);
         expect(props.setWidths).toHaveBeenCalledTimes(1);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
     });
 
     it("applies changes to settings when receiving external prop changes", () => {
@@ -192,13 +198,16 @@ describe("useSettings Hook", () => {
         expect(props.settings.setValue).toHaveBeenCalledWith(
             JSON.stringify([{ column: "Column 1", sort: false, sortMethod: "asc", hidden: false, order: 0 }])
         );
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
         rerender({ ...props, sortBy: [{ id: "0", desc: true }] });
         expect(props.settings.setValue).toHaveBeenCalledTimes(2);
         expect(props.settings.setValue).toHaveBeenCalledWith(
             JSON.stringify([{ column: "Column 1", sort: true, sortMethod: "desc", hidden: false, order: 0 }])
         );
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(2);
         rerender({ ...props, sortBy: [{ id: "0", desc: true }] });
         expect(props.settings.setValue).toHaveBeenCalledTimes(2);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(2);
     });
 });
 
