@@ -228,6 +228,7 @@ export function BarChart({
                                         }
                                         style={mapToGridStyle(style.grid)}
                                     >
+                                        {groupedOrStacked}
                                         <VictoryAxis
                                             orientation={"bottom"}
                                             dependentAxis
@@ -243,7 +244,6 @@ export function BarChart({
                                                 ? { tickFormat: firstSeries.yFormatter }
                                                 : undefined)}
                                         />
-                                        {groupedOrStacked}
                                     </VictoryChart>
                                 ) : null}
                             </View>

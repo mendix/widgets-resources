@@ -18,7 +18,7 @@
             <propertyGroup caption="Data source">
                 <property key="barSeries" type="object" isList="true">
                     <caption>Bar series</caption>
-                    <description>Add one or more bar series.</description>
+                    <description>Add one or more bar series. The top-down order of static data sets and the order of data returned by grouped dynamic data sets influences the sequential order of bars in stacked presentation mode and the order of bars rendered in the Z-plane (where data sets lower in the order are rendered lowest in the Z-plane) in grouped presentation mode.</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
