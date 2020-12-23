@@ -57,7 +57,7 @@ async function main() {
     const projectFile = ls("tests/testProject/*.mpr").toString();
     execSync(
         `docker run -t -v ${process.cwd()}:/source ` +
-            `--rm mxbuild:${latestMendixVersion} bash -c " mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
+            `--rm mxbuild:${latestMendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
             `-o /tmp/automation.mda /source/${projectFile}"`,
         { stdio: "inherit" }
     );
