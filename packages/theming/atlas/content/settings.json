@@ -241,19 +241,9 @@
                 "description": "Change the background color of the container.",
                 "options": [
                     {
-                        "name": "Brand Default",
-                        "oldNames": ["Default"],
-                        "class": "background-default"
-                    },
-                    {
                         "name": "Brand Primary",
                         "oldNames": ["Primary"],
                         "class": "background-primary"
-                    },
-                    {
-                        "name": "Brand Inverse",
-                        "oldNames": ["Inverse"],
-                        "class": "background-inverse"
                     },
                     {
                         "name": "Brand Info",
@@ -282,6 +272,10 @@
                     {
                         "name": "Background Dashboard",
                         "class": "background-secondary"
+                    },
+                    {
+                        "name": "Background Gradient",
+                        "class": "background-brand-gradient"
                     }
                 ]
             }

@@ -341,7 +341,7 @@ $color-danger-dark: mix($brand-danger, black, 70%);
 $color-danger-light: mix($brand-danger, white, 60%);
 $color-danger-lighter: mix($brand-danger, white, 20%);
 
-$brand-gradient: linear-gradient(152deg, #0cc7f0 0%, #087ecc 51%, #077ac9 55%, #0659b9 78%);
+$brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
 
 //== Grids
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
