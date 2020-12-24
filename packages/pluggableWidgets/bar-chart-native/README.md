@@ -36,5 +36,5 @@ series can be grouped or stacked.
 ### Custom styling
 
 The look and feel of the chart is fully customizable. Check out the
-[Native Mobile Styling](https://docs.mendix.com/refguide/native-styling-refguide#) documentation for a full overview of
+[Native Mobile Styling](https://docs.mendix.com/refguide/native-styling-refguide#11-27-bar-chart) documentation for a full overview of
 the available style customizations.
