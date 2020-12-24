@@ -14,8 +14,6 @@
 .mx-dataview {
     /* Control bar */
     .mx-dataview-controls {
-        // Needed to clear the bootstrap columns (get float: left)
-        clear: both;
         margin-top: 16px;
         padding: 16px 0;
         border-top: 1px solid $dataview-controls-border-color;
@@ -29,6 +27,7 @@
                 margin-right: 0;
             }
         }
+        background-color: inherit;
     }
     /* Dataview-content gives problems for nexted layout grid containers */
     > .mx-dataview-content > .mx-container-nested {

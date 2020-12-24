@@ -26,8 +26,6 @@
 
 // Widgets
 @import "core/widgets/inputs";
-@import "core/widgets/alerts";
-@import "core/helpers/alerts";
 @import "core/helpers/backgrounds";
 @import "core/widgets/buttons";
 @import "core/helpers/buttons";
@@ -87,6 +85,7 @@
 //================================= CUSTOM =================================\\
 
 // Building blocks
+@import "ui_resources/atlas_ui_resources/buildingblocks/alert";
 @import "ui_resources/atlas_ui_resources/buildingblocks/breadcrumb";
 @import "ui_resources/atlas_ui_resources/buildingblocks/card";
 @import "ui_resources/atlas_ui_resources/buildingblocks/chat";

@@ -119,7 +119,7 @@ $font-weight-header: $font-weight-semibold;
 $line-height-base: 1.428571429;
 
 // Spacing
-$font-header-margin: 15px 0 30px 0;
+$font-header-margin: 0 0 8px 0;
 
 // Text Colors
 $font-color-detail: #6c717e;
@@ -286,7 +286,10 @@ $btn-link-bg-hover: $gray-lighter;
 
 //== Header blocks
 //## Define look and feel over multible building blocks that serve as header
-$header-bg-color: $bg-color;
+
+$header-min-height: 240px;
+$header-bg-color: $brand-primary;
+$header-bgimage-filter: brightness(60%);
 $header-text-color: #fff;
 $header-text-color-detail: rgba(0, 0, 0, 0.2);
 
@@ -428,22 +431,49 @@ $dataview-emptymessage-color: $font-color-default;
 //## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
 
 // Background Color
-$alert-info-bg: $color-info-lighter;
+$alert-info-bg: $color-primary-lighter;
 $alert-success-bg: $color-success-lighter;
 $alert-warning-bg: $color-warning-lighter;
 $alert-danger-bg: $color-danger-lighter;
 
 // Text Color
-$alert-info-color: $color-info-darker;
+$alert-info-color: $color-primary-darker;
 $alert-success-color: $color-success-darker;
 $alert-warning-color: $color-warning-darker;
 $alert-danger-color: $color-danger-darker;
 
 // Border Color
-$alert-info-border-color: $color-info-dark;
+$alert-info-border-color: $color-primary-dark;
 $alert-success-border-color: $color-success-dark;
 $alert-warning-border-color: $color-warning-dark;
 $alert-danger-border-color: $color-danger-dark;
+
+//== Wizard
+
+$wizard-step-height: 48px;
+$wizard-step-number-size: 64px;
+$wizard-step-number-font-size: $font-size-h3;
+
+//Wizard states
+$wizard-default: #fff;
+$wizard-active: $brand-primary;
+$wizard-visited: $brand-success;
+
+//Wizard step states
+$wizard-default-bg: $wizard-default;
+$wizard-default-color: $wizard-default;
+$wizard-default-step-color: $font-color-default;
+$wizard-default-border-color: $border-color-default;
+
+$wizard-active-bg: $wizard-active;
+$wizard-active-color: $wizard-default;
+$wizard-active-step-color: $wizard-active;
+$wizard-active-border-color: $wizard-active;
+
+$wizard-visited-bg: $wizard-visited;
+$wizard-visited-color: $wizard-default;
+$wizard-visited-step-color: $wizard-visited;
+$wizard-visited-border-color: $wizard-visited;
 
 //== Labels
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
