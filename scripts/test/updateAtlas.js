@@ -25,7 +25,6 @@ async function main() {
     } catch (e) {
         throw new Error("This script requires unzip command to be available on the PATH!");
     }
-
     const atlasArchive = await getLatestAtlasArchive();
     rm("-rf", "tests/testProject/theme");
     rm("-rf", "tests/testProject/widgets");
@@ -57,11 +56,9 @@ async function getLatestAtlasArchive() {
 
     for (const latestAtlasVersion of latestAtlasVersions) {
         const downloadedArchivePath = join(tmpdir(), `${latestAtlasVersion}.mpk`);
-        if (await exists(downloadedArchivePath)) {
-            return downloadedArchivePath;
-        }
+
         const appstoreUrl = `https://files.appstore.mendix.com/5/104730/${latestAtlasVersion}/Atlas_UI_Resources_${latestAtlasVersion}.mpk`;
-        console.log(`Trying to download Atlas from ${appstoreUrl}...`);
+        console.log(`Trying to download Atlas from ${appstoreUrl}`);
         try {
             await promisify(pipeline)((await fetch(appstoreUrl)).body, createWriteStream(downloadedArchivePath));
             return downloadedArchivePath;
