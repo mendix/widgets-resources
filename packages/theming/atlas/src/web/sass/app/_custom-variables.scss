@@ -24,12 +24,12 @@ $gray-primary: #ced0d3;
 $gray-lighter: #f8f8f8;
 
 //== Step 1: Brand Colors
-$brand-default: #ced0d3;
+$brand-default: $gray-primary;
 $brand-primary: #264ae5;
 $brand-inverse: #24276c;
 $brand-info: #0086d9;
 $brand-success: #3cb33d;
-$brand-warning: #e6930e;
+$brand-warning: #eca51c;
 $brand-danger: #e33f4e;
 
 $brand-logo: false;
@@ -122,8 +122,8 @@ $line-height-base: 1.428571429;
 $font-header-margin: 15px 0 30px 0;
 
 // Text Colors
-$font-color-detail: #637381;
-$font-color-header: #212b36;
+$font-color-detail: #6c717e;
+$font-color-header: #0a1326;
 
 //== Navigation
 //## Used in components/navigation
@@ -226,11 +226,11 @@ $form-input-color: $font-color-default;
 $form-input-focus-color: $form-input-color;
 $form-input-disabled-color: #9da1a8;
 $form-input-placeholder-color: #6c717c;
-$form-input-border-color: #ced0d3;
+$form-input-border-color: $gray-primary;
 $form-input-border-focus-color: $brand-primary;
 
 // Form Input Static styling
-$form-input-static-border-color: #ced0d3;
+$form-input-static-border-color: $gray-primary;
 
 // Form Group
 $form-group-margin-bottom: 16px;
@@ -249,12 +249,12 @@ $btn-default-bg: #fff;
 $btn-inverse-bg: $brand-inverse;
 $btn-primary-bg: $brand-primary;
 $btn-info-bg: $brand-info;
-$btn-success-bg: #54b456;
+$btn-success-bg: $brand-success;
 $btn-warning-bg: $brand-warning;
 $btn-danger-bg: $brand-danger;
 
 // Button Border Color
-$btn-default-border-color: #ced0d3;
+$btn-default-border-color: $gray-primary;
 $btn-inverse-border-color: $brand-inverse;
 $btn-primary-border-color: $brand-primary;
 $btn-info-border-color: $brand-info;
@@ -478,7 +478,7 @@ $label-danger-color: #fff;
 //## Default variables for Groupbox Widget (used in components/groupbox)
 
 // Background Color
-$groupbox-default-bg: #ced0d3;
+$groupbox-default-bg: $gray-primary;
 $groupbox-inverse-bg: $brand-inverse;
 $groupbox-primary-bg: $brand-primary;
 $groupbox-info-bg: $brand-info;

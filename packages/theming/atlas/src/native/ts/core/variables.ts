@@ -1,4 +1,5 @@
 import { Platform } from "react-native";
+import { darkMode } from "../app/custom-variables";
 import * as custom from "../app/custom-variables";
 import adjustFont, { height, width } from "./helpers/_functions/adjustfont";
 import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
@@ -38,23 +39,23 @@ export const deviceWidth = width;
 //
 // Brand Style
 let brand: VariablesBrand = {
-    primary: "#0595DB",
-    success: "#76CA02",
-    warning: "#f99b1d",
-    danger: "#ed1c24",
-    info: "",
-    primaryLight: `rgba(${anyColorToRgbString("#0595DB")}, 0.14)`,
-    successLight: `rgba(${anyColorToRgbString("#76CA02")}, 0.14)`,
-    warningLight: `rgba(${anyColorToRgbString("#f99b1d")}, 0.14)`,
-    dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
-    infoLight: ""
+    primary: "#264AE5",
+    success: "#3CB33D",
+    warning: "#ECA51C",
+    danger: "#E33F4E",
+    info: "#0086D9",
+    primaryLight: `#F3F5FF`,
+    successLight: `#F1FCF1`,
+    warningLight: `#FFF9E6`,
+    dangerLight: `#FFEEF0`,
+    infoLight: `#ECF9FF`
 };
 brand = merge(brand, custom.brand || ({} as any));
 //
 // Background colors
 let background: VariablesBackground = {
-    primary: "#FFF",
-    gray: "#c6c6cc",
+    primary: darkMode ? "#0A1325" : "#FFF",
+    gray: darkMode ? "#161F30" : "#F8F8F8",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -77,10 +78,10 @@ contrast = merge(contrast, custom.contrast || ({} as any));
 //
 // Border Style
 let border: VariablesBorder = {
-    color: setContrastScale(0.17, background.primary),
+    color: darkMode ? "#3B4251" : "#CED0D3",
     width: 1,
-    radiusSmall: 5,
-    radiusLarge: 5
+    radiusSmall: 4,
+    radiusLarge: 8
 };
 border = merge(border, custom.border || ({} as any));
 //
@@ -88,13 +89,13 @@ border = merge(border, custom.border || ({} as any));
 let font: VariablesFont = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
-    sizeLarge: adjustFont(18),
-    sizeH1: adjustFont(31),
-    sizeH2: adjustFont(26),
-    sizeH3: adjustFont(24),
-    sizeH4: adjustFont(18),
-    sizeH5: adjustFont(14),
-    sizeH6: adjustFont(12),
+    sizeLarge: adjustFont(16),
+    sizeH1: adjustFont(40),
+    sizeH2: adjustFont(34),
+    sizeH3: adjustFont(28),
+    sizeH4: adjustFont(24),
+    sizeH5: adjustFont(20),
+    sizeH6: adjustFont(16),
     lineHeight: adjustFont(14) * 1.5,
     lineHeightSmall: adjustFont(12) * 1.5,
     lineHeightLarge: adjustFont(16) * 1.5,
@@ -104,9 +105,9 @@ let font: VariablesFont = {
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: "",
-    colorParagraph: "",
-    colorDisabled: "",
+    colorTitle: darkMode ? "#FDFDFD" : "#0A1326",
+    colorParagraph: darkMode ? "#E7E7E9" : "#6C717E",
+    colorDisabled: darkMode ? "#9DA1A8" : "#9DA1A8",
     weightLight: "100", // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
@@ -117,18 +118,19 @@ font = merge(font, custom.font || ({} as any));
 //
 // Spacing
 let spacing: VariablesSpacing = {
-    smallest: 5,
-    smaller: 10,
-    small: 15,
-    regular: 20,
-    large: 25,
-    larger: 30,
+    smallest: 2,
+    smaller: 4,
+    small: 8,
+    regular: 16,
+    large: 24,
+    larger: 32,
     largest: 40
 };
 spacing = merge(spacing, custom.spacing || ({} as any));
 //
 // Button Styles
 let button: VariablesButton = {
+    // Start default styles
     container: {
         rippleColor: contrast.lowest,
         borderRadius: border.radiusLarge,
@@ -154,6 +156,7 @@ let button: VariablesButton = {
     captionDisabled: {
         color: font.colorDisabled
     },
+    // End default styles
 
     header: {
         color: contrast.highest,
@@ -198,7 +201,7 @@ let input: VariablesInput = {
     label: {
         numberOfLines: 1,
         color: font.colorTitle,
-        fontSize: font.size,
+        fontSize: font.sizeSmall,
         textAlign: "left"
     },
     labelDisabled: {
@@ -209,12 +212,12 @@ let input: VariablesInput = {
         borderColor: contrast.lower,
         backgroundColor: background.primary,
         selectionColor: contrast.lower,
-        placeholderTextColor: contrast.regular,
+        placeholderTextColor: contrast.low,
 
         fontSize: font.size,
         lineHeight: font.lineHeight,
         borderWidth: border.width,
-        borderRadius: border.radiusSmall,
+        borderRadius: border.radiusLarge,
 
         minWidth: 48,
         minHeight: 48,
@@ -240,7 +243,7 @@ let input: VariablesInput = {
         fontSize: font.size
     },
 
-    // Dropdown & Reference selector only
+    // Only used for the DropDown & ReferenceSelector
     valueContainer: {
         rippleColor: contrast.lowest
     },
@@ -278,7 +281,7 @@ let image: VariablesImage = {
     imageDisabled: {
         opacity: 0.6
     },
-    icon: 24
+    icon: 16
 };
 image = merge(image, custom.image || ({} as any));
 //
@@ -286,13 +289,13 @@ image = merge(image, custom.image || ({} as any));
 let navigation: VariablesNavigation = {
     statusBar: {
         backgroundColor: background.primary,
-        barStyle: custom.darkMode ? "light-content" : "dark-content"
+        barStyle: darkMode ? "light-content" : "dark-content"
     },
     topBar: {
-        backgroundColor: background.primary,
-        backButtonColor: contrast.highest,
-        titleColor: contrast.highest,
-        titleFontSize: Platform.select({ android: font.sizeH4, ios: font.sizeH5 }) as number
+        backgroundColor: brand.primary,
+        backButtonColor: "#FFF",
+        titleColor: "#FFF",
+        titleFontSize: font.sizeH6
     },
     bottomBar: {
         color: contrast.high,
@@ -327,14 +330,14 @@ container = merge(container, custom.container || ({} as any));
 //
 // Badge Styles
 let badge: VariablesBadge = {
-    fontWeight: font.weightBold,
-    borderRadius: 30,
-    paddingVertical: 3,
-    paddingHorizontal: spacing.smaller,
+    fontWeight: font.weightNormal,
+    borderRadius: border.radiusLarge,
+    paddingVertical: spacing.small,
+    paddingHorizontal: spacing.small,
 
     default: {
-        color: contrast.higher,
-        backgroundColor: contrast.lower
+        color: contrast.high,
+        backgroundColor: contrast.lowest
     },
     primary: {
         color: brand.primary,
@@ -359,26 +362,26 @@ badge = merge(badge, custom.badge || ({} as any));
 let tabContainer: VariablesTabContainer = {
     tabBar: {
         pressColor: contrast.lower,
-        backgroundColor: background.primary
+        backgroundColor: brand.primary
     },
     tab: {
-        paddingVertical: spacing.smaller
+        paddingVertical: 12
     },
     indicator: {
-        backgroundColor: brand.primary,
+        backgroundColor: background.primary,
         height: Platform.select({ ios: 2, android: 2 }) as number
     },
     label: {
-        color: contrast.highest,
+        color: background.primary,
         fontSize: font.size,
-        fontWeight: font.weightBold,
-        textTransform: "uppercase"
+        fontWeight: font.weightSemiBold,
+        textTransform: "capitalize"
     },
     activeLabel: {
-        color: brand.primary,
+        color: background.gray,
         fontSize: font.size,
-        fontWeight: font.weightBold,
-        textTransform: "uppercase"
+        fontWeight: font.weightSemiBold,
+        textTransform: "capitalize"
     },
     badgeContainer: {
         borderRadius: badge.borderRadius,
@@ -409,7 +412,7 @@ listView = merge(listView, custom.listView || ({} as any));
 //
 // Layoutgrid Styles
 let layoutGrid: VariablesLayoutgrid = {
-    gutterSize: 15
+    gutterSize: 16
 };
 layoutGrid = merge(layoutGrid, custom.layoutGrid || ({} as any));
 //
@@ -438,8 +441,8 @@ let floatingActionButton: VariablesFloatingActionButton = {
         color: contrast.high
     },
     secondaryButtonCaption: {
-        color: font.colorTitle,
-        fontSize: font.size
+        color: contrast.high,
+        fontSize: font.sizeSmall
     },
     secondaryButtonCaptionContainer: {
         backgroundColor: background.primary
@@ -496,15 +499,15 @@ introScreen = merge(introScreen, custom.introScreen || ({} as any));
 // List View Swipe Styles
 let listViewSwipe: VariablesListViewSwipe = {
     leftAction: {
-        panelSize: 144,
-        panelSizeSmall: 108,
-        panelSizeLarge: 216,
+        panelSize: 160,
+        panelSizeSmall: 80,
+        panelSizeLarge: 240,
         backgroundColor: background.primary
     },
     rightAction: {
-        panelSize: 144,
-        panelSizeSmall: 108,
-        panelSizeLarge: 216,
+        panelSize: 160,
+        panelSizeSmall: 80,
+        panelSizeLarge: 240,
         backgroundColor: background.primary
     }
 };

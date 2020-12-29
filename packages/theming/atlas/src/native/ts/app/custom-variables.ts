@@ -37,9 +37,9 @@ import {
 // Brand Styles
 export const brand: VariablesBrand = {
     primary: "#264AE5",
-    success: "#77DD77",
-    warning: "#FFD355",
-    danger: "#FF6161",
+    success: "#3CB33D",
+    warning: "#ECA51C",
+    danger: "#E33F4E",
     info: "#0086D9",
     primaryLight: `#F3F5FF`,
     successLight: `#F1FCF1`,
@@ -105,8 +105,8 @@ export const font: VariablesFont = {
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: darkMode ? "#FDFDFD" : "#0A1325",
-    colorParagraph: darkMode ? "#E7E7E9" : "#6C717C",
+    colorTitle: darkMode ? "#FDFDFD" : "#0A1326",
+    colorParagraph: darkMode ? "#E7E7E9" : "#6C717E",
     colorDisabled: darkMode ? "#9DA1A8" : "#9DA1A8",
     weightLight: "100", // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
