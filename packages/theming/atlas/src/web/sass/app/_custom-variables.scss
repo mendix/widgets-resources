@@ -351,16 +351,16 @@ $grid-border-color: $border-color-default;
 
 // Spacing
 // Default
-$grid-padding-top: 15px;
-$grid-padding-right: 15px;
-$grid-padding-bottom: 15px;
-$grid-padding-left: 15px;
+$grid-padding-top: 16px;
+$grid-padding-right: 16px;
+$grid-padding-bottom: 16px;
+$grid-padding-left: 16px;
 
 // Listview
-$listview-padding-top: 15px;
-$listview-padding-right: 15px;
-$listview-padding-bottom: 15px;
-$listview-padding-left: 15px;
+$listview-padding-top: 16px;
+$listview-padding-right: 16px;
+$listview-padding-bottom: 16px;
+$listview-padding-left: 16px;
 
 // Background Colors
 $grid-bg: transparent;
@@ -549,12 +549,17 @@ $callout-danger-bg: $color-danger-lighter;
 // Colors
 $timeline-icon-color: $brand-primary;
 $timeline-border-color: $border-color-default;
-
-$timeline-color-header: $font-color-header;
-$timeline-color-detail: $font-color-detail;
+$timeline-event-time-color: $brand-primary;
 
 // Sizes
 $timeline-icon-size: 18px;
+$timeline-image-size: 36px;
+
+//Timeline grouping
+$timeline-grouping-size: 120px;
+$timeline-grouping-border-radius: 30px;
+$timeline-grouping-border-color: $timeline-border-color;
+
 
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
