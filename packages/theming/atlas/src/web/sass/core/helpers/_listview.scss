@@ -10,24 +10,34 @@
 //== Design Properties
 //## Helper classes to change the look and feel of the component
 ========================================================================== */
-// Bordered
-.listview-bordered.mx-listview {
-    & > ul > li {
-        border: 1px solid $grid-border-color;
-        border-top: 0;
 
+// List items lined
+.listview-lined.mx-listview {
+    & > ul > li {
+        border-top: 1px solid $grid-border-color;
         &:first-child {
             border-top: 1px solid $grid-border-color;
-            border-radius: 0;
         }
-
         &:last-child {
-            border-radius: 0;
+            border-bottom: 1px solid $grid-border-color;
         }
     }
 }
 
-// Striped
+//List items Bordered
+.listview-bordered.mx-listview {
+    & > ul > li {
+        border: 1px solid $grid-border-color;
+        border-top: 0;
+        &:first-child {
+            border-top: 1px solid $grid-border-color;
+        }
+        &:last-child {
+        }
+    }
+}
+
+// List items striped
 .listview-striped.mx-listview {
     & > ul > li:nth-child(2n + 1) {
         background-color: $grid-bg-striped;
@@ -37,13 +47,13 @@
 // Items as seperated blocks
 .listview-seperated.mx-listview {
     & > ul > li {
-        margin-bottom: $gutter-size;
+        margin-bottom: $spacing-medium;
         border: 1px solid $grid-border-color;
         border-radius: $border-radius-default;
     }
 }
 
-// Remove all styling
+// Remove all styling - retire
 .listview-stylingless.mx-listview {
     & > ul > li {
         padding: unset;
@@ -77,29 +87,36 @@
         &:hover,
         &:focus,
         &:active {
-            background-color: $grid-bg-hover !important;
+            background-color: $grid-bg-hover;
         }
 
         &.selected {
             &:hover,
             &:focus,
             &:active {
-                background-color: $grid-bg-selected-hover !important;
+                background-color: $grid-bg-selected-hover;
             }
         }
     }
 }
 
-// Templategrid Row Sizes
-.listview-lg.mx-listview {
-    & > ul > li {
-        padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
-    }
-}
+// Row Sizes
 
 .listview-sm.mx-listview {
     & > ul > li {
-        padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
+        padding:  $spacing-small $spacing-small $spacing-small $spacing-small;
+    }
+}
+
+.listview-md.mx-listview {
+    & > ul > li {
+        padding:  $spacing-medium $spacing-medium $spacing-medium $spacing-medium;
+    }
+}
+
+.listview-lg.mx-listview {
+    & > ul > li {
+        padding:  $spacing-large $spacing-large $spacing-large $spacing-large;
     }
 }
 

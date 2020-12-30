@@ -332,6 +332,10 @@
                 "description": "Change the appearance of rows in the list view.",
                 "options": [
                     {
+                        "name": "Lined",
+                        "class": "listview-lined"
+                    },
+                    {
                         "name": "Striped",
                         "class": "listview-striped"
                     },
@@ -340,8 +344,8 @@
                         "class": "listview-bordered"
                     },
                     {
-                        "name": "Lined",
-                        "class": "listview-lined"
+                        "name": "Seperated",
+                        "class": "listview-seperated"
                     },
                     {
                         "name": "No Styling",
@@ -363,6 +367,10 @@
                     {
                         "name": "Small",
                         "class": "listview-sm"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "listview-md"
                     },
                     {
                         "name": "Large",
