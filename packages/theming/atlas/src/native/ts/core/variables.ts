@@ -1,5 +1,4 @@
 import { Platform } from "react-native";
-import { darkMode } from "../app/custom-variables";
 import * as custom from "../app/custom-variables";
 import adjustFont, { height, width } from "./helpers/_functions/adjustfont";
 import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
@@ -54,8 +53,8 @@ brand = merge(brand, custom.brand || ({} as any));
 //
 // Background colors
 let background: VariablesBackground = {
-    primary: darkMode ? "#0A1325" : "#FFF",
-    gray: darkMode ? "#161F30" : "#F8F8F8",
+    primary: custom.darkMode ? "#0A1325" : "#FFF",
+    gray: custom.darkMode ? "#161F30" : "#F8F8F8",
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -78,7 +77,7 @@ contrast = merge(contrast, custom.contrast || ({} as any));
 //
 // Border Style
 let border: VariablesBorder = {
-    color: darkMode ? "#3B4251" : "#CED0D3",
+    color: custom.darkMode ? "#3B4251" : "#CED0D3",
     width: 1,
     radiusSmall: 4,
     radiusLarge: 8
@@ -105,9 +104,9 @@ let font: VariablesFont = {
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: darkMode ? "#FDFDFD" : "#0A1326",
-    colorParagraph: darkMode ? "#E7E7E9" : "#6C717E",
-    colorDisabled: darkMode ? "#9DA1A8" : "#9DA1A8",
+    colorTitle: custom.darkMode ? "#FDFDFD" : "#0A1326",
+    colorParagraph: custom.darkMode ? "#E7E7E9" : "#6C717E",
+    colorDisabled: custom.darkMode ? "#9DA1A8" : "#9DA1A8",
     weightLight: "100", // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
@@ -289,7 +288,7 @@ image = merge(image, custom.image || ({} as any));
 let navigation: VariablesNavigation = {
     statusBar: {
         backgroundColor: background.primary,
-        barStyle: darkMode ? "light-content" : "dark-content"
+        barStyle: custom.darkMode ? "light-content" : "dark-content"
     },
     topBar: {
         backgroundColor: brand.primary,
