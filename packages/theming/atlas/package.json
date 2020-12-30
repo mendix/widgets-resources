@@ -9,8 +9,8 @@
     "build": "node ./scripts/build.js production",
     "start": "node ./scripts/build.js development",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
-    "test:e2e:dev": "pluggable-widgets-tools test:e2e:js",
-    "pretest:e2e": "cross-env ATLAS_MX_PROJECT_PATH='./tests/testProject' node ./scripts/build.js test"
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "pretest:e2e:dev": "cross-env ATLAS_MX_PROJECT_PATH='./tests/testProject' node ./scripts/build.js test"
   },
   "repository": {
     "type": "git",
