@@ -44,11 +44,11 @@ let brand: VariablesBrand = {
     warning: "#ECA51C",
     danger: "#E33F4E",
     info: "#0086D9",
-    primaryLight: `#F3F5FF`,
-    successLight: `#F1FCF1`,
-    warningLight: `#FFF9E6`,
-    dangerLight: `#FFEEF0`,
-    infoLight: `#ECF9FF`
+    primaryLight: "#F3F5FF",
+    successLight: "#F1FCF1",
+    warningLight: "#FFF9E6",
+    dangerLight: "#FFEEF0",
+    infoLight: "#ECF9FF"
 };
 brand = merge(brand, custom.brand || ({} as any));
 //
@@ -308,7 +308,7 @@ let navigation: VariablesNavigation = {
     progressOverlay: {
         color: font.colorTitle,
         activityIndicatorColor: font.colorTitle,
-        backgroundColor: `rgba(0, 0, 0, 0.5)`,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         containerBackgroundColor: background.gray,
         fontSize: font.size,
         borderRadius: border.radiusSmall,
@@ -458,7 +458,7 @@ let introScreen: VariablesIntroScreen = {
     popupContainer: {
         paddingVertical: 150,
         paddingHorizontal: 50,
-        backgroundColor: `rgba(0, 0, 0, 0.5)`
+        backgroundColor: "rgba(0, 0, 0, 0.5)"
     },
     pagination: {
         text: {
