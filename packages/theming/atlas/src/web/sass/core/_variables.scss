@@ -16,21 +16,21 @@
 
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
-$gray-darker: #222 !default;
-$gray-dark: #333 !default;
-$gray: #555 !default;
-$gray-light: #6c7180 !default;
-$gray-primary: #d7d7d7 !default;
-$gray-lighter: #eee !default;
+$gray-darker: #3b4251 !default;
+$gray-dark: #606671 !default;
+$gray: #787d87 !default;
+$gray-light: #a9acb3 !default;
+$gray-primary: #ced0d3 !default;
+$gray-lighter: #f8f8f8 !default;
 
 //== Step 1: Brand Colors
-$brand-default: #dddddd !default;
-$brand-primary: #0595db !default;
-$brand-inverse: #252c36 !default;
-$brand-info: #48b0f7 !default;
-$brand-success: #76ca02 !default;
-$brand-warning: #f99b1d !default;
-$brand-danger: #ed1c24 !default;
+$brand-default: $gray-primary !default;
+$brand-primary: #264ae5 !default;
+$brand-inverse: #24276c !default;
+$brand-info: #0086d9 !default;
+$brand-success: #3cb33d !default;
+$brand-warning: #eca51c !default;
+$brand-danger: #e33f4e !default;
 
 $brand-logo: false !default;
 $brand-logo-height: 26px !default;
@@ -40,11 +40,11 @@ $brand-logo-width: 26px !default; // Only used for CSS brand logo
 
 // Default Font Size & Color
 $font-size-default: 14px !default;
-$font-color-default: #555 !default;
+$font-color-default: $brand-inverse !default;
 
 // Global Border Color
 $border-color-default: $gray-primary !default;
-$border-radius-default: 4px !default;
+$border-radius-default: 5px !default;
 
 // Topbar
 $topbar-bg: #fff !default;
@@ -64,8 +64,9 @@ $sidebar-bg: $brand-inverse !default;
 $navbar-brand-name: $font-color-default !default;
 
 // Background Colors
-$bg-color: #fff !default;
-$bg-color-secondary: #f5f8fd !default; // Background color that is used for specific page templates background
+// Backgrounds
+$bg-color: #f8f8f8 !default;
+$bg-color-secondary: #f5f8fd !default;
 
 // Default Link Color
 $link-color: $brand-primary !default;
@@ -112,7 +113,7 @@ $font-size-h5: $font-size-default !default;
 $font-size-h6: 12px !default;
 
 // Font Weight Headers
-$font-weight-header: $font-weight-normal !default;
+$font-weight-header: $font-weight-semibold !default;
 
 // Line Height
 $line-height-base: 1.428571429 !default;
@@ -121,15 +122,15 @@ $line-height-base: 1.428571429 !default;
 $font-header-margin: 15px 0 30px 0 !default;
 
 // Text Colors
-$font-color-header: #17347b !default;
-$font-color-detail: $gray-light !default;
+$font-color-detail: #6c717e !default;
+$font-color-header: #0a1326 !default;
 
 //== Navigation
 //## Used in components/navigation
 
 // Default Navigation styling
-$navigation-item-height: 60px !default;
-$navigation-item-padding: 5px 15px !default;
+$navigation-item-height: unset !default;
+$navigation-item-padding: 16px !default;
 
 $navigation-font-size: $font-size-default !default;
 $navigation-sub-font-size: $font-size-small !default;
@@ -157,8 +158,8 @@ $navsidebar-sub-font-size: $font-size-small !default;
 $navsidebar-glyph-size: 20px !default; // For glyphicons that you can select in the Mendix Modeler
 
 $navsidebar-bg: $sidebar-bg !default;
-$navsidebar-bg-hover: lighten($navsidebar-bg, 4) !default;
-$navsidebar-bg-active: lighten($navsidebar-bg, 8) !default;
+$navsidebar-bg-hover: darken($navsidebar-bg, 4) !default;
+$navsidebar-bg-active: darken($navsidebar-bg, 8) !default;
 $navsidebar-color: #fff !default;
 $navsidebar-color-hover: #fff !default;
 $navsidebar-color-active: #fff !default;
@@ -201,7 +202,7 @@ $navtopbar-border-color: $topbar-border-color !default;
 $form-input-style: default !default;
 
 // Form Label
-$form-label-color: #666 !default;
+$form-label-color: $brand-inverse !default;
 $form-label-size: $font-size-default !default;
 $form-label-weight: $font-weight-semibold !default;
 $form-label-gutter: 8px !default;
@@ -210,6 +211,8 @@ $form-label-gutter: 8px !default;
 $form-input-height: auto !default;
 $form-input-padding-y: 8px !default;
 $form-input-padding-x: 10px !default;
+$form-input-static-padding-y: 8px !default;
+$form-input-static-padding-x: 0 !default;
 $form-input-font-size: $form-label-size !default;
 $form-input-line-height: $line-height-base !default;
 $form-input-border-radius: $border-radius-default !default;
@@ -218,20 +221,20 @@ $form-input-border-radius: $border-radius-default !default;
 $form-input-bg: #fff !default;
 $form-input-bg-focus: #fff !default;
 $form-input-bg-hover: $gray-primary !default;
-$form-input-bg-disabled: $gray-lighter !default;
+$form-input-bg-disabled: $bg-color !default;
 $form-input-color: $font-color-default !default;
 $form-input-focus-color: $form-input-color !default;
-$form-input-disabled-color: $form-input-color !default;
-$form-input-placeholder-color: $gray-light !default;
-$form-input-border-color: $border-color-default !default;
+$form-input-disabled-color: #9da1a8 !default;
+$form-input-placeholder-color: #6c717c !default;
+$form-input-border-color: $gray-primary !default;
 $form-input-border-focus-color: $brand-primary !default;
 
 // Form Input Static styling
-$form-input-static-border-color: #f0f0ee !default;
+$form-input-static-border-color: $gray-primary !default;
 
 // Form Group
-$form-group-margin-bottom: 15px !default;
-$form-group-gutter: 15px !default;
+$form-group-margin-bottom: 16px !default;
+$form-group-gutter: 16px !default;
 
 //== Buttons
 //## Define background-color, border-color and text. Used in components/buttons
@@ -251,13 +254,13 @@ $btn-warning-bg: $brand-warning !default;
 $btn-danger-bg: $brand-danger !default;
 
 // Button Border Color
-$btn-default-border-color: $brand-default !default;
-$btn-inverse-border-color: $btn-inverse-bg !default;
-$btn-primary-border-color: $btn-primary-bg !default;
-$btn-info-border-color: $btn-info-bg !default;
-$btn-success-border-color: $btn-success-bg !default;
-$btn-warning-border-color: $btn-warning-bg !default;
-$btn-danger-border-color: $btn-danger-bg !default;
+$btn-default-border-color: $gray-primary !default;
+$btn-inverse-border-color: $brand-inverse !default;
+$btn-primary-border-color: $brand-primary !default;
+$btn-info-border-color: $brand-info !default;
+$btn-success-border-color: $brand-success !default;
+$btn-warning-border-color: $brand-warning !default;
+$btn-danger-border-color: $brand-danger !default;
 
 // Button Text Color
 $btn-default-color: $brand-primary !default;
@@ -267,6 +270,9 @@ $btn-info-color: #fff !default;
 $btn-success-color: #fff !default;
 $btn-warning-color: #fff !default;
 $btn-danger-color: #fff !default;
+
+// Button Icon Color
+$btn-default-icon-color: $gray !default;
 
 // Button Background Color
 $btn-default-bg-hover: $btn-default-border-color !default;
@@ -280,7 +286,7 @@ $btn-link-bg-hover: $gray-lighter !default;
 
 //== Header blocks
 //## Define look and feel over multible building blocks that serve as header
-$header-bg-color: $bg-color-secondary !default;
+$header-bg-color: $bg-color !default;
 $header-text-color: #fff !default;
 $header-text-color-detail: rgba(0, 0, 0, 0.2) !default;
 
@@ -354,7 +360,7 @@ $listview-padding-bottom: 15px !default;
 $listview-padding-left: 15px !default;
 
 // Background Colors
-$grid-bg: #fff !default;
+$grid-bg: transparent !default;
 $grid-bg-header: transparent !default; // Grid Headers
 $grid-bg-hover: mix($grid-border-color, #fff, 20%) !default;
 $grid-bg-selected: mix($grid-border-color, #fff, 30%) !default;
@@ -383,14 +389,14 @@ $grid-paging-color-hover: $brand-primary !default;
 // Text Color
 $tabs-color: $font-color-detail !default;
 $tabs-color-active: $font-color-default !default;
-$tabs-lined-color-active: $brand-primary !default;
+$tabs-lined-color-active: $font-color-default !default;
 
 // Border Color
 $tabs-border-color: $border-color-default !default;
 $tabs-lined-border-color: $brand-primary !default;
 
 // Background Color
-$tabs-bg: #fff !default;
+$tabs-bg: transparent !default;
 $tabs-bg-hover: lighten($tabs-border-color, 5) !default;
 $tabs-bg-active: $brand-primary !default;
 
@@ -471,7 +477,7 @@ $label-danger-color: #fff !default;
 //## Default variables for Groupbox Widget (used in components/groupbox)
 
 // Background Color
-$groupbox-default-bg: $brand-default !default;
+$groupbox-default-bg: $gray-primary !default;
 $groupbox-inverse-bg: $brand-inverse !default;
 $groupbox-primary-bg: $brand-primary !default;
 $groupbox-info-bg: $brand-info !default;
@@ -523,33 +529,33 @@ $timeline-icon-size: 18px;
 //## Advanced layout options (used in base/mixins/default-spacing)
 
 // Small spacing
-$spacing-small: 5px !default;
+$spacing-small: 8px !default;
 
 // Medium spacing
-$spacing-medium: 15px !default;
-$t-spacing-medium: 15px !default;
-$m-spacing-medium: 15px !default;
+$spacing-medium: 16px !default;
+$t-spacing-medium: 16px !default;
+$m-spacing-medium: 16px !default;
 
 // Large spacing
-$spacing-large: 30px !default;
-$t-spacing-large: 30px !default;
-$m-spacing-large: 15px !default;
+$spacing-large: 24px !default;
+$t-spacing-large: 24px !default;
+$m-spacing-large: 16px !default;
 
 // Layout spacing
-$layout-spacing-top: 30px !default;
-$layout-spacing-right: 30px !default;
-$layout-spacing-bottom: 30px !default;
-$layout-spacing-left: 30px !default;
+$layout-spacing-top: 24px !default;
+$layout-spacing-right: 24px !default;
+$layout-spacing-bottom: 24px !default;
+$layout-spacing-left: 24px !default;
 
-$t-layout-spacing-top: 30px !default;
-$t-layout-spacing-right: 30px !default;
-$t-layout-spacing-bottom: 30px !default;
-$t-layout-spacing-left: 30px !default;
+$t-layout-spacing-top: 24px !default;
+$t-layout-spacing-right: 24px !default;
+$t-layout-spacing-bottom: 24px !default;
+$t-layout-spacing-left: 24px !default;
 
-$m-layout-spacing-top: 15px !default;
-$m-layout-spacing-right: 15px !default;
-$m-layout-spacing-bottom: 15px !default;
-$m-layout-spacing-left: 15px !default;
+$m-layout-spacing-top: 16px !default;
+$m-layout-spacing-right: 16px !default;
+$m-layout-spacing-bottom: 16px !default;
+$m-layout-spacing-left: 16px !default;
 
 // Combined layout spacing
 $layout-spacing: $layout-spacing-top $layout-spacing-right $layout-spacing-bottom $layout-spacing-left !default;
@@ -557,7 +563,7 @@ $m-layout-spacing: $m-layout-spacing-top $m-layout-spacing-right $m-layout-spaci
 $t-layout-spacing: $t-layout-spacing-top $t-layout-spacing-right $t-layout-spacing-bottom $t-layout-spacing-left !default;
 
 // Gutter size
-$gutter-size: 15px !default;
+$gutter-size: 8px !default;
 
 //== Tables
 //## Table spacing options (used in components/tables)
