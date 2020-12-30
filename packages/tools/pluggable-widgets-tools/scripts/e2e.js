@@ -134,6 +134,10 @@ async function exists(filePath) {
 
 async function getLatestMendixVersion() {
     let latestMendixVersion;
+
+    if (process.env.MENDIX_VERSION !== "") {
+        return process.env.MENDIX_VERSION;
+    }
     try {
         const dockerTagsResponse = await fetch(
             "https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags"
