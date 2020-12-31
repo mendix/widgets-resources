@@ -25,6 +25,8 @@ export function getProperties(values: DatagridDateFilterPreviewProps, defaultPro
 export const getPreview = (values: DatagridDateFilterPreviewProps): StructurePreviewProps => {
     return {
         type: "RowLayout",
+        borders: true,
+        borderRadius: 5,
         columnSize: "grow",
         children: [
             {

@@ -28,6 +28,8 @@ export const getPreview = (values: DatagridTextFilterPreviewProps): StructurePre
     return {
         type: "RowLayout",
         columnSize: "grow",
+        borders: true,
+        borderRadius: 5,
         children: [
             {
                 type: "RowLayout",

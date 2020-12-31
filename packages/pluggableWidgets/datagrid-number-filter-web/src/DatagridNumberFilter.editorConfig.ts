@@ -24,6 +24,8 @@ export function getProperties(values: DatagridNumberFilterPreviewProps, defaultP
 export const getPreview = (values: DatagridNumberFilterPreviewProps): StructurePreviewProps => {
     return {
         type: "RowLayout",
+        borders: true,
+        borderRadius: 5,
         columnSize: "grow",
         children: [
             {
