@@ -39,26 +39,26 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
 }
 
 export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps => {
-    const columnProps: ColumnsPreviewType[] =
-        values.columns && values.columns.length > 0
-            ? values.columns
-            : [
-                  {
-                      header: "Header",
-                      attribute: "Attribute",
-                      width: "autoFit",
-                      columnClass: "",
-                      filter: { widgetCount: 0, renderer: () => null },
-                      resizable: false,
-                      hasWidgets: false,
-                      content: { widgetCount: 0, renderer: () => null },
-                      draggable: false,
-                      hidable: "no",
-                      size: 1,
-                      sortable: false,
-                      alignment: "left"
-                  }
-              ];
+    const hasColumns = values.columns && values.columns.length > 0;
+    const columnProps: ColumnsPreviewType[] = hasColumns
+        ? values.columns
+        : [
+              {
+                  header: "Header",
+                  attribute: "Attribute",
+                  width: "autoFit",
+                  columnClass: "",
+                  filter: { widgetCount: 0, renderer: () => null },
+                  resizable: false,
+                  hasWidgets: false,
+                  content: { widgetCount: 0, renderer: () => null },
+                  draggable: false,
+                  hidable: "no",
+                  size: 1,
+                  sortable: false,
+                  alignment: "left"
+              }
+          ];
     const columns: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -118,7 +118,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                             }
                         ]
                     },
-                    ...(values.columnsFilterable
+                    ...(hasColumns && values.columnsFilterable
                         ? [
                               {
                                   type: "DropZone",
@@ -157,7 +157,6 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         : [];
     return {
         type: "Container",
-        borders: true,
         children: [headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
     };
 };
