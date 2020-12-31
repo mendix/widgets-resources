@@ -3,11 +3,12 @@
 
    Used in default forms
 ========================================================================== */
-.form {
+.formblock {
+   display: block;
 }
 
 //== Elements
 //-------------------------------------------------------------------------------------------------------------------//
-.form-title {
-    
+.formblock-title {
+   border-bottom: 1px solid $border-color-default;
 }

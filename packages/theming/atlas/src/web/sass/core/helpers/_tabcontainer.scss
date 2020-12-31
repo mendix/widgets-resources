@@ -21,7 +21,7 @@
         & > li > a {
             margin-right: $spacing-small;
             color: $tabs-color;
-            border-radius: 4px;
+            border-radius: $border-radius-default;
             background-color: $tabs-bg-pills;
 
             &:hover,
@@ -47,8 +47,6 @@
 
         li {
             margin-right: $spacing-large;
-            //updated margin to 8 bit grid
-            //margin-bottom: 1px;
 
             & > a {
                 padding: 16px 0 15px 0; // border is 3px

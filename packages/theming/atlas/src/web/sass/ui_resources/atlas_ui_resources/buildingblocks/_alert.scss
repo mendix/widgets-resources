@@ -12,10 +12,10 @@
 ========================================================================== */
 
 .alert {
-    margin-top: 0; // want to align it with padding of a page
-    padding: 15px;
+    margin-top: 0;
+    padding: $spacing-medium;
     border: 1px solid;
-    border-radius: 4px;
+    border-radius: $border-radius-default;
 }
 
 .alert-icon{
@@ -67,6 +67,6 @@
 //## Styling when component is in certain state
 //-------------------------------------------------------------------------------------------------------------------//
 .has-error .alert {
-    margin-top: 8px;
+    margin-top: $spacing-small;
     margin-bottom: 0;
 }

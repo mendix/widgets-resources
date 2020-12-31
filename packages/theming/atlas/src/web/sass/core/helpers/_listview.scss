@@ -104,19 +104,19 @@
 
 .listview-sm.mx-listview {
     & > ul > li {
-        padding:  $spacing-small $spacing-small $spacing-small $spacing-small;
+        padding:  $spacing-small;
     }
 }
 
 .listview-md.mx-listview {
     & > ul > li {
-        padding:  $spacing-medium $spacing-medium $spacing-medium $spacing-medium;
+        padding:  $spacing-medium;
     }
 }
 
 .listview-lg.mx-listview {
     & > ul > li {
-        padding:  $spacing-large $spacing-large $spacing-large $spacing-large;
+        padding:  $spacing-large;
     }
 }
 
