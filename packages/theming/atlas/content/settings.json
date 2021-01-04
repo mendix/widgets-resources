@@ -278,6 +278,12 @@
                         "class": "background-brand-gradient"
                     }
                 ]
+            },
+            {
+                "name": "Elevated",
+                "type": "Toggle",
+                "description": "Add a box shadow to elevate the element.",
+                "class": "shadow"
             }
         ],
         "Button": [

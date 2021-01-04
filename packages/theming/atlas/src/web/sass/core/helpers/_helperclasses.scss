@@ -343,3 +343,7 @@ $important-helpers-value: if($important-helpers, " !important", "");
         display: table-cell #{$important-helpers-value};
     }
 }
+
+.shadow{
+    box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05) #{$important-helpers-value};
+}
