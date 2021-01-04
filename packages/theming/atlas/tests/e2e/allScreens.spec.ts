@@ -5,7 +5,8 @@ const xmlParser = require("fast-xml-parser");
 
 // For every module mx exports a folder, and in that folder we have bunch of xml's
 // which might contain an URL field
-const individualPageFolders = join(cwd, "tests/testProject/deployment/web/pages/en_US");
+const testPageFolders = join(cwd, "tests/testProject/deployment/web/pages/en_US");
+const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 
 // TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failiure
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
@@ -31,31 +32,56 @@ function* getFilePaths(dir) {
     }
 }
 
-describe("Screenshots of the pages for", () => {
-    beforeAll(() => {
-        browser.url("/");
-    });
-
-    for (const filePath of getFilePaths(individualPageFolders)) {
+function pageUrls(folder) {
+    const pageUrls = [];
+    for (const filePath of getFilePaths(folder)) {
         const file = fs.readFileSync(filePath, { encoding: "utf8" });
         if (xmlParser.validate(file) === true) {
             const jsonObj = xmlParser.parse(file, { ignoreAttributes: false });
             const url = jsonObj["m:page"]?.["@_url"];
             if (url) {
-                it(`matches snapshot for page ${url}`, () => {
-                    if (!pagesToSkip.includes(url)) {
-                        browser.url(url); // Open the page
-                        expect(
-                            browser.checkFullPageScreen(url, {
-                                disableCSSAnimation: true,
-                                ignoreAntialiasing: true,
-                                ignoreTransparentPixel: true,
-                                largeImageThreshold: 3000
-                            }) // take screenshot
-                        ).toEqual(0);
-                    }
-                });
+                pageUrls.push(url);
             }
         }
     }
+    return pageUrls;
+}
+
+function cleanUnusedScreenshotBases() {
+    const urls = pageUrls(testPageFolders);
+    // console.log(urls);
+    for (const filePath of getFilePaths(screenShotsFolder)) {
+        console.log(urls.filter(url => filePath.includes(url)).length);
+        if (urls.filter(url => filePath.includes(url)).length === 0) {
+            console.log(`${filePath} is deprecated and will be deleted`);
+            fs.rmSync(filePath);
+        }
+    }
+}
+
+describe("Screenshots of the pages for", () => {
+    beforeAll(() => {
+        browser.url("/");
+    });
+
+    for (const url of pageUrls(testPageFolders)) {
+        if (url) {
+            it(`matches snapshot for page ${url}`, () => {
+                if (!pagesToSkip.includes(url)) {
+                    browser.url(url); // Open the page
+                    expect(true).toBeTruthy();
+                    expect(
+                        browser.checkFullPageScreen(url, {
+                            disableCSSAnimation: true,
+                            ignoreAntialiasing: true
+                        }) // take screenshot
+                    ).toEqual(0);
+                }
+            });
+        }
+    }
+
+    afterAll(() => {
+        cleanUnusedScreenshotBases();
+    });
 });

@@ -1,0 +1,11 @@
+{
+    "extends": "../../../../configs/e2e/tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "module": "commonjs",
+        "lib": ["es2015"],
+        "target": "es2015",
+        "rootDir": "./"
+    },
+    "include": ["./"]
+}
