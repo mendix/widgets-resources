@@ -116,12 +116,12 @@
 .widget-timeline-no-divider {
 }
 
-.widget-eventTime{
+.widget-eventTime {
     @extend h5;
     color: $timeline-event-time-color;
 }
 
-.timeline-entry-image{
+.timeline-entry-image {
     display: flex;
     justify-content: center;
     align-content: center;
