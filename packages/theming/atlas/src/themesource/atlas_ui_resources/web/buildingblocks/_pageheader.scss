@@ -5,13 +5,6 @@
 //== Default
 //-------------------------------------------------------------------------------------------------------------------//
 .pageheader {
-    border-bottom: 1px solid $border-color-default;
-}
-
-// Check if it is part of a inner layoutgrid
-.mx-scrollcontainer .mx-placeholder .mx-layoutgrid .pageheader {
-    @include get-responsive-spacing-large($type: margin, $direction: bottom);
-    @include get-responsive-spacing-large($type: padding, $direction: bottom);
 }
 
 //== Elements
