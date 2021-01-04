@@ -32,7 +32,7 @@ async function main() {
     const packageConf = JSON.parse(await readFile("package.json"));
     const widgetVersion = packageConf?.version;
 
-    if (packageConf?.name !== "@mendix/atlas-ui") {
+    if (!process.argv.includes("--skip-mpk-check")) {
         const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
         if (!widgetMpk) {
             throw new Error(

@@ -77,7 +77,7 @@ function getRealCommand(cmd, toolsRoot) {
         case "test:e2e:web:dev":
             return `cross-env DEBUG=true wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
         case "test:e2e:web":
-            return `node ${join(toolsRoot, "scripts/e2e.js")}`;
+            return `node ${join(toolsRoot, "scripts/e2e.js")} $@`;
         case "start:js":
         case "start:ts":
             return "echo This command has no effect, use pluggable-widgets-tools start:web instead!";

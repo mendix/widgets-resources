@@ -19,12 +19,12 @@ const pagesToSkip = [
     "/p/pt_tablet_dashboard-user-detail"
 ];
 
-function* getFiles(dir) {
-    const files = fs.readdirSync(dir, { withFileTypes: true });
-    for (const file of files) {
+function* getFilePaths(dir) {
+    const directory = fs.readdirSync(dir, { withFileTypes: true });
+    for (const file of directory) {
         const res = resolve(dir, file.name);
         if (file.isDirectory()) {
-            yield* getFiles(res);
+            yield* getFilePaths(res);
         } else {
             yield res;
         }
@@ -36,10 +36,9 @@ describe("Screenshots of the pages for", () => {
         browser.url("/");
     });
 
-    for (const f of getFiles(individualPageFolders)) {
-        const file = fs.readFileSync(f, { encoding: "utf8" });
+    for (const filePath of getFilePaths(individualPageFolders)) {
+        const file = fs.readFileSync(filePath, { encoding: "utf8" });
         if (xmlParser.validate(file) === true) {
-            // optional (it'll return an object in case it's not valid)
             const jsonObj = xmlParser.parse(file, { ignoreAttributes: false });
             const url = jsonObj["m:page"]?.["@_url"];
             if (url) {
