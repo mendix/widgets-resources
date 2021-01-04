@@ -4,10 +4,10 @@ const cwd = process.cwd();
 const xmlParser = require("fast-xml-parser");
 
 // For every module mx exports a folder, and in that folder we have bunch of xml's
-// which might contains URL field
+// which might contain an URL field
 const individualPageFolders = join(cwd, "tests/testProject/deployment/web/pages/en_US");
 
-// Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failiure
+// TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failiure
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
 const pagesToSkip = [
     "/p/datagrid-manyrows",
@@ -22,11 +22,11 @@ const pagesToSkip = [
 function* getFilePaths(dir) {
     const directory = fs.readdirSync(dir, { withFileTypes: true });
     for (const file of directory) {
-        const res = resolve(dir, file.name);
+        const filePathRes = resolve(dir, file.name);
         if (file.isDirectory()) {
-            yield* getFilePaths(res);
+            yield* getFilePaths(filePathRes);
         } else {
-            yield res;
+            yield filePathRes;
         }
     }
 }
