@@ -21,17 +21,16 @@
     color: $header-text-color;
 }
 
-.headerhero-backgroundimage{
+.headerhero-backgroundimage {
     position: absolute;
     z-index: 0;
     top: 0;
     height: 100%;
     width: 100%;
     filter: $header-bgimage-filter;
-
 }
 
-.btn.headerhero-action{
+.btn.headerhero-action {
     color: $header-text-color;
 }
 }

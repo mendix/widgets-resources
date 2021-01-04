@@ -18,21 +18,22 @@
     border-radius: $border-radius-default;
 }
 
-.alert-icon{
+.alert-icon {
     font-size: $font-size-h3;
 }
 
-.alert-title{
+.alert-title {
     color: inherit;
 }
 
-.alert-description{
+.alert-description {
     color: inherit;
 }
 
 //Variations
 
-.alert-info, .alert{
+.alert-info,
+.alert {
     color: $alert-info-color;
     border-color: $alert-info-border-color;
     background-color: $alert-info-bg;

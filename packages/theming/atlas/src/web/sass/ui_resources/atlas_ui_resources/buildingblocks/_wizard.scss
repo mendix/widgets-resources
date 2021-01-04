@@ -1,12 +1,11 @@
-
 //Wizard
-.wizard{
+.wizard {
     display: flex;
     justify-content: space-between;
 }
 
 //Wizard step
-.wizard-step{
+.wizard-step {
     position: relative;
     width: 100%;
     display: flex;
@@ -51,7 +50,6 @@
         content: "";
         background-color: $wizard-default-border-color;
     }
-        
 }
 
 //Wizard arrow
@@ -113,7 +111,7 @@
 }
 .wizard-circle .wizard-step-visited {
     .wizard-step-number {
-        color:$wizard-visited-color;
+        color: $wizard-visited-color;
         border-color: $wizard-visited-border-color;
         background-color: $wizard-visited-bg;
     }
@@ -132,7 +130,7 @@
     }
 }
 
-.wizard-arrow  .wizard-step-visited {
+.wizard-arrow .wizard-step-visited {
     .wizard-step-text {
         color: $link-color;
     }

@@ -63,13 +63,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    //width: $timeline-icon-size;
-    //height: $timeline-icon-size;
     transform: translateX(-50%);
     .glyphicon {
         font-size: $timeline-icon-size;
     }
-    img{
+    img {
         max-width: 100%;
         max-height: 100%;
     }
@@ -97,7 +95,6 @@
     .widget-timeline-info-wrapper {
         flex: 1;
         order: 2;
-        
     }
 }
 
@@ -119,12 +116,12 @@
 .widget-timeline-no-divider {
 }
 
-.widget-eventTime{
+.widget-eventTime {
     @extend h5;
     color: $timeline-event-time-color;
 }
 
-.timeline-entry-image{
+.timeline-entry-image {
     display: flex;
     justify-content: center;
     align-content: center;
