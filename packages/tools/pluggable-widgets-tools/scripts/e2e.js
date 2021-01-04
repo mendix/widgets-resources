@@ -135,7 +135,7 @@ async function exists(filePath) {
 async function getLatestMendixVersion() {
     let latestMendixVersion;
 
-    if (process.env.MENDIX_VERSION !== "") {
+    if (process.env.MENDIX_VERSION) {
         return process.env.MENDIX_VERSION;
     }
     try {
