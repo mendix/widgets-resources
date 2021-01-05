@@ -1,6 +1,6 @@
 import { generateClientTypes } from "./generateClientTypes";
 import { generatePreviewTypes } from "./generatePreviewTypes";
-import { extractProperties } from "./helpers";
+import { extractProperties, extractSystemProperties } from "./helpers";
 import { WidgetXml } from "./WidgetXml";
 
 const mxExports = [
@@ -29,12 +29,11 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
 
     const isNative = widgetXml.widget.$.supportedPlatform === "Native";
 
-    const properties = (widgetXml.widget.properties.length > 0
-        ? extractProperties(widgetXml.widget.properties[0])
-        : []
-    ).filter(prop => prop && prop.$ && prop.$.key);
+    const propElements = widgetXml.widget.properties[0] ?? [];
+    const properties = extractProperties(propElements).filter(prop => prop?.$?.key);
+    const systemProperties = extractSystemProperties(propElements).filter(prop => prop?.$?.key);
 
-    const clientTypes = generateClientTypes(widgetName, properties, isNative);
+    const clientTypes = generateClientTypes(widgetName, properties, systemProperties, isNative);
     const modelerTypes = generatePreviewTypes(widgetName, properties);
 
     const generatedTypesCode = clientTypes
