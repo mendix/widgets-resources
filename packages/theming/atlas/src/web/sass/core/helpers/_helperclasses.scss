@@ -344,6 +344,6 @@ $important-helpers-value: if($important-helpers, " !important", "");
     }
 }
 
-.shadow{
+.shadow {
     box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05) #{$important-helpers-value};
 }
