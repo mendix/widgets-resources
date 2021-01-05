@@ -68,6 +68,13 @@
     }
 }
 
+.link-back {
+    color: $font-color-detail;
+    .glyphicon {
+        top: 2px;
+    }
+}
+
 // Images and icons in buttons
 .btn,
 .mx-button,

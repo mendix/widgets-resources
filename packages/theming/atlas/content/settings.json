@@ -9,20 +9,36 @@
                 "description": "The spacing above this element.",
                 "options": [
                     {
-                        "name": "None",
+                        "name": "Outer none",
+                        "oldNames": ["None"],
                         "class": "spacing-outer-top-none"
                     },
                     {
-                        "name": "Small",
+                        "name": "Outer small",
+                        "oldNames": ["Small"],
                         "class": "spacing-outer-top"
                     },
                     {
-                        "name": "Medium",
+                        "name": "Outer medium",
+                        "oldNames": ["Medium"],
                         "class": "spacing-outer-top-medium"
                     },
                     {
-                        "name": "Large",
+                        "name": "Outer large",
+                        "oldNames": ["Large"],
                         "class": "spacing-outer-top-large"
+                    },
+                    {
+                        "name": "Inner small",
+                        "class": "spacing-inner-top"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacing-inner-top-medium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacing-inner-top-large"
                     }
                 ]
             },
@@ -32,20 +48,36 @@
                 "description": "The spacing below this element.",
                 "options": [
                     {
-                        "name": "None",
+                        "name": "Outer none",
+                        "oldNames": ["None"],
                         "class": "spacing-outer-bottom-none"
                     },
                     {
-                        "name": "Small",
+                        "name": "Outer small",
+                        "oldNames": ["Small"],
                         "class": "spacing-outer-bottom"
                     },
                     {
-                        "name": "Medium",
+                        "name": "Outer medium",
+                        "oldNames": ["Medium"],
                         "class": "spacing-outer-bottom-medium"
                     },
                     {
-                        "name": "Large",
+                        "name": "Outer large",
+                        "oldNames": ["Large"],
                         "class": "spacing-outer-bottom-large"
+                    },
+                    {
+                        "name": "Inner small",
+                        "class": "spacing-inner-bottom"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacing-inner-bottom-medium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacing-inner-bottom-large"
                     }
                 ]
             },
@@ -55,20 +87,36 @@
                 "description": "The spacing to the left of this element.",
                 "options": [
                     {
-                        "name": "None",
+                        "name": "Outer none",
+                        "oldNames": ["None"],
                         "class": "spacing-outer-left-none"
                     },
                     {
-                        "name": "Small",
+                        "name": "Outer small",
+                        "oldNames": ["Small"],
                         "class": "spacing-outer-left"
                     },
                     {
-                        "name": "Medium",
+                        "name": "Outer medium",
+                        "oldNames": ["Medium"],
                         "class": "spacing-outer-left-medium"
                     },
                     {
-                        "name": "Large",
+                        "name": "Outer large",
+                        "oldNames": ["Large"],
                         "class": "spacing-outer-left-large"
+                    },
+                    {
+                        "name": "Inner small",
+                        "class": "spacing-inner-left"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacing-inner-left-medium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacing-inner-left-large"
                     }
                 ]
             },
@@ -78,20 +126,36 @@
                 "description": "The spacing to the right of this element.",
                 "options": [
                     {
-                        "name": "None",
+                        "name": "Outer none",
+                        "oldNames": ["None"],
                         "class": "spacing-outer-right-none"
                     },
                     {
-                        "name": "Small",
+                        "name": "Outer small",
+                        "oldNames": ["Small"],
                         "class": "spacing-outer-right"
                     },
                     {
-                        "name": "Medium",
+                        "name": "Outer medium",
+                        "oldNames": ["Medium"],
                         "class": "spacing-outer-right-medium"
                     },
                     {
-                        "name": "Large",
+                        "name": "Outer large",
+                        "oldNames": ["Large"],
                         "class": "spacing-outer-right-large"
+                    },
+                    {
+                        "name": "Inner small",
+                        "class": "spacing-inner-right"
+                    },
+                    {
+                        "name": "Inner medium",
+                        "class": "spacing-inner-right-medium"
+                    },
+                    {
+                        "name": "Inner large",
+                        "class": "spacing-inner-right-large"
                     }
                 ]
             },
@@ -177,19 +241,9 @@
                 "description": "Change the background color of the container.",
                 "options": [
                     {
-                        "name": "Brand Default",
-                        "oldNames": ["Default"],
-                        "class": "background-default"
-                    },
-                    {
                         "name": "Brand Primary",
                         "oldNames": ["Primary"],
                         "class": "background-primary"
-                    },
-                    {
-                        "name": "Brand Inverse",
-                        "oldNames": ["Inverse"],
-                        "class": "background-inverse"
                     },
                     {
                         "name": "Brand Info",
@@ -218,8 +272,18 @@
                     {
                         "name": "Background Dashboard",
                         "class": "background-secondary"
+                    },
+                    {
+                        "name": "Background Gradient",
+                        "class": "background-brand-gradient"
                     }
                 ]
+            },
+            {
+                "name": "Elevated",
+                "type": "Toggle",
+                "description": "Add a box shadow to elevate the element.",
+                "class": "shadow"
             }
         ],
         "Button": [
@@ -274,6 +338,10 @@
                 "description": "Change the appearance of rows in the list view.",
                 "options": [
                     {
+                        "name": "Lined",
+                        "class": "listview-lined"
+                    },
+                    {
                         "name": "Striped",
                         "class": "listview-striped"
                     },
@@ -282,8 +350,8 @@
                         "class": "listview-bordered"
                     },
                     {
-                        "name": "Lined",
-                        "class": "listview-lined"
+                        "name": "Seperated",
+                        "class": "listview-seperated"
                     },
                     {
                         "name": "No Styling",
@@ -305,6 +373,10 @@
                     {
                         "name": "Small",
                         "class": "listview-sm"
+                    },
+                    {
+                        "name": "Medium",
+                        "class": "listview-md"
                     },
                     {
                         "name": "Large",
@@ -815,6 +887,10 @@
                         "name": "Brand Danger",
                         "oldNames": ["Danger"],
                         "class": "text-danger"
+                    },
+                    {
+                        "name": "Text White",
+                        "class": "text-white"
                     }
                 ]
             },

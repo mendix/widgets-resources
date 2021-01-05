@@ -95,7 +95,7 @@ $font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,
 $font-family-base: "SFProDisplay", "Open Sans", sans-serif;
 
 // Font Sizes
-$font-size-large: 16px;
+$font-size-large: 18px;
 $font-size-small: 12px;
 
 // Font Weights
@@ -119,7 +119,7 @@ $font-weight-header: $font-weight-semibold;
 $line-height-base: 1.428571429;
 
 // Spacing
-$font-header-margin: 15px 0 30px 0;
+$font-header-margin: 0 0 8px 0;
 
 // Text Colors
 $font-color-detail: #6c717e;
@@ -286,7 +286,10 @@ $btn-link-bg-hover: $gray-lighter;
 
 //== Header blocks
 //## Define look and feel over multible building blocks that serve as header
-$header-bg-color: $bg-color;
+
+$header-min-height: 240px;
+$header-bg-color: $brand-primary;
+$header-bgimage-filter: brightness(60%);
 $header-text-color: #fff;
 $header-text-color-detail: rgba(0, 0, 0, 0.2);
 
@@ -338,7 +341,7 @@ $color-danger-dark: mix($brand-danger, black, 70%);
 $color-danger-light: mix($brand-danger, white, 60%);
 $color-danger-lighter: mix($brand-danger, white, 20%);
 
-$brand-gradient: linear-gradient(152deg, #0cc7f0 0%, #087ecc 51%, #077ac9 55%, #0659b9 78%);
+$brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
 
 //== Grids
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
@@ -348,16 +351,16 @@ $grid-border-color: $border-color-default;
 
 // Spacing
 // Default
-$grid-padding-top: 15px;
-$grid-padding-right: 15px;
-$grid-padding-bottom: 15px;
-$grid-padding-left: 15px;
+$grid-padding-top: 16px;
+$grid-padding-right: 16px;
+$grid-padding-bottom: 16px;
+$grid-padding-left: 16px;
 
 // Listview
-$listview-padding-top: 15px;
-$listview-padding-right: 15px;
-$listview-padding-bottom: 15px;
-$listview-padding-left: 15px;
+$listview-padding-top: 16px;
+$listview-padding-right: 16px;
+$listview-padding-bottom: 16px;
+$listview-padding-left: 16px;
 
 // Background Colors
 $grid-bg: transparent;
@@ -428,22 +431,49 @@ $dataview-emptymessage-color: $font-color-default;
 //## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
 
 // Background Color
-$alert-info-bg: $color-info-lighter;
+$alert-info-bg: $color-primary-lighter;
 $alert-success-bg: $color-success-lighter;
 $alert-warning-bg: $color-warning-lighter;
 $alert-danger-bg: $color-danger-lighter;
 
 // Text Color
-$alert-info-color: $color-info-darker;
+$alert-info-color: $color-primary-darker;
 $alert-success-color: $color-success-darker;
 $alert-warning-color: $color-warning-darker;
 $alert-danger-color: $color-danger-darker;
 
 // Border Color
-$alert-info-border-color: $color-info-dark;
+$alert-info-border-color: $color-primary-dark;
 $alert-success-border-color: $color-success-dark;
 $alert-warning-border-color: $color-warning-dark;
 $alert-danger-border-color: $color-danger-dark;
+
+//== Wizard
+
+$wizard-step-height: 48px;
+$wizard-step-number-size: 64px;
+$wizard-step-number-font-size: $font-size-h3;
+
+//Wizard states
+$wizard-default: #fff;
+$wizard-active: $brand-primary;
+$wizard-visited: $brand-success;
+
+//Wizard step states
+$wizard-default-bg: $wizard-default;
+$wizard-default-color: $wizard-default;
+$wizard-default-step-color: $font-color-default;
+$wizard-default-border-color: $border-color-default;
+
+$wizard-active-bg: $wizard-active;
+$wizard-active-color: $wizard-default;
+$wizard-active-step-color: $wizard-active;
+$wizard-active-border-color: $wizard-active;
+
+$wizard-visited-bg: $wizard-visited;
+$wizard-visited-color: $wizard-default;
+$wizard-visited-step-color: $wizard-visited;
+$wizard-visited-border-color: $wizard-visited;
 
 //== Labels
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
@@ -519,12 +549,16 @@ $callout-danger-bg: $color-danger-lighter;
 // Colors
 $timeline-icon-color: $brand-primary;
 $timeline-border-color: $border-color-default;
-
-$timeline-color-header: $font-color-header;
-$timeline-color-detail: $font-color-detail;
+$timeline-event-time-color: $brand-primary;
 
 // Sizes
 $timeline-icon-size: 18px;
+$timeline-image-size: 36px;
+
+//Timeline grouping
+$timeline-grouping-size: 120px;
+$timeline-grouping-border-radius: 30px;
+$timeline-grouping-border-color: $timeline-border-color;
 
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)

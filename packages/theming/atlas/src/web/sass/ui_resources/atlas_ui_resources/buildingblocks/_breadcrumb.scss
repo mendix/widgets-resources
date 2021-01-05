@@ -26,8 +26,8 @@
 .breadcrumb-item + .breadcrumb-item {
     &::before {
         display: inline-block;
-        padding-right: 10px;
-        padding-left: 10px;
+        padding-right: $spacing-small;
+        padding-left: $spacing-small;
         content: "/";
         color: $gray-light;
     }
