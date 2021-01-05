@@ -86,3 +86,7 @@
 	path = packages/pluggableWidgets/datagrid-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = datagrid-web
+[submodule "packages/pluggableWidgets/datagrid-text-filter-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-text-filter-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-text-filter-web
