@@ -16,11 +16,11 @@
 
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
-$gray-darker: #3b4251;
-$gray-dark: #606671;
-$gray: #787d87;
-$gray-light: #6c7180;
-$gray-primary: #ced0d3;
+$gray-darker: #0A1325;
+$gray-dark: #474E5C;
+$gray: #787D87;
+$gray-light: #A9ACB3;
+$gray-primary: #E7E7E9;
 $gray-lighter: #f8f8f8;
 
 //== Step 1: Brand Colors
@@ -40,7 +40,7 @@ $brand-logo-width: 26px; // Only used for CSS brand logo
 
 // Default Font Size & Color
 $font-size-default: 14px;
-$font-color-default: #6c717e;
+$font-color-default: #0A1325;
 
 // Global Border Color
 $border-color-default: #ced0d3;
@@ -123,7 +123,7 @@ $font-header-margin: 0 0 8px 0;
 
 // Text Colors
 $font-color-detail: #6c717e;
-$font-color-header: #0a1326;
+$font-color-header: #0A1325;
 
 //== Navigation
 //## Used in components/navigation
@@ -202,7 +202,7 @@ $navtopbar-border-color: $topbar-border-color;
 $form-input-style: default;
 
 // Form Label
-$form-label-color: $brand-inverse;
+$form-label-color: $font-color-default;
 $form-label-size: $font-size-default;
 $form-label-weight: $font-weight-semibold;
 $form-label-gutter: 8px;
@@ -454,26 +454,22 @@ $wizard-step-height: 48px;
 $wizard-step-number-size: 64px;
 $wizard-step-number-font-size: $font-size-h3;
 
-//Wizard states
-$wizard-default: #fff;
-$wizard-active: $brand-primary;
-$wizard-visited: $brand-success;
-
 //Wizard step states
-$wizard-default-bg: $wizard-default;
-$wizard-default-color: $wizard-default;
+$wizard-default-bg: #fff;
+$wizard-default-color: #fff;
 $wizard-default-step-color: $font-color-default;
 $wizard-default-border-color: $border-color-default;
 
-$wizard-active-bg: $wizard-active;
-$wizard-active-color: $wizard-default;
-$wizard-active-step-color: $wizard-active;
-$wizard-active-border-color: $wizard-active;
+$wizard-active-bg: $color-primary-lighter;
+$wizard-active-color: $color-primary-dark;
+$wizard-active-step-color: $color-primary-dark;
+$wizard-active-border-color: $color-primary-dark;
 
-$wizard-visited-bg: $wizard-visited;
-$wizard-visited-color: $wizard-default;
-$wizard-visited-step-color: $wizard-visited;
-$wizard-visited-border-color: $wizard-visited;
+$wizard-visited-bg: $color-success-lighter;
+$wizard-visited-color: $color-success-dark;
+$wizard-visited-step-color: $color-success-dark;
+$wizard-visited-border-color: $color-success-dark;
+
 
 //== Labels
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
