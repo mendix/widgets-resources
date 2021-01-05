@@ -1,7 +1,13 @@
-import { Property } from "./WidgetXml";
+import { Property, SystemProperty } from "./WidgetXml";
 import { capitalizeFirstLetter, extractProperties } from "./helpers";
 
-export function generateClientTypes(widgetName: string, properties: Property[], isNative: boolean): string[] {
+export function generateClientTypes(
+    widgetName: string,
+    properties: Property[],
+    systemProperties: SystemProperty[],
+    isNative: boolean
+): string[] {
+    const isLabeled = systemProperties.some(p => p.$.key === "Label");
     const results = Array.of<string>();
     results.push(
         isNative
@@ -14,7 +20,12 @@ ${generateClientTypeBody(properties, true, results)}
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;${
+        isLabeled
+            ? `
+    id: string;`
+            : ``
+    }
 ${generateClientTypeBody(properties, false, results)}
 }`
     );
