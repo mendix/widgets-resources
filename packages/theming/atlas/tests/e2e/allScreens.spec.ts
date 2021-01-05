@@ -49,7 +49,6 @@ function pageUrls(folder) {
 
 function cleanUnusedScreenshotBases() {
     const urls = pageUrls(testPageFolders);
-    // console.log(urls);
     for (const filePath of getFilePaths(screenShotsFolder)) {
         console.log(urls.filter(url => filePath.includes(url)).length);
         if (urls.filter(url => filePath.includes(url)).length === 0) {
@@ -69,7 +68,6 @@ describe("Screenshots of the pages for", () => {
             it(`matches snapshot for page ${url}`, () => {
                 if (!pagesToSkip.includes(url)) {
                     browser.url(url); // Open the page
-                    expect(true).toBeTruthy();
                     expect(
                         browser.checkFullPageScreen(url, {
                             disableCSSAnimation: true,
