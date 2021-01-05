@@ -27,8 +27,7 @@ async function main() {
     }
     const atlasArchive = await getLatestAtlasArchive();
     rm("-rf", "tests/testProject/theme");
-    rm("-rf", "tests/testProject/widgets");
-    execSync(`unzip ${atlasArchive} -x '*.mpr' '*.xml' -d tests/testProject`);
+    execSync(`unzip -o ${atlasArchive} -x '*.mpr' '*.xml' -d tests/testProject`);
 }
 
 async function exists(filePath) {
