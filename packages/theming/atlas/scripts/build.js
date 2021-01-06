@@ -2,13 +2,13 @@ const { rm, cd } = require("shelljs");
 const { join } = require("path");
 const concurrently = require("concurrently");
 
-const mode = process.argv[2] || "production";
+const mode = process.argv[2] || "build";
 const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
 let outputDir;
 let projectDeployDir;
 
 switch (mode) {
-    case "test":
+    case "build":
         outputDir = join(__dirname, "../tests/testProject/theme");
         break;
     case "production":
@@ -18,8 +18,6 @@ switch (mode) {
         outputDir = MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "theme") : join(__dirname, "../dist/theme");
         projectDeployDir = MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "deployment/web") : null;
         break;
-    default:
-        throw new Error("No mode specified. Exiting now...");
 }
 
 console.info(`Building for ${mode}...`);

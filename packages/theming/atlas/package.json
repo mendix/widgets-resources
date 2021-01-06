@@ -6,10 +6,11 @@
     "bump:patch": "node ./scripts/bump-patch.js",
     "bump:minor": "node ./scripts/bump-minor.js",
     "bump:major": "node ./scripts/bump-major.js",
-    "release": "node ./scripts/build.js production",
+    "build": "node ./scripts/build.js",
     "start": "node ./scripts/build.js development",
+    "pretest:e2e:dev": "cross-env ATLAS_MX_PROJECT_PATH='./tests/testProject' node ./scripts/build.js",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "pretest:e2e:dev": "cross-env ATLAS_MX_PROJECT_PATH='./tests/testProject' node ./scripts/build.js test"
+    "release": "node ./scripts/build.js production"
   },
   "repository": {
     "type": "git",
