@@ -3,7 +3,7 @@ import { FloatingActionButtonPreviewProps } from "../typings/FloatingActionButto
 import { FABPrimarySVG } from "./assets/FloatingActionButton_Primary";
 
 const rowLayoutContainer: ContainerProps = { type: "Container", children: [] };
-let rowLayoutImage: ImageProps = {
+const rowLayoutImage: ImageProps = {
     type: "image",
     document: FABPrimarySVG(),
     data: "",
