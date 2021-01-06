@@ -10,6 +10,7 @@ let projectDeployDir;
 switch (mode) {
     case "build":
         outputDir = join(__dirname, "../tests/testProject/theme");
+        projectDeployDir = join(__dirname, "../tests/testProject/deployment/web");
         break;
     case "production":
         outputDir = join(__dirname, "../dist/theme");

@@ -16,3 +16,4 @@ detox/*.log
 mendixProject
 **/screenshot
 **/screenshot-results
+**/atlas/tests/testProject

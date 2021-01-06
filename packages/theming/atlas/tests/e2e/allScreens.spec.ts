@@ -12,14 +12,18 @@ const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
 const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
 
+// Mostly the pages with progressbar fails since it is not CSS animations for web -_-. So disableCSSAnimation wont work.
+// This ends up having unstable progress circle percentage
 const pagesWithTimeout = [
     "/p/datagrid-manyrows",
     "/p/progresscircle",
     "/p/pt_dashboard-expenses",
     "/p/pt_dashboard-metrics",
     "/p/pt_tablet_dashboard-metrics",
+    "/p/pt_tablet_dashboard-user-detail",
     "/p/bb_headers",
-    "/p/bb_cards"
+    "/p/bb_cards",
+    "/p/pt_dashboard-user-detail"
 ];
 
 describe("Screenshots of the pages for", () => {
@@ -33,25 +37,22 @@ describe("Screenshots of the pages for", () => {
                 browser.url(url); // Open the page
                 browser.setWindowRect(0, 0, 1920, 1200);
 
-                const elem = $(".sprintrFeedback__sidebar");
-                try {
-                    elem.waitForDisplayed({ timeout: 1000 });
-                } catch (e) {
-                    console.log("No sprintr feedback found for this page");
-                }
+                // These widgets are causing unstable tests due to their nature while loading the screen
+                const sprintrFeedbackWidget = $(".sprintrFeedback__sidebar");
+                const mapsWidget = $(".widget-leaflet-maps");
 
                 if (pagesWithTimeout.includes(url)) {
                     browser.pause(3000);
                 }
 
                 browser.saveElement($("#content"), url, {
-                    removeElements: [elem],
+                    removeElements: [sprintrFeedbackWidget, mapsWidget],
                     disableCSSAnimation: true,
                     hideScrollBars: true
                 });
                 expect(
                     browser.checkElement($("#content"), url, {
-                        removeElements: [elem],
+                        removeElements: [sprintrFeedbackWidget, mapsWidget],
                         disableCSSAnimation: true,
                         hideScrollBars: true
                     })
