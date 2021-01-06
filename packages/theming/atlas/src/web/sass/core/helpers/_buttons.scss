@@ -85,7 +85,7 @@
 }
 
 .btn-icon-right {
-    display: flex;
+    display: inline-flex;
     flex-direction: row-reverse;
     align-items: center;
     & > img,
