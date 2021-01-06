@@ -1,11 +1,11 @@
 import { ImageProps, ContainerProps } from "@widgets-resources/piw-utils";
 import { FloatingActionButtonPreviewProps } from "../typings/FloatingActionButtonProps";
-import { FABPrimarySVG } from "./assets/FloatingActionButton_Primary";
+import { FloatingActionButtonPrimarySVG } from "./assets/FloatingActionButtonPrimary";
 
 const rowLayoutContainer: ContainerProps = { type: "Container", children: [] };
 const rowLayoutImage: ImageProps = {
     type: "image",
-    document: FABPrimarySVG(),
+    document: FloatingActionButtonPrimarySVG(),
     data: "",
     width: 56,
     height: 56

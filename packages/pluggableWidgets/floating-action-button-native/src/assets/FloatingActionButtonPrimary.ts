@@ -1,4 +1,4 @@
-export const FABPrimarySVG = () =>
+export const FloatingActionButtonPrimarySVG = () =>
     `<svg width="56px" height="56px" viewBox="0 0 56 56" version="1.1" xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink">
         <title>Floating Action Button/Primary</title>
