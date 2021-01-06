@@ -32,8 +32,6 @@ async function main() {
     const packageConf = JSON.parse(await readFile("package.json"));
     const widgetVersion = packageConf?.version;
 
-    // TODO [https://mendix.atlassian.net/browse/WT-3111]: Use this flag via `"test:e2e": "pluggable-widgets-tools test:e2e:web --skip-mpk-check"` in atlas package.json
-    // When they released a working 9.x docker image
     if (!process.argv.includes("--skip-mpk-check")) {
         const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
         if (!widgetMpk) {
