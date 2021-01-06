@@ -1,4 +1,4 @@
-## Mendix Atlas UI
+# Mendix Atlas UI
 
 Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework visit the [website](https://atlas.mendix.com/).
 

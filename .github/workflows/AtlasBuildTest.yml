@@ -1,9 +1,6 @@
 name: Testing Atlas Build
 
 on:
-    push:
-        paths:
-            - "packages/theming/atlas/**"
     pull_request:
         paths:
             - "packages/theming/atlas/**"
@@ -20,7 +17,9 @@ jobs:
                   submodules: false
             - name: "Installing dependencies"
               run: npm install
-            - name: "Changing to Atlas directory"
-              run: cd packages/theming/atlas
             - name: "Running Atlas build"
-              run: npm run build
+              run: |
+                  pwd
+                  cd packages/theming/atlas
+                  pwd
+                  npm run build
