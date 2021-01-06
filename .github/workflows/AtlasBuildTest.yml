@@ -4,9 +4,6 @@ on:
     push:
         paths:
             - "packages/theming/atlas/**"
-    pull_request:
-        paths:
-            - "packages/theming/atlas/**"
 
 jobs:
     test:
