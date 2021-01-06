@@ -10,15 +10,60 @@ const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 
 // TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failiure
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
-const pagesToSkip = [
+const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
+
+const pagesWithTimeout = [
     "/p/datagrid-manyrows",
-    "/p/chat-fullheight/{Id}",
-    "/p/chat-variants/{Id}",
+    "/p/progresscircle",
+    "/p/pt_dashboard-expenses",
     "/p/pt_dashboard-metrics",
-    "/p/pt_dashboard-user-detail",
     "/p/pt_tablet_dashboard-metrics",
-    "/p/pt_tablet_dashboard-user-detail"
+    "/p/bb_headers",
+    "/p/bb_cards"
 ];
+
+describe("Screenshots of the pages for", () => {
+    beforeAll(() => {
+        browser.url("/");
+    });
+
+    for (const url of pageUrls(testPageFolders)) {
+        if (url && !pagesToSkip.includes(url)) {
+            it(`matches snapshot for page ${url}`, () => {
+                browser.url(url); // Open the page
+                browser.setWindowRect(0, 0, 1920, 1200);
+
+                const elem = $(".sprintrFeedback__sidebar");
+                try {
+                    elem.waitForDisplayed({ timeout: 1000 });
+                } catch (e) {
+                    console.log("No sprintr feedback found for this page");
+                }
+
+                if (pagesWithTimeout.includes(url)) {
+                    browser.pause(3000);
+                }
+
+                browser.saveElement($("#content"), url, {
+                    removeElements: [elem],
+                    disableCSSAnimation: true,
+                    hideScrollBars: true
+                });
+                expect(
+                    browser.checkElement($("#content"), url, {
+                        removeElements: [elem],
+                        disableCSSAnimation: true,
+                        hideScrollBars: true
+                    })
+                ).toEqual(0);
+            });
+        }
+    }
+
+    afterAll(() => {
+        cleanUnusedScreenshotBases();
+    });
+});
 
 function* getFilePaths(dir) {
     const directory = fs.readdirSync(dir, { withFileTypes: true });
@@ -50,36 +95,13 @@ function pageUrls(folder) {
 function cleanUnusedScreenshotBases() {
     const urls = pageUrls(testPageFolders);
     for (const filePath of getFilePaths(screenShotsFolder)) {
-        console.log(urls.filter(url => filePath.includes(url)).length);
         if (urls.filter(url => filePath.includes(url)).length === 0) {
             console.log(`${filePath} is deprecated and will be deleted`);
-            fs.rmSync(filePath);
+            try {
+                fs.rmSync(filePath);
+            } catch (e) {
+                console.warn(filePath, " couldnt removed. Error: ", e);
+            }
         }
     }
 }
-
-describe("Screenshots of the pages for", () => {
-    beforeAll(() => {
-        browser.url("/");
-    });
-
-    for (const url of pageUrls(testPageFolders)) {
-        if (url) {
-            it(`matches snapshot for page ${url}`, () => {
-                if (!pagesToSkip.includes(url)) {
-                    browser.url(url); // Open the page
-                    expect(
-                        browser.checkFullPageScreen(url, {
-                            disableCSSAnimation: true,
-                            ignoreAntialiasing: true
-                        }) // take screenshot
-                    ).toEqual(0);
-                }
-            });
-        }
-    }
-
-    afterAll(() => {
-        cleanUnusedScreenshotBases();
-    });
-});
