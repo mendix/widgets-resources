@@ -4,7 +4,7 @@ import { FloatingActionButtonPreviewProps } from "../typings/FloatingActionButto
 const rowLayoutContainer: ContainerProps = { type: "Container", children: [] };
 const rowLayoutImage: ImageProps = {
     type: "Image",
-    document: require("./assets/FloatingActionButton_Primary.svg"),
+    document: require("./assets/StructurePreviewFloatingActionButtonPrimary.svg"),
     data: "",
     width: 32,
     height: 32
