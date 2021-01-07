@@ -60,11 +60,23 @@ concurrently(
                   }
               ]
             : []
-    )
+    ),
+    {
+        prefix: "name",
+        killOthers: ["failure"]
+    }
+).then(
+    success => {
+        console.log("Success", success);
+    },
+    failure => {
+        console.error("Failure", failure);
+        process.exit(-1);
+    }
 );
 
 function command(command) {
-    return function(outputPath) {
+    return function (outputPath) {
         return `${command} '${outputPath}'`;
     };
 }
