@@ -16,6 +16,7 @@ import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
 import livereload from "rollup-plugin-livereload";
 import sass from "rollup-plugin-sass";
+import svg from "rollup-plugin-svg";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
@@ -132,6 +133,7 @@ export default async args => {
             },
             treeshake: { moduleSideEffects: false },
             plugins: [
+                svg(),
                 ...getCommonPlugins({
                     sourceMaps: false,
                     extensions: webExtensions,
