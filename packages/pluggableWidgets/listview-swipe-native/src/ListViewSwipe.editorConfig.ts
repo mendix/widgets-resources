@@ -1,10 +1,11 @@
-import { StructurePreviewProps, RowLayoutProps } from "@widgets-resources/piw-utils";
+import { StructurePreviewProps, RowLayoutProps, ContainerProps } from "@widgets-resources/piw-utils";
 import { ReactNode } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
 
-const rowLayoutContainer = (property: ReactNode): StructurePreviewProps => ({
+const rowLayoutContainer = (property: ReactNode): ContainerProps => ({
     type: "Container",
     borders: true,
+    backgroundColor: "#F5F5F5",
     children: [
         {
             type: "DropZone",
