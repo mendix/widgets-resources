@@ -32,7 +32,7 @@ describe("Screenshots of the pages for", () => {
     });
 
     for (const url of pageUrls(testPageFolders)) {
-        if (url && !pagesToSkip.includes(url)) {
+        if (!pagesToSkip.includes(url)) {
             it(`matches snapshot for page ${url}`, () => {
                 browser.url(url); // Open the page
                 browser.setWindowRect(0, 0, 1920, 1200);

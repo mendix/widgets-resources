@@ -32,7 +32,7 @@ async function main() {
     const packageConf = JSON.parse(await readFile("package.json"));
     const widgetVersion = packageConf?.version;
 
-    if (!process.argv.includes("--skip-mpk-check")) {
+    if (!process.argv.includes("--no-widget-update")) {
         const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
         if (!widgetMpk) {
             throw new Error(
