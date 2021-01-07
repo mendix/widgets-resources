@@ -67,7 +67,6 @@
     "react-native": "0.63.3",
     "react-native-testing-library": "^6.0.0",
     "react-test-renderer": "~17.0.1",
-    "rollup-plugin-svg": "^2.0.0",
     "scheduler": "^0.20.1",
     "ts-node": "^9.0.0",
     "zip-folder": "^1.0.0"
