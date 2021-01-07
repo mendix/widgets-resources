@@ -4,11 +4,11 @@ import { FloatingActionButtonPrimarySVG } from "./assets/FloatingActionButtonPri
 
 const rowLayoutContainer: ContainerProps = { type: "Container", children: [] };
 const rowLayoutImage: ImageProps = {
-    type: "image",
+    type: "Image",
     document: FloatingActionButtonPrimarySVG(),
     data: "",
-    width: 56,
-    height: 56
+    width: 32,
+    height: 32
 };
 
 export const getPreview = (values: FloatingActionButtonPreviewProps) => ({
