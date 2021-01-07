@@ -1,4 +1,5 @@
 import { RowLayoutProps } from "@widgets-resources/piw-utils";
+import StructurePreviewActivityIndicatorPrimarySVG from "./assets/StructurePreviewActivityIndicatorPrimary.svg";
 
 export const getPreview = (): RowLayoutProps => ({
     type: "RowLayout",
@@ -8,8 +9,9 @@ export const getPreview = (): RowLayoutProps => ({
     children: [
         {
             type: "Image",
-            document: require("./assets/StructurePreviewActivityIndicatorPrimary.svg"),
-            data: "",
+            document: decodeURIComponent(
+                StructurePreviewActivityIndicatorPrimarySVG.replace("data:image/svg+xml,", "")
+            ),
             width: 24,
             height: 24,
             padding: 8
