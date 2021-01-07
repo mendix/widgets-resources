@@ -62,7 +62,6 @@ concurrently(
             : []
     ),
     {
-        prefix: "name",
         killOthers: ["failure"]
     }
 ).then(
