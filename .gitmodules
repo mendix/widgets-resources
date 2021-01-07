@@ -90,3 +90,7 @@
 	path = packages/pluggableWidgets/datagrid-text-filter-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = datagrid-text-filter-web
+[submodule "packages/pluggableWidgets/datagrid-number-filter-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-number-filter-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-number-filter-web
