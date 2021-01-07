@@ -1,4 +1,4 @@
-import { RowLayoutProps } from "../../../tools/piw-utils/src/typings";
+import { RowLayoutProps } from "@widgets-resources/piw-utils";
 
 export const getPreview = (): RowLayoutProps => ({
     type: "RowLayout",
