@@ -2,6 +2,11 @@ name: Testing Atlas Build
 
 on:
     push:
+        branches: [master]
+        paths:
+            - "packages/theming/atlas/**"
+    pull_request:
+        branches: [master]
         paths:
             - "packages/theming/atlas/**"
 
