@@ -15,14 +15,10 @@ export const getPreview = (values: FloatingActionButtonPreviewProps) => ({
     borders: false,
     padding: 8,
     columnSize: "grow",
-    children: (() => {
-        switch (values.horizontalPosition) {
-            case "left":
-                return [rowLayoutImage];
-            case "center":
-                return [rowLayoutContainer, rowLayoutImage, rowLayoutContainer];
-            case "right":
-                return [rowLayoutContainer, rowLayoutImage];
-        }
-    })()
+    children:
+        values.horizontalPosition === "left"
+            ? [rowLayoutImage]
+            : values.horizontalPosition === "center"
+            ? [rowLayoutContainer, rowLayoutImage, rowLayoutContainer]
+            : [rowLayoutContainer, rowLayoutImage]
 });
