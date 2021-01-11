@@ -43,7 +43,6 @@ table.dijitInline {
     /* To inline tables with a given width set */
     display: inline-table;
     box-sizing: content-box;
-    -moz-box-sizing: content-box;
 }
 
 .dijitHidden {
@@ -607,12 +606,6 @@ div.dijitArrowButton {
     height: auto !important;
 }
 .dijitSpinner .dijitArrowButtonInner .dijitInputField {
-    -moz-transform: scale(0.5);
-    -moz-transform-origin: center top;
-    -webkit-transform: scale(0.5);
-    -webkit-transform-origin: center top;
-    -o-transform: scale(0.5);
-    -o-transform-origin: center top;
     transform: scale(0.5);
     transform-origin: left top;
     padding-top: 0;
@@ -967,9 +960,7 @@ body .dijitAlignClient {
 .dijitSplitContainerVirtualSizerV {
     font-size: 1px;
     background-color: ThreeDShadow;
-    -moz-opacity: 0.5;
     opacity: 0.5;
-    filter: Alpha(Opacity=50);
     margin: 0;
 }
 
@@ -3474,8 +3465,6 @@ body[dir="rtl"] .mx-master-detail-content-hidden {
 .reportingReport {
     padding: 5px;
     border: 1px solid #ddd;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
     border-radius: 3px;
 }
 
