@@ -24,9 +24,6 @@ body {
 }
 
 a {
-    -moz-transition: 0.25s;
-    -o-transition: 0.25s;
-    -webkit-transition: 0.25s;
     transition: 0.25s;
     color: $link-color;
     -webkit-backface-visibility: hidden;
@@ -64,10 +61,8 @@ div[tabindex] {
 .disabled,
 [disabled] {
     cursor: not-allowed;
-    // opacity: 0.65;
-    -webkit-box-shadow: none;
+    opacity: 0.65;
     box-shadow: none;
-    filter: alpha(opacity=65);
 }
 
 .mx-underlay {
