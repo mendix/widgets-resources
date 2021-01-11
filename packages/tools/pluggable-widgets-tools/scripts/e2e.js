@@ -13,7 +13,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const latestMendixVersion = await getLatestMendixVersion();
+    const latestMendixVersion = await getMendixVersion();
     const ip = nodeIp.address();
 
     if (!ip) {
@@ -132,8 +132,8 @@ async function exists(filePath) {
     }
 }
 
-async function getLatestMendixVersion() {
-    let latestMendixVersion;
+async function getMendixVersion() {
+    let mendixVersion;
 
     if (process.env.MENDIX_VERSION) {
         return process.env.MENDIX_VERSION;
@@ -146,13 +146,13 @@ async function getLatestMendixVersion() {
         runtimeVersions.sort((a, b) =>
             semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
         );
-        latestMendixVersion = runtimeVersions[0];
+        mendixVersion = runtimeVersions[0];
     } catch (e) {
         throw new Error("Couldn't reach hub.docker.com. Make sure you are connected to internet.");
     }
-    if (!latestMendixVersion) {
-        throw new Error("Couldn't retrieve latest Mendix version from hub.docker.com. Try again later.");
+    if (!mendixVersion) {
+        throw new Error("Couldn't retrieve Mendix version from hub.docker.com. Try again later.");
     }
 
-    return latestMendixVersion;
+    return mendixVersion;
 }
