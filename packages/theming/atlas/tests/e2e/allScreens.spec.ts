@@ -101,7 +101,7 @@ function cleanUnusedScreenshotBases() {
             try {
                 fs.rmSync(filePath);
             } catch (e) {
-                console.warn(filePath, " couldnt removed. Error: ", e);
+                console.warn(filePath, " couldnt be removed. Error: ", e);
             }
         }
     }
