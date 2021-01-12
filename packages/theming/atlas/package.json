@@ -8,7 +8,7 @@
     "bump:major": "node ./scripts/bump-major.js",
     "build": "node ./scripts/build.js",
     "start": "node ./scripts/build.js start",
-    "pretest:e2e:dev": "cross-env ATLAS_MX_PROJECT_PATH='./tests/testProject' node ./scripts/build.js",
+    "pretest:e2e:dev": "node ./scripts/build.js",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "node ./scripts/build.js release"
   },
