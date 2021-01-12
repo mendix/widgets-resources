@@ -5,7 +5,9 @@ const xmlParser = require("fast-xml-parser");
 
 // For every module mx exports a folder, and in that folder we have bunch of xml's
 // which might contain an URL field
-const testPageFolders = join(cwd, "tests/testProject/deployment/web/pages/en_US");
+const testPageFolders = process.env.ATLAS_MX_PROJECT_PATH
+    ? join(process.env.ATLAS_MX_PROJECT_PATH, "deployment/web/pages/en_US")
+    : join(cwd, "tests/testProject/deployment/web/pages/en_US");
 const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 
 // TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failiure
