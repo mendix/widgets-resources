@@ -2,9 +2,9 @@ name: Run unit tests
 
 on:
     push:
-        branches: [master]
+        branches: [release/8.x]
     pull_request:
-        branches: [master]
+        branches: [release/8.x]
 
 jobs:
     test:
@@ -19,7 +19,7 @@ jobs:
               uses: actions/checkout@v2
               with:
                   submodules: false
-            - name: "Fetching master to compare"
+            - name: "Fetching baseline to compare"
               if: github.event_name == 'pull_request'
               run:
                   git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
