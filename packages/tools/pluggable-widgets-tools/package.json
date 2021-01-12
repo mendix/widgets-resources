@@ -60,7 +60,6 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.1",
     "big.js": "^5.2.2",
-    "chmodr": "^1.2.0",
     "colors": "^1.4.0",
     "concurrently": "^5.3.0",
     "core-js": "^3.6.5",

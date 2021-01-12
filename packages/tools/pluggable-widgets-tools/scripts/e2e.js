@@ -6,7 +6,6 @@ const { join } = require("path");
 const semverCompare = require("semver/functions/rcompare");
 const { cat, cp, ls, mkdir } = require("shelljs");
 const nodeIp = require("ip");
-const chmodr = require("chmodr");
 
 main().catch(e => {
     console.error(e);
@@ -119,14 +118,6 @@ async function main() {
         console.log(cat("results/runtime.log").toString());
         throw e;
     } finally {
-        // Fixing folder permissions
-        chmodr("tests/testProject/deployment", 0o777, err => {
-            if (err) {
-                console.log("Failed to execute chmod", err);
-            } else {
-                console.log("Permissions fixed successfully");
-            }
-        });
         execSync(`docker rm -f ${runtimeContainerId}`);
         execSync(`docker rm -f ${firefoxContainerId}`);
     }
