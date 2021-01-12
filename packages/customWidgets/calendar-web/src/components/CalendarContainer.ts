@@ -268,37 +268,52 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         );
     };
 
-    private setCalendarFormats = () => {
-        return this.props.customViews.reduce(
-            (accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
-                accumulator.dateFormat =
-                    customView.customView === "month"
-                        ? this.customFormat(customView.cellDateFormat, "date")
-                        : accumulator.dateFormat;
-                accumulator.dayFormat =
-                    customView.customView === "day" ||
-                    customView.customView === "week" ||
-                    customView.customView === "work_week"
-                        ? this.customFormat(customView.gutterDateFormat, "day")
-                        : accumulator.dayFormat;
-                accumulator.weekdayFormat =
-                    customView.customView === "month"
-                        ? this.customFormat(customView.headerFormat, "weekday")
-                        : accumulator.weekdayFormat;
-                accumulator.timeGutterFormat =
-                    customView.customView === "week" ||
-                    customView.customView === "day" ||
-                    customView.customView === "work_week"
-                        ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
-                        : accumulator.timeGutterFormat;
+    private setCalendarFormats = (): Container.ViewOptions =>
+        this.props.customViews.reduce((accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
+            accumulator.dateFormat =
+                customView.customView === "month"
+                    ? this.customFormat(customView.cellDateFormat, "date")
+                    : accumulator.dateFormat;
+            accumulator.dayFormat =
+                customView.customView === "day" ||
+                customView.customView === "week" ||
+                customView.customView === "work_week"
+                    ? this.customFormat(customView.gutterDateFormat, "day")
+                    : accumulator.dayFormat;
+            accumulator.weekdayFormat =
+                customView.customView === "month"
+                    ? this.customFormat(customView.headerFormat, "weekday")
+                    : accumulator.weekdayFormat;
+            accumulator.timeGutterFormat =
+                customView.customView === "week" ||
+                customView.customView === "day" ||
+                customView.customView === "work_week"
+                    ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
+                    : accumulator.timeGutterFormat;
 
-                return accumulator;
-            },
-            {}
-        );
-    };
+            if (customView.customView === "day" && customView.headerFormat) {
+                accumulator.dayHeaderFormat = this.customFormat(customView.headerFormat);
+            }
 
-    private customFormat = (dateFormat: string, dateType: Container.DateType) => {
+            if (
+                (customView.customView === "week" || customView.customView === "work_week") &&
+                customView.headerFormat
+            ) {
+                accumulator.dayRangeHeaderFormat = this.customRangeFormat(customView.headerFormat);
+            }
+
+            if (customView.customView === "month" && customView.headerFormat) {
+                accumulator.monthHeaderFormat = this.customFormat(customView.headerFormat);
+            }
+
+            if (customView.customView === "agenda" && customView.headerFormat) {
+                accumulator.agendaHeaderFormat = this.customRangeFormat(customView.headerFormat);
+            }
+
+            return accumulator;
+        }, {});
+
+    private customFormat = (dateFormat: string, dateType?: Container.DateType): ((date: Date) => string) => {
         let datePattern = "";
         if (dateType === "date") {
             datePattern = dateFormat || "dd";
@@ -308,9 +323,22 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             datePattern = dateFormat || "EEEE";
         } else if (dateType === "timeGutter") {
             datePattern = dateFormat || "hh:mm a";
+        } else {
+            datePattern = dateFormat;
         }
 
         return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
+    };
+
+    private customRangeFormat = (dateFormat: string): ((dateRange: { start: Date; end: Date }) => string) => {
+        const datePattern = dateFormat;
+        return (dateRange: { start: Date; end: Date }) => {
+            console.log("start", dateRange.start);
+            console.log("end", dateRange.end);
+            return `${window.mx.parser.formatValue(dateRange.start, "datetime", {
+                datePattern
+            })} - ${window.mx.parser.formatValue(dateRange.end, "datetime", { datePattern })}`;
+        };
     };
 
     private onRangeChange = (date: ViewDate) => {
