@@ -120,7 +120,7 @@ async function main() {
         throw e;
     } finally {
         // Fixing folder permissions
-        chmodr("tests/testProject", 0o777, err => {
+        chmodr("tests/testProject/deployment", 0o777, err => {
             if (err) {
                 console.log("Failed to execute chmod", err);
             } else {
