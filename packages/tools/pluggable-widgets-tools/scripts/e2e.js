@@ -13,7 +13,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const latestMendixVersion = await getMendixVersion();
+    const mendixVersion = await getMendixVersion();
     const ip = nodeIp.address();
 
     if (!ip) {
@@ -46,13 +46,13 @@ async function main() {
     }
 
     // Create reusable mxbuild image
-    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`).toString().trim();
+    const existingImages = execSync(`docker image ls -q mxbuild:${mendixVersion}`).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
             `docker build -f ${join(__dirname, "mxbuild.Dockerfile")} ` +
-                `--build-arg MENDIX_VERSION=${latestMendixVersion} ` +
-                `-t mxbuild:${latestMendixVersion} ${__dirname}`,
+                `--build-arg MENDIX_VERSION=${mendixVersion} ` +
+                `-t mxbuild:${mendixVersion} ${__dirname}`,
             { stdio: "inherit" }
         );
     }
@@ -61,7 +61,7 @@ async function main() {
     const projectFile = ls("tests/testProject/*.mpr").toString();
     execSync(
         `docker run -t -v ${process.cwd()}:/source ` +
-            `--rm mxbuild:${latestMendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
+            `--rm mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
             `-o /tmp/automation.mda /source/${projectFile}"`,
         { stdio: "inherit" }
     );
@@ -71,8 +71,8 @@ async function main() {
     const freePort = await findFreePort(3000);
     const runtimeContainerId = execSync(
         `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
-            `-u root -e MENDIX_VERSION=${latestMendixVersion} --entrypoint /bin/bash ` +
-            `mendix/runtime-base:${latestMendixVersion}-rhel /shared/runtime.sh`
+            `-u root -e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
+            `mendix/runtime-base:${mendixVersion}-rhel /shared/runtime.sh`
     )
         .toString()
         .trim();
