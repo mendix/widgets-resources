@@ -127,7 +127,8 @@ body {
     .loginpage-image {
         height: 100%;
         animation: makePointer 1s ease-out both;
-        background: left / cover no-repeat linear-gradient(to right, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%),
+        background: left / cover no-repeat
+                linear-gradient(to right, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%),
             left / cover no-repeat url("../../../resources/work-do-more.jpeg");
         -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
         clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);

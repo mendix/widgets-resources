@@ -91,7 +91,7 @@
     & > img,
     & > .glyphicon {
         top: 0;
-        margin-left: 8px;
+        margin-left: 4px;
     }
 }
 
@@ -102,7 +102,7 @@
     & > img,
     & > .glyphicon {
         display: block;
-        margin: 0 0 8px 0;
+        margin: 0 0 4px 0;
     }
 }
 
@@ -120,5 +120,5 @@
 }
 
 .btn-block + .btn-block {
-    margin-top: 8px;
+    margin-top: 4px;
 }
