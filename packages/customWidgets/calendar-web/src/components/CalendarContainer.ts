@@ -268,50 +268,53 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         );
     };
 
-    private setCalendarFormats = (): Container.ViewOptions =>
-        this.props.customViews.reduce((accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
-            accumulator.dateFormat =
+    private setCalendarFormats = (): Container.ViewOptions => {
+        const calendarFormats: Container.ViewOptions = {};
+
+        this.props.customViews.forEach((customView: Container.CustomViews) => {
+            calendarFormats.dateFormat =
                 customView.customView === "month"
                     ? this.customFormat(customView.cellDateFormat, "date")
-                    : accumulator.dateFormat;
-            accumulator.dayFormat =
+                    : calendarFormats.dateFormat;
+            calendarFormats.dayFormat =
                 customView.customView === "day" ||
                 customView.customView === "week" ||
                 customView.customView === "work_week"
                     ? this.customFormat(customView.gutterDateFormat, "day")
-                    : accumulator.dayFormat;
-            accumulator.weekdayFormat =
+                    : calendarFormats.dayFormat;
+            calendarFormats.weekdayFormat =
                 customView.customView === "month"
                     ? this.customFormat(customView.headerFormat, "weekday")
-                    : accumulator.weekdayFormat;
-            accumulator.timeGutterFormat =
+                    : calendarFormats.weekdayFormat;
+            calendarFormats.timeGutterFormat =
                 customView.customView === "week" ||
                 customView.customView === "day" ||
                 customView.customView === "work_week"
                     ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
-                    : accumulator.timeGutterFormat;
+                    : calendarFormats.timeGutterFormat;
 
             if (customView.customView === "day" && customView.headerFormat) {
-                accumulator.dayHeaderFormat = this.customFormat(customView.headerFormat);
+                calendarFormats.dayHeaderFormat = this.customFormat(customView.headerFormat);
             }
 
             if (
                 (customView.customView === "week" || customView.customView === "work_week") &&
                 customView.headerFormat
             ) {
-                accumulator.dayRangeHeaderFormat = this.customRangeFormat(customView.headerFormat);
+                calendarFormats.dayRangeHeaderFormat = this.customRangeFormat(customView.headerFormat);
             }
 
             if (customView.customView === "month" && customView.headerFormat) {
-                accumulator.monthHeaderFormat = this.customFormat(customView.headerFormat);
+                calendarFormats.monthHeaderFormat = this.customFormat(customView.headerFormat);
             }
 
             if (customView.customView === "agenda" && customView.headerFormat) {
-                accumulator.agendaHeaderFormat = this.customRangeFormat(customView.headerFormat);
+                calendarFormats.agendaHeaderFormat = this.customRangeFormat(customView.headerFormat);
             }
+        });
 
-            return accumulator;
-        }, {});
+        return calendarFormats;
+    };
 
     private customFormat = (dateFormat: string, dateType?: Container.DateType): ((date: Date) => string) => {
         let datePattern = "";
