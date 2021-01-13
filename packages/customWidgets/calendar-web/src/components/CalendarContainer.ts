@@ -293,23 +293,22 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                     ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
                     : calendarFormats.timeGutterFormat;
 
-            if (customView.customView === "day" && customView.headerFormat) {
-                calendarFormats.dayHeaderFormat = this.customFormat(customView.headerFormat);
-            }
-
-            if (
-                (customView.customView === "week" || customView.customView === "work_week") &&
-                customView.headerFormat
-            ) {
-                calendarFormats.dayRangeHeaderFormat = this.customRangeFormat(customView.headerFormat);
-            }
-
-            if (customView.customView === "month" && customView.headerFormat) {
-                calendarFormats.monthHeaderFormat = this.customFormat(customView.headerFormat);
-            }
-
-            if (customView.customView === "agenda" && customView.headerFormat) {
-                calendarFormats.agendaHeaderFormat = this.customRangeFormat(customView.headerFormat);
+            if (customView.headerFormat) {
+                switch (customView.customView) {
+                    case "day":
+                        calendarFormats.dayHeaderFormat = this.customFormat(customView.headerFormat);
+                        break;
+                    case "week":
+                    case "work_week":
+                        calendarFormats.dayRangeHeaderFormat = this.customRangeFormat(customView.headerFormat);
+                        break;
+                    case "month":
+                        calendarFormats.monthHeaderFormat = this.customFormat(customView.headerFormat);
+                        break;
+                    case "agenda":
+                        calendarFormats.agendaHeaderFormat = this.customRangeFormat(customView.headerFormat);
+                        break;
+                }
             }
         });
 
