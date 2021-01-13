@@ -132,6 +132,7 @@ export default async args => {
             },
             treeshake: { moduleSideEffects: false },
             plugins: [
+                url(),
                 ...getCommonPlugins({
                     sourceMaps: false,
                     extensions: webExtensions,
