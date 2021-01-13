@@ -2,7 +2,7 @@ import { StructurePreviewProps, RowLayoutProps, ContainerProps } from "@widgets-
 import { ReactNode } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
 
-const rowLayoutContainer = (property: ReactNode): ContainerProps => ({
+const swipeContentContainer = (property: ReactNode): ContainerProps => ({
     type: "Container",
     borders: true,
     backgroundColor: "#F5F5F5",
@@ -30,10 +30,10 @@ export function getPreview(values: ListViewSwipeProps<any>): RowLayoutProps {
     ];
 
     if (values.leftRenderMode !== "disabled") {
-        children.unshift(rowLayoutContainer(values.left));
+        children.unshift(swipeContentContainer(values.left));
     }
     if (values.rightRenderMode !== "disabled") {
-        children.push(rowLayoutContainer(values.right));
+        children.push(swipeContentContainer(values.right));
     }
 
     return {
