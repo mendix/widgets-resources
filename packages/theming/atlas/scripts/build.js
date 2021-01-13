@@ -71,7 +71,18 @@ concurrently(
                   }
               ]
             : []
-    )
+    ),
+    {
+        killOthers: ["failure"]
+    }
+).then(
+    success => {
+        console.log("Success", success);
+    },
+    failure => {
+        console.error("Failure", failure);
+        process.exit(-1);
+    }
 );
 
 function command(command) {

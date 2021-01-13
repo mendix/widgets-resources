@@ -2,22 +2,22 @@ name: Script tests
 
 on:
     push:
-        branches: [ master ]
+        branches: [master]
     pull_request:
-        branches: [ master ]
+        branches: [master]
 
 jobs:
     test:
         name: "Script tests (Node ${{ matrix.node }}, ${{ matrix.os }})"
         runs-on: ${{ matrix.os }}
         strategy:
-          matrix:
-            node: [14]
-            os: [windows-latest, ubuntu-latest]
-            include:
-              - node: 10
-                os: ubuntu-latest
-                experimental: true
+            matrix:
+                node: [14]
+                os: [windows-latest, ubuntu-latest]
+                include:
+                    - node: 10
+                      os: ubuntu-latest
+                      experimental: true
 
         steps:
             - name: "Checking changed files"
@@ -29,19 +29,21 @@ jobs:
                   submodules: false
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request'
-              run: git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+              run:
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                  }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'windows')
               id: variablesWindows
               run: |
-                $CHANGED_GLOBAL_FILES = "$('${{ steps.files.outputs.all }}' | Select-String -Pattern '^packages' -NotMatch)"
-                echo "::set-output name=arg::$(If ($CHANGED_GLOBAL_FILES -eq '' -AND '${{ github.event_name == 'pull_request' }}' -eq 'true'){ echo '--since origin/${{ github.base_ref }}' } Else { echo '' })"
+                  $CHANGED_GLOBAL_FILES = "$('${{ steps.files.outputs.all }}' | Select-String -Pattern '^packages' -NotMatch)"
+                  echo "::set-output name=arg::$(If ($CHANGED_GLOBAL_FILES -eq '' -AND '${{ github.event_name == 'pull_request' }}' -eq 'true'){ echo '--since origin/${{ github.base_ref }}' } Else { echo '' })"
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'ubuntu')
               id: variablesLinux
               run: |
-                export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
-                echo "::set-output name=arg::$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && [ ${{ github.event_name == 'pull_request' }} ]; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+                  export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+                  echo "::set-output name=arg::$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && [ ${{ github.event_name == 'pull_request' }} ]; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
@@ -49,18 +51,16 @@ jobs:
               with:
                   path: ~/.npm
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-build-${{ env.cache-name }}-
-                      ${{ runner.os }}-build-
-                      ${{ runner.os }}-
             - name: "Defining node version"
               uses: actions/setup-node@v1
               with:
-                node-version: ${{ matrix.node }}
+                  node-version: ${{ matrix.node }}
             - name: "Installing dependencies"
               run: npm install
             - name: Increase number of watchers
               if: startsWith(matrix.os, 'ubuntu')
               run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
             - name: "Running PIW-Tools commands tests"
-              run: npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
+              run:
+                  npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg
+                  }}
