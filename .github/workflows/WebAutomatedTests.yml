@@ -36,25 +36,21 @@ jobs:
               with:
                   path: ~/.npm
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: |
-                      ${{ runner.os }}-build-${{ env.cache-name }}-
-                      ${{ runner.os }}-build-
-                      ${{ runner.os }}-
             - name: "Installing dependencies"
               run: npm install
             - name: "Building package in production mode"
               run: npm run release -- ${{ steps.variables.outputs.arg }}
             - name: "Executing E2E tests"
               run: npm run test:e2e -- ${{ steps.variables.outputs.arg }}
-            - name: "Fixing files permissions"
+            - name: "Archive test screenshot results"
               if: failure()
               run: |
                   sudo find ${{ github.workspace}}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
                   sudo find ${{ github.workspace}}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
-            - name: "Archive test screenshot results"
               uses: actions/upload-artifact@v2
-              if: failure()
               with:
                   name: test-screenshot-results
-                  path: ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
+                  path: |
+                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
+                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/actual/*.png
                   if-no-files-found: error
