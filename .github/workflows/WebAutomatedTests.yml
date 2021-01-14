@@ -42,12 +42,14 @@ jobs:
               run: npm run release -- ${{ steps.variables.outputs.arg }}
             - name: "Executing E2E tests"
               run: npm run test:e2e -- ${{ steps.variables.outputs.arg }}
-            - name: "Archive test screenshot results"
+            - name: "Fixing files permissions"
               if: failure()
               run: |
                   sudo find ${{ github.workspace}}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
                   sudo find ${{ github.workspace}}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
+            - name: "Archive test screenshot results"
               uses: actions/upload-artifact@v2
+              if: failure()
               with:
                   name: test-screenshot-results
                   path: |
