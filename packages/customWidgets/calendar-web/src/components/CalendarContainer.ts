@@ -335,8 +335,6 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private customRangeFormat = (dateFormat: string): ((dateRange: { start: Date; end: Date }) => string) => {
         const datePattern = dateFormat;
         return (dateRange: { start: Date; end: Date }) => {
-            console.log("start", dateRange.start);
-            console.log("end", dateRange.end);
             return `${window.mx.parser.formatValue(dateRange.start, "datetime", {
                 datePattern
             })} - ${window.mx.parser.formatValue(dateRange.end, "datetime", { datePattern })}`;
