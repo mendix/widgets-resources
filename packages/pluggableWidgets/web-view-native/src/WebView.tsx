@@ -38,7 +38,7 @@ export class WebView extends Component<Props> {
                     }}
                     onLoad={this.onLoadHandler}
                     onError={this.onErrorHandler}
-                    onMessage={(event) => {
+                    onMessage={event => {
                         this.onMessageHandler(event.nativeEvent.data);
                     }}
                     userAgent={this.props.userAgent}
