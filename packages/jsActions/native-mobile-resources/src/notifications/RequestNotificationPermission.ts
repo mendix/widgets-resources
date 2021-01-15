@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import { NativeModules, Platform } from "react-native";
-import ReactNativeFirebase from "react-native-firebase";
+import ReactNativeFirebase from "@react-native-firebase/messaging";
 
 /**
  * Notification permissions are required to send a user push messages. Calling this action displays the permission dialog to the user.
@@ -16,20 +16,19 @@ export async function RequestNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
-    if (NativeModules && !NativeModules.RNFirebase) {
+    if (NativeModules && !NativeModules.RNFBMessagingModule) {
         return Promise.reject(new Error("Firebase module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
-    return firebase
-        .messaging()
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const messaging: typeof ReactNativeFirebase = require("@react-native-firebase/messaging").default;
+
+    return messaging()
         .requestPermission()
         .then(() =>
             Platform.OS === "ios"
-                ? firebase
-                      .messaging()
-                      .ios.registerForRemoteNotifications()
+                ? messaging()
+                      .registerDeviceForRemoteMessages()
                       .then(() => true)
                 : true
         )

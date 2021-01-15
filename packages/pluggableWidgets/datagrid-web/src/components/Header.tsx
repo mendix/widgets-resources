@@ -6,34 +6,46 @@ import {
     DragEvent,
     DragEventHandler,
     useCallback,
-    MouseEvent
+    MouseEvent,
+    KeyboardEvent
 } from "react";
 import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } from "react-table";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
+import { ColumnResizer } from "./ColumnResizer";
 
 export interface HeaderProps<D extends object> {
+    className?: string;
     column: HeaderGroup<D>;
     sortable: boolean;
     resizable: boolean;
     filterable: boolean;
     draggable: boolean;
     dragOver: string;
+    isDragging?: boolean;
     visibleColumns: Array<ColumnInstance<D>>;
     setColumnOrder: (updater: Array<IdType<D>>) => void;
+    setColumnWidth: (width: number) => void;
     setDragOver: Dispatch<SetStateAction<string>>;
+    setIsDragging: Dispatch<SetStateAction<boolean>>;
     setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>;
 }
 
 export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
     const canSort = props.sortable && props.column.canSort;
     const canDrag = props.draggable && (props.column.canDrag ?? false);
-    const draggableProps = useDraggable(canDrag, props.visibleColumns, props.setColumnOrder, props.setDragOver);
+    const draggableProps = useDraggable(
+        canDrag,
+        props.visibleColumns,
+        props.setColumnOrder,
+        props.setDragOver,
+        props.setIsDragging
+    );
 
     const { onClick, style, ...rest } = props.column.getHeaderProps(
         canSort ? props.column.getSortByToggleProps() : undefined
-    ) as TableHeaderProps & { onClick: (e: MouseEvent<HTMLDivElement>) => void };
+    ) as TableHeaderProps & { onClick: (e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void };
 
     const sortIcon = canSort
         ? props.column.isSorted
@@ -49,8 +61,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             {...rest}
             style={{
                 ...style,
-                ...(!props.resizable ? { flex: "1 1 0px" } : {}),
-                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : {})
+                ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : undefined)
             }}
             title={props.column.render("Header") as string}
         >
@@ -64,7 +75,8 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             >
                 <div
                     id={props.column.id}
-                    className={classNames("column-header", canSort ? "clickable" : "")}
+                    className={classNames("column-header", canSort ? "clickable" : "", props.className)}
+                    style={{ pointerEvents: props.isDragging ? "none" : undefined }}
                     onClick={
                         canSort
                             ? e => {
@@ -86,20 +98,25 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                               }
                             : undefined
                     }
+                    onKeyDown={
+                        canSort
+                            ? e => {
+                                  if (e.key === "Enter" || e.key === " ") {
+                                      e.preventDefault();
+                                      onClick(e);
+                                  }
+                              }
+                            : undefined
+                    }
+                    role={canSort ? "button" : undefined}
+                    tabIndex={canSort ? 0 : undefined}
                 >
-                    {props.column.render("Header")}
+                    <span>{props.column.render("Header")}</span>
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
-                {props.filterable &&
-                    props.column.canFilter &&
-                    (props.column.customFilter ? props.column.customFilter : props.column.render("Filter"))}
+                {props.filterable && props.column.customFilter ? props.column.customFilter : null}
             </div>
-            {props.resizable && props.column.canResize && (
-                <div
-                    {...props.column.getResizerProps()}
-                    className={`column-resizer ${props.column.isResizing ? "isResizing" : ""}`}
-                />
-            )}
+            {props.resizable && props.column.canResize && <ColumnResizer setColumnWidth={props.setColumnWidth} />}
         </div>
     );
 }
@@ -108,15 +125,18 @@ function useDraggable<D extends object>(
     columnsDraggable: boolean,
     visibleColumns: Array<ColumnInstance<D>>,
     setColumnOrder: (updater: ((columnOrder: Array<IdType<D>>) => Array<IdType<D>>) | Array<IdType<D>>) => void,
-    setDragOver: Dispatch<SetStateAction<string>>
+    setDragOver: Dispatch<SetStateAction<string>>,
+    setIsDragging: Dispatch<SetStateAction<boolean>>
 ): {
     draggable?: boolean;
     onDragStart?: DragEventHandler;
     onDragOver?: DragEventHandler;
     onDrop?: DragEventHandler;
     onDragEnter?: DragEventHandler;
+    onDragEnd?: DragEventHandler;
 } {
     const handleDragStart = useCallback((e: DragEvent<HTMLDivElement>): void => {
+        setIsDragging(true);
         const { id } = e.target as HTMLDivElement;
         e.dataTransfer.setData("colDestination", id);
     }, []);
@@ -133,9 +153,14 @@ function useDraggable<D extends object>(
         }
     }, []);
 
+    const handleDragEnd = useCallback((): void => {
+        setIsDragging(false);
+        setDragOver("");
+    }, []);
+
     const handleOnDrop = useCallback(
         (e: DragEvent<HTMLDivElement>): void => {
-            setDragOver("");
+            handleDragEnd();
             const { id: colOrigin } = e.target as HTMLDivElement;
             const colDestination = e.dataTransfer.getData("colDestination");
 
@@ -158,7 +183,8 @@ function useDraggable<D extends object>(
               onDragStart: handleDragStart,
               onDragOver: handleDragOver,
               onDrop: handleOnDrop,
-              onDragEnter: handleDragEnter
+              onDragEnter: handleDragEnter,
+              onDragEnd: handleDragEnd
           }
         : {};
 }

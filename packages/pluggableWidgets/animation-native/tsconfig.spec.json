@@ -1,9 +1,0 @@
-{
-    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
-    "baseUrl": "./",
-    "include": ["./src/__tests__"],
-    "exclude": ["../../node_modules/react-native"],
-    "compilerOptions": {
-        "types": ["jest"]
-    }
-}

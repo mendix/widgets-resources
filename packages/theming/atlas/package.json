@@ -1,0 +1,31 @@
+{
+  "name": "@mendix/atlas-ui",
+  "version": "3.0.0",
+  "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
+  "scripts": {
+    "bump:patch": "node ./scripts/bump-patch.js",
+    "bump:minor": "node ./scripts/bump-minor.js",
+    "bump:major": "node ./scripts/bump-major.js",
+    "build": "node ./scripts/build.js",
+    "start": "node ./scripts/build.js start",
+    "pretest:e2e:dev": "node ./scripts/build.js",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "node ./scripts/build.js release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "author": "Mendix",
+  "license": "MIT",
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "copy-and-watch": "^0.1.5",
+    "cross-env": "^7.0.2",
+    "concurrently": "^5.3.0",
+    "fast-xml-parser": "^3.17.5",
+    "sass": "^1.28.0",
+    "typescript": "^4.0.5"
+  },
+  "dependencies": {}
+}

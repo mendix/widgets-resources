@@ -102,34 +102,33 @@ exports[`Badge with on click action Android renders touchables 1`] = `
   }
   testID="badge-test"
 >
-  <View
+  <Text
+    accessible={true}
+    focusable={true}
+    nativeBackgroundAndroid={
+      Object {
+        "attribute": "selectableItemBackgroundBorderless",
+        "rippleRadius": undefined,
+        "type": "ThemeAttrAndroid",
+      }
+    }
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
-      Array [
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#ffbcbc",
-          "borderColor": "red",
-          "borderWidth": 1,
-          "height": 100,
-          "justifyContent": "center",
-          "margin": 10,
-          "width": 300,
-        },
-        undefined,
-      ]
+      Object {
+        "color": "#444",
+        "fontSize": 14,
+        "fontWeight": "bold",
+      }
     }
   >
-    <Text
-      style={
-        Object {
-          "color": "#333333",
-          "margin": 20,
-        }
-      }
-    >
-      TouchableNativeFeedback is not supported on this platform!
-    </Text>
-  </View>
+    
+  </Text>
 </View>
 `;
 
@@ -150,7 +149,6 @@ exports[`Badge with on click action iOS renders touchables 1`] = `
   <View
     accessible={true}
     focusable={true}
-    isTVSelectable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

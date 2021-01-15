@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.linechart.LineChart" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Line chart (beta)</name>
+    <description />
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAE1klEQVR4Ae1bTWgTQRSeN4lNxJ9CKahQEa/toaAi9FawUBO1FylFBS+KgiCe9NyTBz15VLyK9KS12nhQ8GgPIiLpWWmhF0nxB5qfZsY322y6u5mdZNaZ2Gw3kOzsm9l57/vm7XuzLwkhySthIGFgNzMAQfAzMzM5xtgTIaeU3pibmysEx8TpnAbBNMAPoXzIJSI4Jk7nLQQI4B6A3rZHHJ+mjID4oOsASbqDMT0zJLfIh3it/IBwMu4YDeQD7MneK+RhNQxEbDzAAV8tf0HwlxDsEeeNbY4y0Rd7ApyVJ2RAAnSg0Sfpwkwnlfai0HV7me2KvvgQAJCVYW8niwUBuYXKDHDSHwoWg2FYX88TIMCTOn/GCQ/DUhKZIJYEeMCnXIBAgBGAdTxfI0CeQ192VJUGe3YfEAK+TlJw5e2FzJxLSLtjmNu0u+6/9qvAFzTACxBd8YAoO7Qwhk2CFzqse0DUHZqMANPghQ7rHqDcoVU3Pufny/OMkyKkSJGkMsvegOXzHJHn67zfG+0x4Dn3vK7be8m1TgDuzc94FfrbMMg4vyZkvI4f9TLJzZd/cc6LFOg3VqtO4fX7nGs4QncaWx8mwIuZrBKQf1W+iXYPIiCP6eomjj2II8YYZ2NhI51Uh9H+X1bendsKAfk3/BjbrDxljE+4ikweOZCfOqlOpds4Ac6qb1YeEs4PqBQToOtAyW1g/BCOG0YHHyEEhhseoLwU5y6rB3Tea4wA5aoD/KHAlxkjRx3TnEJFn7RQIQIfZZWRep3cR6AnpFAUe3vpeIUwEgG+6IyTU0pW0OWH0eD9LboA3tF05vriOfje0icRNLLAKuooimIGDgk+4yv39pIplSJtAhzwAcNwZbEC4w90APAbgNxdnMo+VloQ0imIQF2juiWukOlCxdoEKPL6thJcddBY9e0L/a2GN1z2S82eaROACz0eZgKuOsNVvxV11cPmtSk3uhXGCP6jl8ALYvUJUEVgIO9trpaNubVvAVFdweg8icZYjc4CbDDbYIFDWefXHS90aHuACEyiyiKqLXj9mvPuoPIilOm8mtmmwzq/7njXFm0PEBd2IzrzzeojVBX0MqF+AD1w5ezLDdFuvlDWbAca7vcC0mwSiYCAAiOns5zTpYXaaXwszOOEOQyoJ41MLCZRZK6uEBB2b2ZTpFqp1CYZr+c+zgfjin9jZYyMwETWCWjem153Ft/Z1crTGzUsg3B8trP9UmQu6wSE7hy5qEUoVhnwqw5RJnHG+RgqyUrdUqK3LlM+O2hnAZ8pnZwoK0ItE5REdqE0dXVvNnMYU+7xTrNN1Oxk1QPaVoRwlYHwT0hDIUXThVPn00uzuJ0O0CKN3oExzmmU7GSFAGVtwGs5wIvCVPaiK3rtNrp4NH4LNCpCXzG4TbTBUYJ03502Y6x3G/MA5apLK0Lqn65YR95QEImAYF43WRHqFnBXjzYBsnRjoyLkGmj7qE1AaF73WmqoIuSd0lZbmwDVvjqpCCUVod6rCGnvAxq/tylJ7knlnlsyfkeItAmIuufeEWglRugHQZwkyp5bontHiLQ9YEdYbdCIhACDZPbkVC3lqOnpaUWZpicxukavyv4DtZtuAel/oGQErLqU7YZjCwHCTRB4HElwboHdsKgJxoSBhIHOGfgLqCZ7QMfa1lkAAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="lines" type="object" isList="true">
+                    <caption>Lines</caption>
+                    <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="dataSet" type="enumeration" defaultValue="static">
+                                <caption>Data set</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="static">Static</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="staticDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for a single line.</description>
+                            </property>
+                            <property key="dynamicDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for all lines which will be divided into single lines based on the Group by attribute value.</description>
+                            </property>
+                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Group by</caption>
+                                <description>Data points within the same group form one line.</description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="HashString" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                </attributeTypes>
+                            </property>
+                            <property key="staticName" type="textTemplate" required="false" multiline="false">
+                                <caption>Name</caption>
+                                <description>The line name displayed in the legend.</description>
+                            </property>
+                            <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Name</caption>
+                                <description>The line name displayed in the legend.</description>
+                            </property>
+                            <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>X attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>X attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>Y attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Y attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="interpolation" type="enumeration" defaultValue="linear">
+                                <caption>Interpolation</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="linear">Linear</enumerationValue>
+                                    <enumerationValue key="catmullRom">Curved</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Appearance">
+                            <property key="staticLineStyle" type="enumeration" defaultValue="line">
+                                <caption>Line style</caption>
+                                <description>Custom allows the line to be styled with or without markers through native styles.</description>
+                                <enumerationValues>
+                                    <enumerationValue key="line">Line</enumerationValue>
+                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="dynamicLineStyle" type="enumeration" defaultValue="line">
+                                <caption>Line style</caption>
+                                <description>Custom allows each line to be styled with or without markers individually through native styles.</description>
+                                <enumerationValues>
+                                    <enumerationValue key="line">Line</enumerationValue>
+                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="staticCustomLineStyle" type="string" required="false" multiline="false">
+                                <caption>Custom line style</caption>
+                                <description>Link a line style defined in the styles of this widget.</description>
+                            </property>
+                            <property key="dynamicCustomLineStyle" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Custom line style</caption>
+                                <description>Link a line style defined in the styles of this widget.</description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Chart settings">
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

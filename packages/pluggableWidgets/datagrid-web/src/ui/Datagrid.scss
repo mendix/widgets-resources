@@ -11,92 +11,125 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
     border-width: 0;
     background-color: transparent;
 
-    /* Table header */
-    .thead {
-        .th {
-            display: flex;
-            flex: 1 1 auto;
-            align-items: flex-start;
-            font-weight: 600;
-            border-style: solid;
-            border-color: $border-color;
-            border-top-width: 0;
-            border-right: 0;
-            border-bottom-width: 1px;
-            border-left: 0;
-            background-color: $background-color;
-            padding: 16px 8px;
+    /* Table Content */
+    .table-content {
+        display: grid;
+        position: relative;
 
-            .clickable {
-                cursor: pointer;
+        &.infinite-loading {
+            overflow-y: scroll;
+        }
+    }
+
+    /* Column Header */
+    .th {
+        display: flex;
+        align-items: flex-start;
+        font-weight: 600;
+        background-color: $background-color;
+        padding: 16px 8px 0 8px;
+        margin-bottom: 16px;
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+        z-index: 10;
+
+        /* Clickable column header (Sortable) */
+        .clickable {
+            cursor: pointer;
+        }
+
+        /* Column resizer when column is resizable */
+        .column-resizer {
+            padding: 0 4px;
+            align-self: stretch;
+            cursor: col-resize;
+
+            &:hover .column-resizer-bar {
+                background-color: $primary-color;
+            }
+            &:active .column-resizer-bar {
+                background-color: $primary-color;
             }
 
-            .column-resizer {
-                min-width: 4px;
-                margin: 0 4px;
+            .column-resizer-bar {
                 height: 100%;
-                cursor: col-resize;
-
-                &:hover {
-                    background-color: $primary-color;
-                }
-                &:active {
-                    background-color: $primary-color;
-                }
-            }
-
-            .column-container {
-                flex-grow: 1;
-                align-self: stretch;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-
-                &.dragging {
-                    border-left: 4px solid $dragging-color-effect;
-                }
-            }
-
-            .column-header {
-                display: flex;
-                flex-grow: 1;
-                justify-content: space-between;
-                align-items: center;
-
-                svg {
-                    color: $icon-color;
-                }
-            }
-
-            .filter {
-                display: flex;
-                margin-top: 4px;
-                input {
-                    font-weight: normal;
-                    flex-grow: 1;
-                    width: 100%;
-                }
-                > .form-group{
-                    margin-bottom: 0;
-                }
-                > .form-control {
-                    flex: unset;
-                    min-width: unset;
-                }
+                width: 4px;
             }
         }
-        .column-selector {
-            flex: unset;
-            padding-left: 0;
-            padding-right: 0;
-            button {
-                padding: 8px;
-                align-self: flex-end;
+
+        /* Content of the column header */
+        .column-container {
+            flex-grow: 1;
+            align-self: stretch;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            /* Styles while dragging another column */
+            &.dragging {
+                border-left: 4px solid $dragging-color-effect;
             }
+        }
+
+        /* Header text */
+        .column-header {
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+
+            span {
+                display: flex;
+                flex-grow: 1;
+            }
+
+            svg {
+                margin-left: 8px;
+                flex-grow: 0;
+                color: $icon-color;
+            }
+        }
+
+        /* Header filter */
+        .filter {
+            display: flex;
+            margin-top: 4px;
+            input:not([type="checkbox"]) {
+                font-weight: normal;
+                flex-grow: 1;
+                width: 100%;
+            }
+            > .form-group {
+                margin-bottom: 0;
+            }
+            > .form-control {
+                flex: unset;
+                min-width: unset;
+            }
+        }
+    }
+
+    /* Column selector for hidable columns */
+    .column-selector {
+        padding-left: 0;
+        padding-right: 0;
+
+        /* Column content */
+        .column-selector-content {
+            align-self: flex-end;
+
+            /* Button containing the eye icon */
+            .column-selector-button {
+                padding: 8px;
+                margin: 0 8px;
+            }
+
+            /* List of columns to select */
             .column-selectors {
                 position: absolute;
+                width: max-content;
                 right: 0;
-                margin-top: 45px;
+                margin: 8px;
                 padding: 0 16px;
                 background: $background-color;
                 z-index: 99;
@@ -120,59 +153,31 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         }
     }
 
-    /* Table Body */
-    .tbody {
-        &.infinite-loading {
-            overflow-y: scroll;
+    /* Column content */
+    .td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 8px;
+        border-width: 0;
+        border-color: $border-color;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        overflow: hidden;
+
+        &.td-borders {
+            border-top-width: 1px;
+            border-top-style: solid;
         }
 
-        .tr {
-            position: relative;
-            .td {
-                display: flex;
-                flex: 1 1 0;
-                justify-content: space-between;
-                align-items: center;
-                padding: 16px 8px;
-                border-width: 0;
-                border-color: $border-color;
-                border-bottom-width: 1px;
-                border-bottom-style: solid;
-                background-color: $background-color;
-                overflow: hidden;
-
-                &:focus {
-                    outline: none;
-                }
-
-                > .td-text, * {
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
-            }
-
-            .column-selector {
-                flex: unset;
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-    }
-
-    /* Table Footer */
-    .tfoot {
-        > .tr > .th {
-            display: flex;
-            padding: 16px;
-            border-width: 0;
-            background-color: $background-color;
+        &:focus {
+            outline: none;
         }
 
-        > .tr > .td {
-            display: flex;
-            padding: 16px;
-            border-width: 0;
-            background-color: $background-color;
+        > .td-text,
+        * {
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
     }
 
@@ -180,33 +185,58 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         outline: 0;
     }
 
-    .pagination {
-        display: flex;
-        justify-content: flex-end;
-        white-space: nowrap;
-        align-items: baseline;
-        margin: 16px;
-        color: $pagination-caption-color;
+    .align-column-left {
+        justify-content: flex-start;
 
-        .paging-status {
-            padding: 0 8px 8px;
-        }
-
-        button {
-            padding: 6px;
-            color: $pagination-button-color;
-            border-color: transparent;
-            background-color: transparent;
-
-            &:hover {
-                color: $primary-color;
-                border-color: transparent;
-                background-color: transparent;
-            }
+        span {
+            justify-content: flex-start;
         }
     }
 
-    .tr {
-        display: flex;
+    .align-column-center {
+        justify-content: center;
+
+        span {
+            justify-content: center;
+        }
+    }
+
+    .align-column-right {
+        justify-content: flex-end;
+
+        span {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.pagination-bar {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    align-items: baseline;
+    margin: 16px;
+    color: $pagination-caption-color;
+
+    .paging-status {
+        padding: 0 8px 8px;
+    }
+
+    .pagination-button {
+        padding: 6px;
+        color: $pagination-button-color;
+        border-color: transparent;
+        background-color: transparent;
+
+        &:hover {
+            color: $primary-color;
+            border-color: transparent;
+            background-color: transparent;
+        }
+
+        &:disabled {
+            border-color: transparent;
+            background-color: transparent;
+        }
     }
 }

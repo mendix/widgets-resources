@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.repeater.Repeater" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Repeater</name>
+    <description>Iterates over a data source and render a content</description>
+    <icon>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</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="datasource" type="datasource" isList="true">
+                    <caption>Data Source</caption>
+                    <description/>
+                </property>
+                <property key="content" type="widgets" dataSource="datasource">
+                    <caption>Content</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

@@ -1,0 +1,73 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Alerts
+
+   Default Bootstrap Alert boxes. Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages
+========================================================================== */
+
+.alert {
+    margin-top: 0;
+    padding: $spacing-medium;
+    border: 1px solid;
+    border-radius: $border-radius-default;
+}
+
+.alert-icon {
+    font-size: $font-size-h3;
+}
+
+.alert-title {
+    color: inherit;
+}
+
+.alert-description {
+    color: inherit;
+}
+
+//Variations
+
+.alert-info,
+.alert {
+    color: $alert-info-color;
+    border-color: $alert-info-border-color;
+    background-color: $alert-info-bg;
+}
+
+// Color variations
+.alert-success {
+    color: $alert-success-color;
+    border-color: $alert-success-border-color;
+    background-color: $alert-success-bg;
+}
+
+.alert-info {
+    color: $alert-info-color;
+    border-color: $alert-info-border-color;
+    background-color: $alert-info-bg;
+}
+
+.alert-warning {
+    color: $alert-warning-color;
+    border-color: $alert-warning-border-color;
+    background-color: $alert-warning-bg;
+}
+
+.alert-danger {
+    color: $alert-danger-color;
+    border-color: $alert-danger-border-color;
+    background-color: $alert-danger-bg;
+}
+
+//== State
+//## Styling when component is in certain state
+//-------------------------------------------------------------------------------------------------------------------//
+.has-error .alert {
+    margin-top: $spacing-small;
+    margin-bottom: 0;
+}

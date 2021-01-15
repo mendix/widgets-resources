@@ -1,0 +1,653 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Timeline hides the timeline header 1`] = `
+<div
+  className="widget-timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="widget-timeline-events-wrapper widget-timeline-no-divider"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <div
+              className="widget-timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="widget-timeline-event"
+          key="1"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <Icon
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Timeline renders timeline with basic configuration 1`] = `
+<div
+  className="widget-timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="widget-timeline-date-header"
+    >
+      <span>
+        Sun May 29 1453
+      </span>
+    </div>
+    <div
+      className="widget-timeline-events-wrapper"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <div
+              className="widget-timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="widget-timeline-event"
+          key="1"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <Icon
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Timeline renders timeline with custom configuration  1`] = `
+<div
+  className="widget-timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Mon May 30 1453"
+  >
+    <div
+      className="widget-timeline-date-header"
+    >
+      <p>
+        Day Divider
+      </p>
+    </div>
+    <div
+      className="widget-timeline-events-wrapper"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <div
+              className="widget-timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p>
+                Date Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p>
+                Title
+              </p>
+              <p>
+                Description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="widget-timeline-event"
+          key="1"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <div
+              className="widget-timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p>
+                Date Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p>
+                Title
+              </p>
+              <p>
+                Description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Timeline with action set change style when hovered 1`] = `
+<div
+  className="widget-timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="widget-timeline-date-header"
+    >
+      <span>
+        Sun May 29 1453
+      </span>
+    </div>
+    <div
+      className="widget-timeline-events-wrapper"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <div
+              className="widget-timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="widget-timeline-event"
+          key="1"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <Icon
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    className="timeline-date"
+    key="Mon May 30 1453"
+  >
+    <div
+      className="widget-timeline-date-header"
+    >
+      <span>
+        Mon May 30 1453
+      </span>
+    </div>
+    <div
+      className="widget-timeline-events-wrapper"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event clickable"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <Icon
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Timeline with action set renders with clickable styles 1`] = `
+<div
+  className="widget-timeline-wrapper"
+>
+  <div
+    className="timeline-date"
+    key="Sun May 29 1453"
+  >
+    <div
+      className="widget-timeline-date-header"
+    >
+      <span>
+        Sun May 29 1453
+      </span>
+    </div>
+    <div
+      className="widget-timeline-events-wrapper"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <div
+              className="widget-timeline-icon-circle"
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+        <li
+          className="widget-timeline-event"
+          key="1"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <Icon
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div
+    className="timeline-date"
+    key="Mon May 30 1453"
+  >
+    <div
+      className="widget-timeline-date-header"
+    >
+      <span>
+        Mon May 30 1453
+      </span>
+    </div>
+    <div
+      className="widget-timeline-events-wrapper"
+    >
+      <ul>
+        <li
+          className="widget-timeline-event clickable"
+          key="0"
+          onClick={[Function]}
+        >
+          <div
+            className="widget-timeline-icon-wrapper"
+          >
+            <Icon
+              icon={
+                Object {
+                  "iconUrl": "iconUrl",
+                  "type": "image",
+                }
+              }
+            />
+          </div>
+          <div
+            className="widget-timeline-flex-container widget-timeline-content-wrapper"
+          >
+            <div
+              className="widget-timeline-date-time-wrapper"
+            >
+              <p
+                className="widget-eventTime"
+              >
+                Basic event Time
+              </p>
+            </div>
+            <div
+              className="widget-timeline-flex-container widget-timeline-info-wrapper"
+            >
+              <p
+                className="widget-timeline-title"
+              >
+                Basic title
+              </p>
+              <p
+                className="widget-timeline-description"
+              >
+                Basic description
+              </p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;

@@ -13,6 +13,7 @@ const mxExports = [
     "NativeImage",
     "ListActionValue",
     "ListAttributeValue",
+    "ListExpressionValue",
     "ListWidgetValue",
     "WebIcon",
     "WebImage"

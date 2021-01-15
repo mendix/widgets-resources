@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popup menu renders popup menu 1`] = `
+<div
+  className="popupmenu mx-popup-menu"
+>
+  <div
+    className="popupmenu-trigger"
+    onClick={[Function]}
+  >
+    <button>
+      Trigger
+    </button>
+  </div>
+  <div
+    className="popupmenu-menu popupmenu-position-bottom"
+  >
+    <div
+      className="popupmenu-basic-item"
+      key="0"
+      onClick={[Function]}
+    >
+      Caption
+    </div>
+    <div
+      className="popupmenu-basic-divider"
+      key="1"
+    />
+  </div>
+</div>
+`;

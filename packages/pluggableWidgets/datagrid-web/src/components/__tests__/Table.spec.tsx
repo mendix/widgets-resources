@@ -55,10 +55,54 @@ describe("Table", () => {
                 filterable: "custom" as const,
                 resizable: false,
                 draggable: false,
-                hidable: "no" as const
+                hidable: "no" as const,
+                width: "autoFill" as const,
+                size: 1,
+                alignment: "left" as const
             }
         ];
         const component = shallow(<Table {...mockTableProps()} columns={columns} columnsFilterable />);
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("renders the structure correctly with empty placeholder", () => {
+        const component = shallow(
+            <Table {...mockTableProps()} emptyPlaceholderRenderer={renderWrapper => renderWrapper(<div />)} />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
+    it("renders the structure correctly with column alignments", () => {
+        const columns = [
+            {
+                header: "Test",
+                hasWidgets: false,
+                sortable: false,
+                filterable: "custom" as const,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const,
+                width: "autoFill" as const,
+                size: 1,
+                alignment: "center" as const
+            },
+            {
+                header: "Test 2",
+                hasWidgets: false,
+                sortable: false,
+                filterable: "custom" as const,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const,
+                width: "autoFill" as const,
+                size: 1,
+                alignment: "right" as const
+            }
+        ];
+
+        const component = shallow(<Table {...mockTableProps()} columns={columns} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -73,7 +117,10 @@ function mockTableProps(): TableProps<ObjectItem> {
             filterable: "no" as const,
             resizable: false,
             draggable: false,
-            hidable: "no" as const
+            hidable: "no" as const,
+            width: "autoFill" as const,
+            size: 1,
+            alignment: "left" as const
         }
     ];
     return {
@@ -86,14 +133,10 @@ function mockTableProps(): TableProps<ObjectItem> {
         pagingPosition: "bottom",
         columnsHidable: false,
         columnsDraggable: false,
-        filterMethod: "startsWith",
-        footerWidgets: undefined,
-        headerWidgets: undefined,
         className: "test",
         columnsFilterable: false,
         columnsSortable: false,
         columns,
-        valueForFilter: () => "dummy",
         valueForSort: () => "dummy",
         filterRenderer: () => <input type="text" value="dummy" />,
         cellRenderer: (renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header),

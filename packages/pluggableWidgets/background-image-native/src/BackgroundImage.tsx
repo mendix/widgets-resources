@@ -1,7 +1,7 @@
 import { createElement } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, StyleProp } from "react-native";
 import { ValueStatus } from "mendix";
-import { Image } from "mendix/components/native/Image";
+import { Image, SvgImageStyle } from "mendix/components/native/Image";
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
 
 import { BackgroundImageStyle, defaultBackgroundImageStyle } from "./ui/Styles";
@@ -31,7 +31,7 @@ export function BackgroundImage(props: BackgroundImageProps<BackgroundImageStyle
             : undefined,
         styles.image,
         { opacity, resizeMode }
-    ];
+    ] as StyleProp<SvgImageStyle>;
 
     return (
         <View style={styles.container} testID={name}>

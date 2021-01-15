@@ -1,0 +1,35 @@
+name: Testing Atlas Build
+
+on:
+    push:
+        branches: [master]
+        paths:
+            - "packages/theming/atlas/**"
+    pull_request:
+        branches: [master]
+        paths:
+            - "packages/theming/atlas/**"
+
+jobs:
+    test:
+        name: "Testing Atlas Build"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
+              with:
+                  submodules: false
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - name: "Installing dependencies"
+              run: npm install
+            - name: "Running Atlas build"
+              run: |
+                  cd packages/theming/atlas
+                  npm run build

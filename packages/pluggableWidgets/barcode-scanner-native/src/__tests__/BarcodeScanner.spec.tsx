@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@native-mobile-resources/util-widgets";
+import { actionValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
 import { fireEvent, render, RenderAPI } from "react-native-testing-library";
 
@@ -94,7 +94,7 @@ describe("BarcodeScanner", () => {
 });
 
 function detectBarcode(component: RenderAPI, barcode: string): void {
-    fireEvent(component.getByType(RNCamera), "barCodeRead", {
+    fireEvent(component.UNSAFE_getByType(RNCamera), "barCodeRead", {
         data: barcode,
         type: "qr",
         bounds: [

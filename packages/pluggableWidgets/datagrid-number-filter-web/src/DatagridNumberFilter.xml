@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Data grid number filter</name>
+    <description/>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAD+ElEQVR4Ae1YTUhUURR+b0ZMzNlFYEEtMgqhWtSicG0xiuFmhBYjJWEFRbtql0JRmyIIKkMGpcA/WqgYLqw2QZQugogM3UlQkKAkzEvHuX1H35sO72emN/P8mTwPLu/c7577nXu+e9+9d0bT5BEFRAFRQBQQBUQBUUAUEAVEAVFAFBAFRAFRQBTYWgro9nRjsdgJYAmUg/a2gOuT4GsZGBh4x3kRvxb1RyhVHA/AntZ1/VJ/f/8Y5wrximmvR/IUigSmWPbnCYCgk6cYVUqpDnswNwHWeub5GByxMEuKOwRpu3G7CRBkTN9cGORd353+sYMbd0muvvhGHftErj7Z2vGNZ53hvr6+Tvg0gqOe8SzCPoaxfGKYp4n+h9A4gVLKnEaIm9VXzE23AswBnsd7lg22FLP3DInxhFjzX5N8yBcI9yUu4nQ8gQiAzUU/PWhUxZQKOyLkAWCmvyOJC7wrYhxBvZ1jHna76ZtpJi7izADMyFsASjo6uFQTHTQe1A0ZM4tKTS0MLT5l3AWZOK5eYODPOQnq15qammo4xm1qIx+OEQdxcYzbeQlw9o0qQ9LvlUq9hRBXldJ2r5CuzhLnL8guLy+/ggRmLBLEovF2x+Px7RZmvU2s2/RZgakv6pctH7d3XgLMLmgVmqYfXiXU53Vd++ZGXijW1dU1FwqFzoEns3EioX2GYdy3cxNGbQxX1BdLf55hDjMvAYYb9J96Seh4WNNrI/u37YQYIw7mgIDe3t5XmMmHNrpWLPc6CzPtVqtOb+pDfTnmZuc8Bt06EfayvvSj1YZ9wDLX5I2ZvQHiUygHrADAOpubm+m405LJpP14+2r2sdw933mtAE+2NWrAMk5iOcdBn2IhKrHsH1MBVsnwFPlSH4Z5mkUhAI0el5hxLOvbPBPMMk5eFeMY+ZAvx7LZRSMAJVFdXX0LL7rheT0Tpo9XuwMvKgHa2tpSmGHP3wpY+nfIx5FlFqCoBDDzoN8Frg8+hyXXhixg3qcAcTYMqz3LmnFSpVf/PFGa2hEdMlr1cOgDPyWyxN/wpoIESC3/fo0bCi4fmXvKXpVWHSqdXoI4u+i+sOEZ5hhAQZ8A0h7TNT3tjKHGj1Zoc0588yEFrYDRxrKLSImK4xl1IJsTKGgFbERK2OgC/YOm6AQIWvT/SQAVDoen/AqUcw/AX0yZLd4v+Xr644J0r6enZ9JvzKJbAUjUbUJGcAW+7jd58ncTwLeK+QQ2+/iOhU3wiy3e50gkcgZXYJfj2ObpUnUToAV+vgfmwp0LohgUy9eDn7nT6HATK+EHyhi++2gikfjli0ScRQFRQBQQBUQBUUAUEAVEAVFAFBAFRAFRQBQQBbawAn8A23QtWVp5WScAAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="defaultValue" type="expression" required="false">
+                    <caption>Default value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <property key="defaultFilter" type="enumeration" defaultValue="equal">
+                    <caption>Default filter</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="greater">Greater than</enumerationValue>
+                        <enumerationValue key="greaterEqual">Greater than or equal</enumerationValue>
+                        <enumerationValue key="equal">Equal</enumerationValue>
+                        <enumerationValue key="notEqual">Not equal</enumerationValue>
+                        <enumerationValue key="smaller">Smaller than</enumerationValue>
+                        <enumerationValue key="smallerEqual">Smaller than or equal</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="placeholder" type="textTemplate" required="false">
+                    <caption>Placeholder</caption>
+                    <description />
+                </property>
+                <property key="adjustable" type="boolean" defaultValue="true">
+                    <caption>Adjustable by user</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="On change behavior">
+                <property key="delay" type="integer" defaultValue="500">
+                    <caption>Apply after (ms)</caption>
+                    <description>Wait this period before applying then change(s) to the filter</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Screen reader">
+                <property key="screenReaderButtonCaption" type="textTemplate" required="false">
+                    <caption>Button caption</caption>
+                    <description />
+                </property>
+                <property key="screenReaderInputCaption" type="textTemplate" required="false">
+                    <caption>Input caption</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

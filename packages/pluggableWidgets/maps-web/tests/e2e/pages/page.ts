@@ -10,7 +10,7 @@ export class Page {
     }
 
     getElements(name: string): WebdriverIO.Element[] {
-        $(name).waitForDisplayed(5000);
+        $(name).waitForDisplayed({ timeout: 5000 });
         return $$(name);
     }
 

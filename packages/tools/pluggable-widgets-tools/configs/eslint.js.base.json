@@ -24,9 +24,10 @@
     "plugins": ["jest", "react"],
     "rules": {
         "no-unused-vars": [
-            "error",
+            "warn",
             {
-                "varsIgnorePattern": "createElement"
+                "varsIgnorePattern": "createElement",
+                "args":  "none"
             }
         ],
 
@@ -196,6 +197,7 @@
         "no-ternary": "off",
         "no-throw-literal": "error",
         "no-trailing-spaces": "error",
+        "no-undef": "warn",
         "no-undef-init": "error",
         "no-undefined": "off",
         "no-underscore-dangle": "off",

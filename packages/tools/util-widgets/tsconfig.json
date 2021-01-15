@@ -3,8 +3,8 @@
     "baseUrl": "./",
     "include": ["./src"],
     "compilerOptions": {
-        "target": "es2015",
-        "lib": ["es2015"],
+        "target": "es2017",
+        "lib": ["es2015", "es2017"],
         "types": ["mendix-client", "big.js", "react-native", "jest"],
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,

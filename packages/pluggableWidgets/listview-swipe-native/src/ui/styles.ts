@@ -3,7 +3,7 @@ import { Style } from "@native-mobile-resources/util-widgets";
 
 export interface PanelStyle extends ViewStyle {
     panelSize: number;
-    threshold: number;
+    threshold?: number;
 }
 
 export interface ListViewSwipeStyle extends Style {

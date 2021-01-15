@@ -1,0 +1,48 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Labels
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+========================================================================== */
+// Color variations
+.label-default {
+    color: $label-default-color;
+    background-color: $label-default-bg;
+}
+
+.label-primary {
+    color: $label-primary-color;
+    background-color: $label-primary-bg;
+}
+
+.label-success {
+    color: $label-success-color;
+    background-color: $label-success-bg;
+}
+
+.label-inverse {
+    color: $label-inverse-color;
+    background-color: $label-inverse-bg;
+}
+
+.label-info {
+    color: $label-info-color;
+    background-color: $label-info-bg;
+}
+
+.label-warning {
+    color: $label-warning-color;
+    background-color: $label-warning-bg;
+}
+
+.label-danger {
+    color: $label-danger-color;
+    background-color: $label-danger-bg;
+}

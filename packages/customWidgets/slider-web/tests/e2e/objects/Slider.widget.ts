@@ -64,15 +64,15 @@ export default class SliderWidget {
     }
 
     waitForTrackDisplayed(reverse?: boolean): boolean {
-        return this.element.$(".rc-slider-track").waitForDisplayed(undefined, reverse);
+        return this.element.$(".rc-slider-track").waitForDisplayed({ reverse });
     }
 
     waitForTooltipExist(reverse?: boolean): boolean {
-        return $(".rc-slider-tooltip").waitForExist(undefined, reverse);
+        return $(".rc-slider-tooltip").waitForExist({ reverse });
     }
 
     waitForTooltipDisplayed(reverse?: boolean): boolean {
-        return $(".rc-slider-tooltip").waitForDisplayed(undefined, reverse);
+        return $(".rc-slider-tooltip").waitForDisplayed({ reverse });
     }
 
     getTooltipValue(): string {

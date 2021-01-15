@@ -24,14 +24,14 @@ async function createParamObject(entity: string, url: string): Promise<mendix.li
 
 function splitUrlToObject(url: string): Records {
     const urlObject = new UrlParse(url);
-    const queryValues: Records = {};
-    const query = urlObject.query;
+    const parsedUrlObject = new UrlParse(url, true);
+    const queryValues = {} as any;
+    const query = parsedUrlObject.query;
 
     for (const [key, value] of Object.entries(query)) {
         queryValues[key.toLowerCase()] = value !== undefined ? value : "";
     }
 
-    console.log("query", queryValues);
     const paths = urlObject.pathname
         .replace(/^\/*/, "")
         .split("/")

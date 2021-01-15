@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter component renders correctly 1`] = `
+<div
+  className="filter-container"
+  data-focusindex={0}
+>
+  <FilterSelector
+    defaultFilter="equal"
+    onChange={[Function]}
+  />
+  <input
+    className="form-control filter-input"
+    onChange={[Function]}
+    type="number"
+  />
+</div>
+`;
+
+exports[`Filter component renders correctly when not adjustable by user 1`] = `
+<div
+  className="filter-container"
+  data-focusindex={0}
+>
+  <input
+    className="form-control"
+    onChange={[Function]}
+    type="number"
+  />
+</div>
+`;
+
+exports[`Filter component renders correctly with aria labels 1`] = `
+<div
+  className="filter-container"
+  data-focusindex={0}
+>
+  <FilterSelector
+    ariaLabel="my label"
+    defaultFilter="equal"
+    onChange={[Function]}
+  />
+  <input
+    aria-label="my label"
+    className="form-control filter-input"
+    onChange={[Function]}
+    type="number"
+  />
+</div>
+`;

@@ -1,15 +1,13 @@
 import { createElement } from "react";
 import { Text } from "react-native";
 import { render } from "react-native-testing-library";
-import { dynamicValue } from "@native-mobile-resources/util-widgets";
+import { dynamicValue } from "@widgets-resources/piw-utils";
 
 import { BackgroundImage } from "../BackgroundImage";
 import { BackgroundImageProps } from "../../typings/BackgroundImageProps";
 import { BackgroundImageStyle } from "../ui/Styles";
 import { NativeImage } from "mendix";
 import Big from "big.js";
-
-jest.mock("mendix/components/native/Image", () => jest.requireActual("./__mocks__/mendix/components/native/Image"));
 
 const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",

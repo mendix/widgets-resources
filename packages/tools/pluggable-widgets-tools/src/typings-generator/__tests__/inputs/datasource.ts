@@ -25,6 +25,15 @@ export const datasourceInput = `<?xml version="1.0" encoding="utf-8"?>
                 <caption>Action</caption>
                 <description />
             </property>
+            <property key="textTemplateAttribute" type="textTemplate" dataSource="contentSource">
+                <caption>Text Template</caption>
+                <description />
+            </property>
+            <property key="expressionAttribute" type="expression" dataSource="contentSource">
+                <caption>Expression</caption>
+                <description />
+                <returnType type="Decimal"/>
+            </property>
             <property key="datasourceProperties" type="object" isList="true">
                 <caption>Data source properties</caption>
                 <description />
@@ -97,6 +106,15 @@ export const datasourceInputNative = `<?xml version="1.0" encoding="utf-8"?>
             <property key="actionAttribute" type="action" dataSource="contentSource">
                 <caption>Action</caption>
                 <description />
+            </property>
+            <property key="textTemplateAttribute" type="textTemplate" dataSource="contentSource">
+                <caption>Text Template</caption>
+                <description />
+            </property>
+            <property key="expressionAttribute" type="expression" dataSource="contentSource">
+                <caption>Expression</caption>
+                <description />
+                <returnType type="Decimal"/>
             </property>
             <property key="datasourceProperties" type="object" isList="true">
                 <caption>Data source properties</caption>

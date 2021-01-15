@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { NativeModules } from "react-native";
-import ReactNativeFirebase from "react-native-firebase";
+import { NativeModules, Platform } from "react-native";
+import PushNotification from "react-native-push-notification";
 
 /**
  * @param {string} notificationId - This field is required.
@@ -13,18 +13,22 @@ import ReactNativeFirebase from "react-native-firebase";
  */
 export async function CancelScheduledNotification(notificationId?: string): Promise<void> {
     // BEGIN USER CODE
-
-    if (NativeModules && !NativeModules.RNFirebase) {
-        return Promise.reject(new Error("Firebase module is not available in your app"));
+    // Documentation https://github.com/zo0r/react-native-push-notification
+    const isIOS = Platform.OS === "ios";
+    if (
+        NativeModules &&
+        ((isIOS && !NativeModules.RNCPushNotificationIOS) || (!isIOS && !NativeModules.RNPushNotification))
+    ) {
+        return Promise.reject(new Error("Notifications module is not available in your app"));
     }
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
+    const RNPushNotification: typeof PushNotification = require("react-native-push-notification");
 
     if (!notificationId) {
         return Promise.reject(new Error("Input parameter 'Notification id' is required"));
     }
 
-    firebase.notifications().cancelNotification(notificationId);
+    RNPushNotification.cancelLocalNotifications({ id: notificationId });
     return Promise.resolve();
 
     // END USER CODE

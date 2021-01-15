@@ -11,7 +11,7 @@ describe("badge-web", () => {
         it("compares with a screenshot baseline and checks if all badges elements are rendered as expected", () => {
             const elem = $(".sprintrFeedback__sidebar");
             browser.setWindowRect(0, 0, 1024, 768);
-            elem.waitForDisplayed(5000);
+            elem.waitForDisplayed({ timeout: 5000 });
             browser.saveElement($(".mx-dataview-content"), "badgePageContent", {
                 removeElements: [elem]
             });

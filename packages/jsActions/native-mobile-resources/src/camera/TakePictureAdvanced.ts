@@ -5,13 +5,22 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import { Alert, Linking, NativeModules } from "react-native";
-import ImagePicker from "react-native-image-picker";
+import ImagePicker, { ImagePickerOptions, ImagePickerResponse } from "react-native-image-picker";
+import { getLocales } from "react-native-localize";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
 type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
 /**
+ * Take a picture using the camera or import one from the image library on the device.
+ *
+ * The result is an ImageMetaData object. Most items are self-explanatory.
+ *
+ * The FileType is not the extension but the mime type, for example image/jpeg when the image is a jpg file
+ * You can get the right extension from the FileName:
+ * substring($ImageMetaData/FileName, findLast($ImageMetaData/FileName, '.'))
+ *
  * @param {MxObject} picture - This field is required.
  * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
@@ -121,8 +130,10 @@ export async function TakePictureAdvanced(
         });
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function getPictureMethod() {
+    function getPictureMethod(): (
+        options: ImagePickerOptions,
+        callback: (response: ImagePickerResponse) => void
+    ) => void {
         const source = pictureSource ? pictureSource : "either";
 
         switch (source) {
@@ -136,20 +147,29 @@ export async function TakePictureAdvanced(
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function getOptions() {
+    function getOptions(): ImagePickerOptions {
         const { maxWidth, maxHeight } = getPictureQuality();
+        const [language] = getLocales().map(local => local.languageCode);
+        const isDutch = language === "nl";
 
         return {
-            mediaType: "photo" as "photo",
+            mediaType: "photo" as const,
             maxWidth,
             maxHeight,
             noData: true,
+            title: isDutch ? "Foto toevoegen" : "Select a photo",
+            cancelButtonTitle: isDutch ? "Annuleren" : "Cancel",
+            takePhotoButtonTitle: isDutch ? "Foto maken" : "Take photo",
+            chooseFromLibraryButtonTitle: isDutch ? "Kies uit bibliotheek" : "Choose from library",
             permissionDenied: {
-                title: "This app does not have access to your camera or photos",
-                text: "To enable access, tap Settings > Permissions and turn on Camera and Storage.",
-                reTryTitle: "Settings",
-                okTitle: "Cancel"
+                title: isDutch
+                    ? "Deze app heeft geen toegang tot uw camera of foto's"
+                    : "This app does not have access to your camera or photos",
+                text: isDutch
+                    ? "Ga naar Instellingen > Privacy om toegang tot uw camera en bestanden te verlenen."
+                    : "To enable access, tap Settings > Privacy and turn on Camera and Photos/Storage.",
+                reTryTitle: isDutch ? "Instellingen" : "Settings",
+                okTitle: isDutch ? "Annuleren" : "Cancel"
             },
             storageOptions: {
                 skipBackup: true,
@@ -228,8 +248,7 @@ export async function TakePictureAdvanced(
         );
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-    function createMxObject(entity: string) {
+    function createMxObject(entity: string): Promise<mendix.lib.MxObject> {
         return new Promise((resolve, reject) => {
             mx.data.create({
                 entity,

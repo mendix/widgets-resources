@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Atlas layout
+
+   The core stucture of all atlas layouts
+========================================================================== */
+.layout-atlas {
+    // Toggle button
+    .toggle-btn > img,
+    .toggle-btn > .glyphicon {
+        margin: 0;
+    }
+
+    // Sidebar
+    .region-sidebar {
+        background-color: $navsidebar-bg;
+
+        .mx-navigationtree .navbar-inner > ul > li > a {
+            padding: 8px 16px;
+
+            .glyphicon {
+                margin-right: 8px;
+            }
+        }
+
+        .toggle-btn {
+            margin-right: 8px;
+            border-color: transparent;
+            border-radius: 0;
+            background: transparent;
+        }
+    }
+
+    // Topbar
+    .region-topbar {
+        position: relative;
+        z-index: 1; // Show dropshadow
+        min-height: $topbar-minimalheight;
+        background-color: $navtopbar-bg;
+        box-shadow: 0px 2px 2px rgba(194, 196, 201, 0.30354);
+        //removed border & chnaged box-shadow
+
+        &::before {
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 4px;
+            content: "";
+            background-color: $brand-primary;
+        }
+
+        // Topbar Content
+        .topbar-content {
+            display: flex;
+            align-items: center;
+            min-height: $topbar-minimalheight;
+        }
+
+        // Toggle btn
+        .toggle-btn {
+            margin-right: 15px;
+            padding: 5px;
+        }
+
+        // For your company, product, or project name
+        .navbar-brand {
+            display: inline-block;
+            float: none; // reset bootstrap
+            height: auto;
+            padding: 0;
+            line-height: inherit;
+
+            img {
+                display: inline-block;
+                @if $brand-logo !=false {
+                    width: 0;
+                    height: 0;
+                    padding: ($brand-logo-height / 2) ($brand-logo-width / 2);
+                    background-image: url($brand-logo);
+                    background-repeat: no-repeat;
+                    background-position: left center;
+                    background-size: $brand-logo-width;
+                } @else {
+                    width: auto;
+                    height: $brand-logo-height;
+                }
+            }
+
+            a {
+                margin-left: 5px;
+                color: $navbar-brand-name;
+                font-size: 20px;
+
+                &:hover,
+                &:focus {
+                    text-decoration: none;
+                }
+            }
+        }
+
+        .mx-navbar {
+            display: inline-block;
+            margin-left: $gutter-size;
+            vertical-align: middle;
+            background: transparent;
+
+            & > .mx-navbar-item {
+                & > a {
+                    margin-top: 5px;
+                    padding: 0 20px;
+                }
+            }
+        }
+    }
+}

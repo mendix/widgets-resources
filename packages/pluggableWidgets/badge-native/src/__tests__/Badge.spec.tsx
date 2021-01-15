@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue } from "@native-mobile-resources/util-widgets";
+import { actionValue, dynamicValue } from "@widgets-resources/piw-utils";
 import { createElement } from "react";
 import { Platform, Text } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";
@@ -58,7 +58,7 @@ describe("Badge", () => {
             it("executes the action when pressed", () => {
                 const onClickAction = actionValue();
                 const component = render(<Badge {...defaultProps} onClick={onClickAction} />);
-                fireEvent.press(component.getByType(Text));
+                fireEvent.press(component.UNSAFE_getByType(Text));
                 expect(onClickAction.execute).toHaveBeenCalledTimes(1);
             });
         });
@@ -78,7 +78,7 @@ describe("Badge", () => {
             it("executes the action when pressed", () => {
                 const onClickAction = actionValue();
                 const component = render(<Badge {...defaultProps} onClick={onClickAction} />);
-                fireEvent.press(component.getByType(Text));
+                fireEvent.press(component.UNSAFE_getByType(Text));
                 expect(onClickAction.execute).toHaveBeenCalledTimes(1);
             });
         });

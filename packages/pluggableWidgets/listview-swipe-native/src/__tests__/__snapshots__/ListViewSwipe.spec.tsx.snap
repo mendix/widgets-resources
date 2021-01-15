@@ -5,134 +5,30 @@ exports[`List View Swipe render with archive animation 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <RNGestureHandlerButton
-        activeOpacity={0.105}
-        collapsable={false}
-        onActiveStateChange={[Function]}
-        onGestureEvent={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        onHandlerStateChange={[Function]}
-        onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "alignItems": "stretch",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              },
-              false,
-            ],
-          ]
-        }
-        testID="list-view-swipe-test$leftAction"
-        underlayColor="black"
-      >
-        <View
-          style={
-            Object {
-              "backgroundColor": "black",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-        <View>
-          <Text>
-            Test
-          </Text>
-        </View>
-      </RNGestureHandlerButton>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;
@@ -142,174 +38,30 @@ exports[`List View Swipe render with buttons option 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <View
-        style={
-          Object {
-            "flexDirection": "row",
-            "width": 128,
-          }
-        }
-        testID="list-view-swipe-test$leftButtons"
-      >
-        <View
-          style={
-            Object {
-              "alignItems": "stretch",
-              "flex": 1,
-              "flexDirection": "row",
-              "justifyContent": "center",
-            }
-          }
-        >
-          <RNGestureHandlerButton
-            activeOpacity={0.105}
-            collapsable={false}
-            onActiveStateChange={[Function]}
-            onGestureEvent={[Function]}
-            onGestureHandlerEvent={[Function]}
-            onGestureHandlerStateChange={[Function]}
-            onHandlerStateChange={[Function]}
-            style={
-              Array [
-                Object {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ]
-            }
-            underlayColor="black"
-          >
-            <View
-              style={
-                Object {
-                  "backgroundColor": "black",
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
-            />
-            Button 1
-          </RNGestureHandlerButton>
-          <RNGestureHandlerButton
-            activeOpacity={0.105}
-            collapsable={false}
-            onActiveStateChange={[Function]}
-            onGestureEvent={[Function]}
-            onGestureHandlerEvent={[Function]}
-            onGestureHandlerStateChange={[Function]}
-            onHandlerStateChange={[Function]}
-            style={
-              Array [
-                Object {
-                  "overflow": "hidden",
-                },
-                undefined,
-              ]
-            }
-            underlayColor="black"
-          >
-            <View
-              style={
-                Object {
-                  "backgroundColor": "black",
-                  "bottom": 0,
-                  "left": 0,
-                  "opacity": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
-            />
-            Button 2
-          </RNGestureHandlerButton>
-        </View>
-      </View>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;
@@ -319,134 +71,30 @@ exports[`List View Swipe render with left and action 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <RNGestureHandlerButton
-        activeOpacity={0.105}
-        collapsable={false}
-        onActiveStateChange={[Function]}
-        onGestureEvent={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        onHandlerStateChange={[Function]}
-        onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "alignItems": "stretch",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              },
-              false,
-            ],
-          ]
-        }
-        testID="list-view-swipe-test$leftAction"
-        underlayColor="black"
-      >
-        <View
-          style={
-            Object {
-              "backgroundColor": "black",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-        <View>
-          <Text>
-            Test
-          </Text>
-        </View>
-      </RNGestureHandlerButton>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;
@@ -456,134 +104,30 @@ exports[`List View Swipe render with left and right with actions 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <RNGestureHandlerButton
-        activeOpacity={0.105}
-        collapsable={false}
-        onActiveStateChange={[Function]}
-        onGestureEvent={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        onHandlerStateChange={[Function]}
-        onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "alignItems": "stretch",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              },
-              false,
-            ],
-          ]
-        }
-        testID="list-view-swipe-test$leftAction"
-        underlayColor="black"
-      >
-        <View
-          style={
-            Object {
-              "backgroundColor": "black",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-        <View>
-          <Text>
-            Left Side
-          </Text>
-        </View>
-      </RNGestureHandlerButton>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;
@@ -593,134 +137,30 @@ exports[`List View Swipe render with right and action 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <RNGestureHandlerButton
-        activeOpacity={0.105}
-        collapsable={false}
-        onActiveStateChange={[Function]}
-        onGestureEvent={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        onHandlerStateChange={[Function]}
-        onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "alignItems": "stretch",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              },
-              false,
-            ],
-          ]
-        }
-        testID="list-view-swipe-test$leftAction"
-        underlayColor="black"
-      >
-        <View
-          style={
-            Object {
-              "backgroundColor": "black",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-        <View>
-          <Text>
-            Test
-          </Text>
-        </View>
-      </RNGestureHandlerButton>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;
@@ -730,137 +170,30 @@ exports[`List View Swipe render with toggle animation 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <RNGestureHandlerButton
-        activeOpacity={0.105}
-        collapsable={false}
-        onActiveStateChange={[Function]}
-        onGestureEvent={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        onHandlerStateChange={[Function]}
-        onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "alignItems": "stretch",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              },
-              Object {
-                "flex": 0,
-                "width": 128,
-              },
-            ],
-          ]
-        }
-        testID="list-view-swipe-test$leftAction"
-        underlayColor="black"
-      >
-        <View
-          style={
-            Object {
-              "backgroundColor": "black",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-        <View>
-          <Text>
-            Test
-          </Text>
-        </View>
-      </RNGestureHandlerButton>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;
@@ -870,134 +203,30 @@ exports[`List View Swipe renders 1`] = `
   style={Object {}}
 >
   <View
-    collapsable={false}
-    onGestureHandlerEvent={[Function]}
-    onGestureHandlerStateChange={[Function]}
-    onLayout={[Function]}
-    style={
-      Object {
-        "overflow": "hidden",
-      }
-    }
+    friction={1}
+    leftThreshold={64}
+    onSwipeableLeftOpen={[Function]}
+    onSwipeableRightOpen={[Function]}
+    overshootLeft={false}
+    overshootRight={false}
+    renderLeftActions={[Function]}
+    renderRightActions={[Function]}
+    rightThreshold={64}
+    useNativeAnimations={true}
   >
     <View
+      onLayout={[Function]}
       style={
         Object {
-          "bottom": 0,
-          "flexDirection": "row",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
+          "alignItems": "stretch",
+          "backgroundColor": "white",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "space-between",
         }
       }
-    >
-      <RNGestureHandlerButton
-        activeOpacity={0.105}
-        collapsable={false}
-        onActiveStateChange={[Function]}
-        onGestureEvent={[Function]}
-        onGestureHandlerEvent={[Function]}
-        onGestureHandlerStateChange={[Function]}
-        onHandlerStateChange={[Function]}
-        onPress={[Function]}
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "alignItems": "stretch",
-                "flex": 1,
-                "flexDirection": "row",
-                "justifyContent": "center",
-              },
-              false,
-            ],
-          ]
-        }
-        testID="list-view-swipe-test$leftAction"
-        underlayColor="black"
-      >
-        <View
-          style={
-            Object {
-              "backgroundColor": "black",
-              "bottom": 0,
-              "left": 0,
-              "opacity": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-        <View>
-          <Text>
-            Test
-          </Text>
-        </View>
-      </RNGestureHandlerButton>
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      style={
-        Object {
-          "bottom": 0,
-          "flexDirection": "row-reverse",
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-          "transform": Array [
-            Object {
-              "translateX": -10000,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-      />
-    </View>
-    <View
-      collapsable={false}
-      onGestureHandlerEvent={[Function]}
-      onGestureHandlerStateChange={[Function]}
-      pointerEvents="auto"
-      style={
-        Object {
-          "transform": Array [
-            Object {
-              "translateX": -0,
-            },
-          ],
-        }
-      }
-    >
-      <View
-        onLayout={[Function]}
-        style={
-          Object {
-            "alignItems": "stretch",
-            "backgroundColor": "white",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "space-between",
-          }
-        }
-        testID="list-view-swipe-test"
-      />
-    </View>
+      testID="list-view-swipe-test"
+    />
   </View>
 </View>
 `;

@@ -1,3 +1,4 @@
+.DS_Store
 .idea
 dist
 node_modules
@@ -14,3 +15,5 @@ detox/*.log
 **/results
 mendixProject
 **/screenshot
+**/screenshot-results
+**/atlas/tests/testProject

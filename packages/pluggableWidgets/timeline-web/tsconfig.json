@@ -1,0 +1,6 @@
+{
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "baseUrl": "./",
+    "types": ["mendix-client"],
+    "include": ["./src", "./typings"]
+}

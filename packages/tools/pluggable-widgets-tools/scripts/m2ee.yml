@@ -14,7 +14,7 @@ m2ee:
             "-Xms512M",
             "-Djava.io.tmpdir=/source/tests/testProject/deployment/data/tmp",
         ]
-    javabin: /opt/java/openjdk/bin/java
+    javabin: /usr/bin/java
     pidfile: /var/run/m2ee.pid
 mxruntime:
     DTAPMode: T

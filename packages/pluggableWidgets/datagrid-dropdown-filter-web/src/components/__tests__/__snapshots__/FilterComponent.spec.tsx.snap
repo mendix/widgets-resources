@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Filter selector with multi selection renders correctly with ariaLabel 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    aria-label="my label"
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with multi selection renders correctly with emptyOptioncaption 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    placeholder="find me"
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with multi selection renders correctly with no options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with multi selection renders correctly with options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with ariaLabel 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    aria-label="my label"
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with emptyOptioncaption 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    placeholder="find me"
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with no options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+</div>
+`;
+
+exports[`Filter selector with single selection renders correctly with options 1`] = `
+<div
+  className="dropdown-container"
+  data-focusindex={0}
+>
+  <input
+    aria-controls="undefined-dropdown-list"
+    aria-expanded={false}
+    aria-haspopup={true}
+    className="form-control dropdown-triggerer"
+    onClick={[Function]}
+    onFocus={[Function]}
+    value=""
+  />
+</div>
+`;
