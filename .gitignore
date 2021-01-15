@@ -14,3 +14,4 @@ detox/*.log
 **/results
 mendixProject
 **/screenshot
+packages/pluggableWidgets/web-view-native/tests/testProject
