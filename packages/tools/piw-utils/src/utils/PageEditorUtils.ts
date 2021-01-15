@@ -2,7 +2,7 @@
 /**
  * TODO: Include tests for methods
  */
-import { Property, PropertyGroup } from "../typings";
+import { Properties, Property, PropertyGroup } from "../typings";
 
 declare type Option<T> = T | undefined;
 
@@ -34,6 +34,16 @@ export function hidePropertiesIn<T>(propertyGroups: PropertyGroup[], _value: T, 
     keys.forEach(key =>
         modifyProperty((_, index, container) => container.splice(index, 1), propertyGroups, key, undefined, undefined)
     );
+}
+
+export function hideNestedPropertiesIn<T, TKey extends keyof T>(
+    propertyGroups: Properties,
+    _value: T,
+    key: TKey,
+    nestedPropIndex: number,
+    nestedPropKeys: Array<T[TKey] extends Array<infer TChild> ? keyof TChild : never>
+): void {
+    nestedPropKeys.forEach(nestedKey => hidePropertyIn(propertyGroups, _value, key, nestedPropIndex, nestedKey));
 }
 
 export function changePropertyIn<T, TKey extends keyof T>(

@@ -1,11 +1,35 @@
 import { createElement, Fragment } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { render } from "react-native-testing-library";
 import { ListViewSwipe } from "../ListViewSwipe";
 import { ListViewSwipeProps } from "../../typings/ListViewSwipeProps";
 import { ListViewSwipeStyle } from "../ui/styles";
-import { actionValue } from "@native-mobile-resources/util-widgets";
+import { actionValue } from "@widgets-resources/piw-utils";
 import { RectButton } from "react-native-gesture-handler";
+
+jest.mock("react-native-gesture-handler", () => ({
+    ScrollView,
+    PanGestureHandler: View,
+    TapGestureHandler: View,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    attachGestureHandler: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    createGestureHandler: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    dropGestureHandler: () => {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    updateGestureHandler: () => {},
+    Direction: {
+        RIGHT: 1,
+        LEFT: 2,
+        UP: 4,
+        DOWN: 8
+    },
+    RectButton: View,
+    State: { BEGAN: "BEGAN", FAILED: "FAILED", ACTIVE: "ACTIVE", END: "END", UNDETERMINED: "UNDETERMINED" }
+}));
+
+jest.mock("react-native-gesture-handler/Swipeable", () => View);
 
 describe("List View Swipe", () => {
     let defaultProps: ListViewSwipeProps<ListViewSwipeStyle>;

@@ -3,6 +3,8 @@ import { DatagridContainerProps } from "../typings/DatagridProps";
 
 import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
+import classNames from "classnames";
+import { FilterContext, FilterFunction } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
@@ -34,27 +36,21 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         [props.datasource, props.pageSize, isInfiniteLoad, currentPage]
     );
 
+    const onConfigurationChange = useCallback(() => {
+        props.onConfigurationChange?.execute();
+    }, [props.onConfigurationChange]);
+
+    const customFiltersState = props.columns.map(() => useState<FilterFunction>());
+    const items = (props.datasource.items ?? []).filter(item =>
+        customFiltersState.every(
+            ([customFilter], columnIndex) =>
+                !customFilter || customFilter.filter(item, props.columns[columnIndex].attribute)
+        )
+    );
+
     return (
         <Table
             className={props.class}
-            columns={props.columns}
-            columnsDraggable={props.columnsDraggable}
-            columnsFilterable={props.columnsFilterable}
-            columnsHidable={props.columnsHidable}
-            columnsResizable={props.columnsResizable}
-            columnsSortable={props.columnsSortable}
-            data={props.datasource.items ?? []}
-            filterMethod={props.filterMethod}
-            footerWidgets={<div className="header">{props.footerWidgets}</div>}
-            hasMoreItems={props.datasource.hasMoreItems ?? false}
-            headerWidgets={<div className="footer">{props.headerWidgets}</div>}
-            numberOfItems={props.datasource.totalCount}
-            page={currentPage}
-            pageSize={props.pageSize}
-            paging={props.pagingEnabled}
-            pagingPosition={props.pagingPosition}
-            setPage={setPage}
-            styles={props.style}
             cellRenderer={useCallback(
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
@@ -63,29 +59,53 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                             column.content(value)
                         ) : (
                             <span className="td-text">{column.attribute(value).displayValue}</span>
-                        )
+                        ),
+                        classNames(
+                            `align-column-${column.alignment}`,
+                            props.rowClass?.(value)?.value,
+                            column.columnClass?.(value)?.value
+                        ),
+                        props.onClick ? useCallback(() => props.onClick?.(value).execute(), [props.onClick]) : undefined
                     );
                 },
-                [props.columns]
+                [props.columns, props.rowClass, props.onClick]
             )}
-            valueForFilter={useCallback(
-                (value, columnIndex) => {
+            columns={props.columns}
+            columnsDraggable={props.columnsDraggable}
+            columnsFilterable={props.columnsFilterable}
+            columnsHidable={props.columnsHidable}
+            columnsResizable={props.columnsResizable}
+            columnsSortable={props.columnsSortable}
+            data={items}
+            emptyPlaceholderRenderer={
+                props.showEmptyPlaceholder
+                    ? useCallback(renderWrapper => renderWrapper(props.emptyPlaceholder), [props.emptyPlaceholder])
+                    : undefined
+            }
+            filterRenderer={useCallback(
+                (renderWrapper, columnIndex) => {
                     const column = props.columns[columnIndex];
-                    return column.attribute(value).displayValue;
+                    const [, setValue] = customFiltersState[columnIndex];
+                    return renderWrapper(
+                        <FilterContext.Provider value={setValue}>{column.filter}</FilterContext.Provider>
+                    );
                 },
-                [props.columns]
+                [props.columns, props.datasource]
             )}
+            hasMoreItems={props.datasource.hasMoreItems ?? false}
+            numberOfItems={props.datasource.totalCount}
+            page={currentPage}
+            pageSize={props.pageSize}
+            paging={props.pagingEnabled}
+            pagingPosition={props.pagingPosition}
+            settings={props.configurationAttribute}
+            onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
+            setPage={setPage}
+            styles={props.style}
             valueForSort={useCallback(
                 (value, columnIndex) => {
                     const column = props.columns[columnIndex];
                     return column.attribute(value).value;
-                },
-                [props.columns]
-            )}
-            filterRenderer={useCallback(
-                (renderWrapper, columnIndex) => {
-                    const column = props.columns[columnIndex];
-                    return renderWrapper(column.customFilter);
                 },
                 [props.columns]
             )}

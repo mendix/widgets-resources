@@ -1,6 +1,6 @@
-import { ActionValue } from "mendix";
-import { Component } from "react";
-import firebase, { RNFirebase } from "react-native-firebase";
+import { ActionValue, ValueStatus } from "mendix";
+import { useEffect, useRef, useState } from "react";
+import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
 import { executeAction } from "@widgets-resources/piw-utils";
@@ -10,67 +10,97 @@ interface NotificationData {
     guid?: string;
 }
 
-export class Notifications extends Component<NotificationsProps<undefined>> {
-    private listeners: Array<() => void> = [];
+export function Notifications(props: NotificationsProps<undefined>) {
+    const listeners = useRef<Array<() => void>>([]);
+    const [loadNotifications, setLoadNotifications] = useState(false);
 
-    componentDidMount(): void {
-        this.checkForInitialNotification();
-
-        this.listeners = [
-            firebase.notifications().onNotification(notification => this.onReceive(notification)),
-            firebase.notifications().onNotificationOpened(notificationOpen => this.onOpen(notificationOpen))
-        ];
-    }
-
-    componentWillUnmount(): void {
-        this.listeners.forEach(unsubscribe => unsubscribe());
-    }
-
-    render(): null {
-        return null;
-    }
-
-    private checkForInitialNotification(): Promise<void> {
-        return firebase
-            .notifications()
-            .getInitialNotification()
-            .then(notificationOpen => {
-                if (notificationOpen) {
-                    this.onOpen(notificationOpen);
-                }
-            });
-    }
-
-    private onReceive(notification: RNFirebase.notifications.Notification): void {
-        this.handleNotification(notification, action => action.onReceive);
-    }
-
-    private onOpen(notificationOpen: RNFirebase.notifications.NotificationOpen): void {
-        this.handleNotification(notificationOpen.notification, action => action.onOpen);
-    }
-
-    private handleNotification(
-        notification: RNFirebase.notifications.Notification,
+    const handleNotification = (
+        notification: FirebaseMessagingTypes.Notification,
+        data: NotificationData | undefined,
         getHandler: (action: ActionsType) => ActionValue | undefined
-    ): void {
-        const data: NotificationData = notification.data;
-        const actions = this.props.actions.filter(item => item.name === data.actionName);
+    ): void => {
+        const body: string = notification.body ?? "";
+        const title: string = notification.title ?? "";
+        const subtitle: string = notification.ios?.subtitle ?? "";
+        const actions = props.actions.filter(item => item.name === data?.actionName);
 
         if (actions.length === 0) {
             return;
         }
 
-        if (this.props.guid) {
-            this.props.guid.setValue(data.guid);
+        if (props.guid) {
+            props.guid.setValue(data?.guid);
+        }
+        if (props.title) {
+            props.title.setValue(title);
+        }
+        if (props.subtitle) {
+            props.subtitle.setValue(subtitle);
+        }
+        if (props.body) {
+            props.body.setValue(body);
+        }
+        if (props.action) {
+            props.action.setValue(actions.join(" "));
         }
 
         actions.forEach(action => {
             const handler = getHandler(action);
             executeAction(handler);
         });
+    };
 
-        if (notification.notificationId) {
-            firebase.notifications().removeDeliveredNotification(notification.notificationId);
+    const onReceive = (notification: FirebaseMessagingTypes.RemoteMessage): void => {
+        if (notification.notification) {
+            handleNotification(notification.notification, notification.data, action => action.onReceive);
         }
-    }
+    };
+
+    const onOpen = (notificationOpen: FirebaseMessagingTypes.RemoteMessage): void => {
+        if (notificationOpen.notification) {
+            handleNotification(notificationOpen.notification, notificationOpen.data, action => action.onOpen);
+        }
+    };
+
+    useEffect(() => {
+        if (loadNotifications) {
+            if (!messaging().isDeviceRegisteredForRemoteMessages) {
+                messaging().registerDeviceForRemoteMessages();
+            }
+            messaging()
+                .getInitialNotification()
+                .then((notificationOpen: FirebaseMessagingTypes.RemoteMessage) => {
+                    if (notificationOpen) {
+                        onOpen(notificationOpen);
+                    }
+                });
+            listeners.current = [
+                messaging().onMessage(async (notification: FirebaseMessagingTypes.RemoteMessage) =>
+                    onReceive(notification)
+                ),
+                messaging().onNotificationOpenedApp(async (notificationOpen: FirebaseMessagingTypes.RemoteMessage) =>
+                    onOpen(notificationOpen)
+                )
+            ];
+            return () => {
+                listeners.current.forEach(unsubscribe => unsubscribe());
+            };
+        }
+    }, [loadNotifications]);
+
+    useEffect(() => {
+        if (
+            (props.guid && props.guid.status !== ValueStatus.Available) ||
+            (props.title && props.title.status !== ValueStatus.Available) ||
+            (props.subtitle && props.subtitle.status !== ValueStatus.Available) ||
+            (props.body && props.body.status !== ValueStatus.Available) ||
+            (props.action && props.action.status !== ValueStatus.Available)
+        ) {
+            setLoadNotifications(false);
+            return;
+        }
+        setLoadNotifications(true);
+    }, [props.guid, props.title, props.subtitle, props.body, props.action]);
+
+    return null;
 }

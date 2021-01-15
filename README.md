@@ -1,6 +1,5 @@
 ![Build Status](https://travis-ci.org/mendix/widgets-resources.svg?branch=master)
 ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
-![GitHub issues](https://img.shields.io/github/issues/mendix/widgets-resources)
 
 # Widgets resources
 
@@ -57,6 +56,7 @@ widgets on Native Mobile Resources module.
 |                | Is biometric authentication supported |
 | Camera         | Save to picture library               |
 |                | Take picture                          |
+|                | Take picture advanced                 |
 | Clipboard      | Get clipboard content                 |
 |                | Set clipboard content                 |
 | Network        | Is cellular connection                |
@@ -102,11 +102,19 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 
 -   Mendix projects for each widget already comes with repo with folder called
     `packages/pluggableWidgets/<widgetName>/tests/testProject`. If you do not see the corresponding folder, run
-    `git submodules init && git submodule update`.
+    `git submodule init && git submodule update`.
 -   Run `npm run pretest:e2e` to initialize Mendix project.
 -   Run `npm run build` on a desired widget folder. For ex: `packages/pluggableWidgets/badge-web`. This will build and copy the mpk to
     each Mendix project's correct widget folder.
 -   Open and run the project in `<widgetName>/tests/testProject` with Mendix Studio
+
+#### Adding new test project to the repo
+
+-   Go to `https://github.com/mendix/testProjects` and create a appropriate branch name from master
+-   Add your **.mpr** files, commit and push (remember your branch name)
+-   Go to `widgets-resources` monorepo and in root folder execute `git submodule add -b your-branch-name-of-testprojects https://github.com/mendix/testProjects.git /necessary-folder-names/tests/testProject`
+
+Note: Do not manually change the `.gitmodules` since this wont work when adding new submodules.
 
 ### For developing in `packages/jsActions`:
 
@@ -132,3 +140,12 @@ means:
 -   Update the necessary widgets to the Mendix `Native Mobile Resources` app and push the changes
 -   Export the module, include every dependency
 -   Create a manual tag for the exported module "Native Mobile Resources - AppStore release vx.x.x" and add the Exported Module as asset
+
+## Commiting submodules
+
+-   Change the test project
+-   Commit and push the test project in testProjects' corresponding branch
+-   Go back to monorepo, commit the shown testProjects change and push
+
+## Raising problems/issues
+-   We encourage everyone to open a Support ticket on [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools)

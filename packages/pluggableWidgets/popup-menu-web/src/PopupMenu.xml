@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.popupmenu.PopupMenu" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+    <name>Pop-up menu</name>
+    <description>Displays a set of pre-defined items within the Pop-up menu</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAD20lEQVR4Ae1aO29TMRS2qyYBKQxUgIRATJ1aiTKw8xgCGYApCx1BSAXUgYEfwcCAgEoVLEgVQyZgKOrAY2cApG6deKgSIBiIBHko5nxpmvj6muQ+fF03sZdev873nc/Hvm7uYcwXr4BXYJwV4Drn5+fnjzabzTtCiNPUf1g3xqG2Tc75m1wud3tlZeVLXF4hAeB8o9H4QIam4hrb4fE/8/n8XFwRJlTSWPld6DzcmOpyV10aWA8J0A37gZNc7UzCfVLjjLrnVym0rsUNLY1do03drbpMRsuSYZW71KV/DEWAOsxF58ERCwJuKt+49aECuLbysoMmuA0VQAYcxWcvwCiuahyffATEUWsUx+ruAbvKz2q1GrrOx3HAb4E4ao3i2LGPAOtnwIXn9dmWEFcpmkpCsGOMiaLZyOI1ztknsrk2yfmjFxcL64PsWxOgsi7yvzfqd1ttsSCYyDDyRJGEnSGnZ1qCLZ5/9ndp33ThVnWWN3RCZEikDwfnaxv1VSbEjWyd72PiqYNFmMAGh2DvVs2KAFh5+l/9rI6AjTZgg4MOK/Mt0NnznbDvwx/cy9mV2Rw7fmCC7S/02008/aoz9vFHmz1eb7Lvf0TPJBdsgbgsqWdC5hGAA08Oezj/8EyBnTpi3nl4C0FhGxjA2i7g0D18t5s6fzMXgFBKMiJWvpiTW7J5BgawlBLggr7MBdh61fVpIOxtFRVL5QIeFtgE3/Om9/wgMcNYQS6WBBhEcef7Mn8LRHXx3bc2u/c+eHJHmYuDbvFEjp08lCyYk82KwizmmCTOAwKvOsxNWpwRIKkDaec5IwDCWH5vR3VsewtEHa+Oc+YMwB5+UjJ8LVS91dSdiQANNytNXgArMjsM4swZ4O8BCS5BCCx/D0i5vZw5BP09wN8DUsZywunObIGE/FNPG3sBht4DkI1lIhdn2FI5ew+grNFliDDMgbT9O/V7gC4CNskZOd+uTCJ8rlQqkXxM+70+EojBQaEzAInHBu1HNuXMPQBZ17Ti54i51WRpZ34P6GZgzlEkPCURsB1GuujOgE4aKnl92YznvCbnAODbXfj3ejNIqhVgBQu4BEvoDAh2p691kxV6hvDh0lZRsVQu4JG5AISxJjuMr7a15L9iy6YGPgMDWEoJcEFf5gIgTYUz3lt2/P9+/XWdvf3aZuEQVegmqMImbAMj8HmcOICLarL//VjtMVinNJX7yA4xaDK+Kc4fvLy056Y6MfMIACBydOit8koFt1UHNjjo8KwIgASl4nShzGgV5O2gI2SyrYNFmMD+X5KUlS0gO+VampzMzT97BbwC46fAP4McXKg/BxlCAAAAAElFTkSuQmCC
+    </icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="menuTrigger" type="widgets" required="false">
+                    <caption>The area to open or close the menu.</caption>
+                    <description>Responsible for toggling the Pop-up menu.</description>
+                </property>
+                <property key="basicItems" type="object" isList="true" required="false">
+                    <caption>Menu items</caption>
+                    <description>The popup menu items.</description>
+                    <properties>
+                        <property key="itemType" type="enumeration" defaultValue="item">
+                            <caption>Item type</caption>
+                            <category>General</category>
+                            <description/>
+                            <enumerationValues>
+                                <enumerationValue key="item">Button</enumerationValue>
+                                <enumerationValue key="divider">Divider</enumerationValue>
+                            </enumerationValues>
+                        </property>
+                        <property key="caption" type="textTemplate" required="false">
+                            <caption>Caption</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                        <property key="action" type="action" required="false">
+                            <caption>On click action</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                        <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
+                            <caption>Style</caption>
+                            <category>General</category>
+                            <description>An extra class will be added: "popupmenu-basic-item-[style]"</description>
+                            <enumerationValues>
+                                <enumerationValue key="defaultStyle">Default</enumerationValue>
+                                <enumerationValue key="inverseStyle">Inverse</enumerationValue>
+                                <enumerationValue key="primaryStyle">Primary</enumerationValue>
+                                <enumerationValue key="infoStyle">Info</enumerationValue>
+                                <enumerationValue key="successStyle">Success</enumerationValue>
+                                <enumerationValue key="warningStyle">Warning</enumerationValue>
+                                <enumerationValue key="dangerStyle">Danger</enumerationValue>
+                            </enumerationValues>
+                        </property>
+                    </properties>
+                </property>
+                <property key="customItems" type="object" isList="true" required="false">
+                    <caption>Menu items</caption>
+                    <description>The popup menu custom items. To make sure the popup closes correctly after a click, do not configure clickable widgets inside the placeholders. Use the action property of this widget.</description>
+                    <properties>
+                        <property key="content" type="widgets">
+                            <caption>Content</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                        <property key="action" type="action" required="false">
+                            <caption>On click action</caption>
+                            <category>General</category>
+                            <description/>
+                        </property>
+                    </properties>
+                </property>
+                <property key="trigger" type="enumeration" defaultValue="onclick">
+                    <caption>Open on</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="onclick">Click</enumerationValue>
+                        <enumerationValue key="onhover">Hover</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="position" type="enumeration" defaultValue="bottom">
+                    <caption>Menu position</caption>
+                    <description>The location of the menu relative to the click area.</description>
+                    <enumerationValues>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
+                        <enumerationValue key="top">Top</enumerationValue>
+                        <enumerationValue key="bottom">Bottom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="advancedMode" type="boolean" defaultValue="false">
+                    <caption>Custom Visualization</caption>
+                    <description>Create custom menu items.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Development">
+                <property key="menuToggle" type="boolean" defaultValue="false">
+                    <caption>Show preview</caption>
+                    <description>Use this to see a preview of the menu items while developing.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

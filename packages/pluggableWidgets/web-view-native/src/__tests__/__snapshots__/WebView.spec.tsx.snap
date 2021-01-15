@@ -23,6 +23,8 @@ exports[`WebView renders a web view when a url is provided 1`] = `
   >
     <RNCWebView
       cacheEnabled={true}
+      injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
+      injectedJavaScriptForMainFrameOnly={true}
       javaScriptEnabled={true}
       messagingEnabled={false}
       onContentProcessDidTerminate={[Function]}
@@ -86,6 +88,8 @@ exports[`WebView renders a web view when html content is provided 1`] = `
   >
     <RNCWebView
       cacheEnabled={true}
+      injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
+      injectedJavaScriptForMainFrameOnly={true}
       javaScriptEnabled={true}
       messagingEnabled={false}
       onContentProcessDidTerminate={[Function]}

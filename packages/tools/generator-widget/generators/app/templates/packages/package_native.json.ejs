@@ -10,9 +10,8 @@
   },
   "packagePath": "<%- packagePath %>",
   "scripts": {
-    "start": "npm run dev",
+    "start": "pluggable-widgets-tools start:native",
     "build": "pluggable-widgets-tools build:native",
-    "dev": "pluggable-widgets-tools start:native",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",<% if (hasUnitTests) { %>
     "test": "pluggable-widgets-tools test:unit:native --no-cache --ci",
@@ -28,7 +27,7 @@
     "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^8.12.0"<% if (isLanguageTS) { %>,
+    "@mendix/pluggable-widgets-tools": "^8.14.0"<% if (isLanguageTS) { %>,
     "@types/big.js": "^4.0.5",<% if (hasUnitTests) { %>
     "@types/enzyme": "^3.1.14",
     "@types/jest": "^24.0.0",<% } %>

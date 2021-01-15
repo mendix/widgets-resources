@@ -12,12 +12,7 @@ describe("Pagination", () => {
     it("disables previous button if is first page", () => {
         const component = shallow(<Pagination {...mockPaginationProps()} canPreviousPage={false} />);
 
-        expect(
-            component
-                .find(".btn")
-                .at(1)
-                .prop("disabled")
-        ).toBeTruthy();
+        expect(component.find(".pagination-button").at(1).prop("disabled")).toBeTruthy();
 
         expect(component).toMatchSnapshot();
     });
@@ -25,12 +20,7 @@ describe("Pagination", () => {
     it("disables first page button if is first page", () => {
         const component = shallow(<Pagination {...mockPaginationProps()} page={0} />);
 
-        expect(
-            component
-                .find(".btn")
-                .first()
-                .prop("disabled")
-        ).toBeTruthy();
+        expect(component.find(".pagination-button").first().prop("disabled")).toBeTruthy();
 
         expect(component).toMatchSnapshot();
     });
@@ -38,12 +28,7 @@ describe("Pagination", () => {
     it("disables next button if is last page", () => {
         const component = shallow(<Pagination {...mockPaginationProps()} canNextPage={false} />);
 
-        expect(
-            component
-                .find(".btn")
-                .at(2)
-                .prop("disabled")
-        ).toBeTruthy();
+        expect(component.find(".pagination-button").at(2).prop("disabled")).toBeTruthy();
 
         expect(component).toMatchSnapshot();
     });

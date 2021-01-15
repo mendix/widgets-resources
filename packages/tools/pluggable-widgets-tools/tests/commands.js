@@ -42,14 +42,7 @@ async function main() {
     console.log("Preparing...");
 
     const { stdout: packOutput } = await execAsync("npm pack", join(__dirname, ".."));
-    const toolsPackagePath = join(
-        __dirname,
-        "..",
-        packOutput
-            .trim()
-            .split(/\n/g)
-            .pop()
-    );
+    const toolsPackagePath = join(__dirname, "..", packOutput.trim().split(/\n/g).pop());
 
     const workDirs = [];
     const workDirSemaphore = new Semaphore(PARALLELISM);
@@ -76,6 +69,7 @@ async function main() {
         )
     ).filter(f => f);
 
+    console.log("All done!");
     rm("-r", toolsPackagePath, ...workDirs);
 
     if (failures.length) {
@@ -170,10 +164,10 @@ async function main() {
 
         async function testTest() {
             if (platform === "native") {
-                await execFailedAsync("npm test", workDir);
-                await execAsync("npm test -- -u", workDir);
+                await execFailedAsync("npm test -- --forceExit", workDir);
+                await execAsync("npm test -- -u --forceExit", workDir);
             } else {
-                await execAsync("npm test", workDir);
+                await execAsync("npm test -- --forceExit", workDir);
             }
         }
 
@@ -192,7 +186,7 @@ async function main() {
         }
 
         async function testTestUnit() {
-            await execAsync("npm run test:unit", workDir);
+            await execAsync("npm run test:unit -- --forceExit", workDir);
             if (!existsSync(join(workDir, `/dist/coverage/clover.xml`))) {
                 throw new Error("Expected coverage file to be generated, but it wasn't.");
             }
@@ -215,33 +209,39 @@ async function main() {
         }
 
         async function testStart() {
-            const startProcess = exec("npm start", { cwd: workDir });
+            const startProcess = exec("npm start", { cwd: workDir, env: { ...process.env, NO_COLOR: "true" } });
 
             try {
                 await new Promise((resolve, reject) => {
-                    startProcess.stdout.on("data", data => {
-                        if (/\berror\b/i.test(data)) {
+                    let inProgress = false;
+                    startProcess.stdout.on("data", onOutput);
+                    startProcess.stderr.on("data", onOutput);
+                    startProcess.on("exit", exitCode => {
+                        reject(new Error(`Exited with status ${exitCode}`));
+                    });
+                    function onOutput(data) {
+                        if (/error/i.test(data)) {
                             reject(new Error(`Received error ${data}`));
-                        } else if (
-                            data.includes("Finished 'copyToDeployment'") ||
-                            data.includes("Project is running at http://localhost:3000/")
-                        ) {
-                            console.log(`[${widgetName}] Start succeeded!`);
-                            resolve();
+                        } else if (/\bbundles /.test(data)) {
+                            inProgress = true;
+                        } else if (/\bcreated .* in /.test(data)) {
+                            inProgress = false;
+                            setTimeout(() => {
+                                if (!inProgress) {
+                                    console.log(`[${widgetName}] Start succeeded!`);
+                                    resolve();
+                                }
+                            }, 100);
                         }
-                    });
-                    startProcess.stderr.on("data", data => {
-                        reject(new Error(`Received error output: ${data}`));
-                    });
-                    startProcess.on("exit", code => {
-                        reject(new Error(`Exited with status ${code}`));
-                    });
+                    }
                 });
             } finally {
                 try {
-                    await promisify(kill)(startProcess.pid);
-                } catch (_) {}
-                await new Promise(resolve => setTimeout(resolve, 2000)); // give time for processes to die
+                    await promisify(kill)(startProcess.pid, "SIGKILL");
+                } catch (_) {
+                    console.warn(`[${widgetName}] Error while killing start process`);
+                }
+                await new Promise(resolve => setTimeout(resolve, 5000)); // give time for processes to die
             }
         }
     }

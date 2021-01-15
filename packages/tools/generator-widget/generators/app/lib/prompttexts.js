@@ -5,7 +5,7 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
         {
             type: "input",
             name: "name",
-            validate: function(input) {
+            validate: input => {
                 if (/^([a-zA-Z]+)$/.test(input)) {
                     return true;
                 }

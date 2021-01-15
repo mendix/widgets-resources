@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Column Resizer renders the structure correctly 1`] = `
+<div
+  className="column-resizer"
+  onMouseDown={[Function]}
+  onTouchStart={[Function]}
+>
+  <div
+    className="column-resizer-bar"
+  />
+</div>
+`;

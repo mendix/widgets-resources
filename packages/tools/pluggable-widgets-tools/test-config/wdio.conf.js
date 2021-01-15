@@ -3,10 +3,13 @@ const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
 const browserName = process.env.BROWSER || "firefox";
 const url = process.env.URL || "http://localhost:8080/";
+const serverIp = process.env.SERVER_IP || "127.0.0.1";
+const serverPort = process.env.SERVER_PORT || 4444;
 
-const e2ePath = join(process.cwd(), "dist/e2e/");
-if (!existsSync(e2ePath)) {
-    mkdirSync(e2ePath, { recursive: true });
+const resultsPath = join(process.cwd(), "tests/e2e/screenshot-results");
+const baselinePath = join(process.cwd(), "tests/e2e/screenshot-baseline");
+if (!existsSync(resultsPath)) {
+    mkdirSync(resultsPath, { recursive: true });
 }
 
 console.warn("Starting wdio with ", url, browserName);
@@ -16,10 +19,10 @@ exports.config = {
         require("@babel/register");
         require("ts-node").register({ files: true, project: join(process.cwd(), "./tests/e2e/tsconfig.json") });
     },
-    host: "127.0.0.1",
-    port: 4444,
+    host: serverIp,
+    port: serverPort,
     specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
-    maxInstances: 1,
+    maxInstances: 5,
     capabilities: [
         {
             browserName,
@@ -32,7 +35,7 @@ exports.config = {
     logLevel: "silent",
     coloredLogs: true,
     bail: 0,
-    screenshotPath: e2ePath,
+    screenshotPath: resultsPath,
     baseUrl: url,
     waitforTimeout: 30000,
     connectionRetryTimeout: 90000,
@@ -43,9 +46,9 @@ exports.config = {
             "image-comparison",
             // The options for image-comparison
             {
-                baselineFolder: e2ePath + "/tests/screenshot-baseline/",
-                formatImageName: "{logName}-{width}x{height}--{browserName}",
-                screenshotPath: e2ePath + "/tests/screenshot/",
+                baselineFolder: baselinePath,
+                formatImageName: "{tag}-{logName}-{browserName}",
+                screenshotPath: resultsPath,
                 savePerInstance: false,
                 autoSaveBaseline: true,
                 blockOutStatusBar: true,
@@ -58,17 +61,17 @@ exports.config = {
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
     jasmineNodeOpts: {
+        helpers: [require("@babel/register")],
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
-    afterTest: test => {
-        if (test.passed) {
-            return;
+    afterTest: (test, context, { error }) => {
+        // take a screenshot anytime a test fails
+        if (error) {
+            const timestamp = new Date().toJSON().replace(/:/g, "-");
+            const testName = test.fullName.replace(/ /g, "_");
+            const filePath = join(resultsPath, `TESTFAIL_${browserName}_${testName}_${timestamp}.png`);
+            browser.saveScreenshot(filePath);
+            console.log("Saved screenshot: ", filePath);
         }
-        const timestamp = new Date().toJSON().replace(/:/g, "-");
-        const testName = test.fullName.replace(/ /g, "_");
-        const filename = `TESTFAIL_${browserName}_${testName}_${timestamp}.png`;
-        const filePath = join(e2ePath, filename);
-        browser.saveScreenshot(filePath);
-        console.log("Saved screenshot: ", filePath);
     }
 };

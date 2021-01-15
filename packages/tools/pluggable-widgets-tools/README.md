@@ -13,7 +13,7 @@ A toolset to build, test, format, run, release and lint your [Pluggable Widgets]
 
 ## How to install
 
-Install from npm using `npm install @mendix/pluggable-widgets-tools`. Or better create your widget using [Pluggable Widgets Generator](https://www.npmjs.com/package/@mendix/generator-widget) that scaffolds the correct project setup.
+Install via npm using `npm install @mendix/pluggable-widgets-tools` (use [node.js](https://nodejs.org/) version >= 10.15). Even better is creating your widget using [Pluggable Widgets Generator](https://www.npmjs.com/package/@mendix/generator-widget) which scaffolds the correct project setup.
 
 ## How to use
 
@@ -21,9 +21,8 @@ In your `package.json` scripts, use the following command with the desired task:
 
 ### Available tasks
 
--   `start:web` Build and watch the changes of your Web widget
--   `start:server` Build and watch the changes of your Web widget. Start a web server, that reloads the widget code without the need to re-run the Mendix project. Accepts option `--open` to automatically open your browser.
--   `start:native` Build and watch the changes of your Native widget
+-   `start:web` Build and watch the changes of your Web widget. Your web app will reload automatically to reflect changes. You need to run the command on the same machine as Studio Pro.
+-   `start:native` Build and watch the changes of your Native widget. Your native app will reload automatically to reflect changes.
 -   `build:web` Build your Web widget
 -   `build:native` Build your Native widget
 -   `release:web` Create a release build of your Web widget
@@ -58,22 +57,22 @@ In your `package.json` scripts, use the following command with the desired task:
 
 -   `src/`
     -   `MyWidget.xml` - widget [definition](https://docs.mendix.com/apidocs-mxsdk/apidocs/property-types-pluggable-widgets)
-    -   `MyWidget.[tj]sx` - widget [client componet](https://docs.mendix.com/apidocs-mxsdk/apidocs/client-apis-for-pluggable-widgets)
+    -   `MyWidget.[tj]sx` - widget [client component](https://docs.mendix.com/apidocs-mxsdk/apidocs/client-apis-for-pluggable-widgets)
     -   `MyWidget.editorPreview.[tj]sx` - (optional) widget [preview](https://docs.mendix.com/apidocs-mxsdk/apidocs/studio-apis-for-pluggable-widgets)
     -   `MyWidget.editorConfig.[tj]s` - (optional) widget editor configuration
-    -   `comopnents/`
+    -   `components/`
         -   `MyComponent.[tj]s` - code of widget's components
         -   `__tests__/`
             -   `MyComponent.spec.[tj]s` - tests for widget's components
-    -   `.eslint.js` - configuration for ESLint. We recoommend to just re-export `@mendix/pluggable-widgets-tools/configs/eslint.ts.base.json`
+    -   `.eslint.js` - configuration for ESLint. We recommend to just re-export `@mendix/pluggable-widgets-tools/configs/eslint.ts.base.json`
     -   `prettier.config.js` - configuration for Prettier. We recommend to just re-export `@mendix/pluggable-widgets-tools/configs/prettier.base.json`
     -   `tsconfig.json` - configuration for TypeScript. We recommend to just extend `@mendix/pluggable-widgets-tools/configs/tsconfig.base.json`
-    -   `webpack.config.dev.js` - (optional) custom configurations for webpack bundler (both for client and preview components) when running in development mode. The standard confiugration can be imported from `@mendix/pluggable-widgets-tools/configs/webpack.config.dev.js` for web and from `@mendix/pluggable-widgets-tools/configs/webpack.native.config.js` for native apps.
-    -   `webpack.config.prod.js` - (optional) custom configuration for webpack bundler in release mode.
-    -   `package.json` - widget package definitions, inluding its dependencies, scripts, and basic configuration (`widgetName` and `config.projectPath` in particular)
+    -   `rollup.config.js` - (optional) custom configurations for [rollup](https://rollupjs.org/guide/en/) bundler. The standard configuration is passed as an argument named `configDefaultConfig`.
+    -   `package.json` - widget package definitions, including its dependencies, scripts, and basic configuration (`widgetName` and `config.projectPath` in particular)
 
-## Migrating from 8.9 to 8.10
+## Migrating from previous versions
 
-React-hot-loader is not anymore needed to provide auto refresh functionality. That is, you can remove its usage from the code: your main entry point can simply be `export default MyWidget;` instead of `export default hot(MyWidget);`.
-
-**If you do not change your widget, hot will be replaced with a noop function that has no effect.**
+-   Webpack bundler is changed to a Rollup. You must migrate your custom configuration.
+-   Update `pluggable-widgets-tools` commands used in your `package.json` file to one of the described in this readme. In particular `start:js`, `start:ts`, and `start:server` commands should be changed to `start:web`.
+-   You now can use named exports in your widget. That is, you can write `export MyWidget;` instead of `export default MyWidget;`.
+-   You should not use react-hot-loader anymore. You can remove the call it, which is anyway replaced with a noop function.

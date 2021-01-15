@@ -75,7 +75,7 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
             {error && <Alert bootstrapStyle="danger">{error}</Alert>}
             <div className="widget-google-maps-wrapper">
                 <LoadScript
-                    googleMapsApiKey={mapsToken}
+                    googleMapsApiKey={mapsToken ?? ""}
                     id="_com.mendix.widget.custom.Maps.Maps"
                     loadingElement={<div className="spinner" />}
                     onError={error => setError(error.message)}

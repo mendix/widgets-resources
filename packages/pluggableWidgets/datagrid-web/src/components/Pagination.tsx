@@ -26,9 +26,9 @@ export function Pagination(props: PaginationProps): ReactElement {
         }
     };
     return (
-        <div className="pagination">
+        <div className="pagination-bar">
             <button
-                className="btn"
+                className="btn pagination-button"
                 onClick={() => {
                     props.gotoPage(0);
                     setPageIndex(0);
@@ -38,7 +38,7 @@ export function Pagination(props: PaginationProps): ReactElement {
                 <span className="glyphicon glyphicon-step-backward" />
             </button>
             <button
-                className="btn"
+                className="btn pagination-button"
                 onClick={() => {
                     props.previousPage();
                     setPageIndex(props.page - 1);
@@ -52,7 +52,7 @@ export function Pagination(props: PaginationProps): ReactElement {
                 {hasLastPage ? `of ${props.numberOfItems ?? (numberOfPages ?? 1) * props.pageSize}` : ""}
             </div>
             <button
-                className="btn"
+                className="btn pagination-button"
                 onClick={() => {
                     props.nextPage();
                     setPageIndex(props.page + 1);
@@ -63,7 +63,7 @@ export function Pagination(props: PaginationProps): ReactElement {
             </button>
             {hasLastPage && (
                 <button
-                    className="btn"
+                    className="btn pagination-button"
                     onClick={() => {
                         props.gotoPage(lastPage);
                         setPageIndex(lastPage);

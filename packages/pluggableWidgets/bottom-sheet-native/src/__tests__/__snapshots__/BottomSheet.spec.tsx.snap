@@ -63,7 +63,6 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -98,7 +97,6 @@ exports[`Bottom sheet renders a custom bottom action sheet for ios (Basic modal)
           <View
             accessible={true}
             focusable={true}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}

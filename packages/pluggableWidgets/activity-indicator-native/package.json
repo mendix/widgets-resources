@@ -1,7 +1,7 @@
 {
   "name": "activity-indicator-native",
   "widgetName": "ActivityIndicator",
-  "version": "0.1.3",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -14,12 +14,13 @@
     "build": "pluggable-widgets-tools build:native",
     "release": "pluggable-widgets-tools release:native",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.native.config.js",
+    "test": "pluggable-widgets-tools test:unit:native",
     "version": "npm run release",
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@native-mobile-resources/util-widgets": "^1.0.0"
+    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "@widgets-resources/piw-utils": "^1.0.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

@@ -1,33 +1,41 @@
-const nativeConfig = {
-    preset: "react-native",
+const { join } = require("path");
 
-    name: "native",
-    displayName: "Native Client",
+const projectDir = process.cwd();
+
+module.exports = {
+    preset: "react-native",
     clearMocks: true,
-    rootDir: "../../../../",
+    rootDir: join(projectDir, "src"),
     globals: {
         "ts-jest": {
-            tsConfig: {
-                module: "commonjs"
-            }
+            tsconfig: { module: "commonjs" }
         }
     },
-    haste: {
-        defaultPlatform: "android",
-        platforms: ["android", "ios", "native"]
-    },
-    modulePathIgnorePatterns: ["<rootDir>/node_modules/react-native/Libraries/react-native/"],
-    reporters: ["default"],
-    setupFilesAfterEnv: [__dirname + "/test-index-native.js"],
+    setupFilesAfterEnv: [
+        join(__dirname, "test-index-native.js"),
+        ...(hasDependency("react-native-gesture-handler") ? ["react-native-gesture-handler/jestSetup.js"] : [])
+    ],
     snapshotSerializers: ["enzyme-to-json/serializer"],
-    testMatch: ["<rootDir>/src/**/*.spec.{js,jsx,ts,tsx}"],
-    testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
-    transformIgnorePatterns: ["/node_modules/(?!react-native)/.+"],
+    testMatch: ["<rootDir>/**/*.spec.{js,jsx,ts,tsx}"],
+    transformIgnorePatterns: ["node_modules/(?!.*react-native)"],
     transform: {
-        "^.+\\.tsx?$": "ts-jest",
-        "^.+\\.jsx?$": __dirname + "/transform-native.js"
+        "node_modules.*\\.jsx?$": "react-native/jest/preprocessor.js",
+        "\\.tsx?$": "ts-jest",
+        "\\.jsx?$": join(__dirname, "transform-native.js")
     },
-    coverageDirectory: "<rootDir>/dist/coverage"
+    moduleNameMapper: {
+        "mendix/components/native/Icon": join(__dirname, "__mocks__/NativeIcon"),
+        "mendix/components/native/Image": join(__dirname, "__mocks__/NativeImage")
+    },
+    collectCoverage: true,
+    coverageDirectory: "<rootDir>/../dist/coverage"
 };
 
-module.exports = nativeConfig;
+function hasDependency(name) {
+    try {
+        require.resolve(name);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}

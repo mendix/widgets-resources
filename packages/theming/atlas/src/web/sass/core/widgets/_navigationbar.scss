@@ -1,0 +1,151 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Navigation
+
+   Default Mendix Navigation Bar
+========================================================================== */
+.mx-navbar {
+    margin: 0;
+    border-style: none;
+    border-radius: 0;
+    background-color: $navigation-bg;
+
+    ul.nav {
+        margin: 0; // weird -margin if screen gets small (bootstrap)
+
+        /* Navigation item */
+        & > li.mx-navbar-item > a {
+            display: flex;
+            align-items: center;
+            min-height: $topbar-minimalheight;
+            padding: $navigation-item-padding;
+            vertical-align: middle;
+            color: $navigation-color;
+            border-radius: 0;
+            font-size: $navigation-font-size;
+            font-weight: $font-weight-normal;
+
+            /* Dropdown arrow */
+            .caret {
+                border-top-color: $navigation-color;
+                border-bottom-color: $navigation-color;
+            }
+
+            &:hover,
+            &:focus,
+            &.active {
+                text-decoration: none;
+                color: $navigation-color-hover;
+                background-color: $navigation-bg-hover;
+
+                .caret {
+                    border-top-color: $navigation-color-active;
+                    border-bottom-color: $navigation-color-active;
+                }
+            }
+
+            &.active {
+                color: $navigation-color-active;
+                background-color: $navigation-bg-active;
+            }
+
+            /* Dropdown */
+            .mx-navbar-submenu::before {
+                position: absolute;
+                top: -9px;
+                left: 15px;
+                width: 0;
+                height: 0;
+                content: "";
+                transform: rotate(360deg);
+                border-width: 0 9px 9px 9px;
+                border-style: solid;
+                border-color: transparent transparent $navigation-border-color transparent;
+            }
+
+            // Image
+            img {
+                width: 20px; // Default size (so it looks good)
+                height: auto;
+                margin-right: 0.5em;
+            }
+
+            .glyphicon {
+                top: 0;
+                margin-right: 0.5em;
+                vertical-align: middle;
+                font-size: $navigation-glyph-size;
+            }
+        }
+
+        & > .mx-navbar-item.active a {
+            color: $navigation-color-active;
+        }
+
+        /* When hovering or the dropdown is open */
+        & > .mx-navbar-item > a:hover,
+        & > .mx-navbar-item > a:focus,
+        & > .mx-navbar-item.open > a,
+        & > .mx-navbar-item.open > a:hover,
+        & > .mx-navbar-item.open > a:focus {
+            text-decoration: none;
+            color: $navigation-color-hover;
+            background-color: $navigation-bg-hover;
+
+            .caret {
+                border-top-color: $navigation-color-hover;
+                border-bottom-color: $navigation-color-hover;
+            }
+        }
+
+        & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
+            color: $navigation-sub-color-active;
+            background-color: $navigation-sub-bg-active;
+
+            .caret {
+                border-top-color: $navigation-sub-color-active;
+                border-bottom-color: $navigation-sub-color-active;
+            }
+        }
+    }
+    @media (max-width: $screen-md) {
+        ul.nav > li.mx-navbar-item > a {
+            padding: 10px 24px;
+        }
+        .mx-navbar-item.open .dropdown-menu {
+            padding: 0;
+            border-radius: 0;
+            background-color: $navigation-sub-bg;
+
+            & > li.mx-navbar-subitem > a {
+                padding: 10px 24px;
+                color: $navigation-sub-color;
+                border-radius: 0;
+                font-size: $navigation-sub-font-size;
+                font-weight: $font-weight-normal;
+
+                &:hover,
+                &:focus {
+                    color: $navigation-sub-color-hover;
+                    background-color: $navigation-sub-bg-hover;
+                }
+
+                &.active {
+                    color: $navigation-sub-color-active;
+                    background-color: $navigation-sub-bg-active;
+                }
+            }
+        }
+    }
+
+    /* remove focus */
+    &:focus {
+        outline: 0;
+    }
+}

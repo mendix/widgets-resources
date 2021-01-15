@@ -3,12 +3,11 @@
         "noEmitOnError": true,
         "sourceMap": true,
         "module": "esnext",
-        "target": "es5",
-        "lib": ["es2015", "dom"],
+        "target": "es6",
+        "lib": ["esnext", "dom"],
         "types": ["big.js", "jest"],
         "moduleResolution": "node",
         "declaration": false,
-        "removeComments": true,
         "noLib": false,
         "watch": false,
         "forceConsistentCasingInFileNames": true,
@@ -22,7 +21,5 @@
         "jsxFactory": "createElement",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true
-    },
-    "include": ["../../../../src"],
-    "exclude": ["../../../../dist/", "../../../../node_modules/"]
+    }
 }

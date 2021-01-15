@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.datagridtextfilter.DatagridTextFilter" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Data grid text filter</name>
+    <description/>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAEm0lEQVR4Ae1ZTYgURxSumh3X3XE3Nw+bv0sWDAsiGC9BFIJK3B/Fg7PgYRfUYDDESw7RmyskJBe9CEkksqwksD9DAu46K4K5hYToCoJIDPESBImIQYk4M/vT5fc63eOzp3rH6unIiK+gqFevXn2v3levurpnlJIiDAgDwoAwIAwIA8KAMCAMCAPCgDAgDAgDwoAw8HIxoKPh5vP5d6EbRX07OpZy/wbw9hUKhV85LvxvQ/8r1G6uT0G+qbU+ODU1dZFjZXgnkJ9H8OSKCCZf0fINFGkHTz66jTGnos5sBPzfO8/XUOMLu2S4QZqyDdtGQJo+nbGwyC+dJz3jBBt2tt5cnNGa50S9OcuN44wvu8OTk5OnYbMLGP0MZx7yBqzlGtPFipi/FoNzqK3MqEjYrO+LTZcBwQI/QHuPLbYVu/cdAuMBseEnItmQLTTclrAIs6akQsCOGfPmiDGpYNEKsdN/I4gP+WrxAFuH/jGui5GPBbbVYcIizKqCCQ0vevt0+aOFpfJfv03Pf8twGxZxXf2AhX/PgdD/dHBwcCPXcZnGyIbrCIOwuI7LDROgjNrvAxqzB5mQ4+CNyrlc7hACuBXiYGdpvWeGhoZWhbqwDXRnAhtfTXPR/zi0sbUNETAwY15TxqwnYKNMu+dVttqcJNWNjY3dz2Qye334AAQBvVUul09EMUlHY0xvaC5S/wHT1YgNEeCZygBH9JR6qs/HksoTExM/YSdPRuYfQLr3hbpAPhD2qaU5NJfrbHLWpnxWnTFPB4wdGECF73RfZoB5BGt6H3VNuDboTg8PD9N1p0qlUvR6+yOYE5rHtokzIP+LaUfebyFkrf07l8Su/umFd0hIsyCNS0jnIWAuMtwupP3XVKHrYvpFsqU5TBcrJibg4b3KVjr3hJxpyX6ilfYdGr20I9ZbAwN4ibmMzPqcQ2CX81S5jmzIluuWkxMToDz1X6Ba3T7Xn/1ZaeWfN5yA1J8DYQA9PT2fQZ4L+5Z2LrCxDNlViQgA6zjkxn9Vxc4X/TOv1YzvAreCfzvY/TWkHRkZWYSv2G8FpP4XZOPiJBEBA8WF9Tj/r5Ijo/QbvWfLp7TRm0LH0dsh1KfU0neBtWBjFqwDyygT3QJmiZ1z422nrxtkRNWNZ9RudGq+vasGTSQkygBPaf/8I/3vo14JK+K6TbHhfGz0b4kmCjRuKc4Z0DtrVpv5sv/2pzPqyOzOtupO952d3+CZpct0Ozz6p7IZTi/EOW4WvXMGdLSrEu79O1RNduWPPJDizhVX0L+EB1XF6MwdPtassjMBhff0w45c25qOV9q6z/fpuzwwug10a9vmbGbl67P9rVf5WFoy3UBpYRGO8xGgSYVtOvYDA6RUYEL1hSjOGdDEUZmWlpY/XddXNwPwE9OT+80V/Tna4/gdHx8fp/8anMoLlwH0nLFEWMQr8GGLvq7KRoAzi3W9xBs4+8JD8PcI3PXOzs49eAXGzxHuxUbAPsA4L8zdte+DfDkVfObexISjyARcxfoizn3v6Ojov04gYiwMCAPCgDAgDAgDwoAwIAwIA8KAMCAMCAPCgDDwEjPwGAmWaJnT4bd7AAAAAElFTkSuQmCC</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="defaultValue" type="expression" required="false">
+                    <caption>Default value</caption>
+                    <description />
+                    <returnType type="String" />
+                </property>
+                <property key="defaultFilter" type="enumeration"  defaultValue="contains">
+                    <caption>Default filter</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="contains">Contains</enumerationValue>
+                        <enumerationValue key="startsWith">Starts with</enumerationValue>
+                        <enumerationValue key="endsWith">Ends with</enumerationValue>
+                        <enumerationValue key="greater">Greater than</enumerationValue>
+                        <enumerationValue key="greaterEqual">Greater than or equal</enumerationValue>
+                        <enumerationValue key="equal">Equal</enumerationValue>
+                        <enumerationValue key="notEqual">Not equal</enumerationValue>
+                        <enumerationValue key="smaller">Smaller than</enumerationValue>
+                        <enumerationValue key="smallerEqual">Smaller than or equal</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="placeholder" type="textTemplate" required="false">
+                    <caption>Placeholder</caption>
+                    <description />
+                </property>
+                <property key="adjustable" type="boolean" defaultValue="true">
+                    <caption>Adjustable by user</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="On change behavior">
+                <property key="delay" type="integer" defaultValue="500">
+                    <caption>Apply after (ms)</caption>
+                    <description>Wait this period before applying then change(s) to the filter</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Screen reader">
+                <property key="screenReaderButtonCaption" type="textTemplate" required="false">
+                    <caption>Button caption</caption>
+                    <description />
+                </property>
+                <property key="screenReaderInputCaption" type="textTemplate" required="false">
+                    <caption>Input caption</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

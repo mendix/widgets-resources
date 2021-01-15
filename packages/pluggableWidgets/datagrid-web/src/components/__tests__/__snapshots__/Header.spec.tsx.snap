@@ -7,7 +7,6 @@ exports[`Header renders the structure correctly 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
     }
   }
   title="Test"
@@ -17,8 +16,15 @@ exports[`Header renders the structure correctly 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
   </div>
 </div>
@@ -31,7 +37,6 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
     }
   }
   title="Test"
@@ -39,6 +44,7 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   <div
     className="column-container"
     draggable={true}
+    onDragEnd={[Function]}
     onDragEnter={[Function]}
     onDragOver={[Function]}
     onDragStart={[Function]}
@@ -46,21 +52,57 @@ exports[`Header renders the structure correctly when draggable 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
   </div>
 </div>
 `;
 
-exports[`Header renders the structure correctly when filterable 1`] = `
+exports[`Header renders the structure correctly when filterable with custom classes 1`] = `
 <div
   className="th"
   role="Test"
   style={
     Object {
       "cursor": "unset",
-      "flex": "1 1 0px",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header my-custom-class"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
+    >
+      <span>
+        Test
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when filterable with custom filter 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
     }
   }
   title="Test"
@@ -70,33 +112,15 @@ exports[`Header renders the structure correctly when filterable 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
-      Test
-    </div>
-    Test
-  </div>
-</div>
-`;
-
-exports[`Header renders the structure correctly when filterable and with custom filter 1`] = `
-<div
-  className="th"
-  role="Test"
-  style={
-    Object {
-      "cursor": "unset",
-      "flex": "1 1 0px",
-    }
-  }
-  title="Test"
->
-  <div
-    className="column-container"
-  >
-    <div
-      className="column-header"
-    >
-      Test
+      <span>
+        Test
+      </span>
     </div>
     <div>
       <label>
@@ -105,6 +129,36 @@ exports[`Header renders the structure correctly when filterable and with custom 
       <input
         type="date"
       />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Header renders the structure correctly when filterable with no custom filter 1`] = `
+<div
+  className="th"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
+    >
+      <span>
+        Test
+      </span>
     </div>
   </div>
 </div>
@@ -126,13 +180,19 @@ exports[`Header renders the structure correctly when resizable 1`] = `
   >
     <div
       className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
     >
-      Test
+      <span>
+        Test
+      </span>
     </div>
   </div>
-  <div
-    className="column-resizer "
-    resizableProps=""
+  <ColumnResizer
+    setColumnWidth={[MockFunction]}
   />
 </div>
 `;
@@ -141,11 +201,7 @@ exports[`Header renders the structure correctly when sortable 1`] = `
 <div
   className="th"
   role="Test"
-  style={
-    Object {
-      "flex": "1 1 0px",
-    }
-  }
+  style={Object {}}
   title="Test"
 >
   <div
@@ -154,8 +210,18 @@ exports[`Header renders the structure correctly when sortable 1`] = `
     <div
       className="column-header clickable"
       onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
+      tabIndex={0}
     >
-      Test
+      <span>
+        Test
+      </span>
       <FontAwesomeIcon
         border={false}
         className=""

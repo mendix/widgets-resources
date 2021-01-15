@@ -118,7 +118,6 @@ exports[`Slider renders 1`] = `
           <View
             accessible={true}
             focusable={false}
-            isTVSelectable={true}
             onClick={[Function]}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -126,7 +125,6 @@ exports[`Slider renders 1`] = `
             onResponderTerminate={[Function]}
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
-            style={null}
             testID="slider-test$marker"
           >
             <View

@@ -13,7 +13,7 @@ export const runAxe = (element: WebdriverIO.Element, options: any) => {
 
     return browser.executeAsync(
         (elementUnderTest: Element, optionsToTest: any, done: (result: any) => void) => {
-            axe.run(elementUnderTest, optionsToTest, function(err: any, results: any) {
+            axe.run(elementUnderTest, optionsToTest, function (err: any, results: any) {
                 if (err) {
                     done(err);
                 }

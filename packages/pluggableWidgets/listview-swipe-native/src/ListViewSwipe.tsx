@@ -90,7 +90,8 @@ export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): Re
                 setAnimate(true);
                 Animated.timing(animation, {
                     toValue: 0,
-                    duration: 200
+                    duration: 200,
+                    useNativeDriver: false
                 }).start(() => {
                     executeAction(action);
                 });

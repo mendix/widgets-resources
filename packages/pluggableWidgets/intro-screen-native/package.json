@@ -14,15 +14,15 @@
     "build": "pluggable-widgets-tools build:native",
     "release": "pluggable-widgets-tools release:native",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.native.config.js",
+    "test": "pluggable-widgets-tools test:unit:native",
     "version": "npm run release",
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@react-native-community/async-storage": "1.8.1",
+    "@react-native-community/async-storage": "1.12.0",
     "@native-mobile-resources/util-widgets": "^1.0.0",
     "@widgets-resources/piw-utils": "^1.0.0",
-    "react-native-device-info": "5.5.3"
+    "react-native-device-info": "7.0.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

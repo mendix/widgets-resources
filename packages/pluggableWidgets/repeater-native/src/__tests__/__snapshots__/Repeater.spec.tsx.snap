@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Repeater renders correctly 1`] = `
+<View
+  style={Object {}}
+>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+</View>
+`;
+
+exports[`Repeater renders correctly with custom styles 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "red",
+    }
+  }
+>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+  <Text>
+    Item
+  </Text>
+</View>
+`;

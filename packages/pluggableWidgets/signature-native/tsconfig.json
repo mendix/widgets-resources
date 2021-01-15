@@ -1,0 +1,9 @@
+{
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "baseUrl": "./",
+    "compilerOptions": {
+        "target": "es2017",
+        "lib": ["es2015", "es2017"]
+    },
+    "include": ["./src", "./typings"]
+}

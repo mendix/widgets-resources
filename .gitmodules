@@ -22,6 +22,10 @@
 	path = packages/pluggableWidgets/badge-button-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = badge-button-web
+[submodule "packages/pluggableWidgets/signature-native/tests/testProject"]
+	path = packages/pluggableWidgets/signature-native/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = signature-native
 [submodule "packages/customWidgets/carousel-web/tests/testProject"]
 	path = packages/customWidgets/carousel-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
@@ -70,3 +74,23 @@
 	path = packages/customWidgets/slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = slider-web
+[submodule "packages/pluggableWidgets/timeline-web/tests/testProject"]
+	path = packages/pluggableWidgets/timeline-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = timeline-web
+[submodule "packages/pluggableWidgets/popup-menu-web/tests/testProject"]
+	branch = popupmenu-web
+	url = https://github.com/mendix/testProjects.git
+	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+[submodule "packages/pluggableWidgets/datagrid-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-web
+[submodule "packages/pluggableWidgets/datagrid-text-filter-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-text-filter-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-text-filter-web
+[submodule "packages/pluggableWidgets/datagrid-number-filter-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-number-filter-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-number-filter-web

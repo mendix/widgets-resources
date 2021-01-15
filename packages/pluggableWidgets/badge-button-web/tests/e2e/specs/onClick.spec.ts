@@ -28,7 +28,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            browser.waitUntil(() => page.getWidget("text1").getText() === "Nanoflow called", 3000);
+            browser.waitUntil(() => page.getWidget("text1").getText() === "Nanoflow called", { timeout: 3000 });
         });
     });
 
@@ -92,7 +92,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            browser.waitUntil(() => page.header() === "OnClickClosePage", 3000);
+            browser.waitUntil(() => page.header() === "OnClickClosePage", { timeout: 3000 });
         });
 
         it("should close a popup page", () => {
@@ -102,7 +102,7 @@ describe("BadgeButton on click", () => {
             badgeButton.element.waitForDisplayed();
             badgeButton.element.click();
 
-            browser.waitUntil(() => page.header() === "OnClickClosePage", 3000);
+            browser.waitUntil(() => page.header() === "OnClickClosePage", { timeout: 3000 });
         });
     });
 
