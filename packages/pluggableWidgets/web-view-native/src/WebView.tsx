@@ -66,10 +66,7 @@ export class WebView extends Component<Props> {
     }
 
     private onMessage(input: string): void {
-        if(this.props.onMessageInput)
-            this.props.onMessageInput?.setTextValue(input);
-
-        if(this.props.onMessage)
-            this.props.onMessage.execute();
+        this.props.onMessageInput?.setTextValue(input);
+        executeAction(this.props.onMessage);
     }
 }
