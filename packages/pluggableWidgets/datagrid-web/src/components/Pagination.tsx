@@ -12,7 +12,7 @@ export interface PaginationProps {
     setPaginationIndex?: Dispatch<SetStateAction<number>>;
 }
 
-export function Pagination(props: PaginationProps): ReactElement {
+export function Pagination(props: PaginationProps): ReactElement | null {
     const numberOfPages =
         props.numberOfItems !== undefined ? Math.ceil(props.numberOfItems / props.pageSize) : undefined;
     const lastPage = numberOfPages !== undefined ? numberOfPages - 1 : 0;
@@ -25,6 +25,11 @@ export function Pagination(props: PaginationProps): ReactElement {
             props.setPaginationIndex(page);
         }
     };
+
+    if (props.numberOfItems === 0) {
+        return null;
+    }
+
     return (
         <div className="pagination-bar">
             <button
