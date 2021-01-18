@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",
+    "@react-native-firebase/app": "9.0.0",
     "@react-native-firebase/messaging": "^8.0.1"
   },
   "devDependencies": {
