@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native-device-info/lib/module/index.js b/node_modules/react-native-device-info/lib/module/index.js
+index 57c9af7..f88f690 100644
+--- a/node_modules/react-native-device-info/lib/module/index.js
++++ b/node_modules/react-native-device-info/lib/module/index.js
+@@ -4,7 +4,7 @@ import { useOnEvent, useOnMount } from './internal/asyncHookWrappers';
+ import devicesWithNotch from './internal/devicesWithNotch';
+ import RNDeviceInfo from './internal/nativeInterface';
+ import { getSupportedPlatformInfoFunctions } from './internal/supported-platform-info';
+-import { AsyncHookResult, DeviceType, LocationProviderInfo, PowerState } from './internal/types';
++// import { AsyncHookResult, DeviceType, LocationProviderInfo, PowerState } from './internal/types';
+ let uniqueId;
+ export function getUniqueId() {
+   if (!uniqueId) {
+@@ -698,7 +698,7 @@ export function useIsEmulator() {
+ export function useManufacturer() {
+   return useOnMount(getManufacturer, 'unknown');
+ }
+-export { AsyncHookResult, DeviceType, LocationProviderInfo, PowerState };
++// export { AsyncHookResult, DeviceType, LocationProviderInfo, PowerState };
+ const deviceInfoModule = {
+   getAndroidId,
+   getAndroidIdSync,
