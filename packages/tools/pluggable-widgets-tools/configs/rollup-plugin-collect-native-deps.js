@@ -1,11 +1,11 @@
 import { basename, dirname, extname, join } from "path";
 import { copy, readJson, writeJson } from "fs-extra";
 import { promises } from "fs";
+import { rm } from "shelljs";
 
 export function collectNativeDependencies({ outputDir, externals, widgetName }) {
-    // 1. Identify whether a dependency has a native module
-    // 2. Copy native modules into node_modules folder at com folder level
-    const nativeDependencies = []; // todo: fix watch mode
+    let firstRun = true;
+    const nativeDependencies = [];
     const nodeModulesPath = join(outputDir, "node_modules");
     return {
         name: "collect-native-deps",
@@ -28,6 +28,13 @@ export function collectNativeDependencies({ outputDir, externals, widgetName }) 
             } catch (e) {
                 return null;
             }
+        },
+        async buildStart() {
+            rm("-rf", nodeModulesPath);
+            if (!firstRun) {
+                nativeDependencies.length = 0;
+            }
+            firstRun = false;
         },
         async writeBundle() {
             await Promise.all(
