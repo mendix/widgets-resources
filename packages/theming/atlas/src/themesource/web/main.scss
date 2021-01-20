@@ -1,0 +1,102 @@
+// Utilities
+@import "core/_legacy/bootstrap/bootstrap";
+@import "core/_legacy/bootstrap/bootstrap-rtl";
+@import "core/_legacy/mxui";
+
+//================================== CORE ==================================\\
+
+// Default variables
+@import "core/variables";
+
+// Base
+@import "core/base/mixins/animations";
+@import "core/base/mixins/spacing";
+@import "core/base/mixins/layout-spacing";
+@import "core/base/mixins/buttons";
+@import "core/base/mixins/groupbox";
+@import "core/base/animation";
+@import "core/base/flex";
+@import "core/base/spacing";
+@import "core/base/reset";
+@import "core/base/base";
+@import "core/base/login";
+
+// Widgets
+@import "core/widgets/inputs";
+@import "core/helpers/backgrounds";
+@import "core/widgets/buttons";
+@import "core/helpers/buttons";
+@import "core/widgets/checkbox";
+@import "core/widgets/grid";
+@import "core/widgets/datagrids";
+@import "core/helpers/datagrids";
+@import "core/widgets/dataview";
+@import "core/widgets/datepicker";
+@import "core/widgets/header";
+@import "core/widgets/glyphicons";
+@import "core/widgets/groupbox";
+@import "core/helpers/groupbox";
+@import "core/helpers/images";
+@import "core/widgets/labels";
+@import "core/helpers/labels";
+@import "core/widgets/listview";
+@import "core/helpers/listview";
+@import "core/widgets/modals";
+@import "core/widgets/navigationbar";
+@import "core/helpers/navigationbar";
+@import "core/widgets/navigationlist";
+@import "core/widgets/navigationtree";
+@import "core/helpers/navigationtree";
+@import "core/widgets/popupmenu";
+@import "core/widgets/simplemenubar";
+@import "core/helpers/simplemenubar";
+@import "core/widgets/radiobuttons";
+@import "core/widgets/tabcontainer";
+@import "core/helpers/tabcontainer";
+@import "core/widgets/tables";
+@import "core/helpers/tables";
+@import "core/widgets/templategrids";
+@import "core/helpers/templategrids";
+@import "core/widgets/typography";
+@import "core/helpers/typography";
+@import "core/widgets/layoutgrid";
+@import "core/widgets/pagination";
+@import "core/widgets/progress";
+@import "core/widgets/progressbar";
+@import "core/helpers/progressbar";
+@import "core/widgets/progresscircle";
+@import "core/helpers/progresscircle";
+@import "core/widgets/rating";
+@import "core/helpers/rating";
+@import "core/widgets/rangeslider";
+@import "core/helpers/rangeslider";
+@import "core/widgets/slider";
+@import "core/helpers/slider";
+@import "core/widgets/timeline";
+@import "core/helpers/helperclasses";
+
+// Custom widgets
+@import "core/widgetscustom/dijit-widgets";
+@import "core/widgetscustom/switchwidget";
+
+//================================= CUSTOM =================================\\
+
+// Building blocks
+@import "buildingblocks/alert";
+@import "buildingblocks/breadcrumb";
+@import "buildingblocks/card";
+@import "buildingblocks/chat";
+@import "buildingblocks/controlgroup";
+@import "buildingblocks/pageblocks";
+@import "buildingblocks/pageheader";
+@import "buildingblocks/heroheader";
+@import "buildingblocks/formblock";
+@import "buildingblocks/master-detail";
+@import "buildingblocks/userprofile";
+@import "buildingblocks/wizard";
+
+// Layouts
+@import "layouts/layout-atlas";
+@import "layouts/layout-atlas-phone";
+@import "layouts/layout-atlas-responsive";
+@import "layouts/layout-atlas-tablet";

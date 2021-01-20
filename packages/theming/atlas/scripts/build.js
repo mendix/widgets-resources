@@ -4,74 +4,51 @@ const concurrently = require("concurrently");
 
 const mode = process.argv[2] || "build";
 const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
-let outputDir;
-let projectDeployDir;
+let outputProjectDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
+let outputThemeDir;
+let outputThemeSourceDir;
+let projectDeployDirWeb;
 
 switch (mode) {
     case "build":
     case "start":
-        // Build will work with two different folders: project's theme, project's deployment
-        outputDir = MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "theme") : join(__dirname, "../tests/testProject/theme");
-        projectDeployDir = MX_PROJECT_PATH
-            ? join(MX_PROJECT_PATH, "deployment/web")
-            : join(__dirname, "../tests/testProject/deployment/web");
+        outputThemeDir = join(outputProjectDir, "theme");
+        outputThemeSourceDir = join(outputProjectDir, "themesource");
+        projectDeployDirWeb = join(outputProjectDir, "deployment/web");
         break;
     case "release":
-        outputDir = join(__dirname, "../dist/theme");
+        outputThemeDir = join(__dirname, "../dist/theme");
+        outputThemeSourceDir = join(__dirname, "../dist/themesource");
         break;
 }
 
 console.info(`Building for ${mode}...`);
 const watchArg = mode === "start" ? "--watch" : "";
-const compressArg = mode === "release" ? "--style compressed" : "";
-const copyAndWatchFonts = command(`copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*'`);
-const compileSass = command(`sass ${watchArg} --embed-sources ${compressArg} --no-charset src/web/sass/main.scss`);
 cd(join(__dirname, ".."));
-rm("-rf", outputDir);
+rm("-rf", outputThemeDir);
 concurrently(
     [
         {
-            name: "content-theme",
-            command: `copy-and-watch ${watchArg} "content/**/*.*" "${outputDir}"`
+            name: "web-content",
+            command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${outputThemeDir}/web"`
         },
         {
-            name: "web-sass-and-manifest-theme",
-            command: `copy-and-watch ${watchArg} 'src/web/sass/**/*' '${outputDir}/styles/web/sass'`
+            name: "web-sass",
+            command: `copy-and-watch ${watchArg} 'src/themesource/web/**/*.scss' '${outputThemeSourceDir}/web'`
         },
         {
-            name: "native-manifest-theme",
-            command: `copy-and-watch ${watchArg} src/native/ts/core/manifest.json '${outputDir}/styles/native/core'`
+            name: "native-typescript",
+            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputProjectDir}'`
         },
         {
-            name: "fonts-theme",
-            command: copyAndWatchFonts(`${outputDir}/styles/web/css/fonts`)
+            name: "design-properties",
+            command: `copy-and-watch ${watchArg} 'src/themesource/**/design-properties.json' '${outputThemeSourceDir}'`
         },
         {
-            name: "sass-theme",
-            command: compileSass(`${outputDir}/styles/web/css/main.css`)
-        },
-        {
-            name: "tsc-theme",
-            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputDir}/styles/native'`
+            name: "manifests",
+            command: `copy-and-watch 'src/themesource/**/manifest.json' '${outputThemeSourceDir}'`
         }
-    ].concat(
-        mode === "start" || mode === "build"
-            ? [
-                  {
-                      name: "fonts-development",
-                      command: copyAndWatchFonts(`${projectDeployDir}/styles/web/css/fonts`)
-                  },
-                  {
-                      name: "sass-development",
-                      command: compileSass(`${projectDeployDir}/styles/web/css/main.css`)
-                  },
-                  {
-                      name: "content-development",
-                      command: `copy-and-watch ${watchArg} "content/**/*.{js,json,png,jpeg}" "${projectDeployDir}"`
-                  }
-              ]
-            : []
-    ),
+    ],
     {
         killOthers: ["failure"]
     }
