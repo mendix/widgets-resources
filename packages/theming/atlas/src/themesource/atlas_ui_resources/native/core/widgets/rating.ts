@@ -1,6 +1,6 @@
 import { spacing } from "../variables";
 import { RatingType } from "../../types/widgets";
-import { rating } from "../../../../theme/native/custom-variables";
+import { rating } from "../../../../../theme/native/custom-variables";
 /*
 
 DISCLAIMER:

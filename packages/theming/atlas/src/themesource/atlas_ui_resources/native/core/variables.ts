@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import * as custom from "../../../theme/native/custom-variables";
+import * as custom from "../../../../theme/native/custom-variables";
 import adjustFont, { height, width } from "./helpers/_functions/adjustfont";
 import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
 import merge from "./helpers/_functions/mergeobjects";

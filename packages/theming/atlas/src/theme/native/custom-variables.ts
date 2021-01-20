@@ -1,6 +1,9 @@
 import { Appearance, Platform } from "react-native";
-import adjustFont from "../../themesource/native/core/helpers/_functions/adjustfont";
-import { anyColorToRgbString, setContrastScale } from "../../themesource/native/core/helpers/_functions/convertcolors";
+import adjustFont from "../../themesource/atlas_ui_resources/native/core/helpers/_functions/adjustfont";
+import {
+    anyColorToRgbString,
+    setContrastScale
+} from "../../themesource/atlas_ui_resources/native/core/helpers/_functions/convertcolors";
 import {
     VariablesBackground,
     VariablesBadge,
@@ -23,7 +26,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer
-} from "../../themesource/native/types/variables";
+} from "../../themesource/atlas_ui_resources/native/types/variables";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)

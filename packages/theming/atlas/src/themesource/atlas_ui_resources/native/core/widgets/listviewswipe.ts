@@ -1,6 +1,6 @@
 import { background } from "../variables";
 import { ListViewSwipeType } from "../../types/widgets";
-import { listViewSwipe } from "../../../../theme/native/custom-variables";
+import { listViewSwipe } from "../../../../../theme/native/custom-variables";
 /*
 
 DISCLAIMER:

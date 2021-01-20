@@ -1,7 +1,7 @@
 import { isIphoneWithNotch } from "../helpers/_functions/device";
 import { font, spacing } from "../variables";
 import { IntroScreenButtonType, IntroScreenType } from "../../types/widgets";
-import { introScreen } from "../../../../theme/native/custom-variables";
+import { introScreen } from "../../../../../theme/native/custom-variables";
 /*
 
 DISCLAIMER:

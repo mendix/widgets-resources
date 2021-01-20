@@ -13,7 +13,7 @@ switch (mode) {
     case "build":
     case "start":
         outputThemeDir = join(outputProjectDir, "theme");
-        outputThemeSourceDir = join(outputProjectDir, "themesource");
+        outputThemeSourceDir = join(outputProjectDir, "themesource/atlas_ui_resources");
         projectDeployDirWeb = join(outputProjectDir, "deployment/web");
         break;
     case "release":
@@ -34,7 +34,7 @@ concurrently(
         },
         {
             name: "web-sass",
-            command: `copy-and-watch ${watchArg} 'src/themesource/web/**/*.scss' '${outputThemeSourceDir}/web'`
+            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/web/**/*.scss' '${outputThemeSourceDir}/web'`
         },
         {
             name: "native-typescript",
@@ -42,11 +42,11 @@ concurrently(
         },
         {
             name: "design-properties",
-            command: `copy-and-watch ${watchArg} 'src/themesource/**/design-properties.json' '${outputThemeSourceDir}'`
+            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/**/design-properties.json' '${outputThemeSourceDir}'`
         },
         {
             name: "manifests",
-            command: `copy-and-watch 'src/themesource/**/manifest.json' '${outputThemeSourceDir}'`
+            command: `copy-and-watch 'src/themesource/atlas_ui_resources/**/manifest.json' '${outputThemeSourceDir}'`
         }
     ],
     {
