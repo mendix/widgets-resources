@@ -42,14 +42,7 @@ async function main() {
     console.log("Preparing...");
 
     const { stdout: packOutput } = await execAsync("npm pack", join(__dirname, ".."));
-    const toolsPackagePath = join(
-        __dirname,
-        "..",
-        packOutput
-            .trim()
-            .split(/\n/g)
-            .pop()
-    );
+    const toolsPackagePath = join(__dirname, "..", packOutput.trim().split(/\n/g).pop());
 
     const workDirs = [];
     const workDirSemaphore = new Semaphore(PARALLELISM);
@@ -76,7 +69,11 @@ async function main() {
         )
     ).filter(f => f);
 
-    rm("-r", toolsPackagePath, ...workDirs);
+    try {
+        rm("-r", toolsPackagePath, ...workDirs);
+    } catch (error) {
+        console.warn(`Error while removing files: ${error.message}`);
+    }
 
     if (failures.length) {
         failures.forEach(f => console.error(`Test for configuration ${f[0]} failed: ${f[1]}`));

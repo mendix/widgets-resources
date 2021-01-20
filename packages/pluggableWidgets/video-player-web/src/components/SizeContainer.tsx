@@ -10,7 +10,7 @@ export interface Dimensions {
     width: number;
     heightUnit: HeightUnitType;
     height: number;
-    tabIndex: number;
+    tabIndex?: number;
 }
 
 export interface SizeProps extends Dimensions {
