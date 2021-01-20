@@ -68,11 +68,7 @@ async function writeNativeDependenciesJson({ nativeDependencies, outputDir, widg
     for (const dependency of nativeDependencies) {
         dependencies[dependency.name] = (await readJson(join(dependency.dir, "package.json"))).version;
     }
-    try {
-        await writeJson(join(outputDir, `${widgetName}.json`), { nativeDependencies: dependencies }, { spaces: 2 });
-    } catch (e) {
-        console.error(`Could not create the dependencies file (${widgetName}.json)`);
-    }
+    await writeJson(join(outputDir, `${widgetName}.json`), { nativeDependencies: dependencies }, { spaces: 2 });
 }
 
 async function hasNativeCode(dir) {
