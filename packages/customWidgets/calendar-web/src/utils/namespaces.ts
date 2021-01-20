@@ -108,6 +108,10 @@ export namespace Container {
         dayFormat?: functionType | string;
         weekdayFormat?: functionType | string;
         timeGutterFormat?: functionType | string;
+        dayHeaderFormat?: functionType | string;
+        dayRangeHeaderFormat?: ((dateRange: { start: Date; end: Date }) => string) | string;
+        monthHeaderFormat?: functionType | string;
+        agendaHeaderFormat?: ((dateRange: { start: Date; end: Date }) => string) | string;
     }
 
     export type DataSource = "context" | "XPath" | "microflow" | "nanoflow";

@@ -195,11 +195,7 @@
                 <property key="headerFormat" type="translatableString" required="false">
                     <caption>Header day format</caption>
                     <category>Custom formats</category>
-                    <description>Header date shown in the top row of the month, week and day view. Use Mendix date formats. e.g. 'EEEE dd/MM'</description>
-                    <translations>
-                        <translation lang="en_US">EEE</translation>
-                        <translation lang="nl_NL">EEE</translation>
-                    </translations>
+                    <description>Format of date(s) in the header above the day, week, month, work week or Agenda view. Use Mendix date formats. e.g. 'EEEE dd/MM'</description>
                 </property>
                 <property key="cellDateFormat" type="translatableString" required="false">
                     <caption>Cell date format</caption>
