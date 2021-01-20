@@ -10,7 +10,7 @@ export interface MyWidgetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     content: ReactNode;
     description: EditableValue<string>;
     action?: ActionValue;

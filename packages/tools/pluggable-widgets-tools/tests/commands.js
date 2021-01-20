@@ -70,7 +70,11 @@ async function main() {
     ).filter(f => f);
 
     console.log("All done!");
-    rm("-r", toolsPackagePath, ...workDirs);
+    try {
+        rm("-r", toolsPackagePath, ...workDirs);
+    } catch (error) {
+        console.warn(`Error while removing files: ${error.message}`);
+    }
 
     if (failures.length) {
         failures.forEach(f => console.error(`Test for configuration ${f[0]} failed: ${f[1]}`));

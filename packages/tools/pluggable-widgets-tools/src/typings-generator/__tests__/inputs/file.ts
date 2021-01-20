@@ -26,9 +26,11 @@ export const fileInput = `<?xml version="1.0" encoding="utf-8"?>
                 <description />
             </property>
         </propertyGroup>
-        <propertyGroup caption="System Properties">
-            <systemProperty key="Label"></systemProperty>
-            <systemProperty key="TabIndex"></systemProperty>
+        <propertyGroup caption="Other">
+            <propertyGroup caption="System Properties">
+                <systemProperty key="Label"></systemProperty>
+                <systemProperty key="TabIndex"></systemProperty>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>`;
@@ -61,9 +63,11 @@ export const fileInputNative = `<?xml version="1.0" encoding="utf-8"?>
                 <description />
             </property>
         </propertyGroup>
-        <propertyGroup caption="System Properties">
-            <systemProperty key="Label"></systemProperty>
-            <systemProperty key="TabIndex"></systemProperty>
+        <propertyGroup caption="Other">
+            <propertyGroup caption="System Properties">
+                <systemProperty key="Label"></systemProperty>
+                <systemProperty key="TabIndex"></systemProperty>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>`;

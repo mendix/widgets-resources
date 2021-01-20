@@ -23,7 +23,7 @@ export const containmentInput = `<?xml version="1.0" encoding="utf-8"?>
             </property>
         </propertyGroup>
         <propertyGroup caption="System Properties">
-            <systemProperty key="Label"></systemProperty>
+            <!-- no "Label" system property -->
             <systemProperty key="TabIndex"></systemProperty>
         </propertyGroup>
     </properties>
@@ -54,7 +54,7 @@ export const containmentInputNative = `<?xml version="1.0" encoding="utf-8"?>
             </property>
         </propertyGroup>
         <propertyGroup caption="System Properties">
-            <systemProperty key="Label"></systemProperty>
+            <!-- no "Label" system property -->
             <systemProperty key="TabIndex"></systemProperty>
         </propertyGroup>
     </properties>
