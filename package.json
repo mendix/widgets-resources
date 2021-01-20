@@ -6,7 +6,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "scripts": {
-    "postinstall": "patch-package && lerna bootstrap --hoist --strict",
+    "postinstall": "lerna bootstrap --hoist --strict && patch-package",
     "prettier": "prettier --config \"./prettier.config.js\" --write \"./**/{src,test}/**/*.{js,jsx,ts,tsx,scss}\"",
     "format": "pretty-quick --staged",
     "clean-all-screenshots-mac": "find . -name 'screenshot-baseline' -type d -prune -exec rm -rf '{}' +",
