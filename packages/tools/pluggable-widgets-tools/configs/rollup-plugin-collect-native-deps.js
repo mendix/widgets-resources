@@ -3,7 +3,7 @@ import { copy, readJson, writeJson } from "fs-extra";
 import { promises } from "fs";
 import { rm } from "shelljs";
 
-export function collectNativeDependencies({ outputDir, externals, widgetName }) {
+export function collectNativeDependencies({ outputDir, externals, widgetName, shouldCopyNodeModules = true }) {
     let firstRun = true;
     const nativeDependencies = [];
     const nodeModulesPath = join(outputDir, "node_modules");
@@ -30,25 +30,32 @@ export function collectNativeDependencies({ outputDir, externals, widgetName }) 
             }
         },
         async buildStart() {
-            rm("-rf", nodeModulesPath);
-            if (!firstRun) {
-                nativeDependencies.length = 0;
+            if (shouldCopyNodeModules) {
+                rm("-rf", nodeModulesPath);
+                if (!firstRun) {
+                    nativeDependencies.length = 0;
+                }
+                firstRun = false;
             }
-            firstRun = false;
         },
         async writeBundle() {
-            await Promise.all(
-                nativeDependencies.map(async dependency => {
-                    await copyJsModule(dependency.dir, join(nodeModulesPath, dependency.name));
-                    for (const transitiveDependency of await getTransitiveDependencies(dependency.name, externals)) {
-                        await copyJsModule(
-                            dirname(require.resolve(`${transitiveDependency}/package.json`)),
-                            join(nodeModulesPath, dependency.name, "node_modules", transitiveDependency)
-                        );
-                    }
-                })
-            );
-            await writeNativeDependenciesJson({ nativeDependencies, outputDir, widgetName });
+            if (shouldCopyNodeModules) {
+                await Promise.all(
+                    nativeDependencies.map(async dependency => {
+                        await copyJsModule(dependency.dir, join(nodeModulesPath, dependency.name));
+                        for (const transitiveDependency of await getTransitiveDependencies(
+                            dependency.name,
+                            externals
+                        )) {
+                            await copyJsModule(
+                                dirname(require.resolve(`${transitiveDependency}/package.json`)),
+                                join(nodeModulesPath, dependency.name, "node_modules", transitiveDependency)
+                            );
+                        }
+                    })
+                );
+                await writeNativeDependenciesJson({ nativeDependencies, outputDir, widgetName });
+            }
         }
     };
 }
@@ -111,7 +118,10 @@ async function copyJsModule(from, to) {
     await copy(from, to, {
         filter: async path =>
             (await promises.lstat(path)).isDirectory()
-                ? !["android", "ios", "windows", ".github", "__tests__", "jest"].includes(basename(path))
-                : [".js", ".jsx", ".json"].includes(extname(path)) || basename(path).toLowerCase().includes("license")
+                ? !["android", "ios", "windows", "macos", ".github", "__tests__", "jest", "__mocks__"].includes(
+                      basename(path)
+                  )
+                : [".js", ".jsx", ".json", ".ts", ".tsx"].includes(extname(path)) ||
+                  basename(path).toLowerCase().includes("license")
     });
 }
