@@ -54,11 +54,18 @@ export function collectNativeDependencies({ outputDir, externals, widgetName }) 
 }
 
 async function writeNativeDependenciesJson({ nativeDependencies, outputDir, widgetName }) {
+    if (nativeDependencies.length === 0) {
+        return;
+    }
     const dependencies = {};
     for (const dependency of nativeDependencies) {
         dependencies[dependency.name] = (await readJson(join(dependency.dir, "package.json"))).version;
     }
-    await writeJson(join(outputDir, `${widgetName}.json`), dependencies, { spaces: 2 });
+    try {
+        await writeJson(join(outputDir, `${widgetName}.json`), { nativeDependencies: dependencies }, { spaces: 2 });
+    } catch (e) {
+        console.error(`Could not create the dependencies file (${widgetName}.json)`);
+    }
 }
 
 async function hasNativeCode(dir) {
@@ -95,7 +102,7 @@ async function getTransitiveDependencies(packageName, externals) {
             result.add(next);
         }
         const packageJson = await readJson(require.resolve(`${next}/package.json`));
-        queue.push(...Object.keys(packageJson.dependencies ?? {}));
+        queue.push(...Object.keys(packageJson.dependencies || {}));
     }
     return Array.from(result);
 }
