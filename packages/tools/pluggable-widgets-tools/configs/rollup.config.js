@@ -106,7 +106,12 @@ export default async args => {
                         transpile: false
                     })
                 ],
-                onwarn
+                onwarn(message) {
+                    if (/'Platform' is imported from external module/.test(message)) {
+                        return;
+                    }
+                    console.warn(message);
+                }
             });
         });
     }
