@@ -1,5 +1,5 @@
-import { background, font, navigation } from "../variables";
-import { LayoutType } from "../../types/widgets";
+import { background, font, navigation } from "../core/variables";
+import { LayoutType } from "../types/widgets";
 /*
 
 DISCLAIMER:

@@ -81,6 +81,12 @@
 
 //================================= CUSTOM =================================\\
 
+// Layouts
+@import "layouts/layout-atlas";
+@import "layouts/layout-atlas-phone";
+@import "layouts/layout-atlas-responsive";
+@import "layouts/layout-atlas-tablet";
+
 // Building blocks
 @import "buildingblocks/alert";
 @import "buildingblocks/breadcrumb";
@@ -94,9 +100,3 @@
 @import "buildingblocks/master-detail";
 @import "buildingblocks/userprofile";
 @import "buildingblocks/wizard";
-
-// Layouts
-@import "layouts/layout-atlas";
-@import "layouts/layout-atlas-phone";
-@import "layouts/layout-atlas-responsive";
-@import "layouts/layout-atlas-tablet";

@@ -28,7 +28,6 @@ export * from "./core/helpers/floatingactionbutton";
 export * from "./core/widgets/images";
 export * from "./core/helpers/images";
 export * from "./core/widgets/introscreen";
-export * from "./core/widgets/layout";
 export * from "./core/widgets/layoutgrid";
 export * from "./core/widgets/linechart";
 export * from "./core/helpers/linechart";
@@ -41,7 +40,6 @@ export * from "./core/helpers/listviewswipe";
 export * from "./core/widgets/maps";
 export * from "./core/helpers/maps";
 export * from "./core/widgets/navigation";
-export * from "./core/widgets/page";
 export * from "./core/widgets/pagetitle";
 export * from "./core/widgets/progressbar";
 export * from "./core/helpers/progressbar";
@@ -70,6 +68,11 @@ export * from "./core/helpers/helperclasses";
 //
 //
 // ================================= CUSTOM =================================\\
+//
+//
+// Layouts
+export * from "./layouts/layout";
+export * from "./layouts/page";
 //
 //
 // Page Templates

@@ -29,24 +29,20 @@ rm("-rf", outputThemeDir);
 concurrently(
     [
         {
-            name: "web-content",
+            name: "web-theme-content",
             command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${outputThemeDir}/web"`
         },
         {
-            name: "web-sass",
-            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/web/**/*.scss' '${outputThemeSourceDir}/web'`
+            name: "web-themesource-content",
+            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/web/**/*' '${outputThemeSourceDir}/web'`
         },
         {
             name: "native-typescript",
             command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputProjectDir}'`
         },
         {
-            name: "design-properties",
-            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/**/design-properties.json' '${outputThemeSourceDir}'`
-        },
-        {
-            name: "manifests",
-            command: `copy-and-watch 'src/themesource/atlas_ui_resources/**/manifest.json' '${outputThemeSourceDir}'`
+            name: "native-design-properties-and-manifest",
+            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/native/**/*.json' '${outputThemeSourceDir}/native'`
         }
     ],
     {
