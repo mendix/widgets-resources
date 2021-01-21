@@ -106,6 +106,7 @@ async function getTransitiveDependencies(packageName, externals) {
         }
         const packageJson = await readJson(require.resolve(`${next}/package.json`));
         queue.push(...Object.keys(packageJson.dependencies || {}));
+        queue.push(...Object.keys(packageJson.peerDependencies || {}));
     }
     return Array.from(result);
 }
