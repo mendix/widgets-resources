@@ -20,7 +20,7 @@ import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
-import { collectNativeDependencies } from "./rollup-plugin-collect-native-deps";
+import { collectNativeDependencies } from "./rollup-plugin-collect-native-dependencies";
 import {
     editorConfigEntry,
     isTypescript,
@@ -94,12 +94,7 @@ export default async args => {
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
-                    collectNativeDependencies({
-                        outputDir: outDir,
-                        externals: nativeExternal,
-                        widgetName,
-                        shouldCopyNodeModules: i === 0
-                    }),
+                    collectNativeDependencies(nativeExternal, outDir, i === 0, widgetName),
                     ...getCommonPlugins({
                         sourceMaps: false,
                         extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
