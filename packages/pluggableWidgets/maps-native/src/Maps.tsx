@@ -10,6 +10,9 @@ import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@widgets-resources/piw-utils";
 
+// Required for Native Dependency Management
+import "prop-types";
+
 type Props = MapsProps<MapsStyle>;
 
 interface State {
