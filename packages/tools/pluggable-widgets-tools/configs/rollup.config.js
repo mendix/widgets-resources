@@ -106,11 +106,11 @@ export default async args => {
                         transpile: false
                     })
                 ],
-                onwarn(message) {
-                    if (/'Platform' is imported from external module/.test(message)) {
+                onwarn: warning => {
+                    if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /'Platform'/.test(warning.message)) {
                         return;
                     }
-                    console.warn(message);
+                    onwarn(warning);
                 }
             });
         });
