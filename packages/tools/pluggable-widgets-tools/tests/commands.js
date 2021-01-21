@@ -1,5 +1,6 @@
 const { Mutex, Semaphore } = require("async-mutex");
 const { exec } = require("child_process");
+const { readFileSync, writeFileSync } = require("fs");
 const { copy, existsSync, readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
 const { ls, mkdir, rm, tempdir } = require("shelljs");
@@ -82,6 +83,7 @@ async function main() {
     }
 
     async function runTest(workDir, platform, boilerplate, lang, version) {
+        const isNative = platform === "native";
         const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}_${boilerplate}`;
         let widgetPackageJson;
 
@@ -110,6 +112,12 @@ async function main() {
 
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
+
+        // Check native dependency management
+        if (isNative) {
+            console.log(`[${widgetName}] Testing native dependency management...`);
+            await testNativeDependencyManagement();
+        }
 
         console.log(`[${widgetName}] Tested!`);
 
@@ -155,6 +163,12 @@ async function main() {
 
             widgetPackageJson = await readJson(join(workDir, "package.json"));
             widgetPackageJson.devDependencies["@mendix/pluggable-widgets-tools"] = toolsPackagePath;
+
+            // Check native dependency management
+            if (isNative) {
+                widgetPackageJson.dependencies["react-native-maps"] = "0.27.0";
+            }
+
             await writeJson(join(workDir, "package.json"), widgetPackageJson);
 
             await execAsync("npm install --loglevel=error", workDir);
@@ -247,6 +261,37 @@ async function main() {
                 }
                 await new Promise(resolve => setTimeout(resolve, 5000)); // give time for processes to die
             }
+        }
+
+        async function testNativeDependencyManagement() {
+            const entryPointPath = join(workDir, "src", `Generated.${lang}x`);
+            const jsonPath = join(workDir, `/dist/tmp/widgets/${widgetPackageJson.widgetName}.json`);
+            const fileData = readFileSync(entryPointPath);
+            writeFileSync(
+                entryPointPath,
+                Buffer.concat([
+                    Buffer.from(`import "react-native-maps";
+`),
+                    Buffer.from(fileData)
+                ])
+            );
+            await execAsync("npm run build", workDir);
+            if (!existsSync(jsonPath)) {
+                throw new Error("Expected dependency json file to be generated, but it wasn't.");
+            }
+            const dependencyJson = await readJson(jsonPath);
+            if (!dependencyJson.nativeDependencies || !dependencyJson.nativeDependencies["react-native-maps"]) {
+                throw new Error("Expected dependency json file to contain dependencies, but it wasn't.");
+            }
+            if (!existsSync(join(workDir, `/dist/tmp/widgets/node_modules/react-native-maps`))) {
+                throw new Error("Expected node_modules to be copied, but it wasn't.");
+            }
+            if (
+                !existsSync(join(workDir, `/dist/tmp/widgets/node_modules/react-native-maps/node_modules/prop-types`))
+            ) {
+                throw new Error("Expected transitive node_modules to be copied, but it wasn't.");
+            }
+            console.log(`[${widgetName}] Native dependency management succeeded!`);
         }
     }
 }
