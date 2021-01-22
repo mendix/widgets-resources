@@ -3,7 +3,7 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
-
+import { saveToCameraRoll } from "@react-native-community/cameraroll";
 /**
  * @param {MxObject} picture - This field is required.
  * @returns {Promise.<string>}
@@ -11,8 +11,6 @@
 export async function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promise<string> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/cameraroll#savetocameraroll
-
-    const CameraRoll = require("@react-native-community/cameraroll") ?? require("react-native").CameraRoll;
 
     if (!picture) {
         return Promise.reject(new Error("Input parameter 'Picture' is required"));
@@ -27,7 +25,7 @@ export async function SaveToPictureLibrary(picture?: mendix.lib.MxObject): Promi
     const changedDate = picture.get("changedDate") as number;
     const url = mx.data.getDocumentUrl(guid, changedDate);
 
-    return CameraRoll.saveToCameraRoll(url);
+    return saveToCameraRoll(url);
 
     // END USER CODE
 }

@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import { NativeModules } from "react-native";
-import ReactNativeFirebase from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 
 /**
  * This generated registration token is used to identify the app instance and periodically sends data to the backend.
@@ -18,8 +18,6 @@ export async function getPushNotificationToken(): Promise<string> {
     if (NativeModules && !NativeModules.RNFBMessagingModule) {
         return Promise.reject(new Error("Firebase module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const messaging: typeof ReactNativeFirebase = require("@react-native-firebase/messaging").default;
 
     return messaging().getToken();
 

@@ -5,7 +5,7 @@
 // Other code you write will be lost the next time you deploy the project.
 
 import { NativeModules, Platform } from "react-native";
-import ReactNativeFirebase from "@react-native-firebase/messaging";
+import messaging from "@react-native-firebase/messaging";
 
 /**
  * Notification permissions are required to send a user push messages. Calling this action displays the permission dialog to the user.
@@ -19,9 +19,6 @@ export async function RequestNotificationPermission(): Promise<boolean> {
     if (NativeModules && !NativeModules.RNFBMessagingModule) {
         return Promise.reject(new Error("Firebase module is not available in your app"));
     }
-
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const messaging: typeof ReactNativeFirebase = require("@react-native-firebase/messaging").default;
 
     return messaging()
         .requestPermission()
