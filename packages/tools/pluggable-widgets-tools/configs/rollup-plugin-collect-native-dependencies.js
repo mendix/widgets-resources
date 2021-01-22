@@ -3,7 +3,13 @@ import { copy, readJson, writeJson } from "fs-extra";
 import { promises } from "fs";
 import { rm } from "shelljs";
 
-export function collectNativeDependencies(externals, outputDir, shouldCopyNodeModules = true, widgetName) {
+export function collectNativeDependencies(
+    externals,
+    outputDir,
+    shouldCopyNodeModules = true,
+    widgetName,
+    shouldRemoveNodeModules = true
+) {
     const nativeDependencies = [];
     const nodeModulesPath = join(outputDir, "node_modules");
     return {
@@ -12,28 +18,16 @@ export function collectNativeDependencies(externals, outputDir, shouldCopyNodeMo
             if (!shouldCopyNodeModules) {
                 return;
             }
-            rm("-rf", nodeModulesPath);
+            if (shouldRemoveNodeModules) {
+                rm("-rf", nodeModulesPath);
+            }
             nativeDependencies.length = 0;
         },
         async resolveId(source) {
             if (source.startsWith(".")) {
                 return null;
             }
-
-            try {
-                const packageFilePath = require.resolve(`${source}/package.json`);
-                const packageDir = dirname(packageFilePath);
-
-                if (await hasNativeCode(packageDir)) {
-                    if (shouldCopyNodeModules && !nativeDependencies.some(x => x.name === source)) {
-                        nativeDependencies.push({ name: source, dir: packageDir });
-                    }
-                    return { id: source, external: true };
-                }
-                return null;
-            } catch (e) {
-                return null;
-            }
+            return checkNativeLibs(externals, source, shouldCopyNodeModules, nativeDependencies);
         },
         async writeBundle() {
             if (!shouldCopyNodeModules) {
@@ -53,6 +47,27 @@ export function collectNativeDependencies(externals, outputDir, shouldCopyNodeMo
             await writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName);
         }
     };
+}
+
+async function checkNativeLibs(externals, source, shouldCopyNodeModules, nativeDependencies) {
+    try {
+        const packageFilePath = require.resolve(`${source}/package.json`);
+        const packageDir = dirname(packageFilePath);
+
+        if (await hasNativeCode(packageDir)) {
+            if (shouldCopyNodeModules && !nativeDependencies.some(x => x.name === source)) {
+                nativeDependencies.push({ name: source, dir: packageDir });
+
+                for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
+                    await checkNativeLibs(externals, transitiveDependency, shouldCopyNodeModules, nativeDependencies);
+                }
+            }
+            return { id: source, external: true };
+        }
+        return null;
+    } catch (e) {
+        return null;
+    }
 }
 
 async function writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName) {
@@ -113,6 +128,6 @@ async function copyJsModule(from, to) {
                 ? !/android|ios|windows|macos|.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?/.test(
                       basename(path)
                   )
-                : /.*.(jsx?|json|tsx?)/.test(extname(path)) || basename(path).toLowerCase().includes("license")
+                : /.*.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")
     });
 }
