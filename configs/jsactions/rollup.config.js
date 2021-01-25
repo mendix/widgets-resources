@@ -132,7 +132,6 @@ const nativeExternal = [
     /^mendix\//,
     /^react-native(\/|$)/,
     "big.js",
-    "fbjs",
     "react",
     /react-native-gesture-handler\/*/,
     "react-native-reanimated",
