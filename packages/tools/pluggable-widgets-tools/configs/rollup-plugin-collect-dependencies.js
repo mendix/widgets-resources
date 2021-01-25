@@ -3,7 +3,7 @@ import { copy, readJson, writeJson } from "fs-extra";
 import { promises } from "fs";
 import { rm } from "shelljs";
 
-export function collectNativeDependencies(
+export function collectDependencies(
     externals,
     outputDir,
     shouldCopyNodeModules = true,
@@ -29,7 +29,7 @@ export function collectNativeDependencies(
             if (source.startsWith(".")) {
                 return null;
             }
-            return checkNativeLibs(
+            return checkLibraries(
                 externals,
                 source,
                 shouldCopyNodeModules,
@@ -58,7 +58,7 @@ export function collectNativeDependencies(
     };
 }
 
-async function checkNativeLibs(
+async function checkLibraries(
     externals,
     source,
     shouldCopyNodeModules,
@@ -75,14 +75,14 @@ async function checkNativeLibs(
                 nativeDependencies.push({ name: source, dir: packageDir });
 
                 for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
-                    await checkNativeLibs(externals, transitiveDependency, shouldCopyNodeModules, nativeDependencies);
+                    await checkLibraries(externals, transitiveDependency, shouldCopyNodeModules, nativeDependencies);
                 }
             }
             return { id: source, external: true };
         } else if (isJSAction && !jsActionsDependencies.some(x => x.name === source)) {
             jsActionsDependencies.push({ name: source, dir: packageDir });
             for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
-                await checkNativeLibs(externals, transitiveDependency, shouldCopyNodeModules, jsActionsDependencies);
+                await checkLibraries(externals, transitiveDependency, shouldCopyNodeModules, jsActionsDependencies);
             }
             return { id: source, external: true };
         }

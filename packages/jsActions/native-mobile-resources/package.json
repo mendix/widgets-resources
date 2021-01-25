@@ -8,7 +8,7 @@
   },
   "scripts": {
     "prebuild": "..\"/../../node_modules/.bin/rimraf\" ./dist/tsc",
-    "build": "rollup --config ./config/rollup.config.js --configProject nativemobileresources",
+    "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nativemobileresources",
     "version": "npm run build",
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },

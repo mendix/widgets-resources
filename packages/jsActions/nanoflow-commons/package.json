@@ -3,10 +3,7 @@
   "version": "1.0.3",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "npm run build:tsc",
-    "prebuild:tsc": "..\"/../../node_modules/.bin/rimraf\" dist/tsc",
-    "build:tsc": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json",
-    "postbuild": "..\"/../../node_modules/.bin/ts-node\" --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+    "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nanoflowcommons",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
   },
   "dependencies": {
