@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { AsyncStorageStatic } from "@react-native-community/async-storage";
-import { StorageValue } from "./StorageValue";
+import AsyncStorage from "@react-native-community/async-storage";
+import { StorageValue } from "../../typings/StorageValue";
 
 /**
  * Store a list of Mendix objects in device storage, identified by a unique key. Can be accessed by the GetStorageItemObject action. Please note that users can clear the device storage.
@@ -30,7 +30,6 @@ export async function SetStorageItemObjectList(key?: string, value?: mendix.lib.
 
     function setItem(key: string, value: string): Promise<void> {
         if (navigator && navigator.product === "ReactNative") {
-            const AsyncStorage: AsyncStorageStatic = require("@react-native-community/async-storage").default;
             return AsyncStorage.setItem(key, value);
         }
 

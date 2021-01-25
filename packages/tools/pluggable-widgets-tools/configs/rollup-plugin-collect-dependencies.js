@@ -8,9 +8,11 @@ export function collectNativeDependencies(
     outputDir,
     shouldCopyNodeModules = true,
     widgetName,
-    shouldRemoveNodeModules = true
+    shouldRemoveNodeModules = true,
+    isJSAction = false
 ) {
     const nativeDependencies = [];
+    const jsActionsDependencies = [];
     const nodeModulesPath = join(outputDir, "node_modules");
     return {
         name: "collect-native-deps",
@@ -27,14 +29,21 @@ export function collectNativeDependencies(
             if (source.startsWith(".")) {
                 return null;
             }
-            return checkNativeLibs(externals, source, shouldCopyNodeModules, nativeDependencies);
+            return checkNativeLibs(
+                externals,
+                source,
+                shouldCopyNodeModules,
+                nativeDependencies,
+                isJSAction,
+                jsActionsDependencies
+            );
         },
         async writeBundle() {
             if (!shouldCopyNodeModules) {
                 return;
             }
             await Promise.all(
-                nativeDependencies.map(async dependency => {
+                [...nativeDependencies, ...jsActionsDependencies].map(async dependency => {
                     await copyJsModule(dependency.dir, join(nodeModulesPath, dependency.name));
                     for (const transitiveDependency of await getTransitiveDependencies(dependency.name, externals)) {
                         await copyJsModule(
@@ -49,7 +58,14 @@ export function collectNativeDependencies(
     };
 }
 
-async function checkNativeLibs(externals, source, shouldCopyNodeModules, nativeDependencies) {
+async function checkNativeLibs(
+    externals,
+    source,
+    shouldCopyNodeModules,
+    nativeDependencies,
+    isJSAction,
+    jsActionsDependencies
+) {
     try {
         const packageFilePath = require.resolve(`${source}/package.json`);
         const packageDir = dirname(packageFilePath);
@@ -61,6 +77,12 @@ async function checkNativeLibs(externals, source, shouldCopyNodeModules, nativeD
                 for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
                     await checkNativeLibs(externals, transitiveDependency, shouldCopyNodeModules, nativeDependencies);
                 }
+            }
+            return { id: source, external: true };
+        } else if (isJSAction && !jsActionsDependencies.some(x => x.name === source)) {
+            jsActionsDependencies.push({ name: source, dir: packageDir });
+            for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
+                await checkNativeLibs(externals, transitiveDependency, shouldCopyNodeModules, jsActionsDependencies);
             }
             return { id: source, external: true };
         }
