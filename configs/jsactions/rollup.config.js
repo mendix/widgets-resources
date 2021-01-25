@@ -115,5 +115,5 @@ const nativeExternal = [
     "react-navigation"
 ];
 
-// This library us being used silently by CameralRool library and doesnt have this lib as a peer or dependency
-const clientDependencies = ["fbjs"];
+// These libraries are being used silently by @react-native-community/cameraroll and @react-native-community/geolocation and both dont have these libs as a peer or dependency
+const clientDependencies = ["fbjs", "invariant"];
