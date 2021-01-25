@@ -3,14 +3,14 @@ import { copy, readJson, writeJson } from "fs-extra";
 import { promises } from "fs";
 import { rm } from "shelljs";
 
-export function collectDependencies(
+export function collectDependencies({
     externals,
+    isJSAction = false,
     outputDir,
-    shouldCopyNodeModules = true,
-    widgetName,
+    shouldCopyNodeModules,
     shouldRemoveNodeModules = true,
-    isJSAction = false
-) {
+    widgetName
+}) {
     const nativeDependencies = [];
     const jsActionsDependencies = [];
     const nodeModulesPath = join(outputDir, "node_modules");
@@ -147,7 +147,7 @@ async function copyJsModule(from, to) {
     await copy(from, to, {
         filter: async path =>
             (await promises.lstat(path)).isDirectory()
-                ? !/android|ios|windows|macos|.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?/.test(
+                ? !/^(android|ios|windows|macos|.github|.gradle|__(tests|mocks)__|docs|jest|examples?)$/.test(
                       basename(path)
                   )
                 : /.*.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")

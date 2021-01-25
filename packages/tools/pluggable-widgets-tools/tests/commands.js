@@ -280,7 +280,10 @@ async function main() {
                 throw new Error("Expected dependency json file to be generated, but it wasn't.");
             }
             const dependencyJson = await readJson(jsonPath);
-            if (!dependencyJson.nativeDependencies || !dependencyJson.nativeDependencies["react-native-maps"]) {
+            if (
+                !dependencyJson.nativeDependencies ||
+                dependencyJson.nativeDependencies["react-native-maps"] !== "0.27.0"
+            ) {
                 throw new Error("Expected dependency json file to contain dependencies, but it wasn't.");
             }
             if (!existsSync(join(workDir, `/dist/tmp/widgets/node_modules/react-native-maps`))) {

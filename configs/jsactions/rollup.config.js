@@ -1,13 +1,13 @@
 import { red, yellow } from "colors";
 import { mkdirSync, promises } from "fs";
-import { join, relative } from "path";
+import { copy } from "fs-extra";
+import { basename, dirname, extname, join, relative } from "path";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
 import { cp } from "shelljs";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import { collectDependencies } from "../../packages/tools/pluggable-widgets-tools/configs/rollup-plugin-collect-dependencies";
-import { copyClientDependencies } from "./rollup-plugin-copy-client-dependencies";
 
 const cwd = process.cwd();
 
@@ -18,7 +18,7 @@ export default async args => {
     const outDir = join(cwd, "dist");
 
     files.forEach((file, i) => {
-        const fileInput = file.path.replace(join(cwd, "/"), "");
+        const fileInput = relative(cwd, file.path);
         const [fileOutput] = file.name.split(".");
         result.push({
             input: fileInput,
@@ -29,9 +29,15 @@ export default async args => {
             },
             external: nativeExternal,
             plugins: [
-                ...(i === 0 ? [clear({ targets: [outDir] })] : []),
-                collectDependencies(nativeExternal, outDir, true, fileOutput, i === 0, true),
-                ...(i === files.length - 1 ? [copyClientDependencies(clientDependencies, outDir)] : []), // Copy extra dependencies not listed in lib's package.json
+                i === 0 ? clear({ targets: [outDir] }) : null,
+                collectDependencies({
+                    externals: nativeExternal,
+                    isJSAction: true,
+                    outputDir: outDir,
+                    shouldCopyNodeModules: true,
+                    shouldRemoveNodeModules: i === 0,
+                    widgetName: fileOutput
+                }),
                 nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] }),
                 typescript({
                     noEmitOnError: false,
@@ -42,9 +48,18 @@ export default async args => {
                     allowSyntheticDefaultImports: true
                 }),
                 command([
-                    () => {
+                    async () => {
                         if (i === files.length - 1) {
-                            const destinationFolder = join(cwd, "./tests/testProject/", jsActionTargetFolder);
+                            await Promise.all(
+                                clientDependencies.map(async dependency => {
+                                    await copyJsModule(
+                                        dirname(require.resolve(`${dependency}/package.json`)),
+                                        join(join(outDir, "node_modules"), dependency)
+                                    );
+                                })
+                            );
+
+                            const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
                             const destinations = [
                                 destinationFolder,
                                 ...[
@@ -99,6 +114,17 @@ export default async args => {
             console.error(red(description));
             process.exit(1);
         }
+    }
+
+    async function copyJsModule(from, to) {
+        await copy(from, to, {
+            filter: async path =>
+                (await promises.lstat(path)).isDirectory()
+                    ? !/android|ios|windows|macos|.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?/.test(
+                          basename(path)
+                      )
+                    : /.*.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")
+        });
     }
 };
 
