@@ -4,7 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { geocodeAddress } from "react-native-geocoder";
+import Geodecoder from "react-native-geocoder";
 
 type GeocodingProvider = "Google" | "Geocodio" | "LocationIQ" | "MapQuest";
 
@@ -35,7 +35,7 @@ export async function Geocode(
     }
 
     if (navigator && navigator.product === "ReactNative") {
-        return geocodeAddress(address).then(results => {
+        return Geodecoder.geocodeAddress(address).then(results => {
             if (results.length === 0) {
                 return Promise.reject(new Error("No results found"));
             }
