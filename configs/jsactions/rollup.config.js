@@ -47,35 +47,35 @@ export default async args => {
                     types: ["mendix-client", "big.js", "react-native"],
                     allowSyntheticDefaultImports: true
                 }),
-                command([
-                    async () => {
-                        if (i === files.length - 1) {
-                            await Promise.all(
-                                clientDependencies.map(async dependency => {
-                                    await copyJsModule(
-                                        dirname(require.resolve(`${dependency}/package.json`)),
-                                        join(join(outDir, "node_modules"), dependency)
-                                    );
-                                })
-                            );
+                i === files.length - 1
+                    ? command([
+                          async () => {
+                              await Promise.all(
+                                  clientDependencies.map(async dependency => {
+                                      await copyJsModule(
+                                          dirname(require.resolve(`${dependency}/package.json`)),
+                                          join(join(outDir, "node_modules"), dependency)
+                                      );
+                                  })
+                              );
 
-                            const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
-                            const destinations = [
-                                destinationFolder,
-                                ...[
-                                    process.env.MX_PROJECT_PATH
-                                        ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
-                                        : undefined
-                                ]
-                            ];
+                              const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
+                              const destinations = [
+                                  destinationFolder,
+                                  ...[
+                                      process.env.MX_PROJECT_PATH
+                                          ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
+                                          : undefined
+                                  ]
+                              ];
 
-                            destinations.filter(Boolean).forEach(destination => {
-                                mkdirSync(destination, { recursive: true });
-                                cp("-r", join(outDir, "*"), destination);
-                            });
-                        }
-                    }
-                ])
+                              destinations.filter(Boolean).forEach(destination => {
+                                  mkdirSync(destination, { recursive: true });
+                                  cp("-r", join(outDir, "*"), destination);
+                              });
+                          }
+                      ])
+                    : null
             ],
             onwarn
         });
@@ -120,7 +120,7 @@ export default async args => {
         await copy(from, to, {
             filter: async path =>
                 (await promises.lstat(path)).isDirectory()
-                    ? !/android|ios|windows|macos|.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?/.test(
+                    ? !/^(android|ios|windows|macos|.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?)$/.test(
                           basename(path)
                       )
                     : /.*.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")

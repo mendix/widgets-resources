@@ -147,7 +147,7 @@ async function copyJsModule(from, to) {
     await copy(from, to, {
         filter: async path =>
             (await promises.lstat(path)).isDirectory()
-                ? !/^(android|ios|windows|macos|.github|.gradle|__(tests|mocks)__|docs|jest|examples?)$/.test(
+                ? !/^(android|ios|windows|macos|.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?)$/.test(
                       basename(path)
                   )
                 : /.*.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")
