@@ -1,6 +1,7 @@
 import { red, yellow } from "colors";
-import { mkdirSync, promises } from "fs";
-import { dirname, join, relative } from "path";
+import fg from "fast-glob";
+import { mkdirSync } from "fs";
+import { basename, dirname, join, relative } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
@@ -14,12 +15,12 @@ const cwd = process.cwd();
 export default async args => {
     const jsActionTargetFolder = `javascriptsource/${args.configProject ?? "nativemobileresources"}/actions`;
     const result = [];
-    const files = await findFiles();
+    const files = await fg([join(cwd, "src", "**/*.ts")]);
     const outDir = join(cwd, "dist");
 
     files.forEach((file, i) => {
-        const fileInput = relative(cwd, file.path);
-        const [fileOutput] = file.name.split(".");
+        const fileInput = relative(cwd, file);
+        const fileOutput = basename(file, ".ts");
         result.push({
             input: fileInput,
             output: {
@@ -83,19 +84,6 @@ export default async args => {
 
     return result;
 
-    async function findFiles(dir = join(cwd, "src")) {
-        const directoryFiles = await promises.readdir(dir, { withFileTypes: true });
-        const files = [];
-        for (const file of directoryFiles) {
-            if (file.isDirectory()) {
-                files.push(...(await findFiles(join(dir, file.name))));
-            } else if (/.*.((js|ts)x?)$/.test(file.name)) {
-                files.push({ path: join(dir, file.name), name: file.name });
-            }
-        }
-        return files;
-    }
-
     function onwarn(warning) {
         const description =
             (warning.plugin ? `(${warning.plugin} plugin) ` : "") +
@@ -122,6 +110,7 @@ export default async args => {
                 from,
                 to,
                 {
+                    overwrite: true,
                     filter: [
                         "**/*.{js,jsx,ts,tsx,json}",
                         "license",

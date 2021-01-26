@@ -150,6 +150,7 @@ async function copyJsModule(from, to) {
             from,
             to,
             {
+                overwrite: true,
                 filter: [
                     "**/*.{js,jsx,ts,tsx,json}",
                     "license",
