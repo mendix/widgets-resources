@@ -142,7 +142,9 @@ async function getMendixVersion() {
         const dockerTagsResponse = await fetch(
             "https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags"
         );
-        const runtimeVersions = (await dockerTagsResponse.json()).map(r => r.name.split("-")[0]);
+        const runtimeVersions = (await dockerTagsResponse.json())
+            .filter(r => !r.name.startsWith("9"))
+            .map(r => r.name.split("-")[0]);
         runtimeVersions.sort((a, b) =>
             semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
         );
