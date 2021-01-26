@@ -1,6 +1,7 @@
-import { basename, dirname, extname, join } from "path";
-import { copy, readJson, writeJson } from "fs-extra";
+import { readJson, writeJson } from "fs-extra";
 import { promises } from "fs";
+import { dirname, join } from "path";
+import copy from "recursive-copy";
 import { rm } from "shelljs";
 
 export function collectDependencies({
@@ -144,12 +145,26 @@ async function getTransitiveDependencies(packageName, externals) {
 }
 
 async function copyJsModule(from, to) {
-    await copy(from, to, {
-        filter: async path =>
-            (await promises.lstat(path)).isDirectory()
-                ? !/^(android|ios|windows|macos|\.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?)$/.test(
-                      basename(path)
-                  )
-                : /.*\.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")
-    });
+    return new Promise((resolve, reject) =>
+        copy(
+            from,
+            to,
+            {
+                filter: [
+                    "**/*.{js,jsx,ts,tsx,json}",
+                    "license",
+                    "LICENSE",
+                    "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                    "!*.{config,setup}.*"
+                ]
+            },
+            err => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(true);
+                }
+            }
+        )
+    );
 }

@@ -1,7 +1,7 @@
 import { red, yellow } from "colors";
 import { mkdirSync, promises } from "fs";
-import { copy } from "fs-extra";
-import { basename, dirname, extname, join, relative } from "path";
+import { dirname, join, relative } from "path";
+import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
 import { cp } from "shelljs";
@@ -117,14 +117,28 @@ export default async args => {
     }
 
     async function copyJsModule(from, to) {
-        await copy(from, to, {
-            filter: async path =>
-                (await promises.lstat(path)).isDirectory()
-                    ? !/^(android|ios|windows|macos|\.?(github|gradle)|__(tests|mocks)__|docs|jest|examples?)$/.test(
-                          basename(path)
-                      )
-                    : /.*\.(jsx?|json|tsx?)$/.test(extname(path)) || basename(path).toLowerCase().includes("license")
-        });
+        return new Promise((resolve, reject) =>
+            copy(
+                from,
+                to,
+                {
+                    filter: [
+                        "**/*.{js,jsx,ts,tsx,json}",
+                        "license",
+                        "LICENSE",
+                        "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                        "!*.{config,setup}.*"
+                    ]
+                },
+                err => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(true);
+                    }
+                }
+            )
+        );
     }
 };
 
