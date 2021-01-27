@@ -143,10 +143,11 @@ async function copyJsModule(from, to) {
     }
     return promisify(copy)(from, to, {
         filter: [
-            "**/*.{js,jsx,ts,tsx,json}",
-            "**/{license,LICENSE}*",
-            "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
-            "!*.{config,setup}.*"
+            "**/*.*",
+            "{license,LICENSE}",
+            "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
+            "!**/*.{config,setup}.*",
+            "!**/*.{podspec,flow}"
         ]
     });
 }
