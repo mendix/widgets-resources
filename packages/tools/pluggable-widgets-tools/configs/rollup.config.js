@@ -97,7 +97,7 @@ export default async args => {
                     collectDependencies({
                         externals: nativeExternal,
                         outputDir: outDir,
-                        shouldCopyNodeModules: i === 0,
+                        copyNodeModules: i === 0,
                         widgetName
                     }),
                     ...getCommonPlugins({

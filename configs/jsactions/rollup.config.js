@@ -1,11 +1,12 @@
 import { red, yellow } from "colors";
 import fg from "fast-glob";
-import { mkdirSync } from "fs";
+import { existsSync, mkdirSync } from "fs";
 import { basename, dirname, join, relative } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
 import { cp } from "shelljs";
+import { promisify } from "util";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import { collectDependencies } from "../../packages/tools/pluggable-widgets-tools/configs/rollup-plugin-collect-dependencies";
@@ -17,6 +18,16 @@ export default async args => {
     const result = [];
     const files = await fg([join(cwd, "src", "**/*.ts")]);
     const outDir = join(cwd, "dist");
+
+    const nodeResolvePlugin = nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] });
+    const typescriptPlugin = typescript({
+        noEmitOnError: false,
+        sourceMap: false,
+        inlineSources: false,
+        target: "es2019",
+        types: ["mendix-client", "big.js", "react-native"],
+        allowSyntheticDefaultImports: true
+    });
 
     files.forEach((file, i) => {
         const fileInput = relative(cwd, file);
@@ -35,19 +46,12 @@ export default async args => {
                     externals: nativeExternal,
                     isJSAction: true,
                     outputDir: outDir,
-                    shouldCopyNodeModules: true,
-                    shouldRemoveNodeModules: i === 0,
+                    copyNodeModules: true,
+                    removeNodeModules: i === 0,
                     widgetName: fileOutput
                 }),
-                nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] }),
-                typescript({
-                    noEmitOnError: false,
-                    sourceMap: false,
-                    inlineSources: false,
-                    target: "es2019",
-                    types: ["mendix-client", "big.js", "react-native"],
-                    allowSyntheticDefaultImports: true
-                }),
+                nodeResolvePlugin,
+                typescriptPlugin,
                 i === files.length - 1
                     ? command([
                           async () => {
@@ -105,29 +109,17 @@ export default async args => {
     }
 
     async function copyJsModule(from, to) {
-        return new Promise((resolve, reject) =>
-            copy(
-                from,
-                to,
-                {
-                    overwrite: true,
-                    filter: [
-                        "**/*.{js,jsx,ts,tsx,json}",
-                        "license",
-                        "LICENSE",
-                        "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
-                        "!*.{config,setup}.*"
-                    ]
-                },
-                err => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(true);
-                    }
-                }
-            )
-        );
+        if (existsSync(join(to, "package.json"))) {
+            return;
+        }
+        return promisify(copy)(from, to, {
+            filter: [
+                "**/*.{js,jsx,ts,tsx,json}",
+                "**/{license,LICENSE}*",
+                "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                "!*.{config,setup}.*"
+            ]
+        });
     }
 };
 

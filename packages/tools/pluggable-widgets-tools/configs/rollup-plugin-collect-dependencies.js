@@ -1,15 +1,17 @@
+import fg from "fast-glob";
 import { readJson, writeJson } from "fs-extra";
-import { promises } from "fs";
+import { existsSync } from "fs";
 import { dirname, join } from "path";
 import copy from "recursive-copy";
 import { rm } from "shelljs";
+import { promisify } from "util";
 
 export function collectDependencies({
     externals,
     isJSAction = false,
     outputDir,
-    shouldCopyNodeModules,
-    shouldRemoveNodeModules = true,
+    copyNodeModules,
+    removeNodeModules = true,
     widgetName
 }) {
     const nativeDependencies = [];
@@ -18,10 +20,10 @@ export function collectDependencies({
     return {
         name: "collect-native-deps",
         async buildStart() {
-            if (!shouldCopyNodeModules) {
+            if (!copyNodeModules) {
                 return;
             }
-            if (shouldRemoveNodeModules) {
+            if (removeNodeModules) {
                 rm("-rf", nodeModulesPath);
             }
             nativeDependencies.length = 0;
@@ -30,17 +32,17 @@ export function collectDependencies({
             if (source.startsWith(".")) {
                 return null;
             }
-            return checkLibraries(
+            return tryResolveDependency(
                 externals,
                 source,
-                shouldCopyNodeModules,
+                copyNodeModules,
                 nativeDependencies,
                 isJSAction,
                 jsActionsDependencies
             );
         },
         async writeBundle() {
-            if (!shouldCopyNodeModules) {
+            if (!copyNodeModules) {
                 return;
             }
             await Promise.all(
@@ -59,10 +61,10 @@ export function collectDependencies({
     };
 }
 
-async function checkLibraries(
+async function tryResolveDependency(
     externals,
     source,
-    shouldCopyNodeModules,
+    copyNodeModules,
     nativeDependencies,
     isJSAction,
     jsActionsDependencies
@@ -72,24 +74,26 @@ async function checkLibraries(
         const packageDir = dirname(packageFilePath);
 
         if (await hasNativeCode(packageDir)) {
-            if (shouldCopyNodeModules && !nativeDependencies.some(x => x.name === source)) {
-                nativeDependencies.push({ name: source, dir: packageDir });
-
-                for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
-                    await checkLibraries(externals, transitiveDependency, shouldCopyNodeModules, nativeDependencies);
-                }
+            if (copyNodeModules && !nativeDependencies.some(x => x.name === source)) {
+                await addDependencyWithTransitives(nativeDependencies, packageDir);
             }
             return { id: source, external: true };
-        } else if (isJSAction && !jsActionsDependencies.some(x => x.name === source)) {
-            jsActionsDependencies.push({ name: source, dir: packageDir });
-            for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
-                await checkLibraries(externals, transitiveDependency, shouldCopyNodeModules, jsActionsDependencies);
-            }
+        }
+        if (isJSAction && !jsActionsDependencies.some(x => x.name === source)) {
+            await addDependencyWithTransitives(jsActionsDependencies, packageDir);
             return { id: source, external: true };
         }
         return null;
     } catch (e) {
         return null;
+    }
+
+    async function addDependencyWithTransitives(dependencyList, packageDir) {
+        dependencyList.push({ name: source, dir: packageDir });
+
+        for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
+            await tryResolveDependency(externals, transitiveDependency, copyNodeModules, dependencyList);
+        }
     }
 }
 
@@ -105,18 +109,7 @@ async function writeNativeDependenciesJson(nativeDependencies, outputDir, widget
 }
 
 async function hasNativeCode(dir) {
-    const packageContent = await promises.readdir(dir, { withFileTypes: true });
-
-    if (packageContent.some(file => /^(ios|android|.*\.podspec)$/i.test(file.name))) {
-        return true;
-    }
-
-    for (const file of packageContent) {
-        if (file.isDirectory() && (await hasNativeCode(join(dir, file.name)))) {
-            return true;
-        }
-    }
-    return false;
+    return (await fg(["**/{android,ios}/*", "**/*.podspec"], { cwd: dir })).length > 0;
 }
 
 async function getTransitiveDependencies(packageName, externals) {
@@ -145,27 +138,15 @@ async function getTransitiveDependencies(packageName, externals) {
 }
 
 async function copyJsModule(from, to) {
-    return new Promise((resolve, reject) =>
-        copy(
-            from,
-            to,
-            {
-                overwrite: true,
-                filter: [
-                    "**/*.{js,jsx,ts,tsx,json}",
-                    "license",
-                    "LICENSE",
-                    "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
-                    "!*.{config,setup}.*"
-                ]
-            },
-            err => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(true);
-                }
-            }
-        )
-    );
+    if (existsSync(join(to, "package.json"))) {
+        return;
+    }
+    return promisify(copy)(from, to, {
+        filter: [
+            "**/*.{js,jsx,ts,tsx,json}",
+            "**/{license,LICENSE}*",
+            "!**/{jest,github,gradle,__*__,docs,jest,example*}/**/*",
+            "!*.{config,setup}.*"
+        ]
+    });
 }
