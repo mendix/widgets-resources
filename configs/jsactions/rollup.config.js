@@ -5,7 +5,6 @@ import { basename, dirname, join, relative } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
-import { cp } from "shelljs";
 import { promisify } from "util";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
@@ -76,7 +75,7 @@ export default async args => {
 
                               destinations.filter(Boolean).forEach(destination => {
                                   mkdirSync(destination, { recursive: true });
-                                  cp("-r", join(outDir, "*"), destination);
+                                  copy(outDir, destination, { filter: ["**/*"], overwrite: true });
                               });
                           }
                       ])
