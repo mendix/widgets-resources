@@ -1,4 +1,4 @@
-import { border, brand, font, spacing } from "../variables";
+import { border, brand, font, spacing } from "../../variables";
 import { BarChartType } from "../../types/widgets";
 /*
 

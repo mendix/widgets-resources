@@ -1,4 +1,4 @@
-import { brand, progressBar } from "../variables";
+import { brand, progressBar } from "../../variables";
 /*
 
 DISCLAIMER:

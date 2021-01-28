@@ -1,4 +1,4 @@
-import { font } from "../variables";
+import { font } from "../../variables";
 import { TextHeading1 } from "./typography";
 import { PageTitleType } from "../../types/widgets";
 /*

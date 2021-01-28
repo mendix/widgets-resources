@@ -1,4 +1,4 @@
-import { background, brand, contrast, font } from "../variables";
+import { background, brand, contrast, font } from "../../variables";
 import { ToggleButtonsType } from "../../types/widgets";
 import { TextBox } from "./textbox";
 /*

@@ -1,4 +1,4 @@
-import { background, listViewSwipe } from "../variables";
+import { background, listViewSwipe } from "../../variables";
 import { ListViewSwipeType } from "../../types/widgets";
 /*
 

@@ -1,6 +1,6 @@
 import { TextBox, TextBoxVertical } from "./textbox";
 import { TextBoxType } from "../../types/widgets";
-import { input } from "../variables";
+import { input } from "../../variables";
 /*
 
 DISCLAIMER:

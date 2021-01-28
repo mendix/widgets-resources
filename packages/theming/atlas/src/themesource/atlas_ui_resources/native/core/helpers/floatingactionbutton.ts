@@ -1,4 +1,4 @@
-import { background, brand } from "../variables";
+import { background, brand } from "../../variables";
 /*
 
 DISCLAIMER:

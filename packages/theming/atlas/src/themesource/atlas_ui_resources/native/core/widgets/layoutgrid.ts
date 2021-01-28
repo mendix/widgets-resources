@@ -1,4 +1,4 @@
-import { layoutGrid } from "../variables";
+import { layoutGrid } from "../../variables";
 import { Helperclass } from "../../types/helperclass";
 import { LayoutGridType } from "../../types/widgets";
 /*

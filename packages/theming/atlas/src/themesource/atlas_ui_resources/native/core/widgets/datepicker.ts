@@ -1,4 +1,4 @@
-import { background, font, input } from "../variables";
+import { background, font, input } from "../../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DatePickerType } from "../../types/widgets";
 /*

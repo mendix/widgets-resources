@@ -1,4 +1,4 @@
-import { font, progressCircle } from "../variables";
+import { font, progressCircle } from "../../variables";
 import { ProgressCircleType } from "../../types/widgets";
 import { TextBox } from "./textbox";
 /*

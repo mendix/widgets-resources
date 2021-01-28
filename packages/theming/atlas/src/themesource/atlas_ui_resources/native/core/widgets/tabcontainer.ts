@@ -1,4 +1,4 @@
-import { badge, font, tabContainer } from "../variables";
+import { badge, font, tabContainer } from "../../variables";
 import { TabContainerType } from "../../types/widgets";
 /*
 

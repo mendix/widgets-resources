@@ -1,4 +1,4 @@
-import { border, brand, contrast, image } from "../variables";
+import { border, brand, contrast, image } from "../../variables";
 /*
 
 DISCLAIMER:

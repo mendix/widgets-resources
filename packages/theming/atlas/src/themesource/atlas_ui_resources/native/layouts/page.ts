@@ -1,4 +1,4 @@
-import { background, font, navigation } from "../core/variables";
+import { background, font, navigation } from "../variables";
 import { LayoutType } from "../types/widgets";
 /*
 

@@ -1,4 +1,4 @@
-import { font, input, spacing } from "../variables";
+import { font, input, spacing } from "../../variables";
 import { TextBoxType } from "../../types/widgets";
 /*
 

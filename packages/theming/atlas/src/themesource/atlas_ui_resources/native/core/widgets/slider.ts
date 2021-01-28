@@ -1,4 +1,4 @@
-import { slider } from "../variables";
+import { slider } from "../../variables";
 import { SliderType } from "../../types/widgets";
 import { TextBox } from "./textbox";
 /*

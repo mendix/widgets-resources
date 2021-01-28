@@ -1,4 +1,4 @@
-import { border, font, navigation, spacing } from "../variables";
+import { border, font, navigation, spacing } from "../../variables";
 import { NavigationType } from "../../types/widgets";
 /*
 

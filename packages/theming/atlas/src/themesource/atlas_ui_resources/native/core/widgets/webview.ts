@@ -1,4 +1,4 @@
-import { font } from "../variables";
+import { font } from "../../variables";
 import { WebViewType } from "../../types/widgets";
 /*
 

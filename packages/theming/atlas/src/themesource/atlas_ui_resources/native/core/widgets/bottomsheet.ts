@@ -1,4 +1,4 @@
-import { background, border, brand, contrast, font } from "../variables";
+import { background, border, brand, contrast, font } from "../../variables";
 import { BottomSheetType } from "../../types/widgets";
 
 //

@@ -1,4 +1,4 @@
-import { background, border, listView, spacing } from "../variables";
+import { background, border, listView, spacing } from "../../variables";
 /*
 
 DISCLAIMER:

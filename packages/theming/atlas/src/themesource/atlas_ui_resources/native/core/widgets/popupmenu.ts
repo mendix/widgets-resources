@@ -1,4 +1,4 @@
-import { brand, contrast, font } from "../variables";
+import { brand, contrast, font } from "../../variables";
 import { PopupMenuType } from "../../types/widgets";
 /*
 

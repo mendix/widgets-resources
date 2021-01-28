@@ -1,5 +1,5 @@
 import { ContainerType } from "../../types/widgets";
-import { container } from "../variables";
+import { container } from "../../variables";
 /*
 
 DISCLAIMER:

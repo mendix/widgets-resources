@@ -1,4 +1,4 @@
-import { spacing, rating } from "../variables";
+import { spacing, rating } from "../../variables";
 import { RatingType } from "../../types/widgets";
 /*
 

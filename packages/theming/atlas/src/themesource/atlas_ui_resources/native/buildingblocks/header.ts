@@ -1,4 +1,4 @@
-import { background, spacing } from "../core/variables";
+import { background, spacing } from "../variables";
 /*
 ==========================================================================
     Cards

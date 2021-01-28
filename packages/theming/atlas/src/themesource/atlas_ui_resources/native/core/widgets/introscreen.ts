@@ -1,5 +1,5 @@
 import { isIphoneWithNotch } from "../helpers/_functions/device";
-import { font, spacing, introScreen } from "../variables";
+import { font, spacing, introScreen } from "../../variables";
 import { IntroScreenButtonType, IntroScreenType } from "../../types/widgets";
 /*
 

@@ -1,4 +1,4 @@
-import { brand, button, contrast, font } from "../variables";
+import { brand, button, contrast, font } from "../../variables";
 import merge from "./_functions/mergeobjects";
 import { ActionButtonType } from "../../types/widgets";
 /*

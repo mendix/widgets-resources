@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { background, border } from "../variables";
+import { background, border } from "../../variables";
 import { Helperclass } from "../../types/helperclass";
 /*
 

@@ -1,4 +1,4 @@
-import { contrast, image } from "../variables";
+import { contrast, image } from "../../variables";
 import { ImageType } from "../../types/widgets";
 /*
 

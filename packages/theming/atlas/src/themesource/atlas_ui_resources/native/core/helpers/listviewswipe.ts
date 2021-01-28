@@ -1,4 +1,4 @@
-import { listViewSwipe } from "../variables";
+import { listViewSwipe } from "../../variables";
 
 /*
 

@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { background, border, contrast, spacing } from "../core/variables";
+import { background, border, contrast, spacing } from "../variables";
 /*
 ==========================================================================
     Cards

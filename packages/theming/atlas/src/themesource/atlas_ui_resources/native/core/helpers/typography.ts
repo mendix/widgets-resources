@@ -1,4 +1,4 @@
-import { brand, font } from "../variables";
+import { brand, font } from "../../variables";
 /*
 
 DISCLAIMER:

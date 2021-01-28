@@ -1,4 +1,4 @@
-import { floatingActionButton, font } from "../variables";
+import { floatingActionButton, font } from "../../variables";
 import { FloatingActionButtonType } from "../../types/widgets";
 /*
 

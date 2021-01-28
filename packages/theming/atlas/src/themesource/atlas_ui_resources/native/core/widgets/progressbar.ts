@@ -1,4 +1,4 @@
-import { progressBar } from "../variables";
+import { progressBar } from "../../variables";
 import { ProgressBarType } from "../../types/widgets";
 import { TextBox } from "./textbox";
 /*

@@ -1,4 +1,4 @@
-import { background, contrast } from "../variables";
+import { background, contrast } from "../../variables";
 import { QRCodeType } from "../../types/widgets";
 /*
 

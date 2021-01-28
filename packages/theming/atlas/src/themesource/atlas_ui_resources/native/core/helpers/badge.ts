@@ -1,4 +1,4 @@
-import { badge } from "../variables";
+import { badge } from "../../variables";
 /*
 
 DISCLAIMER:

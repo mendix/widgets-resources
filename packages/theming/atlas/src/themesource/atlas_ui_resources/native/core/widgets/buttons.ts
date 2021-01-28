@@ -1,4 +1,4 @@
-import { button, font } from "../variables";
+import { button, font } from "../../variables";
 import { ActionButtonType } from "../../types/widgets";
 /*
 

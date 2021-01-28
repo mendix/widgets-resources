@@ -1,4 +1,4 @@
-import { font, input } from "../variables";
+import { font, input } from "../../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { DropDownType } from "../../types/widgets";
 /*

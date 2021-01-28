@@ -1,8 +1,8 @@
 import { Platform } from "react-native";
-import * as custom from "../../../../theme/native/custom-variables";
-import adjustFont, { height, width } from "./helpers/_functions/adjustfont";
-import { anyColorToRgbString, setContrastScale } from "./helpers/_functions/convertcolors";
-import merge from "./helpers/_functions/mergeobjects";
+import * as custom from "../../../theme/native/custom-variables";
+import adjustFont, { height, width } from "./core/helpers/_functions/adjustfont";
+import { anyColorToRgbString, setContrastScale } from "./core/helpers/_functions/convertcolors";
+import merge from "./core/helpers/_functions/mergeobjects";
 import {
     VariablesBackground,
     VariablesBadge,
@@ -26,7 +26,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer
-} from "../types/variables";
+} from "./types/variables";
 //
 //
 // == Global variables
@@ -555,7 +555,6 @@ let rating: VariablesRating = {
         selectedColor: brand.warning
     }
 };
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
 rating = merge(rating, custom.rating || ({} as any));
 //
 // (Range)Slider Styles
@@ -590,7 +589,7 @@ let slider: VariablesSlider = {
 };
 slider = merge(slider, custom.slider || ({} as any));
 //
-export * from "../../../../theme/native/custom-variables";
+export * from "../../../theme/native/custom-variables";
 export {
     brand,
     background,

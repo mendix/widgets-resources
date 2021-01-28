@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { background, border, brand, contrast, font, spacing } from "../variables";
+import { background, border, brand, contrast, font, spacing } from "../../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { CheckBoxType } from "../../types/widgets";
 /*

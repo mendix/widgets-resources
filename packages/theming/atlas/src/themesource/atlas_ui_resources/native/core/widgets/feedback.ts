@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { background, border, brand, button, contrast, font, input } from "../variables";
+import { background, border, brand, button, contrast, font, input } from "../../variables";
 import { FeedbackType } from "../../types/widgets";
 /*
 

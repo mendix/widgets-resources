@@ -1,4 +1,4 @@
-import { badge, font } from "../variables";
+import { badge, font } from "../../variables";
 import { BadgeType } from "../../types/widgets";
 /*
 

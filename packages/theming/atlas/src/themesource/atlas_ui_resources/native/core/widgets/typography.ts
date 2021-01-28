@@ -1,4 +1,4 @@
-import { font } from "../variables";
+import { font } from "../../variables";
 import { TextType } from "../../types/widgets";
 /*
 

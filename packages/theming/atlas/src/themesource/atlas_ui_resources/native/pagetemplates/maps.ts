@@ -1,4 +1,4 @@
-import { background, border, contrast, spacing } from "../core/variables";
+import { background, border, contrast, spacing } from "../variables";
 /*
 ==========================================================================
     Maps
