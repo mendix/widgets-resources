@@ -26,7 +26,7 @@ export default function <T extends { [k: string]: any }>(...sources: T[]): T {
                     }
                     mergeDeep(target[key] as T, source[key] as T);
                 } else {
-                    Object.assign(target, { [key]: source[key] });
+                    Object.assign(target, { [key]: !!source[key] ? source[key] : target[key] });
                 }
             });
         }
