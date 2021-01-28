@@ -1,9 +1,5 @@
 import { Appearance, Platform } from "react-native";
-import adjustFont from "../../themesource/atlas_ui_resources/native/core/helpers/_functions/adjustfont";
-import {
-    anyColorToRgbString,
-    setContrastScale
-} from "../../themesource/atlas_ui_resources/native/core/helpers/_functions/convertcolors";
+import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_ui_resources/native/api";
 import {
     VariablesBackground,
     VariablesBadge,

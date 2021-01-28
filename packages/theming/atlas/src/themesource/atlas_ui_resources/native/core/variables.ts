@@ -590,6 +590,7 @@ let slider: VariablesSlider = {
 };
 slider = merge(slider, custom.slider || ({} as any));
 //
+export * from "../../../../theme/native/custom-variables";
 export {
     brand,
     background,
@@ -611,5 +612,6 @@ export {
     listViewSwipe,
     progressBar,
     progressCircle,
-    slider
+    slider,
+    rating
 };

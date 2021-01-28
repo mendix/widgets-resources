@@ -1,8 +1,8 @@
-import adjustFont from "./core/helpers/_functions/adjustfont.js";
+import adjustFont from "./core/helpers/_functions/adjustfont";
 import {
     anyColorToRgbString,
     setColorBasedOnBackground,
     setContrastScale
-} from "./core/helpers/_functions/convertcolors.js";
+} from "./core/helpers/_functions/convertcolors";
 
 export { adjustFont, anyColorToRgbString, setColorBasedOnBackground, setContrastScale };
