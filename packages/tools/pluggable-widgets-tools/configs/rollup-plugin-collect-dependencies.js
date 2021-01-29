@@ -32,24 +32,31 @@ export function collectDependencies({ onlyNative, outputDir, widgetName }) {
             return null;
         },
         async writeBundle() {
-            for (const dependencyPath of managedDependencies) {
-                const destinationPath = join(outputDir, "node_modules", getModuleName(dependencyPath));
-                await copyJsModule(dependencyPath, destinationPath);
+            const nativeDependencies = new Set(
+                onlyNative ? managedDependencies : await asyncWhere(managedDependencies, hasNativeCode)
+            );
 
-                for (const transitiveDependencyPath of await getNotNestedDependencies(
-                    dependencyPath,
-                    rollupOptions.external
-                )) {
-                    await copyJsModule(
-                        dependencyPath,
-                        join(destinationPath, "node_modules", getModuleName(transitiveDependencyPath))
-                    );
+            for (let i = 0; i < managedDependencies.length; ++i) {
+                const dependency = managedDependencies[i];
+                const destinationPath = join(outputDir, "node_modules", getModuleName(dependency));
+                await copyJsModule(dependency, destinationPath);
+
+                const transitiveDependencies = await getTransitiveDependencies(dependency, rollupOptions.external);
+                for (const transitiveDependency of transitiveDependencies) {
+                    if (await hasNativeCode(transitiveDependency)) {
+                        nativeDependencies.add(dependency);
+                        if (!managedDependencies.includes(transitiveDependency)) {
+                            managedDependencies.push(transitiveDependency);
+                        }
+                    } else if (!transitiveDependency.startsWith(dependency)) {
+                        await copyJsModule(
+                            transitiveDependency,
+                            join(destinationPath, "node_modules", getModuleName(transitiveDependency))
+                        );
+                    }
                 }
             }
 
-            const nativeDependencies = !onlyNative
-                ? await asyncFlatMap(managedDependencies, async dir => ((await hasNativeCode(dir)) ? [dir] : []))
-                : managedDependencies;
             await writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName);
         }
     };
@@ -69,22 +76,28 @@ async function hasNativeCode(dir) {
     return (await fg(["**/{android,ios}/*", "**/*.podspec"], { cwd: dir })).length > 0;
 }
 
-async function getNotNestedDependencies(packagePath, isExternal) {
-    const packageJson = await readJson(join(packagePath, "package.json"));
-    const dependencies = (packageJson.dependencies ? Object.keys(packageJson.dependencies) : []).concat(
-        packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
-    );
-    const result = [];
-    for (const dependency of dependencies) {
-        if (isExternal(dependency)) {
+async function getTransitiveDependencies(packagePath, isExternal) {
+    const queue = [packagePath];
+    const result = new Set();
+    while (queue.length) {
+        const nextPath = queue.shift();
+        if (result.has(nextPath)) {
             continue;
         }
-        const dependencyPath = await resolvePackage(dependency, packagePath);
-        if (!dependencyPath.startsWith(packagePath)) {
-            result.push(dependencyPath);
+        result.add(nextPath);
+
+        const packageJson = await readJson(join(nextPath, "package.json"));
+        const dependencies = (packageJson.dependencies ? Object.keys(packageJson.dependencies) : []).concat(
+            packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
+        );
+        for (const dependency of dependencies) {
+            if (isExternal(dependency)) {
+                continue;
+            }
+            queue.push(await resolvePackage(dependency, nextPath));
         }
     }
-    return result;
+    return Array.from(result);
 }
 
 async function copyJsModule(moduleSourcePath, to) {
@@ -118,6 +131,6 @@ async function writeNativeDependenciesJson(nativeDependencies, outputDir, widget
     await writeJson(join(outputDir, `${widgetName}.json`), { nativeDependencies: dependencies }, { spaces: 2 });
 }
 
-async function asyncFlatMap(array, mapper) {
-    return (await Promise.all(array.map(mapper))).flat();
+async function asyncWhere(array, filter) {
+    return (await Promise.all(array.map(async el => ((await filter(el)) ? [el] : [])))).flat();
 }
