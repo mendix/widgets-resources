@@ -3,145 +3,95 @@ import { readJson, writeJson } from "fs-extra";
 import { existsSync } from "fs";
 import { dirname, join } from "path";
 import copy from "recursive-copy";
-import { rm } from "shelljs";
 import { promisify } from "util";
+import resolve from "resolve";
 
-export function collectDependencies({
-    externals,
-    isJSAction = false,
-    outputDir,
-    copyNodeModules,
-    removeNodeModules = true,
-    widgetName
-}) {
-    const nativeDependencies = [];
-    const jsActionsDependencies = [];
-    const nodeModulesPath = join(outputDir, "node_modules");
+export function collectDependencies({ onlyNative, outputDir, widgetName }) {
+    const managedDependencies = [];
+    let rollupOptions;
     return {
         name: "collect-native-deps",
-        async buildStart() {
-            if (!copyNodeModules) {
-                return;
-            }
-            if (removeNodeModules) {
-                rm("-rf", nodeModulesPath);
-            }
-            nativeDependencies.length = 0;
+        async buildStart(options) {
+            rollupOptions = options;
+            managedDependencies.length = 0;
         },
-        async resolveId(source) {
-            if (source.startsWith(".")) {
+        async resolveId(source, importer) {
+            if (source.startsWith(".") || source.startsWith("/")) {
                 return null;
             }
-            return tryResolveDependency(
-                externals,
+            const resolvedPackagePath = await resolvePackage(
                 source,
-                copyNodeModules,
-                nativeDependencies,
-                isJSAction,
-                jsActionsDependencies
+                dirname(importer ? importer : rollupOptions.input[0])
             );
+            if (resolvedPackagePath && (!onlyNative || (await hasNativeCode(resolvedPackagePath)))) {
+                if (!managedDependencies.includes(resolvedPackagePath)) {
+                    managedDependencies.push(resolvedPackagePath);
+                }
+                return { external: true, id: source };
+            }
+            return null;
         },
         async writeBundle() {
-            if (!copyNodeModules) {
-                return;
+            for (const dependencyPath of managedDependencies) {
+                const destinationPath = join(outputDir, "node_modules", getModuleName(dependencyPath));
+                await copyJsModule(dependencyPath, destinationPath);
+
+                for (const transitiveDependencyPath of await getNotNestedDependencies(
+                    dependencyPath,
+                    rollupOptions.external
+                )) {
+                    await copyJsModule(
+                        dependencyPath,
+                        join(destinationPath, "node_modules", getModuleName(transitiveDependencyPath))
+                    );
+                }
             }
-            await Promise.all(
-                [...nativeDependencies, ...jsActionsDependencies].map(async dependency => {
-                    await copyJsModule(dependency.dir, join(nodeModulesPath, dependency.name));
-                    for (const transitiveDependency of await getTransitiveDependencies(dependency.name, externals)) {
-                        await copyJsModule(
-                            dirname(require.resolve(`${transitiveDependency}/package.json`)),
-                            join(nodeModulesPath, dependency.name, "node_modules", transitiveDependency)
-                        );
-                    }
-                })
-            );
+
+            const nativeDependencies = !onlyNative
+                ? await asyncFlatMap(managedDependencies, async dir => ((await hasNativeCode(dir)) ? [dir] : []))
+                : managedDependencies;
             await writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName);
         }
     };
 }
 
-async function tryResolveDependency(
-    externals,
-    source,
-    copyNodeModules,
-    nativeDependencies,
-    isJSAction,
-    jsActionsDependencies
-) {
+async function resolvePackage(target, sourceDir) {
+    const targetParts = target.split("/");
+    const targetPackage = targetParts[0].startsWith("@") ? `${targetParts[0]}/${targetParts[1]}` : targetParts[0];
     try {
-        const packageFilePath = require.resolve(`${source}/package.json`);
-        const packageDir = dirname(packageFilePath);
-
-        if (await hasNativeCode(packageDir)) {
-            if (copyNodeModules && !nativeDependencies.some(x => x.name === source)) {
-                await addDependencyWithTransitives(nativeDependencies, packageDir);
-            }
-            return { id: source, external: true };
-        }
-        if (isJSAction && !jsActionsDependencies.some(x => x.name === source)) {
-            await addDependencyWithTransitives(jsActionsDependencies, packageDir);
-            return { id: source, external: true };
-        }
-        return null;
+        return dirname(await promisify(resolve)(`${targetPackage}/package.json`, { basedir: sourceDir }));
     } catch (e) {
-        return null;
+        return undefined;
     }
-
-    async function addDependencyWithTransitives(dependencyList, packageDir) {
-        dependencyList.push({ name: source, dir: packageDir });
-
-        for (const transitiveDependency of await getTransitiveDependencies(source, externals)) {
-            await tryResolveDependency(externals, transitiveDependency, copyNodeModules, dependencyList);
-        }
-    }
-}
-
-async function writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName) {
-    if (nativeDependencies.length === 0) {
-        return;
-    }
-    const dependencies = {};
-    for (const dependency of nativeDependencies) {
-        dependencies[dependency.name] = (await readJson(join(dependency.dir, "package.json"))).version;
-    }
-    await writeJson(join(outputDir, `${widgetName}.json`), { nativeDependencies: dependencies }, { spaces: 2 });
 }
 
 async function hasNativeCode(dir) {
     return (await fg(["**/{android,ios}/*", "**/*.podspec"], { cwd: dir })).length > 0;
 }
 
-async function getTransitiveDependencies(packageName, externals) {
-    const queue = [packageName];
-    const result = new Set();
-    while (queue.length) {
-        const next = queue.shift();
-        if (result.has(next)) {
+async function getNotNestedDependencies(packagePath, isExternal) {
+    const packageJson = await readJson(join(packagePath, "package.json"));
+    const dependencies = (packageJson.dependencies ? Object.keys(packageJson.dependencies) : []).concat(
+        packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
+    );
+    const result = [];
+    for (const dependency of dependencies) {
+        if (isExternal(dependency)) {
             continue;
         }
-        const isExternal = externals.some(external =>
-            external instanceof RegExp ? external.test(next) : external === next
-        );
-        if (isExternal) {
-            continue;
+        const dependencyPath = await resolvePackage(dependency, packagePath);
+        if (!dependencyPath.startsWith(packagePath)) {
+            result.push(dependencyPath);
         }
-
-        if (next !== packageName) {
-            result.add(next);
-        }
-        const packageJson = await readJson(require.resolve(`${next}/package.json`));
-        queue.push(...Object.keys(packageJson.dependencies || {}));
-        queue.push(...Object.keys(packageJson.peerDependencies || {}));
     }
-    return Array.from(result);
+    return result;
 }
 
-async function copyJsModule(from, to) {
-    if (existsSync(join(to, "package.json"))) {
+async function copyJsModule(moduleSourcePath, to) {
+    if (existsSync(to)) {
         return;
     }
-    return promisify(copy)(from, to, {
+    return promisify(copy)(moduleSourcePath, to, {
         filter: [
             "**/*.*",
             "{license,LICENSE}",
@@ -150,4 +100,24 @@ async function copyJsModule(from, to) {
             "!**/*.{podspec,flow}"
         ]
     });
+}
+
+function getModuleName(modulePath) {
+    return modulePath.split(/[\\/]node_modules[\\/]/).pop();
+}
+
+async function writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName) {
+    if (nativeDependencies.length === 0) {
+        return;
+    }
+    const dependencies = {};
+    for (const dependency of nativeDependencies) {
+        const dependencyJson = await readJson(join(dependency, "package.json"));
+        dependencies[dependencyJson.name] = dependencyJson.version;
+    }
+    await writeJson(join(outputDir, `${widgetName}.json`), { nativeDependencies: dependencies }, { spaces: 2 });
+}
+
+async function asyncFlatMap(array, mapper) {
+    return (await Promise.all(array.map(mapper))).flat();
 }

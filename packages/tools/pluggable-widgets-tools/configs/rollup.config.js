@@ -94,12 +94,7 @@ export default async args => {
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
-                    collectDependencies({
-                        externals: nativeExternal,
-                        outputDir: outDir,
-                        copyNodeModules: i === 0,
-                        widgetName
-                    }),
+                    collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
                     ...getCommonPlugins({
                         sourceMaps: false,
                         extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],

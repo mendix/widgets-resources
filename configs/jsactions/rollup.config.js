@@ -42,11 +42,8 @@ export default async args => {
             plugins: [
                 i === 0 ? clear({ targets: [outDir] }) : null,
                 collectDependencies({
-                    externals: nativeExternal,
-                    isJSAction: true,
+                    onlyNative: false,
                     outputDir: outDir,
-                    copyNodeModules: true,
-                    removeNodeModules: i === 0,
                     widgetName: fileOutput
                 }),
                 nodeResolvePlugin,
