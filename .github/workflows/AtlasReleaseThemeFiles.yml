@@ -34,4 +34,13 @@ jobs:
                   prerelease: false
                   title: "Test Release"
                   files: |
-                      packages/theming/atlas/src/theme/**/*
+                      packages/theming/atlas/src/theme/native/main.
+                      packages/theming/atlas/src/theme/native/custom-variables.
+                      packages/theming/atlas/src/theme/web/main.scss
+                      packages/theming/atlas/src/theme/web/custom-variables.scss
+                      packages/theming/atlas/src/theme/web/login.html
+                      packages/theming/atlas/src/theme/web/login-with-sso.html
+                      packages/theming/atlas/src/theme/web/logo.png
+                      packages/theming/atlas/src/theme/web/manifest-overrides.manifest
+                      packages/theming/atlas/src/theme/web/robots.txt
+                      packages/theming/atlas/src/theme/web/settings.json
