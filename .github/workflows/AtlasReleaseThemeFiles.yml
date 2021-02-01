@@ -23,19 +23,16 @@ jobs:
 
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
-            - name: "Release Atlas Theme Files"
-              run: |
-                  echo "done!"
-
             - uses: "marvinpinto/action-automatic-releases@latest"
+              name: "Release Atlas Theme Files"
               with:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
                   automatic_release_tag: "test-atlas"
                   prerelease: false
                   title: "Test Release"
                   files: |
-                      packages/theming/atlas/src/theme/native/main.
-                      packages/theming/atlas/src/theme/native/custom-variables.
+                      packages/theming/atlas/src/theme/native/main.ts
+                      packages/theming/atlas/src/theme/native/custom-variables.ts
                       packages/theming/atlas/src/theme/web/main.scss
                       packages/theming/atlas/src/theme/web/custom-variables.scss
                       packages/theming/atlas/src/theme/web/login.html
