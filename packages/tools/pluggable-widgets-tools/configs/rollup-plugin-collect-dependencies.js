@@ -120,7 +120,7 @@ function getModuleName(modulePath) {
 }
 
 async function writeNativeDependenciesJson(nativeDependencies, outputDir, widgetName) {
-    if (nativeDependencies.length === 0) {
+    if (nativeDependencies.size === 0) {
         return;
     }
     const dependencies = {};
