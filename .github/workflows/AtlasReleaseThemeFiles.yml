@@ -27,7 +27,7 @@ jobs:
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Installing dependencies"
               run: npm install
-            - name: "Compile TS to JS"
+            - name: "Build JS"
               run: |
                   cd packages/theming/atlas
                   npm run release-ts
@@ -35,9 +35,9 @@ jobs:
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
-                  automatic_release_tag: "test-atlas"
+                  automatic_release_tag: "atlasui-theme-files"
                   prerelease: false
-                  title: "Test Release"
+                  title: "Atlas UI - Theme Folder Files"
                   files: |
                       packages/theming/atlas/dist/theme/native/main.js
                       packages/theming/atlas/dist/theme/native/custom-variables.js
