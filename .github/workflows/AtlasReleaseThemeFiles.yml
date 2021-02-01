@@ -35,7 +35,7 @@ jobs:
                   path: ~/.npm
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Installing dependencies"
-              run: npm install tsc
+              run: npm install
             - name: "Running Atlas build"
               run: |
                   cd packages/theming/atlas
