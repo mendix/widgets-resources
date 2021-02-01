@@ -25,6 +25,21 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
+              with:
+                  submodules: false
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - name: "Installing dependencies"
+              run: npm install tsc
+            - name: "Running Atlas build"
+              run: |
+                  cd packages/theming/atlas
+                  npm run release-ts
             - name: "Release Atlas Theme Files"
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
@@ -33,4 +48,13 @@ jobs:
                   prerelease: false
                   title: "Test Release"
                   files: |
-                      README.md
+                      packages/theming/atlas/dist/theme/native/main.js
+                      packages/theming/atlas/dist/theme/native/custom-variables.js
+                      packages/theming/atlas/src/theme/web/main.scss
+                      packages/theming/atlas/src/theme/web/custom-variables.scss
+                      packages/theming/atlas/src/theme/web/login.html
+                      packages/theming/atlas/src/theme/web/login-with-sso.html
+                      packages/theming/atlas/src/theme/web/logo.png
+                      packages/theming/atlas/src/theme/web/manifest-overrides.manifest
+                      packages/theming/atlas/src/theme/web/robots.txt
+                      packages/theming/atlas/src/theme/web/settings.json

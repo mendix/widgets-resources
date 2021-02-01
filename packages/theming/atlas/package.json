@@ -10,7 +10,8 @@
     "start": "node ./scripts/build.js start",
     "pretest:e2e:dev": "node ./scripts/build.js",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "node ./scripts/build.js release"
+    "release": "node ./scripts/build.js release",
+    "release-ts": "tsc"
   },
   "repository": {
     "type": "git",
