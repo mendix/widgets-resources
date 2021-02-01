@@ -23,8 +23,10 @@ jobs:
 
         # Steps represent a sequence of tasks that will be executed as part of the job
         steps:
-            - uses: "marvinpinto/action-automatic-releases@latest"
-              name: "Release Atlas Theme Files"
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: "Release Atlas Theme Files"
+              uses: "marvinpinto/action-automatic-releases@latest"
               with:
                   repo_token: "${{ secrets.GITHUB_TOKEN }}"
                   automatic_release_tag: "test-atlas"
