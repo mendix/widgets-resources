@@ -86,3 +86,5 @@ Configure the environment variable `ATLAS_MX_PROJECT_PATH` with an absolute path
 -   Run `npm run start` to build with watch mode active, re-building assets when you make changes and copy over the configured Mendix project's `theme` directory as well as the `deployment` in the correct structure.
 -   Run `npm run build` to run one time build the assets and copy over the configured Mendix project's `theme` directory as well as the `deployment` in the correct structure.
 -   Run `npm run release` to create one time production ready assets which will be placed at `dist` directory.
+
+x
