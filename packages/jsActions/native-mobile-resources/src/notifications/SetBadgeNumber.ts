@@ -22,8 +22,6 @@ export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
     ) {
         return Promise.reject(new Error("Notifications module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const RNPushNotification: typeof PushNotification = require("react-native-push-notification");
 
     if (!badgeNumber) {
         return Promise.reject(new Error("Input parameter 'Badge number' is required"));
@@ -33,7 +31,7 @@ export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
         return Promise.reject(new Error("Input parameter 'Badge number' should be zero or greater"));
     }
 
-    return RNPushNotification.setApplicationIconBadgeNumber(Number(badgeNumber));
+    return PushNotification.setApplicationIconBadgeNumber(Number(badgeNumber));
 
     // END USER CODE
 }

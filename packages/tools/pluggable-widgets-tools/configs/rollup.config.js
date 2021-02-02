@@ -20,6 +20,7 @@ import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
+import { collectDependencies } from "./rollup-plugin-collect-dependencies";
 import {
     editorConfigEntry,
     isTypescript,
@@ -33,7 +34,7 @@ import {
 } from "./shared";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
-const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}.js`);
+const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, `${widgetPackage}.${widgetName}.mpk`);
 
@@ -50,7 +51,7 @@ export default async args => {
             input: widgetEntry,
             output: {
                 format: "amd",
-                file: join(outDir, outWidgetFile),
+                file: join(outDir, `${outWidgetFile}.js`),
                 sourcemap: !production ? "inline" : false
             },
             external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
@@ -78,24 +79,35 @@ export default async args => {
     }
 
     if (platform === "native") {
-        result.push({
-            input: widgetEntry,
-            output: {
-                format: "es",
-                file: join(outDir, outWidgetFile),
-                sourcemap: false
-            },
-            external: nativeExternal,
-            plugins: [
-                ...getClientComponentPlugins(),
-                json(),
-                ...getCommonPlugins({
-                    sourceMaps: false,
-                    extensions: nativeExtensions,
-                    transpile: false
-                })
-            ],
-            onwarn
+        ["ios", "android"].forEach((os, i) => {
+            result.push({
+                input: widgetEntry,
+                output: {
+                    format: "es",
+                    file: join(outDir, `${outWidgetFile}.${os}.js`),
+                    sourcemap: false
+                },
+                external: nativeExternal,
+                plugins: [
+                    replace({
+                        "Platform.OS": `"${os}"`
+                    }),
+                    ...(i === 0 ? getClientComponentPlugins() : []),
+                    json(),
+                    collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
+                    ...getCommonPlugins({
+                        sourceMaps: false,
+                        extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
+                        transpile: false
+                    })
+                ],
+                onwarn: warning => {
+                    if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /'Platform'/.test(warning.message)) {
+                        return;
+                    }
+                    onwarn(warning);
+                }
+            });
         });
     }
 
@@ -265,38 +277,15 @@ const imagesAndFonts = [
     "**/*.woff(2)?",
     "**/*.eot"
 ];
-const nativeExtensions = [".native.js", ".js", ".jsx", ".ts", ".tsx"];
+
 const nativeExternal = [
     /^mendix\//,
-    "@react-native-community/art",
-    "@react-native-community/async-storage",
-    "@react-native-community/cameraroll",
-    "@react-native-community/geolocation",
-    "@react-native-community/netinfo",
-    "@react-native-firebase/analytics",
-    "@react-native-firebase/app",
-    "@react-native-firebase/crashlytics",
-    "@react-native-firebase/messaging",
-    "@react-native-firebase/ml-vision",
+    /^react-native(\/|$)/,
     "big.js",
     "react",
-    "react-native",
-    "react-native-camera",
-    "react-native-device-info",
-    "react-native-firebase",
-    "react-native-geocoder",
     /react-native-gesture-handler\/*/,
-    "react-native-image-picker",
-    "react-native-inappbrowser-reborn",
-    "react-native-localize",
-    "react-native-maps",
-    "react-native-reanimated",
-    "react-native-sound",
-    "react-native-svg",
-    "react-native-touch-id",
-    "react-native-vector-icons",
-    "react-native-video",
-    "react-native-view-shot",
-    "react-native-webview",
-    "react-navigation"
+    /^react-native-reanimated(\/|$)/,
+    /^react-native-svg(\/|$)/,
+    /^react-native-vector-icons(\/|$)/,
+    /^react-navigation(\/|$)/
 ];

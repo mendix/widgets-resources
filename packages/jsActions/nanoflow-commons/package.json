@@ -1,17 +1,16 @@
 {
   "name": "nanoflow-commons",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "npm run build:tsc",
-    "prebuild:tsc": "..\"/../../node_modules/.bin/rimraf\" dist/tsc",
-    "build:tsc": "..\"/../../node_modules/.bin/tsc\" --project src/tsconfig.json",
-    "postbuild": "..\"/../../node_modules/.bin/ts-node\" --project scripts/tsconfig.json ./scripts/copyActionsToTestProject.ts",
+    "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nanoflowcommons",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.12.0",
-    "@react-native-community/geolocation": "2.0.2"
+    "@react-native-community/geolocation": "2.0.2",
+    "react-native-geocoder": "0.5.0",
+    "invariant": "^2.2.4"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
