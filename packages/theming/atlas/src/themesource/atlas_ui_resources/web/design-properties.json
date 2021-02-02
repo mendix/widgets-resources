@@ -273,6 +273,10 @@
                 {
                     "name": "Background Gradient",
                     "class": "background-brand-gradient"
+                },
+                {
+                    "name": "Background White",
+                    "class": "background-white"
                 }
             ]
         },
