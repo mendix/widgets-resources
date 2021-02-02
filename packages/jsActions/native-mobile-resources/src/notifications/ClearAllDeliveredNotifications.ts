@@ -25,9 +25,8 @@ export async function ClearAllDeliveredNotifications(): Promise<void> {
     ) {
         return Promise.reject(new Error("Notifications module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const RNPushNotification: typeof PushNotification = require("react-native-push-notification");
-    RNPushNotification.removeAllDeliveredNotifications();
+
+    PushNotification.removeAllDeliveredNotifications();
 
     return Promise.resolve();
     // END USER CODE
