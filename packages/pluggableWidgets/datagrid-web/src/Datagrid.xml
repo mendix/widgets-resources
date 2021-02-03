@@ -14,8 +14,48 @@
                     <caption>Columns</caption>
                     <description/>
                     <properties>
-                        <propertyGroup caption="General">
-                            <property key="attribute" type="attribute" dataSource="../datasource">
+                        <propertyGroup caption="Header">
+                            <property key="header" type="textTemplate">
+                                <caption>Caption</caption>
+                                <description/>
+                            </property>
+                            <property key="sortable" type="boolean" defaultValue="true">
+                                <caption>Can sort</caption>
+                                <description/>
+                            </property>
+                            <property key="resizable" type="boolean" defaultValue="true">
+                                <caption>Can resize</caption>
+                                <description/>
+                            </property>
+                            <property key="draggable" type="boolean" defaultValue="true">
+                                <caption>Can reorder</caption>
+                                <description/>
+                            </property>
+                            <property key="hidable" type="enumeration" defaultValue="yes">
+                                <caption>Can hide</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="yes">Yes</enumerationValue>
+                                    <enumerationValue key="hidden">Yes, hidden by default</enumerationValue>
+                                    <enumerationValue key="no">No</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="filter" type="widgets" required="false">
+                                <caption>Filter</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Content">
+                            <property key="showContentAs" type="enumeration" defaultValue="attribute">
+                                <caption>Show</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="attribute">Attribute</enumerationValue>
+                                    <enumerationValue key="dynamicText">Dynamic text</enumerationValue>
+                                    <enumerationValue key="customContent">Custom content</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="attribute" type="attribute" dataSource="../datasource" required="false">
                                 <caption>Attribute</caption>
                                 <description/>
                                 <attributeTypes>
@@ -29,20 +69,12 @@
                                     <attributeType name="Long"/>
                                 </attributeTypes>
                             </property>
-                            <property key="header" type="textTemplate">
-                                <caption>Header</caption>
-                                <description/>
-                            </property>
-                            <property key="hasWidgets" type="boolean" defaultValue="false">
-                                <caption>Dynamic content</caption>
-                                <description/>
-                            </property>
-                            <property key="filter" type="widgets" required="false">
-                                <caption>Filter</caption>
-                                <description/>
-                            </property>
                             <property key="content" type="widgets" dataSource="../datasource" required="false">
-                                <caption>Content</caption>
+                                <caption>Custom content</caption>
+                                <description/>
+                            </property>
+                            <property key="dynamicText" type="textTemplate" dataSource="../datasource" required="false">
+                                <caption>Dynamic text</caption>
                                 <description/>
                             </property>
                             <property key="width" type="enumeration" defaultValue="autoFill">
@@ -71,29 +103,6 @@
                                 <caption>Dynamic cell class</caption>
                                 <description />
                                 <returnType type="String"/>
-                            </property>
-                        </propertyGroup>
-                        <propertyGroup caption="Column capabilities">
-                            <property key="sortable" type="boolean" defaultValue="true">
-                                <caption>Sortable</caption>
-                                <description/>
-                            </property>
-                            <property key="resizable" type="boolean" defaultValue="true">
-                                <caption>Resizable</caption>
-                                <description/>
-                            </property>
-                            <property key="draggable" type="boolean" defaultValue="true">
-                                <caption>Draggable</caption>
-                                <description/>
-                            </property>
-                            <property key="hidable" type="enumeration" defaultValue="yes">
-                                <caption>Hidable</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="yes">Yes</enumerationValue>
-                                    <enumerationValue key="hidden">Yes, hidden by default</enumerationValue>
-                                    <enumerationValue key="no">No</enumerationValue>
-                                </enumerationValues>
                             </property>
                         </propertyGroup>
                     </properties>

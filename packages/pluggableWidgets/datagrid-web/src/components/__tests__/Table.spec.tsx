@@ -52,7 +52,6 @@ describe("Table", () => {
                 header: "Test",
                 hasWidgets: false,
                 sortable: false,
-                filterable: "custom" as const,
                 resizable: false,
                 draggable: false,
                 hidable: "no" as const,
@@ -78,9 +77,7 @@ describe("Table", () => {
         const columns = [
             {
                 header: "Test",
-                hasWidgets: false,
                 sortable: false,
-                filterable: "custom" as const,
                 resizable: false,
                 draggable: false,
                 hidable: "no" as const,
@@ -90,9 +87,7 @@ describe("Table", () => {
             },
             {
                 header: "Test 2",
-                hasWidgets: false,
                 sortable: false,
-                filterable: "custom" as const,
                 resizable: false,
                 draggable: false,
                 hidable: "no" as const,
@@ -112,9 +107,7 @@ function mockTableProps(): TableProps<ObjectItem> {
     const columns = [
         {
             header: "Test",
-            hasWidgets: false,
             sortable: false,
-            filterable: "no" as const,
             resizable: false,
             draggable: false,
             hidable: "no" as const,

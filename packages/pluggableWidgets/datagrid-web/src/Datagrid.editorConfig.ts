@@ -2,6 +2,7 @@ import {
     ContainerProps,
     DropZoneProps,
     hidePropertyIn,
+    Problem,
     Properties,
     RowLayoutProps,
     StructurePreviewProps
@@ -10,7 +11,13 @@ import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridPro
 
 export function getProperties(values: DatagridPreviewProps, defaultProperties: Properties): Properties {
     values.columns.forEach((column, index) => {
-        if (!column.hasWidgets) {
+        if (column.showContentAs !== "attribute" && !column.sortable && !values.columnsFilterable) {
+            hidePropertyIn(defaultProperties, values, "columns", index, "attribute");
+        }
+        if (column.showContentAs !== "dynamicText") {
+            hidePropertyIn(defaultProperties, values, "columns", index, "dynamicText");
+        }
+        if (column.showContentAs !== "customContent") {
             hidePropertyIn(defaultProperties, values, "columns", index, "content");
         }
         if (!values.columnsSortable) {
@@ -50,8 +57,9 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                   columnClass: "",
                   filter: { widgetCount: 0, renderer: () => null },
                   resizable: false,
-                  hasWidgets: false,
+                  showContentAs: "attribute",
                   content: { widgetCount: 0, renderer: () => null },
+                  dynamicText: "Dynamic text",
                   draggable: false,
                   hidable: "no",
                   size: 1,
@@ -69,7 +77,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                     borders: true,
                     grow: column.width === "manual" && column.size ? column.size : 1,
                     children: [
-                        column.hasWidgets
+                        column.showContentAs === "customContent"
                             ? {
                                   type: "DropZone",
                                   property: column.content
@@ -80,7 +88,10 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                   children: [
                                       {
                                           type: "Text",
-                                          content: `{${column.attribute ?? "Attribute"}}`,
+                                          content:
+                                              column.showContentAs === "dynamicText"
+                                                  ? column.dynamicText ?? "Dynamic text"
+                                                  : `{${column.attribute ?? "Attribute"}}`,
                                           fontSize: 10
                                       }
                                   ]
@@ -160,3 +171,17 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         children: [headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
     };
 };
+
+export function check(values: DatagridPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+    values.columns.forEach((column: ColumnsPreviewType) => {
+        if (!column.attribute && (column.sortable || values.columnsFilterable)) {
+            errors.push({
+                property: "column.attribute",
+                message: `An attribute is required in order to filter or sort the column ${column.header}`
+            });
+        }
+    });
+
+    return errors;
+}
