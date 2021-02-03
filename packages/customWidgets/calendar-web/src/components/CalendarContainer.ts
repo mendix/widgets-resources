@@ -26,6 +26,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private subscriptionContextHandles: number[] = [];
     private subscriptionEventHandles: number[] = [];
     private progressHandle?: number;
+    private destroyed = false;
 
     readonly state: CalendarContainerState = {
         alertMessage: "",
@@ -86,6 +87,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     componentWillUnmount(): void {
+        this.destroyed = true;
         this.subscriptionContextHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
     }
@@ -137,6 +139,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
             }).then(mxEventObjects => {
+                if (this.destroyed) {
+                    return;
+                }
                 mxEventObjects.forEach(
                     mxEventObject =>
                         (this.subscriptionEventHandles = [
