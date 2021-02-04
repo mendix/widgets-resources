@@ -6,51 +6,55 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 
+export type HidableEnum = "yes" | "hidden" | "no";
+
+export type ShowContentAsEnum = "attribute" | "dynamicText" | "customContent";
+
 export type WidthEnum = "autoFill" | "autoFit" | "manual";
 
 export type AlignmentEnum = "left" | "center" | "right";
 
-export type HidableEnum = "yes" | "hidden" | "no";
-
 export interface ColumnsType {
-    attribute: ListAttributeValue<string | BigJs.Big | boolean | Date>;
     header: DynamicValue<string>;
-    hasWidgets: boolean;
-    filter?: ReactNode;
-    content?: ListWidgetValue;
-    width: WidthEnum;
-    size: number;
-    alignment: AlignmentEnum;
-    columnClass?: ListExpressionValue<string>;
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
+    filter?: ReactNode;
+    showContentAs: ShowContentAsEnum;
+    attribute?: ListAttributeValue<string | BigJs.Big | boolean | Date>;
+    content?: ListWidgetValue;
+    dynamicText?: ListExpressionValue<string>;
+    width: WidthEnum;
+    size: number;
+    alignment: AlignmentEnum;
+    columnClass?: ListExpressionValue<string>;
 }
 
 export type PagingPositionEnum = "bottom" | "top";
 
 export interface ColumnsPreviewType {
-    attribute: string;
     header: string;
-    hasWidgets: boolean;
-    filter: { widgetCount: number; renderer: ComponentType };
-    content: { widgetCount: number; renderer: ComponentType };
-    width: WidthEnum;
-    size: number | null;
-    alignment: AlignmentEnum;
-    columnClass: string;
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
+    filter: { widgetCount: number; renderer: ComponentType };
+    showContentAs: ShowContentAsEnum;
+    attribute: string;
+    content: { widgetCount: number; renderer: ComponentType };
+    dynamicText: string;
+    width: WidthEnum;
+    size: number | null;
+    alignment: AlignmentEnum;
+    columnClass: string;
 }
 
 export interface DatagridContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     datasource: ListValue;
     columns: ColumnsType[];
     showEmptyPlaceholder: boolean;
