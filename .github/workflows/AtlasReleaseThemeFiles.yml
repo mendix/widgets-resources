@@ -1,8 +1,8 @@
 name: Create Release For Atlas Theme Folder
 
 on:
-    pull_request:
-        branches: [feat/atlas/gh-action-release-atlas]
+    push:
+        branches: [master]
         paths:
             - packages/theming/atlas/src/theme/**/*
 
