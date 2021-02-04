@@ -175,10 +175,15 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
 export function check(values: DatagridPreviewProps): Problem[] {
     const errors: Problem[] = [];
     values.columns.forEach((column: ColumnsPreviewType) => {
-        if (!column.attribute && (column.sortable || values.columnsFilterable)) {
+        if (column.showContentAs === "attribute" && !column.attribute) {
             errors.push({
                 property: "column.attribute",
-                message: `An attribute is required in order to filter or sort the column ${column.header}`
+                message: `An attribute is required when 'Show' is set to 'Attribute'. Select the 'Attribute' property for column ${column.header}`
+            });
+        } else if (!column.attribute && (column.sortable || values.columnsFilterable)) {
+            errors.push({
+                property: "column.attribute",
+                message: `An attribute is required when filtering or sorting is enabled. Select the 'Attribute' property for column ${column.header}`
             });
         }
     });
