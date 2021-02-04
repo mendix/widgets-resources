@@ -3,8 +3,12 @@ name: Run automated end-to-end tests
 on:
     push:
         branches: [master]
+        paths:
+            - packages/**/*-web/**/*
     pull_request:
         branches: [master]
+        paths:
+            - packages/**/*-web/**/*
 
 jobs:
     test:
