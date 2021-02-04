@@ -47,9 +47,10 @@ export interface TableProps<T> {
     pageSize: number;
     pagingPosition: string;
     preview?: boolean;
+    onSettingsChange?: () => void;
+    rowClass?: (value: T) => string;
     setPage?: (computePage: (prevPage: number) => number) => void;
     settings?: EditableValue<string>;
-    onSettingsChange?: () => void;
     styles?: CSSProperties;
     valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
 }
@@ -313,14 +314,17 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, rowIndex) => {
                         prepareRow(row);
                         return (
-                            <Fragment key={`row_${rowIndex}`}>
+                            <div
+                                className={classNames("tr", props.rowClass?.(row.original.item))}
+                                key={`row_${rowIndex}`}
+                            >
                                 {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex, rowIndex }))}
                                 {props.columnsHidable && (
                                     <div
                                         className={classNames("td column-selector", { "td-borders": rowIndex === 0 })}
                                     />
                                 )}
-                            </Fragment>
+                            </div>
                         );
                     })}
                     {(props.data.length === 0 || props.preview) &&

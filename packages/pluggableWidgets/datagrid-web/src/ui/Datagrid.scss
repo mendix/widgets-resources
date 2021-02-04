@@ -21,6 +21,11 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
         }
     }
 
+    /* Pseudo Row, to target this object please use .tr > .td or .tr > div */
+    .tr {
+        display: contents;
+    }
+
     /* Column Header */
     .th {
         display: flex;
