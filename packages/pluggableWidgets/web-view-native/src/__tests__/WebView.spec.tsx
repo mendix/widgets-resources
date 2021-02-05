@@ -14,8 +14,7 @@ describe("WebView", () => {
             style: [],
             url: dynamicValue("https://mendix.com"),
             userAgent: "",
-            openLinksExternally: false,
-            useSharedCookies: false
+            openLinksExternally: false
         };
     });
 

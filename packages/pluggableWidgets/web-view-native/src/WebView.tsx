@@ -51,7 +51,6 @@ export class WebView extends Component<Props> {
                         }
                         return true;
                     }}
-                    sharedCookiesEnabled={this.props.useSharedCookies}
                 />
             </View>
         );

@@ -16,7 +16,6 @@ export interface WebViewProps<Style> {
     onMessageInput?: EditableValue<string>;
     userAgent: string;
     openLinksExternally: boolean;
-    useSharedCookies: boolean;
 }
 
 export interface WebViewPreviewProps {
@@ -30,5 +29,4 @@ export interface WebViewPreviewProps {
     onMessageInput: string;
     userAgent: string;
     openLinksExternally: boolean;
-    useSharedCookies: boolean;
 }
