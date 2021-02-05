@@ -37,8 +37,6 @@ export async function DisplayNotification(
     ) {
         return Promise.reject(new Error("Notifications module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const RNPushNotification: typeof PushNotification = require("react-native-push-notification");
 
     if (!body) {
         return Promise.reject(new Error("Input parameter 'Body' is required"));
@@ -49,11 +47,11 @@ export async function DisplayNotification(
     if (!isIOS) {
         const channelId = "mendix-local-notifications";
         const channelExists = await new Promise(resolve =>
-            RNPushNotification.channelExists(channelId, (exists: boolean) => resolve(exists))
+            PushNotification.channelExists(channelId, (exists: boolean) => resolve(exists))
         );
         if (!channelExists) {
             const channel = await new Promise(resolve =>
-                RNPushNotification.createChannel(
+                PushNotification.createChannel(
                     {
                         channelId,
                         channelName: "Local notifications"
@@ -85,7 +83,7 @@ export async function DisplayNotification(
         };
     }
 
-    RNPushNotification.localNotification(notification);
+    PushNotification.localNotification(notification);
     return Promise.resolve();
     // END USER CODE
 }

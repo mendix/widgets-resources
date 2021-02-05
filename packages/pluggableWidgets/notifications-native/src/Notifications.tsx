@@ -1,6 +1,7 @@
 import { ActionValue, ValueStatus } from "mendix";
 import { useEffect, useRef, useState } from "react";
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
+import "@react-native-firebase/app";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
 import { executeAction } from "@widgets-resources/piw-utils";

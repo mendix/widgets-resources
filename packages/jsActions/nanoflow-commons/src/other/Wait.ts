@@ -9,8 +9,7 @@
  * @param {Big} delay - The number of milliseconds to wait. This field is required.
  * @returns {Promise.<void>}
  */
-// eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
-function Wait(delay?: BigJs.Big): Promise<void> {
+export async function Wait(delay?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
     if (delay == null) {
         return Promise.reject(new Error("Input parameter 'delay' is required."));

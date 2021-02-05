@@ -21,10 +21,8 @@ export async function CancelAllScheduledNotifications(): Promise<void> {
     ) {
         return Promise.reject(new Error("Notifications module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const RNPushNotification: typeof PushNotification = require("react-native-push-notification");
 
-    RNPushNotification.cancelAllLocalNotifications();
+    PushNotification.cancelAllLocalNotifications();
     return Promise.resolve();
 
     // END USER CODE

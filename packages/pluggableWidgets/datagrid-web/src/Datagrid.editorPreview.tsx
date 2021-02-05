@@ -18,8 +18,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                       columnClass: "",
                       filter: { renderer: () => <div />, widgetCount: 0 },
                       resizable: false,
-                      hasWidgets: false,
+                      showContentAs: "attribute",
                       content: { renderer: () => <div />, widgetCount: 0 },
+                      dynamicText: "Dynamic Text",
                       draggable: false,
                       hidable: "no",
                       size: 1,
@@ -35,18 +36,21 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 (renderWrapper, _, columnIndex) => {
                     const column = columns[columnIndex];
                     const className = column.alignment ? `align-column-${column.alignment}` : "";
-                    return column.hasWidgets ? (
-                        <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>
-                    ) : (
-                        renderWrapper(
-                            <span className="td-text">
-                                {"{"}
-                                {column.attribute}
-                                {"}"}
-                            </span>,
-                            className
-                        )
-                    );
+                    switch (column.showContentAs) {
+                        case "attribute":
+                            return renderWrapper(
+                                <span className="td-text">
+                                    {"{"}
+                                    {column.attribute}
+                                    {"}"}
+                                </span>,
+                                className
+                            );
+                        case "dynamicText":
+                            return renderWrapper(<span className="td-text">{column.dynamicText}</span>, className);
+                        case "customContent":
+                            return <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>;
+                    }
                 },
                 [props.columns]
             )}

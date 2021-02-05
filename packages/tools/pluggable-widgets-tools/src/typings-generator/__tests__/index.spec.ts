@@ -15,10 +15,10 @@ import { datasourceInput, datasourceInputNative } from "./inputs/datasource";
 import { datasourceNativeOutput, datasourceWebOutput } from "./outputs/datasource";
 import { generateForWidget } from "../generate";
 import { generateClientTypes } from "../generateClientTypes";
-import { extractProperties } from "../helpers";
+import { extractProperties, extractSystemProperties } from "../helpers";
 import { WidgetXml } from "../WidgetXml";
 import { content, contentGroup, contentGroupNative, contentNative } from "./inputs";
-import { nativeResult, webResult } from "./outputs";
+import { nativeResult, webResult, webResultGroup } from "./outputs";
 
 describe("Generating tests", () => {
     it("Generates a parsed typing from XML for native", () => {
@@ -38,7 +38,7 @@ describe("Generating tests", () => {
 
     it("Generates a parsed typing from XML for web with groups", () => {
         const newContent = generateFullTypesFor(contentGroup);
-        expect(newContent).toBe(webResult);
+        expect(newContent).toBe(webResultGroup);
     });
 
     it("Generates a parsed typing from XML for native using list of actions", () => {
@@ -118,7 +118,13 @@ function generateFullTypesFor(xml: string) {
 
 function generateNativeTypesFor(xml: string) {
     const widgetXml = convertXmltoJson(xml);
-    return generateClientTypes("MyWidget", extractProperties(widgetXml!.widget!.properties[0]), true).join("\n\n");
+    const properties = widgetXml!.widget!.properties[0];
+    return generateClientTypes(
+        "MyWidget",
+        extractProperties(properties),
+        extractSystemProperties(properties),
+        true
+    ).join("\n\n");
 }
 
 function convertXmltoJson(xml: string): WidgetXml {

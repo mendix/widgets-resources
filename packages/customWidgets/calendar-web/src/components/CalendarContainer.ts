@@ -26,6 +26,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private subscriptionContextHandles: number[] = [];
     private subscriptionEventHandles: number[] = [];
     private progressHandle?: number;
+    private destroyed = false;
 
     readonly state: CalendarContainerState = {
         alertMessage: "",
@@ -86,6 +87,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     componentWillUnmount(): void {
+        this.destroyed = true;
         this.subscriptionContextHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
     }
@@ -137,6 +139,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
             }).then(mxEventObjects => {
+                if (this.destroyed) {
+                    return;
+                }
                 mxEventObjects.forEach(
                     mxEventObject =>
                         (this.subscriptionEventHandles = [
@@ -268,37 +273,54 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         );
     };
 
-    private setCalendarFormats = () => {
-        return this.props.customViews.reduce(
-            (accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
-                accumulator.dateFormat =
-                    customView.customView === "month"
-                        ? this.customFormat(customView.cellDateFormat, "date")
-                        : accumulator.dateFormat;
-                accumulator.dayFormat =
-                    customView.customView === "day" ||
-                    customView.customView === "week" ||
-                    customView.customView === "work_week"
-                        ? this.customFormat(customView.gutterDateFormat, "day")
-                        : accumulator.dayFormat;
-                accumulator.weekdayFormat =
-                    customView.customView === "month"
-                        ? this.customFormat(customView.headerFormat, "weekday")
-                        : accumulator.weekdayFormat;
-                accumulator.timeGutterFormat =
-                    customView.customView === "week" ||
-                    customView.customView === "day" ||
-                    customView.customView === "work_week"
-                        ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
-                        : accumulator.timeGutterFormat;
+    private setCalendarFormats = (): Container.ViewOptions => {
+        const calendarFormats: Container.ViewOptions = {};
 
-                return accumulator;
-            },
-            {}
-        );
+        this.props.customViews.forEach((customView: Container.CustomViews) => {
+            calendarFormats.dateFormat =
+                customView.customView === "month"
+                    ? this.customFormat(customView.cellDateFormat, "date")
+                    : calendarFormats.dateFormat;
+            calendarFormats.dayFormat =
+                customView.customView === "day" ||
+                customView.customView === "week" ||
+                customView.customView === "work_week"
+                    ? this.customFormat(customView.gutterDateFormat, "day")
+                    : calendarFormats.dayFormat;
+            calendarFormats.weekdayFormat =
+                customView.customView === "month"
+                    ? this.customFormat(customView.headerFormat, "weekday")
+                    : calendarFormats.weekdayFormat;
+            calendarFormats.timeGutterFormat =
+                customView.customView === "week" ||
+                customView.customView === "day" ||
+                customView.customView === "work_week"
+                    ? this.customFormat(customView.gutterTimeFormat, "timeGutter")
+                    : calendarFormats.timeGutterFormat;
+
+            if (customView.headerFormat) {
+                switch (customView.customView) {
+                    case "day":
+                        calendarFormats.dayHeaderFormat = this.customFormat(customView.headerFormat);
+                        break;
+                    case "week":
+                    case "work_week":
+                        calendarFormats.dayRangeHeaderFormat = this.customRangeFormat(customView.headerFormat);
+                        break;
+                    case "month":
+                        calendarFormats.monthHeaderFormat = this.customFormat(customView.headerFormat);
+                        break;
+                    case "agenda":
+                        calendarFormats.agendaHeaderFormat = this.customRangeFormat(customView.headerFormat);
+                        break;
+                }
+            }
+        });
+
+        return calendarFormats;
     };
 
-    private customFormat = (dateFormat: string, dateType: Container.DateType) => {
+    private customFormat = (dateFormat: string, dateType?: Container.DateType): ((date: Date) => string) => {
         let datePattern = "";
         if (dateType === "date") {
             datePattern = dateFormat || "dd";
@@ -308,9 +330,20 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             datePattern = dateFormat || "EEEE";
         } else if (dateType === "timeGutter") {
             datePattern = dateFormat || "hh:mm a";
+        } else {
+            datePattern = dateFormat;
         }
 
         return (date: Date) => window.mx.parser.formatValue(date, "datetime", { datePattern });
+    };
+
+    private customRangeFormat = (dateFormat: string): ((dateRange: { start: Date; end: Date }) => string) => {
+        const datePattern = dateFormat;
+        return (dateRange: { start: Date; end: Date }) => {
+            return `${window.mx.parser.formatValue(dateRange.start, "datetime", {
+                datePattern
+            })} - ${window.mx.parser.formatValue(dateRange.end, "datetime", { datePattern })}`;
+        };
     };
 
     private onRangeChange = (date: ViewDate) => {

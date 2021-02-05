@@ -19,7 +19,10 @@ import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { useSettings } from "../utils/settings";
 
-export type TableColumn = Omit<ColumnsType | ColumnsPreviewType, "content" | "attribute">;
+export type TableColumn = Omit<
+    ColumnsType | ColumnsPreviewType,
+    "content" | "attribute" | "dynamicText" | "showContentAs"
+>;
 
 export interface TableProps<T> {
     cellRenderer: (

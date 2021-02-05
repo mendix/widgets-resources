@@ -15,7 +15,7 @@ jobs:
                 node: [14]
                 os: [windows-latest, ubuntu-latest]
                 include:
-                    - node: 10
+                    - node: 12
                       os: ubuntu-latest
                       experimental: true
 

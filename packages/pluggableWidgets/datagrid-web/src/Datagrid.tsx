@@ -44,7 +44,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const items = (props.datasource.items ?? []).filter(item =>
         customFiltersState.every(
             ([customFilter], columnIndex) =>
-                !customFilter || customFilter.filter(item, props.columns[columnIndex].attribute)
+                !customFilter || customFilter.filter(item, props.columns[columnIndex].attribute!)
         )
     );
 
@@ -54,12 +54,18 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             cellRenderer={useCallback(
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
+                    let content;
+
+                    if (column.showContentAs === "attribute") {
+                        content = <span className="td-text">{column.attribute?.(value)?.displayValue ?? ""}</span>;
+                    } else if (column.showContentAs === "dynamicText") {
+                        content = <span className="td-text">{column.dynamicText?.(value)?.value ?? ""}</span>;
+                    } else {
+                        content = column.content?.(value);
+                    }
+
                     return renderWrapper(
-                        column.hasWidgets && column.content ? (
-                            column.content(value)
-                        ) : (
-                            <span className="td-text">{column.attribute(value).displayValue}</span>
-                        ),
+                        content,
                         classNames(
                             `align-column-${column.alignment}`,
                             props.rowClass?.(value)?.value,
@@ -105,7 +111,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             valueForSort={useCallback(
                 (value, columnIndex) => {
                     const column = props.columns[columnIndex];
-                    return column.attribute(value).value;
+                    return column.attribute ? column.attribute(value).value : "";
                 },
                 [props.columns]
             )}

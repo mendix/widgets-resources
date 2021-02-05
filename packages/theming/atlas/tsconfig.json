@@ -1,12 +1,10 @@
 {
     "extends": "../../tools/pluggable-widgets-tools/configs/tsconfig.base",
-    "include": [
-      "./src/native/**/*.ts"
-    ],
+    "include": ["./src/theme/native/**/*.ts", "./src/themesource/atlas_ui_resources/native/**/*.ts"],
     "compilerOptions": {
         "target": "ES2019",
         "lib": ["ES2017"],
         "sourceMap": false,
-        "outDir": "./dist/theme/styles/native"
+        "outDir": "./dist"
     }
 }
