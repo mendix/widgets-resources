@@ -66,11 +66,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
                     return renderWrapper(
                         content,
-                        classNames(
-                            `align-column-${column.alignment}`,
-                            props.rowClass?.(value)?.value,
-                            column.columnClass?.(value)?.value
-                        ),
+                        classNames(`align-column-${column.alignment}`, column.columnClass?.(value)?.value),
                         props.onClick ? useCallback(() => props.onClick?.(value).execute(), [props.onClick]) : undefined
                     );
                 },
@@ -100,12 +96,13 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             numberOfItems={props.datasource.totalCount}
+            onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             page={currentPage}
             pageSize={props.pageSize}
             paging={props.pagingEnabled}
             pagingPosition={props.pagingPosition}
+            rowClass={useCallback(value => props.rowClass?.(value)?.value ?? "", [props.rowClass])}
             settings={props.configurationAttribute}
-            onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             setPage={setPage}
             styles={props.style}
             valueForSort={useCallback(

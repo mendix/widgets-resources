@@ -101,6 +101,12 @@ describe("Table", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly with dynamic row class", () => {
+        const component = shallow(<Table {...mockTableProps()} rowClass={() => "myclass"} />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockTableProps(): TableProps<ObjectItem> {
