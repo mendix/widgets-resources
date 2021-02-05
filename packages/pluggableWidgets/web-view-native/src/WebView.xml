@@ -30,7 +30,7 @@
                 <description>Used to communicate from the loaded webpage to the native app trough window.ReactNativeWebView.postMessage([string])</description>
             </property>
             <property key="onMessageInput" type="attribute" required="false">
-                <caption>message attribute</caption>
+                <caption>Message attribute</caption>
                 <description>The attribute where the input message will be stored. This can be used to read the input in the onMessage event.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
