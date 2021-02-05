@@ -15,7 +15,7 @@
                     <description/>
                     <properties>
                         <propertyGroup caption="Header">
-                            <property key="header" type="textTemplate">
+                            <property key="header" type="textTemplate" required="false">
                                 <caption>Caption</caption>
                                 <description/>
                             </property>
