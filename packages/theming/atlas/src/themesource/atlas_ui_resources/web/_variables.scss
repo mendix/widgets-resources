@@ -4,7 +4,6 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-
 //
 // ██████╗  █████╗ ███████╗██╗ ██████╗
 // ██╔══██╗██╔══██╗██╔════╝██║██╔════╝
@@ -19,7 +18,7 @@
 $gray-darker: #3b4251 !default;
 $gray-dark: #606671 !default;
 $gray: #787d87 !default;
-$gray-light: #a9acb3 !default;
+$gray-light: #6c7180 !default;
 $gray-primary: #ced0d3 !default;
 $gray-lighter: #f8f8f8 !default;
 
@@ -40,10 +39,10 @@ $brand-logo-width: 26px !default; // Only used for CSS brand logo
 
 // Default Font Size & Color
 $font-size-default: 14px !default;
-$font-color-default: $brand-inverse !default;
+$font-color-default: #6c717e !default;
 
 // Global Border Color
-$border-color-default: $gray-primary !default;
+$border-color-default: #ced0d3 !default;
 $border-radius-default: 5px !default;
 
 // Topbar
@@ -66,7 +65,7 @@ $navbar-brand-name: $font-color-default !default;
 // Background Colors
 // Backgrounds
 $bg-color: #f8f8f8 !default;
-$bg-color-secondary: #f5f8fd !default;
+$bg-color-secondary: #bfcaff !default;
 
 // Default Link Color
 $link-color: $brand-primary !default;
@@ -92,10 +91,10 @@ $font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,
 }
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
-$font-family-base: "Open Sans", sans-serif !default;
+$font-family-base: "SFProDisplay", "Open Sans", sans-serif !default;
 
 // Font Sizes
-$font-size-large: 16px !default;
+$font-size-large: 18px !default;
 $font-size-small: 12px !default;
 
 // Font Weights
@@ -119,7 +118,7 @@ $font-weight-header: $font-weight-semibold !default;
 $line-height-base: 1.428571429 !default;
 
 // Spacing
-$font-header-margin: 15px 0 30px 0 !default;
+$font-header-margin: 0 0 8px 0 !default;
 
 // Text Colors
 $font-color-detail: #6c717e !default;
@@ -210,7 +209,7 @@ $form-label-gutter: 8px !default;
 // Form Input dimensions
 $form-input-height: auto !default;
 $form-input-padding-y: 8px !default;
-$form-input-padding-x: 10px !default;
+$form-input-padding-x: 8px !default;
 $form-input-static-padding-y: 8px !default;
 $form-input-static-padding-x: 0 !default;
 $form-input-font-size: $form-label-size !default;
@@ -286,7 +285,10 @@ $btn-link-bg-hover: $gray-lighter !default;
 
 //== Header blocks
 //## Define look and feel over multible building blocks that serve as header
-$header-bg-color: $bg-color !default;
+
+$header-min-height: 240px !default;
+$header-bg-color: $brand-primary !default;
+$header-bgimage-filter: brightness(60%) !default;
 $header-text-color: #fff !default;
 $header-text-color-detail: rgba(0, 0, 0, 0.2) !default;
 
@@ -338,7 +340,7 @@ $color-danger-dark: mix($brand-danger, black, 70%) !default;
 $color-danger-light: mix($brand-danger, white, 60%) !default;
 $color-danger-lighter: mix($brand-danger, white, 20%) !default;
 
-$brand-gradient: linear-gradient(152deg, #0cc7f0 0%, #087ecc 51%, #077ac9 55%, #0659b9 78%) !default;
+$brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c) !default;
 
 //== Grids
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
@@ -348,16 +350,16 @@ $grid-border-color: $border-color-default !default;
 
 // Spacing
 // Default
-$grid-padding-top: 15px !default;
-$grid-padding-right: 15px !default;
-$grid-padding-bottom: 15px !default;
-$grid-padding-left: 15px !default;
+$grid-padding-top: 16px !default;
+$grid-padding-right: 16px !default;
+$grid-padding-bottom: 16px !default;
+$grid-padding-left: 16px !default;
 
 // Listview
-$listview-padding-top: 15px !default;
-$listview-padding-right: 15px !default;
-$listview-padding-bottom: 15px !default;
-$listview-padding-left: 15px !default;
+$listview-padding-top: 16px !default;
+$listview-padding-right: 16px !default;
+$listview-padding-bottom: 16px !default;
+$listview-padding-left: 16px !default;
 
 // Background Colors
 $grid-bg: transparent !default;
@@ -397,6 +399,7 @@ $tabs-lined-border-color: $brand-primary !default;
 
 // Background Color
 $tabs-bg: transparent !default;
+$tabs-bg-pills: #e7e7e9 !default;
 $tabs-bg-hover: lighten($tabs-border-color, 5) !default;
 $tabs-bg-active: $brand-primary !default;
 
@@ -427,22 +430,49 @@ $dataview-emptymessage-color: $font-color-default !default;
 //## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
 
 // Background Color
-$alert-info-bg: $color-info-lighter !default;
+$alert-info-bg: $color-primary-lighter !default;
 $alert-success-bg: $color-success-lighter !default;
 $alert-warning-bg: $color-warning-lighter !default;
 $alert-danger-bg: $color-danger-lighter !default;
 
 // Text Color
-$alert-info-color: $color-info-darker !default;
+$alert-info-color: $color-primary-darker !default;
 $alert-success-color: $color-success-darker !default;
 $alert-warning-color: $color-warning-darker !default;
 $alert-danger-color: $color-danger-darker !default;
 
 // Border Color
-$alert-info-border-color: $color-info-dark !default;
+$alert-info-border-color: $color-primary-dark !default;
 $alert-success-border-color: $color-success-dark !default;
 $alert-warning-border-color: $color-warning-dark !default;
 $alert-danger-border-color: $color-danger-dark !default;
+
+//== Wizard
+
+$wizard-step-height: 48px !default;
+$wizard-step-number-size: 64px !default;
+$wizard-step-number-font-size: $font-size-h3 !default;
+
+//Wizard states
+$wizard-default: #fff !default;
+$wizard-active: $brand-primary !default;
+$wizard-visited: $brand-success !default;
+
+//Wizard step states
+$wizard-default-bg: $wizard-default !default;
+$wizard-default-color: $wizard-default !default;
+$wizard-default-step-color: $font-color-default !default;
+$wizard-default-border-color: $border-color-default !default;
+
+$wizard-active-bg: $wizard-active !default;
+$wizard-active-color: $wizard-default !default;
+$wizard-active-step-color: $wizard-active !default;
+$wizard-active-border-color: $wizard-active !default;
+
+$wizard-visited-bg: $wizard-visited !default;
+$wizard-visited-color: $wizard-default !default;
+$wizard-visited-step-color: $wizard-visited !default;
+$wizard-visited-border-color: $wizard-visited !default;
 
 //== Labels
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
@@ -516,14 +546,18 @@ $callout-danger-bg: $color-danger-lighter !default;
 //== Timeline
 //## Extended variables for Timeline Widget
 // Colors
-$timeline-icon-color: $brand-primary;
-$timeline-border-color: $border-color-default;
-
-$timeline-color-header: $font-color-header;
-$timeline-color-detail: $font-color-detail;
+$timeline-icon-color: $brand-primary !default;
+$timeline-border-color: $border-color-default !default;
+$timeline-event-time-color: $brand-primary !default;
 
 // Sizes
-$timeline-icon-size: 18px;
+$timeline-icon-size: 18px !default;
+$timeline-image-size: 36px !default;
+
+//Timeline grouping
+$timeline-grouping-size: 120px !default;
+$timeline-grouping-border-radius: 30px !default;
+$timeline-grouping-border-color: $timeline-border-color !default;
 
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)

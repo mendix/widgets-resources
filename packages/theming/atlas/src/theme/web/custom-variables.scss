@@ -1,11 +1,4 @@
 //
-// DISCLAIMER:
-// Do not change this file because it is core styling.
-// Customizing core files will make updating Atlas much more difficult in the future.
-// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
-//
-
-//
 // ██████╗  █████╗ ███████╗██╗ ██████╗
 // ██╔══██╗██╔══██╗██╔════╝██║██╔════╝
 // ██████╔╝███████║███████╗██║██║
@@ -16,11 +9,11 @@
 
 //== Gray Shades
 //## Different gray shades to be used for our variables and components
-$gray-darker: #0A1325;
-$gray-dark: #474E5C;
-$gray: #787D87;
-$gray-light: #A9ACB3;
-$gray-primary: #E7E7E9;
+$gray-darker: #0a1325;
+$gray-dark: #474e5c;
+$gray: #787d87;
+$gray-light: #a9acb3;
+$gray-primary: #e7e7e9;
 $gray-lighter: #f8f8f8;
 
 //== Step 1: Brand Colors
@@ -40,7 +33,7 @@ $brand-logo-width: 26px; // Only used for CSS brand logo
 
 // Default Font Size & Color
 $font-size-default: 14px;
-$font-color-default: #0A1325;
+$font-color-default: #0a1325;
 
 // Global Border Color
 $border-color-default: #ced0d3;
@@ -123,7 +116,7 @@ $font-header-margin: 0 0 8px 0;
 
 // Text Colors
 $font-color-detail: #6c717e;
-$font-color-header: #0A1325;
+$font-color-header: #0a1325;
 
 //== Navigation
 //## Used in components/navigation
@@ -469,7 +462,6 @@ $wizard-visited-bg: $color-success-lighter;
 $wizard-visited-color: $color-success-dark;
 $wizard-visited-step-color: $color-success-dark;
 $wizard-visited-border-color: $color-success-dark;
-
 
 //== Labels
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
