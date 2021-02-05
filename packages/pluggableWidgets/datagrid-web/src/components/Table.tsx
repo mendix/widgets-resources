@@ -336,7 +336,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     gridColumn: `span ${props.columns.length + (props.columnsHidable ? 1 : 0)}`
                                 }}
                             >
-                                {children}
+                                <div className="empty-placeholder">{children}</div>
                             </div>
                         ))}
                 </InfiniteBody>
