@@ -12,6 +12,7 @@ export type Props = WebViewProps<WebViewStyle>;
 export class WebView extends Component<Props> {
     private readonly onLoadHandler = this.onLoad.bind(this);
     private readonly onErrorHandler = this.onError.bind(this);
+    private readonly onMessageHandler = this.onMessage.bind(this);
     private readonly styles = flattenStyles(defaultWebViewStyle, this.props.style);
 
     render(): JSX.Element {
@@ -37,6 +38,9 @@ export class WebView extends Component<Props> {
                     }}
                     onLoad={this.onLoadHandler}
                     onError={this.onErrorHandler}
+                    onMessage={event => {
+                        this.onMessageHandler(event.nativeEvent.data);
+                    }}
                     userAgent={this.props.userAgent}
                     onShouldStartLoadWithRequest={({ url }) => {
                         const openExternally =
@@ -58,5 +62,10 @@ export class WebView extends Component<Props> {
 
     private onError(): void {
         executeAction(this.props.onError);
+    }
+
+    private onMessage(input: string): void {
+        this.props.onMessageInput?.setTextValue(input);
+        executeAction(this.props.onMessage);
     }
 }
