@@ -26,7 +26,7 @@ exports[`WebView renders a web view when a url is provided 1`] = `
       injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
       injectedJavaScriptForMainFrameOnly={true}
       javaScriptEnabled={true}
-      messagingEnabled={false}
+      messagingEnabled={true}
       onContentProcessDidTerminate={[Function]}
       onError={[Function]}
       onHttpError={[Function]}
@@ -37,6 +37,7 @@ exports[`WebView renders a web view when a url is provided 1`] = `
       onLoadingStart={[Function]}
       onMessage={[Function]}
       onShouldStartLoadWithRequest={[Function]}
+      sharedCookiesEnabled={false}
       source={
         Object {
           "uri": "https://mendix.com",
@@ -91,7 +92,7 @@ exports[`WebView renders a web view when html content is provided 1`] = `
       injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
       injectedJavaScriptForMainFrameOnly={true}
       javaScriptEnabled={true}
-      messagingEnabled={false}
+      messagingEnabled={true}
       onContentProcessDidTerminate={[Function]}
       onError={[Function]}
       onHttpError={[Function]}
@@ -102,6 +103,7 @@ exports[`WebView renders a web view when html content is provided 1`] = `
       onLoadingStart={[Function]}
       onMessage={[Function]}
       onShouldStartLoadWithRequest={[Function]}
+      sharedCookiesEnabled={false}
       source={
         Object {
           "html": "Hello, world!",
