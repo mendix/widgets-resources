@@ -133,6 +133,7 @@ async function exists(filePath) {
 }
 
 async function getMendixVersion() {
+    const mendixMajorVersion = process.argv[process.argv.indexOf("--mx-major-version") + 1];
     let mendixVersion;
 
     if (process.env.MENDIX_VERSION) {
@@ -142,7 +143,14 @@ async function getMendixVersion() {
         const dockerTagsResponse = await fetch(
             "https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags"
         );
-        const runtimeVersions = (await dockerTagsResponse.json()).map(r => r.name.split("-")[0]);
+
+        let dockerTagsJson = await dockerTagsResponse.json();
+
+        if (mendixMajorVersion) {
+            dockerTagsJson = dockerTagsJson.filter(r => r.name.startsWith(`${mendixMajorVersion}`));
+        }
+
+        const runtimeVersions = dockerTagsJson.map(r => r.name.split("-")[0]);
         runtimeVersions.sort((a, b) =>
             semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
         );
