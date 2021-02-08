@@ -67,7 +67,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     return renderWrapper(
                         content,
                         classNames(`align-column-${column.alignment}`, column.columnClass?.(value)?.value),
-                        props.onClick ? useCallback(() => props.onClick?.(value).execute(), [props.onClick]) : undefined
+                        props.onClick
+                            ? useCallback(() => props.onClick?.(value).execute(), [props.onClick, value])
+                            : undefined
                     );
                 },
                 [props.columns, props.rowClass, props.onClick]
