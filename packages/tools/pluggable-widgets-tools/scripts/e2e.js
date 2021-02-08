@@ -133,7 +133,7 @@ async function exists(filePath) {
 }
 
 async function getMendixVersion() {
-    const desiredTestMendixVersion = process.argv[process.argv.indexOf("--mx-version") + 1];
+    const targetMendixVersion = process.argv[process.argv.indexOf("--mx-version") + 1];
     let mendixVersion;
 
     if (process.env.MENDIX_VERSION) {
@@ -146,8 +146,8 @@ async function getMendixVersion() {
 
         let dockerTagsJson = await dockerTagsResponse.json();
 
-        if (desiredTestMendixVersion) {
-            dockerTagsJson = dockerTagsJson.filter(r => r.name.startsWith(desiredTestMendixVersion));
+        if (targetMendixVersion) {
+            dockerTagsJson = dockerTagsJson.filter(r => r.name.startsWith(targetMendixVersion));
         }
 
         const runtimeVersions = dockerTagsJson.map(r => r.name.split("-").shift());
