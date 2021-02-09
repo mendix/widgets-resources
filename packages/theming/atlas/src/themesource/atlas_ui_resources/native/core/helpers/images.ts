@@ -28,80 +28,51 @@ export const imageOverlay = {
     }
 };
 //
-// Image Sizes
+// Image Shapes
 export const imageSquare = {
+    image: {
+        borderRadius: border.radiusSmall
+    }
+};
+export const imageCircle = {
+    image: {
+        borderRadius: 50
+    }
+};
+// Image Sizes
+export const imageSmall = {
+    image: {
+        width: image.image.small,
+        height: image.image.small,
+        aspectRatio: 1
+    }
+};
+export const imageMedium = {
+    image: {
+        width: image.image.medium,
+        height: image.image.medium,
+        aspectRatio: 1
+    }
+};
+export const imageLarge = {
+    image: {
+        width: image.image.large,
+        height: image.image.large,
+        aspectRatio: 1
+    }
+};
+export const imageLarger = {
+    image: {
+        width: image.image.larger,
+        height: image.image.larger,
+        aspectRatio: 1
+    }
+};
+export const imageFullSize = {
     image: {
         width: "100%",
         height: "auto",
-        aspectRatio: 1,
-        borderRadius: border.radiusSmall
-    }
-};
-export const imageSquareSmall = {
-    image: {
-        aspectRatio: 1,
-        width: image.image.small,
-        height: image.image.small,
-        borderRadius: border.radiusSmall
-    }
-};
-export const imageSquareMedium = {
-    image: {
-        aspectRatio: 1,
-        width: image.image.medium,
-        height: image.image.medium,
-        borderRadius: border.radiusSmall
-    }
-};
-export const imageSquareLarge = {
-    image: {
-        aspectRatio: 1,
-        width: image.image.large,
-        height: image.image.large,
-        borderRadius: border.radiusSmall
-    }
-};
-export const imageSquareLarger = {
-    image: {
-        aspectRatio: 1,
-        width: image.image.larger,
-        height: image.image.larger,
-        borderRadius: border.radiusSmall
-    }
-};
-export const imageCircleSmall = {
-    image: {
-        width: image.image.small,
-        height: image.image.small,
-        borderRadius: image.image.small / 2
-    }
-};
-export const imageCircleMedium = {
-    image: {
-        width: image.image.medium,
-        height: image.image.medium,
-        borderRadius: image.image.medium / 2
-    }
-};
-export const imageCircleLarge = {
-    image: {
-        width: image.image.large,
-        height: image.image.large,
-        borderRadius: image.image.large / 2
-    }
-};
-export const imageCircleLarger = {
-    image: {
-        width: image.image.larger,
-        height: image.image.larger,
-        borderRadius: image.image.larger / 2
-    }
-};
-export const imageIcon = {
-    image: {
-        width: image.icon,
-        height: image.icon,
-        tintColor: "blue"
+        aspectRatio: 1
     }
 };
 //

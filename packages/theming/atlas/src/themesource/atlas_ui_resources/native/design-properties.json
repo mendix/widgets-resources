@@ -930,7 +930,49 @@
             ]
         }
     ],
-    "Image": [
+    "StaticImageViewer": [
+        {
+            "name": "Shape",
+            "type": "Dropdown",
+            "description": "Change the shape of the image",
+            "options": [
+                {
+                    "name": "Square",
+                    "class": "imageSquare"
+                },
+                {
+                    "name": "Circle",
+                    "class": "imageCircle"
+                }
+            ]
+        },
+        {
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Make the image smaller or larger.",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "imageSmall"
+                },
+                {
+                    "name": "Medium",
+                    "class": "imageMedium"
+                },
+                {
+                    "name": "Large",
+                    "class": "imageLarge"
+                },
+                {
+                    "name": "Larger",
+                    "class": "imageLarger"
+                },
+                {
+                    "name": "FullSize",
+                    "class": "imageFullSize"
+                }
+            ]
+        },
         {
             "name": "Avatar",
             "type": "Toggle",
@@ -938,7 +980,49 @@
             "class": "avatar"
         }
     ],
-    "DynamicImage": [
+    "DynamicImageViewer": [
+        {
+            "name": "Shape",
+            "type": "Dropdown",
+            "description": "Change the shape of the image",
+            "options": [
+                {
+                    "name": "Square",
+                    "class": "imageSquare"
+                },
+                {
+                    "name": "Circle",
+                    "class": "imageCircle"
+                }
+            ]
+        },
+        {
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Make the image smaller or larger.",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "imageSmall"
+                },
+                {
+                    "name": "Medium",
+                    "class": "imageMedium"
+                },
+                {
+                    "name": "Large",
+                    "class": "imageLarge"
+                },
+                {
+                    "name": "Larger",
+                    "class": "imageLarger"
+                },
+                {
+                    "name": "FullSize",
+                    "class": "imageFullSize"
+                }
+            ]
+        },
         {
             "name": "Avatar",
             "type": "Toggle",
