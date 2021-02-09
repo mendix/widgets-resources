@@ -15,7 +15,7 @@ export type WidthEnum = "autoFill" | "autoFit" | "manual";
 export type AlignmentEnum = "left" | "center" | "right";
 
 export interface ColumnsType {
-    header: DynamicValue<string>;
+    header?: DynamicValue<string>;
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;

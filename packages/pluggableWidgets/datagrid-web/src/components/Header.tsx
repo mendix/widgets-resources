@@ -55,6 +55,8 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
             : faArrowsAltV
         : undefined;
 
+    const caption = props.column.render("Header") as string;
+
     return (
         <div
             className="th"
@@ -63,7 +65,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                 ...style,
                 ...(!props.sortable || !props.column.canSort ? { cursor: "unset" } : undefined)
             }}
-            title={props.column.render("Header") as string}
+            title={caption}
         >
             <div
                 id={props.column.id}
@@ -111,7 +113,7 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     role={canSort ? "button" : undefined}
                     tabIndex={canSort ? 0 : undefined}
                 >
-                    <span>{props.column.render("Header")}</span>
+                    <span>{caption.length > 0 ? caption : "\u00a0"}</span>
                     {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
                 </div>
                 {props.filterable && props.column.customFilter ? props.column.customFilter : null}

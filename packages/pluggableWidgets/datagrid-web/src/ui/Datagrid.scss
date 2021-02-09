@@ -184,6 +184,10 @@ $dragging-color-effect: rgba(10, 19, 37, 0.8);
             text-overflow: ellipsis;
             overflow: hidden;
         }
+
+        > .empty-placeholder {
+            width: 100%;
+        }
     }
 
     & *:focus {
