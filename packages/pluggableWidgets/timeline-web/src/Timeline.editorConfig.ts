@@ -6,7 +6,7 @@ import {
     StructurePreviewProps
 } from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
-import { lineAndC } from "./preview/preview";
+import { lineAndDotSVG } from "./preview/preview";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
     if (values.customVisualization) {
@@ -82,6 +82,7 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
             {
                 type: "RowLayout",
                 children: [
+                    { type: "Container", children: [], padding: 5, grow: 0 },
                     {
                         type: "Container",
                         children: [{ content: "Today", type: "Text", fontSize: 10, bold: true, grow: 0 }],
@@ -109,7 +110,7 @@ function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
         children: [
             {
                 type: "Image",
-                document: lineAndC,
+                document: lineAndDotSVG,
                 width: 65,
                 grow: 0
             },
