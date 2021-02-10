@@ -88,20 +88,25 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
                         type: "Container",
                         children: [
                             {
-                                content: getGroupHeadingUserText(values),
-                                type: "Text",
-                                fontSize: 10,
-                                bold: true,
-                                grow: 0
+                                type: "Container",
+                                children: [
+                                    {
+                                        content: getGroupHeadingUserText(values),
+                                        type: "Text",
+                                        fontSize: 10,
+                                        bold: true,
+                                        grow: 1
+                                    }
+                                ],
+                                padding: 5
                             }
                         ],
                         borderRadius: 15,
                         borderWidth: 1,
                         borders: true,
-                        grow: 0,
-                        padding: 100
+                        grow: 0
                     },
-                    { content: "", type: "Text", grow: 1 }
+                    { content: "", type: "Text" }
                 ],
                 columnSize: "grow"
             },
@@ -166,11 +171,8 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
 /*
 
  TODO(jordan):
-. padding to text inside bubble isn't taking effect. Isa says newer modeler will work. 9.0.4
-
 . image width and height are fixed, is this okay for all situations?
 
 . figure out where the svg code should live
-
 
  */
