@@ -78,12 +78,13 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
     return {
         type: "Container",
         children: [
+            { type: "Container", children: [], padding: 8 },
             {
                 type: "RowLayout",
                 children: [
                     {
                         type: "Container",
-                        children: [{ content: "Today", type: "Text", fontSize: 12, bold: true, grow: 0 }],
+                        children: [{ content: "Today", type: "Text", fontSize: 10, bold: true, grow: 0 }],
                         borderRadius: 15,
                         borderWidth: 1,
                         borders: true,
@@ -115,16 +116,16 @@ function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
             {
                 type: "Container",
                 children: [
-                    { type: "Text", content: "-", fontColor: "white" },
-                    { type: "Text", content: "-", fontColor: "white" },
+                    { type: "Container", children: [], padding: 18 },
                     {
                         type: "RowLayout",
                         children: [
-                            { type: "Text", content: values.title },
+                            { type: "Text", content: values.title, bold: true },
                             { type: "Text", content: "", grow: 3 },
-                            { type: "Text", content: values.timeIndication }
+                            { type: "Text", content: values.timeIndication, fontColor: "#264AE5" }
                         ]
                     },
+                    { type: "Container", children: [], padding: 4 },
                     { type: "Text", content: values.description }
                 ]
             }
@@ -138,8 +139,6 @@ function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
 . padding to text inside bubble isn't taking effect. Isa says newer modeler will work. 9.0.4
 
 . image width and height are fixed, is this okay for all situations?
-
-. the two texts "-" are used for layout. coloured white. is this okay? what about dark mode?
 
 . figure out where the svg code should live
 
