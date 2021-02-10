@@ -136,12 +136,16 @@
                     <caption>Page size</caption>
                     <description/>
                 </property>
-                <property key="pagingEnabled" type="boolean" defaultValue="true">
-                    <caption>Page data</caption>
+                <property key="pagination" type="enumeration" defaultValue="buttons">
+                    <caption>Pagination</caption>
                     <description/>
+                    <enumerationValues>
+                        <enumerationValue key="buttons">Paging buttons</enumerationValue>
+                        <enumerationValue key="virtualScrolling">Virtual scrolling</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="pagingPosition" type="enumeration" defaultValue="bottom">
-                    <caption>Position of paging bar</caption>
+                    <caption>Position of paging buttons</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="bottom">Below grid</enumerationValue>

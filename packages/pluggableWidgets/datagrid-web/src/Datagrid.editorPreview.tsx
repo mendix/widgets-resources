@@ -86,7 +86,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             numberOfItems={5}
             page={0}
             pageSize={props.pageSize ?? 5}
-            paging={props.pagingEnabled}
+            paging={props.pagination === "buttons"}
             pagingPosition={props.pagingPosition}
             preview
             styles={parseStyle(props.style)}

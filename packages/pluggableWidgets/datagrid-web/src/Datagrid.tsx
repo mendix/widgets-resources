@@ -8,7 +8,7 @@ import { FilterContext, FilterFunction } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
-    const isInfiniteLoad = !props.pagingEnabled && isServerSide;
+    const isInfiniteLoad = props.pagination === "virtualScrolling" && isServerSide;
     const currentPage = isInfiniteLoad
         ? props.datasource.limit / props.pageSize
         : props.datasource.offset / props.pageSize;
@@ -101,7 +101,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             page={currentPage}
             pageSize={props.pageSize}
-            paging={props.pagingEnabled}
+            paging={props.pagination === "buttons"}
             pagingPosition={props.pagingPosition}
             rowClass={useCallback(value => props.rowClass?.(value)?.value ?? "", [props.rowClass])}
             settings={props.configurationAttribute}
