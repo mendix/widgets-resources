@@ -36,7 +36,7 @@ export const imageSquare = {
 };
 export const imageCircle = {
     image: {
-        borderRadius: 50
+        borderRadius: 50000
     }
 };
 // Image Sizes
