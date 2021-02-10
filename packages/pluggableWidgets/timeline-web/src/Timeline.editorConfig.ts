@@ -7,6 +7,7 @@ import {
 } from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 import { lineAndDotSVG } from "./preview/preview";
+import { getHeaderOption, GroupHeaderConfig } from "./components/TimelineComponent";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
     if (values.customVisualization) {
@@ -85,7 +86,15 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
                     { type: "Container", children: [], padding: 5, grow: 0 },
                     {
                         type: "Container",
-                        children: [{ content: "Today", type: "Text", fontSize: 10, bold: true, grow: 0 }],
+                        children: [
+                            {
+                                content: getGroupHeadingUserText(values),
+                                type: "Text",
+                                fontSize: 10,
+                                bold: true,
+                                grow: 0
+                            }
+                        ],
                         borderRadius: 15,
                         borderWidth: 1,
                         borders: true,
@@ -102,38 +111,58 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
             buildRow(values)
         ]
     };
+
+    function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
+        return {
+            type: "RowLayout",
+            children: [
+                {
+                    type: "Image",
+                    document: lineAndDotSVG,
+                    width: 65,
+                    grow: 0
+                },
+                {
+                    type: "Container",
+                    children: [
+                        { type: "Container", children: [], padding: 18 },
+                        {
+                            type: "RowLayout",
+                            children: [
+                                { type: "Text", content: values.title, bold: true },
+                                { type: "Text", content: "", grow: 3 },
+                                { type: "Text", content: values.timeIndication, fontColor: "#264AE5" }
+                            ]
+                        },
+                        { type: "Container", children: [], padding: 4 },
+                        { type: "Text", content: values.description }
+                    ]
+                }
+            ],
+            columnSize: "grow"
+        };
+    }
+
+    function getGroupHeadingUserText(config: GroupHeaderConfig) {
+        switch (getHeaderOption(config)) {
+            case "dayName":
+                return "[Day]";
+            case "dayMonth":
+                return "[Day] [Month]";
+            case "fullDate":
+                return "[Day/Month/Year]";
+            case "month":
+                return "[Month]";
+            case "monthYear":
+                return "[Month] [Year]";
+            case "year":
+                return "[Year]";
+            default:
+                return "Today";
+        }
+    }
 }
 
-function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
-    return {
-        type: "RowLayout",
-        children: [
-            {
-                type: "Image",
-                document: lineAndDotSVG,
-                width: 65,
-                grow: 0
-            },
-            {
-                type: "Container",
-                children: [
-                    { type: "Container", children: [], padding: 18 },
-                    {
-                        type: "RowLayout",
-                        children: [
-                            { type: "Text", content: values.title, bold: true },
-                            { type: "Text", content: "", grow: 3 },
-                            { type: "Text", content: values.timeIndication, fontColor: "#264AE5" }
-                        ]
-                    },
-                    { type: "Container", children: [], padding: 4 },
-                    { type: "Text", content: values.description }
-                ]
-            }
-        ],
-        columnSize: "grow"
-    };
-}
 /*
 
  TODO(jordan):

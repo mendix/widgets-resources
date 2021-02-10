@@ -2,7 +2,7 @@ import { createElement, ReactElement, ReactNode, useMemo } from "react";
 import { TimelineContainerProps } from "../typings/TimelineProps";
 import "./ui/Timeline.scss";
 import { ActionValue, WebIcon } from "mendix";
-import TimelineComponent, { getGroupHeaderByType } from "./components/TimelineComponent";
+import TimelineComponent, { getGroupHeaderByType, getHeaderOption } from "./components/TimelineComponent";
 
 export interface BasicItemType {
     icon?: WebIcon;
@@ -34,14 +34,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
             let groupKey;
 
             if (!props.customVisualization) {
-                const headerOption =
-                    props.groupByKey === "day"
-                        ? props.groupByDayOptions
-                        : props.groupByKey === "month"
-                        ? props.groupByMonthOptions
-                        : "year";
-
-                groupKey = getGroupHeaderByType(groupAttribute?.formatter, headerOption, date);
+                groupKey = getGroupHeaderByType(groupAttribute?.formatter, getHeaderOption(props), date);
                 constructedItem = {
                     icon: props.icon?.value,
                     title: props.title?.(item)?.value,
