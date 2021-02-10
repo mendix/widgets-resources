@@ -28,7 +28,7 @@ jobs:
               id: variables
               run: |
                   export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
-                  echo "::set-output name=arg::$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && [ ${{ github.event_name == 'pull_request' }} ]; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+                  echo "::set-output name=arg::$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
