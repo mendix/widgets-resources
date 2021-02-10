@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+
+            self.location="/openid/login" + window.location.search + window.location.hash;
+
+    </script>
+    <style>
+        .fullscreenDiv {
+            background-color: #e8e8e8;
+            width: 100%;
+            height: auto;
+            bottom: 0px;
+            top: 0px;
+            left: 0;
+            position: absolute;
+        }
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+<noscript>
+    <div class='fullscreenDiv'>
+        <div class="center">
+            Your browser does not support JavaScript! You need to enable JavaScript to continue.
+        </div>
+    </div>
+</noscript>
+</body>
+</html>
