@@ -1,4 +1,5 @@
 import {
+    changePropertyIn,
     ContainerProps,
     DropZoneProps,
     hidePropertyIn,
@@ -39,9 +40,35 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
             hidePropertyIn(defaultProperties, values, "columns", index, "size");
         }
     });
-    if (!values.pagingEnabled) {
+    if (values.pagination !== "buttons") {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
     }
+    changePropertyIn(
+        defaultProperties,
+        values,
+        prop => {
+            prop.objectHeaders = ["Caption", "Content", "Width", "Alignment"];
+            prop.objects?.forEach((object, index) => {
+                const column = values.columns[index];
+                const alignment = column.alignment;
+                object.captions = [
+                    column.header,
+                    column.showContentAs === "attribute"
+                        ? column.attribute
+                        : column.showContentAs === "dynamicText"
+                        ? column.dynamicText
+                        : "Custom content",
+                    column.width === "autoFill"
+                        ? "Auto-fill"
+                        : column.width === "autoFit"
+                        ? "Auto-fit content"
+                        : `Manual (${column.size})`,
+                    alignment ? alignment.charAt(0).toUpperCase() + alignment.slice(1) : ""
+                ];
+            });
+        },
+        "columns"
+    );
     return defaultProperties;
 }
 

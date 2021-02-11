@@ -31,6 +31,8 @@ export interface ColumnsType {
     columnClass?: ListExpressionValue<string>;
 }
 
+export type PaginationEnum = "buttons" | "virtualScrolling";
+
 export type PagingPositionEnum = "bottom" | "top";
 
 export interface ColumnsPreviewType {
@@ -63,7 +65,7 @@ export interface DatagridContainerProps {
     rowClass?: ListExpressionValue<string>;
     columnsFilterable: boolean;
     pageSize: number;
-    pagingEnabled: boolean;
+    pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
     columnsResizable: boolean;
@@ -84,7 +86,7 @@ export interface DatagridPreviewProps {
     rowClass: string;
     columnsFilterable: boolean;
     pageSize: number | null;
-    pagingEnabled: boolean;
+    pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
     columnsResizable: boolean;
