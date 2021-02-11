@@ -344,7 +344,7 @@ $important-helpers-value: if($important-helpers, " !important", "");
     }
 }
 
-//Box-shadow 
+//Box-shadow
 
 .shadow {
     box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05) #{$important-helpers-value};
@@ -352,37 +352,37 @@ $important-helpers-value: if($important-helpers, " !important", "");
 
 //Height helpers
 
-.h-25{
+.h-25 {
     height: 25% #{$important-helpers-value};
 }
 
-.h-50{
+.h-50 {
     height: 50% #{$important-helpers-value};
 }
 
-.h-75{
+.h-75 {
     height: 75% #{$important-helpers-value};
 }
 
-.h-100{
+.h-100 {
     height: 100% #{$important-helpers-value};
 }
 
 //Width helpers
 
-.w-25{
+.w-25 {
     width: 25% #{$important-helpers-value};
 }
 
-.w-50{
+.w-50 {
     width: 50% #{$important-helpers-value};
 }
 
-.w-75{
+.w-75 {
     width: 75% #{$important-helpers-value};
 }
 
-.w-100{
+.w-100 {
     width: 100% #{$important-helpers-value};
 }
 
