@@ -12,6 +12,29 @@
 //## Helper classes to change the look and feel of the component
 ========================================================================== */
 
+.widget-progress-bar {
+    width: 100%;
+}
+
+.progress-bar-medium {
+    height: 8px;
+    border-radius: $border-radius-default;
+}
+
+.progress-bar-small {
+    height: 4px;
+    border-radius: 2px;
+}
+
+.progress-bar-large {
+    height: 12px;
+    border-radius: 6px;
+}
+
+.widget-progress-bar-clickable:hover {
+    cursor: pointer;
+}
+
 .widget-progress-bar .progress-bar-default {
     background-color: $brand-default;
 }
@@ -46,4 +69,41 @@
 
 .widget-progress-bar-text-contrast .progress-bar {
     color: $font-color-default;
+}
+
+.widget-progress-bar-negative {
+    float: right;
+    display: block;
+}
+
+.widget-progress-bar.progress-bar-background-default {
+    background-color: $bg-color;
+}
+
+.widget-progress-bar.progress-bar-background-dashboard {
+    background-color: $bg-color-secondary;
+}
+
+.widget-progress-bar.progress-bar-background-default {
+    background-color: $brand-default;
+}
+
+.widget-progress-bar.progress-bar-background-primary {
+    background-color: $brand-primary;
+}
+
+.widget-progress-bar.progress-bar-background-success {
+    background-color: $brand-success;
+}
+
+.widget-progress-bar.progress-bar-background-info {
+    background-color: $brand-info;
+}
+
+.widget-progress-bar.progress-bar-background-warning {
+    background-color: $brand-warning;
+}
+
+.widget-progress-bar.progress-bar-background-danger {
+    background-color: $brand-danger;
 }
