@@ -134,13 +134,13 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
                         {
                             type: "RowLayout",
                             children: [
-                                { type: "Text", content: values.title, bold: true },
+                                { type: "Text", content: values.title || "Title", bold: true },
                                 { type: "Text", content: "", grow: 3 },
-                                { type: "Text", content: values.timeIndication, fontColor: "#264AE5" }
+                                { type: "Text", content: values.timeIndication || "Time", fontColor: "#264AE5" }
                             ]
                         },
                         { type: "Container", children: [], padding: 4 },
-                        { type: "Text", content: values.description }
+                        { type: "Text", content: values.description || "Description" }
                     ]
                 }
             ],
