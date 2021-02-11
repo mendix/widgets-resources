@@ -71,6 +71,17 @@ export function changePropertyIn<T, TKey extends keyof T>(
     modifyProperty(modify, propertyGroups, key, nestedPropIndex, nestedPropKey);
 }
 
+export function transformGroupsIntoTabs(properties: Properties) {
+    const groups: PropertyGroup[] = [];
+    properties.forEach(property => {
+        if (property.propertyGroups) {
+            groups.push(...property.propertyGroups);
+            property.propertyGroups = [];
+        }
+    });
+    properties.push(...groups);
+}
+
 function modifyProperty(
     modify: (prop: Property, index: number, container: Property[]) => void,
     propertyGroups: PropertyGroup[],

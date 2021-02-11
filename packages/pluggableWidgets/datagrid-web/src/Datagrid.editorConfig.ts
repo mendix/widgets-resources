@@ -6,11 +6,16 @@ import {
     Problem,
     Properties,
     RowLayoutProps,
-    StructurePreviewProps
+    StructurePreviewProps,
+    transformGroupsIntoTabs
 } from "@widgets-resources/piw-utils";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
-export function getProperties(values: DatagridPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(
+    values: DatagridPreviewProps,
+    defaultProperties: Properties,
+    platform: "web" | "desktop"
+): Properties {
     values.columns.forEach((column, index) => {
         if (column.showContentAs !== "attribute" && !column.sortable && !values.columnsFilterable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "attribute");
@@ -69,6 +74,9 @@ export function getProperties(values: DatagridPreviewProps, defaultProperties: P
         },
         "columns"
     );
+    if (platform === "web") {
+        transformGroupsIntoTabs(defaultProperties);
+    }
     return defaultProperties;
 }
 
