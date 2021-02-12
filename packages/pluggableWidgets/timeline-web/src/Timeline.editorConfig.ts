@@ -167,12 +167,3 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
         }
     }
 }
-
-/*
-
- TODO(jordan):
-. image width and height are fixed, is this okay for all situations?
-
-. figure out where the svg code should live
-
- */
