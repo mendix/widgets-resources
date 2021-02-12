@@ -1,7 +1,6 @@
 import { createElement, ReactElement, useCallback, useState } from "react";
 import { DatagridContainerProps } from "../typings/DatagridProps";
 
-import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
 import classNames from "classnames";
 import { FilterContext, FilterFunction } from "./components/provider";
