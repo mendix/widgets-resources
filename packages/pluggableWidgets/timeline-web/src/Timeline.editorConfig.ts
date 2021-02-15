@@ -6,7 +6,7 @@ import {
     StructurePreviewProps
 } from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
-import { lineAndDotSVG } from "./assets/lineAndDot";
+import lineAndDotSVG from "./assets/lineAndDot.svg";
 import { getHeaderOption, GroupHeaderConfig } from "./utils/utils";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
@@ -123,7 +123,7 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
             children: [
                 {
                     type: "Image",
-                    document: lineAndDotSVG,
+                    document: decodeURIComponent(lineAndDotSVG.replace("data:image/svg+xml,", "")),
                     width: 65,
                     grow: 0
                 },
