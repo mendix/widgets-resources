@@ -135,6 +135,26 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                 } as ContainerProps)
         )
     };
+    const titleHeader: RowLayoutProps = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        backgroundColor: "#daeffb",
+        borders: true,
+        borderWidth: 1,
+        children: [
+            {
+                type: "Container",
+                padding: 4,
+                children: [
+                    {
+                        type: "Text",
+                        content: "Data grid 2",
+                        fontColor: "#2074c8"
+                    }
+                ]
+            }
+        ]
+    };
     const headers: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -203,7 +223,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         : [];
     return {
         type: "Container",
-        children: [headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
+        children: [titleHeader, headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
     };
 };
 
