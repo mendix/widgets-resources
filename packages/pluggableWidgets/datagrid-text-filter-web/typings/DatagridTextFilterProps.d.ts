@@ -12,7 +12,7 @@ export interface DatagridTextFilterContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     defaultValue?: DynamicValue<string>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;

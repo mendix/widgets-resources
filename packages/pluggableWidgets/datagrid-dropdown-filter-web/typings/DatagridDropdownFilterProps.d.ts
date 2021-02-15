@@ -20,7 +20,7 @@ export interface DatagridDropdownFilterContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     defaultValue?: DynamicValue<string>;
     filterOptions: FilterOptionsType[];
     emptyOptionCaption?: DynamicValue<string>;

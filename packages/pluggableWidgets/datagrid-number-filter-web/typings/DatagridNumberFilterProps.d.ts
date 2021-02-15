@@ -12,7 +12,7 @@ export interface DatagridNumberFilterContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     defaultValue?: DynamicValue<BigJs.Big>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
