@@ -2,7 +2,8 @@ import { createElement, ReactElement, ReactNode, useMemo } from "react";
 import { TimelineContainerProps } from "../typings/TimelineProps";
 import "./ui/Timeline.scss";
 import { ActionValue, WebIcon } from "mendix";
-import TimelineComponent, { getGroupHeaderByType, getHeaderOption } from "./components/TimelineComponent";
+import TimelineComponent, { getGroupHeaderByType } from "./components/TimelineComponent";
+import { getHeaderOption } from "./utils/utils";
 
 export interface BasicItemType {
     icon?: WebIcon;

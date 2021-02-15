@@ -152,7 +152,6 @@ export default async args => {
                     babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] }
                 })
             ],
-            external: ["mendix/components/web/Icon"],
             onwarn
         });
     }

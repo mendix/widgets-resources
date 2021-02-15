@@ -2,7 +2,6 @@ import {
     GroupByDayOptionsEnum,
     GroupByKeyEnum,
     GroupByMonthOptionsEnum,
-    TimelineContainerProps,
     UngroupedEventsPositionEnum
 } from "../../typings/TimelineProps";
 import { Children, createElement, ReactElement, ReactNode } from "react";
@@ -152,13 +151,4 @@ export function getGroupHeaderByType(
         }
     }
     return "";
-}
-
-export type GroupHeaderConfig = Pick<
-    TimelineContainerProps,
-    "groupByKey" | "groupByDayOptions" | "groupByMonthOptions"
->;
-
-export function getHeaderOption({ groupByKey, groupByDayOptions, groupByMonthOptions }: GroupHeaderConfig) {
-    return groupByKey === "day" ? groupByDayOptions : groupByKey === "month" ? groupByMonthOptions : "year";
 }

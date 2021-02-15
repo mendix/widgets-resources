@@ -6,8 +6,8 @@ import {
     StructurePreviewProps
 } from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
-import { lineAndDotSVG } from "./preview/preview";
-import { getHeaderOption, GroupHeaderConfig } from "./components/TimelineComponent";
+import { lineAndDotSVG } from "./assets/lineAndDot";
+import { getHeaderOption, GroupHeaderConfig } from "./utils/utils";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
     if (values.customVisualization) {

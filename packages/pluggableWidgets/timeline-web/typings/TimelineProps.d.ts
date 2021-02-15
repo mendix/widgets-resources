@@ -4,15 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties } from "react";
-import {
-    DynamicValue,
-    ListValue,
-    ListActionValue,
-    ListAttributeValue,
-    ListExpressionValue,
-    ListWidgetValue,
-    WebIcon
-} from "mendix";
+import { DynamicValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue, WebIcon } from "mendix";
 
 export type GroupByKeyEnum = "day" | "month" | "year";
 
@@ -55,7 +47,7 @@ export interface TimelinePreviewProps {
     description: string;
     timeIndication: string;
     customVisualization: boolean;
-    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     groupEvents: boolean;
     groupAttribute: string;
     groupByKey: GroupByKeyEnum;
