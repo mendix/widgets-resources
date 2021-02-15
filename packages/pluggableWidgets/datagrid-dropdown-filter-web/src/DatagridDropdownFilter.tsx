@@ -1,7 +1,6 @@
 import { createElement, ReactElement } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
 import { ValueStatus } from "mendix";
-import "./ui/DatagridDropdownFilter.scss";
 import { FilterComponent } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@widgets-resources/piw-utils";

@@ -11,7 +11,3 @@ export function preview(props: DatagridDropdownFilterPreviewProps): ReactElement
         />
     );
 }
-
-export function getPreviewCss(): string {
-    return require("./ui/DatagridDropdownFilter.scss");
-}

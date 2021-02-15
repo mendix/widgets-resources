@@ -14,7 +14,3 @@ export function preview(props: DatagridTextFilterPreviewProps): ReactElement {
         />
     );
 }
-
-export function getPreviewCss(): string {
-    return require("./ui/DatagridTextFilter.scss");
-}
