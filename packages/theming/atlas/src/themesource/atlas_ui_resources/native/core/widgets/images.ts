@@ -15,7 +15,9 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const Image: ImageType = {
     container: {
         // rippleColor & all ViewStyle properties are allowed
-        rippleColor: contrast.lowest
+        rippleColor: contrast.lowest,
+        maxWidth: "100%",
+        maxHeight: "100%"
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
@@ -34,7 +36,9 @@ export const Image: ImageType = {
 export const ImageViewer: ImageType = {
     container: {
         // RippleColor & All ViewStyle properties are allowed
-        rippleColor: contrast.lowest
+        rippleColor: contrast.lowest,
+        maxWidth: "100%",
+        maxHeight: "100%"
     },
     containerDisabled: {
         // All ViewStyle properties are allowed
