@@ -1003,19 +1003,23 @@
             "options": [
                 {
                     "name": "Small",
-                    "class": "imageSmall"
+                    "class": "imageSmall",
+                    "oldNames": ["imageCircleSmall", "imageSquareSmall"]
                 },
                 {
                     "name": "Medium",
-                    "class": "imageMedium"
+                    "class": "imageMedium",
+                    "oldNames": ["imageCircleMedium", "imageSquareMedium"]
                 },
                 {
                     "name": "Large",
-                    "class": "imageLarge"
+                    "class": "imageLarge",
+                    "oldNames": ["imageCircleLarge", "imageSquareLarge"]
                 },
                 {
                     "name": "Larger",
-                    "class": "imageLarger"
+                    "class": "imageLarger",
+                    "oldNames": ["imageCircleLarger", "imageSquareLarger"]
                 },
                 {
                     "name": "FullSize",
