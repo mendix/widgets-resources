@@ -50,10 +50,11 @@ describe("AppEvents", () => {
     });
 
     describe("with on load action", () => {
-        it("executes the on load action", () => {
+        it("executes the on load action", async () => {
             const onLoadAction = actionValue();
-            const { update } = render(<AppEvents {...defaultProps} onLoadAction={onLoadAction} />);
-            update(<AppEvents {...defaultProps} onLoadAction={onLoadAction} />);
+            const element = <AppEvents {...defaultProps} onLoadAction={onLoadAction} />;
+
+            await render(element);
             expect(onLoadAction.execute).toHaveBeenCalledTimes(1);
         });
     });
