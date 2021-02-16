@@ -22,6 +22,15 @@ export class AppEvents extends Component<Props> {
     private unsubscribeNetworkEventListener?: NetInfoSubscription;
 
     async componentDidMount(): Promise<void> {
+        await this.registerSubscriptions();
+
+        if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
+            this.onLoadTriggered = true;
+            executeAction(this.props.onLoadAction);
+        }
+    }
+
+    private async registerSubscriptions(): Promise<void> {
         if (this.props.onResumeAction) {
             AppState.addEventListener("change", this.onAppStateChangeHandler);
         }
@@ -35,14 +44,13 @@ export class AppEvents extends Component<Props> {
             this.isConnected = (await NetInfo.fetch()).isConnected;
             this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
         }
-
-        if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
-            this.onLoadTriggered = true;
-            executeAction(this.props.onLoadAction);
-        }
     }
 
     componentWillUnmount(): void {
+        this.clearSubscriptions();
+    }
+
+    private clearSubscriptions(): void {
         if (this.props.onUnloadAction && this.props.onUnloadAction.canExecute) {
             executeAction(this.props.onUnloadAction);
         }
@@ -65,14 +73,17 @@ export class AppEvents extends Component<Props> {
         return null;
     }
 
-    private onAppStateChange(nextAppState: AppStateStatus): void {
+    private async onAppStateChange(nextAppState: AppStateStatus): Promise<void> {
         if (this.appState === nextAppState) {
             return;
         }
 
         if (nextAppState === "active" && isPastTimeout(this.lastOnResume, this.props.onResumeTimeout)) {
+            await this.registerSubscriptions();
             executeAction(this.props.onResumeAction);
             this.lastOnResume = Date.now();
+        } else if (nextAppState === "background") {
+            this.clearSubscriptions();
         }
 
         this.appState = nextAppState;
