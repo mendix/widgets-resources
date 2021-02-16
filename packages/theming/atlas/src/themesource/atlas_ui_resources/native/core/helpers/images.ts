@@ -40,6 +40,12 @@ export const imageCircle = {
     }
 };
 // Image Sizes
+export const imageIcon = {
+    image: {
+        width: image.icon,
+        height: image.icon
+    }
+};
 export const imageSmall = {
     image: {
         width: image.image.small,

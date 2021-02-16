@@ -952,55 +952,10 @@
             "description": "Make the image smaller or larger.",
             "options": [
                 {
-                    "name": "Small",
-                    "class": "imageSmall"
+                    "name": "Icon",
+                    "class": "imageIcon",
+                    "oldNames": ["imageCircleIcon", "imageSquareIcon"]
                 },
-                {
-                    "name": "Medium",
-                    "class": "imageMedium"
-                },
-                {
-                    "name": "Large",
-                    "class": "imageLarge"
-                },
-                {
-                    "name": "Larger",
-                    "class": "imageLarger"
-                },
-                {
-                    "name": "FullSize",
-                    "class": "imageFullSize"
-                }
-            ]
-        },
-        {
-            "name": "Avatar",
-            "type": "Toggle",
-            "description": "Create an avatar image.",
-            "class": "avatar"
-        }
-    ],
-    "DynamicImageViewer": [
-        {
-            "name": "Shape",
-            "type": "Dropdown",
-            "description": "Change the shape of the image",
-            "options": [
-                {
-                    "name": "Square",
-                    "class": "imageSquare"
-                },
-                {
-                    "name": "Circle",
-                    "class": "imageCircle"
-                }
-            ]
-        },
-        {
-            "name": "Size",
-            "type": "Dropdown",
-            "description": "Make the image smaller or larger.",
-            "options": [
                 {
                     "name": "Small",
                     "class": "imageSmall",
@@ -1026,12 +981,59 @@
                     "class": "imageFullSize"
                 }
             ]
+        }
+    ],
+    "DynamicImageViewer": [
+        {
+            "name": "Shape",
+            "type": "Dropdown",
+            "description": "Change the shape of the image",
+            "options": [
+                {
+                    "name": "Square",
+                    "class": "imageSquare"
+                },
+                {
+                    "name": "Circle",
+                    "class": "imageCircle"
+                }
+            ]
         },
         {
-            "name": "Avatar",
-            "type": "Toggle",
-            "description": "Create an avatar image.",
-            "class": "avatar"
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Make the image smaller or larger.",
+            "options": [
+                {
+                    "name": "Icon",
+                    "class": "imageIcon",
+                    "oldNames": ["imageCircleIcon", "imageSquareIcon"]
+                },
+                {
+                    "name": "Small",
+                    "class": "imageSmall",
+                    "oldNames": ["imageCircleSmall", "imageSquareSmall"]
+                },
+                {
+                    "name": "Medium",
+                    "class": "imageMedium",
+                    "oldNames": ["imageCircleMedium", "imageSquareMedium"]
+                },
+                {
+                    "name": "Large",
+                    "class": "imageLarge",
+                    "oldNames": ["imageCircleLarge", "imageSquareLarge"]
+                },
+                {
+                    "name": "Larger",
+                    "class": "imageLarger",
+                    "oldNames": ["imageCircleLarger", "imageSquareLarger"]
+                },
+                {
+                    "name": "FullSize",
+                    "class": "imageFullSize"
+                }
+            ]
         }
     ],
     "DynamicText": [
