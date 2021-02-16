@@ -43,29 +43,25 @@ export const imageCircle = {
 export const imageSmall = {
     image: {
         width: image.image.small,
-        height: image.image.small,
-        aspectRatio: 1
+        height: image.image.small
     }
 };
 export const imageMedium = {
     image: {
         width: image.image.medium,
-        height: image.image.medium,
-        aspectRatio: 1
+        height: image.image.medium
     }
 };
 export const imageLarge = {
     image: {
         width: image.image.large,
-        height: image.image.large,
-        aspectRatio: 1
+        height: image.image.large
     }
 };
 export const imageLarger = {
     image: {
         width: image.image.larger,
-        height: image.image.larger,
-        aspectRatio: 1
+        height: image.image.larger
     }
 };
 export const imageFullSize = {
