@@ -1,4 +1,4 @@
-import { brand, contrast, font } from "../../variables";
+import { brand, contrast, font, background } from "../../variables";
 import { PopupMenuType } from "../../types/widgets";
 /*
 
@@ -15,6 +15,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
     container: {
         // All ViewStyle properties are allowed
+        backgroundColor: background.gray,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOpacity: 0.2,
