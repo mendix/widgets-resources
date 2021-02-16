@@ -8,11 +8,14 @@
     background-color: #ffffff;
     overflow: hidden;
     position: relative;
+    padding: $spacing-large;
+    margin-bottom: $spacing-large;
 }
 
 //== Card components
 //-------------------------------------------------------------------------------------------------------------------//
 .card-body {
+    padding: $spacing-large;
 }
 
 .card-overlay {
@@ -28,6 +31,7 @@
         rgba(0, 0, 0, 0.99) 121%,
         #000 100%
     );
+    padding: $spacing-large;
 }
 
 .card-title {

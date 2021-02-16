@@ -392,7 +392,7 @@ $important-helpers-value: if($important-helpers, " !important", "");
 }
 
 .border-top {
-    border-bottom: 1px solid $border-color-default #{$important-helpers-value};
+    border-top: 1px solid $border-color-default #{$important-helpers-value};
 }
 
 .border-bottom {
@@ -400,7 +400,7 @@ $important-helpers-value: if($important-helpers, " !important", "");
 }
 
 .border-left {
-    border-right: 1px solid $border-color-default #{$important-helpers-value};
+    border-left: 1px solid $border-color-default #{$important-helpers-value};
 }
 
 .border-right {

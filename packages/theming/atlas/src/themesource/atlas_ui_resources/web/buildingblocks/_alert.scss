@@ -16,6 +16,7 @@
     padding: $spacing-medium;
     border: 1px solid;
     border-radius: $border-radius-default;
+    padding: $spacing-medium;
 }
 
 .alert-icon {
@@ -32,24 +33,24 @@
 
 //Variations
 
-.alert-info,
+.alert-primary,
 .alert {
-    color: $alert-info-color;
-    border-color: $alert-info-border-color;
-    background-color: $alert-info-bg;
+    color: $alert-primary-color;
+    border-color: $alert-primary-border-color;
+    background-color: $alert-primary-bg;
 }
 
-// Color variations
+.alert-secondary{
+    color: $alert-secondary-color;
+    border-color: $alert-secondary-border-color;
+    background-color: $alert-secondary-bg;
+}
+
+// Semantic variations
 .alert-success {
     color: $alert-success-color;
     border-color: $alert-success-border-color;
     background-color: $alert-success-bg;
-}
-
-.alert-info {
-    color: $alert-info-color;
-    border-color: $alert-info-border-color;
-    background-color: $alert-info-bg;
 }
 
 .alert-warning {
@@ -70,4 +71,5 @@
 .has-error .alert {
     margin-top: $spacing-small;
     margin-bottom: 0;
+    padding: 0;
 }

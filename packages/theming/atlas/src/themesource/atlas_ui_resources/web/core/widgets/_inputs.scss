@@ -105,6 +105,13 @@ select.form-control {
     height: auto;
 }
 
+.mx-textarea-counter{
+    display: block;
+    width: 100%;
+    text-align: right;
+    margin-top: $spacing-small;
+}
+
 textarea.form-control {
     flex-basis: auto;
 }
