@@ -35,9 +35,9 @@ describe("datagrid-text-filter-web", () => {
             row.click();
 
             const popUpElement = page.getElement(".mx-name-AgeTextBox .form-control");
-            const popup_context = popUpElement.getValue();
+            const popUpContext = popUpElement.getValue();
 
-            expect(context).toEqual(popup_context);
+            expect(context).toEqual(popUpContext);
         });
     });
 });
