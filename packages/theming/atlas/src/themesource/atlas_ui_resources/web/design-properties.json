@@ -26,6 +26,10 @@
                     "class": "spacing-outer-top-large"
                 },
                 {
+                    "name": "Inner none",
+                    "class": "spacing-inner-top-none"
+                },
+                {
                     "name": "Inner small",
                     "class": "spacing-inner-top"
                 },
@@ -63,6 +67,10 @@
                     "name": "Outer large",
                     "oldNames": ["Large"],
                     "class": "spacing-outer-bottom-large"
+                },
+                {
+                    "name": "Inner none",
+                    "class": "spacing-inner-bottom-none"
                 },
                 {
                     "name": "Inner small",
@@ -104,6 +112,10 @@
                     "class": "spacing-outer-left-large"
                 },
                 {
+                    "name": "Inner none",
+                    "class": "spacing-inner-left-none"
+                },
+                {
                     "name": "Inner small",
                     "class": "spacing-inner-left"
                 },
@@ -141,6 +153,10 @@
                     "name": "Outer large",
                     "oldNames": ["Large"],
                     "class": "spacing-outer-right-large"
+                },
+                {
+                    "name": "Inner none",
+                    "class": "spacing-inner-right-none"
                 },
                 {
                     "name": "Inner small",
@@ -238,14 +254,21 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
+                    "name": "Background Default",
+                    "class": "background-main"
+                },
+                {
+                    "name": "Background Dashboard",
+                    "class": "background-secondary"
+                },
+                {
+                    "name": "Background Gradient",
+                    "class": "background-brand-gradient"
+                },
+                {
                     "name": "Brand Primary",
                     "oldNames": ["Primary"],
                     "class": "background-primary"
-                },
-                {
-                    "name": "Brand Info",
-                    "oldNames": ["Info"],
-                    "class": "background-info"
                 },
                 {
                     "name": "Brand Success",
@@ -261,30 +284,23 @@
                     "name": "Brand Danger",
                     "oldNames": ["Danger"],
                     "class": "background-danger"
-                },
-                {
-                    "name": "Background Default",
-                    "class": "background-main"
-                },
-                {
-                    "name": "Background Dashboard",
-                    "class": "background-secondary"
-                },
-                {
-                    "name": "Background Gradient",
-                    "class": "background-brand-gradient"
-                },
-                {
-                    "name": "Background White",
-                    "class": "background-white"
                 }
             ]
         },
         {
-            "name": "Elevated",
-            "type": "Toggle",
-            "description": "Add a box shadow to elevate the element.",
-            "class": "shadow"
+            "name": "Shade",
+            "type": "Dropdown",
+            "description": "Apply a shade to your background color",
+            "options": [
+                {
+                    "name": "Light",
+                    "class": "background-light"
+                },
+                {
+                    "name": "Dark",
+                    "class": "background-dark"
+                }
+            ]
         }
     ],
     "Button": [
@@ -351,10 +367,6 @@
                     "class": "listview-bordered"
                 },
                 {
-                    "name": "Seperated",
-                    "class": "listview-seperated"
-                },
-                {
                     "name": "No Styling",
                     "class": "listview-stylingless"
                 }
@@ -374,10 +386,6 @@
                 {
                     "name": "Small",
                     "class": "listview-sm"
-                },
-                {
-                    "name": "Medium",
-                    "class": "listview-md"
                 },
                 {
                     "name": "Large",
@@ -474,16 +482,6 @@
                     "name": "Brand Primary",
                     "oldNames": ["Primary"],
                     "class": "groupbox-primary"
-                },
-                {
-                    "name": "Brand Inverse",
-                    "oldNames": ["Inverse"],
-                    "class": "groupbox-inverse"
-                },
-                {
-                    "name": "Brand Info",
-                    "oldNames": ["Info"],
-                    "class": "groupbox-info"
                 },
                 {
                     "name": "Brand Success",
