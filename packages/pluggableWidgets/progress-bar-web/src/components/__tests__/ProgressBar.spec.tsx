@@ -27,7 +27,7 @@ describe("Progress bar", () => {
         expect(progressBar).toMatchSnapshot();
     });
 
-    it("should show positive progress", () => {
+    it("shows a positive progress", () => {
         const progressBar = mount(
             <ProgressBar
                 currentValue={progress}
@@ -42,7 +42,7 @@ describe("Progress bar", () => {
         expect(getProgressBarStyle(progressBar)).toEqual({ width: "23%" });
     });
 
-    it("should call the onClick handler when the progress bar is clicked on", () => {
+    it("triggers an event when a clickable progress bar is clicked", () => {
         const progressBar = mount(
             <ProgressBar
                 currentValue={progress}
@@ -59,7 +59,7 @@ describe("Progress bar", () => {
         expect(onClickSpy).toHaveBeenCalledTimes(1);
     });
 
-    it("should properly handle a different range", () => {
+    it("handles a different range", () => {
         const progressBar = mount(
             <ProgressBar
                 currentValue={progress}
@@ -75,7 +75,7 @@ describe("Progress bar", () => {
         expect(getProgressBarStyle(progressBar)).toEqual({ width: "30%" });
     });
 
-    it("should clamp a current value lower than the minimum value to 0% progress", () => {
+    it("clamps a current value lower than the minimum value to 0% progress", () => {
         const progressBar = mount(
             <ProgressBar
                 currentValue={-20}
@@ -90,7 +90,7 @@ describe("Progress bar", () => {
         expect(getProgressBarStyle(progressBar)).toEqual({ width: "0%" });
     });
 
-    it("should clamp a current value higher than the maximum value to 100% progress", () => {
+    it("clamps a current value higher than the maximum value to 100% progress", () => {
         const progressBar = mount(
             <ProgressBar
                 currentValue={110}
@@ -105,7 +105,7 @@ describe("Progress bar", () => {
         expect(getProgressBarStyle(progressBar)).toEqual({ width: "100%" });
     });
 
-    it("should not be clickable when there is no onClick handler provided", () => {
+    it("is not clickable when there is no onClick handler provided", () => {
         const progressBar = mount(
             <ProgressBar
                 currentValue={50}
@@ -119,7 +119,7 @@ describe("Progress bar", () => {
         expect(progressBar.find(".progress").hasClass("widget-progress-bar-clickable")).toBe(false);
     });
 
-    describe("should show a runtime error Alert", () => {
+    describe("shows a runtime error Alert", () => {
         it("when the current value is lower than the minimum value", () => {
             const progressBar = mount(
                 <ProgressBar
