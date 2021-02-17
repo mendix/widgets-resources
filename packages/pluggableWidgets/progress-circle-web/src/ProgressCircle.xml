@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.progresscircle.ProgressCircle" offlineCapable="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    <name>Progress circle</name>
+    <description>Displays a progress in a circle</description>
+    <icon>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</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="type" type="enumeration" defaultValue="static">
+                    <caption>Type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <!--     Current Value     -->
+                <property key="staticCurrentValue" type="integer" defaultValue="50">
+                    <caption>Current value</caption>
+                    <description />
+                </property>
+                <property key="dynamicCurrentValue" type="attribute" required="false">
+                    <caption>Current value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionCurrentValue" type="expression" required="false">
+                    <caption>Current value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!--     Minimum Value     -->
+                <property key="staticMinValue" type="integer" defaultValue="0">
+                    <caption>Minimum value</caption>
+                    <description />
+                </property>
+                <property key="dynamicMinValue" type="attribute" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionMinValue" type="expression" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!--     Maximum Value     -->
+                <property key="staticMaxValue" type="integer" defaultValue="100">
+                    <caption>Maximum value</caption>
+                    <description />
+                </property>
+                <property key="dynamicMaxValue" type="attribute" required="false">
+                    <caption>Maximum value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionMaxValue" type="expression" required="false">
+                    <caption>Maximum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action">
+                    <caption>On click</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Progress Label">
+            <propertyGroup caption="Progress Label">
+                <property key="showLabel" type="boolean" defaultValue="false">
+                    <caption>Show label</caption>
+                    <description />
+                </property>
+                <property key="labelType" type="enumeration" defaultValue="text">
+                    <caption>Label type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="text">Text</enumerationValue>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="labelText" type="textTemplate" required="false">
+                    <caption>Label text</caption>
+                    <description />
+                </property>
+                <property key="customLabel" type="widgets" required="false">
+                    <caption>Custom label</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

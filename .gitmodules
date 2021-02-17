@@ -30,6 +30,10 @@
 	path = packages/pluggableWidgets/signature-native/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = signature-native
+[submodule "packages/pluggableWidgets/progress-circle-web/tests/testProject"]
+	path = packages/pluggableWidgets/progress-circle-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = progress-circle-web
 [submodule "packages/customWidgets/carousel-web/tests/testProject"]
 	path = packages/customWidgets/carousel-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
@@ -38,10 +42,6 @@
 	path = packages/customWidgets/signature-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = signature-web
-[submodule "packages/customWidgets/progress-circle-web/tests/testProject"]
-	path = packages/customWidgets/progress-circle-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = progress-circle-web
 [submodule "packages/customWidgets/color-picker-web/tests/testProject"]
 	path = packages/customWidgets/color-picker-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git

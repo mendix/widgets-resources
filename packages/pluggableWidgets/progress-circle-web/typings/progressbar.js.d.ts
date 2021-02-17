@@ -16,7 +16,7 @@ declare namespace progressbar {
         color?: string;
         trailColor?: string;
         trailWidth?: number;
-        strokeWidth: number; // For IE & Edge support, shouldn't be over 6
+        strokeWidth?: number; // For IE & Edge support, shouldn't be over 6
         fill?: string;
         duration?: number;
     }
