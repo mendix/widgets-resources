@@ -1,21 +1,23 @@
 import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
-import { ProgressBarPreviewProps } from "../typings/ProgressBarProps";
+import { ProgressBarPreviewProps, TypeEnum } from "../typings/ProgressBarProps";
 
 type PreviewPropsKey = keyof ProgressBarPreviewProps;
-const staticPropKeys: PreviewPropsKey[] = ["staticCurrentValue", "staticMaxValue", "staticMinValue"];
-const dynamicPropKeys: PreviewPropsKey[] = ["dynamicCurrentValue", "dynamicMaxValue", "dynamicMinValue"];
-const expressionPropKeys: PreviewPropsKey[] = ["expressionCurrentValue", "expressionMaxValue", "expressionMinValue"];
+const propKeys: { [Type in TypeEnum]: PreviewPropsKey[] } = {
+    static: ["staticCurrentValue", "staticMaxValue", "staticMinValue"],
+    dynamic: ["dynamicCurrentValue", "dynamicMaxValue", "dynamicMinValue"],
+    expression: ["expressionCurrentValue", "expressionMaxValue", "expressionMinValue"]
+};
 
 export function getProperties(values: ProgressBarPreviewProps, defaultProperties: Properties): Properties {
     switch (values.type) {
         case "dynamic":
-            hidePropertiesIn(defaultProperties, values, [...staticPropKeys, ...expressionPropKeys]);
+            hidePropertiesIn(defaultProperties, values, [...propKeys.static, ...propKeys.expression]);
             break;
         case "static":
-            hidePropertiesIn(defaultProperties, values, [...dynamicPropKeys, ...expressionPropKeys]);
+            hidePropertiesIn(defaultProperties, values, [...propKeys.dynamic, ...propKeys.expression]);
             break;
         case "expression":
-            hidePropertiesIn(defaultProperties, values, [...staticPropKeys, ...dynamicPropKeys]);
+            hidePropertiesIn(defaultProperties, values, [...propKeys.static, ...propKeys.dynamic]);
             break;
         default:
             break;
@@ -58,16 +60,8 @@ function checkValue(key: PreviewPropsKey, values: ProgressBarPreviewProps): Prob
 export function check(values: ProgressBarPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (values.type === "dynamic") {
-        dynamicPropKeys.forEach(key => {
-            const error = checkValue(key, values);
-            if (error) {
-                errors.push(error);
-            }
-        });
-    }
-    if (values.type === "expression") {
-        expressionPropKeys.forEach(key => {
+    if (values.type === "dynamic" || values.type === "expression") {
+        propKeys[values.type].forEach(key => {
             const error = checkValue(key, values);
             if (error) {
                 errors.push(error);
@@ -83,7 +77,7 @@ export function check(values: ProgressBarPreviewProps): Problem[] {
         ) {
             errors.push({
                 property: "staticCurrentValue",
-                message: "The current static value should be higher than or equal to the minimum value."
+                message: "The current value should be higher than or equal to the minimum value."
             });
         }
         if (
@@ -93,7 +87,7 @@ export function check(values: ProgressBarPreviewProps): Problem[] {
         ) {
             errors.push({
                 property: "staticCurrentValue",
-                message: "The current static value should be lower than or equal to the maximum value."
+                message: "The current value should be lower than or equal to the maximum value."
             });
         }
     }
