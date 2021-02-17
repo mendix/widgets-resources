@@ -37,7 +37,6 @@ export const ProgressBar: FunctionComponent<ProgressBarContainerProps> = props =
             currentValue={currentValue}
             minValue={minValue}
             maxValue={maxValue}
-            // Need separate cases here to indicate that no onClick was provided.
             onClick={props.onClick ? onClick : undefined}
             label={props.showLabel ? (props.labelType === "custom" ? props.customLabel : props.labelText?.value) : null}
         />
