@@ -31,11 +31,17 @@ export const imageOverlay = {
 // Image Shapes
 export const imageSquare = {
     image: {
+        width: "100%",
+        height: "auto",
+        aspectRatio: 1,
         borderRadius: border.radiusSmall
     }
 };
 export const imageCircle = {
     image: {
+        width: "100%",
+        height: "auto",
+        aspectRatio: 1,
         borderRadius: 50000
     }
 };
@@ -73,8 +79,7 @@ export const imageLarger = {
 export const imageFullSize = {
     image: {
         width: "100%",
-        height: "auto",
-        aspectRatio: 1
+        height: "auto"
     }
 };
 //
