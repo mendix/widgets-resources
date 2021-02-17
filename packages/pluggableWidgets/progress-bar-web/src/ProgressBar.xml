@@ -74,11 +74,16 @@
                     <description />
                     <returnType type="Decimal" />
                 </property>
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Events">
                 <property key="onClick" type="action">
                     <caption>On click</caption>
                     <description />
                 </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Progress Label">
             <propertyGroup caption="Progress Label">
                 <property key="showLabel" type="boolean" defaultValue="false">
                     <caption>Show label</caption>
