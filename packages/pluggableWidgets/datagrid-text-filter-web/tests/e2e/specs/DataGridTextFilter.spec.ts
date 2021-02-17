@@ -23,5 +23,21 @@ describe("datagrid-text-filter-web", () => {
             const items = page.getElements(".td", grid);
             expect(datagrid.getAllRows(items)).toEqual(["12", "test3", "test3", ""]);
         });
+
+        it("check the context", () => {
+            const grid = page.getWidget("datagrid1");
+            const row = page.getElement(".td", grid);
+            const input = page.getElement(".filter-input", grid);
+
+            input.setValue("test3");
+            const context = row.getText();
+
+            row.click();
+
+            const popUpElement = page.getElement(".mx-name-AgeTextBox .form-control");
+            const popUpContext = popUpElement.getValue();
+
+            expect(context).toEqual(popUpContext);
+        });
     });
 });

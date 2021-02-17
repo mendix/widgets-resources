@@ -22,8 +22,6 @@ async function main() {
         throw new Error("Cannot find a tests/testProject. Did you run the script in the widget folder?");
     }
 
-    rm("-rf", "tests/testProject/theme", "tests/testProject/themesource");
-
     if (process.argv.includes("--latest-atlas")) {
         await copyLatestAtlas();
     } else {
@@ -42,6 +40,7 @@ async function exists(filePath) {
 
 async function copyLatestAtlas() {
     const atlasSrc = join(process.cwd(), "../../theming/atlas");
+    const options = { overwrite: true };
 
     try {
         await promisify(exec)("npm run release", { cwd: atlasSrc });
@@ -50,7 +49,7 @@ async function copyLatestAtlas() {
     }
 
     try {
-        await promisify(rCopy)(join(atlasSrc, "dist"), "tests/testProject");
+        await promisify(rCopy)(join(atlasSrc, "dist"), "tests/testProject", options);
     } catch (e) {
         throw new Error("Failed to copy Atlas release distribution to test/testProject");
     }

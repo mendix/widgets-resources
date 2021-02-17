@@ -105,4 +105,19 @@ describe("datagrid-web", () => {
             expect(column.isDisplayed()).toBeFalsy();
         });
     });
+
+    describe("capabilities: onClick action", () => {
+        it("check the context", () => {
+            const grid = page.getWidget("datagrid1");
+            const row = page.getElement(".td", grid);
+            const context = row.getText();
+
+            row.click();
+
+            const popUpElement = page.getElement(".mx-name-AgeTextBox .form-control");
+            const popUpContext = popUpElement.getValue();
+
+            expect(context).toEqual(popUpContext);
+        });
+    });
 });
