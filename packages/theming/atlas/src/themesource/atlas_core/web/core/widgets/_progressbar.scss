@@ -46,6 +46,7 @@
     background-size: 40px 40px;
 }
 
+.widget-progress-bar.active .progress-bar,
 .progress.active .progress-bar,
 .progress-bar.active {
     animation: progress-bar-stripes 2s linear infinite;

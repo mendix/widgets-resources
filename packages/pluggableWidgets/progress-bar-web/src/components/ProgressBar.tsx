@@ -57,7 +57,7 @@ export function ProgressBar({
                 onClick={onClick}
             >
                 <div
-                    className={classNames("progress-bar", "progress-bar-default", "progress-bar-medium", className)}
+                    className={classNames("progress-bar", "progress-bar-default")}
                     style={{ width: `${calculatePercentage(currentValue, minValue, maxValue)}%` }}
                 >
                     {label}

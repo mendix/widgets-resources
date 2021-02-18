@@ -16,18 +16,24 @@
     width: 100%;
 }
 
-.progress-bar-medium {
+.progress-bar-medium,
+.progress-bar-medium .progress-bar {
     height: 8px;
+    line-height: 8px;
     border-radius: $border-radius-default;
 }
 
-.progress-bar-small {
+.progress-bar-small,
+.progress-bar-small .progress-bar {
     height: 4px;
+    line-height: 4px;
     border-radius: 2px;
 }
 
-.progress-bar-large {
+.progress-bar-large,
+.progress-bar-large .progress-bar {
     height: 12px;
+    line-height: 12px;
     border-radius: 6px;
 }
 
@@ -35,31 +41,31 @@
     cursor: pointer;
 }
 
-.widget-progress-bar .progress-bar-default {
+.widget-progress-bar.progress-bar-default .progress-bar {
     background-color: $brand-default;
 }
 
-.widget-progress-bar .progress-bar-primary {
+.widget-progress-bar.progress-bar-primary .progress-bar {
     background-color: $brand-primary;
 }
 
-.widget-progress-bar .progress-bar-success {
+.widget-progress-bar.progress-bar-success .progress-bar {
     background-color: $brand-success;
 }
 
-.widget-progress-bar .progress-bar-info {
+.widget-progress-bar.progress-bar-info .progress-bar {
     background-color: $brand-info;
 }
 
-.widget-progress-bar .progress-bar-warning {
+.widget-progress-bar.progress-bar-warning .progress-bar {
     background-color: $brand-warning;
 }
 
-.widget-progress-bar .progress-bar-danger {
+.widget-progress-bar.progress-bar-danger .progress-bar {
     background-color: $brand-danger;
 }
 
-.widget-progress-bar .progress-bar-inverse {
+.widget-progress-bar.progress-bar-inverse .progress-bar {
     background-color: $brand-inverse;
 }
 
