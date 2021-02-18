@@ -292,7 +292,7 @@ export const navigation: VariablesNavigation = {
     },
     bottomBar: {
         color: contrast.high,
-        selectedTextColor: contrast.high,
+        selectedTextColor: brand.primary,
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
         fontSize: font.sizeSmall,
