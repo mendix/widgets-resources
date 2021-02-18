@@ -9,7 +9,7 @@ exports[`Progress bar has progress bar structure 1`] = `
     onClick={[MockFunction]}
   >
     <div
-      className="progress-bar progress-bar-default progress-bar-medium"
+      className="progress-bar progress-bar-default"
       style={
         Object {
           "width": "23%",
