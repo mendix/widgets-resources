@@ -111,8 +111,6 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
                 columnSize: "grow"
             },
             buildRow(values),
-            buildRow(values),
-            buildRow(values),
             buildRow(values)
         ]
     };
