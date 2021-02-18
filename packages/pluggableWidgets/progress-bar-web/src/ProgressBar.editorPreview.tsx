@@ -3,6 +3,7 @@ import { createElement, ReactElement } from "react";
 import { ProgressBarPreviewProps } from "../typings/ProgressBarProps";
 import { ProgressBar } from "./components/ProgressBar";
 import { defaultValues, ProgressBarValues } from "./progressBarValues";
+import { calculatePercentage } from "./util";
 
 export function preview(props: ProgressBarPreviewProps): ReactElement {
     function getProgressBarValues(): ProgressBarValues {
@@ -43,6 +44,8 @@ export function preview(props: ProgressBarPreviewProps): ReactElement {
                         <props.customLabel.renderer>
                             <div />
                         </props.customLabel.renderer>
+                    ) : props.labelType === "percentage" ? (
+                        `${calculatePercentage(currentValue, minValue, maxValue)}%`
                     ) : (
                         props.labelText
                     )

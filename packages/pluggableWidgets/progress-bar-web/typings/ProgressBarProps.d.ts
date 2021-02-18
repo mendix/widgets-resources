@@ -8,7 +8,7 @@ import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type TypeEnum = "static" | "dynamic" | "expression";
 
-export type LabelTypeEnum = "text" | "custom";
+export type LabelTypeEnum = "text" | "percentage" | "custom";
 
 export interface ProgressBarContainerProps {
     name: string;

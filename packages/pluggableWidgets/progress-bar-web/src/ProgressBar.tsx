@@ -2,6 +2,7 @@ import { createElement, FunctionComponent, useCallback } from "react";
 import { ProgressBarContainerProps } from "../typings/ProgressBarProps";
 import { ProgressBar as ProgressBarComponent } from "./components/ProgressBar";
 import { defaultValues, ProgressBarValues } from "./progressBarValues";
+import { calculatePercentage } from "./util";
 
 export const ProgressBar: FunctionComponent<ProgressBarContainerProps> = props => {
     function getProgressBarValues(): ProgressBarValues {
@@ -38,7 +39,15 @@ export const ProgressBar: FunctionComponent<ProgressBarContainerProps> = props =
             minValue={minValue}
             maxValue={maxValue}
             onClick={props.onClick ? onClick : undefined}
-            label={props.showLabel ? (props.labelType === "custom" ? props.customLabel : props.labelText?.value) : null}
+            label={
+                props.showLabel
+                    ? props.labelType === "custom"
+                        ? props.customLabel
+                        : props.labelType === "percentage"
+                        ? `${calculatePercentage(currentValue, minValue, maxValue)}%`
+                        : props.labelText?.value
+                    : null
+            }
         />
     );
 };

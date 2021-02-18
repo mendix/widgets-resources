@@ -1,6 +1,7 @@
 import { createElement, CSSProperties, ReactElement, ReactNode } from "react";
 import classNames from "classnames";
 import { Alert } from "@widgets-resources/piw-utils";
+import { calculatePercentage } from "../util";
 
 export interface ProgressBarProps {
     class: string;
@@ -10,18 +11,6 @@ export interface ProgressBarProps {
     maxValue: number;
     onClick: (() => void) | undefined;
     label: ReactNode;
-}
-
-function calculatePercentage(currentValue: number, minValue: number, maxValue: number): number {
-    if (currentValue < minValue) {
-        return 0;
-    }
-    if (currentValue > maxValue) {
-        return 100;
-    }
-    const range = maxValue - minValue;
-    const percentage = Math.round(((currentValue - minValue) / range) * 100);
-    return Math.abs(percentage);
 }
 
 function getValuesErrorMessage(currentValue: number, minValue: number, maxValue: number): string | null {
@@ -47,6 +36,7 @@ export function ProgressBar({
     label
 }: ProgressBarProps): ReactElement {
     const errorMessage = getValuesErrorMessage(currentValue, minValue, maxValue);
+    const percentage = calculatePercentage(currentValue, minValue, maxValue);
     return (
         <div className={classNames("widget-progress-bar", "progress-bar-medium", className)} style={style}>
             <div
@@ -56,10 +46,7 @@ export function ProgressBar({
                 })}
                 onClick={onClick}
             >
-                <div
-                    className={classNames("progress-bar", "progress-bar-default")}
-                    style={{ width: `${calculatePercentage(currentValue, minValue, maxValue)}%` }}
-                >
+                <div className={classNames("progress-bar", "progress-bar-default")} style={{ width: `${percentage}%` }}>
                     {label}
                 </div>
             </div>

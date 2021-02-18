@@ -94,6 +94,7 @@
                     <description />
                     <enumerationValues>
                         <enumerationValue key="text">Text</enumerationValue>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
                 </property>

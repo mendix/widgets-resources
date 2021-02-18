@@ -24,10 +24,11 @@ export function getProperties(values: ProgressBarPreviewProps, defaultProperties
     }
 
     if (values.showLabel) {
-        if (values.labelType === "custom") {
-            hidePropertyIn(defaultProperties, values, "labelText");
-        } else {
+        if (values.labelType !== "custom") {
             hidePropertyIn(defaultProperties, values, "customLabel");
+        }
+        if (values.labelType !== "text") {
+            hidePropertyIn(defaultProperties, values, "labelText");
         }
     } else {
         hidePropertiesIn(defaultProperties, values, ["customLabel", "labelText", "labelType"]);
