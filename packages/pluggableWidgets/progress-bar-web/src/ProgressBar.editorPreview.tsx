@@ -36,13 +36,7 @@ export function preview(props: ProgressBarPreviewProps): ReactElement {
             currentValue={currentValue}
             minValue={minValue}
             maxValue={maxValue}
-            onClick={
-                props.onClick
-                    ? () => {
-                          // do nothing
-                      }
-                    : undefined
-            }
+            onClick={undefined}
             label={
                 props.showLabel ? (
                     props.labelType === "custom" ? (

@@ -8,13 +8,13 @@ export const ProgressBar: FunctionComponent<ProgressBarContainerProps> = props =
         switch (props.type) {
             case "dynamic":
                 return {
-                    currentValue: Number(props.dynamicCurrentValue?.value ?? defaultValues.currentValue),
+                    currentValue: Number(props.dynamicCurrentValue?.value ?? 0),
                     minValue: Number(props.dynamicMinValue?.value ?? defaultValues.minValue),
                     maxValue: Number(props.dynamicMaxValue?.value ?? defaultValues.maxValue)
                 };
             case "expression":
                 return {
-                    currentValue: Number(props.expressionCurrentValue?.value ?? defaultValues.currentValue),
+                    currentValue: Number(props.expressionCurrentValue?.value ?? 0),
                     minValue: Number(props.expressionMinValue?.value ?? defaultValues.minValue),
                     maxValue: Number(props.expressionMaxValue?.value ?? defaultValues.maxValue)
                 };
