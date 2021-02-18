@@ -946,5 +946,28 @@
                 }
             ]
         }
-    ]
+    ],
+    "Table": [
+        {
+            "name": "Style",
+            "type": "Dropdown",
+            "description": "Change the appearance of cells in the table.",
+            "options": [
+                {
+                    "name": "Bordered",
+                    "class": "table-bordered"
+                },
+                {
+                    "name": "Lined",
+                    "class": "table-lined"
+                }
+            ]
+        },
+        {
+            "name": "Compact",
+            "type": "Toggle",
+            "description": "Change the spacing between cells to be compact.",
+            "class": "table-compact"
+        },
+    ],
 }
