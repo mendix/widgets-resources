@@ -14,27 +14,28 @@
 
 .widget-progress-bar {
     width: 100%;
+    border-radius: $border-radius-default;
 }
 
 .progress-bar-medium,
 .progress-bar-medium .progress-bar {
-    height: 8px;
-    line-height: 8px;
-    border-radius: $border-radius-default;
+    height: 16px;
+    line-height: 16px;
+    font-size: $font-size-small;
 }
 
 .progress-bar-small,
 .progress-bar-small .progress-bar {
-    height: 4px;
-    line-height: 4px;
-    border-radius: 2px;
+    height: 8px;
+    line-height: 8px;
+    font-size: 0px;
 }
 
 .progress-bar-large,
 .progress-bar-large .progress-bar {
-    height: 12px;
-    line-height: 12px;
-    border-radius: 6px;
+    height: 24px;
+    line-height: 24px;
+    font-size: $font-size-default;
 }
 
 .widget-progress-bar-clickable:hover {
