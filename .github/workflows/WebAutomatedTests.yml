@@ -27,7 +27,7 @@ jobs:
             - name: "Defining environment variables"
               id: variables
               run: |
-                  export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.all }}" | grep -v "^packages")
+                  export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.added_modified }}" | grep -v "^packages")
                   echo "::set-output name=arg::$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
             - name: "Defining cache"
               uses: actions/cache@v2
