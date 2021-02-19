@@ -46,6 +46,8 @@
 }
 
 // Color variations
+.text-secondary,
+.text-secondary:hover,
 .text-default,
 .text-default:hover {
     color: $font-color-default !important;

@@ -271,6 +271,10 @@
                     "class": "background-primary"
                 },
                 {
+                    "name": "Brand Secondary",
+                    "class": "background-secondary"
+                },
+                {
                     "name": "Brand Success",
                     "oldNames": ["Success"],
                     "class": "background-success"
@@ -474,14 +478,14 @@
             "description": "Choose one of the following styles to change the appearance of the groupbox.",
             "options": [
                 {
-                    "name": "Brand Default",
-                    "oldNames": ["Default"],
-                    "class": "groupbox-default"
-                },
-                {
                     "name": "Brand Primary",
                     "oldNames": ["Primary"],
                     "class": "groupbox-primary"
+                },
+                {
+                    "name": "Brand Secondary",
+                    "oldNames": ["Default", "Brand Default"],
+                    "class": "groupbox-secondary"
                 },
                 {
                     "name": "Brand Success",
@@ -618,24 +622,14 @@
             "description": "Change the appearance of a label.",
             "options": [
                 {
-                    "name": "Brand Default",
-                    "oldNames": ["Default"],
-                    "class": "label-default"
-                },
-                {
                     "name": "Brand Primary",
                     "oldNames": ["Primary"],
                     "class": "label-primary"
                 },
                 {
-                    "name": "Brand Inverse",
-                    "oldNames": ["Inverse"],
-                    "class": "label-inverse"
-                },
-                {
-                    "name": "Brand Info",
-                    "oldNames": ["Info"],
-                    "class": "label-info"
+                    "name": "Brand Secondary",
+                    "oldNames": ["Default", "Brand Default"],
+                    "class": "label-secondary"
                 },
                 {
                     "name": "Brand Success",
@@ -761,24 +755,14 @@
                     "class": "text-detail"
                 },
                 {
-                    "name": "Brand Default",
-                    "oldNames": ["Default"],
-                    "class": "text-default"
-                },
-                {
                     "name": "Brand Primary",
                     "oldNames": ["Primary"],
                     "class": "text-primary"
                 },
                 {
-                    "name": "Brand Inverse",
-                    "oldNames": ["Inverse"],
-                    "class": "text-inverse"
-                },
-                {
-                    "name": "Brand Info",
-                    "oldNames": ["Info"],
-                    "class": "text-info"
+                    "name": "Brand Secondary",
+                    "oldNames": ["Default", "Brand Default"],
+                    "class": "text-secondary"
                 },
                 {
                     "name": "Brand Success",
