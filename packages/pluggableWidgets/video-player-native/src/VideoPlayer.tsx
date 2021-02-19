@@ -1,11 +1,10 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { Component, createElement } from "react";
+import { createElement, ReactElement, useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
-import Video, { OnLoadData } from "react-native-video";
+import Video from "react-native-video";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
-import { defaultVideoStyle } from "./ui/Styles";
-
-export type Props = VideoPlayerProps<undefined>;
+import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
+import { isAvailable } from "@widgets-resources/piw-utils";
 
 const enum StatusEnum {
     ERROR = "error",
@@ -14,74 +13,49 @@ const enum StatusEnum {
     NOT_READY = "not-ready"
 }
 
-interface State {
-    aspectRatio?: number;
-    status: StatusEnum;
-}
+export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
+    const [styles, setStyles] = useState(flattenStyles(defaultVideoStyle, props.style));
+    const [status, setStatus] = useState(StatusEnum.NOT_READY);
+    const [videoAspectRatio, setVideoAspectRatio] = useState(0);
 
-export class VideoPlayer extends Component<Props, State> {
-    readonly state: State = {
-        status: StatusEnum.NOT_READY
-    };
-
-    private readonly onLoadStartHandler = this.onLoadStart.bind(this);
-    private readonly onLoadHandler = this.onLoad.bind(this);
-    private readonly onErrorHandler = this.onError.bind(this);
-    private readonly styles = flattenStyles(defaultVideoStyle, this.props.style);
-
-    render(): JSX.Element {
-        const uri = this.props.videoUrl && this.props.videoUrl.value;
-
-        const styles = { ...this.styles.container };
-
-        if (this.props.aspectRatio && this.state.aspectRatio) {
-            this.styles.video.aspectRatio = this.state.aspectRatio;
-            styles.aspectRatio = this.state.aspectRatio;
-        } else if (!this.props.aspectRatio) {
-            styles.aspectRatio = undefined;
-            if (this.styles.video.width) {
-                styles.width = this.styles.video.width;
+    useEffect(() => {
+        const alteredStyles = JSON.parse(JSON.stringify(styles));
+        if (props.aspectRatio && videoAspectRatio !== 0) {
+            alteredStyles.video.aspectRatio = videoAspectRatio;
+            alteredStyles.container.aspectRatio = videoAspectRatio;
+        } else if (!props.aspectRatio) {
+            alteredStyles.container.aspectRatio = undefined;
+            if (alteredStyles.video.width) {
+                alteredStyles.container.width = alteredStyles.video.width;
             }
-            if (this.styles.video.height) {
-                styles.height = this.styles.video.height;
+            if (alteredStyles.video.height) {
+                alteredStyles.container.height = alteredStyles.video.height;
             }
         }
+        setStyles(alteredStyles);
+    }, [props.style, props.aspectRatio, videoAspectRatio]);
 
-        return (
-            <View style={styles}>
-                {this.state.status === StatusEnum.LOADING && (
-                    <ActivityIndicator color={this.styles.indicator.color} size="large" />
-                )}
-                {this.state.status === StatusEnum.ERROR && (
-                    <Text style={this.styles.errorMessage}>The video failed to load :(</Text>
-                )}
-                <Video
-                    testID={this.props.name}
-                    source={{ uri }}
-                    paused={!this.props.autoStart}
-                    muted={this.props.muted}
-                    repeat={this.props.loop}
-                    controls={this.props.showControls}
-                    onLoadStart={this.onLoadStartHandler}
-                    onLoad={this.onLoadHandler}
-                    onError={this.onErrorHandler}
-                    style={this.state.status !== StatusEnum.READY ? { height: 0 } : this.styles.video}
-                    useTextureView={false}
-                    resizeMode={this.props.aspectRatio ? "contain" : "stretch"}
-                />
-            </View>
-        );
-    }
-
-    private onLoadStart(): void {
-        this.setState({ status: StatusEnum.LOADING });
-    }
-
-    private onLoad(data: OnLoadData): void {
-        this.setState({ status: StatusEnum.READY, aspectRatio: data.naturalSize.width / data.naturalSize.height });
-    }
-
-    private onError(): void {
-        this.setState({ status: StatusEnum.ERROR });
-    }
+    return (
+        <View style={styles.container}>
+            {status === StatusEnum.LOADING && <ActivityIndicator color={styles.indicator.color} size="large" />}
+            {status === StatusEnum.ERROR && <Text style={styles.errorMessage}>The video failed to load :(</Text>}
+            <Video
+                testID={props.name}
+                source={{ uri: isAvailable(props.videoUrl) ? props.videoUrl.value : undefined }}
+                paused={!props.autoStart}
+                muted={props.muted}
+                repeat={props.loop}
+                controls={props.showControls}
+                onLoadStart={() => setStatus(StatusEnum.LOADING)}
+                onLoad={data => {
+                    setStatus(StatusEnum.READY);
+                    setVideoAspectRatio(data.naturalSize.width / data.naturalSize.height);
+                }}
+                onError={() => setStatus(StatusEnum.ERROR)}
+                style={status !== StatusEnum.READY ? { height: 0 } : styles.video}
+                useTextureView={false}
+                resizeMode={props.aspectRatio ? "contain" : "stretch"}
+            />
+        </View>
+    );
 }
