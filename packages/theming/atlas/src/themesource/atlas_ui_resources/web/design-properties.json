@@ -968,6 +968,31 @@
             "type": "Toggle",
             "description": "Change the spacing between cells to be compact.",
             "class": "table-compact"
-        },
+        }
     ],
+    "com.mendix.widget.web.badge.Badge": [
+        {
+            "name": "Style",
+            "type": "Dropdown",
+            "description": "The brand style affecting this element's appearance.",
+            "options": [
+                {
+                    "name": "Brand Secondary",
+                    "class": "label-secondary"
+                },
+                {
+                    "name": "Brand Success",
+                    "class": "label-success"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "label-warning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "label-danger"
+                }
+            ]
+        }
+    ]
 }

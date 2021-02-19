@@ -6,12 +6,12 @@
 //
 
 /* ==========================================================================
-   Labels
+   Badges
 
-   Default labels combined with Bootstrap labels
+   Override of default Bootstrap badge style
 ========================================================================== */
 
-.label {
+.badge {
     display: inline-block;
     margin: 0;
     padding: $spacing-smaller $spacing-small;
@@ -19,7 +19,6 @@
     vertical-align: baseline;
     white-space: nowrap;
     color: #ffffff;
-    border-radius: 0.25em;
     font-size: 100%;
     line-height: 1;
 
@@ -27,4 +26,31 @@
         font-weight: $font-weight-normal;
         all: unset;
     }
+}
+
+/* ==========================================================================
+   Badge-web
+
+   Widget styles
+========================================================================== */
+
+.widget-badge {
+    color: $label-primary-color;
+    background-color: $label-primary-bg;
+}
+
+.widget-badge-clickable {
+    cursor: pointer;
+}
+
+.widget-badge.badge:empty {
+    display: initial;
+    /* Fix padding to stay round */
+    padding: $spacing-smaller ($spacing-small + 2px);
+}
+
+.widget-badge.label:empty {
+    display: initial;
+    /* Fix padding to stay square */
+    padding: $spacing-smaller ($spacing-small + 2px);
 }

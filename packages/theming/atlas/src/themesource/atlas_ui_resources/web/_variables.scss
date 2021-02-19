@@ -493,6 +493,7 @@ $label-danger-bg: $brand-danger !default;
 $label-default-border-color: $brand-default !default;
 $label-primary-border-color: $brand-primary !default;
 $label-info-border-color: $brand-info !default;
+$label-inverse-border-color: $brand-inverse !default;
 $label-success-border-color: $brand-success !default;
 $label-warning-border-color: $brand-warning !default;
 $label-danger-border-color: $brand-danger !default;
@@ -565,6 +566,12 @@ $timeline-grouping-border-color: $timeline-border-color !default;
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
+// Smallest spacing
+$spacing-smallest: 2px !default;
+
+// Smaller spacing
+$spacing-smaller: 4px !default;
+
 // Small spacing
 $spacing-small: 8px !default;
 
@@ -577,6 +584,12 @@ $m-spacing-medium: 16px !default;
 $spacing-large: 24px !default;
 $t-spacing-large: 24px !default;
 $m-spacing-large: 16px !default;
+
+// Larger spacing
+$spacing-larger: 32px !default;
+
+// Largest spacing
+$spacing-largest: 48px !default;
 
 // Layout spacing
 $layout-spacing-top: 24px !default;
