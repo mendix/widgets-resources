@@ -35,7 +35,16 @@ export class VideoPlayer extends Component<Props, State> {
         const styles = { ...this.styles.container };
 
         if (this.props.aspectRatio && this.state.aspectRatio) {
+            this.styles.video.aspectRatio = this.state.aspectRatio;
             styles.aspectRatio = this.state.aspectRatio;
+        } else if (!this.props.aspectRatio) {
+            styles.aspectRatio = undefined;
+            if (this.styles.video.width) {
+                styles.width = this.styles.video.width;
+            }
+            if (this.styles.video.height) {
+                styles.height = this.styles.video.height;
+            }
         }
 
         return (
@@ -58,14 +67,14 @@ export class VideoPlayer extends Component<Props, State> {
                     onError={this.onErrorHandler}
                     style={this.state.status !== StatusEnum.READY ? { height: 0 } : this.styles.video}
                     useTextureView={false}
-                    resizeMode="contain"
+                    resizeMode={this.props.aspectRatio ? "contain" : "stretch"}
                 />
             </View>
         );
     }
 
     private onLoadStart(): void {
-        this.setState({ status: StatusEnum.LOADING, aspectRatio: undefined });
+        this.setState({ status: StatusEnum.LOADING });
     }
 
     private onLoad(data: OnLoadData): void {
@@ -73,6 +82,6 @@ export class VideoPlayer extends Component<Props, State> {
     }
 
     private onError(): void {
-        this.setState({ status: StatusEnum.ERROR, aspectRatio: undefined });
+        this.setState({ status: StatusEnum.ERROR });
     }
 }
