@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge renders as a badge 1`] = `
+<span
+  className="widget-badge badge"
+>
+  text
+</span>
+`;
+
+exports[`Badge renders as a button like element when onClick function is passed 1`] = `
+<span
+  className="widget-badge badge widget-badge-clickable"
+  onClick={[MockFunction]}
+  role="button"
+>
+  text
+</span>
+`;
+
+exports[`Badge renders as a button like element when onKeyDown function is passed 1`] = `
+<span
+  className="widget-badge badge"
+  onKeyDown={[MockFunction]}
+  role="button"
+>
+  text
+</span>
+`;
+
+exports[`Badge renders as a label 1`] = `
+<span
+  className="widget-badge label"
+>
+  text
+</span>
+`;
+
+exports[`Badge renders custom classes 1`] = `
+<span
+  className="widget-badge badge custom-class"
+>
+  text
+</span>
+`;
+
+exports[`Badge renders custom styles 1`] = `
+<span
+  className="widget-badge badge"
+  style={
+    Object {
+      "padding": 5,
+    }
+  }
+>
+  text
+</span>
+`;
+
+exports[`Badge renders when an empty string is passed as value 1`] = `
+<span
+  className="widget-badge badge"
+/>
+`;
+
+exports[`Badge renders with a tabIndex 1`] = `
+<span
+  className="widget-badge badge"
+  tabIndex={1}
+>
+  text
+</span>
+`;
