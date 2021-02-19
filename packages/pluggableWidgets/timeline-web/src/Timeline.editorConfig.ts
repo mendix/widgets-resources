@@ -1,5 +1,13 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import {
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    StructurePreviewProps
+} from "@widgets-resources/piw-utils";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
+import lineAndDotSVG from "./assets/lineAndDot.svg";
+import { getHeaderOption, GroupHeaderConfig } from "./utils/utils";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
     if (values.customVisualization) {
@@ -65,4 +73,95 @@ export function check(values: TimelinePreviewProps): Problem[] {
         });
     }
     return errors;
+}
+
+export function getPreview(values: TimelinePreviewProps): StructurePreviewProps {
+    return {
+        type: "Container",
+        children: [
+            { type: "Container", children: [], padding: 8 },
+            {
+                type: "RowLayout",
+                children: [
+                    { type: "Container", children: [], padding: 5, grow: 0 },
+                    {
+                        type: "Container",
+                        children: [
+                            {
+                                type: "Container",
+                                children: [
+                                    {
+                                        content: getGroupHeadingUserText(values),
+                                        type: "Text",
+                                        fontSize: 10,
+                                        bold: true,
+                                        grow: 1
+                                    }
+                                ],
+                                padding: 5
+                            }
+                        ],
+                        borderRadius: 15,
+                        borderWidth: 1,
+                        borders: true,
+                        grow: 0
+                    },
+                    { content: "", type: "Text" }
+                ],
+                columnSize: "grow"
+            },
+            buildRow(values),
+            buildRow(values)
+        ]
+    };
+
+    function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
+        return {
+            type: "RowLayout",
+            children: [
+                {
+                    type: "Image",
+                    document: decodeURIComponent(lineAndDotSVG.replace("data:image/svg+xml,", "")),
+                    width: 65,
+                    grow: 0
+                },
+                {
+                    type: "Container",
+                    children: [
+                        { type: "Container", children: [], padding: 18 },
+                        {
+                            type: "RowLayout",
+                            children: [
+                                { type: "Text", content: values.title || "Title", bold: true },
+                                { type: "Text", content: "", grow: 3 },
+                                { type: "Text", content: values.timeIndication || "Time", fontColor: "#264AE5" }
+                            ]
+                        },
+                        { type: "Container", children: [], padding: 4 },
+                        { type: "Text", content: values.description || "Description" }
+                    ]
+                }
+            ],
+            columnSize: "grow"
+        };
+    }
+
+    function getGroupHeadingUserText(config: GroupHeaderConfig) {
+        switch (getHeaderOption(config)) {
+            case "dayName":
+                return "[Day]";
+            case "dayMonth":
+                return "[Day] [Month]";
+            case "fullDate":
+                return "[Day/Month/Year]";
+            case "month":
+                return "[Month]";
+            case "monthYear":
+                return "[Month] [Year]";
+            case "year":
+                return "[Year]";
+            default:
+                return "Today";
+        }
+    }
 }

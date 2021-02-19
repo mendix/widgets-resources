@@ -18,7 +18,7 @@ export interface TimelineContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     data: ListValue;
     title?: ListExpressionValue<string>;
     description?: ListExpressionValue<string>;
