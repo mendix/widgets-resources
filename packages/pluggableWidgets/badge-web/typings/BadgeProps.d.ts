@@ -8,8 +8,6 @@ import { ActionValue, DynamicValue } from "mendix";
 
 export type TypeEnum = "badge" | "label";
 
-export type BrandStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
-
 export interface BadgeContainerProps {
     name: string;
     class: string;
@@ -17,7 +15,6 @@ export interface BadgeContainerProps {
     tabIndex?: number;
     type: TypeEnum;
     value?: DynamicValue<string>;
-    brandStyle: BrandStyleEnum;
     onClick?: ActionValue;
 }
 
@@ -26,6 +23,5 @@ export interface BadgePreviewProps {
     style: string;
     type: TypeEnum;
     value: string;
-    brandStyle: BrandStyleEnum;
     onClick: {} | null;
 }
