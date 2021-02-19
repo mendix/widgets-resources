@@ -1,7 +1,6 @@
 import { createElement, ReactElement, useCallback } from "react";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
-import "./ui/Datagrid.scss";
 import { Table } from "./components/Table";
 import { parseStyle } from "@widgets-resources/piw-utils";
 
@@ -96,5 +95,5 @@ export function preview(props: DatagridPreviewProps): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/Datagrid.scss") + require("./ui/DatagridPreview.scss");
+    return require("./ui/DatagridPreview.scss");
 }

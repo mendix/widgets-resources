@@ -13,7 +13,3 @@ export function preview(props: DatagridNumberFilterPreviewProps): ReactElement {
         />
     );
 }
-
-export function getPreviewCss(): string {
-    return require("./ui/DatagridNumberFilter.scss");
-}

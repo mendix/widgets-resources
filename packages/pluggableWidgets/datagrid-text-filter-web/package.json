@@ -1,7 +1,7 @@
 {
   "name": "datagrid-text-filter-web",
   "widgetName": "DatagridTextFilter",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "",
   "copyright": "Mendix B.V.",
   "repository": {
@@ -21,7 +21,7 @@
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 9",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:ts"

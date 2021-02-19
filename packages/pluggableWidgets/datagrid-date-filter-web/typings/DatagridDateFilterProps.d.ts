@@ -12,7 +12,7 @@ export interface DatagridDateFilterContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     defaultValue?: DynamicValue<Date>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;

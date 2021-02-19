@@ -1,7 +1,6 @@
 import { createElement, ReactElement } from "react";
 import { DatagridNumberFilterContainerProps } from "../typings/DatagridNumberFilterProps";
 
-import "./ui/DatagridNumberFilter.scss";
 import { FilterComponent } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@widgets-resources/piw-utils";

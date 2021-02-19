@@ -4,7 +4,7 @@ const concurrently = require("concurrently");
 
 const mode = process.argv[2] || "build";
 const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
-let outputProjectDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
+const outputProjectDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
 let outputThemeDir;
 let outputThemeSourceDir;
 let projectDeployDirWeb;
@@ -12,13 +12,13 @@ let projectDeployDirWeb;
 switch (mode) {
     case "build":
     case "start":
-        outputThemeDir = join(outputProjectDir, "theme");
+        outputThemeDir = join(outputProjectDir);
         outputThemeSourceDir = join(outputProjectDir, "themesource/atlas_ui_resources");
         projectDeployDirWeb = join(outputProjectDir, "deployment/web");
         break;
     case "release":
-        outputThemeDir = join(__dirname, "../dist/theme");
-        outputThemeSourceDir = join(__dirname, "../dist/themesource");
+        outputThemeDir = join(__dirname, "../dist");
+        outputThemeSourceDir = join(__dirname, "../dist/themesource/atlas_ui_resources");
         break;
 }
 
@@ -30,7 +30,7 @@ concurrently(
     [
         {
             name: "web-theme-content",
-            command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${outputThemeDir}/web"`
+            command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${outputThemeDir}/theme/web"`
         },
         {
             name: "web-themesource-content",
@@ -38,7 +38,7 @@ concurrently(
         },
         {
             name: "native-typescript",
-            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputProjectDir}'`
+            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputThemeDir}'`
         },
         {
             name: "native-design-properties-and-manifest",
