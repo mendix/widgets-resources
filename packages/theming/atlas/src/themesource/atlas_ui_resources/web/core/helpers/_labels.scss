@@ -9,10 +9,12 @@
    Labels
 
 //== Design Properties
-//## Helper classes to change the look and feel of the component
+//## Helper classes to change the look and feel of the component including
+badge widget
 ========================================================================== */
 // Color variations
-.label-default {
+.label-default,
+.label-secondary {
     color: $label-default-color;
     background-color: $label-default-bg;
 }
