@@ -259,6 +259,7 @@ exports[`QRCode renders a qr code 1`] = `
             Array [
               "stroke",
               "strokeWidth",
+              "strokeLinecap",
             ]
           }
           rotation={0}

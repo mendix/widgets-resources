@@ -33,7 +33,7 @@ describe("Date picker component", () => {
             <DatePicker adjustable value={null} setValue={setValue} dateFormat="dd/MM/yyyy" locale="nl-NL" />
         );
 
-        component.find("a").simulate("change", { target: { value: "01/12/2020" } });
+        component.find("r").simulate("change", { target: { value: "01/12/2020" } });
 
         expect(setValue).toBeCalledTimes(1);
     });

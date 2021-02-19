@@ -32,7 +32,6 @@ exports[`Popup menu renders menu triggerer 1`] = `
   </View>
   <Modal
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onRequestClose={[Function]}
     supportedOrientations={
       Array [
@@ -195,7 +194,6 @@ exports[`Popup menu with basic items renders 1`] = `
   </View>
   <Modal
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onRequestClose={[Function]}
     supportedOrientations={
       Array [
@@ -358,7 +356,6 @@ exports[`Popup menu with basic items renders with custom styles 1`] = `
   </View>
   <Modal
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onRequestClose={[Function]}
     supportedOrientations={
       Array [
@@ -523,7 +520,6 @@ exports[`Popup menu with custom items renders 1`] = `
   </View>
   <Modal
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onRequestClose={[Function]}
     supportedOrientations={
       Array [
@@ -644,7 +640,6 @@ exports[`Popup menu with custom items renders with custom styles 1`] = `
   </View>
   <Modal
     hardwareAccelerated={false}
-    onDismiss={[Function]}
     onRequestClose={[Function]}
     supportedOrientations={
       Array [

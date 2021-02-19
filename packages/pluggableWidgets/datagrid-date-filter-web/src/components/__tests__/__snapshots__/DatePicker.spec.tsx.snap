@@ -6,7 +6,7 @@ exports[`Date picker component renders correctly 1`] = `
     className="sr-only"
     id="undefined-label"
   />
-  <a
+  <r
     allowSameDay={false}
     ariaLabelledBy="undefined-label"
     autoFocus={false}
@@ -61,6 +61,7 @@ exports[`Date picker component renders correctly 1`] = `
     renderDayContents={[Function]}
     selected={null}
     shouldCloseOnSelect={false}
+    showFourColumnMonthYearPicker={false}
     showFullMonthYearPicker={false}
     showMonthDropdown={true}
     showMonthYearPicker={false}
@@ -97,7 +98,7 @@ exports[`Date picker component renders correctly when is not adjustable 1`] = `
     className="sr-only"
     id="undefined-label"
   />
-  <a
+  <r
     allowSameDay={false}
     ariaLabelledBy="undefined-label"
     autoFocus={false}
@@ -152,6 +153,7 @@ exports[`Date picker component renders correctly when is not adjustable 1`] = `
     renderDayContents={[Function]}
     selected={null}
     shouldCloseOnSelect={false}
+    showFourColumnMonthYearPicker={false}
     showFullMonthYearPicker={false}
     showMonthDropdown={true}
     showMonthYearPicker={false}
@@ -188,7 +190,7 @@ exports[`Date picker component renders correctly with different locale and date 
     className="sr-only"
     id="undefined-label"
   />
-  <a
+  <r
     allowSameDay={false}
     ariaLabelledBy="undefined-label"
     autoFocus={false}
@@ -243,6 +245,7 @@ exports[`Date picker component renders correctly with different locale and date 
     renderDayContents={[Function]}
     selected={null}
     shouldCloseOnSelect={false}
+    showFourColumnMonthYearPicker={false}
     showFullMonthYearPicker={false}
     showMonthDropdown={true}
     showMonthYearPicker={false}
