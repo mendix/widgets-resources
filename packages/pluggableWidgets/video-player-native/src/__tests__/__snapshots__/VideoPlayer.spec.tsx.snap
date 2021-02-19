@@ -5,9 +5,10 @@ exports[`VideoPlayer hides the loading indicator after load 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "aspectRatio": 1.7777777777777777,
+      "aspectRatio": undefined,
       "backgroundColor": "black",
       "justifyContent": "center",
+      "width": "100%",
     }
   }
 >
@@ -19,7 +20,7 @@ exports[`VideoPlayer hides the loading indicator after load 1`] = `
     onLoadStart={[Function]}
     paused={true}
     repeat={false}
-    resizeMode="contain"
+    resizeMode="stretch"
     source={
       Object {
         "uri": "https://mendix.com/video.mp4",
@@ -27,7 +28,6 @@ exports[`VideoPlayer hides the loading indicator after load 1`] = `
     }
     style={
       Object {
-        "height": "100%",
         "width": "100%",
       }
     }
@@ -64,7 +64,7 @@ exports[`VideoPlayer load a video and calculate the aspect ratio 1`] = `
     }
     style={
       Object {
-        "height": "100%",
+        "aspectRatio": 1.9494584837545126,
         "width": "100%",
       }
     }
@@ -79,9 +79,10 @@ exports[`VideoPlayer renders a loading indicator 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "aspectRatio": 1.7777777777777777,
+      "aspectRatio": undefined,
       "backgroundColor": "black",
       "justifyContent": "center",
+      "width": "100%",
     }
   }
 >
@@ -93,7 +94,7 @@ exports[`VideoPlayer renders a loading indicator 1`] = `
     onLoadStart={[Function]}
     paused={true}
     repeat={false}
-    resizeMode="contain"
+    resizeMode="stretch"
     source={
       Object {
         "uri": "https://mendix.com/video.mp4",
@@ -115,9 +116,10 @@ exports[`VideoPlayer shows the loading indicator if the source changes 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "aspectRatio": 1.7777777777777777,
+      "aspectRatio": undefined,
       "backgroundColor": "black",
       "justifyContent": "center",
+      "width": "100%",
     }
   }
 >
@@ -135,7 +137,7 @@ exports[`VideoPlayer shows the loading indicator if the source changes 1`] = `
     onLoadStart={[Function]}
     paused={true}
     repeat={false}
-    resizeMode="contain"
+    resizeMode="stretch"
     source={
       Object {
         "uri": "https://mendix.com/video.mp4",
