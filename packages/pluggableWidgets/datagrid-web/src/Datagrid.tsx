@@ -12,6 +12,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         ? props.datasource.limit / props.pageSize
         : props.datasource.offset / props.pageSize;
 
+    // @ts-ignore // TODO: Remove when Studio Pro 9.0.5 typings are released
+    props.datasource.requestTotalCount?.(isServerSide);
+
     useState(() => {
         if (isServerSide) {
             if (props.datasource.limit === Number.POSITIVE_INFINITY) {
