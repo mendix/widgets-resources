@@ -41,7 +41,7 @@ export const switchContainer: ViewStyle = {
  * Custom styles
  */
 
-export interface TextAreaStyleProps extends TextStyle, TextInputProps {}
+export interface TextAreaStyleProps extends TextStyle, Omit<TextInputProps, "textAlign"> {}
 
 interface CustomSwitchStyleProps {
     trackColorOn?: string;
@@ -152,9 +152,15 @@ export function processStyles(styles: FeedbackStyle): any {
     ];
     const textareaTextPropKeys: Array<keyof TextStyle> = ["color", "fontSize", "fontFamily", "fontWeight"];
 
-    const textAreaInputStyles = exclude<TextStyle, TextInputProps>(styles.textAreaInput, textInputStylePropsKeys);
+    const textAreaInputStyles = exclude<Omit<TextStyle, "textAlign">, TextInputProps>(
+        styles.textAreaInput,
+        textInputStylePropsKeys
+    );
 
-    const textAreaInputProps = only<TextAreaStyleProps, TextInputProps>(styles.textAreaInput, textInputStylePropsKeys);
+    const textAreaInputProps = only<Omit<TextAreaStyleProps, "textAlign">, TextInputProps>(
+        styles.textAreaInput,
+        textInputStylePropsKeys
+    );
 
     const switchInputStyles = exclude<TextStyle, SwitchStyleProps>(styles.switchInput, switchPropKeys);
 

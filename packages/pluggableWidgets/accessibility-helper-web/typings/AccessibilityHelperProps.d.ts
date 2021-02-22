@@ -28,7 +28,7 @@ export interface AccessibilityHelperContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     targetSelector: string;
     content: ReactNode;
     attributesList: AttributesListType[];

@@ -1,11 +1,11 @@
 import { Component, createElement, ReactNode } from "react";
-import { ColorState } from "react-color";
 import classNames = require("classnames");
 
 import { ColorPicker, Mode, PickerType } from "./ColorPicker";
 import { Input } from "./Input";
 import { Button } from "./Button";
 import { Label } from "./Label";
+import { ColorResult } from "react-color";
 
 interface WrapperProps {
     class: string;
@@ -194,7 +194,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     };
 
-    private updateColorValue = (color: ColorState): void => {
+    private updateColorValue = (color: ColorResult): void => {
         const { format, mxObject, colorAttribute } = this.props;
         this.previousColor = this.getValue(this.props.mxObject);
         if (color && mxObject && !this.disabled) {

@@ -10,7 +10,7 @@ export interface FieldsetContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     legend?: DynamicValue<string>;
     content: ReactNode;
 }
