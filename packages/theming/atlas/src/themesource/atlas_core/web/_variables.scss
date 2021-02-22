@@ -25,8 +25,6 @@ $gray-lighter: #f8f8f8 !default;
 //== Step 1: Brand Colors
 $brand-default: $gray-primary !default;
 $brand-primary: #264ae5 !default;
-$brand-inverse: #24276c !default;
-$brand-info: #0086d9 !default;
 $brand-success: #3cb33d !default;
 $brand-warning: #eca51c !default;
 $brand-danger: #e33f4e !default;
@@ -55,9 +53,6 @@ $m-header-height: 45px !default;
 $m-header-bg: $topbar-bg !default;
 $m-header-color: #555 !default;
 $m-header-title-size: 17px !default;
-
-// Sidebar
-$sidebar-bg: $brand-inverse !default;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
 $navbar-brand-name: $font-color-default !default;
@@ -135,7 +130,6 @@ $navigation-font-size: $font-size-default !default;
 $navigation-sub-font-size: $font-size-small !default;
 $navigation-glyph-size: 20px !default; // For glyphicons that you can select in the Mendix Modeler
 
-$navigation-bg: $brand-inverse !default;
 $navigation-bg-hover: lighten($navigation-bg, 4) !default;
 $navigation-bg-active: lighten($navigation-bg, 8) !default;
 $navigation-color: #fff !default;
@@ -201,7 +195,6 @@ $navtopbar-border-color: $topbar-border-color !default;
 $form-input-style: default !default;
 
 // Form Label
-$form-label-color: $brand-inverse !default;
 $form-label-size: $font-size-default !default;
 $form-label-weight: $font-weight-semibold !default;
 $form-label-gutter: 8px !default;
@@ -245,27 +238,21 @@ $btn-border-radius: $border-radius-default !default;
 
 // Button Background Color
 $btn-default-bg: #fff !default;
-$btn-inverse-bg: $brand-inverse !default;
 $btn-primary-bg: $brand-primary !default;
-$btn-info-bg: $brand-info !default;
 $btn-success-bg: $brand-success !default;
 $btn-warning-bg: $brand-warning !default;
 $btn-danger-bg: $brand-danger !default;
 
 // Button Border Color
 $btn-default-border-color: $gray-primary !default;
-$btn-inverse-border-color: $brand-inverse !default;
 $btn-primary-border-color: $brand-primary !default;
-$btn-info-border-color: $brand-info !default;
 $btn-success-border-color: $brand-success !default;
 $btn-warning-border-color: $brand-warning !default;
 $btn-danger-border-color: $brand-danger !default;
 
 // Button Text Color
 $btn-default-color: $brand-primary !default;
-$btn-inverse-color: #fff !default;
 $btn-primary-color: #fff !default;
-$btn-info-color: #fff !default;
 $btn-success-color: #fff !default;
 $btn-warning-color: #fff !default;
 $btn-danger-color: #fff !default;
@@ -275,9 +262,7 @@ $btn-default-icon-color: $gray !default;
 
 // Button Background Color
 $btn-default-bg-hover: $btn-default-border-color !default;
-$btn-inverse-bg-hover: mix($btn-inverse-bg, white, 80%) !default;
 $btn-primary-bg-hover: mix($btn-primary-bg, black, 80%) !default;
-$btn-info-bg-hover: mix($btn-info-bg, black, 80%) !default;
 $btn-success-bg-hover: mix($btn-success-bg, black, 80%) !default;
 $btn-warning-bg-hover: mix($btn-warning-bg, black, 80%) !default;
 $btn-danger-bg-hover: mix($btn-danger-bg, black, 80%) !default;
@@ -310,20 +295,10 @@ $color-default-dark: mix($brand-default, black, 70%) !default;
 $color-default-light: mix($brand-default, white, 40%) !default;
 $color-default-lighter: mix($brand-default, white, 20%) !default;
 
-$color-inverse-darker: mix($brand-inverse, black, 60%) !default;
-$color-inverse-dark: mix($brand-inverse, black, 70%) !default;
-$color-inverse-light: mix($brand-inverse, white, 40%) !default;
-$color-inverse-lighter: mix($brand-inverse, white, 20%) !default;
-
 $color-primary-darker: mix($brand-primary, black, 60%) !default;
 $color-primary-dark: mix($brand-primary, black, 70%) !default;
 $color-primary-light: mix($brand-primary, white, 40%) !default;
 $color-primary-lighter: mix($brand-primary, white, 20%) !default;
-
-$color-info-darker: mix($brand-info, black, 60%) !default;
-$color-info-dark: mix($brand-info, black, 70%) !default;
-$color-info-light: mix($brand-info, white, 60%) !default;
-$color-info-lighter: mix($brand-info, white, 20%) !default;
 
 $color-success-darker: mix($brand-success, black, 60%) !default;
 $color-success-dark: mix($brand-success, black, 70%) !default;
@@ -485,8 +460,6 @@ $wizard-visited-border-color: $wizard-visited !default;
 // Background Color
 $label-default-bg: $brand-default !default;
 $label-primary-bg: $brand-primary !default;
-$label-info-bg: $brand-info !default;
-$label-inverse-bg: $brand-inverse !default;
 $label-success-bg: $brand-success !default;
 $label-warning-bg: $brand-warning !default;
 $label-danger-bg: $brand-danger !default;
@@ -494,8 +467,6 @@ $label-danger-bg: $brand-danger !default;
 // Border Color
 $label-default-border-color: $brand-default !default;
 $label-primary-border-color: $brand-primary !default;
-$label-info-border-color: $brand-info !default;
-$label-inverse-border-color: $brand-inverse !default;
 $label-success-border-color: $brand-success !default;
 $label-warning-border-color: $brand-warning !default;
 $label-danger-border-color: $brand-danger !default;
@@ -503,8 +474,6 @@ $label-danger-border-color: $brand-danger !default;
 // Text Color
 $label-default-color: $font-color-default !default;
 $label-primary-color: #fff !default;
-$label-info-color: #fff !default;
-$label-inverse-color: #fff !default;
 $label-success-color: #fff !default;
 $label-warning-color: #fff !default;
 $label-danger-color: #fff !default;
@@ -514,9 +483,7 @@ $label-danger-color: #fff !default;
 
 // Background Color
 $groupbox-default-bg: $gray-primary !default;
-$groupbox-inverse-bg: $brand-inverse !default;
 $groupbox-primary-bg: $brand-primary !default;
-$groupbox-info-bg: $brand-info !default;
 $groupbox-success-bg: $brand-success !default;
 $groupbox-warning-bg: $brand-warning !default;
 $groupbox-danger-bg: $brand-danger !default;
@@ -524,9 +491,7 @@ $groupbox-white-bg: #fff !default;
 
 // Text Color
 $groupbox-default-color: $font-color-default !default;
-$groupbox-inverse-color: #fff !default;
 $groupbox-primary-color: #fff !default;
-$groupbox-info-color: #fff !default;
 $groupbox-success-color: #fff !default;
 $groupbox-warning-color: #fff !default;
 $groupbox-danger-color: #fff !default;
@@ -646,3 +611,84 @@ $screen-lg-max: ($screen-xl - 1) !default;
 $important-flex: true !default; // ./base/flex.scss
 $important-spacing: true !default; // ./base/spacing.scss
 $important-helpers: true !default; // ./helpers/helperclasses.scss
+
+//===== Legacy variables =====
+
+//== Step 1: Brand Colors
+$brand-inverse: #24276c !default;
+$brand-info: #0086d9 !default;
+
+//== Step 2: UI Customization
+// Sidebar
+$sidebar-bg: $brand-inverse !default;
+
+//== Navigation
+//## Used in components/navigation
+
+// Default Navigation styling
+$navigation-bg: $brand-inverse !default;
+
+//== Form
+//## Used in components/inputs
+
+// Form Label
+$form-label-color: $brand-inverse !default;
+
+//== Buttons
+//## Define background-color, border-color and text. Used in components/buttons
+
+// Button Background Color
+$btn-inverse-bg: $brand-inverse !default;
+$btn-info-bg: $brand-info !default;
+
+// Button Border Color
+$btn-inverse-border-color: $brand-inverse !default;
+$btn-info-border-color: $brand-info !default;
+
+// Button Text Color
+$btn-inverse-color: #fff !default;
+$btn-info-color: #fff !default;
+
+// Button Background Color
+$btn-inverse-bg-hover: mix($btn-inverse-bg, white, 80%) !default;
+$btn-info-bg-hover: mix($btn-info-bg, black, 80%) !default;
+
+//== Color variations
+//## These variations are used to support several other variables and components
+
+// Color variations
+$color-inverse-darker: mix($brand-inverse, black, 60%) !default;
+$color-inverse-dark: mix($brand-inverse, black, 70%) !default;
+$color-inverse-light: mix($brand-inverse, white, 40%) !default;
+$color-inverse-lighter: mix($brand-inverse, white, 20%) !default;
+
+$color-info-darker: mix($brand-info, black, 60%) !default;
+$color-info-dark: mix($brand-info, black, 70%) !default;
+$color-info-light: mix($brand-info, white, 60%) !default;
+$color-info-lighter: mix($brand-info, white, 20%) !default;
+
+//== Labels
+//## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
+
+// Background Color
+$label-info-bg: $brand-info !default;
+$label-inverse-bg: $brand-inverse !default;
+
+// Border Color
+$label-info-border-color: $brand-info !default;
+$label-inverse-border-color: $brand-inverse !default;
+
+// Text Color
+$label-info-color: #fff !default;
+$label-inverse-color: #fff !default;
+
+//== Groupbox
+//## Default variables for Groupbox Widget (used in components/groupbox)
+
+// Background Color
+$groupbox-inverse-bg: $brand-inverse !default;
+$groupbox-info-bg: $brand-info !default;
+
+// Text Color
+$groupbox-inverse-color: #fff !default;
+$groupbox-info-color: #fff !default;
