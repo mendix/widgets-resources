@@ -61,12 +61,14 @@ export function ShrinkingHeader(props: PropsWithChildren<ShrinkingHeaderProps>):
                 }
             } else {
                 if (headerRef.current) {
-                    headerRef.current.style.height = `${maxHeight -
-                        (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)}px`;
+                    headerRef.current.style.height = `${
+                        maxHeight - (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)
+                    }px`;
                 }
                 if (scrollableDivRef.current) {
-                    scrollableDivRef.current.style.paddingTop = `${maxHeight -
-                        (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)}px`;
+                    scrollableDivRef.current.style.paddingTop = `${
+                        maxHeight - (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop)
+                    }px`;
                 }
             }
         }
