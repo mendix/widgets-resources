@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { NativeModules } from "react-native";
-import ReactNativeFirebase from "react-native-firebase";
+import { NativeModules, Platform } from "react-native";
+import PushNotification, { PushNotificationObject } from "react-native-push-notification";
 
 /**
  * Displays the specified notification straight away.
@@ -28,49 +28,62 @@ export async function DisplayNotification(
     actionGuid?: string
 ): Promise<void> {
     // BEGIN USER CODE
-    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/displaying-notifications
+    // Documentation https://github.com/zo0r/react-native-push-notification
 
-    if (NativeModules && !NativeModules.RNFirebase) {
-        return Promise.reject(new Error("Firebase module is not available in your app"));
+    const isIOS = Platform.OS === "ios";
+    if (
+        NativeModules &&
+        ((isIOS && !NativeModules.RNCPushNotificationIOS) || (!isIOS && !NativeModules.RNPushNotification))
+    ) {
+        return Promise.reject(new Error("Notifications module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!body) {
         return Promise.reject(new Error("Input parameter 'Body' is required"));
     }
 
-    const channel = new firebase.notifications.Android.Channel(
-        "mendix-local-notifications",
-        "Local notifications",
-        firebase.notifications.Android.Importance.Default
-    );
-    await firebase.notifications().android.createChannel(channel);
+    const notification = { message: body } as PushNotificationObject;
 
-    const notification = new firebase.notifications.Notification()
-        .setBody(body)
-        .android.setChannelId("mendix-local-notifications");
+    if (!isIOS) {
+        const channelId = "mendix-local-notifications";
+        const channelExists = await new Promise(resolve =>
+            PushNotification.channelExists(channelId, (exists: boolean) => resolve(exists))
+        );
+        if (!channelExists) {
+            const channel = await new Promise(resolve =>
+                PushNotification.createChannel(
+                    {
+                        channelId,
+                        channelName: "Local notifications"
+                    },
+                    created => resolve(created)
+                )
+            );
+            if (!channel) {
+                return Promise.reject(new Error("Could not create the local notifications channel"));
+            }
+        }
+        notification.channelId = channelId;
+    }
 
     if (title) {
-        notification.setTitle(title);
+        notification.title = title;
     }
 
-    if (subtitle) {
-        notification.setSubtitle(subtitle);
+    if (subtitle && !isIOS) {
+        notification.subText = subtitle;
     }
 
-    if (playSound) {
-        notification.setSound("default");
-    }
+    notification.playSound = !!playSound;
 
     if (actionName || actionGuid) {
-        notification.setData({
+        notification.userInfo = {
             actionName,
             guid: actionGuid
-        });
+        };
     }
 
-    return firebase.notifications().displayNotification(notification);
-
+    PushNotification.localNotification(notification);
+    return Promise.resolve();
     // END USER CODE
 }

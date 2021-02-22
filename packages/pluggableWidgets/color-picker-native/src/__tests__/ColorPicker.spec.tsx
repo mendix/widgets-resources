@@ -31,7 +31,7 @@ describe("Color Picker", () => {
         const component = render(
             <ColorPicker {...defaultProps} color={new EditableValueBuilder<string>().isLoading().build()} />
         );
-        expect(component.queryByType(View)).toBeNull();
+        expect(component.UNSAFE_queryByType(View)).toBeNull();
     });
 
     it("renders with alpha slider", () => {

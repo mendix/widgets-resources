@@ -11,6 +11,7 @@ export interface AppEventsProps<Style> {
     name: string;
     style: Style[];
     onLoadAction?: ActionValue;
+    onUnloadAction?: ActionValue;
     onResumeAction?: ActionValue;
     onResumeTimeout: number;
     onOnlineAction?: ActionValue;
@@ -26,6 +27,7 @@ export interface AppEventsPreviewProps {
     class: string;
     style: string;
     onLoadAction: {} | null;
+    onUnloadAction: {} | null;
     onResumeAction: {} | null;
     onResumeTimeout: number | null;
     onOnlineAction: {} | null;

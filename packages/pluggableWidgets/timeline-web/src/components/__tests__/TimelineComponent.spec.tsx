@@ -4,10 +4,6 @@ import { actionValue, EditableValueBuilder } from "@widgets-resources/piw-utils"
 import TimelineComponent, { getGroupHeaderByType, TimelineComponentProps } from "../TimelineComponent";
 import { BasicItemType, CustomItemType } from "../../Timeline";
 
-jest.mock("mendix/components/web/Icon", () =>
-    jest.requireActual("../../__tests__/__mocks__/mendix/components/web/Icon")
-);
-
 const firstDate = new Date(Date.UTC(1453, 4, 29));
 const secondDate = new Date(Date.UTC(1453, 4, 30));
 

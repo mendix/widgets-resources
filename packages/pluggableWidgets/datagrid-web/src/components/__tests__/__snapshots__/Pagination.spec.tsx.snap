@@ -250,57 +250,7 @@ exports[`Pagination renders the current page correctly with server side paging 1
 </div>
 `;
 
-exports[`Pagination renders the current page correctly with without pages 1`] = `
-<div
-  className="pagination-bar"
->
-  <button
-    className="btn pagination-button"
-    disabled={true}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-step-backward"
-    />
-  </button>
-  <button
-    className="btn pagination-button"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-backward"
-    />
-  </button>
-  <div
-    className="paging-status"
-  >
-    1
-     to 
-    5
-     
-    of 0
-  </div>
-  <button
-    className="btn pagination-button"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-forward"
-    />
-  </button>
-  <button
-    className="btn pagination-button"
-    disabled={false}
-    onClick={[Function]}
-  >
-    <span
-      className="glyphicon glyphicon-step-forward"
-    />
-  </button>
-</div>
-`;
+exports[`Pagination renders the current page correctly with without pages 1`] = `""`;
 
 exports[`Pagination renders the structure correctly 1`] = `
 <div

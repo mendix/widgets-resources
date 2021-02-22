@@ -1,8 +1,0 @@
-{
-    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
-    "baseUrl": "./",
-    "include": ["./src/components/__tests__"],
-    "compilerOptions": {
-        "types": ["jest", "react-resize-detector"]
-    }
-}

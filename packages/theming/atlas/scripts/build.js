@@ -2,69 +2,64 @@ const { rm, cd } = require("shelljs");
 const { join } = require("path");
 const concurrently = require("concurrently");
 
-const mode = process.argv[2] || "production";
+const mode = process.argv[2] || "build";
 const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
-const outputDir =
-    mode !== "production" && MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "theme") : join(__dirname, "../dist/theme");
-const projectDeployDir = mode !== "production" && MX_PROJECT_PATH ? join(MX_PROJECT_PATH, "deployment/web") : null;
+const outputProjectDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
+let outputThemeDir;
+let outputThemeSourceDir;
+let projectDeployDirWeb;
+
+switch (mode) {
+    case "build":
+    case "start":
+        outputThemeDir = join(outputProjectDir);
+        outputThemeSourceDir = join(outputProjectDir, "themesource/atlas_ui_resources");
+        projectDeployDirWeb = join(outputProjectDir, "deployment/web");
+        break;
+    case "release":
+        outputThemeDir = join(__dirname, "../dist");
+        outputThemeSourceDir = join(__dirname, "../dist/themesource/atlas_ui_resources");
+        break;
+}
 
 console.info(`Building for ${mode}...`);
-const watchArg = mode !== "production" ? "--watch" : "";
-const compressArg = mode === "production" ? "--style compressed" : "";
-const copyAndWatchFonts = command(`copy-and-watch ${watchArg} 'src/web/sass/core/_legacy/bootstrap/fonts/*'`);
-const copyAndWatchContent = command(`copy-and-watch ${watchArg} 'content/**/*'`);
-const compileSass = command(`sass ${watchArg} --embed-sources ${compressArg} --no-charset src/web/sass/main.scss`);
-
+const watchArg = mode === "start" ? "--watch" : "";
 cd(join(__dirname, ".."));
-rm("-rf", outputDir);
+rm("-rf", outputThemeDir);
 concurrently(
     [
         {
-            name: "content-theme",
-            command: copyAndWatchContent(outputDir)
+            name: "web-theme-content",
+            command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${outputThemeDir}/theme/web"`
         },
         {
-            name: "web-sass-and-manifest-theme",
-            command: `copy-and-watch ${watchArg} 'src/web/sass/**/*' '${outputDir}/styles/web/sass'`
+            name: "web-themesource-content",
+            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/web/**/*' '${outputThemeSourceDir}/web'`
         },
         {
-            name: "native-manifest-theme",
-            command: `copy-and-watch ${watchArg} src/native/ts/core/manifest.json '${outputDir}/styles/native/core'`
+            name: "native-typescript",
+            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputThemeDir}'`
         },
         {
-            name: "fonts-theme",
-            command: copyAndWatchFonts(`${outputDir}/styles/web/css/fonts`)
-        },
-        {
-            name: "sass-theme",
-            command: compileSass(`${outputDir}/styles/web/css/main.css`)
-        },
-        {
-            name: "tsc-theme",
-            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputDir}/styles/native'`
+            name: "native-design-properties-and-manifest",
+            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/native/**/*.json' '${outputThemeSourceDir}/native'`
         }
-    ].concat(
-        projectDeployDir
-            ? [
-                  {
-                      name: "fonts-deployment",
-                      command: copyAndWatchFonts(`${projectDeployDir}/styles/web/css/fonts`)
-                  },
-                  {
-                      name: "sass-deployment",
-                      command: compileSass(`${projectDeployDir}/styles/web/css/main.css`)
-                  },
-                  {
-                      name: "content-deployment",
-                      command: copyAndWatchContent(projectDeployDir)
-                  }
-              ]
-            : []
-    )
+    ],
+    {
+        killOthers: ["failure"]
+    }
+).then(
+    success => {
+        console.log("Success", success);
+    },
+    failure => {
+        console.error("Failure", failure);
+        process.exit(-1);
+    }
 );
 
 function command(command) {
-    return function(outputPath) {
+    return function (outputPath) {
         return `${command} '${outputPath}'`;
     };
 }

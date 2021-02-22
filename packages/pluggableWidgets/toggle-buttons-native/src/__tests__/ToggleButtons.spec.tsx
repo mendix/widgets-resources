@@ -12,10 +12,7 @@ describe("ToggleButtons", () => {
         defaultProps = {
             name: "toggle-buttons-test",
             style: [],
-            enum: new EditableValueBuilder<string>()
-                .withUniverse("a", "b")
-                .withValue("a")
-                .build(),
+            enum: new EditableValueBuilder<string>().withUniverse("a", "b").withValue("a").build(),
             editable: "default"
         };
     });
@@ -35,10 +32,7 @@ describe("ToggleButtons", () => {
     });
 
     it("renders a validation message", () => {
-        const value = new EditableValueBuilder<string>()
-            .withUniverse("a", "b")
-            .withValidation("Invalid")
-            .build();
+        const value = new EditableValueBuilder<string>().withUniverse("a", "b").withValidation("Invalid").build();
         const component = render(<ToggleButtons {...defaultProps} enum={value} />);
 
         expect(component.getByText("Invalid")).toBeDefined();

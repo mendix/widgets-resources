@@ -11,6 +11,7 @@ describe("useSettings Hook", () => {
         renderHook(() =>
             useSettings(
                 props.settings,
+                props.onSettingsChange,
                 props.columns,
                 props.columnOrder,
                 props.setColumnOrder,
@@ -18,8 +19,6 @@ describe("useSettings Hook", () => {
                 props.setHiddenColumns,
                 props.sortBy,
                 props.setSortBy,
-                props.filters,
-                props.setFilters,
                 props.widths,
                 props.setWidths
             )
@@ -27,7 +26,6 @@ describe("useSettings Hook", () => {
         expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
         expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
         expect(props.setSortBy).toHaveBeenCalledTimes(1);
-        expect(props.setFilters).toHaveBeenCalledTimes(1);
         expect(props.setWidths).toHaveBeenCalledTimes(1);
     });
 
@@ -50,7 +48,6 @@ describe("useSettings Hook", () => {
                         column: "Column 1",
                         sort: true,
                         sortMethod: "desc",
-                        filter: "ABC",
                         hidden: false,
                         order: 1,
                         width: undefined
@@ -59,7 +56,6 @@ describe("useSettings Hook", () => {
                         column: "Column 2",
                         sort: false,
                         sortMethod: "asc",
-                        filter: "",
                         hidden: true,
                         order: 0,
                         width: 120
@@ -71,6 +67,7 @@ describe("useSettings Hook", () => {
         renderHook(() =>
             useSettings(
                 settings,
+                props.onSettingsChange,
                 columns,
                 props.columnOrder,
                 props.setColumnOrder,
@@ -78,8 +75,6 @@ describe("useSettings Hook", () => {
                 props.setHiddenColumns,
                 props.sortBy,
                 props.setSortBy,
-                props.filters,
-                props.setFilters,
                 props.widths,
                 props.setWidths
             )
@@ -87,62 +82,30 @@ describe("useSettings Hook", () => {
         expect(props.setColumnOrder).toHaveBeenCalledWith(["1", "0"]);
         expect(props.setHiddenColumns).toHaveBeenCalledWith(["1"]);
         expect(props.setSortBy).toHaveBeenCalledWith([{ id: "0", desc: true }]);
-        expect(props.setFilters).toHaveBeenCalledWith([{ id: "0", value: "ABC" }]);
         expect(props.setWidths).toHaveBeenCalledWith({ "0": undefined, "1": 120 });
     });
 
     it("changes the settings when some property changes", () => {
         const props = mockProperties();
 
-        const { rerender } = renderHook(
-            ({
-                settings,
-                columns,
-                columnOrder,
-                setColumnOrder,
-                hiddenColumns,
-                setHiddenColumns,
-                sortBy,
-                setSortBy,
-                filters,
-                setFilters,
-                widths,
-                setWidths
-            }) =>
-                useSettings(
-                    settings,
-                    columns,
-                    columnOrder,
-                    setColumnOrder,
-                    hiddenColumns,
-                    setHiddenColumns,
-                    sortBy,
-                    setSortBy,
-                    filters,
-                    setFilters,
-                    widths,
-                    setWidths
-                ),
-            {
-                initialProps: {
-                    settings: props.settings,
-                    columns: props.columns,
-                    columnOrder: ["0"],
-                    setColumnOrder: props.setColumnOrder,
-                    hiddenColumns: [],
-                    setHiddenColumns: props.setHiddenColumns,
-                    sortBy: [{ id: "0", desc: true }],
-                    setSortBy: props.setSortBy,
-                    filters: [{ id: "0", value: "ABC" }],
-                    setFilters: props.setFilters,
-                    widths: { "0": undefined } as ColumnWidth,
-                    setWidths: props.setWidths
-                }
-            }
-        );
+        const { rerender } = renderUseSettingsHook({
+            settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
+            columns: props.columns,
+            columnOrder: ["0"],
+            setColumnOrder: props.setColumnOrder,
+            hiddenColumns: [],
+            setHiddenColumns: props.setHiddenColumns,
+            sortBy: [{ id: "0", desc: true }],
+            setSortBy: props.setSortBy,
+            widths: { "0": undefined } as ColumnWidth,
+            setWidths: props.setWidths
+        });
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
         rerender({
             settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -150,8 +113,6 @@ describe("useSettings Hook", () => {
             setHiddenColumns: props.setHiddenColumns,
             sortBy: [{ id: "0", desc: false }],
             setSortBy: props.setSortBy,
-            filters: [{ id: "0", value: "A" }],
-            setFilters: props.setFilters,
             widths: { "0": 130 },
             setWidths: props.setWidths
         });
@@ -162,13 +123,91 @@ describe("useSettings Hook", () => {
                     column: "Column 1",
                     sort: true,
                     sortMethod: "asc",
-                    filter: "A",
                     hidden: false,
                     order: 0,
                     width: 130
                 }
             ])
         );
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
+    });
+
+    it("doesnt change the settings when same properties are applied", () => {
+        const props = mockProperties();
+        const initialProps = {
+            settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
+            columns: props.columns,
+            columnOrder: ["0"],
+            setColumnOrder: props.setColumnOrder,
+            hiddenColumns: [],
+            setHiddenColumns: props.setHiddenColumns,
+            sortBy: [{ id: "0", desc: true }],
+            setSortBy: props.setSortBy,
+            widths: { "0": undefined } as ColumnWidth,
+            setWidths: props.setWidths
+        };
+
+        const { rerender } = renderUseSettingsHook(initialProps);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
+        rerender(initialProps);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
+    });
+
+    it("doesnt change the hooks when same properties are applied", () => {
+        const props = mockProperties();
+        const initialProps = {
+            settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
+            columns: props.columns,
+            columnOrder: ["0"],
+            setColumnOrder: props.setColumnOrder,
+            hiddenColumns: [],
+            setHiddenColumns: props.setHiddenColumns,
+            sortBy: [{ id: "0", desc: true }],
+            setSortBy: props.setSortBy,
+            widths: { "0": undefined } as ColumnWidth,
+            setWidths: props.setWidths
+        };
+
+        const { rerender } = renderUseSettingsHook(initialProps);
+        // Initiates the hooks with values from settings once
+        expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
+        expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
+        expect(props.setSortBy).toHaveBeenCalledTimes(1);
+        expect(props.setWidths).toHaveBeenCalledTimes(1);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
+        rerender(initialProps);
+        expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
+        expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
+        expect(props.setSortBy).toHaveBeenCalledTimes(1);
+        expect(props.setWidths).toHaveBeenCalledTimes(1);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
+    });
+
+    it("applies changes to settings when receiving external prop changes", () => {
+        const props = mockProperties();
+        props.settings = new EditableValueBuilder<string>().withValue("").build();
+
+        const { rerender } = renderUseSettingsHook(props);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(1);
+        expect(props.settings.setValue).toHaveBeenCalledWith(
+            JSON.stringify([{ column: "Column 1", sort: false, sortMethod: "asc", hidden: false, order: 0 }])
+        );
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
+        rerender({ ...props, sortBy: [{ id: "0", desc: true }] });
+        expect(props.settings.setValue).toHaveBeenCalledTimes(2);
+        expect(props.settings.setValue).toHaveBeenCalledWith(
+            JSON.stringify([{ column: "Column 1", sort: true, sortMethod: "desc", hidden: false, order: 0 }])
+        );
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(2);
+        rerender({ ...props, sortBy: [{ id: "0", desc: true }] });
+        expect(props.settings.setValue).toHaveBeenCalledTimes(2);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(2);
     });
 });
 
@@ -181,7 +220,6 @@ function mockProperties(): any {
                         column: "Column 1",
                         sort: true,
                         sortMethod: "desc",
-                        filter: "ABC",
                         hidden: false,
                         order: 0,
                         width: undefined
@@ -189,6 +227,7 @@ function mockProperties(): any {
                 ])
             )
             .build(),
+        onSettingsChange: jest.fn(),
         columns: [
             {
                 header: "Column 1",
@@ -201,9 +240,53 @@ function mockProperties(): any {
         setHiddenColumns: jest.fn(),
         sortBy: [],
         setSortBy: jest.fn(),
-        filters: [],
-        setFilters: jest.fn(),
         widths: { "0": undefined },
         setWidths: jest.fn()
     };
+}
+
+function renderUseSettingsHook(initialProps: {
+    settings: any;
+    onSettingsChange: () => void;
+    hiddenColumns: any[];
+    columnOrder: string[];
+    columns: any;
+    setHiddenColumns: any;
+    sortBy: Array<{ id: string; desc: boolean }>;
+    widths: ColumnWidth;
+    setSortBy: any;
+    setWidths: any;
+    setColumnOrder: any;
+}) {
+    return renderHook(
+        ({
+            settings,
+            onSettingsChange,
+            columns,
+            columnOrder,
+            setColumnOrder,
+            hiddenColumns,
+            setHiddenColumns,
+            sortBy,
+            setSortBy,
+            widths,
+            setWidths
+        }) =>
+            useSettings(
+                settings,
+                onSettingsChange,
+                columns,
+                columnOrder,
+                setColumnOrder,
+                hiddenColumns,
+                setHiddenColumns,
+                sortBy,
+                setSortBy,
+                widths,
+                setWidths
+            ),
+        {
+            initialProps
+        }
+    );
 }

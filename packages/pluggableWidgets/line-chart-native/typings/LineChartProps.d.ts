@@ -5,21 +5,21 @@
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 
-export type TypeEnum = "static" | "dynamic";
+export type DataSetEnum = "static" | "dynamic";
 
 export type InterpolationEnum = "linear" | "catmullRom";
 
-export type StaticLineStyleEnum = "line" | "lineWithMarkers";
+export type StaticLineStyleEnum = "line" | "lineWithMarkers" | "custom";
 
 export type DynamicLineStyleEnum = "line" | "lineWithMarkers" | "custom";
 
-export interface SeriesType {
-    type: TypeEnum;
+export interface LinesType {
+    dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
-    staticSeriesName?: DynamicValue<string>;
-    dynamicSeriesName?: ListExpressionValue<string>;
+    staticName?: DynamicValue<string>;
+    dynamicName?: ListExpressionValue<string>;
     staticXAttribute?: ListAttributeValue<Date | BigJs.Big>;
     dynamicXAttribute?: ListAttributeValue<Date | BigJs.Big>;
     staticYAttribute?: ListAttributeValue<Date | BigJs.Big>;
@@ -27,17 +27,17 @@ export interface SeriesType {
     interpolation: InterpolationEnum;
     staticLineStyle: StaticLineStyleEnum;
     dynamicLineStyle: DynamicLineStyleEnum;
-    staticStylePropertyName: string;
-    dynamicStylePropertyName?: ListAttributeValue<string>;
+    staticCustomLineStyle: string;
+    dynamicCustomLineStyle?: ListAttributeValue<string>;
 }
 
-export interface SeriesPreviewType {
-    type: TypeEnum;
+export interface LinesPreviewType {
+    dataSet: DataSetEnum;
     staticDataSource: {} | null;
     dynamicDataSource: {} | null;
     groupByAttribute: string;
-    staticSeriesName: string;
-    dynamicSeriesName: string;
+    staticName: string;
+    dynamicName: string;
     staticXAttribute: string;
     dynamicXAttribute: string;
     staticYAttribute: string;
@@ -45,14 +45,14 @@ export interface SeriesPreviewType {
     interpolation: InterpolationEnum;
     staticLineStyle: StaticLineStyleEnum;
     dynamicLineStyle: DynamicLineStyleEnum;
-    staticStylePropertyName: string;
-    dynamicStylePropertyName: string;
+    staticCustomLineStyle: string;
+    dynamicCustomLineStyle: string;
 }
 
 export interface LineChartProps<Style> {
     name: string;
     style: Style[];
-    series: SeriesType[];
+    lines: LinesType[];
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
@@ -61,7 +61,7 @@ export interface LineChartProps<Style> {
 export interface LineChartPreviewProps {
     class: string;
     style: string;
-    series: SeriesPreviewType[];
+    lines: LinesPreviewType[];
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;

@@ -54,7 +54,9 @@ export function validateCustomFormats(props: Container.CalendarContainerProps): 
             props.customViews.forEach(customView => {
                 window.mx.parser.formatValue(date, "datetime", { datePattern: customView.cellDateFormat });
                 window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterDateFormat });
-                window.mx.parser.formatValue(date, "datetime", { datePattern: customView.headerFormat });
+                if (customView.headerFormat) {
+                    window.mx.parser.formatValue(date, "datetime", { datePattern: customView.headerFormat });
+                }
                 window.mx.parser.formatValue(date, "datetime", { datePattern: customView.gutterTimeFormat });
             });
         }

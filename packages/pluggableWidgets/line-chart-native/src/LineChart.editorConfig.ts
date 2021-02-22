@@ -3,25 +3,25 @@ import { hideNestedPropertiesIn, Problem, Properties } from "@widgets-resources/
 import { LineChartPreviewProps } from "../typings/LineChartProps";
 
 export function getProperties(values: LineChartPreviewProps, defaultProperties: Properties): Properties {
-    values.series.forEach((series, index) => {
-        if (series.type === "static") {
-            hideNestedPropertiesIn(defaultProperties, values, "series", index, [
+    values.lines.forEach((lines, index) => {
+        if (lines.dataSet === "static") {
+            hideNestedPropertiesIn(defaultProperties, values, "lines", index, [
                 "dynamicDataSource",
                 "groupByAttribute",
-                "dynamicSeriesName",
+                "dynamicName",
                 "dynamicXAttribute",
                 "dynamicYAttribute",
                 "dynamicLineStyle",
-                "dynamicStylePropertyName"
+                "dynamicCustomLineStyle"
             ]);
         } else {
-            hideNestedPropertiesIn(defaultProperties, values, "series", index, [
+            hideNestedPropertiesIn(defaultProperties, values, "lines", index, [
                 "staticDataSource",
-                "staticSeriesName",
+                "staticName",
                 "staticXAttribute",
                 "staticYAttribute",
                 "staticLineStyle",
-                "staticStylePropertyName"
+                "staticCustomLineStyle"
             ]);
         }
     });
@@ -31,63 +31,63 @@ export function getProperties(values: LineChartPreviewProps, defaultProperties: 
 export function check(values: LineChartPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    values.series.forEach((series, index) => {
-        if (series.type === "static") {
+    values.lines.forEach((lines, index) => {
+        if (lines.dataSet === "static") {
             // @ts-ignore
-            if (series.staticDataSource.type === "null") {
+            if (lines.staticDataSource.type === "null") {
                 errors.push({
                     property: "staticDataSource",
                     severity: "error",
-                    message: `No data source configured for static series located at position ${index + 1}.`
+                    message: `No data source configured for static line located at position ${index + 1}.`
                 });
             }
 
-            if (!series.staticXAttribute) {
+            if (!lines.staticXAttribute) {
                 errors.push({
                     property: "staticXAttribute",
                     severity: "error",
-                    message: `No X attribute configured for static series located at position ${index + 1}.`
+                    message: `No X attribute configured for static line located at position ${index + 1}.`
                 });
             }
 
-            if (!series.staticYAttribute) {
+            if (!lines.staticYAttribute) {
                 errors.push({
                     property: "staticYAttribute",
                     severity: "error",
-                    message: `No Y attribute configured for static series located at position ${index + 1}.`
+                    message: `No Y attribute configured for static line located at position ${index + 1}.`
                 });
             }
         } else {
             // @ts-ignore
-            if (series.dynamicDataSource.type === "null") {
+            if (lines.dynamicDataSource.type === "null") {
                 errors.push({
                     property: "dynamicDataSource",
                     severity: "error",
-                    message: `No data source configured for dynamic series located at position ${index + 1}.`
+                    message: `No data source configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
 
-            if (!series.dynamicXAttribute) {
+            if (!lines.dynamicXAttribute) {
                 errors.push({
                     property: "dynamicXAttribute",
                     severity: "error",
-                    message: `No X attribute configured for dynamic series located at position ${index + 1}.`
+                    message: `No X attribute configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
 
-            if (!series.dynamicYAttribute) {
+            if (!lines.dynamicYAttribute) {
                 errors.push({
                     property: "dynamicYAttribute",
                     severity: "error",
-                    message: `No Y attribute configured for dynamic series located at position ${index + 1}.`
+                    message: `No Y attribute configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
 
-            if (!series.groupByAttribute) {
+            if (!lines.groupByAttribute) {
                 errors.push({
                     property: "groupByAttribute",
                     severity: "error",
-                    message: `No group by attribute configured for dynamic series located at position ${index + 1}.`
+                    message: `No group by attribute configured for dynamic line(s) located at position ${index + 1}.`
                 });
             }
         }

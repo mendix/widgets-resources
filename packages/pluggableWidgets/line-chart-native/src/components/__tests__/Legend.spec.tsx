@@ -2,34 +2,18 @@ import { createElement } from "react";
 import { render } from "react-native-testing-library";
 
 import { Legend, LegendProps } from "../Legend";
+import { defaultLineChartStyle } from "../../ui/Styles";
 
 describe("Legend", () => {
     let defaultProps: LegendProps;
 
     beforeEach(() => {
         defaultProps = {
-            series: [
-                { name: "Line 1", stylePropertyName: "line1" },
-                { name: "Line 2", stylePropertyName: "line2" }
-            ],
+            items: [{ name: "Line 1" }, { name: "Line 2" }],
             style: {
-                series: {
-                    line1: {
-                        line: {
-                            data: { stroke: "#0595DB" }
-                        },
-                        markers: {
-                            data: { fill: "#035E8C" },
-                            display: "underneath"
-                        }
-                    },
-                    line2: {
-                        line: {
-                            data: { stroke: "green" }
-                        }
-                    }
-                }
-            }
+                ...defaultLineChartStyle.legend
+            },
+            itemColors: ["#0595DB", "green"]
         };
     });
 
@@ -39,19 +23,13 @@ describe("Legend", () => {
     });
 
     it("doesn't render series when there is no series name", () => {
-        defaultProps.series[0].name = undefined;
-        const component = render(<Legend {...defaultProps} />);
-        expect(component.toJSON()).toMatchSnapshot();
-    });
-
-    it("doesn't render series when it cannot retrieve a background color from the series style property", () => {
-        defaultProps.style.series!.line2!.line!.data! = {};
+        defaultProps.items[0].name = undefined;
         const component = render(<Legend {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 
     it("doesn't render when there are no series", () => {
-        defaultProps.series = [];
+        defaultProps.items = [];
         const component = render(<Legend {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });

@@ -2,6 +2,7 @@
 
 exports[`Animation renders 1`] = `
 <View
+  forwardedRef={[Function]}
   style={Object {}}
   testID="animation-test"
 >

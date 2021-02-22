@@ -4,72 +4,75 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, EditableValue, ListValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
-
-export type WidthEnum = "autoFill" | "autoFit" | "manual";
-
-export type FilterableEnum = "yes" | "no" | "custom";
+import { ActionValue, DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 
 export type HidableEnum = "yes" | "hidden" | "no";
 
+export type ShowContentAsEnum = "attribute" | "dynamicText" | "customContent";
+
+export type WidthEnum = "autoFill" | "autoFit" | "manual";
+
+export type AlignmentEnum = "left" | "center" | "right";
+
 export interface ColumnsType {
-    attribute: ListAttributeValue<string | BigJs.Big | boolean | Date>;
-    header: DynamicValue<string>;
-    hasWidgets: boolean;
-    content?: ListWidgetValue;
-    width: WidthEnum;
-    size: number;
-    columnClass?: ListExpressionValue<string>;
+    header?: DynamicValue<string>;
     sortable: boolean;
-    filterable: FilterableEnum;
-    customFilter?: ReactNode;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
+    filter?: ReactNode;
+    showContentAs: ShowContentAsEnum;
+    attribute?: ListAttributeValue<string | BigJs.Big | boolean | Date>;
+    content?: ListWidgetValue;
+    dynamicText?: ListExpressionValue<string>;
+    width: WidthEnum;
+    size: number;
+    alignment: AlignmentEnum;
+    columnClass?: ListExpressionValue<string>;
 }
+
+export type PaginationEnum = "buttons" | "virtualScrolling";
 
 export type PagingPositionEnum = "bottom" | "top";
 
-export type FilterMethodEnum = "startsWith" | "contains" | "endsWith";
-
 export interface ColumnsPreviewType {
-    attribute: string;
     header: string;
-    hasWidgets: boolean;
-    content: { widgetCount: number; renderer: ComponentType };
-    width: WidthEnum;
-    size: number | null;
-    columnClass: string;
     sortable: boolean;
-    filterable: FilterableEnum;
-    customFilter: { widgetCount: number; renderer: ComponentType };
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
+    filter: { widgetCount: number; renderer: ComponentType };
+    showContentAs: ShowContentAsEnum;
+    attribute: string;
+    content: { widgetCount: number; renderer: ComponentType };
+    dynamicText: string;
+    width: WidthEnum;
+    size: number | null;
+    alignment: AlignmentEnum;
+    columnClass: string;
 }
 
 export interface DatagridContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     datasource: ListValue;
     columns: ColumnsType[];
+    showEmptyPlaceholder: boolean;
+    emptyPlaceholder?: ReactNode;
+    onClick?: ListActionValue;
     rowClass?: ListExpressionValue<string>;
-    showHeader: boolean;
-    headerWidgets?: ReactNode;
-    showFooter: boolean;
-    footerWidgets?: ReactNode;
+    columnsFilterable: boolean;
     pageSize: number;
-    pagingEnabled: boolean;
+    pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
-    columnsFilterable: boolean;
-    filterMethod: FilterMethodEnum;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
     configurationAttribute?: EditableValue<string>;
+    onConfigurationChange?: ActionValue;
 }
 
 export interface DatagridPreviewProps {
@@ -77,19 +80,18 @@ export interface DatagridPreviewProps {
     style: string;
     datasource: {} | null;
     columns: ColumnsPreviewType[];
+    showEmptyPlaceholder: boolean;
+    emptyPlaceholder: { widgetCount: number; renderer: ComponentType };
+    onClick: {} | null;
     rowClass: string;
-    showHeader: boolean;
-    headerWidgets: { widgetCount: number; renderer: ComponentType };
-    showFooter: boolean;
-    footerWidgets: { widgetCount: number; renderer: ComponentType };
+    columnsFilterable: boolean;
     pageSize: number | null;
-    pagingEnabled: boolean;
+    pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     columnsSortable: boolean;
-    columnsFilterable: boolean;
-    filterMethod: FilterMethodEnum;
     columnsResizable: boolean;
     columnsDraggable: boolean;
     columnsHidable: boolean;
     configurationAttribute: string;
+    onConfigurationChange: {} | null;
 }

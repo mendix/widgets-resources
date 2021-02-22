@@ -1,15 +1,16 @@
-const { execSync } = require("child_process");
+const { exec } = require("child_process");
 const {
     createWriteStream,
     promises: { access }
 } = require("fs");
+const fetch = require("node-fetch");
 const { tmpdir } = require("os");
 const { join } = require("path");
-const { pipeline } = require("stream");
-const { promisify } = require("util");
-const fetch = require("node-fetch");
+const rCopy = require("recursive-copy");
 const semverCompare = require("semver/functions/rcompare");
 const { rm } = require("shelljs");
+const { pipeline } = require("stream");
+const { promisify } = require("util");
 
 main().catch(e => {
     console.error(e);
@@ -20,17 +21,14 @@ async function main() {
     if (!(await exists("tests/testProject"))) {
         throw new Error("Cannot find a tests/testProject. Did you run the script in the widget folder?");
     }
-    try {
-        execSync("unzip --help", { stdio: "ignore" });
-    } catch (e) {
-        throw new Error("This script requires unzip command to be available on the PATH!");
-    }
 
-    // const atlasArchive = await getLatestAtlasArchive();
-    const atlasArchive = await temp();
-    rm("-rf", "tests/testProject/theme");
-    rm("-rf", "tests/testProject/widgets");
-    execSync(`unzip ${atlasArchive} -x '*.mpr' '*.xml' -d tests/testProject`);
+    rm("-rf", "tests/testProject/theme", "tests/testProject/themesource/atlas*");
+
+    if (process.argv.includes("--latest-atlas")) {
+        await copyLatestAtlas();
+    } else {
+        await copyLatestReleasedAtlas();
+    }
 }
 
 async function exists(filePath) {
@@ -42,21 +40,39 @@ async function exists(filePath) {
     }
 }
 
-// todo: remove this when mxbuild includes tool to update widget definition (8.15)
-async function temp() {
-    const atlasV = "2.6.1";
-    const url = "https://files.appstore.mendix.com/5/104730/2.6.1/Atlas_UI_Resources_2.6.1.mpk";
-    const path = join(tmpdir(), `${atlasV}.mpk`);
-    if (await exists(path)) {
-        return path;
+async function copyLatestAtlas() {
+    console.log("Copying latest atlas from mono repo...");
+
+    const atlasSrc = join(process.cwd(), "../../theming/atlas");
+
+    try {
+        await promisify(exec)("npm run release", { cwd: atlasSrc });
+    } catch (e) {
+        throw new Error(`Failed to create a release distribution of Atlas: ${e}`);
     }
 
     try {
-        await promisify(pipeline)((await fetch(url)).body, createWriteStream(path));
-        return path;
+        await promisify(rCopy)(join(atlasSrc, "dist"), "tests/testProject");
     } catch (e) {
-        console.log(`Url is not available :(`);
-        rm("-f", path);
+        throw new Error("Failed to copy Atlas release distribution to test/testProject");
+    }
+}
+
+async function copyLatestReleasedAtlas() {
+    console.log("Copying latest released atlas from app store...");
+
+    try {
+        await promisify(exec)("unzip --help", { stdio: "ignore" });
+    } catch (e) {
+        throw new Error("This script requires unzip command to be available on the PATH!");
+    }
+
+    const atlasArchivePath = await getLatestAtlasArchive();
+
+    try {
+        await promisify(exec)(`unzip -o ${atlasArchivePath} -x '*.mpr' '*.xml' -d tests/testProject`);
+    } catch (e) {
+        throw new Error("Failed to unzip the Atlas mpk into tests/testProject");
     }
 }
 
@@ -76,11 +92,9 @@ async function getLatestAtlasArchive() {
 
     for (const latestAtlasVersion of latestAtlasVersions) {
         const downloadedArchivePath = join(tmpdir(), `${latestAtlasVersion}.mpk`);
-        if (await exists(downloadedArchivePath)) {
-            return downloadedArchivePath;
-        }
+
         const appstoreUrl = `https://files.appstore.mendix.com/5/104730/${latestAtlasVersion}/Atlas_UI_Resources_${latestAtlasVersion}.mpk`;
-        console.log(`Trying to download Atlas from ${appstoreUrl}...`);
+        console.log(`Trying to download Atlas from ${appstoreUrl}`);
         try {
             await promisify(pipeline)((await fetch(appstoreUrl)).body, createWriteStream(downloadedArchivePath));
             return downloadedArchivePath;

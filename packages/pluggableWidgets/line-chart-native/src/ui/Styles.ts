@@ -1,8 +1,49 @@
 import { TextStyle, ViewStyle } from "react-native";
-import { VictoryChartProps } from "victory-chart";
-import { VictoryAxisCommonProps, VictoryCommonProps, VictoryLabelProps } from "victory-core";
-import { VictoryLineProps } from "victory-line";
-import { VictoryScatterProps } from "victory-scatter";
+
+export interface LineChartGridStyle {
+    backgroundColor?: string;
+    dashArray?: string;
+    lineColor?: string;
+    lineWidth?: number;
+    padding?: number;
+    paddingBottom?: number;
+    paddingHorizontal?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingVertical?: number;
+}
+
+export interface LineChartAxisStyle<T extends "X" | "Y"> {
+    color?: string;
+    dashArray?: string;
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    lineColor?: string;
+    lineWidth?: number;
+    label?: TextStyle & {
+        relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
+    };
+}
+
+export interface LineChartLineStyle {
+    line?: {
+        dashArray?: string;
+        ending?: "flat" | "round";
+        lineColor?: string;
+        lineWidth?: number;
+    };
+    markers?: {
+        backgroundColor?: string;
+        borderColor?: string;
+        borderWidth?: number;
+        display?: "false" | "underneath" | "onTop";
+        size?: number;
+        symbol?: "circle" | "diamond" | "plus" | "minus" | "square" | "star" | "triangleDown" | "triangleUp";
+    };
+}
 
 export interface LineChartLegendStyle {
     container?: ViewStyle;
@@ -11,35 +52,45 @@ export interface LineChartLegendStyle {
     label?: TextStyle;
 }
 
-export interface LineChartSeriesStyle {
-    line?: VictoryLineProps["style"];
-    markers?: VictoryScatterProps["style"] & {
-        display?: "false" | "underneath" | "onTop";
-        size?: VictoryScatterProps["size"];
-    };
-}
-
 export interface LineChartStyle {
     container?: ViewStyle;
+    errorMessage?: TextStyle;
+    chart?: ViewStyle;
+    grid?: LineChartGridStyle;
+    xAxis?: LineChartAxisStyle<"X">;
+    yAxis?: LineChartAxisStyle<"Y">;
     legend?: LineChartLegendStyle;
-    chart?: VictoryChartProps["style"] & { padding?: VictoryCommonProps["padding"] };
-    xAxis?: VictoryAxisCommonProps["style"] & {
-        axisLabel?: { horizontalOffset?: VictoryLabelProps["dx"]; verticalOffset?: VictoryLabelProps["dy"] };
+    lines?: {
+        lineColorPalette?: string;
+        customLineStyles?: {
+            [key: string]: LineChartLineStyle;
+        };
     };
-    yAxis?: VictoryAxisCommonProps["style"] & {
-        axisLabel?: { horizontalOffset?: VictoryLabelProps["dy"]; verticalOffset?: VictoryLabelProps["dx"] };
-    };
-    series?: { [key: string]: LineChartSeriesStyle };
 }
 
 export const defaultLineChartStyle: LineChartStyle = {
     container: {
         flex: 1
     },
+    errorMessage: {
+        color: "red"
+    },
+    chart: {
+        flex: 1
+    },
+    grid: {
+        paddingBottom: 30,
+        paddingLeft: 30,
+        paddingRight: 10,
+        paddingTop: 10
+    },
+    xAxis: {
+        label: {
+            alignSelf: "center"
+        }
+    },
     legend: {
         container: {
-            borderColor: "black",
-            borderWidth: 1,
             flexDirection: "row",
             justifyContent: "center",
             flexWrap: "wrap",
@@ -52,17 +103,8 @@ export const defaultLineChartStyle: LineChartStyle = {
         },
         indicator: {
             marginRight: 5,
-            height: 5,
+            height: 10,
             width: 10
         }
-    },
-    chart: {
-        padding: { left: 75, top: 25, bottom: 50, right: 25 }
-    },
-    xAxis: {
-        axisLabel: { verticalOffset: 10 }
-    },
-    yAxis: {
-        axisLabel: { horizontalOffset: -10 }
     }
 };

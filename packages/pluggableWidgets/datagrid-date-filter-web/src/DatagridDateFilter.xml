@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.datagriddatefilter.DatagridDateFilter" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Data grid date filter</name>
+    <description/>
+    <icon>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</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="defaultValue" type="expression" required="false">
+                    <caption>Default value</caption>
+                    <description />
+                    <returnType type="DateTime" />
+                </property>
+                <property key="defaultFilter" type="enumeration" defaultValue="equal">
+                    <caption>Default filter</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="greater">Greater than</enumerationValue>
+                        <enumerationValue key="greaterEqual">Greater than or equal</enumerationValue>
+                        <enumerationValue key="equal">Equal</enumerationValue>
+                        <enumerationValue key="notEqual">Not equal</enumerationValue>
+                        <enumerationValue key="smaller">Smaller than</enumerationValue>
+                        <enumerationValue key="smallerEqual">Smaller than or equal</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="placeholder" type="textTemplate" required="false">
+                    <caption>Placeholder</caption>
+                    <description />
+                </property>
+                <property key="adjustable" type="boolean" defaultValue="true">
+                    <caption>Adjustable by user</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Screen reader">
+                <property key="screenReaderButtonCaption" type="textTemplate" required="false">
+                    <caption>Button caption</caption>
+                    <description />
+                </property>
+                <property key="screenReaderInputCaption" type="textTemplate" required="false">
+                    <caption>Input caption</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

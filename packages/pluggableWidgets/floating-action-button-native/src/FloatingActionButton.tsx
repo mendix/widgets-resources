@@ -81,7 +81,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
                         size={this.styles.secondaryButton.size}
                         title={button.caption && button.caption.value}
                         shadowStyle={this.styles.secondaryButton}
-                        buttonColor={this.styles.secondaryButton.backgroundColor}
+                        buttonColor={this.styles.secondaryButton.backgroundColor as string}
                         nativeFeedbackRippleColor={"transparent"}
                         textStyle={this.styles.secondaryButtonCaption}
                         textContainerStyle={this.styles.secondaryButtonCaptionContainer}

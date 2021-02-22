@@ -33,22 +33,28 @@
     "rules": {
         "linebreak-style": ["error", "unix"],
         "no-unused-vars": [
-            "error",
+            "warn",
             {
-                "varsIgnorePattern": "createElement"
+                "varsIgnorePattern": "createElement",
+                "args":  "none"
             }
         ],
-
         "@typescript-eslint/no-unused-vars": [
-            "error",
+            "warn",
             {
-                "varsIgnorePattern": "createElement"
+                "varsIgnorePattern": "createElement",
+                "args":  "none"
             }
         ],
+        "@typescript-eslint/ban-types": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn",
+        "@typescript-eslint/camelcase": "off",
+        "@typescript-eslint/class-name-casing": "off",
         "@typescript-eslint/indent": "off",
         "@typescript-eslint/no-object-literal-type-assertion": "off",
         "@typescript-eslint/no-use-before-define": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-var-requires": "warn",
         "@typescript-eslint/explicit-function-return-type": [
             "warn",
             {
@@ -117,7 +123,7 @@
         "no-useless-catch": "error",
         "no-useless-computed-key": "error",
         "no-useless-return": "error",
-        "no-undef": "off",
+        "no-undef": "warn",
         "no-undef-init": "error",
         "no-var": "error",
         "no-void": "error",
@@ -140,15 +146,7 @@
     },
     "overrides": [
         {
-            "files": [
-                "webpack.config.dev.js",
-                "webpack.config.prod.js",
-                "prettier.config.js",
-                "*.webmodeler.*",
-                "*.editorPreview.*",
-                ".eslintrc.js",
-                "wdio.conf.js"
-            ],
+            "files": ["prettier.config.js", "*.webmodeler.*", "*.editorPreview.*", ".eslintrc.js", "wdio.conf.js"],
             "rules": {
                 "@typescript-eslint/no-var-requires": "off",
                 "@typescript-eslint/class-name-casing": "off"

@@ -1,0 +1,32 @@
+{
+  "name": "datagrid-dropdown-filter-web",
+  "widgetName": "DatagridDropdownFilter",
+  "version": "1.1.0",
+  "description": "",
+  "copyright": "Mendix Technology B.V.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "license": "Apache-2.0",
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:ts",
+    "build": "pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "release": "pluggable-widgets-tools release:ts"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+  }
+}

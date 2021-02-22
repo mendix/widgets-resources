@@ -1,17 +1,27 @@
-import { createElement, ReactElement, useMemo, useCallback, useState, Fragment } from "react";
+import { createElement, ReactElement, useMemo, useCallback, useState } from "react";
 import { View, LayoutChangeEvent, Text } from "react-native";
 import { InterpolationPropType } from "victory-core";
-import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis, VictoryLabel } from "victory-native";
+import { VictoryChart, VictoryLine, VictoryGroup, VictoryScatter, VictoryAxis } from "victory-native";
 
-import { LineChartStyle } from "../ui/Styles";
+import { extractStyles } from "@mendix/pluggable-widgets-tools";
+
 import { Legend } from "./Legend";
+import { LineChartStyle } from "../ui/Styles";
+import {
+    mapToAxisStyle,
+    mapToGridStyle,
+    mapToLineStyle,
+    mapToMarkerStyle,
+    aggregateGridPadding
+} from "../utils/StyleUtils";
 
 export interface LineChartProps {
-    series: LineChartSeries[];
+    lines: LineChartSeries[];
     style: LineChartStyle;
     showLegend: boolean;
     xAxisLabel?: string;
     yAxisLabel?: string;
+    warningPrefix?: string;
 }
 
 export interface LineChartSeries {
@@ -21,7 +31,7 @@ export interface LineChartSeries {
     interpolation: InterpolationPropType;
     name?: string;
     lineStyle: "line" | "lineWithMarkers" | "custom";
-    stylePropertyName?: string;
+    customLineStyle?: string;
 }
 
 export type LineChartDataPoints =
@@ -36,41 +46,135 @@ export interface LineChartDataPoint<X extends number | Date, Y extends number | 
 }
 
 export function LineChart(props: LineChartProps): ReactElement | null {
-    const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
+    const { lines, showLegend, style, warningPrefix, xAxisLabel, yAxisLabel } = props;
 
-    const dataTypesResult = useMemo(() => getDataTypes(series), [series]);
+    const warningMessagePrefix = useMemo(() => (warningPrefix ? warningPrefix + "i" : "I"), [warningPrefix]);
+
+    const dataTypesResult = useMemo(() => getDataTypes(lines), [lines]);
+
+    // Line Chart user-styling may be missing for certain series. A palette is passed, any missing line colours
+    // fallback to a colour from the palette.
+    const normalizedLineColors: string[] = useMemo(() => {
+        const lineColorPalette = style.lines?.lineColorPalette?.split(";");
+        let lineColorPaletteIndex = 0;
+
+        return lines.map(_series => {
+            const configuredStyle = !_series.customLineStyle
+                ? null
+                : style.lines?.customLineStyles?.[_series.customLineStyle]?.line?.lineColor;
+
+            if (typeof configuredStyle !== "string") {
+                const lineColor = lineColorPalette?.[lineColorPaletteIndex] || "black";
+
+                if (lineColorPalette) {
+                    const indexIncrement = lineColorPaletteIndex + 1;
+                    lineColorPaletteIndex = indexIncrement === lineColorPalette.length ? 0 : indexIncrement;
+                }
+
+                return lineColor;
+            }
+
+            return configuredStyle;
+        });
+    }, [lines, style]);
 
     const chartLines = useMemo(() => {
         if (!dataTypesResult || dataTypesResult instanceof Error) {
             return null;
         }
 
-        return series.map((series, index) => {
-            const { dataPoints, interpolation, lineStyle, stylePropertyName } = series;
+        return lines.map((series, index) => {
+            const { dataPoints, interpolation, lineStyle, customLineStyle } = series;
 
-            const seriesStyle = style.series && stylePropertyName ? style.series[stylePropertyName] : undefined;
+            const seriesStyle =
+                style.lines?.customLineStyles && customLineStyle
+                    ? style.lines.customLineStyles[customLineStyle]
+                    : undefined;
+
+            const displayMarker = seriesStyle?.markers?.display;
+
+            if (
+                displayMarker !== undefined &&
+                !(displayMarker === "false" || displayMarker === "underneath" || displayMarker === "onTop")
+            ) {
+                console.warn(
+                    `${warningMessagePrefix}nvalid value for series marker style property, display, valid values are "false", "underneath" and "onTop".`
+                );
+            }
 
             const markers =
                 lineStyle === "lineWithMarkers" ||
-                (lineStyle === "custom" && seriesStyle?.markers?.display !== "false") ? (
-                    <VictoryScatter data={dataPoints} style={seriesStyle?.markers} size={seriesStyle?.markers?.size} />
-                ) : (
-                    undefined
-                );
+                (lineStyle === "custom" && seriesStyle?.markers?.display && seriesStyle.markers.display !== "false") ? (
+                    <VictoryScatter
+                        data={dataPoints}
+                        style={mapToMarkerStyle(seriesStyle?.markers)}
+                        size={seriesStyle?.markers?.size}
+                        symbol={seriesStyle?.markers?.symbol}
+                    />
+                ) : undefined;
 
             return (
                 <VictoryGroup key={index}>
-                    {markers && (!seriesStyle?.markers?.display || seriesStyle.markers.display !== "onTop")
+                    {markers && seriesStyle?.markers?.display === "underneath" ? markers : null}
+                    <VictoryLine
+                        style={mapToLineStyle(seriesStyle?.line)}
+                        data={dataPoints}
+                        interpolation={interpolation}
+                    />
+                    {markers && (!seriesStyle?.markers?.display || seriesStyle?.markers?.display !== "underneath")
                         ? markers
                         : null}
-                    <VictoryLine style={seriesStyle?.line} data={dataPoints} interpolation={interpolation} />
-                    {markers && seriesStyle?.markers?.display === "onTop" ? markers : null}
                 </VictoryGroup>
             );
         });
-    }, [dataTypesResult, series, style]);
+    }, [dataTypesResult, lines, style, warningMessagePrefix]);
 
-    const [firstSeries] = series;
+    const [firstSeries] = lines;
+
+    const axisLabelStyles = useMemo(() => {
+        const [extractedXAxisLabelStyle, xAxisLabelStyle] = extractStyles(style.xAxis?.label, ["relativePositionGrid"]);
+        const [extractedYAxisLabelStyle, yAxisLabelStyle] = extractStyles(style.yAxis?.label, ["relativePositionGrid"]);
+
+        if (
+            !(
+                extractedXAxisLabelStyle.relativePositionGrid === "bottom" ||
+                extractedXAxisLabelStyle.relativePositionGrid === "right"
+            )
+        ) {
+            if (extractedXAxisLabelStyle.relativePositionGrid !== undefined) {
+                console.warn(
+                    `${warningMessagePrefix}nvalid value for X axis label style property, relativePositionGrid, valid values are "bottom" and "right".`
+                );
+            }
+
+            extractedXAxisLabelStyle.relativePositionGrid = "bottom";
+        }
+
+        if (
+            !(
+                extractedYAxisLabelStyle.relativePositionGrid === "top" ||
+                extractedYAxisLabelStyle.relativePositionGrid === "left"
+            )
+        ) {
+            if (extractedYAxisLabelStyle.relativePositionGrid !== undefined) {
+                console.warn(
+                    `${warningMessagePrefix}nvalid value for Y axis label style property, relativePositionGrid, valid values are "top" and "left".`
+                );
+            }
+
+            extractedYAxisLabelStyle.relativePositionGrid = "top";
+        }
+
+        return {
+            extractedXAxisLabelStyle,
+            xAxisLabelStyle,
+            extractedYAxisLabelStyle,
+            yAxisLabelStyle
+        };
+    }, [style, warningMessagePrefix]);
+
+    const xAxisLabelComponent = xAxisLabel ? <Text style={axisLabelStyles.xAxisLabelStyle}>{xAxisLabel}</Text> : null;
+    const yAxisLabelComponent = yAxisLabel ? <Text style={axisLabelStyles.yAxisLabelStyle}>{yAxisLabel}</Text> : null;
 
     const [chartDimensions, setChartDimensions] = useState<{ height: number; width: number }>();
 
@@ -85,72 +189,76 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     return (
         <View style={style.container}>
             {dataTypesResult instanceof Error ? (
-                <Text>{dataTypesResult.message}</Text>
+                <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (
-                <Fragment>
-                    <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
-                        {chartDimensions ? (
-                            <VictoryChart
-                                height={chartDimensions?.height}
-                                width={chartDimensions?.width}
-                                padding={style.chart?.padding}
-                                scale={
-                                    dataTypesResult
-                                        ? {
-                                              x: dataTypesResult.x === "number" ? "linear" : "time",
-                                              y: dataTypesResult.y === "number" ? "linear" : "time"
-                                          }
-                                        : undefined
-                                }
-                                style={style.chart}
-                            >
-                                <VictoryAxis
-                                    style={style.xAxis}
-                                    axisLabelComponent={
-                                        xAxisLabel ? (
-                                            <VictoryLabel
-                                                dx={style.xAxis?.axisLabel?.horizontalOffset}
-                                                dy={style.xAxis?.axisLabel?.verticalOffset}
-                                            />
-                                        ) : (
-                                            undefined
-                                        )
-                                    }
-                                    label={xAxisLabel}
-                                    orientation={"bottom"}
-                                    {...(firstSeries?.xFormatter ? { tickFormat: firstSeries.xFormatter } : undefined)}
-                                />
-                                <VictoryAxis
-                                    dependentAxis
-                                    style={style.yAxis}
-                                    axisLabelComponent={
-                                        yAxisLabel ? (
-                                            <VictoryLabel
-                                                dx={style.yAxis?.axisLabel?.verticalOffset}
-                                                dy={style.yAxis?.axisLabel?.horizontalOffset}
-                                            />
-                                        ) : (
-                                            undefined
-                                        )
-                                    }
-                                    label={yAxisLabel}
-                                    orientation={"left"}
-                                    {...(firstSeries.yFormatter ? { tickFormat: firstSeries.yFormatter } : undefined)}
-                                />
-                                {chartLines}
-                            </VictoryChart>
-                        ) : null}
+                <View style={style.chart}>
+                    <View style={{ flex: 1 }}>
+                        {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "top"
+                            ? yAxisLabelComponent
+                            : null}
+                        <View style={{ flex: 1, flexDirection: "row" }}>
+                            {axisLabelStyles.extractedYAxisLabelStyle.relativePositionGrid === "left"
+                                ? yAxisLabelComponent
+                                : null}
+
+                            <View onLayout={updateChartDimensions} style={{ flex: 1 }}>
+                                {chartDimensions ? (
+                                    <VictoryChart
+                                        height={chartDimensions?.height}
+                                        width={chartDimensions?.width}
+                                        padding={aggregateGridPadding(style.grid)}
+                                        scale={
+                                            dataTypesResult
+                                                ? {
+                                                      x: dataTypesResult.x === "number" ? "linear" : "time",
+                                                      y: dataTypesResult.y === "number" ? "linear" : "time"
+                                                  }
+                                                : undefined
+                                        }
+                                        style={mapToGridStyle(style.grid)}
+                                    >
+                                        <VictoryAxis
+                                            style={mapToAxisStyle(style.grid, style.xAxis)}
+                                            orientation={"bottom"}
+                                            {...(firstSeries?.xFormatter
+                                                ? { tickFormat: firstSeries.xFormatter }
+                                                : undefined)}
+                                        />
+                                        <VictoryAxis
+                                            dependentAxis
+                                            style={mapToAxisStyle(style.grid, style.yAxis)}
+                                            orientation={"left"}
+                                            {...(firstSeries.yFormatter
+                                                ? { tickFormat: firstSeries.yFormatter }
+                                                : undefined)}
+                                        />
+                                        <VictoryGroup colorScale={normalizedLineColors}>{chartLines}</VictoryGroup>
+                                    </VictoryChart>
+                                ) : null}
+                            </View>
+
+                            {axisLabelStyles.extractedXAxisLabelStyle.relativePositionGrid === "right"
+                                ? xAxisLabelComponent
+                                : null}
+                        </View>
+                        {axisLabelStyles.extractedXAxisLabelStyle.relativePositionGrid === "bottom"
+                            ? xAxisLabelComponent
+                            : null}
                     </View>
 
-                    {showLegend ? <Legend style={style} series={series} /> : null}
-                </Fragment>
+                    {showLegend ? (
+                        <Legend style={style.legend} items={lines} itemColors={normalizedLineColors} />
+                    ) : null}
+                </View>
             )}
         </View>
     );
 }
 
-function getDataTypes(series: LineChartSeries[]): { x: string; y: string } | Error | undefined {
-    let dataTypes: { x: string; y: string } | undefined;
+type DataTypeResult = { x: string; y: string };
+
+function getDataTypes(series: LineChartSeries[]): DataTypeResult | Error | undefined {
+    let dataTypes: DataTypeResult | undefined;
 
     for (const element of series) {
         const { dataPoints } = element;

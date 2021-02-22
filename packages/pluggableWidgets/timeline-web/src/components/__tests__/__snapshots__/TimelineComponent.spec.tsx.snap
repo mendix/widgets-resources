@@ -60,7 +60,7 @@ exports[`Timeline hides the timeline header 1`] = `
           <div
             className="widget-timeline-icon-wrapper"
           >
-            <Component
+            <Icon
               icon={
                 Object {
                   "iconUrl": "iconUrl",
@@ -170,7 +170,7 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
           <div
             className="widget-timeline-icon-wrapper"
           >
-            <Component
+            <Icon
               icon={
                 Object {
                   "iconUrl": "iconUrl",
@@ -373,7 +373,7 @@ exports[`Timeline with action set change style when hovered 1`] = `
           <div
             className="widget-timeline-icon-wrapper"
           >
-            <Component
+            <Icon
               icon={
                 Object {
                   "iconUrl": "iconUrl",
@@ -436,7 +436,7 @@ exports[`Timeline with action set change style when hovered 1`] = `
           <div
             className="widget-timeline-icon-wrapper"
           >
-            <Component
+            <Icon
               icon={
                 Object {
                   "iconUrl": "iconUrl",
@@ -546,7 +546,7 @@ exports[`Timeline with action set renders with clickable styles 1`] = `
           <div
             className="widget-timeline-icon-wrapper"
           >
-            <Component
+            <Icon
               icon={
                 Object {
                   "iconUrl": "iconUrl",
@@ -609,7 +609,7 @@ exports[`Timeline with action set renders with clickable styles 1`] = `
           <div
             className="widget-timeline-icon-wrapper"
           >
-            <Component
+            <Icon
               icon={
                 Object {
                   "iconUrl": "iconUrl",

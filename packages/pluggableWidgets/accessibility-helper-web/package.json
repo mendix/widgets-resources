@@ -11,7 +11,7 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server --open",
+    "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:ts",
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",

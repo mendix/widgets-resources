@@ -9,7 +9,7 @@ module.exports = {
     testPathIgnorePatterns: [`${cwd}/dist`, "<rootDir>/node_modules"],
     globals: {
         "ts-jest": {
-            tsConfig: `${cwd}/tsconfig.spec.json`
+            tsconfig: `${cwd}/tsconfig.spec.json`
         }
     },
     moduleDirectories: undefined,

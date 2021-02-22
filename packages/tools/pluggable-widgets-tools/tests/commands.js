@@ -1,5 +1,6 @@
 const { Mutex, Semaphore } = require("async-mutex");
 const { exec } = require("child_process");
+const { readFileSync, writeFileSync } = require("fs");
 const { copy, existsSync, readJson, writeJson } = require("fs-extra");
 const { join } = require("path");
 const { ls, mkdir, rm, tempdir } = require("shelljs");
@@ -42,14 +43,7 @@ async function main() {
     console.log("Preparing...");
 
     const { stdout: packOutput } = await execAsync("npm pack", join(__dirname, ".."));
-    const toolsPackagePath = join(
-        __dirname,
-        "..",
-        packOutput
-            .trim()
-            .split(/\n/g)
-            .pop()
-    );
+    const toolsPackagePath = join(__dirname, "..", packOutput.trim().split(/\n/g).pop());
 
     const workDirs = [];
     const workDirSemaphore = new Semaphore(PARALLELISM);
@@ -76,7 +70,12 @@ async function main() {
         )
     ).filter(f => f);
 
-    rm("-r", toolsPackagePath, ...workDirs);
+    console.log("All done!");
+    try {
+        rm("-r", toolsPackagePath, ...workDirs);
+    } catch (error) {
+        console.warn(`Error while removing files: ${error.message}`);
+    }
 
     if (failures.length) {
         failures.forEach(f => console.error(`Test for configuration ${f[0]} failed: ${f[1]}`));
@@ -84,6 +83,7 @@ async function main() {
     }
 
     async function runTest(workDir, platform, boilerplate, lang, version) {
+        const isNative = platform === "native";
         const widgetName = `generated_${version.replace(".", "_")}_${lang}_${platform}_${boilerplate}`;
         let widgetPackageJson;
 
@@ -112,6 +112,12 @@ async function main() {
 
         console.log(`[${widgetName}] Testing npm start...`);
         await testStart();
+
+        // Check native dependency management
+        if (isNative) {
+            console.log(`[${widgetName}] Testing native dependency management...`);
+            await testNativeDependencyManagement();
+        }
 
         console.log(`[${widgetName}] Tested!`);
 
@@ -157,6 +163,12 @@ async function main() {
 
             widgetPackageJson = await readJson(join(workDir, "package.json"));
             widgetPackageJson.devDependencies["@mendix/pluggable-widgets-tools"] = toolsPackagePath;
+
+            // Check native dependency management
+            if (isNative) {
+                widgetPackageJson.dependencies["react-native-maps"] = "0.27.0";
+            }
+
             await writeJson(join(workDir, "package.json"), widgetPackageJson);
 
             await execAsync("npm install --loglevel=error", workDir);
@@ -170,10 +182,10 @@ async function main() {
 
         async function testTest() {
             if (platform === "native") {
-                await execFailedAsync("npm test", workDir);
-                await execAsync("npm test -- -u", workDir);
+                await execFailedAsync("npm test -- --forceExit", workDir);
+                await execAsync("npm test -- -u --forceExit", workDir);
             } else {
-                await execAsync("npm test", workDir);
+                await execAsync("npm test -- --forceExit", workDir);
             }
         }
 
@@ -192,7 +204,7 @@ async function main() {
         }
 
         async function testTestUnit() {
-            await execAsync("npm run test:unit", workDir);
+            await execAsync("npm run test:unit -- --forceExit", workDir);
             if (!existsSync(join(workDir, `/dist/coverage/clover.xml`))) {
                 throw new Error("Expected coverage file to be generated, but it wasn't.");
             }
@@ -215,34 +227,74 @@ async function main() {
         }
 
         async function testStart() {
-            const startProcess = exec("npm start", { cwd: workDir });
+            const startProcess = exec("npm start", { cwd: workDir, env: { ...process.env, NO_COLOR: "true" } });
 
             try {
                 await new Promise((resolve, reject) => {
-                    startProcess.stdout.on("data", data => {
-                        if (/\berror\b/i.test(data)) {
+                    let inProgress = false;
+                    startProcess.stdout.on("data", onOutput);
+                    startProcess.stderr.on("data", onOutput);
+                    startProcess.on("exit", exitCode => {
+                        reject(new Error(`Exited with status ${exitCode}`));
+                    });
+                    function onOutput(data) {
+                        if (/error/i.test(data)) {
                             reject(new Error(`Received error ${data}`));
-                        } else if (
-                            data.includes("Finished 'copyToDeployment'") ||
-                            data.includes("Project is running at http://localhost:3000/")
-                        ) {
-                            console.log(`[${widgetName}] Start succeeded!`);
-                            resolve();
+                        } else if (/\bbundles /.test(data)) {
+                            inProgress = true;
+                        } else if (/\bcreated .* in /.test(data)) {
+                            inProgress = false;
+                            setTimeout(() => {
+                                if (!inProgress) {
+                                    console.log(`[${widgetName}] Start succeeded!`);
+                                    resolve();
+                                }
+                            }, 100);
                         }
-                    });
-                    startProcess.stderr.on("data", data => {
-                        reject(new Error(`Received error output: ${data}`));
-                    });
-                    startProcess.on("exit", code => {
-                        reject(new Error(`Exited with status ${code}`));
-                    });
+                    }
                 });
             } finally {
                 try {
-                    await promisify(kill)(startProcess.pid);
-                } catch (_) {}
-                await new Promise(resolve => setTimeout(resolve, 2000)); // give time for processes to die
+                    await promisify(kill)(startProcess.pid, "SIGKILL");
+                } catch (_) {
+                    console.warn(`[${widgetName}] Error while killing start process`);
+                }
+                await new Promise(resolve => setTimeout(resolve, 5000)); // give time for processes to die
             }
+        }
+
+        async function testNativeDependencyManagement() {
+            const entryPointPath = join(workDir, "src", `Generated.${lang}x`);
+            const jsonPath = join(workDir, `/dist/tmp/widgets/${widgetPackageJson.widgetName}.json`);
+            const fileData = readFileSync(entryPointPath);
+            writeFileSync(
+                entryPointPath,
+                Buffer.concat([
+                    Buffer.from(`import "react-native-maps";
+`),
+                    Buffer.from(fileData)
+                ])
+            );
+            await execAsync("npm run build", workDir);
+            if (!existsSync(jsonPath)) {
+                throw new Error("Expected dependency json file to be generated, but it wasn't.");
+            }
+            const dependencyJson = await readJson(jsonPath);
+            if (
+                !dependencyJson.nativeDependencies ||
+                dependencyJson.nativeDependencies["react-native-maps"] !== "0.27.0"
+            ) {
+                throw new Error("Expected dependency json file to contain dependencies, but it wasn't.");
+            }
+            if (!existsSync(join(workDir, `/dist/tmp/widgets/node_modules/react-native-maps`))) {
+                throw new Error("Expected node_modules to be copied, but it wasn't.");
+            }
+            if (
+                !existsSync(join(workDir, `/dist/tmp/widgets/node_modules/react-native-maps/node_modules/prop-types`))
+            ) {
+                throw new Error("Expected transitive node_modules to be copied, but it wasn't.");
+            }
+            console.log(`[${widgetName}] Native dependency management succeeded!`);
         }
     }
 }

@@ -7,24 +7,29 @@ import { LineChartStyle, defaultLineChartStyle } from "./ui/Styles";
 import { useSeries } from "./utils/SeriesLoader";
 
 export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement | null {
-    const { series, showLegend, style, xAxisLabel, yAxisLabel } = props;
+    const { name, lines, showLegend, style, xAxisLabel, yAxisLabel } = props;
 
-    const customStyles = style ? style.filter(o => o != null) : [];
+    const customStyles = style.filter(o => o != null);
     const styles = all<LineChartStyle>([defaultLineChartStyle, ...customStyles]);
 
-    const chartSeries = useSeries(series);
+    const chartLines = useSeries(lines);
 
-    if (!chartSeries || (xAxisLabel && !xAxisLabel.value) || (yAxisLabel && !yAxisLabel.value)) {
+    if (
+        !chartLines ||
+        (xAxisLabel && xAxisLabel.value === undefined) ||
+        (yAxisLabel && yAxisLabel.value === undefined)
+    ) {
         return null;
     }
 
     return (
         <LineChartComponent
-            series={chartSeries.reverse()}
+            lines={chartLines}
             style={styles}
             showLegend={showLegend}
             xAxisLabel={xAxisLabel?.value}
             yAxisLabel={yAxisLabel?.value}
+            warningPrefix={`[${name}]: `}
         />
     );
 }

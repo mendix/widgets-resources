@@ -7,6 +7,6 @@ const { writeVersionFiles } = require("./lib/writeFile.js");
     const versionNumbers = files.pkg.version.split(".");
     const majorNumber = Number(versionNumbers[0]) + 1;
     const majorVersion = majorNumber + "." + 0 + "." + 0;
-    files.pkg.version = files.manifest.ts.version = files.manifest.js.version = files.manifest.sass.version = majorVersion;
+    files.pkg.version = files.manifest.native.version = files.manifest.web.version = majorVersion;
     writeVersionFiles(files, paths);
 })();

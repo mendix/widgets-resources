@@ -4,7 +4,11 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { GeolocationError, GeolocationOptions, GeolocationResponse } from "@react-native-community/geolocation";
+import Geolocation, {
+    GeolocationError,
+    GeolocationOptions,
+    GeolocationResponse
+} from "@react-native-community/geolocation";
 
 /**
  * This action retrieves the current geographical position of a user/device.
@@ -28,7 +32,7 @@ export async function GetCurrentLocation(
     // BEGIN USER CODE
 
     if (navigator && navigator.product === "ReactNative" && !navigator.geolocation) {
-        (navigator.geolocation as any) = require("@react-native-community/geolocation");
+        (navigator.geolocation as any) = Geolocation;
     }
 
     return new Promise((resolve, reject) => {

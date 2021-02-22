@@ -3,8 +3,8 @@
         "noEmitOnError": true,
         "sourceMap": true,
         "module": "esnext",
-        "target": "es5",
-        "lib": ["es2019", "dom"],
+        "target": "es6",
+        "lib": ["esnext", "dom"],
         "types": ["big.js", "jest"],
         "moduleResolution": "node",
         "declaration": false,
@@ -21,7 +21,5 @@
         "jsxFactory": "createElement",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true
-    },
-    "include": ["../../../../src"],
-    "exclude": ["../../../../dist/", "../../../../node_modules/"]
+    }
 }

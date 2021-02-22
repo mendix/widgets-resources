@@ -15,6 +15,7 @@ if (!fs.existsSync(e2ePath)) {
 
 exports.config = {
     before() {
+        require("@babel/register");
         require("ts-node").register({ files: true, project: path.resolve(variables.path, "tests/e2e/tsconfig.json") });
     },
     host: "127.0.0.1",
@@ -41,6 +42,7 @@ exports.config = {
     execArgv: debug ? ["--inspect"] : undefined,
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
+        helpers: [require("@babel/register")],
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
     },
     afterTest: test => {

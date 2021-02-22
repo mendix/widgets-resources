@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
-import { NativeModules } from "react-native";
-import ReactNativeFirebase from "react-native-firebase";
+import { NativeModules, Platform } from "react-native";
+import PushNotification from "react-native-push-notification";
 
 /**
  * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.
@@ -13,13 +13,15 @@ import ReactNativeFirebase from "react-native-firebase";
  */
 export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
     // BEGIN USER CODE
-    // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/reference/Notifications#setBadge
+    // Documentation https://github.com/zo0r/react-native-push-notification
 
-    if (NativeModules && !NativeModules.RNFirebase) {
-        return Promise.reject(new Error("Firebase module is not available in your app"));
+    const isIOS = Platform.OS === "ios";
+    if (
+        NativeModules &&
+        ((isIOS && !NativeModules.RNCPushNotificationIOS) || (!isIOS && !NativeModules.RNPushNotification))
+    ) {
+        return Promise.reject(new Error("Notifications module is not available in your app"));
     }
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const firebase: typeof ReactNativeFirebase = require("react-native-firebase");
 
     if (!badgeNumber) {
         return Promise.reject(new Error("Input parameter 'Badge number' is required"));
@@ -29,7 +31,7 @@ export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
         return Promise.reject(new Error("Input parameter 'Badge number' should be zero or greater"));
     }
 
-    return firebase.notifications().setBadge(Number(badgeNumber));
+    return PushNotification.setApplicationIconBadgeNumber(Number(badgeNumber));
 
     // END USER CODE
 }
