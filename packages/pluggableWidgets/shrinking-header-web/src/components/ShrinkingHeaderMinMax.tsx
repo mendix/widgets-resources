@@ -50,6 +50,7 @@ export function ShrinkingHeaderMinMax(props: PropsWithChildren<ShrinkingHeaderPr
     );
 
     function updateHeaderHeight(this: HTMLElement): void {
+        console.log("update height", this);
         setHeaderHeight(maxHeight - (this.scrollTop > maxHeight - minHeight ? maxHeight - minHeight : this.scrollTop));
     }
 
@@ -57,6 +58,7 @@ export function ShrinkingHeaderMinMax(props: PropsWithChildren<ShrinkingHeaderPr
         if (headerRef && scrollableDivRef) {
             setShowContent(true);
 
+            console.log("hi");
             scrollableDivRef.addEventListener("scroll", updateHeaderHeight);
 
             return () => {
@@ -97,11 +99,17 @@ export function ShrinkingHeaderMinMax(props: PropsWithChildren<ShrinkingHeaderPr
     // }, [headerRef.current, scrollableDivRef.current]);
 
     return (
-        <div id={name} className={classNames("shrinking-header-min-max", className)} style={style} tabIndex={tabIndex}>
+        <div
+            id={name}
+            ref={scrollableDivRefCallback}
+            className={classNames("shrinking-header-min-max", className)}
+            style={style}
+            tabIndex={tabIndex}
+        >
             <header ref={headerRefCallback} className={"header"}>
                 {showContent ? headerContent : null}
             </header>
-            <div ref={scrollableDivRefCallback} className={"scroll-container"}>
+            <div className={"scroll-container"}>
                 <div>{showContent ? scrollableContent : null}</div>
             </div>
         </div>
