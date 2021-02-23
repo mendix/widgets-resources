@@ -90,7 +90,8 @@ export default async args => {
                 external: nativeExternal,
                 plugins: [
                     replace({
-                        "Platform.OS": `"${os}"`
+                        "Platform.OS": `"${os}"`,
+                        preventAssignment: true
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
