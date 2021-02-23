@@ -85,9 +85,9 @@ describe("StyleMappers", () => {
 
     describe("mapToBarStyles", () => {
         it("maps the relevant styles", () => {
-            const styles: NonNullable<NonNullable<
-                NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]
-            >> = {
+            const styles: NonNullable<
+                NonNullable<NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]>
+            > = {
                 bar: {
                     ending: 4,
                     barColor: "rgba(255,0,0,0.3)",
@@ -121,9 +121,9 @@ describe("StyleMappers", () => {
 
         it("falls back to fallback palette colour", () => {
             const fallbackColor = "red";
-            const styles: NonNullable<NonNullable<
-                NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]
-            >> = {
+            const styles: NonNullable<
+                NonNullable<NonNullable<NonNullable<BarChartStyle["bars"]>["customBarStyles"]>["key"]>
+            > = {
                 bar: {
                     ending: 4,
                     width: 15
