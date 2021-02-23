@@ -1,5 +1,6 @@
 import { createElement, CSSProperties, ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
+import { throttle } from "lodash-es";
 
 import "../ui/ShrinkingHeader.scss";
 
@@ -33,17 +34,20 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
 
     const scrollableContentDivRef = useRef<HTMLDivElement>(null);
 
-    function onScroll(this: HTMLElement): void {
-        if (this.scrollTop >= shrinkThreshold) {
-            setShrunk(true);
-        } else {
-            setShrunk(false);
-        }
-    }
-
     useEffect(() => {
         const scrollableContentDiv = scrollableContentDivRef.current;
+
         if (scrollableContentDiv) {
+            const evaluateShrunkState = function (this: HTMLElement): void {
+                console.log("evaluate");
+                if (this.scrollTop >= shrinkThreshold) {
+                    setShrunk(true);
+                } else {
+                    setShrunk(false);
+                }
+            };
+
+            const onScroll = throttle(evaluateShrunkState, 100, { trailing: true });
             scrollableContentDiv.addEventListener("scroll", onScroll);
 
             return () => {
