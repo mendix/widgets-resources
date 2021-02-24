@@ -90,7 +90,8 @@ export default async args => {
                 external: nativeExternal,
                 plugins: [
                     replace({
-                        "Platform.OS": `"${os}"`
+                        values: { "Platform.OS": `"${os}"` },
+                        preventAssignment: true
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
@@ -198,7 +199,8 @@ export default async args => {
             }),
             commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
             replace({
-                "process.env.NODE_ENV": production ? "'production'" : "'development'"
+                values: { "process.env.NODE_ENV": production ? "'production'" : "'development'" },
+                preventAssignment: true
             }),
             config.transpile
                 ? getBabelOutputPlugin({

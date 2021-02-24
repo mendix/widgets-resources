@@ -72,7 +72,7 @@ async function main() {
 
     console.log("All done!");
     try {
-        rm("-r", toolsPackagePath, ...workDirs);
+        rm("-rf", toolsPackagePath, ...workDirs);
     } catch (error) {
         console.warn(`Error while removing files: ${error.message}`);
     }
