@@ -17,13 +17,15 @@ async function main() {
         const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
         outputDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
 
-        const toRemoveDirs = [join(outputDir, "theme"), join(outputDir, "themesource/atlas*")];
-        const toRemoveDirsExist = await Promise.all(toRemoveDirs.map(async dir => exists(dir)));
-
-        if (toRemoveDirsExist.includes(true)) {
-            rm("-rf", toRemoveDirs);
-            console.info(`Successfully removed Atlas theme files from Mendix project`);
-        }
+        const toRemoveDirs = [join(outputDir, "theme"), join(outputDir, "themesource/atlas_ui_resources")];
+        await Promise.all(
+            toRemoveDirs.map(async dir => {
+                if (await exists(dir)) {
+                    rm("-rf", dir);
+                    console.info(`Successfully removed ${dir} from your Mendix project`);
+                }
+            })
+        );
     } else if (mode === "release") {
         outputDir = join(__dirname, "../dist");
 
