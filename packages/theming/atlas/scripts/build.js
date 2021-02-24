@@ -23,10 +23,8 @@ async function main() {
     } else if (mode === "release") {
         outputDir = join(__dirname, "../dist");
 
-        if (await exists(outputDir)) {
-            rm("-rf", outputDir);
-            console.info(`Successfully removed dist folder`);
-        }
+        rm("-rf", outputDir);
+        console.info(`Ensured the directory ${outputDir} is removed.`);
     } else {
         throw new Error(`Invalid mode: "${mode}"`);
     }
@@ -65,14 +63,5 @@ async function buildAndCopyAtlas(watchMode, destination) {
         console.log("Success", success);
     } catch (failure) {
         throw new Error(`Failure ${failure}`);
-    }
-}
-
-async function exists(filePath) {
-    try {
-        await access(filePath);
-        return true;
-    } catch (e) {
-        return false;
     }
 }
