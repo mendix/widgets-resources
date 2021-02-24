@@ -18,14 +18,8 @@ async function main() {
         outputDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
 
         const toRemoveDirs = [join(outputDir, "theme"), join(outputDir, "themesource/atlas_ui_resources")];
-        await Promise.all(
-            toRemoveDirs.map(async dir => {
-                if (await exists(dir)) {
-                    rm("-rf", dir);
-                    console.info(`Successfully removed ${dir} from your Mendix project`);
-                }
-            })
-        );
+        rm("-rf", toRemoveDirs);
+        console.info(`Ensured the directories ${toRemoveDirs.join(", ")} are removed from your Mendix project`);
     } else if (mode === "release") {
         outputDir = join(__dirname, "../dist");
 
