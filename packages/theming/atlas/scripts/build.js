@@ -1,65 +1,82 @@
-const { rm, cd } = require("shelljs");
-const { join } = require("path");
 const concurrently = require("concurrently");
+const { access } = require("fs").promises;
+const { join } = require("path");
+const { rm } = require("shelljs");
 
-const mode = process.argv[2] || "build";
-const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
-const outputProjectDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
-let outputThemeDir;
-let outputThemeSourceDir;
-let projectDeployDirWeb;
+main().catch(e => {
+    console.error(e);
+    process.exit(-1);
+});
 
-switch (mode) {
-    case "build":
-    case "start":
-        outputThemeDir = join(outputProjectDir);
-        outputThemeSourceDir = join(outputProjectDir, "themesource/atlas_ui_resources");
-        projectDeployDirWeb = join(outputProjectDir, "deployment/web");
-        break;
-    case "release":
-        outputThemeDir = join(__dirname, "../dist");
-        outputThemeSourceDir = join(__dirname, "../dist/themesource/atlas_ui_resources");
-        break;
+async function main() {
+    const mode = process.argv[2] || "build";
+
+    let outputDir;
+
+    if (mode === "build" || mode === "start") {
+        const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
+        outputDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
+
+        const toRemoveDirs = [join(outputDir, "theme"), join(outputDir, "themesource/atlas*")];
+        const toRemoveDirsExist = await Promise.all(toRemoveDirs.map(async dir => exists(dir)));
+
+        if (toRemoveDirsExist.includes(true)) {
+            rm("-rf", toRemoveDirs);
+            console.info(`Successfully removed Atlas theme files from Mendix project`);
+        }
+    } else if (mode === "release") {
+        outputDir = join(__dirname, "../dist");
+
+        if (await exists(outputDir)) {
+            rm("-rf", outputDir);
+            console.info(`Successfully removed dist folder`);
+        }
+    } else {
+        throw new Error(`Invalid mode: "${mode}"`);
+    }
+
+    await buildAndCopyAtlas(mode === "start", outputDir);
 }
 
-console.info(`Building for ${mode}...`);
-const watchArg = mode === "start" ? "--watch" : "";
-cd(join(__dirname, ".."));
-rm("-rf", outputThemeDir);
-concurrently(
-    [
-        {
-            name: "web-theme-content",
-            command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${outputThemeDir}/theme/web"`
-        },
-        {
-            name: "web-themesource-content",
-            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/web/**/*' '${outputThemeSourceDir}/web'`
-        },
-        {
-            name: "native-typescript",
-            command: `tsc ${watchArg} --project tsconfig.json --outDir '${outputThemeDir}'`
-        },
-        {
-            name: "native-design-properties-and-manifest",
-            command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/native/**/*.json' '${outputThemeSourceDir}/native'`
-        }
-    ],
-    {
-        killOthers: ["failure"]
-    }
-).then(
-    success => {
-        console.log("Success", success);
-    },
-    failure => {
-        console.error("Failure", failure);
-        process.exit(-1);
-    }
-);
+async function buildAndCopyAtlas(watchMode, destination) {
+    console.info(`Building & copying Atlas...`);
+    const watchArg = watchMode ? "--watch" : "";
 
-function command(command) {
-    return function (outputPath) {
-        return `${command} '${outputPath}'`;
-    };
+    try {
+        const success = await concurrently(
+            [
+                {
+                    name: "web-theme-content",
+                    command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${destination}/theme/web"`
+                },
+                {
+                    name: "web-themesource-content",
+                    command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/web/**/*' '${destination}/themesource/atlas_ui_resources/web'`
+                },
+                {
+                    name: "native-typescript",
+                    command: `tsc ${watchArg} --project tsconfig.json --outDir '${destination}'`
+                },
+                {
+                    name: "native-design-properties-and-manifest",
+                    command: `copy-and-watch ${watchArg} 'src/themesource/atlas_ui_resources/native/**/*.json' '${destination}/themesource/atlas_ui_resources/native'`
+                }
+            ],
+            {
+                killOthers: ["failure"]
+            }
+        );
+        console.log("Success", success);
+    } catch (failure) {
+        throw new Error(`Failure ${failure}`);
+    }
+}
+
+async function exists(filePath) {
+    try {
+        await access(filePath);
+        return true;
+    } catch (e) {
+        return false;
+    }
 }
