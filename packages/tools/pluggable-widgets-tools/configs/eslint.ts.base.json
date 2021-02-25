@@ -17,7 +17,8 @@
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
         "prettier",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -135,6 +136,7 @@
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "radix": "error",
+        "react-hooks/rules-of-hooks": "warn",
         "spaced-comment": "error",
 
         "jest/no-disabled-tests": "warn",
