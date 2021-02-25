@@ -22,7 +22,7 @@ async function main() {
         throw new Error("Cannot find a tests/testProject. Did you run the script in the widget folder?");
     }
 
-    rm("-rf", "tests/testProject/theme", "tests/testProject/themesource/atlas*");
+    rm("-rf", "tests/testProject/theme", "tests/testProject/themesource/atlas_ui_resources");
 
     if (process.argv.includes("--latest-atlas")) {
         await copyLatestAtlas();
