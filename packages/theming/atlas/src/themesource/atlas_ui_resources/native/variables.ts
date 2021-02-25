@@ -5,6 +5,7 @@ import { anyColorToRgbString, setContrastScale } from "./core/helpers/_functions
 import merge from "./core/helpers/_functions/mergeobjects";
 import {
     VariablesBackground,
+    VariablesBackgroundDefaults,
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
@@ -13,6 +14,7 @@ import {
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
+    VariablesFontDefaults,
     VariablesImage,
     VariablesInput,
     VariablesIntroScreen,
@@ -52,9 +54,15 @@ let brand: VariablesBrand = {
 brand = merge(brand, custom.brand || ({} as any));
 //
 // Background colors
+const backgroundDefaults: VariablesBackgroundDefaults = {
+    primaryLight: "#FFF",
+    primaryDark: "#0A1325",
+    grayLight: "#F8F8F8",
+    grayDark: "#161F30"
+};
 let background: VariablesBackground = {
-    primary: custom.darkMode ? "#0A1325" : "#FFF",
-    gray: custom.darkMode ? "#161F30" : "#F8F8F8",
+    primary: custom.darkMode ? backgroundDefaults.primaryDark : backgroundDefaults.primaryLight,
+    gray: custom.darkMode ? backgroundDefaults.grayDark : backgroundDefaults.grayLight,
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -85,6 +93,14 @@ let border: VariablesBorder = {
 border = merge(border, custom.border || ({} as any));
 //
 // Font Styles
+const fontDefaults: VariablesFontDefaults = {
+    colorTitleDark: "#0A1326",
+    colorTitleLight: "#FDFDFD",
+    colorParagraphDark: "#6C717E",
+    colorParagraphLight: "#E7E7E9",
+    colorDisabledDark: "#9DA1A8",
+    colorDisabledLight: "#9DA1A8"
+};
 let font: VariablesFont = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
@@ -104,9 +120,9 @@ let font: VariablesFont = {
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: custom.darkMode ? "#FDFDFD" : "#0A1326",
-    colorParagraph: custom.darkMode ? "#E7E7E9" : "#6C717E",
-    colorDisabled: custom.darkMode ? "#9DA1A8" : "#9DA1A8",
+    colorTitle: custom.darkMode ? fontDefaults.colorTitleLight : fontDefaults.colorTitleDark,
+    colorParagraph: custom.darkMode ? fontDefaults.colorParagraphLight : fontDefaults.colorParagraphDark,
+    colorDisabled: custom.darkMode ? fontDefaults.colorDisabledLight : fontDefaults.colorDisabledDark,
     weightLight: "100", // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
@@ -592,10 +608,12 @@ slider = merge(slider, custom.slider || ({} as any));
 export * from "../../../theme/native/custom-variables";
 export {
     brand,
+    backgroundDefaults,
     background,
     border,
     button,
     contrast,
+    fontDefaults,
     font,
     input,
     image,
