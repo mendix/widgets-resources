@@ -116,3 +116,7 @@
 .widget-progress-bar.progress-bar-background-danger > .progress {
     background-color: $brand-danger;
 }
+
+.widget-progress-bar > .alert {
+    margin-top: 24px;
+}
