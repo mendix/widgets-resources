@@ -24,7 +24,7 @@ async function main() {
         outputDir = join(__dirname, "../dist");
 
         rm("-rf", outputDir);
-        console.info(`Ensured the directory ${outputDir} is removed.`);
+        console.info(`Ensured the directory ${outputDir} is removed`);
     } else {
         throw new Error(`Invalid mode: "${mode}"`);
     }

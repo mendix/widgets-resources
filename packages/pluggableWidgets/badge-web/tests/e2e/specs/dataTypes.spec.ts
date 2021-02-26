@@ -33,6 +33,13 @@ describe("BadgeButton different data types", () => {
 
             expect(badgeButton.getBadgeText()).toEqual("0.56");
         });
+
+        it("should display correctly enum data", () => {
+            const badgeButton = new badge("badgeEnum");
+            badgeButton.element.waitForDisplayed();
+
+            expect(badgeButton.getBadgeText()).toEqual("C Success");
+        });
     });
 
     describe("type: label", () => {
@@ -62,6 +69,13 @@ describe("BadgeButton different data types", () => {
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("0.56");
+        });
+
+        it("should display correctly enum data", () => {
+            const badgeButton = new badge("labelEnum");
+            badgeButton.element.waitForDisplayed();
+
+            expect(badgeButton.getBadgeText()).toEqual("C Success");
         });
     });
 });

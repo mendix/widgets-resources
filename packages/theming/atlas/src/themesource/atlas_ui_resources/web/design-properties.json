@@ -970,7 +970,7 @@
             "class": "table-compact"
         }
     ],
-    "com.mendix.widget.web.badge.Badge": [
+    "com.mendix.widget.custom.badge.Badge": [
         {
             "name": "Style",
             "type": "Dropdown",

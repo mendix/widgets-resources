@@ -14,16 +14,17 @@ export function getPreview(values: BadgePreviewProps): StructurePreviewProps {
                         children: [
                             {
                                 type: "Text",
-                                content: values.value || "   ",
+                                content: values.value,
                                 fontColor: "#FFF",
-                                bold: true
+                                bold: true,
+                                fontSize: 8
                             }
                         ],
-                        padding: values.value ? 8 : 26
+                        padding: values.value ? 8 : 18
                     }
                 ],
                 backgroundColor: "#264AE5",
-                borderRadius: values.type === "badge" ? 24 : 8
+                borderRadius: values.type === "badge" ? 22 : 8
             },
             { type: "Container", grow: 2 }
         ]
