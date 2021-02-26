@@ -36,7 +36,7 @@ jobs:
               if: startsWith(matrix.os, 'windows')
               id: variablesWindows
               run: |
-                  $CHANGED_GLOBAL_FILES = "$('${{ steps.files.outputs.all }}' | Select-String -Pattern '^packages' -NotMatch)"
+                  $CHANGED_GLOBAL_FILES = "$('${{ steps.files.outputs.added_modified }}' | Select-String -Pattern '^packages' -NotMatch)"
                   echo "::set-output name=arg::$(If ($CHANGED_GLOBAL_FILES -eq '' -AND '${{ github.event_name == 'pull_request' }}' -eq 'true'){ echo '--since origin/${{ github.base_ref }}' } Else { echo '' })"
             - name: "Defining environment variables"
               if: startsWith(matrix.os, 'ubuntu')
