@@ -2,7 +2,7 @@
   "name": "badge-web",
   "widgetName": "Badge",
   "version": "2.0.0",
-  "description": "Shows a value as a badge or a color label",
+  "description": "Shows a value inside colored badge or label",
   "copyright": "Mendix Technology B.V.",
   "license": "Apache-2.0",
   "repository": {
@@ -13,7 +13,7 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
-  "packagePath": "com.mendix.widget.web",
+  "packagePath": "com.mendix.widget.custom",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
