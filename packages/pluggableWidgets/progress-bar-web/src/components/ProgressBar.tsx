@@ -33,8 +33,6 @@ function getValuesErrorMessage(currentValue: number, minValue: number, maxValue:
  * `theming/atlas/src/themesource/atlas_ui_resources/web/core/helpers/_progressbar.scss` because the
  * information regarding the size of the progress bar is only available through the passed CSS classes
  * as it's a design property. Thus the only way to make use of this information is doing a string check.
- * This was not used for the conditional visibility of the label since that can be done through pure CSS
- * and avoid the usage of this function unless not it's unavoidable.
  */
 function isSizeSmall(className: string): boolean {
     return className.includes("progress-bar-small");
@@ -70,7 +68,7 @@ export function ProgressBar({
                     title={isSizeSmall(className) && isTextualLabel ? (label as string) : undefined}
                     style={{ width: `${percentage}%` }}
                 >
-                    {label}
+                    {isSizeSmall(className) && !isTextualLabel ? null : label}
                 </div>
             </div>
             {errorMessage ? (

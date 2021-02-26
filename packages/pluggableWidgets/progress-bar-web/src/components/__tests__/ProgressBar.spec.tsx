@@ -266,7 +266,7 @@ describe("Progress bar", () => {
             expect(getProgressBarLabelElement(progressBar).prop("title")).toBe("30%");
         });
 
-        it("does not have a tooltip when the size is small and label type is custom", () => {
+        it("does not have a tooltip nor a label when the size is small and label type is custom", () => {
             const progressBar = mount(
                 <ProgressBar
                     currentValue={30}
@@ -278,7 +278,9 @@ describe("Progress bar", () => {
                     labelType="custom"
                 />
             );
-            expect(getProgressBarLabelElement(progressBar).prop("title")).toBe(undefined);
+            const labelElement = getProgressBarLabelElement(progressBar);
+            expect(labelElement.prop("title")).toBe(undefined);
+            expect(labelElement.find(RandomComponent)).toHaveLength(0);
         });
     });
 });
