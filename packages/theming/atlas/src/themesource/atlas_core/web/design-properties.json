@@ -1069,11 +1069,11 @@
                 },
                 {
                     "name": "Brand Info",
-                    "class": "progress-bar-background-success"
+                    "class": "progress-bar-background-info"
                 },
                 {
                     "name": "Brand Success",
-                    "class": "progress-bar-background-info"
+                    "class": "progress-bar-background-success"
                 },
                 {
                     "name": "Brand Warning",
