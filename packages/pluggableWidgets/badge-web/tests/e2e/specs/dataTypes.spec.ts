@@ -6,35 +6,35 @@ describe("BadgeButton different data types", () => {
         page.open("p/dataTypes");
     });
     describe("type: badge", () => {
-        it("should display correctly string data", () => {
+        it("displays correctly string data", () => {
             const badgeButton = new badge("badgeString");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("string type");
         });
 
-        it("should display correctly integer data", () => {
+        it("displays correctly integer data", () => {
             const badgeButton = new badge("badgeInteger");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("987");
         });
 
-        it("should display correctly long data", () => {
+        it("displays correctly long data", () => {
             const badgeButton = new badge("badgeLong");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("123456789012345678");
         });
 
-        it("should display correctly decimal data", () => {
+        it("displays correctly decimal data", () => {
             const badgeButton = new badge("badgeDecimal");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("0.56");
         });
 
-        it("should display correctly enum data", () => {
+        it("displays correctly enum data", () => {
             const badgeButton = new badge("badgeEnum");
             badgeButton.element.waitForDisplayed();
 
@@ -43,35 +43,35 @@ describe("BadgeButton different data types", () => {
     });
 
     describe("type: label", () => {
-        it("should display correctly string data", () => {
+        it("displays correctly string data", () => {
             const badgeButton = new badge("labelString");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("string type");
         });
 
-        it("should display correctly integer data", () => {
+        it("displays correctly integer data", () => {
             const badgeButton = new badge("labelInteger");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("987");
         });
 
-        it("should display correctly long data", () => {
+        it("displays correctly long data", () => {
             const badgeButton = new badge("labelLong");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("123456789012345678");
         });
 
-        it("should display correctly decimal data", () => {
+        it("displays correctly decimal data", () => {
             const badgeButton = new badge("labelDecimal");
             badgeButton.element.waitForDisplayed();
 
             expect(badgeButton.getBadgeText()).toEqual("0.56");
         });
 
-        it("should display correctly enum data", () => {
+        it("displays correctly enum data", () => {
             const badgeButton = new badge("labelEnum");
             badgeButton.element.waitForDisplayed();
 
