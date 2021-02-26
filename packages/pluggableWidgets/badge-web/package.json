@@ -2,7 +2,7 @@
   "name": "badge-web",
   "widgetName": "Badge",
   "version": "2.0.0",
-  "description": "Shows a value inside colored badge or label",
+  "description": "Shows a value inside a colored badge or label",
   "copyright": "Mendix Technology B.V.",
   "license": "Apache-2.0",
   "repository": {
