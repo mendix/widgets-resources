@@ -29,13 +29,13 @@ describe("Fieldset", () => {
     });
 
     it("renders when content is hidden by conditional visibility", () => {
-        const switchWidget = page.getWidget("visibleSwitch");
+        const checkBoxWidget = page.getWidget("checkBoxVisible");
         const fieldset = new FieldsetWidget("fieldsetConVis");
 
         expect(fieldset.hasLegend()).toBe(true);
         expect(fieldset.getContent().length).toBe(2);
 
-        switchWidget.$(".widget-switch-btn-wrapper").click();
+        checkBoxWidget.click();
         expect(fieldset.hasLegend()).toBe(true);
         expect(fieldset.getContent().length).toBe(0);
     });
