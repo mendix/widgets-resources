@@ -48,6 +48,7 @@ export const ProgressBar: FunctionComponent<ProgressBarContainerProps> = props =
                         : props.labelText?.value
                     : null
             }
+            labelType={props.labelType}
         />
     );
 };

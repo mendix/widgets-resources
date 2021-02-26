@@ -1061,7 +1061,7 @@
                 },
                 {
                     "name": "Brand Default",
-                    "class": "progress-bar-background-default"
+                    "class": "progress-bar-background-brand-default"
                 },
                 {
                     "name": "Brand Primary",

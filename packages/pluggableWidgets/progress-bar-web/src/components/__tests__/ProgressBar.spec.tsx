@@ -1,13 +1,17 @@
 import { Alert } from "@widgets-resources/piw-utils";
-import { mount, ReactWrapper, shallow } from "enzyme";
+import { HTMLAttributes, mount, ReactWrapper, shallow } from "enzyme";
 import { createElement, CSSProperties, FunctionComponent } from "react";
 import { ProgressBar, ProgressBarProps } from "../ProgressBar";
 
 const RandomComponent: FunctionComponent<any> = () => <div>This is a random component</div>;
+const progressBarSmallClassName = "progress-bar-small";
 
 describe("Progress bar", () => {
+    function getProgressBarLabelElement(progressBar: ReactWrapper<ProgressBarProps>): ReactWrapper<HTMLAttributes> {
+        return progressBar.find(".progress-bar");
+    }
     function getProgressBarStyle(progressBar: ReactWrapper<ProgressBarProps>): CSSProperties | undefined {
-        return progressBar.find(".progress-bar").prop("style");
+        return getProgressBarLabelElement(progressBar).prop("style");
     }
     const progress = 23;
     const maximumValue = 100;
@@ -22,6 +26,7 @@ describe("Progress bar", () => {
                 onClick={onClickSpy}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
         expect(progressBar).toMatchSnapshot();
@@ -36,6 +41,7 @@ describe("Progress bar", () => {
                 onClick={onClickSpy}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
 
@@ -51,6 +57,7 @@ describe("Progress bar", () => {
                 onClick={onClickSpy}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
         const progressElement = progressBar.find(".progress");
@@ -68,6 +75,7 @@ describe("Progress bar", () => {
                 onClick={onClickSpy}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
 
@@ -84,6 +92,7 @@ describe("Progress bar", () => {
                 onClick={onClickSpy}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
 
@@ -99,6 +108,7 @@ describe("Progress bar", () => {
                 onClick={onClickSpy}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
 
@@ -114,6 +124,7 @@ describe("Progress bar", () => {
                 onClick={undefined}
                 label={`${progress}%`}
                 class=""
+                labelType="text"
             />
         );
         expect(progressBar.find(".progress").hasClass("widget-progress-bar-clickable")).toBe(false);
@@ -129,6 +140,7 @@ describe("Progress bar", () => {
                     onClick={onClickSpy}
                     label={`${progress}%`}
                     class=""
+                    labelType="text"
                 />
             );
             const alert = progressBar.find(Alert);
@@ -147,6 +159,7 @@ describe("Progress bar", () => {
                     onClick={onClickSpy}
                     label={`${progress}%`}
                     class=""
+                    labelType="text"
                 />
             );
             const alert = progressBar.find(Alert);
@@ -165,6 +178,7 @@ describe("Progress bar", () => {
                     onClick={onClickSpy}
                     label={`${progress}%`}
                     class=""
+                    labelType="text"
                 />
             );
             const alert = progressBar.find(Alert);
@@ -185,6 +199,7 @@ describe("Progress bar", () => {
                     onClick={onClickSpy}
                     label="This is your progress"
                     class=""
+                    labelType="text"
                 />
             );
             expect(progressBar.text()).toBe("This is your progress");
@@ -199,6 +214,7 @@ describe("Progress bar", () => {
                     onClick={onClickSpy}
                     label={<RandomComponent />}
                     class=""
+                    labelType="text"
                 />
             );
             expect(progressBar.find(RandomComponent)).toHaveLength(1);
@@ -207,9 +223,62 @@ describe("Progress bar", () => {
 
         it("should accept nothing", () => {
             const progressBar = mount(
-                <ProgressBar currentValue={30} minValue={0} maxValue={100} onClick={onClickSpy} label={null} class="" />
+                <ProgressBar
+                    currentValue={30}
+                    minValue={0}
+                    maxValue={100}
+                    onClick={onClickSpy}
+                    label={null}
+                    class=""
+                    labelType="text"
+                />
             );
             expect(progressBar.text()).toHaveLength(0);
+        });
+
+        it("has a tooltip with the label text when the size is small and label type is text", () => {
+            const progressBar = mount(
+                <ProgressBar
+                    currentValue={30}
+                    minValue={0}
+                    maxValue={100}
+                    onClick={onClickSpy}
+                    label="This is a label text"
+                    class={`${progressBarSmallClassName}`}
+                    labelType="text"
+                />
+            );
+            expect(getProgressBarLabelElement(progressBar).prop("title")).toBe("This is a label text");
+        });
+
+        it("has a tooltip with the progress percentage when the size is small and label type is percentage", () => {
+            const progressBar = mount(
+                <ProgressBar
+                    currentValue={30}
+                    minValue={0}
+                    maxValue={100}
+                    onClick={onClickSpy}
+                    label="30%"
+                    class={`${progressBarSmallClassName}`}
+                    labelType="percentage"
+                />
+            );
+            expect(getProgressBarLabelElement(progressBar).prop("title")).toBe("30%");
+        });
+
+        it("does not have a tooltip when the size is small and label type is custom", () => {
+            const progressBar = mount(
+                <ProgressBar
+                    currentValue={30}
+                    minValue={0}
+                    maxValue={100}
+                    onClick={onClickSpy}
+                    label={<RandomComponent />}
+                    class={`${progressBarSmallClassName}`}
+                    labelType="custom"
+                />
+            );
+            expect(getProgressBarLabelElement(progressBar).prop("title")).toBe(undefined);
         });
     });
 });

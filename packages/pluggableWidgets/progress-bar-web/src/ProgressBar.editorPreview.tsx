@@ -51,6 +51,7 @@ export function preview(props: ProgressBarPreviewProps): ReactElement {
                     )
                 ) : null
             }
+            labelType={props.labelType}
         />
     );
 }
