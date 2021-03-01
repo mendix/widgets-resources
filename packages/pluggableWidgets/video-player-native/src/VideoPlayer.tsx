@@ -5,6 +5,7 @@ import Video from "react-native-video";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
 import { isAvailable } from "@widgets-resources/piw-utils";
+import deepmerge from "deepmerge";
 
 const enum StatusEnum {
     ERROR = "error",
@@ -19,7 +20,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
     const [videoAspectRatio, setVideoAspectRatio] = useState(0);
 
     useEffect(() => {
-        const alteredStyles = JSON.parse(JSON.stringify(styles));
+        const alteredStyles = deepmerge({}, styles);
         if (props.aspectRatio && videoAspectRatio !== 0) {
             alteredStyles.video.aspectRatio = videoAspectRatio;
             alteredStyles.container.aspectRatio = videoAspectRatio;
