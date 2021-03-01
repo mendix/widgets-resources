@@ -102,33 +102,32 @@ exports[`Badge with on click action Android renders touchables 1`] = `
   }
   testID="badge-test"
 >
-  <Text
+  <View
     accessible={true}
     focusable={true}
-    nativeBackgroundAndroid={
-      Object {
-        "attribute": "selectableItemBackgroundBorderless",
-        "rippleRadius": undefined,
-        "type": "ThemeAttrAndroid",
-      }
-    }
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "color": "#444",
-        "fontSize": 14,
-        "fontWeight": "bold",
-      }
-    }
   >
-    
-  </Text>
+    <Text
+      style={
+        Object {
+          "color": "#444",
+          "fontSize": 14,
+          "fontWeight": "bold",
+        }
+      }
+      testID="badge-test$caption"
+    >
+      
+    </Text>
+  </View>
 </View>
 `;
 
@@ -149,18 +148,15 @@ exports[`Badge with on click action iOS renders touchables 1`] = `
   <View
     accessible={true}
     focusable={true}
+    onBlur={[Function]}
     onClick={[Function]}
+    onFocus={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    style={
-      Object {
-        "opacity": 1,
-      }
-    }
   >
     <Text
       style={
