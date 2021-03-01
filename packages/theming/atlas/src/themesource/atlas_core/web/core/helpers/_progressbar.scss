@@ -33,6 +33,11 @@
     font-size: 0px;
 }
 
+.progress-bar-small .progress-bar > * {
+    // Specifically to hide custom labels.
+    display: none;
+}
+
 .progress-bar-large .progress,
 .progress-bar-large .progress-bar {
     height: 24px;
