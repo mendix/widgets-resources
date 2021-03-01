@@ -3,7 +3,7 @@ import { Component } from "react";
 import { AppState, AppStateStatus } from "react-native";
 
 import { AppEventsProps, TimerTypeEnum } from "../typings/AppEventsProps";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = AppEventsProps<undefined>;
 
@@ -32,8 +32,6 @@ export class AppEvents extends Component<Props> {
         AppState.removeEventListener("change", this.onAppStateChangeHandler);
         this.onTimeoutAction?.cancel();
         this.unRegisterNetworkEvents();
-        // TODO: Suggestion Deprecate this behavior.
-        // Keeping it as most likely someone is misusing this for tracking navigation events.
         this.triggerOnUnloadEvent();
     }
 
@@ -47,7 +45,6 @@ export class AppEvents extends Component<Props> {
         }
         this.onTimeoutAction?.schedule();
         this.lastOnResume = Date.now();
-        // TODO: Not clear if onResume should wait for registerNetworkEvents. This can take a few seconds while app has resumed
         await this.registerNetworkEvents();
     }
 
@@ -57,7 +54,6 @@ export class AppEvents extends Component<Props> {
         this.triggerOnUnloadEvent();
     }
 
-    // TODO: Maybe extract this to own widget or js action? It forces an await and makes the whole contract very confusing
     private async registerNetworkEvents(): Promise<void> {
         if (this.props.onOnlineAction || this.props.onOfflineAction) {
             this.isConnected = (await NetInfo.fetch()).isConnected;
@@ -102,7 +98,7 @@ export class AppEvents extends Component<Props> {
     }
 
     private triggerOnUnloadEvent(): void {
-        if (this.props.onUnloadAction && this.props.onUnloadAction.canExecute) {
+        if (this.props.onUnloadAction?.canExecute) {
             executeAction(this.props.onUnloadAction);
         }
     }
@@ -130,11 +126,11 @@ function isPastTimeout(last: number, timeoutSeconds: number): boolean {
 }
 
 interface ScheduledExecution {
-    cancel: () => boolean;
-    schedule: () => boolean;
+    cancel: () => void;
+    schedule: () => void;
 }
 
-class ScheduledOnceExecution {
+class ScheduledOnceExecution implements ScheduledExecution {
     private timeoutHandle: number | undefined;
     private _finished = false;
     private _running = false;
@@ -143,19 +139,18 @@ class ScheduledOnceExecution {
         this.schedule();
     }
 
-    cancel(): boolean {
+    cancel(): void {
         if (!this._running || this._finished) {
-            return false;
+            return;
         }
 
         clearTimeout(this.timeoutHandle);
         this._running = false;
-        return true;
     }
 
-    schedule(): boolean {
+    schedule(): void {
         if (this._running || this._finished) {
-            return false;
+            return;
         }
 
         this.timeoutHandle = setTimeout(() => {
@@ -164,11 +159,10 @@ class ScheduledOnceExecution {
             this._running = false;
         }, this.interval);
         this._running = true;
-        return true;
     }
 }
 
-class ScheduledIntervalExecution {
+class ScheduledIntervalExecution implements ScheduledExecution {
     private timeoutHandle: number | undefined;
     private _running = false;
 
@@ -176,33 +170,33 @@ class ScheduledIntervalExecution {
         this.schedule();
     }
 
-    cancel(): boolean {
+    cancel(): void {
         if (!this._running) {
-            return false;
+            return;
         }
         clearInterval(this.timeoutHandle);
         this._running = false;
-        return true;
     }
 
-    schedule(): boolean {
+    schedule(): void {
         if (this._running) {
-            return false;
+            return;
         }
 
         this.timeoutHandle = setInterval(() => {
             this.fn();
         }, this.interval);
         this._running = true;
-        return true;
     }
 }
 
-function scheduleTask(fn: () => void, timeInMs: number, type: TimerTypeEnum) {
+function scheduleTask(fn: () => void, timeInMs: number, type: TimerTypeEnum): ScheduledExecution {
     switch (type) {
         case "interval":
             return new ScheduledIntervalExecution(fn, timeInMs);
         case "once":
             return new ScheduledOnceExecution(fn, timeInMs);
+        default:
+            throw new Error("Not a valid type");
     }
 }
