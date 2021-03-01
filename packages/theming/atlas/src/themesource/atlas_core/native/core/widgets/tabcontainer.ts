@@ -58,8 +58,8 @@ export const TabContainer: TabContainerType = {
         // All ViewStyle properties are allowed
         borderRadius: badge.borderRadius,
         backgroundColor: badge.default.backgroundColor,
-        paddingVertical: badge.paddingVertical,
-        paddingHorizontal: badge.paddingHorizontal,
+        paddingVertical: tabContainer.badgeContainer.paddingVertical,
+        paddingHorizontal: tabContainer.badgeContainer.paddingHorizontal,
         marginLeft: 8
     },
     badgeCaption: {
@@ -67,7 +67,6 @@ export const TabContainer: TabContainerType = {
         fontSize: font.size,
         color: badge.default.color,
         fontFamily: font.family,
-        fontWeight: badge.fontWeight,
-        marginTop: -1
+        fontWeight: badge.fontWeight
     }
 };
