@@ -370,17 +370,17 @@ export const tabContainer: VariablesTabContainer = {
         paddingVertical: 12
     },
     indicator: {
-        backgroundColor: background.primary,
+        backgroundColor: fontDefaults.colorDisabledLight,
         height: Platform.select({ ios: 2, android: 2 }) as number
     },
     label: {
-        color: background.primary,
+        color: fontDefaults.colorDisabledLight,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         textTransform: "capitalize"
     },
     activeLabel: {
-        color: background.gray,
+        color: fontDefaults.colorDisabledLight,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         textTransform: "capitalize"
@@ -388,8 +388,8 @@ export const tabContainer: VariablesTabContainer = {
     badgeContainer: {
         borderRadius: badge.borderRadius,
         backgroundColor: badge.default.backgroundColor,
-        paddingVertical: badge.paddingVertical,
-        paddingHorizontal: badge.paddingHorizontal,
+        paddingVertical: spacing.smallest,
+        paddingHorizontal: spacing.small,
         marginLeft: 8
     },
     badgeCaption: {
