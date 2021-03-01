@@ -2,7 +2,7 @@ import { Style } from "@native-mobile-resources/util-widgets";
 import { TextStyle, ViewStyle } from "react-native";
 
 export interface BadgeStyle extends Style {
-    container: ViewStyle;
+    container: ViewStyle & { rippleColor?: string };
     caption: TextStyle;
 }
 
