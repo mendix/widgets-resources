@@ -23,14 +23,14 @@
         background: $groupbox-default-bg;
         font-size: $font-size-h5;
         border-radius: $border-radius-default $border-radius-default 0 0;
-        padding: $spacing-small*1.5 $spacing-medium;
+        padding: $spacing-small * 1.5 $spacing-medium;
         .mx-groupbox-collapse-icon {
             margin-top: 0.1em;
         }
     }
 
     > .mx-groupbox-body {
-        padding: $spacing-small*1.5 $spacing-medium;
+        padding: $spacing-small * 1.5 $spacing-medium;
         border-width: 1px;
         border-style: solid;
         border-color: $groupbox-default-bg;
@@ -47,6 +47,6 @@
 }
 
 //With header
-.mx-groupbox-header ~ .mx-groupbox-body{
-    border-radius: 0 0 $border-radius-default $border-radius-default
+.mx-groupbox-header ~ .mx-groupbox-body {
+    border-radius: 0 0 $border-radius-default $border-radius-default;
 }

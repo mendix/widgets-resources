@@ -1,5 +1,5 @@
 import { Appearance, Platform } from "react-native";
-import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_ui_resources/native/api";
+import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_core/native/api";
 import {
     VariablesBackground,
     VariablesBackgroundDefaults,
@@ -24,7 +24,7 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer
-} from "../../themesource/atlas_ui_resources/native/types/variables";
+} from "../../themesource/atlas_core/native/types/variables";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
