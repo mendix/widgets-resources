@@ -1,6 +1,6 @@
 import { createElement, ReactElement } from "react";
 
-import "react-datepicker/dist/react-datepicker.css";
+import "./ui/main.scss";
 import { FilterComponent } from "./components/FilterComponent";
 import { DatagridDateFilterContainerProps } from "../typings/DatagridDateFilterProps";
 import { registerLocale } from "react-datepicker";

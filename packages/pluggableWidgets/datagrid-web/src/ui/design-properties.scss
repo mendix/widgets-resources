@@ -1,0 +1,83 @@
+.table-compact {
+	.th{
+		padding: $spacing-small;
+
+		.filter-selectors {
+			margin: 0 $spacing-small;
+		}
+	}
+	.td {
+		padding: $spacing-small;
+	}
+}
+
+.table-striped {
+	.tr:nth-child(odd) > .td {
+		background-color: $grid-bg-striped;
+	}
+}
+
+.table-hover {
+	.tr:hover > .td {
+		background-color: $grid-bg-hover;
+	}
+}
+
+.table-bordered-all{
+	.th {
+		border-top-width: 1px;
+        border-top-style: solid;
+        border-left-width: 1px;
+        border-left-style: solid;
+
+        // Column for the visibility when a column can be hidden
+		&.column-selector {
+			border-left-width: 0px;
+			border-right-width: 1px;
+	        border-right-style: solid;
+		}
+    }
+
+	.td {
+		border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-left-width: 1px;
+        border-left-style: solid;
+
+        &.td-borders {
+            border-top-width: 1px;
+        }
+
+        // Column for the visibility when a column can be hidden
+		&.column-selector {
+			border-left-width: 0px;
+			border-right-width: 1px;
+	        border-right-style: solid;
+		}
+	}
+}
+
+.table-bordered-horizontal {
+	.td {
+		border-bottom-width: 1px;
+        border-bottom-style: solid;
+
+        &.td-borders {
+            border-top-width: 1px;
+        }
+	}
+}
+
+.table-bordered-vertical {
+	.th, .td {
+		border-left-width: 1px;
+        border-left-style: solid;
+
+        // Column for the visibility when a column can be hidden
+		&.column-selector {
+			border-left-width: 0px;
+			border-right-width: 1px;
+	        border-right-style: solid;
+		}
+	}
+}

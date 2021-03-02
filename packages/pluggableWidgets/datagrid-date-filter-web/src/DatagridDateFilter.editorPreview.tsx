@@ -16,5 +16,5 @@ export function preview(props: DatagridDateFilterPreviewProps): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("react-datepicker/dist/react-datepicker.css");
+    return require("./ui/main.scss");
 }

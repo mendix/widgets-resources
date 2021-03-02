@@ -1,0 +1,11 @@
+$brand-primary: #264ae5 !default;
+$hover-color: #f8f8f8 !default;
+$background-color: #fff !default;
+$selected-color: #dadcde !default;
+$border-color: #ced0d3 !default;
+$day-color: #555 !default;
+$outside-month-color: #c8c8c8 !default;
+$text-color: #fff !default;
+
+@import "~react-datepicker/src/stylesheets/datepicker";
+@import "DatePicker";

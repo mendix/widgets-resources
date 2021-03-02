@@ -5,6 +5,8 @@ import { Table } from "./components/Table";
 import classNames from "classnames";
 import { FilterContext, FilterFunction } from "./components/provider";
 
+import "./ui/main.scss";
+
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const isServerSide = !(props.columnsFilterable || props.columnsSortable);
     const isInfiniteLoad = props.pagination === "virtualScrolling" && isServerSide;

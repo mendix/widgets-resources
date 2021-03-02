@@ -95,5 +95,5 @@ export function preview(props: DatagridPreviewProps): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/DatagridPreview.scss");
+    return require("./ui/main.scss") + require("./ui/DatagridPreview.scss");
 }
