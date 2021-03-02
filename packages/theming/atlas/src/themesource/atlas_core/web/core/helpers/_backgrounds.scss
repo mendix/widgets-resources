@@ -25,15 +25,17 @@
     background-color: $color-primary-darker !important;
 }
 
-.background-primary.background-dark, .background-primary-dark {
+.background-primary.background-dark,
+.background-primary-dark {
     background-color: $color-primary-dark !important;
 }
 
-.background-primary.background-light, .background-primary-light {
+.background-primary.background-light,
+.background-primary-light {
     background-color: $color-primary-light !important;
 }
 
-.background-primary-lighter{
+.background-primary-lighter {
     background-color: $color-primary-lighter !important;
 }
 
@@ -63,11 +65,13 @@
     background-color: $color-success-darker !important;
 }
 
-.background-success.background-dark, .background-success-dark {
+.background-success.background-dark,
+.background-success-dark {
     background-color: $color-success-dark !important;
 }
 
-.background-success.background-light,  .background-success-light {
+.background-success.background-light,
+.background-success-light {
     background-color: $color-success-light !important;
 }
 
@@ -83,11 +87,13 @@
     background-color: $color-warning-darker !important;
 }
 
-.background-warning.background-dark, .background-warning-dark{
+.background-warning.background-dark,
+.background-warning-dark {
     background-color: $color-warning-dark !important;
 }
 
-.background-warning.background-light, .background-warning-light {
+.background-warning.background-light,
+.background-warning-light {
     background-color: $color-warning-light !important;
 }
 
@@ -103,11 +109,13 @@
     background-color: $color-danger-darker !important;
 }
 
-.background-danger.background-dark, .background-danger-dark{
+.background-danger.background-dark,
+.background-danger-dark {
     background-color: $color-danger-dark !important;
 }
 
-.background-danger.background-light, .background-danger-light{
+.background-danger.background-light,
+.background-danger-light {
     background-color: $color-danger-light !important;
 }
 
