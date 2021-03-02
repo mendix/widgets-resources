@@ -20,7 +20,6 @@ export const card = {
     container: {
         borderRadius: border.radiusLarge,
         backgroundColor: background.primary,
-        // marginBottom: spacing.regular,
         ...Platform.select({
             android: {
                 borderWidth: 1,
@@ -49,21 +48,12 @@ export const cardImageBackground = {
     container: {
         ...cardImage.container,
         borderBottomLeftRadius: border.radiusLarge,
-        borderBottomRightRadius: border.radiusLarge
+        borderBottomRightRadius: border.radiusLarge,
+        height: 224
     },
     image: {
         width: "100%",
-        height: 300,
         resizeMode: "cover"
-    }
-};
-export const cardBodyAbsolute = {
-    container: {
-        position: "absolute",
-        end: 0,
-        start: 0,
-        bottom: 0,
-        backgroundColor: "transparent"
     }
 };
 //
