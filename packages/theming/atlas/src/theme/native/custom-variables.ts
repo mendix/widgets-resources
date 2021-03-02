@@ -2,6 +2,7 @@ import { Appearance, Platform } from "react-native";
 import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_ui_resources/native/api";
 import {
     VariablesBackground,
+    VariablesBackgroundDefaults,
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
@@ -10,6 +11,7 @@ import {
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
+    VariablesFontDefaults,
     VariablesImage,
     VariablesInput,
     VariablesIntroScreen,
@@ -51,13 +53,15 @@ export const brand: VariablesBrand = {
 export const darkMode = Appearance.getColorScheme() === "dark";
 //
 // Background Colors
-//
-// const backgroundColor = darkMode ? "#000" : "#FFF";
-// const backgroundColorInversed = darkMode ? "#FFF" : "#000";
-//
+export const backgroundDefaults: VariablesBackgroundDefaults = {
+    primaryLight: "#FFF",
+    primaryDark: "#0A1325",
+    grayLight: "#F8F8F8",
+    grayDark: "#161F30"
+};
 export const background: VariablesBackground = {
-    primary: darkMode ? "#0A1325" : "#FFF",
-    gray: darkMode ? "#161F30" : "#F8F8F8",
+    primary: darkMode ? backgroundDefaults.primaryDark : backgroundDefaults.primaryLight,
+    gray: darkMode ? backgroundDefaults.grayDark : backgroundDefaults.grayLight,
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -85,6 +89,14 @@ export const border: VariablesBorder = {
 };
 //
 // Font Styles
+export const fontDefaults: VariablesFontDefaults = {
+    colorTitleDark: "#0A1326",
+    colorTitleLight: "#FDFDFD",
+    colorParagraphDark: "#6C717E",
+    colorParagraphLight: "#E7E7E9",
+    colorDisabledDark: "#9DA1A8",
+    colorDisabledLight: "#9DA1A8"
+};
 export const font: VariablesFont = {
     size: adjustFont(14),
     sizeSmall: adjustFont(12),
@@ -104,9 +116,9 @@ export const font: VariablesFont = {
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: darkMode ? "#FDFDFD" : "#0A1326",
-    colorParagraph: darkMode ? "#E7E7E9" : "#6C717E",
-    colorDisabled: darkMode ? "#9DA1A8" : "#9DA1A8",
+    colorTitle: darkMode ? fontDefaults.colorTitleLight : fontDefaults.colorTitleDark,
+    colorParagraph: darkMode ? fontDefaults.colorParagraphLight : fontDefaults.colorParagraphDark,
+    colorDisabled: darkMode ? fontDefaults.colorDisabledLight : fontDefaults.colorDisabledDark,
     weightLight: "100", // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android

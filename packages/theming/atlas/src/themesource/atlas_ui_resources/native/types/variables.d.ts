@@ -19,6 +19,12 @@ export interface VariablesBrand {
     infoLight: string;
 }
 
+export interface VariablesBackgroundDefaults {
+    primaryLight: string;
+    primaryDark: string;
+    grayLight: string;
+    grayDark: string;
+}
 export interface VariablesBackground {
     primary: string;
     gray: string;
@@ -46,6 +52,14 @@ export interface VariablesBorder {
     radiusLarge: number;
 }
 
+export interface VariablesFontDefaults {
+    colorTitleLight: string;
+    colorTitleDark: string;
+    colorParagraphLight: string;
+    colorParagraphDark: string;
+    colorDisabledLight: string;
+    colorDisabledDark: string;
+}
 export interface VariablesFont {
     size: number;
     sizeSmall: number;

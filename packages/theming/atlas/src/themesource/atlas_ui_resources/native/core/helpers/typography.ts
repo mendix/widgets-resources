@@ -1,4 +1,4 @@
-import { brand, font } from "../../variables";
+import { brand, font, fontDefaults } from "../../variables";
 /*
 
 DISCLAIMER:
@@ -30,7 +30,12 @@ export const textDisabled = {
 };
 export const textWhite = {
     text: {
-        color: "#FFF"
+        color: fontDefaults.colorTitleLight
+    }
+};
+export const textBlack = {
+    text: {
+        color: fontDefaults.colorTitleDark
     }
 };
 export const textPrimary = {

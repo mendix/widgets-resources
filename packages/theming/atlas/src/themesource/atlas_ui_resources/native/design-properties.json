@@ -1055,6 +1055,10 @@
                     "class": "textWhite"
                 },
                 {
+                    "name": "Black",
+                    "class": "textBlack"
+                },
+                {
                     "name": "Brand primary",
                     "class": "textPrimary"
                 },
@@ -1093,16 +1097,8 @@
             "description": "Emphasize the text with a heavier or lighter font weight",
             "options": [
                 {
-                    "name": "Light",
-                    "class": "textLight"
-                },
-                {
                     "name": "Default",
                     "class": "textNormal"
-                },
-                {
-                    "name": "Semibold",
-                    "class": "textSemiBold"
                 },
                 {
                     "name": "Bold",

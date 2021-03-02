@@ -28,6 +28,7 @@ export * from "./core/helpers/floatingactionbutton";
 export * from "./core/widgets/images";
 export * from "./core/helpers/images";
 export * from "./core/widgets/introscreen";
+export * from "./core/helpers/introscreen";
 export * from "./core/widgets/layoutgrid";
 export * from "./core/widgets/linechart";
 export * from "./core/helpers/linechart";
