@@ -74,13 +74,3 @@ export * from "./core/helpers/helperclasses";
 // Layouts
 export * from "./layouts/layout";
 export * from "./layouts/page";
-//
-//
-// Page Templates
-export * from "./pagetemplates/maps";
-export * from "./pagetemplates/inspectiondetails";
-//
-//
-// Building blocks
-export * from "./buildingblocks/card";
-export * from "./buildingblocks/header";
