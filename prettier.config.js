@@ -21,5 +21,6 @@ module.exports = {
                 proseWrap: "preserve"
             }
         }
-    ]
+    ],
+    filepath: "./packages/**/{src,test}/**/*.{js,jsx,ts,tsx,scss}"
 };
