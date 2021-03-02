@@ -1,42 +1,42 @@
 .table-compact {
-	.th{
-		padding: $spacing-small;
+    .th {
+        padding: $spacing-small;
 
-		.filter-selectors {
-			margin: 0 $spacing-small;
-		}
-	}
-	.td {
-		padding: $spacing-small;
-	}
+        .filter-selectors {
+            margin: 0 $spacing-small;
+        }
+    }
+    .td {
+        padding: $spacing-small;
+    }
 }
 
 .table-striped {
-	.tr:nth-child(odd) > .td {
-		background-color: $grid-bg-striped;
-	}
+    .tr:nth-child(odd) > .td {
+        background-color: $grid-bg-striped;
+    }
 }
 
 .table-hover {
-	.tr:hover > .td {
-		background-color: $grid-bg-hover;
-	}
+    .tr:hover > .td {
+        background-color: $grid-bg-hover;
+    }
 }
 
-.table-bordered-all{
-	.th {
-		border-top-width: 1px;
+.table-bordered-all {
+    .th {
+        border-top-width: 1px;
         border-left-width: 1px;
 
         // Column for the visibility when a column can be hidden
-		&.column-selector {
-			border-left-width: 0;
-			border-right-width: 1px;
-		}
+        &.column-selector {
+            border-left-width: 0;
+            border-right-width: 1px;
+        }
     }
 
-	.td {
-		border-bottom-width: 1px;
+    .td {
+        border-bottom-width: 1px;
         border-left-width: 1px;
 
         &.td-borders {
@@ -44,31 +44,32 @@
         }
 
         // Column for the visibility when a column can be hidden
-		&.column-selector {
-			border-left-width: 0;
-			border-right-width: 1px;
-		}
-	}
+        &.column-selector {
+            border-left-width: 0;
+            border-right-width: 1px;
+        }
+    }
 }
 
 .table-bordered-horizontal {
-	.td {
-		border-bottom-width: 1px;
+    .td {
+        border-bottom-width: 1px;
 
         &.td-borders {
             border-top-width: 1px;
         }
-	}
+    }
 }
 
 .table-bordered-vertical {
-	.th, .td {
-		border-left-width: 1px;
+    .th,
+    .td {
+        border-left-width: 1px;
 
         // Column for the visibility when a column can be hidden
-		&.column-selector {
-			border-left-width: 0;
-			border-right-width: 1px;
-		}
-	}
+        &.column-selector {
+            border-left-width: 0;
+            border-right-width: 1px;
+        }
+    }
 }
