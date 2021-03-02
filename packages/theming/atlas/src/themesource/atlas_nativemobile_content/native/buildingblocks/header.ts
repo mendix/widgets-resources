@@ -1,4 +1,4 @@
-import { background, spacing } from "../../atlas_core/native/variables";
+import { background, spacing } from "../../../atlas_core/native/variables";
 /*
 ==========================================================================
     Cards

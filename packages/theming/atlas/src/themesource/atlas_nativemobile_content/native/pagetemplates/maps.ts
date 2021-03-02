@@ -1,4 +1,4 @@
-import { background, border, contrast, spacing } from "../../atlas_core/native/variables";
+import { background, border, contrast, spacing } from "../../../atlas_core/native/variables";
 /*
 ==========================================================================
     Maps
