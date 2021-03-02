@@ -28,6 +28,7 @@ exports[`VideoPlayer hides the loading indicator after load 1`] = `
     }
     style={
       Object {
+        "height": undefined,
         "width": "100%",
       }
     }
@@ -65,6 +66,7 @@ exports[`VideoPlayer load a video and calculate the aspect ratio 1`] = `
     style={
       Object {
         "aspectRatio": 1.9494584837545126,
+        "height": undefined,
         "width": "100%",
       }
     }
