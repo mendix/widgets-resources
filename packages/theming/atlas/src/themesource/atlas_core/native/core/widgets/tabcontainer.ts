@@ -56,7 +56,7 @@ export const TabContainer: TabContainerType = {
     },
     badgeContainer: {
         // All ViewStyle properties are allowed
-        borderRadius: badge.borderRadius,
+        borderRadius: tabContainer.badgeContainer.borderRadius,
         backgroundColor: badge.default.backgroundColor,
         paddingVertical: tabContainer.badgeContainer.paddingVertical,
         paddingHorizontal: tabContainer.badgeContainer.paddingHorizontal,
