@@ -16,7 +16,7 @@
 
     li.mx-navigationlist-item {
         @include transition();
-        padding: $grid-padding-top $grid-padding-right $grid-padding-bottom $grid-padding-left;
+        padding: $spacing-medium;
         border-width: 1px;
         border-style: none none solid none;
         border-color: $grid-border-color;

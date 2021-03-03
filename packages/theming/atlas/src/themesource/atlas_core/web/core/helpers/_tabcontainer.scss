@@ -49,10 +49,10 @@
             margin-right: $spacing-large;
 
             & > a {
-                padding: 16px 0 13px 0; // border is 3px
+                padding: $spacing-medium 0 ($spacing-medium - $tabs-lined-border-width) 0; // border is 3px
                 color: $tabs-color;
                 border: 0;
-                border-bottom: 3px solid transparent;
+                border-bottom: $tabs-lined-border-width solid transparent;
                 border-radius: 0;
 
                 &:hover,
@@ -69,7 +69,7 @@
             &.active > a:focus {
                 color: $tabs-lined-color-active;
                 border: 0;
-                border-bottom: 3px solid $tabs-lined-border-color;
+                border-bottom: $tabs-lined-border-width solid $tabs-lined-border-color;
                 background-color: transparent;
             }
         }
@@ -82,11 +82,9 @@
     & > .mx-tabcontainer-tabs {
         width: 100%;
         border-bottom: 0;
-
         & > li {
-            display: table-cell;
+            flex: 1;
             float: none; // reset bootstrap
-            width: 1%;
             margin: 0;
             @media (max-width: $screen-sm-max) {
                 display: block;
@@ -107,7 +105,7 @@
     }
 
     & > .mx-tabcontainer-content {
-        padding: 10px;
+        padding: $spacing-small;
         border-width: 0 1px 1px 1px;
         border-style: solid;
         border-color: $tabs-border-color;
@@ -125,7 +123,7 @@
 
         &::before {
             position: absolute;
-            top: 16px;
+            top: $spacing-medium;
             display: block;
             width: 100%;
             height: 1px;
@@ -140,8 +138,8 @@
             text-align: center;
 
             & > a {
-                width: 33px;
-                height: 33px;
+                width: ($spacing-medium * 2) + 1;
+                height: ($spacing-medium * 2) + 1;
                 margin: auto;
                 padding: 0;
                 text-align: center;
@@ -149,9 +147,11 @@
                 border: 1px solid $tabs-border-color;
                 border-radius: 100%;
                 background-color: $bg-color;
-                font-size: 18px;
+                font-size: $font-size-large;
                 font-weight: bold;
-                line-height: 33px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             &.active {
@@ -193,101 +193,5 @@
         align-items: center;
         flex-flow: wrap;
         justify-content: flex-end;
-    }
-}
-
-.tab-spacing-outer-top-none.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-top: 0;
-    }
-}
-
-.tab-spacing-outer-top.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-top: $spacing-small;
-    }
-}
-
-.tab-spacing-outer-top-medium.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-top: $spacing-medium;
-    }
-}
-
-.tab-spacing-outer-top-large.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-top: $spacing-large;
-    }
-}
-
-.tab-spacing-outer-bottom-none.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-bottom: 0;
-    }
-}
-
-.tab-spacing-outer-bottom.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-bottom: $spacing-small;
-    }
-}
-
-.tab-spacing-outer-bottom-medium.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-bottom: $spacing-medium;
-    }
-}
-
-.tab-spacing-outer-bottom-large.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs {
-        margin-bottom: $spacing-large;
-    }
-}
-
-.tab-spacing-outer-left-none.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:first-child {
-        margin-left: 0;
-    }
-}
-
-.tab-spacing-outer-left.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs li:first-child {
-        margin-left: $spacing-small;
-    }
-}
-
-.tab-spacing-outer-left-medium.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:first-child {
-        margin-left: $spacing-medium;
-    }
-}
-
-.tab-spacing-outer-left-large.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:first-child {
-        margin-left: $spacing-large;
-    }
-}
-
-.tab-spacing-outer-right-none.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:last-child {
-        margin-right: 0;
-    }
-}
-
-.tab-spacing-outer-right.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:last-child {
-        margin-right: $spacing-small;
-    }
-}
-
-.tab-spacing-outer-right-medium.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:last-child {
-        margin-right: $spacing-medium;
-    }
-}
-
-.tab-spacing-outer-right-large.mx-tabcontainer {
-    & > .mx-tabcontainer-tabs > li:last-child {
-        margin-right: $spacing-large;
     }
 }

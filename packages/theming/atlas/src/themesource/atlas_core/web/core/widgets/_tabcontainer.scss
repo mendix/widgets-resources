@@ -14,13 +14,18 @@
 
 .mx-tabcontainer {
     .mx-tabcontainer-tabs {
-        margin-bottom: 20px;
+        margin-bottom: $spacing-medium;
         border-color: $tabs-border-color;
+        display: flex;
+        > li{
+            float: none;
+        }
         & > li > a {
             margin-right: 0;
             transition: all 0.2s ease-in-out;
             color: $tabs-color;
             font-weight: $font-weight-normal;
+            border-radius: $border-radius-default $border-radius-default 0 0;
             &:hover,
             &:focus {
                 background-color: $tabs-bg-hover;
@@ -31,7 +36,7 @@
         & > li.active > a:focus {
             color: $tabs-color-active;
             border: 1px solid $tabs-border-color;
-            border-bottom-color: transparent;
+            border-bottom-color: #fff;
             background-color: $tabs-bg;
         }
     }
@@ -83,12 +88,12 @@
 }
 
 .mx-tabcontainer-badge {
-    margin-left: 8px;
+    margin-left: $spacing-small;
     border-radius: $font-size-small;
     background-color: $label-primary-bg;
     color: $label-primary-color;
     font-size: $font-size-small;
     font-weight: $font-weight-bold;
     line-height: 1;
-    padding: 3px 7px;
+    padding: $spacing-small/2 $spacing-small;
 }
