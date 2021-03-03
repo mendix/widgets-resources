@@ -85,7 +85,8 @@ export const border: VariablesBorder = {
     color: darkMode ? "#3B4251" : "#CED0D3",
     width: 1,
     radiusSmall: 4,
-    radiusLarge: 8
+    radiusLarge: 8,
+    radiusLargest: 9999
 };
 //
 // Font Styles
@@ -370,23 +371,23 @@ export const tabContainer: VariablesTabContainer = {
         paddingVertical: 12
     },
     indicator: {
-        backgroundColor: fontDefaults.colorDisabledLight,
+        backgroundColor: fontDefaults.colorTitleLight,
         height: Platform.select({ ios: 2, android: 2 }) as number
     },
     label: {
-        color: fontDefaults.colorDisabledLight,
+        color: fontDefaults.colorTitleLight,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         textTransform: "capitalize"
     },
     activeLabel: {
-        color: fontDefaults.colorDisabledLight,
+        color: fontDefaults.colorTitleLight,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         textTransform: "capitalize"
     },
     badgeContainer: {
-        borderRadius: badge.borderRadius,
+        borderRadius: border.radiusLargest,
         backgroundColor: badge.default.backgroundColor,
         paddingVertical: spacing.smallest,
         paddingHorizontal: spacing.small,

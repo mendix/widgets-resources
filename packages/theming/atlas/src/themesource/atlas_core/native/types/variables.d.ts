@@ -50,6 +50,7 @@ export interface VariablesBorder {
     width: number;
     radiusSmall: number;
     radiusLarge: number;
+    radiusLargest: number;
 }
 
 export interface VariablesFontDefaults {
