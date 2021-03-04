@@ -297,7 +297,12 @@ $color-danger-lighter: mix($brand-danger, white, 20%);
 
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
 
-//== Grids
+//== Widget style inclusion
+// TODO: add variables here
+$include-group-box: false;
+$include-group-box-helpers: true;
+
+//==
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
 
 // Default Border Colors

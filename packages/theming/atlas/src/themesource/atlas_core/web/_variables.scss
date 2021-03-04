@@ -302,6 +302,42 @@ $color-danger-lighter: mix($brand-danger, white, 20%) !default;
 
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c) !default;
 
+//== Widget style inclusion
+// TODO: add badge variable
+$include-button: true !default; // TODO: use in main
+$include-check-box: true !default; // TODO: use in main
+$include-data-grids: true !default; // TODO: use in main
+$include-data-view: true !default; // TODO: use in main
+$include-date-picker: true !default; // TODO: use in main
+$include-glyphicons: true !default; // TODO: use in main
+$include-grid: true !default; // TODO: use in main
+$include-group-box: true !default;
+$include-group-box-helpers: true !default;
+$include-header: true !default; // TODO: use in main
+$include-inputs: true !default; // TODO: use in main
+$include-labels: true !default; // TODO: use in main
+$include-layout-grid: true !default; // TODO: use in main
+$include-list-view: true !default; // TODO: use in main
+$include-modals: true !default; // TODO: use in main
+$include-navigation-bar: true !default; // TODO: use in main
+$include-navigation-list: true !default; // TODO: use in main
+$include-navigation-tree: true !default; // TODO: use in main
+$include-pagination: true !default; // TODO: use in main
+$include-popup-menu: true !default; // TODO: use in main
+$include-progress: true !default; // TODO: use in main
+$include-progress-bar: true !default; // TODO: use in main
+$include-progress-circle: true !default; // TODO: use in main
+$include-radio-buttons: true !default; // TODO: use in main
+$include-range-slider: true !default; // TODO: use in main
+$include-rating: true !default; // TODO: use in main
+$include-simple-menubar: true !default; // TODO: use in main
+$include-slider: true !default; // TODO: use in main
+$include-tab-container: true !default; // TODO: use in main
+$include-tables: true !default; // TODO: use in main
+$include-template-grids: true !default; // TODO: use in main
+$include-timeline: true !default; // TODO: use in main
+$include-typography: true !default; // TODO: use in main
+
 //== Grids
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
 

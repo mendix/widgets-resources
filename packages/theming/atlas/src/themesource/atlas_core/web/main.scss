@@ -1,3 +1,5 @@
+@import "mixins/includewidgetstyles";
+
 // Utilities
 @import "core/_legacy/bootstrap/bootstrap";
 @import "core/_legacy/bootstrap/bootstrap-rtl";
@@ -40,8 +42,12 @@
 @import "core/widgets/datepicker";
 @import "core/widgets/header";
 @import "core/widgets/glyphicons";
-@import "core/widgets/groupbox";
-@import "core/helpers/groupbox";
+@include include-widget-styles(
+    "core/widgets/groupbox",
+    $include-group-box,
+    "core/helpers/groupbox",
+    $include-group-box-helpers
+);
 @import "core/helpers/images";
 @import "core/widgets/listview";
 @import "core/helpers/listview";
