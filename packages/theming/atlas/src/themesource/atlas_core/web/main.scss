@@ -32,12 +32,22 @@
 @import "core/helpers/labels";
 @import "core/widgets/badgebutton";
 @import "core/helpers/badgebutton";
-@import "core/widgets/buttons";
-@import "core/helpers/buttons";
-@import "core/widgets/checkbox";
+@include include-widget-styles(
+    "core/widgets/buttons",
+    $include-buttons,
+    "core/helpers/buttons",
+    $include-buttons-helpers
+);
+@include include-widget-styles("core/widgets/checkbox", $include-check-box);
 @import "core/widgets/grid";
-@import "core/widgets/datagrids";
-@import "core/helpers/datagrids";
+@include include-widget-styles(
+    "core/widgets/datagrids",
+    $include-data-grids,
+    "core/helpers/datagrids",
+    $include-data-grids-helpers
+);
+//@import "core/widgets/datagrids";
+//@import "core/helpers/datagrids";
 @import "core/widgets/dataview";
 @import "core/widgets/datepicker";
 @import "core/widgets/header";

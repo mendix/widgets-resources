@@ -299,7 +299,12 @@ $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #11198
 
 //== Widget style inclusion
 // TODO: add variables here
-$include-group-box: false;
+$include-buttons: true;
+$include-buttons-helpers: true;
+$include-check-box: true;
+$include-data-grids: true;
+$include-data-grids-helpers: true;
+$include-group-box: true;
 $include-group-box-helpers: true;
 
 //==

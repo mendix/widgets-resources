@@ -3,8 +3,8 @@
 @mixin include-widget-styles(
     $default-styles-path,
     $include-default-styles,
-    $helper-styles-path,
-    $include-helper-styles
+    $helper-styles-path: "",
+    $include-helper-styles: false
 ) {
     @if $include-default-styles {
         @include meta.load-css($default-styles-path);

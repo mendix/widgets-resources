@@ -304,9 +304,11 @@ $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #11198
 
 //== Widget style inclusion
 // TODO: add badge variable
-$include-button: true !default; // TODO: use in main
-$include-check-box: true !default; // TODO: use in main
-$include-data-grids: true !default; // TODO: use in main
+$include-buttons: true !default;
+$include-buttons-helpers: true !default;
+$include-check-box: true !default;
+$include-data-grids: true !default;
+$include-data-grids-helpers: true !default;
 $include-data-view: true !default; // TODO: use in main
 $include-date-picker: true !default; // TODO: use in main
 $include-glyphicons: true !default; // TODO: use in main
