@@ -11,7 +11,7 @@ describe("badge-web", () => {
         it("compares with a screenshot baseline and checks if all badges elements are rendered as expected", () => {
             browser.setWindowRect(0, 0, 1200, 900);
             const screenshotElem = $(".mx-dataview-content");
-            screenshotElem.waitForDisplayed();
+            screenshotElem.waitForDisplayed({ timeout: 5000 });
             browser.saveElement(screenshotElem, "badgePageContent");
             expect(browser.checkElement($(".mx-dataview-content"), "badgePageContent")).toEqual(0);
         });
