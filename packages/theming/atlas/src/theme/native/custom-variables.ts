@@ -586,3 +586,107 @@ export const slider: VariablesSlider = {
         backgroundColor: background.gray
     }
 };
+
+
+
+// == Variables to exclude files
+// ## Reduce the amount of files imported from the Atlas_Core module
+// -------------------------------------------------------------------------------------------------------------------//
+// Activity Indicator
+export const excludeActivityIndicatorDefaultClasses = false;
+export const excludeActivityIndicatorHelperClasses = false;
+// Animation
+export const excludeAnimationDefaultClasses = false;
+// Background Image
+export const excludeBackgroundImageDefaultClasses = false;
+// Badge
+export const excludeBadgeDefaultClasses = false;
+export const excludeBadgeHelperClasses = false;
+// Bottom Sheet
+export const excludeBottomSheetDefaultClasses = false;
+// Buttons
+export const excludeButtonsDefaultClasses = false;
+export const excludeButtonsHelperClasses = false;
+// Carousel
+export const excludeCarouselDefaultClasses = false;
+// CheckBox
+export const excludeCheckBoxDefaultClasses = false;
+// Color Picker
+export const excludeColorPickerDefaultClasses = false;
+// Container
+export const excludeContainerDefaultClasses = false;
+// Date Picker
+export const excludeDatePickerDefaultClasses = false;
+// Drop Down
+export const excludeDropDownDefaultClasses = false;
+// Feedback
+export const excludeFeedbackDefaultClasses = false;
+// Floating Action Button
+export const excludeFABDefaultClasses = false;
+export const excludeFABHelperClasses = false;
+// Image
+export const excludeImageDefaultClasses = false;
+export const excludeImageHelperClasses = false;
+// Intro Screen
+export const excludeIntroScreenDefaultClasses = false;
+export const excludeIntroScreenHelperClasses = false;
+// Layout Grid
+export const excludeLayoutGridDefaultClasses = false;
+// Line Chart
+export const excludeLineChartDefaultClasses = false;
+export const excludeLineChartHelperClasses = false;
+// Bar Chart
+export const excludeBarChartDefaultClasses = false;
+export const excludeBarChartHelperClasses = false;
+// List View
+export const excludeListViewDefaultClasses = false;
+export const excludeListViewHelperClasses = false;
+// List View Swipe
+export const excludeListViewSwipeDefaultClasses = false;
+export const excludeListViewSwipeHelperClasses = false;
+// Maps
+export const excludeMapsDefaultClasses = false;
+export const excludeMapsHelperClasses = false;
+// Page Title
+export const excludePageTitleDefaultClasses = false;
+// Progress Bar
+export const excludeProgressBarDefaultClasses = false;
+export const excludeProgressBarHelperClasses = false;
+// Progress Circle
+export const excludeProgressCircleDefaultClasses = false;
+export const excludeProgressCircleHelperClasses = false;
+// Pop Up Menu
+export const excludePopUpMenuDefaultClasses = false;
+// QR Code
+export const excludeQRCodeDefaultClasses = false;
+// Range Slider
+export const excludeRangeSliderDefaultClasses = false;
+export const excludeRangeSliderHelperClasses = false;
+// Rating
+export const excludeRatingDefaultClasses = false;
+// Reference Selector
+export const excludeReferenceSelectorDefaultClasses = false;
+// Safe Area View
+export const excludeSafeAreaViewDefaultClasses = false;
+// Slider
+export const excludeSliderDefaultClasses = false;
+export const excludeSliderHelperClasses = false;
+// Tab Container
+export const excludeTabContainerDefaultClasses = false;
+export const excludeTabContainerHelperClasses = false;
+// Text Area
+export const excludeTextAreaDefaultClasses = false;
+// Text Box
+export const excludeTextBoxDefaultClasses = false;
+export const excludeTextBoxHelperClasses = false;
+// Toggle Buttons
+export const excludeToggleButtonsDefaultClasses = false;
+// Typography
+export const excludeTypographyDefaultClasses = false;
+export const excludeTypographyHelperClasses = false;
+// VideoPlayer
+export const excludeVideoPlayerDefaultClasses = false;
+// Web View
+export const excludeWebViewDefaultClasses = false;
+// Helper Classes
+export const excludeHelperClasses = false;
