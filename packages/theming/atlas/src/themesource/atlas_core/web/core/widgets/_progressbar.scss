@@ -13,8 +13,6 @@
 
 .progress {
     overflow: hidden;
-    height: 16px;
-    margin-bottom: 24px;
     display: flex;
     flex-direction: row;
 }
@@ -27,9 +25,7 @@
     text-align: center;
     color: #ffffff;
     border-radius: $border-radius-default;
-    font-size: 12px;
     font-weight: $font-weight-semibold;
-    line-height: 16px;
 }
 
 .progress-striped .progress-bar,
@@ -47,6 +43,7 @@
     background-size: 40px 40px;
 }
 
+.widget-progress-bar.active .progress-bar,
 .progress.active .progress-bar,
 .progress-bar.active {
     animation: progress-bar-stripes 2s linear infinite;

@@ -21,10 +21,7 @@ describe("Progress Bar on click", () => {
 
         const dialog = page.modalDialog;
         dialog.waitForDisplayed();
-        const textBoxValue = page
-            .getWidget("NewEditTextBox")
-            .$(".form-control-static")
-            .getText();
+        const textBoxValue = page.getWidget("NewEditTextBox").$(".form-control-static").getText();
         expect(value).toContain(textBoxValue);
     });
     it("should Open Full Page", () => {

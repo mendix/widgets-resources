@@ -902,5 +902,115 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.custom.progressbar.ProgressBar": [
+        {
+            "name": "Bar type",
+            "type": "Dropdown",
+            "description": "Type of the progress bar",
+            "options": [
+                {
+                    "name": "Plain",
+                    "class": "progress-bar-default"
+                },
+                {
+                    "name": "Striped",
+                    "class": "progress-striped"
+                },
+                {
+                    "name": "Animated",
+                    "class": "progress-striped active"
+                }
+            ]
+        },
+        {
+            "name": "Bar color",
+            "type": "Dropdown",
+            "description": "Color of the progress bar",
+            "options": [
+                {
+                    "name": "Default",
+                    "class": "progress-bar-default"
+                },
+                {
+                    "name": "Primary",
+                    "class": "progress-bar-primary"
+                },
+                {
+                    "name": "Info",
+                    "class": "progress-bar-info"
+                },
+                {
+                    "name": "Success",
+                    "class": "progress-bar-success"
+                },
+                {
+                    "name": "Warning",
+                    "class": "progress-bar-warning"
+                },
+                {
+                    "name": "Danger",
+                    "class": "progress-bar-danger"
+                }
+            ]
+        },
+        {
+            "name": "Background color",
+            "type": "Dropdown",
+            "description": "Background color of the progress bar",
+            "options": [
+                {
+                    "name": "Background Default",
+                    "class": "progress-bar-background-default"
+                },
+                {
+                    "name": "Background Dashboard",
+                    "class": "progress-bar-background-dashboard"
+                },
+                {
+                    "name": "Brand Default",
+                    "class": "progress-bar-background-brand-default"
+                },
+                {
+                    "name": "Brand Primary",
+                    "class": "progress-bar-background-primary"
+                },
+                {
+                    "name": "Brand Info",
+                    "class": "progress-bar-background-info"
+                },
+                {
+                    "name": "Brand Success",
+                    "class": "progress-bar-background-success"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "progress-bar-background-warning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "progress-bar-background-danger"
+                }
+            ]
+        },
+        {
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Size of the progress bar",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "progress-bar-small"
+                },
+                {
+                    "name": "Medium",
+                    "class": "progress-bar-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "progress-bar-large"
+                }
+            ]
+        }
     ]
 }

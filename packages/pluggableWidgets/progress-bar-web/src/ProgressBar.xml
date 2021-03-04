@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.progressbar.ProgressBar" offlineCapable="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    <name>Progress Bar</name>
+    <description>The widget lets you display a percentage as a bar</description>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABs1BMVEUAAAD///+AgICA//9V//+Av/9mzP9V1f9Jtv9gv/9Vxv9Ns/9duf9VVVVVv/9Jtv9Qv/9LtP9RvP9Ns/9Ruf9Osf9Osf9YWFhMs/9bW1tPuf9Ns/9NsvdLtPhMs/hKtfhLtPlVVVVNsvlIsflMs/pJsfpNs/pLtPpKsfpMs/pKsPpMs/tJsftLtPtKsftLsfdJsvdVVVVLsPhLtPhIs/hJs/hVVVVIrvZIr/VJsfhWVlZJsvhKsPhWVlZJsvhXV1dIsPhKsfhJsvlKsflKsflIsflMk8FJsvdIsfdJsPhKsvhNlslJsfhKsPhJsfhWVlZKsfhJsfdIsPdJsfdIsfdIsfhJsPhJsfhJsPhVVVVJsPhIsfhIsfhJsfdVWl5UXF9JsfdIsPdIsPdJsfdJsfhJsPhJsPhIsfhVVVVIsfhIsfhWVlZIsfhJsPhIsPhJsPdJsPdJsfdIsPdJsfdJsfdIsPdJsfhJsPhIsPhJsfhJsfhVVVVIsPhVVVVIsfhJsfhJsPhIsfhJsfhJsPhVVVVIsPhVVVVWVlZIrPBIsfhSZHBTZHBIq+9IsPdKodxOiLBVVVV1/q+UAAAAjHRSTlMAAQICAwQFBgcICQoLDAwOEBETFBYXGhobHB0eISIlJikqKy4vMTIzNDY3OTs9PkFCQkRHSk1OUmNpa21ubnBwcXV3eXx/f4SGi46Sk5Wam5ygoqepra+ztba5u77AwcPExcnKzs/S1NTX2Nnb3N/g4+Tm5+rt7u/w8fLy8/P09fb3+Pn5+vz9/v7+/kcKcD4AAAHXSURBVHgB7ZRnW9RAEICHIHbEjrFj74rllChG7D12jb17GrsgCqKiCBYC+cnuy4fVjDyc9+Trvp/e2Wdm73Yzs+IYFYfD4fCDOOnJKtCTxIEvo9EY9Wf/SX/UKP9Q6s6qoLskitaBrCoGWtXvj9SXwxODaZq+XcnSlBup4fpkfM07fA9a3xSWR3Yo5c7P/+8LvAPkda5madI1/PZUfEUH3oaCF/Rxir/vIaK+WdrIe7+WlQlX8LsN+LJ2/KD8oZkdIrH43H8g+8jrWs9K3SX8/nR8yRv8CGoJ+BZ+Lix7u8n7sIGFcRfwhzPxRa/wY5LD4x4CG8YmClvI+7SJuPYc/ng2vuAFflIUoSmJbZSY6PAPk/d5M2HNGWqezsXnPcNP14iiyZQkNqJ/v5u83q0Cp6h5Ph+d8wQ/S32eero6t4FpgC/bBI5T83IhOusRfr5WKmzAEYbSr9sFjlLzejE64wF+sQ4f8wi3TDT8bYfAIWral6IN9/DL4/GxL5HP+HOnwH5qOpaj0+7gVyeKRX9G1UjYXmo6V6lZsOhG0q0sLdR0rdOzYNGtrIdpF73wcWNuFhRqmNQ4/xoeGuzdomZBoce5+INS/Ekr9KjqZ/1mkWfd4XA4HL8B8hyYZtVVCEkAAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="type" type="enumeration" defaultValue="static">
+                    <caption>Type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <!--     Current Value     -->
+                <property key="staticCurrentValue" type="integer" defaultValue="50">
+                    <caption>Current value</caption>
+                    <description />
+                </property>
+                <property key="dynamicCurrentValue" type="attribute" required="false">
+                    <caption>Current value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionCurrentValue" type="expression" required="false">
+                    <caption>Current value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!--     Minimum Value     -->
+                <property key="staticMinValue" type="integer" defaultValue="0">
+                    <caption>Minimum value</caption>
+                    <description />
+                </property>
+                <property key="dynamicMinValue" type="attribute" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionMinValue" type="expression" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!--     Maximum Value     -->
+                <property key="staticMaxValue" type="integer" defaultValue="100">
+                    <caption>Maximum value</caption>
+                    <description />
+                </property>
+                <property key="dynamicMaxValue" type="attribute" required="false">
+                    <caption>Maximum value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionMaxValue" type="expression" required="false">
+                    <caption>Maximum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action">
+                    <caption>On click</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Progress Label">
+            <propertyGroup caption="Progress Label">
+                <property key="showLabel" type="boolean" defaultValue="false">
+                    <caption>Show label</caption>
+                    <description />
+                </property>
+                <property key="labelType" type="enumeration" defaultValue="text">
+                    <caption>Label type</caption>
+                    <description>
+Note: If the Size of the progress bar is set to "Small" in the Appearance tab, then text and percentage labels will be shown in a tooltip and custom labels will be ignored.
+                    </description>
+                    <enumerationValues>
+                        <enumerationValue key="text">Text</enumerationValue>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="labelText" type="textTemplate" required="false">
+                    <caption>Label text</caption>
+                    <description />
+                </property>
+                <property key="customLabel" type="widgets" required="false">
+                    <caption>Custom label</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

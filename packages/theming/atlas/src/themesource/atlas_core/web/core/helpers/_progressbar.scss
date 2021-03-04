@@ -12,31 +12,68 @@
 //## Helper classes to change the look and feel of the component
 ========================================================================== */
 
-.widget-progress-bar .progress-bar-default {
+.widget-progress-bar {
+    width: 100%;
+    .progress {
+        border-radius: $border-radius-default;
+    }
+}
+
+.progress-bar-medium .progress,
+.progress-bar-medium .progress-bar {
+    height: 16px;
+    line-height: 16px;
+    font-size: $font-size-small;
+}
+
+.progress-bar-small .progress,
+.progress-bar-small .progress-bar {
+    height: 8px;
+    line-height: 8px;
+    font-size: 0px;
+}
+
+.progress-bar-small .progress-bar > * {
+    // Specifically to hide custom labels.
+    display: none;
+}
+
+.progress-bar-large .progress,
+.progress-bar-large .progress-bar {
+    height: 24px;
+    line-height: 24px;
+    font-size: $font-size-default;
+}
+
+.widget-progress-bar-clickable:hover {
+    cursor: pointer;
+}
+
+.widget-progress-bar.progress-bar-default .progress-bar {
     background-color: $brand-default;
 }
 
-.widget-progress-bar .progress-bar-primary {
+.widget-progress-bar.progress-bar-primary .progress-bar {
     background-color: $brand-primary;
 }
 
-.widget-progress-bar .progress-bar-success {
+.widget-progress-bar.progress-bar-success .progress-bar {
     background-color: $brand-success;
 }
 
-.widget-progress-bar .progress-bar-info {
+.widget-progress-bar.progress-bar-info .progress-bar {
     background-color: $brand-info;
 }
 
-.widget-progress-bar .progress-bar-warning {
+.widget-progress-bar.progress-bar-warning .progress-bar {
     background-color: $brand-warning;
 }
 
-.widget-progress-bar .progress-bar-danger {
+.widget-progress-bar.progress-bar-danger .progress-bar {
     background-color: $brand-danger;
 }
 
-.widget-progress-bar .progress-bar-inverse {
+.widget-progress-bar.progress-bar-inverse .progress-bar {
     background-color: $brand-inverse;
 }
 
@@ -46,4 +83,45 @@
 
 .widget-progress-bar-text-contrast .progress-bar {
     color: $font-color-default;
+}
+
+.widget-progress-bar-negative {
+    float: right;
+    display: block;
+}
+
+.widget-progress-bar.progress-bar-background-default > .progress {
+    background-color: $bg-color;
+}
+
+.widget-progress-bar.progress-bar-background-dashboard > .progress {
+    background-color: $bg-color-secondary;
+}
+
+.widget-progress-bar.progress-bar-background-brand-default > .progress {
+    background-color: $brand-default;
+}
+
+.widget-progress-bar.progress-bar-background-primary > .progress {
+    background-color: $brand-primary;
+}
+
+.widget-progress-bar.progress-bar-background-success > .progress {
+    background-color: $brand-success;
+}
+
+.widget-progress-bar.progress-bar-background-info > .progress {
+    background-color: $brand-info;
+}
+
+.widget-progress-bar.progress-bar-background-warning > .progress {
+    background-color: $brand-warning;
+}
+
+.widget-progress-bar.progress-bar-background-danger > .progress {
+    background-color: $brand-danger;
+}
+
+.widget-progress-bar > .alert {
+    margin-top: 24px;
 }

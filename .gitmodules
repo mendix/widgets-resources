@@ -14,6 +14,10 @@
 	path = packages/pluggableWidgets/video-player-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = video-player-web
+[submodule "packages/pluggableWidgets/progress-bar-web/tests/testProject"]
+	path = packages/pluggableWidgets/progress-bar-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = progress-bar-web
 [submodule "packages/pluggableWidgets/accessibility-helper-web/tests/testProject"]
 	path = packages/pluggableWidgets/accessibility-helper-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
@@ -42,10 +46,6 @@
 	path = packages/customWidgets/color-picker-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = color-picker-web
-[submodule "packages/customWidgets/progress-bar-web/tests/testProject"]
-	path = packages/customWidgets/progress-bar-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = progress-bar-web
 [submodule "packages/customWidgets/switch-web/tests/testProject"]
 	path = packages/customWidgets/switch-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
