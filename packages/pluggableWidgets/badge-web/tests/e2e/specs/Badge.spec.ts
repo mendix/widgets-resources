@@ -9,7 +9,7 @@ describe("badge-web", () => {
 
     describe("type: badge", () => {
         it("compares with a screenshot baseline and checks if all badges elements are rendered as expected", () => {
-            browser.setWindowRect(0, 0, 1024, 768);
+            browser.setWindowRect(0, 0, 1200, 900);
             const screenshotElem = $(".mx-dataview-content");
             screenshotElem.waitForDisplayed();
             browser.saveElement(screenshotElem, "badgePageContent");
