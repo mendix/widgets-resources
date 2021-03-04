@@ -309,23 +309,25 @@ $include-buttons-helpers: true !default;
 $include-check-box: true !default;
 $include-data-grids: true !default;
 $include-data-grids-helpers: true !default;
-$include-data-view: true !default; // TODO: use in main
-$include-date-picker: true !default; // TODO: use in main
-$include-glyphicons: true !default; // TODO: use in main
+$include-data-view: true !default;
+$include-date-picker: true !default;
+$include-header: true !default;
+$include-glyphicons: true !default;
 $include-grid: true !default; // TODO: use in main
 $include-group-box: true !default;
 $include-group-box-helpers: true !default;
-$include-header: true !default; // TODO: use in main
+$include-header: true !default;
 $include-inputs: true !default; // TODO: use in main
 $include-labels: true !default; // TODO: use in main
 $include-layout-grid: true !default; // TODO: use in main
-$include-list-view: true !default; // TODO: use in main
+$include-list-view: true !default;
+$include-list-view-helpers: true !default;
 $include-modals: true !default; // TODO: use in main
 $include-navigation-bar: true !default; // TODO: use in main
 $include-navigation-list: true !default; // TODO: use in main
 $include-navigation-tree: true !default; // TODO: use in main
 $include-pagination: true !default; // TODO: use in main
-$include-popup-menu: true !default; // TODO: use in main
+$include-popup-menu: true !default;
 $include-progress: true !default; // TODO: use in main
 $include-progress-bar: true !default; // TODO: use in main
 $include-progress-circle: true !default; // TODO: use in main

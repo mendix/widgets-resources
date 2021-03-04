@@ -46,12 +46,10 @@
     "core/helpers/datagrids",
     $include-data-grids-helpers
 );
-//@import "core/widgets/datagrids";
-//@import "core/helpers/datagrids";
-@import "core/widgets/dataview";
-@import "core/widgets/datepicker";
-@import "core/widgets/header";
-@import "core/widgets/glyphicons";
+@include include-widget-styles("core/widgets/dataview", $include-data-view);
+@include include-widget-styles("core/widgets/datepicker", $include-data-picker);
+@include include-widget-styles("core/widgets/header", $include-header);
+@include include-widget-styles("core/widgets/glyphicons", $include-glyphicons);
 @include include-widget-styles(
     "core/widgets/groupbox",
     $include-group-box,
@@ -59,15 +57,19 @@
     $include-group-box-helpers
 );
 @import "core/helpers/images";
-@import "core/widgets/listview";
-@import "core/helpers/listview";
+@include include-widget-styles(
+    "core/widgets/listview",
+    $include-list-view,
+    "core/helpers/listview",
+    $include-list-view-helpers
+);
 @import "core/widgets/modals";
 @import "core/widgets/navigationbar";
 @import "core/helpers/navigationbar";
 @import "core/widgets/navigationlist";
 @import "core/widgets/navigationtree";
 @import "core/helpers/navigationtree";
-@import "core/widgets/popupmenu";
+@include include-widget-styles("core/widgets/popupmenu", $include-popup-menu);
 @import "core/widgets/simplemenubar";
 @import "core/helpers/simplemenubar";
 @import "core/widgets/radiobuttons";
