@@ -56,7 +56,7 @@
     "core/helpers/groupbox",
     $include-group-box-helpers
 );
-@import "core/helpers/images";
+@import "core/helpers/images"; // TODO: Check whether to offer inclusion for it
 @include include-widget-styles(
     "core/widgets/listview",
     $include-list-view,
@@ -70,32 +70,57 @@
 @import "core/widgets/navigationtree";
 @import "core/helpers/navigationtree";
 @include include-widget-styles("core/widgets/popupmenu", $include-popup-menu);
-@import "core/widgets/simplemenubar";
-@import "core/helpers/simplemenubar";
-@import "core/widgets/radiobuttons";
-@import "core/widgets/tabcontainer";
-@import "core/helpers/tabcontainer";
-@import "core/widgets/tables";
-@import "core/helpers/tables";
-@import "core/widgets/templategrids";
-@import "core/helpers/templategrids";
-@import "core/widgets/typography";
-@import "core/helpers/typography";
-@import "core/widgets/layoutgrid";
-@import "core/widgets/pagination";
-@import "core/widgets/progress";
-@import "core/widgets/progressbar";
-@import "core/helpers/progressbar";
-@import "core/widgets/progresscircle";
-@import "core/helpers/progresscircle";
-@import "core/widgets/rating";
-@import "core/helpers/rating";
-@import "core/widgets/rangeslider";
-@import "core/helpers/rangeslider";
-@import "core/widgets/slider";
-@import "core/helpers/slider";
-@import "core/widgets/timeline";
-@import "core/helpers/helperclasses";
+@include include-widget-styles(
+    "core/widgets/simplemenubar",
+    $include-simple-menubar,
+    "core/helpers/simplemenubar",
+    $include-simple-menubar-helpers
+);
+@include include-widget-styles("core/widgets/radiobuttons", $include-radio-buttons);
+@include include-widget-styles(
+    "core/widgets/tabcontainer",
+    $include-tab-container,
+    "core/helpers/tabcontainer",
+    $include-tab-container-helpers
+);
+@include include-widget-styles("core/widgets/tables", $include-tables, "core/helpers/tables", $include-tables-helpers);
+@include include-widget-styles(
+    "core/widgets/templategrids",
+    $include-template-grids,
+    "core/helpers/templategrids",
+    $include-template-grids-helpers
+);
+@include include-widget-styles(
+    "core/widgets/typography",
+    $include-typography,
+    "core/helpers/typography",
+    $include-typography-helpers
+);
+@include include-widget-styles("core/widgets/layoutgrid", $include-layout-grid);
+@include include-widget-styles("core/widgets/pagination", $include-pagination);
+@include include-widget-styles("core/widgets/progress", $include-progress);
+@include include-widget-styles(
+    "core/widgets/progressbar",
+    $include-progress-bar,
+    "core/helpers/progressbar",
+    $include-progress-bar-helpers
+);
+@include include-widget-styles(
+    "core/widgets/progresscircle",
+    $include-progress-circle,
+    "core/helpers/progresscircle",
+    $include-progress-circle-helpers
+);
+@include include-widget-styles("core/widgets/rating", $include-rating, "core/helpers/rating", $include-rating-helpers);
+@include include-widget-styles(
+    "core/widgets/rangeslider",
+    $include-range-slider,
+    "core/helpers/rangeslider",
+    $include-range-slider-helpers
+);
+@include include-widget-styles("core/widgets/slider", $include-slider, "core/helpers/slider", $include-slider-helpers);
+@include include-widget-styles("core/widgets/timeline", $include-timeline);
+@import "core/helpers/helperclasses"; // TODO: Check whether to offer inclusion for it
 
 // Custom widgets
 @import "core/widgetscustom/dijit-widgets";

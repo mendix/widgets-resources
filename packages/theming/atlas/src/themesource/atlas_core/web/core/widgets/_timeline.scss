@@ -5,11 +5,14 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+@import "../../variables";
+@import "../../../../../theme/web/custom-variables";
+@import "typography";
+
 /* ==========================================================================
    Timeline
 
 ========================================================================== */
-
 //Timeline grouping
 .widget-timeline-date-header {
     display: flex;

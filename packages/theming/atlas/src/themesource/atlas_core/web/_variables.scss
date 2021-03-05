@@ -319,28 +319,38 @@ $include-group-box-helpers: true !default;
 $include-header: true !default;
 $include-inputs: true !default; // TODO: use in main
 $include-labels: true !default; // TODO: use in main
-$include-layout-grid: true !default; // TODO: use in main
+$include-layout-grid: true !default;
 $include-list-view: true !default;
 $include-list-view-helpers: true !default;
 $include-modals: true !default; // TODO: use in main
 $include-navigation-bar: true !default; // TODO: use in main
 $include-navigation-list: true !default; // TODO: use in main
 $include-navigation-tree: true !default; // TODO: use in main
-$include-pagination: true !default; // TODO: use in main
+$include-pagination: true !default;
 $include-popup-menu: true !default;
-$include-progress: true !default; // TODO: use in main
-$include-progress-bar: true !default; // TODO: use in main
-$include-progress-circle: true !default; // TODO: use in main
-$include-radio-buttons: true !default; // TODO: use in main
-$include-range-slider: true !default; // TODO: use in main
-$include-rating: true !default; // TODO: use in main
-$include-simple-menubar: true !default; // TODO: use in main
-$include-slider: true !default; // TODO: use in main
-$include-tab-container: true !default; // TODO: use in main
-$include-tables: true !default; // TODO: use in main
-$include-template-grids: true !default; // TODO: use in main
-$include-timeline: true !default; // TODO: use in main
-$include-typography: true !default; // TODO: use in main
+$include-progress: true !default;
+$include-progress-bar: true !default;
+$include-progress-bar-helpers: true !default;
+$include-progress-circle: true !default;
+$include-progress-circle-helpers: true !default;
+$include-radio-buttons: true !default;
+$include-range-slider: true !default;
+$include-range-slider-helpers: true !default;
+$include-rating: true !default;
+$include-rating-helpers: true !default;
+$include-simple-menubar: true !default;
+$include-simple-menubar-helpers: true !default;
+$include-slider: true !default;
+$include-slider-helpers: true !default;
+$include-tables: true !default;
+$include-tables-helpers: true !default;
+$include-tab-container: true !default;
+$include-tab-container-helpers: true !default;
+$include-template-grids: true !default;
+$include-template-grids-helpers: true !default;
+$include-timeline: true !default;
+$include-typography: true !default;
+$include-typography-helpers: true !default;
 
 //== Grids
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
