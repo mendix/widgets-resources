@@ -202,4 +202,3 @@ module.exports = [
     layout,
     page
 ].reduce((merged, object) => ({ ...merged, ...object }), {});
-
