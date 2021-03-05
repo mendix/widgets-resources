@@ -889,23 +889,10 @@
     ],
     "com.mendix.widget.custom.progressbar.ProgressBar": [
         {
-            "name": "Bar type",
-            "type": "Dropdown",
-            "description": "Type of the progress bar",
-            "options": [
-                {
-                    "name": "Plain",
-                    "class": "progress-bar-default"
-                },
-                {
-                    "name": "Striped",
-                    "class": "progress-striped"
-                },
-                {
-                    "name": "Animated",
-                    "class": "progress-striped active"
-                }
-            ]
+            "name": "Striped bar",
+            "type": "Toggle",
+            "description": "Striped progress bar",
+            "class": "progress-striped"
         },
         {
             "name": "Bar color",
