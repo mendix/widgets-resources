@@ -42,7 +42,7 @@ export const com_mendix_widget_native_popupmenu_PopupMenu: PopupMenuType = {
             defaultStyle: {
                 // All TextStyle properties are allowed
                 fontSize: font.size,
-                color: font.colorTitle,
+                color: font.colorTitle
             },
             primaryStyle: {
                 // All TextStyle properties are allowed
