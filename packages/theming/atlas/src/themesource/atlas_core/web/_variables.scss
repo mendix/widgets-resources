@@ -303,7 +303,7 @@ $color-danger-lighter: mix($brand-danger, white, 20%) !default;
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c) !default;
 
 //== Widget style inclusion
-// TODO: add badge variable
+$include-badge: true !default;
 $include-buttons: true !default;
 $include-buttons-helpers: true !default;
 $include-check-box: true !default;
@@ -313,19 +313,21 @@ $include-data-view: true !default;
 $include-date-picker: true !default;
 $include-header: true !default;
 $include-glyphicons: true !default;
-$include-grid: true !default; // TODO: use in main
+$include-grid: true !default;
 $include-group-box: true !default;
 $include-group-box-helpers: true !default;
 $include-header: true !default;
-$include-inputs: true !default; // TODO: use in main
+$include-inputs: true !default;
 $include-labels: true !default; // TODO: use in main
 $include-layout-grid: true !default;
 $include-list-view: true !default;
 $include-list-view-helpers: true !default;
-$include-modals: true !default; // TODO: use in main
-$include-navigation-bar: true !default; // TODO: use in main
-$include-navigation-list: true !default; // TODO: use in main
-$include-navigation-tree: true !default; // TODO: use in main
+$include-modals: true !default;
+$include-navigation-bar: true !default;
+$include-navigation-bar-helpers: true !default;
+$include-navigation-list: true !default;
+$include-navigation-tree: true !default;
+$include-navigation-tree-helpers: true !default;
 $include-pagination: true !default;
 $include-popup-menu: true !default;
 $include-progress: true !default;

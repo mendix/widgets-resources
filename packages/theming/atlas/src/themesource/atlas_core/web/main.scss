@@ -25,11 +25,11 @@
 @import "core/base/login";
 
 // Widgets
-@import "core/widgets/inputs";
-@import "core/helpers/backgrounds";
-@import "core/widgets/labels";
-@import "core/widgets/badge";
-@import "core/helpers/labels";
+@include include-widget-styles("core/widgets/inputs", $include-inputs);
+@import "core/helpers/backgrounds"; // TODO: include
+@import "core/widgets/labels"; // TODO: include
+@include include-widget-styles("core/widgets/badge", $include-badge);
+@import "core/helpers/labels"; // TODO: include
 @import "core/widgets/badgebutton";
 @import "core/helpers/badgebutton";
 @include include-widget-styles(
@@ -39,7 +39,7 @@
     $include-buttons-helpers
 );
 @include include-widget-styles("core/widgets/checkbox", $include-check-box);
-@import "core/widgets/grid";
+@include include-widget-styles("core/widgets/grid", $include-grid);
 @include include-widget-styles(
     "core/widgets/datagrids",
     $include-data-grids,
@@ -63,12 +63,20 @@
     "core/helpers/listview",
     $include-list-view-helpers
 );
-@import "core/widgets/modals";
-@import "core/widgets/navigationbar";
-@import "core/helpers/navigationbar";
-@import "core/widgets/navigationlist";
-@import "core/widgets/navigationtree";
-@import "core/helpers/navigationtree";
+@include include-widget-styles("core/widgets/modals", $include-modals);
+@include include-widget-styles(
+    "core/widgets/navigationbar",
+    $include-navigation-bar,
+    "core/helpers/navigationbar",
+    $include-navigation-bar-helpers
+);
+@include include-widget-styles("core/widgets/navigationlist", $include-navigation-list);
+@include include-widget-styles(
+    "core/widgets/navigationtree",
+    $include-navigation-tree,
+    "core/helpers/navigationtree",
+    $include-navigation-tree-helpers
+);
 @include include-widget-styles("core/widgets/popupmenu", $include-popup-menu);
 @include include-widget-styles(
     "core/widgets/simplemenubar",
