@@ -939,45 +939,6 @@
             ]
         },
         {
-            "name": "Background color",
-            "type": "Dropdown",
-            "description": "Background color of the progress bar",
-            "options": [
-                {
-                    "name": "Background Default",
-                    "class": "progress-bar-background-default"
-                },
-                {
-                    "name": "Background Dashboard",
-                    "class": "progress-bar-background-dashboard"
-                },
-                {
-                    "name": "Brand Default",
-                    "class": "progress-bar-background-brand-default"
-                },
-                {
-                    "name": "Brand Primary",
-                    "class": "progress-bar-background-primary"
-                },
-                {
-                    "name": "Brand Info",
-                    "class": "progress-bar-background-info"
-                },
-                {
-                    "name": "Brand Success",
-                    "class": "progress-bar-background-success"
-                },
-                {
-                    "name": "Brand Warning",
-                    "class": "progress-bar-background-warning"
-                },
-                {
-                    "name": "Brand Danger",
-                    "class": "progress-bar-background-danger"
-                }
-            ]
-        },
-        {
             "name": "Size",
             "type": "Dropdown",
             "description": "Size of the progress bar",
