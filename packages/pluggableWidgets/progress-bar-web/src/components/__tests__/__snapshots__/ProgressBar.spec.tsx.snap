@@ -2,7 +2,7 @@
 
 exports[`Progress bar has progress bar structure 1`] = `
 <div
-  className="widget-progress-bar progress-bar-medium progress-bar-default"
+  className="widget-progress-bar progress-bar-medium progress-bar-primary"
 >
   <div
     className="progress widget-progress-bar-clickable"

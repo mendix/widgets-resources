@@ -50,10 +50,6 @@
     cursor: pointer;
 }
 
-.widget-progress-bar.progress-bar-default .progress-bar {
-    background-color: $brand-default;
-}
-
 .widget-progress-bar.progress-bar-primary .progress-bar {
     background-color: $brand-primary;
 }
@@ -62,20 +58,12 @@
     background-color: $brand-success;
 }
 
-.widget-progress-bar.progress-bar-info .progress-bar {
-    background-color: $brand-info;
-}
-
 .widget-progress-bar.progress-bar-warning .progress-bar {
     background-color: $brand-warning;
 }
 
 .widget-progress-bar.progress-bar-danger .progress-bar {
     background-color: $brand-danger;
-}
-
-.widget-progress-bar.progress-bar-inverse .progress-bar {
-    background-color: $brand-inverse;
 }
 
 .widget-progress-bar-alert.widget-progress-bar-text-contrast .progress-bar {

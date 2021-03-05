@@ -913,16 +913,8 @@
             "description": "Color of the progress bar",
             "options": [
                 {
-                    "name": "Default",
-                    "class": "progress-bar-default"
-                },
-                {
                     "name": "Primary",
                     "class": "progress-bar-primary"
-                },
-                {
-                    "name": "Info",
-                    "class": "progress-bar-info"
                 },
                 {
                     "name": "Success",
