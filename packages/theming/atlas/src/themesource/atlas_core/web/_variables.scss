@@ -303,6 +303,7 @@ $color-danger-lighter: mix($brand-danger, white, 20%) !default;
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c) !default;
 
 //== Widget style inclusion
+$include-backgrounds-helpers: true !default;
 $include-badge: true !default;
 $include-buttons: true !default;
 $include-buttons-helpers: true !default;
@@ -317,8 +318,11 @@ $include-grid: true !default;
 $include-group-box: true !default;
 $include-group-box-helpers: true !default;
 $include-header: true !default;
+$include-helper-classes-helpers: true !default;
+$include-images-helpers: true !default;
 $include-inputs: true !default;
-$include-labels: true !default; // TODO: use in main
+$include-labels: true !default;
+$include-labels-helpers: true !default;
 $include-layout-grid: true !default;
 $include-list-view: true !default;
 $include-list-view-helpers: true !default;

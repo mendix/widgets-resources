@@ -9,8 +9,12 @@
     @if $include-default-styles {
         @include meta.load-css($default-styles-path);
 
-        @if $include-helper-styles {
-            @include meta.load-css($helper-styles-path);
-        }
+        @include include-widget-helper-styles($helper-styles-path, $include-helper-styles);
+    }
+}
+
+@mixin include-widget-helper-styles($helper-styles-path, $include-helper-styles) {
+    @if $include-helper-styles {
+        @include meta.load-css($helper-styles-path);
     }
 } ;

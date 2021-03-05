@@ -26,10 +26,10 @@
 
 // Widgets
 @include include-widget-styles("core/widgets/inputs", $include-inputs);
-@import "core/helpers/backgrounds"; // TODO: include
-@import "core/widgets/labels"; // TODO: include
+@include include-widget-helper-styles("core/helpers/backgrounds", $include-backgrounds-helpers);
+@include include-widget-styles("core/widgets/labels", $include-labels);
 @include include-widget-styles("core/widgets/badge", $include-badge);
-@import "core/helpers/labels"; // TODO: include
+@include include-widget-helper-styles("core/helpers/labels", $include-labels-helpers);
 @import "core/widgets/badgebutton";
 @import "core/helpers/badgebutton";
 @include include-widget-styles(
@@ -56,7 +56,7 @@
     "core/helpers/groupbox",
     $include-group-box-helpers
 );
-@import "core/helpers/images"; // TODO: Check whether to offer inclusion for it
+@include include-widget-helper-styles("core/helpers/images", $include-images-helpers);
 @include include-widget-styles(
     "core/widgets/listview",
     $include-list-view,
@@ -128,7 +128,7 @@
 );
 @include include-widget-styles("core/widgets/slider", $include-slider, "core/helpers/slider", $include-slider-helpers);
 @include include-widget-styles("core/widgets/timeline", $include-timeline);
-@import "core/helpers/helperclasses"; // TODO: Check whether to offer inclusion for it
+@include include-widget-helper-styles("core/helpers/helperclasses", $include-helper-classes-helpers);
 
 // Custom widgets
 @import "core/widgetscustom/dijit-widgets";

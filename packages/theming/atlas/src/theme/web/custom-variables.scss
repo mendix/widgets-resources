@@ -299,6 +299,7 @@ $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #11198
 
 //== Widget style inclusion
 // TODO: add variables here
+$include-backgrounds-helpers: true;
 $include-badge: true;
 $include-buttons: true;
 $include-buttons-helpers: true;
@@ -312,7 +313,11 @@ $include-grid: true;
 $include-group-box: true;
 $include-group-box-helpers: true;
 $include-header: true;
+$include-helper-classes-helpers: true;
 $include-inputs: true;
+$include-images-helpers: true;
+$include-labels: true;
+$include-labels-helpers: true;
 $include-layout-grid: true;
 $include-list-view: true;
 $include-list-view-helpers: true;
