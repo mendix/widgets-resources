@@ -79,9 +79,6 @@ $link-hover-color: darken($link-color, 15%);
 
 // Font Family Import (Used for google font plugin in theme creater)
 $font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
-@if $font-family-import != false {
-    @import url("\"#{$font-family-import}\""); // the `url` function removes the outer quotes, escape inner quotes so that compiled value is a string literal.
-}
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base: "SFProDisplay", "Open Sans", sans-serif;
