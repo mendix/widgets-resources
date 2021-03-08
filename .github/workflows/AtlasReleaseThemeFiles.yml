@@ -32,9 +32,10 @@ jobs:
               run: |
                   cd packages/theming/atlas
                   npm run release-ts
+            - name: "Create ZIP"
             - uses: papeloto/action-zip@v1
               with:
-                  files: dist/ manifest.json
+                  files: packages/theming/atlas/dist/theme
                   dest: atlasui-theme-files.zip
             - name: "Release Atlas Theme Files"
               uses: "marvinpinto/action-automatic-releases@latest"
