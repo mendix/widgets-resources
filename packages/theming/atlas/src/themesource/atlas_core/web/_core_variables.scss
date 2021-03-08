@@ -1,0 +1,62 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+//== Widget style inclusion
+$include-backgrounds-helpers: true !default;
+$include-badge: true !default;
+$include-buttons: true !default;
+$include-buttons-helpers: true !default;
+$include-check-box: true !default;
+$include-data-grids: true !default;
+$include-data-grids-helpers: true !default;
+$include-data-view: true !default;
+$include-date-picker: true !default;
+$include-header: true !default;
+$include-glyphicons: true !default;
+$include-grid: true !default;
+$include-group-box: true !default;
+$include-group-box-helpers: true !default;
+$include-header: true !default;
+$include-helper-classes-helpers: true !default;
+$include-images-helpers: true !default;
+$include-inputs: true !default;
+$include-labels: true !default;
+$include-labels-helpers: true !default;
+$include-layout-grid: true !default;
+$include-list-view: true !default;
+$include-list-view-helpers: true !default;
+$include-modals: true !default;
+$include-navigation-bar: true !default;
+$include-navigation-bar-helpers: true !default;
+$include-navigation-list: true !default;
+$include-navigation-tree: true !default;
+$include-navigation-tree-helpers: true !default;
+$include-pagination: true !default;
+$include-popup-menu: true !default;
+$include-progress: true !default;
+$include-progress-bar: true !default;
+$include-progress-bar-helpers: true !default;
+$include-progress-circle: true !default;
+$include-progress-circle-helpers: true !default;
+$include-radio-buttons: true !default;
+$include-range-slider: true !default;
+$include-range-slider-helpers: true !default;
+$include-rating: true !default;
+$include-rating-helpers: true !default;
+$include-simple-menubar: true !default;
+$include-simple-menubar-helpers: true !default;
+$include-slider: true !default;
+$include-slider-helpers: true !default;
+$include-tables: true !default;
+$include-tables-helpers: true !default;
+$include-tab-container: true !default;
+$include-tab-container-helpers: true !default;
+$include-template-grids: true !default;
+$include-template-grids-helpers: true !default;
+$include-timeline: true !default;
+$include-typography: true !default;
+$include-typography-helpers: true !default;
