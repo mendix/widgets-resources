@@ -63,55 +63,6 @@
     }
 }
 
-//== Background colors
-.widget-progress-circle-background-default {
-    .widget-progress-circle-trail-path {
-        stroke: $bg-color;
-    }
-}
-
-.widget-progress-circle-background-dashboard {
-    .widget-progress-circle-trail-path {
-        stroke: $bg-color-secondary;
-    }
-}
-
-.widget-progress-circle-background-brand-default {
-    .widget-progress-circle-trail-path {
-        stroke: $brand-default;
-    }
-}
-
-.widget-progress-circle-background-primary {
-    .widget-progress-circle-trail-path {
-        stroke: $color-primary-lighter;
-    }
-}
-
-.widget-progress-circle-background-success {
-    .widget-progress-circle-trail-path {
-        stroke: $color-success-lighter;
-    }
-}
-
-.widget-progress-circle-background-info {
-    .widget-progress-circle-trail-path {
-        stroke: $color-info-lighter;
-    }
-}
-
-.widget-progress-circle-background-warning {
-    .widget-progress-circle-trail-path {
-        stroke: $color-warning-lighter;
-    }
-}
-
-.widget-progress-circle-background-danger {
-    .widget-progress-circle-trail-path {
-        stroke: $color-danger-lighter;
-    }
-}
-
 //== Sizes
 .widget-progress-circle-thickness-medium {
     .widget-progress-circle-trail-path,

@@ -77,7 +77,6 @@ export const ProgressCircle: FunctionComponent<ProgressCircleProps> = ({
                 "widget-progress-circle",
                 "widget-progress-circle-default",
                 "widget-progress-circle-thickness-medium",
-                "widget-progress-circle-background-default",
                 className
             )}
             style={style}

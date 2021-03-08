@@ -995,45 +995,6 @@
             ]
         },
         {
-            "name": "Background color",
-            "type": "Dropdown",
-            "description": "Background color of the progress circle",
-            "options": [
-                {
-                    "name": "Background Default",
-                    "class": "widget-progress-circle-background-default"
-                },
-                {
-                    "name": "Background Dashboard",
-                    "class": "widget-progress-circle-background-dashboard"
-                },
-                {
-                    "name": "Brand Default",
-                    "class": "widget-progress-circle-background-brand-default"
-                },
-                {
-                    "name": "Brand Primary",
-                    "class": "widget-progress-circle-background-primary"
-                },
-                {
-                    "name": "Brand Info",
-                    "class": "widget-progress-circle-background-success"
-                },
-                {
-                    "name": "Brand Success",
-                    "class": "widget-progress-circle-background-info"
-                },
-                {
-                    "name": "Brand Warning",
-                    "class": "widget-progress-circle-background-warning"
-                },
-                {
-                    "name": "Brand Danger",
-                    "class": "widget-progress-circle-background-danger"
-                }
-            ]
-        },
-        {
             "name": "Size",
             "type": "Dropdown",
             "description": "Thickness of the progress circle",
