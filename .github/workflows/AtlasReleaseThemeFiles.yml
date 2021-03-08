@@ -32,6 +32,9 @@ jobs:
               run: |
                   cd packages/theming/atlas
                   npm run release-ts
+            - name: "Create theme web folder in dist"
+              run: |
+                  mkdir -p packages/theming/atlas/dist/theme/web/
             - name: "Copy theme web folder to dist"
               uses: canastro/copy-file-action@master
               with:
