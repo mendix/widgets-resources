@@ -8,11 +8,12 @@ describe("Progress Bar on click", () => {
     it("should call Microflow", () => {
         const progressBar = new ProgressBar("onClickMicroflow");
         const value = progressBar.value;
+        progressBar.element.waitForDisplayed();
         progressBar.clickableArea.click();
 
         const dialog = page.modalDialog;
         dialog.waitForDisplayed();
-        expect(dialog.getText()).toContain(`you are already at ${value}`);
+        expect(dialog.getText()).toContain(value);
     });
     it("should call Nanoflow", () => {
         const progressBar = new ProgressBar("onClickNanoflow");
