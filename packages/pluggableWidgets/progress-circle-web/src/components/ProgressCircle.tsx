@@ -75,7 +75,7 @@ export const ProgressCircle: FunctionComponent<ProgressCircleProps> = ({
         <div
             className={classNames(
                 "widget-progress-circle",
-                "widget-progress-circle-default",
+                "widget-progress-circle-primary",
                 "widget-progress-circle-thickness-medium",
                 className
             )}

@@ -969,16 +969,8 @@
             "description": "Color of the progress bar",
             "options": [
                 {
-                    "name": "Default",
-                    "class": "widget-progress-circle-default"
-                },
-                {
                     "name": "Primary",
                     "class": "widget-progress-circle-primary"
-                },
-                {
-                    "name": "Info",
-                    "class": "widget-progress-circle-info"
                 },
                 {
                     "name": "Success",

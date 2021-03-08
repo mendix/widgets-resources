@@ -2,7 +2,7 @@
 
 exports[`ProgressCircle renders the structure correctly 1`] = `
 <div
-  className="widget-progress-circle widget-progress-circle-default widget-progress-circle-thickness-medium"
+  className="widget-progress-circle widget-progress-circle-primary widget-progress-circle-thickness-medium"
 >
   <div
     className="h2 progress-circle-label-container widget-progress-circle-clickable"
