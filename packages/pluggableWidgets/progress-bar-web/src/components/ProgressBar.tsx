@@ -39,7 +39,7 @@ export function ProgressBar({
     const percentage = calculatePercentage(currentValue, minValue, maxValue);
     return (
         <div
-            className={classNames("widget-progress-bar", "progress-bar-medium", "progress-bar-default", className)}
+            className={classNames("widget-progress-bar", "progress-bar-medium", "progress-bar-primary", className)}
             style={style}
         >
             <div
