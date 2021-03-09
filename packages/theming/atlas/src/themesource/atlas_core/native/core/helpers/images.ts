@@ -48,38 +48,58 @@ export const imageCircle = {
 // Image Sizes
 export const imageIcon = {
     image: {
-        width: image.icon,
-        height: image.icon
+        maxWidth: image.icon,
+        maxHeight: image.icon
+    },
+    container: {
+        maxWidth: image.icon,
+        maxHeight: image.icon
     }
 };
 export const imageSmall = {
     image: {
-        width: image.image.small,
-        height: image.image.small
+        maxWidth: image.image.small,
+        maxHeight: image.image.small
+    },
+    container: {
+        maxWidth: image.image.small,
+        maxHeight: image.image.small
     }
 };
 export const imageMedium = {
     image: {
-        width: image.image.medium,
-        height: image.image.medium
+        maxWidth: image.image.medium,
+        maxHeight: image.image.medium
+    },
+    container: {
+        maxWidth: image.image.medium,
+        maxHeight: image.image.medium
     }
 };
 export const imageLarge = {
     image: {
-        width: image.image.large,
-        height: image.image.large
+        maxWidth: image.image.large,
+        maxHeight: image.image.large
+    },
+    container: {
+        maxWidth: image.image.large,
+        maxHeight: image.image.large
     }
 };
 export const imageLarger = {
     image: {
-        width: image.image.larger,
-        height: image.image.larger
+        maxWidth: image.image.larger,
+        maxHeight: image.image.larger
+    },
+    container: {
+        maxWidth: image.image.larger,
+        maxHeight: image.image.larger
     }
 };
 export const imageFullSize = {
     image: {
-        width: "100%",
-        height: "auto"
+        maxWidth: "100%",
+        maxHeight: "auto"
     }
 };
 //
