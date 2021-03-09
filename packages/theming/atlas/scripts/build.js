@@ -46,23 +46,23 @@ async function buildAndCopyAtlas(watchMode, destination) {
             [
                 {
                     name: "web-theme-content",
-                    command: `copy-and-watch ${watchArg} src/theme/web/**/* ${destination}/theme/web`
+                    command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${destination}/theme/web"`
                 },
                 {
                     name: "web-themesource-core",
-                    command: `copy-and-watch ${watchArg} src/themesource/atlas_core/web/**/* ${destination}/themesource/atlas_core/web`
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/web/**/*" "${destination}/themesource/atlas_core/web"`
                 },
                 {
                     name: "web-themesource-content",
-                    command: `copy-and-watch ${watchArg} src/themesource/atlas_web_content/web/**/* ${destination}/themesource/atlas_web_content/web`
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_web_content/web/**/*" "${destination}/themesource/atlas_web_content/web"`
                 },
                 {
                     name: "native-typescript",
-                    command: `tsc ${watchArg} --project tsconfig.json --outDir ${destination}`
+                    command: `tsc ${watchArg} --project tsconfig.json --outDir "${destination}"`
                 },
                 {
                     name: "native-design-properties-and-manifest",
-                    command: `copy-and-watch ${watchArg} src/themesource/atlas_core/native/**/*.json ${destination}/themesource/atlas_core/native`
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/native/**/*.json" "${destination}/themesource/atlas_core/native"`
                 }
             ],
             {
