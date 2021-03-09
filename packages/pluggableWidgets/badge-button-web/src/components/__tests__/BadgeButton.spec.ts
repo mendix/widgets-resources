@@ -1,16 +1,15 @@
 import { ShallowWrapper, shallow } from "enzyme";
-import { createElement } from "react";
-import classNames from "classnames";
+import { Component, createElement } from "react";
 
 import { BadgeButton, BadgeButtonProps } from "../BadgeButton";
 
 describe("BadgeButton", () => {
     const createBadgeButton = (
         props: BadgeButtonProps
-    ): ShallowWrapper<BadgeButtonProps, Readonly<{}>, React.Component<{}, {}, any>> =>
+    ): ShallowWrapper<BadgeButtonProps, Readonly<{}>, Component<{}, {}, any>> =>
         shallow(createElement(BadgeButton, props));
 
-    it("should render the structure", () => {
+    it("renders the structure correctly", () => {
         const badgeProps: BadgeButtonProps = {
             label: "Custom Label",
             onClick: expect.any(Function),
@@ -22,9 +21,7 @@ describe("BadgeButton", () => {
             createElement(
                 "button",
                 {
-                    className: classNames("widget-badge-button btn", {
-                        [`btn-${badgeProps.bootstrapStyle}`]: !!badgeProps.bootstrapStyle
-                    }),
+                    className: "widget-badge-button btn btn-primary",
                     onClick: expect.any(Function)
                 },
                 createElement("span", { className: "widget-badge-button-text" }, badgeProps.label),
@@ -33,8 +30,8 @@ describe("BadgeButton", () => {
         );
     });
 
-    it("with a click action should respond to click events", () => {
-        const badgeProps: BadgeButtonProps = { onClick: jasmine.createSpy("onClick") };
+    it("responds to click events", () => {
+        const badgeProps: BadgeButtonProps = { onClick: jest.fn() };
         const badge = createBadgeButton(badgeProps);
 
         badge.simulate("click");
@@ -42,39 +39,9 @@ describe("BadgeButton", () => {
         expect(badgeProps.onClick).toHaveBeenCalled();
     });
 
-    it("with the bootstrap style default should have the class btn-default", () => {
-        const badgeComponent = createBadgeButton({ bootstrapStyle: "default" });
+    it("renders correctly with custom classes", () => {
+        const badgeComponent = createBadgeButton({ className: "btn-secondary" });
 
-        expect(badgeComponent.hasClass("btn-default")).toBe(true);
-    });
-
-    it("with the bootstrap style primary should have the class btn-primary", () => {
-        const badgeComponent = createBadgeButton({ bootstrapStyle: "primary" });
-
-        expect(badgeComponent.hasClass("btn-primary")).toBe(true);
-    });
-
-    it("with the bootstrap style success should have the class btn-success", () => {
-        const badgeComponent = createBadgeButton({ bootstrapStyle: "success" });
-
-        expect(badgeComponent.hasClass("btn-success")).toBe(true);
-    });
-
-    it("with the bootstrap style info should have the class btn-info", () => {
-        const badgeComponent = createBadgeButton({ bootstrapStyle: "info" });
-
-        expect(badgeComponent.hasClass("btn-info")).toBe(true);
-    });
-
-    it("with the bootstrap style warning should have the class btn-warning", () => {
-        const badgeComponent = createBadgeButton({ bootstrapStyle: "warning" });
-
-        expect(badgeComponent.hasClass("btn-warning")).toBe(true);
-    });
-
-    it("with the bootstrap style danger should have the class btn-danger", () => {
-        const badgeComponent = createBadgeButton({ bootstrapStyle: "danger" });
-
-        expect(badgeComponent.hasClass("btn-danger")).toBe(true);
+        expect(badgeComponent.hasClass("btn btn-secondary")).toBe(true);
     });
 });
