@@ -28,10 +28,24 @@ jobs:
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Installing dependencies"
               run: npm install
-            - name: "Build JS"
+            - name: "Compile theme native TS to JS in dist"
               run: |
                   cd packages/theming/atlas
                   npm run release-ts
+            - name: "Create theme web folder in dist"
+              run: |
+                  mkdir -p packages/theming/atlas/dist/theme/web/
+            - name: "Copy theme web folder to dist"
+              uses: canastro/copy-file-action@master
+              with:
+                  source: "packages/theming/atlas/src/theme/web/*"
+                  target: "packages/theming/atlas/dist/theme/web/"
+            - name: "Create ZIP"
+              uses: papeloto/action-zip@v1
+              with:
+                  files: packages/theming/atlas/dist/theme/
+                  recursive: true
+                  dest: atlasui-theme-files.zip
             - name: "Release Atlas Theme Files"
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
@@ -43,3 +57,4 @@ jobs:
                       packages/theming/atlas/dist/theme/native/main.js
                       packages/theming/atlas/dist/theme/native/custom-variables.js
                       packages/theming/atlas/src/theme/web/**/*
+                      atlasui-theme-files.zip
