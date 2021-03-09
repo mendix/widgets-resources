@@ -104,6 +104,7 @@ const fontDefaults: VariablesFontDefaults = {
 };
 let font: VariablesFont = {
     size: adjustFont(14),
+    sizeSmallest: adjustFont(10),
     sizeSmall: adjustFont(12),
     sizeLarge: adjustFont(16),
     sizeH1: adjustFont(40),
@@ -113,6 +114,7 @@ let font: VariablesFont = {
     sizeH5: adjustFont(20),
     sizeH6: adjustFont(16),
     lineHeight: adjustFont(14) * 1.5,
+    lineHeightSmallest: adjustFont(10) * 1.5,
     lineHeightSmall: adjustFont(12) * 1.5,
     lineHeightLarge: adjustFont(16) * 1.5,
     lineHeightH1: adjustFont(40) * 1.5,

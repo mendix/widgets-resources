@@ -99,6 +99,12 @@ export const textBold = {
 };
 //
 // Text Sizes
+export const textSmallest = {
+    text: {
+        fontSize: font.sizeSmallest,
+        lineHeight: font.lineHeightSmallest
+    }
+};
 export const textSmall = {
     text: {
         fontSize: font.sizeSmall,
