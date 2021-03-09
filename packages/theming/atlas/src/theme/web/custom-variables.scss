@@ -124,41 +124,26 @@ $navigation-font-size: $font-size-default;
 $navigation-sub-font-size: $font-size-small;
 $navigation-glyph-size: 20px; // For glyphicons that you can select in the Mendix Modeler
 
-$navigation-bg-hover: lighten($navigation-bg, 4);
-$navigation-bg-active: lighten($navigation-bg, 8);
 $navigation-color: #fff;
 $navigation-color-hover: #fff;
 $navigation-color-active: #fff;
 
-$navigation-sub-bg: darken($navigation-bg, 4);
-$navigation-sub-bg-hover: $navigation-sub-bg;
-$navigation-sub-bg-active: $navigation-sub-bg;
 $navigation-sub-color: #aaa;
 $navigation-sub-color-hover: $brand-primary;
 $navigation-sub-color-active: $brand-primary;
-
-$navigation-border-color: $navigation-bg-hover;
 
 // Navigation Sidebar
 $navsidebar-font-size: $font-size-default;
 $navsidebar-sub-font-size: $font-size-small;
 $navsidebar-glyph-size: 20px; // For glyphicons that you can select in the Mendix Modeler
 
-$navsidebar-bg: $sidebar-bg;
-$navsidebar-bg-hover: darken($navsidebar-bg, 4);
-$navsidebar-bg-active: darken($navsidebar-bg, 8);
 $navsidebar-color: #fff;
 $navsidebar-color-hover: #fff;
 $navsidebar-color-active: #fff;
 
-$navsidebar-sub-bg: darken($navsidebar-bg, 4);
-$navsidebar-sub-bg-hover: $navsidebar-sub-bg;
-$navsidebar-sub-bg-active: $navsidebar-sub-bg;
 $navsidebar-sub-color: #aaa;
 $navsidebar-sub-color-hover: $brand-primary;
 $navsidebar-sub-color-active: $brand-primary;
-
-$navsidebar-border-color: $navsidebar-bg-hover;
 
 // Navigation topbar
 $navtopbar-font-size: $font-size-default;
@@ -610,6 +595,25 @@ $sidebar-bg: $brand-inverse;
 
 // Default Navigation styling
 $navigation-bg: $brand-inverse;
+$navigation-bg-hover: lighten($navigation-bg, 4);
+$navigation-bg-active: lighten($navigation-bg, 8);
+
+$navigation-sub-bg: darken($navigation-bg, 4);
+$navigation-sub-bg-hover: $navigation-sub-bg;
+$navigation-sub-bg-active: $navigation-sub-bg;
+
+$navigation-border-color: $navigation-bg-hover;
+
+// Navigation Sidebar
+$navsidebar-bg: $sidebar-bg;
+$navsidebar-bg-hover: darken($navsidebar-bg, 4);
+$navsidebar-bg-active: darken($navsidebar-bg, 8);
+
+$navsidebar-sub-bg: darken($navsidebar-bg, 4);
+$navsidebar-sub-bg-hover: $navsidebar-sub-bg;
+$navsidebar-sub-bg-active: $navsidebar-sub-bg;
+
+$navsidebar-border-color: $navsidebar-bg-hover;
 
 //== Buttons
 //## Define background-color, border-color and text. Used in components/buttons

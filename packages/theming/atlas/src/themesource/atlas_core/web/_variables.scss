@@ -130,41 +130,26 @@ $navigation-font-size: $font-size-default !default;
 $navigation-sub-font-size: $font-size-small !default;
 $navigation-glyph-size: 20px !default; // For glyphicons that you can select in the Mendix Modeler
 
-$navigation-bg-hover: lighten($navigation-bg, 4) !default;
-$navigation-bg-active: lighten($navigation-bg, 8) !default;
 $navigation-color: #fff !default;
 $navigation-color-hover: #fff !default;
 $navigation-color-active: #fff !default;
 
-$navigation-sub-bg: darken($navigation-bg, 4) !default;
-$navigation-sub-bg-hover: $navigation-sub-bg !default;
-$navigation-sub-bg-active: $navigation-sub-bg !default;
 $navigation-sub-color: #aaa !default;
 $navigation-sub-color-hover: $brand-primary !default;
 $navigation-sub-color-active: $brand-primary !default;
-
-$navigation-border-color: $navigation-bg-hover !default;
 
 // Navigation Sidebar
 $navsidebar-font-size: $font-size-default !default;
 $navsidebar-sub-font-size: $font-size-small !default;
 $navsidebar-glyph-size: 20px !default; // For glyphicons that you can select in the Mendix Modeler
 
-$navsidebar-bg: $sidebar-bg !default;
-$navsidebar-bg-hover: darken($navsidebar-bg, 4) !default;
-$navsidebar-bg-active: darken($navsidebar-bg, 8) !default;
 $navsidebar-color: #fff !default;
 $navsidebar-color-hover: #fff !default;
 $navsidebar-color-active: #fff !default;
 
-$navsidebar-sub-bg: darken($navsidebar-bg, 4) !default;
-$navsidebar-sub-bg-hover: $navsidebar-sub-bg !default;
-$navsidebar-sub-bg-active: $navsidebar-sub-bg !default;
 $navsidebar-sub-color: #aaa !default;
 $navsidebar-sub-color-hover: $brand-primary !default;
 $navsidebar-sub-color-active: $brand-primary !default;
-
-$navsidebar-border-color: $navsidebar-bg-hover !default;
 
 // Navigation topbar
 $navtopbar-font-size: $font-size-default !default;
@@ -627,6 +612,25 @@ $sidebar-bg: $brand-inverse !default;
 
 // Default Navigation styling
 $navigation-bg: $brand-inverse !default;
+$navigation-bg-hover: lighten($navigation-bg, 4) !default;
+$navigation-bg-active: lighten($navigation-bg, 8) !default;
+
+$navigation-sub-bg: darken($navigation-bg, 4) !default;
+$navigation-sub-bg-hover: $navigation-sub-bg !default;
+$navigation-sub-bg-active: $navigation-sub-bg !default;
+
+$navigation-border-color: $navigation-bg-hover !default;
+
+// Navigation Sidebar
+$navsidebar-bg: $sidebar-bg !default;
+$navsidebar-bg-hover: darken($navsidebar-bg, 4) !default;
+$navsidebar-bg-active: darken($navsidebar-bg, 8) !default;
+
+$navsidebar-sub-bg: darken($navsidebar-bg, 4) !default;
+$navsidebar-sub-bg-hover: $navsidebar-sub-bg !default;
+$navsidebar-sub-bg-active: $navsidebar-sub-bg !default;
+
+$navsidebar-border-color: $navsidebar-bg-hover !default;
 
 //== Form
 //## Used in components/inputs
