@@ -11,7 +11,7 @@
 
 // Font Family Import
 @if $font-family-import != false {
-  @import url("\"#{$font-family-import}\""); // the `url` function removes the outer quotes, escape inner quotes so that compiled value is a string literal.
+  @import url($font-family-import);
 }
 
 // Base
