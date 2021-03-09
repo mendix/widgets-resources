@@ -36,7 +36,7 @@ import {
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
-const mpkFile = join(mpkDir, `${widgetPackage}.${widgetName}.mpk`);
+const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
 
 export default async args => {
     const platform = args.configPlatform;
@@ -44,6 +44,7 @@ export default async args => {
     if (!["web", "native"].includes(platform)) {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }
+
     const result = [];
 
     if (platform === "web") {
