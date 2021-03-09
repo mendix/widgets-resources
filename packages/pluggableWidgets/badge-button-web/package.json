@@ -15,16 +15,16 @@
   },
   "packagePath": "com.mendix.widget.custom",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server",
-    "dev": "pluggable-widgets-tools start:ts",
-    "build": "pluggable-widgets-tools build:ts",
+    "start": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools start:ts",
+    "build": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "echo 'Skipping tests'",
     "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools release:web"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
