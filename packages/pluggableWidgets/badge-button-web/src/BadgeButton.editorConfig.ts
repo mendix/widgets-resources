@@ -7,44 +7,49 @@ export function getPreview(values: BadgeButtonPreviewProps): StructurePreviewPro
         columnSize: "grow",
         children: [
             {
-                type: "RowLayout",
-                columnSize: "grow",
-                grow: 0,
+                type: "Container",
                 children: [
                     {
-                        type: "Container",
-                        children: [
-                            {
-                                type: "Text",
-                                content: values.label,
-                                fontColor: "#FFF",
-                                bold: true,
-                                fontSize: 8
-                            }
-                        ],
+                        type: "RowLayout",
+                        columnSize: "grow",
+                        padding: 8,
                         grow: 0,
-                        padding: 12
-                    },
-                    {
-                        type: "Container",
                         children: [
                             {
                                 type: "Container",
                                 children: [
                                     {
                                         type: "Text",
-                                        content: values.value,
-                                        fontColor: "#264AE5",
+                                        content: values.label,
+                                        fontColor: "#FFF",
                                         bold: true,
                                         fontSize: 8
                                     }
                                 ],
-                                padding: values.value ? 4 : 8
+                                grow: 0,
+                                padding: 4
+                            },
+                            {
+                                type: "Container",
+                                children: [
+                                    {
+                                        type: "Container",
+                                        children: [
+                                            {
+                                                type: "Text",
+                                                content: values.value,
+                                                fontColor: "#264AE5",
+                                                bold: true,
+                                                fontSize: 8
+                                            }
+                                        ],
+                                        padding: values.value ? 4 : 8
+                                    }
+                                ],
+                                backgroundColor: "#FFF",
+                                borderRadius: 16
                             }
-                        ],
-                        backgroundColor: "#FFF",
-                        borderRadius: 16,
-                        padding: 8
+                        ]
                     }
                 ],
                 backgroundColor: "#264AE5",
