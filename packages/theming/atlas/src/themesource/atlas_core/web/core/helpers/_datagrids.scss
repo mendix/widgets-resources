@@ -7,7 +7,6 @@
 
 @import "../../variables";
 @import "../../../../../theme/web/custom-variables";
-@import "buttons";
 
 /* ==========================================================================
    Datagrid Default
@@ -131,7 +130,7 @@
 // Default Mendix Datagrid Widget with adjusted search field. Only 1 search field is allowed
 .datagrid-fullsearch.mx-grid {
     .mx-grid-search-button {
-        @extend .btn-primary;
+        @extend .btn-primary !optional;
     }
 
     .mx-grid-reset-button {

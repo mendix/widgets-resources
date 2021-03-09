@@ -7,7 +7,6 @@
 
 @import "../../variables";
 @import "../../../../../theme/web/custom-variables";
-@import "typography";
 
 /* ==========================================================================
    Timeline
@@ -110,7 +109,7 @@
 }
 
 .widget-timeline-title {
-    @extend h5;
+    @extend h5 !optional;
 }
 
 .widget-timeline-description {
@@ -120,7 +119,7 @@
 }
 
 .widget-eventTime {
-    @extend h5;
+    @extend h5 !optional;
     color: $timeline-event-time-color;
 }
 
