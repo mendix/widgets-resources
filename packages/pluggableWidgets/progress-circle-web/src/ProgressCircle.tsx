@@ -5,7 +5,7 @@ import { defaultValues, ProgressCircleValues } from "./progressCircleValues";
 import { calculatePercentage } from "./util";
 
 export const ProgressCircle: FunctionComponent<ProgressCircleContainerProps> = props => {
-    function getProgressBarValues(): ProgressCircleValues {
+    function getProgressCircleValues(): ProgressCircleValues {
         switch (props.type) {
             case "dynamic":
                 return {
@@ -30,7 +30,8 @@ export const ProgressCircle: FunctionComponent<ProgressCircleContainerProps> = p
     }
 
     const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
-    const { currentValue, minValue, maxValue } = getProgressBarValues();
+    const { currentValue, minValue, maxValue } = getProgressCircleValues();
+
     return (
         <ProgressCircleComponent
             class={props.class}

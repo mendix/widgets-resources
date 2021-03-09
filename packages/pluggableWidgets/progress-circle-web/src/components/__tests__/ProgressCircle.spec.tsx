@@ -114,6 +114,7 @@ describe("ProgressCircle", () => {
                 "Error in progress circle values: The progress value is lower than the minimum value."
             );
         });
+
         it("when the current value is higher than the maximum value", () => {
             const progressCircle = mount(
                 <ProgressCircle
@@ -131,6 +132,7 @@ describe("ProgressCircle", () => {
                 "Error in progress circle values: The progress value is higher than the maximum value."
             );
         });
+
         it("when the range of the progress bar is negative", () => {
             const progressCircle = mount(
                 <ProgressCircle

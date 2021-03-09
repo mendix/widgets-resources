@@ -6,7 +6,7 @@ import { defaultValues, ProgressCircleValues } from "./progressCircleValues";
 import { calculatePercentage } from "./util";
 
 export function preview(props: ProgressCirclePreviewProps): ReactElement {
-    function getProgressBarValues(): ProgressCircleValues {
+    function getProgressCircleValues(): ProgressCircleValues {
         switch (props.type) {
             case "dynamic":
                 return {
@@ -29,7 +29,8 @@ export function preview(props: ProgressCirclePreviewProps): ReactElement {
         }
     }
 
-    const { currentValue, minValue, maxValue } = getProgressBarValues();
+    const { currentValue, minValue, maxValue } = getProgressCircleValues();
+
     return (
         <ProgressCircle
             class={props.class}
