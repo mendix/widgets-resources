@@ -1082,6 +1082,10 @@
             "description": "Make the text smaller or larger.",
             "options": [
                 {
+                    "name": "Smallest",
+                    "class": "textSmallest"
+                },
+                {
                     "name": "Small",
                     "class": "textSmall"
                 },
