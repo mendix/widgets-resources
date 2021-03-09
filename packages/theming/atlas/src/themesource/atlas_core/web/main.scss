@@ -26,45 +26,45 @@
 @import "core/base/login";
 
 // Widgets
-@include include-widget-styles("core/widgets/inputs", $exclude-inputs);
-@include include-widget-helper-styles("core/helpers/backgrounds", $exclude-backgrounds-helpers);
-@include include-widget-styles("core/widgets/labels", $exclude-labels);
+@include include-widget-styles("core/widgets/inputs", $exclude-input);
+@include include-widget-helper-styles("core/helpers/backgrounds", $exclude-background-helpers);
+@include include-widget-styles("core/widgets/labels", $exclude-label);
 @include include-widget-styles("core/widgets/badge", $exclude-badge);
-@include include-widget-helper-styles("core/helpers/labels", $exclude-labels-helpers);
+@include include-widget-helper-styles("core/helpers/labels", $exclude-label-helpers);
 @import "core/widgets/badgebutton";
 @import "core/helpers/badgebutton";
 @include include-widget-styles(
     "core/widgets/buttons",
-    $exclude-buttons,
+    $exclude-button,
     "core/helpers/buttons",
-    $exclude-buttons-helpers
+    $exclude-button-helpers
 );
 @include include-widget-styles("core/widgets/checkbox", $exclude-check-box);
 @include include-widget-styles("core/widgets/grid", $exclude-grid);
 @include include-widget-styles(
     "core/widgets/datagrids",
-    $exclude-data-grids,
+    $exclude-data-grid,
     "core/helpers/datagrids",
-    $exclude-data-grids-helpers
+    $exclude-data-grid-helpers
 );
 @include include-widget-styles("core/widgets/dataview", $exclude-data-view);
 @include include-widget-styles("core/widgets/datepicker", $exclude-data-picker);
 @include include-widget-styles("core/widgets/header", $exclude-header);
-@include include-widget-styles("core/widgets/glyphicons", $exclude-glyphicons);
+@include include-widget-styles("core/widgets/glyphicons", $exclude-glyphicon);
 @include include-widget-styles(
     "core/widgets/groupbox",
     $exclude-group-box,
     "core/helpers/groupbox",
     $exclude-group-box-helpers
 );
-@include include-widget-helper-styles("core/helpers/images", $exclude-images-helpers);
+@include include-widget-helper-styles("core/helpers/images", $exclude-image-helpers);
 @include include-widget-styles(
     "core/widgets/listview",
     $exclude-list-view,
     "core/helpers/listview",
     $exclude-list-view-helpers
 );
-@include include-widget-styles("core/widgets/modals", $exclude-modals);
+@include include-widget-styles("core/widgets/modals", $exclude-modal);
 @include include-widget-styles(
     "core/widgets/navigationbar",
     $exclude-navigation-bar,
@@ -85,19 +85,19 @@
     "core/helpers/simplemenubar",
     $exclude-simple-menubar-helpers
 );
-@include include-widget-styles("core/widgets/radiobuttons", $exclude-radio-buttons);
+@include include-widget-styles("core/widgets/radiobuttons", $exclude-radio-button);
 @include include-widget-styles(
     "core/widgets/tabcontainer",
     $exclude-tab-container,
     "core/helpers/tabcontainer",
     $exclude-tab-container-helpers
 );
-@include include-widget-styles("core/widgets/tables", $exclude-tables, "core/helpers/tables", $exclude-tables-helpers);
+@include include-widget-styles("core/widgets/tables", $exclude-table, "core/helpers/tables", $exclude-table-helpers);
 @include include-widget-styles(
     "core/widgets/templategrids",
-    $exclude-template-grids,
+    $exclude-template-grid,
     "core/helpers/templategrids",
-    $exclude-template-grids-helpers
+    $exclude-template-grid-helpers
 );
 @include include-widget-styles(
     "core/widgets/typography",
@@ -129,7 +129,7 @@
 );
 @include include-widget-styles("core/widgets/slider", $exclude-slider, "core/helpers/slider", $exclude-slider-helpers);
 @include include-widget-styles("core/widgets/timeline", $exclude-timeline);
-@include include-widget-helper-styles("core/helpers/helperclasses", $exclude-helper-classes-helpers);
+@include include-widget-helper-styles("core/helpers/helperclasses", $exclude-helper-classes);
 
 // Custom widgets
 @import "core/widgetscustom/dijit-widgets";
