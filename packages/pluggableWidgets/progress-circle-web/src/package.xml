@@ -5,7 +5,7 @@
             <widgetFile path="ProgressCircle.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/web/progresscircle"/>
+            <file path="com/mendix/widget/custom/progresscircle"/>
         </files>
     </clientModule>
 </package>
