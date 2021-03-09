@@ -229,12 +229,10 @@ let input: VariablesInput = {
         backgroundColor: background.primary,
         selectionColor: contrast.lower,
         placeholderTextColor: contrast.low,
-
         fontSize: font.size,
         lineHeight: font.lineHeight,
         borderWidth: border.width,
         borderRadius: border.radiusLarge,
-
         minWidth: 48,
         minHeight: 48,
         paddingVertical: spacing.small,

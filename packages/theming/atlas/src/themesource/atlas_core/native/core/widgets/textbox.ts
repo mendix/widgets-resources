@@ -83,7 +83,7 @@ export const TextBoxVertical: TextBoxType = {
         fontSize: input.label.fontSize,
         fontFamily: font.family,
         textAlign: input.label.textAlign,
-        marginBottom: spacing.smallest
+        marginBottom: spacing.small
     },
     labelDisabled: {
         color: input.labelDisabled.color

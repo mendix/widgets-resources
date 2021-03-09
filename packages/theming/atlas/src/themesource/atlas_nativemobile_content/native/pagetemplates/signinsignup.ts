@@ -1,18 +1,16 @@
 /*
 ==========================================================================
-    Dashboards
+    Sign in and Sign up
 
 ==========================================================================
 */
 // == Elements
 // -------------------------------------------------------------------------------------------------------------------//
-import { flexMain } from "../../../atlas_core/native/core/base/flex";
-import { card } from "../buildingblocks/card";
+import { header } from "../buildingblocks/header";
 
-export const boardCard = {
+export const headerSignIn = {
     container: {
-        ...flexMain.container,
-        ...card.container,
-        height: 104
+        ...header.container,
+        height: 332
     }
 };
