@@ -26,77 +26,72 @@
 @import "core/base/login";
 
 // Widgets
-@include include-widget-styles("core/widgets/inputs", $exclude-input);
-@include include-widget-helper-styles("core/helpers/backgrounds", $exclude-background-helpers);
-@include include-widget-styles("core/widgets/labels", $exclude-label);
+@include include-widget-styles("core/widgets/input", $exclude-input);
+@include include-widget-helper-styles("core/helpers/background", $exclude-background-helpers);
+@include include-widget-styles("core/widgets/label", $exclude-label);
 @include include-widget-styles("core/widgets/badge", $exclude-badge);
-@include include-widget-helper-styles("core/helpers/labels", $exclude-label-helpers);
+@include include-widget-helper-styles("core/helpers/label", $exclude-label-helpers);
 @import "core/widgets/badgebutton";
 @import "core/helpers/badgebutton";
-@include include-widget-styles(
-    "core/widgets/buttons",
-    $exclude-button,
-    "core/helpers/buttons",
-    $exclude-button-helpers
-);
-@include include-widget-styles("core/widgets/checkbox", $exclude-check-box);
+@include include-widget-styles("core/widgets/button", $exclude-button, "core/helpers/button", $exclude-button-helpers);
+@include include-widget-styles("core/widgets/check-box", $exclude-check-box);
 @include include-widget-styles("core/widgets/grid", $exclude-grid);
 @include include-widget-styles(
-    "core/widgets/datagrids",
+    "core/widgets/data-grid",
     $exclude-data-grid,
-    "core/helpers/datagrids",
+    "core/helpers/data-grid",
     $exclude-data-grid-helpers
 );
-@include include-widget-styles("core/widgets/dataview", $exclude-data-view);
-@include include-widget-styles("core/widgets/datepicker", $exclude-data-picker);
+@include include-widget-styles("core/widgets/data-view", $exclude-data-view);
+@include include-widget-styles("core/widgets/date-picker", $exclude-data-picker);
 @include include-widget-styles("core/widgets/header", $exclude-header);
-@include include-widget-styles("core/widgets/glyphicons", $exclude-glyphicon);
+@include include-widget-styles("core/widgets/glyphicon", $exclude-glyphicon);
 @include include-widget-styles(
-    "core/widgets/groupbox",
+    "core/widgets/group-box",
     $exclude-group-box,
-    "core/helpers/groupbox",
+    "core/helpers/group-box",
     $exclude-group-box-helpers
 );
-@include include-widget-helper-styles("core/helpers/images", $exclude-image-helpers);
+@include include-widget-helper-styles("core/helpers/image", $exclude-image-helpers);
 @include include-widget-styles(
-    "core/widgets/listview",
+    "core/widgets/list-view",
     $exclude-list-view,
-    "core/helpers/listview",
+    "core/helpers/list-view",
     $exclude-list-view-helpers
 );
-@include include-widget-styles("core/widgets/modals", $exclude-modal);
+@include include-widget-styles("core/widgets/modal", $exclude-modal);
 @include include-widget-styles(
-    "core/widgets/navigationbar",
+    "core/widgets/navigation-bar",
     $exclude-navigation-bar,
-    "core/helpers/navigationbar",
+    "core/helpers/navigation-bar",
     $exclude-navigation-bar-helpers
 );
-@include include-widget-styles("core/widgets/navigationlist", $exclude-navigation-list);
+@include include-widget-styles("core/widgets/navigation-list", $exclude-navigation-list);
 @include include-widget-styles(
-    "core/widgets/navigationtree",
+    "core/widgets/navigation-tree",
     $exclude-navigation-tree,
-    "core/helpers/navigationtree",
+    "core/helpers/navigation-tree",
     $exclude-navigation-tree-helpers
 );
-@include include-widget-styles("core/widgets/popupmenu", $exclude-popup-menu);
+@include include-widget-styles("core/widgets/pop-up-menu", $exclude-pop-up-menu);
 @include include-widget-styles(
-    "core/widgets/simplemenubar",
-    $exclude-simple-menubar,
-    "core/helpers/simplemenubar",
-    $exclude-simple-menubar-helpers
+    "core/widgets/simple-menu-bar",
+    $exclude-simple-menu-bar,
+    "core/helpers/simple-menu-bar",
+    $exclude-simple-menu-bar-helpers
 );
-@include include-widget-styles("core/widgets/radiobuttons", $exclude-radio-button);
+@include include-widget-styles("core/widgets/radio-button", $exclude-radio-button);
 @include include-widget-styles(
-    "core/widgets/tabcontainer",
+    "core/widgets/tab-container",
     $exclude-tab-container,
-    "core/helpers/tabcontainer",
+    "core/helpers/tab-container",
     $exclude-tab-container-helpers
 );
-@include include-widget-styles("core/widgets/tables", $exclude-table, "core/helpers/tables", $exclude-table-helpers);
+@include include-widget-styles("core/widgets/table", $exclude-table, "core/helpers/table", $exclude-table-helpers);
 @include include-widget-styles(
-    "core/widgets/templategrids",
+    "core/widgets/template-grid",
     $exclude-template-grid,
-    "core/helpers/templategrids",
+    "core/helpers/template-grid",
     $exclude-template-grid-helpers
 );
 @include include-widget-styles(
@@ -105,31 +100,31 @@
     "core/helpers/typography",
     $exclude-typography-helpers
 );
-@include include-widget-styles("core/widgets/layoutgrid", $exclude-layout-grid);
+@include include-widget-styles("core/widgets/layout-grid", $exclude-layout-grid);
 @include include-widget-styles("core/widgets/pagination", $exclude-pagination);
 @include include-widget-styles("core/widgets/progress", $exclude-progress);
 @include include-widget-styles(
-    "core/widgets/progressbar",
+    "core/widgets/progress-bar",
     $exclude-progress-bar,
-    "core/helpers/progressbar",
+    "core/helpers/progress-bar",
     $exclude-progress-bar-helpers
 );
 @include include-widget-styles(
-    "core/widgets/progresscircle",
+    "core/widgets/progress-circle",
     $exclude-progress-circle,
-    "core/helpers/progresscircle",
+    "core/helpers/progress-circle",
     $exclude-progress-circle-helpers
 );
 @include include-widget-styles("core/widgets/rating", $exclude-rating, "core/helpers/rating", $exclude-rating-helpers);
 @include include-widget-styles(
-    "core/widgets/rangeslider",
+    "core/widgets/range-slider",
     $exclude-range-slider,
-    "core/helpers/rangeslider",
+    "core/helpers/range-slider",
     $exclude-range-slider-helpers
 );
 @include include-widget-styles("core/widgets/slider", $exclude-slider, "core/helpers/slider", $exclude-slider-helpers);
 @include include-widget-styles("core/widgets/timeline", $exclude-timeline);
-@include include-widget-helper-styles("core/helpers/helperclasses", $exclude-helper-classes);
+@include include-widget-helper-styles("core/helpers/helper-classes", $exclude-helper-classes);
 
 // Custom widgets
 @import "core/widgetscustom/dijit-widgets";
