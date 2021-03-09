@@ -1,4 +1,4 @@
-@import "mixins/includewidgetstyles";
+@import "mixins/exclude-widget-styles";
 
 // Utilities
 @import "core/_legacy/bootstrap/bootstrap";
@@ -9,7 +9,7 @@
 
 // Default variables
 @import "variables";
-@import "core_variables";
+@import "core-variables";
 @import "../../../theme/web/custom-variables";
 
 // Base
