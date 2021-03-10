@@ -278,8 +278,8 @@ $color-default-lighter: mix($brand-default, white, 20%) !default;
 
 $color-primary-darker: mix($brand-primary, black, 60%) !default;
 $color-primary-dark: mix($brand-primary, black, 70%) !default;
-$color-primary-light: mix($brand-primary, white, 40%) !default;
-$color-primary-lighter: mix($brand-primary, white, 20%) !default;
+$color-primary-light: mix($brand-primary, white, 20%) !default;
+$color-primary-lighter: mix($brand-primary, white, 10%) !default;
 
 $color-success-darker: mix($brand-success, black, 60%) !default;
 $color-success-dark: mix($brand-success, black, 70%) !default;
