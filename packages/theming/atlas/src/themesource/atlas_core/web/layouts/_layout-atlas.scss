@@ -16,7 +16,7 @@
         z-index: 101;
         position: relative;
         box-shadow: 0 0 4px rgb(0 0 0 / 14%), 2px 4px 8px rgb(0 0 0 / 28%);
-        .mx-scrollcontainer-wrapper{
+        .mx-scrollcontainer-wrapper {
             display: flex;
             flex-direction: column;
         }
@@ -26,7 +26,7 @@
                 margin-right: $spacing-small;
             }
         }
-        .sidebar-heading{
+        .sidebar-heading {
             background: $navsidebar-sub-bg;
         }
         .toggle-btn {
