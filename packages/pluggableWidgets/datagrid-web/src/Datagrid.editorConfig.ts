@@ -2,6 +2,8 @@ import {
     changePropertyIn,
     ContainerProps,
     DropZoneProps,
+    hideNestedPropertiesIn,
+    hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
@@ -44,9 +46,32 @@ export function getProperties(
         if (column.width !== "manual") {
             hidePropertyIn(defaultProperties, values, "columns", index, "size");
         }
+        if (!values.advanced) {
+            hideNestedPropertiesIn(defaultProperties, values, "columns", index, [
+                "columnClass",
+                "sortable",
+                "resizable",
+                "draggable",
+                "hidable"
+            ]);
+        }
     });
     if (values.pagination !== "buttons") {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
+    }
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, [
+            "pagination",
+            "pagingPosition",
+            "showEmptyPlaceholder",
+            "rowClass",
+            "columnsSortable",
+            "columnsDraggable",
+            "columnsResizable",
+            "columnsHidable",
+            "configurationAttribute",
+            "onConfigurationChange"
+        ]);
     }
     changePropertyIn(
         defaultProperties,
