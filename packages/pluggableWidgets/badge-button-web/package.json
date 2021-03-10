@@ -23,12 +23,13 @@
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "echo 'Skipping tests'",
-    "test:e2e:dev": "..\"/../../node_modules/.bin/cross-env\" DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e:dev": "cross-env DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
     "release": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools release:web"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@types/classnames": "^2.2.6"
+    "@types/classnames": "^2.2.6",
+    "cross-env": "^7.0.2"
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",
