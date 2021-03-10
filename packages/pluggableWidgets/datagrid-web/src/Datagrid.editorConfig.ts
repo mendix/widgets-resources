@@ -220,7 +220,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                         ? [
                               {
                                   type: "DropZone",
-                                  property: column.filter
+                                  property: column.filter,
+                                  placeholder: "Place filter widget here"
                               } as DropZoneProps
                           ]
                         : [])
@@ -239,20 +240,23 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                 : content;
         })
     };
-    const footer = values.showEmptyPlaceholder
-        ? [
-              {
-                  type: "RowLayout",
-                  columnSize: "fixed",
-                  children: [
-                      {
-                          type: "DropZone",
-                          property: values.emptyPlaceholder
-                      } as DropZoneProps
-                  ]
-              } as RowLayoutProps
-          ]
-        : [];
+    const footer =
+        values.showEmptyPlaceholder === "custom"
+            ? [
+                  {
+                      type: "RowLayout",
+                      columnSize: "fixed",
+                      borders: true,
+                      children: [
+                          {
+                              type: "DropZone",
+                              property: values.emptyPlaceholder,
+                              placeholder: "Place widgets here"
+                          } as DropZoneProps
+                      ]
+                  } as RowLayoutProps
+              ]
+            : [];
     return {
         type: "Container",
         children: [titleHeader, headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
