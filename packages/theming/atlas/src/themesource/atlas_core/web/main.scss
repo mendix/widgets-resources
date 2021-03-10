@@ -1,5 +1,5 @@
 // Main utilities
-@import "mixins/include-widget-styles";
+@import "mixins/conditional-includes";
 
 // Variables
 @import "variables";
@@ -14,11 +14,6 @@
 //================================== CORE ==================================\\
 
 // Base
-@import "core/base/mixins/animations";
-@import "core/base/mixins/spacing";
-@import "core/base/mixins/layout-spacing";
-@import "core/base/mixins/buttons";
-@import "core/base/mixins/groupbox";
 @include include-styles("core/base/animation", $exclude-base);
 @include include-styles("core/base/flex", $exclude-base);
 @include include-styles("core/base/spacing", $exclude-base);
