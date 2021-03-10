@@ -1,4 +1,4 @@
-import colors from "./colorwords.js";
+import colors from "./colorwords";
 //
 //
 declare type ColorPartial = string | number;
