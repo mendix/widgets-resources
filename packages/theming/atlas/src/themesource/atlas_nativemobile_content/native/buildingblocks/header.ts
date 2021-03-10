@@ -1,15 +1,14 @@
-import { background, spacing } from "../../../atlas_core/native/variables";
+import { background } from "../../../atlas_core/native/variables";
 /*
 ==========================================================================
-    Cards
+    Headers
 
 ==========================================================================
 */
 export const header = {
     container: {
         height: 280,
-        backgroundColor: background.primary,
-        marginBottom: spacing.regular
+        backgroundColor: background.primary
     }
 };
 //

@@ -12,6 +12,14 @@ export const boardCard = {
     container: {
         ...card.container,
         flex: 1,
-        height: 104
+        height: 120
+    }
+};
+
+export const boardCardTablet = {
+    container: {
+        ...card.container,
+        flex: 1,
+        aspectRatio: 1
     }
 };
