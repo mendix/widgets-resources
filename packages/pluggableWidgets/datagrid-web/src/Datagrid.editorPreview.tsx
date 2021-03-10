@@ -11,8 +11,8 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             ? props.columns
             : [
                   {
-                      header: "Header",
-                      attribute: "{Attribute}",
+                      header: "Column",
+                      attribute: "[No attribute selected]",
                       width: "autoFill",
                       columnClass: "",
                       filter: { renderer: () => <div />, widgetCount: 0 },
@@ -39,9 +39,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                         case "attribute":
                             return renderWrapper(
                                 <span className="td-text">
-                                    {"{"}
-                                    {column.attribute}
-                                    {"}"}
+                                    {"["}
+                                    {column.attribute.length > 0 ? column.attribute : "No attribute selected"}
+                                    {"]"}
                                 </span>,
                                 className
                             );

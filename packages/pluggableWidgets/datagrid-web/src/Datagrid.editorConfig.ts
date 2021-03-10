@@ -55,11 +55,14 @@ export function getProperties(
             prop.objectHeaders = ["Caption", "Content", "Width", "Alignment"];
             prop.objects?.forEach((object, index) => {
                 const column = values.columns[index];
+                const header = column.header.trim().length > 0 ? column.header : "[Empty caption]";
                 const alignment = column.alignment;
                 object.captions = [
-                    column.header,
+                    header,
                     column.showContentAs === "attribute"
-                        ? column.attribute
+                        ? column.attribute.length > 0
+                            ? column.attribute
+                            : "[No attribute selected]"
                         : column.showContentAs === "dynamicText"
                         ? column.dynamicText
                         : "Custom content",
@@ -86,8 +89,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         ? values.columns
         : [
               {
-                  header: "Header",
-                  attribute: "Attribute",
+                  header: "Column",
+                  attribute: "",
                   width: "autoFit",
                   columnClass: "",
                   filter: { widgetCount: 0, renderer: () => null },
@@ -126,7 +129,11 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                           content:
                                               column.showContentAs === "dynamicText"
                                                   ? column.dynamicText ?? "Dynamic text"
-                                                  : `{${column.attribute ?? "Attribute"}}`,
+                                                  : `[${
+                                                        column.attribute.length > 0
+                                                            ? column.attribute
+                                                            : "No attribute selected"
+                                                    }]`,
                                           fontSize: 10
                                       }
                                   ]
