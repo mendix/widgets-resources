@@ -297,6 +297,15 @@ $color-danger-lighter: mix($brand-danger, white, 20%);
 
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
 
+//== General style exclusion
+$exclude-base: false;
+$exclude-bootstrap: false;
+$exclude-bootstrap-rtl: false;
+$exclude-custom-widgets: false;
+$exclude-helper-classes: false;
+$exclude-layouts: false;
+$exclude-mxui: false;
+
 //== Widget style exclusion
 $exclude-background-helpers: false;
 $exclude-badge: false;
@@ -312,7 +321,6 @@ $exclude-grid: false;
 $exclude-group-box: false;
 $exclude-group-box-helpers: false;
 $exclude-header: false;
-$exclude-helper-classes: false;
 $exclude-input: false;
 $exclude-image-helpers: false;
 $exclude-label: false;

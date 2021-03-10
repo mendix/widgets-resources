@@ -5,6 +5,15 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+//== General style exclusion
+$exclude-base: false !default;
+$exclude-bootstrap: false !default;
+$exclude-bootstrap-rtl: false !default;
+$exclude-custom-widgets: false !default;
+$exclude-helper-classes: false !default;
+$exclude-layouts: false !default;
+$exclude-mxui: false !default;
+
 //== Widget style exclusion
 $exclude-background-helpers: false !default;
 $exclude-badge: false !default;
@@ -20,7 +29,6 @@ $exclude-grid: false !default;
 $exclude-group-box: false !default;
 $exclude-group-box-helper: false !default;
 $exclude-header: false !default;
-$exclude-helper-classes: false !default;
 $exclude-image-helpers: false !default;
 $exclude-input: false !default;
 $exclude-label: false !default;

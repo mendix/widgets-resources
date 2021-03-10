@@ -5,6 +5,9 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+@import "../../variables";
+@import "../../../../../theme/web/custom-variables";
+
 $default-android-color: #6fbeb5;
 $default-ios-color: rgb(100, 189, 99);
 

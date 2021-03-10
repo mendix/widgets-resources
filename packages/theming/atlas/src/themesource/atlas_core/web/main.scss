@@ -1,16 +1,17 @@
+// Main utilities
 @import "mixins/include-widget-styles";
 
-// Utilities
-@import "core/_legacy/bootstrap/bootstrap";
-@import "core/_legacy/bootstrap/bootstrap-rtl";
-@import "core/_legacy/mxui";
-
-//================================== CORE ==================================\\
-
-// Default variables
+// Variables
 @import "variables";
 @import "core-variables";
 @import "../../../theme/web/custom-variables";
+
+// Utilities
+@include include-styles("core/_legacy/bootstrap/bootstrap", $exclude-bootstrap);
+@include include-styles("core/_legacy/bootstrap/bootstrap-rtl", $exclude-bootstrap-rtl);
+@include include-styles("core/_legacy/mxui", $exclude-mxui);
+
+//================================== CORE ==================================\\
 
 // Base
 @import "core/base/mixins/animations";
@@ -18,19 +19,19 @@
 @import "core/base/mixins/layout-spacing";
 @import "core/base/mixins/buttons";
 @import "core/base/mixins/groupbox";
-@import "core/base/animation";
-@import "core/base/flex";
-@import "core/base/spacing";
-@import "core/base/reset";
-@import "core/base/base";
-@import "core/base/login";
+@include include-styles("core/base/animation", $exclude-base);
+@include include-styles("core/base/flex", $exclude-base);
+@include include-styles("core/base/spacing", $exclude-base);
+@include include-styles("core/base/reset", $exclude-base);
+@include include-styles("core/base/base", $exclude-base);
+@include include-styles("core/base/login", $exclude-base);
 
 // Widgets
 @include include-widget-styles("core/widgets/input", $exclude-input);
-@include include-widget-helper-styles("core/helpers/background", $exclude-background-helpers);
+@include include-styles("core/helpers/background", $exclude-background-helpers);
 @include include-widget-styles("core/widgets/label", $exclude-label);
 @include include-widget-styles("core/widgets/badge", $exclude-badge);
-@include include-widget-helper-styles("core/helpers/label", $exclude-label-helpers);
+@include include-styles("core/helpers/label", $exclude-label-helpers);
 @import "core/widgets/badgebutton";
 @import "core/helpers/badgebutton";
 @include include-widget-styles("core/widgets/button", $exclude-button, "core/helpers/button", $exclude-button-helpers);
@@ -52,7 +53,7 @@
     "core/helpers/group-box",
     $exclude-group-box-helpers
 );
-@include include-widget-helper-styles("core/helpers/image", $exclude-image-helpers);
+@include include-styles("core/helpers/image", $exclude-image-helpers);
 @include include-widget-styles(
     "core/widgets/list-view",
     $exclude-list-view,
@@ -124,16 +125,16 @@
 );
 @include include-widget-styles("core/widgets/slider", $exclude-slider, "core/helpers/slider", $exclude-slider-helpers);
 @include include-widget-styles("core/widgets/timeline", $exclude-timeline);
-@include include-widget-helper-styles("core/helpers/helper-classes", $exclude-helper-classes);
+@include include-styles("core/helpers/helper-classes", $exclude-helper-classes);
 
 // Custom widgets
-@import "core/widgetscustom/dijit-widgets";
-@import "core/widgetscustom/switchwidget";
+@include include-styles("core/widgetscustom/dijit-widgets", $exclude-custom-widgets);
+@include include-styles("core/widgetscustom/switchwidget", $exclude-custom-widgets);
 
 //================================= CUSTOM =================================\\
 
 // Layouts
-@import "layouts/layout-atlas";
-@import "layouts/layout-atlas-phone";
-@import "layouts/layout-atlas-responsive";
-@import "layouts/layout-atlas-tablet";
+@include include-styles("layouts/layout-atlas", $exclude-layouts);
+@include include-styles("layouts/layout-atlas-phone", $exclude-layouts);
+@include include-styles("layouts/layout-atlas-responsive", $exclude-layouts);
+@include include-styles("layouts/layout-atlas-tablet", $exclude-layouts);
