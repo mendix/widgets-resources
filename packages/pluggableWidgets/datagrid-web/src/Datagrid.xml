@@ -5,20 +5,61 @@
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAADXUlEQVR4Ae1aS2sUQRCeh+Ii/oIlwYs/ICieRLyIsAjxEPYh6EGUvXiWXFcQPQsSJaCehH3gJYgJwf+gNx9X9w8sHkwuM37d6e50ZmeWHnd2tjNdDbPVVf2qqv66u6Z3PI+S2x7wpfntdrsRRdE2+BUpqygdB0HQHQwGu8y+QBrpiPHM3BVhKzddOYAVcIkbP8pW3QFumJ6w8kyCV+xoNFL7gxIaZJrNZqxX+99+ZB9F9ZfsR/bvPALIARIKrlJCgKszL+0mBEhPuErVWZ91TlbVMTI+oSVQ1Rk2tct5BNC7gClUqlovEwG6wY2dg4YXxdt4zVPv0aL8d+D73c93ant6/dOUN9sD0o1ndq5Gccyu0U5tMkJAyswfG+z7SVQcl6XkZtw9nrirS2k6JcpCJoKbsRf43d31Gr/3m2qoCcwQoDWYNzvj7vHEXZ3ROBnI5BOGMpM+SneAiVJl1indAexKGgaOU4zkSyBFni0CzDncEzXkEkiIU1mjPYB1mLkPxHGaMamDMaG4j1/NrJCjQKzxufoyQ0CGp6ErPwZz6GxdVSMEFOFp6ywXCpkhwFbtC9DLCAFZ5y3Gp0iQIkGKBPMtRIoE8/lr4bVLPwUoEjz6MmOu6E3Cooj4xAwBFAny9+pCZk3Oni3UDAG2aLsAPSgSNHJqxs0L2tKdoEeRoBGGVCWKBJUr7MiUfgpQJEiRoB3Ql1oYxQFFxNxyQNto6XuAbQ7Alf9Rom+EpCcco/oSGDtku7JVOWDG+Vw1v+T/D7JqHiB7NA+oU0CTLTXbarU24jh+iSW5iX+SP4B/Df6qVMr3/Y/gR+Df4Tkv5Iegj1F2DWUPhAwvqv6P4XB4DyfcOmRPwT8B/0WWM2oUCOkNFpmHovdhwHuMEeKtscbGAv8Q5CzLswSeydkmdp3xWrqBsg3wl/HwiQV/pYs0mUwuor818J8wRgufye7IdmoTlIIl0xcYP8SzDyXfCl3waUKuNFW/3++/Qg/7eM7h2dJ7s8oBgP1zKMcMuAXo3xWK5l2mU/U7nc5twP8m6w/0jeiXE6scgDW/BQUfQbM/eC4IRb8JygnKv4Zh+AvMX01+COd9RxmrqzvgZ71eP4DsEuAfo3wTe8AzrZ2d2V6vV/jEYO1Lh9ppNGm1JA/8A329cJKt+cZjAAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="General">
+            <propertyGroup caption="Advanced">
+                <property key="advanced" type="boolean" defaultValue="false">
+                    <caption>Advanced settings</caption>
+                    <description />
+                </property>
+            </propertyGroup>
             <propertyGroup caption="General">
                 <property key="datasource" type="datasource" isList="true">
                     <caption>Data source</caption>
                     <description/>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Columns">
                 <property key="columns" type="object" isList="true">
                     <caption>Columns</caption>
                     <description/>
                     <properties>
-                        <propertyGroup caption="Header">
+                        <propertyGroup caption="General">
+                            <property key="showContentAs" type="enumeration" defaultValue="attribute">
+                                <caption>Show</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="attribute">Attribute</enumerationValue>
+                                    <enumerationValue key="dynamicText">Dynamic text</enumerationValue>
+                                    <enumerationValue key="customContent">Custom content</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="attribute" type="attribute" dataSource="../datasource" required="false">
+                                <caption>Attribute</caption>
+                                <description>Attribute is required if the column can be sorted or filtered</description>
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="Boolean"/>
+                                    <attributeType name="DateTime"/>
+                                    <attributeType name="Decimal"/>
+                                    <attributeType name="Enum"/>
+                                    <attributeType name="Integer"/>
+                                    <attributeType name="Long"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="content" type="widgets" dataSource="../datasource" required="false">
+                                <caption>Custom content</caption>
+                                <description/>
+                            </property>
+                            <property key="dynamicText" type="textTemplate" dataSource="../datasource" required="false">
+                                <caption>Dynamic text</caption>
+                                <description/>
+                            </property>
                             <property key="header" type="textTemplate" required="false">
                                 <caption>Caption</caption>
                                 <description/>
                             </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Column capabilities">
                             <property key="sortable" type="boolean" defaultValue="true">
                                 <caption>Can sort</caption>
                                 <description/>
@@ -45,38 +86,7 @@
                                 <description/>
                             </property>
                         </propertyGroup>
-                        <propertyGroup caption="Content">
-                            <property key="showContentAs" type="enumeration" defaultValue="attribute">
-                                <caption>Show</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="attribute">Attribute</enumerationValue>
-                                    <enumerationValue key="dynamicText">Dynamic text</enumerationValue>
-                                    <enumerationValue key="customContent">Custom content</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="attribute" type="attribute" dataSource="../datasource" required="false">
-                                <caption>Attribute</caption>
-                                <description/>
-                                <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="AutoNumber"/>
-                                    <attributeType name="Boolean"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
-                                </attributeTypes>
-                            </property>
-                            <property key="content" type="widgets" dataSource="../datasource" required="false">
-                                <caption>Custom content</caption>
-                                <description/>
-                            </property>
-                            <property key="dynamicText" type="textTemplate" dataSource="../datasource" required="false">
-                                <caption>Dynamic text</caption>
-                                <description/>
-                            </property>
+                        <propertyGroup caption="Appearance">
                             <property key="width" type="enumeration" defaultValue="autoFill">
                                 <caption>Column width</caption>
                                 <description />
@@ -107,31 +117,12 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="showEmptyPlaceholder" type="boolean" defaultValue="false">
-                    <caption>Show empty placeholder</caption>
-                    <description/>
-                </property>
-                <property key="emptyPlaceholder" type="widgets" required="false">
-                    <caption>Empty placeholder</caption>
-                    <description/>
-                </property>
-                <property key="onClick" type="action" required="false" dataSource="datasource">
-                    <caption>On click action</caption>
-                    <description />
-                </property>
-                <property key="rowClass" type="expression" required="false" dataSource="datasource">
-                    <caption>Dynamic row class</caption>
-                    <description />
-                    <returnType type="String"/>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Filtering">
                 <property key="columnsFilterable" type="boolean" defaultValue="false">
                     <caption>Show column filters</caption>
                     <description/>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Paging">
+            <propertyGroup caption="Rows">
                 <property key="pageSize" type="integer" defaultValue="20">
                     <caption>Page size</caption>
                     <description/>
@@ -152,25 +143,48 @@
                         <enumerationValue key="top">Above grid</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="showEmptyPlaceholder" type="enumeration" defaultValue="none">
+                    <caption>Empty list message</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="emptyPlaceholder" type="widgets" required="false">
+                    <caption>Empty placeholder</caption>
+                    <description/>
+                </property>
+                <property key="rowClass" type="expression" required="false" dataSource="datasource">
+                    <caption>Dynamic row class</caption>
+                    <description />
+                    <returnType type="String"/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action" required="false" dataSource="datasource">
+                    <caption>On click action</caption>
+                    <description />
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Personalization">
             <propertyGroup caption="Column capabilities">
                 <property key="columnsSortable" type="boolean" defaultValue="true">
                     <caption>Sorting</caption>
-                    <description/>
+                    <description>Enable sorting for all columns unless specified otherwise in the column setting</description>
                 </property>
                 <property key="columnsResizable" type="boolean" defaultValue="true">
                     <caption>Resizing</caption>
-                    <description/>
+                    <description>Enable resizing for all columns unless specified otherwise in the column setting</description>
                 </property>
                 <property key="columnsDraggable" type="boolean" defaultValue="true">
                     <caption>Reordering</caption>
-                    <description/>
+                    <description>Enable reordering for all columns unless specified otherwise in the column setting</description>
                 </property>
                 <property key="columnsHidable" type="boolean" defaultValue="true">
                     <caption>Hiding</caption>
-                    <description />
+                    <description>Enable hiding for all columns unless specified otherwise in the column setting</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Configuration">
