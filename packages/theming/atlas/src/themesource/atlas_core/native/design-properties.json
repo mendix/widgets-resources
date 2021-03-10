@@ -1092,6 +1092,10 @@
                 {
                     "name": "Large",
                     "class": "textLarge"
+                },
+                {
+                    "name": "Largest",
+                    "class": "textLargest"
                 }
             ]
         },

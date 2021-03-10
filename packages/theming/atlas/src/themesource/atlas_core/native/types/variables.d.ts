@@ -66,6 +66,7 @@ export interface VariablesFont {
     sizeSmallest: number;
     sizeSmall: number;
     sizeLarge: number;
+    sizeLargest: number;
     sizeH1: number;
     sizeH2: number;
     sizeH3: number;
@@ -76,6 +77,7 @@ export interface VariablesFont {
     lineHeightSmallest: number;
     lineHeightSmall: number;
     lineHeightLarge: number;
+    lineHeightLargest: number;
     lineHeightH1: number;
     lineHeightH2: number;
     lineHeightH3: number;
