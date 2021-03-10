@@ -117,6 +117,12 @@ export const textLarge = {
         lineHeight: font.lineHeightLarge
     }
 };
+export const textLargest = {
+    text: {
+        fontSize: font.sizeLargest,
+        lineHeight: font.lineHeightLargest
+    }
+};
 //
 // == Extra Classes
 // ## Helper classes to change the look and feel of the widget
