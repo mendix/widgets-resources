@@ -19,6 +19,7 @@
   }
 
   .badge {
+    top: unset;
     display: inline-block;
     margin: 0;
     padding: $spacing-smaller $spacing-small;
