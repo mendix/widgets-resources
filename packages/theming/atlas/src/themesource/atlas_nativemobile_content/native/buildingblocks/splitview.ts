@@ -10,7 +10,7 @@ export const splitViewLeft = {
         height: "100%",
         width: "50%",
         maxWidth: "50%",
-        backgroundColor: brand.primary,
+        backgroundColor: brand.primary
     }
 };
 //
