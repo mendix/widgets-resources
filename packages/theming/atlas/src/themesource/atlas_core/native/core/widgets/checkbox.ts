@@ -1,5 +1,5 @@
 import { Platform } from "react-native";
-import { background, border, brand, contrast, font, spacing } from "../../variables";
+import { background, backgroundDefaults, border, brand, contrast, font, spacing } from "../../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { CheckBoxType } from "../../types/widgets";
 /*
@@ -37,7 +37,7 @@ export const CheckBox: CheckBoxType = {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         backgroundColor: "transparent",
         marginRight: Platform.select({ android: -3 }),
-        thumbColorOn: background.primary,
+        thumbColorOn: backgroundDefaults.primaryLight,
         trackColorOn: brand.primary,
         thumbColorOff: "#FFF",
         trackColorOff: border.color
@@ -52,7 +52,7 @@ export const CheckBox: CheckBoxType = {
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
         ...TextBox.inputError,
-        thumbColorOn: background.primary,
+        thumbColorOn: backgroundDefaults.primaryLight,
         trackColorOn: brand.danger,
         thumbColorOff: contrast.low,
         trackColorOff: brand.danger

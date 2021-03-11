@@ -4,6 +4,8 @@
 
 ==========================================================================
 */
+import { listView } from "../../../atlas_core/native/variables";
+
 export const splitViewLeft = {
     container: {
         height: "100%",
