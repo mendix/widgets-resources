@@ -1,25 +1,24 @@
 // Main utilities
-@import "mixins/conditional-includes";
+@use "sass:meta";
+@use "mixins/conditional-includes" as *;
 
 // Variables
-@import "variables";
-@import "core-variables";
-@import "../../../theme/web/custom-variables";
+@use "../../../theme/web/exclusion-variables" as *;
 
 // Utilities
-@include include-styles("core/_legacy/bootstrap/bootstrap", $exclude-bootstrap);
-@include include-styles("core/_legacy/bootstrap/bootstrap-rtl", $exclude-bootstrap-rtl);
-@include include-styles("core/_legacy/mxui", $exclude-mxui);
+@include meta.load-css("core/_legacy/bootstrap/bootstrap");
+@include meta.load-css("core/_legacy/bootstrap/bootstrap-rtl");
+@include meta.load-css("core/_legacy/mxui");
 
 //================================== CORE ==================================\\
 
 // Base
-@include include-styles("core/base/animation", $exclude-base);
-@include include-styles("core/base/flex", $exclude-base);
-@include include-styles("core/base/spacing", $exclude-base);
-@include include-styles("core/base/reset", $exclude-base);
-@include include-styles("core/base/base", $exclude-base);
-@include include-styles("core/base/login", $exclude-base);
+@include meta.load-css("core/base/animation");
+@include meta.load-css("core/base/flex");
+@include meta.load-css("core/base/spacing");
+@include meta.load-css("core/base/reset");
+@include meta.load-css("core/base/base");
+@include meta.load-css("core/base/login");
 
 // Widgets
 @include include-widget-styles("core/widgets/input", $exclude-input);
@@ -123,13 +122,13 @@
 @include include-styles("core/helpers/helper-classes", $exclude-helper-classes);
 
 // Custom widgets
-@include include-styles("core/widgetscustom/dijit-widgets", $exclude-custom-widgets);
-@include include-styles("core/widgetscustom/switchwidget", $exclude-custom-widgets);
+@include include-styles("core/widgetscustom/dijit-widget", $exclude-custom-dijit-widget);
+@include include-styles("core/widgetscustom/switch-widget", $exclude-custom-switch);
 
 //================================= CUSTOM =================================\\
 
 // Layouts
-@include include-styles("layouts/layout-atlas", $exclude-layouts);
-@include include-styles("layouts/layout-atlas-phone", $exclude-layouts);
-@include include-styles("layouts/layout-atlas-responsive", $exclude-layouts);
-@include include-styles("layouts/layout-atlas-tablet", $exclude-layouts);
+@include meta.load-css("layouts/layout-atlas");
+@include meta.load-css("layouts/layout-atlas-phone");
+@include meta.load-css("layouts/layout-atlas-responsive");
+@include meta.load-css("layouts/layout-atlas-tablet");
