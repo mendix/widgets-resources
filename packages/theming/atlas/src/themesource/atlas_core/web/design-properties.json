@@ -936,5 +936,30 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.custom.badgebutton.BadgeButton": [
+        {
+            "name": "Style",
+            "type": "Dropdown",
+            "description": "The brand style affecting this element's appearance.",
+            "options": [
+                {
+                    "name": "Brand Secondary",
+                    "class": "btn-secondary"
+                },
+                {
+                    "name": "Brand Success",
+                    "class": "btn-success"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "btn-warning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "btn-danger"
+                }
+            ]
+        }
     ]
 }

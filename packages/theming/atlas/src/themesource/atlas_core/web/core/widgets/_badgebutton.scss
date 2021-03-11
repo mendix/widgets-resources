@@ -1,0 +1,34 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+/* ==========================================================================
+   Badge-button
+
+   Widget styles
+========================================================================== */
+.widget-badge-button {
+  display: inline-block;
+
+  .widget-badge-button-text {
+    white-space: nowrap;
+    padding-right: 5px;
+  }
+
+  .badge {
+    top: unset;
+    display: inline-block;
+    margin: 0;
+    padding: $spacing-smaller $spacing-small;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    background-color: $btn-primary-color;
+    color: $btn-primary-bg;
+    font-size: 100%;
+    line-height: 1;
+  }
+}
