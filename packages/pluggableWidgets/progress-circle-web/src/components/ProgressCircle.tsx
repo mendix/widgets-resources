@@ -17,8 +17,9 @@ export interface ProgressCircleProps {
 const defaultOptions: CircleOptions = {
     duration: 800,
     // These default values are necessary so that progressbar.js at least renders anything, which we override with custom styling.
-    strokeWidth: 6,
-    trailWidth: 6
+    // They also need to be equal to the largest size that we have available, since that will determine the size of the bounding box.
+    strokeWidth: 16,
+    trailWidth: 16
 };
 
 function getValuesErrorMessage(currentValue: number, minValue: number, maxValue: number): string | null {
