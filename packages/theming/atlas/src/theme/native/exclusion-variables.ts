@@ -1,4 +1,3 @@
-
 // == Variables to exclude files
 // ## Reduce the amount of files imported from the Atlas_Core module
 // -------------------------------------------------------------------------------------------------------------------//
