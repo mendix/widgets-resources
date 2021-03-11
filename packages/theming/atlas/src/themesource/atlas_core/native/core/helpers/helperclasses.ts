@@ -66,6 +66,12 @@ export const borderTop: Helperclass = {
         borderTopWidth: border.width
     }
 };
+export const borderRight: Helperclass = {
+    container: {
+        borderColor: border.color,
+        borderRightWidth: border.width
+    }
+};
 export const borderBottom: Helperclass = {
     container: {
         borderColor: border.color,

@@ -1,4 +1,3 @@
-import { listView } from "../../../atlas_core/native/variables";
 /*
 ==========================================================================
     Split view
