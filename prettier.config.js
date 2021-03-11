@@ -22,5 +22,4 @@ module.exports = {
             }
         }
     ],
-    filepath: "**/{src,test}/**/*.{js,jsx,ts,tsx,scss}"
 };

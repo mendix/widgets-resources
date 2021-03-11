@@ -1,0 +1,32 @@
+{
+    "trailingComma": "none",
+    "useTabs": false,
+    "tabWidth": 4,
+    "semi": true,
+    "singleQuote": false,
+    "printWidth": 120,
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "arrowParens": "avoid",
+    "proseWrap": "always",
+    "overrides": [
+        {
+            "files": ["CHANGELOG.md", ".travis.yml"],
+            "options": {
+                "proseWrap": "preserve"
+            }
+        },
+        {
+            "files": ["package.json", "package.json"],
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.md",
+            "options": {
+                "proseWrap": "preserve"
+            }
+        }
+    ]
+}
