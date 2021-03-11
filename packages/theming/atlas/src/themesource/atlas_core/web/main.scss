@@ -26,8 +26,12 @@
 @include include-widget-styles("core/widgets/label", $exclude-label);
 @include include-widget-styles("core/widgets/badge", $exclude-badge);
 @include include-styles("core/helpers/label", $exclude-label-helpers);
-@import "core/widgets/badgebutton";
-@import "core/helpers/badgebutton";
+@include include-widget-styles(
+    "core/widgets/badge-button",
+    $exclude-badge-button,
+    "core/helpers/badge-button",
+    $exclude-badge-button-helpers
+);
 @include include-widget-styles("core/widgets/button", $exclude-button, "core/helpers/button", $exclude-button-helpers);
 @include include-widget-styles("core/widgets/check-box", $exclude-check-box);
 @include include-widget-styles("core/widgets/grid", $exclude-grid);

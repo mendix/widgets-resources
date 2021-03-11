@@ -5,6 +5,9 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+@import "../../variables";
+@import "../../../../../theme/web/custom-variables";
+
 /* ==========================================================================
    Badge button
 
@@ -13,26 +16,26 @@
 
 .btn-secondary,
 .btn-default {
-  .badge {
-    color: $btn-default-bg;
-    background-color: $btn-primary-bg;
-  }
+    .badge {
+        color: $btn-default-bg;
+        background-color: $btn-primary-bg;
+    }
 }
 
 .btn-success {
-  .badge {
-    color: $btn-success-bg;
-  }
+    .badge {
+        color: $btn-success-bg;
+    }
 }
 
 .btn-warning {
-  .badge {
-    color: $btn-warning-bg;
-  }
+    .badge {
+        color: $btn-warning-bg;
+    }
 }
 
 .btn-danger {
-  .badge {
-    color: $btn-danger-bg;
-  }
+    .badge {
+        color: $btn-danger-bg;
+    }
 }
