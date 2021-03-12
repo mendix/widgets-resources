@@ -4,10 +4,8 @@
 
 @use "mixins/conditional-includes" as *;
 
-// Variables
-@use "../../../theme/web/exclusion-variables" as custom-exclusions;
-@use "exclusions-variables" as exclusions;
-$exclusions: map.merge(exclusions.$map, custom-exclusions.$map);
+// Exclusions variables
+@use "exclusions-main" as exclusions;
 
 // Utilities
 @include meta.load-css("core/_legacy/bootstrap/bootstrap");
@@ -25,132 +23,138 @@ $exclusions: map.merge(exclusions.$map, custom-exclusions.$map);
 @include meta.load-css("core/base/login");
 
 // Widgets
-@include include-widget-styles("./core/widgets/input", map.get($exclusions, "exclude-input"));
-@include include-styles("core/helpers/background", map.get($exclusions, "exclude-background-helpers"));
-@include include-widget-styles("core/widgets/label", map.get($exclusions, "exclude-label"));
-@include include-widget-styles("core/widgets/badge", map.get($exclusions, "exclude-badge"));
-@include include-styles("core/helpers/label", map.get($exclusions, "exclude-label-helpers"));
+@include include-widget-styles("./core/widgets/input", map.get(exclusions.$exclusions, "exclude-input"));
+@include include-styles("core/helpers/background", map.get(exclusions.$exclusions, "exclude-background-helpers"));
+@include include-widget-styles("core/widgets/label", map.get(exclusions.$exclusions, "exclude-label"));
+@include include-widget-styles("core/widgets/badge", map.get(exclusions.$exclusions, "exclude-badge"));
+@include include-styles("core/helpers/label", map.get(exclusions.$exclusions, "exclude-label-helpers"));
 @include include-widget-styles(
     "core/widgets/badge-button",
-    map.get($exclusions, "exclude-badge-button"),
+    map.get(exclusions.$exclusions, "exclude-badge-button"),
     "core/helpers/badge-button",
-    map.get($exclusions, "exclude-badge-button-helpers")
+    map.get(exclusions.$exclusions, "exclude-badge-button-helpers")
 );
 @include include-widget-styles(
     "core/widgets/button",
-    map.get($exclusions, "exclude-button"),
+    map.get(exclusions.$exclusions, "exclude-button"),
     "core/helpers/button",
-    map.get($exclusions, "exclude-button-helpers")
+    map.get(exclusions.$exclusions, "exclude-button-helpers")
 );
-@include include-widget-styles("core/widgets/check-box", map.get($exclusions, "exclude-check-box"));
-@include include-widget-styles("core/widgets/grid", map.get($exclusions, "exclude-grid"));
+@include include-widget-styles("core/widgets/check-box", map.get(exclusions.$exclusions, "exclude-check-box"));
+@include include-widget-styles("core/widgets/grid", map.get(exclusions.$exclusions, "exclude-grid"));
 @include include-widget-styles(
     "core/widgets/data-grid",
-    map.get($exclusions, "exclude-data-grid"),
+    map.get(exclusions.$exclusions, "exclude-data-grid"),
     "core/helpers/data-grid",
-    map.get($exclusions, "exclude-data-grid-helpers")
+    map.get(exclusions.$exclusions, "exclude-data-grid-helpers")
 );
-@include include-widget-styles("core/widgets/data-view", map.get($exclusions, "exclude-data-view"));
-@include include-widget-styles("core/widgets/date-picker", map.get($exclusions, "exclude-data-picker"));
-@include include-widget-styles("core/widgets/header", map.get($exclusions, "exclude-header"));
-@include include-widget-styles("core/widgets/glyphicon", map.get($exclusions, "exclude-glyphicon"));
+@include include-widget-styles("core/widgets/data-view", map.get(exclusions.$exclusions, "exclude-data-view"));
+@include include-widget-styles("core/widgets/date-picker", map.get(exclusions.$exclusions, "exclude-data-picker"));
+@include include-widget-styles("core/widgets/header", map.get(exclusions.$exclusions, "exclude-header"));
+@include include-widget-styles("core/widgets/glyphicon", map.get(exclusions.$exclusions, "exclude-glyphicon"));
 @include include-widget-styles(
     "core/widgets/group-box",
-    map.get($exclusions, "exclude-group-box"),
+    map.get(exclusions.$exclusions, "exclude-group-box"),
     "core/helpers/group-box",
-    map.get($exclusions, "exclude-group-box-helpers")
+    map.get(exclusions.$exclusions, "exclude-group-box-helpers")
 );
-@include include-styles("core/helpers/image", map.get($exclusions, "exclude-image-helpers"));
+@include include-styles("core/helpers/image", map.get(exclusions.$exclusions, "exclude-image-helpers"));
 @include include-widget-styles(
     "core/widgets/list-view",
-    map.get($exclusions, "exclude-list-view"),
+    map.get(exclusions.$exclusions, "exclude-list-view"),
     "core/helpers/list-view",
-    map.get($exclusions, "exclude-list-view-helpers")
+    map.get(exclusions.$exclusions, "exclude-list-view-helpers")
 );
-@include include-widget-styles("core/widgets/modal", map.get($exclusions, "exclude-modal"));
+@include include-widget-styles("core/widgets/modal", map.get(exclusions.$exclusions, "exclude-modal"));
 @include include-widget-styles(
     "core/widgets/navigation-bar",
-    map.get($exclusions, "exclude-navigation-bar"),
+    map.get(exclusions.$exclusions, "exclude-navigation-bar"),
     "core/helpers/navigation-bar",
-    map.get($exclusions, "exclude-navigation-bar-helpers")
+    map.get(exclusions.$exclusions, "exclude-navigation-bar-helpers")
 );
-@include include-widget-styles("core/widgets/navigation-list", map.get($exclusions, "exclude-navigation-list"));
+@include include-widget-styles(
+    "core/widgets/navigation-list",
+    map.get(exclusions.$exclusions, "exclude-navigation-list")
+);
 @include include-widget-styles(
     "core/widgets/navigation-tree",
-    map.get($exclusions, "exclude-navigation-tree"),
+    map.get(exclusions.$exclusions, "exclude-navigation-tree"),
     "core/helpers/navigation-tree",
-    map.get($exclusions, "exclude-navigation-tree-helpers")
+    map.get(exclusions.$exclusions, "exclude-navigation-tree-helpers")
 );
-@include include-widget-styles("core/widgets/pop-up-menu", map.get($exclusions, "exclude-pop-up-menu"));
+@include include-widget-styles("core/widgets/pop-up-menu", map.get(exclusions.$exclusions, "exclude-pop-up-menu"));
 @include include-widget-styles(
     "core/widgets/simple-menu-bar",
-    map.get($exclusions, "exclude-simple-menu-bar"),
+    map.get(exclusions.$exclusions, "exclude-simple-menu-bar"),
     "core/helpers/simple-menu-bar",
-    map.get($exclusions, "exclude-simple-menu-bar-helpers")
+    map.get(exclusions.$exclusions, "exclude-simple-menu-bar-helpers")
 );
-@include include-widget-styles("core/widgets/radio-button", map.get($exclusions, "exclude-radio-button"));
+@include include-widget-styles("core/widgets/radio-button", map.get(exclusions.$exclusions, "exclude-radio-button"));
 @include include-widget-styles(
     "core/widgets/tab-container",
-    map.get($exclusions, "exclude-tab-container"),
+    map.get(exclusions.$exclusions, "exclude-tab-container"),
     "core/helpers/tab-container",
-    map.get($exclusions, "exclude-tab-container-helpers")
+    map.get(exclusions.$exclusions, "exclude-tab-container-helpers")
 );
 @include include-widget-styles(
     "core/widgets/table",
-    map.get($exclusions, "exclude-table") "core/helpers/table",
-    map.get($exclusions, "exclude-table-helpers")
+    map.get(exclusions.$exclusions, "exclude-table") "core/helpers/table",
+    map.get(exclusions.$exclusions, "exclude-table-helpers")
 );
 @include include-widget-styles(
     "core/widgets/template-grid",
-    map.get($exclusions, "exclude-template-grid"),
+    map.get(exclusions.$exclusions, "exclude-template-grid"),
     "core/helpers/template-grid",
-    map.get($exclusions, "exclude-template-grid-helpers")
+    map.get(exclusions.$exclusions, "exclude-template-grid-helpers")
 );
 @include include-widget-styles(
     "core/widgets/typography",
-    map.get($exclusions, "exclude-typography"),
+    map.get(exclusions.$exclusions, "exclude-typography"),
     "core/helpers/typography",
-    map.get($exclusions, "exclude-typography-helpers")
+    map.get(exclusions.$exclusions, "exclude-typography-helpers")
 );
-@include include-widget-styles("core/widgets/layout-grid", map.get($exclusions, "exclude-layout-grid"));
-@include include-widget-styles("core/widgets/pagination", map.get($exclusions, "exclude-pagination"));
-@include include-widget-styles("core/widgets/progress", map.get($exclusions, "exclude-progress"));
+@include include-widget-styles("core/widgets/layout-grid", map.get(exclusions.$exclusions, "exclude-layout-grid"));
+@include include-widget-styles("core/widgets/pagination", map.get(exclusions.$exclusions, "exclude-pagination"));
+@include include-widget-styles("core/widgets/progress", map.get(exclusions.$exclusions, "exclude-progress"));
 @include include-widget-styles(
     "core/widgets/progress-bar",
-    map.get($exclusions, "exclude-progress-bar"),
+    map.get(exclusions.$exclusions, "exclude-progress-bar"),
     "core/helpers/progress-bar",
-    map.get($exclusions, "exclude-progress-bar-helpers")
+    map.get(exclusions.$exclusions, "exclude-progress-bar-helpers")
 );
 @include include-widget-styles(
     "core/widgets/progress-circle",
-    map.get($exclusions, "exclude-progress-circle"),
+    map.get(exclusions.$exclusions, "exclude-progress-circle"),
     "core/helpers/progress-circle",
-    map.get($exclusions, "exclude-progress-circle-helpers")
+    map.get(exclusions.$exclusions, "exclude-progress-circle-helpers")
 );
 @include include-widget-styles(
     "core/widgets/rating",
-    map.get($exclusions, "exclude-rating"),
+    map.get(exclusions.$exclusions, "exclude-rating"),
     "core/helpers/rating",
-    map.get($exclusions, "exclude-rating-helpers")
+    map.get(exclusions.$exclusions, "exclude-rating-helpers")
 );
 @include include-widget-styles(
     "core/widgets/range-slider",
-    map.get($exclusions, "exclude-range-slider"),
+    map.get(exclusions.$exclusions, "exclude-range-slider"),
     "core/helpers/range-slider",
-    map.get($exclusions, "exclude-range-slider-helpers")
+    map.get(exclusions.$exclusions, "exclude-range-slider-helpers")
 );
 @include include-widget-styles(
     "core/widgets/slider",
-    map.get($exclusions, "exclude-slider"),
+    map.get(exclusions.$exclusions, "exclude-slider"),
     "core/helpers/slider",
-    map.get($exclusions, "exclude-slider-helpers")
+    map.get(exclusions.$exclusions, "exclude-slider-helpers")
 );
-@include include-widget-styles("core/widgets/timeline", map.get($exclusions, "exclude-timeline"));
-@include include-styles("core/helpers/helper-classes", map.get($exclusions, "exclude-helper-classes"));
+@include include-widget-styles("core/widgets/timeline", map.get(exclusions.$exclusions, "exclude-timeline"));
+@include include-styles("core/helpers/helper-classes", map.get(exclusions.$exclusions, "exclude-helper-classes"));
 
 // Custom widgets
-@include include-styles("core/widgetscustom/dijit-widget", map.get($exclusions, "exclude-custom-dijit-widget"));
-@include include-styles("core/widgetscustom/switch-widget", map.get($exclusions, "exclude-custom-switch"));
+@include include-styles(
+    "core/widgetscustom/dijit-widget",
+    map.get(exclusions.$exclusions, "exclude-custom-dijit-widget")
+);
+@include include-styles("core/widgetscustom/switch-widget", map.get(exclusions.$exclusions, "exclude-custom-switch"));
 
 //================================= CUSTOM =================================\\
 

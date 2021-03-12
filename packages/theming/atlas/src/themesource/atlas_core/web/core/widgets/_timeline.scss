@@ -5,6 +5,7 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+@use "typography";
 @import "../../variables";
 @import "../../../../../theme/web/custom-variables";
 

@@ -1,0 +1,6 @@
+@use "sass:meta";
+@use "sass:map";
+
+@use "exclusions-variables" as core-exclusions;
+@use "../../../theme/web/exclusion-variables" as custom-exclusions;
+$exclusions: map.merge(meta.module-variables(core-exclusions), meta.module-variables(custom-exclusions));
