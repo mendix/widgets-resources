@@ -91,6 +91,9 @@
                 background: $navsidebar-sub-bg;
             }
             .toggle-btn {
+                margin-left: -$spacing-small;
+                padding: $spacing-small;
+
                 img {
                     width: 24px;
                     height: 24px;
