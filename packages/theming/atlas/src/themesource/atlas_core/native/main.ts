@@ -1,76 +1,204 @@
+import {
+    excludeActivityIndicator,
+    excludeActivityIndicatorHelpers,
+    excludeAnimation,
+    excludeBackgroundImage,
+    excludeBadge,
+    excludeBadgeHelpers,
+    excludeBarChart,
+    excludeBarChartHelpers,
+    excludeBottomSheet,
+    excludeButtons,
+    excludeButtonsHelpers,
+    excludeCarousel,
+    excludeCheckBox,
+    excludeColorPicker,
+    excludeContainer,
+    excludeDatePicker,
+    excludeDropDown,
+    excludeFeedback,
+    excludeFAB,
+    excludeFABHelpers,
+    excludeHelpers,
+    excludeImage,
+    excludeImageHelpers,
+    excludeIntroScreen,
+    excludeIntroScreenHelpers,
+    excludeLayoutGrid,
+    excludeLineChart,
+    excludeLineChartHelpers,
+    excludeListView,
+    excludeListViewHelpers,
+    excludeListViewSwipe,
+    excludeListViewSwipeHelpers,
+    excludeMaps,
+    excludeMapsHelpers,
+    excludePageTitle,
+    excludePopUpMenu,
+    excludeProgressBar,
+    excludeProgressBarHelpers,
+    excludeProgressCircle,
+    excludeProgressCircleHelpers,
+    excludeQRCode,
+    excludeRangeSlider,
+    excludeRangeSliderHelpers,
+    excludeRating,
+    excludeReferenceSelector,
+    excludeSafeAreaView,
+    excludeSlider,
+    excludeSliderHelpers,
+    excludeTabContainer,
+    excludeTabContainerHelpers,
+    excludeTextArea,
+    excludeTextBox,
+    excludeTextBoxHelpers,
+    excludeToggleButtons,
+    excludeTypography,
+    excludeTypographyHelpers,
+    excludeVideoPlayer,
+    excludeWebView
+} from "../../../theme/native/exclusion-variables";
+
 // ================================== CORE ==================================\\
 //
 //
 // Base
-export * from "./core/base/flex";
-export * from "./core/base/spacing";
+import * as flex from "./core/base/flex";
+import * as spacing from "./core/base/spacing";
 //
 //
 // Components
-export * from "./core/widgets/activityindicator";
-export * from "./core/helpers/activityindicator";
-export * from "./core/widgets/animation";
-export * from "./core/widgets/backgroundimage";
-export * from "./core/widgets/badge";
-export * from "./core/helpers/badge";
-export * from "./core/widgets/bottomsheet";
-export * from "./core/widgets/buttons";
-export * from "./core/helpers/buttons";
-export * from "./core/widgets/carousel";
-export * from "./core/widgets/checkbox";
-export * from "./core/widgets/colorpicker";
-export * from "./core/widgets/container";
-export * from "./core/widgets/datepicker";
-export * from "./core/widgets/dropdown";
-export * from "./core/widgets/feedback";
-export * from "./core/widgets/floatingactionbutton";
-export * from "./core/helpers/floatingactionbutton";
-export * from "./core/widgets/images";
-export * from "./core/helpers/images";
-export * from "./core/widgets/introscreen";
-export * from "./core/helpers/introscreen";
-export * from "./core/widgets/layoutgrid";
-export * from "./core/widgets/linechart";
-export * from "./core/helpers/linechart";
-export * from "./core/widgets/barchart";
-export * from "./core/helpers/barchart";
-export * from "./core/widgets/listviews";
-export * from "./core/helpers/listviews";
-export * from "./core/widgets/listviewswipe";
-export * from "./core/helpers/listviewswipe";
-export * from "./core/widgets/maps";
-export * from "./core/helpers/maps";
-export * from "./core/widgets/navigation";
-export * from "./core/widgets/pagetitle";
-export * from "./core/widgets/progressbar";
-export * from "./core/helpers/progressbar";
-export * from "./core/widgets/progresscircle";
-export * from "./core/helpers/progresscircle";
-export * from "./core/widgets/popupmenu";
-export * from "./core/widgets/qrcode";
-export * from "./core/widgets/rangeslider";
-export * from "./core/helpers/rangeslider";
-export * from "./core/widgets/rating";
-export * from "./core/widgets/referenceselector";
-export * from "./core/widgets/safeareaview";
-export * from "./core/widgets/slider";
-export * from "./core/helpers/slider";
-export * from "./core/widgets/tabcontainer";
-export * from "./core/helpers/tabcontainer";
-export * from "./core/widgets/textarea";
-export * from "./core/widgets/textbox";
-export * from "./core/helpers/textbox";
-export * from "./core/widgets/togglebuttons";
-export * from "./core/widgets/typography";
-export * from "./core/helpers/typography";
-export * from "./core/widgets/videoplayer";
-export * from "./core/widgets/webview";
-export * from "./core/helpers/helperclasses";
+
+import * as widgetsActivityIndicator from "./core/widgets/activityindicator";
+import * as helpersActivityIndicator from "./core/helpers/activityindicator";
+import * as widgetsAnimation from "./core/widgets/animation";
+import * as widgetsBackgroundImage from "./core/widgets/backgroundimage";
+import * as widgetsBadge from "./core/widgets/badge";
+import * as helpersBadge from "./core/helpers/badge";
+import * as widgetsBottomSheet from "./core/widgets/bottomsheet";
+import * as widgetsButtons from "./core/widgets/buttons";
+import * as helpersButtons from "./core/helpers/buttons";
+import * as widgetsCarousel from "./core/widgets/carousel";
+import * as widgetsCheckBox from "./core/widgets/checkbox";
+import * as widgetsColorPicker from "./core/widgets/colorpicker";
+import * as widgetsContainer from "./core/widgets/container";
+import * as widgetsDatePicker from "./core/widgets/datepicker";
+import * as widgetsDropDown from "./core/widgets/dropdown";
+import * as widgetsFeedback from "./core/widgets/feedback";
+import * as widgetsFloatingActionButton from "./core/widgets/floatingactionbutton";
+import * as helpersFloatingActionButton from "./core/helpers/floatingactionbutton";
+import * as widgetsImage from "./core/widgets/image";
+import * as helpersImage from "./core/helpers/image";
+import * as widgetsIntroScreen from "./core/widgets/introscreen";
+import * as helpersIntroScreen from "./core/helpers/introscreen";
+import * as widgetsLayoutGrid from "./core/widgets/layoutgrid";
+import * as widgetsLineChart from "./core/widgets/linechart";
+import * as helpersLineChart from "./core/helpers/linechart";
+import * as widgetsBarChart from "./core/widgets/barchart";
+import * as helpersBarChart from "./core/helpers/barchart";
+import * as widgetsListView from "./core/widgets/listview";
+import * as helpersListView from "./core/helpers/listview";
+import * as widgetsListViewSwipe from "./core/widgets/listviewswipe";
+import * as helpersListViewSwipe from "./core/helpers/listviewswipe";
+import * as widgetsMaps from "./core/widgets/maps";
+import * as helpersMaps from "./core/helpers/maps";
+import * as widgetsNavigation from "./core/widgets/navigation";
+import * as widgetsPageTitle from "./core/widgets/pagetitle";
+import * as widgetsProgressBar from "./core/widgets/progressbar";
+import * as helpersProgressBar from "./core/helpers/progressbar";
+import * as widgetsProgressCircle from "./core/widgets/progresscircle";
+import * as helpersProgressCircle from "./core/helpers/progresscircle";
+import * as widgetsPopUpMenu from "./core/widgets/popupmenu";
+import * as widgetsQRCode from "./core/widgets/qrcode";
+import * as widgetsRangeSlider from "./core/widgets/rangeslider";
+import * as helpersRangeSlider from "./core/helpers/rangeslider";
+import * as widgetsRating from "./core/widgets/rating";
+import * as widgetsReferenceSelector from "./core/widgets/referenceselector";
+import * as widgetsSafeAreaView from "./core/widgets/safeareaview";
+import * as widgetsSlider from "./core/widgets/slider";
+import * as helpersSlider from "./core/helpers/slider";
+import * as widgetsTabContainer from "./core/widgets/tabcontainer";
+import * as helpersTabContainer from "./core/helpers/tabcontainer";
+import * as widgetsTextArea from "./core/widgets/textarea";
+import * as widgetsTextBox from "./core/widgets/textbox";
+import * as helpersTextBox from "./core/helpers/textbox";
+import * as widgetsToggleButtons from "./core/widgets/togglebuttons";
+import * as widgetsTypography from "./core/widgets/typography";
+import * as helpersTypography from "./core/helpers/typography";
+import * as widgetsVideoPlayer from "./core/widgets/videoplayer";
+import * as widgetsWebView from "./core/widgets/webview";
+import * as helperClasses from "./core/helpers/helperclasses";
 //
 //
 // ================================= CUSTOM =================================\\
 //
 //
 // Layouts
-export * from "./layouts/layout";
-export * from "./layouts/page";
+import * as layout from "./layouts/layout";
+import * as page from "./layouts/page";
+
+module.exports = [
+    flex,
+    spacing,
+    !excludeActivityIndicator ? widgetsActivityIndicator : {},
+    !excludeActivityIndicator && !excludeActivityIndicatorHelpers ? helpersActivityIndicator : {},
+    !excludeAnimation ? widgetsAnimation : {},
+    !excludeBackgroundImage ? widgetsBackgroundImage : {},
+    !excludeBadge ? widgetsBadge : {},
+    !excludeBadge && !excludeBadgeHelpers ? helpersBadge : {},
+    !excludeBottomSheet ? widgetsBottomSheet : {},
+    !excludeButtons ? widgetsButtons : {},
+    !excludeButtons && !excludeButtonsHelpers ? helpersButtons : {},
+    !excludeCarousel ? widgetsCarousel : {},
+    !excludeCheckBox ? widgetsCheckBox : {},
+    !excludeColorPicker ? widgetsColorPicker : {},
+    !excludeContainer ? widgetsContainer : {},
+    !excludeDatePicker ? widgetsDatePicker : {},
+    !excludeDropDown ? widgetsDropDown : {},
+    !excludeFeedback ? widgetsFeedback : {},
+    !excludeFAB ? widgetsFloatingActionButton : {},
+    !excludeFAB && !excludeFABHelpers ? helpersFloatingActionButton : {},
+    !excludeImage ? widgetsImage : {},
+    !excludeImage && !excludeImageHelpers ? helpersImage : {},
+    !excludeIntroScreen ? widgetsIntroScreen : {},
+    !excludeIntroScreen && !excludeIntroScreenHelpers ? helpersIntroScreen : {},
+    !excludeLayoutGrid ? widgetsLayoutGrid : {},
+    !excludeLineChart ? widgetsLineChart : {},
+    !excludeLineChart && !excludeLineChartHelpers ? helpersLineChart : {},
+    !excludeBarChart ? widgetsBarChart : {},
+    !excludeBarChart && !excludeBarChartHelpers ? helpersBarChart : {},
+    !excludeListView ? widgetsListView : {},
+    !excludeListView && !excludeListViewHelpers ? helpersListView : {},
+    !excludeListViewSwipe ? widgetsListViewSwipe : {},
+    !excludeListViewSwipe && !excludeListViewSwipeHelpers ? helpersListViewSwipe : {},
+    !excludeMaps ? widgetsMaps : {},
+    !excludeMaps && !excludeMapsHelpers ? helpersMaps : {},
+    widgetsNavigation,
+    !excludePageTitle ? widgetsPageTitle : {},
+    !excludeProgressBar ? widgetsProgressBar : {},
+    !excludeProgressBar && !excludeProgressBarHelpers ? helpersProgressBar : {},
+    !excludeProgressCircle ? widgetsProgressCircle : {},
+    !excludeProgressCircle && !excludeProgressCircleHelpers ? helpersProgressCircle : {},
+    !excludePopUpMenu ? widgetsPopUpMenu : {},
+    !excludeQRCode ? widgetsQRCode : {},
+    !excludeRangeSlider ? widgetsRangeSlider : {},
+    !excludeRangeSlider && !excludeRangeSliderHelpers ? helpersRangeSlider : {},
+    !excludeRating ? widgetsRating : {},
+    !excludeReferenceSelector ? widgetsReferenceSelector : {},
+    !excludeSafeAreaView ? widgetsSafeAreaView : {},
+    !excludeSlider ? widgetsSlider : {},
+    !excludeSlider && !excludeSliderHelpers ? helpersSlider : {},
+    !excludeTabContainer ? widgetsTabContainer : {},
+    !excludeTabContainer && !excludeTabContainerHelpers ? helpersTabContainer : {},
+    !excludeTextArea ? widgetsTextArea : {},
+    !excludeTextBox ? widgetsTextBox : {},
+    !excludeTextBox && !excludeTextBoxHelpers ? helpersTextBox : {},
+    !excludeToggleButtons ? widgetsToggleButtons : {},
+    !excludeTypography ? widgetsTypography : {},
+    !excludeTypography && !excludeTypographyHelpers ? helpersTypography : {},
+    !excludeVideoPlayer ? widgetsVideoPlayer : {},
+    !excludeWebView ? widgetsWebView : {},
+    !excludeHelpers ? helperClasses : {},
+    layout,
+    page
+].reduce((merged, object) => ({ ...merged, ...object }), {});
