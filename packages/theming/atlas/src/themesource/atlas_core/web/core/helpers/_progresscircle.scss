@@ -12,11 +12,8 @@
 //## Helper classes to change the look and feel of the component
 ========================================================================== */
 
+//== Progress circle and label colors
 .widget-progress-circle-primary {
-    .widget-progress-circle-trail-path {
-        stroke: $color-primary-lighter;
-    }
-
     .widget-progress-circle-path {
         stroke: $brand-primary;
     }
@@ -26,25 +23,7 @@
     }
 }
 
-.widget-progress-circle-info {
-    .widget-progress-circle-trail-path {
-        stroke: $color-info-lighter;
-    }
-
-    .widget-progress-circle-path {
-        stroke: $brand-info;
-    }
-
-    .progressbar-text {
-        color: $brand-info !important;
-    }
-}
-
 .widget-progress-circle-success {
-    .widget-progress-circle-trail-path {
-        stroke: $color-success-lighter;
-    }
-
     .widget-progress-circle-path {
         stroke: $brand-success;
     }
@@ -55,10 +34,6 @@
 }
 
 .widget-progress-circle-warning {
-    .widget-progress-circle-trail-path {
-        stroke: $color-warning-lighter;
-    }
-
     .widget-progress-circle-path {
         stroke: $brand-warning;
     }
@@ -69,10 +44,6 @@
 }
 
 .widget-progress-circle-danger {
-    .widget-progress-circle-trail-path {
-        stroke: $color-danger-lighter;
-    }
-
     .widget-progress-circle-path {
         stroke: $brand-danger;
     }
@@ -82,16 +53,61 @@
     }
 }
 
-.widget-progress-circle-inverse {
-    .widget-progress-circle-trail-path {
-        stroke: $color-inverse-lighter;
-    }
-
+//== Sizes
+.widget-progress-circle-thickness-medium {
+    .widget-progress-circle-trail-path,
     .widget-progress-circle-path {
-        stroke: $brand-inverse;
+        stroke-width: 8px;
     }
+}
+
+.widget-progress-circle-thickness-small {
+    .widget-progress-circle-trail-path,
+    .widget-progress-circle-path {
+        stroke-width: 4px;
+    }
+}
+
+.widget-progress-circle-thickness-large {
+    .widget-progress-circle-trail-path,
+    .widget-progress-circle-path {
+        stroke-width: 16px;
+    }
+}
+
+//== Progress label container
+.progress-circle-label-container {
+    position: relative;
+    margin: 0;
 
     .progressbar-text {
-        color: $brand-inverse !important;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        padding: 0px;
+        margin: 0px;
+        transform: translate(-50%, -50%);
+        // Original default from the `progressbar.js` library
+        color: rgb(85, 85, 85);
+    }
+}
+
+.widget-progress-circle-clickable {
+    cursor: pointer;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .widget-progress-circle > div {
+        height: 0;
+        padding: 0;
+        width: 100%;
+        padding-bottom: 100%;
+
+        & > svg {
+            top: 0;
+            left: 0;
+            height: 100%;
+            position: absolute;
+        }
     }
 }

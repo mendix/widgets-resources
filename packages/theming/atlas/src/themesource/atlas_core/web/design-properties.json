@@ -961,5 +961,49 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.custom.progresscircle.ProgressCircle": [
+        {
+            "name": "Bar color",
+            "type": "Dropdown",
+            "description": "Color of the progress bar",
+            "options": [
+                {
+                    "name": "Primary",
+                    "class": "widget-progress-circle-primary"
+                },
+                {
+                    "name": "Success",
+                    "class": "widget-progress-circle-success"
+                },
+                {
+                    "name": "Warning",
+                    "class": "widget-progress-circle-warning"
+                },
+                {
+                    "name": "Danger",
+                    "class": "widget-progress-circle-danger"
+                }
+            ]
+        },
+        {
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Thickness of the progress circle",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "widget-progress-circle-thickness-small"
+                },
+                {
+                    "name": "Medium",
+                    "class": "widget-progress-circle-thickness-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "widget-progress-circle-thickness-large"
+                }
+            ]
+        }
     ]
 }

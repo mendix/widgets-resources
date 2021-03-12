@@ -12,13 +12,9 @@
 ========================================================================== */
 
 .widget-progress-circle {
-    width: 100%;
+    display: inline-block;
 }
 
 .widget-progress-circle-trail-path {
-    stroke: #eeeeee;
-}
-
-.widget-progress-circle-default .widget-progress-circle-path {
-    stroke: #dddddd;
+    stroke: $bg-color;
 }
