@@ -67,7 +67,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                     ) : (
                         <div />
                     ),
-                [props.emptyPlaceholder]
+                [props.emptyPlaceholder, props.showEmptyPlaceholder]
             )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {

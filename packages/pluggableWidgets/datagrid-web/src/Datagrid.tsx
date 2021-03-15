@@ -86,7 +86,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             emptyPlaceholderRenderer={useCallback(
                 renderWrapper =>
                     props.showEmptyPlaceholder === "custom" ? renderWrapper(props.emptyPlaceholder) : <div />,
-                [props.emptyPlaceholder]
+                [props.emptyPlaceholder, props.showEmptyPlaceholder]
             )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
