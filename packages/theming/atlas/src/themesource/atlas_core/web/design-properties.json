@@ -869,6 +869,10 @@
             "description": "The brand style affecting this element's appearance.",
             "options": [
                 {
+                    "name": "Brand Primary",
+                    "class": "label-primary"
+                },
+                {
                     "name": "Brand Secondary",
                     "class": "label-secondary"
                 },
@@ -944,6 +948,10 @@
             "description": "The brand style affecting this element's appearance.",
             "options": [
                 {
+                    "name": "Brand Primary",
+                    "class": "btn-primary"
+                },
+                {
                     "name": "Brand Secondary",
                     "class": "btn-secondary"
                 },
@@ -960,6 +968,34 @@
                     "class": "btn-danger"
                 }
             ]
+        },
+        {
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Size of the buttons",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "btn-sm"
+                },
+                {
+                    "name": "Large",
+                    "class": "btn-lg"
+                }
+            ]
+        },
+        {
+            "name": "Full width",
+            "type": "Toggle",
+            "description": "Extend the button to the full width of the container it is placed in.",
+            "class": "btn-block"
+        },
+        {
+            "name": "Border",
+            "oldNames": ["Bordered"],
+            "type": "Toggle",
+            "description": "Style the button with a transparent background, a colored border, and colored text.",
+            "class": "btn-bordered"
         }
     ],
     "com.mendix.widget.custom.progresscircle.ProgressCircle": [

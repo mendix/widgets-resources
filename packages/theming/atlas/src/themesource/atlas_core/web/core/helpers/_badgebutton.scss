@@ -11,28 +11,87 @@
    Different background components, all managed by variables
 ========================================================================== */
 
+//Badge button color variation
 .btn-secondary,
 .btn-default {
-  .badge {
-    color: $btn-default-bg;
-    background-color: $btn-primary-bg;
-  }
+    .badge {
+        color: $btn-default-bg;
+        background-color: $btn-primary-bg;
+    }
 }
 
 .btn-success {
-  .badge {
-    color: $btn-success-bg;
-  }
+    .badge {
+        color: $btn-success-bg;
+    }
 }
 
 .btn-warning {
-  .badge {
-    color: $btn-warning-bg;
-  }
+    .badge {
+        color: $btn-warning-bg;
+    }
 }
 
 .btn-danger {
-  .badge {
-    color: $btn-danger-bg;
-  }
+    .badge {
+        color: $btn-danger-bg;
+    }
+}
+
+//Badge button bordered variation
+
+.btn-bordered.btn-primary {
+    .badge {
+        background: $btn-primary-bg;
+        color: $btn-primary-color;
+    }
+    &:hover,
+    &:focus {
+        .badge {
+            background-color: $btn-primary-color;
+            color: $btn-primary-bg;
+        }
+    }
+}
+
+.btn-bordered.btn-success {
+    .badge {
+        background: $btn-success-bg;
+        color: $btn-success-color;
+    }
+    &:hover,
+    &:focus {
+        .badge {
+            background-color: $btn-success-color;
+            color: $btn-success-bg;
+        }
+    }
+}
+
+.btn-bordered.btn-warning {
+    .badge {
+        background: $btn-warning-bg;
+        color: $btn-warning-color;
+    }
+    &:hover,
+    &:focus {
+        .badge {
+            background-color: $btn-warning-color;
+            color: $btn-warning-bg;
+        }
+    }
+}
+
+.btn-bordered.btn-danger {
+    .badge {
+        background: $btn-danger-bg;
+        color: $btn-danger-color;
+    }
+    &:hover,
+    &:focus {
+        .badge {
+            background-color: $btn-danger-color;
+            color: $btn-danger-bg;
+        }
+    }
 }
