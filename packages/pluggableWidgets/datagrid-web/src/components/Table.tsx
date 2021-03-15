@@ -99,9 +99,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 Header:
                     typeof column.header === "object"
                         ? column.header.value
-                        : props.preview && (column.header?.trim().length ?? 0) > 0
-                        ? column.header
-                        : "[Empty caption]",
+                        : props.preview && (column.header?.trim().length ?? 0) === 0
+                        ? "[Empty caption]"
+                        : column.header,
                 hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
