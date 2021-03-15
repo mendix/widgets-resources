@@ -9,6 +9,11 @@
 @import "variables";
 @import "../../../theme/web/custom-variables";
 
+// Font Family Import
+@if $font-family-import != false {
+  @import url($font-family-import);
+}
+
 // Base
 @import "core/base/mixins/animations";
 @import "core/base/mixins/spacing";
