@@ -1,4 +1,5 @@
 import { ValueStatus, EditableValue } from "mendix";
+import Big from "big.js";
 
 type Writable<T> = {
     -readonly [K in keyof T]: T[K];
@@ -9,7 +10,7 @@ export enum FormatterType {
     DateTime = "datetime"
 }
 
-export class EditableValueBuilder<T extends string | boolean | Date | BigJs.Big> {
+export class EditableValueBuilder<T extends string | boolean | Date | Big> {
     private readonly editableValue: Writable<EditableValue<T>> = {
         value: undefined,
         displayValue: "",

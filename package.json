@@ -30,7 +30,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
-    "@types/big.js": "^4.0.5",
+    "@types/big.js": "^6.0.0",
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/ghauth": "^3.2.0",
