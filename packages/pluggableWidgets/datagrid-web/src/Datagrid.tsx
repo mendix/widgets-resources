@@ -12,8 +12,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         ? props.datasource.limit / props.pageSize
         : props.datasource.offset / props.pageSize;
 
-    // @ts-ignore // TODO: Remove when Studio Pro 9.0.5 typings are released
-    props.datasource.requestTotalCount?.(isServerSide);
+    props.datasource.requestTotalCount(isServerSide);
 
     useState(() => {
         if (isServerSide) {
@@ -59,18 +58,18 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     let content;
 
                     if (column.showContentAs === "attribute") {
-                        content = <span className="td-text">{column.attribute?.(value)?.displayValue ?? ""}</span>;
+                        content = <span className="td-text">{column.attribute?.get(value)?.displayValue ?? ""}</span>;
                     } else if (column.showContentAs === "dynamicText") {
-                        content = <span className="td-text">{column.dynamicText?.(value)?.value ?? ""}</span>;
+                        content = <span className="td-text">{column.dynamicText?.get(value)?.value ?? ""}</span>;
                     } else {
-                        content = column.content?.(value);
+                        content = column.content?.get(value);
                     }
 
                     return renderWrapper(
                         content,
                         classNames(`align-column-${column.alignment}`, column.columnClass?.(value)?.value),
                         props.onClick
-                            ? useCallback(() => props.onClick?.(value).execute(), [props.onClick, value])
+                            ? useCallback(() => props.onClick?.get(value).execute(), [props.onClick, value])
                             : undefined
                     );
                 },
@@ -105,14 +104,14 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             pageSize={props.pageSize}
             paging={props.pagination === "buttons"}
             pagingPosition={props.pagingPosition}
-            rowClass={useCallback(value => props.rowClass?.(value)?.value ?? "", [props.rowClass])}
+            rowClass={useCallback(value => props.rowClass?.get(value)?.value ?? "", [props.rowClass])}
             settings={props.configurationAttribute}
             setPage={setPage}
             styles={props.style}
             valueForSort={useCallback(
                 (value, columnIndex) => {
                     const column = props.columns[columnIndex];
-                    return column.attribute ? column.attribute(value).value : "";
+                    return column.attribute ? column.attribute.get(value).value : "";
                 },
                 [props.columns]
             )}

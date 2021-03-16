@@ -93,7 +93,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     if (selectedFilters.length > 0) {
                         return selectedFilters.some(
                             selectedFilter =>
-                                attr(item).value?.toString().toLocaleLowerCase() ===
+                                attr.get(item).value?.toString().toLocaleLowerCase() ===
                                     selectedFilter.value?.toString().toLocaleLowerCase() ||
                                 selectedFilter.value?.toString() === ""
                         );

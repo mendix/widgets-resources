@@ -36,7 +36,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         props.filterDispatcher({
             filter: (item, attr): any => {
-                const dateValue = attr(item).value as Date;
+                const dateValue = attr.get(item).value as Date;
 
                 if (!value) {
                     return true;
