@@ -9,7 +9,8 @@ export function ListValueBuilder() {
         totalCount: 2,
         hasMoreItems: false,
         setLimit: jest.fn(),
-        setOffset: jest.fn()
+        setOffset: jest.fn(),
+        requestTotalCount: jest.fn()
     };
     return {
         withItems(items: ObjectItem[]): ListValue {
