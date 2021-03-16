@@ -29,7 +29,7 @@
     "@mendix/pluggable-widgets-tools": "^8.7.0"
   },
   "dependencies": {
-    "big.js": "^6.0.2",
+    "big.js": "^5.2.2",
     "classnames": "^2.2.6"
   }
 }
