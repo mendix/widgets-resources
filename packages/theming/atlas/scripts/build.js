@@ -1,6 +1,7 @@
 const concurrently = require("concurrently");
 const { join } = require("path");
 const { rm } = require("shelljs");
+const { zip } = require("zip-a-folder");
 
 main().catch(e => {
     console.error(e);
@@ -63,12 +64,18 @@ async function buildAndCopyAtlas(watchMode, destination) {
                 {
                     name: "native-design-properties-and-manifest",
                     command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/native/**/*.json" "${destination}/themesource/atlas_core/native"`
+                },
+                {
+                    name: "atlas-2-to-3-migration-tool",
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/migration/*" "${destination}/themesource/atlas_core/migration"`
                 }
             ],
             {
                 killOthers: ["failure"]
             }
         );
+        // This needs to be done after the concurrently batch above, since we're dependent on the resulting `theme` folder.
+        await zip(`${destination}/theme`, `${destination}/themesource/atlas_core/migration/theme.zip`);
         console.log("Success", success);
     } catch (failure) {
         throw new Error(`Failure ${failure}`);
