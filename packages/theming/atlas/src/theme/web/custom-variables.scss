@@ -72,8 +72,12 @@ $link-hover-color: darken($link-color, 15%);
 //== Typography
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
 
-// Font Family Import (Used for google font plugin in theme creater)
+// Font Family Import (Used for google font plugin in theme creater https://ux.mendix.com/theme-creator.html)
 $font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
+@if $font-family-import != false {
+    // Only import, if the import is set
+    @import url($font-family-import);
+}
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base: "SFProDisplay", "Open Sans", sans-serif;
@@ -403,6 +407,10 @@ $wizard-step-height: 48px;
 $wizard-step-number-size: 64px;
 $wizard-step-number-font-size: $font-size-h3;
 
+//Wizard states
+$wizard-default: #fff;
+$wizard-active: $brand-primary;
+$wizard-visited: $brand-success;
 //Wizard step states
 $wizard-default-bg: #fff;
 $wizard-default-color: #fff;
@@ -611,6 +619,12 @@ $navsidebar-sub-bg-active: $navsidebar-sub-bg;
 
 $navsidebar-border-color: $navsidebar-bg-hover;
 
+
+//== Form
+//## Used in components/inputs
+
+// Form Label
+$form-label-color: $brand-inverse !default;
 //== Buttons
 //## Define background-color, border-color and text. Used in components/buttons
 

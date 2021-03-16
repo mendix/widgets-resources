@@ -667,6 +667,17 @@ $color-info-dark: mix($brand-info, black, 70%) !default;
 $color-info-light: mix($brand-info, white, 60%) !default;
 $color-info-lighter: mix($brand-info, white, 20%) !default;
 
+//== Alerts
+//## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
+
+// Background Color
+$alert-info-bg: $color-primary-lighter !default;
+
+// Text Color
+$alert-info-color: $color-primary-darker !default;
+
+// Border Color
+$alert-info-border-color: $color-primary-dark !default;
 //== Labels
 //## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
 
@@ -692,3 +703,11 @@ $groupbox-info-bg: $brand-info !default;
 // Text Color
 $groupbox-inverse-color: #fff !default;
 $groupbox-info-color: #fff !default;
+//== Callout (groupbox) Colors
+//## Extended variables for Groupbox Widget (used in components/groupbox)
+
+// Text and Border Color
+$callout-info-color: $brand-info !default;
+
+// Background Color
+$callout-info-bg: $color-info-lighter !default;
