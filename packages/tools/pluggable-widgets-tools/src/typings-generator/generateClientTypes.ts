@@ -56,7 +56,7 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
         case "integer":
             return "number";
         case "decimal":
-            return "BigJs.Big";
+            return "Big";
         case "icon":
             return isNative ? "DynamicValue<NativeIcon>" : "DynamicValue<WebIcon>";
         case "image":
@@ -123,7 +123,7 @@ export function toClientType(xmlType: string): string {
         case "Decimal":
         case "Integer":
         case "Long":
-            return "BigJs.Big";
+            return "Big";
         case "HashString":
         case "String":
         case "Enum":
