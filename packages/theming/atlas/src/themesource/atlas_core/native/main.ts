@@ -82,7 +82,9 @@ module.exports = [
     flex,
     spacing,
     !exclusionVariables.excludeActivityIndicator ? widgetsActivityIndicator : {},
-    !exclusionVariables.excludeActivityIndicator && !exclusionVariables.excludeActivityIndicatorHelpers ? helpersActivityIndicator : {},
+    !exclusionVariables.excludeActivityIndicator && !exclusionVariables.excludeActivityIndicatorHelpers
+        ? helpersActivityIndicator
+        : {},
     !exclusionVariables.excludeAnimation ? widgetsAnimation : {},
     !exclusionVariables.excludeBackgroundImage ? widgetsBackgroundImage : {},
     !exclusionVariables.excludeBadge ? widgetsBadge : {},
@@ -111,7 +113,9 @@ module.exports = [
     !exclusionVariables.excludeListView ? widgetsListView : {},
     !exclusionVariables.excludeListView && !exclusionVariables.excludeListViewHelpers ? helpersListView : {},
     !exclusionVariables.excludeListViewSwipe ? widgetsListViewSwipe : {},
-    !exclusionVariables.excludeListViewSwipe && !exclusionVariables.excludeListViewSwipeHelpers ? helpersListViewSwipe : {},
+    !exclusionVariables.excludeListViewSwipe && !exclusionVariables.excludeListViewSwipeHelpers
+        ? helpersListViewSwipe
+        : {},
     !exclusionVariables.excludeMaps ? widgetsMaps : {},
     !exclusionVariables.excludeMaps && !exclusionVariables.excludeMapsHelpers ? helpersMaps : {},
     widgetsNavigation,
@@ -119,7 +123,9 @@ module.exports = [
     !exclusionVariables.excludeProgressBar ? widgetsProgressBar : {},
     !exclusionVariables.excludeProgressBar && !exclusionVariables.excludeProgressBarHelpers ? helpersProgressBar : {},
     !exclusionVariables.excludeProgressCircle ? widgetsProgressCircle : {},
-    !exclusionVariables.excludeProgressCircle && !exclusionVariables.excludeProgressCircleHelpers ? helpersProgressCircle : {},
+    !exclusionVariables.excludeProgressCircle && !exclusionVariables.excludeProgressCircleHelpers
+        ? helpersProgressCircle
+        : {},
     !exclusionVariables.excludePopUpMenu ? widgetsPopUpMenu : {},
     !exclusionVariables.excludeQRCode ? widgetsQRCode : {},
     !exclusionVariables.excludeRangeSlider ? widgetsRangeSlider : {},
@@ -130,7 +136,9 @@ module.exports = [
     !exclusionVariables.excludeSlider ? widgetsSlider : {},
     !exclusionVariables.excludeSlider && !exclusionVariables.excludeSliderHelpers ? helpersSlider : {},
     !exclusionVariables.excludeTabContainer ? widgetsTabContainer : {},
-    !exclusionVariables.excludeTabContainer && !exclusionVariables.excludeTabContainerHelpers ? helpersTabContainer : {},
+    !exclusionVariables.excludeTabContainer && !exclusionVariables.excludeTabContainerHelpers
+        ? helpersTabContainer
+        : {},
     !exclusionVariables.excludeTextArea ? widgetsTextArea : {},
     !exclusionVariables.excludeTextBox ? widgetsTextBox : {},
     !exclusionVariables.excludeTextBox && !exclusionVariables.excludeTextBoxHelpers ? helpersTextBox : {},
