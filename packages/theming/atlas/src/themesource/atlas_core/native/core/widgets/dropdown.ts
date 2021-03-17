@@ -83,7 +83,7 @@ export const DropDown: DropDownType = {
     },
     menuWrapper: {
         // All ViewStyle properties are allowed
-        overflow: "hidden",
+        // overflow: "hidden",
         borderRadius: input.input.borderRadius,
         shadowColor: "#000",
         shadowOpacity: 0.2,
