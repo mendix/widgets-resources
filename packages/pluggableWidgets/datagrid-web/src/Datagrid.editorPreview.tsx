@@ -11,8 +11,8 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             ? props.columns
             : [
                   {
-                      header: "Header",
-                      attribute: "{Attribute}",
+                      header: "Column",
+                      attribute: "[No attribute selected]",
                       width: "autoFill",
                       columnClass: "",
                       filter: { renderer: () => <div />, widgetCount: 0 },
@@ -39,9 +39,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                         case "attribute":
                             return renderWrapper(
                                 <span className="td-text">
-                                    {"{"}
-                                    {column.attribute}
-                                    {"}"}
+                                    {"["}
+                                    {column.attribute.length > 0 ? column.attribute : "No attribute selected"}
+                                    {"]"}
                                 </span>,
                                 className
                             );
@@ -60,16 +60,15 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             columnsResizable={props.columnsResizable}
             columnsSortable={props.columnsSortable}
             data={data}
-            emptyPlaceholderRenderer={
-                props.showEmptyPlaceholder
-                    ? useCallback(
-                          renderWrapper => (
-                              <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
-                          ),
-                          [props.emptyPlaceholder]
-                      )
-                    : undefined
-            }
+            emptyPlaceholderRenderer={useCallback(
+                renderWrapper =>
+                    props.showEmptyPlaceholder === "custom" ? (
+                        <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                    ) : (
+                        <div />
+                    ),
+                [props.emptyPlaceholder, props.showEmptyPlaceholder]
+            )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
                     const column = columns[columnIndex];
