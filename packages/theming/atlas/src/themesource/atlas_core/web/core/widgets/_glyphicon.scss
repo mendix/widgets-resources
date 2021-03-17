@@ -5,23 +5,25 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Glyphicons
+@mixin glyphicon() {
+    /* ==========================================================================
+       Glyphicon
 
-   Default Mendix Glyphicons
-========================================================================== */
+       Default Mendix glyphicon
+    ========================================================================== */
 
-.mx-glyphicon {
-    &:before {
-        display: inline-block;
-        margin-top: -0.2em;
-        margin-right: 0.4555555em;
-        vertical-align: middle;
-        font-family: "Glyphicons Halflings";
-        font-weight: $font-weight-normal;
-        font-style: normal;
-        line-height: inherit;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+    .mx-glyphicon {
+        &:before {
+            display: inline-block;
+            margin-top: -0.2em;
+            margin-right: 0.4555555em;
+            vertical-align: middle;
+            font-family: "Glyphicons Halflings";
+            font-weight: $font-weight-normal;
+            font-style: normal;
+            line-height: inherit;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
     }
 }

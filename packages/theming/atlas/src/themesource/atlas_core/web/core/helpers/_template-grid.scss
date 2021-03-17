@@ -4,301 +4,306 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-/* ==========================================================================
-   Templategrid
 
-//== Design Properties
-//## Helper classes to change the look and feel of the component
-========================================================================== */
-// Make sure your content looks selectable
-.templategrid-selectable.mx-templategrid {
-    .mx-templategrid-item {
-        cursor: pointer;
-    }
-}
+@mixin template-grid-helpers() {
+    /* ==========================================================================
+       Template grid
 
-// Lined
-.templategrid-lined.mx-templategrid {
-    .mx-grid-content {
-        border-top-width: 2px;
-        border-top-style: solid;
-        border-top-color: $grid-border-color;
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+    // Make sure your content looks selectable
+    .templategrid-selectable.mx-templategrid {
+        .mx-templategrid-item {
+            cursor: pointer;
+        }
     }
 
-    .mx-templategrid-item {
-        border-top: 1px solid $grid-border-color;
-        border-right: none;
-        border-bottom: 1px solid $grid-border-color;
-        border-left: none;
+    // Lined
+    .templategrid-lined.mx-templategrid {
+        .mx-grid-content {
+            border-top-width: 2px;
+            border-top-style: solid;
+            border-top-color: $grid-border-color;
+        }
+
+        .mx-templategrid-item {
+            border-top: 1px solid $grid-border-color;
+            border-right: none;
+            border-bottom: 1px solid $grid-border-color;
+            border-left: none;
+        }
     }
-}
 
-// Striped
-.templategrid-striped.mx-templategrid {
-    .mx-templategrid-row:nth-child(odd) .mx-templategrid-item {
-        background-color: #f9f9f9;
+    // Striped
+    .templategrid-striped.mx-templategrid {
+        .mx-templategrid-row:nth-child(odd) .mx-templategrid-item {
+            background-color: #f9f9f9;
+        }
     }
-}
 
-// Stylingless
-.templategrid-stylingless.mx-templategrid {
-    .mx-templategrid-item {
-        padding: 0;
-        cursor: default;
-        border: 0;
-        background-color: transparent;
+    // Stylingless
+    .templategrid-stylingless.mx-templategrid {
+        .mx-templategrid-item {
+            padding: 0;
+            cursor: default;
+            border: 0;
+            background-color: transparent;
 
-        &:hover {
+            &:hover {
+                background-color: transparent;
+            }
+
+            &.selected {
+                background-color: transparent !important;
+
+                &:hover {
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+
+    // Transparent items
+    .templategrid-transparent.mx-templategrid {
+        .mx-templategrid-item {
+            border: 0;
             background-color: transparent;
         }
+    }
 
-        &.selected {
-            background-color: transparent !important;
-
+    // Hover
+    .templategrid-hover.mx-templategrid {
+        .mx-templategrid-item {
             &:hover {
-                background-color: transparent !important;
+                background-color: $grid-bg-hover !important;
+            }
+
+            &.selected {
+                background-color: $grid-bg-selected !important;
+
+                &:hover {
+                    background-color: $grid-bg-selected-hover !important;
+                }
             }
         }
     }
-}
 
-// Transparent items
-.templategrid-transparent.mx-templategrid {
-    .mx-templategrid-item {
-        border: 0;
-        background-color: transparent;
+    // Templategrid Row Sizes
+    .templategrid-lg.mx-templategrid {
+        .mx-templategrid-item {
+            padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2)
+                ($grid-padding-left * 2);
+        }
     }
-}
 
-// Hover
-.templategrid-hover.mx-templategrid {
-    .mx-templategrid-item {
-        &:hover {
-            background-color: $grid-bg-hover !important;
+    .templategrid-sm.mx-templategrid {
+        .mx-templategrid-item {
+            padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2)
+                ($grid-padding-left / 2);
+        }
+    }
+
+    // Templategrid Layoutgrid styles
+    .mx-templategrid[class*="tg-col"] {
+        overflow: hidden; // For if it is not in a layout, to prevent scrollbars
+        .mx-templategrid-content-wrapper {
+            display: block;
         }
 
-        &.selected {
-            background-color: $grid-bg-selected !important;
+        .mx-templategrid-row {
+            display: block;
+            margin-right: -1 * $gutter-size;
+            margin-left: -1 * $gutter-size;
 
-            &:hover {
-                background-color: $grid-bg-selected-hover !important;
+            &::before,
+            &::after {
+                // clearfix
+                display: table;
+                clear: both;
+                content: " ";
             }
         }
-    }
-}
 
-// Templategrid Row Sizes
-.templategrid-lg.mx-templategrid {
-    .mx-templategrid-item {
-        padding: ($grid-padding-top * 2) ($grid-padding-right * 2) ($grid-padding-bottom * 2) ($grid-padding-left * 2);
-    }
-}
+        .mx-templategrid-item {
+            // bootstrap col
+            position: relative;
+            display: block;
+            float: left;
+            min-height: 1px;
+            padding-right: $gutter-size;
+            padding-left: $gutter-size;
+            border: 0;
+            @media (max-width: 992px) {
+                width: 100% !important;
+            }
 
-.templategrid-sm.mx-templategrid {
-    .mx-templategrid-item {
-        padding: ($grid-padding-top / 2) ($grid-padding-right / 2) ($grid-padding-bottom / 2) ($grid-padding-left / 2);
-    }
-}
-
-// Templategrid Layoutgrid styles
-.mx-templategrid[class*="tg-col"] {
-    overflow: hidden; // For if it is not in a layout, to prevent scrollbars
-    .mx-templategrid-content-wrapper {
-        display: block;
-    }
-
-    .mx-templategrid-row {
-        display: block;
-        margin-right: -1 * $gutter-size;
-        margin-left: -1 * $gutter-size;
-
-        &::before,
-        &::after {
-            // clearfix
-            display: table;
-            clear: both;
-            content: " ";
+            .mx-dataview {
+                overflow: hidden;
+            }
         }
-    }
 
-    .mx-templategrid-item {
-        // bootstrap col
-        position: relative;
-        display: block;
-        float: left;
-        min-height: 1px;
-        padding-right: $gutter-size;
-        padding-left: $gutter-size;
-        border: 0;
-        @media (max-width: 992px) {
+        &.tg-col-xs-12 .mx-templategrid-item {
             width: 100% !important;
         }
 
-        .mx-dataview {
-            overflow: hidden;
-        }
-    }
-
-    &.tg-col-xs-12 .mx-templategrid-item {
-        width: 100% !important;
-    }
-
-    &.tg-col-xs-11 .mx-templategrid-item {
-        width: 91.66666667% !important;
-    }
-
-    &.tg-col-xs-10 .mx-templategrid-item {
-        width: 83.33333333% !important;
-    }
-
-    &.tg-col-xs-9 .mx-templategrid-item {
-        width: 75% !important;
-    }
-
-    &.tg-col-xs-8 .mx-templategrid-item {
-        width: 66.66666667% !important;
-    }
-
-    &.tg-col-xs-7 .mx-templategrid-item {
-        width: 58.33333333% !important;
-    }
-
-    &.tg-col-xs-6 .mx-templategrid-item {
-        width: 50% !important;
-    }
-
-    &.tg-col-xs-5 .mx-templategrid-item {
-        width: 41.66666667% !important;
-    }
-
-    &.tg-col-xs-4 .mx-templategrid-item {
-        width: 33.33333333% !important;
-    }
-
-    &.tg-col-xs-3 .mx-templategrid-item {
-        width: 25% !important;
-    }
-
-    &.tg-col-xs-2 .mx-templategrid-item {
-        width: 16.66666667% !important;
-    }
-
-    &.tg-col-xs-1 .mx-templategrid-item {
-        width: 8.33333333% !important;
-    }
-
-    @media (min-width: 768px) {
-        &.tg-col-sm-12 .mx-templategrid-item {
-            width: 100% !important;
-        }
-        &.tg-col-sm-11 .mx-templategrid-item {
+        &.tg-col-xs-11 .mx-templategrid-item {
             width: 91.66666667% !important;
         }
-        &.tg-col-sm-10 .mx-templategrid-item {
+
+        &.tg-col-xs-10 .mx-templategrid-item {
             width: 83.33333333% !important;
         }
-        &.tg-col-sm-9 .mx-templategrid-item {
+
+        &.tg-col-xs-9 .mx-templategrid-item {
             width: 75% !important;
         }
-        &.tg-col-sm-8 .mx-templategrid-item {
+
+        &.tg-col-xs-8 .mx-templategrid-item {
             width: 66.66666667% !important;
         }
-        &.tg-col-sm-7 .mx-templategrid-item {
+
+        &.tg-col-xs-7 .mx-templategrid-item {
             width: 58.33333333% !important;
         }
-        &.tg-col-sm-6 .mx-templategrid-item {
+
+        &.tg-col-xs-6 .mx-templategrid-item {
             width: 50% !important;
         }
-        &.tg-col-sm-5 .mx-templategrid-item {
+
+        &.tg-col-xs-5 .mx-templategrid-item {
             width: 41.66666667% !important;
         }
-        &.tg-col-sm-4 .mx-templategrid-item {
+
+        &.tg-col-xs-4 .mx-templategrid-item {
             width: 33.33333333% !important;
         }
-        &.tg-col-sm-3 .mx-templategrid-item {
+
+        &.tg-col-xs-3 .mx-templategrid-item {
             width: 25% !important;
         }
-        &.tg-col-sm-2 .mx-templategrid-item {
+
+        &.tg-col-xs-2 .mx-templategrid-item {
             width: 16.66666667% !important;
         }
-        &.tg-col-sm-1 .mx-templategrid-item {
+
+        &.tg-col-xs-1 .mx-templategrid-item {
             width: 8.33333333% !important;
         }
-    }
-    @media (min-width: 992px) {
-        &.tg-col-md-12 .mx-templategrid-item {
-            width: 100% !important;
+
+        @media (min-width: 768px) {
+            &.tg-col-sm-12 .mx-templategrid-item {
+                width: 100% !important;
+            }
+            &.tg-col-sm-11 .mx-templategrid-item {
+                width: 91.66666667% !important;
+            }
+            &.tg-col-sm-10 .mx-templategrid-item {
+                width: 83.33333333% !important;
+            }
+            &.tg-col-sm-9 .mx-templategrid-item {
+                width: 75% !important;
+            }
+            &.tg-col-sm-8 .mx-templategrid-item {
+                width: 66.66666667% !important;
+            }
+            &.tg-col-sm-7 .mx-templategrid-item {
+                width: 58.33333333% !important;
+            }
+            &.tg-col-sm-6 .mx-templategrid-item {
+                width: 50% !important;
+            }
+            &.tg-col-sm-5 .mx-templategrid-item {
+                width: 41.66666667% !important;
+            }
+            &.tg-col-sm-4 .mx-templategrid-item {
+                width: 33.33333333% !important;
+            }
+            &.tg-col-sm-3 .mx-templategrid-item {
+                width: 25% !important;
+            }
+            &.tg-col-sm-2 .mx-templategrid-item {
+                width: 16.66666667% !important;
+            }
+            &.tg-col-sm-1 .mx-templategrid-item {
+                width: 8.33333333% !important;
+            }
         }
-        &.tg-col-md-11 .mx-templategrid-item {
-            width: 91.66666667% !important;
+        @media (min-width: 992px) {
+            &.tg-col-md-12 .mx-templategrid-item {
+                width: 100% !important;
+            }
+            &.tg-col-md-11 .mx-templategrid-item {
+                width: 91.66666667% !important;
+            }
+            &.tg-col-md-10 .mx-templategrid-item {
+                width: 83.33333333% !important;
+            }
+            &.tg-col-md-9 .mx-templategrid-item {
+                width: 75% !important;
+            }
+            &.tg-col-md-8 .mx-templategrid-item {
+                width: 66.66666667% !important;
+            }
+            &.tg-col-md-7 .mx-templategrid-item {
+                width: 58.33333333% !important;
+            }
+            &.tg-col-md-6 .mx-templategrid-item {
+                width: 50% !important;
+            }
+            &.tg-col-md-5 .mx-templategrid-item {
+                width: 41.66666667% !important;
+            }
+            &.tg-col-md-4 .mx-templategrid-item {
+                width: 33.33333333% !important;
+            }
+            &.tg-col-md-3 .mx-templategrid-item {
+                width: 25% !important;
+            }
+            &.tg-col-md-2 .mx-templategrid-item {
+                width: 16.66666667% !important;
+            }
+            &.tg-col-md-1 .mx-templategrid-item {
+                width: 8.33333333% !important;
+            }
         }
-        &.tg-col-md-10 .mx-templategrid-item {
-            width: 83.33333333% !important;
-        }
-        &.tg-col-md-9 .mx-templategrid-item {
-            width: 75% !important;
-        }
-        &.tg-col-md-8 .mx-templategrid-item {
-            width: 66.66666667% !important;
-        }
-        &.tg-col-md-7 .mx-templategrid-item {
-            width: 58.33333333% !important;
-        }
-        &.tg-col-md-6 .mx-templategrid-item {
-            width: 50% !important;
-        }
-        &.tg-col-md-5 .mx-templategrid-item {
-            width: 41.66666667% !important;
-        }
-        &.tg-col-md-4 .mx-templategrid-item {
-            width: 33.33333333% !important;
-        }
-        &.tg-col-md-3 .mx-templategrid-item {
-            width: 25% !important;
-        }
-        &.tg-col-md-2 .mx-templategrid-item {
-            width: 16.66666667% !important;
-        }
-        &.tg-col-md-1 .mx-templategrid-item {
-            width: 8.33333333% !important;
-        }
-    }
-    @media (min-width: 1200px) {
-        &.tg-col-lg-12 .mx-templategrid-item {
-            width: 100% !important;
-        }
-        &.tg-col-lg-11 .mx-templategrid-item {
-            width: 91.66666667% !important;
-        }
-        &.tg-col-lg-10 .mx-templategrid-item {
-            width: 83.33333333% !important;
-        }
-        &.tg-col-lg-9 .mx-templategrid-item {
-            width: 75% !important;
-        }
-        &.tg-col-lg-8 .mx-templategrid-item {
-            width: 66.66666667% !important;
-        }
-        &.tg-col-lg-7 .mx-templategrid-item {
-            width: 58.33333333% !important;
-        }
-        &.tg-col-lg-6 .mx-templategrid-item {
-            width: 50% !important;
-        }
-        &.tg-col-lg-5 .mx-templategrid-item {
-            width: 41.66666667% !important;
-        }
-        &.tg-col-lg-4 .mx-templategrid-item {
-            width: 33.33333333% !important;
-        }
-        &.tg-col-lg-3 .mx-templategrid-item {
-            width: 25% !important;
-        }
-        &.tg-col-lg-2 .mx-templategrid-item {
-            width: 16.66666667% !important;
-        }
-        &.tg-col-lg-1 .mx-templategrid-item {
-            width: 8.33333333% !important;
+        @media (min-width: 1200px) {
+            &.tg-col-lg-12 .mx-templategrid-item {
+                width: 100% !important;
+            }
+            &.tg-col-lg-11 .mx-templategrid-item {
+                width: 91.66666667% !important;
+            }
+            &.tg-col-lg-10 .mx-templategrid-item {
+                width: 83.33333333% !important;
+            }
+            &.tg-col-lg-9 .mx-templategrid-item {
+                width: 75% !important;
+            }
+            &.tg-col-lg-8 .mx-templategrid-item {
+                width: 66.66666667% !important;
+            }
+            &.tg-col-lg-7 .mx-templategrid-item {
+                width: 58.33333333% !important;
+            }
+            &.tg-col-lg-6 .mx-templategrid-item {
+                width: 50% !important;
+            }
+            &.tg-col-lg-5 .mx-templategrid-item {
+                width: 41.66666667% !important;
+            }
+            &.tg-col-lg-4 .mx-templategrid-item {
+                width: 33.33333333% !important;
+            }
+            &.tg-col-lg-3 .mx-templategrid-item {
+                width: 25% !important;
+            }
+            &.tg-col-lg-2 .mx-templategrid-item {
+                width: 16.66666667% !important;
+            }
+            &.tg-col-lg-1 .mx-templategrid-item {
+                width: 8.33333333% !important;
+            }
         }
     }
 }

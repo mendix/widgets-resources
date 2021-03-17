@@ -5,24 +5,26 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Rating
+@mixin rating() {
+    /* ==========================================================================
+       Rating
 
-   Default Mendix Rating Widget.
-========================================================================== */
+       Default Mendix rating widget.
+    ========================================================================== */
 
-.widget-star-rating-empty {
-    color: #cccccc;
-}
+    .widget-star-rating-empty {
+        color: #cccccc;
+    }
 
-.widget-star-rating-full-widget {
-    color: #ffa611;
-}
+    .widget-star-rating-full-widget {
+        color: #ffa611;
+    }
 
-.widget-star-rating-full-default {
-    color: #ced0d3;
-}
+    .widget-star-rating-full-default {
+        color: #ced0d3;
+    }
 
-.widget-star-rating-font-medium {
-    font-size: 30px;
+    .widget-star-rating-font-medium {
+        font-size: 30px;
+    }
 }

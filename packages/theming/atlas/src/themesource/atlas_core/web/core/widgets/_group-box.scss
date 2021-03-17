@@ -5,48 +5,51 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Groupbox
+@mixin group-box() {
+    /* ==========================================================================
+       Group box
 
-   Default Mendix Groupboxes
-========================================================================== */
+       Default Mendix group box
+    ========================================================================== */
 
-.mx-groupbox {
-    margin: 0;
-
-    > .mx-groupbox-header {
+    .mx-groupbox {
         margin: 0;
-        color: $groupbox-default-color;
-        border-width: 1px 1px 0 1px;
-        border-style: solid;
-        border-color: $groupbox-default-bg;
-        background: $groupbox-default-bg;
-        font-size: $font-size-h5;
-        border-radius: $border-radius-default $border-radius-default 0 0;
-        padding: $spacing-small * 1.5 $spacing-medium;
-        .mx-groupbox-collapse-icon {
-            margin-top: 0.1em;
+
+        > .mx-groupbox-header {
+            margin: 0;
+            color: $groupbox-default-color;
+            border-width: 1px 1px 0 1px;
+            border-style: solid;
+            border-color: $groupbox-default-bg;
+            background: $groupbox-default-bg;
+            font-size: $font-size-h5;
+            border-radius: $border-radius-default $border-radius-default 0 0;
+            padding: $spacing-small * 1.5 $spacing-medium;
+
+            .mx-groupbox-collapse-icon {
+                margin-top: 0.1em;
+            }
+        }
+
+        > .mx-groupbox-body {
+            padding: $spacing-small * 1.5 $spacing-medium;
+            border-width: 1px;
+            border-style: solid;
+            border-color: $groupbox-default-bg;
+            background-color: #ffffff;
+            border-radius: $border-radius-default;
+        }
+
+        .mx-groupbox-header + .mx-groupbox-body {
+            border-top: none;
+        }
+
+        &.collapsed > .mx-groupbox-header {
         }
     }
 
-    > .mx-groupbox-body {
-        padding: $spacing-small * 1.5 $spacing-medium;
-        border-width: 1px;
-        border-style: solid;
-        border-color: $groupbox-default-bg;
-        background-color: #ffffff;
-        border-radius: $border-radius-default;
+    //With header
+    .mx-groupbox-header ~ .mx-groupbox-body {
+        border-radius: 0 0 $border-radius-default $border-radius-default;
     }
-
-    .mx-groupbox-header + .mx-groupbox-body {
-        border-top: none;
-    }
-
-    &.collapsed > .mx-groupbox-header {
-    }
-}
-
-//With header
-.mx-groupbox-header ~ .mx-groupbox-body {
-    border-radius: 0 0 $border-radius-default $border-radius-default;
 }

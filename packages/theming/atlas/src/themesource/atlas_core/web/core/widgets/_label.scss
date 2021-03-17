@@ -5,26 +5,28 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Labels
+@mixin label() {
+    /* ==========================================================================
+       Label
 
-   Default labels combined with Bootstrap labels
-========================================================================== */
+       Default label combined with Bootstrap label
+    ========================================================================== */
 
-.label {
-    display: inline-block;
-    margin: 0;
-    padding: $spacing-smaller $spacing-small;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    color: #ffffff;
-    border-radius: 0.25em;
-    font-size: 100%;
-    line-height: 1;
+    .label {
+        display: inline-block;
+        margin: 0;
+        padding: $spacing-smaller $spacing-small;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+        color: #ffffff;
+        border-radius: 0.25em;
+        font-size: 100%;
+        line-height: 1;
 
-    .form-control-static {
-        font-weight: $font-weight-normal;
-        all: unset;
+        .form-control-static {
+            font-weight: $font-weight-normal;
+            all: unset;
+        }
     }
 }

@@ -114,42 +114,44 @@ $default-ios-color: rgb(100, 189, 99);
     }
 }
 
-.widget-switch-btn-wrapper {
-    &:focus {
-        outline: 1px solid $brand-primary;
-    }
-}
-
-div {
-    &.widget-switch {
-        &.iOS {
-            @include ios;
-        }
-
-        &.android {
-            @include android;
-        }
-
-        &.auto {
-            @include ios;
+@mixin switch() {
+    .widget-switch-btn-wrapper {
+        &:focus {
+            outline: 1px solid $brand-primary;
         }
     }
-}
 
-html {
     div {
-        &.dj_android {
-            .widget-switch {
-                &.auto {
-                    @include android;
-                }
+        &.widget-switch {
+            &.iOS {
+                @include ios;
+            }
+
+            &.android {
+                @include android;
+            }
+
+            &.auto {
+                @include ios;
             }
         }
+    }
 
-        &.dj_ios {
-            .widget-switch {
-                &.auto {
-                    @include ios;
+    html {
+        div {
+            &.dj_android {
+                .widget-switch {
+                    &.auto {
+                        @include android;
+                    }
+                }
+            }
+
+            &.dj_ios {
+                .widget-switch {
+                    &.auto {
+                        @include ios;
+                    }
                 }
             }
         }

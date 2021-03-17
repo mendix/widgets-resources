@@ -5,16 +5,18 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Progress Circle
+@mixin progress-circle() {
+    /* ==========================================================================
+       Progress Circle
 
-   Default Mendix Progress Circle Widget.
-========================================================================== */
+       Default Mendix progress circle widget.
+    ========================================================================== */
 
-.widget-progress-circle {
-    display: inline-block;
-}
+    .widget-progress-circle {
+        display: inline-block;
+    }
 
-.widget-progress-circle-trail-path {
-    stroke: $bg-color;
+    .widget-progress-circle-trail-path {
+        stroke: $bg-color;
+    }
 }

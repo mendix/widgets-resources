@@ -4,102 +4,105 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
-/* ==========================================================================
-   Radio Buttons
 
-   Default Mendix Radio Button Widget
-========================================================================== */
-.mx-radiobuttons.inline .mx-radiogroup {
-    display: flex;
-    flex-direction: row;
+@mixin radio-button() {
+    /* ==========================================================================
+       Radio button
+
+       Default Mendix radio button widget
+    ========================================================================== */
+    .mx-radiobuttons.inline .mx-radiogroup {
+        display: flex;
+        flex-direction: row;
+
+        .radio {
+            margin: 0 20px 0 0;
+        }
+    }
+
+    .mx-radiobuttons .radio:last-child {
+        margin-bottom: 0;
+    }
 
     .radio {
-        margin: 0 20px 0 0;
-    }
-}
-
-.mx-radiobuttons .radio:last-child {
-    margin-bottom: 0;
-}
-
-.radio {
-    display: flex !important; // Remove after mxui merge
-    align-items: center;
-    margin-top: 0;
-}
-
-input[type="radio"] {
-    position: relative !important; // Remove after mxui merge
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-
-    &:before,
-    &:after {
-        position: absolute;
-        display: block;
-        transition: all 0.3s ease-in-out;
-        border-radius: 50%;
+        display: flex !important; // Remove after mxui merge
+        align-items: center;
+        margin-top: 0;
     }
 
-    &:before {
-        width: 100%;
-        height: 100%;
-        content: "";
-        border: 1px solid $form-input-border-color;
-        background-color: transparent;
-    }
+    input[type="radio"] {
+        position: relative !important; // Remove after mxui merge
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
 
-    &:after {
-        top: 50%;
-        left: 50%;
-        width: 50%;
-        height: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        background-color: $form-input-border-focus-color;
-    }
+        &:before,
+        &:after {
+            position: absolute;
+            display: block;
+            transition: all 0.3s ease-in-out;
+            border-radius: 50%;
+        }
 
-    &:not(:checked):after {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0;
-    }
+        &:before {
+            width: 100%;
+            height: 100%;
+            content: "";
+            border: 1px solid $form-input-border-color;
+            background-color: transparent;
+        }
 
-    &:not(:disabled):not(:checked):hover:after {
-        background-color: $form-input-bg-hover;
-    }
+        &:after {
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            background-color: $form-input-border-focus-color;
+        }
 
-    &:checked:after,
-    &:not(:disabled):not(:checked):hover:after {
-        content: "";
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-    }
+        &:not(:checked):after {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
 
-    &:checked:before {
-        border-color: $form-input-border-focus-color;
-        background-color: $form-input-bg;
-    }
+        &:not(:disabled):not(:checked):hover:after {
+            background-color: $form-input-bg-hover;
+        }
 
-    &:disabled:before {
-        background-color: $form-input-bg-disabled;
-    }
+        &:checked:after,
+        &:not(:disabled):not(:checked):hover:after {
+            content: "";
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
 
-    &:checked:disabled:before {
-        border-color: rgba($form-input-border-focus-color, 0.4);
-    }
+        &:checked:before {
+            border-color: $form-input-border-focus-color;
+            background-color: $form-input-bg;
+        }
 
-    &:checked:disabled:after {
-        background-color: rgba($form-input-border-focus-color, 0.4);
-    }
+        &:disabled:before {
+            background-color: $form-input-bg-disabled;
+        }
 
-    & + label {
-        margin-left: $form-label-gutter;
+        &:checked:disabled:before {
+            border-color: rgba($form-input-border-focus-color, 0.4);
+        }
+
+        &:checked:disabled:after {
+            background-color: rgba($form-input-border-focus-color, 0.4);
+        }
+
+        & + label {
+            margin-left: $form-label-gutter;
+        }
     }
 }

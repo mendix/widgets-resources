@@ -5,80 +5,83 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Progress Bar
+@mixin progress-bar-helpers() {
+    /* ==========================================================================
+       Progress Bar
 
-//== Design Properties
-//## Helper classes to change the look and feel of the component
-========================================================================== */
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
 
-.widget-progress-bar {
-    width: 100%;
-    .progress {
-        border-radius: $border-radius-default;
-        background-color: $bg-color;
+    .widget-progress-bar {
+        width: 100%;
+
+        .progress {
+            border-radius: $border-radius-default;
+            background-color: $bg-color;
+        }
     }
-}
 
-.progress-bar-medium .progress,
-.progress-bar-medium .progress-bar {
-    height: 16px;
-    line-height: 16px;
-    font-size: $font-size-small;
-}
+    .progress-bar-medium .progress,
+    .progress-bar-medium .progress-bar {
+        height: 16px;
+        line-height: 16px;
+        font-size: $font-size-small;
+    }
 
-.progress-bar-small .progress,
-.progress-bar-small .progress-bar {
-    height: 8px;
-    line-height: 8px;
-    font-size: 0px;
-}
+    .progress-bar-small .progress,
+    .progress-bar-small .progress-bar {
+        height: 8px;
+        line-height: 8px;
+        font-size: 0px;
+    }
 
-.progress-bar-small .progress-bar > * {
-    // Specifically to hide custom labels.
-    display: none;
-}
+    .progress-bar-small .progress-bar > * {
+        // Specifically to hide custom labels.
+        display: none;
+    }
 
-.progress-bar-large .progress,
-.progress-bar-large .progress-bar {
-    height: 24px;
-    line-height: 24px;
-    font-size: $font-size-default;
-}
+    .progress-bar-large .progress,
+    .progress-bar-large .progress-bar {
+        height: 24px;
+        line-height: 24px;
+        font-size: $font-size-default;
+    }
 
-.widget-progress-bar-clickable:hover {
-    cursor: pointer;
-}
+    .widget-progress-bar-clickable:hover {
+        cursor: pointer;
+    }
 
-.widget-progress-bar.progress-bar-primary .progress-bar {
-    background-color: $brand-primary;
-}
+    .widget-progress-bar.progress-bar-primary .progress-bar {
+        background-color: $brand-primary;
+    }
 
-.widget-progress-bar.progress-bar-success .progress-bar {
-    background-color: $brand-success;
-}
+    .widget-progress-bar.progress-bar-success .progress-bar {
+        background-color: $brand-success;
+    }
 
-.widget-progress-bar.progress-bar-warning .progress-bar {
-    background-color: $brand-warning;
-}
+    .widget-progress-bar.progress-bar-warning .progress-bar {
+        background-color: $brand-warning;
+    }
 
-.widget-progress-bar.progress-bar-danger .progress-bar {
-    background-color: $brand-danger;
-}
+    .widget-progress-bar.progress-bar-danger .progress-bar {
+        background-color: $brand-danger;
+    }
 
-.widget-progress-bar-alert.widget-progress-bar-text-contrast .progress-bar {
-    color: $color-danger-darker;
-}
+    .widget-progress-bar-alert.widget-progress-bar-text-contrast .progress-bar {
+        color: $color-danger-darker;
+    }
 
-.widget-progress-bar-text-contrast .progress-bar {
-    color: $font-color-default;
-}
+    .widget-progress-bar-text-contrast .progress-bar {
+        color: $font-color-default;
+    }
 
-.widget-progress-bar-negative {
-    float: right;
-    display: block;
-}
+    .widget-progress-bar-negative {
+        float: right;
+        display: block;
+    }
 
-.widget-progress-bar > .alert {
-    margin-top: 24px;
+    .widget-progress-bar > .alert {
+        margin-top: 24px;
+    }
 }

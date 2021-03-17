@@ -5,92 +5,94 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Checkbox
+@mixin check-box() {
+    /* ==========================================================================
+       Check box
 
-   Default Mendix Checkbox Widget
-========================================================================== */
+       Default Mendix check box widget
+    ========================================================================== */
 
-.mx-checkbox.label-after {
-    flex-wrap: wrap;
+    .mx-checkbox.label-after {
+        flex-wrap: wrap;
 
-    .control-label {
-        display: flex;
-        align-items: center;
-        padding: 0;
-    }
-}
-
-input[type="checkbox"] {
-    position: relative !important; //Remove after mxui merge
-    width: 16px;
-    height: 16px;
-    margin: 0 !important; // Remove after mxui merge
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-
-    &:before,
-    &:after {
-        position: absolute;
-        display: block;
-        transition: all 0.3s ease;
+        .control-label {
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
     }
 
-    &:before {
-        // Checkbox
-        width: 100%;
-        height: 100%;
-        content: "";
-        border: 1px solid $form-input-border-color;
-        border-radius: $form-input-border-radius;
-        background-color: transparent;
-    }
+    input[type="checkbox"] {
+        position: relative !important; //Remove after mxui merge
+        width: 16px;
+        height: 16px;
+        margin: 0 !important; // Remove after mxui merge
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
 
-    &:after {
-        // Checkmark
-        width: 8px;
-        height: 4px;
-        margin: 5px 4px;
-        transform: rotate(-45deg);
-        pointer-events: none;
-        border: 2px solid #ffffff;
-        border-top: 0;
-        border-right: 0;
-    }
+        &:before,
+        &:after {
+            position: absolute;
+            display: block;
+            transition: all 0.3s ease;
+        }
 
-    &:not(:disabled):not(:checked):hover:after {
-        content: "";
-        border-color: $form-input-bg-hover; // color of checkmark on hover
-    }
+        &:before {
+            // Checkbox
+            width: 100%;
+            height: 100%;
+            content: "";
+            border: 1px solid $form-input-border-color;
+            border-radius: $form-input-border-radius;
+            background-color: transparent;
+        }
 
-    &:checked:before {
-        border-color: $form-input-border-focus-color;
-        background-color: $form-input-border-focus-color;
-    }
+        &:after {
+            // Checkmark
+            width: 8px;
+            height: 4px;
+            margin: 5px 4px;
+            transform: rotate(-45deg);
+            pointer-events: none;
+            border: 2px solid #ffffff;
+            border-top: 0;
+            border-right: 0;
+        }
 
-    &:checked:after {
-        content: "";
-    }
+        &:not(:disabled):not(:checked):hover:after {
+            content: "";
+            border-color: $form-input-bg-hover; // color of checkmark on hover
+        }
 
-    &:disabled:before {
-        background-color: $form-input-bg-disabled;
-    }
+        &:checked:before {
+            border-color: $form-input-border-focus-color;
+            background-color: $form-input-border-focus-color;
+        }
 
-    &:checked:disabled:before {
-        border-color: transparent;
-        background-color: rgba($form-input-border-focus-color, 0.4);
-    }
+        &:checked:after {
+            content: "";
+        }
 
-    &:disabled:after,
-    &:checked:disabled:after {
-        border-color: $form-input-bg-disabled;
-    }
+        &:disabled:before {
+            background-color: $form-input-bg-disabled;
+        }
 
-    & + .control-label {
-        margin-left: $form-label-gutter;
+        &:checked:disabled:before {
+            border-color: transparent;
+            background-color: rgba($form-input-border-focus-color, 0.4);
+        }
+
+        &:disabled:after,
+        &:checked:disabled:after {
+            border-color: $form-input-bg-disabled;
+        }
+
+        & + .control-label {
+            margin-left: $form-label-gutter;
+        }
     }
 }

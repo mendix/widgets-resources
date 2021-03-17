@@ -5,52 +5,54 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Badges
+@mixin badge() {
+    /* ==========================================================================
+       Badge
 
-   Override of default Bootstrap badge style
-========================================================================== */
+       Override of default Bootstrap badge style
+    ========================================================================== */
 
-.badge {
-    display: inline-block;
-    margin: 0;
-    padding: $spacing-smaller $spacing-small;
-    text-align: center;
-    vertical-align: baseline;
-    white-space: nowrap;
-    color: #ffffff;
-    font-size: 100%;
-    line-height: 1;
+    .badge {
+        display: inline-block;
+        margin: 0;
+        padding: $spacing-smaller $spacing-small;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+        color: #ffffff;
+        font-size: 100%;
+        line-height: 1;
 
-    .form-control-static {
-        font-weight: $font-weight-normal;
-        all: unset;
+        .form-control-static {
+            font-weight: $font-weight-normal;
+            all: unset;
+        }
     }
-}
 
-/* ==========================================================================
-   Badge-web
+    /* ==========================================================================
+       Badge-web
 
-   Widget styles
-========================================================================== */
+       Widget styles
+    ========================================================================== */
 
-.widget-badge {
-    color: $label-primary-color;
-    background-color: $label-primary-bg;
-}
+    .widget-badge {
+        color: $label-primary-color;
+        background-color: $label-primary-bg;
+    }
 
-.widget-badge-clickable {
-    cursor: pointer;
-}
+    .widget-badge-clickable {
+        cursor: pointer;
+    }
 
-.widget-badge.badge:empty {
-    display: initial;
-    /* Fix padding to stay round */
-    padding: $spacing-smaller ($spacing-small + 2px);
-}
+    .widget-badge.badge:empty {
+        display: initial;
+        /* Fix padding to stay round */
+        padding: $spacing-smaller ($spacing-small + 2px);
+    }
 
-.widget-badge.label:empty {
-    display: initial;
-    /* Fix padding to stay square */
-    padding: $spacing-smaller ($spacing-small + 2px);
+    .widget-badge.label:empty {
+        display: initial;
+        /* Fix padding to stay square */
+        padding: $spacing-smaller ($spacing-small + 2px);
+    }
 }
