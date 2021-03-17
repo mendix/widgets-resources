@@ -19,7 +19,7 @@ export interface MyWidgetContainerProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: ComponentType };
+    content: { widgetCount: number; renderer: ComponentType<{repeat?: boolean, caption?: string}> };
     description: string;
     action: {} | null;
 }
