@@ -6,12 +6,13 @@
 
 import { NativeModules, Platform } from "react-native";
 import PushNotification from "react-native-push-notification";
+import Big from "big.js";
 
 /**
  * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.
  * @returns {Promise.<void>}
  */
-export async function SetBadgeNumber(badgeNumber?: BigJs.Big): Promise<void> {
+export async function SetBadgeNumber(badgeNumber?: Big): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://github.com/zo0r/react-native-push-notification
 

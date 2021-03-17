@@ -9,6 +9,7 @@ import Geolocation, {
     GeolocationOptions,
     GeolocationResponse
 } from "@react-native-community/geolocation";
+import Big from "big.js";
 
 /**
  * This action retrieves the current geographical position of a user/device.
@@ -25,8 +26,8 @@ import Geolocation, {
  * @returns {Promise.<MxObject>}
  */
 export async function GetCurrentLocation(
-    timeout?: BigJs.Big,
-    maximumAge?: BigJs.Big,
+    timeout?: Big,
+    maximumAge?: Big,
     highAccuracy?: boolean
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE

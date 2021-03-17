@@ -7,6 +7,7 @@
 import { Alert, Linking, NativeModules } from "react-native";
 import ImagePicker, { ImagePickerOptions, ImagePickerResponse } from "react-native-image-picker";
 import { getLocales } from "react-native-localize";
+import Big from "big.js";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
@@ -28,8 +29,8 @@ export async function TakePicture(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
-    maximumWidth?: BigJs.Big,
-    maximumHeight?: BigJs.Big
+    maximumWidth?: Big,
+    maximumHeight?: Big
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md

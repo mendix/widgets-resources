@@ -5,7 +5,7 @@ import { IntroScreenProps } from "../../typings/IntroScreenProps";
 import { IntroScreenStyle } from "../ui/Styles";
 import { View } from "react-native";
 import { EditableValueBuilder } from "@mendix/piw-utils-internal";
-import { Big } from "big.js";
+import Big from "big.js";
 
 jest.mock("react-native-device-info", () => ({
     hasNotch: jest.fn().mockReturnValue(true),
@@ -61,7 +61,7 @@ describe("Intro Screen", () => {
         const component = render(
             <IntroScreen
                 {...defaultProps}
-                activeSlideAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(1)).build()}
+                activeSlideAttribute={new EditableValueBuilder<Big>().withValue(new Big(1)).build()}
             />
         );
         expect(component.toJSON()).toMatchSnapshot();
