@@ -5,131 +5,133 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
-/* ==========================================================================
-   Typography
+@mixin typography-helpers() {
+    /* ==========================================================================
+       Typography
 
-//== Design Properties
-//## Helper classes to change the look and feel of the component
-========================================================================== */
-// Text size
-.text-small {
-    font-size: $font-size-small !important;
-}
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+    // Text size
+    .text-small {
+        font-size: $font-size-small !important;
+    }
 
-.text-large {
-    font-size: $font-size-large !important;
-}
+    .text-large {
+        font-size: $font-size-large !important;
+    }
 
-// Text Weights
-.text-light,
-.text-light > *,
-.text-light label {
-    font-weight: $font-weight-light !important;
-}
+    // Text Weights
+    .text-light,
+    .text-light > *,
+    .text-light label {
+        font-weight: $font-weight-light !important;
+    }
 
-.text-normal,
-.text-normal > *,
-.text-normal label {
-    font-weight: $font-weight-normal !important;
-}
+    .text-normal,
+    .text-normal > *,
+    .text-normal label {
+        font-weight: $font-weight-normal !important;
+    }
 
-.text-semibold,
-.text-semibold > *,
-.text-semibold label {
-    font-weight: $font-weight-semibold !important;
-}
+    .text-semibold,
+    .text-semibold > *,
+    .text-semibold label {
+        font-weight: $font-weight-semibold !important;
+    }
 
-.text-bold,
-.text-bold > *,
-.text-bold label {
-    font-weight: $font-weight-bold !important;
-}
+    .text-bold,
+    .text-bold > *,
+    .text-bold label {
+        font-weight: $font-weight-bold !important;
+    }
 
-// Color variations
-.text-secondary,
-.text-secondary:hover,
-.text-default,
-.text-default:hover {
-    color: $font-color-default !important;
-}
+    // Color variations
+    .text-secondary,
+    .text-secondary:hover,
+    .text-default,
+    .text-default:hover {
+        color: $font-color-default !important;
+    }
 
-.text-primary,
-.text-primary:hover {
-    color: $brand-primary !important;
-}
+    .text-primary,
+    .text-primary:hover {
+        color: $brand-primary !important;
+    }
 
-.text-info,
-.text-info:hover {
-    color: $brand-info !important;
-}
+    .text-info,
+    .text-info:hover {
+        color: $brand-info !important;
+    }
 
-.text-success,
-.text-success:hover {
-    color: $brand-success !important;
-}
+    .text-success,
+    .text-success:hover {
+        color: $brand-success !important;
+    }
 
-.text-warning,
-.text-warning:hover {
-    color: $brand-warning !important;
-}
+    .text-warning,
+    .text-warning:hover {
+        color: $brand-warning !important;
+    }
 
-.text-danger,
-.text-danger:hover {
-    color: $brand-danger !important;
-}
+    .text-danger,
+    .text-danger:hover {
+        color: $brand-danger !important;
+    }
 
-.text-header {
-    color: $font-color-header !important;
-}
+    .text-header {
+        color: $font-color-header !important;
+    }
 
-.text-detail {
-    color: $font-color-detail !important;
-}
+    .text-detail {
+        color: $font-color-detail !important;
+    }
 
-.text-white {
-    color: #ffffff;
-}
+    .text-white {
+        color: #ffffff;
+    }
 
-// Alignment options
-.text-left {
-    text-align: left !important;
-}
-.text-center {
-    text-align: center !important;
-}
-.text-right {
-    text-align: right !important;
-}
-.text-justify {
-    text-align: justify !important;
-}
+    // Alignment options
+    .text-left {
+        text-align: left !important;
+    }
+    .text-center {
+        text-align: center !important;
+    }
+    .text-right {
+        text-align: right !important;
+    }
+    .text-justify {
+        text-align: justify !important;
+    }
 
-// Transform options
-.text-lowercase {
-    text-transform: lowercase !important;
-}
-.text-uppercase {
-    text-transform: uppercase !important;
-}
-.text-capitalize {
-    text-transform: capitalize !important;
-}
+    // Transform options
+    .text-lowercase {
+        text-transform: lowercase !important;
+    }
+    .text-uppercase {
+        text-transform: uppercase !important;
+    }
+    .text-capitalize {
+        text-transform: capitalize !important;
+    }
 
-// Wrap options
-.text-break {
-    word-break: break-all !important;
-    word-break: break-word !important;
-    -webkit-hyphens: auto !important;
-    hyphens: auto !important;
-}
+    // Wrap options
+    .text-break {
+        word-break: break-all !important;
+        word-break: break-word !important;
+        -webkit-hyphens: auto !important;
+        hyphens: auto !important;
+    }
 
-.text-nowrap {
-    white-space: nowrap !important;
-}
+    .text-nowrap {
+        white-space: nowrap !important;
+    }
 
-.text-nowrap {
-    overflow: hidden !important;
-    max-width: 100% !important;
-    white-space: nowrap !important;
-    text-overflow: ellipsis !important;
+    .text-nowrap {
+        overflow: hidden !important;
+        max-width: 100% !important;
+        white-space: nowrap !important;
+        text-overflow: ellipsis !important;
+    }
 }
