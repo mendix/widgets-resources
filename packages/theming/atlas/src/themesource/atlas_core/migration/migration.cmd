@@ -3,7 +3,7 @@ IF EXIST ..\..\..\theme_atlas2\ (
     ECHO The folder 'theme_atlas2' already exists in the project folder, please rename and rerun this tool.
 ) ELSE IF EXIST theme.zip (
     MOVE ..\..\..\theme ..\..\..\theme_atlas2
-    mkdir ..\..\..\theme
+    MKDIR ..\..\..\theme
     tar -xf theme.zip -C ..\..\..\theme
     CLS
     ECHO Migration tool ran successfully, please continue with the other steps of the migration documentation.
