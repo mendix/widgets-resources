@@ -14,21 +14,24 @@ jobs:
         steps:
             - name: "Checking changed files"
               id: files
-              uses: jitterbit/get-changed-files@v1
+              uses: softprops/diffset@v1
+              with:
+                global_files: |
+                  !packages/**/*
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@v2
               with:
                   submodules: false
             - name: "Fetching master to compare"
-              if: github.event_name == 'pull_request'
+              if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
               run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
-                  }}:refs/remotes/origin/${{ github.base_ref }}
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
               id: variables
-              run: |
-                  export CHANGED_GLOBAL_FILES=$(echo "${{ steps.files.outputs.added_modified }}" | grep -v "^packages")
-                  echo "::set-output name=arg::$(if [ "${CHANGED_GLOBAL_FILES}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+              run:
+                  echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
