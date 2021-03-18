@@ -9,8 +9,6 @@ import { translateZoom } from "./utils/zoom";
 
 import "leaflet/dist/leaflet.css";
 import "./ui/Maps.css";
-import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
-import "leaflet-defaulticon-compatibility";
 
 export default function Maps(props: MapsContainerProps): ReactNode {
     const [locations] = useLocationResolver(
