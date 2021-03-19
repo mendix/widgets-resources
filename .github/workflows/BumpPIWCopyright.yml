@@ -1,0 +1,42 @@
+name: Bump widgets' copyright
+
+on:
+    schedule:
+        - cron: "0 0 31 12 *"
+jobs:
+    bump_copyright:
+        name: "Bump widgets' copyright"
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
+              with:
+                  ref: "master"
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - name: "Installing dependencies"
+              run: npm install
+            - name: "Bumping widgets' copyright"
+              run: npm run bump:copyright
+            - name: "Create pull request"
+              id: cpr
+              uses: peter-evans/create-pull-request@v3
+              with:
+                  commit-message: Bump widgets copyright
+                  committer: GitHub <noreply@github.com>
+                  author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+                  branch: automated/bump-piws-copyright-year
+                  delete-branch: true
+                  title: "[Automated] Bump pluggable widgets' copyright year"
+                  body: |
+                      Bump pluggable widgets' copyright year
+                      - Updated to new year's year value
+                      - Auto-generated
+                  labels: |
+                      automated
+                  draft: false

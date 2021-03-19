@@ -3,7 +3,7 @@
   "widgetName": "Timeline",
   "version": "2.0.0",
   "description": "Shows timeline",
-  "copyright": "Mendix BV",
+  "copyright": "Copyright © 2005-2020 Mendix Technology B.V. All rights reserved.",
   "author": "Mendix",
   "config": {
     "mendixHost": "http://localhost:8080",
@@ -20,7 +20,9 @@
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "validate:copyright": "pluggable-widgets-tools validate:copyright",
+    "bump:copyright": "pluggable-widgets-tools bump:copyright"
   },
   "license": "Apache-2.0",
   "devDependencies": {

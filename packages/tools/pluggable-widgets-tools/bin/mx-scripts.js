@@ -81,6 +81,10 @@ function getRealCommand(cmd, toolsRoot) {
         case "start:js":
         case "start:ts":
             return "echo This command has no effect, use pluggable-widgets-tools start:web instead!";
+        case "validate:copyright":
+            return `node ${join(toolsRoot, "scripts/validate-copyright.js")}`;
+        case "bump:copyright":
+            return `node ${join(toolsRoot, "scripts/bump-copyright-year.js")}`;
         default:
             console.error(`Unknown command passed to MX Widgets Tools script: '${cmd}'`);
             process.exit(1);
