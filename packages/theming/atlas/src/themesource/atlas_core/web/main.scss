@@ -11,7 +11,7 @@
 
 // Font Family Import
 @if $font-family-import != false {
-  @import url($font-family-import);
+    @import url($font-family-import);
 }
 
 // Base

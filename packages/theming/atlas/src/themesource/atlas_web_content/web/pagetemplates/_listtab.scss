@@ -1,22 +1,24 @@
-.listtab-tabs.mx-tabcontainer{
+.listtab-tabs.mx-tabcontainer {
     background: $bg-color-secondary;
-    .mx-tabcontainer-tabs{
+    .mx-tabcontainer-tabs {
         background: $brand-primary;
         margin-bottom: 0;
         li {
-            > a{
+            > a {
                 color: #fff;
                 opacity: 0.6;
-                &:hover, &:focus{
+                &:hover,
+                &:focus {
                     color: #fff;
                 }
             }
-            &.active{
-                > a{
+            &.active {
+                > a {
                     opacity: 1;
                     color: #fff;
                     border-color: #fff;
-                    &:hover, &:focus{
+                    &:hover,
+                    &:focus {
                         color: #fff;
                         border-color: #fff;
                     }
