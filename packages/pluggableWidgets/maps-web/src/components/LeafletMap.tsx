@@ -85,7 +85,7 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                 >
                     <TileLayer
                         {...baseMapLayer(mapProvider, mapsToken)}
-                        id={mapProvider === "mapBox" ? "mapbox.streets" : undefined}
+                        id={mapProvider === "mapBox" ? "mapbox/streets-v11" : undefined}
                     />
                     {locations
                         .concat(currentLocation ? [currentLocation] : [])

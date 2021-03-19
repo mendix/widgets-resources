@@ -2,7 +2,7 @@ import { MapProviderEnum } from "../../typings/MapsProps";
 
 const customUrls = {
     openStreetMap: "https://{s}.tile.osm.org/{z}/{x}/{y}.png",
-    mapbox: "https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png",
+    mapbox: "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}",
     hereMaps: "https://2.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8"
 };
 
