@@ -13,7 +13,7 @@ export interface DatasourcePropertiesType {
 }
 
 export interface DatasourcePropertiesPreviewType {
-    contentAttribute: { widgetCount: number; renderer: ComponentType };
+    contentAttribute: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     markerAttribute: string;
     actionAttribute: {} | null;
 }
@@ -39,7 +39,7 @@ export interface MyWidgetPreviewProps {
     class: string;
     style: string;
     contentSource: {} | null;
-    content: { widgetCount: number; renderer: ComponentType };
+    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     markerDataAttribute: string;
     actionAttribute: {} | null;
     textTemplateAttribute: string;
