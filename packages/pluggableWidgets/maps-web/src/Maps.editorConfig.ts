@@ -75,7 +75,9 @@ export function getProperties(
             "mapTypeControl",
             "fullScreenControl",
             "rotateControl",
-            "mapStyles"
+            "mapStyles",
+            "geodecodeApiKey",
+            "geodecodeApiKeyExp"
         ]);
         if (values.mapProvider === "openStreet") {
             hidePropertiesIn(defaultProperties, values, ["apiKeyExp", "apiKey"]);
