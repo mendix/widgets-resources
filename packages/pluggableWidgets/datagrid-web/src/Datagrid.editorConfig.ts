@@ -139,6 +139,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                     type: "Container",
                     borders: true,
                     grow: column.width === "manual" && column.size ? column.size : 1,
+                    backgroundColor: values.columnsHidable && column.hidable === "hidden" ? "#F5F5F5" : undefined,
                     children: [
                         column.showContentAs === "customContent"
                             ? {
@@ -201,7 +202,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                             ? column.size
                             : 1
                         : undefined,
-                backgroundColor: "#F5F5F5",
+                backgroundColor: values.columnsHidable && column.hidable === "hidden" ? "#DCDCDC" : "#F5F5F5",
                 children: [
                     {
                         type: "Container",
@@ -212,7 +213,12 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                 bold: true,
                                 fontSize: 10,
                                 content: header.length > 0 ? header : "Header",
-                                fontColor: header.length === 0 ? "#F5F5F5" : undefined
+                                fontColor:
+                                    header.length === 0
+                                        ? values.columnsHidable && column.hidable === "hidden"
+                                            ? "#DCDCDC"
+                                            : "#F5F5F5"
+                                        : undefined
                             }
                         ]
                     },
