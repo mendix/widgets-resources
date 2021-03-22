@@ -271,16 +271,23 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
 
 export function check(values: DatagridPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    values.columns.forEach((column: ColumnsPreviewType) => {
+    values.columns.forEach((column: ColumnsPreviewType, index) => {
         if (column.showContentAs === "attribute" && !column.attribute) {
             errors.push({
-                property: "column.attribute",
+                property: `columns/${index + 1}/attribute`,
                 message: `An attribute is required when 'Show' is set to 'Attribute'. Select the 'Attribute' property for column ${column.header}`
             });
         } else if (!column.attribute && (column.sortable || values.columnsFilterable)) {
             errors.push({
-                property: "column.attribute",
+                property: `columns/${index + 1}/attribute`,
                 message: `An attribute is required when filtering or sorting is enabled. Select the 'Attribute' property for column ${column.header}`
+            });
+        }
+        if (values.columnsHidable && column.hidable !== "no" && column.header.trim().length === 0) {
+            errors.push({
+                property: `columns/${index + 1}/hidable`,
+                message:
+                    "A caption is required if 'Can hide' is Yes or Yes, hidden by default. This can be configured under 'Column capabilities' in the column item properties"
             });
         }
     });
