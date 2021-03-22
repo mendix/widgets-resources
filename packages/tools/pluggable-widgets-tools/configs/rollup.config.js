@@ -32,6 +32,7 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
+import image from "@rollup/plugin-image";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
@@ -211,6 +212,7 @@ export default async args => {
                       ...(config.babelConfig || {})
                   })
                 : null,
+            image(),
             production ? terser() : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define

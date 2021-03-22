@@ -147,6 +147,7 @@ function GoogleMapsMarker({
             onClick={
                 marker.title ? () => setSelectedMarker(prev => (prev !== marker ? marker : undefined)) : marker.onClick
             }
+            icon={marker.url}
         >
             {selectedMarker === marker && markerRef.current && (
                 <InfoWindow

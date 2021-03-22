@@ -43,7 +43,6 @@
     "classnames": "^2.2.6",
     "deep-equal": "^2.0.2",
     "leaflet": "^1.6.0",
-    "react-leaflet": "^2.6.3",
-    "leaflet-defaulticon-compatibility": "^0.1.1"
+    "react-leaflet": "^2.6.3"
   }
 }
