@@ -23,13 +23,15 @@ export interface HeaderProps<D extends object> {
     filterable: boolean;
     draggable: boolean;
     dragOver: string;
+    hidable: boolean;
     isDragging?: boolean;
-    visibleColumns: Array<ColumnInstance<D>>;
+    preview?: boolean;
     setColumnOrder: (updater: Array<IdType<D>>) => void;
     setColumnWidth: (width: number) => void;
     setDragOver: Dispatch<SetStateAction<string>>;
     setIsDragging: Dispatch<SetStateAction<boolean>>;
     setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>;
+    visibleColumns: Array<ColumnInstance<D>>;
 }
 
 export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
@@ -59,7 +61,9 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
 
     return (
         <div
-            className="th"
+            className={classNames("th", {
+                "hidden-column-preview": props.preview && props.hidable && props.column.hidden
+            })}
             {...rest}
             style={{
                 ...style,

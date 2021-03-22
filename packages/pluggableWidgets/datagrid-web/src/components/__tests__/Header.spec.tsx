@@ -93,6 +93,17 @@ describe("Header", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly when is hidden and preview", () => {
+        const props = mockHeaderProps();
+        props.column.hidden = true;
+        props.hidable = true;
+        props.preview = true;
+
+        const component = shallow(<Header {...props} />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockHeaderProps(): HeaderProps<object> {
@@ -104,6 +115,7 @@ function mockHeaderProps(): HeaderProps<object> {
         draggable: false,
         dragOver: "",
         filterable: false,
+        hidable: false,
         resizable: false,
         sortable: false,
         setColumnOrder: jest.fn(),
