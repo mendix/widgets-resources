@@ -34,23 +34,27 @@ export const getPreview = (values: DatagridNumberFilterPreviewProps): StructureP
                 columnSize: "grow",
                 backgroundColor: "#FFFFFF",
                 children: [
-                    {
-                        type: "Container",
-                        padding: 4,
-                        grow: 0,
-                        children: [
-                            {
-                                type: "Image",
-                                document: getSvgContent(values.defaultFilter)
-                            } as ImageProps
-                        ]
-                    } as ContainerProps,
-                    {
-                        type: "Container",
-                        borders: true,
-                        borderWidth: 0.5,
-                        grow: 0
-                    } as ContainerProps,
+                    ...(values.adjustable
+                        ? [
+                              {
+                                  type: "Container",
+                                  padding: 2,
+                                  grow: 0,
+                                  children: [
+                                      {
+                                          type: "Image",
+                                          document: getSvgContent(values.defaultFilter)
+                                      } as ImageProps
+                                  ]
+                              } as ContainerProps,
+                              {
+                                  type: "Container",
+                                  borders: true,
+                                  borderWidth: 0.5,
+                                  grow: 0
+                              } as ContainerProps
+                          ]
+                        : []),
                     {
                         type: "Container",
                         padding: 8,
