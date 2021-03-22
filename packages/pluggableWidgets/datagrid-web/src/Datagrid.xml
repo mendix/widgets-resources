@@ -117,7 +117,7 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="columnsFilterable" type="boolean" defaultValue="false">
+                <property key="columnsFilterable" type="boolean" defaultValue="true">
                     <caption>Show column filters</caption>
                     <description/>
                 </property>

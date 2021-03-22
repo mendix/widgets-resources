@@ -257,7 +257,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                           {
                               type: "DropZone",
                               property: values.emptyPlaceholder,
-                              placeholder: "Place widgets here"
+                              placeholder: "Empty list message: Place widgets here"
                           } as DropZoneProps
                       ]
                   } as RowLayoutProps
