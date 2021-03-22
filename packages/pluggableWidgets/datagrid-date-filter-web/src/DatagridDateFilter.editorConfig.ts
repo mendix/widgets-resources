@@ -62,9 +62,9 @@ export const getPreview = (values: DatagridDateFilterPreviewProps): StructurePre
                         children: [
                             {
                                 type: "Text",
-                                fontColor: "#BBBBBB",
+                                fontColor: values.placeholder ? "#BBBBBB" : "#FFF",
                                 italic: true,
-                                content: values.placeholder ?? ""
+                                content: values.placeholder.length > 0 ? values.placeholder : "Sample"
                             } as TextProps
                         ],
                         grow: 1
@@ -77,7 +77,7 @@ export const getPreview = (values: DatagridDateFilterPreviewProps): StructurePre
                     } as ContainerProps,
                     {
                         type: "Container",
-                        padding: 4,
+                        padding: 2,
                         grow: 0,
                         children: [
                             {

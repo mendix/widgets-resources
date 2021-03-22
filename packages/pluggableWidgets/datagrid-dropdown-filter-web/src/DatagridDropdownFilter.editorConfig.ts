@@ -26,16 +26,16 @@ export const getPreview = (values: DatagridDropdownFilterPreviewProps): Structur
                         children: [
                             {
                                 type: "Text",
-                                fontColor: "#BBBBBB",
+                                fontColor: values.emptyOptionCaption ? "#BBBBBB" : "#FFF",
                                 italic: true,
-                                content: values.emptyOptionCaption ?? ""
+                                content: values.emptyOptionCaption.length > 0 ? values.emptyOptionCaption : "Sample"
                             } as TextProps
                         ],
                         grow: 1
                     } as ContainerProps,
                     {
                         type: "Container",
-                        padding: 4,
+                        padding: 2,
                         grow: 0,
                         children: [
                             {
