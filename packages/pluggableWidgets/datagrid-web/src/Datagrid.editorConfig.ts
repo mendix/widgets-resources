@@ -80,12 +80,12 @@ export function getProperties(
             prop.objectHeaders = ["Caption", "Content", "Width", "Alignment"];
             prop.objects?.forEach((object, index) => {
                 const column = values.columns[index];
-                const header = column.header.trim().length > 0 ? column.header : "[Empty caption]";
+                const header = column.header ? column.header : "[Empty caption]";
                 const alignment = column.alignment;
                 object.captions = [
                     header,
                     column.showContentAs === "attribute"
-                        ? column.attribute.length > 0
+                        ? column.attribute
                             ? column.attribute
                             : "[No attribute selected]"
                         : column.showContentAs === "dynamicText"
@@ -156,9 +156,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                               column.showContentAs === "dynamicText"
                                                   ? column.dynamicText ?? "Dynamic text"
                                                   : `[${
-                                                        column.attribute.length > 0
-                                                            ? column.attribute
-                                                            : "No attribute selected"
+                                                        column.attribute ? column.attribute : "No attribute selected"
                                                     }]`,
                                           fontSize: 10
                                       }
@@ -192,7 +190,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         type: "RowLayout",
         columnSize: "fixed",
         children: columnProps.map(column => {
-            const header = column.header.trim();
+            const isColumnHidden = values.columnsHidable && column.hidable === "hidden";
             const content: ContainerProps = {
                 type: "Container",
                 borders: true,
@@ -202,7 +200,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                             ? column.size
                             : 1
                         : undefined,
-                backgroundColor: values.columnsHidable && column.hidable === "hidden" ? "#DCDCDC" : "#F5F5F5",
+                backgroundColor: isColumnHidden ? "#DCDCDC" : "#F5F5F5",
                 children: [
                     {
                         type: "Container",
@@ -212,13 +210,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                 type: "Text",
                                 bold: true,
                                 fontSize: 10,
-                                content: header.length > 0 ? header : "Header",
-                                fontColor:
-                                    header.length === 0
-                                        ? values.columnsHidable && column.hidable === "hidden"
-                                            ? "#DCDCDC"
-                                            : "#F5F5F5"
-                                        : undefined
+                                content: column.header ? column.header : "Header",
+                                fontColor: column.header ? undefined : isColumnHidden ? "#DCDCDC" : "#F5F5F5"
                             }
                         ]
                     },
@@ -283,7 +276,7 @@ export function check(values: DatagridPreviewProps): Problem[] {
                 message: `An attribute is required when filtering or sorting is enabled. Select the 'Attribute' property for column ${column.header}`
             });
         }
-        if (values.columnsHidable && column.hidable !== "no" && column.header.trim().length === 0) {
+        if (values.columnsHidable && column.hidable !== "no" && !column.header) {
             errors.push({
                 property: `columns/${index + 1}/hidable`,
                 message:
