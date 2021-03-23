@@ -28,9 +28,9 @@ export const backgroundPrimary: Helperclass = {
         backgroundColor: background.primary
     }
 };
-export const backgroundGray: Helperclass = {
+export const backgroundSecondary: Helperclass = {
     container: {
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     }
 };
 export const backgroundBrandPrimary: Helperclass = {
