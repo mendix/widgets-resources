@@ -20,11 +20,11 @@ export interface ColumnsType {
     content?: ListWidgetValue;
     dynamicText?: ListExpressionValue<string>;
     header?: DynamicValue<string>;
+    filter?: ReactNode;
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
-    filter?: ReactNode;
     width: WidthEnum;
     size: number;
     alignment: AlignmentEnum;
@@ -40,14 +40,14 @@ export type ShowEmptyPlaceholderEnum = "none" | "custom";
 export interface ColumnsPreviewType {
     showContentAs: ShowContentAsEnum;
     attribute: string;
-    content: { widgetCount: number; renderer: ComponentType };
+    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     dynamicText: string;
     header: string;
+    filter: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
     hidable: HidableEnum;
-    filter: { widgetCount: number; renderer: ComponentType };
     width: WidthEnum;
     size: number | null;
     alignment: AlignmentEnum;
@@ -59,7 +59,6 @@ export interface DatagridContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    advanced: boolean;
     datasource: ListValue;
     columns: ColumnsType[];
     columnsFilterable: boolean;
@@ -76,12 +75,12 @@ export interface DatagridContainerProps {
     columnsHidable: boolean;
     configurationAttribute?: EditableValue<string>;
     onConfigurationChange?: ActionValue;
+    advanced: boolean;
 }
 
 export interface DatagridPreviewProps {
     class: string;
     style: string;
-    advanced: boolean;
     datasource: {} | null;
     columns: ColumnsPreviewType[];
     columnsFilterable: boolean;
@@ -89,7 +88,7 @@ export interface DatagridPreviewProps {
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
-    emptyPlaceholder: { widgetCount: number; renderer: ComponentType };
+    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     rowClass: string;
     onClick: {} | null;
     columnsSortable: boolean;
@@ -98,4 +97,5 @@ export interface DatagridPreviewProps {
     columnsHidable: boolean;
     configurationAttribute: string;
     onConfigurationChange: {} | null;
+    advanced: boolean;
 }
