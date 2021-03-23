@@ -22,7 +22,7 @@ export interface LeafletProps extends SharedProps {
  * If not, we reuse a leaflet icon that's the same as the default implementation should be.
  */
 const defaultMarkerIcon = new LeafletIcon({
-    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon.png"),
     iconUrl: require("leaflet/dist/images/marker-icon.png"),
     shadowUrl: require("leaflet/dist/images/marker-shadow.png")
 });
@@ -83,10 +83,7 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                     zoom={autoZoom ? translateZoom("city") : zoom}
                     zoomControl={zoomControl}
                 >
-                    <TileLayer
-                        {...baseMapLayer(mapProvider, mapsToken)}
-                        id={mapProvider === "mapBox" ? "mapbox/streets-v11" : undefined}
-                    />
+                    <TileLayer {...baseMapLayer(mapProvider, mapsToken)} />
                     {locations
                         .concat(currentLocation ? [currentLocation] : [])
                         .filter(m => !!m)
