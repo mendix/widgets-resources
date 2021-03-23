@@ -105,31 +105,31 @@ export function check(values: MapsPreviewProps): Problem[] {
         });
     }
 
-    values.markers.forEach(marker => {
+    values.markers.forEach((marker, index) => {
         if (marker.locationType === "address") {
             if (!marker.address) {
                 errors.push({
-                    property: "markers.address",
+                    property: `markers/${index + 1}/address`,
                     message: "A static marker requires an address"
                 });
             }
         } else {
             if (!marker.latitude) {
                 errors.push({
-                    property: "markers.latitude",
+                    property: `markers/${index + 1}/latitude`,
                     message: "A static marker requires latitude"
                 });
             }
             if (!marker.longitude) {
                 errors.push({
-                    property: "markers.longitude",
+                    property: `markers/${index + 1}/longitude`,
                     message: "A static marker requires longitude"
                 });
             }
         }
         if (values.advanced && marker.markerStyle === "image" && !marker.customMarker) {
             errors.push({
-                property: "customMarker",
+                property: `customMarker/${index + 1}`,
                 message: `Custom marker image is required when shape is 'image' for address ${marker.address}`
             });
         }
@@ -138,34 +138,34 @@ export function check(values: MapsPreviewProps): Problem[] {
     values.dynamicMarkers.forEach((marker, index) => {
         if (!marker.markersDS) {
             errors.push({
-                property: "dynamicMarkers.markersDS",
+                property: `dynamicMarkers/${index + 1}/markersDS`,
                 message: "A data source should be selected in order to retrieve a list of markers"
             });
         }
         if (marker.locationType === "address") {
             if (!marker.address) {
                 errors.push({
-                    property: "dynamicMarkers.address",
+                    property: `dynamicMarkers/${index + 1}/address`,
                     message: "A dynamic marker requires an address"
                 });
             }
         } else {
             if (!marker.latitude) {
                 errors.push({
-                    property: "dynamicMarkers.latitude",
+                    property: `dynamicMarkers/${index + 1}/latitude`,
                     message: "A dynamic marker requires latitude"
                 });
             }
             if (!marker.longitude) {
                 errors.push({
-                    property: "dynamicMarkers.longitude",
+                    property: `dynamicMarkers/${index + 1}/longitude`,
                     message: "A dynamic marker requires longitude"
                 });
             }
         }
         if (values.advanced && marker.markerStyleDynamic === "image" && !marker.customMarkerDynamic) {
             errors.push({
-                property: "dynamicMarkers.customMarkerDynamic",
+                property: `dynamicMarkers/${index + 1}/customMarkerDynamic`,
                 message: `Custom marker image is required when shape is 'image' for list at position ${index + 1}`
             });
         }
