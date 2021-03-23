@@ -47,7 +47,7 @@ export const introScreenLightMode: IntroScreenType = {
     },
     activeDotStyle: {
         // All ViewStyle properties are allowed
-        backgroundColor: backgroundDefaults.grayDark
+        backgroundColor: backgroundDefaults.secondaryDark
     },
 
     // Button styles

@@ -57,12 +57,12 @@ export const darkMode = Appearance.getColorScheme() === "dark";
 export const backgroundDefaults: VariablesBackgroundDefaults = {
     primaryLight: "#FFF",
     primaryDark: "#0A1325",
-    grayLight: "#F8F8F8",
-    grayDark: "#161F30"
+    secondaryLight: "#F8F8F8",
+    secondaryDark: "#161F30"
 };
 export const background: VariablesBackground = {
     primary: darkMode ? backgroundDefaults.primaryDark : backgroundDefaults.primaryLight,
-    gray: darkMode ? backgroundDefaults.grayDark : backgroundDefaults.grayLight,
+    secondary: darkMode ? backgroundDefaults.secondaryDark : backgroundDefaults.secondaryLight,
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -244,7 +244,7 @@ export const input: VariablesInput = {
     inputDisabled: {
         color: font.colorDisabled,
         borderColor: border.color,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     inputError: {
         color: brand.danger,
@@ -320,7 +320,7 @@ export const navigation: VariablesNavigation = {
         color: font.colorTitle,
         activityIndicatorColor: font.colorTitle,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        containerBackgroundColor: background.gray,
+        containerBackgroundColor: background.secondary,
         fontSize: font.size,
         borderRadius: border.radiusSmall,
         elevation: 1.5, // Only for Android
@@ -439,7 +439,7 @@ export const floatingActionButton: VariablesFloatingActionButton = {
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
@@ -576,7 +576,7 @@ export const slider: VariablesSlider = {
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     markerActive: {
         size: 32
@@ -584,6 +584,6 @@ export const slider: VariablesSlider = {
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     }
 };
