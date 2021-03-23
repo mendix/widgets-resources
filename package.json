@@ -7,8 +7,8 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap --hoist --strict",
-    "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss}\"",
-    "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss}\"",
+    "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
+    "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "clean-all-screenshots-mac": "find . -name 'screenshot-baseline' -type d -prune -exec rm -rf '{}' +",
     "lint": "npm run lint:src && lerna run lint --stream",
     "lint:src": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages/*/*/src",
@@ -75,7 +75,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss}\"",
+      "pre-commit": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
