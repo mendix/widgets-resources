@@ -24,7 +24,8 @@ export interface LeafletProps extends SharedProps {
 const defaultMarkerIcon = new LeafletIcon({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon.png"),
     iconUrl: require("leaflet/dist/images/marker-icon.png"),
-    shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+    iconAnchor: [12, 41]
 });
 
 export function LeafletMap(props: LeafletProps): ReactElement {
