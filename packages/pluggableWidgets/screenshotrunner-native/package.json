@@ -1,0 +1,27 @@
+{
+  "name": "screenshotrunnner-native",
+  "widgetName": "ScreenshotRunner",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {},
+  "packagePath": "com.mendix.widget.native",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:native",
+    "build": "pluggable-widgets-tools build:native",
+    "release": "pluggable-widgets-tools release:native",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "version": "npm run release",
+    "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
+  },
+  "dependencies": {
+    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "@widgets-resources/piw-utils": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+  }
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.screenshottaker.ScreenshotTaker" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Screenshot Taker</name>
+    <description>My widget description</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Datasource">
+                <property key="content" type="widgets" required="true">
+                    <caption>Content</caption>
+                    <description></description>
+                </property>
+                <property key="pageName" type="attribute" required="true">
+                    <caption>Name</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="base64" type="attribute" required="true">
+                    <caption>Base 64</caption>
+                    <description></description>
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                    </attributeTypes>
+                </property>
+                <property key="beforeScreenshot" type="action" required="false">
+                    <caption>Before screenshot</caption>
+                    <description></description>
+                </property>
+                <property key="onScreenshot" type="action" required="false">
+                    <caption>On screenshot</caption>
+                    <description></description>
+                </property>
+                <property key="onError" type="action" required="false">
+                    <caption>On error</caption>
+                    <description></description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
