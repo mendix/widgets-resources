@@ -8,7 +8,7 @@ describe("Progress Circle", () => {
         const progressCircle = new ProgressCircle("progressCircleNegative");
         progressCircle.element.waitForDisplayed();
 
-        expect(progressCircle.valueElement.getText()).toBe("-60%");
+        expect(progressCircle.valueElement.getText()).toBe("20%");
     });
 
     it("updates the progress percentage when the value is changed", () => {
