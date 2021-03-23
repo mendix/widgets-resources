@@ -72,10 +72,10 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
                 message: "For the popup menu to be visible, you need to add at least one item to it."
             });
         }
-        values.basicItems.forEach(item => {
+        values.basicItems.forEach((item, index) => {
             if (item.itemType === "item" && !item.caption) {
                 errors.push({
-                    property: "basicItems.caption",
+                    property: `basicItems/${index + 1}/caption`,
                     message: "The 'Caption' property is required."
                 });
             }
@@ -87,10 +87,10 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
                 message: "For the popup menu to be visible, you need to add at least one item to it."
             });
         }
-        values.customItems.forEach(item => {
+        values.customItems.forEach((item, index) => {
             if (!item.content) {
                 errors.push({
-                    property: "customItems.content",
+                    property: `customItems/${index + 1}/content`,
                     message: "The content of a menu item cannot be empty."
                 });
             }
