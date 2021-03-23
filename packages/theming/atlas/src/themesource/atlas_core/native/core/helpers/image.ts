@@ -1,3 +1,4 @@
+import { ImageType } from "../../types/widgets";
 import { border, brand, contrast, image } from "../../variables";
 /*
 
@@ -18,7 +19,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 // ## Helper classes to change the look and feel of the widget
 // -------------------------------------------------------------------------------------------------------------------//
 // Image Overlay
-export const imageOverlay = {
+export const imageOverlay: ImageType = {
     container: {
         zIndex: 10,
         width: "100%",
@@ -29,7 +30,7 @@ export const imageOverlay = {
 };
 //
 // Image Shapes
-export const imageSquare = {
+export const imageSquare: ImageType = {
     image: {
         width: "100%",
         height: "auto",
@@ -37,7 +38,7 @@ export const imageSquare = {
         borderRadius: border.radiusSmall
     }
 };
-export const imageCircle = {
+export const imageCircle: ImageType = {
     image: {
         width: "100%",
         height: "auto",
@@ -46,7 +47,7 @@ export const imageCircle = {
     }
 };
 // Image Sizes
-export const imageIcon = {
+export const imageIcon: ImageType = {
     image: {
         maxWidth: image.icon,
         maxHeight: image.icon
@@ -56,7 +57,7 @@ export const imageIcon = {
         maxHeight: image.icon
     }
 };
-export const imageSmall = {
+export const imageSmall: ImageType = {
     image: {
         maxWidth: image.image.small,
         maxHeight: image.image.small
@@ -66,7 +67,7 @@ export const imageSmall = {
         maxHeight: image.image.small
     }
 };
-export const imageMedium = {
+export const imageMedium: ImageType = {
     image: {
         maxWidth: image.image.medium,
         maxHeight: image.image.medium
@@ -76,7 +77,7 @@ export const imageMedium = {
         maxHeight: image.image.medium
     }
 };
-export const imageLarge = {
+export const imageLarge: ImageType = {
     image: {
         maxWidth: image.image.large,
         maxHeight: image.image.large
@@ -86,7 +87,7 @@ export const imageLarge = {
         maxHeight: image.image.large
     }
 };
-export const imageLarger = {
+export const imageLarger: ImageType = {
     image: {
         maxWidth: image.image.larger,
         maxHeight: image.image.larger
@@ -96,7 +97,7 @@ export const imageLarger = {
         maxHeight: image.image.larger
     }
 };
-export const imageFullSize = {
+export const imageFullSize: ImageType = {
     image: {
         maxWidth: "100%",
         maxHeight: "auto"
@@ -104,39 +105,61 @@ export const imageFullSize = {
 };
 //
 // Image / SVG Styles
-export const imageIconPrimary = {
+export const imageIconPrimary: ImageType = {
     image: {
         fill: brand.primary,
         color: brand.primary
     }
 };
-export const imageIconSecondary = {
+export const imageIconSecondary: ImageType = {
     image: {
         fill: contrast.low,
         color: contrast.low
     }
 };
-export const imageIconSuccess = {
+export const imageIconSuccess: ImageType = {
     image: {
         fill: brand.success,
         color: brand.success
     }
 };
-export const imageIconWarning = {
+export const imageIconWarning: ImageType = {
     image: {
         fill: brand.warning,
         color: brand.warning
     }
 };
-export const imageIconDanger = {
+export const imageIconDanger: ImageType = {
     image: {
         fill: brand.danger,
         color: brand.danger
     }
 };
-export const imageIconInfo = {
+export const imageIconInfo: ImageType = {
     image: {
         fill: brand.info,
         color: brand.info
     }
 };
+
+// Image resize modes
+export const imageResizeModeContain: ImageType = {
+    image: {
+        resizeMode: "contain"
+    }
+}
+export const imageResizeModeStretch: ImageType = {
+    image: {
+        resizeMode: "stretch"
+    }
+}
+export const imageResizeModeRepeat: ImageType = {
+    image: {
+        resizeMode: "repeat"
+    }
+}
+export const imageResizeModeCenter: ImageType = {
+    image: {
+        resizeMode: "center"
+    }
+}
