@@ -34,6 +34,24 @@ body {
     width: 400px;
     margin: 0 auto;
 }
+
+.loginpage-fullscreenDiv {
+    background-color: #e8e8e8;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.loginpage-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 // Form
 .loginpage-form {
     .alert {
@@ -88,7 +106,8 @@ body {
         }
     }
 }
-// Divider - only on login-with-sso.html
+
+// Divider - only on login-with-mendixsso-button.html
 .loginpage-alternativelabel {
     display: flex;
     align-items: center;
