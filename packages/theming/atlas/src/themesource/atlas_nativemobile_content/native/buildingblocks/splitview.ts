@@ -4,7 +4,6 @@
 
 ==========================================================================
 */
-import { listView } from "../../../atlas_core/native/variables";
 
 export const splitViewLeft = {
     container: {
@@ -22,13 +21,6 @@ export const splitViewSmallLeft = {
     }
 };
 
-export const splitViewSmallLeftWithRightBorder = {
-    container: {
-        ...splitViewSmallLeft.container,
-        borderRightColor: listView.border.color,
-        borderRightWidth: listView.border.width
-    }
-};
 //
 // == Elements
 // -------------------------------------------------------------------------------------------------------------------//
