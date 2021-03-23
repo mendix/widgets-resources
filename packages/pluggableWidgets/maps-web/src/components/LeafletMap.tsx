@@ -25,6 +25,7 @@ const defaultMarkerIcon = new LeafletIcon({
     iconRetinaUrl: require("leaflet/dist/images/marker-icon.png"),
     iconUrl: require("leaflet/dist/images/marker-icon.png"),
     shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+    iconSize: [25, 41],
     iconAnchor: [12, 41]
 });
 
