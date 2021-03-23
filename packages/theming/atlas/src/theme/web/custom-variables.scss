@@ -44,9 +44,9 @@ $topbar-border-color: $border-color-default;
 
 // Topbar mobile
 $m-header-height: 45px;
-$m-header-bg: $topbar-bg;
-$m-header-color: #555;
-$m-header-title-size: 17px;
+$m-header-bg: $brand-primary;
+$m-header-color: #fff;
+$m-header-title-size: 16px;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
 $navbar-brand-name: $font-color-default;
@@ -268,28 +268,28 @@ $header-text-color-detail: rgba(0, 0, 0, 0.2);
 // Color variations
 $color-default-darker: mix($brand-default, black, 60%);
 $color-default-dark: mix($brand-default, black, 70%);
-$color-default-light: mix($brand-default, white, 60%);
-$color-default-lighter: mix($brand-default, white, 20%);
+$color-default-light: mix($brand-default, white, 20%);
+$color-default-lighter: mix($brand-default, white, 10%);
 
 $color-primary-darker: mix($brand-primary, black, 60%);
 $color-primary-dark: mix($brand-primary, black, 70%);
-$color-primary-light: mix($brand-primary, white, 60%);
-$color-primary-lighter: mix($brand-primary, white, 20%);
+$color-primary-light: mix($brand-primary, white, 20%);
+$color-primary-lighter: mix($brand-primary, white, 10%);
 
 $color-success-darker: mix($brand-success, black, 60%);
 $color-success-dark: mix($brand-success, black, 70%);
-$color-success-light: mix($brand-success, white, 60%);
-$color-success-lighter: mix($brand-success, white, 20%);
+$color-success-light: mix($brand-success, white, 20%);
+$color-success-lighter: mix($brand-success, white, 10%);
 
 $color-warning-darker: mix($brand-warning, black, 60%);
 $color-warning-dark: mix($brand-warning, black, 70%);
-$color-warning-light: mix($brand-warning, white, 60%);
-$color-warning-lighter: mix($brand-warning, white, 20%);
+$color-warning-light: mix($brand-warning, white, 20%);
+$color-warning-lighter: mix($brand-warning, white, 10%);
 
 $color-danger-darker: mix($brand-danger, black, 60%);
 $color-danger-dark: mix($brand-danger, black, 70%);
-$color-danger-light: mix($brand-danger, white, 60%);
-$color-danger-lighter: mix($brand-danger, white, 20%);
+$color-danger-light: mix($brand-danger, white, 20%);
+$color-danger-lighter: mix($brand-danger, white, 10%);
 
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
 

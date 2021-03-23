@@ -50,9 +50,9 @@ $topbar-border-color: $border-color-default !default;
 
 // Topbar mobile
 $m-header-height: 45px !default;
-$m-header-bg: $topbar-bg !default;
-$m-header-color: #555 !default;
-$m-header-title-size: 17px !default;
+$m-header-bg: $brand-primary !default;
+$m-header-color: #fff !default;
+$m-header-title-size: 16px !default;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
 $navbar-brand-name: $font-color-default !default;
@@ -273,28 +273,28 @@ $header-text-color-detail: rgba(0, 0, 0, 0.2) !default;
 // Color variations
 $color-default-darker: mix($brand-default, black, 60%) !default;
 $color-default-dark: mix($brand-default, black, 70%) !default;
-$color-default-light: mix($brand-default, white, 40%) !default;
-$color-default-lighter: mix($brand-default, white, 20%) !default;
+$color-default-light: mix($brand-default, white, 20%) !default;
+$color-default-lighter: mix($brand-default, white, 10%) !default;
 
 $color-primary-darker: mix($brand-primary, black, 60%) !default;
 $color-primary-dark: mix($brand-primary, black, 70%) !default;
-$color-primary-light: mix($brand-primary, white, 40%) !default;
-$color-primary-lighter: mix($brand-primary, white, 20%) !default;
+$color-primary-light: mix($brand-primary, white, 20%) !default;
+$color-primary-lighter: mix($brand-primary, white, 10%) !default;
 
 $color-success-darker: mix($brand-success, black, 60%) !default;
 $color-success-dark: mix($brand-success, black, 70%) !default;
-$color-success-light: mix($brand-success, white, 40%) !default;
-$color-success-lighter: mix($brand-success, white, 20%) !default;
+$color-success-light: mix($brand-success, white, 20%) !default;
+$color-success-lighter: mix($brand-success, white, 10%) !default;
 
 $color-warning-darker: mix($brand-warning, black, 60%) !default;
 $color-warning-dark: mix($brand-warning, black, 70%) !default;
-$color-warning-light: mix($brand-warning, white, 40%) !default;
-$color-warning-lighter: mix($brand-warning, white, 20%) !default;
+$color-warning-light: mix($brand-warning, white, 20%) !default;
+$color-warning-lighter: mix($brand-warning, white, 10%) !default;
 
 $color-danger-darker: mix($brand-danger, black, 60%) !default;
 $color-danger-dark: mix($brand-danger, black, 70%) !default;
-$color-danger-light: mix($brand-danger, white, 40%) !default;
-$color-danger-lighter: mix($brand-danger, white, 20%) !default;
+$color-danger-light: mix($brand-danger, white, 20%) !default;
+$color-danger-lighter: mix($brand-danger, white, 10%) !default;
 
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c) !default;
 
