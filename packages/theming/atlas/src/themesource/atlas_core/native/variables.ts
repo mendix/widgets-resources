@@ -57,12 +57,12 @@ brand = merge(brand, custom.brand || ({} as any));
 const backgroundDefaults: VariablesBackgroundDefaults = {
     primaryLight: "#FFF",
     primaryDark: "#0A1325",
-    grayLight: "#F8F8F8",
-    grayDark: "#161F30"
+    secondaryLight: "#F8F8F8",
+    secondaryDark: "#161F30"
 };
 let background: VariablesBackground = {
     primary: custom.darkMode ? backgroundDefaults.primaryDark : backgroundDefaults.primaryLight,
-    gray: custom.darkMode ? backgroundDefaults.grayDark : backgroundDefaults.grayLight,
+    secondary: custom.darkMode ? backgroundDefaults.secondaryDark : backgroundDefaults.secondaryLight,
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -248,7 +248,7 @@ let input: VariablesInput = {
     inputDisabled: {
         color: font.colorDisabled,
         borderColor: border.color,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     inputError: {
         color: brand.danger,
@@ -327,7 +327,7 @@ let navigation: VariablesNavigation = {
         color: font.colorTitle,
         activityIndicatorColor: font.colorTitle,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        containerBackgroundColor: background.gray,
+        containerBackgroundColor: background.secondary,
         fontSize: font.size,
         borderRadius: border.radiusSmall,
         elevation: 1.5, // Only for Android
@@ -452,7 +452,7 @@ let floatingActionButton: VariablesFloatingActionButton = {
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
@@ -595,7 +595,7 @@ let slider: VariablesSlider = {
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     markerActive: {
         size: 32
@@ -603,7 +603,7 @@ let slider: VariablesSlider = {
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     }
 };
 slider = merge(slider, custom.slider || ({} as any));

@@ -22,12 +22,12 @@ export interface VariablesBrand {
 export interface VariablesBackgroundDefaults {
     primaryLight: string;
     primaryDark: string;
-    grayLight: string;
-    grayDark: string;
+    secondaryLight: string;
+    secondaryDark: string;
 }
 export interface VariablesBackground {
     primary: string;
-    gray: string;
+    secondary: string;
     brandPrimary: string;
     brandSuccess: string;
     brandWarning: string;

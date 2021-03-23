@@ -44,9 +44,9 @@ export const CheckBox: CheckBoxType = {
     },
     inputDisabled: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        thumbColorOn: background.gray,
+        thumbColorOn: background.secondary,
         trackColorOn: font.colorDisabled,
-        thumbColorOff: background.gray,
+        thumbColorOff: background.secondary,
         trackColorOff: border.color
     },
     inputError: {
