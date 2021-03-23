@@ -746,12 +746,10 @@
             "options": [
                 {
                     "name": "Header color",
-                    "oldNames": ["Title color"],
                     "class": "text-header"
                 },
                 {
                     "name": "Detail color",
-                    "oldNames": ["Disabled color"],
                     "class": "text-detail"
                 },
                 {
@@ -780,7 +778,7 @@
                     "class": "text-danger"
                 },
                 {
-                    "name": "Text White",
+                    "name": "White",
                     "class": "text-white"
                 }
             ]
