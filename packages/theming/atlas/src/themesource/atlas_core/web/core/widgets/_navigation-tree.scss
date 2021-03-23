@@ -89,7 +89,7 @@
                     border: 0;
 
                     a {
-                        padding: 12px 20px 12px 24px;
+                        padding: $spacing-medium;
                         text-decoration: none;
                         color: $navigation-sub-color;
                         border: 0;
@@ -97,6 +97,9 @@
                         text-shadow: none;
                         font-size: $navigation-sub-font-size;
                         font-weight: $font-weight-normal;
+                        .glyphicon{
+                            margin-right: $spacing-small;
+                        }
 
                         &:hover,
                         &:focus,

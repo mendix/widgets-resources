@@ -16,12 +16,20 @@
     .region-topbar {
         .mx-navbar {
             background-color: $navtopbar-bg;
+            min-height: auto;
 
             ul.nav {
+                
+                > .mx-navbar-item{
+                    margin-left: $spacing-small;
+                }
                 /* Navigation item */
                 & > li.mx-navbar-item > a {
                     color: $navtopbar-color;
                     font-size: $navtopbar-font-size;
+                    line-height: 1.2;
+                    min-height: auto;
+                    border-radius: $border-radius-default;
 
                     /* Dropdown arrow */
                     .caret {
@@ -72,7 +80,25 @@
                         border-bottom-color: $navtopbar-color-hover;
                     }
                 }
-
+                & > .mx-navbar-item.open .dropdown-menu{
+                    border-radius: $border-radius-default;
+                    background-color: $navtopbar-sub-bg;
+                    padding: $spacing-small $spacing-small 0;
+                    margin: 0;
+                    border: 0;
+                    box-shadow: 0px 2px 2px rgba(194, 196, 201, 0.30354);
+                    & > li.mx-navbar-subitem a{
+                        padding: $spacing-small;
+                        color: $navtopbar-color;
+                        border-radius: $border-radius-default;
+                        margin-bottom: $spacing-small;
+                        line-height: 1.2;
+                        &:hover, &:focus{
+                            color: $navtopbar-color;
+                            background-color: $navtopbar-sub-bg-hover;
+                        }
+                    }
+                }
                 & > .mx-navbar-item.open .dropdown-menu > li.mx-navbar-subitem.active a {
                     color: $navtopbar-sub-color-active;
                     background-color: $navtopbar-sub-bg-active;
@@ -205,6 +231,11 @@
                     }
                 }
             }
+        }
+    }
+    .hide-icons.mx-navbar {
+        .glyphicon{
+            display: none;
         }
     }
 }
