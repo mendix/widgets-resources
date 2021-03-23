@@ -87,6 +87,7 @@ export type TextProps = BaseProps & {
 export type DropZoneProps = BaseProps & {
     type: "DropZone";
     property: object;
+    placeholder?: string;
 };
 
 export type SelectableProps = BaseProps & {

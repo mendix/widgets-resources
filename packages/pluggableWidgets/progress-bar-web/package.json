@@ -1,0 +1,38 @@
+{
+  "name": "progress-bar-web",
+  "widgetName": "ProgressBar",
+  "version": "2.0.0",
+  "description": "Displays a progress bar",
+  "copyright": "Mendix Technology B.V.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.custom",
+  "scripts": {
+    "start": "cross-env MPKOUTPUT=ProgressBar.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=ProgressBar.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=ProgressBar.mpk pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "cross-env MPKOUTPUT=ProgressBar.mpk pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6",
+    "cross-env": "^7.0.2"
+  },
+  "dependencies": {
+    "@widgets-resources/piw-utils": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}

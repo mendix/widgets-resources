@@ -1,30 +1,29 @@
-import { createElement, ReactElement } from "react";
+import { createElement, CSSProperties, KeyboardEvent, ReactElement } from "react";
 import classNames from "classnames";
-
-import "../ui/Badge.css";
-import { BrandStyleEnum } from "../../typings/BadgeProps";
 
 export interface BadgeProps {
     type: "badge" | "label";
     className?: string;
-    style?: object;
+    style?: CSSProperties;
     value: string;
-    brandStyle?: BrandStyleEnum;
-    clickable?: boolean;
     onClick?: () => void;
+    onKeyDown?: (event: KeyboardEvent<HTMLSpanElement>) => void;
+    tabIndex?: number;
 }
 
 export const Badge = (props: BadgeProps): ReactElement => {
-    const { type, className, style, value, brandStyle, clickable, onClick } = props;
+    const { type, className, style, value, onClick, onKeyDown, tabIndex } = props;
 
     return (
         <span
+            role={onClick || onKeyDown ? "button" : undefined}
             className={classNames("widget-badge", type, className, {
-                [`label-${brandStyle}`]: !!brandStyle,
-                "widget-badge-clickable": clickable
+                "widget-badge-clickable": onClick
             })}
             onClick={onClick}
+            onKeyDown={onKeyDown}
             style={style}
+            tabIndex={tabIndex}
         >
             {value}
         </span>

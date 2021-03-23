@@ -1,4 +1,9 @@
-![Build Status](https://travis-ci.org/mendix/widgets-resources.svg?branch=master)
+![E2E Status](https://github.com/mendix/widgets-resources/actions/workflows/WebAutomatedTests.yml/badge.svg?branch=master)
+![Unit tests](https://github.com/mendix/widgets-resources/actions/workflows/UnitTests.yml/badge.svg?branch=master)
+![Script Tests](https://github.com/mendix/widgets-resources/actions/workflows/ScriptTests.yml/badge.svg?branch=master)
+![Atlas build](https://github.com/mendix/widgets-resources/actions/workflows/AtlasBuildTest.yml/badge.svg?branch=master)
+![Atlas Release](https://github.com/mendix/widgets-resources/actions/workflows/AtlasReleaseThemeFiles.yml/badge.svg?branch=master)
+![Publisn NPM](https://github.com/mendix/widgets-resources/actions/workflows/PublishNpm.yml/badge.svg?branch=master)
 ![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
 
 # Widgets resources

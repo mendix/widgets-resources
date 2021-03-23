@@ -1,7 +1,8 @@
 import { Appearance, Platform } from "react-native";
-import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_ui_resources/native/api";
+import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_core/native/api";
 import {
     VariablesBackground,
+    VariablesBackgroundDefaults,
     VariablesBadge,
     VariablesBorder,
     VariablesBrand,
@@ -10,6 +11,7 @@ import {
     VariablesContrast,
     VariablesFloatingActionButton,
     VariablesFont,
+    VariablesFontDefaults,
     VariablesImage,
     VariablesInput,
     VariablesIntroScreen,
@@ -22,7 +24,8 @@ import {
     VariablesSlider,
     VariablesSpacing,
     VariablesTabContainer
-} from "../../themesource/atlas_ui_resources/native/types/variables";
+} from "../../themesource/atlas_core/native/types/variables";
+import "./exclusion-variables";
 /*
 
 ==> You can find a copy of the core variables below. (From styles/native/core/variables.js)
@@ -51,13 +54,15 @@ export const brand: VariablesBrand = {
 export const darkMode = Appearance.getColorScheme() === "dark";
 //
 // Background Colors
-//
-// const backgroundColor = darkMode ? "#000" : "#FFF";
-// const backgroundColorInversed = darkMode ? "#FFF" : "#000";
-//
+export const backgroundDefaults: VariablesBackgroundDefaults = {
+    primaryLight: "#FFF",
+    primaryDark: "#0A1325",
+    secondaryLight: "#F8F8F8",
+    secondaryDark: "#161F30"
+};
 export const background: VariablesBackground = {
-    primary: darkMode ? "#0A1325" : "#FFF",
-    gray: darkMode ? "#161F30" : "#F8F8F8",
+    primary: darkMode ? backgroundDefaults.primaryDark : backgroundDefaults.primaryLight,
+    secondary: darkMode ? backgroundDefaults.secondaryDark : backgroundDefaults.secondaryLight,
     brandPrimary: brand.primary,
     brandSuccess: brand.success,
     brandWarning: brand.warning,
@@ -81,14 +86,25 @@ export const border: VariablesBorder = {
     color: darkMode ? "#3B4251" : "#CED0D3",
     width: 1,
     radiusSmall: 4,
-    radiusLarge: 8
+    radiusLarge: 8,
+    radiusLargest: 9999
 };
 //
 // Font Styles
+export const fontDefaults: VariablesFontDefaults = {
+    colorTitleDark: "#0A1326",
+    colorTitleLight: "#FDFDFD",
+    colorParagraphDark: "#6C717E",
+    colorParagraphLight: "#E7E7E9",
+    colorDisabledDark: "#9DA1A8",
+    colorDisabledLight: "#9DA1A8"
+};
 export const font: VariablesFont = {
     size: adjustFont(14),
+    sizeSmallest: adjustFont(10),
     sizeSmall: adjustFont(12),
     sizeLarge: adjustFont(16),
+    sizeLargest: adjustFont(18),
     sizeH1: adjustFont(40),
     sizeH2: adjustFont(34),
     sizeH3: adjustFont(28),
@@ -96,17 +112,19 @@ export const font: VariablesFont = {
     sizeH5: adjustFont(20),
     sizeH6: adjustFont(16),
     lineHeight: adjustFont(14) * 1.5,
+    lineHeightSmallest: adjustFont(10) * 1.5,
     lineHeightSmall: adjustFont(12) * 1.5,
     lineHeightLarge: adjustFont(16) * 1.5,
+    lineHeightLargest: adjustFont(18) * 1.5,
     lineHeightH1: adjustFont(40) * 1.5,
     lineHeightH2: adjustFont(34) * 1.5,
     lineHeightH3: adjustFont(28) * 1.5,
     lineHeightH4: adjustFont(24) * 1.5,
     lineHeightH5: adjustFont(20) * 1.5,
     lineHeightH6: adjustFont(16) * 1.5,
-    colorTitle: darkMode ? "#FDFDFD" : "#0A1326",
-    colorParagraph: darkMode ? "#E7E7E9" : "#6C717E",
-    colorDisabled: darkMode ? "#9DA1A8" : "#9DA1A8",
+    colorTitle: darkMode ? fontDefaults.colorTitleLight : fontDefaults.colorTitleDark,
+    colorParagraph: darkMode ? fontDefaults.colorParagraphLight : fontDefaults.colorParagraphDark,
+    colorDisabled: darkMode ? fontDefaults.colorDisabledLight : fontDefaults.colorDisabledDark,
     weightLight: "100", // Only supported on iOS, will be 'Normal' on Android
     weightNormal: "normal",
     weightSemiBold: "600", // Only supported on iOS, will be 'Bold' on Android
@@ -226,7 +244,7 @@ export const input: VariablesInput = {
     inputDisabled: {
         color: font.colorDisabled,
         borderColor: border.color,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     inputError: {
         color: brand.danger,
@@ -292,7 +310,7 @@ export const navigation: VariablesNavigation = {
     },
     bottomBar: {
         color: contrast.high,
-        selectedTextColor: contrast.high,
+        selectedTextColor: brand.primary,
         selectedIconColor: brand.primary,
         backgroundColor: background.primary,
         fontSize: font.sizeSmall,
@@ -302,7 +320,7 @@ export const navigation: VariablesNavigation = {
         color: font.colorTitle,
         activityIndicatorColor: font.colorTitle,
         backgroundColor: "rgba(0, 0, 0, 0.5)",
-        containerBackgroundColor: background.gray,
+        containerBackgroundColor: background.secondary,
         fontSize: font.size,
         borderRadius: border.radiusSmall,
         elevation: 1.5, // Only for Android
@@ -323,11 +341,11 @@ export const container: VariablesContainer = {
 export const badge: VariablesBadge = {
     fontWeight: font.weightNormal,
     borderRadius: border.radiusLarge,
-    paddingVertical: spacing.small,
+    paddingVertical: spacing.smaller,
     paddingHorizontal: spacing.small,
 
     default: {
-        color: contrast.high,
+        color: contrast.higher,
         backgroundColor: contrast.lowest
     },
     primary: {
@@ -358,26 +376,26 @@ export const tabContainer: VariablesTabContainer = {
         paddingVertical: 12
     },
     indicator: {
-        backgroundColor: background.primary,
+        backgroundColor: fontDefaults.colorTitleLight,
         height: Platform.select({ ios: 2, android: 2 }) as number
     },
     label: {
-        color: background.primary,
+        color: fontDefaults.colorTitleLight,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         textTransform: "capitalize"
     },
     activeLabel: {
-        color: background.gray,
+        color: fontDefaults.colorTitleLight,
         fontSize: font.size,
         fontWeight: font.weightSemiBold,
         textTransform: "capitalize"
     },
     badgeContainer: {
-        borderRadius: badge.borderRadius,
+        borderRadius: border.radiusLargest,
         backgroundColor: badge.default.backgroundColor,
-        paddingVertical: badge.paddingVertical,
-        paddingHorizontal: badge.paddingHorizontal,
+        paddingVertical: spacing.smallest,
+        paddingHorizontal: spacing.small,
         marginLeft: 8
     },
     badgeCaption: {
@@ -421,7 +439,7 @@ export const floatingActionButton: VariablesFloatingActionButton = {
     },
     secondaryButton: {
         size: 30,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     secondaryButtonIcon: {
         size: font.sizeSmall,
@@ -558,7 +576,7 @@ export const slider: VariablesSlider = {
     marker: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     },
     markerActive: {
         size: 32
@@ -566,6 +584,6 @@ export const slider: VariablesSlider = {
     markerDisabled: {
         size: 24,
         borderColor: contrast.lowest,
-        backgroundColor: background.gray
+        backgroundColor: background.secondary
     }
 };

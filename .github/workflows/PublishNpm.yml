@@ -22,12 +22,14 @@ jobs:
       - name: "Installing dependencies"
         run: npm install
       - name: "Targeting Pluggable Widgets Tools"
-        if: contains(steps.variables.outputs.tag, "pluggable-widgets-tools-v")
-        run: cd packages/tools/pluggable-widgets-tools
-      - name: "Targeting Pluggable Widgets Generator"
-        if: contains(steps.variables.outputs.tag, "generator-widget-v")
-        run: cd packages/tools/generator-widget
-      - name: "Publishing to NPMJs"
+        if: contains(steps.variables.outputs.tag, 'pluggable-widgets-tools-v')
         uses: JS-DevTools/npm-publish@v1
         with:
+          package: "./packages/tools/pluggable-widgets-tools/package.json"
+          token: ${{ secrets.NPM_TOKEN }}
+      - name: "Targeting Pluggable Widgets Generator"
+        if: contains(steps.variables.outputs.tag, 'generator-widget-v')
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          package: "./packages/tools/generator-widget/package.json"
           token: ${{ secrets.NPM_TOKEN }}

@@ -1,0 +1,325 @@
+// Utilities
+@import "core/_legacy/bootstrap/bootstrap";
+@import "core/_legacy/bootstrap/bootstrap-rtl";
+@import "core/_legacy/mxui";
+
+//================================== CORE ==================================\\
+
+// Default variables
+@import "exclusion-variables";
+@import "../../../theme/web/exclusion-variables";
+@import "variables";
+@import "../../../theme/web/custom-variables";
+
+// Font Family Import
+@if $font-family-import != false {
+    @import url($font-family-import);
+}
+
+// Base
+@import "core/base/mixins/animations";
+@import "core/base/mixins/spacing";
+@import "core/base/mixins/layout-spacing";
+@import "core/base/mixins/buttons";
+@import "core/base/mixins/groupbox";
+@import "core/base/animation";
+@import "core/base/flex";
+@import "core/base/spacing";
+@import "core/base/reset";
+@import "core/base/base";
+@import "core/base/login";
+
+// Widgets
+@import "core/widgets/input";
+@if not $exclude-input {
+    @include input();
+}
+
+@import "core/helpers/background";
+@if not $exclude-background-helpers {
+    @include background-helpers();
+}
+
+@import "core/widgets/label";
+@if not $exclude-label {
+    @include label();
+}
+
+@import "core/widgets/badge";
+@if not $exclude-badge {
+    @include badge();
+}
+
+@import "core/helpers/label";
+@if not $exclude-label and not $exclude-label-helpers {
+    @include label-helpers();
+}
+
+@import "core/widgets/badge-button";
+@if not $exclude-badge-button {
+    @include badge-button();
+}
+
+@import "core/helpers/badge-button";
+@if not $exclude-badge-button and not $exclude-badge-button-helpers {
+    @include badge-button-helpers();
+}
+
+@import "core/widgets/button";
+@if not $exclude-button {
+    @include button();
+}
+
+@import "core/helpers/button";
+@if not $exclude-button and not $exclude-button-helpers {
+    @include button-helpers();
+}
+
+@import "core/widgets/check-box";
+@if not $exclude-check-box {
+    @include check-box();
+}
+
+@import "core/widgets/grid";
+@if not $exclude-grid {
+    @include grid();
+}
+
+@import "core/widgets/data-grid";
+@if not $exclude-data-grid {
+    @include data-grid();
+}
+
+@import "core/helpers/data-grid";
+@if not $exclude-data-grid and not $exclude-data-grid-helpers {
+    @include data-grid-helpers();
+}
+
+@import "core/widgets/data-view";
+@if not $exclude-data-view {
+    @include data-view();
+}
+
+@import "core/widgets/date-picker";
+@if not $exclude-data-picker {
+    @include date-picker();
+}
+
+@import "core/widgets/header";
+@if not $exclude-header {
+    @include header();
+}
+
+@import "core/widgets/glyphicon";
+@if not $exclude-glyphicon {
+    @include glyphicon();
+}
+
+@import "core/widgets/group-box";
+@if not $exclude-group-box {
+    @include group-box();
+}
+
+@import "core/helpers/group-box";
+@if not $exclude-group-box and not $exclude-group-box-helpers {
+    @include group-box-helpers();
+}
+
+@import "core/helpers/image";
+@if not $exclude-image-helpers {
+    @include image-helpers();
+}
+
+@import "core/widgets/list-view";
+@if not $exclude-list-view {
+    @include list-view();
+}
+
+@import "core/helpers/list-view";
+@if not $exclude-list-view and not $exclude-list-view-helpers {
+    @include list-view-helpers();
+}
+
+@import "core/widgets/modal";
+@if not $exclude-modal {
+    @include modal();
+}
+
+@import "core/widgets/navigation-bar";
+@if not $exclude-navigation-bar {
+    @include navigation-bar();
+}
+
+@import "core/helpers/navigation-bar";
+@if not $exclude-navigation-bar and not $exclude-navigation-bar-helpers {
+    @include navigation-bar-helpers();
+}
+
+@import "core/widgets/navigation-list";
+@if not $exclude-navigation-list {
+    @include navigation-list();
+}
+
+@import "core/widgets/navigation-tree";
+@if not $exclude-navigation-tree {
+    @include navigation-tree();
+}
+
+@import "core/helpers/navigation-tree";
+@if not $exclude-navigation-tree and not $exclude-navigation-tree-helpers {
+    @include navigation-tree-helpers();
+}
+
+@import "core/widgets/pop-up-menu";
+@if not $exclude-pop-up-menu {
+    @include pop-up-menu();
+}
+
+@import "core/widgets/simple-menu-bar";
+@if not $exclude-simple-menu-bar {
+    @include simple-menu-bar();
+}
+
+@import "core/helpers/simple-menu-bar";
+@if not $exclude-simple-menu-bar and not $exclude-simple-menu-bar-helpers {
+    @include simple-menu-bar-helpers();
+}
+
+@import "core/widgets/radio-button";
+@if not $exclude-radio-button {
+    @include radio-button();
+}
+
+@import "core/widgets/tab-container";
+@if not $exclude-tab-container {
+    @include tab-container();
+}
+
+@import "core/helpers/tab-container";
+@if not $exclude-tab-container and not $exclude-tab-container-helpers {
+    @include tab-container-helpers();
+}
+
+@import "core/widgets/table";
+@if not $exclude-table {
+    @include table();
+}
+
+@import "core/helpers/table";
+@if not $exclude-table and not $exclude-table-helpers {
+    @include table-helpers();
+}
+
+@import "core/widgets/template-grid";
+@if not $exclude-template-grid {
+    @include template-grid();
+}
+
+@import "core/helpers/template-grid";
+@if not $exclude-template-grid and not $exclude-template-grid-helpers {
+    @include template-grid-helpers();
+}
+
+@import "core/widgets/typography";
+@if not $exclude-typography {
+    @include typography();
+}
+
+@import "core/helpers/typography";
+@if not $exclude-typography and not $exclude-typography-helpers {
+    @include typography-helpers();
+}
+
+@import "core/widgets/layout-grid";
+@if not $exclude-layout-grid {
+    @include layout-grid();
+}
+
+@import "core/widgets/pagination";
+@if not $exclude-pagination {
+    @include pagination();
+}
+
+@import "core/widgets/progress";
+@if not $exclude-progress {
+    @include progress();
+}
+
+@import "core/widgets/progress-bar";
+@if not $exclude-progress-bar {
+    @include progress-bar();
+}
+
+@import "core/helpers/progress-bar";
+@if not $exclude-progress-bar and not $exclude-progress-bar-helpers {
+    @include progress-bar-helpers();
+}
+
+@import "core/widgets/progress-circle";
+@if not $exclude-progress-circle {
+    @include progress-circle();
+}
+
+@import "core/helpers/progress-circle";
+@if not $exclude-progress-circle and not $exclude-progress-circle-helpers {
+    @include progress-circle-helpers();
+}
+
+@import "core/widgets/rating";
+@if not $exclude-rating {
+    @include rating();
+}
+
+@import "core/helpers/rating";
+@if not $exclude-rating and not $exclude-rating-helpers {
+    @include rating-helpers();
+}
+
+@import "core/widgets/range-slider";
+@if not $exclude-range-slider {
+    @include range-slider();
+}
+
+@import "core/helpers/range-slider";
+@if not $exclude-range-slider and not $exclude-range-slider-helpers {
+    @include range-slider-helpers();
+}
+
+@import "core/widgets/slider";
+@if not $exclude-slider {
+    @include slider();
+}
+
+@import "core/helpers/slider";
+@if not $exclude-slider and not $exclude-slider-helpers {
+    @include slider-helpers();
+}
+
+@import "core/widgets/timeline";
+@if not $exclude-timeline {
+    @include timeline();
+}
+
+@import "core/helpers/helper-classes";
+@if not $exclude-helper-classes {
+    @include helper-classes();
+}
+
+// Custom widgets
+@import "core/widgetscustom/dijit-widget";
+@if not $exclude-custom-dijit-widget {
+    @include dijit-widget();
+}
+
+@import "core/widgetscustom/switch-widget";
+@if not $exclude-custom-switch {
+    @include switch();
+}
+
+//================================= CUSTOM =================================\\
+
+// Layouts
+@import "layouts/layout-atlas";
+@import "layouts/layout-atlas-phone";
+@import "layouts/layout-atlas-responsive";
+@import "layouts/layout-atlas-tablet";

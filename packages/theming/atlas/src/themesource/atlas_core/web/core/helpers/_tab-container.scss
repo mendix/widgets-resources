@@ -1,0 +1,202 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin tab-container-helpers() {
+    /* ==========================================================================
+       Tab container
+
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+    // Style as pills
+    .tab-pills.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            border: 0;
+
+            & > li {
+                margin-bottom: $spacing-small;
+            }
+
+            & > li > a {
+                margin-right: $spacing-small;
+                color: $tabs-color;
+                border-radius: $border-radius-default;
+                background-color: $tabs-bg-pills;
+
+                &:hover,
+                &:focus {
+                    background-color: $tabs-bg-hover;
+                }
+            }
+
+            & > li.active > a,
+            & > li.active > a:hover,
+            & > li.active > a:focus {
+                color: #ffffff;
+                border-color: $tabs-bg-active;
+                background-color: $tabs-bg-active;
+            }
+        }
+    }
+
+    // Style with lines
+    .tab-lined.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            border-width: 1px;
+
+            li {
+                margin-right: $spacing-large;
+
+                & > a {
+                    padding: $spacing-medium 0 ($spacing-medium - $tabs-lined-border-width) 0; // border is 3px
+                    color: $tabs-color;
+                    border: 0;
+                    border-bottom: $tabs-lined-border-width solid transparent;
+                    border-radius: 0;
+
+                    &:hover,
+                    &:focus {
+                        color: $tabs-color;
+                        border: 0;
+                        border-color: transparent;
+                        background: transparent;
+                    }
+                }
+
+                &.active > a,
+                &.active > a:hover,
+                &.active > a:focus {
+                    color: $tabs-lined-color-active;
+                    border: 0;
+                    border-bottom: $tabs-lined-border-width solid $tabs-lined-border-color;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    // Justified style
+    // Lets your tabs take 100% of the width
+    .tab-justified.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            width: 100%;
+            border-bottom: 0;
+
+            & > li {
+                flex: 1;
+                float: none; // reset bootstrap
+                margin: 0;
+                @media (max-width: $screen-sm-max) {
+                    display: block;
+                    width: 100%;
+                }
+
+                & > a {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    // Bordered
+    .tab-bordered.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            margin: 0;
+        }
+
+        & > .mx-tabcontainer-content {
+            padding: $spacing-small;
+            border-width: 0 1px 1px 1px;
+            border-style: solid;
+            border-color: $tabs-border-color;
+            background-color: transparent;
+        }
+    }
+
+    // Wizard
+    .tab-wizard.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            border-style: none;
+
+            &::before {
+                position: absolute;
+                top: $spacing-medium;
+                display: block;
+                width: 100%;
+                height: 1px;
+                content: "";
+                background-color: $tabs-border-color;
+            }
+
+            & > li {
+                position: relative;
+                float: none; // reset bootstrap
+                width: 100%;
+                text-align: center;
+
+                & > a {
+                    width: ($spacing-medium * 2) + 1;
+                    height: ($spacing-medium * 2) + 1;
+                    margin: auto;
+                    padding: 0;
+                    text-align: center;
+                    color: $brand-primary;
+                    border: 1px solid $tabs-border-color;
+                    border-radius: 100%;
+                    background-color: $bg-color;
+                    font-size: $font-size-large;
+                    font-weight: bold;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                &.active {
+                    & > a,
+                    & > a:hover,
+                    & > a:focus {
+                        color: #ffffff;
+                        border-color: $tabs-bg-active;
+                        background-color: $tabs-bg-active;
+                    }
+                }
+            }
+        }
+    }
+
+    //add tabcontainer flex classes
+
+    .tab-center.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            display: flex;
+            align-items: center;
+            flex-flow: wrap;
+            justify-content: center;
+        }
+    }
+
+    .tab-left.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            display: flex;
+            align-items: center;
+            flex-flow: wrap;
+            justify-content: flex-start;
+        }
+    }
+
+    .tab-right.mx-tabcontainer {
+        & > .mx-tabcontainer-tabs {
+            display: flex;
+            align-items: center;
+            flex-flow: wrap;
+            justify-content: flex-end;
+        }
+    }
+}

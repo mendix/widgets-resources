@@ -6,8 +6,6 @@ import { Marker } from "../typings/shared";
 import { Alert, parseStyle } from "@widgets-resources/piw-utils";
 import { translateZoom } from "./utils/zoom";
 
-import "leaflet-defaulticon-compatibility";
-
 declare function require(name: string): string;
 
 export const preview = (props: MapsPreviewProps): ReactNode => {
@@ -55,10 +53,5 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
 };
 
 export function getPreviewCss(): string {
-    return (
-        require("leaflet/dist/leaflet.css") +
-        require("leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css") +
-        require("./ui/Maps.css") +
-        require("./ui/GoogleMapsPreview.css")
-    );
+    return require("leaflet/dist/leaflet.css") + require("./ui/Maps.css") + require("./ui/GoogleMapsPreview.css");
 }

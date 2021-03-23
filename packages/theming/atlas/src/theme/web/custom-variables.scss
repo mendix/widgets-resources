@@ -19,8 +19,6 @@ $gray-lighter: #f8f8f8;
 //== Step 1: Brand Colors
 $brand-default: $gray-primary;
 $brand-primary: #264ae5;
-$brand-inverse: #24276c;
-$brand-info: #0086d9;
 $brand-success: #3cb33d;
 $brand-warning: #eca51c;
 $brand-danger: #e33f4e;
@@ -46,12 +44,9 @@ $topbar-border-color: $border-color-default;
 
 // Topbar mobile
 $m-header-height: 45px;
-$m-header-bg: $topbar-bg;
-$m-header-color: #555;
-$m-header-title-size: 17px;
-
-// Sidebar
-$sidebar-bg: $brand-inverse;
+$m-header-bg: $brand-primary;
+$m-header-color: #fff;
+$m-header-title-size: 16px;
 
 // Navbar Brand Name / For your company, product, or project name (used in layouts/base/)
 $navbar-brand-name: $font-color-default;
@@ -59,7 +54,7 @@ $navbar-brand-name: $font-color-default;
 // Background Colors
 // Backgrounds
 $bg-color: #f8f8f8;
-$bg-color-secondary: #bfcaff;
+$bg-color-secondary: #fff;
 
 // Default Link Color
 $link-color: $brand-primary;
@@ -77,12 +72,8 @@ $link-hover-color: darken($link-color, 15%);
 //== Typography
 //## Change your font family, weight, line-height, headings and more (used in components/typography)
 
-// Font Family Import (Used for google font plugin in theme creater https://ux.mendix.com/theme-creator.html)
+// Font Family Import (Used for google font plugin in theme creater)
 $font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700";
-@if $font-family-import != false {
-    // Only import, if the import is set
-    @import url($font-family-import);
-}
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
 $font-family-base: "SFProDisplay", "Open Sans", sans-serif;
@@ -129,42 +120,26 @@ $navigation-font-size: $font-size-default;
 $navigation-sub-font-size: $font-size-small;
 $navigation-glyph-size: 20px; // For glyphicons that you can select in the Mendix Modeler
 
-$navigation-bg: $brand-inverse;
-$navigation-bg-hover: lighten($navigation-bg, 4);
-$navigation-bg-active: lighten($navigation-bg, 8);
 $navigation-color: #fff;
 $navigation-color-hover: #fff;
 $navigation-color-active: #fff;
 
-$navigation-sub-bg: darken($navigation-bg, 4);
-$navigation-sub-bg-hover: $navigation-sub-bg;
-$navigation-sub-bg-active: $navigation-sub-bg;
 $navigation-sub-color: #aaa;
 $navigation-sub-color-hover: $brand-primary;
 $navigation-sub-color-active: $brand-primary;
-
-$navigation-border-color: $navigation-bg-hover;
 
 // Navigation Sidebar
 $navsidebar-font-size: $font-size-default;
 $navsidebar-sub-font-size: $font-size-small;
 $navsidebar-glyph-size: 20px; // For glyphicons that you can select in the Mendix Modeler
 
-$navsidebar-bg: $sidebar-bg;
-$navsidebar-bg-hover: darken($navsidebar-bg, 4);
-$navsidebar-bg-active: darken($navsidebar-bg, 8);
 $navsidebar-color: #fff;
 $navsidebar-color-hover: #fff;
 $navsidebar-color-active: #fff;
 
-$navsidebar-sub-bg: darken($navsidebar-bg, 4);
-$navsidebar-sub-bg-hover: $navsidebar-sub-bg;
-$navsidebar-sub-bg-active: $navsidebar-sub-bg;
 $navsidebar-sub-color: #aaa;
 $navsidebar-sub-color-hover: $brand-primary;
 $navsidebar-sub-color-active: $brand-primary;
-
-$navsidebar-border-color: $navsidebar-bg-hover;
 
 // Navigation topbar
 $navtopbar-font-size: $font-size-default;
@@ -239,27 +214,21 @@ $btn-border-radius: $border-radius-default;
 
 // Button Background Color
 $btn-default-bg: #fff;
-$btn-inverse-bg: $brand-inverse;
 $btn-primary-bg: $brand-primary;
-$btn-info-bg: $brand-info;
 $btn-success-bg: $brand-success;
 $btn-warning-bg: $brand-warning;
 $btn-danger-bg: $brand-danger;
 
 // Button Border Color
 $btn-default-border-color: $gray-primary;
-$btn-inverse-border-color: $brand-inverse;
 $btn-primary-border-color: $brand-primary;
-$btn-info-border-color: $brand-info;
 $btn-success-border-color: $brand-success;
 $btn-warning-border-color: $brand-warning;
 $btn-danger-border-color: $brand-danger;
 
 // Button Text Color
 $btn-default-color: $brand-primary;
-$btn-inverse-color: #fff;
 $btn-primary-color: #fff;
-$btn-info-color: #fff;
 $btn-success-color: #fff;
 $btn-warning-color: #fff;
 $btn-danger-color: #fff;
@@ -269,9 +238,7 @@ $btn-default-icon-color: $gray;
 
 // Button Background Color
 $btn-default-bg-hover: $btn-default-border-color;
-$btn-inverse-bg-hover: mix($btn-inverse-bg, white, 80%);
 $btn-primary-bg-hover: mix($btn-primary-bg, black, 80%);
-$btn-info-bg-hover: mix($btn-info-bg, black, 80%);
 $btn-success-bg-hover: mix($btn-success-bg, black, 80%);
 $btn-warning-bg-hover: mix($btn-warning-bg, black, 80%);
 $btn-danger-bg-hover: mix($btn-danger-bg, black, 80%);
@@ -301,38 +268,28 @@ $header-text-color-detail: rgba(0, 0, 0, 0.2);
 // Color variations
 $color-default-darker: mix($brand-default, black, 60%);
 $color-default-dark: mix($brand-default, black, 70%);
-$color-default-light: mix($brand-default, white, 60%);
-$color-default-lighter: mix($brand-default, white, 20%);
-
-$color-inverse-darker: mix($brand-inverse, black, 60%);
-$color-inverse-dark: mix($brand-inverse, black, 70%);
-$color-inverse-light: mix($brand-inverse, white, 60%);
-$color-inverse-lighter: mix($brand-inverse, white, 20%);
+$color-default-light: mix($brand-default, white, 20%);
+$color-default-lighter: mix($brand-default, white, 10%);
 
 $color-primary-darker: mix($brand-primary, black, 60%);
 $color-primary-dark: mix($brand-primary, black, 70%);
-$color-primary-light: mix($brand-primary, white, 60%);
-$color-primary-lighter: mix($brand-primary, white, 20%);
-
-$color-info-darker: mix($brand-info, black, 60%);
-$color-info-dark: mix($brand-info, black, 70%);
-$color-info-light: mix($brand-info, white, 60%);
-$color-info-lighter: mix($brand-info, white, 20%);
+$color-primary-light: mix($brand-primary, white, 20%);
+$color-primary-lighter: mix($brand-primary, white, 10%);
 
 $color-success-darker: mix($brand-success, black, 60%);
 $color-success-dark: mix($brand-success, black, 70%);
-$color-success-light: mix($brand-success, white, 60%);
-$color-success-lighter: mix($brand-success, white, 20%);
+$color-success-light: mix($brand-success, white, 20%);
+$color-success-lighter: mix($brand-success, white, 10%);
 
 $color-warning-darker: mix($brand-warning, black, 60%);
 $color-warning-dark: mix($brand-warning, black, 70%);
-$color-warning-light: mix($brand-warning, white, 60%);
-$color-warning-lighter: mix($brand-warning, white, 20%);
+$color-warning-light: mix($brand-warning, white, 20%);
+$color-warning-lighter: mix($brand-warning, white, 10%);
 
 $color-danger-darker: mix($brand-danger, black, 60%);
 $color-danger-dark: mix($brand-danger, black, 70%);
-$color-danger-light: mix($brand-danger, white, 60%);
-$color-danger-lighter: mix($brand-danger, white, 20%);
+$color-danger-light: mix($brand-danger, white, 20%);
+$color-danger-lighter: mix($brand-danger, white, 10%);
 
 $brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c);
 
@@ -387,6 +344,8 @@ $tabs-color: $font-color-detail;
 $tabs-color-active: $font-color-default;
 $tabs-lined-color-active: $font-color-default;
 
+$tabs-lined-border-width: 3px;
+
 // Border Color
 $tabs-border-color: $border-color-default;
 $tabs-lined-border-color: $brand-primary;
@@ -424,19 +383,16 @@ $dataview-emptymessage-color: $font-color-default;
 //## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
 
 // Background Color
-$alert-info-bg: $color-primary-lighter;
 $alert-success-bg: $color-success-lighter;
 $alert-warning-bg: $color-warning-lighter;
 $alert-danger-bg: $color-danger-lighter;
 
 // Text Color
-$alert-info-color: $color-primary-darker;
 $alert-success-color: $color-success-darker;
 $alert-warning-color: $color-warning-darker;
 $alert-danger-color: $color-danger-darker;
 
 // Border Color
-$alert-info-border-color: $color-primary-dark;
 $alert-success-border-color: $color-success-dark;
 $alert-warning-border-color: $color-warning-dark;
 $alert-danger-border-color: $color-danger-dark;
@@ -447,6 +403,10 @@ $wizard-step-height: 48px;
 $wizard-step-number-size: 64px;
 $wizard-step-number-font-size: $font-size-h3;
 
+//Wizard states
+$wizard-default: #fff;
+$wizard-active: $brand-primary;
+$wizard-visited: $brand-success;
 //Wizard step states
 $wizard-default-bg: #fff;
 $wizard-default-color: #fff;
@@ -469,8 +429,6 @@ $wizard-visited-border-color: $color-success-dark;
 // Background Color
 $label-default-bg: $brand-default;
 $label-primary-bg: $brand-primary;
-$label-info-bg: $brand-info;
-$label-inverse-bg: $brand-inverse;
 $label-success-bg: $brand-success;
 $label-warning-bg: $brand-warning;
 $label-danger-bg: $brand-danger;
@@ -478,7 +436,6 @@ $label-danger-bg: $brand-danger;
 // Border Color
 $label-default-border-color: $brand-default;
 $label-primary-border-color: $brand-primary;
-$label-info-border-color: $brand-info;
 $label-success-border-color: $brand-success;
 $label-warning-border-color: $brand-warning;
 $label-danger-border-color: $brand-danger;
@@ -486,8 +443,6 @@ $label-danger-border-color: $brand-danger;
 // Text Color
 $label-default-color: $font-color-default;
 $label-primary-color: #fff;
-$label-info-color: #fff;
-$label-inverse-color: #fff;
 $label-success-color: #fff;
 $label-warning-color: #fff;
 $label-danger-color: #fff;
@@ -497,9 +452,7 @@ $label-danger-color: #fff;
 
 // Background Color
 $groupbox-default-bg: $gray-primary;
-$groupbox-inverse-bg: $brand-inverse;
 $groupbox-primary-bg: $brand-primary;
-$groupbox-info-bg: $brand-info;
 $groupbox-success-bg: $brand-success;
 $groupbox-warning-bg: $brand-warning;
 $groupbox-danger-bg: $brand-danger;
@@ -507,9 +460,7 @@ $groupbox-white-bg: #fff;
 
 // Text Color
 $groupbox-default-color: $font-color-default;
-$groupbox-inverse-color: #fff;
 $groupbox-primary-color: #fff;
-$groupbox-info-color: #fff;
 $groupbox-success-color: #fff;
 $groupbox-warning-color: #fff;
 $groupbox-danger-color: #fff;
@@ -520,14 +471,12 @@ $groupbox-white-color: $font-color-default;
 
 // Text and Border Color
 $callout-default-color: $font-color-default;
-$callout-info-color: $brand-info;
 $callout-success-color: $brand-success;
 $callout-warning-color: $brand-warning;
 $callout-danger-color: $brand-danger;
 
 // Background Color
 $callout-default-bg: $color-default-lighter;
-$callout-info-bg: $color-info-lighter;
 $callout-success-bg: $color-success-lighter;
 $callout-warning-bg: $color-warning-lighter;
 $callout-danger-bg: $color-danger-lighter;
@@ -551,6 +500,12 @@ $timeline-grouping-border-color: $timeline-border-color;
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
+// Smallest spacing
+$spacing-smallest: 2px;
+
+// Smaller spacing
+$spacing-smaller: 4px;
+
 // Small spacing
 $spacing-small: 8px;
 
@@ -563,6 +518,12 @@ $m-spacing-medium: 16px;
 $spacing-large: 24px;
 $t-spacing-large: 24px;
 $m-spacing-large: 16px;
+
+// Larger spacing
+$spacing-larger: 32px;
+
+// Largest spacing
+$spacing-largest: 48px;
 
 // Layout spacing
 $layout-spacing-top: 24px;
@@ -617,3 +578,124 @@ $screen-lg-max: ($screen-xl - 1);
 $important-flex: true; // ./base/flex.scss
 $important-spacing: true; // ./base/spacing.scss
 $important-helpers: true; // ./helpers/helperclasses.scss
+
+//===== Legacy variables =====
+
+//== Step 1: Brand Colors
+$brand-inverse: #24276c;
+$brand-info: #0086d9;
+
+//== Step 2: UI Customization
+
+// Sidebar
+$sidebar-bg: $brand-inverse;
+
+//== Navigation
+//## Used in components/navigation
+
+// Default Navigation styling
+$navigation-bg: $brand-inverse;
+$navigation-bg-hover: lighten($navigation-bg, 4);
+$navigation-bg-active: lighten($navigation-bg, 8);
+
+$navigation-sub-bg: darken($navigation-bg, 4);
+$navigation-sub-bg-hover: $navigation-sub-bg;
+$navigation-sub-bg-active: $navigation-sub-bg;
+
+$navigation-border-color: $navigation-bg-hover;
+
+// Navigation Sidebar
+$navsidebar-bg: $sidebar-bg;
+$navsidebar-bg-hover: darken($navsidebar-bg, 4);
+$navsidebar-bg-active: darken($navsidebar-bg, 8);
+
+$navsidebar-sub-bg: darken($navsidebar-bg, 4);
+$navsidebar-sub-bg-hover: $navsidebar-sub-bg;
+$navsidebar-sub-bg-active: $navsidebar-sub-bg;
+
+$navsidebar-border-color: $navsidebar-bg-hover;
+
+//== Form
+//## Used in components/inputs
+
+// Form Label
+$form-label-color: $brand-inverse;
+//== Buttons
+//## Define background-color, border-color and text. Used in components/buttons
+
+// Button Background Color
+$btn-inverse-bg: $brand-inverse;
+$btn-info-bg: $brand-info;
+
+// Button Border Color
+$btn-inverse-border-color: $brand-inverse;
+$btn-info-border-color: $brand-info;
+
+// Button Text Color
+$btn-inverse-color: #fff;
+$btn-info-color: #fff;
+
+// Button Background Color
+$btn-inverse-bg-hover: mix($btn-inverse-bg, white, 80%);
+$btn-info-bg-hover: mix($btn-info-bg, black, 80%);
+
+//== Color variations
+//## These variations are used to support several other variables and components
+
+// Color variations
+$color-inverse-darker: mix($brand-inverse, black, 60%);
+$color-inverse-dark: mix($brand-inverse, black, 70%);
+$color-inverse-light: mix($brand-inverse, white, 60%);
+$color-inverse-lighter: mix($brand-inverse, white, 20%);
+
+$color-info-darker: mix($brand-info, black, 60%);
+$color-info-dark: mix($brand-info, black, 70%);
+$color-info-light: mix($brand-info, white, 60%);
+$color-info-lighter: mix($brand-info, white, 20%);
+
+//== Alerts
+//## Default Bootstrap alerts, not a widget in the Modeler (used in components/alerts)
+
+// Background Color
+$alert-info-bg: $color-primary-lighter;
+
+// Text Color
+$alert-info-color: $color-primary-darker;
+
+// Border Color
+$alert-info-border-color: $color-primary-dark;
+
+//== Labels
+//## Default Bootstrap Labels, not a widget in the Modeler (used in components/labels)
+
+// Background Color
+$label-info-bg: $brand-info;
+$label-inverse-bg: $brand-inverse;
+
+// Border Color
+$label-info-border-color: $brand-info;
+$label-inverse-border-color: $brand-inverse;
+
+// Text Color
+$label-info-color: #fff;
+$label-inverse-color: #fff;
+
+//== Groupbox
+//## Default variables for Groupbox Widget (used in components/groupbox)
+
+// Background Color
+$groupbox-inverse-bg: $brand-inverse;
+$groupbox-info-bg: $brand-info;
+
+// Text Color
+$groupbox-inverse-color: #fff;
+$groupbox-info-color: #fff;
+
+//== Callout (groupbox) Colors
+//## Extended variables for Groupbox Widget (used in components/groupbox)
+
+// Text and Border Color
+$callout-info-color: $brand-info;
+
+// Background Color
+$callout-info-bg: $color-info-lighter;

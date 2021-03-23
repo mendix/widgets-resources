@@ -12,7 +12,13 @@
             "version": "detect"
         }
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended", "prettier", "plugin:prettier/recommended"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "prettier",
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended"
+    ],
     "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
@@ -244,6 +250,7 @@
         "prefer-template": "off",
         "quote-props": "off",
         "radix": "error",
+        "react-hooks/rules-of-hooks": "warn",
         "require-await": "error",
         "require-jsdoc": "off",
         "rest-spread-spacing": "error",
@@ -272,5 +279,5 @@
         "vars-on-top": "off",
         "wrap-iife": "error",
         "yield-star-spacing": "error"
-    }
+        }
 }

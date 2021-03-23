@@ -27,9 +27,9 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Display">
-                <property key="aspectRatio" type="boolean" defaultValue="false">
+                <property key="aspectRatio" type="boolean" defaultValue="true">
                     <caption>Keep aspect ratio</caption>
-                    <description>Base aspect ratio on video height</description>
+                    <description>Base aspect ratio on video height. If set to false, make sure to add height and width to the 'video' style property.</description>
                 </property>
                 <property key="showControls" type="boolean" defaultValue="true">
                     <caption>Show controls</caption>

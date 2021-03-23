@@ -1,0 +1,42 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin simple-menu-bar-helpers() {
+    /* ==========================================================================
+       Navigation
+
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+    // Center text and icons
+    .bottom-nav-text-icons.mx-menubar {
+        ul.mx-menubar-list {
+            li.mx-menubar-item {
+                flex: 1;
+
+                a {
+                    flex-direction: column;
+                    padding: $spacing-small $spacing-small $spacing-small/2;
+                    line-height: normal;
+                    font-size: $font-size-small;
+
+                    .glyphicon {
+                        display: block;
+                        margin: 0 0 $spacing-small/2 0;
+                        font-size: $font-size-large;
+                    }
+
+                    img {
+                        display: block;
+                        height: $font-size-large;
+                        margin: 0 0 $spacing-small/2 0;
+                    }
+                }
+            }
+        }
+    }
+}

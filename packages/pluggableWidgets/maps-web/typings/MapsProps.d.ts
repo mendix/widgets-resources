@@ -72,7 +72,7 @@ export interface MapsContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     advanced: boolean;
     markers: MarkersType[];
     dynamicMarkers: DynamicMarkersType[];

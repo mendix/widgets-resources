@@ -5,13 +5,27 @@ import { SharedProps } from "../../typings/shared";
 import { MapProviderEnum } from "../../typings/MapsProps";
 import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
-import { latLngBounds } from "leaflet";
+import { latLngBounds, Icon as LeafletIcon } from "leaflet";
 import { baseMapLayer } from "../utils/leaflet";
 
 export interface LeafletProps extends SharedProps {
     mapProvider: MapProviderEnum;
     attributionControl: boolean;
 }
+
+/**
+ * There is an ongoing issue in `react-leaflet` that fails to properly set the icon urls in the
+ * default marker implementation. Issue https://github.com/PaulLeCam/react-leaflet/issues/453
+ * describes the problem and also proposes a few solutions. But all of them require a hackish method
+ * to override `leaflet`'s implementation of the default Icon. Instead, we always set the
+ * `Marker.icon` prop instead of relying on the default. So if a custom icon is set, we use that.
+ * If not, we reuse a leaflet icon that's the same as the default implementation should be.
+ */
+const defaultMarkerIcon = new LeafletIcon({
+    iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+    iconUrl: require("leaflet/dist/images/marker-icon.png"),
+    shadowUrl: require("leaflet/dist/images/marker-shadow.png")
+});
 
 export function LeafletMap(props: LeafletProps): ReactElement {
     const map = useRef<Map>();
@@ -83,6 +97,14 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                                 onclick={marker.title ? undefined : marker.onClick}
                                 interactive={!!marker.title || !!marker.onClick}
                                 title={marker.title}
+                                icon={
+                                    marker.url
+                                        ? new LeafletIcon({
+                                              iconUrl: marker.url,
+                                              iconRetinaUrl: marker.url
+                                          })
+                                        : defaultMarkerIcon
+                                }
                             >
                                 {marker.title && (
                                     <Popup>

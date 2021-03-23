@@ -19,7 +19,8 @@ module.exports = {
     },
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-        "mendix/components/web/Icon": join(__dirname, "__mocks__/WebIcon")
+        "mendix/components/web/Icon": join(__dirname, "__mocks__/WebIcon"),
+        "\\.png$": join(__dirname, "assetsTransformer.js")
     },
     collectCoverage: true,
     coverageDirectory: "<rootDir>/../dist/coverage"

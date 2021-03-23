@@ -4,12 +4,14 @@ import { Text, View } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";
 import { VideoProperties } from "react-native-video";
 
-import { Props, VideoPlayer } from "../VideoPlayer";
+import { VideoPlayer } from "../VideoPlayer";
+import { VideoPlayerProps } from "../../typings/VideoPlayerProps";
+import { VideoStyle } from "../ui/Styles";
 
 jest.mock("react-native-video", () => "Video");
 
 describe("VideoPlayer", () => {
-    let defaultProps: Props;
+    let defaultProps: VideoPlayerProps<VideoStyle>;
 
     beforeEach(() => {
         defaultProps = {
@@ -48,7 +50,7 @@ describe("VideoPlayer", () => {
         fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 640, height: 360 } });
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", height: "100%" });
+        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", height: undefined });
     });
 
     it("shows the loading indicator if the source changes", () => {

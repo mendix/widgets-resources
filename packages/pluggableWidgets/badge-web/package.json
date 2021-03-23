@@ -2,7 +2,7 @@
   "name": "badge-web",
   "widgetName": "Badge",
   "version": "2.0.0",
-  "description": "Shows a value as a badge or a color label",
+  "description": "Shows a value inside a colored badge or label",
   "copyright": "Mendix Technology B.V.",
   "license": "Apache-2.0",
   "repository": {
@@ -13,22 +13,23 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
-  "packagePath": "com.mendix.widget.web",
+  "packagePath": "com.mendix.widget.custom",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server",
-    "dev": "pluggable-widgets-tools start:web",
-    "build": "pluggable-widgets-tools build:web",
+    "start": "cross-env MPKOUTPUT=Badge.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=Badge.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=Badge.mpk pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "cross-env MPKOUTPUT=Badge.mpk pluggable-widgets-tools release:web"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@types/classnames": "^2.2.6"
+    "@types/classnames": "^2.2.6",
+    "cross-env": "^7.0.2"
   },
   "dependencies": {
     "@widgets-resources/piw-utils": "^1.0.0",

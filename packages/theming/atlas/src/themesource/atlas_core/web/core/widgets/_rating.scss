@@ -1,0 +1,30 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin rating() {
+    /* ==========================================================================
+       Rating
+
+       Default Mendix rating widget.
+    ========================================================================== */
+
+    .widget-star-rating-empty {
+        color: #cccccc;
+    }
+
+    .widget-star-rating-full-widget {
+        color: #ffa611;
+    }
+
+    .widget-star-rating-full-default {
+        color: #ced0d3;
+    }
+
+    .widget-star-rating-font-medium {
+        font-size: 30px;
+    }
+}

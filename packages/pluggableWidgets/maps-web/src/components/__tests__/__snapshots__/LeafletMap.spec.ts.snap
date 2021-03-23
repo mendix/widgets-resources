@@ -149,6 +149,15 @@ exports[`Leaflet maps renders a map with current location 1`] = `
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
       <ForwardRef(Leaflet(Marker))
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "iconRetinaUrl": "image:url",
+              "iconUrl": "image:url",
+            },
+          }
+        }
         interactive={false}
         key="marker_0"
         position={
@@ -197,6 +206,15 @@ exports[`Leaflet maps renders a map with markers 1`] = `
         url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
       />
       <ForwardRef(Leaflet(Marker))
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "iconRetinaUrl": "image:url",
+              "iconUrl": "image:url",
+            },
+          }
+        }
         interactive={true}
         key="marker_0"
         position={
@@ -220,6 +238,15 @@ exports[`Leaflet maps renders a map with markers 1`] = `
         </ForwardRef(Leaflet(Popup))>
       </ForwardRef(Leaflet(Marker))>
       <ForwardRef(Leaflet(Marker))
+        icon={
+          NewClass {
+            "_initHooksCalled": true,
+            "options": Object {
+              "iconRetinaUrl": "image:url",
+              "iconUrl": "image:url",
+            },
+          }
+        }
         interactive={true}
         key="marker_1"
         position={

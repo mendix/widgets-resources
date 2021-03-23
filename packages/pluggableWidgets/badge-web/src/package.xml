@@ -5,7 +5,7 @@
             <widgetFile path="Badge.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/web/badge"/>
+            <file path="com/mendix/widget/custom/badge"/>
         </files>
     </clientModule>
 </package>

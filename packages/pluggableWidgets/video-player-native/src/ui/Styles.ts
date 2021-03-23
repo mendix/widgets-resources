@@ -1,7 +1,7 @@
 import { Style } from "@native-mobile-resources/util-widgets";
 import { TextStyle, ViewStyle } from "react-native";
 
-interface VideoStyle extends Style {
+export interface VideoStyle extends Style {
     container: ViewStyle;
     indicator: {
         color: string;
@@ -22,7 +22,7 @@ export const defaultVideoStyle: VideoStyle = {
     },
     video: {
         width: "100%",
-        height: "100%"
+        height: undefined
     },
     errorMessage: {
         color: "white"

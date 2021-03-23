@@ -133,7 +133,8 @@ async function exists(filePath) {
 }
 
 async function getMendixVersion() {
-    const targetMendixVersion = process.argv[process.argv.indexOf("--mx-version") + 1];
+    const mendixOptionIndex = process.argv.indexOf("--mx-version");
+    const targetMendixVersion = mendixOptionIndex >= 0 ? process.argv[mendixOptionIndex + 1] : undefined;
     let mendixVersion;
 
     if (process.env.MENDIX_VERSION) {

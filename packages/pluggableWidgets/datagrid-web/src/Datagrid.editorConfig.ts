@@ -2,6 +2,8 @@ import {
     changePropertyIn,
     ContainerProps,
     DropZoneProps,
+    hideNestedPropertiesIn,
+    hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
@@ -44,9 +46,32 @@ export function getProperties(
         if (column.width !== "manual") {
             hidePropertyIn(defaultProperties, values, "columns", index, "size");
         }
+        if (!values.advanced) {
+            hideNestedPropertiesIn(defaultProperties, values, "columns", index, [
+                "columnClass",
+                "sortable",
+                "resizable",
+                "draggable",
+                "hidable"
+            ]);
+        }
     });
     if (values.pagination !== "buttons") {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
+    }
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, [
+            "pagination",
+            "pagingPosition",
+            "showEmptyPlaceholder",
+            "rowClass",
+            "columnsSortable",
+            "columnsDraggable",
+            "columnsResizable",
+            "columnsHidable",
+            "configurationAttribute",
+            "onConfigurationChange"
+        ]);
     }
     changePropertyIn(
         defaultProperties,
@@ -55,11 +80,14 @@ export function getProperties(
             prop.objectHeaders = ["Caption", "Content", "Width", "Alignment"];
             prop.objects?.forEach((object, index) => {
                 const column = values.columns[index];
+                const header = column.header.trim().length > 0 ? column.header : "[Empty caption]";
                 const alignment = column.alignment;
                 object.captions = [
-                    column.header,
+                    header,
                     column.showContentAs === "attribute"
-                        ? column.attribute
+                        ? column.attribute.length > 0
+                            ? column.attribute
+                            : "[No attribute selected]"
                         : column.showContentAs === "dynamicText"
                         ? column.dynamicText
                         : "Custom content",
@@ -86,8 +114,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
         ? values.columns
         : [
               {
-                  header: "Header",
-                  attribute: "Attribute",
+                  header: "Column",
+                  attribute: "",
                   width: "autoFit",
                   columnClass: "",
                   filter: { widgetCount: 0, renderer: () => null },
@@ -126,7 +154,11 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                           content:
                                               column.showContentAs === "dynamicText"
                                                   ? column.dynamicText ?? "Dynamic text"
-                                                  : `{${column.attribute ?? "Attribute"}}`,
+                                                  : `[${
+                                                        column.attribute.length > 0
+                                                            ? column.attribute
+                                                            : "No attribute selected"
+                                                    }]`,
                                           fontSize: 10
                                       }
                                   ]
@@ -188,7 +220,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                         ? [
                               {
                                   type: "DropZone",
-                                  property: column.filter
+                                  property: column.filter,
+                                  placeholder: "Place filter widget here"
                               } as DropZoneProps
                           ]
                         : [])
@@ -207,20 +240,23 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                 : content;
         })
     };
-    const footer = values.showEmptyPlaceholder
-        ? [
-              {
-                  type: "RowLayout",
-                  columnSize: "fixed",
-                  children: [
-                      {
-                          type: "DropZone",
-                          property: values.emptyPlaceholder
-                      } as DropZoneProps
-                  ]
-              } as RowLayoutProps
-          ]
-        : [];
+    const footer =
+        values.showEmptyPlaceholder === "custom"
+            ? [
+                  {
+                      type: "RowLayout",
+                      columnSize: "fixed",
+                      borders: true,
+                      children: [
+                          {
+                              type: "DropZone",
+                              property: values.emptyPlaceholder,
+                              placeholder: "Place widgets here"
+                          } as DropZoneProps
+                      ]
+                  } as RowLayoutProps
+              ]
+            : [];
     return {
         type: "Container",
         children: [titleHeader, headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]

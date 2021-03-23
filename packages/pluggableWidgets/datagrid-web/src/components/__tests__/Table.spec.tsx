@@ -107,6 +107,24 @@ describe("Table", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly for preview when no header is provided", () => {
+        const columns = [
+            {
+                header: "",
+                sortable: false,
+                resizable: false,
+                draggable: false,
+                hidable: "no" as const,
+                width: "autoFill" as const,
+                size: 1,
+                alignment: "center" as const
+            }
+        ];
+        const component = shallow(<Table {...mockTableProps()} preview columns={columns} />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockTableProps(): TableProps<ObjectItem> {

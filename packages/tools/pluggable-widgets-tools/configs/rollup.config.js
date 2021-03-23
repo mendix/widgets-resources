@@ -32,11 +32,12 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
+import image from "@rollup/plugin-image";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
 const mpkDir = join(sourcePath, "dist", widgetVersion);
-const mpkFile = join(mpkDir, `${widgetPackage}.${widgetName}.mpk`);
+const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
 
 export default async args => {
     const platform = args.configPlatform;
@@ -44,6 +45,7 @@ export default async args => {
     if (!["web", "native"].includes(platform)) {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }
+
     const result = [];
 
     if (platform === "web") {
@@ -90,7 +92,8 @@ export default async args => {
                 external: nativeExternal,
                 plugins: [
                     replace({
-                        "Platform.OS": `"${os}"`
+                        values: { "Platform.OS": `"${os}"` },
+                        preventAssignment: true
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
@@ -198,7 +201,8 @@ export default async args => {
             }),
             commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
             replace({
-                "process.env.NODE_ENV": production ? "'production'" : "'development'"
+                values: { "process.env.NODE_ENV": production ? "'production'" : "'development'" },
+                preventAssignment: true
             }),
             config.transpile
                 ? getBabelOutputPlugin({
@@ -208,6 +212,7 @@ export default async args => {
                       ...(config.babelConfig || {})
                   })
                 : null,
+            image(),
             production ? terser() : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define
