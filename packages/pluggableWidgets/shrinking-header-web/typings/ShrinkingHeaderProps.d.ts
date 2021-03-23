@@ -20,8 +20,8 @@ export interface ShrinkingHeaderContainerProps {
 export interface ShrinkingHeaderPreviewProps {
     class: string;
     style: string;
-    headerContent: { widgetCount: number; renderer: ComponentType };
-    scrollableContent: { widgetCount: number; renderer: ComponentType };
+    headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    scrollableContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     shrinkThreshold: string;
     shrunkClassName: string;
 }

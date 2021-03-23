@@ -1,10 +1,9 @@
 .widget-shrinking-header-threshold {
     max-height: 100vh;
-    display: flex;
-    flex-direction: column;
+    overflow: scroll;
 
-    & > section {
-        flex: 1;
-        overflow: scroll;
+    & > header {
+        position: fixed;
+        width: 100%;
     }
 }
