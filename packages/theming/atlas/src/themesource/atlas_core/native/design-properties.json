@@ -82,7 +82,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -479,7 +480,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -753,7 +755,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -1295,7 +1298,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -1457,7 +1461,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -1495,7 +1500,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -1548,7 +1554,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -1804,7 +1811,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
@@ -2214,7 +2222,8 @@
             "description": "Change the background color of the container.",
             "options": [
                 {
-                    "name": "Primary",
+                    "name": "Background Primary",
+                    "oldNames": ["Primary"],
                     "class": "backgroundPrimary"
                 },
                 {
