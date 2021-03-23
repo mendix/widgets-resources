@@ -28,7 +28,7 @@ export const getPreview = (values: DatagridDropdownFilterPreviewProps): Structur
                                 type: "Text",
                                 fontColor: values.emptyOptionCaption ? "#BBBBBB" : "#FFF",
                                 italic: true,
-                                content: values.emptyOptionCaption.length > 0 ? values.emptyOptionCaption : "Sample"
+                                content: values.emptyOptionCaption ? values.emptyOptionCaption : "Sample"
                             } as TextProps
                         ],
                         grow: 1
