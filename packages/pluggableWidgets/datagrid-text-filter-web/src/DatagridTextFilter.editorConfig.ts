@@ -25,6 +25,27 @@ export function getProperties(values: DatagridTextFilterPreviewProps, defaultPro
 }
 
 export const getPreview = (values: DatagridTextFilterPreviewProps): StructurePreviewProps => {
+    const adjustableByUserContainer = values.adjustable
+        ? [
+              {
+                  type: "Container",
+                  padding: 2,
+                  grow: 0,
+                  children: [
+                      {
+                          type: "Image",
+                          document: getSvgContent(values.defaultFilter)
+                      } as ImageProps
+                  ]
+              } as ContainerProps,
+              {
+                  type: "Container",
+                  borders: true,
+                  borderWidth: 0.5,
+                  grow: 0
+              } as ContainerProps
+          ]
+        : [];
     return {
         type: "RowLayout",
         columnSize: "grow",
@@ -37,27 +58,7 @@ export const getPreview = (values: DatagridTextFilterPreviewProps): StructurePre
                 columnSize: "grow",
                 backgroundColor: "#FFFFFF",
                 children: [
-                    ...(values.adjustable
-                        ? [
-                              {
-                                  type: "Container",
-                                  padding: 2,
-                                  grow: 0,
-                                  children: [
-                                      {
-                                          type: "Image",
-                                          document: getSvgContent(values.defaultFilter)
-                                      } as ImageProps
-                                  ]
-                              } as ContainerProps,
-                              {
-                                  type: "Container",
-                                  borders: true,
-                                  borderWidth: 0.5,
-                                  grow: 0
-                              } as ContainerProps
-                          ]
-                        : []),
+                    ...adjustableByUserContainer,
                     {
                         type: "Container",
                         padding: 8,
