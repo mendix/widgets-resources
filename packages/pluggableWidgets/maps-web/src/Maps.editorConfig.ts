@@ -129,7 +129,7 @@ export function check(values: MapsPreviewProps): Problem[] {
         }
         if (values.advanced && marker.markerStyle === "image" && !marker.customMarker) {
             errors.push({
-                property: `customMarker/${index + 1}`,
+                property: `markers/${index + 1}/customMarker`,
                 message: `Custom marker image is required when shape is 'image' for address ${marker.address}`
             });
         }
