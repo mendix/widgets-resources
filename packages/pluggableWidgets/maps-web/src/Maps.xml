@@ -154,11 +154,11 @@
                 </property>
                 <property key="geodecodeApiKey" type="string" required="false">
                     <caption>Google maps API Key</caption>
-                    <description>If Google Maps is not used as the map provider, this property becomes optional. If you're using markers based on address, then this key is necessary for the markers to work.</description>
+                    <description>If you are not using Google Maps as your map provider, this property becomes optional. If you are using markers based on address, this key is required for those markers to work.</description>
                 </property>
                 <property key="geodecodeApiKeyExp" type="expression" required="false">
                     <caption>Google maps API Key</caption>
-                    <description>If Google Maps is not used as the map provider, this property becomes optional. If you're using markers based on address, then this key is necessary for the markers to work.</description>
+                    <description>If you are not using Google Maps as your map provider, this property becomes optional. If you are using markers based on address, this key is required for those markers to work.</description>
                     <returnType type="String"/>
                 </property>
                 <property key="showCurrentLocation" type="boolean" defaultValue="false">
