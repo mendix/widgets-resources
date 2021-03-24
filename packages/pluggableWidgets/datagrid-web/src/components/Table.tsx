@@ -67,7 +67,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
     const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
         (props.columns
-            .map((c, i) => (c.hidable === "hidden" ? i.toString() : undefined))
+            .map((c, i) =>
+                props.columnsHidable && c.hidable === "hidden" && !props.preview ? i.toString() : undefined
+            )
             .filter(Boolean) as string[]) ?? []
     );
     const [paginationIndex, setPaginationIndex] = useState<number>(0);
@@ -139,7 +141,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 <div
                                     {...cell.getCellProps()}
                                     className={classNames("td", { "td-borders": rowIndex === 0 }, className, {
-                                        clickable: !!onClick
+                                        clickable: !!onClick,
+                                        "hidden-column-preview":
+                                            props.preview && props.columnsHidable && cell.column.hidden
                                     })}
                                     onClick={onClick}
                                     onKeyDown={
@@ -171,6 +175,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             props.filterRenderer,
             props.valueForSort,
             props.columnsFilterable,
+            props.columnsHidable,
+            props.preview,
             isDragging
         ]
     );
@@ -292,7 +298,9 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                     draggable={props.columnsDraggable}
                                     dragOver={dragOver}
                                     filterable={props.columnsFilterable}
+                                    hidable={props.columnsHidable}
                                     isDragging={isDragging}
+                                    preview={props.preview}
                                     resizable={props.columnsResizable}
                                     setColumnOrder={(newOrder: Array<IdType<object>>) => {
                                         setOrder(newOrder);

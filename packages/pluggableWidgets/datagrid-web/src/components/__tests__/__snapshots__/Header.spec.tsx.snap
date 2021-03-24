@@ -164,6 +164,36 @@ exports[`Header renders the structure correctly when filterable with no custom f
 </div>
 `;
 
+exports[`Header renders the structure correctly when is hidden and preview 1`] = `
+<div
+  className="th hidden-column-preview"
+  role="Test"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title="Test"
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
+    >
+      <span>
+        Test
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Header renders the structure correctly when resizable 1`] = `
 <div
   className="th"
