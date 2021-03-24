@@ -1,9 +1,20 @@
 .widget-shrinking-header-threshold {
-    max-height: 100vh;
+    height: 100vh;
     overflow: scroll;
 
-    & > header {
-        position: fixed;
-        width: 100%;
+    & > div {
+        position: sticky;
+        top: 0;
+        height: 100px; // Should be dynamic in the future
+
+        & > header {
+            width: 100%;
+        }
     }
 }
+
+// Dus sticky div met max header size
+// header kan kleiner worden en heeft geen effect op scroll
+// Header moet onderdeel zijn van scroll, anders krijg je rare effecten op iOS browser
+// Vraag is: hoe krijg je de max size? Berekenen of in css vastleggen?
+// Berekenen is dynamischer, maar kost performance en hoe zit het dan met scroll onthouden?

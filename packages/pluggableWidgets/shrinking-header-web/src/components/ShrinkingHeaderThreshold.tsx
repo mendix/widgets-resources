@@ -65,7 +65,9 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
 
     return (
         <div ref={setWrapperDivElement} id={name} className={actualClassName} style={style} tabIndex={tabIndex}>
-            <header>{headerContent}</header>
+            <div>
+                <header>{headerContent}</header>
+            </div>
             <section>{scrollableContent}</section>
         </div>
     );
