@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useState } from "react";
+import { createElement, CSSProperties, ReactElement, ReactNode, useEffect, useState } from "react";
 import classNames from "classnames";
 import { throttle } from "lodash-es";
 
@@ -16,36 +16,16 @@ export interface ShrinkingHeaderThresholdProps {
 }
 
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
-    const {
-        name,
-        className,
-        style,
-        tabIndex,
-        headerContent,
-        scrollableContent,
-        shrunkClassName,
-        shrinkThreshold
-    } = props;
+    const { name, className, style, tabIndex, headerContent, shrunkClassName, shrinkThreshold } = props;
 
     const [shrunk, setShrunk] = useState(false);
     const actualClassName = classNames("widget-shrinking-header-threshold", className, {
         [`${shrunkClassName}`]: shrunk
     });
 
-    const [wrapperDiv, setWrapperDiv] = useState<HTMLDivElement>();
-    const setWrapperDivElement = useCallback(
-        (node: HTMLDivElement | null) => {
-            if (node) {
-                setWrapperDiv(node);
-            }
-        },
-        [setWrapperDiv]
-    );
-
     useEffect(() => {
         const evaluateShrunkState = function (this: HTMLElement): void {
-            console.log("evaluate");
-            if (this.scrollTop >= shrinkThreshold) {
+            if (window.scrollY >= shrinkThreshold) {
                 setShrunk(true);
             } else {
                 setShrunk(false);
@@ -54,21 +34,16 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
 
         const onScroll = throttle(evaluateShrunkState, 150, { leading: true });
 
-        if (wrapperDiv) {
-            wrapperDiv.addEventListener("scroll", onScroll);
+        document.addEventListener("scroll", onScroll);
 
-            return () => {
-                wrapperDiv.removeEventListener("scroll", onScroll);
-            };
-        }
-    }, [wrapperDiv, shrinkThreshold, setShrunk]);
+        return () => {
+            document.removeEventListener("scroll", onScroll);
+        };
+    }, [shrinkThreshold, setShrunk]);
 
     return (
-        <div ref={setWrapperDivElement} id={name} className={actualClassName} style={style} tabIndex={tabIndex}>
-            <div>
-                <header>{headerContent}</header>
-            </div>
-            <section>{scrollableContent}</section>
+        <div id={name} className={actualClassName} style={style} tabIndex={tabIndex}>
+            <header>{headerContent}</header>
         </div>
     );
 }

@@ -1,15 +1,11 @@
 .widget-shrinking-header-threshold {
-    height: 100vh;
-    overflow: scroll;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100px; // Should be dynamic in the future
 
-    & > div {
-        position: sticky;
-        top: 0;
-        height: 100px; // Should be dynamic in the future
-
-        & > header {
-            width: 100%;
-        }
+    & > header {
+        width: 100%;
     }
 }
 
@@ -18,3 +14,4 @@
 // Header moet onderdeel zijn van scroll, anders krijg je rare effecten op iOS browser
 // Vraag is: hoe krijg je de max size? Berekenen of in css vastleggen?
 // Berekenen is dynamischer, maar kost performance en hoe zit het dan met scroll onthouden?
+// Scroll kan niet op element toegepast worden, maar moet op window niveau blijven vanwege iOS browser
