@@ -9,7 +9,7 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Datasource">
-                <property key="content" type="widgets" required="true">
+                <property key="content" type="widgets" required="false">
                     <caption>Content</caption>
                     <description></description>
                 </property>
@@ -27,6 +27,16 @@
                         <attributeType name="String"/>
                     </attributeTypes>
                 </property>
+                <property key="whatToCapture" type="enumeration" defaultValue="captureContent" required="true">
+                    <caption>What to capture</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="captureFullscreen">Fullscreen</enumerationValue>
+                        <enumerationValue key="captureContent">Content</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+                <propertyGroup caption="Actions">
                 <property key="beforeScreenshot" type="action" required="false">
                     <caption>Before screenshot</caption>
                     <description></description>

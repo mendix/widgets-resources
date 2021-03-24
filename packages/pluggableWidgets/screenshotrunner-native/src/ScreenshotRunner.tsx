@@ -76,6 +76,10 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
         const maxTimeouts = 30;
         let timeoutCount = 0;
 
+        if (!task.task?.canExecute) {
+            throw new Error(`Task ${task.name} is not executable..`);
+        }
+
         setTasksRunning(oldArray => [...oldArray, task]);
         enableGlobalScreenshotVariable(task.name);
         executeAction(task.task);
@@ -99,7 +103,7 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
         if (areTasksTriggered) {
             (async () => {
                 for await (const task of props.tasks) {
-                    if ((global as CustomGlobal).screenshotRunner.masterIsRunning && task.enabled) {
+                    if (task.enabled) {
                         await runTask(task);
                     }
                 }
@@ -116,10 +120,8 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
     };
 
     const setAreTasksTriggeredToTrue = async () => {
-        console.warn("global " + !(global as CustomGlobal).screenshotRunner?.masterIsRunning)
         if (!(global as CustomGlobal).screenshotRunner?.masterIsRunning) {
             (global as CustomGlobal).screenshotRunner = { masterIsRunning: true };
-            // enableGlobalScreenshotVariable();
             setAreTasksTriggered(true);
         }
     };
