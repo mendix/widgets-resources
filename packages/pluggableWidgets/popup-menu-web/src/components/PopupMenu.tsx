@@ -12,7 +12,7 @@ import {
     unBlockAbsoluteElementTop
 } from "../utils/document";
 import { ReactElement, useState, createElement, useCallback, useEffect, useRef } from "react";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 import { ActionValue } from "mendix";
 
 import { PopupMenuContainerProps, PositionEnum } from "../../typings/PopupMenuProps";

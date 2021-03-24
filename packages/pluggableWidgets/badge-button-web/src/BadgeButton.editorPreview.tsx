@@ -1,4 +1,4 @@
-import { parseStyle } from "@widgets-resources/piw-utils";
+import { parseStyle } from "@mendix/piw-utils-internal";
 import { createElement, ReactElement } from "react";
 import { BadgeButton } from "./components/BadgeButton";
 import { BadgeButtonPreviewProps } from "../typings/BadgeButtonProps";

@@ -1,10 +1,10 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { createElement, ReactElement, useEffect, useState } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import Video from "react-native-video";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
-import { isAvailable } from "@widgets-resources/piw-utils";
+import { isAvailable } from "@mendix/piw-utils-internal";
 import deepmerge from "deepmerge";
 
 const enum StatusEnum {

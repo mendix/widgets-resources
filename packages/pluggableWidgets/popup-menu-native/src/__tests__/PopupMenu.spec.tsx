@@ -2,7 +2,7 @@ import { PopupMenuProps } from "../../typings/PopupMenuProps";
 import { PopupMenuStyle } from "../ui/Styles";
 import { Text, TouchableHighlight } from "react-native";
 import { createElement } from "react";
-import { actionValue } from "@widgets-resources/piw-utils";
+import { actionValue } from "@mendix/piw-utils-internal";
 import { fireEvent, render } from "react-native-testing-library";
 import { PopupMenu } from "../PopupMenu";
 import { MenuItem } from "react-native-material-menu";

@@ -1,12 +1,12 @@
 import { createElement, ReactElement, ReactNode, useCallback, useRef, useState } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Animated, View } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { defaultListViewSwipeStyle, ListViewSwipeStyle, PanelStyle } from "./ui/styles";
 import { ActionValue } from "mendix";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export const ListViewSwipe = (props: ListViewSwipeProps<ListViewSwipeStyle>): ReactElement => {
     const row = useRef<Swipeable>(null);

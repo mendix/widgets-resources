@@ -4,7 +4,7 @@ import { IntroScreen } from "../IntroScreen";
 import { IntroScreenProps } from "../../typings/IntroScreenProps";
 import { IntroScreenStyle } from "../ui/Styles";
 import { View } from "react-native";
-import { EditableValueBuilder } from "@widgets-resources/piw-utils";
+import { EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 
 jest.mock("react-native-device-info", () => ({

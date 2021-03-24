@@ -1,4 +1,4 @@
-import { RowLayoutProps } from "@widgets-resources/piw-utils";
+import { RowLayoutProps } from "@mendix/piw-utils-internal";
 import StructurePreviewActivityIndicatorPrimarySVG from "./assets/StructurePreviewActivityIndicatorPrimary.svg";
 
 export const getPreview = (): RowLayoutProps => ({

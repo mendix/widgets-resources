@@ -1,5 +1,5 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
+import { executeAction } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
 import { Component, createElement } from "react";
 import StarRating from "react-native-star-rating";

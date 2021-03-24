@@ -3,7 +3,7 @@ import { DatagridTextFilterContainerProps } from "../typings/DatagridTextFilterP
 
 import { FilterComponent } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@widgets-resources/piw-utils";
+import { Alert } from "@mendix/piw-utils-internal";
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();

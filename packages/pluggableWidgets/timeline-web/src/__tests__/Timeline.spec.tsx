@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { TimelineContainerProps } from "../../typings/TimelineProps";
-import { dynamicValue, ListValueBuilder } from "@widgets-resources/piw-utils";
+import { dynamicValue, ListValueBuilder } from "@mendix/piw-utils-internal";
 import Timeline from "../Timeline";
 
 describe("Timeline", () => {

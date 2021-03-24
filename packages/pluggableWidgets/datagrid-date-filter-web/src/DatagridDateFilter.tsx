@@ -6,7 +6,7 @@ import { DatagridDateFilterContainerProps } from "../typings/DatagridDateFilterP
 import { registerLocale } from "react-datepicker";
 import * as locales from "date-fns/locale";
 import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@widgets-resources/piw-utils";
+import { Alert } from "@mendix/piw-utils-internal";
 
 interface Locale {
     [key: string]: object;

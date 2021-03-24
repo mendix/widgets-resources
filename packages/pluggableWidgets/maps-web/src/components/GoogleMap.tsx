@@ -11,7 +11,7 @@ import { getGoogleMapsStyles } from "../utils/google";
 import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
 import { Option } from "../utils/data";
-import { Alert } from "@widgets-resources/piw-utils";
+import { Alert } from "@mendix/piw-utils-internal";
 
 export interface GoogleMapsProps extends SharedProps {
     mapStyles?: string;

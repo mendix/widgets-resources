@@ -10,7 +10,7 @@ import {
     RowLayoutProps,
     StructurePreviewProps,
     transformGroupsIntoTabs
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
 export function getProperties(

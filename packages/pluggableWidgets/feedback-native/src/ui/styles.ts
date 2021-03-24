@@ -1,4 +1,4 @@
-import { exclude, only, Style } from "@native-mobile-resources/util-widgets";
+import { exclude, only, Style } from "@mendix/piw-native-utils-internal";
 import { Dimensions, ImageStyle, ImageURISource, Platform, TextInputProps, TextStyle, ViewStyle } from "react-native";
 
 /**

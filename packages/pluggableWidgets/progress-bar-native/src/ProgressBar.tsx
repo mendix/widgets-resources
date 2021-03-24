@@ -1,5 +1,5 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { isAvailable } from "@widgets-resources/piw-utils";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
+import { isAvailable } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { Text, View } from "react-native";
 import { Bar } from "react-native-progress";

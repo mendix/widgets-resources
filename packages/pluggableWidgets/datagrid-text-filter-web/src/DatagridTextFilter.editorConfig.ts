@@ -14,7 +14,7 @@ import {
     startsWithIcon,
     StructurePreviewProps,
     TextProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 import { DatagridTextFilterPreviewProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
 export function getProperties(values: DatagridTextFilterPreviewProps, defaultProperties: Properties): Properties {

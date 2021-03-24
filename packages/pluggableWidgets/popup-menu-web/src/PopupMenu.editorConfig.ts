@@ -1,4 +1,4 @@
-import { changePropertyIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { changePropertyIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
 export function getProperties(

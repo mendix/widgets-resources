@@ -1,5 +1,5 @@
-import { available, flattenStyles, toNumber, unavailable } from "@native-mobile-resources/util-widgets";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { available, flattenStyles, toNumber, unavailable } from "@mendix/piw-native-utils-internal";
+import { executeAction } from "@mendix/piw-utils-internal";
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";

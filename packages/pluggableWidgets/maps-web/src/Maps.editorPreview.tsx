@@ -3,7 +3,7 @@ import { MapSwitcher } from "./components/MapSwitcher";
 
 import { MapsPreviewProps } from "../typings/MapsProps";
 import { Marker } from "../typings/shared";
-import { Alert, parseStyle } from "@widgets-resources/piw-utils";
+import { Alert, parseStyle } from "@mendix/piw-utils-internal";
 import { translateZoom } from "./utils/zoom";
 
 declare function require(name: string): string;

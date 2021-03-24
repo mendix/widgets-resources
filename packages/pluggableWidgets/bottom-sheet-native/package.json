@@ -19,8 +19,8 @@
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@native-mobile-resources/util-widgets": "^1.0.0",
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-native-utils-internal": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "react-native-actionsheet": "^2.4.2",
     "react-native-device-info": "8.0.1",
     "react-native-modal": "^11.5.4",

@@ -1,4 +1,4 @@
-import { Alert } from "@widgets-resources/piw-utils";
+import { Alert } from "@mendix/piw-utils-internal";
 import { mount, shallow } from "enzyme";
 import * as ProgressbarJs from "progressbar.js";
 import { createElement, FunctionComponent } from "react";

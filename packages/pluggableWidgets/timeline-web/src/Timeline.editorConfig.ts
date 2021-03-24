@@ -4,7 +4,7 @@ import {
     Problem,
     Properties,
     StructurePreviewProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 import lineAndDotSVG from "./assets/lineAndDot.svg";
 import { getHeaderOption, GroupHeaderConfig } from "./utils/utils";
