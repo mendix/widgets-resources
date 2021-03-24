@@ -57,7 +57,7 @@ function executeScript(script) {
         args = args.concat(["--subProjectPath", projectPath]);
     }
     if (
-        /.*node_modules[\/|\\]@widgets-resources[\/|\\]utils-react-widgets[\/|\\]?$/.test(libraryPath) ||
+        /.*node_modules[\/|\\]@mendix[\/|\\]custom-widgets-utils-internal[\/|\\]?$/.test(libraryPath) ||
         /^win/.test(process.platform)
     ) {
         spawnParams.cwd = libraryPath;
