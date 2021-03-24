@@ -1056,7 +1056,7 @@
             "name": "Hide icons",
             "type": "Toggle",
             "description": "Hide the navigation items icon",
-            "class": "hide-icon"
+            "class": "hide-icons"
         }
     ],
     "SimpleMenuBar": [
