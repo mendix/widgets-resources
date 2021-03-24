@@ -52,7 +52,7 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
             }
         };
 
-        const onScroll = throttle(evaluateShrunkState, 100, { trailing: true });
+        const onScroll = throttle(evaluateShrunkState, 150, { leading: true });
 
         if (wrapperDiv) {
             wrapperDiv.addEventListener("scroll", onScroll);
