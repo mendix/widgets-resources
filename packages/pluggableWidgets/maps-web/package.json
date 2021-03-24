@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@react-google-maps/api": "^1.8.6",
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "deep-equal": "^2.0.2",
     "leaflet": "^1.6.0",

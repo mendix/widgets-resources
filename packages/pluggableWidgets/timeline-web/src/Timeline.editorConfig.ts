@@ -1,4 +1,4 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {

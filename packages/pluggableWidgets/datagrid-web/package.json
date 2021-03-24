@@ -28,7 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.1",
     "@fortawesome/free-regular-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "react-table": "^7.5.0"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { hidePropertyIn, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertyIn, Properties } from "@mendix/piw-utils-internal";
 import { DatagridPreviewProps } from "../typings/DatagridProps";
 
 export function getProperties(values: DatagridPreviewProps, defaultProperties: Properties): Properties {

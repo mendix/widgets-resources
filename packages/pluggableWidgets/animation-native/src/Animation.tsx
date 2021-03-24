@@ -1,10 +1,10 @@
 import { Component, ReactNode, createElement } from "react";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Animation as AnimationType, View, Easing } from "react-native-animatable";
 
 import { AnimationProps } from "../typings/AnimationProps";
 import { defaultAnimationStyle, AnimationStyle } from "./ui/Styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = AnimationProps<AnimationStyle>;
 type Direction = "normal" | "reverse" | "alternate" | "alternate-reverse";

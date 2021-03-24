@@ -1,7 +1,7 @@
 import { ComponentType, createElement, ReactElement, useCallback, useRef, Fragment } from "react";
 import { PopupMenuProps } from "../typings/PopupMenuProps";
 import { PopupMenuStyle } from "./ui/Styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 import {
     Platform,
     StyleSheet,

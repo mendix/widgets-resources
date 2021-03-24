@@ -1,4 +1,4 @@
-import { dynamicValue } from "@widgets-resources/piw-utils";
+import { dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { render } from "react-native-testing-library";
 

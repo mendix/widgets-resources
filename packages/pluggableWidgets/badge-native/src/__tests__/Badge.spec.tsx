@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue } from "@widgets-resources/piw-utils";
+import { actionValue, dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { Platform, Text } from "react-native";
 import { fireEvent, render } from "react-native-testing-library";

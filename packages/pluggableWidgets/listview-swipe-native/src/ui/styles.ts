@@ -1,5 +1,5 @@
 import { ViewStyle } from "react-native";
-import { Style } from "@native-mobile-resources/util-widgets";
+import { Style } from "@mendix/piw-native-utils-internal";
 
 export interface PanelStyle extends ViewStyle {
     panelSize: number;

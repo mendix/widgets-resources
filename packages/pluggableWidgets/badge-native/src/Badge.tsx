@@ -1,10 +1,10 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Component, createElement } from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 
 import { BadgeProps } from "../typings/BadgeProps";
 import { BadgeStyle, defaultBadgeStyle } from "./ui/Styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = BadgeProps<BadgeStyle>;
 

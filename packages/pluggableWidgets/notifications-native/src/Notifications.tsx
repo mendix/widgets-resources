@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import firebase, { RNFirebase } from "react-native-firebase";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 interface NotificationData {
     actionName?: string;

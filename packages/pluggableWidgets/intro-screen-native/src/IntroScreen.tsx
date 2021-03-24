@@ -6,7 +6,7 @@ import { DynamicValue, ValueStatus } from "mendix";
 import { SwipeableContainer } from "./SwipeableContainer";
 import AsyncStorage from "@react-native-community/async-storage";
 import deepmerge from "deepmerge";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export function IntroScreen(props: IntroScreenProps<IntroScreenStyle>): JSX.Element {
     const [visible, setVisible] = useState(false);

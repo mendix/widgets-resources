@@ -1,4 +1,4 @@
-import { available, flattenStyles, unavailable } from "@native-mobile-resources/util-widgets";
+import { available, flattenStyles, unavailable } from "@mendix/piw-native-utils-internal";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 import { Circle } from "react-native-progress";

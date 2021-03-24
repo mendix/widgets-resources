@@ -26,8 +26,8 @@
   "license": "Apache-2.0",
   "dependencies": {
     "react-native-animatable": "^1.3.2",
-    "@native-mobile-resources/util-widgets": "^1.0.0",
-    "@widgets-resources/piw-utils": "^1.0.0"
+    "@mendix/piw-native-utils-internal": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

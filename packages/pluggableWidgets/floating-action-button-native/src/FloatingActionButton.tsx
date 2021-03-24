@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement } from "react";
 import { View } from "react-native";
@@ -6,7 +6,7 @@ import ActionButton from "react-native-action-button";
 
 import { FloatingActionButtonProps } from "../typings/FloatingActionButtonProps";
 import { defaultFloatingActionButtonStyle, FloatingActionButtonStyle } from "./ui/styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 interface State {
     active: boolean;

@@ -1,4 +1,4 @@
-import { Style } from "@native-mobile-resources/util-widgets";
+import { Style } from "@mendix/piw-native-utils-internal";
 import { Platform, TextStyle, ViewStyle } from "react-native";
 
 export interface ProgressCircleStyle extends Style {

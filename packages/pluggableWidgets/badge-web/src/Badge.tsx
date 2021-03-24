@@ -1,5 +1,5 @@
 import { ReactNode, useCallback, createElement } from "react";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
 
 import { BadgeContainerProps } from "../typings/BadgeProps";
