@@ -181,4 +181,9 @@
             }
         }
     }
+    .hide-icons.mx-navigationtree {
+        .glyphicon{
+            display: none;
+        }
+    }
 }

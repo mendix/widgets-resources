@@ -9,6 +9,11 @@
     .toggle-btn > .glyphicon {
         margin: 0;
     }
+    .mx-scrollcontainer-open{
+        .expand-btn > img{
+            transform: rotate(180deg);
+        }
+    }
 
     // Sidebar
     .region-sidebar {
@@ -19,6 +24,7 @@
         .mx-scrollcontainer-wrapper {
             display: flex;
             flex-direction: column;
+            padding: $spacing-small 0;
         }
         .mx-navigationtree .navbar-inner > ul > li > a {
             padding: $spacing-medium;
@@ -45,16 +51,6 @@
         min-height: $topbar-minimalheight;
         background-color: $navtopbar-bg;
         box-shadow: 0px 2px 2px rgba(194, 196, 201, 0.30354);
-        //removed border & chnaged box-shadow
-
-        &::before {
-            z-index: 1;
-            display: block;
-            width: 100%;
-            height: 4px;
-            content: "";
-            background-color: $brand-primary;
-        }
 
         // Topbar Content
         .topbar-content {
@@ -66,7 +62,6 @@
         // Toggle btn
         .toggle-btn {
             margin-right: $spacing-medium;
-            padding: 0 $spacing-medium;
         }
 
         // For your company, product, or project name
@@ -76,9 +71,12 @@
             height: auto;
             padding: 0;
             line-height: inherit;
+            font-size: 16px;
+            margin-right: $spacing-small;
 
             img {
                 display: inline-block;
+                margin-right: $spacing-small;
                 @if $brand-logo !=false {
                     width: 0;
                     height: 0;
@@ -105,10 +103,11 @@
             }
         }
         .mx-navbar {
-            display: inline-block;
-            margin-left: $gutter-size;
+            display: inline-flex;
             vertical-align: middle;
             background: transparent;
+            justify-content: center;
+            align-items: center;
 
             & > .mx-navbar-item {
                 & > a {

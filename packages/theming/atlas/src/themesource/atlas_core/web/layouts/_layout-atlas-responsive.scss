@@ -3,9 +3,13 @@
 
    Extra styling for responsive layouts
 ========================================================================== */
+$sidebar-width: 232px;
+$sidebar-icon-height: 52px;
+$sidebar-icon-width: 52px;
+
 .layout-atlas-responsive,
 .layout-atlas-responsive-default {
-    $sidebar-width: 56px;
+    $sidebar-width: 232px;
 
     @media (min-width: $screen-md) {
         .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar,
@@ -15,20 +19,16 @@
 
             .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
                 &.mx-navigationtree-has-items:hover {
-                    a {
-                        background-color: $navsidebar-sub-bg;
-                    }
-
                     ul {
                         position: absolute;
                         z-index: 100;
                         top: 0;
                         bottom: 0;
-                        left: $sidebar-width;
+                        left: $sidebar-icon-width;
                         display: block;
                         overflow-y: auto;
-                        min-width: 200px;
-                        padding-top: $spacing-small;
+                        min-width: auto;
+                        padding: $spacing-small 0;
                     }
                 }
 
@@ -76,7 +76,7 @@
     // Sidebar
     .region-sidebar {
         .toggle-btn {
-            width: $sidebar-width;
+            width: $sidebar-icon-width;
             border-color: transparent;
             border-radius: 0;
             background: transparent;
@@ -104,17 +104,18 @@
             }
             & > .mx-navigationtree .navbar-inner > ul > li {
                 & > a {
-                    height: $sidebar-width;
-                    padding: $spacing-small;
+                    height: $sidebar-icon-height;
+                    padding: $spacing-small 0;
+                    white-space: nowrap;
+                    overflow: hidden;
                     // Glyph icon
                     .glyphicon {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 56px;
-                        height: 56px;
-                        margin-left: -$spacing-small;
-                        padding: $spacing-small;
+                        width: $sidebar-icon-width;
+                        height: $sidebar-icon-height;
+                        padding: $spacing-small $spacing-medium;
                         border-radius: $border-radius-default;
                     }
                 }
@@ -124,11 +125,18 @@
 
     // Topbar
     .region-topbar {
+        padding: 0 $spacing-small;
     }
 }
 
 // Topbar variant
 .layout-atlas-responsive-topbar {
+    .region-topbar{
+        padding: 0 $spacing-medium;
+        @media (max-width: $screen-sm-max) {
+            padding: 0 $spacing-small;
+        }
+    }
 }
 
 // All responsive layouts

@@ -24,8 +24,8 @@ $brand-warning: #eca51c;
 $brand-danger: #e33f4e;
 
 $brand-logo: false;
-$brand-logo-height: 26px;
-$brand-logo-width: 26px; // Only used for CSS brand logo
+$brand-logo-height: 32px;
+$brand-logo-width: 32px; // Only used for CSS brand logo
 
 //== Step 2: UI Customization
 
@@ -35,11 +35,11 @@ $font-color-default: #0a1325;
 
 // Global Border Color
 $border-color-default: #ced0d3;
-$border-radius-default: 5px;
+$border-radius-default: 4px;
 
 // Topbar
-$topbar-bg: #fff;
-$topbar-minimalheight: 60px;
+$topbar-bg: #020557;
+$topbar-minimalheight: 48px;
 $topbar-border-color: $border-color-default;
 
 // Topbar mobile
@@ -114,9 +114,9 @@ $font-color-header: #0a1325;
 
 // Default Navigation styling
 $navigation-item-height: unset;
-$navigation-item-padding: 16px;
+$navigation-item-padding: 8px;
 
-$navigation-font-size: $font-size-default;
+$navigation-font-size: 14px;
 $navigation-sub-font-size: $font-size-small;
 $navigation-glyph-size: 20px; // For glyphicons that you can select in the Mendix Modeler
 
@@ -124,11 +124,21 @@ $navigation-color: #fff;
 $navigation-color-hover: #fff;
 $navigation-color-active: #fff;
 
-$navigation-sub-color: #aaa;
-$navigation-sub-color-hover: $brand-primary;
-$navigation-sub-color-active: $brand-primary;
+$navigation-sub-color: #fff;
+$navigation-sub-color-hover: #fff;
+$navigation-sub-color-active: #fff;
 
 // Navigation Sidebar
+$navsidebar-bg: #24276c;
+$navsidebar-bg-hover: #020557;
+$navsidebar-bg-active: #020557;
+
+$navsidebar-sub-bg: #020557;
+$navsidebar-sub-bg-hover: #24276c;
+$navsidebar-sub-bg-active: #24276c;
+
+$navsidebar-border-color: $navsidebar-bg-hover;
+
 $navsidebar-font-size: $font-size-default;
 $navsidebar-sub-font-size: $font-size-small;
 $navsidebar-glyph-size: 20px; // For glyphicons that you can select in the Mendix Modeler
@@ -137,9 +147,9 @@ $navsidebar-color: #fff;
 $navsidebar-color-hover: #fff;
 $navsidebar-color-active: #fff;
 
-$navsidebar-sub-color: #aaa;
-$navsidebar-sub-color-hover: $brand-primary;
-$navsidebar-sub-color-active: $brand-primary;
+$navsidebar-sub-color: #fff;
+$navsidebar-sub-color-hover: #fff;
+$navsidebar-sub-color-active: #fff;
 
 // Navigation topbar
 $navtopbar-font-size: $font-size-default;
@@ -147,18 +157,18 @@ $navtopbar-sub-font-size: $font-size-small;
 $navtopbar-glyph-size: 1.2em; // For glyphicons that you can select in the Mendix Modeler
 
 $navtopbar-bg: $topbar-bg;
-$navtopbar-bg-hover: darken($navtopbar-bg, 4);
-$navtopbar-bg-active: darken($navtopbar-bg, 8);
-$navtopbar-color: $font-color-default;
+$navtopbar-bg-hover: mix($topbar-bg, white, 85%);
+$navtopbar-bg-active: mix($topbar-bg, white, 85%);
+$navtopbar-color: #fff;
 $navtopbar-color-hover: $navtopbar-color;
 $navtopbar-color-active: $navtopbar-color;
 
-$navtopbar-sub-bg: lighten($navtopbar-bg, 4);
-$navtopbar-sub-bg-hover: $navtopbar-sub-bg;
-$navtopbar-sub-bg-active: $navtopbar-sub-bg;
-$navtopbar-sub-color: #aaa;
-$navtopbar-sub-color-hover: $brand-primary;
-$navtopbar-sub-color-active: $brand-primary;
+$navtopbar-sub-bg: $topbar-bg;
+$navtopbar-sub-bg-hover: $navtopbar-bg-hover;
+$navtopbar-sub-bg-active: $navtopbar-bg-hover;
+$navtopbar-sub-color: #fff;
+$navtopbar-sub-color-hover: #fff;
+$navtopbar-sub-color-active: #fff;
 
 //## Used in layouts/base
 $navtopbar-border-color: $topbar-border-color;
@@ -586,34 +596,6 @@ $brand-inverse: #24276c;
 $brand-info: #0086d9;
 
 //== Step 2: UI Customization
-
-// Sidebar
-$sidebar-bg: $brand-inverse;
-
-//== Navigation
-//## Used in components/navigation
-
-// Default Navigation styling
-$navigation-bg: $brand-inverse;
-$navigation-bg-hover: lighten($navigation-bg, 4);
-$navigation-bg-active: lighten($navigation-bg, 8);
-
-$navigation-sub-bg: darken($navigation-bg, 4);
-$navigation-sub-bg-hover: $navigation-sub-bg;
-$navigation-sub-bg-active: $navigation-sub-bg;
-
-$navigation-border-color: $navigation-bg-hover;
-
-// Navigation Sidebar
-$navsidebar-bg: $sidebar-bg;
-$navsidebar-bg-hover: darken($navsidebar-bg, 4);
-$navsidebar-bg-active: darken($navsidebar-bg, 8);
-
-$navsidebar-sub-bg: darken($navsidebar-bg, 4);
-$navsidebar-sub-bg-hover: $navsidebar-sub-bg;
-$navsidebar-sub-bg-active: $navsidebar-sub-bg;
-
-$navsidebar-border-color: $navsidebar-bg-hover;
 
 //== Form
 //## Used in components/inputs

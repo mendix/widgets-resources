@@ -39,4 +39,9 @@
             }
         }
     }
+    .hide-icons.mx-menubar {
+        .glyphicon{
+            display: none;
+        }
+    }
 }
