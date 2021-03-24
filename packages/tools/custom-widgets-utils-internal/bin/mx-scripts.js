@@ -91,7 +91,5 @@ function getLibraryPath() {
         return gulpSlash(path.join(currentPath, "../../"));
     }
     const isBinFolder = currentPath.indexOf(gulpSlash("/node_modules/.bin")) !== -1;
-    return gulpSlash(
-        isBinFolder ? path.join(currentPath, "../../@widgets-resources/utils-react-widgets") : currentPath
-    );
+    return gulpSlash(isBinFolder ? path.join(currentPath, "../../@mendix/custom-widgets-utils-internal") : currentPath);
 }
