@@ -2,7 +2,7 @@ import { createElement, ReactElement, useCallback } from "react";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
 import { Table } from "./components/Table";
-import { parseStyle } from "@widgets-resources/piw-utils";
+import { parseStyle } from "@mendix/piw-utils-internal";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
     const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));

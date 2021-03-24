@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

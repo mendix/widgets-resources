@@ -4,7 +4,7 @@ import { render } from "react-native-testing-library";
 import { ListViewSwipe } from "../ListViewSwipe";
 import { ListViewSwipeProps } from "../../typings/ListViewSwipeProps";
 import { ListViewSwipeStyle } from "../ui/styles";
-import { actionValue } from "@widgets-resources/piw-utils";
+import { actionValue } from "@mendix/piw-utils-internal";
 import { RectButton } from "react-native-gesture-handler";
 
 jest.mock("react-native-gesture-handler", () => ({

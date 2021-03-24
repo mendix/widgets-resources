@@ -1,4 +1,4 @@
-import { ImageProps, ContainerProps } from "@widgets-resources/piw-utils";
+import { ImageProps, ContainerProps } from "@mendix/piw-utils-internal";
 import { FloatingActionButtonPreviewProps } from "../typings/FloatingActionButtonProps";
 import StructurePreviewFloatingActionButtonPrimarySVG from "./assets/StructurePreviewFloatingActionButtonPrimary.svg";
 

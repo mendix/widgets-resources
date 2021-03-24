@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { ValueStatus } from "mendix";
 import { Component, createElement, ReactElement, ReactNode } from "react";
 import { View, ViewStyle } from "react-native";
@@ -11,7 +11,7 @@ import { AlphaGradient } from "./components/AlphaGradient";
 import { DisabledHueGradient } from "./components/DisabledHueGradient";
 import { ColorPickerStyle, defaultColorPickerStyle } from "./ui/Styles";
 import HSLA = tinycolor.ColorFormats.HSLA;
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 interface State {
     color?: HSLA;

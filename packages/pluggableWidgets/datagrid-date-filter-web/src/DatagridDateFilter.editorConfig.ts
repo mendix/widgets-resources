@@ -12,7 +12,7 @@ import {
     smallerThanIcon,
     StructurePreviewProps,
     TextProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 import { DatagridDateFilterPreviewProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 
 export function getProperties(values: DatagridDateFilterPreviewProps, defaultProperties: Properties): Properties {

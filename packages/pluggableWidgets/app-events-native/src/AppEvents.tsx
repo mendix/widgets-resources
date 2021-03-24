@@ -3,7 +3,7 @@ import { Component } from "react";
 import { AppState, AppStateStatus } from "react-native";
 
 import { AppEventsProps } from "../typings/AppEventsProps";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = AppEventsProps<undefined>;
 

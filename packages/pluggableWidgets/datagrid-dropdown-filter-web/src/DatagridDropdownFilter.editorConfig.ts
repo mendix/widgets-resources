@@ -5,7 +5,7 @@ import {
     ImageProps,
     StructurePreviewProps,
     TextProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 
 export const getPreview = (values: DatagridDropdownFilterPreviewProps): StructurePreviewProps => {
     return {

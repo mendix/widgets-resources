@@ -1,6 +1,7 @@
 {
-  "name": "@native-mobile-resources/util-widgets",
+  "name": "@mendix/piw-utils-internal",
   "version": "1.0.0",
+  "description": "Tools and helper functions for PIW",
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

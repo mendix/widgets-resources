@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { ActionValue, DynamicValue } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
@@ -8,7 +8,7 @@ import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
 import { DefaultZoomLevelEnum, MapsProps, MarkersType as MarkerProps } from "../typings/MapsProps";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 type Props = MapsProps<MapsStyle>;
 

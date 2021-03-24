@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
-import { useOnClickOutside } from "@widgets-resources/piw-utils";
+import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 
 const options: Array<{ value: DefaultFilterEnum; label: string }> = [

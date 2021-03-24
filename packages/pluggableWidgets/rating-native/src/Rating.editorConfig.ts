@@ -1,4 +1,4 @@
-import { ImageProps, RowLayoutProps } from "@widgets-resources/piw-utils";
+import { ImageProps, RowLayoutProps } from "@mendix/piw-utils-internal";
 import { RatingPreviewProps } from "../typings/RatingProps";
 import StructurePreviewRatingFilledSVG from "./assets/StructurePreviewRatingFilled.svg";
 import StructurePreviewRatingEmptySVG from "./assets/StructurePreviewRatingEmpty.svg";

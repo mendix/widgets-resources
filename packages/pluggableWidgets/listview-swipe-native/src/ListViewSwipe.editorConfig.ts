@@ -1,4 +1,4 @@
-import { StructurePreviewProps, RowLayoutProps, ContainerProps } from "@widgets-resources/piw-utils";
+import { StructurePreviewProps, RowLayoutProps, ContainerProps } from "@mendix/piw-utils-internal";
 import { ReactNode } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
 

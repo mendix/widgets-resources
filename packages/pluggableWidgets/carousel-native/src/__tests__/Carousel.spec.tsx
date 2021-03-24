@@ -3,7 +3,7 @@ import { CarouselStyle } from "../ui/styles";
 import { render } from "react-native-testing-library";
 import { createElement } from "react";
 import { Text, View } from "react-native";
-import { ListValueBuilder } from "@widgets-resources/piw-utils";
+import { ListValueBuilder } from "@mendix/piw-utils-internal";
 import { Carousel } from "../Carousel";
 
 describe("Carousel", () => {

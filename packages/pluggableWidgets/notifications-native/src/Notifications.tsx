@@ -4,7 +4,7 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 import "@react-native-firebase/app";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 interface NotificationData {
     actionName?: string;

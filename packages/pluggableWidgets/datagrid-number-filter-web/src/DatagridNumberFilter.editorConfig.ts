@@ -11,7 +11,7 @@ import {
     smallerThanIcon,
     StructurePreviewProps,
     TextProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 import { DatagridNumberFilterPreviewProps, DefaultFilterEnum } from "../typings/DatagridNumberFilterProps";
 
 export function getProperties(values: DatagridNumberFilterPreviewProps, defaultProperties: Properties): Properties {

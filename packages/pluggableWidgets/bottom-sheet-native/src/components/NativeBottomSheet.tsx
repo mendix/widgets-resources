@@ -4,7 +4,7 @@ import { Platform, Text } from "react-native";
 import { EditableValue, ValueStatus } from "mendix";
 import { ItemsBasicType } from "../../typings/BottomSheetProps";
 import { ModalItemContainerStyle, BottomSheetStyle, defaultMargins } from "../ui/Styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 interface NativeBottomSheetProps {
     name: string;

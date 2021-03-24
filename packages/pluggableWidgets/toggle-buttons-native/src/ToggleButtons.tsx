@@ -1,11 +1,11 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Component, createElement } from "react";
 import { Text, View } from "react-native";
 import SegmentedControlTab from "react-native-segmented-control-tab";
 
 import { ToggleButtonsProps } from "../typings/ToggleButtonsProps";
 import { defaultToggleButtonsStyle, ToggleButtonsStyle } from "./ui/Styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = ToggleButtonsProps<ToggleButtonsStyle>;
 

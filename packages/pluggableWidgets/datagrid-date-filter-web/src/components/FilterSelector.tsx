@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 import classNames from "classnames";
-import { useOnClickOutside } from "@widgets-resources/piw-utils";
+import { useOnClickOutside } from "@mendix/piw-utils-internal";
 
 const options: Array<{ value: DefaultFilterEnum; label: string }> = [
     { value: "greater", label: "Greater than" },

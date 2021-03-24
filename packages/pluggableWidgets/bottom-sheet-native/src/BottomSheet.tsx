@@ -5,7 +5,7 @@ import { ExpandingDrawer } from "./components/ExpandingDrawer";
 import { NativeBottomSheet } from "./components/NativeBottomSheet";
 import { BottomSheetProps } from "../typings/BottomSheetProps";
 import { StyleSheet } from "react-native";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export function BottomSheet(props: BottomSheetProps<BottomSheetStyle>): ReactElement {
     const styles = StyleSheet.flatten(props.style);

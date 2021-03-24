@@ -1,4 +1,4 @@
-import { StructurePreviewProps } from "@widgets-resources/piw-utils";
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { AnimationProps } from "../typings/AnimationProps";
 
 export function getPreview(values: AnimationProps<any>): StructurePreviewProps {

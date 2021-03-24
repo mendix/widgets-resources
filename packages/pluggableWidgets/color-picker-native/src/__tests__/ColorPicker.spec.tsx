@@ -1,4 +1,4 @@
-import { actionValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
+import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { View } from "react-native";
 import Slider from "react-native-slider";

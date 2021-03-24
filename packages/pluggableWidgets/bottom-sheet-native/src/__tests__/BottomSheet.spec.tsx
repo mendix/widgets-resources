@@ -1,4 +1,4 @@
-import { EditableValueBuilder } from "@widgets-resources/piw-utils";
+import { EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { render } from "react-native-testing-library";
 import { createElement } from "react";
 import { BottomSheet } from "../BottomSheet";

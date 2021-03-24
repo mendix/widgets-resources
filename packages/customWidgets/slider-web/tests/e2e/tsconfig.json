@@ -1,5 +1,5 @@
 {
-    "extends": "@widgets-resources/utils-react-widgets/test-configs/e2e/tsconfig",
+    "extends": "@mendix/custom-widgets-utils-internal/test-configs/e2e/tsconfig",
     "compilerOptions": {
         "baseUrl": ".",
         "rootDir": "./"

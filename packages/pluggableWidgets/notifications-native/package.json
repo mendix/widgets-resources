@@ -18,7 +18,7 @@
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "@react-native-firebase/app": "10.1.0",
     "@react-native-firebase/messaging": "10.5.1"
   },

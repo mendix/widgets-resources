@@ -1,4 +1,4 @@
-import { Style } from "@native-mobile-resources/util-widgets";
+import { Style } from "@mendix/piw-native-utils-internal";
 import { ViewStyle } from "react-native";
 
 export interface AnimationStyle extends Style {
