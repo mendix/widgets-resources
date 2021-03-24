@@ -1,6 +1,6 @@
 import { render } from "react-native-testing-library";
 import { Repeater } from "../Repeater";
-import { ListValueBuilder } from "@widgets-resources/piw-utils";
+import { ListValueBuilder } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { Text } from "react-native";
 

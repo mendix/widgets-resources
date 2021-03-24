@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { ValueStatus } from "mendix";
 import { Component, createElement } from "react";
 import { View } from "react-native";
@@ -7,7 +7,7 @@ import BarcodeMask from "react-native-barcode-mask";
 
 import { BarcodeScannerProps } from "../typings/BarcodeScannerProps";
 import { BarcodeScannerStyle, defaultBarcodeScannerStyle } from "./ui/styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = BarcodeScannerProps<BarcodeScannerStyle>;
 

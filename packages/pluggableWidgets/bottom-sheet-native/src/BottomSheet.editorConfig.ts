@@ -1,4 +1,4 @@
-import { changePropertyIn, hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { changePropertyIn, hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 
 export function getProperties(values: any, defaultProperties: Properties): Properties {
     if (values.type === "modal") {

@@ -1,5 +1,5 @@
 {
-    "extends": "@widgets-resources/utils-react-widgets/configs/tsconfig.json",
+    "extends": "@mendix/custom-widgets-utils-internal/configs/tsconfig.json",
     "compilerOptions": {
         "baseUrl": ".",
         "rootDir": "./",

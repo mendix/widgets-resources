@@ -1,5 +1,5 @@
 {
-  "name": "@widgets-resources/piw-utils",
+  "name": "@mendix/piw-utils-internal",
   "version": "1.0.0",
   "description": "Tools and helper functions for PIW",
   "private": true,

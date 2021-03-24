@@ -1,4 +1,4 @@
-import { hideNestedPropertiesIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
 
 import { LineChartPreviewProps } from "../typings/LineChartProps";
 

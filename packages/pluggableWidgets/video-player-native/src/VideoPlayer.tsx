@@ -1,4 +1,4 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Component, createElement } from "react";
 import { ActivityIndicator, Text, View } from "react-native";
 import Video, { OnLoadData } from "react-native-video";

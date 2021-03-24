@@ -34,6 +34,6 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "react-resize-detector": "^5.2.0",
-    "@widgets-resources/piw-utils": "^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0"
   }
 }

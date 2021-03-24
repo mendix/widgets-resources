@@ -1,4 +1,4 @@
-import { hidePropertyIn, Properties, Problem } from "@widgets-resources/piw-utils";
+import { hidePropertyIn, Properties, Problem } from "@mendix/piw-utils-internal";
 import { AttributesListPreviewType, AccessibilityHelperPreviewProps } from "../typings/AccessibilityHelperProps";
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
