@@ -8,10 +8,3 @@
         width: 100%;
     }
 }
-
-// Dus sticky div met max header size
-// header kan kleiner worden en heeft geen effect op scroll
-// Header moet onderdeel zijn van scroll, anders krijg je rare effecten op iOS browser
-// Vraag is: hoe krijg je de max size? Berekenen of in css vastleggen?
-// Berekenen is dynamischer, maar kost performance en hoe zit het dan met scroll onthouden?
-// Scroll kan niet op element toegepast worden, maar moet op window niveau blijven vanwege iOS browser
