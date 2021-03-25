@@ -5,6 +5,7 @@
  */
 import { ComponentType, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeIcon } from "mendix";
+import Big from "big.js";
 
 export interface SlidesType {
     name: string;
@@ -39,7 +40,7 @@ export interface IntroScreenProps<Style> {
     nextIcon?: DynamicValue<NativeIcon>;
     doneCaption?: DynamicValue<string>;
     doneIcon?: DynamicValue<NativeIcon>;
-    activeSlideAttribute?: EditableValue<BigJs.Big>;
+    activeSlideAttribute?: EditableValue<Big>;
     onSlideChange?: ActionValue;
     onDone?: ActionValue;
     onSkip?: ActionValue;

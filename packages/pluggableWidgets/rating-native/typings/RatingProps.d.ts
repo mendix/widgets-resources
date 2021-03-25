@@ -4,6 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
+import Big from "big.js";
 
 export type AnimationEnum = "pulse" | "bounce" | "flash" | "jello" | "rotate" | "rubberBand" | "shake" | "swing" | "tada" | "wobble" | "none";
 
@@ -12,7 +13,7 @@ export type EditableEnum = "default" | "never";
 export interface RatingProps<Style> {
     name: string;
     style: Style[];
-    ratingAttribute: EditableValue<BigJs.Big>;
+    ratingAttribute: EditableValue<Big>;
     emptyIcon?: DynamicValue<NativeImage>;
     icon?: DynamicValue<NativeImage>;
     maximumValue: number;
