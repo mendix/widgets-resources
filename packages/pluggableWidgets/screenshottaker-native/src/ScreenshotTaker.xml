@@ -41,11 +41,11 @@
                     <caption>Before screenshot</caption>
                     <description></description>
                 </property>
-                <property key="onScreenshot" type="action" required="false">
+                <property key="onScreenshot" type="action" required="true">
                     <caption>On screenshot</caption>
                     <description></description>
                 </property>
-                <property key="onError" type="action" required="false">
+                <property key="onError" type="action" required="true">
                     <caption>On error</caption>
                     <description></description>
                 </property>

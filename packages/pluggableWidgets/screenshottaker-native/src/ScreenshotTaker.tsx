@@ -1,6 +1,7 @@
 import { flattenStyles } from "@native-mobile-resources/util-widgets";
-import { createElement, ReactElement, useEffect, useRef, useState } from "react";
-import { View } from "react-native";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { View, Text } from "react-native";
+import { ValueStatus } from "mendix";
 import { captureScreen, captureRef, CaptureOptions } from "react-native-view-shot";
 
 import { executeAction } from "@widgets-resources/piw-utils";
@@ -31,7 +32,6 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerStyle
     const [shouldTakeScreenshot, setShouldTakeScreenshot] = useState(false);
     const styles = flattenStyles(defaultScreenshotTakerStyles, props.style);
     const g = global as CustomGlobal;
-    console.warn(props.pageName.value);
 
     // Runs on Unmount
     useEffect(() => {
@@ -44,7 +44,6 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerStyle
 
     // Runs on dependency change
     useEffect(() => {
-        console.warn("shouldTakeScreenshotRef");
         if (
             (global as CustomGlobal).screenshotRunner?.task?.isRunning &&
             !shouldTakeScreenshotRef.current &&
@@ -56,17 +55,20 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerStyle
     }, [shouldTakeScreenshotRef.current, setShouldTakeScreenshot]);
 
     useEffect(() => {
-        console.warn("shouldTakeScreenshot");
-        if (shouldTakeScreenshot) {
-            // setShouldTakeScreenshot(false);
+        if (
+            shouldTakeScreenshot &&
+            props.pageName.status === ValueStatus.Available &&
+            props.base64.status === ValueStatus.Available &&
+            props.onScreenshot?.canExecute
+        ) {
+            setShouldTakeScreenshot(false);
             (async () => {
-                console.warn("shouldTakeScreenshot yes");
                 const options: CaptureOptions = {
                     result: "base64",
                     quality: 1
                 };
 
-                if (props.beforeScreenshot) {
+                if (props.beforeScreenshot?.canExecute) {
                     executeAction(props.beforeScreenshot);
                     await timeout(3000); // Wait for action to complete
                 }
@@ -81,36 +83,31 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerStyle
                 }
             })();
         }
-    }, [shouldTakeScreenshot]);
+    }, [shouldTakeScreenshot, props.beforeScreenshot, props.pageName, props.base64, props.onScreenshot]);
 
-    const onCapture = (base64: string) => {
-        if (base64.length <= 0) {
-            console.error(`Screenshot [${g.screenshotRunner.task.name}] failed. Base64 string is empty.`);
-        }
-        const formattedBase64 = base64.replace(/\s/g, "").trim();
-        console.warn("base64: " + formattedBase64);
-        console.warn("name: " + g.screenshotRunner.task.name);
-        debugger;
-        props.pageName.setValue(g.screenshotRunner.task.name);
-        props.base64.setValue(formattedBase64);
-        console.warn("saved name: " + props.pageName.value);
-        console.warn("saved base64: " + props.base64.value);
-        console.warn(props.onScreenshot);
-        console.warn(`can exe ${props.onScreenshot?.canExecute}`);
-        // props.onScreenshot?.execute();
-        // executeAction(props.onScreenshot);
-    };
+    const onCapture = useCallback(
+        async (base64: string) => {
+            if (base64.length <= 0) {
+                console.error(`Screenshot [${g.screenshotRunner.task.name}] failed. Base64 string is empty.`);
+            }
+            const formattedBase64 = base64.replace(/\s/g, "").trim();
+            props.pageName.setValue(g.screenshotRunner.task.name);
+            props.base64.setValue(formattedBase64);
+            executeAction(props.onScreenshot);
+        },
+        [props.pageName, props.base64, props.onScreenshot]
+    );
 
-    const onCaptureFailure = (e: Error) => {
+    function onCaptureFailure(e: Error) {
         (global as CustomGlobal).screenshotRunner.task.isRunning = false;
         (global as CustomGlobal).screenshotRunner.task.error = true;
         g.screenshotRunner.task.onError(e, g.screenshotRunner.task.name);
         executeAction(props.onError);
-    };
+    }
 
     return (
         <View ref={viewRef} style={styles.container}>
-            {props.content as ReactElement}
+            {props.content && captureContent ? props.content : captureContent ? <Text style={{ fontSize: 32, fontWeight: "bold" }}>NO CONTENT LOADED</Text> : null}
         </View>
     );
 }

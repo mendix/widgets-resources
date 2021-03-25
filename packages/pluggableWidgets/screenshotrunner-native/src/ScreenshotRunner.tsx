@@ -103,7 +103,7 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
         if (areTasksTriggered) {
             (async () => {
                 for await (const task of props.tasks) {
-                    if (task.enabled) {
+                    if ((global as CustomGlobal).screenshotRunner?.masterIsRunning && task.enabled) {
                         await runTask(task);
                     }
                 }
