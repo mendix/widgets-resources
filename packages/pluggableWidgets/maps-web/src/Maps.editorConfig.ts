@@ -136,31 +136,32 @@ export function check(values: MapsPreviewProps): Problem[] {
     });
 
     values.dynamicMarkers.forEach((marker, index) => {
-        if (!marker.markersDS) {
+        if (marker.markersDS.type === "null") {
             errors.push({
                 property: `dynamicMarkers/${index + 1}/markersDS`,
                 message: "A data source should be selected in order to retrieve a list of markers"
             });
-        }
-        if (marker.locationType === "address") {
-            if (!marker.address) {
-                errors.push({
-                    property: `dynamicMarkers/${index + 1}/address`,
-                    message: "A dynamic marker requires an address"
-                });
-            }
         } else {
-            if (!marker.latitude) {
-                errors.push({
-                    property: `dynamicMarkers/${index + 1}/latitude`,
-                    message: "A dynamic marker requires latitude"
-                });
-            }
-            if (!marker.longitude) {
-                errors.push({
-                    property: `dynamicMarkers/${index + 1}/longitude`,
-                    message: "A dynamic marker requires longitude"
-                });
+            if (marker.locationType === "address") {
+                if (!marker.address) {
+                    errors.push({
+                        property: `dynamicMarkers/${index + 1}/address`,
+                        message: "A dynamic marker requires an address"
+                    });
+                }
+            } else {
+                if (!marker.latitude) {
+                    errors.push({
+                        property: `dynamicMarkers/${index + 1}/latitude`,
+                        message: "A dynamic marker requires latitude"
+                    });
+                }
+                if (!marker.longitude) {
+                    errors.push({
+                        property: `dynamicMarkers/${index + 1}/longitude`,
+                        message: "A dynamic marker requires longitude"
+                    });
+                }
             }
         }
         if (values.advanced && marker.markerStyleDynamic === "image" && !marker.customMarkerDynamic) {
