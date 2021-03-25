@@ -136,6 +136,7 @@ export function check(values: MapsPreviewProps): Problem[] {
     });
 
     values.dynamicMarkers.forEach((marker, index) => {
+        // @ts-ignore
         if (marker.markersDS.type === "null") {
             errors.push({
                 property: `dynamicMarkers/${index + 1}/markersDS`,
