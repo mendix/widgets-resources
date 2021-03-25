@@ -35,7 +35,7 @@ function toPreviewPropType(prop: Property, generatedTypes: string[]): string {
         case "file":
             return "string";
         case "datasource":
-            return '{ type: string | "null" }';
+            return "{} | null";
         case "attribute":
         case "expression":
             return "string";
