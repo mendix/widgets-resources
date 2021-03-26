@@ -87,14 +87,6 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
                 message: "For the popup menu to be visible, you need to add at least one item to it."
             });
         }
-        values.customItems.forEach((item, index) => {
-            if (!item.content) {
-                errors.push({
-                    property: `customItems/${index + 1}/content`,
-                    message: "The content of a menu item cannot be empty."
-                });
-            }
-        });
     }
     return errors;
 }
