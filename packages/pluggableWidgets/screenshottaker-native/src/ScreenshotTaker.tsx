@@ -1,13 +1,13 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import { ValueStatus } from "mendix";
 import { captureScreen, captureRef, CaptureOptions } from "react-native-view-shot";
 
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 import { ScreenshotTakerProps } from "../typings/ScreenshotTakerProps";
-import { defaultScreenshotTakerStyles, ScreenshotTakerStyle } from "./ui/Styles";
+import { defaultScreenshotTakerStyles, ScreenshotTakerType } from "./ui/Styles";
 
 declare type CustomGlobal = NodeJS.Global &
     typeof globalThis & {
@@ -25,7 +25,7 @@ declare type CustomGlobal = NodeJS.Global &
 
 const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerStyle>): ReactElement | null {
+export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerType>): ReactElement | null {
     const captureContent = props.whatToCapture === "captureContent";
     const viewRef = useRef(null);
     const shouldTakeScreenshotRef = useRef(false);
@@ -107,7 +107,11 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerStyle
 
     return (
         <View ref={viewRef} style={styles.container}>
-            {props.content && captureContent ? props.content : captureContent ? <Text style={{ fontSize: 32, fontWeight: "bold" }}>NO CONTENT LOADED</Text> : null}
+            {props.content && captureContent ? (
+                props.content
+            ) : captureContent ? (
+                <Text style={{ fontSize: 32, fontWeight: "bold" }}>NO CONTENT LOADED</Text>
+            ) : null}
         </View>
     );
 }

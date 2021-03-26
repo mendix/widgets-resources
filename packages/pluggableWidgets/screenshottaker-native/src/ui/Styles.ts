@@ -1,10 +1,10 @@
-import { Style } from "@native-mobile-resources/util-widgets";
+import { Style } from "@mendix/piw-native-utils-internal";
 import { ViewStyle } from "react-native";
 
-export interface ScreenshotTakerStyle extends Style {
+export interface ScreenshotTakerType extends Style {
     container: ViewStyle;
 }
 
-export const defaultScreenshotTakerStyles: ScreenshotTakerStyle = {
-    container: {},
+export const defaultScreenshotTakerStyles: ScreenshotTakerType = {
+    container: {}
 };

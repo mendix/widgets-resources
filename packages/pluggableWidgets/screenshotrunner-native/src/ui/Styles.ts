@@ -1,15 +1,19 @@
-import { Style } from "@native-mobile-resources/util-widgets";
-import { TextStyle, ViewStyle } from "react-native";
+import { Style } from "@mendix/piw-native-utils-internal";
+import { PressableAndroidRippleConfig, TextStyle, ViewStyle } from "react-native";
+
+interface PressableContainerType extends ViewStyle {
+    androidRipple?: PressableAndroidRippleConfig;
+}
 
 export interface ScreenshotRunnerStyle extends Style {
     container: ViewStyle;
     button: {
-        start: { container: ViewStyle; text: TextStyle };
-        stop: { container: ViewStyle; text: TextStyle };
+        start: { container: PressableContainerType; text: TextStyle };
+        stop: { container: PressableContainerType; text: TextStyle };
     };
-    title: TextStyle;
-    subTitle: TextStyle;
-    error: TextStyle;
+    text: TextStyle;
+    subText: TextStyle;
+    errorText: TextStyle;
     list: ViewStyle;
 }
 
@@ -34,7 +38,7 @@ export const defaultScreenshotRunnerStyles: ScreenshotRunnerStyle = {
             container: {
                 ...buttonContainer,
                 borderColor: "#264AE5",
-                backgroundColor: "#264AE5",
+                backgroundColor: "#264AE5"
             },
             text: {
                 color: "#FFF",
@@ -48,7 +52,7 @@ export const defaultScreenshotRunnerStyles: ScreenshotRunnerStyle = {
                 ...buttonContainer,
                 borderColor: "#264AE5",
                 backgroundColor: "transparent",
-                marginLeft: 16,
+                marginLeft: 16
             },
             text: {
                 color: "#264AE5",
@@ -58,21 +62,21 @@ export const defaultScreenshotRunnerStyles: ScreenshotRunnerStyle = {
             }
         }
     },
-    title: {
+    list: {},
+    text: {
         color: "#0A1326",
         fontSize: 18,
         lineHeight: 27,
         marginTop: 8
     },
-    subTitle: {
+    subText: {
         color: "#6C717E",
         fontSize: 14,
         lineHeight: 21
     },
-    error: {
+    errorText: {
         color: "#E33F4E",
         fontSize: 10,
         lineHeight: 15
-    },
-    list: {}
+    }
 };

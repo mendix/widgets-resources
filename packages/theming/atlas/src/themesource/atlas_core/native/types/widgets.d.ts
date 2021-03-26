@@ -1,4 +1,4 @@
-import { ImageStyle, TextProps, TextStyle, ViewStyle } from "react-native";
+import { ImageStyle, PressableAndroidRippleConfig, TextProps, TextStyle, ViewStyle } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 
@@ -58,6 +58,10 @@ export interface BottomSheetType {
 }
 
 // Action Button
+export interface PressableContainerType extends ViewStyle {
+    androidRipple: PressableAndroidRippleConfig;
+}
+
 interface ButtonContainerType extends ViewStyle {
     rippleColor?: string;
 }
@@ -587,6 +591,23 @@ export interface SliderType {
     markerActive?: ViewStyle;
     markerDisabled?: ViewStyle;
     validationMessage?: TextStyle;
+}
+
+// Screenshot runner
+export interface ScreenshotRunnerType {
+    container?: ViewStyle;
+    button: {
+        start: { container?: PressableContainerType; text?: TextStyle };
+        stop: { container?: PressableContainerType; text?: TextStyle };
+    };
+    text?: TextStyle;
+    subText?: TextStyle;
+    errorText?: TextStyle;
+    list?: ViewStyle;
+}
+// Screenshot taker
+export interface ScreenshotTakerType {
+    container: ViewStyle;
 }
 
 // Tab Container

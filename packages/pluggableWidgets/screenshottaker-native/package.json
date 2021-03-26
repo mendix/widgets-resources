@@ -18,8 +18,8 @@
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@native-mobile-resources/util-widgets": "^1.0.0",
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-native-utils-internal": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "react-native-view-shot": "3.1.2"
   },
   "devDependencies": {

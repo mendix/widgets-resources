@@ -1,16 +1,7 @@
 import { createElement, ReactElement, useState, Fragment, useEffect } from "react";
-import { executeAction } from "@widgets-resources/piw-utils";
-import {
-    FlatList,
-    Platform,
-    TouchableNativeFeedback,
-    TouchableOpacity,
-    View,
-    Text,
-    ListRenderItemInfo,
-    StyleProp
-} from "react-native";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { executeAction } from "@mendix/piw-utils-internal";
+import { FlatList, View, Text, ListRenderItemInfo, Pressable } from "react-native";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { ScreenshotRunnerProps, TasksType } from "../typings/ScreenshotRunnerProps";
 import { defaultScreenshotRunnerStyles, ScreenshotRunnerStyle } from "./ui/Styles";
 
@@ -32,20 +23,14 @@ declare type CustomGlobal = NodeJS.Global &
     };
 
 const timeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-const TouchableButton: (props: StyleProp<any>) => ReactElement = ({ style, ...props }) =>
-    Platform.OS === "android" ? (
-        <View style={style}>
-            <TouchableNativeFeedback {...props} />
-        </View>
-    ) : (
-        <TouchableOpacity style={style} {...props} />
-    );
 
 export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerStyle>): ReactElement {
     const [tasksRunning, setTasksRunning] = useState<TasksType[]>([]);
     const [taskWithErrors, setTaskWithErrors] = useState<ErrorType[]>([]);
     const [areTasksTriggered, setAreTasksTriggered] = useState(false);
     const styles = flattenStyles(defaultScreenshotRunnerStyles, props.style);
+    const { androidRipple: androidRippleStart } = styles.button.start.container;
+    const { androidRipple: androidRippleStop } = styles.button.stop.container;
     const tasksEnabledLength = props.tasks.filter(task => task.enabled).length;
 
     const onError = (e: Error, name: string) => {
@@ -127,31 +112,39 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
     };
     const renderItemError = (task: ListRenderItemInfo<ErrorType>): ReactElement => (
         <Fragment>
-            <Text style={styles.subTitle}>{task.item?.name}</Text>
-            <Text style={styles.error}>{task.item?.error?.toString()}</Text>
+            <Text style={styles.subText}>{task.item?.name}</Text>
+            <Text style={styles.errorText}>{task.item?.error?.toString()}</Text>
         </Fragment>
     );
 
     return (
         <View style={styles.container}>
             <View style={{ flexDirection: "row" }}>
-                <TouchableButton style={styles.button?.start?.container} onPress={setAreTasksTriggeredToTrue}>
+                <Pressable
+                    style={styles.button?.start?.container}
+                    android_ripple={androidRippleStart}
+                    onPress={setAreTasksTriggeredToTrue}
+                >
                     <Text style={styles.button?.start?.text}>Start</Text>
-                </TouchableButton>
+                </Pressable>
                 {areTasksTriggered && (
-                    <TouchableButton style={styles.button?.stop?.container} onPress={setAreTasksTriggeredToFalse}>
+                    <Pressable
+                        style={styles.button?.stop?.container}
+                        android_ripple={androidRippleStop}
+                        onPress={setAreTasksTriggeredToFalse}
+                    >
                         <Text style={styles.button?.stop?.text}>Stop</Text>
-                    </TouchableButton>
+                    </Pressable>
                 )}
             </View>
             {areTasksTriggered && tasksRunning.length > 0 && (
-                <Text style={styles.subTitle}>
+                <Text style={styles.subText}>
                     {tasksRunning.length}/{tasksEnabledLength} Running tasks...
                 </Text>
             )}
             {taskWithErrors.length > 0 && (
                 <Fragment>
-                    <Text style={styles.title}>Tasks with errors:</Text>
+                    <Text style={styles.text}>Tasks with errors:</Text>
                     <FlatList
                         data={taskWithErrors}
                         renderItem={renderItemError}

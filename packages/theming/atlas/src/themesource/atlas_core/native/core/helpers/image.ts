@@ -147,19 +147,19 @@ export const imageResizeModeContain: ImageType = {
     image: {
         resizeMode: "contain"
     }
-}
+};
 export const imageResizeModeStretch: ImageType = {
     image: {
         resizeMode: "stretch"
     }
-}
+};
 export const imageResizeModeRepeat: ImageType = {
     image: {
         resizeMode: "repeat"
     }
-}
+};
 export const imageResizeModeCenter: ImageType = {
     image: {
         resizeMode: "center"
     }
-}
+};
