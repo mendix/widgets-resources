@@ -43,7 +43,7 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
             }
         ]);
     };
-    const enableGlobalScreenshotVariable = (name: string = "placeholder") => {
+    const enableGlobalScreenshotVariable = (name = "placeholder") => {
         (global as CustomGlobal).screenshotRunner = {
             masterIsRunning: true,
             task: {
