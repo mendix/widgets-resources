@@ -1,3 +1,5 @@
-# Slider widget
+# Screenshot runner widget
 
-Change a numeric value using a slider.
+NOTE: Only works with the screenshot taker widget.
+
+Allow users automatically create screenshots.
