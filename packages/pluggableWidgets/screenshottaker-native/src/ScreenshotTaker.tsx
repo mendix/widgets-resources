@@ -75,10 +75,8 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerType>
 
                 await timeout(1000); // Wait for data to load
                 if (captureContent) {
-                    console.warn("captureContent");
                     captureRef(viewRef, options).then(onCapture).catch(onCaptureFailure);
                 } else {
-                    console.warn("captureScreen");
                     captureScreen(options).then(onCapture).catch(onCaptureFailure);
                 }
             })();
