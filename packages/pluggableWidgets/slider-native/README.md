@@ -1,5 +1,3 @@
-# Screenshot runner widget
+# Slider widget
 
-NOTE: Only works with the screenshot taker widget.
-
-Allow users automatically create screenshots.
+Change a numeric value using a slider.

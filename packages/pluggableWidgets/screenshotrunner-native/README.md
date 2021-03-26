@@ -1,3 +1,5 @@
-# Feedback widget
+# Screenshot runner widget
 
-Allow users to submit feedback directly into the app project.
+NOTE: Only works with the screenshot taker widget.
+
+Allow users automatically create screenshots.
