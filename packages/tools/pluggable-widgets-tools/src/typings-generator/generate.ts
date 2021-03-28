@@ -45,7 +45,7 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
     const imports = [
         generateImport("react", generatedTypesCode, ["ComponentType", "CSSProperties", "ReactNode"]),
         generateImport("mendix", generatedTypesCode, mxExports),
-        generateImport("big.js", generatedTypesCode, ["Big"], true)
+        generateImport("big.js", generatedTypesCode, ["Big"])
     ]
         .filter(line => line)
         .join("\n");
@@ -59,11 +59,7 @@ ${imports.length ? imports + "\n\n" : ""}${generatedTypesCode}
 `;
 }
 
-function generateImport(from: string, code: string, availableNames: string[], isDefault = false) {
+function generateImport(from: string, code: string, availableNames: string[]) {
     const usedNames = availableNames.filter(type => new RegExp(`\\W${type}\\W`).test(code));
-    return usedNames.length
-        ? isDefault && usedNames.length === 1
-            ? `import ${usedNames[0]} from "${from}";`
-            : `import { ${usedNames.join(", ")} } from "${from}";`
-        : "";
+    return usedNames.length ? `import { ${usedNames.join(", ")} } from "${from}";` : "";
 }

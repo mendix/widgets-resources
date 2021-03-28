@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type EditableEnum = "default" | "never";
 

@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, NativeIcon } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export interface MarkersType {
     address?: DynamicValue<string>;
@@ -35,7 +35,7 @@ export interface MarkersPreviewType {
     title: string;
     description: string;
     onClick: {} | null;
-    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     iconSize: number | null;
     color: string;
 }

@@ -5,7 +5,7 @@
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type TypeEnum = "static" | "dynamic" | "expression";
 

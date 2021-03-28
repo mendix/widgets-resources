@@ -3,7 +3,7 @@ import { FilterSelector } from "./FilterSelector";
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
-import Big from "big.js";
+import { Big } from "big.js";
 import classNames from "classnames";
 
 interface FilterComponentProps {

@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { DynamicValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export interface ProgressBarProps<Style> {
     name: string;

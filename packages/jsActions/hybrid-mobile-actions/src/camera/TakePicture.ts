@@ -6,8 +6,9 @@
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
+
 // BEGIN EXTRA CODE
-import Big from "big.js";
 type PictureSource = "camera" | "imageLibrary";
 type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 // END EXTRA CODE

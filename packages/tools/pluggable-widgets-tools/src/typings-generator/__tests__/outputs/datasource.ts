@@ -5,7 +5,7 @@ export const datasourceWebOutput = `/**
  */
 import { ComponentType, CSSProperties } from "react";
 import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export interface DatasourcePropertiesType {
     contentAttribute: ListWidgetValue;

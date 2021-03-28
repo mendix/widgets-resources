@@ -4,12 +4,12 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import Geolocation, {
     GeolocationError,
     GeolocationOptions,
     GeolocationResponse
 } from "@react-native-community/geolocation";
-import Big from "big.js";
 
 /**
  * This action retrieves the current geographical position of a user/device.

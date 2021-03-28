@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type PresentationEnum = "grouped" | "stacked";
 

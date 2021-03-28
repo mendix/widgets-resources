@@ -2,7 +2,7 @@ import { available, flattenStyles, toNumber, unavailable } from "@mendix/piw-nat
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
-import Big from "big.js";
+import { Big } from "big.js";
 
 import { RangeSliderProps } from "../typings/RangeSliderProps";
 import { Marker } from "./Marker";

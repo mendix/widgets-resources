@@ -4,8 +4,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import { Vibration } from "react-native";
-import Big from "big.js";
 
 /**
  * @param {Big} duration - Android only setting. The time (in milliseconds) the device should vibrate. Set to empty to use the default value 500.

@@ -1,5 +1,5 @@
 import { DynamicValue, EditableValue, ValueStatus } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export function available(property: EditableValue<any> | DynamicValue<any>): boolean {
     return property.status === ValueStatus.Available && property.value != null;

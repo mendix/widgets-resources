@@ -7,7 +7,7 @@ import { BackgroundImage } from "../BackgroundImage";
 import { BackgroundImageProps } from "../../typings/BackgroundImageProps";
 import { BackgroundImageStyle } from "../ui/Styles";
 import { NativeImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",

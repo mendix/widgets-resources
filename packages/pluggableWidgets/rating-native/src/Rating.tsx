@@ -3,7 +3,7 @@ import { executeAction } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
 import { Component, createElement } from "react";
 import StarRating from "react-native-star-rating";
-import Big from "big.js";
+import { Big } from "big.js";
 
 import { RatingProps } from "../typings/RatingProps";
 import { defaultRatingStyle, IconStyle, RatingStyle } from "./ui/Styles";

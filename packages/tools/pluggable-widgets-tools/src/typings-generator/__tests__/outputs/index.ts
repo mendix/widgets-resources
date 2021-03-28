@@ -4,7 +4,7 @@ export const nativeResult = `/**
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue, FileValue, NativeImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -68,7 +68,7 @@ export const webResult = `/**
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -134,7 +134,7 @@ export const webResultGroup = `/**
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 

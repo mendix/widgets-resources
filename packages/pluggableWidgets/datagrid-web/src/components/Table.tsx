@@ -15,7 +15,7 @@ import {
     useTable
 } from "react-table";
 import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
-import Big from "big.js";
+import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { useSettings } from "../utils/settings";

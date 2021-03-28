@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Big from "big.js";
+import { Big } from "big.js";
 import { ListExpressionValue, ListWidgetValue } from "mendix";
 import { dynamicValue } from "./DynamicActionValueBuilder";
 

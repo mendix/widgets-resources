@@ -5,7 +5,7 @@
  */
 import { ComponentType, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeIcon } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export interface SlidesType {
     name: string;
@@ -56,13 +56,13 @@ export interface IntroScreenPreviewProps {
     hideIndicatorLastSlide: boolean;
     identifier: string;
     skipCaption: string;
-    skipIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    skipIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     previousCaption: string;
-    previousIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    previousIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     nextCaption: string;
-    nextIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    nextIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     doneCaption: string;
-    doneIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    doneIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     activeSlideAttribute: string;
     onSlideChange: {} | null;
     onDone: {} | null;

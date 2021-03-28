@@ -25,7 +25,7 @@ import { ButtonStyle, IntroScreenStyle } from "./ui/Styles";
 import { Icon } from "mendix/components/native/Icon";
 import { SlidesType } from "../typings/IntroScreenProps";
 import { EditableValue, ValueStatus, DynamicValue, NativeIcon } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 interface SwipeableContainerProps {
     testID?: string;

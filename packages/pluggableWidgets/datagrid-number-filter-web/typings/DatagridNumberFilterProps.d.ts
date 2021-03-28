@@ -5,7 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type DefaultFilterEnum = "greater" | "greaterEqual" | "equal" | "notEqual" | "smaller" | "smallerEqual";
 

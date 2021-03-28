@@ -4,9 +4,9 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import { NativeModules, Platform } from "react-native";
 import PushNotification from "react-native-push-notification";
-import Big from "big.js";
 
 /**
  * @param {Big} badgeNumber - This field is required. Should be greater than or equal to 0.

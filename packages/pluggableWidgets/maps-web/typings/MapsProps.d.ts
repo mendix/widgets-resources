@@ -5,7 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, ListActionValue, ListAttributeValue, WebImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type LocationTypeEnum = "address" | "latlng";
 

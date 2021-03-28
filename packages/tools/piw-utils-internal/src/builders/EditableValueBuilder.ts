@@ -1,5 +1,5 @@
 import { ValueStatus, EditableValue } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 type Writable<T> = {
     -readonly [K in keyof T]: T[K];

@@ -1,6 +1,6 @@
 import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
-import Big from "big.js";
+import { Big } from "big.js";
 import { createElement } from "react";
 import { Text, View } from "react-native";
 import { fireEvent, render, RenderAPI } from "react-native-testing-library";

@@ -4,10 +4,10 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import { Alert, Linking, NativeModules } from "react-native";
 import ImagePicker, { ImagePickerOptions, ImagePickerResponse } from "react-native-image-picker";
 import { getLocales } from "react-native-localize";
-import Big from "big.js";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 

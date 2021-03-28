@@ -4,9 +4,9 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import DeviceInfo from "react-native-device-info";
 import { getLocales, getCountry, getTimeZone, uses24HourClock } from "react-native-localize";
-import Big from "big.js";
 
 /**
  * @returns {Promise.<MxObject>}

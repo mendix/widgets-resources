@@ -9,7 +9,7 @@ import { DefaultZoomLevelEnum, MapsProps, MarkersType as MarkerProps } from "../
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@mendix/piw-utils-internal";
-import Big from "big.js";
+import { Big } from "big.js";
 
 type Props = MapsProps<MapsStyle>;
 

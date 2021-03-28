@@ -5,7 +5,7 @@
  */
 import { ComponentType, ReactNode } from "react";
 import { DynamicValue, NativeImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 export type ResizeModeEnum = "cover" | "contain" | "stretch" | "center";
 
