@@ -1,0 +1,22 @@
+name: "Front-hands GH action example"
+
+on: 
+  pull_request:
+    branches: [master]
+    
+jobs:
+  test:
+    name: "Retrieve employees"
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: "Retrieve data from Data Hub"
+        id: data_hub
+        uses: diego-antonelli/fronthands-action@v1
+        with:
+          country: 'Netherlands'
+          amount: '30'
+      - name: "Show employees"
+        run: |
+          echo "Names ${{ join(steps.data_hub.outputs.employees.*.firstName, ', ') }}"
+          echo "Employees: ${{ fromJSON(steps.data_hub.outputs.employees) }}"
