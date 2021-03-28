@@ -18,5 +18,5 @@ jobs:
           amount: '30'
       - name: "Show employees"
         run: |
-          echo "Names ${{ join(steps.data_hub.outputs.employees.*.firstName, ', ') }}"
-          echo "Employees: ${{ fromJSON(steps.data_hub.outputs.employees) }}"
+          echo "Names ${{ join(toJSON(steps.data_hub.outputs.employees).*.firstName, ', ') }}"
+          echo "Employees: ${{ toJSON(steps.data_hub.outputs.employees) }}"
