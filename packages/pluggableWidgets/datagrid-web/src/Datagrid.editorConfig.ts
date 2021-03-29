@@ -59,6 +59,9 @@ export function getProperties(
     if (values.pagination !== "buttons") {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
     }
+    if (values.showEmptyPlaceholder === "none") {
+        hidePropertyIn(defaultProperties, values, "emptyPlaceholder");
+    }
     if (!values.advanced) {
         hidePropertiesIn(defaultProperties, values, [
             "pagination",

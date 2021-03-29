@@ -61,13 +61,10 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             columnsSortable={props.columnsSortable}
             data={data}
             emptyPlaceholderRenderer={useCallback(
-                renderWrapper =>
-                    props.showEmptyPlaceholder === "custom" ? (
-                        <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
-                    ) : (
-                        <div />
-                    ),
-                [props.emptyPlaceholder, props.showEmptyPlaceholder]
+                renderWrapper => (
+                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                ),
+                [props.emptyPlaceholder]
             )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
