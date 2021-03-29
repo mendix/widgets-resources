@@ -16,7 +16,6 @@
     .region-topbar {
         .mx-navigationtree {
             background-color: $navtopbar-bg;
-
             .navbar-inner > ul {
                 & > li {
                     & > a {
@@ -24,7 +23,6 @@
                         border-color: $navtopbar-border-color;
                         background-color: $navtopbar-bg;
                         font-size: $navtopbar-font-size;
-
                         .caret {
                             border-top-color: $navtopbar-color;
                             border-bottom-color: $navtopbar-color;
@@ -34,19 +32,16 @@
                             font-size: $navtopbar-glyph-size;
                         }
                     }
-
                     a:hover,
                     a:focus,
                     a.active {
                         color: $navtopbar-color-hover;
                         background-color: $navtopbar-bg-hover;
-
                         .caret {
                             border-top-color: $navtopbar-color-active;
                             border-bottom-color: $navtopbar-color-active;
                         }
                     }
-
                     a.active {
                         color: $navtopbar-color-active;
                         border-left-color: $navtopbar-color-active;
@@ -59,20 +54,17 @@
             li.mx-navigationtree-has-items {
                 & > ul {
                     background-color: $navtopbar-sub-bg;
-
                     li {
                         a {
                             color: $navtopbar-sub-color;
                             background-color: $navtopbar-sub-bg;
                             font-size: $navtopbar-sub-font-size;
-
                             &:hover,
                             &:focus,
                             &.active {
                                 color: $navtopbar-sub-color-hover;
                                 background-color: $navtopbar-sub-bg-hover;
                             }
-
                             &.active {
                                 color: $navtopbar-sub-color-active;
                                 background-color: $navtopbar-sub-bg-active;
@@ -88,7 +80,6 @@
     .region-sidebar {
         .mx-navigationtree {
             background-color: $navsidebar-bg;
-
             .navbar-inner > ul {
                 & > li {
                     & > a {
@@ -96,7 +87,6 @@
                         border-color: $navsidebar-border-color;
                         background-color: $navsidebar-bg;
                         font-size: $navsidebar-font-size;
-
                         .caret {
                             border-top-color: $navsidebar-color;
                             border-bottom-color: $navsidebar-color;
@@ -106,19 +96,16 @@
                             font-size: $navsidebar-glyph-size;
                         }
                     }
-
                     a:hover,
                     a:focus,
                     a.active {
                         color: $navsidebar-color-hover;
                         background-color: $navsidebar-bg-hover;
-
                         .caret {
                             border-top-color: $navsidebar-color-active;
                             border-bottom-color: $navsidebar-color-active;
                         }
                     }
-
                     a.active {
                         color: $navsidebar-color-active;
                         border-left-color: $navsidebar-color-active;
@@ -131,20 +118,17 @@
             li.mx-navigationtree-has-items {
                 & > ul {
                     background-color: $navsidebar-sub-bg;
-
                     li {
                         a {
                             color: $navsidebar-sub-color;
                             background-color: $navsidebar-sub-bg;
                             font-size: $navsidebar-sub-font-size;
-
                             &:hover,
                             &:focus,
                             &.active {
                                 color: $navsidebar-sub-color-hover;
                                 background-color: $navsidebar-sub-bg-hover;
                             }
-
                             &.active {
                                 color: $navsidebar-sub-color-active;
                                 background-color: $navsidebar-sub-bg-active;
@@ -165,7 +149,6 @@
             a {
                 flex-direction: column;
                 justify-content: center;
-
                 .glyphicon {
                     margin: 0 0 5px 0;
                 }
@@ -181,8 +164,9 @@
             }
         }
     }
+
     .hide-icons.mx-navigationtree {
-        .glyphicon{
+        .glyphicon {
             display: none;
         }
     }

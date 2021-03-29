@@ -59,25 +59,35 @@ body {
     }
 
     .btn {
-        border-radius: 40px;
+        border-radius: $border-radius-default;
     }
 
     // Form label + input
     .form-group {
         width: 100%;
         align-items: center;
+        @media only screen and (max-width: $screen-sm-max) {
+            align-items: flex-start;
+        }
 
         .control-label {
             flex: 4;
             margin-bottom: 0;
             font-size: $font-size-default;
             font-weight: 500;
+            @media only screen and (max-width: $screen-sm-max) {
+                flex: 1;
+                margin-bottom: $spacing-small;
+            }
         }
 
         .inputwrapper {
             flex: 8;
             position: relative;
             width: 100%;
+            @media only screen and (max-width: $screen-sm-max) {
+                flex: 1;
+            }
 
             .glyphicon {
                 &:before {
@@ -98,6 +108,7 @@ body {
 
             .form-control {
                 padding: $form-input-padding-y $form-input-padding-x $form-input-padding-y 45px;
+                width: 100%;
             }
 
             .form-control:focus ~ .glyphicon:before {
@@ -127,6 +138,14 @@ body {
 
 .loginpage-signin {
     color: #555555;
+}
+
+.loginpage-form .btn {
+    img {
+        vertical-align: middle;
+        top: -1px;
+        position: relative;
+    }
 }
 
 // Show only on wide screens

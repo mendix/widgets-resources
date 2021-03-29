@@ -19,18 +19,17 @@
 
         ul.nav {
             margin: 0; // weird -margin if screen gets small (bootstrap)
-
             /* Navigation item */
             & > li.mx-navbar-item > a {
                 display: flex;
                 align-items: center;
-                min-height: $topbar-minimalheight;
                 padding: $navigation-item-padding;
                 vertical-align: middle;
                 color: $navigation-color;
                 border-radius: 0;
                 font-size: $navigation-font-size;
                 font-weight: $font-weight-normal;
+                border-radius: $border-radius-default;
 
                 /* Dropdown arrow */
                 .caret {
@@ -54,6 +53,7 @@
                 &.active {
                     color: $navigation-color-active;
                     background-color: $navigation-bg-active;
+                    opacity: 1;
                 }
 
                 /* Dropdown */
@@ -115,7 +115,6 @@
                 }
             }
         }
-
         @media (max-width: $screen-md) {
             ul.nav > li.mx-navbar-item > a {
                 padding: 10px 24px;

@@ -134,6 +134,15 @@
         }
     }
 
+    .has-error .mx-validation-message {
+        margin-top: $spacing-small;
+        margin-bottom: 0;
+        padding: $spacing-small;
+        color: $alert-danger-color;
+        border-color: $alert-danger-border-color;
+        background-color: $alert-danger-bg;
+    }
+
     // Form Group
     .form-group {
         display: flex;

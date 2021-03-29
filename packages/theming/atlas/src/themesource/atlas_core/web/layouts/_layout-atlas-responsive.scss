@@ -131,7 +131,7 @@ $sidebar-icon-width: 52px;
 
 // Topbar variant
 .layout-atlas-responsive-topbar {
-    .region-topbar{
+    .region-topbar {
         padding: 0 $spacing-medium;
         @media (max-width: $screen-sm-max) {
             padding: 0 $spacing-small;
