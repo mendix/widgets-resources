@@ -593,23 +593,6 @@ export interface SliderType {
     validationMessage?: TextStyle;
 }
 
-// Screenshot runner
-export interface ScreenshotRunnerType {
-    container?: ViewStyle;
-    button: {
-        start: { container?: PressableContainerType; text?: TextStyle };
-        stop: { container?: PressableContainerType; text?: TextStyle };
-    };
-    text?: TextStyle;
-    subText?: TextStyle;
-    errorText?: TextStyle;
-    list?: ViewStyle;
-}
-// Screenshot taker
-export interface ScreenshotTakerType {
-    container: ViewStyle;
-}
-
 // Tab Container
 export interface TabContainerType {
     container?: ViewStyle;

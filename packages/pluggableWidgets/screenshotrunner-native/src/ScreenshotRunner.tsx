@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useState, Fragment, useEffect } from "react";
+import { createElement, ReactElement, useState, Fragment, useEffect, useCallback } from "react";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { FlatList, View, Text, ListRenderItemInfo, Pressable } from "react-native";
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
@@ -57,7 +57,7 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
         };
     };
 
-    const runTask = async (task: TasksType) => {
+    const runTask = useCallback(async (task: TasksType) => {
         const maxTimeouts = 30;
         let timeoutCount = 0;
 
@@ -82,21 +82,21 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
         } else {
             console.error("Task Failed! Timeout has been reached.");
         }
-    };
+    }, []);
 
     useEffect(() => {
         if (areTasksTriggered) {
-            (async () => {
-                for await (const task of props.tasks) {
+            (async tasks => {
+                for await (const task of tasks) {
                     if ((global as CustomGlobal).screenshotRunner?.masterIsRunning && task.enabled) {
                         await runTask(task);
                     }
                 }
                 setAreTasksTriggered(false);
                 (global as CustomGlobal).screenshotRunner.masterIsRunning = false;
-            })();
+            })(props.tasks);
         }
-    }, [areTasksTriggered]);
+    }, [props.tasks, areTasksTriggered]);
 
     const setAreTasksTriggeredToFalse = () => {
         (global as CustomGlobal).screenshotRunner.masterIsRunning = false;
@@ -104,7 +104,7 @@ export function ScreenshotRunner(props: ScreenshotRunnerProps<ScreenshotRunnerSt
         setAreTasksTriggered(false);
     };
 
-    const setAreTasksTriggeredToTrue = async () => {
+    const setAreTasksTriggeredToTrue = () => {
         if (!(global as CustomGlobal).screenshotRunner?.masterIsRunning) {
             (global as CustomGlobal).screenshotRunner = { masterIsRunning: true };
             setAreTasksTriggered(true);

@@ -80,8 +80,6 @@ export const excludeSafeAreaView = false;
 // Slider
 export const excludeSlider = false;
 export const excludeSliderHelpers = false;
-// Screenshot widgets
-export const excludeScreenshot = false;
 // Tab Container
 export const excludeTabContainer = false;
 export const excludeTabContainerHelpers = false;

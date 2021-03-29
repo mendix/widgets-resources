@@ -52,7 +52,7 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerType>
             shouldTakeScreenshotRef.current = true;
             setShouldTakeScreenshot(true);
         }
-    }, [shouldTakeScreenshotRef.current, setShouldTakeScreenshot]);
+    }, [shouldTakeScreenshotRef.current, shouldTakeScreenshot]);
 
     useEffect(() => {
         if (
@@ -81,7 +81,14 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerType>
                 }
             })();
         }
-    }, [shouldTakeScreenshot, props.beforeScreenshot, props.pageName, props.base64, props.onScreenshot]);
+    }, [
+        shouldTakeScreenshot,
+        captureContent,
+        props.beforeScreenshot,
+        props.pageName,
+        props.base64,
+        props.onScreenshot
+    ]);
 
     const onCapture = useCallback(
         async (base64: string) => {
@@ -96,12 +103,12 @@ export function ScreenshotTaker(props: ScreenshotTakerProps<ScreenshotTakerType>
         [props.pageName, props.base64, props.onScreenshot]
     );
 
-    function onCaptureFailure(e: Error) {
+    const onCaptureFailure = useCallback((e: Error) => {
         (global as CustomGlobal).screenshotRunner.task.isRunning = false;
         (global as CustomGlobal).screenshotRunner.task.error = true;
         g.screenshotRunner.task.onError(e, g.screenshotRunner.task.name);
         executeAction(props.onError);
-    }
+    }, []);
 
     return (
         <View ref={viewRef} style={styles.container}>

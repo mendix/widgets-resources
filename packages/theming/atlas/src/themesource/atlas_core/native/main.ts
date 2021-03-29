@@ -136,7 +136,6 @@ module.exports = [
     !exclusionVariables.excludeSafeAreaView ? widgetsSafeAreaView : {},
     !exclusionVariables.excludeSlider ? widgetsSlider : {},
     !exclusionVariables.excludeSlider && !exclusionVariables.excludeSliderHelpers ? helpersSlider : {},
-    !exclusionVariables.excludeScreenshot ? widgetsScreenshot : {},
     !exclusionVariables.excludeTabContainer ? widgetsTabContainer : {},
     !exclusionVariables.excludeTabContainer && !exclusionVariables.excludeTabContainerHelpers
         ? helpersTabContainer
