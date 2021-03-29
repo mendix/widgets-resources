@@ -59,6 +59,9 @@ export function getProperties(
     if (values.pagination !== "buttons") {
         hidePropertyIn(defaultProperties, values, "pagingPosition");
     }
+    if (values.showEmptyPlaceholder === "none") {
+        hidePropertyIn(defaultProperties, values, "emptyPlaceholder");
+    }
     if (!values.advanced) {
         hidePropertiesIn(defaultProperties, values, [
             "pagination",
@@ -270,7 +273,7 @@ export function check(values: DatagridPreviewProps): Problem[] {
                 property: `columns/${index + 1}/attribute`,
                 message: `An attribute is required when 'Show' is set to 'Attribute'. Select the 'Attribute' property for column ${column.header}`
             });
-        } else if (!column.attribute && (column.sortable || values.columnsFilterable)) {
+        } else if (!column.attribute && ((values.columnsSortable && column.sortable) || values.columnsFilterable)) {
             errors.push({
                 property: `columns/${index + 1}/attribute`,
                 message: `An attribute is required when filtering or sorting is enabled. Select the 'Attribute' property for column ${column.header}`
