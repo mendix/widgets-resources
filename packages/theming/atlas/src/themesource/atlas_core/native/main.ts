@@ -58,7 +58,6 @@ import * as widgetsReferenceSelector from "./core/widgets/referenceselector";
 import * as widgetsSafeAreaView from "./core/widgets/safeareaview";
 import * as widgetsSlider from "./core/widgets/slider";
 import * as helpersSlider from "./core/helpers/slider";
-import * as widgetsScreenshot from "./core/widgets/screenshot";
 import * as widgetsTabContainer from "./core/widgets/tabcontainer";
 import * as helpersTabContainer from "./core/helpers/tabcontainer";
 import * as widgetsTextArea from "./core/widgets/textarea";
