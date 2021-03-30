@@ -1,77 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Switch</name>
     <description>Toggle a boolean attribute</description>
     <icon>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAABV1f9VVVViYmJVVVVXV1dXV1dNsvlYWFhVVVVVVVVVVVVVVVVVVVVJsfhIsfhWVlZVVVVJsfhWVlZWVlZJsfhVVVVWVlZVVVVVVVVIsPhVVVVWVlZJsPhWVlZIsPdVVVUhgB8dAAAAH3RSTlMABgwNISMmKzE/VFp1gY+Uqq69vsfV2Nns8vPz+v39w1yAsQAAAP9JREFUeNrtlcsSgjAMRS/I+40IKIrw/19pgzMdKprByYZFzy5Mc2lumxQWi8VyUKK86e8zw71v8gi/SLp5F12Cb3iXeTcXDxvi6/wH13iT/6DvjyoNXDC4QVq9V34oeMv/ax878OtlD2YVVP8zA8KiHYa2CMGSPckHw3/SzOCU47Qwlg6vQOvXZ9HR/uGcJ82ZV6AqOmgicsVHOa0oeR/IyUiHuYoqhONaYOR9qFRKrqNGRSmKyaAAR6pSGh31KgrQmgItOAKV0uuI+sfFYAoM4HCpsyQCJ5VyE5cgNlF8jOKLJL3K4maStrN4oEhHmnSoSse68GGRPm0Wi8VyTF4UHle0saM+KAAAAABJRU5ErkJggg==
     </icon>
     <properties>
-        <property key="booleanAttribute" type="attribute">
-            <caption>Boolean attribute</caption>
-            <category>Data source</category>
-            <description>Attribute to toggle</description>
-            <attributeTypes>
-                <attributeType name="Boolean"/>
-            </attributeTypes>
-        </property>
-        <property key="editable" type="enumeration" defaultValue="default">
-            <caption>Editable</caption>
-            <category>Data source</category>
-            <description/>
-            <enumerationValues>
-                <enumerationValue key="default">Default</enumerationValue>
-                <enumerationValue key="never">Never</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="label" type="translatableString" required="false">
-            <caption>Label</caption>
-            <category>Appearance</category>
-            <description/>
-            <translations>
-                <translation lang="en_US">Label</translation>
-                <translation lang="nl_NL">Label</translation>
-            </translations>
-        </property>
-        <property key="labelWidth" type="integer" defaultValue="9">
-            <caption>Label width (weight)</caption>
-            <category>Appearance</category>
-            <description>How much of the total row width (12) the label should occupy. Should not be greater than 11</description>
-        </property>
-        <property key="deviceStyle" type="enumeration" defaultValue="auto">
-            <caption>Platform</caption>
-            <category>Appearance</category>
-            <description>The general appearance of the switch. With auto detect, on the web it will be iOS</description>
-            <enumerationValues>
-                <enumerationValue key="auto">Auto detect</enumerationValue>
-                <enumerationValue key="android">Android</enumerationValue>
-                <enumerationValue key="iOS">iOS</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="colorStyle" type="enumeration" defaultValue="default">
-            <caption>Switch style</caption>
-            <category>Appearance</category>
-            <description>The color style of the switch</description>
-            <enumerationValues>
-                <enumerationValue key="default">Widget default</enumerationValue>
-                <enumerationValue key="primary">Primary</enumerationValue>
-                <enumerationValue key="inverse">Inverse</enumerationValue>
-                <enumerationValue key="success">Success</enumerationValue>
-                <enumerationValue key="info">Info</enumerationValue>
-                <enumerationValue key="warning">Warning</enumerationValue>
-                <enumerationValue key="danger">Danger</enumerationValue>
-            </enumerationValues>
-        </property>
-        <property key="onChangeMicroflow" type="microflow" required="false">
-            <caption>On change microflow</caption>
-            <category>Events</category>
-            <description>Microflow to trigger when button is toggled</description>
-            <returnType type="Void"/>
-        </property>
-        <property key="onChangeNanoflow" type="nanoflow" required="false">
-            <caption>On change nanoflow</caption>
-            <category>Events</category>
-            <description>Nanoflow to trigger when button is toggled</description>
-            <returnType type="Void"/>
-        </property>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="booleanAttribute" type="attribute">
+                    <caption>Boolean attribute</caption>
+                    <description>Attribute to toggle</description>
+                    <attributeTypes>
+                        <attributeType name="Boolean"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Editability">
+                <property key="editable" type="enumeration" defaultValue="default">
+                <caption>Editable</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="default">Default</enumerationValue>
+                    <enumerationValue key="never">Never</enumerationValue>
+                </enumerationValues>
+            </property>
+            </propertyGroup>
+            <propertyGroup caption="Style">
+                    <property key="deviceStyle" type="enumeration" defaultValue="auto">
+                        <caption>Platform</caption>
+                        <description>The general appearance of the switch. With auto detect, on the web it will be iOS
+                        </description>
+                        <enumerationValues>
+                            <enumerationValue key="auto">Auto detect</enumerationValue>
+                            <enumerationValue key="android">Android</enumerationValue>
+                            <enumerationValue key="iOS">iOS</enumerationValue>
+                        </enumerationValues>
+                    </property>
+                    <property key="colorStyle" type="enumeration" defaultValue="default">
+                        <caption>Switch style</caption>
+                        <description>The color style of the switch</description>
+                        <enumerationValues>
+                            <enumerationValue key="default">Widget default</enumerationValue>
+                            <enumerationValue key="primary">Primary</enumerationValue>
+                            <enumerationValue key="inverse">Inverse</enumerationValue>
+                            <enumerationValue key="success">Success</enumerationValue>
+                            <enumerationValue key="info">Info</enumerationValue>
+                            <enumerationValue key="warning">Warning</enumerationValue>
+                            <enumerationValue key="danger">Danger</enumerationValue>
+                        </enumerationValues>
+                    </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Label"/>
+        </propertyGroup>
     </properties>
 </widget>

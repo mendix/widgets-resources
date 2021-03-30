@@ -1,7 +1,6 @@
 import { Component, ReactNode, SFCElement, createElement } from "react";
 
 import { Switch, SwitchProps, SwitchStatus } from "./Switch";
-import { Label } from "./Label";
 
 interface WrapperProps {
     class?: string;
@@ -51,21 +50,6 @@ class SwitchContainer extends Component<SwitchContainerProps, SwitchContainerSta
     }
 
     render(): ReactNode {
-        const maxLabelWidth = 11;
-        if (this.props.label.trim()) {
-            return createElement(
-                Label,
-                {
-                    className: `${this.props.deviceStyle} ${this.props.class}`,
-                    label: this.props.label,
-                    labelId: `${this.props.uniqueid}_label`,
-                    style: SwitchContainer.parseStyle(this.props.style),
-                    weight: this.props.labelWidth > maxLabelWidth ? maxLabelWidth : this.props.labelWidth
-                },
-                this.renderSwitch(true)
-            );
-        }
-
         return this.renderSwitch();
     }
 
