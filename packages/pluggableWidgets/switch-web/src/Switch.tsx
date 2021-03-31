@@ -8,8 +8,6 @@ import { Alert } from "./components/Alert";
 import "./ui/Switch.scss";
 import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
 
-// note: it looks like "no-context" is not possible anymore as in framework an attribute is always available, but is unavailable, loading, or available.
-// todo: should i move system prop visibility to separate group? or is it already there?
 // todo: do we want to keep "default" style?
 
 export type SwitchStatus = "enabled" | "disabled" | "no-context";
@@ -41,22 +39,12 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 readOnly={true}
                 type={"checkbox"}
             />
-            ,
             <div
-                className={classNames(
-                    `widget-switch-btn-wrapper`,
-                    {
-                        "widget-switch-btn-wrapper-default": !props.class?.match(
-                            /widget-switch-btn-wrapper-{primary|secondary|success|warning|danger}/
-                        )
-                    },
-                    props.class,
-                    {
-                        checked: isChecked,
-                        disabled: !editable,
-                        "un-checked": !isChecked
-                    }
-                )}
+                className={classNames("widget-switch-btn-wrapper", "widget-switch-btn-wrapper-default", {
+                    checked: isChecked,
+                    disabled: !editable,
+                    "un-checked": !isChecked
+                })}
                 onClick={editable ? onClick : undefined}
                 onKeyDown={onKeyDown}
                 tabIndex={0}
