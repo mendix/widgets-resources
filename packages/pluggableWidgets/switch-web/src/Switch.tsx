@@ -1,16 +1,11 @@
 import { createElement, FunctionComponent, KeyboardEvent, useCallback } from "react";
-import classNames from "classnames";
+import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
+import classNames from "classnames";
 
 import { SwitchContainerProps } from "../typings/SwitchProps";
 import { Alert } from "./components/Alert";
-
 import "./ui/Switch.scss";
-import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
-
-// todo: do we want to keep "default" style?
-
-export type SwitchStatus = "enabled" | "disabled" | "no-context";
 
 export const Switch: FunctionComponent<SwitchContainerProps> = props => {
     const isChecked = isAvailable(props.booleanAttribute);
