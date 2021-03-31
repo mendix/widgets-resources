@@ -17,7 +17,6 @@ describe("BadgeButton different views", () => {
             listViewItem.waitForDisplayed();
             listViewItem.click();
             expect(badgeButton.getText()).toEqual("Button");
-            // expect(badgeButton.getBadgeText()).toEqual("New"); Fix this line
         });
     });
 
@@ -35,7 +34,7 @@ describe("BadgeButton different views", () => {
             expect(badgeButton.getBadgeText()).toEqual("New");
         });
 
-        it("should display multiple widgets", () => {
+        it("displays multiple widgets", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonListView");
 
             expect(badgeButton.getAllBadges().length).toBeGreaterThan(1);

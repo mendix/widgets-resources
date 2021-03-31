@@ -6,7 +6,7 @@ describe("BadgeButton on click", () => {
             page.open("p/events");
         });
 
-        it("display a dialog", () => {
+        it("displays a dialog", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonCallMicroflow");
 
             badgeButton.element.waitForDisplayed();
@@ -38,7 +38,7 @@ describe("BadgeButton on click", () => {
             page.open("p/events");
         });
 
-        it("should open a page", () => {
+        it("opens a page", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonShowPage");
 
             badgeButton.element.waitForDisplayed();
@@ -48,7 +48,7 @@ describe("BadgeButton on click", () => {
             expect(header).toBe("ClickedPage");
         });
 
-        it("should open modal popup page", () => {
+        it("opens modal popup page", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonShowPopupPage");
 
             badgeButton.element.waitForDisplayed();
@@ -65,7 +65,7 @@ describe("BadgeButton on click", () => {
             page.open("p/events");
         });
 
-        it("should close a page", () => {
+        it("closes a page", () => {
             page.getWidget("openClosePage").click();
             const badgeButton = new badgeButtonWidget("badgeButtonClosePage");
 
