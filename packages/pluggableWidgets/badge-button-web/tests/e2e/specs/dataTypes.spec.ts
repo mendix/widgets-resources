@@ -6,7 +6,7 @@ describe("BadgeButton different data types", () => {
         page.open("p/dataTypes");
     });
 
-    it("should display correctly string data", () => {
+    it("displays correctly string data", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonString");
         badgeButton.element.waitForDisplayed();
 
@@ -14,7 +14,7 @@ describe("BadgeButton different data types", () => {
         expect(badgeButton.getBadgeText()).toEqual("New");
     });
 
-    it("should display correctly integer data", () => {
+    it("displays correctly integer data", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonInteger");
         badgeButton.element.waitForDisplayed();
 
@@ -22,7 +22,7 @@ describe("BadgeButton different data types", () => {
         expect(badgeButton.getBadgeText()).toEqual("10");
     });
 
-    it("should display correctly long data", () => {
+    it("displays correctly long data", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonLong");
         badgeButton.element.waitForDisplayed();
 
@@ -30,7 +30,7 @@ describe("BadgeButton different data types", () => {
         expect(badgeButton.getBadgeText()).toEqual("2,147,483,647");
     });
 
-    it("should display correctly decimal data", () => {
+    it("displays correctly decimal data", () => {
         const badgeButton = new badgeButtonWidget("badgeButtonDecimal");
         badgeButton.element.waitForDisplayed();
 
