@@ -47,7 +47,7 @@
 	url = https://github.com/mendix/testProjects.git
 	branch = color-picker-web
 [submodule "packages/customWidgets/switch-web/tests/testProject"]
-	path = packages/customWidgets/switch-web/tests/testProject
+	path = packages/pluggableWidgets/switch-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = switch-web
 [submodule "packages/customWidgets/calendar-web/tests/testProject"]
