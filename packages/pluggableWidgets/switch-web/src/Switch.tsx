@@ -1,75 +1,68 @@
 import { createElement, KeyboardEvent, FunctionComponent } from "react";
 import classNames from "classnames";
 
+import { SwitchContainerProps } from "../typings/SwitchProps";
 import { Alert } from "./components/Alert";
-import { ColorStyle, DeviceStyle } from "./components/SwitchContainer";
 
-import "./ui/Switch.scss";
-import { EditableValueBuilder } from "../../../tools/piw-utils/dist"; // todo: remove
+// import "./ui/Switch.scss";
 import { isAvailable } from "@mendix/piw-utils-internal";
-
-export interface SwitchProps {
-    alertMessage?: string;
-    colorStyle: ColorStyle;
-    className?: string;
-    deviceStyle?: DeviceStyle;
-    isChecked: boolean;
-    onClick: () => void;
-    status: SwitchStatus;
-    style?: object;
-    labelId?: string;
-}
 
 // note: it looks like "no-context" is not possible anymore as in framework an attribute is always available, but is unavailable, loading, or available.
 // todo: should i move system prop visibility to separate group? or is it already there?
+// todo: do we want to keep "default" style?
 
 export type SwitchStatus = "enabled" | "disabled" | "no-context";
 
-export const Switch: FunctionComponent<SwitchProps> = props => {
-    const booleanAttribute = new EditableValueBuilder<boolean>().withValue(false).build();
-    const editable = !booleanAttribute.readOnly;
+export const Switch: FunctionComponent<SwitchContainerProps> = props => {
+    const isChecked = isAvailable(props.booleanAttribute);
+    const editable = !props.booleanAttribute.readOnly;
 
     return (
-        <div className={classNames("widget-switch", props.className, props.deviceStyle)} style={props.style}>
+        <div className={classNames("widget-switch", props.class, props.deviceStyle)} style={props.style}>
             <input
-                checked={isAvailable(booleanAttribute)}
+                checked={isChecked}
                 className={classNames("widget-switch-checkbox", { enabled: editable })}
                 readOnly={true}
                 type={"checkbox"}
             />
             ,
             <div
-                className={classNames(`widget-switch-btn-wrapper widget-switch-btn-wrapper-${props.colorStyle}`, {
-                    checked: isAvailable(booleanAttribute),
-                    disabled: !editable,
-                    "un-checked": !isAvailable(booleanAttribute)
-                })}
-                onClick={editable ? props.onClick : undefined} // todo: execute action
-                onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
-                    if (editable && e.key === " ") {
-                        e.preventDefault();
-                        props.onClick(); // todo: execute action
+                className={classNames(
+                    `widget-switch-btn-wrapper`,
+                    {
+                        "widget-switch-btn-wrapper-default": !props.class?.match(
+                            /widget-switch-btn-wrapper-{primary|secondary|success|warning|danger}/
+                        )
+                    },
+                    props.class,
+                    {
+                        checked: isChecked,
+                        disabled: !editable,
+                        "un-checked": !isChecked
                     }
-                }}
+                )}
+                // onClick={editable ? props.onClick : undefined} // todo: execute action
+                // onKeyDown={(e: KeyboardEvent<HTMLDivElement>) => {
+                //     if (editable && e.key === " ") {
+                //         e.preventDefault();
+                //         props.onClick(); // todo: execute action
+                //     }
+                // }}
                 tabIndex={0}
                 role={"checkbox"}
-                aria-checked={isAvailable(booleanAttribute.value)}
-                aria-labelledby={props.labelId}
+                aria-checked={isChecked}
+                aria-labelledby={props.id}
             >
                 <small
                     className={classNames("widget-switch-btn", {
-                        left: !isAvailable(booleanAttribute),
-                        right: isAvailable(booleanAttribute)
+                        left: !isChecked,
+                        right: isChecked
                     })}
                 />
             </div>
-            <Alert message={booleanAttribute.validation} />
+            <Alert message={props.booleanAttribute.validation} />
         </div>
     );
-};
-
-Switch.defaultProps = {
-    colorStyle: "default"
 };
 
 Switch.displayName = "Switch";

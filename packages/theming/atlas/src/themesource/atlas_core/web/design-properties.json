@@ -1051,23 +1051,23 @@
             "options": [
                 {
                     "name": "Brand Primary",
-                    "class": "switch-primary"
+                    "class": "widget-switch-btn-wrapper-primary"
                 },
                 {
                     "name": "Brand Secondary",
-                    "class": "switch-secondary"
+                    "class": "widget-switch-btn-wrapper-secondary"
                 },
                 {
                     "name": "Brand Success",
-                    "class": "switch-success"
+                    "class": "widget-switch-btn-wrapper-success"
                 },
                 {
                     "name": "Brand Warning",
-                    "class": "switch-warning"
+                    "class": "widget-switch-btn-wrapper-warning"
                 },
                 {
                     "name": "Brand Danger",
-                    "class": "switch-danger"
+                    "class": "widget-switch-btn-wrapper-danger"
                 }
             ]
         }
