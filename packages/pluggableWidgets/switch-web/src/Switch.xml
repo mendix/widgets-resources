@@ -29,19 +29,6 @@
                             <enumerationValue key="iOS">iOS</enumerationValue>
                         </enumerationValues>
                     </property>
-                    <property key="colorStyle" type="enumeration" defaultValue="default">
-                        <caption>Switch style</caption>
-                        <description>The color style of the switch</description>
-                        <enumerationValues>
-                            <enumerationValue key="default">Widget default</enumerationValue>
-                            <enumerationValue key="primary">Primary</enumerationValue>
-                            <enumerationValue key="inverse">Inverse</enumerationValue>
-                            <enumerationValue key="success">Success</enumerationValue>
-                            <enumerationValue key="info">Info</enumerationValue>
-                            <enumerationValue key="warning">Warning</enumerationValue>
-                            <enumerationValue key="danger">Danger</enumerationValue>
-                        </enumerationValues>
-                    </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Common">

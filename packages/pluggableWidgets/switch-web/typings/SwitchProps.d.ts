@@ -8,8 +8,6 @@ import { EditableValue } from "mendix";
 
 export type DeviceStyleEnum = "auto" | "android" | "iOS";
 
-export type ColorStyleEnum = "default" | "primary" | "inverse" | "success" | "info" | "warning" | "danger";
-
 export interface SwitchContainerProps {
     name: string;
     class: string;
@@ -18,7 +16,6 @@ export interface SwitchContainerProps {
     id: string;
     booleanAttribute: EditableValue<boolean>;
     deviceStyle: DeviceStyleEnum;
-    colorStyle: ColorStyleEnum;
 }
 
 export interface SwitchPreviewProps {
@@ -26,5 +23,4 @@ export interface SwitchPreviewProps {
     style: string;
     booleanAttribute: string;
     deviceStyle: DeviceStyleEnum;
-    colorStyle: ColorStyleEnum;
 }
