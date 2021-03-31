@@ -18,6 +18,12 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Actions">
+                <property key="action" type="action">
+                    <caption>On click action</caption>
+                    <description>Action to be performed when button is clicked</description>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Style">
                     <property key="deviceStyle" type="enumeration" defaultValue="auto">
                         <caption>Platform</caption>
