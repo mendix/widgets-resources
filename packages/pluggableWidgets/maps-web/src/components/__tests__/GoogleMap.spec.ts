@@ -43,6 +43,7 @@ describe("Google maps", () => {
 
     beforeEach(() => {
         initialize();
+        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
     });
 
     afterEach(() => {
@@ -53,7 +54,6 @@ describe("Google maps", () => {
         shallow(createElement(GoogleMap, props));
 
     it("renders a map with right structure", () => {
-        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "percentageOfWidth",
@@ -64,7 +64,6 @@ describe("Google maps", () => {
     });
 
     it("renders a map with pixels renders structure correctly", () => {
-        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "pixels",
@@ -75,7 +74,6 @@ describe("Google maps", () => {
     });
 
     it("renders a map with percentage of width and height units renders the structure correctly", () => {
-        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "percentageOfWidth",
@@ -86,7 +84,6 @@ describe("Google maps", () => {
     });
 
     it("renders a map with percentage of parent units renders the structure correctly", () => {
-        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             heightUnit: "percentageOfParent",
@@ -97,7 +94,6 @@ describe("Google maps", () => {
     });
 
     it("renders a map with markers", () => {
-        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             locations: [
@@ -120,7 +116,6 @@ describe("Google maps", () => {
     });
 
     it("renders a map with current location", () => {
-        mockUseLoadScriptHookWithReturn({ isLoaded: true, loadError: undefined });
         const googleMaps = renderGoogleMap(defaultProps);
         googleMaps.setProps({
             showCurrentLocation: true,
