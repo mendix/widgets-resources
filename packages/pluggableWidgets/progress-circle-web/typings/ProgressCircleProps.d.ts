@@ -49,5 +49,5 @@ export interface ProgressCirclePreviewProps {
     showLabel: boolean;
     labelType: LabelTypeEnum;
     labelText: string;
-    customLabel: { widgetCount: number; renderer: ComponentType };
+    customLabel: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
 }
