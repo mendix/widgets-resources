@@ -69,8 +69,7 @@ export const Switch: FunctionComponent<SwitchProps> = props => {
 };
 
 Switch.defaultProps = {
-    colorStyle: "default",
-    deviceStyle: "auto"
+    colorStyle: "default"
 };
 
 Switch.displayName = "Switch";
