@@ -1043,6 +1043,35 @@
             ]
         }
     ],
+    "com.mendix.widget.custom.switch.Switch": [
+        {
+            "name": "Style",
+            "type": "Dropdown",
+            "description": "The brand style affecting this element's appearance.",
+            "options": [
+                {
+                    "name": "Brand Primary",
+                    "class": "switch-primary"
+                },
+                {
+                    "name": "Brand Secondary",
+                    "class": "switch-secondary"
+                },
+                {
+                    "name": "Brand Success",
+                    "class": "switch-success"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "switch-warning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "switch-danger"
+                }
+            ]
+        }
+    ],
     "MenuBar": [
         {
             "name": "Hide icons",
