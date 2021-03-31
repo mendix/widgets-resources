@@ -6,5 +6,7 @@ export interface ScreenshotTakerType extends Style {
 }
 
 export const defaultScreenshotTakerStyles: ScreenshotTakerType = {
-    container: {}
+    container: {
+        backgroundColor: "#FFF"
+    }
 };
