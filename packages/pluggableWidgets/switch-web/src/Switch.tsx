@@ -42,7 +42,6 @@ export const Switch: FunctionComponent<SwitchProps> = props => {
                 className={classNames(`widget-switch-btn-wrapper widget-switch-btn-wrapper-${props.colorStyle}`, {
                     checked: isAvailable(booleanAttribute),
                     disabled: !editable,
-                    "no-switch": props.status === "no-context", // todo: i think this condition will never occur due to framework.
                     "un-checked": !isAvailable(booleanAttribute)
                 })}
                 onClick={editable ? props.onClick : undefined} // todo: execute action
