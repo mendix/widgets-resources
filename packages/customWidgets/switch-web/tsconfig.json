@@ -1,9 +1,5 @@
 {
-    "extends": "@mendix/custom-widgets-utils-internal/configs/tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "rootDir": "./",
-        "outDir": "dist/tsc/"
-    },
-    "exclude": ["dist/", "tests/", "**/*.spec.ts", "node_modules/"]
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "baseUrl": "./",
+    "include": ["./src", "./typings"]
 }

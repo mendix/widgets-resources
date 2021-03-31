@@ -1,6 +1,6 @@
 import { Component, ReactNode, createElement } from "react";
 
-import { Switch } from "./components/Switch";
+import { Switch } from "./Switch";
 import SwitchContainer, { SwitchContainerProps } from "./components/SwitchContainer";
 
 declare function require(name: string): string;

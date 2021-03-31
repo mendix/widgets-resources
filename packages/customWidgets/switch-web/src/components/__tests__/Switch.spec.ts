@@ -1,7 +1,7 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { createElement } from "react";
 
-import { Switch, SwitchProps } from "../Switch";
+import { Switch, SwitchProps } from "../../Switch";
 import { Alert } from "../Alert";
 
 describe("Switch", () => {

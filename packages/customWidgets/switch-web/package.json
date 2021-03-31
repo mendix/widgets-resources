@@ -1,37 +1,38 @@
 {
   "name": "switch-web",
   "widgetName": "Switch",
-  "version": "2.1.3",
+  "version": "3.0.0",
   "description": "Toggle a boolean attribute",
-  "copyright": "Mendix BV",
+  "copyright": "Copyright © 2005-2020 Mendix Technology B.V. All rights reserved.",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
-  },
-  "license": "Apache-2.0",
-  "scripts": {
-    "start": "utils-react-widgets start",
-    "dev": "utils-react-widgets dev",
-    "test:dev": "utils-react-widgets test:dev",
-    "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
-    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "lint:fix": "npm run lint -- --fix",
-    "build": "utils-react-widgets build",
-    "release": "utils-react-widgets release"
   },
   "config": {
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "packagePath": "com.mendix.widget.custom",
+  "scripts": {
+    "start": "cross-env MPKOUTPUT=Switch.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=Switch.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=Switch.mpk pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "cross-env MPKOUTPUT=Switch.mpk pluggable-widgets-tools release:web"
+  },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "@mendix/custom-widgets-utils-internal": "0.0.1"
+    "cross-env": "^7.0.2"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "@mendix/piw-utils-internal":"^1.0.0"
   }
 }
