@@ -18,16 +18,6 @@
                     </attributeTypes>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Editability">
-                <property key="editable" type="enumeration" defaultValue="default">
-                <caption>Editable</caption>
-                <description/>
-                <enumerationValues>
-                    <enumerationValue key="default">Default</enumerationValue>
-                    <enumerationValue key="never">Never</enumerationValue>
-                </enumerationValues>
-            </property>
-            </propertyGroup>
             <propertyGroup caption="Style">
                     <property key="deviceStyle" type="enumeration" defaultValue="auto">
                         <caption>Platform</caption>
@@ -56,6 +46,7 @@
         </propertyGroup>
         <propertyGroup caption="Common">
             <systemProperty key="Label"/>
-        </propertyGroup>
+            <systemProperty key="Editability"/>
+    </propertyGroup>
     </properties>
 </widget>
