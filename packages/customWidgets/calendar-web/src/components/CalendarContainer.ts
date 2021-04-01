@@ -107,22 +107,24 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
-    private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
-        if (this.props.startDateAttribute && mxObject) {
-            return new Promise(resolve => {
-                const processStartDateAttributeValue = (startDateAttributeValue: number | ""): void => {
-                    if (startDateAttributeValue) {
-                        resolve(new Date(startDateAttributeValue));
-                    }
-
-                    resolve(new Date());
-                };
-
-                mxObject.fetch(this.props.startDateAttribute, processStartDateAttributeValue);
-            });
+    // This function returns a promise which resolves to a value of type: value type associated with the property, "", null, undefined
+    private extractAttributeValue = (mxObject: mendix.lib.MxObject, attributePath: string): Promise<any> => {
+        if (!attributePath) {
+            return Promise.resolve(undefined);
         }
 
-        return Promise.resolve(new Date());
+        return new Promise(resolve => {
+            mxObject.fetch(attributePath, (attributeValue: any): void => resolve(attributeValue));
+        });
+    };
+
+    private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
+        if (mxObject) {
+            const startDateAttributeValue = await this.extractAttributeValue(mxObject, this.props.startDateAttribute);
+            return startDateAttributeValue ? new Date(startDateAttributeValue) : new Date();
+        }
+
+        return new Date();
     };
 
     private loadEvents = async (mxObject: mendix.lib.MxObject): Promise<void> => {
@@ -134,9 +136,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         await this.setViewDates(mxObject);
         const guid = mxObject ? mxObject.getGuid() : "";
         if (this.props.dataSource === "context" && mxObject) {
-            this.setCalendarEvents([mxObject]);
+            await this.setCalendarEvents([mxObject]);
         } else {
-            fetchData({
+            const mxEventObjects = await fetchData({
                 guid,
                 type: this.props.dataSource,
                 entity: this.props.eventEntity,
@@ -144,24 +146,26 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 microflow: this.props.dataSourceMicroflow,
                 mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
-            }).then(mxEventObjects => {
-                if (this.destroyed) {
-                    return;
-                }
-                mxEventObjects.forEach(
-                    mxEventObject =>
-                        (this.subscriptionEventHandles = [
-                            ...this.subscriptionEventHandles,
-                            ...this.subscribeToEventAttributes(mxEventObject)
-                        ])
-                );
-                this.setCalendarEvents(mxEventObjects);
-
-                if (this.progressHandle) {
-                    mx.ui.hideProgress(this.progressHandle);
-                    this.progressHandle = undefined;
-                }
             });
+
+            if (this.destroyed) {
+                return;
+            }
+
+            mxEventObjects.forEach(
+                mxEventObject =>
+                    (this.subscriptionEventHandles = [
+                        ...this.subscriptionEventHandles,
+                        ...this.subscribeToEventAttributes(mxEventObject)
+                    ])
+            );
+
+            await this.setCalendarEvents(mxEventObjects);
+
+            if (this.progressHandle) {
+                mx.ui.hideProgress(this.progressHandle);
+                this.progressHandle = undefined;
+            }
         }
     };
 
@@ -169,8 +173,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         const startPosition = await this.getStartPosition(mxObject);
         if (
             this.props.executeOnViewChange &&
-            mxObject.get(this.props.viewStartAttribute) === "" &&
-            mxObject.get(this.props.viewEndAttribute) === ""
+            !(await this.extractAttributeValue(mxObject, this.props.viewStartAttribute)) &&
+            !(await this.extractAttributeValue(mxObject, this.props.viewEndAttribute))
         ) {
             const viewStart = new Date(startPosition.getFullYear(), startPosition.getMonth(), 1);
             const viewEnd = new Date(startPosition.getFullYear(), startPosition.getMonth() + 1, 0);
@@ -200,16 +204,24 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.setState({ startPosition });
     }
 
-    private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]): void => {
+    private setCalendarEvents = async (mxObjects: mendix.lib.MxObject[]): Promise<void> => {
         if (mxObjects) {
-            const events = mxObjects.map(mxObject => ({
-                title: (mxObject.get(this.props.titleAttribute) as string) || " ",
-                allDay: mxObject.get(this.props.allDayAttribute) as boolean,
-                start: new Date(mxObject.get(this.props.startAttribute) as number),
-                end: new Date(mxObject.get(this.props.endAttribute) as number),
-                color: mxObject.get(this.props.eventColor) as string,
-                guid: mxObject.getGuid()
-            }));
+            const promisedEvents = mxObjects.map(async mxObject => {
+                const startAttributeValue = await this.extractAttributeValue(mxObject, this.props.startAttribute);
+                const endAttributeValue = await this.extractAttributeValue(mxObject, this.props.endAttribute);
+
+                return {
+                    title: (await this.extractAttributeValue(mxObject, this.props.titleAttribute)) || " ",
+                    allDay: await this.extractAttributeValue(mxObject, this.props.allDayAttribute),
+                    start: startAttributeValue ? new Date(startAttributeValue as number) : new Date(),
+                    end: endAttributeValue ? new Date(endAttributeValue as number) : new Date(),
+                    color: (await this.extractAttributeValue(mxObject, this.props.eventColor)) || "",
+                    guid: mxObject.getGuid()
+                };
+            });
+
+            const events: CalendarEvent[] = await Promise.all(promisedEvents);
+
             this.setState({ events, eventCache: mxObjects, loading: false });
         }
     };
@@ -224,7 +236,9 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         ].map(attr =>
             window.mx.data.subscribe({
                 attr,
-                callback: () => this.loadEvents(this.props.mxObject),
+                callback: () => {
+                    this.loadEvents(this.props.mxObject);
+                },
                 guid: mxEventObject.getGuid()
             })
         );
@@ -239,19 +253,25 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
                     attr: this.props.startDateAttribute,
-                    callback: () => this.loadEvents(mxObject)
+                    callback: () => {
+                        this.loadEvents(mxObject);
+                    }
                 })
             );
             this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     entity: this.props.eventEntity,
-                    callback: () => this.loadEvents(mxObject)
+                    callback: () => {
+                        this.loadEvents(mxObject);
+                    }
                 })
             );
             this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
-                    callback: () => this.loadEvents(mxObject)
+                    callback: () => {
+                        this.loadEvents(mxObject);
+                    }
                 })
             );
             if (this.props.dataSource === "context" && mxObject.getEntity() === this.props.eventEntity) {
