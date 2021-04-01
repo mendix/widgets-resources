@@ -1,9 +1,6 @@
 $default-android-color: #6fbeb5;
 $default-ios-color: rgb(100, 189, 99);
 
-// TODO: align variables with Atlas 3.
-// TODO: Atlas styles should give the *flavor*
-
 @mixin bootstrap-style-ios($brand-style) {
     background-color: $brand-style;
     border-color: $brand-style;
@@ -14,52 +11,6 @@ $default-ios-color: rgb(100, 189, 99);
     background-color: lighten($brand-style, 10%);
 }
 
-@mixin theme-selector($device, $brand-key, $brand-variable) {
-    .widget-switch-btn-wrapper-#{$brand-key} {
-        .widget-switch {
-            @if ($device == "iOS" or $device == "auto") {
-                &.auto,
-                .iOS {
-                    .widget-switch-btn-wrapper {
-                        &.checked {
-                            &.widget-switch-btn-wrapper-default {
-                                @include bootstrap-style-ios($brand-variable);
-                            }
-                        }
-                    }
-                }
-            } @else {
-                &.android {
-                    .widget-switch-btn-wrapper {
-                        &.checked {
-                            &.widget-switch-btn-wrapper-default {
-                                @include bootstrap-style-android($brand-variable);
-
-                                .widget-switch-btn {
-                                    background: $brand-variable;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-@include theme-selector("iOS", "primary", $brand-primary);
-// NOTE: no secondary because widget never had default design-property
-@include theme-selector("iOS", "success", $brand-success);
-@include theme-selector("iOS", "warning", $brand-warning);
-@include theme-selector("iOS", "danger", $brand-danger);
-
-@include theme-selector("android", "primary", $brand-primary);
-// NOTE: no secondary because widget never had default design-property
-@include theme-selector("android", "success", $brand-success);
-@include theme-selector("android", "warning", $brand-warning);
-@include theme-selector("android", "danger", $brand-danger);
-
-// the selector structure is different for default styling
 .widget-switch {
     &.iOS,
     .auto {

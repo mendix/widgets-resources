@@ -18,6 +18,40 @@ $default-ios-color: rgb(100, 189, 99);
     background-color: lighten($brand-style, 10%);
 }
 
+@mixin style($device, $brand-key, $brand-variable) {
+    .widget-switch-btn-wrapper-#{$brand-key} {
+        .widget-switch {
+            @if ($device == "iOS" or $device == "auto") {
+                &.auto,
+                .iOS {
+                    .widget-switch-btn-wrapper {
+                        &.checked {
+                            &.widget-switch-btn-wrapper-default {
+                                @include bootstrap-style-ios($brand-variable);
+                            }
+                        }
+                    }
+                }
+            } @else {
+                &.android {
+                    .widget-switch-btn-wrapper {
+                        &.checked {
+                            &.widget-switch-btn-wrapper-default {
+                                @include bootstrap-style-android($brand-variable);
+
+                                .widget-switch-btn {
+                                    background: $brand-variable;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// maintained for backwards compatibility prior to Switch 2.0.0.
 @mixin ios {
     .widget-switch-btn-wrapper {
         &.checked {
@@ -52,6 +86,7 @@ $default-ios-color: rgb(100, 189, 99);
     }
 }
 
+// maintained for backwards compatibility prior to Switch 2.0.0.
 @mixin android {
     .widget-switch-btn-wrapper {
         &.checked {
@@ -121,6 +156,19 @@ $default-ios-color: rgb(100, 189, 99);
         }
     }
 
+    @include style("iOS", "primary", $brand-primary);
+    // NOTE: no secondary because widget never had default design-property
+    @include style("iOS", "success", $brand-success);
+    @include style("iOS", "warning", $brand-warning);
+    @include style("iOS", "danger", $brand-danger);
+
+    @include style("android", "primary", $brand-primary);
+    // NOTE: no secondary because widget never had default design-property
+    @include style("android", "success", $brand-success);
+    @include style("android", "warning", $brand-warning);
+    @include style("android", "danger", $brand-danger);
+
+    // below is maintained for backwards compatibility prior to Switch 2.0.0.
     div {
         &.widget-switch {
             &.iOS {
