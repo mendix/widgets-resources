@@ -3,6 +3,7 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
+import { Big } from "big.js";
 
 /**
  * Shows a loading dialog.
@@ -12,7 +13,7 @@
  * @param {boolean} blocking - Block the user interface immediately.
  * @returns {Promise.<Big>}
  */
-export async function ShowProgress(message?: string, blocking?: boolean): Promise<BigJs.Big> {
+export async function ShowProgress(message?: string, blocking?: boolean): Promise<Big> {
     // BEGIN USER CODE
 
     const id = mx.ui.showProgress(message, blocking);

@@ -3,7 +3,7 @@ import { FilterSelector } from "./FilterSelector";
 import { ListAttributeValue, ObjectItem } from "mendix";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
-import Big from "big.js";
+import { Big } from "big.js";
 import classNames from "classnames";
 
 interface FilterComponentProps {
@@ -16,12 +16,12 @@ interface FilterComponentProps {
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
-    value?: BigJs.Big;
+    value?: Big;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
-    const [value, setValue] = useState<BigJs.Big | undefined>(undefined);
+    const [value, setValue] = useState<Big | undefined>(undefined);
     const [valueInput, setValueInput] = useState<string | undefined>(undefined);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -39,7 +39,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     if (!value) {
                         return true;
                     }
-                    const dataValue = attr(item).value as Big;
+                    const dataValue = attr.get(item).value as Big;
                     if (!dataValue || isNaN(Number(dataValue))) {
                         return false;
                     }
@@ -64,7 +64,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.filterDispatcher, value, type]);
 
     const onChange = useCallback(
-        debounce((value?: BigJs.Big) => setValue(value), props.delay),
+        debounce((value?: Big) => setValue(value), props.delay),
         [props.delay]
     );
 

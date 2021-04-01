@@ -4,15 +4,16 @@
  * @author Mendix UI Content Team
  */
 import { DynamicValue } from "mendix";
+import { Big } from "big.js";
 
 export type CircleTextEnum = "percentage" | "customText" | "none";
 
 export interface ProgressCircleProps<Style> {
     name: string;
     style: Style[];
-    progressValue: DynamicValue<BigJs.Big>;
-    minimumValue: DynamicValue<BigJs.Big>;
-    maximumValue: DynamicValue<BigJs.Big>;
+    progressValue: DynamicValue<Big>;
+    minimumValue: DynamicValue<Big>;
+    maximumValue: DynamicValue<Big>;
     circleText: CircleTextEnum;
     customText?: DynamicValue<string>;
 }

@@ -50,7 +50,7 @@ interface SwipeableContainerProps {
     hidePagination: boolean;
     hideIndicatorLastSlide: boolean;
     styles: IntroScreenStyle;
-    activeSlide?: EditableValue<BigJs.Big>;
+    activeSlide?: EditableValue<Big>;
 }
 
 declare type Option<T> = T | undefined;
@@ -58,7 +58,7 @@ declare type Option<T> = T | undefined;
 const isAndroidRTL = I18nManager.isRTL && Platform.OS === "android";
 const Touchable: ComponentClass<any> = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
-const refreshActiveSlideAttribute = (slides: SlidesType[], activeSlide?: EditableValue<BigJs.Big>): number => {
+const refreshActiveSlideAttribute = (slides: SlidesType[], activeSlide?: EditableValue<Big>): number => {
     if (activeSlide && activeSlide.status === ValueStatus.Available && slides && slides.length > 0) {
         const slide = Number(activeSlide.value) - 1;
         if (slide < 0) {

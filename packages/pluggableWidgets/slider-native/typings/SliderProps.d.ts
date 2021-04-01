@@ -4,17 +4,18 @@
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { Big } from "big.js";
 
 export type EditableEnum = "default" | "never";
 
 export interface SliderProps<Style> {
     name: string;
     style: Style[];
-    valueAttribute: EditableValue<BigJs.Big>;
+    valueAttribute: EditableValue<Big>;
     editable: EditableEnum;
-    minimumValue: DynamicValue<BigJs.Big>;
-    maximumValue: DynamicValue<BigJs.Big>;
-    stepSize: DynamicValue<BigJs.Big>;
+    minimumValue: DynamicValue<Big>;
+    maximumValue: DynamicValue<Big>;
+    stepSize: DynamicValue<Big>;
     onChange?: ActionValue;
 }
 

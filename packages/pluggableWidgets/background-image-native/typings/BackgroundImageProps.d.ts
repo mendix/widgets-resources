@@ -5,6 +5,7 @@
  */
 import { ComponentType, ReactNode } from "react";
 import { DynamicValue, NativeImage } from "mendix";
+import { Big } from "big.js";
 
 export type ResizeModeEnum = "cover" | "contain" | "stretch" | "center";
 
@@ -13,7 +14,7 @@ export interface BackgroundImageProps<Style> {
     style: Style[];
     image: DynamicValue<NativeImage>;
     resizeMode: ResizeModeEnum;
-    opacity: BigJs.Big;
+    opacity: Big;
     content?: ReactNode;
 }
 

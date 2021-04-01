@@ -4,7 +4,17 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue, DynamicValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import {
+    ActionValue,
+    DynamicValue,
+    EditableValue,
+    ListValue,
+    ListActionValue,
+    ListAttributeValue,
+    ListExpressionValue,
+    ListWidgetValue
+} from "mendix";
+import { Big } from "big.js";
 
 export type ShowContentAsEnum = "attribute" | "dynamicText" | "customContent";
 
@@ -16,7 +26,7 @@ export type AlignmentEnum = "left" | "center" | "right";
 
 export interface ColumnsType {
     showContentAs: ShowContentAsEnum;
-    attribute?: ListAttributeValue<string | BigJs.Big | boolean | Date>;
+    attribute?: ListAttributeValue<string | Big | boolean | Date>;
     content?: ListWidgetValue;
     dynamicText?: ListExpressionValue<string>;
     header?: DynamicValue<string>;
@@ -40,10 +50,10 @@ export type ShowEmptyPlaceholderEnum = "none" | "custom";
 export interface ColumnsPreviewType {
     showContentAs: ShowContentAsEnum;
     attribute: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dynamicText: string;
     header: string;
-    filter: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    filter: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
@@ -88,7 +98,7 @@ export interface DatagridPreviewProps {
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
-    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     rowClass: string;
     onClick: {} | null;
     columnsSortable: boolean;

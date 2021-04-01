@@ -6,6 +6,8 @@
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
+
 // BEGIN EXTRA CODE
 type PictureSource = "camera" | "imageLibrary";
 type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
@@ -23,8 +25,8 @@ export async function TakePicture(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
-    maximumWidth?: BigJs.Big,
-    maximumHeight?: BigJs.Big
+    maximumWidth?: Big,
+    maximumHeight?: Big
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/apache/cordova-plugin-camera

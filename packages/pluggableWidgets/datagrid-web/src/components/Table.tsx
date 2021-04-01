@@ -15,6 +15,7 @@ import {
     useTable
 } from "react-table";
 import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
+import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { useSettings } from "../utils/settings";
@@ -52,7 +53,7 @@ export interface TableProps<T> {
     setPage?: (computePage: (prevPage: number) => number) => void;
     settings?: EditableValue<string>;
     styles?: CSSProperties;
-    valueForSort: (value: T, columnIndex: number) => string | BigJs.Big | boolean | Date | undefined;
+    valueForSort: (value: T, columnIndex: number) => string | Big | boolean | Date | undefined;
 }
 
 export interface ColumnWidth {

@@ -4,13 +4,14 @@
  * @author Mendix UI Content Team
  */
 import { DynamicValue } from "mendix";
+import { Big } from "big.js";
 
 export interface ProgressBarProps<Style> {
     name: string;
     style: Style[];
-    progressValue: DynamicValue<BigJs.Big>;
-    minimumValue: DynamicValue<BigJs.Big>;
-    maximumValue: DynamicValue<BigJs.Big>;
+    progressValue: DynamicValue<Big>;
+    minimumValue: DynamicValue<Big>;
+    maximumValue: DynamicValue<Big>;
 }
 
 export interface ProgressBarPreviewProps {

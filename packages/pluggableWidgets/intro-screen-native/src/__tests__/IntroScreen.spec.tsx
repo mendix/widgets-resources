@@ -66,7 +66,7 @@ describe("Intro Screen", () => {
         const component = render(
             <IntroScreen
                 {...defaultProps}
-                activeSlideAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(1)).build()}
+                activeSlideAttribute={new EditableValueBuilder<Big>().withValue(new Big(1)).build()}
             />
         );
         expect(component.toJSON()).toMatchSnapshot();

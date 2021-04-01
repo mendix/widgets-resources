@@ -3,7 +3,7 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
-
+import { Big } from "big.js";
 /**
  * Tries to login using a username and password.
  *
@@ -16,7 +16,7 @@
  * @param {string} password - This field is required.
  * @returns {Promise.<Big>}
  */
-export async function SignIn(username?: string, password?: string): Promise<BigJs.Big> {
+export async function SignIn(username?: string, password?: string): Promise<Big> {
     // BEGIN USER CODE
     if (!username || !password) {
         return Promise.resolve(new Big(401));
