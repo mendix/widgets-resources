@@ -118,26 +118,4 @@ describe("Switch", () => {
             expect(props.onClick).not.toHaveBeenCalled();
         });
     });
-
-    describe("without a context", () => {
-        it("should have the no-switch class", () => {
-            createAndFindElements(
-                createProps({
-                    isChecked: false,
-                    status: "no-context"
-                })
-            );
-
-            expect(switchButtonWrapper.hasClass("no-switch")).toBe(true);
-        });
-
-        it("should not handle a click event", () => {
-            const props = createProps({ status: "no-context" });
-            createAndFindElements(props);
-
-            switchButton.simulate("click");
-
-            expect(props.onClick).not.toHaveBeenCalled();
-        });
-    });
 });
