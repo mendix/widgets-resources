@@ -14,6 +14,9 @@ class Calendar {
     get monthView(): WebdriverIO.Element {
         return $(`.mx-name-${this.name} .rbc-month-view`);
     }
+    get label(): WebdriverIO.Element {
+        return $(`.mx-name-${this.name} .calendar-label`);
+    }
 
     get dayViewButton(): WebdriverIO.Element {
         return this.element.$(".btn.btn-default.toolbar-btn-day");
