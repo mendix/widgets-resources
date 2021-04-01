@@ -74,23 +74,6 @@
         &.disabled {
             opacity: 0.5;
         }
-
-        &.no-switch {
-            .left {
-                &:active {
-                    width: 30px;
-                    border-radius: 50%;
-                }
-
-                .right {
-                    &:active {
-                        width: 30px;
-                        left: 20px;
-                        border-radius: 50%;
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -153,16 +136,6 @@
     &.disabled {
         cursor: default;
     }
-
-    &.no-switch {
-        .widget-switch-btn {
-            display: none !important;
-
-            &:active {
-                box-shadow: none;
-            }
-        }
-    }
 }
 
 .widget-switch {
@@ -181,63 +154,6 @@
     &.auto {
         @include ios;
     }
-}
-
-@mixin android-label-padding {
-    &.android {
-        .form-group {
-            .widget-switch {
-                &.android {
-                    padding-top: 8px;
-                    padding-bottom: 8px;
-                }
-            }
-        }
-    }
-}
-
-html {
-    &.dj_android {
-        .widget-switch {
-            &.auto {
-                @include android;
-            }
-        }
-
-        .form-horizontal {
-            &.widget-switch-label {
-                @include android-label-padding;
-            }
-        }
-    }
-
-    &.dj_ios {
-        .widget-switch {
-            &.auto {
-                @include ios;
-            }
-        }
-    }
-}
-
-.widget-switch-label {
-    .form-group {
-        .widget-switch {
-            float: left;
-            @include dynamic-float(320px, 736px, right);
-            @include dynamic-float(768px, 1024px, right);
-        }
-
-        .control-label {
-            float: right;
-            padding-top: 8px;
-            padding-bottom: 8px;
-            @include dynamic-float(320px, 736px, left);
-            @include dynamic-float(768px, 1024px, left);
-        }
-    }
-
-    @include android-label-padding;
 }
 
 .mx-table {
