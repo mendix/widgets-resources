@@ -4,7 +4,7 @@
 ![Atlas build](https://github.com/mendix/widgets-resources/actions/workflows/AtlasBuildTest.yml/badge.svg?branch=master)
 ![Atlas Release](https://github.com/mendix/widgets-resources/actions/workflows/AtlasReleaseThemeFiles.yml/badge.svg?branch=master)
 ![Publisn NPM](https://github.com/mendix/widgets-resources/actions/workflows/PublishNpm.yml/badge.svg?branch=master)
-![Mendix 8](https://img.shields.io/badge/mendix-8.0.0-brightgreen.svg)
+![Mendix 9](https://img.shields.io/badge/mendix-9.0.5-brightgreen.svg)
 
 # Widgets resources
 
