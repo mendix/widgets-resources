@@ -1,10 +1,9 @@
 import { createElement, FunctionComponent, KeyboardEvent, useCallback } from "react";
-import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
+import { executeAction, isAvailable, Alert } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
 import classNames from "classnames";
 
 import { SwitchContainerProps } from "../typings/SwitchProps";
-import { Alert } from "./components/Alert";
 import "./ui/Switch.scss";
 
 export const Switch: FunctionComponent<SwitchContainerProps> = props => {
@@ -32,7 +31,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 checked={isChecked}
                 className={classNames("widget-switch-checkbox", { enabled: editable })}
                 readOnly
-                type={"checkbox"}
+                type="checkbox"
             />
             <div
                 className={classNames("widget-switch-btn-wrapper", "widget-switch-btn-wrapper-default", {
@@ -43,7 +42,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 onClick={editable ? onClick : undefined}
                 onKeyDown={onKeyDown}
                 tabIndex={0}
-                role={"checkbox"}
+                role="checkbox"
                 aria-checked={isChecked}
                 aria-labelledby={props.id}
             >
@@ -54,7 +53,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                     })}
                 />
             </div>
-            <Alert message={props.booleanAttribute.validation} />
+            <Alert bootstrapStyle={"danger"}>{props.booleanAttribute.validation}</Alert>
         </div>
     );
 };
