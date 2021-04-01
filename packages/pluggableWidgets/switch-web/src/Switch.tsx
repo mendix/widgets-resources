@@ -31,7 +31,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
             <input
                 checked={isChecked}
                 className={classNames("widget-switch-checkbox", { enabled: editable })}
-                readOnly={true}
+                readOnly
                 type={"checkbox"}
             />
             <div
