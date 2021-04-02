@@ -4,7 +4,7 @@ import { Alert } from "@mendix/piw-utils-internal";
 import { FunctionComponent } from "react";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
 
-interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" | "style" | "tabIndex" | "deviceStyle"> {
+export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" | "style" | "tabIndex" | "deviceStyle"> {
     onClick: (event: MouseEvent<HTMLDivElement>) => void;
     onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void;
     isChecked: boolean;
@@ -14,7 +14,7 @@ interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" | "style
 
 export const Switch: FunctionComponent<SwitchProps> = props => {
     return (
-        <div className={classNames("widget-switch", props["class"], props.deviceStyle)} style={props.style}>
+        <div className={classNames("widget-switch", props.class, props.deviceStyle)} style={props.style}>
             <input
                 checked={props.isChecked}
                 className={classNames("widget-switch-checkbox", { enabled: props.editable })}
