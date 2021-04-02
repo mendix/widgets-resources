@@ -3,7 +3,7 @@
   "widgetName": "Switch",
   "version": "3.0.0",
   "description": "Toggle a boolean attribute",
-  "copyright": "Copyright © 2005-2020 Mendix Technology B.V. All rights reserved.",
+  "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
