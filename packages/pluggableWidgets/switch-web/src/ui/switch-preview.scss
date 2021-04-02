@@ -1,7 +1,7 @@
 @import "mixins";
 @import "variables";
 
-@import "Switch";
+@import "switch";
 
 @include style("iOS", "default", $default-ios-color);
 @include style("iOS", "primary", $brand-primary);
