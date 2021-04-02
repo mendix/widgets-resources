@@ -12,7 +12,7 @@ export function preview(props: SwitchPreviewProps): ReactElement {
             id="switch-preview"
             validation={undefined}
             editable={false}
-            isChecked={false}
+            isChecked={true}
             onClick={() => {}}
             onKeyDown={() => {}}
             deviceStyle={deviceStyle}

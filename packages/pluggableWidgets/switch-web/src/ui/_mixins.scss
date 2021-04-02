@@ -1,0 +1,162 @@
+@mixin bootstrap-style-ios($brand-style) {
+    background-color: $brand-style;
+    border-color: $brand-style;
+    box-shadow: $brand-style 0 0 0 16px inset;
+}
+
+@mixin bootstrap-style-android($brand-style) {
+    background-color: lighten($brand-style, 10%);
+}
+
+@mixin ios {
+    .widget-switch-btn-wrapper {
+        background-color: #fff;
+        border: 1px solid #dfdfdf;
+        border-radius: 20px;
+        cursor: pointer;
+        display: inline-block;
+        height: 30px;
+        margin-bottom: 3px;
+        margin-top: 3px;
+        position: relative;
+        vertical-align: middle;
+        width: 50px;
+
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+
+        -webkit-background-clip: content-box;
+        background-clip: content-box;
+        transition: border 0.4s, box-shadow 0.4s, transform 0.4s, background-color 1.2s;
+
+        &.un-checked {
+            border-color: rgb(223, 223, 223);
+            box-shadow: rgb(223, 223, 223) 0 0 0 0 inset;
+        }
+
+        .widget-switch-btn {
+            background: #fff;
+            border-radius: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+            height: 30px;
+            position: absolute;
+            top: 0;
+            width: 30px;
+
+            &.left {
+                left: 0;
+                transition: background-color 0.4s, left 0.2s;
+
+                &:active {
+                    width: 70%;
+                    border-radius: 45%;
+                }
+            }
+
+            &.right {
+                left: 20px;
+                transition: background-color 0.4s, left 0.2s;
+                background-color: rgb(255, 255, 255);
+
+                &:active {
+                    left: 30%;
+                    transition: left 0s;
+                    width: 70%;
+                    border-radius: 45%;
+                }
+            }
+        }
+
+        &.disabled {
+            opacity: 0.5;
+        }
+    }
+}
+
+@mixin android {
+    .widget-switch-btn-wrapper {
+        position: relative;
+        display: block;
+        height: 20px;
+        width: 44px;
+        background: #898989;
+        border: none;
+        box-shadow: none;
+        border-radius: 100px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        .widget-switch-btn {
+            position: absolute;
+            left: -2px;
+            top: -3px;
+            display: block;
+            width: 26px;
+            height: 26px;
+            border-radius: 100px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(#000, 0.4);
+            content: "";
+            transition: all 0.3s ease;
+        }
+
+        &.checked {
+            background: #6fbeb5;
+            border: none;
+            box-shadow: none;
+
+            .widget-switch-btn {
+                left: 20px;
+                background: #179588;
+            }
+        }
+
+        &.disabled {
+            background: #d5d5d5;
+            pointer-events: none;
+
+            .widget-switch-btn {
+                background: #bcbdbc;
+            }
+        }
+    }
+}
+
+@mixin style($device, $brand-key, $brand-variable) {
+    .widget-switch-btn-wrapper-#{$brand-key} {
+        .widget-switch {
+            @if ($device == "iOS" or $device == "auto") {
+                &.auto,
+                .iOS {
+                    .widget-switch-btn-wrapper {
+                        &.checked {
+                            &.widget-switch-btn-wrapper-default {
+                                @include bootstrap-style-ios($brand-variable);
+                            }
+                        }
+                    }
+                }
+            } @else {
+                &.android {
+                    .widget-switch-btn-wrapper {
+                        &.checked {
+                            &.widget-switch-btn-wrapper-default {
+                                @include bootstrap-style-android($brand-variable);
+
+                                .widget-switch-btn {
+                                    background: $brand-variable;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

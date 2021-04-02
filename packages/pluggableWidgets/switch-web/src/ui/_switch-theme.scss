@@ -1,15 +1,5 @@
-$default-android-color: #6fbeb5;
-$default-ios-color: rgb(100, 189, 99);
-
-@mixin bootstrap-style-ios($brand-style) {
-    background-color: $brand-style;
-    border-color: $brand-style;
-    box-shadow: $brand-style 0 0 0 16px inset;
-}
-
-@mixin bootstrap-style-android($brand-style) {
-    background-color: lighten($brand-style, 10%);
-}
+@import "variables";
+@import "mixins";
 
 .widget-switch {
     &.iOS,
