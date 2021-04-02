@@ -22,7 +22,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 executeAction(props.action);
             }
         },
-        [props.action]
+        [props.action, editable]
     );
 
     return (
