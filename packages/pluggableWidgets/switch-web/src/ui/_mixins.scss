@@ -133,7 +133,7 @@
         .widget-switch {
             @if ($device == "iOS" or $device == "auto") {
                 &.auto,
-                .iOS {
+                &.iOS {
                     .widget-switch-btn-wrapper {
                         &.checked {
                             &.widget-switch-btn-wrapper-default {

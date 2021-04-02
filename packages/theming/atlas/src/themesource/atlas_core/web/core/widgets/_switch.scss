@@ -23,7 +23,7 @@ $default-ios-color: rgb(100, 189, 99);
         .widget-switch {
             @if ($device == "iOS" or $device == "auto") {
                 &.auto,
-                .iOS {
+                &.iOS {
                     .widget-switch-btn-wrapper {
                         &.checked {
                             &.widget-switch-btn-wrapper-default {
