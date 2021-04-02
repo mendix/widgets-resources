@@ -1,31 +1,23 @@
-// import { Component, ReactNode, createElement } from "react";
-//
-// import { Switch } from "./Switch";
-// import SwitchContainer, { SwitchContainerProps } from "./components/SwitchContainer";
-//
-// declare function require(name: string): string;
-//
-// // tslint:disable class-name
-// export class preview extends Component<SwitchContainerProps, {}> {
-//     render(): ReactNode {
-//         return this.renderSwitch();
-//     }
-//
-//     private renderSwitch(hasLabel = false): ReactNode {
-//         return createElement(Switch, {
-//             className: !hasLabel ? this.props.class : undefined,
-//             colorStyle: this.props.colorStyle,
-//             deviceStyle: this.props.deviceStyle,
-//             isChecked: true,
-//             onClick: undefined as any,
-//             status: this.props.editable === "default" ? "enabled" : "disabled",
-//             style: !hasLabel ? SwitchContainer.parseStyle(this.props.style) : undefined
-//         });
-//     }
-// }
-//
-// export function getPreviewCss(): string {
-//     return require("./ui/Switch.scss");
-// }
+import { createElement, ReactElement } from "react";
+import { parseStyle } from "@mendix/piw-utils-internal";
 
-console.log("hi");
+import { SwitchPreviewProps } from "../typings/SwitchProps";
+import { Switch } from "./components/Switch";
+
+export function preview(props: SwitchPreviewProps): ReactElement {
+    const { class: className, style, deviceStyle } = props;
+
+    return (
+        <Switch
+            id="switch-preview"
+            validation={undefined}
+            editable={false}
+            isChecked={false}
+            onClick={() => {}}
+            onKeyDown={() => {}}
+            deviceStyle={deviceStyle}
+            class={className}
+            style={parseStyle(style)}
+        />
+    );
+}
