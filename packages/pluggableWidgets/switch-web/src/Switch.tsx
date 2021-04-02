@@ -41,7 +41,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 })}
                 onClick={editable ? onClick : undefined}
                 onKeyDown={onKeyDown}
-                tabIndex={0}
+                tabIndex={props.tabIndex ?? 0}
                 role="checkbox"
                 aria-checked={isChecked}
                 aria-labelledby={props.id}
