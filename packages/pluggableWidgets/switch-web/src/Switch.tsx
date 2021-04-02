@@ -1,7 +1,7 @@
 import { createElement, FunctionComponent, KeyboardEvent, MouseEvent, useCallback } from "react";
-import { executeAction, isAvailable, Alert } from "@mendix/piw-utils-internal";
+import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
-import classNames from "classnames";
+import { Switch as SwitchComponent } from "./components/Switch";
 
 import { SwitchContainerProps } from "../typings/SwitchProps";
 import "./ui/Switch.scss";
@@ -35,35 +35,18 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
     );
 
     return (
-        <div className={classNames("widget-switch", props.class, props.deviceStyle)} style={props.style}>
-            <input
-                checked={isChecked}
-                className={classNames("widget-switch-checkbox", { enabled: editable })}
-                readOnly
-                type="checkbox"
-            />
-            <div
-                className={classNames("widget-switch-btn-wrapper", "widget-switch-btn-wrapper-default", {
-                    checked: isChecked,
-                    disabled: !editable,
-                    "un-checked": !isChecked
-                })}
-                onClick={onClick}
-                onKeyDown={onKeyDown}
-                tabIndex={props.tabIndex ?? 0}
-                role="checkbox"
-                aria-checked={isChecked}
-                aria-labelledby={props.id}
-            >
-                <small
-                    className={classNames("widget-switch-btn", {
-                        left: !isChecked,
-                        right: isChecked
-                    })}
-                />
-            </div>
-            <Alert bootstrapStyle={"danger"}>{props.booleanAttribute.validation}</Alert>
-        </div>
+        <SwitchComponent
+            onClick={onClick}
+            onKeyDown={onKeyDown}
+            isChecked={isChecked}
+            editable={editable}
+            validation={props.booleanAttribute.validation}
+            id={props.id}
+            class={props.class}
+            style={props.style}
+            tabIndex={props.tabIndex}
+            deviceStyle={props.deviceStyle}
+        />
     );
 };
 
