@@ -5,6 +5,7 @@
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue } from "mendix";
+import { Big } from "big.js";
 
 export interface ShrinkingHeaderContainerProps {
     name: string;
@@ -13,8 +14,7 @@ export interface ShrinkingHeaderContainerProps {
     tabIndex?: number;
     headerContent: ReactNode;
     scrollableContent: ReactNode;
-    shrinkThreshold: DynamicValue<BigJs.Big>;
-    shrunkClassName: string;
+    shrinkThreshold: DynamicValue<Big>;
 }
 
 export interface ShrinkingHeaderPreviewProps {
@@ -23,5 +23,4 @@ export interface ShrinkingHeaderPreviewProps {
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     scrollableContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     shrinkThreshold: string;
-    shrunkClassName: string;
 }

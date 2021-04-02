@@ -21,10 +21,6 @@
                     <description />
                     <returnType type="Integer" />
                 </property>
-                <property key="shrunkClassName" type="string" required="true">
-                    <caption>Shrink class</caption>
-                    <description>The class applied to the header when shrunk</description>
-                </property>
             </propertyGroup>
 
             <propertyGroup caption="Visibility">

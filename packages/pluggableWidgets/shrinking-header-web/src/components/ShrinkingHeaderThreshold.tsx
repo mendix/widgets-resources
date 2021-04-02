@@ -11,28 +11,29 @@ export interface ShrinkingHeaderThresholdProps {
     tabIndex?: number;
     headerContent?: ReactNode;
     scrollableContent?: ReactNode;
-    shrunkClassName: string;
     shrinkThreshold: number;
 }
 
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
-    const { name, className, style, tabIndex, headerContent, shrunkClassName, shrinkThreshold } = props;
+    const { name, className, style, tabIndex, headerContent, shrinkThreshold } = props;
 
     const [inlineStyle, setInlineStyle] = useState<CSSProperties>({ ...style });
-    const [wrappingHeaderHeight, setWrappingHeaderHeight] = useState<number>(0);
+    const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
     const [shrunk, setShrunk] = useState(false);
 
-    const actualClassName = classNames("widget-shrinking-header-threshold", className, {
-        [`${shrunkClassName}`]: shrunk
-    });
+    const actualClassName = classNames(
+        "widget-shrinking-header-threshold",
+        {
+            "widget-shrinking-header-shrunk": shrunk
+        },
+        className
+    );
 
     const updateHeight = useCallback(
         (node: HTMLDivElement | null) => {
-            if (node) {
-                setWrappingHeaderHeight(node.offsetHeight);
-            }
+            setHeaderElement(node ?? undefined);
         },
-        [setWrappingHeaderHeight]
+        [setHeaderElement]
     );
 
     useEffect(() => {
@@ -54,8 +55,25 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
     }, [shrinkThreshold, setShrunk]);
 
     useEffect(() => {
-        setInlineStyle(prevState => ({ ...prevState, height: wrappingHeaderHeight }));
-    }, [setInlineStyle, wrappingHeaderHeight]);
+        if (headerElement) {
+            const resizeObserver = new ResizeObserver(() => {
+                const headerHeight = headerElement.offsetHeight;
+                setInlineStyle(prevState => {
+                    if (!prevState.height || (prevState.height && prevState.height < headerHeight)) {
+                        return { ...prevState, height: headerHeight };
+                    }
+
+                    return prevState;
+                });
+            });
+
+            resizeObserver.observe(headerElement);
+
+            return () => {
+                resizeObserver.disconnect();
+            };
+        }
+    }, [headerElement, setInlineStyle]);
 
     return (
         <div id={name} className={actualClassName} style={inlineStyle} tabIndex={tabIndex}>
