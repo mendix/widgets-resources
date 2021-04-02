@@ -5,7 +5,7 @@ import { ShrinkingHeaderThreshold } from "./components/ShrinkingHeaderThreshold"
 import { ShrinkingHeaderContainerProps } from "../typings/ShrinkingHeaderProps";
 
 export default function ShrinkingHeader(props: ShrinkingHeaderContainerProps): ReactElement | null {
-    const { name, tabIndex, style, class: className, headerContent, scrollableContent, shrinkThreshold } = props;
+    const { name, tabIndex, style, class: className, content, shrinkThreshold } = props;
 
     const actualShrinkThreshold = shrinkThreshold.value ? Number(shrinkThreshold.value.toString()) : undefined;
 
@@ -50,8 +50,7 @@ export default function ShrinkingHeader(props: ShrinkingHeaderContainerProps): R
             tabIndex={tabIndex}
             style={style}
             className={className}
-            headerContent={headerContent}
-            scrollableContent={scrollableContent}
+            content={content}
             shrinkThreshold={actualShrinkThreshold}
         />
     );

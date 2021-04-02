@@ -10,13 +10,12 @@ export interface ShrinkingHeaderThresholdProps {
     className?: string;
     style?: CSSProperties;
     tabIndex?: number;
-    headerContent?: ReactNode;
-    scrollableContent?: ReactNode;
+    content?: ReactNode;
     shrinkThreshold: number;
 }
 
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
-    const { rootElementRef, name, className, style, tabIndex, headerContent, shrinkThreshold } = props;
+    const { rootElementRef, name, className, style, tabIndex, content, shrinkThreshold } = props;
 
     const [inlineStyle, setInlineStyle] = useState<CSSProperties>({ ...style });
     const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
@@ -79,7 +78,7 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
 
     return (
         <div id={name} className={actualClassName} style={inlineStyle} tabIndex={tabIndex}>
-            <header ref={updateElement}>{headerContent}</header>
+            <header ref={updateElement}>{content}</header>
         </div>
     );
 }
