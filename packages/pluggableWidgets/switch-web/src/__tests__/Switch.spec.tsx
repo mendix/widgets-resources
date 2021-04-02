@@ -1,11 +1,9 @@
 import { ShallowWrapper, shallow } from "enzyme";
 import { createElement } from "react";
 
-import { Switch } from "../../Switch";
-// import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
-import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
-import { SwitchContainerProps } from "../../../typings/SwitchProps";
-import { Alert } from "../Alert";
+import { Switch } from "../Switch";
+import { actionValue, EditableValueBuilder, Alert } from "@mendix/piw-utils-internal";
+import { SwitchContainerProps } from "../../typings/SwitchProps";
 
 describe("Switch", () => {
     let switchWrapper: ShallowWrapper<SwitchContainerProps, any>;
