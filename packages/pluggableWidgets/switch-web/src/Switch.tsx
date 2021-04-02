@@ -19,7 +19,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 executeAction(props.action);
             }
         },
-        [props.action, props.booleanAttribute]
+        [props.action, editable, props.booleanAttribute]
     );
     const onKeyDown = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
