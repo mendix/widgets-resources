@@ -2,7 +2,7 @@ import { createElement } from "react";
 import { View, StyleSheet, StyleProp } from "react-native";
 import { ValueStatus } from "mendix";
 import { Image, SvgImageStyle } from "mendix/components/native/Image";
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 
 import { BackgroundImageStyle, defaultBackgroundImageStyle } from "./ui/Styles";
 import { BackgroundImageProps } from "../typings/BackgroundImageProps";

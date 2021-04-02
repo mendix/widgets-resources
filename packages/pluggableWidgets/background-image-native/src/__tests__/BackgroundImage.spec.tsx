@@ -1,13 +1,13 @@
 import { createElement } from "react";
 import { Text } from "react-native";
 import { render } from "react-native-testing-library";
-import { dynamicValue } from "@widgets-resources/piw-utils";
+import { dynamicValue } from "@mendix/piw-utils-internal";
 
 import { BackgroundImage } from "../BackgroundImage";
 import { BackgroundImageProps } from "../../typings/BackgroundImageProps";
 import { BackgroundImageStyle } from "../ui/Styles";
 import { NativeImage } from "mendix";
-import Big from "big.js";
+import { Big } from "big.js";
 
 const defaultProps: BackgroundImageProps<BackgroundImageStyle> = {
     name: "backgroundImageTest",

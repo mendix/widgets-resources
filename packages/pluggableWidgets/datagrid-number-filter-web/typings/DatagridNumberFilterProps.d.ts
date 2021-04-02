@@ -5,6 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
+import { Big } from "big.js";
 
 export type DefaultFilterEnum = "greater" | "greaterEqual" | "equal" | "notEqual" | "smaller" | "smallerEqual";
 
@@ -13,7 +14,7 @@ export interface DatagridNumberFilterContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    defaultValue?: DynamicValue<BigJs.Big>;
+    defaultValue?: DynamicValue<Big>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
     adjustable: boolean;

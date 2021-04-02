@@ -5,7 +5,7 @@ import {
     ImageProps,
     StructurePreviewProps,
     TextProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 
 export const getPreview = (values: DatagridDropdownFilterPreviewProps): StructurePreviewProps => {
     return {
@@ -26,16 +26,16 @@ export const getPreview = (values: DatagridDropdownFilterPreviewProps): Structur
                         children: [
                             {
                                 type: "Text",
-                                fontColor: "#BBBBBB",
+                                fontColor: values.emptyOptionCaption ? "#BBBBBB" : "#FFF",
                                 italic: true,
-                                content: values.emptyOptionCaption ?? ""
+                                content: values.emptyOptionCaption ? values.emptyOptionCaption : "Sample"
                             } as TextProps
                         ],
                         grow: 1
                     } as ContainerProps,
                     {
                         type: "Container",
-                        padding: 4,
+                        padding: 2,
                         grow: 0,
                         children: [
                             {

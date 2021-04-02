@@ -20,11 +20,11 @@
   },
   "dependencies": {
     "react-native-qrcode-svg": "^6.0.6",
-    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "@mendix/piw-native-utils-internal": "^1.0.0",
     "react-native-svg": "^9.6.4"
   },
   "devDependencies": {
-    "@widgets-resources/piw-utils": "1.0.0",
+    "@mendix/piw-utils-internal": "1.0.0",
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
   }
 }

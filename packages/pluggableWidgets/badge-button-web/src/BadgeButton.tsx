@@ -2,7 +2,7 @@ import { createElement, useCallback, ReactNode } from "react";
 
 import { BadgeButton as BadgeButtonComponent } from "./components/BadgeButton";
 import { BadgeButtonContainerProps } from "../typings/BadgeButtonProps";
-import { executeAction, isAvailable } from "@widgets-resources/piw-utils";
+import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
 
 export function BadgeButton(props: BadgeButtonContainerProps): ReactNode {
     const onClick = useCallback(() => {

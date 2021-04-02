@@ -4,6 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
+import { Big } from "big.js";
 
 export type DataSetEnum = "static" | "dynamic";
 
@@ -17,13 +18,13 @@ export interface LinesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
-    groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
+    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticName?: DynamicValue<string>;
     dynamicName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | BigJs.Big>;
-    dynamicXAttribute?: ListAttributeValue<Date | BigJs.Big>;
-    staticYAttribute?: ListAttributeValue<Date | BigJs.Big>;
-    dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big>;
+    staticXAttribute?: ListAttributeValue<Date | Big>;
+    dynamicXAttribute?: ListAttributeValue<Date | Big>;
+    staticYAttribute?: ListAttributeValue<Date | Big>;
+    dynamicYAttribute?: ListAttributeValue<Date | Big>;
     interpolation: InterpolationEnum;
     staticLineStyle: StaticLineStyleEnum;
     dynamicLineStyle: DynamicLineStyleEnum;

@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
@@ -15,11 +15,11 @@ describe("Slider", () => {
         defaultProps = {
             name: "slider-test",
             style: [],
-            valueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(140)).build(),
+            valueAttribute: new EditableValueBuilder<Big>().withValue(new Big(140)).build(),
             editable: "default",
-            minimumValue: dynamicValue<BigJs.Big>(new Big(0)),
-            maximumValue: dynamicValue<BigJs.Big>(new Big(280)),
-            stepSize: dynamicValue<BigJs.Big>(new Big(1))
+            minimumValue: dynamicValue<Big>(new Big(0)),
+            maximumValue: dynamicValue<Big>(new Big(280)),
+            stepSize: dynamicValue<Big>(new Big(1))
         };
     });
 
@@ -30,7 +30,7 @@ describe("Slider", () => {
 
     it("renders no error while the value is resolving", () => {
         const component = render(
-            <Slider {...defaultProps} valueAttribute={new EditableValueBuilder<BigJs.Big>().isLoading().build()} />
+            <Slider {...defaultProps} valueAttribute={new EditableValueBuilder<Big>().isLoading().build()} />
         );
         expect(component.UNSAFE_queryByType(Text)).toBeNull();
     });
@@ -53,7 +53,7 @@ describe("Slider", () => {
         const component = render(
             <Slider
                 {...defaultProps}
-                valueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(-50)).build()}
+                valueAttribute={new EditableValueBuilder<Big>().withValue(new Big(-50)).build()}
             />
         );
         expect(component.UNSAFE_getByType(Text).props.children).toBe(
@@ -65,7 +65,7 @@ describe("Slider", () => {
         const component = render(
             <Slider
                 {...defaultProps}
-                valueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(300)).build()}
+                valueAttribute={new EditableValueBuilder<Big>().withValue(new Big(300)).build()}
             />
         );
         expect(component.UNSAFE_getByType(Text).props.children).toBe(
@@ -97,7 +97,7 @@ describe("Slider", () => {
     });
 
     it("renders a validation message", () => {
-        const value = new EditableValueBuilder<BigJs.Big>().withValidation("Invalid").build();
+        const value = new EditableValueBuilder<Big>().withValidation("Invalid").build();
         const component = render(<Slider {...defaultProps} valueAttribute={value} />);
 
         expect(component.getByText("Invalid")).toBeDefined();

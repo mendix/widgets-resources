@@ -22,8 +22,8 @@
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "echo 'Skipping tests'",
-    "test:e2e:dev": "cross-env DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools release:web"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "cross-env": "^7.0.2"
   },
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6"
   }
 }

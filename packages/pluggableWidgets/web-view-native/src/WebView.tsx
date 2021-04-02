@@ -1,11 +1,11 @@
-import { flattenStyles } from "@native-mobile-resources/util-widgets";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { Component, createElement } from "react";
 import { Text, View, Linking } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 
 import { WebViewProps } from "../typings/WebViewProps";
 import { defaultWebViewStyle, WebViewStyle } from "./ui/Styles";
-import { executeAction } from "@widgets-resources/piw-utils";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = WebViewProps<WebViewStyle>;
 

@@ -3,7 +3,7 @@ import { DatagridNumberFilterContainerProps } from "../typings/DatagridNumberFil
 
 import { FilterComponent } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@widgets-resources/piw-utils";
+import { Alert } from "@mendix/piw-utils-internal";
 
 export default function DatagridNumberFilter(props: DatagridNumberFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();

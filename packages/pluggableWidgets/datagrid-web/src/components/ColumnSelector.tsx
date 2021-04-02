@@ -2,7 +2,7 @@ import { createElement, Dispatch, ReactElement, SetStateAction, useRef, useState
 import { ColumnInstance, IdType } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { useOnClickOutside } from "@widgets-resources/piw-utils";
+import { useOnClickOutside } from "@mendix/piw-utils-internal";
 
 export interface ColumnSelectorProps<D extends object> {
     allColumns: Array<ColumnInstance<D>>;

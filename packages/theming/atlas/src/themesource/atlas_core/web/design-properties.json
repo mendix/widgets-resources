@@ -1042,5 +1042,29 @@
                 }
             ]
         }
+    ],
+    "MenuBar": [
+        {
+            "name": "Hide icons",
+            "type": "Toggle",
+            "description": "Hide the navigation items icon",
+            "class": "hide-icons"
+        }
+    ],
+    "NavigationTree": [
+        {
+            "name": "Hide icons",
+            "type": "Toggle",
+            "description": "Hide the navigation items icon",
+            "class": "hide-icons"
+        }
+    ],
+    "SimpleMenuBar": [
+        {
+            "name": "Hide icons",
+            "type": "Toggle",
+            "description": "Hide the navigation items icon",
+            "class": "hide-icons"
+        }
     ]
 }

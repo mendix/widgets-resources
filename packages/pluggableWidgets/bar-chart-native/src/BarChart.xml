@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.native.barchart.BarChart" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
-    <name>Bar chart (beta)</name>
+    <name>Bar chart</name>
     <description />
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAFVBMVEUAAABJsvhXV1dJsPdVVVVIsPdVVVXeGvfMAAAABXRSTlMASUnj4xdstKQAAAB+SURBVHgB7dTRCkIxDINhT5P0/R9ZQfCuQwyucNb/tvDBStljehdkWAAzaQH5qh9QES4TEFxANmAt8SxAVf0Adp1yPT0H0CJcJiC4gHYA9fQcQMvaAew45WI0/0GxUAsQXEA2YC3x3oC+rR/An055/oOfYphA8gPQBYLOE6YngxoaCdxLhWwAAAAASUVORK5CYII=</icon>
     <properties>

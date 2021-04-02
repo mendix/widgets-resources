@@ -2,7 +2,7 @@ import { createElement, ReactElement, useCallback } from "react";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
 import { Table } from "./components/Table";
-import { parseStyle } from "@widgets-resources/piw-utils";
+import { parseStyle } from "@mendix/piw-utils-internal";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
     const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));
@@ -61,13 +61,10 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             columnsSortable={props.columnsSortable}
             data={data}
             emptyPlaceholderRenderer={useCallback(
-                renderWrapper =>
-                    props.showEmptyPlaceholder === "custom" ? (
-                        <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
-                    ) : (
-                        <div />
-                    ),
-                [props.emptyPlaceholder, props.showEmptyPlaceholder]
+                renderWrapper => (
+                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                ),
+                [props.emptyPlaceholder]
             )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {

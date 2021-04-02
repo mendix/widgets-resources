@@ -1,3 +1,6 @@
+$gray-primary: #e7e7e9 !default;
+$gray-lighter: #f8f8f8 !default;
+
 svg {
     &.svg-inline--fa {
         height: 15px;
@@ -7,5 +10,15 @@ svg {
 .table {
     .th {
         z-index: unset;
+
+        &.hidden-column-preview {
+            background-color: $gray-primary;
+        }
+    }
+
+    .td {
+        &.hidden-column-preview {
+            background-color: $gray-lighter;
+        }
     }
 }

@@ -30,7 +30,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
 
         props.data.items?.forEach(item => {
             let constructedItem: ItemType;
-            const groupAttribute = props.groupAttribute?.(item);
+            const groupAttribute = props.groupAttribute?.get(item);
             const date = groupAttribute?.value;
             let groupKey;
 
@@ -38,20 +38,20 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
                 groupKey = getGroupHeaderByType(groupAttribute?.formatter, getHeaderOption(props), date);
                 constructedItem = {
                     icon: props.icon?.value,
-                    title: props.title?.(item)?.value,
-                    eventDateTime: props.timeIndication?.(item)?.value,
-                    description: props.description?.(item)?.value,
-                    action: props.onClick?.(item)
+                    title: props.title?.get(item)?.value,
+                    eventDateTime: props.timeIndication?.get(item)?.value,
+                    description: props.description?.get(item)?.value,
+                    action: props.onClick?.get(item)
                 };
             } else {
                 groupKey = getGroupHeaderByType(groupAttribute?.formatter, props.groupByKey, date);
                 constructedItem = {
-                    icon: props.customIcon?.(item),
-                    groupHeader: props.customGroupHeader?.(item),
-                    title: props.customTitle?.(item),
-                    eventDateTime: props.customEventDateTime?.(item),
-                    description: props.customDescription?.(item),
-                    action: props.onClick?.(item)
+                    icon: props.customIcon?.get(item),
+                    groupHeader: props.customGroupHeader?.get(item),
+                    title: props.customTitle?.get(item),
+                    eventDateTime: props.customEventDateTime?.get(item),
+                    description: props.customDescription?.get(item),
+                    action: props.onClick?.get(item)
                 };
             }
 

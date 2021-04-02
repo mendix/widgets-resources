@@ -4,13 +4,14 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import { Vibration } from "react-native";
 
 /**
  * @param {Big} duration - Android only setting. The time (in milliseconds) the device should vibrate. Set to empty to use the default value 500.
  * @returns {Promise.<void>}
  */
-export async function Vibrate(duration?: BigJs.Big): Promise<void> {
+export async function Vibrate(duration?: Big): Promise<void> {
     // BEGIN USER CODE
     // Documentation https://facebook.github.io/react-native/docs/vibration#vibrate
 

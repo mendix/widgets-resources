@@ -131,7 +131,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
     const dataSourceItemGroupsResult: DataSourceItemGroup[] = [];
 
     for (const item of dataSource.items) {
-        const groupByAttributeValue = ensure(groupByAttribute)(item);
+        const groupByAttributeValue = ensure(groupByAttribute).get(item);
 
         if (groupByAttributeValue.value === undefined) {
             return null;
@@ -156,7 +156,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
             };
 
             if (dynamicSeriesName) {
-                const dynamicSeriesNameValue = dynamicSeriesName(item);
+                const dynamicSeriesNameValue = dynamicSeriesName.get(item);
 
                 if (dynamicSeriesNameValue.value === undefined) {
                     return null;
@@ -166,7 +166,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
             }
 
             if (dynamicCustomBarStyle) {
-                const dynamicCustomBarStyleValue = dynamicCustomBarStyle(item);
+                const dynamicCustomBarStyleValue = dynamicCustomBarStyle.get(item);
 
                 if (dynamicCustomBarStyleValue.value === undefined) {
                     return null;

@@ -4,11 +4,12 @@
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, NativeIcon } from "mendix";
+import { Big } from "big.js";
 
 export interface MarkersType {
     address?: DynamicValue<string>;
-    latitude?: DynamicValue<BigJs.Big>;
-    longitude?: DynamicValue<BigJs.Big>;
+    latitude?: DynamicValue<Big>;
+    longitude?: DynamicValue<Big>;
     title?: DynamicValue<string>;
     description?: DynamicValue<string>;
     onClick?: ActionValue;
@@ -34,7 +35,7 @@ export interface MarkersPreviewType {
     title: string;
     description: string;
     onClick: {} | null;
-    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     iconSize: number | null;
     color: string;
 }
@@ -45,8 +46,8 @@ export interface MapsProps<Style> {
     markers: MarkersType[];
     fitToMarkers: boolean;
     centerAddress?: DynamicValue<string>;
-    centerLatitude?: DynamicValue<BigJs.Big>;
-    centerLongitude?: DynamicValue<BigJs.Big>;
+    centerLatitude?: DynamicValue<Big>;
+    centerLongitude?: DynamicValue<Big>;
     defaultZoomLevel: DefaultZoomLevelEnum;
     minZoomLevel: MinZoomLevelEnum;
     maxZoomLevel: MaxZoomLevelEnum;

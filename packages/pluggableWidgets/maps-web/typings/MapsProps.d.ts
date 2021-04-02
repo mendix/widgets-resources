@@ -5,6 +5,7 @@
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, ListActionValue, ListAttributeValue, WebImage } from "mendix";
+import { Big } from "big.js";
 
 export type LocationTypeEnum = "address" | "latlng";
 
@@ -29,8 +30,8 @@ export interface DynamicMarkersType {
     markersDS?: ListValue;
     locationType: LocationTypeEnum;
     address?: ListAttributeValue<string>;
-    latitude?: ListAttributeValue<BigJs.Big>;
-    longitude?: ListAttributeValue<BigJs.Big>;
+    latitude?: ListAttributeValue<Big>;
+    longitude?: ListAttributeValue<Big>;
     title?: ListAttributeValue<string>;
     onClickAttribute?: ListActionValue;
     markerStyleDynamic: MarkerStyleDynamicEnum;

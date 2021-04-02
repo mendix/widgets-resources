@@ -1,4 +1,4 @@
-import { Style } from "../../../../tools/util-widgets/dist";
+import { Style } from "@mendix/piw-native-utils-internal";
 import { ViewStyle } from "react-native";
 
 export interface RepeaterStyle extends Style {

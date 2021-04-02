@@ -1,6 +1,6 @@
 import { render } from "react-native-testing-library";
 import { Repeater } from "../Repeater";
-import { ListValueBuilder } from "@widgets-resources/piw-utils";
+import { buildWidgetValue, ListValueBuilder } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { Text } from "react-native";
 
@@ -11,7 +11,7 @@ describe("Repeater", () => {
                 name="test-repeater"
                 style={[{ container: {} }]}
                 datasource={ListValueBuilder().withAmountOfItems(5)}
-                content={() => <Text>Item</Text>}
+                content={buildWidgetValue(<Text>Item</Text>)}
             />
         );
 
@@ -24,7 +24,7 @@ describe("Repeater", () => {
                 name="test-repeater"
                 style={[{ container: { backgroundColor: "red" } }]}
                 datasource={ListValueBuilder().withAmountOfItems(5)}
-                content={() => <Text>Item</Text>}
+                content={buildWidgetValue(<Text>Item</Text>)}
             />
         );
 

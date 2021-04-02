@@ -1,7 +1,7 @@
 {
   "name": "accessibility-helper-web",
   "widgetName": "AccessibilityHelper",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Set an attribute to a DOM element",
   "copyright": "Mendix 2020",
   "author": "Widget Team",
@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

@@ -4,6 +4,7 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
 import { Alert, Linking, NativeModules } from "react-native";
 import ImagePicker, { ImagePickerOptions, ImagePickerResponse } from "react-native-image-picker";
 import { getLocales } from "react-native-localize";
@@ -33,8 +34,8 @@ export async function TakePictureAdvanced(
     picture?: mendix.lib.MxObject,
     pictureSource?: PictureSource,
     pictureQuality?: PictureQuality,
-    maximumWidth?: BigJs.Big,
-    maximumHeight?: BigJs.Big
+    maximumWidth?: Big,
+    maximumHeight?: Big
 ): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md

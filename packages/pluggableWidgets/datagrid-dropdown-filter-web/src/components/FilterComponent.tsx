@@ -1,6 +1,6 @@
 import { createElement, Dispatch, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { ListAttributeValue, ObjectItem } from "mendix";
-import { useOnClickOutside } from "@widgets-resources/piw-utils";
+import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 
 interface Option {
@@ -93,7 +93,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     if (selectedFilters.length > 0) {
                         return selectedFilters.some(
                             selectedFilter =>
-                                attr(item).value?.toString().toLocaleLowerCase() ===
+                                attr.get(item).value?.toString().toLocaleLowerCase() ===
                                     selectedFilter.value?.toString().toLocaleLowerCase() ||
                                 selectedFilter.value?.toString() === ""
                         );

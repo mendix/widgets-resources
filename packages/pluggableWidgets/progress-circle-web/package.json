@@ -21,8 +21,8 @@
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
-    "test:e2e": "echo \"Skipping progress-circle-web e2e tests\"",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "cross-env MPKOUTPUT=ProgressCircle.mpk pluggable-widgets-tools release:web"
   },
@@ -32,7 +32,7 @@
     "cross-env": "^7.0.2"
   },
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "progressbar.js": "^1.0.1"
   }

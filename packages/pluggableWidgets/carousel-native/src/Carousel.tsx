@@ -44,7 +44,7 @@ export const Carousel = (props: CarouselProps<CarouselStyle>): ReactElement => {
 
         return (
             <View key={index} style={{ ...viewStyle }} testID={`${props.name}$content$${index}`} accessible>
-                {props.content(item)}
+                {props.content.get(item)}
             </View>
         );
     }, []);

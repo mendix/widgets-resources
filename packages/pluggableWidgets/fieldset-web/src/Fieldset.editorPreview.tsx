@@ -1,5 +1,5 @@
 import { createElement, ReactElement } from "react";
-import { parseStyle } from "@widgets-resources/piw-utils";
+import { parseStyle } from "@mendix/piw-utils-internal";
 
 import { Fieldset } from "./components/Fieldset";
 import { FieldsetPreviewProps } from "../typings/FieldsetProps";

@@ -5,10 +5,11 @@ export const datasourceWebOutput = `/**
  */
 import { ComponentType, CSSProperties } from "react";
 import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { Big } from "big.js";
 
 export interface DatasourcePropertiesType {
     contentAttribute: ListWidgetValue;
-    markerAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    markerAttribute: ListAttributeValue<string | boolean | Big>;
     actionAttribute?: ListActionValue;
 }
 
@@ -26,10 +27,10 @@ export interface MyWidgetContainerProps {
     id: string;
     contentSource: ListValue;
     content: ListWidgetValue;
-    markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    markerDataAttribute: ListAttributeValue<string | boolean | Big>;
     actionAttribute?: ListActionValue;
     textTemplateAttribute: ListExpressionValue<string>;
-    expressionAttribute: ListExpressionValue<BigJs.Big>;
+    expressionAttribute: ListExpressionValue<Big>;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
@@ -52,7 +53,7 @@ export interface MyWidgetPreviewProps {
 
 export const datasourceNativeOutput = `export interface DatasourcePropertiesType {
     contentAttribute: ListWidgetValue;
-    markerAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    markerAttribute: ListAttributeValue<string | boolean | Big>;
     actionAttribute?: ListActionValue;
 }
 
@@ -61,10 +62,10 @@ export interface MyWidgetProps<Style> {
     style: Style[];
     contentSource: ListValue;
     content: ListWidgetValue;
-    markerDataAttribute: ListAttributeValue<string | boolean | BigJs.Big>;
+    markerDataAttribute: ListAttributeValue<string | boolean | Big>;
     actionAttribute?: ListActionValue;
     textTemplateAttribute: ListExpressionValue<string>;
-    expressionAttribute: ListExpressionValue<BigJs.Big>;
+    expressionAttribute: ListExpressionValue<Big>;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;

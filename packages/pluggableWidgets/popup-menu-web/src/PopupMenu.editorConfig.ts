@@ -1,4 +1,4 @@
-import { changePropertyIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { changePropertyIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
 export function getProperties(
@@ -72,10 +72,10 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
                 message: "For the popup menu to be visible, you need to add at least one item to it."
             });
         }
-        values.basicItems.forEach(item => {
+        values.basicItems.forEach((item, index) => {
             if (item.itemType === "item" && !item.caption) {
                 errors.push({
-                    property: "basicItems.caption",
+                    property: `basicItems/${index + 1}/caption`,
                     message: "The 'Caption' property is required."
                 });
             }
@@ -87,14 +87,6 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
                 message: "For the popup menu to be visible, you need to add at least one item to it."
             });
         }
-        values.customItems.forEach(item => {
-            if (!item.content) {
-                errors.push({
-                    property: "customItems.content",
-                    message: "The content of a menu item cannot be empty."
-                });
-            }
-        });
     }
     return errors;
 }

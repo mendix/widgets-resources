@@ -1,4 +1,4 @@
-import { actionValue, dynamicValue, EditableValueBuilder } from "@widgets-resources/piw-utils";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
@@ -15,12 +15,12 @@ describe("RangeSlider", () => {
         defaultProps = {
             name: "range-slider-test",
             style: [],
-            lowerValueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(70)).build(),
-            upperValueAttribute: new EditableValueBuilder<BigJs.Big>().withValue(new Big(210)).build(),
+            lowerValueAttribute: new EditableValueBuilder<Big>().withValue(new Big(70)).build(),
+            upperValueAttribute: new EditableValueBuilder<Big>().withValue(new Big(210)).build(),
             editable: "default",
-            minimumValue: dynamicValue<BigJs.Big>(new Big(0)),
-            maximumValue: dynamicValue<BigJs.Big>(new Big(280)),
-            stepSize: dynamicValue<BigJs.Big>(new Big(1))
+            minimumValue: dynamicValue<Big>(new Big(0)),
+            maximumValue: dynamicValue<Big>(new Big(280)),
+            stepSize: dynamicValue<Big>(new Big(1))
         };
     });
 
@@ -31,10 +31,7 @@ describe("RangeSlider", () => {
 
     it("renders no error while a value is resolving", () => {
         const component = render(
-            <RangeSlider
-                {...defaultProps}
-                lowerValueAttribute={new EditableValueBuilder<BigJs.Big>().isLoading().build()}
-            />
+            <RangeSlider {...defaultProps} lowerValueAttribute={new EditableValueBuilder<Big>().isLoading().build()} />
         );
         expect(component.UNSAFE_queryByType(Text)).toBeNull();
     });
@@ -55,7 +52,7 @@ describe("RangeSlider", () => {
         const component = render(
             <RangeSlider
                 {...defaultProps}
-                lowerValueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(-50)).build()}
+                lowerValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(-50)).build()}
             />
         );
         expect(component.UNSAFE_getByType(Text).props.children).toBe(
@@ -67,7 +64,7 @@ describe("RangeSlider", () => {
         const component = render(
             <RangeSlider
                 {...defaultProps}
-                lowerValueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(300)).build()}
+                lowerValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(300)).build()}
             />
         );
         expect(component.UNSAFE_getByType(Text).props.children).toBe(
@@ -79,7 +76,7 @@ describe("RangeSlider", () => {
         const component = render(
             <RangeSlider
                 {...defaultProps}
-                upperValueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(-50)).build()}
+                upperValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(-50)).build()}
             />
         );
         expect(component.UNSAFE_getByType(Text).props.children).toBe(
@@ -91,7 +88,7 @@ describe("RangeSlider", () => {
         const component = render(
             <RangeSlider
                 {...defaultProps}
-                upperValueAttribute={new EditableValueBuilder<BigJs.Big>().withValue(new Big(300)).build()}
+                upperValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(300)).build()}
             />
         );
         expect(component.UNSAFE_getByType(Text).props.children).toBe(
@@ -123,7 +120,7 @@ describe("RangeSlider", () => {
     });
 
     it("renders a validation message", () => {
-        const value = new EditableValueBuilder<BigJs.Big>().withValidation("Invalid").build();
+        const value = new EditableValueBuilder<Big>().withValidation("Invalid").build();
         const component = render(
             <RangeSlider {...defaultProps} lowerValueAttribute={value} upperValueAttribute={value} />
         );

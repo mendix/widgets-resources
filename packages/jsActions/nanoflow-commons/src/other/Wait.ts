@@ -3,13 +3,14 @@
 // WARNING: Only the following code will be retained when actions are regenerated:
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
+import { Big } from "big.js";
 
 /**
  * Wait for number of milliseconds before continuing nanoflow execution.
  * @param {Big} delay - The number of milliseconds to wait. This field is required.
  * @returns {Promise.<void>}
  */
-export async function Wait(delay?: BigJs.Big): Promise<void> {
+export async function Wait(delay?: Big): Promise<void> {
     // BEGIN USER CODE
     if (delay == null) {
         return Promise.reject(new Error("Input parameter 'delay' is required."));

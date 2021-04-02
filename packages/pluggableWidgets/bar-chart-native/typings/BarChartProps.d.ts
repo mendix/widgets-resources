@@ -4,6 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
+import { Big } from "big.js";
 
 export type PresentationEnum = "grouped" | "stacked";
 
@@ -13,13 +14,13 @@ export interface BarSeriesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
-    groupByAttribute?: ListAttributeValue<string | boolean | Date | BigJs.Big>;
+    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticSeriesName?: DynamicValue<string>;
     dynamicSeriesName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
-    dynamicXAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
-    staticYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
-    dynamicYAttribute?: ListAttributeValue<Date | BigJs.Big | string>;
+    staticXAttribute?: ListAttributeValue<Date | Big | string>;
+    dynamicXAttribute?: ListAttributeValue<Date | Big | string>;
+    staticYAttribute?: ListAttributeValue<Date | Big | string>;
+    dynamicYAttribute?: ListAttributeValue<Date | Big | string>;
     staticCustomBarStyle: string;
     dynamicCustomBarStyle?: ListAttributeValue<string>;
 }

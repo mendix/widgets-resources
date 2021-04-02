@@ -18,7 +18,7 @@ export function Repeater(props: RepeaterProps<RepeaterStyle>): ReactElement {
     return (
         <View style={styles.container}>
             {props.datasource.items?.map((item, index) => (
-                <Fragment key={`item_${index}`}>{props.content(item)}</Fragment>
+                <Fragment key={`item_${index}`}>{props.content.get(item)}</Fragment>
             ))}
         </View>
     );

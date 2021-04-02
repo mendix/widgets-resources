@@ -1,4 +1,4 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 import { ProgressBarPreviewProps, TypeEnum } from "../typings/ProgressBarProps";
 
 type PreviewPropsKey = keyof ProgressBarPreviewProps;

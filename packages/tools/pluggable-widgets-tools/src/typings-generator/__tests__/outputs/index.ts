@@ -4,6 +4,7 @@ export const nativeResult = `/**
  * @author Mendix UI Content Team
  */
 import { ActionValue, DynamicValue, EditableValue, FileValue, NativeImage } from "mendix";
+import { Big } from "big.js";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -26,15 +27,15 @@ export interface ActionsPreviewType {
 export interface MyWidgetProps<Style> {
     name: string;
     style: Style[];
-    valueAttribute?: EditableValue<string | BigJs.Big>;
+    valueAttribute?: EditableValue<string | Big>;
     mywidgetValue: string;
     valueExpression?: DynamicValue<string>;
-    valueExpressionDecimal?: DynamicValue<BigJs.Big>;
+    valueExpressionDecimal?: DynamicValue<Big>;
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
-    amount?: BigJs.Big;
+    amount?: Big;
     image?: DynamicValue<NativeImage>;
     onClickAction?: ActionValue;
     onChange?: ActionValue;
@@ -67,6 +68,7 @@ export const webResult = `/**
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
+import { Big } from "big.js";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -91,15 +93,15 @@ export interface MyWidgetContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    valueAttribute?: EditableValue<string | BigJs.Big>;
+    valueAttribute?: EditableValue<string | Big>;
     mywidgetValue: string;
     valueExpression?: DynamicValue<string>;
-    valueExpressionDecimal?: DynamicValue<BigJs.Big>;
+    valueExpressionDecimal?: DynamicValue<Big>;
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
-    amount?: BigJs.Big;
+    amount?: Big;
     image?: DynamicValue<WebImage>;
     onClickAction?: ActionValue;
     onChange?: ActionValue;
@@ -132,6 +134,7 @@ export const webResultGroup = `/**
  */
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
+import { Big } from "big.js";
 
 export type BootstrapStyleEnum = "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 
@@ -157,15 +160,15 @@ export interface MyWidgetContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     id: string;
-    valueAttribute?: EditableValue<string | BigJs.Big>;
+    valueAttribute?: EditableValue<string | Big>;
     mywidgetValue: string;
     valueExpression?: DynamicValue<string>;
-    valueExpressionDecimal?: DynamicValue<BigJs.Big>;
+    valueExpressionDecimal?: DynamicValue<Big>;
     file: DynamicValue<FileValue>;
     bootstrapStyle: BootstrapStyleEnum;
     mywidgetType: MywidgetTypeEnum;
     tries?: number;
-    amount?: BigJs.Big;
+    amount?: Big;
     image?: DynamicValue<WebImage>;
     onClickAction?: ActionValue;
     onChange?: ActionValue;

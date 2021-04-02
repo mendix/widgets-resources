@@ -5,6 +5,7 @@
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { Big } from "big.js";
 
 export type TypeEnum = "static" | "dynamic" | "expression";
 
@@ -17,14 +18,14 @@ export interface ProgressCircleContainerProps {
     tabIndex?: number;
     type: TypeEnum;
     staticCurrentValue: number;
-    dynamicCurrentValue?: EditableValue<BigJs.Big>;
-    expressionCurrentValue?: DynamicValue<BigJs.Big>;
+    dynamicCurrentValue?: EditableValue<Big>;
+    expressionCurrentValue?: DynamicValue<Big>;
     staticMinValue: number;
-    dynamicMinValue?: EditableValue<BigJs.Big>;
-    expressionMinValue?: DynamicValue<BigJs.Big>;
+    dynamicMinValue?: EditableValue<Big>;
+    expressionMinValue?: DynamicValue<Big>;
     staticMaxValue: number;
-    dynamicMaxValue?: EditableValue<BigJs.Big>;
-    expressionMaxValue?: DynamicValue<BigJs.Big>;
+    dynamicMaxValue?: EditableValue<Big>;
+    expressionMaxValue?: DynamicValue<Big>;
     onClick?: ActionValue;
     showLabel: boolean;
     labelType: LabelTypeEnum;
@@ -49,5 +50,5 @@ export interface ProgressCirclePreviewProps {
     showLabel: boolean;
     labelType: LabelTypeEnum;
     labelText: string;
-    customLabel: { widgetCount: number; renderer: ComponentType };
+    customLabel: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
 }

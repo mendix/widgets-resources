@@ -19,12 +19,12 @@
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@native-mobile-resources/util-widgets": "^1.0.0",
+    "@mendix/piw-native-utils-internal": "^1.0.0",
     "react-native-video": "5.1.1"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@widgets-resources/piw-utils": "1.0.0",
+    "@mendix/piw-utils-internal": "1.0.0",
     "@types/react-native-video": "^5.0.4"
   }
 }

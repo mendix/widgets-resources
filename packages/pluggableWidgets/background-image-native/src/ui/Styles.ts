@@ -1,5 +1,5 @@
 import { ViewStyle, ImageStyle } from "react-native";
-import { Style } from "@native-mobile-resources/util-widgets";
+import { Style } from "@mendix/piw-native-utils-internal";
 
 interface CustomImageStyle extends ImageStyle {
     svgColor?: string;

@@ -3,7 +3,7 @@ import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdow
 import { ValueStatus } from "mendix";
 import { FilterComponent } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@widgets-resources/piw-utils";
+import { Alert } from "@mendix/piw-utils-internal";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();

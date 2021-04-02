@@ -1,7 +1,7 @@
 {
   "name": "line-chart-native",
   "widgetName": "LineChart",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
   "dependencies": {
-    "@widgets-resources/piw-utils": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0",
     "victory-native": "^35.0.1"
   },
   "devDependencies": {

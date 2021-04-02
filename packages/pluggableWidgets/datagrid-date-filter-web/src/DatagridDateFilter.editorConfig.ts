@@ -12,7 +12,7 @@ import {
     smallerThanIcon,
     StructurePreviewProps,
     TextProps
-} from "@widgets-resources/piw-utils";
+} from "@mendix/piw-utils-internal";
 import { DatagridDateFilterPreviewProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 
 export function getProperties(values: DatagridDateFilterPreviewProps, defaultProperties: Properties): Properties {
@@ -23,6 +23,27 @@ export function getProperties(values: DatagridDateFilterPreviewProps, defaultPro
 }
 
 export const getPreview = (values: DatagridDateFilterPreviewProps): StructurePreviewProps => {
+    const adjustableByUserContainer = values.adjustable
+        ? [
+              {
+                  type: "Container",
+                  padding: 2,
+                  grow: 0,
+                  children: [
+                      {
+                          type: "Image",
+                          document: getSvgContent(values.defaultFilter)
+                      } as ImageProps
+                  ]
+              } as ContainerProps,
+              {
+                  type: "Container",
+                  borders: true,
+                  borderWidth: 0.5,
+                  grow: 0
+              } as ContainerProps
+          ]
+        : [];
     return {
         type: "RowLayout",
         borders: true,
@@ -35,32 +56,16 @@ export const getPreview = (values: DatagridDateFilterPreviewProps): StructurePre
                 columnSize: "grow",
                 backgroundColor: "#FFFFFF",
                 children: [
-                    {
-                        type: "Container",
-                        padding: 4,
-                        grow: 0,
-                        children: [
-                            {
-                                type: "Image",
-                                document: getSvgContent(values.defaultFilter)
-                            } as ImageProps
-                        ]
-                    } as ContainerProps,
-                    {
-                        type: "Container",
-                        borders: true,
-                        borderWidth: 0.5,
-                        grow: 0
-                    } as ContainerProps,
+                    ...adjustableByUserContainer,
                     {
                         type: "Container",
                         padding: 8,
                         children: [
                             {
                                 type: "Text",
-                                fontColor: "#BBBBBB",
+                                fontColor: values.placeholder ? "#BBBBBB" : "#FFF",
                                 italic: true,
-                                content: values.placeholder ?? ""
+                                content: values.placeholder ? values.placeholder : "Sample"
                             } as TextProps
                         ],
                         grow: 1
@@ -73,7 +78,7 @@ export const getPreview = (values: DatagridDateFilterPreviewProps): StructurePre
                     } as ContainerProps,
                     {
                         type: "Container",
-                        padding: 4,
+                        padding: 2,
                         grow: 0,
                         children: [
                             {

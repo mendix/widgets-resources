@@ -4,12 +4,14 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // Other code you write will be lost the next time you deploy the project.
 
+import { Big } from "big.js";
+
 /**
  * Hides a loading dialog.
  * @param {Big} identifier - This field is required.
  * @returns {Promise.<void>}
  */
-export async function HideProgress(identifier?: BigJs.Big): Promise<void> {
+export async function HideProgress(identifier?: Big): Promise<void> {
     // BEGIN USER CODE
 
     if (identifier == null) {

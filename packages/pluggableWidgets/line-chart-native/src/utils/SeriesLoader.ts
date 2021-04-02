@@ -133,7 +133,7 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
     const dataSourceItemGroupsResult: DataSourceItemGroup[] = [];
 
     for (const item of dataSource.items) {
-        const groupByAttributeValue = ensure(groupByAttribute)(item);
+        const groupByAttributeValue = ensure(groupByAttribute).get(item);
 
         if (groupByAttributeValue.value === undefined) {
             return null;
@@ -157,7 +157,7 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
             };
 
             if (dynamicName) {
-                const dynamicSeriesNameValue = dynamicName(item);
+                const dynamicSeriesNameValue = dynamicName.get(item);
 
                 if (dynamicSeriesNameValue.value === undefined) {
                     return null;
@@ -167,7 +167,7 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
             }
 
             if (dynamicCustomLineStyle) {
-                const dynamicCustomLineStyleValue = dynamicCustomLineStyle(item);
+                const dynamicCustomLineStyleValue = dynamicCustomLineStyle.get(item);
 
                 if (dynamicCustomLineStyleValue.value === undefined) {
                     return null;
@@ -200,8 +200,8 @@ function extractDataPoints(series: LinesType, dataSourceItems?: ObjectItem[]): D
     const dataPointsExtraction: DataPointsExtraction = { dataPoints: [] };
 
     for (const item of dataSourceItems) {
-        const x = xValue(item);
-        const y = yValue(item);
+        const x = xValue.get(item);
+        const y = yValue.get(item);
 
         if (!x.value || !y.value) {
             return null;

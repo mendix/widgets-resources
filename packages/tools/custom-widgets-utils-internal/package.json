@@ -1,5 +1,5 @@
 {
-  "name": "@widgets-resources/utils-react-widgets",
+  "name": "@mendix/custom-widgets-utils-internal",
   "version": "0.0.1",
   "private": true,
   "scripts": {

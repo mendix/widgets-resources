@@ -1,4 +1,4 @@
-import { hideNestedPropertiesIn, Problem, Properties } from "@widgets-resources/piw-utils";
+import { hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
 
 import { BarChartPreviewProps } from "../typings/BarChartProps";
 
@@ -35,7 +35,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
             // @ts-ignore
             if (series.staticDataSource.type === "null") {
                 errors.push({
-                    property: "staticDataSource",
+                    property: `barSeries/${index + 1}/staticDataSource`,
                     severity: "error",
                     message: `No data source configured for static series located at position ${index + 1}.`
                 });
@@ -43,7 +43,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
 
             if (!series.staticXAttribute) {
                 errors.push({
-                    property: "staticXAttribute",
+                    property: `barSeries/${index + 1}/staticXAttribute`,
                     severity: "error",
                     message: `No X attribute configured for static series located at position ${index + 1}.`
                 });
@@ -51,7 +51,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
 
             if (!series.staticYAttribute) {
                 errors.push({
-                    property: "staticYAttribute",
+                    property: `barSeries/${index + 1}/staticYAttribute`,
                     severity: "error",
                     message: `No Y attribute configured for static series located at position ${index + 1}.`
                 });
@@ -60,7 +60,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
             // @ts-ignore
             if (series.dynamicDataSource.type === "null") {
                 errors.push({
-                    property: "dynamicDataSource",
+                    property: `barSeries/${index + 1}/dynamicDataSource`,
                     severity: "error",
                     message: `No data source configured for dynamic series located at position ${index + 1}.`
                 });
@@ -68,7 +68,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
 
             if (!series.dynamicXAttribute) {
                 errors.push({
-                    property: "dynamicXAttribute",
+                    property: `barSeries/${index + 1}/dynamicXAttribute`,
                     severity: "error",
                     message: `No X attribute configured for dynamic series located at position ${index + 1}.`
                 });
@@ -76,7 +76,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
 
             if (!series.dynamicYAttribute) {
                 errors.push({
-                    property: "dynamicYAttribute",
+                    property: `barSeries/${index + 1}/dynamicYAttribute`,
                     severity: "error",
                     message: `No Y attribute configured for dynamic series located at position ${index + 1}.`
                 });
@@ -84,7 +84,7 @@ export function check(values: BarChartPreviewProps): Problem[] {
 
             if (!series.groupByAttribute) {
                 errors.push({
-                    property: "groupByAttribute",
+                    property: `barSeries/${index + 1}/groupByAttribute`,
                     severity: "error",
                     message: `No group by attribute configured for dynamic series located at position ${index + 1}.`
                 });

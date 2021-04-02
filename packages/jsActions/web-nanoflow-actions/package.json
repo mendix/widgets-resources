@@ -36,7 +36,6 @@
   "dependencies": {},
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@types/big.js": "^4.0.5",
     "npm-watch": "^0.6.0"
   }
 }

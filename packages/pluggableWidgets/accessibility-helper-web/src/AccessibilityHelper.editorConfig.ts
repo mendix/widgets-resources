@@ -1,4 +1,4 @@
-import { hidePropertyIn, Properties, Problem } from "@widgets-resources/piw-utils";
+import { hidePropertyIn, Properties, Problem } from "@mendix/piw-utils-internal";
 import { AttributesListPreviewType, AccessibilityHelperPreviewProps } from "../typings/AccessibilityHelperProps";
 
 const PROHIBITED_ATTRIBUTES = ["class", "style", "widgetid", "data-mendix-id"];
@@ -17,10 +17,10 @@ export function getProperties(values: AccessibilityHelperPreviewProps, defaultPr
 
 export function check(values: AccessibilityHelperPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    values.attributesList.forEach((item: AttributesListPreviewType) => {
+    values.attributesList.forEach((item: AttributesListPreviewType, index) => {
         if (PROHIBITED_ATTRIBUTES.some(value => value === item.attribute)) {
             errors.push({
-                property: "attributesList.attribute",
+                property: `attributesList/${index + 1}/attribute`,
                 message: `Widget tries to change ${item.attribute} attribute, this is prohibited`,
                 url: "https://docs.mendix.com/appstore/widgets/accessibility-helper"
             });

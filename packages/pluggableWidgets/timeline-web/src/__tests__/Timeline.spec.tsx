@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { TimelineContainerProps } from "../../typings/TimelineProps";
-import { dynamicValue, ListValueBuilder } from "@widgets-resources/piw-utils";
+import { buildListExpression, buildWidgetValue, ListValueBuilder } from "@mendix/piw-utils-internal";
 import Timeline from "../Timeline";
 
 describe("Timeline", () => {
@@ -14,14 +14,14 @@ describe("Timeline", () => {
         groupByKey: "day",
         data: listValueBuilder.simple(),
         groupEvents: true,
-        title: () => dynamicValue<string>("title1"),
-        description: () => dynamicValue<string>("description"),
-        timeIndication: () => dynamicValue<string>("time"),
-        customIcon: () => <img src={"test"} />,
-        customGroupHeader: () => <p>Custom Divider</p>,
-        customTitle: () => <p>Custom Title</p>,
-        customEventDateTime: () => <p>Custom Event Date Time</p>,
-        customDescription: () => <p>Custom Description</p>,
+        title: buildListExpression("title1"),
+        description: buildListExpression("description"),
+        timeIndication: buildListExpression("time"),
+        customIcon: buildWidgetValue(<img src={"test"} />),
+        customGroupHeader: buildWidgetValue(<p>Custom Divider</p>),
+        customTitle: buildWidgetValue(<p>Custom Title</p>),
+        customEventDateTime: buildWidgetValue(<p>Custom Event Date Time</p>),
+        customDescription: buildWidgetValue(<p>Custom Description</p>),
         groupByMonthOptions: "month",
         groupByDayOptions: "dayName",
         ungroupedEventsPosition: "end"

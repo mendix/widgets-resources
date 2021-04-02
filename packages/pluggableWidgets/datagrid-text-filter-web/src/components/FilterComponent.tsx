@@ -38,7 +38,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     if (!value) {
                         return true;
                     }
-                    const dataValue = attr(item).displayValue.toLowerCase();
+                    const dataValue = attr.get(item).displayValue.toLowerCase();
                     if (!dataValue) {
                         return false;
                     }
