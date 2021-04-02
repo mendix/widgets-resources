@@ -4,7 +4,7 @@ import { ValueStatus } from "mendix";
 import { Switch as SwitchComponent } from "./components/Switch";
 
 import { SwitchContainerProps } from "../typings/SwitchProps";
-import "./ui/Switch.scss";
+import "./ui/switch-main.scss";
 
 export const Switch: FunctionComponent<SwitchContainerProps> = props => {
     const isChecked = isAvailable(props.booleanAttribute);
