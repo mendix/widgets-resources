@@ -9,14 +9,19 @@ import "./ui/Switch.scss";
 export const Switch: FunctionComponent<SwitchContainerProps> = props => {
     const isChecked = isAvailable(props.booleanAttribute);
     const editable = !props.booleanAttribute.readOnly;
+
+    function invokeActionAndMaybeToggleValue() {
+        if (props.booleanAttribute.status === ValueStatus.Available) {
+            props.booleanAttribute.setValue(!props.booleanAttribute.value);
+        }
+        executeAction(props.action);
+    }
+
     const onClick = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
             event.preventDefault();
             if (editable) {
-                if (props.booleanAttribute.status === ValueStatus.Available) {
-                    props.booleanAttribute.setValue(!props.booleanAttribute.value);
-                }
-                executeAction(props.action);
+                invokeActionAndMaybeToggleValue();
             }
         },
         [props.action, editable, props.booleanAttribute]
@@ -25,10 +30,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
         (event: KeyboardEvent<HTMLDivElement>) => {
             event.preventDefault();
             if (editable && event.key === " ") {
-                if (props.booleanAttribute.status === ValueStatus.Available) {
-                    props.booleanAttribute.setValue(!props.booleanAttribute.value);
-                }
-                executeAction(props.action);
+                invokeActionAndMaybeToggleValue();
             }
         },
         [props.action, editable, props.booleanAttribute]
