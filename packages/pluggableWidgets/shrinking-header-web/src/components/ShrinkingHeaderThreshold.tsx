@@ -47,7 +47,7 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
             }
         };
 
-        const onScroll = throttle(evaluateShrunkState, 150, { leading: true });
+        const onScroll = throttle(evaluateShrunkState, 250, { leading: true, trailing: true });
 
         document.addEventListener("scroll", onScroll);
 
