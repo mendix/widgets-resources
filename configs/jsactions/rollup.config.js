@@ -9,6 +9,7 @@ import { promisify } from "util";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import { collectDependencies } from "../../packages/tools/pluggable-widgets-tools/configs/rollup-plugin-collect-dependencies";
+import { bigJsImportReplacer } from "./rollup-plugin-bigjs-import-replacer";
 
 const cwd = process.cwd();
 
@@ -24,7 +25,7 @@ export default async args => {
         sourceMap: false,
         inlineSources: false,
         target: "es2019",
-        types: ["mendix-client", "big.js", "react-native"],
+        types: ["mendix-client", "react-native"],
         allowSyntheticDefaultImports: true
     });
 
@@ -48,6 +49,7 @@ export default async args => {
                 }),
                 nodeResolvePlugin,
                 typescriptPlugin,
+                bigJsImportReplacer(),
                 i === files.length - 1
                     ? command([
                           async () => {
