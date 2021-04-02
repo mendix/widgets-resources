@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, ReactElement, ReactNode, useEffect, useState } from "react";
+import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
 import { throttle } from "lodash-es";
 
@@ -18,10 +18,22 @@ export interface ShrinkingHeaderThresholdProps {
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
     const { name, className, style, tabIndex, headerContent, shrunkClassName, shrinkThreshold } = props;
 
+    const [inlineStyle, setInlineStyle] = useState<CSSProperties>({ ...style });
+    const [wrappingHeaderHeight, setWrappingHeaderHeight] = useState<number>(0);
     const [shrunk, setShrunk] = useState(false);
+
     const actualClassName = classNames("widget-shrinking-header-threshold", className, {
         [`${shrunkClassName}`]: shrunk
     });
+
+    const updateHeight = useCallback(
+        (node: HTMLDivElement | null) => {
+            if (node) {
+                setWrappingHeaderHeight(node.offsetHeight);
+            }
+        },
+        [setWrappingHeaderHeight]
+    );
 
     useEffect(() => {
         const evaluateShrunkState = function (this: HTMLElement): void {
@@ -41,9 +53,13 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
         };
     }, [shrinkThreshold, setShrunk]);
 
+    useEffect(() => {
+        setInlineStyle(prevState => ({ ...prevState, height: wrappingHeaderHeight }));
+    }, [setInlineStyle, wrappingHeaderHeight]);
+
     return (
-        <div id={name} className={actualClassName} style={style} tabIndex={tabIndex}>
-            <header>{headerContent}</header>
+        <div id={name} className={actualClassName} style={inlineStyle} tabIndex={tabIndex}>
+            <header ref={updateHeight}>{headerContent}</header>
         </div>
     );
 }
