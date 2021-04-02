@@ -1,7 +1,6 @@
-import { MouseEvent, KeyboardEvent, createElement } from "react";
+import { MouseEvent, KeyboardEvent, createElement, FunctionComponent } from "react";
 import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal";
-import { FunctionComponent } from "react";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
 
 export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" | "style" | "tabIndex" | "deviceStyle"> {
