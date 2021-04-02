@@ -5,6 +5,7 @@ import { throttle } from "lodash-es";
 import "../ui/ShrinkingHeader.scss";
 
 export interface ShrinkingHeaderThresholdProps {
+    rootElementRef?: (node: HTMLElement | null) => void;
     name?: string;
     className?: string;
     style?: CSSProperties;
@@ -15,7 +16,7 @@ export interface ShrinkingHeaderThresholdProps {
 }
 
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
-    const { name, className, style, tabIndex, headerContent, shrinkThreshold } = props;
+    const { rootElementRef, name, className, style, tabIndex, headerContent, shrinkThreshold } = props;
 
     const [inlineStyle, setInlineStyle] = useState<CSSProperties>({ ...style });
     const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
@@ -29,11 +30,12 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
         className
     );
 
-    const updateHeight = useCallback(
+    const updateElement = useCallback(
         (node: HTMLDivElement | null) => {
             setHeaderElement(node ?? undefined);
+            rootElementRef?.(node);
         },
-        [setHeaderElement]
+        [rootElementRef, setHeaderElement]
     );
 
     useEffect(() => {
@@ -77,7 +79,7 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
 
     return (
         <div id={name} className={actualClassName} style={inlineStyle} tabIndex={tabIndex}>
-            <header ref={updateHeight}>{headerContent}</header>
+            <header ref={updateElement}>{headerContent}</header>
         </div>
     );
 }
