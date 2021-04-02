@@ -16,9 +16,7 @@ export function preview(props: SwitchPreviewProps): ReactElement {
             // Studio Pro will pass `readOnly` value but this is excluded from preview prop typings (via generator)
             // @ts-ignore
             editable={!props.readOnly ?? true}
-            isChecked={true}
-            onClick={() => {}}
-            onKeyDown={() => {}}
+            isChecked
             deviceStyle={deviceStyle}
             class={className}
             style={parseStyle(style)}

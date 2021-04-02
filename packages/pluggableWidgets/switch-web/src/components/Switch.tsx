@@ -4,8 +4,8 @@ import { Alert } from "@mendix/piw-utils-internal";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
 
 export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" | "style" | "tabIndex" | "deviceStyle"> {
-    onClick: (event: MouseEvent<HTMLDivElement>) => void;
-    onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void;
+    onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+    onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
     isChecked: boolean;
     editable: boolean;
     validation: string | undefined;
