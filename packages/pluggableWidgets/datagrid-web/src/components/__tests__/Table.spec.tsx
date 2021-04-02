@@ -125,6 +125,17 @@ describe("Table", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly with header wrapper", () => {
+        const component = shallow(
+            <Table
+                {...mockTableProps()}
+                headerWrapperRenderer={(_, header) => <div className="my-custom-header">{header}</div>}
+            />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockTableProps(): TableProps<ObjectItem> {
@@ -157,6 +168,7 @@ function mockTableProps(): TableProps<ObjectItem> {
         valueForSort: () => "dummy",
         filterRenderer: () => <input type="text" value="dummy" />,
         cellRenderer: (renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header),
+        headerWrapperRenderer: (_index, header) => header,
         data: [{ id: "123456" as any }]
     };
 }

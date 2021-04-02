@@ -42,6 +42,7 @@ export interface TableProps<T> {
     emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
     hasMoreItems: boolean;
+    headerWrapperRenderer: (columnIndex: number, header: ReactElement) => ReactElement;
     numberOfItems?: number;
     paging: boolean;
     page: number;
@@ -291,35 +292,38 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 >
                     {headerGroups.map((headerGroup, index: number) => (
                         <Fragment key={`headers_row_${index}`}>
-                            {headerGroup.headers.map((column, index) => (
-                                <Header
-                                    className={`align-column-${column.alignment}`}
-                                    column={column}
-                                    key={`headers_column_${index}`}
-                                    draggable={props.columnsDraggable}
-                                    dragOver={dragOver}
-                                    filterable={props.columnsFilterable}
-                                    hidable={props.columnsHidable}
-                                    isDragging={isDragging}
-                                    preview={props.preview}
-                                    resizable={props.columnsResizable}
-                                    setColumnOrder={(newOrder: Array<IdType<object>>) => {
-                                        setOrder(newOrder);
-                                        setColumnOrder(newOrder);
-                                    }}
-                                    setColumnWidth={(width: number) =>
-                                        setColumnsWidth(prev => {
-                                            prev[column.id] = width;
-                                            return { ...prev };
-                                        })
-                                    }
-                                    setDragOver={setDragOver}
-                                    setIsDragging={setIsDragging}
-                                    setSortBy={setSortBy}
-                                    sortable={props.columnsSortable}
-                                    visibleColumns={visibleColumns}
-                                />
-                            ))}
+                            {headerGroup.headers.map((column, index) =>
+                                props.headerWrapperRenderer(
+                                    index,
+                                    <Header
+                                        className={`align-column-${column.alignment}`}
+                                        column={column}
+                                        key={`headers_column_${index}`}
+                                        draggable={props.columnsDraggable}
+                                        dragOver={dragOver}
+                                        filterable={props.columnsFilterable}
+                                        hidable={props.columnsHidable}
+                                        isDragging={isDragging}
+                                        preview={props.preview}
+                                        resizable={props.columnsResizable}
+                                        setColumnOrder={(newOrder: Array<IdType<object>>) => {
+                                            setOrder(newOrder);
+                                            setColumnOrder(newOrder);
+                                        }}
+                                        setColumnWidth={(width: number) =>
+                                            setColumnsWidth(prev => {
+                                                prev[column.id] = width;
+                                                return { ...prev };
+                                            })
+                                        }
+                                        setDragOver={setDragOver}
+                                        setIsDragging={setIsDragging}
+                                        setSortBy={setSortBy}
+                                        sortable={props.columnsSortable}
+                                        visibleColumns={visibleColumns}
+                                    />
+                                )
+                            )}
                             {props.columnsHidable && (
                                 <ColumnSelector allColumns={allColumns} setHiddenColumns={setHiddenColumns} />
                             )}
