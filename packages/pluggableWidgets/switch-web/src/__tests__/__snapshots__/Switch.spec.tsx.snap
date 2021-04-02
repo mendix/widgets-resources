@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch with editable value should render the structure correctly 1`] = `
+<Switch
+  booleanAttribute={
+    Object {
+      "displayValue": "Formatted false",
+      "formatter": Object {
+        "config": Object {},
+        "format": [MockFunction] {
+          "calls": Array [
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": "Formatted false",
+            },
+          ],
+        },
+        "getFormatPlaceholder": [MockFunction],
+        "parse": [MockFunction],
+        "type": "datetime",
+        "withConfig": [MockFunction],
+      },
+      "readOnly": false,
+      "setFormatter": [MockFunction],
+      "setTextValue": [MockFunction],
+      "setValidator": [MockFunction],
+      "setValue": [MockFunction],
+      "status": "available",
+      "validation": undefined,
+      "value": false,
+    }
+  }
+  class="company-switch-widget"
+  deviceStyle="auto"
+  id="com.mendix.widgets.custom.switch1"
+  name="switch"
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+  tabIndex={0}
+>
+  <Component
+    class="company-switch-widget"
+    deviceStyle="auto"
+    editable={true}
+    id="com.mendix.widgets.custom.switch1"
+    isChecked={false}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="widget-switch company-switch-widget auto"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      <input
+        checked={false}
+        className="widget-switch-checkbox enabled"
+        readOnly={true}
+        type="checkbox"
+      />
+      <div
+        aria-checked={false}
+        aria-labelledby="com.mendix.widgets.custom.switch1"
+        className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default un-checked"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="checkbox"
+        tabIndex={0}
+      >
+        <small
+          className="widget-switch-btn left"
+        />
+      </div>
+      <Alert
+        bootstrapStyle="danger"
+      />
+    </div>
+  </Component>
+</Switch>
+`;
+
+exports[`Switch with readonly value should render the structure correctly 1`] = `
+<Switch
+  booleanAttribute={
+    Object {
+      "displayValue": "Formatted false",
+      "formatter": Object {
+        "config": Object {},
+        "format": [MockFunction] {
+          "calls": Array [
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": "Formatted false",
+            },
+          ],
+        },
+        "getFormatPlaceholder": [MockFunction],
+        "parse": [MockFunction],
+        "type": "datetime",
+        "withConfig": [MockFunction],
+      },
+      "readOnly": true,
+      "setFormatter": [MockFunction],
+      "setTextValue": [MockFunction],
+      "setValidator": [MockFunction],
+      "setValue": [MockFunction],
+      "status": "available",
+      "validation": undefined,
+      "value": false,
+    }
+  }
+  class="company-switch-widget"
+  deviceStyle="auto"
+  id="com.mendix.widgets.custom.switch1"
+  name="switch"
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+  tabIndex={0}
+>
+  <Component
+    class="company-switch-widget"
+    deviceStyle="auto"
+    editable={false}
+    id="com.mendix.widgets.custom.switch1"
+    isChecked={false}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="widget-switch company-switch-widget auto"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      <input
+        checked={false}
+        className="widget-switch-checkbox"
+        readOnly={true}
+        type="checkbox"
+      />
+      <div
+        aria-checked={false}
+        aria-labelledby="com.mendix.widgets.custom.switch1"
+        className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default disabled un-checked"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="checkbox"
+        tabIndex={0}
+      >
+        <small
+          className="widget-switch-btn left"
+        />
+      </div>
+      <Alert
+        bootstrapStyle="danger"
+      />
+    </div>
+  </Component>
+</Switch>
+`;
+
+exports[`Switch with validation message should render correctly 1`] = `
+<Alert
+  bootstrapStyle="danger"
+>
+  <div
+    className="alert alert-danger"
+  >
+    error
+  </div>
+</Alert>
+`;
+
+exports[`Switch without validation message should render correctly 1`] = `
+<Alert
+  bootstrapStyle="danger"
+/>
+`;
