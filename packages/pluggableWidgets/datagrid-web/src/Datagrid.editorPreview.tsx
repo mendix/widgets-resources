@@ -86,7 +86,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             data={data}
             emptyPlaceholderRenderer={useCallback(
                 renderWrapper => (
-                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                    <props.emptyPlaceholder.renderer caption="Empty list message: Place widgets here">
+                        {renderWrapper(null)}
+                    </props.emptyPlaceholder.renderer>
                 ),
                 [props.emptyPlaceholder]
             )}
@@ -94,7 +96,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 (renderWrapper, columnIndex) => {
                     const column = columns[columnIndex];
                     return column.filter ? (
-                        <column.filter.renderer>{renderWrapper(null)}</column.filter.renderer>
+                        <column.filter.renderer caption="Place filter widget here">
+                            {renderWrapper(null)}
+                        </column.filter.renderer>
                     ) : (
                         renderWrapper(null)
                     );
