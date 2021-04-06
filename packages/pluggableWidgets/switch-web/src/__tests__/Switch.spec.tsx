@@ -4,7 +4,7 @@ import { createElement } from "react";
 
 import SwitchComponent, { SwitchProps } from "../components/Switch";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
-import Switch from "../Switch";
+import { Switch } from "../Switch";
 
 describe("Switch", () => {
     let switchWrapper: ReactWrapper<SwitchContainerProps, any>;

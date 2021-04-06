@@ -5,7 +5,7 @@ import SwitchComponent from "./components/Switch";
 import { SwitchContainerProps } from "../typings/SwitchProps";
 import "./ui/switch-main.scss";
 
-export default function Switch(props: SwitchContainerProps) {
+export function Switch(props: SwitchContainerProps) {
     const isChecked = isAvailable(props.booleanAttribute);
     const editable = !props.booleanAttribute.readOnly;
 
