@@ -46,7 +46,7 @@ exports[`Switch with editable value should render the structure correctly 1`] = 
   }
   tabIndex={0}
 >
-  <Component
+  <Switch
     class="company-switch-widget"
     deviceStyle="auto"
     editable={true}
@@ -92,7 +92,7 @@ exports[`Switch with editable value should render the structure correctly 1`] = 
         bootstrapStyle="danger"
       />
     </div>
-  </Component>
+  </Switch>
 </Switch>
 `;
 
@@ -142,7 +142,7 @@ exports[`Switch with readonly value should render the structure correctly 1`] = 
   }
   tabIndex={0}
 >
-  <Component
+  <Switch
     class="company-switch-widget"
     deviceStyle="auto"
     editable={false}
@@ -188,7 +188,7 @@ exports[`Switch with readonly value should render the structure correctly 1`] = 
         bootstrapStyle="danger"
       />
     </div>
-  </Component>
+  </Switch>
 </Switch>
 `;
 

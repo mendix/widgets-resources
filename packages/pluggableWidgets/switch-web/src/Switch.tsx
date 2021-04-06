@@ -9,13 +9,10 @@ export default function Switch(props: SwitchContainerProps) {
     const isChecked = isAvailable(props.booleanAttribute);
     const editable = !props.booleanAttribute.readOnly;
 
-    const invokeActionAndMaybeToggleValue = useCallback(
-        function () {
-            props.booleanAttribute.setValue(!props.booleanAttribute.value);
-            executeAction(props.action);
-        },
-        [props.action, props.booleanAttribute]
-    );
+    const invokeActionAndMaybeToggleValue = useCallback(() => {
+        props.booleanAttribute.setValue(!props.booleanAttribute.value);
+        executeAction(props.action);
+    }, [props.action, props.booleanAttribute]);
 
     const onClick = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
