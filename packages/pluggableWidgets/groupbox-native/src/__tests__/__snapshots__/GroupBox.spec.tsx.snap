@@ -1,0 +1,342 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GroupBox renders with custom styles 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#264ae5",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={Object {}}
+    testID="header"
+  >
+    <View
+      style={Object {}}
+    >
+      <Text>
+        Header
+      </Text>
+    </View>
+    <View
+      style={Object {}}
+    >
+      <View
+        testId="icon"
+      />
+    </View>
+  </View>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "height": undefined,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        Content
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`GroupBox renders with default styles 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#264ae5",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#264ae5",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 12,
+        "paddingVertical": 8,
+      }
+    }
+    testID="header"
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <Text>
+        Header
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        testId="icon"
+      />
+    </View>
+  </View>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "height": undefined,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        Content
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`GroupBox renders without content 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#264ae5",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#264ae5",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 12,
+        "paddingVertical": 8,
+      }
+    }
+    testID="header"
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <Text>
+        Header
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        testId="icon"
+      />
+    </View>
+  </View>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "height": undefined,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`GroupBox renders without header 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#264ae5",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "height": undefined,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        Content
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`GroupBox renders without header content 1`] = `
+<View
+  style={
+    Object {
+      "borderColor": "#264ae5",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <View
+    accessible={true}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#264ae5",
+        "flex": 1,
+        "flexDirection": "row",
+        "paddingHorizontal": 12,
+        "paddingVertical": 8,
+      }
+    }
+    testID="header"
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <View
+        testId="icon"
+      />
+    </View>
+  </View>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "height": undefined,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 8,
+          "paddingVertical": 12,
+        }
+      }
+    >
+      <Text>
+        Content
+      </Text>
+    </View>
+  </View>
+</View>
+`;

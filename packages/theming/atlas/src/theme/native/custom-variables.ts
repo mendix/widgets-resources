@@ -12,6 +12,7 @@ import {
     VariablesFloatingActionButton,
     VariablesFont,
     VariablesFontDefaults,
+    VariablesGroupBox,
     VariablesImage,
     VariablesInput,
     VariablesIntroScreen,
@@ -585,5 +586,29 @@ export const slider: VariablesSlider = {
         size: 24,
         borderColor: contrast.lowest,
         backgroundColor: background.secondary
+    }
+};
+//
+// Group Box Styles
+export const groupbox: VariablesGroupBox = {
+    container: {
+        borderWidth: border.width,
+        borderColor: button.primary.borderColor,
+        borderRadius: border.radiusSmall
+    },
+    header: {
+        container: {
+            backgroundColor: button.primary.backgroundColor,
+            paddingHorizontal: spacing.regular,
+            paddingVertical: spacing.small
+        },
+        icon: {
+            size: 16,
+            color: button.primary.color
+        }
+    },
+    content: {
+        paddingHorizontal: spacing.regular,
+        paddingVertical: spacing.small
     }
 };

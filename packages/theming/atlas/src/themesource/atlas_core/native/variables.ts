@@ -15,6 +15,7 @@ import {
     VariablesFloatingActionButton,
     VariablesFont,
     VariablesFontDefaults,
+    VariablesGroupBox,
     VariablesImage,
     VariablesInput,
     VariablesIntroScreen,
@@ -608,6 +609,31 @@ let slider: VariablesSlider = {
 };
 slider = merge(slider, custom.slider || ({} as any));
 //
+// Group Box Styles
+let groupbox: VariablesGroupBox = {
+    container: {
+        borderWidth: border.width,
+        borderColor: button.primary.borderColor,
+        borderRadius: border.radiusSmall
+    },
+    header: {
+        container: {
+            backgroundColor: button.primary.backgroundColor,
+            paddingHorizontal: spacing.regular,
+            paddingVertical: spacing.small
+        },
+        icon: {
+            size: 16,
+            color: button.primary.color
+        }
+    },
+    content: {
+        paddingHorizontal: spacing.regular,
+        paddingVertical: spacing.small
+    }
+};
+groupbox = merge(groupbox, custom.groupbox || ({} as any));
+//
 export * from "../../../theme/native/custom-variables";
 export {
     brand,
@@ -633,5 +659,6 @@ export {
     progressBar,
     progressCircle,
     slider,
-    rating
+    rating,
+    groupbox
 };

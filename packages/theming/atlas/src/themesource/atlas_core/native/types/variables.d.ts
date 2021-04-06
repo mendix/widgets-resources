@@ -510,3 +510,26 @@ export interface VariablesSlider {
         backgroundColor: string;
     };
 }
+
+export interface VariablesGroupBox {
+    container: {
+        borderWidth: number;
+        borderColor: string;
+        borderRadius: number;
+    },
+    header: {
+        container: {
+            backgroundColor: string;
+            paddingHorizontal: number;
+            paddingVertical: number;
+        },
+        icon: {
+            size: number;
+            color: string;
+        }
+    },
+    content: {
+        paddingHorizontal: number;
+        paddingVertical: number;
+    },
+}

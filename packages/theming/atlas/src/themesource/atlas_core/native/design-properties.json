@@ -2344,5 +2344,34 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.native.groupbox.GroupBox": [
+        {
+            "name": "Group box style",
+            "type": "Dropdown",
+            "description": "Style of the group box.",
+            "options": [
+                {
+                    "name": "Secondary",
+                    "class": "groupBoxSecondary"
+                },
+                {
+                    "name": "Success",
+                    "class": "groupBoxSuccess"
+                },
+                {
+                    "name": "Warning",
+                    "class": "groupBoxWarning"
+                },
+                {
+                    "name": "Danger",
+                    "class": "groupBoxDanger"
+                },
+                {
+                    "name": "Transparent",
+                    "class": "groupBoxTransparent"
+                }
+            ]
+        }
     ]
 }

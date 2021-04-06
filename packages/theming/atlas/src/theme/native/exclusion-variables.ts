@@ -33,6 +33,9 @@ export const excludeFeedback = false;
 // Floating Action Button
 export const excludeFAB = false;
 export const excludeFABHelpers = false;
+// Group Box
+export const excludeGroupBox = false;
+export const excludeGroupBoxHelpers = false;
 // Image
 export const excludeImage = false;
 export const excludeImageHelpers = false;

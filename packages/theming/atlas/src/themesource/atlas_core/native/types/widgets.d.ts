@@ -41,6 +41,79 @@ export interface BadgeType {
     caption?: TextStyle;
 }
 
+// Bar chart
+interface BarChartGridStyle {
+    backgroundColor?: string;
+    dashArray?: string;
+    lineColor?: string;
+    padding?: number;
+    paddingBottom?: number;
+    paddingHorizontal?: number;
+    paddingLeft?: number;
+    paddingRight?: number;
+    paddingTop?: number;
+    paddingVertical?: number;
+    width?: number;
+}
+
+interface BarChartAxisStyle<T extends "X" | "Y"> {
+    color?: string;
+    dashArray?: string;
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+    label?: TextStyle & {
+        relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
+    };
+    lineColor?: string;
+    width?: number;
+}
+
+interface BarChartBarStyle {
+    ending?: number;
+    barColor?: string;
+    width?: number;
+}
+
+interface BarChartBarLabelStyle {
+    // color is the same as bar color
+    fontFamily?: string;
+    fontSize?: number;
+    fontStyle?: "normal" | "italic";
+    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
+}
+
+export interface BarChartLegendStyle {
+    container?: ViewStyle;
+    item?: ViewStyle;
+    indicator?: ViewStyle;
+    label?: TextStyle;
+}
+
+export interface BarChartType {
+    container?: ViewStyle;
+    errorMessage?: TextStyle;
+    chart?: ViewStyle;
+    grid?: BarChartGridStyle;
+    xAxis?: BarChartAxisStyle<"X">;
+    yAxis?: BarChartAxisStyle<"Y">;
+    legend?: BarChartLegendStyle;
+    bars?: {
+        barColorPalette?: string;
+        barsOffset?: number; // only applicable to Grouped presentation mode
+        customBarStyles?: {
+            [key: string]: {
+                bar?: BarChartBarStyle;
+                label?: BarChartBarLabelStyle;
+            };
+        };
+    };
+    domain?: {
+        padding?: { x: number; y: number };
+    };
+}
+
 // Bottom Sheet
 export interface BottomSheetType {
     container?: ViewStyle;
@@ -232,6 +305,20 @@ export interface FloatingActionButtonType {
     secondaryButtonCaptionContainer?: ViewStyle;
 }
 
+// Group Box
+export interface GroupBoxType {
+    container?: ViewStyle;
+    header?: {
+        container?: ViewStyle;
+        content?: ViewStyle;
+        icon?: ViewStyle & {
+            size?: number;
+            color?: string;
+        };
+    };
+    content?: ViewStyle;
+}
+
 // Images
 export interface ImageType {
     container?: ButtonContainerType;
@@ -356,79 +443,6 @@ export interface LineChartType {
         customLineStyles?: {
             [key: string]: LineChartLineStyle;
         };
-    };
-}
-
-// Bar chart
-interface BarChartGridStyle {
-    backgroundColor?: string;
-    dashArray?: string;
-    lineColor?: string;
-    padding?: number;
-    paddingBottom?: number;
-    paddingHorizontal?: number;
-    paddingLeft?: number;
-    paddingRight?: number;
-    paddingTop?: number;
-    paddingVertical?: number;
-    width?: number;
-}
-
-interface BarChartAxisStyle<T extends "X" | "Y"> {
-    color?: string;
-    dashArray?: string;
-    fontFamily?: string;
-    fontSize?: number;
-    fontStyle?: "normal" | "italic";
-    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
-    label?: TextStyle & {
-        relativePositionGrid?: T extends "X" ? "bottom" | "right" : "top" | "left";
-    };
-    lineColor?: string;
-    width?: number;
-}
-
-interface BarChartBarStyle {
-    ending?: number;
-    barColor?: string;
-    width?: number;
-}
-
-interface BarChartBarLabelStyle {
-    // color is the same as bar color
-    fontFamily?: string;
-    fontSize?: number;
-    fontStyle?: "normal" | "italic";
-    fontWeight?: "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
-}
-
-export interface BarChartLegendStyle {
-    container?: ViewStyle;
-    item?: ViewStyle;
-    indicator?: ViewStyle;
-    label?: TextStyle;
-}
-
-export interface BarChartType {
-    container?: ViewStyle;
-    errorMessage?: TextStyle;
-    chart?: ViewStyle;
-    grid?: BarChartGridStyle;
-    xAxis?: BarChartAxisStyle<"X">;
-    yAxis?: BarChartAxisStyle<"Y">;
-    legend?: BarChartLegendStyle;
-    bars?: {
-        barColorPalette?: string;
-        barsOffset?: number; // only applicable to Grouped presentation mode
-        customBarStyles?: {
-            [key: string]: {
-                bar?: BarChartBarStyle;
-                label?: BarChartBarLabelStyle;
-            };
-        };
-    };
-    domain?: {
-        padding?: { x: number; y: number };
     };
 }
 

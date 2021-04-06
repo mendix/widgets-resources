@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.groupbox.GroupBox" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Group Box</name>
+    <description>Group content in a container.</description>
+    <helpUrl>https://github.com/mendix/widgets-resources/blob/master/packages/pluggableWidgets/groupbox-native/README.md</helpUrl>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFuSURBVHgB7ds/UoNAGAXwR4wN2CZ2tmk8BIW5AdBoQeeVLGHGCq5gwSFsbO0cWqGJTgRnLJQ/O+uQAt77lZsvM9k3fLubzMY5NkBsBXIKAOTWfweKokCSJKjrGkuy2WwQhiF83/813nkC8jxf3ORbZVkiTdPO+KqvcKmqquqMaQ0wFWRZhjmLomj0dW2DIKc1AJaeXj/x8PyB6jDtV4hL18Hdbo2bq7PRuqFzytA+b2L9BDy+TD/51lt9bII9GOuGzilD+7yJdQDv5s/4bxfnjrGmby//4XkebFkHcH+9/n5cp+Y1k7/dmTsyjmNst9vu+5vJB0EAW9ZrwL7p0b2hT0+p7XHbPh+jbRDkdA4wFZjO0nOnFgA5rQGmAv0esHAKAOQUAMgpAJBTACCnAEBOAYCcAgA5BQByCgDkFADIKQCQUwAgpwBATgGAnAIAOd0RArlOAK7rYqn6rth2Ahi6izt3Q3eJHf13mJwCALkvY/Jc3wh3q30AAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="headerContent" type="widgets" required="false">
+                    <caption>Header</caption>
+                    <description />
+                </property>
+                <property key="content" type="widgets" required="true">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+                <property key="showHeader" type="boolean" defaultValue="true">
+                    <caption>Show header</caption>
+                    <description></description>
+                </property>
+                <property key="collapsible" type="enumeration" defaultValue="collapsibleYesExpanded">
+                    <caption>Collapsible</caption>
+                    <description></description>
+                    <enumerationValues>
+                        <enumerationValue key="collapsibleNo">No</enumerationValue>
+                        <enumerationValue key="collapsibleYesExpanded">Yes (start expanded)</enumerationValue>
+                        <enumerationValue key="collapsibleYesCollapsed">Yes (start collapsed)</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="iconCollapsed" type="icon" required="false">
+                    <caption>Icon collapsed</caption>
+                    <description/>
+                </property>
+                <property key="iconExpanded" type="icon" required="false">
+                    <caption>Icon expanded</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
