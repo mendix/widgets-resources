@@ -21,7 +21,7 @@ export default function Switch(props: SwitchContainerProps) {
                 invokeActionAndMaybeToggleValue();
             }
         },
-        [editable]
+        [editable, invokeActionAndMaybeToggleValue]
     );
     const onKeyDown = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
@@ -30,7 +30,7 @@ export default function Switch(props: SwitchContainerProps) {
                 invokeActionAndMaybeToggleValue();
             }
         },
-        [editable]
+        [editable, invokeActionAndMaybeToggleValue]
     );
 
     return (
