@@ -2,9 +2,9 @@ import { actionValue, EditableValueBuilder, Alert, AlertProps } from "@mendix/pi
 import { mount, ReactWrapper } from "enzyme";
 import { createElement } from "react";
 
-import { Switch as SwitchComponent, SwitchProps } from "../components/Switch";
+import SwitchComponent, { SwitchProps } from "../components/Switch";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
-import { Switch } from "../Switch";
+import Switch from "../Switch";
 
 describe("Switch", () => {
     let switchWrapper: ReactWrapper<SwitchContainerProps, any>;

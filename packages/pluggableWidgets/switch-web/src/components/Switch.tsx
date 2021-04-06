@@ -1,4 +1,4 @@
-import { MouseEvent, KeyboardEvent, createElement, FunctionComponent } from "react";
+import { MouseEvent, KeyboardEvent, createElement } from "react";
 import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
@@ -11,7 +11,7 @@ export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" |
     validation: string | undefined;
 }
 
-export const Switch: FunctionComponent<SwitchProps> = props => {
+export default function Switch(props: SwitchProps) {
     return (
         <div className={classNames("widget-switch", props.class, props.deviceStyle)} style={props.style}>
             <input
@@ -43,4 +43,4 @@ export const Switch: FunctionComponent<SwitchProps> = props => {
             <Alert bootstrapStyle={"danger"}>{props.validation}</Alert>
         </div>
     );
-};
+}

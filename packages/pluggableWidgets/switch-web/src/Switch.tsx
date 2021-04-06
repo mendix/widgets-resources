@@ -1,11 +1,11 @@
-import { createElement, FunctionComponent, KeyboardEvent, MouseEvent, useCallback } from "react";
+import { createElement, KeyboardEvent, MouseEvent, useCallback } from "react";
 import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
-import { Switch as SwitchComponent } from "./components/Switch";
+import SwitchComponent from "./components/Switch";
 
 import { SwitchContainerProps } from "../typings/SwitchProps";
 import "./ui/switch-main.scss";
 
-export const Switch: FunctionComponent<SwitchContainerProps> = props => {
+export default function Switch(props: SwitchContainerProps) {
     const isChecked = isAvailable(props.booleanAttribute);
     const editable = !props.booleanAttribute.readOnly;
 
@@ -50,6 +50,4 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
             deviceStyle={props.deviceStyle}
         />
     );
-};
-
-Switch.displayName = "Switch";
+}
