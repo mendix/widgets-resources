@@ -104,9 +104,10 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         });
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: ColorPickerContainerProps): void {
+    // Note that React will not await this function to call the render function
+    async UNSAFE_componentWillReceiveProps(newProps: ColorPickerContainerProps): Promise<void> {
         this.resetSubscriptions(newProps.mxObject);
-        this.setState(this.validateColor(this.getValue(newProps.mxObject)));
+        this.setState(this.validateColor(await this.getValue(newProps.mxObject))); // This line aligns mx object color attribute value with state.color
     }
 
     componentWillUnmount(): void {
@@ -147,7 +148,7 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
             className: this.props.mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner",
             disabled: this.disabled,
             mode: this.props.mode,
-            color: this.state.alertMessage ? this.getValue(this.props.mxObject) : this.state.color,
+            color: this.state.color,
             onClick: this.handleClick,
             tabIndex: this.props.mode === "popover" ? 0 : -1
         });
@@ -194,9 +195,9 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     };
 
-    private updateColorValue = (color: ColorState): void => {
+    private updateColorValue = async (color: ColorState): Promise<void> => {
         const { format, mxObject, colorAttribute } = this.props;
-        this.previousColor = this.getValue(this.props.mxObject);
+        this.previousColor = await this.getValue(this.props.mxObject);
         if (color && mxObject && !this.disabled) {
             if (format === "hex") {
                 mxObject.set(colorAttribute, color.hex);
@@ -208,8 +209,25 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     };
 
-    private getValue = (mxObject?: mendix.lib.MxObject): string => {
-        return mxObject ? (mxObject.get(this.props.colorAttribute) as string) : "";
+    private extractAttributeValue = async <WidgetPropertyTypes>(
+        mxObject: mendix.lib.MxObject,
+        attributePath: string
+    ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
+        if (!attributePath) {
+            return Promise.resolve(undefined);
+        }
+
+        return new Promise(resolve => {
+            mxObject.fetch(attributePath, (attributeValue: any): void => resolve(attributeValue));
+        });
+    };
+
+    private getValue = async (mxObject?: mendix.lib.MxObject): Promise<string> => {
+        if (mxObject) {
+            return (await this.extractAttributeValue<string>(mxObject, this.props.colorAttribute)) || "";
+        }
+
+        return "";
     };
 
     private resetSubscriptions(mxObject?: mendix.lib.MxObject): void {
@@ -240,8 +258,8 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         }
     }
 
-    private handleSubscriptions = (): void => {
-        this.setState(this.validateColor(this.getValue(this.props.mxObject)));
+    private handleSubscriptions = async (): Promise<void> => {
+        this.setState(this.validateColor(await this.getValue(this.props.mxObject)));
     };
 
     private handleValidations = (validations: mendix.lib.ObjectValidation[]): void => {
@@ -267,10 +285,10 @@ export default class ColorPickerContainer extends Component<ColorPickerContainer
         };
     };
 
-    private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    private handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>): Promise<void> => {
         const newColor = event.target.value as string;
         if (newColor) {
-            this.colorChanged = this.getValue(this.props.mxObject) !== newColor;
+            this.colorChanged = (await this.getValue(this.props.mxObject)) !== newColor;
             const state = this.validateColor(event.target.value);
             this.updateColorAttribute(newColor, this.props.mxObject);
             this.setState(state);
