@@ -92,6 +92,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
     }
 
+    // Note that React will not await this function to call the render function
     async UNSAFE_componentWillReceiveProps(nextProps: Container.CalendarContainerProps): Promise<void> {
         if (nextProps.mxObject) {
             if (!this.state.alertMessage) {
@@ -107,8 +108,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
-    // This function returns a promise which resolves to a value of type: value type associated with the property, "", null, undefined
-    private extractAttributeValue = (mxObject: mendix.lib.MxObject, attributePath: string): Promise<any> => {
+    private extractAttributeValue = async <WidgetPropertyTypes>(
+        mxObject: mendix.lib.MxObject,
+        attributePath: string
+    ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
         if (!attributePath) {
             return Promise.resolve(undefined);
         }
@@ -120,7 +123,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
         if (mxObject) {
-            const startDateAttributeValue = await this.extractAttributeValue(mxObject, this.props.startDateAttribute);
+            const startDateAttributeValue = await this.extractAttributeValue<number>(
+                mxObject,
+                this.props.startDateAttribute
+            );
             return startDateAttributeValue ? new Date(startDateAttributeValue) : new Date();
         }
 
@@ -173,8 +179,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         const startPosition = await this.getStartPosition(mxObject);
         if (
             this.props.executeOnViewChange &&
-            !(await this.extractAttributeValue(mxObject, this.props.viewStartAttribute)) &&
-            !(await this.extractAttributeValue(mxObject, this.props.viewEndAttribute))
+            !(await this.extractAttributeValue<number>(mxObject, this.props.viewStartAttribute)) &&
+            !(await this.extractAttributeValue<number>(mxObject, this.props.viewEndAttribute))
         ) {
             const viewStart = new Date(startPosition.getFullYear(), startPosition.getMonth(), 1);
             const viewEnd = new Date(startPosition.getFullYear(), startPosition.getMonth() + 1, 0);
@@ -207,15 +213,18 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     private setCalendarEvents = async (mxObjects: mendix.lib.MxObject[]): Promise<void> => {
         if (mxObjects) {
             const promisedEvents = mxObjects.map(async mxObject => {
-                const startAttributeValue = await this.extractAttributeValue(mxObject, this.props.startAttribute);
-                const endAttributeValue = await this.extractAttributeValue(mxObject, this.props.endAttribute);
+                const startAttributeValue = await this.extractAttributeValue<number>(
+                    mxObject,
+                    this.props.startAttribute
+                );
+                const endAttributeValue = await this.extractAttributeValue<number>(mxObject, this.props.endAttribute);
 
                 return {
-                    title: (await this.extractAttributeValue(mxObject, this.props.titleAttribute)) || " ",
-                    allDay: await this.extractAttributeValue(mxObject, this.props.allDayAttribute),
-                    start: startAttributeValue ? new Date(startAttributeValue as number) : new Date(),
-                    end: endAttributeValue ? new Date(endAttributeValue as number) : new Date(),
-                    color: (await this.extractAttributeValue(mxObject, this.props.eventColor)) || "",
+                    title: (await this.extractAttributeValue<string>(mxObject, this.props.titleAttribute)) || " ",
+                    allDay: !!(await this.extractAttributeValue<boolean>(mxObject, this.props.allDayAttribute)),
+                    start: startAttributeValue ? new Date(startAttributeValue) : new Date(),
+                    end: endAttributeValue ? new Date(endAttributeValue) : new Date(),
+                    color: (await this.extractAttributeValue<string>(mxObject, this.props.eventColor)) || "",
                     guid: mxObject.getGuid()
                 };
             });
