@@ -28,6 +28,6 @@ describe("Calendar", () => {
         page.open("p/startPosition");
         const calendar = new Calendar("calendar2");
         calendar.element.waitForExist();
-        expect(calendar.label.getText()).toBe("Tuesday Feb 02");
+        expect(calendar.label.getText()).toBe("Tuesday 02/02/2021");
     });
 });
