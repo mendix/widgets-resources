@@ -9,7 +9,7 @@ export function Switch(props: SwitchContainerProps) {
     const isChecked = isAvailable(props.booleanAttribute);
     const editable = !props.booleanAttribute.readOnly;
 
-    const invokeActionAndMaybeToggleValue = useCallback(() => {
+    const toggle = useCallback(() => {
         props.booleanAttribute.setValue(!props.booleanAttribute.value);
         executeAction(props.action);
     }, [props.action, props.booleanAttribute]);
@@ -18,19 +18,19 @@ export function Switch(props: SwitchContainerProps) {
         (event: MouseEvent<HTMLDivElement>) => {
             event.preventDefault();
             if (editable) {
-                invokeActionAndMaybeToggleValue();
+                toggle();
             }
         },
-        [editable, invokeActionAndMaybeToggleValue]
+        [editable, toggle]
     );
     const onKeyDown = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
             event.preventDefault();
             if (editable && event.key === " ") {
-                invokeActionAndMaybeToggleValue();
+                toggle();
             }
         },
-        [editable, invokeActionAndMaybeToggleValue]
+        [editable, toggle]
     );
 
     return (
