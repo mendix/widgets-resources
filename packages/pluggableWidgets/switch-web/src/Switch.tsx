@@ -10,12 +10,15 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
     const isChecked = isAvailable(props.booleanAttribute);
     const editable = !props.booleanAttribute.readOnly;
 
-    function invokeActionAndMaybeToggleValue() {
-        if (props.booleanAttribute.status === ValueStatus.Available) {
-            props.booleanAttribute.setValue(!props.booleanAttribute.value);
-        }
-        executeAction(props.action);
-    }
+    const invokeActionAndMaybeToggleValue = useCallback(
+        function () {
+            if (props.booleanAttribute.status === ValueStatus.Available) {
+                props.booleanAttribute.setValue(!props.booleanAttribute.value);
+            }
+            executeAction(props.action);
+        },
+        [props.action, props.booleanAttribute]
+    );
 
     const onClick = useCallback(
         (event: MouseEvent<HTMLDivElement>) => {
@@ -24,7 +27,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 invokeActionAndMaybeToggleValue();
             }
         },
-        [props.action, editable, props.booleanAttribute]
+        [editable]
     );
     const onKeyDown = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
@@ -33,7 +36,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
                 invokeActionAndMaybeToggleValue();
             }
         },
-        [props.action, editable, props.booleanAttribute]
+        [editable]
     );
 
     return (
