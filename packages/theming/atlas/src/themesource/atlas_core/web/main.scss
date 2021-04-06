@@ -312,7 +312,7 @@
 }
 
 @import "core/widgets/switch";
-@if not $exclude-custom-switch {
+@if not $exclude-switch {
     @include switch();
 }
 
