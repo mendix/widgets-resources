@@ -179,7 +179,7 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         }
     }
 
-    private extractAttributeValue = <WidgetPropertyTypes>(
+    private extractAttributeValue = async <WidgetPropertyTypes>(
         mxObject: mendix.lib.MxObject,
         attributePath: string
     ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
