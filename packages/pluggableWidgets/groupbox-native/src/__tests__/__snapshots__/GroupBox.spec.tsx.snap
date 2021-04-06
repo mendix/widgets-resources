@@ -4,7 +4,7 @@ exports[`GroupBox renders with custom styles 1`] = `
 <View
   style={
     Object {
-      "borderColor": "#264ae5",
+      "borderColor": "#e7e7e9",
       "borderRadius": 4,
       "borderWidth": 1,
       "overflow": "hidden",
@@ -69,7 +69,7 @@ exports[`GroupBox renders with default styles 1`] = `
 <View
   style={
     Object {
-      "borderColor": "#264ae5",
+      "borderColor": "#e7e7e9",
       "borderRadius": 4,
       "borderWidth": 1,
       "overflow": "hidden",
@@ -91,7 +91,7 @@ exports[`GroupBox renders with default styles 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#264ae5",
+        "backgroundColor": "#e7e7e9",
         "flex": 1,
         "flexDirection": "row",
         "paddingHorizontal": 12,
@@ -112,12 +112,7 @@ exports[`GroupBox renders with default styles 1`] = `
       </Text>
     </View>
     <View
-      style={
-        Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-        }
-      }
+      style={Object {}}
     >
       <View
         testId="icon"
@@ -152,7 +147,7 @@ exports[`GroupBox renders without content 1`] = `
 <View
   style={
     Object {
-      "borderColor": "#264ae5",
+      "borderColor": "#e7e7e9",
       "borderRadius": 4,
       "borderWidth": 1,
       "overflow": "hidden",
@@ -174,7 +169,7 @@ exports[`GroupBox renders without content 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#264ae5",
+        "backgroundColor": "#e7e7e9",
         "flex": 1,
         "flexDirection": "row",
         "paddingHorizontal": 12,
@@ -195,12 +190,7 @@ exports[`GroupBox renders without content 1`] = `
       </Text>
     </View>
     <View
-      style={
-        Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-        }
-      }
+      style={Object {}}
     >
       <View
         testId="icon"
@@ -231,7 +221,7 @@ exports[`GroupBox renders without header 1`] = `
 <View
   style={
     Object {
-      "borderColor": "#264ae5",
+      "borderColor": "#e7e7e9",
       "borderRadius": 4,
       "borderWidth": 1,
       "overflow": "hidden",
@@ -266,7 +256,7 @@ exports[`GroupBox renders without header content 1`] = `
 <View
   style={
     Object {
-      "borderColor": "#264ae5",
+      "borderColor": "#e7e7e9",
       "borderRadius": 4,
       "borderWidth": 1,
       "overflow": "hidden",
@@ -288,7 +278,7 @@ exports[`GroupBox renders without header content 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#264ae5",
+        "backgroundColor": "#e7e7e9",
         "flex": 1,
         "flexDirection": "row",
         "paddingHorizontal": 12,
@@ -305,12 +295,7 @@ exports[`GroupBox renders without header content 1`] = `
       }
     />
     <View
-      style={
-        Object {
-          "alignItems": "center",
-          "justifyContent": "center",
-        }
-      }
+      style={Object {}}
     >
       <View
         testId="icon"
