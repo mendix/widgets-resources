@@ -1,6 +1,6 @@
 ## Checklist
 - Code is compiling ✅ ❌
-- Code is prettyfied ✅ ❌
+- Code is prettified ✅ ❌
 - Contains unit tests ✅ ❌
 - Contains breaking changes ✅ ❌
 
