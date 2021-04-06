@@ -147,7 +147,9 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         const constraint = entityConstraint ? entityConstraint.replace(/\[%CurrentObject%]/g, contextGuid) : "";
 
         window.mx.data.get({
-            callback: mxObjects => this.setImagesFromMxObjects(mxObjects),
+            callback: mxObjects => {
+                this.setImagesFromMxObjects(mxObjects);
+            },
             error: error =>
                 this.setState({
                     alertMessage: `An error occurred while retrieving items via XPath (${entityConstraint}): ${error}`,
@@ -160,7 +162,9 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
     private fetchImagesByMicroflow(microflow: string, mxObject?: mendix.lib.MxObject): void {
         if (microflow) {
             window.mx.ui.action(microflow, {
-                callback: (mxObjects: mendix.lib.MxObject[]) => this.setImagesFromMxObjects(mxObjects),
+                callback: (mxObjects: mendix.lib.MxObject[]) => {
+                    this.setImagesFromMxObjects(mxObjects);
+                },
                 error: error =>
                     this.setState({
                         alertMessage: `An error occurred while retrieving images via the microflow ${microflow}:
@@ -175,35 +179,43 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
         }
     }
 
-    private setImagesFromMxObjects(mxObjects: mendix.lib.MxObject[]): void {
-        mxObjects = mxObjects || [];
-        const imagesPromises = mxObjects.map(
-            mxObject =>
-                new Promise((resolve, reject) => {
-                    if (this.props.urlAttribute) {
-                        resolve(this.getImageProps(mxObject, mxObject.get(this.props.urlAttribute) as string));
-                    } else {
-                        const docURL = mx.data.getDocumentUrl(
-                            mxObject.getGuid(),
-                            mxObject.get("changedDate") as number
-                        );
-                        mx.data.getImageUrl(
-                            docURL,
-                            objectUrl => {
-                                resolve(this.getImageProps(mxObject, objectUrl));
-                            },
-                            error => {
-                                // eslint-disable-next-line prefer-promise-reject-errors
-                                reject(`Error in carousel while retrieving image url: ${error.message}`);
-                            }
-                        );
-                    }
-                })
-        );
+    private extractAttributeValue = <WidgetPropertyTypes>(
+        mxObject: mendix.lib.MxObject,
+        attributePath: string
+    ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
+        if (!attributePath) {
+            return Promise.resolve(undefined);
+        }
 
-        Promise.all(imagesPromises).then((images: Image[]) => {
-            this.setState({ images, isLoading: false });
+        return new Promise(resolve => {
+            mxObject.fetch(attributePath, (attributeValue: any): void => resolve(attributeValue));
         });
+    };
+
+    private async setImagesFromMxObjects(mxObjects: mendix.lib.MxObject[]): Promise<void> {
+        mxObjects = mxObjects || [];
+        const imagesPromises = mxObjects.map(async mxObject => {
+            if (this.props.urlAttribute) {
+                const urlAttributeValue = await this.extractAttributeValue<string>(mxObject, this.props.urlAttribute);
+
+                return this.getImageProps(mxObject, urlAttributeValue || "");
+            } else {
+                const docURL = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
+                mx.data.getImageUrl(
+                    docURL,
+                    objectUrl => {
+                        return this.getImageProps(mxObject, objectUrl);
+                    },
+                    error => {
+                        // eslint-disable-next-line prefer-promise-reject-errors
+                        throw new Error(`Error in carousel while retrieving image url: ${error.message}`);
+                    }
+                );
+            }
+        });
+
+        const images: Image[] = await Promise.all(imagesPromises);
+        this.setState({ images, isLoading: false });
     }
 
     private getImageProps(mxObject: mendix.lib.MxObject, url: string): any {
