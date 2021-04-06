@@ -1,11 +1,11 @@
 ## Checklist
 - Code is compiling ✅ ❌
 - Code is prettyfied ✅ ❌
-- Constains unit tests ✅ ❌
+- Contains unit tests ✅ ❌
 - Contains breaking changes ✅ ❌
 
 #### Web specific
-- Constains e2e tests ✅ ❌
+- Contains e2e tests ✅ ❌
 - Is accessible ✅ ❌
 - Compatible with Studio ✅ ❌
 - Cross-browser compatible ✅ ❌
