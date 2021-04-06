@@ -1,6 +1,5 @@
 import { createElement, FunctionComponent, KeyboardEvent, MouseEvent, useCallback } from "react";
 import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
-import { ValueStatus } from "mendix";
 import { Switch as SwitchComponent } from "./components/Switch";
 
 import { SwitchContainerProps } from "../typings/SwitchProps";
@@ -12,9 +11,7 @@ export const Switch: FunctionComponent<SwitchContainerProps> = props => {
 
     const invokeActionAndMaybeToggleValue = useCallback(
         function () {
-            if (props.booleanAttribute.status === ValueStatus.Available) {
-                props.booleanAttribute.setValue(!props.booleanAttribute.value);
-            }
+            props.booleanAttribute.setValue(!props.booleanAttribute.value);
             executeAction(props.action);
         },
         [props.action, props.booleanAttribute]

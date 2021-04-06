@@ -223,54 +223,6 @@ describe("Switch", () => {
                 expect(props.booleanAttribute.setValue).not.toHaveBeenCalled();
             });
         });
-
-        describe("when value is loading", () => {
-            it("should not toggle the attributes value", () => {
-                const props = createProps({
-                    booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).isLoading().build()
-                });
-                createAndFindElements(props);
-
-                switchButton.simulate("click");
-
-                expect(props.booleanAttribute.setValue).not.toHaveBeenCalled();
-            });
-
-            it("should not toggle the attributes value on space keydown", () => {
-                const props = createProps({
-                    booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).isLoading().build()
-                });
-                createAndFindElements(props);
-
-                switchButton.simulate("keydown", { key: " " });
-
-                expect(props.booleanAttribute.setValue).not.toHaveBeenCalled();
-            });
-        });
-
-        describe("when value is unavailable", () => {
-            it("should not toggle the attributes value", () => {
-                const props = createProps({
-                    booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).isUnavailable().build()
-                });
-                createAndFindElements(props);
-
-                switchButton.simulate("click");
-
-                expect(props.booleanAttribute.setValue).not.toHaveBeenCalled();
-            });
-
-            it("should not toggle the attributes value on space keydown", () => {
-                const props = createProps({
-                    booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).isUnavailable().build()
-                });
-                createAndFindElements(props);
-
-                switchButton.simulate("keydown", { key: " " });
-
-                expect(props.booleanAttribute.setValue).not.toHaveBeenCalled();
-            });
-        });
     });
 
     describe("when readonly", () => {
