@@ -1,6 +1,7 @@
 import { Component, createElement, ReactNode } from "react";
 
 import { BootstrapStyle, RangeSlider } from "./RangeSlider";
+import Big from "big.js";
 
 interface WrapperProps {
     class?: string;
@@ -44,7 +45,7 @@ interface RangeSliderContainerState {
 
 export default class RangeSliderContainer extends Component<RangeSliderContainerProps, RangeSliderContainerState> {
     private subscriptionHandles: number[];
-    private subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => void;
+    private readonly subscriptionCallback: (mxObject: mendix.lib.MxObject) => () => Promise<void>;
     private selfUpdate = false;
     private previousUpperBoundValue?: number;
     private previousLowerBoundValue?: number;
@@ -52,15 +53,20 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
     constructor(props: RangeSliderContainerProps) {
         super(props);
 
-        this.state = this.updateValues(props.mxObject);
+        this.state = {
+            maximumValue: props.staticMaximumValue,
+            minimumValue: props.staticMinimumValue,
+            stepValue: props.stepValue
+        };
+        this.updateState(this.props.mxObject); // Deliberately not awaiting here
         this.handleChangeAction = this.handleChangeAction.bind(this);
         this.onUpdate = this.onUpdate.bind(this);
-        this.subscriptionCallback = mxObject => () => {
+        this.subscriptionCallback = mxObject => async () => {
             if (this.selfUpdate) {
                 this.selfUpdate = false;
                 return;
             }
-            this.setState(this.updateValues(mxObject));
+            this.setState(await this.updateValues(mxObject));
         };
         this.subscriptionHandles = [];
         this.resetSubscriptions(props.mxObject);
@@ -94,13 +100,18 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         });
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: RangeSliderContainerProps): void {
+    // Note that React will not await this function to call the render function
+    async UNSAFE_componentWillReceiveProps(newProps: RangeSliderContainerProps): Promise<void> {
         this.resetSubscriptions(newProps.mxObject);
-        this.setState(this.updateValues(newProps.mxObject));
+        await this.updateState(newProps.mxObject);
     }
 
     componentWillUnmount(): void {
         this.subscriptionHandles.forEach(window.mx.data.unsubscribe);
+    }
+
+    private async updateState(mxObject?: mendix.lib.MxObject): Promise<void> {
+        this.setState(await this.updateValues(mxObject));
     }
 
     private validateSettings(state: RangeSliderContainerState): string {
@@ -190,18 +201,18 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         );
     }
 
-    private updateValues(mxObject?: mendix.lib.MxObject): RangeSliderContainerState {
+    private async updateValues(mxObject?: mendix.lib.MxObject): Promise<RangeSliderContainerState> {
         const { lowerBoundAttribute, maxAttribute, minAttribute, upperBoundAttribute } = this.props;
-        const lowerBoundValue = this.getValue(lowerBoundAttribute, mxObject);
-        const upperBoundValue = this.getValue(upperBoundAttribute, mxObject);
+        const lowerBoundValue = await this.getNumericValue(lowerBoundAttribute, mxObject);
+        const upperBoundValue = await this.getNumericValue(upperBoundAttribute, mxObject);
         this.previousLowerBoundValue = lowerBoundValue;
         this.previousUpperBoundValue = upperBoundValue;
 
         return {
             lowerBoundValue,
-            maximumValue: this.getValue(maxAttribute, mxObject, this.props.staticMaximumValue),
-            minimumValue: this.getValue(minAttribute, mxObject, this.props.staticMinimumValue),
-            stepValue: this.getValue(this.props.stepAttribute, mxObject, this.props.stepValue),
+            maximumValue: await this.getNumericValue(maxAttribute, mxObject, this.props.staticMaximumValue),
+            minimumValue: await this.getNumericValue(minAttribute, mxObject, this.props.staticMinimumValue),
+            stepValue: await this.getNumericValue(this.props.stepAttribute, mxObject, this.props.stepValue),
             upperBoundValue
         };
     }
@@ -303,9 +314,30 @@ export default class RangeSliderContainer extends Component<RangeSliderContainer
         return this.props.mxObject ? this.props.mxObject.getAttributeType(attribute) === "Decimal" : false;
     }
 
-    private getValue(attributeName: string, mxObject?: mendix.lib.MxObject, defaultValue?: number): number | undefined {
-        if (mxObject && attributeName && mxObject.get(attributeName) !== "") {
-            return parseFloat(mxObject.get(attributeName) as string);
+    private extractAttributeValue = async <WidgetPropertyTypes>(
+        mxObject: mendix.lib.MxObject,
+        attributePath: string
+    ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
+        if (!attributePath) {
+            return Promise.resolve(undefined);
+        }
+
+        return new Promise(resolve => {
+            mxObject.fetch(attributePath, (attributeValue: any): void => resolve(attributeValue));
+        });
+    };
+
+    private async getNumericValue(
+        attributeName: string,
+        mxObject?: mendix.lib.MxObject,
+        defaultValue?: number
+    ): Promise<number | undefined> {
+        if (mxObject) {
+            const attributeValue = await this.extractAttributeValue<Big>(mxObject, attributeName);
+
+            if (attributeValue) {
+                return Number(attributeValue.toString());
+            }
         }
 
         return defaultValue;
