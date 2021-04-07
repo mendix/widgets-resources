@@ -51,7 +51,7 @@ $default-ios-color: rgb(100, 189, 99);
     }
 }
 
-// maintained for backwards compatibility prior to Switch 2.0.0.
+// maintained for backwards compatibility prior to Switch 3.0.0.
 @mixin ios {
     .widget-switch-btn-wrapper {
         &.checked {
@@ -86,7 +86,7 @@ $default-ios-color: rgb(100, 189, 99);
     }
 }
 
-// maintained for backwards compatibility prior to Switch 2.0.0.
+// maintained for backwards compatibility prior to Switch 3.0.0.
 @mixin android {
     .widget-switch-btn-wrapper {
         &.checked {
@@ -168,7 +168,7 @@ $default-ios-color: rgb(100, 189, 99);
     @include style("android", "warning", $brand-warning);
     @include style("android", "danger", $brand-danger);
 
-    // below is maintained for backwards compatibility prior to Switch 2.0.0.
+    // below is maintained for backwards compatibility prior to Switch 3.0.0.
     div {
         &.widget-switch {
             &.iOS {
