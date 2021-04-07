@@ -20,8 +20,8 @@
             </propertyGroup>
             <propertyGroup caption="Actions">
                 <property key="action" type="action">
-                    <caption>On click action</caption>
-                    <description>Action to be performed when button is clicked</description>
+                    <caption>On change</caption>
+                    <description>Action to be performed when switch is toggled</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Style">
