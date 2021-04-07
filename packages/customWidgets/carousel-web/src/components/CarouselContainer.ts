@@ -194,27 +194,29 @@ export default class CarouselContainer extends Component<CarouselContainerProps,
 
     private async setImagesFromMxObjects(mxObjects: mendix.lib.MxObject[]): Promise<void> {
         mxObjects = mxObjects || [];
-        const imagesPromises = mxObjects.map(async mxObject => {
+        const imagePromises = mxObjects.map(async mxObject => {
             if (this.props.urlAttribute) {
                 const urlAttributeValue = await this.extractAttributeValue<string>(mxObject, this.props.urlAttribute);
 
                 return this.getImageProps(mxObject, urlAttributeValue || "");
             } else {
                 const docURL = mx.data.getDocumentUrl(mxObject.getGuid(), mxObject.get("changedDate") as number);
-                mx.data.getImageUrl(
-                    docURL,
-                    objectUrl => {
-                        return this.getImageProps(mxObject, objectUrl);
-                    },
-                    error => {
-                        // eslint-disable-next-line prefer-promise-reject-errors
-                        throw new Error(`Error in carousel while retrieving image url: ${error.message}`);
-                    }
-                );
+                return new Promise((resolve, reject) => {
+                    mx.data.getImageUrl(
+                        docURL,
+                        objectUrl => {
+                            resolve(this.getImageProps(mxObject, objectUrl));
+                        },
+                        error => {
+                            // eslint-disable-next-line prefer-promise-reject-errors
+                            reject(`Error in carousel while retrieving image url: ${error.message}`);
+                        }
+                    );
+                });
             }
         });
 
-        const images: Image[] = await Promise.all(imagesPromises);
+        const images: Image[] = await Promise.all(imagePromises);
         this.setState({ images, isLoading: false });
     }
 
