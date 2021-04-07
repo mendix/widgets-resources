@@ -157,13 +157,13 @@ $default-ios-color: rgb(100, 189, 99);
     }
 
     @include style("iOS", "primary", $brand-primary);
-    // NOTE: no secondary because widget never had default design-property
+    @include style("iOS", "secondary", $brand-default);
     @include style("iOS", "success", $brand-success);
     @include style("iOS", "warning", $brand-warning);
     @include style("iOS", "danger", $brand-danger);
 
     @include style("android", "primary", $brand-primary);
-    // NOTE: no secondary because widget never had default design-property
+    @include style("android", "secondary", $brand-default);
     @include style("android", "success", $brand-success);
     @include style("android", "warning", $brand-warning);
     @include style("android", "danger", $brand-danger);

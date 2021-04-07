@@ -2,6 +2,7 @@
 @import "variables";
 
 $brand-primary: #264ae5;
+$brand-secondary: #e7e7e9;
 $brand-success: #3cb33d;
 $brand-warning: #eca51c;
 $brand-danger: #e33f4e;
@@ -10,12 +11,14 @@ $brand-danger: #e33f4e;
 
 @include style("iOS", "default", $default-ios-color);
 @include style("iOS", "primary", $brand-primary);
+@include style("iOS", "secondary", $brand-secondary);
 @include style("iOS", "success", $brand-success);
 @include style("iOS", "warning", $brand-warning);
 @include style("iOS", "danger", $brand-danger);
 
 @include style("android", "default", $default-android-color);
 @include style("android", "primary", $brand-primary);
+@include style("android", "secondary", $brand-secondary);
 @include style("android", "success", $brand-success);
 @include style("android", "warning", $brand-warning);
 @include style("android", "danger", $brand-danger);
