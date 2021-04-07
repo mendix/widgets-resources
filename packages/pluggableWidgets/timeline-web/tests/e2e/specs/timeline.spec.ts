@@ -1,6 +1,7 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
 
 describe("timeline-web", () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
     beforeAll(() => {
         page.open();
     });
