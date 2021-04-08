@@ -42,6 +42,9 @@ $topbar-bg: #020557;
 $topbar-minimalheight: 48px;
 $topbar-border-color: $border-color-default;
 
+// Sidebar
+$sidebar-bg: #24276c;
+
 // Topbar mobile
 $m-header-height: 45px;
 $m-header-bg: $topbar-bg;
@@ -129,13 +132,13 @@ $navigation-sub-color-hover: #fff;
 $navigation-sub-color-active: #fff;
 
 // Navigation Sidebar
-$navsidebar-bg: #24276c;
-$navsidebar-bg-hover: #020557;
-$navsidebar-bg-active: #020557;
+$navsidebar-bg: $sidebar-bg;
+$navsidebar-bg-hover: darken($navsidebar-bg, 10%);
+$navsidebar-bg-active: darken($navsidebar-bg, 10%);
 
-$navsidebar-sub-bg: #020557;
-$navsidebar-sub-bg-hover: #24276c;
-$navsidebar-sub-bg-active: #24276c;
+$navsidebar-sub-bg: $navsidebar-bg-hover;
+$navsidebar-sub-bg-hover: $navsidebar-bg;
+$navsidebar-sub-bg-active: $navsidebar-bg;
 
 $navsidebar-border-color: $navsidebar-bg-hover;
 
