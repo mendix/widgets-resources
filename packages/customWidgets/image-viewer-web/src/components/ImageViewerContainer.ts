@@ -101,6 +101,33 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         this.subscriptionHandles = [];
 
         if (mxObject) {
+            const attributePathValues = this.props.dynamicUrlAttribute.split("/");
+
+            if (attributePathValues.length > 2) {
+                const [referenceAttribute, , attr] = attributePathValues;
+
+                this.subscriptionHandles.push(
+                    window.mx.data.subscribe({
+                        guid: mxObject.get(referenceAttribute) as string,
+                        attr,
+                        callback: this.attributeCallback(mxObject)
+                    })
+                );
+            }
+            this.subscriptionHandles.push(
+                window.mx.data.subscribe({
+                    guid: mxObject.getGuid(),
+                    attr: attributePathValues[0],
+                    callback: () => {
+                        this.attributeCallback(mxObject)();
+
+                        if (attributePathValues.length > 2) {
+                            this.resetSubscriptions(mxObject);
+                        }
+                    }
+                })
+            );
+
             this.subscriptionHandles.push(
                 window.mx.data.subscribe({
                     attr: this.props.dynamicUrlAttribute,
