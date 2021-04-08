@@ -1,8 +1,8 @@
 ## Checklist
-- Code is compiling ✅ ❌
-- Code is prettified ✅ ❌
 - Contains unit tests ✅ ❌
 - Contains breaking changes ✅ ❌
+- Contains Atlas changes ✅ ❌
+- Compatible with: MX 7️⃣, 8️⃣, 9️⃣
 
 #### Web specific
 - Contains e2e tests ✅ ❌
@@ -19,7 +19,7 @@
 - Comply with designs ✅ ❌
 - Comply with PM's requirements ✅ ❌
 
-**_Please remove unnecessary emojis and sections and this comment before proceed_**
+**_Please remove unnecessary emojis and sections and this comment before proceeding_**
 
 ## This PR contains
 - [ ] Bug fix
@@ -29,13 +29,13 @@
 - [ ] Other (describe)
 
 ## What is the purpose of this PR?
-_Please add your explanation about the purpose of the PR_
+_..._
 
 ## Relevant changes
 _Please add a high level explanation of what was changed and how the initial problem was solved_
 
-## How to test?
-_Please add valid information on how to test and where this should be tested_
+## What should be covered while testing?
+_..._
 
 ## Extra comments (optional)
-_Please add extra comments or delete the session if not required_
+_Please add extra comments or delete the section if not required_
