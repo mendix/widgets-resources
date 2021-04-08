@@ -110,7 +110,6 @@ export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps
     return {
         type: "Container",
         padding: 8,
-        // columnSize: "grow",
         children: [
             {
                 type: "Container",
@@ -134,13 +133,14 @@ export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps
                         children: [...buildMenuItems(values)]
                     } as ContainerProps,
                     {
+                        // To create some space on the right so the menu items don't take full width.
                         type: "Container",
                         children: []
                     } as ContainerProps
                 ]
             } as RowLayoutProps
         ]
-    } as ContainerProps | RowLayoutProps;
+    } as ContainerProps;
 
     function buildMenuItems(values: PopupMenuPreviewProps): StructurePreviewProps[] {
         return values.basicItems.map(
