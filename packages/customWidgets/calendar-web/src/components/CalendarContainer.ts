@@ -92,6 +92,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
     }
 
+    // Note that React will not await this function to call the render function
     async UNSAFE_componentWillReceiveProps(nextProps: Container.CalendarContainerProps): Promise<void> {
         if (nextProps.mxObject) {
             if (!this.state.alertMessage) {
@@ -107,22 +108,29 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return !this.props.mxObject || !this.props.editable || this.props.readOnly;
     }
 
-    private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
-        if (this.props.startDateAttribute && mxObject) {
-            return new Promise(resolve => {
-                const processStartDateAttributeValue = (startDateAttributeValue: number | ""): void => {
-                    if (startDateAttributeValue) {
-                        resolve(new Date(startDateAttributeValue));
-                    }
-
-                    resolve(new Date());
-                };
-
-                mxObject.fetch(this.props.startDateAttribute, processStartDateAttributeValue);
-            });
+    private extractAttributeValue = async <WidgetPropertyTypes>(
+        mxObject: mendix.lib.MxObject,
+        attributePath: string
+    ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
+        if (!attributePath) {
+            return Promise.resolve(undefined);
         }
 
-        return Promise.resolve(new Date());
+        return new Promise(resolve => {
+            mxObject.fetch(attributePath, (attributeValue: any): void => resolve(attributeValue));
+        });
+    };
+
+    private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
+        if (mxObject) {
+            const startDateAttributeValue = await this.extractAttributeValue<number>(
+                mxObject,
+                this.props.startDateAttribute
+            );
+            return startDateAttributeValue ? new Date(startDateAttributeValue) : new Date();
+        }
+
+        return new Date();
     };
 
     private loadEvents = async (mxObject: mendix.lib.MxObject): Promise<void> => {
@@ -136,7 +144,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         if (this.props.dataSource === "context" && mxObject) {
             this.setCalendarEvents([mxObject]);
         } else {
-            fetchData({
+            const mxEventObjects = await fetchData({
                 guid,
                 type: this.props.dataSource,
                 entity: this.props.eventEntity,
@@ -144,24 +152,26 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 microflow: this.props.dataSourceMicroflow,
                 mxform: this.props.mxform,
                 nanoflow: this.props.dataSourceNanoflow
-            }).then(mxEventObjects => {
-                if (this.destroyed) {
-                    return;
-                }
-                mxEventObjects.forEach(
-                    mxEventObject =>
-                        (this.subscriptionEventHandles = [
-                            ...this.subscriptionEventHandles,
-                            ...this.subscribeToEventAttributes(mxEventObject)
-                        ])
-                );
-                this.setCalendarEvents(mxEventObjects);
-
-                if (this.progressHandle) {
-                    mx.ui.hideProgress(this.progressHandle);
-                    this.progressHandle = undefined;
-                }
             });
+
+            if (this.destroyed) {
+                return;
+            }
+
+            mxEventObjects.forEach(
+                mxEventObject =>
+                    (this.subscriptionEventHandles = [
+                        ...this.subscriptionEventHandles,
+                        ...this.subscribeToEventAttributes(mxEventObject)
+                    ])
+            );
+
+            this.setCalendarEvents(mxEventObjects);
+
+            if (this.progressHandle) {
+                mx.ui.hideProgress(this.progressHandle);
+                this.progressHandle = undefined;
+            }
         }
     };
 
@@ -235,13 +245,33 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.subscriptionContextHandles = [];
 
         if (mxObject) {
+            const attributePathValues = this.props.startDateAttribute.split("/");
+
+            if (attributePathValues.length > 2) {
+                const [referenceAttribute, , attr] = attributePathValues;
+
+                this.subscriptionContextHandles.push(
+                    window.mx.data.subscribe({
+                        guid: mxObject.get(referenceAttribute) as string,
+                        attr,
+                        callback: () => this.loadEvents(mxObject)
+                    })
+                );
+            }
             this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
-                    attr: this.props.startDateAttribute,
-                    callback: () => this.loadEvents(mxObject)
+                    attr: attributePathValues[0],
+                    callback: () => {
+                        this.loadEvents(mxObject);
+
+                        if (attributePathValues.length > 2) {
+                            this.resetSubscriptions(mxObject);
+                        }
+                    }
                 })
             );
+
             this.subscriptionContextHandles.push(
                 window.mx.data.subscribe({
                     entity: this.props.eventEntity,
