@@ -3,6 +3,7 @@ import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridPro
 
 import { Table } from "./components/Table";
 import { parseStyle } from "@mendix/piw-utils-internal";
+import { Selectable } from "mendix/preview/Selectable";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
     const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));
@@ -28,6 +29,22 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                   }
               ];
 
+    const selectableWrapperRenderer = useCallback(
+        (columnIndex: number, header: ReactElement) => {
+            const column = columns[columnIndex];
+            return (
+                <Selectable
+                    object={column}
+                    caption={column.header.trim().length > 0 ? column.header : "[Empty caption]"}
+                    key={`selectable_column_${columnIndex}`}
+                >
+                    {header}
+                </Selectable>
+            );
+        },
+        [columns]
+    );
+
     return (
         <Table
             className={props.class}
@@ -35,9 +52,10 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 (renderWrapper, _, columnIndex) => {
                     const column = columns[columnIndex];
                     const className = column.alignment ? `align-column-${column.alignment}` : "";
+                    let content;
                     switch (column.showContentAs) {
                         case "attribute":
-                            return renderWrapper(
+                            content = renderWrapper(
                                 <span className="td-text">
                                     {"["}
                                     {column.attribute.length > 0 ? column.attribute : "No attribute selected"}
@@ -45,13 +63,19 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                                 </span>,
                                 className
                             );
+                            break;
                         case "dynamicText":
-                            return renderWrapper(<span className="td-text">{column.dynamicText}</span>, className);
+                            content = renderWrapper(<span className="td-text">{column.dynamicText}</span>, className);
+                            break;
                         case "customContent":
-                            return <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>;
+                            content = (
+                                <column.content.renderer>{renderWrapper(null, className)}</column.content.renderer>
+                            );
                     }
+
+                    return selectableWrapperRenderer(columnIndex, content);
                 },
-                [props.columns]
+                [columns]
             )}
             columns={columns}
             columnsDraggable={props.columnsDraggable}
@@ -62,7 +86,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             data={data}
             emptyPlaceholderRenderer={useCallback(
                 renderWrapper => (
-                    <props.emptyPlaceholder.renderer>{renderWrapper(null)}</props.emptyPlaceholder.renderer>
+                    <props.emptyPlaceholder.renderer caption="Empty list message: Place widgets here">
+                        {renderWrapper(null)}
+                    </props.emptyPlaceholder.renderer>
                 ),
                 [props.emptyPlaceholder]
             )}
@@ -70,14 +96,17 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 (renderWrapper, columnIndex) => {
                     const column = columns[columnIndex];
                     return column.filter ? (
-                        <column.filter.renderer>{renderWrapper(null)}</column.filter.renderer>
+                        <column.filter.renderer caption="Place filter widget here">
+                            {renderWrapper(null)}
+                        </column.filter.renderer>
                     ) : (
                         renderWrapper(null)
                     );
                 },
-                [props.columns]
+                [columns]
             )}
             hasMoreItems={false}
+            headerWrapperRenderer={selectableWrapperRenderer}
             numberOfItems={5}
             page={0}
             pageSize={props.pageSize ?? 5}

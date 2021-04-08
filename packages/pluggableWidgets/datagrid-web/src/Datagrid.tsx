@@ -98,6 +98,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 [props.columns, props.datasource]
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
+            headerWrapperRenderer={useCallback((_columnIndex: number, header: ReactElement) => header, [])}
             numberOfItems={props.datasource.totalCount}
             onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             page={currentPage}
