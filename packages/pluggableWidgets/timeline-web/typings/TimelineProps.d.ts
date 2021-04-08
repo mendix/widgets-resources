@@ -54,10 +54,10 @@ export interface TimelinePreviewProps {
     groupByDayOptions: GroupByDayOptionsEnum;
     groupByMonthOptions: GroupByMonthOptionsEnum;
     ungroupedEventsPosition: UngroupedEventsPositionEnum;
-    customIcon: { widgetCount: number; renderer: ComponentType };
-    customGroupHeader: { widgetCount: number; renderer: ComponentType };
-    customTitle: { widgetCount: number; renderer: ComponentType };
-    customEventDateTime: { widgetCount: number; renderer: ComponentType };
-    customDescription: { widgetCount: number; renderer: ComponentType };
+    customIcon: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    customGroupHeader: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    customTitle: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    customEventDateTime: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    customDescription: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     onClick: {} | null;
 }
