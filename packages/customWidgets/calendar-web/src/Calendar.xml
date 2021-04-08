@@ -83,7 +83,7 @@
             <category>Data source</category>
             <description>For data source microflow, enable to retrieve a sub set of large data set based on view start and end attribute</description>
         </property>
-        <property key="viewStartAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
+        <property key="viewStartAttribute" type="attribute" required="false" allowNonPersistableEntities="true">
             <caption>View start attribute</caption>
             <category>Data source</category>
             <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
@@ -91,7 +91,7 @@
                 <attributeType name="DateTime"/>
             </attributeTypes>
         </property>
-        <property key="viewEndAttribute" type="attribute" isPath="optional" pathType="reference" required="false" allowNonPersistableEntities="true">
+        <property key="viewEndAttribute" type="attribute" required="false" allowNonPersistableEntities="true">
             <caption>View end attribute</caption>
             <category>Data source</category>
             <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
