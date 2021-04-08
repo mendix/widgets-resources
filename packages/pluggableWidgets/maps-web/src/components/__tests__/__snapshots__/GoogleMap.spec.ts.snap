@@ -13,66 +13,54 @@ exports[`Google maps renders a map with current location 1`] = `
   <div
     className="widget-google-maps-wrapper"
   >
-    <LoadScript
-      googleMapsApiKey=""
-      id="_com.mendix.widget.custom.Maps.Maps"
-      loadingElement={
-        <div
-          className="spinner"
-        />
+    <GoogleMap
+      center={
+        Object {
+          "lat": 51.906688,
+          "lng": 4.48837,
+        }
       }
-      onError={[Function]}
-      version="weekly"
-    >
-      <GoogleMap
-        center={
-          Object {
-            "lat": 51.906688,
-            "lng": 4.48837,
-          }
-        }
-        mapContainerClassName="widget-google-maps"
-        onCenterChanged={[Function]}
-        onLoad={[Function]}
-        options={
-          Object {
-            "draggable": true,
-            "fullscreenControl": false,
-            "mapTypeControl": false,
-            "maxZoom": 20,
-            "minZoom": 1,
-            "rotateControl": false,
-            "scrollwheel": true,
-            "streetViewControl": false,
-            "styles": Array [
-              Object {
-                "elementType": "labels",
-                "featureType": "poi",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
-              },
-            ],
-            "zoomControl": true,
-          }
-        }
-        zoom={10}
-      >
-        <GoogleMapsMarker
-          key="marker_0"
-          marker={
+      mapContainerClassName="widget-google-maps"
+      onCenterChanged={[Function]}
+      onLoad={[Function]}
+      options={
+        Object {
+          "draggable": true,
+          "fullscreenControl": false,
+          "mapTypeControl": false,
+          "maxZoom": 20,
+          "minZoom": 1,
+          "rotateControl": false,
+          "scrollwheel": true,
+          "streetViewControl": false,
+          "styles": Array [
             Object {
-              "latitude": 51.906688,
-              "longitude": 4.48837,
-              "url": "image:url",
-            }
+              "elementType": "labels",
+              "featureType": "poi",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ],
+          "zoomControl": true,
+        }
+      }
+      zoom={10}
+    >
+      <GoogleMapsMarker
+        key="marker_0"
+        marker={
+          Object {
+            "latitude": 51.906688,
+            "longitude": 4.48837,
+            "url": "image:url",
           }
-          setSelectedMarker={[Function]}
-        />
-      </GoogleMap>
-    </LoadScript>
+        }
+        setSelectedMarker={[Function]}
+      />
+    </GoogleMap>
   </div>
 </div>
 `;
@@ -90,79 +78,67 @@ exports[`Google maps renders a map with markers 1`] = `
   <div
     className="widget-google-maps-wrapper"
   >
-    <LoadScript
-      googleMapsApiKey=""
-      id="_com.mendix.widget.custom.Maps.Maps"
-      loadingElement={
-        <div
-          className="spinner"
-        />
+    <GoogleMap
+      center={
+        Object {
+          "lat": 51.906688,
+          "lng": 4.48837,
+        }
       }
-      onError={[Function]}
-      version="weekly"
+      mapContainerClassName="widget-google-maps"
+      onCenterChanged={[Function]}
+      onLoad={[Function]}
+      options={
+        Object {
+          "draggable": true,
+          "fullscreenControl": false,
+          "mapTypeControl": false,
+          "maxZoom": 20,
+          "minZoom": 1,
+          "rotateControl": false,
+          "scrollwheel": true,
+          "streetViewControl": false,
+          "styles": Array [
+            Object {
+              "elementType": "labels",
+              "featureType": "poi",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ],
+          "zoomControl": true,
+        }
+      }
+      zoom={10}
     >
-      <GoogleMap
-        center={
+      <GoogleMapsMarker
+        key="marker_0"
+        marker={
           Object {
-            "lat": 51.906688,
-            "lng": 4.48837,
+            "latitude": 51.906688,
+            "longitude": 4.48837,
+            "title": "Mendix HQ",
+            "url": "image:url",
           }
         }
-        mapContainerClassName="widget-google-maps"
-        onCenterChanged={[Function]}
-        onLoad={[Function]}
-        options={
+        setSelectedMarker={[Function]}
+      />
+      <GoogleMapsMarker
+        key="marker_1"
+        marker={
           Object {
-            "draggable": true,
-            "fullscreenControl": false,
-            "mapTypeControl": false,
-            "maxZoom": 20,
-            "minZoom": 1,
-            "rotateControl": false,
-            "scrollwheel": true,
-            "streetViewControl": false,
-            "styles": Array [
-              Object {
-                "elementType": "labels",
-                "featureType": "poi",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
-              },
-            ],
-            "zoomControl": true,
+            "latitude": 51.922823,
+            "longitude": 4.479632,
+            "title": "Gementee Rotterdam",
+            "url": "image:url",
           }
         }
-        zoom={10}
-      >
-        <GoogleMapsMarker
-          key="marker_0"
-          marker={
-            Object {
-              "latitude": 51.906688,
-              "longitude": 4.48837,
-              "title": "Mendix HQ",
-              "url": "image:url",
-            }
-          }
-          setSelectedMarker={[Function]}
-        />
-        <GoogleMapsMarker
-          key="marker_1"
-          marker={
-            Object {
-              "latitude": 51.922823,
-              "longitude": 4.479632,
-              "title": "Gementee Rotterdam",
-              "url": "image:url",
-            }
-          }
-          setSelectedMarker={[Function]}
-        />
-      </GoogleMap>
-    </LoadScript>
+        setSelectedMarker={[Function]}
+      />
+    </GoogleMap>
   </div>
 </div>
 `;
@@ -180,54 +156,42 @@ exports[`Google maps renders a map with percentage of parent units renders the s
   <div
     className="widget-google-maps-wrapper"
   >
-    <LoadScript
-      googleMapsApiKey=""
-      id="_com.mendix.widget.custom.Maps.Maps"
-      loadingElement={
-        <div
-          className="spinner"
-        />
+    <GoogleMap
+      center={
+        Object {
+          "lat": 51.906688,
+          "lng": 4.48837,
+        }
       }
-      onError={[Function]}
-      version="weekly"
-    >
-      <GoogleMap
-        center={
-          Object {
-            "lat": 51.906688,
-            "lng": 4.48837,
-          }
+      mapContainerClassName="widget-google-maps"
+      onCenterChanged={[Function]}
+      onLoad={[Function]}
+      options={
+        Object {
+          "draggable": true,
+          "fullscreenControl": false,
+          "mapTypeControl": false,
+          "maxZoom": 20,
+          "minZoom": 1,
+          "rotateControl": false,
+          "scrollwheel": true,
+          "streetViewControl": false,
+          "styles": Array [
+            Object {
+              "elementType": "labels",
+              "featureType": "poi",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ],
+          "zoomControl": true,
         }
-        mapContainerClassName="widget-google-maps"
-        onCenterChanged={[Function]}
-        onLoad={[Function]}
-        options={
-          Object {
-            "draggable": true,
-            "fullscreenControl": false,
-            "mapTypeControl": false,
-            "maxZoom": 20,
-            "minZoom": 1,
-            "rotateControl": false,
-            "scrollwheel": true,
-            "streetViewControl": false,
-            "styles": Array [
-              Object {
-                "elementType": "labels",
-                "featureType": "poi",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
-              },
-            ],
-            "zoomControl": true,
-          }
-        }
-        zoom={10}
-      />
-    </LoadScript>
+      }
+      zoom={10}
+    />
   </div>
 </div>
 `;
@@ -246,54 +210,42 @@ exports[`Google maps renders a map with percentage of width and height units ren
   <div
     className="widget-google-maps-wrapper"
   >
-    <LoadScript
-      googleMapsApiKey=""
-      id="_com.mendix.widget.custom.Maps.Maps"
-      loadingElement={
-        <div
-          className="spinner"
-        />
+    <GoogleMap
+      center={
+        Object {
+          "lat": 51.906688,
+          "lng": 4.48837,
+        }
       }
-      onError={[Function]}
-      version="weekly"
-    >
-      <GoogleMap
-        center={
-          Object {
-            "lat": 51.906688,
-            "lng": 4.48837,
-          }
+      mapContainerClassName="widget-google-maps"
+      onCenterChanged={[Function]}
+      onLoad={[Function]}
+      options={
+        Object {
+          "draggable": true,
+          "fullscreenControl": false,
+          "mapTypeControl": false,
+          "maxZoom": 20,
+          "minZoom": 1,
+          "rotateControl": false,
+          "scrollwheel": true,
+          "streetViewControl": false,
+          "styles": Array [
+            Object {
+              "elementType": "labels",
+              "featureType": "poi",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ],
+          "zoomControl": true,
         }
-        mapContainerClassName="widget-google-maps"
-        onCenterChanged={[Function]}
-        onLoad={[Function]}
-        options={
-          Object {
-            "draggable": true,
-            "fullscreenControl": false,
-            "mapTypeControl": false,
-            "maxZoom": 20,
-            "minZoom": 1,
-            "rotateControl": false,
-            "scrollwheel": true,
-            "streetViewControl": false,
-            "styles": Array [
-              Object {
-                "elementType": "labels",
-                "featureType": "poi",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
-              },
-            ],
-            "zoomControl": true,
-          }
-        }
-        zoom={10}
-      />
-    </LoadScript>
+      }
+      zoom={10}
+    />
   </div>
 </div>
 `;
@@ -311,54 +263,42 @@ exports[`Google maps renders a map with pixels renders structure correctly 1`] =
   <div
     className="widget-google-maps-wrapper"
   >
-    <LoadScript
-      googleMapsApiKey=""
-      id="_com.mendix.widget.custom.Maps.Maps"
-      loadingElement={
-        <div
-          className="spinner"
-        />
+    <GoogleMap
+      center={
+        Object {
+          "lat": 51.906688,
+          "lng": 4.48837,
+        }
       }
-      onError={[Function]}
-      version="weekly"
-    >
-      <GoogleMap
-        center={
-          Object {
-            "lat": 51.906688,
-            "lng": 4.48837,
-          }
+      mapContainerClassName="widget-google-maps"
+      onCenterChanged={[Function]}
+      onLoad={[Function]}
+      options={
+        Object {
+          "draggable": true,
+          "fullscreenControl": false,
+          "mapTypeControl": false,
+          "maxZoom": 20,
+          "minZoom": 1,
+          "rotateControl": false,
+          "scrollwheel": true,
+          "streetViewControl": false,
+          "styles": Array [
+            Object {
+              "elementType": "labels",
+              "featureType": "poi",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ],
+          "zoomControl": true,
         }
-        mapContainerClassName="widget-google-maps"
-        onCenterChanged={[Function]}
-        onLoad={[Function]}
-        options={
-          Object {
-            "draggable": true,
-            "fullscreenControl": false,
-            "mapTypeControl": false,
-            "maxZoom": 20,
-            "minZoom": 1,
-            "rotateControl": false,
-            "scrollwheel": true,
-            "streetViewControl": false,
-            "styles": Array [
-              Object {
-                "elementType": "labels",
-                "featureType": "poi",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
-              },
-            ],
-            "zoomControl": true,
-          }
-        }
-        zoom={10}
-      />
-    </LoadScript>
+      }
+      zoom={10}
+    />
   </div>
 </div>
 `;
@@ -376,54 +316,42 @@ exports[`Google maps renders a map with right structure 1`] = `
   <div
     className="widget-google-maps-wrapper"
   >
-    <LoadScript
-      googleMapsApiKey=""
-      id="_com.mendix.widget.custom.Maps.Maps"
-      loadingElement={
-        <div
-          className="spinner"
-        />
+    <GoogleMap
+      center={
+        Object {
+          "lat": 51.906688,
+          "lng": 4.48837,
+        }
       }
-      onError={[Function]}
-      version="weekly"
-    >
-      <GoogleMap
-        center={
-          Object {
-            "lat": 51.906688,
-            "lng": 4.48837,
-          }
+      mapContainerClassName="widget-google-maps"
+      onCenterChanged={[Function]}
+      onLoad={[Function]}
+      options={
+        Object {
+          "draggable": true,
+          "fullscreenControl": false,
+          "mapTypeControl": false,
+          "maxZoom": 20,
+          "minZoom": 1,
+          "rotateControl": false,
+          "scrollwheel": true,
+          "streetViewControl": false,
+          "styles": Array [
+            Object {
+              "elementType": "labels",
+              "featureType": "poi",
+              "stylers": Array [
+                Object {
+                  "visibility": "off",
+                },
+              ],
+            },
+          ],
+          "zoomControl": true,
         }
-        mapContainerClassName="widget-google-maps"
-        onCenterChanged={[Function]}
-        onLoad={[Function]}
-        options={
-          Object {
-            "draggable": true,
-            "fullscreenControl": false,
-            "mapTypeControl": false,
-            "maxZoom": 20,
-            "minZoom": 1,
-            "rotateControl": false,
-            "scrollwheel": true,
-            "streetViewControl": false,
-            "styles": Array [
-              Object {
-                "elementType": "labels",
-                "featureType": "poi",
-                "stylers": Array [
-                  Object {
-                    "visibility": "off",
-                  },
-                ],
-              },
-            ],
-            "zoomControl": true,
-          }
-        }
-        zoom={10}
-      />
-    </LoadScript>
+      }
+      zoom={10}
+    />
   </div>
 </div>
 `;
