@@ -109,10 +109,10 @@ export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps
 
     return {
         type: "Container",
-        padding: 8,
         children: [
             {
                 type: "Container",
+                backgroundColor: values.menuTrigger.widgetCount === 0 ? "#F5F5F5" : undefined,
                 children: [
                     {
                         type: "DropZone",
@@ -120,6 +120,11 @@ export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps
                         placeholder: "Place menu trigger widget here"
                     } as DropZoneProps
                 ]
+            } as ContainerProps,
+            {
+                type: "Container",
+                padding: 1,
+                children: []
             } as ContainerProps,
             {
                 type: "RowLayout",
