@@ -123,10 +123,15 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
         if (mxObject) {
-            const startDateAttributeValue = await this.extractAttributeValue<number>(
-                mxObject,
-                this.props.startDateAttribute
-            );
+            let startDateAttributeValue;
+            try {
+                startDateAttributeValue = await this.extractAttributeValue<number>(
+                    mxObject,
+                    this.props.startDateAttribute
+                );
+            } catch (e) {
+                window.mx.ui.error("Unable to fetch start date attribute value");
+            }
             return startDateAttributeValue ? new Date(startDateAttributeValue) : new Date();
         }
 
@@ -144,33 +149,37 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         if (this.props.dataSource === "context" && mxObject) {
             this.setCalendarEvents([mxObject]);
         } else {
-            const mxEventObjects = await fetchData({
-                guid,
-                type: this.props.dataSource,
-                entity: this.props.eventEntity,
-                constraint: this.props.entityConstraint,
-                microflow: this.props.dataSourceMicroflow,
-                mxform: this.props.mxform,
-                nanoflow: this.props.dataSourceNanoflow
-            });
+            try {
+                const mxEventObjects = await fetchData({
+                    guid,
+                    type: this.props.dataSource,
+                    entity: this.props.eventEntity,
+                    constraint: this.props.entityConstraint,
+                    microflow: this.props.dataSourceMicroflow,
+                    mxform: this.props.mxform,
+                    nanoflow: this.props.dataSourceNanoflow
+                });
 
-            if (this.destroyed) {
-                return;
-            }
+                if (this.destroyed) {
+                    return;
+                }
 
-            mxEventObjects.forEach(
-                mxEventObject =>
-                    (this.subscriptionEventHandles = [
-                        ...this.subscriptionEventHandles,
-                        ...this.subscribeToEventAttributes(mxEventObject)
-                    ])
-            );
+                mxEventObjects.forEach(
+                    mxEventObject =>
+                        (this.subscriptionEventHandles = [
+                            ...this.subscriptionEventHandles,
+                            ...this.subscribeToEventAttributes(mxEventObject)
+                        ])
+                );
 
-            this.setCalendarEvents(mxEventObjects);
+                this.setCalendarEvents(mxEventObjects);
 
-            if (this.progressHandle) {
-                mx.ui.hideProgress(this.progressHandle);
-                this.progressHandle = undefined;
+                if (this.progressHandle) {
+                    mx.ui.hideProgress(this.progressHandle);
+                    this.progressHandle = undefined;
+                }
+            } catch (e) {
+                window.mx.ui.error(e);
             }
         }
     };
