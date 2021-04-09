@@ -10,11 +10,11 @@ export interface AlertProps {
 }
 
 export const Alert: FunctionComponent<AlertProps> = props =>
-    props.message
+    props.children
         ? createElement(
               "div",
               { className: classNames(`alert alert-${props.bootstrapStyle}`, props.className) },
-              props.message
+              props.children
           )
         : null;
 
