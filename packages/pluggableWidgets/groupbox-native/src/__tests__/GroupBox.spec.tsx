@@ -89,7 +89,9 @@ describe("GroupBox", () => {
     });
 
     it("expands content when header is empty and is clicked", () => {
-        const component = render(<GroupBox {...defaultProps} headerContent={null} collapsible={"collapsibleYesCollapsed"} />);
+        const component = render(
+            <GroupBox {...defaultProps} headerContent={null} collapsible={"collapsibleYesCollapsed"} />
+        );
         component.findByTestId("header").then(header => {
             const json = component.toJSON();
             expect(json).toMatchSnapshot();

@@ -1,3 +1,3 @@
 # Groupbox widget
 
-The groupbox widget allows to users to group content in an expandable container.
+The groupbox widget allows users to group content in an expandable container.

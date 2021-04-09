@@ -37,7 +37,7 @@ export const com_mendix_widget_native_groupbox_GroupBox: GroupBoxType = {
         icon: {
             // Size, Color and all ViewStyle properties are allowed
             size: groupbox.header.icon.size,
-            color: groupbox.header.icon.color,
+            color: groupbox.header.icon.color
         }
     },
     content: {

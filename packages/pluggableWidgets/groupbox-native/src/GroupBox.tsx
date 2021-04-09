@@ -13,12 +13,7 @@ declare interface GlyphIcon {
 
 export function GroupBox(props: GroupBoxProps<GroupBoxStyle>): ReactElement | null {
     const styles = flattenStyles(defaultGroupBoxStyle, props.style);
-    const startedExpanded = !props.showHeader || props.collapsible === "collapsibleYesExpanded";
-    const [isExpanded, setIsExpanded] = useState(startedExpanded);
-
-    const toggleContent = () => {
-        setIsExpanded(value => !value);
-    };
+    const [isExpanded, setIsExpanded] = useState(!props.showHeader || props.collapsible === "collapsibleYesExpanded");
 
     const renderIcon = () => {
         const { iconCollapsed, iconExpanded } = props;
@@ -47,7 +42,13 @@ export function GroupBox(props: GroupBoxProps<GroupBoxStyle>): ReactElement | nu
                 <Pressable
                     testID={"header"}
                     style={styles.header.container}
-                    onPress={props.collapsible !== "collapsibleNo" ? toggleContent : null}
+                    onPress={
+                        props.collapsible !== "collapsibleNo"
+                            ? () => {
+                                  setIsExpanded(value => !value);
+                              }
+                            : null
+                    }
                 >
                     <View style={styles.header.content}>{props.headerContent}</View>
                     {props.collapsible !== "collapsibleNo" && renderIcon()}

@@ -16,10 +16,10 @@ export interface GroupBoxStyle extends Style {
 
 export const defaultGroupBoxStyle: GroupBoxStyle = {
     container: {
-            borderWidth: 1,
-            borderColor: "#e7e7e9",
-            borderRadius: 4,
-            overflow: "hidden"
+        borderWidth: 1,
+        borderColor: "#e7e7e9",
+        borderRadius: 4,
+        overflow: "hidden"
     },
     header: {
         container: {
@@ -28,18 +28,18 @@ export const defaultGroupBoxStyle: GroupBoxStyle = {
             alignItems: "center",
             backgroundColor: "#e7e7e9",
             paddingHorizontal: 12,
-            paddingVertical: 8,
+            paddingVertical: 8
         },
         content: {
-            flex: 1,
+            flex: 1
         },
         icon: {
             size: 16,
-            color: "#0a1325",
+            color: "#0a1325"
         }
     },
     content: {
         paddingVertical: 12,
-        paddingHorizontal: 8,
+        paddingHorizontal: 8
     }
 };
