@@ -33,12 +33,20 @@ export function validateProps(props: Container.CalendarContainerProps): ReactChi
     if (props.view === "standard" && (props.defaultView === "work_week" || props.defaultView === "agenda")) {
         errorMessages.push(`${props.friendlyId}: ${props.defaultView} is only available in custom view`);
     }
+    if (props.startDateAttribute.split("/").length > 3) {
+        errorMessages.push(`Start date attribute can only go over one association`);
+    }
+
     if (errorMessages.length) {
         return createElement(
             "div",
             {},
-            "Error in calendar configuration:",
-            errorMessages.map((message, key) => createElement("p", { key }, message))
+            createElement("p", {}, "Error in calendar configuration:"),
+            createElement(
+                "ul",
+                {},
+                errorMessages.map((message, key) => createElement("li", { key }, message))
+            )
         );
     }
 

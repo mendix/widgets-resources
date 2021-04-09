@@ -20,7 +20,7 @@ export class preview extends Component<ImageViewerContainerProps, {}> {
             return createElement(
                 "div",
                 {},
-                createElement(Alert, { className: "widget-image-viewer-alert-danger", message }),
+                createElement(Alert, { className: "widget-image-viewer-alert-danger" }, message),
                 createElement(ImageViewer, this.transformProps(this.props))
             );
         }

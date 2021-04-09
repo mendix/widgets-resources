@@ -1,4 +1,4 @@
-import { Component, createElement, ReactNode } from "react";
+import { Component, createElement, ReactChild, ReactNode } from "react";
 
 import { Alert } from "./Alert";
 import { ImageViewer } from "./ImageViewer";
@@ -30,7 +30,7 @@ interface ImageViewerContainerProps extends WrapperProps {
 }
 
 interface ImageViewerContainerState {
-    alertMessage?: string;
+    alertMessage?: ReactChild;
     imageUrl: string;
 }
 
@@ -67,7 +67,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         const { height, heightUnit, width, widthUnit, onClickOption, responsive } = this.props;
         const { imageUrl } = this.state;
         if (this.state.alertMessage) {
-            return createElement(Alert, { message: this.state.alertMessage });
+            return createElement(Alert, {}, this.state.alertMessage);
         }
 
         return createElement(ImageViewer, {
@@ -227,31 +227,50 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
         return {};
     }
 
-    static validateProps(props: ImageViewerContainerProps): string {
-        let message = "";
+    static validateProps(props: ImageViewerContainerProps): ReactChild {
+        const errorMessages: string[] = [];
+
         if (props.source === "systemImage" && props.mxObject && !props.mxObject.isA("System.Image")) {
-            message = "for data source option 'System image' the context object should inherit system.image";
+            errorMessages.push("for data source option 'System image' the context object should inherit system.image");
         }
         if (props.source === "urlAttribute" && !props.dynamicUrlAttribute) {
-            message = "for data source option 'Dynamic URL' the Dynamic image URL attribute should be configured";
+            errorMessages.push(
+                "for data source option 'Dynamic URL' the Dynamic image URL attribute should be configured"
+            );
         }
         if (props.source === "staticUrl" && !props.urlStatic) {
-            message = "for data source option 'Static URL' a static image url should be configured";
+            errorMessages.push("for data source option 'Static URL' a static image url should be configured");
         }
         if (props.source === "staticImage" && !props.imageStatic) {
-            message = "for data source option 'Static Image' a static image should be configured";
+            errorMessages.push("for data source option 'Static Image' a static image should be configured");
         }
         if (props.onClickOption === "callMicroflow" && !props.onClickMicroflow) {
-            message = "on click microflow is required";
+            errorMessages.push("on click microflow is required");
         }
         if (props.onClickOption === "callNanoflow" && !props.onClickNanoflow.nanoflow) {
-            message = "on click nanoflow is required";
+            errorMessages.push("on click nanoflow is required");
         }
         if (props.onClickOption === "showPage" && !props.onClickForm) {
-            message = "on click page is required";
+            errorMessages.push("on click page is required");
+        }
+        if (props.dynamicUrlAttribute.split("/").length > 3) {
+            errorMessages.push(`start date attribute can only go over one association`);
         }
 
-        return message && `Error in imageviewer configuration: ${message}`;
+        if (errorMessages.length) {
+            return createElement(
+                "div",
+                {},
+                createElement("p", {}, "Error in image viewer configuration:"),
+                createElement(
+                    "ul",
+                    {},
+                    errorMessages.map((message, key) => createElement("li", { key }, message))
+                )
+            );
+        }
+
+        return "";
     }
 }
 
