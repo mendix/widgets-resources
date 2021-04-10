@@ -12,10 +12,22 @@
                     <caption>Content</caption>
                     <description />
                 </property>
+                <property key="threshold" type="boolean" defaultValue="true">
+                    <caption>Shrink after threshold</caption>
+                    <description />
+                </property>
                 <property key="shrinkThreshold" type="expression" defaultValue="100">
                     <caption>Shrink after scrolling (px)</caption>
                     <description />
                     <returnType type="Integer" />
+                </property>
+                <property key="initHeight" type="integer" defaultValue="125">
+                    <caption>Initial height</caption>
+                    <description />
+                </property>
+                <property key="shrunkHeight" type="integer" defaultValue="50">
+                    <caption>Shrunk height</caption>
+                    <description />
                 </property>
             </propertyGroup>
 

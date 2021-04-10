@@ -13,12 +13,18 @@ export interface ShrinkingHeaderContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     content: ReactNode;
+    threshold: boolean;
     shrinkThreshold: DynamicValue<Big>;
+    initHeight: number;
+    shrunkHeight: number;
 }
 
 export interface ShrinkingHeaderPreviewProps {
     class: string;
     style: string;
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    threshold: boolean;
     shrinkThreshold: string;
+    initHeight: number | null;
+    shrunkHeight: number | null;
 }

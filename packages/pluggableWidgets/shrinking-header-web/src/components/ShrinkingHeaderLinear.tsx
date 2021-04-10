@@ -1,6 +1,5 @@
 import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
-import { throttle } from "lodash-es";
 
 import "../ui/ShrinkingHeader.scss";
 
@@ -11,24 +10,18 @@ export interface ShrinkingHeaderThresholdProps {
     style?: CSSProperties;
     tabIndex?: number;
     content?: ReactNode;
-    shrinkThreshold: number;
+    initHeight: number;
+    shrunkHeight: number;
 }
 
-export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
-    const { rootElementRef, name, className, style, tabIndex, content, shrinkThreshold } = props;
+export function ShrinkingHeaderLinear(props: ShrinkingHeaderThresholdProps): ReactElement {
+    const { rootElementRef, name, className, style, tabIndex, content, initHeight, shrunkHeight } = props;
 
-    const [inlineStyle, setInlineStyle] = useState<CSSProperties>({ ...style });
+    const [widgetInlineStyle, setWidgetInlineStyle] = useState<CSSProperties>({ ...style });
+    const [headerInlineStyle, setHeaderInlineStyle] = useState<CSSProperties>();
     const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
-    const [shrunk, setShrunk] = useState(false);
 
-    const actualClassName = classNames(
-        "widget-shrinking-header",
-        "widget-shrinking-header-threshold",
-        {
-            "widget-shrinking-header-shrunk": shrunk
-        },
-        className
-    );
+    const actualClassName = classNames("widget-shrinking-header", "widget-shrinking-header-linear", className);
 
     const updateElement = useCallback(
         (node: HTMLDivElement | null) => {
@@ -39,28 +32,25 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
     );
 
     useEffect(() => {
-        const evaluateShrunkState = function (this: HTMLElement): void {
-            if (window.scrollY >= shrinkThreshold) {
-                setShrunk(true);
-            } else {
-                setShrunk(false);
-            }
+        const updateHeaderHeight = function (): void {
+            const headerHeight =
+                initHeight - (window.scrollY > initHeight - shrunkHeight ? initHeight - shrunkHeight : window.scrollY);
+
+            setHeaderInlineStyle({ height: headerHeight });
         };
 
-        const onScroll = throttle(evaluateShrunkState, 250, { leading: true, trailing: true });
-
-        document.addEventListener("scroll", onScroll);
+        document.addEventListener("scroll", updateHeaderHeight);
 
         return () => {
-            document.removeEventListener("scroll", onScroll);
+            document.removeEventListener("scroll", updateHeaderHeight);
         };
-    }, [shrinkThreshold, setShrunk]);
+    }, [initHeight, shrunkHeight, headerElement, setHeaderInlineStyle]);
 
     useEffect(() => {
         if (headerElement) {
             const resizeObserver = new ResizeObserver(() => {
                 const headerHeight = headerElement.offsetHeight;
-                setInlineStyle(prevState => {
+                setWidgetInlineStyle(prevState => {
                     if (!prevState.height || (prevState.height && prevState.height < headerHeight)) {
                         return { ...prevState, height: headerHeight };
                     }
@@ -75,11 +65,13 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
                 resizeObserver.disconnect();
             };
         }
-    }, [headerElement, setInlineStyle]);
+    }, [headerElement, setWidgetInlineStyle]);
 
     return (
-        <div id={name} className={actualClassName} style={inlineStyle} tabIndex={tabIndex}>
-            <header ref={updateElement}>{content}</header>
+        <div id={name} className={actualClassName} style={widgetInlineStyle} tabIndex={tabIndex}>
+            <header ref={updateElement} style={headerInlineStyle}>
+                {content}
+            </header>
         </div>
     );
 }
