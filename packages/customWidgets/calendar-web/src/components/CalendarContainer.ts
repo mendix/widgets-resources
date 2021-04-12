@@ -116,8 +116,19 @@ export default class CalendarContainer extends Component<Container.CalendarConta
             return Promise.resolve(undefined);
         }
 
-        return new Promise(resolve => {
-            mxObject.fetch(attributePath, (attributeValue: any): void => resolve(attributeValue));
+        return new Promise((resolve, reject) => {
+            mxObject.fetch(
+                attributePath,
+                (attributeValue: any): void => {
+                    if (attributeValue instanceof Error) {
+                        reject(attributeValue);
+                    } else {
+                        resolve(attributeValue);
+                    }
+                },
+                // @ts-ignore
+                (error: Error): void => reject(error)
+            );
         });
     };
 
@@ -129,8 +140,8 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                     mxObject,
                     this.props.startDateAttribute
                 );
-            } catch (e) {
-                window.mx.ui.error("Unable to fetch start date attribute value");
+            } catch (error) {
+                window.mx.ui.error(`Unable to fetch start date attribute value: ${error.message}`);
             }
             return startDateAttributeValue ? new Date(startDateAttributeValue) : new Date();
         }
