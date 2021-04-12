@@ -3,16 +3,16 @@ import { Animated, Easing, LayoutChangeEvent, Pressable, View, ViewStyle } from 
 import { Icon } from "mendix/components/native/Icon";
 import { exclude, flattenStyles } from "@mendix/piw-native-utils-internal";
 
-import { GroupBoxStyle, defaultGroupBoxStyle } from "./ui/Styles";
-import { GroupBoxProps } from "../typings/GroupBoxProps";
+import { AccordionStyle, defaultAccordionStyle } from "./ui/Styles";
+import { AccordionProps } from "../typings/AccordionProps";
 
 declare interface GlyphIcon {
     readonly type: "glyph";
     readonly iconClass: string;
 }
 
-export function GroupBox(props: GroupBoxProps<GroupBoxStyle>): ReactElement | null {
-    const styles = flattenStyles(defaultGroupBoxStyle, props.style);
+export function Accordion(props: AccordionProps<AccordionStyle>): ReactElement | null {
+    const styles = flattenStyles(defaultAccordionStyle, props.style);
     const [isExpanded, setIsExpanded] = useState(!props.showHeader || props.collapsible === "collapsibleYesExpanded");
 
     const renderIcon = () => {

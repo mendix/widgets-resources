@@ -1,7 +1,7 @@
 import { ViewStyle } from "react-native";
 import { Style } from "@mendix/piw-native-utils-internal";
 
-export interface GroupBoxStyle extends Style {
+export interface AccordionStyle extends Style {
     container: ViewStyle;
     header: {
         container: ViewStyle;
@@ -14,7 +14,7 @@ export interface GroupBoxStyle extends Style {
     content: ViewStyle;
 }
 
-export const defaultGroupBoxStyle: GroupBoxStyle = {
+export const defaultAccordionStyle: AccordionStyle = {
     container: {
         borderWidth: 1,
         borderColor: "#e7e7e9",

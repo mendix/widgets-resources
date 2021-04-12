@@ -1,7 +1,7 @@
 import { hidePropertiesIn, Properties } from "@mendix/piw-utils-internal";
-import { GroupBoxProps } from "../typings/GroupBoxProps";
+import { AccordionProps } from "../typings/AccordionProps";
 
-export function getProperties(values: GroupBoxProps<any>, defaultProperties: Properties): Properties {
+export function getProperties(values: AccordionProps<any>, defaultProperties: Properties): Properties {
     if (!values.showHeader) {
         hidePropertiesIn(defaultProperties, values, ["headerContent", "iconCollapsed", "iconExpanded", "collapsible"]);
     }

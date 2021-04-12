@@ -1,5 +1,5 @@
 /**
- * This file was generated from GroupBox.xml
+ * This file was generated from Accordion.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
@@ -8,7 +8,7 @@ import { DynamicValue, NativeIcon } from "mendix";
 
 export type CollapsibleEnum = "collapsibleNo" | "collapsibleYesExpanded" | "collapsibleYesCollapsed";
 
-export interface GroupBoxProps<Style> {
+export interface AccordionProps<Style> {
     name: string;
     style: Style[];
     headerContent?: ReactNode;
@@ -19,7 +19,7 @@ export interface GroupBoxProps<Style> {
     iconExpanded?: DynamicValue<NativeIcon>;
 }
 
-export interface GroupBoxPreviewProps {
+export interface AccordionPreviewProps {
     class: string;
     style: string;
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
