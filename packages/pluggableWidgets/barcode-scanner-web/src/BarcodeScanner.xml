@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.barcodescanner.BarcodeScanner" offlineCapable="true"
+<widget id="com.mendix.widget.web.barcodescanner.BarcodeScanner" offlineCapable="true"
     xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Barcode Scanner</name>
@@ -8,6 +8,10 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
+                <property key="value" type="integer" defaultValue="50">
+                    <caption>Current value</caption>
+                    <description />
+                </property>
             </propertyGroup>
         </propertyGroup>
     </properties>
