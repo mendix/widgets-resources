@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress bar has progress bar structure 1`] = `
+<div
+  className="widget-progress-bar progress-bar-medium progress-bar-primary"
+>
+  <div
+    className="progress widget-progress-bar-clickable"
+    onClick={[MockFunction]}
+  >
+    <div
+      className="progress-bar"
+      style={
+        Object {
+          "width": "23%",
+        }
+      }
+      title="23%"
+    >
+      23%
+    </div>
+  </div>
+</div>
+`;
