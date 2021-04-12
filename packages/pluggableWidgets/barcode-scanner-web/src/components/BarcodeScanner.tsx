@@ -1,12 +1,30 @@
-import { createElement, ReactElement, useEffect, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BarcodeScannerProps {}
 
 export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     const [error, setError] = useState<string>();
+    const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
     const [streamObject, setStreamObject] = useState<MediaStream | null>(null);
     const supportsCameraAccess = "mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices;
+
+    const updateVideoElement = useCallback(
+        (node: HTMLVideoElement | null) => {
+            setVideoElement(node);
+        },
+        [setVideoElement]
+    );
+
+    const play = useCallback(() => {
+        videoElement?.play();
+    }, [videoElement]);
+
+    useEffect(() => {
+        if (streamObject && videoElement) {
+            videoElement.srcObject = streamObject;
+        }
+    }, [streamObject, videoElement]);
 
     useEffect(() => {
         async function getStream(): Promise<void> {
@@ -41,5 +59,5 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     if (error) {
         return <div>{error}</div>;
     }
-    return streamObject ? <div>We have persmission</div> : <div>Waiting for permission</div>;
+    return streamObject ? <video ref={updateVideoElement} onCanPlay={play} /> : <div>Waiting for permission</div>;
 }
