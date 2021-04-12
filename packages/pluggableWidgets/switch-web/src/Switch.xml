@@ -21,7 +21,7 @@
             <propertyGroup caption="Actions">
                 <property key="action" type="action">
                     <caption>On change</caption>
-                    <description>Action to be performed when switch is toggled</description>
+                    <description>Action to be performed when the switch is toggled</description>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Style">
