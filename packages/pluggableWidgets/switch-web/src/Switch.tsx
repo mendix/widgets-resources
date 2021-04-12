@@ -44,7 +44,6 @@ export function Switch(props: SwitchContainerProps) {
             class={props.class}
             style={props.style}
             tabIndex={props.tabIndex}
-            deviceStyle={props.deviceStyle}
         />
     );
 }

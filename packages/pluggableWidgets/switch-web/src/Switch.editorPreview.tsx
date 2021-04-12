@@ -7,7 +7,7 @@ import Switch from "./components/Switch";
 export function preview(props: SwitchPreviewProps): ReactElement {
     // TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) generation to remove the ts-ignore below
     // @ts-ignore
-    const { className, style, deviceStyle } = props;
+    const { className, style } = props;
 
     return (
         <Switch
@@ -17,7 +17,6 @@ export function preview(props: SwitchPreviewProps): ReactElement {
             // @ts-ignore
             editable={!props.readOnly ?? true}
             isChecked
-            deviceStyle={deviceStyle}
             class={className}
             style={parseStyle(style)}
         />

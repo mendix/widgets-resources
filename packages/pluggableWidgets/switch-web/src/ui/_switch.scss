@@ -13,26 +13,22 @@
 }
 
 .widget-switch {
+    @include ios;
+
     .widget-switch-checkbox {
         display: none;
     }
+}
 
-    &.iOS {
-        @include ios;
-    }
-
-    &.android {
+.android {
+    .widget-switch {
         @include android;
-    }
-
-    &.auto {
-        @include ios;
     }
 }
 
 .mx-table {
-    .widget-switch {
-        &.android {
+    .android {
+        .widget-switch {
             padding-top: 6px;
             padding-bottom: 7px;
         }

@@ -24,18 +24,6 @@
                     <description>Action to be performed when the switch is toggled</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Style">
-                    <property key="deviceStyle" type="enumeration" defaultValue="auto">
-                        <caption>Platform</caption>
-                        <description>The general appearance of the switch. With auto detect, on the web it will be iOS
-                        </description>
-                        <enumerationValues>
-                            <enumerationValue key="auto">Auto detect</enumerationValue>
-                            <enumerationValue key="android">Android</enumerationValue>
-                            <enumerationValue key="iOS">iOS</enumerationValue>
-                        </enumerationValues>
-                    </property>
-            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Common">
             <systemProperty key="Label"/>

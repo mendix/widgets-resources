@@ -6,8 +6,6 @@
 import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
-export type DeviceStyleEnum = "auto" | "android" | "iOS";
-
 export interface SwitchContainerProps {
     name: string;
     class: string;
@@ -16,7 +14,6 @@ export interface SwitchContainerProps {
     id: string;
     booleanAttribute: EditableValue<boolean>;
     action?: ActionValue;
-    deviceStyle: DeviceStyleEnum;
 }
 
 export interface SwitchPreviewProps {
@@ -24,5 +21,4 @@ export interface SwitchPreviewProps {
     style: string;
     booleanAttribute: string;
     action: {} | null;
-    deviceStyle: DeviceStyleEnum;
 }

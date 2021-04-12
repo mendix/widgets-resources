@@ -1051,23 +1051,38 @@
             "options": [
                 {
                     "name": "Brand Primary",
-                    "class": "widget-switch-btn-wrapper-primary"
+                    "class": "widget-switch-brand-primary"
                 },
                 {
                     "name": "Brand Secondary",
-                    "class": "widget-switch-btn-wrapper-secondary"
+                    "class": "widget-switch-brand-secondary"
                 },
                 {
                     "name": "Brand Success",
-                    "class": "widget-switch-btn-wrapper-success"
+                    "class": "widget-switch-brand-success"
                 },
                 {
                     "name": "Brand Warning",
-                    "class": "widget-switch-btn-wrapper-warning"
+                    "class": "widget-switch-brand-warning"
                 },
                 {
                     "name": "Brand Danger",
-                    "class": "widget-switch-btn-wrapper-danger"
+                    "class": "widget-switch-brand-danger"
+                }
+            ]
+        },
+        {
+            "name": "Device style",
+            "type": "Dropdown",
+            "description": "The general appearance of the switch. When no option selected iOS styles are applied",
+            "options": [
+                {
+                    "name": "iOS",
+                    "class": "iOS"
+                },
+                {
+                    "name": "Android",
+                    "class": "android"
                 }
             ]
         }

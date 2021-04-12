@@ -31,8 +31,7 @@ describe("Switch", () => {
             tabIndex: 0,
             id: "com.mendix.widgets.custom.switch1",
             booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build(),
-            action: undefined,
-            deviceStyle: "auto"
+            action: undefined
         };
 
         return { ...defaultProps, ...props };
@@ -93,21 +92,14 @@ describe("Switch", () => {
     });
 
     it("with iOS device style should render correct class", () => {
-        createAndFindElements(createProps({ deviceStyle: "iOS" }));
-        console.log(switchComponentWrapper);
+        createAndFindElements(createProps({ class: "iOS" }));
         expect(switchComponentWrapper.hasClass("iOS")).toBe(true);
     });
 
     it("with android device style should render correct class", () => {
-        createAndFindElements(createProps({ deviceStyle: "android" }));
+        createAndFindElements(createProps({ class: "android" }));
 
         expect(switchComponentWrapper.hasClass("android")).toBe(true);
-    });
-
-    it("with auto device style should render correct class", () => {
-        createAndFindElements(createProps({ deviceStyle: "auto" }));
-
-        expect(switchComponentWrapper.hasClass("auto")).toBe(true);
     });
 
     it("with tabIndex passed renders correctly", () => {
