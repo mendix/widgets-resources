@@ -32,6 +32,7 @@ export default function Switch(props: SwitchProps) {
                 role="checkbox"
                 aria-checked={props.isChecked}
                 aria-labelledby={props.id}
+                aria-readonly={!props.editable}
             >
                 <small
                     className={classNames("widget-switch-btn", {
