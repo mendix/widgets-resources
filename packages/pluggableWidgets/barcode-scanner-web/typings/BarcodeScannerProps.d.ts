@@ -10,11 +10,11 @@ export interface BarcodeScannerContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-
+    value: number;
 }
 
 export interface BarcodeScannerPreviewProps {
     class: string;
     style: string;
-
+    value: number | null;
 }
