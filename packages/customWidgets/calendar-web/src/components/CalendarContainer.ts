@@ -8,10 +8,14 @@ import moment from "moment";
 import { validateCustomFormats, validateProps } from "../utils/validation";
 import { parseStyle } from "../utils/style";
 
+type MxObject = Omit<mendix.lib.MxObject, "fetch"> & {
+    fetch: (path: string, callback: (requested: any) => void, error: (error: Error) => void) => void;
+};
+
 export interface CalendarContainerState {
     alertMessage: ReactChild;
     events: CalendarEvent[];
-    eventCache: mendix.lib.MxObject[];
+    eventCache: MxObject[];
     eventColor: string;
     loading: boolean;
     startPosition: Date;
@@ -109,7 +113,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     }
 
     private extractAttributeValue = async <WidgetPropertyTypes>(
-        mxObject: mendix.lib.MxObject,
+        mxObject: MxObject,
         attributePath: string
     ): Promise<WidgetPropertyTypes | "" | null | undefined> => {
         if (!attributePath) {
@@ -126,13 +130,12 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                         resolve(attributeValue);
                     }
                 },
-                // @ts-ignore
                 (error: Error): void => reject(error)
             );
         });
     };
 
-    private getStartPosition = async (mxObject: mendix.lib.MxObject): Promise<Date> => {
+    private getStartPosition = async (mxObject: MxObject): Promise<Date> => {
         if (mxObject) {
             let startDateAttributeValue;
             try {
@@ -149,7 +152,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         return new Date();
     };
 
-    private loadEvents = async (mxObject: mendix.lib.MxObject): Promise<void> => {
+    private loadEvents = async (mxObject: MxObject): Promise<void> => {
         this.subscriptionEventHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionEventHandles = [];
         if (!mxObject) {
@@ -195,7 +198,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     };
 
-    private async setViewDates(mxObject: mendix.lib.MxObject): Promise<void> {
+    private async setViewDates(mxObject: MxObject): Promise<void> {
         const startPosition = await this.getStartPosition(mxObject);
         if (
             this.props.executeOnViewChange &&
@@ -230,7 +233,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.setState({ startPosition });
     }
 
-    private setCalendarEvents = (mxObjects: mendix.lib.MxObject[]): void => {
+    private setCalendarEvents = (mxObjects: MxObject[]): void => {
         if (mxObjects) {
             const events = mxObjects.map(mxObject => ({
                 title: (mxObject.get(this.props.titleAttribute) as string) || " ",
@@ -244,7 +247,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     };
 
-    private subscribeToEventAttributes(mxEventObject: mendix.lib.MxObject): number[] {
+    private subscribeToEventAttributes(mxEventObject: MxObject): number[] {
         return [
             this.props.allDayAttribute,
             this.props.titleAttribute,
@@ -260,7 +263,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         );
     }
 
-    private resetSubscriptions = (mxObject: mendix.lib.MxObject): void => {
+    private resetSubscriptions = (mxObject: MxObject): void => {
         this.subscriptionContextHandles.forEach(window.mx.data.unsubscribe);
         this.subscriptionContextHandles = [];
 
@@ -435,7 +438,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         });
     };
 
-    private executeEventAction = (mxObject: mendix.lib.MxObject) => {
+    private executeEventAction = (mxObject: MxObject) => {
         const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow } = this.props;
         if (mxObject) {
             this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
@@ -470,7 +473,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         });
     };
 
-    private executeSlotAction(mxObject: mendix.lib.MxObject): void {
+    private executeSlotAction(mxObject: MxObject): void {
         const { onCreate, onCreateMicroflow, mxform, onCreateNanoflow } = this.props;
         this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow);
     }
@@ -501,7 +504,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     };
 
-    private executeOnDropAction = (mxObject: mendix.lib.MxObject) => {
+    private executeOnDropAction = (mxObject: MxObject) => {
         const { onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow } = this.props;
         if (mxObject && mxObject.getGuid()) {
             this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
@@ -509,7 +512,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
     };
 
     private executeAction(
-        mxObject: mendix.lib.MxObject,
+        mxObject: MxObject,
         action: Container.OnClickEventOptions,
         microflow: string,
         mxform: mxui.lib.form._FormBase,
