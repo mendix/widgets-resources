@@ -11,6 +11,7 @@ describe("accessibility-helper", () => {
             radioButton.waitForDisplayed({ timeout: 3000 });
             radioButton.click();
             const elementToBeChanged = page.getWidget("text3");
+            elementToBeChanged.waitForDisplayed();
 
             expect(elementToBeChanged.getAttribute("trueCondition")).toEqual("true");
         });
@@ -18,6 +19,7 @@ describe("accessibility-helper", () => {
         it("hides attributes when condition is false", () => {
             $(".mx-name-radioButtons2 input").click();
             const elementToBeChanged = page.getWidget("text3");
+            elementToBeChanged.waitForDisplayed();
 
             expect(elementToBeChanged.getAttribute("a11yhelper")).not.toBe("a11yhelper");
         });
