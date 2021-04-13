@@ -7,7 +7,9 @@ describe("accessibility-helper", () => {
 
     describe("with single target", () => {
         it("sets attributes when condition is true", () => {
-            $(".mx-name-radioButtons2 input").click();
+            const radioButton = $(".mx-name-radioButtons2 input");
+            radioButton.waitForDisplayed({ timeout: 3000 });
+            radioButton.click();
             const elementToBeChanged = page.getWidget("text3");
 
             expect(elementToBeChanged.getAttribute("trueCondition")).toEqual("true");
