@@ -17,7 +17,7 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     );
 
     const play = useCallback(() => {
-        videoElement?.play();
+        videoElement?.play(); // TODO: doesn't work on iOS safari
     }, [videoElement]);
 
     useEffect(() => {
@@ -54,7 +54,7 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         // Mendix ensures that Mendix apps are only run in the supported browsers and all of them
         // support the `navigator.mediaDevices.getUserMedia` API. So no additional error handling
         // needs to be done, but just in case we soft catch it.
-        return <div>This browser is not compatible with the barcode scanner widget</div>;
+        return <div>This browser is not compatible with the barcode scanner widget</div>; // TODO: improve message, since this will also show when no https is used in certain browsers
     }
     if (error) {
         return <div>{error}</div>;
