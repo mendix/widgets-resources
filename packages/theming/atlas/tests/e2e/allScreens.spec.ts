@@ -40,14 +40,14 @@ describe("Screenshots of the pages for", () => {
         if (!pagesToSkip.includes(url)) {
             it(`matches snapshot for page ${url}`, () => {
                 browser.url(url); // Open the page
-                browser.setWindowRect(0, 0, 1920, 1200);
+                browser.setWindowRect(0, 0, 1200, 900);
 
                 // These widgets are causing unstable tests due to their nature while loading the screen
                 const sprintrFeedbackWidget = $(".sprintrFeedback__sidebar");
-                const mapsWidget = $(".widget-leaflet-maps");
+                const mapsWidget = $(".widget-maps");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(8000);
+                    browser.pause(10000);
                 }
 
                 browser.saveElement($("#content"), url, {
