@@ -1,0 +1,40 @@
+name: Testing Atlas Reference App
+
+on:
+    push:
+        branches: [master]
+        paths:
+            - "packages/theming/atlas/**"
+    pull_request:
+        branches: [master]
+        paths:
+            - "packages/theming/atlas/**"
+
+jobs:
+    test:
+        name: "Testing Atlas Reference App"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout private repository
+              uses: actions/checkout@v2
+              with:
+                  repository: leonardomendix/atlas
+                  token: ${{ secrets.E2E_PAT }} # `GitHub_PAT` is a secret that contains your PAT
+                  path: packages/theming/atlas/tests/testProject
+            - name: "Executing E2E screenshot tests"
+              run: npm run test:e2e -- --no-widget-update
+            - name: "Fixing files permissions"
+              if: failure()
+              run: |
+                sudo find ${{ github.workspace}}/packages/theming -type d -exec chmod 755 {} \;
+                sudo find ${{ github.workspace}}/packages/theming -type f -exec chmod 644 {} \;
+            - name: "Archive test screenshot results"
+              uses: actions/upload-artifact@v2
+              if: failure()
+              with:
+                name: test-screenshot-results
+                path: |
+                  ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/diff/*.png
+                  ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/actual/*.png
+                if-no-files-found: error
