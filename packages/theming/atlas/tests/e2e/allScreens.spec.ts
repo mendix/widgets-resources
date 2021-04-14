@@ -47,7 +47,7 @@ describe("Screenshots of the pages for", () => {
                 const mapsWidget = $(".widget-leaflet-maps");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(5000);
+                    browser.pause(8000);
                 }
 
                 browser.saveElement($("#content"), url, {
