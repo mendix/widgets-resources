@@ -119,10 +119,8 @@ export class Maps extends Component<Props, State> {
     }
 
     private onMapReady(): void {
-        if (Platform.OS === "android") {
-            this.updateCamera(false);
-            this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
-        }
+        this.updateCamera(false);
+        this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
         this.onRegionChangeComplete();
     }
 
@@ -200,17 +198,19 @@ export class Maps extends Component<Props, State> {
 
     private async getCenter(): Promise<LatLng> {
         const center =
-            this.props.markers.length === 1 && this.props.fitToMarkers
-                ? await this.parseCoordinate(
-                      this.props.markers[0].latitude,
-                      this.props.markers[0].longitude,
-                      this.props.markers[0].address
-                  )
-                : await this.parseCoordinate(
-                      this.props.centerLatitude,
-                      this.props.centerLongitude,
-                      this.props.centerAddress
-                  );
+            (this.props.centerLatitude && this.props.centerLongitude) || this.props.centerAddress
+            ? await this.parseCoordinate(
+                this.props.centerLatitude,
+                this.props.centerLongitude,
+                this.props.centerAddress
+            )
+            : this.props.markers.length === 1 && this.props.fitToMarkers
+              ? await this.parseCoordinate(
+                    this.props.markers[0].latitude,
+                    this.props.markers[0].longitude,
+                    this.props.markers[0].address
+                )
+              : null;
 
         return center || { latitude: 51.9066346, longitude: 4.4861703 };
     }
