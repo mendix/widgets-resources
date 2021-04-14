@@ -14,7 +14,7 @@ describe("Switch", () => {
     let switchButton: ReactWrapper<any, any>;
     let alert: ReactWrapper<AlertProps, any>;
     const createAndFindElements = (props: SwitchContainerProps): void => {
-        switchWrapper = mount(createElement(Switch, props));
+        switchWrapper = mount(<Switch {...props} />);
         switchComponent = switchWrapper.find(SwitchComponent);
         switchComponentWrapper = switchComponent.find(".widget-switch");
         switchButtonWrapper = switchComponent.find(".widget-switch-btn-wrapper");
