@@ -67,12 +67,6 @@ exports[`Switch with editable value should render the structure correctly 1`] = 
         }
       }
     >
-      <input
-        checked={false}
-        className="widget-switch-checkbox enabled"
-        readOnly={true}
-        type="checkbox"
-      />
       <div
         aria-checked={false}
         aria-labelledby="com.mendix.widgets.custom.switch1"
@@ -80,10 +74,10 @@ exports[`Switch with editable value should render the structure correctly 1`] = 
         className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default un-checked"
         onClick={[Function]}
         onKeyDown={[Function]}
-        role="checkbox"
+        role="switch"
         tabIndex={0}
       >
-        <small
+        <div
           className="widget-switch-btn left"
         />
       </div>
@@ -162,12 +156,6 @@ exports[`Switch with readonly value should render the structure correctly 1`] = 
         }
       }
     >
-      <input
-        checked={false}
-        className="widget-switch-checkbox"
-        readOnly={true}
-        type="checkbox"
-      />
       <div
         aria-checked={false}
         aria-labelledby="com.mendix.widgets.custom.switch1"
@@ -175,10 +163,10 @@ exports[`Switch with readonly value should render the structure correctly 1`] = 
         className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default disabled un-checked"
         onClick={[Function]}
         onKeyDown={[Function]}
-        role="checkbox"
+        role="switch"
         tabIndex={0}
       >
-        <small
+        <div
           className="widget-switch-btn left"
         />
       </div>

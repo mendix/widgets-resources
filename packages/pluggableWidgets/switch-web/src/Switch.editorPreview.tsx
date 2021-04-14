@@ -24,5 +24,5 @@ export function preview(props: SwitchPreviewProps): ReactElement {
 }
 
 export function getPreviewCss() {
-    return require("./ui/switch-preview.scss");
+    return require("./ui/switch-main.scss");
 }

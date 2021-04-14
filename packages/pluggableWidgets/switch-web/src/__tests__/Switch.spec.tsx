@@ -10,7 +10,6 @@ describe("Switch", () => {
     let switchWrapper: ReactWrapper<SwitchContainerProps, any>;
     let switchComponent: ReactWrapper<SwitchProps, any>;
     let switchComponentWrapper: ReactWrapper<any, any>;
-    let checkbox: ReactWrapper<any, any>;
     let switchButtonWrapper: ReactWrapper<any, any>;
     let switchButton: ReactWrapper<any, any>;
     let alert: ReactWrapper<AlertProps, any>;
@@ -18,7 +17,6 @@ describe("Switch", () => {
         switchWrapper = mount(createElement(Switch, props));
         switchComponent = switchWrapper.find(SwitchComponent);
         switchComponentWrapper = switchComponent.find(".widget-switch");
-        checkbox = switchComponent.find(".widget-switch-checkbox");
         switchButtonWrapper = switchComponent.find(".widget-switch-btn-wrapper");
         switchButton = switchComponent.find(".widget-switch-btn");
         alert = switchComponent.find(Alert);
@@ -77,18 +75,26 @@ describe("Switch", () => {
         expect(alert).toMatchSnapshot();
     });
 
-    it("when value is false should have the correct checkbox attribute", () => {
+    it("when value is false should render with correct attributes", () => {
         createAndFindElements(createProps());
 
-        expect(checkbox.props().checked).toBe(false);
+        expect(switchButtonWrapper.hasClass("un-checked")).toBe(true);
+        expect(switchButtonWrapper.hasClass("checked")).toBe(false);
+        expect(switchButtonWrapper.props()["aria-checked"]).toBe(false);
+        expect(switchButton.hasClass("left")).toBe(true);
+        expect(switchButton.hasClass("right")).toBe(false);
     });
 
-    it("when value is true should have the correct checkbox attribute", () => {
+    it("when value is true should render with correct attributes", () => {
         createAndFindElements(
             createProps({ booleanAttribute: new EditableValueBuilder<boolean>().withValue(true).build() })
         );
 
-        expect(checkbox.props().checked).toBe(true);
+        expect(switchButtonWrapper.hasClass("un-checked")).toBe(false);
+        expect(switchButtonWrapper.hasClass("checked")).toBe(true);
+        expect(switchButtonWrapper.props()["aria-checked"]).toBe(true);
+        expect(switchButton.hasClass("left")).toBe(false);
+        expect(switchButton.hasClass("right")).toBe(true);
     });
 
     it("with iOS device style should render correct class", () => {
@@ -118,8 +124,8 @@ describe("Switch", () => {
         it("should render elements with correct attributes", () => {
             createAndFindElements(createProps());
 
-            expect(checkbox.hasClass("enabled")).toBe(true);
-            expect(switchButtonWrapper.hasClass("enabled")).toBe(false);
+            expect(switchButtonWrapper.hasClass("disabled")).toBe(false);
+            expect(switchButtonWrapper.props()["aria-readonly"]).toBe(false);
         });
 
         it("should invoke preventDefault onClick", () => {
@@ -223,8 +229,8 @@ describe("Switch", () => {
                 createProps({ booleanAttribute: new EditableValueBuilder<boolean>().isReadOnly().build() })
             );
 
-            expect(checkbox.hasClass("enabled")).toBe(false);
             expect(switchButtonWrapper.hasClass("disabled")).toBe(true);
+            expect(switchButtonWrapper.props()["aria-readonly"]).toBe(true);
         });
 
         it("should not invoke action", () => {

@@ -14,12 +14,6 @@ export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" |
 export default function Switch(props: SwitchProps) {
     return (
         <div className={classNames("widget-switch", props.class)} style={props.style}>
-            <input
-                checked={props.isChecked}
-                className={classNames("widget-switch-checkbox", { enabled: props.editable })}
-                readOnly
-                type="checkbox"
-            />
             <div
                 className={classNames("widget-switch-btn-wrapper", "widget-switch-btn-wrapper-default", {
                     checked: props.isChecked,
@@ -29,12 +23,12 @@ export default function Switch(props: SwitchProps) {
                 onClick={props.onClick}
                 onKeyDown={props.onKeyDown}
                 tabIndex={props.tabIndex ?? 0}
-                role="checkbox"
+                role="switch"
                 aria-checked={props.isChecked}
                 aria-labelledby={props.id}
                 aria-readonly={!props.editable}
             >
-                <small
+                <div
                     className={classNames("widget-switch-btn", {
                         left: !props.isChecked,
                         right: props.isChecked
