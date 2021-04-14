@@ -35,7 +35,7 @@ jobs:
                   token: ${{ secrets.E2E_PAT }} # `GitHub_PAT` is a secret that contains your PAT
                   path: packages/theming/atlas/tests/testProject
             - name: "Executing E2E screenshot tests"
-              run: npm run test:e2e -- --no-widget-update
+              run: npm run test:e2e
             - name: "Fixing files permissions"
               if: failure()
               run: |
