@@ -35,7 +35,7 @@ describe("Switch", () => {
         return { ...defaultProps, ...props };
     };
 
-    it("with editable value should render the structure correctly", () => {
+    it("with editable value renders the structure correctly", () => {
         createAndFindElements(
             createProps({
                 booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build()
@@ -45,7 +45,7 @@ describe("Switch", () => {
         expect(switchWrapper).toMatchSnapshot();
     });
 
-    it("with readonly value should render the structure correctly", () => {
+    it("with readonly value renders the structure correctly", () => {
         createAndFindElements(
             createProps({
                 booleanAttribute: new EditableValueBuilder<boolean>().isReadOnly().withValue(false).build()
@@ -55,7 +55,7 @@ describe("Switch", () => {
         expect(switchWrapper).toMatchSnapshot();
     });
 
-    it("without validation message should render correctly", () => {
+    it("without validation message renders correctly", () => {
         createAndFindElements(
             createProps({
                 booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build()
@@ -65,7 +65,7 @@ describe("Switch", () => {
         expect(alert).toMatchSnapshot();
     });
 
-    it("with validation message should render correctly", () => {
+    it("with validation message renders correctly", () => {
         createAndFindElements(
             createProps({
                 booleanAttribute: new EditableValueBuilder<boolean>().withValidation("error").withValue(false).build()
@@ -75,7 +75,7 @@ describe("Switch", () => {
         expect(alert).toMatchSnapshot();
     });
 
-    it("when value is false should render with correct attributes", () => {
+    it("when value is false renders with correct attributes", () => {
         createAndFindElements(createProps());
 
         expect(switchButtonWrapper.hasClass("un-checked")).toBe(true);
@@ -85,7 +85,7 @@ describe("Switch", () => {
         expect(switchButton.hasClass("right")).toBe(false);
     });
 
-    it("when value is true should render with correct attributes", () => {
+    it("when value is true renders with correct attributes", () => {
         createAndFindElements(
             createProps({ booleanAttribute: new EditableValueBuilder<boolean>().withValue(true).build() })
         );
@@ -97,12 +97,12 @@ describe("Switch", () => {
         expect(switchButton.hasClass("right")).toBe(true);
     });
 
-    it("with iOS device style should render correct class", () => {
+    it("with iOS device style renders correct class", () => {
         createAndFindElements(createProps({ class: "iOS" }));
         expect(switchComponentWrapper.hasClass("iOS")).toBe(true);
     });
 
-    it("with android device style should render correct class", () => {
+    it("with android device style renders correct class", () => {
         createAndFindElements(createProps({ class: "android" }));
 
         expect(switchComponentWrapper.hasClass("android")).toBe(true);
@@ -121,14 +121,14 @@ describe("Switch", () => {
     });
 
     describe("when editable", () => {
-        it("should render elements with correct attributes", () => {
+        it("renders elements with correct attributes", () => {
             createAndFindElements(createProps());
 
             expect(switchButtonWrapper.hasClass("disabled")).toBe(false);
             expect(switchButtonWrapper.props()["aria-readonly"]).toBe(false);
         });
 
-        it("should invoke preventDefault onClick", () => {
+        it("invokes preventDefault onClick", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
             const eventMock = { preventDefault: jest.fn() };
@@ -138,7 +138,7 @@ describe("Switch", () => {
             expect(eventMock.preventDefault).toHaveBeenCalled();
         });
 
-        it("should invoke preventDefault on space keydown", () => {
+        it("invokes preventDefault on space keydown", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
             const eventMock = { preventDefault: jest.fn(), key: " " };
@@ -148,7 +148,7 @@ describe("Switch", () => {
             expect(eventMock.preventDefault).toHaveBeenCalled();
         });
 
-        it("should invoke action on click", () => {
+        it("invokes action on click", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
 
@@ -157,7 +157,7 @@ describe("Switch", () => {
             expect(props.action?.execute).toHaveBeenCalled();
         });
 
-        it("should invoke action on space keydown", () => {
+        it("invokes action on space keydown", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
 
@@ -166,7 +166,7 @@ describe("Switch", () => {
             expect(props.action?.execute).toHaveBeenCalled();
         });
 
-        it("should not invoke action on keydown of any key but space", () => {
+        it("shouldn't invoke action on keydown of any key but space", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
 
@@ -176,7 +176,7 @@ describe("Switch", () => {
         });
 
         describe("when value is available", () => {
-            it("should toggle the attributes value onClick", () => {
+            it("toggles the attributes value onClick", () => {
                 const props = createProps({
                     booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build()
                 });
@@ -193,7 +193,7 @@ describe("Switch", () => {
                 expect(props.booleanAttribute.value).toEqual(false);
             });
 
-            it("should toggle the attribute value on space keydown", () => {
+            it("toggles the attribute value on space keydown", () => {
                 const props = createProps({
                     booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build()
                 });
@@ -210,7 +210,7 @@ describe("Switch", () => {
                 expect(props.booleanAttribute.value).toEqual(false);
             });
 
-            it("should not toggle the attribute on keydown of any key but space", () => {
+            it("shouldn't toggle the attribute on keydown of any key but space", () => {
                 const props = createProps({
                     booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build()
                 });
@@ -224,7 +224,7 @@ describe("Switch", () => {
     });
 
     describe("when readonly", () => {
-        it("should render elements with correct attributes", () => {
+        it("renders elements with correct attributes", () => {
             createAndFindElements(
                 createProps({ booleanAttribute: new EditableValueBuilder<boolean>().isReadOnly().build() })
             );
@@ -233,7 +233,7 @@ describe("Switch", () => {
             expect(switchButtonWrapper.props()["aria-readonly"]).toBe(true);
         });
 
-        it("should not invoke action", () => {
+        it("shouldn't invoke action", () => {
             const props = createProps({
                 booleanAttribute: new EditableValueBuilder<boolean>().isReadOnly().build(),
                 action: actionValue()
@@ -245,7 +245,7 @@ describe("Switch", () => {
             expect(props.action?.execute).not.toHaveBeenCalled();
         });
 
-        it("should not change the attributes value", () => {
+        it("shouldn't change the attributes value", () => {
             const props = createProps({
                 booleanAttribute: new EditableValueBuilder<boolean>().isReadOnly().build()
             });
@@ -256,7 +256,7 @@ describe("Switch", () => {
             expect(props.booleanAttribute.setValue).not.toHaveBeenCalled();
         });
 
-        it("should invoke preventDefault onClick", () => {
+        it("invokes preventDefault onClick", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
             const eventMock = { preventDefault: jest.fn() };
@@ -266,7 +266,7 @@ describe("Switch", () => {
             expect(eventMock.preventDefault).toHaveBeenCalled();
         });
 
-        it("should invoke preventDefault on keydown space", () => {
+        it("invokes preventDefault on keydown space", () => {
             const props = createProps({ action: actionValue() });
             createAndFindElements(props);
             const eventMock = { preventDefault: jest.fn(), key: " " };

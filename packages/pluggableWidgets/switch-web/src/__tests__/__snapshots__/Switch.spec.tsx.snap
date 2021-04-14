@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Switch with editable value should render the structure correctly 1`] = `
+exports[`Switch with editable value renders the structure correctly 1`] = `
 <Switch
   booleanAttribute={
     Object {
@@ -89,7 +89,7 @@ exports[`Switch with editable value should render the structure correctly 1`] = 
 </Switch>
 `;
 
-exports[`Switch with readonly value should render the structure correctly 1`] = `
+exports[`Switch with readonly value renders the structure correctly 1`] = `
 <Switch
   booleanAttribute={
     Object {
@@ -178,7 +178,7 @@ exports[`Switch with readonly value should render the structure correctly 1`] = 
 </Switch>
 `;
 
-exports[`Switch with validation message should render correctly 1`] = `
+exports[`Switch with validation message renders correctly 1`] = `
 <Alert
   bootstrapStyle="danger"
 >
@@ -190,7 +190,7 @@ exports[`Switch with validation message should render correctly 1`] = `
 </Alert>
 `;
 
-exports[`Switch without validation message should render correctly 1`] = `
+exports[`Switch without validation message renders correctly 1`] = `
 <Alert
   bootstrapStyle="danger"
 />
