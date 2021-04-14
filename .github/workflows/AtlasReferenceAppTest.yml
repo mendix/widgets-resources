@@ -16,6 +16,18 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
+              with:
+                  submodules: false
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+
             - name: Checkout private repository
               uses: actions/checkout@v2
               with:
@@ -27,14 +39,14 @@ jobs:
             - name: "Fixing files permissions"
               if: failure()
               run: |
-                sudo find ${{ github.workspace}}/packages/theming -type d -exec chmod 755 {} \;
-                sudo find ${{ github.workspace}}/packages/theming -type f -exec chmod 644 {} \;
+                  sudo find ${{ github.workspace}}/packages/theming -type d -exec chmod 755 {} \;
+                  sudo find ${{ github.workspace}}/packages/theming -type f -exec chmod 644 {} \;
             - name: "Archive test screenshot results"
               uses: actions/upload-artifact@v2
               if: failure()
               with:
-                name: test-screenshot-results
-                path: |
-                  ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/diff/*.png
-                  ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/actual/*.png
-                if-no-files-found: error
+                  name: test-screenshot-results
+                  path: |
+                      ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/diff/*.png
+                      ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/actual/*.png
+                  if-no-files-found: error
