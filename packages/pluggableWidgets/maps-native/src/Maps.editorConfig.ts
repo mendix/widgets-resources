@@ -1,6 +1,5 @@
-import { Problem, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { Problem } from "@mendix/piw-utils-internal";
 import { MapsPreviewProps } from "../typings/MapsProps";
-import StructurePreviewMapsSVG from "./assets/StructurePreviewMaps.svg";
 
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
