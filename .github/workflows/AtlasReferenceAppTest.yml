@@ -51,6 +51,6 @@ jobs:
               with:
                   name: test-screenshot-results
                   path: |
-                      ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/diff/*.png
-                      ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/actual/*.png
+                      ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/diff/p/*.png
+                      ${{ github.workspace}}/packages/theming/atlas/tests/e2e/screenshot-results/actual/p/*.png
                   if-no-files-found: error
