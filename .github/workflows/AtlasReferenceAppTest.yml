@@ -34,8 +34,12 @@ jobs:
                   repository: leonardomendix/atlas
                   token: ${{ secrets.E2E_PAT }} # `GitHub_PAT` is a secret that contains your PAT
                   path: packages/theming/atlas/tests/testProject
+            - name: "Installing dependencies"
+              run: npm install
             - name: "Executing E2E screenshot tests"
-              run: npm run test:e2e
+              run: |
+                  cd packages/theming/atlas
+                  npm run test:e2e
             - name: "Fixing files permissions"
               if: failure()
               run: |
