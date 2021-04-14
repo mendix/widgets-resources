@@ -18,10 +18,12 @@ const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
 // This ends up having unstable progress circle percentage
 const pagesWithTimeout = [
     "/p/alerts",
-    "/p/datagrid-manyrows",
-    "/p/progresscircle",
+    "/p/progress-circles",
+    "/p/maps",
     "/p/pt_dashboard-expenses",
     "/p/pt_dashboard-metrics",
+    "/p/pt_dashboard-transactions",
+    "/p/pt_dashboard-action-center",
     "/p/pt_tablet_dashboard-metrics",
     "/p/pt_tablet_dashboard-user-detail",
     "/p/bb_headers",
@@ -45,7 +47,7 @@ describe("Screenshots of the pages for", () => {
                 const mapsWidget = $(".widget-leaflet-maps");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(3000);
+                    browser.pause(5000);
                 }
 
                 browser.saveElement($("#content"), url, {
