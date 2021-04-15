@@ -27,6 +27,10 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         }
     }, [streamObject, videoElement]);
 
+    const cleanupStreamObject = useCallback(() => {
+        streamObject?.getVideoTracks().forEach(track => track.stop());
+    }, [streamObject]);
+
     useEffect(() => {
         async function getStream(): Promise<void> {
             if (supportsCameraAccess) {
@@ -55,8 +59,9 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         async function check(): Promise<void> {
             if (streamObject) {
                 const hints = new Map();
-                // TODO: Support all formats.
-                const formats = [BarcodeFormat.QR_CODE, BarcodeFormat.UPC_A];
+                const formats = Object.values(BarcodeFormat).filter(
+                    format => typeof format !== "string"
+                ) as BarcodeFormat[];
 
                 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
@@ -68,6 +73,7 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
                         // TODO: Do something with the result
                         console.log({ result });
                         // TODO: Handle stopping the stream and cleaning stuff up, since right now it stays open forever.
+                        cleanupStreamObject();
                     }
                 } catch (e) {
                     // TODO: handle error case
@@ -76,7 +82,7 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
             }
         }
         check();
-    }, [streamObject, videoElement]);
+    }, [streamObject, videoElement, cleanupStreamObject]);
 
     if (!supportsCameraAccess) {
         // Mendix ensures that Mendix apps are only run in the supported browsers and all of them
@@ -87,5 +93,12 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     if (error) {
         return <div>{error}</div>;
     }
-    return streamObject ? <video ref={updateVideoElement} onCanPlay={play} /> : <div>Waiting for permission</div>;
+    return streamObject ? (
+        <div>
+            <video ref={updateVideoElement} onCanPlay={play} />
+            <canvas />
+        </div>
+    ) : (
+        <div>Waiting for permission</div>
+    );
 }
