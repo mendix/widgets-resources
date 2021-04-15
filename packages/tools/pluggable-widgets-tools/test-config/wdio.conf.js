@@ -22,7 +22,7 @@ exports.config = {
     host: serverIp,
     port: serverPort,
     specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
-    maxInstances: 5,
+    maxInstances: 1,
     capabilities: [
         {
             browserName,
