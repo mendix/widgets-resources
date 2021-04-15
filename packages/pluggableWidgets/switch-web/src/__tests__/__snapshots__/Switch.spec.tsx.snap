@@ -69,9 +69,10 @@ exports[`Switch with editable value renders the structure correctly 1`] = `
     >
       <div
         aria-checked={false}
-        aria-labelledby="com.mendix.widgets.custom.switch1"
+        aria-labelledby="com.mendix.widgets.custom.switch1-label"
         aria-readonly={false}
         className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default un-checked"
+        id="com.mendix.widgets.custom.switch1"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="switch"
@@ -158,9 +159,10 @@ exports[`Switch with readonly value renders the structure correctly 1`] = `
     >
       <div
         aria-checked={false}
-        aria-labelledby="com.mendix.widgets.custom.switch1"
+        aria-labelledby="com.mendix.widgets.custom.switch1-label"
         aria-readonly={true}
         className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default disabled un-checked"
+        id="com.mendix.widgets.custom.switch1"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="switch"
