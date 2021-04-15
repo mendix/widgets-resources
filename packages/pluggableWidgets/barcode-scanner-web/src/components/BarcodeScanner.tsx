@@ -4,6 +4,10 @@ import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BarcodeScannerProps {}
 
+const hints = new Map();
+const formats = Object.values(BarcodeFormat).filter(format => typeof format !== "string") as BarcodeFormat[];
+hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
+
 export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     const [error, setError] = useState<string>();
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
@@ -21,20 +25,20 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         videoElement?.play(); // TODO: doesn't work on iOS safari
     }, [videoElement]);
 
+    const cleanupStreamObject = useCallback((stream: MediaStream | null) => {
+        stream?.getVideoTracks().forEach(track => track.stop());
+    }, []);
+
     useEffect(() => {
         if (videoElement) {
             videoElement.srcObject = streamObject;
         }
     }, [streamObject, videoElement]);
 
-    const cleanupStreamObject = useCallback(() => {
-        streamObject?.getVideoTracks().forEach(track => track.stop());
-    }, [streamObject]);
-
     useEffect(() => {
+        let stream: MediaStream | null;
         async function getStream(): Promise<void> {
             if (supportsCameraAccess) {
-                let stream;
                 try {
                     stream = await navigator.mediaDevices.getUserMedia({ video: true });
                     setStreamObject(stream);
@@ -53,27 +57,21 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
             }
         }
         getStream();
-    }, [supportsCameraAccess, setError]);
+        return () => {
+            cleanupStreamObject(stream);
+        };
+    }, [supportsCameraAccess, setError, cleanupStreamObject]);
 
     useEffect(() => {
         async function check(): Promise<void> {
             if (streamObject) {
-                const hints = new Map();
-                const formats = Object.values(BarcodeFormat).filter(
-                    format => typeof format !== "string"
-                ) as BarcodeFormat[];
-
-                hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
-
                 const browserReader = new BrowserMultiFormatReader(hints);
-
                 try {
                     if (videoElement) {
                         const result = await browserReader.decodeOnceFromStream(streamObject, videoElement);
                         // TODO: Do something with the result
                         console.log({ result });
-                        // TODO: Handle stopping the stream and cleaning stuff up, since right now it stays open forever.
-                        cleanupStreamObject();
+                        cleanupStreamObject(streamObject);
                     }
                 } catch (e) {
                     // TODO: handle error case
