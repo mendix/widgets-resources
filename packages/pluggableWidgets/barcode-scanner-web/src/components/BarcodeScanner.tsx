@@ -1,4 +1,5 @@
 import { createElement, ReactElement, useCallback, useEffect, useState } from "react";
+import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BarcodeScannerProps {}
@@ -21,7 +22,7 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     }, [videoElement]);
 
     useEffect(() => {
-        if (streamObject && videoElement) {
+        if (videoElement) {
             videoElement.srcObject = streamObject;
         }
     }, [streamObject, videoElement]);
@@ -49,6 +50,33 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         }
         getStream();
     }, [supportsCameraAccess, setError]);
+
+    useEffect(() => {
+        async function check(): Promise<void> {
+            if (streamObject) {
+                const hints = new Map();
+                // TODO: Support all formats.
+                const formats = [BarcodeFormat.QR_CODE, BarcodeFormat.UPC_A];
+
+                hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
+
+                const browserReader = new BrowserMultiFormatReader(hints);
+
+                try {
+                    if (videoElement) {
+                        const result = await browserReader.decodeOnceFromStream(streamObject, videoElement);
+                        // TODO: Do something with the result
+                        console.log({ result });
+                        // TODO: Handle stopping the stream and cleaning stuff up, since right now it stays open forever.
+                    }
+                } catch (e) {
+                    // TODO: handle error case
+                    console.log("something went wrong", e);
+                }
+            }
+        }
+        check();
+    }, [streamObject, videoElement]);
 
     if (!supportsCameraAccess) {
         // Mendix ensures that Mendix apps are only run in the supported browsers and all of them
