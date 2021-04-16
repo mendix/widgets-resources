@@ -72,6 +72,6 @@ async function buildAndCopyAtlas(watchMode, destination) {
         console.log("Building & copying Atlas has completed successfully");
     } catch (commands) {
         const commandInfo = commands.map(command => `{ name: ${command.command.name}, exit code: ${command.exitCode}}`);
-        throw new Error(`One or more commands failed: ${commandInfo.join(", ")}`);
+        throw new Error(`One or more commands failed:\n${commandInfo.join("\n")}`);
     }
 }
