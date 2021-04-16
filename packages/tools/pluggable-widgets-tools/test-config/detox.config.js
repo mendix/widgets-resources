@@ -14,7 +14,7 @@ module.exports = {
             testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
             type: "android.emulator",
             device: {
-                avdName: "Pixel_2_API_29"
+                avdName: "Emulator_29"
             }
         }
     }
