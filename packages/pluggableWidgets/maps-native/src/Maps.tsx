@@ -197,22 +197,15 @@ export class Maps extends Component<Props, State> {
     }
 
     private async getCenter(): Promise<LatLng> {
+        const { markers, fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            (this.props.centerLatitude && this.props.centerLongitude) || this.props.centerAddress
-                ? await this.parseCoordinate(
-                      this.props.centerLatitude,
-                      this.props.centerLongitude,
-                      this.props.centerAddress
-                  )
-                : this.props.markers.length === 1 && this.props.fitToMarkers
-                ? await this.parseCoordinate(
-                      this.props.markers[0].latitude,
-                      this.props.markers[0].longitude,
-                      this.props.markers[0].address
-                  )
-                : null;
+            (centerLatitude && centerLongitude) || centerAddress
+                ? await this.parseCoordinate(centerLatitude, centerLongitude, centerAddress)
+                : markers.length === 1 && fitToMarkers
+                ? await this.parseCoordinate(markers[0].latitude, markers[0].longitude, markers[0].address)
+                : { latitude: 51.9066346, longitude: 4.4861703 };
 
-        return center || { latitude: 51.9066346, longitude: 4.4861703 };
+        return center as LatLng;
     }
 
     private parseCoordinate(
@@ -220,7 +213,7 @@ export class Maps extends Component<Props, State> {
         longitudeProp?: DynamicValue<Big>,
         addressProp?: DynamicValue<string>
     ): Promise<LatLng | null> {
-        if (latitudeProp && latitudeProp.value && longitudeProp && longitudeProp.value) {
+        if (latitudeProp?.value && longitudeProp?.value) {
             const latitude = Number(latitudeProp.value);
             const longitude = Number(longitudeProp.value);
 
