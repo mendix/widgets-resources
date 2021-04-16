@@ -70,7 +70,8 @@ async function buildAndCopyAtlas(watchMode, destination) {
             }
         );
         console.log("Success", success);
-    } catch (failure) {
-        throw new Error(`Failure ${failure}`);
+    } catch (commands) {
+        const commandInfo = commands.map(command => `{ name: ${command.command.name}, exit code: ${command.exitCode}}`);
+        throw new Error(`One or more commands failed: ${commandInfo.join(", ")}`);
     }
 }
