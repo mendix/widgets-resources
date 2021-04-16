@@ -49,11 +49,11 @@ describe("Progress Bar on click", () => {
     it("should Open Blocking Popup Page", () => {
         const progressBar = new ProgressBar("onClickOpenBlockingPopupPage");
         const value = progressBar.value;
-        progressBar.element.waitForDisplayed();
+        progressBar.element.waitForDisplayed({ timeout: 3000 });
         progressBar.clickableArea.click();
 
         const progressBarOpened = new ProgressBar("onClickOpened");
-        progressBarOpened.element.waitForDisplayed();
+        progressBarOpened.element.waitForDisplayed({ timeout: 3000 });
         expect(value).toContain(progressBarOpened.value);
     });
 });

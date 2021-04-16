@@ -58,8 +58,10 @@ describe("BadgeButton different views", () => {
         it("displays multiple widgets", () => {
             const badgeButton = new badgeButtonWidget("badgeButtonTemplateGrid");
 
+            badgeButton.element.waitForDisplayed();
+
             expect(badgeButton.getAllBadges().length).toBeGreaterThan(1);
-            expect(templateGrid.rowCount).toEqual(3);
+            expect(templateGrid.rowCount).toEqual(2);
         });
     });
 
