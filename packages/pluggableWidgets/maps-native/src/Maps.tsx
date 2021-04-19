@@ -1,15 +1,16 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { ActionValue, DynamicValue } from "mendix";
+import { ActionValue } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
 import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
 
-import { DefaultZoomLevelEnum, MapsProps, MarkersType as MarkerProps } from "../typings/MapsProps";
+import { DefaultZoomLevelEnum, MapsProps } from "../typings/MapsProps";
+import { ModeledMarker } from "../typings/shared";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@mendix/piw-utils-internal";
-import { Big } from "big.js";
+import { convertDynamicModeledMarker, convertStaticModeledMarker } from "./util/data";
 
 type Props = MapsProps<MapsStyle>;
 
@@ -28,7 +29,7 @@ const enum Status {
 
 interface Marker {
     key: string;
-    props: MarkerProps;
+    props: ModeledMarker;
     coordinate: LatLng;
 }
 
@@ -101,18 +102,14 @@ export class Maps extends Component<Props, State> {
             <MarkerView
                 key={key}
                 coordinate={coordinate}
-                title={this.props.interactive ? props.title && props.title.value : ""}
-                description={this.props.interactive ? props.description && props.description.value : ""}
+                title={this.props.interactive ? props.title : ""}
+                description={this.props.interactive ? props.description : ""}
                 onPress={this.props.interactive ? () => onMarkerPress(props.onClick) : undefined}
-                pinColor={props.color || this.styles.marker.color}
+                pinColor={props.iconColor || this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
             >
-                {props.icon && props.icon.value && (
-                    <Icon
-                        icon={props.icon.value}
-                        color={props.color || this.styles.marker.color}
-                        size={props.iconSize}
-                    />
+                {props.icon && (
+                    <Icon icon={props.icon} color={props.iconColor || this.styles.marker.color} size={props.iconSize} />
                 )}
             </MarkerView>
         );
@@ -147,8 +144,15 @@ export class Maps extends Component<Props, State> {
     }
 
     private async parseMarkers(): Promise<void> {
+        const markers = [
+            ...this.props.markers.map(convertStaticModeledMarker),
+            ...this.props.dynamicMarkers
+                .map(convertDynamicModeledMarker)
+                .reduce((prev, current) => [...prev, ...current], [])
+        ];
+
         const parsedMarkers = await Promise.all(
-            this.props.markers.map(async (marker, index) => ({
+            markers.map(async (marker, index) => ({
                 key: `map_marker_${index}`,
                 props: marker,
                 coordinate: await this.parseCoordinate(marker.latitude, marker.longitude, marker.address)
@@ -199,36 +203,34 @@ export class Maps extends Component<Props, State> {
     private async getCenter(): Promise<LatLng> {
         const { markers, fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            (centerLatitude && centerLongitude) || centerAddress
-                ? await this.parseCoordinate(centerLatitude, centerLongitude, centerAddress)
-                : markers.length === 1 && fitToMarkers
-                ? await this.parseCoordinate(markers[0].latitude, markers[0].longitude, markers[0].address)
-                : { latitude: 51.9066346, longitude: 4.4861703 };
+            this.state.markers?.length === 1 && this.props.fitToMarkers
+                ? this.state.markers[0]?.coordinate
+                : await this.parseCoordinate(
+                      Number(this.props.centerLatitude?.value),
+                      Number(this.props.centerLongitude?.value),
+                      this.props.centerAddress?.value
+                  );
 
-        return center as LatLng;
+        return center || { latitude: 51.9066346, longitude: 4.4861703 };
     }
 
     private parseCoordinate(
-        latitudeProp?: DynamicValue<Big>,
-        longitudeProp?: DynamicValue<Big>,
-        addressProp?: DynamicValue<string>
-    ): Promise<LatLng | null> {
-        if (latitudeProp?.value && longitudeProp?.value) {
-            const latitude = Number(latitudeProp.value);
-            const longitude = Number(longitudeProp.value);
-
+        latitude?: number | undefined,
+        longitude?: number | undefined,
+        address?: string | undefined
+    ): Promise<LatLng> {
+        if (latitude && longitude) {
             if (!isValidLatitude(latitude) || !isValidLongitude(longitude)) {
                 throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
-
             return Promise.resolve({ latitude, longitude });
         }
 
-        if (addressProp && addressProp.value) {
-            return this.geocoder.geocode(addressProp.value);
+        if (address) {
+            return this.geocoder.geocode(address);
+        } else {
+            throw new Error(`No address provided.`);
         }
-
-        return Promise.resolve(null);
     }
 }
 
