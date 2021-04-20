@@ -37,16 +37,9 @@ export function check(values: MapsPreviewProps): Problem[] {
 
 export function getPreview(_: MapsPreviewProps): StructurePreviewProps {
     return {
-        type: "RowLayout",
-        padding: 8,
-        columnSize: "grow",
-        children: [
-            {
-                type: "Image",
-                document: decodeURIComponent(StructurePreviewMapsSVG.replace("data:image/svg+xml,", "")),
-                width: 375,
-                height: 375
-            }
-        ]
+        type: "Image",
+        document: decodeURIComponent(StructurePreviewMapsSVG.replace("data:image/svg+xml,", "")),
+        width: 375,
+        height: 375
     };
 }
