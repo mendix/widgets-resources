@@ -1,5 +1,16 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    StructurePreviewProps
+} from "@mendix/piw-utils-internal";
 import { MapsPreviewProps } from "../typings/MapsProps";
+
+import GoogleMapsSVG from "./assets/GoogleMaps.svg";
+import MapboxSVG from "./assets/Mapbox.svg";
+import OpenStreetMapSVG from "./assets/OpenStreetMap.svg";
+import HereMapsSVG from "./assets/HereMaps.svg";
 
 export function getProperties(
     values: MapsPreviewProps,
@@ -174,4 +185,31 @@ export function check(values: MapsPreviewProps): Problem[] {
     });
 
     return errors;
+}
+
+export function getPreview(values: MapsPreviewProps): StructurePreviewProps {
+    const { mapProvider } = values;
+    let image: string;
+
+    switch (mapProvider) {
+        case "googleMaps":
+            image = GoogleMapsSVG;
+            break;
+        case "mapBox":
+            image = MapboxSVG;
+            break;
+        case "openStreet":
+            image = OpenStreetMapSVG;
+            break;
+        case "hereMaps":
+            image = HereMapsSVG;
+            break;
+    }
+
+    return {
+        type: "Image",
+        document: decodeURIComponent(image.replace("data:image/svg+xml,", "")),
+        width: 375,
+        height: 375
+    };
 }
