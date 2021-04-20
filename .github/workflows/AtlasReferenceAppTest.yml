@@ -19,7 +19,7 @@ jobs:
             - name: "Checking-out code"
               uses: actions/checkout@v2
               with:
-                  submodules: false
+                  submodules: true
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
@@ -27,13 +27,6 @@ jobs:
               with:
                   path: ~/.npm
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-
-            - name: Checkout private repository
-              uses: actions/checkout@v2
-              with:
-                  repository: leonardomendix/atlas
-                  token: ${{ secrets.E2E_PAT }} # `GitHub_PAT` is a secret that contains your PAT
-                  path: packages/theming/atlas/tests/testProject
             - name: "Installing dependencies"
               run: npm install
             - name: "Executing E2E screenshot tests"
