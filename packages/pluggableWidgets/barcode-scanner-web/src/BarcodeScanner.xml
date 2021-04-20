@@ -19,7 +19,7 @@
             </propertyGroup>
 
             <propertyGroup caption="Mask">
-                <property key="showMask" type="boolean" required="true" defaultValue="false">
+                <property key="showMask" type="boolean" required="true" defaultValue="true">
                     <caption>Show barcode mask</caption>
                     <description />
                 </property>

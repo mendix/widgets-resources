@@ -7,13 +7,14 @@ import "../ui/BarcodeScanner.scss";
 export interface BarcodeScannerProps {
     onClose?: () => void;
     onDetect?: (data: string) => void;
+    showMask: boolean;
 }
 
 const hints = new Map();
 const formats = Object.values(BarcodeFormat).filter(format => typeof format !== "string") as BarcodeFormat[];
 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
-export function BarcodeScanner({ onClose, onDetect }: BarcodeScannerProps): ReactElement | null {
+export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
     const [error, setError] = useState<string>();
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
@@ -108,26 +109,25 @@ export function BarcodeScanner({ onClose, onDetect }: BarcodeScannerProps): Reac
     return (
         <div className={classNames("widget-barcode-scanner-container")}>
             <video className={classNames("video")} ref={updateVideoElement} onCanPlay={play} />
-            <div className={classNames("video-canvas")}>
-                <button
-                    className={classNames("btn btn-image btn-icon close-button")}
-                    onClick={onClose || toggleOverlay}
-                >
-                    <div className={classNames("glyphicon", "glyphicon-remove")} />
-                </button>
-                <div className={classNames("canvas-left", "canvas-background")} />
-                <div className={classNames("canvas-middle")}>
-                    <div className={classNames("canvas-middle-top", "canvas-background")} />
-                    <div className={classNames("canvas-middle-middle")}>
-                        <div className={classNames("corner", "corner-top-left")} />
-                        <div className={classNames("corner", "corner-top-right")} />
-                        <div className={classNames("corner", "corner-bottom-right")} />
-                        <div className={classNames("corner", "corner-bottom-left")} />
+            {showMask ? (
+                <div className={classNames("video-canvas")}>
+                    <div className={classNames("canvas-left", "canvas-background")} />
+                    <div className={classNames("canvas-middle")}>
+                        <div className={classNames("canvas-middle-top", "canvas-background")} />
+                        <div className={classNames("canvas-middle-middle")}>
+                            <div className={classNames("corner", "corner-top-left")} />
+                            <div className={classNames("corner", "corner-top-right")} />
+                            <div className={classNames("corner", "corner-bottom-right")} />
+                            <div className={classNames("corner", "corner-bottom-left")} />
+                        </div>
+                        <div className={classNames("canvas-middle-bottom", "canvas-background")} />
                     </div>
-                    <div className={classNames("canvas-middle-bottom", "canvas-background")} />
+                    <div className={classNames("canvas-right", "canvas-background")} />
                 </div>
-                <div className={classNames("canvas-right", "canvas-background")} />
-            </div>
+            ) : null}
+            <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose || toggleOverlay}>
+                <div className={classNames("glyphicon", "glyphicon-remove")} />
+            </button>
         </div>
     );
 }
