@@ -114,6 +114,7 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
                     })
                 );
             }
+
             this.subscriptionHandles.push(
                 window.mx.data.subscribe({
                     guid: mxObject.getGuid(),
@@ -128,13 +129,6 @@ class ImageViewerContainer extends Component<ImageViewerContainerProps, ImageVie
                 })
             );
 
-            this.subscriptionHandles.push(
-                window.mx.data.subscribe({
-                    attr: this.props.dynamicUrlAttribute,
-                    callback: this.attributeCallback(mxObject),
-                    guid: mxObject.getGuid()
-                })
-            );
             this.subscriptionHandles.push(
                 window.mx.data.subscribe({
                     callback: this.attributeCallback(mxObject),
