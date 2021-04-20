@@ -4,18 +4,24 @@ import classNames from "classnames";
 
 import "../ui/BarcodeScanner.scss";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface BarcodeScannerProps {}
+export interface BarcodeScannerProps {
+    onClose?: () => void;
+}
 
 const hints = new Map();
 const formats = Object.values(BarcodeFormat).filter(format => typeof format !== "string") as BarcodeFormat[];
 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
-export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
+export function BarcodeScanner({ onClose }: BarcodeScannerProps): ReactElement | null {
+    const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
     const [error, setError] = useState<string>();
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
     const [streamObject, setStreamObject] = useState<MediaStream | null>(null);
     const supportsCameraAccess = "mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices;
+
+    const toggleOverlay = useCallback(() => {
+        setShowScannerOverlay(showScannerOverlayCurrent => !showScannerOverlayCurrent);
+    }, []);
 
     const updateVideoElement = useCallback(
         (node: HTMLVideoElement | null) => {
@@ -85,6 +91,9 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         check();
     }, [streamObject, videoElement, cleanupStreamObject]);
 
+    if (!showScannerOverlay) {
+        return null;
+    }
     if (!supportsCameraAccess) {
         // Mendix ensures that Mendix apps are only run in the supported browsers and all of them
         // support the `navigator.mediaDevices.getUserMedia` API. So no additional error handling
@@ -98,7 +107,10 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
         <div className={classNames("widget-barcode-scanner-container")}>
             <video className={classNames("video")} ref={updateVideoElement} onCanPlay={play} />
             <div className={classNames("video-canvas")}>
-                <button className={classNames("btn btn-image btn-icon close-button")}>
+                <button
+                    className={classNames("btn btn-image btn-icon close-button")}
+                    onClick={onClose || toggleOverlay}
+                >
                     <div className={classNames("glyphicon", "glyphicon-remove")} />
                 </button>
                 <div className={classNames("canvas-left", "canvas-background")} />

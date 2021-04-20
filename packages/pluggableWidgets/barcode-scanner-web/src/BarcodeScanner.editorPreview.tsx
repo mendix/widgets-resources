@@ -3,5 +3,5 @@ import { BarcodeScannerPreviewProps } from "../typings/BarcodeScannerProps";
 import { BarcodeScanner } from "./components/BarcodeScanner";
 
 export function preview(_props: BarcodeScannerPreviewProps): ReactElement {
-    return <BarcodeScanner />;
+    return <BarcodeScanner onClose={undefined} />;
 }
