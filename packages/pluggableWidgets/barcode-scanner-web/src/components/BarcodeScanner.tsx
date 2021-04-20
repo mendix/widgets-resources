@@ -6,13 +6,14 @@ import "../ui/BarcodeScanner.scss";
 
 export interface BarcodeScannerProps {
     onClose?: () => void;
+    onDetect?: (data: string) => void;
 }
 
 const hints = new Map();
 const formats = Object.values(BarcodeFormat).filter(format => typeof format !== "string") as BarcodeFormat[];
 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
-export function BarcodeScanner({ onClose }: BarcodeScannerProps): ReactElement | null {
+export function BarcodeScanner({ onClose, onDetect }: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
     const [error, setError] = useState<string>();
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
@@ -80,6 +81,7 @@ export function BarcodeScanner({ onClose }: BarcodeScannerProps): ReactElement |
                         const result = await browserReader.decodeOnceFromStream(streamObject, videoElement);
                         // TODO: Do something with the result
                         console.log({ result });
+                        onDetect?.(result.getText());
                         cleanupStreamObject(streamObject);
                     }
                 } catch (e) {
@@ -89,7 +91,7 @@ export function BarcodeScanner({ onClose }: BarcodeScannerProps): ReactElement |
             }
         }
         check();
-    }, [streamObject, videoElement, cleanupStreamObject]);
+    }, [streamObject, videoElement, cleanupStreamObject, onDetect]);
 
     if (!showScannerOverlay) {
         return null;
