@@ -4,17 +4,24 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
+import { ActionValue, EditableValue } from "mendix";
 
 export interface BarcodeScannerContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    value: number;
+    datasource?: EditableValue<string>;
+    showMask: boolean;
+    onDetect?: ActionValue;
+    onClose?: ActionValue;
 }
 
 export interface BarcodeScannerPreviewProps {
     class: string;
     style: string;
-    value: number | null;
+    datasource: string;
+    showMask: boolean;
+    onDetect: {} | null;
+    onClose: {} | null;
 }
