@@ -201,17 +201,19 @@ export class Maps extends Component<Props, State> {
     }
 
     private async getCenter(): Promise<LatLng> {
-        const { markers, fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
+        const { fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            this.state.markers?.length === 1 && this.props.fitToMarkers
+            (centerLatitude && centerLongitude) || centerAddress
+                ? await this.parseCoordinate(
+                      Number(centerLatitude?.value),
+                      Number(centerLongitude?.value),
+                      centerAddress?.value
+                  )
+                : this.state.markers?.length === 1 && fitToMarkers
                 ? this.state.markers[0]?.coordinate
-                : await this.parseCoordinate(
-                      Number(this.props.centerLatitude?.value),
-                      Number(this.props.centerLongitude?.value),
-                      this.props.centerAddress?.value
-                  );
+                : { latitude: 51.9066346, longitude: 4.4861703 };
 
-        return center || { latitude: 51.9066346, longitude: 4.4861703 };
+        return center as LatLng;
     }
 
     private parseCoordinate(
