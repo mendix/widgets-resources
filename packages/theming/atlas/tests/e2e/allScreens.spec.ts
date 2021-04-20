@@ -29,16 +29,15 @@ const pagesWithTimeout = [
     "/p/pt_dashboard-action-center",
     "/p/pt_tablet_dashboard-metrics",
     "/p/pt_tablet_dashboard-user-detail",
+    "/p/pt_dashboard-transactions",
+    "/p/pt_grid-tabbed",
     "/p/bb_headers",
     "/p/bb_cards",
-    "/p/pt_dashboard-user-detail"
+    "/p/pt_dashboard-user-detail",
+    "/p/wizardcirclestep"
 ];
 
 describe("Screenshots of the pages for", () => {
-    beforeAll(() => {
-        browser.url("/");
-    });
-
     for (const url of pageUrls(testPageFolders)) {
         if (!pagesToSkip.includes(url)) {
             it(`matches snapshot for page ${url}`, () => {
@@ -48,7 +47,7 @@ describe("Screenshots of the pages for", () => {
                 // These widgets are causing unstable tests due to their nature while loading the screen
                 const sprintrFeedbackWidget = $(".sprintrFeedback__sidebar");
                 const mapsWidget = $(".widget-maps");
-                const chartBar = $(".modebar-container");
+                const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
                     browser.pause(5000);
