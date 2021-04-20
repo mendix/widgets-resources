@@ -1,5 +1,8 @@
 import { createElement, ReactElement, useCallback, useEffect, useState } from "react";
 import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library";
+import classNames from "classnames";
+
+import "../ui/BarcodeScanner.scss";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface BarcodeScannerProps {}
@@ -91,12 +94,26 @@ export function BarcodeScanner(_props: BarcodeScannerProps): ReactElement {
     if (error) {
         return <div>{error}</div>;
     }
-    return streamObject ? (
-        <div>
-            <video ref={updateVideoElement} onCanPlay={play} />
-            <canvas />
+    return (
+        <div className={classNames("widget-barcode-scanner-container")}>
+            <video className={classNames("video")} ref={updateVideoElement} onCanPlay={play} />
+            <div className={classNames("video-canvas")}>
+                <button className={classNames("btn btn-image btn-icon close-button")}>
+                    <div className={classNames("glyphicon", "glyphicon-remove")} />
+                </button>
+                <div className={classNames("canvas-left", "canvas-background")} />
+                <div className={classNames("canvas-middle")}>
+                    <div className={classNames("canvas-middle-top", "canvas-background")} />
+                    <div className={classNames("canvas-middle-middle")}>
+                        <div className={classNames("corner", "corner-top-left")} />
+                        <div className={classNames("corner", "corner-top-right")} />
+                        <div className={classNames("corner", "corner-bottom-right")} />
+                        <div className={classNames("corner", "corner-bottom-left")} />
+                    </div>
+                    <div className={classNames("canvas-middle-bottom", "canvas-background")} />
+                </div>
+                <div className={classNames("canvas-right", "canvas-background")} />
+            </div>
         </div>
-    ) : (
-        <div>Waiting for permission</div>
     );
 }
