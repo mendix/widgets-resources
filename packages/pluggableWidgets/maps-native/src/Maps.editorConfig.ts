@@ -13,7 +13,7 @@ export function check(values: MapsPreviewProps): Problem[] {
         errors.push({
             property: "minZoomLevel",
             severity: "error",
-            message: "The minimum zoom level can not be smaller than the maximum zoom level."
+            message: "The minimum zoom level can not be greater than the maximum zoom level."
         });
     }
 
@@ -21,13 +21,13 @@ export function check(values: MapsPreviewProps): Problem[] {
         errors.push({
             property: "defaultZoomLevel",
             severity: "error",
-            message: "The default zoom level can not be bigger than the minimum zoom level."
+            message: "The default zoom level can not be smaller than the minimum zoom level."
         });
     } else if (defaultZoomLevelIndex > maxZoomLevelIndex) {
         errors.push({
             property: "defaultZoomLevel",
             severity: "error",
-            message: "The default zoom level can not be smaller than the maximum zoom level."
+            message: "The default zoom level can not be greater than the maximum zoom level."
         });
     }
 
