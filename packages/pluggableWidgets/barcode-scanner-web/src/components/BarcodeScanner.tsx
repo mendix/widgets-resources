@@ -15,6 +15,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
     const { streamObject, cleanupStreamObject, error } = useMediaStream();
+    const { codeResult } = useCodeScanner(streamObject, videoElement);
     const supportsCameraAccess = browserSupportsCameraAccess();
 
     const updateVideoElement = useCallback(
@@ -41,7 +42,11 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         }
     }, [streamObject, videoElement]);
 
-    useCodeScanner(streamObject, videoElement, onDetect);
+    useEffect(() => {
+        if (onDetect && codeResult) {
+            onDetect(codeResult);
+        }
+    }, [codeResult, onDetect]);
 
     if (!showScannerOverlay) {
         return null;
