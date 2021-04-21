@@ -13,7 +13,7 @@ export interface BarcodeScannerProps {
 
 export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
-    const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
+    const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
     const { streamObject, cleanupStreamObject, error } = useMediaStream();
     const { codeResult } = useCodeScanner(streamObject, videoElement);
     const supportsCameraAccess = browserSupportsCameraAccess();

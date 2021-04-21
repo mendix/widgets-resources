@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
+type MediaStreamHookError = "ERROR_NOT_FOUND" | "ERROR_NOT_ALLOWED" | "ERROR_MEDIA_STREAM";
+
 type MediaStreamHook = () => {
     streamObject: MediaStream | null;
-    error: string;
+    error: MediaStreamHookError | null;
     cleanupStreamObject: () => void;
 };
 
@@ -21,7 +23,7 @@ const mediaStreamConstraints: MediaStreamConstraints = {
 
 export const useMediaStream: MediaStreamHook = () => {
     const [streamObject, setStreamObject] = useState<MediaStream | null>(null);
-    const [error, setError] = useState<string>("");
+    const [error, setError] = useState<MediaStreamHookError | null>(null);
     const supportsCameraAccess = browserSupportsCameraAccess();
 
     const cleanupStreamObject = useCallback(() => {
@@ -30,18 +32,24 @@ export const useMediaStream: MediaStreamHook = () => {
 
     useEffect(() => {
         let stream: MediaStream | null;
+        let isCanceled = false;
         async function getStream(): Promise<void> {
             try {
                 stream = await navigator.mediaDevices.getUserMedia(mediaStreamConstraints);
-                setStreamObject(stream);
+                if (!isCanceled) {
+                    setStreamObject(stream);
+                }
             } catch (e) {
                 if (e instanceof Error) {
                     switch (e.name) {
-                        // TODO: personalize this.
                         case "NotFoundError":
+                            setError("ERROR_NOT_FOUND");
+                            break;
                         case "NotAllowedError":
+                            setError("ERROR_NOT_ALLOWED");
+                            break;
                         default:
-                            setError(e.message);
+                            setError("ERROR_MEDIA_STREAM");
                             break;
                     }
                 }
@@ -49,11 +57,11 @@ export const useMediaStream: MediaStreamHook = () => {
         }
         if (supportsCameraAccess && !streamObject) {
             getStream();
-        } else {
-            return () => {
-                cleanupStreamObject();
-            };
         }
+        return () => {
+            isCanceled = true;
+            cleanupStreamObject();
+        };
     }, [supportsCameraAccess, streamObject, cleanupStreamObject]);
 
     return { streamObject, cleanupStreamObject, error };
