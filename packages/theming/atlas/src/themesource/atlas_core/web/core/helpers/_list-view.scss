@@ -125,6 +125,7 @@
         overflow: hidden; // For if it is not in a layout, to prevent scrollbars
         & > ul {
             display: flex; // normal a table
+            flex-wrap: wrap; 
             margin-right: -1 * $gutter-size;
             margin-left: -1 * $gutter-size;
 
