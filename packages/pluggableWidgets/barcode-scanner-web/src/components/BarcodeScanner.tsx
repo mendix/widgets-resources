@@ -1,6 +1,7 @@
 import { createElement, ReactElement, useCallback, useEffect, useState } from "react";
-import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library";
 import classNames from "classnames";
+import { useCodeScanner } from "../hooks/useCodeScanner";
+import { browserSupportsCameraAccess, useMediaStream } from "../hooks/useMediaStream";
 
 import "../ui/BarcodeScanner.scss";
 
@@ -10,20 +11,11 @@ export interface BarcodeScannerProps {
     showMask: boolean;
 }
 
-const hints = new Map();
-const formats = Object.values(BarcodeFormat).filter(format => typeof format !== "string") as BarcodeFormat[];
-hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
-
 export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
-    const [error, setError] = useState<string>();
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>();
-    const [streamObject, setStreamObject] = useState<MediaStream | null>(null);
-    const supportsCameraAccess = "mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices;
-
-    const toggleOverlay = useCallback(() => {
-        setShowScannerOverlay(showScannerOverlayCurrent => !showScannerOverlayCurrent);
-    }, []);
+    const { streamObject, cleanupStreamObject, error } = useMediaStream();
+    const supportsCameraAccess = browserSupportsCameraAccess();
 
     const updateVideoElement = useCallback(
         (node: HTMLVideoElement | null) => {
@@ -32,73 +24,24 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         [setVideoElement]
     );
 
-    const play = useCallback(() => {
-        videoElement?.play(); // TODO: doesn't work on iOS safari
-    }, [videoElement]);
-
-    const cleanupStreamObject = useCallback((stream: MediaStream | null) => {
-        stream?.getVideoTracks().forEach(track => track.stop());
+    const play = useCallback((event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+        if (event.currentTarget.paused) {
+            event.currentTarget.play(); // TODO: doesn't work on iOS safari
+        }
     }, []);
 
+    function onCloseOverlay(): void {
+        setShowScannerOverlay(false);
+        cleanupStreamObject();
+    }
+
     useEffect(() => {
-        if (videoElement) {
+        if (videoElement && streamObject) {
             videoElement.srcObject = streamObject;
         }
     }, [streamObject, videoElement]);
 
-    useEffect(() => {
-        let stream: MediaStream | null;
-        async function getStream(): Promise<void> {
-            if (supportsCameraAccess) {
-                try {
-                    stream = await navigator.mediaDevices.getUserMedia({
-                        video: {
-                            facingMode: "environment",
-                            width: { min: 640, ideal: 1280, max: 1920 },
-                            height: { min: 480, ideal: 720, max: 1080 }
-                        }
-                    });
-                    setStreamObject(stream);
-                } catch (e) {
-                    if (e instanceof Error) {
-                        switch (e.name) {
-                            // TODO: personalize this.
-                            case "NotFoundError":
-                            case "NotAllowedError":
-                            default:
-                                setError(e.message);
-                                break;
-                        }
-                    }
-                }
-            }
-        }
-        getStream();
-        return () => {
-            cleanupStreamObject(stream);
-        };
-    }, [supportsCameraAccess, setError, cleanupStreamObject]);
-
-    useEffect(() => {
-        async function check(): Promise<void> {
-            if (streamObject) {
-                const browserReader = new BrowserMultiFormatReader(hints);
-                try {
-                    if (videoElement) {
-                        const result = await browserReader.decodeOnceFromStream(streamObject, videoElement);
-                        // TODO: Do something with the result
-                        console.log({ result });
-                        onDetect?.(result.getText());
-                        cleanupStreamObject(streamObject);
-                    }
-                } catch (e) {
-                    // TODO: handle error case
-                    console.log("something went wrong", e);
-                }
-            }
-        }
-        check();
-    }, [streamObject, videoElement, cleanupStreamObject, onDetect]);
+    useCodeScanner(streamObject, videoElement, onDetect);
 
     if (!showScannerOverlay) {
         return null;
@@ -131,7 +74,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
                     <div className={classNames("canvas-right", "canvas-background")} />
                 </div>
             ) : null}
-            <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose || toggleOverlay}>
+            <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose || onCloseOverlay}>
                 <div className={classNames("glyphicon", "glyphicon-remove")} />
             </button>
         </div>
