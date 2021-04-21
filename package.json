@@ -18,7 +18,7 @@
     "test": "lerna run test --ignore @mendix/custom-widgets-utils-internal --stream",
     "test:scripts": "lerna run test:scripts --stream",
     "test:scripts:cross-platform": "lerna run test:scripts:cross-platform --stream",
-    "test:e2e": "lerna run test:e2e --ignore @mendix/{atlas-ui,custom-widgets-utils-internal} --stream --concurrency 1 --no-bail",
+    "test:e2e": "lerna run test:e2e --ignore @mendix/custom-widgets-utils-internal --stream --concurrency 1 --no-bail",
     "test:e2e:ios": "cd ./detox && npm install && npm run test:ios",
     "test:e2e:android": "cd ./detox && npm install && npm run test:android",
     "build": "lerna run build --ignore @mendix/custom-widgets-utils-internal",
