@@ -51,7 +51,13 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         async function getStream(): Promise<void> {
             if (supportsCameraAccess) {
                 try {
-                    stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    stream = await navigator.mediaDevices.getUserMedia({
+                        video: {
+                            facingMode: "environment",
+                            width: { min: 640, ideal: 1280, max: 1920 },
+                            height: { min: 480, ideal: 720, max: 1080 }
+                        }
+                    });
                     setStreamObject(stream);
                 } catch (e) {
                     if (e instanceof Error) {
