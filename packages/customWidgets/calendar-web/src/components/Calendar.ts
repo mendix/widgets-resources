@@ -208,7 +208,7 @@ class Calendar extends Component<CalendarProps, State> {
 
     private onEventDrop = (eventInfo: Container.EventInfo) => {
         if (
-            eventInfo.start.getDate() !== eventInfo.event.start.getDate() &&
+            eventInfo.start.getTime() !== eventInfo.event.start.getTime() &&
             this.props.editable === "default" &&
             this.props.onEventDropAction
         ) {
@@ -218,9 +218,9 @@ class Calendar extends Component<CalendarProps, State> {
 
     private onEventResize = (_resizeType: string, eventInfo: Container.EventInfo) => {
         if (
-            (eventInfo.start.getDate() !== eventInfo.event.start.getDate() ||
-                eventInfo.end.getDate() !== eventInfo.event.end.getDate()) &&
-            eventInfo.start.getDate() < eventInfo.end.getDate() &&
+            (eventInfo.start.getTime() !== eventInfo.event.start.getTime() ||
+                eventInfo.end.getTime() !== eventInfo.event.end.getTime()) &&
+            eventInfo.start.getTime() < eventInfo.end.getTime() &&
             this.props.editable &&
             this.props.onEventResizeAction
         ) {
