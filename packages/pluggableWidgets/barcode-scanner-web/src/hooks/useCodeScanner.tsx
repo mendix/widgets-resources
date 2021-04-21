@@ -7,29 +7,35 @@ hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
 type CodeScannerHook = (
     streamObject: MediaStream | null,
-    videoElement: HTMLVideoElement | null | undefined
-) => { codeResult: string | null };
+    videoElement: HTMLVideoElement | null
+) => { codeResult: string | null; error: "ERROR_CODE_SCANNER" | null };
 
 export const useCodeScanner: CodeScannerHook = (streamObject, videoElement) => {
     const [codeResult, setCodeResult] = useState<string | null>(null);
+    const [error, setError] = useState<"ERROR_CODE_SCANNER" | null>(null);
 
     useEffect(() => {
-        const browserReader = new BrowserMultiFormatReader(hints);
+        let isCanceled = false;
         async function check(stream: MediaStream, element: HTMLVideoElement): Promise<void> {
             try {
+                const browserReader = new BrowserMultiFormatReader(hints);
                 const result = await browserReader.decodeOnceFromStream(stream, element);
-                setCodeResult(result.getText());
+                if (!isCanceled) {
+                    setCodeResult(result.getText());
+                }
             } catch (e) {
-                // TODO: handle error case
-                console.log("something went wrong", e);
+                setError("ERROR_CODE_SCANNER");
             }
         }
         if (streamObject && videoElement) {
             check(streamObject, videoElement);
         }
+        return () => {
+            isCanceled = true;
+        };
     }, [streamObject, videoElement]);
     useWhyDidYouUpdate("useCodeScanner", { streamObject, videoElement });
-    return { codeResult };
+    return { codeResult, error };
 };
 
 // Hook
