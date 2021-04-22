@@ -57,7 +57,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         // needs to be done, but just in case we soft catch it.
         return <div>This browser is not compatible with the barcode scanner widget</div>; // TODO: improve message, since this will also show when no https is used in certain browsers
     }
-    if (error) {
+    if (error && error !== "ERROR_NOT_ALLOWED") {
         return <div>{error}</div>;
     }
     return (
