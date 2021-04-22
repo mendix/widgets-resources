@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useEffect, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { useCodeScanner } from "../hooks/useCodeScanner";
 import { browserSupportsCameraAccess, useMediaStream } from "../hooks/useMediaStream";
@@ -14,6 +14,7 @@ export interface BarcodeScannerProps {
 export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
     const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
+    const hasDetectedOnce = useRef<boolean>(false);
     const { streamObject, cleanupStreamObject, error } = useMediaStream();
     const { codeResult } = useCodeScanner(streamObject, videoElement);
     const supportsCameraAccess = browserSupportsCameraAccess();
@@ -43,7 +44,8 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
     }, [streamObject, videoElement]);
 
     useEffect(() => {
-        if (onDetect && codeResult) {
+        if (onDetect && codeResult && !hasDetectedOnce.current) {
+            hasDetectedOnce.current = true;
             onDetect(codeResult);
         }
     }, [codeResult, onDetect]);
