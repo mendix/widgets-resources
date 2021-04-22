@@ -5,7 +5,7 @@ import { SharedProps } from "../../typings/shared";
 import { MapProviderEnum } from "../../typings/MapsProps";
 import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
-import { latLngBounds, Icon as LeafletIcon } from "leaflet";
+import { latLngBounds, Icon as LeafletIcon, DivIcon } from "leaflet";
 import { baseMapLayer } from "../utils/leaflet";
 
 export interface LeafletProps extends SharedProps {
@@ -98,9 +98,9 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                                 title={marker.title}
                                 icon={
                                     marker.url
-                                        ? new LeafletIcon({
-                                              iconUrl: marker.url,
-                                              iconRetinaUrl: marker.url
+                                        ? new DivIcon({
+                                              html: `<img src="${marker.url}" class="custom-leaflet-map-icon-marker-icon"}></img>`,
+                                              className: "custom-leaflet-map-icon-marker"
                                           })
                                         : defaultMarkerIcon
                                 }

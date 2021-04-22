@@ -155,8 +155,8 @@ exports[`Leaflet maps renders a map with current location 1`] = `
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
-              "iconRetinaUrl": "image:url",
-              "iconUrl": "image:url",
+              "className": "custom-leaflet-map-icon-marker",
+              "html": "<img src=\\"image:url\\" class=\\"custom-leaflet-map-icon-marker-icon\\"}></img>",
             },
           }
         }
@@ -212,8 +212,8 @@ exports[`Leaflet maps renders a map with markers 1`] = `
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
-              "iconRetinaUrl": "image:url",
-              "iconUrl": "image:url",
+              "className": "custom-leaflet-map-icon-marker",
+              "html": "<img src=\\"image:url\\" class=\\"custom-leaflet-map-icon-marker-icon\\"}></img>",
             },
           }
         }
@@ -244,8 +244,8 @@ exports[`Leaflet maps renders a map with markers 1`] = `
           NewClass {
             "_initHooksCalled": true,
             "options": Object {
-              "iconRetinaUrl": "image:url",
-              "iconUrl": "image:url",
+              "className": "custom-leaflet-map-icon-marker",
+              "html": "<img src=\\"image:url\\" class=\\"custom-leaflet-map-icon-marker-icon\\"}></img>",
             },
           }
         }
