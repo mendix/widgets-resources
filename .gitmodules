@@ -94,3 +94,7 @@
 	path = packages/pluggableWidgets/datagrid-number-filter-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = datagrid-number-filter-web
+[submodule "packages/theming/atlas/tests/testProject"]
+	path = packages/theming/atlas/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = atlas-design-system
