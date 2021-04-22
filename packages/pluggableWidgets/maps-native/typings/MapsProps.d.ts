@@ -79,9 +79,6 @@ export interface MapsProps<Style> {
     style: Style[];
     markers: MarkersType[];
     dynamicMarkers: DynamicMarkersType[];
-    icon?: DynamicValue<NativeIcon>;
-    iconSize: number;
-    color: string;
     fitToMarkers: boolean;
     centerAddress?: DynamicValue<string>;
     centerLatitude?: DynamicValue<Big>;
@@ -100,9 +97,6 @@ export interface MapsPreviewProps {
     style: string;
     markers: MarkersPreviewType[];
     dynamicMarkers: DynamicMarkersPreviewType[];
-    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    iconSize: number | null;
-    color: string;
     fitToMarkers: boolean;
     centerAddress: string;
     centerLatitude: string;

@@ -1,10 +1,7 @@
-import { hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 import { MapsPreviewProps } from "../typings/MapsProps";
 
-export function getProperties(
-    values: MapsPreviewProps,
-    defaultProperties: Properties,
-): Properties {
+export function getProperties(values: MapsPreviewProps, defaultProperties: Properties): Properties {
     [...values.markers, ...values.dynamicMarkers].forEach((f, index) => {
         if (f.locationType === "address") {
             hidePropertyIn(defaultProperties, values, "markers", index, "latitude");
@@ -13,6 +10,14 @@ export function getProperties(
             hidePropertyIn(defaultProperties, values, "markers", index, "address");
         }
     });
+
+    if (values.fitToMarkers) {
+        hidePropertiesIn(defaultProperties, values, ["centerAddress", "centerLatitude", "centerLongitude"]);
+
+        if (values.markers.length > 1) {
+            hidePropertyIn(defaultProperties, values, "defaultZoomLevel");
+        }
+    }
 
     return defaultProperties;
 }

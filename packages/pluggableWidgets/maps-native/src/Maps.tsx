@@ -81,7 +81,7 @@ export class Maps extends Component<Props, State> {
                         liteMode={!this.props.interactive}
                         cacheEnabled={!this.props.interactive}
                         showsPointsOfInterest={false}
-                        mapPadding={{ top: 40, right: 20, bottom: 20, left: 20 }}
+                        mapPadding={{ top: 48, right: 48, bottom: 48, left: 48 }}
                         onMapReady={this.onMapReadyHandler}
                         onRegionChangeComplete={this.onRegionChangeCompleteHandler}
                     >
@@ -116,8 +116,10 @@ export class Maps extends Component<Props, State> {
     }
 
     private onMapReady(): void {
+        // if (Platform.OS === "android") {
         this.updateCamera(false);
         this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
+        // }
         this.onRegionChangeComplete();
     }
 
@@ -177,13 +179,8 @@ export class Maps extends Component<Props, State> {
         );
     }
 
-    private async updateCamera(animate: boolean): Promise<void> {
+    private async updateCamera(animated: boolean): Promise<void> {
         if (!this.mapViewRef.current) {
-            return;
-        }
-
-        if (this.props.fitToMarkers && this.props.markers.length > 1) {
-            this.mapViewRef.current.fitToElements(animate);
             return;
         }
 
@@ -193,10 +190,15 @@ export class Maps extends Component<Props, State> {
             altitude: toAltitude(this.props.defaultZoomLevel)
         };
 
-        if (animate) {
-            this.mapViewRef.current.animateCamera(camera);
+        if (this.props.fitToMarkers && this.state.markers && this.state.markers.length > 1) {
+            const coords = (this.state.markers as Marker[]).map(marker => marker.coordinate);
+            this.mapViewRef.current.fitToCoordinates(coords, { animated });
         } else {
-            this.mapViewRef.current.setCamera(camera);
+            if (animated) {
+                this.mapViewRef.current.animateCamera(camera);
+            } else {
+                this.mapViewRef.current.setCamera({ ...camera, center: await this.getCenter() });
+            }
         }
     }
 
@@ -210,7 +212,7 @@ export class Maps extends Component<Props, State> {
                       centerAddress?.value
                   )
                 : this.state.markers?.length === 1 && fitToMarkers
-                ? this.state.markers[0]?.coordinate
+                ? this.state.markers[0].coordinate
                 : { latitude: 51.9066346, longitude: 4.4861703 };
 
         return center as LatLng;
