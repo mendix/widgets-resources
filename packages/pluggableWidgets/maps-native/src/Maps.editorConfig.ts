@@ -19,29 +19,31 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
         }
     }
 
-    changePropertyIn(defaultProperties, values, prop => {
-        prop.objectHeaders = ["Address", "Latitude", "Longitude"];
-        prop.objects?.forEach((object, index) => {
-            const column = values.markers[index];
-            object.captions = [
-                column.address,
-                column.latitude,
-                column.longitude
-            ];
-        })
-    }, "markers");
+    changePropertyIn(
+        defaultProperties,
+        values,
+        prop => {
+            prop.objectHeaders = ["Address", "Latitude", "Longitude"];
+            prop.objects?.forEach((object, index) => {
+                const column = values.markers[index];
+                object.captions = [column.address, column.latitude, column.longitude];
+            });
+        },
+        "markers"
+    );
 
-    changePropertyIn(defaultProperties, values, prop => {
-        prop.objectHeaders = ["Address", "Latitude", "Longitude"];
-        prop.objects?.forEach((object, index) => {
-            const column = values.markers[index];
-            object.captions = [
-                column.address,
-                column.latitude,
-                column.longitude
-            ];
-        })
-    }, "dynamicMarkers");
+    changePropertyIn(
+        defaultProperties,
+        values,
+        prop => {
+            prop.objectHeaders = ["Address", "Latitude", "Longitude"];
+            prop.objects?.forEach((object, index) => {
+                const column = values.markers[index];
+                object.captions = [column.address, column.latitude, column.longitude];
+            });
+        },
+        "dynamicMarkers"
+    );
 
     return defaultProperties;
 }
