@@ -115,11 +115,9 @@ export class Maps extends Component<Props, State> {
         );
     }
 
-    private onMapReady(): void {
-        // if (Platform.OS === "android") {
-        this.updateCamera(false);
+    private async onMapReady(): Promise<void> {
+        await this.updateCamera(false);
         this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
-        // }
         this.onRegionChangeComplete();
     }
 
