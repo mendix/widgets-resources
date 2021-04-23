@@ -55,7 +55,5 @@ jobs:
               if: failure()
               with:
                   name: test-screenshot-results
-                  path: |
-                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
-                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/actual/*.png
+                  path: ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
                   if-no-files-found: error
