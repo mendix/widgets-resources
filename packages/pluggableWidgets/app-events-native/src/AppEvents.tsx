@@ -17,8 +17,7 @@ export class AppEvents extends Component<Props> {
     private isConnected?: boolean;
     private lastOnOnline = 0;
     private lastOnOffline = 0;
-    private onLoadTriggered = false;
-    private onTimeoutAction: ScheduledExecution | undefined;
+    private onTimeoutAction?: ScheduledExecution;
     private unsubscribeNetworkEventListener?: NetInfoSubscription;
 
     async componentDidMount(): Promise<void> {
@@ -104,8 +103,7 @@ export class AppEvents extends Component<Props> {
     }
 
     private triggerOnLoadEvent(): void {
-        if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
-            this.onLoadTriggered = true;
+        if (this.props.onLoadAction?.canExecute) {
             executeAction(this.props.onLoadAction);
         }
     }
@@ -131,7 +129,7 @@ interface ScheduledExecution {
 }
 
 class ScheduledOnceExecution implements ScheduledExecution {
-    private timeoutHandle: number | undefined;
+    private timeoutHandle?: number;
     private _finished = false;
     private _running = false;
 
@@ -163,7 +161,7 @@ class ScheduledOnceExecution implements ScheduledExecution {
 }
 
 class ScheduledIntervalExecution implements ScheduledExecution {
-    private timeoutHandle: number | undefined;
+    private timeoutHandle?: number;
     private _running = false;
 
     constructor(private readonly fn: () => void, private readonly interval: number) {
@@ -183,9 +181,7 @@ class ScheduledIntervalExecution implements ScheduledExecution {
             return;
         }
 
-        this.timeoutHandle = setInterval(() => {
-            this.fn();
-        }, this.interval);
+        this.timeoutHandle = setInterval(() => this.fn(), this.interval);
         this._running = true;
     }
 }
