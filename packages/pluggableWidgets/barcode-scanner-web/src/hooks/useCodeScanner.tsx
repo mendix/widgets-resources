@@ -5,10 +5,15 @@ const hints = new Map();
 const formats = Object.values(BarcodeFormat).filter(format => typeof format !== "string") as BarcodeFormat[];
 hints.set(DecodeHintType.POSSIBLE_FORMATS, formats);
 
+export type CodeScannerHookError = "ERROR_CODE_SCANNER";
+
 type CodeScannerHook = (
     streamObject: MediaStream | null,
     videoElement: HTMLVideoElement | null
-) => { codeResult: string | null; error: "ERROR_CODE_SCANNER" | null };
+) => {
+    codeResult: string | null;
+    error: CodeScannerHookError | null;
+};
 
 export const useCodeScanner: CodeScannerHook = (streamObject, videoElement) => {
     const [codeResult, setCodeResult] = useState<string | null>(null);
