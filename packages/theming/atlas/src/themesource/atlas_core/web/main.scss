@@ -311,7 +311,7 @@
     @include dijit-widget();
 }
 
-@import "core/widgetscustom/switch-widget";
+@import "core/widgets/switch";
 @if not $exclude-custom-switch {
     @include switch();
 }

@@ -1,7 +1,7 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
-    "include": ["./src/components/__tests__", "./typings"],
+    "include": ["./src/__tests__", "./typings"],
     "compilerOptions": {
         "types": ["jest"]
     }

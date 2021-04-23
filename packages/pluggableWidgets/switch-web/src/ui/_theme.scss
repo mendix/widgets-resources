@@ -1,0 +1,24 @@
+@import "variables";
+@import "mixins";
+
+.widget-switch {
+    .widget-switch-btn-wrapper {
+        &.checked {
+            @include bootstrap-style-ios($default-ios-color);
+        }
+    }
+}
+
+.android {
+    .widget-switch {
+        .widget-switch-btn-wrapper {
+            &.checked {
+                @include bootstrap-style-android($default-android-color);
+
+                .widget-switch-btn {
+                    background: $default-android-color;
+                }
+            }
+        }
+    }
+}

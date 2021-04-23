@@ -18,6 +18,32 @@ $default-ios-color: rgb(100, 189, 99);
     background-color: lighten($brand-style, 10%);
 }
 
+@mixin style($brand-key, $brand-variable) {
+    div.widget-switch-brand-#{$brand-key} {
+        .widget-switch {
+            .widget-switch-btn-wrapper {
+                &.checked {
+                    @include bootstrap-style-ios($brand-variable);
+                }
+            }
+        }
+        &.android {
+            .widget-switch {
+                .widget-switch-btn-wrapper {
+                    &.checked {
+                        @include bootstrap-style-android($brand-variable);
+
+                        .widget-switch-btn {
+                            background: $brand-variable;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// maintained for backwards compatibility prior to Switch 3.0.0.
 @mixin ios {
     .widget-switch-btn-wrapper {
         &.checked {
@@ -52,6 +78,7 @@ $default-ios-color: rgb(100, 189, 99);
     }
 }
 
+// maintained for backwards compatibility prior to Switch 3.0.0.
 @mixin android {
     .widget-switch-btn-wrapper {
         &.checked {
@@ -121,6 +148,13 @@ $default-ios-color: rgb(100, 189, 99);
         }
     }
 
+    @include style("primary", $brand-primary);
+    @include style("secondary", $brand-default);
+    @include style("success", $brand-success);
+    @include style("warning", $brand-warning);
+    @include style("danger", $brand-danger);
+
+    // below is maintained for backwards compatibility prior to Switch 3.0.0.
     div {
         &.widget-switch {
             &.iOS {

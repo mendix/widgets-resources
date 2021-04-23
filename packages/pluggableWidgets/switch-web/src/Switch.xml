@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Switch</name>
+    <description>Toggle a boolean attribute</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAABV1f9VVVViYmJVVVVXV1dXV1dNsvlYWFhVVVVVVVVVVVVVVVVVVVVJsfhIsfhWVlZVVVVJsfhWVlZWVlZJsfhVVVVWVlZVVVVVVVVIsPhVVVVWVlZJsPhWVlZIsPdVVVUhgB8dAAAAH3RSTlMABgwNISMmKzE/VFp1gY+Uqq69vsfV2Nns8vPz+v39w1yAsQAAAP9JREFUeNrtlcsSgjAMRS/I+40IKIrw/19pgzMdKprByYZFzy5Mc2lumxQWi8VyUKK86e8zw71v8gi/SLp5F12Cb3iXeTcXDxvi6/wH13iT/6DvjyoNXDC4QVq9V34oeMv/ax878OtlD2YVVP8zA8KiHYa2CMGSPckHw3/SzOCU47Qwlg6vQOvXZ9HR/uGcJ82ZV6AqOmgicsVHOa0oeR/IyUiHuYoqhONaYOR9qFRKrqNGRSmKyaAAR6pSGh31KgrQmgItOAKV0uuI+sfFYAoM4HCpsyQCJ5VyE5cgNlF8jOKLJL3K4maStrN4oEhHmnSoSse68GGRPm0Wi8VyTF4UHle0saM+KAAAAABJRU5ErkJggg==
+    </icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="booleanAttribute" type="attribute">
+                    <caption>Boolean attribute</caption>
+                    <description>Attribute to toggle</description>
+                    <attributeTypes>
+                        <attributeType name="Boolean"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Actions">
+                <property key="action" type="action">
+                    <caption>On change</caption>
+                    <description>Action to be performed when the switch is toggled</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Common">
+            <systemProperty key="Label"/>
+            <systemProperty key="Editability"/>
+    </propertyGroup>
+    </properties>
+</widget>

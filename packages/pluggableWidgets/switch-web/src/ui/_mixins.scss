@@ -1,9 +1,11 @@
-@import "variables";
+@mixin bootstrap-style-ios($brand-style) {
+    background-color: $brand-style;
+    border-color: $brand-style;
+    box-shadow: $brand-style 0 0 0 16px inset;
+}
 
-@mixin dynamic-float($min-width, $max-width, $direction) {
-    @media (min-width: $min-width) and (max-width: $max-width) {
-        float: $direction;
-    }
+@mixin bootstrap-style-android($brand-style) {
+    background-color: lighten($brand-style, 10%);
 }
 
 @mixin ios {
@@ -74,23 +76,6 @@
         &.disabled {
             opacity: 0.5;
         }
-
-        &.no-switch {
-            .left {
-                &:active {
-                    width: 30px;
-                    border-radius: 50%;
-                }
-
-                .right {
-                    &:active {
-                        width: 30px;
-                        left: 20px;
-                        border-radius: 50%;
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -142,111 +127,3 @@
         }
     }
 }
-
-.widget-switch-btn-wrapper {
-    margin-bottom: 8px;
-
-    &:focus {
-        outline: 1px solid #0595db;
-    }
-
-    &.disabled {
-        cursor: default;
-    }
-
-    &.no-switch {
-        .widget-switch-btn {
-            display: none !important;
-
-            &:active {
-                box-shadow: none;
-            }
-        }
-    }
-}
-
-.widget-switch {
-    .widget-switch-checkbox {
-        display: none;
-    }
-
-    &.iOS {
-        @include ios;
-    }
-
-    &.android {
-        @include android;
-    }
-
-    &.auto {
-        @include ios;
-    }
-}
-
-@mixin android-label-padding {
-    &.android {
-        .form-group {
-            .widget-switch {
-                &.android {
-                    padding-top: 8px;
-                    padding-bottom: 8px;
-                }
-            }
-        }
-    }
-}
-
-html {
-    &.dj_android {
-        .widget-switch {
-            &.auto {
-                @include android;
-            }
-        }
-
-        .form-horizontal {
-            &.widget-switch-label {
-                @include android-label-padding;
-            }
-        }
-    }
-
-    &.dj_ios {
-        .widget-switch {
-            &.auto {
-                @include ios;
-            }
-        }
-    }
-}
-
-.widget-switch-label {
-    .form-group {
-        .widget-switch {
-            float: left;
-            @include dynamic-float(320px, 736px, right);
-            @include dynamic-float(768px, 1024px, right);
-        }
-
-        .control-label {
-            float: right;
-            padding-top: 8px;
-            padding-bottom: 8px;
-            @include dynamic-float(320px, 736px, left);
-            @include dynamic-float(768px, 1024px, left);
-        }
-    }
-
-    @include android-label-padding;
-}
-
-.mx-table {
-    .widget-switch {
-        &.android {
-            padding-top: 6px;
-            padding-bottom: 7px;
-        }
-    }
-}
-
-@import "switch-theme";

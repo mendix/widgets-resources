@@ -1,0 +1,32 @@
+@import "mixins";
+
+.widget-switch-btn-wrapper {
+    margin-bottom: 8px;
+
+    &:focus {
+        outline: 1px solid #0595db;
+    }
+
+    &.disabled {
+        cursor: default;
+    }
+}
+
+.widget-switch {
+    @include ios;
+}
+
+.android {
+    .widget-switch {
+        @include android;
+    }
+}
+
+.mx-table {
+    .android {
+        .widget-switch {
+            padding-top: 6px;
+            padding-bottom: 7px;
+        }
+    }
+}
