@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-type MediaStreamHookError = "ERROR_NOT_FOUND" | "ERROR_NOT_ALLOWED" | "ERROR_MEDIA_STREAM";
+export type MediaStreamHookError = "ERROR_NOT_FOUND" | "ERROR_NOT_ALLOWED" | "ERROR_MEDIA_STREAM";
 
 type MediaStreamHook = () => {
     streamObject: MediaStream | null;
