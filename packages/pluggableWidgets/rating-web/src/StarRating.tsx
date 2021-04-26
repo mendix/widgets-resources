@@ -33,6 +33,7 @@ export function StarRating(props: StarRatingContainerProps): ReactElement {
     );
     return (
         <RatingComponent
+            className={props.class}
             animated={props.animation}
             disabled={props.ratingAttribute.readOnly}
             emptyIcon={emptyIcon}
