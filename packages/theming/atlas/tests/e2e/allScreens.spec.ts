@@ -12,30 +12,11 @@ const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 
 // TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failure
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
-const pagesToSkip = [
-    "/p/chat-fullheight/{Id}",
-    "/p/chat-variants/{Id}",
-    "/p/tabbed-list-phone",
-    "/p/confirmation-phone"
-];
+const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
 
 // Mostly the pages with progressbar fails since it is not CSS animations for web -_-. So disableCSSAnimation wont work.
 // This ends up having unstable progress circle percentage
-const pagesWithTimeout = [
-    "/p/alerts",
-    "/p/progress-circles",
-    "/p/pt_dashboard-expenses",
-    "/p/pt_dashboard-metrics",
-    "/p/pt_dashboard-action-center",
-    "/p/pt_tablet_dashboard-metrics",
-    "/p/pt_tablet_dashboard-user-detail",
-    "/p/pt_dashboard-transactions",
-    "/p/pt_grid-tabbed",
-    "/p/bb_headers",
-    "/p/bb_cards",
-    "/p/pt_dashboard-user-detail",
-    "/p/wizardcirclestep"
-];
+const pagesWithTimeout = ["/p/alerts", "/p/progress-circles", "/p/web-dashboard-actioncenter"];
 
 describe("Screenshots of the pages for", () => {
     for (const url of pageUrls(testPageFolders)) {
@@ -68,10 +49,6 @@ describe("Screenshots of the pages for", () => {
             });
         }
     }
-
-    afterAll(() => {
-        cleanUnusedScreenshotBases();
-    });
 });
 
 function* getFilePaths(dir) {
