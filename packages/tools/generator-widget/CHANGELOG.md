@@ -1,0 +1,14 @@
+# Changelog
+All notable changes to this widget will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+## Changed
+- Set required node version to v12 or higher.
+
+### Fixed
+- Fixes failing `npm install` executions when scaffolding a widget project with the widget generator with NPM v7.x.x.
+- Explains users in the readme of generated widget project how to install dependencies with NPM v7.x.x.
+
+## [major.minor.patch] - YYYY-MM-DD
