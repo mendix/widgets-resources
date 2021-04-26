@@ -14,6 +14,8 @@ export interface GroupsType {
     headerContent?: ReactNode;
 }
 
+export type CollapseBehaviorEnum = "singleExpanded" | "multipleExpanded";
+
 export interface GroupsPreviewType {
     headerRenderMode: HeaderRenderModeEnum;
     headerText: string;
@@ -26,10 +28,14 @@ export interface AccordionContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     groups: GroupsType[];
+    collapsible: boolean;
+    collapseBehavior: CollapseBehaviorEnum;
 }
 
 export interface AccordionPreviewProps {
     class: string;
     style: string;
     groups: GroupsPreviewType[];
+    collapsible: boolean;
+    collapseBehavior: CollapseBehaviorEnum;
 }

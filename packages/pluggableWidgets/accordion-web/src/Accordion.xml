@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.accordion.Accordion" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
+<widget id="com.mendix.widget.web.accordion.Accordion" needsEntityContext="true" offlineCapable="true"
+        pluginWidget="true"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Accordion</name>
     <description>Toggle the display of sections of content</description>
-    <icon />
+    <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="groups" type="object" isList="true">
-                <caption>Groups</caption>
-                <description/>
-                <properties>
-                    <propertyGroup caption="General">
-                        <property key="headerRenderMode" type="enumeration" defaultValue="text">
-                            <caption>Header</caption>
-                            <description />
-                            <enumerationValues>
-                                <enumerationValue key="text">Text</enumerationValue>
-                                <enumerationValue key="custom">Custom</enumerationValue>
-                            </enumerationValues>
-                        </property>
-                        <property key="headerText" type="textTemplate">
-                            <caption>Text</caption>
-                            <description />
-                            <translations>
-                                <translation lang="en_US">Header</translation>
-                                <translation lang="nl_NL">Koptekst</translation>
-                            </translations>
-                        </property>
-                        <property key="headerContent" type="widgets" required="false">
-                            <caption>Header</caption>
-                            <description />
-                        </property>
-                    </propertyGroup>
-                </properties>
-            </property>
+            <propertyGroup caption="General">
+                <property key="groups" type="object" isList="true" required="false">
+                    <caption>Groups</caption>
+                    <description/>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="headerRenderMode" type="enumeration" defaultValue="text">
+                                <caption>Header</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="text">Text</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="headerText" type="textTemplate">
+                                <caption>Text</caption>
+                                <description/>
+                                <translations>
+                                    <translation lang="en_US">Header</translation>
+                                    <translation lang="nl_NL">Koptekst</translation>
+                                </translations>
+                            </property>
+                            <property key="headerContent" type="widgets" required="false">
+                                <caption>Header</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Behavior">
+                <property key="collapsible" type="boolean" defaultValue="true">
+                    <caption>Collapsible</caption>
+                    <description/>
+                </property>
+                <property key="collapseBehavior" type="enumeration" defaultValue="singleExpanded">
+                    <caption>Collapse behavior</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="singleExpanded">Only one group can be open</enumerationValue>
+                        <enumerationValue key="multipleExpanded">Multiple groups can be open</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>

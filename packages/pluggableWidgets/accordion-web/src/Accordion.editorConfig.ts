@@ -15,6 +15,10 @@ export function getProperties(
         }
     });
 
+    if (!values.collapsible) {
+        hidePropertyIn(defaultProperties, values, "collapseBehavior");
+    }
+
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
