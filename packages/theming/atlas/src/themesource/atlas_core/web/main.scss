@@ -305,6 +305,11 @@
     @include helper-classes();
 }
 
+@import "core/widgets/barcode-scanner";
+@if not $exclude-barcode-scanner {
+    @include barcode-scanner();
+}
+
 // Custom widgets
 @import "core/widgetscustom/dijit-widget";
 @if not $exclude-custom-dijit-widget {
