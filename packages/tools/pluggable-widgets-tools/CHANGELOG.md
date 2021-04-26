@@ -8,6 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Set required node version to v12 or higher.
 
 ### Fixed
-- Note in the readme file that installation with NPM v7.x.x requires the flag `--legacy-peer-deps`.
+- Note in the README file that installation with NPM v7.x.x requires the flag `--legacy-peer-deps`.
 
 ## [major.minor.patch] - YYYY-MM-DD
