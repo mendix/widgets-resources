@@ -2,30 +2,24 @@
   display: flex;
   flex-direction: row;
 
+  /**
+  Defines each image/icon styles
+   */
   .rating-item {
     cursor: pointer;
 
+    /**
+    Style when the item is disabled
+     */
     &.disabled {
       cursor: not-allowed;
       opacity: 0.65;
     }
 
-    //&:hover {
-    //  > .rating-icon {
-    //    display: none;
-    //  }
-    //
-    //  > .rating-image {
-    //    display: none;
-    //  }
-    //
-    //  .rating-item-hover {
-    //    display: block;
-    //  }
-    //}
-
+    /**
+    Style when mouse hovers the item
+     */
     .rating-item-hover {
-      opacity: 0.7;
 
       .rating-icon-full {
         &.animate {
@@ -41,15 +35,24 @@
     }
   }
 
+  /**
+  Styles when icon is selected in Studio/Studio Pro
+   */
   .rating-icon {
     font-size: 30px;
     transform: scale(1);
   }
 
+  /**
+  Style for the empty icon
+   */
   .rating-icon-empty {
     color: #CCC;
   }
 
+  /**
+  Style for the full icon
+   */
   .rating-icon-full {
     color: #FFA611;
 
@@ -58,10 +61,23 @@
     }
   }
 
+  /**
+  Styles when image is selected in Studio/Studio Pro
+   */
   .rating-image {
     transform: scale(1);
   }
 
+  /**
+  Style for the empty image
+   */
+  .rating-image-empty {
+
+  }
+
+  /**
+  Style for the full image
+   */
   .rating-image-full {
     &.animate {
       animation: stretch-bounce .5s ease-in-out;
@@ -69,6 +85,9 @@
   }
 }
 
+/**
+Animation when defining an item (Stretch and bounce)
+ */
 @-webkit-keyframes stretch-bounce {
   0% {
     transform: scale(1);
