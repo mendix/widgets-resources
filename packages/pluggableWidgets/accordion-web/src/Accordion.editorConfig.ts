@@ -1,6 +1,6 @@
 import { hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
 
-import { AccordionContainerProps } from "./typings/AccordionProps";
+import { AccordionContainerProps } from "../typings/AccordionProps";
 
 export function getProperties(
     values: AccordionContainerProps,
