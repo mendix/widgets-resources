@@ -1,7 +1,7 @@
 import { createElement, CSSProperties, ReactElement, useState } from "react";
 import classNames from "classnames";
 
-interface RatingProps {
+export interface RatingProps {
     className?: string;
     disabled: boolean;
     value: number;
