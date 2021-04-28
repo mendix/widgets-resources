@@ -98,3 +98,7 @@
 	path = packages/pluggableWidgets/rating-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = star-rating-web
+[submodule "packages/pluggableWidgets/barcode-scanner-web/tests/testProject"]
+	path = packages/pluggableWidgets/barcode-scanner-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = barcode-scanner-web
