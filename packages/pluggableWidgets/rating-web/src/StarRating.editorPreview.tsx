@@ -6,9 +6,10 @@ import { StarRatingPreviewProps } from "../typings/StarRatingProps";
 import { Icon } from "./components/Icon";
 
 export function preview(props: StarRatingPreviewProps): ReactElement {
-    // TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) generation to remove the ts-ignore below
+    // TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) and readOnly generation to remove the ts-ignore below
     // @ts-ignore
-    const { className, style } = props;
+    const { className, readOnly } = props;
+    console.warn(className, readOnly);
 
     const emptyIcon = props.emptyIcon ? (
         <Icon value={props.emptyIcon as WebIcon} empty />
@@ -23,16 +24,14 @@ export function preview(props: StarRatingPreviewProps): ReactElement {
 
     return (
         <RatingComponent
-            className={className}
             animated={props.animation}
-            // Studio Pro will pass `readOnly` value but this is excluded from preview prop typings (via generator)
-            // @ts-ignore
-            editable={props.readOnly ?? false}
+            className={className}
+            disabled={readOnly ?? false}
             emptyIcon={emptyIcon}
             fullIcon={fullIcon}
             maximumValue={props.maximumValue ?? 5}
-            style={parseStyle(style)}
-            value={Number(props.ratingAttribute)}
+            style={parseStyle(props.style)}
+            value={Number(props.maximumValue ?? 5) - 1}
         />
     );
 }

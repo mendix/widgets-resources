@@ -1,37 +1,37 @@
-import { WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
 import classNames from "classnames";
+import { WebIcon } from "mendix";
 
 interface IconProps {
-    value: WebIcon;
-    empty?: boolean;
     animate?: boolean;
+    empty?: boolean;
     full?: boolean;
+    value: WebIcon;
 }
 
-export function Icon(props: IconProps): ReactElement {
-    if (props.value && props.value.type === "glyph") {
+export function Icon({ animate, empty, full, value }: IconProps): ReactElement {
+    if (value && value.type === "glyph") {
         return (
             <span
                 className={classNames(
                     "rating-icon",
-                    { "rating-icon-empty": props.empty, "rating-icon-full": props.full, animate: props.animate },
+                    { "rating-icon-empty": empty, "rating-icon-full": full, animate },
                     "glyphicon",
-                    props.value.iconClass
+                    value.iconClass
                 )}
                 aria-hidden="true"
             />
         );
     }
-    if (props.value && props.value.type === "image") {
+    if (value && value.type === "image") {
         return (
             <img
                 className={classNames("rating-image", {
-                    "rating-image-empty": props.empty,
-                    "rating-image-full": props.full,
-                    animate: props.animate
+                    "rating-image-empty": empty,
+                    "rating-image-full": full,
+                    animate
                 })}
-                src={props.value.iconUrl}
+                src={value.iconUrl}
                 alt=""
             />
         );

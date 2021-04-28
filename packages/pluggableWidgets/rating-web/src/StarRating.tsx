@@ -31,6 +31,9 @@ export function StarRating(props: StarRatingContainerProps): ReactElement {
         },
         [props.ratingAttribute, props.onChange]
     );
+
+    const value = Number(isAvailable(props.ratingAttribute) ? props.ratingAttribute.value : 0);
+
     return (
         <RatingComponent
             className={props.class}
@@ -40,7 +43,8 @@ export function StarRating(props: StarRatingContainerProps): ReactElement {
             fullIcon={fullIcon}
             maximumValue={props.maximumValue}
             onChange={onChange}
-            value={Number(props.ratingAttribute?.value ?? 0)}
+            tabIndex={props.tabIndex}
+            value={value > props.maximumValue ? props.maximumValue : value}
         />
     );
 }

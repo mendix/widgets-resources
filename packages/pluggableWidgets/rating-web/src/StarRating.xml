@@ -44,6 +44,7 @@
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
                 <systemProperty key="Editability"/>
+                <systemProperty key="TabIndex" />
             </propertyGroup>
         </propertyGroup>
     </properties>
