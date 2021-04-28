@@ -27,4 +27,19 @@
     .widget-star-rating-font-medium {
         font-size: 30px;
     }
+
+    .widget-rating {
+
+        .rating-icon {
+            font-size: 24px;
+        }
+
+        .rating-icon-empty {
+            color: #CCC;
+        }
+
+        .rating-icon-full {
+            color: #FFA611;
+        }
+    }
 }
