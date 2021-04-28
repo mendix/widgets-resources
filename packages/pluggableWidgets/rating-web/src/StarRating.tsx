@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useCallback } from "react";
 import { Rating as RatingComponent } from "./components/Rating";
 import { ValueStatus } from "mendix";
-import { isAvailable } from "@mendix/piw-utils-internal";
+import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 import { StarRatingContainerProps } from "../typings/StarRatingProps";
 import { Icon } from "./components/Icon";
@@ -26,7 +26,7 @@ export function StarRating(props: StarRatingContainerProps): ReactElement {
         (value: number) => {
             if (props.ratingAttribute.status === ValueStatus.Available) {
                 props.ratingAttribute.setValue(new Big(value));
-                props.onChange?.execute();
+                executeAction(props.onChange);
             }
         },
         [props.ratingAttribute, props.onChange]
