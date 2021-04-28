@@ -40,7 +40,7 @@ export const useMediaStream: MediaStreamHook = () => {
                     setStreamObject(stream);
                 }
             } catch (e) {
-                if (e instanceof Error) {
+                if (e instanceof Error && !isCanceled) {
                     switch (e.name) {
                         case "NotFoundError":
                             setError("ERROR_NOT_FOUND");

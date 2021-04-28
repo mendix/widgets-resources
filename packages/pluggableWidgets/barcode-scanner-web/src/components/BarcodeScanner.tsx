@@ -79,7 +79,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         // needs to be done, but just in case we soft catch it.
         return (
             <Alert bootstrapStyle="danger">
-                The barcode scanner widget is only comptaible with certain browsers and requires a secure HTTPS
+                The barcode scanner widget is only compatible with certain browsers and requires a secure HTTPS
                 connection in certain browsers. If you encounter this error message as an user, please contact your
                 system administrator. If you are a Mendix developer, please refer to the appropriate docs on how to
                 resolve this issue.

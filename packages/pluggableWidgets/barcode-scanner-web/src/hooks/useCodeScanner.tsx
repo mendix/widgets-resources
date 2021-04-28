@@ -30,7 +30,9 @@ export const useCodeScanner: CodeScannerHook = (streamObject, videoElement) => {
                     setCodeResult(result.getText());
                 }
             } catch (e) {
-                setError("ERROR_CODE_SCANNER");
+                if (!isCanceled) {
+                    setError("ERROR_CODE_SCANNER");
+                }
             }
         }
         if (streamObject && videoElement) {
