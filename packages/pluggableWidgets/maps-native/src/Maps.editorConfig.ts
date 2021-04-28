@@ -1,5 +1,6 @@
-import { Problem } from "@mendix/piw-utils-internal";
+import { Problem, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { MapsPreviewProps } from "../typings/MapsProps";
+import StructurePreviewMapsSVG from "./assets/StructurePreviewMaps.svg";
 
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
@@ -32,4 +33,13 @@ export function check(values: MapsPreviewProps): Problem[] {
     }
 
     return errors;
+}
+
+export function getPreview(_: MapsPreviewProps): StructurePreviewProps {
+    return {
+        type: "Image",
+        document: decodeURIComponent(StructurePreviewMapsSVG.replace("data:image/svg+xml,", "")),
+        width: 375,
+        height: 375
+    };
 }
