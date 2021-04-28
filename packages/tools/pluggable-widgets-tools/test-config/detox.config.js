@@ -14,7 +14,7 @@ module.exports = {
             testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
             type: "android.emulator",
             device: {
-                avdName: "Emulator_29"
+                avdName: "5.4_FWVGA_API_30"
             }
         }
     }

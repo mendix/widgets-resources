@@ -10,7 +10,6 @@
     "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "clean-all-screenshots-mac": "find . -name 'screenshot-baseline' -type d -prune -exec rm -rf '{}' +",
-    "install:android:create-avd": "avdmanager -s create avd -n Emulator_29 -k 'system-images;android-30;google_apis;x86' -f -d '5.4in FWVGA' -c 1000M",
     "lint": "npm run lint:src && lerna run lint --stream",
     "lint:src": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages/*/*/src",
     "lint:scripts": "eslint --fix --config .eslintrc.js --ext .jsx,.js,.ts,.tsx scripts",
