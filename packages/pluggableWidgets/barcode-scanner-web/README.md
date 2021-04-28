@@ -1,1 +1,1 @@
-Please see [Progress Bar](https://docs.mendix.com/appstore/widgets/progress-bar) in the Mendix documentation for details.
+Please see [Barcode Scanner](https://docs.mendix.com/appstore/widgets/barcode-scanner) in the Mendix documentation for details.

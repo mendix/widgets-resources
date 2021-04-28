@@ -1,8 +1,8 @@
 {
   "name": "barcode-scanner-web",
   "widgetName": "BarcodeScanner",
-  "version": "2.0.0",
-  "description": "Displays a progress bar",
+  "version": "1.0.0",
+  "description": "Displays a barcode scanner",
   "copyright": "Mendix Technology B.V.",
   "license": "Apache-2.0",
   "repository": {
@@ -15,16 +15,16 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "cross-env MPKOUTPUT=BarcodeScanner.mpk pluggable-widgets-tools start:server",
-    "dev": "cross-env MPKOUTPUT=BarcodeScanner.mpk pluggable-widgets-tools start:web",
-    "build": "cross-env MPKOUTPUT=BarcodeScanner.mpk pluggable-widgets-tools build:web",
+    "start": "cross-env pluggable-widgets-tools start:server",
+    "dev": "cross-env pluggable-widgets-tools start:web",
+    "build": "cross-env pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "echo \"Skipping barcode-scanner-web e2e tests\"",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "cross-env MPKOUTPUT=BarcodeScanner.mpk pluggable-widgets-tools release:web"
+    "release": "cross-env pluggable-widgets-tools release:web"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
@@ -34,6 +34,6 @@
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
-    "@zxing/library": "^0.18.4"
+    "@zxing/library": "~0.18.4"
   }
 }
