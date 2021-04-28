@@ -11,7 +11,7 @@ export interface BarcodeScannerContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    datasource?: EditableValue<string>;
+    datasource: EditableValue<string>;
     showMask: boolean;
     onDetect?: ActionValue;
     onClose?: ActionValue;

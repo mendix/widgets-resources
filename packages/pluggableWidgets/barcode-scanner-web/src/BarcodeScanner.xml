@@ -8,8 +8,7 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <!-- TODO: required should be true -->
-                <property key="datasource" type="attribute" required="false">
+                <property key="datasource" type="attribute" required="true">
                     <caption>Barcode</caption>
                     <description>The attribute that will receive the scanned barcode value.</description>
                     <attributeTypes>
