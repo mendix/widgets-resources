@@ -17,66 +17,60 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
     // BEGIN USER CODE
     if (!picture) {
         // TODO: message does not appear in client. Because Error is used. Likewise for all other errors.
-        return Promise.reject(new Error("Input parameter 'Picture' is required"));
+        return Promise.reject(new Error("Input parameter 'Picture' is required."));
     }
 
     if (!picture.inheritsFrom("System.Image")) {
         const entity = picture.getEntity();
-        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
+
+        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'.`));
     }
 
-    const supportsCameraAccess = "mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices;
+    if (!("mediaDevices" in navigator) || !("getUserMedia" in navigator.mediaDevices)) {
+        return Promise.reject(new Error("Media devices are not supported."));
+    }
 
-    if (!supportsCameraAccess) {
-        return Promise.reject(new Error("Camera is unsupported"));
+    const videoDevices = (await navigator.mediaDevices.enumerateDevices()).filter(
+        deviceInfo => deviceInfo.kind === "videoinput"
+    );
+
+    if (!videoDevices.length) {
+        return Promise.reject(new Error("Your device does not have a camera."));
     }
 
     return new Promise(async (resolve, reject) => {
+        const hasMultipleCameraDevices = videoDevices.length > 1;
         let error: string | undefined;
         let stream: MediaStream | undefined;
         let styleElements: HTMLStyleElement[] = [];
         let videoIsReady = false;
+        let shouldFaceEnvironment = true;
 
         createAndInsertStyles(styleElements);
-        const { video, wrapper, actionControl, closeControl } = createAndInsertElements();
 
-        try {
-            stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        } catch (e) {
-            if (e instanceof Error) {
-                switch (e.name) {
-                    case "NotAllowedError":
-                        error = "Permission denied.";
-                        break;
-                    case "NotFoundError":
-                        error = "Media not available.";
-                        break;
-                    case "NotReadableError":
-                        error = "Media not available, is it already in use elsewhere?";
-                        break;
-                    default:
-                        error = e.message;
-                        break;
-                }
-            }
-        }
+        const { video, wrapper, actionControl, switchControl, closeControl } = createAndInsertElements();
 
-        if (error) {
-            closeHandler();
-            return reject(new Error(error));
-        }
+        await startStream("environment");
 
         const { handler: takePictureHandler, cleanup: takePictureCleanup } = takePictureSetup();
 
-        closeControl.onclick = () => {
+        if (hasMultipleCameraDevices) {
+            switchControl.style.display = "block";
+        }
+
+        closeControl.addEventListener("click", () => {
             closeHandler();
+
             takePictureCleanup();
+
             resolve(false);
-        };
-        actionControl.onclick = takePictureHandler;
-        video.onloadedmetadata = () => (videoIsReady = true);
-        //TODO: handle cases where video stream closes. cleanup.
-        video.srcObject = stream!;
+        });
+
+        switchControl.addEventListener("click", switchControlHandler);
+
+        actionControl.addEventListener("click", takePictureHandler);
+
+        video.addEventListener("loadedmetadata", () => (videoIsReady = true));
 
         function createAndInsertStyles(styleElements: HTMLStyleElement[]) {
             const styles = [
@@ -132,7 +126,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                     background-color: red;
                     width: 50px;
                     height: 50px;
-                };`,
+                };
+                `,
+                `
+                .pwa-take-picture-switch-control {
+                    border-radius: 50%;
+                    background-color: red;
+                    width: 50px;
+                    height: 50px;
+                    display: none;
+                };
+                `,
                 `
                 .pwa-take-picture-close-control {
                     border-radius: 50%;
@@ -188,13 +192,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             const closeControlWrapper = document.createElement("div");
             closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
 
-            const actionControl = document.createElement("div");
+            const actionControl = document.createElement("button");
             actionControl.classList.add("pwa-take-picture-action-control");
 
-            const closeControl = document.createElement("div");
+            const switchControl = document.createElement("button");
+            switchControl.classList.add("pwa-take-picture-switch-control");
+
+            const closeControl = document.createElement("button");
             closeControl.classList.add("pwa-take-picture-close-control");
 
             actionControlWrapper.appendChild(actionControl);
+            actionControlWrapper.appendChild(switchControl);
             closeControlWrapper.appendChild(closeControl);
             wrapper.appendChild(actionControlWrapper);
             wrapper.appendChild(closeControlWrapper);
@@ -202,7 +210,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
             document.body.appendChild(wrapper);
 
-            return { video, wrapper, actionControl, closeControl };
+            return { video, wrapper, actionControl, switchControl, closeControl };
         }
 
         function takePictureSetup() {
@@ -211,7 +219,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             return {
                 handler: () => {
                     if (videoIsReady) {
-                        // take the picture - save stream bits.
                         confirmationWrapper = document.createElement("div");
                         confirmationWrapper.classList.add("pwa-take-picture-confirm-wrapper");
 
@@ -246,12 +253,16 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
                         document.body.appendChild(confirmationWrapper);
 
+                        saveBtn.addEventListener("click", saveFile);
+
+                        closeBtn.addEventListener("click", cleanupConfirmationElements);
+
                         function cleanupConfirmationElements() {
                             document.body.removeChild(confirmationWrapper);
                         }
 
                         async function saveFile() {
-                            const filename = `picture-${new Date()}`; //TODO: better?
+                            const filename = `device-camera-picture-${new Date()}`;
 
                             new Promise((resolve, reject) => {
                                 videoCanvas.toBlob(blob => {
@@ -272,7 +283,9 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                                                 callback: () => cleanupConfirmationElements(),
                                                 error: (error: Error) => {
                                                     cleanupConfirmationElements();
+
                                                     closeHandler();
+
                                                     reject(error);
                                                 } //TODO: test this.
                                             });
@@ -284,9 +297,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                                     reject(new Error("Couldn't create image."));
                                 });
                         }
-
-                        saveBtn.onclick = saveFile;
-                        closeBtn.onclick = cleanupConfirmationElements;
 
                         // TODO: cleanup
                         // on error ->
@@ -305,7 +315,63 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             };
         }
 
+        async function switchControlHandler() {
+            if (!stream) return;
+
+            stopStream();
+
+            if (hasMultipleCameraDevices) {
+                shouldFaceEnvironment = !shouldFaceEnvironment;
+            }
+
+            await startStream(shouldFaceEnvironment ? "environment" : "user");
+        }
+
         function closeHandler() {
+            stopStream();
+
+            document.body.removeChild(wrapper);
+
+            for (const styleElement of styleElements) {
+                document.head.removeChild(styleElement);
+            }
+        }
+
+        async function startStream(facingMode: string) {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facingMode } });
+            } catch (e) {
+                if (e instanceof Error) {
+                    switch (e.name) {
+                        case "NotAllowedError":
+                            error = "Permission denied.";
+                            break;
+                        case "NotFoundError":
+                            error = "Media not available.";
+                            break;
+                        case "NotReadableError":
+                            error = "Media not available, is it already in use elsewhere?";
+                            break;
+                        default:
+                            error = e.message;
+                            break;
+                    }
+                }
+            }
+
+            if (error) {
+                closeHandler();
+
+                return reject(new Error(error));
+            }
+
+            //TODO: handle cases where video stream closes. cleanup.
+            video.srcObject = stream!;
+        }
+
+        function stopStream() {
+            videoIsReady = false;
+
             const tracks = stream?.getTracks();
 
             tracks?.forEach(track => {
@@ -313,11 +379,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             });
 
             stream = undefined;
-            document.body.removeChild(wrapper);
-
-            for (const styleElement of styleElements) {
-                document.head.removeChild(styleElement);
-            }
         }
     });
     // END USER CODE
