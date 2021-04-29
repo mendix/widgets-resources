@@ -41,12 +41,6 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         [setVideoElement]
     );
 
-    const play = useCallback((event: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-        if (event.currentTarget.paused) {
-            event.currentTarget.play();
-        }
-    }, []);
-
     function onCloseOverlay(): void {
         setShowScannerOverlay(false);
         cleanupStreamObject();
@@ -94,7 +88,15 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
     }
     return (
         <div className={classNames("widget-barcode-scanner-container")}>
-            <video className={classNames("video")} ref={updateVideoElement} onCanPlay={play} />
+            <video
+                className={classNames("video")}
+                ref={updateVideoElement}
+                onCanPlay={event => {
+                    if (event.currentTarget.paused) {
+                        event.currentTarget.play();
+                    }
+                }}
+            />
             {showMask ? (
                 <div className={classNames("video-canvas")}>
                     <div className={classNames("canvas-left", "canvas-background")} />
