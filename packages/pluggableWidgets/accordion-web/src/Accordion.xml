@@ -51,8 +51,8 @@
                     <caption>Collapse behavior</caption>
                     <description/>
                     <enumerationValues>
-                        <enumerationValue key="singleExpanded">Only one group can be open</enumerationValue>
-                        <enumerationValue key="multipleExpanded">Multiple groups can be open</enumerationValue>
+                        <enumerationValue key="singleExpanded">Only one group can be expanded</enumerationValue>
+                        <enumerationValue key="multipleExpanded">Multiple groups can be expanded</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
