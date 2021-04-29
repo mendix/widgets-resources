@@ -13,14 +13,14 @@
  * Does stuff.
  * @returns {Promise.<void>}
  */
-export async function TakePicture(picture: mendix.lib.MxObject): Promise<void | Error> {
+export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean> {
     // BEGIN USER CODE
     if (!picture) {
         // TODO: message does not appear in client. Because Error is used. Likewise for all other errors.
         return Promise.reject(new Error("Input parameter 'Picture' is required"));
     }
 
-    if (!picture.inheritsFrom("System.FileDocument")) {
+    if (!picture.inheritsFrom("System.Image")) {
         const entity = picture.getEntity();
         return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
     }
@@ -31,53 +31,56 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<void | 
         return Promise.reject(new Error("Camera is unsupported"));
     }
 
-    let error: string | undefined;
-    let stream: MediaStream | undefined;
-    let styleElements: HTMLStyleElement[] = [];
-    let videoIsReady = false;
+    return new Promise(async (resolve, reject) => {
+        let error: string | undefined;
+        let stream: MediaStream | undefined;
+        let styleElements: HTMLStyleElement[] = [];
+        let videoIsReady = false;
 
-    createAndInsertStyles(styleElements);
-    const { video, wrapper, actionControl, closeControl } = createAndInsertElements();
+        createAndInsertStyles(styleElements);
+        const { video, wrapper, actionControl, closeControl } = createAndInsertElements();
 
-    try {
-        stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                width: window.innerWidth,
-                height: window.innerHeight
-            }
-        });
-    } catch (e) {
-        if (e instanceof Error) {
-            switch (e.name) {
-                case "NotAllowedError":
-                    error = "Permission denied.";
-                    break;
-                case "NotFoundError":
-                    error = "Media not available.";
-                    break;
-                case "NotReadableError":
-                    error = "Media not available, is it already in use elsewhere?";
-                    break;
-                default:
-                    error = e.message;
-                    break;
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        } catch (e) {
+            if (e instanceof Error) {
+                switch (e.name) {
+                    case "NotAllowedError":
+                        error = "Permission denied.";
+                        break;
+                    case "NotFoundError":
+                        error = "Media not available.";
+                        break;
+                    case "NotReadableError":
+                        error = "Media not available, is it already in use elsewhere?";
+                        break;
+                    default:
+                        error = e.message;
+                        break;
+                }
             }
         }
-    }
 
-    if (error) {
-        closeHandler();
-        return Promise.reject(new Error(error));
-    }
+        if (error) {
+            closeHandler();
+            return reject(new Error(error));
+        }
 
-    closeControl.onclick = closeHandler;
-    actionControl.onclick = takePictureHandler;
-    video.onloadedmetadata = () => (videoIsReady = true);
-    video.srcObject = stream!;
+        const { handler: takePictureHandler, cleanup: takePictureCleanup } = takePictureSetup();
 
-    function createAndInsertStyles(styleElements: HTMLStyleElement[]) {
-        const styles = [
-            `
+        closeControl.onclick = () => {
+            closeHandler();
+            takePictureCleanup();
+            resolve(false);
+        };
+        actionControl.onclick = takePictureHandler;
+        video.onloadedmetadata = () => (videoIsReady = true);
+        //TODO: handle cases where video stream closes. cleanup.
+        video.srcObject = stream!;
+
+        function createAndInsertStyles(styleElements: HTMLStyleElement[]) {
+            const styles = [
+                `
                 .pwa-take-picture-wrapper {
                     height: 100%;
                     width: 100%;
@@ -86,9 +89,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<void | 
                     right: 0;
                     bottom: 0;
                     left: 0;
+                    display: flex;
+                    flex-direction: column-reverse;
+                    justify-content: space-between;
                 };
                 `,
-            `
+                `
                 .pwa-take-picture-video-element {
                     position: absolute;
                     z-index: 10;
@@ -102,46 +108,32 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<void | 
                     background-color: black;
                 };
                 `,
-            `
+                `
                 .pwa-take-picture-action-control-wrapper {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
                     display: flex;
                     justify-content: flex-end;
                     flex-direction: column;
                     align-items: center;
-                    height: 100%;
-                    width: 100%;
                     z-index: 15;
                 };
                 `,
-            `
+                `
                 .pwa-take-picture-close-control-wrapper {
-                    position: absolute;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
                     display: flex;
                     justify-content: flex-start;
                     flex-direction: column;
                     align-items: flex-end;
-                    height: 100%;
-                    width: 100%;
                     z-index: 15;
                 };
                 `,
-            `
+                `
                 .pwa-take-picture-action-control {
                     border-radius: 50%;
                     background-color: red;
                     width: 50px;
                     height: 50px;
                 };`,
-            `
+                `
                 .pwa-take-picture-close-control {
                     border-radius: 50%;
                     background-color: red;
@@ -149,7 +141,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<void | 
                     height: 50px;
                 };
                 `,
-            `
+                `
                 .pwa-take-picture-confirm-wrapper {
                     position: absolute;
                     top: 0;
@@ -157,72 +149,176 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<void | 
                     bottom: 0;
                     left: 0;
                     width: 100%;
-                    height: 0;
+                    height: 100%;
                     background-color: white;
+                    z-index: 20;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                `,
+                `
+                .pwa-take-picture-image {
+                    width: 100%;
                 }
                 `
-        ];
+            ];
 
-        for (const style of styles) {
-            const styleElement = document.createElement("style");
-            styleElement.appendChild(document.createTextNode(style));
-            styleElements.push(styleElement);
-            document.head.appendChild(styleElement);
+            for (const style of styles) {
+                const styleElement = document.createElement("style");
+                styleElement.appendChild(document.createTextNode(style));
+                styleElements.push(styleElement);
+                document.head.appendChild(styleElement);
+            }
         }
-    }
 
-    function createAndInsertElements() {
-        const wrapper = document.createElement("div");
-        wrapper.classList.add("pwa-take-picture-wrapper");
+        function createAndInsertElements() {
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("pwa-take-picture-wrapper");
 
-        const video = document.createElement("video");
-        video.classList.add("pwa-take-picture-video-element");
-        video.setAttribute("autoplay", "autoplay");
-        video.setAttribute("muted", "muted");
-        video.setAttribute("playsinline", "");
+            const video = document.createElement("video");
+            video.classList.add("pwa-take-picture-video-element");
+            video.setAttribute("autoplay", "autoplay");
+            video.setAttribute("muted", "muted");
+            video.setAttribute("playsinline", "");
 
-        const actionControlWrapper = document.createElement("div");
-        actionControlWrapper.classList.add("pwa-take-picture-action-control-wrapper");
+            const actionControlWrapper = document.createElement("div");
+            actionControlWrapper.classList.add("pwa-take-picture-action-control-wrapper");
 
-        const closeControlWrapper = document.createElement("div");
-        closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
+            const closeControlWrapper = document.createElement("div");
+            closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
 
-        const actionControl = document.createElement("div");
-        actionControl.classList.add("pwa-take-picture-action-control");
+            const actionControl = document.createElement("div");
+            actionControl.classList.add("pwa-take-picture-action-control");
 
-        const closeControl = document.createElement("div");
-        closeControl.classList.add("pwa-take-picture-close-control");
+            const closeControl = document.createElement("div");
+            closeControl.classList.add("pwa-take-picture-close-control");
 
-        actionControlWrapper.appendChild(actionControl);
-        closeControlWrapper.appendChild(closeControl);
-        wrapper.appendChild(actionControlWrapper);
-        wrapper.appendChild(closeControlWrapper);
-        wrapper.appendChild(video);
+            actionControlWrapper.appendChild(actionControl);
+            closeControlWrapper.appendChild(closeControl);
+            wrapper.appendChild(actionControlWrapper);
+            wrapper.appendChild(closeControlWrapper);
+            wrapper.appendChild(video);
 
-        document.body.appendChild(wrapper);
+            document.body.appendChild(wrapper);
 
-        return { video, wrapper, actionControl, closeControl };
-    }
-
-    function takePictureHandler() {
-        if (videoIsReady) {
-            // TODO: take the picture.
+            return { video, wrapper, actionControl, closeControl };
         }
-    }
 
-    function closeHandler() {
-        const tracks = stream?.getTracks();
+        function takePictureSetup() {
+            let confirmationWrapper: HTMLDivElement;
 
-        tracks?.forEach(track => {
-            track.stop();
-        });
+            return {
+                handler: () => {
+                    if (videoIsReady) {
+                        // take the picture - save stream bits.
+                        confirmationWrapper = document.createElement("div");
+                        confirmationWrapper.classList.add("pwa-take-picture-confirm-wrapper");
 
-        stream = undefined;
-        document.body.removeChild(wrapper);
+                        const topSection = document.createElement("div");
+                        topSection.classList.add("pwa-take-picture-confirm-top-section");
 
-        for (const styleElement of styleElements) {
-            document.head.removeChild(styleElement);
+                        const middleSection = document.createElement("div");
+                        middleSection.classList.add("pwa-take-picture-confirm-middle-section");
+
+                        const bottomSection = document.createElement("div");
+                        bottomSection.classList.add("pwa-take-picture-confirm-bottom-section");
+
+                        const videoCanvas = document.createElement("canvas");
+                        videoCanvas.classList.add("pwa-take-picture-image");
+                        videoCanvas.height = video.videoHeight;
+                        videoCanvas.width = video.videoWidth;
+                        const videoContext = videoCanvas.getContext("2d");
+                        videoContext?.drawImage(video, 0, 0);
+                        middleSection.appendChild(videoCanvas);
+
+                        const closeBtn = document.createElement("button");
+                        closeBtn.textContent = "Close";
+                        bottomSection.appendChild(closeBtn);
+
+                        const saveBtn = document.createElement("button");
+                        saveBtn.textContent = "Save";
+                        bottomSection.appendChild(saveBtn);
+
+                        confirmationWrapper.appendChild(topSection);
+                        confirmationWrapper.appendChild(middleSection);
+                        confirmationWrapper.appendChild(bottomSection);
+
+                        document.body.appendChild(confirmationWrapper);
+
+                        function cleanupConfirmationElements() {
+                            document.body.removeChild(confirmationWrapper);
+                        }
+
+                        async function saveFile() {
+                            const filename = `picture-${new Date()}`; //TODO: better?
+
+                            new Promise((resolve, reject) => {
+                                videoCanvas.toBlob(blob => {
+                                    if (blob) resolve(blob);
+                                    else reject("Couldn't create blob.");
+                                });
+                            })
+                                .then((blob: Blob) => {
+                                    mx.data.saveDocument(
+                                        picture.getGuid(),
+                                        filename,
+                                        {},
+                                        blob,
+                                        () => {
+                                            picture.set("Name", filename);
+                                            mx.data.commit({
+                                                mxobj: picture,
+                                                callback: () => cleanupConfirmationElements(),
+                                                error: (error: Error) => {
+                                                    cleanupConfirmationElements();
+                                                    closeHandler();
+                                                    reject(error);
+                                                } //TODO: test this.
+                                            });
+                                        },
+                                        (error: Error) => reject(error)
+                                    );
+                                })
+                                .catch(() => {
+                                    reject(new Error("Couldn't create image."));
+                                });
+                        }
+
+                        saveBtn.onclick = saveFile;
+                        closeBtn.onclick = cleanupConfirmationElements;
+
+                        // TODO: cleanup
+                        // on error ->
+                        // on success -> show confirmation dialog
+                        // on save -> save, commit, close? or back to cam.
+                        // on cancel -> go back to camera
+                    }
+                },
+                cleanup: () => {
+                    try {
+                        document.body.removeChild(confirmationWrapper);
+                    } catch (e) {
+                        // no-op: node may have already been removed.
+                    }
+                }
+            };
         }
-    }
+
+        function closeHandler() {
+            const tracks = stream?.getTracks();
+
+            tracks?.forEach(track => {
+                track.stop();
+            });
+
+            stream = undefined;
+            document.body.removeChild(wrapper);
+
+            for (const styleElement of styleElements) {
+                document.head.removeChild(styleElement);
+            }
+        }
+    });
     // END USER CODE
 }
