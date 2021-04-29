@@ -115,7 +115,6 @@
     "@wdio/devtools-service": "^7.5.3",
     "async-mutex": "^0.2.4",
     "cross-env": "^7.0.2",
-    "detox": "^18.10.0",
     "shx": "^0.3.3",
     "tree-kill": "^1.2.2",
     "wdio-image-comparison-service": "^2.3.0",
