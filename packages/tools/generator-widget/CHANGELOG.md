@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 
-- Explain users in the README of generated widget project how to install dependencies with NPM v7.x.x.
+- Explain to users in the README of a generated widget project how to install dependencies with NPM v7.x.x.
 
 ### Fixed
 
