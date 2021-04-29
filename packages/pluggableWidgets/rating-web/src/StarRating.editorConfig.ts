@@ -42,10 +42,10 @@ export const getPreview = (props: StarRatingPreviewProps): RowLayoutProps => {
 
 export function check(values: StarRatingPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (!values.maximumValue || values.maximumValue < 0) {
+    if (!values.maximumValue || values.maximumValue <= 0) {
         errors.push({
             property: "maximumValue",
-            message: "Number of stars should be greater than Zero (0)"
+            message: "Number of stars should be greater than zero (0)"
         });
     }
     return errors;

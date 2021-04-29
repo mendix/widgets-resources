@@ -9,7 +9,6 @@ export function preview(props: StarRatingPreviewProps): ReactElement {
     // TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) and readOnly generation to remove the ts-ignore below
     // @ts-ignore
     const { className, readOnly } = props;
-    console.warn(className, readOnly);
 
     const emptyIcon = props.emptyIcon ? (
         <Icon value={props.emptyIcon as WebIcon} empty />

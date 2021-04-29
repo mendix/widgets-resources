@@ -45,9 +45,11 @@ export function Rating(props: RatingProps): ReactElement {
                             setHover(undefined);
                             onClickAction?.(currentIndex);
                         }}
-                        onKeyDown={event =>
-                            event.key === " " || event.key === "Enter" ? onClickAction?.(currentIndex) : undefined
-                        }
+                        onKeyDown={event => {
+                            if (event.key === " " || event.key === "Enter") {
+                                onClickAction?.(currentIndex);
+                            }
+                        }}
                         onMouseOut={() => {
                             setHover(undefined);
                         }}
