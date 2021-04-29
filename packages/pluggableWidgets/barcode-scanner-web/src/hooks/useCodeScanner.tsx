@@ -24,7 +24,7 @@ export const useCodeScanner: CodeScannerHook = (streamObject, videoElement) => {
         let isCanceled = false;
         async function check(stream: MediaStream, element: HTMLVideoElement): Promise<void> {
             try {
-                const browserReader = new BrowserMultiFormatReader(hints);
+                const browserReader = new BrowserMultiFormatReader(hints, 2000);
                 const result = await browserReader.decodeOnceFromStream(stream, element);
                 if (!isCanceled) {
                     setCodeResult(result.getText());
