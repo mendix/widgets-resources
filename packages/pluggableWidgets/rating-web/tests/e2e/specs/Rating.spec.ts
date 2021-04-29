@@ -8,6 +8,6 @@ describe("Rating", () => {
         const screenshotElem = $(".mx-name-mainLayoutGrid");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
         browser.saveElement(screenshotElem, "ratingPageContent");
-        expect(browser.checkElement(screenshotElem, "ratingPageContent")).toEqual(0);
+        expect(browser.checkElement(screenshotElem, "ratingPageContent")).toBeLessThan(0.3);
     });
 });
