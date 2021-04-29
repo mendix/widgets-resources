@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, Fragment, ReactElement, ReactNode, useMemo, useState } from "react";
+import { createElement, CSSProperties, Fragment, ReactElement, ReactNode, useEffect, useMemo, useState } from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
@@ -42,6 +42,7 @@ export interface TableProps<T> {
     onSettingsChange?: () => void;
     rowClass?: (value: T) => string;
     setPage?: (computePage: (prevPage: number) => number) => void;
+    setSortParameters?: (sort?: { columnIndex: number; desc: boolean }) => void;
     settings?: EditableValue<string>;
     styles?: CSSProperties;
     valueForSort: (value: T, columnIndex: number) => string | Big | boolean | Date | undefined;
@@ -63,7 +64,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             )
             .filter(Boolean) as string[]) ?? []
     );
-    const [paginationIndex, setPaginationIndex] = useState<number>(0);
+    // TODO: const [paginationIndex, setPaginationIndex] = useState<number>(0);
+    const [, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
@@ -83,6 +85,20 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         setColumnsWidth
     );
     // TODO: Auto reset pagination if paging is enabled and somehow the settings contains pagination index
+    // TODO: Auto reset for sort and
+
+    useEffect(() => {
+        // TODO: Should apply sort in the database
+        const [sortProperties] = sortBy;
+        if (sortProperties && "id" in sortProperties && "desc" in sortProperties) {
+            props.setSortParameters?.({
+                columnIndex: Number(sortProperties.id),
+                desc: sortProperties.desc ?? false
+            });
+        } else {
+            props.setSortParameters?.(undefined);
+        }
+    }, [sortBy, props.setSortParameters]);
 
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
@@ -100,6 +116,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
                 canResize: column.resizable,
+                canSort: column.sortable,
                 customFilter: props.columnsFilterable
                     ? props.filterRenderer(
                           (children: ReactNode) => (
@@ -110,7 +127,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                           index
                       )
                     : null,
-                disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
                 sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
                     const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
@@ -186,16 +202,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         {
             columns: tableColumns,
             data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
-            disableSortBy: !props.columnsSortable,
             initialState: {
-                pageSize: props.pageSize,
                 columnOrder,
-                hiddenColumns,
-                pageIndex: paginationIndex,
-                sortBy
+                hiddenColumns
             },
-            disableMultiSort: true,
-            autoResetSortBy: false,
             useControlledState: state =>
                 useMemo(
                     () => ({
@@ -207,7 +217,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     [state, columnOrder, hiddenColumns, sortBy]
                 )
         },
-        useSortBy,
         useColumnOrder
     );
 
@@ -306,6 +315,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                         setDragOver={setDragOver}
                                         setIsDragging={setIsDragging}
                                         setSortBy={setSortBy}
+                                        sortBy={sortBy}
                                         sortable={props.columnsSortable}
                                         visibleColumns={visibleColumns}
                                     />

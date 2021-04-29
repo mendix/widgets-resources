@@ -1,15 +1,5 @@
-import {
-    createElement,
-    Dispatch,
-    ReactElement,
-    SetStateAction,
-    DragEvent,
-    DragEventHandler,
-    useCallback,
-    MouseEvent,
-    KeyboardEvent
-} from "react";
-import { ColumnInstance, HeaderGroup, IdType, SortingRule, TableHeaderProps } from "react-table";
+import { createElement, Dispatch, ReactElement, SetStateAction, DragEvent, DragEventHandler, useCallback } from "react";
+import { ColumnInstance, HeaderGroup, IdType, SortingRule } from "react-table";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
@@ -31,6 +21,7 @@ export interface HeaderProps<D extends object> {
     setDragOver: Dispatch<SetStateAction<string>>;
     setIsDragging: Dispatch<SetStateAction<boolean>>;
     setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>;
+    sortBy: Array<SortingRule<object>>;
     visibleColumns: Array<ColumnInstance<D>>;
 }
 
@@ -45,19 +36,39 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
         props.setIsDragging
     );
 
-    const { onClick, style, ...rest } = props.column.getHeaderProps(
-        canSort ? props.column.getSortByToggleProps() : undefined
-    ) as TableHeaderProps & { onClick: (e: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>) => void };
+    const { style, ...rest } = props.column.getHeaderProps();
+
+    const [sortProperties] = props.sortBy;
+    const isSorted = sortProperties && sortProperties.id === props.column.id;
+    const isSortedDesc = isSorted && sortProperties.desc;
 
     const sortIcon = canSort
-        ? props.column.isSorted
-            ? props.column.isSortedDesc
+        ? isSorted
+            ? isSortedDesc
                 ? faLongArrowAltDown
                 : faLongArrowAltUp
             : faArrowsAltV
         : undefined;
 
     const caption = props.column.render("Header") as string;
+
+    const onSortBy = (): void => {
+        /**
+         * Always analyse previous values to predict the next
+         * 1 - !props.column.isSorted turns to asc
+         * 2 - isSortedDesc === false && props.column.isSorted turns to desc
+         * 3 - isSortedDesc === true && props.column.isSorted turns to unsorted
+         * If multisort is allowed in the future this should be changed to append instead of just return a new array
+         */
+        if (!isSorted) {
+            props.setSortBy([{ id: props.column.id, desc: false }]);
+        } else if (isSorted && !isSortedDesc) {
+            props.setSortBy([{ id: props.column.id, desc: true }]);
+        } else {
+            props.setSortBy([]);
+        }
+        // TODO: Find a way to do sorting better
+    };
 
     return (
         <div
@@ -83,33 +94,13 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
                     id={props.column.id}
                     className={classNames("column-header", canSort ? "clickable" : "", props.className)}
                     style={{ pointerEvents: props.isDragging ? "none" : undefined }}
-                    onClick={
-                        canSort
-                            ? e => {
-                                  /**
-                                   * Always analyse previous values to predict the next
-                                   * 1 - !props.column.isSorted turns to asc
-                                   * 2 - isSortedDesc === false && props.column.isSorted turns to desc
-                                   * 3 - isSortedDesc === true && props.column.isSorted turns to unsorted
-                                   * If multisort is allowed in the future this should be changed to append instead of just return a new array
-                                   */
-                                  if (!props.column.isSorted) {
-                                      props.setSortBy([{ id: props.column.id, desc: false }]);
-                                  } else if (props.column.isSorted && !props.column.isSortedDesc) {
-                                      props.setSortBy([{ id: props.column.id, desc: true }]);
-                                  } else {
-                                      props.setSortBy([]);
-                                  }
-                                  onClick(e);
-                              }
-                            : undefined
-                    }
+                    onClick={canSort ? onSortBy : undefined}
                     onKeyDown={
                         canSort
                             ? e => {
                                   if (e.key === "Enter" || e.key === " ") {
                                       e.preventDefault();
-                                      onClick(e);
+                                      onSortBy();
                                   }
                               }
                             : undefined

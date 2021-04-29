@@ -123,6 +123,7 @@ function mockHeaderProps(): HeaderProps<object> {
         setDragOver: jest.fn(),
         visibleColumns: [],
         setSortBy: jest.fn(),
-        setIsDragging: jest.fn()
+        setIsDragging: jest.fn(),
+        sortBy: []
     };
 }

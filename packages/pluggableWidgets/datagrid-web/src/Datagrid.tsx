@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { FilterContext, FilterFunction } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
+    const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
     const isInfiniteLoad = props.pagination === "virtualScrolling";
     const currentPage = isInfiniteLoad
         ? props.datasource.limit / props.pageSize
@@ -50,6 +51,14 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         props.datasource.setFilter(filters.length > 1 ? and(...filters) : filters[0]);
     } else {
         props.datasource.setFilter(undefined);
+    }
+
+    if (sortParameters) {
+        props.datasource.setSortOrder([
+            [props.columns[sortParameters.columnIndex].attribute!.id, sortParameters.desc ? "desc" : "asc"]
+        ]);
+    } else {
+        props.datasource.setSortOrder([]);
     }
     // const items = (props.datasource.items ?? []).filter(item =>
     //     customFiltersState.every(
@@ -117,6 +126,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             rowClass={useCallback(value => props.rowClass?.get(value)?.value ?? "", [props.rowClass])}
             settings={props.configurationAttribute}
             setPage={setPage}
+            setSortParameters={setSortParameters}
             styles={props.style}
             valueForSort={useCallback(
                 (value, columnIndex) => {
