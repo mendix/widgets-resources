@@ -1,8 +1,17 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ListAttributeValue, ObjectItem } from "mendix";
+import { ListAttributeValue } from "mendix";
+import { FilterCondition } from "mendix/filters";
+import {
+    and,
+    attribute,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    literal
+} from "mendix/filters/builders";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
-import { isValid, isDate } from "date-fns";
 
 import { changeTimeOfDate } from "../utils/utils";
 import DatePickerComponent from "react-datepicker";
@@ -13,7 +22,7 @@ interface FilterComponentProps {
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
     dateFormat?: string;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
+    filterDispatcher: Dispatch<{ getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined }>;
     locale?: string;
     name?: string;
     placeholder?: string;
@@ -35,38 +44,32 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     useEffect(() => {
         props.filterDispatcher({
-            filter: (item, attr): any => {
-                const dateValue = attr.get(item).value as Date;
-
-                if (!value) {
-                    return true;
+            getFilterCondition: attr => {
+                if (!attr.filterable || !value) {
+                    return undefined;
                 }
 
-                if (!dateValue || !isDate(dateValue) || !isValid(dateValue)) {
-                    return false;
-                }
-
-                const utcDateValue = dateValue.getTime();
+                const filterAttribute = attribute(attr.id);
 
                 switch (type) {
                     case "greater":
-                        return utcDateValue > changeTimeOfDate(value, 23, 59, 59).getTime();
+                        return greaterThan(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)));
                     case "greaterEqual":
-                        return utcDateValue >= changeTimeOfDate(value, 0, 0, 0).getTime();
+                        return greaterThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0)));
                     case "equal":
-                        return (
-                            changeTimeOfDate(dateValue, 0, 0, 0).getTime() ===
-                            changeTimeOfDate(value, 0, 0, 0).getTime()
+                        return and(
+                            greaterThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0))),
+                            lessThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)))
                         );
                     case "notEqual":
-                        return (
-                            changeTimeOfDate(dateValue, 0, 0, 0).getTime() !==
-                            changeTimeOfDate(value, 0, 0, 0).getTime()
+                        return and(
+                            lessThan(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0))),
+                            greaterThan(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)))
                         );
                     case "smaller":
-                        return utcDateValue < changeTimeOfDate(value, 0, 0, 0).getTime();
+                        return lessThan(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0)));
                     case "smallerEqual":
-                        return utcDateValue <= changeTimeOfDate(value, 23, 59, 59).getTime();
+                        return lessThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)));
                 }
             }
         });

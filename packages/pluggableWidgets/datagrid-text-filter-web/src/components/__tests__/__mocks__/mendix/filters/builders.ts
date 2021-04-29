@@ -1,0 +1,11 @@
+export const attribute = jest.fn();
+export const contains = jest.fn();
+export const equals = jest.fn();
+export const endsWith = jest.fn();
+export const greaterThan = jest.fn();
+export const greaterThanOrEqual = jest.fn();
+export const lessThan = jest.fn();
+export const lessThanOrEqual = jest.fn();
+export const literal = jest.fn();
+export const startsWith = jest.fn();
+export const notEqual = jest.fn();

@@ -1,6 +1,20 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ObjectItem, ListAttributeValue } from "mendix";
+import { ListAttributeValue } from "mendix";
+import { FilterCondition } from "mendix/filters";
+import {
+    attribute,
+    contains,
+    equals,
+    endsWith,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    literal,
+    startsWith,
+    notEqual
+} from "mendix/filters/builders";
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 import { debounce } from "../utils/utils";
 import classNames from "classnames";
@@ -9,7 +23,7 @@ interface FilterComponentProps {
     adjustable: boolean;
     defaultFilter: DefaultFilterEnum;
     delay: number;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
+    filterDispatcher: Dispatch<{ getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined }>;
     name?: string;
     placeholder?: string;
     tabIndex?: number;
@@ -34,34 +48,31 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                filter: (item, attr): boolean => {
-                    if (!value) {
-                        return true;
+                getFilterCondition: attr => {
+                    if (!attr.filterable || !value) {
+                        return undefined;
                     }
-                    const dataValue = attr.get(item).displayValue.toLowerCase();
-                    if (!dataValue) {
-                        return false;
-                    }
-                    const filterValue = value.toLowerCase();
+                    const filterAttribute = attribute(attr.id);
+
                     switch (type) {
                         case "contains":
-                            return dataValue.includes(filterValue);
+                            return contains(filterAttribute, literal(value));
                         case "startsWith":
-                            return dataValue.startsWith(filterValue);
+                            return startsWith(filterAttribute, literal(value));
                         case "endsWith":
-                            return dataValue.endsWith(filterValue);
+                            return endsWith(filterAttribute, literal(value));
                         case "greater":
-                            return dataValue > filterValue;
+                            return greaterThan(filterAttribute, literal(value));
                         case "greaterEqual":
-                            return dataValue >= filterValue;
+                            return greaterThanOrEqual(filterAttribute, literal(value));
                         case "equal":
-                            return dataValue === filterValue;
+                            return equals(filterAttribute, literal(value));
                         case "notEqual":
-                            return dataValue !== filterValue;
+                            return notEqual(filterAttribute, literal(value));
                         case "smaller":
-                            return dataValue < filterValue;
+                            return lessThan(filterAttribute, literal(value));
                         case "smallerEqual":
-                            return dataValue <= filterValue;
+                            return lessThanOrEqual(filterAttribute, literal(value));
                     }
                 }
             });

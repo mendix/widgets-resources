@@ -1,6 +1,17 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ListAttributeValue, ObjectItem } from "mendix";
+import { ListAttributeValue } from "mendix";
+import { FilterCondition } from "mendix/filters";
+import {
+    attribute,
+    equals,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    literal,
+    notEqual
+} from "mendix/filters/builders";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
 import { Big } from "big.js";
@@ -10,7 +21,7 @@ interface FilterComponentProps {
     adjustable: boolean;
     defaultFilter: DefaultFilterEnum;
     delay: number;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
+    filterDispatcher: Dispatch<{ getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined }>;
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
@@ -35,28 +46,26 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                filter: (item, attr): boolean => {
-                    if (!value) {
-                        return true;
+                getFilterCondition: attr => {
+                    if (!attr.filterable || !value) {
+                        return undefined;
                     }
-                    const dataValue = attr.get(item).value as Big;
-                    if (!dataValue || isNaN(Number(dataValue))) {
-                        return false;
-                    }
+                    const filterAttribute = attribute(attr.id);
                     const filterValue = new Big(value);
+
                     switch (type) {
                         case "greater":
-                            return dataValue.gt(filterValue);
+                            return greaterThan(filterAttribute, literal(filterValue));
                         case "greaterEqual":
-                            return dataValue.gte(filterValue);
+                            return greaterThanOrEqual(filterAttribute, literal(filterValue));
                         case "equal":
-                            return dataValue.eq(filterValue);
+                            return equals(filterAttribute, literal(filterValue));
                         case "notEqual":
-                            return !dataValue.eq(filterValue);
+                            return notEqual(filterAttribute, literal(filterValue));
                         case "smaller":
-                            return dataValue.lt(filterValue);
+                            return lessThan(filterAttribute, literal(filterValue));
                         case "smallerEqual":
-                            return dataValue.lte(filterValue);
+                            return lessThanOrEqual(filterAttribute, literal(filterValue));
                     }
                 }
             });

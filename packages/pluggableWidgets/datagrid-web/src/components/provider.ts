@@ -1,12 +1,13 @@
 import { createContext, Dispatch, useContext } from "react";
-import { ObjectItem, ListAttributeValue } from "mendix";
+import { ListAttributeValue } from "mendix";
+import { FilterCondition } from "mendix/filters";
 
 export const FilterContext = createContext((undefined as any) as Dispatch<FilterFunction>);
 
 (window as any)["com.mendix.widgets.web.datagrid.filterContext"] = FilterContext;
 
 export interface FilterFunction {
-    filter(item: ObjectItem, attribute: ListAttributeValue): boolean;
+    getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined;
 }
 
 export function useFilterDispatcher(): Dispatch<FilterFunction> {

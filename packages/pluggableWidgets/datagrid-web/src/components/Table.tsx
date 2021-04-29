@@ -3,17 +3,7 @@ import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
-import {
-    ColumnWithStrictAccessor,
-    IdType,
-    Row,
-    SortingRule,
-    useColumnOrder,
-    useFilters,
-    usePagination,
-    useSortBy,
-    useTable
-} from "react-table";
+import { ColumnWithStrictAccessor, IdType, Row, SortingRule, useColumnOrder, useTable } from "react-table";
 import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
 import { Big } from "big.js";
 import classNames from "classnames";
@@ -62,8 +52,7 @@ export interface ColumnWidth {
 }
 
 export function Table<T>(props: TableProps<T>): ReactElement {
-    const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
-    const isInfinite = !props.paging && !isSortingOrFiltering;
+    const isInfinite = !props.paging;
     const [isDragging, setIsDragging] = useState(false);
     const [dragOver, setDragOver] = useState("");
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
@@ -93,6 +82,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         columnsWidth,
         setColumnsWidth
     );
+    // TODO: Auto reset pagination if paging is enabled and somehow the settings contains pagination index
 
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
@@ -187,18 +177,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         getTableProps,
         headerGroups,
         rows,
-        page: rowsPagination,
         prepareRow,
         getTableBodyProps,
         allColumns,
         setColumnOrder: setOrder,
-        visibleColumns,
-        state: { pageIndex },
-        gotoPage,
-        previousPage,
-        nextPage,
-        canPreviousPage,
-        canNextPage
+        visibleColumns
     } = useTable<{ item: T }>(
         {
             columns: tableColumns,
@@ -224,37 +207,41 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     [state, columnOrder, hiddenColumns, sortBy]
                 )
         },
-        useFilters,
         useSortBy,
-        usePagination,
         useColumnOrder
     );
 
     const pagination = props.paging ? (
-        !isInfinite && !isSortingOrFiltering ? (
-            <Pagination
-                canNextPage={props.hasMoreItems}
-                canPreviousPage={props.page !== 0}
-                gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
-                nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
-                numberOfItems={props.numberOfItems}
-                page={props.page}
-                pageSize={props.pageSize}
-                previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
-            />
-        ) : (
-            <Pagination
-                canNextPage={canNextPage}
-                canPreviousPage={canPreviousPage}
-                gotoPage={gotoPage}
-                nextPage={nextPage}
-                numberOfItems={rows.length}
-                page={pageIndex}
-                pageSize={props.pageSize}
-                previousPage={previousPage}
-                setPaginationIndex={setPaginationIndex}
-            />
-        )
+        <Pagination
+            canNextPage={props.hasMoreItems}
+            canPreviousPage={props.page !== 0}
+            gotoPage={(page: number) =>
+                props.setPage &&
+                props.setPage(() => {
+                    setPaginationIndex(page);
+                    return page;
+                })
+            }
+            nextPage={() =>
+                props.setPage &&
+                props.setPage(prev => {
+                    const newPage = prev + 1;
+                    setPaginationIndex(newPage);
+                    return newPage;
+                })
+            }
+            numberOfItems={props.numberOfItems}
+            page={props.page}
+            pageSize={props.pageSize}
+            previousPage={() =>
+                props.setPage &&
+                props.setPage(prev => {
+                    const newPage = prev - 1;
+                    setPaginationIndex(newPage);
+                    return newPage;
+                })
+            }
+        />
     ) : null;
 
     const cssGridStyles = useMemo(() => {
@@ -329,7 +316,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             )}
                         </Fragment>
                     ))}
-                    {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, rowIndex) => {
+                    {rows.map((row, rowIndex) => {
                         prepareRow(row);
                         return (
                             <div

@@ -1,8 +1,9 @@
 import { Context, Dispatch } from "react";
-import { ObjectItem, ListAttributeValue } from "mendix";
+import { ListAttributeValue } from "mendix";
+import { FilterCondition } from "mendix/filters";
 
 export interface FilterFunction {
-    filter(item: ObjectItem, attribute: ListAttributeValue): boolean;
+    getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined;
 }
 
 export function getFilterDispatcher(): Context<Dispatch<FilterFunction>> | undefined {
