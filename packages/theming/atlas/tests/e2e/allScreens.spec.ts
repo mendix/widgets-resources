@@ -77,17 +77,3 @@ function pageUrls(folder) {
     }
     return pageUrls;
 }
-
-function cleanUnusedScreenshotBases() {
-    const urls = pageUrls(testPageFolders);
-    for (const filePath of getFilePaths(screenShotsFolder)) {
-        if (urls.filter(url => filePath.includes(url)).length === 0) {
-            console.log(`${filePath} is deprecated and will be deleted`);
-            try {
-                fs.rmSync(filePath);
-            } catch (e) {
-                console.warn(filePath, " couldn't be removed. Error: ", e);
-            }
-        }
-    }
-}
