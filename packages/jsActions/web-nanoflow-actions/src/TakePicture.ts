@@ -202,6 +202,39 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
+                .pwa-take-picture-button-wrapper {
+                    padding: 16px;
+                };
+                `,
+                `
+                .pwa-take-picture-save-button {
+                    color: white;
+                    background-color: #264AE5;
+                    width: 100%;
+                    border-radius: 4px;
+                    height: 40px;
+                    font-size: 14px;
+                    line-height: 20px;
+                    text-align: center;
+                    border-style: none;
+                };
+                `,
+                `
+                .pwa-take-picture-cancel-button {
+                    margin-top: 8px;
+                    color: #264AE5;
+                    background-color: white;
+                    width: 100%;
+                    border-radius: 4px;
+                    height: 40px;
+                    font-size: 14px;
+                    line-height: 20px;
+                    text-align: center;
+                    border: 1px solid #264AE5;
+                };
+                `,
+
+                `
                 .pwa-take-picture-switch-control {
                     background-color: transparent;
                     border-style: none;
@@ -367,16 +400,22 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                         videoCanvas.width = video.videoWidth;
                         const videoContext = videoCanvas.getContext("2d");
                         videoContext?.drawImage(video, 0, 0);
-                        middleSection.appendChild(videoCanvas);
 
-                        const closeBtn = document.createElement("button");
-                        closeBtn.textContent = "Close";
-                        bottomSection.appendChild(closeBtn);
+                        const buttonWrapper = document.createElement("div");
+                        buttonWrapper.classList.add("pwa-take-picture-button-wrapper");
 
                         const saveBtn = document.createElement("button");
-                        saveBtn.textContent = "Save";
-                        bottomSection.appendChild(saveBtn);
+                        saveBtn.classList.add("pwa-take-picture-save-button");
+                        saveBtn.textContent = "Save"; // TODO: translatable.
 
+                        const closeBtn = document.createElement("button");
+                        closeBtn.classList.add("pwa-take-picture-cancel-button");
+                        closeBtn.textContent = "Close"; // TODO: translatable.
+
+                        middleSection.appendChild(videoCanvas);
+                        buttonWrapper.appendChild(saveBtn);
+                        buttonWrapper.appendChild(closeBtn);
+                        bottomSection.appendChild(buttonWrapper);
                         confirmationWrapper.appendChild(topSection);
                         confirmationWrapper.appendChild(middleSection);
                         confirmationWrapper.appendChild(bottomSection);
