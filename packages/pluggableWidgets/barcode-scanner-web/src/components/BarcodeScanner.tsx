@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal";
 import { useCodeScanner, CodeScannerHookError } from "../hooks/useCodeScanner";
@@ -28,18 +28,11 @@ function getErrorMessage(errorEnum: MediaStreamHookError | CodeScannerHookError 
 
 export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
-    const [videoElement, setVideoElement] = useState<HTMLVideoElement | null>(null);
+    const videoElement = useRef<HTMLVideoElement | null>(null);
     const hasDetectedOnce = useRef<boolean>(false);
     const { streamObject, cleanupStreamObject, error: errorMediaStream } = useMediaStream();
-    const { codeResult, error: errorCodeScanner } = useCodeScanner(streamObject, videoElement);
+    const { codeResult, error: errorCodeScanner } = useCodeScanner(streamObject, videoElement.current);
     const supportsCameraAccess = browserSupportsCameraAccess();
-
-    const updateVideoElement = useCallback(
-        (node: HTMLVideoElement | null) => {
-            setVideoElement(node);
-        },
-        [setVideoElement]
-    );
 
     function onCloseOverlay(): void {
         setShowScannerOverlay(false);
@@ -48,10 +41,10 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
 
     // If both the video element ref and the camera stream object are ready, display it through the `srcObject` prop.
     useEffect(() => {
-        if (videoElement && streamObject) {
-            videoElement.srcObject = streamObject;
+        if (videoElement.current && streamObject) {
+            videoElement.current.srcObject = streamObject;
         }
-    }, [streamObject, videoElement]);
+    }, [streamObject]);
 
     // If we have an onDetect handler and a barcode has been scanned and it was the first detected code, trigger the onDetect handler.
     useEffect(() => {
@@ -90,7 +83,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         <div className={classNames("widget-barcode-scanner-container")}>
             <video
                 className={classNames("video")}
-                ref={updateVideoElement}
+                ref={videoElement}
                 onCanPlay={event => {
                     if (event.currentTarget.paused) {
                         event.currentTarget.play();
