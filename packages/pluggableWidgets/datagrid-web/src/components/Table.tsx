@@ -4,15 +4,15 @@ import { Pagination } from "./Pagination";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
 import { ColumnWithStrictAccessor, IdType, Row, SortingRule, useColumnOrder, useTable } from "react-table";
-import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
+import { ColumnsPreviewType } from "../../typings/DatagridProps";
 import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { useSettings } from "../utils/settings";
 
 export type TableColumn = Omit<
-    ColumnsType | ColumnsPreviewType,
-    "content" | "attribute" | "dynamicText" | "showContentAs"
+    ColumnsPreviewType,
+    "attribute" | "columnClass" | "content" | "dynamicText" | "filter" | "showContentAs"
 >;
 
 export interface TableProps<T> {
@@ -106,12 +106,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 id: index.toString(),
                 accessor: "item",
                 alignment: column.alignment,
-                Header:
-                    typeof column.header === "object"
-                        ? column.header.value
-                        : props.preview && (column.header?.trim().length ?? 0) === 0
-                        ? "[Empty caption]"
-                        : column.header,
+                Header: column.header,
                 hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,

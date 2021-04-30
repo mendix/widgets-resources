@@ -56,7 +56,7 @@ export function useSettings(
     const filteredColumns = useMemo(
         () =>
             columns.map((c, index) => ({
-                header: typeof c.header === "object" ? c.header.value : c.header,
+                header: c.header,
                 id: index.toString(),
                 hidable: c.hidable
             })) as Array<{ header: string; id: string; hidable: string }>,

@@ -1,11 +1,12 @@
 import { createElement, ReactElement, useCallback, useState } from "react";
-import { DatagridContainerProps } from "../typings/DatagridProps";
+import { ColumnsType, DatagridContainerProps } from "../typings/DatagridProps";
 import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
 
-import { Table } from "./components/Table";
+import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
 import { FilterContext, FilterFunction } from "./components/provider";
+import { isAvailable } from "@mendix/piw-utils-internal";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
@@ -60,12 +61,6 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     } else {
         props.datasource.setSortOrder([]);
     }
-    // const items = (props.datasource.items ?? []).filter(item =>
-    //     customFiltersState.every(
-    //         ([customFilter], columnIndex) =>
-    //             !customFilter || customFilter.filter(item, props.columns[columnIndex].attribute!)
-    //     )
-    // );
 
     return (
         <Table
@@ -93,7 +88,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 },
                 [props.columns, props.rowClass, props.onClick]
             )}
-            columns={props.columns}
+            columns={transformColumnProps(props.columns)}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
             columnsHidable={props.columnsHidable}
@@ -137,4 +132,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             )}
         />
     );
+}
+
+function transformColumnProps(props: ColumnsType[]): TableColumn[] {
+    return props.map(prop => ({
+        ...prop,
+        header: prop.header && isAvailable(prop.header) ? prop.header.value ?? "" : "",
+        sortable: prop.sortable && (prop.attribute?.sortable ?? false)
+    }));
 }
