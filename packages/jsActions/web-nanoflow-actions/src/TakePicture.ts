@@ -23,7 +23,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
     if (!picture.inheritsFrom("System.Image")) {
         const entity = picture.getEntity();
 
-        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'.`));
+        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.Image'.`));
     }
 
     if (!("mediaDevices" in navigator) || !("getUserMedia" in navigator.mediaDevices)) {
@@ -46,20 +46,26 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         let videoIsReady = false;
         let shouldFaceEnvironment = true;
 
-        createAndInsertStyles(styleElements);
+        for (const styleElement of createStyleElements(createStyles())) {
+            styleElements.push(styleElement);
 
-        const { video, wrapper, actionControl, switchControl, closeControl } = createAndInsertElements();
+            document.head.appendChild(styleElement);
+        }
 
-        await startStream("environment");
+        const { video, wrapper, actionControl, switchControl, closeControl } = createFirstScreenElements();
 
-        const { handler: takePictureHandler, cleanup: takePictureCleanup } = takePictureSetup();
+        document.body.appendChild(wrapper);
+
+        await startCamera("environment");
+
+        const { handler: takePictureHandler, cleanup: takePictureCleanup } = setupTakePictureHandlers();
 
         if (hasMultipleCameraDevices) {
             switchControl.style.display = "block";
         }
 
         closeControl.addEventListener("click", () => {
-            closeHandler();
+            closeControlHandler();
 
             takePictureCleanup();
 
@@ -72,8 +78,8 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
         video.addEventListener("loadedmetadata", () => (videoIsReady = true));
 
-        function createAndInsertStyles(styleElements: HTMLStyleElement[]) {
-            const styles = [
+        function createStyles(): string[] {
+            return [
                 `
                 .pwa-take-picture-wrapper {
                     height: 100%;
@@ -86,12 +92,15 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                     display: flex;
                     flex-direction: column-reverse;
                     justify-content: space-between;
+                    /* Should be higher than the the video. */
+                    z-index: 111;
                 };
                 `,
                 `
                 .pwa-take-picture-video-element {
                     position: absolute;
-                    z-index: 10;
+                    /* Should be higher than the z-index of '.layout-atlas .region-sidebar' so it sits on top of the page. */
+                    z-index: 110;
                     top: 0;
                     left: 0;
                     right: 0;
@@ -108,7 +117,8 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                     justify-content: flex-end;
                     flex-direction: column;
                     align-items: center;
-                    z-index: 15;
+                    /* should be higher than the video. */
+                    z-index: 111;
                 };
                 `,
                 `
@@ -116,8 +126,9 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                     display: flex;
                     justify-content: flex-start;
                     flex-direction: column;
-                    align-items: flex-end;
-                    z-index: 15;
+                    align-items: flex-start;
+                    /* should be higher than the video. */
+                    z-index: 111;
                 };
                 `,
                 `
@@ -139,10 +150,14 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `,
                 `
                 .pwa-take-picture-close-control {
-                    border-radius: 50%;
-                    background-color: red;
-                    width: 50px;
-                    height: 50px;
+                    margin: 30px 0 0 30px;
+                };
+                `,
+                `
+                .pwa-take-picture-close-control .glyphicon {
+                    position: unset;
+                    color: white;
+                    font-size: 16px;
                 };
                 `,
                 `
@@ -155,7 +170,8 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                     width: 100%;
                     height: 100%;
                     background-color: white;
-                    z-index: 20;
+                    /* should be higher than the wrapper. */
+                    z-index: 112;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -167,16 +183,21 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 }
                 `
             ];
+        }
+
+        function createStyleElements(styles: string[]): HTMLStyleElement[] {
+            const styleElements: HTMLStyleElement[] = [];
 
             for (const style of styles) {
                 const styleElement = document.createElement("style");
                 styleElement.appendChild(document.createTextNode(style));
                 styleElements.push(styleElement);
-                document.head.appendChild(styleElement);
             }
+
+            return styleElements;
         }
 
-        function createAndInsertElements() {
+        function createFirstScreenElements() {
             const wrapper = document.createElement("div");
             wrapper.classList.add("pwa-take-picture-wrapper");
 
@@ -199,8 +220,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             switchControl.classList.add("pwa-take-picture-switch-control");
 
             const closeControl = document.createElement("button");
-            closeControl.classList.add("pwa-take-picture-close-control");
+            closeControl.classList.add("btn", "btn-image", "btn-icon", "pwa-take-picture-close-control");
 
+            const closeControlGlyph = document.createElement("div");
+            closeControlGlyph.classList.add("glyphicon", "glyphicon-remove");
+
+            closeControl.appendChild(closeControlGlyph);
             actionControlWrapper.appendChild(actionControl);
             actionControlWrapper.appendChild(switchControl);
             closeControlWrapper.appendChild(closeControl);
@@ -208,12 +233,10 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             wrapper.appendChild(closeControlWrapper);
             wrapper.appendChild(video);
 
-            document.body.appendChild(wrapper);
-
             return { video, wrapper, actionControl, switchControl, closeControl };
         }
 
-        function takePictureSetup() {
+        function setupTakePictureHandlers() {
             let confirmationWrapper: HTMLDivElement;
 
             return {
@@ -284,7 +307,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                                                 error: (error: Error) => {
                                                     cleanupConfirmationElements();
 
-                                                    closeHandler();
+                                                    closeControlHandler();
 
                                                     reject(error);
                                                 } //TODO: test this.
@@ -318,17 +341,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         async function switchControlHandler() {
             if (!stream) return;
 
-            stopStream();
+            stopCamera();
 
             if (hasMultipleCameraDevices) {
                 shouldFaceEnvironment = !shouldFaceEnvironment;
             }
 
-            await startStream(shouldFaceEnvironment ? "environment" : "user");
+            await startCamera(shouldFaceEnvironment ? "environment" : "user");
         }
 
-        function closeHandler() {
-            stopStream();
+        function closeControlHandler() {
+            stopCamera();
 
             document.body.removeChild(wrapper);
 
@@ -337,7 +360,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             }
         }
 
-        async function startStream(facingMode: string) {
+        async function startCamera(facingMode: string) {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facingMode } });
             } catch (e) {
@@ -360,7 +383,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             }
 
             if (error) {
-                closeHandler();
+                closeControlHandler();
 
                 return reject(new Error(error));
             }
@@ -369,7 +392,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             video.srcObject = stream!;
         }
 
-        function stopStream() {
+        function stopCamera() {
             videoIsReady = false;
 
             const tracks = stream?.getTracks();
