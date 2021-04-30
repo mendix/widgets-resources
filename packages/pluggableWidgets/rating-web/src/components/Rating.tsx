@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, ReactElement, useState } from "react";
+import { createElement, CSSProperties, ReactElement, useRef, useState } from "react";
 import classNames from "classnames";
 
 export interface RatingProps {
@@ -14,8 +14,11 @@ export interface RatingProps {
     value: number;
 }
 
+export type Direction = "previous" | "next";
+
 export function Rating(props: RatingProps): ReactElement {
     const [hover, setHover] = useState<undefined | number>(undefined);
+    const containerRef = useRef<HTMLDivElement>(null);
     const onClickAction = !props.disabled
         ? (currentIndex: number): void => {
               if (props.value === currentIndex) {
@@ -26,12 +29,36 @@ export function Rating(props: RatingProps): ReactElement {
           }
         : undefined;
 
+    const focusItem = (direction: Direction): void => {
+        if (containerRef.current) {
+            const currentFocusedElement = containerRef.current.querySelector(".rating-item:focus");
+            if (direction === "next" && currentFocusedElement?.nextSibling) {
+                (currentFocusedElement.nextSibling as HTMLDivElement).focus();
+            } else if (direction === "previous" && currentFocusedElement?.previousSibling) {
+                (currentFocusedElement.previousSibling as HTMLDivElement).focus();
+            }
+        }
+    };
+
     return (
         <div
             className={classNames("widget-rating", props.className)}
             data-focusindex={props.tabIndex ?? 0}
             role="radiogroup"
             style={props.style}
+            onKeyDown={event => {
+                switch (event.key) {
+                    case "Left": // Microsoft Edge value
+                    case "ArrowLeft":
+                        focusItem("previous");
+                        break;
+                    case "Right": // Microsoft Edge value
+                    case "ArrowRight":
+                        focusItem("next");
+                        break;
+                }
+            }}
+            ref={containerRef}
         >
             {Array.from({ length: props.maximumValue }, (_, index) => {
                 const currentIndex = index + 1;
@@ -47,6 +74,7 @@ export function Rating(props: RatingProps): ReactElement {
                         }}
                         onKeyDown={event => {
                             if (event.key === " " || event.key === "Enter") {
+                                event.preventDefault();
                                 onClickAction?.(currentIndex);
                             }
                         }}
@@ -59,7 +87,7 @@ export function Rating(props: RatingProps): ReactElement {
                             }
                         }}
                         role="radio"
-                        tabIndex={0}
+                        tabIndex={index === 0 ? index : -1}
                     >
                         {Number(currentIndex) <= props.value ? (
                             props.fullIcon

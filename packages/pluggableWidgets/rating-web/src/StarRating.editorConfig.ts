@@ -14,7 +14,7 @@ export const getPreview = (props: StarRatingPreviewProps): RowLayoutProps => {
         children:
             props.maximumValue !== null
                 ? [
-                      ...Array.from({ length: props.maximumValue - 1 }).map(
+                      ...Array.from({ length: (props.maximumValue > 50 ? 50 : props.maximumValue) - 1 }).map(
                           (): ImageProps => ({
                               type: "Image",
                               document: ratingFilledSVG,
