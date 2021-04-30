@@ -1,15 +1,12 @@
-import { createElement, ReactElement, ReactNode, useMemo } from "react";
+import { createElement, ReactElement, useMemo } from "react";
+
+import AccordionGroup, { AccordionGroupProps } from "./AccordionGroup";
 
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 
-interface AccordionGroup {
-    header: ReactNode;
-    content: ReactNode;
-}
-
 export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
     id: string;
-    groups: AccordionGroup[];
+    groups: AccordionGroupProps[];
 }
 
 export default function Accordion(props: AccordionProps): ReactElement | null {
@@ -17,10 +14,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
 
     const renderedGroups = useMemo(() => {
         return groups.map((group, index) => (
-            <section key={index}>
-                <header>{group.header}</header>
-                <div>{group.content}</div>
-            </section>
+            <AccordionGroup key={index} header={group.header} content={group.content} />
         ));
     }, [groups]);
 
