@@ -10,8 +10,8 @@
 // END EXTRA CODE
 
 /**
- * Does stuff.
- * @returns {Promise.<void>}
+ * Take a picture using the device camera.
+ * @returns {Promise.<boolean>}
  */
 export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean> {
     // BEGIN USER CODE
@@ -52,22 +52,37 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             document.head.appendChild(styleElement);
         }
 
-        const { video, wrapper, actionControl, switchControl, closeControl } = createFirstScreenElements();
+        const {
+            video,
+            wrapper,
+            actionAndSwitchControlWrapper,
+            actionControl,
+            switchControl,
+            switchControlGlyph,
+            closeControl,
+            createAction,
+            createActionAndSwitch
+        } = createFirstScreenElements();
 
         document.body.appendChild(wrapper);
 
         await startCamera("environment");
 
-        const { handler: takePictureHandler, cleanup: takePictureCleanup } = setupTakePictureHandlers();
+        const { handler: takePictureHandler, cleanup: secondScreenCleanup } = prepareSecondScreen();
 
-        if (hasMultipleCameraDevices) {
-            switchControl.style.display = "block";
+        if (!hasMultipleCameraDevices) {
+            // TODO: flip me back.
+            actionAndSwitchControlWrapper.classList.add("pwa-take-picture-action-switch-control-wrapper");
+            createActionAndSwitch();
+        } else {
+            actionAndSwitchControlWrapper.classList.add("pwa-take-picture-action-control-wrapper");
+            createAction();
         }
 
         closeControl.addEventListener("click", () => {
             closeControlHandler();
 
-            takePictureCleanup();
+            secondScreenCleanup();
 
             resolve(false);
         });
@@ -114,11 +129,23 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `
                 .pwa-take-picture-action-control-wrapper {
                     display: flex;
-                    justify-content: flex-end;
-                    flex-direction: column;
+                    justify-content: center;
+                    flex-direction: row;
                     align-items: center;
                     /* should be higher than the video. */
                     z-index: 111;
+                    margin-bottom: 74px;
+                };
+                `,
+                `
+                .pwa-take-picture-action-switch-control-wrapper {
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: row;
+                    align-items: center;
+                    /* should be higher than the video. */
+                    z-index: 111;
+                    margin-bottom: 74px;
                 };
                 `,
                 `
@@ -133,24 +160,67 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `,
                 `
                 .pwa-take-picture-action-control {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     border-radius: 50%;
-                    background-color: red;
-                    width: 50px;
-                    height: 50px;
+                    background-color: white;
+                    width: 70px;
+                    height: 70px;
+                    border-style: none;
+                    padding: 0;
+                };
+                `,
+                `
+                .pwa-take-picture-action-spacing {
+                    flex: 1;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                };
+                `,
+                `
+                .pwa-take-picture-switch-spacing {
+                    display: flex;
+                    flex: 1;
+                    justify-content: flex-end;
+                    align-items: center;
+                };
+                `,
+                `
+                .pwa-take-picture-spacing-div {
+                    flex: 1;
+                };
+                `,
+                `
+                .pwa-take-picture-action-control-inner {
+                    border-radius: 50%;
+                    background-color: white;
+                    border: 1px solid black;
+                    width: 58px;
+                    height: 58px;
                 };
                 `,
                 `
                 .pwa-take-picture-switch-control {
-                    border-radius: 50%;
-                    background-color: red;
-                    width: 50px;
-                    height: 50px;
-                    display: none;
+                    background-color: transparent;
+                    border-style: none;
+                    padding: 0;
+                    margin-right: 22.33px;
+                };
+                `,
+                `
+                .pwa-take-picture-switch-control .glyphicon {
+                    font-size: 32px;
+                    color: white;
                 };
                 `,
                 `
                 .pwa-take-picture-close-control {
                     margin: 30px 0 0 30px;
+                    border-style: none;
+                    padding: 0;
+                    background-color: transparent;
                 };
                 `,
                 `
@@ -203,12 +273,11 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
             const video = document.createElement("video");
             video.classList.add("pwa-take-picture-video-element");
-            video.setAttribute("autoplay", "autoplay");
-            video.setAttribute("muted", "muted");
+            video.setAttribute("autoplay", "");
+            video.setAttribute("muted", "");
             video.setAttribute("playsinline", "");
 
-            const actionControlWrapper = document.createElement("div");
-            actionControlWrapper.classList.add("pwa-take-picture-action-control-wrapper");
+            const actionAndSwitchControlWrapper = document.createElement("div");
 
             const closeControlWrapper = document.createElement("div");
             closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
@@ -216,27 +285,65 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             const actionControl = document.createElement("button");
             actionControl.classList.add("pwa-take-picture-action-control");
 
+            const actionControlWrapper = document.createElement("div");
+            actionControlWrapper.classList.add("pwa-take-picture-action-spacing");
+
+            const actionControlInnerCircle = document.createElement("div");
+            actionControlInnerCircle.classList.add("pwa-take-picture-action-control-inner");
+
             const switchControl = document.createElement("button");
             switchControl.classList.add("pwa-take-picture-switch-control");
 
+            const switchControlWrapper = document.createElement("div");
+            switchControlWrapper.classList.add("pwa-take-picture-switch-spacing");
+
+            const switchControlGlyph = document.createElement("div");
+            switchControlGlyph.classList.add("glyphicon", "glyphicon-refresh");
+
             const closeControl = document.createElement("button");
-            closeControl.classList.add("btn", "btn-image", "btn-icon", "pwa-take-picture-close-control");
+            closeControl.classList.add("pwa-take-picture-close-control");
 
             const closeControlGlyph = document.createElement("div");
             closeControlGlyph.classList.add("glyphicon", "glyphicon-remove");
 
             closeControl.appendChild(closeControlGlyph);
-            actionControlWrapper.appendChild(actionControl);
-            actionControlWrapper.appendChild(switchControl);
+            switchControl.appendChild(switchControlGlyph);
+            actionControl.appendChild(actionControlInnerCircle);
+
+            function createActionAndSwitch() {
+                const spacingDiv = document.createElement("div");
+                spacingDiv.classList.add("pwa-take-picture-spacing-div");
+
+                actionControlWrapper.appendChild(actionControl);
+                switchControlWrapper.appendChild(switchControl);
+                actionAndSwitchControlWrapper.appendChild(spacingDiv);
+                actionAndSwitchControlWrapper.appendChild(actionControlWrapper);
+                actionAndSwitchControlWrapper.appendChild(switchControlWrapper);
+            }
+
+            function createAction() {
+                actionAndSwitchControlWrapper.appendChild(actionControl);
+            }
+
             closeControlWrapper.appendChild(closeControl);
-            wrapper.appendChild(actionControlWrapper);
+            wrapper.appendChild(actionAndSwitchControlWrapper);
             wrapper.appendChild(closeControlWrapper);
             wrapper.appendChild(video);
 
-            return { video, wrapper, actionControl, switchControl, closeControl };
+            return {
+                video,
+                wrapper,
+                actionAndSwitchControlWrapper,
+                actionControl,
+                switchControl,
+                switchControlGlyph,
+                closeControl,
+                createActionAndSwitch,
+                createAction
+            };
         }
 
-        function setupTakePictureHandlers() {
+        function prepareSecondScreen() {
             let confirmationWrapper: HTMLDivElement;
 
             return {
@@ -320,19 +427,13 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                                     reject(new Error("Couldn't create image."));
                                 });
                         }
-
-                        // TODO: cleanup
-                        // on error ->
-                        // on success -> show confirmation dialog
-                        // on save -> save, commit, close? or back to cam.
-                        // on cancel -> go back to camera
                     }
                 },
                 cleanup: () => {
                     try {
                         document.body.removeChild(confirmationWrapper);
                     } catch (e) {
-                        // no-op: node may have already been removed.
+                        // silently handle case where node already removed.
                     }
                 }
             };
