@@ -58,7 +58,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             actionAndSwitchControlWrapper,
             actionControl,
             switchControl,
-            switchControlGlyph,
             closeControl,
             createAction,
             createActionAndSwitch
@@ -284,6 +283,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 .pwa-take-picture-image {
                     width: 100%;
                 }
+                `,
+                `
+                /* Overwrite 'atlas_core/web/core/_legacy/_mxui.scss' for this particular widget because otherwise
+                 iOS Safari will in certain cases put the top and/or bottom bar on top of the overlay of this widget. */
+                 
+                .mx-dataview-content, 
+                .mx-scrollcontainer-wrapper:not(.mx-scrollcontainer-nested), 
+                .mx-tabcontainer-content,
+                .mx-grid-content {
+                    -webkit-overflow-scrolling: auto;
+                }
                 `
             ];
         }
@@ -369,7 +379,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 actionAndSwitchControlWrapper,
                 actionControl,
                 switchControl,
-                switchControlGlyph,
                 closeControl,
                 createActionAndSwitch,
                 createAction
