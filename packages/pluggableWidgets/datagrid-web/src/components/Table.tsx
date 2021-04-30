@@ -64,8 +64,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             )
             .filter(Boolean) as string[]) ?? []
     );
-    // TODO: const [paginationIndex, setPaginationIndex] = useState<number>(0);
-    const [, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
@@ -84,11 +82,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         columnsWidth,
         setColumnsWidth
     );
-    // TODO: Auto reset pagination if paging is enabled and somehow the settings contains pagination index
-    // TODO: Auto reset for sort and
 
     useEffect(() => {
-        // TODO: Should apply sort in the database
         const [sortProperties] = sortBy;
         if (sortProperties && "id" in sortProperties && "desc" in sortProperties) {
             props.setSortParameters?.({
@@ -219,32 +214,12 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         <Pagination
             canNextPage={props.hasMoreItems}
             canPreviousPage={props.page !== 0}
-            gotoPage={(page: number) =>
-                props.setPage &&
-                props.setPage(() => {
-                    setPaginationIndex(page);
-                    return page;
-                })
-            }
-            nextPage={() =>
-                props.setPage &&
-                props.setPage(prev => {
-                    const newPage = prev + 1;
-                    setPaginationIndex(newPage);
-                    return newPage;
-                })
-            }
+            gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
+            nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
             numberOfItems={props.numberOfItems}
             page={props.page}
             pageSize={props.pageSize}
-            previousPage={() =>
-                props.setPage &&
-                props.setPage(prev => {
-                    const newPage = prev - 1;
-                    setPaginationIndex(newPage);
-                    return newPage;
-                })
-            }
+            previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
         />
     ) : null;
 
