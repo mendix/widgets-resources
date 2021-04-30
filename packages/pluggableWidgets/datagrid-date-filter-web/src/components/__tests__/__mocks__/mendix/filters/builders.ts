@@ -5,4 +5,4 @@ export const greaterThanOrEqual = jest.fn();
 export const lessThan = jest.fn();
 export const lessThanOrEqual = jest.fn();
 export const literal = jest.fn();
-export const notEqual = jest.fn();
+export const or = jest.fn();

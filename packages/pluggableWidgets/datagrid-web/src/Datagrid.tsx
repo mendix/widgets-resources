@@ -42,10 +42,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const customFiltersState = props.columns.map(() => useState<FilterFunction>());
 
     const filters = customFiltersState
-        .map(
-            ([customFilter], columnIndex) =>
-                customFilter && customFilter.getFilterCondition?.(props.columns[columnIndex].attribute!)
-        )
+        .map(([customFilter]) => customFilter && customFilter.getFilterCondition?.())
         .filter(Boolean) as FilterCondition[];
 
     if (filters.length > 0) {
@@ -102,11 +99,15 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             )}
             filterRenderer={useCallback(
                 (renderWrapper, columnIndex) => {
-                    const column = props.columns[columnIndex];
-                    const [, setValue] = customFiltersState[columnIndex];
-                    return renderWrapper(
-                        <FilterContext.Provider value={setValue}>{column.filter}</FilterContext.Provider>
-                    );
+                    const { attribute, filter } = props.columns[columnIndex];
+                    const [, filterDispatcher] = customFiltersState[columnIndex];
+                    return attribute
+                        ? renderWrapper(
+                              <FilterContext.Provider value={{ filterDispatcher, attribute }}>
+                                  {filter}
+                              </FilterContext.Provider>
+                          )
+                        : renderWrapper(filter);
                 },
                 [props.columns, props.datasource]
             )}

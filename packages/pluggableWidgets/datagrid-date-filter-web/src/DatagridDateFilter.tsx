@@ -34,10 +34,11 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
-            {filterDispatcher =>
+            {({ filterDispatcher, attribute }) =>
                 filterDispatcher ? (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        attribute={attribute}
                         defaultFilter={props.defaultFilter}
                         defaultValue={props.defaultValue?.value}
                         dateFormat={patterns.date}

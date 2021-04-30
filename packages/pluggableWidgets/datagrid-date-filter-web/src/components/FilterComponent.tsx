@@ -1,7 +1,6 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
 import { ListAttributeValue } from "mendix";
-import { FilterCondition } from "mendix/filters";
 import {
     and,
     attribute,
@@ -9,20 +8,24 @@ import {
     greaterThanOrEqual,
     lessThan,
     lessThanOrEqual,
-    literal
+    literal,
+    or
 } from "mendix/filters/builders";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
-import { changeTimeOfDate } from "../utils/utils";
+import { chanteTimeToMidnight } from "../utils/utils";
 import DatePickerComponent from "react-datepicker";
 import { DatePicker } from "./DatePicker";
+import { FilterFunction } from "../utils/provider";
+import { addDays, subDays } from "date-fns";
 
 interface FilterComponentProps {
     adjustable: boolean;
+    attribute?: ListAttributeValue;
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
     dateFormat?: string;
-    filterDispatcher: Dispatch<{ getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined }>;
+    filterDispatcher: Dispatch<FilterFunction>;
     locale?: string;
     name?: string;
     placeholder?: string;
@@ -44,36 +47,42 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     useEffect(() => {
         props.filterDispatcher({
-            getFilterCondition: attr => {
-                if (!attr.filterable || !value) {
+            getFilterCondition: () => {
+                if (!props.attribute || !props.attribute.filterable || !value) {
                     return undefined;
                 }
 
-                const filterAttribute = attribute(attr.id);
+                const filterAttribute = attribute(props.attribute.id);
 
                 switch (type) {
                     case "greater":
-                        return greaterThan(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)));
+                        // > Date at midnight
+                        return greaterThan(filterAttribute, literal(chanteTimeToMidnight(value)));
                     case "greaterEqual":
-                        return greaterThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0)));
+                        // > day -1 at midnight
+                        return greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
                     case "equal":
+                        // > day -1 at midnight and < day +1 midnight
                         return and(
-                            greaterThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0))),
-                            lessThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)))
+                            greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1))),
+                            lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
                         );
                     case "notEqual":
-                        return and(
-                            lessThan(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0))),
-                            greaterThan(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)))
+                        // < day at midnight or >= day +1 at midnight
+                        return or(
+                            lessThan(filterAttribute, literal(chanteTimeToMidnight(value))),
+                            greaterThanOrEqual(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
                         );
                     case "smaller":
-                        return lessThan(filterAttribute, literal(changeTimeOfDate(value, 0, 0, 0)));
+                        // <= day -1 at midnight
+                        return lessThanOrEqual(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
                     case "smallerEqual":
-                        return lessThanOrEqual(filterAttribute, literal(changeTimeOfDate(value, 23, 59, 59)));
+                        // < day +1 at midnight
+                        return lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)));
                 }
             }
         });
-    }, [props.filterDispatcher, value, type]);
+    }, [props.attribute, props.filterDispatcher, value, type]);
 
     const focusInput = useCallback(() => {
         if (pickerRef.current) {

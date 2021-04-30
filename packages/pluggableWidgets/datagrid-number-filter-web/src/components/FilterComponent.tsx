@@ -1,7 +1,6 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
 import { ListAttributeValue } from "mendix";
-import { FilterCondition } from "mendix/filters";
 import {
     attribute,
     equals,
@@ -16,12 +15,14 @@ import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
 import { Big } from "big.js";
 import classNames from "classnames";
+import { FilterFunction } from "../utils/provider";
 
 interface FilterComponentProps {
     adjustable: boolean;
+    attribute?: ListAttributeValue;
     defaultFilter: DefaultFilterEnum;
     delay: number;
-    filterDispatcher: Dispatch<{ getFilterCondition(attribute: ListAttributeValue): FilterCondition | undefined }>;
+    filterDispatcher: Dispatch<FilterFunction>;
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
@@ -46,11 +47,11 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                getFilterCondition: attr => {
-                    if (!attr.filterable || !value) {
+                getFilterCondition: () => {
+                    if (!props.attribute || !props.attribute.filterable || !value) {
                         return undefined;
                     }
-                    const filterAttribute = attribute(attr.id);
+                    const filterAttribute = attribute(props.attribute.id);
                     const filterValue = new Big(value);
 
                     switch (type) {
@@ -70,7 +71,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 }
             });
         }
-    }, [props.filterDispatcher, value, type]);
+    }, [props.attribute, props.filterDispatcher, value, type]);
 
     const onChange = useCallback(
         debounce((value?: Big) => setValue(value), props.delay),

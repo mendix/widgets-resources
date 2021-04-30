@@ -25,10 +25,11 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
-            {filterDispatcher =>
+            {({ filterDispatcher, attribute }) =>
                 filterDispatcher ? (
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
+                        attribute={attribute}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         filterDispatcher={filterDispatcher}
                         multiSelect={props.multiSelect}

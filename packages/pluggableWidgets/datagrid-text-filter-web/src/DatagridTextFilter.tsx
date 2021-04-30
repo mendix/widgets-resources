@@ -14,10 +14,11 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     );
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
-            {filterDispatcher =>
+            {({ filterDispatcher, attribute }) =>
                 filterDispatcher ? (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        attribute={attribute}
                         defaultFilter={props.defaultFilter}
                         delay={props.delay}
                         filterDispatcher={filterDispatcher}

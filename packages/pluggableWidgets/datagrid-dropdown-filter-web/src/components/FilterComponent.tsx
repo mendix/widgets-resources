@@ -1,7 +1,8 @@
 import { createElement, Dispatch, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { ListAttributeValue, ObjectItem } from "mendix";
+import { ListAttributeValue } from "mendix";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
+import { FilterFunction } from "../utils/provider";
 
 interface Option {
     caption: string;
@@ -10,8 +11,9 @@ interface Option {
 
 interface FilterComponentProps {
     ariaLabel?: string;
+    attribute?: ListAttributeValue;
     emptyOptionCaption?: string;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
+    filterDispatcher: Dispatch<FilterFunction>;
     multiSelect?: boolean;
     name?: string;
     options: Option[];
@@ -85,24 +87,28 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         }
     }, [props.defaultValue, props.options, props.emptyOptionCaption]);
 
-    // Filter
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                filter: (item, attr): boolean => {
-                    if (selectedFilters.length > 0) {
-                        return selectedFilters.some(
-                            selectedFilter =>
-                                attr.get(item).value?.toString().toLocaleLowerCase() ===
-                                    selectedFilter.value?.toString().toLocaleLowerCase() ||
-                                selectedFilter.value?.toString() === ""
-                        );
+                getFilterCondition: () => {
+                    if (!props.attribute || !props.attribute.filterable || selectedFilters.length === 0) {
+                        return undefined;
                     }
-                    return true;
+
+                    // TODO: Implement logic for load Enum captions and filter using conditions
+                    // if (selectedFilters.length > 0) {
+                    //     return selectedFilters.some(
+                    //         selectedFilter =>
+                    //             attr.get(item).value?.toString().toLocaleLowerCase() ===
+                    //                 selectedFilter.value?.toString().toLocaleLowerCase() ||
+                    //             selectedFilter.value?.toString() === ""
+                    //     );
+                    // }
+                    return undefined;
                 }
             });
         }
-    }, [props.filterDispatcher, selectedFilters]);
+    }, [props.attribute, props.filterDispatcher, selectedFilters]);
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
 

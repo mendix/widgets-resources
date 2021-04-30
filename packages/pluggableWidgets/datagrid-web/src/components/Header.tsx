@@ -55,9 +55,9 @@ export function Header<D extends object>(props: HeaderProps<D>): ReactElement {
     const onSortBy = (): void => {
         /**
          * Always analyse previous values to predict the next
-         * 1 - !props.column.isSorted turns to asc
-         * 2 - isSortedDesc === false && props.column.isSorted turns to desc
-         * 3 - isSortedDesc === true && props.column.isSorted turns to unsorted
+         * 1 - !isSorted turns to asc
+         * 2 - isSortedDesc === false && isSorted turns to desc
+         * 3 - isSortedDesc === true && isSorted turns to unsorted
          * If multisort is allowed in the future this should be changed to append instead of just return a new array
          */
         if (!isSorted) {
