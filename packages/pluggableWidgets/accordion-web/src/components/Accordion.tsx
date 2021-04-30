@@ -14,7 +14,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
 
     const renderedGroups = useMemo(() => {
         return groups.map((group, index) => (
-            <AccordionGroup key={index} header={group.header} content={group.content} />
+            <AccordionGroup key={index} header={group.header} content={group.content} collapsible={group.collapsible} />
         ));
     }, [groups]);
 

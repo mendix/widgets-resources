@@ -5,7 +5,7 @@ import AccordionComponent from "./components/Accordion";
 import { AccordionContainerProps } from "../typings/AccordionProps";
 
 export function Accordion(props: AccordionContainerProps): ReactElement {
-    const { class: className, name, style, tabIndex, groups } = props;
+    const { class: className, name, style, tabIndex, groups, collapsible } = props;
 
     const accordionGroups = useMemo(() => {
         return groups.map(group => {
@@ -17,9 +17,9 @@ export function Accordion(props: AccordionContainerProps): ReactElement {
                 header = group.headerContent;
             }
 
-            return { header, content: group.content };
+            return { header, content: group.content, collapsible };
         });
-    }, [groups]);
+    }, [groups, collapsible]);
 
     return (
         <AccordionComponent id={name} class={className} style={style} tabIndex={tabIndex} groups={accordionGroups} />

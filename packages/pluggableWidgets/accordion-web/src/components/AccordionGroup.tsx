@@ -3,6 +3,7 @@ import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, use
 export interface AccordionGroupProps {
     header: ReactNode;
     content: ReactNode;
+    collapsible: boolean;
 }
 
 // collapsible false -> always show all content, not clickable
@@ -10,10 +11,11 @@ export interface AccordionGroupProps {
 // collapsible true + multiple --> start all closed, allow multiple open
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { header, content } = props;
+    const { header, content, collapsible } = props;
 
-    const [divInlineStyle, setDivInlineStyle] = useState<CSSProperties>({ display: "none" });
-    const [mountContent, setMountContent] = useState(false);
+    // The collapsible prop is never going to change afterwards, so the state doesn't need to be updated at a later stage based on this prop.
+    const [divInlineStyle, setDivInlineStyle] = useState<CSSProperties>({ display: collapsible ? "none" : undefined });
+    const [mountContent, setMountContent] = useState(!collapsible);
 
     const toggleContentVisibility = useCallback(() => {
         setMountContent(true);
@@ -22,7 +24,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     return (
         <section>
-            <header onClick={toggleContentVisibility}>{header}</header>
+            <header onClick={collapsible ? toggleContentVisibility : undefined}>{header}</header>
             <div style={divInlineStyle}>{mountContent ? content : undefined}</div>
         </section>
     );
