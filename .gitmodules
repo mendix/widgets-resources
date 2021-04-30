@@ -2,14 +2,6 @@
 	path = packages/pluggableWidgets/fieldset-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = fieldset-web
-[submodule "packages/pluggableWidgets/maps-web/tests/testProject"]
-	path = packages/pluggableWidgets/maps-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = maps-web
-[submodule "packages/pluggableWidgets/badge-web/tests/testProject"]
-	path = packages/pluggableWidgets/badge-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = badge-web
 [submodule "packages/pluggableWidgets/video-player-web/tests/testProject"]
 	path = packages/pluggableWidgets/video-player-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
@@ -82,3 +74,11 @@
 	branch = popupmenu-web
 	url = https://github.com/mendix/testProjects.git
 	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+[submodule "packages/pluggableWidgets/badge-web/tests/testProject"]
+	path = packages/pluggableWidgets/badge-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = badge-web-mx8
+[submodule "packages/pluggableWidgets/maps-web/tests/testProject"]
+	path = packages/pluggableWidgets/maps-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = maps-web-mx8

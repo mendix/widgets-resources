@@ -42,9 +42,7 @@ async function main() {
     cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
 
     // Create reusable mxbuild image
-    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`)
-        .toString()
-        .trim();
+    const existingImages = execSync(`docker image ls -q mxbuild:${latestMendixVersion}`).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
@@ -136,7 +134,10 @@ async function getLatestMendixVersion() {
         const dockerTagsResponse = await fetch(
             "https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags"
         );
-        const runtimeVersions = (await dockerTagsResponse.json()).map(r => r.name.split("-")[0]);
+        const runtimeVersions = (await dockerTagsResponse.json())
+            .map(r => r.name.split("-")[0])
+            .filter(runtimeVersion => runtimeVersion.startsWith("8"));
+
         runtimeVersions.sort((a, b) =>
             semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
         );
