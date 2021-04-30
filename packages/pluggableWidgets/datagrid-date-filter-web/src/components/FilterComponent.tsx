@@ -62,9 +62,9 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                         // > day -1 at midnight
                         return greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
                     case "equal":
-                        // > day -1 at midnight and < day +1 midnight
+                        // >= day at midnight and < day +1 midnight
                         return and(
-                            greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1))),
+                            greaterThanOrEqual(filterAttribute, literal(chanteTimeToMidnight(value))),
                             lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
                         );
                     case "notEqual":
