@@ -14,7 +14,10 @@ export interface RatingProps {
     value: number;
 }
 
-export type Direction = "previous" | "next";
+const enum Direction {
+    PREVIOUS = "previous",
+    NEXT = "next"
+}
 
 export function Rating(props: RatingProps): ReactElement {
     const [hover, setHover] = useState<undefined | number>(undefined);
@@ -32,9 +35,9 @@ export function Rating(props: RatingProps): ReactElement {
     const focusItem = (direction: Direction): void => {
         if (containerRef.current) {
             const currentFocusedElement = containerRef.current.querySelector(".rating-item:focus");
-            if (direction === "next" && currentFocusedElement?.nextSibling) {
+            if (direction === Direction.NEXT && currentFocusedElement?.nextSibling) {
                 (currentFocusedElement.nextSibling as HTMLDivElement).focus();
-            } else if (direction === "previous" && currentFocusedElement?.previousSibling) {
+            } else if (direction === Direction.PREVIOUS && currentFocusedElement?.previousSibling) {
                 (currentFocusedElement.previousSibling as HTMLDivElement).focus();
             }
         }
@@ -50,11 +53,11 @@ export function Rating(props: RatingProps): ReactElement {
                 switch (event.key) {
                     case "Left": // Microsoft Edge value
                     case "ArrowLeft":
-                        focusItem("previous");
+                        focusItem(Direction.PREVIOUS);
                         break;
                     case "Right": // Microsoft Edge value
                     case "ArrowRight":
-                        focusItem("next");
+                        focusItem(Direction.NEXT);
                         break;
                 }
             }}
