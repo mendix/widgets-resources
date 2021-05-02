@@ -1,14 +1,18 @@
 import { createElement, ReactElement, ReactNode, useCallback, useRef, useState } from "react";
 
-export interface AccordionGroupProps {
+export interface AccGroup {
     header: ReactNode;
     content: ReactNode;
-    collapsible: boolean;
     collapsed?: boolean;
 }
 
+export interface AccordionGroupProps extends AccGroup {
+    collapsible: boolean;
+    onExpand?: () => void;
+}
+
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { header, content, collapsible, collapsed } = props;
+    const { header, content, collapsible, collapsed, onExpand } = props;
 
     const previousCollapsedPropValue = useRef(collapsed);
 
@@ -26,8 +30,16 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     const toggleContentVisibility = useCallback(() => {
         setMountDivContent(true);
-        setDivCollapsed(prevState => !prevState);
-    }, [setDivCollapsed, setMountDivContent]);
+        setDivCollapsed(prevState => {
+            const divCollapsed = !prevState;
+
+            if (!divCollapsed) {
+                onExpand?.();
+            }
+
+            return !prevState;
+        });
+    }, [onExpand, setDivCollapsed, setMountDivContent]);
 
     return (
         <section>

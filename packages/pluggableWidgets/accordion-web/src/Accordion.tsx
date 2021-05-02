@@ -17,11 +17,18 @@ export function Accordion(props: AccordionContainerProps): ReactElement {
                 header = group.headerContent;
             }
 
-            return { header, content: group.content, collapsible };
+            return { header, content: group.content };
         });
-    }, [groups, collapsible]);
+    }, [groups]);
 
     return (
-        <AccordionComponent id={name} class={className} style={style} tabIndex={tabIndex} groups={accordionGroups} />
+        <AccordionComponent
+            id={name}
+            class={className}
+            style={style}
+            tabIndex={tabIndex}
+            groups={accordionGroups}
+            collapsible={collapsible}
+        />
     );
 }
