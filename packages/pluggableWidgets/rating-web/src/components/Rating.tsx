@@ -53,10 +53,12 @@ export function Rating(props: RatingProps): ReactElement {
                 switch (event.key) {
                     case "Left": // Microsoft Edge value
                     case "ArrowLeft":
+                        event.preventDefault();
                         focusItem(Direction.PREVIOUS);
                         break;
                     case "Right": // Microsoft Edge value
                     case "ArrowRight":
+                        event.preventDefault();
                         focusItem(Direction.NEXT);
                         break;
                 }
@@ -90,7 +92,7 @@ export function Rating(props: RatingProps): ReactElement {
                             }
                         }}
                         role="radio"
-                        tabIndex={index === 0 ? index : -1}
+                        tabIndex={index === (props.value > 0 ? props.value - 1 : 0) ? 0 : -1}
                     >
                         {Number(currentIndex) <= props.value ? (
                             props.fullIcon
