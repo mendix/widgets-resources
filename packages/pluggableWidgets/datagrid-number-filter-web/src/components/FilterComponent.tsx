@@ -1,35 +1,19 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ListAttributeValue } from "mendix";
-import {
-    attribute,
-    equals,
-    greaterThan,
-    greaterThanOrEqual,
-    lessThan,
-    lessThanOrEqual,
-    literal,
-    notEqual
-} from "mendix/filters/builders";
+
+import { FilterCondition } from "mendix/filters";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
 import { Big } from "big.js";
 import classNames from "classnames";
 import { FilterFunction } from "../utils/provider";
-import { Alert } from "@mendix/piw-utils-internal";
-
-function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && !type.match(/AutoNumber|Decimal|Integer|Long/)
-        ? "The attribute type being used for Data grid number filter is not 'Auto number, Decimal, Integer or Long'"
-        : null;
-}
 
 interface FilterComponentProps {
     adjustable: boolean;
-    attribute?: ListAttributeValue;
     defaultFilter: DefaultFilterEnum;
     delay: number;
     filterDispatcher: Dispatch<FilterFunction>;
+    getFilterConditions?: (value: Big | undefined, type: DefaultFilterEnum) => FilterCondition | undefined;
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
@@ -54,31 +38,10 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                getFilterCondition: () => {
-                    if (!props.attribute || !props.attribute.filterable || !value) {
-                        return undefined;
-                    }
-                    const filterAttribute = attribute(props.attribute.id);
-                    const filterValue = new Big(value);
-
-                    switch (type) {
-                        case "greater":
-                            return greaterThan(filterAttribute, literal(filterValue));
-                        case "greaterEqual":
-                            return greaterThanOrEqual(filterAttribute, literal(filterValue));
-                        case "equal":
-                            return equals(filterAttribute, literal(filterValue));
-                        case "notEqual":
-                            return notEqual(filterAttribute, literal(filterValue));
-                        case "smaller":
-                            return lessThan(filterAttribute, literal(filterValue));
-                        case "smallerEqual":
-                            return lessThanOrEqual(filterAttribute, literal(filterValue));
-                    }
-                }
+                getFilterCondition: () => props.getFilterConditions?.(value, type)
             });
         }
-    }, [props.attribute, props.filterDispatcher, value, type]);
+    }, [props.filterDispatcher, value, type]);
 
     const onChange = useCallback(
         debounce((value?: Big) => setValue(value), props.delay),
@@ -90,12 +53,6 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             inputRef.current.focus();
         }
     }, [inputRef]);
-
-    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
-
-    if (errorMessage) {
-        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
-    }
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
