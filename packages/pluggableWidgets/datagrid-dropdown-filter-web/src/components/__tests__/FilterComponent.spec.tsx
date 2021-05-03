@@ -3,8 +3,6 @@ import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
 import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 
-jest.mock("mendix/filters/builders", () => jest.requireActual("./__mocks__/mendix/filters/builders"));
-
 const defaultOptions = [
     { caption: "1", value: "_1" },
     { caption: "2", value: "_2" },

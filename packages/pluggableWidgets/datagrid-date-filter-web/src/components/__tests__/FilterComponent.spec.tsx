@@ -2,8 +2,6 @@ import { shallow } from "enzyme";
 import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
 
-jest.mock("mendix/filters/builders", () => jest.requireActual("./__mocks__/mendix/filters/builders"));
-
 describe("Filter component", () => {
     it("renders correctly", () => {
         const component = shallow(<FilterComponent adjustable defaultFilter="equal" filterDispatcher={jest.fn()} />);
