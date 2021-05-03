@@ -18,6 +18,13 @@ import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 import { debounce } from "../utils/utils";
 import classNames from "classnames";
 import { FilterFunction } from "../../../datagrid-number-filter-web/src/utils/provider";
+import { Alert } from "@mendix/piw-utils-internal";
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && !type.match(/HashString|String/)
+        ? "The attribute type being used for Data grid text filter is not 'Hashed string or String'"
+        : null;
+}
 
 interface FilterComponentProps {
     adjustable: boolean;
@@ -90,6 +97,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             inputRef.current.focus();
         }
     }, [inputRef]);
+
+    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
+
+    if (errorMessage) {
+        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
+    }
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>

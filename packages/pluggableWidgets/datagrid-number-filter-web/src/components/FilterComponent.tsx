@@ -16,6 +16,13 @@ import { debounce } from "../utils/utils";
 import { Big } from "big.js";
 import classNames from "classnames";
 import { FilterFunction } from "../utils/provider";
+import { Alert } from "@mendix/piw-utils-internal";
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && !type.match(/AutoNumber|Decimal|Integer|Long/)
+        ? "The attribute type being used for Data grid number filter is not 'Auto number, Decimal, Integer or Long'"
+        : null;
+}
 
 interface FilterComponentProps {
     adjustable: boolean;
@@ -83,6 +90,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             inputRef.current.focus();
         }
     }, [inputRef]);
+
+    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
+
+    if (errorMessage) {
+        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
+    }
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>

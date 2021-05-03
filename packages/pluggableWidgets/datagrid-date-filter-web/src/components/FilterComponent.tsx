@@ -18,6 +18,13 @@ import DatePickerComponent from "react-datepicker";
 import { DatePicker } from "./DatePicker";
 import { FilterFunction } from "../utils/provider";
 import { addDays, subDays } from "date-fns";
+import { Alert } from "@mendix/piw-utils-internal";
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && type !== "DateTime"
+        ? "The attribute type being used for Data grid date filter is not 'Date and time'"
+        : null;
+}
 
 interface FilterComponentProps {
     adjustable: boolean;
@@ -89,6 +96,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             pickerRef.current.setFocus();
         }
     }, [pickerRef.current]);
+
+    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
+
+    if (errorMessage) {
+        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
+    }
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>

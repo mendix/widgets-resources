@@ -10,7 +10,7 @@ import {
     useState
 } from "react";
 import { ListAttributeValue } from "mendix";
-import { useOnClickOutside } from "@mendix/piw-utils-internal";
+import { Alert, useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 import { FilterFunction } from "../utils/provider";
 import { attribute, equals, literal, or } from "mendix/filters/builders";
@@ -31,6 +31,12 @@ interface FilterComponentProps {
     options: Option[];
     tabIndex?: number;
     defaultValue?: string;
+}
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && type !== "Enum"
+        ? "The attribute type being used for Data grid drop-down filter is not 'Enumeration'"
+        : null;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -139,6 +145,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.attribute, props.filterDispatcher, selectedFilters]);
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
+
+    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
+
+    if (errorMessage) {
+        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
+    }
 
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
