@@ -1,9 +1,30 @@
 import { createElement, ReactElement } from "react";
-import { DatagridTextFilterContainerProps } from "../typings/DatagridTextFilterProps";
+import { DatagridTextFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@mendix/piw-utils-internal";
+
+import {
+    attribute as attributeFunction,
+    contains,
+    equals,
+    endsWith,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    literal,
+    startsWith,
+    notEqual
+} from "mendix/filters/builders";
+import { FilterCondition } from "mendix/filters";
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && !type.match(/HashString|String/)
+        ? "The attribute type being used for Data grid text filter is not 'Hashed string or String'"
+        : null;
+}
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();
@@ -12,16 +33,55 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
             The data grid text filter widget must be placed inside the header of the Data grid 2.0 widget.
         </Alert>
     );
+
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
-            {({ filterDispatcher, attribute }) =>
-                filterDispatcher ? (
+            {filterContextValue => {
+                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                    return alertMessage;
+                }
+                const { filterDispatcher, attribute } = filterContextValue;
+
+                const errorMessage = getAttributeTypeErrorMessage(attribute.type);
+                if (errorMessage) {
+                    return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
+                }
+
+                const getFilterConditions = (value: string, type: DefaultFilterEnum): FilterCondition | undefined => {
+                    if (!attribute || !attribute.filterable || !value) {
+                        return undefined;
+                    }
+
+                    const filterAttribute = attributeFunction(attribute.id);
+
+                    switch (type) {
+                        case "contains":
+                            return contains(filterAttribute, literal(value));
+                        case "startsWith":
+                            return startsWith(filterAttribute, literal(value));
+                        case "endsWith":
+                            return endsWith(filterAttribute, literal(value));
+                        case "greater":
+                            return greaterThan(filterAttribute, literal(value));
+                        case "greaterEqual":
+                            return greaterThanOrEqual(filterAttribute, literal(value));
+                        case "equal":
+                            return equals(filterAttribute, literal(value));
+                        case "notEqual":
+                            return notEqual(filterAttribute, literal(value));
+                        case "smaller":
+                            return lessThan(filterAttribute, literal(value));
+                        case "smallerEqual":
+                            return lessThanOrEqual(filterAttribute, literal(value));
+                    }
+                };
+                return (
                     <FilterComponent
                         adjustable={props.adjustable}
-                        attribute={attribute}
                         defaultFilter={props.defaultFilter}
                         delay={props.delay}
                         filterDispatcher={filterDispatcher}
+                        getFilterConditions={getFilterConditions}
                         name={props.name}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
@@ -29,10 +89,8 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                         tabIndex={props.tabIndex}
                         value={props.defaultValue?.value}
                     />
-                ) : (
-                    alertMessage
-                )
-            }
+                );
+            }}
         </FilterContext.Consumer>
     ) : (
         alertMessage
