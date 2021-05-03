@@ -10,12 +10,12 @@ import {
     useState
 } from "react";
 import { ListAttributeValue } from "mendix";
-import { Alert, useOnClickOutside } from "@mendix/piw-utils-internal";
+import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 import { FilterFunction } from "../utils/provider";
-import { attribute, equals, literal, or } from "mendix/filters/builders";
+import { FilterCondition } from "mendix/filters";
 
-interface Option {
+export interface Option {
     caption: string;
     value: string;
 }
@@ -26,17 +26,12 @@ interface FilterComponentProps {
     auto?: boolean;
     emptyOptionCaption?: string;
     filterDispatcher: Dispatch<FilterFunction>;
+    getFilterConditions?: (values: Option[]) => FilterCondition | undefined;
     multiSelect?: boolean;
     name?: string;
     options: Option[];
     tabIndex?: number;
     defaultValue?: string;
-}
-
-function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "Enum"
-        ? "The attribute type being used for Data grid drop-down filter is not 'Enumeration'"
-        : null;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -122,35 +117,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         if (props.filterDispatcher) {
             props.filterDispatcher({
-                getFilterCondition: () => {
-                    if (!props.attribute || !props.attribute.filterable || selectedFilters.length === 0) {
-                        return undefined;
-                    }
-
-                    const filterAttribute = attribute(props.attribute.id);
-
-                    if (selectedFilters.length > 1) {
-                        return or(...selectedFilters.map(filter => equals(filterAttribute, literal(filter.value))));
-                    }
-
-                    const [filterValue] = selectedFilters;
-                    if (filterValue.value) {
-                        return equals(filterAttribute, literal(filterValue.value));
-                    }
-
-                    return undefined;
-                }
+                getFilterCondition: () => props.getFilterConditions?.(selectedFilters)
             });
         }
     }, [props.attribute, props.filterDispatcher, selectedFilters]);
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
-
-    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
-
-    if (errorMessage) {
-        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
-    }
 
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
