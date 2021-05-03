@@ -1,38 +1,20 @@
 import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ListAttributeValue } from "mendix";
-import {
-    and,
-    attribute,
-    greaterThan,
-    greaterThanOrEqual,
-    lessThan,
-    lessThanOrEqual,
-    literal,
-    or
-} from "mendix/filters/builders";
+import { FilterCondition } from "mendix/filters";
+
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
-import { chanteTimeToMidnight } from "../utils/utils";
 import DatePickerComponent from "react-datepicker";
 import { DatePicker } from "./DatePicker";
 import { FilterFunction } from "../utils/provider";
-import { addDays, subDays } from "date-fns";
-import { Alert } from "@mendix/piw-utils-internal";
-
-function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "DateTime"
-        ? "The attribute type being used for Data grid date filter is not 'Date and time'"
-        : null;
-}
 
 interface FilterComponentProps {
     adjustable: boolean;
-    attribute?: ListAttributeValue;
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
     dateFormat?: string;
     filterDispatcher: Dispatch<FilterFunction>;
+    getFilterConditions?: (value: Date | null, type: DefaultFilterEnum) => FilterCondition | undefined;
     locale?: string;
     name?: string;
     placeholder?: string;
@@ -54,54 +36,15 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     useEffect(() => {
         props.filterDispatcher({
-            getFilterCondition: () => {
-                if (!props.attribute || !props.attribute.filterable || !value) {
-                    return undefined;
-                }
-
-                const filterAttribute = attribute(props.attribute.id);
-
-                switch (type) {
-                    case "greater":
-                        // > Date at midnight
-                        return greaterThan(filterAttribute, literal(chanteTimeToMidnight(value)));
-                    case "greaterEqual":
-                        // > day -1 at midnight
-                        return greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
-                    case "equal":
-                        // >= day at midnight and < day +1 midnight
-                        return and(
-                            greaterThanOrEqual(filterAttribute, literal(chanteTimeToMidnight(value))),
-                            lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
-                        );
-                    case "notEqual":
-                        // < day at midnight or >= day +1 at midnight
-                        return or(
-                            lessThan(filterAttribute, literal(chanteTimeToMidnight(value))),
-                            greaterThanOrEqual(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
-                        );
-                    case "smaller":
-                        // <= day -1 at midnight
-                        return lessThanOrEqual(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
-                    case "smallerEqual":
-                        // < day +1 at midnight
-                        return lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)));
-                }
-            }
+            getFilterCondition: () => props.getFilterConditions?.(value, type)
         });
-    }, [props.attribute, props.filterDispatcher, value, type]);
+    }, [props.filterDispatcher, value, type]);
 
     const focusInput = useCallback(() => {
         if (pickerRef.current) {
             pickerRef.current.setFocus();
         }
     }, [pickerRef.current]);
-
-    const errorMessage = getAttributeTypeErrorMessage(props.attribute?.type);
-
-    if (errorMessage) {
-        return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
-    }
 
     return (
         <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
