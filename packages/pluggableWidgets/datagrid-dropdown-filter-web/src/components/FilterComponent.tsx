@@ -95,15 +95,17 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                         return undefined;
                     }
 
-                    // TODO: Implement logic for load Enum captions and filter using conditions
-                    // if (selectedFilters.length > 0) {
-                    //     return selectedFilters.some(
-                    //         selectedFilter =>
-                    //             attr.get(item).value?.toString().toLocaleLowerCase() ===
-                    //                 selectedFilter.value?.toString().toLocaleLowerCase() ||
-                    //             selectedFilter.value?.toString() === ""
-                    //     );
-                    // }
+                    const filterAttribute = attribute(props.attribute.id);
+
+                    if (selectedFilters.length > 1) {
+                        return or(...selectedFilters.map(filter => equals(filterAttribute, literal(filter.value))));
+                    }
+
+                    const [filterValue] = selectedFilters;
+                    if (filterValue.value) {
+                        return equals(filterAttribute, literal(filterValue.value));
+                    }
+
                     return undefined;
                 }
             });
