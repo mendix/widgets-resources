@@ -13,7 +13,7 @@
                     <description />
                 </property>
                 <property key="threshold" type="boolean" defaultValue="true">
-                    <caption>Shrink after threshold</caption>
+                    <caption>Shrink with threshold</caption>
                     <description />
                 </property>
                 <property key="shrinkThreshold" type="expression" defaultValue="100">
