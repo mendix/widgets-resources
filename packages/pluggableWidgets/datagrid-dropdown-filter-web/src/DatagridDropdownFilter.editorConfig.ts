@@ -2,10 +2,19 @@ import { DatagridDropdownFilterPreviewProps } from "../typings/DatagridDropdownF
 import {
     chevronDownIcon,
     ContainerProps,
+    hidePropertyIn,
     ImageProps,
+    Properties,
     StructurePreviewProps,
     TextProps
 } from "@mendix/piw-utils-internal";
+
+export function getProperties(values: DatagridDropdownFilterPreviewProps, defaultProperties: Properties): Properties {
+    if (values.auto) {
+        hidePropertyIn(defaultProperties, values, "filterOptions");
+    }
+    return defaultProperties;
+}
 
 export const getPreview = (values: DatagridDropdownFilterPreviewProps): StructurePreviewProps => {
     return {

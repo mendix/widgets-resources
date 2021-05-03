@@ -13,7 +13,11 @@
                     <description>Empty option caption will be shown by default or if configured default value matches none of the options</description>
                     <returnType type="String" />
                 </property>
-                <property key="filterOptions" type="object" isList="true">
+                <property key="auto" type="boolean" defaultValue="false">
+                    <caption>Automatic options</caption>
+                    <description>Create options based on the enumeration values and captions</description>
+                </property>
+                <property key="filterOptions" type="object" isList="true" required="false">
                     <caption>Options</caption>
                     <description/>
                     <properties>
