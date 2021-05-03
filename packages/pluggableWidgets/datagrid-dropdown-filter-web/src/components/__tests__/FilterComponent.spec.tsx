@@ -1,8 +1,9 @@
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
+import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 
-jest.useFakeTimers();
+jest.mock("mendix/filters/builders", () => jest.requireActual("./__mocks__/mendix/filters/builders"));
 
 const defaultOptions = [
     { caption: "1", value: "_1" },
@@ -41,6 +42,24 @@ describe("Filter selector", () => {
 
                 expect(component).toMatchSnapshot();
                 expect(component.find("input").first().prop("placeholder")).toBe("find me");
+            });
+
+            it("with automatic options from the attribute", () => {
+                const component = mount(
+                    <FilterComponent
+                        auto
+                        attribute={new ListAttributeValueBuilder()
+                            .withUniverse(["enum_value_1", "enum_value_2"])
+                            .build()}
+                        options={[]}
+                        filterDispatcher={jest.fn()}
+                    />
+                );
+
+                const input = component.find("input.dropdown-triggerer");
+                input.simulate("click");
+
+                expect(component).toMatchSnapshot();
             });
         });
         it("selects default option", () => {
