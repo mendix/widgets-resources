@@ -92,7 +92,7 @@ export function Rating(props: RatingProps): ReactElement {
                             }
                         }}
                         role="radio"
-                        tabIndex={index === (props.value > 0 ? props.value - 1 : 0) ? 0 : -1}
+                        tabIndex={index === Math.max(props.value - 1, 0) ? 0 : -1}
                     >
                         {Number(currentIndex) <= props.value ? (
                             props.fullIcon
