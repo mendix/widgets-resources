@@ -17,7 +17,7 @@
     }
 
     &:focus:not(:focus-visible) {
-      .rating-image, .rating-icon{
+      .rating-image, .rating-icon {
         outline: none;
       }
     }
