@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { throttle } from "lodash-es";
 
 import "../ui/ShrinkingHeader.scss";
+import { useWrappingDivStyle } from "../utils/WrappingDivStyler";
 
 export interface ShrinkingHeaderThresholdProps {
     rootElementRef?: (node: HTMLElement | null) => void;
@@ -17,7 +18,6 @@ export interface ShrinkingHeaderThresholdProps {
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
     const { rootElementRef, name, className, style, tabIndex, content, shrinkThreshold } = props;
 
-    const [inlineStyle, setInlineStyle] = useState<CSSProperties>({ ...style });
     const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
     const [shrunk, setShrunk] = useState(false);
 
@@ -56,29 +56,10 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
         };
     }, [shrinkThreshold, setShrunk]);
 
-    useEffect(() => {
-        if (headerElement) {
-            const resizeObserver = new ResizeObserver(() => {
-                const headerHeight = headerElement.offsetHeight;
-                setInlineStyle(prevState => {
-                    if (!prevState.height || (prevState.height && prevState.height < headerHeight)) {
-                        return { ...prevState, height: headerHeight };
-                    }
-
-                    return prevState;
-                });
-            });
-
-            resizeObserver.observe(headerElement);
-
-            return () => {
-                resizeObserver.disconnect();
-            };
-        }
-    }, [headerElement, setInlineStyle]);
+    const wrappingDivStyle = useWrappingDivStyle(style, headerElement);
 
     return (
-        <div id={name} className={actualClassName} style={inlineStyle} tabIndex={tabIndex}>
+        <div id={name} className={actualClassName} style={wrappingDivStyle} tabIndex={tabIndex}>
             <header ref={updateElement}>{content}</header>
         </div>
     );

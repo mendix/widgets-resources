@@ -2,6 +2,7 @@ import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, use
 import classNames from "classnames";
 
 import "../ui/ShrinkingHeader.scss";
+import { useWrappingDivStyle } from "../utils/WrappingDivStyler";
 
 export interface ShrinkingHeaderThresholdProps {
     rootElementRef?: (node: HTMLElement | null) => void;
@@ -17,7 +18,6 @@ export interface ShrinkingHeaderThresholdProps {
 export function ShrinkingHeaderLinear(props: ShrinkingHeaderThresholdProps): ReactElement {
     const { rootElementRef, name, className, style, tabIndex, content, initHeight, shrunkHeight } = props;
 
-    const [widgetInlineStyle, setWidgetInlineStyle] = useState<CSSProperties>({ ...style });
     const [headerInlineStyle, setHeaderInlineStyle] = useState<CSSProperties>();
     const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
 
@@ -44,31 +44,12 @@ export function ShrinkingHeaderLinear(props: ShrinkingHeaderThresholdProps): Rea
         return () => {
             document.removeEventListener("scroll", updateHeaderHeight);
         };
-    }, [initHeight, shrunkHeight, headerElement, setHeaderInlineStyle]);
+    }, [initHeight, shrunkHeight, setHeaderInlineStyle]);
 
-    useEffect(() => {
-        if (headerElement) {
-            const resizeObserver = new ResizeObserver(() => {
-                const headerHeight = headerElement.offsetHeight;
-                setWidgetInlineStyle(prevState => {
-                    if (!prevState.height || (prevState.height && prevState.height < headerHeight)) {
-                        return { ...prevState, height: headerHeight };
-                    }
-
-                    return prevState;
-                });
-            });
-
-            resizeObserver.observe(headerElement);
-
-            return () => {
-                resizeObserver.disconnect();
-            };
-        }
-    }, [headerElement, setWidgetInlineStyle]);
+    const wrappingDivStyle = useWrappingDivStyle(style, headerElement);
 
     return (
-        <div id={name} className={actualClassName} style={widgetInlineStyle} tabIndex={tabIndex}>
+        <div id={name} className={actualClassName} style={wrappingDivStyle} tabIndex={tabIndex}>
             <header ref={updateElement} style={headerInlineStyle}>
                 {content}
             </header>
