@@ -1,18 +1,18 @@
-import { CSSProperties, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-export function useWrappingDivStyle(style?: CSSProperties, headerElement?: HTMLDivElement): CSSProperties {
-    const [divStyle, setDivStyle] = useState<CSSProperties>({ ...style });
+export function useWrappingDivHeight(headerElement?: HTMLDivElement): number | undefined {
+    const [divHeight, setDivHeight] = useState<number>();
 
     useEffect(() => {
         if (headerElement) {
             const resizeObserver = new ResizeObserver(() => {
                 const headerHeight = headerElement.offsetHeight;
-                setDivStyle(prevState => {
-                    if (!prevState.height || (prevState.height && prevState.height < headerHeight)) {
-                        return { ...prevState, height: headerHeight };
+                setDivHeight(prevHeight => {
+                    if (!prevHeight || (prevHeight && prevHeight < headerHeight)) {
+                        return headerHeight;
                     }
 
-                    return prevState;
+                    return prevHeight;
                 });
             });
 
@@ -22,7 +22,7 @@ export function useWrappingDivStyle(style?: CSSProperties, headerElement?: HTMLD
                 resizeObserver.disconnect();
             };
         }
-    }, [headerElement, setDivStyle]);
+    }, [headerElement, setDivHeight]);
 
-    return divStyle;
+    return divHeight;
 }

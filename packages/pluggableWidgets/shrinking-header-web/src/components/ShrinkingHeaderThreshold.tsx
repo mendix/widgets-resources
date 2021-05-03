@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { throttle } from "lodash-es";
 
 import "../ui/ShrinkingHeader.scss";
-import { useWrappingDivStyle } from "../utils/WrappingDivStyler";
+import { useWrappingDivHeight } from "../utils/WrappingDivStyler";
 
 export interface ShrinkingHeaderThresholdProps {
     rootElementRef?: (node: HTMLElement | null) => void;
@@ -56,10 +56,10 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
         };
     }, [shrinkThreshold, setShrunk]);
 
-    const wrappingDivStyle = useWrappingDivStyle(style, headerElement);
+    const wrappingDivHeight = useWrappingDivHeight(headerElement);
 
     return (
-        <div id={name} className={actualClassName} style={wrappingDivStyle} tabIndex={tabIndex}>
+        <div id={name} className={actualClassName} style={{ ...style, height: wrappingDivHeight }} tabIndex={tabIndex}>
             <header ref={updateElement}>{content}</header>
         </div>
     );
