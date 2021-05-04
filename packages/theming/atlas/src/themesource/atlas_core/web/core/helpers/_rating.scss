@@ -36,4 +36,24 @@
     .widget-star-rating-full-inverse {
         color: $brand-inverse;
     }
+
+    .widget-rating {
+        &.widget-rating-small {
+            .rating-icon {
+                font-size: 16px;
+            }
+            .rating-image {
+                height: 16px;
+            }
+        }
+        &.widget-rating-large {
+            .rating-icon {
+                font-size: 32px;
+            }
+            .rating-image {
+                height: 32px;
+            }
+        }
+    }
+
 }

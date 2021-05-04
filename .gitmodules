@@ -66,10 +66,6 @@
 	path = packages/customWidgets/range-slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = range-slider-web
-[submodule "packages/customWidgets/star-rating-web/tests/testProject"]
-	path = packages/customWidgets/star-rating-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = star-rating-web
 [submodule "packages/customWidgets/slider-web/tests/testProject"]
 	path = packages/customWidgets/slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
@@ -98,3 +94,7 @@
 	path = packages/theming/atlas/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = atlas-design-system
+[submodule "packages/pluggableWidgets/rating-web/tests/testProject"]
+	path = packages/pluggableWidgets/rating-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = star-rating-web

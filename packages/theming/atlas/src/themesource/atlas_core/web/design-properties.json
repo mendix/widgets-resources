@@ -1110,5 +1110,22 @@
             "description": "Hide the navigation items icon",
             "class": "hide-icons"
         }
+    ],
+    "com.mendix.widget.custom.starrating.StarRating": [
+        {
+            "name": "Size",
+            "type": "Dropdown",
+            "description": "Change size of the rating icon/image. Default is medium.",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "widget-rating-small"
+                },
+                {
+                    "name": "Large",
+                    "class": "widget-rating-large"
+                }
+            ]
+        }
     ]
 }
