@@ -4,7 +4,6 @@
     "include": ["./src"],
     "exclude": ["**/__tests__/**"],
     "compilerOptions": {
-        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"],
-        "types": ["resize-observer-browser", "jest"]
+        "types": ["resize-observer-browser"]
     }
 }
