@@ -18,7 +18,7 @@ export interface ShrinkingHeaderThresholdProps {
 export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): ReactElement {
     const { rootElementRef, name, className, style, tabIndex, content, shrinkThreshold } = props;
 
-    const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
+    const [headerElement, setHeaderElement] = useState<HTMLElement>();
     const [shrunk, setShrunk] = useState(false);
 
     const actualClassName = classNames(
@@ -31,7 +31,7 @@ export function ShrinkingHeaderThreshold(props: ShrinkingHeaderThresholdProps): 
     );
 
     const updateElement = useCallback(
-        (node: HTMLDivElement | null) => {
+        (node: HTMLElement | null) => {
             setHeaderElement(node ?? undefined);
             rootElementRef?.(node);
         },

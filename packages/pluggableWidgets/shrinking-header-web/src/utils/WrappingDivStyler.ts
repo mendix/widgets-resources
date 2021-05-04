@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useWrappingDivHeight(headerElement?: HTMLDivElement): number | undefined {
+export function useWrappingDivHeight(headerElement?: HTMLElement): number | undefined {
     const [divHeight, setDivHeight] = useState<number>();
 
     useEffect(() => {

@@ -19,12 +19,12 @@ export function ShrinkingHeaderLinear(props: ShrinkingHeaderThresholdProps): Rea
     const { rootElementRef, name, className, style, tabIndex, content, initHeight, shrunkHeight } = props;
 
     const [headerHeight, setHeaderHeight] = useState<number>();
-    const [headerElement, setHeaderElement] = useState<HTMLDivElement>();
+    const [headerElement, setHeaderElement] = useState<HTMLElement>();
 
     const actualClassName = classNames("widget-shrinking-header", "widget-shrinking-header-linear", className);
 
     const updateElement = useCallback(
-        (node: HTMLDivElement | null) => {
+        (node: HTMLElement | null) => {
             setHeaderElement(node ?? undefined);
             rootElementRef?.(node);
         },
