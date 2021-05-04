@@ -2,13 +2,12 @@ import { createElement, ReactElement } from "react";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { FilterComponent } from "./components/FilterComponent";
-import { DatagridDateFilterContainerProps } from "../typings/DatagridDateFilterProps";
+import { DatagridDateFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 import { registerLocale } from "react-datepicker";
 import * as locales from "date-fns/locale";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@mendix/piw-utils-internal";
 
-import { DefaultFilterEnum } from "../../datagrid-text-filter-web/typings/DatagridTextFilterProps";
 import { chanteTimeToMidnight } from "./utils/utils";
 import { addDays, subDays } from "date-fns";
 
