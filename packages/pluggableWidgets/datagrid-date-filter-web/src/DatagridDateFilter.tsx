@@ -23,15 +23,10 @@ import {
     or
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
+import { ListAttributeValue } from "mendix";
 
 interface Locale {
     [key: string]: object;
-}
-
-function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "DateTime"
-        ? "The attribute type being used for Data grid date filter is not 'Date and time'"
-        : null;
 }
 
 export default function DatagridDateFilter(props: DatagridDateFilterContainerProps): ReactElement | null {
@@ -67,57 +62,23 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
 
-                const getFilterConditions = (
-                    value: Date | null,
-                    type: DefaultFilterEnum
-                ): FilterCondition | undefined => {
-                    if (!attribute || !attribute.filterable || !value) {
-                        return undefined;
-                    }
-
-                    const filterAttribute = attributeFunction(attribute.id);
-
-                    switch (type) {
-                        case "greater":
-                            // > Date at midnight
-                            return greaterThan(filterAttribute, literal(chanteTimeToMidnight(value)));
-                        case "greaterEqual":
-                            // > day -1 at midnight
-                            return greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
-                        case "equal":
-                            // >= day at midnight and < day +1 midnight
-                            return and(
-                                greaterThanOrEqual(filterAttribute, literal(chanteTimeToMidnight(value))),
-                                lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
-                            );
-                        case "notEqual":
-                            // < day at midnight or >= day +1 at midnight
-                            return or(
-                                lessThan(filterAttribute, literal(chanteTimeToMidnight(value))),
-                                greaterThanOrEqual(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
-                            );
-                        case "smaller":
-                            // <= day -1 at midnight
-                            return lessThanOrEqual(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
-                        case "smallerEqual":
-                            // < day +1 at midnight
-                            return lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)));
-                    }
-                };
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
                         defaultFilter={props.defaultFilter}
                         defaultValue={props.defaultValue?.value}
                         dateFormat={patterns.date}
-                        filterDispatcher={filterDispatcher}
-                        getFilterConditions={getFilterConditions}
                         locale={language}
                         name={props.name}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
+                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void =>
+                            filterDispatcher({
+                                getFilterCondition: () => getFilterCondition(attribute, value, type)
+                            })
+                        }
                     />
                 );
             }}
@@ -125,4 +86,48 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     ) : (
         alertMessage
     );
+}
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && type !== "DateTime"
+        ? "The attribute type being used for Data grid date filter is not 'Date and time'"
+        : null;
+}
+
+function getFilterCondition(
+    attribute: ListAttributeValue,
+    value: Date | null,
+    type: DefaultFilterEnum
+): FilterCondition | undefined {
+    if (!attribute || !attribute.filterable || !value) {
+        return undefined;
+    }
+
+    const filterAttribute = attributeFunction(attribute.id);
+    switch (type) {
+        case "greater":
+            // > Date at midnight
+            return greaterThan(filterAttribute, literal(chanteTimeToMidnight(value)));
+        case "greaterEqual":
+            // > day -1 at midnight
+            return greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
+        case "equal":
+            // >= day at midnight and < day +1 midnight
+            return and(
+                greaterThanOrEqual(filterAttribute, literal(chanteTimeToMidnight(value))),
+                lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
+            );
+        case "notEqual":
+            // < day at midnight or >= day +1 at midnight
+            return or(
+                lessThan(filterAttribute, literal(chanteTimeToMidnight(value))),
+                greaterThanOrEqual(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
+            );
+        case "smaller":
+            // <= day -1 at midnight
+            return lessThanOrEqual(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
+        case "smallerEqual":
+            // < day +1 at midnight
+            return lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)));
+    }
 }

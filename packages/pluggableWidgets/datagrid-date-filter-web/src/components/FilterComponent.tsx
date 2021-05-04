@@ -1,26 +1,23 @@
-import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { FilterCondition } from "mendix/filters";
 
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
 import DatePickerComponent from "react-datepicker";
 import { DatePicker } from "./DatePicker";
-import { FilterFunction } from "../utils/provider";
 
 interface FilterComponentProps {
     adjustable: boolean;
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
     dateFormat?: string;
-    filterDispatcher: Dispatch<FilterFunction>;
-    getFilterConditions?: (value: Date | null, type: DefaultFilterEnum) => FilterCondition | undefined;
     locale?: string;
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
+    updateFilters?: (value: Date | null, type: DefaultFilterEnum) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -35,10 +32,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.defaultValue]);
 
     useEffect(() => {
-        props.filterDispatcher({
-            getFilterCondition: () => props.getFilterConditions?.(value, type)
-        });
-    }, [props.filterDispatcher, value, type]);
+        props.updateFilters?.(value, type);
+    }, [value, type]);
 
     const focusInput = useCallback(() => {
         if (pickerRef.current) {
