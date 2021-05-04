@@ -1,19 +1,7 @@
-import {
-    createElement,
-    Dispatch,
-    Fragment,
-    ReactElement,
-    useCallback,
-    useEffect,
-    useMemo,
-    useRef,
-    useState
-} from "react";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ListAttributeValue } from "mendix";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
-import { FilterFunction } from "../utils/provider";
-import { FilterCondition } from "mendix/filters";
 
 export interface Option {
     caption: string;
@@ -25,13 +13,12 @@ interface FilterComponentProps {
     attribute?: ListAttributeValue;
     auto?: boolean;
     emptyOptionCaption?: string;
-    filterDispatcher: Dispatch<FilterFunction>;
-    getFilterConditions?: (values: Option[]) => FilterCondition | undefined;
     multiSelect?: boolean;
     name?: string;
     options: Option[];
     tabIndex?: number;
     defaultValue?: string;
+    updateFilters?: (values: Option[]) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -115,12 +102,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.defaultValue, availableOptions, props.emptyOptionCaption]);
 
     useEffect(() => {
-        if (props.filterDispatcher) {
-            props.filterDispatcher({
-                getFilterCondition: () => props.getFilterConditions?.(selectedFilters)
-            });
-        }
-    }, [props.attribute, props.filterDispatcher, selectedFilters]);
+        props.updateFilters?.(selectedFilters);
+    }, [selectedFilters]);
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
 

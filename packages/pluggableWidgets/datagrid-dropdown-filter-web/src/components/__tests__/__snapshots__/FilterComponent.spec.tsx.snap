@@ -127,32 +127,6 @@ exports[`Filter selector with single selection renders correctly with automatic 
     }
   }
   auto={true}
-  filterDispatcher={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "getFilterCondition": [Function],
-          },
-        ],
-        Array [
-          Object {
-            "getFilterCondition": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-        Object {
-          "type": "return",
-          "value": undefined,
-        },
-      ],
-    }
-  }
   options={Array []}
 >
   <div
