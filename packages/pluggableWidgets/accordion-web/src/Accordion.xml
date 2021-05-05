@@ -38,6 +38,11 @@
                                 <caption>Content</caption>
                                 <description/>
                             </property>
+                            <property key="visible" type="expression" defaultValue="true">
+                                <caption>Visible</caption>
+                                <description />
+                                <returnType type="Boolean" />
+                            </property>
                         </propertyGroup>
                     </properties>
                 </property>

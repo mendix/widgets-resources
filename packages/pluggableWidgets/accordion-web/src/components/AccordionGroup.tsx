@@ -4,6 +4,7 @@ export interface AccGroup {
     header: ReactNode;
     content: ReactNode;
     collapsed?: boolean;
+    visible: boolean;
 }
 
 export interface AccordionGroupProps extends AccGroup {
@@ -12,7 +13,7 @@ export interface AccordionGroupProps extends AccGroup {
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { header, content, collapsible, collapsed, onExpand } = props;
+    const { header, content, collapsed, visible, collapsible, onExpand } = props;
 
     const previousCollapsedPropValue = useRef(collapsed);
 
@@ -40,6 +41,10 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             return !prevState;
         });
     }, [onExpand, setDivCollapsed, setMountDivContent]);
+
+    if (!visible) {
+        return null;
+    }
 
     return (
         <section>

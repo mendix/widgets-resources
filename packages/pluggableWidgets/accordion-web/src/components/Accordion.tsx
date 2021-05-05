@@ -21,7 +21,9 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
 
     if (groups !== previousGroupsPropValue.current) {
         previousGroupsPropValue.current = groups;
-        setAccordionGroups(groups.map(group => ({ ...group, collapsed: true })));
+        setAccordionGroups(
+            prevGroups => groups.map((group, index) => ({ ...group, collapsed: prevGroups[index].collapsed })) // The previous collapsed state of the group at the same index can be used, because the order of groups remains the same throughout the lifetime of the widget.
+        );
     }
 
     const updateAccordionGroupCollapsedStates = useCallback(
@@ -44,6 +46,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
                 header={group.header}
                 content={group.content}
                 collapsed={group.collapsed}
+                visible={group.visible}
                 collapsible={collapsible}
                 onExpand={updateAccordionGroupCollapsedStates(group)}
             />
