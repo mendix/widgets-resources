@@ -9,7 +9,7 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="groups" type="object" isList="true" required="false">
+                <property key="groups" type="object" isList="true" required="true">
                     <caption>Groups</caption>
                     <description/>
                     <properties>
