@@ -5,6 +5,8 @@ import { BarcodeScanner } from "../BarcodeScanner";
 import * as mediaStreamFunctions from "../../hooks/useMediaStream";
 import { act } from "react-dom/test-utils";
 
+jest.mock("../../assets/ic24-close.svg", () => "close-button-icon-svg");
+
 jest.mock("@zxing/library", () => {
     const original = jest.requireActual("@zxing/library");
     return {
