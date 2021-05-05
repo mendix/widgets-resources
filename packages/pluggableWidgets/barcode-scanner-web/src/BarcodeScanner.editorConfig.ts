@@ -1,7 +1,11 @@
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
-import { BarcodeScannerPreviewProps } from "../typings/BarcodeScannerProps";
+import BarcodeScannerSvg from "./assets/barcodescanner.svg";
 
-// TODO: Structure preview.
-export function getPreview(_values: BarcodeScannerPreviewProps): StructurePreviewProps | null {
-    return null;
+export function getPreview(): StructurePreviewProps | null {
+    return {
+        type: "Image",
+        document: decodeURIComponent(BarcodeScannerSvg.replace("data:image/svg+xml,", "")),
+        height: 275,
+        width: 275
+    };
 }
