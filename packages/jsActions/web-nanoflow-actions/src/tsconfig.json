@@ -6,6 +6,7 @@
         "lib": ["es2017", "dom"],
         "moduleResolution": "node",
         "sourceMap": false,
+        "types": ["mendix-client"],
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "removeComments": false,

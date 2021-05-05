@@ -38,6 +38,15 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         return Promise.reject(new Error("Your device does not have a camera."));
     }
 
+    //TODO: WC-463 rollup has a bug where comments are removed from the top of files, disallowing imports between
+    // "extra code" comments. Until this is fixed, SVGs are manually encoded and added here.
+    const closeSVG =
+        "PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4yMjIyIDE2LjAwMDNMMjYuNTM5NyA3LjY4MjhDMjcuMTU0MSA3LjA2ODM4IDI3LjE1NDEgNi4wNzUyNCAyNi41Mzk3IDUuNDYwODJDMjUuOTI1MyA0Ljg0NjM5IDI0LjkzMjEgNC44NDYzOSAyNC4zMTc3IDUuNDYwODJMMTYuMDAwMiAxMy43NzgzTDcuNjgyNzkgNS40NjA4MkM3LjA2ODM3IDQuODQ2MzkgNi4wNzUyNCA0Ljg0NjM5IDUuNDYwODIgNS40NjA4MkM0Ljg0NjM5IDYuMDc1MjQgNC44NDYzOSA3LjA2ODM4IDUuNDYwODIgNy42ODI4TDEzLjc3ODMgMTYuMDAwM0w1LjQ2MDgyIDI0LjMxNzhDNC44NDYzOSAyNC45MzIzIDQuODQ2MzkgMjUuOTI1NCA1LjQ2MDgyIDI2LjUzOThDNS43NjcyNCAyNi44NDYzIDYuMTY5NTIgMjcuMDAwMyA2LjU3MTggMjcuMDAwM0M2Ljk3NDA4IDI3LjAwMDMgNy4zNzYzNiAyNi44NDYzIDcuNjgyNzkgMjYuNTM5OEwxNi4wMDAyIDE4LjIyMjNMMjQuMzE3NyAyNi41Mzk4QzI0LjYyNDEgMjYuODQ2MyAyNS4wMjY0IDI3LjAwMDMgMjUuNDI4NyAyNy4wMDAzQzI1LjgzMSAyNy4wMDAzIDI2LjIzMzMgMjYuODQ2MyAyNi41Mzk3IDI2LjUzOThDMjcuMTU0MSAyNS45MjU0IDI3LjE1NDEgMjQuOTMyMyAyNi41Mzk3IDI0LjMxNzhMMTguMjIyMiAxNi4wMDAzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==";
+    const syncSVG =
+        "PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNS45OTk5IDVDMTIuNzA5MyA1IDkuNzU0NzQgNi40NDQ1NCA3LjczNzY2IDguNzM3NjJMMTAuMTQ2NCAxMS4xNDY0QzEwLjQ2MTQgMTEuNDYxNCAxMC4yMzgzIDEyIDkuNzkyOSAxMkgyLjVDMi4yMjM4NiAxMiAyIDExLjc3NjEgMiAxMS41VjQuMjA3MDZDMiAzLjc2MTYgMi41Mzg1OCAzLjUzODUyIDIuODUzNTYgMy44NTM1TDUuNjEzMiA2LjYxMzE2QzguMTczOTIgMy43ODE1IDExLjg3ODIgMiAxNS45OTk5IDJDMjMuMTY0NCAyIDI5LjA3MDIgNy4zODA0MiAyOS45MDAyIDE0LjMyMTlDMjkuOTk4NiAxNS4xNDQ0IDI5LjQxMTYgMTUuODkxIDI4LjU4OSAxNS45ODk0QzI3Ljc2NjQgMTYuMDg3OCAyNy4wMTk4IDE1LjUwMDcgMjYuOTIxNCAxNC42NzgxQzI2LjI2OTYgOS4yMjY5IDIxLjYyNzIgNSAxNS45OTk5IDVaTTMuNDEwOSAxNi4wMTA2QzQuMjMzNDYgMTUuOTEyMiA0Ljk4MDAyIDE2LjQ5OTMgNS4wNzg0IDE3LjMyMTlDNS43MzAzMiAyMi43NzMgMTAuMzcyNiAyNyAxNS45OTk5IDI3QzE5LjI5MDYgMjcgMjIuMjQ1MiAyNS41NTU0IDI0LjI2MjIgMjMuMjYyNEwyMS44NTM2IDIwLjg1MzZDMjEuNTM4NiAyMC41Mzg2IDIxLjc2MTYgMjAgMjIuMjA3MiAyMEgyOS41QzI5Ljc3NjIgMjAgMzAgMjAuMjI0IDMwIDIwLjVWMjcuNzkzQzMwIDI4LjIzODQgMjkuNDYxNCAyOC40NjE0IDI5LjE0NjQgMjguMTQ2NEwyNi4zODY4IDI1LjM4NjhDMjMuODI2IDI4LjIxODQgMjAuMTIxNiAzMCAxNS45OTk5IDMwQzguODM1NDIgMzAgMi45Mjk3OCAyNC42MTk2IDIuMDk5NjIgMTcuNjc4MUMyLjAwMTI2IDE2Ljg1NTYgMi41ODgzNCAxNi4xMDkgMy40MTA5IDE2LjAxMDZaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K";
+    const cameraButtonSVG =
+        "PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzUiIGN5PSIzNSIgcj0iMzUiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=";
+
     return new Promise(async (resolve, reject) => {
         const hasMultipleCameraDevices = videoDevices.length > 1;
         let error: string | undefined;
@@ -55,11 +64,11 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         const {
             video,
             wrapper,
-            actionAndSwitchControlWrapper,
             actionControl,
             switchControl,
             closeControl,
             createAction,
+            controlsWrapper,
             createActionAndSwitch
         } = createFirstScreenElements();
 
@@ -69,12 +78,11 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
         const { handler: takePictureHandler, cleanup: secondScreenCleanup } = prepareSecondScreen();
 
-        if (!hasMultipleCameraDevices) {
-            // TODO: flip me back.
-            actionAndSwitchControlWrapper.classList.add("pwa-take-picture-action-switch-control-wrapper");
+        if (hasMultipleCameraDevices) {
+            controlsWrapper.classList.add("pwa-take-picture-action-switch-control-wrapper");
             createActionAndSwitch();
         } else {
-            actionAndSwitchControlWrapper.classList.add("pwa-take-picture-action-control-wrapper");
+            controlsWrapper.classList.add("pwa-take-picture-action-control-wrapper");
             createAction();
         }
 
@@ -159,13 +167,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `,
                 `
                 .pwa-take-picture-action-control {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 50%;
-                    background-color: white;
-                    width: 70px;
-                    height: 70px;
+                    background-color: transparent;
                     border-style: none;
                     padding: 0;
                 };
@@ -242,24 +244,11 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-switch-control .glyphicon {
-                    font-size: 32px;
-                    color: white;
-                };
-                `,
-                `
                 .pwa-take-picture-close-control {
                     margin: 30px 0 0 30px;
                     border-style: none;
                     padding: 0;
                     background-color: transparent;
-                };
-                `,
-                `
-                .pwa-take-picture-close-control .glyphicon {
-                    position: unset;
-                    color: white;
-                    font-size: 16px;
                 };
                 `,
                 `
@@ -320,7 +309,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             video.setAttribute("muted", "");
             video.setAttribute("playsinline", "");
 
-            const actionAndSwitchControlWrapper = document.createElement("div");
+            const controlsWrapper = document.createElement("div");
 
             const closeControlWrapper = document.createElement("div");
             closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
@@ -331,27 +320,27 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             const actionControlWrapper = document.createElement("div");
             actionControlWrapper.classList.add("pwa-take-picture-action-spacing");
 
-            const actionControlInnerCircle = document.createElement("div");
-            actionControlInnerCircle.classList.add("pwa-take-picture-action-control-inner");
-
             const switchControl = document.createElement("button");
             switchControl.classList.add("pwa-take-picture-switch-control");
 
             const switchControlWrapper = document.createElement("div");
             switchControlWrapper.classList.add("pwa-take-picture-switch-spacing");
 
-            const switchControlGlyph = document.createElement("div");
-            switchControlGlyph.classList.add("glyphicon", "glyphicon-refresh");
-
             const closeControl = document.createElement("button");
             closeControl.classList.add("pwa-take-picture-close-control");
 
-            const closeControlGlyph = document.createElement("div");
-            closeControlGlyph.classList.add("glyphicon", "glyphicon-remove");
+            const closeImg = document.createElement("img");
+            closeImg.src = `data:image/svg+xml;base64,${closeSVG}`;
 
-            closeControl.appendChild(closeControlGlyph);
-            switchControl.appendChild(switchControlGlyph);
-            actionControl.appendChild(actionControlInnerCircle);
+            const switchImg = document.createElement("img");
+            switchImg.src = `data:image/svg+xml;base64,${syncSVG}`;
+
+            const takePictureImg = document.createElement("img");
+            takePictureImg.src = `data:image/svg+xml;base64,${cameraButtonSVG}`;
+
+            closeControl.appendChild(closeImg);
+            switchControl.appendChild(switchImg);
+            actionControl.appendChild(takePictureImg);
 
             function createActionAndSwitch() {
                 const spacingDiv = document.createElement("div");
@@ -359,24 +348,24 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
                 actionControlWrapper.appendChild(actionControl);
                 switchControlWrapper.appendChild(switchControl);
-                actionAndSwitchControlWrapper.appendChild(spacingDiv);
-                actionAndSwitchControlWrapper.appendChild(actionControlWrapper);
-                actionAndSwitchControlWrapper.appendChild(switchControlWrapper);
+                controlsWrapper.appendChild(spacingDiv);
+                controlsWrapper.appendChild(actionControlWrapper);
+                controlsWrapper.appendChild(switchControlWrapper);
             }
 
             function createAction() {
-                actionAndSwitchControlWrapper.appendChild(actionControl);
+                controlsWrapper.appendChild(actionControl);
             }
 
             closeControlWrapper.appendChild(closeControl);
-            wrapper.appendChild(actionAndSwitchControlWrapper);
+            wrapper.appendChild(controlsWrapper);
             wrapper.appendChild(closeControlWrapper);
             wrapper.appendChild(video);
 
             return {
                 video,
                 wrapper,
-                actionAndSwitchControlWrapper,
+                controlsWrapper,
                 actionControl,
                 switchControl,
                 closeControl,
