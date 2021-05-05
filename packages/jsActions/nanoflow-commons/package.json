@@ -13,6 +13,7 @@
     "invariant": "^2.2.4"
   },
   "devDependencies": {
+    "rollup": "^2.28.2",
     "@mendix/pluggable-widgets-tools": ">=8.9.2"
   }
 }

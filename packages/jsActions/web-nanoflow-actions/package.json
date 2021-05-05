@@ -12,6 +12,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "rollup": "^2.28.2",
     "@mendix/pluggable-widgets-tools": ">=9.0.3"
   }
 }
