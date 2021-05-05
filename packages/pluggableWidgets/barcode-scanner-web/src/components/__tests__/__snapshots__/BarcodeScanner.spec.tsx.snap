@@ -12,8 +12,10 @@ exports[`Barcode scanner does not show the overlay when the user opts out of it 
     className="btn btn-image btn-icon close-button"
     onClick={[Function]}
   >
-    <div
-      className="glyphicon glyphicon-remove"
+    <img
+      alt="Close icon for the canvas overlay"
+      className="removeIcon"
+      src="close-button-icon-svg"
     />
   </button>
 </div>
@@ -67,8 +69,10 @@ exports[`Barcode scanner shows a loading screen while waiting for the user to gi
     className="btn btn-image btn-icon close-button"
     onClick={[Function]}
   >
-    <div
-      className="glyphicon glyphicon-remove"
+    <img
+      alt="Close icon for the canvas overlay"
+      className="removeIcon"
+      src="close-button-icon-svg"
     />
   </button>
 </div>

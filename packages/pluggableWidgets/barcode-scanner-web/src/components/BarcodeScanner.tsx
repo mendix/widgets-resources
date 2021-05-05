@@ -4,6 +4,7 @@ import { Alert } from "@mendix/piw-utils-internal";
 import { useCodeScanner, CodeScannerHookError } from "../hooks/useCodeScanner";
 import { browserSupportsCameraAccess, useMediaStream, MediaStreamHookError } from "../hooks/useMediaStream";
 
+import closeIconSvg from "../assets/ic24-close.svg";
 import "../ui/BarcodeScanner.scss";
 
 export interface BarcodeScannerProps {
@@ -107,7 +108,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
                 </div>
             ) : null}
             <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose || onCloseOverlay}>
-                <div className={classNames("glyphicon", "glyphicon-remove")} />
+                <img src={closeIconSvg} className={classNames("removeIcon")} alt="Close icon for the canvas overlay" />
             </button>
         </div>
     );
