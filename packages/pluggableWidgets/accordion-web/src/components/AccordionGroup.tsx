@@ -1,4 +1,4 @@
-import { createElement, ReactElement, ReactNode, useCallback, useRef, useState } from "react";
+import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 export interface AccGroup {
     header: ReactNode;
@@ -15,32 +15,34 @@ export interface AccordionGroupProps extends AccGroup {
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
     const { header, content, collapsed, visible, collapsible, onExpand } = props;
 
-    const previousCollapsedPropValue = useRef(collapsed);
+    const previousVisiblePropValue = useRef(visible);
 
-    // The collapsible prop is never going to change afterwards, so the state doesn't need to be updated at a later stage based on this prop.
     const [divCollapsed, setDivCollapsed] = useState(collapsible && (collapsed || collapsed === undefined));
-    const [mountDivContent, setMountDivContent] = useState(!divCollapsed);
+    const [divContentMounted, setDivContentMounted] = useState(visible && !divCollapsed);
 
-    if (collapsed !== previousCollapsedPropValue.current) {
-        previousCollapsedPropValue.current = collapsed;
-        if (!collapsed) {
-            setMountDivContent(true);
-        }
+    useEffect(() => {
         setDivCollapsed(collapsible && (collapsed || collapsed === undefined));
-    }
+    }, [collapsed, collapsible, setDivCollapsed]);
+
+    useEffect(() => {
+        if (visible !== previousVisiblePropValue.current) {
+            previousVisiblePropValue.current = visible;
+            setDivContentMounted(visible && !divCollapsed);
+        }
+    }, [visible, divCollapsed, setDivContentMounted]);
 
     const toggleContentVisibility = useCallback(() => {
-        setMountDivContent(true);
+        setDivContentMounted(true);
         setDivCollapsed(prevState => {
             const divCollapsed = !prevState;
 
             if (!divCollapsed) {
-                onExpand?.();
+                onExpand?.(); // TODO call this one before we actually open this accordion group
             }
 
             return !prevState;
         });
-    }, [onExpand, setDivCollapsed, setMountDivContent]);
+    }, [onExpand, setDivCollapsed, setDivContentMounted]);
 
     if (!visible) {
         return null;
@@ -49,7 +51,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     return (
         <section>
             <header onClick={collapsible ? toggleContentVisibility : undefined}>{header}</header>
-            <div style={{ display: divCollapsed ? "none" : undefined }}>{mountDivContent ? content : undefined}</div>
+            <div style={{ display: divCollapsed ? "none" : undefined }}>{divContentMounted ? content : undefined}</div>
         </section>
     );
 }
