@@ -18,6 +18,7 @@ export default async args => {
     const result = [];
     const files = await fg([join(cwd, "src", "**/*.ts")]);
     const outDir = join(cwd, "dist");
+    const isWeb = args.configEnv === "web";
 
     const nodeResolvePlugin = nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] });
     const typescriptPlugin = typescript({
@@ -42,25 +43,29 @@ export default async args => {
             external: nativeExternal,
             plugins: [
                 i === 0 ? clear({ targets: [outDir] }) : null,
-                collectDependencies({
-                    onlyNative: false,
-                    outputDir: outDir,
-                    widgetName: fileOutput
-                }),
+                !isWeb
+                    ? collectDependencies({
+                          onlyNative: false,
+                          outputDir: outDir,
+                          widgetName: fileOutput
+                      })
+                    : null,
                 nodeResolvePlugin,
                 typescriptPlugin,
                 bigJsImportReplacer(),
                 i === files.length - 1
                     ? command([
                           async () => {
-                              await Promise.all(
-                                  clientDependencies.map(async dependency => {
-                                      await copyJsModule(
-                                          dirname(require.resolve(`${dependency}/package.json`)),
-                                          join(join(outDir, "node_modules"), dependency)
-                                      );
-                                  })
-                              );
+                              if (!isWeb) {
+                                  await Promise.all(
+                                      clientDependencies.map(async dependency => {
+                                          await copyJsModule(
+                                              dirname(require.resolve(`${dependency}/package.json`)),
+                                              join(join(outDir, "node_modules"), dependency)
+                                          );
+                                      })
+                                  );
+                              }
 
                               const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
                               const destinations = [
