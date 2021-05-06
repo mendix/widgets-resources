@@ -189,6 +189,19 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
+                .pwa-take-picture-screen-reader {
+                    border: 0;
+                    clip: rect(0 0 0 0);
+                    height: 1px;
+                    margin: -1px;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    white-space: nowrap;
+                    width: 1px;
+                };
+                `,
+                `
                 .pwa-take-picture-action-spacing {
                     flex: 1;
                     display: flex;
@@ -336,18 +349,30 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
 
             const actionControl = document.createElement("button");
+            const actionControlHiddenText = document.createElement("span");
+            actionControlHiddenText.textContent = getUserText("Take picture", "Foto nemen");
+            actionControlHiddenText.classList.add("pwa-take-picture-screen-reader");
+            actionControl.appendChild(actionControlHiddenText);
             actionControl.classList.add("pwa-take-picture-action-control");
 
             const actionControlWrapper = document.createElement("div");
             actionControlWrapper.classList.add("pwa-take-picture-action-spacing");
 
             const switchControl = document.createElement("button");
+            const switchControlHiddenText = document.createElement("span");
+            switchControlHiddenText.textContent = getUserText("Switch camera", "Van camera wisselen");
+            switchControlHiddenText.classList.add("pwa-take-picture-screen-reader");
+            switchControl.appendChild(switchControlHiddenText);
             switchControl.classList.add("pwa-take-picture-switch-control");
 
             const switchControlWrapper = document.createElement("div");
             switchControlWrapper.classList.add("pwa-take-picture-switch-spacing");
 
             const closeControl = document.createElement("button");
+            const closeControlHiddenText = document.createElement("span");
+            closeControlHiddenText.classList.add("pwa-take-picture-screen-reader");
+            closeControlHiddenText.textContent = getUserText("Close", "Afsluiten");
+            closeControl.appendChild(closeControlHiddenText);
             closeControl.classList.add("pwa-take-picture-close-control");
 
             const closeImg = document.createElement("img");
