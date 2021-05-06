@@ -1,0 +1,45 @@
+{
+    "name": "maps-web",
+    "widgetName": "Maps",
+    "version": "1.0.9",
+    "description": "Show locations on Google Maps",
+    "copyright": "Mendix BV",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mendix/widgets-resources.git"
+    },
+    "scripts": {
+        "start": "utils-react-widgets start",
+        "dev": "utils-react-widgets dev",
+        "format": "../../node_modules/.bin/prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+        "test": "npm run test:unit",
+        "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint:fix": "npm run lint -- --fix",
+        "build": "utils-react-widgets build",
+        "release": "utils-react-widgets release"
+    },
+    "config": {
+        "mendixHost": "http://localhost:8080",
+        "developmentPort": 3000,
+        "testProjectId": "b16057e9-012a-4d19-8484-34caebdc3eb2"
+    },
+    "license": "Apache-2.0",
+    "devDependencies": {
+        "@mendix/pluggable-widgets-tools": ">=8.9.2",
+        "@types/classnames": "^2.2.6",
+        "@types/googlemaps": "3.30.19",
+        "@types/faker": "^4.1.0",
+        "@types/leaflet": "^1.4.4",
+        "@types/react": "~16.9.0",
+        "@types/react-resize-detector": "^5.0.0",
+        "@mendix/custom-widgets-utils-internal": "0.0.1",
+        "faker": "^4.1.0"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "leaflet": "^1.4.0",
+        "leaflet-defaulticon-compatibility": "^0.1.1",
+        "react-resize-detector": "^5.2.0"
+    }
+}
