@@ -15,19 +15,33 @@
  */
 export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean> {
     // BEGIN USER CODE
+    const getUserText = prepareLanguage();
+
     if (!picture) {
-        // TODO: message does not appear in client. Because Error is used. Likewise for all other errors.
-        return Promise.reject(new Error("Input parameter 'Picture' is required."));
+        return Promise.reject(
+            new Error(
+                getUserText("Input parameter 'Picture' is required.", "Invoerparameter 'Afbeelding' is vereist. ")
+            )
+        );
     }
 
     if (!picture.inheritsFrom("System.Image")) {
         const entity = picture.getEntity();
 
-        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.Image'.`));
+        return Promise.reject(
+            new Error(
+                getUserText(
+                    `Entity ${entity} does not inherit from 'System.Image'.`,
+                    `Entiteit ${entity} erft niet van 'System.Image'. `
+                )
+            )
+        );
     }
 
     if (!("mediaDevices" in navigator) || !("getUserMedia" in navigator.mediaDevices)) {
-        return Promise.reject(new Error("Media devices are not supported."));
+        return Promise.reject(
+            new Error(getUserText("Media devices are not supported.", "Media-apparaten worden niet ondersteund."))
+        );
     }
 
     const videoDevices = (await navigator.mediaDevices.enumerateDevices()).filter(
@@ -35,11 +49,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
     );
 
     if (!videoDevices.length) {
-        return Promise.reject(new Error("Your device does not have a camera."));
+        return Promise.reject(
+            new Error(getUserText("Your device does not have a camera.", "Uw apparaat heeft geen camera."))
+        );
     }
 
-    //TODO: WC-463 rollup has a bug where comments are removed from the top of files, disallowing imports between
-    // "extra code" comments. Until this is fixed, SVGs are manually encoded and added here.
+    // TODO: WC-463 rollup has a bug where comments are removed from the top of files, disallowing imports between "extra code" comments. Until this is fixed, SVGs are manually encoded and added here.
     const closeSVG =
         "PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4yMjIyIDE2LjAwMDNMMjYuNTM5NyA3LjY4MjhDMjcuMTU0MSA3LjA2ODM4IDI3LjE1NDEgNi4wNzUyNCAyNi41Mzk3IDUuNDYwODJDMjUuOTI1MyA0Ljg0NjM5IDI0LjkzMjEgNC44NDYzOSAyNC4zMTc3IDUuNDYwODJMMTYuMDAwMiAxMy43NzgzTDcuNjgyNzkgNS40NjA4MkM3LjA2ODM3IDQuODQ2MzkgNi4wNzUyNCA0Ljg0NjM5IDUuNDYwODIgNS40NjA4MkM0Ljg0NjM5IDYuMDc1MjQgNC44NDYzOSA3LjA2ODM4IDUuNDYwODIgNy42ODI4TDEzLjc3ODMgMTYuMDAwM0w1LjQ2MDgyIDI0LjMxNzhDNC44NDYzOSAyNC45MzIzIDQuODQ2MzkgMjUuOTI1NCA1LjQ2MDgyIDI2LjUzOThDNS43NjcyNCAyNi44NDYzIDYuMTY5NTIgMjcuMDAwMyA2LjU3MTggMjcuMDAwM0M2Ljk3NDA4IDI3LjAwMDMgNy4zNzYzNiAyNi44NDYzIDcuNjgyNzkgMjYuNTM5OEwxNi4wMDAyIDE4LjIyMjNMMjQuMzE3NyAyNi41Mzk4QzI0LjYyNDEgMjYuODQ2MyAyNS4wMjY0IDI3LjAwMDMgMjUuNDI4NyAyNy4wMDAzQzI1LjgzMSAyNy4wMDAzIDI2LjIzMzMgMjYuODQ2MyAyNi41Mzk3IDI2LjUzOThDMjcuMTU0MSAyNS45MjU0IDI3LjE1NDEgMjQuOTMyMyAyNi41Mzk3IDI0LjMxNzhMMTguMjIyMiAxNi4wMDAzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==";
     const syncSVG =
@@ -53,6 +68,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         let stream: MediaStream | undefined;
         let styleElements: HTMLStyleElement[] = [];
         let videoIsReady = false;
+        let saveButtonIsDisabled = false;
         let shouldFaceEnvironment = true;
 
         for (const styleElement of createStyleElements(createStyles())) {
@@ -218,6 +234,11 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                     line-height: 20px;
                     text-align: center;
                     border-style: none;
+                };
+                `,
+                `
+                .pwa-take-picture-save-button.pwa-take-picture-disabled {
+                    background-color: #888888bd;
                 };
                 `,
                 `
@@ -404,11 +425,11 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
                         const saveBtn = document.createElement("button");
                         saveBtn.classList.add("pwa-take-picture-save-button");
-                        saveBtn.textContent = "Save"; // TODO: translatable.
+                        saveBtn.textContent = getUserText("Save", "Opslaan");
 
                         const closeBtn = document.createElement("button");
                         closeBtn.classList.add("pwa-take-picture-cancel-button");
-                        closeBtn.textContent = "Close"; // TODO: translatable.
+                        closeBtn.textContent = getUserText("Close", "Afsluiten");
 
                         middleSection.appendChild(videoCanvas);
                         buttonWrapper.appendChild(saveBtn);
@@ -425,44 +446,93 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                         closeBtn.addEventListener("click", cleanupConfirmationElements);
 
                         function cleanupConfirmationElements() {
+                            updateSaveButtonDisabledState(false);
                             document.body.removeChild(confirmationWrapper);
                         }
 
                         async function saveFile() {
-                            const filename = `device-camera-picture-${new Date()}`;
+                            if (!saveButtonIsDisabled) {
+                                updateSaveButtonDisabledState(true);
+                                const filename = `device-camera-picture-${new Date()}`;
 
-                            new Promise((resolve, reject) => {
-                                videoCanvas.toBlob(blob => {
-                                    if (blob) resolve(blob);
-                                    else reject("Couldn't create blob.");
-                                });
-                            })
-                                .then((blob: Blob) => {
-                                    mx.data.saveDocument(
-                                        picture.getGuid(),
-                                        filename,
-                                        {},
-                                        blob,
-                                        () => {
-                                            picture.set("Name", filename);
-                                            mx.data.commit({
-                                                mxobj: picture,
-                                                callback: () => cleanupConfirmationElements(),
-                                                error: (error: Error) => {
-                                                    cleanupConfirmationElements();
-
-                                                    closeControlHandler();
-
-                                                    reject(error);
-                                                } //TODO: test this.
-                                            });
-                                        },
-                                        (error: Error) => reject(error)
-                                    );
+                                new Promise((resolve, reject) => {
+                                    videoCanvas.toBlob(blob => {
+                                        if (blob) resolve(blob);
+                                        else
+                                            reject(
+                                                new Error(
+                                                    getUserText(
+                                                        "Couldn't save picture, please try again.",
+                                                        "Kan foto niet opslaan. Probeer het opnieuw."
+                                                    )
+                                                )
+                                            );
+                                    });
                                 })
-                                .catch(() => {
-                                    reject(new Error("Couldn't create image."));
-                                });
+                                    .then((blob: Blob) => {
+                                        mx.data.saveDocument(
+                                            picture.getGuid(),
+                                            filename,
+                                            {},
+                                            blob,
+                                            () => {
+                                                picture.set("Name", filename);
+
+                                                mx.data.commit({
+                                                    mxobj: picture,
+                                                    callback: cleanupConfirmationElements,
+                                                    error: (error: Error) => {
+                                                        updateSaveButtonDisabledState(false);
+                                                        // show a error modal and allow the user to retry.
+                                                        mx.onError(
+                                                            new Error(
+                                                                getUserText(
+                                                                    `An error occurred while trying to save the file${
+                                                                        error.message ? `: ${error.message}` : ""
+                                                                    }. Please try again.`,
+                                                                    `Er is een fout opgetreden bij het opslaan van het bestand${
+                                                                        error.message ? `: ${error.message}` : ""
+                                                                    }. Probeer het opnieuw.`
+                                                                )
+                                                            )
+                                                        );
+                                                    }
+                                                });
+                                            },
+                                            (error: Error) => {
+                                                updateSaveButtonDisabledState(false);
+                                                // show a error modal and allow the user to retry.
+                                                mx.onError(
+                                                    new Error(
+                                                        getUserText(
+                                                            `An error occurred while trying to save the file${
+                                                                error.message ? `: ${error.message}` : ""
+                                                            }. Please try again.`,
+                                                            `Er is een fout opgetreden bij het opslaan van het bestand${
+                                                                error.message ? `: ${error.message}` : ""
+                                                            }. Probeer het opnieuw.`
+                                                        )
+                                                    )
+                                                );
+                                            }
+                                        );
+                                    })
+                                    .catch((error: Error) => {
+                                        updateSaveButtonDisabledState(false);
+
+                                        mx.onError(error);
+                                    });
+                            }
+                        }
+
+                        function updateSaveButtonDisabledState(isDisabled: boolean): void {
+                            saveButtonIsDisabled = isDisabled;
+                            saveBtn.disabled = isDisabled;
+                            if (isDisabled) {
+                                saveBtn.classList.add("pwa-take-picture-disabled");
+                            } else {
+                                saveBtn.classList.remove("pwa-take-picture-disabled");
+                            }
                         }
                     }
                 },
@@ -501,17 +571,31 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         async function startCamera(facingMode: string) {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facingMode } });
+
+                stream?.getTracks()?.forEach(track => {
+                    track.addEventListener("ended", () => {
+                        closeControlHandler();
+                        reject(
+                            new Error(
+                                getUserText("Video stream unexpectedly ended.", "Videostream is onverwachts beëindigd.")
+                            )
+                        );
+                    });
+                });
             } catch (e) {
                 if (e instanceof Error) {
                     switch (e.name) {
                         case "NotAllowedError":
-                            error = "Permission denied.";
+                            error = getUserText("Permission denied.", "Geen toestemming.");
                             break;
                         case "NotFoundError":
-                            error = "Media not available.";
+                            error = getUserText("Media not available.", "Media niet beschikbaar.");
                             break;
                         case "NotReadableError":
-                            error = "Media not available, is it already in use elsewhere?";
+                            error = getUserText(
+                                "Media not available, is it already in use elsewhere?",
+                                "Media niet beschikbaar, wordt deze al ergens anders gebruikt?"
+                            );
                             break;
                         default:
                             error = e.message;
@@ -526,7 +610,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 return reject(new Error(error));
             }
 
-            //TODO: handle cases where video stream closes. cleanup.
             video.srcObject = stream!;
         }
 
@@ -542,5 +625,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             stream = undefined;
         }
     });
+
+    function prepareLanguage(): (english: string, dutch: string) => string {
+        const englishFn = (english: string, _dutch: string) => english;
+
+        try {
+            return mx.session.sessionData.locale.code.toLowerCase().includes("en")
+                ? englishFn
+                : (_english: string, dutch: string) => dutch;
+        } catch (_) {
+            return englishFn;
+        }
+    }
     // END USER CODE
 }
