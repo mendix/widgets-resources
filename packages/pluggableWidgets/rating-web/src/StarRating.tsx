@@ -24,27 +24,27 @@ export function StarRating(props: StarRatingContainerProps): ReactElement {
 
     const onChange = useCallback(
         (value: number) => {
-            if (props.ratingAttribute.status === ValueStatus.Available) {
-                props.ratingAttribute.setValue(new Big(value));
+            if (props.rateAttribute.status === ValueStatus.Available) {
+                props.rateAttribute.setValue(new Big(value));
                 executeAction(props.onChange);
             }
         },
-        [props.ratingAttribute, props.onChange]
+        [props.rateAttribute, props.onChange]
     );
 
-    const value = Number(isAvailable(props.ratingAttribute) ? props.ratingAttribute.value : 0);
+    const value = Number(isAvailable(props.rateAttribute) ? props.rateAttribute.value : 0);
 
     return (
         <RatingComponent
             className={props.class}
             animated={props.animation}
-            disabled={props.ratingAttribute.readOnly}
+            disabled={props.rateAttribute.readOnly}
             emptyIcon={emptyIcon}
             fullIcon={fullIcon}
-            maximumValue={props.maximumValue}
+            maximumValue={props.maximumStars}
             onChange={onChange}
             tabIndex={props.tabIndex}
-            value={value > props.maximumValue ? props.maximumValue : value}
+            value={value > props.maximumStars ? props.maximumStars : value}
         />
     );
 }

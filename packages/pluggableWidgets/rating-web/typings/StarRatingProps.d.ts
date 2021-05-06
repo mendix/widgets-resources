@@ -12,10 +12,10 @@ export interface StarRatingContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    ratingAttribute: EditableValue<Big>;
+    rateAttribute: EditableValue<Big>;
     emptyIcon?: DynamicValue<WebIcon>;
     icon?: DynamicValue<WebIcon>;
-    maximumValue: number;
+    maximumStars: number;
     animation: boolean;
     onChange?: ActionValue;
 }
@@ -23,10 +23,10 @@ export interface StarRatingContainerProps {
 export interface StarRatingPreviewProps {
     class: string;
     style: string;
-    ratingAttribute: string;
+    rateAttribute: string;
     emptyIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    maximumValue: number | null;
+    maximumStars: number | null;
     animation: boolean;
     onChange: {} | null;
 }

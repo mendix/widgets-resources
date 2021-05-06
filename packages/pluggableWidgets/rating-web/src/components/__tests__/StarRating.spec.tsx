@@ -11,9 +11,9 @@ describe("Rating Container", () => {
         class: "",
         name: "rating",
         tabIndex: 0,
-        ratingAttribute: new EditableValueBuilder<Big>().withValue(new Big(5)).build(),
+        rateAttribute: new EditableValueBuilder<Big>().withValue(new Big(5)).build(),
         animation: true,
-        maximumValue: 5
+        maximumStars: 5
     };
 
     it("renders correctly the structure", () => {
@@ -30,7 +30,7 @@ describe("Rating Container", () => {
         const rating = shallow(
             <StarRating
                 {...defaultProps}
-                ratingAttribute={new EditableValueBuilder<Big>().withValue(new Big(1)).isReadOnly().build()}
+                rateAttribute={new EditableValueBuilder<Big>().withValue(new Big(1)).isReadOnly().build()}
             />
         );
         expect(rating).toMatchSnapshot();
@@ -49,7 +49,7 @@ describe("Rating Container", () => {
 
         it("defines correct values to attribute on change action", () => {
             const ratingAttribute = new EditableValueBuilder<Big>().withValue(new Big(0)).build();
-            const ratingWrapper = mount(<StarRating {...defaultProps} ratingAttribute={ratingAttribute} />);
+            const ratingWrapper = mount(<StarRating {...defaultProps} rateAttribute={ratingAttribute} />);
             const rating = ratingWrapper.find(Rating);
             const options = rating.find("div.rating-item");
             options.at(0).simulate("click");
@@ -60,7 +60,7 @@ describe("Rating Container", () => {
 
         it("doesnt call setValue when value is read only", () => {
             const ratingAttribute = new EditableValueBuilder<Big>().withValue(new Big(1)).isReadOnly().build();
-            const ratingWrapper = mount(<StarRating {...defaultProps} ratingAttribute={ratingAttribute} />);
+            const ratingWrapper = mount(<StarRating {...defaultProps} rateAttribute={ratingAttribute} />);
             const rating = ratingWrapper.find(Rating);
             const options = rating.find("div.rating-item");
             options.at(0).simulate("click");
@@ -73,7 +73,7 @@ describe("Rating Container", () => {
             const ratingWrapper = mount(
                 <StarRating
                     {...defaultProps}
-                    ratingAttribute={new EditableValueBuilder<Big>().withValue(new Big(1)).isReadOnly().build()}
+                    rateAttribute={new EditableValueBuilder<Big>().withValue(new Big(1)).isReadOnly().build()}
                 />
             );
             const rating = ratingWrapper.find(Rating);

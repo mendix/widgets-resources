@@ -12,9 +12,9 @@ export const getPreview = (props: StarRatingPreviewProps): RowLayoutProps => {
         padding: 8,
         columnSize: "fixed",
         children:
-            props.maximumValue !== null
+            props.maximumStars !== null
                 ? [
-                      ...Array.from({ length: (props.maximumValue > 50 ? 50 : props.maximumValue) - 1 }).map(
+                      ...Array.from({ length: (props.maximumStars > 50 ? 50 : props.maximumStars) - 1 }).map(
                           (): ImageProps => ({
                               type: "Image",
                               document: ratingFilledSVG,
@@ -42,7 +42,7 @@ export const getPreview = (props: StarRatingPreviewProps): RowLayoutProps => {
 
 export function check(values: StarRatingPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    if (!values.maximumValue || values.maximumValue <= 0) {
+    if (!values.maximumStars || values.maximumStars <= 0) {
         errors.push({
             property: "maximumValue",
             message: "Number of stars should be greater than zero (0)"
