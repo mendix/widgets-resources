@@ -27,11 +27,11 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
     }
 
     const updateAccordionGroupCollapsedStates = useCallback(
-        (expandedGroup: AccGroup) => {
+        (changingGroup: AccGroup, collapsing: boolean) => {
             return () => {
                 const newAccordionGroupStates = accordionGroups.map(group => ({
                     ...group,
-                    collapsed: group !== expandedGroup
+                    collapsed: collapsing ? group !== changingGroup : true
                 }));
                 setAccordionGroups(newAccordionGroupStates);
             };
@@ -48,7 +48,8 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
                 collapsed={group.collapsed}
                 visible={group.visible}
                 collapsible={collapsible}
-                onExpand={updateAccordionGroupCollapsedStates(group)}
+                expand={updateAccordionGroupCollapsedStates(group, true)}
+                collapse={updateAccordionGroupCollapsedStates(group, false)}
             />
         ));
     }, [accordionGroups, collapsible, updateAccordionGroupCollapsedStates]);
