@@ -641,7 +641,9 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 return reject(new Error(error));
             }
 
-            video.srcObject = stream!;
+            if (stream) {
+                video.srcObject = stream;
+            }
         }
 
         function stopCamera() {
