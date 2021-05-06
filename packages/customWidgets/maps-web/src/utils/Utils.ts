@@ -6,7 +6,7 @@ type Dimensions = MapUtils.Dimensions;
 export default class Utils {
     static customUrls: MapUtils.CustomTypeUrls = {
         openStreetMap: `https://{s}.tile.osm.org/{z}/{x}/{y}.png`,
-        mapbox: `https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=`,
+        mapbox: `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=`,
         hereMaps: `https://2.base.maps.cit.api.here.com/maptile/2.1/maptile/newest/normal.day/{z}/{x}/{y}/256/png8?`
     };
 

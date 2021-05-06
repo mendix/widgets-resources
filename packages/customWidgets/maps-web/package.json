@@ -1,7 +1,7 @@
 {
     "name": "maps-web",
     "widgetName": "Maps",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Show locations on Google Maps",
     "copyright": "Mendix BV",
     "repository": {
@@ -14,7 +14,7 @@
         "format": "../../node_modules/.bin/prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
         "test": "npm run test:unit",
         "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
-        "lint": "..\"/../node_modules/.bin/eslint\" --config ../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+        "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
         "lint:fix": "npm run lint -- --fix",
         "build": "utils-react-widgets build",
         "release": "utils-react-widgets release"

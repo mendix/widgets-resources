@@ -163,7 +163,13 @@ export class LeafletMap extends Component<LeafletMapProps, LeafletMapState> {
 
         return tileLayer(urlTemplate, {
             attribution: mapAttribution,
-            id: mapProvider === "mapBox" ? "mapbox.streets" : undefined
+            ...(mapProvider === "mapBox"
+                ? {
+                      id: "mapbox/streets-v11",
+                      tileSize: 512,
+                      zoomOffset: -1
+                  }
+                : {})
         } as TileLayerOptions);
     };
 
