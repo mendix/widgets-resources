@@ -332,6 +332,15 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
         function createFirstScreenElements() {
             const wrapper = document.createElement("div");
+            wrapper.setAttribute("role", "dialog");
+            wrapper.setAttribute("aria-labelledby", "pwa-take-picture-modal-label");
+            const hiddenDialogLabel = document.createElement("h1");
+            hiddenDialogLabel.id = "pwa-take-picture-modal-label";
+            hiddenDialogLabel.classList.add("pwa-take-picture-screen-reader");
+            hiddenDialogLabel.textContent = getUserText(
+                "Take a picture using your device's camera",
+                "Maak een foto met de camera van uw apparaat"
+            );
             wrapper.classList.add("pwa-take-picture-wrapper");
 
             const video = document.createElement("video");
