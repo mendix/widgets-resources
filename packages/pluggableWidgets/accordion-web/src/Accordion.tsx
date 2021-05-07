@@ -6,7 +6,7 @@ import { AccordionContainerProps } from "../typings/AccordionProps";
 import { AccGroup } from "./components/AccordionGroup";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
-    const { class: className, name, style, tabIndex, groups, collapsible } = props;
+    const { class: className, name, style, tabIndex, groups, collapsible, collapseBehavior } = props;
 
     const accordionGroups: AccGroup[] | undefined = useMemo(() => {
         const result = [];
@@ -27,7 +27,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
                     return undefined;
                 }
 
-                header = <h3>{headerText}</h3>; // TODO: verify this is the desired heading element
+                header = <h3>{headerText}</h3>;
             } else {
                 header = group.headerContent;
             }
@@ -50,6 +50,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             tabIndex={tabIndex}
             groups={accordionGroups}
             collapsible={collapsible}
+            singleExpandedGroup={collapseBehavior === "singleExpanded"}
         />
     );
 }
