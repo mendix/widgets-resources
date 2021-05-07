@@ -23,6 +23,7 @@ export const BarcodeScanner: FunctionComponent<BarcodeScannerContainerProps> = p
             onClose={props.onClose ? onClose : undefined}
             onDetect={props.onDetect ? onDetect : undefined}
             showMask={props.showMask}
+            class={props.class}
         />
     );
 };

@@ -11,6 +11,7 @@ export interface BarcodeScannerProps {
     onClose?: () => void;
     onDetect?: (data: string) => void;
     showMask: boolean;
+    class: string;
 }
 
 function getErrorMessage(errorEnum: MediaStreamHookError | CodeScannerHookError | null): string | null {
@@ -27,7 +28,12 @@ function getErrorMessage(errorEnum: MediaStreamHookError | CodeScannerHookError 
     }
 }
 
-export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerProps): ReactElement | null {
+export function BarcodeScanner({
+    onClose,
+    onDetect,
+    showMask,
+    class: className
+}: BarcodeScannerProps): ReactElement | null {
     const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
     const videoElement = useRef<HTMLVideoElement | null>(null);
     const hasDetectedOnce = useRef<boolean>(false);
@@ -81,7 +87,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         }
     }
     return (
-        <div className={classNames("mx-barcode-scanner")}>
+        <div className={classNames("mx-barcode-scanner", className)}>
             <video
                 className={classNames("video")}
                 ref={videoElement}
