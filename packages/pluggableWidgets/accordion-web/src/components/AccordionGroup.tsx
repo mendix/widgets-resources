@@ -1,4 +1,5 @@
-import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { AccordionGroupsDispatch } from "./Accordion";
 
 export interface AccGroup {
     header: ReactNode;
@@ -7,42 +8,44 @@ export interface AccGroup {
     visible: boolean;
 }
 
-export interface AccordionGroupProps extends AccGroup {
+export interface AccordionGroupProps {
+    group: AccGroup;
     collapsible: boolean;
-    expand: () => void;
-    collapse: () => void;
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { header, content, collapsed, visible, collapsible, expand, collapse } = props;
+    const { group, collapsible } = props;
 
-    const previousVisiblePropValue = useRef(visible);
+    const dispatch = useContext(AccordionGroupsDispatch);
+    const previousVisiblePropValue = useRef(group.visible);
 
-    const [divContentMounted, setDivContentMounted] = useState(visible && !collapsed);
+    const [divContentMounted, setDivContentMounted] = useState(group.visible && !group.collapsed);
 
     useEffect(() => {
-        if (visible !== previousVisiblePropValue.current || !collapsed) {
-            previousVisiblePropValue.current = visible;
-            setDivContentMounted(visible && !collapsed);
+        if (group.visible !== previousVisiblePropValue.current || !group.collapsed) {
+            previousVisiblePropValue.current = group.visible;
+            setDivContentMounted(group.visible && !group.collapsed);
         }
-    }, [collapsed, visible, setDivContentMounted]);
+    }, [group, setDivContentMounted]);
 
     const toggleContentVisibility = useCallback(() => {
-        if (collapsed) {
-            expand();
+        if (group.collapsed) {
+            dispatch!({ type: "expand", accordionGroup: group });
         } else {
-            collapse();
+            dispatch!({ type: "collapse", accordionGroup: group });
         }
-    }, [collapsed, expand, collapse]);
+    }, [group, dispatch]);
 
-    if (!visible) {
+    if (!group.visible) {
         return null;
     }
 
     return (
         <section>
-            <header onClick={collapsible ? toggleContentVisibility : undefined}>{header}</header>
-            <div style={{ display: collapsed ? "none" : undefined }}>{divContentMounted ? content : undefined}</div>
+            <header onClick={collapsible ? toggleContentVisibility : undefined}>{group.header}</header>
+            <div style={{ display: group.collapsed ? "none" : undefined }}>
+                {divContentMounted ? group.content : undefined}
+            </div>
         </section>
     );
 }
