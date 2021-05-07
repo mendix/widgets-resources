@@ -81,7 +81,7 @@ export function BarcodeScanner({ onClose, onDetect, showMask }: BarcodeScannerPr
         }
     }
     return (
-        <div className={classNames("widget-barcode-scanner-container")}>
+        <div className={classNames("mx-barcode-scanner")}>
             <video
                 className={classNames("video")}
                 ref={videoElement}
