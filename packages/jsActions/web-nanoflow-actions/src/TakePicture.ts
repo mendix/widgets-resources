@@ -15,6 +15,11 @@
  */
 export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean> {
     // BEGIN USER CODE
+    const CAMERA_POSITION = {
+        BACK_CAMERA: "environment",
+        FRONT_CAMERA: "user"
+    };
+
     const getUserText = prepareLanguage();
 
     if (!picture) {
@@ -88,7 +93,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
         document.body.appendChild(wrapper);
 
-        await startCamera("environment");
+        await startCamera(CAMERA_POSITION.BACK_CAMERA);
 
         const { handler: takePictureHandler, cleanup: secondScreenCleanup } = prepareSecondScreen();
 
@@ -578,7 +583,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 shouldFaceEnvironment = !shouldFaceEnvironment;
             }
 
-            await startCamera(shouldFaceEnvironment ? "environment" : "user");
+            await startCamera(shouldFaceEnvironment ? CAMERA_POSITION.BACK_CAMERA : CAMERA_POSITION.FRONT_CAMERA);
         }
 
         function closeControlHandler() {
