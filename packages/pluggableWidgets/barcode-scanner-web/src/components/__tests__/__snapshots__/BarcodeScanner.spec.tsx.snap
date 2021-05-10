@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Barcode scanner does not show the overlay when the user opts out of it 1`] = `
+<div
+  className="mx-barcode-scanner"
+>
+  <video
+    className="video"
+    onCanPlay={[Function]}
+  />
+  <button
+    className="btn btn-image btn-icon close-button"
+    onClick={[Function]}
+  >
+    <img
+      alt="Close icon for the canvas overlay"
+      className="removeIcon"
+      src="close-button-icon-svg"
+    />
+  </button>
+</div>
+`;
+
+exports[`Barcode scanner shows a loading screen while waiting for the user to give persmission to access the media device 1`] = `
+<div
+  className="mx-barcode-scanner"
+>
+  <video
+    className="video"
+    onCanPlay={[Function]}
+  />
+  <div
+    className="video-canvas"
+  >
+    <div
+      className="canvas-left canvas-background"
+    />
+    <div
+      className="canvas-middle"
+    >
+      <div
+        className="canvas-middle-top canvas-background"
+      />
+      <div
+        className="canvas-middle-middle"
+      >
+        <div
+          className="corner corner-top-left"
+        />
+        <div
+          className="corner corner-top-right"
+        />
+        <div
+          className="corner corner-bottom-right"
+        />
+        <div
+          className="corner corner-bottom-left"
+        />
+      </div>
+      <div
+        className="canvas-middle-bottom canvas-background"
+      />
+    </div>
+    <div
+      className="canvas-right canvas-background"
+    />
+  </div>
+  <button
+    className="btn btn-image btn-icon close-button"
+    onClick={[Function]}
+  >
+    <img
+      alt="Close icon for the canvas overlay"
+      className="removeIcon"
+      src="close-button-icon-svg"
+    />
+  </button>
+</div>
+`;
