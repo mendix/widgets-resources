@@ -1,0 +1,3 @@
+describe("AccordionGroup", () => {
+    it("");
+});
