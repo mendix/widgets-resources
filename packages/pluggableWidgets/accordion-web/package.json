@@ -15,20 +15,19 @@
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "cross-env pluggable-widgets-tools start:server",
-    "dev": "cross-env pluggable-widgets-tools start:web",
-    "build": "cross-env pluggable-widgets-tools build:web",
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "cross-env pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=9.0.0",
-    "cross-env": "^7.0.2"
+    "@mendix/pluggable-widgets-tools": ">=9.0.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0"
