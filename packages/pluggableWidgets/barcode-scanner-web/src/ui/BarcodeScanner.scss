@@ -124,5 +124,5 @@
 // iOS Safari will in certain cases put the top and/or bottom bar on top of the overlay of this widget.
 .mx-dataview-content,
 .mx-scrollcontainer-wrapper:not(.mx-scrollcontainer-nested) {
-    -webkit-overflow-scrolling: auto;
+    -webkit-overflow-scrolling: auto !important;
 }
