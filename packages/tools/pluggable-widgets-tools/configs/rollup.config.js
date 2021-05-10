@@ -105,7 +105,7 @@ export default async args => {
                     })
                 ],
                 onwarn: warning => {
-                    if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /'Platform'/.test(warning.message)) {
+                    if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /('|")Platform('|")/.test(warning.message)) {
                         return;
                     }
                     onwarn(warning);
