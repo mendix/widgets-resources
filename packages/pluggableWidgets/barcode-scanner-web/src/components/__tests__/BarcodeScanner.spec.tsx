@@ -1,7 +1,7 @@
 import { mount, shallow } from "enzyme";
 import { createElement } from "react";
 import * as zxing from "@zxing/library";
-import { BarcodeScanner } from "../BarcodeScanner";
+import { BarcodeScanner, BarcodeScannerOverlay } from "../BarcodeScanner";
 import * as mediaStreamFunctions from "../../hooks/useMediaStream";
 import { act } from "react-dom/test-utils";
 
@@ -194,5 +194,9 @@ describe("Barcode scanner", () => {
                 "Error in barcode scanner: an unexpected error occurred while detecting a barcode in the camera media stream."
             );
         });
+    });
+
+    it("the overlay structure should be correct", () => {
+        expect(shallow(<BarcodeScannerOverlay class="" showMask />)).toMatchSnapshot();
     });
 });

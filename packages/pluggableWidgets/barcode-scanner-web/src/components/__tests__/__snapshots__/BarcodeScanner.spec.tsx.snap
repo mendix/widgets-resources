@@ -1,34 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Barcode scanner does not show the overlay when the user opts out of it 1`] = `
-<div
-  className="mx-barcode-scanner"
+<BarcodeScannerOverlay
+  class=""
+  onClose={[Function]}
+  showMask={false}
 >
   <video
     className="video"
     onCanPlay={[Function]}
   />
-  <button
-    className="btn btn-image btn-icon close-button"
-    onClick={[Function]}
-  >
-    <img
-      alt="Close icon for the canvas overlay"
-      className="removeIcon"
-      src="close-button-icon-svg"
-    />
-  </button>
-</div>
+</BarcodeScannerOverlay>
 `;
 
 exports[`Barcode scanner shows a loading screen while waiting for the user to give persmission to access the media device 1`] = `
-<div
-  className="mx-barcode-scanner"
+<BarcodeScannerOverlay
+  class=""
+  onClose={[Function]}
+  showMask={true}
 >
   <video
     className="video"
     onCanPlay={[Function]}
   />
+</BarcodeScannerOverlay>
+`;
+
+exports[`Barcode scanner the overlay structure should be correct 1`] = `
+<div
+  className="mx-barcode-scanner"
+>
   <div
     className="video-canvas"
   >
@@ -67,7 +68,6 @@ exports[`Barcode scanner shows a loading screen while waiting for the user to gi
   </div>
   <button
     className="btn btn-image btn-icon close-button"
-    onClick={[Function]}
   >
     <img
       alt="Close icon for the canvas overlay"
