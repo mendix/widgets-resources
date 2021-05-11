@@ -15,11 +15,11 @@ type AccordionGroupsReducerAction =
     | { type: "sync"; groups: AccGroup[] }
     | { type: "expand" | "collapse"; group: AccGroup };
 
-function getAccordionGroupsReducer(
-    singleExpandedGroup?: boolean
+export function getAccordionGroupsReducer(
+    expand: "single" | "multiple" | "all"
 ): (state: AccGroup[], action: AccordionGroupsReducerAction) => AccGroup[] {
     return (state: AccGroup[], action: AccordionGroupsReducerAction): AccGroup[] => {
-        if (action.type === "sync" || singleExpandedGroup) {
+        if (action.type === "sync" || expand === "single") {
             const newState = action.type === "sync" ? action.groups : state;
 
             return newState.map((group, index) => {
@@ -59,7 +59,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
     const previousGroupsPropValue = useRef(groups);
 
     const [accordionGroups, accordionGroupsDispatch] = useReducer(
-        getAccordionGroupsReducer(singleExpandedGroup), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
+        getAccordionGroupsReducer(collapsible ? (singleExpandedGroup ? "single" : "multiple") : "all"), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
         groups.map(group => (collapsible ? { ...group, collapsed: true } : { ...group, collapsed: false }))
     );
 
