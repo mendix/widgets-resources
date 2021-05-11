@@ -1,7 +1,7 @@
 const { join } = require("path");
 const { existsSync, mkdirSync } = require("fs");
 const debug = process.env.DEBUG;
-const browserName = process.env.BROWSER || "firefox";
+const browserName = process.env.BROWSER || "chrome";
 const url = process.env.URL || "http://localhost:8080/";
 const serverIp = process.env.SERVER_IP || "127.0.0.1";
 const serverPort = process.env.SERVER_PORT || 4444;
@@ -23,8 +23,8 @@ exports.config = {
     capabilities: [
         {
             browserName,
-            "moz:firefoxOptions": {
-                args: ["-headless"]
+            "goog:chromeOptions": {
+                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"]
             }
         }
     ],

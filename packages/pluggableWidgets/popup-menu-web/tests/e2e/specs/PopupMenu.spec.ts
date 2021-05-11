@@ -12,8 +12,7 @@ describe("Popup-menu-web", () => {
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton10");
             button.click();
-            popupmenu.waitForExist();
-            browser.pause(1000);
+            popupmenu.waitForDisplayed({ timeout: 5000 });
             browser.saveElement(popupmenu, "popUpMenuTopLeft", { removeElements: [sprintrFeedback] });
             expect(browser.checkElement(popupmenu, "popUpMenuTopLeft", { removeElements: [sprintrFeedback] })).toEqual(
                 0
@@ -114,7 +113,7 @@ describe("Popup-menu-web", () => {
                 0
             );
         });
-        it("shows a new menu list when on hover is triggered", () => {
+        xit("shows a new menu list when on hover is triggered", () => {
             const button = page.getWidget("actionButton1");
             const buttonHover = page.getWidget("actionButton25");
             button.click();
