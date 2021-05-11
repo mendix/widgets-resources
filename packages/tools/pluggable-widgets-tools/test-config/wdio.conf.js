@@ -23,8 +23,8 @@ exports.config = {
     capabilities: [
         {
             browserName,
-            "goog:chromeOptions": {
-                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"]
+            "moz:firefoxOptions": {
+                args: ["-headless"]
             }
         }
     ],
