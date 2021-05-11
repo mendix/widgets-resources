@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, ReactNode, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal";
 import { useCodeScanner, CodeScannerHookError } from "../hooks/useCodeScanner";
@@ -12,6 +12,7 @@ export interface BarcodeScannerProps {
     onDetect?: (data: string) => void;
     showMask: boolean;
     class: string;
+    preview?: boolean;
 }
 
 function getErrorMessage(errorEnum: MediaStreamHookError | CodeScannerHookError | null): string | null {
@@ -26,6 +27,45 @@ function getErrorMessage(errorEnum: MediaStreamHookError | CodeScannerHookError 
         default:
             return null;
     }
+}
+
+interface BarcodeScannerOverlayProps {
+    onClose?: () => void;
+    showMask: boolean;
+    class: string;
+    children?: ReactNode;
+}
+
+export function BarcodeScannerOverlay({
+    children,
+    class: className,
+    showMask,
+    onClose
+}: BarcodeScannerOverlayProps): ReactElement {
+    return (
+        <div className={classNames("mx-barcode-scanner", className)}>
+            {children}
+            {showMask ? (
+                <div className={classNames("video-canvas")}>
+                    <div className={classNames("canvas-left", "canvas-background")} />
+                    <div className={classNames("canvas-middle")}>
+                        <div className={classNames("canvas-middle-top", "canvas-background")} />
+                        <div className={classNames("canvas-middle-middle")}>
+                            <div className={classNames("corner", "corner-top-left")} />
+                            <div className={classNames("corner", "corner-top-right")} />
+                            <div className={classNames("corner", "corner-bottom-right")} />
+                            <div className={classNames("corner", "corner-bottom-left")} />
+                        </div>
+                        <div className={classNames("canvas-middle-bottom", "canvas-background")} />
+                    </div>
+                    <div className={classNames("canvas-right", "canvas-background")} />
+                </div>
+            ) : null}
+            <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose}>
+                <img src={closeIconSvg} className={classNames("removeIcon")} alt="Close icon for the canvas overlay" />
+            </button>
+        </div>
+    );
 }
 
 export function BarcodeScanner({
@@ -87,7 +127,7 @@ export function BarcodeScanner({
         }
     }
     return (
-        <div className={classNames("mx-barcode-scanner", className)}>
+        <BarcodeScannerOverlay class={className} showMask={showMask} onClose={onClose || onCloseOverlay}>
             <video
                 className={classNames("video")}
                 ref={videoElement}
@@ -97,25 +137,6 @@ export function BarcodeScanner({
                     }
                 }}
             />
-            {showMask ? (
-                <div className={classNames("video-canvas")}>
-                    <div className={classNames("canvas-left", "canvas-background")} />
-                    <div className={classNames("canvas-middle")}>
-                        <div className={classNames("canvas-middle-top", "canvas-background")} />
-                        <div className={classNames("canvas-middle-middle")}>
-                            <div className={classNames("corner", "corner-top-left")} />
-                            <div className={classNames("corner", "corner-top-right")} />
-                            <div className={classNames("corner", "corner-bottom-right")} />
-                            <div className={classNames("corner", "corner-bottom-left")} />
-                        </div>
-                        <div className={classNames("canvas-middle-bottom", "canvas-background")} />
-                    </div>
-                    <div className={classNames("canvas-right", "canvas-background")} />
-                </div>
-            ) : null}
-            <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose || onCloseOverlay}>
-                <img src={closeIconSvg} className={classNames("removeIcon")} alt="Close icon for the canvas overlay" />
-            </button>
-        </div>
+        </BarcodeScannerOverlay>
     );
 }
