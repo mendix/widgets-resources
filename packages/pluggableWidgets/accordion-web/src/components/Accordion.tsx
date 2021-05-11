@@ -8,7 +8,7 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
     id: string;
     groups: AccGroup[];
     collapsible: boolean;
-    singleExpandedGroup: boolean;
+    singleExpandedGroup?: boolean;
 }
 
 type AccordionGroupsReducerAction =
@@ -16,9 +16,13 @@ type AccordionGroupsReducerAction =
     | { type: "expand" | "collapse"; group: AccGroup };
 
 function getAccordionGroupsReducer(
-    singleExpandedGroup: boolean
+    singleExpandedGroup?: boolean
 ): (state: AccGroup[], action: AccordionGroupsReducerAction) => AccGroup[] {
     return (state: AccGroup[], action: AccordionGroupsReducerAction): AccGroup[] => {
+        if (singleExpandedGroup === undefined && action.type !== "sync") {
+            return state;
+        }
+
         if (action.type === "sync" || singleExpandedGroup) {
             const newState = action.type === "sync" ? action.groups : state;
 
@@ -60,7 +64,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
 
     const [accordionGroups, accordionGroupsDispatch] = useReducer(
         getAccordionGroupsReducer(singleExpandedGroup), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
-        groups.map(group => ({ ...group, collapsed: true }))
+        groups.map(group => (collapsible ? { ...group, collapsed: true } : { ...group, collapsed: false }))
     );
 
     if (groups !== previousGroupsPropValue.current) {

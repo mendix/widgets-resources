@@ -50,7 +50,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             tabIndex={tabIndex}
             groups={accordionGroups}
             collapsible={collapsible}
-            singleExpandedGroup={collapseBehavior === "singleExpanded"}
+            singleExpandedGroup={collapsible ? collapseBehavior === "singleExpanded" : undefined}
         />
     );
 }
