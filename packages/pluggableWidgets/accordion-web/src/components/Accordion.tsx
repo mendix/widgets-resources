@@ -4,7 +4,7 @@ import AccordionGroup, { AccGroup } from "./AccordionGroup";
 
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 
-export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
+interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
     id: string;
     groups: AccGroup[];
     collapsible: boolean;
@@ -19,10 +19,6 @@ function getAccordionGroupsReducer(
     singleExpandedGroup?: boolean
 ): (state: AccGroup[], action: AccordionGroupsReducerAction) => AccGroup[] {
     return (state: AccGroup[], action: AccordionGroupsReducerAction): AccGroup[] => {
-        if (singleExpandedGroup === undefined && action.type !== "sync") {
-            return state;
-        }
-
         if (action.type === "sync" || singleExpandedGroup) {
             const newState = action.type === "sync" ? action.groups : state;
 
@@ -73,13 +69,11 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
     }
 
     const renderedGroups = useMemo(() => {
-        return accordionGroups.map((group, index) => (
-            <AccordionGroup key={index} group={group} collapsible={collapsible} />
-        ));
-    }, [accordionGroups, collapsible]);
+        return accordionGroups.map((group, index) => <AccordionGroup key={index} group={group} />);
+    }, [accordionGroups]);
 
     return (
-        <AccordionGroupsDispatch.Provider value={accordionGroupsDispatch}>
+        <AccordionGroupsDispatch.Provider value={collapsible ? accordionGroupsDispatch : undefined}>
             <div id={id} className={classNames} style={style} tabIndex={tabIndex}>
                 {renderedGroups}
             </div>

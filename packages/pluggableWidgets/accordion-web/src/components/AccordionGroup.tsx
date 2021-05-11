@@ -10,11 +10,10 @@ export interface AccGroup {
 
 export interface AccordionGroupProps {
     group: AccGroup;
-    collapsible: boolean;
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { group, collapsible } = props;
+    const { group } = props;
 
     const dispatch = useContext(AccordionGroupsDispatch);
     const previousVisiblePropValue = useRef(group.visible);
@@ -42,8 +41,8 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     return (
         <section>
-            <header onClick={collapsible ? toggleContentVisibility : undefined}>{group.header}</header>
-            <div style={{ display: group.collapsed ? "none" : undefined }}>
+            <header onClick={dispatch ? toggleContentVisibility : undefined}>{group.header}</header>
+            <div style={{ display: dispatch && group.collapsed ? "none" : undefined }}>
                 {divContentMounted ? group.content : undefined}
             </div>
         </section>
