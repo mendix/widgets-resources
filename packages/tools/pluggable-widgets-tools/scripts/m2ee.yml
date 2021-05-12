@@ -31,4 +31,4 @@ logging:
       max_size: 10485760
       max_rotation: 10
 mxnode:
-    mxjar_repo: /opt/mendix
+    mxjar_repo: /var/opt/runtime
