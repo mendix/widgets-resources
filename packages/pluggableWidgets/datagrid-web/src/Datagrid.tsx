@@ -42,8 +42,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const customFiltersState = props.columns.map(() => useState<FilterFunction>());
 
     const filters = customFiltersState
-        .map(([customFilter]) => customFilter && customFilter.getFilterCondition?.())
-        .filter(Boolean) as FilterCondition[];
+        .map(([customFilter]) => customFilter?.getFilterCondition?.())
+        .filter((filter): filter is FilterCondition => filter !== undefined);
 
     if (filters.length > 0) {
         props.datasource.setFilter(filters.length > 1 ? and(...filters) : filters[0]);

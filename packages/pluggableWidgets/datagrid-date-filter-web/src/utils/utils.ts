@@ -5,7 +5,7 @@
  * @param minutes
  * @param seconds
  */
-export function chanteTimeToMidnight(date: Date): Date {
+export function changeTimeToMidnight(date: Date): Date {
     const newDate = new Date(date.getTime());
     newDate.setHours(0);
     newDate.setMinutes(0);

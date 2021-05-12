@@ -74,6 +74,7 @@ exports[`Table renders the structure correctly 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -1180,7 +1181,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
           Object {
             "Cell": [Function],
             "Footer": [Function],
-            "Header": "[Empty caption]",
+            "Header": "",
             "accessor": [Function],
             "alignment": "center",
             "canDrag": false,
@@ -1227,13 +1228,14 @@ exports[`Table renders the structure correctly for preview when no header is pro
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
             Object {
               "Cell": [Function],
               "Footer": [Function],
-              "Header": "[Empty caption]",
+              "Header": "",
               "accessor": [Function],
               "alignment": "center",
               "canDrag": false,
@@ -1279,7 +1281,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
               Object {
                 "Cell": [Function],
                 "Footer": [Function],
-                "Header": "[Empty caption]",
+                "Header": "",
                 "accessor": [Function],
                 "alignment": "center",
                 "canDrag": false,
@@ -1320,7 +1322,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
               "column": Object {
                 "Cell": [Function],
                 "Footer": [Function],
-                "Header": "[Empty caption]",
+                "Header": "",
                 "accessor": [Function],
                 "alignment": "center",
                 "canDrag": false,
@@ -1388,7 +1390,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
             Object {
               "Cell": [Function],
               "Footer": [Function],
-              "Header": "[Empty caption]",
+              "Header": "",
               "accessor": [Function],
               "alignment": "center",
               "canDrag": false,
@@ -1427,7 +1429,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
               Object {
                 "Cell": [Function],
                 "Footer": [Function],
-                "Header": "[Empty caption]",
+                "Header": "",
                 "accessor": [Function],
                 "alignment": "center",
                 "canDrag": false,
@@ -1478,7 +1480,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
               Object {
                 "Cell": [Function],
                 "Footer": [Function],
-                "Header": "[Empty caption]",
+                "Header": "",
                 "accessor": [Function],
                 "alignment": "center",
                 "canDrag": false,
@@ -1521,7 +1523,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -1567,7 +1569,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -1636,7 +1638,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                   Object {
                     "Cell": [Function],
                     "Footer": [Function],
-                    "Header": "[Empty caption]",
+                    "Header": "",
                     "accessor": [Function],
                     "alignment": "center",
                     "canDrag": false,
@@ -1688,7 +1690,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                   Object {
                     "Cell": [Function],
                     "Footer": [Function],
-                    "Header": "[Empty caption]",
+                    "Header": "",
                     "accessor": [Function],
                     "alignment": "center",
                     "canDrag": false,
@@ -1730,7 +1732,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
               Object {
                 "Cell": [Function],
                 "Footer": [Function],
-                "Header": "[Empty caption]",
+                "Header": "",
                 "accessor": [Function],
                 "alignment": "center",
                 "canDrag": false,
@@ -1773,7 +1775,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -1819,7 +1821,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -1900,7 +1902,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                   "column": Object {
                     "Cell": [Function],
                     "Footer": [Function],
-                    "Header": "[Empty caption]",
+                    "Header": "",
                     "accessor": [Function],
                     "alignment": "center",
                     "canDrag": false,
@@ -1946,7 +1948,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                   "column": Object {
                     "Cell": [Function],
                     "Footer": [Function],
-                    "Header": "[Empty caption]",
+                    "Header": "",
                     "accessor": [Function],
                     "alignment": "center",
                     "canDrag": false,
@@ -2014,7 +2016,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -2060,7 +2062,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -2128,7 +2130,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -2174,7 +2176,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
                     "column": Object {
                       "Cell": [Function],
                       "Footer": [Function],
-                      "Header": "[Empty caption]",
+                      "Header": "",
                       "accessor": [Function],
                       "alignment": "center",
                       "canDrag": false,
@@ -2260,7 +2262,7 @@ exports[`Table renders the structure correctly for preview when no header is pro
               Object {
                 "Cell": [Function],
                 "Footer": [Function],
-                "Header": "[Empty caption]",
+                "Header": "",
                 "accessor": [Function],
                 "alignment": "center",
                 "canDrag": false,
@@ -2379,6 +2381,7 @@ exports[`Table renders the structure correctly with column alignments 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -2509,6 +2512,7 @@ exports[`Table renders the structure correctly with column alignments 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -6319,6 +6323,7 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -7531,6 +7536,7 @@ exports[`Table renders the structure correctly with dragging 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -8683,6 +8689,7 @@ exports[`Table renders the structure correctly with dynamic row class 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -9835,6 +9842,7 @@ exports[`Table renders the structure correctly with empty placeholder 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -10990,6 +10998,7 @@ exports[`Table renders the structure correctly with filtering 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -12205,6 +12214,7 @@ exports[`Table renders the structure correctly with header wrapper 1`] = `
           setDragOver={[Function]}
           setIsDragging={[Function]}
           setSortBy={[Function]}
+          sortBy={Array []}
           sortable={false}
           visibleColumns={
             Array [
@@ -13358,6 +13368,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -14556,6 +14567,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -15718,6 +15730,7 @@ exports[`Table renders the structure correctly with resizing 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={false}
         visibleColumns={
           Array [
@@ -16870,6 +16883,7 @@ exports[`Table renders the structure correctly with sorting 1`] = `
         setDragOver={[Function]}
         setIsDragging={[Function]}
         setSortBy={[Function]}
+        sortBy={Array []}
         sortable={true}
         visibleColumns={
           Array [

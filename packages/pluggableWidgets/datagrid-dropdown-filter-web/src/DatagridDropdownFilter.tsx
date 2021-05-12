@@ -1,11 +1,11 @@
 import { createElement, ReactElement } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
 import { ValueStatus, ListAttributeValue } from "mendix";
-import { FilterComponent, Option } from "./components/FilterComponent";
+import { FilterComponent, FilterOption } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@mendix/piw-utils-internal";
 
-import { attribute as attributeFunction, equals, literal, or } from "mendix/filters/builders";
+import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
@@ -49,7 +49,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         name={props.name}
                         options={parsedOptions}
                         tabIndex={props.tabIndex}
-                        updateFilters={(values: Option[]): void =>
+                        updateFilters={(values: FilterOption[]): void =>
                             filterDispatcher({
                                 getFilterCondition: () => getFilterCondition(attribute, values)
                             })
@@ -69,12 +69,12 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
         : null;
 }
 
-function getFilterCondition(attribute: ListAttributeValue, values: Option[]): FilterCondition | undefined {
-    if (!attribute || !attribute.filterable || values.length === 0) {
+function getFilterCondition(listAttribute: ListAttributeValue, values: FilterOption[]): FilterCondition | undefined {
+    if (!listAttribute || !listAttribute.filterable || values.length === 0) {
         return undefined;
     }
 
-    const filterAttribute = attributeFunction(attribute.id);
+    const filterAttribute = attribute(listAttribute.id);
 
     if (values.length > 1) {
         return or(...values.map(filter => equals(filterAttribute, literal(filter.value))));

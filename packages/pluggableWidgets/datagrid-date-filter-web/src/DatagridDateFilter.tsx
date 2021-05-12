@@ -8,19 +8,10 @@ import * as locales from "date-fns/locale";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@mendix/piw-utils-internal";
 
-import { chanteTimeToMidnight } from "./utils/utils";
-import { addDays, subDays } from "date-fns";
+import { changeTimeToMidnight } from "./utils/utils";
+import { addDays } from "date-fns";
 
-import {
-    and,
-    attribute as attributeFunction,
-    greaterThan,
-    greaterThanOrEqual,
-    lessThan,
-    lessThanOrEqual,
-    literal,
-    or
-} from "mendix/filters/builders";
+import { and, attribute, greaterThanOrEqual, lessThan, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
 
@@ -94,39 +85,40 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
 }
 
 function getFilterCondition(
-    attribute: ListAttributeValue,
+    listAttribute: ListAttributeValue,
     value: Date | null,
     type: DefaultFilterEnum
 ): FilterCondition | undefined {
-    if (!attribute || !attribute.filterable || !value) {
+    if (!listAttribute || !listAttribute.filterable || !value) {
         return undefined;
     }
 
-    const filterAttribute = attributeFunction(attribute.id);
+    const filterAttribute = attribute(listAttribute.id);
+    const dateValue = changeTimeToMidnight(value);
     switch (type) {
         case "greater":
-            // > Date at midnight
-            return greaterThan(filterAttribute, literal(chanteTimeToMidnight(value)));
+            // >= Day +1 at midnight
+            return greaterThanOrEqual(filterAttribute, literal(addDays(dateValue, 1)));
         case "greaterEqual":
-            // > day -1 at midnight
-            return greaterThan(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
+            // >= day at midnight
+            return greaterThanOrEqual(filterAttribute, literal(dateValue));
         case "equal":
             // >= day at midnight and < day +1 midnight
             return and(
-                greaterThanOrEqual(filterAttribute, literal(chanteTimeToMidnight(value))),
-                lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
+                greaterThanOrEqual(filterAttribute, literal(dateValue)),
+                lessThan(filterAttribute, literal(addDays(dateValue, 1)))
             );
         case "notEqual":
             // < day at midnight or >= day +1 at midnight
             return or(
-                lessThan(filterAttribute, literal(chanteTimeToMidnight(value))),
-                greaterThanOrEqual(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)))
+                lessThan(filterAttribute, literal(dateValue)),
+                greaterThanOrEqual(filterAttribute, literal(addDays(dateValue, 1)))
             );
         case "smaller":
-            // <= day -1 at midnight
-            return lessThanOrEqual(filterAttribute, literal(subDays(chanteTimeToMidnight(value), 1)));
+            // < day at midnight
+            return lessThan(filterAttribute, literal(dateValue));
         case "smallerEqual":
             // < day +1 at midnight
-            return lessThan(filterAttribute, literal(addDays(chanteTimeToMidnight(value), 1)));
+            return lessThan(filterAttribute, literal(addDays(dateValue, 1)));
     }
 }

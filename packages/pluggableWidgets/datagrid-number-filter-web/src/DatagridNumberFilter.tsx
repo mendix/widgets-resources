@@ -7,7 +7,7 @@ import { Alert } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 
 import {
-    attribute as attributeFunction,
+    attribute,
     equals,
     greaterThan,
     greaterThanOrEqual,
@@ -71,28 +71,22 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
 }
 
 function getFilterCondition(
-    attribute: ListAttributeValue,
+    listAttribute: ListAttributeValue,
     value: Big | undefined,
     type: DefaultFilterEnum
 ): FilterCondition | undefined {
-    if (!attribute || !attribute.filterable || !value) {
+    if (!listAttribute || !listAttribute.filterable || !value) {
         return undefined;
     }
 
-    const filterAttribute = attributeFunction(attribute.id);
+    const filters = {
+        greater: greaterThan,
+        greaterEqual: greaterThanOrEqual,
+        equal: equals,
+        notEqual,
+        smaller: lessThan,
+        smallerEqual: lessThanOrEqual
+    };
 
-    switch (type) {
-        case "greater":
-            return greaterThan(filterAttribute, literal(value));
-        case "greaterEqual":
-            return greaterThanOrEqual(filterAttribute, literal(value));
-        case "equal":
-            return equals(filterAttribute, literal(value));
-        case "notEqual":
-            return notEqual(filterAttribute, literal(value));
-        case "smaller":
-            return lessThan(filterAttribute, literal(value));
-        case "smallerEqual":
-            return lessThanOrEqual(filterAttribute, literal(value));
-    }
+    return filters[type](attribute(listAttribute.id), literal(value));
 }
