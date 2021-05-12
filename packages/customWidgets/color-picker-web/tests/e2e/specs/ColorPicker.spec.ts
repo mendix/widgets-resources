@@ -6,9 +6,11 @@ describe("Color picker", () => {
         const id = ".mx-name-colorPicker17 input";
         colorFormatPage.open();
         colorFormatPage.skethInput.waitForDisplayed();
+        colorFormatPage.rgbTab.waitForEnabled();
         colorFormatPage.rgbTab.click();
         colorFormatPage.circleColorPicker.waitForDisplayed();
         const initialColorValue = $(id).getValue();
+        colorFormatPage.circleColorPickerButton.waitForEnabled();
         colorFormatPage.circleColorPickerButton.click();
         colorFormatPage.circleColorPickerButtonValue.waitForEnabled();
         const newColorValue = $(id).getValue();

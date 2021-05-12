@@ -4,6 +4,7 @@ import FieldsetWidget from "../objects/Fieldset.widget";
 describe("Fieldset", () => {
     beforeAll(() => {
         page.open("p/configuration-combinations");
+        browser.setWindowRect(0, 0, 1200, 900);
     });
 
     it("renders content and legend", () => {

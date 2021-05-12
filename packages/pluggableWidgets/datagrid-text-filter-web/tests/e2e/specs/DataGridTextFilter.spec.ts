@@ -9,7 +9,7 @@ describe("datagrid-text-filter-web", () => {
     describe("text filtering", () => {
         it("shows correct result", () => {
             const grid = page.getWidget("datagrid1");
-            const input = page.getElement(".filter-input", grid);
+            const input = page.waitForElement(".filter-input", grid);
             input.setValue("test3");
             grid.waitUntil(
                 () => {
