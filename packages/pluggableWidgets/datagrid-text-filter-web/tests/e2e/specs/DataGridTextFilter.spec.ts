@@ -10,6 +10,7 @@ describe("datagrid-text-filter-web", () => {
         it("shows correct result", () => {
             const grid = page.getWidget("datagrid1");
             const input = page.waitForElement(".filter-input", grid);
+            input.waitForEnabled();
             input.setValue("test3");
             grid.waitUntil(
                 () => {
