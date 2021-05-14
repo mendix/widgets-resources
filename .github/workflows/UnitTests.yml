@@ -18,6 +18,7 @@ jobs:
               with:
                 global_files: |
                   !packages/**/*
+                  !configs/e2e/mendix-versions.json
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
