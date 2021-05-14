@@ -3,7 +3,6 @@ const findFreePort = require("find-free-port");
 const { access, readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
-const semverCompare = require("semver/functions/rcompare");
 const { cat, cp, ls, mkdir } = require("shelljs");
 const nodeIp = require("ip");
 
@@ -57,6 +56,17 @@ async function main() {
         );
     }
 
+    const existingRuntimeImages = execSync(`docker image ls -q mxruntime:${mendixVersion}`).toString().trim();
+    if (!existingRuntimeImages) {
+        console.log(`Creating new runtime docker image...`);
+        execSync(
+            `docker build -f ${join(__dirname, "runtime.Dockerfile")} ` +
+                `--build-arg MENDIX_VERSION=${mendixVersion} ` +
+                `-t mxruntime:${mendixVersion} ${__dirname}`,
+            { stdio: "inherit" }
+        );
+    }
+
     // Build testProject via mxbuild
     const projectFile = ls("tests/testProject/*.mpr").toString();
     execSync(
@@ -71,8 +81,8 @@ async function main() {
     const freePort = await findFreePort(3000);
     const runtimeContainerId = execSync(
         `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
-            `-u root -e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
-            `mendix/runtime-base:${mendixVersion}-rhel /shared/runtime.sh`
+            `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
+            `--rm mxruntime:${mendixVersion} /shared/runtime.sh`
     )
         .toString()
         .trim();
@@ -141,26 +151,22 @@ async function getMendixVersion() {
         return process.env.MENDIX_VERSION;
     }
     try {
-        const dockerTagsResponse = await fetch(
-            "https://registry.hub.docker.com/v1/repositories/mendix/runtime-base/tags"
+        const mendixVersions = await fetch(
+            "https://raw.githubusercontent.com/mendix/widgets-resources/master/configs/e2e/mendix-versions.json"
         );
 
-        let dockerTagsJson = await dockerTagsResponse.json();
+        const mendixVersionsJson = await mendixVersions.json();
 
-        if (targetMendixVersion) {
-            dockerTagsJson = dockerTagsJson.filter(r => r.name.startsWith(targetMendixVersion));
+        if (targetMendixVersion && targetMendixVersion in mendixVersionsJson) {
+            mendixVersion = mendixVersionsJson[targetMendixVersion];
+        } else {
+            mendixVersion = mendixVersionsJson.latest;
         }
-
-        const runtimeVersions = dockerTagsJson.map(r => r.name.split("-").shift());
-        runtimeVersions.sort((a, b) =>
-            semverCompare(a.replace(/^(\d+\.\d+\.\d+).*/, "$1"), b.replace(/^(\d+\.\d+\.\d+).*/, "$1"))
-        );
-        mendixVersion = runtimeVersions[0];
     } catch (e) {
-        throw new Error("Couldn't reach hub.docker.com. Make sure you are connected to internet.");
+        throw new Error("Couldn't reach github.com. Make sure you are connected to internet.");
     }
     if (!mendixVersion) {
-        throw new Error("Couldn't retrieve Mendix version from hub.docker.com. Try again later.");
+        throw new Error("Couldn't retrieve Mendix version from github.com. Try again later.");
     }
 
     return mendixVersion;
