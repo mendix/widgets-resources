@@ -17,8 +17,7 @@ jobs:
               uses: softprops/diffset@v1
               with:
                 global_files: |
-                  !packages/**/*
-                  !configs/e2e/mendix-versions.json
+                  !{packages/**/*,configs/e2e/*.json}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
