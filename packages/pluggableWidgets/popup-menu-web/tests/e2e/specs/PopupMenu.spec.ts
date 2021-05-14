@@ -113,7 +113,7 @@ describe("Popup-menu-web", () => {
                 0
             );
         });
-        xit("shows a new menu list when on hover is triggered", () => {
+        it("shows a new menu list when on hover is triggered", () => {
             const button = page.getWidget("actionButton1");
             const buttonHover = page.getWidget("actionButton25");
             button.click();
