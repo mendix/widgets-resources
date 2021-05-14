@@ -480,7 +480,10 @@ export default class CalendarContainer extends Component<Container.CalendarConta
 
     private handleOnChangeEvent = (eventInfo: Container.EventInfo) => {
         const { events } = this.state;
-        const eventPosition = events.indexOf(eventInfo.event);
+        const eventPosition = events.findIndex(value => value.guid === eventInfo.event.guid);
+        if (eventPosition === -1) {
+            return;
+        }
         const updatedEvent: CalendarEvent = {
             title: eventInfo.event.title,
             allDay: eventInfo.event.allDay,
