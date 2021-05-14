@@ -80,7 +80,7 @@ async function main() {
     // Spin up the standalone selenium firefox
     const freePortFirefox = await findFreePort(4444);
     const firefoxContainerId = execSync(
-        `docker run -d -p ${freePortFirefox}:4444 -e START_XVFB=false -v /dev/shm:/dev/shm selenium/standalone-chrome`
+        `docker run -d -p ${freePortFirefox}:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox`
     )
         .toString()
         .trim();
