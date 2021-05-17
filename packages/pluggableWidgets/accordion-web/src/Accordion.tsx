@@ -6,12 +6,10 @@ import { AccordionContainerProps } from "../typings/AccordionProps";
 import { AccGroup } from "./components/AccordionGroup";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
-    const { class: className, name, style, tabIndex, groups, collapsible, collapseBehavior } = props;
-
     const accordionGroups: AccGroup[] | undefined = useMemo(() => {
         const result = [];
 
-        for (const group of groups) {
+        for (const group of props.groups) {
             const visible = group.visible.value;
 
             if (visible === undefined) {
@@ -36,7 +34,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
         }
 
         return result;
-    }, [groups]);
+    }, [props.groups]);
 
     if (!accordionGroups) {
         return null;
@@ -44,13 +42,13 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
 
     return (
         <AccordionComponent
-            id={name}
-            class={className}
-            style={style}
-            tabIndex={tabIndex}
+            id={props.name}
+            class={props.class}
+            style={props.style}
+            tabIndex={props.tabIndex}
             groups={accordionGroups}
-            collapsible={collapsible}
-            singleExpandedGroup={collapsible ? collapseBehavior === "singleExpanded" : undefined}
+            collapsible={props.collapsible}
+            singleExpandedGroup={props.collapsible ? props.collapseBehavior === "singleExpanded" : undefined}
         />
     );
 }
