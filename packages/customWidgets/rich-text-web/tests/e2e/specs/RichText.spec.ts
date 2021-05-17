@@ -14,7 +14,7 @@ describe("RichText", () => {
 
     it("content is updated by attribute", () => {
         const textAreaBubbleBasic = page.waitForElement(".mx-name-text_area_bubble_basic");
-
+        browser.pause(1000);
         textAreaBubbleBasic.$(".form-control").setValue(testValue);
         richTextBubbleBasic.element.click();
 

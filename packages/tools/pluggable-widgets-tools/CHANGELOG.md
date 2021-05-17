@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- Update webdriverio package to version 7.
+- Update Mendix package to version 9.1.
+
 ## 9.0.3 - 2021-04-26
 
 ### Changed

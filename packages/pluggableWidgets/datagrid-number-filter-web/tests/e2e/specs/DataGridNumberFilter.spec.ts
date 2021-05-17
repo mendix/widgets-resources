@@ -9,7 +9,8 @@ describe("datagrid-number-filter-web", () => {
     describe("number filtering", () => {
         it("shows correct result", () => {
             const grid = page.getWidget("datagrid1");
-            const input = page.getElement(".filter-input", grid);
+            const input = page.waitForElement(".filter-input", grid);
+            input.waitForEnabled();
             input.setValue("12");
             grid.waitUntil(
                 () => {
