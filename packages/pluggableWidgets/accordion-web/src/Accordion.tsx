@@ -1,4 +1,4 @@
-import { createElement, ReactElement, ReactNode, useMemo } from "react";
+import { createElement, ReactElement, useMemo } from "react";
 
 import AccordionComponent from "./components/Accordion";
 
@@ -7,33 +7,15 @@ import { AccGroup } from "./components/AccordionGroup";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const accordionGroups: AccGroup[] | undefined = useMemo(() => {
-        const result = [];
-
-        for (const group of props.groups) {
-            const visible = group.visible.value;
-
-            if (visible === undefined) {
-                return undefined;
-            }
-
-            let header: ReactNode;
-
-            if (group.headerRenderMode === "text") {
-                const headerText = group.headerText.value;
-
-                if (headerText === undefined) {
-                    return undefined;
-                }
-
-                header = <h3>{headerText}</h3>;
-            } else {
-                header = group.headerContent;
-            }
-
-            result.push({ header, content: group.content, visible });
+        if (props.groups.some(group => group.visible.value === undefined || group.headerText.value === undefined)) {
+            return undefined;
         }
 
-        return result;
+        return props.groups.map(group => ({
+            header: group.headerRenderMode === "text" ? <h3>{group.headerText.value}</h3> : group.headerContent,
+            content: group.content,
+            visible: group.visible.value!
+        }));
     }, [props.groups]);
 
     if (!accordionGroups) {

@@ -14,18 +14,16 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
 export const AccordionGroupsDispatch = createContext<Dispatch<AccordionGroupsReducerAction> | undefined>(undefined);
 
 export default function Accordion(props: AccordionProps): ReactElement | null {
-    const { id, class: classNames, style, tabIndex, groups, collapsible, singleExpandedGroup } = props;
-
-    const previousGroupsPropValue = useRef(groups);
+    const previousGroupsPropValue = useRef(props.groups);
 
     const [accordionGroups, accordionGroupsDispatch] = useReducer(
-        getAccordionGroupsReducer(collapsible ? (singleExpandedGroup ? "single" : "multiple") : "all"), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
-        groups.map(group => (collapsible ? { ...group, collapsed: true } : { ...group, collapsed: false }))
+        getAccordionGroupsReducer(props.collapsible ? (props.singleExpandedGroup ? "single" : "multiple") : "all"), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
+        props.groups.map(group => (props.collapsible ? { ...group, collapsed: true } : { ...group, collapsed: false }))
     );
 
-    if (groups !== previousGroupsPropValue.current) {
-        previousGroupsPropValue.current = groups;
-        accordionGroupsDispatch({ type: "sync", groups });
+    if (props.groups !== previousGroupsPropValue.current) {
+        previousGroupsPropValue.current = props.groups;
+        accordionGroupsDispatch({ type: "sync", groups: props.groups });
     }
 
     const renderedGroups = useMemo(() => {
@@ -33,8 +31,8 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
     }, [accordionGroups]);
 
     return (
-        <AccordionGroupsDispatch.Provider value={collapsible ? accordionGroupsDispatch : undefined}>
-            <div id={id} className={classNames} style={style} tabIndex={tabIndex}>
+        <AccordionGroupsDispatch.Provider value={props.collapsible ? accordionGroupsDispatch : undefined}>
+            <div id={props.id} className={props.class} style={props.style} tabIndex={props.tabIndex}>
                 {renderedGroups}
             </div>
         </AccordionGroupsDispatch.Provider>
