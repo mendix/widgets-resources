@@ -4,7 +4,7 @@ import AccordionGroup, { AccGroup } from "./AccordionGroup";
 import { AccordionGroupsReducerAction, getAccordionGroupsReducer } from "../utils/AccordionGroupStateReducer";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 
-interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
+export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
     id: string;
     groups: AccGroup[];
     collapsible: boolean;
