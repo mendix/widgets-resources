@@ -1,6 +1,6 @@
 import { createElement } from "react";
-import { AccGroup } from "../AccordionGroup";
-import { getAccordionGroupsReducer } from "../Accordion";
+import { AccGroup } from "../../components/AccordionGroup";
+import { getAccordionGroupsReducer } from "../AccordionGroupStateReducer";
 
 describe("getAccordionGroupsReducer", () => {
     let defaultGroups: AccGroup[];
