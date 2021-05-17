@@ -29,9 +29,9 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     const toggleContentVisibility = useCallback(() => {
         if (group.collapsed) {
-            dispatch!({ type: "expand", group });
+            dispatch?.({ type: "expand", group });
         } else {
-            dispatch!({ type: "collapse", group });
+            dispatch?.({ type: "collapse", group });
         }
     }, [group, dispatch]);
 
