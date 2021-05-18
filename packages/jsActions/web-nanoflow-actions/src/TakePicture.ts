@@ -65,11 +65,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
     const cameraButtonSVG =
         "PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzUiIGN5PSIzNSIgcj0iMzUiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=";
 
+    // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
         const hasMultipleCameraDevices = videoDevices.length > 1;
         let error: string | undefined;
         let stream: MediaStream | undefined;
-        let styleElements: HTMLStyleElement[] = [];
+        const styleElements: HTMLStyleElement[] = [];
         let videoIsReady = false;
         let saveButtonIsDisabled = false;
         let shouldFaceEnvironment = true;
@@ -333,7 +334,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             return styleElements;
         }
 
-        function createFirstScreenElements() {
+        function createFirstScreenElements(): any {
             const wrapper = document.createElement("div");
             wrapper.setAttribute("role", "dialog");
             wrapper.setAttribute("aria-labelledby", "pwa-take-picture-modal-label");
@@ -397,7 +398,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             switchControl.appendChild(switchImg);
             actionControl.appendChild(takePictureImg);
 
-            function createActionAndSwitch() {
+            function createActionAndSwitch(): void {
                 const spacingDiv = document.createElement("div");
                 spacingDiv.classList.add("pwa-take-picture-spacing-div");
 
@@ -429,7 +430,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             };
         }
 
-        function prepareSecondScreen() {
+        function prepareSecondScreen(): { handler: () => void; cleanup: () => void } {
             let confirmationWrapper: HTMLDivElement;
 
             return {
@@ -479,12 +480,14 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
                         closeBtn.addEventListener("click", cleanupConfirmationElements);
 
-                        function cleanupConfirmationElements() {
+                        // eslint-disable-next-line no-inner-declarations
+                        function cleanupConfirmationElements(): void {
                             updateSaveButtonDisabledState(false);
                             document.body.removeChild(confirmationWrapper);
                         }
 
-                        async function saveFile() {
+                        // eslint-disable-next-line no-inner-declarations
+                        async function saveFile(): Promise<void> {
                             if (!saveButtonIsDisabled) {
                                 updateSaveButtonDisabledState(true);
                                 const filename = `device-camera-picture-${new Date()}.png`; // `toBlob` defaults to PNG.
@@ -553,6 +556,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                             }
                         }
 
+                        // eslint-disable-next-line no-inner-declarations
                         function updateSaveButtonDisabledState(isDisabled: boolean): void {
                             saveButtonIsDisabled = isDisabled;
                             saveBtn.disabled = isDisabled;
@@ -574,8 +578,10 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             };
         }
 
-        async function switchControlHandler() {
-            if (!stream) return;
+        async function switchControlHandler(): Promise<void> {
+            if (!stream) {
+                return;
+            }
 
             stopCamera();
 
@@ -586,7 +592,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             await startCamera(shouldFaceEnvironment ? CAMERA_POSITION.BACK_CAMERA : CAMERA_POSITION.FRONT_CAMERA);
         }
 
-        function closeControlHandler() {
+        function closeControlHandler(): void {
             stopCamera();
 
             document.body.removeChild(wrapper);
@@ -596,9 +602,9 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             }
         }
 
-        async function startCamera(facingMode: string) {
+        async function startCamera(facingMode: string): Promise<void> {
             try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facingMode } });
+                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode } });
 
                 stream?.getTracks()?.forEach(track => {
                     track.addEventListener("ended", () => {
@@ -646,7 +652,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             }
         }
 
-        function stopCamera() {
+        function stopCamera(): void {
             videoIsReady = false;
 
             const tracks = stream?.getTracks();
@@ -660,7 +666,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
     });
 
     function prepareLanguage(): (english: string, dutch: string) => string {
-        const englishFn = (english: string, _dutch: string) => english;
+        const englishFn = (english: string, _dutch: string): string => english;
 
         try {
             return mx.session.sessionData.locale.code.toLowerCase().includes("en")
