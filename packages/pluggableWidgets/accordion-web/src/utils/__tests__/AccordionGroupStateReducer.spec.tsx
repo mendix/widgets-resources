@@ -86,6 +86,14 @@ describe("getAccordionGroupsReducer", () => {
             const receivedGroups = reducer(defaultGroups, { type: "collapse", group: defaultGroups[2] });
             expect(receivedGroups).toEqual(expectedGroups);
         });
+
+        it("ignores an invalid group", () => {
+            const receivedGroups = reducer(defaultGroups, {
+                type: "collapse",
+                group: { header: "Non existent group", content: <span>Content</span>, visible: true, collapsed: true }
+            });
+            expect(receivedGroups).toEqual(defaultGroups);
+        });
     });
 
     describe("returned reducer in all expanded mode", () => {
