@@ -1,4 +1,4 @@
-import { createContext, createElement, Dispatch, ReactElement, useMemo, useReducer, useRef } from "react";
+import { createContext, createElement, Dispatch, ReactElement, useReducer, useRef } from "react";
 
 import AccordionGroup, { AccGroup } from "./AccordionGroup";
 import { AccordionGroupsReducerAction, getAccordionGroupsReducer } from "../utils/AccordionGroupStateReducer";
@@ -26,15 +26,15 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
         accordionGroupsDispatch({ type: "sync", groups: props.groups });
     }
 
-    const renderedGroups = useMemo(() => {
-        return accordionGroups.map((group, index) => <AccordionGroup key={index} group={group} />);
-    }, [accordionGroups]);
-
     return (
         <AccordionGroupsDispatch.Provider value={props.collapsible ? accordionGroupsDispatch : undefined}>
             <div id={props.id} className={props.class} style={props.style} tabIndex={props.tabIndex}>
-                {renderedGroups}
+                {renderAccordionGroups(accordionGroups)}
             </div>
         </AccordionGroupsDispatch.Provider>
     );
+}
+
+function renderAccordionGroups(accordionGroups: AccGroup[]): ReactElement[] {
+    return accordionGroups.map((group, index) => <AccordionGroup key={index} group={group} />);
 }
