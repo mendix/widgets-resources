@@ -34,13 +34,8 @@ export function getAccordionGroupsReducer(
         }
 
         const newState = [...state];
+        newState[groupIndex] = { ...action.group, collapsed: action.type !== "expand" };
 
-        if (action.type === "expand") {
-            newState[groupIndex] = { ...action.group, collapsed: false };
-            return newState;
-        }
-
-        newState[groupIndex] = { ...action.group, collapsed: true };
         return newState;
     };
 }
