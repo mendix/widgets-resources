@@ -18,7 +18,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
 
     const [accordionGroups, accordionGroupsDispatch] = useReducer(
         getAccordionGroupsReducer(props.collapsible ? (props.singleExpandedGroup ? "single" : "multiple") : "all"), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
-        props.groups.map(group => (props.collapsible ? { ...group, collapsed: true } : { ...group, collapsed: false }))
+        props.groups.map(group => ({ ...group, collapsed: props.collapsible }))
     );
 
     if (props.groups !== previousGroupsPropValue.current) {
