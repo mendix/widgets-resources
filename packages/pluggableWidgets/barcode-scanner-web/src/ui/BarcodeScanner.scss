@@ -15,23 +15,6 @@
         object-fit: cover;
     }
 
-    .close-button {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        color: white;
-        display: flex;
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-
-        .removeIcon {
-            height: 16px;
-            width: 16px;
-        }
-    }
-
     .video-canvas {
         position: absolute;
         top: 0;

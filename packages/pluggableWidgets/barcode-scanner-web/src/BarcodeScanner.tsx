@@ -5,7 +5,6 @@ import { BarcodeScannerContainerProps } from "../typings/BarcodeScannerProps";
 import { BarcodeScanner as BarcodeScannerComponent } from "./components/BarcodeScanner";
 
 export const BarcodeScanner: FunctionComponent<BarcodeScannerContainerProps> = props => {
-    const onClose = useCallback(() => executeAction(props.onClose), [props.onClose]);
     const onDetect = useCallback(
         (data: string) => {
             if (props.datasource?.status !== ValueStatus.Available) {
@@ -20,7 +19,6 @@ export const BarcodeScanner: FunctionComponent<BarcodeScannerContainerProps> = p
     );
     return (
         <BarcodeScannerComponent
-            onClose={props.onClose ? onClose : undefined}
             onDetect={props.onDetect ? onDetect : undefined}
             showMask={props.showMask}
             class={props.class}

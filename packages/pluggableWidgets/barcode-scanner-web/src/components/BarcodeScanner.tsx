@@ -1,14 +1,12 @@
-import { createElement, ReactElement, ReactNode, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, ReactNode, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal";
 import { useCodeScanner, CodeScannerHookError } from "../hooks/useCodeScanner";
 import { browserSupportsCameraAccess, useMediaStream, MediaStreamHookError } from "../hooks/useMediaStream";
 
-import closeIconSvg from "../assets/ic24-close.svg";
 import "../ui/BarcodeScanner.scss";
 
 export interface BarcodeScannerProps {
-    onClose?: () => void;
     onDetect?: (data: string) => void;
     showMask: boolean;
     class: string;
@@ -30,7 +28,6 @@ function getErrorMessage(errorEnum: MediaStreamHookError | CodeScannerHookError 
 }
 
 interface BarcodeScannerOverlayProps {
-    onClose?: () => void;
     showMask: boolean;
     class: string;
     children?: ReactNode;
@@ -39,8 +36,7 @@ interface BarcodeScannerOverlayProps {
 export function BarcodeScannerOverlay({
     children,
     class: className,
-    showMask,
-    onClose
+    showMask
 }: BarcodeScannerOverlayProps): ReactElement {
     return (
         <div className={classNames("mx-barcode-scanner", className)}>
@@ -61,30 +57,16 @@ export function BarcodeScannerOverlay({
                     <div className={classNames("canvas-right", "canvas-background")} />
                 </div>
             ) : null}
-            <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose}>
-                <img src={closeIconSvg} className={classNames("removeIcon")} alt="Close icon for the canvas overlay" />
-            </button>
         </div>
     );
 }
 
-export function BarcodeScanner({
-    onClose,
-    onDetect,
-    showMask,
-    class: className
-}: BarcodeScannerProps): ReactElement | null {
-    const [showScannerOverlay, setShowScannerOverlay] = useState<boolean>(true);
+export function BarcodeScanner({ onDetect, showMask, class: className }: BarcodeScannerProps): ReactElement | null {
     const videoElement = useRef<HTMLVideoElement | null>(null);
     const hasDetectedOnce = useRef<boolean>(false);
-    const { streamObject, cleanupStreamObject, error: errorMediaStream } = useMediaStream();
+    const { streamObject, error: errorMediaStream } = useMediaStream();
     const { codeResult, error: errorCodeScanner } = useCodeScanner(streamObject, videoElement.current);
     const supportsCameraAccess = browserSupportsCameraAccess();
-
-    function onCloseOverlay(): void {
-        setShowScannerOverlay(false);
-        cleanupStreamObject();
-    }
 
     // If both the video element ref and the camera stream object are ready, display it through the `srcObject` prop.
     useEffect(() => {
@@ -104,9 +86,6 @@ export function BarcodeScanner({
         }
     }, [codeResult, onDetect]);
 
-    if (!showScannerOverlay) {
-        return null;
-    }
     if (!supportsCameraAccess) {
         // Mendix ensures that Mendix apps are only run in the supported browsers and all of them
         // support the `navigator.mediaDevices.getUserMedia` API. So no additional error handling
@@ -127,7 +106,7 @@ export function BarcodeScanner({
         }
     }
     return (
-        <BarcodeScannerOverlay class={className} showMask={showMask} onClose={onClose || onCloseOverlay}>
+        <BarcodeScannerOverlay class={className} showMask={showMask}>
             <video
                 className={classNames("video")}
                 ref={videoElement}

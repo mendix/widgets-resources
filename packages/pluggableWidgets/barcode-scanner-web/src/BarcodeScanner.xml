@@ -29,10 +29,6 @@
                     <caption>On detect</caption>
                     <description />
                 </property>
-                <property key="onClose" type="action" required="false">
-                    <caption>On close</caption>
-                    <description />
-                </property>
             </propertyGroup>
 
             <propertyGroup caption="Common">
