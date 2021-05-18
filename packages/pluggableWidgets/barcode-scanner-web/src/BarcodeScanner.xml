@@ -9,22 +9,22 @@
         <propertyGroup caption="General">
             <propertyGroup caption="General">
                 <property key="datasource" type="attribute" required="true">
-                    <caption>Barcode</caption>
-                    <description>The attribute that will receive the scanned barcode value.</description>
+                    <caption>Scanned result</caption>
+                    <description>The String attribute used to store the result of the scanned barcode.</description>
                     <attributeTypes>
                         <attributeType name="String"/>
                     </attributeTypes>
                 </property>
                 <property key="showMask" type="boolean" required="true" defaultValue="true">
                     <caption>Show barcode mask</caption>
-                    <description />
+                    <description>Apply a mask to camera view, as a specific target area for the barcode.</description>
                 </property>
             </propertyGroup>
 
             <propertyGroup caption="Events">
                 <property key="onDetect" type="action" required="false">
-                    <caption>On detect</caption>
-                    <description />
+                    <caption>On Detect Action</caption>
+                    <description>Action to trigger when the barcode has been successfully detected.</description>
                 </property>
             </propertyGroup>
 
