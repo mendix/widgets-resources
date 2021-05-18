@@ -84,10 +84,10 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         const { handler: takePictureHandler, cleanup: secondScreenCleanup } = prepareSecondScreen();
 
         if (hasMultipleCameraDevices) {
-            controlsWrapper.classList.add("pwa-take-picture-action-switch-control-wrapper");
+            controlsWrapper.classList.add("take-picture-action-switch-control-wrapper");
             createActionAndSwitch();
         } else {
-            controlsWrapper.classList.add("pwa-take-picture-action-control-wrapper");
+            controlsWrapper.classList.add("take-picture-action-control-wrapper");
             createAction();
         }
 
@@ -108,7 +108,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         function createStyles(): string[] {
             return [
                 `
-                .pwa-take-picture-wrapper {
+                .take-picture-wrapper {
                     height: 100%;
                     width: 100%;
                     position: absolute;
@@ -124,7 +124,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-video-element {
+                .take-picture-video-element {
                     position: absolute;
                     /* Should be higher than the z-index of '.layout-atlas .region-sidebar' so it sits on top of the page. */
                     z-index: 110;
@@ -139,7 +139,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-action-control-wrapper {
+                .take-picture-action-control-wrapper {
                     display: flex;
                     justify-content: center;
                     flex-direction: row;
@@ -150,7 +150,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-action-switch-control-wrapper {
+                .take-picture-action-switch-control-wrapper {
                     display: flex;
                     justify-content: space-between;
                     flex-direction: row;
@@ -161,7 +161,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-close-control-wrapper {
+                .take-picture-close-control-wrapper {
                     display: flex;
                     justify-content: flex-start;
                     flex-direction: column;
@@ -171,14 +171,14 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-action-control {
+                .take-picture-action-control {
                     background-color: transparent;
                     border-style: none;
                     padding: 0;
                 };
                 `,
                 `
-                .pwa-take-picture-screen-reader {
+                .take-picture-screen-reader {
                     border: 0;
                     clip: rect(0 0 0 0);
                     height: 1px;
@@ -191,7 +191,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-action-spacing {
+                .take-picture-action-spacing {
                     flex: 1;
                     display: flex;
                     justify-content: center;
@@ -199,7 +199,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-switch-spacing {
+                .take-picture-switch-spacing {
                     display: flex;
                     flex: 1;
                     justify-content: flex-end;
@@ -207,12 +207,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-spacing-div {
+                .take-picture-spacing-div {
                     flex: 1;
                 };
                 `,
                 `
-                .pwa-take-picture-action-control-inner {
+                .take-picture-action-control-inner {
                     border-radius: 50%;
                     background-color: white;
                     border: 1px solid black;
@@ -221,12 +221,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-button-wrapper {
+                .take-picture-button-wrapper {
                     padding: 16px;
                 };
                 `,
                 `
-                .pwa-take-picture-save-button {
+                .take-picture-save-button {
                     color: white;
                     background-color: #264AE5;
                     width: 100%;
@@ -239,12 +239,12 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-save-button.pwa-take-picture-disabled {
+                .take-picture-save-button.take-picture-disabled {
                     background-color: #888888bd;
                 };
                 `,
                 `
-                .pwa-take-picture-cancel-button {
+                .take-picture-cancel-button {
                     margin-top: 8px;
                     color: #264AE5;
                     background-color: white;
@@ -259,7 +259,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `,
 
                 `
-                .pwa-take-picture-switch-control {
+                .take-picture-switch-control {
                     background-color: transparent;
                     border-style: none;
                     padding: 0;
@@ -267,7 +267,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-close-control {
+                .take-picture-close-control {
                     margin: 30px 0 0 30px;
                     border-style: none;
                     padding: 0;
@@ -275,7 +275,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .pwa-take-picture-confirm-wrapper {
+                .take-picture-confirm-wrapper {
                     position: absolute;
                     top: 0;
                     right: 0;
@@ -292,7 +292,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 }
                 `,
                 `
-                .pwa-take-picture-image {
+                .take-picture-image {
                     width: 100%;
                 }
                 `,
@@ -322,18 +322,18 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         function createFirstScreenElements(): any {
             const wrapper = document.createElement("div");
             wrapper.setAttribute("role", "dialog");
-            wrapper.setAttribute("aria-labelledby", "pwa-take-picture-modal-label");
+            wrapper.setAttribute("aria-labelledby", "take-picture-modal-label");
             const hiddenDialogLabel = document.createElement("h1");
-            hiddenDialogLabel.id = "pwa-take-picture-modal-label";
-            hiddenDialogLabel.classList.add("pwa-take-picture-screen-reader");
+            hiddenDialogLabel.id = "take-picture-modal-label";
+            hiddenDialogLabel.classList.add("take-picture-screen-reader");
             hiddenDialogLabel.textContent = getUserText(
                 "Take a picture using your device's camera",
                 "Maak een foto met de camera van uw apparaat"
             );
-            wrapper.classList.add("pwa-take-picture-wrapper");
+            wrapper.classList.add("take-picture-wrapper");
 
             const video = document.createElement("video");
-            video.classList.add("pwa-take-picture-video-element");
+            video.classList.add("take-picture-video-element");
             video.setAttribute("autoplay", "");
             video.setAttribute("muted", "");
             video.setAttribute("playsinline", "");
@@ -341,34 +341,34 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             const controlsWrapper = document.createElement("div");
 
             const closeControlWrapper = document.createElement("div");
-            closeControlWrapper.classList.add("pwa-take-picture-close-control-wrapper");
+            closeControlWrapper.classList.add("take-picture-close-control-wrapper");
 
             const actionControl = document.createElement("button");
             const actionControlHiddenText = document.createElement("span");
             actionControlHiddenText.textContent = getUserText("Take picture", "Foto nemen");
-            actionControlHiddenText.classList.add("pwa-take-picture-screen-reader");
+            actionControlHiddenText.classList.add("take-picture-screen-reader");
             actionControl.appendChild(actionControlHiddenText);
-            actionControl.classList.add("pwa-take-picture-action-control");
+            actionControl.classList.add("take-picture-action-control");
 
             const actionControlWrapper = document.createElement("div");
-            actionControlWrapper.classList.add("pwa-take-picture-action-spacing");
+            actionControlWrapper.classList.add("take-picture-action-spacing");
 
             const switchControl = document.createElement("button");
             const switchControlHiddenText = document.createElement("span");
             switchControlHiddenText.textContent = getUserText("Switch camera", "Van camera wisselen");
-            switchControlHiddenText.classList.add("pwa-take-picture-screen-reader");
+            switchControlHiddenText.classList.add("take-picture-screen-reader");
             switchControl.appendChild(switchControlHiddenText);
-            switchControl.classList.add("pwa-take-picture-switch-control");
+            switchControl.classList.add("take-picture-switch-control");
 
             const switchControlWrapper = document.createElement("div");
-            switchControlWrapper.classList.add("pwa-take-picture-switch-spacing");
+            switchControlWrapper.classList.add("take-picture-switch-spacing");
 
             const closeControl = document.createElement("button");
             const closeControlHiddenText = document.createElement("span");
-            closeControlHiddenText.classList.add("pwa-take-picture-screen-reader");
+            closeControlHiddenText.classList.add("take-picture-screen-reader");
             closeControlHiddenText.textContent = getUserText("Close", "Afsluiten");
             closeControl.appendChild(closeControlHiddenText);
-            closeControl.classList.add("pwa-take-picture-close-control");
+            closeControl.classList.add("take-picture-close-control");
 
             const closeImg = document.createElement("img");
             closeImg.src = `data:image/svg+xml;base64,${closeSVG}`;
@@ -385,7 +385,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
             function createActionAndSwitch(): void {
                 const spacingDiv = document.createElement("div");
-                spacingDiv.classList.add("pwa-take-picture-spacing-div");
+                spacingDiv.classList.add("take-picture-spacing-div");
 
                 actionControlWrapper.appendChild(actionControl);
                 switchControlWrapper.appendChild(switchControl);
@@ -418,33 +418,33 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 handler: () => {
                     if (videoIsReady) {
                         confirmationWrapper = document.createElement("div");
-                        confirmationWrapper.classList.add("pwa-take-picture-confirm-wrapper");
+                        confirmationWrapper.classList.add("take-picture-confirm-wrapper");
 
                         const topSection = document.createElement("div");
-                        topSection.classList.add("pwa-take-picture-confirm-top-section");
+                        topSection.classList.add("take-picture-confirm-top-section");
 
                         const middleSection = document.createElement("div");
-                        middleSection.classList.add("pwa-take-picture-confirm-middle-section");
+                        middleSection.classList.add("take-picture-confirm-middle-section");
 
                         const bottomSection = document.createElement("div");
-                        bottomSection.classList.add("pwa-take-picture-confirm-bottom-section");
+                        bottomSection.classList.add("take-picture-confirm-bottom-section");
 
                         const videoCanvas = document.createElement("canvas");
-                        videoCanvas.classList.add("pwa-take-picture-image");
+                        videoCanvas.classList.add("take-picture-image");
                         videoCanvas.height = video.videoHeight;
                         videoCanvas.width = video.videoWidth;
                         const videoContext = videoCanvas.getContext("2d");
                         videoContext?.drawImage(video, 0, 0);
 
                         const buttonWrapper = document.createElement("div");
-                        buttonWrapper.classList.add("pwa-take-picture-button-wrapper");
+                        buttonWrapper.classList.add("take-picture-button-wrapper");
 
                         const saveBtn = document.createElement("button");
-                        saveBtn.classList.add("pwa-take-picture-save-button");
+                        saveBtn.classList.add("take-picture-save-button");
                         saveBtn.textContent = getUserText("Save", "Opslaan");
 
                         const closeBtn = document.createElement("button");
-                        closeBtn.classList.add("pwa-take-picture-cancel-button");
+                        closeBtn.classList.add("take-picture-cancel-button");
                         closeBtn.textContent = getUserText("Close", "Afsluiten");
 
                         middleSection.appendChild(videoCanvas);
@@ -539,9 +539,9 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                             saveButtonIsDisabled = isDisabled;
                             saveBtn.disabled = isDisabled;
                             if (isDisabled) {
-                                saveBtn.classList.add("pwa-take-picture-disabled");
+                                saveBtn.classList.add("take-picture-disabled");
                             } else {
-                                saveBtn.classList.remove("pwa-take-picture-disabled");
+                                saveBtn.classList.remove("take-picture-disabled");
                             }
                         }
                     }
