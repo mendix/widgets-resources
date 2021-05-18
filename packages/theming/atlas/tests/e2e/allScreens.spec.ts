@@ -16,7 +16,13 @@ const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
 
 // Mostly the pages with progressbar fails since it is not CSS animations for web -_-. So disableCSSAnimation wont work.
 // This ends up having unstable progress circle percentage
-const pagesWithTimeout = ["/p/alerts", "/p/progress-circles", "/p/maps", "/p/web-dashboard-actioncenter"];
+const pagesWithTimeout = [
+    "/p/alerts",
+    "/p/progress-circles",
+    "/p/maps",
+    "/p/web-dashboard-actioncenter",
+    "/p/web-dashboard-transactions"
+];
 
 describe("Screenshots of the pages for", () => {
     for (const url of pageUrls(testPageFolders)) {
