@@ -3,345 +3,157 @@
 exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
 
 exports[`AccordionGroup with dispatch displays the content when the group becomes visible and is expanded 1`] = `
-<TestWrapper
-  dispatch={[MockFunction]}
-  group={
-    Object {
-      "collapsed": false,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <AccordionGroup
-    group={
+<section>
+  <header
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    style={
       Object {
-        "collapsed": false,
-        "content": <span>
-          content
-        </span>,
-        "header": "header",
-        "visible": true,
+        "display": undefined,
       }
     }
   >
-    <section>
-      <header
-        onClick={[Function]}
-      >
-        header
-      </header>
-      <div
-        style={
-          Object {
-            "display": undefined,
-          }
-        }
-      >
-        <span>
-          content
-        </span>
-      </div>
-    </section>
-  </AccordionGroup>
-</TestWrapper>
+    <span>
+      content
+    </span>
+  </div>
+</section>
 `;
 
 exports[`AccordionGroup with dispatch displays the content when the group is visible and expanded 1`] = `
-<TestWrapper
-  dispatch={[MockFunction]}
-  group={
-    Object {
-      "collapsed": false,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <AccordionGroup
-    group={
+<section>
+  <header
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    style={
       Object {
-        "collapsed": false,
-        "content": <span>
-          content
-        </span>,
-        "header": "header",
-        "visible": true,
+        "display": undefined,
       }
     }
   >
-    <section>
-      <header
-        onClick={[Function]}
-      >
-        header
-      </header>
-      <div
-        style={
-          Object {
-            "display": undefined,
-          }
-        }
-      >
-        <span>
-          content
-        </span>
-      </div>
-    </section>
-  </AccordionGroup>
-</TestWrapper>
+    <span>
+      content
+    </span>
+  </div>
+</section>
 `;
 
 exports[`AccordionGroup with dispatch displays the content when the group is visible and gets expanded 1`] = `
-<TestWrapper
-  dispatch={[MockFunction]}
-  group={
-    Object {
-      "collapsed": false,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <AccordionGroup
-    group={
+<section>
+  <header
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    style={
       Object {
-        "collapsed": false,
-        "content": <span>
-          content
-        </span>,
-        "header": "header",
-        "visible": true,
+        "display": undefined,
       }
     }
   >
-    <section>
-      <header
-        onClick={[Function]}
-      >
-        header
-      </header>
-      <div
-        style={
-          Object {
-            "display": undefined,
-          }
-        }
-      >
-        <span>
-          content
-        </span>
-      </div>
-    </section>
-  </AccordionGroup>
-</TestWrapper>
+    <span>
+      content
+    </span>
+  </div>
+</section>
 `;
 
 exports[`AccordionGroup with dispatch keeps the content in DOM when the group is visible and gets collapsed 1`] = `
-<TestWrapper
-  dispatch={[MockFunction]}
-  group={
-    Object {
-      "collapsed": true,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <AccordionGroup
-    group={
+<section>
+  <header
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    style={
       Object {
-        "collapsed": true,
-        "content": <span>
-          content
-        </span>,
-        "header": "header",
-        "visible": true,
+        "display": "none",
       }
     }
   >
-    <section>
-      <header
-        onClick={[Function]}
-      >
-        header
-      </header>
-      <div
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-      >
-        <span>
-          content
-        </span>
-      </div>
-    </section>
-  </AccordionGroup>
-</TestWrapper>
+    <span>
+      content
+    </span>
+  </div>
+</section>
 `;
 
 exports[`AccordionGroup with dispatch loads the content lazily when the group becomes visible and is collapsed 1`] = `
-<TestWrapper
-  dispatch={[MockFunction]}
-  group={
-    Object {
-      "collapsed": true,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <AccordionGroup
-    group={
+<section>
+  <header
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    style={
       Object {
-        "collapsed": true,
-        "content": <span>
-          content
-        </span>,
-        "header": "header",
-        "visible": true,
+        "display": "none",
       }
     }
-  >
-    <section>
-      <header
-        onClick={[Function]}
-      >
-        header
-      </header>
-      <div
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-      />
-    </section>
-  </AccordionGroup>
-</TestWrapper>
+  />
+</section>
 `;
 
 exports[`AccordionGroup with dispatch loads the content lazily when the group is visible and collapsed 1`] = `
-<TestWrapper
-  dispatch={[MockFunction]}
-  group={
-    Object {
-      "collapsed": true,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <AccordionGroup
-    group={
+<section>
+  <header
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    style={
       Object {
-        "collapsed": true,
-        "content": <span>
-          content
-        </span>,
-        "header": "header",
-        "visible": true,
+        "display": "none",
       }
     }
-  >
-    <section>
-      <header
-        onClick={[Function]}
-      >
-        header
-      </header>
-      <div
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-      />
-    </section>
-  </AccordionGroup>
-</TestWrapper>
+  />
+</section>
 `;
 
 exports[`AccordionGroup without dispatch displays the content when the group becomes visible 1`] = `
-<AccordionGroup
-  group={
-    Object {
-      "collapsed": false,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <section>
-    <header>
-      header
-    </header>
-    <div
-      style={
-        Object {
-          "display": undefined,
-        }
+<section>
+  <header>
+    header
+  </header>
+  <div
+    style={
+      Object {
+        "display": undefined,
       }
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </section>
-</AccordionGroup>
+    }
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
 `;
 
 exports[`AccordionGroup without dispatch displays the content when the group is visible 1`] = `
-<AccordionGroup
-  group={
-    Object {
-      "collapsed": false,
-      "content": <span>
-        content
-      </span>,
-      "header": "header",
-      "visible": true,
-    }
-  }
->
-  <section>
-    <header>
-      header
-    </header>
-    <div
-      style={
-        Object {
-          "display": undefined,
-        }
+<section>
+  <header>
+    header
+  </header>
+  <div
+    style={
+      Object {
+        "display": undefined,
       }
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </section>
-</AccordionGroup>
+    }
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
 `;

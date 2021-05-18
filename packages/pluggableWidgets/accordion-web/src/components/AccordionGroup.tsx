@@ -1,5 +1,6 @@
-import { createElement, ReactElement, ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react";
-import { AccordionGroupsDispatch } from "./Accordion";
+import { createElement, Dispatch, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+
+import { AccordionGroupsReducerAction } from "../utils/AccordionGroupStateReducer";
 
 export interface AccGroup {
     header: ReactNode;
@@ -10,14 +11,13 @@ export interface AccGroup {
 
 export interface AccordionGroupProps {
     group: AccGroup;
+    accordionGroupsDispatch?: Dispatch<AccordionGroupsReducerAction>;
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { group } = props;
+    const { group, accordionGroupsDispatch } = props;
 
-    const dispatch = useContext(AccordionGroupsDispatch);
     const previousVisiblePropValue = useRef(group.visible);
-
     const [divContentMounted, setDivContentMounted] = useState(group.visible && !group.collapsed);
 
     useEffect(() => {
@@ -29,11 +29,11 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     const toggleContentVisibility = useCallback(() => {
         if (group.collapsed) {
-            dispatch?.({ type: "expand", group });
+            accordionGroupsDispatch!({ type: "expand", group });
         } else {
-            dispatch?.({ type: "collapse", group });
+            accordionGroupsDispatch!({ type: "collapse", group });
         }
-    }, [group, dispatch]);
+    }, [group, accordionGroupsDispatch]);
 
     if (!group.visible) {
         return null;
@@ -41,8 +41,8 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     return (
         <section>
-            <header onClick={dispatch ? toggleContentVisibility : undefined}>{group.header}</header>
-            <div style={{ display: dispatch && group.collapsed ? "none" : undefined }}>
+            <header onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}>{group.header}</header>
+            <div style={{ display: accordionGroupsDispatch && group.collapsed ? "none" : undefined }}>
                 {divContentMounted ? group.content : undefined}
             </div>
         </section>

@@ -1,20 +1,6 @@
-import { createContext, createElement, ReactElement } from "react";
-import { mount, ReactWrapper, shallow } from "enzyme";
-import AccordionGroup, { AccGroup, AccordionGroupProps } from "../AccordionGroup";
-
-jest.mock("../Accordion", () => ({
-    AccordionGroupsDispatch: createContext<(() => void) | undefined>(undefined)
-}));
-
-import { AccordionGroupsDispatch } from "../Accordion";
-
-function TestWrapper(props: AccordionGroupProps & { dispatch: () => void }): ReactElement {
-    return (
-        <AccordionGroupsDispatch.Provider value={props.dispatch}>
-            <AccordionGroup group={props.group} />
-        </AccordionGroupsDispatch.Provider>
-    );
-}
+import { createElement } from "react";
+import { shallow, ShallowWrapper } from "enzyme";
+import AccordionGroup, { AccGroup } from "../AccordionGroup";
 
 describe("AccordionGroup", () => {
     let defaultGroup: AccGroup;
@@ -30,10 +16,10 @@ describe("AccordionGroup", () => {
     });
 
     describe("with dispatch", () => {
-        function mountAccordionGroupWithDispatch(group: AccGroup, dispatch?: () => void): ReactWrapper {
+        function mountAccordionGroupWithDispatch(group: AccGroup, dispatch?: () => void): ShallowWrapper {
             const resDispatch = dispatch ?? jest.fn();
 
-            return mount(<TestWrapper group={group} dispatch={resDispatch} />);
+            return shallow(<AccordionGroup group={group} accordionGroupsDispatch={resDispatch} />);
         }
 
         it("loads the content lazily when the group is visible and collapsed", () => {
@@ -105,14 +91,14 @@ describe("AccordionGroup", () => {
 
     describe("without dispatch", () => {
         it("displays the content when the group is visible", () => {
-            const accordionGroup = mount(<AccordionGroup group={{ ...defaultGroup, collapsed: false }} />);
+            const accordionGroup = shallow(<AccordionGroup group={{ ...defaultGroup, collapsed: false }} />);
 
             expect(accordionGroup).toMatchSnapshot();
         });
 
         it("displays the content when the group becomes visible", () => {
             const group = { ...defaultGroup, visible: false, collapsed: false };
-            const accordionGroup = mount(
+            const accordionGroup = shallow(
                 <AccordionGroup group={{ ...defaultGroup, visible: false, collapsed: false }} />
             );
 

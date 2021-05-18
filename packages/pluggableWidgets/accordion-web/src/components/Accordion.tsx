@@ -1,7 +1,7 @@
-import { createContext, createElement, Dispatch, ReactElement, useReducer, useRef } from "react";
+import { createElement, ReactElement, useReducer, useRef } from "react";
 
 import AccordionGroup, { AccGroup } from "./AccordionGroup";
-import { AccordionGroupsReducerAction, getAccordionGroupsReducer } from "../utils/AccordionGroupStateReducer";
+import { getAccordionGroupsReducer } from "../utils/AccordionGroupStateReducer";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 
 export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
@@ -10,8 +10,6 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
     collapsible: boolean;
     singleExpandedGroup?: boolean;
 }
-
-export const AccordionGroupsDispatch = createContext<Dispatch<AccordionGroupsReducerAction> | undefined>(undefined);
 
 export default function Accordion(props: AccordionProps): ReactElement | null {
     const previousGroupsPropValue = useRef(props.groups);
@@ -26,15 +24,17 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
         accordionGroupsDispatch({ type: "sync", groups: props.groups });
     }
 
-    return (
-        <AccordionGroupsDispatch.Provider value={props.collapsible ? accordionGroupsDispatch : undefined}>
-            <div id={props.id} className={props.class} style={props.style} tabIndex={props.tabIndex}>
-                {renderAccordionGroups(accordionGroups)}
-            </div>
-        </AccordionGroupsDispatch.Provider>
-    );
-}
+    const accordionGroupElements = accordionGroups.map((group, index) => (
+        <AccordionGroup
+            key={index}
+            group={group}
+            accordionGroupsDispatch={props.collapsible ? accordionGroupsDispatch : undefined}
+        />
+    ));
 
-function renderAccordionGroups(accordionGroups: AccGroup[]): ReactElement[] {
-    return accordionGroups.map((group, index) => <AccordionGroup key={index} group={group} />);
+    return (
+        <div id={props.id} className={props.class} style={props.style} tabIndex={props.tabIndex}>
+            {accordionGroupElements}
+        </div>
+    );
 }
