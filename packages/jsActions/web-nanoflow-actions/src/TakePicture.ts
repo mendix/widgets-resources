@@ -13,7 +13,7 @@
  * Take a picture using the device camera.
  * @returns {Promise.<boolean>}
  */
-export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean> {
+export async function TakePicture(picture: mendix.lib.MxObject, showConfirmationScreen: boolean): Promise<boolean> {
     // BEGIN USER CODE
     const CAMERA_POSITION = {
         BACK_CAMERA: "environment",
@@ -34,14 +34,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         return Promise.reject(new Error("Media devices are not supported."));
     }
 
-    const videoDevices = (await navigator.mediaDevices.enumerateDevices()).filter(
-        deviceInfo => deviceInfo.kind === "videoinput"
-    );
-
-    if (!videoDevices.length) {
-        return Promise.reject(new Error("Your device does not have a camera."));
-    }
-
     // TODO: WC-463 rollup has a bug where comments are removed from the top of files, disallowing imports between "extra code" comments. Until this is fixed, SVGs are manually encoded and added here.
     const closeSVG =
         "PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xOC4yMjIyIDE2LjAwMDNMMjYuNTM5NyA3LjY4MjhDMjcuMTU0MSA3LjA2ODM4IDI3LjE1NDEgNi4wNzUyNCAyNi41Mzk3IDUuNDYwODJDMjUuOTI1MyA0Ljg0NjM5IDI0LjkzMjEgNC44NDYzOSAyNC4zMTc3IDUuNDYwODJMMTYuMDAwMiAxMy43NzgzTDcuNjgyNzkgNS40NjA4MkM3LjA2ODM3IDQuODQ2MzkgNi4wNzUyNCA0Ljg0NjM5IDUuNDYwODIgNS40NjA4MkM0Ljg0NjM5IDYuMDc1MjQgNC44NDYzOSA3LjA2ODM4IDUuNDYwODIgNy42ODI4TDEzLjc3ODMgMTYuMDAwM0w1LjQ2MDgyIDI0LjMxNzhDNC44NDYzOSAyNC45MzIzIDQuODQ2MzkgMjUuOTI1NCA1LjQ2MDgyIDI2LjUzOThDNS43NjcyNCAyNi44NDYzIDYuMTY5NTIgMjcuMDAwMyA2LjU3MTggMjcuMDAwM0M2Ljk3NDA4IDI3LjAwMDMgNy4zNzYzNiAyNi44NDYzIDcuNjgyNzkgMjYuNTM5OEwxNi4wMDAyIDE4LjIyMjNMMjQuMzE3NyAyNi41Mzk4QzI0LjYyNDEgMjYuODQ2MyAyNS4wMjY0IDI3LjAwMDMgMjUuNDI4NyAyNy4wMDAzQzI1LjgzMSAyNy4wMDAzIDI2LjIzMzMgMjYuODQ2MyAyNi41Mzk3IDI2LjUzOThDMjcuMTU0MSAyNS45MjU0IDI3LjE1NDEgMjQuOTMyMyAyNi41Mzk3IDI0LjMxNzhMMTguMjIyMiAxNi4wMDAzWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==";
@@ -49,15 +41,15 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         "PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0xNS45OTk5IDVDMTIuNzA5MyA1IDkuNzU0NzQgNi40NDQ1NCA3LjczNzY2IDguNzM3NjJMMTAuMTQ2NCAxMS4xNDY0QzEwLjQ2MTQgMTEuNDYxNCAxMC4yMzgzIDEyIDkuNzkyOSAxMkgyLjVDMi4yMjM4NiAxMiAyIDExLjc3NjEgMiAxMS41VjQuMjA3MDZDMiAzLjc2MTYgMi41Mzg1OCAzLjUzODUyIDIuODUzNTYgMy44NTM1TDUuNjEzMiA2LjYxMzE2QzguMTczOTIgMy43ODE1IDExLjg3ODIgMiAxNS45OTk5IDJDMjMuMTY0NCAyIDI5LjA3MDIgNy4zODA0MiAyOS45MDAyIDE0LjMyMTlDMjkuOTk4NiAxNS4xNDQ0IDI5LjQxMTYgMTUuODkxIDI4LjU4OSAxNS45ODk0QzI3Ljc2NjQgMTYuMDg3OCAyNy4wMTk4IDE1LjUwMDcgMjYuOTIxNCAxNC42NzgxQzI2LjI2OTYgOS4yMjY5IDIxLjYyNzIgNSAxNS45OTk5IDVaTTMuNDEwOSAxNi4wMTA2QzQuMjMzNDYgMTUuOTEyMiA0Ljk4MDAyIDE2LjQ5OTMgNS4wNzg0IDE3LjMyMTlDNS43MzAzMiAyMi43NzMgMTAuMzcyNiAyNyAxNS45OTk5IDI3QzE5LjI5MDYgMjcgMjIuMjQ1MiAyNS41NTU0IDI0LjI2MjIgMjMuMjYyNEwyMS44NTM2IDIwLjg1MzZDMjEuNTM4NiAyMC41Mzg2IDIxLjc2MTYgMjAgMjIuMjA3MiAyMEgyOS41QzI5Ljc3NjIgMjAgMzAgMjAuMjI0IDMwIDIwLjVWMjcuNzkzQzMwIDI4LjIzODQgMjkuNDYxNCAyOC40NjE0IDI5LjE0NjQgMjguMTQ2NEwyNi4zODY4IDI1LjM4NjhDMjMuODI2IDI4LjIxODQgMjAuMTIxNiAzMCAxNS45OTk5IDMwQzguODM1NDIgMzAgMi45Mjk3OCAyNC42MTk2IDIuMDk5NjIgMTcuNjc4MUMyLjAwMTI2IDE2Ljg1NTYgMi41ODgzNCAxNi4xMDkgMy40MTA5IDE2LjAxMDZaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K";
     const cameraButtonSVG =
         "PHN2ZyB3aWR0aD0iNzAiIGhlaWdodD0iNzAiIHZpZXdCb3g9IjAgMCA3MCA3MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMzUiIGN5PSIzNSIgcj0iMzUiIGZpbGw9IndoaXRlIi8+CjxjaXJjbGUgY3g9IjM1IiBjeT0iMzUiIHI9IjI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=";
+    const saveSVG =
+        "PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI5Ljc1ODMgNS4zOTY5NEMzMC40MDY5IDUuOTczNTMgMzAuNDY1NCA2Ljk2Njc5IDI5Ljg4ODggNy42MTU0NEwxMy4xMjY5IDI2LjQ3MjZDMTIuODI4NyAyNi44MDgxIDEyLjQwMTIgMjcgMTEuOTUyNCAyN0MxMS41MDM1IDI3IDExLjA3NjEgMjYuODA4MSAxMC43Nzc5IDI2LjQ3MjZMMi4zOTY5NCAxNy4wNDRDMS44MjAzNiAxNi4zOTUzIDEuODc4NzkgMTUuNDAyMSAyLjUyNzQ0IDE0LjgyNTVDMy4xNzYxIDE0LjI0ODkgNC4xNjkzNiAxNC4zMDc0IDQuNzQ1OTQgMTQuOTU2TDExLjk1MjQgMjMuMDYzM0wyNy41Mzk4IDUuNTI3NDRDMjguMTE2NCA0Ljg3ODc5IDI5LjEwOTYgNC44MjAzNiAyOS43NTgzIDUuMzk2OTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K";
 
     // eslint-disable-next-line no-async-promise-executor
     return new Promise(async (resolve, reject) => {
-        const hasMultipleCameraDevices = videoDevices.length > 1;
         let error: string | undefined;
         let stream: MediaStream | undefined;
         const styleElements: HTMLStyleElement[] = [];
         let videoIsReady = false;
-        let saveButtonIsDisabled = false;
         let shouldFaceEnvironment = true;
 
         for (const styleElement of createStyleElements(createStyles())) {
@@ -83,7 +75,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
         const { handler: takePictureHandler, cleanup: secondScreenCleanup } = prepareSecondScreen();
 
-        if (hasMultipleCameraDevices) {
+        if (await hasMultipleCameras()) {
             controlsWrapper.classList.add("take-picture-action-switch-control-wrapper");
             createActionAndSwitch();
         } else {
@@ -96,14 +88,34 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
             secondScreenCleanup();
 
-            resolve();
+            resolve(false);
         });
 
         switchControl.addEventListener("click", switchControlHandler);
 
-        actionControl.addEventListener("click", takePictureHandler);
+        actionControl.addEventListener(
+            "click",
+            showConfirmationScreen
+                ? takePictureHandler
+                : () => {
+                      const videoCanvas = getVideoCanvas();
+                      savePicture(videoCanvas, () => {
+                          videoCanvas.remove();
+                          closeControlHandler();
+                      });
+                  }
+        );
 
         video.addEventListener("loadedmetadata", () => (videoIsReady = true));
+
+        function getVideoCanvas(): HTMLCanvasElement {
+            const videoCanvas = document.createElement("canvas");
+            videoCanvas.height = video.videoHeight;
+            videoCanvas.width = video.videoWidth;
+            const videoContext = videoCanvas.getContext("2d");
+            videoContext?.drawImage(video, 0, 0);
+            return videoCanvas;
+        }
 
         function createStyles(): string[] {
             return [
@@ -178,19 +190,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .take-picture-screen-reader {
-                    border: 0;
-                    clip: rect(0 0 0 0);
-                    height: 1px;
-                    margin: -1px;
-                    overflow: hidden;
-                    padding: 0;
-                    position: absolute;
-                    white-space: nowrap;
-                    width: 1px;
-                };
-                `,
-                `
                 .take-picture-action-spacing {
                     flex: 1;
                     display: flex;
@@ -222,7 +221,10 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `,
                 `
                 .take-picture-button-wrapper {
-                    padding: 16px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    z-index: 111;
                 };
                 `,
                 `
@@ -239,26 +241,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 };
                 `,
                 `
-                .take-picture-save-button.take-picture-disabled {
-                    background-color: #888888bd;
-                };
-                `,
-                `
-                .take-picture-cancel-button {
-                    margin-top: 8px;
-                    color: #264AE5;
-                    background-color: white;
-                    width: 100%;
-                    border-radius: 4px;
-                    height: 40px;
-                    font-size: 14px;
-                    line-height: 20px;
-                    text-align: center;
-                    border: 1px solid #264AE5;
-                };
-                `,
-
-                `
                 .take-picture-switch-control {
                     background-color: transparent;
                     border-style: none;
@@ -269,6 +251,14 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `
                 .take-picture-close-control {
                     margin: 30px 0 0 30px;
+                    border-style: none;
+                    padding: 0;
+                    background-color: transparent;
+                };
+                `,
+                `
+                .take-picture-save-control {
+                    margin: 30px 30px 0 0;
                     border-style: none;
                     padding: 0;
                     background-color: transparent;
@@ -293,7 +283,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                 `,
                 `
                 .take-picture-image {
+                    position: absolute;
+                    /* Should be higher than the z-index of '.layout-atlas .region-sidebar' so it sits on top of the page. */
+                    z-index: 110;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    object-fit: cover;
                     width: 100%;
+                    height: 100%;
+                    background-color: black;
                 }
                 `,
                 `
@@ -323,13 +323,6 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             const wrapper = document.createElement("div");
             wrapper.setAttribute("role", "dialog");
             wrapper.setAttribute("aria-labelledby", "take-picture-modal-label");
-            const hiddenDialogLabel = document.createElement("h1");
-            hiddenDialogLabel.id = "take-picture-modal-label";
-            hiddenDialogLabel.classList.add("take-picture-screen-reader");
-            hiddenDialogLabel.textContent = getUserText(
-                "Take a picture using your device's camera",
-                "Maak een foto met de camera van uw apparaat"
-            );
             wrapper.classList.add("take-picture-wrapper");
 
             const video = document.createElement("video");
@@ -344,30 +337,21 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
             closeControlWrapper.classList.add("take-picture-close-control-wrapper");
 
             const actionControl = document.createElement("button");
-            const actionControlHiddenText = document.createElement("span");
-            actionControlHiddenText.textContent = getUserText("Take picture", "Foto nemen");
-            actionControlHiddenText.classList.add("take-picture-screen-reader");
-            actionControl.appendChild(actionControlHiddenText);
+            actionControl.setAttribute("aria-label", getUserText("Take picture", "Foto nemen"));
             actionControl.classList.add("take-picture-action-control");
 
             const actionControlWrapper = document.createElement("div");
             actionControlWrapper.classList.add("take-picture-action-spacing");
 
             const switchControl = document.createElement("button");
-            const switchControlHiddenText = document.createElement("span");
-            switchControlHiddenText.textContent = getUserText("Switch camera", "Van camera wisselen");
-            switchControlHiddenText.classList.add("take-picture-screen-reader");
-            switchControl.appendChild(switchControlHiddenText);
+            switchControl.setAttribute("aria-label", getUserText("Switch camera", "Van camera wisselen"));
             switchControl.classList.add("take-picture-switch-control");
 
             const switchControlWrapper = document.createElement("div");
             switchControlWrapper.classList.add("take-picture-switch-spacing");
 
             const closeControl = document.createElement("button");
-            const closeControlHiddenText = document.createElement("span");
-            closeControlHiddenText.classList.add("take-picture-screen-reader");
-            closeControlHiddenText.textContent = getUserText("Close", "Afsluiten");
-            closeControl.appendChild(closeControlHiddenText);
+            closeControl.setAttribute("aria-label", getUserText("Close", "Afsluiten"));
             closeControl.classList.add("take-picture-close-control");
 
             const closeImg = document.createElement("img");
@@ -420,129 +404,51 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
                         confirmationWrapper = document.createElement("div");
                         confirmationWrapper.classList.add("take-picture-confirm-wrapper");
 
-                        const topSection = document.createElement("div");
-                        topSection.classList.add("take-picture-confirm-top-section");
+                        // Element to retrieve the blob from mediaStream (not rendered on the screen)
+                        const videoCanvas = getVideoCanvas();
 
-                        const middleSection = document.createElement("div");
-                        middleSection.classList.add("take-picture-confirm-middle-section");
-
-                        const bottomSection = document.createElement("div");
-                        bottomSection.classList.add("take-picture-confirm-bottom-section");
-
-                        const videoCanvas = document.createElement("canvas");
-                        videoCanvas.classList.add("take-picture-image");
-                        videoCanvas.height = video.videoHeight;
-                        videoCanvas.width = video.videoWidth;
-                        const videoContext = videoCanvas.getContext("2d");
-                        videoContext?.drawImage(video, 0, 0);
+                        const pictureImg = document.createElement("img");
+                        pictureImg.classList.add("take-picture-image");
+                        pictureImg.src = videoCanvas.toDataURL();
 
                         const buttonWrapper = document.createElement("div");
                         buttonWrapper.classList.add("take-picture-button-wrapper");
 
                         const saveBtn = document.createElement("button");
-                        saveBtn.classList.add("take-picture-save-button");
-                        saveBtn.textContent = getUserText("Save", "Opslaan");
+                        saveBtn.setAttribute("aria-label", getUserText("Save", "Opslaan"));
+                        saveBtn.classList.add("take-picture-save-control");
+
+                        const saveImg = document.createElement("img");
+                        saveImg.src = `data:image/svg+xml;base64,${saveSVG}`;
+                        saveBtn.appendChild(saveImg);
 
                         const closeBtn = document.createElement("button");
-                        closeBtn.classList.add("take-picture-cancel-button");
-                        closeBtn.textContent = getUserText("Close", "Afsluiten");
+                        closeBtn.setAttribute("aria-label", getUserText("Close", "Afsluiten"));
+                        closeBtn.classList.add("take-picture-close-control");
 
-                        middleSection.appendChild(videoCanvas);
-                        buttonWrapper.appendChild(saveBtn);
+                        const closeImg = document.createElement("img");
+                        closeImg.src = `data:image/svg+xml;base64,${closeSVG}`;
+                        closeBtn.appendChild(closeImg);
+
                         buttonWrapper.appendChild(closeBtn);
-                        bottomSection.appendChild(buttonWrapper);
-                        confirmationWrapper.appendChild(topSection);
-                        confirmationWrapper.appendChild(middleSection);
-                        confirmationWrapper.appendChild(bottomSection);
+                        buttonWrapper.appendChild(saveBtn);
+
+                        confirmationWrapper.appendChild(buttonWrapper);
+                        confirmationWrapper.appendChild(pictureImg);
 
                         document.body.appendChild(confirmationWrapper);
 
-                        saveBtn.addEventListener("click", saveFile);
-
-                        closeBtn.addEventListener("click", () => {
+                        saveBtn.addEventListener("click", () => {
                             cleanupConfirmationElements();
-                            resolve();
+                            savePicture(videoCanvas, closeControlHandler);
                         });
+
+                        closeBtn.addEventListener("click", () => cleanupConfirmationElements());
 
                         // eslint-disable-next-line no-inner-declarations
                         function cleanupConfirmationElements(): void {
-                            updateSaveButtonDisabledState(false);
                             document.body.removeChild(confirmationWrapper);
-                        }
-
-                        // eslint-disable-next-line no-inner-declarations
-                        async function saveFile(): Promise<void> {
-                            if (!saveButtonIsDisabled) {
-                                updateSaveButtonDisabledState(true);
-                                const filename = `device-camera-picture-${new Date().getTime()}.png`; // `toBlob` defaults to PNG.
-
-                                new Promise((resolve, reject) => {
-                                    videoCanvas.toBlob(blob => {
-                                        if (blob) {
-                                            resolve(blob);
-                                        } else {
-                                            reject(new Error("Couldn't save picture, please try again."));
-                                        }
-                                    });
-                                })
-                                    .then((blob: Blob) => {
-                                        mx.data.saveDocument(
-                                            picture.getGuid(),
-                                            filename,
-                                            {},
-                                            blob,
-                                            () => {
-                                                picture.set("Name", filename);
-
-                                                mx.data.commit({
-                                                    mxobj: picture,
-                                                    callback: () => {
-                                                        cleanupConfirmationElements();
-                                                        resolve();
-                                                    },
-                                                    error: (error: Error) => {
-                                                        updateSaveButtonDisabledState(false);
-
-                                                        reject(
-                                                            new Error(
-                                                                `An error occurred while trying to save the file${
-                                                                    error.message ? `: ${error.message}` : ""
-                                                                }. Please try again.`
-                                                            )
-                                                        );
-                                                    }
-                                                });
-                                            },
-                                            (error: Error) => {
-                                                updateSaveButtonDisabledState(false);
-
-                                                reject(
-                                                    new Error(
-                                                        `An error occurred while trying to save the file${
-                                                            error.message ? `: ${error.message}` : ""
-                                                        }. Please try again.`
-                                                    )
-                                                );
-                                            }
-                                        );
-                                    })
-                                    .catch((message: string) => {
-                                        updateSaveButtonDisabledState(false);
-
-                                        reject(new Error(message));
-                                    });
-                            }
-                        }
-
-                        // eslint-disable-next-line no-inner-declarations
-                        function updateSaveButtonDisabledState(isDisabled: boolean): void {
-                            saveButtonIsDisabled = isDisabled;
-                            saveBtn.disabled = isDisabled;
-                            if (isDisabled) {
-                                saveBtn.classList.add("take-picture-disabled");
-                            } else {
-                                saveBtn.classList.remove("take-picture-disabled");
-                            }
+                            videoCanvas.remove();
                         }
                     }
                 },
@@ -563,7 +469,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
             stopCamera();
 
-            if (hasMultipleCameraDevices) {
+            if (await hasMultipleCameras()) {
                 shouldFaceEnvironment = !shouldFaceEnvironment;
             }
 
@@ -582,7 +488,13 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
         async function startCamera(facingMode: string): Promise<void> {
             try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode } });
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode,
+                        width: { min: 1280, ideal: 1920, max: 2560 },
+                        height: { min: 720, ideal: 1080, max: 1440 }
+                    }
+                });
 
                 stream?.getTracks()?.forEach(track => {
                     track.addEventListener("ended", () => {
@@ -618,7 +530,7 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
                 mx.ui.error(error);
 
-                resolve();
+                resolve(false);
             }
 
             if (stream) {
@@ -637,6 +549,66 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
 
             stream = undefined;
         }
+
+        async function savePicture(videoCanvas: HTMLCanvasElement, onSuccess?: () => void): Promise<void> {
+            const progressId = mx.ui.showProgress();
+            const filename = `device-camera-picture-${new Date().getTime()}.png`; // `toBlob` defaults to PNG.
+
+            new Promise((resolve, reject) => {
+                videoCanvas.toBlob(blob => {
+                    if (blob) {
+                        resolve(blob);
+                    } else {
+                        mx.ui.hideProgress(progressId);
+                        reject(new Error("Couldn't save picture, please try again."));
+                    }
+                });
+            })
+                .then((blob: Blob) => {
+                    mx.data.saveDocument(
+                        picture.getGuid(),
+                        filename,
+                        {},
+                        blob,
+                        () => {
+                            picture.set("Name", filename);
+
+                            mx.data.commit({
+                                mxobj: picture,
+                                callback: () => {
+                                    mx.ui.hideProgress(progressId);
+                                    onSuccess?.();
+                                    resolve(true);
+                                },
+                                error: (error: Error) => {
+                                    mx.ui.hideProgress(progressId);
+                                    reject(
+                                        new Error(
+                                            `An error occurred while trying to save the file${
+                                                error.message ? `: ${error.message}` : ""
+                                            }. Please try again.`
+                                        )
+                                    );
+                                }
+                            });
+                        },
+                        (error: Error) => {
+                            mx.ui.hideProgress(progressId);
+                            reject(
+                                new Error(
+                                    `An error occurred while trying to save the file${
+                                        error.message ? `: ${error.message}` : ""
+                                    }. Please try again.`
+                                )
+                            );
+                        }
+                    );
+                })
+                .catch((message: string) => {
+                    mx.ui.hideProgress(progressId);
+                    reject(new Error(message));
+                });
+        }
     });
 
     function prepareLanguage(): (english: string, dutch: string) => string {
@@ -649,6 +621,17 @@ export async function TakePicture(picture: mendix.lib.MxObject): Promise<boolean
         } catch (_) {
             return englishFn;
         }
+    }
+
+    async function hasMultipleCameras(): Promise<boolean> {
+        const videoDevices = (await navigator.mediaDevices.enumerateDevices()).filter(
+            deviceInfo => deviceInfo.kind === "videoinput"
+        );
+
+        if (!videoDevices.length) {
+            return Promise.reject(new Error("Your device does not have a camera."));
+        }
+        return videoDevices.length > 1;
     }
     // END USER CODE
 }
