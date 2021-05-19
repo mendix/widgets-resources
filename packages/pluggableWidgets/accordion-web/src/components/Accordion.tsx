@@ -3,6 +3,7 @@ import { createElement, ReactElement, useReducer, useRef } from "react";
 import AccordionGroup, { AccGroup } from "./AccordionGroup";
 import { getAccordionGroupsReducer } from "../utils/AccordionGroupStateReducer";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
+import classNames from "classnames";
 
 export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
     id: string;
@@ -33,7 +34,12 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
     ));
 
     return (
-        <div id={props.id} className={props.class} style={props.style} tabIndex={props.tabIndex}>
+        <div
+            id={props.id}
+            className={classNames("widget-accordion", props.class)}
+            style={props.style}
+            tabIndex={props.tabIndex}
+        >
             {accordionGroupElements}
         </div>
     );

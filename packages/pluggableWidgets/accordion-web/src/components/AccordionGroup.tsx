@@ -43,9 +43,18 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     }
 
     return (
-        <section className={classNames("widget-accordion-group", { collapsed: group.collapsed })}>
-            <header onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}>{group.header}</header>
-            <div>{divContentMounted ? group.content : undefined}</div>
+        <section
+            className={classNames("widget-accordion-group", { "widget-accordion-group-collapsed": group.collapsed })}
+        >
+            <header
+                className={classNames("widget-accordion-group-header", {
+                    "widget-accordion-group-header-clickable": accordionGroupsDispatch
+                })}
+                onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}
+            >
+                {group.header}
+            </header>
+            <div className={"widget-accordion-group-content"}>{divContentMounted ? group.content : undefined}</div>
         </section>
     );
 }
