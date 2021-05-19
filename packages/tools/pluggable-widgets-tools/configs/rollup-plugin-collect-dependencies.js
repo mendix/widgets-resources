@@ -1,6 +1,6 @@
 import fg from "fast-glob";
 import { readJson, writeJson } from "fs-extra";
-import { existsSync } from "fs";
+import { existsSync, join } from "fs";
 import { dirname, join } from "path";
 import copy from "recursive-copy";
 import { promisify } from "util";
@@ -66,7 +66,7 @@ async function resolvePackage(target, sourceDir) {
     const targetParts = target.split("/");
     const targetPackage = targetParts[0].startsWith("@") ? `${targetParts[0]}/${targetParts[1]}` : targetParts[0];
     try {
-        let targetPackagePath = await promisify(resolve)(`${targetPackage}/package.json`, { basedir: sourceDir });
+        let targetPackagePath = await promisify(resolve)(join(targetPackage, "package.json"), { basedir: sourceDir });
         return dirname(targetPackagePath);
     } catch (e) {
         if (e.message.includes("Cannot find module")) throw e;
