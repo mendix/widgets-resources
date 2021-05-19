@@ -26,9 +26,6 @@
   "engines": {
     "node": ">=12"
   },
-  "bugs": {
-    "url": "https://github.com/mendix/widgets-resources/issues"
-  },
   "dependencies": {
     "chalk": "^4.1.0",
     "semver": "^7.3.2",
