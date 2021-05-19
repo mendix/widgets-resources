@@ -1,6 +1,9 @@
 import { createElement, Dispatch, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { AccordionGroupsReducerAction } from "../utils/AccordionGroupStateReducer";
+import classNames from "classnames";
+
+import "../ui/accordion-main.scss";
 
 export interface AccGroup {
     header: ReactNode;
@@ -40,11 +43,9 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     }
 
     return (
-        <section>
+        <section className={classNames("widget-accordion-group", { collapsed: group.collapsed })}>
             <header onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}>{group.header}</header>
-            <div style={{ display: accordionGroupsDispatch && group.collapsed ? "none" : undefined }}>
-                {divContentMounted ? group.content : undefined}
-            </div>
+            <div>{divContentMounted ? group.content : undefined}</div>
         </section>
     );
 }
