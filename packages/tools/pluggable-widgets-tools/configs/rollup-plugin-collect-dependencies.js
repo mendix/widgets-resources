@@ -69,7 +69,7 @@ async function resolvePackage(target, sourceDir) {
         let targetPackagePath = await promisify(resolve)(join(targetPackage, "package.json"), { basedir: sourceDir });
         return dirname(targetPackagePath);
     } catch (e) {
-        if (e.message.includes("Cannot find module") && !basename(targetPackage).test(/^.+\.{js|jsx|ts|tsx|json}$/)) {
+        if (e.message.includes("Cannot find module") && !basename(targetPackage).test(/\.((j|t)sx?)|json|(pn|jpe?|sv)g|(tif|gi)f$/g)) {
             throw e;
         }
         return undefined;
