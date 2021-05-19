@@ -1,6 +1,6 @@
 import fg from "fast-glob";
 import { readJson, writeJson } from "fs-extra";
-import { existsSync, join } from "fs";
+import { existsSync } from "fs";
 import { dirname, join } from "path";
 import copy from "recursive-copy";
 import { promisify } from "util";
