@@ -23,7 +23,7 @@
 
             <propertyGroup caption="Events">
                 <property key="onDetect" type="action" required="false">
-                    <caption>On Detect Action</caption>
+                    <caption>On detect action</caption>
                     <description>Action to trigger when the barcode has been successfully detected.</description>
                 </property>
             </propertyGroup>
