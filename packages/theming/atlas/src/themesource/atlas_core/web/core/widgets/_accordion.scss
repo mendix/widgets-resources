@@ -16,37 +16,46 @@
         background-color: $bg-color-secondary;
 
         .widget-accordion-group {
-            &:first-child {
-                border-top: 1px solid $accordion-primary-border-color;
-            }
+            @include get-accordion-group-styles(
+                $accordion-primary-bg,
+                $accordion-primary-bg-hover,
+                $accordion-primary-border-color,
+                $accordion-primary-color
+            );
+        }
+    }
+}
 
-            border-bottom: 1px solid $accordion-primary-border-color;
+@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color) {
+    &:first-child {
+        border-top: 1px solid $border-color;
+    }
 
-            .widget-accordion-group-header {
-                background-color: $accordion-primary-bg;
-                padding: $spacing-medium;
+    border-bottom: 1px solid $border-color;
 
-                > :is(h1, h2, h3, h4, h5, h6, p, span) {
-                    color: $accordion-primary-color;
-                }
+    .widget-accordion-group-header {
+        background-color: $background-color;
+        padding: $spacing-medium;
 
-                &.widget-accordion-group-header-clickable {
-                    &:hover,
-                    &:hover *,
-                    &:focus,
-                    &:focus *,
-                    &:active,
-                    &:active * {
-                        cursor: pointer;
-                        background-color: $accordion-primary-bg-hover;
-                        color: $accordion-primary-color;
-                    }
-                }
-            }
+        > :is(h1, h2, h3, h4, h5, h6, p, span) {
+            color: $color;
+        }
 
-            .widget-accordion-group-content {
-                padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
+        &.widget-accordion-group-header-clickable {
+            &:hover,
+            &:hover *,
+            &:focus,
+            &:focus *,
+            &:active,
+            &:active * {
+                cursor: pointer;
+                background-color: $background-color-hover;
+                color: $color;
             }
         }
+    }
+
+    .widget-accordion-group-content {
+        padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
     }
 }
