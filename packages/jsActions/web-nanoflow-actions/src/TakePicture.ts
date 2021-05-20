@@ -550,7 +550,7 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
             stream = undefined;
         }
 
-        async function savePicture(videoCanvas: HTMLCanvasElement, onSuccess?: () => void): Promise<void> {
+        function savePicture(videoCanvas: HTMLCanvasElement, onSuccess?: () => void): void {
             const progressId = mx.ui.showProgress();
             const filename = `device-camera-picture-${new Date().getTime()}.png`; // `toBlob` defaults to PNG.
 
