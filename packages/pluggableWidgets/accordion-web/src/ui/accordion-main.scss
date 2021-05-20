@@ -1,7 +1,10 @@
+$background-color: #ffffff;
 $border-color: #ced0d3;
+$header-background-color-hover: #f8f8f8;
+$header-color-hover: #264ae5;
 
 .widget-accordion {
-    background-color: #ffffff;
+    background-color: $background-color;
 }
 
 .widget-accordion-group {
@@ -36,8 +39,8 @@ $border-color: #ced0d3;
             &:active,
             &:active * {
                 cursor: pointer;
-                background-color: #f8f8f8;
-                color: #264ae5;
+                background-color: $header-background-color-hover;
+                color: $header-color-hover;
             }
         }
     }
