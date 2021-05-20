@@ -310,6 +310,16 @@
     @include barcode-scanner();
 }
 
+@import "core/widgets/accordion";
+@if not $exclude-accordion {
+    @include accordion();
+}
+
+@import "core/helpers/accordion";
+@if not $exclude-accordion and not $exclude-accordion-helpers {
+    @include accordion-helpers();
+}
+
 // Custom widgets
 @import "core/widgetscustom/dijit-widget";
 @if not $exclude-custom-dijit-widget {

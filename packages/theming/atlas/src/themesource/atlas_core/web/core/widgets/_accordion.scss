@@ -1,0 +1,52 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin accordion() {
+    /* ==========================================================================
+       Accordion
+
+       Default Mendix accordion widget styles.
+    ========================================================================== */
+
+    .widget-accordion {
+        background-color: $bg-color-secondary;
+
+        .widget-accordion-group {
+            &:first-child {
+                border-top: 1px solid $accordion-primary-border-color;
+            }
+
+            border-bottom: 1px solid $accordion-primary-border-color;
+
+            .widget-accordion-group-header {
+                background-color: $accordion-primary-bg;
+                padding: $spacing-medium;
+
+                > :is(h1, h2, h3, h4, h5, h6, p, span) {
+                    color: $accordion-primary-color;
+                }
+
+                &.widget-accordion-group-header-clickable {
+                    &:hover,
+                    &:hover *,
+                    &:focus,
+                    &:focus *,
+                    &:active,
+                    &:active * {
+                        cursor: pointer;
+                        background-color: $accordion-primary-bg-hover;
+                        color: $accordion-primary-color;
+                    }
+                }
+            }
+
+            .widget-accordion-group-content {
+                padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
+            }
+        }
+    }
+}

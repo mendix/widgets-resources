@@ -1,0 +1,37 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin accordion-helpers() {
+    /* ==========================================================================
+       Accordion
+
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+
+    .widget-accordion-brand-primary {
+        .widget-accordion-group-header {
+            background-color: $brand-primary;
+        }
+    }
+
+    .widget-accordion-brand-secondary {
+        background-color: $brand-default;
+    }
+
+    .widget-accordion-brand-success {
+        background-color: $brand-success;
+    }
+
+    .widget-accordion-brand-warning {
+        background-color: $brand-warning;
+    }
+
+    .widget-accordion-brand-danger {
+        background-color: $brand-danger;
+    }
+}
