@@ -13,7 +13,7 @@ import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { convertDynamicModeledMarker, convertStaticModeledMarker } from "./util/data";
 
-type Props = MapsProps<MapsStyle>;
+export type Props = MapsProps<MapsStyle>;
 
 interface State {
     status: Status;
