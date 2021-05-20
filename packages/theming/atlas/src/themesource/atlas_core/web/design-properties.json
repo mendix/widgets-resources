@@ -1153,6 +1153,12 @@
             "type": "Toggle",
             "description": "Add alternating background color to the content section of groups in the accordion.",
             "class": "widget-accordion-striped"
+        },
+        {
+            "name": "Compact",
+            "type": "Toggle",
+            "description": "Make groups in the accordion more compact.",
+            "class": "widget-accordion-compact"
         }
     ]
 }

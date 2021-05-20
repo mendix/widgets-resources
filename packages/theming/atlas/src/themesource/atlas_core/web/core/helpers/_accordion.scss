@@ -14,27 +14,20 @@
     ========================================================================== */
 
     .widget-accordion {
-        @include get-accordion-helper-styles(vertical);
+        @include get-accordion-helper-styles();
 
-        &.widget-accordion-bordered-all {
-            @include get-accordion-helper-styles(all);
-        }
-
-        &.widget-accordion-bordered-none {
-            @include get-accordion-helper-styles(none);
-        }
+        @include get-accordion-root-helper-styles();
     }
 }
 
-@mixin get-accordion-helper-styles($border) {
+@mixin get-accordion-helper-styles() {
     .widget-accordion-group {
         &.widget-accordion-brand-secondary {
             @include get-accordion-group-styles(
                 $accordion-secondary-bg,
                 $accordion-secondary-bg-hover,
                 $accordion-secondary-border-color,
-                $accordion-secondary-color,
-                $border
+                $accordion-secondary-color
             );
 
             .widget-accordion-group-header {
@@ -47,8 +40,7 @@
                 $accordion-success-bg,
                 $accordion-success-bg-hover,
                 $accordion-success-border-color,
-                $accordion-success-color,
-                $border
+                $accordion-success-color
             );
         }
 
@@ -57,8 +49,7 @@
                 $accordion-warning-bg,
                 $accordion-warning-bg-hover,
                 $accordion-warning-border-color,
-                $accordion-warning-color,
-                $border
+                $accordion-warning-color
             );
         }
 
@@ -67,8 +58,7 @@
                 $accordion-danger-bg,
                 $accordion-danger-bg-hover,
                 $accordion-danger-border-color,
-                $accordion-danger-color,
-                $border
+                $accordion-danger-color
             );
         }
     }

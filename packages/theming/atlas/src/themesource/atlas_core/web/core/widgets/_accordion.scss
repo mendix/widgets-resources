@@ -20,55 +20,20 @@
                 $accordion-primary-bg,
                 $accordion-primary-bg-hover,
                 $accordion-primary-border-color,
-                $accordion-primary-color,
-                vertical
+                $accordion-primary-color
             );
         }
 
-        &.widget-accordion-bordered-all {
-            .widget-accordion-group {
-                @include get-accordion-group-styles(
-                    $accordion-primary-bg,
-                    $accordion-primary-bg-hover,
-                    $accordion-primary-border-color,
-                    $accordion-primary-color,
-                    all
-                );
-            }
-        }
-
-        &.widget-accordion-bordered-none {
-            .widget-accordion-group {
-                @include get-accordion-group-styles(
-                    $accordion-primary-bg,
-                    $accordion-primary-bg-hover,
-                    $accordion-primary-border-color,
-                    $accordion-primary-color,
-                    none
-                );
-            }
-        }
-
-        &.widget-accordion-striped {
-            .widget-accordion-group:nth-child(2n + 1) {
-                .widget-accordion-group-content {
-                    background-color: $accordion-bg-striped;
-                }
-            }
-        }
+        @include get-accordion-root-helper-styles();
     }
 }
 
-@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color, $border) {
+@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color) {
     &:first-child {
         border-top: none;
     }
 
-    border-bottom: none;
-
-    @if $border == vertical {
-        border-bottom: 1px solid $border-color;
-    }
+    border-bottom: 1px solid $border-color;
 
     .widget-accordion-group-header {
         background-color: $background-color;
@@ -93,11 +58,50 @@
     }
 
     .widget-accordion-group-content {
-        @if $border == all {
-            border-right: 1px solid $border-color;
-            border-bottom: 1px solid $border-color;
-            border-left: 1px solid $border-color;
-        }
+        border-color: $border-color;
         padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
+    }
+}
+
+@mixin get-accordion-root-helper-styles() {
+    &.widget-accordion-bordered-all {
+        .widget-accordion-group {
+            border-bottom: none;
+
+            .widget-accordion-group-content {
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-left-width: 1px;
+                border-left-style: solid;
+            }
+        }
+    }
+
+    &.widget-accordion-bordered-none {
+        .widget-accordion-group {
+            border-bottom: none;
+        }
+    }
+
+    &.widget-accordion-striped {
+        .widget-accordion-group:nth-child(2n + 1) {
+            .widget-accordion-group-content {
+                background-color: $accordion-bg-striped;
+            }
+        }
+    }
+
+    &.widget-accordion-compact {
+        .widget-accordion-group {
+            .widget-accordion-group-header {
+                padding: $spacing-smaller $spacing-small;
+            }
+
+            .widget-accordion-group-content {
+                padding: $spacing-smaller $spacing-small $spacing-medium $spacing-small;
+            }
+        }
     }
 }
