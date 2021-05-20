@@ -48,6 +48,14 @@
                 );
             }
         }
+
+        &.widget-accordion-striped {
+            .widget-accordion-group:nth-child(2n + 1) {
+                .widget-accordion-group-content {
+                    background-color: $accordion-bg-striped;
+                }
+            }
+        }
     }
 }
 
