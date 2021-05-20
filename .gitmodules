@@ -102,3 +102,7 @@
 	path = packages/pluggableWidgets/barcode-scanner-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = barcode-scanner-web
+[submodule "packages/pluggableWidgets/accordion-web/tests/testProject"]
+	path = packages/pluggableWidgets/accordion-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = accordion-web
