@@ -1127,5 +1127,26 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.web.accordion.Accordion": [
+        {
+            "name": "Borders",
+            "type": "Dropdown",
+            "description": "Change the border appearance of groups in the accordion. By default, only vertical borders are applied.",
+            "options": [
+                {
+                    "name": "All",
+                    "class": "widget-accordion-bordered-all"
+                },
+                {
+                    "name": "Vertical",
+                    "class": "widget-accordion-bordered-vertical"
+                },
+                {
+                    "name": "None",
+                    "class": "widget-accordion-bordered-none"
+                }
+            ]
+        }
     ]
 }

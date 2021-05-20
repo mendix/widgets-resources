@@ -14,42 +14,62 @@
     ========================================================================== */
 
     .widget-accordion {
-        .widget-accordion-group {
-            &.widget-accordion-brand-secondary {
-                @include get-accordion-group-styles(
-                    $accordion-secondary-bg,
-                    $accordion-secondary-bg-hover,
-                    $accordion-secondary-border-color,
-                    $accordion-secondary-color
-                );
-            }
+        @include get-accordion-helper-styles(vertical);
 
-            &.widget-accordion-brand-success {
-                @include get-accordion-group-styles(
-                    $accordion-success-bg,
-                    $accordion-success-bg-hover,
-                    $accordion-success-border-color,
-                    $accordion-success-color
-                );
-            }
+        &.widget-accordion-bordered-all {
+            @include get-accordion-helper-styles(all);
+        }
 
-            &.widget-accordion-brand-warning {
-                @include get-accordion-group-styles(
-                    $accordion-warning-bg,
-                    $accordion-warning-bg-hover,
-                    $accordion-warning-border-color,
-                    $accordion-warning-color
-                );
-            }
+        &.widget-accordion-bordered-none {
+            @include get-accordion-helper-styles(none);
+        }
+    }
+}
 
-            &.widget-accordion-brand-danger {
-                @include get-accordion-group-styles(
-                    $accordion-danger-bg,
-                    $accordion-danger-bg-hover,
-                    $accordion-danger-border-color,
-                    $accordion-danger-color
-                );
+@mixin get-accordion-helper-styles($border) {
+    .widget-accordion-group {
+        &.widget-accordion-brand-secondary {
+            @include get-accordion-group-styles(
+                $accordion-secondary-bg,
+                $accordion-secondary-bg-hover,
+                $accordion-secondary-border-color,
+                $accordion-secondary-color,
+                $border
+            );
+
+            .widget-accordion-group-header {
+                border: 1px solid $accordion-secondary-border-color;
             }
+        }
+
+        &.widget-accordion-brand-success {
+            @include get-accordion-group-styles(
+                $accordion-success-bg,
+                $accordion-success-bg-hover,
+                $accordion-success-border-color,
+                $accordion-success-color,
+                $border
+            );
+        }
+
+        &.widget-accordion-brand-warning {
+            @include get-accordion-group-styles(
+                $accordion-warning-bg,
+                $accordion-warning-bg-hover,
+                $accordion-warning-border-color,
+                $accordion-warning-color,
+                $border
+            );
+        }
+
+        &.widget-accordion-brand-danger {
+            @include get-accordion-group-styles(
+                $accordion-danger-bg,
+                $accordion-danger-bg-hover,
+                $accordion-danger-border-color,
+                $accordion-danger-color,
+                $border
+            );
         }
     }
 }

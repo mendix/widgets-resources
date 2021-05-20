@@ -20,18 +20,47 @@
                 $accordion-primary-bg,
                 $accordion-primary-bg-hover,
                 $accordion-primary-border-color,
-                $accordion-primary-color
+                $accordion-primary-color,
+                vertical
             );
+        }
+
+        &.widget-accordion-bordered-all {
+            .widget-accordion-group {
+                @include get-accordion-group-styles(
+                    $accordion-primary-bg,
+                    $accordion-primary-bg-hover,
+                    $accordion-primary-border-color,
+                    $accordion-primary-color,
+                    all
+                );
+            }
+        }
+
+        &.widget-accordion-bordered-none {
+            .widget-accordion-group {
+                @include get-accordion-group-styles(
+                    $accordion-primary-bg,
+                    $accordion-primary-bg-hover,
+                    $accordion-primary-border-color,
+                    $accordion-primary-color,
+                    none
+                );
+            }
         }
     }
 }
 
-@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color) {
+@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color, $border) {
     &:first-child {
-        border-top: 1px solid $border-color;
+        border-top: none;
     }
 
-    border-bottom: 1px solid $border-color;
+    border-bottom: none;
+
+    @if $border == vertical {
+        border-bottom: 1px solid $border-color;
+    }
 
     .widget-accordion-group-header {
         background-color: $background-color;
@@ -56,6 +85,11 @@
     }
 
     .widget-accordion-group-content {
+        @if $border == all {
+            border-right: 1px solid $border-color;
+            border-bottom: 1px solid $border-color;
+            border-left: 1px solid $border-color;
+        }
         padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
     }
 }
