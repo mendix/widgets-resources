@@ -11,7 +11,7 @@ import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 
-type Props = MapsProps<MapsStyle>;
+export type Props = MapsProps<MapsStyle>;
 
 interface State {
     status: Status;
