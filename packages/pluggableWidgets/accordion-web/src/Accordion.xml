@@ -43,6 +43,11 @@
                                 <description />
                                 <returnType type="Boolean" />
                             </property>
+                            <property key="dynamicClass" type="expression" required="false">
+                                <caption>Dynamic class</caption>
+                                <description />
+                                <returnType type="String"/>
+                            </property>
                         </propertyGroup>
                     </properties>
                 </property>

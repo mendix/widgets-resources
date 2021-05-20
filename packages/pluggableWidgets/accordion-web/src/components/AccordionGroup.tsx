@@ -10,6 +10,7 @@ export interface AccGroup {
     content: ReactNode;
     collapsed?: boolean;
     visible: boolean;
+    dynamicClassName?: string;
 }
 
 export interface AccordionGroupProps {
@@ -44,7 +45,11 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     return (
         <section
-            className={classNames("widget-accordion-group", { "widget-accordion-group-collapsed": group.collapsed })}
+            className={classNames(
+                "widget-accordion-group",
+                { "widget-accordion-group-collapsed": group.collapsed },
+                group.dynamicClassName
+            )}
         >
             <header
                 className={classNames("widget-accordion-group-header", {
