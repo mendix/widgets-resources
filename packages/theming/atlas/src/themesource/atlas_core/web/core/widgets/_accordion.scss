@@ -45,14 +45,19 @@
 
         &.widget-accordion-group-header-clickable {
             &:hover,
-            &:hover *,
             &:focus,
-            &:focus *,
-            &:active,
-            &:active * {
-                cursor: pointer;
+            &:active {
                 background-color: $background-color-hover;
                 color: $color;
+                cursor: pointer;
+
+                > :is(h1, h2, h3, h4, h5, h6, p, span) {
+                    color: $color;
+                }
+
+                * {
+                    cursor: pointer;
+                }
             }
         }
     }
