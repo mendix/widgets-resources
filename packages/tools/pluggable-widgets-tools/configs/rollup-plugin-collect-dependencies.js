@@ -1,7 +1,7 @@
 import fg from "fast-glob";
 import { readJson, writeJson } from "fs-extra";
 import { existsSync } from "fs";
-import { basename, dirname, join } from "path";
+import { dirname, join } from "path";
 import copy from "recursive-copy";
 import { promisify } from "util";
 import resolve from "resolve";
@@ -66,10 +66,9 @@ async function resolvePackage(target, sourceDir) {
     const targetParts = target.split("/");
     const targetPackage = targetParts[0].startsWith("@") ? `${targetParts[0]}/${targetParts[1]}` : targetParts[0];
     try {
-        let targetPackagePath = await promisify(resolve)(join(targetPackage, "package.json"), { basedir: sourceDir });
-        return dirname(targetPackagePath);
+        return dirname(await promisify(resolve)(join(targetPackage, "package.json"), { basedir: sourceDir }));
     } catch (e) {
-        if (e.message.includes("Cannot find module") && !basename(targetPackage).test(/\.((j|t)sx?)|json|(pn|jpe?|sv)g|(tif|gi)f$/g)) {
+        if (e.message.includes("Cannot find module") && targetPackage.test(/\.((j|t)sx?)|json|(pn|jpe?|sv)g|(tif|gi)f$/g)) {
             throw e;
         }
         return undefined;
@@ -90,8 +89,7 @@ async function getTransitiveDependencies(packagePath, isExternal) {
         }
         result.add(nextPath);
 
-        const packageJsonPath = join(nextPath, "package.json");
-        const packageJson = await readJson(packageJsonPath);
+        const packageJson = await readJson(join(nextPath, "package.json"));
         const dependencies = (packageJson.dependencies ? Object.keys(packageJson.dependencies) : []).concat(
             packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
         );
