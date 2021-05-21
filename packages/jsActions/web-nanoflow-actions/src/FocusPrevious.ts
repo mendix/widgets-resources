@@ -5,16 +5,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
-import { findNext, getFocus, setFocus } from "./FocusHelper";
 
-// BEGIN EXTRA CODE
-function focusPrevious(): void {
-    const previous = findNext(getFocus(), true);
-    if (previous) {
-        setFocus(previous);
-    }
-}
-// END EXTRA CODE
+declare function require(name: string): any;
 
 /**
  * Move the keyboard focus to the previous element that can be focused.
@@ -22,6 +14,15 @@ function focusPrevious(): void {
  */
 export async function FocusPrevious(): Promise<void> {
     // BEGIN USER CODE
+    const { findNext, getFocus, setFocus } = require("./FocusHelper");
+
+    function focusPrevious(): void {
+        const previous = findNext(getFocus(), true);
+        if (previous) {
+            setFocus(previous);
+        }
+    }
+
     focusPrevious();
     return Promise.resolve();
     // END USER CODE
