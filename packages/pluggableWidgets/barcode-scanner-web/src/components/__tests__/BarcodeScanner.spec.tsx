@@ -5,8 +5,6 @@ import { BarcodeScanner, BarcodeScannerOverlay } from "../BarcodeScanner";
 import * as mediaStreamFunctions from "../../hooks/useMediaStream";
 import { act } from "react-dom/test-utils";
 
-jest.mock("../../assets/ic24-close.svg", () => "close-button-icon-svg");
-
 jest.mock("@zxing/library", () => {
     const original = jest.requireActual("@zxing/library");
     return {
@@ -72,63 +70,6 @@ describe("Barcode scanner", () => {
         });
 
         expect(onDetectMock).toHaveBeenCalledWith("https://www.mendix.com");
-    });
-
-    it("calls the onClose function if it has been provided and the user closes the overlay", async () => {
-        const onCloseMock = jest.fn();
-        const handleFakeMediaStream = Promise.resolve({});
-        jest.spyOn(mediaStreamFunctions, "browserSupportsCameraAccess").mockImplementation(() => true);
-        mockGetUserMedia(jest.fn(() => handleFakeMediaStream));
-
-        const barcodeScanner = mount(<BarcodeScanner class="" showMask onClose={onCloseMock} />);
-
-        await act(async () => {
-            await handleFakeMediaStream;
-        });
-
-        barcodeScanner.find("button").simulate("click");
-        expect(onCloseMock).toHaveBeenCalled();
-    });
-
-    it("closes the visual overlay if no onClose has been provided and the user closes the overlay", async () => {
-        const handleFakeMediaStream = Promise.resolve({
-            getVideoTracks: jest.fn(() => [])
-        });
-        jest.spyOn(mediaStreamFunctions, "browserSupportsCameraAccess").mockImplementation(() => true);
-        mockGetUserMedia(jest.fn(() => handleFakeMediaStream));
-
-        const barcodeScanner = mount(<BarcodeScanner class="" showMask />);
-
-        await act(async () => {
-            await handleFakeMediaStream;
-        });
-
-        expect(barcodeScanner.html()).not.toBe(null);
-
-        barcodeScanner.find("button").simulate("click");
-        expect(barcodeScanner.html()).toBe(null);
-    });
-
-    it("cleans up the media stream on unmount", async () => {
-        const fakeVideoTracks = [{ stop: jest.fn() }, { stop: jest.fn() }, { stop: jest.fn() }];
-        const handleFakeMediaStream = Promise.resolve({
-            getVideoTracks: jest.fn(() => fakeVideoTracks)
-        });
-        jest.spyOn(mediaStreamFunctions, "browserSupportsCameraAccess").mockImplementation(() => true);
-        mockGetUserMedia(jest.fn(() => handleFakeMediaStream));
-
-        const barcodeScanner = mount(<BarcodeScanner class="" showMask />);
-
-        await act(async () => {
-            await handleFakeMediaStream;
-        });
-
-        // To trigger an unmount
-        barcodeScanner.find("button").simulate("click");
-
-        fakeVideoTracks.forEach(track => {
-            expect(track.stop).toHaveBeenCalled();
-        });
     });
 
     describe("shows an appropriate error to the user", () => {

@@ -1,5 +1,5 @@
 .mx-barcode-scanner {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -13,23 +13,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
-
-    .close-button {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        color: white;
-        display: flex;
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-
-        .removeIcon {
-            height: 16px;
-            width: 16px;
-        }
     }
 
     .video-canvas {

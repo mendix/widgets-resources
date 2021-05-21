@@ -14,7 +14,6 @@ export interface BarcodeScannerContainerProps {
     datasource: EditableValue<string>;
     showMask: boolean;
     onDetect?: ActionValue;
-    onClose?: ActionValue;
 }
 
 export interface BarcodeScannerPreviewProps {
@@ -23,5 +22,4 @@ export interface BarcodeScannerPreviewProps {
     datasource: string;
     showMask: boolean;
     onDetect: {} | null;
-    onClose: {} | null;
 }
