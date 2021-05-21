@@ -3,7 +3,11 @@
 exports[`Barcode scanner does not show the overlay when the user opts out of it 1`] = `
 <BarcodeScannerOverlay
   class=""
+  height={100}
+  heightUnit="percentageOfParent"
   showMask={false}
+  width={100}
+  widthUnit="percentage"
 >
   <video
     className="video"
@@ -15,7 +19,11 @@ exports[`Barcode scanner does not show the overlay when the user opts out of it 
 exports[`Barcode scanner shows a loading screen while waiting for the user to give persmission to access the media device 1`] = `
 <BarcodeScannerOverlay
   class=""
+  height={100}
+  heightUnit="percentageOfParent"
   showMask={true}
+  width={100}
+  widthUnit="percentage"
 >
   <video
     className="video"
@@ -27,6 +35,12 @@ exports[`Barcode scanner shows a loading screen while waiting for the user to gi
 exports[`Barcode scanner the overlay structure should be correct 1`] = `
 <div
   className="mx-barcode-scanner"
+  style={
+    Object {
+      "height": "100%",
+      "width": "100%",
+    }
+  }
 >
   <div
     className="video-canvas"
