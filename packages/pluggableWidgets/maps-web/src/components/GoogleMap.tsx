@@ -8,10 +8,9 @@ import {
 } from "@react-google-maps/api";
 import { Marker, SharedProps } from "../../typings/shared";
 import { getGoogleMapsStyles } from "../utils/google";
-import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
 import { Option } from "../utils/data";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert, getDimensions } from "@mendix/piw-utils-internal";
 
 export interface GoogleMapsProps extends SharedProps {
     mapStyles?: string;

@@ -1,9 +1,9 @@
 import { createElement, ReactElement, useEffect, useRef } from "react";
 import { Map, Marker as MarkerComponent, Popup, TileLayer } from "react-leaflet";
 import classNames from "classnames";
+import { getDimensions } from "@mendix/piw-utils-internal";
 import { SharedProps } from "../../typings/shared";
 import { MapProviderEnum } from "../../typings/MapsProps";
-import { getDimensions } from "../utils/dimension";
 import { translateZoom } from "../utils/zoom";
 import { latLngBounds, Icon as LeafletIcon, DivIcon } from "leaflet";
 import { baseMapLayer } from "../utils/leaflet";

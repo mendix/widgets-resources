@@ -1,5 +1,15 @@
 import { CSSProperties } from "react";
-import { Dimensions } from "../../typings/shared";
+
+export type WidthUnitEnum = "percentage" | "pixels";
+
+export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
+export interface Dimensions {
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
+}
 
 export function getDimensions<T extends Dimensions>(props: T): CSSProperties {
     const style: CSSProperties = {
