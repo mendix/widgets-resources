@@ -48,14 +48,9 @@
             &:focus,
             &:active {
                 background-color: $background-color-hover;
-                cursor: pointer;
 
                 > :is(h1, h2, h3, h4, h5, h6, p, span) {
                     color: $color;
-                }
-
-                * {
-                    cursor: pointer;
                 }
             }
         }
