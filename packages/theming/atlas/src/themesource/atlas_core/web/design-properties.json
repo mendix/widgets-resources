@@ -1139,8 +1139,8 @@
                     "class": "widget-accordion-bordered-all"
                 },
                 {
-                    "name": "Vertical",
-                    "class": "widget-accordion-bordered-vertical"
+                    "name": "Horizontal",
+                    "class": "widget-accordion-bordered-horizontal"
                 },
                 {
                     "name": "None",

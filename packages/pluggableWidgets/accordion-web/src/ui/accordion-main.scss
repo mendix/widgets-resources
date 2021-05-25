@@ -8,17 +8,9 @@ $header-color-hover: #264ae5;
 }
 
 .widget-accordion-group {
-    &:first-child {
-        border-top: 1px solid $border-color;
-    }
-
     border-bottom: 1px solid $border-color;
 
     &.widget-accordion-group-collapsed {
-        &:first-child {
-            border-top: none;
-        }
-
         .widget-accordion-group-content {
             display: none;
         }

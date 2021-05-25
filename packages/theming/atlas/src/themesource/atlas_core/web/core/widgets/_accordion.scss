@@ -17,22 +17,19 @@
 
         .widget-accordion-group {
             @include get-accordion-group-styles(
-                $accordion-primary-bg,
-                $accordion-primary-bg-hover,
-                $accordion-primary-border-color,
-                $accordion-primary-color
+                $accordion-header-default-bg,
+                $accordion-header-default-bg-hover,
+                $accordion-default-border-color,
+                $accordion-header-header-default-color,
+                $brand-primary
             );
         }
 
-        @include get-accordion-root-helper-styles();
+        @include get-accordion-root-helper-styles($accordion-default-border-color);
     }
 }
 
-@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color) {
-    &:first-child {
-        border-top: none;
-    }
-
+@mixin get-accordion-group-styles($background-color, $background-color-hover, $border-color, $color, $color-hover) {
     border-bottom: 1px solid $border-color;
 
     .widget-accordion-group-header {
@@ -50,8 +47,12 @@
                 background-color: $background-color-hover;
 
                 > :is(h1, h2, h3, h4, h5, h6, p, span) {
-                    color: $color;
+                    color: $color-hover;
                 }
+            }
+
+            &:focus {
+                outline: 2px solid $brand-primary;
             }
         }
     }
@@ -62,18 +63,21 @@
     }
 }
 
-@mixin get-accordion-root-helper-styles() {
+@mixin get-accordion-root-helper-styles($border-color) {
     &.widget-accordion-bordered-all {
-        .widget-accordion-group {
-            border-bottom: none;
+        border: 1px solid $border-color;
 
-            .widget-accordion-group-content {
-                border-right-width: 1px;
-                border-right-style: solid;
-                border-bottom-width: 1px;
-                border-bottom-style: solid;
-                border-left-width: 1px;
-                border-left-style: solid;
+        .widget-accordion-group {
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    &.widget-accordion-bordered-horizontal {
+        .widget-accordion-group {
+            &:first-child {
+                border-top: 1px solid $accordion-default-border-color;
             }
         }
     }
@@ -86,6 +90,15 @@
 
     &.widget-accordion-striped {
         .widget-accordion-group:nth-child(2n + 1) {
+            .widget-accordion-group-header {
+                background-color: $accordion-bg-striped; // TODO check how it works with semantic colors
+                &:hover,
+                &:focus,
+                &:active {
+                    background-color: $accordion-bg-striped-hover;
+                }
+            }
+
             .widget-accordion-group-content {
                 background-color: $accordion-bg-striped;
             }

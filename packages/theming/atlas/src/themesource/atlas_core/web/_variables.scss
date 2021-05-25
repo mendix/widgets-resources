@@ -514,32 +514,41 @@ $timeline-grouping-border-color: $timeline-border-color !default;
 //== Accordions
 //## Extended variables for Accordion Widget
 
-// Background colors
-$accordion-primary-bg: $btn-primary-bg !default;
-$accordion-secondary-bg: $btn-default-bg !default;
-$accordion-success-bg: $btn-success-bg !default;
-$accordion-warning-bg: $btn-warning-bg !default;
-$accordion-danger-bg: $btn-danger-bg !default;
-$accordion-primary-bg-hover: $btn-primary-bg-hover !default;
-$accordion-secondary-bg-hover: $btn-default-bg-hover !default;
-$accordion-success-bg-hover: $btn-success-bg-hover !default;
-$accordion-warning-bg-hover: $btn-warning-bg-hover !default;
-$accordion-danger-bg-hover: $btn-danger-bg-hover !default;
-$accordion-bg-striped: $grid-bg-striped !default;
+// Default
+$accordion-header-default-bg: $bg-color-secondary !default;
+$accordion-header-default-bg-hover: $bg-color !default;
+$accordion-header-default-color: $font-color-header !default;
+$accordion-default-border-color: $border-color-default !default;
 
-// Border colors
+$accordion-bg-striped: $grid-bg-striped !default;
+$accordion-bg-striped-hover: $grid-bg-selected !default;
+
+// Semantic background colors
+$accordion-header-primary-bg: $btn-primary-bg !default;
+$accordion-header-secondary-bg: $btn-default-bg !default;
+$accordion-header-success-bg: $btn-success-bg !default;
+$accordion-header-warning-bg: $btn-warning-bg !default;
+$accordion-header-danger-bg: $btn-danger-bg !default;
+
+$accordion-header-primary-bg-hover: $btn-primary-bg-hover !default;
+$accordion-header-secondary-bg-hover: $btn-default-bg-hover !default;
+$accordion-header-success-bg-hover: $btn-success-bg-hover !default;
+$accordion-header-warning-bg-hover: $btn-warning-bg-hover !default;
+$accordion-header-danger-bg-hover: $btn-danger-bg-hover !default;
+
+// Semantic text colors
+$accordion-header-primary-color: $btn-primary-color !default;
+$accordion-header-secondary-color: $btn-default-color !default;
+$accordion-header-success-color: $btn-success-color !default;
+$accordion-header-warning-color: $btn-warning-color !default;
+$accordion-header-danger-color: $btn-danger-color !default;
+
+// Semantic border colors
 $accordion-primary-border-color: $btn-primary-border-color !default;
 $accordion-secondary-border-color: $btn-default-border-color !default;
 $accordion-success-border-color: $btn-success-border-color !default;
 $accordion-warning-border-color: $btn-warning-border-color !default;
 $accordion-danger-border-color: $btn-danger-border-color !default;
-
-// Text colors
-$accordion-primary-color: $btn-primary-color !default;
-$accordion-secondary-color: $btn-default-color !default;
-$accordion-success-color: $btn-success-color !default;
-$accordion-warning-color: $btn-warning-color !default;
-$accordion-danger-color: $btn-danger-color !default;
 
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)

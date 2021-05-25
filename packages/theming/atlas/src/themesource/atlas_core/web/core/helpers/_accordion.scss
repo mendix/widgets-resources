@@ -16,18 +16,29 @@
     .widget-accordion {
         @include get-accordion-helper-styles();
 
-        @include get-accordion-root-helper-styles();
+        @include get-accordion-root-helper-styles($accordion-default-border-color);
     }
 }
 
 @mixin get-accordion-helper-styles() {
     .widget-accordion-group {
+        &.widget-accordion-brand-primary {
+            @include get-accordion-group-styles(
+                $accordion-header-primary-bg,
+                $accordion-header-primary-bg-hover,
+                $accordion-primary-border-color,
+                $accordion-header-primary-color,
+                $accordion-header-primary-color
+            );
+        }
+
         &.widget-accordion-brand-secondary {
             @include get-accordion-group-styles(
-                $accordion-secondary-bg,
-                $accordion-secondary-bg-hover,
+                $accordion-header-secondary-bg,
+                $accordion-header-secondary-bg-hover,
                 $accordion-secondary-border-color,
-                $accordion-secondary-color
+                $accordion-header-secondary-color,
+                $accordion-header-secondary-color
             );
 
             .widget-accordion-group-header {
@@ -37,28 +48,31 @@
 
         &.widget-accordion-brand-success {
             @include get-accordion-group-styles(
-                $accordion-success-bg,
-                $accordion-success-bg-hover,
+                $accordion-header-success-bg,
+                $accordion-header-success-bg-hover,
                 $accordion-success-border-color,
-                $accordion-success-color
+                $accordion-header-success-color,
+                $accordion-header-success-color
             );
         }
 
         &.widget-accordion-brand-warning {
             @include get-accordion-group-styles(
-                $accordion-warning-bg,
-                $accordion-warning-bg-hover,
+                $accordion-header-warning-bg,
+                $accordion-header-warning-bg-hover,
                 $accordion-warning-border-color,
-                $accordion-warning-color
+                $accordion-header-warning-color,
+                $accordion-header-warning-color
             );
         }
 
         &.widget-accordion-brand-danger {
             @include get-accordion-group-styles(
-                $accordion-danger-bg,
-                $accordion-danger-bg-hover,
+                $accordion-header-danger-bg,
+                $accordion-header-danger-bg-hover,
                 $accordion-danger-border-color,
-                $accordion-danger-color
+                $accordion-header-danger-color,
+                $accordion-header-danger-color
             );
         }
     }
