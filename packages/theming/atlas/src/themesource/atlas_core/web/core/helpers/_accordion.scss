@@ -14,66 +14,115 @@
     ========================================================================== */
 
     .widget-accordion {
-        @include get-accordion-helper-styles();
+        .widget-accordion-group {
+            &.widget-accordion-brand-primary {
+                @include get-accordion-group-styles(
+                    $accordion-header-primary-bg,
+                    $accordion-header-primary-bg-hover,
+                    $accordion-header-primary-color,
+                    $accordion-header-primary-color,
+                    $accordion-primary-border-color
+                );
+            }
 
-        @include get-accordion-root-helper-styles();
-    }
-}
+            &.widget-accordion-brand-secondary {
+                @include get-accordion-group-styles(
+                    $accordion-header-secondary-bg,
+                    $accordion-header-secondary-bg-hover,
+                    $accordion-header-secondary-color,
+                    $accordion-header-secondary-color,
+                    $accordion-secondary-border-color
+                );
+            }
 
-@mixin get-accordion-helper-styles() {
-    .widget-accordion-group {
-        &.widget-accordion-brand-primary {
-            @include get-accordion-group-styles(
-                $accordion-header-primary-bg,
-                $accordion-header-primary-bg-hover,
-                $accordion-header-primary-color,
-                $accordion-header-primary-color,
-                $accordion-primary-border-color
-            );
-        }
+            &.widget-accordion-brand-success {
+                @include get-accordion-group-styles(
+                    $accordion-header-success-bg,
+                    $accordion-header-success-bg-hover,
+                    $accordion-header-success-color,
+                    $accordion-header-success-color,
+                    $accordion-success-border-color
+                );
+            }
 
-        &.widget-accordion-brand-secondary {
-            @include get-accordion-group-styles(
-                $accordion-header-secondary-bg,
-                $accordion-header-secondary-bg-hover,
-                $accordion-header-secondary-color,
-                $accordion-header-secondary-color,
-                $accordion-secondary-border-color
-            );
+            &.widget-accordion-brand-warning {
+                @include get-accordion-group-styles(
+                    $accordion-header-warning-bg,
+                    $accordion-header-warning-bg-hover,
+                    $accordion-header-warning-color,
+                    $accordion-header-warning-color,
+                    $accordion-warning-border-color
+                );
+            }
 
-            .widget-accordion-group-header {
-                border: 1px solid $accordion-secondary-border-color;
+            &.widget-accordion-brand-danger {
+                @include get-accordion-group-styles(
+                    $accordion-header-danger-bg,
+                    $accordion-header-danger-bg-hover,
+                    $accordion-header-danger-color,
+                    $accordion-header-danger-color,
+                    $accordion-danger-border-color
+                );
             }
         }
 
-        &.widget-accordion-brand-success {
-            @include get-accordion-group-styles(
-                $accordion-header-success-bg,
-                $accordion-header-success-bg-hover,
-                $accordion-header-success-color,
-                $accordion-header-success-color,
-                $accordion-success-border-color
-            );
+        &.widget-accordion-bordered-all {
+            .widget-accordion-group {
+                &:first-child {
+                    border-top-width: 1px;
+                    border-top-style: solid;
+                }
+
+                border-right-width: 1px;
+                border-right-style: solid;
+                border-left-width: 1px;
+                border-left-style: solid;
+            }
         }
 
-        &.widget-accordion-brand-warning {
-            @include get-accordion-group-styles(
-                $accordion-header-warning-bg,
-                $accordion-header-warning-bg-hover,
-                $accordion-header-warning-color,
-                $accordion-header-warning-color,
-                $accordion-warning-border-color
-            );
+        &.widget-accordion-bordered-horizontal {
+            .widget-accordion-group {
+                &:first-child {
+                    border-top-width: 1px;
+                    border-top-style: solid;
+                }
+            }
         }
 
-        &.widget-accordion-brand-danger {
-            @include get-accordion-group-styles(
-                $accordion-header-danger-bg,
-                $accordion-header-danger-bg-hover,
-                $accordion-header-danger-color,
-                $accordion-header-danger-color,
-                $accordion-danger-border-color
-            );
+        &.widget-accordion-bordered-none {
+            .widget-accordion-group {
+                border-bottom: none;
+            }
+        }
+
+        &.widget-accordion-striped {
+            .widget-accordion-group:not(:is(.widget-accordion-brand-primary, .widget-accordion-brand-secondary, .widget-accordion-brand-success, .widget-accordion-brand-warning, .widget-accordion-brand-danger)):nth-child(2n
+                    + 1) {
+                .widget-accordion-group-header {
+                    background-color: $accordion-bg-striped;
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        background-color: $accordion-bg-striped-hover;
+                    }
+                }
+
+                .widget-accordion-group-content {
+                    background-color: $accordion-bg-striped;
+                }
+            }
+        }
+
+        &.widget-accordion-compact {
+            .widget-accordion-group {
+                .widget-accordion-group-header {
+                    padding: $spacing-smaller $spacing-small;
+                }
+
+                .widget-accordion-group-content {
+                    padding: $spacing-smaller $spacing-small $spacing-medium $spacing-small;
+                }
+            }
         }
     }
 }

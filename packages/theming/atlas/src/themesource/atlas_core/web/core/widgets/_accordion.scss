@@ -24,8 +24,6 @@
                 $accordion-default-border-color
             );
         }
-
-        @include get-accordion-root-helper-styles();
     }
 }
 
@@ -60,66 +58,5 @@
     .widget-accordion-group-content {
         border-color: $border-color;
         padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
-    }
-}
-
-@mixin get-accordion-root-helper-styles() {
-    &.widget-accordion-bordered-all {
-        .widget-accordion-group {
-            &:first-child {
-                border-top-width: 1px;
-                border-top-style: solid;
-            }
-
-            border-right-width: 1px;
-            border-right-style: solid;
-            border-left-width: 1px;
-            border-left-style: solid;
-        }
-    }
-
-    &.widget-accordion-bordered-horizontal {
-        .widget-accordion-group {
-            &:first-child {
-                border-top-width: 1px;
-                border-top-style: solid;
-            }
-        }
-    }
-
-    &.widget-accordion-bordered-none {
-        .widget-accordion-group {
-            border-bottom: none;
-        }
-    }
-
-    &.widget-accordion-striped {
-        .widget-accordion-group:not(:is(.widget-accordion-brand-primary, .widget-accordion-brand-secondary, .widget-accordion-brand-success, .widget-accordion-brand-warning, .widget-accordion-brand-danger)):nth-child(2n
-                + 1) {
-            .widget-accordion-group-header {
-                background-color: $accordion-bg-striped;
-                &:hover,
-                &:focus,
-                &:active {
-                    background-color: $accordion-bg-striped-hover;
-                }
-            }
-
-            .widget-accordion-group-content {
-                background-color: $accordion-bg-striped;
-            }
-        }
-    }
-
-    &.widget-accordion-compact {
-        .widget-accordion-group {
-            .widget-accordion-group-header {
-                padding: $spacing-smaller $spacing-small;
-            }
-
-            .widget-accordion-group-content {
-                padding: $spacing-smaller $spacing-small $spacing-medium $spacing-small;
-            }
-        }
     }
 }
