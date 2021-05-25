@@ -4,6 +4,7 @@ import { AccordionGroupsReducerAction } from "../utils/AccordionGroupStateReduce
 import classNames from "classnames";
 
 import "../ui/accordion-main.scss";
+import ChevronSVG from "../assets/chevron.svg";
 
 export interface AccGroup {
     header: ReactNode;
@@ -58,6 +59,12 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}
             >
                 {group.header}
+                <img
+                    className={"widget-accordion-group-header-chevron"}
+                    src={ChevronSVG}
+                    alt={`${group.collapsed ? "Downward" : "Upward"} arrow`}
+                    aria-hidden={"true"}
+                />
             </header>
             <div className={"widget-accordion-group-content"}>{divContentMounted ? group.content : undefined}</div>
         </section>

@@ -13,6 +13,11 @@ $header-color-hover: #264ae5;
     border-bottom-style: solid;
 
     &.widget-accordion-group-collapsed {
+        .widget-accordion-group-header {
+            .widget-accordion-group-header-chevron {
+                transform: none;
+            }
+        }
         .widget-accordion-group-content {
             display: none;
         }
@@ -20,6 +25,8 @@ $header-color-hover: #264ae5;
 
     .widget-accordion-group-header {
         padding: 16px;
+        display: flex;
+        align-items: center;
 
         > :is(h1, h2, h3, h4, h5, h6, p) {
             margin-bottom: 0;
@@ -40,6 +47,12 @@ $header-color-hover: #264ae5;
                     cursor: pointer;
                 }
             }
+        }
+
+        .widget-accordion-group-header-chevron {
+            margin-left: auto;
+            transform: rotate(180deg);
+            transition: 0.2s ease-in-out;
         }
     }
 
