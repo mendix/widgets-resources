@@ -46,6 +46,10 @@ $header-color-hover: #264ae5;
                 * {
                     cursor: pointer;
                 }
+
+                .widget-accordion-group-header-chevron {
+                    fill: $header-color-hover;
+                }
             }
         }
 
@@ -53,6 +57,7 @@ $header-color-hover: #264ae5;
             margin-left: auto;
             transform: rotate(180deg);
             transition: 0.2s ease-in-out;
+            transition-property: transform;
         }
     }
 
