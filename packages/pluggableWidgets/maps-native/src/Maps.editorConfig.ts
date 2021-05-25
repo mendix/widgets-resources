@@ -2,7 +2,7 @@ import { changePropertyIn, hidePropertiesIn, hidePropertyIn, Problem, Properties
 import { MapsPreviewProps } from "../typings/MapsProps";
 
 export function getProperties(values: MapsPreviewProps, defaultProperties: Properties): Properties {
-    [...values.markers, ...values.dynamicMarkers].forEach((f, index) => {
+    values.markers.forEach((f, index) => {
         if (f.locationType === "address") {
             hidePropertyIn(defaultProperties, values, "markers", index, "latitude");
             hidePropertyIn(defaultProperties, values, "markers", index, "longitude");
@@ -11,10 +11,19 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
         }
     });
 
+    values.dynamicMarkers.forEach((f, index) => {
+        if (f.locationType === "address") {
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "latitude");
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "longitude");
+        } else {
+            hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "address");
+        }
+    });
+
     if (values.fitToMarkers) {
         hidePropertiesIn(defaultProperties, values, ["centerAddress", "centerLatitude", "centerLongitude"]);
 
-        if (values.markers.length > 1) {
+        if (values.markers.length > 1 || values.dynamicMarkers.length > 1) {
             hidePropertyIn(defaultProperties, values, "defaultZoomLevel");
         }
     }
@@ -38,7 +47,7 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
         prop => {
             prop.objectHeaders = ["Address", "Latitude", "Longitude"];
             prop.objects?.forEach((object, index) => {
-                const column = values.markers[index];
+                const column = values.dynamicMarkers[index];
                 object.captions = [column.address, column.latitude, column.longitude];
             });
         },

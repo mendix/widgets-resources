@@ -1,5 +1,5 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { ActionValue } from "mendix";
+import { ActionValue, ValueStatus } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
@@ -45,11 +45,17 @@ export class Maps extends Component<Props, State> {
     private readonly geocoder = new CachedGeocoder();
 
     componentDidMount(): void {
-        this.parseMarkers();
+        if (!this.props.dynamicMarkers.length) {
+            this.parseMarkers();
+        }
     }
 
     componentDidUpdate(): void {
-        if (this.state.status === Status.LoadingMarkers) {
+        if (
+            this.state.status === Status.LoadingMarkers &&
+            (!this.props.dynamicMarkers.length ||
+                this.props.dynamicMarkers.filter(m => m.markersDS?.status !== ValueStatus.Available).length === 0)
+        ) {
             this.parseMarkers();
         }
     }
