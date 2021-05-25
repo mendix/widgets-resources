@@ -1,5 +1,22 @@
-import { changePropertyIn, hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    changePropertyIn,
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    StructurePreviewProps
+} from "@mendix/piw-utils-internal";
 import { MapsPreviewProps } from "../typings/MapsProps";
+import StructurePreviewMapsSVG from "./assets/StructurePreviewMaps.svg";
+
+export function getPreview(_: MapsPreviewProps): StructurePreviewProps {
+    return {
+        type: "Image",
+        document: decodeURIComponent(StructurePreviewMapsSVG.replace("data:image/svg+xml,", "")),
+        width: 375,
+        height: 375
+    };
+}
 
 export function getProperties(values: MapsPreviewProps, defaultProperties: Properties): Properties {
     values.markers.forEach((f, index) => {

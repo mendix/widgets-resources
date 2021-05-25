@@ -17,6 +17,7 @@ type Props = MapsProps<MapsStyle>;
 interface State {
     status: Status;
     markers?: Marker[];
+    minZoomLevel: number;
 }
 
 const enum Status {
@@ -35,7 +36,8 @@ interface Marker {
 
 export class Maps extends Component<Props, State> {
     readonly state: State = {
-        status: Status.LoadingMarkers
+        status: Status.LoadingMarkers,
+        minZoomLevel: 3
     };
 
     private readonly onMapReadyHandler = this.onMapReady.bind(this);
@@ -52,13 +54,11 @@ export class Maps extends Component<Props, State> {
 
     componentDidUpdate(): void {
         if (
-            this.state.status === Status.LoadingMarkers &&
-            (!this.props.dynamicMarkers.length ||
-                this.props.dynamicMarkers.filter(m => m.markersDS?.status !== ValueStatus.Available).length === 0)
+            this.state.status === Status.CameraReady ||
+            (this.state.status === Status.LoadingMarkers &&
+                (!this.props.dynamicMarkers.length ||
+                    this.props.dynamicMarkers.filter(m => m.markersDS?.status !== ValueStatus.Available).length === 0))
         ) {
-            this.parseMarkers();
-        }
-        if (this.state.status === Status.CameraReady) {
             this.parseMarkers();
         }
     }
@@ -74,7 +74,7 @@ export class Maps extends Component<Props, State> {
                         showsUserLocation={this.props.showsUserLocation}
                         showsMyLocationButton={this.props.showsUserLocation}
                         showsTraffic={false}
-                        minZoomLevel={toZoomValue(this.props.minZoomLevel)}
+                        minZoomLevel={this.state.minZoomLevel}
                         maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
                         rotateEnabled={this.props.interactive}
                         scrollEnabled={this.props.interactive}
@@ -119,6 +119,7 @@ export class Maps extends Component<Props, State> {
     }
 
     private async onMapReady(): Promise<void> {
+        this.setState({ minZoomLevel: toZoomValue(this.props.minZoomLevel) });
         await this.updateCamera(false);
         if (Platform.OS === "android") {
             this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
