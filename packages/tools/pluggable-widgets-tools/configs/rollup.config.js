@@ -5,7 +5,7 @@ import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel"
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import replace from "@rollup/plugin-replace";
+import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
 import { red, yellow } from "colors";
@@ -92,8 +92,12 @@ export default async args => {
                 external: nativeExternal,
                 plugins: [
                     replace({
-                        values: { "Platform.OS": `"${os}"` },
-                        preventAssignment: true
+                        patterns: [
+                            {
+                                test: /\b(?<!\.)Platform.OS\b(?!\s*=[^=])/g,
+                                replace: `"${os}"`
+                            }
+                        ]
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
@@ -201,8 +205,12 @@ export default async args => {
             }),
             commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
             replace({
-                values: { "process.env.NODE_ENV": production ? "'production'" : "'development'" },
-                preventAssignment: true
+                patterns: [
+                    {
+                        test: "process.env.NODE_ENV",
+                        replace: production ? "'production'" : "'development'"
+                    }
+                ]
             }),
             config.transpile
                 ? getBabelOutputPlugin({
@@ -224,8 +232,14 @@ export default async args => {
                     mkdirSync(mpkDir, { recursive: true });
                     await zip(outDir, mpkFile);
                     if (!production && projectPath) {
-                        cp("-r", join(outDir, "*"), join(projectPath, `deployment/${platform}/widgets`));
-                        cp(mpkFile, join(projectPath, "widgets"));
+                        const widgetsPath = join(projectPath, "widgets");
+                        const deploymentPath = join(projectPath, `deployment/${platform}/widgets`);
+                        // Create folder if they do not exists or directories were cleaned
+                        mkdirSync(widgetsPath, { recursive: true });
+                        mkdirSync(deploymentPath, { recursive: true });
+                        // Copy files to deployment and widgets folder
+                        cp("-r", join(outDir, "*"), deploymentPath);
+                        cp(mpkFile, widgetsPath);
                     }
                 }
             ])
