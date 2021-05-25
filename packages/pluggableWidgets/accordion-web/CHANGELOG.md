@@ -8,5 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   Configure groups with a header & content.
 -   Configure the header of a group with text or widgets.
 -   Hide groups conditionally based on a boolean expression.
+-   Apply classes to a specific group dynamically.
 -   Control whether the content of groups can collapse.
 -   Control the collapse behavior by allowing one or more groups to be expanded at the same time.
