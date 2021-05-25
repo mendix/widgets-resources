@@ -94,9 +94,10 @@
     }
 
     &.widget-accordion-striped {
-        .widget-accordion-group:nth-child(2n + 1) {
+        .widget-accordion-group:not(:is(.widget-accordion-brand-primary, .widget-accordion-brand-secondary, .widget-accordion-brand-success, .widget-accordion-brand-warning, .widget-accordion-brand-danger)):nth-child(2n
+                + 1) {
             .widget-accordion-group-header {
-                background-color: $accordion-bg-striped; // TODO check how it works with semantic colors
+                background-color: $accordion-bg-striped;
                 &:hover,
                 &:focus,
                 &:active {
