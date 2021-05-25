@@ -38,6 +38,10 @@
             color: $color;
         }
 
+        .widget-accordion-group-header-chevron {
+            fill: $color;
+        }
+
         &.widget-accordion-group-header-clickable {
             &:hover,
             &:focus,
@@ -46,6 +50,10 @@
 
                 > :is(h1, h2, h3, h4, h5, h6, p, span) {
                     color: $color-hover;
+                }
+
+                .widget-accordion-group-header-chevron {
+                    fill: $color-hover;
                 }
             }
 

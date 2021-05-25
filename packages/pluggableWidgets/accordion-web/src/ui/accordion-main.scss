@@ -1,6 +1,7 @@
 $background-color: #ffffff;
 $border-color: #ced0d3;
 $header-background-color-hover: #f8f8f8;
+$header-color: #000000;
 $header-color-hover: #264ae5;
 
 .widget-accordion {
@@ -29,7 +30,12 @@ $header-color-hover: #264ae5;
         align-items: center;
 
         > :is(h1, h2, h3, h4, h5, h6, p) {
+            color: $header-color;
             margin-bottom: 0;
+        }
+
+        .widget-accordion-group-header-chevron {
+            fill: $header-color;
         }
 
         &.widget-accordion-group-header-clickable {
