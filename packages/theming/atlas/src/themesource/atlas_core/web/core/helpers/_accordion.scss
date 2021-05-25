@@ -16,7 +16,7 @@
     .widget-accordion {
         @include get-accordion-helper-styles();
 
-        @include get-accordion-root-helper-styles($accordion-default-border-color);
+        @include get-accordion-root-helper-styles();
     }
 }
 
@@ -26,9 +26,9 @@
             @include get-accordion-group-styles(
                 $accordion-header-primary-bg,
                 $accordion-header-primary-bg-hover,
-                $accordion-primary-border-color,
                 $accordion-header-primary-color,
-                $accordion-header-primary-color
+                $accordion-header-primary-color,
+                $accordion-primary-border-color
             );
         }
 
@@ -36,9 +36,9 @@
             @include get-accordion-group-styles(
                 $accordion-header-secondary-bg,
                 $accordion-header-secondary-bg-hover,
-                $accordion-secondary-border-color,
                 $accordion-header-secondary-color,
-                $accordion-header-secondary-color
+                $accordion-header-secondary-color,
+                $accordion-secondary-border-color
             );
 
             .widget-accordion-group-header {
@@ -50,9 +50,9 @@
             @include get-accordion-group-styles(
                 $accordion-header-success-bg,
                 $accordion-header-success-bg-hover,
-                $accordion-success-border-color,
                 $accordion-header-success-color,
-                $accordion-header-success-color
+                $accordion-header-success-color,
+                $accordion-success-border-color
             );
         }
 
@@ -60,9 +60,9 @@
             @include get-accordion-group-styles(
                 $accordion-header-warning-bg,
                 $accordion-header-warning-bg-hover,
-                $accordion-warning-border-color,
                 $accordion-header-warning-color,
-                $accordion-header-warning-color
+                $accordion-header-warning-color,
+                $accordion-warning-border-color
             );
         }
 
@@ -70,9 +70,9 @@
             @include get-accordion-group-styles(
                 $accordion-header-danger-bg,
                 $accordion-header-danger-bg-hover,
-                $accordion-danger-border-color,
                 $accordion-header-danger-color,
-                $accordion-header-danger-color
+                $accordion-header-danger-color,
+                $accordion-danger-border-color
             );
         }
     }

@@ -8,7 +8,9 @@ $header-color-hover: #264ae5;
 }
 
 .widget-accordion-group {
-    border-bottom: 1px solid $border-color;
+    border-color: $border-color;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
 
     &.widget-accordion-group-collapsed {
         .widget-accordion-group-content {
