@@ -6,12 +6,13 @@ import { ImageViewer, ImageViewerProps } from "../ImageViewer";
 
 describe("ImageViewer", () => {
     const defaultProps: ImageViewerProps = {
-        imageUrl: "https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg",
         height: 300,
         heightUnit: "pixels",
         width: 300,
         widthUnit: "pixels",
-        responsive: true
+        responsive: true,
+        type: "image",
+        image: "https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
     };
 
     const renderImageViewer = (props: ImageViewerProps): ReactWrapper<ImageViewerProps> =>
@@ -34,6 +35,6 @@ describe("ImageViewer", () => {
 
         const lightboxAfter = imageViewer.find(Lightbox);
         expect(lightboxAfter).toHaveLength(1);
-        expect(lightboxAfter.prop("mainSrc")).toBe(defaultProps.imageUrl);
+        expect(lightboxAfter.prop("mainSrc")).toBe(defaultProps.image);
     });
 });

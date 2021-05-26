@@ -29,12 +29,10 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "@mendix/custom-widgets-utils-internal": "0.0.1",
     "cross-env": "^7.0.2"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
-    "classnames": "^2.2.6",
-    "react-image-lightbox": "^4.1.0"
+    "classnames": "^2.2.6"
   }
 }

@@ -1,11 +1,14 @@
-import { createElement, CSSProperties, ReactElement, useCallback, useState } from "react";
+import { createElement, CSSProperties, ReactElement } from "react";
 import classNames from "classnames";
-import Lightbox from "react-image-lightbox";
 import { HeightUnitEnum, WidthUnitEnum } from "../../typings/ImageViewerProps";
 
 import "../ui/ImageViewer.scss";
-export interface ImageViewerProps {
-    imageUrl: string | undefined;
+
+export type ImageViewerImageProps = {
+    type: "image" | "icon";
+    image: string | undefined;
+};
+export type ImageViewerProps = {
     height: number;
     heightUnit: HeightUnitEnum;
     width: number;
@@ -16,7 +19,7 @@ export interface ImageViewerProps {
     getRef?: (node: HTMLDivElement) => void;
     // TODO: Implement the Events
     onClick?: () => void;
-}
+} & ImageViewerImageProps;
 
 function getStyle(value: string | number, type: string): number | string {
     // when type is auto default browser styles applies
@@ -30,30 +33,28 @@ function getStyle(value: string | number, type: string): number | string {
 }
 
 export function ImageViewer(props: ImageViewerProps): ReactElement | null {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const toggleLightBox = useCallback((): void => setIsOpen(currentIsOpen => !currentIsOpen), []);
-
+    const commonImageProps = {
+        style: {
+            ...props.style,
+            height: getStyle(props.height, props.heightUnit),
+            width: getStyle(props.width, props.widthUnit)
+        }
+    };
     return (
         <div
             className={classNames(
                 "mx-image-viewer",
                 { "mx-image-viewer-responsive": props.responsive },
                 props.className,
-                { hidden: !props.imageUrl }
+                { hidden: !props.image }
             )}
             style={props.style}
         >
-            <img
-                onClick={toggleLightBox}
-                src={props.imageUrl}
-                style={{
-                    ...props.style,
-                    height: getStyle(props.height, props.heightUnit),
-                    width: getStyle(props.width, props.widthUnit)
-                }}
-            ></img>
-            {isOpen && props.imageUrl ? <Lightbox mainSrc={props.imageUrl} onCloseRequest={toggleLightBox} /> : null}
+            {props.type === "image" ? (
+                <img src={props.image} {...commonImageProps}></img>
+            ) : (
+                <span className={classNames("glyphicon", props.image)} {...commonImageProps} />
+            )}
         </div>
     );
 }
