@@ -33,7 +33,8 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 }
                 const { filterDispatcher, attribute } = filterContextValue;
 
-                const errorMessage = getAttributeTypeErrorMessage(attribute.type);
+                const errorMessage =
+                    getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
                 if (errorMessage) {
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
@@ -66,6 +67,16 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 function getAttributeTypeErrorMessage(type?: string): string | null {
     return type && type !== "Enum"
         ? "The attribute type being used for Data grid drop-down filter is not 'Enumeration'"
+        : null;
+}
+
+function validateValues(listAttribute: ListAttributeValue, values: FilterOption[]): string | null {
+    if (values.length === 0) {
+        return null;
+    }
+
+    return !listAttribute.universe?.some(value => values.some(v => v.value === value))
+        ? "There are invalid values available in the Data grid drop-down filter"
         : null;
 }
 
