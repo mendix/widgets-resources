@@ -70,12 +70,12 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
         : null;
 }
 
-function validateValues(listAttribute: ListAttributeValue, values: FilterOption[]): string | null {
-    if (values.length === 0) {
+function validateValues(listAttribute: ListAttributeValue, options: FilterOption[]): string | null {
+    if (options.length === 0) {
         return null;
     }
 
-    return !listAttribute.universe?.some(value => values.some(v => v.value === value))
+    return options.some(filterOption => !listAttribute.universe?.includes(filterOption.value))
         ? "There are invalid values available in the Data grid drop-down filter"
         : null;
 }
