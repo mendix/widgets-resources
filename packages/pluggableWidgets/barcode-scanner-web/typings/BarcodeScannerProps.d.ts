@@ -6,6 +6,10 @@
 import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
+export type WidthUnitEnum = "percentage" | "pixels";
+
+export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
 export interface BarcodeScannerContainerProps {
     name: string;
     class: string;
@@ -14,6 +18,10 @@ export interface BarcodeScannerContainerProps {
     datasource: EditableValue<string>;
     showMask: boolean;
     onDetect?: ActionValue;
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
 }
 
 export interface BarcodeScannerPreviewProps {
@@ -22,4 +30,8 @@ export interface BarcodeScannerPreviewProps {
     datasource: string;
     showMask: boolean;
     onDetect: {} | null;
+    widthUnit: WidthUnitEnum;
+    width: number | null;
+    heightUnit: HeightUnitEnum;
+    height: number | null;
 }

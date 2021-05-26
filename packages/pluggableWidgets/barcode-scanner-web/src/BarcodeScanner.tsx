@@ -22,6 +22,10 @@ export const BarcodeScanner: FunctionComponent<BarcodeScannerContainerProps> = p
             onDetect={props.onDetect ? onDetect : undefined}
             showMask={props.showMask}
             class={props.class}
+            heightUnit={props.heightUnit}
+            height={props.height}
+            widthUnit={props.widthUnit}
+            width={props.width}
         />
     );
 };

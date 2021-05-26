@@ -33,5 +33,35 @@
                 <systemProperty key="Visibility"/>
             </propertyGroup>
         </propertyGroup>
+
+        <propertyGroup caption="Dimensions">
+            <propertyGroup caption="Dimensions">
+                <property key="widthUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Width unit</caption>
+                    <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="width" type="integer" defaultValue="100">
+                    <caption>Width</caption>
+                    <description/>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="75">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
     </properties>
 </widget>

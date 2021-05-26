@@ -1,13 +1,5 @@
-import { HeightUnitEnum, WidthUnitEnum } from "./MapsProps";
+import { Dimensions } from "@mendix/piw-utils-internal";
 import { CSSProperties } from "react";
-
-export interface Dimensions {
-    widthUnit: WidthUnitEnum;
-    width: number;
-    heightUnit: HeightUnitEnum;
-    height: number;
-}
-
 export interface ModeledMarker {
     address?: string;
     latitude?: number;
