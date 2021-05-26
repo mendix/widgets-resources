@@ -1,35 +1,37 @@
-import { createElement, Dispatch, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { ListAttributeValue, ObjectItem } from "mendix";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ListAttributeValue } from "mendix";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 
-interface Option {
+export interface FilterOption {
     caption: string;
     value: string;
 }
 
 interface FilterComponentProps {
     ariaLabel?: string;
+    attribute?: ListAttributeValue;
+    auto?: boolean;
     emptyOptionCaption?: string;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     multiSelect?: boolean;
     name?: string;
-    options: Option[];
+    options: FilterOption[];
     tabIndex?: number;
     defaultValue?: string;
+    updateFilters?: (values: FilterOption[]) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [valueInput, setValueInput] = useState("");
-    const [options, setOptions] = useState<Option[]>([]);
-    const [selectedFilters, setSelectedFilters] = useState<Option[]>([]);
+    const [options, setOptions] = useState<FilterOption[]>([]);
+    const [selectedFilters, setSelectedFilters] = useState<FilterOption[]>([]);
     const [show, setShow] = useState(false);
     const [dropdownWidth, setDropdownWidth] = useState(0);
 
     const componentRef = useRef<HTMLDivElement>(null);
 
     const setMultiSelectFilters = useCallback(
-        (selectedOptions: Option[]) => {
+        (selectedOptions: FilterOption[]) => {
             if (selectedOptions?.length === 0) {
                 setValueInput(props.emptyOptionCaption ?? "");
                 setSelectedFilters([]);
@@ -42,7 +44,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     );
 
     const onClick = useCallback(
-        (option: Option) => {
+        (option: FilterOption) => {
             if (props.multiSelect) {
                 setMultiSelectFilters(toggleFilter(selectedFilters, option));
             } else {
@@ -56,14 +58,25 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     useOnClickOutside(componentRef, () => setShow(false));
 
+    const availableOptions = useMemo(
+        () =>
+            props.auto
+                ? props.attribute?.universe?.map(value => ({
+                      caption: props.attribute?.formatter.format(value) ?? "",
+                      value: value?.toString() ?? ""
+                  })) ?? []
+                : props.options,
+        [props.auto, props.attribute, props.options]
+    );
+
     // Select the first option Or default option on load
     useEffect(() => {
         if (props.multiSelect) {
             if (props.defaultValue) {
                 const initialOptions = props.defaultValue
                     .split(",")
-                    .map(value => props.options.find(option => option.value === value))
-                    .filter(Boolean) as Option[];
+                    .map(value => availableOptions.find(option => option.value === value))
+                    .filter(Boolean) as FilterOption[];
 
                 // User can set anything, but it could not match so we have to set to empty or ""
                 setMultiSelectFilters(initialOptions);
@@ -71,10 +84,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setValueInput(props.emptyOptionCaption ?? "");
             }
 
-            setOptions(props.options);
+            setOptions(availableOptions);
         } else {
             // We want to add empty option caption
-            const optionsWithEmptyCaption = [{ caption: props.emptyOptionCaption ?? "", value: "" }, ...props.options];
+            const optionsWithEmptyCaption = [
+                { caption: props.emptyOptionCaption ?? "", value: "" },
+                ...availableOptions
+            ];
             const initialOption =
                 optionsWithEmptyCaption.find(option => option.value === props.defaultValue) ??
                 optionsWithEmptyCaption[0];
@@ -83,26 +99,11 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             setSelectedFilters([initialOption]);
             setOptions(optionsWithEmptyCaption);
         }
-    }, [props.defaultValue, props.options, props.emptyOptionCaption]);
+    }, [props.defaultValue, availableOptions, props.emptyOptionCaption]);
 
-    // Filter
     useEffect(() => {
-        if (props.filterDispatcher) {
-            props.filterDispatcher({
-                filter: (item, attr): boolean => {
-                    if (selectedFilters.length > 0) {
-                        return selectedFilters.some(
-                            selectedFilter =>
-                                attr.get(item).value?.toString().toLocaleLowerCase() ===
-                                    selectedFilter.value?.toString().toLocaleLowerCase() ||
-                                selectedFilter.value?.toString() === ""
-                        );
-                    }
-                    return true;
-                }
-            });
-        }
-    }, [props.filterDispatcher, selectedFilters]);
+        props.updateFilters?.(selectedFilters);
+    }, [selectedFilters]);
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
 
@@ -170,7 +171,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     );
 }
 
-function toggleFilter(filters: Option[], filterToToggle: Option): Option[] {
+function toggleFilter(filters: FilterOption[], filterToToggle: FilterOption): FilterOption[] {
     const alteredFilters = [...filters];
     const index = filters.indexOf(filterToToggle);
     if (index > -1) {

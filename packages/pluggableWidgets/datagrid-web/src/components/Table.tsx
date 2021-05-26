@@ -1,28 +1,18 @@
-import { createElement, CSSProperties, Fragment, ReactElement, ReactNode, useMemo, useState } from "react";
+import { createElement, CSSProperties, Fragment, ReactElement, ReactNode, useEffect, useMemo, useState } from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
-import {
-    ColumnWithStrictAccessor,
-    IdType,
-    Row,
-    SortingRule,
-    useColumnOrder,
-    useFilters,
-    usePagination,
-    useSortBy,
-    useTable
-} from "react-table";
-import { ColumnsPreviewType, ColumnsType } from "../../typings/DatagridProps";
+import { ColumnWithStrictAccessor, IdType, Row, SortingRule, useColumnOrder, useTable } from "react-table";
+import { ColumnsPreviewType } from "../../typings/DatagridProps";
 import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { useSettings } from "../utils/settings";
 
 export type TableColumn = Omit<
-    ColumnsType | ColumnsPreviewType,
-    "content" | "attribute" | "dynamicText" | "showContentAs"
+    ColumnsPreviewType,
+    "attribute" | "columnClass" | "content" | "dynamicText" | "filter" | "showContentAs"
 >;
 
 export interface TableProps<T> {
@@ -52,6 +42,7 @@ export interface TableProps<T> {
     onSettingsChange?: () => void;
     rowClass?: (value: T) => string;
     setPage?: (computePage: (prevPage: number) => number) => void;
+    setSortParameters?: (sort?: { columnIndex: number; desc: boolean }) => void;
     settings?: EditableValue<string>;
     styles?: CSSProperties;
     valueForSort: (value: T, columnIndex: number) => string | Big | boolean | Date | undefined;
@@ -62,8 +53,7 @@ export interface ColumnWidth {
 }
 
 export function Table<T>(props: TableProps<T>): ReactElement {
-    const isSortingOrFiltering = props.columnsFilterable || props.columnsSortable;
-    const isInfinite = !props.paging && !isSortingOrFiltering;
+    const isInfinite = !props.paging;
     const [isDragging, setIsDragging] = useState(false);
     const [dragOver, setDragOver] = useState("");
     const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
@@ -74,7 +64,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             )
             .filter(Boolean) as string[]) ?? []
     );
-    const [paginationIndex, setPaginationIndex] = useState<number>(0);
     const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
     const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
@@ -94,22 +83,30 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         setColumnsWidth
     );
 
+    useEffect(() => {
+        const [sortProperties] = sortBy;
+        if (sortProperties && "id" in sortProperties && "desc" in sortProperties) {
+            props.setSortParameters?.({
+                columnIndex: Number(sortProperties.id),
+                desc: sortProperties.desc ?? false
+            });
+        } else {
+            props.setSortParameters?.(undefined);
+        }
+    }, [sortBy, props.setSortParameters]);
+
     const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
         () =>
             props.columns.map((column, index) => ({
                 id: index.toString(),
                 accessor: "item",
                 alignment: column.alignment,
-                Header:
-                    typeof column.header === "object"
-                        ? column.header.value
-                        : props.preview && (column.header?.trim().length ?? 0) === 0
-                        ? "[Empty caption]"
-                        : column.header,
+                Header: column.header,
                 hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
                 canResize: column.resizable,
+                canSort: column.sortable,
                 customFilter: props.columnsFilterable
                     ? props.filterRenderer(
                           (children: ReactNode) => (
@@ -120,7 +117,6 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                           index
                       )
                     : null,
-                disableSortBy: !column.sortable,
                 disableResizing: !column.resizable,
                 sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
                     const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
@@ -187,32 +183,19 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         getTableProps,
         headerGroups,
         rows,
-        page: rowsPagination,
         prepareRow,
         getTableBodyProps,
         allColumns,
         setColumnOrder: setOrder,
-        visibleColumns,
-        state: { pageIndex },
-        gotoPage,
-        previousPage,
-        nextPage,
-        canPreviousPage,
-        canNextPage
+        visibleColumns
     } = useTable<{ item: T }>(
         {
             columns: tableColumns,
             data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
-            disableSortBy: !props.columnsSortable,
             initialState: {
-                pageSize: props.pageSize,
                 columnOrder,
-                hiddenColumns,
-                pageIndex: paginationIndex,
-                sortBy
+                hiddenColumns
             },
-            disableMultiSort: true,
-            autoResetSortBy: false,
             useControlledState: state =>
                 useMemo(
                     () => ({
@@ -224,37 +207,20 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     [state, columnOrder, hiddenColumns, sortBy]
                 )
         },
-        useFilters,
-        useSortBy,
-        usePagination,
         useColumnOrder
     );
 
     const pagination = props.paging ? (
-        !isInfinite && !isSortingOrFiltering ? (
-            <Pagination
-                canNextPage={props.hasMoreItems}
-                canPreviousPage={props.page !== 0}
-                gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
-                nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
-                numberOfItems={props.numberOfItems}
-                page={props.page}
-                pageSize={props.pageSize}
-                previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
-            />
-        ) : (
-            <Pagination
-                canNextPage={canNextPage}
-                canPreviousPage={canPreviousPage}
-                gotoPage={gotoPage}
-                nextPage={nextPage}
-                numberOfItems={rows.length}
-                page={pageIndex}
-                pageSize={props.pageSize}
-                previousPage={previousPage}
-                setPaginationIndex={setPaginationIndex}
-            />
-        )
+        <Pagination
+            canNextPage={props.hasMoreItems}
+            canPreviousPage={props.page !== 0}
+            gotoPage={(page: number) => props.setPage && props.setPage(() => page)}
+            nextPage={() => props.setPage && props.setPage(prev => prev + 1)}
+            numberOfItems={props.numberOfItems}
+            page={props.page}
+            pageSize={props.pageSize}
+            previousPage={() => props.setPage && props.setPage(prev => prev - 1)}
+        />
     ) : null;
 
     const cssGridStyles = useMemo(() => {
@@ -319,6 +285,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                         setDragOver={setDragOver}
                                         setIsDragging={setIsDragging}
                                         setSortBy={setSortBy}
+                                        sortBy={sortBy}
                                         sortable={props.columnsSortable}
                                         visibleColumns={visibleColumns}
                                     />
@@ -329,7 +296,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             )}
                         </Fragment>
                     ))}
-                    {(isSortingOrFiltering && props.paging ? rowsPagination : rows).map((row, rowIndex) => {
+                    {rows.map((row, rowIndex) => {
                         prepareRow(row);
                         return (
                             <div

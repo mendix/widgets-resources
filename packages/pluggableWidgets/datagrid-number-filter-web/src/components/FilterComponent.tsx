@@ -1,6 +1,6 @@
-import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ListAttributeValue, ObjectItem } from "mendix";
+
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { debounce } from "../utils/utils";
 import { Big } from "big.js";
@@ -10,12 +10,12 @@ interface FilterComponentProps {
     adjustable: boolean;
     defaultFilter: DefaultFilterEnum;
     delay: number;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
+    updateFilters?: (value: Big | undefined, type: DefaultFilterEnum) => void;
     value?: Big;
 }
 
@@ -33,35 +33,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.value]);
 
     useEffect(() => {
-        if (props.filterDispatcher) {
-            props.filterDispatcher({
-                filter: (item, attr): boolean => {
-                    if (!value) {
-                        return true;
-                    }
-                    const dataValue = attr.get(item).value as Big;
-                    if (!dataValue || isNaN(Number(dataValue))) {
-                        return false;
-                    }
-                    const filterValue = new Big(value);
-                    switch (type) {
-                        case "greater":
-                            return dataValue.gt(filterValue);
-                        case "greaterEqual":
-                            return dataValue.gte(filterValue);
-                        case "equal":
-                            return dataValue.eq(filterValue);
-                        case "notEqual":
-                            return !dataValue.eq(filterValue);
-                        case "smaller":
-                            return dataValue.lt(filterValue);
-                        case "smallerEqual":
-                            return dataValue.lte(filterValue);
-                    }
-                }
-            });
-        }
-    }, [props.filterDispatcher, value, type]);
+        props.updateFilters?.(value, type);
+    }, [value, type]);
 
     const onChange = useCallback(
         debounce((value?: Big) => setValue(value), props.delay),

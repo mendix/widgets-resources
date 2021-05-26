@@ -1,28 +1,13 @@
-import {
-    UsePaginationOptions,
-    UsePaginationState,
-    UseSortByColumnOptions,
-    UseSortByOptions,
-    UseSortByColumnProps,
-    UseSortByInstanceProps,
-    UseColumnOrderInstanceProps,
-    UsePaginationInstanceProps,
-    UseColumnOrderState,
-    UseSortByState
-} from "react-table";
+import { UseColumnOrderInstanceProps, UseColumnOrderState } from "react-table";
 import { ReactNode } from "react";
 import { WidthEnum } from "./DatagridProps";
 
 declare module "react-table" {
-    export interface TableOptions<D extends object>
-        extends UsePaginationOptions<D>,
-            UseSortByColumnOptions<D>,
-            UseSortByOptions<D> {}
-
-    export interface ColumnInterface<D extends object = {}> extends UseSortByColumnOptions<D> {
+    export interface ColumnInterface<D extends object = {}> {
         alignment: string;
         canHide?: boolean;
         canDrag?: boolean;
+        canSort?: boolean;
         canResize?: boolean;
         hidden?: boolean;
         customFilter?: ReactNode;
@@ -30,15 +15,9 @@ declare module "react-table" {
         width?: WidthEnum;
     }
 
-    export interface TableState<D extends object = {}>
-        extends UsePaginationState<D>,
-            UseColumnOrderState<D>,
-            UseSortByState<D> {}
+    export interface TableState<D extends object = {}> extends UseColumnOrderState<D> {}
 
-    export interface TableInstance<D extends object = {}>
-        extends UseSortByInstanceProps<D>,
-            UseColumnOrderInstanceProps<D>,
-            UsePaginationInstanceProps<D> {
+    export interface TableInstance<D extends object = {}> extends UseColumnOrderInstanceProps<D> {
         rowIndex: number;
     }
 

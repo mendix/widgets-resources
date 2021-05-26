@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useCallback } from "react";
 import { ColumnsPreviewType, DatagridPreviewProps } from "../typings/DatagridProps";
 
-import { Table } from "./components/Table";
+import { Table, TableColumn } from "./components/Table";
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { Selectable } from "mendix/preview/Selectable";
 
@@ -77,7 +77,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [columns]
             )}
-            columns={columns}
+            columns={transformColumnProps(columns)}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
             columnsHidable={props.columnsHidable}
@@ -121,4 +121,13 @@ export function preview(props: DatagridPreviewProps): ReactElement {
 
 export function getPreviewCss(): string {
     return require("./ui/DatagridPreview.scss");
+}
+
+function transformColumnProps(props: ColumnsPreviewType[]): TableColumn[] {
+    return props.map(prop => ({
+        ...prop,
+        header: (prop.header?.trim().length ?? 0) === 0 ? "[Empty caption]" : prop.header,
+        draggable: false,
+        resizable: false
+    }));
 }

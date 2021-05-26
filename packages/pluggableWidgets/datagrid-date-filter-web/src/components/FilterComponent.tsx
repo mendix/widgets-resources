@@ -1,10 +1,8 @@
-import { createElement, Dispatch, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector";
-import { ListAttributeValue, ObjectItem } from "mendix";
-import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
-import { isValid, isDate } from "date-fns";
 
-import { changeTimeOfDate } from "../utils/utils";
+import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
+
 import DatePickerComponent from "react-datepicker";
 import { DatePicker } from "./DatePicker";
 
@@ -13,13 +11,13 @@ interface FilterComponentProps {
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
     dateFormat?: string;
-    filterDispatcher: Dispatch<{ filter(item: ObjectItem, attribute: ListAttributeValue): boolean }>;
     locale?: string;
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
+    updateFilters?: (value: Date | null, type: DefaultFilterEnum) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
@@ -34,43 +32,8 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.defaultValue]);
 
     useEffect(() => {
-        props.filterDispatcher({
-            filter: (item, attr): any => {
-                const dateValue = attr.get(item).value as Date;
-
-                if (!value) {
-                    return true;
-                }
-
-                if (!dateValue || !isDate(dateValue) || !isValid(dateValue)) {
-                    return false;
-                }
-
-                const utcDateValue = dateValue.getTime();
-
-                switch (type) {
-                    case "greater":
-                        return utcDateValue > changeTimeOfDate(value, 23, 59, 59).getTime();
-                    case "greaterEqual":
-                        return utcDateValue >= changeTimeOfDate(value, 0, 0, 0).getTime();
-                    case "equal":
-                        return (
-                            changeTimeOfDate(dateValue, 0, 0, 0).getTime() ===
-                            changeTimeOfDate(value, 0, 0, 0).getTime()
-                        );
-                    case "notEqual":
-                        return (
-                            changeTimeOfDate(dateValue, 0, 0, 0).getTime() !==
-                            changeTimeOfDate(value, 0, 0, 0).getTime()
-                        );
-                    case "smaller":
-                        return utcDateValue < changeTimeOfDate(value, 0, 0, 0).getTime();
-                    case "smallerEqual":
-                        return utcDateValue <= changeTimeOfDate(value, 23, 59, 59).getTime();
-                }
-            }
-        });
-    }, [props.filterDispatcher, value, type]);
+        props.updateFilters?.(value, type);
+    }, [value, type]);
 
     const focusInput = useCallback(() => {
         if (pickerRef.current) {

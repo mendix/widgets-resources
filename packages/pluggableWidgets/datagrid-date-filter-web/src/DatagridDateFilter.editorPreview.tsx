@@ -7,7 +7,6 @@ export function preview(props: DatagridDateFilterPreviewProps): ReactElement {
         <FilterComponent
             adjustable={props.adjustable}
             defaultFilter={props.defaultFilter}
-            filterDispatcher={() => ({})}
             placeholder={props.placeholder}
             screenReaderButtonCaption={props.screenReaderButtonCaption}
             screenReaderInputCaption={props.screenReaderInputCaption}
