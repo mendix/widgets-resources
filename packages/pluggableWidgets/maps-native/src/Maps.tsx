@@ -54,11 +54,16 @@ export class Maps extends Component<Props, State> {
 
     componentDidUpdate(): void {
         if (
-            this.state.status === Status.CameraReady ||
-            (this.state.status === Status.LoadingMarkers &&
-                (!this.props.dynamicMarkers.length ||
-                    this.props.dynamicMarkers.filter(m => m.markersDS?.status !== ValueStatus.Available).length === 0))
+            this.state.status === Status.LoadingMarkers &&
+            (!this.props.dynamicMarkers.length ||
+                this.props.dynamicMarkers.filter(m => m.markersDS?.status !== ValueStatus.Available).length === 0)
         ) {
+            this.parseMarkers();
+        }
+    }
+
+    UNSAFE_componentWillReceiveProps(): void {
+        if (this.state.status === Status.CameraReady) {
             this.parseMarkers();
         }
     }
