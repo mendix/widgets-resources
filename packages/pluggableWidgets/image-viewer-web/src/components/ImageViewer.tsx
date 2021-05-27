@@ -48,7 +48,6 @@ export function ImageViewer(props: ImageViewerProps): ReactElement | null {
                 props.className,
                 { hidden: !props.image }
             )}
-            style={props.style}
         >
             {props.type === "image" ? (
                 <img src={props.image} {...commonImageProps}></img>
@@ -56,5 +55,29 @@ export function ImageViewer(props: ImageViewerProps): ReactElement | null {
                 <span className={classNames("glyphicon", props.image)} {...commonImageProps} />
             )}
         </div>
+    );
+}
+
+function Glyphicon(props: { icon: string | undefined; style?: CSSProperties }): ReactElement {
+    return <span className={classNames("glyphicon", props.icon)} style={{ ...props.style }} />;
+}
+
+function Image(props: {
+    image: string | undefined;
+    style?: CSSProperties;
+    height: number;
+    heightUnit: HeightUnitEnum;
+    width: number;
+    widthUnit: WidthUnitEnum;
+}): ReactElement {
+    return (
+        <img
+            src={props.image}
+            style={{
+                ...props.style,
+                height: getStyle(props.height, props.heightUnit),
+                width: getStyle(props.width, props.widthUnit)
+            }}
+        />
     );
 }
