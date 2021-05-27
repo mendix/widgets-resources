@@ -12,8 +12,7 @@ const dataSourceProperties: ImageViewPreviewPropsKey[] = ["imageObject", "imageU
 
 function filterDataSourceProperties(sourceProperty: DatasourceEnum): ImageViewPreviewPropsKey[] {
     switch (sourceProperty) {
-        case "staticImage":
-        case "dynamicImage":
+        case "image":
             return dataSourceProperties.filter(prop => prop !== "imageObject");
         case "imageUrl":
             return dataSourceProperties.filter(prop => prop !== "imageUrl");
@@ -30,6 +29,12 @@ export function getProperties(
     platform: "web" | "desktop"
 ): Properties {
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
+
+    if (values.datasource === "icon" && values.imageIcon?.type === "glyph") {
+        hidePropertiesIn(defaultProperties, values, ["widthUnit", "width", "heightUnit", "height"]);
+    } else {
+        hidePropertiesIn(defaultProperties, values, ["iconSize"]);
+    }
 
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);

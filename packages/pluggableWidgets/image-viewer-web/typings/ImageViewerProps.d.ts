@@ -6,7 +6,7 @@
 import { CSSProperties } from "react";
 import { DynamicValue, WebIcon, WebImage } from "mendix";
 
-export type DatasourceEnum = "dynamicImage" | "staticImage" | "imageUrl" | "icon";
+export type DatasourceEnum = "image" | "imageUrl" | "icon";
 
 export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
@@ -25,6 +25,7 @@ export interface ImageViewerContainerProps {
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
+    iconSize: number;
     responsive: boolean;
 }
 
@@ -39,5 +40,6 @@ export interface ImageViewerPreviewProps {
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
+    iconSize: number | null;
     responsive: boolean;
 }

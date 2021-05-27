@@ -6,12 +6,11 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="datasource" type="enumeration" defaultValue="staticImage">
+                <property key="datasource" type="enumeration" defaultValue="image">
                     <caption>Data source</caption>
                     <description/>
                     <enumerationValues>
-                        <enumerationValue key="dynamicImage">Dynamic image</enumerationValue>
-                        <enumerationValue key="staticImage">Static image</enumerationValue>
+                        <enumerationValue key="image">Image</enumerationValue>
                         <enumerationValue key="imageUrl">Image URL</enumerationValue>
                         <enumerationValue key="icon">Icon</enumerationValue>
                     </enumerationValues>
@@ -54,6 +53,10 @@
                 <property key="height" type="integer" defaultValue="100">
                     <caption>Height</caption>
                     <description/>
+                </property>
+                <property key="iconSize" type="integer" defaultValue="14">
+                    <caption>Icon size</caption>
+                    <description>The size of the icon in pixels</description> 
                 </property>
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>

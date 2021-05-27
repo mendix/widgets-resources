@@ -1,38 +1,43 @@
 import { ValueStatus } from "mendix";
 import { createElement, FunctionComponent } from "react";
 import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
-import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/ImageViewer";
+import { ImageViewer as ImageViewerComponent } from "./components/ImageViewer";
 
-function getImageProps(props: ImageViewerContainerProps): ImageViewerImageProps {
-    const fallback: ImageViewerImageProps = {
+type ImageProps = {
+    type: "image" | "icon";
+    image: string | undefined;
+};
+
+function getImageProps({ datasource, imageIcon, imageObject, imageUrl }: ImageViewerContainerProps): ImageProps {
+    const fallback: ImageProps = {
         type: "image",
         image: undefined
     };
-    switch (props.datasource) {
-        case "dynamicImage":
-        case "staticImage":
+    switch (datasource) {
+        case "image":
             return {
                 type: "image",
-                image: props.imageObject?.status === ValueStatus.Available ? props.imageObject.value.uri : undefined
+                image: imageObject?.status === ValueStatus.Available ? imageObject.value.uri : undefined
             };
         case "imageUrl":
-            console.log(props);
             return {
                 type: "image",
-                image: props.imageUrl?.status === ValueStatus.Available ? props.imageUrl.value : undefined
+                image: imageUrl?.status === ValueStatus.Available ? imageUrl.value : undefined
             };
         case "icon": {
-            if (props.imageIcon?.status === ValueStatus.Available) {
-                if (props.imageIcon.value?.type === "glyph") {
+            if (imageIcon?.status === ValueStatus.Available) {
+                if (imageIcon.value?.type === "glyph") {
                     return {
                         type: "icon",
-                        image: props.imageIcon.value.iconClass
+                        image: imageIcon.value.iconClass
                     };
                 }
-                return {
-                    type: "image",
-                    image: props.imageIcon.value?.iconUrl
-                };
+                if (imageIcon.value?.type === "image") {
+                    return {
+                        type: "image",
+                        image: imageIcon.value.iconUrl
+                    };
+                }
             }
             return fallback;
         }
@@ -41,19 +46,26 @@ function getImageProps(props: ImageViewerContainerProps): ImageViewerImageProps 
     }
 }
 
-export const ImageViewer: FunctionComponent<any> = (props: ImageViewerContainerProps) => {
-    const imageProps = getImageProps(props);
-    console.log(imageProps);
+export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props => {
+    const { type, image } = getImageProps(props);
     return (
-        <ImageViewerComponent
+        <ImageViewerComponent.Wrapper
             className={props.class}
-            height={props.height}
-            heightUnit={props.heightUnit}
-            width={props.width}
-            widthUnit={props.widthUnit}
             responsive={props.responsive}
-            style={props.style}
-            {...imageProps}
-        />
+            hasImage={image !== undefined && image.length > 0}
+        >
+            {type === "image" ? (
+                <ImageViewerComponent.Image
+                    image={image}
+                    height={props.height}
+                    heightUnit={props.heightUnit}
+                    width={props.width}
+                    widthUnit={props.widthUnit}
+                    style={props.style}
+                />
+            ) : (
+                <ImageViewerComponent.Glyphicon icon={image} size={props.iconSize} style={props.style} />
+            )}
+        </ImageViewerComponent.Wrapper>
     );
 };

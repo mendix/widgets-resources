@@ -4,24 +4,8 @@ import { HeightUnitEnum, WidthUnitEnum } from "../../typings/ImageViewerProps";
 
 import "../ui/ImageViewer.scss";
 
-export type ImageViewerImageProps = {
-    type: "image" | "icon";
-    image: string | undefined;
-};
-export type ImageViewerProps = {
-    height: number;
-    heightUnit: HeightUnitEnum;
-    width: number;
-    widthUnit: WidthUnitEnum;
-    className?: string;
-    style?: CSSProperties;
-    responsive: boolean;
-    getRef?: (node: HTMLDivElement) => void;
-    // TODO: Implement the Events
-    onClick?: () => void;
-} & ImageViewerImageProps;
-
-function getStyle(value: string | number, type: string): number | string {
+function getStyle(value: string | number, type: WidthUnitEnum | HeightUnitEnum): number | string {
+    console.log({ value, type });
     // when type is auto default browser styles applies
     if (type === "pixels") {
         return value;
@@ -31,45 +15,52 @@ function getStyle(value: string | number, type: string): number | string {
 
     return "";
 }
+export interface ImageViewerWrapperProps {
+    className?: string;
+    responsive: boolean;
+    hasImage: boolean;
+    children: ReactElement<ImageViewerGlyphicon | ImageViewerImage>;
+}
 
-export function ImageViewer(props: ImageViewerProps): ReactElement | null {
-    const commonImageProps = {
-        style: {
-            ...props.style,
-            height: getStyle(props.height, props.heightUnit),
-            width: getStyle(props.width, props.widthUnit)
-        }
-    };
+interface ImageViewerContent {
+    style?: CSSProperties;
+}
+
+function Wrapper(props: ImageViewerWrapperProps): ReactElement {
     return (
         <div
             className={classNames(
                 "mx-image-viewer",
                 { "mx-image-viewer-responsive": props.responsive },
                 props.className,
-                { hidden: !props.image }
+                { hidden: !props.hasImage }
             )}
         >
-            {props.type === "image" ? (
-                <img src={props.image} {...commonImageProps}></img>
-            ) : (
-                <span className={classNames("glyphicon", props.image)} {...commonImageProps} />
-            )}
+            {props.children}
         </div>
     );
 }
 
-function Glyphicon(props: { icon: string | undefined; style?: CSSProperties }): ReactElement {
-    return <span className={classNames("glyphicon", props.icon)} style={{ ...props.style }} />;
+export interface ImageViewerGlyphicon extends ImageViewerContent {
+    icon: string | undefined;
+    size: number;
 }
 
-function Image(props: {
+function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
+    return (
+        <span className={classNames("glyphicon", props.icon)} style={{ ...props.style, fontSize: `${props.size}px` }} />
+    );
+}
+
+export interface ImageViewerImage extends ImageViewerContent {
     image: string | undefined;
-    style?: CSSProperties;
     height: number;
     heightUnit: HeightUnitEnum;
     width: number;
     widthUnit: WidthUnitEnum;
-}): ReactElement {
+}
+
+function Image(props: ImageViewerImage): ReactElement {
     return (
         <img
             src={props.image}
@@ -81,3 +72,9 @@ function Image(props: {
         />
     );
 }
+
+export const ImageViewer = {
+    Wrapper,
+    Glyphicon,
+    Image
+};

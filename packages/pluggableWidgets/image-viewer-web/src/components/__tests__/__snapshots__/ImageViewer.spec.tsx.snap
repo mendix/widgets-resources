@@ -1,18 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ImageViewer renders the structure 1`] = `
+exports[`ImageViewer renders the structure with an icon 1`] = `
 <div
-  className="mx-image-viewer mx-image-viewer-responsive"
+  class="mx-image-viewer mx-image-viewer-responsive"
+>
+  <span
+    class="glyphicon glyphicon-asterisk"
+    style="font-size:20px"
+  />
+</div>
+`;
+
+exports[`ImageViewer renders the structure with an image 1`] = `
+<div
+  class="mx-image-viewer mx-image-viewer-responsive"
 >
   <img
-    onClick={[Function]}
     src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
-    style={
-      Object {
-        "height": 300,
-        "width": 300,
-      }
-    }
+    style="height:300px;width:300px"
+  />
+</div>
+`;
+
+exports[`ImageViewer renders the structure with an image and percentage dimensions 1`] = `
+<div
+  class="mx-image-viewer mx-image-viewer-responsive"
+>
+  <img
+    src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
+    style="height:;width:100%"
   />
 </div>
 `;
