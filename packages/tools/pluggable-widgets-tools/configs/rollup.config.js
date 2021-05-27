@@ -305,15 +305,15 @@ const imagesAndFonts = [
     "**/*.eot"
 ];
 
-const webExternal = [/^mendix($|\/)/, "react", "react-dom", "big.js"];
+const webExternal = [/^mendix($|\/)/, /^react(\/|$)/, /^react-dom(\/|$)/, /^big.js(\/|$)/];
 
-const editorPreviewExternal = [/^mendix($|\/)/, "react", "react-dom"];
+const editorPreviewExternal = [/^mendix($|\/)/, /^react(\/|$)/, /^react-dom(\/|$)/];
 
 const nativeExternal = [
     /^mendix($|\/)/,
     /^react-native(\/|$)/,
-    "big.js",
-    "react",
+    /^big.js(\/|$)/,
+    /^react(\/|$)/,
     /^react-native-gesture-handler(\/|$)/,
     /^react-native-reanimated(\/|$)/,
     /^react-native-svg(\/|$)/,
