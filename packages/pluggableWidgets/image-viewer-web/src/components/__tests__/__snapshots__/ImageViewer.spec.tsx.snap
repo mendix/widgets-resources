@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageViewer renders the structure 1`] = `
+<div
+  className="mx-image-viewer mx-image-viewer-responsive"
+>
+  <img
+    onClick={[Function]}
+    src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
+    style={
+      Object {
+        "height": 300,
+        "width": 300,
+      }
+    }
+  />
+</div>
+`;

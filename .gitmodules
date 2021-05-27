@@ -54,10 +54,6 @@
 	path = packages/customWidgets/calendar-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = calendar-web
-[submodule "packages/customWidgets/image-viewer-web/tests/testProject"]
-	path = packages/customWidgets/image-viewer-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = image-viewer-web
 [submodule "packages/customWidgets/rich-text-web/tests/testProject"]
 	path = packages/customWidgets/rich-text-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
