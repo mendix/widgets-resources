@@ -30,6 +30,7 @@
     "@mendix/pluggable-widgets-tools": ">=9.0.0"
   },
   "dependencies": {
-    "@mendix/piw-utils-internal": "^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "classnames": "^2.2.6"
   }
 }

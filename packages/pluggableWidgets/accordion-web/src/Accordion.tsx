@@ -14,7 +14,8 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
         return props.groups.map(group => ({
             header: group.headerRenderMode === "text" ? <h3>{group.headerText.value}</h3> : group.headerContent,
             content: group.content,
-            visible: group.visible.value!
+            visible: group.visible.value!,
+            dynamicClassName: group.dynamicClass?.value
         }));
     }, [props.groups]);
 

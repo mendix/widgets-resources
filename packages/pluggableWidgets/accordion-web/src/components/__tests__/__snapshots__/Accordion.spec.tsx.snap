@@ -2,7 +2,7 @@
 
 exports[`Accordion in collapsible & multiple expanded group mode renders correctly 1`] = `
 <div
-  className=""
+  className="widget-accordion"
   id="id"
   style={
     Object {
@@ -44,7 +44,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
 
 exports[`Accordion in collapsible & multiple expanded group mode updates when accordion group data changes 1`] = `
 <div
-  className=""
+  className="widget-accordion"
   id="id"
   style={
     Object {
@@ -86,7 +86,7 @@ exports[`Accordion in collapsible & multiple expanded group mode updates when ac
 
 exports[`Accordion in collapsible & single expanded group mode renders correctly 1`] = `
 <div
-  className=""
+  className="widget-accordion"
   id="id"
   style={
     Object {
@@ -128,7 +128,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
 
 exports[`Accordion in collapsible & single expanded group mode updates when accordion group data changes 1`] = `
 <div
-  className=""
+  className="widget-accordion"
   id="id"
   style={
     Object {
@@ -170,7 +170,7 @@ exports[`Accordion in collapsible & single expanded group mode updates when acco
 
 exports[`Accordion not collapsible renders correctly 1`] = `
 <div
-  className=""
+  className="widget-accordion"
   id="id"
   style={
     Object {
@@ -210,7 +210,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
 
 exports[`Accordion not collapsible updates when accordion group data changes 1`] = `
 <div
-  className=""
+  className="widget-accordion"
   id="id"
   style={
     Object {

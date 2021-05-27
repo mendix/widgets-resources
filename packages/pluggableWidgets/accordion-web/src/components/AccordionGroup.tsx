@@ -1,12 +1,16 @@
 import { createElement, Dispatch, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { AccordionGroupsReducerAction } from "../utils/AccordionGroupStateReducer";
+import classNames from "classnames";
+
+import "../ui/accordion-main.scss";
 
 export interface AccGroup {
     header: ReactNode;
     content: ReactNode;
     collapsed?: boolean;
     visible: boolean;
+    dynamicClassName?: string;
 }
 
 export interface AccordionGroupProps {
@@ -40,11 +44,22 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     }
 
     return (
-        <section>
-            <header onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}>{group.header}</header>
-            <div style={{ display: accordionGroupsDispatch && group.collapsed ? "none" : undefined }}>
-                {divContentMounted ? group.content : undefined}
-            </div>
+        <section
+            className={classNames(
+                "widget-accordion-group",
+                { "widget-accordion-group-collapsed": group.collapsed },
+                group.dynamicClassName
+            )}
+        >
+            <header
+                className={classNames("widget-accordion-group-header", {
+                    "widget-accordion-group-header-clickable": accordionGroupsDispatch
+                })}
+                onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}
+            >
+                {group.header}
+            </header>
+            <div className={"widget-accordion-group-content"}>{divContentMounted ? group.content : undefined}</div>
         </section>
     );
 }

@@ -14,6 +14,7 @@ export interface GroupsType {
     headerContent?: ReactNode;
     content?: ReactNode;
     visible: DynamicValue<boolean>;
+    dynamicClass?: DynamicValue<string>;
 }
 
 export type CollapseBehaviorEnum = "singleExpanded" | "multipleExpanded";
@@ -24,6 +25,7 @@ export interface GroupsPreviewType {
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     visible: string;
+    dynamicClass: string;
 }
 
 export interface AccordionContainerProps {

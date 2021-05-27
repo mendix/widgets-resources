@@ -506,6 +506,45 @@ $timeline-grouping-size: 120px;
 $timeline-grouping-border-radius: 30px;
 $timeline-grouping-border-color: $timeline-border-color;
 
+//== Accordions
+//## Extended variables for Accordion Widget
+
+// Default
+$accordion-header-default-bg: $bg-color-secondary;
+$accordion-header-default-bg-hover: $bg-color;
+$accordion-header-default-color: $font-color-header;
+$accordion-default-border-color: $border-color-default;
+
+$accordion-bg-striped: $grid-bg-striped;
+$accordion-bg-striped-hover: $grid-bg-selected;
+
+// Semantic background colors
+$accordion-header-primary-bg: $btn-primary-bg;
+$accordion-header-secondary-bg: $btn-default-bg;
+$accordion-header-success-bg: $btn-success-bg;
+$accordion-header-warning-bg: $btn-warning-bg;
+$accordion-header-danger-bg: $btn-danger-bg;
+
+$accordion-header-primary-bg-hover: $btn-primary-bg-hover;
+$accordion-header-secondary-bg-hover: $btn-default-bg-hover;
+$accordion-header-success-bg-hover: $btn-success-bg-hover;
+$accordion-header-warning-bg-hover: $btn-warning-bg-hover;
+$accordion-header-danger-bg-hover: $btn-danger-bg-hover;
+
+// Semantic text colors
+$accordion-header-primary-color: $btn-primary-color;
+$accordion-header-secondary-color: $btn-default-color;
+$accordion-header-success-color: $btn-success-color;
+$accordion-header-warning-color: $btn-warning-color;
+$accordion-header-danger-color: $btn-danger-color;
+
+// Semantic border colors
+$accordion-primary-border-color: $btn-primary-border-color;
+$accordion-secondary-border-color: $btn-default-border-color;
+$accordion-success-border-color: $btn-success-border-color;
+$accordion-warning-border-color: $btn-warning-border-color;
+$accordion-danger-border-color: $btn-danger-border-color;
+
 //== Spacing
 //## Advanced layout options (used in base/mixins/default-spacing)
 
