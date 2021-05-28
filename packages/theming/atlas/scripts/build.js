@@ -1,6 +1,6 @@
 const concurrently = require("concurrently");
 const { join } = require("path");
-const { rm } = require("shelljs");
+const { rm, mkdir } = require("shelljs");
 
 main().catch(e => {
     console.error(e);
@@ -34,6 +34,13 @@ async function main() {
         throw new Error(`Invalid mode: "${mode}"`);
     }
 
+    // when targeting a networked windows drive, the cmds executed by concurrently run into a race condition when
+    // creating directories. create them here to avoid the error.
+    mkdir(join(outputDir, "theme"));
+    mkdir(join(outputDir, "themesource/atlas_core"));
+    mkdir(join(outputDir, "themesource/atlas_web_content"));
+    mkdir(join(outputDir, "themesource/atlas_nativemobile_content"));
+
     await buildAndCopyAtlas(mode === "start", outputDir);
 }
 
@@ -46,15 +53,21 @@ async function buildAndCopyAtlas(watchMode, destination) {
             [
                 {
                     name: "web-theme-content",
-                    command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${destination}/theme/web"`
+                    command: `copy-and-watch ${watchArg} "src/theme/web/**/*" "${join(destination, "/theme/web")}"`
                 },
                 {
                     name: "web-themesource-core",
-                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/web/**/*" "${destination}/themesource/atlas_core/web"`
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/web/**/*" "${join(
+                        destination,
+                        "/themesource/atlas_core/web"
+                    )}"`
                 },
                 {
                     name: "web-themesource-content",
-                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_web_content/web/**/*" "${destination}/themesource/atlas_web_content/web"`
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_web_content/web/**/*" "${join(
+                        destination,
+                        "/themesource/atlas_web_content/web"
+                    )}"`
                 },
                 {
                     name: "native-typescript",
@@ -62,7 +75,10 @@ async function buildAndCopyAtlas(watchMode, destination) {
                 },
                 {
                     name: "native-design-properties-and-manifest",
-                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/native/**/*.json" "${destination}/themesource/atlas_core/native"`
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/native/**/*.json" "${join(
+                        destination,
+                        "/themesource/atlas_core/native"
+                    )}"`
                 }
             ],
             {
