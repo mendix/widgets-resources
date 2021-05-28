@@ -13,6 +13,32 @@ interface InputType extends TextStyle {
     underlineColorAndroid?: string;
 }
 
+// Accordion
+export interface AccordionType {
+    container?: ViewStyle;
+    group?: AccordionGroupType;
+}
+
+export interface AccordionGroupType {
+    container?: ViewStyle;
+    header?: {
+        container?: ViewStyle;
+        heading1?: TextStyle;
+        heading2?: TextStyle;
+        heading3?: TextStyle;
+        heading4?: TextStyle;
+        heading5?: TextStyle;
+        heading6?: TextStyle;
+        icon?: AccordionIconType;
+    };
+    content?: ViewStyle;
+}
+
+export interface AccordionIconType extends ViewStyle {
+    size?: number;
+    color?: string;
+}
+
 // Activity Indicator
 export interface ActivityIndicatorType {
     container?: ViewStyle;

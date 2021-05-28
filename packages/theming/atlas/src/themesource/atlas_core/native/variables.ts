@@ -4,6 +4,7 @@ import adjustFont, { height, width } from "./core/helpers/_functions/adjustfont"
 import { anyColorToRgbString, setContrastScale } from "./core/helpers/_functions/convertcolors";
 import merge from "./core/helpers/_functions/mergeobjects";
 import {
+    VariablesAccordion,
     VariablesBackground,
     VariablesBackgroundDefaults,
     VariablesBadge,
@@ -344,6 +345,32 @@ let container: VariablesContainer = {
     }
 };
 container = merge(container, custom.container || ({} as any));
+//
+// Accordion Styles
+let accordion: VariablesAccordion = {
+    container: {
+        backgroundColor: background.primary
+    },
+    groupHeader: {
+        container: {
+            paddingVertical: spacing.small,
+            paddingHorizontal: spacing.regular
+        },
+        heading: {
+            color: font.colorTitle
+        },
+        icon: {
+            size: font.sizeLarge,
+            color: "#000"
+        }
+    },
+    groupContent: {
+        paddingTop: spacing.small,
+        paddingBottom: spacing.regular,
+        paddingHorizontal: spacing.regular
+    }
+};
+accordion = merge(accordion, custom.accordion || ({} as any));
 //
 // Badge Styles
 let badge: VariablesBadge = {

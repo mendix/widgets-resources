@@ -1,0 +1,1351 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion in collapsible & multi expanded group mode renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode hides the first accordion group when visibility is false 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the accordion groups icon on left side 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          Object {
+            "flexDirection": "row-reverse",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          Object {
+            "flexDirection": "row-reverse",
+          },
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the accordion groups without an icon 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the first accordion group initially collapsed 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the first accordion group initially collapsed based on attribute 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the first accordion group initially collapsed based on expression 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Object {
+            "fontSize": 40,
+            "fontWeight": "600",
+            "lineHeight": 60,
+          }
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 8,
+          },
+          false,
+        ]
+      }
+    >
+      <Text>
+        Header2
+      </Text>
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 16,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

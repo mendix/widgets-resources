@@ -1924,6 +1924,31 @@
             ]
         }
     ],
+    "com.mendix.widget.native.accordion.Accordion": [
+        {
+            "name": "Accordion style",
+            "type": "Dropdown",
+            "description": "Style of the Accordion.",
+            "options": [
+                {
+                    "name": "Primary",
+                    "class": "accordionPrimary"
+                },
+                {
+                    "name": "Success",
+                    "class": "accordionSuccess"
+                },
+                {
+                    "name": "Warning",
+                    "class": "accordionWarning"
+                },
+                {
+                    "name": "Danger",
+                    "class": "accordionDanger"
+                }
+            ]
+        }
+    ],
     "com.mendix.widget.native.badge.Badge": [
         {
             "name": "Badge style",
