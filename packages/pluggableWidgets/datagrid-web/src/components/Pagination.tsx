@@ -34,21 +34,21 @@ export function Pagination(props: PaginationProps): ReactElement | null {
         <div className="pagination-bar">
             <button
                 className="btn pagination-button"
+                disabled={props.page === 0}
                 onClick={() => {
                     props.gotoPage(0);
                     setPageIndex(0);
                 }}
-                disabled={props.page === 0}
             >
                 <span className="glyphicon glyphicon-step-backward" />
             </button>
             <button
                 className="btn pagination-button"
+                disabled={!props.canPreviousPage}
                 onClick={() => {
                     props.previousPage();
                     setPageIndex(props.page - 1);
                 }}
-                disabled={!props.canPreviousPage}
             >
                 <span className="glyphicon glyphicon-backward" />
             </button>
@@ -58,22 +58,22 @@ export function Pagination(props: PaginationProps): ReactElement | null {
             </div>
             <button
                 className="btn pagination-button"
+                disabled={!props.canNextPage}
                 onClick={() => {
                     props.nextPage();
                     setPageIndex(props.page + 1);
                 }}
-                disabled={!props.canNextPage}
             >
                 <span className="glyphicon glyphicon-forward" />
             </button>
             {hasLastPage && (
                 <button
                     className="btn pagination-button"
+                    disabled={props.page === lastPage}
                     onClick={() => {
                         props.gotoPage(lastPage);
                         setPageIndex(lastPage);
                     }}
-                    disabled={props.page === lastPage}
                 >
                     <span className="glyphicon glyphicon-step-forward" />
                 </button>

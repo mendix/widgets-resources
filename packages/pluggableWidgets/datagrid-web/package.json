@@ -32,12 +32,10 @@
     "@fortawesome/free-regular-svg-icons": "^5.13.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
     "@mendix/piw-utils-internal": "^1.0.0",
-    "deep-equal": "^2.0.2",
-    "react-table": "^7.5.0"
+    "deep-equal": "^2.0.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@testing-library/react-hooks": "^3.4.2",
-    "@types/react-table": "^7.0.20"
+    "@testing-library/react-hooks": "^3.4.2"
   }
 }

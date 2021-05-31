@@ -34,9 +34,9 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             const column = columns[columnIndex];
             return (
                 <Selectable
-                    object={column}
-                    caption={column.header.trim().length > 0 ? column.header : "[Empty caption]"}
                     key={`selectable_column_${columnIndex}`}
+                    caption={column.header.trim().length > 0 ? column.header : "[Empty caption]"}
+                    object={column}
                 >
                     {header}
                 </Selectable>
@@ -47,7 +47,6 @@ export function preview(props: DatagridPreviewProps): ReactElement {
 
     return (
         <Table
-            className={props.class}
             cellRenderer={useCallback(
                 (renderWrapper, _, columnIndex) => {
                     const column = columns[columnIndex];
@@ -77,6 +76,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [columns]
             )}
+            className={props.class}
             columns={transformColumnProps(columns)}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}

@@ -3,5 +3,6 @@
 exports[`Infinite Body renders the structure correctly 1`] = `
 <div
   className="table-content"
+  role="rowgroup"
 />
 `;

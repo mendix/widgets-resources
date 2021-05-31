@@ -61,7 +61,6 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     return (
         <Table
-            className={props.class}
             cellRenderer={useCallback(
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
@@ -85,6 +84,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 },
                 [props.columns, props.rowClass, props.onClick]
             )}
+            className={props.class}
             columns={transformColumnProps(props.columns)}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
@@ -120,9 +120,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             paging={props.pagination === "buttons"}
             pagingPosition={props.pagingPosition}
             rowClass={useCallback(value => props.rowClass?.get(value)?.value ?? "", [props.rowClass])}
-            settings={props.configurationAttribute}
             setPage={setPage}
             setSortParameters={setSortParameters}
+            settings={props.configurationAttribute}
             styles={props.style}
             valueForSort={useCallback(
                 (value, columnIndex) => {
