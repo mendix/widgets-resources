@@ -48,7 +48,7 @@ describe("Popup menu", () => {
         it("triggers action", () => {
             basicItemProps.action = actionValue();
             const popupMenu = createPopupMenu(defaultProps);
-            const event: any = { target: {} };
+            const event: any = { target: {}, preventDefault: jest.fn(), stopPropagation: jest.fn() };
             popupMenu.find(".popupmenu-basic-item").prop("onClick")!(event);
 
             expect(basicItemProps.action.execute).toHaveBeenCalledTimes(1);
