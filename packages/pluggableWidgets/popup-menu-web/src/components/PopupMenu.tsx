@@ -28,9 +28,14 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
     if (!preview) {
         handleOnClickOutsideElement(ref, () => setVisibility(false));
     }
-    const handleOnClickTrigger = useCallback((): void => {
-        setVisibility(prev => !prev);
-    }, [visibility, setVisibility]);
+    const handleOnClickTrigger = useCallback(
+        (e): void => {
+            e.preventDefault();
+            e.stopPropagation();
+            setVisibility(prev => !prev);
+        },
+        [visibility, setVisibility]
+    );
     const handleOnClickItem = useCallback(
         (itemAction?: ActionValue): void => {
             setVisibility(false);
@@ -93,7 +98,11 @@ function createMenuOptions(
                     <div
                         key={index}
                         className={classNames("popupmenu-basic-item", pickedStyle)}
-                        onClick={() => handleOnClickItem(item.action)}
+                        onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleOnClickItem(item.action);
+                        }}
                     >
                         {item.caption?.value ?? ""}
                     </div>
