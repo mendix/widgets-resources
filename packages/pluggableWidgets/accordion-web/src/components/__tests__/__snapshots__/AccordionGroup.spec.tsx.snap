@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
+
+exports[`AccordionGroup with dispatch displays the content when the group becomes visible and is expanded 1`] = `
+<section
+  className="widget-accordion-group"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable"
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup with dispatch displays the content when the group is visible and expanded 1`] = `
+<section
+  className="widget-accordion-group"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable"
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup with dispatch displays the content when the group is visible and gets expanded 1`] = `
+<section
+  className="widget-accordion-group"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable"
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup with dispatch keeps the content in DOM when the group is visible and gets collapsed 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable"
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup with dispatch loads the content lazily when the group becomes visible and is collapsed 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable"
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  />
+</section>
+`;
+
+exports[`AccordionGroup with dispatch loads the content lazily when the group is visible and collapsed 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable"
+    onClick={[Function]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  />
+</section>
+`;
+
+exports[`AccordionGroup without dispatch displays the content when the group becomes visible 1`] = `
+<section
+  className="widget-accordion-group"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup without dispatch displays the content when the group is visible 1`] = `
+<section
+  className="widget-accordion-group"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content"
+  >
+    <span>
+      content
+    </span>
+  </div>
+</section>
+`;

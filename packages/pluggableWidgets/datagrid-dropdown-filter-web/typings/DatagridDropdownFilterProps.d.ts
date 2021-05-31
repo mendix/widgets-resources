@@ -22,6 +22,7 @@ export interface DatagridDropdownFilterContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     defaultValue?: DynamicValue<string>;
+    auto: boolean;
     filterOptions: FilterOptionsType[];
     emptyOptionCaption?: DynamicValue<string>;
     multiSelect: boolean;
@@ -32,6 +33,7 @@ export interface DatagridDropdownFilterPreviewProps {
     class: string;
     style: string;
     defaultValue: string;
+    auto: boolean;
     filterOptions: FilterOptionsPreviewType[];
     emptyOptionCaption: string;
     multiSelect: boolean;

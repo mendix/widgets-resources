@@ -1,0 +1,62 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin accordion() {
+    /* ==========================================================================
+       Accordion
+
+       Default Mendix accordion widget styles.
+    ========================================================================== */
+
+    .widget-accordion {
+        background-color: $bg-color-secondary;
+
+        .widget-accordion-group {
+            @include get-accordion-group-styles(
+                $accordion-header-default-bg,
+                $accordion-header-default-bg-hover,
+                $accordion-header-default-color,
+                $brand-primary,
+                $accordion-default-border-color
+            );
+        }
+    }
+}
+
+@mixin get-accordion-group-styles($background-color, $background-color-hover, $color, $color-hover, $border-color) {
+    border-color: $border-color;
+
+    .widget-accordion-group-header {
+        background-color: $background-color;
+        padding: $spacing-medium;
+
+        > :is(h1, h2, h3, h4, h5, h6, p, span) {
+            color: $color;
+        }
+
+        &.widget-accordion-group-header-clickable {
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $background-color-hover;
+
+                > :is(h1, h2, h3, h4, h5, h6, p, span) {
+                    color: $color-hover;
+                }
+            }
+
+            &:focus {
+                outline: 2px solid $brand-primary;
+            }
+        }
+    }
+
+    .widget-accordion-group-content {
+        border-color: $border-color;
+        padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
+    }
+}

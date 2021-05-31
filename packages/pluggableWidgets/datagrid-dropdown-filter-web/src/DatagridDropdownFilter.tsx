@@ -1,9 +1,12 @@
 import { createElement, ReactElement } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
-import { ValueStatus } from "mendix";
-import { FilterComponent } from "./components/FilterComponent";
+import { ValueStatus, ListAttributeValue } from "mendix";
+import { FilterComponent, FilterOption } from "./components/FilterComponent";
 import { getFilterDispatcher } from "./utils/provider";
 import { Alert } from "@mendix/piw-utils-internal";
+
+import { attribute, equals, literal, or } from "mendix/filters/builders";
+import { FilterCondition } from "mendix/filters";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();
@@ -18,31 +21,80 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
         : [];
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The usage of filter widgets are only available within a data grid filter context. Please move the Data grid
-            dropdown widget to inside a Data Grid v2.
+            The data grid drop-down filter widget must be placed inside the header of the Data grid 2.0 widget.
         </Alert>
     );
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
-            {filterDispatcher =>
-                filterDispatcher ? (
+            {filterContextValue => {
+                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                    return alertMessage;
+                }
+                const { filterDispatcher, attribute } = filterContextValue;
+
+                const errorMessage =
+                    getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
+                if (errorMessage) {
+                    return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
+                }
+
+                return (
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
+                        attribute={attribute}
+                        auto={props.auto}
+                        defaultValue={props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
-                        filterDispatcher={filterDispatcher}
                         multiSelect={props.multiSelect}
                         name={props.name}
                         options={parsedOptions}
                         tabIndex={props.tabIndex}
-                        defaultValue={props.defaultValue?.value}
+                        updateFilters={(values: FilterOption[]): void =>
+                            filterDispatcher({
+                                getFilterCondition: () => getFilterCondition(attribute, values)
+                            })
+                        }
                     />
-                ) : (
-                    alertMessage
-                )
-            }
+                );
+            }}
         </FilterContext.Consumer>
     ) : (
         alertMessage
     );
+}
+
+function getAttributeTypeErrorMessage(type?: string): string | null {
+    return type && type !== "Enum"
+        ? "The attribute type being used for Data grid drop-down filter is not 'Enumeration'"
+        : null;
+}
+
+function validateValues(listAttribute: ListAttributeValue, options: FilterOption[]): string | null {
+    if (options.length === 0) {
+        return null;
+    }
+
+    return options.some(filterOption => !listAttribute.universe?.includes(filterOption.value))
+        ? "There are invalid values available in the Data grid drop-down filter"
+        : null;
+}
+
+function getFilterCondition(listAttribute: ListAttributeValue, values: FilterOption[]): FilterCondition | undefined {
+    if (!listAttribute || !listAttribute.filterable || values.length === 0) {
+        return undefined;
+    }
+
+    const filterAttribute = attribute(listAttribute.id);
+
+    if (values.length > 1) {
+        return or(...values.map(filter => equals(filterAttribute, literal(filter.value))));
+    }
+
+    const [filterValue] = values;
+    if (filterValue.value) {
+        return equals(filterAttribute, literal(filterValue.value));
+    }
+
+    return undefined;
 }

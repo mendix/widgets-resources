@@ -1,6 +1,7 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
 
 describe("timeline-web", () => {
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
     beforeAll(() => {
         page.open();
     });
@@ -9,7 +10,7 @@ describe("timeline-web", () => {
         it("compares with a screenshot baseline and checks if all timeline elements are rendered as expected", () => {
             browser.setWindowRect(0, 0, 1290, 900);
             const button = page.getWidget("basicTimelinePage");
-            button.waitForDisplayed();
+            button.waitForDisplayed({ timeout: 5000 });
             button.click();
             const timeline = page.getWidget("timelineGrids");
             browser.saveElement(timeline, "timelineBasic");

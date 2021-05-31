@@ -15,7 +15,6 @@ module.exports = {
     ${chalk.bold.bgBlueBright("                ")}                    __/ |          
                                        |___/           
      Generator, version: ${pkg.version}
-     Issues? Please report them at : ${chalk.italic.blueBright(pkg.bugs.url)}
                 
     `,
 

@@ -10,29 +10,21 @@ const testPageFolders = process.env.ATLAS_MX_PROJECT_PATH
     : join(cwd, "tests/testProject/deployment/web/pages/en_US");
 const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 
-// TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failiure
+// TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failure
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
 const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
 
 // Mostly the pages with progressbar fails since it is not CSS animations for web -_-. So disableCSSAnimation wont work.
 // This ends up having unstable progress circle percentage
 const pagesWithTimeout = [
-    "/p/datagrid-manyrows",
-    "/p/progresscircle",
-    "/p/pt_dashboard-expenses",
-    "/p/pt_dashboard-metrics",
-    "/p/pt_tablet_dashboard-metrics",
-    "/p/pt_tablet_dashboard-user-detail",
-    "/p/bb_headers",
-    "/p/bb_cards",
-    "/p/pt_dashboard-user-detail"
+    "/p/alerts",
+    "/p/progress-circles",
+    "/p/maps",
+    "/p/web-dashboard-actioncenter",
+    "/p/web-dashboard-transactions"
 ];
 
 describe("Screenshots of the pages for", () => {
-    beforeAll(() => {
-        browser.url("/");
-    });
-
     for (const url of pageUrls(testPageFolders)) {
         if (!pagesToSkip.includes(url)) {
             it(`matches snapshot for page ${url}`, () => {
@@ -41,20 +33,21 @@ describe("Screenshots of the pages for", () => {
 
                 // These widgets are causing unstable tests due to their nature while loading the screen
                 const sprintrFeedbackWidget = $(".sprintrFeedback__sidebar");
-                const mapsWidget = $(".widget-leaflet-maps");
+                const mapsWidget = $(".widget-maps");
+                const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(3000);
+                    browser.pause(5000);
                 }
 
                 browser.saveElement($("#content"), url, {
-                    removeElements: [sprintrFeedbackWidget, mapsWidget],
+                    removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
                     disableCSSAnimation: true,
                     hideScrollBars: true
                 });
                 expect(
                     browser.checkElement($("#content"), url, {
-                        removeElements: [sprintrFeedbackWidget, mapsWidget],
+                        removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
                         disableCSSAnimation: true,
                         hideScrollBars: true
                     })
@@ -62,10 +55,6 @@ describe("Screenshots of the pages for", () => {
             });
         }
     }
-
-    afterAll(() => {
-        cleanUnusedScreenshotBases();
-    });
 });
 
 function* getFilePaths(dir) {
@@ -93,18 +82,4 @@ function pageUrls(folder) {
         }
     }
     return pageUrls;
-}
-
-function cleanUnusedScreenshotBases() {
-    const urls = pageUrls(testPageFolders);
-    for (const filePath of getFilePaths(screenShotsFolder)) {
-        if (urls.filter(url => filePath.includes(url)).length === 0) {
-            console.log(`${filePath} is deprecated and will be deleted`);
-            try {
-                fs.rmSync(filePath);
-            } catch (e) {
-                console.warn(filePath, " couldnt be removed. Error: ", e);
-            }
-        }
-    }
 }

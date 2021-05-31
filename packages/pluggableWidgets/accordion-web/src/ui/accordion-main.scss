@@ -1,0 +1,49 @@
+$background-color: #ffffff;
+$border-color: #ced0d3;
+$header-background-color-hover: #f8f8f8;
+$header-color-hover: #264ae5;
+
+.widget-accordion {
+    background-color: $background-color;
+}
+
+.widget-accordion-group {
+    border-color: $border-color;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+
+    &.widget-accordion-group-collapsed {
+        .widget-accordion-group-content {
+            display: none;
+        }
+    }
+
+    .widget-accordion-group-header {
+        padding: 16px;
+
+        > :is(h1, h2, h3, h4, h5, h6, p) {
+            margin-bottom: 0;
+        }
+
+        &.widget-accordion-group-header-clickable {
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $header-background-color-hover;
+                cursor: pointer;
+
+                > :is(h1, h2, h3, h4, h5, h6, p, span) {
+                    color: $header-color-hover;
+                }
+
+                * {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .widget-accordion-group-content {
+        padding: 8px 16px 24px 16px;
+    }
+}

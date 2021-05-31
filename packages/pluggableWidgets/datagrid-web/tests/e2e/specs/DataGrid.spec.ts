@@ -9,9 +9,9 @@ describe("datagrid-web", () => {
     describe("capabilities: sorting", () => {
         it("changes order of data to ASC when clicking sort option", () => {
             const grid = page.getWidget("datagrid1");
-            const column = page.getElement(".column-header*=First Name", grid);
-            const icon = page.getElement("svg", column);
-            const items = page.getElements(".td", grid);
+            const column = page.waitForElement(".column-header*=First Name", grid);
+            const icon = page.waitForElement("svg", column);
+            const items = page.waitForElements(".td", grid);
 
             expect(icon.getAttribute("data-icon")).toContain("arrows-alt-v");
 

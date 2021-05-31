@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Switch with editable value renders the structure correctly 1`] = `
+<Switch
+  booleanAttribute={
+    Object {
+      "displayValue": "Formatted false",
+      "formatter": Object {
+        "config": Object {},
+        "format": [MockFunction] {
+          "calls": Array [
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": "Formatted false",
+            },
+          ],
+        },
+        "getFormatPlaceholder": [MockFunction],
+        "parse": [MockFunction],
+        "type": "datetime",
+        "withConfig": [MockFunction],
+      },
+      "readOnly": false,
+      "setFormatter": [MockFunction],
+      "setTextValue": [MockFunction],
+      "setValidator": [MockFunction],
+      "setValue": [MockFunction],
+      "status": "available",
+      "validation": undefined,
+      "value": false,
+    }
+  }
+  class="company-switch-widget"
+  id="com.mendix.widgets.custom.switch1"
+  name="switch"
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+  tabIndex={0}
+>
+  <Switch
+    class="company-switch-widget"
+    editable={true}
+    id="com.mendix.widgets.custom.switch1"
+    isChecked={false}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="widget-switch company-switch-widget"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      <div
+        aria-checked={false}
+        aria-labelledby="com.mendix.widgets.custom.switch1-label"
+        aria-readonly={false}
+        className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default un-checked"
+        id="com.mendix.widgets.custom.switch1"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="switch"
+        tabIndex={0}
+      >
+        <div
+          className="widget-switch-btn left"
+        />
+      </div>
+      <Alert
+        bootstrapStyle="danger"
+      />
+    </div>
+  </Switch>
+</Switch>
+`;
+
+exports[`Switch with readonly value renders the structure correctly 1`] = `
+<Switch
+  booleanAttribute={
+    Object {
+      "displayValue": "Formatted false",
+      "formatter": Object {
+        "config": Object {},
+        "format": [MockFunction] {
+          "calls": Array [
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": "Formatted false",
+            },
+          ],
+        },
+        "getFormatPlaceholder": [MockFunction],
+        "parse": [MockFunction],
+        "type": "datetime",
+        "withConfig": [MockFunction],
+      },
+      "readOnly": true,
+      "setFormatter": [MockFunction],
+      "setTextValue": [MockFunction],
+      "setValidator": [MockFunction],
+      "setValue": [MockFunction],
+      "status": "available",
+      "validation": undefined,
+      "value": false,
+    }
+  }
+  class="company-switch-widget"
+  id="com.mendix.widgets.custom.switch1"
+  name="switch"
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+  tabIndex={0}
+>
+  <Switch
+    class="company-switch-widget"
+    editable={false}
+    id="com.mendix.widgets.custom.switch1"
+    isChecked={false}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+    tabIndex={0}
+  >
+    <div
+      className="widget-switch company-switch-widget"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    >
+      <div
+        aria-checked={false}
+        aria-labelledby="com.mendix.widgets.custom.switch1-label"
+        aria-readonly={true}
+        className="widget-switch-btn-wrapper widget-switch-btn-wrapper-default disabled un-checked"
+        id="com.mendix.widgets.custom.switch1"
+        onClick={[Function]}
+        onKeyDown={[Function]}
+        role="switch"
+        tabIndex={0}
+      >
+        <div
+          className="widget-switch-btn left"
+        />
+      </div>
+      <Alert
+        bootstrapStyle="danger"
+      />
+    </div>
+  </Switch>
+</Switch>
+`;
+
+exports[`Switch with validation message renders correctly 1`] = `
+<Alert
+  bootstrapStyle="danger"
+>
+  <div
+    className="alert alert-danger"
+  >
+    error
+  </div>
+</Alert>
+`;
+
+exports[`Switch without validation message renders correctly 1`] = `
+<Alert
+  bootstrapStyle="danger"
+/>
+`;

@@ -2,8 +2,8 @@
     "extends": "../../../../configs/e2e/tsconfig.json",
     "compilerOptions": {
         "baseUrl": ".",
-        "lib": ["es2015"],
         "rootDir": "./"
     },
-    "include": ["./"]
+    "include": ["*.spec.ts"],
+    "exclude": ["../../node_modules", "../../../../node_modules"]
 }

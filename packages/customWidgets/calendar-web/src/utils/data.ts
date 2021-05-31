@@ -14,15 +14,15 @@ export const fetchData = (options: Data.FetchDataOptions): Promise<MxObject[]> =
                     constraint: options.constraint || ""
                 })
                     .then(resolve)
-                    .catch(message => reject({ message }));
+                    .catch(message => reject(message));
             } else if (options.type === "microflow" && options.microflow) {
                 fetchByMicroflow(options.microflow, guid)
                     .then(resolve)
-                    .catch(message => reject({ message }));
+                    .catch(message => reject(message));
             } else if (options.type === "nanoflow" && options.nanoflow.nanoflow && options.mxform) {
                 fetchByNanoflow(options.nanoflow, options.mxform)
                     .then(resolve)
-                    .catch(message => reject({ message }));
+                    .catch(message => reject(message));
             }
         } else {
             reject("entity & guid are required");

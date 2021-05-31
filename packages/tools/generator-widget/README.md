@@ -15,7 +15,7 @@ This generator uses the Yeoman scaffolding tool to let you quickly create a [Men
 
 ## Installation
 
-1. Install [node.js](https://nodejs.org/) (version >= 10.15).
+1. Install [node.js](https://nodejs.org/) (version >= 12).
 1. Install [Yeoman](http://yeoman.io):
 
     ```bash

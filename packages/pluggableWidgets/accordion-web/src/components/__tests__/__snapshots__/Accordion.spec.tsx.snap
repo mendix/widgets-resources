@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion in collapsible & multiple expanded group mode renders correctly 1`] = `
+<div
+  className="widget-accordion"
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      }
+    }
+    key="0"
+  />
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": false,
+      }
+    }
+    key="1"
+  />
+</div>
+`;
+
+exports[`Accordion in collapsible & multiple expanded group mode updates when accordion group data changes 1`] = `
+<div
+  className="widget-accordion"
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      }
+    }
+    key="0"
+  />
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": true,
+      }
+    }
+    key="1"
+  />
+</div>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders correctly 1`] = `
+<div
+  className="widget-accordion"
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      }
+    }
+    key="0"
+  />
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": false,
+      }
+    }
+    key="1"
+  />
+</div>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode updates when accordion group data changes 1`] = `
+<div
+  className="widget-accordion"
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      }
+    }
+    key="0"
+  />
+  <AccordionGroup
+    accordionGroupsDispatch={[Function]}
+    group={
+      Object {
+        "collapsed": true,
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": true,
+      }
+    }
+    key="1"
+  />
+</div>
+`;
+
+exports[`Accordion not collapsible renders correctly 1`] = `
+<div
+  className="widget-accordion"
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <AccordionGroup
+    group={
+      Object {
+        "collapsed": false,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      }
+    }
+    key="0"
+  />
+  <AccordionGroup
+    group={
+      Object {
+        "collapsed": false,
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": false,
+      }
+    }
+    key="1"
+  />
+</div>
+`;
+
+exports[`Accordion not collapsible updates when accordion group data changes 1`] = `
+<div
+  className="widget-accordion"
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <AccordionGroup
+    group={
+      Object {
+        "collapsed": false,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      }
+    }
+    key="0"
+  />
+  <AccordionGroup
+    group={
+      Object {
+        "collapsed": false,
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": true,
+      }
+    }
+    key="1"
+  />
+</div>
+`;

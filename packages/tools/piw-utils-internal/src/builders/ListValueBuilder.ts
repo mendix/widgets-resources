@@ -10,7 +10,11 @@ export function ListValueBuilder() {
         hasMoreItems: false,
         setLimit: jest.fn(),
         setOffset: jest.fn(),
-        requestTotalCount: jest.fn()
+        requestTotalCount: jest.fn(),
+        sortOrder: [],
+        filter: undefined,
+        setSortOrder: jest.fn(),
+        setFilter: jest.fn()
     };
     return {
         withItems(items: ObjectItem[]): ListValue {

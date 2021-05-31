@@ -1,4 +1,4 @@
-FROM mono:latest
+FROM mono:5.20.1
 ARG MENDIX_VERSION
 
 RUN \

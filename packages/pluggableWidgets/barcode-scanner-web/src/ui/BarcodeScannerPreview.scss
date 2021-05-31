@@ -1,0 +1,25 @@
+.mx-barcode-scanner {
+    .mx-barcode-scanner-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .design-preview-qr-code {
+            $screen-md: 768px;
+            $screen-lg: 992px;
+            $screen-xl: 1200px;
+
+            flex: 0;
+            flex-basis: 50%;
+            @media screen and (min-width: $screen-md) {
+                flex-basis: 40%;
+            }
+            @media screen and (min-width: $screen-lg) {
+                flex-basis: 30%;
+            }
+            @media screen and (min-width: $screen-xl) {
+                flex-basis: 20%;
+            }
+        }
+    }
+}

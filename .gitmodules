@@ -47,7 +47,7 @@
 	url = https://github.com/mendix/testProjects.git
 	branch = color-picker-web
 [submodule "packages/customWidgets/switch-web/tests/testProject"]
-	path = packages/customWidgets/switch-web/tests/testProject
+	path = packages/pluggableWidgets/switch-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = switch-web
 [submodule "packages/customWidgets/calendar-web/tests/testProject"]
@@ -66,10 +66,6 @@
 	path = packages/customWidgets/range-slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = range-slider-web
-[submodule "packages/customWidgets/star-rating-web/tests/testProject"]
-	path = packages/customWidgets/star-rating-web/tests/testProject
-	url = https://github.com/mendix/testProjects.git
-	branch = star-rating-web
 [submodule "packages/customWidgets/slider-web/tests/testProject"]
 	path = packages/customWidgets/slider-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
@@ -94,3 +90,19 @@
 	path = packages/pluggableWidgets/datagrid-number-filter-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = datagrid-number-filter-web
+[submodule "packages/theming/atlas/tests/testProject"]
+	path = packages/theming/atlas/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = atlas-design-system
+[submodule "packages/pluggableWidgets/rating-web/tests/testProject"]
+	path = packages/pluggableWidgets/rating-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = star-rating-web
+[submodule "packages/pluggableWidgets/barcode-scanner-web/tests/testProject"]
+	path = packages/pluggableWidgets/barcode-scanner-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = barcode-scanner-web
+[submodule "packages/pluggableWidgets/accordion-web/tests/testProject"]
+	path = packages/pluggableWidgets/accordion-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = accordion-web

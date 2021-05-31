@@ -12,8 +12,7 @@ describe("Popup-menu-web", () => {
             const popupmenu = page.getWidget("container15");
             const button = page.getWidget("actionButton10");
             button.click();
-            popupmenu.waitForExist();
-            browser.pause(1000);
+            popupmenu.waitForDisplayed({ timeout: 5000 });
             browser.saveElement(popupmenu, "popUpMenuTopLeft", { removeElements: [sprintrFeedback] });
             expect(browser.checkElement(popupmenu, "popUpMenuTopLeft", { removeElements: [sprintrFeedback] })).toEqual(
                 0

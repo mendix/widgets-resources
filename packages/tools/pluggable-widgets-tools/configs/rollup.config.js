@@ -5,7 +5,7 @@ import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel"
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
-import replace from "@rollup/plugin-replace";
+import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
 import { red, yellow } from "colors";
@@ -56,7 +56,7 @@ export default async args => {
                 file: join(outDir, `${outWidgetFile}.js`),
                 sourcemap: !production ? "inline" : false
             },
-            external: [/^mendix($|\/)/, "react", "react-dom", "big.js"],
+            external: webExternal,
             plugins: [
                 ...getClientComponentPlugins(),
                 url({ include: imagesAndFonts, limit: 100000 }),
@@ -73,7 +73,8 @@ export default async args => {
                     babelConfig: {
                         presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
                         allowAllFormats: true
-                    }
+                    },
+                    external: webExternal
                 })
             ],
             onwarn
@@ -92,8 +93,12 @@ export default async args => {
                 external: nativeExternal,
                 plugins: [
                     replace({
-                        values: { "Platform.OS": `"${os}"` },
-                        preventAssignment: true
+                        patterns: [
+                            {
+                                test: /\b(?<!\.)Platform.OS\b(?!\s*=[^=])/g,
+                                replace: `"${os}"`
+                            }
+                        ]
                     }),
                     ...(i === 0 ? getClientComponentPlugins() : []),
                     json(),
@@ -101,11 +106,12 @@ export default async args => {
                     ...getCommonPlugins({
                         sourceMaps: false,
                         extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
-                        transpile: false
+                        transpile: false,
+                        external: nativeExternal
                     })
                 ],
                 onwarn: warning => {
-                    if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /'Platform'/.test(warning.message)) {
+                    if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /('|")Platform('|")/.test(warning.message)) {
                         return;
                     }
                     onwarn(warning);
@@ -122,14 +128,15 @@ export default async args => {
                 file: join(outDir, `${widgetName}.editorPreview.js`),
                 sourcemap: !production ? "inline" : false
             },
-            external: [/^mendix($|\/)/, "react", "react-dom"],
+            external: editorPreviewExternal,
             plugins: [
                 sass({ output: false, include: /\.(css|sass|scss)$/, processor }),
                 ...getCommonPlugins({
                     sourceMaps: !production,
                     extensions: webExtensions,
                     transpile: production,
-                    babelConfig: { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] }
+                    babelConfig: { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] },
+                    external: editorPreviewExternal
                 })
             ],
             onwarn
@@ -147,7 +154,7 @@ export default async args => {
             },
             treeshake: { moduleSideEffects: false },
             plugins: [
-                url(),
+                url({ include: ["**/*.svg"], limit: 102400 }), // SVG file size limit of 100 kB
                 ...getCommonPlugins({
                     sourceMaps: false,
                     extensions: webExtensions,
@@ -199,10 +206,19 @@ export default async args => {
                     }
                 ]
             }),
-            commonjs({ extensions: config.extensions, transformMixedEsModules: true, requireReturnsDefault: true }),
+            commonjs({
+                extensions: config.extensions,
+                transformMixedEsModules: true,
+                requireReturnsDefault: true,
+                ignore: id => (config.external || []).some(value => new RegExp(value).test(id))
+            }),
             replace({
-                values: { "process.env.NODE_ENV": production ? "'production'" : "'development'" },
-                preventAssignment: true
+                patterns: [
+                    {
+                        test: "process.env.NODE_ENV",
+                        replace: production ? "'production'" : "'development'"
+                    }
+                ]
             }),
             config.transpile
                 ? getBabelOutputPlugin({
@@ -224,8 +240,14 @@ export default async args => {
                     mkdirSync(mpkDir, { recursive: true });
                     await zip(outDir, mpkFile);
                     if (!production && projectPath) {
-                        cp("-r", join(outDir, "*"), join(projectPath, `deployment/${platform}/widgets`));
-                        cp(mpkFile, join(projectPath, "widgets"));
+                        const widgetsPath = join(projectPath, "widgets");
+                        const deploymentPath = join(projectPath, `deployment/${platform}/widgets`);
+                        // Create folder if they do not exists or directories were cleaned
+                        mkdirSync(widgetsPath, { recursive: true });
+                        mkdirSync(deploymentPath, { recursive: true });
+                        // Copy files to deployment and widgets folder
+                        cp("-r", join(outDir, "*"), deploymentPath);
+                        cp(mpkFile, widgetsPath);
                     }
                 }
             ])
@@ -283,14 +305,18 @@ const imagesAndFonts = [
     "**/*.eot"
 ];
 
+const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.js$/];
+
+const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+
 const nativeExternal = [
-    /^mendix\//,
-    /^react-native(\/|$)/,
-    "big.js",
-    "react",
-    /react-native-gesture-handler\/*/,
-    /^react-native-reanimated(\/|$)/,
-    /^react-native-svg(\/|$)/,
-    /^react-native-vector-icons(\/|$)/,
-    /^react-navigation(\/|$)/
+    /^mendix($|\/)/,
+    /^react-native($|\/)/,
+    /^big.js$/,
+    /^react($|\/)/,
+    /^react-native-gesture-handler($|\/)/,
+    /^react-native-reanimated($|\/)/,
+    /^react-native-svg($|\/)/,
+    /^react-native-vector-icons($|\/)/,
+    /^react-navigation($|\/)/
 ];

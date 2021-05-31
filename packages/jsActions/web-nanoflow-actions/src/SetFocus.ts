@@ -5,10 +5,8 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
-import { isFocusable, focusFirst, setFocus } from "./FocusHelper";
 
-// BEGIN EXTRA CODE
-// END EXTRA CODE
+declare function require(name: string): any;
 
 /**
  * Set focus to the element found with the selector, The element should be able to hold focus like a link, button, or input.
@@ -17,6 +15,8 @@ import { isFocusable, focusFirst, setFocus } from "./FocusHelper";
  */
 export async function SetFocus(targetSelector: string): Promise<void> {
     // BEGIN USER CODE
+    const { isFocusable, focusFirst, setFocus } = require("./FocusHelper");
+
     const targetNode: HTMLElement | null = targetSelector
         ? (document.querySelector(targetSelector) as HTMLElement)
         : null;

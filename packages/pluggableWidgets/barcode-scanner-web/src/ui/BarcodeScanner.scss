@@ -1,0 +1,115 @@
+.mx-barcode-scanner {
+    position: relative;
+
+    .mx-barcode-scanner-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000000;
+        // Should be higher than the z-index of `.layout-atlas .region-sidebar` so it sits on top of the page.
+        z-index: 110;
+
+        .video {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+
+            .canvas-background {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+
+            .canvas-left {
+                flex: 1;
+            }
+
+            $screen-md: 768px;
+            $screen-lg: 992px;
+            $screen-xl: 1200px;
+            .canvas-middle {
+                flex: 0;
+                flex-basis: 60%;
+                @media screen and (min-width: $screen-md) {
+                    flex-basis: 50%;
+                }
+                @media screen and (min-width: $screen-lg) {
+                    flex-basis: 40%;
+                }
+                @media screen and (min-width: $screen-xl) {
+                    flex-basis: 30%;
+                }
+                display: flex;
+                flex-direction: column;
+
+                .canvas-middle-top {
+                    flex: 1;
+                }
+
+                .canvas-middle-middle {
+                    flex: 0;
+                    padding-top: 100%;
+                    position: relative;
+
+                    $corner-offset: 13px;
+                    .corner {
+                        position: absolute;
+                        width: 32px;
+                        height: 32px;
+                        box-sizing: border-box;
+                        $corner-border: 5px solid #ffffff;
+                        border-left: $corner-border;
+                        border-top: $corner-border;
+
+                        &.corner-top-left {
+                            top: -$corner-offset;
+                            left: -$corner-offset;
+                        }
+                        &.corner-top-right {
+                            top: -$corner-offset;
+                            right: -$corner-offset;
+                            transform: rotate(90deg);
+                        }
+                        &.corner-bottom-right {
+                            bottom: -$corner-offset;
+                            right: -$corner-offset;
+                            transform: rotate(180deg);
+                        }
+                        &.corner-bottom-left {
+                            bottom: -$corner-offset;
+                            left: -$corner-offset;
+                            transform: rotate(270deg);
+                        }
+                    }
+                }
+
+                .canvas-middle-bottom {
+                    flex: 1;
+                }
+            }
+
+            .canvas-right {
+                flex: 1;
+            }
+        }
+    }
+}
+
+// Overwrite `atlas_core/web/core/_legacy/_mxui.scss` for this particular widget because otherwise
+// iOS Safari will in certain cases put the top and/or bottom bar on top of the overlay of this widget.
+.mx-dataview-content,
+.mx-scrollcontainer-wrapper:not(.mx-scrollcontainer-nested) {
+    -webkit-overflow-scrolling: auto !important;
+}

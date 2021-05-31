@@ -42,7 +42,7 @@ async function buildAndCopyAtlas(watchMode, destination) {
     const watchArg = watchMode ? "--watch" : "";
 
     try {
-        const success = await concurrently(
+        await concurrently(
             [
                 {
                     name: "web-theme-content",
@@ -69,8 +69,9 @@ async function buildAndCopyAtlas(watchMode, destination) {
                 killOthers: ["failure"]
             }
         );
-        console.log("Success", success);
-    } catch (failure) {
-        throw new Error(`Failure ${failure}`);
+        console.log("Building & copying Atlas has completed successfully");
+    } catch (commands) {
+        const commandInfo = commands.map(command => `{ name: ${command.command.name}, exit code: ${command.exitCode}}`);
+        throw new Error(`One or more commands failed:\n${commandInfo.join("\n")}`);
     }
 }

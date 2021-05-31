@@ -6,17 +6,13 @@ jest.useFakeTimers();
 
 describe("Filter component", () => {
     it("renders correctly", () => {
-        const component = shallow(
-            <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
-        );
+        const component = shallow(<FilterComponent adjustable defaultFilter="contains" delay={500} />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders correctly when not adjustable by user", () => {
-        const component = shallow(
-            <FilterComponent adjustable={false} defaultFilter="contains" delay={500} filterDispatcher={jest.fn()} />
-        );
+        const component = shallow(<FilterComponent adjustable={false} defaultFilter="contains" delay={500} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -29,33 +25,32 @@ describe("Filter component", () => {
                 screenReaderInputCaption="my label"
                 defaultFilter="contains"
                 delay={500}
-                filterDispatcher={jest.fn()}
             />
         );
 
         expect(component).toMatchSnapshot();
     });
 
-    it("calls filterDispatcher when value changes", () => {
-        const filterDispatcher = jest.fn();
+    it("calls updateFilters when value changes", () => {
+        const updateFiltersHandler = jest.fn();
         const component = shallow(
-            <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent adjustable defaultFilter="contains" delay={500} updateFilters={updateFiltersHandler} />
         );
 
         const input = component.find("input");
         input.simulate("change", { target: { value: "test" } });
 
-        expect(filterDispatcher).toBeCalled();
+        expect(updateFiltersHandler).toBeCalled();
     });
 
-    it("debounces calls for filterDispatcher when value changes", () => {
-        const filterDispatcher = jest.fn();
+    it("debounces calls for updateFilters when value changes", () => {
+        const updateFiltersHandler = jest.fn();
         const component = shallow(
-            <FilterComponent adjustable defaultFilter="contains" delay={500} filterDispatcher={filterDispatcher} />
+            <FilterComponent adjustable defaultFilter="contains" delay={500} updateFilters={updateFiltersHandler} />
         );
 
         // Initial call with default filter
-        expect(filterDispatcher).toBeCalledTimes(1);
+        expect(updateFiltersHandler).toBeCalledTimes(1);
 
         const input = component.find("input");
         input.simulate("change", { target: { value: "test" } });
@@ -64,11 +59,11 @@ describe("Filter component", () => {
         input.simulate("change", { target: { value: "test3" } });
         jest.advanceTimersByTime(500);
 
-        expect(filterDispatcher).toBeCalledTimes(2);
+        expect(updateFiltersHandler).toBeCalledTimes(2);
 
         input.simulate("change", { target: { value: "test" } });
         jest.advanceTimersByTime(500);
 
-        expect(filterDispatcher).toBeCalledTimes(3);
+        expect(updateFiltersHandler).toBeCalledTimes(3);
     });
 });

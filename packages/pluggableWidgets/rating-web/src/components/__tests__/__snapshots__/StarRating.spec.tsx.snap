@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rating Container renders correctly the structure 1`] = `
+<Rating
+  animated={true}
+  className=""
+  disabled={false}
+  emptyIcon={
+    <Icon
+      animate={true}
+      empty={true}
+      value={
+        Object {
+          "iconClass": "glyphicon-star-empty",
+          "type": "glyph",
+        }
+      }
+    />
+  }
+  fullIcon={
+    <Icon
+      animate={true}
+      full={true}
+      value={
+        Object {
+          "iconClass": "glyphicon-star",
+          "type": "glyph",
+        }
+      }
+    />
+  }
+  maximumValue={5}
+  onChange={[Function]}
+  tabIndex={0}
+  value={5}
+/>
+`;
+
+exports[`Rating Container renders correctly the structure when disabled 1`] = `
+<Rating
+  animated={true}
+  className=""
+  disabled={true}
+  emptyIcon={
+    <Icon
+      animate={true}
+      empty={true}
+      value={
+        Object {
+          "iconClass": "glyphicon-star-empty",
+          "type": "glyph",
+        }
+      }
+    />
+  }
+  fullIcon={
+    <Icon
+      animate={true}
+      full={true}
+      value={
+        Object {
+          "iconClass": "glyphicon-star",
+          "type": "glyph",
+        }
+      }
+    />
+  }
+  maximumValue={5}
+  onChange={[Function]}
+  tabIndex={0}
+  value={1}
+/>
+`;
+
+exports[`Rating Container renders correctly the structure without animation 1`] = `
+<Rating
+  animated={false}
+  className=""
+  disabled={false}
+  emptyIcon={
+    <Icon
+      animate={false}
+      empty={true}
+      value={
+        Object {
+          "iconClass": "glyphicon-star-empty",
+          "type": "glyph",
+        }
+      }
+    />
+  }
+  fullIcon={
+    <Icon
+      animate={false}
+      full={true}
+      value={
+        Object {
+          "iconClass": "glyphicon-star",
+          "type": "glyph",
+        }
+      }
+    />
+  }
+  maximumValue={5}
+  onChange={[Function]}
+  tabIndex={0}
+  value={5}
+/>
+`;

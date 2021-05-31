@@ -21,7 +21,7 @@ function mockColumnSelectorProps(): ColumnSelectorProps<object> {
                 canHide: false,
                 canDrag: false,
                 canResize: false,
-                disableSortBy: false
+                canSort: false
             }
         ] as Array<ColumnInstance<object>>,
         setHiddenColumns: jest.fn()

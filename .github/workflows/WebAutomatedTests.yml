@@ -17,7 +17,7 @@ jobs:
               uses: softprops/diffset@v1
               with:
                 global_files: |
-                  !packages/**/*
+                  !{packages/**/*,configs/e2e/*.json}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
@@ -49,13 +49,15 @@ jobs:
               if: failure()
               run: |
                   sudo find ${{ github.workspace}}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
+                  sudo find ${{ github.workspace}}/packages/theming -type d -exec chmod 755 {} \;
                   sudo find ${{ github.workspace}}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
-            - name: "Archive test screenshot results"
+                  sudo find ${{ github.workspace}}/packages/theming -type f -exec chmod 644 {} \;
+            - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@v2
               if: failure()
               with:
                   name: test-screenshot-results
                   path: |
                       ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
-                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/actual/*.png
+                      ${{ github.workspace}}/packages/theming/**/tests/e2e/screenshot-results/diff/*.png
                   if-no-files-found: error

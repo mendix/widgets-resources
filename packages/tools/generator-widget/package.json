@@ -1,6 +1,6 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "8.14.0",
+  "version": "9.0.2",
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
   "copyright": "2020 Mendix Technology B.V.",
@@ -24,10 +24,7 @@
     "scaffold"
   ],
   "engines": {
-    "node": ">=10.15"
-  },
-  "bugs": {
-    "url": "https://github.com/mendix/widgets-resources/issues"
+    "node": ">=12"
   },
   "dependencies": {
     "chalk": "^4.1.0",

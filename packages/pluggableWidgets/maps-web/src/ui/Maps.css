@@ -47,3 +47,18 @@ Leaflet maps
     z-index: 10;
     width: 100%;
 }
+
+.custom-leaflet-map-icon-marker {
+    /* Since we're moving the icon with translate, the clickable surface area would mismatch meaning users
+    could click next to the icon and still trigger the tooltip on click. Instead, we just get rid of this
+    hitbox by resetting the height and width and only use the actual icon as a hitbox. */
+    height: 0px !important;
+    width: 0px !important;
+    /* Leaflet does some tweaking based on their own assumptions. But they are wrong, we are correct. So we override them. */
+    margin-left: inherit !important;
+    margin-top: inherit !important;
+}
+
+.custom-leaflet-map-icon-marker-icon {
+    transform: translate(-50%, -50%);
+}

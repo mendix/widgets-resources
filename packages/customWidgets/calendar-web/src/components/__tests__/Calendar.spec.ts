@@ -115,6 +115,36 @@ describe("Calendar", () => {
             expect(calendarProps.onEventDropAction).toHaveBeenCalled();
         });
 
+        it("calls onEventDrop when moving the event within same day", () => {
+            const eventInfo = {
+                start: new Date(2021, 4, 27, 0, 0, 0),
+                event: {
+                    start: new Date(2021, 4, 27, 18, 0, 0)
+                }
+            };
+            calendarProps.onEventDropAction = jest.fn();
+            const calendar = renderCalendar(calendarProps);
+            (calendar.instance() as any).onEventDrop(eventInfo);
+
+            expect(calendarProps.onEventDropAction).toHaveBeenCalled();
+        });
+
+        it("calls onEventResize when resizing the event within same day", () => {
+            const eventInfo = {
+                start: new Date(2021, 4, 27, 0, 0, 1),
+                end: new Date(2021, 4, 27, 12, 0, 0),
+                event: {
+                    start: new Date(2021, 4, 27, 18, 0, 0),
+                    end: new Date(2021, 4, 27, 23, 59, 59)
+                }
+            };
+            calendarProps.onEventResizeAction = jest.fn();
+            const calendar = renderCalendar(calendarProps);
+            (calendar.instance() as any).onEventResize(undefined, eventInfo);
+
+            expect(calendarProps.onEventResizeAction).toHaveBeenCalled();
+        });
+
         // it("#onEventResize() calls the parent onEventResize handler when the start date, end date or both dates have changed", () => {
         //     const resizeType = "drop";
         //     const startDate = new Date();

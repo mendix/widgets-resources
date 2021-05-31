@@ -4,7 +4,7 @@ import Calendar from "../objects/calendar.widget";
 describe("Calendar", () => {
     const calendar = new Calendar("calendar1");
 
-    beforeAll(() => {
+    beforeEach(() => {
         page.open();
     });
 
@@ -23,5 +23,18 @@ describe("Calendar", () => {
         calendar.dayViewButton.click();
         calendar.calendarSlot.waitForExist();
         expect(calendar.daysDisplayed).toBe(1);
+    });
+    it("renders start date attribute correctly", () => {
+        page.open("p/startPosition");
+        const calendar = new Calendar("calendar2");
+        calendar.element.waitForExist();
+        expect(calendar.label.getText()).toBe("Tuesday 02/02/2021");
+    });
+    it("renders correct start date after switching the object", () => {
+        page.open("p/startPosition");
+        page.getWidget("switchObjectButton").click();
+        const calendar = new Calendar("calendar2");
+        calendar.element.waitForExist();
+        expect(calendar.label.getText()).toBe("Saturday 01/05/2021");
     });
 });

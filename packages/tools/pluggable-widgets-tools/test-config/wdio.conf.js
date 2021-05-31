@@ -8,6 +8,7 @@ const serverPort = process.env.SERVER_PORT || 4444;
 
 const resultsPath = join(process.cwd(), "tests/e2e/screenshot-results");
 const baselinePath = join(process.cwd(), "tests/e2e/screenshot-baseline");
+
 if (!existsSync(resultsPath)) {
     mkdirSync(resultsPath, { recursive: true });
 }
@@ -15,24 +16,20 @@ if (!existsSync(resultsPath)) {
 console.warn("Starting wdio with ", url, browserName);
 
 exports.config = {
-    before() {
-        require("@babel/register");
-        require("ts-node").register({ files: true, project: join(process.cwd(), "./tests/e2e/tsconfig.json") });
-    },
     host: serverIp,
     port: serverPort,
     specs: [join(process.cwd(), "./tests/e2e/**/*.spec.js"), join(process.cwd(), "./tests/e2e/**/*.spec.ts")],
-    maxInstances: 5,
+    maxInstances: 1,
     capabilities: [
         {
             browserName,
             "goog:chromeOptions": {
-                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--headless", "--disable-gpu", "--disable-extensions"]
+                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--disable-gpu", "--disable-extensions"]
             }
         }
     ],
     sync: true,
-    logLevel: "silent",
+    logLevel: "error",
     coloredLogs: true,
     bail: 0,
     screenshotPath: resultsPath,
@@ -60,15 +57,24 @@ exports.config = {
     framework: "jasmine",
     reporters: ["spec"],
     execArgv: debug ? ["--inspect"] : undefined,
-    jasmineNodeOpts: {
-        helpers: [require("@babel/register")],
+    jasmineOpts: {
         defaultTimeoutInterval: debug ? 60 * 60 * 1000 : 30 * 1000
+    },
+    autoCompileOpts: {
+        // Enable/disable auto-compilation (enabled by default)
+        autoCompile: true,
+
+        // Configure how ts-node is automatically included when present
+        tsNodeOpts: {
+            transpileOnly: true,
+            project: join(process.cwd(), "./tests/e2e/tsconfig.json")
+        }
     },
     afterTest: (test, context, { error }) => {
         // take a screenshot anytime a test fails
         if (error) {
             const timestamp = new Date().toJSON().replace(/:/g, "-");
-            const testName = test.fullName.replace(/ /g, "_");
+            const testName = test.id;
             const filePath = join(resultsPath, `TESTFAIL_${browserName}_${testName}_${timestamp}.png`);
             browser.saveScreenshot(filePath);
             console.log("Saved screenshot: ", filePath);

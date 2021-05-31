@@ -75,7 +75,11 @@ export function check(values: TimelinePreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: TimelinePreviewProps): StructurePreviewProps {
+export function getPreview(values: TimelinePreviewProps): StructurePreviewProps | null {
+    if (values.customVisualization) {
+        return null;
+    }
+
     return {
         type: "Container",
         children: [
