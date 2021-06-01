@@ -33,8 +33,15 @@ export function ShrinkingHeaderLinear(props: ShrinkingHeaderLinearProps): ReactE
 
     useEffect(() => {
         const updateHeaderHeight = function (): void {
-            const headerHeight =
-                initHeight - (window.scrollY > initHeight - shrunkHeight ? initHeight - shrunkHeight : window.scrollY);
+            let headerHeight;
+
+            if (window.scrollY > initHeight - shrunkHeight) {
+                headerHeight = initHeight - (initHeight - shrunkHeight);
+            } else if (window.scrollY < 0) {
+                headerHeight = initHeight;
+            } else {
+                headerHeight = initHeight - window.scrollY;
+            }
 
             setHeaderHeight(headerHeight);
         };
