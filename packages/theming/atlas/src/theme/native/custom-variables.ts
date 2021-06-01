@@ -272,6 +272,7 @@ export const input: VariablesInput = {
         fontSize: font.size
     },
     selectedItemContainer: {
+        maxWidth: "100%",
         borderWidth: border.width,
         borderRadius: border.radiusLarge,
         borderColor: brand.primary,

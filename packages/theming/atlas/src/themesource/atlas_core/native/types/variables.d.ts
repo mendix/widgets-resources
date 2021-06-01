@@ -216,6 +216,7 @@ export interface VariablesInput {
         fontSize: number;
     };
     selectedItemContainer: {
+        maxWidth: string;
         borderWidth: number;
         borderRadius: number;
         borderColor: string;

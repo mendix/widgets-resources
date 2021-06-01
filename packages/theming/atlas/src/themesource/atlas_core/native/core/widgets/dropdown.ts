@@ -112,6 +112,7 @@ export const DropDown: DropDownType = {
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
+        maxWidth: input.selectedItemContainer.maxWidth,
         borderWidth: input.selectedItemContainer.borderWidth,
         borderRadius: input.selectedItemContainer.borderRadius,
         borderColor: input.selectedItemContainer.borderColor,
