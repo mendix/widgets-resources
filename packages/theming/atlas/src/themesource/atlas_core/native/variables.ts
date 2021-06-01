@@ -266,7 +266,7 @@ let input: VariablesInput = {
         rippleColor: contrast.lowest
     },
     itemContainer: {
-        maxWidth: 500,
+        maxWidth: "100%",
         paddingVertical: 12,
         paddingHorizontal: spacing.regular,
         backgroundColor: background.primary

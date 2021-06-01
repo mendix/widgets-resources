@@ -206,7 +206,7 @@ export interface VariablesInput {
         rippleColor: string;
     };
     itemContainer: {
-        maxWidth: number;
+        maxWidth: string;
         paddingVertical: number;
         paddingHorizontal: number;
         backgroundColor: string;
