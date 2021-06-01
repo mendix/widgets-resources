@@ -34,7 +34,7 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
             e.stopPropagation();
             setVisibility(prev => !prev);
         },
-        [visibility, setVisibility]
+        [setVisibility]
     );
     const handleOnClickItem = useCallback(
         (itemAction?: ActionValue): void => {
@@ -66,7 +66,7 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
                 correctPosition(element, props.position);
             }
         }
-    }, [visibility]);
+    }, [props.position, visibility]);
     useEffect(() => {
         setVisibility(props.menuToggle);
     }, [props.menuToggle]);
@@ -111,7 +111,15 @@ function createMenuOptions(
         });
     } else {
         return props.customItems.map((item, index) => (
-            <div key={index} className={"popupmenu-custom-item"} onClick={() => handleOnClickItem(item.action)}>
+            <div
+                key={index}
+                className={"popupmenu-custom-item"}
+                onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleOnClickItem(item.action);
+                }}
+            >
                 {item.content}
             </div>
         ));
