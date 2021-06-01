@@ -1,9 +1,9 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
-    "include": ["./src"],
-    "exclude": ["**/__tests__/**"],
+    "include": ["./src", "./typings"],
     "compilerOptions": {
-        "types": ["resize-observer-browser"]
+        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"],
+        "types": ["jest", "resize-observer-browser"]
     }
 }

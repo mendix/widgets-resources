@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShrinkingHeaderLinear renders correctly 1`] = `
+<ShrinkingHeaderLinear
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  initHeight={100}
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header>
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrunkHeight={25}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-linear class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header
+      style={
+        Object {
+          "height": undefined,
+        }
+      }
+    >
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderLinear>
+`;
+
+exports[`ShrinkingHeaderLinear updates the header & wrapping div height when the page gets scrolled 1`] = `
+<ShrinkingHeaderLinear
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  initHeight={100}
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header
+            style="height: 75px;"
+          >
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrunkHeight={25}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-linear class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header
+      style={
+        Object {
+          "height": 75,
+        }
+      }
+    >
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderLinear>
+`;

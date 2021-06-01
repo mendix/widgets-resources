@@ -1,0 +1,281 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShrinkingHeaderThreshold applies the shrink class when the page gets scrolled passed the threshold 1`] = `
+<ShrinkingHeaderThreshold
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header>
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrinkThreshold={250}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-threshold widget-shrinking-header-shrunk class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header>
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderThreshold>
+`;
+
+exports[`ShrinkingHeaderThreshold applies the shrink class when the page gets scrolled to the threshold 1`] = `
+<ShrinkingHeaderThreshold
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header>
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrinkThreshold={250}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-threshold widget-shrinking-header-shrunk class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header>
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderThreshold>
+`;
+
+exports[`ShrinkingHeaderThreshold removes the shrink class when the page gets scrolled back above the threshold 1`] = `
+<ShrinkingHeaderThreshold
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header>
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrinkThreshold={250}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-threshold widget-shrinking-header-shrunk class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header>
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderThreshold>
+`;
+
+exports[`ShrinkingHeaderThreshold removes the shrink class when the page gets scrolled back above the threshold 2`] = `
+<ShrinkingHeaderThreshold
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header>
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrinkThreshold={250}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-threshold class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header>
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderThreshold>
+`;
+
+exports[`ShrinkingHeaderThreshold renders correctly when the page isn't scrolled past the threshold 1`] = `
+<ShrinkingHeaderThreshold
+  className="class-name"
+  content={
+    <h1>
+      Header
+    </h1>
+  }
+  name="name"
+  rootElementRef={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          <header>
+            <h1>
+              Header
+            </h1>
+          </header>,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  shrinkThreshold={250}
+  style={
+    Object {
+      "color": "green",
+    }
+  }
+  tabIndex={4}
+>
+  <div
+    className="widget-shrinking-header widget-shrinking-header-threshold class-name"
+    id="name"
+    style={
+      Object {
+        "color": "green",
+        "height": 100,
+      }
+    }
+    tabIndex={4}
+  >
+    <header>
+      <h1>
+        Header
+      </h1>
+    </header>
+  </div>
+</ShrinkingHeaderThreshold>
+`;

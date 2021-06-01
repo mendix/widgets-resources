@@ -1,16 +1,11 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { useWrappingDivHeight } from "../WrappingDivStyler";
+import { mockResizeObserver } from "./ResizeObserverMock";
 
 let lastMockedResizeObserver: ResizeObserver & { notifyChange: () => void };
 
-window.ResizeObserver = jest.fn().mockImplementation((callback: () => void) => {
-    lastMockedResizeObserver = {
-        observe: jest.fn().mockImplementation(() => act(() => callback())),
-        unobserve: jest.fn(),
-        disconnect: jest.fn(),
-        notifyChange: () => act(() => callback()) // specific mock function to mimic observe behavior
-    };
-    return lastMockedResizeObserver;
+mockResizeObserver(act, _lastMockedResizeObserver => {
+    lastMockedResizeObserver = _lastMockedResizeObserver;
 });
 
 describe("useWrappingDivHeight", () => {
