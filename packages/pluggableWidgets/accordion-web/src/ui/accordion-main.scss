@@ -19,8 +19,17 @@ $header-color-hover: #264ae5;
                 transform: none;
             }
         }
-        .widget-accordion-group-content {
+
+        .widget-accordion-group-content-wrapper {
             display: none;
+        }
+    }
+
+    &.widget-accordion-group-collapsing {
+        .widget-accordion-group-content-wrapper {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.2s ease;
         }
     }
 
