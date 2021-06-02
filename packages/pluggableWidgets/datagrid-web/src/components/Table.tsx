@@ -17,6 +17,7 @@ import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { SortingRule, useSettings } from "../utils/settings";
+import { ColumnResizer } from "./ColumnResizer";
 
 export type TableColumn = Omit<
     ColumnsPreviewType,
@@ -91,7 +92,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
     );
 
-    useSettings(
+    const [updateSettings] = useSettings(
         props.settings,
         props.onSettingsChange,
         props.columns,
@@ -104,6 +105,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         columnsWidth,
         setColumnsWidth
     );
+
+    useEffect(() => updateSettings(), [columnOrder, hiddenColumns, sortBy]);
 
     useEffect(() => {
         const [sortProperties] = sortBy;
@@ -248,13 +251,18 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                                 isDragging={isDragging}
                                 preview={props.preview}
                                 resizable={props.columnsResizable}
-                                setColumnOrder={(newOrder: string[]) => setColumnOrder(newOrder)}
-                                setColumnWidth={(width: number) =>
-                                    setColumnsWidth(prev => {
-                                        prev[column.id] = width;
-                                        return { ...prev };
-                                    })
+                                resizer={
+                                    <ColumnResizer
+                                        onResizeEnds={updateSettings}
+                                        setColumnWidth={(width: number) =>
+                                            setColumnsWidth(prev => {
+                                                prev[column.id] = width;
+                                                return { ...prev };
+                                            })
+                                        }
+                                    />
                                 }
+                                setColumnOrder={(newOrder: string[]) => setColumnOrder(newOrder)}
                                 setDragOver={setDragOver}
                                 setIsDragging={setIsDragging}
                                 setSortBy={setSortBy}

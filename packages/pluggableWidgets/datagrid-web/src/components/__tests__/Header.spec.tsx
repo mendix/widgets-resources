@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { Header, HeaderProps } from "../Header";
+import { ColumnResizer } from "../ColumnResizer";
 
 describe("Header", () => {
     it("renders the structure correctly", () => {
@@ -113,9 +114,9 @@ function mockHeaderProps(): HeaderProps {
         filterable: false,
         hidable: false,
         resizable: false,
+        resizer: <ColumnResizer setColumnWidth={jest.fn()} />,
         sortable: false,
         setColumnOrder: jest.fn(),
-        setColumnWidth: jest.fn(),
         setDragOver: jest.fn(),
         visibleColumns: [],
         setSortBy: jest.fn(),

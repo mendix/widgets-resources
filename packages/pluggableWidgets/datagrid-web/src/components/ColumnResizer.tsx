@@ -1,12 +1,12 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState, MouseEvent, TouchEvent } from "react";
 
-export function ColumnResizer({
-    minWidth = 50,
-    setColumnWidth
-}: {
+export interface ColumnResizerProps {
     minWidth?: number;
     setColumnWidth: (width: number) => void;
-}): ReactElement {
+    onResizeEnds?: () => void;
+}
+
+export function ColumnResizer({ minWidth = 50, setColumnWidth, onResizeEnds }: ColumnResizerProps): ReactElement {
     const [isResizing, setIsResizing] = useState(false);
     const [startPosition, setStartPosition] = useState(0);
     const [currentWidth, setCurrentWidth] = useState(0);
@@ -25,9 +25,13 @@ export function ColumnResizer({
         [resizerReference.current]
     );
     const onEndDrag = useCallback((): void => {
+        if (!isResizing) {
+            return;
+        }
         setIsResizing(false);
         setCurrentWidth(0);
-    }, []);
+        onResizeEnds?.();
+    }, [onResizeEnds, isResizing]);
     const onMouseMove = useCallback(
         (e: TouchEvent & MouseEvent & Event): void => {
             if (!isResizing) {
@@ -60,7 +64,7 @@ export function ColumnResizer({
             document.removeEventListener("touchmove", onMouseMove);
             document.removeEventListener("touchend", onEndDrag);
         };
-    }, [isResizing, resizerReference.current]); // Required dependencies because of the callback's references
+    }, [onMouseMove, onEndDrag]);
 
     return (
         <div ref={resizerReference} className="column-resizer" onMouseDown={onStartDrag} onTouchStart={onStartDrag}>
