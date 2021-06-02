@@ -11,6 +11,7 @@ exports[`AccordionGroup doesn't render the icon when set to not visible 1`] = `
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -49,6 +50,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group becomes v
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -85,6 +87,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group becomes v
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -121,6 +124,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -157,6 +161,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -193,6 +198,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -229,6 +235,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -264,6 +271,7 @@ exports[`AccordionGroup without dispatch displays the content when the group bec
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"
@@ -299,6 +307,7 @@ exports[`AccordionGroup without dispatch displays the content when the group is 
   </header>
   <div
     className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
     <div
       className="widget-accordion-group-content"

@@ -60,6 +60,9 @@ describe("AccordionGroup", () => {
             const accordionGroup = mountAccordionGroupWithDispatch(defaultGroup);
 
             accordionGroup.setProps({ group: { ...defaultGroup, collapsed: false } });
+            // expect(accordionGroup.find(".widget-accordion-group-content-wrapper")).toHaveLength(1);
+            // accordionGroup.find(".widget-accordion-group-content-wrapper").simulate("transitionEnd");
+            // accordionGroup.update();
             // TODO wait on the animation to be completed
             expect(accordionGroup).toMatchSnapshot();
         });

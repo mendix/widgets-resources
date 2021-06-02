@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, Dispatch, ReactElement, ReactNode, useCallback, useEffect, useRef } from "react";
 
 import { AccordionGroupsReducerAction } from "../utils/AccordionGroupStateReducer";
 import classNames from "classnames";
@@ -23,66 +23,54 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     const { group, accordionGroupsDispatch, showHeaderIcon } = props;
 
     const previousCollapsedPropValue = useRef(group.collapsed);
+    const rootElement = useRef<HTMLDivElement>(null);
+    const contentWrapperElement = useRef<HTMLDivElement>(null);
+    const contentElement = useRef<HTMLDivElement>(null);
 
-    const [rootElement, setRootElement] = useState<HTMLElement>();
-    const [contentWrapperElement, setContentWrapperElement] = useState<HTMLDivElement>();
-    const [contentElement, setContentElement] = useState<HTMLDivElement>();
-
-    const updateRootElement = useCallback((node: HTMLDivElement | null) => {
-        setRootElement(node ?? undefined);
-    }, []);
-
-    const updateContentWrapperElement = useCallback((node: HTMLDivElement | null) => {
-        setContentWrapperElement(node ?? undefined);
-    }, []);
-
-    const updateContentElement = useCallback((node: HTMLDivElement | null) => {
-        setContentElement(node ?? undefined);
-    }, []);
-
-    useEffect(() => {
-        if (contentWrapperElement && rootElement) {
-            const completeCollapsing = (): void => {
-                rootElement.classList.remove("widget-accordion-group-collapsing");
-                if (previousCollapsedPropValue.current) {
-                    rootElement.classList.add("widget-accordion-group-collapsed");
-                } else {
-                    contentWrapperElement.style.height = "";
-                }
-            };
-            contentWrapperElement.addEventListener("transitionend", completeCollapsing);
-
-            return () => contentWrapperElement?.removeEventListener("transitionend", completeCollapsing);
+    const completeCollapsing = useCallback((): void => {
+        if (contentWrapperElement.current && rootElement.current) {
+            rootElement.current.classList.remove("widget-accordion-group-collapsing");
+            if (previousCollapsedPropValue.current) {
+                rootElement.current.classList.add("widget-accordion-group-collapsed");
+            } else {
+                contentWrapperElement.current.style.height = "";
+            }
         }
-    }, [contentWrapperElement, rootElement]);
+    }, []);
 
     useEffect(() => {
         if (
             group.collapsed !== previousCollapsedPropValue.current &&
-            rootElement &&
-            contentWrapperElement &&
-            contentElement
+            rootElement.current &&
+            contentWrapperElement.current &&
+            contentElement.current
         ) {
             previousCollapsedPropValue.current = group.collapsed;
 
             if (group.collapsed) {
-                contentWrapperElement.style.height = `${contentElement.getBoundingClientRect().height}px`;
-                rootElement.classList.add("widget-accordion-group-collapsing");
+                contentWrapperElement.current.style.height = `${
+                    contentElement.current.getBoundingClientRect().height
+                }px`;
+                rootElement.current.classList.add("widget-accordion-group-collapsing");
 
                 setTimeout(() => {
-                    contentWrapperElement.style.height = "";
+                    if (contentWrapperElement.current) {
+                        contentWrapperElement.current.style.height = "";
+                    }
                 }, 200); // the animation is already ongoing. That's why we need to wait.
 
                 // window.requestAnimationFrame(() => {
-                //     contentWrapperElement.style.height = "";
+                //     contentWrapperElement.current.style.height = "";
                 // }); // TODO Check how this behaves when we have multiple transitions with accordion groups: maybe removing height:0 from collapsing style will solve the issue
             } else {
-                rootElement.classList.add("widget-accordion-group-collapsing");
-                rootElement.classList.remove("widget-accordion-group-collapsed");
-                contentWrapperElement.style.height = `${contentElement.getBoundingClientRect().height}px`;
+                rootElement.current.classList.add("widget-accordion-group-collapsing");
+                rootElement.current.classList.remove("widget-accordion-group-collapsed");
+                contentWrapperElement.current.style.height = `${
+                    contentElement.current.getBoundingClientRect().height
+                }px`;
             }
         }
-    }, [group, contentElement, contentWrapperElement, rootElement]);
+    }, [group]);
 
     const toggleContentVisibility = useCallback(() => {
         if (group.collapsed) {
@@ -98,7 +86,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     return (
         <section
-            ref={updateRootElement}
+            ref={rootElement}
             className={classNames(
                 "widget-accordion-group",
                 {
@@ -129,8 +117,12 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                     </svg>
                 ) : null}
             </header>
-            <div ref={updateContentWrapperElement} className={"widget-accordion-group-content-wrapper"}>
-                <div ref={updateContentElement} className={"widget-accordion-group-content"}>
+            <div
+                ref={contentWrapperElement}
+                className={"widget-accordion-group-content-wrapper"}
+                onTransitionEnd={completeCollapsing}
+            >
+                <div ref={contentElement} className={"widget-accordion-group-content"}>
                     {group.content}
                 </div>
             </div>
