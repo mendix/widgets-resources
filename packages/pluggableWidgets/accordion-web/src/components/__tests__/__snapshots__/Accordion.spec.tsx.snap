@@ -199,7 +199,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       }
     }
     key="0"
-    showHeaderIcon="right"
+    showHeaderIcon="no"
   />
   <AccordionGroup
     group={
@@ -213,7 +213,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       }
     }
     key="1"
-    showHeaderIcon="right"
+    showHeaderIcon="no"
   />
 </div>
 `;
@@ -241,7 +241,7 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
       }
     }
     key="0"
-    showHeaderIcon="right"
+    showHeaderIcon="no"
   />
   <AccordionGroup
     group={
@@ -255,7 +255,7 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
       }
     }
     key="1"
-    showHeaderIcon="right"
+    showHeaderIcon="no"
   />
 </div>
 `;

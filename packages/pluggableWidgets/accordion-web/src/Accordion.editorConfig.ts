@@ -1,4 +1,4 @@
-import { hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
 
@@ -17,6 +17,7 @@ export function getProperties(
 
     if (!values.collapsible) {
         hidePropertyIn(defaultProperties, values, "collapseBehavior");
+        hidePropertiesIn(defaultProperties, values, ["animate", "showIcon", "openIcon", "closedIcon", "animateIcon"]);
     }
 
     if (!values.advancedMode) {
