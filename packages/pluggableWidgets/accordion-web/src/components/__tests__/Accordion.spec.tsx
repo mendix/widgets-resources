@@ -16,7 +16,8 @@ describe("Accordion", () => {
                 { header: "header2", content: <span>content2</span>, visible: false }
             ],
             collapsible,
-            singleExpandedGroup
+            singleExpandedGroup,
+            showGroupHeaderIcon: "right"
         };
     }
 

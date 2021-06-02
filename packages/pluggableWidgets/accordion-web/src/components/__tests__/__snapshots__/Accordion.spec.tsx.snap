@@ -24,6 +24,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       }
     }
     key="0"
+    showHeaderIcon="right"
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
@@ -38,6 +39,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       }
     }
     key="1"
+    showHeaderIcon="right"
   />
 </div>
 `;
@@ -66,6 +68,7 @@ exports[`Accordion in collapsible & multiple expanded group mode updates when ac
       }
     }
     key="0"
+    showHeaderIcon="right"
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
@@ -80,6 +83,7 @@ exports[`Accordion in collapsible & multiple expanded group mode updates when ac
       }
     }
     key="1"
+    showHeaderIcon="right"
   />
 </div>
 `;
@@ -108,6 +112,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       }
     }
     key="0"
+    showHeaderIcon="right"
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
@@ -122,6 +127,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       }
     }
     key="1"
+    showHeaderIcon="right"
   />
 </div>
 `;
@@ -150,6 +156,7 @@ exports[`Accordion in collapsible & single expanded group mode updates when acco
       }
     }
     key="0"
+    showHeaderIcon="right"
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
@@ -164,6 +171,7 @@ exports[`Accordion in collapsible & single expanded group mode updates when acco
       }
     }
     key="1"
+    showHeaderIcon="right"
   />
 </div>
 `;
@@ -191,6 +199,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       }
     }
     key="0"
+    showHeaderIcon="right"
   />
   <AccordionGroup
     group={
@@ -204,6 +213,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       }
     }
     key="1"
+    showHeaderIcon="right"
   />
 </div>
 `;
@@ -231,6 +241,7 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
       }
     }
     key="0"
+    showHeaderIcon="right"
   />
   <AccordionGroup
     group={
@@ -244,6 +255,7 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
       }
     }
     key="1"
+    showHeaderIcon="right"
   />
 </div>
 `;
