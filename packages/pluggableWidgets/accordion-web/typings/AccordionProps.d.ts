@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue } from "mendix";
+import { DynamicValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
@@ -18,6 +18,8 @@ export interface GroupsType {
 }
 
 export type CollapseBehaviorEnum = "singleExpanded" | "multipleExpanded";
+
+export type ShowIconEnum = "right" | "left" | "no";
 
 export interface GroupsPreviewType {
     headerRenderMode: HeaderRenderModeEnum;
@@ -36,6 +38,12 @@ export interface AccordionContainerProps {
     groups: GroupsType[];
     collapsible: boolean;
     collapseBehavior: CollapseBehaviorEnum;
+    animate: boolean;
+    showIcon: ShowIconEnum;
+    openIcon?: DynamicValue<WebIcon>;
+    closedIcon?: DynamicValue<WebIcon>;
+    animateIcon: boolean;
+    advancedMode: boolean;
 }
 
 export interface AccordionPreviewProps {
@@ -44,4 +52,10 @@ export interface AccordionPreviewProps {
     groups: GroupsPreviewType[];
     collapsible: boolean;
     collapseBehavior: CollapseBehaviorEnum;
+    animate: boolean;
+    showIcon: ShowIconEnum;
+    openIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    closedIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    animateIcon: boolean;
+    advancedMode: boolean;
 }

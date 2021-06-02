@@ -19,6 +19,14 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "collapseBehavior");
     }
 
+    if (!values.advancedMode) {
+        hidePropertyIn(defaultProperties, values, "animate");
+        hidePropertyIn(defaultProperties, values, "showIcon");
+        hidePropertyIn(defaultProperties, values, "openIcon");
+        hidePropertyIn(defaultProperties, values, "closedIcon");
+        hidePropertyIn(defaultProperties, values, "animateIcon");
+    }
+
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
