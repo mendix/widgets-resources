@@ -16,16 +16,22 @@ export function getProperties(
     });
 
     if (!values.collapsible) {
-        hidePropertyIn(defaultProperties, values, "collapseBehavior");
-        hidePropertiesIn(defaultProperties, values, ["animate", "showIcon", "openIcon", "closedIcon", "animateIcon"]);
+        hidePropertiesIn(defaultProperties, values, [
+            "collapseBehavior",
+            "animate",
+            "showIcon",
+            "openIcon",
+            "closedIcon",
+            "animateIcon"
+        ]);
     }
 
     if (!values.advancedMode) {
-        hidePropertyIn(defaultProperties, values, "animate");
-        hidePropertyIn(defaultProperties, values, "showIcon");
-        hidePropertyIn(defaultProperties, values, "openIcon");
-        hidePropertyIn(defaultProperties, values, "closedIcon");
-        hidePropertyIn(defaultProperties, values, "animateIcon");
+        hidePropertiesIn(defaultProperties, values, ["animate", "showIcon", "openIcon", "closedIcon", "animateIcon"]);
+    }
+
+    if (values.showIcon === "no") {
+        hidePropertiesIn(defaultProperties, values, ["openIcon", "closedIcon", "animateIcon"]);
     }
 
     if (platform === "web") {

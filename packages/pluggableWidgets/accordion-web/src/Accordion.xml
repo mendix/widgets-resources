@@ -94,7 +94,7 @@
                 </property>
                 <property key="animateIcon" type="boolean" defaultValue="true">
                     <caption>Animate icon</caption>
-                    <description/>
+                    <description>Animate the icon when the group is collapsing or expanding</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
