@@ -5,7 +5,6 @@ import { HeightUnitEnum, WidthUnitEnum } from "../../typings/ImageViewerProps";
 import "../ui/ImageViewer.scss";
 
 function getStyle(value: string | number, type: WidthUnitEnum | HeightUnitEnum): number | string {
-    console.log({ value, type });
     // when type is auto default browser styles applies
     if (type === "pixels") {
         return value;
