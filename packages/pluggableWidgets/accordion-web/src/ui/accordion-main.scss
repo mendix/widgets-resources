@@ -16,7 +16,7 @@ $header-color-hover: #264ae5;
     &.widget-accordion-group-collapsed {
         .widget-accordion-group-header,
         .widget-accordion-group-header.widget-accordion-group-header-icon-left {
-            .widget-accordion-group-header-chevron {
+            .widget-accordion-group-header-icon {
                 transform: none;
             }
         }
@@ -44,12 +44,14 @@ $header-color-hover: #264ae5;
             margin-bottom: 0;
         }
 
-        .widget-accordion-group-header-chevron {
+        .widget-accordion-group-header-icon {
             fill: $header-color;
             margin-left: auto;
             transform: rotate(-180deg);
-            transition: 0.2s ease-in-out;
-            transition-property: transform;
+
+            &.widget-accordion-group-header-icon-animate {
+                transition: transform 0.2s ease-in-out;
+            }
         }
 
         &.widget-accordion-group-header-clickable {
@@ -67,7 +69,7 @@ $header-color-hover: #264ae5;
                     cursor: pointer;
                 }
 
-                .widget-accordion-group-header-chevron {
+                .widget-accordion-group-header-icon {
                     fill: $header-color-hover;
                 }
             }
@@ -76,7 +78,7 @@ $header-color-hover: #264ae5;
         &.widget-accordion-group-header-icon-left {
             flex-direction: row-reverse;
 
-            .widget-accordion-group-header-chevron {
+            .widget-accordion-group-header-icon {
                 margin-right: auto;
                 margin-left: 0;
                 transform: rotate(180deg);

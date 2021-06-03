@@ -13,6 +13,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
 >
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -28,6 +29,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -57,6 +59,7 @@ exports[`Accordion in collapsible & multiple expanded group mode updates when ac
 >
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -72,6 +75,7 @@ exports[`Accordion in collapsible & multiple expanded group mode updates when ac
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -101,6 +105,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
 >
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -116,6 +121,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -145,6 +151,7 @@ exports[`Accordion in collapsible & single expanded group mode updates when acco
 >
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -160,6 +167,7 @@ exports[`Accordion in collapsible & single expanded group mode updates when acco
   />
   <AccordionGroup
     accordionGroupsDispatch={[Function]}
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": true,
@@ -188,6 +196,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
   tabIndex={1}
 >
   <AccordionGroup
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": false,
@@ -202,6 +211,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
     showHeaderIcon="no"
   />
   <AccordionGroup
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": false,
@@ -230,6 +240,7 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
   tabIndex={1}
 >
   <AccordionGroup
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": false,
@@ -244,6 +255,7 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
     showHeaderIcon="no"
   />
   <AccordionGroup
+    animateHeaderIcon={true}
     group={
       Object {
         "collapsed": false,

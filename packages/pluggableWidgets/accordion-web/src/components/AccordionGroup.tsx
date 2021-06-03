@@ -17,10 +17,11 @@ export interface AccordionGroupProps {
     group: AccGroup;
     accordionGroupsDispatch?: Dispatch<AccordionGroupsReducerAction>;
     showHeaderIcon: "right" | "left" | "no";
+    animateHeaderIcon?: boolean;
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { group, accordionGroupsDispatch, showHeaderIcon } = props;
+    const { group, accordionGroupsDispatch, showHeaderIcon, animateHeaderIcon } = props;
 
     const previousCollapsedPropValue = useRef(group.collapsed);
     const rootElement = useRef<HTMLDivElement>(null);
@@ -106,7 +107,9 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 {group.header}
                 {showHeaderIcon !== "no" ? (
                     <svg
-                        className={"widget-accordion-group-header-chevron"}
+                        className={classNames("widget-accordion-group-header-icon", {
+                            "widget-accordion-group-header-icon-animate": animateHeaderIcon
+                        })}
                         aria-hidden={"true"}
                         width="16"
                         height="16"

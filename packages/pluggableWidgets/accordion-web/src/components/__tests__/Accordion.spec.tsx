@@ -17,7 +17,8 @@ describe("Accordion", () => {
             ],
             collapsible,
             singleExpandedGroup,
-            showGroupHeaderIcon: "right"
+            showGroupHeaderIcon: "right",
+            animateGroupHeaderIcon: true
         };
     }
 

@@ -8,7 +8,7 @@ describe("AccordionGroup", () => {
 
     beforeEach(() => {
         defaultGroup = { header: "header", content: <span>content</span>, collapsed: true, visible: true };
-        defaultAccordionGroupProps = { group: defaultGroup, showHeaderIcon: "right" };
+        defaultAccordionGroupProps = { group: defaultGroup, showHeaderIcon: "right", animateHeaderIcon: true };
     });
 
     it("doesn't render when the group isn't visible", () => {
@@ -113,6 +113,24 @@ describe("AccordionGroup", () => {
                 type: "collapse",
                 group
             });
+        });
+
+        it("applies the correct class when the header icon needs to animate", () => {
+            const accordionGroup = shallow(<AccordionGroup {...defaultAccordionGroupProps} />);
+
+            expect(accordionGroup.find(".widget-accordion-group-header-icon").prop("className")).toContain(
+                "widget-accordion-group-header-icon-animate"
+            );
+        });
+
+        it("applies no animate class when the header icon doesn't need to animate", () => {
+            const accordionGroup = shallow(
+                <AccordionGroup {...defaultAccordionGroupProps} animateHeaderIcon={false} />
+            );
+
+            expect(accordionGroup.find(".widget-accordion-group-header-icon").prop("className")).not.toContain(
+                "widget-accordion-group-header-icon-animate"
+            );
         });
     });
 

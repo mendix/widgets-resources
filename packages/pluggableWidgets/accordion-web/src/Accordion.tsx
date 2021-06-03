@@ -33,6 +33,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             collapsible={props.collapsible}
             singleExpandedGroup={props.collapsible ? props.collapseBehavior === "singleExpanded" : undefined}
             showGroupHeaderIcon={props.showIcon}
+            animateGroupHeaderIcon={props.animateIcon}
         />
     );
 }

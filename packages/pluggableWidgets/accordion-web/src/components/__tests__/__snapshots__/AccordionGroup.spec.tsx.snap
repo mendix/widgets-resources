@@ -37,7 +37,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group becomes v
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -74,7 +74,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group becomes v
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -111,7 +111,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -148,7 +148,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -185,7 +185,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -222,7 +222,7 @@ exports[`AccordionGroup with dispatch renders correctly when the group is visibl
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -258,7 +258,7 @@ exports[`AccordionGroup without dispatch displays the content when the group bec
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
@@ -294,7 +294,7 @@ exports[`AccordionGroup without dispatch displays the content when the group is 
     header
     <svg
       aria-hidden="true"
-      className="widget-accordion-group-header-chevron"
+      className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
       height="16"
       viewBox="0 0 16 16"
       width="16"
