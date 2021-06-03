@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useState } from "react";
+import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { ColumnsType, DatagridContainerProps } from "../typings/DatagridProps";
 import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
@@ -59,6 +59,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         props.datasource.setSortOrder([]);
     }
 
+    const columns = useMemo(() => transformColumnProps(props.columns), [props.columns]);
+
     return (
         <Table
             cellRenderer={useCallback(
@@ -83,7 +85,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 [props.columns, props.onClick]
             )}
             className={props.class}
-            columns={transformColumnProps(props.columns)}
+            columns={columns}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
             columnsHidable={props.columnsHidable}
