@@ -92,7 +92,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
     );
 
-    const [updateSettings] = useSettings(
+    const { updateSettings } = useSettings(
         props.settings,
         props.onSettingsChange,
         props.columns,

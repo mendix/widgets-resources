@@ -13,6 +13,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - We've fixed a problem while having text box widget inside a column with an on leave/change event it was loosing focus after trigger the events
 - We've fixed a problem with 'Configuration' attribute and its on change event that was causing too many changes in the database while a column was being resized.
-
-### Removed
-- We've removed 'react-table' library from our code, so now we do not rely on any 3rd party library anymore.
+- We've made drastic code improvements that increased the performance and reliability of the widget.

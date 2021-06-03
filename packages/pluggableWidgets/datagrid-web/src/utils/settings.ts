@@ -54,8 +54,9 @@ export function useSettings(
     setSortBy: Dispatch<SetStateAction<SortingRule[]>>,
     widths: ColumnWidth,
     setWidths: Dispatch<SetStateAction<ColumnWidth>>
-): [() => void] {
+): { updateSettings: () => void } {
     const previousLoadedSettings = useRef<string>();
+    const shouldUpdate = useRef(true);
 
     const filteredColumns = useMemo(
         () =>
@@ -91,17 +92,25 @@ export function useSettings(
                     })),
                 widths: Object.fromEntries(columns.map(s => [s.columnId, s.width]))
             };
+
+            previousLoadedSettings.current = settings.value;
+
+            // Avoid settings to be saved if the value changes from the database or dataview around.
+            shouldUpdate.current = false;
+
             setColumnOrder(prev => setValue(prev, extractedSettings.columnOrder));
             setHiddenColumns(prev => setValue(prev, extractedSettings.hiddenColumns));
             setSortBy(prev => setValue(prev, extractedSettings.sortBy));
             setWidths(prev => setValue(prev, extractedSettings.widths));
 
-            previousLoadedSettings.current = settings.value;
+            setTimeout(() => {
+                shouldUpdate.current = true;
+            }, 100);
         }
     }, [settings, filteredColumns, previousLoadedSettings.current]);
 
     const updateSettings = useCallback(() => {
-        if (settings && settings.status === ValueStatus.Available) {
+        if (settings && settings.status === ValueStatus.Available && shouldUpdate.current) {
             const newSettings = JSON.stringify(
                 createSettings(
                     {
@@ -118,10 +127,12 @@ export function useSettings(
                 onSettingsChange?.();
                 previousLoadedSettings.current = newSettings;
             }
+        } else {
+            console.warn(settings, shouldUpdate.current);
         }
     }, [settings, columnOrder, hiddenColumns, sortBy, widths, filteredColumns, onSettingsChange]);
 
-    return [updateSettings];
+    return { updateSettings };
 }
 
 function setValue<T>(previous: T, current: T): T {
