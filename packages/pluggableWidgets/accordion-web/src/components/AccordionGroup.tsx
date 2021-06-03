@@ -18,9 +18,9 @@ export type AccordionGroupIcon = { icon: ReactNode } | { expandIcon: ReactNode; 
 export interface AccordionGroupProps {
     group: AccGroup;
     accordionGroupsDispatch?: Dispatch<AccordionGroupsReducerAction>;
-    animateCollapsing: boolean;
+    animateCollapsing?: boolean;
     generateIcon?: (collapsed: boolean) => ReactElement;
-    showHeaderIcon: "right" | "left" | "no";
+    showHeaderIcon?: "right" | "left" | "no";
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
@@ -111,7 +111,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}
             >
                 {group.header}
-                {accordionGroupsDispatch && showHeaderIcon !== "no"
+                {accordionGroupsDispatch && showHeaderIcon !== "no" && showHeaderIcon
                     ? props.generateIcon?.(previousCollapsedPropValue ?? false)
                     : null}
             </header>
