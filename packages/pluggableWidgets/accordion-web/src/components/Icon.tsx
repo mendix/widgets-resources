@@ -50,6 +50,7 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
                 })}
                 src={data.iconUrl}
                 alt=""
+                aria-hidden="true"
             />
         );
     }
