@@ -40,8 +40,9 @@ export interface AccordionContainerProps {
     collapseBehavior: CollapseBehaviorEnum;
     animate: boolean;
     showIcon: ShowIconEnum;
-    openIcon?: DynamicValue<WebIcon>;
-    closedIcon?: DynamicValue<WebIcon>;
+    icon?: DynamicValue<WebIcon>;
+    expandIcon?: DynamicValue<WebIcon>;
+    collapseIcon?: DynamicValue<WebIcon>;
     animateIcon: boolean;
     advancedMode: boolean;
 }
@@ -54,8 +55,9 @@ export interface AccordionPreviewProps {
     collapseBehavior: CollapseBehaviorEnum;
     animate: boolean;
     showIcon: ShowIconEnum;
-    openIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    closedIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    expandIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    collapseIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     animateIcon: boolean;
     advancedMode: boolean;
 }

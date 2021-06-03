@@ -10,8 +10,8 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
     groups: AccGroup[];
     collapsible: boolean;
     singleExpandedGroup?: boolean;
+    generateHeaderIcon?: (collapsed: boolean) => ReactElement;
     showGroupHeaderIcon: "right" | "left" | "no";
-    animateGroupHeaderIcon: boolean;
 }
 
 export default function Accordion(props: AccordionProps): ReactElement | null {
@@ -32,8 +32,8 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
             key={index}
             group={group}
             accordionGroupsDispatch={props.collapsible ? accordionGroupsDispatch : undefined}
+            generateIcon={props.generateHeaderIcon}
             showHeaderIcon={props.showGroupHeaderIcon}
-            animateHeaderIcon={props.animateGroupHeaderIcon}
         />
     ));
 

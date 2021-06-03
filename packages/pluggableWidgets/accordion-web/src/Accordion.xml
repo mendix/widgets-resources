@@ -84,12 +84,16 @@
                         <enumerationValue key="no">No</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="openIcon" type="icon" required="false">
-                    <caption>Open icon</caption>
+                <property key="icon" type="icon" required="false">
+                    <caption>Icon</caption>
                     <description/>
                 </property>
-                <property key="closedIcon" type="icon" required="false">
-                    <caption>Closed icon</caption>
+                <property key="expandIcon" type="icon" required="false">
+                    <caption>Expand icon</caption>
+                    <description/>
+                </property>
+                <property key="collapseIcon" type="icon" required="false">
+                    <caption>Collapse icon</caption>
                     <description/>
                 </property>
                 <property key="animateIcon" type="boolean" defaultValue="true">

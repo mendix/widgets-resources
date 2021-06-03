@@ -1,9 +1,11 @@
-import { createElement, ReactElement, useMemo } from "react";
+import { createElement, ReactElement, useCallback, useMemo } from "react";
+import { ValueStatus } from "mendix";
 
+import { Icon } from "./components/Icon";
 import AccordionComponent from "./components/Accordion";
+import { AccGroup } from "./components/AccordionGroup";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
-import { AccGroup } from "./components/AccordionGroup";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const accordionGroups: AccGroup[] | undefined = useMemo(() => {
@@ -19,6 +21,14 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
         }));
     }, [props.groups]);
 
+    const generateIcon = useIconGenerator(
+        props.advancedMode,
+        props.animateIcon,
+        props.icon,
+        props.expandIcon,
+        props.collapseIcon
+    );
+
     if (!accordionGroups) {
         return null;
     }
@@ -32,8 +42,45 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             groups={accordionGroups}
             collapsible={props.collapsible}
             singleExpandedGroup={props.collapsible ? props.collapseBehavior === "singleExpanded" : undefined}
+            generateHeaderIcon={generateIcon}
             showGroupHeaderIcon={props.showIcon}
-            animateGroupHeaderIcon={props.animateIcon}
         />
+    );
+}
+
+function useIconGenerator(
+    advancedMode: AccordionContainerProps["advancedMode"],
+    animateIcon: AccordionContainerProps["animateIcon"],
+    icon: AccordionContainerProps["icon"],
+    expandIcon: AccordionContainerProps["expandIcon"],
+    collapseIcon: AccordionContainerProps["collapseIcon"]
+): (collapsed: boolean) => ReactElement {
+    return useCallback(
+        (collapsed: boolean): ReactElement => {
+            if (!advancedMode) {
+                return <Icon animate={animateIcon} />;
+            } else {
+                if (animateIcon) {
+                    return (
+                        <Icon data={icon?.value} loading={icon?.status === ValueStatus.Loading} animate={animateIcon} />
+                    );
+                } else {
+                    return collapsed ? (
+                        <Icon
+                            data={expandIcon?.value}
+                            loading={expandIcon?.status === ValueStatus.Loading}
+                            animate={animateIcon}
+                        />
+                    ) : (
+                        <Icon
+                            data={collapseIcon?.value}
+                            loading={collapseIcon?.status === ValueStatus.Loading}
+                            animate={animateIcon}
+                        />
+                    );
+                }
+            }
+        },
+        [advancedMode, animateIcon, icon, expandIcon, collapseIcon]
     );
 }
