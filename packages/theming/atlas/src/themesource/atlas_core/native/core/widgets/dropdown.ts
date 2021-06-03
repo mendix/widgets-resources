@@ -92,6 +92,8 @@ export const DropDown: DropDownType = {
     },
     itemContainer: {
         // All ViewStyle properties & rippleColor & activeOpacity & underlayColor are allowed
+        width: "100%",
+        maxWidth: undefined, // unset core widget's default maxWidth value (prior to 9.3)
         paddingVertical: input.itemContainer.paddingVertical,
         paddingHorizontal: input.itemContainer.paddingHorizontal,
         backgroundColor: input.itemContainer.backgroundColor,
@@ -111,6 +113,8 @@ export const DropDown: DropDownType = {
     },
     selectedItemContainer: {
         // All ViewStyle properties are allowed
+        width: "100%",
+        maxWidth: undefined, // unset core widget's default maxWidth value (prior to 9.3)
         borderWidth: input.selectedItemContainer.borderWidth,
         borderRadius: input.selectedItemContainer.borderRadius,
         borderColor: input.selectedItemContainer.borderColor,
