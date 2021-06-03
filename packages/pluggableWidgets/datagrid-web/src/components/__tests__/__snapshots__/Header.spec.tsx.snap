@@ -3,7 +3,7 @@
 exports[`Header renders the structure correctly 1`] = `
 <div
   className="th"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -33,7 +33,7 @@ exports[`Header renders the structure correctly 1`] = `
 exports[`Header renders the structure correctly when draggable 1`] = `
 <div
   className="th"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -69,7 +69,7 @@ exports[`Header renders the structure correctly when draggable 1`] = `
 exports[`Header renders the structure correctly when filterable with custom classes 1`] = `
 <div
   className="th"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -99,7 +99,7 @@ exports[`Header renders the structure correctly when filterable with custom clas
 exports[`Header renders the structure correctly when filterable with custom filter 1`] = `
 <div
   className="th"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -137,7 +137,7 @@ exports[`Header renders the structure correctly when filterable with custom filt
 exports[`Header renders the structure correctly when filterable with no custom filter 1`] = `
 <div
   className="th"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -167,7 +167,7 @@ exports[`Header renders the structure correctly when filterable with no custom f
 exports[`Header renders the structure correctly when is hidden and preview 1`] = `
 <div
   className="th hidden-column-preview"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -197,7 +197,7 @@ exports[`Header renders the structure correctly when is hidden and preview 1`] =
 exports[`Header renders the structure correctly when resizable 1`] = `
 <div
   className="th"
-  role="Test"
+  role="columnheader"
   style={
     Object {
       "cursor": "unset",
@@ -230,8 +230,7 @@ exports[`Header renders the structure correctly when resizable 1`] = `
 exports[`Header renders the structure correctly when sortable 1`] = `
 <div
   className="th"
-  role="Test"
-  style={Object {}}
+  role="columnheader"
   title="Test"
 >
   <div

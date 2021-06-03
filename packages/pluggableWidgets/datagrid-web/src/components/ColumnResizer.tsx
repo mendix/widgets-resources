@@ -63,7 +63,7 @@ export function ColumnResizer({
     }, [isResizing, resizerReference.current]); // Required dependencies because of the callback's references
 
     return (
-        <div ref={resizerReference} onMouseDown={onStartDrag} onTouchStart={onStartDrag} className="column-resizer">
+        <div ref={resizerReference} className="column-resizer" onMouseDown={onStartDrag} onTouchStart={onStartDrag}>
             <div className="column-resizer-bar" />
         </div>
     );

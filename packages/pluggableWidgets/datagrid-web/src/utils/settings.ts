@@ -1,4 +1,3 @@
-import { IdType, SortingRule } from "react-table";
 import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react";
 import { EditableValue, ValueStatus } from "mendix";
 import { ColumnWidth, TableColumn } from "../components/Table";
@@ -6,9 +5,9 @@ import { ColumnWidth, TableColumn } from "../components/Table";
 declare type Option<T> = T | undefined;
 
 interface Settings {
-    columnOrder: Array<IdType<object>>;
-    hiddenColumns: Array<IdType<object>>;
-    sortBy: Array<SortingRule<object>>;
+    columnOrder: string[];
+    hiddenColumns: string[];
+    sortBy: SortingRule[];
     widths: ColumnWidth;
 }
 
@@ -19,6 +18,11 @@ interface PersistedSettings {
     hidden: boolean;
     order: number;
     width: number | undefined;
+}
+
+export interface SortingRule {
+    id: string;
+    desc: boolean;
 }
 
 export function createSettings(
@@ -42,12 +46,12 @@ export function useSettings(
     settings: Option<EditableValue<string>>,
     onSettingsChange: Option<() => void>,
     columns: TableColumn[],
-    columnOrder: Array<IdType<object>>,
-    setColumnOrder: Dispatch<SetStateAction<Array<IdType<object>>>>,
-    hiddenColumns: Array<IdType<object>>,
-    setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>,
-    sortBy: Array<SortingRule<object>>,
-    setSortBy: Dispatch<SetStateAction<Array<SortingRule<object>>>>,
+    columnOrder: string[],
+    setColumnOrder: Dispatch<SetStateAction<string[]>>,
+    hiddenColumns: string[],
+    setHiddenColumns: Dispatch<SetStateAction<string[]>>,
+    sortBy: SortingRule[],
+    setSortBy: Dispatch<SetStateAction<SortingRule[]>>,
     widths: ColumnWidth,
     setWidths: Dispatch<SetStateAction<ColumnWidth>>
 ): void {
