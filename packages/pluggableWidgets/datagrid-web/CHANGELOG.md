@@ -12,5 +12,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - We've fixed a problem while having text box widget inside a column with an on leave/change event it was loosing focus after trigger the events
-- We've fixed a problem with 'Configuration' attribute and its on change event that was causing too many changes in the database while a column was being resized.
-- We've made drastic code improvements that increased the performance and reliability of the widget.
+- Prevent settings' onchange action being fired continuously while resizing a column, causing performance issues.
+- Prevent the settings from being overwritten when loading a new value from the settings attribute.
