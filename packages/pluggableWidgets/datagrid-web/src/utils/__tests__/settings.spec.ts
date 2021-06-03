@@ -1,4 +1,4 @@
-import { SortingRule, useSettings } from "../settings";
+import { useSettings } from "../settings";
 import { ColumnWidth, TableColumn } from "../../components/Table";
 import { EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { HidableEnum } from "../../../typings/DatagridProps";
@@ -7,20 +7,47 @@ import { EditableValue } from "mendix";
 import { act } from "react-dom/test-utils";
 
 describe("useSettings Hook", () => {
-    let settings: EditableValue<string>;
-    let columnOrder: string[] = [];
-    const setColumnOrder = jest.fn((fn: () => string[]) => (columnOrder = fn()));
-    let hiddenColumns: string[] = [];
-    const setHiddenColumns = jest.fn((fn: () => string[]) => (hiddenColumns = fn()));
-    let sortBy: SortingRule[] = [];
-    const setSortBy = jest.fn((fn: () => SortingRule[]) => (sortBy = fn()));
-    let widths: ColumnWidth = {};
-    const setWidths = jest.fn((fn: () => ColumnWidth) => (widths = fn()));
-    const onSettingsChange = jest.fn();
-    let columns: TableColumn[];
-
     beforeEach(() => {
-        settings = new EditableValueBuilder<string>()
+        jest.useFakeTimers();
+    });
+
+    it("loads correct values into hooks", () => {
+        const props = mockProperties();
+
+        renderHook(() =>
+            useSettings(
+                props.settings,
+                props.onSettingsChange,
+                props.columns,
+                props.columnOrder,
+                props.setColumnOrder,
+                props.hiddenColumns,
+                props.setHiddenColumns,
+                props.sortBy,
+                props.setSortBy,
+                props.widths,
+                props.setWidths
+            )
+        );
+        expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
+        expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
+        expect(props.setSortBy).toHaveBeenCalledTimes(1);
+        expect(props.setWidths).toHaveBeenCalledTimes(1);
+    });
+
+    it("calls state functions with correct values", () => {
+        const props = mockProperties();
+        const columns = [
+            {
+                header: "Column 1",
+                hidable: "yes" as HidableEnum
+            },
+            {
+                header: "Column 2",
+                hidable: "hidden" as HidableEnum
+            }
+        ] as TableColumn[];
+        const settings = new EditableValueBuilder<string>()
             .withValue(
                 JSON.stringify([
                     {
@@ -28,130 +55,53 @@ describe("useSettings Hook", () => {
                         sort: true,
                         sortMethod: "desc",
                         hidden: false,
-                        order: 0,
+                        order: 1,
                         width: undefined
+                    },
+                    {
+                        column: "Column 2",
+                        sort: false,
+                        sortMethod: "asc",
+                        hidden: true,
+                        order: 0,
+                        width: 120
                     }
                 ])
             )
             .build();
-        columnOrder = [];
-        hiddenColumns = [];
-        sortBy = [];
-        widths = {};
-        columns = [
-            {
-                header: "Column 1",
-                hidable: "yes" as HidableEnum
-            }
-        ] as TableColumn[];
 
-        jest.useFakeTimers();
+        renderHook(() =>
+            useSettings(
+                settings,
+                props.onSettingsChange,
+                columns,
+                props.columnOrder,
+                props.setColumnOrder,
+                props.hiddenColumns,
+                props.setHiddenColumns,
+                props.sortBy,
+                props.setSortBy,
+                props.widths,
+                props.setWidths
+            )
+        );
+
+        expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
+        expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
+        expect(props.setSortBy).toHaveBeenCalledTimes(1);
+        expect(props.setWidths).toHaveBeenCalledTimes(1);
     });
 
-    // it("loads correct values into hooks", () => {
-    //     renderHook(() =>
-    //         useSettings(
-    //             settings,
-    //             onSettingsChange,
-    //             columns,
-    //             columnOrder,
-    //             setColumnOrder,
-    //             hiddenColumns,
-    //             setHiddenColumns,
-    //             sortBy,
-    //             setSortBy,
-    //             widths,
-    //             setWidths
-    //         )
-    //     );
-    //     expect(setColumnOrder).toHaveBeenCalledTimes(1);
-    //     expect(setHiddenColumns).toHaveBeenCalledTimes(1);
-    //     expect(setSortBy).toHaveBeenCalledTimes(1);
-    //     expect(setWidths).toHaveBeenCalledTimes(1);
-    // });
-    //
-    // it("calls state functions with correct values", () => {
-    //     const columns = [
-    //         {
-    //             header: "Column 1",
-    //             hidable: "yes" as HidableEnum
-    //         },
-    //         {
-    //             header: "Column 2",
-    //             hidable: "hidden" as HidableEnum
-    //         }
-    //     ] as TableColumn[];
-    //     const settings = new EditableValueBuilder<string>()
-    //         .withValue(
-    //             JSON.stringify([
-    //                 {
-    //                     column: "Column 1",
-    //                     sort: true,
-    //                     sortMethod: "desc",
-    //                     hidden: false,
-    //                     order: 1,
-    //                     width: undefined
-    //                 },
-    //                 {
-    //                     column: "Column 2",
-    //                     sort: false,
-    //                     sortMethod: "asc",
-    //                     hidden: true,
-    //                     order: 0,
-    //                     width: 120
-    //                 }
-    //             ])
-    //         )
-    //         .build();
-    //
-    //     renderHook(() =>
-    //         useSettings(
-    //             settings,
-    //             onSettingsChange,
-    //             columns,
-    //             columnOrder,
-    //             setColumnOrder,
-    //             hiddenColumns,
-    //             setHiddenColumns,
-    //             sortBy,
-    //             setSortBy,
-    //             widths,
-    //             setWidths
-    //         )
-    //     );
-    //
-    //     expect(setColumnOrder).toHaveBeenCalledTimes(1);
-    //     expect(columnOrder).toStrictEqual(["1", "0"]);
-    //     expect(setHiddenColumns).toHaveBeenCalledTimes(1);
-    //     expect(hiddenColumns).toStrictEqual(["1"]);
-    //     expect(setSortBy).toHaveBeenCalledTimes(1);
-    //     expect(sortBy).toStrictEqual([{ id: "0", desc: true }]);
-    //     expect(setWidths).toHaveBeenCalledTimes(1);
-    //     expect(widths).toStrictEqual({ "0": undefined, "1": 120 });
-    // });
-
     it("changes the settings when some property changes", () => {
-        const initialProps = {
-            settings,
-            onSettingsChange,
-            columns,
-            columnOrder,
-            setColumnOrder,
-            hiddenColumns,
-            setHiddenColumns,
-            sortBy,
-            setSortBy,
-            widths,
-            setWidths
-        };
-        const { result, rerender } = renderUseSettingsHook(initialProps);
-        expect(settings.setValue).toHaveBeenCalledTimes(0);
-        expect(onSettingsChange).toHaveBeenCalledTimes(0);
+        const props = mockProperties();
+        const { result, rerender } = renderUseSettingsHook(props);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
 
         jest.advanceTimersByTime(100);
 
         rerender({
-            ...initialProps,
+            ...props,
             columnOrder: ["0"],
             sortBy: [{ id: "0", desc: true }],
             widths: { "0": 130 }
@@ -159,7 +109,7 @@ describe("useSettings Hook", () => {
 
         result.current.updateSettings();
 
-        expect(settings.setValue).toHaveBeenCalledWith(
+        expect(props.settings.setValue).toHaveBeenCalledWith(
             JSON.stringify([
                 {
                     column: "Column 1",
@@ -171,9 +121,9 @@ describe("useSettings Hook", () => {
                 }
             ])
         );
-        expect(onSettingsChange).toHaveBeenCalledTimes(1);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
     });
-    //
+
     it("doesnt change the settings when same properties are applied", () => {
         const props = mockProperties();
         const initialProps = {
@@ -198,7 +148,7 @@ describe("useSettings Hook", () => {
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
         expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
     });
-    //
+
     // it("doesnt change the hooks when same properties are applied", () => {
     //     const props = mockProperties();
     //     const initialProps = {
