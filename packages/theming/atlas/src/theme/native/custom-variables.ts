@@ -262,7 +262,6 @@ export const input: VariablesInput = {
         rippleColor: contrast.lowest
     },
     itemContainer: {
-        maxWidth: 500,
         paddingVertical: 12,
         paddingHorizontal: spacing.regular,
         backgroundColor: background.primary
