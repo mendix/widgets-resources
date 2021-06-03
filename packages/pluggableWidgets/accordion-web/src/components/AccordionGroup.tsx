@@ -34,10 +34,12 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     const completeCollapsing = useCallback((): void => {
         if (contentWrapperElement.current && rootElement.current) {
-            rootElement.current.classList.remove("widget-accordion-group-collapsing");
             if (!previousCollapsedPropValue) {
+                rootElement.current.classList.add("widget-accordion-group-collapsed");
+                rootElement.current.classList.remove("widget-accordion-group-collapsing");
                 setPreviousCollapsedPropValue(true);
             } else {
+                rootElement.current.classList.remove("widget-accordion-group-expanding");
                 contentWrapperElement.current.style.height = "";
                 setPreviousCollapsedPropValue(false);
             }
@@ -68,7 +70,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 //     contentWrapperElement.current.style.height = "";
                 // }); // TODO Check how this behaves when we have multiple transitions with accordion groups: maybe removing height:0 from collapsing style will solve the issue
             } else {
-                rootElement.current.classList.add("widget-accordion-group-collapsing");
+                rootElement.current.classList.add("widget-accordion-group-expanding");
                 rootElement.current.classList.remove("widget-accordion-group-collapsed");
                 contentWrapperElement.current.style.height = `${
                     contentElement.current.getBoundingClientRect().height

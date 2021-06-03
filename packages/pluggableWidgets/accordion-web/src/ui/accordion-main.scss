@@ -27,6 +27,16 @@ $header-color-hover: #264ae5;
     }
 
     &.widget-accordion-group-collapsing {
+        .widget-accordion-group-header,
+        .widget-accordion-group-header.widget-accordion-group-header-icon-left {
+            .widget-accordion-group-header-icon {
+                transform: none;
+            }
+        }
+    }
+
+    &.widget-accordion-group-expanding,
+    &.widget-accordion-group-collapsing {
         .widget-accordion-group-content-wrapper {
             height: 0;
             overflow: hidden;
