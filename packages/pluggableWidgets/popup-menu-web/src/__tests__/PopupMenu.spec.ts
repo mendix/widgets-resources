@@ -48,9 +48,17 @@ describe("Popup menu", () => {
         it("triggers action", () => {
             basicItemProps.action = actionValue();
             const popupMenu = createPopupMenu(defaultProps);
-            const event: any = { target: {} };
+            const preventDefaultAction = jest.fn();
+            const stopPropagationAction = jest.fn();
+            const event: any = {
+                preventDefault: preventDefaultAction,
+                stopPropagation: stopPropagationAction,
+                target: {}
+            };
             popupMenu.find(".popupmenu-basic-item").prop("onClick")!(event);
 
+            expect(stopPropagationAction).toHaveBeenCalled();
+            expect(preventDefaultAction).toHaveBeenCalled();
             expect(basicItemProps.action.execute).toHaveBeenCalledTimes(1);
         });
 
@@ -106,9 +114,17 @@ describe("Popup menu", () => {
         it("triggers action", () => {
             const action = (customItemProps.action = actionValue());
             const popupMenu = createPopupMenu(defaultProps);
-            const event: any = { target: {} };
+            const preventDefaultAction = jest.fn();
+            const stopPropagationAction = jest.fn();
+            const event: any = {
+                preventDefault: preventDefaultAction,
+                stopPropagation: stopPropagationAction,
+                target: {}
+            };
             popupMenu.find(".popupmenu-custom-item").prop("onClick")!(event);
 
+            expect(stopPropagationAction).toHaveBeenCalled();
+            expect(preventDefaultAction).toHaveBeenCalled();
             expect(action.execute).toHaveBeenCalledTimes(1);
         });
     });
