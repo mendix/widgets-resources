@@ -99,13 +99,13 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             <header
                 className={classNames("widget-accordion-group-header", {
                     "widget-accordion-group-header-clickable": accordionGroupsDispatch,
-                    "widget-accordion-group-header-icon-left": showHeaderIcon === "left",
-                    "widget-accordion-group-header-icon-right": showHeaderIcon === "right"
+                    "widget-accordion-group-header-icon-left": accordionGroupsDispatch && showHeaderIcon === "left",
+                    "widget-accordion-group-header-icon-right": accordionGroupsDispatch && showHeaderIcon === "right"
                 })}
                 onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}
             >
                 {group.header}
-                {showHeaderIcon !== "no" ? (
+                {accordionGroupsDispatch && showHeaderIcon !== "no" ? (
                     <svg
                         className={classNames("widget-accordion-group-header-icon", {
                             "widget-accordion-group-header-icon-animate": animateHeaderIcon

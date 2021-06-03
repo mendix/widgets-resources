@@ -32,7 +32,7 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
             key={index}
             group={group}
             accordionGroupsDispatch={props.collapsible ? accordionGroupsDispatch : undefined}
-            showHeaderIcon={props.collapsible ? props.showGroupHeaderIcon : "no"}
+            showHeaderIcon={props.showGroupHeaderIcon}
             animateHeaderIcon={props.animateGroupHeaderIcon}
         />
     ));
