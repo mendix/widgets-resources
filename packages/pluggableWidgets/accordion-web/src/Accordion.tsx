@@ -41,6 +41,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             tabIndex={props.tabIndex}
             groups={accordionGroups}
             collapsible={props.collapsible}
+            animateCollapsing={props.animate}
             singleExpandedGroup={props.collapsible ? props.collapseBehavior === "singleExpanded" : undefined}
             generateHeaderIcon={generateIcon}
             showGroupHeaderIcon={props.showIcon}

@@ -18,12 +18,13 @@ export type AccordionGroupIcon = { icon: ReactNode } | { expandIcon: ReactNode; 
 export interface AccordionGroupProps {
     group: AccGroup;
     accordionGroupsDispatch?: Dispatch<AccordionGroupsReducerAction>;
+    animateCollapsing: boolean;
     generateIcon?: (collapsed: boolean) => ReactElement;
     showHeaderIcon: "right" | "left" | "no";
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { group, accordionGroupsDispatch, showHeaderIcon } = props;
+    const { group, accordionGroupsDispatch, animateCollapsing, showHeaderIcon } = props;
 
     const [previousCollapsedPropValue, setPreviousCollapsedPropValue] = useState(group.collapsed);
 
@@ -48,7 +49,8 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             group.collapsed !== previousCollapsedPropValue &&
             rootElement.current &&
             contentWrapperElement.current &&
-            contentElement.current
+            contentElement.current &&
+            animateCollapsing
         ) {
             if (group.collapsed) {
                 contentWrapperElement.current.style.height = `${
@@ -72,8 +74,10 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                     contentElement.current.getBoundingClientRect().height
                 }px`;
             }
+        } else if (group.collapsed !== previousCollapsedPropValue && !animateCollapsing) {
+            setPreviousCollapsedPropValue(group.collapsed);
         }
-    }, [group, previousCollapsedPropValue]);
+    }, [group, previousCollapsedPropValue, animateCollapsing]);
 
     const toggleContentVisibility = useCallback(() => {
         if (group.collapsed) {
