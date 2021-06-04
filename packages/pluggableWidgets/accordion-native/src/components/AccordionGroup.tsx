@@ -38,9 +38,9 @@ export function AccordionGroup({
 }: AccordionGroupProps): ReactElement | null {
     useEffect(() => {
         if (group.groupCollapsedAttribute?.status === ValueStatus.Available) {
-            if (!isExpanded && group.groupCollapsedAttribute.value === false) {
+            if (group.groupCollapsedAttribute.value === false) {
                 expandGroup(index);
-            } else if (isExpanded && group.groupCollapsedAttribute.value) {
+            } else if (group.groupCollapsedAttribute.value) {
                 collapseGroup(index);
             }
         }
@@ -51,9 +51,9 @@ export function AccordionGroup({
             group.groupCollapsedDynamic?.status === ValueStatus.Available &&
             group.groupCollapsed === "groupStartDynamic"
         ) {
-            if (!isExpanded && group.groupCollapsedDynamic.value === false) {
+            if (group.groupCollapsedDynamic.value === false) {
                 expandGroup(index);
-            } else if (isExpanded && group.groupCollapsedDynamic.value) {
+            } else if (group.groupCollapsedDynamic.value) {
                 collapseGroup(index);
             }
         }
