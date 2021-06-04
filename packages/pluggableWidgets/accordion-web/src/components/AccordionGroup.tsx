@@ -47,6 +47,13 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     }, [previousCollapsedPropValue]);
 
     useEffect(() => {
+        async function removeInlineHeight(): Promise<void> {
+            if (contentWrapperElement.current) {
+                await new Promise(resolve => setTimeout(resolve, 50));
+                contentWrapperElement.current.style.height = "";
+            }
+        }
+
         if (
             group.collapsed !== previousCollapsedPropValue &&
             rootElement.current &&
@@ -60,15 +67,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 }px`;
                 rootElement.current.classList.add("widget-accordion-group-collapsing");
 
-                setTimeout(() => {
-                    if (contentWrapperElement.current) {
-                        contentWrapperElement.current.style.height = "";
-                    }
-                }, 200); // the animation is already ongoing. That's why we need to wait.
-
-                // window.requestAnimationFrame(() => {
-                //     contentWrapperElement.current.style.height = "";
-                // }); // TODO Check how this behaves when we have multiple transitions with accordion groups: maybe removing height:0 from collapsing style will solve the issue
+                removeInlineHeight();
             } else {
                 rootElement.current.classList.add("widget-accordion-group-expanding");
                 rootElement.current.classList.remove("widget-accordion-group-collapsed");
