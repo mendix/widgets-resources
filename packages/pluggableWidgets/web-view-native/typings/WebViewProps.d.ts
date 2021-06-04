@@ -16,6 +16,8 @@ export interface WebViewProps<Style> {
     onMessageInput?: EditableValue<string>;
     userAgent: string;
     openLinksExternally: boolean;
+    allowsBackForwardNavigationGestures: boolean;
+    propagateBackbutton: boolean;
 }
 
 export interface WebViewPreviewProps {
@@ -29,4 +31,6 @@ export interface WebViewPreviewProps {
     onMessageInput: string;
     userAgent: string;
     openLinksExternally: boolean;
+    allowsBackForwardNavigationGestures: boolean;
+    propagateBackbutton: boolean;
 }
