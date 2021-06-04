@@ -127,8 +127,6 @@ export function useSettings(
                 onSettingsChange?.();
                 previousLoadedSettings.current = newSettings;
             }
-        } else {
-            console.warn(settings, shouldUpdate.current);
         }
     }, [settings, columnOrder, hiddenColumns, sortBy, widths, filteredColumns, onSettingsChange]);
 

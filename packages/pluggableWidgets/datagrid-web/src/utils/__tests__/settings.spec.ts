@@ -149,39 +149,44 @@ describe("useSettings Hook", () => {
         expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
     });
 
-    // it("doesnt change the hooks when same properties are applied", () => {
-    //     const props = mockProperties();
-    //     const initialProps = {
-    //         settings: props.settings,
-    //         onSettingsChange: props.onSettingsChange,
-    //         columns: props.columns,
-    //         columnOrder: ["0"],
-    //         setColumnOrder: props.setColumnOrder,
-    //         hiddenColumns: [],
-    //         setHiddenColumns: props.setHiddenColumns,
-    //         sortBy: [{ id: "0", desc: true }],
-    //         setSortBy: props.setSortBy,
-    //         widths: { "0": undefined } as ColumnWidth,
-    //         setWidths: props.setWidths
-    //     };
-    //
-    //     const { rerender } = renderUseSettingsHook(initialProps);
-    //     // Initiates the hooks with values from settings once
-    //     expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
-    //     expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
-    //     expect(props.setSortBy).toHaveBeenCalledTimes(1);
-    //     expect(props.setWidths).toHaveBeenCalledTimes(1);
-    //     expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-    //     expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
-    //     rerender(initialProps);
-    //     expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
-    //     expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
-    //     expect(props.setSortBy).toHaveBeenCalledTimes(1);
-    //     expect(props.setWidths).toHaveBeenCalledTimes(1);
-    //     expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-    //     expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
-    // });
-    //
+    it("doesnt change the hooks when same properties are applied", () => {
+        const props = mockProperties();
+        const initialProps = {
+            settings: props.settings,
+            onSettingsChange: props.onSettingsChange,
+            columns: props.columns,
+            columnOrder: ["0"],
+            setColumnOrder: props.setColumnOrder,
+            hiddenColumns: [],
+            setHiddenColumns: props.setHiddenColumns,
+            sortBy: [{ id: "0", desc: true }],
+            setSortBy: props.setSortBy,
+            widths: { "0": undefined } as ColumnWidth,
+            setWidths: props.setWidths
+        };
+
+        const { result, rerender } = renderUseSettingsHook(initialProps);
+        // Initiates the hooks with values from settings once
+        expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
+        expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
+        expect(props.setSortBy).toHaveBeenCalledTimes(1);
+        expect(props.setWidths).toHaveBeenCalledTimes(1);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
+
+        rerender({ ...initialProps });
+        act(() => {
+            result.current.updateSettings();
+        });
+
+        expect(props.setColumnOrder).toHaveBeenCalledTimes(1);
+        expect(props.setHiddenColumns).toHaveBeenCalledTimes(1);
+        expect(props.setSortBy).toHaveBeenCalledTimes(1);
+        expect(props.setWidths).toHaveBeenCalledTimes(1);
+        expect(props.settings.setValue).toHaveBeenCalledTimes(0);
+        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
+    });
+
     it("applies changes to settings when receiving external changes", () => {
         const props = mockProperties();
         props.settings = new EditableValueBuilder<string>().withValue("").build();
