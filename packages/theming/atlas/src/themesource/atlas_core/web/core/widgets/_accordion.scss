@@ -34,11 +34,16 @@
         background-color: $background-color;
         padding: $spacing-medium;
 
+        > :is(h1, h2, h3, h4, h5, h6) {
+            font-size: $font-size-h5;
+            font-weight: $font-weight-header;
+        }
+
         > :is(h1, h2, h3, h4, h5, h6, p, span) {
             color: $color;
         }
 
-        .widget-accordion-group-header-chevron {
+        .widget-accordion-group-header-icon {
             fill: $color;
         }
 
@@ -52,7 +57,7 @@
                     color: $color-hover;
                 }
 
-                .widget-accordion-group-header-chevron {
+                .widget-accordion-group-header-icon {
                     fill: $color-hover;
                 }
             }

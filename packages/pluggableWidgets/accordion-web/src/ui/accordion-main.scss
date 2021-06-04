@@ -98,6 +98,10 @@ $header-color-hover: #264ae5;
                     fill: $header-color-hover;
                 }
             }
+
+            &:focus {
+                outline: 2px solid $header-color-hover;
+            }
         }
 
         &.widget-accordion-group-header-icon-left {
