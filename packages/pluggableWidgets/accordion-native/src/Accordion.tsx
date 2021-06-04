@@ -19,9 +19,7 @@ export function Accordion(props: Props): ReactElement | null {
         initialRender.current = true;
         const initialExpandedGroups = props.groups.reduce(
             (acc, group, index): number[] =>
-                !props.collapsible || group.groupCollapsed === "groupStartExpanded" || expandedGroups.includes(index)
-                    ? [...acc, index]
-                    : acc,
+                !props.collapsible || group.groupCollapsed === "groupStartExpanded" ? [...acc, index] : acc,
             []
         );
         setExpandedGroups(initialExpandedGroups);
