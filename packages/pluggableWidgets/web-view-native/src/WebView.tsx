@@ -1,6 +1,6 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { Component, createElement } from "react";
-import { Text, View, Linking } from "react-native";
+import { Component, createElement, createRef, RefObject } from "react";
+import { Text, View, Linking, Platform, BackHandler } from "react-native";
 import { WebView as RNWebView } from "react-native-webview";
 
 import { WebViewProps } from "../typings/WebViewProps";
@@ -13,7 +13,23 @@ export class WebView extends Component<Props> {
     private readonly onLoadHandler = this.onLoad.bind(this);
     private readonly onErrorHandler = this.onError.bind(this);
     private readonly onMessageHandler = this.onMessage.bind(this);
+    private readonly onAndroidBackPressHandler = this.onAndroidBackPress.bind(this);
     private readonly styles = flattenStyles(defaultWebViewStyle, this.props.style);
+
+    private webViewRef: RefObject<RNWebView> = createRef();
+    private canGoBack = false;
+
+    componentDidMount(): void {
+        if (Platform.OS === "android" && this.props.propagateBackbutton) {
+            BackHandler.addEventListener("hardwareBackPress", this.onAndroidBackPressHandler);
+        }
+    }
+
+    componentWillUnmount(): void {
+        if (Platform.OS === "android" && this.props.propagateBackbutton) {
+            BackHandler.removeEventListener("hardwareBackPress", this.onAndroidBackPressHandler);
+        }
+    }
 
     render(): JSX.Element {
         const uri = this.props.url && this.props.url.value;
@@ -30,6 +46,7 @@ export class WebView extends Component<Props> {
         return (
             <View style={this.styles.container}>
                 <RNWebView
+                    ref={this.webViewRef}
                     testID={this.props.name}
                     source={html ? { html } : { uri: uri! }}
                     style={{
@@ -51,6 +68,10 @@ export class WebView extends Component<Props> {
                         }
                         return true;
                     }}
+                    allowsBackForwardNavigationGestures={this.props.allowsBackForwardNavigationGestures}
+                    onNavigationStateChange={navState => {
+                        this.canGoBack = navState.canGoBack;
+                    }}
                 />
             </View>
         );
@@ -67,5 +88,14 @@ export class WebView extends Component<Props> {
     private onMessage(input: string): void {
         this.props.onMessageInput?.setTextValue(input);
         executeAction(this.props.onMessage);
+    }
+
+    private onAndroidBackPress(): boolean {
+        if (this.canGoBack && this.webViewRef.current) {
+            this.webViewRef.current.goBack();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
