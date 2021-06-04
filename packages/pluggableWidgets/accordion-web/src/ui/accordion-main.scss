@@ -55,9 +55,18 @@ $header-color-hover: #264ae5;
         display: flex;
         align-items: center;
 
+        > :is(h1, h2, h3, h4, h5, h6) {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
         > :is(h1, h2, h3, h4, h5, h6, p) {
             color: $header-color;
             margin-bottom: 0;
+        }
+
+        > span {
+            color: $header-color;
         }
 
         .widget-accordion-group-header-icon {
