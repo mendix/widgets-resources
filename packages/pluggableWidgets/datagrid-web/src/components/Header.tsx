@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
 import { ColumnProperty } from "./Table";
-import { ColumnResizer } from "./ColumnResizer";
+import { ColumnResizerProps } from "./ColumnResizer";
 import { SortingRule } from "../utils/settings";
 
 export interface HeaderProps {
@@ -17,8 +17,8 @@ export interface HeaderProps {
     hidable: boolean;
     isDragging?: boolean;
     preview?: boolean;
+    resizer: ReactElement<ColumnResizerProps>;
     setColumnOrder: (updater: string[]) => void;
-    setColumnWidth: (width: number) => void;
     setDragOver: Dispatch<SetStateAction<string>>;
     setIsDragging: Dispatch<SetStateAction<boolean>>;
     setSortBy: Dispatch<SetStateAction<SortingRule[]>>;
@@ -108,7 +108,7 @@ export function Header(props: HeaderProps): ReactElement {
                 </div>
                 {props.filterable && props.column.customFilter ? props.column.customFilter : null}
             </div>
-            {props.resizable && props.column.canResize && <ColumnResizer setColumnWidth={props.setColumnWidth} />}
+            {props.resizable && props.column.canResize && props.resizer}
         </div>
     );
 }

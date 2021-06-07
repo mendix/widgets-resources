@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useMemo, useRef } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef } from "react";
 import { EditableValue, ValueStatus } from "mendix";
 import { ColumnWidth, TableColumn } from "../components/Table";
 
@@ -54,8 +54,9 @@ export function useSettings(
     setSortBy: Dispatch<SetStateAction<SortingRule[]>>,
     widths: ColumnWidth,
     setWidths: Dispatch<SetStateAction<ColumnWidth>>
-): void {
+): { updateSettings: () => void } {
     const previousLoadedSettings = useRef<string>();
+    const shouldUpdate = useRef(true);
 
     const filteredColumns = useMemo(
         () =>
@@ -91,15 +92,25 @@ export function useSettings(
                     })),
                 widths: Object.fromEntries(columns.map(s => [s.columnId, s.width]))
             };
-            setColumnOrder(extractedSettings.columnOrder);
-            setHiddenColumns(extractedSettings.hiddenColumns);
-            setSortBy(extractedSettings.sortBy);
-            setWidths(extractedSettings.widths);
+
+            previousLoadedSettings.current = settings.value;
+
+            // Avoid settings to be saved if the value changes from the database or dataview around.
+            shouldUpdate.current = false;
+
+            setColumnOrder(prev => setValue(prev, extractedSettings.columnOrder));
+            setHiddenColumns(prev => setValue(prev, extractedSettings.hiddenColumns));
+            setSortBy(prev => setValue(prev, extractedSettings.sortBy));
+            setWidths(prev => setValue(prev, extractedSettings.widths));
+
+            setTimeout(() => {
+                shouldUpdate.current = true;
+            }, 100);
         }
     }, [settings, filteredColumns, previousLoadedSettings.current]);
 
-    useEffect(() => {
-        if (settings && settings.status === ValueStatus.Available) {
+    const updateSettings = useCallback(() => {
+        if (settings && settings.status === ValueStatus.Available && shouldUpdate.current) {
             const newSettings = JSON.stringify(
                 createSettings(
                     {
@@ -117,5 +128,14 @@ export function useSettings(
                 previousLoadedSettings.current = newSettings;
             }
         }
-    }, [columnOrder, hiddenColumns, sortBy, widths, settings, onSettingsChange, previousLoadedSettings.current]);
+    }, [settings, columnOrder, hiddenColumns, sortBy, widths, filteredColumns, onSettingsChange]);
+
+    return { updateSettings };
+}
+
+function setValue<T>(previous: T, current: T): T {
+    if (JSON.stringify(previous) === JSON.stringify(current)) {
+        return previous;
+    }
+    return current;
 }
