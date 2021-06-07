@@ -1,13 +1,18 @@
-import { createElement, ReactElement, useReducer, useRef } from "react";
+import { createElement, Dispatch, ReactElement, useCallback, useReducer, useRef } from "react";
 
-import AccordionGroup, { AccGroup } from "./AccordionGroup";
-import { getAccordionGroupsReducer } from "../utils/AccordionGroupStateReducer";
+import AccordionGroup, { AccordionGroupProps } from "./AccordionGroup";
+import {
+    CollapsedAccordionGroupsReducerAction,
+    getCollapsedAccordionGroupsReducer
+} from "../utils/AccordionGroupStateReducer";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 import classNames from "classnames";
 
+export type AccordionGroups = Array<Pick<AccordionGroupProps, "header" | "content" | "visible" | "dynamicClassName">>;
+
 export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
     id: string;
-    groups: AccGroup[];
+    groups: AccordionGroups;
     collapsible: boolean;
     animateCollapsing?: boolean;
     singleExpandedGroup?: boolean;
@@ -16,23 +21,20 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
 }
 
 export default function Accordion(props: AccordionProps): ReactElement | null {
-    const previousGroupsPropValue = useRef(props.groups);
+    const reducer = useRef(getCollapsedAccordionGroupsReducer(props.singleExpandedGroup ? "single" : "multiple")); // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
 
-    const [accordionGroups, accordionGroupsDispatch] = useReducer(
-        getAccordionGroupsReducer(props.collapsible ? (props.singleExpandedGroup ? "single" : "multiple") : "all"), // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
-        props.groups.map(group => ({ ...group, collapsed: props.collapsible }))
+    const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(
+        reducer.current,
+        props.groups.map(() => props.collapsible)
     );
 
-    if (props.groups !== previousGroupsPropValue.current) {
-        previousGroupsPropValue.current = props.groups;
-        accordionGroupsDispatch({ type: "sync", groups: props.groups });
-    }
-
-    const accordionGroupElements = accordionGroups.map((group, index) => (
-        <AccordionGroup
+    const accordionGroupElements = props.groups.map((group, index) => (
+        <AccordionGroupWrapper
             key={index}
-            group={group}
-            accordionGroupsDispatch={props.collapsible ? accordionGroupsDispatch : undefined}
+            index={index}
+            collapsedAccordionGroupsDispatch={props.collapsible ? collapsedAccordionGroupsDispatch : undefined}
+            {...group}
+            collapsed={collapsedAccordionGroups[index]}
             animateCollapsing={props.animateCollapsing}
             generateIcon={props.generateHeaderIcon}
             showHeaderIcon={props.showGroupHeaderIcon}
@@ -48,5 +50,35 @@ export default function Accordion(props: AccordionProps): ReactElement | null {
         >
             {accordionGroupElements}
         </div>
+    );
+}
+
+interface AccordionGroupWrapperProps extends Omit<AccordionGroupProps, "toggleCollapsed"> {
+    index: number;
+    collapsedAccordionGroupsDispatch?: Dispatch<CollapsedAccordionGroupsReducerAction>;
+}
+
+function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement {
+    const toggleCollapsedState = useCallback(() => {
+        if (props.collapsed) {
+            props.collapsedAccordionGroupsDispatch!({ type: "expand", index: props.index });
+        } else {
+            props.collapsedAccordionGroupsDispatch!({ type: "collapse", index: props.index });
+        }
+    }, [props.collapsed, props.collapsedAccordionGroupsDispatch, props.index]);
+
+    return (
+        <AccordionGroup
+            key={props.index}
+            header={props.header}
+            content={props.content}
+            collapsed={props.collapsed}
+            visible={props.visible}
+            dynamicClassName={props.dynamicClassName}
+            toggleCollapsed={props.collapsedAccordionGroupsDispatch ? toggleCollapsedState : undefined}
+            animateCollapsing={props.animateCollapsing}
+            generateIcon={props.generateIcon}
+            showHeaderIcon={props.showHeaderIcon}
+        />
     );
 }

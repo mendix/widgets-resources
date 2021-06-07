@@ -2,13 +2,12 @@ import { createElement, ReactElement, useCallback, useMemo } from "react";
 import { ValueStatus } from "mendix";
 
 import { Icon } from "./components/Icon";
-import AccordionComponent from "./components/Accordion";
-import { AccGroup } from "./components/AccordionGroup";
+import AccordionComponent, { AccordionGroups } from "./components/Accordion";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
-    const accordionGroups: AccGroup[] | undefined = useMemo(() => {
+    const accordionGroups: AccordionGroups | undefined = useMemo(() => {
         if (props.groups.some(group => group.visible.value === undefined || group.headerText.value === undefined)) {
             return undefined;
         }

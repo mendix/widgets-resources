@@ -1,32 +1,27 @@
-import { createElement, Dispatch, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
-import { AccordionGroupsReducerAction } from "../utils/AccordionGroupStateReducer";
 import classNames from "classnames";
 
 import "../ui/accordion-main.scss";
 
-export interface AccGroup {
-    header: ReactNode;
-    content: ReactNode;
-    collapsed?: boolean;
-    visible: boolean;
-    dynamicClassName?: string;
-}
-
 export type AccordionGroupIcon = { icon: ReactNode } | { expandIcon: ReactNode; collapseIcon: ReactNode };
 
 export interface AccordionGroupProps {
-    group: AccGroup;
-    accordionGroupsDispatch?: Dispatch<AccordionGroupsReducerAction>;
+    header: ReactNode;
+    content: ReactNode;
+    collapsed: boolean;
+    visible: boolean;
+    dynamicClassName?: string;
+    toggleCollapsed?: () => void;
     animateCollapsing?: boolean;
     generateIcon?: (collapsed: boolean) => ReactElement;
     showHeaderIcon?: "right" | "left" | "no";
 }
 
 export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { group, accordionGroupsDispatch, animateCollapsing, showHeaderIcon } = props;
+    const { animateCollapsing, showHeaderIcon } = props;
 
-    const [previousCollapsedPropValue, setPreviousCollapsedPropValue] = useState(group.collapsed);
+    const [previousCollapsedPropValue, setPreviousCollapsedPropValue] = useState(props.collapsed);
 
     const rootElement = useRef<HTMLDivElement>(null);
     const contentWrapperElement = useRef<HTMLDivElement>(null);
@@ -48,13 +43,13 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
     useEffect(() => {
         if (
-            group.collapsed !== previousCollapsedPropValue &&
+            props.collapsed !== previousCollapsedPropValue &&
             rootElement.current &&
             contentWrapperElement.current &&
             contentElement.current &&
             animateCollapsing
         ) {
-            if (group.collapsed) {
+            if (props.collapsed) {
                 contentWrapperElement.current.style.height = `${
                     contentElement.current.getBoundingClientRect().height
                 }px`;
@@ -72,20 +67,12 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                     contentElement.current.getBoundingClientRect().height
                 }px`;
             }
-        } else if (group.collapsed !== previousCollapsedPropValue && !animateCollapsing) {
-            setPreviousCollapsedPropValue(group.collapsed);
+        } else if (props.collapsed !== previousCollapsedPropValue && (!animateCollapsing || !props.visible)) {
+            setPreviousCollapsedPropValue(props.collapsed);
         }
-    }, [group, previousCollapsedPropValue, animateCollapsing]);
+    }, [props.collapsed, props.visible, previousCollapsedPropValue, animateCollapsing]);
 
-    const toggleContentVisibility = useCallback(() => {
-        if (group.collapsed) {
-            accordionGroupsDispatch!({ type: "expand", group });
-        } else {
-            accordionGroupsDispatch!({ type: "collapse", group });
-        }
-    }, [group, accordionGroupsDispatch]);
-
-    if (!group.visible) {
+    if (!props.visible) {
         return null;
     }
 
@@ -97,19 +84,19 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 {
                     "widget-accordion-group-collapsed": previousCollapsedPropValue
                 },
-                group.dynamicClassName
+                props.dynamicClassName
             )}
         >
             <header
                 className={classNames("widget-accordion-group-header", {
-                    "widget-accordion-group-header-clickable": accordionGroupsDispatch,
-                    "widget-accordion-group-header-icon-left": accordionGroupsDispatch && showHeaderIcon === "left",
-                    "widget-accordion-group-header-icon-right": accordionGroupsDispatch && showHeaderIcon === "right"
+                    "widget-accordion-group-header-clickable": props.toggleCollapsed,
+                    "widget-accordion-group-header-icon-left": props.toggleCollapsed && showHeaderIcon === "left",
+                    "widget-accordion-group-header-icon-right": props.toggleCollapsed && showHeaderIcon === "right"
                 })}
-                onClick={accordionGroupsDispatch ? toggleContentVisibility : undefined}
+                onClick={props.toggleCollapsed}
             >
-                {group.header}
-                {accordionGroupsDispatch && showHeaderIcon !== "no" && showHeaderIcon
+                {props.header}
+                {props.toggleCollapsed && showHeaderIcon !== "no" && showHeaderIcon
                     ? props.generateIcon?.(previousCollapsedPropValue ?? false)
                     : null}
             </header>
@@ -119,7 +106,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 onTransitionEnd={completeCollapsing}
             >
                 <div ref={contentElement} className={"widget-accordion-group-content"}>
-                    {group.content}
+                    {props.content}
                 </div>
             </div>
         </section>
