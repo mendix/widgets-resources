@@ -29,11 +29,14 @@ export interface AccordionIconStyle extends ViewStyle {
 export const defaultAccordionStyle: AccordionStyle = {
     container: {
         flex: 1,
-        backgroundColor: "#FFF"
+        backgroundColor: "#FFF",
+        borderColor: "#CED0D3"
     },
     group: {
         container: {
-            flex: 1
+            flex: 1,
+            borderWidth: 1,
+            borderColor: "#CED0D3"
         },
         header: {
             container: {
@@ -41,7 +44,7 @@ export const defaultAccordionStyle: AccordionStyle = {
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
-                paddingVertical: 8,
+                paddingVertical: 16,
                 paddingHorizontal: 16
             },
             heading1: {
@@ -75,13 +78,15 @@ export const defaultAccordionStyle: AccordionStyle = {
                 lineHeight: 24
             },
             icon: {
+                height: 16,
+                width: 16,
                 size: 16,
                 color: "#000"
             }
         },
         content: {
             paddingTop: 8,
-            paddingBottom: 16,
+            paddingBottom: 24,
             paddingHorizontal: 16
         }
     }

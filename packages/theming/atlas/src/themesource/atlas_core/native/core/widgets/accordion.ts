@@ -17,12 +17,15 @@ export const com_mendix_widget_native_accordion_Accordion: AccordionType = {
     container: {
         // All ViewStyle properties are allowed
         flex: 1,
-        backgroundColor: accordion.container.backgroundColor
+        backgroundColor: accordion.container.backgroundColor,
+        borderColor: accordion.container.borderColor
     },
     group: {
         container: {
             // All ViewStyle properties are allowed
-            flex: 1
+            flex: 1,
+            borderWidth: 1,
+            borderColor: accordion.container.borderColor
         },
         header: {
             container: {

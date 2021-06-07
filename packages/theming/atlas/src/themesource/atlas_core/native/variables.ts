@@ -349,11 +349,12 @@ container = merge(container, custom.container || ({} as any));
 // Accordion Styles
 let accordion: VariablesAccordion = {
     container: {
-        backgroundColor: background.primary
+        backgroundColor: background.primary,
+        borderColor: border.color
     },
     groupHeader: {
         container: {
-            paddingVertical: spacing.small,
+            paddingVertical: spacing.regular,
             paddingHorizontal: spacing.regular
         },
         heading: {
@@ -361,12 +362,12 @@ let accordion: VariablesAccordion = {
         },
         icon: {
             size: font.sizeLarge,
-            color: "#000"
+            color: font.colorTitle
         }
     },
     groupContent: {
         paddingTop: spacing.small,
-        paddingBottom: spacing.regular,
+        paddingBottom: spacing.large,
         paddingHorizontal: spacing.regular
     }
 };

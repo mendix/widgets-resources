@@ -16,7 +16,7 @@ export function AnimatedCollapsibleView({ isExpanded, style, children }: Collaps
     useEffect(() => {
         Animated.timing(animatedHeight, {
             toValue: isExpanded ? fullHeight : startingHeight,
-            duration: 300,
+            duration: 200,
             easing: Easing.ease,
             useNativeDriver: false
         }).start();
