@@ -3,13 +3,23 @@ name: Run automated end-to-end tests
 on:
     push:
         branches: [master]
-    pull_request:
+    pull_request_target:
         branches: [master]
+        types: [opened, synchronize, reopened]
 
 jobs:
+    approve:
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository
+        runs-on: ubuntu-latest
+        steps:
+            - name: Approve
+              run: echo For security reasons, all forked pull requests need to be approved first before running any automated CI.
+        environment:
+            name: Integrated Forked PRs
     test:
         name: "Automated tests"
         runs-on: ubuntu-latest
+        if: jobs.approve.result == 'sucess' || jobs.approve.result == 'skipped'
 
         steps:
             - name: "Checking changed files"
