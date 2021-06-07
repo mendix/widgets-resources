@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useState, useRef } from "react";
+import { createElement, ReactElement, useState, useRef, useEffect } from "react";
 import { View } from "react-native";
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { executeAction } from "@mendix/piw-utils-internal";
@@ -27,9 +27,6 @@ export function Accordion(props: Props): ReactElement | null {
 
     const onPressGroupHeader = (group: GroupsType, index: number): void => {
         const expanded = expandedGroups.includes(index);
-        if (group.groupCollapsedAttribute?.status === ValueStatus.Available) {
-            group.groupCollapsedAttribute.setValue(expanded);
-        }
         if (expanded) {
             collapseGroup(index);
         } else {
@@ -40,20 +37,27 @@ export function Accordion(props: Props): ReactElement | null {
     };
 
     const collapseGroup = (index: number): void => {
-        setExpandedGroups(oldArray => oldArray.filter(i => i !== index));
+        // Use setTimeout to schedule setState after the current event loop and outside the current event context.
+        setTimeout(() => {
+            setExpandedGroups(oldArray => oldArray.filter(i => i !== index));
+        }, 0);
     };
     const expandGroup = (index: number): void => {
-        if (props.collapseBehavior === "singleExpanded") {
-            expandedGroups.forEach(i => {
-                if (index !== i && props.groups[i].groupCollapsedAttribute?.status === ValueStatus.Available) {
-                    props.groups[i].groupCollapsedAttribute?.setValue(true);
-                }
-            });
-            setExpandedGroups([index]);
-        } else {
-            setExpandedGroups(oldArray => [...oldArray, index]);
-        }
+        // Use setTimeout to schedule setState after the current event loop and outside the current event context.
+        setTimeout(() => {
+            setExpandedGroups(oldArray =>
+                props.collapseBehavior === "singleExpanded" ? [index] : [...oldArray, index]
+            );
+        }, 0);
     };
+
+    useEffect(() => {
+        props.groups.forEach((group, index) => {
+            if (group.groupCollapsedAttribute?.status === ValueStatus.Available) {
+                group.groupCollapsedAttribute?.setValue(!expandedGroups.includes(index));
+            }
+        });
+    }, [expandedGroups]);
 
     return (
         <View style={styles.container}>
