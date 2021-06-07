@@ -1,5 +1,5 @@
 import { ValueStatus } from "mendix";
-import { createElement, FunctionComponent } from "react";
+import { createElement, FunctionComponent, useCallback } from "react";
 import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
 import { ImageViewer as ImageViewerComponent } from "./components/ImageViewer";
 
@@ -48,6 +48,12 @@ function getImageProps({ datasource, imageIcon, imageObject, imageUrl }: ImageVi
 
 export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props => {
     const { type, image } = getImageProps(props);
+    // TODO: Handle props.onClickType === "enlarge";
+    const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
+    const sharedContentProps = {
+        style: props.style,
+        onClick: props.onClick ? onClick : undefined
+    };
     return (
         <ImageViewerComponent.Wrapper
             className={props.class}
@@ -61,10 +67,10 @@ export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props =
                     heightUnit={props.heightUnit}
                     width={props.width}
                     widthUnit={props.widthUnit}
-                    style={props.style}
+                    {...sharedContentProps}
                 />
             ) : (
-                <ImageViewerComponent.Glyphicon icon={image} size={props.iconSize} style={props.style} />
+                <ImageViewerComponent.Glyphicon icon={image} size={props.iconSize} {...sharedContentProps} />
             )}
         </ImageViewerComponent.Wrapper>
     );

@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { render } from "enzyme";
+import { mount, render } from "enzyme";
 
 import { ImageViewer, ImageViewerImage, ImageViewerGlyphicon } from "../ImageViewer";
 
@@ -50,5 +50,35 @@ describe("ImageViewer", () => {
                 </ImageViewer.Wrapper>
             )
         ).toMatchSnapshot();
+    });
+
+    it("calls the onClick when clicking on an image", () => {
+        const onClickMock = jest.fn();
+        const imageViewer = mount(
+            <ImageViewer.Wrapper responsive hasImage>
+                <ImageViewer.Image {...imageProps} onClick={onClickMock} />
+            </ImageViewer.Wrapper>
+        );
+
+        const image = imageViewer.find("img");
+        expect(image).toHaveLength(1);
+
+        image.simulate("click");
+        expect(onClickMock).toHaveBeenCalled();
+    });
+
+    it("calls the onClick when clicking on an icon", () => {
+        const onClickMock = jest.fn();
+        const imageViewer = mount(
+            <ImageViewer.Wrapper responsive hasImage>
+                <ImageViewer.Glyphicon {...glyphiconProps} onClick={onClickMock} />
+            </ImageViewer.Wrapper>
+        );
+
+        const glyphicon = imageViewer.find("span");
+        expect(glyphicon).toHaveLength(1);
+
+        glyphicon.simulate("click");
+        expect(onClickMock).toHaveBeenCalled();
     });
 });

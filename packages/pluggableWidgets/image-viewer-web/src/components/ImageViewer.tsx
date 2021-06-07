@@ -23,6 +23,7 @@ export interface ImageViewerWrapperProps {
 
 interface ImageViewerContent {
     style?: CSSProperties;
+    onClick?: () => void;
 }
 
 function Wrapper(props: ImageViewerWrapperProps): ReactElement {
@@ -47,7 +48,11 @@ export interface ImageViewerGlyphicon extends ImageViewerContent {
 
 function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
     return (
-        <span className={classNames("glyphicon", props.icon)} style={{ ...props.style, fontSize: `${props.size}px` }} />
+        <span
+            className={classNames("glyphicon", props.icon)}
+            style={{ ...props.style, fontSize: `${props.size}px` }}
+            onClick={props.onClick}
+        />
     );
 }
 
@@ -68,6 +73,7 @@ function Image(props: ImageViewerImage): ReactElement {
                 height: getStyle(props.height, props.heightUnit),
                 width: getStyle(props.width, props.widthUnit)
             }}
+            onClick={props.onClick}
         />
     );
 }
