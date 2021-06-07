@@ -1,123 +1,68 @@
-import { createElement } from "react";
-import { AccGroup } from "../../components/AccordionGroup";
-import { getAccordionGroupsReducer } from "../AccordionGroupStateReducer";
+import { getCollapsedAccordionGroupsReducer } from "../CollapsedAccordionGroupsReducer";
 
 describe("getAccordionGroupsReducer", () => {
-    let defaultGroups: AccGroup[];
+    let defaultCollapsedAccordionGroups: boolean[];
 
     describe("returned reducer in single expanded mode", () => {
-        const reducer = getAccordionGroupsReducer("single");
+        const reducer = getCollapsedAccordionGroupsReducer("single");
 
-        function getDefaultGroupsSingle(): AccGroup[] {
-            return [
-                { header: "Header1", content: <span>Content1</span>, visible: true, collapsed: true },
-                { header: "Header2", content: <span>Content2</span>, visible: false, collapsed: true },
-                { header: "Header3", content: <span>Content3</span>, visible: true, collapsed: true }
-            ];
+        function getDefaultCollapsedAccordionGroups(): boolean[] {
+            return [true, true, true];
         }
 
         beforeEach(() => {
-            defaultGroups = getDefaultGroupsSingle();
-        });
-
-        it("synchronizes new group data", () => {
-            const expectedGroups = getDefaultGroupsSingle();
-            expectedGroups[0].content = <span>NewContent1</span>;
-            expectedGroups[1].visible = true;
-
-            const receivedGroups = reducer(defaultGroups, { type: "sync", groups: expectedGroups });
-            expect(receivedGroups).toEqual(expectedGroups);
+            defaultCollapsedAccordionGroups = getDefaultCollapsedAccordionGroups();
         });
 
         it("expands a single group", () => {
-            defaultGroups[0].collapsed = false;
-            const expectedGroups = getDefaultGroupsSingle();
-            expectedGroups[1].collapsed = false;
+            defaultCollapsedAccordionGroups[0] = false;
+            const expectedGroups = getDefaultCollapsedAccordionGroups();
+            expectedGroups[1] = false;
 
-            const receivedGroups = reducer(defaultGroups, { type: "expand", group: defaultGroups[1] });
+            const receivedGroups = reducer(defaultCollapsedAccordionGroups, { type: "expand", index: 1 });
             expect(receivedGroups).toEqual(expectedGroups);
         });
 
         it("collapses a group", () => {
-            defaultGroups[2].collapsed = false;
-            const expectedGroups = getDefaultGroupsSingle();
+            defaultCollapsedAccordionGroups[2] = false;
+            const expectedGroups = getDefaultCollapsedAccordionGroups();
 
-            const receivedGroups = reducer(defaultGroups, { type: "collapse", group: defaultGroups[2] });
+            const receivedGroups = reducer(defaultCollapsedAccordionGroups, { type: "collapse", index: 2 });
             expect(receivedGroups).toEqual(expectedGroups);
         });
     });
 
     describe("returned reducer in multiple expanded mode", () => {
-        const reducer = getAccordionGroupsReducer("multiple");
+        const reducer = getCollapsedAccordionGroupsReducer("multiple");
 
-        function getDefaultGroupsMultiple(): AccGroup[] {
-            return [
-                { header: "Header1", content: <span>Content1</span>, visible: true, collapsed: false },
-                { header: "Header2", content: <span>Content2</span>, visible: false, collapsed: true },
-                { header: "Header3", content: <span>Content3</span>, visible: true, collapsed: false }
-            ];
+        function getDefaultCollapsedAccordionGroupsMultiple(): boolean[] {
+            return [false, true, false];
         }
 
         beforeEach(() => {
-            defaultGroups = getDefaultGroupsMultiple();
-        });
-
-        it("synchronizes new group data", () => {
-            const expectedGroups = getDefaultGroupsMultiple();
-            expectedGroups[0].content = <span>NewContent1</span>;
-            expectedGroups[1].visible = true;
-
-            const receivedGroups = reducer(defaultGroups, { type: "sync", groups: expectedGroups });
-            expect(receivedGroups).toMatchObject(expectedGroups);
+            defaultCollapsedAccordionGroups = getDefaultCollapsedAccordionGroupsMultiple();
         });
 
         it("expands an extra group", () => {
-            defaultGroups[2].collapsed = true;
-            const expectedGroups = getDefaultGroupsMultiple();
+            defaultCollapsedAccordionGroups[2] = true;
+            const expectedGroups = getDefaultCollapsedAccordionGroupsMultiple();
 
-            const receivedGroups = reducer(defaultGroups, { type: "expand", group: defaultGroups[2] });
+            const receivedGroups = reducer(defaultCollapsedAccordionGroups, {
+                type: "expand",
+                index: 2
+            });
             expect(receivedGroups).toEqual(expectedGroups);
         });
 
         it("collapses a group", () => {
-            const expectedGroups = getDefaultGroupsMultiple();
-            expectedGroups[2].collapsed = true;
+            const expectedGroups = getDefaultCollapsedAccordionGroupsMultiple();
+            expectedGroups[2] = true;
 
-            const receivedGroups = reducer(defaultGroups, { type: "collapse", group: defaultGroups[2] });
-            expect(receivedGroups).toEqual(expectedGroups);
-        });
-
-        it("ignores an invalid group", () => {
-            const receivedGroups = reducer(defaultGroups, {
+            const receivedGroups = reducer(defaultCollapsedAccordionGroups, {
                 type: "collapse",
-                group: { header: "Non existent group", content: <span>Content</span>, visible: true, collapsed: true }
+                index: 2
             });
-            expect(receivedGroups).toEqual(defaultGroups);
-        });
-    });
-
-    describe("returned reducer in all expanded mode", () => {
-        const reducer = getAccordionGroupsReducer("all");
-
-        function getDefaultGroupsAllExpanded(): AccGroup[] {
-            return [
-                { header: "Header1", content: <span>Content1</span>, visible: true, collapsed: false },
-                { header: "Header2", content: <span>Content2</span>, visible: false, collapsed: false },
-                { header: "Header3", content: <span>Content3</span>, visible: true, collapsed: false }
-            ];
-        }
-
-        beforeEach(() => {
-            defaultGroups = getDefaultGroupsAllExpanded();
-        });
-
-        it("synchronizes new group data", () => {
-            const expectedGroups = getDefaultGroupsAllExpanded();
-            expectedGroups[0].content = <span>NewContent1</span>;
-            expectedGroups[1].visible = true;
-
-            const receivedGroups = reducer(defaultGroups, { type: "sync", groups: expectedGroups });
-            expect(receivedGroups).toMatchObject(expectedGroups);
+            expect(receivedGroups).toEqual(expectedGroups);
         });
     });
 });
