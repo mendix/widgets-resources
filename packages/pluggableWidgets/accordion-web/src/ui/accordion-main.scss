@@ -40,13 +40,7 @@ $header-color-hover: #264ae5;
         .widget-accordion-group-content-wrapper {
             height: 0;
             overflow: hidden;
-            transition: height 0.2s ease;
-        }
-    }
-
-    &.widget-accordion-group-collapsing {
-        .widget-accordion-group-content-wrapper {
-            transition-delay: 50ms;
+            transition: height 0.2s ease 50ms;
         }
     }
 
@@ -54,6 +48,10 @@ $header-color-hover: #264ae5;
         padding: 16px;
         display: flex;
         align-items: center;
+
+        > :first-child {
+            flex: 1;
+        }
 
         > :is(h1, h2, h3, h4, h5, h6) {
             font-size: 18px;
@@ -71,11 +69,16 @@ $header-color-hover: #264ae5;
 
         .widget-accordion-group-header-icon {
             fill: $header-color;
-            margin-left: auto;
             transform: rotate(-180deg);
 
             &.widget-accordion-group-header-icon-animate {
-                transition: transform 0.2s ease-in-out;
+                transition: transform 0.2s ease-in-out 50ms;
+            }
+        }
+
+        &.widget-accordion-group-header-icon-right {
+            .widget-accordion-group-header-icon {
+                margin-left: 16px;
             }
         }
 
@@ -108,8 +111,7 @@ $header-color-hover: #264ae5;
             flex-direction: row-reverse;
 
             .widget-accordion-group-header-icon {
-                margin-right: auto;
-                margin-left: 0;
+                margin-right: 16px;
                 transform: rotate(180deg);
             }
         }

@@ -63,9 +63,14 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             } else {
                 rootElement.current.classList.add("widget-accordion-group-expanding");
                 rootElement.current.classList.remove("widget-accordion-group-collapsed");
-                contentWrapperElement.current.style.height = `${
-                    contentElement.current.getBoundingClientRect().height
-                }px`;
+
+                setTimeout(() => {
+                    if (contentWrapperElement.current && contentElement.current) {
+                        contentWrapperElement.current.style.height = `${
+                            contentElement.current.getBoundingClientRect().height
+                        }px`;
+                    }
+                }, 50);
             }
         } else if (props.collapsed !== previousCollapsedPropValue && (!animateCollapsing || !props.visible)) {
             setPreviousCollapsedPropValue(props.collapsed);
