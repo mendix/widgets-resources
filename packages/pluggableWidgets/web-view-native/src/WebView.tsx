@@ -20,13 +20,13 @@ export class WebView extends Component<Props> {
     private canGoBack = false;
 
     componentDidMount(): void {
-        if (Platform.OS === "android" && this.props.propagateBackbutton) {
+        if (Platform.OS === "android" && this.props.historyNavigation) {
             BackHandler.addEventListener("hardwareBackPress", this.onAndroidBackPressHandler);
         }
     }
 
     componentWillUnmount(): void {
-        if (Platform.OS === "android" && this.props.propagateBackbutton) {
+        if (Platform.OS === "android" && this.props.historyNavigation) {
             BackHandler.removeEventListener("hardwareBackPress", this.onAndroidBackPressHandler);
         }
     }
@@ -68,7 +68,7 @@ export class WebView extends Component<Props> {
                         }
                         return true;
                     }}
-                    allowsBackForwardNavigationGestures={this.props.allowsBackForwardNavigationGestures}
+                    allowsBackForwardNavigationGestures={this.props.historyNavigation}
                     onNavigationStateChange={navState => {
                         this.canGoBack = navState.canGoBack;
                     }}

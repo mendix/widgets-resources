@@ -15,8 +15,7 @@ describe("WebView", () => {
             url: dynamicValue("https://mendix.com"),
             userAgent: "",
             openLinksExternally: false,
-            allowsBackForwardNavigationGestures: false,
-            propagateBackbutton: false
+            historyNavigation: false
         };
     });
 
@@ -51,5 +50,10 @@ describe("WebView", () => {
         fireEvent(component.UNSAFE_getByType(RNWebView), "error");
 
         expect(onErrorAction.execute).toHaveBeenCalledTimes(1);
+    });
+
+    it("renders a web view with back button and gestures to control history", () => {
+        const component = render(<WebView {...defaultProps} historyNavigation />);
+        expect(component.toJSON()).toMatchSnapshot();
     });
 });
