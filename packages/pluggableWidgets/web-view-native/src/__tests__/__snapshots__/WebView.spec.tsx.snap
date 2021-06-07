@@ -22,6 +22,7 @@ exports[`WebView renders a web view when a url is provided 1`] = `
     }
   >
     <RNCWebView
+      allowsBackForwardNavigationGestures={false}
       cacheEnabled={true}
       injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
       injectedJavaScriptForMainFrameOnly={true}
@@ -36,6 +37,7 @@ exports[`WebView renders a web view when a url is provided 1`] = `
       onLoadingProgress={[Function]}
       onLoadingStart={[Function]}
       onMessage={[Function]}
+      onNavigationStateChange={[Function]}
       onShouldStartLoadWithRequest={[Function]}
       source={
         Object {
@@ -87,6 +89,7 @@ exports[`WebView renders a web view when html content is provided 1`] = `
     }
   >
     <RNCWebView
+      allowsBackForwardNavigationGestures={false}
       cacheEnabled={true}
       injectedJavaScriptBeforeContentLoadedForMainFrameOnly={true}
       injectedJavaScriptForMainFrameOnly={true}
@@ -101,6 +104,7 @@ exports[`WebView renders a web view when html content is provided 1`] = `
       onLoadingProgress={[Function]}
       onLoadingStart={[Function]}
       onMessage={[Function]}
+      onNavigationStateChange={[Function]}
       onShouldStartLoadWithRequest={[Function]}
       source={
         Object {
