@@ -4,7 +4,7 @@ import AccordionGroup, { AccordionGroupProps } from "./AccordionGroup";
 import {
     CollapsedAccordionGroupsReducerAction,
     getCollapsedAccordionGroupsReducer
-} from "../utils/AccordionGroupStateReducer";
+} from "../utils/CollapsedAccordionGroupsReducer";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 import classNames from "classnames";
 
