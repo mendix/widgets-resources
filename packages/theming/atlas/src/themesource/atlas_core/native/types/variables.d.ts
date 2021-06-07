@@ -338,6 +338,7 @@ export interface VariablesLayoutgrid {
 export interface VariablesAccordion {
     container: {
         backgroundColor: string;
+        borderColor: string;
     };
     groupHeader: {
         container: {
