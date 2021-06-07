@@ -36,6 +36,10 @@ export function getProperties(
         hidePropertiesIn(defaultProperties, values, ["iconSize"]);
     }
 
+    if (values.onClickType !== "action") {
+        hidePropertiesIn(defaultProperties, values, ["onClick"]);
+    }
+
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
