@@ -60,7 +60,7 @@ describe("Table", () => {
                 alignment: "left" as const
             }
         ];
-        const component = shallow(<Table {...mockTableProps()} columns={columns} columnsFilterable />);
+        const component = shallow(<Table {...mockTableProps()} columnsFilterable columns={columns} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -97,7 +97,13 @@ describe("Table", () => {
             }
         ];
 
-        const component = shallow(<Table {...mockTableProps()} columns={columns} />);
+        const component = shallow(
+            <Table
+                {...mockTableProps()}
+                columns={columns}
+                cellRenderer={(renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header)}
+            />
+        );
 
         expect(component).toMatchSnapshot();
     });

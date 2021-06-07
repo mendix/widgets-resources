@@ -1,7 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { ColumnSelector, ColumnSelectorProps } from "../ColumnSelector";
-import { ColumnInstance } from "react-table";
+import { ColumnProperty } from "../Table";
 
 describe("Column Selector", () => {
     it("renders the structure correctly", () => {
@@ -11,19 +11,19 @@ describe("Column Selector", () => {
     });
 });
 
-function mockColumnSelectorProps(): ColumnSelectorProps<object> {
+function mockColumnSelectorProps(): ColumnSelectorProps {
     return {
-        allColumns: [
+        columns: [
             {
                 id: "id",
-                Header: "Test",
-                isVisible: false,
+                header: "Test",
                 canHide: false,
                 canDrag: false,
                 canResize: false,
                 canSort: false
             }
-        ] as Array<ColumnInstance<object>>,
+        ] as ColumnProperty[],
+        hiddenColumns: [],
         setHiddenColumns: jest.fn()
     };
 }

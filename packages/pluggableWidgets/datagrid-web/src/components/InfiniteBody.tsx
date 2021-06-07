@@ -9,14 +9,7 @@ interface InfiniteBodyProps {
     style?: CSSProperties;
 }
 
-export function InfiniteBody({
-    children,
-    hasMoreItems,
-    setPage,
-    isInfinite,
-    style,
-    ...rest
-}: InfiniteBodyProps): ReactElement {
+export function InfiniteBody({ children, hasMoreItems, setPage, isInfinite, style }: InfiniteBodyProps): ReactElement {
     const [bodySize, setBodySize] = useState(0);
 
     const trackScrolling = useCallback(
@@ -45,10 +38,10 @@ export function InfiniteBody({
 
     return (
         <div
-            {...rest}
-            className={classNames("table-content", isInfinite ? "infinite-loading" : "")}
             ref={calculateBodyHeight}
+            className={classNames("table-content", isInfinite ? "infinite-loading" : "")}
             onScroll={isInfinite ? trackScrolling : undefined}
+            role="rowgroup"
             style={isInfinite && bodySize > 0 ? { ...style, maxHeight: bodySize } : style}
         >
             {children}

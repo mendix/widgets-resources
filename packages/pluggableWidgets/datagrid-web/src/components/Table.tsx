@@ -1,14 +1,23 @@
-import { createElement, CSSProperties, Fragment, ReactElement, ReactNode, useEffect, useMemo, useState } from "react";
+import {
+    createElement,
+    CSSProperties,
+    ReactElement,
+    ReactNode,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState
+} from "react";
 import { ColumnSelector } from "./ColumnSelector";
 import { Pagination } from "./Pagination";
 import { Header } from "./Header";
 import { InfiniteBody } from "./InfiniteBody";
-import { ColumnWithStrictAccessor, IdType, Row, SortingRule, useColumnOrder, useTable } from "react-table";
-import { ColumnsPreviewType } from "../../typings/DatagridProps";
+import { AlignmentEnum, ColumnsPreviewType, WidthEnum } from "../../typings/DatagridProps";
 import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
-import { useSettings } from "../utils/settings";
+import { SortingRule, useSettings } from "../utils/settings";
+import { ColumnResizer } from "./ColumnResizer";
 
 export type TableColumn = Omit<
     ColumnsPreviewType,
@@ -52,24 +61,38 @@ export interface ColumnWidth {
     [key: string]: number | undefined;
 }
 
+export interface ColumnProperty {
+    id: string;
+    alignment: AlignmentEnum;
+    header: string;
+    hidden: boolean;
+    canHide: boolean;
+    canDrag: boolean;
+    canResize: boolean;
+    canSort: boolean;
+    customFilter: ReactNode;
+    width: WidthEnum;
+    weight: number;
+}
+
 export function Table<T>(props: TableProps<T>): ReactElement {
     const isInfinite = !props.paging;
     const [isDragging, setIsDragging] = useState(false);
     const [dragOver, setDragOver] = useState("");
-    const [columnOrder, setColumnOrder] = useState<Array<IdType<object>>>([]);
-    const [hiddenColumns, setHiddenColumns] = useState<Array<IdType<object>>>(
+    const [columnOrder, setColumnOrder] = useState<string[]>([]);
+    const [hiddenColumns, setHiddenColumns] = useState<string[]>(
         (props.columns
             .map((c, i) =>
                 props.columnsHidable && c.hidable === "hidden" && !props.preview ? i.toString() : undefined
             )
             .filter(Boolean) as string[]) ?? []
     );
-    const [sortBy, setSortBy] = useState<Array<SortingRule<object>>>([]);
+    const [sortBy, setSortBy] = useState<SortingRule[]>([]);
     const [columnsWidth, setColumnsWidth] = useState<ColumnWidth>(
         Object.fromEntries(props.columns.map((_c, index) => [index.toString(), undefined]))
     );
 
-    useSettings(
+    const { updateSettings } = useSettings(
         props.settings,
         props.onSettingsChange,
         props.columns,
@@ -83,6 +106,8 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         setColumnsWidth
     );
 
+    useEffect(() => updateSettings(), [columnOrder, hiddenColumns, sortBy]);
+
     useEffect(() => {
         const [sortProperties] = sortBy;
         if (sortProperties && "id" in sortProperties && "desc" in sortProperties) {
@@ -95,13 +120,13 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         }
     }, [sortBy, props.setSortParameters]);
 
-    const tableColumns: Array<ColumnWithStrictAccessor<{ item: T }>> = useMemo(
+    const tableColumns: ColumnProperty[] = useMemo(
         () =>
             props.columns.map((column, index) => ({
                 id: index.toString(),
                 accessor: "item",
                 alignment: column.alignment,
-                Header: column.header,
+                header: column.header,
                 hidden: column.hidable === "hidden",
                 canHide: column.hidable !== "no",
                 canDrag: column.draggable,
@@ -117,98 +142,55 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                           index
                       )
                     : null,
-                disableResizing: !column.resizable,
-                sortType: (rowA: Row<{ item: T }>, rowB: Row<{ item: T }>, columnId: IdType<object>): number => {
-                    const valueA = props.valueForSort(rowA.values[columnId], Number(columnId)) || "";
-                    const valueB = props.valueForSort(rowB.values[columnId], Number(columnId)) || "";
-                    // Values should always be sorted in ASC mode https://github.com/tannerlinsley/react-table/pull/2504
-                    if (typeof valueA === "string" && typeof valueB === "string") {
-                        return valueA.localeCompare(valueB);
-                    } else if (typeof valueA === "boolean" && typeof valueB === "boolean") {
-                        // True first
-                        return valueA === valueB ? 0 : valueA ? -1 : 1;
-                    } else if (valueA instanceof Date && valueB instanceof Date) {
-                        return (valueA as Date).getTime() - (valueB as Date).getTime();
-                    }
-                    return Number(valueA) - Number(valueB);
-                },
-                Cell: ({ cell, value, rowIndex }) =>
-                    props.cellRenderer(
-                        (children, className, onClick) => {
-                            return (
-                                <div
-                                    {...cell.getCellProps()}
-                                    className={classNames("td", { "td-borders": rowIndex === 0 }, className, {
-                                        clickable: !!onClick,
-                                        "hidden-column-preview":
-                                            props.preview && props.columnsHidable && cell.column.hidden
-                                    })}
-                                    onClick={onClick}
-                                    onKeyDown={
-                                        onClick
-                                            ? e => {
-                                                  if (e.key === "Enter" || e.key === " ") {
-                                                      e.preventDefault();
-                                                      onClick();
-                                                  }
-                                              }
-                                            : undefined
-                                    }
-                                    role={onClick ? "button" : undefined}
-                                    tabIndex={onClick ? 0 : undefined}
-                                >
-                                    {children}
-                                </div>
-                            );
-                        },
-                        value,
-                        index
-                    ),
                 width: column.width,
                 weight: column.size ?? 1
             })),
-        [
-            props.columns,
-            props.cellRenderer,
-            props.filterRenderer,
-            props.valueForSort,
-            props.columnsFilterable,
-            props.columnsHidable,
-            props.preview,
-            isDragging
-        ]
+        [props.columns, props.filterRenderer, props.columnsFilterable, isDragging]
     );
 
-    const {
-        getTableProps,
-        headerGroups,
-        rows,
-        prepareRow,
-        getTableBodyProps,
-        allColumns,
-        setColumnOrder: setOrder,
-        visibleColumns
-    } = useTable<{ item: T }>(
-        {
-            columns: tableColumns,
-            data: useMemo(() => props.data.map(item => ({ item })), [props.data]),
-            initialState: {
-                columnOrder,
-                hiddenColumns
-            },
-            useControlledState: state =>
-                useMemo(
-                    () => ({
-                        ...state,
-                        columnOrder,
-                        hiddenColumns,
-                        sortBy
-                    }),
-                    [state, columnOrder, hiddenColumns, sortBy]
-                )
-        },
-        useColumnOrder
+    const visibleColumns = useMemo(
+        () => tableColumns.filter(c => !hiddenColumns.includes(c.id)).sort((a, b) => sortColumns(columnOrder, a, b)),
+        [tableColumns, hiddenColumns, columnOrder]
     );
+
+    const renderCell = useCallback(
+        (column: ColumnProperty, value: T, rowIndex: number) =>
+            visibleColumns.find(c => c.id === column.id) || props.preview
+                ? props.cellRenderer(
+                      (children, className, onClick) => {
+                          return (
+                              <div
+                                  key={`row_${rowIndex}_cell_${column.id}`}
+                                  className={classNames("td", { "td-borders": rowIndex === 0 }, className, {
+                                      clickable: !!onClick,
+                                      "hidden-column-preview": props.preview && props.columnsHidable && column.hidden
+                                  })}
+                                  onClick={onClick}
+                                  onKeyDown={
+                                      onClick
+                                          ? e => {
+                                                if (e.key === "Enter" || e.key === " ") {
+                                                    e.preventDefault();
+                                                    onClick();
+                                                }
+                                            }
+                                          : undefined
+                                  }
+                                  role={onClick ? "button" : undefined}
+                                  tabIndex={onClick ? 0 : undefined}
+                              >
+                                  {children}
+                              </div>
+                          );
+                      },
+                      value,
+                      Number(column.id)
+                  )
+                : null,
+        [props.cellRenderer, props.columnsHidable, props.preview, visibleColumns]
+    );
+
+    const rows = useMemo(() => props.data.map(item => ({ item })), [props.data]);
 
     const pagination = props.paging ? (
         <Pagination
@@ -247,63 +229,60 @@ export function Table<T>(props: TableProps<T>): ReactElement {
 
     return (
         <div className={props.className} style={props.styles}>
-            <div {...getTableProps()} className="table">
+            <div className="table" role="table">
                 <div className="table-header">{props.pagingPosition === "top" && pagination}</div>
                 <InfiniteBody
-                    isInfinite={isInfinite}
                     hasMoreItems={props.hasMoreItems}
+                    isInfinite={isInfinite}
                     setPage={props.setPage}
                     style={cssGridStyles}
-                    {...getTableBodyProps()}
                 >
-                    {headerGroups.map((headerGroup, index: number) => (
-                        <Fragment key={`headers_row_${index}`}>
-                            {headerGroup.headers.map((column, index) =>
-                                props.headerWrapperRenderer(
-                                    index,
-                                    <Header
-                                        className={`align-column-${column.alignment}`}
-                                        column={column}
-                                        key={`headers_column_${index}`}
-                                        draggable={props.columnsDraggable}
-                                        dragOver={dragOver}
-                                        filterable={props.columnsFilterable}
-                                        hidable={props.columnsHidable}
-                                        isDragging={isDragging}
-                                        preview={props.preview}
-                                        resizable={props.columnsResizable}
-                                        setColumnOrder={(newOrder: Array<IdType<object>>) => {
-                                            setOrder(newOrder);
-                                            setColumnOrder(newOrder);
-                                        }}
+                    {visibleColumns.map(column =>
+                        props.headerWrapperRenderer(
+                            Number(column.id),
+                            <Header
+                                key={`headers_column_${column.id}`}
+                                className={`align-column-${column.alignment}`}
+                                column={column}
+                                draggable={props.columnsDraggable}
+                                dragOver={dragOver}
+                                filterable={props.columnsFilterable}
+                                hidable={props.columnsHidable}
+                                isDragging={isDragging}
+                                preview={props.preview}
+                                resizable={props.columnsResizable}
+                                resizer={
+                                    <ColumnResizer
+                                        onResizeEnds={updateSettings}
                                         setColumnWidth={(width: number) =>
                                             setColumnsWidth(prev => {
                                                 prev[column.id] = width;
                                                 return { ...prev };
                                             })
                                         }
-                                        setDragOver={setDragOver}
-                                        setIsDragging={setIsDragging}
-                                        setSortBy={setSortBy}
-                                        sortBy={sortBy}
-                                        sortable={props.columnsSortable}
-                                        visibleColumns={visibleColumns}
                                     />
-                                )
-                            )}
-                            {props.columnsHidable && (
-                                <ColumnSelector allColumns={allColumns} setHiddenColumns={setHiddenColumns} />
-                            )}
-                        </Fragment>
-                    ))}
+                                }
+                                setColumnOrder={(newOrder: string[]) => setColumnOrder(newOrder)}
+                                setDragOver={setDragOver}
+                                setIsDragging={setIsDragging}
+                                setSortBy={setSortBy}
+                                sortable={props.columnsSortable}
+                                sortBy={sortBy}
+                                visibleColumns={visibleColumns}
+                            />
+                        )
+                    )}
+                    {props.columnsHidable && (
+                        <ColumnSelector
+                            columns={tableColumns}
+                            hiddenColumns={hiddenColumns}
+                            setHiddenColumns={setHiddenColumns}
+                        />
+                    )}
                     {rows.map((row, rowIndex) => {
-                        prepareRow(row);
                         return (
-                            <div
-                                className={classNames("tr", props.rowClass?.(row.original.item))}
-                                key={`row_${rowIndex}`}
-                            >
-                                {row.cells.map((cell, cellIndex) => cell.render("Cell", { key: cellIndex, rowIndex }))}
+                            <div key={`row_${rowIndex}`} className={classNames("tr", props.rowClass?.(row.item))}>
+                                {visibleColumns.map(cell => renderCell(cell, row.item, rowIndex))}
                                 {props.columnsHidable && (
                                     <div
                                         className={classNames("td column-selector", { "td-borders": rowIndex === 0 })}
@@ -329,4 +308,16 @@ export function Table<T>(props: TableProps<T>): ReactElement {
             </div>
         </div>
     );
+}
+
+function sortColumns(columnsOrder: string[], columnA: ColumnProperty, columnB: ColumnProperty): number {
+    let columnAValue = columnsOrder.findIndex(c => c === columnA.id);
+    let columnBValue = columnsOrder.findIndex(c => c === columnB.id);
+    if (columnAValue < 0) {
+        columnAValue = Number(columnA.id);
+    }
+    if (columnBValue < 0) {
+        columnBValue = Number(columnB.id);
+    }
+    return columnAValue < columnBValue ? -1 : columnAValue > columnBValue ? 1 : 0;
 }
