@@ -1,32 +1,37 @@
 import { createElement } from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import AccordionGroup, { AccGroup, AccordionGroupProps } from "../AccordionGroup";
+import AccordionGroup, { AccordionGroupProps } from "../AccordionGroup";
 
 describe("AccordionGroup", () => {
-    let defaultGroup: AccGroup;
     let defaultAccordionGroupProps: AccordionGroupProps;
 
     beforeEach(() => {
-        defaultGroup = { header: "header", content: <span>content</span>, collapsed: true, visible: true };
-        defaultAccordionGroupProps = { group: defaultGroup, showHeaderIcon: "right", animateHeaderIcon: true };
+        defaultAccordionGroupProps = {
+            header: "header",
+            content: <span>content</span>,
+            collapsed: true,
+            visible: true,
+            // dynamicClassName: "class-name",
+            // animateCollapsing: true,
+            // generateIcon?: (collapsed: boolean) => ReactElement;
+            showHeaderIcon: "right"
+        };
     });
 
     it("doesn't render when the group isn't visible", () => {
-        const accordionGroup = shallow(
-            <AccordionGroup {...defaultAccordionGroupProps} group={{ ...defaultGroup, visible: false }} />
-        );
+        const accordionGroup = shallow(<AccordionGroup {...defaultAccordionGroupProps} visible={false} />);
 
         expect(accordionGroup).toMatchSnapshot();
     });
 
-    describe("with dispatch", () => {
+    describe("with toggleCollapsed", () => {
         function mountAccordionGroupWithDispatch(
             accordionGroupProps: AccordionGroupProps,
-            dispatch?: () => void
+            toggleCollapsed?: () => void
         ): ShallowWrapper {
-            const resDispatch = dispatch ?? jest.fn();
+            const resToggleCollapsed = toggleCollapsed ?? jest.fn();
 
-            return shallow(<AccordionGroup {...accordionGroupProps} accordionGroupsDispatch={resDispatch} />);
+            return shallow(<AccordionGroup {...accordionGroupProps} toggleCollapsed={resToggleCollapsed} />);
         }
 
         it("renders correctly when the group is visible and collapsed", () => {
@@ -38,7 +43,7 @@ describe("AccordionGroup", () => {
         it("renders correctly when the group is visible and expanded", () => {
             const accordionGroup = mountAccordionGroupWithDispatch({
                 ...defaultAccordionGroupProps,
-                group: { ...defaultGroup, collapsed: false }
+                collapsed: false
             });
 
             expect(accordionGroup).toMatchSnapshot();
@@ -47,72 +52,60 @@ describe("AccordionGroup", () => {
         it("renders correctly when the group is visible and gets expanded", () => {
             const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps);
 
-            accordionGroup.setProps({ group: { ...defaultGroup, collapsed: false } });
-            // expect(accordionGroup.find(".widget-accordion-group-content-wrapper")).toHaveLength(1);
-            // accordionGroup.find(".widget-accordion-group-content-wrapper").simulate("transitionEnd");
-            // accordionGroup.update();
-            // TODO wait on the animation to be completed
+            accordionGroup.setProps({ collapsed: false });
             expect(accordionGroup).toMatchSnapshot();
         });
 
         it("renders correctly when the group is visible and gets collapsed", () => {
             const accordionGroup = mountAccordionGroupWithDispatch({
                 ...defaultAccordionGroupProps,
-                group: { ...defaultGroup, collapsed: false }
+                collapsed: false
             });
 
-            accordionGroup.setProps({ group: { ...defaultGroup, collapsed: true } });
-            // TODO wait on the animation to be completed
+            accordionGroup.setProps({ collapsed: true });
             expect(accordionGroup).toMatchSnapshot();
         });
 
         it("renders correctly when the group becomes visible and is collapsed", () => {
             const accordionGroup = mountAccordionGroupWithDispatch({
                 ...defaultAccordionGroupProps,
-                group: { ...defaultGroup, visible: false }
+                visible: false
             });
 
-            accordionGroup.setProps({ group: { ...defaultGroup, visible: true } });
+            accordionGroup.setProps({ visible: true });
             expect(accordionGroup).toMatchSnapshot();
         });
 
         it("renders correctly when the group becomes visible and is expanded", () => {
-            const group = { ...defaultGroup, collapsed: false, visible: false };
-
             const accordionGroup = mountAccordionGroupWithDispatch({
                 ...defaultAccordionGroupProps,
-                group
+                collapsed: false,
+                visible: false
             });
 
-            accordionGroup.setProps({ group: { ...group, visible: true } });
+            accordionGroup.setProps({ visible: true });
             expect(accordionGroup).toMatchSnapshot();
         });
 
-        it("calls the dispatch from AccordionGroupsDispatch when clicking the header to expand", () => {
-            const dispatchMock = jest.fn();
+        it("calls toggleCollapsed when clicking the header to expand", () => {
+            const toggleCollapsedMock = jest.fn();
 
-            const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps, dispatchMock);
+            const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps, toggleCollapsedMock);
 
             accordionGroup.find("header").simulate("click");
-            expect(dispatchMock).toHaveBeenCalledTimes(1);
-            expect(dispatchMock).toHaveBeenCalledWith({ type: "expand", group: defaultGroup });
+            expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
         });
 
-        it("calls the dispatch from AccordionGroupsDispatch when clicking the header to collapse", () => {
-            const group = { ...defaultGroup, collapsed: false };
-            const dispatchMock = jest.fn();
+        it("calls toggleCollapsed when clicking the header to collapse", () => {
+            const toggleCollapsedMock = jest.fn();
 
             const accordionGroup = mountAccordionGroupWithDispatch(
-                { ...defaultAccordionGroupProps, group },
-                dispatchMock
+                { ...defaultAccordionGroupProps, collapsed: false },
+                toggleCollapsedMock
             );
 
             accordionGroup.find("header").simulate("click");
-            expect(dispatchMock).toHaveBeenCalledTimes(1);
-            expect(dispatchMock).toHaveBeenCalledWith({
-                type: "collapse",
-                group
-            });
+            expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
         });
 
         it("applies the correct class when the header icon is aligned right", () => {
@@ -142,46 +135,21 @@ describe("AccordionGroup", () => {
 
             expect(accordionGroup).toMatchSnapshot();
         });
-
-        it("applies the correct class when the header icon needs to animate", () => {
-            const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps);
-
-            expect(accordionGroup.find(".widget-accordion-group-header-icon").prop("className")).toContain(
-                "widget-accordion-group-header-icon-animate"
-            );
-        });
-
-        it("applies no animate class when the header icon doesn't need to animate", () => {
-            const accordionGroup = mountAccordionGroupWithDispatch({
-                ...defaultAccordionGroupProps,
-                animateHeaderIcon: false
-            });
-
-            expect(accordionGroup.find(".widget-accordion-group-header-icon").prop("className")).not.toContain(
-                "widget-accordion-group-header-icon-animate"
-            );
-        });
     });
 
-    describe("without dispatch", () => {
+    describe("without toggleCollapsed", () => {
         it("displays the content when the group is visible", () => {
-            const accordionGroup = shallow(
-                <AccordionGroup {...defaultAccordionGroupProps} group={{ ...defaultGroup, collapsed: false }} />
-            );
+            const accordionGroup = shallow(<AccordionGroup {...defaultAccordionGroupProps} collapsed={false} />);
 
             expect(accordionGroup).toMatchSnapshot();
         });
 
         it("displays the content when the group becomes visible", () => {
-            const group = { ...defaultGroup, visible: false, collapsed: false };
             const accordionGroup = shallow(
-                <AccordionGroup
-                    {...defaultAccordionGroupProps}
-                    group={{ ...defaultGroup, visible: false, collapsed: false }}
-                />
+                <AccordionGroup {...defaultAccordionGroupProps} visible={false} collapsed={false} />
             );
 
-            accordionGroup.setProps({ group: { ...group, visible: true } });
+            accordionGroup.setProps({ visible: true });
             expect(accordionGroup).toMatchSnapshot();
         });
     });
