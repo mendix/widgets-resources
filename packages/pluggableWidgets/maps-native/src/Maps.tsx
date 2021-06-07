@@ -157,9 +157,7 @@ export class Maps extends Component<Props, State> {
     private async parseMarkers(): Promise<void> {
         const markers = [
             ...this.props.markers.map(convertStaticModeledMarker),
-            ...this.props.dynamicMarkers
-                .map(convertDynamicModeledMarker)
-                .reduce((prev, current) => [...prev, ...current], [])
+            ...this.props.dynamicMarkers.flatMap(convertDynamicModeledMarker)
         ];
 
         const parsedMarkers = await Promise.all(
