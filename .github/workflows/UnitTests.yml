@@ -15,6 +15,7 @@ jobs:
             - name: "Checking changed files"
               id: files
               uses: softprops/diffset@v1
+              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
               with:
                 global_files: |
                   !{packages/**/*,configs/e2e/*.json}
