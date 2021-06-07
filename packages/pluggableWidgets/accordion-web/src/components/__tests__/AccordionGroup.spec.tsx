@@ -11,9 +11,9 @@ describe("AccordionGroup", () => {
             content: <span>content</span>,
             collapsed: true,
             visible: true,
-            // dynamicClassName: "class-name",
-            // animateCollapsing: true,
-            // generateIcon?: (collapsed: boolean) => ReactElement;
+            dynamicClassName: "class-name",
+            // TODO animateCollapsing: true,
+            generateIcon: jest.fn(),
             showHeaderIcon: "right"
         };
     });
@@ -21,6 +21,7 @@ describe("AccordionGroup", () => {
     it("doesn't render when the group isn't visible", () => {
         const accordionGroup = shallow(<AccordionGroup {...defaultAccordionGroupProps} visible={false} />);
 
+        expect(defaultAccordionGroupProps.generateIcon).not.toHaveBeenCalled();
         expect(accordionGroup).toMatchSnapshot();
     });
 
@@ -37,6 +38,8 @@ describe("AccordionGroup", () => {
         it("renders correctly when the group is visible and collapsed", () => {
             const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps);
 
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(1);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(true);
             expect(accordionGroup).toMatchSnapshot();
         });
 
@@ -46,13 +49,19 @@ describe("AccordionGroup", () => {
                 collapsed: false
             });
 
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(1);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(false);
             expect(accordionGroup).toMatchSnapshot();
         });
 
         it("renders correctly when the group is visible and gets expanded", () => {
             const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(1);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(true);
 
             accordionGroup.setProps({ collapsed: false });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(3);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(false);
             expect(accordionGroup).toMatchSnapshot();
         });
 
@@ -61,8 +70,12 @@ describe("AccordionGroup", () => {
                 ...defaultAccordionGroupProps,
                 collapsed: false
             });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(1);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(false);
 
             accordionGroup.setProps({ collapsed: true });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(3);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(true);
             expect(accordionGroup).toMatchSnapshot();
         });
 
@@ -71,8 +84,11 @@ describe("AccordionGroup", () => {
                 ...defaultAccordionGroupProps,
                 visible: false
             });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(0);
 
             accordionGroup.setProps({ visible: true });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(1);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(true);
             expect(accordionGroup).toMatchSnapshot();
         });
 
@@ -82,8 +98,11 @@ describe("AccordionGroup", () => {
                 collapsed: false,
                 visible: false
             });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(0);
 
             accordionGroup.setProps({ visible: true });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(1);
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledWith(false);
             expect(accordionGroup).toMatchSnapshot();
         });
 
@@ -141,6 +160,7 @@ describe("AccordionGroup", () => {
         it("displays the content when the group is visible", () => {
             const accordionGroup = shallow(<AccordionGroup {...defaultAccordionGroupProps} collapsed={false} />);
 
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(0);
             expect(accordionGroup).toMatchSnapshot();
         });
 
@@ -150,6 +170,7 @@ describe("AccordionGroup", () => {
             );
 
             accordionGroup.setProps({ visible: true });
+            expect(defaultAccordionGroupProps.generateIcon).toHaveBeenCalledTimes(0);
             expect(accordionGroup).toMatchSnapshot();
         });
     });

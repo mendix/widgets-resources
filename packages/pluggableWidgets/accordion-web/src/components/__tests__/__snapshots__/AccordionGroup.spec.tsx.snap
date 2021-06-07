@@ -4,7 +4,7 @@ exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
 
 exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to not visible 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable"
@@ -29,7 +29,7 @@ exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to
 
 exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is collapsed 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
@@ -54,7 +54,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
 
 exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is expanded 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
@@ -79,7 +79,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
 
 exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and collapsed 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
@@ -104,7 +104,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 
 exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and expanded 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
@@ -129,7 +129,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 
 exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets collapsed 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
@@ -154,7 +154,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 
 exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets expanded 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
@@ -179,7 +179,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 
 exports[`AccordionGroup without toggleCollapsed displays the content when the group becomes visible 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header"
@@ -203,7 +203,7 @@ exports[`AccordionGroup without toggleCollapsed displays the content when the gr
 
 exports[`AccordionGroup without toggleCollapsed displays the content when the group is visible 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header"
