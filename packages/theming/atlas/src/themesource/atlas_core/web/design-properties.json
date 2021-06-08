@@ -1160,5 +1160,55 @@
             "description": "Make groups in the accordion more compact.",
             "class": "widget-accordion-compact"
         }
+    ],
+    "com.mendix.widget.web.image.Image": [
+        {
+            "name": "Image style",
+            "type": "Dropdown",
+            "description": "Change the image style.",
+            "options": [
+                {
+                    "name": "Rounded",
+                    "class": "img-rounded"
+                },
+                {
+                    "name": "Circle",
+                    "class": "img-circle"
+                },
+                {
+                    "name": "Square",
+                    "class": "img-square"
+                }
+            ]
+        },
+        {
+            "name": "Center image",
+            "type": "Toggle",
+            "description": "Center the image.",
+            "class": "img-center"
+        },
+        {
+            "name": "Image fit",
+            "type": "Dropdown",
+            "description": "Change the fit of the image.",
+            "options": [
+                {
+                    "name": "Fill",
+                    "class": "img-fill"
+                },
+                {
+                    "name": "Contain",
+                    "class": "img-contain"
+                },
+                {
+                    "name": "Cover",
+                    "class": "img-cover"
+                },
+                {
+                    "name": "Scale-down",
+                    "class": "img-scale-down"
+                }
+            ]
+        }
     ]
 }

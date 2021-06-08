@@ -62,7 +62,7 @@ function getImageProps({
     }
 }
 
-export const ImageViewer: FunctionComponent<ImageContainerProps> = props => {
+export const Image: FunctionComponent<ImageContainerProps> = props => {
     const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
     const { type, image } = getImageProps(props);
 
