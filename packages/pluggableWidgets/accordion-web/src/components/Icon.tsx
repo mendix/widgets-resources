@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import classNames from "classnames";
 import { WebIcon } from "mendix";
 
-interface IconProps {
+export interface IconProps {
     data?: WebIcon;
     loading?: boolean;
     animate?: boolean;
