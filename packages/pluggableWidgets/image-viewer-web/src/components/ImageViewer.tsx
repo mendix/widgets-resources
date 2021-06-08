@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { HeightUnitEnum, WidthUnitEnum } from "../../typings/ImageViewerProps";
 
 import "../ui/ImageViewer.scss";
+import ReactModal from "react-modal";
 
 function getStyle(value: string | number, type: WidthUnitEnum | HeightUnitEnum): number | string {
     // when type is auto default browser styles applies
@@ -18,7 +19,9 @@ export interface ImageViewerWrapperProps {
     className?: string;
     responsive: boolean;
     hasImage: boolean;
-    children: ReactElement<ImageViewerGlyphicon | ImageViewerImage>;
+    children:
+        | ReactElement<ImageViewerGlyphicon | ImageViewerImage>
+        | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<ReactModal>];
 }
 
 interface ImageViewerContent {

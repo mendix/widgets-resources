@@ -29,10 +29,12 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "@types/react-modal": "^3.12.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "react-modal": "^3.14.2"
   }
 }

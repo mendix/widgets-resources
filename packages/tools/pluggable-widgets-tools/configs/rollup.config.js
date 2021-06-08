@@ -209,7 +209,9 @@ export default async args => {
             commonjs({
                 extensions: config.extensions,
                 transformMixedEsModules: true,
-                requireReturnsDefault: true,
+                requireReturnsDefault: id => {
+                    return !id.includes("react-lifecycles-compat");
+                },
                 ignore: id => (config.external || []).some(value => new RegExp(value).test(id))
             }),
             replace({
