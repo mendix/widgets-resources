@@ -1,17 +1,15 @@
 import { ValueStatus } from "mendix";
 import { createElement, FunctionComponent, useCallback } from "react";
 import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
-import { ImageViewer as ImageViewerComponent } from "./components/ImageViewer";
-import { Lightbox } from "./components/Lightbox";
-import { useLightboxState } from "./utils/lightboxState";
+import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/ImageViewer/index";
 
-type ImageProps = {
-    type: "image" | "icon";
-    image: string | undefined;
-};
-
-function getImageProps({ datasource, imageIcon, imageObject, imageUrl }: ImageViewerContainerProps): ImageProps {
-    const fallback: ImageProps = {
+function getImageProps({
+    datasource,
+    imageIcon,
+    imageObject,
+    imageUrl
+}: ImageViewerContainerProps): ImageViewerImageProps {
+    const fallback: ImageViewerImageProps = {
         type: "image",
         image: undefined
     };
@@ -49,46 +47,23 @@ function getImageProps({ datasource, imageIcon, imageObject, imageUrl }: ImageVi
 }
 
 export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props => {
-    const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
+    const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
     const { type, image } = getImageProps(props);
 
-    const onClick = useCallback(() => {
-        if (props.onClickType === "action") {
-            props.onClick?.execute();
-        } else if (props.onClickType === "enlarge") {
-            openLightbox();
-        }
-    }, [props.onClick, props.onClickType, openLightbox]);
-
-    const sharedContentProps = {
-        style: props.style,
-        onClick: lightboxIsOpen ? undefined : onClick
-    };
-
-    const content =
-        type === "image" ? (
-            <ImageViewerComponent.Image
-                image={image}
-                height={props.height}
-                heightUnit={props.heightUnit}
-                width={props.width}
-                widthUnit={props.widthUnit}
-                {...sharedContentProps}
-            />
-        ) : (
-            <ImageViewerComponent.Glyphicon icon={image} size={props.iconSize} {...sharedContentProps} />
-        );
-
     return (
-        <ImageViewerComponent.Wrapper
-            className={props.class}
+        <ImageViewerComponent
+            class={props.class}
+            style={props.style}
+            widthUnit={props.widthUnit}
+            width={props.width}
+            heightUnit={props.heightUnit}
+            height={props.height}
+            iconSize={props.iconSize}
             responsive={props.responsive}
-            hasImage={image !== undefined && image.length > 0}
-        >
-            {content}
-            <Lightbox isOpen={lightboxIsOpen} onClose={closeLightbox}>
-                {content}
-            </Lightbox>
-        </ImageViewerComponent.Wrapper>
+            onClickType={props.onClickType}
+            onClick={props.onClick ? onClick : undefined}
+            type={type}
+            image={image}
+        />
     );
 };
