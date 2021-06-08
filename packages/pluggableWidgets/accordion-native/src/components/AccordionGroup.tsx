@@ -1,6 +1,6 @@
-import { createElement, ReactElement, useEffect } from "react";
+import { createElement, ReactElement } from "react";
 import { View, Pressable, Text } from "react-native";
-import { DynamicValue, NativeIcon, ValueStatus } from "mendix";
+import { DynamicValue, NativeIcon } from "mendix";
 
 import { GroupIcon } from "./GroupIcon";
 import { AnimatedCollapsibleView } from "./CollapsibleView";
@@ -15,8 +15,6 @@ export interface AccordionGroupProps {
     iconExpanded: DynamicValue<NativeIcon> | undefined;
     group: GroupsType;
     isExpanded: boolean;
-    collapseGroup: (index: number) => void;
-    expandGroup: (index: number) => void;
     onPressGroupHeader: (group: GroupsType, index: number) => void;
     visible: DynamicValue<boolean>;
     style: AccordionGroupStyle;
@@ -30,36 +28,10 @@ export function AccordionGroup({
     iconExpanded,
     group,
     isExpanded,
-    collapseGroup,
-    expandGroup,
     onPressGroupHeader,
     visible,
     style
 }: AccordionGroupProps): ReactElement | null {
-    useEffect(() => {
-        if (group.groupCollapsedAttribute?.status === ValueStatus.Available && collapsible) {
-            if (group.groupCollapsedAttribute.value === false) {
-                expandGroup(index);
-            } else if (group.groupCollapsedAttribute.value) {
-                collapseGroup(index);
-            }
-        }
-    }, [group.groupCollapsedAttribute]);
-
-    useEffect(() => {
-        if (
-            group.groupCollapsedDynamic?.status === ValueStatus.Available &&
-            group.groupCollapsed === "groupStartDynamic" &&
-            collapsible
-        ) {
-            if (group.groupCollapsedDynamic.value === false) {
-                expandGroup(index);
-            } else if (group.groupCollapsedDynamic.value) {
-                collapseGroup(index);
-            }
-        }
-    }, [group.groupCollapsedDynamic]);
-
     return (
         visible && (
             <View style={style.container}>

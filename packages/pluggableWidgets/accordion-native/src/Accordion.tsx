@@ -32,32 +32,41 @@ export function Accordion(props: Props): ReactElement | null {
         } else {
             expandGroup(index);
         }
-
         executeAction(group.groupOnChange);
     };
 
     const collapseGroup = (index: number): void => {
-        // Use setTimeout to schedule setState after the current event loop and outside the current event context.
-        setTimeout(() => {
-            setExpandedGroups(oldArray => oldArray.filter(i => i !== index));
-        }, 0);
+        setExpandedGroups(oldArray => oldArray.filter(i => i !== index));
     };
     const expandGroup = (index: number): void => {
-        // Use setTimeout to schedule setState after the current event loop and outside the current event context.
-        setTimeout(() => {
-            setExpandedGroups(oldArray =>
-                props.collapseBehavior === "singleExpanded" ? [index] : [...oldArray, index]
-            );
-        }, 0);
+        setExpandedGroups(oldArray => (props.collapseBehavior === "singleExpanded" ? [index] : [...oldArray, index]));
+    };
+
+    const checkPropertyValues = (group: GroupsType, i: number): void => {
+        if (group.groupCollapsedAttribute?.status === ValueStatus.Available && props.collapsible) {
+            if (group.groupCollapsedAttribute?.value === false) {
+                expandGroup(i);
+            } else if (group.groupCollapsedAttribute?.value) {
+                collapseGroup(i);
+            }
+        }
+
+        if (
+            group.groupCollapsedDynamic?.status === ValueStatus.Available &&
+            group.groupCollapsed === "groupStartDynamic" &&
+            props.collapsible
+        ) {
+            if (group.groupCollapsedDynamic?.value === false) {
+                expandGroup(i);
+            } else if (group.groupCollapsedDynamic?.value) {
+                collapseGroup(i);
+            }
+        }
     };
 
     useEffect(() => {
-        props.groups.forEach((group, index) => {
-            if (group.groupCollapsedAttribute?.status === ValueStatus.Available) {
-                group.groupCollapsedAttribute?.setValue(!expandedGroups.includes(index));
-            }
-        });
-    }, [expandedGroups]);
+        props.groups.forEach(checkPropertyValues);
+    }, [props.groups]);
 
     return (
         <View style={styles.container}>
@@ -72,8 +81,6 @@ export function Accordion(props: Props): ReactElement | null {
                         iconExpanded={props.iconExpanded}
                         group={group}
                         isExpanded={expandedGroups.includes(index)}
-                        collapseGroup={collapseGroup}
-                        expandGroup={expandGroup}
                         onPressGroupHeader={onPressGroupHeader}
                         visible={group.visible}
                         style={styles.group}
