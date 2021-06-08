@@ -28,9 +28,14 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
     if (!preview) {
         handleOnClickOutsideElement(ref, () => setVisibility(false));
     }
-    const handleOnClickTrigger = useCallback((): void => {
-        setVisibility(prev => !prev);
-    }, [visibility, setVisibility]);
+    const handleOnClickTrigger = useCallback(
+        (e): void => {
+            e.preventDefault();
+            e.stopPropagation();
+            setVisibility(prev => !prev);
+        },
+        [setVisibility]
+    );
     const handleOnClickItem = useCallback(
         (itemAction?: ActionValue): void => {
             setVisibility(false);
@@ -61,7 +66,7 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
                 correctPosition(element, props.position);
             }
         }
-    }, [visibility]);
+    }, [props.position, visibility]);
     useEffect(() => {
         setVisibility(props.menuToggle);
     }, [props.menuToggle]);
@@ -93,7 +98,11 @@ function createMenuOptions(
                     <div
                         key={index}
                         className={classNames("popupmenu-basic-item", pickedStyle)}
-                        onClick={() => handleOnClickItem(item.action)}
+                        onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleOnClickItem(item.action);
+                        }}
                     >
                         {item.caption?.value ?? ""}
                     </div>
@@ -102,7 +111,15 @@ function createMenuOptions(
         });
     } else {
         return props.customItems.map((item, index) => (
-            <div key={index} className={"popupmenu-custom-item"} onClick={() => handleOnClickItem(item.action)}>
+            <div
+                key={index}
+                className={"popupmenu-custom-item"}
+                onClick={e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleOnClickItem(item.action);
+                }}
+            >
                 {item.content}
             </div>
         ));

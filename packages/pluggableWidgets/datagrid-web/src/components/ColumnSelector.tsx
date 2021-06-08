@@ -1,22 +1,22 @@
 import { createElement, Dispatch, ReactElement, SetStateAction, useRef, useState } from "react";
-import { ColumnInstance, IdType } from "react-table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
+import { ColumnProperty } from "./Table";
 
-export interface ColumnSelectorProps<D extends object> {
-    allColumns: Array<ColumnInstance<D>>;
-    setHiddenColumns: Dispatch<SetStateAction<Array<IdType<object>>>>;
+export interface ColumnSelectorProps {
+    columns: ColumnProperty[];
+    hiddenColumns: string[];
+    setHiddenColumns: Dispatch<SetStateAction<string[]>>;
 }
 
-export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>): ReactElement {
+export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const [show, setShow] = useState(false);
     const componentRef = useRef<HTMLDivElement>(null);
     useOnClickOutside(componentRef, () => setShow(false));
-    const visibleColumns = props.allColumns.filter(column => column.isVisible).length;
     return (
         <div className="th column-selector">
-            <div className="column-selector-content" ref={componentRef}>
+            <div ref={componentRef} className="column-selector-content">
                 <button
                     className="btn btn-default column-selector-button"
                     onClick={() => {
@@ -27,16 +27,17 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
                 </button>
                 {show && (
                     <ul className="column-selectors">
-                        {props.allColumns.map((column, index) => {
+                        {props.columns.map((column: ColumnProperty, index: number) => {
+                            const isVisible = !props.hiddenColumns.includes(column.id);
                             return column.canHide ? (
                                 <li key={index}>
                                     <input
+                                        checked={isVisible}
+                                        disabled={isVisible && props.columns.length - props.hiddenColumns.length === 1}
                                         id={`checkbox_toggle_${index}`}
-                                        type="checkbox"
-                                        checked={column.isVisible}
                                         onClick={() => {
                                             props.setHiddenColumns(prev => {
-                                                if (!column.isVisible) {
+                                                if (!isVisible) {
                                                     prev.splice(
                                                         prev.findIndex(v => v === column.id),
                                                         1
@@ -46,12 +47,10 @@ export function ColumnSelector<D extends object>(props: ColumnSelectorProps<D>):
                                                     return [...prev, column.id];
                                                 }
                                             });
-                                            column.toggleHidden();
                                         }}
-                                        disabled={column.isVisible && visibleColumns === 1}
-                                        {...column.getToggleHiddenProps()}
+                                        type="checkbox"
                                     />
-                                    <label htmlFor={`checkbox_toggle_${index}`}>{column.render("Header")}</label>
+                                    <label htmlFor={`checkbox_toggle_${index}`}>{column.header}</label>
                                 </li>
                             ) : null;
                         })}

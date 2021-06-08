@@ -1,6 +1,7 @@
 import { shallow } from "enzyme";
 import { createElement } from "react";
 import { Header, HeaderProps } from "../Header";
+import { ColumnResizer } from "../ColumnResizer";
 
 describe("Header", () => {
     it("renders the structure correctly", () => {
@@ -12,7 +13,6 @@ describe("Header", () => {
     it("renders the structure correctly when sortable", () => {
         const props = mockHeaderProps();
         props.column.canSort = true;
-        props.column.getSortByToggleProps = () => ({ sortableProps: "" });
         props.sortable = true;
 
         const component = shallow(<Header {...props} />);
@@ -67,10 +67,8 @@ describe("Header", () => {
     it("calls setSortBy store function with correct parameters when sortable", () => {
         const column = {
             id: "sortable",
-            render: () => "My sortable column",
-            canSort: true,
-            getHeaderProps: () => ({ role: "Test", onClick: jest.fn() } as any),
-            getSortByToggleProps: () => ({})
+            header: "My sortable column",
+            canSort: true
         } as any;
         const mockedFunction = jest.fn();
         const component = shallow(
@@ -106,20 +104,19 @@ describe("Header", () => {
     });
 });
 
-function mockHeaderProps(): HeaderProps<object> {
+function mockHeaderProps(): HeaderProps {
     return {
         column: {
-            render: () => "Test",
-            getHeaderProps: () => ({ role: "Test" } as any)
+            header: "Test"
         } as any,
         draggable: false,
         dragOver: "",
         filterable: false,
         hidable: false,
         resizable: false,
+        resizer: <ColumnResizer setColumnWidth={jest.fn()} />,
         sortable: false,
         setColumnOrder: jest.fn(),
-        setColumnWidth: jest.fn(),
         setDragOver: jest.fn(),
         visibleColumns: [],
         setSortBy: jest.fn(),

@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useState } from "react";
+import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
 import { ColumnsType, DatagridContainerProps } from "../typings/DatagridProps";
 import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
@@ -59,9 +59,10 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         props.datasource.setSortOrder([]);
     }
 
+    const columns = useMemo(() => transformColumnProps(props.columns), [props.columns]);
+
     return (
         <Table
-            className={props.class}
             cellRenderer={useCallback(
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
@@ -78,14 +79,13 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     return renderWrapper(
                         content,
                         classNames(`align-column-${column.alignment}`, column.columnClass?.get(value)?.value),
-                        props.onClick
-                            ? useCallback(() => props.onClick?.get(value).execute(), [props.onClick, value])
-                            : undefined
+                        props.onClick ? props.onClick?.get(value).execute : undefined
                     );
                 },
-                [props.columns, props.rowClass, props.onClick]
+                [props.columns, props.onClick]
             )}
-            columns={transformColumnProps(props.columns)}
+            className={props.class}
+            columns={columns}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}
             columnsHidable={props.columnsHidable}
@@ -120,9 +120,9 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             paging={props.pagination === "buttons"}
             pagingPosition={props.pagingPosition}
             rowClass={useCallback(value => props.rowClass?.get(value)?.value ?? "", [props.rowClass])}
-            settings={props.configurationAttribute}
             setPage={setPage}
             setSortParameters={setSortParameters}
+            settings={props.configurationAttribute}
             styles={props.style}
             valueForSort={useCallback(
                 (value, columnIndex) => {
