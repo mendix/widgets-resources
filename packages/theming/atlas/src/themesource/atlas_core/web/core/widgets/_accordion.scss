@@ -29,6 +29,17 @@
 
 @mixin get-accordion-group-styles($background-color, $background-color-hover, $color, $color-hover, $border-color) {
     border-color: $border-color;
+    overflow: hidden;
+
+    &:first-child {
+        border-top-left-radius: $border-radius-default;
+        border-top-right-radius: $border-radius-default;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: $border-radius-default;
+        border-bottom-right-radius: $border-radius-default;
+    }
 
     .widget-accordion-group-header {
         background-color: $background-color;
