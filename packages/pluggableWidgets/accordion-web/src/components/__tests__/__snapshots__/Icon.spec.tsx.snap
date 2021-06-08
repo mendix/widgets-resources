@@ -21,7 +21,7 @@ exports[`Icon renders a default icon 1`] = `
 
 exports[`Icon renders glyph icons 1`] = `
 <span
-  aria-hidden="true"
+  aria-hidden={true}
   className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate glyphicon icon-class"
 />
 `;
@@ -29,7 +29,7 @@ exports[`Icon renders glyph icons 1`] = `
 exports[`Icon renders image icons 1`] = `
 <img
   alt=""
-  aria-hidden="true"
+  aria-hidden={true}
   className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
   src="icon.url"
 />

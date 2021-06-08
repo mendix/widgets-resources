@@ -1,10 +1,7 @@
 import { createElement, Dispatch, ReactElement, useCallback, useReducer, useRef } from "react";
 
 import AccordionGroup, { AccordionGroupProps } from "./AccordionGroup";
-import {
-    CollapsedAccordionGroupsReducerAction,
-    getCollapsedAccordionGroupsReducer
-} from "../utils/CollapsedAccordionGroupsReducer";
+import { CollapsedAccordionGroupsReducerAction, getCollapsedAccordionGroupsReducer } from "../utils/reducers";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 import classNames from "classnames";
 
@@ -20,7 +17,7 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
     showGroupHeaderIcon?: "right" | "left" | "no";
 }
 
-export default function Accordion(props: AccordionProps): ReactElement | null {
+export function Accordion(props: AccordionProps): ReactElement | null {
     const reducer = useRef(getCollapsedAccordionGroupsReducer(props.singleExpandedGroup ? "single" : "multiple")); // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
 
     const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(

@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { mount } from "enzyme";
-import Accordion, { AccordionProps } from "../Accordion";
+import { Accordion, AccordionProps } from "../Accordion";
 
 describe("Accordion", () => {
     let defaultProps: AccordionProps;

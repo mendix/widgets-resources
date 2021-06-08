@@ -37,7 +37,7 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
                     "glyphicon",
                     data.iconClass
                 )}
-                aria-hidden="true"
+                aria-hidden
             />
         );
     }
@@ -50,7 +50,7 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
                 })}
                 src={data.iconUrl}
                 alt=""
-                aria-hidden="true"
+                aria-hidden
             />
         );
     }

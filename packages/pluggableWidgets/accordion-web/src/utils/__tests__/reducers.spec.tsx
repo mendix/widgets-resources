@@ -1,4 +1,4 @@
-import { getCollapsedAccordionGroupsReducer } from "../CollapsedAccordionGroupsReducer";
+import { getCollapsedAccordionGroupsReducer } from "../reducers";
 
 describe("getAccordionGroupsReducer", () => {
     let defaultCollapsedAccordionGroups: boolean[];

@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useMemo } from "react";
 
-import AccordionComponent, { AccordionGroups } from "./components/Accordion";
+import { Accordion as AccordionComponent, AccordionGroups } from "./components/Accordion";
 import { useIconGenerator } from "./utils/IconGenerator";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
