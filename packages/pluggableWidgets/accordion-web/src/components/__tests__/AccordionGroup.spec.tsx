@@ -12,7 +12,7 @@ describe("AccordionGroup", () => {
             collapsed: true,
             visible: true,
             dynamicClassName: "class-name",
-            // TODO animateCollapsing: true,
+            animateCollapsing: false, // testing animations with Enzyme doesn't work
             generateIcon: jest.fn(),
             showHeaderIcon: "right"
         };
