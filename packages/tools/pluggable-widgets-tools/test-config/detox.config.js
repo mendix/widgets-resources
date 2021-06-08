@@ -1,21 +1,39 @@
 module.exports = {
     "test-runner": "jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
-    configurations: {
-        "ios.simulator": {
-            binaryPath: process.env.TEST_NATIVE_APP_IOS,
+    apps: {
+        "ios.developerapp": {
+            type: "ios.app",
+            binaryPath: process.env.TEST_NATIVE_APP_IOS
+        },
+        "android.developerapp": {
+            type: "android.apk",
+            binaryPath: process.env.TEST_NATIVE_APP_ANDROID,
+            testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
+        },
+    },
+    "devices": {
+        ios: {
             type: "ios.simulator",
             device: {
-                type: "iPhone 11 Pro Max"
+                type: "iPhone 12 Pro Max"
             }
         },
         android: {
-            binaryPath: process.env.TEST_NATIVE_APP_ANDROID,
-            testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
             type: "android.emulator",
             device: {
-                avdName: "5.4_FWVGA_API_30"
+                "avdName": "Nexus_6P_API_28"
             }
-        }
+        },
+    },
+    configurations: {
+        "ios.simulator.developerapp": {
+            device: "ios",
+            app: "ios.developerapp"
+        },
+        "android.emulator.developerapp": {
+            device: "android",
+            app: "android.developerapp"
+        },
     }
 };

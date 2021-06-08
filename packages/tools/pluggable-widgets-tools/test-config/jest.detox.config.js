@@ -9,7 +9,7 @@ module.exports = {
     verbose: true,
     globals: {
         "ts-jest": {
-            tsConfig: {
+            tsconfig: {
                 target: "ES2019"
             }
         }

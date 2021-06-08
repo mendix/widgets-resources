@@ -1,5 +1,12 @@
 How to run tests
 
+
+Latest Steps:
+https://paper.dropbox.com/doc/Running-local-detox-tests--BMPPqQujc330XMe1pNDCKrA9Ag-YBPdIMfn6okX9DTgeIqa7
+
+#### I think the steps below are outdated as they are 1 year (too) old
+
+<!-- --------------------------------------------------------------- -->
 ## Prerequisites
 
 -   Make sure to install `brew tap wix/brew` and `brew install applesimutils`
