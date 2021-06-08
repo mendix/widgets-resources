@@ -30,13 +30,15 @@
                                     <caption>Address</caption>
                                     <description>Address containing (a subset of) street, number, zipcode, city and country.</description>
                                 </property>
-                                <property key="latitude" type="textTemplate" required="false">
+                                <property key="latitude" type="expression" required="false">
                                     <caption>Latitude</caption>
                                     <description>Decimal number from -90.0 to 90.0.</description>
+                                    <returnType type="Decimal"/>
                                 </property>
-                                <property key="longitude" type="textTemplate" required="false">
+                                <property key="longitude" type="expression" required="false">
                                     <caption>Longitude</caption>
                                     <description>Decimal number from -180.0 to 180.0.</description>
+                                    <returnType type="Decimal"/>
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Callout box">

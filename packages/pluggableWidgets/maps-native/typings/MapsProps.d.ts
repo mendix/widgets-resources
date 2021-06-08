@@ -11,8 +11,8 @@ export type LocationTypeEnum = "address" | "latlng";
 export interface MarkersType {
     locationType: LocationTypeEnum;
     address?: DynamicValue<string>;
-    latitude?: DynamicValue<string>;
-    longitude?: DynamicValue<string>;
+    latitude?: DynamicValue<Big>;
+    longitude?: DynamicValue<Big>;
     title?: DynamicValue<string>;
     description?: DynamicValue<string>;
     onClick?: ActionValue;

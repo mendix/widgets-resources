@@ -56,7 +56,7 @@ export class Maps extends Component<Props, State> {
         if (
             this.state.status === Status.LoadingMarkers &&
             (!this.props.dynamicMarkers.length ||
-                this.props.dynamicMarkers.filter(m => m.markersDS?.status !== ValueStatus.Available).length === 0)
+                this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
         ) {
             this.parseMarkers();
         }
