@@ -91,7 +91,7 @@ async function main() {
     const freePortBrowser = await findFreePort(4444);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
-        `docker run -d -p ${freePortBrowser}:4444 -v /dev/shm:/dev/shm ${browserDocker}`
+        `docker run -d --network="host" -v /dev/shm:/dev/shm ${browserDocker}`
     )
         .toString()
         .trim();
@@ -117,7 +117,7 @@ async function main() {
             stdio: "inherit",
             env: {
                 ...process.env,
-                URL: `http://${ip}:${freePort}`,
+                URL: `http://localhost:${freePort}`,
                 SERVER_IP: ip,
                 SERVER_PORT: freePortBrowser
             }
