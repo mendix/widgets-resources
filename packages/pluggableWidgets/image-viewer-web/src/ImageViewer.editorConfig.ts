@@ -1,5 +1,6 @@
 import {
     hidePropertiesIn,
+    hidePropertyIn,
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs
@@ -33,11 +34,11 @@ export function getProperties(
     if (values.datasource === "icon" && values.imageIcon?.type === "glyph") {
         hidePropertiesIn(defaultProperties, values, ["widthUnit", "width", "heightUnit", "height"]);
     } else {
-        hidePropertiesIn(defaultProperties, values, ["iconSize"]);
+        hidePropertyIn(defaultProperties, values, "iconSize");
     }
 
     if (values.onClickType !== "action") {
-        hidePropertiesIn(defaultProperties, values, ["onClick"]);
+        hidePropertyIn(defaultProperties, values, "onClick");
     }
 
     if (platform === "web") {
