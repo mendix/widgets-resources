@@ -24,7 +24,7 @@ export interface ImageViewerWrapperProps {
         | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<ReactModal> | false];
 }
 
-interface ImageViewerContent {
+export interface ImageViewerContentProps {
     style?: CSSProperties;
     onClick?: () => void;
 }
@@ -44,7 +44,7 @@ function Wrapper(props: ImageViewerWrapperProps): ReactElement {
     );
 }
 
-export interface ImageViewerGlyphicon extends ImageViewerContent {
+export interface ImageViewerGlyphicon extends ImageViewerContentProps {
     icon: string | undefined;
     size: number;
 }
@@ -59,7 +59,7 @@ function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
     );
 }
 
-export interface ImageViewerImage extends ImageViewerContent {
+export interface ImageViewerImage extends ImageViewerContentProps {
     image: string | undefined;
     height: number;
     heightUnit: HeightUnitEnum;

@@ -1,7 +1,7 @@
 import { createElement, CSSProperties, FunctionComponent, useCallback } from "react";
 import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum } from "../../../typings/ImageViewerProps";
 import { useLightboxState } from "../../utils/lightboxState";
-import { ImageViewerUi } from "./ui";
+import { ImageViewerUi, ImageViewerContentProps } from "./ui";
 import { Lightbox } from "../Lightbox";
 
 import "../../ui/ImageViewer.scss";
@@ -48,7 +48,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         }
     }, [onClick, onClickType, openLightbox]);
 
-    const sharedContentProps = {
+    const sharedContentProps: ImageViewerContentProps = {
         style,
         onClick: lightboxIsOpen ? undefined : onImageClick
     };
