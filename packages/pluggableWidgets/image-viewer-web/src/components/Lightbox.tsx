@@ -39,7 +39,7 @@ export function Lightbox({ isOpen, onClose, children }: LightboxProps): ReactEle
             style={modalStyle}
             onRequestClose={onClose}
             overlayClassName="mx-image-viewer-lightbox-overlay"
-            appElement={typeof window !== "undefined" ? window.document.body : undefined}
+            appElement={window?.document?.body}
             preventScroll
             shouldCloseOnEsc
             shouldCloseOnOverlayClick

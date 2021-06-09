@@ -1,5 +1,4 @@
 import { createElement, CSSProperties, FunctionComponent, useCallback } from "react";
-import classNames from "classnames";
 import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum } from "../../../typings/ImageViewerProps";
 import { useLightboxState } from "../../utils/lightboxState";
 import { ImageViewerUi } from "./ui";
@@ -70,16 +69,16 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
     return (
         <ImageViewerUi.Wrapper
-            className={classNames(className)}
+            className={className}
             responsive={responsive}
             hasImage={image !== undefined && image.length > 0}
         >
             {content}
-            {lightboxIsOpen ? (
+            {lightboxIsOpen && (
                 <Lightbox isOpen={lightboxIsOpen} onClose={closeLightbox}>
                     {content}
                 </Lightbox>
-            ) : null}
+            )}
         </ImageViewerUi.Wrapper>
     );
 };

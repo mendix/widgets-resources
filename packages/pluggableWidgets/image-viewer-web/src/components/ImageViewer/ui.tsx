@@ -21,7 +21,7 @@ export interface ImageViewerWrapperProps {
     hasImage: boolean;
     children:
         | ReactElement<ImageViewerGlyphicon | ImageViewerImage>
-        | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<ReactModal> | null];
+        | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<ReactModal> | false];
 }
 
 interface ImageViewerContent {
