@@ -2,8 +2,23 @@ import { createElement } from "react";
 import { mount, render } from "enzyme";
 import { ImageViewer, ImageViewerProps } from "../ImageViewer/index";
 import { Lightbox } from "../Lightbox";
+import { ModalProps } from "react-overlays/esm/Modal";
 
 jest.mock("../../assets/ic24-close.svg", () => "close-button-icon-svg");
+
+jest.mock("react-overlays/Modal", () => (props: ModalProps) => {
+    const MockName = "react-overlays-modal-mock";
+    // The backdrop is rendered somewhere else in a portal, but for testing sake we put it here since we also mock.
+    const BackdropMockName = "react-overlays-modal-backdrop-mock";
+    return (
+        // @ts-expect-error lower case custom name to make clear it's a mock
+        <MockName {...props}>
+            {props.chilren}
+            {/* @ts-expect-error lower case custom name to make clear it's a mock */}
+            <BackdropMockName>{props.renderBackdrop?.({ onClick: jest.fn(), ref: jest.fn() })}</BackdropMockName>
+        </MockName>
+    );
+});
 
 const imageProps: ImageViewerProps = {
     class: "",

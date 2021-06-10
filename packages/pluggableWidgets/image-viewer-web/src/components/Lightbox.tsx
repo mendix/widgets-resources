@@ -19,9 +19,9 @@ interface RenderBackdropWithCloseProps extends RenderModalBackdropProps {
  * for the actual backdrop and not for other elements due to a `e.target !== e.currentTarget` check in
  * the library. Therefore, we extend it with an additional `onClose` prop for our close button.
  */
-function BackdropWithClose({ ref, onClose, onClick }: RenderBackdropWithCloseProps): ReactElement {
+function BackdropWithClose({ onClose, ...restProps }: RenderBackdropWithCloseProps): ReactElement {
     return (
-        <div className="mx-image-viewer-lightbox-backdrop" ref={ref} onClick={onClick}>
+        <div className="mx-image-viewer-lightbox-backdrop" {...restProps}>
             <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose}>
                 <img src={closeIconSvg} className={"removeIcon"} alt="Close icon for the full screen image lightbox" />
             </button>
