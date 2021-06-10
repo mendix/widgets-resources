@@ -23,11 +23,7 @@ function BackdropWithClose({ ref, onClose, onClick }: RenderBackdropWithClosePro
     return (
         <div className="mx-image-viewer-lightbox-backdrop" ref={ref} onClick={onClick}>
             <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose}>
-                <img
-                    src={closeIconSvg}
-                    className={classNames("removeIcon")}
-                    alt="Close icon for the full screen image lightbox"
-                />
+                <img src={closeIconSvg} className={"removeIcon"} alt="Close icon for the full screen image lightbox" />
             </button>
         </div>
     );
