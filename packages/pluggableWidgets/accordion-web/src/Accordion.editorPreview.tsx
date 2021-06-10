@@ -6,11 +6,16 @@ import { useIconGenerator } from "./utils/iconGenerator";
 
 import { AccordionPreviewProps } from "../typings/AccordionProps";
 
+// This interface is necessary to overcome incorrect exposure of class names with the "className" prop. In the future they will be exposed with a "class" prop (Jira Issue PAG-1317).
+interface PreviewProps extends Omit<AccordionPreviewProps, "class"> {
+    className: string;
+}
+
 export function getPreviewCss(): string {
     return require("./ui/accordion-main.scss");
 }
 
-export function preview(props: AccordionPreviewProps): ReactElement {
+export function preview(props: PreviewProps): ReactElement {
     const style = parseStyle(props.style);
 
     const accordionGroups = props.groups.map(group => ({
@@ -60,7 +65,7 @@ export function preview(props: AccordionPreviewProps): ReactElement {
     return (
         <Accordion
             id={"Accordion"}
-            class={props.class}
+            class={props.className}
             style={style}
             groups={accordionGroups}
             collapsible={props.collapsible}
@@ -68,6 +73,7 @@ export function preview(props: AccordionPreviewProps): ReactElement {
             singleExpandedGroup={props.collapsible ? props.collapseBehavior === "singleExpanded" : undefined}
             generateHeaderIcon={generateIcon}
             showGroupHeaderIcon={props.showIcon}
+            previewMode
         />
     );
 }

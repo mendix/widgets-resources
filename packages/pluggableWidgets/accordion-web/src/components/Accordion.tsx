@@ -15,6 +15,7 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
     singleExpandedGroup?: boolean;
     generateHeaderIcon?: (collapsed: boolean) => ReactElement;
     showGroupHeaderIcon?: "right" | "left" | "no";
+    previewMode?: boolean;
 }
 
 export function Accordion(props: AccordionProps): ReactElement | null {
@@ -22,7 +23,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 
     const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(
         reducer.current,
-        props.groups.map(() => props.collapsible)
+        props.groups.map(() => (props.previewMode ? false : props.collapsible))
     );
 
     const accordionGroupElements = props.groups.map((group, index) => (
@@ -41,7 +42,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
     return (
         <div
             id={props.id}
-            className={classNames("widget-accordion", props.class)}
+            className={classNames("widget-accordion", { "widget-accordion-preview": props.previewMode }, props.class)}
             style={props.style}
             tabIndex={props.tabIndex}
         >

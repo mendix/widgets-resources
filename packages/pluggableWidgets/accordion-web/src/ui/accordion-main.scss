@@ -121,3 +121,23 @@ $header-color-hover: #264ae5;
         padding: 8px 16px 24px 16px;
     }
 }
+
+.widget-accordion-preview {
+    .widget-accordion-group {
+        .widget-accordion-group-header {
+            > div > :is(h1, h2, h3, h4, h5, h6) {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            > div > :is(h1, h2, h3, h4, h5, h6, p) {
+                color: $header-color;
+                margin-bottom: 0;
+            }
+
+            > div > span {
+                color: $header-color;
+            }
+        }
+    }
+}

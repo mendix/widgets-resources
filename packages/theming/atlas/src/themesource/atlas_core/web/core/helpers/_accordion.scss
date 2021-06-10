@@ -66,6 +66,30 @@
             }
         }
 
+        &.widget-accordion-preview {
+            .widget-accordion-group {
+                &.widget-accordion-brand-primary {
+                    @include get-accordion-preview-group-styles($accordion-header-primary-color);
+                }
+
+                &.widget-accordion-brand-secondary {
+                    @include get-accordion-preview-group-styles($accordion-header-secondary-color);
+                }
+
+                &.widget-accordion-brand-success {
+                    @include get-accordion-preview-group-styles($accordion-header-success-color);
+                }
+
+                &.widget-accordion-brand-warning {
+                    @include get-accordion-preview-group-styles($accordion-header-warning-color);
+                }
+
+                &.widget-accordion-brand-danger {
+                    @include get-accordion-preview-group-styles($accordion-header-danger-color);
+                }
+            }
+        }
+
         &.widget-accordion-bordered-all {
             .widget-accordion-group {
                 &:first-child {
