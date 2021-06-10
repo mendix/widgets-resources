@@ -14,6 +14,7 @@
 
     .widget-accordion {
         background-color: $bg-color-secondary;
+        border-radius: $border-radius-default;
 
         .widget-accordion-group {
             @include get-accordion-group-styles(
