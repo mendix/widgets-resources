@@ -1,7 +1,7 @@
 import { createElement, CSSProperties, ReactElement } from "react";
 import classNames from "classnames";
-import ReactModal from "react-modal";
 import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageViewerProps";
+import { LightboxProps } from "../Lightbox";
 
 import "../../ui/ImageViewer.scss";
 
@@ -21,7 +21,7 @@ export interface ImageViewerWrapperProps {
     hasImage: boolean;
     children:
         | ReactElement<ImageViewerGlyphicon | ImageViewerImage>
-        | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<ReactModal> | false];
+        | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<LightboxProps> | false];
 }
 
 export interface ImageViewerContentProps {

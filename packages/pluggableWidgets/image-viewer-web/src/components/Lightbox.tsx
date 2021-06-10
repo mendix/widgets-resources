@@ -1,49 +1,27 @@
-import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
-import { createElement, ReactElement, useRef } from "react";
-import ReactModal from "react-modal";
+import { createElement, ReactElement, useCallback } from "react";
+import Modal, { RenderModalBackdropProps } from "react-overlays/Modal";
 
 import closeIconSvg from "../assets/ic24-close.svg";
 
-interface LightboxProps {
+export interface LightboxProps {
     children: ReactElement;
     isOpen: boolean;
     onClose: () => void;
 }
 
-const modalStyle = {
-    // Only way to style the content div of `ReactModal` is through inline styles.
-    content: {
-        backgroundColor: "transparent",
-        overflow: "hidden", // Needed, otherwise keyboard shortcuts scroll the page
-        border: "none",
-        borderRadius: 0,
-        padding: 0,
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-    }
-};
+interface RenderBackdropWithCloseProps extends RenderModalBackdropProps {
+    onClose: () => void;
+}
 
-export function Lightbox({ isOpen, onClose, children }: LightboxProps): ReactElement {
-    const imageElement = useRef<HTMLDivElement>(null);
-    useOnClickOutside(imageElement, onClose);
-
+/**
+ * The `onClick` here is provided by the `onHide` from the Modal props. But unfortunately it only works
+ * for the actual backdrop and not for other elements due to a `e.target !== e.currentTarget` check in
+ * the library. Therefore, we extend it with an additional `onClose` prop for our close button.
+ */
+function BackdropWithClose({ ref, onClose, onClick }: RenderBackdropWithCloseProps): ReactElement {
     return (
-        <ReactModal
-            isOpen={isOpen}
-            style={modalStyle}
-            onRequestClose={onClose}
-            overlayClassName="mx-image-viewer-lightbox-overlay"
-            appElement={window?.document?.body}
-            preventScroll
-            shouldCloseOnEsc
-            shouldCloseOnOverlayClick
-        >
+        <div className="mx-image-viewer-lightbox-backdrop" ref={ref} onClick={onClick}>
             <button className={classNames("btn btn-image btn-icon close-button")} onClick={onClose}>
                 <img
                     src={closeIconSvg}
@@ -51,7 +29,24 @@ export function Lightbox({ isOpen, onClose, children }: LightboxProps): ReactEle
                     alt="Close icon for the full screen image lightbox"
                 />
             </button>
-            <div ref={imageElement}>{children}</div>
-        </ReactModal>
+        </div>
+    );
+}
+
+export function Lightbox({ isOpen, onClose, children }: LightboxProps): ReactElement {
+    const renderBackdropWithClose = useCallback(
+        (props: RenderModalBackdropProps) => <BackdropWithClose onClose={onClose} {...props} />,
+        [onClose]
+    );
+
+    return (
+        <Modal
+            show={isOpen}
+            onHide={onClose}
+            renderBackdrop={renderBackdropWithClose}
+            className="mx-image-viewer-lightbox"
+        >
+            <div>{children}</div>
+        </Modal>
     );
 }

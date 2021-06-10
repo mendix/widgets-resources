@@ -8,8 +8,9 @@
     max-height: 100%;
 }
 
-.mx-image-viewer-lightbox-overlay {
-    z-index: 1000;
+.mx-image-viewer-lightbox-backdrop {
+    // Should be higher than the z-index of `.layout-atlas .region-sidebar` so it sits on top of the page.
+    z-index: 110;
     background-color: rgba(0, 0, 0, 0.85);
     position: fixed;
     inset: 0px;
@@ -30,4 +31,13 @@
             width: 16px;
         }
     }
+}
+
+.mx-image-viewer-lightbox {
+    // Should be higher than the z-index of `.mx-image-viewer-lightbox-backdrop`.
+    z-index: 210;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
