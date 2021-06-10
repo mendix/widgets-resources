@@ -1,16 +1,15 @@
 import { createElement, ReactElement, useCallback } from "react";
-import { ValueStatus } from "mendix";
 
-import { Icon } from "../components/Icon";
+import { Icon, IconProps } from "../components/Icon";
 
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 
 export function useIconGenerator(
     advancedMode: AccordionContainerProps["advancedMode"],
     animateIcon: AccordionContainerProps["animateIcon"],
-    icon: AccordionContainerProps["icon"],
-    expandIcon: AccordionContainerProps["expandIcon"],
-    collapseIcon: AccordionContainerProps["collapseIcon"]
+    icon: Omit<IconProps, "animate">,
+    expandIcon: Omit<IconProps, "animate">,
+    collapseIcon: Omit<IconProps, "animate">
 ): (collapsed: boolean) => ReactElement {
     return useCallback(
         (collapsed: boolean): ReactElement => {
@@ -18,22 +17,12 @@ export function useIconGenerator(
                 return <Icon animate={animateIcon} />;
             } else {
                 if (animateIcon) {
-                    return (
-                        <Icon data={icon?.value} loading={icon?.status === ValueStatus.Loading} animate={animateIcon} />
-                    );
+                    return <Icon {...icon} animate={animateIcon} />;
                 } else {
                     return collapsed ? (
-                        <Icon
-                            data={expandIcon?.value}
-                            loading={expandIcon?.status === ValueStatus.Loading}
-                            animate={animateIcon}
-                        />
+                        <Icon {...expandIcon} animate={animateIcon} />
                     ) : (
-                        <Icon
-                            data={collapseIcon?.value}
-                            loading={collapseIcon?.status === ValueStatus.Loading}
-                            animate={animateIcon}
-                        />
+                        <Icon {...collapseIcon} animate={animateIcon} />
                     );
                 }
             }

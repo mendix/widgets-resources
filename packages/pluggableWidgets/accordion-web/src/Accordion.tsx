@@ -1,4 +1,5 @@
 import { createElement, ReactElement, useMemo } from "react";
+import { ValueStatus } from "mendix";
 
 import { Accordion as AccordionComponent, AccordionGroups } from "./components/Accordion";
 import { useIconGenerator } from "./utils/IconGenerator";
@@ -22,9 +23,9 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const generateIcon = useIconGenerator(
         props.advancedMode,
         props.animateIcon,
-        props.icon,
-        props.expandIcon,
-        props.collapseIcon
+        { data: props.icon?.value, loading: props.icon?.status === ValueStatus.Loading },
+        { data: props.expandIcon?.value, loading: props.expandIcon?.status === ValueStatus.Loading },
+        { data: props.collapseIcon?.value, loading: props.collapseIcon?.status === ValueStatus.Loading }
     );
 
     if (!accordionGroups) {
