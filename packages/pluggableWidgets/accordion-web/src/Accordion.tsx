@@ -2,7 +2,7 @@ import { createElement, ReactElement, useMemo } from "react";
 import { ValueStatus } from "mendix";
 
 import { Accordion as AccordionComponent, AccordionGroups } from "./components/Accordion";
-import { useIconGenerator } from "./utils/IconGenerator";
+import { useIconGenerator } from "./utils/iconGenerator";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
 

@@ -1,7 +1,7 @@
 export type CollapsedAccordionGroupsReducerAction = { type: "expand" | "collapse"; index: number };
 
 export function getCollapsedAccordionGroupsReducer(
-    expandMode: "single" | "multiple" | "all"
+    expandMode: "single" | "multiple"
 ): (state: boolean[], action: CollapsedAccordionGroupsReducerAction) => boolean[] {
     return (state: boolean[], action: CollapsedAccordionGroupsReducerAction): boolean[] => {
         if (action.type === "expand" && expandMode === "single") {
