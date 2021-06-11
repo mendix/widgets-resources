@@ -77,10 +77,17 @@ async function main() {
     );
     console.log("Bundle created and all the widgets are updated");
 
+    // Create a docker network to share between containers
+    const dockerNetworkId = execSync(
+        `docker network create -d bridge --subnet 192.168.10.0/24 --gateway 192.168.10.1 dockernet`
+    )
+        .toString()
+        .trim();
+
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
     const runtimeContainerId = execSync(
-        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
+        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source --name runtime --net=dockernet -p ${freePort}:8080 ` +
             `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
             `--rm mxruntime:${mendixVersion} /shared/runtime.sh`
     )
@@ -91,7 +98,9 @@ async function main() {
     const freePortBrowser = await findFreePort(4444);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
-        `docker run -d --network="host" -v /dev/shm:/dev/shm ${browserDocker}`
+        `docker run -d --name browser --privileged --cap-add=NET_ADMIN --link runtime --net=dockernet -p ${freePortBrowser}:4444 ` +
+            `--add-host=localhost:192.168.10.2 -v /dev/shm:/dev/shm -v ${__dirname}:/shared ` +
+            `${browserDocker} /bin/sh -c "chmod +x /shared/browsercontainer.sh && /shared/browsercontainer.sh && /opt/bin/entry_point.sh"`
     )
         .toString()
         .trim();
@@ -117,7 +126,6 @@ async function main() {
             stdio: "inherit",
             env: {
                 ...process.env,
-                URL: `http://localhost:${freePort}`,
                 SERVER_IP: ip,
                 SERVER_PORT: freePortBrowser
             }
@@ -131,6 +139,7 @@ async function main() {
     } finally {
         execSync(`docker rm -f ${runtimeContainerId}`);
         execSync(`docker rm -f ${browserContainerId}`);
+        execSync(`docker network rm ${dockerNetworkId}`);
     }
 }
 
