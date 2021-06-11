@@ -87,13 +87,12 @@ async function main() {
         .toString()
         .trim();
 
-    // Spin up the standalone selenium firefox
-    const freePortFirefox = await findFreePort(4444);
-    const firefoxContainerId = execSync(
-        `docker run -d -p ${freePortFirefox}:4444 -v /dev/shm:/dev/shm selenium/standalone-firefox`
+     // Spin up the standalone selenium docker image
+    const freePortBrowser = await findFreePort(4444);
+    const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
+    const browserContainerId = execSync(
+        `docker run -d -p ${freePortBrowser}:4444 -v /dev/shm:/dev/shm ${browserDocker}`
     )
-        .toString()
-        .trim();
 
     let attempts = 60;
     for (; attempts > 0; --attempts) {
@@ -118,7 +117,7 @@ async function main() {
                 ...process.env,
                 URL: `http://${ip}:${freePort}`,
                 SERVER_IP: ip,
-                SERVER_PORT: freePortFirefox
+                SERVER_PORT: freePortBrowser
             }
         });
     } catch (e) {
@@ -129,7 +128,7 @@ async function main() {
         throw e;
     } finally {
         execSync(`docker rm -f ${runtimeContainerId}`);
-        execSync(`docker rm -f ${firefoxContainerId}`);
+        execSync(`docker rm -f ${browserContainerId}`);
     }
 }
 
