@@ -48,6 +48,10 @@
                     <description>Alternative text of the image for accessibility purposes</description>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">
