@@ -93,6 +93,8 @@ async function main() {
     const browserContainerId = execSync(
         `docker run -d -p ${freePortBrowser}:4444 -v /dev/shm:/dev/shm ${browserDocker}`
     )
+        .toString()
+        .trim();
 
     let attempts = 60;
     for (; attempts > 0; --attempts) {
