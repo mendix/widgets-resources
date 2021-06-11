@@ -25,6 +25,7 @@ export interface ImageViewerContainerProps {
     imageIcon?: DynamicValue<WebIcon>;
     onClickType: OnClickTypeEnum;
     onClick?: ActionValue;
+    alternativeText?: DynamicValue<string>;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -42,6 +43,7 @@ export interface ImageViewerPreviewProps {
     imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     onClickType: OnClickTypeEnum;
     onClick: {} | null;
+    alternativeText: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;

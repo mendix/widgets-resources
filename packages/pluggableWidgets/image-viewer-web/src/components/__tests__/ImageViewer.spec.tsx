@@ -130,4 +130,34 @@ describe("ImageViewer", () => {
         expect(onClickImageMock).toHaveBeenCalledTimes(1);
         expect(onClickOuterMock).not.toHaveBeenCalled();
     });
+
+    describe("when there is an accessibility alt text", () => {
+        it("is set properly on an image", () => {
+            const imageViewer = mount(<ImageViewer {...imageProps} altText="this is an awesome image" />);
+            const image = imageViewer.find("img");
+            expect(image.prop("alt")).toBe("this is an awesome image");
+        });
+
+        it("is set properly on a glyphicon", () => {
+            const imageViewer = mount(<ImageViewer {...glyphiconProps} altText="this is an awesome icon" />);
+            const image = imageViewer.find("span");
+            expect(image.prop("aria-label")).toBe("this is an awesome icon");
+            expect(image.prop("role")).toBe("img");
+        });
+    });
+
+    describe("when there is no accessibility alt text", () => {
+        it("nothing is set on an image", () => {
+            const imageViewer = mount(<ImageViewer {...imageProps} />);
+            const image = imageViewer.find("img");
+            expect(image.prop("alt")).toBe(undefined);
+        });
+
+        it("nothing is set on a glyphicon", () => {
+            const imageViewer = mount(<ImageViewer {...glyphiconProps} />);
+            const image = imageViewer.find("span");
+            expect(image).not.toHaveProperty("aria-label");
+            expect(image).not.toHaveProperty("role");
+        });
+    });
 });

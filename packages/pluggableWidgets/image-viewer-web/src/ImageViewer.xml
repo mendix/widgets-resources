@@ -42,6 +42,12 @@
                     <description/>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Accessibility">
+                <property key="alternativeText" type="textTemplate" required="false">
+                    <caption>Alternative test</caption>
+                    <description>Alternative text of the image for accessibility purposes</description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">

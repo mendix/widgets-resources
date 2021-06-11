@@ -50,6 +50,8 @@ export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props =
     const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
     const { type, image } = getImageProps(props);
 
+    const altText = props.alternativeText?.status === ValueStatus.Available ? props.alternativeText.value : undefined;
+
     return (
         <ImageViewerComponent
             class={props.class}
@@ -64,6 +66,7 @@ export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props =
             onClick={props.onClick ? onClick : undefined}
             type={type}
             image={image}
+            altText={altText}
         />
     );
 };

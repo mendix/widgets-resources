@@ -22,6 +22,7 @@ export interface ImageViewerProps extends ImageViewerImageProps {
     responsive: boolean;
     onClickType: OnClickTypeEnum;
     onClick?: () => void;
+    altText?: string;
 }
 
 export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
@@ -36,7 +37,8 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     onClickType,
     onClick,
     type,
-    image
+    image,
+    altText
 }) => {
     const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
 
@@ -65,7 +67,8 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
     const sharedContentProps: ImageViewerContentProps = {
         style,
-        onClick: onImageClick
+        onClick: onImageClick,
+        altText
     };
 
     const content =

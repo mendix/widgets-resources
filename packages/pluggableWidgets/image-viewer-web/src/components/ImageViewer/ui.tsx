@@ -27,6 +27,7 @@ export interface ImageViewerWrapperProps {
 export interface ImageViewerContentProps {
     style?: CSSProperties;
     onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+    altText?: string;
 }
 
 function Wrapper(props: ImageViewerWrapperProps): ReactElement {
@@ -50,11 +51,18 @@ export interface ImageViewerGlyphicon extends ImageViewerContentProps {
 }
 
 function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
+    const accessibilityProps = props.altText
+        ? {
+              "aria-label": props.altText,
+              role: "img"
+          }
+        : {};
     return (
         <span
             className={classNames("glyphicon", props.icon)}
             style={{ ...props.style, fontSize: `${props.size}px` }}
             onClick={props.onClick}
+            {...accessibilityProps}
         />
     );
 }
@@ -77,6 +85,7 @@ function Image(props: ImageViewerImage): ReactElement {
                 width: getStyle(props.width, props.widthUnit)
             }}
             onClick={props.onClick}
+            alt={props.altText}
         />
     );
 }
