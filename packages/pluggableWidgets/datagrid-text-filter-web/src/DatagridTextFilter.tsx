@@ -35,7 +35,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                 if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute } = filterContextValue;
+                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
