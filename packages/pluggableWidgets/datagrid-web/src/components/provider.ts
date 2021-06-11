@@ -1,6 +1,7 @@
 import { createContext, Dispatch, useContext } from "react";
 import { ListAttributeValue } from "mendix";
 import { FilterCondition } from "mendix/filters";
+import { FilterValue } from "../utils/filters";
 
 export interface FilterFunction {
     getFilterCondition(): FilterCondition | undefined;
@@ -9,6 +10,7 @@ export interface FilterFunction {
 export interface FilterContextValue {
     filterDispatcher: Dispatch<FilterFunction>;
     attribute: ListAttributeValue;
+    initialFilters: FilterValue[];
 }
 
 export const FilterContext = createContext((undefined as any) as FilterContextValue);

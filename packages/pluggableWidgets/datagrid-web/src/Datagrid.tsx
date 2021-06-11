@@ -7,6 +7,7 @@ import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
 import { FilterContext, FilterFunction } from "./components/provider";
 import { isAvailable } from "@mendix/piw-utils-internal";
+import { extractFilters } from "./utils/filters";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
@@ -101,15 +102,17 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 (renderWrapper, columnIndex) => {
                     const { attribute, filter } = props.columns[columnIndex];
                     const [, filterDispatcher] = customFiltersState[columnIndex];
+                    const initialFilters = extractFilters(attribute, props.datasource.filter);
+
                     return attribute
                         ? renderWrapper(
-                              <FilterContext.Provider value={{ filterDispatcher, attribute }}>
+                              <FilterContext.Provider value={{ filterDispatcher, attribute, initialFilters }}>
                                   {filter}
                               </FilterContext.Provider>
                           )
                         : renderWrapper(filter);
                 },
-                [props.columns, props.datasource]
+                [customFiltersState, props.columns, props.datasource.filter]
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWrapperRenderer={useCallback((_columnIndex: number, header: ReactElement) => header, [])}
