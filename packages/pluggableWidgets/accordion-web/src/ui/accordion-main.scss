@@ -14,9 +14,9 @@ $header-color-hover: #264ae5;
     border-bottom-style: solid;
 
     &.widget-accordion-group-collapsed {
-        .widget-accordion-group-header,
-        .widget-accordion-group-header.widget-accordion-group-header-icon-left {
-            .widget-accordion-group-header-icon {
+        .widget-accordion-group-header-button,
+        .widget-accordion-group-header-button.widget-accordion-group-header-button-icon-left {
+            .widget-accordion-group-header-button-icon {
                 transform: none;
             }
         }
@@ -27,9 +27,9 @@ $header-color-hover: #264ae5;
     }
 
     &.widget-accordion-group-collapsing {
-        .widget-accordion-group-header,
-        .widget-accordion-group-header.widget-accordion-group-header-icon-left {
-            .widget-accordion-group-header-icon {
+        .widget-accordion-group-header-button,
+        .widget-accordion-group-header-button.widget-accordion-group-header-button-icon-left {
+            .widget-accordion-group-header-button-icon {
                 transform: none;
             }
         }
@@ -44,7 +44,7 @@ $header-color-hover: #264ae5;
         }
     }
 
-    > .widget-accordion-group-header {
+    > .widget-accordion-group-header > .widget-accordion-group-header-button {
         padding: 16px;
         display: flex;
         align-items: center;
@@ -67,22 +67,22 @@ $header-color-hover: #264ae5;
             color: $header-color;
         }
 
-        .widget-accordion-group-header-icon {
+        .widget-accordion-group-header-button-icon {
             fill: $header-color;
             transform: rotate(-180deg);
 
-            &.widget-accordion-group-header-icon-animate {
+            &.widget-accordion-group-header-button-icon-animate {
                 transition: transform 0.2s ease-in-out 50ms;
             }
         }
 
-        &.widget-accordion-group-header-icon-right {
-            .widget-accordion-group-header-icon {
+        &.widget-accordion-group-header-button-icon-right {
+            .widget-accordion-group-header-button-icon {
                 margin-left: 16px;
             }
         }
 
-        &.widget-accordion-group-header-clickable {
+        &.widget-accordion-group-header-button-clickable {
             &:hover,
             &:focus,
             &:active {
@@ -97,7 +97,7 @@ $header-color-hover: #264ae5;
                     cursor: pointer;
                 }
 
-                .widget-accordion-group-header-icon {
+                .widget-accordion-group-header-button-icon {
                     fill: $header-color-hover;
                 }
             }
@@ -107,10 +107,10 @@ $header-color-hover: #264ae5;
             }
         }
 
-        &.widget-accordion-group-header-icon-left {
+        &.widget-accordion-group-header-button-icon-left {
             flex-direction: row-reverse;
 
-            .widget-accordion-group-header-icon {
+            .widget-accordion-group-header-button-icon {
                 margin-right: 16px;
                 transform: rotate(180deg);
             }
@@ -124,7 +124,7 @@ $header-color-hover: #264ae5;
 
 .widget-accordion-preview {
     .widget-accordion-group {
-        .widget-accordion-group-header {
+        .widget-accordion-group-header-button {
             > div > :is(h1, h2, h3, h4, h5, h6) {
                 font-size: 18px;
                 font-weight: 600;

@@ -136,15 +136,16 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                 props.dynamicClassName
             )}
         >
-            <header
-                className={classNames("widget-accordion-group-header", {
-                    "widget-accordion-group-header-clickable": props.toggleCollapsed,
-                    "widget-accordion-group-header-icon-left": props.toggleCollapsed && showHeaderIcon === "left",
-                    "widget-accordion-group-header-icon-right": props.toggleCollapsed && showHeaderIcon === "right"
-                })}
-            >
+            <header className={"widget-accordion-group-header"}>
                 <div
                     id={`${props.id}HeaderButton`}
+                    className={classNames("widget-accordion-group-header-button", {
+                        "widget-accordion-group-header-button-clickable": props.toggleCollapsed,
+                        "widget-accordion-group-header-button-icon-left":
+                            props.toggleCollapsed && showHeaderIcon === "left",
+                        "widget-accordion-group-header-button-icon-right":
+                            props.toggleCollapsed && showHeaderIcon === "right"
+                    })}
                     tabIndex={0}
                     data-focusindex={0}
                     role={"button"}
