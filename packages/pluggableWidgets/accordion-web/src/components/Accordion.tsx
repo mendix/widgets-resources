@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, useCallback, useReducer, useRef } from "react";
+import { createElement, Dispatch, ReactElement, useCallback, useReducer, useRef, useState } from "react";
 
 import { AccordionGroup, AccordionGroupProps, Target } from "./AccordionGroup";
 import { CollapsedAccordionGroupsReducerAction, getCollapsedAccordionGroupsReducer } from "../utils/reducers";
@@ -20,18 +20,23 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
 
 export function Accordion(props: AccordionProps): ReactElement | null {
     const reducer = useRef(getCollapsedAccordionGroupsReducer(props.singleExpandedGroup ? "single" : "multiple")); // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
-    const containerElementRef = useRef<HTMLDivElement>(null);
 
     const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(
         reducer.current,
         props.groups.map(() => !props.previewMode && props.collapsible)
     );
 
+    const [container, setContainer] = useState<HTMLDivElement>();
+
+    const updateContainer = useCallback((node: HTMLDivElement | null) => {
+        setContainer(node ?? undefined);
+    }, []);
+
     const accordionGroupElements = props.groups.map((group, index) => (
         <AccordionGroupWrapper
             key={index}
             index={index}
-            parent={containerElementRef.current ?? undefined}
+            parent={container}
             id={`${props.id}AccordionGroup${index}`}
             collapsedAccordionGroupsDispatch={props.collapsible ? collapsedAccordionGroupsDispatch : undefined}
             {...group}
@@ -44,7 +49,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 
     return (
         <div
-            ref={containerElementRef}
+            ref={updateContainer}
             id={props.id}
             className={classNames("widget-accordion", { "widget-accordion-preview": props.previewMode }, props.class)}
             style={props.style}
@@ -71,25 +76,27 @@ function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement 
     }, [props.collapsed, props.collapsedAccordionGroupsDispatch, props.index]);
 
     const focusAccordionGroupHeaderElement = useCallback(
-        (focusedHeader: EventTarget | null, focusTargetHeader: Target): void => {
-            if (props.parent && focusedHeader && focusedHeader instanceof Node) {
-                const headerElements: HTMLDivElement[] = Array.from(
-                    props.parent.querySelectorAll(".widget-accordion-group-header > div")
+        (focusedHeaderButton: EventTarget | null, focusTargetHeader: Target): void => {
+            if (props.parent && focusedHeaderButton && focusedHeaderButton instanceof Node) {
+                const headerButtons: HTMLDivElement[] = Array.from(
+                    props.parent.querySelectorAll(
+                        ":scope > .widget-accordion-group > .widget-accordion-group-header > .widget-accordion-group-header-button"
+                    )
                 );
 
                 switch (focusTargetHeader) {
                     case Target.FIRST:
-                        headerElements[0].focus();
+                        headerButtons[0].focus();
                         break;
                     case Target.LAST:
-                        headerElements[headerElements.length - 1].focus();
+                        headerButtons[headerButtons.length - 1].focus();
                         break;
                     case Target.PREVIOUS:
                     case Target.NEXT:
-                        const targetElementIndex = headerElements.findIndex(element =>
-                            element.isSameNode(focusedHeader)
+                        const currentHeaderButtonIndex = headerButtons.findIndex(headerButton =>
+                            headerButton.isSameNode(focusedHeaderButton)
                         );
-                        headerElements[targetElementIndex + (focusTargetHeader === Target.NEXT ? 1 : -1)]?.focus();
+                        headerButtons[currentHeaderButtonIndex + (focusTargetHeader === Target.NEXT ? 1 : -1)]?.focus();
                         break;
                 }
             }
