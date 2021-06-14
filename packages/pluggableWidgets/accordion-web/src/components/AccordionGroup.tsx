@@ -22,13 +22,14 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
     const { animateCollapsing, showHeaderIcon } = props;
 
     const [previousCollapsedPropValue, setPreviousCollapsedPropValue] = useState(props.collapsed);
+    const transitioning = useRef<boolean>(false);
 
     const rootElement = useRef<HTMLDivElement>(null);
     const contentWrapperElement = useRef<HTMLDivElement>(null);
     const contentElement = useRef<HTMLDivElement>(null);
 
-    const completeCollapsing = useCallback((): void => {
-        if (contentWrapperElement.current && rootElement.current) {
+    const completeTransitioning = useCallback((): void => {
+        if (contentWrapperElement.current && rootElement.current && transitioning.current) {
             if (!previousCollapsedPropValue) {
                 rootElement.current.classList.add("widget-accordion-group-collapsed");
                 rootElement.current.classList.remove("widget-accordion-group-collapsing");
@@ -38,6 +39,8 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                 contentWrapperElement.current.style.height = "";
                 setPreviousCollapsedPropValue(false);
             }
+
+            transitioning.current = false;
         }
     }, [previousCollapsedPropValue]);
 
@@ -49,6 +52,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             contentElement.current &&
             animateCollapsing
         ) {
+            transitioning.current = true;
             if (props.collapsed) {
                 contentWrapperElement.current.style.height = `${
                     contentElement.current.getBoundingClientRect().height
@@ -108,7 +112,7 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             <div
                 ref={contentWrapperElement}
                 className={"widget-accordion-group-content-wrapper"}
-                onTransitionEnd={completeCollapsing}
+                onTransitionEnd={completeTransitioning}
             >
                 <div ref={contentElement} className={"widget-accordion-group-content"}>
                     {props.content}
