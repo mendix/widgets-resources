@@ -36,7 +36,7 @@ describe("Accordion", () => {
         it("expands a group", () => {
             const accordion = mount(<Accordion {...defaultProps} />);
 
-            accordion.find(".widget-accordion-group-header").simulate("click");
+            accordion.find(".widget-accordion-group-header-button").simulate("click");
             expect(accordion).toMatchSnapshot();
         });
 
@@ -45,16 +45,16 @@ describe("Accordion", () => {
             groups[1].visible = true;
             const accordion = mount(<Accordion {...defaultProps} groups={groups} />);
 
-            accordion.find(".widget-accordion-group-header").first().simulate("click");
-            accordion.find(".widget-accordion-group-header").last().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").first().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").last().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
 
         it("collapses a group", () => {
             const accordion = mount(<Accordion {...defaultProps} />);
 
-            accordion.find(".widget-accordion-group-header").first().simulate("click");
-            accordion.find(".widget-accordion-group-header").first().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").first().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").first().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
     });
@@ -73,7 +73,7 @@ describe("Accordion", () => {
         it("expands a group", () => {
             const accordion = mount(<Accordion {...defaultProps} />);
 
-            accordion.find(".widget-accordion-group-header").simulate("click");
+            accordion.find(".widget-accordion-group-header-button").simulate("click");
             expect(accordion).toMatchSnapshot();
         });
 
@@ -82,8 +82,8 @@ describe("Accordion", () => {
             groups[1].visible = true;
             const accordion = mount(<Accordion {...defaultProps} groups={groups} />);
 
-            accordion.find(".widget-accordion-group-header").first().simulate("click");
-            accordion.find(".widget-accordion-group-header").last().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").first().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").last().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
 
@@ -92,9 +92,9 @@ describe("Accordion", () => {
             groups[1].visible = true;
             const accordion = mount(<Accordion {...defaultProps} groups={groups} />);
 
-            accordion.find(".widget-accordion-group-header").first().simulate("click");
-            accordion.find(".widget-accordion-group-header").last().simulate("click");
-            accordion.find(".widget-accordion-group-header").first().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").first().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").last().simulate("click");
+            accordion.find(".widget-accordion-group-header-button").first().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
     });

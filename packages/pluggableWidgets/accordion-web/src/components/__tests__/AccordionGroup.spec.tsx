@@ -112,7 +112,7 @@ describe("AccordionGroup", () => {
 
             const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps, toggleCollapsedMock);
 
-            accordionGroup.find("header").simulate("click");
+            accordionGroup.find(".widget-accordion-group-header-button").simulate("click");
             expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
         });
 
@@ -124,15 +124,15 @@ describe("AccordionGroup", () => {
                 toggleCollapsedMock
             );
 
-            accordionGroup.find("header").simulate("click");
+            accordionGroup.find(".widget-accordion-group-header-button").simulate("click");
             expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
         });
 
         it("applies the correct class when the header icon is aligned right", () => {
             const accordionGroup = mountAccordionGroupWithDispatch(defaultAccordionGroupProps);
 
-            expect(accordionGroup.find("header").prop("className")).toContain(
-                "widget-accordion-group-header-icon-right"
+            expect(accordionGroup.find(".widget-accordion-group-header-button").prop("className")).toContain(
+                "widget-accordion-group-header-button-icon-right"
             );
         });
 
@@ -142,8 +142,8 @@ describe("AccordionGroup", () => {
                 showHeaderIcon: "left"
             });
 
-            expect(accordionGroup.find("header").prop("className")).toContain(
-                "widget-accordion-group-header-icon-left"
+            expect(accordionGroup.find(".widget-accordion-group-header-button").prop("className")).toContain(
+                "widget-accordion-group-header-button-icon-left"
             );
         });
 
