@@ -23,7 +23,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 
     const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(
         reducer.current,
-        props.groups.map(() => (props.previewMode ? false : props.collapsible))
+        props.groups.map(() => !props.previewMode && props.collapsible)
     );
 
     const accordionGroupElements = props.groups.map((group, index) => (
