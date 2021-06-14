@@ -1,17 +1,19 @@
 import classNames from "classnames";
-import { createElement, ReactElement, useCallback } from "react";
-import Modal, { RenderModalBackdropProps } from "react-overlays/Modal";
+import React, { createElement, ReactElement, useCallback } from "react";
+import Modal, { ModalProps, RenderModalBackdropProps } from "react-overlays/Modal";
 
 import closeIconSvg from "../assets/ic24-close.svg";
 
 export interface LightboxProps {
     children: ReactElement;
     isOpen: boolean;
-    onClose: () => void;
+    onClose: RenderBackdropWithCloseProps["onClose"];
 }
 
-interface RenderBackdropWithCloseProps extends RenderModalBackdropProps {
-    onClose: () => void;
+export interface RenderBackdropWithCloseProps extends RenderModalBackdropProps {
+    // `event` is optional here because `ModalProps['onHide'] does not require it, but is
+    // preceeded by `ModalProps['onBackdropClick']` that will prevent the event propagation.
+    onClose: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 /**
@@ -35,11 +37,17 @@ export function Lightbox({ isOpen, onClose, children }: LightboxProps): ReactEle
         [onClose]
     );
 
+    // This is to prevent on click from containers when clicking on the backdrop.
+    const preventBackdropEventPropagation = useCallback<Exclude<ModalProps["onBackdropClick"], undefined>>(event => {
+        event.stopPropagation();
+    }, []);
+
     return (
         <Modal
             show={isOpen}
             onHide={onClose}
             renderBackdrop={renderBackdropWithClose}
+            onBackdropClick={preventBackdropEventPropagation}
             className="mx-image-viewer-lightbox"
         >
             <div>{children}</div>

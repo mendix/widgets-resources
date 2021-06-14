@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, ReactElement } from "react";
+import React, { createElement, CSSProperties, ReactElement } from "react";
 import classNames from "classnames";
 import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageViewerProps";
 import { LightboxProps } from "../Lightbox";
@@ -26,7 +26,7 @@ export interface ImageViewerWrapperProps {
 
 export interface ImageViewerContentProps {
     style?: CSSProperties;
-    onClick?: () => void;
+    onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 function Wrapper(props: ImageViewerWrapperProps): ReactElement {

@@ -113,4 +113,21 @@ describe("ImageViewer", () => {
             expect(imageViewer.find(Lightbox)).toHaveLength(0);
         });
     });
+
+    it("does not trigger on clicks from containers if clicked on the image", () => {
+        const onClickOuterMock = jest.fn();
+        const onClickImageMock = jest.fn();
+        const imageViewer = mount(
+            <div onClick={onClickOuterMock}>
+                <ImageViewer {...imageProps} onClickType="action" onClick={onClickImageMock} />
+            </div>
+        );
+
+        const image = imageViewer.find("img");
+        expect(image).toHaveLength(1);
+
+        image.simulate("click");
+        expect(onClickImageMock).toHaveBeenCalledTimes(1);
+        expect(onClickOuterMock).not.toHaveBeenCalled();
+    });
 });

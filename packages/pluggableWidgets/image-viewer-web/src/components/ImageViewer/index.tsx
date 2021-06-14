@@ -2,7 +2,7 @@ import { createElement, CSSProperties, FunctionComponent, useCallback } from "re
 import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum } from "../../../typings/ImageViewerProps";
 import { useLightboxState } from "../../utils/lightboxState";
 import { ImageViewerUi, ImageViewerContentProps } from "./ui";
-import { Lightbox } from "../Lightbox";
+import { Lightbox, LightboxProps } from "../Lightbox";
 
 import "../../ui/ImageViewer.scss";
 
@@ -40,17 +40,32 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 }) => {
     const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
 
-    const onImageClick = useCallback(() => {
-        if (onClickType === "action") {
-            onClick?.();
-        } else if (onClickType === "enlarge") {
-            openLightbox();
-        }
-    }, [onClick, onClickType, openLightbox]);
+    const onCloseLightbox = useCallback<LightboxProps["onClose"]>(
+        event => {
+            event?.stopPropagation();
+            closeLightbox();
+        },
+        [closeLightbox]
+    );
+
+    const onImageClick = useCallback<ImageViewerContentProps["onClick"]>(
+        event => {
+            event.stopPropagation();
+            if (lightboxIsOpen) {
+                return;
+            }
+            if (onClickType === "action") {
+                onClick?.();
+            } else if (onClickType === "enlarge") {
+                openLightbox();
+            }
+        },
+        [onClick, onClickType, openLightbox, lightboxIsOpen]
+    );
 
     const sharedContentProps: ImageViewerContentProps = {
         style,
-        onClick: lightboxIsOpen ? undefined : onImageClick
+        onClick: onImageClick
     };
 
     const content =
@@ -75,7 +90,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         >
             {content}
             {lightboxIsOpen && (
-                <Lightbox isOpen={lightboxIsOpen} onClose={closeLightbox}>
+                <Lightbox isOpen={lightboxIsOpen} onClose={onCloseLightbox}>
                     {content}
                 </Lightbox>
             )}
