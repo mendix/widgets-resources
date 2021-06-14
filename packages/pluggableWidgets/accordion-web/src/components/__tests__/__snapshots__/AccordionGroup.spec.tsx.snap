@@ -7,14 +7,29 @@ exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -32,14 +47,29 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -57,14 +87,29 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
   className="widget-accordion-group class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -82,14 +127,29 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -107,14 +167,29 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
   className="widget-accordion-group class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -132,14 +207,29 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -157,14 +247,29 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
   className="widget-accordion-group class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
+    className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -184,11 +289,26 @@ exports[`AccordionGroup without toggleCollapsed displays the content when the gr
   <header
     className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={true}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button"
+      data-focusindex={0}
+      id="idHeaderButton"
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -208,11 +328,26 @@ exports[`AccordionGroup without toggleCollapsed displays the content when the gr
   <header
     className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={true}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button"
+      data-focusindex={0}
+      id="idHeaderButton"
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"

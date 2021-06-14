@@ -1,12 +1,13 @@
 import { createElement } from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import AccordionGroup, { AccordionGroupProps } from "../AccordionGroup";
+import { AccordionGroup, AccordionGroupProps } from "../AccordionGroup";
 
 describe("AccordionGroup", () => {
     let defaultAccordionGroupProps: AccordionGroupProps;
 
     beforeEach(() => {
         defaultAccordionGroupProps = {
+            id: "id",
             header: "header",
             content: <span>content</span>,
             collapsed: true,
