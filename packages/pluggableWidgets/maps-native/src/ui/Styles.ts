@@ -16,7 +16,9 @@ export interface MapsStyle extends Style {
 }
 
 export const defaultMapsStyle: MapsStyle = {
-    container: {},
+    container: {
+        minHeight: 50
+    },
     loadingOverlay: {
         position: "absolute",
         top: 0,

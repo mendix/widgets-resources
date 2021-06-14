@@ -1,21 +1,23 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { ActionValue, DynamicValue } from "mendix";
+import { ActionValue, ValueStatus } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
 import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
 
-import { DefaultZoomLevelEnum, MapsProps, MarkersType as MarkerProps } from "../typings/MapsProps";
+import { DefaultZoomLevelEnum, MapsProps } from "../typings/MapsProps";
+import { ModeledMarker } from "../typings/shared";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@mendix/piw-utils-internal";
-import { Big } from "big.js";
+import { convertDynamicModeledMarker, convertStaticModeledMarker } from "./util/data";
 
 type Props = MapsProps<MapsStyle>;
 
 interface State {
     status: Status;
     markers?: Marker[];
+    minZoomLevel: number;
 }
 
 const enum Status {
@@ -28,13 +30,14 @@ const enum Status {
 
 interface Marker {
     key: string;
-    props: MarkerProps;
+    props: ModeledMarker;
     coordinate: LatLng;
 }
 
 export class Maps extends Component<Props, State> {
     readonly state: State = {
-        status: Status.LoadingMarkers
+        status: Status.LoadingMarkers,
+        minZoomLevel: 3
     };
 
     private readonly onMapReadyHandler = this.onMapReady.bind(this);
@@ -44,11 +47,17 @@ export class Maps extends Component<Props, State> {
     private readonly geocoder = new CachedGeocoder();
 
     componentDidMount(): void {
-        this.parseMarkers();
+        if (!this.props.dynamicMarkers.length) {
+            this.parseMarkers();
+        }
     }
 
     componentDidUpdate(): void {
-        if (this.state.status === Status.LoadingMarkers) {
+        if (
+            this.state.status === Status.LoadingMarkers &&
+            (!this.props.dynamicMarkers.length ||
+                this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
+        ) {
             this.parseMarkers();
         }
     }
@@ -70,7 +79,7 @@ export class Maps extends Component<Props, State> {
                         showsUserLocation={this.props.showsUserLocation}
                         showsMyLocationButton={this.props.showsUserLocation}
                         showsTraffic={false}
-                        minZoomLevel={toZoomValue(this.props.minZoomLevel)}
+                        minZoomLevel={this.state.minZoomLevel}
                         maxZoomLevel={toZoomValue(this.props.maxZoomLevel)}
                         rotateEnabled={this.props.interactive}
                         scrollEnabled={this.props.interactive}
@@ -80,7 +89,7 @@ export class Maps extends Component<Props, State> {
                         liteMode={!this.props.interactive}
                         cacheEnabled={!this.props.interactive}
                         showsPointsOfInterest={false}
-                        mapPadding={{ top: 40, right: 20, bottom: 20, left: 20 }}
+                        mapPadding={{ top: 48, right: 48, bottom: 48, left: 48 }}
                         onMapReady={this.onMapReadyHandler}
                         onRegionChangeComplete={this.onRegionChangeCompleteHandler}
                     >
@@ -101,26 +110,23 @@ export class Maps extends Component<Props, State> {
             <MarkerView
                 key={key}
                 coordinate={coordinate}
-                title={this.props.interactive ? props.title && props.title.value : ""}
-                description={this.props.interactive ? props.description && props.description.value : ""}
+                title={this.props.interactive ? props.title : ""}
+                description={this.props.interactive ? props.description : ""}
                 onPress={this.props.interactive ? () => onMarkerPress(props.onClick) : undefined}
-                pinColor={props.color || this.styles.marker.color}
+                pinColor={props.iconColor || this.styles.marker.color}
                 opacity={this.styles.marker.opacity}
             >
-                {props.icon && props.icon.value && (
-                    <Icon
-                        icon={props.icon.value}
-                        color={props.color || this.styles.marker.color}
-                        size={props.iconSize}
-                    />
+                {props.icon && (
+                    <Icon icon={props.icon} color={props.iconColor || this.styles.marker.color} size={props.iconSize} />
                 )}
             </MarkerView>
         );
     }
 
-    private onMapReady(): void {
+    private async onMapReady(): Promise<void> {
+        this.setState({ minZoomLevel: toZoomValue(this.props.minZoomLevel) });
+        await this.updateCamera(false);
         if (Platform.OS === "android") {
-            this.updateCamera(false);
             this.setState({ status: this.props.interactive ? Status.MapReady : Status.CameraReady });
         }
         this.onRegionChangeComplete();
@@ -149,8 +155,13 @@ export class Maps extends Component<Props, State> {
     }
 
     private async parseMarkers(): Promise<void> {
+        const markers = [
+            ...this.props.markers.map(convertStaticModeledMarker),
+            ...this.props.dynamicMarkers.flatMap(convertDynamicModeledMarker)
+        ];
+
         const parsedMarkers = await Promise.all(
-            this.props.markers.map(async (marker, index) => ({
+            markers.map(async (marker, index) => ({
                 key: `map_marker_${index}`,
                 props: marker,
                 coordinate: await this.parseCoordinate(marker.latitude, marker.longitude, marker.address)
@@ -175,13 +186,8 @@ export class Maps extends Component<Props, State> {
         );
     }
 
-    private async updateCamera(animate: boolean): Promise<void> {
+    private async updateCamera(animated: boolean): Promise<void> {
         if (!this.mapViewRef.current) {
-            return;
-        }
-
-        if (this.props.fitToMarkers && this.props.markers.length > 1) {
-            this.mapViewRef.current.fitToElements(animate);
             return;
         }
 
@@ -191,51 +197,51 @@ export class Maps extends Component<Props, State> {
             altitude: toAltitude(this.props.defaultZoomLevel)
         };
 
-        if (animate) {
-            this.mapViewRef.current.animateCamera(camera);
+        if (this.props.fitToMarkers && this.state.markers && this.state.markers.length > 1) {
+            const coords = (this.state.markers as Marker[]).map(marker => marker.coordinate);
+            this.mapViewRef.current.fitToCoordinates(coords, { animated });
         } else {
-            this.mapViewRef.current.setCamera(camera);
+            if (animated) {
+                this.mapViewRef.current.animateCamera(camera);
+            } else {
+                this.mapViewRef.current.setCamera(camera);
+            }
         }
     }
 
     private async getCenter(): Promise<LatLng> {
+        const { fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            this.props.markers.length === 1 && this.props.fitToMarkers
+            (centerLatitude && centerLongitude) || centerAddress
                 ? await this.parseCoordinate(
-                      this.props.markers[0].latitude,
-                      this.props.markers[0].longitude,
-                      this.props.markers[0].address
+                      Number(centerLatitude?.value),
+                      Number(centerLongitude?.value),
+                      centerAddress?.value
                   )
-                : await this.parseCoordinate(
-                      this.props.centerLatitude,
-                      this.props.centerLongitude,
-                      this.props.centerAddress
-                  );
+                : this.state.markers?.length === 1 && fitToMarkers
+                ? this.state.markers[0].coordinate
+                : { latitude: 51.9066346, longitude: 4.4861703 };
 
-        return center || { latitude: 51.9066346, longitude: 4.4861703 };
+        return center as LatLng;
     }
 
     private parseCoordinate(
-        latitudeProp?: DynamicValue<Big>,
-        longitudeProp?: DynamicValue<Big>,
-        addressProp?: DynamicValue<string>
-    ): Promise<LatLng | null> {
-        if (latitudeProp && latitudeProp.value && longitudeProp && longitudeProp.value) {
-            const latitude = Number(latitudeProp.value);
-            const longitude = Number(longitudeProp.value);
-
+        latitude?: number | undefined,
+        longitude?: number | undefined,
+        address?: string | undefined
+    ): Promise<LatLng> {
+        if (latitude && longitude) {
             if (!isValidLatitude(latitude) || !isValidLongitude(longitude)) {
                 throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
-
             return Promise.resolve({ latitude, longitude });
         }
 
-        if (addressProp && addressProp.value) {
-            return this.geocoder.geocode(addressProp.value);
+        if (address) {
+            return this.geocoder.geocode(address);
+        } else {
+            throw new Error(`No address provided.`);
         }
-
-        return Promise.resolve(null);
     }
 }
 
