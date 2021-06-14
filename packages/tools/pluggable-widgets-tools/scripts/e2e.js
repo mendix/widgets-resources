@@ -98,7 +98,7 @@ async function main() {
     const freePortBrowser = await findFreePort(4444);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
-        `docker run -d --name browser --privileged --cap-add=NET_ADMIN --link runtime --net=dockernet -p ${freePortBrowser}:4444 ` +
+        `docker run -d --name browser --link runtime --net=dockernet -p ${freePortBrowser}:4444 ` +
             `--add-host=localhost:192.168.10.2 -v /dev/shm:/dev/shm -v ${__dirname}:/shared ` +
             `${browserDocker} /bin/sh -c "chmod +x /shared/browsercontainer.sh && /shared/browsercontainer.sh && /opt/bin/entry_point.sh"`
     )
