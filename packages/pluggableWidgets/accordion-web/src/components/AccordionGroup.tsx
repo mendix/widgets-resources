@@ -1,24 +1,33 @@
-import { createElement, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, KeyboardEvent, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import classNames from "classnames";
 
 import "../ui/accordion-main.scss";
 
+export const enum Target {
+    FIRST = "first",
+    LAST = "last",
+    PREVIOUS = "previous",
+    NEXT = "next"
+}
+
 export type AccordionGroupIcon = { icon: ReactNode } | { expandIcon: ReactNode; collapseIcon: ReactNode };
 
 export interface AccordionGroupProps {
+    id: string;
     header: ReactNode;
     content: ReactNode;
     collapsed: boolean;
     visible: boolean;
     dynamicClassName?: string;
     toggleCollapsed?: () => void;
+    changeFocus?: (focusedGroupHeader: EventTarget | null, focusTargetGroupHeader: Target) => void;
     animateCollapsing?: boolean;
     generateIcon?: (collapsed: boolean) => ReactElement;
     showHeaderIcon?: "right" | "left" | "no";
 }
 
-export default function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
+export function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
     const { animateCollapsing, showHeaderIcon } = props;
 
     const [previousCollapsedPropValue, setPreviousCollapsedPropValue] = useState(props.collapsed);
@@ -81,6 +90,37 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
         }
     }, [props.collapsed, props.visible, previousCollapsedPropValue, animateCollapsing]);
 
+    const onKeydownHandler = useCallback(
+        (event: KeyboardEvent<HTMLDivElement>) => {
+            switch (event.key) {
+                case "Enter":
+                case "Space":
+                    event.preventDefault();
+                    props.toggleCollapsed!();
+                    break;
+                case "Home":
+                    event.preventDefault();
+                    props.changeFocus!(event.currentTarget, Target.FIRST);
+                    break;
+                case "End":
+                    event.preventDefault();
+                    props.changeFocus!(event.currentTarget, Target.LAST);
+                    break;
+                case "Up": // Microsoft Edge value
+                case "ArrowUp":
+                    event.preventDefault();
+                    props.changeFocus!(event.currentTarget, Target.PREVIOUS);
+                    break;
+                case "Down": // Microsoft Edge value
+                case "ArrowDown":
+                    event.preventDefault();
+                    props.changeFocus!(event.currentTarget, Target.NEXT);
+                    break;
+            }
+        },
+        [props.toggleCollapsed, props.changeFocus]
+    );
+
     if (!props.visible) {
         return null;
     }
@@ -102,17 +142,32 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
                     "widget-accordion-group-header-icon-left": props.toggleCollapsed && showHeaderIcon === "left",
                     "widget-accordion-group-header-icon-right": props.toggleCollapsed && showHeaderIcon === "right"
                 })}
-                onClick={props.toggleCollapsed}
             >
-                {props.header}
-                {props.toggleCollapsed && (showHeaderIcon === "left" || showHeaderIcon === "right")
-                    ? props.generateIcon?.(previousCollapsedPropValue ?? false)
-                    : null}
+                <div
+                    id={`${props.id}HeaderButton`}
+                    tabIndex={0}
+                    data-focusindex={0}
+                    role={"button"}
+                    onClick={props.toggleCollapsed}
+                    onKeyDown={props.toggleCollapsed && props.changeFocus ? onKeydownHandler : undefined}
+                    aria-expanded={!previousCollapsedPropValue}
+                    aria-disabled={!props.toggleCollapsed}
+                    aria-controls={`${props.id}ContentWrapper`}
+                >
+                    {props.header}
+                    {props.toggleCollapsed && (showHeaderIcon === "left" || showHeaderIcon === "right")
+                        ? props.generateIcon?.(previousCollapsedPropValue ?? false)
+                        : null}
+                </div>
             </header>
             <div
                 ref={contentWrapperElement}
+                id={`${props.id}ContentWrapper`}
                 className={"widget-accordion-group-content-wrapper"}
+                data-focusindex={0}
                 onTransitionEnd={completeTransitioning}
+                role={"region"}
+                aria-labelledby={`${props.id}HeaderButton`}
             >
                 <div ref={contentElement} className={"widget-accordion-group-content"}>
                     {props.content}
