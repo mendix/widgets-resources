@@ -17,6 +17,12 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
           true,
         ],
         Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
           false,
         ],
         Array [
@@ -33,6 +39,14 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
         ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -127,6 +141,12 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -143,6 +163,14 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -285,6 +313,12 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -301,6 +335,14 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -404,6 +446,12 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -420,6 +468,14 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -562,6 +618,12 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -578,6 +640,14 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -681,6 +751,12 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
           true,
         ],
         Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
           false,
         ],
         Array [
@@ -706,6 +782,14 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
         ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -812,6 +896,12 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -837,6 +927,14 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -991,6 +1089,12 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -1016,6 +1120,14 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -1131,6 +1243,12 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -1156,6 +1274,14 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -1310,6 +1436,12 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -1335,6 +1467,14 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -1447,10 +1587,17 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
           true,
         ],
         Array [
+          true,
+        ],
+        Array [
           false,
         ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -1522,10 +1669,17 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
               false,
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -1610,10 +1764,17 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
                 false,
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -1694,10 +1855,17 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
               false,
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -1782,10 +1950,17 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
                 false,
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -1823,8 +1998,15 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
         Array [
           true,
         ],
+        Array [
+          true,
+        ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -1884,8 +2066,15 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
             Array [
               true,
             ],
+            Array [
+              true,
+            ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -1897,6 +2086,50 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       id="idAccordionGroup0"
       index={0}
       key="0"
+      parent={
+        <div
+          class="widget-accordion"
+          data-focusindex="1"
+          id="id"
+          style="height: 500px;"
+        >
+          <section
+            class="widget-accordion-group widget-accordion-group-collapsed"
+          >
+            <header
+              class="widget-accordion-group-header"
+            >
+              <div
+                aria-controls="idAccordionGroup0ContentWrapper"
+                aria-disabled="false"
+                aria-expanded="false"
+                class="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+                data-focusindex="0"
+                id="idAccordionGroup0HeaderButton"
+                role="button"
+                tabindex="0"
+              >
+                header
+              </div>
+            </header>
+            <div
+              aria-labelledby="idAccordionGroup0HeaderButton"
+              class="widget-accordion-group-content-wrapper"
+              data-focusindex="0"
+              id="idAccordionGroup0ContentWrapper"
+              role="region"
+            >
+              <div
+                class="widget-accordion-group-content"
+              >
+                <span>
+                  content
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      }
       showHeaderIcon="right"
       visible={true}
     >
@@ -1914,8 +2147,15 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
               Array [
                 true,
               ],
+              Array [
+                true,
+              ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -1984,8 +2224,15 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
             Array [
               true,
             ],
+            Array [
+              true,
+            ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -1997,6 +2244,50 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       id="idAccordionGroup1"
       index={1}
       key="1"
+      parent={
+        <div
+          class="widget-accordion"
+          data-focusindex="1"
+          id="id"
+          style="height: 500px;"
+        >
+          <section
+            class="widget-accordion-group widget-accordion-group-collapsed"
+          >
+            <header
+              class="widget-accordion-group-header"
+            >
+              <div
+                aria-controls="idAccordionGroup0ContentWrapper"
+                aria-disabled="false"
+                aria-expanded="false"
+                class="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+                data-focusindex="0"
+                id="idAccordionGroup0HeaderButton"
+                role="button"
+                tabindex="0"
+              >
+                header
+              </div>
+            </header>
+            <div
+              aria-labelledby="idAccordionGroup0HeaderButton"
+              class="widget-accordion-group-content-wrapper"
+              data-focusindex="0"
+              id="idAccordionGroup0ContentWrapper"
+              role="region"
+            >
+              <div
+                class="widget-accordion-group-content"
+              >
+                <span>
+                  content
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      }
       showHeaderIcon="right"
       visible={false}
     >
@@ -2014,8 +2305,15 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
               Array [
                 true,
               ],
+              Array [
+                true,
+              ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -2052,6 +2350,12 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
           true,
         ],
         Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
           false,
         ],
         Array [
@@ -2071,6 +2375,14 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
         ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -2169,6 +2481,12 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -2188,6 +2506,14 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -2334,6 +2660,12 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -2353,6 +2685,14 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -2460,6 +2800,12 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -2479,6 +2825,14 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -2625,6 +2979,12 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -2644,6 +3004,14 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -2748,6 +3116,9 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
           true,
         ],
         Array [
+          true,
+        ],
+        Array [
           false,
         ],
         Array [
@@ -2758,6 +3129,10 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
         ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -2837,6 +3212,9 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -2847,6 +3225,10 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -2939,6 +3321,9 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -2949,6 +3334,10 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -3037,6 +3426,9 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
               false,
             ],
             Array [
@@ -3047,6 +3439,10 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -3139,6 +3535,9 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
                 false,
               ],
               Array [
@@ -3149,6 +3548,10 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -3198,10 +3601,17 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
           true,
         ],
         Array [
+          true,
+        ],
+        Array [
           false,
         ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -3273,10 +3683,17 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
               false,
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -3361,10 +3778,17 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
                 false,
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -3445,10 +3869,17 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
               true,
             ],
             Array [
+              true,
+            ],
+            Array [
               false,
             ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -3533,10 +3964,17 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
                 true,
               ],
               Array [
+                true,
+              ],
+              Array [
                 false,
               ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -3574,8 +4012,15 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
         Array [
           true,
         ],
+        Array [
+          true,
+        ],
       ],
       "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
         Object {
           "type": "return",
           "value": undefined,
@@ -3635,8 +4080,15 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
             Array [
               true,
             ],
+            Array [
+              true,
+            ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -3648,6 +4100,50 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       id="idAccordionGroup0"
       index={0}
       key="0"
+      parent={
+        <div
+          class="widget-accordion"
+          data-focusindex="1"
+          id="id"
+          style="height: 500px;"
+        >
+          <section
+            class="widget-accordion-group widget-accordion-group-collapsed"
+          >
+            <header
+              class="widget-accordion-group-header"
+            >
+              <div
+                aria-controls="idAccordionGroup0ContentWrapper"
+                aria-disabled="false"
+                aria-expanded="false"
+                class="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+                data-focusindex="0"
+                id="idAccordionGroup0HeaderButton"
+                role="button"
+                tabindex="0"
+              >
+                header
+              </div>
+            </header>
+            <div
+              aria-labelledby="idAccordionGroup0HeaderButton"
+              class="widget-accordion-group-content-wrapper"
+              data-focusindex="0"
+              id="idAccordionGroup0ContentWrapper"
+              role="region"
+            >
+              <div
+                class="widget-accordion-group-content"
+              >
+                <span>
+                  content
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      }
       showHeaderIcon="right"
       visible={true}
     >
@@ -3665,8 +4161,15 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
               Array [
                 true,
               ],
+              Array [
+                true,
+              ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -3735,8 +4238,15 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
             Array [
               true,
             ],
+            Array [
+              true,
+            ],
           ],
           "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
             Object {
               "type": "return",
               "value": undefined,
@@ -3748,6 +4258,50 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       id="idAccordionGroup1"
       index={1}
       key="1"
+      parent={
+        <div
+          class="widget-accordion"
+          data-focusindex="1"
+          id="id"
+          style="height: 500px;"
+        >
+          <section
+            class="widget-accordion-group widget-accordion-group-collapsed"
+          >
+            <header
+              class="widget-accordion-group-header"
+            >
+              <div
+                aria-controls="idAccordionGroup0ContentWrapper"
+                aria-disabled="false"
+                aria-expanded="false"
+                class="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+                data-focusindex="0"
+                id="idAccordionGroup0HeaderButton"
+                role="button"
+                tabindex="0"
+              >
+                header
+              </div>
+            </header>
+            <div
+              aria-labelledby="idAccordionGroup0HeaderButton"
+              class="widget-accordion-group-content-wrapper"
+              data-focusindex="0"
+              id="idAccordionGroup0ContentWrapper"
+              role="region"
+            >
+              <div
+                class="widget-accordion-group-content"
+              >
+                <span>
+                  content
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      }
       showHeaderIcon="right"
       visible={false}
     >
@@ -3765,8 +4319,15 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
               Array [
                 true,
               ],
+              Array [
+                true,
+              ],
             ],
             "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
               Object {
                 "type": "return",
                 "value": undefined,
@@ -3840,6 +4401,50 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       id="idAccordionGroup0"
       index={0}
       key="0"
+      parent={
+        <div
+          class="widget-accordion"
+          data-focusindex="1"
+          id="id"
+          style="height: 500px;"
+        >
+          <section
+            class="widget-accordion-group"
+          >
+            <header
+              class="widget-accordion-group-header"
+            >
+              <div
+                aria-controls="idAccordionGroup0ContentWrapper"
+                aria-disabled="true"
+                aria-expanded="true"
+                class="widget-accordion-group-header-button"
+                data-focusindex="0"
+                id="idAccordionGroup0HeaderButton"
+                role="button"
+                tabindex="0"
+              >
+                header
+              </div>
+            </header>
+            <div
+              aria-labelledby="idAccordionGroup0HeaderButton"
+              class="widget-accordion-group-content-wrapper"
+              data-focusindex="0"
+              id="idAccordionGroup0ContentWrapper"
+              role="region"
+            >
+              <div
+                class="widget-accordion-group-content"
+              >
+                <span>
+                  content
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      }
       showHeaderIcon="right"
       visible={true}
     >
@@ -3907,6 +4512,50 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       id="idAccordionGroup1"
       index={1}
       key="1"
+      parent={
+        <div
+          class="widget-accordion"
+          data-focusindex="1"
+          id="id"
+          style="height: 500px;"
+        >
+          <section
+            class="widget-accordion-group"
+          >
+            <header
+              class="widget-accordion-group-header"
+            >
+              <div
+                aria-controls="idAccordionGroup0ContentWrapper"
+                aria-disabled="true"
+                aria-expanded="true"
+                class="widget-accordion-group-header-button"
+                data-focusindex="0"
+                id="idAccordionGroup0HeaderButton"
+                role="button"
+                tabindex="0"
+              >
+                header
+              </div>
+            </header>
+            <div
+              aria-labelledby="idAccordionGroup0HeaderButton"
+              class="widget-accordion-group-content-wrapper"
+              data-focusindex="0"
+              id="idAccordionGroup0ContentWrapper"
+              role="region"
+            >
+              <div
+                class="widget-accordion-group-content"
+              >
+                <span>
+                  content
+                </span>
+              </div>
+            </div>
+          </section>
+        </div>
+      }
       showHeaderIcon="right"
       visible={false}
     >
