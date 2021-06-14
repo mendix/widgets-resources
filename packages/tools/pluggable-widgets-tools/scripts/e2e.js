@@ -96,10 +96,11 @@ async function main() {
 
     // Spin up the standalone selenium docker image
     const freePortBrowser = await findFreePort(4444);
+    const runtimeIp = execSync(`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' runtime`);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
-        `docker run -d --name browser --link runtime --net=dockernet -p ${freePortBrowser}:4444 ` +
-            `--add-host=localhost:192.168.10.2 -v /dev/shm:/dev/shm -v ${__dirname}:/shared ` +
+        `docker run -d --name browser --net=dockernet -p ${freePortBrowser}:4444 ` +
+            `-v /dev/shm:/dev/shm -v ${__dirname}:/shared ` +
             `${browserDocker} /bin/sh -c "chmod +x /shared/browsercontainer.sh && /shared/browsercontainer.sh && /opt/bin/entry_point.sh"`
     )
         .toString()
@@ -114,6 +115,7 @@ async function main() {
             }
         } catch (e) {
             console.log(`Could not reach http://${ip}:${freePort}, trying again...`);
+            console.log(`Runtime IP: ${runtimeIp}`);
         }
         await new Promise(resolve => setTimeout(resolve, 3000));
     }
@@ -126,6 +128,7 @@ async function main() {
             stdio: "inherit",
             env: {
                 ...process.env,
+                URL: `http://localhost:8080`,
                 SERVER_IP: ip,
                 SERVER_PORT: freePortBrowser
             }
@@ -133,6 +136,8 @@ async function main() {
     } catch (e) {
         try {
             execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
+            execSync(`docker logs ${browserContainerId}`, { stdio: "inherit" });
+            // eslint-disable-next-line no-empty
         } catch (_) {}
         console.log(cat("results/runtime.log").toString());
         throw e;
