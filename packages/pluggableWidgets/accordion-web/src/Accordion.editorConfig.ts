@@ -17,7 +17,7 @@ export function getProperties(
 
     if (!values.collapsible) {
         hidePropertiesIn(defaultProperties, values, [
-            "collapseBehavior",
+            "expandBehavior",
             "animate",
             "showIcon",
             "icon",

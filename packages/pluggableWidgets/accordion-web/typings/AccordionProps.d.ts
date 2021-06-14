@@ -17,7 +17,7 @@ export interface GroupsType {
     dynamicClass?: DynamicValue<string>;
 }
 
-export type CollapseBehaviorEnum = "singleExpanded" | "multipleExpanded";
+export type ExpandBehaviorEnum = "singleExpanded" | "multipleExpanded";
 
 export type ShowIconEnum = "right" | "left" | "no";
 
@@ -37,7 +37,7 @@ export interface AccordionContainerProps {
     tabIndex?: number;
     groups: GroupsType[];
     collapsible: boolean;
-    collapseBehavior: CollapseBehaviorEnum;
+    expandBehavior: ExpandBehaviorEnum;
     animate: boolean;
     showIcon: ShowIconEnum;
     icon?: DynamicValue<WebIcon>;
@@ -52,7 +52,7 @@ export interface AccordionPreviewProps {
     style: string;
     groups: GroupsPreviewType[];
     collapsible: boolean;
-    collapseBehavior: CollapseBehaviorEnum;
+    expandBehavior: ExpandBehaviorEnum;
     animate: boolean;
     showIcon: ShowIconEnum;
     icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
