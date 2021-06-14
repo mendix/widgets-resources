@@ -28,6 +28,22 @@
                     <description>The icon image</description>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClickType" type="enumeration" defaultValue="action">
+                    <caption>On click type</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="action">Action</enumerationValue>
+                        <enumerationValue key="enlarge">Enlarge</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="onClick" type="action" required="false">
+                    <caption>On click</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">
                 <property key="widthUnit" type="enumeration" defaultValue="auto">
                     <caption>Width unit</caption>
@@ -61,20 +77,6 @@
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>
                     <description>Image will never get larger than its original size. It can become smaller</description>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Events">
-                <property key="onClickType" type="enumeration" defaultValue="action">
-                    <caption>On click type</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="action">Action</enumerationValue>
-                        <enumerationValue key="enlarge">Enlarge</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="onClick" type="action" required="false">
-                    <caption>On click</caption>
-                    <description/>
                 </property>
             </propertyGroup>
         </propertyGroup>
