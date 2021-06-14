@@ -4,13 +4,15 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue, WebIcon, WebImage } from "mendix";
+import { ActionValue, DynamicValue, WebIcon, WebImage } from "mendix";
 
 export type DatasourceEnum = "image" | "imageUrl" | "icon";
 
 export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
 export type HeightUnitEnum = "auto" | "pixels";
+
+export type OnClickTypeEnum = "action" | "enlarge";
 
 export interface ImageViewerContainerProps {
     name: string;
@@ -27,6 +29,8 @@ export interface ImageViewerContainerProps {
     height: number;
     iconSize: number;
     responsive: boolean;
+    onClickType: OnClickTypeEnum;
+    onClick?: ActionValue;
 }
 
 export interface ImageViewerPreviewProps {
@@ -42,4 +46,6 @@ export interface ImageViewerPreviewProps {
     height: number | null;
     iconSize: number | null;
     responsive: boolean;
+    onClickType: OnClickTypeEnum;
+    onClick: {} | null;
 }

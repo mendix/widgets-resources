@@ -63,7 +63,20 @@
                     <description>Image will never get larger than its original size. It can become smaller</description>
                 </property>
             </propertyGroup>
-            <!-- TODO: Events -->
+            <propertyGroup caption="Events">
+                <property key="onClickType" type="enumeration" defaultValue="action">
+                    <caption>On click type</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="action">Action</enumerationValue>
+                        <enumerationValue key="enlarge">Enlarge</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="onClick" type="action" required="false">
+                    <caption>On click</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
