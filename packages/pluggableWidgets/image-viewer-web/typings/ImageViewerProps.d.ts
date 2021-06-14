@@ -12,7 +12,7 @@ export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
 export type HeightUnitEnum = "auto" | "pixels";
 
-export type OnClickTypeEnum = "action" | "enlarge" | "doNothing";
+export type OnClickTypeEnum = "action" | "enlarge";
 
 export interface ImageViewerContainerProps {
     name: string;

@@ -70,7 +70,6 @@
                     <enumerationValues>
                         <enumerationValue key="action">Action</enumerationValue>
                         <enumerationValue key="enlarge">Enlarge</enumerationValue>
-                        <enumerationValue key="doNothing">Do nothing</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="onClick" type="action" required="false">

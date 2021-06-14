@@ -30,7 +30,7 @@ const imageProps: ImageViewerProps = {
     widthUnit: "pixels",
     iconSize: 0,
     responsive: true,
-    onClickType: "doNothing"
+    onClickType: "action"
 };
 
 const glyphiconProps: ImageViewerProps = {
@@ -43,7 +43,7 @@ const glyphiconProps: ImageViewerProps = {
     width: 0,
     widthUnit: "pixels",
     responsive: true,
-    onClickType: "doNothing"
+    onClickType: "action"
 };
 
 describe("ImageViewer", () => {
@@ -111,20 +111,6 @@ describe("ImageViewer", () => {
             closeButton.simulate("click");
 
             expect(imageViewer.find(Lightbox)).toHaveLength(0);
-        });
-    });
-
-    describe("when the onClickType is doNothing", () => {
-        it("does nothing when clicking on the image", () => {
-            const onClickMock = jest.fn();
-            const imageViewer = mount(<ImageViewer {...imageProps} onClickType="doNothing" onClick={onClickMock} />);
-            expect(imageViewer.find(Lightbox)).toHaveLength(0);
-
-            const image = imageViewer.find("img");
-            image.simulate("click");
-
-            expect(imageViewer.find(Lightbox)).toHaveLength(0);
-            expect(onClickMock).not.toHaveBeenCalled();
         });
     });
 });
