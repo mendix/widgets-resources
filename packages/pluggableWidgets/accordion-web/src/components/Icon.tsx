@@ -15,7 +15,7 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
                 className={classNames("widget-accordion-group-header-icon", {
                     "widget-accordion-group-header-icon-animate": animate
                 })}
-                aria-hidden={"true"}
+                aria-hidden
                 width="16"
                 height="16"
                 viewBox="0 0 16 16"

@@ -50,7 +50,9 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             animateCollapsing
         ) {
             if (props.collapsed) {
-                setContentWrapperHeightToContentHeight(contentWrapperElement.current, contentElement.current);
+                contentWrapperElement.current.style.height = `${
+                    contentElement.current.getBoundingClientRect().height
+                }px`;
                 rootElement.current.classList.add("widget-accordion-group-collapsing");
 
                 setTimeout(() => {
@@ -64,7 +66,9 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
 
                 setTimeout(() => {
                     if (contentWrapperElement.current && contentElement.current) {
-                        setContentWrapperHeightToContentHeight(contentWrapperElement.current, contentElement.current);
+                        contentWrapperElement.current.style.height = `${
+                            contentElement.current.getBoundingClientRect().height
+                        }px`;
                     }
                 }, 50);
             }
@@ -112,8 +116,4 @@ export default function AccordionGroup(props: AccordionGroupProps): ReactElement
             </div>
         </section>
     );
-}
-
-function setContentWrapperHeightToContentHeight(contentWrapper: HTMLDivElement, content: HTMLDivElement): void {
-    contentWrapper.style.height = `${content.getBoundingClientRect().height}px`;
 }
