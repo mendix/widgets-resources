@@ -122,7 +122,7 @@
         &.widget-accordion-striped {
             .widget-accordion-group:not(:is(.widget-accordion-brand-primary, .widget-accordion-brand-secondary, .widget-accordion-brand-success, .widget-accordion-brand-warning, .widget-accordion-brand-danger)):nth-child(2n
                     + 1) {
-                .widget-accordion-group-header {
+                .widget-accordion-group-header-button {
                     background-color: $accordion-bg-striped;
                     &:hover,
                     &:focus,
@@ -139,7 +139,7 @@
 
         &.widget-accordion-compact {
             .widget-accordion-group {
-                .widget-accordion-group-header {
+                .widget-accordion-group-header-button {
                     padding: $spacing-smaller $spacing-small;
                 }
 

@@ -48,7 +48,7 @@
         border-bottom-right-radius: $border-radius-default;
     }
 
-    > .widget-accordion-group-header {
+    > .widget-accordion-group-header > .widget-accordion-group-header-button {
         background-color: $background-color;
         padding: $spacing-medium;
 
@@ -61,11 +61,11 @@
             color: $color;
         }
 
-        .widget-accordion-group-header-icon {
+        .widget-accordion-group-header-button-icon {
             fill: $color;
         }
 
-        &.widget-accordion-group-header-clickable {
+        &.widget-accordion-group-header-button-clickable {
             &:hover,
             &:focus,
             &:active {
@@ -75,7 +75,7 @@
                     color: $color-hover;
                 }
 
-                .widget-accordion-group-header-icon {
+                .widget-accordion-group-header-button-icon {
                     fill: $color-hover;
                 }
             }
@@ -93,7 +93,7 @@
 }
 
 @mixin get-accordion-preview-group-styles($color) {
-    .widget-accordion-group-header {
+    .widget-accordion-group-header-button {
         > div > :is(h1, h2, h3, h4, h5, h6) {
             font-size: $font-size-h5;
             font-weight: $font-weight-header;
