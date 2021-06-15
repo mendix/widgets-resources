@@ -13,9 +13,6 @@
     ========================================================================== */
 
     .widget-accordion {
-        background-color: $bg-color-secondary;
-        border-radius: $border-radius-default;
-
         .widget-accordion-group {
             @include get-accordion-group-styles(
                 $accordion-header-default-bg,
@@ -36,6 +33,7 @@
 
 @mixin get-accordion-group-styles($background-color, $background-color-hover, $color, $color-hover, $border-color) {
     border-color: $border-color;
+    background-color: $bg-color-secondary;
 
     &:first-child {
         border-top-left-radius: $border-radius-default;

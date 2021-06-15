@@ -4,11 +4,8 @@ $header-background-color-hover: #f8f8f8;
 $header-color: #000000;
 $header-color-hover: #264ae5;
 
-.widget-accordion {
-    background-color: $background-color;
-}
-
 .widget-accordion-group {
+    background-color: $background-color;
     border-color: $border-color;
     border-bottom-width: 1px;
     border-bottom-style: solid;
