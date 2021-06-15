@@ -14,9 +14,11 @@ export function translateFilters(filters: FilterValue[]): DefaultFilterValue | u
             case "contains":
                 type = "contains";
                 break;
-            case "startsWith":
-            case "endsWith":
-                type = filter.type;
+            case "starts-with":
+                type = "startsWith";
+                break;
+            case "ends-with":
+                type = "endsWith";
                 break;
             case ">":
                 type = "greater";
