@@ -20,75 +20,74 @@ export interface AccordionGroupProps {
     collapsed: boolean;
     visible: boolean;
     dynamicClassName?: string;
+    collapsible: boolean;
     toggleCollapsed?: () => void;
     changeFocus?: (focusedGroupHeader: EventTarget | null, focusTargetGroupHeader: Target) => void;
-    animateCollapsing?: boolean;
-    generateIcon?: (collapsed: boolean) => ReactElement;
+    animateContent?: boolean;
+    generateHeaderIcon?: (collapsed: boolean) => ReactElement;
     showHeaderIcon?: "right" | "left" | "no";
 }
 
 export function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { animateCollapsing, showHeaderIcon } = props;
+    const { animateContent, changeFocus, showHeaderIcon, toggleCollapsed } = props;
 
-    const [previousCollapsedPropValue, setPreviousCollapsedPropValue] = useState(props.collapsed);
-    const transitioning = useRef<boolean>(false);
+    const [previousCollapsedValue, setPreviousCollapsedValue] = useState(props.collapsed);
+    const animatingContent = useRef<boolean>(false);
 
-    const rootElement = useRef<HTMLDivElement>(null);
-    const contentWrapperElement = useRef<HTMLDivElement>(null);
-    const contentElement = useRef<HTMLDivElement>(null);
+    const rootRef = useRef<HTMLDivElement>(null);
+    const contentWrapperRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
 
     const completeTransitioning = useCallback((): void => {
-        if (contentWrapperElement.current && rootElement.current && transitioning.current) {
-            if (!previousCollapsedPropValue) {
-                rootElement.current.classList.add("widget-accordion-group-collapsed");
-                rootElement.current.classList.remove("widget-accordion-group-collapsing");
-                setPreviousCollapsedPropValue(true);
+        if (contentWrapperRef.current && rootRef.current && animatingContent.current) {
+            if (!previousCollapsedValue) {
+                rootRef.current.classList.add("widget-accordion-group-collapsed");
+                rootRef.current.classList.remove("widget-accordion-group-collapsing");
+                setPreviousCollapsedValue(true);
             } else {
-                rootElement.current.classList.remove("widget-accordion-group-expanding");
-                contentWrapperElement.current.style.height = "";
-                setPreviousCollapsedPropValue(false);
+                rootRef.current.classList.remove("widget-accordion-group-expanding");
+                contentWrapperRef.current.style.height = "";
+                setPreviousCollapsedValue(false);
             }
 
-            transitioning.current = false;
+            animatingContent.current = false;
         }
-    }, [previousCollapsedPropValue]);
+    }, [previousCollapsedValue]);
 
     useEffect(() => {
         if (
-            props.collapsed !== previousCollapsedPropValue &&
-            rootElement.current &&
-            contentWrapperElement.current &&
-            contentElement.current &&
-            animateCollapsing
+            props.collapsed !== previousCollapsedValue &&
+            rootRef.current &&
+            contentWrapperRef.current &&
+            contentRef.current &&
+            animateContent
         ) {
-            transitioning.current = true;
+            animatingContent.current = true;
             if (props.collapsed) {
-                contentWrapperElement.current.style.height = `${
-                    contentElement.current.getBoundingClientRect().height
-                }px`;
-                rootElement.current.classList.add("widget-accordion-group-collapsing");
+                contentWrapperRef.current.style.height = `${contentRef.current.getBoundingClientRect().height}px`;
+                rootRef.current.classList.add("widget-accordion-group-collapsing");
 
                 setTimeout(() => {
-                    if (contentWrapperElement.current) {
-                        contentWrapperElement.current.style.height = "";
+                    if (contentWrapperRef.current) {
+                        contentWrapperRef.current.style.height = "";
                     }
                 }, 50);
             } else {
-                rootElement.current.classList.add("widget-accordion-group-expanding");
-                rootElement.current.classList.remove("widget-accordion-group-collapsed");
+                rootRef.current.classList.add("widget-accordion-group-expanding");
+                rootRef.current.classList.remove("widget-accordion-group-collapsed");
 
                 setTimeout(() => {
-                    if (contentWrapperElement.current && contentElement.current) {
-                        contentWrapperElement.current.style.height = `${
-                            contentElement.current.getBoundingClientRect().height
+                    if (contentWrapperRef.current && contentRef.current) {
+                        contentWrapperRef.current.style.height = `${
+                            contentRef.current.getBoundingClientRect().height
                         }px`;
                     }
                 }, 50);
             }
-        } else if (props.collapsed !== previousCollapsedPropValue && (!animateCollapsing || !props.visible)) {
-            setPreviousCollapsedPropValue(props.collapsed);
+        } else if (props.collapsed !== previousCollapsedValue && (!animateContent || !props.visible)) {
+            setPreviousCollapsedValue(props.collapsed);
         }
-    }, [props.collapsed, props.visible, previousCollapsedPropValue, animateCollapsing]);
+    }, [props.collapsed, props.visible, previousCollapsedValue, animateContent]);
 
     const onKeydownHandler = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
@@ -96,29 +95,29 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                 case "Enter":
                 case " ":
                     event.preventDefault();
-                    props.toggleCollapsed!();
+                    toggleCollapsed?.();
                     break;
                 case "Home":
                     event.preventDefault();
-                    props.changeFocus!(event.currentTarget, Target.FIRST);
+                    changeFocus?.(event.currentTarget, Target.FIRST);
                     break;
                 case "End":
                     event.preventDefault();
-                    props.changeFocus!(event.currentTarget, Target.LAST);
+                    changeFocus?.(event.currentTarget, Target.LAST);
                     break;
                 case "Up": // Microsoft Edge value
                 case "ArrowUp":
                     event.preventDefault();
-                    props.changeFocus!(event.currentTarget, Target.PREVIOUS);
+                    changeFocus?.(event.currentTarget, Target.PREVIOUS);
                     break;
                 case "Down": // Microsoft Edge value
                 case "ArrowDown":
                     event.preventDefault();
-                    props.changeFocus!(event.currentTarget, Target.NEXT);
+                    changeFocus?.(event.currentTarget, Target.NEXT);
                     break;
             }
         },
-        [props.toggleCollapsed, props.changeFocus]
+        [toggleCollapsed, changeFocus]
     );
 
     if (!props.visible) {
@@ -127,11 +126,11 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
 
     return (
         <section
-            ref={rootElement}
+            ref={rootRef}
             className={classNames(
                 "widget-accordion-group",
                 {
-                    "widget-accordion-group-collapsed": previousCollapsedPropValue
+                    "widget-accordion-group-collapsed": previousCollapsedValue
                 },
                 props.dynamicClassName
             )}
@@ -140,29 +139,29 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                 <div
                     id={`${props.id}HeaderButton`}
                     className={classNames("widget-accordion-group-header-button", {
-                        "widget-accordion-group-header-button-clickable": props.toggleCollapsed,
+                        "widget-accordion-group-header-button-clickable": props.collapsible,
                         "widget-accordion-group-header-button-icon-left":
-                            props.toggleCollapsed && showHeaderIcon === "left",
+                            props.collapsible && showHeaderIcon === "left",
                         "widget-accordion-group-header-button-icon-right":
-                            props.toggleCollapsed && showHeaderIcon === "right"
+                            props.collapsible && showHeaderIcon === "right"
                     })}
                     tabIndex={0}
                     data-focusindex={0}
                     role={"button"}
-                    onClick={props.toggleCollapsed}
-                    onKeyDown={props.toggleCollapsed && props.changeFocus ? onKeydownHandler : undefined}
-                    aria-expanded={!previousCollapsedPropValue}
-                    aria-disabled={!props.toggleCollapsed}
+                    onClick={props.collapsible ? toggleCollapsed : undefined}
+                    onKeyDown={props.collapsible ? onKeydownHandler : undefined}
+                    aria-expanded={!previousCollapsedValue}
+                    aria-disabled={!props.collapsible}
                     aria-controls={`${props.id}ContentWrapper`}
                 >
                     {props.header}
-                    {props.toggleCollapsed && (showHeaderIcon === "left" || showHeaderIcon === "right")
-                        ? props.generateIcon?.(previousCollapsedPropValue ?? false)
+                    {props.collapsible && (showHeaderIcon === "left" || showHeaderIcon === "right")
+                        ? props.generateHeaderIcon?.(previousCollapsedValue ?? false)
                         : null}
                 </div>
             </header>
             <div
-                ref={contentWrapperElement}
+                ref={contentWrapperRef}
                 id={`${props.id}ContentWrapper`}
                 className={"widget-accordion-group-content-wrapper"}
                 data-focusindex={0}
@@ -170,7 +169,7 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                 role={"region"}
                 aria-labelledby={`${props.id}HeaderButton`}
             >
-                <div ref={contentElement} className={"widget-accordion-group-content"}>
+                <div ref={contentRef} className={"widget-accordion-group-content"}>
                     {props.content}
                 </div>
             </div>
