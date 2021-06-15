@@ -48,6 +48,8 @@ $header-color-hover: #264ae5;
         padding: 16px;
         display: flex;
         align-items: center;
+        position: relative;
+        transition: box-shadow 0.2s ease 0ms;
 
         > :first-child {
             flex: 1;
@@ -103,7 +105,9 @@ $header-color-hover: #264ae5;
             }
 
             &:focus {
-                outline: 2px solid $header-color-hover;
+                z-index: 3;
+                outline: 0;
+                box-shadow: 0 0 0 2px $header-color-hover;
             }
         }
 
@@ -119,6 +123,7 @@ $header-color-hover: #264ae5;
 
     .widget-accordion-group-content {
         padding: 8px 16px 24px 16px;
+        overflow: hidden;
     }
 }
 
