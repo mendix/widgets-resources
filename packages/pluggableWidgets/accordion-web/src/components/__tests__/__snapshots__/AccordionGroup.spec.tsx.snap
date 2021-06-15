@@ -1,8 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
-
-exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to not visible 1`] = `
+exports[`AccordionGroup collapsible doesn't render the icon when set to not visible 1`] = `
 <section
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
@@ -17,6 +15,7 @@ exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -42,7 +41,7 @@ exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to
 </section>
 `;
 
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is collapsed 1`] = `
+exports[`AccordionGroup collapsible renders correctly when the group becomes visible and is collapsed 1`] = `
 <section
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
@@ -57,6 +56,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -82,7 +82,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
 </section>
 `;
 
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is expanded 1`] = `
+exports[`AccordionGroup collapsible renders correctly when the group becomes visible and is expanded 1`] = `
 <section
   className="widget-accordion-group class-name"
 >
@@ -97,6 +97,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -122,7 +123,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group be
 </section>
 `;
 
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and collapsed 1`] = `
+exports[`AccordionGroup collapsible renders correctly when the group is visible and collapsed 1`] = `
 <section
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
@@ -137,6 +138,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -162,7 +164,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 </section>
 `;
 
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and expanded 1`] = `
+exports[`AccordionGroup collapsible renders correctly when the group is visible and expanded 1`] = `
 <section
   className="widget-accordion-group class-name"
 >
@@ -177,6 +179,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -202,7 +205,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 </section>
 `;
 
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets collapsed 1`] = `
+exports[`AccordionGroup collapsible renders correctly when the group is visible and gets collapsed 1`] = `
 <section
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
@@ -217,6 +220,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -242,7 +246,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 </section>
 `;
 
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets expanded 1`] = `
+exports[`AccordionGroup collapsible renders correctly when the group is visible and gets expanded 1`] = `
 <section
   className="widget-accordion-group class-name"
 >
@@ -257,6 +261,7 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
       data-focusindex={0}
       id="idHeaderButton"
       onClick={[MockFunction]}
+      onKeyDown={[Function]}
       role="button"
       tabIndex={0}
     >
@@ -282,7 +287,9 @@ exports[`AccordionGroup with toggleCollapsed renders correctly when the group is
 </section>
 `;
 
-exports[`AccordionGroup without toggleCollapsed displays the content when the group becomes visible 1`] = `
+exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
+
+exports[`AccordionGroup not collapsible displays the content when the group becomes visible 1`] = `
 <section
   className="widget-accordion-group class-name"
 >
@@ -321,7 +328,7 @@ exports[`AccordionGroup without toggleCollapsed displays the content when the gr
 </section>
 `;
 
-exports[`AccordionGroup without toggleCollapsed displays the content when the group is visible 1`] = `
+exports[`AccordionGroup not collapsible displays the content when the group is visible 1`] = `
 <section
   className="widget-accordion-group class-name"
 >

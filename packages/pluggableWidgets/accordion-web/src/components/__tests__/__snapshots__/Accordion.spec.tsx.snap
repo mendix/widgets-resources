@@ -123,12 +123,13 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
     <AccordionGroupWrapper
       collapsed={false}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -295,12 +296,13 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={false}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -428,12 +430,13 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
     <AccordionGroupWrapper
       collapsed={false}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -600,12 +603,13 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={false}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -878,12 +882,13 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -1071,12 +1076,13 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -1225,12 +1231,13 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
     <AccordionGroupWrapper
       collapsed={false}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -1418,12 +1425,13 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={false}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -1654,12 +1662,13 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
     <AccordionGroupWrapper
       collapsed={false}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -1749,12 +1758,13 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={false}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -1840,12 +1850,13 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -1935,12 +1946,13 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -2055,12 +2067,13 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -2136,12 +2149,13 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -2213,12 +2227,13 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -2294,12 +2309,13 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -2463,12 +2479,13 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -2642,12 +2659,13 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -2782,12 +2800,13 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
     <AccordionGroupWrapper
       collapsed={false}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -2961,12 +2980,13 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={false}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -3197,12 +3217,13 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -3306,12 +3327,13 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -3411,12 +3433,13 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -3520,12 +3543,13 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -3668,12 +3692,13 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
     <AccordionGroupWrapper
       collapsed={false}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -3763,12 +3788,13 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={false}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -3854,12 +3880,13 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -3949,12 +3976,13 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -4069,12 +4097,13 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -4150,12 +4179,13 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -4227,12 +4257,13 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
     <AccordionGroupWrapper
       collapsed={true}
       collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={true}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={
+      generateHeaderIcon={
         [MockFunction] {
           "calls": Array [
             Array [
@@ -4308,12 +4339,13 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       <AccordionGroup
         changeFocus={[Function]}
         collapsed={true}
+        collapsible={true}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={
+        generateHeaderIcon={
           [MockFunction] {
             "calls": Array [
               Array [
@@ -4391,12 +4423,14 @@ exports[`Accordion not collapsible renders correctly 1`] = `
   >
     <AccordionGroupWrapper
       collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={false}
       content={
         <span>
           content
         </span>
       }
-      generateIcon={[MockFunction]}
+      generateHeaderIcon={[MockFunction]}
       header="header"
       id="idAccordionGroup0"
       index={0}
@@ -4449,17 +4483,20 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       visible={true}
     >
       <AccordionGroup
+        changeFocus={[Function]}
         collapsed={false}
+        collapsible={false}
         content={
           <span>
             content
           </span>
         }
-        generateIcon={[MockFunction]}
+        generateHeaderIcon={[MockFunction]}
         header="header"
         id="idAccordionGroup0"
         key="0"
         showHeaderIcon="right"
+        toggleCollapsed={[Function]}
         visible={true}
       >
         <section
@@ -4502,12 +4539,14 @@ exports[`Accordion not collapsible renders correctly 1`] = `
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
       collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      collapsible={false}
       content={
         <span>
           content2
         </span>
       }
-      generateIcon={[MockFunction]}
+      generateHeaderIcon={[MockFunction]}
       header="header2"
       id="idAccordionGroup1"
       index={1}
@@ -4560,17 +4599,20 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       visible={false}
     >
       <AccordionGroup
+        changeFocus={[Function]}
         collapsed={false}
+        collapsible={false}
         content={
           <span>
             content2
           </span>
         }
-        generateIcon={[MockFunction]}
+        generateHeaderIcon={[MockFunction]}
         header="header2"
         id="idAccordionGroup1"
         key="1"
         showHeaderIcon="right"
+        toggleCollapsed={[Function]}
         visible={false}
       />
     </AccordionGroupWrapper>
