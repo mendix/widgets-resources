@@ -11,8 +11,9 @@ $header-color-hover: #264ae5;
     border-bottom-style: solid;
 
     &.widget-accordion-group-collapsed {
-        .widget-accordion-group-header-button,
-        .widget-accordion-group-header-button.widget-accordion-group-header-button-icon-left {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button,
+        > .widget-accordion-group-header
+            > .widget-accordion-group-header-button.widget-accordion-group-header-button-icon-left {
             .widget-accordion-group-header-button-icon {
                 transform: none;
             }
@@ -24,8 +25,9 @@ $header-color-hover: #264ae5;
     }
 
     &.widget-accordion-group-collapsing {
-        .widget-accordion-group-header-button,
-        .widget-accordion-group-header-button.widget-accordion-group-header-button-icon-left {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button,
+        > .widget-accordion-group-header
+            > .widget-accordion-group-header-button.widget-accordion-group-header-button-icon-left {
             .widget-accordion-group-header-button-icon {
                 transform: none;
             }
