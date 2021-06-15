@@ -34,14 +34,15 @@
 @mixin get-accordion-group-styles($background-color, $background-color-hover, $color, $color-hover, $border-color) {
     border-color: $border-color;
     background-color: $bg-color-secondary;
+    border-bottom-width: $accordion-border-width;
 
     &:first-child {
         border-top-left-radius: $border-radius-default;
         border-top-right-radius: $border-radius-default;
 
         .widget-accordion-group-header-button {
-            border-top-left-radius: calc(#{$border-radius-default} - 1px); // TODO use border width variable here
-            border-top-right-radius: calc(#{$border-radius-default} - 1px);
+            border-top-left-radius: calc(#{$border-radius-default} - #{$accordion-border-width});
+            border-top-right-radius: calc(#{$border-radius-default} - #{$accordion-border-width});
         }
     }
 
@@ -53,16 +54,16 @@
     &.widget-accordion-group-collapsed:last-child,
     &.widget-accordion-group-collapsing:last-child {
         .widget-accordion-group-header-button {
-            transition: border-radius 5ms ease 265ms;
-            border-bottom-left-radius: calc(#{$border-radius-default} - 1px); // TODO use border width variable here
-            border-bottom-right-radius: calc(#{$border-radius-default} - 1px);
+            transition: border-radius 5ms ease 200ms;
+            border-bottom-left-radius: calc(#{$border-radius-default} - #{$accordion-border-width});
+            border-bottom-right-radius: calc(#{$border-radius-default} - #{$accordion-border-width});
         }
     }
 
     > .widget-accordion-group-header > .widget-accordion-group-header-button {
         background-color: $background-color;
         padding: $spacing-medium;
-        transition: box-shadow 0.2s ease 0ms, border-radius 5ms ease 70ms;
+        transition: box-shadow 0.2s ease 0ms, border-radius 5ms ease 80ms;
 
         > :is(h1, h2, h3, h4, h5, h6) {
             font-size: $font-size-h5;
