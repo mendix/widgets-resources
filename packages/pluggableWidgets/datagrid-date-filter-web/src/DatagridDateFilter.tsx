@@ -11,17 +11,25 @@ import { Alert } from "@mendix/piw-utils-internal";
 import { changeTimeToMidnight } from "./utils/utils";
 import { addDays } from "date-fns";
 
-import { and, attribute, greaterThanOrEqual, lessThan, literal, or } from "mendix/filters/builders";
+import {
+    and,
+    attribute,
+    greaterThan,
+    greaterThanOrEqual,
+    lessThan,
+    lessThanOrEqual,
+    literal,
+    or
+} from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
+import { translateFilters } from "./utils/filters";
 
 interface Locale {
     [key: string]: object;
 }
 
 export default function DatagridDateFilter(props: DatagridDateFilterContainerProps): ReactElement | null {
-    const FilterContext = getFilterDispatcher();
-
     const { languageTag = "en-US", patterns } = (window as any).mx.session.getConfig().locale;
 
     const [language] = languageTag.split("-");
@@ -39,13 +47,16 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
         </Alert>
     );
 
+    const FilterContext = getFilterDispatcher();
+
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
                 if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute } = filterContextValue;
+                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+                const defaultFilter = translateFilters(initialFilters);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -55,8 +66,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
-                        defaultFilter={props.defaultFilter}
-                        defaultValue={props.defaultValue?.value}
+                        defaultFilter={defaultFilter?.type ?? props.defaultFilter}
+                        defaultValue={defaultFilter?.value ?? props.defaultValue?.value}
                         dateFormat={patterns.date}
                         locale={language}
                         name={props.name}
@@ -97,8 +108,8 @@ function getFilterCondition(
     const dateValue = changeTimeToMidnight(value);
     switch (type) {
         case "greater":
-            // >= Day +1 at midnight
-            return greaterThanOrEqual(filterAttribute, literal(addDays(dateValue, 1)));
+            // > Day +1 at midnight -1ms
+            return greaterThan(filterAttribute, literal(new Date(addDays(dateValue, 1).getTime() - 1)));
         case "greaterEqual":
             // >= day at midnight
             return greaterThanOrEqual(filterAttribute, literal(dateValue));
@@ -118,7 +129,7 @@ function getFilterCondition(
             // < day at midnight
             return lessThan(filterAttribute, literal(dateValue));
         case "smallerEqual":
-            // < day +1 at midnight
-            return lessThan(filterAttribute, literal(addDays(dateValue, 1)));
+            // <= day +1 at midnight -1ms
+            return lessThanOrEqual(filterAttribute, literal(new Date(addDays(dateValue, 1).getTime() - 1)));
     }
 }
