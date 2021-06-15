@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
@@ -32,6 +32,12 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
         },
         [props.onChange]
     );
+
+    useEffect(() => {
+        setValue(props.defaultFilter);
+        props.onChange(props.defaultFilter);
+    }, [props.defaultFilter, props.onChange]);
+
     return (
         <div className="filter-selector">
             <div className="filter-selector-content" ref={componentRef}>

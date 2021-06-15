@@ -54,10 +54,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     ariaLabel={props.screenReaderButtonCaption}
                     name={props.name}
                     defaultFilter={props.defaultFilter}
-                    onChange={type => {
-                        setType(type);
-                        focusInput();
-                    }}
+                    onChange={useCallback(
+                        type => {
+                            setType(type);
+                            focusInput();
+                        },
+                        [focusInput]
+                    )}
                 />
             )}
             <input
