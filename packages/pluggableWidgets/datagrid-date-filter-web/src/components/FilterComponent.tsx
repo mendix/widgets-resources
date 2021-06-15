@@ -48,10 +48,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     ariaLabel={props.screenReaderButtonCaption}
                     defaultFilter={props.defaultFilter}
                     name={props.name}
-                    onChange={type => {
-                        setType(type);
-                        focusInput();
-                    }}
+                    onChange={useCallback(
+                        type => {
+                            setType(type);
+                            focusInput();
+                        },
+                        [focusInput]
+                    )}
                 />
             )}
             <DatePicker
