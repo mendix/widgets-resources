@@ -2,8 +2,8 @@ import { createElement, ReactElement, useCallback, useEffect, useRef, useState }
 import { FilterSelector } from "./FilterSelector";
 
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
-import { debounce } from "../utils/utils";
 import classNames from "classnames";
+import { debounce } from "../utils/utils";
 
 interface FilterComponentProps {
     adjustable: boolean;
