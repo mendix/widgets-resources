@@ -1,6 +1,6 @@
 describe("barcode-scanner-web", () => {
     beforeAll(() => {
-        browser.url("http://localhost:8080");
+        browser.url("http://localhost:3000/");
     });
 
     it("compares with a screenshot baseline and checks if the media stream is started", () => {
