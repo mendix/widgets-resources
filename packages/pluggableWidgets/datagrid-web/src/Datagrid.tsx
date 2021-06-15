@@ -1,13 +1,13 @@
 import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnsType, DatagridContainerProps } from "../typings/DatagridProps";
-import { ValueStatus } from "mendix";
 import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
 
 import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
-import { FilterContext, FilterFunction, isAvailable } from "@mendix/piw-utils-internal";
+import { isAvailable } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
+import { FilterContext, FilterFunction } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
