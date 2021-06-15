@@ -6,8 +6,7 @@ import { and } from "mendix/filters/builders";
 
 import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
-import { FilterContext, FilterFunction } from "./components/provider";
-import { isAvailable } from "@mendix/piw-utils-internal";
+import { FilterContext, FilterFunction, isAvailable } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
@@ -16,8 +15,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const currentPage = isInfiniteLoad
         ? props.datasource.limit / props.pageSize
         : props.datasource.offset / props.pageSize;
-    const [filtered, setFiltered] = useState(false);
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
+    const [filtered, setFiltered] = useState(false);
 
     props.datasource.requestTotalCount(true);
 
@@ -28,15 +27,10 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     });
 
     useEffect(() => {
-        if (
-            !viewStateFilters.current &&
-            !filtered &&
-            props.datasource.status === ValueStatus.Available &&
-            props.datasource.filter
-        ) {
+        if (props.datasource.filter && !filtered && !viewStateFilters.current) {
             viewStateFilters.current = props.datasource.filter;
         }
-    }, [filtered, props.datasource]);
+    }, [props.datasource, props.configurationAttribute, filtered]);
 
     const setPage = useCallback(
         computePage => {
@@ -64,6 +58,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         props.datasource.setFilter(filters.length > 1 ? and(...filters) : filters[0]);
     } else if (filtered) {
         props.datasource.setFilter(undefined);
+    } else {
+        props.datasource.setFilter(viewStateFilters.current);
     }
 
     if (sortParameters) {
@@ -118,23 +114,25 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     const [, filterDispatcher] = customFiltersState[columnIndex];
                     const initialFilters = extractFilters(attribute, viewStateFilters.current);
 
-                    return attribute
-                        ? renderWrapper(
-                              <FilterContext.Provider
-                                  value={{
-                                      filterDispatcher: prev => {
-                                          setFiltered(true);
-                                          filterDispatcher(prev);
-                                          return prev;
-                                      },
-                                      attribute,
-                                      initialFilters
-                                  }}
-                              >
-                                  {filter}
-                              </FilterContext.Provider>
-                          )
-                        : renderWrapper(filter);
+                    if (!attribute) {
+                        return renderWrapper(filter);
+                    }
+
+                    return renderWrapper(
+                        <FilterContext.Provider
+                            value={{
+                                filterDispatcher: prev => {
+                                    setFiltered(true);
+                                    filterDispatcher(prev);
+                                    return prev;
+                                },
+                                attribute,
+                                initialFilters
+                            }}
+                        >
+                            {filter}
+                        </FilterContext.Provider>
+                    );
                 },
                 [customFiltersState, props.columns]
             )}
