@@ -19,6 +19,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
               value: value.value.value ?? ""
           }))
         : [];
+
     const alertMessage = (
         <Alert bootstrapStyle="danger">
             The data grid drop-down filter widget must be placed inside the header of the Data grid 2.0 widget.
@@ -31,7 +32,9 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute } = filterContextValue;
+                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+
+                const defaultValues = initialFilters.map(filter => filter.value).join(",");
 
                 const errorMessage =
                     getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
@@ -44,7 +47,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         ariaLabel={props.ariaLabel?.value}
                         attribute={attribute}
                         auto={props.auto}
-                        defaultValue={props.defaultValue?.value}
+                        defaultValue={defaultValues ?? props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         name={props.name}
