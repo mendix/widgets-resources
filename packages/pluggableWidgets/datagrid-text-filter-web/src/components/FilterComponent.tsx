@@ -1,9 +1,8 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { FilterSelector } from "./FilterSelector";
+import { debounce, FilterSelector } from "@mendix/piw-utils-internal";
 
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 import classNames from "classnames";
-import { debounce } from "../utils/utils";
 
 interface FilterComponentProps {
     adjustable: boolean;
@@ -60,6 +59,19 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                         },
                         [focusInput]
                     )}
+                    options={
+                        [
+                            { value: "contains", label: "Contains" },
+                            { value: "startsWith", label: "Starts with" },
+                            { value: "endsWith", label: "Ends with" },
+                            { value: "greater", label: "Greater than" },
+                            { value: "greaterEqual", label: "Greater than or equal" },
+                            { value: "equal", label: "Equal" },
+                            { value: "notEqual", label: "Not equal" },
+                            { value: "smaller", label: "Smaller than" },
+                            { value: "smallerEqual", label: "Smaller than or equal" }
+                        ] as Array<{ value: DefaultFilterEnum; label: string }>
+                    }
                 />
             )}
             <input

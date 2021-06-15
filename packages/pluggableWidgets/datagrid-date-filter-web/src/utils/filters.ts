@@ -1,5 +1,5 @@
+import { FilterValue } from "@mendix/piw-utils-internal";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
-import { FilterValue } from "./provider";
 
 export declare type DefaultFilterValue = {
     type: DefaultFilterEnum;

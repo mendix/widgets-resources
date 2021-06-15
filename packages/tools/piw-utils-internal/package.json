@@ -10,7 +10,8 @@
     "prebuild": "..\"/../../node_modules/.bin/rimraf\" ./dist",
     "build": "..\"/../../node_modules/.bin/tsc\"",
     "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "test": "pluggable-widgets-tools test:unit:web"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2"

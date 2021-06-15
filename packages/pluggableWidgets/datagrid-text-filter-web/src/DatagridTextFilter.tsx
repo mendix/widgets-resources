@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridTextFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import {
     attribute,
@@ -19,7 +19,6 @@ import {
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
-import { getFilterDispatcher } from "./utils/provider";
 import { translateFilters } from "./utils/filters";
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {

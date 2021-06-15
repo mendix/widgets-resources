@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { FilterSelector } from "./FilterSelector";
+import { FilterSelector } from "@mendix/piw-utils-internal";
 
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
@@ -55,6 +55,16 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                         },
                         [focusInput]
                     )}
+                    options={
+                        [
+                            { value: "greater", label: "Greater than" },
+                            { value: "greaterEqual", label: "Greater than or equal" },
+                            { value: "equal", label: "Equal" },
+                            { value: "notEqual", label: "Not equal" },
+                            { value: "smaller", label: "Smaller than" },
+                            { value: "smallerEqual", label: "Smaller than or equal" }
+                        ] as Array<{ value: DefaultFilterEnum; label: string }>
+                    }
                 />
             )}
             <DatePicker

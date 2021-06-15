@@ -2,8 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
 import { ValueStatus, ListAttributeValue } from "mendix";
 import { FilterComponent, FilterOption } from "./components/FilterComponent";
-import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";

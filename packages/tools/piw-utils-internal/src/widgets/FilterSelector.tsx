@@ -1,31 +1,23 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 import classNames from "classnames";
-import { useOnClickOutside } from "@mendix/piw-utils-internal";
+import { useOnClickOutside } from "../utils";
 
-const options: Array<{ value: DefaultFilterEnum; label: string }> = [
-    { value: "greater", label: "Greater than" },
-    { value: "greaterEqual", label: "Greater than or equal" },
-    { value: "equal", label: "Equal" },
-    { value: "notEqual", label: "Not equal" },
-    { value: "smaller", label: "Smaller than" },
-    { value: "smallerEqual", label: "Smaller than or equal" }
-];
-
-interface FilterSelectorProps {
+interface FilterSelectorProps<T> {
     ariaLabel?: string;
     name?: string;
-    defaultFilter: DefaultFilterEnum;
-    onChange: (value: DefaultFilterEnum) => void;
+    defaultFilter: T;
+    onChange: (value: T) => void;
+    options: Array<{ value: T; label: string }>;
 }
 
-export function FilterSelector(props: FilterSelectorProps): ReactElement {
+export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
     const [value, setValue] = useState(props.defaultFilter);
     const [show, setShow] = useState(false);
     const componentRef = useRef<HTMLDivElement>(null);
     useOnClickOutside(componentRef, () => setShow(false));
+
     const onClick = useCallback(
-        (value: DefaultFilterEnum) => {
+        (value: T) => {
             setValue(value);
             props.onChange(value);
             setShow(false);
@@ -58,7 +50,7 @@ export function FilterSelector(props: FilterSelectorProps): ReactElement {
                         role="menu"
                         data-focusindex={0}
                     >
-                        {options.map((option, index) => (
+                        {props.options.map((option, index) => (
                             <li
                                 className={classNames({ "filter-selected": value === option.value })}
                                 key={index}
