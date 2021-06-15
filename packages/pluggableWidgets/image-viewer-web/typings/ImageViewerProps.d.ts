@@ -8,11 +8,11 @@ import { ActionValue, DynamicValue, WebIcon, WebImage } from "mendix";
 
 export type DatasourceEnum = "image" | "imageUrl" | "icon";
 
+export type OnClickTypeEnum = "action" | "enlarge";
+
 export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
 export type HeightUnitEnum = "auto" | "pixels";
-
-export type OnClickTypeEnum = "action" | "enlarge";
 
 export interface ImageViewerContainerProps {
     name: string;
@@ -23,14 +23,14 @@ export interface ImageViewerContainerProps {
     imageObject?: DynamicValue<WebImage>;
     imageUrl?: DynamicValue<string>;
     imageIcon?: DynamicValue<WebIcon>;
+    onClickType: OnClickTypeEnum;
+    onClick?: ActionValue;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
     iconSize: number;
     responsive: boolean;
-    onClickType: OnClickTypeEnum;
-    onClick?: ActionValue;
 }
 
 export interface ImageViewerPreviewProps {
@@ -40,12 +40,12 @@ export interface ImageViewerPreviewProps {
     imageObject: string;
     imageUrl: string;
     imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    onClickType: OnClickTypeEnum;
+    onClick: {} | null;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
     iconSize: number | null;
     responsive: boolean;
-    onClickType: OnClickTypeEnum;
-    onClick: {} | null;
 }
