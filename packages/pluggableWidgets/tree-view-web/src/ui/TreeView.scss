@@ -1,4 +1,14 @@
 .mx-tree-view {
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .tree-view-header-expandable {
+        cursor: pointer;
+    }
+
+    .tree-view-body {
+        margin-left: 12px;
+    }
 }
