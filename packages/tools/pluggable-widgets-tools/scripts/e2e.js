@@ -87,7 +87,7 @@ async function main() {
         .toString()
         .trim();
 
-     // Spin up the standalone selenium docker image
+    // Spin up the standalone selenium docker image
     const freePortBrowser = await findFreePort(4444);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
