@@ -2,121 +2,184 @@
 
 exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
 
-exports[`AccordionGroup with dispatch displays the content when the group becomes visible and is expanded 1`] = `
+exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to not visible 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
     className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[Function]}
+    onClick={[MockFunction]}
   >
     header
   </header>
   <div
-    className="widget-accordion-group-content"
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
-    <span>
-      content
-    </span>
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
   </div>
 </section>
 `;
 
-exports[`AccordionGroup with dispatch displays the content when the group is visible and expanded 1`] = `
+exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is collapsed 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[Function]}
+    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+    onClick={[MockFunction]}
   >
     header
   </header>
   <div
-    className="widget-accordion-group-content"
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
-    <span>
-      content
-    </span>
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
   </div>
 </section>
 `;
 
-exports[`AccordionGroup with dispatch displays the content when the group is visible and gets expanded 1`] = `
+exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is expanded 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[Function]}
+    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+    onClick={[MockFunction]}
   >
     header
   </header>
   <div
-    className="widget-accordion-group-content"
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
-    <span>
-      content
-    </span>
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
   </div>
 </section>
 `;
 
-exports[`AccordionGroup with dispatch keeps the content in DOM when the group is visible and gets collapsed 1`] = `
+exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and collapsed 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[Function]}
+    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+    onClick={[MockFunction]}
   >
     header
   </header>
   <div
-    className="widget-accordion-group-content"
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
-    <span>
-      content
-    </span>
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
   </div>
 </section>
 `;
 
-exports[`AccordionGroup with dispatch loads the content lazily when the group becomes visible and is collapsed 1`] = `
+exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and expanded 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[Function]}
+    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+    onClick={[MockFunction]}
   >
     header
   </header>
   <div
-    className="widget-accordion-group-content"
-  />
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
 </section>
 `;
 
-exports[`AccordionGroup with dispatch loads the content lazily when the group is visible and collapsed 1`] = `
+exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets collapsed 1`] = `
 <section
-  className="widget-accordion-group widget-accordion-group-collapsed"
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >
   <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[Function]}
+    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+    onClick={[MockFunction]}
   >
     header
   </header>
   <div
-    className="widget-accordion-group-content"
-  />
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
 </section>
 `;
 
-exports[`AccordionGroup without dispatch displays the content when the group becomes visible 1`] = `
+exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets expanded 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
+>
+  <header
+    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+    onClick={[MockFunction]}
+  >
+    header
+  </header>
+  <div
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup without toggleCollapsed displays the content when the group becomes visible 1`] = `
+<section
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header"
@@ -124,18 +187,23 @@ exports[`AccordionGroup without dispatch displays the content when the group bec
     header
   </header>
   <div
-    className="widget-accordion-group-content"
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
-    <span>
-      content
-    </span>
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
   </div>
 </section>
 `;
 
-exports[`AccordionGroup without dispatch displays the content when the group is visible 1`] = `
+exports[`AccordionGroup without toggleCollapsed displays the content when the group is visible 1`] = `
 <section
-  className="widget-accordion-group"
+  className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header"
@@ -143,11 +211,16 @@ exports[`AccordionGroup without dispatch displays the content when the group is 
     header
   </header>
   <div
-    className="widget-accordion-group-content"
+    className="widget-accordion-group-content-wrapper"
+    onTransitionEnd={[Function]}
   >
-    <span>
-      content
-    </span>
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
   </div>
 </section>
 `;

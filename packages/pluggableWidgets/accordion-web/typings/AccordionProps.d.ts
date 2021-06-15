@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue } from "mendix";
+import { DynamicValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
@@ -17,7 +17,9 @@ export interface GroupsType {
     dynamicClass?: DynamicValue<string>;
 }
 
-export type CollapseBehaviorEnum = "singleExpanded" | "multipleExpanded";
+export type ExpandBehaviorEnum = "singleExpanded" | "multipleExpanded";
+
+export type ShowIconEnum = "right" | "left" | "no";
 
 export interface GroupsPreviewType {
     headerRenderMode: HeaderRenderModeEnum;
@@ -35,7 +37,14 @@ export interface AccordionContainerProps {
     tabIndex?: number;
     groups: GroupsType[];
     collapsible: boolean;
-    collapseBehavior: CollapseBehaviorEnum;
+    expandBehavior: ExpandBehaviorEnum;
+    animate: boolean;
+    showIcon: ShowIconEnum;
+    icon?: DynamicValue<WebIcon>;
+    expandIcon?: DynamicValue<WebIcon>;
+    collapseIcon?: DynamicValue<WebIcon>;
+    animateIcon: boolean;
+    advancedMode: boolean;
 }
 
 export interface AccordionPreviewProps {
@@ -43,5 +52,12 @@ export interface AccordionPreviewProps {
     style: string;
     groups: GroupsPreviewType[];
     collapsible: boolean;
-    collapseBehavior: CollapseBehaviorEnum;
+    expandBehavior: ExpandBehaviorEnum;
+    animate: boolean;
+    showIcon: ShowIconEnum;
+    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    expandIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    collapseIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    animateIcon: boolean;
+    advancedMode: boolean;
 }

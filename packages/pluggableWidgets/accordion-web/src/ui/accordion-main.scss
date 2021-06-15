@@ -1,6 +1,7 @@
 $background-color: #ffffff;
 $border-color: #ced0d3;
 $header-background-color-hover: #f8f8f8;
+$header-color: #000000;
 $header-color-hover: #264ae5;
 
 .widget-accordion {
@@ -13,16 +14,72 @@ $header-color-hover: #264ae5;
     border-bottom-style: solid;
 
     &.widget-accordion-group-collapsed {
-        .widget-accordion-group-content {
+        .widget-accordion-group-header,
+        .widget-accordion-group-header.widget-accordion-group-header-icon-left {
+            .widget-accordion-group-header-icon {
+                transform: none;
+            }
+        }
+
+        .widget-accordion-group-content-wrapper {
             display: none;
         }
     }
 
-    .widget-accordion-group-header {
+    &.widget-accordion-group-collapsing {
+        .widget-accordion-group-header,
+        .widget-accordion-group-header.widget-accordion-group-header-icon-left {
+            .widget-accordion-group-header-icon {
+                transform: none;
+            }
+        }
+    }
+
+    &.widget-accordion-group-expanding,
+    &.widget-accordion-group-collapsing {
+        .widget-accordion-group-content-wrapper {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.2s ease 50ms;
+        }
+    }
+
+    > .widget-accordion-group-header {
         padding: 16px;
+        display: flex;
+        align-items: center;
+
+        > :first-child {
+            flex: 1;
+        }
+
+        > :is(h1, h2, h3, h4, h5, h6) {
+            font-size: 18px;
+            font-weight: 600;
+        }
 
         > :is(h1, h2, h3, h4, h5, h6, p) {
+            color: $header-color;
             margin-bottom: 0;
+        }
+
+        > span {
+            color: $header-color;
+        }
+
+        .widget-accordion-group-header-icon {
+            fill: $header-color;
+            transform: rotate(-180deg);
+
+            &.widget-accordion-group-header-icon-animate {
+                transition: transform 0.2s ease-in-out 50ms;
+            }
+        }
+
+        &.widget-accordion-group-header-icon-right {
+            .widget-accordion-group-header-icon {
+                margin-left: 16px;
+            }
         }
 
         &.widget-accordion-group-header-clickable {
@@ -39,6 +96,23 @@ $header-color-hover: #264ae5;
                 * {
                     cursor: pointer;
                 }
+
+                .widget-accordion-group-header-icon {
+                    fill: $header-color-hover;
+                }
+            }
+
+            &:focus {
+                outline: 2px solid $header-color-hover;
+            }
+        }
+
+        &.widget-accordion-group-header-icon-left {
+            flex-direction: row-reverse;
+
+            .widget-accordion-group-header-icon {
+                margin-right: 16px;
+                transform: rotate(180deg);
             }
         }
     }

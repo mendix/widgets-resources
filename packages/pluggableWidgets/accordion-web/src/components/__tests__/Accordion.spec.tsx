@@ -1,6 +1,6 @@
 import { createElement } from "react";
-import { shallow } from "enzyme";
-import Accordion, { AccordionProps } from "../Accordion";
+import { mount } from "enzyme";
+import { Accordion, AccordionProps } from "../Accordion";
 
 describe("Accordion", () => {
     let defaultProps: AccordionProps;
@@ -16,7 +16,9 @@ describe("Accordion", () => {
                 { header: "header2", content: <span>content2</span>, visible: false }
             ],
             collapsible,
-            singleExpandedGroup
+            singleExpandedGroup,
+            generateHeaderIcon: jest.fn(),
+            showGroupHeaderIcon: "right"
         };
     }
 
@@ -26,18 +28,33 @@ describe("Accordion", () => {
         });
 
         it("renders correctly", () => {
-            const accordion = shallow(<Accordion {...defaultProps} />);
+            const accordion = mount(<Accordion {...defaultProps} />);
 
             expect(accordion).toMatchSnapshot();
         });
 
-        it("updates when accordion group data changes", () => {
-            const accordion = shallow<AccordionProps>(<Accordion {...defaultProps} />);
+        it("expands a group", () => {
+            const accordion = mount(<Accordion {...defaultProps} />);
 
-            const newProps = getProps(true, true);
-            newProps.groups[1].visible = true;
+            accordion.find(".widget-accordion-group-header").simulate("click");
+            expect(accordion).toMatchSnapshot();
+        });
 
-            accordion.setProps(newProps);
+        it("allows one group to be expanded only", () => {
+            const groups = [...defaultProps.groups];
+            groups[1].visible = true;
+            const accordion = mount(<Accordion {...defaultProps} groups={groups} />);
+
+            accordion.find(".widget-accordion-group-header").first().simulate("click");
+            accordion.find(".widget-accordion-group-header").last().simulate("click");
+            expect(accordion).toMatchSnapshot();
+        });
+
+        it("collapses a group", () => {
+            const accordion = mount(<Accordion {...defaultProps} />);
+
+            accordion.find(".widget-accordion-group-header").first().simulate("click");
+            accordion.find(".widget-accordion-group-header").first().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
     });
@@ -48,18 +65,36 @@ describe("Accordion", () => {
         });
 
         it("renders correctly", () => {
-            const accordion = shallow(<Accordion {...defaultProps} />);
+            const accordion = mount(<Accordion {...defaultProps} />);
 
             expect(accordion).toMatchSnapshot();
         });
 
-        it("updates when accordion group data changes", () => {
-            const accordion = shallow<AccordionProps>(<Accordion {...defaultProps} />);
+        it("expands a group", () => {
+            const accordion = mount(<Accordion {...defaultProps} />);
 
-            const newProps = getProps(true, false);
-            newProps.groups[1].visible = true;
+            accordion.find(".widget-accordion-group-header").simulate("click");
+            expect(accordion).toMatchSnapshot();
+        });
 
-            accordion.setProps(newProps);
+        it("allows multiple groups to be expanded", () => {
+            const groups = [...defaultProps.groups];
+            groups[1].visible = true;
+            const accordion = mount(<Accordion {...defaultProps} groups={groups} />);
+
+            accordion.find(".widget-accordion-group-header").first().simulate("click");
+            accordion.find(".widget-accordion-group-header").last().simulate("click");
+            expect(accordion).toMatchSnapshot();
+        });
+
+        it("collapses a group", () => {
+            const groups = [...defaultProps.groups];
+            groups[1].visible = true;
+            const accordion = mount(<Accordion {...defaultProps} groups={groups} />);
+
+            accordion.find(".widget-accordion-group-header").first().simulate("click");
+            accordion.find(".widget-accordion-group-header").last().simulate("click");
+            accordion.find(".widget-accordion-group-header").first().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
     });
@@ -70,18 +105,8 @@ describe("Accordion", () => {
         });
 
         it("renders correctly", () => {
-            const accordion = shallow(<Accordion {...defaultProps} />);
+            const accordion = mount(<Accordion {...defaultProps} />);
 
-            expect(accordion).toMatchSnapshot();
-        });
-
-        it("updates when accordion group data changes", () => {
-            const accordion = shallow<AccordionProps>(<Accordion {...defaultProps} />);
-
-            const newProps = getProps(false);
-            newProps.groups[1].visible = true;
-
-            accordion.setProps(newProps);
             expect(accordion).toMatchSnapshot();
         });
     });

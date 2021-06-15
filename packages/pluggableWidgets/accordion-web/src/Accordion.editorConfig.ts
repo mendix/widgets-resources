@@ -1,4 +1,4 @@
-import { hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
 
@@ -16,7 +16,36 @@ export function getProperties(
     });
 
     if (!values.collapsible) {
-        hidePropertyIn(defaultProperties, values, "collapseBehavior");
+        hidePropertiesIn(defaultProperties, values, [
+            "expandBehavior",
+            "animate",
+            "showIcon",
+            "icon",
+            "expandIcon",
+            "collapseIcon",
+            "animateIcon"
+        ]);
+    }
+
+    if (!values.advancedMode) {
+        hidePropertiesIn(defaultProperties, values, [
+            "animate",
+            "showIcon",
+            "icon",
+            "expandIcon",
+            "collapseIcon",
+            "animateIcon"
+        ]);
+    }
+
+    if (values.showIcon === "no") {
+        hidePropertiesIn(defaultProperties, values, ["icon", "expandIcon", "collapseIcon", "animateIcon"]);
+    }
+
+    if (values.animateIcon) {
+        hidePropertiesIn(defaultProperties, values, ["expandIcon", "collapseIcon"]);
+    } else {
+        hidePropertyIn(defaultProperties, values, "icon");
     }
 
     if (platform === "web") {

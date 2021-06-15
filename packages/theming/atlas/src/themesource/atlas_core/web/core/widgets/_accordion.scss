@@ -29,13 +29,33 @@
 
 @mixin get-accordion-group-styles($background-color, $background-color-hover, $color, $color-hover, $border-color) {
     border-color: $border-color;
+    overflow: hidden;
 
-    .widget-accordion-group-header {
+    &:first-child {
+        border-top-left-radius: $border-radius-default;
+        border-top-right-radius: $border-radius-default;
+    }
+
+    &:last-child {
+        border-bottom-left-radius: $border-radius-default;
+        border-bottom-right-radius: $border-radius-default;
+    }
+
+    > .widget-accordion-group-header {
         background-color: $background-color;
         padding: $spacing-medium;
 
+        > :is(h1, h2, h3, h4, h5, h6) {
+            font-size: $font-size-h5;
+            font-weight: $font-weight-header;
+        }
+
         > :is(h1, h2, h3, h4, h5, h6, p, span) {
             color: $color;
+        }
+
+        .widget-accordion-group-header-icon {
+            fill: $color;
         }
 
         &.widget-accordion-group-header-clickable {
@@ -46,6 +66,10 @@
 
                 > :is(h1, h2, h3, h4, h5, h6, p, span) {
                     color: $color-hover;
+                }
+
+                .widget-accordion-group-header-icon {
+                    fill: $color-hover;
                 }
             }
 

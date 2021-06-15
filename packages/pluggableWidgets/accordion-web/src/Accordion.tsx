@@ -1,12 +1,13 @@
 import { createElement, ReactElement, useMemo } from "react";
+import { ValueStatus } from "mendix";
 
-import AccordionComponent from "./components/Accordion";
+import { Accordion as AccordionComponent, AccordionGroups } from "./components/Accordion";
+import { useIconGenerator } from "./utils/iconGenerator";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
-import { AccGroup } from "./components/AccordionGroup";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
-    const accordionGroups: AccGroup[] | undefined = useMemo(() => {
+    const accordionGroups: AccordionGroups | undefined = useMemo(() => {
         if (props.groups.some(group => group.visible.value === undefined || group.headerText.value === undefined)) {
             return undefined;
         }
@@ -18,6 +19,14 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             dynamicClassName: group.dynamicClass?.value
         }));
     }, [props.groups]);
+
+    const generateIcon = useIconGenerator(
+        props.advancedMode,
+        props.animateIcon,
+        { data: props.icon?.value, loading: props.icon?.status === ValueStatus.Loading },
+        { data: props.expandIcon?.value, loading: props.expandIcon?.status === ValueStatus.Loading },
+        { data: props.collapseIcon?.value, loading: props.collapseIcon?.status === ValueStatus.Loading }
+    );
 
     if (!accordionGroups) {
         return null;
@@ -31,7 +40,10 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             tabIndex={props.tabIndex}
             groups={accordionGroups}
             collapsible={props.collapsible}
-            singleExpandedGroup={props.collapsible ? props.collapseBehavior === "singleExpanded" : undefined}
+            animateCollapsing={props.animate}
+            singleExpandedGroup={props.collapsible ? props.expandBehavior === "singleExpanded" : undefined}
+            generateHeaderIcon={generateIcon}
+            showGroupHeaderIcon={props.showIcon}
         />
     );
 }

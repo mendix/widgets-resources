@@ -1,9 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Accordion in collapsible & multiple expanded group mode renders correctly 1`] = `
-<div
-  className="widget-accordion"
+exports[`Accordion in collapsible & multiple expanded group mode allows multiple groups to be expanded 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
+      Object {
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      },
+      Object {
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": true,
+      },
+    ]
+  }
   id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={false}
   style={
     Object {
       "height": "500px",
@@ -11,41 +96,1005 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
   }
   tabIndex={1}
 >
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
       Object {
-        "collapsed": true,
+        "height": "500px",
+      }
+    }
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header2
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content2
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
+`;
+
+exports[`Accordion in collapsible & multiple expanded group mode collapses a group 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
+      Object {
         "content": <span>
           content
         </span>,
         "header": "header",
         "visible": true,
+      },
+      Object {
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": true,
+      },
+    ]
+  }
+  id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={false}
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
+      Object {
+        "height": "500px",
       }
     }
-    key="0"
-  />
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group widget-accordion-group-collapsed"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header2
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content2
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
+`;
+
+exports[`Accordion in collapsible & multiple expanded group mode expands a group 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
       Object {
-        "collapsed": true,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      },
+      Object {
         "content": <span>
           content2
         </span>,
         "header": "header2",
         "visible": false,
-      }
-    }
-    key="1"
-  />
-</div>
-`;
-
-exports[`Accordion in collapsible & multiple expanded group mode updates when accordion group data changes 1`] = `
-<div
-  className="widget-accordion"
+      },
+    ]
+  }
   id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={false}
   style={
     Object {
       "height": "500px",
@@ -53,83 +1102,1568 @@ exports[`Accordion in collapsible & multiple expanded group mode updates when ac
   }
   tabIndex={1}
 >
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
       Object {
-        "collapsed": true,
+        "height": "500px",
+      }
+    }
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={false}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={false}
+      />
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
+`;
+
+exports[`Accordion in collapsible & multiple expanded group mode renders correctly 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
+      Object {
         "content": <span>
           content
         </span>,
         "header": "header",
         "visible": true,
+      },
+      Object {
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": false,
+      },
+    ]
+  }
+  id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={false}
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
+      Object {
+        "height": "500px",
       }
     }
-    key="0"
-  />
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group widget-accordion-group-collapsed"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={false}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={false}
+      />
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode allows one group to be expanded only 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
       Object {
-        "collapsed": true,
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      },
+      Object {
         "content": <span>
           content2
         </span>,
         "header": "header2",
         "visible": true,
+      },
+    ]
+  }
+  id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={true}
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
+      Object {
+        "height": "500px",
       }
     }
-    key="1"
-  />
-</div>
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group widget-accordion-group-collapsed"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header2
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content2
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode collapses a group 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          false,
+        ],
+        Array [
+          true,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
+      Object {
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      },
+      Object {
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": false,
+      },
+    ]
+  }
+  id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={true}
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
+      Object {
+        "height": "500px",
+      }
+    }
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group widget-accordion-group-collapsed"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              false,
+            ],
+            Array [
+              true,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={false}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                false,
+              ],
+              Array [
+                true,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={false}
+      />
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode expands a group 1`] = `
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+        Array [
+          true,
+        ],
+        Array [
+          false,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+  groups={
+    Array [
+      Object {
+        "content": <span>
+          content
+        </span>,
+        "header": "header",
+        "visible": true,
+      },
+      Object {
+        "content": <span>
+          content2
+        </span>,
+        "header": "header2",
+        "visible": false,
+      },
+    ]
+  }
+  id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={true}
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
+      Object {
+        "height": "500px",
+      }
+    }
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={false}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
+          content2
+        </span>
+      }
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+            Array [
+              true,
+            ],
+            Array [
+              false,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={false}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+              Array [
+                true,
+              ],
+              Array [
+                false,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={false}
+      />
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
 `;
 
 exports[`Accordion in collapsible & single expanded group mode renders correctly 1`] = `
-<div
-  className="widget-accordion"
-  id="id"
-  style={
-    Object {
-      "height": "500px",
+<Accordion
+  class=""
+  collapsible={true}
+  generateHeaderIcon={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          true,
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
     }
   }
-  tabIndex={1}
->
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+  groups={
+    Array [
       Object {
-        "collapsed": true,
         "content": <span>
           content
         </span>,
         "header": "header",
         "visible": true,
-      }
-    }
-    key="0"
-  />
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+      },
       Object {
-        "collapsed": true,
         "content": <span>
           content2
         </span>,
         "header": "header2",
         "visible": false,
-      }
-    }
-    key="1"
-  />
-</div>
-`;
-
-exports[`Accordion in collapsible & single expanded group mode updates when accordion group data changes 1`] = `
-<div
-  className="widget-accordion"
+      },
+    ]
+  }
   id="id"
+  showGroupHeaderIcon="right"
+  singleExpandedGroup={true}
   style={
     Object {
       "height": "500px",
@@ -137,81 +2671,184 @@ exports[`Accordion in collapsible & single expanded group mode updates when acco
   }
   tabIndex={1}
 >
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
       Object {
-        "collapsed": true,
-        "content": <span>
+        "height": "500px",
+      }
+    }
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
           content
-        </span>,
-        "header": "header",
-        "visible": true,
+        </span>
       }
-    }
-    key="0"
-  />
-  <AccordionGroup
-    accordionGroupsDispatch={[Function]}
-    group={
-      Object {
-        "collapsed": true,
-        "content": <span>
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group widget-accordion-group-collapsed"
+        >
+          <header
+            className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
+            onClick={[Function]}
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={true}
+      collapsedAccordionGroupsDispatch={[Function]}
+      content={
+        <span>
           content2
-        </span>,
-        "header": "header2",
-        "visible": true,
+        </span>
       }
-    }
-    key="1"
-  />
-</div>
+      generateIcon={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              true,
+            ],
+          ],
+          "results": Array [
+            Object {
+              "type": "return",
+              "value": undefined,
+            },
+          ],
+        }
+      }
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={false}
+    >
+      <AccordionGroup
+        collapsed={true}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={
+          [MockFunction] {
+            "calls": Array [
+              Array [
+                true,
+              ],
+            ],
+            "results": Array [
+              Object {
+                "type": "return",
+                "value": undefined,
+              },
+            ],
+          }
+        }
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        toggleCollapsed={[Function]}
+        visible={false}
+      />
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
 `;
 
 exports[`Accordion not collapsible renders correctly 1`] = `
-<div
-  className="widget-accordion"
-  id="id"
-  style={
-    Object {
-      "height": "500px",
-    }
-  }
-  tabIndex={1}
->
-  <AccordionGroup
-    group={
+<Accordion
+  class=""
+  collapsible={false}
+  generateHeaderIcon={[MockFunction]}
+  groups={
+    Array [
       Object {
-        "collapsed": false,
         "content": <span>
           content
         </span>,
         "header": "header",
         "visible": true,
-      }
-    }
-    key="0"
-  />
-  <AccordionGroup
-    group={
+      },
       Object {
-        "collapsed": false,
         "content": <span>
           content2
         </span>,
         "header": "header2",
         "visible": false,
-      }
-    }
-    key="1"
-  />
-</div>
-`;
-
-exports[`Accordion not collapsible updates when accordion group data changes 1`] = `
-<div
-  className="widget-accordion"
+      },
+    ]
+  }
   id="id"
+  showGroupHeaderIcon="right"
   style={
     Object {
       "height": "500px",
@@ -219,31 +2856,94 @@ exports[`Accordion not collapsible updates when accordion group data changes 1`]
   }
   tabIndex={1}
 >
-  <AccordionGroup
-    group={
+  <div
+    className="widget-accordion"
+    id="id"
+    style={
       Object {
-        "collapsed": false,
-        "content": <span>
+        "height": "500px",
+      }
+    }
+    tabIndex={1}
+  >
+    <AccordionGroupWrapper
+      collapsed={false}
+      content={
+        <span>
           content
-        </span>,
-        "header": "header",
-        "visible": true,
+        </span>
       }
-    }
-    key="0"
-  />
-  <AccordionGroup
-    group={
-      Object {
-        "collapsed": false,
-        "content": <span>
+      generateIcon={[MockFunction]}
+      header="header"
+      index={0}
+      key="0"
+      showHeaderIcon="right"
+      visible={true}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content
+          </span>
+        }
+        generateIcon={[MockFunction]}
+        header="header"
+        key="0"
+        showHeaderIcon="right"
+        visible={true}
+      >
+        <section
+          className="widget-accordion-group"
+        >
+          <header
+            className="widget-accordion-group-header"
+          >
+            header
+          </header>
+          <div
+            className="widget-accordion-group-content-wrapper"
+            onTransitionEnd={[Function]}
+          >
+            <div
+              className="widget-accordion-group-content"
+            >
+              <span>
+                content
+              </span>
+            </div>
+          </div>
+        </section>
+      </AccordionGroup>
+    </AccordionGroupWrapper>
+    <AccordionGroupWrapper
+      collapsed={false}
+      content={
+        <span>
           content2
-        </span>,
-        "header": "header2",
-        "visible": true,
+        </span>
       }
-    }
-    key="1"
-  />
-</div>
+      generateIcon={[MockFunction]}
+      header="header2"
+      index={1}
+      key="1"
+      showHeaderIcon="right"
+      visible={false}
+    >
+      <AccordionGroup
+        collapsed={false}
+        content={
+          <span>
+            content2
+          </span>
+        }
+        generateIcon={[MockFunction]}
+        header="header2"
+        key="1"
+        showHeaderIcon="right"
+        visible={false}
+      />
+    </AccordionGroupWrapper>
+  </div>
+</Accordion>
 `;
