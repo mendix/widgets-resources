@@ -89,12 +89,11 @@ async function main() {
 
     // Spin up the standalone selenium docker image
     const freePortBrowser = await findFreePort(4444);
-    const runtimeIp = execSync(`docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' runtime`);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
         `docker run -d --name browser -p ${freePortBrowser}:4444 ` +
             `-v /dev/shm:/dev/shm -v ${__dirname}:/shared ` +
-            `${browserDocker} /bin/sh -c "chmod +x /shared/browsercontainer.sh && /shared/browsercontainer.sh ${runtimeIp}"`
+            `${browserDocker} /bin/sh -c "chmod +x /shared/browsercontainer.sh && /shared/browsercontainer.sh ${ip} ${freePort}"`
     )
         .toString()
         .trim();
@@ -120,7 +119,7 @@ async function main() {
             stdio: "inherit",
             env: {
                 ...process.env,
-                URL: `http://localhost:8080`,
+                URL: "http://localhost:8080",
                 SERVER_IP: ip,
                 SERVER_PORT: freePortBrowser
             }
