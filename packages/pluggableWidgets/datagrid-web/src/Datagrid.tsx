@@ -1,5 +1,6 @@
-import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnsType, DatagridContainerProps } from "../typings/DatagridProps";
+import { ValueStatus } from "mendix";
 import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
 
@@ -15,6 +16,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const currentPage = isInfiniteLoad
         ? props.datasource.limit / props.pageSize
         : props.datasource.offset / props.pageSize;
+    const [filtered, setFiltered] = useState(false);
+    const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
 
     props.datasource.requestTotalCount(true);
 
@@ -23,6 +26,17 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             props.datasource.setLimit(props.pageSize);
         }
     });
+
+    useEffect(() => {
+        if (
+            !viewStateFilters.current &&
+            !filtered &&
+            props.datasource.status === ValueStatus.Available &&
+            props.datasource.filter
+        ) {
+            viewStateFilters.current = props.datasource.filter;
+        }
+    }, [filtered, props.datasource]);
 
     const setPage = useCallback(
         computePage => {
@@ -48,7 +62,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     if (filters.length > 0) {
         props.datasource.setFilter(filters.length > 1 ? and(...filters) : filters[0]);
-    } else {
+    } else if (filtered) {
         props.datasource.setFilter(undefined);
     }
 
@@ -102,17 +116,27 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 (renderWrapper, columnIndex) => {
                     const { attribute, filter } = props.columns[columnIndex];
                     const [, filterDispatcher] = customFiltersState[columnIndex];
-                    const initialFilters = extractFilters(attribute, props.datasource.filter);
+                    const initialFilters = extractFilters(attribute, viewStateFilters.current);
 
                     return attribute
                         ? renderWrapper(
-                              <FilterContext.Provider value={{ filterDispatcher, attribute, initialFilters }}>
+                              <FilterContext.Provider
+                                  value={{
+                                      filterDispatcher: prev => {
+                                          setFiltered(true);
+                                          filterDispatcher(prev);
+                                          return prev;
+                                      },
+                                      attribute,
+                                      initialFilters
+                                  }}
+                              >
                                   {filter}
                               </FilterContext.Provider>
                           )
                         : renderWrapper(filter);
                 },
-                [customFiltersState, props.columns, props.datasource.filter]
+                [customFiltersState, props.columns]
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWrapperRenderer={useCallback((_columnIndex: number, header: ReactElement) => header, [])}
