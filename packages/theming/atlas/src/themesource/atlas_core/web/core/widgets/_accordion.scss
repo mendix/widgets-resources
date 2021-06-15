@@ -14,6 +14,7 @@
 
     .widget-accordion {
         background-color: $bg-color-secondary;
+        border-radius: $border-radius-default;
 
         .widget-accordion-group {
             @include get-accordion-group-styles(
@@ -23,6 +24,12 @@
                 $brand-primary,
                 $accordion-default-border-color
             );
+        }
+
+        &.widget-accordion-preview {
+            .widget-accordion-group {
+                @include get-accordion-preview-group-styles($accordion-header-default-color);
+            }
         }
     }
 }
@@ -82,5 +89,18 @@
     .widget-accordion-group-content {
         border-color: $border-color;
         padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
+    }
+}
+
+@mixin get-accordion-preview-group-styles($color) {
+    .widget-accordion-group-header {
+        > div > :is(h1, h2, h3, h4, h5, h6) {
+            font-size: $font-size-h5;
+            font-weight: $font-weight-header;
+        }
+
+        > div > :is(h1, h2, h3, h4, h5, h6, p, span) {
+            color: $color;
+        }
     }
 }
