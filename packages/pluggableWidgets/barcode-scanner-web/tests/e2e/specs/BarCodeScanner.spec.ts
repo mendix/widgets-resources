@@ -1,8 +1,6 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-
 describe("barcode-scanner-web", () => {
     beforeAll(() => {
-        page.open(); // resets page
+        browser.url("http://localhost:8080");
     });
 
     it("compares with a screenshot baseline and checks if the media stream is started", () => {
