@@ -2,7 +2,7 @@ import { Context, Dispatch } from "react";
 import { ListAttributeValue } from "mendix";
 import { FilterCondition } from "mendix/filters";
 
-export declare type FilterValue = { type: string; value: any };
+export type FilterValue = { type: string; value: any };
 
 export interface FilterFunction {
     getFilterCondition(): FilterCondition | undefined;
