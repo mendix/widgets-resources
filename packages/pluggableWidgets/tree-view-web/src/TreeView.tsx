@@ -11,6 +11,7 @@ export const TreeView: FunctionComponent<TreeViewContainerProps> = props => {
                 content: props.children?.get(item)
             };
         }) ?? [];
+
     return (
         <TreeViewComponent
             class={props.class}

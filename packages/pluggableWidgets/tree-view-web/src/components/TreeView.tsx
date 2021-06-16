@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { GUID } from "mendix";
-import { createElement, CSSProperties, ReactElement, ReactNode, useState } from "react";
+import React, { createElement, CSSProperties, ReactElement, ReactNode, useState } from "react";
 
 import "../ui/TreeView.scss";
 
@@ -50,7 +50,6 @@ function TreeViewObject(props: TreeViewObjectProps): ReactElement {
         }
     }
 
-    console.log({ value: props.value, chidlren: props.children });
     return (
         <div className="tree-view-object">
             <h2
@@ -66,6 +65,9 @@ function TreeViewObject(props: TreeViewObjectProps): ReactElement {
                 role={props.hasChildren ? "button" : undefined}
             >
                 {props.value}
+                {props.hasChildren && (
+                    <span className={`glyphicon ${treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus"}`} />
+                )}
             </h2>
             {props.hasChildren && treeViewIsExpanded && <div className="tree-view-body">{props.children}</div>}
         </div>

@@ -8,7 +8,20 @@
         cursor: pointer;
     }
 
+    .tree-view-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+        padding: 8px 0;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
     .tree-view-body {
-        margin-left: 12px;
+        padding-left: 12px;
+        border-left: blue 1px solid;
     }
 }
