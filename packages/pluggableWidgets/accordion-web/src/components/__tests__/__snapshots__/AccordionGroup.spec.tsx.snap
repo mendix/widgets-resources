@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionGroup collapsible doesn't render the icon when set to not visible 1`] = `
+exports[`AccordionGroup collapsible header doesn't render the icon when set to not visible 1`] = `
 <section
   className="widget-accordion-group widget-accordion-group-collapsed class-name"
 >

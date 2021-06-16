@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { shallow, ShallowWrapper } from "enzyme";
-import { AccordionGroup, AccordionGroupProps } from "../AccordionGroup";
+import { AccordionGroup, AccordionGroupProps, Target } from "../AccordionGroup";
 
 describe("AccordionGroup", () => {
     let defaultAccordionGroupProps: AccordionGroupProps;
@@ -30,12 +30,18 @@ describe("AccordionGroup", () => {
     describe("collapsible", () => {
         function mountCollapsibleAccordionGroup(
             accordionGroupProps: AccordionGroupProps,
-            toggleCollapsed?: () => void
+            toggleCollapsed?: () => void,
+            changeFocus?: (focusedGroupHeader: EventTarget | null, focusTargetGroupHeader: Target) => void
         ): ShallowWrapper {
             const resToggleCollapsed = toggleCollapsed ?? jest.fn();
 
             return shallow(
-                <AccordionGroup {...accordionGroupProps} collapsible toggleCollapsed={resToggleCollapsed} />
+                <AccordionGroup
+                    {...accordionGroupProps}
+                    collapsible
+                    toggleCollapsed={resToggleCollapsed}
+                    changeFocus={changeFocus}
+                />
             );
         }
 
@@ -110,53 +116,147 @@ describe("AccordionGroup", () => {
             expect(accordionGroup).toMatchSnapshot();
         });
 
-        it("calls toggleCollapsed when clicking the header to expand", () => {
-            const toggleCollapsedMock = jest.fn();
+        describe("header", () => {
+            it("calls toggleCollapsed when clicking to expand", () => {
+                const toggleCollapsedMock = jest.fn();
 
-            const accordionGroup = mountCollapsibleAccordionGroup(defaultAccordionGroupProps, toggleCollapsedMock);
+                const accordionGroup = mountCollapsibleAccordionGroup(defaultAccordionGroupProps, toggleCollapsedMock);
 
-            accordionGroup.find(".widget-accordion-group-header-button").simulate("click");
-            expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
-        });
-
-        it("calls toggleCollapsed when clicking the header to collapse", () => {
-            const toggleCollapsedMock = jest.fn();
-
-            const accordionGroup = mountCollapsibleAccordionGroup(
-                { ...defaultAccordionGroupProps, collapsed: false },
-                toggleCollapsedMock
-            );
-
-            accordionGroup.find(".widget-accordion-group-header-button").simulate("click");
-            expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
-        });
-
-        it("applies the correct class when the header icon is aligned right", () => {
-            const accordionGroup = mountCollapsibleAccordionGroup(defaultAccordionGroupProps);
-
-            expect(accordionGroup.find(".widget-accordion-group-header-button").prop("className")).toContain(
-                "widget-accordion-group-header-button-icon-right"
-            );
-        });
-
-        it("applies the correct class when the header icon is aligned left", () => {
-            const accordionGroup = mountCollapsibleAccordionGroup({
-                ...defaultAccordionGroupProps,
-                showHeaderIcon: "left"
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("click");
+                expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
             });
 
-            expect(accordionGroup.find(".widget-accordion-group-header-button").prop("className")).toContain(
-                "widget-accordion-group-header-button-icon-left"
-            );
-        });
+            it("calls toggleCollapsed when clicking to collapse", () => {
+                const toggleCollapsedMock = jest.fn();
 
-        it("doesn't render the icon when set to not visible", () => {
-            const accordionGroup = mountCollapsibleAccordionGroup({
-                ...defaultAccordionGroupProps,
-                showHeaderIcon: "no"
+                const accordionGroup = mountCollapsibleAccordionGroup(
+                    { ...defaultAccordionGroupProps, collapsed: false },
+                    toggleCollapsedMock
+                );
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("click");
+                expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
             });
 
-            expect(accordionGroup).toMatchSnapshot();
+            it("calls toggleCollapsed on space key down", () => {
+                const toggleCollapsedMock = jest.fn();
+
+                const accordionGroup = mountCollapsibleAccordionGroup(defaultAccordionGroupProps, toggleCollapsedMock);
+
+                const keyboardEvent = { key: " ", preventDefault: jest.fn() };
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("keydown", keyboardEvent);
+                expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
+                expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
+            });
+
+            it("calls toggleCollapsed on Enter key down", () => {
+                const toggleCollapsedMock = jest.fn();
+
+                const accordionGroup = mountCollapsibleAccordionGroup(defaultAccordionGroupProps, toggleCollapsedMock);
+
+                const keyboardEvent = { key: "Enter", preventDefault: jest.fn() };
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("keydown", keyboardEvent);
+                expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
+                expect(toggleCollapsedMock).toHaveBeenCalledTimes(1);
+            });
+
+            it("calls changeFocus on arrow down key down", () => {
+                const changeFocusMock = jest.fn();
+
+                const accordionGroup = mountCollapsibleAccordionGroup(
+                    defaultAccordionGroupProps,
+                    undefined,
+                    changeFocusMock
+                );
+
+                const keyboardEvent = { key: "ArrowDown", preventDefault: jest.fn(), currentTarget: "currentTarget" };
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("keydown", keyboardEvent);
+                expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledWith(keyboardEvent.currentTarget, Target.NEXT);
+            });
+
+            it("calls changeFocus on arrow up key down", () => {
+                const changeFocusMock = jest.fn();
+
+                const accordionGroup = mountCollapsibleAccordionGroup(
+                    defaultAccordionGroupProps,
+                    undefined,
+                    changeFocusMock
+                );
+
+                const keyboardEvent = { key: "ArrowUp", preventDefault: jest.fn(), currentTarget: "currentTarget" };
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("keydown", keyboardEvent);
+                expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledWith(keyboardEvent.currentTarget, Target.PREVIOUS);
+            });
+
+            it("calls changeFocus on Home key down", () => {
+                const changeFocusMock = jest.fn();
+
+                const accordionGroup = mountCollapsibleAccordionGroup(
+                    defaultAccordionGroupProps,
+                    undefined,
+                    changeFocusMock
+                );
+
+                const keyboardEvent = { key: "Home", preventDefault: jest.fn(), currentTarget: "currentTarget" };
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("keydown", keyboardEvent);
+                expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledWith(keyboardEvent.currentTarget, Target.FIRST);
+            });
+
+            it("calls changeFocus on End key down", () => {
+                const changeFocusMock = jest.fn();
+
+                const accordionGroup = mountCollapsibleAccordionGroup(
+                    defaultAccordionGroupProps,
+                    undefined,
+                    changeFocusMock
+                );
+
+                const keyboardEvent = { key: "End", preventDefault: jest.fn(), currentTarget: "currentTarget" };
+
+                accordionGroup.find(".widget-accordion-group-header-button").simulate("keydown", keyboardEvent);
+                expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledTimes(1);
+                expect(changeFocusMock).toHaveBeenCalledWith(keyboardEvent.currentTarget, Target.LAST);
+            });
+
+            it("applies the correct class when the header icon is aligned right", () => {
+                const accordionGroup = mountCollapsibleAccordionGroup(defaultAccordionGroupProps);
+
+                expect(accordionGroup.find(".widget-accordion-group-header-button").prop("className")).toContain(
+                    "widget-accordion-group-header-button-icon-right"
+                );
+            });
+
+            it("applies the correct class when the header icon is aligned left", () => {
+                const accordionGroup = mountCollapsibleAccordionGroup({
+                    ...defaultAccordionGroupProps,
+                    showHeaderIcon: "left"
+                });
+
+                expect(accordionGroup.find(".widget-accordion-group-header-button").prop("className")).toContain(
+                    "widget-accordion-group-header-button-icon-left"
+                );
+            });
+
+            it("doesn't render the icon when set to not visible", () => {
+                const accordionGroup = mountCollapsibleAccordionGroup({
+                    ...defaultAccordionGroupProps,
+                    showHeaderIcon: "no"
+                });
+
+                expect(accordionGroup).toMatchSnapshot();
+            });
         });
     });
 
