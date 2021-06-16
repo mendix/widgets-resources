@@ -64,8 +64,8 @@ function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
         <span
             className={classNames("glyphicon", props.icon)}
             style={{ ...props.style, fontSize: `${props.size}px` }}
-            {...onClickProps}
             {...accessibilityProps}
+            {...onClickProps}
         />
     );
 }
