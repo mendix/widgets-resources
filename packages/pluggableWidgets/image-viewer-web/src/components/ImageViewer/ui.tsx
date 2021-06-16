@@ -1,4 +1,4 @@
-import React, { createElement, CSSProperties, ReactElement } from "react";
+import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactEventHandler } from "react";
 import classNames from "classnames";
 import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageViewerProps";
 import { LightboxProps } from "../Lightbox";
@@ -26,7 +26,7 @@ export interface ImageViewerWrapperProps {
 
 export interface ImageViewerContentProps {
     style?: CSSProperties;
-    onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+    onClick?: ReactEventHandler<HTMLElement>;
     altText?: string;
 }
 
@@ -57,11 +57,14 @@ function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
               role: "img"
           }
         : {};
+
+    const onClickProps = getImageContentOnClickProps(props.onClick);
+
     return (
         <span
             className={classNames("glyphicon", props.icon)}
             style={{ ...props.style, fontSize: `${props.size}px` }}
-            onClick={props.onClick}
+            {...onClickProps}
             {...accessibilityProps}
         />
     );
@@ -76,6 +79,7 @@ export interface ImageViewerImage extends ImageViewerContentProps {
 }
 
 function Image(props: ImageViewerImage): ReactElement {
+    const onClickProps = getImageContentOnClickProps(props.onClick);
     return (
         <img
             src={props.image}
@@ -84,10 +88,26 @@ function Image(props: ImageViewerImage): ReactElement {
                 height: getStyle(props.height, props.heightUnit),
                 width: getStyle(props.width, props.widthUnit)
             }}
-            onClick={props.onClick}
             alt={props.altText}
+            {...onClickProps}
         />
     );
+}
+
+function getImageContentOnClickProps(onClick: ImageViewerContentProps["onClick"]): HTMLAttributes<HTMLElement> {
+    if (!onClick) {
+        return {};
+    }
+    return {
+        onClick,
+        role: "button",
+        tabIndex: 0,
+        onKeyDown: event => {
+            if (event.key === "Enter" || event.key === " ") {
+                onClick(event);
+            }
+        }
+    };
 }
 
 export const ImageViewerUi = {

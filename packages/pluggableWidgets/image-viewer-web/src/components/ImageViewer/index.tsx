@@ -50,24 +50,22 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         [closeLightbox]
     );
 
-    const onImageClick = useCallback<ImageViewerContentProps["onClick"]>(
+    const onImageClick = useCallback<Exclude<ImageViewerContentProps["onClick"], undefined>>(
         event => {
             event.stopPropagation();
-            if (lightboxIsOpen) {
-                return;
-            }
             if (onClickType === "action") {
                 onClick?.();
             } else if (onClickType === "enlarge") {
                 openLightbox();
             }
         },
-        [onClick, onClickType, openLightbox, lightboxIsOpen]
+        [onClick, onClickType, openLightbox]
     );
 
+    const hasClickHandler = (onClickType === "action" && onClick) || onClickType === "enlarge";
     const sharedContentProps: ImageViewerContentProps = {
         style,
-        onClick: onImageClick,
+        onClick: hasClickHandler && !lightboxIsOpen ? onImageClick : undefined,
         altText
     };
 
