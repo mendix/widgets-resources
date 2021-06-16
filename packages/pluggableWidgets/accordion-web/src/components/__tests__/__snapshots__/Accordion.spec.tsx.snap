@@ -4619,3 +4619,51 @@ exports[`Accordion not collapsible renders correctly 1`] = `
   </div>
 </Accordion>
 `;
+
+exports[`Accordion renders correctly without tabindex 1`] = `
+<div
+  className="widget-accordion"
+  data-focusindex={0}
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+>
+  <AccordionGroupWrapper
+    collapsed={true}
+    collapsedAccordionGroupsDispatch={[Function]}
+    collapsible={true}
+    content={
+      <span>
+        content
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header"
+    id="idAccordionGroup0"
+    index={0}
+    key="0"
+    showHeaderIcon="right"
+    visible={true}
+  />
+  <AccordionGroupWrapper
+    collapsed={true}
+    collapsedAccordionGroupsDispatch={[Function]}
+    collapsible={true}
+    content={
+      <span>
+        content2
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header2"
+    id="idAccordionGroup1"
+    index={1}
+    key="1"
+    showHeaderIcon="right"
+    visible={false}
+  />
+</div>
+`;

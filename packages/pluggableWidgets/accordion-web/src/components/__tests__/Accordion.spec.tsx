@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { mount } from "enzyme";
+import { mount, ReactWrapper, shallow } from "enzyme";
 import { Accordion, AccordionProps } from "../Accordion";
 
 describe("Accordion", () => {
@@ -21,6 +21,144 @@ describe("Accordion", () => {
             showGroupHeaderIcon: "right"
         };
     }
+
+    describe("collapsible AccordionGroupWrapper", () => {
+        let accordion: ReactWrapper;
+
+        const container = document.createElement("div");
+        container.id = "container";
+        document.body.appendChild(container);
+
+        beforeEach(() => {
+            defaultProps = getProps(true, true);
+        });
+
+        afterEach(() => {
+            accordion.unmount();
+        });
+
+        it("gives the next accordion group button focus on arrow down key down", () => {
+            const groups = [...defaultProps.groups];
+            groups[1].visible = true;
+
+            accordion = mount(<Accordion {...defaultProps} groups={groups} />, {
+                attachTo: document.querySelector("#container") as HTMLDivElement
+            });
+
+            const firstAccordionGroupButton = accordion.find(".widget-accordion-group-header-button").first();
+
+            const keyboardEvent = {
+                key: "ArrowDown",
+                preventDefault: jest.fn(),
+                currentTarget: firstAccordionGroupButton.getDOMNode()
+            };
+
+            firstAccordionGroupButton.simulate("keydown", keyboardEvent);
+            expect(accordion.find(".widget-accordion-group-header-button").last().getDOMNode()).toBe(
+                document.activeElement
+            );
+        });
+
+        it("gives the previous accordion group button focus on arrow up key down", () => {
+            const groups = [...defaultProps.groups];
+            groups[1].visible = true;
+
+            accordion = mount(<Accordion {...defaultProps} groups={groups} />, {
+                attachTo: document.querySelector("#container") as HTMLDivElement
+            });
+
+            const lastAccordionGroupButton = accordion.find(".widget-accordion-group-header-button").last();
+            const keyboardEvent = {
+                key: "ArrowUp",
+                preventDefault: jest.fn(),
+                currentTarget: lastAccordionGroupButton.getDOMNode()
+            };
+
+            (lastAccordionGroupButton.getDOMNode() as HTMLButtonElement).focus();
+            lastAccordionGroupButton.simulate("keydown", keyboardEvent);
+            expect(accordion.find(".widget-accordion-group-header-button").first().getDOMNode()).toBe(
+                document.activeElement
+            );
+        });
+
+        it("gives the first accordion group button focus on Home key down", () => {
+            const groups = [
+                ...defaultProps.groups,
+                { header: "header3", content: <span>content3</span>, visible: true }
+            ];
+            groups[1].visible = true;
+
+            accordion = mount(<Accordion {...defaultProps} groups={groups} />, {
+                attachTo: document.querySelector("#container") as HTMLDivElement
+            });
+
+            const lastAccordionGroupButton = accordion.find(".widget-accordion-group-header-button").last();
+            const keyboardEvent = {
+                key: "Home",
+                preventDefault: jest.fn(),
+                currentTarget: lastAccordionGroupButton.getDOMNode()
+            };
+
+            (lastAccordionGroupButton.getDOMNode() as HTMLButtonElement).focus();
+            lastAccordionGroupButton.simulate("keydown", keyboardEvent);
+            expect(accordion.find(".widget-accordion-group-header-button").first().getDOMNode()).toBe(
+                document.activeElement
+            );
+        });
+
+        it("gives the last accordion group button focus on End key down", () => {
+            const groups = [
+                ...defaultProps.groups,
+                { header: "header3", content: <span>content3</span>, visible: true }
+            ];
+            groups[1].visible = true;
+
+            accordion = mount(<Accordion {...defaultProps} groups={groups} />, {
+                attachTo: document.querySelector("#container") as HTMLDivElement
+            });
+
+            const firstAccordionGroupButton = accordion.find(".widget-accordion-group-header-button").first();
+            const keyboardEvent = {
+                key: "End",
+                preventDefault: jest.fn(),
+                currentTarget: firstAccordionGroupButton.getDOMNode()
+            };
+
+            (firstAccordionGroupButton.getDOMNode() as HTMLButtonElement).focus();
+            firstAccordionGroupButton.simulate("keydown", keyboardEvent);
+            expect(accordion.find(".widget-accordion-group-header-button").last().getDOMNode()).toBe(
+                document.activeElement
+            );
+        });
+
+        it("remains focus on the last accordion group button on arrow down key down", () => {
+            const groups = [
+                ...defaultProps.groups,
+                { header: "header3", content: <span>content3</span>, visible: true }
+            ];
+            groups[1].visible = true;
+
+            accordion = mount(<Accordion {...defaultProps} groups={groups} />, {
+                attachTo: document.querySelector("#container") as HTMLDivElement
+            });
+
+            const lastAccordionGroupButton = accordion.find(".widget-accordion-group-header-button").last();
+            const keyboardEvent = {
+                key: "ArrowDown",
+                preventDefault: jest.fn(),
+                currentTarget: lastAccordionGroupButton.getDOMNode()
+            };
+
+            (lastAccordionGroupButton.getDOMNode() as HTMLButtonElement).focus();
+            lastAccordionGroupButton.simulate("keydown", keyboardEvent);
+            expect(lastAccordionGroupButton.getDOMNode()).toBe(document.activeElement);
+        });
+    });
+
+    it("renders correctly without tabindex", () => {
+        const accordion = shallow(<Accordion {...getProps(true, true)} tabIndex={undefined} />);
+        expect(accordion).toMatchSnapshot();
+    });
 
     describe("in collapsible & single expanded group mode", () => {
         beforeEach(() => {
