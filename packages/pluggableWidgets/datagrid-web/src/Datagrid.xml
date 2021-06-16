@@ -194,6 +194,8 @@
                     <description/>
                 </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Advanced">
             <propertyGroup caption="Advanced">
                 <property key="advanced" type="boolean" defaultValue="false">
                     <caption>Advanced settings</caption>
