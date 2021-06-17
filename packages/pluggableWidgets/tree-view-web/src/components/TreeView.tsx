@@ -70,7 +70,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(props.isUserDefinedLeafNode);
 
     return (
-        <div className="tree-view-object">
+        <div className="tree-view-branch">
             <h2
                 className={classNames("tree-view-header", {
                     "tree-view-header-expandable": !props.isUserDefinedLeafNode
