@@ -74,7 +74,6 @@
         cursor: auto;
         background-color: $background-color;
         padding: $spacing-medium;
-        transition: box-shadow 0.2s ease 0ms;
 
         > :is(h1, h2, h3, h4, h5, h6) {
             font-size: $font-size-h5;
