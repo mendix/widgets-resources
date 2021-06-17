@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, useCallback, useReducer, useRef, useState } from "react";
+import { createElement, Dispatch, MutableRefObject, ReactElement, useCallback, useReducer, useRef } from "react";
 
 import { AccordionGroup, AccordionGroupProps, Target } from "./AccordionGroup";
 import { CollapsedAccordionGroupsReducerAction, getCollapsedAccordionGroupsReducer } from "../utils/reducers";
@@ -26,17 +26,13 @@ export function Accordion(props: AccordionProps): ReactElement | null {
         props.groups.map(() => !props.previewMode && props.collapsible)
     );
 
-    const [container, setContainer] = useState<HTMLDivElement>();
-
-    const updateContainer = useCallback((node: HTMLDivElement | null) => {
-        setContainer(node ?? undefined);
-    }, []);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     const accordionGroupElements = props.groups.map((group, index) => (
         <AccordionGroupWrapper
             key={index}
             index={index}
-            parent={container}
+            parent={containerRef}
             id={`${props.id}AccordionGroup${index}`}
             collapsible={props.collapsible}
             collapsedAccordionGroupsDispatch={collapsedAccordionGroupsDispatch}
@@ -50,7 +46,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 
     return (
         <div
-            ref={updateContainer}
+            ref={containerRef}
             id={props.id}
             className={classNames("widget-accordion", { "widget-accordion-preview": props.previewMode }, props.class)}
             style={props.style}
@@ -63,7 +59,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 
 interface AccordionGroupWrapperProps extends Omit<AccordionGroupProps, "toggleCollapsed" | "changeFocus"> {
     index: number;
-    parent?: HTMLDivElement;
+    parent: MutableRefObject<HTMLDivElement | null>;
     collapsedAccordionGroupsDispatch: Dispatch<CollapsedAccordionGroupsReducerAction>;
 }
 
@@ -80,9 +76,9 @@ function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement 
 
     const focusAccordionGroupHeaderElement = useCallback(
         (focusedHeaderButton: EventTarget | null, focusTargetHeader: Target): void => {
-            if (props.parent && focusedHeaderButton && focusedHeaderButton instanceof Node) {
+            if (props.parent.current && focusedHeaderButton && focusedHeaderButton instanceof Node) {
                 const headerButtons: HTMLDivElement[] = Array.from(
-                    props.parent.querySelectorAll(
+                    props.parent.current.querySelectorAll(
                         ":scope > .widget-accordion-group > .widget-accordion-group-header > .widget-accordion-group-header-button"
                     )
                 );
