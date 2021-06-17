@@ -54,9 +54,20 @@
     &.widget-accordion-group-collapsed:last-child,
     &.widget-accordion-group-collapsing:last-child {
         .widget-accordion-group-header-button {
-            transition: border-radius 5ms ease 200ms;
             border-bottom-left-radius: calc(#{$border-radius-default} - #{$accordion-border-width});
             border-bottom-right-radius: calc(#{$border-radius-default} - #{$accordion-border-width});
+        }
+    }
+
+    &.widget-accordion-group-collapsing:last-child {
+        .widget-accordion-group-header-button {
+            transition: border-radius 5ms ease 200ms;
+        }
+    }
+
+    &.widget-accordion-group-expanding:last-child {
+        .widget-accordion-group-header-button {
+            transition: border-radius 5ms ease 80ms;
         }
     }
 
@@ -64,7 +75,7 @@
         cursor: auto;
         background-color: $background-color;
         padding: $spacing-medium;
-        transition: box-shadow 0.2s ease 0ms, border-radius 5ms ease 80ms;
+        transition: box-shadow 0.2s ease 0ms;
 
         > :is(h1, h2, h3, h4, h5, h6) {
             font-size: $font-size-h5;
