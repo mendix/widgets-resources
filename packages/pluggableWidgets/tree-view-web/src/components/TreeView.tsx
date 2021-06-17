@@ -1,6 +1,6 @@
-import classNames from "classnames";
 import { GUID } from "mendix";
-import React, { createElement, CSSProperties, ReactElement, ReactNode, useState } from "react";
+import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactNode, useState } from "react";
+import classNames from "classnames";
 
 import "../ui/TreeView.scss";
 
@@ -41,6 +41,16 @@ interface TreeViewObjectProps extends Omit<TreeViewObject, "id"> {
     children: ReactNode;
 }
 
+function getTreeViewHeaderAccessibilityProps(hasChildren: boolean): HTMLAttributes<HTMLHeadingElement> {
+    if (hasChildren) {
+        return {
+            tabIndex: 0,
+            role: "button"
+        };
+    }
+    return {};
+}
+
 function TreeViewObject(props: TreeViewObjectProps): ReactElement {
     const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
 
@@ -49,6 +59,8 @@ function TreeViewObject(props: TreeViewObjectProps): ReactElement {
             setTreeViewIsExpanded(isExpanded => !isExpanded);
         }
     }
+
+    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(props.hasChildren);
 
     return (
         <div className="tree-view-object">
@@ -61,8 +73,7 @@ function TreeViewObject(props: TreeViewObjectProps): ReactElement {
                         toggleTreeViewContent();
                     }
                 }}
-                tabIndex={props.hasChildren ? 0 : undefined}
-                role={props.hasChildren ? "button" : undefined}
+                {...headerAccessibilityProps}
             >
                 {props.value}
                 {props.hasChildren && (
