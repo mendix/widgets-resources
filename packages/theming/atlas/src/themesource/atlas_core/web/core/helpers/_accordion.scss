@@ -91,7 +91,7 @@
         }
 
         &.widget-accordion-bordered-all {
-            .widget-accordion-group {
+            > .widget-accordion-group {
                 &:first-child {
                     border-top-width: $accordion-border-width;
                     border-top-style: solid;
@@ -105,7 +105,7 @@
         }
 
         &.widget-accordion-bordered-horizontal {
-            .widget-accordion-group {
+            > .widget-accordion-group {
                 &:first-child {
                     border-top-width: $accordion-border-width;
                     border-top-style: solid;
@@ -114,15 +114,15 @@
         }
 
         &.widget-accordion-bordered-none {
-            .widget-accordion-group {
+            > .widget-accordion-group {
                 border-bottom: none;
             }
         }
 
         &.widget-accordion-striped {
-            .widget-accordion-group:not(:is(.widget-accordion-brand-primary, .widget-accordion-brand-secondary, .widget-accordion-brand-success, .widget-accordion-brand-warning, .widget-accordion-brand-danger)):nth-child(2n
+            > .widget-accordion-group:not(:is(.widget-accordion-brand-primary, .widget-accordion-brand-secondary, .widget-accordion-brand-success, .widget-accordion-brand-warning, .widget-accordion-brand-danger)):nth-child(2n
                     + 1) {
-                .widget-accordion-group-header-button {
+                > .widget-accordion-group-header > .widget-accordion-group-header-button {
                     background-color: $accordion-bg-striped;
 
                     &.widget-accordion-group-header-button-clickable {
@@ -134,19 +134,19 @@
                     }
                 }
 
-                .widget-accordion-group-content {
+                > .widget-accordion-group-content {
                     background-color: $accordion-bg-striped;
                 }
             }
         }
 
         &.widget-accordion-compact {
-            .widget-accordion-group {
-                .widget-accordion-group-header-button {
+            > .widget-accordion-group {
+                > .widget-accordion-group-header > .widget-accordion-group-header-button {
                     padding: $spacing-smaller $spacing-small;
                 }
 
-                .widget-accordion-group-content {
+                > .widget-accordion-group-content {
                     padding: $spacing-smaller $spacing-small $spacing-medium $spacing-small;
                 }
             }
