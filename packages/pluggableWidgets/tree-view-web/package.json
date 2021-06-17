@@ -1,7 +1,7 @@
 {
   "name": "tree-view-web",
   "widgetName": "TreeView",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Display a tree view structure",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
