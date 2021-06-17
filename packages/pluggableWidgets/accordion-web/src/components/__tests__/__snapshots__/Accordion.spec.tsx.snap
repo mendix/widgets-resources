@@ -4456,7 +4456,6 @@ exports[`Accordion not collapsible renders correctly 1`] = `
                 data-focusindex="0"
                 id="idAccordionGroup0HeaderButton"
                 role="button"
-                tabindex="0"
               >
                 header
               </div>
@@ -4513,7 +4512,6 @@ exports[`Accordion not collapsible renders correctly 1`] = `
               data-focusindex={0}
               id="idAccordionGroup0HeaderButton"
               role="button"
-              tabIndex={0}
             >
               header
             </div>
@@ -4572,7 +4570,6 @@ exports[`Accordion not collapsible renders correctly 1`] = `
                 data-focusindex="0"
                 id="idAccordionGroup0HeaderButton"
                 role="button"
-                tabindex="0"
               >
                 header
               </div>

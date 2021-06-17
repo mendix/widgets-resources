@@ -145,7 +145,7 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                         "widget-accordion-group-header-button-icon-right":
                             props.collapsible && showHeaderIcon === "right"
                     })}
-                    tabIndex={0}
+                    tabIndex={props.collapsible ? 0 : undefined}
                     data-focusindex={0}
                     role={"button"}
                     onClick={props.collapsible ? toggleCollapsed : undefined}

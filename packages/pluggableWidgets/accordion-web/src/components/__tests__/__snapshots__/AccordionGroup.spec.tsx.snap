@@ -304,7 +304,6 @@ exports[`AccordionGroup not collapsible displays the content when the group beco
       data-focusindex={0}
       id="idHeaderButton"
       role="button"
-      tabIndex={0}
     >
       header
     </div>
@@ -343,7 +342,6 @@ exports[`AccordionGroup not collapsible displays the content when the group is v
       data-focusindex={0}
       id="idHeaderButton"
       role="button"
-      tabIndex={0}
     >
       header
     </div>
