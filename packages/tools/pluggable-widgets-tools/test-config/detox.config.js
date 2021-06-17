@@ -22,7 +22,7 @@ module.exports = {
         android: {
             type: "android.emulator",
             device: {
-                "avdName": "Nexus_6P_API_28"
+                "avdName": "5.4_FWVGA_API_30"
             }
         },
     },
