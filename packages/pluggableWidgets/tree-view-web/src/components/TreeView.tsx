@@ -6,16 +6,16 @@ import "../ui/TreeView.scss";
 
 interface TreeViewObject {
     id: GUID;
-    value?: string;
-    content?: ReactNode;
+    value: string | undefined;
+    content: ReactNode;
 }
 
 export interface TreeViewProps {
     class: string;
     style?: CSSProperties;
     items: TreeViewObject[];
-    isUserDefinedLeafNode: boolean;
-    startExpanded: boolean;
+    isUserDefinedLeafNode: TreeViewBranchProps["isUserDefinedLeafNode"];
+    startExpanded: TreeViewBranchProps["startExpanded"];
 }
 
 export function TreeView({
@@ -27,24 +27,25 @@ export function TreeView({
 }: TreeViewProps): ReactElement {
     return (
         <div className={classNames("mx-tree-view", className)} style={style}>
-            {items.map(treeViewItem => (
+            {items.map(({ id, value, content }) => (
                 <TreeViewBranch
-                    key={treeViewItem.id}
-                    value={treeViewItem.value}
+                    key={id}
+                    value={value}
                     isUserDefinedLeafNode={isUserDefinedLeafNode}
                     startExpanded={startExpanded}
                 >
-                    {treeViewItem.content}
+                    {content}
                 </TreeViewBranch>
             ))}
         </div>
     );
 }
 
-interface TreeViewBranchProps extends Omit<TreeViewObject, "id"> {
+interface TreeViewBranchProps {
     isUserDefinedLeafNode: boolean;
     startExpanded: boolean;
-    children: ReactNode;
+    value: TreeViewObject["value"];
+    children: TreeViewObject["content"];
 }
 
 function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttributes<HTMLHeadingElement> {
