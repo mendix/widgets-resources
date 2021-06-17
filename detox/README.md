@@ -1,49 +1,76 @@
-How to run tests
+# Running local detox tests
+To be able to run detox tests you need the following pieces:
 
 
-Latest Steps:
-https://paper.dropbox.com/doc/Running-local-detox-tests--BMPPqQujc330XMe1pNDCKrA9Ag-YBPdIMfn6okX9DTgeIqa7
+- 2 Apks for android (Create them via appdev’s native automated)
+- IPA for ios (Create them via appdev’s native automated)
+- Emulator android / simulator ios (Create them via appdev’s native automated)
+- Locally running Mendix Studio project 
+- Actual detox tests (in widgets-resources)
 
-#### I think the steps below are outdated as they are 1 year (too) old
+## How do you get APK’s and IPA:
 
-<!-- --------------------------------------------------------------- -->
-## Prerequisites
+Fortunately appdev’s automation system already built a system where you can create avd’s and necessary apk’s AND the necessary variables to be able to make it work.
 
--   Make sure to install `brew tap wix/brew` and `brew install applesimutils`
+Make sure you follow detox’s installation part.
 
-## Developing tests locally
+For that please follow the README.md => https://gitlab.rnd.mendix.com/appdev/appdev/-/tree/master/automated/frontend/native
 
-For the first time make sure to run
+I made already them so feel free to go ahead and use these:
 
--   `npm run decompress:ios:local` in order to decompress the ios app
+https://mendix.slack.com/archives/G01LKEB3W2U/p1620655910024400
 
--   Run NativeComponentsTestProject in any of the mendix versions
--   Run `npm run test:ios:local` in order to run the ios app which will connect to `localhost:8080` for bundle requests.
+## How do I create Emulator and Simulator:
 
-## Updating the tests for travis
+Both for ios and android on a fresh machine, you need to install some packages. Cannot cover everything here. But you must be able to execute the Emulator with a particular name in the same Readme => https://gitlab.rnd.mendix.com/appdev/appdev/-/tree/master/automated/frontend/native
 
-In order to run the tests without mendix, we put the bundle inside of the app itself. This means that every time we
-update the test project, one should also replace the contents of this file. For ios and android it is in different
-locations
+## How do I run a test:
 
-### IOS
+Tell where the packages are:
+First we need to tell where is our apk’s and ipa’s. To do that simply change we have to provide the following consts in terminal.
 
-`ios/NativeComponents.app/Bundle/index.ios.bundle`.
 
--   Run NativeComponentsTestProject in desired mendix versions
--   Hit `http://localhost:8080/n/index.bundle?platform=ios&minify=true` in firefox in order to preload the file
--   Replace the `ios/NativeComponents.app/Bundle/index.ios.bundle` with localhost contents
--   Run `npm run compress:ios` in order to ship the changes to archived version
+    process.env.TEST_NATIVE_APP_IOS => yourPathToIPA
+    process.env.TEST_NATIVE_APP_ANDROID => yourPathTo app-debug.apk
+    process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY => yourPathTo app-debug-androidTest.apk
 
-### Android
+### Which will be picked up in:
+/widgets-resources/packages/tools/pluggable-widgets-tools/test-config/detox.config.js
 
-TODO
+### Spin up mendix project:
+Every widget has its own project.
 
-## How do I create new .app and apk file ?
+### Run the tests:
+Every widget has its own detox.config.js file. Which inherits the pluggable-widgets-tools. For android run:
 
-After launching the ios app in Xcode and press play, under `Yourapp/Products` you can find the xxxx.app file which you
-can drag and drop to the simulator
+`npm run test:e2e:local:android`
+`npm run test:e2e:local:ios`
 
-### Android
+Debugging
 
-TODO
+`npm run test:e2e:local:android:debug`
+`npm run test:e2e:local:ios:debug`
+
+# General improvements
+- List all versions of the working tools 
+    - Android studio
+        - avd
+        - sdk
+    - Xcode
+    - Node
+    - Java
+- Add script to monorepo where we clone native template repo and build the debug APK / IPA / APP which we use to run the detox commands
+    - Update `pluggable-widgets-tools/test-config/detox.config.js` so the paths point to the freshly created mobile apps
+    - We probably have to include the native libraries included in the MiN from appdev in order to test widgets like native maps
+- Always use same iPhone & android emulators (names) so new users don’t have to update the names in `pluggable-widgets-tools/test-config/detox.config.js`
+- AppDev Android Studio java issue - never version of studio (atl east in 4.2) throws error when trying to run appdev’s native testing setup commands (the ones that use avdmanager, etc.). 
+
+# Troubleshooting
+`Failed to connect to websocket`
+- Make sure to disable firewalls and any other software interferring with your local network (Windows Defender, Mac Firewall, Adblockers, Network security tools)
+    - Unable to Mac firewall configurations due to lack of admin rights?
+        - Use `socketfilterfw` to alter firewall configuration `/usr/libexec/ApplicationFirewall/socketfilterfw`
+        - Helpfull links:
+
+            https://krypted.com/mac-security/command-line-firewall-management-in-os-x-10-10
+            https://apple.stackexchange.com/questions/380118/how-to-debug-macos-firewall-my-application-layer-firewall-alf-is-not-logging
