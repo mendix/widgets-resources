@@ -24,6 +24,7 @@ export interface ImageViewerProps extends ImageViewerImageProps {
     onClick?: () => void;
     altText?: string;
     displayAs: DisplayAsEnum;
+    previewMode?: boolean;
 }
 
 function processImageLink(imageLink: string | undefined, displayAs: DisplayAsEnum): string | undefined {
@@ -49,7 +50,8 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     type,
     image,
     altText,
-    displayAs
+    displayAs,
+    previewMode
 }) => {
     const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
 
@@ -101,7 +103,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
             hasImage={image !== undefined && image.length > 0}
         >
             {content}
-            {lightboxIsOpen && (
+            {!previewMode && lightboxIsOpen && (
                 <Lightbox isOpen={lightboxIsOpen} onClose={onCloseLightbox}>
                     {type === "image" ? cloneElement(content, { image, onClick: undefined }) : content}
                 </Lightbox>

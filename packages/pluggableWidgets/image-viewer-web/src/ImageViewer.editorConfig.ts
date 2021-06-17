@@ -65,8 +65,8 @@ export function getPreview(): StructurePreviewProps | null {
     return {
         type: "Image",
         document: decodeURIComponent(StructurePreviewImageViewerSvg.replace("data:image/svg+xml,", "")),
-        height: 275,
-        width: 275
+        height: 100,
+        width: 100
     };
 }
 
