@@ -7,7 +7,7 @@ $header-color-hover: #264ae5;
 .widget-accordion-group {
     background-color: $background-color;
     border-color: $border-color;
-    border-bottom-width: 1px;
+    border-width: 1px;
     border-bottom-style: solid;
 
     &.widget-accordion-group-collapsed {

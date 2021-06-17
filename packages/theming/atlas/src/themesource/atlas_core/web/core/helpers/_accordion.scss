@@ -93,13 +93,10 @@
         &.widget-accordion-bordered-all {
             > .widget-accordion-group {
                 &:first-child {
-                    border-top-width: $accordion-border-width;
                     border-top-style: solid;
                 }
 
-                border-right-width: $accordion-border-width;
                 border-right-style: solid;
-                border-left-width: $accordion-border-width;
                 border-left-style: solid;
             }
         }
@@ -107,7 +104,6 @@
         &.widget-accordion-bordered-horizontal {
             > .widget-accordion-group {
                 &:first-child {
-                    border-top-width: $accordion-border-width;
                     border-top-style: solid;
                 }
             }
