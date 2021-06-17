@@ -25,6 +25,7 @@ export function TreeView({
     isUserDefinedLeafNode,
     startExpanded
 }: TreeViewProps): ReactElement {
+    // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
         <div className={classNames("mx-tree-view", className)} style={style}>
             {items.map(({ id, value, content }) => (
@@ -86,9 +87,11 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
             >
                 {props.value}
                 {!props.isUserDefinedLeafNode && (
+                    // TODO: This should not be a glyphicon, but rather a svg or something that is not dependent on Atlas
                     <span className={`glyphicon ${treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus"}`} />
                 )}
             </h2>
+            {/* TODO: For lazy loading and to prevent reloading the children data every time, it might be better to implement the 2nd "collapse" through CSS */}
             {!props.isUserDefinedLeafNode && treeViewIsExpanded && (
                 <div className="tree-view-body">{props.children}</div>
             )}

@@ -3,6 +3,7 @@ import { TreeViewContainerProps } from "../typings/TreeViewProps";
 import { TreeView as TreeViewComponent } from "./components/TreeView";
 
 export const TreeView: FunctionComponent<TreeViewContainerProps> = props => {
+    // TODO: Handle async states more gracefully?
     const items =
         props.datasource.items?.map(item => {
             return {

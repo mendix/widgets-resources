@@ -11,6 +11,7 @@
                 <caption>Data source</caption>
                 <description/>
             </property>
+            <!-- TODO: Dynamic headers -->
             <property key="caption" type="textTemplate" dataSource="datasource" required="false">
                 <caption>Header caption</caption>
                 <description/>
