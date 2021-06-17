@@ -22,6 +22,7 @@ export interface ImageViewerProps extends ImageViewerImageProps {
     responsive: boolean;
     onClickType: OnClickTypeEnum;
     onClick?: () => void;
+    altText?: string;
 }
 
 export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
@@ -36,7 +37,8 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     onClickType,
     onClick,
     type,
-    image
+    image,
+    altText
 }) => {
     const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
 
@@ -48,24 +50,23 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         [closeLightbox]
     );
 
-    const onImageClick = useCallback<ImageViewerContentProps["onClick"]>(
+    const onImageClick = useCallback<Exclude<ImageViewerContentProps["onClick"], undefined>>(
         event => {
             event.stopPropagation();
-            if (lightboxIsOpen) {
-                return;
-            }
             if (onClickType === "action") {
                 onClick?.();
             } else if (onClickType === "enlarge") {
                 openLightbox();
             }
         },
-        [onClick, onClickType, openLightbox, lightboxIsOpen]
+        [onClick, onClickType, openLightbox]
     );
 
+    const hasClickHandler = (onClickType === "action" && onClick) || onClickType === "enlarge";
     const sharedContentProps: ImageViewerContentProps = {
         style,
-        onClick: onImageClick
+        onClick: hasClickHandler && !lightboxIsOpen ? onImageClick : undefined,
+        altText
     };
 
     const content =
