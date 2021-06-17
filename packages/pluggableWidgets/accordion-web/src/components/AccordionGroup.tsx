@@ -147,7 +147,7 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                     })}
                     tabIndex={props.collapsible ? 0 : undefined}
                     data-focusindex={0}
-                    role={"button"}
+                    role="button"
                     onClick={props.collapsible ? toggleCollapsed : undefined}
                     onKeyDown={props.collapsible ? onKeydownHandler : undefined}
                     aria-expanded={!previousCollapsedValue}
@@ -166,7 +166,7 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                 className={"widget-accordion-group-content-wrapper"}
                 data-focusindex={0}
                 onTransitionEnd={completeTransitioning}
-                role={"region"}
+                role="region"
                 aria-labelledby={`${props.id}HeaderButton`}
             >
                 <div ref={contentRef} className={"widget-accordion-group-content"}>
