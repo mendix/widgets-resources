@@ -124,10 +124,13 @@
                     + 1) {
                 .widget-accordion-group-header-button {
                     background-color: $accordion-bg-striped;
-                    &:hover,
-                    &:focus,
-                    &:active {
-                        background-color: $accordion-bg-striped-hover;
+
+                    &.widget-accordion-group-header-button-clickable {
+                        &:hover,
+                        &:focus,
+                        &:active {
+                            background-color: $accordion-bg-striped-hover;
+                        }
                     }
                 }
 

@@ -61,6 +61,7 @@
     }
 
     > .widget-accordion-group-header > .widget-accordion-group-header-button {
+        cursor: auto;
         background-color: $background-color;
         padding: $spacing-medium;
         transition: box-shadow 0.2s ease 0ms, border-radius 5ms ease 80ms;
