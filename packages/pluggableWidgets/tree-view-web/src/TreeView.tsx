@@ -17,7 +17,7 @@ export const TreeView: FunctionComponent<TreeViewContainerProps> = props => {
             class={props.class}
             style={props.style}
             items={items}
-            hasChildren={props.hasChildren}
+            isUserDefinedLeafNode={!props.hasChildren}
             startExpanded={props.startExpanded}
         />
     );

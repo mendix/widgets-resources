@@ -14,18 +14,24 @@ export interface TreeViewProps {
     class: string;
     style?: CSSProperties;
     items: TreeViewObject[];
-    hasChildren: boolean;
+    isUserDefinedLeafNode: boolean;
     startExpanded: boolean;
 }
 
-export function TreeView({ class: className, items, style, hasChildren, startExpanded }: TreeViewProps): ReactElement {
+export function TreeView({
+    class: className,
+    items,
+    style,
+    isUserDefinedLeafNode,
+    startExpanded
+}: TreeViewProps): ReactElement {
     return (
         <div className={classNames("mx-tree-view", className)} style={style}>
             {items.map(treeViewItem => (
                 <TreeViewBranch
                     key={treeViewItem.id}
                     value={treeViewItem.value}
-                    hasChildren={hasChildren}
+                    isUserDefinedLeafNode={isUserDefinedLeafNode}
                     startExpanded={startExpanded}
                 >
                     {treeViewItem.content}
@@ -36,36 +42,38 @@ export function TreeView({ class: className, items, style, hasChildren, startExp
 }
 
 interface TreeViewBranchProps extends Omit<TreeViewObject, "id"> {
-    hasChildren: boolean;
+    isUserDefinedLeafNode: boolean;
     startExpanded: boolean;
     children: ReactNode;
 }
 
-function getTreeViewHeaderAccessibilityProps(hasChildren: boolean): HTMLAttributes<HTMLHeadingElement> {
-    if (hasChildren) {
-        return {
-            tabIndex: 0,
-            role: "button"
-        };
+function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttributes<HTMLHeadingElement> {
+    if (isLeafNode) {
+        return {};
     }
-    return {};
+    return {
+        tabIndex: 0,
+        role: "button"
+    };
 }
 
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
 
     function toggleTreeViewContent(): void {
-        if (props.hasChildren) {
+        if (!props.isUserDefinedLeafNode) {
             setTreeViewIsExpanded(isExpanded => !isExpanded);
         }
     }
 
-    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(props.hasChildren);
+    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(props.isUserDefinedLeafNode);
 
     return (
         <div className="tree-view-object">
             <h2
-                className={classNames("tree-view-header", { "tree-view-header-expandable": props.hasChildren })}
+                className={classNames("tree-view-header", {
+                    "tree-view-header-expandable": !props.isUserDefinedLeafNode
+                })}
                 onClick={toggleTreeViewContent}
                 onKeyDown={e => {
                     if (e.key === "Enter" || e.key === " ") {
@@ -76,11 +84,13 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 {...headerAccessibilityProps}
             >
                 {props.value}
-                {props.hasChildren && (
+                {!props.isUserDefinedLeafNode && (
                     <span className={`glyphicon ${treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus"}`} />
                 )}
             </h2>
-            {props.hasChildren && treeViewIsExpanded && <div className="tree-view-body">{props.children}</div>}
+            {!props.isUserDefinedLeafNode && treeViewIsExpanded && (
+                <div className="tree-view-body">{props.children}</div>
+            )}
         </div>
     );
 }
