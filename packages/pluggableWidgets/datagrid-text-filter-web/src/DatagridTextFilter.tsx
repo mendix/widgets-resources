@@ -2,8 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridTextFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import {
     attribute,
@@ -20,6 +19,7 @@ import {
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
+import { translateFilters } from "./utils/filters";
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();
@@ -35,7 +35,9 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                 if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute } = filterContextValue;
+                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+
+                const defaultFilter = translateFilters(initialFilters);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -45,7 +47,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
-                        defaultFilter={props.defaultFilter}
+                        defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
                         name={props.name}
                         placeholder={props.placeholder?.value}
@@ -57,7 +59,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                                 getFilterCondition: () => getFilterCondition(attribute, value, type)
                             })
                         }
-                        value={props.defaultValue?.value}
+                        value={defaultFilter?.value ?? props.defaultValue?.value}
                     />
                 );
             }}

@@ -1,12 +1,13 @@
-import { createElement, ReactElement, useCallback, useMemo, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ColumnsType, DatagridContainerProps } from "../typings/DatagridProps";
 import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
 
 import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
-import { FilterContext, FilterFunction } from "./components/provider";
-import { isAvailable } from "@mendix/piw-utils-internal";
+import { FilterFunction, isAvailable } from "@mendix/piw-utils-internal";
+import { extractFilters } from "./utils/filters";
+import { FilterContext } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
@@ -14,6 +15,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const currentPage = isInfiniteLoad
         ? props.datasource.limit / props.pageSize
         : props.datasource.offset / props.pageSize;
+    const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
+    const [filtered, setFiltered] = useState(false);
 
     props.datasource.requestTotalCount(true);
 
@@ -22,6 +25,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             props.datasource.setLimit(props.pageSize);
         }
     });
+
+    useEffect(() => {
+        if (props.datasource.filter && !filtered && !viewStateFilters.current) {
+            viewStateFilters.current = props.datasource.filter;
+        }
+    }, [props.datasource, props.configurationAttribute, filtered]);
 
     const setPage = useCallback(
         computePage => {
@@ -47,8 +56,10 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     if (filters.length > 0) {
         props.datasource.setFilter(filters.length > 1 ? and(...filters) : filters[0]);
-    } else {
+    } else if (filtered) {
         props.datasource.setFilter(undefined);
+    } else {
+        props.datasource.setFilter(viewStateFilters.current);
     }
 
     if (sortParameters) {
@@ -101,15 +112,29 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 (renderWrapper, columnIndex) => {
                     const { attribute, filter } = props.columns[columnIndex];
                     const [, filterDispatcher] = customFiltersState[columnIndex];
-                    return attribute
-                        ? renderWrapper(
-                              <FilterContext.Provider value={{ filterDispatcher, attribute }}>
-                                  {filter}
-                              </FilterContext.Provider>
-                          )
-                        : renderWrapper(filter);
+                    const initialFilters = extractFilters(attribute, viewStateFilters.current);
+
+                    if (!attribute) {
+                        return renderWrapper(filter);
+                    }
+
+                    return renderWrapper(
+                        <FilterContext.Provider
+                            value={{
+                                filterDispatcher: prev => {
+                                    setFiltered(true);
+                                    filterDispatcher(prev);
+                                    return prev;
+                                },
+                                attribute,
+                                initialFilters
+                            }}
+                        >
+                            {filter}
+                        </FilterContext.Provider>
+                    );
                 },
-                [props.columns, props.datasource]
+                [customFiltersState, props.columns]
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWrapperRenderer={useCallback((_columnIndex: number, header: ReactElement) => header, [])}

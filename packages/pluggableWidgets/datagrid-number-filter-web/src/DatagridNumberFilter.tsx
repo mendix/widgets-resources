@@ -2,8 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridNumberFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridNumberFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 
 import {
@@ -18,6 +17,7 @@ import {
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
+import { translateFilters } from "./utils/filters";
 
 export default function DatagridNumberFilter(props: DatagridNumberFilterContainerProps): ReactElement {
     const FilterContext = getFilterDispatcher();
@@ -26,13 +26,16 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
             The data grid number filter widget must be placed inside the header of the Data grid 2.0 widget.
         </Alert>
     );
+
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
                 if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute } = filterContextValue;
+                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+
+                const defaultFilter = translateFilters(initialFilters);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -42,7 +45,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
-                        defaultFilter={props.defaultFilter}
+                        defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
                         name={props.name}
                         placeholder={props.placeholder?.value}
@@ -54,7 +57,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                                 getFilterCondition: () => getFilterCondition(attribute, value, type)
                             })
                         }
-                        value={props.defaultValue?.value}
+                        value={defaultFilter?.value ?? props.defaultValue?.value}
                     />
                 );
             }}

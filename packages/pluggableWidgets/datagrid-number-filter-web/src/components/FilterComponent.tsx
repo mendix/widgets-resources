@@ -1,8 +1,7 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { FilterSelector } from "./FilterSelector";
+import { debounce, FilterSelector } from "@mendix/piw-utils-internal";
 
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
-import { debounce } from "../utils/utils";
 import { Big } from "big.js";
 import classNames from "classnames";
 
@@ -54,10 +53,23 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     ariaLabel={props.screenReaderButtonCaption}
                     name={props.name}
                     defaultFilter={props.defaultFilter}
-                    onChange={type => {
-                        setType(type);
-                        focusInput();
-                    }}
+                    onChange={useCallback(
+                        type => {
+                            setType(type);
+                            focusInput();
+                        },
+                        [focusInput]
+                    )}
+                    options={
+                        [
+                            { value: "greater", label: "Greater than" },
+                            { value: "greaterEqual", label: "Greater than or equal" },
+                            { value: "equal", label: "Equal" },
+                            { value: "notEqual", label: "Not equal" },
+                            { value: "smaller", label: "Smaller than" },
+                            { value: "smallerEqual", label: "Smaller than or equal" }
+                        ] as Array<{ value: DefaultFilterEnum; label: string }>
+                    }
                 />
             )}
             <input
