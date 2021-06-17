@@ -87,6 +87,10 @@ function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement 
                     )
                 );
 
+                if (headerButtons.length === 0) {
+                    return;
+                }
+
                 switch (focusTargetHeader) {
                     case Target.FIRST:
                         headerButtons[0].focus();
