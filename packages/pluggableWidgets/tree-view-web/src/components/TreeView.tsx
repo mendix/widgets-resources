@@ -22,20 +22,20 @@ export function TreeView({ class: className, items, style, hasChildren, startExp
     return (
         <div className={classNames("mx-tree-view", className)} style={style}>
             {items.map(treeViewItem => (
-                <TreeViewObject
+                <TreeViewBranch
                     key={treeViewItem.id}
                     value={treeViewItem.value}
                     hasChildren={hasChildren}
                     startExpanded={startExpanded}
                 >
                     {treeViewItem.content}
-                </TreeViewObject>
+                </TreeViewBranch>
             ))}
         </div>
     );
 }
 
-interface TreeViewObjectProps extends Omit<TreeViewObject, "id"> {
+interface TreeViewBranchProps extends Omit<TreeViewObject, "id"> {
     hasChildren: boolean;
     startExpanded: boolean;
     children: ReactNode;
@@ -51,7 +51,7 @@ function getTreeViewHeaderAccessibilityProps(hasChildren: boolean): HTMLAttribut
     return {};
 }
 
-function TreeViewObject(props: TreeViewObjectProps): ReactElement {
+function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
 
     function toggleTreeViewContent(): void {
