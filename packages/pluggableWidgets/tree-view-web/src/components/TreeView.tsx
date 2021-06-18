@@ -76,7 +76,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         <div className="tree-view-branch">
             <h2
                 className={classNames("tree-view-header", {
-                    "tree-view-header-expandable": !props.isUserDefinedLeafNode
+                    "tree-view-header-clickable": !props.isUserDefinedLeafNode
                 })}
                 onClick={toggleTreeViewContent}
                 onKeyDown={e => {
