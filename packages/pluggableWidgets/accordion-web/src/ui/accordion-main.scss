@@ -19,7 +19,7 @@ $header-color-hover: #264ae5;
             }
         }
 
-        .widget-accordion-group-content-wrapper {
+        > .widget-accordion-group-content-wrapper {
             display: none;
         }
     }
@@ -36,7 +36,7 @@ $header-color-hover: #264ae5;
 
     &.widget-accordion-group-expanding,
     &.widget-accordion-group-collapsing {
-        .widget-accordion-group-content-wrapper {
+        > .widget-accordion-group-content-wrapper {
             height: 0;
             overflow: hidden;
             transition: height 0.2s ease 50ms;
@@ -123,7 +123,7 @@ $header-color-hover: #264ae5;
         }
     }
 
-    .widget-accordion-group-content {
+    > .widget-accordion-group-content-wrapper > .widget-accordion-group-content {
         padding: 8px 16px 24px 16px;
         overflow: hidden;
     }

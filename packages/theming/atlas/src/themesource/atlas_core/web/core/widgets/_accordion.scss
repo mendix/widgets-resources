@@ -39,7 +39,7 @@
         border-top-left-radius: $border-radius-default;
         border-top-right-radius: $border-radius-default;
 
-        .widget-accordion-group-header-button {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
             border-top-left-radius: calc(#{$border-radius-default} - 1px);
             border-top-right-radius: calc(#{$border-radius-default} - 1px);
         }
@@ -52,20 +52,20 @@
 
     &.widget-accordion-group-collapsed:last-child,
     &.widget-accordion-group-collapsing:last-child {
-        .widget-accordion-group-header-button {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
             border-bottom-left-radius: calc(#{$border-radius-default} - 1px);
             border-bottom-right-radius: calc(#{$border-radius-default} - 1px);
         }
     }
 
     &.widget-accordion-group-collapsing:last-child {
-        .widget-accordion-group-header-button {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
             transition: border-radius 5ms ease 200ms;
         }
     }
 
     &.widget-accordion-group-expanding:last-child {
-        .widget-accordion-group-header-button {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
             transition: border-radius 5ms ease 80ms;
         }
     }
@@ -105,7 +105,7 @@
         }
     }
 
-    .widget-accordion-group-content {
+    > .widget-accordion-group-content-wrapper > .widget-accordion-group-content {
         border-color: $border-color;
         padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
     }
