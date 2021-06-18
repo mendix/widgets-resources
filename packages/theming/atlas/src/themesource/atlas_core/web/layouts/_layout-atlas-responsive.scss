@@ -3,19 +3,17 @@
 
    Extra styling for responsive layouts
 ========================================================================== */
-$sidebar-width: 232px;
 $sidebar-icon-height: 52px;
 $sidebar-icon-width: 52px;
 
 .layout-atlas-responsive,
 .layout-atlas-responsive-default {
-    $sidebar-width: 232px;
 
     @media (min-width: $screen-md) {
         .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar,
         .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar,
         .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar {
-            width: $sidebar-width !important;
+            width: $navsidebar-width-closed !important;
 
             .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
                 &.mx-navigationtree-has-items:hover {
@@ -48,7 +46,7 @@ $sidebar-icon-width: 52px;
         }
 
         &.mx-scrollcontainer-open > .region-sidebar {
-            width: $sidebar-width !important;
+            width: $navsidebar-width-open !important;
 
             & > .mx-scrollcontainer-wrapper {
                 position: relative;
