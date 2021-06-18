@@ -1,0 +1,37 @@
+{
+  "name": "tree-view-web",
+  "widgetName": "TreeView",
+  "version": "1.0.0",
+  "description": "A Mendix pluggable widget to display a tree view structure.",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "echo \"Skipping tree-view-web e2e pretests\"",
+    "test:e2e": "echo \"Skipping tree-view-web e2e tests\"",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "pluggable-widgets-tools release:web"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=9.0.0",
+    "@types/classnames": "^2.2.6"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}
