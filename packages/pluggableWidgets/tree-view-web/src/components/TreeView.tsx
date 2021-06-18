@@ -29,7 +29,7 @@ export function TreeView({
 }: TreeViewProps): ReactElement {
     // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
-        <div className={classNames("mx-tree-view", className)} style={style} id={name}>
+        <div className={classNames("widget-tree-view", className)} style={style} id={name}>
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
                     key={id}
