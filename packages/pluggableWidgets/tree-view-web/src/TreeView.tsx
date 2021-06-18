@@ -1,8 +1,8 @@
-import { createElement, FunctionComponent } from "react";
+import { createElement, ReactElement } from "react";
 import { TreeViewContainerProps } from "../typings/TreeViewProps";
 import { TreeView as TreeViewComponent } from "./components/TreeView";
 
-export const TreeView: FunctionComponent<TreeViewContainerProps> = props => {
+export function TreeView(props: TreeViewContainerProps): ReactElement {
     // TODO: Handle async states more gracefully?
     const items =
         props.datasource.items?.map(item => {
@@ -22,4 +22,4 @@ export const TreeView: FunctionComponent<TreeViewContainerProps> = props => {
             startExpanded={props.startExpanded}
         />
     );
-};
+}
