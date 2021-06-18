@@ -14,7 +14,7 @@ describe("TreeView", () => {
         const treeView = mount(<TreeView class="" items={items} isUserDefinedLeafNode={false} startExpanded />);
 
         // There is not really another way to properly identify that we're dealing with tree view branches.
-        const treeViewBranches = treeView.find(".tree-view-branch");
+        const treeViewBranches = treeView.find(".widget-tree-view-branch");
         expect(treeViewBranches).toHaveLength(items.length);
 
         expect(treeViewBranches.at(0).text()).toContain("First header");
@@ -30,7 +30,7 @@ describe("TreeView", () => {
         const treeView = mount(<TreeView class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />);
 
         // There is not really another way to properly identify that we're dealing with tree view branches.
-        const treeViewBranches = treeView.find(".tree-view-branch");
+        const treeViewBranches = treeView.find(".widget-tree-view-branch");
         expect(treeViewBranches).toHaveLength(items.length);
 
         expect(treeViewBranches.at(0).text()).toContain("First header");
