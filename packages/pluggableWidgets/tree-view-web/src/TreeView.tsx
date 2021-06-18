@@ -15,6 +15,7 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
 
     return (
         <TreeViewComponent
+            name={props.name}
             class={props.class}
             style={props.style}
             items={items}

@@ -11,6 +11,7 @@ interface TreeViewObject {
 }
 
 export interface TreeViewProps {
+    name?: string;
     class: string;
     style?: CSSProperties;
     items: TreeViewObject[];
@@ -19,6 +20,7 @@ export interface TreeViewProps {
 }
 
 export function TreeView({
+    name,
     class: className,
     items,
     style,
@@ -27,7 +29,7 @@ export function TreeView({
 }: TreeViewProps): ReactElement {
     // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
-        <div className={classNames("mx-tree-view", className)} style={style}>
+        <div className={classNames("mx-tree-view", className)} style={style} id={name}>
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
                     key={id}
