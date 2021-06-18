@@ -75,8 +75,8 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     return (
         <div className="tree-view-branch">
             <h2
-                className={classNames("tree-view-header", {
-                    "tree-view-header-clickable": !props.isUserDefinedLeafNode
+                className={classNames("widget-tree-view-header", {
+                    "widget-tree-view-header-clickable": !props.isUserDefinedLeafNode
                 })}
                 onClick={toggleTreeViewContent}
                 onKeyDown={e => {
@@ -95,7 +95,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
             </h2>
             {/* TODO: For lazy loading and to prevent reloading the children data every time, it might be better to implement the 2nd "collapse" through CSS */}
             {!props.isUserDefinedLeafNode && treeViewIsExpanded && (
-                <div className="tree-view-body">{props.children}</div>
+                <div className="widget-tree-view-body">{props.children}</div>
             )}
         </div>
     );
