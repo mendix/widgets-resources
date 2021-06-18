@@ -13,9 +13,6 @@
     ========================================================================== */
 
     .widget-accordion {
-        background-color: $bg-color-secondary;
-        border-radius: $border-radius-default;
-
         .widget-accordion-group {
             @include get-accordion-group-styles(
                 $accordion-header-default-bg,
@@ -36,11 +33,16 @@
 
 @mixin get-accordion-group-styles($background-color, $background-color-hover, $color, $color-hover, $border-color) {
     border-color: $border-color;
-    overflow: hidden;
+    background-color: $bg-color-secondary;
 
     &:first-child {
         border-top-left-radius: $border-radius-default;
         border-top-right-radius: $border-radius-default;
+
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
+            border-top-left-radius: calc(#{$border-radius-default} - 1px);
+            border-top-right-radius: calc(#{$border-radius-default} - 1px);
+        }
     }
 
     &:last-child {
@@ -48,7 +50,28 @@
         border-bottom-right-radius: $border-radius-default;
     }
 
-    > .widget-accordion-group-header {
+    &.widget-accordion-group-collapsed:last-child,
+    &.widget-accordion-group-collapsing:last-child {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
+            border-bottom-left-radius: calc(#{$border-radius-default} - 1px);
+            border-bottom-right-radius: calc(#{$border-radius-default} - 1px);
+        }
+    }
+
+    &.widget-accordion-group-collapsing:last-child {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
+            transition: border-radius 5ms ease 200ms;
+        }
+    }
+
+    &.widget-accordion-group-expanding:last-child {
+        > .widget-accordion-group-header > .widget-accordion-group-header-button {
+            transition: border-radius 5ms ease 80ms;
+        }
+    }
+
+    > .widget-accordion-group-header > .widget-accordion-group-header-button {
+        cursor: auto;
         background-color: $background-color;
         padding: $spacing-medium;
 
@@ -61,11 +84,11 @@
             color: $color;
         }
 
-        .widget-accordion-group-header-icon {
+        .widget-accordion-group-header-button-icon {
             fill: $color;
         }
 
-        &.widget-accordion-group-header-clickable {
+        &.widget-accordion-group-header-button-clickable {
             &:hover,
             &:focus,
             &:active {
@@ -75,25 +98,21 @@
                     color: $color-hover;
                 }
 
-                .widget-accordion-group-header-icon {
+                .widget-accordion-group-header-button-icon {
                     fill: $color-hover;
                 }
-            }
-
-            &:focus {
-                outline: 2px solid $brand-primary;
             }
         }
     }
 
-    .widget-accordion-group-content {
+    > .widget-accordion-group-content-wrapper > .widget-accordion-group-content {
         border-color: $border-color;
         padding: $spacing-small $spacing-medium $spacing-large $spacing-medium;
     }
 }
 
 @mixin get-accordion-preview-group-styles($color) {
-    .widget-accordion-group-header {
+    .widget-accordion-group-header-button {
         > div > :is(h1, h2, h3, h4, h5, h6) {
             font-size: $font-size-h5;
             font-weight: $font-weight-header;

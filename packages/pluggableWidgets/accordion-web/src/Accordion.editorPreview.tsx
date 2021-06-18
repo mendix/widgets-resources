@@ -69,7 +69,7 @@ export function preview(props: PreviewProps): ReactElement {
             style={style}
             groups={accordionGroups}
             collapsible={props.collapsible}
-            animateCollapsing={props.animate}
+            animateContent={props.animate}
             singleExpandedGroup={props.collapsible ? props.expandBehavior === "singleExpanded" : undefined}
             generateHeaderIcon={generateIcon}
             showGroupHeaderIcon={props.showIcon}

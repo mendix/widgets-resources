@@ -7,7 +7,7 @@ exports[`Icon doesn't render an icon with an unknown icon data type 1`] = `""`;
 exports[`Icon renders a default icon 1`] = `
 <svg
   aria-hidden={true}
-  className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
+  className="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate"
   height="16"
   viewBox="0 0 16 16"
   width="16"
@@ -22,7 +22,7 @@ exports[`Icon renders a default icon 1`] = `
 exports[`Icon renders glyph icons 1`] = `
 <span
   aria-hidden={true}
-  className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate glyphicon icon-class"
+  className="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate glyphicon icon-class"
 />
 `;
 
@@ -30,7 +30,7 @@ exports[`Icon renders image icons 1`] = `
 <img
   alt=""
   aria-hidden={true}
-  className="widget-accordion-group-header-icon widget-accordion-group-header-icon-animate"
+  className="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate"
   src="icon.url"
 />
 `;

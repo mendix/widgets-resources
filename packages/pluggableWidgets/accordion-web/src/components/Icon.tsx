@@ -12,8 +12,8 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
     if (!data) {
         return !loading ? (
             <svg
-                className={classNames("widget-accordion-group-header-icon", {
-                    "widget-accordion-group-header-icon-animate": animate
+                className={classNames("widget-accordion-group-header-button-icon", {
+                    "widget-accordion-group-header-button-icon-animate": animate
                 })}
                 aria-hidden
                 width="16"
@@ -30,9 +30,9 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
         return (
             <span
                 className={classNames(
-                    "widget-accordion-group-header-icon",
+                    "widget-accordion-group-header-button-icon",
                     {
-                        "widget-accordion-group-header-icon-animate": animate
+                        "widget-accordion-group-header-button-icon-animate": animate
                     },
                     "glyphicon",
                     data.iconClass
@@ -45,8 +45,8 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
     if (data.type === "image") {
         return (
             <img
-                className={classNames("widget-accordion-group-header-icon", {
-                    "widget-accordion-group-header-icon-animate": animate
+                className={classNames("widget-accordion-group-header-button-icon", {
+                    "widget-accordion-group-header-button-icon-animate": animate
                 })}
                 src={data.iconUrl}
                 alt=""

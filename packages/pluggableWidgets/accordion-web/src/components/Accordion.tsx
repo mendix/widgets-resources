@@ -1,6 +1,6 @@
-import { createElement, Dispatch, ReactElement, useCallback, useReducer, useRef } from "react";
+import { createElement, Dispatch, MutableRefObject, ReactElement, useCallback, useReducer, useRef } from "react";
 
-import AccordionGroup, { AccordionGroupProps } from "./AccordionGroup";
+import { AccordionGroup, AccordionGroupProps, Target } from "./AccordionGroup";
 import { CollapsedAccordionGroupsReducerAction, getCollapsedAccordionGroupsReducer } from "../utils/reducers";
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 import classNames from "classnames";
@@ -11,7 +11,7 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
     id: string;
     groups: AccordionGroups;
     collapsible: boolean;
-    animateCollapsing?: boolean;
+    animateContent?: boolean;
     singleExpandedGroup?: boolean;
     generateHeaderIcon?: (collapsed: boolean) => ReactElement;
     showGroupHeaderIcon?: "right" | "left" | "no";
@@ -26,56 +26,101 @@ export function Accordion(props: AccordionProps): ReactElement | null {
         props.groups.map(() => !props.previewMode && props.collapsible)
     );
 
+    const containerRef = useRef<HTMLDivElement | null>(null);
+
     const accordionGroupElements = props.groups.map((group, index) => (
         <AccordionGroupWrapper
             key={index}
             index={index}
-            collapsedAccordionGroupsDispatch={props.collapsible ? collapsedAccordionGroupsDispatch : undefined}
+            parent={containerRef}
+            id={`${props.id}AccordionGroup${index}`}
+            collapsible={props.collapsible}
+            collapsedAccordionGroupsDispatch={collapsedAccordionGroupsDispatch}
             {...group}
             collapsed={collapsedAccordionGroups[index]}
-            animateCollapsing={props.animateCollapsing}
-            generateIcon={props.generateHeaderIcon}
+            animateContent={props.animateContent}
+            generateHeaderIcon={props.generateHeaderIcon}
             showHeaderIcon={props.showGroupHeaderIcon}
         />
     ));
 
     return (
         <div
+            ref={containerRef}
             id={props.id}
             className={classNames("widget-accordion", { "widget-accordion-preview": props.previewMode }, props.class)}
             style={props.style}
-            tabIndex={props.tabIndex}
+            data-focusindex={props.tabIndex || 0}
         >
             {accordionGroupElements}
         </div>
     );
 }
 
-interface AccordionGroupWrapperProps extends Omit<AccordionGroupProps, "toggleCollapsed"> {
+interface AccordionGroupWrapperProps extends Omit<AccordionGroupProps, "toggleCollapsed" | "changeFocus"> {
     index: number;
-    collapsedAccordionGroupsDispatch?: Dispatch<CollapsedAccordionGroupsReducerAction>;
+    parent: MutableRefObject<HTMLDivElement | null>;
+    collapsedAccordionGroupsDispatch: Dispatch<CollapsedAccordionGroupsReducerAction>;
 }
 
 function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement {
+    const { collapsedAccordionGroupsDispatch } = props;
+
     const toggleCollapsedState = useCallback(() => {
         if (props.collapsed) {
-            props.collapsedAccordionGroupsDispatch!({ type: "expand", index: props.index });
+            collapsedAccordionGroupsDispatch({ type: "expand", index: props.index });
         } else {
-            props.collapsedAccordionGroupsDispatch!({ type: "collapse", index: props.index });
+            collapsedAccordionGroupsDispatch({ type: "collapse", index: props.index });
         }
-    }, [props.collapsed, props.collapsedAccordionGroupsDispatch, props.index]);
+    }, [props.collapsed, collapsedAccordionGroupsDispatch, props.index]);
+
+    const focusAccordionGroupHeaderElement = useCallback(
+        (focusedHeaderButton: EventTarget | null, focusTargetHeader: Target): void => {
+            if (props.parent.current && focusedHeaderButton && focusedHeaderButton instanceof Node) {
+                const headerButtons: HTMLDivElement[] = Array.from(
+                    props.parent.current.querySelectorAll(
+                        ":scope > .widget-accordion-group > .widget-accordion-group-header > .widget-accordion-group-header-button"
+                    )
+                );
+
+                if (headerButtons.length === 0) {
+                    return;
+                }
+
+                switch (focusTargetHeader) {
+                    case Target.FIRST:
+                        headerButtons[0].focus();
+                        break;
+                    case Target.LAST:
+                        headerButtons[headerButtons.length - 1].focus();
+                        break;
+                    case Target.PREVIOUS:
+                    case Target.NEXT:
+                        const currentHeaderButtonIndex = headerButtons.findIndex(headerButton =>
+                            headerButton.isSameNode(focusedHeaderButton)
+                        );
+                        headerButtons[currentHeaderButtonIndex + (focusTargetHeader === Target.NEXT ? 1 : -1)]?.focus();
+                        break;
+                }
+            }
+        },
+        [props.parent]
+    );
 
     return (
         <AccordionGroup
             key={props.index}
+            id={props.id}
             header={props.header}
             content={props.content}
             collapsed={props.collapsed}
             visible={props.visible}
             dynamicClassName={props.dynamicClassName}
-            toggleCollapsed={props.collapsedAccordionGroupsDispatch ? toggleCollapsedState : undefined}
-            animateCollapsing={props.animateCollapsing}
-            generateIcon={props.generateIcon}
+            collapsible={props.collapsible}
+            toggleCollapsed={toggleCollapsedState}
+            changeFocus={focusAccordionGroupHeaderElement}
+            animateContent={props.animateContent}
+            generateHeaderIcon={props.generateHeaderIcon}
             showHeaderIcon={props.showHeaderIcon}
         />
     );

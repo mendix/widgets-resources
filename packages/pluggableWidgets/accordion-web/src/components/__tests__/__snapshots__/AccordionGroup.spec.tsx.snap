@@ -1,194 +1,320 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AccordionGroup collapsible header doesn't render the icon when set to not visible 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup collapsible renders correctly when the group becomes visible and is collapsed 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup collapsible renders correctly when the group becomes visible and is expanded 1`] = `
+<section
+  className="widget-accordion-group class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup collapsible renders correctly when the group is visible and collapsed 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup collapsible renders correctly when the group is visible and expanded 1`] = `
+<section
+  className="widget-accordion-group class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup collapsible renders correctly when the group is visible and gets collapsed 1`] = `
+<section
+  className="widget-accordion-group widget-accordion-group-collapsed class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={false}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccordionGroup collapsible renders correctly when the group is visible and gets expanded 1`] = `
+<section
+  className="widget-accordion-group class-name"
+>
+  <header
+    className="widget-accordion-group-header"
+  >
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={false}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button widget-accordion-group-header-button-clickable widget-accordion-group-header-button-icon-right"
+      data-focusindex={0}
+      id="idHeaderButton"
+      onClick={[MockFunction]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      header
+    </div>
+  </header>
+  <div
+    aria-labelledby="idHeaderButton"
+    className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
+    onTransitionEnd={[Function]}
+    role="region"
+  >
+    <div
+      className="widget-accordion-group-content"
+    >
+      <span>
+        content
+      </span>
+    </div>
+  </div>
+</section>
+`;
+
 exports[`AccordionGroup doesn't render when the group isn't visible 1`] = `""`;
 
-exports[`AccordionGroup with toggleCollapsed doesn't render the icon when set to not visible 1`] = `
-<section
-  className="widget-accordion-group widget-accordion-group-collapsed class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is collapsed 1`] = `
-<section
-  className="widget-accordion-group widget-accordion-group-collapsed class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group becomes visible and is expanded 1`] = `
-<section
-  className="widget-accordion-group class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and collapsed 1`] = `
-<section
-  className="widget-accordion-group widget-accordion-group-collapsed class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and expanded 1`] = `
-<section
-  className="widget-accordion-group class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets collapsed 1`] = `
-<section
-  className="widget-accordion-group widget-accordion-group-collapsed class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup with toggleCollapsed renders correctly when the group is visible and gets expanded 1`] = `
-<section
-  className="widget-accordion-group class-name"
->
-  <header
-    className="widget-accordion-group-header widget-accordion-group-header-clickable widget-accordion-group-header-icon-right"
-    onClick={[MockFunction]}
-  >
-    header
-  </header>
-  <div
-    className="widget-accordion-group-content-wrapper"
-    onTransitionEnd={[Function]}
-  >
-    <div
-      className="widget-accordion-group-content"
-    >
-      <span>
-        content
-      </span>
-    </div>
-  </div>
-</section>
-`;
-
-exports[`AccordionGroup without toggleCollapsed displays the content when the group becomes visible 1`] = `
+exports[`AccordionGroup not collapsible displays the content when the group becomes visible 1`] = `
 <section
   className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={true}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button"
+      data-focusindex={0}
+      id="idHeaderButton"
+      role="button"
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
@@ -201,18 +327,32 @@ exports[`AccordionGroup without toggleCollapsed displays the content when the gr
 </section>
 `;
 
-exports[`AccordionGroup without toggleCollapsed displays the content when the group is visible 1`] = `
+exports[`AccordionGroup not collapsible displays the content when the group is visible 1`] = `
 <section
   className="widget-accordion-group class-name"
 >
   <header
     className="widget-accordion-group-header"
   >
-    header
+    <div
+      aria-controls="idContentWrapper"
+      aria-disabled={true}
+      aria-expanded={true}
+      className="widget-accordion-group-header-button"
+      data-focusindex={0}
+      id="idHeaderButton"
+      role="button"
+    >
+      header
+    </div>
   </header>
   <div
+    aria-labelledby="idHeaderButton"
     className="widget-accordion-group-content-wrapper"
+    data-focusindex={0}
+    id="idContentWrapper"
     onTransitionEnd={[Function]}
+    role="region"
   >
     <div
       className="widget-accordion-group-content"
