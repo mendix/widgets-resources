@@ -2,7 +2,7 @@
   "name": "tree-view-web",
   "widgetName": "TreeView",
   "version": "1.0.0",
-  "description": "Display a tree view structure",
+  "description": "A Mendix pluggable widget to display a tree view structure.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
