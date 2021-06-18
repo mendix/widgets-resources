@@ -73,7 +73,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(props.isUserDefinedLeafNode);
 
     return (
-        <div className="tree-view-branch">
+        <div className="widget-tree-view-branch">
             <h2
                 className={classNames("widget-tree-view-header", {
                     "widget-tree-view-header-clickable": !props.isUserDefinedLeafNode
