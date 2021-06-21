@@ -286,3 +286,33 @@ exports[`Header renders the structure correctly when sortable 1`] = `
   </div>
 </div>
 `;
+
+exports[`Header renders the structure correctly when value is empty 1`] = `
+<div
+  className="th"
+  role="columnheader"
+  style={
+    Object {
+      "cursor": "unset",
+    }
+  }
+  title=""
+>
+  <div
+    className="column-container"
+  >
+    <div
+      className="column-header"
+      style={
+        Object {
+          "pointerEvents": undefined,
+        }
+      }
+    >
+      <span>
+         
+      </span>
+    </div>
+  </div>
+</div>
+`;
