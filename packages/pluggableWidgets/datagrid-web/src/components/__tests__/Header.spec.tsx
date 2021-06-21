@@ -102,6 +102,15 @@ describe("Header", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly when value is empty", () => {
+        const props = mockHeaderProps();
+        props.column.header = " ";
+
+        const component = shallow(<Header {...props} />);
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockHeaderProps(): HeaderProps {
