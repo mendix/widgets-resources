@@ -1,6 +1,7 @@
 import {
     hidePropertiesIn,
     hidePropertyIn,
+    Problem,
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs
@@ -50,4 +51,29 @@ export function getProperties(
 export function getPreview(): StructurePreviewProps | null {
     // TODO:
     return null;
+}
+
+export function check(values: ImageViewerPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+
+    if (values.datasource === "image" && !values.imageObject) {
+        errors.push({
+            property: "imageObject",
+            message: "No image selected"
+        });
+    }
+    if (values.datasource === "imageUrl" && !values.imageUrl) {
+        errors.push({
+            property: "imageUrl",
+            message: "No image link provided"
+        });
+    }
+    if (values.datasource === "icon" && !values.imageIcon) {
+        errors.push({
+            property: "imageIcon",
+            message: "No icon selected"
+        });
+    }
+
+    return errors;
 }
