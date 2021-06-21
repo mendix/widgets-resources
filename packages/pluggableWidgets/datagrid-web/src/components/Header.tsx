@@ -49,7 +49,7 @@ export function Header(props: HeaderProps): ReactElement {
             : faArrowsAltV
         : undefined;
 
-    const caption = props.column.header;
+    const caption = props.column.header.trim();
 
     const onSortBy = (): void => {
         /**
