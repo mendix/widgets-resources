@@ -14,6 +14,8 @@ export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
 export type HeightUnitEnum = "auto" | "pixels";
 
+export type DisplayAsEnum = "thumbnail" | "fullImage";
+
 export interface ImageViewerContainerProps {
     name: string;
     class: string;
@@ -31,6 +33,7 @@ export interface ImageViewerContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     iconSize: number;
+    displayAs: DisplayAsEnum;
     responsive: boolean;
 }
 
@@ -49,5 +52,6 @@ export interface ImageViewerPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     iconSize: number | null;
+    displayAs: DisplayAsEnum;
     responsive: boolean;
 }

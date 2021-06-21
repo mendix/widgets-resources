@@ -84,6 +84,14 @@
                     <caption>Icon size</caption>
                     <description>The size of the icon in pixels</description> 
                 </property>
+                <property key="displayAs" type="enumeration" defaultValue="fullImage">
+                    <caption>Display as</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="thumbnail">Thumbnail</enumerationValue>
+                        <enumerationValue key="fullImage">Full image</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>
                     <description>Image will never get larger than its original size. It can become smaller</description>

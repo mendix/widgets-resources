@@ -1,6 +1,6 @@
 import { ValueStatus } from "mendix";
 import { createElement, FunctionComponent, useCallback } from "react";
-import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
+import { DisplayAsEnum, ImageViewerContainerProps } from "../typings/ImageViewerProps";
 import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/ImageViewer/index";
 
 function getImageProps({
@@ -46,9 +46,19 @@ function getImageProps({
     }
 }
 
+function processImageLink(imageLink: string | undefined, displayAs: DisplayAsEnum): string | undefined {
+    if (!imageLink || displayAs === "fullImage") {
+        return imageLink;
+    }
+    const url = new URL(imageLink);
+    url.searchParams.append("thumb", "true");
+    return url.href;
+}
+
 export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props => {
     const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
     const { type, image } = getImageProps(props);
+    const processedImageLink = type === "image" ? processImageLink(image, props.displayAs) : image;
 
     const altText = props.alternativeText?.status === ValueStatus.Available ? props.alternativeText.value : undefined;
 
@@ -65,7 +75,7 @@ export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props =
             onClickType={props.onClickType}
             onClick={props.onClick ? onClick : undefined}
             type={type}
-            image={image}
+            image={processedImageLink}
             altText={altText}
         />
     );

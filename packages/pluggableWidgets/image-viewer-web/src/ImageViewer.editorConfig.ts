@@ -50,6 +50,10 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "onClick");
     }
 
+    if (values.datasource !== "image") {
+        hidePropertyIn(defaultProperties, values, "displayAs");
+    }
+
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
