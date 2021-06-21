@@ -68,12 +68,6 @@ export function getPreview(): StructurePreviewProps | null {
 export function check(values: ImageViewerPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    if (values.datasource === "image" && !values.imageObject) {
-        errors.push({
-            property: "imageObject",
-            message: "No image selected"
-        });
-    }
     if (values.datasource === "imageUrl" && !values.imageUrl) {
         errors.push({
             property: "imageUrl",
