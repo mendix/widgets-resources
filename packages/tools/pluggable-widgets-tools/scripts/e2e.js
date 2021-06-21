@@ -80,7 +80,7 @@ async function main() {
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
     const runtimeContainerId = execSync(
-        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source --name runtime -p ${freePort}:8080 ` +
+        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
             `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
             `--rm mxruntime:${mendixVersion} /shared/runtime.sh`
     )
@@ -91,9 +91,7 @@ async function main() {
     const freePortBrowser = await findFreePort(4444);
     const browserDocker = process.env.BROWSER_DOCKER || "selenium/standalone-firefox:88.0";
     const browserContainerId = execSync(
-        `docker run -td --name browser -p ${freePortBrowser}:4444 ` +
-            `-v /dev/shm:/dev/shm -v ${__dirname}:/shared:ro --entrypoint /bin/bash ` +
-            `${browserDocker} shared/browsercontainer.sh ${ip} ${freePort}`
+        `docker run -d -p ${freePortBrowser}:4444 -v /dev/shm:/dev/shm ${browserDocker}`
     )
         .toString()
         .trim();
@@ -127,8 +125,6 @@ async function main() {
     } catch (e) {
         try {
             execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
-            execSync(`docker logs ${browserContainerId}`, { stdio: "inherit" });
-            // eslint-disable-next-line no-empty
         } catch (_) {}
         console.log(cat("results/runtime.log").toString());
         throw e;
