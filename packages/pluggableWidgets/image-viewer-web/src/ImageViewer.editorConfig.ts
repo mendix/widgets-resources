@@ -32,6 +32,14 @@ export function getProperties(
 ): Properties {
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
 
+    if (values.heightUnit === "auto") {
+        hidePropertyIn(defaultProperties, values, "height");
+    }
+
+    if (values.widthUnit === "auto") {
+        hidePropertyIn(defaultProperties, values, "width");
+    }
+
     if (values.datasource === "icon" && values.imageIcon?.type === "glyph") {
         hidePropertiesIn(defaultProperties, values, ["widthUnit", "width", "heightUnit", "height"]);
     } else {
