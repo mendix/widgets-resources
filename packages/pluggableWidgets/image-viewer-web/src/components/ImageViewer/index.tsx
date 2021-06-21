@@ -1,5 +1,5 @@
-import { createElement, CSSProperties, FunctionComponent, useCallback } from "react";
-import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum } from "../../../typings/ImageViewerProps";
+import { cloneElement, createElement, CSSProperties, FunctionComponent, useCallback } from "react";
+import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum, DisplayAsEnum } from "../../../typings/ImageViewerProps";
 import { useLightboxState } from "../../utils/lightboxState";
 import { ImageViewerUi, ImageViewerContentProps } from "./ui";
 import { Lightbox, LightboxProps } from "../Lightbox";
@@ -23,6 +23,16 @@ export interface ImageViewerProps extends ImageViewerImageProps {
     onClickType: OnClickTypeEnum;
     onClick?: () => void;
     altText?: string;
+    displayAs: DisplayAsEnum;
+}
+
+function processImageLink(imageLink: string | undefined, displayAs: DisplayAsEnum): string | undefined {
+    if (!imageLink || displayAs === "fullImage") {
+        return imageLink;
+    }
+    const url = new URL(imageLink);
+    url.searchParams.append("thumb", "true");
+    return url.href;
 }
 
 export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
@@ -38,7 +48,8 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     onClick,
     type,
     image,
-    altText
+    altText,
+    displayAs
 }) => {
     const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
 
@@ -72,7 +83,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     const content =
         type === "image" ? (
             <ImageViewerUi.Image
-                image={image}
+                image={processImageLink(image, displayAs)}
                 height={height}
                 heightUnit={heightUnit}
                 width={width}
@@ -92,7 +103,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
             {content}
             {lightboxIsOpen && (
                 <Lightbox isOpen={lightboxIsOpen} onClose={onCloseLightbox}>
-                    {content}
+                    {type === "image" ? cloneElement(content, { image }) : content}
                 </Lightbox>
             )}
         </ImageViewerUi.Wrapper>
