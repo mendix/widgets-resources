@@ -20,7 +20,7 @@
                     <description>The image from the modeler</description>
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
-                    <caption>Image URL</caption>
+                    <caption>Image link</caption>
                     <description>The URL of the external image</description>
                 </property>
                 <property key="imageIcon" type="icon" required="false">
