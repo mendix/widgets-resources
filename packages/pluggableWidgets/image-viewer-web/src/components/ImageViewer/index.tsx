@@ -76,7 +76,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     const hasClickHandler = (onClickType === "action" && onClick) || onClickType === "enlarge";
     const sharedContentProps: ImageViewerContentProps = {
         style,
-        onClick: hasClickHandler && !lightboxIsOpen ? onImageClick : undefined,
+        onClick: hasClickHandler ? onImageClick : undefined,
         altText
     };
 
@@ -103,7 +103,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
             {content}
             {lightboxIsOpen && (
                 <Lightbox isOpen={lightboxIsOpen} onClose={onCloseLightbox}>
-                    {type === "image" ? cloneElement(content, { image }) : content}
+                    {type === "image" ? cloneElement(content, { image, onClick: undefined }) : content}
                 </Lightbox>
             )}
         </ImageViewerUi.Wrapper>
