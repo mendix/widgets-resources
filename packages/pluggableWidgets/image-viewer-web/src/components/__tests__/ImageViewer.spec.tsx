@@ -13,7 +13,7 @@ jest.mock("react-overlays/Modal", () => (props: ModalProps) => {
     return (
         // @ts-expect-error lower case custom name to make clear it's a mock
         <MockName {...props}>
-            {props.chilren}
+            {props.children}
             {/* @ts-expect-error lower case custom name to make clear it's a mock */}
             <BackdropMockName>{props.renderBackdrop?.({ onClick: jest.fn(), ref: jest.fn() })}</BackdropMockName>
         </MockName>
