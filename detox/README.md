@@ -35,7 +35,7 @@ First we need to tell where is our apk’s and ipa’s. To do that simply change
     process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY => yourPathTo app-debug-androidTest.apk
 
 ### Which will be picked up in:
-/widgets-resources/packages/tools/detox/detox.config.js
+detox/detox.config.js
 
 ### Spin up mendix project:
 Every widget has its own project.
