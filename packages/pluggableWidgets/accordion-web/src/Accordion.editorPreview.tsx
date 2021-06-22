@@ -42,21 +42,21 @@ export function preview(props: PreviewProps): ReactElement {
         {
             data: props.icon
                 ? props.icon.type === "image"
-                    ? { type: props.icon.type, iconUrl: props.icon.imageUrl }
+                    ? { type: props.icon.type, iconUrl: props.icon.iconUrl }
                     : props.icon
                 : undefined
         },
         {
             data: props.expandIcon
                 ? props.expandIcon.type === "image"
-                    ? { type: props.expandIcon.type, iconUrl: props.expandIcon.imageUrl }
+                    ? { type: props.expandIcon.type, iconUrl: props.expandIcon.iconUrl }
                     : props.expandIcon
                 : undefined
         },
         {
             data: props.collapseIcon
                 ? props.collapseIcon.type === "image"
-                    ? { type: props.collapseIcon.type, iconUrl: props.collapseIcon.imageUrl }
+                    ? { type: props.collapseIcon.type, iconUrl: props.collapseIcon.iconUrl }
                     : props.collapseIcon
                 : undefined
         }
