@@ -12,8 +12,8 @@ export interface IconsType {
 }
 
 export interface IconsPreviewType {
-    firstIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    secondIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    firstIcon: WebIcon | null;
+    secondIcon: WebIcon | null;
 }
 
 export interface MyWidgetContainerProps {
