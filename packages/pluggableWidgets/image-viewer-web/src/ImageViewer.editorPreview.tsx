@@ -11,9 +11,9 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
     let image = ImageViewerPlaceholder;
     switch (props.datasource) {
         case "image":
-            if (props.imageObject?.type !== "dynamic") {
+            if (props.imageObject?.type === "static") {
                 // The optional chaining in the conditional guarantees the object is set here.
-                image = props.imageObject!.imageUrl;
+                image = props.imageObject.imageUrl;
             }
             break;
         case "icon":
