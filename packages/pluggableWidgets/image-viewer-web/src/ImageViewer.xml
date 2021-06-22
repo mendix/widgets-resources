@@ -11,7 +11,7 @@
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="image">Image</enumerationValue>
-                        <enumerationValue key="imageUrl">Image URL</enumerationValue>
+                        <enumerationValue key="imageUrl">Image link</enumerationValue>
                         <enumerationValue key="icon">Icon</enumerationValue>
                     </enumerationValues>
                 </property>
@@ -21,7 +21,7 @@
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
                     <caption>Image link</caption>
-                    <description>The URL of the external image</description>
+                    <description>The link of the external image</description>
                 </property>
                 <property key="imageIcon" type="icon" required="false">
                     <caption>Icon</caption>
