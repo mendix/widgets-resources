@@ -23,9 +23,13 @@ exports.config = {
     capabilities: [
         {
             browserName,
-            "moz:firefoxOptions": {
-                prefs: { "media.navigator.streams.fake": true, "media.navigator.permission.disabled": true }
-            }
+            ...(!process.env.CI
+                ? {
+                      "moz:firefoxOptions": {
+                          prefs: { "media.navigator.streams.fake": true, "media.navigator.permission.disabled": true }
+                      }
+                  }
+                : {})
         }
     ],
     sync: true,
