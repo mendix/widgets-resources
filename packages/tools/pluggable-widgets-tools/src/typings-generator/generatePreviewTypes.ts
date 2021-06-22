@@ -29,9 +29,9 @@ function toPreviewPropType(prop: Property, generatedTypes: string[]): string {
         case "decimal":
             return "number | null";
         case "icon":
-            return '{ type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null';
+            return "WebIcon | null";
         case "image":
-            return "string";
+            return '{ type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null';
         case "file":
             return "string";
         case "datasource":
