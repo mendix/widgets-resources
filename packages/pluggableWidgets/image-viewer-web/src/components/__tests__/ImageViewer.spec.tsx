@@ -13,7 +13,7 @@ jest.mock("react-overlays/Modal", () => (props: ModalProps) => {
     return (
         // @ts-expect-error lower case custom name to make clear it's a mock
         <MockName {...props}>
-            {props.chilren}
+            {props.children}
             {/* @ts-expect-error lower case custom name to make clear it's a mock */}
             <BackdropMockName>{props.renderBackdrop?.({ onClick: jest.fn(), ref: jest.fn() })}</BackdropMockName>
         </MockName>
@@ -30,7 +30,8 @@ const imageProps: ImageViewerProps = {
     widthUnit: "pixels",
     iconSize: 0,
     responsive: true,
-    onClickType: "action"
+    onClickType: "action",
+    displayAs: "fullImage"
 };
 
 const glyphiconProps: ImageViewerProps = {
@@ -43,7 +44,8 @@ const glyphiconProps: ImageViewerProps = {
     width: 0,
     widthUnit: "pixels",
     responsive: true,
-    onClickType: "action"
+    onClickType: "action",
+    displayAs: "fullImage"
 };
 
 describe("ImageViewer", () => {
@@ -158,6 +160,32 @@ describe("ImageViewer", () => {
             const image = imageViewer.find("span");
             expect(image).not.toHaveProperty("aria-label");
             expect(image).not.toHaveProperty("role");
+        });
+    });
+
+    describe("when showing an image as a thumbnail", () => {
+        it("includes the thumb=true URL param in the image", () => {
+            const imageViewer = mount(<ImageViewer {...imageProps} displayAs="thumbnail" />);
+            const image = imageViewer.find("img");
+            expect(image.prop("src")).toContain("thumb=true");
+        });
+
+        it("does not include the thumb=true URL param in the lightbox image", () => {
+            const imageViewer = mount(<ImageViewer {...imageProps} displayAs="thumbnail" onClickType="enlarge" />);
+
+            const image = imageViewer.find("img");
+            expect(image.prop("src")).toContain("thumb=true");
+            expect(image).toHaveLength(1);
+
+            image.simulate("click");
+
+            const allImages = imageViewer.findWhere(
+                node => node.type() === "img" && node.prop("src").startsWith(imageProps.image)
+            );
+            expect(allImages).toHaveLength(2);
+
+            expect(allImages.at(0).prop("src")).toContain("thumb=true");
+            expect(allImages.at(1).prop("src")).not.toContain("thumb=true");
         });
     });
 });

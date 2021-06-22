@@ -67,6 +67,7 @@ export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props =
             type={type}
             image={image}
             altText={altText}
+            displayAs={props.displayAs}
         />
     );
 };

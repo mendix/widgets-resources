@@ -11,7 +11,7 @@
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="image">Image</enumerationValue>
-                        <enumerationValue key="imageUrl">Image URL</enumerationValue>
+                        <enumerationValue key="imageUrl">Image link</enumerationValue>
                         <enumerationValue key="icon">Icon</enumerationValue>
                     </enumerationValues>
                 </property>
@@ -20,8 +20,8 @@
                     <description>The image from the modeler</description>
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
-                    <caption>Image URL</caption>
-                    <description>The URL of the external image</description>
+                    <caption>Image link</caption>
+                    <description>The link of the external image</description>
                 </property>
                 <property key="imageIcon" type="icon" required="false">
                     <caption>Icon</caption>
@@ -44,7 +44,7 @@
             </propertyGroup>
             <propertyGroup caption="Accessibility">
                 <property key="alternativeText" type="textTemplate" required="false">
-                    <caption>Alternative test</caption>
+                    <caption>Alternative text</caption>
                     <description>Alternative text of the image for accessibility purposes</description>
                 </property>
             </propertyGroup>
@@ -83,6 +83,14 @@
                 <property key="iconSize" type="integer" defaultValue="14">
                     <caption>Icon size</caption>
                     <description>The size of the icon in pixels</description> 
+                </property>
+                <property key="displayAs" type="enumeration" defaultValue="fullImage">
+                    <caption>Display as</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="thumbnail">Thumbnail</enumerationValue>
+                        <enumerationValue key="fullImage">Full image</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>
