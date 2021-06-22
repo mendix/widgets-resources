@@ -111,6 +111,7 @@
     "zip-a-folder": "^0.0.12"
   },
   "devDependencies": {
+    "@types/xml2js": "^0.4.5",
     "@mendix/generator-widget": ">=8.9.0",
     "@wdio/devtools-service": "^7.5.3",
     "async-mutex": "^0.2.4",

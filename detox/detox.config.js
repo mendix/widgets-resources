@@ -1,5 +1,5 @@
 module.exports = {
-    "test-runner": "jest",
+    "test-runner": "npx jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
     apps: {
         "ios.developerapp": {
@@ -9,10 +9,10 @@ module.exports = {
         "android.developerapp": {
             type: "android.apk",
             binaryPath: process.env.TEST_NATIVE_APP_ANDROID,
-            testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY,
-        },
+            testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY
+        }
     },
-    "devices": {
+    devices: {
         ios: {
             type: "ios.simulator",
             device: {
@@ -22,9 +22,9 @@ module.exports = {
         android: {
             type: "android.emulator",
             device: {
-                "avdName": "5.4_FWVGA_API_30"
+                avdName: "5.4_FWVGA_API_30"
             }
-        },
+        }
     },
     configurations: {
         "ios.simulator.developerapp": {
@@ -34,6 +34,6 @@ module.exports = {
         "android.emulator.developerapp": {
             device: "android",
             app: "android.developerapp"
-        },
+        }
     }
 };

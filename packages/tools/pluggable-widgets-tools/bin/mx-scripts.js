@@ -70,14 +70,6 @@ function getRealCommand(cmd, toolsRoot) {
             return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;
         case "test:unit:native":
             return `jest --projects ${join(toolsRoot, "test-config/jest.native.config.js")}`;
-        case "test:e2e:native:local:ios":
-            return `detox test --configuration ios.simulator.developerapp`;
-        case "test:e2e:native:local:ios:debug":
-            return `detox test --record-logs all -l trace --configuration ios.simulator.developerapp`;
-        case "test:e2e:native:local:android":
-            return `detox test --configuration android.emulator.developerapp`;
-        case "test:e2e:native:local:android:debug":
-            return `detox test --record-logs all -l trace --configuration android.emulator.developerapp`;
         case "test:e2e":
         case "test:e2e:ts":
         case "test:e2e:js":

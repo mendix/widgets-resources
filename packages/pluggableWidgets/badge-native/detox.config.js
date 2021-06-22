@@ -1,1 +1,1 @@
-module.exports = require("@mendix/pluggable-widgets-tools/test-config/detox.config.js");
+module.exports = require("../../../detox/detox.config.js");
