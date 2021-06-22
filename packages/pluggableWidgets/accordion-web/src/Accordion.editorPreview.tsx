@@ -39,27 +39,9 @@ export function preview(props: PreviewProps): ReactElement {
     const generateIcon = useIconGenerator(
         props.advancedMode,
         props.animateIcon,
-        {
-            data: props.icon
-                ? props.icon.type === "image"
-                    ? { type: props.icon.type, iconUrl: props.icon.iconUrl }
-                    : props.icon
-                : undefined
-        },
-        {
-            data: props.expandIcon
-                ? props.expandIcon.type === "image"
-                    ? { type: props.expandIcon.type, iconUrl: props.expandIcon.iconUrl }
-                    : props.expandIcon
-                : undefined
-        },
-        {
-            data: props.collapseIcon
-                ? props.collapseIcon.type === "image"
-                    ? { type: props.collapseIcon.type, iconUrl: props.collapseIcon.iconUrl }
-                    : props.collapseIcon
-                : undefined
-        }
+        { data: props.icon || undefined },
+        { data: props.expandIcon || undefined },
+        { data: props.collapseIcon || undefined }
     );
 
     return (
