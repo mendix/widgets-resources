@@ -9,10 +9,8 @@ describe("Image viewer", () => {
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
-        browser.pause(1000);
-
         page.modalDialog.waitForDisplayed();
+
         expect(page.modalDialog.getText()).toContain("You clicked this image");
     });
 
@@ -22,23 +20,19 @@ describe("Image viewer", () => {
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
-        browser.pause(1000);
-
         page.modalDialog.waitForDisplayed();
+
         expect(page.modalDialog.getText()).toContain(html.dynamicImage);
     });
 
-    it("open a Page on click", () => {
+    it("opens a Page on click", () => {
         page.open("p/onClickShowPage");
 
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
-        browser.pause(1000);
-
         page.modalDialog.waitForDisplayed();
+
         expect(page.modalDialogHeader.getText()).toBe("GazaLand");
     });
 
@@ -48,8 +42,8 @@ describe("Image viewer", () => {
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
         ImageViewer.lightbox.waitForDisplayed();
+
         expect(ImageViewer.lightbox.$("img").getProperty("src")).toContain(html.staticImage);
     });
 });
