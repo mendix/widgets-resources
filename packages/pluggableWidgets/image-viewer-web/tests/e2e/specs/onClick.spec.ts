@@ -2,55 +2,48 @@ import page from "../../../../../../configs/e2e/src/pages/page";
 import ImageViewer from "../objects/imageViewer.widget";
 import * as html from "../objects/constants";
 
-// eslint-disable-next-line jest/no-disabled-tests
-xdescribe("Image viewer", () => {
-    it("should trigger Microflow on click", () => {
+describe("Image viewer", () => {
+    it("triggers a Microflow on click", () => {
         page.open("p/onClickMicroflow");
 
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
-        browser.pause(1000);
-
         page.modalDialog.waitForDisplayed();
+
         expect(page.modalDialog.getText()).toContain("You clicked this image");
     });
 
-    it("should trigger Nanoflow on click", () => {
+    it("triggers a Nanoflow on click", () => {
         page.open("p/onClickNanoflow");
 
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
-        browser.pause(1000);
-
         page.modalDialog.waitForDisplayed();
+
         expect(page.modalDialog.getText()).toContain(html.dynamicImage);
     });
 
-    it("should Open a Page on click", () => {
+    it("opens a Page on click", () => {
         page.open("p/onClickShowPage");
 
-        const imageViewer = new ImageViewer("imageViewer2");
+        const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
-        browser.pause(1000);
-
         page.modalDialog.waitForDisplayed();
+
         expect(page.modalDialogHeader.getText()).toBe("GazaLand");
     });
 
-    it("should show full screen on click", () => {
+    it("shows full screen image on click", () => {
         page.open("p/onClickOpenFullScreen");
 
         const imageViewer = new ImageViewer("imageViewer1");
         imageViewer.element.waitForDisplayed();
         imageViewer.element.click();
-
         ImageViewer.lightbox.waitForDisplayed();
+
         expect(ImageViewer.lightbox.$("img").getProperty("src")).toContain(html.staticImage);
     });
 });

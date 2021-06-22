@@ -28,7 +28,7 @@ class ImageViewer {
     }
 
     static get lightbox(): WebdriverIO.Element {
-        return $(".ReactModal__Overlay.ReactModal__Overlay--after-open");
+        return $(".mx-image-viewer-lightbox");
     }
 }
 
