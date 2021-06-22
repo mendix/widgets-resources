@@ -2,7 +2,6 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { Component, createElement } from "react";
 import classNames from "classnames";
 
-import { Alert } from "./components/Alert";
 import { Error } from "./components/Error";
 import { SizeContainer } from "./components/SizeContainer";
 import { Video, VideoPlayerProps } from "./components/Video";
@@ -13,11 +12,6 @@ declare function require(name: string): string;
 
 export class preview extends Component<VideoPlayerPreviewProps, {}> {
     render(): JSX.Element {
-        const message = this.validateProps(this.props);
-        if (message) {
-            return <Alert message={message} className="widget-badge-alert" />;
-        }
-
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
@@ -51,15 +45,6 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
             aspectRatio: false,
             preview: true
         };
-    }
-
-    private validateProps(props: VideoPlayerPreviewProps): string {
-        let errorMessage = "";
-        if (!props.urlExpression) {
-            errorMessage = "An URL is required for this widget";
-        }
-
-        return errorMessage;
     }
 }
 
