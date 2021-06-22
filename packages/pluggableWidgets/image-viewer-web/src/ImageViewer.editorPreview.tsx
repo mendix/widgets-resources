@@ -46,6 +46,7 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
             onClick={undefined}
             type={props.datasource === "icon" && props.imageIcon?.type === "glyph" ? "icon" : "image"}
             image={image}
+            displayAs={props.displayAs}
             previewMode
         />
     );
