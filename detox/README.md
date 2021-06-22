@@ -35,7 +35,7 @@ First we need to tell where is our apk’s and ipa’s. To do that simply change
     process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY => yourPathTo app-debug-androidTest.apk
 
 ### Which will be picked up in:
-/widgets-resources/packages/tools/pluggable-widgets-tools/test-config/detox.config.js
+/widgets-resources/packages/tools/detox/detox.config.js
 
 ### Spin up mendix project:
 Every widget has its own project.
@@ -60,9 +60,9 @@ Debugging
     - Node
     - Java
 - Add script to monorepo where we clone native template repo and build the debug APK / IPA / APP which we use to run the detox commands
-    - Update `pluggable-widgets-tools/test-config/detox.config.js` so the paths point to the freshly created mobile apps
+    - Update `detox/detox.config.js` so the paths point to the freshly created mobile apps
     - We probably have to include the native libraries included in the MiN from appdev in order to test widgets like native maps
-- Always use same iPhone & android emulators (names) so new users don’t have to update the names in `pluggable-widgets-tools/test-config/detox.config.js`
+- Always use same iPhone & android emulators (names) so new users don’t have to update the names in `detox/detox.config.js`
 - AppDev Android Studio java issue - never version of studio (atl east in 4.2) throws error when trying to run appdev’s native testing setup commands (the ones that use avdmanager, etc.). 
 
 # Troubleshooting
