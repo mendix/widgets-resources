@@ -55,9 +55,9 @@ export interface AccordionPreviewProps {
     expandBehavior: ExpandBehaviorEnum;
     animate: boolean;
     showIcon: ShowIconEnum;
-    icon: WebIcon | null;
-    expandIcon: WebIcon | null;
-    collapseIcon: WebIcon | null;
+    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    expandIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    collapseIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     animateIcon: boolean;
     advancedMode: boolean;
 }
