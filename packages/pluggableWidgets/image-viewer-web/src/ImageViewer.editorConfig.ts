@@ -7,6 +7,7 @@ import {
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { DatasourceEnum, ImageViewerPreviewProps } from "../typings/ImageViewerProps";
+import StructurePreviewImageViewerSvg from "./assets/placeholder.svg";
 
 type ImageViewPreviewPropsKey = keyof ImageViewerPreviewProps;
 
@@ -61,8 +62,12 @@ export function getProperties(
 }
 
 export function getPreview(): StructurePreviewProps | null {
-    // TODO:
-    return null;
+    return {
+        type: "Image",
+        document: decodeURIComponent(StructurePreviewImageViewerSvg.replace("data:image/svg+xml,", "")),
+        height: 100,
+        width: 100
+    };
 }
 
 export function check(values: ImageViewerPreviewProps): Problem[] {
