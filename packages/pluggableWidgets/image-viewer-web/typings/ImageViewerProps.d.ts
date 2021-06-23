@@ -41,9 +41,9 @@ export interface ImageViewerPreviewProps {
     class: string;
     style: string;
     datasource: DatasourceEnum;
-    imageObject: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    imageObject: string;
     imageUrl: string;
-    imageIcon: WebIcon | null;
+    imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     onClickType: OnClickTypeEnum;
     onClick: {} | null;
     alternativeText: string;
