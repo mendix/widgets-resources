@@ -5,10 +5,16 @@ on:
         branches: [master]
         paths-ignore:
             - "**/*.md"
+            - "packages/theming/atlas/src/theme/native/**"
+            - "packages/theming/atlas/src/themesource/**/native/**"
+
+
     pull_request:
         branches: [master]
         paths-ignore:
             - "**/*.md"
+            - "packages/theming/atlas/src/**/native/**"
+            - "packages/theming/atlas/src/themesource/**/native/**"
 
 jobs:
     test:

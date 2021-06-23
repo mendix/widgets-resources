@@ -5,8 +5,7 @@ on:
         branches: [master]
         paths:
             - packages/theming/atlas/src/theme/**/*
-        paths-ignore:
-            - "**/*.md"
+            - "!**/*.md"
 
 jobs:
     build:
