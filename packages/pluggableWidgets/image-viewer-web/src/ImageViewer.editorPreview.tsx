@@ -1,4 +1,5 @@
 import { parseStyle } from "@mendix/piw-utils-internal";
+import { WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
 import { ImageViewerPreviewProps } from "../typings/ImageViewerProps";
 import { ImageViewer as ImageViewerComponent } from "./components/ImageViewer/index";
@@ -11,17 +12,24 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
     let image = ImageViewerPlaceholder;
     switch (props.datasource) {
         case "image":
-            if (props.imageObject?.type === "static") {
+            // TODO: Remove these when preview typing for `image` property is aligned properly by PageEditor
+            const imageObject:
+                | { type: "static"; imageUrl: string }
+                | { type: "dynamic"; entity: string }
+                | null = props.imageObject as any;
+            if (imageObject?.type === "static") {
                 // The optional chaining in the conditional guarantees the object is set here.
-                image = props.imageObject.imageUrl;
+                image = imageObject.imageUrl;
             }
             break;
         case "icon":
-            if (props.imageIcon?.type === "glyph") {
-                image = props.imageIcon.iconClass;
+            // TODO: Remove these when preview typing for `icon` property is aligned properly by PageEditor
+            const imageIcon: WebIcon | null = props.imageIcon as any;
+            if (imageIcon?.type === "glyph") {
+                image = imageIcon.iconClass;
             }
-            if (props.imageIcon?.type === "image") {
-                image = props.imageIcon.iconUrl;
+            if (imageIcon?.type === "image") {
+                image = imageIcon.iconUrl;
             }
             break;
         case "imageUrl":
