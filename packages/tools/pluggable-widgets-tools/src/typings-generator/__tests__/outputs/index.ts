@@ -21,7 +21,7 @@ export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
     action: {} | null;
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
 }
 
 export interface MyWidgetProps<Style> {
@@ -54,7 +54,7 @@ export interface MyWidgetPreviewProps {
     mywidgetType: MywidgetTypeEnum;
     tries: number | null;
     amount: number | null;
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
     onClickAction: {} | null;
     onChange: {} | null;
     actions: ActionsPreviewType[];
@@ -85,7 +85,7 @@ export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
     action: {} | null;
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
 }
 
 export interface MyWidgetContainerProps {
@@ -120,7 +120,7 @@ export interface MyWidgetPreviewProps {
     mywidgetType: MywidgetTypeEnum;
     tries: number | null;
     amount: number | null;
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
     onClickAction: {} | null;
     onChange: {} | null;
     actions: ActionsPreviewType[];
@@ -151,7 +151,7 @@ export interface ActionsPreviewType {
     name: string;
     enabled: boolean;
     action: {} | null;
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
 }
 
 export interface MyWidgetContainerProps {
@@ -187,7 +187,7 @@ export interface MyWidgetPreviewProps {
     mywidgetType: MywidgetTypeEnum;
     tries: number | null;
     amount: number | null;
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
     onClickAction: {} | null;
     onChange: {} | null;
     actions: ActionsPreviewType[];

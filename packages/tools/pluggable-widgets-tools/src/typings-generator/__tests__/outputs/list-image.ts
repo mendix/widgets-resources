@@ -11,7 +11,7 @@ export interface ActionsType {
 }
 
 export interface ActionsPreviewType {
-    image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    image: string;
 }
 
 export interface MyWidgetContainerProps {
