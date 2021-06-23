@@ -73,7 +73,7 @@ export class SizeContainer extends Component<SizeProps> {
         } else if (heightUnit === "percentageOfParent") {
             style.height = `${height}%`;
         } else if (heightUnit === "aspectRatio") {
-            style.height = width * 0.5625; // Default is 16:9
+            style.height = width * 0.5625; // Default is 16:9; Important note: this calculation is incorrect when width is a percentage.
         }
 
         return style;

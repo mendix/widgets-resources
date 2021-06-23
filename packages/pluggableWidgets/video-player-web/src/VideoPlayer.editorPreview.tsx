@@ -2,10 +2,9 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { Component, createElement } from "react";
 import classNames from "classnames";
 
-import { Error } from "./components/Error";
 import { SizeContainer } from "./components/SizeContainer";
-import { Video, VideoPlayerProps } from "./components/Video";
-import { validateUrl } from "./utils/Utils";
+import videoPreview from "./assets/VideoPreview.svg";
+import videoWithControlsPreview from "./assets/VideoWithControlsPreview.svg";
 import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
 
 declare function require(name: string): string;
@@ -15,36 +14,24 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
-                style={{ ...parseStyle(this.props.style), minHeight: "400px" }}
+                style={{ ...parseStyle(this.props.style), minHeight: "400px" }} // TODO: remove the min height when aspect ratio height works with percentages inside SizeContainer
                 widthUnit={this.props.widthUnit}
                 width={this.props.width ?? 0}
                 heightUnit={this.props.heightUnit}
                 height={this.props.height ?? 0}
                 tabIndex={0}
             >
-                {this.renderPlayers()}
+                {this.props.showControls ? (
+                    <img
+                        className="widget-video-player-preview-image"
+                        src={videoWithControlsPreview}
+                        alt="Video with controls preview"
+                    />
+                ) : (
+                    <img className="widget-video-player-preview-image" src={videoPreview} alt="Video preview" />
+                )}
             </SizeContainer>
         );
-    }
-
-    private renderPlayers(): JSX.Element {
-        if (!validateUrl(this.props.urlExpression || "")) {
-            return <Error preview />;
-        }
-        return <Video {...this.transformProps(this.props)} />;
-    }
-
-    private transformProps(props: VideoPlayerPreviewProps): VideoPlayerProps {
-        return {
-            url: props.urlExpression,
-            poster: props.posterExpression,
-            autoStart: false,
-            showControls: props.showControls,
-            loop: false,
-            muted: true,
-            aspectRatio: false,
-            preview: true
-        };
     }
 }
 
