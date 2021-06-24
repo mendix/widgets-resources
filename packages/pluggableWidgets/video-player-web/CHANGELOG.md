@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 -   We renamed the video URL and Poster URL widget properties.
 -   We improved property rendering in Studio.
 -   We improved the design mode preview.
+-   We changed the property type of Video link and Poster link to text template.
 
 ### Removed
 -   We removed rendering errors inside design mode preview.

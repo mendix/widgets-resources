@@ -20,8 +20,8 @@ export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
                 tabIndex={this.props.tabIndex}
             >
                 <Video
-                    url={this.props.urlExpression && this.props.urlExpression.value}
-                    poster={this.props.posterExpression && this.props.posterExpression.value}
+                    url={this.props.videoUrl && this.props.videoUrl.value}
+                    poster={this.props.posterUrl && this.props.posterUrl.value}
                     autoStart={this.props.autoStart}
                     showControls={this.props.showControls}
                     loop={this.props.loop}
