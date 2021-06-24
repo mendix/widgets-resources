@@ -73,7 +73,6 @@ export default class CalendarContainer extends Component<Container.CalendarConta
                 messages: this.setCustomViews(),
                 events: this.state.events,
                 defaultView: this.props.defaultView,
-                popup: this.props.popup,
                 startPosition: this.state.startPosition,
                 loading: this.state.loading,
                 style: parseStyle(this.props.style),

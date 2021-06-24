@@ -16,7 +16,6 @@ describe("Toolbar", () => {
         height: 580,
         heightUnit: "pixels",
         messages: [],
-        popup: true,
         editable: "default",
         style: {},
         viewOption: "standard",
