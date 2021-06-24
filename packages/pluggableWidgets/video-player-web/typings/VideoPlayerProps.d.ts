@@ -14,7 +14,7 @@ export interface VideoPlayerContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
-    tabIndex: number;
+    tabIndex?: number;
     urlExpression: DynamicValue<string>;
     posterExpression?: DynamicValue<string>;
     autoStart: boolean;
