@@ -1,5 +1,6 @@
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { createElement, ReactElement } from "react";
+import { WebIcon } from "mendix";
 
 import { Accordion } from "./components/Accordion";
 import { useIconGenerator } from "./utils/iconGenerator";
@@ -36,29 +37,22 @@ export function preview(props: PreviewProps): ReactElement {
         dynamicClassName: group.dynamicClass.slice(1, -1) // expression result is surrounded by single quotes
     }));
 
+    // TODO: Remove these when preview typing for `icon` property is aligned properly by PageEditor
+    const icon: WebIcon | null = props.icon as any;
+    const expandIcon: WebIcon | null = props.expandIcon as any;
+    const collapseIcon: WebIcon | null = props.collapseIcon as any;
+
     const generateIcon = useIconGenerator(
         props.advancedMode,
         props.animateIcon,
         {
-            data: props.icon
-                ? props.icon.type === "image"
-                    ? { type: props.icon.type, iconUrl: props.icon.imageUrl }
-                    : props.icon
-                : undefined
+            data: icon ?? undefined
         },
         {
-            data: props.expandIcon
-                ? props.expandIcon.type === "image"
-                    ? { type: props.expandIcon.type, iconUrl: props.expandIcon.imageUrl }
-                    : props.expandIcon
-                : undefined
+            data: expandIcon ?? undefined
         },
         {
-            data: props.collapseIcon
-                ? props.collapseIcon.type === "image"
-                    ? { type: props.collapseIcon.type, iconUrl: props.collapseIcon.imageUrl }
-                    : props.collapseIcon
-                : undefined
+            data: collapseIcon ?? undefined
         }
     );
 
