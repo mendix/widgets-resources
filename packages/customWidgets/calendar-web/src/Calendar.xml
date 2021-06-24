@@ -262,11 +262,6 @@
                 </property>
             </properties>
         </property>
-        <property key="popup" type="boolean" defaultValue="true">
-            <caption>Show truncated events</caption>
-            <category>View</category>
-            <description>Show truncated events in an overlay when you click the "+x more" link</description>
-        </property>
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>View</category>

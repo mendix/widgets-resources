@@ -76,7 +76,6 @@ export class preview extends Component<Container.CalendarContainerProps> {
             heightUnit: props.heightUnit,
             messages: [],
             startPosition: new Date(),
-            popup: props.popup,
             editable: props.editable,
             style: parseStyle(props.style),
             viewOption: props.view,
