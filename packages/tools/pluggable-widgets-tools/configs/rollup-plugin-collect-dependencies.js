@@ -68,7 +68,11 @@ async function resolvePackage(target, sourceDir) {
     try {
         return dirname(await promisify(resolve)(join(targetPackage, "package.json"), { basedir: sourceDir }));
     } catch (e) {
-        if (e.message.includes("Cannot find module") && !/\.((j|t)sx?)|json|(pn|jpe?|sv)g|(tif|gi)f$/g.test(targetPackage)) {
+        if (
+            e.message.includes("Cannot find module") &&
+            !/\.((j|t)sx?)|json|(pn|jpe?|sv)g|(tif|gi)f$/g.test(targetPackage) &&
+            !/configs\/jsActions/i.test(__dirname)                                 // Ignore errors about missing package.json in 'jsActions/**/src/*' folders
+        ) {
             throw e;
         }
         return undefined;
@@ -94,10 +98,11 @@ async function getTransitiveDependencies(packagePath, isExternal) {
             packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
         );
         for (const dependency of dependencies) {
-            if (isExternal(dependency)) {
+            const resolvedPackagePath = await resolvePackage(dependency, nextPath);
+            if (isExternal(dependency) || !resolvedPackagePath) {
                 continue;
             }
-            queue.push(await resolvePackage(dependency, nextPath));
+            queue.push(resolvedPackagePath);
         }
     }
     return Array.from(result);

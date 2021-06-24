@@ -45,45 +45,44 @@ export default async args => {
                 i === 0 ? clear({ targets: [outDir] }) : null,
                 !isWeb
                     ? collectDependencies({
-                          onlyNative: false,
-                          outputDir: outDir,
-                          widgetName: fileOutput
-                      })
+                        onlyNative: false,
+                        outputDir: outDir,
+                        widgetName: fileOutput
+                    })
                     : null,
                 nodeResolvePlugin,
                 typescriptPlugin,
                 bigJsImportReplacer(),
-                i === files.length - 1
-                    ? command([
-                          async () => {
-                              if (!isWeb) {
-                                  await Promise.all(
-                                      clientDependencies.map(async dependency => {
-                                          await copyJsModule(
-                                              dirname(require.resolve(`${dependency}/package.json`)),
-                                              join(join(outDir, "node_modules"), dependency)
-                                          );
-                                      })
-                                  );
-                              }
+                command([
+                    async () => {
+                        if (!isWeb) {
+                            await Promise.all(
+                                clientDependencies.map(async dependency => {
+                                    await copyJsModule(
+                                        dirname(require.resolve(`${dependency}/package.json`)),
+                                        join(join(outDir, "node_modules"), dependency)
+                                    );
+                                })
+                            );
+                        }
 
-                              const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
-                              const destinations = [
-                                  destinationFolder,
-                                  ...[
-                                      process.env.MX_PROJECT_PATH
-                                          ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
-                                          : undefined
-                                  ]
-                              ];
+                        const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
+                        const destinations = [
+                            destinationFolder,
+                            process.env.MX_PROJECT_PATH
+                                ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
+                                : undefined
+                        ];
 
-                              destinations.filter(Boolean).forEach(destination => {
-                                  mkdirSync(destination, { recursive: true });
-                                  copy(outDir, destination, { filter: ["**/*"], overwrite: true });
-                              });
-                          }
-                      ])
-                    : null
+                        destinations.filter(Boolean).forEach(destination => {
+                            mkdirSync(destination, { recursive: true });
+                            copy(join(outDir, `${fileOutput}.js`), destination, { overwrite: true });
+                            if (existsSync(join(outDir, `${fileOutput}.json`))) {
+                                copy(join(outDir, `${fileOutput}.json`), destination, { overwrite: true });
+                            }
+                        });
+                    }
+                ])
             ],
             onwarn
         });
