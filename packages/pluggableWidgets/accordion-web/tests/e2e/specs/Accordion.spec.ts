@@ -1,7 +1,7 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
 
 describe("accordion-web", () => {
-    beforeAll(() => {
+    beforeEach(() => {
         page.open(); // resets page
     });
     it("compares with a screenshot baseline and checks if all accordion elements are rendered as expected", () => {
@@ -41,6 +41,27 @@ describe("accordion-web", () => {
         accordionGroup.click();
 
         expect(accordionGroupContent.isDisplayed()).toBeTrue();
+    });
+    it("shows single accordion expanded at a time", () => {
+        const firstAccordionGroup = $(".mx-name-accordion1 > section");
+        const secondAccordionGroup = $(".mx-name-accordion1 > section:nth-child(2)");
+        const thirdAccordionGroup = $(".mx-name-accordion1 > section:nth-child(3)");
+
+        expect(firstAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+        expect(secondAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+        expect(thirdAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+
+        firstAccordionGroup.click();
+
+        expect(firstAccordionGroup.getAttribute("class")).not.toContain("widget-accordion-group-collapsed");
+        expect(secondAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+        expect(thirdAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+
+        thirdAccordionGroup.click();
+
+        expect(firstAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsing");
+        expect(secondAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+        expect(thirdAccordionGroup.getAttribute("class")).not.toContain("widget-accordion-group-collapsed");
     });
     it("shows multiple accordions expanded", () => {
         const accordionGroup = $(".mx-name-accordion2 > section");
