@@ -15,7 +15,6 @@ import {
     launchImageLibrary
 } from "react-native-image-picker";
 import { getLocales } from "react-native-localize";
-import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
@@ -112,6 +111,8 @@ export async function TakePicture(
 
     // V3 dropped the feature of providing an action sheet so users can decide on which action to take, camera or library.
     const nativeVersionMajor = NativeModules.ImagePickerManager.showImagePicker ? 2 : 4;
+    const { check, PERMISSIONS, request, RESULTS } =
+        nativeVersionMajor === 4 ? require("react-native-permissions") : null;
 
     try {
         const uri = await takePicture();
@@ -210,19 +211,17 @@ export async function TakePicture(
             callback: (response: ImagePickerV2Response | ImagePickerResponse) => void
         ) => void
     > {
-        function handleCameraRequest() {
-            return async () => {
-                if (Platform.OS === "android" && nativeVersionMajor === 4) {
-                    await checkAndMaybeRequestAndroidPermission();
-                }
+        async function handleCameraRequest(): Promise<typeof launchCamera> {
+            if (Platform.OS === "android" && nativeVersionMajor === 4) {
+                await checkAndMaybeRequestAndroidPermission();
+            }
 
-                return launchCamera;
-            };
+            return launchCamera;
         }
 
         switch (pictureSource) {
             case "imageLibrary":
-                return () => Promise.resolve(launchImageLibrary);
+                return launchImageLibrary;
 
             case "camera":
                 return handleCameraRequest();

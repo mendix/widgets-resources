@@ -15,7 +15,6 @@ import {
     launchImageLibrary
 } from "react-native-image-picker";
 import { getLocales } from "react-native-localize";
-import { check, PERMISSIONS, request, RESULTS } from "react-native-permissions";
 
 type PictureSource = "camera" | "imageLibrary" | "either";
 
@@ -102,8 +101,6 @@ export async function TakePictureAdvanced(
 ): Promise<boolean | mendix.lib.MxObject> {
     // BEGIN USER CODE
 
-    // V3 dropped the feature of providing an action sheet so users can decide on which action to take, camera or library.
-    const nativeVersionMajor = NativeModules.ImagePickerManager.showImagePicker ? 2 : 4;
     if (!picture) {
         return Promise.reject(new Error("Input parameter 'Picture' is required"));
     }
@@ -118,6 +115,10 @@ export async function TakePictureAdvanced(
         );
     }
 
+    // V3 dropped the feature of providing an action sheet so users can decide on which action to take, camera or library.
+    const nativeVersionMajor = NativeModules.ImagePickerManager.showImagePicker ? 2 : 4;
+    const { check, PERMISSIONS, request, RESULTS } =
+        nativeVersionMajor === 4 ? require("react-native-permissions") : null;
     const resultObject = await createMxObject("NativeMobileResources.ImageMetaData");
 
     try {
@@ -259,19 +260,17 @@ export async function TakePictureAdvanced(
             callback: (response: ImagePickerV2Response | ImagePickerResponse) => void
         ) => void
     > {
-        function handleCameraRequest() {
-            return async () => {
-                if (Platform.OS === "android" && nativeVersionMajor === 4) {
-                    await checkAndMaybeRequestAndroidPermission();
-                }
+        async function handleCameraRequest() {
+            if (Platform.OS === "android" && nativeVersionMajor === 4) {
+                await checkAndMaybeRequestAndroidPermission();
+            }
 
-                return launchCamera;
-            };
+            return launchCamera;
         }
 
         switch (pictureSource) {
             case "imageLibrary":
-                return () => Promise.resolve(launchImageLibrary);
+                return launchImageLibrary;
 
             case "camera":
                 return handleCameraRequest();
