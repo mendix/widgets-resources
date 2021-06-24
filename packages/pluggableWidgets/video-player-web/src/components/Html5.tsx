@@ -1,5 +1,4 @@
 import { Component, createElement, createRef } from "react";
-import ReactResizeDetector from "react-resize-detector";
 
 export interface Html5PlayerProps {
     url: string;
@@ -15,7 +14,6 @@ export interface Html5PlayerProps {
 export class Html5 extends Component<Html5PlayerProps> {
     private videoElement = createRef<HTMLVideoElement>();
     private errorElement = createRef<HTMLDivElement>();
-    private readonly handleOnResize = this.onResize.bind(this);
     private readonly handleOnSuccess = this.handleSuccess.bind(this);
     private readonly handleOnError = this.handleError.bind(this);
 
@@ -42,13 +40,6 @@ export class Html5 extends Component<Html5PlayerProps> {
                         onError={this.handleOnError}
                         onLoad={this.handleOnSuccess}
                     />
-                    <ReactResizeDetector
-                        handleWidth
-                        handleHeight
-                        onResize={this.handleOnResize}
-                        refreshMode="debounce"
-                        refreshRate={100}
-                    />
                 </video>
             </div>
         );
@@ -68,25 +59,6 @@ export class Html5 extends Component<Html5PlayerProps> {
             this.errorElement.current.classList.remove("hasError");
             if (this.videoElement && this.videoElement.current) {
                 this.videoElement.current.controls = this.props.showControls;
-            }
-        }
-    }
-
-    private onResize(): void {
-        if (this.videoElement && this.videoElement.current && this.props.aspectRatio) {
-            Html5.changeHeight(this.videoElement.current);
-        }
-    }
-
-    private static changeHeight(element: HTMLElement): void {
-        if (element.parentElement) {
-            const height = element.clientHeight + "px";
-            if (element.parentElement.parentElement) {
-                element.parentElement.parentElement.style.height = height;
-
-                if (element.parentElement.parentElement.parentElement) {
-                    element.parentElement.parentElement.parentElement.style.height = height;
-                }
             }
         }
     }
