@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## 1.2.0 - [Unreleased]
+
+### Changed
+-   We changed the property type of Video link and Poster link to text template.
+
 ## 1.1.0 - 2021-07-02
 
 ### Added
