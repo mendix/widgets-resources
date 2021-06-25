@@ -7,6 +7,10 @@ export function generateClientTypes(
     systemProperties: SystemProperty[],
     isNative: boolean
 ): string[] {
+    function resolveProp(key: string) {
+        return properties.find(p => p.$.key === key);
+    }
+
     const isLabeled = systemProperties.some(p => p.$.key === "Label");
     const results = Array.of<string>();
     results.push(
@@ -14,7 +18,7 @@ export function generateClientTypes(
             ? `export interface ${widgetName}Props<Style> {
     name: string;
     style: Style[];
-${generateClientTypeBody(properties, true, results)}
+${generateClientTypeBody(properties, true, results, resolveProp)}
 }`
             : `export interface ${widgetName}ContainerProps {
     name: string;
@@ -26,33 +30,48 @@ ${generateClientTypeBody(properties, true, results)}
     id: string;`
             : ``
     }
-${generateClientTypeBody(properties, false, results)}
+${generateClientTypeBody(properties, false, results, resolveProp)}
 }`
     );
     return results;
 }
 
-function generateClientTypeBody(properties: Property[], isNative: boolean, generatedTypes: string[]) {
+function generateClientTypeBody(
+    properties: Property[],
+    isNative: boolean,
+    generatedTypes: string[],
+    resolveProp: (key: string) => Property | undefined
+) {
     return properties
         .map(prop => {
             const isOptional =
                 prop.$.type !== "string" &&
                 ((prop.$.required === "false" && prop.$.type !== "object") || prop.$.type === "action");
-            return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(prop, isNative, generatedTypes)};`;
+            return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(
+                prop,
+                isNative,
+                generatedTypes,
+                resolveProp
+            )};`;
         })
         .join("\n");
 }
 
-function toClientPropType(prop: Property, isNative: boolean, generatedTypes: string[]) {
+function toClientPropType(
+    prop: Property,
+    isNative: boolean,
+    generatedTypes: string[],
+    resolveProp: (key: string) => Property | undefined
+) {
     switch (prop.$.type) {
         case "boolean":
             return "boolean";
         case "string":
             return "string";
         case "action":
-            return prop.$.dataSource ? "ListActionValue" : "ActionValue";
+            return toLinkableType(prop, "ListActionValue", "ActionValue", resolveProp);
         case "textTemplate":
-            return prop.$.dataSource ? "ListExpressionValue<string>" : "DynamicValue<string>";
+            return toLinkableType(prop, "ListExpressionValue<string>", "DynamicValue<string>", resolveProp);
         case "integer":
             return "number";
         case "decimal":
@@ -74,15 +93,18 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 .reduce((a, i) => a.concat(i), [])
                 .map(at => toClientType(at.$.name));
             const uniqueTypes = Array.from(new Set(types));
-            return prop.$.dataSource
-                ? `ListAttributeValue<${uniqueTypes.join(" | ")}>`
-                : `EditableValue<${uniqueTypes.join(" | ")}>`;
+            return toLinkableType(
+                prop,
+                `ListAttributeValue<${uniqueTypes.join(" | ")}>`,
+                `EditableValue<${uniqueTypes.join(" | ")}>`,
+                resolveProp
+            );
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new Error("[XML] Expression property requires returnType element");
             }
             const type = toClientType(prop.returnType[0].$.type);
-            return prop.$.dataSource ? `ListExpressionValue<${type}>` : `DynamicValue<${type}>`;
+            return toLinkableType(prop, `ListExpressionValue<${type}>`, `DynamicValue<${type}>`, resolveProp);
         case "enumeration":
             const typeName = capitalizeFirstLetter(prop.$.key) + "Enum";
             generatedTypes.push(generateEnum(typeName, prop));
@@ -92,17 +114,36 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 throw new Error("[XML] Object property requires properties element");
             }
             const childType = capitalizeFirstLetter(prop.$.key) + "Type";
+            const childProperties = extractProperties(prop.properties[0]);
+
+            const resolveChildProp = (key: string) =>
+                key.startsWith("../") ? resolveProp(key.substring(3)) : childProperties.find(p => p.$.key === key);
+
             generatedTypes.push(
                 `export interface ${childType} {
-${generateClientTypeBody(extractProperties(prop.properties[0]), isNative, generatedTypes)}
+${generateClientTypeBody(childProperties, isNative, generatedTypes, resolveChildProp)}
 }`
             );
             return prop.$.isList === "true" ? `${childType}[]` : childType;
         case "widgets":
-            return prop.$.dataSource ? "ListWidgetValue" : "ReactNode";
+            return toLinkableType(prop, "ListWidgetValue", "ReactNode", resolveProp);
         default:
             return "any";
     }
+}
+
+function toLinkableType(
+    prop: Property,
+    linkedType: string,
+    nonLinkedType: string,
+    resolveProp: (name: string) => Property | undefined
+) {
+    const dataSource = prop.$.dataSource && resolveProp(prop.$.dataSource);
+    return dataSource
+        ? dataSource.$.required !== "false"
+            ? linkedType
+            : `${linkedType} | ${nonLinkedType}`
+        : nonLinkedType;
 }
 
 function generateEnum(typeName: string, prop: Property) {

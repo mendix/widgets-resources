@@ -8,6 +8,10 @@ export const datasourceInput = `<?xml version="1.0" encoding="utf-8"?>
                 <caption>Content data source</caption>
                 <description />
             </property>
+            <property key="optionalSource" type="datasource" isList="true" required="false">
+                <caption>Optional data source</caption>
+                <description />
+            </property>
             <property key="content" type="widgets" dataSource="contentSource">
                 <caption>Content</caption>
                 <description />
@@ -34,6 +38,32 @@ export const datasourceInput = `<?xml version="1.0" encoding="utf-8"?>
                 <description />
                 <returnType type="Decimal"/>
             </property>
+            <property key="optionalDSAttribute" type="attribute" dataSource="optionalSource">
+                <caption>Marker attribute</caption>
+                <description />
+                <attributeTypes>
+                    <attributeType name="String"/>
+                    <attributeType name="Boolean"/>
+                    <attributeType name="Decimal"/>
+                </attributeTypes>
+            </property>
+            <property key="optionalDSAction" type="action" dataSource="optionalSource">
+                <caption>Action</caption>
+                <description />
+            </property>
+            <property key="optionalDSTextTemplate" type="textTemplate" dataSource="optionalSource">
+                <caption>Text Template</caption>
+                <description />
+            </property>
+            <property key="optionalDSExpression" type="expression" dataSource="optionalSource">
+                <caption>Expression</caption>
+                <description />
+                <returnType type="Decimal"/>
+            </property>
+            <property key="optionalContent" type="widgets" dataSource="optionalSource">
+                <caption>Content</caption>
+                <description />
+            </property>
             <property key="datasourceProperties" type="object" isList="true">
                 <caption>Data source properties</caption>
                 <description />
@@ -54,6 +84,32 @@ export const datasourceInput = `<?xml version="1.0" encoding="utf-8"?>
                         </property>
                         <property key="actionAttribute" type="action" dataSource="../contentSource">
                             <caption>Action</caption>
+                            <description />
+                        </property>
+                        <property key="optionalDSAttribute" type="attribute" dataSource="../optionalSource">
+                            <caption>Marker attribute</caption>
+                            <description />
+                            <attributeTypes>
+                                <attributeType name="String"/>
+                                <attributeType name="Boolean"/>
+                                <attributeType name="Decimal"/>
+                            </attributeTypes>
+                        </property>
+                        <property key="optionalDSAction" type="action" dataSource="../optionalSource">
+                            <caption>Action</caption>
+                            <description />
+                        </property>
+                        <property key="optionalDSTextTemplate" type="textTemplate" dataSource="../optionalSource">
+                            <caption>Text Template</caption>
+                            <description />
+                        </property>
+                        <property key="optionalDSExpression" type="expression" dataSource="../optionalSource">
+                            <caption>Expression</caption>
+                            <description />
+                            <returnType type="Decimal"/>
+                        </property>
+                        <property key="optionalContent" type="widgets" dataSource="../optionalSource">
+                            <caption>Content</caption>
                             <description />
                         </property>
                     </propertyGroup>
