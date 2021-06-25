@@ -117,8 +117,7 @@ export async function TakePictureAdvanced(
 
     // V3 dropped the feature of providing an action sheet so users can decide on which action to take, camera or library.
     const nativeVersionMajor = NativeModules.ImagePickerManager.showImagePicker ? 2 : 4;
-    const { check, PERMISSIONS, request, RESULTS } =
-        nativeVersionMajor === 4 ? require("react-native-permissions") : null;
+    const RNPermissions = nativeVersionMajor === 4 ? require("react-native-permissions") : null;
     const resultObject = await createMxObject("NativeMobileResources.ImageMetaData");
 
     try {
@@ -186,7 +185,7 @@ export async function TakePictureAdvanced(
                 .then(method =>
                     method(getOptions(), (response: ImagePickerV2Response | ImagePickerResponse) => {
                         if (response.didCancel) {
-                            return resolve();
+                            return resolve(undefined);
                         }
 
                         if (nativeVersionMajor === 2) {
@@ -196,7 +195,7 @@ export async function TakePictureAdvanced(
                                 const unhandledError = handleImagePickerV2Error(response.error);
 
                                 if (!unhandledError) {
-                                    return resolve();
+                                    return resolve(undefined);
                                 }
 
                                 return reject(new Error(response.error));
@@ -210,7 +209,7 @@ export async function TakePictureAdvanced(
                         if (response.errorCode) {
                             handleImagePickerV4Error(response.errorCode, response.errorMessage);
 
-                            return resolve();
+                            return resolve(undefined);
                         }
 
                         return resolve(response);
@@ -250,7 +249,8 @@ export async function TakePictureAdvanced(
                             reject(error);
                         }
                     );
-                });
+                })
+                .catch(error => reject(error));
         });
     }
 
@@ -260,7 +260,7 @@ export async function TakePictureAdvanced(
             callback: (response: ImagePickerV2Response | ImagePickerResponse) => void
         ) => void
     > {
-        async function handleCameraRequest() {
+        async function handleCameraRequest(): Promise<typeof launchCamera> {
             if (Platform.OS === "android" && nativeVersionMajor === 4) {
                 await checkAndMaybeRequestAndroidPermission();
             }
@@ -275,24 +275,18 @@ export async function TakePictureAdvanced(
             case "camera":
                 return handleCameraRequest();
 
-            // TODO: I don't see much value in this since an update to native-mobile-resources can include an edit to Enum used. Maybe remove?
-            case "either":
-                throw new Error(
-                    "Either is no longer a supported PictureSource value. Please use `camera` or `imageLibrary`."
-                ); // TODO: enduser copy
-
             default:
                 return handleCameraRequest();
         }
     }
 
-    async function checkAndMaybeRequestAndroidPermission() {
+    async function checkAndMaybeRequestAndroidPermission(): Promise<void> {
         let requestResult: string;
 
-        async function requestAndroidPermission() {
-            requestResult = await request(PERMISSIONS.ANDROID.CAMERA);
+        async function requestAndroidPermission(): Promise<string> {
+            requestResult = await RNPermissions.request(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
 
-            if (requestResult === RESULTS.DENIED) {
+            if (requestResult === RNPermissions.RESULTS.DENIED) {
                 // re-enter request flow. note, if a request is denied twice, result = blocked.
                 requestResult = await requestAndroidPermission();
             }
@@ -301,21 +295,21 @@ export async function TakePictureAdvanced(
         }
 
         // https://github.com/zoontek/react-native-permissions#android-flow
-        const statusResult = await check(PERMISSIONS.ANDROID.CAMERA);
+        const statusResult = await RNPermissions.check(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
 
-        if (statusResult === RESULTS.UNAVAILABLE) {
-            throw new Error("The camera is unavailable."); // TODO: enduser copy
+        if (statusResult === RNPermissions.RESULTS.UNAVAILABLE) {
+            throw new Error("The camera is unavailable.");
         }
 
-        if (statusResult === RESULTS.BLOCKED) {
-            throw new Error("Blocked from using camera."); // TODO: enduser copy
+        if (statusResult === RNPermissions.RESULTS.BLOCKED) {
+            throw new Error("Camera access for this app is currently blocked.");
         }
 
-        if (statusResult === RESULTS.DENIED) {
+        if (statusResult === RNPermissions.RESULTS.DENIED) {
             requestResult = await requestAndroidPermission();
 
-            if (requestResult === RESULTS.BLOCKED) {
-                throw new Error("The camera is currently blocked from use."); // TODO: enduser copy
+            if (requestResult === RNPermissions.RESULTS.BLOCKED) {
+                throw new Error("Camera access for this app is currently blocked.");
             }
         }
     }
@@ -338,8 +332,8 @@ export async function TakePictureAdvanced(
                 chooseFromLibraryButtonTitle: isDutch ? "Kies uit bibliotheek" : "Choose from library",
                 permissionDenied: {
                     title: isDutch
-                        ? "Deze app heeft geen toegang tot uw camera of foto's"
-                        : "This app does not have access to your camera or photos",
+                        ? "Deze app heeft geen toegang tot uw camera of foto bibliotheek"
+                        : "This app does not have access to your camera or photo library",
                     text: isDutch
                         ? "Ga naar Instellingen > Privacy om toegang tot uw camera en bestanden te verlenen."
                         : "To enable access, tap Settings > Privacy and turn on Camera and Photos/Storage.",
@@ -397,7 +391,7 @@ export async function TakePictureAdvanced(
         switch (error) {
             case ERRORS.iOSPhotoLibraryPermissionDenied:
                 showAlert(
-                    "This app does not have access to your photos or videos",
+                    "This app does not have access to your photo library",
                     "To enable access, tap Settings and turn on Photos."
                 );
                 return;
@@ -442,25 +436,28 @@ export async function TakePictureAdvanced(
         });
     }
 
-    // TODO: end-user messages/copy
     function handleImagePickerV4Error(errorCode: ErrorCode, errorMessage?: string) {
         switch (errorCode) {
             case "camera_unavailable":
-                showAlert("Device camera not available", "!!!!!REPLACEME!!!!!!.");
+                showAlert("The camera is unavailable.", "");
                 break;
             case "permission":
                 showAlert(
-                    "Access to the device camera and image library is required",
-                    Platform.OS === "ios"
-                        ? "To enable access, tap Settings and turn on Camera and Photos."
-                        : "!!!!!REPLACEME!!!!!!."
+                    "This app does not have access to your photo library or camera",
+                    "To enable access, tap Settings and turn on Camera and Photos."
                 );
                 break;
             case "others":
-                showAlert("Something went wrong", `${errorMessage}.` ?? "!!!!!REPLACEME!!!!!!.");
+                showAlert(
+                    "Something went wrong.",
+                    `${errorMessage}.` ?? "Something went wrong while trying to access your Camera or photo library."
+                );
                 break;
             default:
-                showAlert("Something went wrong", "!!!!!REPLACEME!!!!!!.");
+                showAlert(
+                    "Something went wrong.",
+                    "Something went wrong while trying to access your Camera or photo library."
+                );
                 break;
         }
     }
