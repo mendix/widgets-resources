@@ -27,7 +27,7 @@ export class SizeContainer extends Component<SizeProps> {
             <div
                 className={classNames(this.props.className, "size-box")}
                 tabIndex={this.props.tabIndex}
-                style={this.setDimensions()}
+                style={{ ...this.setDimensions(), ...this.props.style }}
             >
                 <div className={classNames("size-box-inner", this.props.classNameInner)}>{this.props.children}</div>
             </div>
