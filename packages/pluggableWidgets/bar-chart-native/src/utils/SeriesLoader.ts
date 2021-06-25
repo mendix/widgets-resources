@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Big } from "big.js";
-import { ObjectItem } from "mendix";
+import { ListAttributeValue, ListExpressionValue, ObjectItem, Option } from "mendix";
 
 import { BarSeriesType } from "../../typings/BarChartProps";
 import { BarChartSeries, BarDataPoints } from "../components/BarChart";
@@ -116,7 +116,7 @@ function loadDynamicSeries(series: BarSeriesType): BarChartSeries[] | null {
 }
 
 function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | null {
-    const { dynamicDataSource, dynamicSeriesName, dynamicCustomBarStyle, groupByAttribute, dataSet } = series;
+    const { dynamicDataSource, dataSet } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -131,6 +131,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
     const dataSourceItemGroupsResult: DataSourceItemGroup[] = [];
 
     for (const item of dataSource.items) {
+        const groupByAttribute = series.groupByAttribute as ListAttributeValue<string | boolean | Date | Big>;
         const groupByAttributeValue = ensure(groupByAttribute).get(item);
 
         if (groupByAttributeValue.value === undefined) {
@@ -155,6 +156,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
                 items: [item]
             };
 
+            const dynamicSeriesName = series.dynamicSeriesName as Option<ListExpressionValue<string>>;
             if (dynamicSeriesName) {
                 const dynamicSeriesNameValue = dynamicSeriesName.get(item);
 
@@ -165,6 +167,7 @@ function groupDataSourceItems(series: BarSeriesType): DataSourceItemGroup[] | nu
                 newDataSourceItemGroup.dynamicSeriesNameValue = dynamicSeriesNameValue.value;
             }
 
+            const dynamicCustomBarStyle = series.dynamicSeriesName as Option<ListExpressionValue<string>>;
             if (dynamicCustomBarStyle) {
                 const dynamicCustomBarStyleValue = dynamicCustomBarStyle.get(item);
 
@@ -196,12 +199,14 @@ function extractDataPoints(series: BarSeriesType, dataSourceItems?: ObjectItem[]
     const dataPointsExtraction: DataPointsExtraction = { dataPoints: [] };
 
     for (const item of dataSourceItems) {
-        const x = (series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute))(
-            item
-        );
-        const y = (series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute))(
-            item
-        );
+        const xAttribute = (series.dataSet === "static"
+            ? ensure(series.staticXAttribute)
+            : ensure(series.dynamicXAttribute)) as ListAttributeValue<string | Date | Big>;
+        const x = xAttribute.get(item);
+        const yAttribute = (series.dataSet === "static"
+            ? ensure(series.staticYAttribute)
+            : ensure(series.dynamicYAttribute)) as ListAttributeValue<string | Date | Big>;
+        const y = yAttribute.get(item);
 
         if (!x.value || !y.value) {
             return null;
