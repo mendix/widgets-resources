@@ -44,24 +44,30 @@ describe("accordion-web", () => {
     });
     it("shows single accordion expanded at a time", () => {
         const firstAccordionGroup = $(".mx-name-accordion1 > section");
+        const firstAccordionGroupContent = firstAccordionGroup.$(".mx-name-text5");
         const secondAccordionGroup = $(".mx-name-accordion1 > section:nth-child(2)");
+        const secondAccordionGroupContent = secondAccordionGroup.$(".mx-name-image1");
         const thirdAccordionGroup = $(".mx-name-accordion1 > section:nth-child(3)");
+        const thirdAccordionGroupContent = thirdAccordionGroup.$(".mx-name-image2");
 
-        expect(firstAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
-        expect(secondAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
-        expect(thirdAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+        expect(firstAccordionGroupContent.isDisplayed()).toBeFalse();
+        expect(secondAccordionGroupContent.isDisplayed()).toBeFalse();
+        expect(thirdAccordionGroupContent.isDisplayed()).toBeFalse();
 
         firstAccordionGroup.click();
+        firstAccordionGroupContent.waitForDisplayed();
 
-        expect(firstAccordionGroup.getAttribute("class")).not.toContain("widget-accordion-group-collapsed");
-        expect(secondAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
-        expect(thirdAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
+        expect(firstAccordionGroupContent.isDisplayed()).toBeTrue();
+        expect(secondAccordionGroupContent.isDisplayed()).toBeFalse();
+        expect(thirdAccordionGroupContent.isDisplayed()).toBeFalse();
 
         thirdAccordionGroup.click();
+        firstAccordionGroupContent.waitForDisplayed({ reverse: true });
+        thirdAccordionGroupContent.waitForDisplayed();
 
-        expect(firstAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsing");
-        expect(secondAccordionGroup.getAttribute("class")).toContain("widget-accordion-group-collapsed");
-        expect(thirdAccordionGroup.getAttribute("class")).not.toContain("widget-accordion-group-collapsed");
+        expect(firstAccordionGroupContent.isDisplayed()).toBeFalse();
+        expect(secondAccordionGroupContent.isDisplayed()).toBeFalse();
+        expect(thirdAccordionGroupContent.isDisplayed()).toBeTrue();
     });
     it("shows multiple accordions expanded", () => {
         const accordionGroup = $(".mx-name-accordion2 > section");
