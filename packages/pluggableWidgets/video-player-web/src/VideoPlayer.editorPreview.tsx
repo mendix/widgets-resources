@@ -20,6 +20,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
                 width={this.props.width ?? 0}
                 heightUnit={this.props.heightUnit}
                 height={this.props.height ?? 0}
+                heightAspectRatio={this.props.heightAspectRatio}
                 tabIndex={0}
             >
                 {this.renderPlayers()}

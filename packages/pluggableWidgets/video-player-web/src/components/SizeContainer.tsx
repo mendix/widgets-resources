@@ -2,6 +2,7 @@ import { CSSProperties, Component, createElement } from "react";
 import classNames from "classnames";
 
 export type HeightUnitType = "percentageOfWidth" | "percentageOfParent" | "pixels" | "aspectRatio";
+export type HeightAspectRatioType = "oneByOne" | "fourByThree" | "threeByTwo" | "sixteenByNine" | "TwentyOneByNine";
 
 export type WidthUnitType = "percentage" | "pixels";
 
@@ -9,7 +10,8 @@ export interface Dimensions {
     widthUnit: WidthUnitType;
     width: number;
     heightUnit: HeightUnitType;
-    height: number;
+    height?: number;
+    heightAspectRatio?: HeightAspectRatioType;
     tabIndex?: number;
 }
 
@@ -33,7 +35,7 @@ export class SizeContainer extends Component<SizeProps> {
     }
 
     private setDimensions(): CSSProperties {
-        const { heightUnit, height, widthUnit, width } = this.props;
+        const { widthUnit, width, heightUnit, height, heightAspectRatio } = this.props;
 
         const style: CSSProperties = {};
         style.width = widthUnit === "percentage" ? `${width}%` : `${width}px`;
@@ -43,7 +45,7 @@ export class SizeContainer extends Component<SizeProps> {
                 style.paddingTop = height;
                 break;
             case "percentageOfWidth":
-                const actualHeight = (height / 100) * width;
+                const actualHeight = (height! / 100) * width;
 
                 if (widthUnit === "percentage") {
                     style.paddingTop = `${actualHeight}%`;
@@ -56,10 +58,30 @@ export class SizeContainer extends Component<SizeProps> {
                 style.height = `${height}%`;
                 break;
             case "aspectRatio":
+                let ratioHeightFactor = 0;
+
+                switch (heightAspectRatio) {
+                    case "oneByOne":
+                        ratioHeightFactor = 1;
+                        break;
+                    case "fourByThree":
+                        ratioHeightFactor = 3 / 4;
+                        break;
+                    case "threeByTwo":
+                        ratioHeightFactor = 2 / 3;
+                        break;
+                    case "sixteenByNine":
+                        ratioHeightFactor = 9 / 16;
+                        break;
+                    case "TwentyOneByNine":
+                        ratioHeightFactor = 9 / 21;
+                        break;
+                }
+
                 if (widthUnit === "pixels") {
-                    style.paddingTop = width * 0.5625;
+                    style.paddingTop = width * ratioHeightFactor;
                 } else {
-                    style.paddingTop = `${width * 0.5625}%`; // Default is 16:9
+                    style.paddingTop = `${width * ratioHeightFactor}%`;
                 }
                 break;
         }
