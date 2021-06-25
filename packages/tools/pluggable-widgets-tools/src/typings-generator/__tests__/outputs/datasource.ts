@@ -11,12 +11,22 @@ export interface DatasourcePropertiesType {
     contentAttribute: ListWidgetValue;
     markerAttribute: ListAttributeValue<string | boolean | Big>;
     actionAttribute?: ListActionValue;
+    optionalDSAttribute?: ListAttributeValue<string | boolean | Big>;
+    optionalDSAction?: ListActionValue;
+    optionalDSTextTemplate?: ListExpressionValue<string>;
+    optionalDSExpression?: ListExpressionValue<Big>;
+    optionalContent?: ListWidgetValue;
 }
 
 export interface DatasourcePropertiesPreviewType {
     contentAttribute: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     markerAttribute: string;
     actionAttribute: {} | null;
+    optionalDSAttribute: string;
+    optionalDSAction: {} | null;
+    optionalDSTextTemplate: string;
+    optionalDSExpression: string;
+    optionalContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
 }
 
 export interface MyWidgetContainerProps {
@@ -26,11 +36,17 @@ export interface MyWidgetContainerProps {
     tabIndex?: number;
     id: string;
     contentSource: ListValue;
+    optionalSource?: ListValue;
     content: ListWidgetValue;
     markerDataAttribute: ListAttributeValue<string | boolean | Big>;
     actionAttribute?: ListActionValue;
     textTemplateAttribute: ListExpressionValue<string>;
     expressionAttribute: ListExpressionValue<Big>;
+    optionalDSAttribute?: ListAttributeValue<string | boolean | Big>;
+    optionalDSAction?: ListActionValue;
+    optionalDSTextTemplate?: ListExpressionValue<string>;
+    optionalDSExpression?: ListExpressionValue<Big>;
+    optionalContent?: ListWidgetValue;
     datasourceProperties: DatasourcePropertiesType[];
     description: EditableValue<string>;
     action?: ActionValue;
@@ -40,11 +56,17 @@ export interface MyWidgetPreviewProps {
     class: string;
     style: string;
     contentSource: {} | { type: string } | null;
+    optionalSource: {} | null;
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     markerDataAttribute: string;
     actionAttribute: {} | null;
     textTemplateAttribute: string;
     expressionAttribute: string;
+    optionalDSAttribute: string;
+    optionalDSAction: {} | null;
+    optionalDSTextTemplate: string;
+    optionalDSExpression: string;
+    optionalContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     datasourceProperties: DatasourcePropertiesPreviewType[];
     description: string;
     action: {} | null;

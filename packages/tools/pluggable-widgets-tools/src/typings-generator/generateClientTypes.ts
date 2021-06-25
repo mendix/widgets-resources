@@ -7,6 +7,10 @@ export function generateClientTypes(
     systemProperties: SystemProperty[],
     isNative: boolean
 ): string[] {
+    function resolveProp(key: string) {
+        return properties.find(p => p.$.key === key);
+    }
+
     const isLabeled = systemProperties.some(p => p.$.key === "Label");
     const results = Array.of<string>();
     results.push(
@@ -14,7 +18,7 @@ export function generateClientTypes(
             ? `export interface ${widgetName}Props<Style> {
     name: string;
     style: Style[];
-${generateClientTypeBody(properties, true, results)}
+${generateClientTypeBody(properties, true, results, resolveProp)}
 }`
             : `export interface ${widgetName}ContainerProps {
     name: string;
@@ -26,24 +30,41 @@ ${generateClientTypeBody(properties, true, results)}
     id: string;`
             : ``
     }
-${generateClientTypeBody(properties, false, results)}
+${generateClientTypeBody(properties, false, results, resolveProp)}
 }`
     );
     return results;
 }
 
-function generateClientTypeBody(properties: Property[], isNative: boolean, generatedTypes: string[]) {
+function generateClientTypeBody(
+    properties: Property[],
+    isNative: boolean,
+    generatedTypes: string[],
+    resolveProp: (key: string) => Property | undefined
+) {
     return properties
         .map(prop => {
             const isOptional =
                 prop.$.type !== "string" &&
-                ((prop.$.required === "false" && prop.$.type !== "object") || prop.$.type === "action");
-            return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(prop, isNative, generatedTypes)};`;
+                ((prop.$.required === "false" && prop.$.type !== "object") ||
+                    prop.$.type === "action" ||
+                    (prop.$.dataSource && resolveProp(prop.$.dataSource)?.$.required === "false"));
+            return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(
+                prop,
+                isNative,
+                generatedTypes,
+                resolveProp
+            )};`;
         })
         .join("\n");
 }
 
-function toClientPropType(prop: Property, isNative: boolean, generatedTypes: string[]) {
+function toClientPropType(
+    prop: Property,
+    isNative: boolean,
+    generatedTypes: string[],
+    resolveProp: (key: string) => Property | undefined
+) {
     switch (prop.$.type) {
         case "boolean":
             return "boolean";
@@ -92,9 +113,14 @@ function toClientPropType(prop: Property, isNative: boolean, generatedTypes: str
                 throw new Error("[XML] Object property requires properties element");
             }
             const childType = capitalizeFirstLetter(prop.$.key) + "Type";
+            const childProperties = extractProperties(prop.properties[0]);
+
+            const resolveChildProp = (key: string) =>
+                key.startsWith("../") ? resolveProp(key.substring(3)) : childProperties.find(p => p.$.key === key);
+
             generatedTypes.push(
                 `export interface ${childType} {
-${generateClientTypeBody(extractProperties(prop.properties[0]), isNative, generatedTypes)}
+${generateClientTypeBody(childProperties, isNative, generatedTypes, resolveChildProp)}
 }`
             );
             return prop.$.isList === "true" ? `${childType}[]` : childType;
