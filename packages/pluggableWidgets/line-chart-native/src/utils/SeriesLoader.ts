@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Big } from "big.js";
-import { ObjectItem } from "mendix";
+import { ListAttributeValue, ListExpressionValue, ObjectItem, Option } from "mendix";
 
 import { LinesType } from "../../typings/LineChartProps";
 import { LineChartDataPoints, LineChartSeries } from "../components/LineChart";
@@ -118,7 +118,7 @@ function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
 }
 
 function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
-    const { dynamicDataSource, dynamicName, dynamicCustomLineStyle, groupByAttribute, dataSet } = series;
+    const { dynamicDataSource, dataSet } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -133,6 +133,7 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
     const dataSourceItemGroupsResult: DataSourceItemGroup[] = [];
 
     for (const item of dataSource.items) {
+        const groupByAttribute = series.groupByAttribute as ListAttributeValue<string | boolean | Date | Big>;
         const groupByAttributeValue = ensure(groupByAttribute).get(item);
 
         if (groupByAttributeValue.value === undefined) {
@@ -156,6 +157,7 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
                 items: [item]
             };
 
+            const dynamicName = series.dynamicName as Option<ListExpressionValue<string>>;
             if (dynamicName) {
                 const dynamicSeriesNameValue = dynamicName.get(item);
 
@@ -166,6 +168,7 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
                 newDataSourceItemGroup.dynamicNameValue = dynamicSeriesNameValue.value;
             }
 
+            const dynamicCustomLineStyle = series.dynamicCustomLineStyle as Option<ListExpressionValue<string>>;
             if (dynamicCustomLineStyle) {
                 const dynamicCustomLineStyleValue = dynamicCustomLineStyle.get(item);
 
@@ -184,8 +187,12 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
 }
 
 function extractDataPoints(series: LinesType, dataSourceItems?: ObjectItem[]): DataPointsExtraction | null {
-    const xValue = series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
-    const yValue = series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
+    const xValue = (series.dataSet === "static"
+        ? ensure(series.staticXAttribute)
+        : ensure(series.dynamicXAttribute)) as ListAttributeValue<string | Date | Big>;
+    const yValue = (series.dataSet === "static"
+        ? ensure(series.staticYAttribute)
+        : ensure(series.dynamicYAttribute)) as ListAttributeValue<string | Date | Big>;
 
     if (!dataSourceItems) {
         const dataSource = ensure(series.staticDataSource);
