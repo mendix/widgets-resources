@@ -10,7 +10,7 @@ export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "aspectRatio" | "percentageOfParent" | "percentageOfWidth" | "pixels";
 
-export type HeightAspectRatioEnum = "oneByOne" | "fourByThree" | "threeByTwo" | "sixteenByNine" | "TwentyOneByNine";
+export type HeightAspectRatioEnum = "sixteenByNine" | "fourByThree" | "threeByTwo" | "TwentyOneByNine" | "oneByOne";
 
 export interface VideoPlayerContainerProps {
     name: string;

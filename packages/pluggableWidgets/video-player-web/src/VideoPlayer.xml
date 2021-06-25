@@ -44,6 +44,7 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Dimensions">
+            <propertyGroup caption="Dimensions">
                 <property key="widthUnit" type="enumeration" defaultValue="percentage">
                     <caption>Width Unit</caption>
                     <description/>
@@ -70,17 +71,18 @@
                     <caption>Aspect ratio</caption>
                     <description />
                     <enumerationValues>
-                        <enumerationValue key="oneByOne">1:1</enumerationValue>
+                        <enumerationValue key="sixteenByNine">16:9</enumerationValue>
                         <enumerationValue key="fourByThree">4:3</enumerationValue>
                         <enumerationValue key="threeByTwo">3:2</enumerationValue>
-                        <enumerationValue key="sixteenByNine">16:9</enumerationValue>
                         <enumerationValue key="TwentyOneByNine">21:9</enumerationValue>
+                        <enumerationValue key="oneByOne">1:1</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="height" type="integer" defaultValue="500">
                     <caption>Height</caption>
                     <description />
                 </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
