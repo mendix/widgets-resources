@@ -58,7 +58,7 @@
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="aspectRatio">
                     <caption>Height unit</caption>
-                    <description>Warning: when "Percentage of parent" is selected, the parent container must have an absolute height, otherwise nothing will be displayed.</description>
+                    <description>Note: when "Percentage of parent" is selected, the parent container must have a height.</description>
                     <enumerationValues>
                         <enumerationValue key="aspectRatio">Aspect ratio</enumerationValue>
                         <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
