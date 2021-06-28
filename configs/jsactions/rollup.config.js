@@ -1,6 +1,6 @@
 import { red, yellow } from "colors";
 import fg from "fast-glob";
-import { existsSync, mkdirSync } from "fs";
+import { access, copyFile, mkdir } from "fs/promises";
 import { basename, dirname, join, relative } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
@@ -74,13 +74,16 @@ export default async args => {
                                 : undefined
                         ];
 
-                        destinations.filter(Boolean).forEach(destination => {
-                            mkdirSync(destination, { recursive: true });
-                            copy(join(outDir, `${fileOutput}.js`), destination, { overwrite: true });
-                            if (existsSync(join(outDir, `${fileOutput}.json`))) {
-                                copy(join(outDir, `${fileOutput}.json`), destination, { overwrite: true });
+                        await Promise.all(destinations.filter(Boolean).map(async destination => {
+                            await mkdir(destination, { recursive: true });
+                            await copyFile(join(outDir, `${fileOutput}.js`), join(destination, `${fileOutput}.js`));
+                            try {
+                                await access(join(outDir, `${fileOutput}.json`));
+                                await copyFile(join(outDir, `${fileOutput}.json`), join(destination, `${fileOutput}.json`));
+                            } catch (e) {
+                                return;
                             }
-                        });
+                        }));
                     }
                 ])
             ],
@@ -111,18 +114,20 @@ export default async args => {
     }
 
     async function copyJsModule(from, to) {
-        if (existsSync(join(to, "package.json"))) {
+        try {
+            await access(join(to, "package.json"))
             return;
+        } catch (e) {
+            return promisify(copy)(from, to, {
+                filter: [
+                    "**/*.*",
+                    "{license,LICENSE}",
+                    "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                    "!**/*.{config,setup}.*",
+                    "!**/*.{podspec,flow}"
+                ]
+            });
         }
-        return promisify(copy)(from, to, {
-            filter: [
-                "**/*.*",
-                "{license,LICENSE}",
-                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
-                "!**/*.{config,setup}.*",
-                "!**/*.{podspec,flow}"
-            ]
-        });
     }
 };
 
