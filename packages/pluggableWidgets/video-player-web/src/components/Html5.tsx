@@ -9,6 +9,7 @@ export interface Html5PlayerProps {
     muted: boolean;
     style?: any;
     aspectRatio?: boolean;
+    preview: boolean;
 }
 
 export class Html5 extends Component<Html5PlayerProps> {
@@ -20,9 +21,11 @@ export class Html5 extends Component<Html5PlayerProps> {
     render(): JSX.Element {
         return (
             <div className="widget-video-player-html5-container">
-                <div className="video-error-label-html5" ref={this.errorElement}>
-                    The video failed to load :(
-                </div>
+                {!this.props.preview ? (
+                    <div className="video-error-label-html5" ref={this.errorElement}>
+                        The video failed to load :(
+                    </div>
+                ) : null}
                 <video
                     className="widget-video-player-html5"
                     controls={this.props.showControls}
@@ -34,12 +37,14 @@ export class Html5 extends Component<Html5PlayerProps> {
                     height={!this.props.aspectRatio ? "100%" : undefined}
                     preload={this.props.poster ? "metadata" : "auto"}
                 >
-                    <source
-                        src={this.props.url}
-                        type="video/mp4"
-                        onError={this.handleOnError}
-                        onLoad={this.handleOnSuccess}
-                    />
+                    {!this.props.preview ? (
+                        <source
+                            src={this.props.url}
+                            type="video/mp4"
+                            onError={this.handleOnError}
+                            onLoad={this.handleOnSuccess}
+                        />
+                    ) : null}
                 </video>
             </div>
         );
