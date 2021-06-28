@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+-   We added specific aspect ratio configuration options.
+
 ### Changed
 
 -   We renamed the video URL and Poster URL widget properties.
