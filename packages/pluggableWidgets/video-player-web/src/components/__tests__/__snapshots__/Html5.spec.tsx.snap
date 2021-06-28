@@ -25,12 +25,9 @@ exports[`Html5 Player should renders correctly 1`] = `
       src="test"
       type="video/mp4"
     />
-    <div />
   </video>
 </div>
 `;
-
-exports[`Html5 Player should renders correctly with aspectRatio 1`] = `[Function]`;
 
 exports[`Html5 Player should renders correctly with autoplay 1`] = `
 <div
@@ -57,7 +54,6 @@ exports[`Html5 Player should renders correctly with autoplay 1`] = `
       src="test"
       type="video/mp4"
     />
-    <div />
   </video>
 </div>
 `;
@@ -87,7 +83,6 @@ exports[`Html5 Player should renders correctly with controls 1`] = `
       src="test"
       type="video/mp4"
     />
-    <div />
   </video>
 </div>
 `;
@@ -117,7 +112,6 @@ exports[`Html5 Player should renders correctly with loop 1`] = `
       src="test"
       type="video/mp4"
     />
-    <div />
   </video>
 </div>
 `;
@@ -147,7 +141,6 @@ exports[`Html5 Player should renders correctly with muted 1`] = `
       src="test"
       type="video/mp4"
     />
-    <div />
   </video>
 </div>
 `;
@@ -177,7 +170,6 @@ exports[`Html5 Player should renders correctly with poster 1`] = `
       src="test"
       type="video/mp4"
     />
-    <div />
   </video>
 </div>
 `;
