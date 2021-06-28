@@ -73,9 +73,10 @@ export async function TakePicture(
 
     function takePicture(): Promise<string | undefined> {
         return new Promise((resolve, reject) => {
+            const options = nativeVersionMajor === 2 ? getOptionsV2() : getOptionsV4();
             getPictureMethod()
                 .then(method =>
-                    method(getOptions(), (response: ImagePickerV2Response | ImagePickerResponse) => {
+                    method(options, (response: ImagePickerV2Response | ImagePickerResponse) => {
                         if (response.didCancel) {
                             return resolve(undefined);
                         }
@@ -135,8 +136,8 @@ export async function TakePicture(
                                 error: (error: Error) => reject(error)
                             });
                         },
-                        (error: Error) => {
-                            NativeModules.NativeFsModule.remove(uri);
+                        async (error: Error) => {
+                            await NativeModules.NativeFsModule.remove(uri);
 
                             reject(error);
                         }
@@ -189,57 +190,54 @@ export async function TakePicture(
         // https://github.com/zoontek/react-native-permissions#android-flow
         const statusResult = await RNPermissions.check(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
 
-        if (statusResult === RNPermissions.RESULTS.UNAVAILABLE) {
-            throw new Error("The camera is unavailable.");
-        }
-
-        if (statusResult === RNPermissions.RESULTS.BLOCKED) {
-            throw new Error("Camera access for this app is currently blocked.");
-        }
-
-        if (statusResult === RNPermissions.RESULTS.DENIED) {
-            requestResult = await requestAndroidPermission();
-
-            if (requestResult === RNPermissions.RESULTS.BLOCKED) {
+        switch (statusResult) {
+            case RNPermissions.RESULTS.UNAVAILABLE:
+                throw new Error("The camera is unavailable.");
+            case RNPermissions.RESULTS.BLOCKED:
                 throw new Error("Camera access for this app is currently blocked.");
-            }
+            case RNPermissions.RESULTS.DENIED:
+                requestResult = await requestAndroidPermission();
+                if (requestResult === RNPermissions.RESULTS.BLOCKED) {
+                    throw new Error("Camera access for this app is currently blocked.");
+                }
+                break;
         }
     }
 
-    function getOptions(): ImagePickerV2Options | CameraOptions | ImageLibraryOptions {
+    function getOptionsV2(): ImagePickerV2Options {
         const { maxWidth, maxHeight } = getPictureQuality();
+        const [language] = getLocales().map(local => local.languageCode);
+        const isDutch = language === "nl";
 
-        if (nativeVersionMajor === 2) {
-            const [language] = getLocales().map(local => local.languageCode);
-            const isDutch = language === "nl";
+        return {
+            mediaType: "photo" as const,
+            maxWidth,
+            maxHeight,
+            noData: true,
+            title: isDutch ? "Foto toevoegen" : "Select a photo",
+            cancelButtonTitle: isDutch ? "Annuleren" : "Cancel",
+            takePhotoButtonTitle: isDutch ? "Foto maken" : "Take photo",
+            chooseFromLibraryButtonTitle: isDutch ? "Kies uit bibliotheek" : "Choose from library",
+            permissionDenied: {
+                title: isDutch
+                    ? "Deze app heeft geen toegang tot uw camera of foto bibliotheek"
+                    : "This app does not have access to your camera or photo library",
+                text: isDutch
+                    ? "Ga naar Instellingen > Privacy om toegang tot uw camera en bestanden te verlenen."
+                    : "To enable access, tap Settings > Privacy and turn on Camera and Photos/Storage.",
+                reTryTitle: isDutch ? "Instellingen" : "Settings",
+                okTitle: isDutch ? "Annuleren" : "Cancel"
+            },
+            storageOptions: {
+                skipBackup: true,
+                cameraRoll: false,
+                privateDirectory: true
+            }
+        };
+    }
 
-            return {
-                mediaType: "photo" as const,
-                maxWidth,
-                maxHeight,
-                noData: true,
-                title: isDutch ? "Foto toevoegen" : "Select a photo",
-                cancelButtonTitle: isDutch ? "Annuleren" : "Cancel",
-                takePhotoButtonTitle: isDutch ? "Foto maken" : "Take photo",
-                chooseFromLibraryButtonTitle: isDutch ? "Kies uit bibliotheek" : "Choose from library",
-                permissionDenied: {
-                    title: isDutch
-                        ? "Deze app heeft geen toegang tot uw camera of foto bibliotheek"
-                        : "This app does not have access to your camera or photo library",
-                    text: isDutch
-                        ? "Ga naar Instellingen > Privacy om toegang tot uw camera en bestanden te verlenen."
-                        : "To enable access, tap Settings > Privacy and turn on Camera and Photos/Storage.",
-                    reTryTitle: isDutch ? "Instellingen" : "Settings",
-                    okTitle: isDutch ? "Annuleren" : "Cancel"
-                },
-                storageOptions: {
-                    skipBackup: true,
-                    cameraRoll: false,
-                    privateDirectory: true
-                }
-            };
-        }
-
+    function getOptionsV4(): CameraOptions | ImageLibraryOptions {
+        const { maxWidth, maxHeight } = getPictureQuality();
         return {
             mediaType: "photo" as const,
             maxWidth,
