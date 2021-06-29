@@ -48,7 +48,7 @@ jobs:
             - name: "Building package in production mode"
               run: npm run release -- ${{ steps.variables.outputs.arg }}
             - name: "Executing E2E tests"
-              if: steps.files.outputs.not_atlas_native_files != ''
+              if: github.event_name != 'pull_request' || steps.files.outputs.not_atlas_native_files != ''
               run: npm run test:e2e -- ${{ steps.variables.outputs.arg }}
             - name: "Fixing files permissions"
               if: failure()
