@@ -3,18 +3,9 @@ name: Run automated end-to-end tests
 on:
     push:
         branches: [master]
-        paths-ignore:
-            - "**/*.md"
-            - "packages/theming/atlas/src/theme/native/**"
-            - "packages/theming/atlas/src/themesource/**/native/**"
-
 
     pull_request:
         branches: [master]
-        paths-ignore:
-            - "**/*.md"
-            - "packages/theming/atlas/src/**/native/**"
-            - "packages/theming/atlas/src/themesource/**/native/**"
 
 jobs:
     test:
@@ -29,6 +20,8 @@ jobs:
               with:
                 global_files: |
                   !{packages/**/*,configs/e2e/*.json}
+                not_atlas_native_files: |
+                  !packages/theming/atlas/src/**/native/**
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
@@ -55,6 +48,7 @@ jobs:
             - name: "Building package in production mode"
               run: npm run release -- ${{ steps.variables.outputs.arg }}
             - name: "Executing E2E tests"
+              if: steps.files.outputs.not_atlas_native_files != ''
               run: npm run test:e2e -- ${{ steps.variables.outputs.arg }}
             - name: "Fixing files permissions"
               if: failure()
