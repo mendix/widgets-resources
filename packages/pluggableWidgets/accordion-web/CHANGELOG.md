@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [1.0.0] - 2021-06-29
 ### Added
 -   We added configuration of groups with composable content for header & body.
--   We added conditionally visibility for groups based on a Boolean expression.
+-   We added conditional visibility for groups based on a Boolean expression.
 -   We added support for dynamic classes on groups to apply brand styles for instance.
 -   We provided controls to make accordion groups collapsible.
 -   We provided controls to influence the collapse behavior by allowing one or more groups to be expanded at the same time.
