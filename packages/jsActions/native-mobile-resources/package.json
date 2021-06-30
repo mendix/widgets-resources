@@ -23,7 +23,7 @@
     "react-native-localize": "1.3.4",
     "react-native-sound": "0.11.0",
     "react-native-touch-id": "4.4.1",
-    "react-native-permissions": "^3.0.4"
+    "react-native-permissions": "3.0.4"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
