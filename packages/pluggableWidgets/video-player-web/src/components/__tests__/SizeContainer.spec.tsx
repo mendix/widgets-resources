@@ -28,16 +28,85 @@ describe("Size container", () => {
         expect(sizeContainer).toMatchSnapshot();
     });
 
+    it("renders correctly with pixel width & height unit percentage of width", () => {
+        const sizeContainer = create(
+            <SizeContainer {...defaultProps} widthUnit="pixels" heightUnit="percentageOfWidth" />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
     it("renders correctly with height unit percentage of parent", () => {
         const sizeContainer = create(<SizeContainer {...defaultProps} heightUnit="percentageOfParent" />).toJSON();
 
         expect(sizeContainer).toMatchSnapshot();
     });
 
-    it("renders correctly with height unit aspect ratio", () => {
+    it("renders correctly with height unit aspect ratio 1:1", () => {
+        const sizeContainer = create(
+            <SizeContainer {...defaultProps} heightUnit="aspectRatio" height={undefined} heightAspectRatio="oneByOne" />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
+    it("renders correctly with height unit aspect ratio 4:3", () => {
         const sizeContainer = create(
             <SizeContainer
                 {...defaultProps}
+                heightUnit="aspectRatio"
+                height={undefined}
+                heightAspectRatio="fourByThree"
+            />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
+    it("renders correctly with height unit aspect ratio 3:2", () => {
+        const sizeContainer = create(
+            <SizeContainer
+                {...defaultProps}
+                heightUnit="aspectRatio"
+                height={undefined}
+                heightAspectRatio="threeByTwo"
+            />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
+    it("renders correctly with height unit aspect ratio 16:9", () => {
+        const sizeContainer = create(
+            <SizeContainer
+                {...defaultProps}
+                heightUnit="aspectRatio"
+                height={undefined}
+                heightAspectRatio="sixteenByNine"
+            />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
+    it("renders correctly with height unit aspect ratio 21:9", () => {
+        const sizeContainer = create(
+            <SizeContainer
+                {...defaultProps}
+                heightUnit="aspectRatio"
+                height={undefined}
+                heightAspectRatio="TwentyOneByNine"
+            />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
+    it("renders correctly with pixel width & height unit aspect ratio", () => {
+        const sizeContainer = create(
+            <SizeContainer
+                {...defaultProps}
+                widthUnit="pixels"
                 heightUnit="aspectRatio"
                 height={undefined}
                 heightAspectRatio="TwentyOneByNine"

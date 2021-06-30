@@ -1,6 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Size container renders correctly with height unit aspect ratio 1`] = `
+exports[`Size container renders correctly with height unit aspect ratio 1:1 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": "50%",
+      "width": "50%",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Size container renders correctly with height unit aspect ratio 3:2 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": "33.33333333333333%",
+      "width": "50%",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Size container renders correctly with height unit aspect ratio 4:3 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": "37.5%",
+      "width": "50%",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Size container renders correctly with height unit aspect ratio 16:9 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": "28.125%",
+      "width": "50%",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Size container renders correctly with height unit aspect ratio 21:9 1`] = `
 <div
   className="class-name size-box"
   style={
@@ -75,6 +163,50 @@ exports[`Size container renders correctly with height unit pixels 1`] = `
       "backgroundColor": "aqua",
       "paddingTop": 25,
       "width": "50%",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Size container renders correctly with pixel width & height unit aspect ratio 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": 21.428571428571427,
+      "width": "50px",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Size container renders correctly with pixel width & height unit percentage of width 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": 12.5,
+      "width": "50px",
     }
   }
   tabIndex={1}
