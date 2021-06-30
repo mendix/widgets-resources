@@ -13,6 +13,10 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "marketplace": {
+    "studioProMinimumVersion": "8.3.1",
+    "marketplaceId": 113922
+  },
     "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "fieldset-web"
@@ -28,7 +32,8 @@
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
     "test:e2e:dev": "cross-env DEBUG=true node ../../node_modules/.bin/wdio ../../configs/e2e/wdio.conf.js",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "releaseMarketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0"

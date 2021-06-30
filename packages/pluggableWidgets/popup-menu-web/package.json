@@ -12,6 +12,10 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "marketplace": {
+    "studioProMinimumVersion": "9.0.5",
+    "marketplaceId": 115826
+  },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "popupmenu-web"
@@ -27,7 +31,8 @@
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "pluggable-widgets-tools release:web"
+    "release": "pluggable-widgets-tools release:web",
+    "releaseMarketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
