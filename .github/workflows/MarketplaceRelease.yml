@@ -1,0 +1,30 @@
+name: Marketplace Release
+
+on:
+    push:
+        tags:
+            - "*-web-v*"
+
+jobs:
+    publish:
+          name: "Marketplace Release"
+          runs-on: ubuntu-latest
+
+          steps:
+              - name: "Checking-out code"
+                uses: actions/checkout@v2
+                with:
+                    submodules: false
+              - name: "Defining Environment Variables"
+                id: variables
+                run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
+              - name: "Defining lerna scope"
+                uses: jungwinter/split@v1
+                id: scope
+                with:
+                    msg: ${{ steps.variables.outputs.tag }}
+                    separator: "-v"
+              - name: "Installing dependencies"
+                run: npm install
+              - name: "Check changes and publish widgets"
+                run: TAG=${{ steps.variables.outputs.tag }} npm run releaseMarketplace -- --scope=${{ steps.scope.outputs._1 }}
