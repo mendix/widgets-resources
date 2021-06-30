@@ -40,7 +40,7 @@ export async function TakePictureAdvanced(
     pictureQuality?: PictureQuality,
     maximumWidth?: Big,
     maximumHeight?: Big
-): Promise<boolean> {
+): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
     if (!picture) {
