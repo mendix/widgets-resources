@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Html5 Player should render correctly in preview mode 1`] = `
+<div
+  className="widget-video-player-html5-container"
+>
+  <img
+    className="widget-video-player-preview-play-button"
+    src={[Function]}
+  />
+  <video
+    autoPlay={false}
+    className="widget-video-player-html5"
+    controls={false}
+    height="100%"
+    loop={false}
+    muted={false}
+    poster="test"
+    preload="metadata"
+  />
+</div>
+`;
+
 exports[`Html5 Player should renders correctly 1`] = `
 <div
   className="widget-video-player-html5-container"
