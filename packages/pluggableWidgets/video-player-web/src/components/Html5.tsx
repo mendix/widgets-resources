@@ -1,5 +1,7 @@
 import { Component, createElement, createRef } from "react";
 
+import playButton from "../assets/PlayButton.svg";
+
 export interface Html5PlayerProps {
     url: string;
     poster?: string;
@@ -21,11 +23,13 @@ export class Html5 extends Component<Html5PlayerProps> {
     render(): JSX.Element {
         return (
             <div className="widget-video-player-html5-container">
-                {!this.props.preview ? (
+                {this.props.preview ? (
+                    <img className="widget-video-player-preview-play-button" src={playButton} />
+                ) : (
                     <div className="video-error-label-html5" ref={this.errorElement}>
                         The video failed to load :(
                     </div>
-                ) : null}
+                )}
                 <video
                     className="widget-video-player-html5"
                     controls={this.props.showControls}
