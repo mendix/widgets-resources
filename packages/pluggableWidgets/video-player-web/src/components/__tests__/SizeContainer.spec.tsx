@@ -11,7 +11,7 @@ describe("Size container", () => {
         style: { backgroundColor: "aqua" },
         tabIndex: 1,
         widthUnit: "percentage",
-        width: 50,
+        width: 100,
         heightUnit: "pixels",
         height: 25
     };

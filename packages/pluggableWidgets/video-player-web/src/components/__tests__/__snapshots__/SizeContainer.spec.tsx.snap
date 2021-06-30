@@ -6,8 +6,8 @@ exports[`Size container renders correctly with height unit aspect ratio 1:1 1`] 
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": "50%",
-      "width": "50%",
+      "paddingTop": "100%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -28,8 +28,8 @@ exports[`Size container renders correctly with height unit aspect ratio 3:2 1`] 
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": "33.33333333333333%",
-      "width": "50%",
+      "paddingTop": "66.66666666666666%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -50,8 +50,8 @@ exports[`Size container renders correctly with height unit aspect ratio 4:3 1`] 
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": "37.5%",
-      "width": "50%",
+      "paddingTop": "75%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -72,8 +72,8 @@ exports[`Size container renders correctly with height unit aspect ratio 16:9 1`]
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": "28.125%",
-      "width": "50%",
+      "paddingTop": "56.25%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -94,8 +94,8 @@ exports[`Size container renders correctly with height unit aspect ratio 21:9 1`]
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": "21.428571428571427%",
-      "width": "50%",
+      "paddingTop": "42.857142857142854%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -118,7 +118,7 @@ exports[`Size container renders correctly with height unit percentage of parent 
       "backgroundColor": "aqua",
       "height": "25%",
       "paddingTop": 0,
-      "width": "50%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -139,8 +139,8 @@ exports[`Size container renders correctly with height unit percentage of width 1
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": "12.5%",
-      "width": "50%",
+      "paddingTop": "25%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -162,7 +162,7 @@ exports[`Size container renders correctly with height unit pixels 1`] = `
     Object {
       "backgroundColor": "aqua",
       "paddingTop": 25,
-      "width": "50%",
+      "width": "100%",
     }
   }
   tabIndex={1}
@@ -183,8 +183,8 @@ exports[`Size container renders correctly with pixel width & height unit aspect 
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": 21.428571428571427,
-      "width": "50px",
+      "paddingTop": 42.857142857142854,
+      "width": "100px",
     }
   }
   tabIndex={1}
@@ -205,8 +205,8 @@ exports[`Size container renders correctly with pixel width & height unit percent
   style={
     Object {
       "backgroundColor": "aqua",
-      "paddingTop": 12.5,
-      "width": "50px",
+      "paddingTop": 25,
+      "width": "100px",
     }
   }
   tabIndex={1}
