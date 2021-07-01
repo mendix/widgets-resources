@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## 1.2.0 - Unreleased
+## 1.2.1 - 2021-07-01
+
+### Changed
+- We fixed an issue with data source default sorting wasn't being applied correctly.
+
+## 1.2.0 - 2021-06-29
 
 ### Added
 - We implemented lazy filtering and sorting. Now Data Grid v2 will not load all the data if you have sorting or filtering enabled.

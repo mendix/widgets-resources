@@ -67,7 +67,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             [props.columns[sortParameters.columnIndex].attribute!.id, sortParameters.desc ? "desc" : "asc"]
         ]);
     } else {
-        props.datasource.setSortOrder([]);
+        props.datasource.setSortOrder(undefined);
     }
 
     const columns = useMemo(() => transformColumnProps(props.columns), [props.columns]);
