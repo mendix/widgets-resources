@@ -28,19 +28,20 @@ export interface AccordionIconStyle extends ViewStyle {
 
 export const defaultAccordionStyle: AccordionStyle = {
     container: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: "#FFF",
         borderColor: "#CED0D3"
     },
     group: {
         container: {
-            flex: 1,
+            flexGrow: 1,
             borderWidth: 1,
             borderColor: "#CED0D3"
         },
         header: {
             container: {
-                flex: 1,
+                flexGrow: 1,
+                borderColor: "#CED0D3",
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",

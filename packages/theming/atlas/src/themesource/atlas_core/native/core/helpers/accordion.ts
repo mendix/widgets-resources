@@ -15,10 +15,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
     Default Class For Mendix Accordion Widget
 ========================================================================== */
 export const accordionPrimary: AccordionType = {
-    container: {
-        borderColor: brand.primary,
-        borderBottomWidth: 0
-    },
+    container: {},
     group: {
         container: {
             borderWidth: 1,
@@ -26,7 +23,9 @@ export const accordionPrimary: AccordionType = {
         },
         header: {
             container: {
-                backgroundColor: brand.primary
+                backgroundColor: brand.primary,
+                borderColor: brand.primary,
+                borderBottomWidth: 0
             },
             heading1: {
                 color: fontDefaults.colorTitleLight
@@ -54,10 +53,7 @@ export const accordionPrimary: AccordionType = {
 };
 
 export const accordionSecondary: AccordionType = {
-    container: {
-        borderColor: "#CED0D3",
-        borderBottomWidth: 0
-    },
+    container: {},
     group: {
         container: {
             borderWidth: 1,
@@ -65,7 +61,9 @@ export const accordionSecondary: AccordionType = {
         },
         header: {
             container: {
-                backgroundColor: background.primary
+                backgroundColor: background.primary,
+                borderColor: "#CED0D3",
+                borderBottomWidth: 0
             },
             heading1: {
                 color: brand.primary
@@ -93,46 +91,40 @@ export const accordionSecondary: AccordionType = {
 };
 
 export const accordionSuccess: AccordionType = merge(accordionPrimary, {
-    container: {
-        borderColor: brand.success
-    },
     group: {
         container: {
             borderColor: brand.success
         },
         header: {
             container: {
-                backgroundColor: brand.success
+                backgroundColor: brand.success,
+                borderColor: brand.success
             }
         }
     }
 });
 export const accordionWarning: AccordionType = merge(accordionPrimary, {
-    container: {
-        borderColor: brand.warning
-    },
     group: {
         container: {
             borderColor: brand.warning
         },
         header: {
             container: {
-                backgroundColor: brand.warning
+                backgroundColor: brand.warning,
+                borderColor: brand.warning
             }
         }
     }
 });
 export const accordionDanger: AccordionType = merge(accordionPrimary, {
-    container: {
-        borderColor: brand.danger
-    },
     group: {
         container: {
             borderColor: brand.danger
         },
         header: {
             container: {
-                backgroundColor: brand.danger
+                backgroundColor: brand.danger,
+                borderColor: brand.danger
             }
         }
     }
@@ -140,24 +132,24 @@ export const accordionDanger: AccordionType = merge(accordionPrimary, {
 
 export const accordionLined: AccordionType = {
     container: {
-        borderBottomWidth: 1
+        borderTopWidth: 1
     },
     group: {
         container: {
             borderWidth: 0,
-            borderTopWidth: 1
+            borderBottomWidth: 1
         }
     }
 };
 export const accordionDividerNone: AccordionType = {
     container: {
         borderWidth: 0,
-        borderBottomWidth: 0
+        borderTopWidth: 0
     },
     group: {
         container: {
             borderWidth: 0,
-            borderTopWidth: 0
+            borderBottomWidth: 0
         }
     }
 };

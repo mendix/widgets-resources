@@ -16,21 +16,22 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_accordion_Accordion: AccordionType = {
     container: {
         // All ViewStyle properties are allowed
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: accordion.container.backgroundColor,
         borderColor: accordion.container.borderColor
     },
     group: {
         container: {
             // All ViewStyle properties are allowed
-            flex: 1,
+            flexGrow: 1,
             borderWidth: 1,
             borderColor: accordion.container.borderColor
         },
         header: {
             container: {
                 // All ViewStyle properties are allowed
-                flex: 1,
+                flexGrow: 1,
+                borderColor: accordion.container.borderColor,
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
