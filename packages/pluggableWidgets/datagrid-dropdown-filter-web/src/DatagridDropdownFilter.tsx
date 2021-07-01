@@ -67,8 +67,8 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "Enum"
-        ? "The attribute type being used for Data grid drop-down filter is not 'Enumeration'"
+    return type && !type.match(/Enum|Boolean/)
+        ? "The attribute type being used for Data grid drop-down filter is not 'Boolean or Enumeration'"
         : null;
 }
 
@@ -77,7 +77,9 @@ function validateValues(listAttribute: ListAttributeValue, options: FilterOption
         return null;
     }
 
-    return options.some(filterOption => !listAttribute.universe?.includes(filterOption.value))
+    return options.some(
+        filterOption => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
+    )
         ? "There are invalid values available in the Data grid drop-down filter"
         : null;
 }
@@ -87,16 +89,27 @@ function getFilterCondition(listAttribute: ListAttributeValue, values: FilterOpt
         return undefined;
     }
 
-    const filterAttribute = attribute(listAttribute.id);
+    const { id, type } = listAttribute;
+    const filterAttribute = attribute(id);
 
     if (values.length > 1) {
-        return or(...values.map(filter => equals(filterAttribute, literal(filter.value))));
+        return or(...values.map(filter => equals(filterAttribute, literal(checkValue(filter.value, type)))));
     }
 
     const [filterValue] = values;
     if (filterValue.value) {
-        return equals(filterAttribute, literal(filterValue.value));
+        return equals(filterAttribute, literal(checkValue(filterValue.value, type)));
     }
 
     return undefined;
+}
+
+function checkValue(value: string, type: string): boolean | string {
+    if (type === "Boolean") {
+        if (value !== "true" && value !== "false") {
+            return value;
+        }
+        return value === "true";
+    }
+    return value;
 }
