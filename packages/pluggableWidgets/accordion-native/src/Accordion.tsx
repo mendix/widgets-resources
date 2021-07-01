@@ -83,6 +83,7 @@ export function Accordion(props: Props): ReactElement | null {
                         isExpanded={expandedGroups.includes(index)}
                         onPressGroupHeader={onPressGroupHeader}
                         visible={group.visible}
+                        visible={group.visible.status === ValueStatus.Available && group.visible.value}
                         style={styles.group}
                     />
                 )

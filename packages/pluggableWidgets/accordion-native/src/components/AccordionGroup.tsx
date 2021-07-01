@@ -16,7 +16,7 @@ export interface AccordionGroupProps {
     group: GroupsType;
     isExpanded: boolean;
     onPressGroupHeader: (group: GroupsType, index: number) => void;
-    visible: DynamicValue<boolean>;
+    visible: boolean;
     style: AccordionGroupStyle;
 }
 
@@ -32,31 +32,31 @@ export function AccordionGroup({
     visible,
     style
 }: AccordionGroupProps): ReactElement | null {
-    return (
-        visible && (
-            <View style={style.container}>
-                <Pressable
-                    style={[style.header.container, icon === "left" && { flexDirection: "row-reverse" }]}
-                    onPress={collapsible ? () => onPressGroupHeader(group, index) : null}
-                >
-                    {group.headerRenderMode === "text" ? (
-                        <Text style={style.header[group.headerTextRenderMode]}>{group.headerText.value}</Text>
-                    ) : (
-                        group.headerContent
-                    )}
-                    {icon !== "no" && collapsible && (
-                        <GroupIcon
-                            isExpanded={isExpanded}
-                            iconCollapsed={iconCollapsed}
-                            iconExpanded={iconExpanded}
-                            style={style.header.icon}
-                        />
-                    )}
-                </Pressable>
-                <AnimatedCollapsibleView isExpanded={isExpanded} style={style.content}>
-                    {group.content}
-                </AnimatedCollapsibleView>
-            </View>
-        )
-    );
+    return visible ? (
+        <View style={style.container}>
+            <Pressable
+                style={[style.header.container, icon === "left" && { flexDirection: "row-reverse" }]}
+                onPress={collapsible ? () => onPressGroupHeader(group, index) : null}
+            >
+                {group.headerRenderMode === "text" ? (
+                    <Text style={[style.header[group.headerTextRenderMode], { flex: 1 }]}>
+                        {group.headerText.value}
+                    </Text>
+                ) : (
+                    group.headerContent
+                )}
+                {icon !== "no" && collapsible && (
+                    <GroupIcon
+                        isExpanded={isExpanded}
+                        iconCollapsed={iconCollapsed}
+                        iconExpanded={iconExpanded}
+                        style={style.header.icon}
+                    />
+                )}
+            </Pressable>
+            <AnimatedCollapsibleView isExpanded={isExpanded} style={style.content}>
+                {group.content}
+            </AnimatedCollapsibleView>
+        </View>
+    ) : null;
 }
