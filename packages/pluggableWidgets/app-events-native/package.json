@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@mendix/piw-native-utils-internal": "^1.0.0",
-    "@react-native-community/netinfo": "5.9.7"
+    "@react-native-community/netinfo": "5.9.10"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
