@@ -49,7 +49,8 @@ export function GroupIcon({ iconCollapsed, iconExpanded, isExpanded, style }: Gr
             style={[
                 iconStyles,
                 {
-                    transform: [{ rotate: animatedRotation }]
+                    transform: [{ rotate: animatedRotation }],
+                    marginRight: isExpanded ? undefined : -2 // vertically align expanded and collapsed icon
                 }
             ]}
         >
