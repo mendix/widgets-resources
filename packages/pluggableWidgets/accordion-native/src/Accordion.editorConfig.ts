@@ -1,4 +1,4 @@
-import { hidePropertyIn, Properties, Problem } from "@mendix/piw-utils-internal";
+import { changePropertyIn, hidePropertyIn, Properties, Problem } from "@mendix/piw-utils-internal";
 
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 
@@ -28,6 +28,24 @@ export function getProperties(values: AccordionPreviewProps, defaultProperties: 
         hidePropertyIn(defaultProperties, values, "iconExpanded");
         hidePropertyIn(defaultProperties, values, "iconCollapsed");
     }
+
+    changePropertyIn(
+        defaultProperties,
+        values,
+        prop => {
+            prop.objectHeaders = ["Header type", "Render mode", "Text", "Visible"];
+            prop.objects?.forEach((object, index) => {
+                const column = values.groups[index];
+                object.captions = [
+                    column.headerRenderMode,
+                    column.headerRenderMode === "text" ? column.headerTextRenderMode : "",
+                    column.headerRenderMode === "text" ? column.headerText : "",
+                    column.visible
+                ];
+            });
+        },
+        "groups"
+    );
 
     return defaultProperties;
 }
