@@ -18,7 +18,7 @@
                     <properties>
                         <propertyGroup caption="General">
                             <property key="headerRenderMode" type="enumeration" defaultValue="text">
-                                <caption>Header</caption>
+                                <caption>Header type</caption>
                                 <description/>
                                 <enumerationValues>
                                     <enumerationValue key="text">Text</enumerationValue>
@@ -59,11 +59,11 @@
                                 <returnType type="Boolean"/>
                             </property>
                             <property key="groupCollapsed" type="enumeration" defaultValue="groupStartExpanded">
-                                <caption>Collapsed</caption>
+                                <caption>Start as</caption>
                                 <description/>
                                 <enumerationValues>
-                                    <enumerationValue key="groupStartExpanded">Start expanded</enumerationValue>
-                                    <enumerationValue key="groupStartCollapsed">Start collapsed</enumerationValue>
+                                    <enumerationValue key="groupStartExpanded">Expanded</enumerationValue>
+                                    <enumerationValue key="groupStartCollapsed">Collapsed</enumerationValue>
                                     <enumerationValue key="groupStartDynamic">Dynamic</enumerationValue>
                                 </enumerationValues>
                             </property>
@@ -95,11 +95,11 @@
                     <description/>
                 </property>
                 <property key="collapseBehavior" type="enumeration" defaultValue="singleExpanded">
-                    <caption>Collapse behavior</caption>
-                    <description/>
+                    <caption>Expanded groups</caption>
+                    <description>Allow a single group or multiple groups to be expanded at the same time</description>
                     <enumerationValues>
-                        <enumerationValue key="singleExpanded">Only one group can be expanded</enumerationValue>
-                        <enumerationValue key="multipleExpanded">Multiple groups can be expanded</enumerationValue>
+                        <enumerationValue key="singleExpanded">Single</enumerationValue>
+                        <enumerationValue key="multipleExpanded">Multiple</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
