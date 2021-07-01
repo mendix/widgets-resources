@@ -19,7 +19,11 @@ export function Accordion(props: Props): ReactElement | null {
         initialRender.current = true;
         const initialExpandedGroups = props.groups.reduce(
             (acc, group, index): number[] =>
-                !props.collapsible || group.groupCollapsed === "groupStartExpanded" ? [...acc, index] : acc,
+                !props.collapsible || group.groupCollapsed === "groupStartExpanded"
+                    ? props.collapseBehavior === "singleExpanded"
+                        ? [index]
+                        : [...acc, index]
+                    : acc,
             []
         );
         setExpandedGroups(initialExpandedGroups);
@@ -43,7 +47,7 @@ export function Accordion(props: Props): ReactElement | null {
     };
 
     const checkPropertyValues = (group: GroupsType, i: number): void => {
-        if (group.groupCollapsedAttribute?.status === ValueStatus.Available && props.collapsible) {
+        if (group.groupCollapsedAttribute?.status === ValueStatus.Available) {
             if (group.groupCollapsedAttribute?.value === false) {
                 expandGroup(i);
             } else if (group.groupCollapsedAttribute?.value) {
@@ -53,8 +57,7 @@ export function Accordion(props: Props): ReactElement | null {
 
         if (
             group.groupCollapsedDynamic?.status === ValueStatus.Available &&
-            group.groupCollapsed === "groupStartDynamic" &&
-            props.collapsible
+            group.groupCollapsed === "groupStartDynamic"
         ) {
             if (group.groupCollapsedDynamic?.value === false) {
                 expandGroup(i);
@@ -82,7 +85,6 @@ export function Accordion(props: Props): ReactElement | null {
                         group={group}
                         isExpanded={expandedGroups.includes(index)}
                         onPressGroupHeader={onPressGroupHeader}
-                        visible={group.visible}
                         visible={group.visible.status === ValueStatus.Available && group.visible.value}
                         style={styles.group}
                     />
