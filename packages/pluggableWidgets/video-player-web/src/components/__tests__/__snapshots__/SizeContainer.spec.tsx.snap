@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Size container renders correctly with height unit aspect ratio & any width 1`] = `
+<div
+  className="class-name size-box"
+  style={
+    Object {
+      "backgroundColor": "aqua",
+      "paddingTop": "29.142857142857142%",
+      "width": "68%",
+    }
+  }
+  tabIndex={1}
+>
+  <div
+    className="size-box-inner class-name-inner"
+  >
+    <span>
+      Child
+    </span>
+  </div>
+</div>
+`;
+
 exports[`Size container renders correctly with height unit aspect ratio 1:1 1`] = `
 <div
   className="class-name size-box"

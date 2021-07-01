@@ -102,6 +102,20 @@ describe("Size container", () => {
         expect(sizeContainer).toMatchSnapshot();
     });
 
+    it("renders correctly with height unit aspect ratio & any width", () => {
+        const sizeContainer = create(
+            <SizeContainer
+                {...defaultProps}
+                width={68}
+                heightUnit="aspectRatio"
+                height={undefined}
+                heightAspectRatio="TwentyOneByNine"
+            />
+        ).toJSON();
+
+        expect(sizeContainer).toMatchSnapshot();
+    });
+
     it("renders correctly with pixel width & height unit aspect ratio", () => {
         const sizeContainer = create(
             <SizeContainer
