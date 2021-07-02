@@ -15,7 +15,7 @@
     "dev": "pluggable-widgets-tools start:ts",
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
@@ -26,6 +26,7 @@
     "@mendix/piw-utils-internal": "^1.0.0"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "eslint": "^7.20.0"
   }
 }

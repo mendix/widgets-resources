@@ -15,7 +15,7 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
@@ -25,7 +25,8 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "@types/classnames": "^2.2.6"
+    "@types/classnames": "^2.2.6",
+    "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",

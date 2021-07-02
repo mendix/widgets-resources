@@ -5,13 +5,16 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start": "..\"/../../node_modules/.bin/tsc\" --watch",
-    "prebuild": "..\"/../../node_modules/.bin/rimraf\" ./dist",
-    "build": "..\"/../../node_modules/.bin/tsc\"",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "start": "tsc --watch",
+    "prebuild": "rimraf ./dist",
+    "build": "tsc",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "prepare": "npm run build"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "eslint": "^7.20.0",
+    "typescript": "^4.0.5",
+    "rimraf": "^2.7.1"
   }
 }

@@ -13,9 +13,8 @@
     "start": "pluggable-widgets-tools start:native",
     "build": "pluggable-widgets-tools build:native",
     "release": "pluggable-widgets-tools release:native",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "version": "npm run release",
-    "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "version": "npm run release"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
@@ -23,6 +22,7 @@
     "@react-native-firebase/messaging": "10.5.1"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "eslint": "^7.20.0"
   }
 }

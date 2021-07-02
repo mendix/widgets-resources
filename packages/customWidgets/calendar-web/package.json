@@ -14,11 +14,11 @@
     "dev": "utils-react-widgets dev",
     "format": "prettier --config \"../../prettier.config.js\" --write \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "test": "npm run test:unit",
-    "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "test:unit": "jest --config ../../../scripts/test/jest.web.config.js",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
     "release": "utils-react-widgets release"
@@ -28,13 +28,15 @@
     "developmentPort": 3000
   },
   "devDependencies": {
+    "@mendix/custom-widgets-utils-internal": "0.0.1",
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
     "@types/date-arithmetic": "^3.1.2",
     "@types/react-big-calendar": "0.20.20",
     "@types/react-dnd": "^3.0.2",
     "@types/react-dnd-html5-backend": "^3.0.2",
-    "@mendix/custom-widgets-utils-internal": "0.0.1"
+    "eslint": "^7.20.0",
+    "jest": "^26.6.1"
   },
   "dependencies": {
     "classnames": "^2.2.6",

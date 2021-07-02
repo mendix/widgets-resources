@@ -13,11 +13,11 @@
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
     "test": "npm run test:unit",
-    "test:unit": "..\"/../../node_modules/.bin/jest\" --config ../../../scripts/test/jest.web.config.js",
+    "test:unit": "jest --config ../../../scripts/test/jest.web.config.js",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 8",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
     "release": "utils-react-widgets release"
@@ -31,7 +31,9 @@
     "@types/classnames": "^2.2.6",
     "@types/faker": "^4.1.0",
     "@mendix/custom-widgets-utils-internal": "0.0.1",
-    "faker": "^4.1.0"
+    "eslint": "^7.20.0",
+    "faker": "^4.1.0",
+    "jest": "^26.6.1"
   },
   "dependencies": {
     "classnames": "^2.2.6"

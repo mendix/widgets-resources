@@ -19,7 +19,7 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
@@ -28,7 +28,8 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=9.0.0",
-    "@testing-library/react-hooks": "^3.4.2"
+    "@testing-library/react-hooks": "^3.4.2",
+    "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
