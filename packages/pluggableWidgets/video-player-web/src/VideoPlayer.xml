@@ -69,7 +69,7 @@
                 </property>
                 <property key="heightAspectRatio" type="enumeration" defaultValue="sixteenByNine">
                     <caption>Aspect ratio</caption>
-                    <description>16:9 (Widescreen, HD Video), 4:3 (Classic TV, Standard monitor) , 3:2 (Classic film), 21:9 (Cinemascope), 1:1 (Square, Social media).</description>
+                    <description>16:9 (Widescreen, HD Video), 4:3 (Classic TV, Standard monitor), 3:2 (Classic film), 21:9 (Cinemascope), 1:1 (Square, Social media)</description>
                     <enumerationValues>
                         <enumerationValue key="sixteenByNine">16:9</enumerationValue>
                         <enumerationValue key="fourByThree">4:3</enumerationValue>
