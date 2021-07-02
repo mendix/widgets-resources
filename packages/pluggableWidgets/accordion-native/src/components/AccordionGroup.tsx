@@ -45,14 +45,14 @@ export function AccordionGroup({
                 ) : (
                     group.headerContent
                 )}
-                {icon !== "no" && collapsible && (
+                {icon !== "no" && collapsible ? (
                     <GroupIcon
                         isExpanded={isExpanded}
                         iconCollapsed={iconCollapsed}
                         iconExpanded={iconExpanded}
                         style={style.header.icon}
                     />
-                )}
+                ) : null}
             </Pressable>
             <AnimatedCollapsibleView isExpanded={isExpanded} style={style.content}>
                 {group.content}
