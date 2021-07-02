@@ -19,7 +19,7 @@
     "dev": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools start:web",
     "build": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/Maps.mpk",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
@@ -34,8 +34,9 @@
     "@types/googlemaps": "^3.39.2",
     "@types/faker": "^4.1.0",
     "@types/react-leaflet": "^2.5.1",
-    "faker": "^4.1.0",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "eslint": "^7.20.0",
+    "faker": "^4.1.0"
   },
   "dependencies": {
     "@react-google-maps/api": "^1.8.6",

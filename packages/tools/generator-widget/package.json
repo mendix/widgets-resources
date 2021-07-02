@@ -11,7 +11,7 @@
     "url": "https://github.com/mendix/widgets-resources"
   },
   "scripts": {
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config .eslintrc.js --ext .jsx,.js,.ts,.tsx generators/"
+    "lint": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx generators/"
   },
   "files": [
     "generators"

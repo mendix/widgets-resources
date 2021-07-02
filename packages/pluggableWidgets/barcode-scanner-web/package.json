@@ -19,7 +19,7 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "echo \"Skipping barcode-scanner-web e2e tests\"",
@@ -29,11 +29,12 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "@rollup/plugin-replace": "^2.4.1"
+    "@rollup/plugin-replace": "^2.4.1",
+    "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
-    "classnames": "^2.2.6",
-    "@zxing/library": "~0.18.4"
+    "@zxing/library": "~0.18.4",
+    "classnames": "^2.2.6"
   }
 }

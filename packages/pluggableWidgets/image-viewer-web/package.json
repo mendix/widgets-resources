@@ -19,7 +19,7 @@
     "dev": "cross-env MPKOUTPUT=ImageViewer.mpk pluggable-widgets-tools start:web",
     "build": "cross-env MPKOUTPUT=ImageViewer.mpk pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
@@ -29,7 +29,8 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",

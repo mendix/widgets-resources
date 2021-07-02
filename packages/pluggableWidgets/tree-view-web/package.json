@@ -19,7 +19,7 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "echo \"Skipping tree-view-web e2e pretests\"",
     "test:e2e": "echo \"Skipping tree-view-web e2e tests\"",
@@ -28,7 +28,8 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=9.0.0",
-    "@types/classnames": "^2.2.6"
+    "@types/classnames": "^2.2.6",
+    "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
