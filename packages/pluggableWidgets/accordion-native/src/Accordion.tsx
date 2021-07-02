@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useState, useRef, useEffect } from "react";
+import { createElement, ReactElement, useState, useCallback, useEffect } from "react";
 import { View } from "react-native";
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { executeAction } from "@mendix/piw-utils-internal";
@@ -12,12 +12,8 @@ export type Props = AccordionProps<AccordionStyle>;
 
 export function Accordion(props: Props): ReactElement | null {
     const styles = flattenStyles(defaultAccordionStyle, props.style);
-    const initialRender = useRef(false);
-    const [expandedGroups, setExpandedGroups] = useState<number[]>([]);
-
-    if (!initialRender.current) {
-        initialRender.current = true;
-        const initialExpandedGroups = props.groups.reduce(
+    const [expandedGroups, setExpandedGroups] = useState<number[]>(
+        props.groups.reduce(
             (acc, group, index): number[] =>
                 !props.collapsible || group.groupCollapsed === "groupStartExpanded"
                     ? props.collapseBehavior === "singleExpanded"
@@ -25,26 +21,33 @@ export function Accordion(props: Props): ReactElement | null {
                         : [...acc, index]
                     : acc,
             []
-        );
-        setExpandedGroups(initialExpandedGroups);
-    }
+        )
+    );
 
-    const onPressGroupHeader = (group: GroupsType, index: number): void => {
-        const expanded = expandedGroups.includes(index);
-        if (expanded) {
-            collapseGroup(index);
-        } else {
-            expandGroup(index);
-        }
-        executeAction(group.groupOnChange);
-    };
-
-    const collapseGroup = (index: number): void => {
+    const collapseGroup = useCallback((index: number): void => {
         setExpandedGroups(oldArray => oldArray.filter(i => i !== index));
-    };
-    const expandGroup = (index: number): void => {
-        setExpandedGroups(oldArray => (props.collapseBehavior === "singleExpanded" ? [index] : [...oldArray, index]));
-    };
+    }, []);
+    const expandGroup = useCallback(
+        (index: number): void => {
+            setExpandedGroups(oldArray =>
+                props.collapseBehavior === "singleExpanded" ? [index] : [...oldArray, index]
+            );
+        },
+        [props.collapseBehavior]
+    );
+
+    const onPressGroupHeader = useCallback(
+        (group: GroupsType, index: number): void => {
+            const expanded = expandedGroups.includes(index);
+            if (expanded) {
+                collapseGroup(index);
+            } else {
+                expandGroup(index);
+            }
+            executeAction(group.groupOnChange);
+        },
+        [expandedGroups, expandGroup, collapseGroup]
+    );
 
     const checkPropertyValues = (group: GroupsType, i: number): void => {
         if (group.groupCollapsedAttribute?.status === ValueStatus.Available) {
