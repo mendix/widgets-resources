@@ -1,6 +1,6 @@
 import { Component, createElement, createRef } from "react";
 
-import playButton from "../assets/PlayButton.svg";
+import classNames from "classnames";
 
 export interface Html5PlayerProps {
     url: string;
@@ -22,9 +22,26 @@ export class Html5 extends Component<Html5PlayerProps> {
 
     render(): JSX.Element {
         return (
-            <div className="widget-video-player-html5-container">
+            <div
+                className={classNames("widget-video-player-html5-container", {
+                    "widget-video-player-show-controls": this.props.showControls
+                })}
+            >
                 {this.props.preview ? (
-                    <img className="widget-video-player-preview-play-button" src={playButton} />
+                    <svg
+                        className="widget-video-player-preview-play-button"
+                        width="48"
+                        height="48"
+                        viewBox="0 0 48 48"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
+                            fill="#373737"
+                        />
+                        <path d="M16 12V36L34.8571 24L16 12Z" fill="white" />
+                    </svg>
                 ) : (
                     <div className="video-error-label-html5" ref={this.errorElement}>
                         The video failed to load :(

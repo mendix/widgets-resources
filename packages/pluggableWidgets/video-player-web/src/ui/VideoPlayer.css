@@ -63,3 +63,7 @@
     margin: auto;
     z-index: 1;
 }
+
+.widget-video-player-show-controls .widget-video-player-preview-play-button path:first-child {
+    fill: #000000;
+}
