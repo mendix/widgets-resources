@@ -4,10 +4,23 @@ exports[`Html5 Player should render correctly in preview mode 1`] = `
 <div
   className="widget-video-player-html5-container"
 >
-  <img
+  <svg
     className="widget-video-player-preview-play-button"
-    src={[Function]}
-  />
+    fill="none"
+    height="48"
+    viewBox="0 0 48 48"
+    width="48"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M0 24C0 10.7452 10.7452 0 24 0C37.2548 0 48 10.7452 48 24C48 37.2548 37.2548 48 24 48C10.7452 48 0 37.2548 0 24Z"
+      fill="#373737"
+    />
+    <path
+      d="M16 12V36L34.8571 24L16 12Z"
+      fill="white"
+    />
+  </svg>
   <video
     autoPlay={false}
     className="widget-video-player-html5"
@@ -81,7 +94,7 @@ exports[`Html5 Player should renders correctly with autoplay 1`] = `
 
 exports[`Html5 Player should renders correctly with controls 1`] = `
 <div
-  className="widget-video-player-html5-container"
+  className="widget-video-player-html5-container widget-video-player-show-controls"
 >
   <div
     className="video-error-label-html5"
