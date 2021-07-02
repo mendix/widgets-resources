@@ -8,7 +8,9 @@ import { DynamicValue } from "mendix";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
-export type HeightUnitEnum = "aspectRatio" | "percentageOfWidth" | "pixels" | "percentageOfParent";
+export type HeightUnitEnum = "aspectRatio" | "percentageOfParent" | "percentageOfWidth" | "pixels";
+
+export type HeightAspectRatioEnum = "sixteenByNine" | "fourByThree" | "threeByTwo" | "TwentyOneByNine" | "oneByOne";
 
 export interface VideoPlayerContainerProps {
     name: string;
@@ -24,6 +26,7 @@ export interface VideoPlayerContainerProps {
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
+    heightAspectRatio: HeightAspectRatioEnum;
     height: number;
 }
 
@@ -39,5 +42,6 @@ export interface VideoPlayerPreviewProps {
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
+    heightAspectRatio: HeightAspectRatioEnum;
     height: number | null;
 }

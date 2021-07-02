@@ -17,6 +17,7 @@ export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
                 width={this.props.width}
                 heightUnit={this.props.heightUnit}
                 height={this.props.height}
+                heightAspectRatio={this.props.heightAspectRatio}
                 tabIndex={this.props.tabIndex}
             >
                 <Video
