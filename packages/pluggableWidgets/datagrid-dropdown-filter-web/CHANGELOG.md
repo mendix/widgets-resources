@@ -8,4 +8,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## 1.3.0 - [Unreleased]
 
 ### Added
-- We added support for filter Boolean attributes. Values can be: 'true' or 'false';
+- We added support for filtering Boolean attributes. Values can be: 'true' or 'false';
