@@ -16,7 +16,7 @@ export interface VideoPlayerProps {
     muted: boolean;
     aspectRatio: boolean;
 
-    preview?: boolean;
+    preview: boolean;
 }
 
 export class Video extends Component<VideoPlayerProps> {
@@ -47,6 +47,7 @@ export class Video extends Component<VideoPlayerProps> {
                 poster={this.props.poster}
                 url={url}
                 aspectRatio={this.props.aspectRatio}
+                preview={this.props.preview}
             />
         );
     }

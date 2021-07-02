@@ -14,6 +14,7 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
+                preview={false}
             />
         ).toJSON();
 
@@ -30,6 +31,7 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
+                preview={false}
             />
         ).toJSON();
 
@@ -46,6 +48,7 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
+                preview={false}
             />
         ).toJSON();
 
@@ -62,6 +65,7 @@ describe("Video Player", () => {
                 loop={false}
                 muted={false}
                 aspectRatio={false}
+                preview={false}
             />
         ).toJSON();
 

@@ -34,34 +34,9 @@
     width: 100%;
 }
 
-.widget-video-player-error-container {
-    height: 100%;
-    width: 100%;
-}
-
-.widget-video-player-error-container video {
-    background-color: #000;
-}
-
-.video-error-label {
-    position: absolute;
-    color: #CCC;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    z-index: 1;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4vw;
-    user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    -webkit-user-select: none;
-}
-
 .video-error-label-html5 {
     position: absolute;
-    color: #CCC;
+    color: #ccc;
     height: 100%;
     width: 100%;
     display: none;
@@ -77,4 +52,18 @@
 
 .hasError {
     display: flex;
+}
+
+.widget-video-player-preview-play-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 1;
+}
+
+.widget-video-player-show-controls .widget-video-player-preview-play-button path:first-child {
+    fill: #000000;
 }

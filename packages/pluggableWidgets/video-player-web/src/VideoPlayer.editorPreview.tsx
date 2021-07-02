@@ -2,10 +2,9 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { Component, createElement } from "react";
 import classNames from "classnames";
 
-import { Error } from "./components/Error";
 import { SizeContainer } from "./components/SizeContainer";
-import { Video, VideoPlayerProps } from "./components/Video";
-import { validateUrl } from "./utils/Utils";
+import { Video } from "./components/Video";
+
 import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
 
 declare function require(name: string): string;
@@ -15,7 +14,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
         return (
             <SizeContainer
                 className={classNames("video-player-container", this.props.class)}
-                style={{ ...parseStyle(this.props.style), minHeight: "400px" }}
+                style={parseStyle(this.props.style)}
                 widthUnit={this.props.widthUnit}
                 width={this.props.width ?? 0}
                 heightUnit={this.props.heightUnit}
@@ -23,29 +22,16 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
                 heightAspectRatio={this.props.heightAspectRatio}
                 tabIndex={0}
             >
-                {this.renderPlayers()}
+                <Video
+                    autoStart={this.props.autoStart}
+                    showControls={this.props.showControls}
+                    loop={this.props.loop}
+                    muted={this.props.muted}
+                    aspectRatio={this.props.heightUnit === "aspectRatio"}
+                    preview
+                />
             </SizeContainer>
         );
-    }
-
-    private renderPlayers(): JSX.Element {
-        if (!validateUrl(this.props.urlExpression || "")) {
-            return <Error preview />;
-        }
-        return <Video {...this.transformProps(this.props)} />;
-    }
-
-    private transformProps(props: VideoPlayerPreviewProps): VideoPlayerProps {
-        return {
-            url: props.urlExpression,
-            poster: props.posterExpression,
-            autoStart: false,
-            showControls: props.showControls,
-            loop: false,
-            muted: true,
-            aspectRatio: false,
-            preview: true
-        };
     }
 }
 

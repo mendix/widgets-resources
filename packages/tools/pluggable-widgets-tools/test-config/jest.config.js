@@ -15,7 +15,8 @@ module.exports = {
     testMatch: ["<rootDir>/**/*.spec.{js,jsx,ts,tsx}"],
     transform: {
         "\\.tsx?$": "ts-jest",
-        "\\.jsx?$": join(__dirname, "transform.js")
+        "\\.jsx?$": join(__dirname, "transform.js"),
+        "^.+\\.svg$": "jest-svg-transformer"
     },
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
