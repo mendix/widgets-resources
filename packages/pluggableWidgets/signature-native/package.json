@@ -20,7 +20,7 @@
   "dependencies": {
     "@mendix/piw-native-utils-internal": "^1.0.0",
     "@mendix/piw-utils-internal": "^1.0.0",
-    "react-native-signature-canvas": "3.4.0"
+    "react-native-signature-canvas": "3.6.0"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
