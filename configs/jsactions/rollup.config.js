@@ -1,6 +1,6 @@
 import { red, yellow } from "colors";
 import fg from "fast-glob";
-import { access, copyFile, mkdir } from "fs/promises";
+import { existsSync, mkdirSync } from "fs";
 import { basename, dirname, join, relative } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
@@ -45,47 +45,45 @@ export default async args => {
                 i === 0 ? clear({ targets: [outDir] }) : null,
                 !isWeb
                     ? collectDependencies({
-                        onlyNative: false,
-                        outputDir: outDir,
-                        widgetName: fileOutput
-                    })
+                          onlyNative: false,
+                          outputDir: outDir,
+                          widgetName: fileOutput
+                      })
                     : null,
                 nodeResolvePlugin,
                 typescriptPlugin,
                 bigJsImportReplacer(),
-                command([
-                    async () => {
-                        if (!isWeb) {
-                            await Promise.all(
-                                clientDependencies.map(async dependency => {
-                                    await copyJsModule(
-                                        dirname(require.resolve(`${dependency}/package.json`)),
-                                        join(join(outDir, "node_modules"), dependency)
-                                    );
-                                })
-                            );
-                        }
+                i === files.length - 1
+                    ? command([
+                          async () => {
+                              if (!isWeb) {
+                                  await Promise.all(
+                                      clientDependencies.map(async dependency => {
+                                          await copyJsModule(
+                                              dirname(require.resolve(`${dependency}/package.json`)),
+                                              join(join(outDir, "node_modules"), dependency)
+                                          );
+                                      })
+                                  );
+                              }
 
-                        const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
-                        const destinations = [
-                            destinationFolder,
-                            process.env.MX_PROJECT_PATH
-                                ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
-                                : undefined
-                        ];
+                              const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
+                              const destinations = [
+                                  destinationFolder,
+                                  ...[
+                                      process.env.MX_PROJECT_PATH
+                                          ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
+                                          : undefined
+                                  ]
+                              ];
 
-                        await Promise.all(destinations.filter(Boolean).map(async destination => {
-                            await mkdir(destination, { recursive: true });
-                            await copyFile(join(outDir, `${fileOutput}.js`), join(destination, `${fileOutput}.js`));
-                            try {
-                                await access(join(outDir, `${fileOutput}.json`));
-                                await copyFile(join(outDir, `${fileOutput}.json`), join(destination, `${fileOutput}.json`));
-                            } catch (e) {
-                                return;
-                            }
-                        }));
-                    }
-                ])
+                              destinations.filter(Boolean).forEach(destination => {
+                                  mkdirSync(destination, { recursive: true });
+                                  copy(outDir, destination, { filter: ["**/*"], overwrite: true });
+                              });
+                          }
+                      ])
+                    : null
             ],
             onwarn
         });
@@ -114,20 +112,18 @@ export default async args => {
     }
 
     async function copyJsModule(from, to) {
-        try {
-            await access(join(to, "package.json"))
+        if (existsSync(join(to, "package.json"))) {
             return;
-        } catch (e) {
-            return promisify(copy)(from, to, {
-                filter: [
-                    "**/*.*",
-                    "{license,LICENSE}",
-                    "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
-                    "!**/*.{config,setup}.*",
-                    "!**/*.{podspec,flow}"
-                ]
-            });
         }
+        return promisify(copy)(from, to, {
+            filter: [
+                "**/*.*",
+                "{license,LICENSE}",
+                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                "!**/*.{config,setup}.*",
+                "!**/*.{podspec,flow}"
+            ]
+        });
     }
 };
 
