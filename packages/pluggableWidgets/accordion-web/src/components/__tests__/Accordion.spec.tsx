@@ -12,8 +12,8 @@ describe("Accordion", () => {
             style: { height: "500px" },
             tabIndex: 1,
             groups: [
-                { header: "header", content: <span>content</span>, visible: true },
-                { header: "header2", content: <span>content2</span>, visible: false }
+                { header: "header", content: <span>content</span>, initiallyCollapsed: true, visible: true },
+                { header: "header2", content: <span>content2</span>, initiallyCollapsed: true, visible: false }
             ],
             collapsible,
             singleExpandedGroup,
@@ -195,6 +195,21 @@ describe("Accordion", () => {
             accordion.find(".widget-accordion-group-header-button").first().simulate("click");
             expect(accordion).toMatchSnapshot();
         });
+
+        it("inits with group initially collapsed settings", () => {
+            const groups = [...defaultProps.groups];
+            groups[0].initiallyCollapsed = false;
+
+            const accordion = shallow(<Accordion {...defaultProps} groups={groups} />);
+            expect(accordion).toMatchSnapshot();
+        });
+
+        it("inits with not more than one group expanded", () => {
+            const groups = [...defaultProps.groups].map(group => ({ ...group, initiallyCollapsed: false }));
+
+            const accordion = shallow(<Accordion {...defaultProps} groups={groups} />);
+            expect(accordion).toMatchSnapshot();
+        });
     });
 
     describe("in collapsible & multiple expanded group mode", () => {
@@ -233,6 +248,14 @@ describe("Accordion", () => {
             accordion.find(".widget-accordion-group-header-button").first().simulate("click");
             accordion.find(".widget-accordion-group-header-button").last().simulate("click");
             accordion.find(".widget-accordion-group-header-button").first().simulate("click");
+            expect(accordion).toMatchSnapshot();
+        });
+
+        it("inits with group initially collapsed settings", () => {
+            const groups = [...defaultProps.groups].map(group => ({ ...group, initiallyCollapsed: false }));
+            groups.push({ header: "header3", content: <span>content3</span>, initiallyCollapsed: true, visible: true });
+
+            const accordion = shallow(<Accordion {...defaultProps} groups={groups} />);
             expect(accordion).toMatchSnapshot();
         });
     });

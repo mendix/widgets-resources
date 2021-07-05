@@ -5,7 +5,9 @@ import { CollapsedAccordionGroupsReducerAction, getCollapsedAccordionGroupsReduc
 import { AccordionContainerProps } from "../../typings/AccordionProps";
 import classNames from "classnames";
 
-export type AccordionGroups = Array<Pick<AccordionGroupProps, "header" | "content" | "visible" | "dynamicClassName">>;
+export type AccordionGroups = Array<
+    Pick<AccordionGroupProps, "header" | "content" | "visible" | "dynamicClassName"> & { initiallyCollapsed?: boolean }
+>;
 
 export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
     id: string;
@@ -23,7 +25,20 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 
     const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(
         reducer.current,
-        props.groups.map(() => !props.previewMode && props.collapsible)
+        props.groups.reduce<boolean[]>((accumulator, group) => {
+            let result;
+            const collapsed = !props.previewMode && props.collapsible && !!group.initiallyCollapsed;
+
+            if (!collapsed && props.singleExpandedGroup) {
+                result = accumulator.map(() => true);
+            } else {
+                result = [...accumulator];
+            }
+
+            result.push(collapsed);
+
+            return result;
+        }, [])
     );
 
     const containerRef = useRef<HTMLDivElement | null>(null);

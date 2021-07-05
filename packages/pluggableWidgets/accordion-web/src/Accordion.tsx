@@ -23,6 +23,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             return {
                 header,
                 content: group.content,
+                initiallyCollapsed: group.initialCollapsedState === "collapsed",
                 visible: group.visible.value!,
                 dynamicClassName: group.dynamicClass?.value
             };

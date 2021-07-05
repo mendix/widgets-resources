@@ -52,6 +52,14 @@
                                 <caption>Content</caption>
                                 <description/>
                             </property>
+                            <property key="initialCollapsedState" type="enumeration" defaultValue="expanded">
+                                <caption>Start as</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="expanded">Expanded</enumerationValue>
+                                    <enumerationValue key="collapsed">Collapsed</enumerationValue>
+                                </enumerationValues>
+                            </property>
                             <property key="visible" type="expression" defaultValue="true">
                                 <caption>Visible</caption>
                                 <description/>

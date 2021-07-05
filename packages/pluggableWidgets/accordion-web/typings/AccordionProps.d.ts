@@ -10,12 +10,15 @@ export type HeaderRenderModeEnum = "text" | "custom";
 
 export type HeaderHeadingEnum = "headingOne" | "headingTwo" | "headingThree" | "headingFour" | "headingFive" | "headingSix";
 
+export type InitialCollapsedStateEnum = "expanded" | "collapsed";
+
 export interface GroupsType {
     headerRenderMode: HeaderRenderModeEnum;
     headerText: DynamicValue<string>;
     headerHeading: HeaderHeadingEnum;
     headerContent?: ReactNode;
     content?: ReactNode;
+    initialCollapsedState: InitialCollapsedStateEnum;
     visible: DynamicValue<boolean>;
     dynamicClass?: DynamicValue<string>;
 }
@@ -30,6 +33,7 @@ export interface GroupsPreviewType {
     headerHeading: HeaderHeadingEnum;
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    initialCollapsedState: InitialCollapsedStateEnum;
     visible: string;
     dynamicClass: string;
 }
