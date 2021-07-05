@@ -5,6 +5,7 @@ import { Accordion as AccordionComponent, AccordionGroups } from "./components/A
 import { useIconGenerator } from "./utils/iconGenerator";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
+import { Header } from "./components/Header";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const accordionGroups: AccordionGroups | undefined = useMemo(() => {
@@ -12,12 +13,20 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             return undefined;
         }
 
-        return props.groups.map(group => ({
-            header: group.headerRenderMode === "text" ? <h3>{group.headerText.value}</h3> : group.headerContent,
-            content: group.content,
-            visible: group.visible.value!,
-            dynamicClassName: group.dynamicClass?.value
-        }));
+        return props.groups.map(group => {
+            let header = group.headerContent;
+
+            if (group.headerRenderMode === "text") {
+                header = <Header heading={group.headerHeading} text={group.headerText.value} />;
+            }
+
+            return {
+                header,
+                content: group.content,
+                visible: group.visible.value!,
+                dynamicClassName: group.dynamicClass?.value
+            };
+        });
     }, [props.groups]);
 
     const generateIcon = useIconGenerator(

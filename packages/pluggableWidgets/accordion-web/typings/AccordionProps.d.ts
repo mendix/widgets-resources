@@ -8,9 +8,12 @@ import { DynamicValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
+export type HeaderHeadingEnum = "headingOne" | "headingTwo" | "headingThree" | "headingFour" | "headingFive" | "headingSix";
+
 export interface GroupsType {
     headerRenderMode: HeaderRenderModeEnum;
     headerText: DynamicValue<string>;
+    headerHeading: HeaderHeadingEnum;
     headerContent?: ReactNode;
     content?: ReactNode;
     visible: DynamicValue<boolean>;
@@ -24,6 +27,7 @@ export type ShowIconEnum = "right" | "left" | "no";
 export interface GroupsPreviewType {
     headerRenderMode: HeaderRenderModeEnum;
     headerText: string;
+    headerHeading: HeaderHeadingEnum;
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     visible: string;

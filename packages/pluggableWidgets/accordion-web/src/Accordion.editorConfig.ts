@@ -10,8 +10,13 @@ export function getProperties(
     values.groups.forEach((group, index) => {
         if (group.headerRenderMode === "text") {
             hidePropertyIn(defaultProperties, values, "groups", index, "headerContent");
+
+            if (!values.advancedMode) {
+                hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
+            }
         } else {
             hidePropertyIn(defaultProperties, values, "groups", index, "headerText");
+            hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
         }
     });
 

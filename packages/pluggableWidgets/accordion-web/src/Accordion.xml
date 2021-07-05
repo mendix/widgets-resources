@@ -32,6 +32,18 @@
                                     <translation lang="nl_NL">Koptekst</translation>
                                 </translations>
                             </property>
+                            <property key="headerHeading" type="enumeration" defaultValue="headingThree">
+                                <caption>Render mode</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="headingOne">Heading 1</enumerationValue>
+                                    <enumerationValue key="headingTwo">Heading 2</enumerationValue>
+                                    <enumerationValue key="headingThree">Heading 3</enumerationValue>
+                                    <enumerationValue key="headingFour">Heading 4</enumerationValue>
+                                    <enumerationValue key="headingFive">Heading 5</enumerationValue>
+                                    <enumerationValue key="headingSix">Heading 6</enumerationValue>
+                                </enumerationValues>
+                            </property>
                             <property key="headerContent" type="widgets" required="false">
                                 <caption>Header</caption>
                                 <description/>
