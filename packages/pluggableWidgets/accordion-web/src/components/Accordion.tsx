@@ -133,6 +133,7 @@ function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement 
             dynamicClassName={props.dynamicClassName}
             collapsible={props.collapsible}
             toggleCollapsed={toggleCollapsedState}
+            onToggleCompletion={props.onToggleCompletion}
             changeFocus={focusAccordionGroupHeaderElement}
             animateContent={props.animateContent}
             generateHeaderIcon={props.generateHeaderIcon}

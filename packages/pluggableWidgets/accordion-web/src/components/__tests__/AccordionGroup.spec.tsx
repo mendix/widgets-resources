@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { shallow, ShallowWrapper } from "enzyme";
+import { mount, shallow, ShallowWrapper } from "enzyme";
 import { AccordionGroup, AccordionGroupProps, Target } from "../AccordionGroup";
 
 describe("AccordionGroup", () => {
@@ -228,6 +228,21 @@ describe("AccordionGroup", () => {
                 expect(keyboardEvent.preventDefault).toHaveBeenCalledTimes(1);
                 expect(changeFocusMock).toHaveBeenCalledTimes(1);
                 expect(changeFocusMock).toHaveBeenCalledWith(keyboardEvent.currentTarget, Target.LAST);
+            });
+
+            it("calls onToggleCompletion", () => {
+                const onToggleCompletionMock = jest.fn();
+
+                const accordionGroup = mount(
+                    <AccordionGroup
+                        {...defaultAccordionGroupProps}
+                        collapsible
+                        onToggleCompletion={onToggleCompletionMock}
+                    />
+                );
+
+                accordionGroup.setProps({ collapsed: false });
+                expect(onToggleCompletionMock).toHaveBeenCalledTimes(1);
             });
 
             it("applies the correct class when the header icon is aligned right", () => {

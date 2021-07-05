@@ -22,6 +22,10 @@ export function getProperties(
         if (!values.advancedMode || group.initialCollapsedState !== "dynamic") {
             hidePropertyIn(defaultProperties, values, "groups", index, "initiallyCollapsed");
         }
+
+        if (!values.advancedMode) {
+            hidePropertyIn(defaultProperties, values, "groups", index, "onToggleCollapsed");
+        }
     });
 
     if (!values.collapsible) {

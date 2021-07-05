@@ -35,7 +35,8 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
                         ? group.initiallyCollapsed.value
                         : group.initialCollapsedState === "collapsed",
                 visible: group.visible.value!,
-                dynamicClassName: group.dynamicClass?.value
+                dynamicClassName: group.dynamicClass?.value,
+                onToggleCompletion: group.onToggleCollapsed?.execute
             };
         });
     }, [props.groups]);

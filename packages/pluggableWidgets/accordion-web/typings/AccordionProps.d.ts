@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { DynamicValue, WebIcon } from "mendix";
+import { ActionValue, DynamicValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
@@ -22,6 +22,7 @@ export interface GroupsType {
     initiallyCollapsed: DynamicValue<boolean>;
     visible: DynamicValue<boolean>;
     dynamicClass?: DynamicValue<string>;
+    onToggleCollapsed?: ActionValue;
 }
 
 export type ExpandBehaviorEnum = "singleExpanded" | "multipleExpanded";
@@ -38,6 +39,7 @@ export interface GroupsPreviewType {
     initiallyCollapsed: string;
     visible: string;
     dynamicClass: string;
+    onToggleCollapsed: {} | null;
 }
 
 export interface AccordionContainerProps {

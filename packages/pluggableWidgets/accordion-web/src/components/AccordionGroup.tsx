@@ -22,6 +22,7 @@ export interface AccordionGroupProps {
     dynamicClassName?: string;
     collapsible: boolean;
     toggleCollapsed?: () => void;
+    onToggleCompletion?: () => void;
     changeFocus?: (focusedGroupHeader: EventTarget | null, focusTargetGroupHeader: Target) => void;
     animateContent?: boolean;
     generateHeaderIcon?: (collapsed: boolean) => ReactElement;
@@ -29,9 +30,10 @@ export interface AccordionGroupProps {
 }
 
 export function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { animateContent, changeFocus, showHeaderIcon, toggleCollapsed } = props;
+    const { animateContent, changeFocus, showHeaderIcon, toggleCollapsed, onToggleCompletion } = props;
 
     const [previousCollapsedValue, setPreviousCollapsedValue] = useState(props.collapsed);
+    const previousPreviousCollapsedValue = useRef(previousCollapsedValue);
     const animatingContent = useRef<boolean>(false);
 
     const rootRef = useRef<HTMLDivElement>(null);
@@ -88,6 +90,13 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
             setPreviousCollapsedValue(props.collapsed);
         }
     }, [props.collapsed, props.visible, previousCollapsedValue, animateContent]);
+
+    useEffect(() => {
+        if (previousCollapsedValue !== previousPreviousCollapsedValue.current) {
+            previousPreviousCollapsedValue.current = previousCollapsedValue;
+            onToggleCompletion?.();
+        }
+    }, [onToggleCompletion, previousCollapsedValue, previousPreviousCollapsedValue]);
 
     const onKeydownHandler = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {

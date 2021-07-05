@@ -77,6 +77,12 @@
                                 <returnType type="String"/>
                             </property>
                         </propertyGroup>
+                        <propertyGroup caption="Events">
+                            <property key="onToggleCollapsed" type="action">
+                                <caption>On change</caption>
+                                <description />
+                            </property>
+                        </propertyGroup>
                     </properties>
                 </property>
             </propertyGroup>
