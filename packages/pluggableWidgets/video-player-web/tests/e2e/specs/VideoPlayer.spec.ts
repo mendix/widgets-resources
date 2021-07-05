@@ -6,12 +6,10 @@ describe("Grid page", () => {
     it("should render youtube iframe", () => {
         gridpage.open();
         gridpage.youtube.waitForDisplayed();
-        // @ts-ignore
         const youtubePlayer = gridpage.youtube.getHTML();
-        // prettier-ignore
-        expect(youtubePlayer).toContain("class=\"widget-video-player-iframe\"");
-        // prettier-ignore
-        expect(youtubePlayer).toContain("src=\"https://www.youtube.com");
+
+        expect(youtubePlayer).toContain('class="widget-video-player-iframe"');
+        expect(youtubePlayer).toContain('src="https://www.youtube.com');
         expect(youtubePlayer).toContain("&amp;autoplay=1");
         expect(youtubePlayer).toContain("&amp;controls=0");
         expect(youtubePlayer).toContain("&amp;muted=0");
@@ -19,14 +17,11 @@ describe("Grid page", () => {
     });
 
     it("should render vimeo iframe", () => {
-        // @ts-ignore
         gridpage.vimeo.waitForDisplayed();
-        // @ts-ignore
         const youtubePlayer = gridpage.vimeo.getHTML();
-        // prettier-ignore
-        expect(youtubePlayer).toContain("class=\"widget-video-player-iframe\"");
-        // prettier-ignore
-        expect(youtubePlayer).toContain("src=\"https://player.vimeo.com");
+
+        expect(youtubePlayer).toContain('class="widget-video-player-iframe"');
+        expect(youtubePlayer).toContain('src="https://player.vimeo.com');
         expect(youtubePlayer).toContain("&amp;autoplay=1");
         expect(youtubePlayer).toContain("&amp;muted=0");
         expect(youtubePlayer).toContain("&amp;loop=0");
@@ -40,10 +35,9 @@ describe("Tab page", () => {
         tabpage.youtubeTab.click();
         tabpage.youtube.waitForDisplayed();
         const youtubePlayer = tabpage.youtube.getHTML();
-        // prettier-ignore
-        expect(youtubePlayer).toContain("class=\"widget-video-player-iframe\"");
-        // prettier-ignore
-        expect(youtubePlayer).toContain("src=\"https://www.youtube.com");
+
+        expect(youtubePlayer).toContain('class="widget-video-player-iframe"');
+        expect(youtubePlayer).toContain('src="https://www.youtube.com');
     });
 
     it("should render vimeo tab", () => {
@@ -51,10 +45,9 @@ describe("Tab page", () => {
         tabpage.vimeoTab.click();
         tabpage.vimeo.waitForDisplayed();
         const vimeoPlayer = tabpage.vimeo.getHTML();
-        // prettier-ignore
-        expect(vimeoPlayer).toContain("class=\"widget-video-player-iframe\"");
-        // prettier-ignore
-        expect(vimeoPlayer).toContain("src=\"https://player.vimeo.com");
+
+        expect(vimeoPlayer).toContain('class="widget-video-player-iframe"');
+        expect(vimeoPlayer).toContain('src="https://player.vimeo.com');
     });
 
     it("should render dailymotion tab", () => {
@@ -62,10 +55,9 @@ describe("Tab page", () => {
         tabpage.dailymotionTab.click();
         tabpage.dailymotion.waitForDisplayed();
         const dailymotionPlayer = tabpage.dailymotion.getHTML();
-        // prettier-ignore
-        expect(dailymotionPlayer).toContain("class=\"widget-video-player-iframe\"");
-        // prettier-ignore
-        expect(dailymotionPlayer).toContain("src=\"https://www.dailymotion.com");
+
+        expect(dailymotionPlayer).toContain('class="widget-video-player-iframe"');
+        expect(dailymotionPlayer).toContain('src="https://www.dailymotion.com');
     });
 
     it("should render html5 video tab", () => {
@@ -73,10 +65,10 @@ describe("Tab page", () => {
         tabpage.html5Tab.click();
         tabpage.html5.waitForDisplayed();
         const html5Player = tabpage.html5.getHTML();
-        // prettier-ignore
-        expect(html5Player).toContain("class=\"widget-video-player-html5\"");
+
+        expect(html5Player).toContain('class="widget-video-player-html5"');
         expect(html5Player).toContain("<source src=");
-        expect(html5Player).toContain("ElephantsDream.mp4");
+        expect(html5Player).toContain("file_example_MP4_640_3MG.mp4");
     });
 });
 
