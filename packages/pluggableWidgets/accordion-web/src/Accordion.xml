@@ -58,7 +58,13 @@
                                 <enumerationValues>
                                     <enumerationValue key="expanded">Expanded</enumerationValue>
                                     <enumerationValue key="collapsed">Collapsed</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
                                 </enumerationValues>
+                            </property>
+                            <property key="initiallyCollapsed" type="expression" defaultValue="false">
+                                <caption>Collapsed</caption>
+                                <description/>
+                                <returnType type="Boolean"/>
                             </property>
                             <property key="visible" type="expression" defaultValue="true">
                                 <caption>Visible</caption>

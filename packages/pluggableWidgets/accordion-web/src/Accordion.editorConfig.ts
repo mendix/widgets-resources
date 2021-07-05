@@ -18,6 +18,10 @@ export function getProperties(
             hidePropertyIn(defaultProperties, values, "groups", index, "headerText");
             hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
         }
+
+        if (!values.advancedMode || group.initialCollapsedState !== "dynamic") {
+            hidePropertyIn(defaultProperties, values, "groups", index, "initiallyCollapsed");
+        }
     });
 
     if (!values.collapsible) {

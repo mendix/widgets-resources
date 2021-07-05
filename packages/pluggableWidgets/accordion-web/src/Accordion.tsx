@@ -9,7 +9,14 @@ import { Header } from "./components/Header";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const accordionGroups: AccordionGroups | undefined = useMemo(() => {
-        if (props.groups.some(group => group.visible.value === undefined || group.headerText.value === undefined)) {
+        if (
+            props.groups.some(
+                group =>
+                    group.visible.value === undefined ||
+                    group.headerText.value === undefined ||
+                    group.initiallyCollapsed.value === undefined
+            )
+        ) {
             return undefined;
         }
 
@@ -23,7 +30,10 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             return {
                 header,
                 content: group.content,
-                initiallyCollapsed: group.initialCollapsedState === "collapsed",
+                initiallyCollapsed:
+                    group.initialCollapsedState === "dynamic"
+                        ? group.initiallyCollapsed.value
+                        : group.initialCollapsedState === "collapsed",
                 visible: group.visible.value!,
                 dynamicClassName: group.dynamicClass?.value
             };
