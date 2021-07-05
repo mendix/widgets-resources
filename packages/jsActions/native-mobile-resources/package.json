@@ -14,7 +14,7 @@
   "dependencies": {
     "@react-native-community/cameraroll": "4.0.1",
     "@react-native-community/push-notification-ios": "^1.5.0",
-    "@react-native-firebase/messaging": "10.5.1",
+    "@react-native-firebase/messaging": "10.8.1",
     "react-native-device-info": "8.0.1",
     "react-native-image-picker": "2.3.1",
     "react-native-inappbrowser-reborn": "3.4.0",
