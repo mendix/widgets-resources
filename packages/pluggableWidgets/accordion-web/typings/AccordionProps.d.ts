@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue, DynamicValue, WebIcon } from "mendix";
+import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
@@ -22,6 +22,7 @@ export interface GroupsType {
     initiallyCollapsed: DynamicValue<boolean>;
     visible: DynamicValue<boolean>;
     dynamicClass?: DynamicValue<string>;
+    collapsed?: EditableValue<boolean>;
     onToggleCollapsed?: ActionValue;
 }
 
@@ -39,6 +40,7 @@ export interface GroupsPreviewType {
     initiallyCollapsed: string;
     visible: string;
     dynamicClass: string;
+    collapsed: string;
     onToggleCollapsed: {} | null;
 }
 

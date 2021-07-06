@@ -14,7 +14,8 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
                 group =>
                     group.visible.value === undefined ||
                     group.headerText.value === undefined ||
-                    group.initiallyCollapsed.value === undefined
+                    group.initiallyCollapsed.value === undefined ||
+                    (group.collapsed && group.collapsed.value === undefined)
             )
         ) {
             return undefined;
@@ -30,6 +31,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
             return {
                 header,
                 content: group.content,
+                collapsed: group.collapsed?.value,
                 initiallyCollapsed:
                     group.initialCollapsedState === "dynamic"
                         ? group.initiallyCollapsed.value

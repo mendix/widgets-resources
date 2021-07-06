@@ -78,6 +78,13 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
+                            <property key="collapsed" type="attribute" required="false" onChange="onToggleCollapsed">
+                                <caption>Attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="Boolean"/>
+                                </attributeTypes>
+                            </property>
                             <property key="onToggleCollapsed" type="action">
                                 <caption>On change</caption>
                                 <description />

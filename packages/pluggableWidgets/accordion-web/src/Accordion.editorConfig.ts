@@ -25,6 +25,7 @@ export function getProperties(
 
         if (!values.advancedMode) {
             hidePropertyIn(defaultProperties, values, "groups", index, "onToggleCollapsed");
+            hidePropertyIn(defaultProperties, values, "groups", index, "collapsed");
         }
     });
 

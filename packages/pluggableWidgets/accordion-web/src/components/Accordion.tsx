@@ -1,4 +1,13 @@
-import { createElement, Dispatch, MutableRefObject, ReactElement, useCallback, useReducer, useRef } from "react";
+import {
+    createElement,
+    Dispatch,
+    MutableRefObject,
+    ReactElement,
+    useCallback,
+    useMemo,
+    useReducer,
+    useRef
+} from "react";
 
 import { AccordionGroup, AccordionGroupProps, Target } from "./AccordionGroup";
 import { CollapsedAccordionGroupsReducerAction, getCollapsedAccordionGroupsReducer } from "../utils/reducers";
@@ -6,7 +15,10 @@ import { AccordionContainerProps } from "../../typings/AccordionProps";
 import classNames from "classnames";
 
 export type AccordionGroups = Array<
-    Pick<AccordionGroupProps, "header" | "content" | "visible" | "dynamicClassName"> & { initiallyCollapsed?: boolean }
+    Pick<AccordionGroupProps, "header" | "content" | "visible" | "dynamicClassName" | "onToggleCompletion"> & {
+        collapsed?: boolean;
+        initiallyCollapsed?: boolean;
+    }
 >;
 
 export interface AccordionProps extends Pick<AccordionContainerProps, "class" | "style" | "tabIndex"> {
@@ -40,6 +52,23 @@ export function Accordion(props: AccordionProps): ReactElement | null {
             return result;
         }, [])
     );
+
+    const previousGroupCollapsedValues = useRef(props.groups.map(group => group.collapsed));
+
+    useMemo(() => {
+        const changes: Array<{ index: number; value: boolean }> = [];
+
+        props.groups.forEach((group, index) => {
+            if (group.collapsed !== undefined && group.collapsed !== previousGroupCollapsedValues.current[index]) {
+                changes.push({ index, value: group.collapsed });
+                previousGroupCollapsedValues.current[index] = group.collapsed;
+            }
+        });
+
+        changes.forEach(change => {
+            collapsedAccordionGroupsDispatch({ type: change.value ? "collapse" : "expand", index: change.index });
+        });
+    }, [props.groups]);
 
     const containerRef = useRef<HTMLDivElement | null>(null);
 
