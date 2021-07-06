@@ -243,6 +243,7 @@ describe("AccordionGroup", () => {
 
                 accordionGroup.setProps({ collapsed: false });
                 expect(onToggleCompletionMock).toHaveBeenCalledTimes(1);
+                expect(onToggleCompletionMock).toHaveBeenCalledWith(false);
             });
 
             it("applies the correct class when the header icon is aligned right", () => {
