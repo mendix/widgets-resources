@@ -8,13 +8,15 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
-                <property key="videoUrl" type="textTemplate">
+                <property key="urlExpression" type="expression">
                     <caption>Video link</caption>
                     <description>The web address of the video: YouTube, Vimeo, Dailymotion or MP4.</description>
+                    <returnType type="String"/>
                 </property>
-                <property key="posterUrl" type="textTemplate" required="false">
+                <property key="posterExpression" type="expression" required="false">
                     <caption>Poster link</caption>
                     <description>The web address of the poster image. A poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
+                    <returnType type="String"/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">

@@ -17,8 +17,8 @@ export interface VideoPlayerContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    videoUrl: DynamicValue<string>;
-    posterUrl?: DynamicValue<string>;
+    urlExpression: DynamicValue<string>;
+    posterExpression?: DynamicValue<string>;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
@@ -33,8 +33,8 @@ export interface VideoPlayerContainerProps {
 export interface VideoPlayerPreviewProps {
     class: string;
     style: string;
-    videoUrl: string;
-    posterUrl: string;
+    urlExpression: string;
+    posterExpression: string;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
