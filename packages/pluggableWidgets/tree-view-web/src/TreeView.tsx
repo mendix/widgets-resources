@@ -8,7 +8,7 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
         props.datasource.items?.map(item => {
             return {
                 id: item.id,
-                value: props.caption?.get(item).value,
+                value: props.headerCaption?.get(item).value,
                 content: props.children?.get(item)
             };
         }) ?? [];

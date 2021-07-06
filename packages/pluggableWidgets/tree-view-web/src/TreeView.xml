@@ -12,7 +12,7 @@
                 <description/>
             </property>
             <!-- TODO: Dynamic headers -->
-            <property key="caption" type="textTemplate" dataSource="datasource" required="false">
+            <property key="headerCaption" type="textTemplate" dataSource="datasource" required="false">
                 <caption>Header caption</caption>
                 <description/>
             </property>

@@ -12,7 +12,7 @@ export interface TreeViewContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     datasource: ListValue;
-    caption?: ListExpressionValue<string>;
+    headerCaption?: ListExpressionValue<string>;
     hasChildren: boolean;
     startExpanded: boolean;
     children?: ListWidgetValue;
@@ -22,7 +22,7 @@ export interface TreeViewPreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
-    caption: string;
+    headerCaption: string;
     hasChildren: boolean;
     startExpanded: boolean;
     children: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
