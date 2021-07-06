@@ -20,7 +20,7 @@
   "dependencies": {
     "@mendix/piw-native-utils-internal": "^1.0.0",
     "@mendix/piw-utils-internal": "^1.0.0",
-    "react-native-gesture-handler": "1.8.0"
+    "react-native-gesture-handler": "1.10.3"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
