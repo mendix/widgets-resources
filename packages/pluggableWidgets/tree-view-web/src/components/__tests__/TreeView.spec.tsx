@@ -42,6 +42,21 @@ describe("TreeView", () => {
         expect(treeViewBranches.at(2).text()).not.toContain("Third content");
     });
 
+    it("handles tree headers properly even if they are composed with widgets", () => {
+        const newItems = [
+            ...items,
+            { id: "44" as GUID, value: <div>This is the 44 header</div>, content: <div>Fourth content</div> }
+        ];
+        const treeView = mount(<TreeView class="" items={newItems} isUserDefinedLeafNode={false} startExpanded />);
+
+        // There is not really another way to properly identify that we're dealing with tree view branches.
+        const treeViewBranches = treeView.find(".widget-tree-view-branch");
+        expect(treeViewBranches).toHaveLength(newItems.length);
+
+        expect(treeViewBranches.at(3).html()).toContain("<div>This is the 44 header</div>");
+        expect(treeViewBranches.at(3).text()).toContain("Fourth content");
+    });
+
     it("shows the tree view headers in the correct order as a button when not defined as a leaf node", () => {
         const treeView = mount(<TreeView class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />);
 

@@ -6,7 +6,7 @@ import "../ui/TreeView.scss";
 
 interface TreeViewObject {
     id: GUID;
-    value: string | undefined;
+    value: string | ReactNode | undefined;
     content: ReactNode;
 }
 

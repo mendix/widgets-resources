@@ -11,7 +11,18 @@
                 <caption>Data source</caption>
                 <description/>
             </property>
-            <!-- TODO: Dynamic headers -->
+            <property key="headerType" type="enumeration" defaultValue="text">
+                <caption>Header type</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="text">Text</enumerationValue>
+                    <enumerationValue key="custom">Custom</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="headerContent" type="widgets" dataSource="datasource" required="false">
+                <caption>Header</caption>
+                <description/>
+            </property>
             <property key="headerCaption" type="textTemplate" dataSource="datasource" required="false">
                 <caption>Header caption</caption>
                 <description/>
