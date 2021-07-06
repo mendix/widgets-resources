@@ -2,11 +2,12 @@ import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
+    Problem,
     Properties,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 
-import { AccordionContainerProps } from "../typings/AccordionProps";
+import { AccordionContainerProps, AccordionPreviewProps } from "../typings/AccordionProps";
 
 export function getProperties(
     values: AccordionContainerProps,
@@ -86,4 +87,21 @@ export function getProperties(
     }
 
     return defaultProperties;
+}
+
+export function check(values: AccordionPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+
+    const amountOfGroupsStartingExpanded = values.groups.filter(group => group.initialCollapsedState === "expanded")
+        .length;
+
+    if (values.expandBehavior === "singleExpanded" && amountOfGroupsStartingExpanded > 1) {
+        errors.push({
+            property: "expandBehavior",
+            severity: "error",
+            message: `There are ${amountOfGroupsStartingExpanded} groups configured to start expanded. Change the configuration to have just one group starting expanded or switch the "Expanded groups" property to "Multiple".`
+        });
+    }
+
+    return errors;
 }
