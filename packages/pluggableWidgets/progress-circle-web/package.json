@@ -1,7 +1,7 @@
 {
   "name": "progress-circle-web",
   "widgetName": "ProgressCircle",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Displays a progress in a circle",
   "copyright": "Mendix Technology B.V.",
   "license": "Apache-2.0",
