@@ -676,6 +676,66 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
 </Accordion>
 `;
 
+exports[`Accordion in collapsible & multiple expanded group mode applies group collapsed value changes 1`] = `
+<div
+  className="widget-accordion"
+  data-focusindex={1}
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+>
+  <AccordionGroupWrapper
+    collapsed={true}
+    collapsedAccordionGroupsDispatch={[Function]}
+    collapsible={true}
+    content={
+      <span>
+        content
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header"
+    id="idAccordionGroup0"
+    index={0}
+    initiallyCollapsed={true}
+    key="0"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={true}
+  />
+  <AccordionGroupWrapper
+    collapsed={false}
+    collapsedAccordionGroupsDispatch={[Function]}
+    collapsible={true}
+    content={
+      <span>
+        content2
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header2"
+    id="idAccordionGroup1"
+    index={1}
+    initiallyCollapsed={true}
+    key="1"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={false}
+  />
+</div>
+`;
+
 exports[`Accordion in collapsible & multiple expanded group mode collapses a group 1`] = `
 <Accordion
   class=""

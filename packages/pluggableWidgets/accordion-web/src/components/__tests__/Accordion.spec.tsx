@@ -258,6 +258,15 @@ describe("Accordion", () => {
             const accordion = shallow(<Accordion {...defaultProps} groups={groups} />);
             expect(accordion).toMatchSnapshot();
         });
+
+        it("applies group collapsed value changes", () => {
+            const accordion = shallow(<Accordion {...defaultProps} />);
+            const newGroups = [...defaultProps.groups];
+            newGroups[1].collapsed = false;
+            accordion.setProps({ groups: newGroups });
+
+            expect(accordion).toMatchSnapshot();
+        });
     });
 
     describe("not collapsible", () => {
