@@ -1,4 +1,10 @@
-import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import {
+    hideNestedPropertiesIn,
+    hidePropertiesIn,
+    hidePropertyIn,
+    Properties,
+    transformGroupsIntoTabs
+} from "@mendix/piw-utils-internal";
 
 import { AccordionContainerProps } from "../typings/AccordionProps";
 
@@ -19,13 +25,26 @@ export function getProperties(
             hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
         }
 
-        if (!values.advancedMode || group.initialCollapsedState !== "dynamic") {
+        if (group.initialCollapsedState !== "dynamic") {
             hidePropertyIn(defaultProperties, values, "groups", index, "initiallyCollapsed");
         }
 
         if (!values.advancedMode) {
-            hidePropertyIn(defaultProperties, values, "groups", index, "onToggleCollapsed");
-            hidePropertyIn(defaultProperties, values, "groups", index, "collapsed");
+            hideNestedPropertiesIn(defaultProperties, values, "groups", index, [
+                "collapsed",
+                "onToggleCollapsed",
+                "initialCollapsedState",
+                "initiallyCollapsed"
+            ]);
+        }
+
+        if (!values.collapsible) {
+            hideNestedPropertiesIn(defaultProperties, values, "groups", index, [
+                "collapsed",
+                "onToggleCollapsed",
+                "initialCollapsedState",
+                "initiallyCollapsed"
+            ]);
         }
     });
 
