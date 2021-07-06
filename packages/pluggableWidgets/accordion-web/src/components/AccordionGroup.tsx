@@ -22,7 +22,7 @@ export interface AccordionGroupProps {
     dynamicClassName?: string;
     collapsible: boolean;
     toggleCollapsed?: () => void;
-    onToggleCompletion?: () => void;
+    onToggleCompletion?: (collapsed: boolean) => void;
     changeFocus?: (focusedGroupHeader: EventTarget | null, focusTargetGroupHeader: Target) => void;
     animateContent?: boolean;
     generateHeaderIcon?: (collapsed: boolean) => ReactElement;
@@ -94,9 +94,9 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
     useEffect(() => {
         if (previousCollapsedValue !== previousPreviousCollapsedValue.current) {
             previousPreviousCollapsedValue.current = previousCollapsedValue;
-            onToggleCompletion?.();
+            onToggleCompletion?.(props.collapsed);
         }
-    }, [onToggleCompletion, previousCollapsedValue, previousPreviousCollapsedValue]);
+    }, [props.collapsed, onToggleCompletion, previousCollapsedValue, previousPreviousCollapsedValue]);
 
     const onKeydownHandler = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
