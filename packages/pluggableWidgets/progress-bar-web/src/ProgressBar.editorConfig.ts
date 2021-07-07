@@ -1,5 +1,12 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    StructurePreviewProps
+} from "@mendix/piw-utils-internal";
 import { ProgressBarPreviewProps, TypeEnum } from "../typings/ProgressBarProps";
+import StructurePreviewSvg from "./assets/structure-preview.svg";
 
 type PreviewPropsKey = keyof ProgressBarPreviewProps;
 const propKeys: { [Type in TypeEnum]: PreviewPropsKey[] } = {
@@ -94,4 +101,16 @@ export function check(values: ProgressBarPreviewProps): Problem[] {
     }
 
     return errors;
+}
+
+export function getPreview(values: ProgressBarPreviewProps): StructurePreviewProps | null {
+    if (values.labelType === "custom") {
+        return null;
+    }
+    return {
+        type: "Image",
+        document: decodeURIComponent(StructurePreviewSvg.replace("data:image/svg+xml,", "")),
+        height: 16,
+        width: 300
+    };
 }

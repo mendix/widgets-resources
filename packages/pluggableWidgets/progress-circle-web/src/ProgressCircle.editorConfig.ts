@@ -1,5 +1,12 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    StructurePreviewProps
+} from "@mendix/piw-utils-internal";
 import { ProgressCirclePreviewProps, TypeEnum } from "../typings/ProgressCircleProps";
+import StructurePreviewSvg from "./assets/structure-preview.svg";
 
 type PreviewPropsKey = keyof ProgressCirclePreviewProps;
 const propKeys: { [Type in TypeEnum]: PreviewPropsKey[] } = {
@@ -95,4 +102,16 @@ export function check(values: ProgressCirclePreviewProps): Problem[] {
     }
 
     return errors;
+}
+
+export function getPreview(values: ProgressCirclePreviewProps): StructurePreviewProps | null {
+    if (values.labelType === "custom") {
+        return null;
+    }
+    return {
+        type: "Image",
+        document: decodeURIComponent(StructurePreviewSvg.replace("data:image/svg+xml,", "")),
+        height: 175,
+        width: 175
+    };
 }
