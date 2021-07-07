@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.scrollcontainer.ScrollContainer" needsEntityContext="true" offlineCapable="true"
+        pluginWidget="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Scroll container</name>
+    <description>Displays a scrollable container</description>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Width">
+                <property key="widthType" type="enumeration" defaultValue="full">
+                    <caption>Width</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="full">Full width</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="widthPixels" type="decimal" defaultValue="500">
+                    <caption>Pixels</caption>
+                    <description>The amount of pixels to be considered as width.</description>
+                </property>
+                <property key="widthPercentage" type="decimal" defaultValue="100">
+                    <caption>Percentage</caption>
+                    <description>The amount of percentage to be considered as width.</description>
+                </property>
+                <property key="content" type="widgets">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
