@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
-    "@react-native-firebase/app": "10.1.0",
+    "@react-native-firebase/app": "10.8.1",
     "@react-native-firebase/messaging": "10.5.1"
   },
   "devDependencies": {
