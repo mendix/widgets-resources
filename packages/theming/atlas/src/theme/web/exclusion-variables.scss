@@ -1,3 +1,12 @@
+//== Core style exclusion
+$exclude-bootstrap: false;
+$exclude-mxui: false;
+$exclude-animations: false;
+$exclude-flex: false;
+$exclude-spacing: false;
+$exclude-base: false;
+$exclude-login: false;
+
 //== Widget style exclusion
 $exclude-accordion: false;
 $exclude-accordion-helpers: false;
@@ -59,3 +68,9 @@ $exclude-template-grid-helpers: false;
 $exclude-timeline: false;
 $exclude-typography: false;
 $exclude-typography-helpers: false;
+
+//== Layouts style exclusion
+$exclude-layout-atlas: false;
+$exclude-layout-atlas-phone: false;
+$exclude-layout-atlas-responsive: false;
+$exclude-layout-atlas-tablet: false;

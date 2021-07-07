@@ -1,10 +1,3 @@
-// Utilities
-@import "core/_legacy/bootstrap/bootstrap";
-@import "core/_legacy/bootstrap/bootstrap-rtl";
-@import "core/_legacy/mxui";
-
-//================================== CORE ==================================\\
-
 // Default variables
 @import "exclusion-variables";
 @import "../../../theme/web/exclusion-variables";
@@ -16,18 +9,49 @@
     @import url($font-family-import);
 }
 
+//=============================== Bootstrap ================================\\
+
+// Utilities
+@import "core/_legacy/bootstrap/bootstrap";
+@import "core/_legacy/bootstrap/bootstrap-rtl";
+@if not $exclude-bootstrap {
+    @include bootstrap();
+    @include bootstrap-rtl();
+}
+@import "core/_legacy/mxui";
+@if not $exclude-mxui {
+    @include mxui();
+}
+
+//================================== CORE ==================================\\
+
 // Base
 @import "core/base/mixins/animations";
 @import "core/base/mixins/spacing";
 @import "core/base/mixins/layout-spacing";
 @import "core/base/mixins/buttons";
 @import "core/base/mixins/groupbox";
+
 @import "core/base/animation";
+@if not $exclude-animations {
+    @include animations();
+}
 @import "core/base/flex";
+@if not $exclude-flex {
+    @include flex();
+}
 @import "core/base/spacing";
-@import "core/base/reset";
+@if not $exclude-spacing {
+    @include spacing();
+}
 @import "core/base/base";
+@if not $exclude-base {
+    @include base();
+}
 @import "core/base/login";
+@if not $exclude-login {
+    @include login();
+}
 
 // Widgets
 @import "core/widgets/input";
@@ -335,6 +359,18 @@
 
 // Layouts
 @import "layouts/layout-atlas";
+@if not $exclude-layout-atlas {
+    @include layout-atlas();
+}
 @import "layouts/layout-atlas-phone";
+@if not $exclude-layout-atlas-phone {
+    @include layout-atlas-phone();
+}
 @import "layouts/layout-atlas-responsive";
+@if not $exclude-layout-atlas-responsive {
+    @include layout-atlas-responsive();
+}
 @import "layouts/layout-atlas-tablet";
+@if not $exclude-layout-atlas-tablet {
+    @include layout-atlas-tablet();
+}

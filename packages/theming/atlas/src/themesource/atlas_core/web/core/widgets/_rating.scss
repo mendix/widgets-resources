@@ -29,28 +29,29 @@
     }
 
     .widget-rating {
-
         .rating-icon {
             font-size: 24px;
         }
 
         .rating-icon-empty {
-            color: #CCC;
+            color: #ccc;
         }
 
         .rating-icon-full {
-            color: #FFA611;
+            color: #ffa611;
         }
 
         .rating-item {
             &:focus:not(:focus-visible) {
-                .rating-image, .rating-icon {
+                .rating-image,
+                .rating-icon {
                     outline: none;
                 }
             }
 
             &:focus-visible {
-                .rating-image, .rating-icon {
+                .rating-image,
+                .rating-icon {
                     outline: 1px solid $brand-primary;
                 }
             }
