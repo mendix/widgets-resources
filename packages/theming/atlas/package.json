@@ -11,6 +11,7 @@
     "pretest:e2e:dev": "node ./scripts/build.js",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --no-widget-update",
+    "test:e2e:chrome": "BROWSER_DOCKER=selenium/standalone-chrome BROWSER=chrome pluggable-widgets-tools test:e2e:web --no-widget-update",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "node ./scripts/build.js release",
     "release-ts": "tsc"
