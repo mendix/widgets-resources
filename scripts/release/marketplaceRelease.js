@@ -21,6 +21,10 @@ async function main() {
         throw new Error("Widget does not define expected keys in its package.json");
     }
 
+    if (version.split(".").length !== 3) {
+        throw new Error("Widget version not defined correctly in its package.json");
+    }
+
     await uploadModuleToAppStore(widgetName, marketplaceId, version, minimumMXVersion);
 }
 
@@ -50,19 +54,19 @@ async function getGithubAssetUrl() {
         const assetsData = (await assetsRequest.json()) ?? [];
         const downloadUrl = assetsData.filter(asset => asset.name.endsWith(".mpk"))?.pop()?.browser_download_url;
         if (!downloadUrl) {
-            throw new Error("Could not retrieve MPK url from GitHub tag");
+            throw new Error("Could not retrieve MPK url from GitHub release");
         }
         return downloadUrl;
     } else {
-        throw new Error("Could not retrieve release tag information from GitHub");
+        throw new Error("Could not find release on GitHub");
     }
 }
 
 async function createDraft(marketplaceId, version, minimumMXVersion) {
     console.log(`Creating draft in the Mendix Marketplace..`);
     const url = `${config.appStoreUrl}/packages/${marketplaceId}/version`;
+    const [major, minor, patch] = version.split(".");
     try {
-        const [major, minor, patch] = version.split(".");
         const assetUrl = await getGithubAssetUrl();
         const body = {
             VersionMajor: major ?? 1,
@@ -116,7 +120,7 @@ async function fetch(method, url, body) {
     try {
         response = await nodefetch(url, httpsOptions);
     } catch (error) {
-        console.error(error);
+        throw new Error(`An error occurred while retrieving data from ${url}`);
     }
     console.log(`Response status Code ${response.status}`);
     if (response.status === 409) {
@@ -130,6 +134,6 @@ async function fetch(method, url, body) {
     } else if (response.ok) {
         return response.json();
     } else {
-        throw new Error(`Fetching Failed. Unhandled status code: ${response.status}`);
+        throw new Error(`Fetching Failed (Code ${response.status}). ${response.statusText}`);
     }
 }
