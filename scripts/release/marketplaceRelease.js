@@ -14,19 +14,19 @@ async function main() {
     const {
         widgetName,
         version,
-        marketplace: { studioProMinimumVersion, marketplaceId }
+        marketplace: { minimumMXVersion, marketplaceId }
     } = require(join(process.cwd(), "package.json"));
 
-    if (!widgetName || !version || !studioProMinimumVersion || !marketplaceId || !version.includes(".")) {
+    if (!widgetName || !version || !minimumMXVersion || !marketplaceId || !version.includes(".")) {
         throw new Error("Widget does not define expected keys in its package.json");
     }
 
-    await uploadModuleToAppStore(widgetName, marketplaceId, version, studioProMinimumVersion);
+    await uploadModuleToAppStore(widgetName, marketplaceId, version, minimumMXVersion);
 }
 
-async function uploadModuleToAppStore(widgetName, marketplaceId, version, studioProMinimumVersion) {
+async function uploadModuleToAppStore(widgetName, marketplaceId, version, minimumMXVersion) {
     try {
-        const postResponse = await createDraft(marketplaceId, version, studioProMinimumVersion);
+        const postResponse = await createDraft(marketplaceId, version, minimumMXVersion);
         await publishDraft(postResponse.Version.VersionUUID);
         console.log(`Successfully uploaded ${widgetName} to the Mendix Marketplace.`);
     } catch (error) {
@@ -58,7 +58,7 @@ async function getGithubAssetUrl() {
     }
 }
 
-async function createDraft(marketplaceId, version, studioProMinimumVersion) {
+async function createDraft(marketplaceId, version, minimumMXVersion) {
     console.log(`Creating draft in the Mendix Marketplace..`);
     const url = `${config.appStoreUrl}/packages/${marketplaceId}/version`;
     try {
@@ -68,7 +68,7 @@ async function createDraft(marketplaceId, version, studioProMinimumVersion) {
             VersionMajor: major ?? 1,
             VersionMinor: minor ?? 0,
             VersionPatch: patch ?? 0,
-            StudioProVersion: studioProMinimumVersion,
+            StudioProVersion: minimumMXVersion,
             IsSourceGitHub: "true",
             GithubRepo: {
                 UseReadmeForDoc: false,

@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "studioProMinimumVersion": "8.3.1",
+    "minimumMXVersion": "8.3.1",
     "marketplaceId": 113922
   },
     "testProject": {

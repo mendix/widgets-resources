@@ -14,7 +14,7 @@
   },
   "license": "Apache-2.0",
   "marketplace": {
-    "studioProMinimumVersion": "7.13.1",
+    "minimumMXVersion": "7.13.1",
     "marketplaceId": 107984
   },
   "scripts": {
