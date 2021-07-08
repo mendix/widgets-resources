@@ -7,7 +7,7 @@ describe("datagrid-web", () => {
     });
 
     describe("capabilities: sorting", () => {
-        it("changes order of data to ASC when clicking sort option", () => {
+        it("applies the default sort order from the data source option", () => {
             const grid = page.getWidget("datagrid1");
             const column = page.waitForElement(".column-header*=First Name", grid);
             const icon = page.waitForElement("svg", column);
@@ -16,19 +16,28 @@ describe("datagrid-web", () => {
             expect(icon.getAttribute("data-icon")).toContain("arrows-alt-v");
 
             expect(datagrid.getAllRows(items)).toEqual([
-                "10",
-                "test",
-                "test",
+                "12",
+                "test3",
+                "test3",
                 "",
                 "11",
                 "test2",
                 "test2",
                 "",
-                "12",
-                "test3",
-                "test3",
+                "10",
+                "test",
+                "test",
                 ""
             ]);
+        });
+
+        it("changes order of data to ASC when clicking sort option", () => {
+            const grid = page.getWidget("datagrid1");
+            const column = page.waitForElement(".column-header*=First Name", grid);
+            const icon = page.waitForElement("svg", column);
+            const items = page.waitForElements(".td", grid);
+
+            expect(icon.getAttribute("data-icon")).toContain("arrows-alt-v");
 
             column.click();
 
