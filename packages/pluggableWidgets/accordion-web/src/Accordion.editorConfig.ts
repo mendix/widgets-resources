@@ -99,7 +99,7 @@ export function check(values: AccordionPreviewProps): Problem[] {
         errors.push({
             property: "expandBehavior",
             severity: "error",
-            message: `There are ${amountOfGroupsStartingExpanded} groups configured to start expanded. Change the configuration to have just one group starting expanded or switch the "Expanded groups" property to "Multiple".`
+            message: `The 'Expanded groups' property is set to 'Single', but there are ${amountOfGroupsStartingExpanded} group items configured to be shown as expanded. Either change the configuration to have just one group to start as expanded or switch the 'Expanded groups' property to 'Multiple'.`
         });
     }
 
