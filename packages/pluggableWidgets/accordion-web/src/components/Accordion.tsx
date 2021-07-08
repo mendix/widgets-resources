@@ -35,22 +35,26 @@ export interface AccordionProps extends Pick<AccordionContainerProps, "class" | 
 export function Accordion(props: AccordionProps): ReactElement | null {
     const reducer = useRef(getCollapsedAccordionGroupsReducer(props.singleExpandedGroup ? "single" : "multiple")); // the accordion group reducer function doesn't need to change during the lifetime of this component, since the singleExpandedGroup won't change.
 
-    const [collapsedAccordionGroups, collapsedAccordionGroupsDispatch] = useReducer(
+    const [accordionGroupCollapsedState, accordionGroupCollapsedStateDispatch] = useReducer(
         reducer.current,
-        props.groups.reduce<boolean[]>((accumulator, group) => {
-            let result;
-            const collapsed = !props.previewMode && props.collapsible && !!group.initiallyCollapsed;
+        undefined,
+        () => {
+            const groupCollapsedStates = props.groups.map(
+                group => !props.previewMode && props.collapsible && !!group.initiallyCollapsed
+            );
 
-            if (!collapsed && props.singleExpandedGroup) {
-                result = accumulator.map(() => true);
-            } else {
-                result = [...accumulator];
+            if (!props.previewMode && props.singleExpandedGroup) {
+                const lastGroupCollapsedStateIndex = groupCollapsedStates.lastIndexOf(false);
+
+                if (lastGroupCollapsedStateIndex > -1) {
+                    for (let i = 0; i < lastGroupCollapsedStateIndex; i++) {
+                        groupCollapsedStates[i] = true;
+                    }
+                }
             }
 
-            result.push(collapsed);
-
-            return result;
-        }, [])
+            return groupCollapsedStates;
+        }
     );
 
     const previousGroupCollapsedValues = useRef(props.groups.map(group => group.collapsed));
@@ -66,7 +70,7 @@ export function Accordion(props: AccordionProps): ReactElement | null {
         });
 
         changes.forEach(change => {
-            collapsedAccordionGroupsDispatch({ type: change.value ? "collapse" : "expand", index: change.index });
+            accordionGroupCollapsedStateDispatch({ type: change.value ? "collapse" : "expand", index: change.index });
         });
     }, [props.groups]);
 
@@ -79,9 +83,9 @@ export function Accordion(props: AccordionProps): ReactElement | null {
             parent={containerRef}
             id={`${props.id}AccordionGroup${index}`}
             collapsible={props.collapsible}
-            collapsedAccordionGroupsDispatch={collapsedAccordionGroupsDispatch}
+            accordionGroupCollapsedStateDispatch={accordionGroupCollapsedStateDispatch}
             {...group}
-            collapsed={collapsedAccordionGroups[index]}
+            collapsed={accordionGroupCollapsedState[index]}
             animateContent={props.animateContent}
             generateHeaderIcon={props.generateHeaderIcon}
             showHeaderIcon={props.showGroupHeaderIcon}
@@ -104,19 +108,19 @@ export function Accordion(props: AccordionProps): ReactElement | null {
 interface AccordionGroupWrapperProps extends Omit<AccordionGroupProps, "toggleCollapsed" | "changeFocus"> {
     index: number;
     parent: MutableRefObject<HTMLDivElement | null>;
-    collapsedAccordionGroupsDispatch: Dispatch<CollapsedAccordionGroupsReducerAction>;
+    accordionGroupCollapsedStateDispatch: Dispatch<CollapsedAccordionGroupsReducerAction>;
 }
 
 function AccordionGroupWrapper(props: AccordionGroupWrapperProps): ReactElement {
-    const { collapsedAccordionGroupsDispatch } = props;
+    const { accordionGroupCollapsedStateDispatch } = props;
 
     const toggleCollapsedState = useCallback(() => {
         if (props.collapsed) {
-            collapsedAccordionGroupsDispatch({ type: "expand", index: props.index });
+            accordionGroupCollapsedStateDispatch({ type: "expand", index: props.index });
         } else {
-            collapsedAccordionGroupsDispatch({ type: "collapse", index: props.index });
+            accordionGroupCollapsedStateDispatch({ type: "collapse", index: props.index });
         }
-    }, [props.collapsed, collapsedAccordionGroupsDispatch, props.index]);
+    }, [props.collapsed, accordionGroupCollapsedStateDispatch, props.index]);
 
     const focusAccordionGroupHeaderElement = useCallback(
         (focusedHeaderButton: EventTarget | null, focusTargetHeader: Target): void => {
