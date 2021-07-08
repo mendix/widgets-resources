@@ -6,28 +6,25 @@ export interface HeaderProps {
 }
 
 export function Header(props: HeaderProps): ReactElement {
-    let header;
+    let Header: keyof JSX.IntrinsicElements = "h1";
 
     switch (props.heading) {
-        case "headingOne":
-            header = <h1>{props.text}</h1>;
-            break;
         case "headingTwo":
-            header = <h2>{props.text}</h2>;
+            Header = "h2";
             break;
         case "headingThree":
-            header = <h3>{props.text}</h3>;
+            Header = "h3";
             break;
         case "headingFour":
-            header = <h4>{props.text}</h4>;
+            Header = "h4";
             break;
         case "headingFive":
-            header = <h5>{props.text}</h5>;
+            Header = "h5";
             break;
         case "headingSix":
-            header = <h6>{props.text}</h6>;
+            Header = "h6";
             break;
     }
 
-    return header;
+    return <Header>{props.text}</Header>;
 }

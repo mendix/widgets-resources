@@ -109,8 +109,8 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -391,8 +391,8 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -688,8 +688,8 @@ exports[`Accordion in collapsible & multiple expanded group mode applies group c
   }
 >
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -711,8 +711,8 @@ exports[`Accordion in collapsible & multiple expanded group mode applies group c
     visible={true}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={false}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -866,8 +866,8 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1190,8 +1190,8 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1591,8 +1591,8 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1768,8 +1768,8 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1921,8 +1921,8 @@ exports[`Accordion in collapsible & multiple expanded group mode inits with grou
   }
 >
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={false}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -1944,8 +1944,8 @@ exports[`Accordion in collapsible & multiple expanded group mode inits with grou
     visible={true}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={false}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -1967,8 +1967,8 @@ exports[`Accordion in collapsible & multiple expanded group mode inits with grou
     visible={false}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -2052,8 +2052,8 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -2201,8 +2201,8 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -2430,8 +2430,8 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -2726,8 +2726,8 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3113,8 +3113,8 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3318,8 +3318,8 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3561,8 +3561,8 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3738,8 +3738,8 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3891,8 +3891,8 @@ exports[`Accordion in collapsible & single expanded group mode inits with group 
   }
 >
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={false}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -3914,8 +3914,8 @@ exports[`Accordion in collapsible & single expanded group mode inits with group 
     visible={true}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -3951,8 +3951,8 @@ exports[`Accordion in collapsible & single expanded group mode inits with not mo
   }
 >
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -3974,8 +3974,8 @@ exports[`Accordion in collapsible & single expanded group mode inits with not mo
     visible={true}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={false}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -4059,8 +4059,8 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -4208,8 +4208,8 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -4366,8 +4366,8 @@ exports[`Accordion not collapsible renders correctly 1`] = `
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={false}
       content={
         <span>
@@ -4483,8 +4483,8 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={false}
       content={
         <span>
@@ -4579,8 +4579,8 @@ exports[`Accordion renders correctly without tabindex 1`] = `
   }
 >
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -4602,8 +4602,8 @@ exports[`Accordion renders correctly without tabindex 1`] = `
     visible={true}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
