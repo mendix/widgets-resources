@@ -27,4 +27,4 @@ jobs:
               - name: "Installing dependencies"
                 run: npm install
               - name: "Check changes and publish widgets"
-                run: TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }} MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run releaseMarketplace -- --scope=${{ steps.scope.outputs._1 }}
+                run: TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }} MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope=${{ steps.scope.outputs._1 }}

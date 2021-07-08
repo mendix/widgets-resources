@@ -29,7 +29,7 @@
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:web",
-    "releaseMarketplace": "node ../../../scripts/release/marketplaceRelease.js"
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "license": "Apache-2.0",
   "devDependencies": {

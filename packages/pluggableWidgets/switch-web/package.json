@@ -33,7 +33,7 @@
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "cross-env MPKOUTPUT=Switch.mpk pluggable-widgets-tools release:web",
-    "releaseMarketplace": "node ../../../scripts/release/marketplaceRelease.js"
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
