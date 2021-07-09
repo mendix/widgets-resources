@@ -8,3 +8,4 @@
 **/customWidgets/**/* @mendix/web-content
 **/atlas/**/native/**/* @mendix/native-content
 **/atlas/**/web/**/* @mendix/web-content
+.gitmodules @mendix/web-content
