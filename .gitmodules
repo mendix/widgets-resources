@@ -69,11 +69,11 @@
 [submodule "packages/pluggableWidgets/timeline-web/tests/testProject"]
 	path = packages/pluggableWidgets/timeline-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
-	branch = timeline-web
+	branch = timeline-web-mx8
 [submodule "packages/pluggableWidgets/popup-menu-web/tests/testProject"]
-	branch = popupmenu-web
 	url = https://github.com/mendix/testProjects.git
 	path = packages/pluggableWidgets/popup-menu-web/tests/testProject
+	branch = popupmenu-web-mx8
 [submodule "packages/pluggableWidgets/badge-web/tests/testProject"]
 	path = packages/pluggableWidgets/badge-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
