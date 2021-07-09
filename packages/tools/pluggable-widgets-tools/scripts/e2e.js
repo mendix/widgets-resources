@@ -1,10 +1,14 @@
-const { execSync } = require("child_process");
+const { execSync, exec } = require("child_process");
 const findFreePort = require("find-free-port");
-const { access, readFile } = require("fs").promises;
+const { readFile } = require("fs").promises;
 const fetch = require("node-fetch");
 const { join } = require("path");
-const { cat, cp, ls, mkdir } = require("shelljs");
+const { cat, cp, ls, mkdir, rm } = require("shelljs");
 const nodeIp = require("ip");
+const { pipeline } = require("stream");
+const { promisify } = require("util");
+const { createWriteStream } = require("fs");
+const { tmpdir } = require("os");
 
 main().catch(e => {
     console.error(e);
@@ -17,10 +21,6 @@ async function main() {
 
     if (!ip) {
         throw new Error("Could not determine local ip address!");
-    }
-
-    if (!(await exists("tests/testProject"))) {
-        throw new Error("No e2e test project found locally in tests/testProject!");
     }
     try {
         execSync("docker info");
@@ -43,6 +43,8 @@ async function main() {
         mkdir("-p", "tests/testProject/widgets");
         cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
     }
+    // Downloading test project
+    await unzipTestProject();
 
     // Create reusable mxbuild image
     const existingImages = execSync(`docker image ls -q mxbuild:${mendixVersion}`).toString().trim();
@@ -134,15 +136,6 @@ async function main() {
     }
 }
 
-async function exists(filePath) {
-    try {
-        await access(filePath);
-        return true;
-    } catch (e) {
-        return false;
-    }
-}
-
 async function getMendixVersion() {
     const mendixOptionIndex = process.argv.indexOf("--mx-version");
     const targetMendixVersion = mendixOptionIndex >= 0 ? process.argv[mendixOptionIndex + 1] : undefined;
@@ -171,4 +164,42 @@ async function getMendixVersion() {
     }
 
     return mendixVersion;
+}
+
+async function unzipTestProject() {
+    const packageConf = JSON.parse(await readFile("package.json"));
+
+    console.log("Copying test project from GitHub repository...");
+
+    try {
+        await promisify(exec)("unzip --help", { stdio: "ignore" });
+    } catch (e) {
+        throw new Error("This script requires unzip command to be available on the PATH!");
+    }
+
+    const testArchivePath = await getTestProject(packageConf.testProject.branchName);
+
+    try {
+        mkdir("-p", "tests/testProject");
+        console.log(testArchivePath);
+        await promisify(exec)(`unzip -j -o ${testArchivePath} -d tests/testProject`);
+        rm("-f", testArchivePath);
+    } catch (e) {
+        throw new Error("Failed to unzip the test project into tests/testProject", e.message);
+    }
+}
+
+async function getTestProject(branch) {
+    const downloadedArchivePath = join(tmpdir(), `testProject.zip`);
+    try {
+        await promisify(pipeline)(
+            (await fetch(`https://github.com/mendix/testProjects/archive/refs/heads/${branch}.zip`)).body,
+            createWriteStream(downloadedArchivePath)
+        );
+        return downloadedArchivePath;
+    } catch (e) {
+        console.log(`Url is not available :(`);
+        rm("-f", downloadedArchivePath);
+    }
+    throw new Error("Cannot find test project in GitHub repository. Try again later.");
 }

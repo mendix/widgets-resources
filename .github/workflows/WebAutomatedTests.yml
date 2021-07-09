@@ -27,7 +27,7 @@ jobs:
             - name: "Checking-out code"
               uses: actions/checkout@v2
               with:
-                  submodules: true
+                  submodules: false
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
               run:

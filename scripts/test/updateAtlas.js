@@ -1,14 +1,13 @@
 const { exec } = require("child_process");
 const {
-    createWriteStream,
-    promises: { access }
+    createWriteStream
 } = require("fs");
 const fetch = require("node-fetch");
 const { tmpdir } = require("os");
 const { join } = require("path");
 const rCopy = require("recursive-copy");
 const semverCompare = require("semver/functions/rcompare");
-const { rm } = require("shelljs");
+const { mkdir, rm } = require("shelljs");
 const { pipeline } = require("stream");
 const { promisify } = require("util");
 
@@ -18,9 +17,7 @@ main().catch(e => {
 });
 
 async function main() {
-    if (!(await exists("tests/testProject"))) {
-        throw new Error("Cannot find a tests/testProject. Did you run the script in the widget folder?");
-    }
+    mkdir("-p", "tests/testProject");
 
     rm(
         "-rf",
@@ -35,15 +32,6 @@ async function main() {
         await copyLatestAtlas();
     } else {
         await copyLatestReleasedAtlas();
-    }
-}
-
-async function exists(filePath) {
-    try {
-        await access(filePath);
-        return true;
-    } catch (e) {
-        return false;
     }
 }
 
