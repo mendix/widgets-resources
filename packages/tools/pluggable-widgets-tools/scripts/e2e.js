@@ -5,6 +5,7 @@ const fetch = require("node-fetch");
 const { join } = require("path");
 const { cat, cp, ls, mkdir, rm } = require("shelljs");
 const nodeIp = require("ip");
+const { exists } = require("fs");
 const { pipeline } = require("stream");
 const { promisify } = require("util");
 const { createWriteStream } = require("fs");
@@ -31,6 +32,18 @@ async function main() {
     const packageConf = JSON.parse(await readFile("package.json"));
     const widgetVersion = packageConf?.version;
 
+    // Downloading test project
+    if (!process.argv.includes("--no-update-testProject")) {
+        await unzipTestProject();
+    } else {
+        const projectMpr = ls(`tests/testProject/*.mpr`).length;
+        if (!projectMpr) {
+            throw new Error(
+                "No project founds in tests/testProject folder. Please copy your test project before start e2e tests."
+            );
+        }
+    }
+
     if (!process.argv.includes("--no-widget-update")) {
         const widgetMpk = ls(`dist/${widgetVersion}/*.mpk`).length;
         if (!widgetMpk) {
@@ -43,8 +56,6 @@ async function main() {
         mkdir("-p", "tests/testProject/widgets");
         cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
     }
-    // Downloading test project
-    await unzipTestProject();
 
     // Create reusable mxbuild image
     const existingImages = execSync(`docker image ls -q mxbuild:${mendixVersion}`).toString().trim();
@@ -169,6 +180,9 @@ async function getMendixVersion() {
 async function unzipTestProject() {
     const packageConf = JSON.parse(await readFile("package.json"));
 
+    if (!packageConf?.testProject?.branchName) {
+        throw new Error("Required attribute 'branchName' not found in package.json");
+    }
     console.log("Copying test project from GitHub repository...");
 
     try {
@@ -181,8 +195,9 @@ async function unzipTestProject() {
 
     try {
         mkdir("-p", "tests/testProject");
-        console.log(testArchivePath);
-        await promisify(exec)(`unzip -j -o ${testArchivePath} -d tests/testProject`);
+        await promisify(exec)(`unzip -o ${testArchivePath} -d tests/testProject`);
+        cp("-rf", `tests/testProject/testProjects-${packageConf.testProject.branchName}/*`, "tests/testProject");
+        rm("-rf", `tests/testProject/testProjects-${packageConf.testProject.branchName}`);
         rm("-f", testArchivePath);
     } catch (e) {
         throw new Error("Failed to unzip the test project into tests/testProject", e.message);

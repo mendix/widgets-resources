@@ -8,6 +8,9 @@
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
   },
+  "testProject": {
+    "branchName": "slider-web"
+  },
   "license": "Apache-2.0",
   "scripts": {
     "start": "utils-react-widgets start",

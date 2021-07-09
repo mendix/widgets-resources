@@ -111,6 +111,7 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 -   Run `npm run build` on a desired widget folder. For ex: `packages/pluggableWidgets/badge-web`. This will build and copy the mpk to
     each Mendix project's correct widget folder.
 -   Open and run the project in `<widgetName>/tests/testProject` with Mendix Studio
+-   If you don't want to override your test project use the flag `--no-update-testProject` in test:e2e npm script
 
 #### Adding new test project to the repo
 

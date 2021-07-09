@@ -9,7 +9,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "testProject": {
-    "branchName": "ColorPicker-web-mx8"
+    "branchName": "color-picker-web"
   },
   "license": "Apache-2.0",
   "scripts": {

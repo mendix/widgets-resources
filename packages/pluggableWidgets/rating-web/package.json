@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "testProject": {
-    "branchName": "rating-web"
+    "branchName": "star-rating-web"
   },
   "packagePath": "com.mendix.widget.custom",
   "scripts": {

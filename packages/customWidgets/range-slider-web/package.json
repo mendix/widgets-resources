@@ -9,7 +9,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "testProject": {
-    "branchName": "range-slider-web-mx8"
+    "branchName": "range-slider-web"
   },
   "license": "Apache-2.0",
   "scripts": {

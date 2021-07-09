@@ -13,7 +13,7 @@
     "developmentPort": 3000
   },
   "testProject": {
-    "branchName": "datagrid-text-filter-web-mx8"
+    "branchName": "popupmenu-web"
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
