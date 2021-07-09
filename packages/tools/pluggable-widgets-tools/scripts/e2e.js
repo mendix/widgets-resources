@@ -39,7 +39,7 @@ async function main() {
         const projectMpr = ls(`tests/testProject/*.mpr`).length;
         if (!projectMpr) {
             throw new Error(
-                "No project founds in tests/testProject folder. Please copy your test project before start e2e tests."
+                "No project found in tests/testProject folder. Please copy your test project before start e2e tests."
             );
         }
     }
