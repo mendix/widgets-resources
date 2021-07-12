@@ -6,6 +6,8 @@
 import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
 
+export type TypeEnum = "dynamic" | "expression";
+
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "aspectRatio" | "percentageOfParent" | "percentageOfWidth" | "pixels";
@@ -17,8 +19,11 @@ export interface VideoPlayerContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    urlExpression: DynamicValue<string>;
+    type: TypeEnum;
+    urlExpression?: DynamicValue<string>;
     posterExpression?: DynamicValue<string>;
+    videoUrl?: DynamicValue<string>;
+    posterUrl?: DynamicValue<string>;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
@@ -33,8 +38,11 @@ export interface VideoPlayerContainerProps {
 export interface VideoPlayerPreviewProps {
     class: string;
     style: string;
+    type: TypeEnum;
     urlExpression: string;
     posterExpression: string;
+    videoUrl: string;
+    posterUrl: string;
     autoStart: boolean;
     showControls: boolean;
     muted: boolean;
