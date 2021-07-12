@@ -32,8 +32,10 @@ export function check(values: BarChartPreviewProps): Problem[] {
 
     values.barSeries.forEach((series, index) => {
         if (series.dataSet === "static") {
-            // @ts-ignore
-            if (series.staticDataSource.type === "null") {
+            if (
+                !series.staticDataSource ||
+                ("type" in series.staticDataSource && series.staticDataSource.type === "null")
+            ) {
                 errors.push({
                     property: `barSeries/${index + 1}/staticDataSource`,
                     severity: "error",
@@ -57,8 +59,10 @@ export function check(values: BarChartPreviewProps): Problem[] {
                 });
             }
         } else {
-            // @ts-ignore
-            if (series.dynamicDataSource.type === "null") {
+            if (
+                !series.dynamicDataSource ||
+                ("type" in series.dynamicDataSource && series.dynamicDataSource.type === "null")
+            ) {
                 errors.push({
                     property: `barSeries/${index + 1}/dynamicDataSource`,
                     severity: "error",
