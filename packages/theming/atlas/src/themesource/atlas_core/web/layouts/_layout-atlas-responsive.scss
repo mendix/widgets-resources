@@ -127,6 +127,13 @@
         // Topbar
         .region-topbar {
             padding: 0 $spacing-small;
+
+            .toggle-btn {
+                padding: 0;
+                border-color: transparent;
+                border-radius: 0;
+                background: transparent;
+            }
         }
     }
 
@@ -140,21 +147,6 @@
         }
     }
 
-    // All responsive layouts
-    .layout-atlas-responsive,
-    .layout-atlas-responsive-default,
-    .layout-atlas-responsive-topbar {
-        // Topbar
-        .region-topbar {
-            .toggle-btn {
-                display: none;
-
-                @media (max-width: $screen-sm-max) {
-                    display: inline-block;
-                }
-            }
-        }
-    }
 
     // Fix Safari issue of sidebar disappearing
     .profile-tablet {
