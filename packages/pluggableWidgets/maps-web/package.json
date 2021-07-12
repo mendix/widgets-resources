@@ -13,6 +13,10 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "maps-web"
+  },
   "packagePath": "com.mendix.widget.custom.Maps",
   "scripts": {
     "start": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools start:server",

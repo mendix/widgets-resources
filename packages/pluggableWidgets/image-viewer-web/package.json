@@ -13,6 +13,10 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "image-viewer-web"
+  },
   "packagePath": "com.mendix.widget.custom",
   "scripts": {
     "start": "cross-env MPKOUTPUT=ImageViewer.mpk pluggable-widgets-tools start:server",

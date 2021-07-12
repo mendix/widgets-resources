@@ -13,6 +13,10 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "switch-web"
+  },
   "packagePath": "com.mendix.widget.custom",
   "scripts": {
     "start": "cross-env MPKOUTPUT=Switch.mpk pluggable-widgets-tools start:server",
@@ -34,6 +38,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "@mendix/piw-utils-internal":"^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0"
   }
 }
