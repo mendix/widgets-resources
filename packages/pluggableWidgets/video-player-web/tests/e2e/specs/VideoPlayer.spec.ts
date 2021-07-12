@@ -68,7 +68,7 @@ describe("Tab page", () => {
 
         expect(html5Player).toContain('class="widget-video-player-html5"');
         expect(html5Player).toContain("<source src=");
-        expect(html5Player).toContain("ElephantsDream.mp4");
+        expect(html5Player).toContain("file_example_MP4_640_3MG.mp4");
     });
 });
 

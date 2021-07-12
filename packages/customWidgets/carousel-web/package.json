@@ -9,6 +9,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "carousel-web"
   },
   "license": "Apache-2.0",

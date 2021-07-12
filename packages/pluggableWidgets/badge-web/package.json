@@ -14,6 +14,7 @@
     "developmentPort": 3000
   },
   "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "badge-web"
   },
   "packagePath": "com.mendix.widget.custom",

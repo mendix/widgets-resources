@@ -13,7 +13,8 @@
     "mendixHost": "http://localhost:8080/",
     "developmentPort": "3000"
   },
-    "testProject": {
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "video-player-web"
   },
   "packagePath": "com.mendix.widget.web",

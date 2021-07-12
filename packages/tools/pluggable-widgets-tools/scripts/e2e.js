@@ -5,7 +5,6 @@ const fetch = require("node-fetch");
 const { join } = require("path");
 const { cat, cp, ls, mkdir, rm } = require("shelljs");
 const nodeIp = require("ip");
-const { exists } = require("fs");
 const { pipeline } = require("stream");
 const { promisify } = require("util");
 const { createWriteStream } = require("fs");
@@ -33,7 +32,7 @@ async function main() {
     const widgetVersion = packageConf?.version;
 
     // Downloading test project
-    if (!process.argv.includes("--no-update-testProject")) {
+    if (!process.argv.includes("--no-update-testProject") && packageConf?.testProject?.githubUrl && packageConf?.testProject?.branchName) {
         await unzipTestProject();
     } else {
         const projectMpr = ls(`tests/testProject/*.mpr`).length;
@@ -180,9 +179,6 @@ async function getMendixVersion() {
 async function unzipTestProject() {
     const packageConf = JSON.parse(await readFile("package.json"));
 
-    if (!packageConf?.testProject?.branchName) {
-        throw new Error("Required attribute 'branchName' not found in package.json");
-    }
     console.log("Copying test project from GitHub repository...");
 
     try {
@@ -191,24 +187,33 @@ async function unzipTestProject() {
         throw new Error("This script requires unzip command to be available on the PATH!");
     }
 
-    const testArchivePath = await getTestProject(packageConf.testProject.branchName);
+    const testArchivePath = await getTestProject(packageConf.testProject.githubUrl, packageConf.testProject.branchName);
 
     try {
+        const folderPrefix = packageConf.testProject.githubUrl.split("/").pop();
+        if (!folderPrefix) {
+            throw new Error("Could not determine prefix for repository folder. Please make sure you have defined a githubUrl with a valid Github repository.");
+        }
         mkdir("-p", "tests/testProject");
         await promisify(exec)(`unzip -o ${testArchivePath} -d tests/testProject`);
-        cp("-rf", `tests/testProject/testProjects-${packageConf.testProject.branchName}/*`, "tests/testProject");
-        rm("-rf", `tests/testProject/testProjects-${packageConf.testProject.branchName}`);
+        cp("-rf", `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}/*`, "tests/testProject");
+        rm("-rf", `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}`);
         rm("-f", testArchivePath);
     } catch (e) {
         throw new Error("Failed to unzip the test project into tests/testProject", e.message);
     }
 }
 
-async function getTestProject(branch) {
+async function getTestProject(repository, branch) {
     const downloadedArchivePath = join(tmpdir(), `testProject.zip`);
+
+    if( !repository.includes("github.com")) {
+        throw new Error("githubUrl is not a valid github repository!");
+    }
+
     try {
         await promisify(pipeline)(
-            (await fetch(`https://github.com/mendix/testProjects/archive/refs/heads/${branch}.zip`)).body,
+            (await fetch(`${repository}/archive/refs/heads/${branch}.zip`)).body,
             createWriteStream(downloadedArchivePath)
         );
         return downloadedArchivePath;
