@@ -21,7 +21,7 @@ export interface TreeViewContainerProps {
 export interface TreeViewPreviewProps {
     class: string;
     style: string;
-    datasource: {} | null;
+    datasource: {} | { type: string } | null;
     caption: string;
     hasChildren: boolean;
     startExpanded: boolean;

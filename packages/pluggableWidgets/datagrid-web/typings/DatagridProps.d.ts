@@ -82,7 +82,7 @@ export interface DatagridContainerProps {
 export interface DatagridPreviewProps {
     class: string;
     style: string;
-    datasource: {} | null;
+    datasource: {} | { type: string } | null;
     columns: ColumnsPreviewType[];
     columnsFilterable: boolean;
     pageSize: number | null;
