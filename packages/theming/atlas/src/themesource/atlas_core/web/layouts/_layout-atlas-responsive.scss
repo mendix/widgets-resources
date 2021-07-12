@@ -127,6 +127,13 @@
         // Topbar
         .region-topbar {
             padding: 0 $spacing-small;
+
+            .toggle-btn {
+                padding: 0;
+                border-color: transparent;
+                border-radius: 0;
+                background: transparent;
+            }
         }
     }
 

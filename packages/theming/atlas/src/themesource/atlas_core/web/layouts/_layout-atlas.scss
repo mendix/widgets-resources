@@ -68,7 +68,11 @@
 
             // Toggle btn
             .toggle-btn {
+                padding: 0;
                 margin-right: $spacing-medium;
+                border-color: transparent;
+                border-radius: 0;
+                background: transparent;
             }
 
             // For your company, product, or project name
