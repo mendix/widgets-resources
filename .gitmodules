@@ -106,3 +106,7 @@
 	path = packages/pluggableWidgets/image-viewer-web/tests/testProject
 	url = https://github.com/mendix/testProjects.git
 	branch = image-viewer-web
+[submodule "packages/pluggableWidgets/datagrid-dropdown-filter-web/tests/testProject"]
+	path = packages/pluggableWidgets/datagrid-dropdown-filter-web/tests/testProject
+	url = https://github.com/mendix/testProjects.git
+	branch = datagrid-dropdown-filter-web
