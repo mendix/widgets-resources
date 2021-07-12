@@ -31,7 +31,7 @@ describe("datagrid-dropdown-filter-web", () => {
             expect(datagrid.getAllRows(items)).toEqual(["10", "test", "test", "Yes", ""]);
         });
 
-        it("shows the expected result when multiple selected items", () => {
+        it("shows the expected result with multiple selected items", () => {
             const grid = page.getWidget("datagrid1");
             const dropdown = page.getElement(".dropdown-container", grid);
 
