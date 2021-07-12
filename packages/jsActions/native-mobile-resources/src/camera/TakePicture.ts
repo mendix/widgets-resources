@@ -119,6 +119,7 @@ export async function TakePicture(
                 .then(blob => {
                     // eslint-disable-next-line no-useless-escape
                     const filename = /[^\/]*$/.exec(uri)![0];
+                    const filePathWithoutFileScheme = uri.replace("file://", "");
 
                     mx.data.saveDocument(
                         imageObject.getGuid(),
@@ -126,7 +127,7 @@ export async function TakePicture(
                         {},
                         blob,
                         async () => {
-                            await NativeModules.NativeFsModule.remove(uri);
+                            await NativeModules.NativeFsModule.remove(filePathWithoutFileScheme);
 
                             imageObject.set("Name", filename);
 
@@ -137,7 +138,7 @@ export async function TakePicture(
                             });
                         },
                         async (error: Error) => {
-                            await NativeModules.NativeFsModule.remove(uri);
+                            await NativeModules.NativeFsModule.remove(filePathWithoutFileScheme);
 
                             reject(error);
                         }
