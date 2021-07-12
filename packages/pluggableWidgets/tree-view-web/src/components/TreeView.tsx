@@ -1,8 +1,10 @@
-import { GUID } from "mendix";
-import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactNode, useState } from "react";
+import { GUID, WebIcon } from "mendix";
+import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactNode, useCallback, useState } from "react";
 import classNames from "classnames";
 
 import "../ui/TreeView.scss";
+import { ShowIconEnum } from "../../typings/TreeViewProps";
+import { Icon } from "./Icon";
 
 interface TreeViewObject {
     id: GUID;
@@ -17,6 +19,10 @@ export interface TreeViewProps {
     items: TreeViewObject[];
     isUserDefinedLeafNode: TreeViewBranchProps["isUserDefinedLeafNode"];
     startExpanded: TreeViewBranchProps["startExpanded"];
+    showCustomIcon: boolean;
+    iconPlacement: TreeViewBranchProps["iconPlacement"];
+    expandIcon: WebIcon | null;
+    collapseIcon: WebIcon | null;
 }
 
 export function TreeView({
@@ -25,8 +31,31 @@ export function TreeView({
     items,
     style,
     isUserDefinedLeafNode,
-    startExpanded
+    showCustomIcon,
+    startExpanded,
+    iconPlacement,
+    expandIcon,
+    collapseIcon
 }: TreeViewProps): ReactElement {
+    const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
+        (treeViewIsExpanded: boolean) =>
+            showCustomIcon ? (
+                <Icon
+                    icon={treeViewIsExpanded ? collapseIcon : expandIcon}
+                    className="widget-tree-view-branch-header-icon"
+                />
+            ) : (
+                // TODO: This should not be a glyphicon, but rather a svg or something that is not dependent on Atlas
+                <span
+                    className={classNames(
+                        "glyphicon",
+                        treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus",
+                        "widget-tree-view-branch-header-icon"
+                    )}
+                />
+            ),
+        [collapseIcon, expandIcon, showCustomIcon]
+    );
     // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
         <div className={classNames("widget-tree-view", className)} style={style} id={name}>
@@ -36,6 +65,8 @@ export function TreeView({
                     value={value}
                     isUserDefinedLeafNode={isUserDefinedLeafNode}
                     startExpanded={startExpanded}
+                    iconPlacement={iconPlacement}
+                    renderHeaderIcon={renderHeaderIcon}
                 >
                     {content}
                 </TreeViewBranch>
@@ -49,6 +80,8 @@ interface TreeViewBranchProps {
     startExpanded: boolean;
     value: TreeViewObject["value"];
     children: TreeViewObject["content"];
+    iconPlacement: ShowIconEnum;
+    renderHeaderIcon: (treeViewIsExpanded: boolean) => ReactNode;
 }
 
 function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttributes<HTMLHeadingElement> {
@@ -74,9 +107,10 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
 
     return (
         <div className="widget-tree-view-branch">
-            <h2
-                className={classNames("widget-tree-view-header", {
-                    "widget-tree-view-header-clickable": !props.isUserDefinedLeafNode
+            <header
+                className={classNames("widget-tree-view-branch-header", {
+                    "widget-tree-view-branch-header-clickable": !props.isUserDefinedLeafNode,
+                    "widget-tree-view-branch-header-reversed": props.iconPlacement === "left"
                 })}
                 onClick={toggleTreeViewContent}
                 onKeyDown={e => {
@@ -87,12 +121,11 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 }}
                 {...headerAccessibilityProps}
             >
-                {props.value}
-                {!props.isUserDefinedLeafNode && (
-                    // TODO: This should not be a glyphicon, but rather a svg or something that is not dependent on Atlas
-                    <span className={`glyphicon ${treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus"}`} />
-                )}
-            </h2>
+                <span className="widget-tree-view-branch-header-value">{props.value}</span>
+                {!props.isUserDefinedLeafNode &&
+                    props.iconPlacement !== "no" &&
+                    props.renderHeaderIcon(treeViewIsExpanded)}
+            </header>
             {/* TODO: For lazy loading and to prevent reloading the children data every time, it might be better to implement the 2nd "collapse" through CSS */}
             {!props.isUserDefinedLeafNode && treeViewIsExpanded && (
                 <div className="widget-tree-view-body">{props.children}</div>

@@ -1,4 +1,5 @@
 import { createElement, ReactElement } from "react";
+import { ValueStatus } from "mendix";
 import { TreeViewContainerProps } from "../typings/TreeViewProps";
 import { TreeView as TreeViewComponent } from "./components/TreeView";
 
@@ -14,6 +15,9 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             };
         }) ?? [];
 
+    const expandIcon = props.expandIcon?.status === ValueStatus.Available ? props.expandIcon.value : null;
+    const collapseIcon = props.collapseIcon?.status === ValueStatus.Available ? props.collapseIcon.value : null;
+
     return (
         <TreeViewComponent
             name={props.name}
@@ -22,6 +26,10 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             items={items}
             isUserDefinedLeafNode={!props.hasChildren}
             startExpanded={props.startExpanded}
+            showCustomIcon={props.advancedMode}
+            iconPlacement={props.showIcon}
+            expandIcon={expandIcon}
+            collapseIcon={collapseIcon}
         />
     );
 }

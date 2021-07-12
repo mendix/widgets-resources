@@ -42,5 +42,32 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+        <propertyGroup caption="Visualization">
+            <propertyGroup caption="Icon">
+                <property key="showIcon" type="enumeration" defaultValue="right">
+                    <caption>Show icon</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="right">Right</enumerationValue>
+                        <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="expandIcon" type="icon" required="false">
+                    <caption>Expand icon</caption>
+                    <description/>
+                </property>
+                <property key="collapseIcon" type="icon" required="false">
+                    <caption>Collapse icon</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Advanced">
+            <property key="advancedMode" type="boolean" defaultValue="false">
+                <caption>Advanced options</caption>
+                <description/>
+            </property>
+        </propertyGroup>
     </properties>
 </widget>
