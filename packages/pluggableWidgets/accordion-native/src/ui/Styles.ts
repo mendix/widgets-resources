@@ -34,13 +34,11 @@ export const defaultAccordionStyle: AccordionStyle = {
     },
     group: {
         container: {
-            flexGrow: 1,
             borderWidth: 1,
             borderColor: "#CED0D3"
         },
         header: {
             container: {
-                flexGrow: 1,
                 borderColor: "#CED0D3",
                 flexDirection: "row",
                 alignItems: "center",
@@ -49,31 +47,37 @@ export const defaultAccordionStyle: AccordionStyle = {
                 paddingHorizontal: 16
             },
             heading1: {
+                color: "#0A1326",
                 fontWeight: "600",
                 fontSize: 40,
                 lineHeight: 60
             },
             heading2: {
+                color: "#0A1326",
                 fontWeight: "600",
                 fontSize: 34,
                 lineHeight: 51
             },
             heading3: {
+                color: "#0A1326",
                 fontWeight: "600",
                 fontSize: 28,
                 lineHeight: 42
             },
             heading4: {
+                color: "#0A1326",
                 fontWeight: "600",
                 fontSize: 24,
                 lineHeight: 36
             },
             heading5: {
+                color: "#0A1326",
                 fontWeight: "600",
                 fontSize: 20,
                 lineHeight: 30
             },
             heading6: {
+                color: "#0A1326",
                 fontWeight: "600",
                 fontSize: 16,
                 lineHeight: 24
@@ -82,7 +86,7 @@ export const defaultAccordionStyle: AccordionStyle = {
                 height: 16,
                 width: 16,
                 size: 16,
-                color: "#000"
+                color: "#0A1326"
             }
         },
         content: {

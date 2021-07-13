@@ -23,14 +23,12 @@ export const com_mendix_widget_native_accordion_Accordion: AccordionType = {
     group: {
         container: {
             // All ViewStyle properties are allowed
-            flexGrow: 1,
             borderWidth: 1,
             borderColor: accordion.container.borderColor
         },
         header: {
             container: {
                 // All ViewStyle properties are allowed
-                flexGrow: 1,
                 borderColor: accordion.container.borderColor,
                 flexDirection: "row",
                 alignItems: "center",
