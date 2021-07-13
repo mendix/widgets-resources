@@ -43,7 +43,7 @@ export function AccordionGroup({
                         {group.headerText.value}
                     </Text>
                 ) : (
-                    group.headerContent
+                    <View style={{ flex: 1 }}>{group.headerContent}</View>
                 )}
                 {icon !== "no" && collapsible ? (
                     <GroupIcon
