@@ -15,7 +15,6 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -37,7 +36,6 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -50,6 +48,7 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -110,7 +109,6 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -132,7 +130,6 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -141,9 +138,17 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
@@ -205,7 +210,6 @@ exports[`Accordion in collapsible & single expanded group mode hides the first a
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -227,7 +231,6 @@ exports[`Accordion in collapsible & single expanded group mode hides the first a
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -236,9 +239,17 @@ exports[`Accordion in collapsible & single expanded group mode hides the first a
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
@@ -300,7 +311,6 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -322,7 +332,6 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -335,6 +344,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -395,7 +405,6 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -417,7 +426,6 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -426,9 +434,17 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
@@ -490,7 +506,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -512,7 +527,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -527,6 +541,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -587,7 +602,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -609,7 +623,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -620,9 +633,17 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
@@ -684,7 +705,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -706,7 +726,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -719,6 +738,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -761,7 +781,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -783,7 +802,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -792,9 +810,17 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
     </View>
     <View
       onLayout={[Function]}
@@ -838,7 +864,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -860,7 +885,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -873,6 +897,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -933,7 +958,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -955,7 +979,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -964,9 +987,17 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
@@ -1028,7 +1059,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -1050,7 +1080,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -1063,6 +1092,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -1123,7 +1153,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -1145,7 +1174,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -1154,9 +1182,17 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
@@ -1218,7 +1254,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -1240,7 +1275,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -1253,6 +1287,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
         style={
           Array [
             Object {
+              "color": "#0A1326",
               "fontSize": 40,
               "fontWeight": "600",
               "lineHeight": 60,
@@ -1313,7 +1348,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
       Object {
         "borderColor": "#CED0D3",
         "borderWidth": 1,
-        "flexGrow": 1,
       }
     }
   >
@@ -1335,7 +1369,6 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
             "alignItems": "center",
             "borderColor": "#CED0D3",
             "flexDirection": "row",
-            "flexGrow": 1,
             "justifyContent": "space-between",
             "paddingHorizontal": 16,
             "paddingVertical": 16,
@@ -1344,9 +1377,17 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
         ]
       }
     >
-      <Text>
-        Header2
-      </Text>
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
       <View
         style={
           Object {
