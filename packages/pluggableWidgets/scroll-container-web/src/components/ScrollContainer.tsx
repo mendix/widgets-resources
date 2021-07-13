@@ -1,43 +1,48 @@
-import { createElement, PropsWithChildren, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, CSSProperties, PropsWithChildren, ReactElement, useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
 
 interface ScrollContainerProps {
     className: string;
     width?: number;
     percentage?: number;
+    styles?: CSSProperties;
 }
 
 export function ScrollContainer(props: PropsWithChildren<ScrollContainerProps>): ReactElement {
-    const divContainer = useRef<HTMLDivElement>(null);
-    const [renderContents, showRenderContent] = useState(false);
+    const [divContainer, setDivContainer] = useState<HTMLDivElement | null>(null);
+    const [renderContents, showRenderContents] = useState(false);
     const [height, setHeight] = useState<number | undefined>(undefined);
 
     const handleResize = useCallback(() => {
-        if (divContainer.current?.parentElement?.className.match(/mx-placeholder|region-content/)) {
+        if (divContainer?.parentElement?.className.match(/mx-placeholder|region-content/)) {
             const topBar = document.querySelector(".topbar-content");
             setHeight(window.innerHeight - (topBar?.clientHeight ?? 0));
         } else {
             // Impossible to define height of the element
-            showRenderContent(true);
+            showRenderContents(true);
         }
-    }, [divContainer.current]);
+    }, [divContainer]);
 
     useEffect(() => {
-        if (divContainer.current?.clientHeight === 0) {
+        if (divContainer?.clientHeight === 0) {
             handleResize();
         }
-    }, [divContainer.current, handleResize]);
+    }, [divContainer, handleResize]);
 
     useEffect(() => {
         window.addEventListener("resize", handleResize);
         return () => {
             window.removeEventListener("resize", handleResize);
         };
-    }, []);
+    }, [handleResize]);
 
     return (
         <div
-            ref={divContainer}
+            ref={ref => {
+                if (ref && !divContainer) {
+                    setDivContainer(ref);
+                }
+            }}
             className={classNames("widget-scroll-container", props.className)}
             style={{
                 ...(props.width
@@ -45,7 +50,8 @@ export function ScrollContainer(props: PropsWithChildren<ScrollContainerProps>):
                     : props.percentage
                     ? { width: `${props.percentage}%` }
                     : undefined),
-                ...(height !== undefined ? { height } : undefined)
+                ...(height !== undefined ? { height } : undefined),
+                ...props.styles
             }}
         >
             <div

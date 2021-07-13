@@ -1,10 +1,5 @@
 {
     "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
     "baseUrl": "./",
-    "include": ["./src", "./typings", "node_modules/@mendix/pluggable-widgets-tools/typings"],
-    "compilerOptions": {
-        "jsx": "react",
-        "typeRoots": ["node_modules/@types", "../../../node_modules/@types"],
-        "types": ["jest"]
-    }
+    "include": ["./src", "./typings"]
 }

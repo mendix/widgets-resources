@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Scroll Container renders correctly the structure 1`] = `
+<div
+  className="widget-scroll-container scroll-container-test"
+  style={Object {}}
+>
+  <div
+    className="widget-scroll-container-wrapper"
+  />
+</div>
+`;

@@ -10,6 +10,7 @@ export function ScrollContainer(props: ScrollContainerContainerProps): ReactElem
             className={props.class}
             percentage={props.widthType === "percentage" ? props.widthPercentage?.toNumber() : undefined}
             width={props.widthType === "pixels" ? props.widthPixels?.toNumber() : undefined}
+            styles={props.style}
         >
             {props.content}
         </ScrollContainerComponent>
