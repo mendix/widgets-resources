@@ -1924,6 +1924,56 @@
             ]
         }
     ],
+    "com.mendix.widget.native.accordion.Accordion": [
+        {
+            "name": "Compact",
+            "type": "Toggle",
+            "description": "Reduces the spacing in the header and the content.",
+            "class": "accordionCompact"
+        },
+        {
+            "name": "Dividers",
+            "type": "Dropdown",
+            "description": "Configure the dividers between the groups.",
+            "options": [
+                {
+                    "name": "Lined",
+                    "class": "accordionLined"
+                },
+                {
+                    "name": "None",
+                    "class": "accordionDividerNone"
+                }
+            ]
+        },
+        {
+            "name": "Accordion style",
+            "type": "Dropdown",
+            "description": "Style of the Accordion.",
+            "options": [
+                {
+                    "name": "Primary",
+                    "class": "accordionPrimary"
+                },
+                {
+                    "name": "Secondary",
+                    "class": "accordionSecondary"
+                },
+                {
+                    "name": "Success",
+                    "class": "accordionSuccess"
+                },
+                {
+                    "name": "Warning",
+                    "class": "accordionWarning"
+                },
+                {
+                    "name": "Danger",
+                    "class": "accordionDanger"
+                }
+            ]
+        }
+    ],
     "com.mendix.widget.native.badge.Badge": [
         {
             "name": "Badge style",

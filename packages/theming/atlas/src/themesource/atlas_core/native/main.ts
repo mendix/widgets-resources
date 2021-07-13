@@ -10,6 +10,8 @@ import * as spacing from "./core/base/spacing";
 //
 // Components
 
+import * as widgetsAccordion from "./core/widgets/accordion";
+import * as helpersAccordion from "./core/helpers/accordion";
 import * as widgetsActivityIndicator from "./core/widgets/activityindicator";
 import * as helpersActivityIndicator from "./core/helpers/activityindicator";
 import * as widgetsAnimation from "./core/widgets/animation";
@@ -81,6 +83,8 @@ import * as page from "./layouts/page";
 module.exports = [
     flex,
     spacing,
+    !exclusionVariables.excludeAccordion ? widgetsAccordion : {},
+    !exclusionVariables.excludeAccordion && !exclusionVariables.excludeAccordionHelpers ? helpersAccordion : {},
     !exclusionVariables.excludeActivityIndicator ? widgetsActivityIndicator : {},
     !exclusionVariables.excludeActivityIndicator && !exclusionVariables.excludeActivityIndicatorHelpers
         ? helpersActivityIndicator

@@ -25,6 +25,7 @@ export interface VariablesBackgroundDefaults {
     secondaryLight: string;
     secondaryDark: string;
 }
+
 export interface VariablesBackground {
     primary: string;
     secondary: string;
@@ -61,6 +62,7 @@ export interface VariablesFontDefaults {
     colorDisabledLight: string;
     colorDisabledDark: string;
 }
+
 export interface VariablesFont {
     size: number;
     sizeSmallest: number;
@@ -332,6 +334,31 @@ export interface VariablesLayoutgrid {
 
 // ## Pluggable Widgets
 // -------------------------------------------------------------------------------------------------------------------//
+
+export interface VariablesAccordion {
+    container: {
+        backgroundColor: string;
+        borderColor: string;
+    };
+    groupHeader: {
+        container: {
+            paddingVertical: number;
+            paddingHorizontal: number;
+        };
+        heading: {
+            color: string;
+        };
+        icon: {
+            size: number;
+            color: string;
+        };
+    };
+    groupContent: {
+        paddingTop: number;
+        paddingBottom: number;
+        paddingHorizontal: number;
+    };
+}
 
 interface VariablesBadgeStyles {
     color: string;
