@@ -105,102 +105,78 @@ export function getPreview(values: AccordionPreviewProps): StructurePreviewProps
     return {
         type: "Container",
         borders: true,
-        children: values.groups
-            .map((group, index): StructurePreviewProps[] => {
-                let headerTextFontSize = 0;
-                let headerTextIconPadding = 0;
+        children: values.groups.reduce((accumulator, group, index): StructurePreviewProps[] => {
+            const { headerTextFontSize, headerTextIconPadding } = getHeaderTextPreviewDetails(group);
 
-                if (group.headerRenderMode === "text") {
-                    switch (group.headerHeading) {
-                        case "headingOne":
-                            headerTextFontSize = 13;
-                            headerTextIconPadding = 18;
-                            break;
-                        case "headingTwo":
-                            headerTextFontSize = 12;
-                            headerTextIconPadding = 18;
-                            break;
-                        case "headingThree":
-                            headerTextFontSize = 11;
-                            headerTextIconPadding = 16;
-                            break;
-                        case "headingFour":
-                            headerTextFontSize = 10;
-                            headerTextIconPadding = 15;
-                            break;
-                        case "headingFive":
-                            headerTextFontSize = 9;
-                            headerTextIconPadding = 14;
-                            break;
-                        case "headingSix":
-                            headerTextFontSize = 8;
-                            headerTextIconPadding = 13;
-                            break;
-                    }
-                }
+            return [...accumulator, getGroupPreview(group, values, headerTextIconPadding, headerTextFontSize, index)];
+        }, [])
+    };
+}
 
-                return [
-                    {
-                        type: "Selectable",
-                        object: group,
-                        child: {
-                            type: "Container",
-                            borders: true,
+function getGroupPreview(
+    group: GroupsPreviewType,
+    values: AccordionPreviewProps,
+    headerTextIconPadding: number,
+    headerTextFontSize: number,
+    index: number
+): StructurePreviewProps {
+    return {
+        type: "Selectable",
+        object: group,
+        child: {
+            type: "Container",
+            borders: true,
+            children: [
+                {
+                    type: "Container",
+                    borders: true,
+                    children: [
+                        {
+                            type: "RowLayout",
+                            columnSize: "grow",
                             children: [
+                                ...(values.collapsible && values.showIcon === "left"
+                                    ? [getIconPreview(group, headerTextIconPadding)]
+                                    : []),
                                 {
                                     type: "Container",
-                                    borders: true,
+                                    padding: group.headerRenderMode === "text" ? 10 : 0,
+                                    grow: 100,
                                     children: [
-                                        {
-                                            type: "RowLayout",
-                                            columnSize: "grow",
-                                            children: [
-                                                ...(values.collapsible && values.showIcon === "left"
-                                                    ? [getIconPreview(group, headerTextIconPadding)]
-                                                    : []),
-                                                {
-                                                    type: "Container",
-                                                    padding: group.headerRenderMode === "text" ? 10 : 0,
-                                                    grow: 100,
-                                                    children: [
-                                                        group.headerRenderMode === "text"
-                                                            ? {
-                                                                  type: "Text",
-                                                                  content: group.headerText,
-                                                                  fontSize: headerTextFontSize,
-                                                                  bold: true
-                                                              }
-                                                            : {
-                                                                  type: "DropZone",
-                                                                  property: group.headerContent,
-                                                                  placeholder: `Place header contents for group ${index}`
-                                                              }
-                                                    ]
-                                                },
-                                                ...(values.collapsible && values.showIcon === "right"
-                                                    ? [getIconPreview(group, headerTextIconPadding)]
-                                                    : [])
-                                            ]
-                                        }
+                                        group.headerRenderMode === "text"
+                                            ? {
+                                                  type: "Text",
+                                                  content: group.headerText,
+                                                  fontSize: headerTextFontSize,
+                                                  bold: true
+                                              }
+                                            : {
+                                                  type: "DropZone",
+                                                  property: group.headerContent,
+                                                  placeholder: `Place header contents for group ${index}`
+                                              }
                                     ]
                                 },
-                                {
-                                    type: "Container",
-                                    borders: true,
-                                    children: [
-                                        {
-                                            type: "DropZone",
-                                            property: group.content,
-                                            placeholder: `Place body contents for group ${index}`
-                                        }
-                                    ]
-                                }
+                                ...(values.collapsible && values.showIcon === "right"
+                                    ? [getIconPreview(group, headerTextIconPadding)]
+                                    : [])
                             ]
                         }
-                    }
-                ];
-            })
-            .reduce((accumulator, group) => [...accumulator, ...group], [])
+                    ]
+                },
+                {
+                    type: "Container",
+                    borders: true,
+                    children: [
+                        {
+                            type: "DropZone",
+                            property: group.content,
+                            placeholder: `Place body contents for group ${index}`
+                        }
+                    ]
+                }
+            ]
+        }
     };
 }
 
@@ -216,4 +192,41 @@ function getIconPreview(group: GroupsPreviewType, headerTextIconPadding: number)
             }
         ]
     };
+}
+
+function getHeaderTextPreviewDetails(
+    group: GroupsPreviewType
+): { headerTextFontSize: number; headerTextIconPadding: number } {
+    let headerTextFontSize = 0;
+    let headerTextIconPadding = 0;
+
+    if (group.headerRenderMode === "text") {
+        switch (group.headerHeading) {
+            case "headingOne":
+                headerTextFontSize = 13;
+                headerTextIconPadding = 18;
+                break;
+            case "headingTwo":
+                headerTextFontSize = 12;
+                headerTextIconPadding = 18;
+                break;
+            case "headingThree":
+                headerTextFontSize = 11;
+                headerTextIconPadding = 16;
+                break;
+            case "headingFour":
+                headerTextFontSize = 10;
+                headerTextIconPadding = 15;
+                break;
+            case "headingFive":
+                headerTextFontSize = 9;
+                headerTextIconPadding = 14;
+                break;
+            case "headingSix":
+                headerTextFontSize = 8;
+                headerTextIconPadding = 13;
+                break;
+        }
+    }
+    return { headerTextFontSize, headerTextIconPadding };
 }
