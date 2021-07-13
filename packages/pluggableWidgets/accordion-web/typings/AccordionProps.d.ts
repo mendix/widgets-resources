@@ -18,10 +18,10 @@ export interface GroupsType {
     headerHeading: HeaderHeadingEnum;
     headerContent?: ReactNode;
     content?: ReactNode;
-    initialCollapsedState: InitialCollapsedStateEnum;
-    initiallyCollapsed: DynamicValue<boolean>;
     visible: DynamicValue<boolean>;
     dynamicClass?: DynamicValue<string>;
+    initialCollapsedState: InitialCollapsedStateEnum;
+    initiallyCollapsed: DynamicValue<boolean>;
     collapsed?: EditableValue<boolean>;
     onToggleCollapsed?: ActionValue;
 }
@@ -36,10 +36,10 @@ export interface GroupsPreviewType {
     headerHeading: HeaderHeadingEnum;
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
-    initialCollapsedState: InitialCollapsedStateEnum;
-    initiallyCollapsed: string;
     visible: string;
     dynamicClass: string;
+    initialCollapsedState: InitialCollapsedStateEnum;
+    initiallyCollapsed: string;
     collapsed: string;
     onToggleCollapsed: {} | null;
 }

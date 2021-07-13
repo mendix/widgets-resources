@@ -52,20 +52,6 @@
                                 <caption>Content</caption>
                                 <description/>
                             </property>
-                            <property key="initialCollapsedState" type="enumeration" defaultValue="expanded">
-                                <caption>Start as</caption>
-                                <description />
-                                <enumerationValues>
-                                    <enumerationValue key="expanded">Expanded</enumerationValue>
-                                    <enumerationValue key="collapsed">Collapsed</enumerationValue>
-                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="initiallyCollapsed" type="expression" defaultValue="false">
-                                <caption>Collapsed</caption>
-                                <description/>
-                                <returnType type="Boolean"/>
-                            </property>
                             <property key="visible" type="expression" defaultValue="true">
                                 <caption>Visible</caption>
                                 <description/>
@@ -77,17 +63,31 @@
                                 <returnType type="String"/>
                             </property>
                         </propertyGroup>
-                        <propertyGroup caption="Events">
-                            <property key="collapsed" type="attribute" required="false" onChange="onToggleCollapsed">
-                                <caption>Attribute</caption>
+                        <propertyGroup caption="State">
+                            <property key="initialCollapsedState" type="enumeration" defaultValue="expanded">
+                                <caption>Start as</caption>
                                 <description />
+                                <enumerationValues>
+                                    <enumerationValue key="expanded">Expanded</enumerationValue>
+                                    <enumerationValue key="collapsed">Collapsed</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="initiallyCollapsed" type="expression" defaultValue="false">
+                                <caption>Start as collapsed</caption>
+                                <description/>
+                                <returnType type="Boolean"/>
+                            </property>
+                            <property key="collapsed" type="attribute" required="false" onChange="onToggleCollapsed">
+                                <caption>Collapsed</caption>
+                                <description>Determines whether the group is collapsed or expanded. The 'Start as' properties override the attribute value for the initial state.</description>
                                 <attributeTypes>
                                     <attributeType name="Boolean"/>
                                 </attributeTypes>
                             </property>
                             <property key="onToggleCollapsed" type="action">
                                 <caption>On change</caption>
-                                <description />
+                                <description>Executes an action when the 'Collapsed' attribute value changes. Note: the 'Start as' properties can prevent execution of this action when the initial state changes.</description>
                             </property>
                         </propertyGroup>
                     </properties>
