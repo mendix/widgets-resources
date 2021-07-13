@@ -987,6 +987,29 @@
                     "class": "imageFullSize"
                 }
             ]
+        },
+        {
+            "name": "Resize mode",
+            "type": "Dropdown",
+            "description": "Determines how to resize the image when the parent doesn't match the image dimensions",
+            "options": [
+                {
+                    "name": "Contain",
+                    "class": "imageResizeModeContain"
+                },
+                {
+                    "name": "Center",
+                    "class": "imageResizeModeCenter"
+                },
+                {
+                    "name": "Repeat",
+                    "class": "imageResizeModeRepeat"
+                },
+                {
+                    "name": "Stretch",
+                    "class": "imageResizeModeStretch"
+                }
+            ]
         }
     ],
     "DynamicImageViewer": [
@@ -1038,6 +1061,29 @@
                 {
                     "name": "FullSize",
                     "class": "imageFullSize"
+                }
+            ]
+        },
+        {
+            "name": "Resize mode",
+            "type": "Dropdown",
+            "description": "Determines how to resize the image when the parent doesn't match the image dimensions",
+            "options": [
+                {
+                    "name": "Contain",
+                    "class": "imageResizeModeContain"
+                },
+                {
+                    "name": "Center",
+                    "class": "imageResizeModeCenter"
+                },
+                {
+                    "name": "Repeat",
+                    "class": "imageResizeModeRepeat"
+                },
+                {
+                    "name": "Stretch",
+                    "class": "imageResizeModeStretch"
                 }
             ]
         }

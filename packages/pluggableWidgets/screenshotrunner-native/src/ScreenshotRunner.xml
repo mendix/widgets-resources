@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.screenshotrunner.ScreenshotRunner" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Screenshot Runner</name>
+    <description>Use this widget in combination with the ScreenShotTaker widget to automatically create screenshots of your app.</description>
+    <icon/>
+    <properties>
+        <propertyGroup caption="Process">
+            <property key="tasks" type="object" isList="true">
+                <caption>Tasks</caption>
+                <description/>
+                <properties>
+                    <propertyGroup caption="Task">
+                        <property key="task" type="action" required="true">
+                            <caption>Task</caption>
+                            <description></description>
+                        </property>
+
+                        <property key="name" type="string" required="true" defaultValue="">
+                            <caption>Name</caption>
+                            <description></description>
+                        </property>
+
+                        <property key="enabled" type="boolean" required="true" defaultValue="true">
+                            <caption>Enabled</caption>
+                            <description></description>
+                        </property>
+
+                    </propertyGroup>
+                </properties>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

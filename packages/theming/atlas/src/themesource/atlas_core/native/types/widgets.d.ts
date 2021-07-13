@@ -1,4 +1,4 @@
-import { ImageStyle, TextProps, TextStyle, ViewStyle } from "react-native";
+import { ImageStyle, PressableAndroidRippleConfig, TextProps, TextStyle, ViewStyle } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 
@@ -84,6 +84,10 @@ export interface BottomSheetType {
 }
 
 // Action Button
+export interface PressableContainerType extends ViewStyle {
+    androidRipple: PressableAndroidRippleConfig;
+}
+
 interface ButtonContainerType extends ViewStyle {
     rippleColor?: string;
 }
@@ -262,8 +266,14 @@ export interface FloatingActionButtonType {
 export interface ImageType {
     container?: ButtonContainerType;
     containerDisabled?: ViewStyle;
-    image?: ImageStyle;
-    imageDisabled?: ImageStyle;
+    image?: ImageStyle & {
+        fill?: string;
+        color?: string;
+    };
+    imageDisabled?: ImageStyle & {
+        fill?: string;
+        color?: string;
+    };
 }
 
 // Intro Screen
