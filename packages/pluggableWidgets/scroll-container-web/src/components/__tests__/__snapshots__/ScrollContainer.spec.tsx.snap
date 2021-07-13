@@ -10,3 +10,33 @@ exports[`Scroll Container renders correctly the structure 1`] = `
   />
 </div>
 `;
+
+exports[`Scroll Container with fixed width renders correctly the structure with percentage 1`] = `
+<div
+  className="widget-scroll-container scroll-container-percentage"
+  style={
+    Object {
+      "width": "70%",
+    }
+  }
+>
+  <div
+    className="widget-scroll-container-wrapper"
+  />
+</div>
+`;
+
+exports[`Scroll Container with fixed width renders correctly the structure with pixels 1`] = `
+<div
+  className="widget-scroll-container scroll-container-pixels"
+  style={
+    Object {
+      "width": "500px",
+    }
+  }
+>
+  <div
+    className="widget-scroll-container-wrapper"
+  />
+</div>
+`;
