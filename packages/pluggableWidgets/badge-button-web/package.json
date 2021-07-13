@@ -14,6 +14,10 @@
     "developmentPort": 3000
   },
   "packagePath": "com.mendix.widget.web",
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "badge-button-web-mx8"
+  },
   "scripts": {
     "start": "pluggable-widgets-tools start:server --open",
     "dev": "pluggable-widgets-tools start:ts",

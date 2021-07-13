@@ -9,7 +9,7 @@ const { pipeline } = require("stream");
 const { promisify } = require("util");
 const fetch = require("node-fetch");
 const semverCompare = require("semver/functions/rcompare");
-const { rm } = require("shelljs");
+const { mkdir, rm } = require("shelljs");
 
 main().catch(e => {
     console.error(e);
@@ -17,9 +17,8 @@ main().catch(e => {
 });
 
 async function main() {
-    if (!(await exists("tests/testProject"))) {
-        throw new Error("Cannot find a tests/testProject. Did you run the script in the widget folder?");
-    }
+    mkdir("-p", "tests/testProject");
+
     try {
         execSync("unzip --help", { stdio: "ignore" });
     } catch (e) {
@@ -28,15 +27,6 @@ async function main() {
     const atlasArchive = await getLatestAtlasArchive();
     rm("-rf", "tests/testProject/theme");
     execSync(`unzip -o ${atlasArchive} -x '*.mpr' '*.xml' -d tests/testProject`);
-}
-
-async function exists(filePath) {
-    try {
-        await access(filePath);
-        return true;
-    } catch (e) {
-        return false;
-    }
 }
 
 async function getLatestAtlasArchive() {

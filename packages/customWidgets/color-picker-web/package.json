@@ -8,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "color-picker-web-mx8"
+  },
   "scripts": {
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
