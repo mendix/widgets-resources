@@ -27,7 +27,7 @@ export function convertDynamicModeledMarker(marker: DynamicMarkersType): Modeled
 
 function fromDatasource(marker: DynamicMarkersType, item: ObjectItem): ModeledMarker {
     const {
-        locationType,
+        locationDynamicType,
         address,
         latitude,
         longitude,
@@ -39,9 +39,9 @@ function fromDatasource(marker: DynamicMarkersType, item: ObjectItem): ModeledMa
         iconColor
     } = marker;
     return {
-        address: locationType === "address" && address ? address.get(item).value : undefined,
-        latitude: locationType === "latlng" && latitude ? Number(latitude.get(item).value) : undefined,
-        longitude: locationType === "latlng" && longitude ? Number(longitude.get(item).value) : undefined,
+        address: locationDynamicType === "address" && address ? address.get(item).value : undefined,
+        latitude: locationDynamicType === "latlng" && latitude ? Number(latitude.get(item).value) : undefined,
+        longitude: locationDynamicType === "latlng" && longitude ? Number(longitude.get(item).value) : undefined,
         title: title ? title.get(item).value : "",
         description: description ? description.get(item).value : "",
         onClick: onClick ? onClick.get(item).execute : undefined,

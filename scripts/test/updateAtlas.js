@@ -1,7 +1,5 @@
 const { exec } = require("child_process");
-const {
-    createWriteStream
-} = require("fs");
+const { createWriteStream } = require("fs");
 const fetch = require("node-fetch");
 const { tmpdir } = require("os");
 const { join } = require("path");

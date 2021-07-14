@@ -6,18 +6,7 @@
 import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 import { Big } from "big.js";
 
-export type AnimationEnum =
-    | "pulse"
-    | "bounce"
-    | "flash"
-    | "jello"
-    | "rotate"
-    | "rubberBand"
-    | "shake"
-    | "swing"
-    | "tada"
-    | "wobble"
-    | "none";
+export type AnimationEnum = "pulse" | "bounce" | "flash" | "jello" | "rotate" | "rubberBand" | "shake" | "swing" | "tada" | "wobble" | "none";
 
 export type EditableEnum = "default" | "never";
 
