@@ -30,16 +30,7 @@ export function getProperties(
             hidePropertyIn(defaultProperties, values, "groups", index, "initiallyCollapsed");
         }
 
-        if (!values.advancedMode) {
-            hideNestedPropertiesIn(defaultProperties, values, "groups", index, [
-                "collapsed",
-                "onToggleCollapsed",
-                "initialCollapsedState",
-                "initiallyCollapsed"
-            ]);
-        }
-
-        if (!values.collapsible) {
+        if (!values.advancedMode || !values.collapsible) {
             hideNestedPropertiesIn(defaultProperties, values, "groups", index, [
                 "collapsed",
                 "onToggleCollapsed",
