@@ -13,6 +13,10 @@
     "branchName": "color-picker-web"
   },
   "license": "Apache-2.0",
+  "marketplace": {
+    "minimumMXVersion": "7.13.1",
+    "marketplaceId": 107044
+  },
   "scripts": {
     "start": "utils-react-widgets start",
     "dev": "utils-react-widgets dev",
@@ -24,7 +28,8 @@
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "lint:fix": "npm run lint -- --fix",
     "build": "utils-react-widgets build",
-    "release": "utils-react-widgets release"
+    "release": "utils-react-widgets release",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "config": {
     "mendixHost": "http://localhost:8080",
