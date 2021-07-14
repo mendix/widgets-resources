@@ -29,7 +29,7 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
     });
 
     values.dynamicMarkers.forEach((f, index) => {
-        if (f.locationType === "address") {
+        if (f.locationDynamicType === "address") {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "latitude");
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "longitude");
         } else {
@@ -134,7 +134,7 @@ export function check(values: MapsPreviewProps): Problem[] {
                 message: "A data source should be selected in order to retrieve a list of markers"
             });
         } else {
-            if (marker.locationType === "address") {
+            if (marker.locationDynamicType === "address") {
                 if (!marker.address) {
                     errors.push({
                         property: `dynamicMarkers/${index + 1}/address`,

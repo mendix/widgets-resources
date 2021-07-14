@@ -88,7 +88,7 @@
                                     <caption>Data source</caption>
                                     <description/>
                                 </property>
-                                <property key="locationType" type="enumeration" defaultValue="address">
+                                <property key="locationDynamicType" type="enumeration" defaultValue="address">
                                     <caption>Location</caption>
                                     <description/>
                                     <enumerationValues>
