@@ -17,6 +17,8 @@ async function main() {
         marketplace: { minimumMXVersion, marketplaceId }
     } = require(join(process.cwd(), "package.json"));
 
+    console.log(`Starting release process for tag ${process.env.TAG}`);
+
     if (!widgetName || !version || !minimumMXVersion || !marketplaceId || !version.includes(".")) {
         throw new Error("Widget does not define expected keys in its package.json");
     }
