@@ -1,15 +1,15 @@
-import { createElement } from "react";
+import { createElement, PropsWithChildren } from "react";
 import { shallow } from "enzyme";
 
 import { Header, HeaderProps } from "../Header";
 
 describe("Header", () => {
-    let defaultHeaderProps: HeaderProps;
+    let defaultHeaderProps: PropsWithChildren<HeaderProps>;
 
     beforeEach(() => {
         defaultHeaderProps = {
             heading: "headingThree",
-            text: "Text"
+            children: "Text"
         };
     });
 

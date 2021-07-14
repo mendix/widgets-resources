@@ -55,7 +55,7 @@ function translateGroups(groups: AccordionContainerProps["groups"]): AccordionGr
         let header = group.headerContent;
 
         if (group.headerRenderMode === "text") {
-            header = <Header heading={group.headerHeading} text={group.headerText.value} />;
+            header = <Header heading={group.headerHeading}>{group.headerText.value}</Header>;
         }
 
         return {

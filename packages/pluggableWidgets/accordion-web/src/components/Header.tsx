@@ -1,11 +1,10 @@
-import { createElement, ReactElement } from "react";
+import { createElement, PropsWithChildren, ReactElement } from "react";
 
 export interface HeaderProps {
     heading: "headingOne" | "headingTwo" | "headingThree" | "headingFour" | "headingFive" | "headingSix";
-    text?: string;
 }
 
-export function Header(props: HeaderProps): ReactElement {
+export function Header(props: PropsWithChildren<HeaderProps>): ReactElement {
     let Header: keyof JSX.IntrinsicElements = "h1";
 
     switch (props.heading) {
@@ -26,5 +25,5 @@ export function Header(props: HeaderProps): ReactElement {
             break;
     }
 
-    return <Header>{props.text}</Header>;
+    return <Header>{props.children}</Header>;
 }
