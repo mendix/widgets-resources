@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - We added a widget property to configure the render mode of the header text.
 - We added widget properties to influence the initial collapsed state for a group.
-- We added a widget property to trigger an action when the widget collapse state changes.
+- We added a widget properties to control the collapse state of a group via an entity attribute.
 
 ## [1.0.0] - 2021-06-29
 ### Added
