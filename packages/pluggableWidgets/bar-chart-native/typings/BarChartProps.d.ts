@@ -29,8 +29,8 @@ export type SortOrderEnum = "ascending" | "descending";
 
 export interface BarSeriesPreviewType {
     dataSet: DataSetEnum;
-    staticDataSource: {} | null;
-    dynamicDataSource: {} | null;
+    staticDataSource: {} | { type: string } | null;
+    dynamicDataSource: {} | { type: string } | null;
     groupByAttribute: string;
     staticSeriesName: string;
     dynamicSeriesName: string;

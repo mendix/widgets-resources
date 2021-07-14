@@ -33,8 +33,10 @@ export function check(values: LineChartPreviewProps): Problem[] {
 
     values.lines.forEach((lines, index) => {
         if (lines.dataSet === "static") {
-            // @ts-ignore
-            if (lines.staticDataSource.type === "null") {
+            if (
+                !lines.staticDataSource ||
+                ("type" in lines.staticDataSource && lines.staticDataSource.type === "null")
+            ) {
                 errors.push({
                     property: `lines/${index + 1}/staticDataSource`,
                     severity: "error",
@@ -58,8 +60,10 @@ export function check(values: LineChartPreviewProps): Problem[] {
                 });
             }
         } else {
-            // @ts-ignore
-            if (lines.dynamicDataSource.type === "null") {
+            if (
+                !lines.dynamicDataSource ||
+                ("type" in lines.dynamicDataSource && lines.dynamicDataSource.type === "null")
+            ) {
                 errors.push({
                     property: `lines/${index + 1}/dynamicDataSource`,
                     severity: "error",

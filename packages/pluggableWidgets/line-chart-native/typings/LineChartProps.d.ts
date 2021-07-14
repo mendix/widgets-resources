@@ -34,8 +34,8 @@ export interface LinesType {
 
 export interface LinesPreviewType {
     dataSet: DataSetEnum;
-    staticDataSource: {} | null;
-    dynamicDataSource: {} | null;
+    staticDataSource: {} | { type: string } | null;
+    dynamicDataSource: {} | { type: string } | null;
     groupByAttribute: string;
     staticName: string;
     dynamicName: string;
