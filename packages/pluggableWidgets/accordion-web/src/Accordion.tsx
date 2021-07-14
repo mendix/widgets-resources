@@ -5,7 +5,7 @@ import { Accordion as AccordionComponent, AccordionGroups } from "./components/A
 import { Header } from "./components/Header";
 import { useIconGenerator } from "./utils/iconGenerator";
 
-import { AccordionContainerProps } from "../typings/AccordionProps";
+import { AccordionContainerProps, GroupsType } from "../typings/AccordionProps";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const groups: AccordionGroups | undefined = useMemo(() => translateGroups(props.groups), [props.groups]);
@@ -39,15 +39,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
 }
 
 function translateGroups(groups: AccordionContainerProps["groups"]): AccordionGroups | undefined {
-    if (
-        groups.some(
-            group =>
-                group.visible.value === undefined ||
-                group.headerText.value === undefined ||
-                group.initiallyCollapsed.value === undefined ||
-                (group.collapsed && group.collapsed.value === undefined)
-        )
-    ) {
+    if (someGroupMissingData(groups)) {
         return undefined;
     }
 
@@ -71,4 +63,14 @@ function translateGroups(groups: AccordionContainerProps["groups"]): AccordionGr
             onToggleCompletion: group.collapsed?.setValue
         };
     });
+}
+
+function someGroupMissingData(groups: GroupsType[]): boolean {
+    return groups.some(
+        group =>
+            group.visible.value === undefined ||
+            group.headerText.value === undefined ||
+            group.initiallyCollapsed.value === undefined ||
+            (group.collapsed && group.collapsed.value === undefined)
+    );
 }
