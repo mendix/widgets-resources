@@ -60,17 +60,11 @@ export function Accordion(props: AccordionProps): ReactElement | null {
     const previousGroupCollapsedValues = useRef(props.groups.map(group => group.collapsed));
 
     useMemo(() => {
-        const changes: Array<{ index: number; value: boolean }> = [];
-
         props.groups.forEach((group, index) => {
             if (group.collapsed !== undefined && group.collapsed !== previousGroupCollapsedValues.current[index]) {
-                changes.push({ index, value: group.collapsed });
                 previousGroupCollapsedValues.current[index] = group.collapsed;
+                accordionGroupCollapsedStateDispatch({ type: group.collapsed ? "collapse" : "expand", index });
             }
-        });
-
-        changes.forEach(change => {
-            accordionGroupCollapsedStateDispatch({ type: change.value ? "collapse" : "expand", index: change.index });
         });
     }, [props.groups]);
 
