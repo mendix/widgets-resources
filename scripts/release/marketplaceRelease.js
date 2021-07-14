@@ -120,7 +120,7 @@ async function fetch(method, url, body) {
     try {
         response = await nodefetch(url, httpsOptions);
     } catch (error) {
-        throw new Error(`An error occurred while retrieving data from ${url}`);
+        throw new Error(`An error occurred while retrieving data from ${url}. Technical error: ${error.message}`);
     }
     console.log(`Response status Code ${response.status}`);
     if (response.status === 409) {
