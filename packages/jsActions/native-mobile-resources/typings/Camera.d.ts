@@ -1,4 +1,4 @@
-export type PictureSource = "camera" | "imageLibrary" | "either";
+export type PictureSource = "camera" | "imageLibrary";
 
 export type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 
@@ -19,7 +19,7 @@ export interface ImagePickerV2Response {
     latitude?: number;
     longitude?: number;
     timestamp?: string;
-};
+}
 
 export interface ImagePickerV2Options {
     title?: string;
@@ -55,4 +55,4 @@ export interface ImagePickerV2Options {
         okTitle: string;
     };
     tintColor?: number | string;
-};
+}
