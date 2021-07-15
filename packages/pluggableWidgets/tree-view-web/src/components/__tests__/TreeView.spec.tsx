@@ -1,5 +1,5 @@
 import { GUID } from "mendix";
-import { createElement } from "react";
+import { createElement, ReactElement, ReactNode } from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { TreeView, TreeViewProps } from "../TreeView";
 
@@ -237,6 +237,48 @@ describe("TreeView", () => {
                         isUserDefinedLeafNode={false}
                         startExpanded={false}
                     />
+                )
+            }
+        ];
+
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={nestedItems}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
+
+        const parentTreeViewHeader = treeView.findWhere(
+            node => node.type() === "header" && node.text().includes("Parent treeview")
+        );
+
+        expect(parentTreeViewHeader).toHaveLength(1);
+        expect(parentTreeViewHeader.prop("role")).toBe("button");
+
+        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+    });
+
+    it("does not influence the parent if it is not immediately in the chain", () => {
+        const RandomOtherWidget = ({ children }: { children: ReactNode }): ReactElement => <div>{children}</div>;
+        const nestedItems: TreeViewProps["items"] = [
+            {
+                id: "11" as GUID,
+                value: "Parent treeview with a nested treeview that is empty and wrapped with a random other widget",
+                content: (
+                    <RandomOtherWidget>
+                        <TreeView
+                            {...defaultProps}
+                            class=""
+                            items={[]}
+                            isUserDefinedLeafNode={false}
+                            startExpanded={false}
+                        />
+                    </RandomOtherWidget>
                 )
             }
         ];

@@ -70,7 +70,19 @@ export function TreeView({
         [collapseIcon, expandIcon, showCustomIcon]
     );
 
-    useInformParentContextToHaveChildNodes(items);
+    // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextToHaveChildNodes
+    const [treeViewElement, setTreeViewElement] = useState<HTMLDivElement | null>(null);
+    const updateTreeViewElement = useCallback(node => {
+        if (node) {
+            setTreeViewElement(node);
+        }
+    }, []);
+
+    const isInsideAnotherTreeView = useCallback(() => {
+        return treeViewElement?.parentElement?.className.includes(treeViewBodyClassName) ?? false;
+    }, [treeViewElement]);
+
+    useInformParentContextToHaveChildNodes(items, isInsideAnotherTreeView);
 
     if (!items) {
         return null;
@@ -78,7 +90,7 @@ export function TreeView({
 
     // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
-        <div className={classNames("widget-tree-view", className)} style={style} id={name}>
+        <div className={classNames("widget-tree-view", className)} style={style} id={name} ref={updateTreeViewElement}>
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
                     key={id}
@@ -113,6 +125,8 @@ function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttribute
         role: "button"
     };
 }
+
+const treeViewBodyClassName = "widget-tree-view-body";
 
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const { level: currentContextLevel } = useContext(TreeViewBranchContext);
@@ -167,7 +181,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                         informParentToHaveChildNodes
                     }}
                 >
-                    <div className="widget-tree-view-body">{props.children}</div>
+                    <div className={treeViewBodyClassName}>{props.children}</div>
                 </TreeViewBranchContext.Provider>
             )}
         </div>
