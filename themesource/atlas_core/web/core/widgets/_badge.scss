@@ -1,0 +1,58 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin badge() {
+    /* ==========================================================================
+       Badge
+
+       Override of default Bootstrap badge style
+    ========================================================================== */
+
+    .badge {
+        display: inline-block;
+        margin: 0;
+        padding: $spacing-smaller $spacing-small;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+        color: #ffffff;
+        font-size: 100%;
+        line-height: 1;
+
+        .form-control-static {
+            font-weight: $font-weight-normal;
+            all: unset;
+        }
+    }
+
+    /* ==========================================================================
+       Badge-web
+
+       Widget styles
+    ========================================================================== */
+
+    .widget-badge {
+        color: $label-primary-color;
+        background-color: $label-primary-bg;
+    }
+
+    .widget-badge-clickable {
+        cursor: pointer;
+    }
+
+    .widget-badge.badge:empty {
+        display: initial;
+        /* Fix padding to stay round */
+        padding: $spacing-smaller ($spacing-small + 2px);
+    }
+
+    .widget-badge.label:empty {
+        display: initial;
+        /* Fix padding to stay square */
+        padding: $spacing-smaller ($spacing-small + 2px);
+    }
+}

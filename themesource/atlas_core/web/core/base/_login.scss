@@ -1,0 +1,192 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+body {
+    height: 100%;
+}
+
+.loginpage {
+    display: flex;
+    height: 100%;
+}
+.loginpage-logo {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 120px;
+}
+
+.loginpage-left {
+    display: none;
+}
+
+.loginpage-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.loginpage-formwrapper {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.loginpage-fullscreenDiv {
+    background-color: #e8e8e8;
+    width: 100%;
+    height: auto;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.loginpage-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// Form
+.loginpage-form {
+    .alert {
+        display: none;
+    }
+
+    .btn {
+        border-radius: $border-radius-default;
+    }
+
+    // Form label + input
+    .form-group {
+        width: 100%;
+        align-items: center;
+        @media only screen and (max-width: $screen-sm-max) {
+            align-items: flex-start;
+        }
+
+        .control-label {
+            flex: 4;
+            margin-bottom: 0;
+            font-size: $font-size-default;
+            font-weight: 500;
+            @media only screen and (max-width: $screen-sm-max) {
+                flex: 1;
+                margin-bottom: $spacing-small;
+            }
+        }
+
+        .inputwrapper {
+            flex: 8;
+            position: relative;
+            width: 100%;
+            @media only screen and (max-width: $screen-sm-max) {
+                flex: 1;
+            }
+
+            .glyphicon {
+                &:before {
+                    transition: color 0.4s;
+                }
+
+                position: absolute;
+                top: 50%;
+                left: $form-input-padding-x;
+                transform: translateY(-50%);
+
+                &-eye-open:hover,
+                &-eye-close:hover {
+                    cursor: pointer;
+                    color: $brand-primary;
+                }
+            }
+
+            .form-control {
+                padding: $form-input-padding-y $form-input-padding-x $form-input-padding-y 45px;
+                width: 100%;
+            }
+
+            .form-control:focus ~ .glyphicon:before {
+                color: $brand-primary;
+            }
+        }
+    }
+}
+
+// Divider - only on login-with-mendixsso-button.html
+.loginpage-alternativelabel {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 25px 0px;
+
+    hr {
+        flex: 1;
+        margin: 20px 0 20px 10px;
+        border: 0;
+        border-color: #d8d8d8;
+        border-top: 1px solid #eeeeee;
+    }
+}
+
+.loginpage-signin {
+    color: #555555;
+}
+
+.loginpage-form .btn {
+    img {
+        vertical-align: middle;
+        top: -1px;
+        position: relative;
+    }
+}
+
+// Show only on wide screens
+@media screen and (min-width: $screen-xl) {
+    .loginpage-logo {
+        width: 150px;
+    }
+
+    .loginpage-left {
+        position: relative;
+        display: block;
+        flex: 1;
+        width: 100%;
+        height: 100%;
+    }
+    // Image and clipping mask
+    .loginpage-image {
+        height: 100%;
+        animation: makePointer 1s ease-out both;
+        background: left / cover no-repeat
+                linear-gradient(to right, rgba($brand-primary, 0.9) 0%, rgba($brand-primary, 0.6) 100%),
+            left / cover no-repeat url("../../resources/work-do-more.jpeg");
+        -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+        clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+    }
+
+    .loginpage-formwrapper {
+        width: 400px;
+    }
+}
+
+// Animate image clipping mask
+@keyframes makePointer {
+    100% {
+        -webkit-clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+        clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    }
+}
+@-webkit-keyframes makePointer {
+    100% {
+        -webkit-clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+        clip-path: polygon(0% 0%, 80% 0%, 100% 50%, 80% 100%, 0% 100%);
+    }
+}

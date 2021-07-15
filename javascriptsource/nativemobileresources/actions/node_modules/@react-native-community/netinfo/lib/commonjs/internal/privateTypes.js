@@ -1,0 +1,2 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.DEVICE_CONNECTIVITY_EVENT=void 0;var DEVICE_CONNECTIVITY_EVENT='netInfo.networkStatusDidChange';exports.DEVICE_CONNECTIVITY_EVENT=DEVICE_CONNECTIVITY_EVENT;
+//# sourceMappingURL=privateTypes.js.map

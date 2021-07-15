@@ -1,0 +1,6 @@
+{
+  "nativeDependencies": {
+    "@react-native-firebase/messaging": "10.5.1",
+    "@react-native-firebase/app": "10.1.0"
+  }
+}

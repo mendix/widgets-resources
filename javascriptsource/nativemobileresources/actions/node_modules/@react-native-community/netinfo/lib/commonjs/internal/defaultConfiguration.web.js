@@ -1,0 +1,2 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=void 0;var _default={reachabilityUrl:'/',reachabilityTest:function reachabilityTest(response){return Promise.resolve(response.status===200);},reachabilityShortTimeout:5*1000,reachabilityLongTimeout:60*1000,reachabilityRequestTimeout:15*1000};exports.default=_default;
+//# sourceMappingURL=defaultConfiguration.web.js.map

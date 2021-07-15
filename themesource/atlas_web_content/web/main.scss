@@ -1,0 +1,23 @@
+// Default variables
+@import "../../atlas_core/web/variables";
+@import "../../../theme/web/custom-variables";
+
+// Building blocks
+@import "buildingblocks/alert";
+@import "buildingblocks/breadcrumb";
+@import "buildingblocks/card";
+@import "buildingblocks/chat";
+@import "buildingblocks/controlgroup";
+@import "buildingblocks/pageblocks";
+@import "buildingblocks/pageheader";
+@import "buildingblocks/heroheader";
+@import "buildingblocks/formblock";
+@import "buildingblocks/master-detail";
+@import "buildingblocks/userprofile";
+@import "buildingblocks/wizard";
+
+// Page templates
+@import "pagetemplates/login";
+@import "pagetemplates/list-tab";
+@import "pagetemplates/springboard";
+@import "pagetemplates/statuspage";

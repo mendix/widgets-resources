@@ -1,0 +1,2 @@
+export default{reachabilityUrl:'/',reachabilityTest:function reachabilityTest(response){return Promise.resolve(response.status===200);},reachabilityShortTimeout:5*1000,reachabilityLongTimeout:60*1000,reachabilityRequestTimeout:15*1000};
+//# sourceMappingURL=defaultConfiguration.web.js.map
