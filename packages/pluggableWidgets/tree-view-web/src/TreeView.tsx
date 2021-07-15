@@ -1,19 +1,22 @@
 import { createElement, ReactElement } from "react";
-import { ValueStatus } from "mendix";
+import { ObjectItem, ValueStatus } from "mendix";
 import { TreeViewContainerProps } from "../typings/TreeViewProps";
-import { TreeView as TreeViewComponent } from "./components/TreeView";
+import { TreeView as TreeViewComponent, TreeViewObject } from "./components/TreeView";
+
+function mapDataSourceItemToTreeViewObject(item: ObjectItem, props: TreeViewContainerProps): TreeViewObject {
+    return {
+        id: item.id,
+        value: props.headerType === "text" ? props.headerCaption?.get(item).value : props.headerContent?.get(item),
+        content: props.children?.get(item)
+    };
+}
 
 export function TreeView(props: TreeViewContainerProps): ReactElement {
     // TODO: Handle async states more gracefully?
     const items =
-        props.datasource.items?.map(item => {
-            return {
-                id: item.id,
-                value:
-                    props.headerType === "text" ? props.headerCaption?.get(item).value : props.headerContent?.get(item),
-                content: props.children?.get(item)
-            };
-        }) ?? [];
+        props.datasource.status === ValueStatus.Available
+            ? props.datasource.items?.map(item => mapDataSourceItemToTreeViewObject(item, props)) ?? []
+            : null;
 
     const expandIcon = props.expandIcon?.status === ValueStatus.Available ? props.expandIcon.value : null;
     const collapseIcon = props.collapseIcon?.status === ValueStatus.Available ? props.collapseIcon.value : null;
