@@ -1,13 +1,17 @@
 import {
+    ContainerProps,
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
+    StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 
-import { AccordionContainerProps, AccordionPreviewProps } from "../typings/AccordionProps";
+import { AccordionContainerProps, AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
+
+import ChevronSVG from "./assets/ChevronStructurePreview.svg";
 
 export function getProperties(
     values: AccordionContainerProps,
@@ -95,4 +99,134 @@ export function check(values: AccordionPreviewProps): Problem[] {
     }
 
     return errors;
+}
+
+export function getPreview(values: AccordionPreviewProps): StructurePreviewProps | null {
+    return {
+        type: "Container",
+        borders: true,
+        children: values.groups.reduce((accumulator, group, index): StructurePreviewProps[] => {
+            const { headerTextFontSize, headerTextIconPadding } = getHeaderTextPreviewDetails(group);
+
+            return [...accumulator, getGroupPreview(group, values, headerTextIconPadding, headerTextFontSize, index)];
+        }, [])
+    };
+}
+
+function getGroupPreview(
+    group: GroupsPreviewType,
+    values: AccordionPreviewProps,
+    headerTextIconPadding: number,
+    headerTextFontSize: number,
+    index: number
+): StructurePreviewProps {
+    return {
+        type: "Selectable",
+        object: group,
+        child: {
+            type: "Container",
+            borders: true,
+            children: [
+                {
+                    type: "Container",
+                    borders: true,
+                    children: [
+                        {
+                            type: "RowLayout",
+                            columnSize: "grow",
+                            children: [
+                                ...(values.collapsible && values.showIcon === "left"
+                                    ? [getIconPreview(group, headerTextIconPadding)]
+                                    : []),
+                                {
+                                    type: "Container",
+                                    padding: group.headerRenderMode === "text" ? 10 : 0,
+                                    grow: 100,
+                                    children: [
+                                        group.headerRenderMode === "text"
+                                            ? {
+                                                  type: "Text",
+                                                  content: group.headerText,
+                                                  fontSize: headerTextFontSize,
+                                                  bold: true
+                                              }
+                                            : {
+                                                  type: "DropZone",
+                                                  property: group.headerContent,
+                                                  placeholder: `Place header contents for group ${index}`
+                                              }
+                                    ]
+                                },
+                                ...(values.collapsible && values.showIcon === "right"
+                                    ? [getIconPreview(group, headerTextIconPadding)]
+                                    : [])
+                            ]
+                        }
+                    ]
+                },
+                {
+                    type: "Container",
+                    borders: true,
+                    children: [
+                        {
+                            type: "DropZone",
+                            property: group.content,
+                            placeholder: `Place body contents for group ${index}`
+                        }
+                    ]
+                }
+            ]
+        }
+    };
+}
+
+function getIconPreview(group: GroupsPreviewType, headerTextIconPadding: number): ContainerProps {
+    return {
+        type: "Container",
+        padding: group.headerRenderMode === "text" ? headerTextIconPadding : 21,
+        children: [
+            {
+                type: "Image",
+                document: decodeURIComponent(ChevronSVG.replace("data:image/svg+xml,", "")),
+                width: 14
+            }
+        ]
+    };
+}
+
+function getHeaderTextPreviewDetails(
+    group: GroupsPreviewType
+): { headerTextFontSize: number; headerTextIconPadding: number } {
+    let headerTextFontSize = 0;
+    let headerTextIconPadding = 0;
+
+    if (group.headerRenderMode === "text") {
+        switch (group.headerHeading) {
+            case "headingOne":
+                headerTextFontSize = 13;
+                headerTextIconPadding = 18;
+                break;
+            case "headingTwo":
+                headerTextFontSize = 12;
+                headerTextIconPadding = 18;
+                break;
+            case "headingThree":
+                headerTextFontSize = 11;
+                headerTextIconPadding = 16;
+                break;
+            case "headingFour":
+                headerTextFontSize = 10;
+                headerTextIconPadding = 15;
+                break;
+            case "headingFive":
+                headerTextFontSize = 9;
+                headerTextIconPadding = 14;
+                break;
+            case "headingSix":
+                headerTextFontSize = 8;
+                headerTextIconPadding = 13;
+                break;
+        }
+    }
+    return { headerTextFontSize, headerTextIconPadding };
 }
