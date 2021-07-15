@@ -14,6 +14,7 @@ const defaultProps: TreeViewProps = {
     class: "",
     items: [],
     isUserDefinedLeafNode: false,
+    shouldLazyLoad: false,
     startExpanded: false,
     showCustomIcon: false,
     iconPlacement: "right",

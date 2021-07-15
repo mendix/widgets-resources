@@ -20,6 +20,7 @@ export interface TreeViewContainerProps {
     headerContent?: ListWidgetValue;
     headerCaption?: ListExpressionValue<string>;
     hasChildren: boolean;
+    shouldLazyLoad: boolean;
     startExpanded: boolean;
     children?: ListWidgetValue;
     showIcon: ShowIconEnum;
@@ -36,6 +37,7 @@ export interface TreeViewPreviewProps {
     headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     headerCaption: string;
     hasChildren: boolean;
+    shouldLazyLoad: boolean;
     startExpanded: boolean;
     children: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     showIcon: ShowIconEnum;

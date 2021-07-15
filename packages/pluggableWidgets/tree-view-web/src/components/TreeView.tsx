@@ -31,6 +31,7 @@ export interface TreeViewProps {
     style?: CSSProperties;
     items: TreeViewObject[] | null;
     isUserDefinedLeafNode: TreeViewBranchProps["isUserDefinedLeafNode"];
+    shouldLazyLoad: TreeViewBranchProps["shouldLazyLoad"];
     startExpanded: TreeViewBranchProps["startExpanded"];
     showCustomIcon: boolean;
     iconPlacement: TreeViewBranchProps["iconPlacement"];
@@ -45,6 +46,7 @@ export function TreeView({
     style,
     isUserDefinedLeafNode,
     showCustomIcon,
+    shouldLazyLoad,
     startExpanded,
     iconPlacement,
     expandIcon,
@@ -88,7 +90,6 @@ export function TreeView({
         return null;
     }
 
-    // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
         <div className={classNames("widget-tree-view", className)} style={style} id={name} ref={updateTreeViewElement}>
             {items.map(({ id, value, content }) => (
@@ -96,6 +97,7 @@ export function TreeView({
                     key={id}
                     value={value}
                     isUserDefinedLeafNode={isUserDefinedLeafNode}
+                    shouldLazyLoad={shouldLazyLoad}
                     startExpanded={startExpanded}
                     iconPlacement={iconPlacement}
                     renderHeaderIcon={renderHeaderIcon}
@@ -109,6 +111,7 @@ export function TreeView({
 
 interface TreeViewBranchProps {
     isUserDefinedLeafNode: boolean;
+    shouldLazyLoad: boolean;
     startExpanded: boolean;
     value: TreeViewObject["value"];
     children: TreeViewObject["content"];
@@ -130,14 +133,21 @@ const treeViewBodyClassName = "widget-tree-view-body";
 
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const { level: currentContextLevel } = useContext(TreeViewBranchContext);
-    const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
+    const [treeViewState, setTreeViewState] = useState<"COLLAPSED_WITH_JS" | "COLLAPSED_WITH_CSS" | "EXPANDED">(
+        !props.shouldLazyLoad && props.startExpanded ? "EXPANDED" : "COLLAPSED_WITH_JS"
+    );
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
     const toggleTreeViewContent = useCallback(() => {
         if (!isActualLeafNode) {
-            setTreeViewIsExpanded(isExpanded => !isExpanded);
+            setTreeViewState(treeViewState => {
+                if (treeViewState === "COLLAPSED_WITH_JS" || treeViewState === "COLLAPSED_WITH_CSS") {
+                    return "EXPANDED";
+                }
+                return props.shouldLazyLoad ? "COLLAPSED_WITH_CSS" : "COLLAPSED_WITH_JS";
+            });
         }
-    }, [isActualLeafNode]);
+    }, [isActualLeafNode, props.shouldLazyLoad]);
 
     const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(isActualLeafNode);
 
@@ -169,17 +179,24 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 {...headerAccessibilityProps}
             >
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
-                {!isActualLeafNode && props.iconPlacement !== "no" && props.renderHeaderIcon(treeViewIsExpanded)}
+                {!isActualLeafNode &&
+                    props.iconPlacement !== "no" &&
+                    props.renderHeaderIcon(treeViewState === "EXPANDED")}
             </header>
-            {/* TODO: For lazy loading and to prevent reloading the children data every time, it might be better to implement the 2nd "collapse" through CSS */}
-            {!isActualLeafNode && treeViewIsExpanded && (
+            {!isActualLeafNode && treeViewState !== "COLLAPSED_WITH_JS" && (
                 <TreeViewBranchContext.Provider
                     value={{
                         level: currentContextLevel + 1,
                         informParentToHaveChildNodes
                     }}
                 >
-                    <div className={treeViewBodyClassName}>{props.children}</div>
+                    <div
+                        className={classNames(treeViewBodyClassName, {
+                            "widget-tree-view-branch-hidden": treeViewState === "COLLAPSED_WITH_CSS"
+                        })}
+                    >
+                        {props.children}
+                    </div>
                 </TreeViewBranchContext.Provider>
             )}
         </div>
