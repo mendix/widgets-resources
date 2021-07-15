@@ -219,7 +219,7 @@ describe("TreeView", () => {
             node => node.type() === "header" && node.text().includes("Parent treeview")
         );
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.prop("role")).not.toBe("button");
+        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
     });
@@ -257,7 +257,7 @@ describe("TreeView", () => {
         );
 
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.prop("role")).toBe("button");
+        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).toBe("button");
 
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
@@ -299,7 +299,7 @@ describe("TreeView", () => {
         );
 
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.prop("role")).toBe("button");
+        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).toBe("button");
 
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
