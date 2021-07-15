@@ -133,11 +133,11 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode);
 
-    function toggleTreeViewContent(): void {
+    const toggleTreeViewContent = useCallback(() => {
         if (!isActualLeafNode) {
             setTreeViewIsExpanded(isExpanded => !isExpanded);
         }
-    }
+    }, [isActualLeafNode]);
 
     const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(isActualLeafNode);
 
