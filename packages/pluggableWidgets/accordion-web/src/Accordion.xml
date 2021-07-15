@@ -32,6 +32,18 @@
                                     <translation lang="nl_NL">Koptekst</translation>
                                 </translations>
                             </property>
+                            <property key="headerHeading" type="enumeration" defaultValue="headingThree">
+                                <caption>Render mode</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="headingOne">Heading 1</enumerationValue>
+                                    <enumerationValue key="headingTwo">Heading 2</enumerationValue>
+                                    <enumerationValue key="headingThree">Heading 3</enumerationValue>
+                                    <enumerationValue key="headingFour">Heading 4</enumerationValue>
+                                    <enumerationValue key="headingFive">Heading 5</enumerationValue>
+                                    <enumerationValue key="headingSix">Heading 6</enumerationValue>
+                                </enumerationValues>
+                            </property>
                             <property key="headerContent" type="widgets" required="false">
                                 <caption>Header</caption>
                                 <description/>
@@ -49,6 +61,33 @@
                                 <caption>Dynamic class</caption>
                                 <description/>
                                 <returnType type="String"/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="State">
+                            <property key="initialCollapsedState" type="enumeration" defaultValue="expanded">
+                                <caption>Start as</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="expanded">Expanded</enumerationValue>
+                                    <enumerationValue key="collapsed">Collapsed</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="initiallyCollapsed" type="expression" defaultValue="false">
+                                <caption>Start as collapsed</caption>
+                                <description/>
+                                <returnType type="Boolean"/>
+                            </property>
+                            <property key="collapsed" type="attribute" required="false" onChange="onToggleCollapsed">
+                                <caption>Collapsed</caption>
+                                <description>Determines whether the group is collapsed or expanded. The 'Start as' properties override the attribute value for the initial state.</description>
+                                <attributeTypes>
+                                    <attributeType name="Boolean"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="onToggleCollapsed" type="action">
+                                <caption>On change</caption>
+                                <description>Executes an action when the 'Collapsed' attribute value changes. Note: the 'Start as' properties can prevent execution of this action when the initial state changes.</description>
                             </property>
                         </propertyGroup>
                     </properties>

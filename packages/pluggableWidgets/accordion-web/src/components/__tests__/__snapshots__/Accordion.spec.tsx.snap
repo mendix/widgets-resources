@@ -75,6 +75,7 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -82,6 +83,7 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": true,
       },
     ]
@@ -107,8 +109,8 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -182,6 +184,7 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -388,8 +391,8 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -463,6 +466,7 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -672,6 +676,66 @@ exports[`Accordion in collapsible & multiple expanded group mode allows multiple
 </Accordion>
 `;
 
+exports[`Accordion in collapsible & multiple expanded group mode applies group collapsed value changes 1`] = `
+<div
+  className="widget-accordion"
+  data-focusindex={1}
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+>
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={true}
+    collapsible={true}
+    content={
+      <span>
+        content
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header"
+    id="idAccordionGroup0"
+    index={0}
+    initiallyCollapsed={true}
+    key="0"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={true}
+  />
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={false}
+    collapsible={true}
+    content={
+      <span>
+        content2
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header2"
+    id="idAccordionGroup1"
+    index={1}
+    initiallyCollapsed={true}
+    key="1"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={false}
+  />
+</div>
+`;
+
 exports[`Accordion in collapsible & multiple expanded group mode collapses a group 1`] = `
 <Accordion
   class=""
@@ -768,6 +832,7 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -775,6 +840,7 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": true,
       },
     ]
@@ -800,8 +866,8 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -896,6 +962,7 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -1123,8 +1190,8 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1219,6 +1286,7 @@ exports[`Accordion in collapsible & multiple expanded group mode collapses a gro
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -1489,6 +1557,7 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -1496,6 +1565,7 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": false,
       },
     ]
@@ -1521,8 +1591,8 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1561,6 +1631,7 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -1697,8 +1768,8 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1737,6 +1808,7 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -1837,6 +1909,89 @@ exports[`Accordion in collapsible & multiple expanded group mode expands a group
 </Accordion>
 `;
 
+exports[`Accordion in collapsible & multiple expanded group mode inits with group initially collapsed settings 1`] = `
+<div
+  className="widget-accordion"
+  data-focusindex={1}
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+>
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={false}
+    collapsible={true}
+    content={
+      <span>
+        content
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header"
+    id="idAccordionGroup0"
+    index={0}
+    initiallyCollapsed={false}
+    key="0"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={true}
+  />
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={false}
+    collapsible={true}
+    content={
+      <span>
+        content2
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header2"
+    id="idAccordionGroup1"
+    index={1}
+    initiallyCollapsed={false}
+    key="1"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={false}
+  />
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={true}
+    collapsible={true}
+    content={
+      <span>
+        content3
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header3"
+    id="idAccordionGroup2"
+    index={2}
+    initiallyCollapsed={true}
+    key="2"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={true}
+  />
+</div>
+`;
+
 exports[`Accordion in collapsible & multiple expanded group mode renders correctly 1`] = `
 <Accordion
   class=""
@@ -1863,6 +2018,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -1870,6 +2026,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": false,
       },
     ]
@@ -1895,8 +2052,8 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -1921,6 +2078,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -2043,8 +2201,8 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -2069,6 +2227,7 @@ exports[`Accordion in collapsible & multiple expanded group mode renders correct
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -2237,6 +2396,7 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -2244,6 +2404,7 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": true,
       },
     ]
@@ -2269,8 +2430,8 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -2351,6 +2512,7 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -2564,8 +2726,8 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -2646,6 +2808,7 @@ exports[`Accordion in collapsible & single expanded group mode allows one group 
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -2916,6 +3079,7 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -2923,6 +3087,7 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": false,
       },
     ]
@@ -2948,8 +3113,8 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3002,6 +3167,7 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -3152,8 +3318,8 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3206,6 +3372,7 @@ exports[`Accordion in collapsible & single expanded group mode collapses a group
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -3360,6 +3527,7 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -3367,6 +3535,7 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": false,
       },
     ]
@@ -3392,8 +3561,8 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3432,6 +3601,7 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -3568,8 +3738,8 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3608,6 +3778,7 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -3708,6 +3879,126 @@ exports[`Accordion in collapsible & single expanded group mode expands a group 1
 </Accordion>
 `;
 
+exports[`Accordion in collapsible & single expanded group mode inits with group initially collapsed settings 1`] = `
+<div
+  className="widget-accordion"
+  data-focusindex={1}
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+>
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={false}
+    collapsible={true}
+    content={
+      <span>
+        content
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header"
+    id="idAccordionGroup0"
+    index={0}
+    initiallyCollapsed={false}
+    key="0"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={true}
+  />
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={true}
+    collapsible={true}
+    content={
+      <span>
+        content2
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header2"
+    id="idAccordionGroup1"
+    index={1}
+    initiallyCollapsed={true}
+    key="1"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={false}
+  />
+</div>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode inits with not more than one group expanded 1`] = `
+<div
+  className="widget-accordion"
+  data-focusindex={1}
+  id="id"
+  style={
+    Object {
+      "height": "500px",
+    }
+  }
+>
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={true}
+    collapsible={true}
+    content={
+      <span>
+        content
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header"
+    id="idAccordionGroup0"
+    index={0}
+    initiallyCollapsed={false}
+    key="0"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={true}
+  />
+  <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
+    collapsed={false}
+    collapsible={true}
+    content={
+      <span>
+        content2
+      </span>
+    }
+    generateHeaderIcon={[MockFunction]}
+    header="header2"
+    id="idAccordionGroup1"
+    index={1}
+    initiallyCollapsed={false}
+    key="1"
+    parent={
+      Object {
+        "current": null,
+      }
+    }
+    showHeaderIcon="right"
+    visible={false}
+  />
+</div>
+`;
+
 exports[`Accordion in collapsible & single expanded group mode renders correctly 1`] = `
 <Accordion
   class=""
@@ -3734,6 +4025,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -3741,6 +4033,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": false,
       },
     ]
@@ -3766,8 +4059,8 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3792,6 +4085,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -3914,8 +4208,8 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={true}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={true}
       content={
         <span>
@@ -3940,6 +4234,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -4038,6 +4333,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
           content
         </span>,
         "header": "header",
+        "initiallyCollapsed": true,
         "visible": true,
       },
       Object {
@@ -4045,6 +4341,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
           content2
         </span>,
         "header": "header2",
+        "initiallyCollapsed": true,
         "visible": false,
       },
     ]
@@ -4069,8 +4366,8 @@ exports[`Accordion not collapsible renders correctly 1`] = `
     }
   >
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={false}
       content={
         <span>
@@ -4081,6 +4378,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       header="header"
       id="idAccordionGroup0"
       index={0}
+      initiallyCollapsed={true}
       key="0"
       parent={
         Object {
@@ -4185,8 +4483,8 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       </AccordionGroup>
     </AccordionGroupWrapper>
     <AccordionGroupWrapper
+      accordionGroupCollapsedStateDispatch={[Function]}
       collapsed={false}
-      collapsedAccordionGroupsDispatch={[Function]}
       collapsible={false}
       content={
         <span>
@@ -4197,6 +4495,7 @@ exports[`Accordion not collapsible renders correctly 1`] = `
       header="header2"
       id="idAccordionGroup1"
       index={1}
+      initiallyCollapsed={true}
       key="1"
       parent={
         Object {
@@ -4280,8 +4579,8 @@ exports[`Accordion renders correctly without tabindex 1`] = `
   }
 >
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -4292,6 +4591,7 @@ exports[`Accordion renders correctly without tabindex 1`] = `
     header="header"
     id="idAccordionGroup0"
     index={0}
+    initiallyCollapsed={true}
     key="0"
     parent={
       Object {
@@ -4302,8 +4602,8 @@ exports[`Accordion renders correctly without tabindex 1`] = `
     visible={true}
   />
   <AccordionGroupWrapper
+    accordionGroupCollapsedStateDispatch={[Function]}
     collapsed={true}
-    collapsedAccordionGroupsDispatch={[Function]}
     collapsible={true}
     content={
       <span>
@@ -4314,6 +4614,7 @@ exports[`Accordion renders correctly without tabindex 1`] = `
     header="header2"
     id="idAccordionGroup1"
     index={1}
+    initiallyCollapsed={true}
     key="1"
     parent={
       Object {

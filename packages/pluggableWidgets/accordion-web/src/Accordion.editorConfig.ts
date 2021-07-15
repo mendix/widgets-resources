@@ -1,6 +1,13 @@
-import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import {
+    hideNestedPropertiesIn,
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    transformGroupsIntoTabs
+} from "@mendix/piw-utils-internal";
 
-import { AccordionContainerProps } from "../typings/AccordionProps";
+import { AccordionContainerProps, AccordionPreviewProps } from "../typings/AccordionProps";
 
 export function getProperties(
     values: AccordionContainerProps,
@@ -10,8 +17,26 @@ export function getProperties(
     values.groups.forEach((group, index) => {
         if (group.headerRenderMode === "text") {
             hidePropertyIn(defaultProperties, values, "groups", index, "headerContent");
+
+            if (!values.advancedMode) {
+                hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
+            }
         } else {
             hidePropertyIn(defaultProperties, values, "groups", index, "headerText");
+            hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
+        }
+
+        if (group.initialCollapsedState !== "dynamic") {
+            hidePropertyIn(defaultProperties, values, "groups", index, "initiallyCollapsed");
+        }
+
+        if (!values.advancedMode || !values.collapsible) {
+            hideNestedPropertiesIn(defaultProperties, values, "groups", index, [
+                "collapsed",
+                "onToggleCollapsed",
+                "initialCollapsedState",
+                "initiallyCollapsed"
+            ]);
         }
     });
 
@@ -53,4 +78,21 @@ export function getProperties(
     }
 
     return defaultProperties;
+}
+
+export function check(values: AccordionPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+
+    const amountOfGroupsStartingExpanded = values.groups.filter(group => group.initialCollapsedState === "expanded")
+        .length;
+
+    if (values.expandBehavior === "singleExpanded" && amountOfGroupsStartingExpanded > 1) {
+        errors.push({
+            property: "expandBehavior",
+            severity: "error",
+            message: `The 'Expanded groups' property is set to 'Single', but there are ${amountOfGroupsStartingExpanded} group items configured to be shown as expanded. Either change the configuration to have just one group to start as expanded or switch the 'Expanded groups' property to 'Multiple'.`
+        });
+    }
+
+    return errors;
 }

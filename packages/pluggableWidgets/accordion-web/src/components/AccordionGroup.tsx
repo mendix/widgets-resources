@@ -22,6 +22,7 @@ export interface AccordionGroupProps {
     dynamicClassName?: string;
     collapsible: boolean;
     toggleCollapsed?: () => void;
+    onToggleCompletion?: (collapsed: boolean) => void;
     changeFocus?: (focusedGroupHeader: EventTarget | null, focusTargetGroupHeader: Target) => void;
     animateContent?: boolean;
     generateHeaderIcon?: (collapsed: boolean) => ReactElement;
@@ -29,9 +30,10 @@ export interface AccordionGroupProps {
 }
 
 export function AccordionGroup(props: AccordionGroupProps): ReactElement | null {
-    const { animateContent, changeFocus, showHeaderIcon, toggleCollapsed } = props;
+    const { animateContent, changeFocus, showHeaderIcon, toggleCollapsed, onToggleCompletion } = props;
 
-    const [previousCollapsedValue, setPreviousCollapsedValue] = useState(props.collapsed);
+    const [renderCollapsed, setRenderCollapsed] = useState(props.collapsed);
+    const previousRenderCollapsed = useRef(renderCollapsed);
     const animatingContent = useRef<boolean>(false);
 
     const rootRef = useRef<HTMLDivElement>(null);
@@ -40,23 +42,23 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
 
     const completeTransitioning = useCallback((): void => {
         if (contentWrapperRef.current && rootRef.current && animatingContent.current) {
-            if (!previousCollapsedValue) {
+            if (!renderCollapsed) {
                 rootRef.current.classList.add("widget-accordion-group-collapsed");
                 rootRef.current.classList.remove("widget-accordion-group-collapsing");
-                setPreviousCollapsedValue(true);
+                setRenderCollapsed(true);
             } else {
                 rootRef.current.classList.remove("widget-accordion-group-expanding");
                 contentWrapperRef.current.style.height = "";
-                setPreviousCollapsedValue(false);
+                setRenderCollapsed(false);
             }
 
             animatingContent.current = false;
         }
-    }, [previousCollapsedValue]);
+    }, [renderCollapsed]);
 
     useEffect(() => {
         if (
-            props.collapsed !== previousCollapsedValue &&
+            props.collapsed !== renderCollapsed &&
             rootRef.current &&
             contentWrapperRef.current &&
             contentRef.current &&
@@ -84,10 +86,17 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                     }
                 }, 50);
             }
-        } else if (props.collapsed !== previousCollapsedValue && (!animateContent || !props.visible)) {
-            setPreviousCollapsedValue(props.collapsed);
+        } else if (props.collapsed !== renderCollapsed && (!animateContent || !props.visible)) {
+            setRenderCollapsed(props.collapsed);
         }
-    }, [props.collapsed, props.visible, previousCollapsedValue, animateContent]);
+    }, [props.collapsed, props.visible, renderCollapsed, animateContent]);
+
+    useEffect(() => {
+        if (renderCollapsed !== previousRenderCollapsed.current) {
+            previousRenderCollapsed.current = renderCollapsed;
+            onToggleCompletion?.(props.collapsed);
+        }
+    }, [props.collapsed, onToggleCompletion, renderCollapsed]);
 
     const onKeydownHandler = useCallback(
         (event: KeyboardEvent<HTMLDivElement>) => {
@@ -130,7 +139,7 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
             className={classNames(
                 "widget-accordion-group",
                 {
-                    "widget-accordion-group-collapsed": previousCollapsedValue
+                    "widget-accordion-group-collapsed": renderCollapsed
                 },
                 props.dynamicClassName
             )}
@@ -150,13 +159,13 @@ export function AccordionGroup(props: AccordionGroupProps): ReactElement | null 
                     role="button"
                     onClick={props.collapsible ? toggleCollapsed : undefined}
                     onKeyDown={props.collapsible ? onKeydownHandler : undefined}
-                    aria-expanded={!previousCollapsedValue}
+                    aria-expanded={!renderCollapsed}
                     aria-disabled={!props.collapsible}
                     aria-controls={`${props.id}ContentWrapper`}
                 >
                     {props.header}
                     {props.collapsible && (showHeaderIcon === "left" || showHeaderIcon === "right")
-                        ? props.generateHeaderIcon?.(previousCollapsedValue ?? false)
+                        ? props.generateHeaderIcon?.(renderCollapsed ?? false)
                         : null}
                 </div>
             </header>
