@@ -325,4 +325,80 @@ describe("TreeView", () => {
         expect(treeViewHeader).toHaveLength(1);
         expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
     });
+
+    describe("with lazy loading enabled", () => {
+        const itemsWithNestedTreeView: TreeViewProps["items"] = [
+            {
+                id: "11" as GUID,
+                value: "Parent treeview with a nested treeview that is filled",
+                content: (
+                    <TreeView
+                        {...defaultProps}
+                        class=""
+                        items={items}
+                        isUserDefinedLeafNode={false}
+                        startExpanded={false}
+                    />
+                )
+            }
+        ];
+
+        it("starts in the collapsed state", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+            const clickableHeader = treeView.find("header").filter("[role='button']");
+            expect(clickableHeader).toHaveLength(1);
+            expect(treeView.text()).not.toContain("First header");
+        });
+
+        it("expands the nested tree view normally", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+            const clickableHeader = treeView.find("header").filter("[role='button']");
+            expect(clickableHeader).toHaveLength(1);
+            expect(treeView.text()).not.toContain("First header");
+
+            clickableHeader.simulate("click");
+            expect(treeView.text()).toContain("First header");
+        });
+
+        it("collapses the nested treeview through CSS instead of JS after being expanded once", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+            const clickableHeader = treeView.find("header").filter("[role='button']");
+            expect(clickableHeader).toHaveLength(1);
+            expect(treeView.text()).not.toContain("First header");
+
+            clickableHeader.simulate("click");
+            expect(treeView.text()).toContain("First header");
+
+            clickableHeader.simulate("click");
+            expect(treeView.text()).toContain("First header");
+            expect(treeView.find(".widget-tree-view-body").hasClass("widget-tree-view-branch-hidden")).toBe(true);
+        });
+    });
 });
