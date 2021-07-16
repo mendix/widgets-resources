@@ -4,7 +4,11 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties } from "react";
-import { ListValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { DynamicValue, ListValue, ListExpressionValue, ListWidgetValue, WebIcon } from "mendix";
+
+export type HeaderTypeEnum = "text" | "custom";
+
+export type ShowIconEnum = "right" | "left" | "no";
 
 export interface TreeViewContainerProps {
     name: string;
@@ -12,18 +16,30 @@ export interface TreeViewContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     datasource: ListValue;
-    caption?: ListExpressionValue<string>;
+    headerType: HeaderTypeEnum;
+    headerContent?: ListWidgetValue;
+    headerCaption?: ListExpressionValue<string>;
     hasChildren: boolean;
     startExpanded: boolean;
     children?: ListWidgetValue;
+    showIcon: ShowIconEnum;
+    expandIcon?: DynamicValue<WebIcon>;
+    collapseIcon?: DynamicValue<WebIcon>;
+    advancedMode: boolean;
 }
 
 export interface TreeViewPreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
-    caption: string;
+    headerType: HeaderTypeEnum;
+    headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    headerCaption: string;
     hasChildren: boolean;
     startExpanded: boolean;
     children: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    showIcon: ShowIconEnum;
+    expandIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    collapseIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    advancedMode: boolean;
 }
