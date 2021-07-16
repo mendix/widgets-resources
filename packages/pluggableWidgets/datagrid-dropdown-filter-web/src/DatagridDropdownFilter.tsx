@@ -46,7 +46,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         ariaLabel={props.ariaLabel?.value}
                         attribute={attribute}
                         auto={props.auto}
-                        defaultValue={defaultValues ?? props.defaultValue?.value}
+                        defaultValue={defaultValues.length > 0 ? defaultValues : props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         name={props.name}
