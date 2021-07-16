@@ -11,7 +11,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - We added exclusion variables for core styles, layouts and bootstrap.
   
 ### Changed
-- We fixed the styles of links (added cursor pointer)
+- We fixed the styles of links (added cursor pointer).
+- We fixed the sidebar sub menu items when the sidebar is closed.
 
 ### Removed
 - We removed the restrictions to show the toggle sidebar widget only on phones.
