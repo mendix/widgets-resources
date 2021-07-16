@@ -1,2 +1,0 @@
-var _interopRequireDefault=require("@babel/runtime/helpers/interopRequireDefault");var _implementation=_interopRequireDefault(require("./implementation"));module.exports=_implementation.default;
-//# sourceMappingURL=index.js.map

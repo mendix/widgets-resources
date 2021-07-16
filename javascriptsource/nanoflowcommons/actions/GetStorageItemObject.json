@@ -1,5 +1,0 @@
-{
-  "nativeDependencies": {
-    "@react-native-community/async-storage": "1.12.1"
-  }
-}
