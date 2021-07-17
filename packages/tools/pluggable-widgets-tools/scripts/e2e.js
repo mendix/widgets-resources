@@ -32,7 +32,11 @@ async function main() {
     const widgetVersion = packageConf?.version;
 
     // Downloading test project
-    if (!process.argv.includes("--no-update-testProject") && packageConf?.testProject?.githubUrl && packageConf?.testProject?.branchName) {
+    if (
+        !process.argv.includes("--no-update-testProject") &&
+        packageConf?.testProject?.githubUrl &&
+        packageConf?.testProject?.branchName
+    ) {
         await unzipTestProject();
     } else {
         const projectMpr = ls(`tests/testProject/*.mpr`).length;
@@ -192,10 +196,21 @@ async function unzipTestProject() {
     try {
         const folderPrefix = packageConf.testProject.githubUrl.split("/").pop();
         if (!folderPrefix) {
-            throw new Error("Could not determine prefix for repository folder. Please make sure you have defined a githubUrl with a valid Github repository.");
+            throw new Error(
+                "Could not determine prefix for repository folder. Please make sure you have defined a githubUrl with a valid Github repository."
+            );
         }
         mkdir("-p", "tests/testProject");
         await promisify(exec)(`unzip -o ${testArchivePath} -d tests/testProject`);
+        if (process.argv.includes("--remove-atlas-files")) {
+            rm(
+                "-rf",
+                `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}/theme`,
+                `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}/themesource/atlas_core`,
+                `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}/themesource/atlas_nativemobile_content`,
+                `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}/themesource/atlas_web_content`
+            );
+        }
         cp("-rf", `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}/*`, "tests/testProject");
         rm("-rf", `tests/testProject/${folderPrefix}-${packageConf.testProject.branchName}`);
         rm("-f", testArchivePath);
@@ -207,7 +222,7 @@ async function unzipTestProject() {
 async function getTestProject(repository, branch) {
     const downloadedArchivePath = join(tmpdir(), `testProject.zip`);
 
-    if( !repository.includes("github.com")) {
+    if (!repository.includes("github.com")) {
         throw new Error("githubUrl is not a valid github repository!");
     }
 
