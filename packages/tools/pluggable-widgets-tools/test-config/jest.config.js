@@ -18,7 +18,6 @@ module.exports = {
         "\\.jsx?$": join(__dirname, "transform.js"),
         "^.+\\.svg$": "jest-svg-transformer"
     },
-    transformIgnorePatterns: ["<rootDir>/node_modules/(?!lodash-es)"],
     moduleNameMapper: {
         "\\.(css|less|scss|sass)$": "identity-obj-proxy",
         "mendix/components/web/Icon": join(__dirname, "__mocks__/WebIcon"),
