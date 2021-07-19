@@ -1,6 +1,6 @@
 /*
     An "overflow-x: hidden" rule on any parent element of the shrinking header widget, except the body element, causes sticky positioned elements to break.
-    In Mendix 8 & 9 this specific rule is applied to 'div class="mx-placeholder" />' when navigating from a page to any other page.
+    In Mendix 8 & 9 this specific rule is sometimes applied to 'div class="mx-placeholder" />' when navigating from a page to any other page.
     This line overrides that default behavior.
  */
 .mx-placeholder {
