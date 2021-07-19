@@ -9,7 +9,6 @@ exports[`ShrinkingHeaderLinear renders correctly 1`] = `
     </h1>
   }
   initHeight={100}
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -39,7 +38,6 @@ exports[`ShrinkingHeaderLinear renders correctly 1`] = `
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-linear class-name"
-    id="name"
     style={
       Object {
         "color": "green",
@@ -72,7 +70,6 @@ exports[`ShrinkingHeaderLinear updates the header & wrapping div height when the
     </h1>
   }
   initHeight={100}
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -104,7 +101,6 @@ exports[`ShrinkingHeaderLinear updates the header & wrapping div height when the
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-linear class-name"
-    id="name"
     style={
       Object {
         "color": "green",

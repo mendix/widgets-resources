@@ -23,7 +23,6 @@ describe("ShrinkingHeaderThreshold", () => {
     beforeEach(() => {
         defaultShrinkingHeaderProps = {
             rootElementRef: jest.fn(),
-            name: "name",
             className: "class-name",
             style: { color: "green" },
             tabIndex: 4,

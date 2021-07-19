@@ -6,7 +6,6 @@ import { useWrappingDivHeight } from "../utils/WrappingDivStyler";
 
 export interface ShrinkingHeaderLinearProps {
     rootElementRef?: (node: HTMLElement | null) => void;
-    name?: string;
     className?: string;
     style?: CSSProperties;
     tabIndex?: number;
@@ -16,7 +15,7 @@ export interface ShrinkingHeaderLinearProps {
 }
 
 export function ShrinkingHeaderLinear(props: ShrinkingHeaderLinearProps): ReactElement {
-    const { rootElementRef, name, className, style, tabIndex, content, initHeight, shrunkHeight } = props;
+    const { rootElementRef, className, style, tabIndex, content, initHeight, shrunkHeight } = props;
 
     const [headerHeight, setHeaderHeight] = useState<number>();
     const [headerElement, setHeaderElement] = useState<HTMLElement>();
@@ -56,7 +55,7 @@ export function ShrinkingHeaderLinear(props: ShrinkingHeaderLinearProps): ReactE
     const wrappingDivHeight = useWrappingDivHeight(headerElement);
 
     return (
-        <div id={name} className={actualClassName} style={{ ...style, height: wrappingDivHeight }} tabIndex={tabIndex}>
+        <div className={actualClassName} style={{ ...style, height: wrappingDivHeight }} tabIndex={tabIndex}>
             <header ref={updateElement} style={{ height: headerHeight }}>
                 {content}
             </header>

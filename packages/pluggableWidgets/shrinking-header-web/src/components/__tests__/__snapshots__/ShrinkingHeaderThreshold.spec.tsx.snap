@@ -8,7 +8,6 @@ exports[`ShrinkingHeaderThreshold applies the shrink class when the page gets sc
       Header
     </h1>
   }
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -38,7 +37,6 @@ exports[`ShrinkingHeaderThreshold applies the shrink class when the page gets sc
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-threshold widget-shrinking-header-shrunk class-name"
-    id="name"
     style={
       Object {
         "color": "green",
@@ -64,7 +62,6 @@ exports[`ShrinkingHeaderThreshold applies the shrink class when the page gets sc
       Header
     </h1>
   }
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -94,7 +91,6 @@ exports[`ShrinkingHeaderThreshold applies the shrink class when the page gets sc
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-threshold widget-shrinking-header-shrunk class-name"
-    id="name"
     style={
       Object {
         "color": "green",
@@ -120,7 +116,6 @@ exports[`ShrinkingHeaderThreshold removes the shrink class when the page gets sc
       Header
     </h1>
   }
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -150,7 +145,6 @@ exports[`ShrinkingHeaderThreshold removes the shrink class when the page gets sc
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-threshold widget-shrinking-header-shrunk class-name"
-    id="name"
     style={
       Object {
         "color": "green",
@@ -176,7 +170,6 @@ exports[`ShrinkingHeaderThreshold removes the shrink class when the page gets sc
       Header
     </h1>
   }
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -206,7 +199,6 @@ exports[`ShrinkingHeaderThreshold removes the shrink class when the page gets sc
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-threshold class-name"
-    id="name"
     style={
       Object {
         "color": "green",
@@ -232,7 +224,6 @@ exports[`ShrinkingHeaderThreshold renders correctly when the page isn't scrolled
       Header
     </h1>
   }
-  name="name"
   rootElementRef={
     [MockFunction] {
       "calls": Array [
@@ -262,7 +253,6 @@ exports[`ShrinkingHeaderThreshold renders correctly when the page isn't scrolled
 >
   <div
     className="widget-shrinking-header widget-shrinking-header-threshold class-name"
-    id="name"
     style={
       Object {
         "color": "green",
