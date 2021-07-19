@@ -4,9 +4,10 @@ on:
     push:
         tags:
             - "*-web-v*"
+            - "*-native-v*"
 
 jobs:
-    publish:
+    publish_release:
           name: "Marketplace Release"
           runs-on: ubuntu-latest
 
@@ -18,13 +19,19 @@ jobs:
               - name: "Defining Environment Variables"
                 id: variables
                 run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
-              - name: "Defining lerna scope"
+              - name: "Defining lerna scope for web"
                 uses: jungwinter/split@v1
-                id: scope
+                id: scope_web
                 with:
                     msg: ${{ steps.variables.outputs.tag }}
                     separator: "-v"
+              - name: "Defining lerna scope for native"
+                uses: jungwinter/split@v1
+                id: scope
+                with:
+                    msg: ${{ steps.scope_web.outputs._0 }}
+                    separator: "-native"
               - name: "Installing dependencies"
                 run: npm install
-              - name: "Check changes and publish widget"
-                run: TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }} MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{ steps.scope.outputs._1 }}'
+              - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
+                run: TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }} MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{ steps.scope.outputs._0 }}'

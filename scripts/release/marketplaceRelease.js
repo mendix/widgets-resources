@@ -11,65 +11,65 @@ main().catch(e => {
 });
 
 async function main() {
+    const pkgPath = join(process.cwd(), "package.json");
     const {
+        name,
         widgetName,
         version,
         marketplace: { minimumMXVersion, marketplaceId }
-    } = require(join(process.cwd(), "package.json"));
+    } = require(pkgPath);
 
     console.log(`Starting release process for tag ${process.env.TAG}`);
 
-    if (!widgetName || !version || !minimumMXVersion || !marketplaceId || !version.includes(".")) {
-        throw new Error("Widget does not define expected keys in its package.json");
+    const pkgName = name ?? widgetName;
+    if (!pkgName || !version || !minimumMXVersion || !marketplaceId || !version.includes(".")) {
+        throw new Error(`${pkgPath} does not define expected keys.`);
     }
 
     if (version.split(".").length !== 3) {
-        throw new Error("Widget version not defined correctly in its package.json");
+        throw new Error(`${pkgPath} version is not defined correctly.`);
     }
 
-    await uploadModuleToAppStore(widgetName, marketplaceId, version, minimumMXVersion);
+    await uploadModuleToAppStore(pkgName, marketplaceId, version, minimumMXVersion);
 }
 
-async function uploadModuleToAppStore(widgetName, marketplaceId, version, minimumMXVersion) {
+async function uploadModuleToAppStore(pkgName, marketplaceId, version, minimumMXVersion) {
     try {
         const postResponse = await createDraft(marketplaceId, version, minimumMXVersion);
         await publishDraft(postResponse.Version.VersionUUID);
-        console.log(`Successfully uploaded ${widgetName} to the Mendix Marketplace.`);
+        console.log(`Successfully uploaded ${pkgName} to the Mendix Marketplace.`);
     } catch (error) {
-        error.message = `Failed uploading module to appstore with error: ${error.message}`;
+        error.message = `Failed uploading ${pkgName} to appstore with error: ${error.message}`;
         throw error;
     }
 }
 
 async function getGithubAssetUrl() {
     console.log("Retrieving informations from Github Tag");
-    const request = await nodefetch("https://api.github.com/repos/mendix/widgets-resources/releases?per_page=5", {
-        method: "GET"
-    });
-    const data = (await request.json()) ?? [];
+    const request = await fetch("GET", "https://api.github.com/repos/mendix/widgets-resources/releases?per_page=10");
+    const data = (await request) ?? [];
     const releaseId = data.filter(info => info.tag_name === process.env.TAG)?.pop()?.id;
-    if (releaseId) {
-        const assetsRequest = await nodefetch(
-            `https://api.github.com/repos/mendix/widgets-resources/releases/${releaseId}/assets`,
-            { method: "GET" }
-        );
-        const assetsData = (await assetsRequest.json()) ?? [];
-        const downloadUrl = assetsData.filter(asset => asset.name.endsWith(".mpk"))?.pop()?.browser_download_url;
-        if (!downloadUrl) {
-            throw new Error("Could not retrieve MPK url from GitHub release");
-        }
-        return downloadUrl;
-    } else {
-        throw new Error("Could not find release on GitHub");
+    if (!releaseId) {
+        throw new Error(`Could not find release with tag ${process.env.TAG} on GitHub`);
     }
+    const assetsRequest = await fetch(
+        "GET",
+        `https://api.github.com/repos/mendix/widgets-resources/releases/${releaseId}/assets`
+    );
+    const assetsData = (await assetsRequest) ?? [];
+    const downloadUrl = assetsData.filter(asset => asset.name.endsWith(".mpk"))?.pop()?.browser_download_url;
+    if (!downloadUrl) {
+        throw new Error(`Could not retrieve MPK url from GitHub release with tag ${process.env.TAG}`);
+    }
+    return downloadUrl;
 }
 
 async function createDraft(marketplaceId, version, minimumMXVersion) {
     console.log(`Creating draft in the Mendix Marketplace..`);
+    console.log(`ID: ${marketplaceId} - Version: ${version} - MXVersion: ${minimumMXVersion}`);
     const url = `${config.appStoreUrl}/packages/${marketplaceId}/version`;
     const [major, minor, patch] = version.split(".");
     try {
-        const assetUrl = await getGithubAssetUrl();
         const body = {
             VersionMajor: major ?? 1,
             VersionMinor: minor ?? 0,
@@ -78,7 +78,7 @@ async function createDraft(marketplaceId, version, minimumMXVersion) {
             IsSourceGitHub: "true",
             GithubRepo: {
                 UseReadmeForDoc: false,
-                ArtifactURL: assetUrl
+                ArtifactURL: await getGithubAssetUrl()
             }
         };
 
