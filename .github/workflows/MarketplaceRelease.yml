@@ -5,6 +5,7 @@ on:
         tags:
             - "*-web-v*"
             - "*-native-v*"
+            - "*-hybrid-v*"
 
 jobs:
     publish_release:
