@@ -2,6 +2,10 @@
   "name": "hybrid-mobile-actions",
   "version": "1.0.0",
   "license": "Apache-2.0",
+  "marketplace": {
+    "minimumMXVersion": "8.4.0",
+    "marketplaceId": 112063
+  },
   "scripts": {
     "start": "concurrently \"npm:watch-*\"",
     "watch-ts": "tsc --project src/tsconfig.json --watch ",
@@ -12,7 +16,8 @@
     "postbuild": "node ../../../scripts/modules/copyActionsToTestProject.js",
     "lint": "eslint --config ../../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
     "lint:scripts": "eslint --config ../../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "config": {
     "moduleName": "HybridMobileActions",
