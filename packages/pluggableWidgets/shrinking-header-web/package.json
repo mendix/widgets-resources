@@ -3,10 +3,10 @@
   "widgetName": "ShrinkingHeader",
   "version": "1.0.0",
   "description": "A fixed header that shrinks when scrolling down a page",
-  "copyright": "Mendix B.V.",
+  "copyright": "Copyright © 2021 Mendix B.V.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mendix/widgets-resources.git"
+    "url": "https://github.com/IIsaku/widgets-resources.git"
   },
   "license": "Apache-2.0",
   "config": {
