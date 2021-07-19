@@ -1,43 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.web.shrinkingheader.ShrinkingHeader" pluginWidget="true" offlineCapable="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Shrinking header</name>
     <description>A fixed header that shrinks when scrolling down a page"</description>
-    <icon />
+    <icon/>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
-                <property key="content" type="widgets">
-                    <caption>Content</caption>
-                    <description />
-                </property>
-                <property key="threshold" type="boolean" defaultValue="true">
-                    <caption>Shrink with threshold</caption>
-                    <description />
-                </property>
-                <property key="shrinkThreshold" type="expression" defaultValue="100">
-                    <caption>Shrink after scrolling (px)</caption>
-                    <description />
-                    <returnType type="Integer" />
-                </property>
-                <property key="initHeight" type="integer" defaultValue="125">
-                    <caption>Initial height</caption>
-                    <description />
-                </property>
-                <property key="shrunkHeight" type="integer" defaultValue="50">
-                    <caption>Shrunk height</caption>
-                    <description />
-                </property>
-            </propertyGroup>
-
-            <propertyGroup caption="Visibility">
-                <systemProperty key="Visibility" />
-            </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Name" />
-                <systemProperty key="TabIndex"/>
-            </propertyGroup>
+            <property key="content" type="widgets">
+                <caption>Header contents</caption>
+                <description/>
+            </property>
+            <property key="threshold" type="boolean" defaultValue="true">
+                <caption>Shrink with threshold</caption>
+                <description/>
+            </property>
+            <property key="shrinkThreshold" type="expression" defaultValue="100">
+                <caption>Shrink after scrolling</caption>
+                <description>Scroll amount in pixels</description>
+                <returnType type="Integer"/>
+            </property>
+            <property key="initHeight" type="integer" defaultValue="125">
+                <caption>Initial height</caption>
+                <description>Height in pixels</description>
+            </property>
+            <property key="shrunkHeight" type="integer" defaultValue="50">
+                <caption>Shrunk height</caption>
+                <description>Height in pixels</description>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
