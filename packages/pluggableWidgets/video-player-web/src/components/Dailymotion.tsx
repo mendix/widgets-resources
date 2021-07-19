@@ -1,6 +1,5 @@
-import { Component, createElement, createRef } from "react";
-import ReactResizeDetector from "react-resize-detector";
-import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
+import { Component, createElement } from "react";
+import { validateUrl } from "../utils/Utils";
 
 export interface DailymotionProps {
     url: string;
@@ -10,17 +9,8 @@ export interface DailymotionProps {
     aspectRatio?: boolean;
 }
 
-export interface DailymotionState {
-    ratio: number;
-}
-
-export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
-    private iframe = createRef<HTMLIFrameElement>();
-    private readonly handleOnResize = this.onResize.bind(this);
+export class Dailymotion extends Component<DailymotionProps> {
     private handleAttributes = this.getUrlAttributes.bind(this);
-    readonly state: DailymotionState = {
-        ratio: 0
-    };
 
     render(): JSX.Element {
         return (
@@ -30,32 +20,8 @@ export class Dailymotion extends Component<DailymotionProps, DailymotionState> {
                 frameBorder="0"
                 allow="autoplay; fullscreen"
                 allowFullScreen
-                ref={this.iframe}
-            >
-                <ReactResizeDetector
-                    handleWidth
-                    handleHeight
-                    onResize={this.handleOnResize}
-                    refreshMode="debounce"
-                    refreshRate={100}
-                />
-            </iframe>
+            />
         );
-    }
-
-    private onResize(): void {
-        if (this.iframe && this.iframe.current && this.props.aspectRatio) {
-            if (this.state.ratio) {
-                fixHeightWithRatio(this.iframe.current, this.state.ratio);
-            } else {
-                getRatio(this.props.url).then(ratio => {
-                    this.setState({ ratio });
-                    if (this.iframe && this.iframe.current) {
-                        fixHeightWithRatio(this.iframe.current, this.state.ratio);
-                    }
-                });
-            }
-        }
     }
 
     private generateUrl(url: string): string {

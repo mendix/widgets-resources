@@ -1,6 +1,5 @@
-import { Component, createElement, createRef } from "react";
-import ReactResizeDetector from "react-resize-detector";
-import { fixHeightWithRatio, getRatio, validateUrl } from "../utils/Utils";
+import { Component, createElement } from "react";
+import { validateUrl } from "../utils/Utils";
 
 export interface YoutubeProps {
     url: string;
@@ -11,17 +10,8 @@ export interface YoutubeProps {
     aspectRatio?: boolean;
 }
 
-export interface YoutubeState {
-    ratio: number;
-}
-
-export class Youtube extends Component<YoutubeProps, YoutubeState> {
-    private iframe = createRef<HTMLIFrameElement>();
-    private readonly handleOnResize = this.onResize.bind(this);
+export class Youtube extends Component<YoutubeProps> {
     private handleAttributes = this.getUrlAttributes.bind(this);
-    readonly state: YoutubeState = {
-        ratio: 0
-    };
 
     render(): JSX.Element {
         return (
@@ -31,32 +21,8 @@ export class Youtube extends Component<YoutubeProps, YoutubeState> {
                 frameBorder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-                ref={this.iframe}
-            >
-                <ReactResizeDetector
-                    handleWidth
-                    handleHeight
-                    onResize={this.handleOnResize}
-                    refreshMode="debounce"
-                    refreshRate={100}
-                />
-            </iframe>
+            />
         );
-    }
-
-    private onResize(): void {
-        if (this.iframe && this.iframe.current && this.props.aspectRatio) {
-            if (this.state.ratio) {
-                fixHeightWithRatio(this.iframe.current, this.state.ratio);
-            } else {
-                getRatio(this.props.url).then(ratio => {
-                    this.setState({ ratio });
-                    if (this.iframe && this.iframe.current) {
-                        fixHeightWithRatio(this.iframe.current, this.state.ratio);
-                    }
-                });
-            }
-        }
     }
 
     private generateUrl(url: string): string {

@@ -1,8 +1,7 @@
 import { createElement } from "react";
+import { create } from "react-test-renderer";
 
 import { Html5, Html5PlayerProps } from "../Html5";
-import { create } from "react-test-renderer";
-import ReactResizeDetector from "react-resize-detector";
 
 describe("Html5 Player", () => {
     const defaultProps = {
@@ -12,7 +11,8 @@ describe("Html5 Player", () => {
         loop: false,
         showControls: false,
         aspectRatio: false,
-        poster: "test"
+        poster: "test",
+        preview: false
     };
 
     const defaulPlayer = (props: Html5PlayerProps): JSX.Element => <Html5 {...props} />;
@@ -58,14 +58,9 @@ describe("Html5 Player", () => {
         expect(player).toMatchSnapshot();
     });
 
-    it("should renders correctly with aspectRatio", () => {
-        const player = create(defaulPlayer({ ...defaultProps, aspectRatio: true }));
-        window.dispatchEvent(new Event("resize"));
-        const instance = player.root;
-        const sizeDetector = instance.findByType(ReactResizeDetector);
+    it("should render correctly in preview mode", () => {
+        const player = create(defaulPlayer({ ...defaultProps, preview: true })).toJSON();
 
-        expect(player.toJSON).toMatchSnapshot();
-        expect(sizeDetector).not.toBeNull();
-        expect(sizeDetector.props).toHaveProperty("onResize");
+        expect(player).toMatchSnapshot();
     });
 });

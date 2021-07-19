@@ -130,6 +130,8 @@ export default async args => {
 const nativeExternal = [
     /^mendix\//,
     /^react-native(\/|$)/,
+    /^react-native-windows(\/|$)/,
+    /^react-native-web(\/|$)/,
     "big.js",
     "react",
     /react-native-gesture-handler\/*/,

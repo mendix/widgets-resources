@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.imageviewer.ImageViewer" needsEntityContext="false" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+<widget id="com.mendix.widget.web.imageviewer.ImageViewer" needsEntityContext="false" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Image viewer</name>
-    <description>Display an image and enlarge it on click</description>
+    <description>Display an image and enlarge it on click.</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAABnlBMVEUAAAD///+A//9V//+Av/9mzP9gv/9Vxv9Ns/9duf9Vv/9Osf9Jtv9Vu/9Qv/9LtP9RvP9Jtv9Osf9Ktf9Ms/9Puf9Ns/9Ktf9Ms/hKtfhOsfhNs/lLtPlLtPlKtflIsflMs/pJsfpNs/pIsvpKsPpLtPtKsftJsvtJsvdJs/hLtPhKsfhJsvhXV1dLsflKsvlKsvlKsvlKsvpKsvdKs/dJsfdIsvhKsPhJsfhKsPhJsvhKsfhIsPlKsflJsPlKsflIsflJsvdKsvdJsfhJsPhJsfhKsvhIsvhJsfhIsPhKsfhJsvlJsfdJsfdIsPdKsfdJsfdJsfdIsfdIsfhIsfhIsfhJsfhJsfhIsPhJsPhIsfhJsfdJsfdJsfdJsfdIsPdJsfdJsPhIsfhJsfhIsfhJsfhIsfhJsfhJsPhJsfhJsfhIsfhIsPhJsfdIsPdJsPdVVVVJsfdJsfdJsfdIsPdJsfdIsPdIsPdJsfhJsPhIsPhJsfhIsPhIsfhJsfhJsPhIsfhJsfhJsPhIsPhIsfhJsPhJsPhIsfhIsPdVVVU8lPiOAAAAiHRSTlMAAQIDBAUICQoLDA0ODxARExUXGBsdHh8lJicoKSwtLi8xMjU3PT4/QkZHSElJUlNWWV1gZGVqa2xucHV4eXt8f4SHiYuMjpGTm5yeoKGio6SnqaqtsbO2uLm+wMHEyMnLzM3O0NHU1dba3d7f4eLj4+Tn6Onr7O3u7/Dy8/T19vf4+fr7/P3+LOCsiQAAAeRJREFUeAHt1/lTEmEYwPHHhYyiLEjtPtLu0siOsLL7MLtNOjRLs8MyU7Q7K4hyv/7Xve/sLrAzArPvMFPT7Oen9wf4MsDz7OyKI9QxvWBgukM8Ru9XBfEsGKpvQAL6/wORY48+5ieu7zIN7HiG4+5yo0B7Hs/oMoNA4i0lN4IHkreA+Ssbmva/BOztAQP7nqL1iBJ7BfQGCxy30WYt0Q4C44ECbb9Qih+7BpgLFLgN2BOF0WbTQBboFEsUs6/wDXBnx+xHfAKcXuKcV5j8jZdwmQ7SqhlcpqO8e5Yi/zJt6ZvMTfXvrBWQRO+YOws/feucLqDZFwwvKJ02rrRRIPkBz/dmk8AAkDsU3/sJuGkQSKGcVIejgN1eM9DYfX/yx+uH3S3iSLwHHkfUyXoODNcKdGVx/L62VrR+IL9JtD0oqaoB6yIlubS7UpwSRwZ401gl0HAHn0xs9TtgJCKOdQWgp0rgPEr+3PrYxhMv0IYH9FBtFs9l4GuyYqALJeu83Dr8GdcZKWrSI9FXKdAyB0y1iqt1BI2xqJSkgfltFQL39Ki1SVF8CKWwVcpEx4HBxQMplCNSZukgcFZ8DqAsGojPAEMNUm5l5svVqPg9cAP/2D1SeJcWBsLA398F84euOj32hf4AR3v7uNFLZj0AAAAASUVORK5CYII=</icon>
     <properties>
         <propertyGroup caption="General">
@@ -11,23 +11,49 @@
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="image">Image</enumerationValue>
-                        <enumerationValue key="imageUrl">Image URL</enumerationValue>
+                        <enumerationValue key="imageUrl">Image link</enumerationValue>
                         <enumerationValue key="icon">Icon</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="imageObject" type="image" required="false">
                     <caption>Image</caption>
-                    <description>The image from the modeler</description>
+                    <description>The image from the modeler.</description>
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
-                    <caption>Image URL</caption>
-                    <description>The URL of the external image</description>
+                    <caption>Image link</caption>
+                    <description>The link of the external image.</description>
                 </property>
                 <property key="imageIcon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description>The icon image</description>
+                    <description>The icon image.</description>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClickType" type="enumeration" defaultValue="action">
+                    <caption>On click type</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="action">Action</enumerationValue>
+                        <enumerationValue key="enlarge">Enlarge</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="onClick" type="action" required="false">
+                    <caption>On click</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Accessibility">
+                <property key="alternativeText" type="textTemplate" required="false">
+                    <caption>Alternative text</caption>
+                    <description>Alternative text of the image for accessibility purposes.</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">
                 <property key="widthUnit" type="enumeration" defaultValue="auto">
                     <caption>Width unit</caption>
@@ -44,7 +70,7 @@
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="auto">
                     <caption>Height unit</caption>
-                    <description>Auto will keep the aspect ratio of the image</description>
+                    <description>Auto will keep the aspect ratio of the image.</description>
                     <enumerationValues>
                         <enumerationValue key="auto">Auto</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -56,14 +82,21 @@
                 </property>
                 <property key="iconSize" type="integer" defaultValue="14">
                     <caption>Icon size</caption>
-                    <description>The size of the icon in pixels</description> 
+                    <description>The size of the icon in pixels.</description>
+                </property>
+                <property key="displayAs" type="enumeration" defaultValue="fullImage">
+                    <caption>Display as</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="thumbnail">Thumbnail</enumerationValue>
+                        <enumerationValue key="fullImage">Full image</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>
-                    <description>Image will never get larger than its original size. It can become smaller</description>
+                    <description>Image will never get larger than its original size. It can become smaller.</description>
                 </property>
             </propertyGroup>
-            <!-- TODO: Events -->
         </propertyGroup>
     </properties>
 </widget>

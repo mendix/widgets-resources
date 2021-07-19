@@ -4,13 +4,17 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue, WebIcon, WebImage } from "mendix";
+import { ActionValue, DynamicValue, WebIcon, WebImage } from "mendix";
 
 export type DatasourceEnum = "image" | "imageUrl" | "icon";
+
+export type OnClickTypeEnum = "action" | "enlarge";
 
 export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
 export type HeightUnitEnum = "auto" | "pixels";
+
+export type DisplayAsEnum = "thumbnail" | "fullImage";
 
 export interface ImageViewerContainerProps {
     name: string;
@@ -21,11 +25,15 @@ export interface ImageViewerContainerProps {
     imageObject?: DynamicValue<WebImage>;
     imageUrl?: DynamicValue<string>;
     imageIcon?: DynamicValue<WebIcon>;
+    onClickType: OnClickTypeEnum;
+    onClick?: ActionValue;
+    alternativeText?: DynamicValue<string>;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
     iconSize: number;
+    displayAs: DisplayAsEnum;
     responsive: boolean;
 }
 
@@ -36,10 +44,14 @@ export interface ImageViewerPreviewProps {
     imageObject: string;
     imageUrl: string;
     imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    onClickType: OnClickTypeEnum;
+    onClick: {} | null;
+    alternativeText: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
     iconSize: number | null;
+    displayAs: DisplayAsEnum;
     responsive: boolean;
 }

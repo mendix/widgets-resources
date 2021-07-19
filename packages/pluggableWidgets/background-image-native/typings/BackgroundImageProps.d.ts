@@ -24,5 +24,5 @@ export interface BackgroundImagePreviewProps {
     image: string;
     resizeMode: ResizeModeEnum;
     opacity: number | null;
-    content: { widgetCount: number; renderer: ComponentType };
+    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
 }

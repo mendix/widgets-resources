@@ -3,6 +3,7 @@ name: Run automated end-to-end tests
 on:
     push:
         branches: [master]
+
     pull_request:
         branches: [master]
 
@@ -19,12 +20,14 @@ jobs:
               with:
                 global_files: |
                   !{packages/**/*,configs/e2e/*.json}
+                not_atlas_native_files: |
+                  !packages/theming/atlas/src/**/native/**
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@v2
               with:
-                  submodules: true
+                  submodules: false
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
               run:
@@ -45,6 +48,7 @@ jobs:
             - name: "Building package in production mode"
               run: npm run release -- ${{ steps.variables.outputs.arg }}
             - name: "Executing E2E tests"
+              if: github.event_name != 'pull_request' || steps.files.outputs.not_atlas_native_files != ''
               run: npm run test:e2e -- ${{ steps.variables.outputs.arg }}
             - name: "Fixing files permissions"
               if: failure()
@@ -60,5 +64,7 @@ jobs:
                   name: test-screenshot-results
                   path: |
                       ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
+                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/TESTFAIL_*.png
                       ${{ github.workspace}}/packages/theming/**/tests/e2e/screenshot-results/diff/*.png
+                      ${{ github.workspace}}/packages/theming/**/tests/e2e/screenshot-results/TESTFAIL_*.png
                   if-no-files-found: error

@@ -82,7 +82,7 @@ $link-hover-color: darken($link-color, 15%) !default;
 $font-family-import: "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" !default;
 
 // Font Family / False = fallback from Bootstrap (Helvetica Neue)
-$font-family-base: "SFProDisplay", "Open Sans", sans-serif !default;
+$font-family-base: "Open Sans", sans-serif !default;
 
 // Font Sizes
 $font-size-large: 18px !default;
@@ -146,6 +146,9 @@ $navsidebar-color-active: #fff !default;
 $navsidebar-sub-color: #aaa !default;
 $navsidebar-sub-color-hover: $brand-primary !default;
 $navsidebar-sub-color-active: $brand-primary !default;
+
+$navsidebar-width-closed: 52px !default;
+$navsidebar-width-open: 232px !default;
 
 // Navigation topbar
 $navtopbar-font-size: $font-size-default !default;

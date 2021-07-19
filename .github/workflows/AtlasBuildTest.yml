@@ -5,10 +5,12 @@ on:
         branches: [master]
         paths:
             - "packages/theming/atlas/**"
+            - "!**/*.md"
     pull_request:
         branches: [master]
         paths:
-            - "packages/theming/atlas/**"
+          - "packages/theming/atlas/**"
+          - "!**/*.md"
 
 jobs:
     test:

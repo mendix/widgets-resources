@@ -42,7 +42,7 @@ export interface TimelineContainerProps {
 export interface TimelinePreviewProps {
     class: string;
     style: string;
-    data: {} | null;
+    data: {} | { type: string } | null;
     title: string;
     description: string;
     timeIndication: string;

@@ -1,7 +1,7 @@
 {
   "name": "datagrid-dropdown-filter-web",
   "widgetName": "DatagridDropdownFilter",
-  "version": "1.2.0",
+  "version": "1.3.1",
   "description": "",
   "copyright": "Mendix Technology B.V.",
   "repository": {
@@ -13,20 +13,28 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "datagrid-dropdown-filter-web"
+  },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:ts",
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 9",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:ts"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "eslint": "^7.20.0"
   }
 }

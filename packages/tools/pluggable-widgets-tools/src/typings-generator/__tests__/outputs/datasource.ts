@@ -39,7 +39,7 @@ export interface MyWidgetContainerProps {
 export interface MyWidgetPreviewProps {
     class: string;
     style: string;
-    contentSource: {} | null;
+    contentSource: {} | { type: string } | null;
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     markerDataAttribute: string;
     actionAttribute: {} | null;

@@ -1,7 +1,7 @@
 {
   "name": "maps-web",
   "widgetName": "Maps",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Show locations on Maps",
   "copyright": "Mendix Technology B.V.",
   "license": "Apache-2.0",
@@ -13,18 +13,27 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "marketplace": {
+    "minimumMXVersion": "9.0.5",
+    "marketplaceId": 108261
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "maps-web"
+  },
   "packagePath": "com.mendix.widget.custom.Maps",
   "scripts": {
     "start": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools start:server",
     "dev": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools start:web",
     "build": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
-    "lint": "..\"/../../node_modules/.bin/eslint\" --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/Maps.mpk",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools release:web"
+    "release": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "devDependencies": {
     "@googlemaps/jest-mocks": "^0.0.3",
@@ -34,8 +43,9 @@
     "@types/googlemaps": "^3.39.2",
     "@types/faker": "^4.1.0",
     "@types/react-leaflet": "^2.5.1",
-    "faker": "^4.1.0",
-    "cross-env": "^7.0.2"
+    "cross-env": "^7.0.2",
+    "eslint": "^7.20.0",
+    "faker": "^4.1.0"
   },
   "dependencies": {
     "@react-google-maps/api": "^1.8.6",

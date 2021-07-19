@@ -1,0 +1,38 @@
+.widget-tree-view {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .widget-tree-view-branch-header-clickable {
+        cursor: pointer;
+    }
+
+    .widget-tree-view-branch-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        padding: 8px 0;
+
+        .glyphicon.widget-tree-view-branch-header-icon {
+            font-size: 16px;
+        }
+    }
+
+    .widget-tree-view-branch-header-reversed {
+        flex-direction: row-reverse;
+    }
+
+    .widget-tree-view-branch-header-value {
+        flex: 1;
+        font-size: 16px;
+        margin: 0 8px;
+    }
+
+    .widget-tree-view-body {
+        padding-left: 12px;
+        border-left: blue 1px solid;
+    }
+}

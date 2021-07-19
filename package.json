@@ -7,8 +7,9 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap --hoist --strict",
-    "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
-    "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
+    "reinstall": "git clean -dfx && npx lerna clean --yes && npm i",
+    "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
+    "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "clean-all-screenshots-mac": "find . -name 'screenshot-baseline' -type d -prune -exec rm -rf '{}' +",
     "lint": "npm run lint:src && lerna run lint --stream",
     "lint:src": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages/*/*/src",
@@ -19,12 +20,15 @@
     "test:scripts": "lerna run test:scripts --stream",
     "test:scripts:cross-platform": "lerna run test:scripts:cross-platform --stream",
     "test:e2e": "lerna run test:e2e --ignore @mendix/custom-widgets-utils-internal --stream --concurrency 1 --no-bail",
-    "test:e2e:ios": "cd ./detox && npm install && npm run test:ios",
-    "test:e2e:android": "cd ./detox && npm install && npm run test:android",
     "build": "lerna run build --ignore @mendix/custom-widgets-utils-internal",
+    "build:native": "npm run build -- --scope '*-native'",
+    "build:web": "npm run build -- --scope '*-web'",
     "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
     "release": "lerna run release --ignore @mendix/custom-widgets-utils-internal",
-    "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts"
+    "release:native": "npm run release -- --scope '*-native'",
+    "release:web": "npm run release -- --scope '*-web'",
+    "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
+    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -50,6 +54,7 @@
     "@types/xml2js": "^0.4.5",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
+    "detox": "^18.16.0",
     "es-abstract": "^1.17.7",
     "gulp-change": "^1.0.2",
     "gulp-git": "^2.10.1",
@@ -62,6 +67,7 @@
     "mime": "^2.4.6",
     "mini-css-extract-plugin": "^1.2.1",
     "node-ip": "^0.1.2",
+    "node-fetch": "^2.6.1",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0",
     "react": "~17.0.1",
@@ -75,7 +81,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
+      "pre-commit": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\" && npm run validate-staged-widget-versions",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

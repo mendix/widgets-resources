@@ -1,5 +1,8 @@
 import { existsSync, readdirSync, promises as fs } from "fs";
 import { join } from "path";
+import { config } from "dotenv";
+
+config({ path: join(process.cwd(), ".env") });
 
 export async function listDir(path) {
     const entries = await fs.readdir(path, { withFileTypes: true });

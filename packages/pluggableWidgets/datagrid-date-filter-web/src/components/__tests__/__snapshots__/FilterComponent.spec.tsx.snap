@@ -8,6 +8,34 @@ exports[`Filter component renders correctly 1`] = `
   <FilterSelector
     defaultFilter="equal"
     onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "Greater than",
+          "value": "greater",
+        },
+        Object {
+          "label": "Greater than or equal",
+          "value": "greaterEqual",
+        },
+        Object {
+          "label": "Equal",
+          "value": "equal",
+        },
+        Object {
+          "label": "Not equal",
+          "value": "notEqual",
+        },
+        Object {
+          "label": "Smaller than",
+          "value": "smaller",
+        },
+        Object {
+          "label": "Smaller than or equal",
+          "value": "smallerEqual",
+        },
+      ]
+    }
   />
   <ForwardRef
     adjustable={true}
@@ -39,6 +67,34 @@ exports[`Filter component renders correctly with aria labels 1`] = `
     ariaLabel="my label"
     defaultFilter="equal"
     onChange={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "Greater than",
+          "value": "greater",
+        },
+        Object {
+          "label": "Greater than or equal",
+          "value": "greaterEqual",
+        },
+        Object {
+          "label": "Equal",
+          "value": "equal",
+        },
+        Object {
+          "label": "Not equal",
+          "value": "notEqual",
+        },
+        Object {
+          "label": "Smaller than",
+          "value": "smaller",
+        },
+        Object {
+          "label": "Smaller than or equal",
+          "value": "smallerEqual",
+        },
+      ]
+    }
   />
   <ForwardRef
     adjustable={true}

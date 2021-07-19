@@ -1,121 +1,121 @@
 .widget-rating {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 
-  /**
+    /**
   Defines each image/icon styles
    */
-  .rating-item {
-    cursor: pointer;
+    .rating-item {
+        cursor: pointer;
 
-    /**
+        /**
     Style when the item is disabled
      */
-    &.disabled {
-      cursor: not-allowed;
-      opacity: 0.65;
-    }
+        &.disabled {
+            cursor: not-allowed;
+            opacity: 0.65;
+        }
 
-    &:focus:not(:focus-visible) {
-      .rating-image, .rating-icon {
-        outline: none;
-      }
-    }
+        &:focus:not(:focus-visible) {
+            .rating-image,
+            .rating-icon {
+                outline: none;
+            }
+        }
 
-    // Add focus for keyboard only
-    &:focus-visible {
-      .rating-image, .rating-icon {
-        outline: 1px solid #0595db;
-      }
+        // Add focus for keyboard only
+        &:focus-visible {
+            .rating-image,
+            .rating-icon {
+                outline: 1px solid #0595db;
+            }
+        }
+
+        /**
+    Style when mouse hovers the item
+     */
+        .rating-item-hover {
+            .rating-icon-full {
+                &.animate {
+                    animation: none;
+                }
+            }
+
+            .rating-image-full {
+                &.animate {
+                    animation: none;
+                }
+            }
+        }
     }
 
     /**
-    Style when mouse hovers the item
-     */
-    .rating-item-hover {
-
-      .rating-icon-full {
-        &.animate {
-          animation: none;
-        }
-      }
-
-      .rating-image-full {
-        &.animate {
-          animation: none;
-        }
-      }
-    }
-  }
-
-  /**
   Styles when icon is selected in Studio/Studio Pro
    */
-  .rating-icon {
-    font-size: 24px;
-    transform: scale(1);
-  }
+    .rating-icon {
+        font-size: 24px;
+        transform: scale(1);
+    }
 
-  /**
+    /**
   Style for the empty icon
    */
-  .rating-icon-empty {
-    color: #CCC;
-  }
+    .rating-icon-empty {
+        color: #ccc;
+    }
 
-  /**
+    /**
   Style for the full icon
    */
-  .rating-icon-full {
-    color: #FFA611;
+    .rating-icon-full {
+        color: #ffa611;
 
-    &.animate {
-      animation: stretch-bounce .5s ease-in-out;
+        &.animate {
+            animation: stretch-bounce 0.5s ease-in-out;
+        }
     }
-  }
 
-  /**
+    /**
   Styles when image is selected in Studio/Studio Pro
    */
-  .rating-image {
-    margin-right: 2px;
-    transform: scale(1);
-  }
+    .rating-image {
+        margin-right: 2px;
+        transform: scale(1);
+    }
 
-  /**
+    /**
   Style for the empty image
    */
-  .rating-image-empty {
+    .rating-image-empty {
+    }
 
-  }
-
-  /**
+    /**
   Style for the full image
    */
-  .rating-image-full {
-    &.animate {
-      animation: stretch-bounce .5s ease-in-out;
+    .rating-image-full {
+        &.animate {
+            animation: stretch-bounce 0.5s ease-in-out;
+        }
     }
-  }
 }
 
 /**
 Animation when defining an item (Stretch and bounce)
  */
 @-webkit-keyframes stretch-bounce {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.5);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  75% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.5);
+    }
+    50% {
+        transform: scale(0.9);
+    }
+    75% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }

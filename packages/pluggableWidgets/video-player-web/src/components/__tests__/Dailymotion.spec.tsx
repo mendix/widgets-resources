@@ -1,8 +1,7 @@
 import { createElement } from "react";
+import { create } from "react-test-renderer";
 
 import { Dailymotion, DailymotionProps } from "../Dailymotion";
-import { create } from "react-test-renderer";
-import ReactResizeDetector from "react-resize-detector";
 
 describe("Dailymotion Player", () => {
     const defaultProps = {
@@ -37,16 +36,5 @@ describe("Dailymotion Player", () => {
         const player = create(defaulPlayer({ ...defaultProps, showControls: true })).toJSON();
 
         expect(player).toMatchSnapshot();
-    });
-
-    it("should renders correctly with aspectRatio", () => {
-        const player = create(defaulPlayer({ ...defaultProps, aspectRatio: true }));
-        window.dispatchEvent(new Event("resize"));
-        const instance = player.root;
-        const sizeDetector = instance.findByType(ReactResizeDetector);
-
-        expect(player.toJSON).toMatchSnapshot();
-        expect(sizeDetector).not.toBeNull();
-        expect(sizeDetector.props).toHaveProperty("onResize");
     });
 });

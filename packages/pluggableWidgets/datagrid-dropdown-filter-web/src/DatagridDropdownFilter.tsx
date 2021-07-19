@@ -2,8 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
 import { ValueStatus, ListAttributeValue } from "mendix";
 import { FilterComponent, FilterOption } from "./components/FilterComponent";
-import { getFilterDispatcher } from "./utils/provider";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
@@ -19,6 +18,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
               value: value.value.value ?? ""
           }))
         : [];
+
     const alertMessage = (
         <Alert bootstrapStyle="danger">
             The data grid drop-down filter widget must be placed inside the header of the Data grid 2.0 widget.
@@ -31,7 +31,9 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute } = filterContextValue;
+                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+
+                const defaultValues = initialFilters.map(filter => filter.value).join(",");
 
                 const errorMessage =
                     getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
@@ -44,7 +46,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         ariaLabel={props.ariaLabel?.value}
                         attribute={attribute}
                         auto={props.auto}
-                        defaultValue={props.defaultValue?.value}
+                        defaultValue={defaultValues.length > 0 ? defaultValues : props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         name={props.name}
@@ -65,8 +67,8 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "Enum"
-        ? "The attribute type being used for Data grid drop-down filter is not 'Enumeration'"
+    return type && !type.match(/Enum|Boolean/)
+        ? "The attribute type being used for Data grid drop-down filter is not 'Boolean or Enumeration'"
         : null;
 }
 
@@ -75,7 +77,9 @@ function validateValues(listAttribute: ListAttributeValue, options: FilterOption
         return null;
     }
 
-    return options.some(filterOption => !listAttribute.universe?.includes(filterOption.value))
+    return options.some(
+        filterOption => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
+    )
         ? "There are invalid values available in the Data grid drop-down filter"
         : null;
 }
@@ -85,16 +89,27 @@ function getFilterCondition(listAttribute: ListAttributeValue, values: FilterOpt
         return undefined;
     }
 
-    const filterAttribute = attribute(listAttribute.id);
+    const { id, type } = listAttribute;
+    const filterAttribute = attribute(id);
 
     if (values.length > 1) {
-        return or(...values.map(filter => equals(filterAttribute, literal(filter.value))));
+        return or(...values.map(filter => equals(filterAttribute, literal(checkValue(filter.value, type)))));
     }
 
     const [filterValue] = values;
     if (filterValue.value) {
-        return equals(filterAttribute, literal(filterValue.value));
+        return equals(filterAttribute, literal(checkValue(filterValue.value, type)));
     }
 
     return undefined;
+}
+
+function checkValue(value: string, type: string): boolean | string {
+    if (type === "Boolean") {
+        if (value !== "true" && value !== "false") {
+            return value;
+        }
+        return value === "true";
+    }
+    return value;
 }

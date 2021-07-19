@@ -1,6 +1,7 @@
 import { Appearance, Platform } from "react-native";
 import { adjustFont, anyColorToRgbString, setContrastScale } from "../../themesource/atlas_core/native/api";
 import {
+    VariablesAccordion,
     VariablesBackground,
     VariablesBackgroundDefaults,
     VariablesBadge,
@@ -333,6 +334,32 @@ export const navigation: VariablesNavigation = {
 export const container: VariablesContainer = {
     containerDisabled: {
         opacity: 0.6
+    }
+};
+//
+// Accordion Styles
+export const accordion: VariablesAccordion = {
+    container: {
+        backgroundColor: background.primary,
+        borderColor: border.color
+    },
+    groupHeader: {
+        container: {
+            paddingVertical: spacing.regular,
+            paddingHorizontal: spacing.regular
+        },
+        heading: {
+            color: font.colorTitle
+        },
+        icon: {
+            size: font.sizeLarge,
+            color: font.colorTitle
+        }
+    },
+    groupContent: {
+        paddingTop: spacing.small,
+        paddingBottom: spacing.large,
+        paddingHorizontal: spacing.regular
     }
 };
 //

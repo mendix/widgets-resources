@@ -1,0 +1,1435 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion in collapsible & multi expanded group mode renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode hides the first accordion group when visibility is false 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": -2,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the accordion groups icon on left side 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          Object {
+            "flexDirection": "row-reverse",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": -2,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          Object {
+            "flexDirection": "row-reverse",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the accordion groups without an icon 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the first accordion group initially collapsed 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": -2,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the first accordion group initially collapsed based on attribute 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": -2,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Accordion in collapsible & single expanded group mode renders the first accordion group initially collapsed based on expression 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "borderColor": "#CED0D3",
+      "flexGrow": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#0A1326",
+              "fontSize": 40,
+              "fontWeight": "600",
+              "lineHeight": 60,
+            },
+            Object {
+              "flex": 1,
+            },
+          ]
+        }
+      >
+        Header1
+      </Text>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": -2,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderColor": "#CED0D3",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderColor": "#CED0D3",
+            "flexDirection": "row",
+            "justifyContent": "space-between",
+            "paddingHorizontal": 16,
+            "paddingVertical": 16,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <Text>
+          Header2
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 16,
+            "marginRight": undefined,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+            "width": 16,
+          }
+        }
+      >
+        <View
+          testId="icon"
+        />
+      </View>
+    </View>
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "height": undefined,
+          "overflow": undefined,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingBottom": 24,
+            "paddingHorizontal": 16,
+            "paddingTop": 8,
+          }
+        }
+      >
+        <Text>
+          Content
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

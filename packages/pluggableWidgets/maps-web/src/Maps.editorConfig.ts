@@ -147,8 +147,7 @@ export function check(values: MapsPreviewProps): Problem[] {
     });
 
     values.dynamicMarkers.forEach((marker, index) => {
-        // @ts-ignore
-        if (marker.markersDS.type === "null") {
+        if (!marker.markersDS || ("type" in marker.markersDS && marker.markersDS.type === "null")) {
             errors.push({
                 property: `dynamicMarkers/${index + 1}/markersDS`,
                 message: "A data source should be selected in order to retrieve a list of markers"

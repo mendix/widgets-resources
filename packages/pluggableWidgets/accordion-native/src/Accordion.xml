@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.accordion.Accordion" supportedPlatform="Native" needsEntityContext="true"
+        offlineCapable="true"
+        pluginWidget="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+    <name>Accordion</name>
+    <description>Toggle the display of sections of content</description>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAF0SURBVHgB7du9ToRAFAXgw7o2YAt2ttv4EBTuGwCNFnS+kiUkVvAKFjyEja2doRWa1axgYqHDMBnDFsw9Xzlek50T5mcvWe84gGAbCMcAINz270DTNCiKAn3fwyVhGCJNU8Rx/GtceQLqunZu8qO2bVGWpTK+mSp0Vdd1yhj3AFNBVVVYsyzLZv/OYxDCcQ+ApafXTzw8f6A7LPsV4tL3cLfb4ubqbLZOd0/RnfMm1k/A48vykx+99cch2IOxTndP0Z3zJtYBvJs/479dnHvGmqmz/EcQBLBlHcD99fb7cV1aMEz+dmdekXmeI4oi9f+HySdJAlvWe8B+WKN7wzo9pXGN267zOTwGIRzvAaYC01167bgEIBz3AFMB+wGOYwAQjv0AWGI/gP0A9gPYD3AJA4Bw7AdAOAYA4dgPgHAMAMIxAAjHACAcA4BwDADCMQAIxwAgHHuCEE4JwPd9uGrqlZoSgO7d29rp3h16/O2wcAwAwn0BL4eSOakvH2IAAAAASUVORK5CYII=
+    </icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="groups" type="object" isList="true" required="true">
+                    <caption>Groups</caption>
+                    <description/>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="headerRenderMode" type="enumeration" defaultValue="text">
+                                <caption>Header type</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="text">Text</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="headerTextRenderMode" type="enumeration" defaultValue="heading5">
+                                <caption>Render mode</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="heading1">Heading 1</enumerationValue>
+                                    <enumerationValue key="heading2">Heading 2</enumerationValue>
+                                    <enumerationValue key="heading3">Heading 3</enumerationValue>
+                                    <enumerationValue key="heading4">Heading 4</enumerationValue>
+                                    <enumerationValue key="heading5">Heading 5</enumerationValue>
+                                    <enumerationValue key="heading6">Heading 6</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="headerText" type="textTemplate">
+                                <caption>Text</caption>
+                                <description/>
+                                <translations>
+                                    <translation lang="en_US">Header</translation>
+                                    <translation lang="nl_NL">Koptekst</translation>
+                                </translations>
+                            </property>
+                            <property key="headerContent" type="widgets" required="false">
+                                <caption>Header</caption>
+                                <description/>
+                            </property>
+                            <property key="content" type="widgets" required="false">
+                                <caption>Content</caption>
+                                <description/>
+                            </property>
+                            <property key="visible" type="expression" defaultValue="true">
+                                <caption>Visible</caption>
+                                <description/>
+                                <returnType type="Boolean"/>
+                            </property>
+                            <property key="groupCollapsed" type="enumeration" defaultValue="groupStartExpanded">
+                                <caption>Start as</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="groupStartExpanded">Expanded</enumerationValue>
+                                    <enumerationValue key="groupStartCollapsed">Collapsed</enumerationValue>
+                                    <enumerationValue key="groupStartDynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="groupCollapsedDynamic" type="expression" required="false">
+                                <caption>Collapsed expression</caption>
+                                <description/>
+                                <returnType type="Boolean"/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Events">
+                            <property key="groupCollapsedAttribute" type="attribute" required="false">
+                                <caption>Collapsed attribute</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="Boolean"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="groupOnChange" type="action" required="false">
+                                <caption>On change</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Behavior">
+                <property key="collapsible" type="boolean" defaultValue="true">
+                    <caption>Collapsible</caption>
+                    <description/>
+                </property>
+                <property key="collapseBehavior" type="enumeration" defaultValue="singleExpanded">
+                    <caption>Expanded groups</caption>
+                    <description>Allow a single group or multiple groups to be expanded at the same time</description>
+                    <enumerationValues>
+                        <enumerationValue key="singleExpanded">Single</enumerationValue>
+                        <enumerationValue key="multipleExpanded">Multiple</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Visualization">
+            <property key="icon" type="enumeration" defaultValue="right">
+                <caption>Show Icon</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="right">Right</enumerationValue>
+                    <enumerationValue key="left">Left</enumerationValue>
+                    <enumerationValue key="no">No</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="iconCollapsed" type="icon" required="false">
+                <caption>Icon collapsed</caption>
+                <description/>
+            </property>
+            <property key="iconExpanded" type="icon" required="false">
+                <caption>Icon expanded</caption>
+                <description/>
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

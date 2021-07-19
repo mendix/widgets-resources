@@ -14,5 +14,5 @@ export interface SafeAreaViewProps<Style> {
 export interface SafeAreaViewPreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: ComponentType };
+    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
 }

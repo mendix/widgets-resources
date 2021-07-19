@@ -1,15 +1,15 @@
 import { ValueStatus } from "mendix";
-import { createElement, FunctionComponent } from "react";
+import { createElement, FunctionComponent, useCallback } from "react";
 import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
-import { ImageViewer as ImageViewerComponent } from "./components/ImageViewer";
+import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/ImageViewer/index";
 
-type ImageProps = {
-    type: "image" | "icon";
-    image: string | undefined;
-};
-
-function getImageProps({ datasource, imageIcon, imageObject, imageUrl }: ImageViewerContainerProps): ImageProps {
-    const fallback: ImageProps = {
+function getImageProps({
+    datasource,
+    imageIcon,
+    imageObject,
+    imageUrl
+}: ImageViewerContainerProps): ImageViewerImageProps {
+    const fallback: ImageViewerImageProps = {
         type: "image",
         image: undefined
     };
@@ -47,25 +47,27 @@ function getImageProps({ datasource, imageIcon, imageObject, imageUrl }: ImageVi
 }
 
 export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props => {
+    const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
     const { type, image } = getImageProps(props);
+
+    const altText = props.alternativeText?.status === ValueStatus.Available ? props.alternativeText.value : undefined;
+
     return (
-        <ImageViewerComponent.Wrapper
-            className={props.class}
+        <ImageViewerComponent
+            class={props.class}
+            style={props.style}
+            widthUnit={props.widthUnit}
+            width={props.width}
+            heightUnit={props.heightUnit}
+            height={props.height}
+            iconSize={props.iconSize}
             responsive={props.responsive}
-            hasImage={image !== undefined && image.length > 0}
-        >
-            {type === "image" ? (
-                <ImageViewerComponent.Image
-                    image={image}
-                    height={props.height}
-                    heightUnit={props.heightUnit}
-                    width={props.width}
-                    widthUnit={props.widthUnit}
-                    style={props.style}
-                />
-            ) : (
-                <ImageViewerComponent.Glyphicon icon={image} size={props.iconSize} style={props.style} />
-            )}
-        </ImageViewerComponent.Wrapper>
+            onClickType={props.onClickType}
+            onClick={props.onClick ? onClick : undefined}
+            type={type}
+            image={image}
+            altText={altText}
+            displayAs={props.displayAs}
+        />
     );
 };

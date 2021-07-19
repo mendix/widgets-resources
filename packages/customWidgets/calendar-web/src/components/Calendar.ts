@@ -32,7 +32,6 @@ export interface CalendarProps {
     loading?: boolean;
     startPosition?: Date;
     messages: {};
-    popup: boolean;
     editable: string;
     titleFormat?: (date: Date) => void;
     weekdayFormat?: (date: Date) => void;
@@ -156,7 +155,7 @@ class Calendar extends Component<CalendarProps, State> {
             defaultView: this.defaultView(),
             formats: this.props.viewOption === "custom" ? this.props.formats : "",
             messages: this.props.viewOption === "custom" ? this.props.messages : "",
-            popup: this.props.popup,
+            popup: false,
             selectable: this.props.enableCreate,
             step: 60,
             showMultiDayTimes: true,

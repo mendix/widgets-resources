@@ -23,9 +23,13 @@ exports.config = {
     capabilities: [
         {
             browserName,
-            "goog:chromeOptions": {
-                args: debug ? ["--no-sandbox"] : ["--no-sandbox", "--disable-gpu", "--disable-extensions"]
-            }
+            ...(!process.env.CI
+                ? {
+                      "moz:firefoxOptions": {
+                          prefs: { "media.navigator.streams.fake": true, "media.navigator.permission.disabled": true }
+                      }
+                  }
+                : {})
         }
     ],
     sync: true,

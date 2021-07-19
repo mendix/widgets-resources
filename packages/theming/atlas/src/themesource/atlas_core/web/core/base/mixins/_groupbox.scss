@@ -6,12 +6,14 @@
 //
 
 @mixin groupbox-variant($color, $background) {
-    > .mx-groupbox-header {
-        color: $color;
-        border-color: $background;
-        background: $background;
-    }
-    > .mx-groupbox-body {
-        border-color: $background;
+    @if not $exclude-group-box {
+        > .mx-groupbox-header {
+            color: $color;
+            border-color: $background;
+            background: $background;
+        }
+        > .mx-groupbox-body {
+            border-color: $background;
+        }
     }
 }

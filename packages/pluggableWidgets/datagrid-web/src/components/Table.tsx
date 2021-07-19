@@ -120,6 +120,15 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         }
     }, [sortBy, props.setSortParameters]);
 
+    const filterRenderer = useCallback(
+        (children: ReactNode) => (
+            <div className="filter" style={{ pointerEvents: isDragging ? "none" : undefined }}>
+                {children}
+            </div>
+        ),
+        [isDragging]
+    );
+
     const tableColumns: ColumnProperty[] = useMemo(
         () =>
             props.columns.map((column, index) => ({
@@ -132,20 +141,11 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 canDrag: column.draggable,
                 canResize: column.resizable,
                 canSort: column.sortable,
-                customFilter: props.columnsFilterable
-                    ? props.filterRenderer(
-                          (children: ReactNode) => (
-                              <div className="filter" style={{ pointerEvents: isDragging ? "none" : undefined }}>
-                                  {children}
-                              </div>
-                          ),
-                          index
-                      )
-                    : null,
+                customFilter: props.columnsFilterable ? props.filterRenderer(filterRenderer, index) : null,
                 width: column.width,
                 weight: column.size ?? 1
             })),
-        [props.columns, props.filterRenderer, props.columnsFilterable, isDragging]
+        [props.columns, props.filterRenderer, props.columnsFilterable, filterRenderer]
     );
 
     const visibleColumns = useMemo(
