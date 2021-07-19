@@ -1,0 +1,24 @@
+name: DG Release Slack Notification
+
+on:
+    push:
+        tags:
+            - "data-grid-2-v*"
+
+jobs:
+    notify:
+          name: "Slack Notification"
+          runs-on: ubuntu-latest
+          steps:
+              - name: "Notifying Workflow Team on slack"
+                uses: rtCamp/action-slack-notify@v2
+                env:
+                  SLACK_CHANNEL: ${{ secrets.SLACK_WORKFLOW_CHANNEL }}
+                  SLACK_COLOR: ${{ job.status }}
+                  SLACK_ICON: https://avatars.githubusercontent.com/t/4561606?s=48
+                  SLACK_MESSAGE: 'A new version of Data Grid v2 module was released :rocket:. Please update your team modules/starter apps.'
+                  SLACK_TITLE: 'New Data Grid v2 release'
+                  SLACK_USERNAME: WebContentBot
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WORKFLOW_WEBHOOK }}
+                  SLACK_FOOTER: 'Created by Web Content'
+                  MSG_MINIMAL: true
