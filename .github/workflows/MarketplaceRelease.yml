@@ -43,7 +43,7 @@ jobs:
                   SLACK_MESSAGE:
                       "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{
                       steps.scope.outputs._0 }} to the marketplace.
-                      <https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}|More info..>"
+                      <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|More info..>"
                   SLACK_TITLE: ":alert: Failure"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_MULTIXP_WEBHOOK }}
