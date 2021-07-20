@@ -1,5 +1,5 @@
 const { join } = require("path");
-const { access, readdir, mkdir, readFile, writeFile } = require("fs/promises");
+const { access, readdir, mkdir, readFile, writeFile, rm } = require("fs/promises");
 const { cp } = require("shelljs");
 const { promisify } = require("util");
 const { exec } = require("child_process");
@@ -61,6 +61,7 @@ async function createNMRModule() {
 
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
+    await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(
         `git clone ${githubUrlAuthenticated} ${tmpFolder} && \
         cd ${tmpFolder} && git checkout ${branchName} && \
@@ -121,7 +122,7 @@ async function combineWidgetChangelogs(allChangelogs, currentFolder) {
 
         `;
     } catch (error) {
-        console.warn(`${changelogPath} does not exist.`);
+        // console.warn(`${changelogPath} does not exist.`);
     }
 
     return allChangelogs;
