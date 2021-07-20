@@ -1,5 +1,5 @@
 {
-  "name": "native-mobile-resources",
+  "name": "mobile-resources-native",
   "version": "3.0.0",
   "license": "Apache-2.0",
   "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
@@ -7,12 +7,17 @@
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"
   },
+  "marketplace": {
+    "minimumMXVersion": "9.0.5",
+    "marketplaceId": 109513
+  },
   "scripts": {
     "prestart": "rimraf ./dist/tsc",
     "start": "rollup --config ../../../configs/jsactions/rollup.config.js --watch --configProject nativemobileresources",
     "prebuild": "rimraf ./dist/tsc",
     "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nativemobileresources",
-    "version": "npm run build"
+    "version": "npm run build",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {
     "@react-native-community/cameraroll": "4.0.1",

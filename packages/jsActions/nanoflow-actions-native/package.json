@@ -1,10 +1,15 @@
 {
-  "name": "nanoflow-commons",
+  "name": "nanoflow-actions-native",
   "version": "2.0.1",
   "license": "Apache-2.0",
+  "marketplace": {
+    "minimumMXVersion": "9.0.5",
+    "marketplaceId": 109515
+  },
   "scripts": {
     "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nanoflowcommons",
-    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/"
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {
     "@react-native-community/async-storage": "1.12.1",

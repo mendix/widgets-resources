@@ -122,14 +122,14 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 ### For developing in `packages/jsActions`:
 
 -   Create a simple Mendix project in Studio.
--   Copy all of it's contents to `packages/jsActions/nanoflow-commons/dist/mxproject`.
--   Run `npm run build` on `nanoflow-commons`. This will build and copy the mpk to dist/mxproject's
+-   Copy all of it's contents to `packages/jsActions/nanoflow-actions-native/dist/mxproject`.
+-   Run `npm run build` on `nanoflow-actions-native`. This will build and copy the mpk to dist/mxproject's
     correct folder.
 
 Please bear in mind that when you develop JSActions, creation process is not automatically picked up by Modeler. Which
 means:
 
--   First you have to create the ts file in `nanoflow-commons/src/.../ExampleName.ts` with desired content. Please take
+-   First you have to create the ts file in `nanoflow-actions-native/src/.../ExampleName.ts` with desired content. Please take
     a look at examples in `src/client`.
 -   Second you have to create a JsAction with name `ExampleName` and `parameters` in Studio.
 -   Then every time `npm run build` is run, the code piece between `// BEGIN USER CODE` and `// END USER CODE` will be

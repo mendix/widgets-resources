@@ -17,7 +17,7 @@ Change to local IP or add your config in `config/environments.json`
 Build your package:
 
 ```shell
-> cd packages-hybrid/hybrid-mobile-actions/tests/phonegap
+> cd packages-hybrid/nanoflow-actions-hybrid/tests/phonegap
 > npm run package -- --env.target=mendixLocalMachine
 or
 > npm run package -- --env.target=sandbox

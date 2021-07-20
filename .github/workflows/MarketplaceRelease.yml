@@ -4,9 +4,11 @@ on:
     push:
         tags:
             - "*-web-v*"
+            - "*-native-v*"
+            - "*-hybrid-v*"
 
 jobs:
-    publish:
+    publish_release:
           name: "Marketplace Release"
           runs-on: ubuntu-latest
 
@@ -26,5 +28,5 @@ jobs:
                     separator: "-v"
               - name: "Installing dependencies"
                 run: npm install
-              - name: "Check changes and publish widget"
-                run: TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }} MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{ steps.scope.outputs._1 }}'
+              - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
+                run: TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }} MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{ steps.scope.outputs._0 }}'
