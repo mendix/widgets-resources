@@ -16,6 +16,7 @@ export interface WebViewProps<Style> {
     onMessageInput?: EditableValue<string>;
     userAgent: string;
     openLinksExternally: boolean;
+    historyNavigation: boolean;
 }
 
 export interface WebViewPreviewProps {
@@ -29,4 +30,5 @@ export interface WebViewPreviewProps {
     onMessageInput: string;
     userAgent: string;
     openLinksExternally: boolean;
+    historyNavigation: boolean;
 }
