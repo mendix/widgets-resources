@@ -66,17 +66,15 @@ async function createNMRModule() {
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(tmpFolder, { recursive: true, force: true });
-    await execShellCommand(
-        `git clone ${githubUrlAuthenticated} ${tmpFolder} && \
-        cd ${tmpFolder} && \
-        git add . && git commit -m "Updated native widgets and js actions" && \
-        git push`
-    );
+    await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
     await Promise.all([
         ...nativeWidgetFolders.map(folder => asyncCopy("-rf", `${folder}/dist/**/*.mpk`, tmpFolderWidgets)),
         asyncCopy("-rf", join(process.cwd(), "packages/jsActions/mobile-resources-native/dist/**/*"), tmpFolderActions)
     ]);
+    await execShellCommand(
+        `cd ${tmpFolder} && git add . && git commit -m "Updated native widgets and js actions" && git push`
+    );
 
     console.log("Creating module MPK..");
     await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
