@@ -30,9 +30,9 @@ jobs:
               run: npm install
             - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
               run:
-                  TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }}
+                  "TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }}
                   MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{
-                  steps.scope.outputs._0 }}'
+                  steps.scope.outputs._0 }}'"
             - name: "Send slack msg on failure"
               if: ${{ failure() }}
               uses: rtCamp/action-slack-notify@v2
@@ -41,7 +41,9 @@ jobs:
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: ${{ secrets.WEBCONTENT_BOT_IMAGE }}
                   SLACK_MESSAGE:
-                      "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{ steps.scope.outputs._0 }} to the marketplace. <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|More info..>"
+                      "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{
+                      steps.scope.outputs._0 }} to the marketplace.
+                      <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|More info..>"
                   SLACK_TITLE: ":alert: Failure"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_MULTIXP_WEBHOOK }}
