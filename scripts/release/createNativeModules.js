@@ -1,10 +1,8 @@
-const nodefetch = require("node-fetch");
 const { join } = require("path");
-const { readdir, mkdir, readFile } = require("fs/promises");
+const { access, readdir, mkdir, readFile, writeFile } = require("fs/promises");
 const { cp } = require("shelljs");
 const { promisify } = require("util");
 const { exec } = require("child_process");
-const { writeFile } = require("fs");
 
 main().catch(e => {
     console.error(e);
@@ -28,7 +26,9 @@ async function main() {
 async function createNMRModule() {
     const pkgPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/package.json");
     const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
-    const nativeWidgetFolders = widgetFolders.filter(folder => folder.includes("-native"));
+    const nativeWidgetFolders = widgetFolders
+        .filter(folder => folder.includes("-native"))
+        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
     const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
@@ -51,9 +51,9 @@ async function createNMRModule() {
         ${nativeWidgetsChangelogs}
     `;
 
-    const changelogBranchName = `${moduleName}-release-${version}`;
+    const changelogBranchName = `${name}-release-${version}`;
     await execShellCommand(
-        `git checkout -b ${changelogBranchName} && git commit -m "chore(${name}): update changelogs" && git push`
+        `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${name}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
     );
     await execShellCommand(
         `gh pr create --title "Updating all the changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
@@ -110,16 +110,20 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
 
 async function combineWidgetChangelogs(allChangelogs, currentFolder) {
     const { widgetName, version } = require(`${currentFolder}/package.json`);
-    const changelogFile = ls(`${currentFolder}/CHANGELOG.md`)?.[0];
-    if (changelogFile) {
-        const changelogs = await getUnreleasedChangelogs(changelogFile, version);
+    const changelogPath = `${currentFolder}/CHANGELOG.md`;
+    try {
+        await access(changelogPath);
+        const changelogs = await getUnreleasedChangelogs(changelogPath, version);
         allChangelogs += `
             ## [${version}] ${widgetName}
             
             ${changelogs}
 
         `;
+    } catch (error) {
+        console.warn(`${changelogPath} does not exist.`);
     }
+
     return allChangelogs;
 }
 
@@ -138,7 +142,7 @@ async function getUnreleasedChangelogs(changelogFile, version) {
     const d = new Date();
     const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
     const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
-    await writeFile(changelogFile, newContent, "utf8");
+    await writeFile(changelogFile, newContent);
 
     return unreleasedChangelogs;
 }
