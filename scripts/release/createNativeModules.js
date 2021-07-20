@@ -68,10 +68,10 @@ async function createNMRModule() {
     await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
-    await Promise.all([
-        ...nativeWidgetFolders.map(folder => asyncCopy("-rf", `${folder}/dist/**/*.mpk`, tmpFolderWidgets)),
-        asyncCopy("-rf", join(process.cwd(), "packages/jsActions/mobile-resources-native/dist/**/*"), tmpFolderActions)
-    ]);
+    console.log("Copying widgets..");
+    await Promise.all(nativeWidgetFolders.map(folder => asyncCopy("-rf", `${folder}/dist/**/*.mpk`, tmpFolderWidgets)));
+    console.log("Copying JS actions..");
+    await asyncCopy("-rf", join(process.cwd(), "packages/jsActions/mobile-resources-native/dist/*"), tmpFolderActions);
     await execShellCommand(
         `cd ${tmpFolder} && git add . && git commit -m "Updated native widgets and js actions" && git push`
     );
