@@ -24,6 +24,7 @@ async function main() {
 }
 
 async function createNMRModule() {
+    console.log("Creating the Native Mobile Resource module.");
     const pkgPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/package.json");
     const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
     const nativeWidgetFolders = widgetFolders
@@ -52,13 +53,16 @@ async function createNMRModule() {
     `;
 
     const changelogBranchName = `${name}-release-${version}`;
+    console.log("Updating changelogs..");
     await execShellCommand(
         `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${name}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
     );
     await execShellCommand(
         `gh pr create --title "Updating all the changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
     );
+    console.log("Created PR for changelog updates.");
 
+    console.log("Updating NativeComponentsTestProject..");
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(tmpFolder, { recursive: true, force: true });
@@ -74,11 +78,14 @@ async function createNMRModule() {
         asyncCopy("-rf", join(process.cwd(), "packages/jsActions/mobile-resources-native/dist/**/*"), tmpFolderActions)
     ]);
 
+    console.log("Creating module MPK..");
     await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
     const mpkOutput = ls(`${tmpFolder}/*.mpk`).toString();
 
+    console.log(`Creating Github release for module ${moduleName}`);
     await execShellCommand(`gh release create ${process.env.tag} --notes "${changelog}" "${mpkOutput}"`);
     await execShellCommand(`rm -rf ${tmpFolder}`);
+    console.log("Done.");
 }
 
 // Create reusable mxbuild image
