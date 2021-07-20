@@ -121,7 +121,7 @@ async function combineWidgetChangelogs(allChangelogs, currentFolder) {
 
         `;
     } catch (error) {
-        console.warn(`${changelogPath} does not exist.`);
+        // console.warn(`${changelogPath} does not exist.`);
     }
 
     return allChangelogs;
