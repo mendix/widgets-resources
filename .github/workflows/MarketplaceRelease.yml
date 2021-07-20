@@ -24,8 +24,8 @@ jobs:
               uses: jungwinter/split@v1
               id: scope
               with:
-                  msg: ${{ steps.variables.outputs.tag }}
-                  separator: "-v"
+                  msg: "${{ steps.variables.outputs.tag }}"
+                  seperator: "-v"
             - name: "Installing dependencies"
               run: npm install
             - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
@@ -43,7 +43,7 @@ jobs:
                   SLACK_MESSAGE:
                       "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{
                       steps.scope.outputs._0 }} to the marketplace.
-                      <https://github.com/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID|More info..>"
+                      <https://github.com/${{GITHUB_REPOSITORY}}/actions/runs/${{GITHUB_RUN_ID}}|More info..>"
                   SLACK_TITLE: ":alert: Failure"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_MULTIXP_WEBHOOK }}
