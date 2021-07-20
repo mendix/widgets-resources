@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Icon doesn't render a default icon while loading 1`] = `""`;
+exports[`Icon doesn't render a default icon while loading 1`] = `null`;
 
-exports[`Icon doesn't render an icon with an unknown icon data type 1`] = `""`;
+exports[`Icon doesn't render an icon with an unknown icon data type 1`] = `null`;
 
 exports[`Icon renders a default icon 1`] = `
 <svg
-  aria-hidden={true}
-  className="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate"
+  aria-hidden="true"
+  class="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate"
   height="16"
   viewBox="0 0 16 16"
   width="16"
@@ -21,16 +21,16 @@ exports[`Icon renders a default icon 1`] = `
 
 exports[`Icon renders glyph icons 1`] = `
 <span
-  aria-hidden={true}
-  className="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate glyphicon icon-class"
+  aria-hidden="true"
+  class="glyphicon widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate icon-class"
 />
 `;
 
 exports[`Icon renders image icons 1`] = `
 <img
   alt=""
-  aria-hidden={true}
-  className="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate"
+  aria-hidden="true"
+  class="widget-accordion-group-header-button-icon widget-accordion-group-header-button-icon-animate"
   src="icon.url"
 />
 `;

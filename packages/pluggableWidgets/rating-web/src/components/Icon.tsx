@@ -1,6 +1,7 @@
 import { createElement, ReactElement } from "react";
 import classNames from "classnames";
 import { WebIcon } from "mendix";
+import { Icon as InternalIcon } from "@mendix/piw-utils-internal";
 
 interface IconProps {
     animate?: boolean;
@@ -10,31 +11,16 @@ interface IconProps {
 }
 
 export function Icon({ animate, empty, full, value }: IconProps): ReactElement {
+    let className;
     if (value && value.type === "glyph") {
-        return (
-            <span
-                className={classNames(
-                    "rating-icon",
-                    { "rating-icon-empty": empty, "rating-icon-full": full, animate },
-                    "glyphicon",
-                    value.iconClass
-                )}
-                aria-hidden="true"
-            />
-        );
+        className = classNames("rating-icon", { "rating-icon-empty": empty, "rating-icon-full": full, animate });
     }
     if (value && value.type === "image") {
-        return (
-            <img
-                className={classNames("rating-image", {
-                    "rating-image-empty": empty,
-                    "rating-image-full": full,
-                    animate
-                })}
-                src={value.iconUrl}
-                alt=""
-            />
-        );
+        className = classNames("rating-image", {
+            "rating-image-empty": empty,
+            "rating-image-full": full,
+            animate
+        });
     }
-    return <div />;
+    return <InternalIcon icon={value} className={className} fallback={<div />} />;
 }

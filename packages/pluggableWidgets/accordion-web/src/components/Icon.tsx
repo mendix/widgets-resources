@@ -1,6 +1,7 @@
 import { createElement, ReactElement } from "react";
 import classNames from "classnames";
 import { WebIcon } from "mendix";
+import { Icon as InternalIcon } from "@mendix/piw-utils-internal";
 
 export interface IconProps {
     data?: WebIcon;
@@ -26,34 +27,12 @@ export function Icon({ data, loading, animate }: IconProps): ReactElement | null
         ) : null;
     }
 
-    if (data.type === "glyph") {
-        return (
-            <span
-                className={classNames(
-                    "widget-accordion-group-header-button-icon",
-                    {
-                        "widget-accordion-group-header-button-icon-animate": animate
-                    },
-                    "glyphicon",
-                    data.iconClass
-                )}
-                aria-hidden
-            />
-        );
-    }
-
-    if (data.type === "image") {
-        return (
-            <img
-                className={classNames("widget-accordion-group-header-button-icon", {
-                    "widget-accordion-group-header-button-icon-animate": animate
-                })}
-                src={data.iconUrl}
-                alt=""
-                aria-hidden
-            />
-        );
-    }
-
-    return null;
+    return (
+        <InternalIcon
+            icon={data}
+            className={classNames("widget-accordion-group-header-button-icon", {
+                "widget-accordion-group-header-button-icon-animate": animate
+            })}
+        />
+    );
 }

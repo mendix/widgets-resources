@@ -1,10 +1,10 @@
 import { GUID, WebIcon } from "mendix";
 import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactNode, useCallback, useState } from "react";
 import classNames from "classnames";
+import { Icon } from "@mendix/piw-utils-internal";
 
 import "../ui/TreeView.scss";
 import { ShowIconEnum } from "../../typings/TreeViewProps";
-import { Icon } from "./Icon";
 
 interface TreeViewObject {
     id: GUID;
