@@ -68,7 +68,7 @@ async function createNMRModule() {
     await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(
         `git clone ${githubUrlAuthenticated} ${tmpFolder} && \
-        cd ${tmpFolder} && git checkout ${branchName} && \
+        cd ${tmpFolder} && \
         git add . && git commit -m "Updated native widgets and js actions" && \
         git push`
     );
