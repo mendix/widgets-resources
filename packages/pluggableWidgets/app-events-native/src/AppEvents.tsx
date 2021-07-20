@@ -2,7 +2,7 @@ import NetInfo, { NetInfoSubscription, NetInfoState } from "@react-native-commun
 import { Component } from "react";
 import { AppState, AppStateStatus } from "react-native";
 
-import { AppEventsProps } from "../typings/AppEventsProps";
+import { AppEventsProps, TimerTypeEnum } from "../typings/AppEventsProps";
 import { executeAction } from "@mendix/piw-utils-internal";
 
 export type Props = AppEventsProps<undefined>;
@@ -17,62 +17,62 @@ export class AppEvents extends Component<Props> {
     private isConnected?: boolean;
     private lastOnOnline = 0;
     private lastOnOffline = 0;
-    private onLoadTriggered = false;
-    private timeoutHandle?: any;
+    private onTimeoutAction?: ScheduledExecution;
     private unsubscribeNetworkEventListener?: NetInfoSubscription;
 
     async componentDidMount(): Promise<void> {
-        if (this.props.onResumeAction) {
-            AppState.addEventListener("change", this.onAppStateChangeHandler);
-        }
-
-        if (this.props.onTimeoutAction) {
-            const schedule = this.props.timerType === "once" ? setTimeout : setInterval;
-            this.timeoutHandle = schedule(() => executeAction(this.props.onTimeoutAction), this.props.delayTime * 1000);
-        }
-
-        if (this.props.onOnlineAction || this.props.onOfflineAction) {
-            this.isConnected = (await NetInfo.fetch()).isConnected;
-            this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
-        }
-
-        if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
-            this.onLoadTriggered = true;
-            executeAction(this.props.onLoadAction);
-        }
+        AppState.addEventListener("change", this.onAppStateChangeHandler);
+        this.registerScheduledExecution();
+        await this.registerNetworkEvents();
+        this.triggerOnLoadEvent();
     }
 
     componentWillUnmount(): void {
-        if (this.props.onUnloadAction && this.props.onUnloadAction.canExecute) {
-            executeAction(this.props.onUnloadAction);
-        }
-
-        if (this.props.onResumeAction) {
-            AppState.removeEventListener("change", this.onAppStateChangeHandler);
-        }
-
-        if (this.unsubscribeNetworkEventListener) {
-            this.unsubscribeNetworkEventListener();
-        }
-
-        if (this.props.onTimeoutAction && this.timeoutHandle != null) {
-            const clear = this.props.timerType === "once" ? clearTimeout : clearInterval;
-            clear(this.timeoutHandle);
-        }
+        AppState.removeEventListener("change", this.onAppStateChangeHandler);
+        this.onTimeoutAction?.cancel();
+        this.unRegisterNetworkEvents();
+        this.triggerOnUnloadEvent();
     }
 
     render(): null {
         return null;
     }
 
-    private onAppStateChange(nextAppState: AppStateStatus): void {
+    private async onResume(): Promise<void> {
+        if (this.props.onResumeAction) {
+            executeAction(this.props.onResumeAction);
+        }
+        this.onTimeoutAction?.schedule();
+        this.lastOnResume = Date.now();
+        await this.registerNetworkEvents();
+    }
+
+    private onBackground(): void {
+        this.onTimeoutAction?.cancel();
+        this.unRegisterNetworkEvents();
+        this.triggerOnUnloadEvent();
+    }
+
+    private async registerNetworkEvents(): Promise<void> {
+        if (this.props.onOnlineAction || this.props.onOfflineAction) {
+            this.isConnected = (await NetInfo.fetch()).isConnected;
+            this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
+        }
+    }
+
+    private unRegisterNetworkEvents(): void {
+        this.unsubscribeNetworkEventListener?.();
+    }
+
+    private async onAppStateChange(nextAppState: AppStateStatus): Promise<void> {
         if (this.appState === nextAppState) {
             return;
         }
 
         if (nextAppState === "active" && isPastTimeout(this.lastOnResume, this.props.onResumeTimeout)) {
-            executeAction(this.props.onResumeAction);
-            this.lastOnResume = Date.now();
+            await this.onResume();
+        } else if (nextAppState === "background") {
+            this.onBackground();
         }
 
         this.appState = nextAppState;
@@ -95,8 +95,104 @@ export class AppEvents extends Component<Props> {
 
         this.isConnected = nextState.isConnected;
     }
+
+    private triggerOnUnloadEvent(): void {
+        if (this.props.onUnloadAction?.canExecute) {
+            executeAction(this.props.onUnloadAction);
+        }
+    }
+
+    private triggerOnLoadEvent(): void {
+        if (this.props.onLoadAction?.canExecute) {
+            executeAction(this.props.onLoadAction);
+        }
+    }
+
+    private registerScheduledExecution(): void {
+        if (this.props.onTimeoutAction) {
+            this.onTimeoutAction = scheduleTask(
+                () => executeAction(this.props.onTimeoutAction),
+                this.props.delayTime * 1000,
+                this.props.timerType
+            );
+        }
+    }
 }
 
 function isPastTimeout(last: number, timeoutSeconds: number): boolean {
     return Date.now() - last >= timeoutSeconds * 1000;
+}
+
+interface ScheduledExecution {
+    cancel: () => void;
+    schedule: () => void;
+}
+
+class ScheduledOnceExecution implements ScheduledExecution {
+    private timeoutHandle?: number;
+    private _finished = false;
+    private _running = false;
+
+    constructor(private readonly fn: () => void, private readonly interval: number) {
+        this.schedule();
+    }
+
+    cancel(): void {
+        if (!this._running || this._finished) {
+            return;
+        }
+
+        clearTimeout(this.timeoutHandle);
+        this._running = false;
+    }
+
+    schedule(): void {
+        if (this._running || this._finished) {
+            return;
+        }
+
+        this.timeoutHandle = setTimeout(() => {
+            this.fn();
+            this._finished = true;
+            this._running = false;
+        }, this.interval);
+        this._running = true;
+    }
+}
+
+class ScheduledIntervalExecution implements ScheduledExecution {
+    private timeoutHandle?: number;
+    private _running = false;
+
+    constructor(private readonly fn: () => void, private readonly interval: number) {
+        this.schedule();
+    }
+
+    cancel(): void {
+        if (!this._running) {
+            return;
+        }
+        clearInterval(this.timeoutHandle);
+        this._running = false;
+    }
+
+    schedule(): void {
+        if (this._running) {
+            return;
+        }
+
+        this.timeoutHandle = setInterval(() => this.fn(), this.interval);
+        this._running = true;
+    }
+}
+
+function scheduleTask(fn: () => void, timeInMs: number, type: TimerTypeEnum): ScheduledExecution {
+    switch (type) {
+        case "interval":
+            return new ScheduledIntervalExecution(fn, timeInMs);
+        case "once":
+            return new ScheduledOnceExecution(fn, timeInMs);
+        default:
+            throw new Error("Not a valid type");
+    }
 }

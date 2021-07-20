@@ -50,10 +50,11 @@ describe("AppEvents", () => {
     });
 
     describe("with on load action", () => {
-        it("executes the on load action", () => {
+        it("executes the on load action", async () => {
             const onLoadAction = actionValue();
-            const { update } = render(<AppEvents {...defaultProps} onLoadAction={onLoadAction} />);
-            update(<AppEvents {...defaultProps} onLoadAction={onLoadAction} />);
+            const element = <AppEvents {...defaultProps} onLoadAction={onLoadAction} />;
+
+            await render(element);
             expect(onLoadAction.execute).toHaveBeenCalledTimes(1);
         });
     });
@@ -188,6 +189,38 @@ describe("AppEvents", () => {
             expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
         });
 
+        it("does not execute the on timeout action after the app went to background", () => {
+            const onTimeoutAction = actionValue(true, true);
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} />);
+
+            expect(onTimeoutAction.execute).not.toHaveBeenCalled();
+
+            expect(appStateChangeHandler).toBeDefined();
+            appStateChangeHandler?.("background");
+
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+        });
+
+        it("executes the on timeout action after the app returns from background if not yet executed", () => {
+            const onTimeoutAction = actionValue();
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} />);
+
+            expect(onTimeoutAction.execute).not.toHaveBeenCalled();
+
+            expect(appStateChangeHandler).toBeDefined();
+
+            appStateChangeHandler?.("background");
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+
+            appStateChangeHandler?.("active");
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(1);
+        });
+
         it("executes the interval on timeout action after every interval", () => {
             const onTimeoutAction = actionValue();
             render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} timerType={"interval"} />);
@@ -218,6 +251,39 @@ describe("AppEvents", () => {
 
             jest.advanceTimersByTime(30000);
             expect(onTimeoutAction.execute).not.toHaveBeenCalled();
+        });
+
+        it("does not execute the interval when the app is in background", () => {
+            const onTimeoutAction = actionValue(true, true);
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} timerType={"interval"} />);
+
+            expect(onTimeoutAction.execute).not.toHaveBeenCalled();
+
+            expect(appStateChangeHandler).toBeDefined();
+            appStateChangeHandler?.("background");
+
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+        });
+
+        it("executes the interval when the app returns from background", () => {
+            const onTimeoutAction = actionValue();
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} timerType={"interval"} />);
+
+            expect(onTimeoutAction.execute).not.toHaveBeenCalled();
+
+            expect(appStateChangeHandler).toBeDefined();
+            appStateChangeHandler?.("background");
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+
+            appStateChangeHandler?.("active");
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(1);
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(2);
         });
     });
 });
