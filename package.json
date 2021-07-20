@@ -28,8 +28,10 @@
     "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
     "release": "lerna run release --ignore @mendix/custom-widgets-utils-internal",
     "release:marketplace": "lerna run release:marketplace",
+    "release:hybrid": "npm run release -- --scope '*-hybrid'",
     "release:native": "npm run release -- --scope '*-native'",
     "release:web": "npm run release -- --scope '*-web'",
+    "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
   },

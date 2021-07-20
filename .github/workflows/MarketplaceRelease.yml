@@ -28,11 +28,21 @@ jobs:
                   seperator: "-v"
             - name: "Installing dependencies"
               run: npm install
+            - name: "Building widgets and js actions"
+              if: contains(steps.scope.outputs._0, '-native')
+              run: npm run release:native
+            - name: "Updating Mendix project"
+              run: "npm run create-modules:native"
+              env:
+                  GH_USERNAME: ${{ secrets.GH_USERNAME }}
+                  GH_PAT: ${{ secrets.GH_PAT }}
+                  TAG: ${{ steps.variables.outputs.tag }}
             - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
-              run:
-                  "TAG=${{ steps.variables.outputs.tag }} MARKETPLACE_USERNAME=${{ secrets.MARKETPLACE_USERNAME }}
-                  MARKETPLACE_API_KEY=${{ secrets.MARKETPLACE_API_KEY }} npm run release:marketplace -- --scope '${{
-                  steps.scope.outputs._0 }}'"
+              run: "npm run release:marketplace -- --scope '${{ steps.scope.outputs._0 }}'"
+              env:
+                  MARKETPLACE_API_KEY: ${{ secrets.MARKETPLACE_API_KEY }}
+                  MARKETPLACE_USERNAME: ${{ secrets.MARKETPLACE_USERNAME }}
+                  TAG: ${{ steps.variables.outputs.tag }}
             - name: "Send slack msg on failure"
               if: ${{ failure() }}
               uses: rtCamp/action-slack-notify@v2
@@ -44,7 +54,7 @@ jobs:
                       "Something went wrong while uploading version ${{ steps.scope.outputs._1 }} of package ${{
                       steps.scope.outputs._0 }} to the marketplace.
                       <https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|More info..>"
-                  SLACK_TITLE: ":alert: Failure"
+                  SLACK_TITLE: ":warning: *Automation Failed*"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_MULTIXP_WEBHOOK }}
                   SLACK_FOOTER: "Created by Aliens"

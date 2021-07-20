@@ -1,5 +1,6 @@
 {
   "name": "mobile-resources-native",
+  "moduleName": "Native Mobile Resources", 
   "version": "3.0.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
@@ -11,12 +12,16 @@
     "minimumMXVersion": "9.0.5",
     "marketplaceId": 109513
   },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/native-mobile-resources",
+    "branchName": "main"
+  },
   "scripts": {
     "prestart": "rimraf ./dist/tsc",
     "start": "rollup --config ../../../configs/jsactions/rollup.config.js --watch --configProject nativemobileresources",
     "prebuild": "rimraf ./dist/tsc",
     "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nativemobileresources",
-    "version": "npm run build",
+    "release": "npm run build",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {
