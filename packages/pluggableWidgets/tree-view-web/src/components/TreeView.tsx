@@ -144,10 +144,8 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const informParentToHaveChildNodes = useCallback<TreeViewBranchContextProps["informParentToHaveChildNodes"]>(
         hasChildNodes => {
             if (!hasChildNodes && !isActualLeafNode) {
-                // User defined it as non-leaf but in reality there are no child nodes, then it's a leaf.
                 setIsActualLeafNode(true);
             } else if (hasChildNodes && isActualLeafNode) {
-                // The other relevant case is when it was a leaf in reality, but then it changed. Then we change back.
                 setIsActualLeafNode(false);
             }
         },
