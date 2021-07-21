@@ -47,7 +47,7 @@ async function createNMRModule() {
 
     console.log(`Creating Github release for module ${moduleName}`);
     await execShellCommand(
-        `gh release create --title "${moduleName} ${version} - Mendix ${minimumMXVersion}" --notes "${changelog}" "${process.env.tag}" "${mpkOutput}"`
+        `gh release create --title "${moduleName} ${version} - Mendix ${minimumMXVersion}" --notes "${changelog}" "${process.env.TAG}" "${mpkOutput}"`
     );
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
@@ -57,7 +57,10 @@ async function createNMRModule() {
 async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name) {
     console.log("Updating changelogs..");
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
-    const nativeWidgetsChangelogs = await Promise.all(nativeWidgetFolders.reduce(combineWidgetChangelogs, ""));
+    let nativeWidgetsChangelogs = "";
+    for await (const folder of nativeWidgetFolders) {
+        nativeWidgetsChangelogs += (await combineWidgetChangelogs(folder)) || "";
+    }
     let changelog = moduleChangelogs ? `## [${version}] ${moduleName}\n${moduleChangelogs}\n` : "";
     changelog = nativeWidgetsChangelogs ? `\n${nativeWidgetsChangelogs}` : changelog;
 
@@ -72,23 +75,20 @@ async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleNam
     return changelog;
 }
 
-async function combineWidgetChangelogs(allChangelogs, currentFolder) {
+async function combineWidgetChangelogs(currentFolder) {
     const { widgetName, version } = require(`${currentFolder}/package.json`);
     const changelogPath = `${currentFolder}/CHANGELOG.md`;
     try {
         await access(changelogPath);
         const changelogs = await getUnreleasedChangelogs(changelogPath, version);
-        allChangelogs += `
-            ## [${version}] ${widgetName}
+        return changelogs
+            ? `## [${version}] ${widgetName}
             
-            ${changelogs}
-
-        `;
+            ${changelogs}`
+            : "";
     } catch (error) {
         console.warn(`${changelogPath} does not exist.`);
     }
-
-    return allChangelogs;
 }
 
 async function getUnreleasedChangelogs(changelogFile, version) {
