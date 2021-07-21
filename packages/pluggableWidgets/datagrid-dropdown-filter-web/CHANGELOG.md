@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## 1.3.0 - [Unreleased]
+## [1.3.1] - 2021-07-16
+
+### Changed
+- We fixed an issue in Drop-down filter where the default values were not working.
+
+## [1.3.0] - 2021-07-07
 
 ### Added
 - We added support for filtering Boolean attributes. Values can be: 'true' or 'false';

@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## 3.0.0 23-04-2021
+## [3.0.0] - 2021-04-23
+
 ### Added
 - Add `Brand Secondary` `Style` design-property option.
 - Add `aria-readonly` for improved accessibility.

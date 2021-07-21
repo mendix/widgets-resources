@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ## [2.1.1] - 2021-07-14
+
 ### Fixed
 - We have fixed the dynamic marker data source consistency check for MX 9.2 and above.
 
