@@ -1,0 +1,49 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin image-viewer-helpers() {
+    /* ==========================================================================
+       Image Viewer
+
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+
+    .widget-image-viewer-image-style-rounded img {
+        border-radius: $border-radius-default;
+    }
+
+    .widget-image-viewer-image-style-circle img {
+        border-radius: 50%;
+    }
+
+    .widget-image-viewer-image-style-square img {
+        border-radius: 0px;
+    }
+
+    .widget-image-viewer-centered img {
+        display: block;
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .widget-image-viewer-image-fit-fill img {
+        object-fit: fill;
+    }
+
+    .widget-image-viewer-image-fit-contain img {
+        object-fit: contain;
+    }
+
+    .widget-image-viewer-image-fit-cover img {
+        object-fit: cover;
+    }
+
+    .widget-image-viewer-image-fit-scale-down img {
+        object-fit: scale-down;
+    }
+}

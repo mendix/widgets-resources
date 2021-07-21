@@ -344,6 +344,11 @@
     @include accordion-helpers();
 }
 
+@import "core/helpers/image-viewer";
+@if not $exclude-accordion and not $exclude-image-viewer {
+    @include image-viewer-helpers();
+}
+
 // Custom widgets
 @import "core/widgetscustom/dijit-widget";
 @if not $exclude-custom-dijit-widget {
