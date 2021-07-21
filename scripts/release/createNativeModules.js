@@ -37,12 +37,12 @@ async function createNMRModule() {
         testProject: { githubUrl, branchName }
     } = require(pkgPath);
 
-    const changelog = await updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name);
+    const changelog = await updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name);
     await updateTestProject(nativeWidgetFolders, githubUrl);
 
     console.log("Creating module MPK..");
     await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
-    const mpkOutput = await getFiles(tmpFolder, `.mpk`);
+    const mpkOutput = await getFiles(tmpFolder, [`.mpk`]);
 
     console.log(`Creating Github release for module ${moduleName}`);
     await execShellCommand(`gh release create ${process.env.tag} --notes "${changelog}" "${mpkOutput}"`);
@@ -51,7 +51,8 @@ async function createNMRModule() {
 }
 
 // Update changelogs and create PR in widget-resources
-async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWidgetChangelogs, moduleName, name) {
+async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name) {
+    console.log("Updating changelogs..");
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
     const nativeWidgetsChangelogs = nativeWidgetFolders.reduce(combineWidgetChangelogs, "");
     const changelog = `
@@ -62,7 +63,6 @@ async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWi
     `;
 
     const changelogBranchName = `${name}-release-${version}`;
-    console.log("Updating changelogs..");
     await execShellCommand(
         `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${name}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
     );
@@ -71,6 +71,47 @@ async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWi
     );
     console.log("Created PR for changelog updates.");
     return changelog;
+}
+
+
+async function combineWidgetChangelogs(allChangelogs, currentFolder) {
+    const { widgetName, version } = require(`${currentFolder}/package.json`);
+    const changelogPath = `${currentFolder}/CHANGELOG.md`;
+    try {
+        await access(changelogPath);
+        const changelogs = await getUnreleasedChangelogs(changelogPath, version);
+        allChangelogs += `
+            ## [${version}] ${widgetName}
+            
+            ${changelogs}
+
+        `;
+    } catch (error) {
+        // console.warn(`${changelogPath} does not exist.`);
+    }
+
+    return allChangelogs;
+}
+
+async function getUnreleasedChangelogs(changelogFile, version) {
+    console.log(changelogFile);
+    const content = await readFile(changelogFile, "utf8");
+    const unreleasedChangelogs = content
+        .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
+        .trim();
+    const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
+    if (releasedVersions?.includes(version)) {
+        throw new Error(
+            `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
+        );
+    }
+
+    const d = new Date();
+    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
+    await writeFile(changelogFile, newContent);
+
+    return unreleasedChangelogs;
 }
 
 // Update test project with latest changes
@@ -90,7 +131,8 @@ async function updateTestProject(nativeWidgetFolders, githubUrl) {
     console.log("Copying widgets and js actions..");
     await Promise.all([
         ...nativeWidgetFolders.map(async folder => {
-            const src = await getFiles(folder, `.mpk`)[0];
+            const src = await getFiles(folder, [`.mpk`])[0];
+            console.log(src);
             await copyFile(src, join(tmpFolderWidgets, basename(src)));
         }),
         ...jsActions.map(async file => {
@@ -119,7 +161,7 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
     }
 
     // Build testProject via mxbuild
-    const projectFile = await getFiles(sourceDir, `.mpr`);
+    const projectFile = await getFiles(sourceDir, [`.mpr`]);
     const containerId = await execShellCommand(
         `docker run -t -v ${sourceDir}:/source ` +
             `--rm mxbuild:${mendixVersion} bash -c "mxutil create-module-package /source/${projectFile} ${moduleName}"`,
@@ -128,45 +170,6 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
     console.log("containerID", containerId);
     console.log(`Module ${moduleName} created successfully.`);
     await execShellCommand(`docker rm -f ${containerId}`);
-}
-
-async function combineWidgetChangelogs(allChangelogs, currentFolder) {
-    const { widgetName, version } = require(`${currentFolder}/package.json`);
-    const changelogPath = `${currentFolder}/CHANGELOG.md`;
-    try {
-        await access(changelogPath);
-        const changelogs = await getUnreleasedChangelogs(changelogPath, version);
-        allChangelogs += `
-            ## [${version}] ${widgetName}
-            
-            ${changelogs}
-
-        `;
-    } catch (error) {
-        // console.warn(`${changelogPath} does not exist.`);
-    }
-
-    return allChangelogs;
-}
-
-async function getUnreleasedChangelogs(changelogFile, version) {
-    const content = await readFile(changelogFile, "utf8");
-    const unreleasedChangelogs = content
-        .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
-        .trim();
-    const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
-    if (releasedVersions?.includes(version)) {
-        throw new Error(
-            `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
-        );
-    }
-
-    const d = new Date();
-    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
-    await writeFile(changelogFile, newContent);
-
-    return unreleasedChangelogs;
 }
 
 function execShellCommand(cmd) {
@@ -191,8 +194,8 @@ async function getFiles(dir, includeExtension) {
     const files = await Promise.all(
         dirents.map(dirent => {
             const res = resolve(dir, dirent.name);
-            return dirent.isDirectory() ? getFiles(res) : res;
+            return dirent.isDirectory() ? getFiles(res, includeExtension) : res;
         })
     );
-    return files.filter(file => includeExtension && includeExtension.includes(extname(file))).flat();
+    return files.filter(file => includeExtension?.length && includeExtension?.includes(extname(file))).flat();
 }
