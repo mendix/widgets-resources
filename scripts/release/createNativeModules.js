@@ -131,9 +131,9 @@ async function updateTestProject(nativeWidgetFolders, githubUrl) {
     await Promise.all([
         ...nativeWidgetFolders.map(async folder => {
             console.log(folder);
-            const src = (await getFiles(folder, [`.mpk`]))[0];
+            const src = (await getFiles(folder, [`.mpk`]));
             console.log(src);
-            await copyFile(src, join(tmpFolderWidgets, basename(src)));
+            await copyFile(src[0], join(tmpFolderWidgets, basename(src[0])));
         }),
         ...jsActions.map(async file => {
             await copyFile(file, join(tmpFolderActions, file.replace(jsActionsPath, "")));
