@@ -25,6 +25,7 @@ async function main() {
 async function createNMRModule() {
     console.log("Creating the Native Mobile Resource module.");
     const pkgPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/package.json");
+    const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
     const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
     const nativeWidgetFolders = widgetFolders
         .filter(folder => folder.includes("-native"))
@@ -38,7 +39,7 @@ async function createNMRModule() {
     } = require(pkgPath);
 
     const changelog = await updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name);
-    await updateTestProject(nativeWidgetFolders, githubUrl);
+    await updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl);
 
     console.log("Creating module MPK..");
     await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
@@ -93,7 +94,6 @@ async function combineWidgetChangelogs(allChangelogs, currentFolder) {
 }
 
 async function getUnreleasedChangelogs(changelogFile, version) {
-    console.log(changelogFile);
     const content = await readFile(changelogFile, "utf8");
     const unreleasedChangelogs = content
         .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
@@ -114,10 +114,9 @@ async function getUnreleasedChangelogs(changelogFile, version) {
 }
 
 // Update test project with latest changes
-async function updateTestProject(nativeWidgetFolders, githubUrl) {
+async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
     const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
     const jsActions = await getFiles(jsActionsPath);
-    const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
 
@@ -127,21 +126,25 @@ async function updateTestProject(nativeWidgetFolders, githubUrl) {
     await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
+    await new Promise(resolve => setTimeout(resolve, 120000));
+
     console.log("Copying widgets and js actions..");
     await Promise.all([
         ...nativeWidgetFolders.map(async folder => {
-            console.log(folder);
             const src = (await getFiles(folder, [`.mpk`]))[0];
-            console.log(src);
             await copyFile(src, join(tmpFolderWidgets, basename(src)));
         }),
         ...jsActions.map(async file => {
             await copyFile(file, join(tmpFolderActions, file.replace(jsActionsPath, "")));
         })
     ]);
-    await execShellCommand(
-        `cd ${tmpFolder} && git add . && git commit -m "Updated native widgets and js actions" && git push`
-    );
+    const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
+    // FIXME: Why no changes?
+    if (!/nothing to commit/i.test(gitOutput)) {
+        await execShellCommand(
+            `cd ${tmpFolder} && git add . && git commit -m "Updated native widgets and js actions" && git push`
+        );
+    }
 }
 
 // Create reusable mxbuild image
@@ -197,9 +200,7 @@ async function getFiles(dir, includeExtension) {
             return dirent.isDirectory() ? getFiles(res, includeExtension) : res;
         })
     );
-    const result = files
+    return files
         .flat()
         .filter(file => !includeExtension?.length || (extname(file) && includeExtension?.includes(extname(file))));
-    console.log(result);
-    return result;
 }
