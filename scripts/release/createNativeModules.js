@@ -25,6 +25,10 @@ async function main() {
 async function createNMRModule() {
     console.log("Creating the Native Mobile Resource module.");
     const pkgPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/package.json");
+    const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
+    const nativeWidgetFolders = widgetFolders
+        .filter(folder => folder.includes("-native"))
+        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
     const {
         name,
         moduleName,
@@ -34,7 +38,7 @@ async function createNMRModule() {
     } = require(pkgPath);
 
     const changelog = await updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name);
-    await updateTestProject(githubUrl);
+    await updateTestProject(nativeWidgetFolders, githubUrl);
 
     console.log("Creating module MPK..");
     await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
@@ -47,7 +51,7 @@ async function createNMRModule() {
 }
 
 // Update changelogs and create PR in widget-resources
-async function updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name) {
+async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWidgetChangelogs, moduleName, name) {
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
     const nativeWidgetsChangelogs = nativeWidgetFolders.reduce(combineWidgetChangelogs, "");
     const changelog = `
@@ -70,13 +74,9 @@ async function updateChangelogs(pkgPath, version, combineWidgetChangelogs, modul
 }
 
 // Update test project with latest changes
-async function updateTestProject(githubUrl) {
+async function updateTestProject(nativeWidgetFolders, githubUrl) {
     const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
     const jsActions = await getFiles(jsActionsPath);
-    const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
-    const nativeWidgetFolders = widgetFolders
-        .filter(folder => folder.includes("-native"))
-        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
     const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
