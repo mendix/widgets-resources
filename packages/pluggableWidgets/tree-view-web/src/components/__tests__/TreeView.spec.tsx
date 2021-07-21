@@ -304,4 +304,24 @@ describe("TreeView", () => {
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
     });
+
+    it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={[{ id: "11" as GUID, value: "First header", content: undefined }]}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
+
+        const treeViewHeader = treeView.findWhere(
+            node => node.type() === "header" && node.text().includes("First header")
+        );
+
+        expect(treeViewHeader).toHaveLength(1);
+        expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
+    });
 });

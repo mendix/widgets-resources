@@ -131,7 +131,7 @@ const treeViewBodyClassName = "widget-tree-view-body";
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const { level: currentContextLevel } = useContext(TreeViewBranchContext);
     const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
-    const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode);
+    const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
     const toggleTreeViewContent = useCallback(() => {
         if (!isActualLeafNode) {
