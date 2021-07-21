@@ -34,7 +34,7 @@ async function createNMRModule() {
         name,
         moduleName,
         version,
-        docker: { mxBuildVersion },
+        marketplace: { minimumMXVersion },
         testProject: { githubUrl, branchName }
     } = require(pkgPath);
 
@@ -42,8 +42,8 @@ async function createNMRModule() {
     await updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl);
 
     console.log("Creating module MPK..");
-    await createMxBuildContainer(tmpFolder, "NativeMobileResources", mxBuildVersion);
-    const mpkOutput = await getFiles(tmpFolder, [`.mpk`]);
+    await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
+    const mpkOutput = (await getFiles(tmpFolder, [`.mpk`]))[0];
 
     console.log(`Creating Github release for module ${moduleName}`);
     await execShellCommand(`gh release create ${process.env.tag} --notes "${changelog}" "${mpkOutput}"`);
@@ -87,7 +87,7 @@ async function combineWidgetChangelogs(allChangelogs, currentFolder) {
 
         `;
     } catch (error) {
-        // console.warn(`${changelogPath} does not exist.`);
+        console.warn(`${changelogPath} does not exist.`);
     }
 
     return allChangelogs;
@@ -152,7 +152,7 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
 
 // Create reusable mxbuild image
 async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
-    const existingImages = await execShellCommand(`docker image ls -q mxbuild:${mendixVersion}`).toString().trim();
+    const existingImages = (await execShellCommand(`docker image ls -q mxbuild:${mendixVersion}`)).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         await execShellCommand(
@@ -161,21 +161,17 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
                 "packages/tools/pluggable-widgets-tools/scripts/mxbuild.Dockerfile"
             )} ` +
                 `--build-arg MENDIX_VERSION=${mendixVersion} ` +
-                `-t mxbuild:${mendixVersion} ${process.cwd()}`,
-            { stdio: "inherit" }
+                `-t mxbuild:${mendixVersion} ${process.cwd()}`
         );
     }
 
     // Build testProject via mxbuild
-    const projectFile = await getFiles(sourceDir, [`.mpr`]);
-    const containerId = await execShellCommand(
+    const projectFile = basename((await getFiles(sourceDir, [`.mpr`]))[0]);
+    await execShellCommand(
         `docker run -t -v ${sourceDir}:/source ` +
-            `--rm mxbuild:${mendixVersion} bash -c "mxutil create-module-package /source/${projectFile} ${moduleName}"`,
-        { stdio: "inherit" }
+            `--rm mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mono /tmp/mxbuild/modeler/mxutil.exe create-module-package /source/${projectFile} ${moduleName}"`
     );
-    console.log("containerID", containerId);
     console.log(`Module ${moduleName} created successfully.`);
-    await execShellCommand(`docker rm -f ${containerId}`);
 }
 
 function execShellCommand(cmd) {

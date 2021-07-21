@@ -9,11 +9,8 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.0.5.17836",
     "marketplaceId": 109513
-  },
-  "docker": {
-    "mxBuildVersion": "9.0.5.17836"
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/native-mobile-resources",
