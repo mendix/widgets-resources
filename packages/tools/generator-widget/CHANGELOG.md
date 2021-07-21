@@ -6,12 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## 9.0.2 - 2021-05-20
+## [9.0.2] - 2021-05-20
 
 ### Removed
 - Links to unsupported Github issues page for bug reporting.
 
-## 9.0.1 - 2021-04-26
+## [9.0.1] - 2021-04-26
 
 ### Changed
 
