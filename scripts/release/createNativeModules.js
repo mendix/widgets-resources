@@ -69,9 +69,9 @@ async function createNMRModule() {
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
     console.log("Copying widgets..");
-    await Promise.all(
-        nativeWidgetFolders.map(folder => asyncCopy("-rf", ls(`${folder}/dist/**/*.mpk`)[0], tmpFolderWidgets))
-    );
+    for await (const folder of nativeWidgetFolders) {
+        await asyncCopy("-rf", ls(`${folder}/dist/**/*.mpk`)[0], tmpFolderWidgets);
+    }
     console.log("Copying JS actions..");
     await asyncCopy("-rfP", join(process.cwd(), "packages/jsActions/mobile-resources-native/dist/*"), tmpFolderActions);
     await execShellCommand(
