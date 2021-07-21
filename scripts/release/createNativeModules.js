@@ -1,6 +1,6 @@
 const { join } = require("path");
 const { access, readdir, mkdir, readFile, writeFile, rm } = require("fs/promises");
-const { cp } = require("shelljs");
+const { cp, ls } = require("shelljs");
 const { promisify } = require("util");
 const { exec } = require("child_process");
 
