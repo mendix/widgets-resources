@@ -40,3 +40,30 @@
         display: none;
     }
 }
+
+.widget-tree-view-lazy-loading-placeholder {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 9px;
+
+    .widget-tree-view-placeholder-text {
+        margin-left: 8px;
+        color: #264ae5;
+        font-size: 16px;
+    }
+
+    .widget-tree-view-loading-spinner {
+        width: 16px;
+        height: 16px;
+        animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

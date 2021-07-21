@@ -19,6 +19,7 @@ import {
 } from "./TreeViewBranchContext";
 
 import "../ui/TreeView.scss";
+import loadingCircleSvg from "../assets/loading-circle.svg";
 
 export interface TreeViewObject extends ObjectItem {
     value: string | ReactNode | undefined;
@@ -52,6 +53,8 @@ export function TreeView({
     expandIcon,
     collapseIcon
 }: TreeViewProps): ReactElement | null {
+    const { childShouldShowPlaceholder: shouldShowPlaceholder } = useContext(TreeViewBranchContext);
+
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
         (treeViewIsExpanded: boolean) =>
             showCustomIcon ? (
@@ -87,7 +90,12 @@ export function TreeView({
     useInformParentContextToHaveChildNodes(items, isInsideAnotherTreeView);
 
     if (!items) {
-        return null;
+        return shouldShowPlaceholder ? (
+            <div className="widget-tree-view-lazy-loading-placeholder">
+                <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="Loading spinner" />
+                <span className="widget-tree-view-placeholder-text">Loading...</span>
+            </div>
+        ) : null;
     }
 
     return (
@@ -187,7 +195,8 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 <TreeViewBranchContext.Provider
                     value={{
                         level: currentContextLevel + 1,
-                        informParentToHaveChildNodes
+                        informParentToHaveChildNodes,
+                        childShouldShowPlaceholder: props.shouldLazyLoad
                     }}
                 >
                     <div
