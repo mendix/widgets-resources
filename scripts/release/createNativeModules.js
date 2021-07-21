@@ -46,7 +46,9 @@ async function createNMRModule() {
     const mpkOutput = (await getFiles(tmpFolder, [`.mpk`]))[0];
 
     console.log(`Creating Github release for module ${moduleName}`);
-    await execShellCommand(`gh release create ${process.env.tag} --notes "${changelog}" "${mpkOutput}"`);
+    await execShellCommand(
+        `gh release create --title "${moduleName} ${version} - Mendix ${minimumMXVersion}" --notes "${changelog}" "${process.env.tag}" "${mpkOutput}"`
+    );
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
 }
@@ -55,13 +57,9 @@ async function createNMRModule() {
 async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name) {
     console.log("Updating changelogs..");
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
-    const nativeWidgetsChangelogs = nativeWidgetFolders.reduce(combineWidgetChangelogs, "");
-    const changelog = `
-        ## [${version}] ${moduleName}
-        ${moduleChangelogs}
-
-        ${nativeWidgetsChangelogs}
-    `;
+    const nativeWidgetsChangelogs = await Promise.all(nativeWidgetFolders.reduce(combineWidgetChangelogs, ""));
+    let changelog = moduleChangelogs ? `## [${version}] ${moduleName}\n${moduleChangelogs}\n` : "";
+    changelog = nativeWidgetsChangelogs ? `\n${nativeWidgetsChangelogs}` : changelog;
 
     const changelogBranchName = `${name}-release-${version}`;
     await execShellCommand(
