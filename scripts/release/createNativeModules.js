@@ -34,7 +34,7 @@ async function createNMRModule() {
     } = require(pkgPath);
 
     const changelog = await updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name);
-    await updateTestProject();
+    await updateTestProject(githubUrl);
 
     console.log("Creating module MPK..");
     await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
@@ -70,7 +70,7 @@ async function updateChangelogs(pkgPath, version, combineWidgetChangelogs, modul
 }
 
 // Update test project with latest changes
-async function updateTestProject() {
+async function updateTestProject(githubUrl) {
     const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
     const jsActions = await getFiles(jsActionsPath);
     const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
