@@ -1,8 +1,7 @@
 const { join } = require("path");
-const { access, readdir, mkdir, readFile, writeFile, rm } = require("fs/promises");
-const { cp, ls } = require("shelljs");
-const { promisify } = require("util");
+const { access, readdir, readFile, copyFile, writeFile, rm } = require("fs/promises");
 const { exec } = require("child_process");
+const { basename, extname, resolve } = require("path");
 
 main().catch(e => {
     console.error(e);
@@ -26,16 +25,6 @@ async function main() {
 async function createNMRModule() {
     console.log("Creating the Native Mobile Resource module.");
     const pkgPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/package.json");
-    const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
-    const nativeWidgetFolders = widgetFolders
-        .filter(folder => folder.includes("-native"))
-        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
-    const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
-    const tmpFolderWidgets = join(tmpFolder, "widgets");
-    const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
-    await mkdir(tmpFolderWidgets, { recursive: true });
-    await mkdir(tmpFolderActions, { recursive: true });
-    const asyncCopy = promisify(cp);
     const {
         name,
         moduleName,
@@ -43,6 +32,22 @@ async function createNMRModule() {
         marketplace: { minimumMXVersion },
         testProject: { githubUrl, branchName }
     } = require(pkgPath);
+
+    const changelog = await updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name);
+    await updateTestProject();
+
+    console.log("Creating module MPK..");
+    await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
+    const mpkOutput = await getFiles(tmpFolder, `.mpk`);
+
+    console.log(`Creating Github release for module ${moduleName}`);
+    await execShellCommand(`gh release create ${process.env.tag} --notes "${changelog}" "${mpkOutput}"`);
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+    console.log("Done.");
+}
+
+// Update changelogs and create PR in widget-resources
+async function updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name) {
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
     const nativeWidgetsChangelogs = nativeWidgetFolders.reduce(combineWidgetChangelogs, "");
     const changelog = `
@@ -61,6 +66,20 @@ async function createNMRModule() {
         `gh pr create --title "Updating all the changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
     );
     console.log("Created PR for changelog updates.");
+    return changelog;
+}
+
+// Update test project with latest changes
+async function updateTestProject() {
+    const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
+    const jsActions = await getFiles(jsActionsPath);
+    const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
+    const nativeWidgetFolders = widgetFolders
+        .filter(folder => folder.includes("-native"))
+        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
+    const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
+    const tmpFolderWidgets = join(tmpFolder, "widgets");
+    const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
 
     console.log("Updating NativeComponentsTestProject..");
     const githubUrlDomain = githubUrl.replace("https://", "");
@@ -68,24 +87,19 @@ async function createNMRModule() {
     await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
-    console.log("Copying widgets..");
-    for await (const folder of nativeWidgetFolders) {
-        await asyncCopy("-rf", ls(`${folder}/dist/**/*.mpk`)[0], tmpFolderWidgets);
-    }
-    console.log("Copying JS actions..");
-    await asyncCopy("-rfP", join(process.cwd(), "packages/jsActions/mobile-resources-native/dist/*"), tmpFolderActions);
+    console.log("Copying widgets and js actions..");
+    await Promise.all([
+        ...nativeWidgetFolders.map(async folder => {
+            const src = await getFiles(folder, `.mpk`)[0];
+            await copyFile(src, join(tmpFolderWidgets, basename(src)));
+        }),
+        ...jsActions.map(async file => {
+            await copyFile(file, join(tmpFolderActions, file.replace(jsActionsPath, "")));
+        })
+    ]);
     await execShellCommand(
         `cd ${tmpFolder} && git add . && git commit -m "Updated native widgets and js actions" && git push`
     );
-
-    console.log("Creating module MPK..");
-    await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
-    const mpkOutput = ls(`${tmpFolder}/*.mpk`).toString();
-
-    console.log(`Creating Github release for module ${moduleName}`);
-    await execShellCommand(`gh release create ${process.env.tag} --notes "${changelog}" "${mpkOutput}"`);
-    await execShellCommand(`rm -rf ${tmpFolder}`);
-    console.log("Done.");
 }
 
 // Create reusable mxbuild image
@@ -105,7 +119,7 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
     }
 
     // Build testProject via mxbuild
-    const projectFile = ls(`${sourceDir}/*.mpr`).toString();
+    const projectFile = await getFiles(sourceDir, `.mpr`);
     const containerId = await execShellCommand(
         `docker run -t -v ${sourceDir}:/source ` +
             `--rm mxbuild:${mendixVersion} bash -c "mxutil create-module-package /source/${projectFile} ${moduleName}"`,
@@ -170,4 +184,15 @@ function execShellCommand(cmd) {
             resolve(stdout);
         });
     });
+}
+
+async function getFiles(dir, includeExtension) {
+    const dirents = await readdir(dir, { withFileTypes: true });
+    const files = await Promise.all(
+        dirents.map(dirent => {
+            const res = resolve(dir, dirent.name);
+            return dirent.isDirectory() ? getFiles(res) : res;
+        })
+    );
+    return files.filter(file => includeExtension && includeExtension.includes(extname(file))).flat();
 }
