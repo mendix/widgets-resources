@@ -12,6 +12,9 @@
     "minimumMXVersion": "9.0.5",
     "marketplaceId": 109513
   },
+  "docker": {
+    "mxBuildVersion": "9.0.5.17836"
+  },
   "testProject": {
     "githubUrl": "https://github.com/mendix/native-mobile-resources",
     "branchName": "main"

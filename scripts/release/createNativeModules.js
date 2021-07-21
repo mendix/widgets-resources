@@ -34,7 +34,7 @@ async function createNMRModule() {
         name,
         moduleName,
         version,
-        marketplace: { minimumMXVersion },
+        docker: { mxBuildVersion },
         testProject: { githubUrl, branchName }
     } = require(pkgPath);
 
@@ -42,7 +42,7 @@ async function createNMRModule() {
     await updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl);
 
     console.log("Creating module MPK..");
-    await createMxBuildContainer(tmpFolder, "NativeMobileResources", minimumMXVersion);
+    await createMxBuildContainer(tmpFolder, "NativeMobileResources", mxBuildVersion);
     const mpkOutput = await getFiles(tmpFolder, [`.mpk`]);
 
     console.log(`Creating Github release for module ${moduleName}`);
