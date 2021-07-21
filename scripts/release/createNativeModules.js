@@ -57,7 +57,7 @@ async function createNMRModule() {
 async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name) {
     console.log("Updating changelogs..");
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
-    const nativeWidgetsChangelogs = await Promise.all(nativeWidgetFolders.reduce(combineWidgetChangelogs, ""));
+    const nativeWidgetsChangelogs = await nativeWidgetFolders.reduce(combineWidgetChangelogs, Promise.resolve(""));
     let changelog = moduleChangelogs ? `## [${version}] ${moduleName}\n${moduleChangelogs}\n` : "";
     changelog = nativeWidgetsChangelogs ? `\n${nativeWidgetsChangelogs}` : changelog;
 
@@ -73,6 +73,7 @@ async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleNam
 }
 
 async function combineWidgetChangelogs(allChangelogs, currentFolder) {
+    await allChangelogs;
     const { widgetName, version } = require(`${currentFolder}/package.json`);
     const changelogPath = `${currentFolder}/CHANGELOG.md`;
     try {
