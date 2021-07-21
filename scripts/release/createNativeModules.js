@@ -37,7 +37,7 @@ async function createNMRModule() {
         testProject: { githubUrl, branchName }
     } = require(pkgPath);
 
-    const changelog = await updateChangelogs(pkgPath, version, combineWidgetChangelogs, moduleName, name);
+    const changelog = await updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name);
     await updateTestProject(nativeWidgetFolders, githubUrl);
 
     console.log("Creating module MPK..");
@@ -51,8 +51,10 @@ async function createNMRModule() {
 }
 
 // Update changelogs and create PR in widget-resources
-async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWidgetChangelogs, moduleName, name) {
+async function updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name) {
+    console.log("Updating changelogs..");
     const moduleChangelogs = await getUnreleasedChangelogs(pkgPath, version);
+    console.log("1");
     const nativeWidgetsChangelogs = nativeWidgetFolders.reduce(combineWidgetChangelogs, "");
     const changelog = `
         ## [${version}] ${moduleName}
@@ -60,9 +62,9 @@ async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWi
 
         ${nativeWidgetsChangelogs}
     `;
+    console.log("2");
 
     const changelogBranchName = `${name}-release-${version}`;
-    console.log("Updating changelogs..");
     await execShellCommand(
         `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${name}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
     );
@@ -71,6 +73,48 @@ async function updateChangelogs(nativeWidgetFolders, pkgPath, version, combineWi
     );
     console.log("Created PR for changelog updates.");
     return changelog;
+}
+
+
+async function combineWidgetChangelogs(allChangelogs, currentFolder) {
+    const { widgetName, version } = require(`${currentFolder}/package.json`);
+    const changelogPath = `${currentFolder}/CHANGELOG.md`;
+    try {
+        await access(changelogPath);
+        const changelogs = await getUnreleasedChangelogs(changelogPath, version);
+        allChangelogs += `
+            ## [${version}] ${widgetName}
+            
+            ${changelogs}
+
+        `;
+    } catch (error) {
+        // console.warn(`${changelogPath} does not exist.`);
+    }
+
+    return allChangelogs;
+}
+
+async function getUnreleasedChangelogs(changelogFile, version) {
+    console.log(changelogFile);
+    const content = await readFile(changelogFile, "utf8");
+    console.log("1.1");
+    const unreleasedChangelogs = content
+        .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
+        .trim();
+    const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
+    if (releasedVersions?.includes(version)) {
+        throw new Error(
+            `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
+        );
+    }
+
+    const d = new Date();
+    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
+    await writeFile(changelogFile, newContent);
+
+    return unreleasedChangelogs;
 }
 
 // Update test project with latest changes
@@ -128,45 +172,6 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
     console.log("containerID", containerId);
     console.log(`Module ${moduleName} created successfully.`);
     await execShellCommand(`docker rm -f ${containerId}`);
-}
-
-async function combineWidgetChangelogs(allChangelogs, currentFolder) {
-    const { widgetName, version } = require(`${currentFolder}/package.json`);
-    const changelogPath = `${currentFolder}/CHANGELOG.md`;
-    try {
-        await access(changelogPath);
-        const changelogs = await getUnreleasedChangelogs(changelogPath, version);
-        allChangelogs += `
-            ## [${version}] ${widgetName}
-            
-            ${changelogs}
-
-        `;
-    } catch (error) {
-        // console.warn(`${changelogPath} does not exist.`);
-    }
-
-    return allChangelogs;
-}
-
-async function getUnreleasedChangelogs(changelogFile, version) {
-    const content = await readFile(changelogFile, "utf8");
-    const unreleasedChangelogs = content
-        .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
-        .trim();
-    const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
-    if (releasedVersions?.includes(version)) {
-        throw new Error(
-            `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
-        );
-    }
-
-    const d = new Date();
-    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
-    await writeFile(changelogFile, newContent);
-
-    return unreleasedChangelogs;
 }
 
 function execShellCommand(cmd) {
