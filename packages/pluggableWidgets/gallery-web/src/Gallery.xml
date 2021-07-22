@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.gallery.Gallery" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Gallery</name>
+    <description/>
+    <icon/>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="datasource" type="datasource" isList="true">
+                    <caption>Data source</caption>
+                    <description/>
+                </property>
+                <property key="content" type="widgets" dataSource="datasource">
+                    <caption>Content</caption>
+                    <description/>
+                </property>
+                <property key="desktopItems" type="integer" defaultValue="4">
+                    <caption>Desktop items</caption>
+                    <description />
+                </property>
+                <property key="tabletItems" type="integer" defaultValue="3">
+                    <caption>Tablet items</caption>
+                    <description />
+                </property>
+                <property key="phoneItems" type="integer" defaultValue="2">
+                    <caption>Phone items</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Items">
+                <property key="pageSize" type="integer" defaultValue="20">
+                    <caption>Page size</caption>
+                    <description />
+                </property>
+                <property key="pagination" type="enumeration" defaultValue="buttons">
+                    <caption>Pagination</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="buttons">Paging buttons</enumerationValue>
+                        <enumerationValue key="virtualScrolling">Virtual scrolling</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="pagingPosition" type="enumeration" defaultValue="below">
+                    <caption>Position of paging buttons</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="below">Below grid</enumerationValue>
+                        <enumerationValue key="above">Above grid</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="showEmptyPlaceholder" type="enumeration" defaultValue="none">
+                    <caption>Empty message</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="emptyPlaceholder" type="widgets" required="false">
+                    <caption>Empty placeholder</caption>
+                    <description/>
+                </property>
+                <property key="itemClass" type="expression" required="false" dataSource="datasource">
+                    <caption>Dynamic item class</caption>
+                    <description />
+                    <returnType type="String"/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action" required="false" dataSource="datasource">
+                    <caption>On click action</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

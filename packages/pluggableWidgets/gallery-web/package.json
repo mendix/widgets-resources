@@ -1,0 +1,44 @@
+{
+  "name": "gallery-web",
+  "widgetName": "Gallery",
+  "version": "1.0.0",
+  "description": "A flexible gallery widget that renders columns, rows and layouts.",
+  "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.0.5",
+    "marketplaceId": 0
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "gallery-web"
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "release": "pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "cross-env": "^7.0.2",
+    "eslint": "^7.20.0"
+  }
+}
