@@ -1,5 +1,5 @@
 import { GUID } from "mendix";
-import { createElement } from "react";
+import { createElement, ReactElement, ReactNode } from "react";
 import { mount, ReactWrapper } from "enzyme";
 import { TreeView, TreeViewProps } from "../TreeView";
 
@@ -141,17 +141,31 @@ describe("TreeView", () => {
         expect(treeView.text()).not.toContain("Second content");
     });
 
+    const customIconProps: Partial<TreeViewProps> = {
+        showCustomIcon: true,
+        expandIcon: { type: "glyph", iconClass: "expand-icon" },
+        collapseIcon: { type: "image", iconUrl: "collapse-image" }
+    };
+
+    function getExpandIconFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
+        return header.findWhere(
+            node => node.type() === "span" && node.hasClass("glyphicon") && node.hasClass("expand-icon")
+        );
+    }
+
+    function getCollapseImageFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
+        return header.findWhere(node => node.type() === "img" && node.prop("src") === "collapse-image");
+    }
+
     it("shows custom the expand and close icon accordingly", () => {
         const treeView = mount(
             <TreeView
                 {...defaultProps}
+                {...customIconProps}
                 class=""
                 items={items}
                 isUserDefinedLeafNode={false}
                 startExpanded={false}
-                showCustomIcon
-                expandIcon={{ type: "glyph", iconClass: "expand-icon" }}
-                collapseIcon={{ type: "image", iconUrl: "collapse-image" }}
             />
         );
 
@@ -162,16 +176,6 @@ describe("TreeView", () => {
         expect(firstTreeViewBranchHeader).toHaveLength(1);
         expect(firstTreeViewBranchHeader.text()).toContain("First header");
 
-        function getExpandIconFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
-            return header.findWhere(
-                node => node.type() === "span" && node.hasClass("glyphicon") && node.hasClass("expand-icon")
-            );
-        }
-
-        function getCollapseImageFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
-            return header.findWhere(node => node.type() === "img" && node.prop("src") === "collapse-image");
-        }
-
         expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
         expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
 
@@ -181,5 +185,143 @@ describe("TreeView", () => {
 
         expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+    });
+
+    it("is not clickable and doesn't show an icon when its child has no nodes", () => {
+        const nestedItems: TreeViewProps["items"] = [
+            {
+                id: "11" as GUID,
+                value: "Parent treeview with a nested treeview that is empty",
+                content: (
+                    <TreeView
+                        {...defaultProps}
+                        class=""
+                        items={[]}
+                        isUserDefinedLeafNode={false}
+                        startExpanded={false}
+                    />
+                )
+            }
+        ];
+
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={nestedItems}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
+
+        const parentTreeViewHeader = treeView.findWhere(
+            node => node.type() === "header" && node.text().includes("Parent treeview")
+        );
+        expect(parentTreeViewHeader).toHaveLength(1);
+        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
+        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+    });
+
+    it("is clickable and shows an icon when its child has nodes", () => {
+        const nestedItems: TreeViewProps["items"] = [
+            {
+                id: "11" as GUID,
+                value: "Parent treeview with a nested treeview that is filled",
+                content: (
+                    <TreeView
+                        {...defaultProps}
+                        class=""
+                        items={items}
+                        isUserDefinedLeafNode={false}
+                        startExpanded={false}
+                    />
+                )
+            }
+        ];
+
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={nestedItems}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
+
+        const parentTreeViewHeader = treeView.findWhere(
+            node => node.type() === "header" && node.text().includes("Parent treeview")
+        );
+
+        expect(parentTreeViewHeader).toHaveLength(1);
+        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).toBe("button");
+
+        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+    });
+
+    it("does not influence the parent if it is not immediately in the chain", () => {
+        const RandomOtherWidget = ({ children }: { children: ReactNode }): ReactElement => <div>{children}</div>;
+        const nestedItems: TreeViewProps["items"] = [
+            {
+                id: "11" as GUID,
+                value: "Parent treeview with a nested treeview that is empty and wrapped with a random other widget",
+                content: (
+                    <RandomOtherWidget>
+                        <TreeView
+                            {...defaultProps}
+                            class=""
+                            items={[]}
+                            isUserDefinedLeafNode={false}
+                            startExpanded={false}
+                        />
+                    </RandomOtherWidget>
+                )
+            }
+        ];
+
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={nestedItems}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
+
+        const parentTreeViewHeader = treeView.findWhere(
+            node => node.type() === "header" && node.text().includes("Parent treeview")
+        );
+
+        expect(parentTreeViewHeader).toHaveLength(1);
+        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).toBe("button");
+
+        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+    });
+
+    it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={[{ id: "11" as GUID, value: "First header", content: undefined }]}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
+
+        const treeViewHeader = treeView.findWhere(
+            node => node.type() === "header" && node.text().includes("First header")
+        );
+
+        expect(treeViewHeader).toHaveLength(1);
+        expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
     });
 });

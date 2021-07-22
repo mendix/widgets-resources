@@ -1,13 +1,26 @@
-import { GUID, WebIcon } from "mendix";
-import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactNode, useCallback, useState } from "react";
+import { WebIcon, ObjectItem } from "mendix";
+import {
+    createElement,
+    CSSProperties,
+    HTMLAttributes,
+    ReactElement,
+    ReactNode,
+    useCallback,
+    useContext,
+    useState
+} from "react";
 import classNames from "classnames";
 
 import "../ui/TreeView.scss";
 import { ShowIconEnum } from "../../typings/TreeViewProps";
 import { Icon } from "./Icon";
+import {
+    TreeViewBranchContextProps,
+    TreeViewBranchContext,
+    useInformParentContextToHaveChildNodes
+} from "./TreeViewBranchContext";
 
-interface TreeViewObject {
-    id: GUID;
+export interface TreeViewObject extends ObjectItem {
     value: string | ReactNode | undefined;
     content: ReactNode;
 }
@@ -16,7 +29,7 @@ export interface TreeViewProps {
     name?: string;
     class: string;
     style?: CSSProperties;
-    items: TreeViewObject[];
+    items: TreeViewObject[] | null;
     isUserDefinedLeafNode: TreeViewBranchProps["isUserDefinedLeafNode"];
     startExpanded: TreeViewBranchProps["startExpanded"];
     showCustomIcon: boolean;
@@ -36,7 +49,7 @@ export function TreeView({
     iconPlacement,
     expandIcon,
     collapseIcon
-}: TreeViewProps): ReactElement {
+}: TreeViewProps): ReactElement | null {
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
         (treeViewIsExpanded: boolean) =>
             showCustomIcon ? (
@@ -56,9 +69,28 @@ export function TreeView({
             ),
         [collapseIcon, expandIcon, showCustomIcon]
     );
+
+    // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextToHaveChildNodes
+    const [treeViewElement, setTreeViewElement] = useState<HTMLDivElement | null>(null);
+    const updateTreeViewElement = useCallback(node => {
+        if (node) {
+            setTreeViewElement(node);
+        }
+    }, []);
+
+    const isInsideAnotherTreeView = useCallback(() => {
+        return treeViewElement?.parentElement?.className.includes(treeViewBodyClassName) ?? false;
+    }, [treeViewElement]);
+
+    useInformParentContextToHaveChildNodes(items, isInsideAnotherTreeView);
+
+    if (!items) {
+        return null;
+    }
+
     // TODO: for lazy loading/knowing whether there are children, it might be better to not render any DOM here if there are no items.
     return (
-        <div className={classNames("widget-tree-view", className)} style={style} id={name}>
+        <div className={classNames("widget-tree-view", className)} style={style} id={name} ref={updateTreeViewElement}>
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
                     key={id}
@@ -94,22 +126,37 @@ function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttribute
     };
 }
 
-function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
-    const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
+const treeViewBodyClassName = "widget-tree-view-body";
 
-    function toggleTreeViewContent(): void {
-        if (!props.isUserDefinedLeafNode) {
+function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
+    const { level: currentContextLevel } = useContext(TreeViewBranchContext);
+    const [treeViewIsExpanded, setTreeViewIsExpanded] = useState<boolean>(props.startExpanded);
+    const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
+
+    const toggleTreeViewContent = useCallback(() => {
+        if (!isActualLeafNode) {
             setTreeViewIsExpanded(isExpanded => !isExpanded);
         }
-    }
+    }, [isActualLeafNode]);
 
-    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(props.isUserDefinedLeafNode);
+    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(isActualLeafNode);
+
+    const informParentToHaveChildNodes = useCallback<TreeViewBranchContextProps["informParentToHaveChildNodes"]>(
+        hasChildNodes => {
+            if (!hasChildNodes && !isActualLeafNode) {
+                setIsActualLeafNode(true);
+            } else if (hasChildNodes && isActualLeafNode) {
+                setIsActualLeafNode(false);
+            }
+        },
+        [isActualLeafNode]
+    );
 
     return (
         <div className="widget-tree-view-branch">
             <header
                 className={classNames("widget-tree-view-branch-header", {
-                    "widget-tree-view-branch-header-clickable": !props.isUserDefinedLeafNode,
+                    "widget-tree-view-branch-header-clickable": !isActualLeafNode,
                     "widget-tree-view-branch-header-reversed": props.iconPlacement === "left"
                 })}
                 onClick={toggleTreeViewContent}
@@ -122,13 +169,18 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 {...headerAccessibilityProps}
             >
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
-                {!props.isUserDefinedLeafNode &&
-                    props.iconPlacement !== "no" &&
-                    props.renderHeaderIcon(treeViewIsExpanded)}
+                {!isActualLeafNode && props.iconPlacement !== "no" && props.renderHeaderIcon(treeViewIsExpanded)}
             </header>
             {/* TODO: For lazy loading and to prevent reloading the children data every time, it might be better to implement the 2nd "collapse" through CSS */}
-            {!props.isUserDefinedLeafNode && treeViewIsExpanded && (
-                <div className="widget-tree-view-body">{props.children}</div>
+            {!isActualLeafNode && treeViewIsExpanded && (
+                <TreeViewBranchContext.Provider
+                    value={{
+                        level: currentContextLevel + 1,
+                        informParentToHaveChildNodes
+                    }}
+                >
+                    <div className={treeViewBodyClassName}>{props.children}</div>
+                </TreeViewBranchContext.Provider>
             )}
         </div>
     );
