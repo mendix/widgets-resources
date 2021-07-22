@@ -1,0 +1,54 @@
+$screen-md: 768px !default;
+$screen-lg: 992px !default;
+
+@mixin grid-items($number, $suffix) {
+    @for $i from 1 through $number {
+        &.widget-gallery-#{$suffix}-#{$i} {
+            grid-template-columns: repeat($i, 1fr);
+        }
+    }
+}
+
+@mixin grid-span($number, $type) {
+    @for $i from 1 through $number {
+        .widget-gallery-#{$type}-span-#{$i} {
+            grid-#{$type}: span $i;
+        }
+    }
+}
+
+.widget-gallery {
+    display: grid;
+    grid-gap: 8px;
+
+    .widget-gallery-clickable {
+        cursor: pointer;
+    }
+
+    /*
+    Desktop widths
+    */
+    @media screen and (min-width: $screen-lg) {
+        @include grid-items(12, 'lg');
+    }
+
+    /*
+    Tablet widths
+    */
+    @media screen and (min-width: $screen-md) and (max-width: ($screen-lg - 1px)) {
+        @include grid-items(12, 'md');
+    }
+
+    /*
+    Phone widths
+    */
+    @media screen and (max-width: ($screen-md - 1)) {
+        @include grid-items(12, 'sm');
+    }
+
+    /**
+    Helper classes
+     */
+    @include grid-span(12, 'column');
+    @include grid-span(12, 'row');
+}

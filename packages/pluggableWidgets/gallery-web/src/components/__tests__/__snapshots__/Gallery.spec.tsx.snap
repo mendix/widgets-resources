@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gallery renders correctly 1`] = `
+<div
+  className="widget-gallery widget-gallery-lg-4 widget-gallery-md-3 widget-gallery-sm-2"
+>
+  <div
+    className="widget-gallery-item"
+    key="item_0"
+  >
+    item1
+  </div>
+</div>
+`;
