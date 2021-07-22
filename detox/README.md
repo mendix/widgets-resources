@@ -40,16 +40,15 @@ detox/detox.config.js
 ### Spin up mendix project:
 Every widget has its own project.
 
-### Run the tests:
-Every widget has its own detox.config.js file. Which inherits the pluggable-widgets-tools. For android run:
+### Run or debug the tests:
 
-`npm run test:e2e:local:android`
-`npm run test:e2e:local:ios`
+To run all the specs: `npm run test:e2e:local:PLATFORM_NAME`
 
-Debugging
+To run one spec file: `npm run test:e2e:local:PLATFORM_NAME FILE_NAME.spec.ts`
 
-`npm run test:e2e:local:android:debug`
-`npm run test:e2e:local:ios:debug`
+Debugging: `npm run test:e2e:local:PLATFORM_NAME:debug`
+
+PLATFORM_NAME = `android` or `ios`
 
 # General improvements
 - List all versions of the working tools 
