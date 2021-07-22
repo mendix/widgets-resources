@@ -1,0 +1,32 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin label() {
+    /* ==========================================================================
+       Label
+
+       Default label combined with Bootstrap label
+    ========================================================================== */
+
+    .label {
+        display: inline-block;
+        margin: 0;
+        padding: $spacing-smaller $spacing-small;
+        text-align: center;
+        vertical-align: baseline;
+        white-space: nowrap;
+        color: #ffffff;
+        border-radius: 0.25em;
+        font-size: 100%;
+        line-height: 1;
+
+        .form-control-static {
+            font-weight: $font-weight-normal;
+            all: unset;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin barcode-scanner() {
+    /* ==========================================================================
+       Barcode-scanner
+
+       Override of default Bootstrap barcode-scanner style
+    ========================================================================== */
+
+    .mx-barcode-scanner {
+        background: #000000;
+        z-index: 110;
+
+        .close-button {
+            color: white;
+            .glyphicon {
+                font-size: 16px;
+            }
+        }
+
+        .video-canvas {
+            .canvas-background {
+                background-color: rgba(0, 0, 0, 0.7);
+            }
+
+            .canvas-middle {
+                .canvas-middle-middle {
+                    $corner-offset: 13px;
+                    .corner {
+                        $corner-border: 5px solid #ffffff;
+                        border-left: $corner-border;
+                        border-top: $corner-border;
+
+                        &.corner-top-left {
+                            top: -$corner-offset;
+                            left: -$corner-offset;
+                        }
+                        &.corner-top-right {
+                            top: -$corner-offset;
+                            right: -$corner-offset;
+                            transform: rotate(90deg);
+                        }
+                        &.corner-bottom-right {
+                            bottom: -$corner-offset;
+                            right: -$corner-offset;
+                            transform: rotate(180deg);
+                        }
+                        &.corner-bottom-left {
+                            bottom: -$corner-offset;
+                            left: -$corner-offset;
+                            transform: rotate(270deg);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

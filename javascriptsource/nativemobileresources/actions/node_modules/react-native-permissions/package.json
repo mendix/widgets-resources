@@ -1,0 +1,117 @@
+{
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "dist",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ]
+  },
+  "_args": [
+    [
+      "react-native-permissions@3.0.4",
+      "/Users/Jordan.Hunt/mendix/widgets-resources"
+    ]
+  ],
+  "_from": "react-native-permissions@3.0.4",
+  "_id": "react-native-permissions@3.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-GMd0l0TA/qupidGFfKAVNaboewQkJSW+l3ndwv1cu+tBGI+TRfJdMjg8Q714wn9roZlXsZ3z407qT2xPdQmGdg==",
+  "_location": "/react-native-permissions",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-permissions@3.0.4",
+    "name": "react-native-permissions",
+    "escapedName": "react-native-permissions",
+    "rawSpec": "3.0.4",
+    "saveSpec": null,
+    "fetchSpec": "3.0.4"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-permissions/-/react-native-permissions-3.0.4.tgz",
+  "_spec": "3.0.4",
+  "_where": "/Users/Jordan.Hunt/mendix/widgets-resources",
+  "author": {
+    "name": "Mathieu Acthernoene",
+    "email": "zoontek@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/zoontek/react-native-permissions/issues"
+  },
+  "description": "An unified permissions API for React Native on iOS and Android",
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@react-native-community/bob": "^0.16.2",
+    "@types/react-native": "^0.63.37",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
+    "eslint": "^7.14.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.0",
+    "lint-staged": "^10.5.2",
+    "prettier": "^2.2.1",
+    "react": "16.13.1",
+    "react-native": "0.63.3",
+    "typescript": "^4.1.2"
+  },
+  "files": [
+    "/android",
+    "!/android/build",
+    "/dist",
+    "/ios",
+    "/windows",
+    "/src",
+    "/*.podspec",
+    "mock.js"
+  ],
+  "homepage": "https://github.com/zoontek/react-native-permissions#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "keywords": [
+    "react-native",
+    "react native",
+    "react-native-windows",
+    "permission",
+    "authorization"
+  ],
+  "license": "MIT",
+  "lint-staged": {
+    "**/*.{js,ts,tsx}": [
+      "prettier --write",
+      "eslint"
+    ],
+    "**/*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "main": "dist/commonjs/index.js",
+  "module": "dist/module/index.js",
+  "name": "react-native-permissions",
+  "peerDependencies": {
+    "react": ">=16.13.1",
+    "react-native": ">=0.63.3",
+    "react-native-windows": ">=0.62.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zoontek/react-native-permissions.git"
+  },
+  "scripts": {
+    "format": "prettier '**/*.{js,json,md,ts,tsx}' --write",
+    "lint": "eslint \"./**/*.{js,ts,tsx}\"",
+    "prepare": "bob build",
+    "start": "react-native start",
+    "tscheck": "tsc --project ./ --noEmit"
+  },
+  "types": "dist/typescript/index.d.ts",
+  "version": "3.0.4"
+}

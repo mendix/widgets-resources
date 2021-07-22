@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Atlas layout
+   
+   Extra styling for tablet layouts
+========================================================================== */
+.layout-atlas-tablet {
+    .region-topbar {
+        min-height: $m-header-height;
+        border-style: none;
+        background-color: $m-header-bg;
+        &::before {
+            display: none;
+        }
+    }
+    .region-sidebar {
+        .mx-navigationtree .navbar-inner > ul > li > a .glyphicon {
+            margin-right: $spacing-medium;
+        }
+    }
+}

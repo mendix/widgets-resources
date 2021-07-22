@@ -1,0 +1,2 @@
+Object.defineProperty(exports,"__esModule",{value:true});exports.default=void 0;var _reactNative=require("react-native");var RNCNetInfo=_reactNative.NativeModules.RNCNetInfo;var _default=RNCNetInfo;exports.default=_default;
+//# sourceMappingURL=nativeModule.js.map

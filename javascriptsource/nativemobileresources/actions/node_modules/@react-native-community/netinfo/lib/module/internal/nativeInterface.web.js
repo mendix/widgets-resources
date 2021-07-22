@@ -1,0 +1,2 @@
+import _objectSpread from"@babel/runtime/helpers/objectSpread";import{NativeEventEmitter}from'react-native';import RNCNetInfo from'./nativeModule';import{DEVICE_CONNECTIVITY_EVENT}from'./privateTypes';var nativeEventEmitter=new NativeEventEmitter();RNCNetInfo.addListener(DEVICE_CONNECTIVITY_EVENT,function(event){nativeEventEmitter.emit(DEVICE_CONNECTIVITY_EVENT,event);});export default _objectSpread({},RNCNetInfo,{eventEmitter:nativeEventEmitter});
+//# sourceMappingURL=nativeInterface.web.js.map

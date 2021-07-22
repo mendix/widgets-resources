@@ -1,0 +1,115 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin progress-circle-helpers() {
+    /* ==========================================================================
+       Progress Circle
+
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+
+    //== Progress circle and label colors
+    .widget-progress-circle-primary {
+        .widget-progress-circle-path {
+            stroke: $brand-primary;
+        }
+
+        .progressbar-text {
+            color: $brand-primary !important;
+        }
+    }
+
+    .widget-progress-circle-success {
+        .widget-progress-circle-path {
+            stroke: $brand-success;
+        }
+
+        .progressbar-text {
+            color: $brand-success !important;
+        }
+    }
+
+    .widget-progress-circle-warning {
+        .widget-progress-circle-path {
+            stroke: $brand-warning;
+        }
+
+        .progressbar-text {
+            color: $brand-warning !important;
+        }
+    }
+
+    .widget-progress-circle-danger {
+        .widget-progress-circle-path {
+            stroke: $brand-danger;
+        }
+
+        .progressbar-text {
+            color: $brand-danger !important;
+        }
+    }
+
+    //== Sizes
+    .widget-progress-circle-thickness-medium {
+        .widget-progress-circle-trail-path,
+        .widget-progress-circle-path {
+            stroke-width: 8px;
+        }
+    }
+
+    .widget-progress-circle-thickness-small {
+        .widget-progress-circle-trail-path,
+        .widget-progress-circle-path {
+            stroke-width: 4px;
+        }
+    }
+
+    .widget-progress-circle-thickness-large {
+        .widget-progress-circle-trail-path,
+        .widget-progress-circle-path {
+            stroke-width: 16px;
+        }
+    }
+
+    //== Progress label container
+    .progress-circle-label-container {
+        position: relative;
+        margin: 0;
+
+        .progressbar-text {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            padding: 0px;
+            margin: 0px;
+            transform: translate(-50%, -50%);
+            // Original default from the `progressbar.js` library
+            color: rgb(85, 85, 85);
+        }
+    }
+
+    .widget-progress-circle-clickable {
+        cursor: pointer;
+    }
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+        .widget-progress-circle > div {
+            height: 0;
+            padding: 0;
+            width: 100%;
+            padding-bottom: 100%;
+
+            & > svg {
+                top: 0;
+                left: 0;
+                height: 100%;
+                position: absolute;
+            }
+        }
+    }
+}

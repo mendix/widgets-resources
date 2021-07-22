@@ -1,0 +1,5 @@
+{
+  "nativeDependencies": {
+    "@react-native-community/cameraroll": "4.0.1"
+  }
+}
