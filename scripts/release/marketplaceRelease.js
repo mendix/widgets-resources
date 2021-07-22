@@ -74,7 +74,7 @@ async function createDraft(marketplaceId, version, minimumMXVersion) {
             VersionMajor: major ?? 1,
             VersionMinor: minor ?? 0,
             VersionPatch: patch ?? 0,
-            StudioProVersion: minimumMXVersion,
+            StudioProVersion: minimumMXVersion.split(".").slice(0, 3).join("."),
             IsSourceGitHub: "true",
             GithubRepo: {
                 UseReadmeForDoc: false,

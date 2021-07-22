@@ -17,6 +17,7 @@
     "lint": "eslint --config ../../../.eslintrc.js --parser-options=project:src/tsconfig.json --ext .ts src/",
     "lint:scripts": "eslint --config ../../../.eslintrc.js --parser-options=project:scripts/tsconfig.json --ext .ts scripts/",
     "lint:fix": "npm run lint -- --fix",
+    "release": "npm run build:tsc",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "config": {
