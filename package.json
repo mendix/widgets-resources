@@ -25,6 +25,7 @@
     "build:web": "npm run build -- --scope '*-web'",
     "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
     "release": "lerna run release --ignore @mendix/custom-widgets-utils-internal",
+    "release:marketplace": "lerna run release:marketplace",
     "release:native": "npm run release -- --scope '*-native'",
     "release:web": "npm run release -- --scope '*-web'",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
