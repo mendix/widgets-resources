@@ -32,6 +32,10 @@
                     <caption>Has children</caption>
                     <description/>
                 </property>
+                <property key="shouldLazyLoad" type="boolean" defaultValue="false">
+                    <caption>Lazy load</caption>
+                    <description/>
+                </property>
                 <property key="startExpanded" type="boolean" defaultValue="false">
                     <caption>Start state expanded</caption>
                     <description/>

@@ -28,6 +28,7 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             style={props.style}
             items={items}
             isUserDefinedLeafNode={!props.hasChildren}
+            shouldLazyLoad={props.shouldLazyLoad}
             startExpanded={props.startExpanded}
             showCustomIcon={props.advancedMode}
             iconPlacement={props.showIcon}
