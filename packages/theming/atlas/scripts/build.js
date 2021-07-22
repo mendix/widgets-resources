@@ -63,10 +63,24 @@ async function buildAndCopyAtlas(watchMode, destination) {
                     )}"`
                 },
                 {
+                    name: "public-themesource-core",
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/public/**/*" "${join(
+                      destination,
+                      "themesource/atlas_core/public"
+                    )}"`
+                },
+                {
                     name: "web-themesource-content",
                     command: `copy-and-watch ${watchArg} "src/themesource/atlas_web_content/web/**/*" "${join(
                         destination,
                         "themesource/atlas_web_content/web"
+                    )}"`
+                },
+                {
+                    name: "public-themesource-content",
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_web_content/public/**/*" "${join(
+                      destination,
+                      "themesource/atlas_web_content/public"
                     )}"`
                 },
                 {
@@ -79,7 +93,14 @@ async function buildAndCopyAtlas(watchMode, destination) {
                         destination,
                         "themesource/atlas_core/native"
                     )}"`
-                }
+                },
+                {
+                    name: "public-themesource-nativecontent",
+                    command: `copy-and-watch ${watchArg} "src/themesource/atlas_nativemobile_content/public/**/*" "${join(
+                      destination,
+                      "themesource/atlas_nativemobile_content/public"
+                    )}"`
+                },
             ],
             {
                 killOthers: ["failure"]
