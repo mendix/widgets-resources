@@ -19,17 +19,17 @@ export function getPreviewCss(): string {
 export function preview(props: PreviewProps): ReactElement {
     const style = parseStyle(props.style);
 
-    const accordionGroups = props.groups.map(group => ({
+    const accordionGroups = props.groups.map((group, index) => ({
         header:
             group.headerRenderMode === "text" ? (
                 <h3>{group.headerText}</h3>
             ) : (
-                <group.headerContent.renderer>
+                <group.headerContent.renderer caption={`Place header contents for group ${index + 1} here.`}>
                     <div />
                 </group.headerContent.renderer>
             ),
         content: (
-            <group.content.renderer>
+            <group.content.renderer caption={`Place body contents for group ${index + 1} here.`}>
                 <div />
             </group.content.renderer>
         ),

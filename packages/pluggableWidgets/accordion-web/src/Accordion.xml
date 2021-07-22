@@ -4,7 +4,7 @@
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Accordion</name>
-    <description>Toggle the display of sections of content</description>
+    <description>Toggle the display of sections of content.</description>
     <icon>
         iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAF0SURBVHgB7du9ToRAFAXgw7o2YAt2ttv4EBTuGwCNFnS+kiUkVvAKFjyEja2doRWa1axgYqHDMBnDFsw9Xzlek50T5mcvWe84gGAbCMcAINz270DTNCiKAn3fwyVhGCJNU8Rx/GtceQLqunZu8qO2bVGWpTK+mSp0Vdd1yhj3AFNBVVVYsyzLZv/OYxDCcQ+ApafXTzw8f6A7LPsV4tL3cLfb4ubqbLZOd0/RnfMm1k/A48vykx+99cch2IOxTndP0Z3zJtYBvJs/479dnHvGmqmz/EcQBLBlHcD99fb7cV1aMEz+dmdekXmeI4oi9f+HySdJAlvWe8B+WKN7wzo9pXGN267zOTwGIRzvAaYC01167bgEIBz3AFMB+wGOYwAQjv0AWGI/gP0A9gPYD3AJA4Bw7AdAOAYA4dgPgHAMAMIxAAjHACAcA4BwDADCMQAIxwAgHHuCEE4JwPd9uGrqlZoSgO7d29rp3h16/O2wcAwAwn0BL4eSOakvH2IAAAAASUVORK5CYII=
     </icon>
@@ -100,7 +100,7 @@
                 </property>
                 <property key="expandBehavior" type="enumeration" defaultValue="singleExpanded">
                     <caption>Expanded groups</caption>
-                    <description>Allow a single group or multiple groups to be expanded at the same time</description>
+                    <description>Allow a single group or multiple groups to be expanded at the same time.</description>
                     <enumerationValues>
                         <enumerationValue key="singleExpanded">Single</enumerationValue>
                         <enumerationValue key="multipleExpanded">Multiple</enumerationValue>
@@ -137,7 +137,7 @@
                 </property>
                 <property key="animateIcon" type="boolean" defaultValue="true">
                     <caption>Animate icon</caption>
-                    <description>Animate the icon when the group is collapsing or expanding</description>
+                    <description>Animate the icon when the group is collapsing or expanding.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>

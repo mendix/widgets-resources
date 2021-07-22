@@ -153,7 +153,7 @@ function getGroupPreview(
                                             : {
                                                   type: "DropZone",
                                                   property: group.headerContent,
-                                                  placeholder: `Place header contents for group ${index}`
+                                                  placeholder: `Place header contents for group ${index + 1} here.`
                                               }
                                     ]
                                 },
@@ -171,7 +171,7 @@ function getGroupPreview(
                         {
                             type: "DropZone",
                             property: group.content,
-                            placeholder: `Place body contents for group ${index}`
+                            placeholder: `Place body contents for group ${index + 1} here.`
                         }
                     ]
                 }
