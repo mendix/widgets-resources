@@ -1,6 +1,6 @@
 module.exports = {
     "test-runner": "npx jest",
-    "runner-config": `${__dirname}/jest.detox.config.js`,
+    "runner-config": `detox/jest.detox.config.js`,
     apps: {
         "ios.developerapp": {
             type: "ios.app",
@@ -22,7 +22,7 @@ module.exports = {
         android: {
             type: "android.emulator",
             device: {
-                avdName: "5.4_FWVGA_API_30"
+                avdName: "Pixel_3a_XL_API_30"
             }
         }
     },
