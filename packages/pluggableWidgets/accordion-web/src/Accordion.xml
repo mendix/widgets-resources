@@ -64,7 +64,7 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="State">
-                            <property key="initialCollapsedState" type="enumeration" defaultValue="expanded">
+                            <property key="initialCollapsedState" type="enumeration" defaultValue="collapsed">
                                 <caption>Start as</caption>
                                 <description />
                                 <enumerationValues>
@@ -73,7 +73,7 @@
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="initiallyCollapsed" type="expression" defaultValue="false">
+                            <property key="initiallyCollapsed" type="expression" defaultValue="true">
                                 <caption>Start as collapsed</caption>
                                 <description/>
                                 <returnType type="Boolean"/>
