@@ -26,11 +26,11 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
             )}
             data-focusindex={props.tabIndex || 0}
         >
-            {props.items.map((item: T, index: number) =>
+            {props.items.map(item =>
                 props.itemRenderer((children, className, onClick) => {
                     return (
                         <div
-                            key={`item_${index}`}
+                            key={`item_${item}`}
                             className={classNames("widget-gallery-item", className, {
                                 "widget-gallery-clickable": !!onClick
                             })}

@@ -7,19 +7,19 @@ exports[`Gallery DOM Structure renders correctly 1`] = `
 >
   <div
     className="widget-gallery-item"
-    key="item_0"
+    key="item_11"
   >
     11
   </div>
   <div
     className="widget-gallery-item"
-    key="item_1"
+    key="item_22"
   >
     22
   </div>
   <div
     className="widget-gallery-item"
-    key="item_2"
+    key="item_33"
   >
     33
   </div>
@@ -33,7 +33,7 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
 >
   <div
     className="widget-gallery-item widget-gallery-clickable"
-    key="item_0"
+    key="item_11"
     onClick={[MockFunction]}
     onKeyDown={[Function]}
     role="button"
@@ -43,7 +43,7 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
   </div>
   <div
     className="widget-gallery-item widget-gallery-clickable"
-    key="item_1"
+    key="item_22"
     onClick={[MockFunction]}
     onKeyDown={[Function]}
     role="button"
@@ -53,7 +53,7 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
   </div>
   <div
     className="widget-gallery-item widget-gallery-clickable"
-    key="item_2"
+    key="item_33"
     onClick={[MockFunction]}
     onKeyDown={[Function]}
     role="button"
