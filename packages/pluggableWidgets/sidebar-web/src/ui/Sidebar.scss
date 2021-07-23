@@ -1,7 +1,9 @@
 .widget-sidebar {
     background-color: #24276c;
     float: left; // TODO: how should this widget be positioned?
-    height: 100vh; // TODO: what to do when a topbar is used?
+    height: 100%; // TODO: what to do when a topbar is used?
+    width: 0;
+    transition: width 0.2s ease-in;
 }
 
 .widget-sidebar-expanded {
