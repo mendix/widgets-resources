@@ -28,6 +28,18 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Dimensions">
+                <property key="widthUnit" type="enumeration" defaultValue="pixels">
+                    <caption>Width unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="widthValue" type="integer" defaultValue="100">
+                    <caption>Width</caption>
+                    <description/>
+                </property>
                 <property key="expandedWidthUnit" type="enumeration" defaultValue="pixels">
                     <caption>Expanded width unit</caption>
                     <description/>
@@ -38,6 +50,18 @@
                 </property>
                 <property key="expandedWidthValue" type="integer" defaultValue="100">
                     <caption>Expanded width</caption>
+                    <description/>
+                </property>
+                <property key="collapsedWidthUnit" type="enumeration" defaultValue="pixels">
+                    <caption>Collapsed width unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="collapsedWidthValue" type="integer" defaultValue="100">
+                    <caption>Collapsed width</caption>
                     <description/>
                 </property>
             </propertyGroup>
