@@ -3,15 +3,12 @@ import { mount, shallow } from "enzyme";
 import { Gallery, GalleryProps } from "../Gallery";
 
 const itemWrapperFunction = ({
-    onClick = false,
-    customClass,
-    customOnClick
+    onClick,
+    customClass
 }: {
-    onClick?: boolean;
+    onClick?: () => void;
     customClass?: string;
-    customOnClick?: () => void;
-}): GalleryProps<string>["itemRenderer"] => (wrapper, item) =>
-    wrapper(item, customClass, onClick ? (customOnClick ? customOnClick : () => console.log("Clicked")) : undefined);
+}): GalleryProps<string>["itemRenderer"] => (wrapper, item) => wrapper(item, customClass, onClick);
 
 const defaultProps: GalleryProps<string> = {
     phoneItems: 2,
@@ -32,7 +29,7 @@ describe("Gallery", () => {
 
         it("renders correctly with onclick event", () => {
             const gallery = shallow(
-                <Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick: true })} />
+                <Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick: jest.fn() })} />
             );
 
             expect(gallery).toMatchSnapshot();
@@ -42,12 +39,7 @@ describe("Gallery", () => {
     describe("with events", () => {
         it("triggers correct events on click", () => {
             const onClick = jest.fn();
-            const gallery = mount(
-                <Gallery
-                    {...defaultProps}
-                    itemRenderer={itemWrapperFunction({ onClick: true, customOnClick: onClick })}
-                />
-            );
+            const gallery = mount(<Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick })} />);
             const galleryFirstItem = gallery.find(".widget-gallery-clickable").at(0);
 
             expect(galleryFirstItem).toBeDefined();
@@ -59,12 +51,7 @@ describe("Gallery", () => {
 
         it("triggers correct events on Enter key down", () => {
             const onClick = jest.fn();
-            const gallery = mount(
-                <Gallery
-                    {...defaultProps}
-                    itemRenderer={itemWrapperFunction({ onClick: true, customOnClick: onClick })}
-                />
-            );
+            const gallery = mount(<Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick })} />);
             const galleryFirstItem = gallery.find(".widget-gallery-clickable").at(0);
 
             expect(galleryFirstItem).toBeDefined();
@@ -76,12 +63,7 @@ describe("Gallery", () => {
 
         it("triggers correct events on Space key down", () => {
             const onClick = jest.fn();
-            const gallery = mount(
-                <Gallery
-                    {...defaultProps}
-                    itemRenderer={itemWrapperFunction({ onClick: true, customOnClick: onClick })}
-                />
-            );
+            const gallery = mount(<Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick })} />);
             const galleryFirstItem = gallery.find(".widget-gallery-clickable").at(0);
 
             expect(galleryFirstItem).toBeDefined();

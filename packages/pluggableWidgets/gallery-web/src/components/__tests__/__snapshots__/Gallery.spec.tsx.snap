@@ -34,7 +34,7 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
   <div
     className="widget-gallery-item widget-gallery-clickable"
     key="item_0"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     onKeyDown={[Function]}
     role="button"
     tabIndex={0}
@@ -44,7 +44,7 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
   <div
     className="widget-gallery-item widget-gallery-clickable"
     key="item_1"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     onKeyDown={[Function]}
     role="button"
     tabIndex={0}
@@ -54,7 +54,7 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
   <div
     className="widget-gallery-item widget-gallery-clickable"
     key="item_2"
-    onClick={[Function]}
+    onClick={[MockFunction]}
     onKeyDown={[Function]}
     role="button"
     tabIndex={0}
