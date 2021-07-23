@@ -8,7 +8,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
-import { red, yellow } from "colors";
+import { red, yellow,blue } from "colors";
 import postcss from "postcss";
 import postcssUrl from "postcss-url";
 import loadConfigFile from "rollup/dist/loadConfigFile";
@@ -45,6 +45,7 @@ export default async args => {
     if (!["web", "native"].includes(platform)) {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }
+    console.info(blue(`Project Path: ${projectPath}`));
 
     const result = [];
 
