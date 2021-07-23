@@ -20,6 +20,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
             )}
             phoneItems={props.phoneItems}
             tabletItems={props.tabletItems}
+            tabIndex={props.tabIndex}
         />
     );
 }

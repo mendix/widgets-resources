@@ -11,6 +11,7 @@ export interface GalleryProps<T> {
     ) => ReactNode;
     phoneItems: number;
     tabletItems: number;
+    tabIndex?: number;
 }
 
 export function Gallery<T>(props: GalleryProps<T>): ReactElement {
@@ -23,6 +24,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
                 `widget-gallery-md-${props.tabletItems}`,
                 `widget-gallery-sm-${props.phoneItems}`
             )}
+            data-focusindex={props.tabIndex || 0}
         >
             {props.items.map((item: T, index: number) =>
                 props.itemRenderer((children, className, onClick) => {
