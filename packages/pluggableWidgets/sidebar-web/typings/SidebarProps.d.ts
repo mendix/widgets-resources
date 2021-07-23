@@ -5,7 +5,9 @@
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
 
-export type WidthUnitEnum = "pixels" | "percentage";
+export type ToggleModeEnum = "none" | "push" | "slideOver" | "startExpandedShrink" | "startCollapsedShrink";
+
+export type ExpandedWidthUnitEnum = "pixels" | "percentage";
 
 export interface SidebarContainerProps {
     name: string;
@@ -13,14 +15,16 @@ export interface SidebarContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     contents?: ReactNode;
-    widthUnit: WidthUnitEnum;
-    widthValue: number;
+    toggleMode: ToggleModeEnum;
+    expandedWidthUnit: ExpandedWidthUnitEnum;
+    expandedWidthValue: number;
 }
 
 export interface SidebarPreviewProps {
     class: string;
     style: string;
     contents: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
-    widthUnit: WidthUnitEnum;
-    widthValue: number | null;
+    toggleMode: ToggleModeEnum;
+    expandedWidthUnit: ExpandedWidthUnitEnum;
+    expandedWidthValue: number | null;
 }
