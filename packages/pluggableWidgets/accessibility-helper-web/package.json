@@ -3,7 +3,7 @@
   "widgetName": "AccessibilityHelper",
   "version": "1.0.1",
   "description": "Set an attribute to a DOM element",
-  "copyright": "Mendix 2020",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "author": "Widget Team",
   "config": {
     "mendixHost": "http://localhost:8080",

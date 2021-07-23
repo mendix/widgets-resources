@@ -3,7 +3,7 @@
   "widgetName": "StarRating",
   "version": "2.0.0",
   "description": "Displays a rating mechanism with icons",
-  "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",

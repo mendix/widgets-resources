@@ -3,7 +3,7 @@
   "widgetName": "ProgressBar",
   "version": "2.1.0",
   "description": "Displays a progress bar",
-  "copyright": "Mendix Technology B.V.",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
