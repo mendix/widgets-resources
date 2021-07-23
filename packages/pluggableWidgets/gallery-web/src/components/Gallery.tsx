@@ -1,7 +1,7 @@
 import { createElement, ReactElement, ReactNode } from "react";
 import classNames from "classnames";
 
-interface GalleryProps<T> {
+export interface GalleryProps<T> {
     className?: string;
     desktopItems: number;
     items: T[];
