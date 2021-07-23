@@ -6,7 +6,7 @@ import { SidebarContainerProps } from "../typings/SidebarProps";
 
 export function Sidebar(props: SidebarContainerProps): ReactElement | null {
     return (
-        <SidebarComponent className={props.class} style={props.style} tabIndex={props.tabIndex}>
+        <SidebarComponent className={props.class} name={props.name} style={props.style} tabIndex={props.tabIndex}>
             {props.contents}
         </SidebarComponent>
     );
