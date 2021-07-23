@@ -13,5 +13,19 @@
                 <description/>
             </property>
         </propertyGroup>
+        <propertyGroup caption="Dimensions">
+            <property key="widthUnit" type="enumeration" defaultValue="pixels">
+                <caption>Width unit</caption>
+                <description />
+                <enumerationValues>
+                    <enumerationValue key="pixels">Pixels</enumerationValue>
+                    <enumerationValue key="percentage">Percentage</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="widthValue" type="integer" defaultValue="100">
+                <caption>Width</caption>
+                <description />
+            </property>
+        </propertyGroup>
     </properties>
 </widget>

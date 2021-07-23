@@ -5,6 +5,7 @@ import "../ui/Sidebar.scss";
 
 interface SidebarProps {
     className?: string;
+    expandedWidth?: CSSProperties["width"];
     style?: CSSProperties;
     name: string;
     tabIndex?: number;
@@ -31,7 +32,7 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     return (
         <aside
             className={classNames("widget-sidebar", { "widget-sidebar-expanded": expanded }, props.className)}
-            style={props.style}
+            style={{ ...props.style, width: expanded ? props.expandedWidth : undefined }}
             tabIndex={props.tabIndex}
         >
             {props.children}
