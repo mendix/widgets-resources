@@ -2,7 +2,7 @@
   "name": "mobile-resources-native",
   "version": "3.0.0",
   "license": "Apache-2.0",
-  "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"

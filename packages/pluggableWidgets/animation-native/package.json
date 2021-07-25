@@ -3,7 +3,7 @@
   "widgetName": "Animation",
   "version": "2.0.0",
   "description": "Container for animations",
-  "copyright": "Mendix 2019",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "author": "Widget Team",
   "config": {},
   "packagePath": "com.mendix.widget.native",

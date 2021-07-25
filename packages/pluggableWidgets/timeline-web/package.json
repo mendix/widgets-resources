@@ -3,7 +3,7 @@
   "widgetName": "Timeline",
   "version": "2.0.0",
   "description": "Shows timeline",
-  "copyright": "Mendix BV",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "author": "Mendix",
   "config": {
     "mendixHost": "http://localhost:8080",
