@@ -5,8 +5,9 @@ import { Sidebar as SidebarComponent } from "./components/Sidebar";
 import { SidebarContainerProps } from "../typings/SidebarProps";
 
 export function Sidebar(props: SidebarContainerProps): ReactElement | null {
-    const collapsedWidth = `${props.collapsedWidthValue}${props.collapsedWidthUnit === "pixels" ? "px" : "%"}`;
-    const expandedWidth = `${props.expandedWidthValue}${props.expandedWidthUnit === "pixels" ? "px" : "%"}`;
+    const width = `${props.widthValue}${props.widthUnit === "pixels" ? "px" : "vw"}`;
+    const collapsedWidth = `${props.collapsedWidthValue}${props.collapsedWidthUnit === "pixels" ? "px" : "vw"}`;
+    const expandedWidth = `${props.expandedWidthValue}${props.expandedWidthUnit === "pixels" ? "px" : "vw"}`;
 
     return (
         <SidebarComponent
@@ -14,6 +15,8 @@ export function Sidebar(props: SidebarContainerProps): ReactElement | null {
             name={props.name}
             style={props.style}
             tabIndex={props.tabIndex}
+            width={props.toggleMode === "none" ? width : undefined}
+            collapsible={props.toggleMode !== "none"}
             collapsedWidth={
                 props.toggleMode === "startCollapsedShrink" || props.toggleMode === "startExpandedShrink"
                     ? collapsedWidth

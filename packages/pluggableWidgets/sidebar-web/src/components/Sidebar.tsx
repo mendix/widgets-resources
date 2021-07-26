@@ -6,7 +6,9 @@ import "../ui/Sidebar.scss";
 interface SidebarProps {
     className?: string;
     collapsedWidth?: CSSProperties["width"];
+    collapsible?: boolean;
     expandedWidth?: CSSProperties["width"];
+    width?: CSSProperties["width"];
     slideOver?: boolean;
     startExpanded?: boolean;
     style?: CSSProperties;
@@ -17,29 +19,40 @@ interface SidebarProps {
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     const [expanded, setExpanded] = useState(props.startExpanded);
 
+    let width: string | number | undefined;
+
+    if (props.collapsible) {
+        width = expanded ? props.expandedWidth : props.collapsedWidth;
+    } else {
+        width = props.width;
+    }
+
     useEffect(() => {
         let unregisterSidebar: () => void;
 
         try {
             unregisterSidebar = registerSidebar({
                 name: props.name,
-                toggleExpanded: () => setExpanded(prevExpanded => !prevExpanded)
+                toggleExpanded: () => setExpanded(prevExpanded => props.collapsible && !prevExpanded)
             });
         } catch (e) {
             console.error(e); // TODO: show error in an alert
         }
 
         return () => unregisterSidebar();
-    }, [props.name]);
+    }, [props.name, props.collapsible]);
 
     return (
         <aside
             className={classNames(
                 "widget-sidebar",
-                { "widget-sidebar-slide-over": props.slideOver, "widget-sidebar-expanded": expanded },
+                {
+                    "widget-sidebar-slide-over": props.slideOver,
+                    "widget-sidebar-expanded": props.collapsible && expanded
+                },
                 props.className
             )}
-            style={{ ...props.style, width: expanded ? props.expandedWidth : props.collapsedWidth }}
+            style={{ ...props.style, width }}
             tabIndex={props.tabIndex}
         >
             {props.children}

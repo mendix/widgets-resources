@@ -30,7 +30,7 @@
             <propertyGroup caption="Dimensions">
                 <property key="widthUnit" type="enumeration" defaultValue="pixels">
                     <caption>Width unit</caption>
-                    <description/>
+                    <description>A percentage is relative to the viewport width.</description>
                     <enumerationValues>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
@@ -42,7 +42,7 @@
                 </property>
                 <property key="expandedWidthUnit" type="enumeration" defaultValue="pixels">
                     <caption>Expanded width unit</caption>
-                    <description/>
+                    <description>A percentage is relative to the viewport width.</description>
                     <enumerationValues>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
@@ -54,7 +54,7 @@
                 </property>
                 <property key="collapsedWidthUnit" type="enumeration" defaultValue="pixels">
                     <caption>Collapsed width unit</caption>
-                    <description/>
+                    <description>A percentage is relative to the viewport width.</description>
                     <enumerationValues>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
