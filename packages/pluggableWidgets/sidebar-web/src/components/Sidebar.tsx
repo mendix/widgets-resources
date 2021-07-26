@@ -5,15 +5,17 @@ import "../ui/Sidebar.scss";
 
 interface SidebarProps {
     className?: string;
+    collapsedWidth?: CSSProperties["width"];
     expandedWidth?: CSSProperties["width"];
     slideOver?: boolean;
+    startExpanded?: boolean;
     style?: CSSProperties;
     name: string;
     tabIndex?: number;
 }
 
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
-    const [expanded, setExpanded] = useState(false);
+    const [expanded, setExpanded] = useState(props.startExpanded);
 
     useEffect(() => {
         let unregisterSidebar: () => void;
@@ -37,7 +39,7 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
                 { "widget-sidebar-slide-over": props.slideOver, "widget-sidebar-expanded": expanded },
                 props.className
             )}
-            style={{ ...props.style, width: expanded ? props.expandedWidth : undefined }}
+            style={{ ...props.style, width: expanded ? props.expandedWidth : props.collapsedWidth }}
             tabIndex={props.tabIndex}
         >
             {props.children}
