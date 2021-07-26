@@ -4,7 +4,7 @@ module.exports = {
     rootDir: process.cwd(),
     setupFilesAfterEnv: [`${__dirname}/jest.detox.startup.js`],
     testMatch: ["<rootDir>/**/e2e/*.spec.{js,jsx,ts,tsx}"],
-    testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
+    testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules", "<rootDir>/packages/theming"],
     testEnvironment: "node",
     verbose: true,
     globals: {

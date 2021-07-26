@@ -1,5 +1,5 @@
 import { device, expect, waitFor } from "detox";
-import { Widget, Alert } from "@mendix/piw-native-utils-internal";
+import { Widget, Alert } from "../../../../../tests/e2e/index";
 
 describe("Badge", () => {
     beforeAll(async () => {
