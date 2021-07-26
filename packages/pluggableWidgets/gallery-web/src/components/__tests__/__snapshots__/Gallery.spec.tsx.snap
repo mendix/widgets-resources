@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gallery DOM Structure renders correctly 1`] = `
+<div
+  className="widget-gallery widget-gallery-lg-4 widget-gallery-md-3 widget-gallery-sm-2"
+  data-focusindex={0}
+>
+  <div
+    className="widget-gallery-item"
+    key="item_11"
+  >
+    11
+  </div>
+  <div
+    className="widget-gallery-item"
+    key="item_22"
+  >
+    22
+  </div>
+  <div
+    className="widget-gallery-item"
+    key="item_33"
+  >
+    33
+  </div>
+</div>
+`;
+
+exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
+<div
+  className="widget-gallery widget-gallery-lg-4 widget-gallery-md-3 widget-gallery-sm-2"
+  data-focusindex={0}
+>
+  <div
+    className="widget-gallery-item widget-gallery-clickable"
+    key="item_11"
+    onClick={[MockFunction]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    11
+  </div>
+  <div
+    className="widget-gallery-item widget-gallery-clickable"
+    key="item_22"
+    onClick={[MockFunction]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    22
+  </div>
+  <div
+    className="widget-gallery-item widget-gallery-clickable"
+    key="item_33"
+    onClick={[MockFunction]}
+    onKeyDown={[Function]}
+    role="button"
+    tabIndex={0}
+  >
+    33
+  </div>
+</div>
+`;
