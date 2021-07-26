@@ -1,5 +1,5 @@
 import { device, expect } from "detox";
-import { Widget } from "../../../../../tests/e2e/helpers-native/Helpers";
+import { Widget } from "@mendix/piw-native-utils-internal";
 
 describe("Activity Indicator", () => {
     beforeAll(async () => {
