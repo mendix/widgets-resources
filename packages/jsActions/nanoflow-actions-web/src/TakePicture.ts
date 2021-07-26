@@ -7,13 +7,26 @@
 // Other code you write will be lost the next time you deploy the project.
 
 // BEGIN EXTRA CODE
+import { Big } from "big.js";
+export type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 // END EXTRA CODE
 
 /**
- * Take a picture using the device camera.
+ * Take a picture using the device's camera.
+ * @param {MxObject} picture - This is required.
+ * @param {boolean} showConfirmationScreen
+ * @param {"WebActions.PictureQuality.original"|"WebActions.PictureQuality.low"|"WebActions.PictureQuality.medium"|"WebActions.PictureQuality.high"|"WebActions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
+ * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaining the aspect ratio.
+ * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaining the aspect ratio.
  * @returns {Promise.<boolean>}
  */
-export async function TakePicture(picture: mendix.lib.MxObject, showConfirmationScreen: boolean): Promise<boolean> {
+export async function TakePicture(
+    picture: mendix.lib.MxObject,
+    showConfirmationScreen: boolean,
+    pictureQuality?: PictureQuality,
+    maximumHeight?: Big,
+    maximumWidth?: Big
+): Promise<boolean> {
     // BEGIN USER CODE
     const CAMERA_POSITION = {
         BACK_CAMERA: "environment",
@@ -32,6 +45,12 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
 
     if (!("mediaDevices" in navigator) || !("getUserMedia" in navigator.mediaDevices)) {
         return Promise.reject(new Error("Media devices are not supported."));
+    }
+
+    if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
+        return Promise.reject(
+            new Error("Picture quality is set to 'Custom', but no maximum width or height was provided")
+        );
     }
 
     // TODO: WC-463 rollup has a bug where comments are removed from the top of files, disallowing imports between "extra code" comments. Until this is fixed, SVGs are manually encoded and added here.
@@ -491,8 +510,7 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
                 stream = await navigator.mediaDevices.getUserMedia({
                     video: {
                         facingMode,
-                        width: { min: 1280, ideal: 1920, max: 2560 },
-                        height: { min: 720, ideal: 1080, max: 1440 }
+                        ...getCameraQuality()
                     }
                 });
 
@@ -608,6 +626,32 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
                     mx.ui.hideProgress(progressId);
                     reject(new Error(message));
                 });
+        }
+
+        function getCameraQuality(): MediaTrackConstraints {
+            switch (pictureQuality) {
+                case "low":
+                    return {
+                        width: { ideal: 1024 },
+                        height: { ideal: 1024 }
+                    };
+                case "medium":
+                default:
+                    return {
+                        width: { ideal: 2048 },
+                        height: { ideal: 2048 }
+                    };
+                case "high":
+                    return {
+                        width: { ideal: 4096 },
+                        height: { ideal: 4096 }
+                    };
+                case "custom":
+                    return {
+                        width: { ideal: Number(maximumWidth) },
+                        height: { ideal: Number(maximumHeight) }
+                    };
+            }
         }
     });
 
