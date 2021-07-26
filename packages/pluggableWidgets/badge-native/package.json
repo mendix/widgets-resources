@@ -15,6 +15,10 @@
     "release": "pluggable-widgets-tools release:native",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:native",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "test:e2e:local:ios:debug": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:android:debug": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
     "version": "npm run release"
   },
   "dependencies": {

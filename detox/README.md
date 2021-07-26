@@ -42,9 +42,9 @@ Every widget has its own project.
 
 ### Run or debug the tests:
 
-To run all the specs: `npm run test:e2e:local:PLATFORM_NAME`
+To run all the specs(From the root directory of the repository or native-widget): `npm run test:e2e:local:PLATFORM_NAME`
 
-To run one spec file: `npm run test:e2e:local:PLATFORM_NAME FILE_NAME.spec.ts`
+To run one spec file(From the root directory of the repository or native-widget): `npm run test:e2e:local:PLATFORM_NAME FILE_NAME.spec.ts`
 
 Debugging: `npm run test:e2e:local:PLATFORM_NAME:debug`
 
@@ -69,7 +69,7 @@ PLATFORM_NAME = `android` or `ios`
 - Make sure to disable firewalls and any other software interferring with your local network (Windows Defender, Mac Firewall, Adblockers, Network security tools)
     - Unable to Mac firewall configurations due to lack of admin rights?
         - Use `socketfilterfw` to alter firewall configuration `/usr/libexec/ApplicationFirewall/socketfilterfw`
-        - Helpfull links:
+        - Helpful links:
 
             https://krypted.com/mac-security/command-line-firewall-management-in-os-x-10-10
             https://apple.stackexchange.com/questions/380118/how-to-debug-macos-firewall-my-application-layer-firewall-alf-is-not-logging
