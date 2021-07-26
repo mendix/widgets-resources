@@ -45,6 +45,9 @@ export default async args => {
     if (!["web", "native"].includes(platform)) {
         throw new Error("Must pass --configPlatform=web|native parameter");
     }
+    if (!production && projectPath) {
+        console.info(blue(`Project Path: ${projectPath}`));
+    }
 
     const result = [];
 
@@ -240,7 +243,6 @@ export default async args => {
                     mkdirSync(mpkDir, { recursive: true });
                     await zip(outDir, mpkFile);
                     if (!production && projectPath) {
-                        console.info(blue(`Project Path: ${projectPath}`));
                         const widgetsPath = join(projectPath, "widgets");
                         const deploymentPath = join(projectPath, `deployment/${platform}/widgets`);
                         // Create folder if they do not exists or directories were cleaned
