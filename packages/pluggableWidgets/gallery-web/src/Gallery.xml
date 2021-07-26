@@ -2,7 +2,9 @@
 <widget id="com.mendix.widget.web.gallery.Gallery" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Gallery</name>
     <description/>
-    <icon/>
+    <studioProCategory>Data</studioProCategory>
+    <studioCategory>Data</studioCategory>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAMAAAAolt3jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA2UExURVVVVf///0iw9/H5/vL6//P6/42NjaioqKampqSkpKKiopCQkJGRkb6+vr29vf7+/n19fX5+fi2XaR4AAAAJcEhZcwAADsMAAA7DAcdvqGQAAABRSURBVBhXVYwLDoAwCENBp87v5v0vuxaMhIaQvLapJCkuZDhB/hznAlScY1kS5rJp/ZcZyEav0uGU7MTDEFNysnsZshwpFanrpvl8obZO720DbswBc3aR4GQAAAAASUVORK5CYII=</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
@@ -10,20 +12,40 @@
                     <caption>Data source</caption>
                     <description/>
                 </property>
+                <property key="filterAttribute" type="attribute" dataSource="datasource">
+                    <caption>Filter attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String"/>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="Boolean"/>
+                        <attributeType name="DateTime"/>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Enum"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
+                </property>
+                <property key="filters" type="widgets" required="false">
+                    <caption>Filters</caption>
+                    <description/>
+                </property>
                 <property key="content" type="widgets" dataSource="datasource">
                     <caption>Content</caption>
                     <description/>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Columns">
                 <property key="desktopItems" type="integer" defaultValue="4">
-                    <caption>Desktop items</caption>
+                    <caption>Desktop columns</caption>
                     <description />
                 </property>
                 <property key="tabletItems" type="integer" defaultValue="3">
-                    <caption>Tablet items</caption>
+                    <caption>Tablet columns</caption>
                     <description />
                 </property>
                 <property key="phoneItems" type="integer" defaultValue="2">
-                    <caption>Phone items</caption>
+                    <caption>Phone columns</caption>
                     <description />
                 </property>
             </propertyGroup>

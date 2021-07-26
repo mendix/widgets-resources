@@ -17,6 +17,14 @@ $screen-lg: 992px !default;
     }
 }
 
+@mixin grid-filter($number, $suffix) {
+    @for $i from 1 through $number {
+        .widget-gallery-filter-#{$suffix}-#{$i} {
+            grid-column: span $i;
+        }
+    }
+}
+
 .widget-gallery {
     display: grid;
     grid-gap: 8px;
@@ -38,6 +46,7 @@ $screen-lg: 992px !default;
     */
     @media screen and (min-width: $screen-lg) {
         @include grid-items(12, 'lg');
+        @include grid-filter(12, 'lg');
     }
 
     /*
@@ -45,6 +54,7 @@ $screen-lg: 992px !default;
     */
     @media screen and (min-width: $screen-md) and (max-width: ($screen-lg - 1px)) {
         @include grid-items(12, 'md');
+        @include grid-filter(12, 'md');
     }
 
     /*
@@ -52,6 +62,7 @@ $screen-lg: 992px !default;
     */
     @media screen and (max-width: ($screen-md - 1)) {
         @include grid-items(12, 'sm');
+        @include grid-filter(12, 'sm');
     }
 
     /**

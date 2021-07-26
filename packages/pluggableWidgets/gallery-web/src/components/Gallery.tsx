@@ -4,6 +4,7 @@ import classNames from "classnames";
 export interface GalleryProps<T> {
     className?: string;
     desktopItems: number;
+    filters?: ReactNode;
     items: T[];
     itemRenderer: (
         renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
@@ -26,6 +27,15 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
             )}
             data-focusindex={props.tabIndex || 0}
         >
+            <div
+                className={classNames(
+                    `widget-gallery-filter-lg-${props.desktopItems}`,
+                    `widget-gallery-filter-md-${props.tabletItems}`,
+                    `widget-gallery-filter-sm-${props.phoneItems}`
+                )}
+            >
+                {props.filters}
+            </div>
             {props.items.map(item =>
                 props.itemRenderer((children, className, onClick) => {
                     return (

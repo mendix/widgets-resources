@@ -12,6 +12,11 @@ export function preview(props: PreviewProps): ReactElement {
         <GalleryComponent
             className={props.className}
             desktopItems={props.desktopItems!}
+            filters={
+                <props.filters.renderer caption="Place filter widget(s) here">
+                    <div>{props.filters}</div>
+                </props.filters.renderer>
+            }
             items={items}
             itemRenderer={useCallback(
                 renderWrapper => (

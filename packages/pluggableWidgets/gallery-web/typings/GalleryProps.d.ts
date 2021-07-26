@@ -4,7 +4,8 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ListValue, ListActionValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { Big } from "big.js";
 
 export type PaginationEnum = "buttons" | "virtualScrolling";
 
@@ -18,6 +19,8 @@ export interface GalleryContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     datasource: ListValue;
+    filterAttribute: ListAttributeValue<string | Big | boolean | Date>;
+    filters?: ReactNode;
     content: ListWidgetValue;
     desktopItems: number;
     tabletItems: number;
@@ -35,6 +38,8 @@ export interface GalleryPreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
+    filterAttribute: string;
+    filters: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     desktopItems: number | null;
     tabletItems: number | null;
