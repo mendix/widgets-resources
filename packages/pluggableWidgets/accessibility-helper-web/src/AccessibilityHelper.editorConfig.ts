@@ -5,7 +5,6 @@ import {
     StructurePreviewProps,
     DropZoneProps,
     RowLayoutProps,
-    // ContainerProps,
     TextProps
 } from "@mendix/piw-utils-internal";
 import { AttributesListPreviewType, AccessibilityHelperPreviewProps } from "../typings/AccessibilityHelperProps";
