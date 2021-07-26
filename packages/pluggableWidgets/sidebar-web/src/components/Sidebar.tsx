@@ -3,6 +3,7 @@ import classNames from "classnames";
 
 import "../ui/Sidebar.scss";
 import { registerSidebar } from "../utils/SidebarRegistration";
+import { Alert } from "@mendix/piw-utils-internal";
 
 interface SidebarProps {
     name: string;
@@ -19,6 +20,7 @@ interface SidebarProps {
 
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     const [expanded, setExpanded] = useState(props.startExpanded);
+    const [error, setError] = useState("");
 
     let width: string | number | undefined;
 
@@ -38,12 +40,16 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
                     toggleExpanded: () => setExpanded(prevExpanded => !prevExpanded)
                 });
             } catch (e) {
-                console.error(e); // TODO: show error in an alert
+                setError(e.message);
             }
 
             return () => unregisterSidebar();
         }
     }, [props.name, props.collapsible]);
+
+    if (error) {
+        return <Alert bootstrapStyle={"danger"}>{error}</Alert>;
+    }
 
     return (
         <aside
