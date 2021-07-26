@@ -2,12 +2,12 @@ import page from "../../../../../../configs/e2e/src/pages/page";
 
 export enum SliderStyleColor {
     Default = "#abe2fb",
-    Primary = "#0595db",
-    Success = "#76ca02",
-    Info = "#48b0f7",
-    Warning = "#f99b1d",
-    Danger = "#ed1c24",
-    Inverse = "#252c36"
+    Primary = "#264ae5",
+    Success = "#3cb33d",
+    Info = "#0086d9",
+    Warning = "#eca51c",
+    Danger = "#e33f4e",
+    Inverse = "#24276c"
 }
 
 interface Marker {

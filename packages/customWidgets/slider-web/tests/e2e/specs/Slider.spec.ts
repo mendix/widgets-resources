@@ -149,7 +149,7 @@ describe("Slider widget", () => {
                 handle.click({ x: 58 });
                 expect(textValueWidget.getText()).toContain("60000");
                 expect(handle.getAttribute("style")).toContain("left: 0%;");
-                handle.click({ x: 59 });
+                handle.click({ x: 71 });
                 expect(textValueWidget.getText()).toContain("120000");
                 expect(handle.getAttribute("style")).toContain("left: 25%;");
             });
@@ -166,7 +166,7 @@ describe("Slider widget", () => {
                 handle.click({ x: 39 });
                 expect(textValueWidget.getText()).toContain("140000");
                 expect(handle.getAttribute("style")).toContain("left: 33.3333%;");
-                handle.click({ x: 40 });
+                handle.click({ x: 52 });
                 expect(textValueWidget.getText()).toContain("180000");
                 expect(handle.getAttribute("style")).toContain("left: 50%;");
             });
