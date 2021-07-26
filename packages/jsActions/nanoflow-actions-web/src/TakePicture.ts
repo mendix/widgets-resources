@@ -458,11 +458,16 @@ export async function TakePicture(
                         document.body.appendChild(confirmationWrapper);
 
                         saveBtn.addEventListener("click", () => {
-                            cleanupConfirmationElements();
+                            cleanupConfirmationButtons();
                             savePicture(videoCanvas, closeControlHandler);
                         });
 
                         closeBtn.addEventListener("click", () => cleanupConfirmationElements());
+
+                        // eslint-disable-next-line no-inner-declarations
+                        function cleanupConfirmationButtons(): void {
+                            confirmationWrapper.removeChild(buttonWrapper);
+                        }
 
                         // eslint-disable-next-line no-inner-declarations
                         function cleanupConfirmationElements(): void {
