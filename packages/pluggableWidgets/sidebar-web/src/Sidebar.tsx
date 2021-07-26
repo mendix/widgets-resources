@@ -14,6 +14,7 @@ export function Sidebar(props: SidebarContainerProps): ReactElement | null {
             style={props.style}
             tabIndex={props.tabIndex}
             expandedWidth={expandedWidth}
+            slideOver={props.toggleMode === "slideOver"}
         >
             {props.contents}
         </SidebarComponent>
