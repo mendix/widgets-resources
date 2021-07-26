@@ -2,16 +2,16 @@ import { createElement, ReactElement, useCallback, useEffect, useRef, useState }
 import { GalleryContainerProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
 import "./ui/gallery-main.scss";
-import { FilterFunction } from "@mendix/piw-utils-internal";
+import { FilterFunction, useFilterContext } from "@mendix/piw-utils-internal";
 import { FilterCondition } from "mendix/filters";
 import { extractFilters } from "./utils/filters";
-import { FilterContext } from "./components/provider";
 
 export function Gallery(props: GalleryContainerProps): ReactElement {
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
     const [filtered, setFiltered] = useState(false);
-
+    const initialFilters = extractFilters(props.filterAttribute, viewStateFilters.current);
     const [filters, setFilters] = useState<FilterFunction>();
+    const { FilterContext } = useFilterContext();
 
     if (filters?.getFilterCondition()) {
         props.datasource.setFilter(filters.getFilterCondition());
@@ -20,8 +20,6 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
     } else {
         props.datasource.setFilter(viewStateFilters.current);
     }
-
-    const initialFilters = extractFilters(props.filterAttribute, viewStateFilters.current);
 
     useEffect(() => {
         if (props.datasource.filter && !filtered && !viewStateFilters.current) {

@@ -1,4 +1,4 @@
-import { Context, Dispatch } from "react";
+import { Context, createContext, Dispatch } from "react";
 import { ListAttributeValue } from "mendix";
 import { FilterCondition } from "mendix/filters";
 
@@ -15,5 +15,17 @@ export interface FilterContextValue {
 }
 
 export function getFilterDispatcher(): Context<FilterContextValue> | undefined {
-    return (window as any)["com.mendix.widgets.web.datagrid.filterContext"] as Context<FilterContextValue>;
+    return (window as any)["com.mendix.widgets.web.filterable.filterContext"] as Context<FilterContextValue>;
+}
+
+export function useFilterContext(): { FilterContext: Context<FilterContextValue> } {
+    const globalFilterContext = getFilterDispatcher();
+    if (globalFilterContext) {
+        return { FilterContext: globalFilterContext };
+    }
+
+    const FilterContext = createContext((undefined as any) as FilterContextValue);
+
+    (window as any)["com.mendix.widgets.web.filterable.filterContext"] = FilterContext;
+    return { FilterContext };
 }

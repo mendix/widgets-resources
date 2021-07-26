@@ -5,9 +5,8 @@ import { and } from "mendix/filters/builders";
 
 import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
-import { FilterFunction, isAvailable } from "@mendix/piw-utils-internal";
+import { FilterFunction, isAvailable, useFilterContext } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
-import { FilterContext } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
@@ -17,6 +16,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         : props.datasource.offset / props.pageSize;
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
     const [filtered, setFiltered] = useState(false);
+    const { FilterContext } = useFilterContext();
 
     props.datasource.requestTotalCount(true);
 
