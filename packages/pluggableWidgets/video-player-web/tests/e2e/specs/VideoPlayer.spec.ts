@@ -1,9 +1,10 @@
 import gridpage from "../pages/grid.page";
 import tabpage from "../pages/tab.page";
 import errorpage from "../pages/error.page";
+import page from "../../../../../../configs/e2e/src/pages/page";
 
 describe("Grid page", () => {
-    it("should render youtube iframe", () => {
+    it("renders youtube video", () => {
         gridpage.open();
         gridpage.youtube.waitForDisplayed();
         const youtubePlayer = gridpage.youtube.getHTML();
@@ -16,7 +17,7 @@ describe("Grid page", () => {
         expect(youtubePlayer).toContain("&amp;loop=0");
     });
 
-    it("should render vimeo iframe", () => {
+    it("renders vimeo video", () => {
         gridpage.vimeo.waitForDisplayed();
         const youtubePlayer = gridpage.vimeo.getHTML();
 
@@ -29,7 +30,7 @@ describe("Grid page", () => {
 });
 
 describe("Tab page", () => {
-    it("should render youtube tab", () => {
+    it("renders youtube video", () => {
         tabpage.open();
         tabpage.youtubeTab.waitForDisplayed();
         tabpage.youtubeTab.click();
@@ -40,7 +41,7 @@ describe("Tab page", () => {
         expect(youtubePlayer).toContain('src="https://www.youtube.com');
     });
 
-    it("should render vimeo tab", () => {
+    it("renders vimeo video", () => {
         tabpage.vimeoTab.waitForDisplayed();
         tabpage.vimeoTab.click();
         tabpage.vimeo.waitForDisplayed();
@@ -50,7 +51,7 @@ describe("Tab page", () => {
         expect(vimeoPlayer).toContain('src="https://player.vimeo.com');
     });
 
-    it("should render dailymotion tab", () => {
+    it("renders dailymotion video", () => {
         tabpage.dailymotionTab.waitForDisplayed();
         tabpage.dailymotionTab.click();
         tabpage.dailymotion.waitForDisplayed();
@@ -60,7 +61,7 @@ describe("Tab page", () => {
         expect(dailymotionPlayer).toContain('src="https://www.dailymotion.com');
     });
 
-    it("should render html5 video tab", () => {
+    it("renders html5 video", () => {
         tabpage.html5Tab.waitForDisplayed();
         tabpage.html5Tab.click();
         tabpage.html5.waitForDisplayed();
@@ -73,10 +74,46 @@ describe("Tab page", () => {
 });
 
 describe("Error page", () => {
-    it("should render no content div", () => {
+    it("renders no content div", () => {
         errorpage.open();
         errorpage.noContent.waitForDisplayed();
         const playerError = errorpage.noContent.getHTML();
         expect(playerError).not.toBeNull();
+    });
+});
+
+describe("External video", () => {
+    it("renders a poster", () => {
+        page.open("p/external");
+        browser.setWindowRect(0, 0, 1200, 900);
+        const screenshotElem = $(".widget-video-player");
+        screenshotElem.waitForDisplayed({ timeout: 5000 });
+        browser.saveElement(screenshotElem, "videoPlayerExternalPoster");
+        expect(browser.checkElement(screenshotElem, "videoPlayerExternalPoster")).toEqual(0);
+    });
+});
+
+describe("Video aspect ratio", () => {
+    it("renders video aspect ratio correctly", () => {
+        page.open("p/aspectRatio");
+        browser.setWindowRect(0, 0, 1200, 900);
+        const screenshotElem = $(".mx-name-layoutGrid2");
+        screenshotElem.waitForDisplayed({ timeout: 5000 });
+        browser.saveElement(screenshotElem, "videoPlayerAspectRatioFirstTab");
+        expect(browser.checkElement(screenshotElem, "videoPlayerAspectRatioFirstTab")).toEqual(0);
+
+        const secondTab = $(".mx-name-tabPage2");
+        const screenshotElem2 = $(".mx-name-layoutGrid3");
+        secondTab.click();
+        screenshotElem2.waitForDisplayed({ timeout: 5000 });
+        browser.saveElement(screenshotElem2, "videoPlayerAspectRatioSecondTab");
+        expect(browser.checkElement(screenshotElem2, "videoPlayerAspectRatioSecondTab")).toEqual(0);
+
+        const thirdTab = $(".mx-name-tabPage3");
+        const screenshotElem3 = $(".mx-name-layoutGrid4");
+        thirdTab.click();
+        screenshotElem3.waitForDisplayed({ timeout: 5000 });
+        browser.saveElement(screenshotElem3, "videoPlayerAspectRatioThirdTab");
+        expect(browser.checkElement(screenshotElem3, "videoPlayerAspectRatioThirdTab")).toEqual(0);
     });
 });
