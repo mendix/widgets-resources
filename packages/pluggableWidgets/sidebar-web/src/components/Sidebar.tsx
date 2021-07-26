@@ -2,18 +2,19 @@ import { createElement, CSSProperties, PropsWithChildren, ReactElement, useEffec
 import classNames from "classnames";
 
 import "../ui/Sidebar.scss";
+import { registerSidebar } from "../utils/SidebarRegistration";
 
 interface SidebarProps {
-    className?: string;
-    collapsedWidth?: CSSProperties["width"];
-    collapsible?: boolean;
-    expandedWidth?: CSSProperties["width"];
-    width?: CSSProperties["width"];
-    slideOver?: boolean;
-    startExpanded?: boolean;
-    style?: CSSProperties;
     name: string;
+    className?: string;
+    style?: CSSProperties;
     tabIndex?: number;
+    collapsible?: boolean;
+    startExpanded?: boolean;
+    width?: CSSProperties["width"];
+    collapsedWidth?: CSSProperties["width"];
+    expandedWidth?: CSSProperties["width"];
+    slideOver?: boolean;
 }
 
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
@@ -28,18 +29,20 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     }
 
     useEffect(() => {
-        let unregisterSidebar: () => void;
+        if (props.collapsible) {
+            let unregisterSidebar: () => void;
 
-        try {
-            unregisterSidebar = registerSidebar({
-                name: props.name,
-                toggleExpanded: () => setExpanded(prevExpanded => props.collapsible && !prevExpanded)
-            });
-        } catch (e) {
-            console.error(e); // TODO: show error in an alert
+            try {
+                unregisterSidebar = registerSidebar({
+                    name: props.name,
+                    toggleExpanded: () => setExpanded(prevExpanded => !prevExpanded)
+                });
+            } catch (e) {
+                console.error(e); // TODO: show error in an alert
+            }
+
+            return () => unregisterSidebar();
         }
-
-        return () => unregisterSidebar();
     }, [props.name, props.collapsible]);
 
     return (
@@ -58,28 +61,4 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
             {props.children}
         </aside>
     );
-}
-
-interface SidebarRegistration {
-    name: string;
-    toggleExpanded: () => void;
-}
-
-function registerSidebar(registration: SidebarRegistration): () => void {
-    const registerLocation = "com.mendix.widgets.web.sidebar.register";
-
-    if (!(window as any)[registerLocation]) {
-        (window as any)[registerLocation] = new Map();
-    }
-
-    // Widget names aren't unique, so we need to check
-    if ((window as any)[registerLocation].has(registration.name)) {
-        throw Error(
-            "There are multiple sidebar widgets on this page that have the same name. Please give every sidebar a unique name."
-        );
-    }
-
-    (window as any)[registerLocation].set(registration.name, registration.toggleExpanded);
-
-    return () => (window as any)[registerLocation].delete(registration.name);
 }

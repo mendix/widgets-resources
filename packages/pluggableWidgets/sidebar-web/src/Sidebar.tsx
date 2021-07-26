@@ -5,9 +5,9 @@ import { Sidebar as SidebarComponent } from "./components/Sidebar";
 import { SidebarContainerProps } from "../typings/SidebarProps";
 
 export function Sidebar(props: SidebarContainerProps): ReactElement | null {
-    const width = `${props.widthValue}${props.widthUnit === "pixels" ? "px" : "vw"}`;
-    const collapsedWidth = `${props.collapsedWidthValue}${props.collapsedWidthUnit === "pixels" ? "px" : "vw"}`;
-    const expandedWidth = `${props.expandedWidthValue}${props.expandedWidthUnit === "pixels" ? "px" : "vw"}`;
+    const width = getWidth(props.widthUnit, props.widthValue);
+    const collapsedWidth = getWidth(props.collapsedWidthUnit, props.collapsedWidthValue);
+    const expandedWidth = getWidth(props.expandedWidthUnit, props.expandedWidthValue);
 
     return (
         <SidebarComponent
@@ -15,8 +15,9 @@ export function Sidebar(props: SidebarContainerProps): ReactElement | null {
             name={props.name}
             style={props.style}
             tabIndex={props.tabIndex}
-            width={props.toggleMode === "none" ? width : undefined}
             collapsible={props.toggleMode !== "none"}
+            startExpanded={props.toggleMode === "none" || props.toggleMode === "startExpandedShrink"}
+            width={props.toggleMode === "none" ? width : undefined}
             collapsedWidth={
                 props.toggleMode === "startCollapsedShrink" || props.toggleMode === "startExpandedShrink"
                     ? collapsedWidth
@@ -24,9 +25,12 @@ export function Sidebar(props: SidebarContainerProps): ReactElement | null {
             }
             expandedWidth={expandedWidth}
             slideOver={props.toggleMode === "slideOver"}
-            startExpanded={props.toggleMode === "none" || props.toggleMode === "startExpandedShrink"}
         >
             {props.contents}
         </SidebarComponent>
     );
+}
+
+function getWidth(widthUnit: "pixels" | "percentage", width: number): string {
+    return `${width}${widthUnit === "pixels" ? "px" : "vw"}`;
 }
