@@ -10,37 +10,41 @@
     $delay: 0s,
     $duration: 0.3s,
     $property: all,
-    $timing-fucntion: cubic-bezier(0.4, 0, 0.2, 1)
+    $timing-function: cubic-bezier(0.4, 0, 0.2, 1)
 ) {
-    transition: $property $duration $delay $timing-fucntion;
-    transform-style: $style;
+    @if not $exclude-animations {
+        transition: $property $duration $delay $timing-function;
+        transform-style: $style;
+    }
 }
 
 @mixin ripple($color: #000, $transparency: 10%, $scale: 10) {
-    position: relative;
-    overflow: hidden;
-    transform: translate3d(0, 0, 0);
+    @if not $exclude-animations {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
 
-    &:after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        background-image: radial-gradient(circle, $color $transparency, transparent $transparency);
-        background-repeat: no-repeat;
-        background-position: 50%;
-        transform: scale($scale, $scale);
-        opacity: 0;
-        transition: transform 0.5s, opacity 1s;
-    }
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background-image: radial-gradient(circle, $color $transparency, transparent $transparency);
+            background-repeat: no-repeat;
+            background-position: 50%;
+            transform: scale($scale, $scale);
+            opacity: 0;
+            transition: transform 0.5s, opacity 1s;
+        }
 
-    &:active:after {
-        transform: scale(0, 0);
-        opacity: 0.1;
-        transition: 0s;
+        &:active:after {
+            transform: scale(0, 0);
+            opacity: 0.1;
+            transition: 0s;
+        }
     }
 }

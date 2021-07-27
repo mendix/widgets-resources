@@ -317,6 +317,33 @@ let container = {
 };
 container = merge(container, custom.container || {});
 //
+// Accordion Styles
+let accordion = {
+    container: {
+        backgroundColor: background.primary,
+        borderColor: border.color
+    },
+    groupHeader: {
+        container: {
+            paddingVertical: spacing.regular,
+            paddingHorizontal: spacing.regular
+        },
+        heading: {
+            color: font.colorTitle
+        },
+        icon: {
+            size: font.sizeLarge,
+            color: font.colorTitle
+        }
+    },
+    groupContent: {
+        paddingTop: spacing.small,
+        paddingBottom: spacing.large,
+        paddingHorizontal: spacing.regular
+    }
+};
+accordion = merge(accordion, custom.accordion || {});
+//
 // Badge Styles
 let badge = {
     fontWeight: font.weightNormal,
