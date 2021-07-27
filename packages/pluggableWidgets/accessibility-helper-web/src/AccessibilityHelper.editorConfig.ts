@@ -72,7 +72,10 @@ export function getPreview(values: AccessibilityHelperPreviewProps): StructurePr
                             {
                                 type: "Text",
                                 bold: true,
-                                content: buildCaption(values)
+                                content:
+                                    values.targetSelector.length > 0
+                                        ? `Target ${values.targetSelector}`
+                                        : "Target [Target selector]"
                             } as TextProps
                         ]
                     }
@@ -80,14 +83,4 @@ export function getPreview(values: AccessibilityHelperPreviewProps): StructurePr
             }
         ]
     };
-}
-
-function buildCaption(values: AccessibilityHelperPreviewProps): string {
-    if (values.targetSelector.length > 0) {
-        if (values.attributesList.length > 0) {
-            return `Target ${values.targetSelector}`;
-        }
-        return "Set [HTML Attributes list]";
-    }
-    return "Target [Target selector]";
 }
