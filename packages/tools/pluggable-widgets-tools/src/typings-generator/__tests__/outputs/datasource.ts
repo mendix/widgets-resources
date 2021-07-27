@@ -56,7 +56,7 @@ export interface MyWidgetPreviewProps {
     class: string;
     style: string;
     contentSource: {} | { type: string } | null;
-    optionalSource: {} | null;
+    optionalSource: {} | { type: string } | null;
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     markerDataAttribute: string;
     actionAttribute: {} | null;
