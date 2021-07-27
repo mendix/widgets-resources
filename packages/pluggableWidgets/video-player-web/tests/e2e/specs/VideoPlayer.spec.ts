@@ -101,7 +101,7 @@ describe("Video aspect ratio", () => {
         screenshotElem.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
         browser.saveElement(screenshotElem, "videoPlayerAspectRatioFirstTab");
-        expect(browser.checkElement(screenshotElem, "videoPlayerAspectRatioFirstTab")).toEqual(0);
+        expect(browser.checkElement(screenshotElem, "videoPlayerAspectRatioFirstTab")).toBeLessThan(1);
 
         const secondTab = $(".mx-name-tabPage2");
         const screenshotElem2 = $(".mx-name-layoutGrid3");
@@ -109,7 +109,7 @@ describe("Video aspect ratio", () => {
         screenshotElem2.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
         browser.saveElement(screenshotElem2, "videoPlayerAspectRatioSecondTab");
-        expect(browser.checkElement(screenshotElem2, "videoPlayerAspectRatioSecondTab")).toEqual(0);
+        expect(browser.checkElement(screenshotElem2, "videoPlayerAspectRatioSecondTab")).toBeLessThan(1);
 
         const thirdTab = $(".mx-name-tabPage3");
         const screenshotElem3 = $(".mx-name-layoutGrid4");
@@ -117,6 +117,6 @@ describe("Video aspect ratio", () => {
         screenshotElem3.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
         browser.saveElement(screenshotElem3, "videoPlayerAspectRatioThirdTab");
-        expect(browser.checkElement(screenshotElem3, "videoPlayerAspectRatioThirdTab")).toEqual(0);
+        expect(browser.checkElement(screenshotElem3, "videoPlayerAspectRatioThirdTab")).toBeLessThan(1);
     });
 });
