@@ -118,10 +118,13 @@ export async function TakePicture(
             video.pause();
             removeAllControlButtons();
             if (showConfirmationScreen) {
-                takePictureHandler(() => {
-                    addAllControlButtons();
-                    video.play();
-                });
+                // Delay the `takePictureHandler` to the next cycle so the UI preparations can go first. Otherwise, the control-buttons are not removed while the second screen is being set up.
+                setTimeout(() => {
+                    takePictureHandler(() => {
+                        addAllControlButtons();
+                        video.play();
+                    });
+                }, 0);
             } else {
                 const videoCanvas = getVideoCanvas();
                 savePicture(videoCanvas, () => {
