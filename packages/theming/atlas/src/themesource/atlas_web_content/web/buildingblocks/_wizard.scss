@@ -128,7 +128,7 @@
         color: $wizard-active-color;
     }
     &::after {
-        border-left-color: $wizard-active-border-color;
+        border-left-color: $wizard-active-bg;
     }
 }
 
