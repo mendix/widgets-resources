@@ -13,7 +13,7 @@ describe("Badge", () => {
         await textBox.typeText("Detox");
     });
 
-    it("should render normal badge", async () => {
+    it("renders the normal badge", async () => {
         const badgeNormal = Widget("badgeNormal");
         const badge = badgeNormal.getElement();
         const badgeText = badgeNormal.getCaption();
@@ -25,13 +25,13 @@ describe("Badge", () => {
         await expect(badgeText).toHaveText("Detox");
     });
 
-    it("should not render badge with visibility set as false", async () => {
+    it("does not render the badge with visibility set as false", async () => {
         const badge = Widget("badgeNoVisibility").getElement();
 
         await expect(badge).not.toBeVisible();
     });
 
-    it("should render a badge with actions", async () => {
+    it("renders the badge with actions", async () => {
         const badgeAction = Widget("badgeAction");
         const badge = badgeAction.getElement();
         const badgeText = badgeAction.getCaption();
