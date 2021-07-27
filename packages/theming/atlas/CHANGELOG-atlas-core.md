@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.0.5] - 2021-07-27
+
 ### Changed
 - We moved resource files from web/resources to public folder.
 
