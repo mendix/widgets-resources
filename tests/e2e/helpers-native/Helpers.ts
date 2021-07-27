@@ -1,7 +1,7 @@
 import { by, element } from "detox";
-export function Badge(testID: string, matcher = by.id(testID)) {
+export function Widget(testID: string, matcher = by.id(testID)) {
     return {
-        getBadge() {
+        getElement() {
             return element(matcher);
         },
         getCaption() {

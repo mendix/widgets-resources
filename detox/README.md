@@ -37,19 +37,18 @@ First we need to tell where is our apk’s and ipa’s. To do that simply change
 ### Which will be picked up in:
 detox/detox.config.js
 
-### Spin up mendix project:
+### Spin up Mendix project:
 Every widget has its own project.
 
-### Run the tests:
-Every widget has its own detox.config.js file. Which inherits the pluggable-widgets-tools. For android run:
+### Run or debug the tests:
 
-`npm run test:e2e:local:android`
-`npm run test:e2e:local:ios`
+To run all the specs(from the root directory of the repository or particular native-widget): `npm run test:e2e:local:PLATFORM_NAME`
 
-Debugging
+To run one spec file(from the root directory of the repository or particular native-widget): `npm run test:e2e:local:PLATFORM_NAME FILE_NAME.spec.ts`
 
-`npm run test:e2e:local:android:debug`
-`npm run test:e2e:local:ios:debug`
+Debugging(from the root directory of the particular native-widget): `npm run test:e2e:local:PLATFORM_NAME:debug`
+
+PLATFORM_NAME = `android` or `ios`
 
 # General improvements
 - List all versions of the working tools 
@@ -67,10 +66,10 @@ Debugging
 
 # Troubleshooting
 `Failed to connect to websocket`
-- Make sure to disable firewalls and any other software interferring with your local network (Windows Defender, Mac Firewall, Adblockers, Network security tools)
+- Make sure to disable firewalls and any other software interfering with your local network (Windows Defender, Mac Firewall, Adblockers, Network security tools)
     - Unable to Mac firewall configurations due to lack of admin rights?
         - Use `socketfilterfw` to alter firewall configuration `/usr/libexec/ApplicationFirewall/socketfilterfw`
-        - Helpfull links:
+        - Helpful links:
 
             https://krypted.com/mac-security/command-line-firewall-management-in-os-x-10-10
             https://apple.stackexchange.com/questions/380118/how-to-debug-macos-firewall-my-application-layer-firewall-alf-is-not-logging
