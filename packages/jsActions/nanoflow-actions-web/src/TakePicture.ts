@@ -85,7 +85,9 @@ export async function TakePicture(
             closeControl,
             createAction,
             controlsWrapper,
-            createActionAndSwitch
+            createActionAndSwitch,
+            addAllControlButtons,
+            removeAllControlButtons
         } = createFirstScreenElements();
 
         document.body.appendChild(wrapper);
@@ -112,18 +114,22 @@ export async function TakePicture(
 
         switchControl.addEventListener("click", switchControlHandler);
 
-        actionControl.addEventListener(
-            "click",
-            showConfirmationScreen
-                ? takePictureHandler
-                : () => {
-                      const videoCanvas = getVideoCanvas();
-                      savePicture(videoCanvas, () => {
-                          videoCanvas.remove();
-                          closeControlHandler();
-                      });
-                  }
-        );
+        actionControl.addEventListener("click", () => {
+            video.pause();
+            removeAllControlButtons();
+            if (showConfirmationScreen) {
+                takePictureHandler(() => {
+                    addAllControlButtons();
+                    video.play();
+                });
+            } else {
+                const videoCanvas = getVideoCanvas();
+                savePicture(videoCanvas, () => {
+                    videoCanvas.remove();
+                    closeControlHandler();
+                });
+            }
+        });
 
         video.addEventListener("loadedmetadata", () => (videoIsReady = true));
 
@@ -338,7 +344,18 @@ export async function TakePicture(
             return styleElements;
         }
 
-        function createFirstScreenElements(): any {
+        function createFirstScreenElements(): {
+            video: HTMLVideoElement;
+            wrapper: HTMLDivElement;
+            controlsWrapper: HTMLDivElement;
+            actionControl: HTMLButtonElement;
+            switchControl: HTMLButtonElement;
+            closeControl: HTMLButtonElement;
+            createActionAndSwitch: () => void;
+            createAction: () => HTMLButtonElement;
+            addAllControlButtons: () => void;
+            removeAllControlButtons: () => void;
+        } {
             const wrapper = document.createElement("div");
             wrapper.setAttribute("role", "dialog");
             wrapper.setAttribute("aria-labelledby", "take-picture-modal-label");
@@ -398,8 +415,18 @@ export async function TakePicture(
             }
 
             closeControlWrapper.appendChild(closeControl);
-            wrapper.appendChild(controlsWrapper);
-            wrapper.appendChild(closeControlWrapper);
+
+            function addAllControlButtons(): void {
+                wrapper.appendChild(controlsWrapper);
+                wrapper.appendChild(closeControlWrapper);
+            }
+
+            function removeAllControlButtons(): void {
+                wrapper.removeChild(controlsWrapper);
+                wrapper.removeChild(closeControlWrapper);
+            }
+
+            addAllControlButtons();
             wrapper.appendChild(video);
 
             return {
@@ -410,15 +437,17 @@ export async function TakePicture(
                 switchControl,
                 closeControl,
                 createActionAndSwitch,
-                createAction: () => controlsWrapper.appendChild(actionControl)
+                createAction: () => controlsWrapper.appendChild(actionControl),
+                addAllControlButtons,
+                removeAllControlButtons
             };
         }
 
-        function prepareSecondScreen(): { handler: () => void; cleanup: () => void } {
+        function prepareSecondScreen(): { handler: (onResumeFirstScreen: () => void) => void; cleanup: () => void } {
             let confirmationWrapper: HTMLDivElement;
 
             return {
-                handler: () => {
+                handler: onResumeFirstScreen => {
                     if (videoIsReady) {
                         confirmationWrapper = document.createElement("div");
                         confirmationWrapper.classList.add("take-picture-confirm-wrapper");
@@ -458,16 +487,17 @@ export async function TakePicture(
                         document.body.appendChild(confirmationWrapper);
 
                         saveBtn.addEventListener("click", () => {
-                            cleanupConfirmationButtons();
-                            savePicture(videoCanvas, closeControlHandler);
+                            confirmationWrapper.removeChild(buttonWrapper);
+                            savePicture(videoCanvas, () => {
+                                closeControlHandler();
+                                cleanupConfirmationElements();
+                            });
                         });
 
-                        closeBtn.addEventListener("click", () => cleanupConfirmationElements());
-
-                        // eslint-disable-next-line no-inner-declarations
-                        function cleanupConfirmationButtons(): void {
-                            confirmationWrapper.removeChild(buttonWrapper);
-                        }
+                        closeBtn.addEventListener("click", () => {
+                            cleanupConfirmationElements();
+                            onResumeFirstScreen();
+                        });
 
                         // eslint-disable-next-line no-inner-declarations
                         function cleanupConfirmationElements(): void {
