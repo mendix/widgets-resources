@@ -23,19 +23,46 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     const FilterContext = getFilterDispatcher();
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The data grid number filter widget must be placed inside the header of the Data grid 2.0 widget.
+            The number filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+        </Alert>
+    );
+    const alertMessageMultipleFilters = (
+        <Alert bootstrapStyle="danger">
+            To use multiple filters you need to define a filter identification in the properties of number filter.
         </Alert>
     );
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
-                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                if (
+                    !filterContextValue ||
+                    !filterContextValue.filterDispatcher ||
+                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                ) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+                const {
+                    filterDispatcher,
+                    attribute: singleAttribute,
+                    attributes: multipleAttributes,
+                    initialFilter: singleInitialFilter,
+                    initialFilters: multipleInitialFilters
+                } = filterContextValue;
 
-                const defaultFilter = translateFilters(initialFilters);
+                if (multipleAttributes && !props.filterId) {
+                    return alertMessageMultipleFilters;
+                }
+
+                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+
+                if (!attribute) {
+                    return alertMessage;
+                }
+
+                const defaultFilter = singleInitialFilter
+                    ? translateFilters(singleInitialFilter)
+                    : translateFilters(multipleInitialFilters?.[props.filterId]);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -54,7 +81,8 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Big | undefined, type: DefaultFilterEnum): void =>
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, value, type)
+                                getFilterCondition: () => getFilterCondition(attribute, value, type),
+                                filterId: props.filterId
                             })
                         }
                         value={defaultFilter?.value ?? props.defaultValue?.value}

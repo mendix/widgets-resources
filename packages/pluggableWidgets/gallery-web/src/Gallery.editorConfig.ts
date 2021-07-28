@@ -22,6 +22,10 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "emptyPlaceholder");
     }
 
+    if (values.filterList?.length === 0) {
+        hidePropertyIn(defaultProperties, values, "filtersPlaceholder");
+    }
+
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
@@ -48,6 +52,14 @@ export function check(values: GalleryPreviewProps): Problem[] {
             message: "Tablet items must be a number between 1 and 12"
         });
     }
+    values.filterList.forEach((filter, index, items) => {
+        if (items.filter(f => f.id === filter.id).length > 1) {
+            errors.push({
+                property: `filterList/${index + 1}/id`,
+                message: "The identification of each filter should be unique."
+            });
+        }
+    });
     return errors;
 }
 
@@ -79,7 +91,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
         children: [
             {
                 type: "DropZone",
-                property: values.filters,
+                property: values.filtersPlaceholder,
                 placeholder: "Place filter widget(s) here"
             } as DropZoneProps
         ]
@@ -99,6 +111,6 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
     } as RowLayoutProps;
     return {
         type: "Container",
-        children: [titleHeader, filters, content]
+        children: [titleHeader, ...(values.filterList.length > 0 ? [filters] : []), content]
     };
 }

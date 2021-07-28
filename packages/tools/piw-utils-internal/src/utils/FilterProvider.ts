@@ -5,13 +5,16 @@ import { FilterCondition } from "mendix/filters";
 export type FilterValue = { type: string; value: any };
 
 export interface FilterFunction {
-    getFilterCondition(): FilterCondition | undefined;
+    getFilterCondition: () => FilterCondition | undefined;
+    filterId?: string;
 }
 
 export interface FilterContextValue {
     filterDispatcher: Dispatch<FilterFunction>;
-    attribute: ListAttributeValue;
-    initialFilters: FilterValue[];
+    attribute?: ListAttributeValue;
+    attributes?: { [id: string]: ListAttributeValue };
+    initialFilter?: FilterValue[];
+    initialFilters?: { [id: string]: FilterValue[] };
 }
 
 export function getFilterDispatcher(): Context<FilterContextValue> | undefined {

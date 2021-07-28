@@ -42,7 +42,12 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The data grid date filter widget must be placed inside the header of the Data grid 2.0 widget.
+            The date filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+        </Alert>
+    );
+    const alertMessageMultipleFilters = (
+        <Alert bootstrapStyle="danger">
+            To use multiple filters you need to define a filter identification in the properties of date filter.
         </Alert>
     );
 
@@ -51,11 +56,34 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
-                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                if (
+                    !filterContextValue ||
+                    !filterContextValue.filterDispatcher ||
+                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                ) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
-                const defaultFilter = translateFilters(initialFilters);
+                const {
+                    filterDispatcher,
+                    attribute: singleAttribute,
+                    attributes: multipleAttributes,
+                    initialFilter: singleInitialFilter,
+                    initialFilters: multipleInitialFilters
+                } = filterContextValue;
+
+                if (multipleAttributes && !props.filterId) {
+                    return alertMessageMultipleFilters;
+                }
+
+                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+
+                if (!attribute) {
+                    return alertMessage;
+                }
+
+                const defaultFilter = singleInitialFilter
+                    ? translateFilters(singleInitialFilter)
+                    : translateFilters(multipleInitialFilters?.[props.filterId]);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -76,7 +104,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void =>
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, value, type)
+                                getFilterCondition: () => getFilterCondition(attribute, value, type),
+                                filterId: props.filterId
                             })
                         }
                     />

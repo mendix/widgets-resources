@@ -13,14 +13,22 @@ export type PagingPositionEnum = "below" | "above";
 
 export type ShowEmptyPlaceholderEnum = "none" | "custom";
 
+export interface FilterListType {
+    filter: ListAttributeValue<string | Big | boolean | Date>;
+    id: string;
+}
+
+export interface FilterListPreviewType {
+    filter: string;
+    id: string;
+}
+
 export interface GalleryContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
     datasource: ListValue;
-    filterAttribute: ListAttributeValue<string | Big | boolean | Date>;
-    filters?: ReactNode;
     content: ListWidgetValue;
     desktopItems: number;
     tabletItems: number;
@@ -31,6 +39,8 @@ export interface GalleryContainerProps {
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder?: ReactNode;
     itemClass?: ListExpressionValue<string>;
+    filterList: FilterListType[];
+    filtersPlaceholder?: ReactNode;
     onClick?: ListActionValue;
 }
 
@@ -38,8 +48,6 @@ export interface GalleryPreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
-    filterAttribute: string;
-    filters: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     desktopItems: number | null;
     tabletItems: number | null;
@@ -50,5 +58,7 @@ export interface GalleryPreviewProps {
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     itemClass: string;
+    filterList: FilterListPreviewType[];
+    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     onClick: {} | null;
 }

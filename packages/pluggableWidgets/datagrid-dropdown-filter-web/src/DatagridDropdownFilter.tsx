@@ -21,19 +21,48 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The data grid drop-down filter widget must be placed inside the header of the Data grid 2.0 widget.
+            The drop-down filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+        </Alert>
+    );
+
+    const alertMessageMultipleFilters = (
+        <Alert bootstrapStyle="danger">
+            To use multiple filters you need to define a filter identification in the properties of drop-down filter.
         </Alert>
     );
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
-                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                if (
+                    !filterContextValue ||
+                    !filterContextValue.filterDispatcher ||
+                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                ) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+                const {
+                    filterDispatcher,
+                    attribute: singleAttribute,
+                    attributes: multipleAttributes,
+                    initialFilter: singleInitialFilter,
+                    initialFilters: multipleInitialFilters
+                } = filterContextValue;
 
-                const defaultValues = initialFilters.map(filter => filter.value).join(",");
+                if (multipleAttributes && !props.filterId) {
+                    return alertMessageMultipleFilters;
+                }
+
+                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+
+                if (!attribute) {
+                    return alertMessage;
+                }
+
+                const defaultValues =
+                    (singleInitialFilter
+                        ? singleInitialFilter?.map(filter => filter.value).join(",")
+                        : multipleInitialFilters?.[props.filterId].map(filter => filter.value).join(",")) ?? "";
 
                 const errorMessage =
                     getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
@@ -54,7 +83,8 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         tabIndex={props.tabIndex}
                         updateFilters={(values: FilterOption[]): void =>
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, values)
+                                getFilterCondition: () => getFilterCondition(attribute, values),
+                                filterId: props.filterId
                             })
                         }
                     />

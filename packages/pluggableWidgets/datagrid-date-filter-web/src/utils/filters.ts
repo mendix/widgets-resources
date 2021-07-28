@@ -6,7 +6,7 @@ export type DefaultFilterValue = {
     value: Date;
 };
 
-export function translateFilters(filters: FilterValue[]): DefaultFilterValue | undefined {
+export function translateFilters(filters?: FilterValue[]): DefaultFilterValue | undefined {
     if (filters && filters.length > 0) {
         if (filters.length === 1) {
             const [filter] = filters;

@@ -127,7 +127,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                     return prev;
                                 },
                                 attribute,
-                                initialFilters
+                                initialFilter: initialFilters
                             }}
                         >
                             {filter}
