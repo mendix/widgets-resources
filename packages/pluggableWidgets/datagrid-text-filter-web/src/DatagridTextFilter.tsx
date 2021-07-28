@@ -30,11 +30,10 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of text filter.
+            To use multiple filters you need to define a filter identification in the properties of text filter or have
+            a &quot;Hashed string or String&quot; attribute available.
         </Alert>
     );
-
-    console.warn(FilterContext?.Consumer);
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
@@ -42,25 +41,25 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                 if (
                     !filterContextValue ||
                     !filterContextValue.filterDispatcher ||
-                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                    (!filterContextValue.singleAttribute && !filterContextValue.multipleAttributes)
                 ) {
                     return alertMessage;
                 }
                 const {
                     filterDispatcher,
-                    attribute: singleAttribute,
-                    attributes: multipleAttributes,
-                    initialFilter: singleInitialFilter,
-                    initialFilters: multipleInitialFilters
+                    singleAttribute,
+                    multipleAttributes,
+                    singleInitialFilter,
+                    multipleInitialFilters
                 } = filterContextValue;
 
-                if ((multipleAttributes?.length ?? 0) > 0 && !props.filterId) {
-                    return alertMessageMultipleFilters;
-                }
-
-                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+                const attribute =
+                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
 
                 if (!attribute) {
+                    if (multipleAttributes) {
+                        return alertMessageMultipleFilters;
+                    }
                     return alertMessage;
                 }
 
@@ -97,6 +96,17 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     ) : (
         alertMessage
     );
+}
+
+function findAttributeByType(multipleAttributes?: {
+    [key: string]: ListAttributeValue;
+}): ListAttributeValue | undefined {
+    if (!multipleAttributes) {
+        return undefined;
+    }
+    return Object.keys(multipleAttributes)
+        .map(key => multipleAttributes[key])
+        .find(attr => attr.type.match(/HashString|String/));
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {

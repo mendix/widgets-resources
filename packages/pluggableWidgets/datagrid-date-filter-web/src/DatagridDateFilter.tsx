@@ -47,7 +47,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of date filter.
+            To use multiple filters you need to define a filter identification in the properties of date filter or have
+            a &quot;Date and Time&quot; attribute available.
         </Alert>
     );
 
@@ -59,25 +60,25 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                 if (
                     !filterContextValue ||
                     !filterContextValue.filterDispatcher ||
-                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                    (!filterContextValue.singleAttribute && !filterContextValue.multipleAttributes)
                 ) {
                     return alertMessage;
                 }
                 const {
                     filterDispatcher,
-                    attribute: singleAttribute,
-                    attributes: multipleAttributes,
-                    initialFilter: singleInitialFilter,
-                    initialFilters: multipleInitialFilters
+                    singleAttribute,
+                    multipleAttributes,
+                    singleInitialFilter,
+                    multipleInitialFilters
                 } = filterContextValue;
 
-                if (multipleAttributes && !props.filterId) {
-                    return alertMessageMultipleFilters;
-                }
-
-                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+                const attribute =
+                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
 
                 if (!attribute) {
+                    if (multipleAttributes) {
+                        return alertMessageMultipleFilters;
+                    }
                     return alertMessage;
                 }
 
@@ -115,6 +116,17 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     ) : (
         alertMessage
     );
+}
+
+function findAttributeByType(multipleAttributes?: {
+    [key: string]: ListAttributeValue;
+}): ListAttributeValue | undefined {
+    if (!multipleAttributes) {
+        return undefined;
+    }
+    return Object.keys(multipleAttributes)
+        .map(key => multipleAttributes[key])
+        .find(attr => attr.type === "DateTime");
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {

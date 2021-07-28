@@ -11,10 +11,10 @@ export interface FilterFunction {
 
 export interface FilterContextValue {
     filterDispatcher: Dispatch<FilterFunction>;
-    attribute?: ListAttributeValue;
-    attributes?: { [id: string]: ListAttributeValue };
-    initialFilter?: FilterValue[];
-    initialFilters?: { [id: string]: FilterValue[] };
+    singleAttribute?: ListAttributeValue;
+    multipleAttributes?: { [id: string]: ListAttributeValue };
+    singleInitialFilter?: FilterValue[];
+    multipleInitialFilters?: { [id: string]: FilterValue[] };
 }
 
 export function getFilterDispatcher(): Context<FilterContextValue> | undefined {

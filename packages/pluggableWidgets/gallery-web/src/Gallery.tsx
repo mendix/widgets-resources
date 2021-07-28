@@ -34,6 +34,8 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
         [props.filterList]
     );
 
+    // TODO: Allow and between same attributes
+
     const customFiltersState = props.filterList
         .map(filter => ({ [filter.id]: useState<FilterFunction>() }))
         .reduce((filters, current) => ({ ...filters, ...current }), {});
@@ -65,8 +67,8 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                             setFiltered(true);
                             return prev;
                         },
-                        attributes: filterList,
-                        initialFilters
+                        multipleAttributes: filterList,
+                        multipleInitialFilters: initialFilters
                     }}
                 >
                     {props.filtersPlaceholder}

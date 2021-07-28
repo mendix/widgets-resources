@@ -27,7 +27,8 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of drop-down filter.
+            To use multiple filters you need to define a filter identification in the properties of drop-down filter or
+            have a &quot;Boolean or Enumeration&quot; attribute available.
         </Alert>
     );
 
@@ -37,25 +38,25 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 if (
                     !filterContextValue ||
                     !filterContextValue.filterDispatcher ||
-                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                    (!filterContextValue.singleAttribute && !filterContextValue.multipleAttributes)
                 ) {
                     return alertMessage;
                 }
                 const {
                     filterDispatcher,
-                    attribute: singleAttribute,
-                    attributes: multipleAttributes,
-                    initialFilter: singleInitialFilter,
-                    initialFilters: multipleInitialFilters
+                    singleAttribute,
+                    multipleAttributes,
+                    singleInitialFilter,
+                    multipleInitialFilters
                 } = filterContextValue;
 
-                if (multipleAttributes && !props.filterId) {
-                    return alertMessageMultipleFilters;
-                }
-
-                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+                const attribute =
+                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
 
                 if (!attribute) {
+                    if (multipleAttributes) {
+                        return alertMessageMultipleFilters;
+                    }
                     return alertMessage;
                 }
 
@@ -94,6 +95,17 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
     ) : (
         alertMessage
     );
+}
+
+function findAttributeByType(multipleAttributes?: {
+    [key: string]: ListAttributeValue;
+}): ListAttributeValue | undefined {
+    if (!multipleAttributes) {
+        return undefined;
+    }
+    return Object.keys(multipleAttributes)
+        .map(key => multipleAttributes[key])
+        .find(attr => attr.type.match(/Enum|Boolean/));
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {

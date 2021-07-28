@@ -28,7 +28,8 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of number filter.
+            To use multiple filters you need to define a filter identification in the properties of number filter or
+            have a &quot;Auto number, Decimal, Integer or Long&quot; attribute available.
         </Alert>
     );
 
@@ -38,25 +39,25 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                 if (
                     !filterContextValue ||
                     !filterContextValue.filterDispatcher ||
-                    (!filterContextValue.attribute && !filterContextValue.attributes)
+                    (!filterContextValue.singleAttribute && !filterContextValue.multipleAttributes)
                 ) {
                     return alertMessage;
                 }
                 const {
                     filterDispatcher,
-                    attribute: singleAttribute,
-                    attributes: multipleAttributes,
-                    initialFilter: singleInitialFilter,
-                    initialFilters: multipleInitialFilters
+                    singleAttribute,
+                    multipleAttributes,
+                    singleInitialFilter,
+                    multipleInitialFilters
                 } = filterContextValue;
 
-                if (multipleAttributes && !props.filterId) {
-                    return alertMessageMultipleFilters;
-                }
-
-                const attribute = singleAttribute ?? multipleAttributes?.[props.filterId];
+                const attribute =
+                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
 
                 if (!attribute) {
+                    if (multipleAttributes) {
+                        return alertMessageMultipleFilters;
+                    }
                     return alertMessage;
                 }
 
@@ -93,6 +94,17 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     ) : (
         alertMessage
     );
+}
+
+function findAttributeByType(multipleAttributes?: {
+    [key: string]: ListAttributeValue;
+}): ListAttributeValue | undefined {
+    if (!multipleAttributes) {
+        return undefined;
+    }
+    return Object.keys(multipleAttributes)
+        .map(key => multipleAttributes[key])
+        .find(attr => attr.type.match(/AutoNumber|Decimal|Integer|Long/));
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
