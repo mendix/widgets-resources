@@ -1,7 +1,7 @@
 {
   "name": "fieldset-web",
   "widgetName": "Fieldset",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A container to group several controls within a web form",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {
@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "8.3.1",
+    "minimumMXVersion": "9.0.5",
     "marketplaceId": 113922
   },
   "testProject": {
