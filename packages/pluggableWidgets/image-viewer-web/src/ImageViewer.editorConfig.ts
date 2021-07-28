@@ -1,6 +1,7 @@
 import {
     hidePropertiesIn,
     hidePropertyIn,
+    moveProperty,
     Problem,
     Properties,
     StructurePreviewProps,
@@ -23,6 +24,18 @@ function filterDataSourceProperties(sourceProperty: DatasourceEnum): ImageViewPr
             return dataSourceProperties.filter(prop => prop !== "imageIcon");
         default:
             return dataSourceProperties;
+    }
+}
+
+function reorderTabsForStudio(tabs: Properties): void {
+    const dimensionsTabIndex = tabs.findIndex(
+        tab => tab.caption === "Dimensions" && tab.properties && tab.properties.length > 0
+    );
+    const dataSourceTabIndex = tabs.findIndex(
+        tab => tab.caption === "Data source" && tab.properties && tab.properties.length > 0
+    );
+    if (dimensionsTabIndex >= 0 && dataSourceTabIndex >= 0) {
+        moveProperty(dimensionsTabIndex, dataSourceTabIndex + 1, tabs);
     }
 }
 
@@ -57,6 +70,7 @@ export function getProperties(
 
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
+        reorderTabsForStudio(defaultProperties);
     }
     return defaultProperties;
 }
