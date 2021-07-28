@@ -29,7 +29,7 @@ describe("Screenshots of the pages for", () => {
         if (!pagesToSkip.includes(url)) {
             it(`matches snapshot for page ${url}`, () => {
                 browser.url(url); // Open the page
-                browser.setWindowRect(0, 0, 1920, 1200);
+                browser.setWindowRect(0, 0, 1360, 1020);
 
                 // These widgets are causing unstable tests due to their nature while loading the screen
                 const sprintrFeedbackWidget = $(".sprintrFeedback__sidebar");

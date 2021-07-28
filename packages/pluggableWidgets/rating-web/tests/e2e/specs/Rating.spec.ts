@@ -11,6 +11,7 @@ describe("Rating", () => {
         const ratingWidget = $(".mx-name-rating1");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
         ratingWidget.waitForDisplayed({ timeout: 5000 });
+        browser.pause(1000);
         browser.saveElement(screenshotElem, "ratingPageContent");
 
         expect(browser.checkElement(screenshotElem, "ratingPageContent")).toBeLessThan(0.4);
