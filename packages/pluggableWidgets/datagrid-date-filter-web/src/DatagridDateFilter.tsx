@@ -5,7 +5,7 @@ import { FilterComponent } from "./components/FilterComponent";
 import { DatagridDateFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 import { registerLocale } from "react-datepicker";
 import * as locales from "date-fns/locale";
-import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import { changeTimeToMidnight } from "./utils/utils";
 import { addDays } from "date-fns";
@@ -72,8 +72,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                     multipleInitialFilters
                 } = filterContextValue;
 
-                const attribute =
-                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
+                const attribute = singleAttribute ?? findAttributesByType(multipleAttributes)?.[0];
 
                 if (!attribute) {
                     if (multipleAttributes) {
@@ -84,7 +83,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
                 const defaultFilter = singleInitialFilter
                     ? translateFilters(singleInitialFilter)
-                    : translateFilters(multipleInitialFilters?.[props.filterId]);
+                    : translateFilters(multipleInitialFilters?.[attribute.id]); // TODO: Restore all
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -103,12 +102,17 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
-                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void =>
+                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
+                            const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
+                            const conditions = attributes
+                                ?.map(attribute => getFilterCondition(attribute, value, type))
+                                .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, value, type),
-                                filterId: props.filterId
-                            })
-                        }
+                                getFilterCondition: () =>
+                                    conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
+                                filterType: FilterType.DATE
+                            });
+                        }}
                     />
                 );
             }}
@@ -118,15 +122,15 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     );
 }
 
-function findAttributeByType(multipleAttributes?: {
+function findAttributesByType(multipleAttributes?: {
     [key: string]: ListAttributeValue;
-}): ListAttributeValue | undefined {
+}): ListAttributeValue[] | undefined {
     if (!multipleAttributes) {
         return undefined;
     }
     return Object.keys(multipleAttributes)
         .map(key => multipleAttributes[key])
-        .find(attr => attr.type === "DateTime");
+        .filter(attr => attr.type === "DateTime");
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {

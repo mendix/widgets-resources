@@ -2,7 +2,7 @@ import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, u
 import { GalleryContainerProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
 import "./ui/gallery-main.scss";
-import { FilterFunction, useFilterContext } from "@mendix/piw-utils-internal";
+import { FilterFunction, FilterType, useFilterContext } from "@mendix/piw-utils-internal";
 import { FilterCondition } from "mendix/filters";
 import { extractFilters } from "./utils/filters";
 import { and } from "mendix/filters/builders";
@@ -21,27 +21,31 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
     const filterList = useMemo(
         () =>
             props.filterList
-                .map(filter => ({ [filter.id]: filter.filter }))
+                .map(({ filter }) => ({ [filter.id]: filter }))
                 .reduce((filters, current) => ({ ...filters, ...current }), {}),
         [props.filterList]
     );
 
+    // TODO: Needs to be fixed
     const initialFilters = useMemo(
         () =>
             props.filterList
-                .map(filter => ({ [filter.id]: extractFilters(filter.filter, viewStateFilters.current) }))
+                .map(filter => ({ [filter.filter.id]: extractFilters(filter.filter, viewStateFilters.current) }))
                 .reduce((filters, current) => ({ ...filters, ...current }), {}),
         [props.filterList]
     );
 
     // TODO: Allow and between same attributes
 
-    const customFiltersState = props.filterList
-        .map(filter => ({ [filter.id]: useState<FilterFunction>() }))
-        .reduce((filters, current) => ({ ...filters, ...current }), {});
+    const customFiltersState = {
+        [FilterType.STRING]: useState<FilterFunction>(),
+        [FilterType.NUMBER]: useState<FilterFunction>(),
+        [FilterType.DATE]: useState<FilterFunction>(),
+        [FilterType.ENUMERATION]: useState<FilterFunction>()
+    };
 
     const filters = Object.keys(customFiltersState)
-        .map((key: string) => customFiltersState[key][0]?.getFilterCondition?.())
+        .map((key: FilterType) => customFiltersState[key][0]?.getFilterCondition())
         .filter((filter): filter is FilterCondition => filter !== undefined);
 
     if (filters.length > 0) {
@@ -60,10 +64,11 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                 <FilterContext.Provider
                     value={{
                         filterDispatcher: prev => {
-                            if (prev.filterId && prev.filterId in customFiltersState) {
-                                const [, filterDispatcher] = customFiltersState[prev.filterId];
-                                filterDispatcher?.(prev);
+                            if (prev.filterType) {
+                                const [, filterDispatcher] = customFiltersState[prev.filterType];
+                                filterDispatcher(prev);
                             }
+
                             setFiltered(true);
                             return prev;
                         },

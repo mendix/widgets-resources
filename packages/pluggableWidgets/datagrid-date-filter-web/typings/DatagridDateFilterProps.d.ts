@@ -17,7 +17,6 @@ export interface DatagridDateFilterContainerProps {
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
     adjustable: boolean;
-    filterId: string;
     screenReaderButtonCaption?: DynamicValue<string>;
     screenReaderInputCaption?: DynamicValue<string>;
 }
@@ -29,7 +28,6 @@ export interface DatagridDateFilterPreviewProps {
     defaultFilter: DefaultFilterEnum;
     placeholder: string;
     adjustable: boolean;
-    filterId: string;
     screenReaderButtonCaption: string;
     screenReaderInputCaption: string;
 }

@@ -17,7 +17,6 @@ export interface DatagridTextFilterContainerProps {
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
     adjustable: boolean;
-    filterId: string;
     delay: number;
     screenReaderButtonCaption?: DynamicValue<string>;
     screenReaderInputCaption?: DynamicValue<string>;
@@ -30,7 +29,6 @@ export interface DatagridTextFilterPreviewProps {
     defaultFilter: DefaultFilterEnum;
     placeholder: string;
     adjustable: boolean;
-    filterId: string;
     delay: number | null;
     screenReaderButtonCaption: string;
     screenReaderInputCaption: string;

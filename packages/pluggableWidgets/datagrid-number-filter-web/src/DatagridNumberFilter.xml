@@ -35,10 +35,6 @@
                     <caption>Adjustable by user</caption>
                     <description />
                 </property>
-                <property key="filterId" type="string" required="false">
-                    <caption>Filter identification</caption>
-                    <description>An identification to match an attribute when multiple attributes are available.</description>
-                </property>
             </propertyGroup>
             <propertyGroup caption="On change behavior">
                 <property key="delay" type="integer" defaultValue="500">

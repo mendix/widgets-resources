@@ -90,10 +90,6 @@
                                     <attributeType name="Long"/>
                                 </attributeTypes>
                             </property>
-                            <property key="id" type="string">
-                                <caption>Filter identification</caption>
-                                <description>An identification to match a filter widget. Example: myfilter</description>
-                            </property>
                         </propertyGroup>
                     </properties>
                 </property>

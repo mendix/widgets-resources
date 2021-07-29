@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridNumberFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridNumberFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 
 import {
@@ -13,7 +13,8 @@ import {
     lessThan,
     lessThanOrEqual,
     literal,
-    notEqual
+    notEqual,
+    or
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
@@ -51,8 +52,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                     multipleInitialFilters
                 } = filterContextValue;
 
-                const attribute =
-                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
+                const attribute = singleAttribute ?? findAttributesByType(multipleAttributes)?.[0];
 
                 if (!attribute) {
                     if (multipleAttributes) {
@@ -63,7 +63,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
 
                 const defaultFilter = singleInitialFilter
                     ? translateFilters(singleInitialFilter)
-                    : translateFilters(multipleInitialFilters?.[props.filterId]);
+                    : translateFilters(multipleInitialFilters?.[attribute.id]); // TODO: Restore all
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -80,12 +80,17 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
-                        updateFilters={(value: Big | undefined, type: DefaultFilterEnum): void =>
+                        updateFilters={(value: Big | undefined, type: DefaultFilterEnum): void => {
+                            const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
+                            const conditions = attributes
+                                ?.map(attribute => getFilterCondition(attribute, value, type))
+                                .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, value, type),
-                                filterId: props.filterId
-                            })
-                        }
+                                getFilterCondition: () =>
+                                    conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
+                                filterType: FilterType.NUMBER
+                            });
+                        }}
                         value={defaultFilter?.value ?? props.defaultValue?.value}
                     />
                 );
@@ -96,15 +101,15 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     );
 }
 
-function findAttributeByType(multipleAttributes?: {
+function findAttributesByType(multipleAttributes?: {
     [key: string]: ListAttributeValue;
-}): ListAttributeValue | undefined {
+}): ListAttributeValue[] | undefined {
     if (!multipleAttributes) {
         return undefined;
     }
     return Object.keys(multipleAttributes)
         .map(key => multipleAttributes[key])
-        .find(attr => attr.type.match(/AutoNumber|Decimal|Integer|Long/));
+        .filter(attr => attr.type.match(/AutoNumber|Decimal|Integer|Long/));
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {

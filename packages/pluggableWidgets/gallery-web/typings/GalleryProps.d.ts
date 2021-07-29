@@ -15,12 +15,10 @@ export type ShowEmptyPlaceholderEnum = "none" | "custom";
 
 export interface FilterListType {
     filter: ListAttributeValue<string | Big | boolean | Date>;
-    id: string;
 }
 
 export interface FilterListPreviewType {
     filter: string;
-    id: string;
 }
 
 export interface GalleryContainerProps {

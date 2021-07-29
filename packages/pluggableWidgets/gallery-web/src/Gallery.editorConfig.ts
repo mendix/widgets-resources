@@ -52,14 +52,6 @@ export function check(values: GalleryPreviewProps): Problem[] {
             message: "Tablet items must be a number between 1 and 12"
         });
     }
-    values.filterList.forEach((filter, index, items) => {
-        if (items.filter(f => f.id === filter.id).length > 1) {
-            errors.push({
-                property: `filterList/${index + 1}/id`,
-                message: "The identification of each filter should be unique."
-            });
-        }
-    });
     return errors;
 }
 

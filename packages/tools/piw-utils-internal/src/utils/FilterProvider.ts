@@ -4,13 +4,20 @@ import { FilterCondition } from "mendix/filters";
 
 export type FilterValue = { type: string; value: any };
 
+export const enum FilterType {
+    STRING = "string",
+    NUMBER = "number",
+    ENUMERATION = "enum",
+    DATE = "date"
+}
+
 export interface FilterFunction {
     getFilterCondition: () => FilterCondition | undefined;
-    filterId?: string;
+    filterType?: FilterType;
 }
 
 export interface FilterContextValue {
-    filterDispatcher: Dispatch<FilterFunction>;
+    filterDispatcher?: Dispatch<FilterFunction>;
     singleAttribute?: ListAttributeValue;
     multipleAttributes?: { [id: string]: ListAttributeValue };
     singleInitialFilter?: FilterValue[];

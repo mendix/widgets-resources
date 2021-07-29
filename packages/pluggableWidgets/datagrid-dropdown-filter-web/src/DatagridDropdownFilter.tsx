@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
 import { ValueStatus, ListAttributeValue } from "mendix";
 import { FilterComponent, FilterOption } from "./components/FilterComponent";
-import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
@@ -50,8 +50,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                     multipleInitialFilters
                 } = filterContextValue;
 
-                const attribute =
-                    singleAttribute ?? multipleAttributes?.[props.filterId] ?? findAttributeByType(multipleAttributes);
+                const attribute = singleAttribute ?? findAttributesByType(multipleAttributes)?.[0];
 
                 if (!attribute) {
                     if (multipleAttributes) {
@@ -63,7 +62,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 const defaultValues =
                     (singleInitialFilter
                         ? singleInitialFilter?.map(filter => filter.value).join(",")
-                        : multipleInitialFilters?.[props.filterId].map(filter => filter.value).join(",")) ?? "";
+                        : multipleInitialFilters?.[attribute.id].map(filter => filter.value).join(",")) ?? ""; // TODO: Restore all
 
                 const errorMessage =
                     getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
@@ -82,12 +81,19 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         name={props.name}
                         options={parsedOptions}
                         tabIndex={props.tabIndex}
-                        updateFilters={(values: FilterOption[]): void =>
+                        updateFilters={(values: FilterOption[]): void => {
+                            // TODO: Auto read universe from all attributes and add as possible values
+                            // TODO: When creating filter conditions, they should match the attributes containing the values in their universes.
+                            const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
+                            const conditions = attributes
+                                ?.map(attribute => getFilterCondition(attribute, values))
+                                .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, values),
-                                filterId: props.filterId
-                            })
-                        }
+                                getFilterCondition: () =>
+                                    conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
+                                filterType: FilterType.ENUMERATION
+                            });
+                        }}
                     />
                 );
             }}
@@ -97,15 +103,15 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
     );
 }
 
-function findAttributeByType(multipleAttributes?: {
+function findAttributesByType(multipleAttributes?: {
     [key: string]: ListAttributeValue;
-}): ListAttributeValue | undefined {
+}): ListAttributeValue[] | undefined {
     if (!multipleAttributes) {
         return undefined;
     }
     return Object.keys(multipleAttributes)
         .map(key => multipleAttributes[key])
-        .find(attr => attr.type.match(/Enum|Boolean/));
+        .filter(attr => attr.type.match(/Enum|Boolean/));
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
@@ -126,7 +132,10 @@ function validateValues(listAttribute: ListAttributeValue, options: FilterOption
         : null;
 }
 
-function getFilterCondition(listAttribute: ListAttributeValue, values: FilterOption[]): FilterCondition | undefined {
+function getFilterCondition(
+    listAttribute: ListAttributeValue | undefined,
+    values: FilterOption[]
+): FilterCondition | undefined {
     if (!listAttribute || !listAttribute.filterable || values.length === 0) {
         return undefined;
     }
