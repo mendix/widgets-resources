@@ -10,15 +10,15 @@ import {
     useState
 } from "react";
 import classNames from "classnames";
-
-import "../ui/TreeView.scss";
+import { Icon } from "@mendix/piw-utils-internal";
 import { ShowIconEnum } from "../../typings/TreeViewProps";
-import { Icon } from "./Icon";
 import {
     TreeViewBranchContextProps,
     TreeViewBranchContext,
     useInformParentContextToHaveChildNodes
 } from "./TreeViewBranchContext";
+
+import "../ui/TreeView.scss";
 
 export interface TreeViewObject extends ObjectItem {
     value: string | ReactNode | undefined;
