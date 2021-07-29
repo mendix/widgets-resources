@@ -5,7 +5,7 @@ import "../ui/Sidebar.scss";
 import { registerSidebar } from "../utils/SidebarRegistration";
 import { Alert } from "@mendix/piw-utils-internal";
 
-interface SidebarProps {
+export interface SidebarProps {
     name: string;
     className?: string;
     style?: CSSProperties;
