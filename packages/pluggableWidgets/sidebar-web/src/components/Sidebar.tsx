@@ -2,7 +2,7 @@ import { createElement, CSSProperties, PropsWithChildren, ReactElement, useEffec
 import classNames from "classnames";
 
 import "../ui/Sidebar.scss";
-import { registerSidebar } from "../utils/SidebarRegistration";
+import { registerSidebarToggle } from "../utils/SidebarToggleRegistration";
 import { Alert } from "@mendix/piw-utils-internal";
 
 export interface SidebarProps {
@@ -32,18 +32,15 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
 
     useEffect(() => {
         if (props.collapsible) {
-            let unregisterSidebar: () => void;
+            let unregisterSidebarToggle: () => void;
 
             try {
-                unregisterSidebar = registerSidebar({
-                    name: props.name,
-                    toggleExpanded: () => setExpanded(prevExpanded => !prevExpanded)
-                });
+                unregisterSidebarToggle = registerSidebarToggle(() => setExpanded(prevExpanded => !prevExpanded));
             } catch (e) {
                 setError(e.message);
             }
 
-            return () => unregisterSidebar();
+            return () => unregisterSidebarToggle();
         }
     }, [props.name, props.collapsible]);
 
