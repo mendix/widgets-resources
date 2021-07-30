@@ -12,7 +12,7 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    if (values.toggleMode === "none" && values.toggleMode === "push" && values.toggleMode === "slideOver") {
+    if (values.toggleMode === "none" || values.toggleMode === "push" || values.toggleMode === "slideOver") {
         hidePropertiesIn(defaultProperties, values, ["collapsedWidthUnit", "collapsedWidthValue"]);
 
         if (values.toggleMode === "none") {
