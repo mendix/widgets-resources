@@ -67,6 +67,10 @@ describe("Sidebar", () => {
     it("is toggleable when collapsible", () => {
         const sidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
 
+        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+            "widget-sidebar-expanded"
+        );
+
         act(() => {
             (window as any)["com.mendix.widgets.web.sidebar.toggle"]?.();
         });
@@ -83,6 +87,9 @@ describe("Sidebar", () => {
             <Sidebar {...defaultSidebarProps} collapsible={false} expandedWidth={undefined} width={500} />
         );
 
+        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+            "widget-sidebar-expanded"
+        );
         expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
 
         act(() => {
