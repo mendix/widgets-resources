@@ -21,7 +21,7 @@
     "@mendix/piw-native-utils-internal": "^1.0.0",
     "@mendix/piw-utils-internal": "^1.0.0",
     "react-native-barcode-mask": "^1.2.4",
-    "react-native-camera": "3.19.2"
+    "react-native-camera": "3.44.3"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
