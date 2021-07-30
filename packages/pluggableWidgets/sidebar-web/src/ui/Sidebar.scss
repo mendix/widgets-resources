@@ -1,0 +1,12 @@
+.widget-sidebar {
+    background-color: #24276c;
+    height: 100%;
+    width: 0;
+    transition: width 0.2s ease-in;
+}
+
+.widget-sidebar-slide-over {
+    overflow: hidden;
+    position: absolute;
+    z-index: 999;
+}
