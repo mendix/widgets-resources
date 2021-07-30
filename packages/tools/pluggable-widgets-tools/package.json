@@ -83,7 +83,7 @@
     "jest-react-hooks-shallow": "^1.4.1",
     "jest-svg-transformer": "^1.0.0",
     "mendix": "^9.4.24572",
-    "metro-react-native-babel-preset": "~0.63.0",
+    "metro-react-native-babel-preset": "~0.66.1",
     "node-fetch": "^2.6.1",
     "postcss": "^8.1.10",
     "postcss-url": "^10.1.0",
