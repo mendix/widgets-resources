@@ -139,20 +139,29 @@ function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttribute
 
 const treeViewBodyClassName = "widget-tree-view-body";
 
+const enum TreeViewState {
+    COLLAPSED_WITH_JS = "COLLAPSED_WITH_JS",
+    COLLAPSED_WITH_CSS = "COLLAPSED_WITH_CSS",
+    EXPANDED = "EXPANDED"
+}
+
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const { level: currentContextLevel } = useContext(TreeViewBranchContext);
-    const [treeViewState, setTreeViewState] = useState<"COLLAPSED_WITH_JS" | "COLLAPSED_WITH_CSS" | "EXPANDED">(
-        !props.shouldLazyLoad && props.startExpanded ? "EXPANDED" : "COLLAPSED_WITH_JS"
+    const [treeViewState, setTreeViewState] = useState<TreeViewState>(
+        !props.shouldLazyLoad && props.startExpanded ? TreeViewState.EXPANDED : TreeViewState.COLLAPSED_WITH_JS
     );
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
     const toggleTreeViewContent = useCallback(() => {
         if (!isActualLeafNode) {
             setTreeViewState(treeViewState => {
-                if (treeViewState === "COLLAPSED_WITH_JS" || treeViewState === "COLLAPSED_WITH_CSS") {
-                    return "EXPANDED";
+                if (
+                    treeViewState === TreeViewState.COLLAPSED_WITH_JS ||
+                    treeViewState === TreeViewState.COLLAPSED_WITH_CSS
+                ) {
+                    return TreeViewState.EXPANDED;
                 }
-                return props.shouldLazyLoad ? "COLLAPSED_WITH_CSS" : "COLLAPSED_WITH_JS";
+                return props.shouldLazyLoad ? TreeViewState.COLLAPSED_WITH_CSS : TreeViewState.COLLAPSED_WITH_JS;
             });
         }
     }, [isActualLeafNode, props.shouldLazyLoad]);
@@ -189,9 +198,9 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
                 {!isActualLeafNode &&
                     props.iconPlacement !== "no" &&
-                    props.renderHeaderIcon(treeViewState === "EXPANDED")}
+                    props.renderHeaderIcon(treeViewState === TreeViewState.EXPANDED)}
             </header>
-            {!isActualLeafNode && treeViewState !== "COLLAPSED_WITH_JS" && (
+            {!isActualLeafNode && treeViewState !== TreeViewState.COLLAPSED_WITH_JS && (
                 <TreeViewBranchContext.Provider
                     value={{
                         level: currentContextLevel + 1,
@@ -201,7 +210,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 >
                     <div
                         className={classNames(treeViewBodyClassName, {
-                            "widget-tree-view-branch-hidden": treeViewState === "COLLAPSED_WITH_CSS"
+                            "widget-tree-view-branch-hidden": treeViewState === TreeViewState.COLLAPSED_WITH_CSS
                         })}
                     >
                         {props.children}
