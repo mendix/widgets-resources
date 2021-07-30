@@ -21,7 +21,7 @@
     "@mendix/piw-utils-internal": "^1.0.0",
     "prop-types": "^15.7.2",
     "react-native-geocoder": "0.5.0",
-    "react-native-maps": "0.27.0"
+    "react-native-maps": "0.29.1"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
