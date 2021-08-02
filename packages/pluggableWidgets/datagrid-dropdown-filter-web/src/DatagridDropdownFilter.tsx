@@ -67,12 +67,11 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 
                 const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
 
-                const defaultValues =
-                    (singleInitialFilter
-                        ? singleInitialFilter?.map(filter => filter.value).join(",")
-                        : attributes
-                              ?.flatMap(attribute => multipleInitialFilters?.[attribute.id].map(filter => filter.value))
-                              .join(",")) ?? "";
+                const defaultValues = singleInitialFilter
+                    ? singleInitialFilter?.map(filter => filter.value).join(",")
+                    : attributes
+                          ?.flatMap(attribute => multipleInitialFilters?.[attribute.id].map(filter => filter.value))
+                          .join(",");
 
                 const options = props.auto
                     ? attributes?.flatMap(attribute =>
@@ -88,7 +87,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 return (
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
-                        defaultValue={defaultValues.length > 0 ? defaultValues : props.defaultValue?.value}
+                        defaultValue={defaultValues ?? props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         name={props.name}

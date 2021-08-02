@@ -31,7 +31,8 @@
     "release": "pluggable-widgets-tools release:ts"
   },
   "dependencies": {
-    "@mendix/piw-utils-internal": "^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "deep-equal": "^2.0.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
