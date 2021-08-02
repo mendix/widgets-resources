@@ -65,7 +65,7 @@ export default async args => {
                     ...getClientComponentPlugins(),
                     url({ include: imagesAndFonts, limit: 100000 }),
                     sass({
-                        output: outputFormat === "amd",
+                        output: production && outputFormat === "amd",
                         insert: !production,
                         include: /\.(css|sass|scss)$/,
                         processor
