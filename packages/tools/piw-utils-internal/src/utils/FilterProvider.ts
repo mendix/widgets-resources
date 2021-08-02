@@ -1,4 +1,4 @@
-import { Context, createContext, Dispatch } from "react";
+import { Context, createContext, Dispatch, SetStateAction, useState } from "react";
 import { ListAttributeValue } from "mendix";
 import { FilterCondition } from "mendix/filters";
 
@@ -38,4 +38,15 @@ export function useFilterContext(): { FilterContext: Context<FilterContextValue>
 
     (window as any)["com.mendix.widgets.web.filterable.filterContext"] = FilterContext;
     return { FilterContext };
+}
+
+export function useMultipleFiltering(): {
+    [key: string]: [FilterFunction | undefined, Dispatch<SetStateAction<FilterFunction | undefined>>];
+} {
+    return {
+        [FilterType.STRING]: useState<FilterFunction>(),
+        [FilterType.NUMBER]: useState<FilterFunction>(),
+        [FilterType.DATE]: useState<FilterFunction>(),
+        [FilterType.ENUMERATION]: useState<FilterFunction>()
+    };
 }

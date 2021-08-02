@@ -38,6 +38,10 @@ export type PagingPositionEnum = "bottom" | "top";
 
 export type ShowEmptyPlaceholderEnum = "none" | "custom";
 
+export interface FilterListType {
+    filter: ListAttributeValue<string | Big | boolean | Date>;
+}
+
 export interface ColumnsPreviewType {
     showContentAs: ShowContentAsEnum;
     attribute: string;
@@ -53,6 +57,10 @@ export interface ColumnsPreviewType {
     size: number | null;
     alignment: AlignmentEnum;
     columnClass: string;
+}
+
+export interface FilterListPreviewType {
+    filter: string;
 }
 
 export interface DatagridContainerProps {
@@ -76,6 +84,9 @@ export interface DatagridContainerProps {
     columnsHidable: boolean;
     configurationAttribute?: EditableValue<string>;
     onConfigurationChange?: ActionValue;
+    showHeaderFilters: boolean;
+    filterList: FilterListType[];
+    filtersPlaceholder?: ReactNode;
     advanced: boolean;
 }
 
@@ -98,5 +109,8 @@ export interface DatagridPreviewProps {
     columnsHidable: boolean;
     configurationAttribute: string;
     onConfigurationChange: {} | null;
+    showHeaderFilters: boolean;
+    filterList: FilterListPreviewType[];
+    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     advanced: boolean;
 }

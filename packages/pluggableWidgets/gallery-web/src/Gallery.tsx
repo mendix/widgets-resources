@@ -2,7 +2,7 @@ import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, u
 import { GalleryContainerProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
 import "./ui/gallery-main.scss";
-import { FilterFunction, FilterType, useFilterContext } from "@mendix/piw-utils-internal";
+import { FilterType, useFilterContext, useMultipleFiltering } from "@mendix/piw-utils-internal";
 import { FilterCondition } from "mendix/filters";
 import { extractFilters } from "./utils/filters";
 import { and } from "mendix/filters/builders";
@@ -10,6 +10,7 @@ import { and } from "mendix/filters/builders";
 export function Gallery(props: GalleryContainerProps): ReactElement {
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
     const [filtered, setFiltered] = useState(false);
+    const customFiltersState = useMultipleFiltering();
     const { FilterContext } = useFilterContext();
 
     useEffect(() => {
@@ -26,23 +27,13 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
         [props.filterList]
     );
 
-    // TODO: Needs to be fixed
     const initialFilters = useMemo(
         () =>
             props.filterList
                 .map(filter => ({ [filter.filter.id]: extractFilters(filter.filter, viewStateFilters.current) }))
                 .reduce((filters, current) => ({ ...filters, ...current }), {}),
-        [props.filterList]
+        [props.filterList, viewStateFilters.current]
     );
-
-    // TODO: Allow and between same attributes
-
-    const customFiltersState = {
-        [FilterType.STRING]: useState<FilterFunction>(),
-        [FilterType.NUMBER]: useState<FilterFunction>(),
-        [FilterType.DATE]: useState<FilterFunction>(),
-        [FilterType.ENUMERATION]: useState<FilterFunction>()
-    };
 
     const filters = Object.keys(customFiltersState)
         .map((key: FilterType) => customFiltersState[key][0]?.getFilterCondition())
@@ -60,25 +51,27 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
         <GalleryComponent
             className={props.class}
             desktopItems={props.desktopItems}
-            filters={
-                <FilterContext.Provider
-                    value={{
-                        filterDispatcher: prev => {
-                            if (prev.filterType) {
-                                const [, filterDispatcher] = customFiltersState[prev.filterType];
-                                filterDispatcher(prev);
-                            }
-
-                            setFiltered(true);
-                            return prev;
-                        },
-                        multipleAttributes: filterList,
-                        multipleInitialFilters: initialFilters
-                    }}
-                >
-                    {props.filtersPlaceholder}
-                </FilterContext.Provider>
-            }
+            filters={useMemo(
+                () => (
+                    <FilterContext.Provider
+                        value={{
+                            filterDispatcher: prev => {
+                                if (prev.filterType) {
+                                    const [, filterDispatcher] = customFiltersState[prev.filterType];
+                                    filterDispatcher(prev);
+                                    setFiltered(true);
+                                }
+                                return prev;
+                            },
+                            multipleAttributes: filterList,
+                            multipleInitialFilters: initialFilters
+                        }}
+                    >
+                        {props.filtersPlaceholder}
+                    </FilterContext.Provider>
+                ),
+                [FilterContext, customFiltersState, filterList, initialFilters, props.filtersPlaceholder]
+            )}
             items={props.datasource.items ?? []}
             itemRenderer={useCallback(
                 (renderWrapper, item) =>

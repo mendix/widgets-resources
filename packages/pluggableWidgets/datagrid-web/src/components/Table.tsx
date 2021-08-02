@@ -41,6 +41,7 @@ export interface TableProps<T> {
     emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
     hasMoreItems: boolean;
+    headerFilters?: ReactNode;
     headerWrapperRenderer: (columnIndex: number, header: ReactElement) => ReactElement;
     numberOfItems?: number;
     paging: boolean;
@@ -231,6 +232,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
         <div className={props.className} style={props.styles}>
             <div className="table" role="table">
                 <div className="table-header">{props.pagingPosition === "top" && pagination}</div>
+                {props.headerFilters && <div className="header-filters">{props.headerFilters}</div>}
                 <InfiniteBody
                     hasMoreItems={props.hasMoreItems}
                     isInfinite={isInfinite}
