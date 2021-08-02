@@ -1,5 +1,4 @@
-import { createElement, Fragment, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ListAttributeValue } from "mendix";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 
@@ -10,8 +9,6 @@ export interface FilterOption {
 
 interface FilterComponentProps {
     ariaLabel?: string;
-    attribute?: ListAttributeValue;
-    auto?: boolean;
     emptyOptionCaption?: string;
     multiSelect?: boolean;
     name?: string;
@@ -53,21 +50,10 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setShow(false);
             }
         },
-        [selectedFilters, props.emptyOptionCaption, props.multiSelect]
+        [selectedFilters, props.multiSelect, setSelectedFilters, setMultiSelectFilters]
     );
 
     useOnClickOutside(componentRef, () => setShow(false));
-
-    const availableOptions = useMemo(
-        () =>
-            props.auto
-                ? props.attribute?.universe?.map(value => ({
-                      caption: props.attribute?.formatter.format(value) ?? "",
-                      value: value?.toString() ?? ""
-                  })) ?? []
-                : props.options,
-        [props.auto, props.attribute, props.options]
-    );
 
     // Select the first option Or default option on load
     useEffect(() => {
@@ -75,7 +61,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             if (props.defaultValue) {
                 const initialOptions = props.defaultValue
                     .split(",")
-                    .map(value => availableOptions.find(option => option.value === value))
+                    .map(value => props.options.find(option => option.value === value))
                     .filter(Boolean) as FilterOption[];
 
                 // User can set anything, but it could not match so we have to set to empty or ""
@@ -84,13 +70,10 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setValueInput(props.emptyOptionCaption ?? "");
             }
 
-            setOptions(availableOptions);
+            setOptions(props.options);
         } else {
             // We want to add empty option caption
-            const optionsWithEmptyCaption = [
-                { caption: props.emptyOptionCaption ?? "", value: "" },
-                ...availableOptions
-            ];
+            const optionsWithEmptyCaption = [{ caption: props.emptyOptionCaption ?? "", value: "" }, ...props.options];
             const initialOption =
                 optionsWithEmptyCaption.find(option => option.value === props.defaultValue) ??
                 optionsWithEmptyCaption[0];
@@ -99,7 +82,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             setSelectedFilters([initialOption]);
             setOptions(optionsWithEmptyCaption);
         }
-    }, [props.defaultValue, availableOptions, props.emptyOptionCaption]);
+    }, [props.defaultValue]);
 
     useEffect(() => {
         props.updateFilters?.(selectedFilters);

@@ -59,32 +59,42 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                     return alertMessage;
                 }
 
-                const defaultValues =
-                    (singleInitialFilter
-                        ? singleInitialFilter?.map(filter => filter.value).join(",")
-                        : multipleInitialFilters?.[attribute.id].map(filter => filter.value).join(",")) ?? ""; // TODO: Restore all
-
                 const errorMessage =
                     getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
                 if (errorMessage) {
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
 
+                const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
+
+                const defaultValues =
+                    (singleInitialFilter
+                        ? singleInitialFilter?.map(filter => filter.value).join(",")
+                        : attributes
+                              ?.flatMap(attribute => multipleInitialFilters?.[attribute.id].map(filter => filter.value))
+                              .join(",")) ?? "";
+
+                const options = props.auto
+                    ? attributes?.flatMap(attribute =>
+                          attribute.universe
+                              ? attribute.universe.map(value => ({
+                                    caption: attribute.formatter.format(value) ?? "",
+                                    value: value?.toString() ?? ""
+                                }))
+                              : []
+                      ) ?? []
+                    : parsedOptions;
+
                 return (
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
-                        attribute={attribute}
-                        auto={props.auto}
                         defaultValue={defaultValues.length > 0 ? defaultValues : props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         name={props.name}
-                        options={parsedOptions}
+                        options={options}
                         tabIndex={props.tabIndex}
                         updateFilters={(values: FilterOption[]): void => {
-                            // TODO: Auto read universe from all attributes and add as possible values
-                            // TODO: When creating filter conditions, they should match the attributes containing the values in their universes.
-                            const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, values))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);
@@ -142,6 +152,14 @@ function getFilterCondition(
 
     const { id, type } = listAttribute;
     const filterAttribute = attribute(id);
+
+    if (
+        values.some(
+            filterOption => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
+        )
+    ) {
+        return undefined;
+    }
 
     if (values.length > 1) {
         return or(...values.map(filter => equals(filterAttribute, literal(checkValue(filter.value, type)))));
