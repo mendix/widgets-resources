@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.dropdownsort.DropdownSort" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Drop-down sort</name>
+    <description/>
+    <studioProCategory>Sort</studioProCategory>
+    <studioCategory>Sort</studioCategory>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAtFBMVEUAAABV//9Ns/9mZmZJtv9Vu/9JtvhJsPlVVVVIs/tLtPtMs/dLsPhVVVVJsvhXV1dIs/hWVlZVVVVKsvlJs/lJsPpXV1dKsvdVVVVKsfhJsvhJsfhIsfhIsPlVVVVJsfdWVlZIsPdKsfdJsPhJsfhJsfhVVVVJsPhIsfhIsfhJsfhIsfhJsfhJsfdVVVVIsPdWVlZJsPdVVVVJsfdJsfdIsPdIsPdJsfhVVVVIsPhIsPdVVVUbiIIIAAAAOnRSTlMAAwoKDg8jKio8PUBESElJSkpLVldeXmBgb3CJip+foKCio7y91dXW19ja293h4eLi4+Pk5+zt9fX6/A3sdwAAAYRJREFUeAHtlWlPwkAQhilIuQ+oHIICcoAcYreA0OX//y9nXKrb2DWZ2Q/GpM+HTZPhfULfnaSZlP9GZb2u2OQdIaVwLAQlCZQtBEMUPFoIVih44edd+YnLFjwowYAtmCnBPGOmEQQN4/AuVIIwbxYE12tgHHoQXi3guDcLroBxOIXsEG9yyhM4J9wi3KV3hyXA6MlRGpbg9uefcRlZAlxD71YlR+CqC1SX6TIEA6kxYAhmumBOF+RDXRDmyQJPxvCoArWG2n2SBUdIldRjGR6PZMEBQs5tp0EmyILmm6h/PR9emwSBgT8QpIK6kBqbKlkgZIydrWBr+Qqywy+xh/kx/xYKZ8gvsj8HLT9oR4J24LcM+Sx+2s6F5K/ipagExYv5C/kkgV7SxIfoMoeC3BIOn1xAF7MjPCZ4dGkFIJD7ZkIsAMF/HrHMJf5kbCwAwe4U2CaxAEU/EvTpBcRqGDEK0GtgFaDVYCigI3VE3WCo7fe15MlWxg0ZKjtbQXXz2yukpHwAAOGFaGtXJegAAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="emptyOptionCaption" type="textTemplate" required="false">
+                    <caption>Empty option caption</caption>
+                    <description />
+                </property>
+                <property key="sortOrder" type="enumeration" defaultValue="asc">
+                    <caption>Sort order</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="asc">Ascending</enumerationValue>
+                        <enumerationValue key="desc">Descending</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Accessibility">
+                <property key="ariaLabel" type="textTemplate" required="false">
+                    <caption>Screen reader caption</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
