@@ -3,12 +3,11 @@ import page from "../../../../../../configs/e2e/src/pages/page";
 describe("accordion-web", () => {
     beforeEach(() => {
         page.open(); // resets page
+        browser.pause(1000);
     });
     it("compares with a screenshot baseline and checks if all accordion elements are rendered as expected", () => {
-        browser.setWindowRect(0, 0, 1200, 900);
         const screenshotElem = $(".mx-name-container2");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
-        browser.saveElement(screenshotElem, "accordionPageContent");
 
         expect(browser.checkElement(screenshotElem, "accordionPageContent")).toEqual(0);
     });

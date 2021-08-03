@@ -4,6 +4,7 @@ import badgeButtonWidget from "../objects/badgeButton.widget";
 describe("BadgeButton", () => {
     beforeAll(() => {
         page.open();
+        browser.pause(1000);
     });
 
     it("displays correctly dynamic data", () => {
@@ -28,10 +29,9 @@ describe("BadgeButton", () => {
     });
 
     it("compares with a screenshot baseline and checks if all badge buttons elements are rendered as expected", () => {
-        browser.setWindowRect(0, 0, 1200, 900);
         const screenshotElem = $(".mx-name-table1");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
-        browser.saveElement(screenshotElem, "badgeButtonPageContent");
+
         expect(browser.checkElement(screenshotElem, "badgeButtonPageContent")).toEqual(0);
     });
 });

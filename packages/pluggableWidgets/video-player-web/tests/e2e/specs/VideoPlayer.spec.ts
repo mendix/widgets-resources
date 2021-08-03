@@ -85,10 +85,11 @@ describe("Error page", () => {
 describe("External video", () => {
     it("renders a poster", () => {
         page.open("p/external");
-        browser.setWindowRect(0, 0, 1200, 900);
+        browser.pause(1000);
         const screenshotElem = $(".widget-video-player");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
-        browser.saveElement(screenshotElem, "videoPlayerExternalPoster");
+        browser.pause(2000);
+
         expect(browser.checkElement(screenshotElem, "videoPlayerExternalPoster")).toEqual(0);
     });
 });
@@ -96,11 +97,11 @@ describe("External video", () => {
 describe("Video aspect ratio", () => {
     it("renders video aspect ratio correctly", () => {
         page.open("p/aspectRatio");
-        browser.setWindowRect(0, 0, 1200, 900);
+        browser.pause(1000);
         const screenshotElem = $(".mx-name-layoutGrid2");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
-        browser.saveElement(screenshotElem, "videoPlayerAspectRatioFirstTab");
+
         expect(browser.checkElement(screenshotElem, "videoPlayerAspectRatioFirstTab")).toBeLessThan(1);
 
         const secondTab = $(".mx-name-tabPage2");
@@ -108,7 +109,7 @@ describe("Video aspect ratio", () => {
         secondTab.click();
         screenshotElem2.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
-        browser.saveElement(screenshotElem2, "videoPlayerAspectRatioSecondTab");
+
         expect(browser.checkElement(screenshotElem2, "videoPlayerAspectRatioSecondTab")).toBeLessThan(1);
 
         const thirdTab = $(".mx-name-tabPage3");
@@ -116,7 +117,7 @@ describe("Video aspect ratio", () => {
         thirdTab.click();
         screenshotElem3.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
-        browser.saveElement(screenshotElem3, "videoPlayerAspectRatioThirdTab");
+
         expect(browser.checkElement(screenshotElem3, "videoPlayerAspectRatioThirdTab")).toBeLessThan(1);
     });
 });

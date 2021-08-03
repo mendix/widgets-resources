@@ -4,16 +4,16 @@ describe("timeline-web", () => {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
     beforeAll(() => {
         page.open();
+        browser.pause(1000);
     });
 
     describe("option: basic", () => {
         it("compares with a screenshot baseline and checks if all timeline elements are rendered as expected", () => {
-            browser.setWindowRect(0, 0, 1290, 900);
             const button = page.getWidget("basicTimelinePage");
             button.waitForDisplayed({ timeout: 5000 });
             button.click();
             const timeline = page.getWidget("timelineGrids");
-            browser.saveElement(timeline, "timelineBasic");
+            timeline.waitForDisplayed({ timeout: 5000 });
 
             expect(browser.checkElement(timeline, "timelineBasic")).toEqual(0);
         });
@@ -34,10 +34,9 @@ describe("timeline-web", () => {
     describe("option: custom", () => {
         it("compares with a screenshot baseline and checks if all custom timeline elements are rendered as expected", () => {
             page.open();
-            browser.setWindowRect(0, 0, 1290, 1200);
+            browser.pause(1000);
             const timeline = page.getWidget("customTimelineLayoutGrid");
-            timeline.waitForDisplayed();
-            browser.saveElement(timeline, "timelineCustom");
+            timeline.waitForDisplayed({ timeout: 5000 });
 
             expect(browser.checkElement(timeline, "timelineCustom")).toEqual(0);
         });

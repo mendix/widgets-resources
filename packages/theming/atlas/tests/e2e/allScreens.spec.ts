@@ -19,9 +19,9 @@ const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
 const pagesWithTimeout = [
     "/p/alerts",
     "/p/progress-circles",
-    "/p/maps",
     "/p/web-dashboard-actioncenter",
-    "/p/web-dashboard-transactions"
+    "/p/web-dashboard-transactions",
+    "/p/web-wizard-form-centered"
 ];
 
 describe("Screenshots of the pages for", () => {
@@ -29,25 +29,19 @@ describe("Screenshots of the pages for", () => {
         if (!pagesToSkip.includes(url)) {
             it(`matches snapshot for page ${url}`, () => {
                 browser.url(url); // Open the page
-                browser.setWindowRect(0, 0, 1360, 1020);
+                browser.pause(1000);
 
                 // These widgets are causing unstable tests due to their nature while loading the screen
                 const sprintrFeedbackWidget = $(".sprintrFeedback__sidebar");
-                const mapsWidget = $(".widget-maps");
                 const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
                     browser.pause(5000);
                 }
 
-                browser.saveElement($("#content"), url, {
-                    removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
-                    disableCSSAnimation: true,
-                    hideScrollBars: true
-                });
                 expect(
                     browser.checkElement($("#content"), url, {
-                        removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
+                        removeElements: [sprintrFeedbackWidget, chartBar],
                         disableCSSAnimation: true,
                         hideScrollBars: true
                     })
