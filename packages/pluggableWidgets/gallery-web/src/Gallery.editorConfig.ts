@@ -56,6 +56,14 @@ export function check(values: GalleryPreviewProps): Problem[] {
 }
 
 export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
+    const filterCaption =
+        values.filterList.length > 0
+            ? values.sortList.length > 0
+                ? "Place filter/sort widget(s) here"
+                : "Place filter widget(s) here"
+            : values.sortList.length > 0
+            ? "Place sort widget(s) here"
+            : "Place widget(s) here";
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -84,7 +92,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
             {
                 type: "DropZone",
                 property: values.filtersPlaceholder,
-                placeholder: "Place filter widget(s) here"
+                placeholder: filterCaption
             } as DropZoneProps
         ]
     } as RowLayoutProps;

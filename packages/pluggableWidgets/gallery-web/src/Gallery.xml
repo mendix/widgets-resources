@@ -70,6 +70,14 @@
                     <returnType type="String"/>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClick" type="action" required="false" dataSource="datasource">
+                    <caption>On click action</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Filters">
             <propertyGroup caption="Filters">
                 <property key="filterList" type="object" isList="true" required="false">
                     <caption>Filters</caption>
@@ -98,10 +106,34 @@
                     <description/>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Events">
-                <property key="onClick" type="action" required="false" dataSource="datasource">
-                    <caption>On click action</caption>
+        </propertyGroup>
+        <propertyGroup caption="Sort">
+            <propertyGroup caption="Sort">
+                <property key="sortList" type="object" isList="true" required="false">
+                    <caption>Sort attributes</caption>
                     <description />
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="attribute" type="attribute" dataSource="../datasource">
+                                <caption>Attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="Boolean"/>
+                                    <attributeType name="DateTime"/>
+                                    <attributeType name="Decimal"/>
+                                    <attributeType name="Enum"/>
+                                    <attributeType name="Integer"/>
+                                    <attributeType name="Long"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="caption" type="textTemplate">
+                                <caption>Caption</caption>
+                                <description />
+                            </property>
+                        </propertyGroup>
+                    </properties>
                 </property>
             </propertyGroup>
         </propertyGroup>

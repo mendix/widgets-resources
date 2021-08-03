@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { DynamicValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 import { Big } from "big.js";
 
 export type PaginationEnum = "buttons" | "virtualScrolling";
@@ -17,8 +17,18 @@ export interface FilterListType {
     filter: ListAttributeValue<string | Big | boolean | Date>;
 }
 
+export interface SortListType {
+    attribute: ListAttributeValue<string | Big | boolean | Date>;
+    caption: DynamicValue<string>;
+}
+
 export interface FilterListPreviewType {
     filter: string;
+}
+
+export interface SortListPreviewType {
+    attribute: string;
+    caption: string;
 }
 
 export interface GalleryContainerProps {
@@ -37,9 +47,10 @@ export interface GalleryContainerProps {
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder?: ReactNode;
     itemClass?: ListExpressionValue<string>;
+    onClick?: ListActionValue;
     filterList: FilterListType[];
     filtersPlaceholder?: ReactNode;
-    onClick?: ListActionValue;
+    sortList: SortListType[];
 }
 
 export interface GalleryPreviewProps {
@@ -56,7 +67,8 @@ export interface GalleryPreviewProps {
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     itemClass: string;
+    onClick: {} | null;
     filterList: FilterListPreviewType[];
     filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
-    onClick: {} | null;
+    sortList: SortListPreviewType[];
 }
