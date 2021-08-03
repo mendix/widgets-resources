@@ -1,0 +1,501 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Date Filter with multiple attributes renders correctly 1`] = `
+<DatagridDateFilter
+  adjustable={true}
+  class="filter-test"
+  defaultFilter="equal"
+  name="filter-test"
+  tabIndex={0}
+>
+  <FilterComponent
+    adjustable={true}
+    dateFormat="dd/MM/YYYY"
+    defaultFilter="equal"
+    locale="en"
+    name="filter-test"
+    tabIndex={0}
+    updateFilters={[Function]}
+  >
+    <div
+      className="filter-container"
+      data-focusindex={0}
+    >
+      <FilterSelector
+        defaultFilter="equal"
+        name="filter-test"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Greater than",
+              "value": "greater",
+            },
+            Object {
+              "label": "Greater than or equal",
+              "value": "greaterEqual",
+            },
+            Object {
+              "label": "Equal",
+              "value": "equal",
+            },
+            Object {
+              "label": "Not equal",
+              "value": "notEqual",
+            },
+            Object {
+              "label": "Smaller than",
+              "value": "smaller",
+            },
+            Object {
+              "label": "Smaller than or equal",
+              "value": "smallerEqual",
+            },
+          ]
+        }
+      >
+        <div
+          className="filter-selector"
+        >
+          <div
+            className="filter-selector-content"
+          >
+            <button
+              aria-controls="filter-test-filter-selectors"
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="btn btn-default filter-selector-button button-icon equal"
+              onClick={[Function]}
+            >
+               
+            </button>
+          </div>
+        </div>
+      </FilterSelector>
+      <ForwardRef
+        adjustable={true}
+        dateFormat="dd/MM/YYYY"
+        locale="en"
+        name="filter-test"
+        setValue={[Function]}
+        value={null}
+      >
+        <span
+          className="sr-only"
+          id="filter-test-label"
+        />
+        <a
+          allowSameDay={false}
+          ariaLabelledBy="filter-test-label"
+          autoFocus={false}
+          className="form-control filter-input"
+          customTimeInput={null}
+          dateFormat="dd/MM/YYYY"
+          dateFormatCalendar="LLLL yyyy"
+          disabled={false}
+          disabledKeyboardNavigation={false}
+          dropdownMode="select"
+          enableTabLoop={true}
+          excludeScrollbar={true}
+          focusSelectedMonth={false}
+          locale="en"
+          monthsShown={1}
+          nextMonthButtonLabel="Next Month"
+          nextYearButtonLabel="Next Year"
+          onBlur={[Function]}
+          onCalendarClose={[Function]}
+          onCalendarOpen={[Function]}
+          onChange={[Function]}
+          onClickOutside={[Function]}
+          onFocus={[Function]}
+          onInputClick={[Function]}
+          onInputError={[Function]}
+          onKeyDown={[Function]}
+          onMonthChange={[Function]}
+          onSelect={[Function]}
+          onYearChange={[Function]}
+          open={false}
+          popperModifiers={
+            Object {
+              "flip": Object {
+                "enabled": false,
+              },
+              "offset": Object {
+                "enabled": true,
+                "offset": "0, 0",
+              },
+              "preventOverflow": Object {
+                "boundariesElement": "viewport",
+                "enabled": true,
+                "escapeWithReference": false,
+              },
+            }
+          }
+          popperPlacement="bottom-start"
+          preventOpenOnFocus={true}
+          previousMonthButtonLabel="Previous Month"
+          previousYearButtonLabel="Previous Year"
+          readOnly={false}
+          renderDayContents={[Function]}
+          selected={null}
+          shouldCloseOnSelect={false}
+          showFullMonthYearPicker={false}
+          showMonthDropdown={true}
+          showMonthYearPicker={false}
+          showPopperArrow={false}
+          showPreviousMonths={false}
+          showQuarterYearPicker={false}
+          showTimeInput={false}
+          showTimeSelect={false}
+          showTwoColumnMonthYearPicker={false}
+          showYearDropdown={true}
+          showYearPicker={false}
+          strictParsing={true}
+          timeCaption="Time"
+          timeInputLabel="Time"
+          timeIntervals={30}
+          useWeekdaysShort={true}
+          withPortal={false}
+          yearItemNumber={12}
+        >
+          <o
+            enableTabLoop={true}
+            hidePopper={true}
+            popperComponent={null}
+            popperModifiers={
+              Object {
+                "flip": Object {
+                  "enabled": false,
+                },
+                "offset": Object {
+                  "enabled": true,
+                  "offset": "0, 0",
+                },
+                "preventOverflow": Object {
+                  "boundariesElement": "viewport",
+                  "enabled": true,
+                  "escapeWithReference": false,
+                },
+              }
+            }
+            popperOnKeyDown={[Function]}
+            popperPlacement="bottom-start"
+            popperProps={Object {}}
+            targetComponent={
+              <div
+                className="react-datepicker__input-container"
+              >
+                <input
+                  aria-labelledby="filter-test-label"
+                  autoFocus={false}
+                  className="form-control filter-input"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  readOnly={false}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+          >
+            <Manager
+              className="react-datepicker-manager"
+            >
+              <Reference>
+                <InnerReference
+                  setReferenceNode={[Function]}
+                >
+                  <div
+                    className="react-datepicker-wrapper"
+                  >
+                    <div
+                      className="react-datepicker__input-container"
+                    >
+                      <input
+                        aria-labelledby="filter-test-label"
+                        autoFocus={false}
+                        className="form-control filter-input"
+                        disabled={false}
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        readOnly={false}
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </InnerReference>
+              </Reference>
+            </Manager>
+          </o>
+        </a>
+        <button
+          className="btn btn-default btn-calendar"
+          onClick={[Function]}
+        >
+          <span
+            className="glyphicon glyphicon-calendar"
+          />
+        </button>
+      </ForwardRef>
+    </div>
+  </FilterComponent>
+</DatagridDateFilter>
+`;
+
+exports[`Date Filter with single attribute renders correctly 1`] = `
+<DatagridDateFilter
+  adjustable={true}
+  class="filter-test"
+  defaultFilter="equal"
+  name="filter-test"
+  tabIndex={0}
+>
+  <FilterComponent
+    adjustable={true}
+    dateFormat="dd/MM/YYYY"
+    defaultFilter="equal"
+    locale="en"
+    name="filter-test"
+    tabIndex={0}
+    updateFilters={[Function]}
+  >
+    <div
+      className="filter-container"
+      data-focusindex={0}
+    >
+      <FilterSelector
+        defaultFilter="equal"
+        name="filter-test"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Greater than",
+              "value": "greater",
+            },
+            Object {
+              "label": "Greater than or equal",
+              "value": "greaterEqual",
+            },
+            Object {
+              "label": "Equal",
+              "value": "equal",
+            },
+            Object {
+              "label": "Not equal",
+              "value": "notEqual",
+            },
+            Object {
+              "label": "Smaller than",
+              "value": "smaller",
+            },
+            Object {
+              "label": "Smaller than or equal",
+              "value": "smallerEqual",
+            },
+          ]
+        }
+      >
+        <div
+          className="filter-selector"
+        >
+          <div
+            className="filter-selector-content"
+          >
+            <button
+              aria-controls="filter-test-filter-selectors"
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="btn btn-default filter-selector-button button-icon equal"
+              onClick={[Function]}
+            >
+               
+            </button>
+          </div>
+        </div>
+      </FilterSelector>
+      <ForwardRef
+        adjustable={true}
+        dateFormat="dd/MM/YYYY"
+        locale="en"
+        name="filter-test"
+        setValue={[Function]}
+        value={null}
+      >
+        <span
+          className="sr-only"
+          id="filter-test-label"
+        />
+        <a
+          allowSameDay={false}
+          ariaLabelledBy="filter-test-label"
+          autoFocus={false}
+          className="form-control filter-input"
+          customTimeInput={null}
+          dateFormat="dd/MM/YYYY"
+          dateFormatCalendar="LLLL yyyy"
+          disabled={false}
+          disabledKeyboardNavigation={false}
+          dropdownMode="select"
+          enableTabLoop={true}
+          excludeScrollbar={true}
+          focusSelectedMonth={false}
+          locale="en"
+          monthsShown={1}
+          nextMonthButtonLabel="Next Month"
+          nextYearButtonLabel="Next Year"
+          onBlur={[Function]}
+          onCalendarClose={[Function]}
+          onCalendarOpen={[Function]}
+          onChange={[Function]}
+          onClickOutside={[Function]}
+          onFocus={[Function]}
+          onInputClick={[Function]}
+          onInputError={[Function]}
+          onKeyDown={[Function]}
+          onMonthChange={[Function]}
+          onSelect={[Function]}
+          onYearChange={[Function]}
+          open={false}
+          popperModifiers={
+            Object {
+              "flip": Object {
+                "enabled": false,
+              },
+              "offset": Object {
+                "enabled": true,
+                "offset": "0, 0",
+              },
+              "preventOverflow": Object {
+                "boundariesElement": "viewport",
+                "enabled": true,
+                "escapeWithReference": false,
+              },
+            }
+          }
+          popperPlacement="bottom-start"
+          preventOpenOnFocus={true}
+          previousMonthButtonLabel="Previous Month"
+          previousYearButtonLabel="Previous Year"
+          readOnly={false}
+          renderDayContents={[Function]}
+          selected={null}
+          shouldCloseOnSelect={false}
+          showFullMonthYearPicker={false}
+          showMonthDropdown={true}
+          showMonthYearPicker={false}
+          showPopperArrow={false}
+          showPreviousMonths={false}
+          showQuarterYearPicker={false}
+          showTimeInput={false}
+          showTimeSelect={false}
+          showTwoColumnMonthYearPicker={false}
+          showYearDropdown={true}
+          showYearPicker={false}
+          strictParsing={true}
+          timeCaption="Time"
+          timeInputLabel="Time"
+          timeIntervals={30}
+          useWeekdaysShort={true}
+          withPortal={false}
+          yearItemNumber={12}
+        >
+          <o
+            enableTabLoop={true}
+            hidePopper={true}
+            popperComponent={null}
+            popperModifiers={
+              Object {
+                "flip": Object {
+                  "enabled": false,
+                },
+                "offset": Object {
+                  "enabled": true,
+                  "offset": "0, 0",
+                },
+                "preventOverflow": Object {
+                  "boundariesElement": "viewport",
+                  "enabled": true,
+                  "escapeWithReference": false,
+                },
+              }
+            }
+            popperOnKeyDown={[Function]}
+            popperPlacement="bottom-start"
+            popperProps={Object {}}
+            targetComponent={
+              <div
+                className="react-datepicker__input-container"
+              >
+                <input
+                  aria-labelledby="filter-test-label"
+                  autoFocus={false}
+                  className="form-control filter-input"
+                  disabled={false}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onClick={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  readOnly={false}
+                  type="text"
+                  value=""
+                />
+              </div>
+            }
+          >
+            <Manager
+              className="react-datepicker-manager"
+            >
+              <Reference>
+                <InnerReference
+                  setReferenceNode={[Function]}
+                >
+                  <div
+                    className="react-datepicker-wrapper"
+                  >
+                    <div
+                      className="react-datepicker__input-container"
+                    >
+                      <input
+                        aria-labelledby="filter-test-label"
+                        autoFocus={false}
+                        className="form-control filter-input"
+                        disabled={false}
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onClick={[Function]}
+                        onFocus={[Function]}
+                        onKeyDown={[Function]}
+                        readOnly={false}
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </InnerReference>
+              </Reference>
+            </Manager>
+          </o>
+        </a>
+        <button
+          className="btn btn-default btn-calendar"
+          onClick={[Function]}
+        >
+          <span
+            className="glyphicon glyphicon-calendar"
+          />
+        </button>
+      </ForwardRef>
+    </div>
+  </FilterComponent>
+</DatagridDateFilter>
+`;

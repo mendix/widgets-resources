@@ -21,13 +21,13 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The drop-down filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+            The Drop-down filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
         </Alert>
     );
 
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of drop-down filter or
+            To use multiple filters you need to define a filter identification in the properties of Drop-down filter or
             have a &quot;Boolean or Enumeration&quot; attribute available.
         </Alert>
     );
@@ -125,7 +125,7 @@ function findAttributesByType(multipleAttributes?: {
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
     return type && !type.match(/Enum|Boolean/)
-        ? "The attribute type being used for Data grid drop-down filter is not 'Boolean or Enumeration'"
+        ? "The attribute type being used for Drop-down filter is not 'Boolean or Enumeration'"
         : null;
 }
 
@@ -137,7 +137,7 @@ function validateValues(listAttribute: ListAttributeValue, options: FilterOption
     return options.some(
         filterOption => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
     )
-        ? "There are invalid values available in the Data grid drop-down filter"
+        ? "There are invalid values available in the Drop-down filter"
         : null;
 }
 

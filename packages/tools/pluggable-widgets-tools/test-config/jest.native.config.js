@@ -25,7 +25,8 @@ module.exports = {
     },
     moduleNameMapper: {
         "mendix/components/native/Icon": join(__dirname, "__mocks__/NativeIcon"),
-        "mendix/components/native/Image": join(__dirname, "__mocks__/NativeImage")
+        "mendix/components/native/Image": join(__dirname, "__mocks__/NativeImage"),
+        "mendix/filters/builders": join(__dirname, "__mocks__/FilterBuilders")
     },
     collectCoverage: true,
     coverageDirectory: "<rootDir>/../dist/coverage"

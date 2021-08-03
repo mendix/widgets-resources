@@ -42,12 +42,12 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The date filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+            The Date filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
         </Alert>
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of date filter or have
+            To use multiple filters you need to define a filter identification in the properties of Date filter or have
             a &quot;Date and Time&quot; attribute available.
         </Alert>
     );
@@ -83,7 +83,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
                 const defaultFilter = singleInitialFilter
                     ? translateFilters(singleInitialFilter)
-                    : translateFilters(multipleInitialFilters?.[attribute.id]); // TODO: Restore all
+                    : translateFilters(multipleInitialFilters?.[attribute.id]);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -134,9 +134,7 @@ function findAttributesByType(multipleAttributes?: {
 }
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "DateTime"
-        ? "The attribute type being used for Data grid date filter is not 'Date and time'"
-        : null;
+    return type && type !== "DateTime" ? "The attribute type being used for Date filter is not 'Date and time'" : null;
 }
 
 function getFilterCondition(

@@ -26,12 +26,12 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     const FilterContext = getFilterDispatcher();
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The text filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+            The Text filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
         </Alert>
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of text filter or have
+            To use multiple filters you need to define a filter identification in the properties of Text filter or have
             a &quot;Hashed string or String&quot; attribute available.
         </Alert>
     );
@@ -65,7 +65,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
 
                 const defaultFilter = singleInitialFilter
                     ? translateFilters(singleInitialFilter)
-                    : translateFilters(multipleInitialFilters?.[attribute.id]); // TODO: Restore all
+                    : translateFilters(multipleInitialFilters?.[attribute.id]);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -116,7 +116,7 @@ function findAttributesByType(multipleAttributes?: {
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
     return type && !type.match(/HashString|String/)
-        ? "The attribute type being used for Data grid text filter is not 'Hashed string or String'"
+        ? "The attribute type being used for Text filter is not 'Hashed string or String'"
         : null;
 }
 

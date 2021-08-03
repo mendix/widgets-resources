@@ -24,12 +24,12 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     const FilterContext = getFilterDispatcher();
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The number filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+            The Number filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
         </Alert>
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of number filter or
+            To use multiple filters you need to define a filter identification in the properties of Number filter or
             have a &quot;Auto number, Decimal, Integer or Long&quot; attribute available.
         </Alert>
     );
@@ -63,7 +63,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
 
                 const defaultFilter = singleInitialFilter
                     ? translateFilters(singleInitialFilter)
-                    : translateFilters(multipleInitialFilters?.[attribute.id]); // TODO: Restore all
+                    : translateFilters(multipleInitialFilters?.[attribute.id]);
 
                 const errorMessage = getAttributeTypeErrorMessage(attribute.type);
                 if (errorMessage) {
@@ -114,7 +114,7 @@ function findAttributesByType(multipleAttributes?: {
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
     return type && !type.match(/AutoNumber|Decimal|Integer|Long/)
-        ? "The attribute type being used for Data grid number filter is not 'Auto number, Decimal, Integer or Long'"
+        ? "The attribute type being used for Number filter is not 'Auto number, Decimal, Integer or Long'"
         : null;
 }
 

@@ -17,7 +17,7 @@ export interface FilterFunction {
 }
 
 export interface FilterContextValue {
-    filterDispatcher?: Dispatch<FilterFunction>;
+    filterDispatcher: Dispatch<FilterFunction>;
     singleAttribute?: ListAttributeValue;
     multipleAttributes?: { [id: string]: ListAttributeValue };
     singleInitialFilter?: FilterValue[];
