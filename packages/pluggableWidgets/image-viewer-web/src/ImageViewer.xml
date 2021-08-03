@@ -17,7 +17,7 @@
                 </property>
                 <property key="imageObject" type="image" required="false">
                     <caption>Image</caption>
-                    <description>The image from the modeler.</description>
+                    <description/>
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
                     <caption>Image link</caption>
@@ -85,7 +85,7 @@
                     <description>The size of the icon in pixels.</description>
                 </property>
                 <property key="displayAs" type="enumeration" defaultValue="fullImage">
-                    <caption>Display as</caption>
+                    <caption>Show</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="fullImage">Full image</enumerationValue>
