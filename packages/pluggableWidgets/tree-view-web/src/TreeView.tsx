@@ -30,7 +30,7 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             isUserDefinedLeafNode={!props.hasChildren}
             shouldLazyLoad={props.shouldLazyLoad}
             startExpanded={props.startExpanded}
-            showCustomIcon={props.advancedMode}
+            showCustomIcon={props.advancedMode && (Boolean(props.expandIcon) || Boolean(props.collapseIcon))}
             iconPlacement={props.showIcon}
             expandIcon={expandIcon}
             collapseIcon={collapseIcon}

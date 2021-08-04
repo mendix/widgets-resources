@@ -3,12 +3,14 @@ import { createContext, useContext, useEffect } from "react";
 export interface TreeViewBranchContextProps {
     level: number;
     informParentToHaveChildNodes: (hasChildNodes: boolean) => void;
+    informParentIsLoading: (isLoading: boolean) => void;
     childShouldShowPlaceholder: boolean;
 }
 
 export const TreeViewBranchContext = createContext<TreeViewBranchContextProps>({
     level: 0,
     informParentToHaveChildNodes: () => null,
+    informParentIsLoading: () => null,
     childShouldShowPlaceholder: false
 });
 

@@ -7,6 +7,7 @@ import {
     ReactNode,
     useCallback,
     useContext,
+    useEffect,
     useState
 } from "react";
 import classNames from "classnames";
@@ -41,7 +42,6 @@ export interface TreeViewProps {
 }
 
 export function TreeView({
-    name,
     class: className,
     items,
     style,
@@ -53,11 +53,17 @@ export function TreeView({
     expandIcon,
     collapseIcon
 }: TreeViewProps): ReactElement | null {
-    const { childShouldShowPlaceholder: shouldShowPlaceholder } = useContext(TreeViewBranchContext);
+    const { informParentIsLoading } = useContext(TreeViewBranchContext);
 
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
-        (treeViewIsExpanded: boolean) =>
-            showCustomIcon ? (
+        treeViewState => {
+            if (treeViewState === TreeViewState.LOADING) {
+                return (
+                    <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="Loading spinner" />
+                );
+            }
+            const treeViewIsExpanded = treeViewState === TreeViewState.EXPANDED;
+            return showCustomIcon ? (
                 <Icon
                     icon={treeViewIsExpanded ? collapseIcon : expandIcon}
                     className="widget-tree-view-branch-header-icon"
@@ -71,7 +77,8 @@ export function TreeView({
                         "widget-tree-view-branch-header-icon"
                     )}
                 />
-            ),
+            );
+        },
         [collapseIcon, expandIcon, showCustomIcon]
     );
 
@@ -87,19 +94,18 @@ export function TreeView({
         return treeViewElement?.parentElement?.className.includes(treeViewBodyClassName) ?? false;
     }, [treeViewElement]);
 
+    useEffect(() => {
+        informParentIsLoading(!items);
+    }, [items, informParentIsLoading]);
+
     useInformParentContextToHaveChildNodes(items, isInsideAnotherTreeView);
 
     if (!items) {
-        return shouldShowPlaceholder ? (
-            <div className="widget-tree-view-lazy-loading-placeholder">
-                <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="Loading spinner" />
-                <span className="widget-tree-view-placeholder-text">Loading...</span>
-            </div>
-        ) : null;
+        return null;
     }
 
     return (
-        <div className={classNames("widget-tree-view", className)} style={style} id={name} ref={updateTreeViewElement}>
+        <div className={classNames("widget-tree-view", className)} style={style} ref={updateTreeViewElement}>
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
                     key={id}
@@ -124,7 +130,7 @@ interface TreeViewBranchProps {
     value: TreeViewObject["value"];
     children: TreeViewObject["content"];
     iconPlacement: ShowIconEnum;
-    renderHeaderIcon: (treeViewIsExpanded: boolean) => ReactNode;
+    renderHeaderIcon: (treeViewState: TreeViewState) => ReactNode;
 }
 
 function getTreeViewHeaderAccessibilityProps(isLeafNode: boolean): HTMLAttributes<HTMLHeadingElement> {
@@ -142,7 +148,8 @@ const treeViewBodyClassName = "widget-tree-view-body";
 const enum TreeViewState {
     COLLAPSED_WITH_JS = "COLLAPSED_WITH_JS",
     COLLAPSED_WITH_CSS = "COLLAPSED_WITH_CSS",
-    EXPANDED = "EXPANDED"
+    EXPANDED = "EXPANDED",
+    LOADING = "LOADING"
 }
 
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
@@ -152,13 +159,25 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     );
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
+    const updateTreeViewState = useCallback<TreeViewBranchContextProps["informParentIsLoading"]>(isLoading => {
+        if (!isLoading) {
+            setTreeViewState(treeViewState =>
+                treeViewState === TreeViewState.LOADING ? TreeViewState.EXPANDED : treeViewState
+            );
+        }
+    }, []);
+
     const toggleTreeViewContent = useCallback(() => {
         if (!isActualLeafNode) {
             setTreeViewState(treeViewState => {
-                if (
-                    treeViewState === TreeViewState.COLLAPSED_WITH_JS ||
-                    treeViewState === TreeViewState.COLLAPSED_WITH_CSS
-                ) {
+                if (treeViewState === TreeViewState.LOADING) {
+                    // TODO:
+                    return treeViewState;
+                }
+                if (treeViewState === TreeViewState.COLLAPSED_WITH_JS) {
+                    return props.shouldLazyLoad ? TreeViewState.LOADING : TreeViewState.EXPANDED;
+                }
+                if (treeViewState === TreeViewState.COLLAPSED_WITH_CSS) {
                     return TreeViewState.EXPANDED;
                 }
                 return props.shouldLazyLoad ? TreeViewState.COLLAPSED_WITH_CSS : TreeViewState.COLLAPSED_WITH_JS;
@@ -196,15 +215,14 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 {...headerAccessibilityProps}
             >
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
-                {!isActualLeafNode &&
-                    props.iconPlacement !== "no" &&
-                    props.renderHeaderIcon(treeViewState === TreeViewState.EXPANDED)}
+                {!isActualLeafNode && props.iconPlacement !== "no" && props.renderHeaderIcon(treeViewState)}
             </header>
             {!isActualLeafNode && treeViewState !== TreeViewState.COLLAPSED_WITH_JS && (
                 <TreeViewBranchContext.Provider
                     value={{
                         level: currentContextLevel + 1,
                         informParentToHaveChildNodes,
+                        informParentIsLoading: updateTreeViewState,
                         childShouldShowPlaceholder: props.shouldLazyLoad
                     }}
                 >

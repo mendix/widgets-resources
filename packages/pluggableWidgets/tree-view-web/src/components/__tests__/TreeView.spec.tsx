@@ -400,5 +400,69 @@ describe("TreeView", () => {
             expect(treeView.text()).toContain("First header");
             expect(treeView.find(".widget-tree-view-body").hasClass("widget-tree-view-branch-hidden")).toBe(true);
         });
+
+        function getLoadingSpinnerFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
+            return header.findWhere(node => node.type() === "img" && node.hasClass("widget-tree-view-loading-spinner"));
+        }
+
+        it("shows a loading spinner icon when opening for the first time", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    {...customIconProps}
+                    class=""
+                    items={items}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+
+            // There is not really another way to properly identify that we're dealing with tree view branches.
+            const treeViewBranches = treeView.find(".widget-tree-view-branch");
+            const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+
+            expect(firstTreeViewBranchHeader).toHaveLength(1);
+
+            expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
+            expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+
+            firstTreeViewBranchHeader.simulate("click");
+
+            const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
+            expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+        });
+
+        it("the nested treeview should tell the parent it can change from the loading spinner to the next state", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    {...customIconProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+
+            // There is not really another way to properly identify that we're dealing with tree view branches.
+            const treeViewBranches = treeView.find(".widget-tree-view-branch");
+            const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+
+            expect(firstTreeViewBranchHeader).toHaveLength(1);
+
+            expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
+            expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+
+            firstTreeViewBranchHeader.simulate("click");
+
+            const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
+            expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+        });
     });
 });
