@@ -258,10 +258,13 @@ export default async args => {
     }
 
     function getClientComponentPlugins() {
+        const assetDir = join(outDir, widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), 'assets/');
+        mkdirSync(assetDir, { recursive: true });
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             clear({ targets: [outDir, mpkDir] }),
             command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)]),
+            command([() => cp("-R", join(sourcePath, "assets"), assetDir)]),
             args.watch && platform === "web" && !production && projectPath ? livereload() : null
         ];
     }
