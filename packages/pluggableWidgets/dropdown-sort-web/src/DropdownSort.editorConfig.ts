@@ -56,7 +56,7 @@ export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewPr
             } as ContainerProps,
             {
                 type: "Container",
-                padding: 2,
+                padding: 10,
                 grow: 0,
                 children: [
                     {
