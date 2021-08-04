@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.3] - 2021-08-04
+
+## Changed
+- We renamed Markers and Marker list properties to Static and Dynamic markers.
+
 ## [2.0.2] - 2021-07-13
 
 ### Fixed

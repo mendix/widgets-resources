@@ -18,7 +18,7 @@
             </propertyGroup>
             <propertyGroup caption="Markers">
                 <property key="markers" type="object" isList="true" required="false">
-                    <caption>Markers</caption>
+                    <caption>Static markers</caption>
                     <description>A list of static locations on the map.</description>
                     <properties>
                         <propertyGroup caption="Locations">
@@ -72,7 +72,7 @@
                     </properties>
                 </property>
                 <property key="dynamicMarkers" type="object" isList="true" required="false">
-                    <caption>Marker list</caption>
+                    <caption>Dynamic markers</caption>
                     <description>A list of markers showing dynamic locations on the map.</description>
                     <properties>
                         <propertyGroup caption="Locations">
