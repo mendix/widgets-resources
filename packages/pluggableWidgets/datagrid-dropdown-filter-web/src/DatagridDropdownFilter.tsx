@@ -50,9 +50,12 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                     multipleInitialFilters
                 } = filterContextValue;
 
-                const attribute = singleAttribute ?? findAttributesByType(multipleAttributes)?.[0];
+                const attributes = [
+                    ...(singleAttribute ? [singleAttribute] : []),
+                    ...(multipleAttributes ? findAttributesByType(multipleAttributes) ?? [] : [])
+                ];
 
-                if (!attribute) {
+                if (attributes.length === 0) {
                     if (multipleAttributes) {
                         return alertMessageMultipleFilters;
                     }
@@ -60,12 +63,11 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 }
 
                 const errorMessage =
-                    getAttributeTypeErrorMessage(attribute.type) || validateValues(attribute, parsedOptions);
+                    getAttributeTypeErrorMessage(attributes[0].type) || validateValues(attributes, parsedOptions);
+
                 if (errorMessage) {
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
-
-                const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
 
                 const defaultValues = singleInitialFilter
                     ? singleInitialFilter?.map(filter => filter.value).join(",")
@@ -73,16 +75,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                           ?.flatMap(attribute => multipleInitialFilters?.[attribute.id].map(filter => filter.value))
                           .join(",");
 
-                const options = props.auto
-                    ? attributes?.flatMap(attribute =>
-                          attribute.universe
-                              ? attribute.universe.map(value => ({
-                                    caption: attribute.formatter.format(value) ?? "",
-                                    value: value?.toString() ?? ""
-                                }))
-                              : []
-                      ) ?? []
-                    : parsedOptions;
+                const options = props.auto ? attributes?.flatMap(mapAttributeToValues) ?? [] : parsedOptions;
 
                 return (
                     <FilterComponent
@@ -129,13 +122,15 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
         : null;
 }
 
-function validateValues(listAttribute: ListAttributeValue, options: FilterOption[]): string | null {
+function validateValues(attributes: ListAttributeValue[], options: FilterOption[]): string | null {
     if (options.length === 0) {
         return null;
     }
 
-    return options.some(
-        filterOption => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
+    return options.some(filterOption =>
+        attributes.every(
+            listAttribute => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
+        )
     )
         ? "There are invalid values available in the Drop-down filter"
         : null;
@@ -180,4 +175,14 @@ function checkValue(value: string, type: string): boolean | string {
         return value === "true";
     }
     return value;
+}
+
+function mapAttributeToValues(attribute: ListAttributeValue): FilterOption[] {
+    if (!attribute.universe) {
+        return [];
+    }
+    return attribute.universe.map(value => ({
+        caption: attribute.formatter.format(value) ?? "",
+        value: value?.toString() ?? ""
+    }));
 }

@@ -26,10 +26,7 @@ export function extractFilters(attribute: ListAttributeValue | undefined, filter
 
 function extractAndOrStatements(filter?: FilterCondition): FilterCondition[] | undefined {
     if (filter && filter.type === "function" && (filter.name === "and" || filter.name === "or")) {
-        return (
-            (filter.args.flatMap(f => extractAndOrStatements(f)).filter(f => f !== undefined) as FilterCondition[]) ??
-            []
-        );
+        return filter.args.flatMap(extractAndOrStatements).filter(f => f !== undefined) as FilterCondition[];
     }
     return filter ? [filter] : undefined;
 }

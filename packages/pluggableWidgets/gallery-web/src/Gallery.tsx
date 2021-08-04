@@ -20,18 +20,19 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
     }, [props.datasource, filtered]);
 
     const filterList = useMemo(
-        () =>
-            props.filterList
-                .map(({ filter }) => ({ [filter.id]: filter }))
-                .reduce((filters, current) => ({ ...filters, ...current }), {}),
+        () => props.filterList.reduce((filters, { filter }) => ({ ...filters, [filter.id]: filter }), {}),
         [props.filterList]
     );
 
     const initialFilters = useMemo(
         () =>
-            props.filterList
-                .map(filter => ({ [filter.filter.id]: extractFilters(filter.filter, viewStateFilters.current) }))
-                .reduce((filters, current) => ({ ...filters, ...current }), {}),
+            props.filterList.reduce(
+                (filters, { filter }) => ({
+                    ...filters,
+                    [filter.id]: extractFilters(filter, viewStateFilters.current)
+                }),
+                {}
+            ),
         [props.filterList, viewStateFilters.current]
     );
 

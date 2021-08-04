@@ -89,17 +89,18 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
      * Multiple filtering properties
      */
     const filterList = useMemo(
-        () =>
-            props.filterList
-                .map(({ filter }) => ({ [filter.id]: filter }))
-                .reduce((filters, current) => ({ ...filters, ...current }), {}),
+        () => props.filterList.reduce((filters, { filter }) => ({ ...filters, [filter.id]: filter }), {}),
         [props.filterList]
     );
     const multipleInitialFilters = useMemo(
         () =>
-            props.filterList
-                .map(filter => ({ [filter.filter.id]: extractFilters(filter.filter, viewStateFilters.current) }))
-                .reduce((filters, current) => ({ ...filters, ...current }), {}),
+            props.filterList.reduce(
+                (filters, { filter }) => ({
+                    ...filters,
+                    [filter.id]: extractFilters(filter, viewStateFilters.current)
+                }),
+                {}
+            ),
         [props.filterList, viewStateFilters.current]
     );
 

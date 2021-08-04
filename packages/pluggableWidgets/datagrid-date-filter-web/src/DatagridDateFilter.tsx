@@ -72,9 +72,12 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                     multipleInitialFilters
                 } = filterContextValue;
 
-                const attribute = singleAttribute ?? findAttributesByType(multipleAttributes)?.[0];
+                const attributes = [
+                    ...(singleAttribute ? [singleAttribute] : []),
+                    ...(multipleAttributes ? findAttributesByType(multipleAttributes) ?? [] : [])
+                ];
 
-                if (!attribute) {
+                if (attributes.length === 0) {
                     if (multipleAttributes) {
                         return alertMessageMultipleFilters;
                     }
@@ -83,9 +86,9 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
                 const defaultFilter = singleInitialFilter
                     ? translateFilters(singleInitialFilter)
-                    : translateFilters(multipleInitialFilters?.[attribute.id]);
+                    : translateFilters(multipleInitialFilters?.[attributes[0].id]);
 
-                const errorMessage = getAttributeTypeErrorMessage(attribute.type);
+                const errorMessage = getAttributeTypeErrorMessage(attributes[0].type);
                 if (errorMessage) {
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
@@ -103,7 +106,6 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
-                            const attributes = singleAttribute ? [attribute] : findAttributesByType(multipleAttributes);
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, value, type))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);

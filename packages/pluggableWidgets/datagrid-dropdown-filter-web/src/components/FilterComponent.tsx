@@ -33,12 +33,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         (selectedOptions: FilterOption[]) => {
             if (selectedOptions?.length === 0) {
                 setValueInput(props.emptyOptionCaption ?? "");
-                setSelectedFilters(prev => {
-                    if (prev.length === 0) {
-                        return prev;
-                    }
-                    return [];
-                });
+                setSelectedFilters([]);
             } else {
                 setValueInput(selectedOptions.map(option => option.caption).join(","));
                 setSelectedFilters(prev => {
@@ -100,17 +95,15 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.defaultValue, props.emptyOptionCaption, props.multiSelect, options]);
 
     useEffect(() => {
-        const options = [
-            ...(!props.multiSelect
-                ? [
-                      {
-                          caption: props.emptyOptionCaption ?? "",
-                          value: ""
-                      }
-                  ]
-                : []),
-            ...props.options
-        ];
+        const emptyOption = props.multiSelect
+            ? []
+            : [
+                  {
+                      caption: props.emptyOptionCaption ?? "",
+                      value: ""
+                  }
+              ];
+        const options = [...emptyOption, ...props.options];
         setOptions(prev => {
             if (deepEqual(prev, options, { strict: true })) {
                 return prev;
