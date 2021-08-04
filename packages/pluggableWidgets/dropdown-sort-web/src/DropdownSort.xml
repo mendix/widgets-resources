@@ -14,14 +14,6 @@
                     <caption>Empty option caption</caption>
                     <description />
                 </property>
-                <property key="sortOrder" type="enumeration" defaultValue="asc">
-                    <caption>Sort order</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="asc">Ascending</enumerationValue>
-                        <enumerationValue key="desc">Descending</enumerationValue>
-                    </enumerationValues>
-                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Accessibility">

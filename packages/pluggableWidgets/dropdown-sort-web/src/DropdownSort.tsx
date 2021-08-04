@@ -4,6 +4,7 @@ import { Alert, getSortDispatcher, SortDirection, SortInstruction } from "@mendi
 
 import { DropdownSortContainerProps } from "../typings/DropdownSortProps";
 import { SortComponent, SortOption } from "./components/SortComponent";
+import "./ui/dropdown-sort-main.scss";
 
 export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
     const SortContext = getSortDispatcher();
@@ -23,6 +24,7 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
     const { sortDispatcher, attributes, initialSort } = sortContextValue;
 
     let defaultValue;
+    let defaultDirection;
 
     const options = useMemo(
         () => [
@@ -38,9 +40,12 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
     if (initialSort && initialSort.length > 0) {
         // Keeping the code in order to implement a future multi-sorting
         const [sort] = initialSort;
-        const [id] = sort;
+        const [id, direction] = sort;
         if (id) {
             defaultValue = options.find(option => option.value === String(id));
+        }
+        if (direction) {
+            defaultDirection = direction;
         }
     }
 
@@ -48,19 +53,20 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
         <SortComponent
             key={defaultValue?.value ?? "sort-component"}
             ariaLabel={props.ariaLabel?.value}
+            defaultDirection={defaultDirection}
             defaultOption={defaultValue}
             emptyOptionCaption={props.emptyOptionCaption?.value}
             name={props.name}
             options={options}
             tabIndex={props.tabIndex}
             updateSort={useCallback(
-                (value: SortOption): void => {
+                (value: SortOption, direction: SortDirection): void => {
                     const filteredOption = attributes.find(attr => attr.attribute.id === value.value);
                     sortDispatcher({
-                        getSortCondition: () => getSortCondition(filteredOption?.attribute, props.sortOrder, value)
+                        getSortCondition: () => getSortCondition(filteredOption?.attribute, direction, value)
                     });
                 },
-                [attributes, props.sortOrder, sortDispatcher]
+                [attributes, sortDispatcher]
             )}
         />
     );

@@ -1,0 +1,37 @@
+@font-face {
+    font-family: "dropdown-sort";
+    src: url("./src/ui/fonts/dropdown-sort.eot?99281285");
+    src: url("./src/ui/fonts/dropdown-sort.eot?99281285#iefix") format("embedded-opentype"),
+    url("./src/ui/fonts/dropdown-sort.woff2?99281285") format("woff2"),
+    url("./src/ui/fonts/dropdown-sort.woff?99281285") format("woff"),
+    url("./src/ui/fonts/dropdown-sort.ttf?99281285") format("truetype"),
+    url("./src/ui/fonts/dropdown-sort.svg?99281285#dropdown-sort") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.dropdown-triggerer-wrapper{
+    display: flex;
+
+    .dropdown-triggerer{
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right-width: 0;
+    }
+
+    .btn-sort {
+        padding: 4px 8px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+
+        font-family: "dropdown-sort";
+        font-style: normal;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-size: 2rem;
+
+        &.icon-asc:before { content: "\e800"; }
+        &.icon-desc:before { content: "\e801"; }
+    }
+}

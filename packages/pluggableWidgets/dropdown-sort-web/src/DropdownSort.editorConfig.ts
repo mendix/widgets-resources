@@ -7,6 +7,8 @@ import {
 } from "@mendix/piw-utils-internal";
 import { DropdownSortPreviewProps } from "../typings/DropdownSortProps";
 
+import AscIcon from "./assets/asc.svg";
+
 export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewProps => {
     return {
         type: "RowLayout",
@@ -45,7 +47,24 @@ export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewPr
                         ]
                     } as ContainerProps
                 ]
-            }
+            },
+            {
+                type: "Container",
+                borders: true,
+                borderWidth: 0.5,
+                grow: 0
+            } as ContainerProps,
+            {
+                type: "Container",
+                padding: 2,
+                grow: 0,
+                children: [
+                    {
+                        type: "Image",
+                        document: decodeURIComponent(AscIcon.replace("data:image/svg+xml,", ""))
+                    } as ImageProps
+                ]
+            } as ContainerProps
         ]
     };
 };

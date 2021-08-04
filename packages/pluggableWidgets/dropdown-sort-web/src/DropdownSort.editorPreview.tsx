@@ -11,3 +11,7 @@ export function preview(props: DropdownSortPreviewProps): ReactElement {
         />
     );
 }
+
+export function getPreviewCss(): string {
+    return require("./ui/dropdown-sort-main.scss");
+}

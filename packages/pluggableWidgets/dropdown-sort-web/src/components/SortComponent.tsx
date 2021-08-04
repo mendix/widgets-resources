@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { useOnClickOutside } from "@mendix/piw-utils-internal";
+import { SortDirection, useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 
 export interface SortOption {
@@ -9,12 +9,13 @@ export interface SortOption {
 
 interface SortComponentProps {
     ariaLabel?: string;
+    defaultDirection?: SortDirection;
     defaultOption?: SortOption;
     emptyOptionCaption?: string;
     name?: string;
     options: SortOption[];
     tabIndex?: number;
-    updateSort?: (value: SortOption) => void;
+    updateSort?: (value: SortOption, direction: SortDirection) => void;
 }
 
 export function SortComponent(props: SortComponentProps): ReactElement {
@@ -27,6 +28,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
     );
     const [show, setShow] = useState(false);
     const [dropdownWidth, setDropdownWidth] = useState(0);
+    const [direction, setDirection] = useState(props.defaultDirection ?? "asc");
 
     const componentRef = useRef<HTMLDivElement>(null);
 
@@ -40,30 +42,39 @@ export function SortComponent(props: SortComponentProps): ReactElement {
 
     useEffect(() => {
         if (selectedSort) {
-            props.updateSort?.(selectedSort);
+            props.updateSort?.(selectedSort, direction);
         }
-    }, [selectedSort]);
+    }, [direction, selectedSort]);
 
     const showPlaceholder = !selectedSort || valueInput === props.emptyOptionCaption;
 
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
-            <input
-                value={!showPlaceholder ? valueInput : ""}
-                placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
-                className="form-control dropdown-triggerer"
-                onClick={() => setShow(true)}
-                onFocus={() => setShow(true)}
-                aria-haspopup
-                ref={inputRef => {
-                    if (inputRef && inputRef.clientWidth) {
-                        setDropdownWidth(inputRef.clientWidth);
-                    }
-                }}
-                aria-expanded={show}
-                aria-controls={`${props.name}-dropdown-list`}
-                aria-label={props.ariaLabel}
-            />
+            <div className="dropdown-triggerer-wrapper">
+                <input
+                    value={!showPlaceholder ? valueInput : ""}
+                    placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
+                    className="form-control dropdown-triggerer"
+                    onClick={() => setShow(true)}
+                    onFocus={() => setShow(true)}
+                    aria-haspopup
+                    ref={inputRef => {
+                        if (inputRef && inputRef.clientWidth) {
+                            setDropdownWidth(inputRef.clientWidth);
+                        }
+                    }}
+                    aria-expanded={show}
+                    aria-controls={`${props.name}-dropdown-list`}
+                    aria-label={props.ariaLabel}
+                />
+                <button
+                    className={classNames("btn btn-default btn-sort", {
+                        "icon-asc": direction === "asc",
+                        "icon-desc": direction === "desc"
+                    })}
+                    onClick={() => setDirection(prev => (prev === "asc" ? "desc" : "asc"))}
+                />
+            </div>
             {show && (
                 <ul
                     id={`${props.name}-dropdown-list`}
