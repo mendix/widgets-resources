@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.4.1] - 2021-08-05
+
+### Added
+- We added an extra es6 module output (.mjs) for widgets in order to make widgets compatible with modern client.
+
+## [9.4.0] - 2021-07-27
+
 ### Changed
 - Updated Mendix package to 9.4.
 - If a datasource property is optional and has not been configured by the user, any properties that are linked to that datasource property are automatically omitted from the props passed to the client component (even if they are marked as required). The generated typings have been updated to reflect this, marking such properties as optional.
