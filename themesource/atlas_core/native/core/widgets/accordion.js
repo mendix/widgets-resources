@@ -15,73 +15,74 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_accordion_Accordion = {
     container: {
         // All ViewStyle properties are allowed
-        flexGrow: 1,
+        flex: 1,
         backgroundColor: accordion.container.backgroundColor,
-        borderColor: accordion.container.borderColor
+        borderColor: "#CED0D3",
     },
     group: {
         container: {
             // All ViewStyle properties are allowed
+            flex: 1,
             borderWidth: 1,
-            borderColor: accordion.container.borderColor
+            borderColor: "#CED0D3",
         },
         header: {
             container: {
                 // All ViewStyle properties are allowed
-                borderColor: accordion.container.borderColor,
+                flex: 1,
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
                 paddingVertical: accordion.groupHeader.container.paddingVertical,
-                paddingHorizontal: accordion.groupHeader.container.paddingHorizontal
+                paddingHorizontal: accordion.groupHeader.container.paddingHorizontal,
             },
             heading1: {
                 // All TextStyle properties are allowed
                 ...TextHeading1.text,
                 fontWeight: "normal",
-                color: accordion.groupHeader.heading.color
+                color: accordion.groupHeader.heading.color,
             },
             heading2: {
                 // All TextStyle properties are allowed
                 ...TextHeading2.text,
                 fontWeight: "normal",
-                color: accordion.groupHeader.heading.color
+                color: accordion.groupHeader.heading.color,
             },
             heading3: {
                 // All TextStyle properties are allowed
                 ...TextHeading3.text,
                 fontWeight: "normal",
-                color: accordion.groupHeader.heading.color
+                color: accordion.groupHeader.heading.color,
             },
             heading4: {
                 // All TextStyle properties are allowed
                 ...TextHeading4.text,
                 fontWeight: "normal",
-                color: accordion.groupHeader.heading.color
+                color: accordion.groupHeader.heading.color,
             },
             heading5: {
                 // All TextStyle properties are allowed
                 ...TextHeading5.text,
                 fontWeight: "normal",
-                color: accordion.groupHeader.heading.color
+                color: accordion.groupHeader.heading.color,
             },
             heading6: {
                 // All TextStyle properties are allowed
                 ...TextHeading6.text,
                 fontWeight: "normal",
-                color: accordion.groupHeader.heading.color
+                color: accordion.groupHeader.heading.color,
             },
             icon: {
                 // Size, Color and all ViewStyle properties are allowed
                 size: accordion.groupHeader.icon.size,
-                color: accordion.groupHeader.icon.color
-            }
+                color: accordion.groupHeader.icon.color,
+            },
         },
         content: {
             // All ViewStyle properties are allowed
             paddingTop: accordion.groupContent.paddingTop,
             paddingBottom: accordion.groupContent.paddingBottom,
-            paddingHorizontal: accordion.groupContent.paddingHorizontal
-        }
-    }
+            paddingHorizontal: accordion.groupContent.paddingHorizontal,
+        },
+    },
 };
