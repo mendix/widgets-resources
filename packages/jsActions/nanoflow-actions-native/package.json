@@ -3,7 +3,7 @@
   "version": "2.0.1",
   "license": "Apache-2.0",
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.0.5.17836",
     "marketplaceId": 109515
   },
   "scripts": {
