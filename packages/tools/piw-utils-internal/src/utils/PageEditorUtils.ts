@@ -107,3 +107,20 @@ function modifyProperty(
         });
     });
 }
+
+export function moveProperty(fromIndex: number, toIndex: number, properties: Properties): void {
+    if (fromIndex >= 0 && toIndex >= 0 && fromIndex < properties.length && toIndex < properties.length) {
+        const elementToMove = properties[fromIndex];
+
+        const isMoveForward = toIndex - fromIndex >= 0;
+        const maxIndexStep = isMoveForward ? toIndex - fromIndex : fromIndex - toIndex;
+        const getNextIndex = (currentIndex: number): number => currentIndex + (isMoveForward ? +1 : -1);
+        const getCurrentIndex = (indexStep: number): number => fromIndex + (isMoveForward ? +indexStep : -indexStep);
+
+        for (let indexStep = 0; indexStep <= maxIndexStep; indexStep++) {
+            const currentIndex = getCurrentIndex(indexStep);
+            const newElement = currentIndex === toIndex ? elementToMove : properties[getNextIndex(currentIndex)];
+            properties[currentIndex] = newElement;
+        }
+    }
+}
