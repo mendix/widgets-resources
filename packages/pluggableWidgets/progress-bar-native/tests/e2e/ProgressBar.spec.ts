@@ -1,5 +1,5 @@
 import { device, expect, waitFor } from "detox";
-import { Widget } from "../../../../../tests/e2e/helpers-native";
+import { Widget } from "../../../../../tests/e2e";
 
 describe("Progress Bar", () => {
     beforeAll(async () => {

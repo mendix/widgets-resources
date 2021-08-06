@@ -1,5 +1,5 @@
 import { device, expect } from "detox";
-import { Widget } from "../../../../../tests/e2e/index";
+import { Widget } from "../../../../../tests/e2e";
 
 describe("Activity Indicator", () => {
     beforeAll(async () => {

@@ -6,6 +6,9 @@ export function Widget(testID: string, matcher = by.id(testID)) {
         },
         getCaption() {
             return element(by.id(`${testID}$caption`).withAncestor(matcher));
+        },
+        getText(text: string) {
+            return element(by.text(text).withAncestor(matcher));
         }
     };
 }

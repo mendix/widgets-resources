@@ -1,5 +1,5 @@
 import { device, expect, waitFor } from "detox";
-import { Widget, Alert } from "../../../../../tests/e2e/index";
+import { Widget, Alert } from "../../../../../tests/e2e";
 
 describe("Badge", () => {
     beforeAll(async () => {
