@@ -19,7 +19,7 @@ jobs:
               if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
               with:
                 global_files: |
-                  !{packages/**/*,configs/e2e/*.json}
+                  !{packages/**/*,configs/e2e/*.json,detox/**/*}
                 not_atlas_native_files: |
                   !packages/theming/atlas/src/**/native/**
               env:
@@ -29,7 +29,7 @@ jobs:
               with:
                   submodules: false
             - name: "Fetching master to compare"
-              if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
+              if: github.event_name == 'pull_request' && (steps.files.outputs.global_files == '' || github.event.pull_request.head.repo.full_name != github.repository)
               run:
                   git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
@@ -48,7 +48,7 @@ jobs:
             - name: "Building package in production mode"
               run: npm run release -- ${{ steps.variables.outputs.arg }}
             - name: "Executing E2E tests"
-              if: github.event_name != 'pull_request' || steps.files.outputs.not_atlas_native_files != ''
+              if: github.event_name == 'push' || steps.files.outputs.not_atlas_native_files != '' || (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository)
               run: npm run test:e2e -- ${{ steps.variables.outputs.arg }}
             - name: "Fixing files permissions"
               if: failure()
