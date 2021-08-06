@@ -1,27 +1,19 @@
-import { createElement, ReactElement, useCallback, useContext, useMemo } from "react";
+import { Context, createElement, ReactElement, useCallback, useContext, useMemo } from "react";
 import { ListAttributeValue } from "mendix";
-import { Alert, getSortDispatcher, SortDirection, SortInstruction } from "@mendix/piw-utils-internal";
+import { Alert, getSortDispatcher, SortContextValue, SortDirection, SortInstruction } from "@mendix/piw-utils-internal";
 
 import { DropdownSortContainerProps } from "../typings/DropdownSortProps";
 import { SortComponent, SortOption } from "./components/SortComponent";
 import "./ui/dropdown-sort-main.scss";
 
 export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
-    const SortContext = getSortDispatcher();
+    const SortContext = getSortDispatcher() ?? ({} as Context<SortContextValue>);
     const alertMessage = (
         <Alert bootstrapStyle="danger">
             The Drop-down sort widget must be placed inside the header of the Gallery widget.
         </Alert>
     );
-    if (!SortContext) {
-        return alertMessage;
-    }
-    const sortContextValue = useContext(SortContext);
-
-    if (!sortContextValue || !sortContextValue.sortDispatcher || !sortContextValue.attributes) {
-        return alertMessage;
-    }
-    const { sortDispatcher, attributes, initialSort } = sortContextValue;
+    const { sortDispatcher, attributes, initialSort } = useContext(SortContext) ?? {};
 
     let defaultValue;
     let defaultDirection;
@@ -36,6 +28,20 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
         ],
         [attributes, props.emptyOptionCaption?.value]
     );
+
+    const updateSort = useCallback(
+        (value: SortOption, direction: SortDirection): void => {
+            const filteredOption = attributes?.find(attr => attr.attribute.id === value.value);
+            sortDispatcher({
+                getSortCondition: () => getSortCondition(filteredOption?.attribute, direction, value)
+            });
+        },
+        [attributes, sortDispatcher]
+    );
+
+    if (!sortDispatcher || !attributes) {
+        return alertMessage;
+    }
 
     if (initialSort && initialSort.length > 0) {
         // Keeping the code in order to implement a future multi-sorting
@@ -59,15 +65,7 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
             name={props.name}
             options={options}
             tabIndex={props.tabIndex}
-            updateSort={useCallback(
-                (value: SortOption, direction: SortDirection): void => {
-                    const filteredOption = attributes.find(attr => attr.attribute.id === value.value);
-                    sortDispatcher({
-                        getSortCondition: () => getSortCondition(filteredOption?.attribute, direction, value)
-                    });
-                },
-                [attributes, sortDispatcher]
-            )}
+            updateSort={updateSort}
         />
     );
 }

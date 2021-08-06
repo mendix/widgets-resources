@@ -52,7 +52,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
             <div className="dropdown-triggerer-wrapper">
                 <input
-                    value={!showPlaceholder ? valueInput : ""}
+                    value={showPlaceholder ? "" : valueInput}
                     placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
                     className="form-control dropdown-triggerer"
                     onClick={() => setShow(true)}
