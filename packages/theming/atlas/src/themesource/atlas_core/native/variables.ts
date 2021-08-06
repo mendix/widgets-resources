@@ -637,6 +637,7 @@ slider = merge(slider, custom.slider || ({} as any));
 //
 export * from "../../../theme/native/custom-variables";
 export {
+    accordion,
     brand,
     backgroundDefaults,
     background,
