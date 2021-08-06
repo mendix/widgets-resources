@@ -20,6 +20,7 @@ import {
     TreeViewBranchContext,
     useInformParentContextToHaveChildNodes
 } from "./TreeViewBranchContext";
+import { useIncrementalId } from "./hooks/useIncrementalId";
 
 import "../ui/TreeView.scss";
 import loadingCircleSvg from "../assets/loading-circle.svg";
@@ -63,6 +64,7 @@ export function TreeView({
     collapseIcon
 }: TreeViewProps): ReactElement | null {
     const { informParentIsLoading } = useContext(TreeViewBranchContext);
+    const { id: currentTreeViewUniqueId } = useIncrementalId();
 
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
         treeViewState => {
@@ -188,7 +190,13 @@ export function TreeView({
     }
 
     return (
-        <div className={classNames("widget-tree-view", className)} style={style} ref={updateTreeViewElement}>
+        <div
+            // This `widget-tree-view-XX` className is necessary for the querySelectorAll call in the changeTreeViewBranchHeaderFocus callback (in test env).
+            // It needs to be the first class or defined as an id. Since defining an id is quite enforcing, I made it a className.
+            className={classNames(`widget-tree-view-${currentTreeViewUniqueId}`, "widget-tree-view", className)}
+            style={style}
+            ref={updateTreeViewElement}
+        >
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
                     key={id}
