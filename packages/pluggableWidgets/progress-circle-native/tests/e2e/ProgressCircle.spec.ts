@@ -39,7 +39,7 @@ describe("Progress Circle", () => {
         await expect(progressCircleText).toHaveText(customText);
     });
 
-    // To-do: Once detox releases the method to assert empty string
+    // TODO: NC-456 Once detox releases the method to assert empty string
     /*    it("renders progress circle with text as none", async () => {
         const progressCircleId = Widget("progressCircleNoText");
         const progressCircle = progressCircleId.getElement();
