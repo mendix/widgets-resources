@@ -26,6 +26,10 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "headerCaption");
     }
 
+    if (values.shouldLazyLoad) {
+        hidePropertyIn(defaultProperties, values, "startExpanded");
+    }
+
     if (!values.hasChildren) {
         hidePropertiesIn(defaultProperties, values, ["startExpanded", "children"]);
     }

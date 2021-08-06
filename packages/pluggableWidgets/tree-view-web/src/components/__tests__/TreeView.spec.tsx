@@ -14,6 +14,7 @@ const defaultProps: TreeViewProps = {
     class: "",
     items: [],
     isUserDefinedLeafNode: false,
+    shouldLazyLoad: false,
     startExpanded: false,
     showCustomIcon: false,
     iconPlacement: "right",
@@ -323,5 +324,145 @@ describe("TreeView", () => {
 
         expect(treeViewHeader).toHaveLength(1);
         expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
+    });
+
+    describe("with lazy loading enabled", () => {
+        const itemsWithNestedTreeView: TreeViewProps["items"] = [
+            {
+                id: "11" as GUID,
+                value: "Parent treeview with a nested treeview that is filled",
+                content: (
+                    <TreeView
+                        {...defaultProps}
+                        class=""
+                        items={items}
+                        isUserDefinedLeafNode={false}
+                        startExpanded={false}
+                    />
+                )
+            }
+        ];
+
+        it("starts in the collapsed state", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+            const clickableHeader = treeView.find("header").filter("[role='button']");
+            expect(clickableHeader).toHaveLength(1);
+            expect(treeView.text()).not.toContain("First header");
+        });
+
+        it("expands the nested tree view normally", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+            const clickableHeader = treeView.find("header").filter("[role='button']");
+            expect(clickableHeader).toHaveLength(1);
+            expect(treeView.text()).not.toContain("First header");
+
+            clickableHeader.simulate("click");
+            expect(treeView.text()).toContain("First header");
+        });
+
+        it("collapses the nested treeview through CSS instead of JS after being expanded once", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+            const clickableHeader = treeView.find("header").filter("[role='button']");
+            expect(clickableHeader).toHaveLength(1);
+            expect(treeView.text()).not.toContain("First header");
+
+            clickableHeader.simulate("click");
+            expect(treeView.text()).toContain("First header");
+
+            clickableHeader.simulate("click");
+            expect(treeView.text()).toContain("First header");
+            expect(treeView.find(".widget-tree-view-body").hasClass("widget-tree-view-branch-hidden")).toBe(true);
+        });
+
+        function getLoadingSpinnerFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
+            return header.findWhere(node => node.type() === "img" && node.hasClass("widget-tree-view-loading-spinner"));
+        }
+
+        it("shows a loading spinner icon when opening for the first time", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    {...customIconProps}
+                    class=""
+                    items={items}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+
+            // There is not really another way to properly identify that we're dealing with tree view branches.
+            const treeViewBranches = treeView.find(".widget-tree-view-branch");
+            const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+
+            expect(firstTreeViewBranchHeader).toHaveLength(1);
+
+            expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
+            expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+
+            firstTreeViewBranchHeader.simulate("click");
+
+            const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
+            expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+        });
+
+        it("the nested treeview should tell the parent it can change from the loading spinner to the next state", () => {
+            const treeView = mount(
+                <TreeView
+                    {...defaultProps}
+                    {...customIconProps}
+                    class=""
+                    items={itemsWithNestedTreeView}
+                    isUserDefinedLeafNode={false}
+                    startExpanded
+                    shouldLazyLoad
+                />
+            );
+
+            // There is not really another way to properly identify that we're dealing with tree view branches.
+            const treeViewBranches = treeView.find(".widget-tree-view-branch");
+            const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+
+            expect(firstTreeViewBranchHeader).toHaveLength(1);
+
+            expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
+            expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+
+            firstTreeViewBranchHeader.simulate("click");
+
+            const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
+            expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+        });
     });
 });
