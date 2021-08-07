@@ -55,7 +55,7 @@
     "@wdio/selenium-standalone-service": "^7.5.3",
     "@wdio/spec-reporter": "^7.5.3",
     "@wdio/sync": "^7.5.3",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.1.1",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.1",
     "big.js": "^6.0.2",
