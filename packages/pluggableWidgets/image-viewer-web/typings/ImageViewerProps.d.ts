@@ -14,7 +14,7 @@ export type WidthUnitEnum = "auto" | "pixels" | "percentage";
 
 export type HeightUnitEnum = "auto" | "pixels";
 
-export type DisplayAsEnum = "thumbnail" | "fullImage";
+export type DisplayAsEnum = "fullImage" | "thumbnail";
 
 export interface ImageViewerContainerProps {
     name: string;
