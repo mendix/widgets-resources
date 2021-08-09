@@ -19,6 +19,10 @@
                     <caption>Image</caption>
                     <description/>
                 </property>
+                <property key="defaultImageDynamic" type="image" required="false">
+                    <caption>Default image</caption>
+                    <description/>
+                </property>
                 <property key="imageUrl" type="textTemplate" required="false">
                     <caption>Image link</caption>
                     <description>The link of the external image.</description>

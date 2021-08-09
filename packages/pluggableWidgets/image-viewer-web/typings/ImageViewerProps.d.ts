@@ -23,6 +23,7 @@ export interface ImageViewerContainerProps {
     tabIndex?: number;
     datasource: DatasourceEnum;
     imageObject?: DynamicValue<WebImage>;
+    defaultImageDynamic?: DynamicValue<WebImage>;
     imageUrl?: DynamicValue<string>;
     imageIcon?: DynamicValue<WebIcon>;
     onClickType: OnClickTypeEnum;
@@ -42,6 +43,7 @@ export interface ImageViewerPreviewProps {
     style: string;
     datasource: DatasourceEnum;
     imageObject: string;
+    defaultImageDynamic: string;
     imageUrl: string;
     imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     onClickType: OnClickTypeEnum;
