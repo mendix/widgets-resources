@@ -33,7 +33,7 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
             }
             break;
         case "imageUrl":
-            const isTextTemplateObject = props.imageUrl.startsWith("{") && props.imageUrl.endsWith("}");
+            const isTextTemplateObject = props.imageUrl.includes("{") && props.imageUrl.includes("}");
             if (!isTextTemplateObject) {
                 image = props.imageUrl;
             }
