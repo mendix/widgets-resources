@@ -68,9 +68,7 @@ export function TreeView({
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
         treeViewState => {
             if (treeViewState === TreeViewState.LOADING) {
-                return (
-                    <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="Loading spinner" />
-                );
+                return <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="" aria-hidden />;
             }
             const treeViewIsExpanded = treeViewState === TreeViewState.EXPANDED;
             return showCustomIcon ? (
@@ -86,6 +84,7 @@ export function TreeView({
                         treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus",
                         "widget-tree-view-branch-header-icon"
                     )}
+                    aria-hidden
                 />
             );
         },
