@@ -13,7 +13,7 @@ import {
 } from "react";
 import classNames from "classnames";
 import { Icon } from "@mendix/piw-utils-internal";
-import { ShowIconEnum } from "../../typings/TreeViewProps";
+import { ShowIconEnum, TreeViewContainerProps } from "../../typings/TreeViewProps";
 import {
     TreeViewBranchContextProps,
     TreeViewBranchContext,
@@ -35,7 +35,7 @@ export interface TreeViewObject extends ObjectItem {
     content: ReactNode;
 }
 
-export interface TreeViewProps {
+export interface TreeViewProps extends Pick<TreeViewContainerProps, "tabIndex"> {
     name?: string;
     class: string;
     style?: CSSProperties;
@@ -59,7 +59,8 @@ export function TreeView({
     startExpanded,
     iconPlacement,
     expandIcon,
-    collapseIcon
+    collapseIcon,
+    tabIndex
 }: TreeViewProps): ReactElement | null {
     const { informParentIsLoading } = useContext(TreeViewBranchContext);
     const { id: currentTreeViewUniqueId } = useIncrementalId();
@@ -122,6 +123,7 @@ export function TreeView({
             className={classNames(`widget-tree-view-${currentTreeViewUniqueId}`, "widget-tree-view", className)}
             style={style}
             ref={updateTreeViewElement}
+            data-focusindex={tabIndex || 0}
         >
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
@@ -256,6 +258,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 onClick={toggleTreeViewContent}
                 onKeyDown={onHeaderKeyDown}
                 ref={headerRef}
+                data-focusindex={0}
                 {...headerAccessibilityProps}
             >
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
@@ -277,6 +280,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                         id={treeViewBranchUtils.getBodyId(props.id)}
                         role="region"
                         aria-labelledby={treeViewBranchUtils.getHeaderId(props.id)}
+                        data-focusindex={0}
                     >
                         {props.children}
                     </div>
