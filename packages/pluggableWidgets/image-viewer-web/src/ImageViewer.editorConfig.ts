@@ -46,6 +46,10 @@ export function getProperties(
 ): Properties {
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
 
+    if (values.datasource !== "image") {
+        hidePropertyIn(defaultProperties, values, "defaultImageDynamic");
+    }
+
     if (values.heightUnit === "auto") {
         hidePropertyIn(defaultProperties, values, "height");
     }

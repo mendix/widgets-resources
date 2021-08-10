@@ -17,9 +17,15 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
                 | { type: "static"; imageUrl: string }
                 | { type: "dynamic"; entity: string }
                 | null = props.imageObject as any;
+            const defaultImageObject:
+                | { type: "static"; imageUrl: string }
+                | { type: "dynamic"; entity: string }
+                | null = props.defaultImageDynamic as any;
             if (imageObject?.type === "static") {
                 // The optional chaining in the conditional guarantees the object is set here.
                 image = imageObject.imageUrl;
+            } else if (defaultImageObject?.type === "static") {
+                image = defaultImageObject.imageUrl;
             }
             break;
         case "icon":
@@ -33,7 +39,7 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
             }
             break;
         case "imageUrl":
-            const isTextTemplateObject = props.imageUrl.startsWith("{") && props.imageUrl.endsWith("}");
+            const isTextTemplateObject = props.imageUrl.includes("{") && props.imageUrl.includes("}");
             if (!isTextTemplateObject) {
                 image = props.imageUrl;
             }

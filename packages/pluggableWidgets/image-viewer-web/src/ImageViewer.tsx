@@ -7,18 +7,34 @@ function getImageProps({
     datasource,
     imageIcon,
     imageObject,
-    imageUrl
+    imageUrl,
+    defaultImageDynamic
 }: ImageViewerContainerProps): ImageViewerImageProps {
     const fallback: ImageViewerImageProps = {
         type: "image",
         image: undefined
     };
     switch (datasource) {
-        case "image":
+        case "image": {
+            if (imageObject?.status === ValueStatus.Available) {
+                return {
+                    type: "image",
+                    image: imageObject.value.uri
+                };
+            } else if (
+                imageObject?.status === ValueStatus.Unavailable &&
+                defaultImageDynamic?.status === ValueStatus.Available
+            ) {
+                return {
+                    type: "image",
+                    image: defaultImageDynamic.value.uri
+                };
+            }
             return {
                 type: "image",
-                image: imageObject?.status === ValueStatus.Available ? imageObject.value.uri : undefined
+                image: undefined
             };
+        }
         case "imageUrl":
             return {
                 type: "image",
