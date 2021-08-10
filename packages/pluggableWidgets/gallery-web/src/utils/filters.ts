@@ -1,12 +1,11 @@
 import { ListAttributeValue } from "mendix";
 import { FilterCondition, FilterExpression, LiteralExpression } from "mendix/filters";
+import { FilterValue } from "@mendix/piw-utils-internal";
 
 declare type SingleFilterCondition = FilterCondition & {
     arg1: FilterExpression;
     arg2: LiteralExpression;
 };
-
-export declare type FilterValue = { type: string; value: any };
 
 export function extractFilters(attribute: ListAttributeValue | undefined, filter?: FilterCondition): FilterValue[] {
     if (!attribute || !filter) {
@@ -18,7 +17,7 @@ export function extractFilters(attribute: ListAttributeValue | undefined, filter
               .filter((a: SingleFilterCondition) => !!a.arg1 && !!a.arg2)
               .filter((f: SingleFilterCondition) => f.arg1.type === "attribute" && f.arg1.attributeId === attribute.id)
               .map((f: SingleFilterCondition) => ({
-                  type: f.name,
+                  type: String(f.name),
                   value: f.arg2.value
               }))
         : [];

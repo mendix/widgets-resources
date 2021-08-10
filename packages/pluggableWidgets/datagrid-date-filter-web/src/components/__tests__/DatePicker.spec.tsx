@@ -1,10 +1,10 @@
-import { shallow } from "enzyme";
+import { render, shallow } from "enzyme";
 import { createElement } from "react";
 import { DatePicker } from "../DatePicker";
 
 describe("Date picker component", () => {
     it("renders correctly", () => {
-        const component = shallow(
+        const component = render(
             <DatePicker adjustable value={null} setValue={jest.fn()} dateFormat="dd/MM/yyyy" locale="nl-NL" />
         );
 
@@ -12,7 +12,7 @@ describe("Date picker component", () => {
     });
 
     it("renders correctly when is not adjustable", () => {
-        const component = shallow(
+        const component = render(
             <DatePicker adjustable={false} value={null} setValue={jest.fn()} dateFormat="dd/MM/yyyy" locale="nl-NL" />
         );
 
@@ -20,7 +20,7 @@ describe("Date picker component", () => {
     });
 
     it("renders correctly with different locale and date format", () => {
-        const component = shallow(
+        const component = render(
             <DatePicker adjustable={false} value={null} setValue={jest.fn()} dateFormat="yyyy-MM-dd" locale="pt-BR" />
         );
 

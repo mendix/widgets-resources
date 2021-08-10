@@ -1,7 +1,7 @@
 {
   "name": "datagrid-dropdown-filter-web",
   "widgetName": "DatagridDropdownFilter",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {
@@ -31,7 +31,8 @@
     "release": "pluggable-widgets-tools release:ts"
   },
   "dependencies": {
-    "@mendix/piw-utils-internal": "^1.0.0"
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "deep-equal": "^2.0.2"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",

@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added new options to allow filtering in multiple attributes. To enable it make sure you have "Advanced" and "Show header filters" on.
+
 ## [1.2.1] - 2021-07-01
 
 ### Changed

@@ -2,17 +2,15 @@
 
 exports[`Filter selector with multi selection renders correctly with ariaLabel 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
+    aria-expanded="false"
+    aria-haspopup="true"
     aria-label="my label"
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    class="form-control dropdown-triggerer"
     value=""
   />
 </div>
@@ -20,16 +18,14 @@ exports[`Filter selector with multi selection renders correctly with ariaLabel 1
 
 exports[`Filter selector with multi selection renders correctly with emptyOptioncaption 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-triggerer"
     placeholder="find me"
     value=""
   />
@@ -38,16 +34,14 @@ exports[`Filter selector with multi selection renders correctly with emptyOption
 
 exports[`Filter selector with multi selection renders correctly with no options 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-triggerer"
     value=""
   />
 </div>
@@ -55,16 +49,14 @@ exports[`Filter selector with multi selection renders correctly with no options 
 
 exports[`Filter selector with multi selection renders correctly with options 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-triggerer"
     value=""
   />
 </div>
@@ -72,144 +64,30 @@ exports[`Filter selector with multi selection renders correctly with options 1`]
 
 exports[`Filter selector with single selection renders correctly with ariaLabel 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
+    aria-expanded="false"
+    aria-haspopup="true"
     aria-label="my label"
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    class="form-control dropdown-triggerer"
     value=""
   />
 </div>
 `;
 
-exports[`Filter selector with single selection renders correctly with automatic options from the attribute 1`] = `
-<FilterComponent
-  attribute={
-    Object {
-      "filterable": true,
-      "formatter": Object {
-        "format": [MockFunction] {
-          "calls": Array [
-            Array [
-              "enum_value_1",
-            ],
-            Array [
-              "enum_value_2",
-            ],
-          ],
-          "results": Array [
-            Object {
-              "type": "return",
-              "value": "enum_value_1",
-            },
-            Object {
-              "type": "return",
-              "value": "enum_value_2",
-            },
-          ],
-        },
-        "parse": [MockFunction],
-      },
-      "get": [MockFunction],
-      "id": "",
-      "sortable": true,
-      "type": "String",
-      "universe": Array [
-        "enum_value_1",
-        "enum_value_2",
-      ],
-    }
-  }
-  auto={true}
-  options={Array []}
->
-  <div
-    className="dropdown-container"
-    data-focusindex={0}
-  >
-    <input
-      aria-controls="undefined-dropdown-list"
-      aria-expanded={true}
-      aria-haspopup={true}
-      className="form-control dropdown-triggerer"
-      onClick={[Function]}
-      onFocus={[Function]}
-      value=""
-    />
-    <ul
-      className="dropdown-list"
-      data-focusindex={0}
-      id="undefined-dropdown-list"
-      role="menu"
-      style={
-        Object {
-          "width": 0,
-        }
-      }
-    >
-      <li
-        className="filter-selected"
-        key="0"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="menuitem"
-        tabIndex={0}
-      >
-        <div
-          className="filter-label"
-        />
-      </li>
-      <li
-        className=""
-        key="1"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="menuitem"
-        tabIndex={0}
-      >
-        <div
-          className="filter-label"
-        >
-          enum_value_1
-        </div>
-      </li>
-      <li
-        className=""
-        key="2"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="menuitem"
-        tabIndex={0}
-      >
-        <div
-          className="filter-label"
-        >
-          enum_value_2
-        </div>
-      </li>
-    </ul>
-  </div>
-</FilterComponent>
-`;
-
 exports[`Filter selector with single selection renders correctly with emptyOptioncaption 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-triggerer"
     placeholder="find me"
     value=""
   />
@@ -218,16 +96,14 @@ exports[`Filter selector with single selection renders correctly with emptyOptio
 
 exports[`Filter selector with single selection renders correctly with no options 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-triggerer"
     value=""
   />
 </div>
@@ -235,16 +111,14 @@ exports[`Filter selector with single selection renders correctly with no options
 
 exports[`Filter selector with single selection renders correctly with options 1`] = `
 <div
-  className="dropdown-container"
-  data-focusindex={0}
+  class="dropdown-container"
+  data-focusindex="0"
 >
   <input
     aria-controls="undefined-dropdown-list"
-    aria-expanded={false}
-    aria-haspopup={true}
-    className="form-control dropdown-triggerer"
-    onClick={[Function]}
-    onFocus={[Function]}
+    aria-expanded="false"
+    aria-haspopup="true"
+    class="form-control dropdown-triggerer"
     value=""
   />
 </div>

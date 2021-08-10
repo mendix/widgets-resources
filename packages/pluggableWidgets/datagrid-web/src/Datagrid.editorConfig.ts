@@ -73,7 +73,10 @@ export function getProperties(
             "columnsResizable",
             "columnsHidable",
             "configurationAttribute",
-            "onConfigurationChange"
+            "onConfigurationChange",
+            "showHeaderFilters",
+            "filterList",
+            "filtersPlaceholder"
         ]);
     }
     changePropertyIn(
@@ -189,6 +192,18 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
             }
         ]
     };
+    const headerFilters = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        borders: true,
+        children: [
+            {
+                type: "DropZone",
+                property: values.filtersPlaceholder,
+                placeholder: "Place filter widget(s) here"
+            } as DropZoneProps
+        ]
+    } as RowLayoutProps;
     const headers: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -261,7 +276,13 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
             : [];
     return {
         type: "Container",
-        children: [titleHeader, headers, ...Array.from({ length: 5 }).map(() => columns), ...footer]
+        children: [
+            titleHeader,
+            ...(values.showHeaderFilters && values.filterList.length > 0 ? [headerFilters] : []),
+            headers,
+            ...Array.from({ length: 5 }).map(() => columns),
+            ...footer
+        ]
     };
 };
 

@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridNumberFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridNumberFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 
 import {
@@ -13,7 +13,8 @@ import {
     lessThan,
     lessThanOrEqual,
     literal,
-    notEqual
+    notEqual,
+    or
 } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
@@ -23,21 +24,51 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     const FilterContext = getFilterDispatcher();
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The data grid number filter widget must be placed inside the header of the Data grid 2.0 widget.
+            The Number filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+        </Alert>
+    );
+    const alertMessageMultipleFilters = (
+        <Alert bootstrapStyle="danger">
+            To use multiple filters you need to define a filter identification in the properties of Number filter or
+            have a &quot;Auto number, Decimal, Integer or Long&quot; attribute available.
         </Alert>
     );
 
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
-                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                if (
+                    !filterContextValue ||
+                    !filterContextValue.filterDispatcher ||
+                    (!filterContextValue.singleAttribute && !filterContextValue.multipleAttributes)
+                ) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
+                const {
+                    filterDispatcher,
+                    singleAttribute,
+                    multipleAttributes,
+                    singleInitialFilter,
+                    multipleInitialFilters
+                } = filterContextValue;
 
-                const defaultFilter = translateFilters(initialFilters);
+                const attributes = [
+                    ...(singleAttribute ? [singleAttribute] : []),
+                    ...(multipleAttributes ? findAttributesByType(multipleAttributes) ?? [] : [])
+                ];
 
-                const errorMessage = getAttributeTypeErrorMessage(attribute.type);
+                if (attributes.length === 0) {
+                    if (multipleAttributes) {
+                        return alertMessageMultipleFilters;
+                    }
+                    return alertMessage;
+                }
+
+                const defaultFilter = singleInitialFilter
+                    ? translateFilters(singleInitialFilter)
+                    : translateFilters(multipleInitialFilters?.[attributes[0].id]);
+
+                const errorMessage = getAttributeTypeErrorMessage(attributes[0].type);
                 if (errorMessage) {
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
@@ -52,11 +83,16 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
-                        updateFilters={(value: Big | undefined, type: DefaultFilterEnum): void =>
+                        updateFilters={(value: Big | undefined, type: DefaultFilterEnum): void => {
+                            const conditions = attributes
+                                ?.map(attribute => getFilterCondition(attribute, value, type))
+                                .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, value, type)
-                            })
-                        }
+                                getFilterCondition: () =>
+                                    conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
+                                filterType: FilterType.NUMBER
+                            });
+                        }}
                         value={defaultFilter?.value ?? props.defaultValue?.value}
                     />
                 );
@@ -67,9 +103,20 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     );
 }
 
+function findAttributesByType(multipleAttributes?: {
+    [key: string]: ListAttributeValue;
+}): ListAttributeValue[] | undefined {
+    if (!multipleAttributes) {
+        return undefined;
+    }
+    return Object.keys(multipleAttributes)
+        .map(key => multipleAttributes[key])
+        .filter(attr => attr.type.match(/AutoNumber|Decimal|Integer|Long/));
+}
+
 function getAttributeTypeErrorMessage(type?: string): string | null {
     return type && !type.match(/AutoNumber|Decimal|Integer|Long/)
-        ? "The attribute type being used for Data grid number filter is not 'Auto number, Decimal, Integer or Long'"
+        ? "The attribute type being used for Number filter is not 'Auto number, Decimal, Integer or Long'"
         : null;
 }
 

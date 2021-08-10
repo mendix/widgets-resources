@@ -1,7 +1,6 @@
-import { mount, shallow } from "enzyme";
+import { mount, render, shallow } from "enzyme";
 import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
-import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 
 const defaultOptions = [
     { caption: "1", value: "_1" },
@@ -13,42 +12,25 @@ describe("Filter selector", () => {
     describe("with single selection", () => {
         describe("renders correctly", () => {
             it("with options", () => {
-                const component = shallow(<FilterComponent options={defaultOptions} />);
+                const component = render(<FilterComponent options={defaultOptions} />);
 
                 expect(component).toMatchSnapshot();
             });
             it("with no options", () => {
-                const component = shallow(<FilterComponent options={[]} />);
+                const component = render(<FilterComponent options={[]} />);
 
                 expect(component).toMatchSnapshot();
             });
             it("with ariaLabel", () => {
-                const component = shallow(<FilterComponent options={defaultOptions} ariaLabel="my label" />);
+                const component = render(<FilterComponent options={defaultOptions} ariaLabel="my label" />);
 
                 expect(component).toMatchSnapshot();
             });
             it("with emptyOptioncaption", () => {
-                const component = shallow(<FilterComponent options={defaultOptions} emptyOptionCaption={"find me"} />);
+                const component = render(<FilterComponent options={defaultOptions} emptyOptionCaption={"find me"} />);
 
                 expect(component).toMatchSnapshot();
                 expect(component.find("input").first().prop("placeholder")).toBe("find me");
-            });
-
-            it("with automatic options from the attribute", () => {
-                const component = mount(
-                    <FilterComponent
-                        auto
-                        attribute={new ListAttributeValueBuilder()
-                            .withUniverse(["enum_value_1", "enum_value_2"])
-                            .build()}
-                        options={[]}
-                    />
-                );
-
-                const input = component.find("input.dropdown-triggerer");
-                input.simulate("click");
-
-                expect(component).toMatchSnapshot();
             });
         });
         it("selects default option", () => {
@@ -97,24 +79,22 @@ describe("Filter selector", () => {
     describe("with multi selection", () => {
         describe("renders correctly", () => {
             it("with options", () => {
-                const component = shallow(<FilterComponent multiSelect options={defaultOptions} />);
+                const component = render(<FilterComponent multiSelect options={defaultOptions} />);
 
                 expect(component).toMatchSnapshot();
             });
             it("with no options", () => {
-                const component = shallow(<FilterComponent multiSelect options={[]} />);
+                const component = render(<FilterComponent multiSelect options={[]} />);
 
                 expect(component).toMatchSnapshot();
             });
             it("with ariaLabel", () => {
-                const component = shallow(
-                    <FilterComponent options={defaultOptions} multiSelect ariaLabel="my label" />
-                );
+                const component = render(<FilterComponent options={defaultOptions} multiSelect ariaLabel="my label" />);
 
                 expect(component).toMatchSnapshot();
             });
             it("with emptyOptioncaption", () => {
-                const component = shallow(
+                const component = render(
                     <FilterComponent multiSelect options={defaultOptions} emptyOptionCaption={"find me"} />
                 );
 
@@ -164,7 +144,7 @@ describe("Filter selector", () => {
         describe("when value changes", () => {
             it("calls updateFilters when value changes", () => {
                 const updateFiltersHandler = jest.fn();
-                const component = shallow(
+                const component = mount(
                     <FilterComponent multiSelect options={defaultOptions} updateFilters={updateFiltersHandler} />
                 );
 
@@ -177,7 +157,7 @@ describe("Filter selector", () => {
                 expect(updateFiltersHandler).toBeCalled();
             });
             it("shows selected options on input value", () => {
-                const component = shallow(<FilterComponent multiSelect options={defaultOptions} />);
+                const component = mount(<FilterComponent multiSelect options={defaultOptions} />);
 
                 const input = component.find("input");
                 input.simulate("click");

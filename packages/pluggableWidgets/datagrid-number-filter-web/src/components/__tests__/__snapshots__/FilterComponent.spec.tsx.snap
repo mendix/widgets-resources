@@ -2,44 +2,27 @@
 
 exports[`Filter component renders correctly 1`] = `
 <div
-  className="filter-container"
-  data-focusindex={0}
+  class="filter-container"
+  data-focusindex="0"
 >
-  <FilterSelector
-    defaultFilter="equal"
-    onChange={[Function]}
-    options={
-      Array [
-        Object {
-          "label": "Greater than",
-          "value": "greater",
-        },
-        Object {
-          "label": "Greater than or equal",
-          "value": "greaterEqual",
-        },
-        Object {
-          "label": "Equal",
-          "value": "equal",
-        },
-        Object {
-          "label": "Not equal",
-          "value": "notEqual",
-        },
-        Object {
-          "label": "Smaller than",
-          "value": "smaller",
-        },
-        Object {
-          "label": "Smaller than or equal",
-          "value": "smallerEqual",
-        },
-      ]
-    }
-  />
+  <div
+    class="filter-selector"
+  >
+    <div
+      class="filter-selector-content"
+    >
+      <button
+        aria-controls="undefined-filter-selectors"
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="btn btn-default filter-selector-button button-icon equal"
+      >
+         
+      </button>
+    </div>
+  </div>
   <input
-    className="form-control filter-input"
-    onChange={[Function]}
+    class="form-control filter-input"
     type="number"
   />
 </div>
@@ -47,12 +30,11 @@ exports[`Filter component renders correctly 1`] = `
 
 exports[`Filter component renders correctly when not adjustable by user 1`] = `
 <div
-  className="filter-container"
-  data-focusindex={0}
+  class="filter-container"
+  data-focusindex="0"
 >
   <input
-    className="form-control"
-    onChange={[Function]}
+    class="form-control"
     type="number"
   />
 </div>
@@ -60,46 +42,29 @@ exports[`Filter component renders correctly when not adjustable by user 1`] = `
 
 exports[`Filter component renders correctly with aria labels 1`] = `
 <div
-  className="filter-container"
-  data-focusindex={0}
+  class="filter-container"
+  data-focusindex="0"
 >
-  <FilterSelector
-    ariaLabel="my label"
-    defaultFilter="equal"
-    onChange={[Function]}
-    options={
-      Array [
-        Object {
-          "label": "Greater than",
-          "value": "greater",
-        },
-        Object {
-          "label": "Greater than or equal",
-          "value": "greaterEqual",
-        },
-        Object {
-          "label": "Equal",
-          "value": "equal",
-        },
-        Object {
-          "label": "Not equal",
-          "value": "notEqual",
-        },
-        Object {
-          "label": "Smaller than",
-          "value": "smaller",
-        },
-        Object {
-          "label": "Smaller than or equal",
-          "value": "smallerEqual",
-        },
-      ]
-    }
-  />
+  <div
+    class="filter-selector"
+  >
+    <div
+      class="filter-selector-content"
+    >
+      <button
+        aria-controls="undefined-filter-selectors"
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-label="my label"
+        class="btn btn-default filter-selector-button button-icon equal"
+      >
+         
+      </button>
+    </div>
+  </div>
   <input
     aria-label="my label"
-    className="form-control filter-input"
-    onChange={[Function]}
+    class="form-control filter-input"
     type="number"
   />
 </div>

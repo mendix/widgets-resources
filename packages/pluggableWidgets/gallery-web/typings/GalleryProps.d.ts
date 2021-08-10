@@ -4,13 +4,22 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ListValue, ListActionValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
+import { Big } from "big.js";
 
 export type PaginationEnum = "buttons" | "virtualScrolling";
 
 export type PagingPositionEnum = "below" | "above";
 
 export type ShowEmptyPlaceholderEnum = "none" | "custom";
+
+export interface FilterListType {
+    filter: ListAttributeValue<string | Big | boolean | Date>;
+}
+
+export interface FilterListPreviewType {
+    filter: string;
+}
 
 export interface GalleryContainerProps {
     name: string;
@@ -28,6 +37,8 @@ export interface GalleryContainerProps {
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder?: ReactNode;
     itemClass?: ListExpressionValue<string>;
+    filterList: FilterListType[];
+    filtersPlaceholder?: ReactNode;
     onClick?: ListActionValue;
 }
 
@@ -45,5 +56,7 @@ export interface GalleryPreviewProps {
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
     emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     itemClass: string;
+    filterList: FilterListPreviewType[];
+    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
     onClick: {} | null;
 }

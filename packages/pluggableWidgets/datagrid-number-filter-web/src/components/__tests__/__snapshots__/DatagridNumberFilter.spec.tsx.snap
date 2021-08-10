@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Number Filter with multiple attributes renders correctly 1`] = `
+<DatagridNumberFilter
+  adjustable={true}
+  class="filter-test"
+  defaultFilter="equal"
+  delay={1000}
+  name="filter-test"
+  tabIndex={0}
+>
+  <FilterComponent
+    adjustable={true}
+    defaultFilter="equal"
+    delay={1000}
+    name="filter-test"
+    tabIndex={0}
+    updateFilters={[Function]}
+  >
+    <div
+      className="filter-container"
+      data-focusindex={0}
+    >
+      <FilterSelector
+        defaultFilter="equal"
+        name="filter-test"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Greater than",
+              "value": "greater",
+            },
+            Object {
+              "label": "Greater than or equal",
+              "value": "greaterEqual",
+            },
+            Object {
+              "label": "Equal",
+              "value": "equal",
+            },
+            Object {
+              "label": "Not equal",
+              "value": "notEqual",
+            },
+            Object {
+              "label": "Smaller than",
+              "value": "smaller",
+            },
+            Object {
+              "label": "Smaller than or equal",
+              "value": "smallerEqual",
+            },
+          ]
+        }
+      >
+        <div
+          className="filter-selector"
+        >
+          <div
+            className="filter-selector-content"
+          >
+            <button
+              aria-controls="filter-test-filter-selectors"
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="btn btn-default filter-selector-button button-icon equal"
+              onClick={[Function]}
+            >
+               
+            </button>
+          </div>
+        </div>
+      </FilterSelector>
+      <input
+        className="form-control filter-input"
+        onChange={[Function]}
+        type="number"
+      />
+    </div>
+  </FilterComponent>
+</DatagridNumberFilter>
+`;
+
+exports[`Number Filter with single attribute renders correctly 1`] = `
+<DatagridNumberFilter
+  adjustable={true}
+  class="filter-test"
+  defaultFilter="equal"
+  delay={1000}
+  name="filter-test"
+  tabIndex={0}
+>
+  <FilterComponent
+    adjustable={true}
+    defaultFilter="equal"
+    delay={1000}
+    name="filter-test"
+    tabIndex={0}
+    updateFilters={[Function]}
+  >
+    <div
+      className="filter-container"
+      data-focusindex={0}
+    >
+      <FilterSelector
+        defaultFilter="equal"
+        name="filter-test"
+        onChange={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Greater than",
+              "value": "greater",
+            },
+            Object {
+              "label": "Greater than or equal",
+              "value": "greaterEqual",
+            },
+            Object {
+              "label": "Equal",
+              "value": "equal",
+            },
+            Object {
+              "label": "Not equal",
+              "value": "notEqual",
+            },
+            Object {
+              "label": "Smaller than",
+              "value": "smaller",
+            },
+            Object {
+              "label": "Smaller than or equal",
+              "value": "smallerEqual",
+            },
+          ]
+        }
+      >
+        <div
+          className="filter-selector"
+        >
+          <div
+            className="filter-selector-content"
+          >
+            <button
+              aria-controls="filter-test-filter-selectors"
+              aria-expanded={false}
+              aria-haspopup={true}
+              className="btn btn-default filter-selector-button button-icon equal"
+              onClick={[Function]}
+            >
+               
+            </button>
+          </div>
+        </div>
+      </FilterSelector>
+      <input
+        className="form-control filter-input"
+        onChange={[Function]}
+        type="number"
+      />
+    </div>
+  </FilterComponent>
+</DatagridNumberFilter>
+`;

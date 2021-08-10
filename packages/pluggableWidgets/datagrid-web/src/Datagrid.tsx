@@ -5,9 +5,14 @@ import { and } from "mendix/filters/builders";
 
 import { Table, TableColumn } from "./components/Table";
 import classNames from "classnames";
-import { FilterFunction, isAvailable } from "@mendix/piw-utils-internal";
+import {
+    FilterFunction,
+    FilterType,
+    isAvailable,
+    useFilterContext,
+    useMultipleFiltering
+} from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
-import { FilterContext } from "./components/provider";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
@@ -17,6 +22,8 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         : props.datasource.offset / props.pageSize;
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
     const [filtered, setFiltered] = useState(false);
+    const multipleFilteringState = useMultipleFiltering();
+    const { FilterContext } = useFilterContext();
 
     props.datasource.requestTotalCount(true);
 
@@ -52,7 +59,13 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     const filters = customFiltersState
         .map(([customFilter]) => customFilter?.getFilterCondition?.())
-        .filter((filter): filter is FilterCondition => filter !== undefined);
+        .filter((filter): filter is FilterCondition => filter !== undefined)
+        .concat(
+            // Concatenating multiple filter state
+            Object.keys(multipleFilteringState)
+                .map((key: FilterType) => multipleFilteringState[key][0]?.getFilterCondition())
+                .filter((filter): filter is FilterCondition => filter !== undefined)
+        );
 
     if (filters.length > 0) {
         props.datasource.setFilter(filters.length > 1 ? and(...filters) : filters[0]);
@@ -71,6 +84,25 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     }
 
     const columns = useMemo(() => transformColumnProps(props.columns), [props.columns]);
+
+    /**
+     * Multiple filtering properties
+     */
+    const filterList = useMemo(
+        () => props.filterList.reduce((filters, { filter }) => ({ ...filters, [filter.id]: filter }), {}),
+        [props.filterList]
+    );
+    const multipleInitialFilters = useMemo(
+        () =>
+            props.filterList.reduce(
+                (filters, { filter }) => ({
+                    ...filters,
+                    [filter.id]: extractFilters(filter, viewStateFilters.current)
+                }),
+                {}
+            ),
+        [props.filterList, viewStateFilters.current]
+    );
 
     return (
         <Table
@@ -126,18 +158,39 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                                     filterDispatcher(prev);
                                     return prev;
                                 },
-                                attribute,
-                                initialFilters
+                                singleAttribute: attribute,
+                                singleInitialFilter: initialFilters
                             }}
                         >
                             {filter}
                         </FilterContext.Provider>
                     );
                 },
-                [customFiltersState, props.columns]
+                [FilterContext, customFiltersState, props.columns]
             )}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWrapperRenderer={useCallback((_columnIndex: number, header: ReactElement) => header, [])}
+            headerFilters={useMemo(
+                () => (
+                    <FilterContext.Provider
+                        value={{
+                            filterDispatcher: prev => {
+                                if (prev.filterType) {
+                                    const [, filterDispatcher] = multipleFilteringState[prev.filterType];
+                                    filterDispatcher(prev);
+                                    setFiltered(true);
+                                }
+                                return prev;
+                            },
+                            multipleAttributes: filterList,
+                            multipleInitialFilters
+                        }}
+                    >
+                        {props.filtersPlaceholder}
+                    </FilterContext.Provider>
+                ),
+                [FilterContext, customFiltersState, filterList, multipleInitialFilters, props.filtersPlaceholder]
+            )}
             numberOfItems={props.datasource.totalCount}
             onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             page={currentPage}

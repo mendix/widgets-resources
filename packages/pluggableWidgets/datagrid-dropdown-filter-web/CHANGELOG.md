@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added the possibility to reuse the filter with Gallery and Tree View widget.
+
 ## [1.3.1] - 2021-07-16
 
 ### Changed

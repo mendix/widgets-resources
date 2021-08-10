@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import { render, shallow } from "enzyme";
 import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
 
@@ -6,19 +6,19 @@ jest.useFakeTimers();
 
 describe("Filter component", () => {
     it("renders correctly", () => {
-        const component = shallow(<FilterComponent adjustable defaultFilter="equal" delay={500} />);
+        const component = render(<FilterComponent adjustable defaultFilter="equal" delay={500} />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders correctly when not adjustable by user", () => {
-        const component = shallow(<FilterComponent adjustable={false} defaultFilter="equal" delay={500} />);
+        const component = render(<FilterComponent adjustable={false} defaultFilter="equal" delay={500} />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders correctly with aria labels", () => {
-        const component = shallow(
+        const component = render(
             <FilterComponent
                 adjustable
                 defaultFilter="equal"

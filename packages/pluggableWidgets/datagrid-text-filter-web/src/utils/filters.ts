@@ -6,7 +6,7 @@ export type DefaultFilterValue = {
     value: string;
 };
 
-export function translateFilters(filters: FilterValue[]): DefaultFilterValue | undefined {
+export function translateFilters(filters?: FilterValue[]): DefaultFilterValue | undefined {
     if (filters && filters.length === 1) {
         const [filter] = filters;
         let type: DefaultFilterEnum = "equal";

@@ -2,6 +2,8 @@
 <widget id="com.mendix.widget.web.datagrid.Datagrid" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Data grid 2</name>
     <description/>
+    <studioProCategory>Data</studioProCategory>
+    <studioCategory>Data</studioCategory>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAADXUlEQVR4Ae1aS2sUQRCeh+Ii/oIlwYs/ICieRLyIsAjxEPYh6EGUvXiWXFcQPQsSJaCehH3gJYgJwf+gNx9X9w8sHkwuM37d6e50ZmeWHnd2tjNdDbPVVf2qqv66u6Z3PI+S2x7wpfntdrsRRdE2+BUpqygdB0HQHQwGu8y+QBrpiPHM3BVhKzddOYAVcIkbP8pW3QFumJ6w8kyCV+xoNFL7gxIaZJrNZqxX+99+ZB9F9ZfsR/bvPALIARIKrlJCgKszL+0mBEhPuErVWZ91TlbVMTI+oSVQ1Rk2tct5BNC7gClUqlovEwG6wY2dg4YXxdt4zVPv0aL8d+D73c93ant6/dOUN9sD0o1ndq5Gccyu0U5tMkJAyswfG+z7SVQcl6XkZtw9nrirS2k6JcpCJoKbsRf43d31Gr/3m2qoCcwQoDWYNzvj7vHEXZ3ROBnI5BOGMpM+SneAiVJl1indAexKGgaOU4zkSyBFni0CzDncEzXkEkiIU1mjPYB1mLkPxHGaMamDMaG4j1/NrJCjQKzxufoyQ0CGp6ErPwZz6GxdVSMEFOFp6ywXCpkhwFbtC9DLCAFZ5y3Gp0iQIkGKBPMtRIoE8/lr4bVLPwUoEjz6MmOu6E3Cooj4xAwBFAny9+pCZk3Oni3UDAG2aLsAPSgSNHJqxs0L2tKdoEeRoBGGVCWKBJUr7MiUfgpQJEiRoB3Ql1oYxQFFxNxyQNto6XuAbQ7Alf9Rom+EpCcco/oSGDtku7JVOWDG+Vw1v+T/D7JqHiB7NA+oU0CTLTXbarU24jh+iSW5iX+SP4B/Df6qVMr3/Y/gR+Df4Tkv5Iegj1F2DWUPhAwvqv6P4XB4DyfcOmRPwT8B/0WWM2oUCOkNFpmHovdhwHuMEeKtscbGAv8Q5CzLswSeydkmdp3xWrqBsg3wl/HwiQV/pYs0mUwuor818J8wRgufye7IdmoTlIIl0xcYP8SzDyXfCl3waUKuNFW/3++/Qg/7eM7h2dJ7s8oBgP1zKMcMuAXo3xWK5l2mU/U7nc5twP8m6w/0jeiXE6scgDW/BQUfQbM/eC4IRb8JygnKv4Zh+AvMX01+COd9RxmrqzvgZ71eP4DsEuAfo3wTe8AzrZ2d2V6vV/jEYO1Lh9ppNGm1JA/8A329cJKt+cZjAAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="General">
@@ -191,6 +193,40 @@
                 </property>
                 <property key="onConfigurationChange" type="action">
                     <caption>On change</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Filtering">
+            <propertyGroup caption="Filters">
+                <property key="showHeaderFilters" type="boolean" defaultValue="false">
+                    <caption>Show header filters</caption>
+                    <description />
+                </property>
+                <property key="filterList" type="object" isList="true" required="false">
+                    <caption>Filters</caption>
+                    <description />
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="filter" type="attribute" dataSource="../datasource">
+                                <caption>Filter attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="Boolean"/>
+                                    <attributeType name="DateTime"/>
+                                    <attributeType name="Decimal"/>
+                                    <attributeType name="Enum"/>
+                                    <attributeType name="Integer"/>
+                                    <attributeType name="Long"/>
+                                </attributeTypes>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="filtersPlaceholder" type="widgets" required="false">
+                    <caption>Filters placeholder</caption>
                     <description/>
                 </property>
             </propertyGroup>

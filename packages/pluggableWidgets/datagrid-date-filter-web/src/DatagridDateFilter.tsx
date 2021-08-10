@@ -5,7 +5,7 @@ import { FilterComponent } from "./components/FilterComponent";
 import { DatagridDateFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 import { registerLocale } from "react-datepicker";
 import * as locales from "date-fns/locale";
-import { Alert, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
 
 import { changeTimeToMidnight } from "./utils/utils";
 import { addDays } from "date-fns";
@@ -42,7 +42,13 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
 
     const alertMessage = (
         <Alert bootstrapStyle="danger">
-            The data grid date filter widget must be placed inside the header of the Data grid 2.0 widget.
+            The Date filter widget must be placed inside the header of the Data grid 2.0 or Gallery widget.
+        </Alert>
+    );
+    const alertMessageMultipleFilters = (
+        <Alert bootstrapStyle="danger">
+            To use multiple filters you need to define a filter identification in the properties of Date filter or have
+            a &quot;Date and Time&quot; attribute available.
         </Alert>
     );
 
@@ -51,13 +57,38 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     return FilterContext?.Consumer ? (
         <FilterContext.Consumer>
             {filterContextValue => {
-                if (!filterContextValue || !filterContextValue.filterDispatcher || !filterContextValue.attribute) {
+                if (
+                    !filterContextValue ||
+                    !filterContextValue.filterDispatcher ||
+                    (!filterContextValue.singleAttribute && !filterContextValue.multipleAttributes)
+                ) {
                     return alertMessage;
                 }
-                const { filterDispatcher, attribute, initialFilters } = filterContextValue;
-                const defaultFilter = translateFilters(initialFilters);
+                const {
+                    filterDispatcher,
+                    singleAttribute,
+                    multipleAttributes,
+                    singleInitialFilter,
+                    multipleInitialFilters
+                } = filterContextValue;
 
-                const errorMessage = getAttributeTypeErrorMessage(attribute.type);
+                const attributes = [
+                    ...(singleAttribute ? [singleAttribute] : []),
+                    ...(multipleAttributes ? findAttributesByType(multipleAttributes) ?? [] : [])
+                ];
+
+                if (attributes.length === 0) {
+                    if (multipleAttributes) {
+                        return alertMessageMultipleFilters;
+                    }
+                    return alertMessage;
+                }
+
+                const defaultFilter = singleInitialFilter
+                    ? translateFilters(singleInitialFilter)
+                    : translateFilters(multipleInitialFilters?.[attributes[0].id]);
+
+                const errorMessage = getAttributeTypeErrorMessage(attributes[0].type);
                 if (errorMessage) {
                     return <Alert bootstrapStyle="danger">{errorMessage}</Alert>;
                 }
@@ -74,11 +105,16 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         tabIndex={props.tabIndex}
-                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void =>
+                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
+                            const conditions = attributes
+                                ?.map(attribute => getFilterCondition(attribute, value, type))
+                                .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
-                                getFilterCondition: () => getFilterCondition(attribute, value, type)
-                            })
-                        }
+                                getFilterCondition: () =>
+                                    conditions && conditions.length > 1 ? or(...conditions) : conditions?.[0],
+                                filterType: FilterType.DATE
+                            });
+                        }}
                     />
                 );
             }}
@@ -88,10 +124,19 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     );
 }
 
+function findAttributesByType(multipleAttributes?: {
+    [key: string]: ListAttributeValue;
+}): ListAttributeValue[] | undefined {
+    if (!multipleAttributes) {
+        return undefined;
+    }
+    return Object.keys(multipleAttributes)
+        .map(key => multipleAttributes[key])
+        .filter(attr => attr.type === "DateTime");
+}
+
 function getAttributeTypeErrorMessage(type?: string): string | null {
-    return type && type !== "DateTime"
-        ? "The attribute type being used for Data grid date filter is not 'Date and time'"
-        : null;
+    return type && type !== "DateTime" ? "The attribute type being used for Date filter is not 'Date and time'" : null;
 }
 
 function getFilterCondition(

@@ -1,7 +1,7 @@
-import { createElement, Fragment, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ListAttributeValue } from "mendix";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { useOnClickOutside } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
+import deepEqual from "deep-equal";
 
 export interface FilterOption {
     caption: string;
@@ -10,8 +10,6 @@ export interface FilterOption {
 
 interface FilterComponentProps {
     ariaLabel?: string;
-    attribute?: ListAttributeValue;
-    auto?: boolean;
     emptyOptionCaption?: string;
     multiSelect?: boolean;
     name?: string;
@@ -27,6 +25,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [selectedFilters, setSelectedFilters] = useState<FilterOption[]>([]);
     const [show, setShow] = useState(false);
     const [dropdownWidth, setDropdownWidth] = useState(0);
+    const defaultValuesLoaded = useRef<boolean>(false);
 
     const componentRef = useRef<HTMLDivElement>(null);
 
@@ -37,7 +36,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setSelectedFilters([]);
             } else {
                 setValueInput(selectedOptions.map(option => option.caption).join(","));
-                setSelectedFilters(selectedOptions);
+                setSelectedFilters(prev => {
+                    if (deepEqual(selectedOptions, prev, { strict: true })) {
+                        return prev;
+                    }
+                    return selectedOptions;
+                });
             }
         },
         [props.emptyOptionCaption]
@@ -53,53 +57,63 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 setShow(false);
             }
         },
-        [selectedFilters, props.emptyOptionCaption, props.multiSelect]
+        [selectedFilters, props.multiSelect]
     );
 
     useOnClickOutside(componentRef, () => setShow(false));
 
-    const availableOptions = useMemo(
-        () =>
-            props.auto
-                ? props.attribute?.universe?.map(value => ({
-                      caption: props.attribute?.formatter.format(value) ?? "",
-                      value: value?.toString() ?? ""
-                  })) ?? []
-                : props.options,
-        [props.auto, props.attribute, props.options]
-    );
-
     // Select the first option Or default option on load
     useEffect(() => {
-        if (props.multiSelect) {
-            if (props.defaultValue) {
-                const initialOptions = props.defaultValue
-                    .split(",")
-                    .map(value => availableOptions.find(option => option.value === value))
-                    .filter(Boolean) as FilterOption[];
+        if (!defaultValuesLoaded.current && options.length > 0) {
+            if (props.multiSelect) {
+                if (props.defaultValue) {
+                    const initialOptions = props.defaultValue
+                        .split(",")
+                        .map(value => options.find(option => option.value === value))
+                        .filter(Boolean) as FilterOption[];
 
-                // User can set anything, but it could not match so we have to set to empty or ""
-                setMultiSelectFilters(initialOptions);
+                    // User can set anything, but it could not match so we have to set to empty or ""
+                    setMultiSelectFilters(initialOptions);
+                } else {
+                    setValueInput(props.emptyOptionCaption ?? "");
+                }
             } else {
-                setValueInput(props.emptyOptionCaption ?? "");
+                // We want to add empty option caption
+                const initialOption = options.find(option => option.value === props.defaultValue) ?? options[0];
+
+                setValueInput(initialOption?.caption ?? "");
+                setSelectedFilters(prev => {
+                    const newValue = [initialOption];
+                    if (deepEqual(newValue, prev, { strict: true })) {
+                        return prev;
+                    }
+                    return newValue;
+                });
             }
-
-            setOptions(availableOptions);
-        } else {
-            // We want to add empty option caption
-            const optionsWithEmptyCaption = [
-                { caption: props.emptyOptionCaption ?? "", value: "" },
-                ...availableOptions
-            ];
-            const initialOption =
-                optionsWithEmptyCaption.find(option => option.value === props.defaultValue) ??
-                optionsWithEmptyCaption[0];
-
-            setValueInput(initialOption?.caption ?? "");
-            setSelectedFilters([initialOption]);
-            setOptions(optionsWithEmptyCaption);
+            defaultValuesLoaded.current = true;
         }
-    }, [props.defaultValue, availableOptions, props.emptyOptionCaption]);
+    }, [props.defaultValue, props.emptyOptionCaption, props.multiSelect, options]);
+
+    useEffect(() => {
+        const emptyOption = props.multiSelect
+            ? []
+            : [
+                  {
+                      caption: props.emptyOptionCaption ?? "",
+                      value: ""
+                  }
+              ];
+        const options = [...emptyOption, ...props.options];
+        setOptions(prev => {
+            if (deepEqual(prev, options, { strict: true })) {
+                return prev;
+            }
+            return options;
+        });
+
+        // Resets the option to reload default values
+        defaultValuesLoaded.current = false;
+    }, [props.emptyOptionCaption, props.multiSelect, props.options, props.defaultValue]);
 
     useEffect(() => {
         props.updateFilters?.(selectedFilters);
@@ -152,11 +166,14 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                             {props.multiSelect ? (
                                 <Fragment>
                                     <input
-                                        id={`checkbox_toggle_${index}`}
+                                        id={`${props.name}_checkbox_toggle_${index}`}
                                         type="checkbox"
                                         checked={selectedFilters.includes(option)}
                                     />
-                                    <label htmlFor={`checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
+                                    <label
+                                        htmlFor={`${props.name}_checkbox_toggle_${index}`}
+                                        style={{ pointerEvents: "none" }}
+                                    >
                                         {option.caption}
                                     </label>
                                 </Fragment>
