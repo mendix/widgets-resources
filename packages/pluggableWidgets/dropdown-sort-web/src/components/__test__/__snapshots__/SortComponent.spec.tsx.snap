@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sort selector renders correctly with ariaLabel 1`] = `
+<div
+  class="dropdown-container"
+  data-focusindex="0"
+>
+  <div
+    class="dropdown-triggerer-wrapper"
+  >
+    <input
+      aria-controls="undefined-dropdown-list"
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="my label"
+      class="form-control dropdown-triggerer"
+      value=""
+    />
+    <button
+      class="btn btn-default btn-sort icon-asc"
+    />
+  </div>
+</div>
+`;
+
+exports[`Sort selector renders correctly with emptyOptioncaption 1`] = `
+<div
+  class="dropdown-container"
+  data-focusindex="0"
+>
+  <div
+    class="dropdown-triggerer-wrapper"
+  >
+    <input
+      aria-controls="undefined-dropdown-list"
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="form-control dropdown-triggerer"
+      placeholder="find me"
+      value=""
+    />
+    <button
+      class="btn btn-default btn-sort icon-asc"
+    />
+  </div>
+</div>
+`;
+
+exports[`Sort selector renders correctly with no options 1`] = `
+<div
+  class="dropdown-container"
+  data-focusindex="0"
+>
+  <div
+    class="dropdown-triggerer-wrapper"
+  >
+    <input
+      aria-controls="undefined-dropdown-list"
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="form-control dropdown-triggerer"
+      value=""
+    />
+    <button
+      class="btn btn-default btn-sort icon-asc"
+    />
+  </div>
+</div>
+`;
+
+exports[`Sort selector renders correctly with options 1`] = `
+<div
+  class="dropdown-container"
+  data-focusindex="0"
+>
+  <div
+    class="dropdown-triggerer-wrapper"
+  >
+    <input
+      aria-controls="undefined-dropdown-list"
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="form-control dropdown-triggerer"
+      value=""
+    />
+    <button
+      class="btn btn-default btn-sort icon-asc"
+    />
+  </div>
+</div>
+`;

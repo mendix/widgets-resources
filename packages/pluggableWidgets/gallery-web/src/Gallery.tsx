@@ -2,26 +2,49 @@ import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, u
 import { GalleryContainerProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
 import "./ui/gallery-main.scss";
-import { FilterType, useFilterContext, useMultipleFiltering } from "@mendix/piw-utils-internal";
+import {
+    FilterType,
+    SortInstruction,
+    SortFunction,
+    useFilterContext,
+    useMultipleFiltering,
+    useSortContext
+} from "@mendix/piw-utils-internal";
 import { FilterCondition } from "mendix/filters";
 import { extractFilters } from "./utils/filters";
 import { and } from "mendix/filters/builders";
 
 export function Gallery(props: GalleryContainerProps): ReactElement {
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
+    const viewStateSort = useRef<SortInstruction[] | undefined>(undefined);
     const [filtered, setFiltered] = useState(false);
+    const [sorted, setSorted] = useState(false);
     const customFiltersState = useMultipleFiltering();
+    const [sortState, setSortState] = useState<SortFunction>();
     const { FilterContext } = useFilterContext();
+    const { SortContext } = useSortContext();
 
     useEffect(() => {
         if (props.datasource.filter && !filtered && !viewStateFilters.current) {
             viewStateFilters.current = props.datasource.filter;
         }
-    }, [props.datasource, filtered]);
+        if (props.datasource.sortOrder && !sorted && !viewStateSort.current) {
+            viewStateSort.current = props.datasource.sortOrder;
+        }
+    }, [props.datasource, filtered, sorted]);
 
     const filterList = useMemo(
         () => props.filterList.reduce((filters, { filter }) => ({ ...filters, [filter.id]: filter }), {}),
         [props.filterList]
+    );
+
+    const sortList = useMemo(
+        () =>
+            props.sortList.map(({ attribute, caption }) => ({
+                attribute,
+                caption: caption.value ?? ""
+            })),
+        [props.sortList]
     );
 
     const initialFilters = useMemo(
@@ -48,29 +71,51 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
         props.datasource.setFilter(viewStateFilters.current);
     }
 
+    if (sortState && "getSortCondition" in sortState) {
+        const sortCondition = sortState.getSortCondition();
+        props.datasource.setSortOrder(sortCondition ? [sortCondition] : undefined);
+    } else {
+        props.datasource.setSortOrder(undefined);
+    }
+
+    const isSortableFilterable = props.filterList.length > 0 || props.sortList.length > 0;
+
     return (
         <GalleryComponent
             className={props.class}
             desktopItems={props.desktopItems}
             filters={useMemo(
-                () => (
-                    <FilterContext.Provider
-                        value={{
-                            filterDispatcher: prev => {
-                                if (prev.filterType) {
-                                    const [, filterDispatcher] = customFiltersState[prev.filterType];
-                                    filterDispatcher(prev);
-                                    setFiltered(true);
-                                }
-                                return prev;
-                            },
-                            multipleAttributes: filterList,
-                            multipleInitialFilters: initialFilters
-                        }}
-                    >
-                        {props.filtersPlaceholder}
-                    </FilterContext.Provider>
-                ),
+                () =>
+                    isSortableFilterable ? (
+                        <FilterContext.Provider
+                            value={{
+                                filterDispatcher: prev => {
+                                    if (prev.filterType) {
+                                        const [, filterDispatcher] = customFiltersState[prev.filterType];
+                                        filterDispatcher(prev);
+                                        setFiltered(true);
+                                    }
+                                    return prev;
+                                },
+                                multipleAttributes: filterList,
+                                multipleInitialFilters: initialFilters
+                            }}
+                        >
+                            <SortContext.Provider
+                                value={{
+                                    sortDispatcher: prev => {
+                                        setSorted(true);
+                                        setSortState(prev);
+                                        return prev;
+                                    },
+                                    attributes: sortList,
+                                    initialSort: viewStateSort.current
+                                }}
+                            >
+                                {props.filtersPlaceholder}
+                            </SortContext.Provider>
+                        </FilterContext.Provider>
+                    ) : null,
                 [FilterContext, customFiltersState, filterList, initialFilters, props.filtersPlaceholder]
             )}
             items={props.datasource.items ?? []}
