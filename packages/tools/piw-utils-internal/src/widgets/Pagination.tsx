@@ -1,4 +1,4 @@
-import { createElement, Dispatch, ReactElement, SetStateAction } from "react";
+import { createElement, Dispatch, HTMLAttributes, ReactElement, SetStateAction } from "react";
 
 export interface PaginationProps {
     canNextPage: boolean;
@@ -35,20 +35,20 @@ export function Pagination(props: PaginationProps): ReactElement | null {
             <button
                 className="btn pagination-button"
                 disabled={props.page === 0}
-                onClick={() => {
+                {...getEvents(() => {
                     props.gotoPage(0);
                     setPageIndex(0);
-                }}
+                })}
             >
                 <span className="glyphicon glyphicon-step-backward" />
             </button>
             <button
                 className="btn pagination-button"
                 disabled={!props.canPreviousPage}
-                onClick={() => {
+                {...getEvents(() => {
                     props.previousPage();
                     setPageIndex(props.page - 1);
-                }}
+                })}
             >
                 <span className="glyphicon glyphicon-backward" />
             </button>
@@ -59,10 +59,10 @@ export function Pagination(props: PaginationProps): ReactElement | null {
             <button
                 className="btn pagination-button"
                 disabled={!props.canNextPage}
-                onClick={() => {
+                {...getEvents(() => {
                     props.nextPage();
                     setPageIndex(props.page + 1);
-                }}
+                })}
             >
                 <span className="glyphicon glyphicon-forward" />
             </button>
@@ -70,14 +70,27 @@ export function Pagination(props: PaginationProps): ReactElement | null {
                 <button
                     className="btn pagination-button"
                     disabled={props.page === lastPage}
-                    onClick={() => {
+                    {...getEvents(() => {
                         props.gotoPage(lastPage);
                         setPageIndex(lastPage);
-                    }}
+                    })}
                 >
                     <span className="glyphicon glyphicon-step-forward" />
                 </button>
             )}
         </div>
     );
+}
+
+function getEvents(action: () => void): Partial<HTMLAttributes<HTMLButtonElement>> {
+    return {
+        onClick: action,
+        onKeyDown: e => {
+            if (e.key === " " || e.key === "Enter") {
+                e.preventDefault();
+                e.stopPropagation();
+                action();
+            }
+        }
+    };
 }

@@ -56,6 +56,16 @@ describe("Pagination", () => {
         expect(onNextPage).toBeCalled();
     });
 
+    it("calls nextPage when pressing Enter over next page button", () => {
+        const onNextPage = jest.fn();
+        const component = shallow(<Pagination {...mockPaginationProps()} nextPage={onNextPage} />);
+
+        const button = component.find("button").at(2);
+        button.simulate("keydown", { key: "Enter", preventDefault: jest.fn(), stopPropagation: jest.fn() });
+
+        expect(onNextPage).toBeCalled();
+    });
+
     it("calls correct page when pressing the last page button", () => {
         const goToPage = jest.fn();
         const component = shallow(<Pagination {...mockPaginationProps()} gotoPage={goToPage} />);
