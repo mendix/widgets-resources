@@ -115,7 +115,6 @@ export async function TakePicture(
         switchControl.addEventListener("click", switchControlHandler);
 
         actionControl.addEventListener("click", () => {
-            video.pause();
             removeAllControlButtons();
             if (showConfirmationScreen) {
                 // Delay the `takePictureHandler` to the next cycle so the UI preparations can go first. Otherwise, the control-buttons are not removed while the second screen is being set up.
@@ -126,6 +125,7 @@ export async function TakePicture(
                     });
                 }, 0);
             } else {
+                video.pause();
                 const videoCanvas = getVideoCanvas();
                 savePicture(videoCanvas, () => {
                     videoCanvas.remove();
@@ -455,6 +455,7 @@ export async function TakePicture(
                         confirmationWrapper = document.createElement("div");
                         confirmationWrapper.classList.add("take-picture-confirm-wrapper");
 
+                        video.pause();
                         // Element to retrieve the blob from mediaStream (not rendered on the screen)
                         const videoCanvas = getVideoCanvas();
 
