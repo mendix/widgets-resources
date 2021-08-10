@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination renders the current page correctly with server side paging 1`] = `
+<div
+  class="pagination-bar"
+>
+  <button
+    class="btn pagination-button"
+    disabled=""
+  >
+    <span
+      class="glyphicon glyphicon-step-backward"
+    />
+  </button>
+  <button
+    class="btn pagination-button"
+  >
+    <span
+      class="glyphicon glyphicon-backward"
+    />
+  </button>
+  <div
+    class="paging-status"
+  >
+    1 to 5 
+  </div>
+  <button
+    class="btn pagination-button"
+  >
+    <span
+      class="glyphicon glyphicon-forward"
+    />
+  </button>
+</div>
+`;
+
+exports[`Pagination renders the current page correctly with without pages 1`] = `null`;
+
+exports[`Pagination renders the structure correctly 1`] = `
+<div
+  class="pagination-bar"
+>
+  <button
+    class="btn pagination-button"
+    disabled=""
+  >
+    <span
+      class="glyphicon glyphicon-step-backward"
+    />
+  </button>
+  <button
+    class="btn pagination-button"
+  >
+    <span
+      class="glyphicon glyphicon-backward"
+    />
+  </button>
+  <div
+    class="paging-status"
+  >
+    1 to 5 of 25
+  </div>
+  <button
+    class="btn pagination-button"
+  >
+    <span
+      class="glyphicon glyphicon-forward"
+    />
+  </button>
+  <button
+    class="btn pagination-button"
+  >
+    <span
+      class="glyphicon glyphicon-step-forward"
+    />
+  </button>
+</div>
+`;

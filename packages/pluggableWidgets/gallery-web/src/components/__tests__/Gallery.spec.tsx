@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { mount, shallow } from "enzyme";
+import { mount, render, shallow } from "enzyme";
 import { Gallery, GalleryProps } from "../Gallery";
 
 const itemWrapperFunction = ({
@@ -11,6 +11,10 @@ const itemWrapperFunction = ({
 }): GalleryProps<string>["itemRenderer"] => (wrapper, item) => wrapper(item, customClass, onClick);
 
 const defaultProps: GalleryProps<string> = {
+    hasMoreItems: false,
+    page: 0,
+    pageSize: 10,
+    paging: false,
     phoneItems: 2,
     tabletItems: 3,
     desktopItems: 4,
@@ -22,13 +26,13 @@ const defaultProps: GalleryProps<string> = {
 describe("Gallery", () => {
     describe("DOM Structure", () => {
         it("renders correctly", () => {
-            const gallery = shallow(<Gallery {...defaultProps} />);
+            const gallery = render(<Gallery {...defaultProps} />);
 
             expect(gallery).toMatchSnapshot();
         });
 
         it("renders correctly with onclick event", () => {
-            const gallery = shallow(
+            const gallery = render(
                 <Gallery {...defaultProps} itemRenderer={itemWrapperFunction({ onClick: jest.fn() })} />
             );
 
@@ -78,19 +82,19 @@ describe("Gallery", () => {
         it("contains correct classes for desktop", () => {
             const gallery = shallow(<Gallery {...defaultProps} desktopItems={12} />);
 
-            expect(gallery.hasClass("widget-gallery-lg-12")).toBeTruthy();
+            expect(gallery.find(".widget-gallery-items").hasClass("widget-gallery-lg-12")).toBeTruthy();
         });
 
         it("contains correct classes for tablet", () => {
             const gallery = shallow(<Gallery {...defaultProps} tabletItems={6} />);
 
-            expect(gallery.hasClass("widget-gallery-md-6")).toBeTruthy();
+            expect(gallery.find(".widget-gallery-items").hasClass("widget-gallery-md-6")).toBeTruthy();
         });
 
         it("contains correct classes for phone", () => {
             const gallery = shallow(<Gallery {...defaultProps} phoneItems={3} />);
 
-            expect(gallery.hasClass("widget-gallery-sm-3")).toBeTruthy();
+            expect(gallery.find(".widget-gallery-items").hasClass("widget-gallery-sm-3")).toBeTruthy();
         });
     });
 
@@ -108,6 +112,51 @@ describe("Gallery", () => {
             const galleryFirstItem = gallery.find(".widget-gallery-item").at(0);
 
             expect(galleryFirstItem.hasClass("custom-class")).toBeTruthy();
+        });
+    });
+
+    describe("with pagination", () => {
+        it("renders correctly", () => {
+            const gallery = render(
+                <Gallery {...defaultProps} paging paginationPosition="above" numberOfItems={20} hasMoreItems />
+            );
+
+            expect(gallery).toMatchSnapshot();
+        });
+
+        it("triggers correct events on click next button", () => {
+            const setPage = jest.fn();
+            const gallery = mount(
+                <Gallery
+                    {...defaultProps}
+                    paging
+                    paginationPosition="above"
+                    numberOfItems={20}
+                    hasMoreItems
+                    setPage={setPage}
+                />
+            );
+            const galleryFirstItem = gallery.find(".glyphicon-step-forward").at(0);
+
+            expect(galleryFirstItem).toBeDefined();
+
+            galleryFirstItem.simulate("click");
+
+            expect(setPage).toBeCalled();
+        });
+    });
+
+    describe("with empty option", () => {
+        it("renders correctly", () => {
+            const gallery = render(
+                <Gallery
+                    {...defaultProps}
+                    items={[]}
+                    emptyPlaceholderRenderer={renderWrapper => renderWrapper(<span>No items found</span>)}
+                />
+            );
+
+            expect(gallery).toMatchSnapshot();
         });
     });
 });

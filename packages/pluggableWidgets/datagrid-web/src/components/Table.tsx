@@ -9,15 +9,14 @@ import {
     useState
 } from "react";
 import { ColumnSelector } from "./ColumnSelector";
-import { Pagination } from "./Pagination";
 import { Header } from "./Header";
-import { InfiniteBody } from "./InfiniteBody";
 import { AlignmentEnum, ColumnsPreviewType, WidthEnum } from "../../typings/DatagridProps";
 import { Big } from "big.js";
 import classNames from "classnames";
 import { EditableValue } from "mendix";
 import { SortingRule, useSettings } from "../utils/settings";
 import { ColumnResizer } from "./ColumnResizer";
+import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal";
 
 export type TableColumn = Omit<
     ColumnsPreviewType,
@@ -234,8 +233,10 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                 <div className="table-header">{props.pagingPosition === "top" && pagination}</div>
                 {props.headerFilters && <div className="header-filters">{props.headerFilters}</div>}
                 <InfiniteBody
+                    className="table-content"
                     hasMoreItems={props.hasMoreItems}
                     isInfinite={isInfinite}
+                    role="rowgroup"
                     setPage={props.setPage}
                     style={cssGridStyles}
                 >

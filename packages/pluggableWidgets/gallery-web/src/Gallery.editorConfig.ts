@@ -109,8 +109,27 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
             } as DropZoneProps
         ]
     } as RowLayoutProps;
+
+    const footer =
+        values.showEmptyPlaceholder === "custom"
+            ? [
+                  {
+                      type: "RowLayout",
+                      columnSize: "fixed",
+                      borders: true,
+                      children: [
+                          {
+                              type: "DropZone",
+                              property: values.emptyPlaceholder,
+                              placeholder: "Empty list message: Place widgets here"
+                          } as DropZoneProps
+                      ]
+                  } as RowLayoutProps
+              ]
+            : [];
+
     return {
         type: "Container",
-        children: [titleHeader, ...(values.filterList.length > 0 ? [filters] : []), content]
+        children: [titleHeader, ...(values.filterList.length > 0 ? [filters] : []), content, ...footer]
     };
 }
