@@ -1,4 +1,5 @@
 import {
+    ContainerProps,
     DropZoneProps,
     hidePropertyIn,
     Problem,
@@ -88,6 +89,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
         type: "RowLayout",
         columnSize: "fixed",
         borders: true,
+        backgroundColor: "#f5f5f5",
         children: [
             {
                 type: "DropZone",
@@ -98,17 +100,44 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
     } as RowLayoutProps;
 
     const content = {
-        type: "RowLayout",
-        columnSize: "fixed",
+        type: "Container",
         borders: true,
         children: [
             {
-                type: "DropZone",
-                property: values.content,
-                placeholder: "Place widgets here"
-            } as DropZoneProps
+                type: "RowLayout",
+                columnSize: "fixed",
+                children: [
+                    {
+                        type: "DropZone",
+                        property: values.content,
+                        placeholder: "Place widget(s) here"
+                    } as DropZoneProps
+                ]
+            } as RowLayoutProps,
+            {
+                type: "RowLayout",
+                columnSize: "grow",
+                children: [
+                    {
+                        type: "Container",
+                        grow: 1,
+                        children: []
+                    },
+                    {
+                        type: "Container",
+                        grow: 0,
+                        children: [
+                            {
+                                type: "Text",
+                                content: `Desktop ${values.desktopItems} Columns, Tablet ${values.tabletItems} Columns, Phone ${values.phoneItems} Columns`,
+                                fontColor: "#899499"
+                            }
+                        ]
+                    }
+                ]
+            } as RowLayoutProps
         ]
-    } as RowLayoutProps;
+    } as ContainerProps;
 
     const footer =
         values.showEmptyPlaceholder === "custom"
@@ -117,11 +146,12 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                       type: "RowLayout",
                       columnSize: "fixed",
                       borders: true,
+                      backgroundColor: "#f5f5f5",
                       children: [
                           {
                               type: "DropZone",
                               property: values.emptyPlaceholder,
-                              placeholder: "Empty list message: Place widgets here"
+                              placeholder: "Empty gallery message: Place widget(s) here"
                           } as DropZoneProps
                       ]
                   } as RowLayoutProps
