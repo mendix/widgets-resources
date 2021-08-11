@@ -175,7 +175,7 @@ function getTreeViewHeaderAccessibilityProps(
     };
 }
 
-function getTreeViewAccessibilityProps(isActualLeafNode: boolean, isExpanded: boolean): HTMLAttributes<HTMLElement> {
+function getTreeViewAccessibilityProps(isActualLeafNode: boolean, isExpanded: boolean): HTMLAttributes<HTMLLIElement> {
     return {
         role: isActualLeafNode ? "none" : "treeitem",
         "aria-expanded": isExpanded
