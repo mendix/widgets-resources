@@ -204,7 +204,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         }
     }, []);
 
-    const headerRef = useRef<HTMLHeaderElement>(null);
+    const headerRef = useRef<HTMLHeadElement>(null);
     const { changeFocus } = props;
 
     const toggleTreeViewContent = useCallback(() => {
