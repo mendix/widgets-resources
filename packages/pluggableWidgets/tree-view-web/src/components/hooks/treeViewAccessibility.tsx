@@ -102,8 +102,7 @@ export const useTreeViewBranchKeyboardHandler = (
                     treeViewState === TreeViewState.COLLAPSED_WITH_JS
                 ) {
                     toggleTreeViewContent();
-                }
-                if (treeViewState === TreeViewState.EXPANDED) {
+                } else if (treeViewState === TreeViewState.EXPANDED || isActualLeafNode) {
                     changeFocus(event.currentTarget, FocusTargetChange.NEXT, "VERTICAL");
                 }
             },
@@ -114,8 +113,7 @@ export const useTreeViewBranchKeyboardHandler = (
                     isActualLeafNode
                 ) {
                     changeFocus(event.currentTarget, FocusTargetChange.PREVIOUS, "VERTICAL");
-                }
-                if (treeViewState === TreeViewState.EXPANDED) {
+                } else if (treeViewState === TreeViewState.EXPANDED) {
                     toggleTreeViewContent();
                 }
             }
