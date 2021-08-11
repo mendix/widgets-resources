@@ -62,7 +62,7 @@ export function TreeView({
     collapseIcon,
     tabIndex
 }: TreeViewProps): ReactElement | null {
-    const { informParentIsLoading } = useContext(TreeViewBranchContext);
+    const { informParentIsLoading, level } = useContext(TreeViewBranchContext);
     const { id: currentTreeViewUniqueId } = useIncrementalId();
 
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
@@ -116,13 +116,14 @@ export function TreeView({
     }
 
     return (
-        <div
+        <ul
             // This `widget-tree-view-XX` className is necessary for the querySelectorAll call in the changeTreeViewBranchHeaderFocus callback (in test env).
             // It needs to be the first class or defined as an id. Since defining an id is quite enforcing, I made it a className.
             className={classNames(`widget-tree-view-${currentTreeViewUniqueId}`, "widget-tree-view", className)}
             style={style}
             ref={updateTreeViewElement}
             data-focusindex={tabIndex || 0}
+            role={level === 0 ? "tree" : "group"}
         >
             {items.map(({ id, value, content }) => (
                 <TreeViewBranch
@@ -139,7 +140,7 @@ export function TreeView({
                     {content}
                 </TreeViewBranch>
             ))}
-        </div>
+        </ul>
     );
 }
 
@@ -162,15 +163,27 @@ const treeViewBranchUtils = {
 };
 
 function getTreeViewHeaderAccessibilityProps(
-    isExpanded: boolean,
+    isActualLeafNode: boolean,
     id: TreeViewObject["id"]
 ): HTMLAttributes<HTMLHeadElement> {
-    return {
+    const commonProps: HTMLAttributes<HTMLHeadElement> = {
         id: treeViewBranchUtils.getHeaderId(id),
-        "aria-expanded": isExpanded,
         "aria-controls": treeViewBranchUtils.getBodyId(id),
-        tabIndex: 0,
+        tabIndex: 0
+    };
+    if (isActualLeafNode) {
+        return commonProps;
+    }
+    return {
+        ...commonProps,
         role: "button"
+    };
+}
+
+function getTreeViewAccessibilityProps(isActualLeafNode: boolean, isExpanded: boolean): HTMLAttributes<HTMLElement> {
+    return {
+        role: isActualLeafNode ? "none" : "treeitem",
+        "aria-expanded": isExpanded
     };
 }
 
@@ -217,9 +230,10 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         }
     }, [isActualLeafNode, props.shouldLazyLoad]);
 
-    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(
-        treeViewState === TreeViewState.EXPANDED,
-        props.id
+    const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(isActualLeafNode, props.id);
+    const treeViewAccessibilityProps = getTreeViewAccessibilityProps(
+        isActualLeafNode,
+        treeViewState === TreeViewState.EXPANDED
     );
 
     const informParentToHaveChildNodes = useCallback<TreeViewBranchContextProps["informParentToHaveChildNodes"]>(
@@ -237,7 +251,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const onHeaderKeyDown = useTreeViewBranchKeyboardHandler(toggleTreeViewContent, changeFocus, treeViewState);
 
     return (
-        <div className="widget-tree-view-branch">
+        <li className="widget-tree-view-branch" {...treeViewAccessibilityProps}>
             <header
                 className={classNames("widget-tree-view-branch-header", {
                     "widget-tree-view-branch-header-clickable": !isActualLeafNode,
@@ -266,7 +280,6 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                             "widget-tree-view-branch-hidden": treeViewState === TreeViewState.COLLAPSED_WITH_CSS
                         })}
                         id={treeViewBranchUtils.getBodyId(props.id)}
-                        role="region"
                         aria-labelledby={treeViewBranchUtils.getHeaderId(props.id)}
                         data-focusindex={0}
                     >
@@ -274,6 +287,6 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                     </div>
                 </TreeViewBranchContext.Provider>
             )}
-        </div>
+        </li>
     );
 }

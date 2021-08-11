@@ -92,19 +92,6 @@ describe("TreeView", () => {
         });
     });
 
-    it("does render the tree view headers as a button even when defined as a leaf node", () => {
-        const treeView = mount(
-            <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode startExpanded={false} />
-        );
-
-        const treeViewHeaders = treeView.find('[role="button"]');
-
-        expect(treeViewHeaders).toHaveLength(3);
-        items.forEach(item => {
-            expect(treeView.text()).toContain(item.value);
-        });
-    });
-
     it("correctly collapses and expands the tree view branch content when clicking on the header", () => {
         const treeView = mount(
             <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
@@ -288,25 +275,24 @@ describe("TreeView", () => {
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
     });
 
-    // it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
-    //     const treeView = mount(
-    //         <TreeView
-    //             {...defaultProps}
-    //             {...customIconProps}
-    //             class=""
-    //             items={[{ id: "11" as GUID, value: "First header", content: undefined }]}
-    //             isUserDefinedLeafNode={false}
-    //             startExpanded
-    //         />
-    //     );
+    it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                {...customIconProps}
+                class=""
+                items={[{ id: "11" as GUID, value: "First header", content: undefined }]}
+                isUserDefinedLeafNode={false}
+                startExpanded
+            />
+        );
 
-    //     const treeViewHeader = treeView.findWhere(
-    //         node => node.type() === "header" && node.text().includes("First header")
-    //     );
+        const treeViews = treeView.findWhere(node => node.type() === "li");
 
-    //     expect(treeViewHeader).toHaveLength(1);
-    //     expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
-    // });
+        expect(treeViews).toHaveLength(1);
+        expect(treeViews.getDOMNode().getAttribute("role")).not.toBe("treeitem");
+        expect(treeViews.getDOMNode().getAttribute("role")).toBe("none");
+    });
 
     describe("with lazy loading enabled", () => {
         const itemsWithNestedTreeView: TreeViewProps["items"] = [
@@ -515,6 +501,10 @@ describe("TreeView", () => {
             return screen.getAllByRole("button").filter(element => element.tagName === "HEADER");
         }
 
+        function getTreeViewItems(): HTMLElement[] {
+            return screen.getAllByRole("treeitem").filter(element => element.tagName === "LI");
+        }
+
         function focusFirstTreeViewElement(): void {
             expect(document.body).toHaveFocus();
             userEvent.tab();
@@ -523,10 +513,10 @@ describe("TreeView", () => {
         it("the Space and Enter keys collapses and expands the tree view branch content", () => {
             expect(screen.queryByText("First content")).not.toBeInTheDocument();
 
-            const treeViewHeaders = getClickableTreeViewHeaders();
-            expect(treeViewHeaders).toHaveLength(4);
-            treeViewHeaders.forEach(header => {
-                expect(header).toHaveAttribute("aria-expanded", "false");
+            const treeViews = getTreeViewItems();
+            expect(treeViews).toHaveLength(4);
+            treeViews.forEach(treeView => {
+                expect(treeView).toHaveAttribute("aria-expanded", "false");
             });
 
             focusFirstTreeViewElement();
@@ -535,20 +525,21 @@ describe("TreeView", () => {
             userEvent.keyboard("{Enter}");
 
             expect(screen.queryByText("First content")).toBeInTheDocument();
-            expect(treeViewHeaders[0]).toHaveAttribute("aria-expanded", "true");
+            expect(treeViews[0]).toHaveAttribute("aria-expanded", "true");
 
             // collapse
             userEvent.keyboard(" ");
 
             expect(screen.queryByText("First content")).not.toBeInTheDocument();
-            expect(treeViewHeaders[0]).toHaveAttribute("aria-expanded", "false");
+            expect(treeViews[0]).toHaveAttribute("aria-expanded", "false");
         });
 
         it("the Home key jumps focus to the first tree view", () => {
             const treeViewHeaders = getClickableTreeViewHeaders();
-            expect(treeViewHeaders).toHaveLength(4);
-            treeViewHeaders.forEach(header => {
-                expect(header).toHaveAttribute("aria-expanded", "false");
+            const treeViews = getTreeViewItems();
+            expect(treeViews).toHaveLength(4);
+            treeViews.forEach(treeView => {
+                expect(treeView).toHaveAttribute("aria-expanded", "false");
             });
 
             focusFirstTreeViewElement();
@@ -565,9 +556,10 @@ describe("TreeView", () => {
 
         it("the End key jumps focus to the last tree view", () => {
             const treeViewHeaders = getClickableTreeViewHeaders();
-            expect(treeViewHeaders).toHaveLength(4);
-            treeViewHeaders.forEach(header => {
-                expect(header).toHaveAttribute("aria-expanded", "false");
+            const treeViews = getTreeViewItems();
+            expect(treeViews).toHaveLength(4);
+            treeViews.forEach(treeView => {
+                expect(treeView).toHaveAttribute("aria-expanded", "false");
             });
 
             focusFirstTreeViewElement();
@@ -582,9 +574,10 @@ describe("TreeView", () => {
         describe("the ArrowDown key", () => {
             it("goes to the next tree view element if the current one is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -598,9 +591,10 @@ describe("TreeView", () => {
 
             it("does not circularly target the first tree view element if the current one is the last", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -619,9 +613,10 @@ describe("TreeView", () => {
 
             it("goes to the next tree view element on the same level if the current one is expanded", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -635,7 +630,7 @@ describe("TreeView", () => {
                 expect(screen.getByText("Second Second header")).toBeInTheDocument();
                 expect(screen.getByText("Second Third header")).toBeInTheDocument();
                 expect(getClickableTreeViewHeaders()).toHaveLength(7);
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
 
                 expect(treeViewHeaders[1]).toHaveFocus();
                 userEvent.keyboard("{ArrowDown}");
@@ -647,9 +642,10 @@ describe("TreeView", () => {
         describe("the ArrowUp key", () => {
             it("goes to the previous tree view element if the current one is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -665,9 +661,10 @@ describe("TreeView", () => {
 
             it("does not circularly target the last tree view element if the current one is the first", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -682,9 +679,10 @@ describe("TreeView", () => {
 
             it("goes to the previous tree view element on the same level even if there are nested elements inbetween", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -699,7 +697,7 @@ describe("TreeView", () => {
                 expect(screen.getByText("Second Second header")).toBeInTheDocument();
                 expect(screen.getByText("Second Third header")).toBeInTheDocument();
                 expect(getClickableTreeViewHeaders()).toHaveLength(7);
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
 
                 expect(treeViewHeaders[1]).toHaveFocus();
 
@@ -719,9 +717,10 @@ describe("TreeView", () => {
         describe("the ArrowRight key", () => {
             it("goes to the next tree view if the current one turns out to be empty", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -733,16 +732,17 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{ArrowRight}");
 
-                expect(treeViewHeaders[2]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[2]).toHaveAttribute("aria-expanded", "true");
 
                 expect(treeViewHeaders[3]).toHaveFocus();
             });
 
             it("expands a tree view element if possible", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -753,15 +753,16 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{ArrowRight}");
 
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
                 expect(getClickableTreeViewHeaders()).not.toHaveLength(4);
             });
 
             it("targets the first child tree view element if the current one is already expanded", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -772,7 +773,7 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{ArrowRight}");
 
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
 
                 userEvent.keyboard("{ArrowRight}");
 
@@ -784,9 +785,10 @@ describe("TreeView", () => {
         describe("the ArrowLeft key", () => {
             it("goes to the previous tree view if the current one is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -803,9 +805,10 @@ describe("TreeView", () => {
 
             it("collapses a tree view element if possible", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -816,19 +819,20 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{ArrowRight}");
 
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
                 expect(getClickableTreeViewHeaders()).not.toHaveLength(4);
 
                 userEvent.keyboard("{ArrowLeft}");
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "false");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "false");
                 expect(getClickableTreeViewHeaders()).toHaveLength(4);
             });
 
             it("goes to the parent tree view element if the current one is the first child element", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
-                expect(treeViewHeaders).toHaveLength(4);
-                treeViewHeaders.forEach(header => {
-                    expect(header).toHaveAttribute("aria-expanded", "false");
+                const treeViews = getTreeViewItems();
+                expect(treeViews).toHaveLength(4);
+                treeViews.forEach(treeView => {
+                    expect(treeView).toHaveAttribute("aria-expanded", "false");
                 });
 
                 focusFirstTreeViewElement();
@@ -839,7 +843,7 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{ArrowRight}");
 
-                expect(treeViewHeaders[1]).toHaveAttribute("aria-expanded", "true");
+                expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
 
                 userEvent.keyboard("{ArrowRight}");
 
