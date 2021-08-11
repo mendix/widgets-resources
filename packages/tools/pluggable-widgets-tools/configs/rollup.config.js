@@ -219,7 +219,7 @@ export default async args => {
             commonjs({
                 extensions: config.extensions,
                 transformMixedEsModules: true,
-                requireReturnsDefault: true,
+                requireReturnsDefault: "auto",
                 ignore: id => (config.external || []).some(value => new RegExp(value).test(id))
             }),
             replace({
