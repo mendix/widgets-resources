@@ -21,6 +21,14 @@ export function preview(props: PreviewProps): ReactElement {
         <GalleryComponent
             className={props.className}
             desktopItems={props.desktopItems!}
+            emptyPlaceholderRenderer={useCallback(
+                renderWrapper => (
+                    <props.emptyPlaceholder.renderer caption="Empty list message: Place widgets here">
+                        {renderWrapper(null)}
+                    </props.emptyPlaceholder.renderer>
+                ),
+                [props.emptyPlaceholder]
+            )}
             filters={
                 isSortableFilterable ? (
                     <props.filtersPlaceholder.renderer caption={caption}>
@@ -28,6 +36,7 @@ export function preview(props: PreviewProps): ReactElement {
                     </props.filtersPlaceholder.renderer>
                 ) : null
             }
+            hasMoreItems={false}
             items={items}
             itemRenderer={useCallback(
                 renderWrapper => (
@@ -35,6 +44,12 @@ export function preview(props: PreviewProps): ReactElement {
                 ),
                 [props.content]
             )}
+            numberOfItems={items.length}
+            page={0}
+            pageSize={props.pageSize ?? 5}
+            paging={props.pagination === "buttons"}
+            paginationPosition={props.pagingPosition}
+            preview
             phoneItems={props.phoneItems!}
             tabletItems={props.tabletItems!}
         />

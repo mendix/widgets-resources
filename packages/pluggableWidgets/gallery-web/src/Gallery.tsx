@@ -23,6 +23,17 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
     const [sortState, setSortState] = useState<SortFunction>();
     const { FilterContext } = useFilterContext();
     const { SortContext } = useSortContext();
+    const isInfiniteLoad = props.pagination === "virtualScrolling";
+    const currentPage = isInfiniteLoad
+        ? props.datasource.limit / props.pageSize
+        : props.datasource.offset / props.pageSize;
+
+    useEffect(() => {
+        props.datasource.requestTotalCount(true);
+        if (props.datasource.limit === Number.POSITIVE_INFINITY) {
+            props.datasource.setLimit(props.pageSize);
+        }
+    }, [props.datasource, props.pageSize]);
 
     useEffect(() => {
         if (props.datasource.filter && !filtered && !viewStateFilters.current) {
@@ -80,10 +91,27 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
 
     const isSortableFilterable = props.filterList.length > 0 || props.sortList.length > 0;
 
+    const setPage = useCallback(
+        computePage => {
+            const newPage = computePage(currentPage);
+            if (isInfiniteLoad) {
+                props.datasource.setLimit(newPage * props.pageSize);
+            } else {
+                props.datasource.setOffset(newPage * props.pageSize);
+            }
+        },
+        [props.datasource, props.pageSize, isInfiniteLoad, currentPage]
+    );
+
     return (
         <GalleryComponent
             className={props.class}
             desktopItems={props.desktopItems}
+            emptyPlaceholderRenderer={useCallback(
+                renderWrapper =>
+                    props.showEmptyPlaceholder === "custom" ? renderWrapper(props.emptyPlaceholder) : <div />,
+                [props.emptyPlaceholder, props.showEmptyPlaceholder]
+            )}
             filters={useMemo(
                 () =>
                     isSortableFilterable ? (
@@ -116,8 +144,18 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                             </SortContext.Provider>
                         </FilterContext.Provider>
                     ) : null,
-                [FilterContext, customFiltersState, filterList, initialFilters, props.filtersPlaceholder]
+                [
+                    FilterContext,
+                    SortContext,
+                    customFiltersState,
+                    filterList,
+                    initialFilters,
+                    isSortableFilterable,
+                    props.filtersPlaceholder,
+                    sortList
+                ]
             )}
+            hasMoreItems={props.datasource.hasMoreItems ?? false}
             items={props.datasource.items ?? []}
             itemRenderer={useCallback(
                 (renderWrapper, item) =>
@@ -128,7 +166,13 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                     ),
                 [props.content, props.itemClass, props.onClick]
             )}
+            numberOfItems={props.datasource.totalCount}
+            page={currentPage}
+            pageSize={props.pageSize}
+            paging={props.pagination === "buttons"}
+            paginationPosition={props.pagingPosition}
             phoneItems={props.phoneItems}
+            setPage={setPage}
             tabletItems={props.tabletItems}
             tabIndex={props.tabIndex}
         />

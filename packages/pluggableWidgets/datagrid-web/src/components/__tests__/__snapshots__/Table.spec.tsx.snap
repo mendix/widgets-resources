@@ -12,8 +12,10 @@ exports[`Table renders the structure correctly 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -108,8 +110,10 @@ exports[`Table renders the structure correctly for preview when no header is pro
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -205,8 +209,10 @@ exports[`Table renders the structure correctly with column alignments 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -391,8 +397,10 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -493,8 +501,10 @@ exports[`Table renders the structure correctly with dragging 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -589,8 +599,10 @@ exports[`Table renders the structure correctly with dynamic row class 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -685,8 +697,10 @@ exports[`Table renders the structure correctly with empty placeholder 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -781,8 +795,10 @@ exports[`Table renders the structure correctly with filtering 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -883,8 +899,10 @@ exports[`Table renders the structure correctly with header wrapper 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -983,8 +1001,10 @@ exports[`Table renders the structure correctly with hiding 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -1104,8 +1124,10 @@ exports[`Table renders the structure correctly with paging 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={false}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -1210,8 +1232,10 @@ exports[`Table renders the structure correctly with resizing 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {
@@ -1306,8 +1330,10 @@ exports[`Table renders the structure correctly with sorting 1`] = `
       className="table-header"
     />
     <InfiniteBody
+      className="table-content"
       hasMoreItems={false}
       isInfinite={true}
+      role="rowgroup"
       setPage={[MockFunction]}
       style={
         Object {

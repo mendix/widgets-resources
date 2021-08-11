@@ -25,13 +25,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const multipleFilteringState = useMultipleFiltering();
     const { FilterContext } = useFilterContext();
 
-    props.datasource.requestTotalCount(true);
-
-    useState(() => {
+    useEffect(() => {
+        props.datasource.requestTotalCount(true);
         if (props.datasource.limit === Number.POSITIVE_INFINITY) {
             props.datasource.setLimit(props.pageSize);
         }
-    });
+    }, [props.datasource, props.pageSize]);
 
     useEffect(() => {
         if (props.datasource.filter && !filtered && !viewStateFilters.current) {
@@ -43,7 +42,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         computePage => {
             const newPage = computePage(currentPage);
             if (isInfiniteLoad) {
-                props.datasource.setLimit((newPage + 1) * props.pageSize);
+                props.datasource.setLimit(newPage * props.pageSize);
             } else {
                 props.datasource.setOffset(newPage * props.pageSize);
             }
