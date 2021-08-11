@@ -15,84 +15,78 @@ export type TreeViewFocusChangeHandler = (
     traverseOption?: "HORIZONTAL" | "VERTICAL"
 ) => void;
 
-export const useTreeViewFocusChangeHandler = (treeViewElement: HTMLDivElement | null): TreeViewFocusChangeHandler => {
-    return useCallback(
-        (targetElement, focusTargetChange, traverseOption) => {
-            if (targetElement && targetElement instanceof Element && treeViewElement) {
-                const targetableBranches: HTMLHeadElement[] = Array.from(
-                    treeViewElement.querySelectorAll(":scope > .widget-tree-view-branch > header[role=button]")
-                );
+export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
+    return useCallback((targetElement, focusTargetChange, traverseOption) => {
+        if (targetElement && targetElement instanceof Element) {
+            const getTreeViewHeadersInElement = (element: Element | Document | null): HTMLHeadElement[] =>
+                element ? Array.from(element.querySelectorAll(".widget-tree-view-branch-header")) : [];
 
-                const numberOfTargetableBranches = targetableBranches.length;
-                if (numberOfTargetableBranches === 0) {
-                    return;
+            const currentTreeViewScope = Array.from(
+                document.body.querySelectorAll(".widget-tree-view[role=tree]")
+            ).find(element => element.contains(targetElement));
+
+            if (!currentTreeViewScope) {
+                return;
+            }
+
+            const targetableBranches = getTreeViewHeadersInElement(currentTreeViewScope);
+
+            const numberOfTargetableBranches = targetableBranches.length;
+            if (numberOfTargetableBranches === 0) {
+                return;
+            }
+
+            const currentBranchIndex = targetableBranches.findIndex(branch => branch.isSameNode(targetElement));
+
+            switch (focusTargetChange) {
+                case FocusTargetChange.FIRST:
+                    targetableBranches[0].focus();
+                    break;
+                case FocusTargetChange.LAST:
+                    targetableBranches[numberOfTargetableBranches - 1].focus();
+                    break;
+                case FocusTargetChange.PREVIOUS: {
+                    if (traverseOption === "VERTICAL") {
+                        const parentTreeViewHeaders = getTreeViewHeadersInElement(document).filter(node =>
+                            node.nextElementSibling?.contains(targetElement)
+                        );
+                        if (parentTreeViewHeaders.length > 0) {
+                            parentTreeViewHeaders[parentTreeViewHeaders.length - 1].focus();
+                        }
+                        return;
+                    }
+                    const newBranchIndex = currentBranchIndex - 1;
+                    const newBranchIndexProcessed = Math.max(newBranchIndex, 0);
+                    if (newBranchIndexProcessed !== currentBranchIndex) {
+                        targetableBranches[newBranchIndexProcessed].focus();
+                    }
+                    break;
                 }
-
-                const getTreeViewHeadersInElement = (element: Element | Document | null): HTMLHeadElement[] =>
-                    element ? Array.from(element.querySelectorAll(".widget-tree-view-branch-header[role=button]")) : [];
-
-                switch (focusTargetChange) {
-                    case FocusTargetChange.FIRST:
-                        targetableBranches[0].focus();
-                        break;
-                    case FocusTargetChange.LAST:
-                        targetableBranches[numberOfTargetableBranches - 1].focus();
-                        break;
-                    case FocusTargetChange.PREVIOUS: {
-                        const currentBranchIndex = targetableBranches.findIndex(targetableBranch =>
-                            targetableBranch.isSameNode(targetElement)
-                        );
-                        if (currentBranchIndex >= 0) {
-                            if (currentBranchIndex === 0 && traverseOption === "VERTICAL") {
-                                const parentTreeViewHeaders = getTreeViewHeadersInElement(document).filter(node =>
-                                    node.nextElementSibling?.contains(targetElement)
-                                );
-                                if (parentTreeViewHeaders.length > 0) {
-                                    parentTreeViewHeaders[parentTreeViewHeaders.length - 1].focus();
-                                }
-                                return;
-                            }
-                            const newBranchIndex = currentBranchIndex - 1;
-                            const newBranchIndexProcessed = Math.max(newBranchIndex, 0);
-                            if (newBranchIndexProcessed !== currentBranchIndex) {
-                                targetableBranches[newBranchIndexProcessed].focus();
-                            }
+                case FocusTargetChange.NEXT: {
+                    if (traverseOption === "VERTICAL") {
+                        const childTreeViewHeaders = getTreeViewHeadersInElement(targetElement.nextElementSibling);
+                        if (childTreeViewHeaders.length > 0) {
+                            childTreeViewHeaders[0].focus();
                         }
-                        break;
+                        return;
                     }
-                    case FocusTargetChange.NEXT: {
-                        const currentBranchIndex = targetableBranches.findIndex(targetableBranch =>
-                            targetableBranch.isSameNode(targetElement)
-                        );
-                        if (currentBranchIndex >= 0) {
-                            if (traverseOption === "VERTICAL") {
-                                const childTreeViewHeaders = getTreeViewHeadersInElement(
-                                    targetElement.nextElementSibling
-                                );
-                                if (childTreeViewHeaders.length > 0) {
-                                    childTreeViewHeaders[0].focus();
-                                }
-                                return;
-                            }
-                            const newBranchIndex = currentBranchIndex + 1;
-                            const newBranchIndexProcessed = Math.min(newBranchIndex, numberOfTargetableBranches - 1);
-                            if (newBranchIndexProcessed !== currentBranchIndex) {
-                                targetableBranches[newBranchIndexProcessed].focus();
-                            }
-                        }
-                        break;
+                    const newBranchIndex = currentBranchIndex + 1;
+                    const newBranchIndexProcessed = Math.min(newBranchIndex, numberOfTargetableBranches - 1);
+                    if (newBranchIndexProcessed !== currentBranchIndex) {
+                        targetableBranches[newBranchIndexProcessed].focus();
                     }
+                    break;
                 }
             }
-        },
-        [treeViewElement]
-    );
+        }
+    }, []);
 };
 
 export const useTreeViewBranchKeyboardHandler = (
     toggleTreeViewContent: () => void,
     changeFocus: TreeViewFocusChangeHandler,
-    treeViewState: TreeViewState
+    treeViewState: TreeViewState,
+    isActualLeafNode: boolean
 ): ReturnType<KeyboardHandlerHook> => {
     const keyHandlers = useMemo<Parameters<KeyboardHandlerHook>[0]>(
         () => ({
@@ -116,7 +110,8 @@ export const useTreeViewBranchKeyboardHandler = (
             ArrowLeft: event => {
                 if (
                     treeViewState === TreeViewState.COLLAPSED_WITH_CSS ||
-                    treeViewState === TreeViewState.COLLAPSED_WITH_JS
+                    treeViewState === TreeViewState.COLLAPSED_WITH_JS ||
+                    isActualLeafNode
                 ) {
                     changeFocus(event.currentTarget, FocusTargetChange.PREVIOUS, "VERTICAL");
                 }
@@ -125,7 +120,7 @@ export const useTreeViewBranchKeyboardHandler = (
                 }
             }
         }),
-        [toggleTreeViewContent, changeFocus, treeViewState]
+        [toggleTreeViewContent, changeFocus, treeViewState, isActualLeafNode]
     );
     return useKeyboardHandler(keyHandlers);
 };

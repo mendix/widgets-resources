@@ -24,7 +24,6 @@ import { useIncrementalId } from "./hooks/useIncrementalId";
 import "../ui/TreeView.scss";
 import loadingCircleSvg from "../assets/loading-circle.svg";
 import {
-    FocusTargetChange,
     TreeViewFocusChangeHandler,
     useTreeViewBranchKeyboardHandler,
     useTreeViewFocusChangeHandler
@@ -240,15 +239,19 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         hasChildNodes => {
             if (!hasChildNodes && !isActualLeafNode) {
                 setIsActualLeafNode(true);
-                changeFocus(headerRef.current, FocusTargetChange.NEXT);
             } else if (hasChildNodes && isActualLeafNode) {
                 setIsActualLeafNode(false);
             }
         },
-        [isActualLeafNode, changeFocus]
+        [isActualLeafNode]
     );
 
-    const onHeaderKeyDown = useTreeViewBranchKeyboardHandler(toggleTreeViewContent, changeFocus, treeViewState);
+    const onHeaderKeyDown = useTreeViewBranchKeyboardHandler(
+        toggleTreeViewContent,
+        changeFocus,
+        treeViewState,
+        isActualLeafNode
+    );
 
     return (
         <li className="widget-tree-view-branch" {...treeViewAccessibilityProps}>

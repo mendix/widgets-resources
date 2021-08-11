@@ -611,7 +611,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[3]).toHaveFocus();
             });
 
-            it("goes to the next tree view element on the same level if the current one is expanded", () => {
+            it("goes to the next nested tree view element if the current one is expanded", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -635,7 +635,8 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[1]).toHaveFocus();
                 userEvent.keyboard("{ArrowDown}");
 
-                expect(treeViewHeaders[2]).toHaveFocus();
+                expect(treeViewHeaders[2]).not.toHaveFocus();
+                expect(getClickableTreeViewHeaders()[2]).toHaveFocus();
             });
         });
 
@@ -677,7 +678,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[0]).toHaveFocus();
             });
 
-            it("goes to the previous tree view element on the same level even if there are nested elements inbetween", () => {
+            it("goes to the previous nested tree view element if there are nested elements inbetween", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -710,12 +711,13 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{Up}");
 
-                expect(treeViewHeaders[1]).toHaveFocus();
+                expect(treeViewHeaders[1]).not.toHaveFocus();
+                expect(getClickableTreeViewHeaders()[4]).toHaveFocus();
             });
         });
 
         describe("the ArrowRight key", () => {
-            it("goes to the next tree view if the current one turns out to be empty", () => {
+            it("stays at the current tree view if it turns out to be empty", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -734,7 +736,7 @@ describe("TreeView", () => {
 
                 expect(treeViews[2]).toHaveAttribute("aria-expanded", "true");
 
-                expect(treeViewHeaders[3]).toHaveFocus();
+                expect(treeViewHeaders[2]).toHaveFocus();
             });
 
             it("expands a tree view element if possible", () => {
@@ -783,7 +785,7 @@ describe("TreeView", () => {
         });
 
         describe("the ArrowLeft key", () => {
-            it("goes to the previous tree view if the current one is collapsed", () => {
+            it("does nothing if the current one is top level and collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -800,7 +802,7 @@ describe("TreeView", () => {
 
                 userEvent.keyboard("{ArrowLeft}");
 
-                expect(treeViewHeaders[1]).toHaveFocus();
+                expect(treeViewHeaders[2]).toHaveFocus();
             });
 
             it("collapses a tree view element if possible", () => {
@@ -827,7 +829,7 @@ describe("TreeView", () => {
                 expect(getClickableTreeViewHeaders()).toHaveLength(4);
             });
 
-            it("goes to the parent tree view element if the current one is the first child element", () => {
+            it("goes to the parent tree view element if the current one is not top level and is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -848,7 +850,9 @@ describe("TreeView", () => {
                 userEvent.keyboard("{ArrowRight}");
 
                 expect(treeViewHeaders[2]).not.toHaveFocus();
-                expect(getClickableTreeViewHeaders()[2]).toHaveFocus();
+
+                userEvent.keyboard("{ArrowDown}");
+                expect(getClickableTreeViewHeaders()[3]).toHaveFocus();
 
                 userEvent.keyboard("{ArrowLeft}");
 
