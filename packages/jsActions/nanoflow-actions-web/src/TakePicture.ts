@@ -7,13 +7,26 @@
 // Other code you write will be lost the next time you deploy the project.
 
 // BEGIN EXTRA CODE
+import { Big } from "big.js";
+export type PictureQuality = "original" | "low" | "medium" | "high" | "custom";
 // END EXTRA CODE
 
 /**
- * Take a picture using the device camera.
+ * Take a picture using the device's camera.
+ * @param {MxObject} picture - This is required.
+ * @param {boolean} showConfirmationScreen
+ * @param {"WebActions.PictureQuality.original"|"WebActions.PictureQuality.low"|"WebActions.PictureQuality.medium"|"WebActions.PictureQuality.high"|"WebActions.PictureQuality.custom"} pictureQuality - The default picture quality is 'Medium'.
+ * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaining the aspect ratio.
+ * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaining the aspect ratio.
  * @returns {Promise.<boolean>}
  */
-export async function TakePicture(picture: mendix.lib.MxObject, showConfirmationScreen: boolean): Promise<boolean> {
+export async function TakePicture(
+    picture: mendix.lib.MxObject,
+    showConfirmationScreen: boolean,
+    pictureQuality?: PictureQuality,
+    maximumHeight?: Big,
+    maximumWidth?: Big
+): Promise<boolean> {
     // BEGIN USER CODE
     const CAMERA_POSITION = {
         BACK_CAMERA: "environment",
@@ -32,6 +45,12 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
 
     if (!("mediaDevices" in navigator) || !("getUserMedia" in navigator.mediaDevices)) {
         return Promise.reject(new Error("Media devices are not supported."));
+    }
+
+    if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
+        return Promise.reject(
+            new Error("Picture quality is set to 'Custom', but no maximum width or height was provided")
+        );
     }
 
     // TODO: WC-463 rollup has a bug where comments are removed from the top of files, disallowing imports between "extra code" comments. Until this is fixed, SVGs are manually encoded and added here.
@@ -66,7 +85,9 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
             closeControl,
             createAction,
             controlsWrapper,
-            createActionAndSwitch
+            createActionAndSwitch,
+            addAllControlButtons,
+            removeAllControlButtons
         } = createFirstScreenElements();
 
         document.body.appendChild(wrapper);
@@ -93,18 +114,25 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
 
         switchControl.addEventListener("click", switchControlHandler);
 
-        actionControl.addEventListener(
-            "click",
-            showConfirmationScreen
-                ? takePictureHandler
-                : () => {
-                      const videoCanvas = getVideoCanvas();
-                      savePicture(videoCanvas, () => {
-                          videoCanvas.remove();
-                          closeControlHandler();
-                      });
-                  }
-        );
+        actionControl.addEventListener("click", () => {
+            removeAllControlButtons();
+            if (showConfirmationScreen) {
+                // Delay the `takePictureHandler` to the next cycle so the UI preparations can go first. Otherwise, the control-buttons are not removed while the second screen is being set up.
+                setTimeout(() => {
+                    takePictureHandler(() => {
+                        addAllControlButtons();
+                        video.play();
+                    });
+                }, 0);
+            } else {
+                video.pause();
+                const videoCanvas = getVideoCanvas();
+                savePicture(videoCanvas, () => {
+                    videoCanvas.remove();
+                    closeControlHandler();
+                });
+            }
+        });
 
         video.addEventListener("loadedmetadata", () => (videoIsReady = true));
 
@@ -319,7 +347,18 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
             return styleElements;
         }
 
-        function createFirstScreenElements(): any {
+        function createFirstScreenElements(): {
+            video: HTMLVideoElement;
+            wrapper: HTMLDivElement;
+            controlsWrapper: HTMLDivElement;
+            actionControl: HTMLButtonElement;
+            switchControl: HTMLButtonElement;
+            closeControl: HTMLButtonElement;
+            createActionAndSwitch: () => void;
+            createAction: () => HTMLButtonElement;
+            addAllControlButtons: () => void;
+            removeAllControlButtons: () => void;
+        } {
             const wrapper = document.createElement("div");
             wrapper.setAttribute("role", "dialog");
             wrapper.setAttribute("aria-labelledby", "take-picture-modal-label");
@@ -379,8 +418,18 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
             }
 
             closeControlWrapper.appendChild(closeControl);
-            wrapper.appendChild(controlsWrapper);
-            wrapper.appendChild(closeControlWrapper);
+
+            function addAllControlButtons(): void {
+                wrapper.appendChild(controlsWrapper);
+                wrapper.appendChild(closeControlWrapper);
+            }
+
+            function removeAllControlButtons(): void {
+                wrapper.removeChild(controlsWrapper);
+                wrapper.removeChild(closeControlWrapper);
+            }
+
+            addAllControlButtons();
             wrapper.appendChild(video);
 
             return {
@@ -391,19 +440,22 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
                 switchControl,
                 closeControl,
                 createActionAndSwitch,
-                createAction: () => controlsWrapper.appendChild(actionControl)
+                createAction: () => controlsWrapper.appendChild(actionControl),
+                addAllControlButtons,
+                removeAllControlButtons
             };
         }
 
-        function prepareSecondScreen(): { handler: () => void; cleanup: () => void } {
+        function prepareSecondScreen(): { handler: (onResumeFirstScreen: () => void) => void; cleanup: () => void } {
             let confirmationWrapper: HTMLDivElement;
 
             return {
-                handler: () => {
+                handler: onResumeFirstScreen => {
                     if (videoIsReady) {
                         confirmationWrapper = document.createElement("div");
                         confirmationWrapper.classList.add("take-picture-confirm-wrapper");
 
+                        video.pause();
                         // Element to retrieve the blob from mediaStream (not rendered on the screen)
                         const videoCanvas = getVideoCanvas();
 
@@ -439,11 +491,17 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
                         document.body.appendChild(confirmationWrapper);
 
                         saveBtn.addEventListener("click", () => {
-                            cleanupConfirmationElements();
-                            savePicture(videoCanvas, closeControlHandler);
+                            confirmationWrapper.removeChild(buttonWrapper);
+                            savePicture(videoCanvas, () => {
+                                closeControlHandler();
+                                cleanupConfirmationElements();
+                            });
                         });
 
-                        closeBtn.addEventListener("click", () => cleanupConfirmationElements());
+                        closeBtn.addEventListener("click", () => {
+                            cleanupConfirmationElements();
+                            onResumeFirstScreen();
+                        });
 
                         // eslint-disable-next-line no-inner-declarations
                         function cleanupConfirmationElements(): void {
@@ -491,8 +549,7 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
                 stream = await navigator.mediaDevices.getUserMedia({
                     video: {
                         facingMode,
-                        width: { min: 1280, ideal: 1920, max: 2560 },
-                        height: { min: 720, ideal: 1080, max: 1440 }
+                        ...getCameraQuality()
                     }
                 });
 
@@ -608,6 +665,32 @@ export async function TakePicture(picture: mendix.lib.MxObject, showConfirmation
                     mx.ui.hideProgress(progressId);
                     reject(new Error(message));
                 });
+        }
+
+        function getCameraQuality(): MediaTrackConstraints {
+            switch (pictureQuality) {
+                case "low":
+                    return {
+                        width: { ideal: 1024 },
+                        height: { ideal: 1024 }
+                    };
+                case "medium":
+                default:
+                    return {
+                        width: { ideal: 2048 },
+                        height: { ideal: 2048 }
+                    };
+                case "high":
+                    return {
+                        width: { ideal: 4096 },
+                        height: { ideal: 4096 }
+                    };
+                case "custom":
+                    return {
+                        width: { ideal: Number(maximumWidth) },
+                        height: { ideal: Number(maximumHeight) }
+                    };
+            }
         }
     });
 
