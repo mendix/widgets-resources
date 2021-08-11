@@ -25,13 +25,12 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const multipleFilteringState = useMultipleFiltering();
     const { FilterContext } = useFilterContext();
 
-    props.datasource.requestTotalCount(true);
-
-    useState(() => {
+    useEffect(() => {
+        props.datasource.requestTotalCount(true);
         if (props.datasource.limit === Number.POSITIVE_INFINITY) {
             props.datasource.setLimit(props.pageSize);
         }
-    });
+    }, [props.datasource, props.pageSize]);
 
     useEffect(() => {
         if (props.datasource.filter && !filtered && !viewStateFilters.current) {
