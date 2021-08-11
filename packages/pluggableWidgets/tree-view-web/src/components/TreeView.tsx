@@ -162,23 +162,13 @@ const treeViewBranchUtils = {
 };
 
 function getTreeViewHeaderAccessibilityProps(
-    isLeafNode: boolean,
     isExpanded: boolean,
     id: TreeViewObject["id"]
 ): HTMLAttributes<HTMLHeadElement> {
-    const commonProps: HTMLAttributes<HTMLHeadElement> = {
+    return {
         id: treeViewBranchUtils.getHeaderId(id),
         "aria-expanded": isExpanded,
-        "aria-disabled": isLeafNode,
-        "aria-controls": treeViewBranchUtils.getBodyId(id)
-    };
-    if (isLeafNode) {
-        return {
-            ...commonProps
-        };
-    }
-    return {
-        ...commonProps,
+        "aria-controls": treeViewBranchUtils.getBodyId(id),
         tabIndex: 0,
         role: "button"
     };
@@ -228,7 +218,6 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     }, [isActualLeafNode, props.shouldLazyLoad]);
 
     const headerAccessibilityProps = getTreeViewHeaderAccessibilityProps(
-        isActualLeafNode,
         treeViewState === TreeViewState.EXPANDED,
         props.id
     );

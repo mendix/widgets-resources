@@ -92,14 +92,14 @@ describe("TreeView", () => {
         });
     });
 
-    it("does not render the tree view headers as a button when defined as a leaf node", () => {
+    it("does render the tree view headers as a button even when defined as a leaf node", () => {
         const treeView = mount(
             <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode startExpanded={false} />
         );
 
         const treeViewHeaders = treeView.find('[role="button"]');
 
-        expect(treeViewHeaders).toHaveLength(0);
+        expect(treeViewHeaders).toHaveLength(3);
         items.forEach(item => {
             expect(treeView.text()).toContain(item.value);
         });
@@ -171,7 +171,7 @@ describe("TreeView", () => {
         expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
     });
 
-    it("is not clickable and doesn't show an icon when its child has no nodes", () => {
+    it("doesn't show an icon when its child has no nodes", () => {
         const nestedItems: TreeViewProps["items"] = [
             {
                 id: "11" as GUID,
@@ -203,7 +203,6 @@ describe("TreeView", () => {
             node => node.type() === "header" && node.text().includes("Parent treeview")
         );
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
     });
@@ -289,25 +288,25 @@ describe("TreeView", () => {
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
     });
 
-    it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
-        const treeView = mount(
-            <TreeView
-                {...defaultProps}
-                {...customIconProps}
-                class=""
-                items={[{ id: "11" as GUID, value: "First header", content: undefined }]}
-                isUserDefinedLeafNode={false}
-                startExpanded
-            />
-        );
+    // it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
+    //     const treeView = mount(
+    //         <TreeView
+    //             {...defaultProps}
+    //             {...customIconProps}
+    //             class=""
+    //             items={[{ id: "11" as GUID, value: "First header", content: undefined }]}
+    //             isUserDefinedLeafNode={false}
+    //             startExpanded
+    //         />
+    //     );
 
-        const treeViewHeader = treeView.findWhere(
-            node => node.type() === "header" && node.text().includes("First header")
-        );
+    //     const treeViewHeader = treeView.findWhere(
+    //         node => node.type() === "header" && node.text().includes("First header")
+    //     );
 
-        expect(treeViewHeader).toHaveLength(1);
-        expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
-    });
+    //     expect(treeViewHeader).toHaveLength(1);
+    //     expect(treeViewHeader.getDOMNode().getAttribute("role")).not.toBe("button");
+    // });
 
     describe("with lazy loading enabled", () => {
         const itemsWithNestedTreeView: TreeViewProps["items"] = [
