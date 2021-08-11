@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.4.2] - 2021-08-11
+
+### Changed
+- We changed the behavior of commonjs pluggin for rollup to identify the correct way to handle require (as default or not).
+
 ## [9.4.1] - 2021-08-05
 
 ### Added
