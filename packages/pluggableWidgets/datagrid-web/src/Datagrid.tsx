@@ -42,7 +42,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
         computePage => {
             const newPage = computePage(currentPage);
             if (isInfiniteLoad) {
-                props.datasource.setLimit((newPage + 1) * props.pageSize);
+                props.datasource.setLimit(newPage * props.pageSize);
             } else {
                 props.datasource.setOffset(newPage * props.pageSize);
             }
