@@ -53,7 +53,7 @@
         // Topbar
         .region-topbar {
             position: relative;
-            z-index: 1; // Show dropshadow
+            z-index: 2; // Show dropshadow
             min-height: $topbar-minimalheight;
             background-color: $navtopbar-bg;
 
