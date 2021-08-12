@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.4.3] - 2021-08-12
+
+### Changed
+- We've updated rollup & rollup plugins dependencies.
+
 ## [9.4.2] - 2021-08-11
 
 ### Changed
