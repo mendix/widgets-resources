@@ -53,8 +53,15 @@ export class Maps extends Component<Props, State> {
     }
 
     componentDidUpdate(): void {
+        const markersChanged =
+            (this.props.markers?.length || 0) +
+                (this.props.dynamicMarkers?.reduce((acc, curr) => acc + (curr.markersDS?.items?.length || 0), 0) ||
+                    0) !==
+            this.state.markers?.length;
+
         if (
-            this.state.status === Status.LoadingMarkers &&
+            (this.state.status === Status.LoadingMarkers ||
+                (this.state.status === Status.CameraReady && markersChanged)) &&
             (!this.props.dynamicMarkers.length ||
                 this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
         ) {
@@ -62,16 +69,10 @@ export class Maps extends Component<Props, State> {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(): void {
-        if (this.state.status === Status.CameraReady) {
-            this.parseMarkers();
-        }
-    }
-
     render(): JSX.Element {
         return (
             <View style={this.styles.container} testID={this.props.name}>
-                {this.state.status !== Status.LoadingMarkers && (
+                {this.state.status !== Status.LoadingMarkers ? (
                     <MapView
                         ref={this.mapViewRef}
                         provider={this.props.provider === "default" ? null : this.props.provider}
@@ -93,14 +94,14 @@ export class Maps extends Component<Props, State> {
                         onMapReady={this.onMapReadyHandler}
                         onRegionChangeComplete={this.onRegionChangeCompleteHandler}
                     >
-                        {this.state.markers && this.state.markers.map(marker => this.renderMarker(marker))}
+                        {this.state.markers ? this.state.markers.map(marker => this.renderMarker(marker)) : null}
                     </MapView>
-                )}
-                {(this.state.status === Status.LoadingMarkers || this.state.status === Status.LoadingMap) && (
+                ) : null}
+                {this.state.status === Status.LoadingMarkers || this.state.status === Status.LoadingMap ? (
                     <View style={this.styles.loadingOverlay}>
                         <ActivityIndicator color={this.styles.loadingIndicator.color} size="large" />
                     </View>
-                )}
+                ) : null}
             </View>
         );
     }
