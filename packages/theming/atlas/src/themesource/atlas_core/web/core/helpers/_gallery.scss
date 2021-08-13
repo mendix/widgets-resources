@@ -60,6 +60,34 @@
         }
     }
 
+    // Grid spacing none
+    .widget-gallery.widget-gallery-gridgap-none {
+        .widget-gallery-items{
+            gap: 0;
+        }
+    }
+
+    // Grid spacing small
+    .widget-gallery.widget-gallery-gridgap-small {
+        .widget-gallery-items{
+            gap: $spacing-small;
+        }
+    }
+
+    // Grid spacing medium
+    .widget-gallery.widget-gallery-gridgap-medium {
+        .widget-gallery-items{
+            gap: $spacing-medium;
+        }
+    }
+
+    // Grid spacing large
+    .widget-gallery.widget-gallery-gridgap-large {
+        .widget-gallery-items{
+            gap: $spacing-large;
+        }
+    }
+
     // Pagination left
     .widget-gallery-pagination-left {
         .widget-gallery-pagination {

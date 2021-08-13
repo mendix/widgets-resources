@@ -1194,6 +1194,30 @@
             "class": "widget-gallery-striped"
         },
         {
+            "name": "Grid spacing",
+            "type": "Dropdown",
+            "description": "Change the gap between grid items.",
+            "options": [
+
+                {
+                    "name": "None",
+                    "class": "widget-gallery-gridgap-none"
+                },
+                {
+                    "name": "Small",
+                    "class": "widget-gallery-gridgap-small"
+                },
+                {
+                    "name": "Medium",
+                    "class": "widget-gallery-gridgap-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "widget-gallery-gridgap-large"
+                }
+            ]
+        },
+        {
             "name": "Pagination",
             "type": "Dropdown",
             "description": "Change the alignment of the pagination.",
