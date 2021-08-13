@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 - We fixed an issue where dynamic markers added on the fly were not added to the maps.
-- We fixed an issue where latitude or longtitude with a value of 0 gave unexpected results.
+- We fixed an issue where latitude or longitude with a value of 0 gave unexpected results.
 
 ## [2.1.1] - 2021-07-14
 
