@@ -89,7 +89,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
         type: "RowLayout",
         columnSize: "fixed",
         borders: true,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#F8F8F8",
         children: [
             {
                 type: "DropZone",
@@ -146,7 +146,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                       type: "RowLayout",
                       columnSize: "fixed",
                       borders: true,
-                      backgroundColor: "#f5f5f5",
+                      backgroundColor: "#F8F8F8",
                       children: [
                           {
                               type: "DropZone",
