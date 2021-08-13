@@ -212,7 +212,7 @@ export class Maps extends Component<Props, State> {
     private async getCenter(): Promise<LatLng> {
         const { fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            (centerLatitude && centerLongitude) || centerAddress
+            (typeof centerLatitude === "number" && typeof centerLongitude === "number") || centerAddress
                 ? await this.parseCoordinate(
                       Number(centerLatitude?.value),
                       Number(centerLongitude?.value),
@@ -230,7 +230,7 @@ export class Maps extends Component<Props, State> {
         longitude?: number | undefined,
         address?: string | undefined
     ): Promise<LatLng> {
-        if (latitude && longitude) {
+        if (typeof latitude === "number" && typeof longitude === "number") {
             if (!isValidLatitude(latitude) || !isValidLongitude(longitude)) {
                 throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
