@@ -134,6 +134,16 @@
     @include header();
 }
 
+@import "core/widgets/gallery";
+@if not $exclude-gallery {
+    @include gallery();
+}
+
+@import "core/helpers/gallery";
+@if not $exclude-gallery and not $exclude-gallery-helpers {
+    @include gallery-helpers();
+}
+
 @import "core/widgets/glyphicon";
 @if not $exclude-glyphicon {
     @include glyphicon();

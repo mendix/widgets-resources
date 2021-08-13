@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added styles, exclusion variables and design properties for Gallery widget.
+
 ## [3.0.6] - 2021-08-12
 
 ### Changed
