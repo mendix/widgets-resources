@@ -5,7 +5,7 @@ import { WebIcon } from "mendix";
 import { Accordion } from "./components/Accordion";
 import { useIconGenerator } from "./utils/iconGenerator";
 
-import { AccordionPreviewProps } from "../typings/AccordionProps";
+import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 
 // This interface is necessary to overcome incorrect exposure of class names with the "className" prop. In the future they will be exposed with a "class" prop (Jira Issue PAG-1317).
 interface PreviewProps extends Omit<AccordionPreviewProps, "class"> {
@@ -19,7 +19,28 @@ export function getPreviewCss(): string {
 export function preview(props: PreviewProps): ReactElement {
     const style = parseStyle(props.style);
 
-    const accordionGroups = props.groups.map((group, index) => ({
+    const groups =
+        props.groups.length > 0
+            ? props.groups
+            : [
+                  {
+                      headerRenderMode: "text",
+                      headerText: "[No groups configured]",
+                      headerHeading: "headingOne" as const,
+                      visible: true as any,
+                      dynamicClass: "",
+                      initiallyCollapsed: true as any,
+                      collapsed: true as any,
+                      onToggleCollapsed: null,
+                      content: {
+                          renderer: ({}: { caption: string; children: ReactElement }) => (
+                              <div>Add groups in order to place widgets here.</div>
+                          )
+                      }
+                  } as GroupsPreviewType
+              ];
+
+    const accordionGroups = groups.map((group, index) => ({
         header:
             group.headerRenderMode === "text" ? (
                 <h3>{group.headerText}</h3>

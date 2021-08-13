@@ -5,6 +5,7 @@ import {
     hidePropertyIn,
     Problem,
     Properties,
+    RowLayoutProps,
     StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
@@ -102,14 +103,66 @@ export function check(values: AccordionPreviewProps): Problem[] {
 }
 
 export function getPreview(values: AccordionPreviewProps): StructurePreviewProps | null {
+    const groups =
+        values.groups.length > 0
+            ? values.groups
+            : [
+                  {
+                      headerRenderMode: "text",
+                      headerText: "[No groups configured]",
+                      headerHeading: "headingOne" as const,
+                      visible: true as any,
+                      dynamicClass: "",
+                      initiallyCollapsed: true as any,
+                      collapsed: true as any,
+                      onToggleCollapsed: null,
+                      content: {
+                          renderer: ({}: { caption: string }) => null,
+                          widgetCount: 0
+                      }
+                  } as GroupsPreviewType
+              ];
+    const titleHeader: RowLayoutProps = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        backgroundColor: "#daeffb",
+        borders: true,
+        borderWidth: 1,
+        children: [
+            {
+                type: "Container",
+                padding: 4,
+                children: [
+                    {
+                        type: "Text",
+                        content: "Accordion",
+                        fontColor: "#2074c8"
+                    }
+                ]
+            }
+        ]
+    };
     return {
         type: "Container",
         borders: true,
-        children: values.groups.reduce((accumulator, group, index): StructurePreviewProps[] => {
-            const { headerTextFontSize, headerTextIconPadding } = getHeaderTextPreviewDetails(group);
+        children: [
+            titleHeader,
+            ...groups.reduce((accumulator, group, index): StructurePreviewProps[] => {
+                const { headerTextFontSize, headerTextIconPadding } = getHeaderTextPreviewDetails(group);
 
-            return [...accumulator, getGroupPreview(group, values, headerTextIconPadding, headerTextFontSize, index)];
-        }, [])
+                return [
+                    ...accumulator,
+                    getGroupPreview(
+                        group,
+                        values,
+                        headerTextIconPadding,
+                        headerTextFontSize,
+                        index,
+                        values.groups.length === 0
+                    )
+                ];
+            }, [])
+        ]
     };
 }
 
@@ -118,66 +171,89 @@ function getGroupPreview(
     values: AccordionPreviewProps,
     headerTextIconPadding: number,
     headerTextFontSize: number,
-    index: number
+    index: number,
+    groupsEmpty: boolean
 ): StructurePreviewProps {
-    return {
-        type: "Selectable",
-        object: group,
-        child: {
-            type: "Container",
-            borders: true,
-            children: [
-                {
-                    type: "Container",
-                    borders: true,
-                    children: [
-                        {
-                            type: "RowLayout",
-                            columnSize: "grow",
-                            children: [
-                                ...(values.collapsible && values.showIcon === "left"
-                                    ? [getIconPreview(group, headerTextIconPadding)]
-                                    : []),
-                                {
-                                    type: "Container",
-                                    padding: group.headerRenderMode === "text" ? 10 : 0,
-                                    grow: 100,
-                                    children: [
-                                        group.headerRenderMode === "text"
-                                            ? {
-                                                  type: "Text",
-                                                  content: group.headerText,
-                                                  fontSize: headerTextFontSize,
-                                                  bold: true
-                                              }
-                                            : {
-                                                  type: "DropZone",
-                                                  property: group.headerContent,
-                                                  placeholder: `Place header contents for group ${index + 1} here.`
-                                              }
-                                    ]
-                                },
-                                ...(values.collapsible && values.showIcon === "right"
-                                    ? [getIconPreview(group, headerTextIconPadding)]
-                                    : [])
-                            ]
-                        }
-                    ]
-                },
-                {
-                    type: "Container",
-                    borders: true,
-                    children: [
-                        {
-                            type: "DropZone",
-                            property: group.content,
-                            placeholder: `Place body contents for group ${index + 1} here.`
-                        }
-                    ]
-                }
-            ]
-        }
-    };
+    const content = {
+        type: "Container",
+        borders: true,
+        children: [
+            {
+                type: "Container",
+                borders: true,
+                children: [
+                    {
+                        type: "RowLayout",
+                        columnSize: "grow",
+                        children: [
+                            ...(values.collapsible && values.showIcon === "left"
+                                ? [getIconPreview(group, headerTextIconPadding)]
+                                : []),
+                            {
+                                type: "Container",
+                                padding: group.headerRenderMode === "text" ? 10 : 0,
+                                grow: 100,
+                                children: [
+                                    group.headerRenderMode === "text"
+                                        ? {
+                                              type: "Text",
+                                              content: group.headerText,
+                                              fontSize: headerTextFontSize,
+                                              bold: true
+                                          }
+                                        : {
+                                              type: "DropZone",
+                                              property: group.headerContent,
+                                              placeholder: `Place header contents for group ${index + 1} here.`
+                                          }
+                                ]
+                            },
+                            ...(values.collapsible && values.showIcon === "right"
+                                ? [getIconPreview(group, headerTextIconPadding)]
+                                : [])
+                        ]
+                    }
+                ]
+            },
+            ...(groupsEmpty
+                ? [
+                      {
+                          type: "Container",
+                          borders: true,
+                          padding: 8,
+                          children: [
+                              {
+                                  type: "Text",
+                                  content: "Add groups in order to place widgets here.",
+                                  fontSize: 10,
+                                  bold: false
+                              }
+                          ]
+                      }
+                  ]
+                : [
+                      {
+                          type: "Container",
+                          borders: true,
+                          children: [
+                              {
+                                  type: "DropZone",
+                                  property: group.content,
+                                  placeholder: `Place body contents for group ${index + 1} here.`
+                              }
+                          ]
+                      }
+                  ])
+        ]
+    } as ContainerProps;
+
+    return groupsEmpty
+        ? content
+        : {
+              type: "Selectable",
+              object: group,
+              child: content
+          };
 }
 
 function getIconPreview(group: GroupsPreviewType, headerTextIconPadding: number): ContainerProps {
