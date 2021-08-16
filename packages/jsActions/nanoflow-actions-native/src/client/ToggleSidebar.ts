@@ -12,6 +12,12 @@ export async function ToggleSidebar(): Promise<void> {
     // BEGIN USER CODE
 
     mx.ui.toggleSidebar();
+
+    // Web platform
+    if (window) {
+        document.dispatchEvent(new CustomEvent("toggleSidebar"));
+    }
+
     return Promise.resolve();
 
     // END USER CODE
