@@ -13,7 +13,7 @@ export type Props = BarcodeScannerProps<BarcodeScannerStyle>;
 
 export class BarcodeScanner extends Component<Props> {
     private readonly styles = flattenStyles(defaultBarcodeScannerStyle, this.props.style);
-    private readonly onBarCodeReadHandler = throttle(this.onBarCodeRead.bind(this), 2000);
+    private readonly onBarCodeReadHandler = throttle(this.onBarCodeRead.bind(this), this.props.throttlems);
 
     render(): JSX.Element {
         return (

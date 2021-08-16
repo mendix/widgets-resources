@@ -29,6 +29,10 @@
                     <caption>On detect</caption>
                     <description/>
                 </property>
+                <property key="throttlems" type="integer" defaultValue="2000" required="true">
+                 <caption>Throttle (ms)</caption>
+                  <description>How often can the widget fire the "on detect" event? Lower means more frequent events. This could cause duplicate reads, so be sure to handle this accordingly! (Default is 2000.)</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>

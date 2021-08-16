@@ -12,6 +12,7 @@ export interface BarcodeScannerProps<Style> {
     showMask: boolean;
     showAnimatedLine: boolean;
     onDetect?: ActionValue;
+    throttlems: number;
 }
 
 export interface BarcodeScannerPreviewProps {
@@ -21,4 +22,5 @@ export interface BarcodeScannerPreviewProps {
     showMask: boolean;
     showAnimatedLine: boolean;
     onDetect: {} | null;
+    throttlems: number | null;
 }

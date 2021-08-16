@@ -18,7 +18,8 @@ describe("BarcodeScanner", () => {
             showMask: false,
             name: "barcode-scanner-test",
             style: [],
-            barcode: new EditableValueBuilder<string>().build()
+            barcode: new EditableValueBuilder<string>().build(),
+            throttlems: 2000
         };
     });
 
