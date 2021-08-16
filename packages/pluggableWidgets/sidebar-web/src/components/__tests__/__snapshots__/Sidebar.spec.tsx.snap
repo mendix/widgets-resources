@@ -1,13 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sidebar renders an alert in the case of a failure 1`] = `
-<div
-  class="alert alert-danger"
->
-  Error message
-</div>
-`;
-
 exports[`Sidebar renders starting collapsed 1`] = `
 <aside
   class="widget-sidebar sidebar-left"

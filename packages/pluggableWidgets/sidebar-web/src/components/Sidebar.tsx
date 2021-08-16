@@ -1,9 +1,8 @@
-import { createElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useState } from "react";
+import { createElement, CSSProperties, PropsWithChildren, ReactElement } from "react";
 import classNames from "classnames";
+import { useSidebar } from "../utils/useSidebar";
 
 import "../ui/Sidebar.scss";
-import { registerSidebarToggle } from "../utils/SidebarToggleRegistration";
-import { Alert } from "@mendix/piw-utils-internal";
 
 export interface SidebarProps {
     name: string;
@@ -19,33 +18,14 @@ export interface SidebarProps {
 }
 
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
-    const [expanded, setExpanded] = useState(props.startExpanded);
-    const [error, setError] = useState("");
+    const expanded = useSidebar(!!props.startExpanded, props.name);
 
-    let width: string | number | undefined;
+    let width: CSSProperties["width"];
 
     if (props.collapsible) {
         width = expanded ? props.expandedWidth : props.collapsedWidth;
     } else {
         width = props.width;
-    }
-
-    useEffect(() => {
-        if (props.collapsible) {
-            let unregisterSidebarToggle: () => void;
-
-            try {
-                unregisterSidebarToggle = registerSidebarToggle(() => setExpanded(prevExpanded => !prevExpanded));
-            } catch (e) {
-                setError(e.message);
-            }
-
-            return () => unregisterSidebarToggle();
-        }
-    }, [props.name, props.collapsible]);
-
-    if (error) {
-        return <Alert bootstrapStyle={"danger"}>{error}</Alert>;
     }
 
     return (
