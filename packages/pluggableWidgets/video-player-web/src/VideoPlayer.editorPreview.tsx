@@ -36,5 +36,5 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/VideoPlayer.css");
+    return require("./ui/VideoPlayer.css") + require("./ui/VideoPlayerPreview.css");
 }
