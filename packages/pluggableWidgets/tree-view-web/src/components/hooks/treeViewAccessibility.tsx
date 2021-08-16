@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { EventHandler, SyntheticEvent, useCallback, useMemo } from "react";
 import { TreeViewState } from "../TreeView";
 import { KeyboardHandlerHook, useKeyboardHandler } from "./useKeyboardHandler";
 
@@ -19,7 +19,7 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
     return useCallback((targetElement, focusTargetChange, traverseOption) => {
         if (targetElement && targetElement instanceof Element) {
             const getTreeViewHeadersInElement = (element: Element | Document | null): HTMLHeadElement[] =>
-                element ? Array.from(element.querySelectorAll(".widget-tree-view-branch-header")) : [];
+                element ? Array.from(element.querySelectorAll("li.widget-tree-view-branch")) : [];
 
             const currentTreeViewScope = Array.from(
                 document.body.querySelectorAll(".widget-tree-view[role=tree]")
@@ -48,7 +48,7 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
                 case FocusTargetChange.PREVIOUS: {
                     if (traverseOption === "VERTICAL") {
                         const parentTreeViewHeaders = getTreeViewHeadersInElement(document).filter(node =>
-                            node.nextElementSibling?.contains(targetElement)
+                            node.lastElementChild?.contains(targetElement)
                         );
                         if (parentTreeViewHeaders.length > 0) {
                             parentTreeViewHeaders[parentTreeViewHeaders.length - 1].focus();
@@ -64,7 +64,7 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
                 }
                 case FocusTargetChange.NEXT: {
                     if (traverseOption === "VERTICAL") {
-                        const childTreeViewHeaders = getTreeViewHeadersInElement(targetElement.nextElementSibling);
+                        const childTreeViewHeaders = getTreeViewHeadersInElement(targetElement.lastElementChild);
                         if (childTreeViewHeaders.length > 0) {
                             childTreeViewHeaders[0].focus();
                         }
@@ -83,10 +83,11 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
 };
 
 export const useTreeViewBranchKeyboardHandler = (
-    toggleTreeViewContent: () => void,
+    toggleTreeViewContent: EventHandler<SyntheticEvent<HTMLElement>>,
     changeFocus: TreeViewFocusChangeHandler,
     treeViewState: TreeViewState,
-    isActualLeafNode: boolean
+    isActualLeafNode: boolean,
+    eventTargetIsNotCurrentBranch: (event: SyntheticEvent<HTMLElement>) => boolean
 ): ReturnType<KeyboardHandlerHook> => {
     const keyHandlers = useMemo<Parameters<KeyboardHandlerHook>[0]>(
         () => ({
@@ -101,7 +102,7 @@ export const useTreeViewBranchKeyboardHandler = (
                     treeViewState === TreeViewState.COLLAPSED_WITH_CSS ||
                     treeViewState === TreeViewState.COLLAPSED_WITH_JS
                 ) {
-                    toggleTreeViewContent();
+                    toggleTreeViewContent(event);
                 } else if (treeViewState === TreeViewState.EXPANDED || isActualLeafNode) {
                     changeFocus(event.currentTarget, FocusTargetChange.NEXT, "VERTICAL");
                 }
@@ -114,11 +115,22 @@ export const useTreeViewBranchKeyboardHandler = (
                 ) {
                     changeFocus(event.currentTarget, FocusTargetChange.PREVIOUS, "VERTICAL");
                 } else if (treeViewState === TreeViewState.EXPANDED) {
-                    toggleTreeViewContent();
+                    toggleTreeViewContent(event);
                 }
             }
         }),
         [toggleTreeViewContent, changeFocus, treeViewState, isActualLeafNode]
     );
-    return useKeyboardHandler(keyHandlers);
+
+    const keyboardHandler = useKeyboardHandler(keyHandlers);
+
+    return useCallback(
+        event => {
+            if (eventTargetIsNotCurrentBranch(event)) {
+                return;
+            }
+            return keyboardHandler(event);
+        },
+        [eventTargetIsNotCurrentBranch, keyboardHandler]
+    );
 };

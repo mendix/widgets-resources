@@ -1,6 +1,6 @@
 import { GUID } from "mendix";
 import { createElement, ReactElement, ReactNode } from "react";
-import { mount, ReactWrapper } from "enzyme";
+import { HTMLAttributes, mount, ReactWrapper } from "enzyme";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
@@ -79,12 +79,16 @@ describe("TreeView", () => {
         expect(treeViewBranches.at(3).text()).toContain("Fourth content");
     });
 
-    it("shows the tree view headers in the correct order as a button when not defined as a leaf node", () => {
+    function findTreeViewItems(reactWrapper: ReactWrapper<any, any, any>): ReactWrapper<HTMLAttributes, any, any> {
+        return reactWrapper.find('[role="treeitem"]');
+    }
+
+    it("shows the tree view headers in the correct order as a treeitem when not defined as a leaf node", () => {
         const treeView = mount(
             <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
         );
 
-        const treeViewHeaders = treeView.find('[role="button"]');
+        const treeViewHeaders = findTreeViewItems(treeView);
 
         expect(treeViewHeaders).toHaveLength(items.length);
         items.forEach(item => {
@@ -99,7 +103,7 @@ describe("TreeView", () => {
 
         expect(treeView.text()).not.toContain("Second content");
 
-        const treeViewHeaders = treeView.find('[role="button"]');
+        const treeViewHeaders = findTreeViewItems(treeView);
         expect(treeViewHeaders).toHaveLength(3);
 
         const secondTreeViewHeader = treeViewHeaders.at(1);
@@ -140,22 +144,21 @@ describe("TreeView", () => {
             />
         );
 
-        // There is not really another way to properly identify that we're dealing with tree view branches.
-        const treeViewBranches = treeView.find(".widget-tree-view-branch");
-        const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+        const treeViewBranches = findTreeViewItems(treeView);
+        const firstTreeViewBranch = treeViewBranches.at(0);
 
-        expect(firstTreeViewBranchHeader).toHaveLength(1);
-        expect(firstTreeViewBranchHeader.text()).toContain("First header");
+        expect(firstTreeViewBranch).toHaveLength(1);
+        expect(firstTreeViewBranch.text()).toContain("First header");
 
-        expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
-        expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+        expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+        expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
 
-        firstTreeViewBranchHeader.simulate("click");
+        firstTreeViewBranch.simulate("click");
 
-        const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
+        const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
 
-        expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
-        expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+        expect(getExpandIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
+        expect(getCollapseImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
     });
 
     it("doesn't show an icon when its child has no nodes", () => {
@@ -187,7 +190,10 @@ describe("TreeView", () => {
         );
 
         const parentTreeViewHeader = treeView.findWhere(
-            node => node.type() === "header" && node.text().includes("Parent treeview")
+            node =>
+                node.type() === "span" &&
+                node.hasClass("widget-tree-view-branch-header") &&
+                node.text().includes("Parent treeview")
         );
         expect(parentTreeViewHeader).toHaveLength(1);
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
@@ -223,11 +229,14 @@ describe("TreeView", () => {
         );
 
         const parentTreeViewHeader = treeView.findWhere(
-            node => node.type() === "header" && node.text().includes("Parent treeview")
+            node =>
+                node.type() === "span" &&
+                node.hasClass("widget-tree-view-branch-header") &&
+                node.text().includes("Parent treeview")
         );
 
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).toBe("button");
+        expect(parentTreeViewHeader.hasClass("widget-tree-view-branch-header-clickable")).toBe(true);
 
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
@@ -265,11 +274,14 @@ describe("TreeView", () => {
         );
 
         const parentTreeViewHeader = treeView.findWhere(
-            node => node.type() === "header" && node.text().includes("Parent treeview")
+            node =>
+                node.type() === "span" &&
+                node.hasClass("widget-tree-view-branch-header") &&
+                node.text().includes("Parent treeview")
         );
 
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.getDOMNode().getAttribute("role")).toBe("button");
+        expect(parentTreeViewHeader.hasClass("widget-tree-view-branch-header-clickable")).toBe(true);
 
         expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
         expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
@@ -290,8 +302,12 @@ describe("TreeView", () => {
         const treeViews = treeView.findWhere(node => node.type() === "li");
 
         expect(treeViews).toHaveLength(1);
-        expect(treeViews.getDOMNode().getAttribute("role")).not.toBe("treeitem");
-        expect(treeViews.getDOMNode().getAttribute("role")).toBe("none");
+        expect(
+            treeViews
+                .at(0)
+                .findWhere(node => node.type() === "span" && node.hasClass("widget-tree-view-branch-header"))
+                .hasClass("widget-tree-view-branch-header-clickable")
+        ).toBe(false);
     });
 
     describe("with lazy loading enabled", () => {
@@ -322,8 +338,8 @@ describe("TreeView", () => {
                     shouldLazyLoad
                 />
             );
-            const clickableHeader = treeView.find("header").filter("[role='button']");
-            expect(clickableHeader).toHaveLength(1);
+            const treeViewBranches = findTreeViewItems(treeView);
+            expect(treeViewBranches).toHaveLength(1);
             expect(treeView.text()).not.toContain("First header");
         });
 
@@ -338,11 +354,12 @@ describe("TreeView", () => {
                     shouldLazyLoad
                 />
             );
-            const clickableHeader = treeView.find("header").filter("[role='button']");
-            expect(clickableHeader).toHaveLength(1);
+
+            const treeViewBranches = findTreeViewItems(treeView);
+            expect(treeViewBranches).toHaveLength(1);
             expect(treeView.text()).not.toContain("First header");
 
-            clickableHeader.simulate("click");
+            treeViewBranches.simulate("click");
             expect(treeView.text()).toContain("First header");
         });
 
@@ -357,14 +374,15 @@ describe("TreeView", () => {
                     shouldLazyLoad
                 />
             );
-            const clickableHeader = treeView.find("header").filter("[role='button']");
-            expect(clickableHeader).toHaveLength(1);
+
+            const treeViewBranches = findTreeViewItems(treeView);
+            expect(treeViewBranches).toHaveLength(1);
             expect(treeView.text()).not.toContain("First header");
 
-            clickableHeader.simulate("click");
+            treeViewBranches.simulate("click");
             expect(treeView.text()).toContain("First header");
 
-            clickableHeader.simulate("click");
+            treeViewBranches.simulate("click");
             expect(treeView.text()).toContain("First header");
             expect(treeView.find(".widget-tree-view-body").hasClass("widget-tree-view-branch-hidden")).toBe(true);
         });
@@ -386,21 +404,18 @@ describe("TreeView", () => {
                 />
             );
 
-            // There is not really another way to properly identify that we're dealing with tree view branches.
-            const treeViewBranches = treeView.find(".widget-tree-view-branch");
-            const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+            const treeViewBranches = findTreeViewItems(treeView);
+            const firstTreeViewBranch = treeViewBranches.at(0);
 
-            expect(firstTreeViewBranchHeader).toHaveLength(1);
+            expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+            expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
 
-            expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
-            expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+            firstTreeViewBranch.simulate("click");
 
-            firstTreeViewBranchHeader.simulate("click");
-
-            const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
-            expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
-            expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
-            expect(getLoadingSpinnerFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
+            const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
+            expect(getExpandIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
+            expect(getCollapseImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
         });
 
         it("the nested treeview should tell the parent it can change from the loading spinner to the next state", () => {
@@ -417,20 +432,18 @@ describe("TreeView", () => {
             );
 
             // There is not really another way to properly identify that we're dealing with tree view branches.
-            const treeViewBranches = treeView.find(".widget-tree-view-branch");
-            const firstTreeViewBranchHeader = treeViewBranches.at(0).find("header");
+            const treeViewBranches = findTreeViewItems(treeView);
+            const firstTreeViewBranch = treeViewBranches.at(0);
 
-            expect(firstTreeViewBranchHeader).toHaveLength(1);
+            expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+            expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
 
-            expect(getExpandIconFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(1);
-            expect(getCollapseImageFromBranchHeader(firstTreeViewBranchHeader)).toHaveLength(0);
+            firstTreeViewBranch.simulate("click");
 
-            firstTreeViewBranchHeader.simulate("click");
-
-            const updatedFirstHeader = treeView.find(".widget-tree-view-branch").at(0).find("header");
-            expect(getExpandIconFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
-            expect(getCollapseImageFromBranchHeader(updatedFirstHeader)).toHaveLength(1);
-            expect(getLoadingSpinnerFromBranchHeader(updatedFirstHeader)).toHaveLength(0);
+            const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
+            expect(getExpandIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
+            expect(getCollapseImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
         });
     });
 
@@ -498,7 +511,7 @@ describe("TreeView", () => {
         });
 
         function getClickableTreeViewHeaders(): HTMLElement[] {
-            return screen.getAllByRole("button").filter(element => element.tagName === "HEADER");
+            return screen.getAllByRole("treeitem").filter(element => element.tagName === "LI");
         }
 
         function getTreeViewItems(): HTMLElement[] {

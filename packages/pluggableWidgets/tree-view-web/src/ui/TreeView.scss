@@ -7,6 +7,13 @@
 
     .widget-tree-view-branch {
         display: block;
+
+        &:focus-visible {
+            outline: none;
+            & > .widget-tree-view-branch-header {
+                outline: -webkit-focus-ring-color auto 1px;
+            }
+        }
     }
 
     .widget-tree-view-branch-header-clickable {
