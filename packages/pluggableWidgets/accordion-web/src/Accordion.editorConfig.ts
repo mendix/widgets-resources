@@ -117,6 +117,7 @@ export function getPreview(values: AccordionPreviewProps): StructurePreviewProps
                       collapsed: true as any,
                       onToggleCollapsed: null,
                       content: {
+                          // eslint-disable-next-line no-empty-pattern
                           renderer: ({}: { caption: string }) => null,
                           widgetCount: 0
                       }

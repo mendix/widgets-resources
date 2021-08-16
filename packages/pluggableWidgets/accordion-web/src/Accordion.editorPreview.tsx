@@ -33,6 +33,7 @@ export function preview(props: PreviewProps): ReactElement {
                       collapsed: true as any,
                       onToggleCollapsed: null,
                       content: {
+                          // eslint-disable-next-line no-empty-pattern
                           renderer: ({}: { caption: string; children: ReactElement }) => (
                               <div>Add groups in order to place widgets here.</div>
                           )
