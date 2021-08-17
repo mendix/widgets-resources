@@ -1,5 +1,5 @@
-import { createElement } from "react";
-import { mount } from "enzyme";
+import React, { createElement } from "react";
+import { mount, render } from "enzyme";
 
 import { Sidebar, SidebarProps } from "../Sidebar";
 
@@ -22,66 +22,88 @@ describe("Sidebar", () => {
         };
     });
 
-    it("renders starting collapsed", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
+    describe("rendering", () => {
+        it("renders starting collapsed", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} />);
 
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders starting expanded", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} startExpanded />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders with slide over mode", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} slideOver />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders with collapsed width", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} collapsedWidth={100} expandedWidth={500} />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("is toggleable when collapsible", () => {
-        const sidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
-
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
-            "widget-sidebar-expanded"
-        );
-
-        act(() => {
-            document.dispatchEvent(new CustomEvent("toggleSidebar"));
+            expect(sidebar).toMatchSnapshot();
         });
 
-        sidebarWrapper.update();
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).toContain(
-            "widget-sidebar-expanded"
-        );
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("400px");
-    });
+        it("renders starting expanded", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} startExpanded />);
 
-    it("isn't toggleable when not collapsible", () => {
-        const sidebarWrapper = mount(
-            <Sidebar {...defaultSidebarProps} collapsible={false} expandedWidth={undefined} width={500} />
-        );
-
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
-            "widget-sidebar-expanded"
-        );
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
-
-        act(() => {
-            document.dispatchEvent(new CustomEvent("toggleSidebar"));
+            expect(sidebar).toMatchSnapshot();
         });
 
-        sidebarWrapper.update();
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
-            "widget-sidebar-expanded"
-        );
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
+        it("renders with slide over mode", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} slideOver />);
+
+            expect(sidebar).toMatchSnapshot();
+        });
+
+        it("renders with collapsed width", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} collapsedWidth={100} expandedWidth={500} />);
+
+            expect(sidebar).toMatchSnapshot();
+        });
+    });
+
+    describe("behaviors", () => {
+        it("is toggleable when collapsible", () => {
+            const sidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
+
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+                "widget-sidebar-expanded"
+            );
+
+            act(() => {
+                document.dispatchEvent(new CustomEvent("toggleSidebar"));
+            });
+
+            sidebarWrapper.update();
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).toContain(
+                "widget-sidebar-expanded"
+            );
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("400px");
+        });
+
+        it("isn't toggleable when not collapsible", () => {
+            const sidebarWrapper = mount(
+                <Sidebar {...defaultSidebarProps} collapsible={false} expandedWidth={undefined} width={500} />
+            );
+
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+                "widget-sidebar-expanded"
+            );
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
+
+            act(() => {
+                document.dispatchEvent(new CustomEvent("toggleSidebar"));
+            });
+
+            sidebarWrapper.update();
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+                "widget-sidebar-expanded"
+            );
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
+        });
+
+        it("applies correct aria tags when collapsed", () => {
+            const mockedNavigationTree = {
+                setAttribute: jest.fn()
+            };
+            jest.spyOn(React, "useRef").mockReturnValue({
+                current: {
+                    querySelectorAll: () => [mockedNavigationTree]
+                }
+            });
+
+            render(
+                <Sidebar {...defaultSidebarProps} collapsible collapsedWidth={52} slideOver={false} width={undefined} />
+            );
+
+            expect(mockedNavigationTree.setAttribute).toBeCalledWith("aria-hidden", "true");
+            expect(mockedNavigationTree.setAttribute).toBeCalledWith("data-focusindex", "-1");
+        });
     });
 });

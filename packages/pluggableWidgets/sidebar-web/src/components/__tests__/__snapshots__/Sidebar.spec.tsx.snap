@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sidebar renders starting collapsed 1`] = `
+exports[`Sidebar rendering renders starting collapsed 1`] = `
 <aside
   class="widget-sidebar sidebar-left"
-  style="background-color: blue;"
+  style="background-color:blue"
   tabindex="1"
 />
 `;
 
-exports[`Sidebar renders starting expanded 1`] = `
+exports[`Sidebar rendering renders starting expanded 1`] = `
 <aside
   class="widget-sidebar widget-sidebar-expanded sidebar-left"
-  style="background-color: blue; width: 400px;"
+  style="background-color:blue;width:400px"
   tabindex="1"
 />
 `;
 
-exports[`Sidebar renders with collapsed width 1`] = `
+exports[`Sidebar rendering renders with collapsed width 1`] = `
 <aside
   class="widget-sidebar sidebar-left"
-  style="background-color: blue; width: 100px;"
+  style="background-color:blue;width:100px"
   tabindex="1"
 />
 `;
 
-exports[`Sidebar renders with slide over mode 1`] = `
+exports[`Sidebar rendering renders with slide over mode 1`] = `
 <aside
   class="widget-sidebar widget-sidebar-slide-over sidebar-left"
-  style="background-color: blue;"
+  style="background-color:blue"
   tabindex="1"
 />
 `;
