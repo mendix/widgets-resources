@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true" supportedPlatform="Web" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.web.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true" supportedPlatform="Web" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Video Player</name>
     <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
     <icon>
@@ -17,21 +17,21 @@
                     </enumerationValues>
                 </property>
                 <property key="urlExpression" type="expression" required="false">
-                    <caption>Video link</caption>
+                    <caption>Video URL</caption>
                     <description>The web address of the video: YouTube, Vimeo, Dailymotion or MP4.</description>
                     <returnType type="String"/>
                 </property>
                 <property key="posterExpression" type="expression" required="false">
-                    <caption>Poster link</caption>
+                    <caption>Poster URL</caption>
                     <description>The web address of the poster image. A poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
                     <returnType type="String"/>
                 </property>
                 <property key="videoUrl" type="textTemplate" required="false">
-                    <caption>Video link</caption>
+                    <caption>Video URL</caption>
                     <description>The web address of the video: YouTube, Vimeo, Dailymotion or MP4.</description>
                 </property>
                 <property key="posterUrl" type="textTemplate" required="false">
-                    <caption>Poster link</caption>
+                    <caption>Poster URL</caption>
                     <description>The web address of the poster image. A poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
                 </property>
             </propertyGroup>
@@ -40,24 +40,26 @@
                 <systemProperty key="TabIndex"/>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Behavior">
-            <property key="autoStart" type="boolean" defaultValue="false">
-                <caption>Auto start</caption>
-                <description>Automatically start playing the video when the page loads.</description>
-            </property>
-            <property key="showControls" type="boolean" defaultValue="true">
-                <caption>Show Controls</caption>
-                <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube, Dailymotion and external videos.</description>
-            </property>
-            <property key="muted" type="boolean" defaultValue="false">
-                <caption>Muted</caption>
-                <description>Start the video on mute.</description>
-            </property>
-            <property key="loop" type="boolean" defaultValue="false">
-                <caption>Loop</caption>
-                <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.
-                </description>
-            </property>
+        <propertyGroup caption="Controls">
+            <propertyGroup caption="Controls">
+                <property key="autoStart" type="boolean" defaultValue="false">
+                    <caption>Auto start</caption>
+                    <description>Automatically start playing the video when the page loads.</description>
+                </property>
+                <property key="showControls" type="boolean" defaultValue="true">
+                    <caption>Show Controls</caption>
+                    <description>Display video controls (control bar, display icons, dock buttons). Available for YouTube, Dailymotion and external videos.</description>
+                </property>
+                <property key="muted" type="boolean" defaultValue="false">
+                    <caption>Muted</caption>
+                    <description>Start the video on mute.</description>
+                </property>
+                <property key="loop" type="boolean" defaultValue="false">
+                    <caption>Loop</caption>
+                    <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.
+                    </description>
+                </property>
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">

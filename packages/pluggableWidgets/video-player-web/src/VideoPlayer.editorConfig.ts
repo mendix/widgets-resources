@@ -42,13 +42,13 @@ export function check(values: VideoPlayerPreviewProps): Problem[] {
     if (values.type === "dynamic" && !values.videoUrl) {
         errors.push({
             property: "videoUrl",
-            message: "Providing a video link is required"
+            message: "Providing a video URL is required"
         });
     }
     if (values.type === "expression" && !values.urlExpression) {
         errors.push({
             property: "urlExpression",
-            message: "Providing a video link is required"
+            message: "Providing a video URL is required"
         });
     }
     return errors;
