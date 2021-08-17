@@ -19,21 +19,22 @@ interface IPushNotification {
     message: string;
     channelId?: string;
     foreground: boolean;
-    data: NotificationData & {
+    data: ActionData & {
         actionIdentifier?: string;
         userInteraction?: number;
     }; // iOS
 }
 
-interface NotificationData {
+interface ActionData {
     actionName?: string;
     guid?: string;
 }
 
-interface Helpers {
-    title: () => Option<string>;
-    body: () => Option<string>;
-    subTitle: () => Option<string>;
+interface Notification {
+    data: Option<ActionData>;
+    title: Option<string>;
+    body: Option<string>;
+    subTitle: Option<string>;
 }
 
 export function Notifications(props: NotificationsProps<undefined>): null {
@@ -41,21 +42,17 @@ export function Notifications(props: NotificationsProps<undefined>): null {
     const [loadNotifications, setLoadNotifications] = useState(false);
 
     const handleNotification = useCallback(
-        (
-            data: Option<NotificationData>,
-            getHandler: (action: ActionsType) => Option<ActionValue>,
-            helpers: Helpers
-        ): void => {
-            const body: string = helpers.body() ?? "";
-            const title: string = helpers.title() ?? "";
-            const subtitle: string = helpers.subTitle() ?? "";
-            const actions = props.actions.filter(item => item.name === data?.actionName);
+        (notification: Notification, getHandler: (action: ActionsType) => Option<ActionValue>): void => {
+            const body: string = notification.body ?? "";
+            const title: string = notification.title ?? "";
+            const subtitle: string = notification.subTitle ?? "";
+            const actions = props.actions.filter(item => item.name === notification.data?.actionName);
 
             if (actions.length === 0) {
                 return;
             }
             if (props.guid) {
-                props.guid.setValue(data?.guid);
+                props.guid.setValue(notification.data?.guid);
             }
             if (props.title) {
                 props.title.setValue(title);
@@ -75,19 +72,25 @@ export function Notifications(props: NotificationsProps<undefined>): null {
         [props.actions, props.guid, props.title, props.subtitle, props.body, props.action]
     );
 
-    const remoteMessageHandlerHelpers = (notification: FirebaseMessagingTypes.Notification): Helpers => ({
-        title: () => notification?.title,
-        body: () => notification?.body,
-        subTitle: () => notification.ios?.subtitle
+    const remoteMessageHandlerHelpers = (
+        notification: FirebaseMessagingTypes.Notification
+    ): Pick<Notification, "title" | "subTitle" | "body"> => ({
+        title: notification?.title,
+        body: notification?.body,
+        subTitle: notification.ios?.subtitle
     });
 
     const onReceive = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
             const { notification } = message;
             if (notification) {
-                handleNotification(message.data, action => action.onReceive, {
-                    ...remoteMessageHandlerHelpers(notification)
-                });
+                handleNotification(
+                    {
+                        data: message.data,
+                        ...remoteMessageHandlerHelpers(notification)
+                    },
+                    action => action.onReceive
+                );
             }
         },
         [handleNotification]
@@ -97,9 +100,13 @@ export function Notifications(props: NotificationsProps<undefined>): null {
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
             const { notification } = message;
             if (notification) {
-                handleNotification(message.data, action => action.onOpen, {
-                    ...remoteMessageHandlerHelpers(notification)
-                });
+                handleNotification(
+                    {
+                        data: message.data,
+                        ...remoteMessageHandlerHelpers(notification)
+                    },
+                    action => action.onOpen
+                );
             }
         },
         [handleNotification]
@@ -114,11 +121,15 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error - see comment top top of file
                 onNotification(notification: IPushNotification) {
-                    handleNotification(notification.data, action => action.onOpen, {
-                        title: () => notification.title,
-                        body: () => notification.message,
-                        subTitle: () => notification.subText
-                    });
+                    handleNotification(
+                        {
+                            data: notification.data,
+                            title: notification.title,
+                            body: notification.message,
+                            subTitle: notification.subText
+                        },
+                        action => action.onOpen
+                    );
                 }
             });
         }
