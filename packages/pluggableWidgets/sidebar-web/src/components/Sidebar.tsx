@@ -5,7 +5,7 @@ import { useSidebar } from "../utils/useSidebar";
 import "../ui/Sidebar.scss";
 
 export interface SidebarProps {
-    name: string;
+    name?: string;
     className?: string;
     style?: CSSProperties;
     tabIndex?: number;
