@@ -41,7 +41,7 @@
                     <description/>
                 </property>
                 <property key="children" type="widgets" dataSource="datasource" required="false">
-                    <caption>Content</caption>
+                    <caption>Place other Tree nodes here</caption>
                     <description />
                 </property>
             </propertyGroup>
