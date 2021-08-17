@@ -66,7 +66,7 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             props.body.setValue(body);
         }
         if (props.action) {
-            props.action.setValue(actions.join(" "));
+            props.action.setValue(actions.map(action => action.name).join(" "));
         }
 
         actions.forEach(action => executeAction(getHandler(action)));
