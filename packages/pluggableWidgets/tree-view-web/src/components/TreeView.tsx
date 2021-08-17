@@ -29,6 +29,7 @@ import {
     useTreeViewBranchKeyboardHandler,
     useTreeViewFocusChangeHandler
 } from "./hooks/treeViewAccessibility";
+import { ChevronIcon } from "./ChevronIcon";
 
 export interface TreeViewObject extends ObjectItem {
     value: string | ReactNode | undefined;
@@ -65,7 +66,7 @@ export function TreeView({
     const { informParentIsLoading, level } = useContext(TreeViewBranchContext);
 
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
-        treeViewState => {
+        (treeViewState, iconPlacement) => {
             if (treeViewState === TreeViewState.LOADING) {
                 return <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="" aria-hidden />;
             }
@@ -76,14 +77,13 @@ export function TreeView({
                     className="widget-tree-view-branch-header-icon"
                 />
             ) : (
-                // TODO: This should not be a glyphicon, but rather a svg or something that is not dependent on Atlas
-                <span
-                    className={classNames(
-                        "glyphicon",
-                        treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus",
-                        "widget-tree-view-branch-header-icon"
-                    )}
-                    aria-hidden
+                <ChevronIcon
+                    className={classNames("widget-tree-view-branch-header-icon", {
+                        "widget-tree-view-branch-header-icon-collapsed-left":
+                            !treeViewIsExpanded && iconPlacement === "left",
+                        "widget-tree-view-branch-header-icon-collapsed-right":
+                            !treeViewIsExpanded && iconPlacement === "right"
+                    })}
                 />
             );
         },
@@ -148,7 +148,7 @@ interface TreeViewBranchProps {
     value: TreeViewObject["value"];
     children: TreeViewObject["content"];
     iconPlacement: ShowIconEnum;
-    renderHeaderIcon: (treeViewState: TreeViewState) => ReactNode;
+    renderHeaderIcon: (treeViewState: TreeViewState, iconPlacement: Exclude<ShowIconEnum, "no">) => ReactNode;
     changeFocus: TreeViewFocusChangeHandler;
 }
 
@@ -271,7 +271,9 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 id={treeViewBranchUtils.getHeaderId(props.id)}
             >
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
-                {!isActualLeafNode && props.iconPlacement !== "no" && props.renderHeaderIcon(treeViewState)}
+                {!isActualLeafNode &&
+                    props.iconPlacement !== "no" &&
+                    props.renderHeaderIcon(treeViewState, props.iconPlacement)}
             </span>
             {!isActualLeafNode && treeViewState !== TreeViewState.COLLAPSED_WITH_JS && (
                 <TreeViewBranchContext.Provider
