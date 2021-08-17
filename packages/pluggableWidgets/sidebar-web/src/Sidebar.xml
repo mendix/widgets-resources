@@ -5,7 +5,9 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Sidebar</name>
     <description>Display sidebar content conditionally.</description>
-    <icon/>
+    <studioProCategory>Layout</studioProCategory>
+    <studioCategory>Layout</studioCategory>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAErSURBVHgB7VVLToRAEK0ixAx+Eo7AUcaVvbQXJKwMR3BOMHgCjyAbVyzo2TjsxBt4BL2BiQswQcqCiEECzpAGV/MS6Krul35dXdUpgJmB1c/zPKcoCh8mBO8XKqVezG/HR8Q1TAjTrLcOzPZkFEXYJQqVPVZjcmmdw55wXZca24CZcRDYCRM0IOLM4UK/y2khU4lvfRzdCBz+lgvMb4cIWgKJtFIkXLHpi03W+45GX9GFymMEshufgBojEPH7UyLP0jZ/dAQGla/dORap7x/hyO6ujY5gK4+v277YfKyRyiVQebOVlurytXJQVxGVAZthIk+CPo6WgAGfNudDcZmuhjha7+BBnj7zIOHPQ8yMg8BO/EpyuxP94P5qeG1fAe6fIfdlmBJV04f/wBeGB1z3CmfUMgAAAABJRU5ErkJggg==</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
