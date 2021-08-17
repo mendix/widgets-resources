@@ -10,7 +10,7 @@ interface ToggleProps {
     tabIndex?: number;
     tooltip?: string;
     render: "button" | "link";
-    role: string;
+    role?: string;
     style?: CSSProperties;
 }
 
@@ -18,7 +18,7 @@ export function Toggle(props: ToggleProps): ReactElement {
     const commonProps = {
         tabIndex: props.tabIndex,
         title: props.tooltip,
-        ariaLabel: props.tooltip,
+        "aria-label": props.tooltip,
         style: props.style
     };
 
@@ -26,7 +26,7 @@ export function Toggle(props: ToggleProps): ReactElement {
         <Icon icon={props.icon} className="widget-sidebar-toggle-icon" fallback={<span />} />
     ) : null;
 
-    const prepareRole = (text: string): string => text.replace("_", "-");
+    const prepareRole = (text?: string): string | undefined => text?.replace(/_/g, "-");
 
     const action = (): void => {
         document.dispatchEvent(new CustomEvent("toggleSidebar"));

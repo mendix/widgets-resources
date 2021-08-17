@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Sidebar toggle rendering renders correctly as a button 1`] = `
+<button
+  class="widget-sidebar-toggle btn mx-button toggle-btn"
+/>
+`;
+
+exports[`Sidebar toggle rendering renders correctly as a link 1`] = `
+<a
+  class="widget-sidebar-toggle mx-link"
+  role="button"
+/>
+`;
+
+exports[`Sidebar toggle rendering renders correctly with a tooltip and caption 1`] = `
+<button
+  aria-label="this is a toggle"
+  class="widget-sidebar-toggle btn mx-button toggle-btn"
+  title="this is a toggle"
+>
+  menu
+</button>
+`;
+
+exports[`Sidebar toggle rendering renders correctly with an icon 1`] = `
+<button
+  class="widget-sidebar-toggle btn mx-button toggle-btn"
+>
+  <span
+    aria-hidden="true"
+    class="glyphicon widget-sidebar-toggle-icon hamburger"
+  />
+</button>
+`;
