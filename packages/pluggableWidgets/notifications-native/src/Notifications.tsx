@@ -1,34 +1,58 @@
-import { ActionValue, ValueStatus } from "mendix";
-import { useEffect, useRef, useState } from "react";
 import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messaging";
+import PushNotification from "react-native-push-notification";
+import { executeAction } from "@mendix/piw-utils-internal";
+import { useEffect, useRef, useState } from "react";
+import { ActionValue, ValueStatus } from "mendix";
 import "@react-native-firebase/app";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
-import { executeAction } from "@mendix/piw-utils-internal";
+
+declare type Option<T> = T | undefined;
+
+// re-declare the library's type because: 1) it doesn't match library version 2) the definition file exports two symbols with same name.
+interface IPushNotification {
+    playSound?: boolean;
+    subText?: string;
+    userInteraction: boolean;
+    id?: number;
+    title: string;
+    message: string;
+    channelId?: string;
+    foreground: boolean;
+    data: NotificationData & {
+        actionIdentifier?: string;
+        userInteraction?: number;
+    }; // iOS
+}
 
 interface NotificationData {
     actionName?: string;
     guid?: string;
 }
 
-export function Notifications(props: NotificationsProps<undefined>) {
+interface Helpers {
+    title: () => Option<string>;
+    body: () => Option<string>;
+    subTitle: () => Option<string>;
+}
+
+export function Notifications(props: NotificationsProps<undefined>): null {
     const listeners = useRef<Array<() => void>>([]);
     const [loadNotifications, setLoadNotifications] = useState(false);
 
     const handleNotification = (
-        notification: FirebaseMessagingTypes.Notification,
-        data: NotificationData | undefined,
-        getHandler: (action: ActionsType) => ActionValue | undefined
+        data: Option<NotificationData>,
+        getHandler: (action: ActionsType) => Option<ActionValue>,
+        helpers: Helpers
     ): void => {
-        const body: string = notification.body ?? "";
-        const title: string = notification.title ?? "";
-        const subtitle: string = notification.ios?.subtitle ?? "";
+        const body: string = helpers.body() ?? "";
+        const title: string = helpers.title() ?? "";
+        const subtitle: string = helpers.subTitle() ?? "";
         const actions = props.actions.filter(item => item.name === data?.actionName);
 
         if (actions.length === 0) {
             return;
         }
-
         if (props.guid) {
             props.guid.setValue(data?.guid);
         }
@@ -45,23 +69,47 @@ export function Notifications(props: NotificationsProps<undefined>) {
             props.action.setValue(actions.join(" "));
         }
 
-        actions.forEach(action => {
-            const handler = getHandler(action);
-            executeAction(handler);
-        });
+        actions.forEach(action => executeAction(getHandler(action)));
     };
 
-    const onReceive = (notification: FirebaseMessagingTypes.RemoteMessage): void => {
-        if (notification.notification) {
-            handleNotification(notification.notification, notification.data, action => action.onReceive);
+    const helpers = (notification: FirebaseMessagingTypes.Notification): Helpers => ({
+        title: () => notification?.title,
+        body: () => notification?.body,
+        subTitle: () => notification.ios?.subtitle
+    });
+
+    const onReceive = (message: FirebaseMessagingTypes.RemoteMessage): void => {
+        const { notification } = message;
+        if (notification) {
+            handleNotification(message.data, action => action.onReceive, { ...helpers(notification) });
         }
     };
 
-    const onOpen = (notificationOpen: FirebaseMessagingTypes.RemoteMessage): void => {
-        if (notificationOpen.notification) {
-            handleNotification(notificationOpen.notification, notificationOpen.data, action => action.onOpen);
+    const onOpen = (message: FirebaseMessagingTypes.RemoteMessage): void => {
+        const { notification } = message;
+        if (notification) {
+            handleNotification(message.data, action => action.onOpen, { ...helpers(notification) });
         }
     };
+
+    useEffect(() => {
+        // wait for all used DynamicValues are available before configuring, else handleNotification is invoked while
+        // properties in scope are loading. Note that handlers passed to `configure` are only ever registered once.
+        if (loadNotifications) {
+            PushNotification.configure({
+                // called when user taps local notification
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error - see comment top top of file
+                onNotification(notification: IPushNotification) {
+                    handleNotification(notification.data, action => action.onOpen, {
+                        title: () => notification.title,
+                        body: () => notification.message,
+                        subTitle: () => notification.subText
+                    });
+                }
+            });
+        }
+    }, [loadNotifications]);
 
     useEffect(() => {
         if (loadNotifications) {
