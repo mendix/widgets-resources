@@ -1,0 +1,45 @@
+{
+  "name": "sidebar-toggle-web",
+  "widgetName": "SidebarToggle",
+  "version": "1.0.0",
+  "description": "A Mendix pluggable widget to toggle the sidebar.",
+  "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.5.0",
+    "marketplaceId": 0
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "sidebar-web"
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web --mx-version 9",
+    "release": "pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=9.0.0",
+    "eslint": "^7.20.0"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}
