@@ -37,7 +37,7 @@
                     <description/>
                 </property>
                 <property key="startExpanded" type="boolean" defaultValue="false">
-                    <caption>Start state expanded</caption>
+                    <caption>Start expanded</caption>
                     <description/>
                 </property>
                 <property key="children" type="widgets" dataSource="datasource" required="false">
