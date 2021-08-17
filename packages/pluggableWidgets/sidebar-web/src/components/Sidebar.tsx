@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, PropsWithChildren, ReactElement } from "react";
+import { createElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useRef } from "react";
 import classNames from "classnames";
 import { useSidebar } from "../utils/useSidebar";
 
@@ -18,7 +18,18 @@ export interface SidebarProps {
 }
 
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
+    const sidebarRef = useRef<HTMLElement | null>(null);
     const expanded = useSidebar(!!props.startExpanded, props.name);
+    const CONTENT_SELECTOR = [
+        "mx-navigationtree",
+        "mx-navigationlist",
+        "mx-navbar",
+        "mx-menubar",
+        "mx-button",
+        "mx-link"
+    ]
+        .map(cls => "." + cls)
+        .join(",");
 
     let width: CSSProperties["width"];
 
@@ -27,6 +38,23 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     } else {
         width = props.width;
     }
+
+    useEffect(() => {
+        if (sidebarRef.current && props.collapsible) {
+            const content = sidebarRef.current?.querySelectorAll(CONTENT_SELECTOR);
+            if (expanded) {
+                content.forEach(contentNode => {
+                    contentNode.removeAttribute("aria-hidden");
+                    contentNode.setAttribute("data-focusindex", "0");
+                });
+            } else {
+                content.forEach(contentNode => {
+                    contentNode.setAttribute("aria-hidden", "true");
+                    contentNode.setAttribute("data-focusindex", "-1");
+                });
+            }
+        }
+    }, [CONTENT_SELECTOR, expanded, props.collapsible]);
 
     return (
         <aside
@@ -40,6 +68,7 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
             )}
             style={{ ...props.style, width }}
             tabIndex={props.tabIndex}
+            ref={sidebarRef}
         >
             {props.children}
         </aside>
