@@ -25,5 +25,5 @@ export interface ScrollContainerPreviewProps {
     widthType: WidthTypeEnum;
     widthPixels: number | null;
     widthPercentage: number | null;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

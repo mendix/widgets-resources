@@ -54,7 +54,7 @@ ${generatePreviewTypeBody(extractProperties(prop.properties[0]), generatedTypes)
             );
             return prop.$.isList === "true" ? `${childType}[]` : childType;
         case "widgets":
-            return "{ widgetCount: number; renderer: ComponentType<{caption?: string}> }";
+            return "{ widgetCount: number; renderer: ComponentType<{ caption?: string }> }";
         default:
             return "any";
     }
