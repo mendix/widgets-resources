@@ -48,12 +48,12 @@
         </propertyGroup>
         <propertyGroup caption="Visualization">
             <propertyGroup caption="Icon">
-                <property key="showIcon" type="enumeration" defaultValue="right">
+                <property key="showIcon" type="enumeration" defaultValue="left">
                     <caption>Show icon</caption>
                     <description/>
                     <enumerationValues>
-                        <enumerationValue key="right">Right</enumerationValue>
                         <enumerationValue key="left">Left</enumerationValue>
+                        <enumerationValue key="right">Right</enumerationValue>
                         <enumerationValue key="no">No</enumerationValue>
                     </enumerationValues>
                 </property>

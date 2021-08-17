@@ -8,7 +8,7 @@ import { DynamicValue, ListValue, ListExpressionValue, ListWidgetValue, WebIcon 
 
 export type HeaderTypeEnum = "text" | "custom";
 
-export type ShowIconEnum = "right" | "left" | "no";
+export type ShowIconEnum = "left" | "right" | "no";
 
 export interface TreeViewContainerProps {
     name: string;
