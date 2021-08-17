@@ -44,6 +44,10 @@
                     <caption>Place other Tree nodes here</caption>
                     <description />
                 </property>
+                <property key="animate" type="boolean" defaultValue="true">
+                    <caption>Animate</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Visualization">
@@ -64,6 +68,10 @@
                 <property key="collapseIcon" type="icon" required="false">
                     <caption>Collapsed icon</caption>
                     <description/>
+                </property>
+                <property key="animateIcon" type="boolean" defaultValue="true">
+                    <caption>Animate icon</caption>
+                    <description>Animate the icon when the group is collapsing or expanding.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>

@@ -30,6 +30,9 @@
         padding: 8px 0;
 
         svg {
+            &.widget-tree-view-branch-header-icon-animated {
+                transition: transform 0.2s ease-in-out 50ms;
+            }
             &.widget-tree-view-branch-header-icon-collapsed-left {
                 transform: rotate(-90deg);
             }

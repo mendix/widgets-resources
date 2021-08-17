@@ -1,6 +1,6 @@
 import { GUID } from "mendix";
 import { createElement, ReactElement, ReactNode } from "react";
-import { HTMLAttributes, mount, ReactWrapper } from "enzyme";
+import { HTMLAttributes, mount, ReactWrapper, render as renderEnzyme } from "enzyme";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
@@ -22,10 +22,20 @@ const defaultProps: TreeViewProps = {
     showCustomIcon: false,
     iconPlacement: "right",
     expandIcon: null,
-    collapseIcon: null
+    collapseIcon: null,
+    animateIcon: false,
+    animateTreeView: false
 };
 
 describe("TreeView", () => {
+    it("preserves the DOM structure when collapsed", () => {
+        expect(renderEnzyme(<TreeView {...defaultProps} class="" items={items} />)).toMatchSnapshot();
+    });
+
+    it("preserves the DOM structure when expanded", () => {
+        expect(renderEnzyme(<TreeView {...defaultProps} class="" items={items} startExpanded />)).toMatchSnapshot();
+    });
+
     it("shows everything properly when starting expanded", () => {
         const treeView = mount(
             <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded />
@@ -308,6 +318,26 @@ describe("TreeView", () => {
                 .findWhere(node => node.type() === "span" && node.hasClass("widget-tree-view-branch-header"))
                 .hasClass("widget-tree-view-branch-header-clickable")
         ).toBe(false);
+    });
+
+    it("adds a CSS class for the header when the icon should animate on toggle", () => {
+        const treeView = mount(
+            <TreeView
+                {...defaultProps}
+                class=""
+                items={items}
+                isUserDefinedLeafNode={false}
+                startExpanded
+                animateIcon
+            />
+        );
+        expect(
+            treeView
+                .find(".widget-tree-view-branch-header")
+                .at(0)
+                .find("svg")
+                .hasClass("widget-tree-view-branch-header-icon-animated")
+        ).toBe(true);
     });
 
     describe("with lazy loading enabled", () => {

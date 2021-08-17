@@ -13,7 +13,13 @@ export function getProperties(
     platform: "web" | "desktop"
 ): Properties {
     if (!values.advancedMode) {
-        hidePropertiesIn(defaultProperties, values, ["showIcon", "expandIcon", "collapseIcon"]);
+        hidePropertiesIn(defaultProperties, values, [
+            "showIcon",
+            "expandIcon",
+            "collapseIcon",
+            "animate",
+            "animateIcon"
+        ]);
     }
 
     if (values.showIcon === "no") {

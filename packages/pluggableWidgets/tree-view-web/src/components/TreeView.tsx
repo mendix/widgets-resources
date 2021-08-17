@@ -48,6 +48,8 @@ export interface TreeViewProps extends Pick<TreeViewContainerProps, "tabIndex"> 
     iconPlacement: TreeViewBranchProps["iconPlacement"];
     expandIcon: WebIcon | null;
     collapseIcon: WebIcon | null;
+    animateIcon: boolean;
+    animateTreeView: boolean;
 }
 
 export function TreeView({
@@ -61,7 +63,8 @@ export function TreeView({
     iconPlacement,
     expandIcon,
     collapseIcon,
-    tabIndex
+    tabIndex,
+    animateIcon
 }: TreeViewProps): ReactElement | null {
     const { informParentIsLoading, level } = useContext(TreeViewBranchContext);
 
@@ -79,6 +82,7 @@ export function TreeView({
             ) : (
                 <ChevronIcon
                     className={classNames("widget-tree-view-branch-header-icon", {
+                        "widget-tree-view-branch-header-icon-animated": animateIcon,
                         "widget-tree-view-branch-header-icon-collapsed-left":
                             !treeViewIsExpanded && iconPlacement === "left",
                         "widget-tree-view-branch-header-icon-collapsed-right":
@@ -87,7 +91,7 @@ export function TreeView({
                 />
             );
         },
-        [collapseIcon, expandIcon, showCustomIcon]
+        [collapseIcon, expandIcon, showCustomIcon, animateIcon]
     );
 
     // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextToHaveChildNodes
