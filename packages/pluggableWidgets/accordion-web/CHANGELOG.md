@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.1.1] - 2021-08-16
+
+### Changed
+- We fixed a display issue while using the Accordion in Structure and Design Mode/Studio when there is no group configured.
+
 ## [1.1.0] - 2021-07-22
 
 ### Added
