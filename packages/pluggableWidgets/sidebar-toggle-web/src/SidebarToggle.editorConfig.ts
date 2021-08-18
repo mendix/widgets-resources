@@ -39,7 +39,7 @@ export function getPreview(values: SidebarTogglePreviewProps): StructurePreviewP
                         type: "RowLayout",
                         columnSize: "grow",
                         children: [
-                            ...(values.icon
+                            ...(hasIcon
                                 ? [
                                       {
                                           type: "Image",

@@ -22,9 +22,7 @@ export function Toggle(props: ToggleProps): ReactElement {
         style: props.style
     };
 
-    const icon = props.icon ? (
-        <Icon icon={props.icon} className="widget-sidebar-toggle-icon" fallback={<span />} />
-    ) : null;
+    const icon = <Icon icon={props.icon} className="widget-sidebar-toggle-icon" fallback={<span />} />;
 
     const prepareRole = (text?: string): string | undefined => text?.replace(/_/g, "-");
 

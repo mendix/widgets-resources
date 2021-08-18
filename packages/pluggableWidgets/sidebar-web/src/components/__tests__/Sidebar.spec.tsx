@@ -105,5 +105,31 @@ describe("Sidebar", () => {
             expect(mockedNavigationTree.setAttribute).toBeCalledWith("aria-hidden", "true");
             expect(mockedNavigationTree.setAttribute).toBeCalledWith("data-focusindex", "-1");
         });
+
+        it("applies correct aria tags when expanded", () => {
+            const mockedNavigationTree = {
+                setAttribute: jest.fn(),
+                removeAttribute: jest.fn()
+            };
+            jest.spyOn(React, "useRef").mockReturnValue({
+                current: {
+                    querySelectorAll: () => [mockedNavigationTree]
+                }
+            });
+
+            render(
+                <Sidebar
+                    {...defaultSidebarProps}
+                    collapsible
+                    collapsedWidth={52}
+                    slideOver={false}
+                    width={undefined}
+                    startExpanded
+                />
+            );
+
+            expect(mockedNavigationTree.removeAttribute).toBeCalledWith("aria-hidden");
+            expect(mockedNavigationTree.setAttribute).toBeCalledWith("data-focusindex", "0");
+        });
     });
 });

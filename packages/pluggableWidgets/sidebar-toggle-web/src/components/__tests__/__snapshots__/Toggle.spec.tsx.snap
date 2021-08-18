@@ -3,14 +3,18 @@
 exports[`Sidebar toggle rendering renders correctly as a button 1`] = `
 <button
   class="widget-sidebar-toggle btn mx-button toggle-btn"
-/>
+>
+  <span />
+</button>
 `;
 
 exports[`Sidebar toggle rendering renders correctly as a link 1`] = `
 <a
   class="widget-sidebar-toggle mx-link"
   role="button"
-/>
+>
+  <span />
+</a>
 `;
 
 exports[`Sidebar toggle rendering renders correctly with a tooltip and caption 1`] = `
@@ -19,6 +23,7 @@ exports[`Sidebar toggle rendering renders correctly with a tooltip and caption 1
   class="widget-sidebar-toggle btn mx-button toggle-btn"
   title="this is a toggle"
 >
+  <span />
   menu
 </button>
 `;

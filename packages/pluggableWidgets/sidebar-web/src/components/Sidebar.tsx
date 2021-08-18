@@ -17,19 +17,13 @@ export interface SidebarProps {
     slideOver?: boolean;
 }
 
+const CONTENT_SELECTOR = ["mx-navigationtree", "mx-navigationlist", "mx-navbar", "mx-menubar", "mx-button", "mx-link"]
+    .map(cls => "." + cls)
+    .join(",");
+
 export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     const sidebarRef = useRef<HTMLElement | null>(null);
     const expanded = useSidebar(!!props.startExpanded, props.name);
-    const CONTENT_SELECTOR = [
-        "mx-navigationtree",
-        "mx-navigationlist",
-        "mx-navbar",
-        "mx-menubar",
-        "mx-button",
-        "mx-link"
-    ]
-        .map(cls => "." + cls)
-        .join(",");
 
     let width: CSSProperties["width"];
 
@@ -41,20 +35,17 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
 
     useEffect(() => {
         if (sidebarRef.current && props.collapsible) {
-            const content = sidebarRef.current?.querySelectorAll(CONTENT_SELECTOR);
-            if (expanded) {
-                content.forEach(contentNode => {
+            sidebarRef.current?.querySelectorAll(CONTENT_SELECTOR).forEach(contentNode => {
+                if (expanded) {
                     contentNode.removeAttribute("aria-hidden");
                     contentNode.setAttribute("data-focusindex", "0");
-                });
-            } else {
-                content.forEach(contentNode => {
+                } else {
                     contentNode.setAttribute("aria-hidden", "true");
                     contentNode.setAttribute("data-focusindex", "-1");
-                });
-            }
+                }
+            });
         }
-    }, [CONTENT_SELECTOR, expanded, props.collapsible]);
+    }, [expanded, props.collapsible]);
 
     return (
         <aside
