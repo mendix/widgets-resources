@@ -18,8 +18,14 @@ export type TreeViewFocusChangeHandler = (
 export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
     return useCallback((targetElement, focusTargetChange, traverseOption) => {
         if (targetElement && targetElement instanceof Element) {
-            const getTreeViewHeadersInElement = (element: Element | Document | null): HTMLHeadElement[] =>
-                element ? Array.from(element.querySelectorAll("li.widget-tree-view-branch")) : [];
+            const getTreeViewHeadersInElement = (el: Element | Document | null): HTMLElement[] => {
+                if (el) {
+                    const allBranches = Array.from(el.querySelectorAll<HTMLElement>("li.widget-tree-view-branch"));
+                    const hiddenBodies = Array.from(el.querySelectorAll(".widget-tree-view-body[aria-hidden=true]"));
+                    return allBranches.filter(node => !hiddenBodies.some(hiddenBody => hiddenBody.contains(node)));
+                }
+                return [];
+            };
 
             const currentTreeViewScope = Array.from(
                 document.body.querySelectorAll(".widget-tree-view[role=tree]")

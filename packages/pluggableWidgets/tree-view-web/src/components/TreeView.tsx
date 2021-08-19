@@ -287,6 +287,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                             "widget-tree-view-branch-hidden": treeViewState === TreeViewState.COLLAPSED_WITH_CSS
                         })}
                         id={treeViewBranchUtils.getBodyId(props.id)}
+                        aria-hidden={treeViewState === TreeViewState.COLLAPSED_WITH_CSS}
                     >
                         {props.children}
                     </div>
