@@ -5,7 +5,9 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Scroll container</name>
     <description>Displays a scrollable container</description>
-    <icon />
+    <studioProCategory>Layout</studioProCategory>
+    <studioCategory>Layout</studioCategory>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAHkSURBVHgBvVVNTsJAFH4D3SguvIG9gXgDXBirK5tAws5yAvEE1BMAJ6CuISndCO64gXgDjsACpRrK+D2YRiDaTkn0S15npm/e+zrT90P0xxD8qFar5mKxcOKXmLf6/f6UMqJcLtcxHCsfHnxMDLVwhBANtY8de2rURqVSKWJoxmvDWLl2jc1N3W5XJDmx+vMOj8Obg9quDrZjUjcCMhm/z5EmrOCDT+iwWMG8oWunRXAZhHckl66Usi0gJMm1gs9bHdtUgmt/VoTTFqajZ/uwPoDwnGTkXUCXZm8kKS1/bi4F+Wo5sfw3lycgfJVClPIi72PP+dA+mOxFAJQgppo7JNYHlt96U+3xaB8CfJmXZKwD7ShiIPwcliw22gTKMedBJwtJphPsA20CZKqHgTO4puZaSIuin0gyISUPZgjNfCdpD2K2pqItOwFRfoTHBGKuygTJdYUVuRNa1yXWjZI8JP4DztCcjOyVTyFOh3bBZSGVfKxLymKNExA92UdjlIMaCnHnKnhv8jfhNCWUi3vWpdlr/WS+Y65LkrgpoVDI5cPALrR0bLXDFCQuHD+yqGvSwtYJNjrRmepQOyQFh34B9/Uoil5I9eQtAvRPD305fjft9Xqpd7uLMAyn8NOO19z06T/wBefnxUyC/zU5AAAAAElFTkSuQmCC</icon>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Width">

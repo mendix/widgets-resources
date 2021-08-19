@@ -1,8 +1,8 @@
 {
-  "name": "sidebar-web",
-  "widgetName": "Sidebar",
+  "name": "sidebar-toggle-web",
+  "widgetName": "SidebarToggle",
   "version": "1.0.0",
-  "description": "A Mendix pluggable widget to display sidebar content conditionally.",
+  "description": "A Mendix pluggable widget to toggle the sidebar.",
   "copyright": "Copyright © 2005-2021 Mendix Technology B.V. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {

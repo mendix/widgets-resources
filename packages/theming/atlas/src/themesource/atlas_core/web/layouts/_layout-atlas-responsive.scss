@@ -38,6 +38,31 @@
                     }
                 }
             }
+
+            .widget-sidebar:not(.widget-sidebar-expanded) {
+                .mx-navigationtree ul li {
+                    &.mx-navigationtree-has-items:hover {
+                        ul {
+                            position: absolute;
+                            z-index: 100;
+                            top: 0;
+                            bottom: 0;
+                            left: $sidebar-icon-width;
+                            display: block;
+                            overflow-y: auto;
+                            min-width: auto;
+                            padding: $spacing-small 0;
+                        }
+                    }
+
+                    &.mx-navigationtree-collapsed,
+                    &.mx-navigationtree-has-items {
+                        ul {
+                            display: none;
+                        }
+                    }
+                }
+            }
         }
 
         .mx-scrollcontainer-slide {

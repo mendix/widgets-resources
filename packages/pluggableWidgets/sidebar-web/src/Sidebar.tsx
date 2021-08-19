@@ -3,6 +3,7 @@ import { createElement, ReactElement } from "react";
 import { Sidebar as SidebarComponent } from "./components/Sidebar";
 
 import { SidebarContainerProps } from "../typings/SidebarProps";
+import { getWidth } from "./utils/utils";
 
 export function Sidebar(props: SidebarContainerProps): ReactElement | null {
     const width = getWidth(props.widthUnit, props.widthValue);
@@ -29,8 +30,4 @@ export function Sidebar(props: SidebarContainerProps): ReactElement | null {
             {props.contents}
         </SidebarComponent>
     );
-}
-
-function getWidth(widthUnit: "pixels" | "percentage", width: number): string {
-    return `${width}${widthUnit === "pixels" ? "px" : "vw"}`;
 }

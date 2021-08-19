@@ -1,14 +1,9 @@
-import { createElement } from "react";
-import { mount } from "enzyme";
+import React, { createElement } from "react";
+import { mount, render } from "enzyme";
 
 import { Sidebar, SidebarProps } from "../Sidebar";
 
-jest.mock("../../utils/SidebarToggleRegistration");
-import { registerSidebarToggle as mockedRegisterSidebarToggle } from "../../utils/SidebarToggleRegistration";
 import { act } from "react-dom/test-utils";
-const { registerSidebarToggle } = jest.requireActual("../../utils/SidebarToggleRegistration");
-
-(mockedRegisterSidebarToggle as any).mockImplementation((toggle: () => void) => registerSidebarToggle(toggle));
 
 describe("Sidebar", () => {
     let defaultSidebarProps: SidebarProps;
@@ -27,89 +22,114 @@ describe("Sidebar", () => {
         };
     });
 
-    afterEach(() => {
-        (window as any)["com.mendix.widgets.web.sidebar.toggle"] = undefined;
-    });
+    describe("rendering", () => {
+        it("renders starting collapsed", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} />);
 
-    it("renders starting collapsed", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders starting expanded", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} startExpanded />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders with slide over mode", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} slideOver />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders with collapsed width", () => {
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} collapsedWidth={100} expandedWidth={500} />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("renders an alert in the case of a failure", () => {
-        (mockedRegisterSidebarToggle as any).mockImplementationOnce(() => {
-            throw Error("Error message");
-        });
-        const SidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
-
-        expect(SidebarWrapper.getDOMNode()).toMatchSnapshot();
-    });
-
-    it("is toggleable when collapsible", () => {
-        const sidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
-
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
-            "widget-sidebar-expanded"
-        );
-
-        act(() => {
-            (window as any)["com.mendix.widgets.web.sidebar.toggle"]?.();
+            expect(sidebar).toMatchSnapshot();
         });
 
-        sidebarWrapper.update();
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).toContain(
-            "widget-sidebar-expanded"
-        );
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("400px");
-    });
+        it("renders starting expanded", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} startExpanded />);
 
-    it("isn't toggleable when not collapsible", () => {
-        const sidebarWrapper = mount(
-            <Sidebar {...defaultSidebarProps} collapsible={false} expandedWidth={undefined} width={500} />
-        );
-
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
-            "widget-sidebar-expanded"
-        );
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
-
-        act(() => {
-            (window as any)["com.mendix.widgets.web.sidebar.toggle"]?.();
+            expect(sidebar).toMatchSnapshot();
         });
 
-        sidebarWrapper.update();
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
-            "widget-sidebar-expanded"
-        );
-        expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
+        it("renders with slide over mode", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} slideOver />);
+
+            expect(sidebar).toMatchSnapshot();
+        });
+
+        it("renders with collapsed width", () => {
+            const sidebar = render(<Sidebar {...defaultSidebarProps} collapsedWidth={100} expandedWidth={500} />);
+
+            expect(sidebar).toMatchSnapshot();
+        });
     });
 
-    // TODO: enable this test after upgrading the enzyme-adapter-react-17 dep to the latest version, since this will call the useEffect cleanup function
-    xit("cleans up", () => {
-        const sidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
+    describe("behaviors", () => {
+        it("is toggleable when collapsible", () => {
+            const sidebarWrapper = mount(<Sidebar {...defaultSidebarProps} />);
 
-        expect((window as any)["com.mendix.widgets.web.sidebar.toggle"]).toBeTruthy();
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+                "widget-sidebar-expanded"
+            );
 
-        sidebarWrapper.unmount();
-        expect((window as any)["com.mendix.widgets.web.sidebar.toggle"]).toBeUndefined();
+            act(() => {
+                document.dispatchEvent(new CustomEvent("toggleSidebar"));
+            });
+
+            sidebarWrapper.update();
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).toContain(
+                "widget-sidebar-expanded"
+            );
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("400px");
+        });
+
+        it("isn't toggleable when not collapsible", () => {
+            const sidebarWrapper = mount(
+                <Sidebar {...defaultSidebarProps} collapsible={false} expandedWidth={undefined} width={500} />
+            );
+
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+                "widget-sidebar-expanded"
+            );
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
+
+            act(() => {
+                document.dispatchEvent(new CustomEvent("toggleSidebar"));
+            });
+
+            sidebarWrapper.update();
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).className).not.toContain(
+                "widget-sidebar-expanded"
+            );
+            expect((sidebarWrapper.find("aside").getDOMNode() as HTMLElement).style.width).toBe("500px");
+        });
+
+        it("applies correct aria tags when collapsed", () => {
+            const mockedNavigationTree = {
+                setAttribute: jest.fn()
+            };
+            jest.spyOn(React, "useRef").mockReturnValue({
+                current: {
+                    querySelectorAll: () => [mockedNavigationTree]
+                }
+            });
+
+            render(
+                <Sidebar {...defaultSidebarProps} collapsible collapsedWidth={52} slideOver={false} width={undefined} />
+            );
+
+            expect(mockedNavigationTree.setAttribute).toBeCalledWith("aria-hidden", "true");
+            expect(mockedNavigationTree.setAttribute).toBeCalledWith("data-focusindex", "-1");
+        });
+
+        it("applies correct aria tags when expanded", () => {
+            const mockedNavigationTree = {
+                setAttribute: jest.fn(),
+                removeAttribute: jest.fn()
+            };
+            jest.spyOn(React, "useRef").mockReturnValue({
+                current: {
+                    querySelectorAll: () => [mockedNavigationTree]
+                }
+            });
+
+            render(
+                <Sidebar
+                    {...defaultSidebarProps}
+                    collapsible
+                    collapsedWidth={52}
+                    slideOver={false}
+                    width={undefined}
+                    startExpanded
+                />
+            );
+
+            expect(mockedNavigationTree.removeAttribute).toBeCalledWith("aria-hidden");
+            expect(mockedNavigationTree.setAttribute).toBeCalledWith("data-focusindex", "0");
+        });
     });
 });

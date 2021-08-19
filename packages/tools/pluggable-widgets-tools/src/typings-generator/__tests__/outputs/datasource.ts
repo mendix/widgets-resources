@@ -19,14 +19,14 @@ export interface DatasourcePropertiesType {
 }
 
 export interface DatasourcePropertiesPreviewType {
-    contentAttribute: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    contentAttribute: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     markerAttribute: string;
     actionAttribute: {} | null;
     optionalDSAttribute: string;
     optionalDSAction: {} | null;
     optionalDSTextTemplate: string;
     optionalDSExpression: string;
-    optionalContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    optionalContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }
 
 export interface MyWidgetContainerProps {
@@ -57,7 +57,7 @@ export interface MyWidgetPreviewProps {
     style: string;
     contentSource: {} | { type: string } | null;
     optionalSource: {} | { type: string } | null;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     markerDataAttribute: string;
     actionAttribute: {} | null;
     textTemplateAttribute: string;
@@ -66,7 +66,7 @@ export interface MyWidgetPreviewProps {
     optionalDSAction: {} | null;
     optionalDSTextTemplate: string;
     optionalDSExpression: string;
-    optionalContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    optionalContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     datasourceProperties: DatasourcePropertiesPreviewType[];
     description: string;
     action: {} | null;

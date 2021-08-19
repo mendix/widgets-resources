@@ -31,7 +31,7 @@ export interface SidebarContainerProps {
 export interface SidebarPreviewProps {
     class: string;
     style: string;
-    contents: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    contents: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     toggleMode: ToggleModeEnum;
     widthUnit: WidthUnitEnum;
     widthValue: number | null;

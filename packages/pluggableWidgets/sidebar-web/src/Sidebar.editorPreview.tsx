@@ -1,13 +1,37 @@
-import { ReactElement } from "react";
+import { parseStyle } from "@mendix/piw-utils-internal";
+import { createElement, ReactElement } from "react";
 
 import { SidebarPreviewProps } from "../typings/SidebarProps";
+import { Sidebar as SidebarComponent } from "./components/Sidebar";
+import { getWidth } from "./utils/utils";
 
-export function getPreviewCss(): string {
-    // TODO: implement
-    return "";
+interface PreviewProps extends Omit<SidebarPreviewProps, "class"> {
+    className: string;
 }
 
-export function preview(_props: SidebarPreviewProps): ReactElement | null {
-    // TODO: implement
-    return null;
+export function preview(props: PreviewProps): ReactElement | null {
+    const width = getWidth(props.widthUnit, props.widthValue ?? 0);
+    const collapsedWidth = getWidth(props.collapsedWidthUnit, props.collapsedWidthValue ?? 0);
+    const expandedWidth = getWidth(props.expandedWidthUnit, props.expandedWidthValue ?? 0);
+
+    return (
+        <SidebarComponent
+            className={props.className}
+            style={parseStyle(props.style)}
+            collapsible={props.toggleMode !== "none"}
+            startExpanded={props.toggleMode === "none" || props.toggleMode === "startExpandedShrink"}
+            width={props.toggleMode === "none" ? width : undefined}
+            collapsedWidth={
+                props.toggleMode === "startCollapsedShrink" || props.toggleMode === "startExpandedShrink"
+                    ? collapsedWidth
+                    : undefined
+            }
+            expandedWidth={expandedWidth}
+            slideOver={props.toggleMode === "slideOver"}
+        >
+            <props.contents.renderer>
+                <div />
+            </props.contents.renderer>
+        </SidebarComponent>
+    );
 }

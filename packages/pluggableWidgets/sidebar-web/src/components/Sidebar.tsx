@@ -1,12 +1,11 @@
-import { createElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useState } from "react";
+import { createElement, CSSProperties, PropsWithChildren, ReactElement, useEffect, useRef } from "react";
 import classNames from "classnames";
+import { useSidebar } from "../utils/useSidebar";
 
 import "../ui/Sidebar.scss";
-import { registerSidebarToggle } from "../utils/SidebarToggleRegistration";
-import { Alert } from "@mendix/piw-utils-internal";
 
 export interface SidebarProps {
-    name: string;
+    name?: string;
     className?: string;
     style?: CSSProperties;
     tabIndex?: number;
@@ -18,11 +17,15 @@ export interface SidebarProps {
     slideOver?: boolean;
 }
 
-export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
-    const [expanded, setExpanded] = useState(props.startExpanded);
-    const [error, setError] = useState("");
+const CONTENT_SELECTOR = ["mx-navigationtree", "mx-navigationlist", "mx-navbar", "mx-menubar", "mx-button", "mx-link"]
+    .map(cls => "." + cls)
+    .join(",");
 
-    let width: string | number | undefined;
+export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
+    const sidebarRef = useRef<HTMLElement | null>(null);
+    const expanded = useSidebar(!!props.startExpanded, props.name);
+
+    let width: CSSProperties["width"];
 
     if (props.collapsible) {
         width = expanded ? props.expandedWidth : props.collapsedWidth;
@@ -31,22 +34,18 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
     }
 
     useEffect(() => {
-        if (props.collapsible) {
-            let unregisterSidebarToggle: () => void;
-
-            try {
-                unregisterSidebarToggle = registerSidebarToggle(() => setExpanded(prevExpanded => !prevExpanded));
-            } catch (e) {
-                setError(e.message);
-            }
-
-            return () => unregisterSidebarToggle();
+        if (sidebarRef.current && props.collapsible) {
+            sidebarRef.current?.querySelectorAll(CONTENT_SELECTOR).forEach(contentNode => {
+                if (expanded) {
+                    contentNode.removeAttribute("aria-hidden");
+                    contentNode.setAttribute("data-focusindex", "0");
+                } else {
+                    contentNode.setAttribute("aria-hidden", "true");
+                    contentNode.setAttribute("data-focusindex", "-1");
+                }
+            });
         }
-    }, [props.name, props.collapsible]);
-
-    if (error) {
-        return <Alert bootstrapStyle={"danger"}>{error}</Alert>;
-    }
+    }, [expanded, props.collapsible]);
 
     return (
         <aside
@@ -60,6 +59,7 @@ export function Sidebar(props: PropsWithChildren<SidebarProps>): ReactElement {
             )}
             style={{ ...props.style, width }}
             tabIndex={props.tabIndex}
+            ref={sidebarRef}
         >
             {props.children}
         </aside>

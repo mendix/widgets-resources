@@ -1,6 +1,8 @@
 import {
+    DropZoneProps,
     hidePropertiesIn,
     Properties,
+    RowLayoutProps,
     StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
@@ -31,7 +33,42 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(_values: SidebarPreviewProps): StructurePreviewProps | null {
-    // TODO: implement
-    return null;
+export function getPreview(values: SidebarPreviewProps): StructurePreviewProps | null {
+    const titleHeader: RowLayoutProps = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        backgroundColor: "#daeffb",
+        borders: true,
+        borderWidth: 1,
+        children: [
+            {
+                type: "Container",
+                padding: 4,
+                children: [
+                    {
+                        type: "Text",
+                        content: "Sidebar",
+                        fontColor: "#2074c8"
+                    }
+                ]
+            }
+        ]
+    };
+    const content = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        borders: true,
+        children: [
+            {
+                type: "DropZone",
+                property: values.contents,
+                placeholder: "Place your menu widget(s) here."
+            } as DropZoneProps
+        ]
+    } as RowLayoutProps;
+
+    return {
+        type: "Container",
+        children: [titleHeader, content]
+    };
 }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.sidebartoggle.SidebarToggle" needsEntityContext="true" offlineCapable="true"
+        pluginWidget="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Sidebar toggle</name>
+    <description>Toggles the sidebar.</description>
+    <studioProCategory>Layout</studioProCategory>
+    <studioCategory>Layout</studioCategory>
+    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADnSURBVHgB7ZUxDoIwFIbfqy4y6Q08Ah7BwTgiA+EY6k28BgkJMuHmFTgC3oDBwUH6LAQSUZsUW6MmfEnTpq/5//x5aQvw72Cz8H1/zTlfgQEYY3EQBLtq3WzW4jYRgc4oNYqicBrd4b2zOJCGYTgHDTzPO7bSwIcZygqL6GwPgMagJpMd3FHWyYAhE1FRyQABczFNOhkg4UxMU1AyuOaymtSgjpyBJt9r8nJ/iVCxyYiUJo61fVWTJmDET6AKyXslTZC41gYM0F+0iv6iadFKgIj243v+BrYY6ZOB+GxiMEMpbkrrB7gB2jl3RW/TEDUAAAAASUVORK5CYII=</icon>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="caption" type="textTemplate" required="false">
+                    <caption>Caption</caption>
+                    <description />
+                </property>
+                <property key="tooltip" type="textTemplate" required="false">
+                    <caption>Tooltip</caption>
+                    <description />
+                </property>
+                <property key="icon" type="icon" required="false">
+                    <caption>Icon</caption>
+                    <description />
+                </property>
+                <property key="renderMode" type="enumeration" defaultValue="button">
+                    <caption>Render mode</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="button">Button</enumerationValue>
+                        <enumerationValue key="link">Link</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Accessibility">
+                <property key="role" type="enumeration" defaultValue="button">
+                    <caption>Role type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="button">Button</enumerationValue>
+                        <enumerationValue key="link">Link</enumerationValue>
+                        <enumerationValue key="checkbox">Checkbox</enumerationValue>
+                        <enumerationValue key="tab">Tab</enumerationValue>
+                        <enumerationValue key="menu_item">Menu item</enumerationValue>
+                        <enumerationValue key="menu_item_checkbox">Menu item checkbox</enumerationValue>
+                        <enumerationValue key="menu_item_radio">Menu item radio</enumerationValue>
+                        <enumerationValue key="option">Option</enumerationValue>
+                        <enumerationValue key="switch">Switch</enumerationValue>
+                        <enumerationValue key="tree_item">Tree item</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
