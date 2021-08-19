@@ -23,7 +23,7 @@ const defaultProps: TreeViewProps = {
     expandIcon: null,
     collapseIcon: null,
     animateIcon: false,
-    animateTreeView: false
+    animateTreeViewContent: false
 };
 
 describe("TreeView", () => {

@@ -35,7 +35,7 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             collapseIcon={collapseIcon}
             tabIndex={props.tabIndex}
             animateIcon={props.animate && props.animateIcon}
-            animateTreeView={props.animate}
+            animateTreeViewContent={props.animate}
         />
     );
 }
