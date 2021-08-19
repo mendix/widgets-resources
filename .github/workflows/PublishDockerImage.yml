@@ -46,22 +46,22 @@ jobs:
               run: |
                 MXBUILD_MX8=ghcr.io/${{ github.repository }}/$MXBUILD:${{steps.variables.outputs.mx8}}
                 docker tag $MXBUILD:${{steps.variables.outputs.mx8}} $MXBUILD_MX8
-                docker push $MXBUILD_MX8
+                if [[ $(docker manifest inspect $MXBUILD_MX8 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $MXBUILD_MX8 ; fi
 
             - name: Push Mx Build 9 Docker Image
               run: |
                 MXBUILD_MX9=ghcr.io/${{ github.repository }}/$MXBUILD:${{steps.variables.outputs.mx9}}
                 docker tag $MXBUILD:${{steps.variables.outputs.mx9}} $MXBUILD_MX9
-                docker push $MXBUILD_MX9
+                if [[ $(docker manifest inspect $MXBUILD_MX9 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $MXBUILD_MX9 ; fi
 
             - name: Push Mx Runtime 8 Docker Image
               run: |
                 RUNTIME_MX8=ghcr.io/${{ github.repository }}/$RUNTIME:${{steps.variables.outputs.mx8}}
                 docker tag $RUNTIME:${{steps.variables.outputs.mx8}} $RUNTIME_MX8
-                docker push $RUNTIME_MX8
+                if [[ $(docker manifest inspect $RUNTIME_MX8 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $RUNTIME_MX8 ; fi
 
             - name: Push Mx Runtime 9 Docker Image
               run: |
                 RUNTIME_MX9=ghcr.io/${{ github.repository }}/$RUNTIME:${{steps.variables.outputs.mx9}}
                 docker tag $RUNTIME:${{steps.variables.outputs.mx9}} $RUNTIME_MX9
-                docker push $RUNTIME_MX9
+                if [[ $(docker manifest inspect $RUNTIME_MX9 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $RUNTIME_MX9 ; fi
