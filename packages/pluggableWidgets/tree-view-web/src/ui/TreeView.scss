@@ -12,6 +12,7 @@
             outline: none;
             & > .widget-tree-view-branch-header {
                 outline: -webkit-focus-ring-color auto 1px;
+                outline: -moz-mac-focusring auto 1px;
             }
         }
     }
