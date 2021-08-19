@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.0.7] - 2021-08-19
+
 ### Added
+- We added default padding for data view placed directly inside placeholders. (Ticket #128307)
 - We added styles, exclusion variables and design properties for Gallery widget.
 
 ## [3.0.6] - 2021-08-12
