@@ -45,10 +45,10 @@ export interface FilterListType {
 export interface ColumnsPreviewType {
     showContentAs: ShowContentAsEnum;
     attribute: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dynamicText: string;
     header: string;
-    filter: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    filter: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     sortable: boolean;
     resizable: boolean;
     draggable: boolean;
@@ -100,7 +100,7 @@ export interface DatagridPreviewProps {
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
-    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     rowClass: string;
     onClick: {} | null;
     columnsSortable: boolean;
@@ -111,6 +111,6 @@ export interface DatagridPreviewProps {
     onConfigurationChange: {} | null;
     showHeaderFilters: boolean;
     filterList: FilterListPreviewType[];
-    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     advanced: boolean;
 }

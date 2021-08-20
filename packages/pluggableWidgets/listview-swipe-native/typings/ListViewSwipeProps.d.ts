@@ -25,11 +25,11 @@ export interface ListViewSwipeProps<Style> {
 export interface ListViewSwipePreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
-    left: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    left: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     leftRenderMode: LeftRenderModeEnum;
     onSwipeLeft: {} | null;
-    right: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    right: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     rightRenderMode: RightRenderModeEnum;
     onSwipeRight: {} | null;
 }

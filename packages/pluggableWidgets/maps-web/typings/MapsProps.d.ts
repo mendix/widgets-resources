@@ -54,7 +54,7 @@ export interface MarkersPreviewType {
     title: string;
     onClick: {} | null;
     markerStyle: MarkerStyleEnum;
-    customMarker: string;
+    customMarker: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
 }
 
 export interface DynamicMarkersPreviewType {
@@ -66,7 +66,7 @@ export interface DynamicMarkersPreviewType {
     title: string;
     onClickAttribute: {} | null;
     markerStyleDynamic: MarkerStyleDynamicEnum;
-    customMarkerDynamic: string;
+    customMarkerDynamic: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
 }
 
 export interface MapsContainerProps {

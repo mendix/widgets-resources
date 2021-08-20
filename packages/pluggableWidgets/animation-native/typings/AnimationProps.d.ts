@@ -38,7 +38,7 @@ export interface AnimationProps<Style> {
 export interface AnimationPreviewProps {
     class: string;
     style: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     animationType: AnimationTypeEnum;
     animationIn: AnimationInEnum;
     animationAttention: AnimationAttentionEnum;

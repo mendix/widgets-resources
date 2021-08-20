@@ -34,8 +34,8 @@ export interface GroupsPreviewType {
     headerRenderMode: HeaderRenderModeEnum;
     headerText: string;
     headerHeading: HeaderHeadingEnum;
-    headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    headerContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     visible: string;
     dynamicClass: string;
     initialCollapsedState: InitialCollapsedStateEnum;
