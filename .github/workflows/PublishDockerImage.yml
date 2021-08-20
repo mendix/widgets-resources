@@ -1,0 +1,67 @@
+name: Publishing docker images for mxbuild
+
+on:
+    push:
+        branches: [master]
+        paths:
+            - "configs/e2e/mendix-versions.json"
+
+env:
+    MXBUILD: mxbuild
+    RUNTIME: mxruntime
+    JSON_PATH: configs/e2e/mendix-versions.json
+    PWT_PATH: packages/tools/pluggable-widgets-tools
+
+jobs:
+    push:
+        runs-on: ubuntu-latest
+        permissions:
+            packages: write
+            contents: read
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Getting variables
+              id: variables
+              run: |
+                  echo "::set-output name=mx9::$(sed -n 's/.*"latest": "\([^"]*\)",/\1/p' $JSON_PATH)"
+                  echo "::set-output name=mx8::$(sed -n 's/.*"8": "\([^"]*\)"/\1/p' $JSON_PATH)"
+
+            - name: Building Mx Build 8 docker image
+              run: docker build . --file $PWT_PATH/scripts/mxbuild.Dockerfile --build-arg MENDIX_VERSION=${{steps.variables.outputs.mx8}} --tag $MXBUILD:${{steps.variables.outputs.mx8}} --label "runnumber=${GITHUB_RUN_ID}"
+
+            - name: Building Mx Build 9 docker image
+              run: docker build . --file $PWT_PATH/scripts/mxbuild.Dockerfile --build-arg MENDIX_VERSION=${{steps.variables.outputs.mx9}} --tag $MXBUILD:${{steps.variables.outputs.mx9}} --label "runnumber=${GITHUB_RUN_ID}"
+
+            - name: Building Mx Runtime 8 docker image
+              run: docker build . --file $PWT_PATH/scripts/runtime.Dockerfile --build-arg MENDIX_VERSION=${{steps.variables.outputs.mx8}} --tag $RUNTIME:${{steps.variables.outputs.mx8}} --label "runnumber=${GITHUB_RUN_ID}"
+
+            - name: Building MX Runtime 9 docker image
+              run: docker build . --file $PWT_PATH/scripts/runtime.Dockerfile --build-arg MENDIX_VERSION=${{steps.variables.outputs.mx9}} --tag $RUNTIME:${{steps.variables.outputs.mx9}} --label "runnumber=${GITHUB_RUN_ID}"
+
+            - name: Log in to Container Registry
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+            - name: Push Mx Build 8 Docker Image
+              run: |
+                MXBUILD_MX8=ghcr.io/${{ github.repository }}/$MXBUILD:${{steps.variables.outputs.mx8}}
+                docker tag $MXBUILD:${{steps.variables.outputs.mx8}} $MXBUILD_MX8
+                if [[ $(docker manifest inspect $MXBUILD_MX8 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $MXBUILD_MX8 ; fi
+
+            - name: Push Mx Build 9 Docker Image
+              run: |
+                MXBUILD_MX9=ghcr.io/${{ github.repository }}/$MXBUILD:${{steps.variables.outputs.mx9}}
+                docker tag $MXBUILD:${{steps.variables.outputs.mx9}} $MXBUILD_MX9
+                if [[ $(docker manifest inspect $MXBUILD_MX9 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $MXBUILD_MX9 ; fi
+
+            - name: Push Mx Runtime 8 Docker Image
+              run: |
+                RUNTIME_MX8=ghcr.io/${{ github.repository }}/$RUNTIME:${{steps.variables.outputs.mx8}}
+                docker tag $RUNTIME:${{steps.variables.outputs.mx8}} $RUNTIME_MX8
+                if [[ $(docker manifest inspect $RUNTIME_MX8 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $RUNTIME_MX8 ; fi
+
+            - name: Push Mx Runtime 9 Docker Image
+              run: |
+                RUNTIME_MX9=ghcr.io/${{ github.repository }}/$RUNTIME:${{steps.variables.outputs.mx9}}
+                docker tag $RUNTIME:${{steps.variables.outputs.mx9}} $RUNTIME_MX9
+                if [[ $(docker manifest inspect $RUNTIME_MX9 > /dev/null ; echo $?)  = 0 ]] ; then echo 'Docker image already exists'; else docker push $RUNTIME_MX9 ; fi

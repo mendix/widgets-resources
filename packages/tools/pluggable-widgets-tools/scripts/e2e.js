@@ -18,6 +18,7 @@ main().catch(e => {
 async function main() {
     const mendixVersion = await getMendixVersion();
     const ip = nodeIp.address();
+    const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
     if (!ip) {
         throw new Error("Could not determine local ip address!");
@@ -60,8 +61,16 @@ async function main() {
         cp("-rf", `dist/${widgetVersion}/*.mpk`, "tests/testProject/widgets/");
     }
 
+    // When running on CI pull the docker image from Github Container Registry
+
+    if (ghcr) {
+        console.log(`Pulling mxbuild docker image from Github Container Registry...`);
+        execSync(`docker pull ${ghcr}mxbuild:${mendixVersion}`);
+    }
+
     // Create reusable mxbuild image
-    const existingImages = execSync(`docker image ls -q mxbuild:${mendixVersion}`).toString().trim();
+
+    const existingImages = execSync(`docker image ls -q ${ghcr}mxbuild:${mendixVersion}`).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         execSync(
@@ -72,7 +81,12 @@ async function main() {
         );
     }
 
-    const existingRuntimeImages = execSync(`docker image ls -q mxruntime:${mendixVersion}`).toString().trim();
+    if (ghcr) {
+        console.log(`Pulling mxruntime docker image from Github Container Registry...`);
+        execSync(`docker pull ${ghcr}mxruntime:${mendixVersion}`);
+    }
+
+    const existingRuntimeImages = execSync(`docker image ls -q ${ghcr}mxruntime:${mendixVersion}`).toString().trim();
     if (!existingRuntimeImages) {
         console.log(`Creating new runtime docker image...`);
         execSync(
@@ -87,7 +101,7 @@ async function main() {
     const projectFile = ls("tests/testProject/*.mpr").toString();
     execSync(
         `docker run -t -v ${process.cwd()}:/source ` +
-            `--rm mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
+            `--rm ${ghcr}mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
             `-o /tmp/automation.mda /source/${projectFile}"`,
         { stdio: "inherit" }
     );
@@ -98,7 +112,7 @@ async function main() {
     const runtimeContainerId = execSync(
         `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
             `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
-            `--rm mxruntime:${mendixVersion} /shared/runtime.sh`
+            `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
     )
         .toString()
         .trim();
