@@ -12,20 +12,11 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
     let image = ImageViewerPlaceholder;
     switch (props.datasource) {
         case "image":
-            // TODO: Remove these when preview typing for `image` property is aligned properly by PageEditor
-            const imageObject:
-                | { type: "static"; imageUrl: string }
-                | { type: "dynamic"; entity: string }
-                | null = props.imageObject as any;
-            const defaultImageObject:
-                | { type: "static"; imageUrl: string }
-                | { type: "dynamic"; entity: string }
-                | null = props.defaultImageDynamic as any;
-            if (imageObject?.type === "static") {
+            if (props.imageObject?.type === "static") {
                 // The optional chaining in the conditional guarantees the object is set here.
-                image = imageObject.imageUrl;
-            } else if (defaultImageObject?.type === "static") {
-                image = defaultImageObject.imageUrl;
+                image = props.imageObject.imageUrl;
+            } else if (props.defaultImageDynamic?.type === "static") {
+                image = props.defaultImageDynamic.imageUrl;
             }
             break;
         case "icon":

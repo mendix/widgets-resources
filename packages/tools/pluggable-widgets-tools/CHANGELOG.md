@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - We fixed the formatting of Preview typings
+- We fixed the Preview typings for Icon property.
 
 ## [9.4.3] - 2021-08-12
 
