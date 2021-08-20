@@ -13,7 +13,7 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
-    "testProject": {
+  "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
     "branchName": "tree-view-web"
   },

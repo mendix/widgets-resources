@@ -1,8 +1,21 @@
 .widget-tree-view {
     height: 100%;
     width: 100%;
+    padding: 0;
     display: flex;
     flex-direction: column;
+
+    .widget-tree-view-branch {
+        display: block;
+
+        &:focus-visible {
+            outline: none;
+            & > .widget-tree-view-branch-header {
+                outline: -webkit-focus-ring-color auto 1px;
+                outline: -moz-mac-focusring auto 1px;
+            }
+        }
+    }
 
     .widget-tree-view-branch-header-clickable {
         cursor: pointer;
