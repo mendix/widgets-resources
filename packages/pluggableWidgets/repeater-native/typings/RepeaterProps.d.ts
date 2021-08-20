@@ -17,5 +17,5 @@ export interface RepeaterPreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

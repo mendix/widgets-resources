@@ -26,8 +26,8 @@ export interface RatingPreviewProps {
     class: string;
     style: string;
     ratingAttribute: string;
-    emptyIcon: string;
-    icon: string;
+    emptyIcon: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
+    icon: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
     maximumValue: number | null;
     animation: AnimationEnum;
     editable: EditableEnum;

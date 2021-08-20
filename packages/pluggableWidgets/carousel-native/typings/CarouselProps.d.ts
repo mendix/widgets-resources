@@ -24,7 +24,7 @@ export interface CarouselPreviewProps {
     class: string;
     style: string;
     contentSource: {} | { type: string } | null;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     layout: LayoutEnum;
     showPagination: boolean;
     activeSlideAlignment: ActiveSlideAlignmentEnum;

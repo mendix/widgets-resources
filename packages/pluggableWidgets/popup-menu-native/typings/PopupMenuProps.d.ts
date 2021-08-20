@@ -32,7 +32,7 @@ export interface BasicItemsPreviewType {
 }
 
 export interface CustomItemsPreviewType {
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     action: {} | null;
 }
 
@@ -48,7 +48,7 @@ export interface PopupMenuProps<Style> {
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
-    menuTriggerer: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    menuTriggerer: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     renderMode: RenderModeEnum;
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];

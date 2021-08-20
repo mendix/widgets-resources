@@ -38,6 +38,6 @@ export interface AccessibilityHelperPreviewProps {
     class: string;
     style: string;
     targetSelector: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     attributesList: AttributesListPreviewType[];
 }

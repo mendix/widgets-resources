@@ -57,7 +57,7 @@ export interface GalleryPreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     desktopItems: number | null;
     tabletItems: number | null;
     phoneItems: number | null;
@@ -65,10 +65,10 @@ export interface GalleryPreviewProps {
     pagination: PaginationEnum;
     pagingPosition: PagingPositionEnum;
     showEmptyPlaceholder: ShowEmptyPlaceholderEnum;
-    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    emptyPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     itemClass: string;
     onClick: {} | null;
     filterList: FilterListPreviewType[];
-    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     sortList: SortListPreviewType[];
 }

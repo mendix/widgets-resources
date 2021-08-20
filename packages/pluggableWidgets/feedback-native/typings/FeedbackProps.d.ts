@@ -18,5 +18,5 @@ export interface FeedbackPreviewProps {
     style: string;
     sprintrapp: string;
     allowScreenshot: boolean;
-    logo: string;
+    logo: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
 }

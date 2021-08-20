@@ -50,5 +50,5 @@ export interface ProgressBarPreviewProps {
     showLabel: boolean;
     labelType: LabelTypeEnum;
     labelText: string;
-    customLabel: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    customLabel: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

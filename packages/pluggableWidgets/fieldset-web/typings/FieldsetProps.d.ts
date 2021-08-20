@@ -19,5 +19,5 @@ export interface FieldsetPreviewProps {
     class: string;
     style: string;
     legend: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

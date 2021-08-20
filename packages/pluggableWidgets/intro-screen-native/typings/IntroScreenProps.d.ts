@@ -20,7 +20,7 @@ export type SlideIndicatorsEnum = "between" | "above" | "never";
 
 export interface SlidesPreviewType {
     name: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }
 
 export interface IntroScreenProps<Style> {

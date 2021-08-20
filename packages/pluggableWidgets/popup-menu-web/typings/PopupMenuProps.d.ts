@@ -34,7 +34,7 @@ export interface BasicItemsPreviewType {
 }
 
 export interface CustomItemsPreviewType {
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     action: {} | null;
 }
 
@@ -55,7 +55,7 @@ export interface PopupMenuContainerProps {
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
-    menuTrigger: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    menuTrigger: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];
     trigger: TriggerEnum;
