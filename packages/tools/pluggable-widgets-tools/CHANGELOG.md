@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added support for icon and tile images. Now you can use an image file instead of `<icon>` in your `MyWidget.xml`. In order to use, please make sure you follow the pattern `src/MyWidget.icon.png` (24x24px) and `src/MyWidget.tile.png` (256x192px)
+
+### Changed
+- We fixed the formatting of Preview typings
+
 ## [9.4.3] - 2021-08-12
 
 ### Changed
@@ -13,7 +19,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [9.4.2] - 2021-08-11
 
 ### Changed
-- We changed the behavior of commonjs pluggin for rollup to identify the correct way to handle require (as default or not).
+- We changed the behavior of commonjs plugin for rollup to identify the correct way to handle require (as default or not).
 
 ## [9.4.1] - 2021-08-05
 

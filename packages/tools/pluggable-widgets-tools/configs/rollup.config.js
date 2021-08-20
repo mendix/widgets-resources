@@ -268,7 +268,14 @@ export default async args => {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             clear({ targets: [outDir, mpkDir] }),
-            command([() => cp(join(sourcePath, "src/**/*.xml"), outDir)]),
+            command([
+                () => {
+                    cp(join(sourcePath, "src/**/*.xml"), outDir);
+                    if (existsSync(`src/${widgetName}.icon.png`) || existsSync(`src/${widgetName}.tile.png`)) {
+                        cp(join(sourcePath, `src/${widgetName}.@(tile|icon).png`), outDir);
+                    }
+                }
+            ]),
             args.watch && platform === "web" && !production && projectPath ? livereload() : null
         ];
     }
