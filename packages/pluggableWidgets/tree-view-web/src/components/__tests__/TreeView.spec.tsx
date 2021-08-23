@@ -163,7 +163,7 @@ describe("TreeView", () => {
         expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
     });
 
-    it("shows custom the close icon accordingly", () => {
+    it("shows custom close icon accordingly", () => {
         const treeView = mount(
             <TreeView
                 {...defaultProps}
@@ -334,7 +334,7 @@ describe("TreeView", () => {
         ).toBe(false);
     });
 
-    it("adds a CSS class for the header when the icon should animate on toggle", () => {
+    it("adds a CSS class for the header when the icon animates on toggle", () => {
         const treeView = mount(
             <TreeView
                 {...defaultProps}
@@ -547,7 +547,7 @@ describe("TreeView", () => {
             userEvent.tab();
         }
 
-        it("the Space and Enter keys collapses and expands the tree view branch content", async () => {
+        it("collapses and expands the content when pressing Space and Enter keys", async () => {
             expect(screen.queryByText("First content")).not.toBeInTheDocument();
 
             const treeViews = getTreeViewItems();
