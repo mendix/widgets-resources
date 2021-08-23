@@ -458,6 +458,48 @@ export interface BarChartType {
     };
 }
 
+// Pie Doughnut Chart
+export interface PieDoughnutChartStyle {
+    container?: ViewStyle;
+    slices?: {
+        colorPalette?: string;
+        innerRadius?: number;
+        padding?: number;
+        paddingBottom?: number;
+        paddingHorizontal?: number;
+        paddingLeft?: number;
+        paddingRight?: number;
+        paddingTop?: number;
+        paddingVertical?: number;
+        customStyles?: {
+            // key configured in modeler
+            [key: string]: {
+                slice?: {
+                    color?: string;
+                };
+                label?: {
+                    // color is the same as slice color
+                    fontFamily?: string;
+                    fontSize?: number;
+                    fontStyle?: "normal" | "italic";
+                    fontWeight?:
+                        | "normal"
+                        | "bold"
+                        | "100"
+                        | "200"
+                        | "300"
+                        | "400"
+                        | "500"
+                        | "600"
+                        | "700"
+                        | "800"
+                        | "900";
+                };
+            };
+        };
+    };
+}
+
 // List view
 export interface ListViewType {
     container?: ViewStyle;

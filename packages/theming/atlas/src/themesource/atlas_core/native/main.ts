@@ -47,6 +47,7 @@ import * as widgetsMaps from "./core/widgets/maps";
 import * as helpersMaps from "./core/helpers/maps";
 import * as widgetsNavigation from "./core/widgets/navigation";
 import * as widgetsPageTitle from "./core/widgets/pagetitle";
+import * as widgetsPieDoughnutChart from "./core/widgets/piedoughnutchart";
 import * as widgetsProgressBar from "./core/widgets/progressbar";
 import * as helpersProgressBar from "./core/helpers/progressbar";
 import * as widgetsProgressCircle from "./core/widgets/progresscircle";
@@ -124,6 +125,7 @@ module.exports = [
     !exclusionVariables.excludeMaps && !exclusionVariables.excludeMapsHelpers ? helpersMaps : {},
     widgetsNavigation,
     !exclusionVariables.excludePageTitle ? widgetsPageTitle : {},
+    !exclusionVariables.excludePieDoughnutChart ? widgetsPieDoughnutChart : {},
     !exclusionVariables.excludeProgressBar ? widgetsProgressBar : {},
     !exclusionVariables.excludeProgressBar && !exclusionVariables.excludeProgressBarHelpers ? helpersProgressBar : {},
     !exclusionVariables.excludeProgressCircle ? widgetsProgressCircle : {},
