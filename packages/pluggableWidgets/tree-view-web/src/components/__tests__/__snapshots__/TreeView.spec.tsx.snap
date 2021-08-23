@@ -131,6 +131,7 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
       </svg>
     </span>
     <div
+      aria-hidden="false"
       class="widget-tree-view-body"
       id="11TreeViewBranchBody"
     >
@@ -168,6 +169,7 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
       </svg>
     </span>
     <div
+      aria-hidden="false"
       class="widget-tree-view-body"
       id="22TreeViewBranchBody"
     >
@@ -205,6 +207,7 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
       </svg>
     </span>
     <div
+      aria-hidden="false"
       class="widget-tree-view-body"
       id="33TreeViewBranchBody"
     >

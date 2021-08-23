@@ -32,10 +32,6 @@
                     <caption>Has children</caption>
                     <description>Indicate whether the node has children or is an end node. When set to yes, a composable region becomes avaliable to define the child nodes.</description>
                 </property>
-                <property key="shouldLazyLoad" type="boolean" defaultValue="false">
-                    <caption>Lazy load</caption>
-                    <description/>
-                </property>
                 <property key="startExpanded" type="boolean" defaultValue="false">
                     <caption>Start expanded</caption>
                     <description/>

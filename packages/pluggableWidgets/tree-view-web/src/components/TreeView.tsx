@@ -30,6 +30,7 @@ import {
     useTreeViewFocusChangeHandler
 } from "./hooks/treeViewAccessibility";
 import { ChevronIcon } from "./ChevronIcon";
+import { useTreeViewLazyLoading } from "./hooks/lazyLoading";
 
 export interface TreeViewObject extends ObjectItem {
     value: string | ReactNode | undefined;
@@ -42,7 +43,6 @@ export interface TreeViewProps extends Pick<TreeViewContainerProps, "tabIndex"> 
     style?: CSSProperties;
     items: TreeViewObject[] | null;
     isUserDefinedLeafNode: TreeViewBranchProps["isUserDefinedLeafNode"];
-    shouldLazyLoad: TreeViewBranchProps["shouldLazyLoad"];
     startExpanded: TreeViewBranchProps["startExpanded"];
     showCustomIcon: boolean;
     iconPlacement: TreeViewBranchProps["iconPlacement"];
@@ -58,7 +58,6 @@ export function TreeView({
     style,
     isUserDefinedLeafNode,
     showCustomIcon,
-    shouldLazyLoad,
     startExpanded,
     iconPlacement,
     expandIcon,
@@ -132,7 +131,6 @@ export function TreeView({
                     id={id}
                     value={value}
                     isUserDefinedLeafNode={isUserDefinedLeafNode}
-                    shouldLazyLoad={shouldLazyLoad}
                     startExpanded={startExpanded}
                     iconPlacement={iconPlacement}
                     renderHeaderIcon={renderHeaderIcon}
@@ -147,7 +145,6 @@ export function TreeView({
 interface TreeViewBranchProps {
     id: TreeViewObject["id"];
     isUserDefinedLeafNode: boolean;
-    shouldLazyLoad: boolean;
     startExpanded: boolean;
     value: TreeViewObject["value"];
     children: TreeViewObject["content"];
@@ -180,7 +177,7 @@ export const enum TreeViewState {
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const { level: currentContextLevel } = useContext(TreeViewBranchContext);
     const [treeViewState, setTreeViewState] = useState<TreeViewState>(
-        !props.shouldLazyLoad && props.startExpanded ? TreeViewState.EXPANDED : TreeViewState.COLLAPSED_WITH_JS
+        props.startExpanded ? TreeViewState.EXPANDED : TreeViewState.COLLAPSED_WITH_JS
     );
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
@@ -192,6 +189,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         }
     }, []);
 
+    const { treeViewBranchBody, hasNestedTreeView } = useTreeViewLazyLoading();
     const treeViewBranchRef = useRef<HTMLLIElement>(null);
     const { changeFocus } = props;
 
@@ -203,6 +201,14 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
             !treeViewBranchRef.current?.lastElementChild?.isSameNode(target)
         );
     }, []);
+
+    useEffect(() => {
+        if (treeViewState === TreeViewState.LOADING) {
+            if (!hasNestedTreeView()) {
+                setTreeViewState(TreeViewState.EXPANDED);
+            }
+        }
+    }, [hasNestedTreeView, treeViewState]);
 
     const toggleTreeViewContent = useCallback<ReactEventHandler<HTMLLIElement>>(
         event => {
@@ -216,16 +222,16 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                         return treeViewState;
                     }
                     if (treeViewState === TreeViewState.COLLAPSED_WITH_JS) {
-                        return props.shouldLazyLoad ? TreeViewState.LOADING : TreeViewState.EXPANDED;
+                        return TreeViewState.LOADING;
                     }
                     if (treeViewState === TreeViewState.COLLAPSED_WITH_CSS) {
                         return TreeViewState.EXPANDED;
                     }
-                    return props.shouldLazyLoad ? TreeViewState.COLLAPSED_WITH_CSS : TreeViewState.COLLAPSED_WITH_JS;
+                    return TreeViewState.COLLAPSED_WITH_CSS;
                 });
             }
         },
-        [isActualLeafNode, props.shouldLazyLoad, eventTargetIsNotCurrentBranch]
+        [isActualLeafNode, eventTargetIsNotCurrentBranch]
     );
 
     const treeViewAccessibilityProps = getTreeViewAccessibilityProps(treeViewState === TreeViewState.EXPANDED);
@@ -284,8 +290,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                     value={{
                         level: currentContextLevel + 1,
                         informParentToHaveChildNodes,
-                        informParentIsLoading: updateTreeViewState,
-                        childShouldShowPlaceholder: props.shouldLazyLoad
+                        informParentIsLoading: updateTreeViewState
                     }}
                 >
                     <div
@@ -293,7 +298,8 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                             "widget-tree-view-branch-hidden": treeViewState === TreeViewState.COLLAPSED_WITH_CSS
                         })}
                         id={treeViewBranchUtils.getBodyId(props.id)}
-                        aria-hidden={treeViewState === TreeViewState.COLLAPSED_WITH_CSS}
+                        aria-hidden={treeViewState !== TreeViewState.EXPANDED}
+                        ref={treeViewBranchBody}
                     >
                         {props.children}
                     </div>
