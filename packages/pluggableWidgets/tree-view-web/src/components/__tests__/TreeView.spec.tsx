@@ -141,7 +141,7 @@ describe("TreeView", () => {
         return header.findWhere(node => node.type() === "img" && node.prop("src") === "collapse-image");
     }
 
-    it("shows custom the expand icon accordingly", () => {
+    it("shows custom expanded icon accordingly", () => {
         const treeView = mount(
             <TreeView
                 {...defaultProps}
