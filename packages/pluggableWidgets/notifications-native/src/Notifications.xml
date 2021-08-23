@@ -17,7 +17,7 @@
                     <property key="onReceive" type="action" required="false">
                         <caption>On receive</caption>
                         <category>Action</category>
-                        <description>Called when the notification is received while the application is running.</description>
+                        <description>Called when the notification is received while the application is running. Only applicable to remote notifications.</description>
                     </property>
                     <property key="onOpen" type="action" required="false">
                         <caption>On open</caption>
