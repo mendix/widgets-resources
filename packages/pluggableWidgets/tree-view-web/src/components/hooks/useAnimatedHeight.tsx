@@ -1,12 +1,11 @@
-import { RefObject, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { RefObject, useCallback, useRef, useState } from "react";
 
-export const useAnimatedTreeViewContentHeight = <T extends any>(
-    treeViewBranchBody: RefObject<HTMLDivElement>,
-    dependency: T,
-    shouldAnimate: (dependency: T) => boolean
+export const useAnimatedTreeViewContentHeight = (
+    treeViewBranchBody: RefObject<HTMLDivElement>
 ): {
     isAnimating: boolean;
     captureElementHeight: () => void;
+    animateTreeViewContent: () => (() => void) | undefined;
     cleanupAnimation: () => void;
 } => {
     const currentElementHeight = useRef<number>();
@@ -16,12 +15,11 @@ export const useAnimatedTreeViewContentHeight = <T extends any>(
         currentElementHeight.current = treeViewBranchBody.current?.getBoundingClientRect().height ?? 0;
     }, []);
 
-    useLayoutEffect(() => {
+    const animateTreeViewContent = useCallback(() => {
         if (
             treeViewBranchBody.current &&
             currentElementHeight.current !== undefined &&
-            !Number.isNaN(currentElementHeight.current) &&
-            shouldAnimate(dependency)
+            !Number.isNaN(currentElementHeight.current)
         ) {
             const newElementHeight = treeViewBranchBody.current.getBoundingClientRect().height;
             if (newElementHeight - currentElementHeight.current !== 0) {
@@ -34,12 +32,12 @@ export const useAnimatedTreeViewContentHeight = <T extends any>(
                 return () => clearTimeout(timeout);
             }
         }
-    }, [dependency, shouldAnimate]);
+    }, []);
 
     const cleanupAnimation = useCallback(() => {
         setIsAnimating(false);
         treeViewBranchBody.current?.style.removeProperty("height");
     }, []);
 
-    return { isAnimating, captureElementHeight, cleanupAnimation };
+    return { isAnimating, captureElementHeight, animateTreeViewContent, cleanupAnimation };
 };

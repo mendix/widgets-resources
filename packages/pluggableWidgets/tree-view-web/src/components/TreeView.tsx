@@ -10,6 +10,7 @@ import {
     useCallback,
     useContext,
     useEffect,
+    useLayoutEffect,
     useRef,
     useState
 } from "react";
@@ -197,15 +198,21 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const treeViewBranchRef = useRef<HTMLLIElement>(null);
 
     const { hasNestedTreeView } = useTreeViewLazyLoading(treeViewBranchBody);
-    const shouldAnimate = useCallback(
-        (tvs: TreeViewState) => props.animateTreeViewContent && tvs !== TreeViewState.LOADING,
-        [props.animateTreeViewContent]
-    );
-    const { isAnimating, captureElementHeight, cleanupAnimation } = useAnimatedTreeViewContentHeight(
-        treeViewBranchBody,
-        treeViewState,
-        shouldAnimate
-    );
+    const {
+        isAnimating,
+        captureElementHeight,
+        animateTreeViewContent,
+        cleanupAnimation
+    } = useAnimatedTreeViewContentHeight(treeViewBranchBody);
+
+    useLayoutEffect(() => {
+        if (props.animateTreeViewContent && treeViewState !== TreeViewState.LOADING) {
+            const animationCleanup = animateTreeViewContent();
+            if (animationCleanup) {
+                return animationCleanup;
+            }
+        }
+    }, [animateTreeViewContent, props.animateTreeViewContent, treeViewState]);
 
     const eventTargetIsNotCurrentBranch = useCallback<(event: SyntheticEvent<HTMLElement>) => boolean>(event => {
         const target = event.target as Node;
