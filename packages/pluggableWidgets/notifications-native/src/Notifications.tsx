@@ -51,21 +51,11 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             if (actions.length === 0) {
                 return;
             }
-            if (props.guid) {
-                props.guid.setValue(notification.data?.guid);
-            }
-            if (props.title) {
-                props.title.setValue(title);
-            }
-            if (props.subtitle) {
-                props.subtitle.setValue(subtitle);
-            }
-            if (props.body) {
-                props.body.setValue(body);
-            }
-            if (props.action) {
-                props.action.setValue(actions.map(action => action.name).join(" "));
-            }
+            props.guid?.setValue(notification.data?.guid);
+            props.title?.setValue(title);
+            props.subtitle?.setValue(subtitle);
+            props.body?.setValue(body);
+            props.action?.setValue(actions.map(action => action.name).join(" "));
 
             actions.forEach(action => executeAction(getHandler(action)));
         },
@@ -75,18 +65,18 @@ export function Notifications(props: NotificationsProps<undefined>): null {
     const remoteMessageHandlerHelpers = (
         notification: FirebaseMessagingTypes.Notification
     ): Pick<Notification, "title" | "subTitle" | "body"> => ({
-        title: notification?.title,
-        body: notification?.body,
+        title: notification.title,
+        body: notification.body,
         subTitle: notification.ios?.subtitle
     });
 
     const onReceive = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
-            const { notification } = message;
+            const { notification, data } = message;
             if (notification) {
                 handleNotification(
                     {
-                        data: message.data,
+                        data,
                         ...remoteMessageHandlerHelpers(notification)
                     },
                     action => action.onReceive
@@ -98,11 +88,11 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
     const onOpen = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
-            const { notification } = message;
+            const { notification, data } = message;
             if (notification) {
                 handleNotification(
                     {
-                        data: message.data,
+                        data,
                         ...remoteMessageHandlerHelpers(notification)
                     },
                     action => action.onOpen
