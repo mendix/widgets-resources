@@ -2,12 +2,10 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 import PushNotification from "react-native-push-notification";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ActionValue, ValueStatus } from "mendix";
+import { ActionValue, ValueStatus, Option } from "mendix";
 import "@react-native-firebase/app";
 
 import { ActionsType, NotificationsProps } from "../typings/NotificationsProps";
-
-declare type Option<T> = T | undefined;
 
 // re-declare the library's type because: 1) it doesn't match library version 2) the definition file exports two symbols with same name.
 interface IPushNotification {
