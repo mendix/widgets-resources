@@ -20,7 +20,7 @@ export const useAnimatedTreeViewContentHeight = <T extends any>(
         if (
             treeViewBranchBody.current &&
             currentElementHeight.current !== undefined &&
-            Number.isInteger(currentElementHeight.current) &&
+            !Number.isNaN(currentElementHeight.current) &&
             shouldAnimate(dependency)
         ) {
             const newElementHeight = treeViewBranchBody.current.getBoundingClientRect().height;
