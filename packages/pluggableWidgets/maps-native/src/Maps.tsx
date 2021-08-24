@@ -1,5 +1,5 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { ActionValue, ValueStatus } from "mendix";
+import { ActionValue, ValueStatus, Option } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
@@ -228,9 +228,9 @@ export class Maps extends Component<Props, State> {
     }
 
     private parseCoordinate(
-        latitude?: number | undefined,
-        longitude?: number | undefined,
-        address?: string | undefined
+        latitude?: Option<number>,
+        longitude?: Option<number>,
+        address?: Option<string>
     ): Promise<LatLng> {
         if (isValidCoordinate(latitude) && isValidCoordinate(longitude)) {
             latitude = latitude as number;
@@ -249,7 +249,7 @@ export class Maps extends Component<Props, State> {
     }
 }
 
-function isValidCoordinate(value: Big | number | undefined): boolean {
+function isValidCoordinate(value: Option<Big | number>): boolean {
     return /-?\d{1,2}(?:\.\d+)?/.test(`${value}`);
 }
 
