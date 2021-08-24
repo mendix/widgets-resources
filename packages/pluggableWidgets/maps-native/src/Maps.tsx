@@ -4,6 +4,7 @@ import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
 import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
+import { Big } from "big.js";
 
 import { DefaultZoomLevelEnum, MapsProps } from "../typings/MapsProps";
 import { ModeledMarker } from "../typings/shared";
@@ -213,7 +214,7 @@ export class Maps extends Component<Props, State> {
     private async getCenter(): Promise<LatLng> {
         const { fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            (typeof centerLatitude === "number" && typeof centerLongitude === "number") || centerAddress
+            (isValidCoordinate(centerLatitude?.value) && isValidCoordinate(centerLongitude?.value)) || centerAddress
                 ? await this.parseCoordinate(
                       Number(centerLatitude?.value),
                       Number(centerLongitude?.value),
@@ -231,7 +232,9 @@ export class Maps extends Component<Props, State> {
         longitude?: number | undefined,
         address?: string | undefined
     ): Promise<LatLng> {
-        if (typeof latitude === "number" && typeof longitude === "number") {
+        if (isValidCoordinate(latitude) && isValidCoordinate(longitude)) {
+            latitude = latitude as number;
+            longitude = longitude as number;
             if (!isValidLatitude(latitude) || !isValidLongitude(longitude)) {
                 throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
@@ -244,6 +247,10 @@ export class Maps extends Component<Props, State> {
             throw new Error(`No address provided.`);
         }
     }
+}
+
+function isValidCoordinate(value: Big | number | undefined): boolean {
+    return /\d{1,2}(?:\.\d+)?/.test(`${value}`);
 }
 
 function isValidLatitude(latitude: number): boolean {
