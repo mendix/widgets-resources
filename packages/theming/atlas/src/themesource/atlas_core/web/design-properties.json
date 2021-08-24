@@ -1253,12 +1253,6 @@
             ]
         },
         {
-            "name": "Striped",
-            "type": "Toggle",
-            "description": "Add alternating background colors to nodes in the tree.",
-            "class": "widget-tree-view-striped"
-        },
-        {
             "name": "Hover",
             "type": "Toggle",
             "description": "Highlight an item when hovering over it. Only useful when the item is clickable.",
