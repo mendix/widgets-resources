@@ -40,11 +40,19 @@
     .widget-tree-view-bordered-all {
         border: 1px solid $grid-border-color;
         border-radius: 8px;
-        .widget-tree-view-branch > .widget-tree-view-branch-header {
+        overflow: hidden;
+
+        .widget-tree-view-body:not(.widget-tree-view-branch-loading) {
             border-width: 0;
-            border-bottom-width: 1px;
-            border-bottom-style: solid;
-            border-bottom-color: $grid-border-color;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #ced0d3;
+        }
+        .widget-tree-view-branch:not(:first-of-type) > .widget-tree-view-branch-header {
+            border-width: 0;
+            border-top-width: 1px;
+            border-top-style: solid;
+            border-top-color: #ced0d3;
         }
     }
 

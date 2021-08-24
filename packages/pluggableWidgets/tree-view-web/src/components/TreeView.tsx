@@ -20,7 +20,7 @@ import { ShowIconEnum, TreeViewContainerProps } from "../../typings/TreeViewProp
 import {
     TreeViewBranchContextProps,
     TreeViewBranchContext,
-    useInformParentContextToHaveChildNodes
+    useInformParentContextOfChildNodes
 } from "./TreeViewBranchContext";
 
 import "../ui/TreeView.scss";
@@ -68,7 +68,7 @@ export function TreeView({
     animateIcon,
     animateTreeViewContent
 }: TreeViewProps): ReactElement | null {
-    const { informParentIsLoading, level } = useContext(TreeViewBranchContext);
+    const { level } = useContext(TreeViewBranchContext);
 
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
         (treeViewState, iconPlacement) => {
@@ -96,7 +96,7 @@ export function TreeView({
         [collapseIcon, expandIcon, showCustomIcon, animateIcon]
     );
 
-    // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextToHaveChildNodes
+    // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextOfChildNodes
     const [treeViewElement, setTreeViewElement] = useState<HTMLDivElement | null>(null);
     const updateTreeViewElement = useCallback(node => {
         if (node) {
@@ -108,11 +108,7 @@ export function TreeView({
         return treeViewElement?.parentElement?.className.includes(treeViewBranchUtils.bodyClassName) ?? false;
     }, [treeViewElement]);
 
-    useEffect(() => {
-        informParentIsLoading(!items);
-    }, [items, informParentIsLoading]);
-
-    useInformParentContextToHaveChildNodes(items, isInsideAnotherTreeView);
+    useInformParentContextOfChildNodes(items, isInsideAnotherTreeView);
 
     const changeTreeViewBranchHeaderFocus = useTreeViewFocusChangeHandler();
 
@@ -186,13 +182,24 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     );
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
-    const updateTreeViewState = useCallback<TreeViewBranchContextProps["informParentIsLoading"]>(isLoading => {
-        if (!isLoading) {
-            setTreeViewState(treeViewState =>
-                treeViewState === TreeViewState.LOADING ? TreeViewState.EXPANDED : treeViewState
-            );
-        }
-    }, []);
+    const informParentOfChildNodes = useCallback<TreeViewBranchContextProps["informParentOfChildNodes"]>(
+        numberOfNodes => {
+            if (numberOfNodes !== undefined) {
+                setTreeViewState(treeViewState =>
+                    treeViewState === TreeViewState.LOADING ? TreeViewState.EXPANDED : treeViewState
+                );
+                setIsActualLeafNode(currentIsActualLeafNode => {
+                    if (numberOfNodes === 0 && !currentIsActualLeafNode) {
+                        return true;
+                    } else if (numberOfNodes > 0 && currentIsActualLeafNode) {
+                        return false;
+                    }
+                    return currentIsActualLeafNode;
+                });
+            }
+        },
+        []
+    );
 
     const treeViewBranchBody = useRef<HTMLDivElement>(null);
     const treeViewBranchRef = useRef<HTMLLIElement>(null);
@@ -258,17 +265,6 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
 
     const treeViewAccessibilityProps = getTreeViewAccessibilityProps(treeViewState === TreeViewState.EXPANDED);
 
-    const informParentToHaveChildNodes = useCallback<TreeViewBranchContextProps["informParentToHaveChildNodes"]>(
-        hasChildNodes => {
-            if (!hasChildNodes && !isActualLeafNode) {
-                setIsActualLeafNode(true);
-            } else if (hasChildNodes && isActualLeafNode) {
-                setIsActualLeafNode(false);
-            }
-        },
-        [isActualLeafNode]
-    );
-
     const onHeaderKeyDown = useTreeViewBranchKeyboardHandler(
         toggleTreeViewContent,
         props.changeFocus,
@@ -311,14 +307,14 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 <TreeViewBranchContext.Provider
                     value={{
                         level: currentContextLevel + 1,
-                        informParentToHaveChildNodes,
-                        informParentIsLoading: updateTreeViewState
+                        informParentOfChildNodes
                     }}
                 >
                     <div
                         className={classNames(treeViewBranchUtils.bodyClassName, {
                             "widget-tree-view-branch-hidden":
-                                treeViewState === TreeViewState.COLLAPSED_WITH_CSS && !isAnimating
+                                treeViewState === TreeViewState.COLLAPSED_WITH_CSS && !isAnimating,
+                            "widget-tree-view-branch-loading": treeViewState === TreeViewState.LOADING
                         })}
                         id={treeViewBranchUtils.getBodyId(props.id)}
                         aria-hidden={treeViewState !== TreeViewState.EXPANDED}
