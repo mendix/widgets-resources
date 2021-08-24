@@ -1,7 +1,8 @@
 import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { useOnClickOutside } from "@mendix/piw-utils-internal";
+import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
 import deepEqual from "deep-equal";
+import { createPortal } from "react-dom";
 
 export interface FilterOption {
     caption: string;
@@ -28,6 +29,9 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const defaultValuesLoaded = useRef<boolean>(false);
 
     const componentRef = useRef<HTMLDivElement>(null);
+    const optionsRef = useRef<HTMLUListElement>(null);
+
+    const [position, PositionObserver] = usePositionObserver(componentRef.current);
 
     const setMultiSelectFilters = useCallback(
         (selectedOptions: FilterOption[]) => {
@@ -60,7 +64,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
         [selectedFilters, props.multiSelect]
     );
 
-    useOnClickOutside(componentRef, () => setShow(false));
+    useOnClickOutside([componentRef, optionsRef], () => setShow(false));
 
     // Select the first option Or default option on load
     useEffect(() => {
@@ -121,14 +125,83 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
 
+    const optionsComponent = createPortal(
+        <Fragment>
+            <ul
+                ref={optionsRef}
+                id={`${props.name}-dropdown-list`}
+                className="dropdown-list"
+                role="menu"
+                data-focusindex={0}
+                style={{ position: "fixed", width: dropdownWidth, top: position?.bottom, left: position?.left }}
+            >
+                {options.map((option, index) => (
+                    <li
+                        className={classNames({
+                            "filter-selected": !props.multiSelect && selectedFilters.includes(option)
+                        })}
+                        key={index}
+                        onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onClick(option);
+                        }}
+                        onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                onClick(option);
+                            }
+                        }}
+                        role="menuitem"
+                        tabIndex={0}
+                    >
+                        {props.multiSelect ? (
+                            <Fragment>
+                                <input
+                                    id={`${props.name}_checkbox_toggle_${index}`}
+                                    type="checkbox"
+                                    checked={selectedFilters.includes(option)}
+                                />
+                                <label
+                                    htmlFor={`${props.name}_checkbox_toggle_${index}`}
+                                    style={{ pointerEvents: "none" }}
+                                >
+                                    {option.caption}
+                                </label>
+                            </Fragment>
+                        ) : (
+                            <div className="filter-label">{option.caption}</div>
+                        )}
+                    </li>
+                ))}
+            </ul>
+            {PositionObserver}
+        </Fragment>,
+        document.body
+    );
+
+    const containerClick = useCallback(() => {
+        setShow(true);
+        setTimeout(() => {
+            (optionsRef.current?.querySelector("li.filter-selected") as HTMLElement)?.focus();
+        }, 10);
+    }, []);
+
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
             <input
                 value={!showPlaceholder ? valueInput : ""}
                 placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
                 className="form-control dropdown-triggerer"
-                onClick={() => setShow(true)}
-                onFocus={() => setShow(true)}
+                onClick={() => containerClick()}
+                onKeyDown={e => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        containerClick();
+                    }
+                }}
                 aria-haspopup
                 ref={inputRef => {
                     if (inputRef && inputRef.clientWidth) {
@@ -139,51 +212,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 aria-controls={`${props.name}-dropdown-list`}
                 aria-label={props.ariaLabel}
             />
-            {show && (
-                <ul
-                    id={`${props.name}-dropdown-list`}
-                    className="dropdown-list"
-                    style={{ width: dropdownWidth }}
-                    role="menu"
-                    data-focusindex={0}
-                >
-                    {options.map((option, index) => (
-                        <li
-                            className={classNames({
-                                "filter-selected": !props.multiSelect && selectedFilters.includes(option)
-                            })}
-                            key={index}
-                            onClick={() => onClick(option)}
-                            onKeyDown={e => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    e.preventDefault();
-                                    onClick(option);
-                                }
-                            }}
-                            role="menuitem"
-                            tabIndex={0}
-                        >
-                            {props.multiSelect ? (
-                                <Fragment>
-                                    <input
-                                        id={`${props.name}_checkbox_toggle_${index}`}
-                                        type="checkbox"
-                                        checked={selectedFilters.includes(option)}
-                                    />
-                                    <label
-                                        htmlFor={`${props.name}_checkbox_toggle_${index}`}
-                                        style={{ pointerEvents: "none" }}
-                                    >
-                                        {option.caption}
-                                    </label>
-                                </Fragment>
-                            ) : (
-                                <div className="filter-label">{option.caption}</div>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            )}
+            {show && optionsComponent}
         </div>
     );
 }
