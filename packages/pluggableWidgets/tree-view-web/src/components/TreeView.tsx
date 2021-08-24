@@ -10,6 +10,7 @@ import {
     useCallback,
     useContext,
     useEffect,
+    useLayoutEffect,
     useRef,
     useState
 } from "react";
@@ -29,6 +30,9 @@ import {
     useTreeViewBranchKeyboardHandler,
     useTreeViewFocusChangeHandler
 } from "./hooks/treeViewAccessibility";
+import { ChevronIcon } from "./ChevronIcon";
+import { useTreeViewLazyLoading } from "./hooks/lazyLoading";
+import { useAnimatedTreeViewContentHeight } from "./hooks/useAnimatedHeight";
 
 export interface TreeViewObject extends ObjectItem {
     value: string | ReactNode | undefined;
@@ -41,12 +45,13 @@ export interface TreeViewProps extends Pick<TreeViewContainerProps, "tabIndex"> 
     style?: CSSProperties;
     items: TreeViewObject[] | null;
     isUserDefinedLeafNode: TreeViewBranchProps["isUserDefinedLeafNode"];
-    shouldLazyLoad: TreeViewBranchProps["shouldLazyLoad"];
     startExpanded: TreeViewBranchProps["startExpanded"];
     showCustomIcon: boolean;
     iconPlacement: TreeViewBranchProps["iconPlacement"];
     expandIcon: WebIcon | null;
     collapseIcon: WebIcon | null;
+    animateIcon: boolean;
+    animateTreeViewContent: TreeViewBranchProps["animateTreeViewContent"];
 }
 
 export function TreeView({
@@ -55,17 +60,18 @@ export function TreeView({
     style,
     isUserDefinedLeafNode,
     showCustomIcon,
-    shouldLazyLoad,
     startExpanded,
     iconPlacement,
     expandIcon,
     collapseIcon,
-    tabIndex
+    tabIndex,
+    animateIcon,
+    animateTreeViewContent
 }: TreeViewProps): ReactElement | null {
     const { informParentIsLoading, level } = useContext(TreeViewBranchContext);
 
     const renderHeaderIcon = useCallback<TreeViewBranchProps["renderHeaderIcon"]>(
-        treeViewState => {
+        (treeViewState, iconPlacement) => {
             if (treeViewState === TreeViewState.LOADING) {
                 return <img src={loadingCircleSvg} className="widget-tree-view-loading-spinner" alt="" aria-hidden />;
             }
@@ -76,18 +82,18 @@ export function TreeView({
                     className="widget-tree-view-branch-header-icon"
                 />
             ) : (
-                // TODO: This should not be a glyphicon, but rather a svg or something that is not dependent on Atlas
-                <span
-                    className={classNames(
-                        "glyphicon",
-                        treeViewIsExpanded ? "glyphicon-minus" : "glyphicon-plus",
-                        "widget-tree-view-branch-header-icon"
-                    )}
-                    aria-hidden
+                <ChevronIcon
+                    className={classNames("widget-tree-view-branch-header-icon", {
+                        "widget-tree-view-branch-header-icon-animated": animateIcon,
+                        "widget-tree-view-branch-header-icon-collapsed-left":
+                            !treeViewIsExpanded && iconPlacement === "left",
+                        "widget-tree-view-branch-header-icon-collapsed-right":
+                            !treeViewIsExpanded && iconPlacement === "right"
+                    })}
                 />
             );
         },
-        [collapseIcon, expandIcon, showCustomIcon]
+        [collapseIcon, expandIcon, showCustomIcon, animateIcon]
     );
 
     // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextToHaveChildNodes
@@ -128,11 +134,11 @@ export function TreeView({
                     id={id}
                     value={value}
                     isUserDefinedLeafNode={isUserDefinedLeafNode}
-                    shouldLazyLoad={shouldLazyLoad}
                     startExpanded={startExpanded}
                     iconPlacement={iconPlacement}
                     renderHeaderIcon={renderHeaderIcon}
                     changeFocus={changeTreeViewBranchHeaderFocus}
+                    animateTreeViewContent={animateTreeViewContent}
                 >
                     {content}
                 </TreeViewBranch>
@@ -143,13 +149,13 @@ export function TreeView({
 interface TreeViewBranchProps {
     id: TreeViewObject["id"];
     isUserDefinedLeafNode: boolean;
-    shouldLazyLoad: boolean;
     startExpanded: boolean;
     value: TreeViewObject["value"];
     children: TreeViewObject["content"];
     iconPlacement: ShowIconEnum;
-    renderHeaderIcon: (treeViewState: TreeViewState) => ReactNode;
+    renderHeaderIcon: (treeViewState: TreeViewState, iconPlacement: Exclude<ShowIconEnum, "no">) => ReactNode;
     changeFocus: TreeViewFocusChangeHandler;
+    animateTreeViewContent: boolean;
 }
 
 const treeViewBranchUtils = {
@@ -176,7 +182,7 @@ export const enum TreeViewState {
 function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
     const { level: currentContextLevel } = useContext(TreeViewBranchContext);
     const [treeViewState, setTreeViewState] = useState<TreeViewState>(
-        !props.shouldLazyLoad && props.startExpanded ? TreeViewState.EXPANDED : TreeViewState.COLLAPSED_WITH_JS
+        props.startExpanded ? TreeViewState.EXPANDED : TreeViewState.COLLAPSED_WITH_JS
     );
     const [isActualLeafNode, setIsActualLeafNode] = useState<boolean>(props.isUserDefinedLeafNode || !props.children);
 
@@ -188,8 +194,25 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         }
     }, []);
 
+    const treeViewBranchBody = useRef<HTMLDivElement>(null);
     const treeViewBranchRef = useRef<HTMLLIElement>(null);
-    const { changeFocus } = props;
+
+    const { hasNestedTreeView } = useTreeViewLazyLoading(treeViewBranchBody);
+    const {
+        isAnimating,
+        captureElementHeight,
+        animateTreeViewContent,
+        cleanupAnimation
+    } = useAnimatedTreeViewContentHeight(treeViewBranchBody);
+
+    useLayoutEffect(() => {
+        if (props.animateTreeViewContent && treeViewState !== TreeViewState.LOADING) {
+            const animationCleanup = animateTreeViewContent();
+            if (animationCleanup) {
+                return animationCleanup;
+            }
+        }
+    }, [animateTreeViewContent, props.animateTreeViewContent, treeViewState]);
 
     const eventTargetIsNotCurrentBranch = useCallback<(event: SyntheticEvent<HTMLElement>) => boolean>(event => {
         const target = event.target as Node;
@@ -200,28 +223,37 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
         );
     }, []);
 
+    useEffect(() => {
+        if (treeViewState === TreeViewState.LOADING) {
+            if (!hasNestedTreeView()) {
+                setTreeViewState(TreeViewState.EXPANDED);
+            }
+        }
+    }, [hasNestedTreeView, treeViewState]);
+
     const toggleTreeViewContent = useCallback<ReactEventHandler<HTMLLIElement>>(
         event => {
             if (eventTargetIsNotCurrentBranch(event)) {
                 return;
             }
             if (!isActualLeafNode) {
+                captureElementHeight();
                 setTreeViewState(treeViewState => {
                     if (treeViewState === TreeViewState.LOADING) {
                         // TODO:
                         return treeViewState;
                     }
                     if (treeViewState === TreeViewState.COLLAPSED_WITH_JS) {
-                        return props.shouldLazyLoad ? TreeViewState.LOADING : TreeViewState.EXPANDED;
+                        return TreeViewState.LOADING;
                     }
                     if (treeViewState === TreeViewState.COLLAPSED_WITH_CSS) {
                         return TreeViewState.EXPANDED;
                     }
-                    return props.shouldLazyLoad ? TreeViewState.COLLAPSED_WITH_CSS : TreeViewState.COLLAPSED_WITH_JS;
+                    return TreeViewState.COLLAPSED_WITH_CSS;
                 });
             }
         },
-        [isActualLeafNode, props.shouldLazyLoad, eventTargetIsNotCurrentBranch]
+        [isActualLeafNode, eventTargetIsNotCurrentBranch, captureElementHeight]
     );
 
     const treeViewAccessibilityProps = getTreeViewAccessibilityProps(treeViewState === TreeViewState.EXPANDED);
@@ -239,7 +271,7 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
 
     const onHeaderKeyDown = useTreeViewBranchKeyboardHandler(
         toggleTreeViewContent,
-        changeFocus,
+        props.changeFocus,
         treeViewState,
         isActualLeafNode,
         eventTargetIsNotCurrentBranch
@@ -271,23 +303,27 @@ function TreeViewBranch(props: TreeViewBranchProps): ReactElement {
                 id={treeViewBranchUtils.getHeaderId(props.id)}
             >
                 <span className="widget-tree-view-branch-header-value">{props.value}</span>
-                {!isActualLeafNode && props.iconPlacement !== "no" && props.renderHeaderIcon(treeViewState)}
+                {!isActualLeafNode &&
+                    props.iconPlacement !== "no" &&
+                    props.renderHeaderIcon(treeViewState, props.iconPlacement)}
             </span>
-            {!isActualLeafNode && treeViewState !== TreeViewState.COLLAPSED_WITH_JS && (
+            {((!isActualLeafNode && treeViewState !== TreeViewState.COLLAPSED_WITH_JS) || isAnimating) && (
                 <TreeViewBranchContext.Provider
                     value={{
                         level: currentContextLevel + 1,
                         informParentToHaveChildNodes,
-                        informParentIsLoading: updateTreeViewState,
-                        childShouldShowPlaceholder: props.shouldLazyLoad
+                        informParentIsLoading: updateTreeViewState
                     }}
                 >
                     <div
                         className={classNames(treeViewBranchUtils.bodyClassName, {
-                            "widget-tree-view-branch-hidden": treeViewState === TreeViewState.COLLAPSED_WITH_CSS
+                            "widget-tree-view-branch-hidden":
+                                treeViewState === TreeViewState.COLLAPSED_WITH_CSS && !isAnimating
                         })}
                         id={treeViewBranchUtils.getBodyId(props.id)}
-                        aria-hidden={treeViewState === TreeViewState.COLLAPSED_WITH_CSS}
+                        aria-hidden={treeViewState !== TreeViewState.EXPANDED}
+                        ref={treeViewBranchBody}
+                        onTransitionEnd={cleanupAnimation}
                     >
                         {props.children}
                     </div>

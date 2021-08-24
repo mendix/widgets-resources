@@ -28,13 +28,14 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             style={props.style}
             items={items}
             isUserDefinedLeafNode={!props.hasChildren}
-            shouldLazyLoad={props.shouldLazyLoad}
             startExpanded={props.startExpanded}
             showCustomIcon={props.advancedMode && (Boolean(props.expandIcon) || Boolean(props.collapseIcon))}
             iconPlacement={props.showIcon}
             expandIcon={expandIcon}
             collapseIcon={collapseIcon}
             tabIndex={props.tabIndex}
+            animateIcon={props.animate && props.animateIcon}
+            animateTreeViewContent={props.animate}
         />
     );
 }

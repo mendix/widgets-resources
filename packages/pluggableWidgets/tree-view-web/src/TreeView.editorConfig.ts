@@ -13,7 +13,13 @@ export function getProperties(
     platform: "web" | "desktop"
 ): Properties {
     if (!values.advancedMode) {
-        hidePropertiesIn(defaultProperties, values, ["showIcon", "expandIcon", "collapseIcon"]);
+        hidePropertiesIn(defaultProperties, values, [
+            "showIcon",
+            "expandIcon",
+            "collapseIcon",
+            "animate",
+            "animateIcon"
+        ]);
     }
 
     if (values.showIcon === "no") {
@@ -24,10 +30,6 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "headerContent");
     } else if (values.headerType === "custom") {
         hidePropertyIn(defaultProperties, values, "headerCaption");
-    }
-
-    if (values.shouldLazyLoad) {
-        hidePropertyIn(defaultProperties, values, "startExpanded");
     }
 
     if (!values.hasChildren) {

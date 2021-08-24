@@ -29,8 +29,16 @@
         margin: 0;
         padding: 8px 0;
 
-        .glyphicon.widget-tree-view-branch-header-icon {
-            font-size: 16px;
+        svg {
+            &.widget-tree-view-branch-header-icon-animated {
+                transition: transform 0.2s ease-in-out 50ms;
+            }
+            &.widget-tree-view-branch-header-icon-collapsed-left {
+                transform: rotate(-90deg);
+            }
+            &.widget-tree-view-branch-header-icon-collapsed-right {
+                transform: rotate(90deg);
+            }
         }
 
         .widget-tree-view-loading-spinner {
@@ -62,9 +70,11 @@
     .widget-tree-view-body {
         padding-left: 12px;
         border-left: blue 1px solid;
-    }
+        transition: height 0.2s ease 50ms;
+        overflow: hidden;
 
-    .widget-tree-view-branch-hidden {
-        display: none;
+        &.widget-tree-view-branch-hidden {
+            display: none;
+        }
     }
 }
