@@ -1,0 +1,57 @@
+//
+// DISCLAIMER:
+// Do not change this file because it is core styling.
+// Customizing core files will make updating Atlas much more difficult in the future.
+// To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
+//
+
+@mixin tree-node-helpers() {
+    /* ==========================================================================
+       Tree Node
+
+    //== Design Properties
+    //## Helper classes to change the look and feel of the component
+    ========================================================================== */
+
+    .widget-tree-view-striped {
+        .widget-tree-view-branch:nth-of-type(even) > .widget-tree-view-branch-header {
+            background-color: white;
+        }
+        .widget-tree-view-branch:nth-of-type(odd) > .widget-tree-view-branch-header {
+            background-color: $grid-bg-striped;
+        }
+    }
+
+    .widget-tree-view-hover {
+        .widget-tree-view-branch:hover > .widget-tree-view-branch-header {
+            background-color: $grid-bg-hover;
+        }
+    }
+
+    .widget-tree-view-bordered-horizontal {
+        .widget-tree-view-branch > .widget-tree-view-branch-header {
+            border-width: 0;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: $grid-border-color;
+        }
+    }
+
+    .widget-tree-view-bordered-all {
+        border: 1px solid $grid-border-color;
+        border-radius: 8px;
+        .widget-tree-view-branch > .widget-tree-view-branch-header {
+            border-width: 0;
+            border-bottom-width: 1px;
+            border-bottom-style: solid;
+            border-bottom-color: $grid-border-color;
+        }
+    }
+
+    .widget-tree-view-bordered-none {
+        border-width: 0;
+        .widget-tree-view-branch > .widget-tree-view-branch-header {
+            border-width: 0;
+        }
+    }
+}

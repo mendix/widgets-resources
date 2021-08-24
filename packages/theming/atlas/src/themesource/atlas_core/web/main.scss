@@ -354,6 +354,11 @@
     @include accordion-helpers();
 }
 
+@import "core/helpers/tree-node";
+@if not $exclude-tree-node and not $exclude-tree-node-helpers {
+    @include tree-node-helpers();
+}
+
 // Custom widgets
 @import "core/widgetscustom/dijit-widget";
 @if not $exclude-custom-dijit-widget {
