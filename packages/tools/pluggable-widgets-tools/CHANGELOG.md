@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - We fixed the formatting of Preview typings
 - We fixed the Preview typings for Icon property.
+- We downgraded the version of `rollup-plugin-sass` to 1.2.4 in order to prevent a library version issue throwing `The "path" argument must be of type string. Received an instance of RegExp`.
 
 ## [9.4.3] - 2021-08-12
 
