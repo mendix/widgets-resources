@@ -1,6 +1,8 @@
-import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { useOnClickOutside } from "../utils";
+import { createPortal } from "react-dom";
+import { usePositionObserver } from "./usePositionObserver";
 
 interface FilterSelectorProps<T> {
     ariaLabel?: string;
@@ -14,7 +16,9 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
     const [value, setValue] = useState(props.defaultFilter);
     const [show, setShow] = useState(false);
     const componentRef = useRef<HTMLDivElement>(null);
-    useOnClickOutside(componentRef, () => setShow(false));
+    const filterSelectorsRef = useRef<HTMLUListElement>(null);
+    useOnClickOutside([componentRef, filterSelectorsRef], () => setShow(false));
+    const [position, PositionObserver] = usePositionObserver(componentRef.current);
 
     const onClick = useCallback(
         (value: T) => {
@@ -30,6 +34,45 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
         props.onChange(props.defaultFilter);
     }, [props.defaultFilter, props.onChange]);
 
+    const filterSelectors = createPortal(
+        <Fragment>
+            <ul
+                ref={filterSelectorsRef}
+                id={`${props.name}-filter-selectors`}
+                className="filter-selectors"
+                role="menu"
+                data-focusindex={0}
+                style={{ position: "fixed", top: position?.bottom, left: position?.left }}
+            >
+                {props.options.map((option, index) => (
+                    <li
+                        className={classNames({ "filter-selected": value === option.value })}
+                        key={index}
+                        onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onClick(option.value);
+                        }}
+                        onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                onClick(option.value);
+                            }
+                        }}
+                        role="menuitem"
+                        tabIndex={0}
+                    >
+                        <div className={classNames("filter-icon", option.value)} aria-hidden />
+                        <div className="filter-label">{option.label}</div>
+                    </li>
+                ))}
+            </ul>
+            {PositionObserver}
+        </Fragment>,
+        document.body
+    );
+
     return (
         <div className="filter-selector">
             <div className="filter-selector-content" ref={componentRef}>
@@ -39,37 +82,21 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
                     aria-haspopup
                     aria-label={props.ariaLabel}
                     className={classNames("btn btn-default filter-selector-button button-icon", value)}
-                    onClick={() => setShow(show => !show)}
+                    onClick={() => {
+                        setShow(show => !show);
+
+                        setTimeout(() => {
+                            if (show) {
+                                (filterSelectorsRef.current?.querySelector(
+                                    "li.filter-selected"
+                                ) as HTMLElement)?.focus();
+                            }
+                        }, 10);
+                    }}
                 >
                     &nbsp;
                 </button>
-                {show && (
-                    <ul
-                        id={`${props.name}-filter-selectors`}
-                        className="filter-selectors"
-                        role="menu"
-                        data-focusindex={0}
-                    >
-                        {props.options.map((option, index) => (
-                            <li
-                                className={classNames({ "filter-selected": value === option.value })}
-                                key={index}
-                                onClick={() => onClick(option.value)}
-                                onKeyDown={e => {
-                                    if (e.key === "Enter" || e.key === " ") {
-                                        e.preventDefault();
-                                        onClick(option.value);
-                                    }
-                                }}
-                                role="menuitem"
-                                tabIndex={0}
-                            >
-                                <div className={classNames("filter-icon", option.value)} aria-hidden />
-                                <div className="filter-label">{option.label}</div>
-                            </li>
-                        ))}
-                    </ul>
-                )}
+                {show && filterSelectors}
             </div>
         </div>
     );
