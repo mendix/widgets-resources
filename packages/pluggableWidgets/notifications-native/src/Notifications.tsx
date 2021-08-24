@@ -102,7 +102,7 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
     useEffect(() => {
         // wait for all used DynamicValues are available before configuring, else handleNotification is invoked while
-        // properties in scope are loading. Note that handlers passed to `configure` are only ever registered once.
+        // properties in scope are loading.
         if (loadNotifications) {
             PushNotification.configure({
                 // called when user taps local notification
