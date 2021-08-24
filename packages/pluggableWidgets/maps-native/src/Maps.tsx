@@ -250,7 +250,7 @@ export class Maps extends Component<Props, State> {
 }
 
 function isValidCoordinate(value: Big | number | undefined): boolean {
-    return /\d{1,2}(?:\.\d+)?/.test(`${value}`);
+    return /-?\d{1,2}(?:\.\d+)?/.test(`${value}`);
 }
 
 function isValidLatitude(latitude: number): boolean {
