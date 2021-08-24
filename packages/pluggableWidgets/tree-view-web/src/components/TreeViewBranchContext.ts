@@ -2,24 +2,22 @@ import { createContext, useContext, useEffect } from "react";
 
 export interface TreeViewBranchContextProps {
     level: number;
-    informParentToHaveChildNodes: (hasChildNodes: boolean) => void;
-    informParentIsLoading: (isLoading: boolean) => void;
+    informParentOfChildNodes: (numberOfNodes: number | undefined) => void;
 }
 
 export const TreeViewBranchContext = createContext<TreeViewBranchContextProps>({
     level: 0,
-    informParentToHaveChildNodes: () => null,
-    informParentIsLoading: () => null
+    informParentOfChildNodes: () => null
 });
 
-export const useInformParentContextToHaveChildNodes = (
+export const useInformParentContextOfChildNodes = (
     nodes: any[] | null,
     identifyParentIsTreeView: () => boolean
 ): void => {
-    const { level, informParentToHaveChildNodes } = useContext(TreeViewBranchContext);
+    const { level, informParentOfChildNodes } = useContext(TreeViewBranchContext);
     useEffect(() => {
-        if (level > 0 && nodes && identifyParentIsTreeView()) {
-            informParentToHaveChildNodes(nodes.length > 0);
+        if (level > 0 && identifyParentIsTreeView()) {
+            informParentOfChildNodes(nodes?.length);
         }
-    }, [nodes, level, informParentToHaveChildNodes, identifyParentIsTreeView]);
+    }, [nodes, level, informParentOfChildNodes, identifyParentIsTreeView]);
 };

@@ -1198,7 +1198,6 @@
             "type": "Dropdown",
             "description": "Change the gap between grid items.",
             "options": [
-
                 {
                     "name": "None",
                     "class": "widget-gallery-gridgap-none"
@@ -1231,6 +1230,33 @@
                     "class": "widget-gallery-pagination-center"
                 }
             ]
+        }
+    ],
+    "com.mendix.widget.web.treeView.TreeView": [
+        {
+            "name": "Borders",
+            "type": "Dropdown",
+            "description": "Change the border appearance.",
+            "options": [
+                {
+                    "name": "Horizontal",
+                    "class": "widget-tree-view-bordered-horizontal"
+                },
+                {
+                    "name": "Both",
+                    "class": "widget-tree-view-bordered-all"
+                },
+                {
+                    "name": "None",
+                    "class": "widget-tree-view-bordered-none"
+                }
+            ]
+        },
+        {
+            "name": "Hover",
+            "type": "Toggle",
+            "description": "Highlight an item when hovering over it. Only useful when the item is clickable.",
+            "class": "widget-tree-view-hover"
         }
     ]
 }

@@ -1,5 +1,4 @@
 .widget-tree-view {
-    height: 100%;
     width: 100%;
     padding: 0;
     display: flex;
@@ -69,7 +68,6 @@
 
     .widget-tree-view-body {
         padding-left: 12px;
-        border-left: blue 1px solid;
         transition: height 0.2s ease 50ms;
         overflow: hidden;
 
