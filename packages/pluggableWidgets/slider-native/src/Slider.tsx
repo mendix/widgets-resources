@@ -1,6 +1,6 @@
 import { available, flattenStyles, toNumber, unavailable } from "@mendix/piw-native-utils-internal";
 import { executeAction } from "@mendix/piw-utils-internal";
-import { ValueStatus } from "mendix";
+import { ValueStatus, Option } from "mendix";
 import MultiSlider, { MarkerProps } from "@ptomasroos/react-native-multi-slider";
 import { createElement, ReactElement, useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, Text, View } from "react-native";
@@ -23,7 +23,10 @@ export function Slider(props: Props): ReactElement {
     const editable = props.editable !== "never" && !props.valueAttribute.readOnly && validProps;
     const styles = flattenStyles(defaultSliderStyle, props.style);
     // We have to fix the decimal count ourselves because of an unresolved bug in the library: https://github.com/ptomasroos/react-native-multi-slider/issues/211
-    const decimalCount = useCallback((value: Big): number => value?.toString().split(".")?.[1]?.length || 0, []);
+    const decimalCount = useCallback(
+        (value: Option<Big>): number => value?.toString().split(".")?.[1]?.length || 0,
+        []
+    );
 
     const customMarker = () => (markerProps: MarkerProps): JSX.Element => (
         <Marker {...markerProps} testID={`${props.name}$marker`} />
@@ -59,7 +62,7 @@ export function Slider(props: Props): ReactElement {
 
             executeAction(props.onChange);
         },
-        [props.valueAttribute, props.onChange, props.stepSize, decimalCount]
+        [lastValue, props.valueAttribute, props.onChange, props.stepSize, decimalCount]
     );
 
     return (
