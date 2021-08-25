@@ -44,32 +44,34 @@ describe("Filter selector", () => {
 
         describe("when value changes", () => {
             it("calls updateFilters when value changes", () => {
+                const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
                 const updateFilterHandler = jest.fn();
                 const component = shallow(
                     <FilterComponent options={defaultOptions} updateFilters={updateFilterHandler} />
                 );
 
                 const input = component.find("input");
-                input.simulate("click");
+                input.simulate("click", onClickProps);
 
                 const item = component.find("li").first();
-                item.simulate("click");
+                item.simulate("click", onClickProps);
 
                 expect(updateFilterHandler).toBeCalled();
             });
             it("shows selected option on input value", () => {
+                const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
                 const defaultOption = defaultOptions[1];
                 const component = shallow(
                     <FilterComponent options={defaultOptions} defaultValue={defaultOption.value} />
                 );
 
                 const input = component.find("input");
-                input.simulate("click");
+                input.simulate("click", onClickProps);
 
                 expect(component.find("input").first().prop("value")).toBe(defaultOption.caption);
 
                 const item = component.find("li").last(); // [cap 3: val:_3]
-                item.simulate("click");
+                item.simulate("click", onClickProps);
 
                 expect(component.find("input").first().prop("value")).toBe(defaultOptions[2].caption);
             });
@@ -143,29 +145,31 @@ describe("Filter selector", () => {
 
         describe("when value changes", () => {
             it("calls updateFilters when value changes", () => {
+                const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
                 const updateFiltersHandler = jest.fn();
                 const component = mount(
                     <FilterComponent multiSelect options={defaultOptions} updateFilters={updateFiltersHandler} />
                 );
 
                 const input = component.find("input");
-                input.simulate("click");
+                input.simulate("click", onClickProps);
 
                 const item = component.find("li").first();
-                item.simulate("click");
+                item.simulate("click", onClickProps);
 
                 expect(updateFiltersHandler).toBeCalled();
             });
             it("shows selected options on input value", () => {
+                const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
                 const component = mount(<FilterComponent multiSelect options={defaultOptions} />);
 
                 const input = component.find("input");
-                input.simulate("click");
+                input.simulate("click", onClickProps);
 
                 const item = component.find("li").at(1);
-                item.simulate("click");
+                item.simulate("click", onClickProps);
                 const item2 = component.find("li").at(2);
-                item2.simulate("click");
+                item2.simulate("click", onClickProps);
 
                 expect(component.find("input").first().prop("value")).toBe("2,3");
             });

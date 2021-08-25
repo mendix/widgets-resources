@@ -23,6 +23,19 @@ describe("Filter selector", () => {
         expect(component).toMatchSnapshot();
     });
 
+    it("renders correctly with filter selectors open", () => {
+        const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
+        const onChange = jest.fn();
+        const component = shallow(
+            <FilterSelector defaultFilter="contains" onChange={onChange} name="test" options={options} />
+        );
+
+        const button = component.find("button");
+        button.simulate("click", onClickProps);
+
+        expect(component).toMatchSnapshot();
+    });
+
     it("renders correctly with aria-label", () => {
         const component = shallow(
             <FilterSelector
@@ -46,22 +59,23 @@ describe("Filter selector", () => {
     });
 
     it("calls onChange when type changes", () => {
+        const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
         const onChange = jest.fn();
         const component = shallow(
             <FilterSelector defaultFilter="contains" onChange={onChange} name="test" options={options} />
         );
 
         const button = component.find("button");
-        button.simulate("click");
+        button.simulate("click", onClickProps);
         const lis = component.find("li");
 
         expect(lis.at(0)).toBeDefined();
-        lis.at(0).simulate("click");
+        lis.at(0).simulate("click", onClickProps);
 
         expect(onChange).toBeCalled();
         expect(onChange).toBeCalledWith("contains");
 
-        lis.at(1).simulate("click");
+        lis.at(1).simulate("click", onClickProps);
         expect(onChange).toBeCalledWith("startsWith");
     });
 });

@@ -43,28 +43,30 @@ describe("Sort selector", () => {
 
     describe("when value changes", () => {
         it("calls updateFilters when value changes", () => {
+            const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
             const updateSortHandler = jest.fn();
             const component = shallow(<SortComponent options={defaultOptions} updateSort={updateSortHandler} />);
 
             const input = component.find("input");
-            input.simulate("click");
+            input.simulate("click", onClickProps);
 
             const item = component.find("li").first();
-            item.simulate("click");
+            item.simulate("click", onClickProps);
 
             expect(updateSortHandler).toBeCalled();
         });
         it("shows selected option on input value", () => {
+            const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
             const defaultOption = defaultOptions[1];
             const component = shallow(<SortComponent options={defaultOptions} defaultOption={defaultOption} />);
 
             const input = component.find("input");
-            input.simulate("click");
+            input.simulate("click", onClickProps);
 
             expect(component.find("input").first().prop("value")).toBe(defaultOption.caption);
 
             const item = component.find("li").last(); // [cap 3: val:_3]
-            item.simulate("click");
+            item.simulate("click", onClickProps);
 
             expect(component.find("input").first().prop("value")).toBe(defaultOptions[2].caption);
         });

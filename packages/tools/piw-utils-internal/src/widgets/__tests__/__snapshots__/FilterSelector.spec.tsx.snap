@@ -60,3 +60,206 @@ exports[`Filter selector renders correctly with aria-label 1`] = `
   </div>
 </div>
 `;
+
+exports[`Filter selector renders correctly with filter selectors open 1`] = `
+<div
+  className="filter-selector"
+>
+  <div
+    className="filter-selector-content"
+  >
+    <button
+      aria-controls="test-filter-selectors"
+      aria-expanded={true}
+      aria-haspopup={true}
+      className="btn btn-default filter-selector-button button-icon contains"
+      onClick={[Function]}
+    >
+       
+    </button>
+    <Portal
+      containerInfo={<body />}
+    >
+      <ul
+        className="filter-selectors"
+        data-focusindex={0}
+        id="test-filter-selectors"
+        role="menu"
+        style={
+          Object {
+            "left": undefined,
+            "position": "fixed",
+            "top": undefined,
+          }
+        }
+      >
+        <li
+          className="filter-selected"
+          key="0"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon contains"
+          />
+          <div
+            className="filter-label"
+          >
+            Contains
+          </div>
+        </li>
+        <li
+          className=""
+          key="1"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon startsWith"
+          />
+          <div
+            className="filter-label"
+          >
+            Starts with
+          </div>
+        </li>
+        <li
+          className=""
+          key="2"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon endsWith"
+          />
+          <div
+            className="filter-label"
+          >
+            Ends with
+          </div>
+        </li>
+        <li
+          className=""
+          key="3"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon greater"
+          />
+          <div
+            className="filter-label"
+          >
+            Greater than
+          </div>
+        </li>
+        <li
+          className=""
+          key="4"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon greaterEqual"
+          />
+          <div
+            className="filter-label"
+          >
+            Greater than or equal
+          </div>
+        </li>
+        <li
+          className=""
+          key="5"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon equal"
+          />
+          <div
+            className="filter-label"
+          >
+            Equal
+          </div>
+        </li>
+        <li
+          className=""
+          key="6"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon notEqual"
+          />
+          <div
+            className="filter-label"
+          >
+            Not equal
+          </div>
+        </li>
+        <li
+          className=""
+          key="7"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon smaller"
+          />
+          <div
+            className="filter-label"
+          >
+            Smaller than
+          </div>
+        </li>
+        <li
+          className=""
+          key="8"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="menuitem"
+          tabIndex={0}
+        >
+          <div
+            aria-hidden={true}
+            className="filter-icon smallerEqual"
+          />
+          <div
+            className="filter-label"
+          >
+            Smaller than or equal
+          </div>
+        </li>
+      </ul>
+      <AnimationFrameHandler
+        callback={[Function]}
+      />
+    </Portal>
+  </div>
+</div>
+`;
