@@ -35,8 +35,17 @@ async function createNMRModule() {
         moduleName,
         version,
         marketplace: { minimumMXVersion },
-        testProject: { githubUrl, branchName }
+        testProject: { githubUrl, branchName },
+        repository: { url }
     } = require(pkgPath);
+    await execShellCommand('git config user.name "Native Content Automation"');
+    await execShellCommand('git config user.email "widgets@mendix.com"');
+    await execShellCommand(
+        `git remote set-url origin https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${url.replace(
+            "https://",
+            ""
+        )}}`
+    );
 
     const changelog = await updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name);
     await updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl);
