@@ -6,12 +6,14 @@ import {
     MutableRefObject,
     ReactElement,
     SetStateAction,
+    useMemo,
     useRef,
     useState
 } from "react";
 import DatePickerComponent from "react-datepicker";
 import classNames from "classnames";
 import { isDate, isValid } from "date-fns";
+import { createPortal } from "react-dom";
 
 interface DatePickerProps {
     adjustable: boolean;
@@ -28,8 +30,11 @@ export const DatePicker = forwardRef(
     (props: DatePickerProps, ref: MutableRefObject<DatePickerComponent> | null): ReactElement => {
         const [open, setOpen] = useState(false);
         const buttonRef = useRef<HTMLButtonElement>(null);
+        const id = useMemo(() => `datepicker_` + Math.random(), []);
+        const Portal = createPortal(<div id={id} style={{ position: "fixed" }} />, document.body);
         return (
             <Fragment>
+                {Portal}
                 <span className="sr-only" id={`${props.name}-label`}>
                     {props.screenReaderInputCaption}
                 </span>
@@ -57,21 +62,15 @@ export const DatePicker = forwardRef(
                         setOpen(false);
                     }}
                     placeholderText={props.placeholder}
-                    popperPlacement="bottom-start"
-                    popperModifiers={{
-                        offset: {
-                            enabled: true,
-                            offset: "0, 0"
-                        },
-                        preventOverflow: {
-                            enabled: true,
-                            escapeWithReference: false,
-                            boundariesElement: "viewport"
-                        },
-                        flip: {
-                            enabled: false
+                    popperPlacement="bottom-end"
+                    popperModifiers={[
+                        {
+                            name: "offset",
+                            options: {
+                                offset: [0, 0]
+                            }
                         }
-                    }}
+                    ]}
                     preventOpenOnFocus
                     ref={ref}
                     selected={props.value}
@@ -81,6 +80,7 @@ export const DatePicker = forwardRef(
                     showYearDropdown
                     strictParsing
                     useWeekdaysShort
+                    portalId={id}
                 />
                 <button ref={buttonRef} className="btn btn-default btn-calendar" onClick={() => setOpen(prev => !prev)}>
                     <span className="glyphicon glyphicon-calendar" />

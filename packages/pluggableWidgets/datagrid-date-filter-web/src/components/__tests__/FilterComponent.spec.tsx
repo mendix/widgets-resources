@@ -1,8 +1,16 @@
 import { render } from "enzyme";
 import { createElement } from "react";
 import { FilterComponent } from "../FilterComponent";
+import ReactDOM from "react-dom";
 
 describe("Filter component", () => {
+    beforeAll(() => {
+        // @ts-ignore
+        jest.spyOn(ReactDOM, "createPortal").mockReturnValue((element, node) => {
+            return element;
+        });
+    });
+
     it("renders correctly", () => {
         const component = render(<FilterComponent adjustable defaultFilter="equal" />);
 

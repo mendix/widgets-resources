@@ -32,6 +32,8 @@ describe("Date Filter", () => {
                 singleAttribute: new ListAttributeValueBuilder().withType("DateTime").withFilterable(true).build()
             } as FilterContextValue);
             (window as any).mx = mxObject;
+
+            jest.spyOn(global.Math, "random").mockReturnValue(0.123456789);
         });
 
         it("renders correctly", () => {
@@ -63,6 +65,8 @@ describe("Date Filter", () => {
                 }
             } as FilterContextValue);
             (window as any).mx = mxObject;
+
+            jest.spyOn(global.Math, "random").mockReturnValue(0.123456789);
         });
 
         it("renders correctly", () => {

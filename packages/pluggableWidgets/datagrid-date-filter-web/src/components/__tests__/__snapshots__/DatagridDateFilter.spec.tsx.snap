@@ -80,11 +80,34 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
         setValue={[Function]}
         value={null}
       >
+        <Portal
+          containerInfo={
+            <body>
+              <div
+                id="datepicker_0.123456789"
+                style="position: fixed;"
+              />
+              <div
+                id="datepicker_0.123456789"
+                style="position: fixed;"
+              />
+            </body>
+          }
+        >
+          <div
+            id="datepicker_0.123456789"
+            style={
+              Object {
+                "position": "fixed",
+              }
+            }
+          />
+        </Portal>
         <span
           className="sr-only"
           id="filter-test-label"
         />
-        <a
+        <r
           allowSameDay={false}
           ariaLabelledBy="filter-test-label"
           autoFocus={false}
@@ -116,22 +139,20 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
           onYearChange={[Function]}
           open={false}
           popperModifiers={
-            Object {
-              "flip": Object {
-                "enabled": false,
+            Array [
+              Object {
+                "name": "offset",
+                "options": Object {
+                  "offset": Array [
+                    0,
+                    0,
+                  ],
+                },
               },
-              "offset": Object {
-                "enabled": true,
-                "offset": "0, 0",
-              },
-              "preventOverflow": Object {
-                "boundariesElement": "viewport",
-                "enabled": true,
-                "escapeWithReference": false,
-              },
-            }
+            ]
           }
-          popperPlacement="bottom-start"
+          popperPlacement="bottom-end"
+          portalId="datepicker_0.123456789"
           preventOpenOnFocus={true}
           previousMonthButtonLabel="Previous Month"
           previousYearButtonLabel="Previous Year"
@@ -139,6 +160,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
           renderDayContents={[Function]}
           selected={null}
           shouldCloseOnSelect={false}
+          showFourColumnMonthYearPicker={false}
           showFullMonthYearPicker={false}
           showMonthDropdown={true}
           showMonthYearPicker={false}
@@ -158,29 +180,27 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
           withPortal={false}
           yearItemNumber={12}
         >
-          <o
+          <r
             enableTabLoop={true}
             hidePopper={true}
             popperComponent={null}
             popperModifiers={
-              Object {
-                "flip": Object {
-                  "enabled": false,
+              Array [
+                Object {
+                  "name": "offset",
+                  "options": Object {
+                    "offset": Array [
+                      0,
+                      0,
+                    ],
+                  },
                 },
-                "offset": Object {
-                  "enabled": true,
-                  "offset": "0, 0",
-                },
-                "preventOverflow": Object {
-                  "boundariesElement": "viewport",
-                  "enabled": true,
-                  "escapeWithReference": false,
-                },
-              }
+              ]
             }
             popperOnKeyDown={[Function]}
-            popperPlacement="bottom-start"
+            popperPlacement="bottom-end"
             popperProps={Object {}}
+            portalId="datepicker_0.123456789"
             targetComponent={
               <div
                 className="react-datepicker__input-container"
@@ -206,36 +226,32 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
               className="react-datepicker-manager"
             >
               <Reference>
-                <InnerReference
-                  setReferenceNode={[Function]}
+                <div
+                  className="react-datepicker-wrapper"
                 >
                   <div
-                    className="react-datepicker-wrapper"
+                    className="react-datepicker__input-container"
                   >
-                    <div
-                      className="react-datepicker__input-container"
-                    >
-                      <input
-                        aria-labelledby="filter-test-label"
-                        autoFocus={false}
-                        className="form-control filter-input"
-                        disabled={false}
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onKeyDown={[Function]}
-                        readOnly={false}
-                        type="text"
-                        value=""
-                      />
-                    </div>
+                    <input
+                      aria-labelledby="filter-test-label"
+                      autoFocus={false}
+                      className="form-control filter-input"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      readOnly={false}
+                      type="text"
+                      value=""
+                    />
                   </div>
-                </InnerReference>
+                </div>
               </Reference>
             </Manager>
-          </o>
-        </a>
+          </r>
+        </r>
         <button
           className="btn btn-default btn-calendar"
           onClick={[Function]}
@@ -330,11 +346,30 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
         setValue={[Function]}
         value={null}
       >
+        <Portal
+          containerInfo={
+            <body>
+              <div
+                id="datepicker_0.123456789"
+                style="position: fixed;"
+              />
+            </body>
+          }
+        >
+          <div
+            id="datepicker_0.123456789"
+            style={
+              Object {
+                "position": "fixed",
+              }
+            }
+          />
+        </Portal>
         <span
           className="sr-only"
           id="filter-test-label"
         />
-        <a
+        <r
           allowSameDay={false}
           ariaLabelledBy="filter-test-label"
           autoFocus={false}
@@ -366,22 +401,20 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
           onYearChange={[Function]}
           open={false}
           popperModifiers={
-            Object {
-              "flip": Object {
-                "enabled": false,
+            Array [
+              Object {
+                "name": "offset",
+                "options": Object {
+                  "offset": Array [
+                    0,
+                    0,
+                  ],
+                },
               },
-              "offset": Object {
-                "enabled": true,
-                "offset": "0, 0",
-              },
-              "preventOverflow": Object {
-                "boundariesElement": "viewport",
-                "enabled": true,
-                "escapeWithReference": false,
-              },
-            }
+            ]
           }
-          popperPlacement="bottom-start"
+          popperPlacement="bottom-end"
+          portalId="datepicker_0.123456789"
           preventOpenOnFocus={true}
           previousMonthButtonLabel="Previous Month"
           previousYearButtonLabel="Previous Year"
@@ -389,6 +422,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
           renderDayContents={[Function]}
           selected={null}
           shouldCloseOnSelect={false}
+          showFourColumnMonthYearPicker={false}
           showFullMonthYearPicker={false}
           showMonthDropdown={true}
           showMonthYearPicker={false}
@@ -408,29 +442,27 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
           withPortal={false}
           yearItemNumber={12}
         >
-          <o
+          <r
             enableTabLoop={true}
             hidePopper={true}
             popperComponent={null}
             popperModifiers={
-              Object {
-                "flip": Object {
-                  "enabled": false,
+              Array [
+                Object {
+                  "name": "offset",
+                  "options": Object {
+                    "offset": Array [
+                      0,
+                      0,
+                    ],
+                  },
                 },
-                "offset": Object {
-                  "enabled": true,
-                  "offset": "0, 0",
-                },
-                "preventOverflow": Object {
-                  "boundariesElement": "viewport",
-                  "enabled": true,
-                  "escapeWithReference": false,
-                },
-              }
+              ]
             }
             popperOnKeyDown={[Function]}
-            popperPlacement="bottom-start"
+            popperPlacement="bottom-end"
             popperProps={Object {}}
+            portalId="datepicker_0.123456789"
             targetComponent={
               <div
                 className="react-datepicker__input-container"
@@ -456,36 +488,32 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
               className="react-datepicker-manager"
             >
               <Reference>
-                <InnerReference
-                  setReferenceNode={[Function]}
+                <div
+                  className="react-datepicker-wrapper"
                 >
                   <div
-                    className="react-datepicker-wrapper"
+                    className="react-datepicker__input-container"
                   >
-                    <div
-                      className="react-datepicker__input-container"
-                    >
-                      <input
-                        aria-labelledby="filter-test-label"
-                        autoFocus={false}
-                        className="form-control filter-input"
-                        disabled={false}
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onKeyDown={[Function]}
-                        readOnly={false}
-                        type="text"
-                        value=""
-                      />
-                    </div>
+                    <input
+                      aria-labelledby="filter-test-label"
+                      autoFocus={false}
+                      className="form-control filter-input"
+                      disabled={false}
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onClick={[Function]}
+                      onFocus={[Function]}
+                      onKeyDown={[Function]}
+                      readOnly={false}
+                      type="text"
+                      value=""
+                    />
                   </div>
-                </InnerReference>
+                </div>
               </Reference>
             </Manager>
-          </o>
-        </a>
+          </r>
+        </r>
         <button
           className="btn btn-default btn-calendar"
           onClick={[Function]}
