@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.0] - 2021-08-26
+### Notifications widget
+#### Added
+- handle local notification "On open" actions. Note: local notification's do not handle "On receive" actions, despite being able to configure these in Studio Pro.
+#### Fixed
+- a configured "Actions" property will receive the correct value; a concatenation of matching action names.
+
 ## [3.0.0] - 2021-07-14
 
 ### Changed
