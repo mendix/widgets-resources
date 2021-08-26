@@ -1,4 +1,4 @@
-import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { useOnClickOutside } from "../utils";
 import { createPortal } from "react-dom";
@@ -18,7 +18,7 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
     const componentRef = useRef<HTMLDivElement>(null);
     const filterSelectorsRef = useRef<HTMLUListElement>(null);
     useOnClickOutside([componentRef, filterSelectorsRef], () => setShow(false));
-    const [position, PositionObserver] = usePositionObserver(componentRef.current);
+    const [position, onAnimateFrameHandler] = usePositionObserver(componentRef.current);
 
     const onClick = useCallback(
         (value: T) => {
@@ -34,44 +34,56 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
         props.onChange(props.defaultFilter);
     }, [props.defaultFilter, props.onChange]);
 
+    useEffect(() => {
+        let cleanup;
+        if (show) {
+            cleanup = onAnimateFrameHandler();
+        }
+        return cleanup;
+    }, [onAnimateFrameHandler, show]);
+
     const filterSelectors = createPortal(
-        <Fragment>
-            <ul
-                ref={filterSelectorsRef}
-                id={`${props.name}-filter-selectors`}
-                className="filter-selectors"
-                role="menu"
-                data-focusindex={0}
-                style={{ position: "fixed", top: position?.bottom, left: position?.left }}
-            >
-                {props.options.map((option, index) => (
-                    <li
-                        className={classNames({ "filter-selected": value === option.value })}
-                        key={index}
-                        onClick={e => {
+        <ul
+            ref={filterSelectorsRef}
+            id={`${props.name}-filter-selectors`}
+            className="filter-selectors"
+            role="menu"
+            data-focusindex={0}
+            style={{ position: "fixed", top: position?.bottom, left: position?.left }}
+        >
+            {props.options.map((option, index) => (
+                <li
+                    className={classNames({ "filter-selected": value === option.value })}
+                    key={index}
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onClick(option.value);
+                    }}
+                    onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
                             e.preventDefault();
                             e.stopPropagation();
                             onClick(option.value);
-                        }}
-                        onKeyDown={e => {
-                            if (e.key === "Enter" || e.key === " ") {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                onClick(option.value);
-                            }
-                        }}
-                        role="menuitem"
-                        tabIndex={0}
-                    >
-                        <div className={classNames("filter-icon", option.value)} aria-hidden />
-                        <div className="filter-label">{option.label}</div>
-                    </li>
-                ))}
-            </ul>
-            {PositionObserver}
-        </Fragment>,
+                        }
+                    }}
+                    role="menuitem"
+                    tabIndex={0}
+                >
+                    <div className={classNames("filter-icon", option.value)} aria-hidden />
+                    <div className="filter-label">{option.label}</div>
+                </li>
+            ))}
+        </ul>,
         document.body
     );
+
+    const containerClick = useCallback(() => {
+        setShow(prev => !prev);
+        setTimeout(() => {
+            (filterSelectorsRef.current?.querySelector("li.filter-selected") as HTMLElement)?.focus();
+        }, 10);
+    }, []);
 
     return (
         <div className="filter-selector">
@@ -82,16 +94,13 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
                     aria-haspopup
                     aria-label={props.ariaLabel}
                     className={classNames("btn btn-default filter-selector-button button-icon", value)}
-                    onClick={() => {
-                        setShow(show => !show);
-
-                        setTimeout(() => {
-                            if (show) {
-                                (filterSelectorsRef.current?.querySelector(
-                                    "li.filter-selected"
-                                ) as HTMLElement)?.focus();
-                            }
-                        }, 10);
+                    onClick={containerClick}
+                    onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            containerClick();
+                        }
                     }}
                 >
                     &nbsp;

@@ -66,6 +66,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
               aria-haspopup={true}
               className="btn btn-default filter-selector-button button-icon equal"
               onClick={[Function]}
+              onKeyDown={[Function]}
             >
                
             </button>
@@ -332,6 +333,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
               aria-haspopup={true}
               className="btn btn-default filter-selector-button button-icon equal"
               onClick={[Function]}
+              onKeyDown={[Function]}
             >
                
             </button>

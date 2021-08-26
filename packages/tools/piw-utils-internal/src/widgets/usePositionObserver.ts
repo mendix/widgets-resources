@@ -1,6 +1,6 @@
-import { createElement, FC, ReactElement, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
-export function usePositionObserver(target: HTMLElement | null): [ClientRect | undefined, ReactElement] {
+export function usePositionObserver(target: HTMLElement | null): [ClientRect | undefined, () => () => void] {
     const [position, setPosition] = useState<ClientRect>();
 
     const onAnimationFrameHandler = useCallback(() => {
@@ -15,35 +15,24 @@ export function usePositionObserver(target: HTMLElement | null): [ClientRect | u
         }
     }, [position, target]);
 
-    const PositionObserver = useMemo(
-        () => createElement(AnimationFrameHandler, { callback: onAnimationFrameHandler }),
-        [onAnimationFrameHandler]
-    );
-
-    return [position, PositionObserver];
+    return [position, useAnimationFrameHandler(onAnimationFrameHandler)];
 }
 
-interface AnimationFrameHandlerProps {
-    callback: () => void;
-}
-
-const AnimationFrameHandler: FC<AnimationFrameHandlerProps> = props => {
-    const [requestId, setRequestId] = useState<number | undefined>(undefined);
+function useAnimationFrameHandler(callback: () => void) {
+    const requestId = useRef<number | undefined>();
 
     const onAnimationFrame = useCallback(() => {
-        props.callback();
-        setRequestId(window.requestAnimationFrame(onAnimationFrame));
-    }, [props.callback]);
+        callback();
+        requestId.current = window.requestAnimationFrame(onAnimationFrame);
+    }, [callback]);
 
-    useEffect(() => {
-        setRequestId(window.requestAnimationFrame(onAnimationFrame));
+    return useCallback(() => {
+        requestId.current = window.requestAnimationFrame(onAnimationFrame);
         return () => {
-            window.cancelAnimationFrame(requestId!);
+            window.cancelAnimationFrame(requestId.current!);
         };
-    }, []);
-
-    return null;
-};
+    }, [onAnimationFrame]);
+}
 
 function shouldUpdatePosition(a?: ClientRect, b?: ClientRect): boolean {
     return (

@@ -1,8 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { usePositionObserver } from "../usePositionObserver";
-import { act } from "react-test-renderer";
 import React from "react";
-import { shallow } from "enzyme";
 
 describe("Position Observer", () => {
     it("Defines the AnimationFrameHandler", () => {
@@ -24,12 +22,10 @@ describe("Position Observer", () => {
         });
 
         const { result } = renderHook(() => usePositionObserver(target));
-        act(() => {
-            const component = shallow(result.current[1]);
-            expect(component).toBeDefined();
-        });
 
-        expect(setHookValue).toBeCalledWith({ top: 1, right: 2, bottom: 3, left: 4 });
+        expect(result.current[0]).toStrictEqual({ top: 0, right: 0, bottom: 0, left: 0 });
         expect(result.current[1]).toBeDefined();
+        result.current[1]();
+        expect(setHookValue).toBeCalledWith({ top: 1, right: 2, bottom: 3, left: 4 });
     });
 });
