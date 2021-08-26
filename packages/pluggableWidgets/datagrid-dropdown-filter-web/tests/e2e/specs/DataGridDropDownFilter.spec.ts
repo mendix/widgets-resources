@@ -13,7 +13,7 @@ describe("datagrid-dropdown-filter-web", () => {
 
             dropdown.click();
 
-            const dropdownOption = page.getElement(".dropdown-list > li:nth-child(1)", dropdown);
+            const dropdownOption = page.getElement(".dropdown-list > li:nth-child(1)");
 
             dropdownOption.click();
 
@@ -37,9 +37,9 @@ describe("datagrid-dropdown-filter-web", () => {
 
             dropdown.click();
 
-            const dropdownOption = page.getElement(".dropdown-list > li:nth-child(1)", dropdown);
+            const dropdownOption = page.getElement(".dropdown-list > li:nth-child(1)");
 
-            const dropdownOption2 = page.getElement(".dropdown-list > li:nth-child(2)", dropdown);
+            const dropdownOption2 = page.getElement(".dropdown-list > li:nth-child(2)");
 
             dropdownOption.click();
 
@@ -78,7 +78,7 @@ describe("datagrid-dropdown-filter-web", () => {
 
             dropdown.click();
 
-            const dropdownOption = page.getElement(".dropdown-list > li:nth-child(3) > div", dropdown);
+            const dropdownOption = page.getElement(".dropdown-list > li:nth-child(3) > div");
 
             expect(dropdownOption.getText()).toContain("No");
 
