@@ -52,7 +52,7 @@ function loadStaticSeries(series: SeriesType): ChartSeries | null {
             data.push({
                 x: x.formatter.format(x.value),
                 y: Number(y.value.toString()),
-                stylingKey: series.sliceStylingKey?.get(item).displayValue || undefined
+                stylingKey: series.sliceStylingKey?.get(item).value || undefined
             });
         }
 
