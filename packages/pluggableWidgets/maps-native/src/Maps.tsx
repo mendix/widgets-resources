@@ -6,7 +6,7 @@ import { ActivityIndicator, Platform, View } from "react-native";
 import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
 import { Big } from "big.js";
 
-import { DefaultZoomLevelEnum, MapsProps } from "../typings/MapsProps";
+import { DefaultZoomLevelEnum, DynamicMarkersType, MapsProps, MarkersType } from "../typings/MapsProps";
 import { ModeledMarker } from "../typings/shared";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
@@ -34,7 +34,6 @@ interface Marker {
     props: ModeledMarker;
     coordinate: LatLng;
 }
-
 export class Maps extends Component<Props, State> {
     readonly state: State = {
         status: Status.LoadingMarkers,
@@ -53,20 +52,20 @@ export class Maps extends Component<Props, State> {
         }
     }
 
-    componentDidUpdate(): void {
-        const markersChanged =
-            (this.props.markers?.length || 0) +
-                (this.props.dynamicMarkers?.reduce((acc, curr) => acc + (curr.markersDS?.items?.length || 0), 0) ||
-                    0) !==
-            this.state.markers?.length;
+    componentDidUpdate(prevProps: Props, prevState: State): void {
+        if (this.props !== prevProps) {
+            const markersChanged = didMarkersChange(prevState.markers, this.props.markers, this.props.dynamicMarkers);
 
-        if (
-            (this.state.status === Status.LoadingMarkers ||
-                (this.state.status === Status.CameraReady && markersChanged)) &&
-            (!this.props.dynamicMarkers.length ||
-                this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
-        ) {
-            this.parseMarkers();
+            if (
+                (this.state.status === Status.LoadingMarkers ||
+                    (this.state.status === Status.CameraReady && markersChanged)) &&
+                (!this.props.dynamicMarkers.length ||
+                    this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
+            ) {
+                // TODO: Only parse new or updated markers. No need to re-parse existing markers
+                // TODO: Check for removed markers and remove them from the state
+                this.parseMarkers();
+            }
         }
     }
 
@@ -147,11 +146,9 @@ export class Maps extends Component<Props, State> {
                     break;
                 case Status.MapReady:
                     this.setState({
-                        status: this.props.provider === "default" ? Status.CameraAlmostReady : Status.CameraReady
+                        status: Status.CameraReady
                     });
                     break;
-                case Status.CameraAlmostReady:
-                    this.setState({ status: Status.CameraReady });
             }
         }
     }
@@ -247,6 +244,31 @@ export class Maps extends Component<Props, State> {
             throw new Error(`No address provided.`);
         }
     }
+}
+
+function didMarkersChange(
+    prevMarkers: Option<Marker[]>,
+    newMarkers: MarkersType[],
+    newDynamicMarkers: DynamicMarkersType[]
+): boolean {
+    const markers = newMarkers.flatMap(convertStaticModeledMarker) as ModeledMarker[];
+    const dynamicMarkers = newDynamicMarkers.flatMap(convertDynamicModeledMarker) as ModeledMarker[];
+    const combinedMarkers = [...dynamicMarkers, ...markers];
+
+    return (
+        prevMarkers?.length !== combinedMarkers?.length ||
+        !!combinedMarkers?.filter(
+            (marker: ModeledMarker) =>
+                prevMarkers?.filter((prevMarker: Marker) => {
+                    for (const [key, value] of Object.entries(marker)) {
+                        if (value !== prevMarker.props[key]) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }).length !== prevMarkers.length
+        ).length
+    );
 }
 
 function isValidCoordinate(value: Option<Big | number>): boolean {
