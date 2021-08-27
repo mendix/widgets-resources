@@ -28,7 +28,7 @@
                     <caption>Header caption</caption>
                     <description/>
                 </property>
-                <property key="hasChildren" type="boolean" defaultValue="false">
+                <property key="hasChildren" type="boolean" defaultValue="true">
                     <caption>Has children</caption>
                     <description>Indicate whether the node has children or is an end node. When set to yes, a composable region becomes avaliable to define the child nodes.</description>
                 </property>
