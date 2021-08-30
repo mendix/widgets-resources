@@ -13,7 +13,6 @@ export function preview(props: ImagePreviewProps): ReactElement | null {
     switch (props.datasource) {
         case "image":
             if (props.imageObject?.type === "static") {
-                // The optional chaining in the conditional guarantees the object is set here.
                 image = props.imageObject.imageUrl;
             } else if (props.defaultImageDynamic?.type === "static") {
                 image = props.defaultImageDynamic.imageUrl;
