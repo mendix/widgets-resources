@@ -18,7 +18,7 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
     const componentRef = useRef<HTMLDivElement>(null);
     const filterSelectorsRef = useRef<HTMLUListElement>(null);
     useOnClickOutside([componentRef, filterSelectorsRef], () => setShow(false));
-    const [position, onAnimateFrameHandler] = usePositionObserver(componentRef.current);
+    const position = usePositionObserver(componentRef.current, show);
 
     const onClick = useCallback(
         (value: T) => {
@@ -33,14 +33,6 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
         setValue(props.defaultFilter);
         props.onChange(props.defaultFilter);
     }, [props.defaultFilter, props.onChange]);
-
-    useEffect(() => {
-        let cleanup;
-        if (show) {
-            cleanup = onAnimateFrameHandler();
-        }
-        return cleanup;
-    }, [onAnimateFrameHandler, show]);
 
     const filterSelectors = createPortal(
         <ul

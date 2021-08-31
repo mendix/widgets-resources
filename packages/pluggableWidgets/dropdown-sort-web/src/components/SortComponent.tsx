@@ -34,7 +34,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
     const componentRef = useRef<HTMLDivElement>(null);
     const optionsRef = useRef<HTMLUListElement>(null);
 
-    const [position, onAnimateFrameHandler] = usePositionObserver(componentRef.current);
+    const position = usePositionObserver(componentRef.current, show);
 
     const onClick = useCallback((option: SortOption) => {
         setValueInput(option.caption);
@@ -49,14 +49,6 @@ export function SortComponent(props: SortComponentProps): ReactElement {
             props.updateSort?.(selectedSort, direction);
         }
     }, [direction, selectedSort]);
-
-    useEffect(() => {
-        let cleanup;
-        if (show) {
-            cleanup = onAnimateFrameHandler();
-        }
-        return cleanup;
-    }, [onAnimateFrameHandler, show]);
 
     const showPlaceholder = !selectedSort || valueInput === props.emptyOptionCaption;
 

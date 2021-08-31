@@ -15,17 +15,10 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const [show, setShow] = useState(false);
     const optionsRef = useRef<HTMLUListElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const [position, onAnimateFrameHandler] = usePositionObserver(buttonRef.current);
+    const position = usePositionObserver(buttonRef.current, show);
 
     useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
 
-    useEffect(() => {
-        let cleanup;
-        if (show) {
-            cleanup = onAnimateFrameHandler();
-        }
-        return cleanup;
-    }, [onAnimateFrameHandler, show]);
 
     const optionsComponent = createPortal(
         <ul

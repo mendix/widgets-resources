@@ -31,7 +31,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const componentRef = useRef<HTMLDivElement>(null);
     const optionsRef = useRef<HTMLUListElement>(null);
 
-    const [position, onAnimateFrameHandler] = usePositionObserver(componentRef.current);
+    const position = usePositionObserver(componentRef.current, show);
 
     const setMultiSelectFilters = useCallback(
         (selectedOptions: FilterOption[]) => {
@@ -122,14 +122,6 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     useEffect(() => {
         props.updateFilters?.(selectedFilters);
     }, [selectedFilters]);
-
-    useEffect(() => {
-        let cleanup;
-        if (show) {
-            cleanup = onAnimateFrameHandler();
-        }
-        return cleanup;
-    }, [onAnimateFrameHandler, show]);
 
     const showPlaceholder = selectedFilters.length === 0 || valueInput === props.emptyOptionCaption;
 

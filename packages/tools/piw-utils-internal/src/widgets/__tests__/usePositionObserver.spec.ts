@@ -21,11 +21,9 @@ describe("Position Observer", () => {
             return 1;
         });
 
-        const { result } = renderHook(() => usePositionObserver(target));
+        const { result } = renderHook(() => usePositionObserver(target, true));
 
-        expect(result.current[0]).toStrictEqual({ top: 0, right: 0, bottom: 0, left: 0 });
-        expect(result.current[1]).toBeDefined();
-        result.current[1]();
+        expect(result.current).toStrictEqual({ top: 0, right: 0, bottom: 0, left: 0 });
         expect(setHookValue).toBeCalledWith({ top: 1, right: 2, bottom: 3, left: 4 });
     });
 });

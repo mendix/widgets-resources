@@ -1,37 +1,39 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export function usePositionObserver(target: HTMLElement | null): [ClientRect | undefined, () => () => void] {
+export function usePositionObserver(target: HTMLElement | null, active: boolean): ClientRect | undefined {
     const [position, setPosition] = useState<ClientRect>();
 
     const onAnimationFrameHandler = useCallback(() => {
-        if (!target) {
-            return;
-        }
-
-        const newPosition: ClientRect = target.getBoundingClientRect();
+        const newPosition: ClientRect | undefined = target?.getBoundingClientRect();
 
         if (shouldUpdatePosition(newPosition, position)) {
             setPosition(newPosition);
         }
     }, [position, target]);
 
-    return [position, useAnimationFrameHandler(onAnimationFrameHandler)];
+    useAnimationFrameEffect(active ? onAnimationFrameHandler : undefined);
+
+    return position;
 }
 
-function useAnimationFrameHandler(callback: () => void) {
+function useAnimationFrameEffect(callback?: () => void): void {
     const requestId = useRef<number | undefined>();
 
     const onAnimationFrame = useCallback(() => {
-        callback();
+        callback!();
         requestId.current = window.requestAnimationFrame(onAnimationFrame);
     }, [callback]);
 
-    return useCallback(() => {
+    useEffect(() => {
+        if (!callback) {
+            return;
+        }
+
         requestId.current = window.requestAnimationFrame(onAnimationFrame);
         return () => {
             window.cancelAnimationFrame(requestId.current!);
         };
-    }, [onAnimationFrame]);
+    }, [callback, onAnimationFrame]);
 }
 
 function shouldUpdatePosition(a?: ClientRect, b?: ClientRect): boolean {
