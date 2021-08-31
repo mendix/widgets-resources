@@ -1,14 +1,14 @@
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
-import { ImageViewerPreviewProps } from "../typings/ImageViewerProps";
+import { ImagePreviewProps } from "../typings/ImageProps";
 import { ImageViewer as ImageViewerComponent } from "./components/Image/index";
 
 import ImageViewerPlaceholder from "./assets/placeholder.svg";
 
 declare function require(name: string): string;
 
-export function preview(props: ImageViewerPreviewProps): ReactElement | null {
+export function preview(props: ImagePreviewProps): ReactElement | null {
     let image = ImageViewerPlaceholder;
     switch (props.datasource) {
         case "image":

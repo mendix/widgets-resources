@@ -1,6 +1,6 @@
 import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactEventHandler } from "react";
 import classNames from "classnames";
-import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageViewerProps";
+import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageProps";
 import { LightboxProps } from "../Lightbox";
 
 import "../../ui/Image.scss";
