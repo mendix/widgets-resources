@@ -6,8 +6,8 @@
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
 import { Big } from "big.js";
-import { NativeModules, Alert, Linking } from 'react-native';
-import ImagePicker from 'react-native-image-picker';
+import { NativeModules, Alert, Platform, Linking } from 'react-native';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { getLocales } from 'react-native-localize';
 
 // BEGIN EXTRA CODE
@@ -15,7 +15,7 @@ import { getLocales } from 'react-native-localize';
 
 /**
  * @param {MxObject} picture - This field is required.
- * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"|"NativeMobileResources.PictureSource.either"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
+ * @param {"NativeMobileResources.PictureSource.camera"|"NativeMobileResources.PictureSource.imageLibrary"} pictureSource - Select a picture from the library or the camera. The default is to let the user decide.
  * @param {"NativeMobileResources.PictureQuality.original"|"NativeMobileResources.PictureQuality.low"|"NativeMobileResources.PictureQuality.medium"|"NativeMobileResources.PictureQuality.high"|"NativeMobileResources.PictureQuality.custom"} pictureQuality - Set to empty to use default value 'medium'.
  * @param {Big} maximumWidth - The picture will be scaled to this maximum pixel width, while maintaing the aspect ratio.
  * @param {Big} maximumHeight - The picture will be scaled to this maximum pixel height, while maintaing the aspect ratio.
@@ -23,88 +23,126 @@ import { getLocales } from 'react-native-localize';
  */
 export async function TakePicture(picture, pictureSource, pictureQuality, maximumWidth, maximumHeight) {
 	// BEGIN USER CODE
-    // Documentation https://github.com/react-native-community/react-native-image-picker/blob/master/docs/Reference.md
     if (!picture) {
         return Promise.reject(new Error("Input parameter 'Picture' is required"));
     }
     if (!picture.inheritsFrom("System.FileDocument")) {
-        const entity = picture.getEntity();
-        return Promise.reject(new Error(`Entity ${entity} does not inherit from 'System.FileDocument'`));
+        return Promise.reject(new Error(`Entity ${picture.getEntity()} does not inherit from 'System.FileDocument'`));
     }
     if (pictureQuality === "custom" && !maximumHeight && !maximumWidth) {
         return Promise.reject(new Error("Picture quality is set to 'Custom', but no maximum width or height was provided"));
     }
-    return takePicture()
-        .then(uri => {
+    // V3 dropped the feature of providing an action sheet so users can decide on which action to take, camera or library.
+    const nativeVersionMajor = NativeModules.ImagePickerManager.showImagePicker ? 2 : 4;
+    const RNPermissions = nativeVersionMajor === 4 ? require("react-native-permissions") : null;
+    try {
+        const uri = await takePicture();
         if (!uri) {
             return false;
         }
         return storeFile(picture, uri);
-    })
-        .catch(error => {
+    }
+    catch (error) {
         if (error === "canceled") {
             return false;
         }
         throw new Error(error);
-    });
+    }
     function takePicture() {
         return new Promise((resolve, reject) => {
-            const options = getOptions();
-            const method = getPictureMethod();
-            method(options, response => {
+            const options = nativeVersionMajor === 2 ? getOptionsV2() : getOptionsV4();
+            getPictureMethod()
+                .then(method => method(options, (response) => {
                 if (response.didCancel) {
-                    return resolve();
+                    return resolve(undefined);
                 }
-                if (response.error) {
-                    const unhandledError = handleImagePickerError(response.error);
-                    if (!unhandledError) {
-                        return resolve();
+                if (nativeVersionMajor === 2) {
+                    response = response;
+                    if (response.error) {
+                        const unhandledError = handleImagePickerV2Error(response.error);
+                        if (!unhandledError) {
+                            return resolve(undefined);
+                        }
+                        return reject(new Error(response.error));
                     }
-                    return reject(new Error(response.error));
+                    return resolve(response.uri);
                 }
-                return resolve(response.uri);
-            });
+                response = response;
+                if (response.errorCode) {
+                    handleImagePickerV4Error(response.errorCode, response.errorMessage);
+                    return resolve(undefined);
+                }
+                return resolve(response.assets[0].uri);
+            }))
+                .catch(error => reject(error));
         });
     }
     function storeFile(imageObject, uri) {
         return new Promise((resolve, reject) => {
             fetch(uri)
-                .then(res => res.blob())
+                .then(response => response.blob())
                 .then(blob => {
-                const guid = imageObject.getGuid();
                 // eslint-disable-next-line no-useless-escape
                 const filename = /[^\/]*$/.exec(uri)[0];
-                const onSuccess = () => {
-                    NativeModules.NativeFsModule.remove(uri).then(() => {
-                        imageObject.set("Name", filename);
-                        mx.data.commit({
-                            mxobj: imageObject,
-                            callback: () => resolve(true),
-                            error: (error) => reject(error)
-                        });
+                const filePathWithoutFileScheme = uri.replace("file://", "");
+                mx.data.saveDocument(imageObject.getGuid(), filename, {}, blob, async () => {
+                    await NativeModules.NativeFsModule.remove(filePathWithoutFileScheme);
+                    imageObject.set("Name", filename);
+                    mx.data.commit({
+                        mxobj: imageObject,
+                        callback: () => resolve(true),
+                        error: (error) => reject(error)
                     });
-                };
-                const onError = (error) => {
-                    NativeModules.NativeFsModule.remove(uri).then(undefined);
+                }, async (error) => {
+                    await NativeModules.NativeFsModule.remove(filePathWithoutFileScheme);
                     reject(error);
-                };
-                mx.data.saveDocument(guid, filename, {}, blob, onSuccess, onError);
-            });
+                });
+            })
+                .catch(error => reject(error));
         });
     }
-    function getPictureMethod() {
-        const source = pictureSource ? pictureSource : "either";
-        switch (source) {
+    async function getPictureMethod() {
+        async function handleCameraRequest() {
+            if (Platform.OS === "android" && nativeVersionMajor === 4) {
+                await checkAndMaybeRequestAndroidPermission();
+            }
+            return launchCamera;
+        }
+        switch (pictureSource) {
             case "imageLibrary":
-                return ImagePicker.launchImageLibrary;
+                return launchImageLibrary;
             case "camera":
-                return ImagePicker.launchCamera;
-            case "either":
+                return handleCameraRequest();
             default:
-                return ImagePicker.showImagePicker;
+                return handleCameraRequest();
         }
     }
-    function getOptions() {
+    async function checkAndMaybeRequestAndroidPermission() {
+        let requestResult;
+        async function requestAndroidPermission() {
+            requestResult = await RNPermissions.request(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
+            if (requestResult === RNPermissions.RESULTS.DENIED) {
+                // re-enter request flow. note, if a request is denied twice, result = blocked.
+                requestResult = await requestAndroidPermission();
+            }
+            return requestResult;
+        }
+        // https://github.com/zoontek/react-native-permissions#android-flow
+        const statusResult = await RNPermissions.check(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
+        switch (statusResult) {
+            case RNPermissions.RESULTS.UNAVAILABLE:
+                throw new Error("The camera is unavailable.");
+            case RNPermissions.RESULTS.BLOCKED:
+                throw new Error("Camera access for this app is currently blocked.");
+            case RNPermissions.RESULTS.DENIED:
+                requestResult = await requestAndroidPermission();
+                if (requestResult === RNPermissions.RESULTS.BLOCKED) {
+                    throw new Error("Camera access for this app is currently blocked.");
+                }
+                break;
+        }
+    }
+    function getOptionsV2() {
         const { maxWidth, maxHeight } = getPictureQuality();
         const [language] = getLocales().map(local => local.languageCode);
         const isDutch = language === "nl";
@@ -119,8 +157,8 @@ export async function TakePicture(picture, pictureSource, pictureQuality, maximu
             chooseFromLibraryButtonTitle: isDutch ? "Kies uit bibliotheek" : "Choose from library",
             permissionDenied: {
                 title: isDutch
-                    ? "Deze app heeft geen toegang tot uw camera of foto's"
-                    : "This app does not have access to your camera or photos",
+                    ? "Deze app heeft geen toegang tot uw camera of foto bibliotheek"
+                    : "This app does not have access to your camera or photo library",
                 text: isDutch
                     ? "Ga naar Instellingen > Privacy om toegang tot uw camera en bestanden te verlenen."
                     : "To enable access, tap Settings > Privacy and turn on Camera and Photos/Storage.",
@@ -132,6 +170,14 @@ export async function TakePicture(picture, pictureSource, pictureQuality, maximu
                 cameraRoll: false,
                 privateDirectory: true
             }
+        };
+    }
+    function getOptionsV4() {
+        const { maxWidth, maxHeight } = getPictureQuality();
+        return {
+            mediaType: "photo",
+            maxWidth,
+            maxHeight
         };
     }
     function getPictureQuality() {
@@ -159,7 +205,7 @@ export async function TakePicture(picture, pictureSource, pictureQuality, maximu
                 };
         }
     }
-    function handleImagePickerError(error) {
+    function handleImagePickerV2Error(error) {
         const ERRORS = {
             AndroidPermissionDenied: "Permissions weren't granted",
             iOSPhotoLibraryPermissionDenied: "Photo library permissions not granted",
@@ -167,10 +213,10 @@ export async function TakePicture(picture, pictureSource, pictureQuality, maximu
         };
         switch (error) {
             case ERRORS.iOSPhotoLibraryPermissionDenied:
-                showiOSPermissionAlert("This app does not have access to your photos or videos", "To enable access, tap Settings and turn on Photos.");
+                showAlert("This app does not have access to your photo library", "To enable access, tap Settings and turn on Photos.");
                 return;
             case ERRORS.iOSCameraPermissionDenied:
-                showiOSPermissionAlert("This app does not have access to your camera", "To enable access, tap Settings and turn on Camera.");
+                showAlert("This app does not have access to your camera", "To enable access, tap Settings and turn on Camera.");
                 return;
             case ERRORS.AndroidPermissionDenied:
                 // Ignore this error because the image picker plugin already shows an alert in this case.
@@ -179,11 +225,30 @@ export async function TakePicture(picture, pictureSource, pictureQuality, maximu
                 return error;
         }
     }
-    function showiOSPermissionAlert(title, message) {
+    function showAlert(title, message) {
         Alert.alert(title, message, [
             { text: "Cancel", style: "cancel" },
-            { text: "Settings", onPress: () => Linking.openURL("app-settings:") }
+            ...(Platform.OS === "ios"
+                ? [{ text: "Settings", onPress: () => Linking.openURL("app-settings:") }]
+                : [])
         ], { cancelable: false });
+    }
+    function handleImagePickerV4Error(errorCode, errorMessage) {
+        var _a;
+        switch (errorCode) {
+            case "camera_unavailable":
+                showAlert("The camera is unavailable", "");
+                break;
+            case "permission":
+                showAlert("This app does not have access to your photo library or camera", "To enable access, tap Settings and turn on Camera and Photos.");
+                break;
+            case "others":
+                showAlert("Something went wrong.", (_a = `${errorMessage}.`) !== null && _a !== void 0 ? _a : "Something went wrong while trying to access your Camera or photo library.");
+                break;
+            default:
+                showAlert("Something went wrong.", "Something went wrong while trying to access your Camera or photo library.");
+                break;
+        }
     }
 	// END USER CODE
 }

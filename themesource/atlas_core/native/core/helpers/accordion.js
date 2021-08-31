@@ -13,161 +13,153 @@ To customize any core styling, copy the part you want to customize to styles/nat
     Default Class For Mendix Accordion Widget
 ========================================================================== */
 export const accordionPrimary = {
-    container: {
-        borderColor: brand.primary,
-        borderBottomWidth: 0,
-    },
+    container: {},
     group: {
         container: {
             borderWidth: 1,
-            borderColor: brand.primary,
+            borderColor: brand.primary
         },
         header: {
             container: {
                 backgroundColor: brand.primary,
+                borderColor: brand.primary,
+                borderBottomWidth: 0
             },
             heading1: {
-                color: fontDefaults.colorTitleLight,
+                color: fontDefaults.colorTitleLight
             },
             heading2: {
-                color: fontDefaults.colorTitleLight,
+                color: fontDefaults.colorTitleLight
             },
             heading3: {
-                color: fontDefaults.colorTitleLight,
+                color: fontDefaults.colorTitleLight
             },
             heading4: {
-                color: fontDefaults.colorTitleLight,
+                color: fontDefaults.colorTitleLight
             },
             heading5: {
-                color: fontDefaults.colorTitleLight,
+                color: fontDefaults.colorTitleLight
             },
             heading6: {
-                color: fontDefaults.colorTitleLight,
+                color: fontDefaults.colorTitleLight
             },
             icon: {
-                color: fontDefaults.colorTitleLight,
-            },
-        },
-    },
+                color: fontDefaults.colorTitleLight
+            }
+        }
+    }
 };
 export const accordionSecondary = {
-    container: {
-        borderColor: "#CED0D3",
-        borderBottomWidth: 0,
-    },
+    container: {},
     group: {
         container: {
             borderWidth: 1,
-            borderColor: "#CED0D3",
+            borderColor: "#CED0D3"
         },
         header: {
             container: {
                 backgroundColor: background.primary,
+                borderColor: "#CED0D3",
+                borderBottomWidth: 0
             },
             heading1: {
-                color: brand.primary,
+                color: brand.primary
             },
             heading2: {
-                color: brand.primary,
+                color: brand.primary
             },
             heading3: {
-                color: brand.primary,
+                color: brand.primary
             },
             heading4: {
-                color: brand.primary,
+                color: brand.primary
             },
             heading5: {
-                color: brand.primary,
+                color: brand.primary
             },
             heading6: {
-                color: brand.primary,
+                color: brand.primary
             },
             icon: {
-                color: brand.primary,
-            },
-        },
-    },
+                color: brand.primary
+            }
+        }
+    }
 };
 export const accordionSuccess = merge(accordionPrimary, {
-    container: {
-        borderColor: brand.success,
-    },
     group: {
         container: {
-            borderColor: brand.success,
+            borderColor: brand.success
         },
         header: {
             container: {
                 backgroundColor: brand.success,
-            },
-        },
-    },
+                borderColor: brand.success
+            }
+        }
+    }
 });
 export const accordionWarning = merge(accordionPrimary, {
-    container: {
-        borderColor: brand.warning,
-    },
     group: {
         container: {
-            borderColor: brand.warning,
+            borderColor: brand.warning
         },
         header: {
             container: {
                 backgroundColor: brand.warning,
-            },
-        },
-    },
+                borderColor: brand.warning
+            }
+        }
+    }
 });
 export const accordionDanger = merge(accordionPrimary, {
-    container: {
-        borderColor: brand.danger,
-    },
     group: {
         container: {
-            borderColor: brand.danger,
+            borderColor: brand.danger
         },
         header: {
             container: {
                 backgroundColor: brand.danger,
-            },
-        },
-    },
+                borderColor: brand.danger
+            }
+        }
+    }
 });
 export const accordionLined = {
     container: {
-        borderBottomWidth: 1,
+        borderTopWidth: 1
     },
     group: {
         container: {
             borderWidth: 0,
-            borderTopWidth: 1,
-        },
-    },
+            borderBottomWidth: 1
+        }
+    }
 };
 export const accordionDividerNone = {
     container: {
         borderWidth: 0,
-        borderBottomWidth: 0,
+        borderTopWidth: 0
     },
     group: {
         container: {
             borderWidth: 0,
-            borderTopWidth: 0,
-        },
-    },
+            borderBottomWidth: 0
+        }
+    }
 };
 export const accordionCompact = {
     group: {
         header: {
             container: {
                 paddingVertical: accordion.groupHeader.container.paddingVertical / 2,
-                paddingHorizontal: accordion.groupHeader.container.paddingHorizontal / 2,
-            },
+                paddingHorizontal: accordion.groupHeader.container.paddingHorizontal / 2
+            }
         },
         content: {
             paddingTop: accordion.groupContent.paddingTop / 2,
             paddingBottom: accordion.groupContent.paddingBottom / 2,
-            paddingHorizontal: accordion.groupContent.paddingHorizontal / 2,
-        },
-    },
+            paddingHorizontal: accordion.groupContent.paddingHorizontal / 2
+        }
+    }
 };
