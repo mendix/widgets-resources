@@ -57,6 +57,13 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
                             e.preventDefault();
                             e.stopPropagation();
                             onClick(option.value);
+                        } else if (e.key === "Tab" && index + 1 === props.options.length) {
+                            e.preventDefault();
+                            onClick(value);
+                        } else if ((e.key === "Tab" && e.shiftKey && index === 0) || e.key === "Escape") {
+                            e.preventDefault();
+                            componentRef.current?.querySelector("button")?.focus();
+                            setShow(false);
                         }
                     }}
                     role="menuitem"

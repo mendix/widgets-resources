@@ -6,6 +6,7 @@ import {
     MutableRefObject,
     ReactElement,
     SetStateAction,
+    useCallback,
     useMemo,
     useRef,
     useState
@@ -30,8 +31,17 @@ export const DatePicker = forwardRef(
     (props: DatePickerProps, ref: MutableRefObject<DatePickerComponent> | null): ReactElement => {
         const [open, setOpen] = useState(false);
         const buttonRef = useRef<HTMLButtonElement>(null);
+        const portalRef = useRef<HTMLDivElement>(null);
         const id = useMemo(() => `datepicker_` + Math.random(), []);
-        const Portal = createPortal(<div id={id} style={{ position: "fixed" }} />, document.body);
+        const Portal = createPortal(<div ref={portalRef} id={id} style={{ position: "fixed" }} />, document.body);
+
+        const buttonClick = useCallback(() => {
+            setOpen(open => !open);
+            setTimeout(() => {
+                (portalRef.current?.querySelector(".react-datepicker > button") as HTMLElement)?.focus();
+            }, 10);
+        }, []);
+
         return (
             <Fragment>
                 {Portal}
@@ -46,6 +56,7 @@ export const DatePicker = forwardRef(
                     dateFormat={props.dateFormat}
                     disabledKeyboardNavigation={false}
                     dropdownMode="select"
+                    enableTabLoop
                     locale={props.locale}
                     onChange={date => {
                         if (isDate(date) && isValid(date)) {
@@ -82,7 +93,18 @@ export const DatePicker = forwardRef(
                     useWeekdaysShort
                     portalId={id}
                 />
-                <button ref={buttonRef} className="btn btn-default btn-calendar" onClick={() => setOpen(prev => !prev)}>
+                <button
+                    ref={buttonRef}
+                    className="btn btn-default btn-calendar"
+                    onClick={buttonClick}
+                    onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            buttonClick();
+                        }
+                    }}
+                >
                     <span className="glyphicon glyphicon-calendar" />
                 </button>
             </Fragment>

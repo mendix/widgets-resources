@@ -256,6 +256,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
         <button
           className="btn btn-default btn-calendar"
           onClick={[Function]}
+          onKeyDown={[Function]}
         >
           <span
             className="glyphicon glyphicon-calendar"
@@ -519,6 +520,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
         <button
           className="btn btn-default btn-calendar"
           onClick={[Function]}
+          onKeyDown={[Function]}
         >
           <span
             className="glyphicon glyphicon-calendar"

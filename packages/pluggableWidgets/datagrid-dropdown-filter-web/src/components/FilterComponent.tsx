@@ -150,6 +150,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                             e.preventDefault();
                             e.stopPropagation();
                             onClick(option);
+                        } else if (
+                            (e.key === "Tab" && (index + 1 === options.length || (e.shiftKey && index === 0))) ||
+                            e.key === "Escape"
+                        ) {
+                            e.preventDefault();
+                            setShow(false);
+                            componentRef.current?.querySelector("input")?.focus();
                         }
                     }}
                     role="menuitem"

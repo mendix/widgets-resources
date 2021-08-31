@@ -1,4 +1,7 @@
 import { shallow } from "enzyme";
+import { render, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import "@testing-library/jest-dom";
 import { createElement } from "react";
 import { FilterSelector } from "../FilterSelector";
 
@@ -13,6 +16,8 @@ const options = [
     { value: "smaller", label: "Smaller than" },
     { value: "smallerEqual", label: "Smaller than or equal" }
 ];
+
+jest.useFakeTimers();
 
 describe("Filter selector", () => {
     it("renders correctly", () => {
@@ -77,5 +82,112 @@ describe("Filter selector", () => {
 
         lis.at(1).simulate("click", onClickProps);
         expect(onChange).toBeCalledWith("startsWith");
+    });
+
+    describe("focus", () => {
+        beforeEach(() => (document.body.innerHTML = ""));
+
+        it("changes focused element when pressing filter selector button", () => {
+            const component = render(
+                <FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />
+            );
+
+            expect(document.body).toHaveFocus();
+
+            const button = component.getByRole("button");
+            expect(button).toBeDefined();
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(10);
+
+            const items = component.getAllByRole("menuitem");
+
+            expect(items[0]).toHaveFocus();
+        });
+
+        it("changes focused element back to the button when pressing shift+tab in the first element", () => {
+            const component = render(
+                <FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />
+            );
+
+            expect(document.body).toHaveFocus();
+
+            const button = component.getByRole("button");
+            expect(button).toBeDefined();
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(10);
+
+            const items = component.getAllByRole("menuitem");
+            expect(items[0]).toHaveFocus();
+
+            userEvent.tab({ shift: true });
+
+            jest.advanceTimersByTime(10);
+
+            expect(button).toHaveFocus();
+        });
+
+        it("triggers onChange with previous value when pressing tab on the last item", () => {
+            const onChange = jest.fn();
+
+            const component = render(
+                <FilterSelector
+                    defaultFilter="contains"
+                    onChange={onChange}
+                    name="test"
+                    options={[
+                        { value: "contains", label: "Contains" },
+                        { value: "startsWith", label: "Starts with" }
+                    ]}
+                />
+            );
+
+            expect(document.body).toHaveFocus();
+
+            const button = component.getByRole("button");
+            expect(button).toBeDefined();
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(10);
+
+            const items = component.getAllByRole("menuitem");
+            expect(items[0]).toHaveFocus();
+
+            userEvent.tab();
+            expect(items[1]).toHaveFocus();
+            userEvent.tab();
+
+            jest.advanceTimersByTime(10);
+
+            expect(onChange).toHaveBeenCalledWith("contains");
+        });
+
+        it("changes focused element back to the button when pressing escape in any element", () => {
+            const component = render(
+                <FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />
+            );
+
+            expect(document.body).toHaveFocus();
+
+            const button = component.getByRole("button");
+            expect(button).toBeDefined();
+            fireEvent.click(button);
+
+            jest.advanceTimersByTime(10);
+
+            const items = component.getAllByRole("menuitem");
+            expect(items[0]).toHaveFocus();
+
+            userEvent.tab();
+
+            expect(items[1]).toHaveFocus();
+
+            userEvent.keyboard("{esc}");
+
+            jest.advanceTimersByTime(10);
+
+            expect(button).toHaveFocus();
+        });
     });
 });

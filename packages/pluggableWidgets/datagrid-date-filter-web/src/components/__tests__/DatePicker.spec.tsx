@@ -51,7 +51,7 @@ describe("Date picker component", () => {
             />
         );
 
-        fireEvent.change(await component.findByPlaceholderText("Placeholder"), { target: { value: "01/12/2020" } });
+        fireEvent.change(component.getByPlaceholderText("Placeholder"), { target: { value: "01/12/2020" } });
 
         expect(setValue).toBeCalledTimes(1);
     });

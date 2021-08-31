@@ -77,6 +77,14 @@ export function SortComponent(props: SortComponentProps): ReactElement {
                             e.preventDefault();
                             e.stopPropagation();
                             onClick(option);
+                        } else if (e.key === "Tab" && index + 1 === props.options.length) {
+                            e.preventDefault();
+                            setShow(false);
+                            componentRef.current?.querySelector("button")?.focus();
+                        } else if ((e.key === "Tab" && e.shiftKey && index === 0) || e.key === "Escape") {
+                            e.preventDefault();
+                            setShow(false);
+                            componentRef.current?.querySelector("input")?.focus();
                         }
                     }}
                     role="menuitem"
