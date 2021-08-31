@@ -18,4 +18,6 @@ The pie/doughnut chart widget renders a dataset as a pie or doughnut chart (depe
 
 ### Custom styling
 
-...todo
+The look and feel of the chart is fully customizable. Check out the
+[Native Mobile Styling](https://docs.mendix.com/refguide/native-styling-refguide#11-29-pie-doughnut-chart) documentation for a full overview of
+the available style customizations.
