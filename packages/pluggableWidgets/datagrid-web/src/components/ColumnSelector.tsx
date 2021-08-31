@@ -24,11 +24,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
         (isVisible: boolean, id: string) =>
             props.setHiddenColumns(prev => {
                 if (!isVisible) {
-                    prev.splice(
-                        prev.findIndex(v => v === id),
-                        1
-                    );
-                    return [...prev];
+                    return prev.filter(v => v !== id);
                 } else {
                     return [...prev, id];
                 }
@@ -37,15 +33,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     );
 
     const firstHidableColumnIndex = useMemo(() => props.columns.findIndex(c => c.canHide), [props.columns]);
-    const lastHidableColumnIndex = useMemo(() => {
-        const index = props.columns
-            .slice()
-            .reverse()
-            .findIndex(c => c.canHide);
-        const count = props.columns.length - 1;
-
-        return index > -1 ? count - index : count;
-    }, [props.columns]);
+    const lastHidableColumnIndex = useMemo(() => props.columns.map(c => c.canHide).lastIndexOf(true), [props.columns]);
 
     const optionsComponent = createPortal(
         <ul
@@ -57,7 +45,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
             style={{
                 position: "fixed",
                 top: position?.bottom,
-                right: position?.right ? document.body.clientWidth - position.right : undefined
+                right: position?.right !== undefined ? document.body.clientWidth - position.right : undefined
             }}
         >
             {props.columns.map((column: ColumnProperty, index: number) => {

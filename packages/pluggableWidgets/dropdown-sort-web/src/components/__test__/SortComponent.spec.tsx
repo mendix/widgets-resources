@@ -1,11 +1,12 @@
 import { render, shallow } from "enzyme";
 import { createElement } from "react";
-import { render as renderTestingLib, fireEvent } from "@testing-library/react";
+import { SortComponent, SortOption } from "../SortComponent";
+import { render as renderTestingLib, fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { SortComponent, SortOption } from "../SortComponent";
 
 const defaultOptions: SortOption[] = [
+    { caption: "Empty option", value: "" },
     { caption: "1", value: "_1" },
     { caption: "2", value: "_2" },
     { caption: "3", value: "_3" }
@@ -73,7 +74,7 @@ describe("Sort selector", () => {
             const item = component.find("li").last(); // [cap 3: val:_3]
             item.simulate("click", onClickProps);
 
-            expect(component.find("input").first().prop("value")).toBe(defaultOptions[2].caption);
+            expect(component.find("input").first().prop("value")).toBe(defaultOptions[3].caption);
         });
     });
 
@@ -81,35 +82,31 @@ describe("Sort selector", () => {
         beforeEach(() => (document.body.innerHTML = ""));
 
         it("changes focused element when pressing the input", () => {
-            const component = renderTestingLib(
-                <SortComponent options={defaultOptions} emptyOptionCaption="Click me" />
-            );
+            renderTestingLib(<SortComponent options={defaultOptions} emptyOptionCaption="Click me" />);
 
             expect(document.body).toHaveFocus();
-            const input = component.getByPlaceholderText("Click me");
+            const input = screen.getByPlaceholderText("Click me");
             expect(input).toBeDefined();
             fireEvent.click(input);
 
             jest.advanceTimersByTime(10);
 
-            const items = component.getAllByRole("menuitem");
+            const items = screen.getAllByRole("menuitem");
             expect(items[0]).toHaveFocus();
         });
 
         it("changes focused element back to the input when pressing shift+tab in the first element", () => {
-            const component = renderTestingLib(
-                <SortComponent options={defaultOptions} emptyOptionCaption="Click me" />
-            );
+            renderTestingLib(<SortComponent options={defaultOptions} emptyOptionCaption="Click me" />);
 
             expect(document.body).toHaveFocus();
 
-            const input = component.getByPlaceholderText("Click me");
+            const input = screen.getByPlaceholderText("Click me");
             expect(input).toBeDefined();
             fireEvent.click(input);
 
             jest.advanceTimersByTime(10);
 
-            const items = component.getAllByRole("menuitem");
+            const items = screen.getAllByRole("menuitem");
             expect(items[0]).toHaveFocus();
 
             userEvent.tab({ shift: true });
@@ -120,18 +117,24 @@ describe("Sort selector", () => {
         });
 
         it("changes focused element back to the input when pressing tab on the last item", () => {
-            const component = renderTestingLib(
-                <SortComponent options={[{ caption: "1", value: "_1" }]} emptyOptionCaption="Click me" />
+            renderTestingLib(
+                <SortComponent
+                    options={[
+                        { caption: "Click me", value: "" },
+                        { caption: "1", value: "_1" }
+                    ]}
+                    emptyOptionCaption="Click me"
+                />
             );
 
             expect(document.body).toHaveFocus();
 
-            const input = component.getByPlaceholderText("Click me");
+            const input = screen.getByPlaceholderText("Click me");
             fireEvent.click(input);
 
             jest.advanceTimersByTime(10);
 
-            const items = component.getAllByRole("menuitem");
+            const items = screen.getAllByRole("menuitem");
             expect(items[0]).toHaveFocus();
 
             userEvent.tab();
@@ -140,22 +143,32 @@ describe("Sort selector", () => {
 
             jest.advanceTimersByTime(10);
 
-            expect(input).toHaveFocus();
+            const button = screen.getByRole("button");
+
+            expect(button).toHaveFocus();
         });
 
-        it("changes focused element back to the input when pressing escape on the last item", () => {
-            const component = renderTestingLib(
-                <SortComponent options={[{ caption: "1", value: "_1" }]} emptyOptionCaption="Click me" />
+        it("changes focused element back to the input when pressing escape on any item", () => {
+            renderTestingLib(
+                <SortComponent
+                    options={[
+                        { caption: "Click me", value: "" },
+                        { caption: "1", value: "_1" },
+                        { caption: "2", value: "_2" }
+                    ]}
+                    emptyOptionCaption="Click me"
+                />
             );
 
             expect(document.body).toHaveFocus();
 
-            const input = component.getByPlaceholderText("Click me");
+            const input = screen.getByPlaceholderText("Click me");
             fireEvent.click(input);
 
             jest.advanceTimersByTime(10);
 
-            const items = component.getAllByRole("menuitem");
+            const items = screen.getAllByRole("menuitem");
+            expect(items).toHaveLength(3);
             expect(items[0]).toHaveFocus();
 
             userEvent.tab();
