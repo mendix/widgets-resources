@@ -80,7 +80,9 @@ export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps 
                 columnSize: "grow",
                 padding: 4,
                 children: [
-                    ...(values.showIcon === "left" ? [getChevronIconPreview(values.headerType)] : []),
+                    ...(values.showIcon === "left" && values.hasChildren
+                        ? [getChevronIconPreview(values.headerType)]
+                        : []),
                     values.headerType === "text"
                         ? ({
                               type: "Text",
@@ -102,7 +104,9 @@ export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps 
                               ]
                           } as RowLayoutProps),
 
-                    ...(values.showIcon === "right" ? [getChevronIconPreview(values.headerType)] : [])
+                    ...(values.showIcon === "right" && values.hasChildren
+                        ? [getChevronIconPreview(values.headerType)]
+                        : [])
                 ]
             }
         ]
