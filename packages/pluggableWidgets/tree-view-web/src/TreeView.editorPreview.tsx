@@ -4,7 +4,7 @@ import { createElement, ReactElement } from "react";
 import { TreeViewPreviewProps } from "../typings/TreeViewProps";
 import { TreeView } from "./components/TreeView";
 
-function mapIconToWebIcon(icon: TreeViewPreviewProps["expandIcon"] | TreeViewPreviewProps["collapseIcon"]): WebIcon {
+function mapIconToWebIcon(icon: TreeViewPreviewProps["expandedIcon"] | TreeViewPreviewProps["collapsedIcon"]): WebIcon {
     if (icon) {
         if (icon.type === "glyph") {
             return {
@@ -52,10 +52,10 @@ export function preview(props: TreeViewPreviewProps): ReactElement | null {
             ]}
             isUserDefinedLeafNode={!props.hasChildren}
             startExpanded
-            showCustomIcon={props.advancedMode && (Boolean(props.expandIcon) || Boolean(props.collapseIcon))}
+            showCustomIcon={props.advancedMode && (Boolean(props.expandedIcon) || Boolean(props.collapsedIcon))}
             iconPlacement={props.showIcon}
-            expandIcon={mapIconToWebIcon(props.expandIcon)}
-            collapseIcon={mapIconToWebIcon(props.collapseIcon)}
+            expandedIcon={mapIconToWebIcon(props.expandedIcon)}
+            collapsedIcon={mapIconToWebIcon(props.collapsedIcon)}
             animateIcon={false}
             animateTreeViewContent={false}
         />

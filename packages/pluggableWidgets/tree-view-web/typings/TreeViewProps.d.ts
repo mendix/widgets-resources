@@ -24,8 +24,8 @@ export interface TreeViewContainerProps {
     children?: ListWidgetValue;
     animate: boolean;
     showIcon: ShowIconEnum;
-    expandIcon?: DynamicValue<WebIcon>;
-    collapseIcon?: DynamicValue<WebIcon>;
+    expandedIcon?: DynamicValue<WebIcon>;
+    collapsedIcon?: DynamicValue<WebIcon>;
     animateIcon: boolean;
     advancedMode: boolean;
 }
@@ -35,15 +35,15 @@ export interface TreeViewPreviewProps {
     style: string;
     datasource: {} | { type: string } | null;
     headerType: HeaderTypeEnum;
-    headerContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    headerContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     headerCaption: string;
     hasChildren: boolean;
     startExpanded: boolean;
-    children: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     animate: boolean;
     showIcon: ShowIconEnum;
-    expandIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    collapseIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    expandedIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    collapsedIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
     animateIcon: boolean;
     advancedMode: boolean;
 }

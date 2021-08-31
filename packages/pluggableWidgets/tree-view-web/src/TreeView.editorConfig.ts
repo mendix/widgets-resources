@@ -15,15 +15,15 @@ export function getProperties(
     if (!values.advancedMode) {
         hidePropertiesIn(defaultProperties, values, [
             "showIcon",
-            "expandIcon",
-            "collapseIcon",
+            "expandedIcon",
+            "collapsedIcon",
             "animate",
             "animateIcon"
         ]);
     }
 
     if (values.showIcon === "no") {
-        hidePropertiesIn(defaultProperties, values, ["expandIcon", "collapseIcon"]);
+        hidePropertiesIn(defaultProperties, values, ["expandedIcon", "collapsedIcon"]);
     }
 
     if (values.headerType === "text") {
