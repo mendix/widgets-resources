@@ -1,7 +1,7 @@
 import { ValueStatus } from "mendix";
 import { createElement, FunctionComponent, useCallback } from "react";
 import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
-import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/ImageViewer/index";
+import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/Image/index";
 
 function getImageProps({
     datasource,

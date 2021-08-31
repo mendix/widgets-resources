@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { mount, render } from "enzyme";
-import { ImageViewer, ImageViewerProps } from "../ImageViewer/index";
+import { ImageViewer, ImageViewerProps } from "../Image/index";
 import { Lightbox } from "../Lightbox";
 import { ModalProps } from "react-overlays/esm/Modal";
 

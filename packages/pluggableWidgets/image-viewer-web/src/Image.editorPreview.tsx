@@ -2,7 +2,7 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
 import { ImageViewerPreviewProps } from "../typings/ImageViewerProps";
-import { ImageViewer as ImageViewerComponent } from "./components/ImageViewer/index";
+import { ImageViewer as ImageViewerComponent } from "./components/Image/index";
 
 import ImageViewerPlaceholder from "./assets/placeholder.svg";
 
@@ -58,5 +58,5 @@ export function preview(props: ImageViewerPreviewProps): ReactElement | null {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/ImageViewer.scss");
+    return require("./ui/Image.scss");
 }
