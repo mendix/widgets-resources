@@ -12,7 +12,7 @@
 /**
  * @returns {Promise.<string>}
  */
-export async function ScanBarcode(): Promise<string> {
+export async function ScanBarcode(): Promise<string | void> {
     // BEGIN USER CODE
     // Documentation https://github.com/phonegap/phonegap-plugin-barcodescanner
     return new Promise((resolve, reject) => {

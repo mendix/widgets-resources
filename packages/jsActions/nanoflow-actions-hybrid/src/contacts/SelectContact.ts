@@ -12,7 +12,7 @@
 /**
  * @returns {Promise.<MxObject>}
  */
-export async function SelectContact(): Promise<mendix.lib.MxObject> {
+export async function SelectContact(): Promise<mendix.lib.MxObject | void> {
     // BEGIN USER CODE
     // Documentation: https://github.com/apache/cordova-plugin-contacts
     return new Promise((resolve, reject) => {
