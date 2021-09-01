@@ -5,13 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.5.0] - 2021-09-01
+
 ### Added
 - We added support for icon and tile images. Now you can use an image file instead of `<icon>` in your `MyWidget.xml`. In order to use, please make sure you follow the pattern `src/MyWidget.icon.png` (24x24px) and `src/MyWidget.tile.png` (256x192px)
 
 ### Changed
 - We fixed the formatting of Preview typings
 - We fixed the Preview typings for Icon property.
-- We downgraded the version of `rollup-plugin-sass` to 1.2.4 in order to prevent a library version issue throwing `The "path" argument must be of type string. Received an instance of RegExp`.
+- We defined a fixed version of `typescript` to 4.3.5 in order to prevent processes to be hanging after creates the widget mpk. See issue [here](https://github.com/rollup/rollup/issues/4213)
+- We updated Mendix library to 9.5.0
 
 ## [9.4.3] - 2021-08-12
 

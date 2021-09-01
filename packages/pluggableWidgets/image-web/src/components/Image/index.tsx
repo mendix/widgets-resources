@@ -1,10 +1,10 @@
 import { cloneElement, createElement, CSSProperties, FunctionComponent, useCallback } from "react";
-import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum, DisplayAsEnum } from "../../../typings/ImageViewerProps";
+import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum, DisplayAsEnum } from "../../../typings/ImageProps";
 import { useLightboxState } from "../../utils/lightboxState";
 import { ImageViewerUi, ImageViewerContentProps } from "./ui";
 import { Lightbox, LightboxProps } from "../Lightbox";
 
-import "../../ui/ImageViewer.scss";
+import "../../ui/Image.scss";
 
 export type ImageViewerImageProps = {
     type: "image" | "icon";

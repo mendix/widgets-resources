@@ -1,7 +1,7 @@
 import { ValueStatus } from "mendix";
 import { createElement, FunctionComponent, useCallback } from "react";
-import { ImageViewerContainerProps } from "../typings/ImageViewerProps";
-import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/ImageViewer/index";
+import { ImageContainerProps } from "../typings/ImageProps";
+import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/Image/index";
 
 function getImageProps({
     datasource,
@@ -9,7 +9,7 @@ function getImageProps({
     imageObject,
     imageUrl,
     defaultImageDynamic
-}: ImageViewerContainerProps): ImageViewerImageProps {
+}: ImageContainerProps): ImageViewerImageProps {
     const fallback: ImageViewerImageProps = {
         type: "image",
         image: undefined
@@ -62,7 +62,7 @@ function getImageProps({
     }
 }
 
-export const ImageViewer: FunctionComponent<ImageViewerContainerProps> = props => {
+export const ImageViewer: FunctionComponent<ImageContainerProps> = props => {
     const onClick = useCallback(() => props.onClick?.execute(), [props.onClick]);
     const { type, image } = getImageProps(props);
 

@@ -7,10 +7,10 @@ import {
     StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
-import { DatasourceEnum, ImageViewerPreviewProps } from "../typings/ImageViewerProps";
+import { DatasourceEnum, ImagePreviewProps } from "../typings/ImageProps";
 import StructurePreviewImageViewerSvg from "./assets/placeholder.svg";
 
-type ImageViewPreviewPropsKey = keyof ImageViewerPreviewProps;
+type ImageViewPreviewPropsKey = keyof ImagePreviewProps;
 
 const dataSourceProperties: ImageViewPreviewPropsKey[] = ["imageObject", "imageUrl", "imageIcon"];
 
@@ -40,7 +40,7 @@ function reorderTabsForStudio(tabs: Properties): void {
 }
 
 export function getProperties(
-    values: ImageViewerPreviewProps,
+    values: ImagePreviewProps,
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
@@ -88,7 +88,7 @@ export function getPreview(): StructurePreviewProps | null {
     };
 }
 
-export function check(values: ImageViewerPreviewProps): Problem[] {
+export function check(values: ImagePreviewProps): Problem[] {
     const errors: Problem[] = [];
 
     if (values.datasource === "imageUrl" && !values.imageUrl) {
