@@ -43,9 +43,9 @@ export function PieDoughnutChart({
         let index = 0;
 
         return series.map(_series => {
-            const configuredStyle = !_series.stylingKey
-                ? null
-                : style.slices?.customStyles?.[_series.stylingKey]?.slice?.color;
+            const configuredStyle = _series.stylingKey
+                ? style.slices?.customStyles?.[_series.stylingKey]?.slice?.color
+                : null;
             if (typeof configuredStyle !== "string") {
                 const color = sliceColorPalette?.[index] || DEFAULT_SLICE_COLOUR;
                 if (sliceColorPalette) {
@@ -108,26 +108,25 @@ export function PieDoughnutChart({
 }
 
 function createLabelStyleGetters(...keys: string[]): VictoryStyleObject {
-    const result = {};
-    for (const key of keys) {
-        Object.assign(result, {
-            [key]: ({ datum }: CallbackArgs) => datum.labelStyle[key]
-        });
-    }
-
-    return result;
+    return keys.reduce(
+        (acc, key) => Object.assign(acc, { [key]: ({ datum }: CallbackArgs) => datum.labelStyle[key] }),
+        {}
+    );
 }
 
-function aggregateGridPadding(style?: SlicesStyle): Option<BlockProps> {
-    if (!style) {
-        return;
-    }
-
-    const { padding, paddingHorizontal, paddingVertical, paddingTop, paddingRight, paddingBottom, paddingLeft } = style;
+function aggregateGridPadding({
+    padding,
+    paddingHorizontal,
+    paddingVertical,
+    paddingTop,
+    paddingRight,
+    paddingBottom,
+    paddingLeft
+}: SlicesStyle = {}): BlockProps {
     return {
-        top: paddingTop ?? paddingVertical ?? padding,
-        right: paddingRight ?? paddingHorizontal ?? padding,
-        bottom: paddingBottom ?? paddingVertical ?? padding,
-        left: paddingLeft ?? paddingHorizontal ?? padding
+        top: paddingTop ?? paddingVertical ?? padding ?? 0,
+        right: paddingRight ?? paddingHorizontal ?? padding ?? 0,
+        bottom: paddingBottom ?? paddingVertical ?? padding ?? 0,
+        left: paddingLeft ?? paddingHorizontal ?? padding ?? 0
     };
 }

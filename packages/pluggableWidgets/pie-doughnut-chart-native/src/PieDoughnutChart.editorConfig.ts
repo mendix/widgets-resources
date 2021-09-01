@@ -7,19 +7,9 @@ import DoughnutWithLabels from "./assets/doughnut-w-labels.svg";
 import DoughnutWithoutLabels from "./assets/doughnut-wo-labels.svg";
 
 export function getPreview(values: PieDoughnutChartPreviewProps): StructurePreviewProps {
-    if (values.presentation === "pie") {
-        if (values.showLabels) {
-            return result(PieWithLabels);
-        }
-
-        return result(PieWithoutLabels);
-    }
-
-    if (values.showLabels) {
-        return result(DoughnutWithLabels);
-    }
-
-    return result(DoughnutWithoutLabels);
+    return values.presentation === "pie"
+        ? result(values.showLabels ? PieWithLabels : PieWithoutLabels)
+        : result(values.showLabels ? DoughnutWithLabels : DoughnutWithoutLabels);
 
     function result(svg: string): StructurePreviewProps {
         return {

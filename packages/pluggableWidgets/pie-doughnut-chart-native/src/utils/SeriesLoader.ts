@@ -30,13 +30,7 @@ export function useSeries(series: SeriesType[]): ChartSeries[] | null {
 function loadStaticSeries(series: SeriesType): ChartSeries | null {
     const dataPointsExtraction = extractDataPoints(series);
 
-    if (!dataPointsExtraction) {
-        return null;
-    }
-
-    return {
-        slices: dataPointsExtraction
-    };
+    return dataPointsExtraction ? { slices: dataPointsExtraction } : null;
 
     function extractDataPoints(series: SeriesType): Array<Slice<string, number>> | null {
         if (!series.dataSource.items) {
