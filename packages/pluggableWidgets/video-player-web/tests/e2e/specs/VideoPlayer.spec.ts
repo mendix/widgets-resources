@@ -89,7 +89,7 @@ describe("External video", () => {
         const screenshotElem = $(".widget-video-player");
         screenshotElem.waitForDisplayed({ timeout: 5000 });
         browser.saveElement(screenshotElem, "videoPlayerExternalPoster");
-        expect(browser.checkElement(screenshotElem, "videoPlayerExternalPoster")).toEqual(0);
+        expect(browser.checkElement(screenshotElem, "videoPlayerExternalPoster")).toBeLessThan(0.15);
     });
 });
 
