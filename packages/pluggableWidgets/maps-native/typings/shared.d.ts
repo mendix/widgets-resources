@@ -1,4 +1,3 @@
-
 export interface ModeledMarker {
     address?: string;
     latitude?: number;

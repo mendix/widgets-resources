@@ -8,7 +8,13 @@ import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
-export type HeaderHeadingEnum = "headingOne" | "headingTwo" | "headingThree" | "headingFour" | "headingFive" | "headingSix";
+export type HeaderHeadingEnum =
+    | "headingOne"
+    | "headingTwo"
+    | "headingThree"
+    | "headingFour"
+    | "headingFive"
+    | "headingSix";
 
 export type InitialCollapsedStateEnum = "expanded" | "collapsed" | "dynamic";
 
@@ -69,9 +75,9 @@ export interface AccordionPreviewProps {
     expandBehavior: ExpandBehaviorEnum;
     animate: boolean;
     showIcon: ShowIconEnum;
-    icon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    expandIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    collapseIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    expandIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    collapseIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     animateIcon: boolean;
     advancedMode: boolean;
 }
