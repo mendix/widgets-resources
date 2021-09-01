@@ -1,47 +1,47 @@
-import { shallow } from "enzyme";
+import { render } from "enzyme";
 import { createElement } from "react";
 import { Table, TableProps } from "../Table";
 import { ObjectItem } from "mendix";
 
 describe("Table", () => {
     it("renders the structure correctly", () => {
-        const component = shallow(<Table {...mockTableProps()} />);
+        const component = render(<Table {...mockTableProps()} />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with sorting", () => {
-        const component = shallow(<Table {...mockTableProps()} columnsSortable />);
+        const component = render(<Table {...mockTableProps()} columnsSortable />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with resizing", () => {
-        const component = shallow(<Table {...mockTableProps()} columnsResizable />);
+        const component = render(<Table {...mockTableProps()} columnsResizable />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with dragging", () => {
-        const component = shallow(<Table {...mockTableProps()} columnsDraggable />);
+        const component = render(<Table {...mockTableProps()} columnsDraggable />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with filtering", () => {
-        const component = shallow(<Table {...mockTableProps()} columnsFilterable />);
+        const component = render(<Table {...mockTableProps()} columnsFilterable />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with hiding", () => {
-        const component = shallow(<Table {...mockTableProps()} columnsHidable />);
+        const component = render(<Table {...mockTableProps()} columnsHidable />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with paging", () => {
-        const component = shallow(<Table {...mockTableProps()} paging />);
+        const component = render(<Table {...mockTableProps()} paging />);
 
         expect(component).toMatchSnapshot();
     });
@@ -60,13 +60,13 @@ describe("Table", () => {
                 alignment: "left" as const
             }
         ];
-        const component = shallow(<Table {...mockTableProps()} columnsFilterable columns={columns} />);
+        const component = render(<Table {...mockTableProps()} columnsFilterable columns={columns} />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with empty placeholder", () => {
-        const component = shallow(
+        const component = render(
             <Table {...mockTableProps()} emptyPlaceholderRenderer={renderWrapper => renderWrapper(<div />)} />
         );
 
@@ -97,7 +97,7 @@ describe("Table", () => {
             }
         ];
 
-        const component = shallow(
+        const component = render(
             <Table
                 {...mockTableProps()}
                 columns={columns}
@@ -109,7 +109,7 @@ describe("Table", () => {
     });
 
     it("renders the structure correctly with dynamic row class", () => {
-        const component = shallow(<Table {...mockTableProps()} rowClass={() => "myclass"} />);
+        const component = render(<Table {...mockTableProps()} rowClass={() => "myclass"} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -127,13 +127,13 @@ describe("Table", () => {
                 alignment: "center" as const
             }
         ];
-        const component = shallow(<Table {...mockTableProps()} preview columns={columns} />);
+        const component = render(<Table {...mockTableProps()} preview columns={columns} />);
 
         expect(component).toMatchSnapshot();
     });
 
     it("renders the structure correctly with header wrapper", () => {
-        const component = shallow(
+        const component = render(
             <Table
                 {...mockTableProps()}
                 headerWrapperRenderer={(_, header) => <div className="my-custom-header">{header}</div>}

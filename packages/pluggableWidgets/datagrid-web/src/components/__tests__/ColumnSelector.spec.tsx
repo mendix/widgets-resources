@@ -1,4 +1,4 @@
-import { shallow } from "enzyme";
+import { render } from "enzyme";
 import { createElement } from "react";
 import { render as renderTestingLib, fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -10,7 +10,7 @@ jest.useFakeTimers();
 
 describe("Column Selector", () => {
     it("renders the structure correctly", () => {
-        const component = shallow(<ColumnSelector {...mockColumnSelectorProps()} />);
+        const component = render(<ColumnSelector {...mockColumnSelectorProps()} />);
 
         expect(component).toMatchSnapshot();
     });

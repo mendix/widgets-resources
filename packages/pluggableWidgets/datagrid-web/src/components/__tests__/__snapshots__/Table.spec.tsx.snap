@@ -2,97 +2,62 @@
 
 exports[`Table renders the structure correctly 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -100,98 +65,62 @@ exports[`Table renders the structure correctly 1`] = `
 
 exports[`Table renders the structure correctly for preview when no header is provided 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-center"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "center",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        preview={true}
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "center",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label=""
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title=""
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-center"
+              id="0"
+            >
+              <span>
+                 
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -199,187 +128,89 @@ exports[`Table renders the structure correctly for preview when no header is pro
 
 exports[`Table renders the structure correctly with column alignments 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr 1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr 1fr"
     >
-      <Header
-        className="align-column-center"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "center",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "center",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-            Object {
-              "accessor": "item",
-              "alignment": "right",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test 2",
-              "hidden": false,
-              "id": "1",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
-      <Header
-        className="align-column-right"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "right",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test 2",
-            "hidden": false,
-            "id": "1",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_1"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "center",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-            Object {
-              "accessor": "item",
-              "alignment": "right",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test 2",
-              "hidden": false,
-              "id": "1",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-center"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="Test 2"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test 2"
+        >
+          <div
+            class="column-container"
+            id="1"
+          >
+            <div
+              class="column-header align-column-right"
+              id="1"
+            >
+              <span>
+                Test 2
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
         <div
-          className="td td-borders"
-          key="row_0_cell_1"
+          class="td td-borders"
+          role="cell"
         >
           Test 2
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -387,103 +218,66 @@ exports[`Table renders the structure correctly with column alignments 1`] = `
 
 exports[`Table renders the structure correctly with custom filtering 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": <input
-              type="text"
-              value="dummy"
-            />,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={true}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": <input
-                type="text"
-                value="dummy"
-              />,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+            <input
+              type="text"
+              value="dummy"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -491,97 +285,62 @@ exports[`Table renders the structure correctly with custom filtering 1`] = `
 
 exports[`Table renders the structure correctly with dragging 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={true}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -589,97 +348,62 @@ exports[`Table renders the structure correctly with dragging 1`] = `
 
 exports[`Table renders the structure correctly with dynamic row class 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr myclass"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr myclass"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -687,97 +411,62 @@ exports[`Table renders the structure correctly with dynamic row class 1`] = `
 
 exports[`Table renders the structure correctly with empty placeholder 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -785,103 +474,66 @@ exports[`Table renders the structure correctly with empty placeholder 1`] = `
 
 exports[`Table renders the structure correctly with filtering 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": <input
-              type="text"
-              value="dummy"
-            />,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={true}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": <input
-                type="text"
-                value="dummy"
-              />,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+            <input
+              type="text"
+              value="dummy"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -889,101 +541,66 @@ exports[`Table renders the structure correctly with filtering 1`] = `
 
 exports[`Table renders the structure correctly with header wrapper 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
       <div
-        className="my-custom-header"
-      >
-        <Header
-          className="align-column-left"
-          column={
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            }
-          }
-          dragOver=""
-          draggable={false}
-          filterable={false}
-          hidable={false}
-          isDragging={false}
-          key="headers_column_0"
-          resizable={false}
-          resizer={
-            <ColumnResizer
-              onResizeEnds={[Function]}
-              setColumnWidth={[Function]}
-            />
-          }
-          setColumnOrder={[Function]}
-          setDragOver={[Function]}
-          setIsDragging={[Function]}
-          setSortBy={[Function]}
-          sortBy={Array []}
-          sortable={false}
-          visibleColumns={
-            Array [
-              Object {
-                "accessor": "item",
-                "alignment": "left",
-                "canDrag": false,
-                "canHide": false,
-                "canResize": false,
-                "canSort": false,
-                "customFilter": null,
-                "header": "Test",
-                "hidden": false,
-                "id": "0",
-                "weight": 1,
-                "width": "autoFill",
-              },
-            ]
-          }
-        />
-      </div>
-      <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          class="my-custom-header"
+        >
+          <div
+            aria-label="Test"
+            class="th"
+            role="columnheader"
+            style="cursor:unset"
+            title="Test"
+          >
+            <div
+              class="column-container"
+              id="0"
+            >
+              <div
+                class="column-header align-column-left"
+                id="0"
+              >
+                <span>
+                  Test
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -991,122 +608,97 @@ exports[`Table renders the structure correctly with header wrapper 1`] = `
 
 exports[`Table renders the structure correctly with hiding 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr fit-content(50px)",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr fit-content(50px)"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={true}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
-      <ColumnSelector
-        columns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-        hiddenColumns={Array []}
-        setHiddenColumns={[Function]}
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-label="Column selector"
+          class="th column-selector"
+          role="columnheader"
+          title="Column selector"
+        >
+          <div
+            class="column-selector-content"
+          >
+            <button
+              aria-label="Column selector"
+              class="btn btn-default column-selector-button"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-eye fa-w-18 "
+                data-icon="eye"
+                data-prefix="far"
+                focusable="false"
+                role="img"
+                viewBox="0 0 576 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M288 144a110.94 110.94 0 0 0-31.24 5 55.4 55.4 0 0 1 7.24 27 56 56 0 0 1-56 56 55.4 55.4 0 0 1-27-7.24A111.71 111.71 0 1 0 288 144zm284.52 97.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400c-98.65 0-189.09-55-237.93-144C98.91 167 189.34 112 288 112s189.09 55 237.93 144C477.1 345 386.66 400 288 400z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
         <div
-          className="td column-selector td-borders"
+          aria-hidden="true"
+          class="td column-selector td-borders"
         />
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -1114,107 +706,109 @@ exports[`Table renders the structure correctly with hiding 1`] = `
 
 exports[`Table renders the structure correctly with paging 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={false}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     >
-      <Pagination
-        canNextPage={false}
-        canPreviousPage={true}
-        gotoPage={[Function]}
-        nextPage={[Function]}
-        page={1}
-        pageSize={10}
-        previousPage={[Function]}
-      />
+      <div
+        aria-label="Pagination"
+        class="pagination-bar"
+        role="pagination"
+      >
+        <button
+          aria-label="Go to first page"
+          class="btn pagination-button"
+        >
+          <span
+            aria-hidden="true"
+            class="glyphicon glyphicon-step-backward"
+          />
+        </button>
+        <button
+          aria-label="Go to previous page"
+          class="btn pagination-button"
+        >
+          <span
+            aria-hidden="true"
+            class="glyphicon glyphicon-backward"
+          />
+        </button>
+        <span
+          class="sr-only"
+          tabindex="0"
+        >
+          Currently showing 11 to 20 
+        </span>
+        <div
+          aria-hidden="true"
+          class="paging-status"
+        >
+          11 to 20 
+        </div>
+        <button
+          aria-label="Go to next page"
+          class="btn pagination-button"
+          disabled=""
+        >
+          <span
+            aria-hidden="true"
+            class="glyphicon glyphicon-forward"
+          />
+        </button>
+      </div>
     </div>
   </div>
 </div>
@@ -1222,97 +816,62 @@ exports[`Table renders the structure correctly with paging 1`] = `
 
 exports[`Table renders the structure correctly with resizing 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={true}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={false}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>
@@ -1320,97 +879,62 @@ exports[`Table renders the structure correctly with resizing 1`] = `
 
 exports[`Table renders the structure correctly with sorting 1`] = `
 <div
-  className="test"
+  class="test"
 >
   <div
-    className="table"
+    class="table"
     role="table"
   >
     <div
-      className="table-header"
-    />
-    <InfiniteBody
-      className="table-content"
-      hasMoreItems={false}
-      isInfinite={true}
+      class="table-header"
       role="rowgroup"
-      setPage={[MockFunction]}
-      style={
-        Object {
-          "gridTemplateColumns": "1fr",
-        }
-      }
+    />
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
     >
-      <Header
-        className="align-column-left"
-        column={
-          Object {
-            "accessor": "item",
-            "alignment": "left",
-            "canDrag": false,
-            "canHide": false,
-            "canResize": false,
-            "canSort": false,
-            "customFilter": null,
-            "header": "Test",
-            "hidden": false,
-            "id": "0",
-            "weight": 1,
-            "width": "autoFill",
-          }
-        }
-        dragOver=""
-        draggable={false}
-        filterable={false}
-        hidable={false}
-        isDragging={false}
-        key="headers_column_0"
-        resizable={false}
-        resizer={
-          <ColumnResizer
-            onResizeEnds={[Function]}
-            setColumnWidth={[Function]}
-          />
-        }
-        setColumnOrder={[Function]}
-        setDragOver={[Function]}
-        setIsDragging={[Function]}
-        setSortBy={[Function]}
-        sortBy={Array []}
-        sortable={true}
-        visibleColumns={
-          Array [
-            Object {
-              "accessor": "item",
-              "alignment": "left",
-              "canDrag": false,
-              "canHide": false,
-              "canResize": false,
-              "canSort": false,
-              "customFilter": null,
-              "header": "Test",
-              "hidden": false,
-              "id": "0",
-              "weight": 1,
-              "width": "autoFill",
-            },
-          ]
-        }
-      />
       <div
-        className="tr"
-        key="row_0"
+        class="tr"
+        role="row"
       >
         <div
-          className="td td-borders"
-          key="row_0_cell_0"
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
         >
           Test
         </div>
       </div>
-    </InfiniteBody>
+    </div>
     <div
-      className="table-footer"
+      class="table-footer"
+      role="rowgroup"
     />
   </div>
 </div>

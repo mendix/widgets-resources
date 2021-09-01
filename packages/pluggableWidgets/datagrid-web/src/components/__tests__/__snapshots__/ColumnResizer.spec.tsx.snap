@@ -2,12 +2,11 @@
 
 exports[`Column Resizer renders the structure correctly 1`] = `
 <div
-  className="column-resizer"
-  onMouseDown={[Function]}
-  onTouchStart={[Function]}
+  aria-hidden="true"
+  class="column-resizer"
 >
   <div
-    className="column-resizer-bar"
+    class="column-resizer-bar"
   />
 </div>
 `;
