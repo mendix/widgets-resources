@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.5.1] - 2021-09-02
+
+### Changed
+- We fixed an issue with paths containing spaces on windows causing tests (unit and e2e) to throw `Could not find a config file based on provided values`.
+
 ## [9.5.0] - 2021-09-01
 
 ### Added

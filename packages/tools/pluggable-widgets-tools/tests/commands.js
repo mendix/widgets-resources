@@ -49,14 +49,17 @@ async function main() {
     const workDirSemaphore = new Semaphore(PARALLELISM);
     const failures = (
         await Promise.all(
-            CONFIGS.map(async config => {
+            CONFIGS.map(async (config, index) => {
                 const [, release] = await workDirSemaphore.acquire();
                 let workDir;
                 try {
                     workDir = workDirs.pop();
                     if (!workDir) {
-                        workDir = join(tempdir(), `pwt_test_${Math.round(Math.random() * 10000)}`);
-                        mkdir(workDir);
+                        workDir = join(
+                            index === 0 ? join(tempdir(), "spaced folder") : tempdir(),
+                            `pwt_test_${Math.round(Math.random() * 10000)}`
+                        );
+                        mkdir("-p", workDir);
                     }
                     await runTest(workDir, ...config);
                     return undefined;
