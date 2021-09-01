@@ -62,6 +62,9 @@ export function getProperties(
     if (values.showEmptyPlaceholder === "none") {
         hidePropertyIn(defaultProperties, values, "emptyPlaceholder");
     }
+    if (!values.showHeaderFilters) {
+        hidePropertyIn(defaultProperties, values, "filterList");
+    }
     if (!values.advanced) {
         hidePropertiesIn(defaultProperties, values, [
             "pagination",
