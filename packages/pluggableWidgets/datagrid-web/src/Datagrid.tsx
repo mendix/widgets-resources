@@ -190,6 +190,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                 ),
                 [FilterContext, customFiltersState, filterList, multipleInitialFilters, props.filtersPlaceholder]
             )}
+            name={props.name}
             numberOfItems={props.datasource.totalCount}
             onSettingsChange={props.onConfigurationChange ? onConfigurationChange : undefined}
             page={currentPage}
