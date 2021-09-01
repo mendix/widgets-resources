@@ -236,12 +236,12 @@ export class Maps extends Component<Props, State> {
                 throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
             return Promise.resolve({ latitude, longitude });
-        }
-
-        if (address) {
+        } else if (address) {
             return this.geocoder.geocode(address);
         } else {
-            throw new Error(`No address provided.`);
+            throw new Error(
+                `Address: "${address}", Latitude: "${latitude}", Longitude: "${longitude}". None of these values could be parsed to coordinates.`
+            );
         }
     }
 }
