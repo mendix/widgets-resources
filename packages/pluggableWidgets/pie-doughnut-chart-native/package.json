@@ -15,7 +15,7 @@
     "build": "pluggable-widgets-tools build:native",
     "release": "pluggable-widgets-tools release:native",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "pluggable-widgets-tools test:unit:native --passWithNoTests",
+    "test": "pluggable-widgets-tools test:unit:native",
     "version": "npm run release"
   },
   "dependencies": {

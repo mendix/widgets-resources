@@ -69,7 +69,11 @@ export function PieDoughnutChart({
 
     return (
         <View style={{ ...style.container }}>
-            <View onLayout={updateChartDimensions} style={{ justifyContent: "center", alignItems: "center" }}>
+            <View
+                onLayout={updateChartDimensions}
+                style={{ justifyContent: "center", alignItems: "center" }}
+                testID="innerView"
+            >
                 {chartDimensions ? (
                     <VictoryPie
                         padding={aggregateGridPadding(style.slices)}
