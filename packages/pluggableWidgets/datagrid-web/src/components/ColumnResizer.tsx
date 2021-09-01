@@ -67,7 +67,13 @@ export function ColumnResizer({ minWidth = 50, setColumnWidth, onResizeEnds }: C
     }, [onMouseMove, onEndDrag]);
 
     return (
-        <div ref={resizerReference} className="column-resizer" onMouseDown={onStartDrag} onTouchStart={onStartDrag}>
+        <div
+            aria-hidden
+            ref={resizerReference}
+            className="column-resizer"
+            onMouseDown={onStartDrag}
+            onTouchStart={onStartDrag}
+        >
             <div className="column-resizer-bar" />
         </div>
     );

@@ -1,4 +1,14 @@
-import { createElement, Dispatch, ReactElement, SetStateAction, DragEvent, DragEventHandler, useCallback } from "react";
+import {
+    createElement,
+    Dispatch,
+    ReactElement,
+    SetStateAction,
+    DragEvent,
+    DragEventHandler,
+    KeyboardEvent,
+    useCallback,
+    HTMLAttributes
+} from "react";
 import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
@@ -68,8 +78,22 @@ export function Header(props: HeaderProps): ReactElement {
         }
     };
 
+    const sortProps: HTMLAttributes<HTMLDivElement> = {
+        onClick: onSortBy,
+        onKeyDown: (e: KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSortBy();
+            }
+        },
+        role: "button",
+        tabIndex: 0
+    };
+
     return (
         <div
+            aria-label={caption}
+            aria-sort={canSort ? (isSorted ? (isSortedDesc ? "descending" : "ascending") : "none") : undefined}
             className={classNames("th", {
                 "hidden-column-preview": props.preview && props.hidable && props.column.hidden
             })}
@@ -88,23 +112,11 @@ export function Header(props: HeaderProps): ReactElement {
                 <div
                     className={classNames("column-header", canSort ? "clickable" : "", props.className)}
                     id={props.column.id}
-                    onClick={canSort ? onSortBy : undefined}
-                    onKeyDown={
-                        canSort
-                            ? e => {
-                                  if (e.key === "Enter" || e.key === " ") {
-                                      e.preventDefault();
-                                      onSortBy();
-                                  }
-                              }
-                            : undefined
-                    }
-                    role={canSort ? "button" : undefined}
                     style={{ pointerEvents: props.isDragging ? "none" : undefined }}
-                    tabIndex={canSort ? 0 : undefined}
+                    {...(canSort ? sortProps : undefined)}
                 >
                     <span>{caption.length > 0 ? caption : "\u00a0"}</span>
-                    {sortIcon && <FontAwesomeIcon icon={sortIcon} />}
+                    {sortIcon && <FontAwesomeIcon aria-hidden icon={sortIcon} />}
                 </div>
                 {props.filterable && props.column.customFilter ? props.column.customFilter : null}
             </div>

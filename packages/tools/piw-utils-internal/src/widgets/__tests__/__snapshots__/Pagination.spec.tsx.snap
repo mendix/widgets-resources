@@ -2,32 +2,47 @@
 
 exports[`Pagination renders the current page correctly with server side paging 1`] = `
 <div
+  aria-label="Pagination"
   class="pagination-bar"
+  role="pagination"
 >
   <button
+    aria-label="Go to first page"
     class="btn pagination-button"
     disabled=""
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-step-backward"
     />
   </button>
   <button
+    aria-label="Go to previous page"
     class="btn pagination-button"
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-backward"
     />
   </button>
+  <span
+    class="sr-only"
+    tabindex="0"
+  >
+    Currently showing 1 to 5 
+  </span>
   <div
+    aria-hidden="true"
     class="paging-status"
   >
     1 to 5 
   </div>
   <button
+    aria-label="Go to next page"
     class="btn pagination-button"
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-forward"
     />
   </button>
@@ -38,39 +53,56 @@ exports[`Pagination renders the current page correctly with without pages 1`] = 
 
 exports[`Pagination renders the structure correctly 1`] = `
 <div
+  aria-label="Pagination"
   class="pagination-bar"
+  role="pagination"
 >
   <button
+    aria-label="Go to first page"
     class="btn pagination-button"
     disabled=""
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-step-backward"
     />
   </button>
   <button
+    aria-label="Go to previous page"
     class="btn pagination-button"
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-backward"
     />
   </button>
+  <span
+    class="sr-only"
+    tabindex="0"
+  >
+    Currently showing 1 to 5 of 25
+  </span>
   <div
+    aria-hidden="true"
     class="paging-status"
   >
     1 to 5 of 25
   </div>
   <button
+    aria-label="Go to next page"
     class="btn pagination-button"
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-forward"
     />
   </button>
   <button
+    aria-label="Go to last page"
     class="btn pagination-button"
   >
     <span
+      aria-hidden="true"
       class="glyphicon glyphicon-step-forward"
     />
   </button>

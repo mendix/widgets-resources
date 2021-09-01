@@ -10,6 +10,12 @@ export interface PaginationProps {
     pageSize: number;
     previousPage: () => void;
     setPaginationIndex?: Dispatch<SetStateAction<number>>;
+    labelNextPage?: string;
+    labelPreviousPage?: string;
+    labelFirstPage?: string;
+    labelLastPage?: string;
+    labelPagination?: string;
+    labelPagingStatus?: string;
 }
 
 export function Pagination(props: PaginationProps): ReactElement | null {
@@ -30,8 +36,12 @@ export function Pagination(props: PaginationProps): ReactElement | null {
         return null;
     }
 
+    const pagingStatus = `${initialItem} to ${lastItem} ${
+        hasLastPage ? `of ${props.numberOfItems ?? (numberOfPages ?? 1) * props.pageSize}` : ""
+    }`;
+
     return (
-        <div className="pagination-bar">
+        <div aria-label={props.labelPagination ?? "Pagination"} className="pagination-bar" role="pagination">
             <button
                 className="btn pagination-button"
                 disabled={props.page === 0}
@@ -39,8 +49,9 @@ export function Pagination(props: PaginationProps): ReactElement | null {
                     props.gotoPage(0);
                     setPageIndex(0);
                 })}
+                aria-label={props.labelFirstPage ?? "Go to first page"}
             >
-                <span className="glyphicon glyphicon-step-backward" />
+                <span aria-hidden className="glyphicon glyphicon-step-backward" />
             </button>
             <button
                 className="btn pagination-button"
@@ -49,14 +60,18 @@ export function Pagination(props: PaginationProps): ReactElement | null {
                     props.previousPage();
                     setPageIndex(props.page - 1);
                 })}
+                aria-label={props.labelPreviousPage ?? "Go to previous page"}
             >
-                <span className="glyphicon glyphicon-backward" />
+                <span aria-hidden className="glyphicon glyphicon-backward" />
             </button>
-            <div className="paging-status">
-                {initialItem} to {lastItem}{" "}
-                {hasLastPage ? `of ${props.numberOfItems ?? (numberOfPages ?? 1) * props.pageSize}` : ""}
+            <span className="sr-only" tabIndex={0}>
+                {props.labelPagingStatus ?? "Currently showing"} {pagingStatus}
+            </span>
+            <div aria-hidden className="paging-status">
+                {pagingStatus}
             </div>
             <button
+                aria-label={props.labelNextPage ?? "Go to next page"}
                 className="btn pagination-button"
                 disabled={!props.canNextPage}
                 {...getEvents(() => {
@@ -64,10 +79,11 @@ export function Pagination(props: PaginationProps): ReactElement | null {
                     setPageIndex(props.page + 1);
                 })}
             >
-                <span className="glyphicon glyphicon-forward" />
+                <span aria-hidden className="glyphicon glyphicon-forward" />
             </button>
             {hasLastPage && (
                 <button
+                    aria-label={props.labelLastPage ?? "Go to last page"}
                     className="btn pagination-button"
                     disabled={props.page === lastPage}
                     {...getEvents(() => {
@@ -75,7 +91,7 @@ export function Pagination(props: PaginationProps): ReactElement | null {
                         setPageIndex(lastPage);
                     })}
                 >
-                    <span className="glyphicon glyphicon-step-forward" />
+                    <span aria-hidden className="glyphicon glyphicon-step-forward" />
                 </button>
             )}
         </div>
