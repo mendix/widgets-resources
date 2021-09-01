@@ -18,7 +18,6 @@ $screen-lg: 992px !default;
 }
 
 .widget-gallery {
-
     .widget-gallery-items {
         display: grid;
         grid-gap: 8px;
@@ -27,21 +26,21 @@ $screen-lg: 992px !default;
         Desktop widths
         */
         @media screen and (min-width: $screen-lg) {
-            @include grid-items(12, 'lg');
+            @include grid-items(12, "lg");
         }
 
         /*
         Tablet widths
         */
         @media screen and (min-width: $screen-md) and (max-width: ($screen-lg - 1px)) {
-            @include grid-items(12, 'md');
+            @include grid-items(12, "md");
         }
 
         /*
         Phone widths
         */
         @media screen and (max-width: ($screen-md - 1)) {
-            @include grid-items(12, 'sm');
+            @include grid-items(12, "sm");
         }
     }
 
@@ -64,12 +63,12 @@ $screen-lg: 992px !default;
     .widget-gallery-filter,
     .widget-gallery-empty,
     .widget-gallery-pagination {
-        flex: 1
+        flex: 1;
     }
 
     /**
     Helper classes
      */
-    @include grid-span(12, 'column');
-    @include grid-span(12, 'row');
+    @include grid-span(12, "column");
+    @include grid-span(12, "row");
 }
