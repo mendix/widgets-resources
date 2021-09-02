@@ -7,11 +7,11 @@ export function preview(props: GalleryPreviewProps): ReactElement {
     const caption =
         props.filterList.length > 0
             ? props.sortList.length > 0
-                ? "Place filter/sort widget(s) here"
-                : "Place filter widget(s) here"
+                ? "Place filter/sort widgets here"
+                : "Place filter widgets here"
             : props.sortList.length > 0
-            ? "Place sort widget(s) here"
-            : "Place widget(s) here";
+            ? "Place sort widgets here"
+            : "Place widgets here";
     const isSortableFilterable = props.filterList.length > 0 || props.sortList.length > 0;
     return (
         <GalleryComponent
@@ -36,7 +36,9 @@ export function preview(props: GalleryPreviewProps): ReactElement {
             items={items}
             itemRenderer={useCallback(
                 renderWrapper => (
-                    <props.content.renderer>{renderWrapper(null, "")}</props.content.renderer>
+                    <props.content.renderer caption="Gallery item: Place widgets here">
+                        {renderWrapper(null, "")}
+                    </props.content.renderer>
                 ),
                 [props.content]
             )}

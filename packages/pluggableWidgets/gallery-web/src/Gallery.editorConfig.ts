@@ -60,11 +60,11 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
     const filterCaption =
         values.filterList.length > 0
             ? values.sortList.length > 0
-                ? "Place filter/sort widget(s) here"
-                : "Place filter widget(s) here"
+                ? "Place filter/sort widgets here"
+                : "Place filter widgets here"
             : values.sortList.length > 0
-            ? "Place sort widget(s) here"
-            : "Place widget(s) here";
+            ? "Place sort widgets here"
+            : "Place widgets here";
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -109,7 +109,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                     {
                         type: "DropZone",
                         property: values.content,
-                        placeholder: "Place widget(s) here"
+                        placeholder: "Gallery item: Place widgets here"
                     } as DropZoneProps
                 ]
             } as RowLayoutProps,
@@ -149,7 +149,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                           {
                               type: "DropZone",
                               property: values.emptyPlaceholder,
-                              placeholder: "Empty gallery message: Place widget(s) here"
+                              placeholder: "Empty gallery message: Place widgets here"
                           } as DropZoneProps
                       ]
                   } as RowLayoutProps
