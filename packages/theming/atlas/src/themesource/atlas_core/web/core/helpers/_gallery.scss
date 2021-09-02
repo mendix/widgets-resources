@@ -56,34 +56,34 @@
             background-color: $grid-bg-striped;
         }
         .widget-gallery-item:nth-child(even) {
-            background-color: #FFF;
+            background-color: #fff;
         }
     }
 
     // Grid spacing none
     .widget-gallery.widget-gallery-gridgap-none {
-        .widget-gallery-items{
+        .widget-gallery-items {
             gap: 0;
         }
     }
 
     // Grid spacing small
     .widget-gallery.widget-gallery-gridgap-small {
-        .widget-gallery-items{
+        .widget-gallery-items {
             gap: $spacing-small;
         }
     }
 
     // Grid spacing medium
     .widget-gallery.widget-gallery-gridgap-medium {
-        .widget-gallery-items{
+        .widget-gallery-items {
             gap: $spacing-medium;
         }
     }
 
     // Grid spacing large
     .widget-gallery.widget-gallery-gridgap-large {
-        .widget-gallery-items{
+        .widget-gallery-items {
             gap: $spacing-large;
         }
     }

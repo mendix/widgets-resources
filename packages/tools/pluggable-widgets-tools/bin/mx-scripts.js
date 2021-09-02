@@ -67,17 +67,17 @@ function getRealCommand(cmd, toolsRoot) {
             return `${prettierCommand} --write`;
         case "test:unit":
         case "test:unit:web":
-            return `jest --projects ${join(toolsRoot, "test-config/jest.config.js")}`;
+            return `jest --projects "${join(toolsRoot, "test-config/jest.config.js")}"`;
         case "test:unit:native":
-            return `jest --projects ${join(toolsRoot, "test-config/jest.native.config.js")}`;
+            return `jest --projects "${join(toolsRoot, "test-config/jest.native.config.js")}"`;
         case "test:e2e":
         case "test:e2e:ts":
         case "test:e2e:js":
-            return `wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
+            return `wdio "${join(toolsRoot, "test-config/wdio.conf.js")}"`;
         case "test:e2e:web:dev":
-            return `cross-env DEBUG=true wdio ${join(toolsRoot, "test-config/wdio.conf.js")}`;
+            return `cross-env DEBUG=true wdio "${join(toolsRoot, "test-config/wdio.conf.js")}"`;
         case "test:e2e:web":
-            return `node ${join(toolsRoot, "scripts/e2e.js")} $@`;
+            return `node "${join(toolsRoot, "scripts/e2e.js")}" $@`;
         case "start:js":
         case "start:ts":
             return "echo This command has no effect, use pluggable-widgets-tools start:web instead!";

@@ -1,6 +1,6 @@
 {
-  "name": "image-viewer-web",
-  "widgetName": "ImageViewer",
+  "name": "image-web",
+  "widgetName": "Image",
   "version": "1.0.0",
   "description": "Display an image and enlarge it on click",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",

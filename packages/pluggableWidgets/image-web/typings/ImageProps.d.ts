@@ -1,5 +1,5 @@
 /**
- * This file was generated from ImageViewer.xml
+ * This file was generated from Image.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
@@ -16,7 +16,7 @@ export type HeightUnitEnum = "auto" | "pixels";
 
 export type DisplayAsEnum = "fullImage" | "thumbnail";
 
-export interface ImageViewerContainerProps {
+export interface ImageContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
@@ -38,14 +38,14 @@ export interface ImageViewerContainerProps {
     responsive: boolean;
 }
 
-export interface ImageViewerPreviewProps {
+export interface ImagePreviewProps {
     class: string;
     style: string;
     datasource: DatasourceEnum;
-    imageObject: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
-    defaultImageDynamic: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
+    imageObject: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    defaultImageDynamic: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     imageUrl: string;
-    imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    imageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     onClickType: OnClickTypeEnum;
     onClick: {} | null;
     alternativeText: string;

@@ -1,9 +1,9 @@
 import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactEventHandler } from "react";
 import classNames from "classnames";
-import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageViewerProps";
+import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageProps";
 import { LightboxProps } from "../Lightbox";
 
-import "../../ui/ImageViewer.scss";
+import "../../ui/Image.scss";
 
 function getStyle(value: string | number, type: WidthUnitEnum | HeightUnitEnum): number | string {
     // when type is auto default browser styles applies

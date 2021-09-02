@@ -60,6 +60,6 @@ export interface AccordionPreviewProps {
     collapsible: boolean;
     collapseBehavior: CollapseBehaviorEnum;
     icon: IconEnum;
-    iconCollapsed: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    iconExpanded: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    iconCollapsed: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    iconExpanded: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
 }

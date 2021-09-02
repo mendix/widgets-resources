@@ -1,14 +1,14 @@
 .widget-scroll-container {
-  display: flex;
-  position: relative;
-  flex: 1;
-  flex-direction: column;
-  align-items: stretch;
-  height: 100%;
+    display: flex;
+    position: relative;
+    flex: 1;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
 }
 
 .widget-scroll-container-wrapper {
-  position: absolute;
-  inset: 0;
-  overflow: auto;
+    position: absolute;
+    inset: 0;
+    overflow: auto;
 }
