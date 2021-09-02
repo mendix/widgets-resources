@@ -1,62 +1,128 @@
-import { createElement, Dispatch, ReactElement, SetStateAction, useRef, useState } from "react";
+import { createElement, Dispatch, ReactElement, SetStateAction, useCallback, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { useOnClickOutside } from "@mendix/piw-utils-internal";
+import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal";
 import { ColumnProperty } from "./Table";
+import { createPortal } from "react-dom";
 
 export interface ColumnSelectorProps {
     columns: ColumnProperty[];
     hiddenColumns: string[];
+    name?: string;
     setHiddenColumns: Dispatch<SetStateAction<string[]>>;
 }
 
 export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const [show, setShow] = useState(false);
-    const componentRef = useRef<HTMLDivElement>(null);
-    useOnClickOutside(componentRef, () => setShow(false));
+    const optionsRef = useRef<HTMLUListElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const position = usePositionObserver(buttonRef.current, show);
+
+    useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
+
+    const onClick = useCallback(
+        (isVisible: boolean, id: string) =>
+            props.setHiddenColumns(prev => {
+                if (!isVisible) {
+                    return prev.filter(v => v !== id);
+                } else {
+                    return [...prev, id];
+                }
+            }),
+        [props.setHiddenColumns]
+    );
+
+    const firstHidableColumnIndex = useMemo(() => props.columns.findIndex(c => c.canHide), [props.columns]);
+    const lastHidableColumnIndex = useMemo(() => props.columns.map(c => c.canHide).lastIndexOf(true), [props.columns]);
+
+    const optionsComponent = createPortal(
+        <ul
+            ref={optionsRef}
+            id={`${props.name}-column-selectors`}
+            className="column-selectors"
+            data-focusindex={0}
+            role="menu"
+            style={{
+                position: "fixed",
+                top: position?.bottom,
+                right: position?.right !== undefined ? document.body.clientWidth - position.right : undefined
+            }}
+        >
+            {props.columns.map((column: ColumnProperty, index: number) => {
+                const isVisible = !props.hiddenColumns.includes(column.id);
+                return column.canHide ? (
+                    <li
+                        key={index}
+                        onClick={e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onClick(isVisible, column.id);
+                        }}
+                        onKeyDown={e => {
+                            if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                onClick(isVisible, column.id);
+                            } else if (
+                                (e.key === "Tab" &&
+                                    (index === lastHidableColumnIndex ||
+                                        (e.shiftKey && index === firstHidableColumnIndex))) ||
+                                e.key === "Escape"
+                            ) {
+                                e.preventDefault();
+                                setShow(false);
+                                buttonRef.current?.focus();
+                            }
+                        }}
+                        role="menuitem"
+                        tabIndex={0}
+                    >
+                        <input
+                            checked={isVisible}
+                            disabled={isVisible && props.columns.length - props.hiddenColumns.length === 1}
+                            id={`${props.name}_checkbox_toggle_${index}`}
+                            type="checkbox"
+                            tabIndex={-1}
+                        />
+                        <label htmlFor={`${props.name}_checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
+                            {column.header}
+                        </label>
+                    </li>
+                ) : null;
+            })}
+        </ul>,
+        document.body
+    );
+
+    const containerClick = useCallback(() => {
+        setShow(show => !show);
+        setTimeout(() => {
+            (optionsRef.current?.querySelector("li") as HTMLElement)?.focus();
+        }, 10);
+    }, []);
+
     return (
         <div className="th column-selector">
-            <div ref={componentRef} className="column-selector-content">
+            <div className="column-selector-content">
                 <button
+                    ref={buttonRef}
                     className="btn btn-default column-selector-button"
-                    onClick={() => {
-                        setShow(show => !show);
+                    onClick={containerClick}
+                    onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            containerClick();
+                        }
                     }}
+                    aria-haspopup
+                    aria-expanded={show}
+                    aria-controls={`${props.name}-column-selectors`}
                 >
                     <FontAwesomeIcon icon={faEye} />
                 </button>
-                {show && (
-                    <ul className="column-selectors">
-                        {props.columns.map((column: ColumnProperty, index: number) => {
-                            const isVisible = !props.hiddenColumns.includes(column.id);
-                            return column.canHide ? (
-                                <li key={index}>
-                                    <input
-                                        checked={isVisible}
-                                        disabled={isVisible && props.columns.length - props.hiddenColumns.length === 1}
-                                        id={`checkbox_toggle_${index}`}
-                                        onClick={() => {
-                                            props.setHiddenColumns(prev => {
-                                                if (!isVisible) {
-                                                    prev.splice(
-                                                        prev.findIndex(v => v === column.id),
-                                                        1
-                                                    );
-                                                    return [...prev];
-                                                } else {
-                                                    return [...prev, column.id];
-                                                }
-                                            });
-                                        }}
-                                        type="checkbox"
-                                    />
-                                    <label htmlFor={`checkbox_toggle_${index}`}>{column.header}</label>
-                                </li>
-                            ) : null;
-                        })}
-                    </ul>
-                )}
             </div>
+            {show && optionsComponent}
         </div>
     );
 }

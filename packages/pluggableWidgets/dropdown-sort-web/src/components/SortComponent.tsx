@@ -1,6 +1,7 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { SortDirection, useOnClickOutside } from "@mendix/piw-utils-internal";
+import { SortDirection, useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal";
 import classNames from "classnames";
+import { createPortal } from "react-dom";
 
 export interface SortOption {
     caption: string;
@@ -31,6 +32,9 @@ export function SortComponent(props: SortComponentProps): ReactElement {
     const [direction, setDirection] = useState(props.defaultDirection ?? "asc");
 
     const componentRef = useRef<HTMLDivElement>(null);
+    const optionsRef = useRef<HTMLUListElement>(null);
+
+    const position = usePositionObserver(componentRef.current, show);
 
     const onClick = useCallback((option: SortOption) => {
         setValueInput(option.caption);
@@ -38,7 +42,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
         setShow(false);
     }, []);
 
-    useOnClickOutside(componentRef, () => setShow(false));
+    useOnClickOutside([componentRef, optionsRef], () => setShow(false));
 
     useEffect(() => {
         if (selectedSort) {
@@ -48,6 +52,58 @@ export function SortComponent(props: SortComponentProps): ReactElement {
 
     const showPlaceholder = !selectedSort || valueInput === props.emptyOptionCaption;
 
+    const optionsComponent = createPortal(
+        <ul
+            ref={optionsRef}
+            id={`${props.name}-dropdown-list`}
+            className="dropdown-list"
+            role="menu"
+            data-focusindex={0}
+            style={{ position: "fixed", width: dropdownWidth, top: position?.bottom, left: position?.left }}
+        >
+            {props.options.map((option, index) => (
+                <li
+                    className={classNames({
+                        "filter-selected": selectedSort?.value === option.value
+                    })}
+                    key={index}
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        onClick(option);
+                    }}
+                    onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            onClick(option);
+                        } else if (e.key === "Tab" && index + 1 === props.options.length) {
+                            e.preventDefault();
+                            setShow(false);
+                            componentRef.current?.querySelector("button")?.focus();
+                        } else if ((e.key === "Tab" && e.shiftKey && index === 0) || e.key === "Escape") {
+                            e.preventDefault();
+                            setShow(false);
+                            componentRef.current?.querySelector("input")?.focus();
+                        }
+                    }}
+                    role="menuitem"
+                    tabIndex={0}
+                >
+                    <div className="filter-label">{option.caption}</div>
+                </li>
+            ))}
+        </ul>,
+        document.body
+    );
+
+    const containerClick = useCallback(() => {
+        setShow(show => !show);
+        setTimeout(() => {
+            (optionsRef.current?.querySelector("li.filter-selected") as HTMLElement)?.focus();
+        }, 10);
+    }, []);
+
     return (
         <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
             <div className="dropdown-triggerer-wrapper">
@@ -55,8 +111,14 @@ export function SortComponent(props: SortComponentProps): ReactElement {
                     value={showPlaceholder ? "" : valueInput}
                     placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
                     className="form-control dropdown-triggerer"
-                    onClick={() => setShow(true)}
-                    onFocus={() => setShow(true)}
+                    onClick={containerClick}
+                    onKeyDown={e => {
+                        if (e.key === "Enter" || e.key === " ") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            containerClick();
+                        }
+                    }}
                     aria-haspopup
                     ref={inputRef => {
                         if (inputRef && inputRef.clientWidth) {
@@ -75,35 +137,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
                     onClick={() => setDirection(prev => (prev === "asc" ? "desc" : "asc"))}
                 />
             </div>
-            {show && (
-                <ul
-                    id={`${props.name}-dropdown-list`}
-                    className="dropdown-list"
-                    style={{ width: dropdownWidth }}
-                    role="menu"
-                    data-focusindex={0}
-                >
-                    {props.options.map((option, index) => (
-                        <li
-                            className={classNames({
-                                "filter-selected": selectedSort?.value === option.value
-                            })}
-                            key={index}
-                            onClick={() => onClick(option)}
-                            onKeyDown={e => {
-                                if (e.key === "Enter" || e.key === " ") {
-                                    e.preventDefault();
-                                    onClick(option);
-                                }
-                            }}
-                            role="menuitem"
-                            tabIndex={0}
-                        >
-                            <div className="filter-label">{option.caption}</div>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            {show && optionsComponent}
         </div>
     );
 }
