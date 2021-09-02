@@ -20,8 +20,8 @@ const defaultProps: TreeViewProps = {
     startExpanded: false,
     showCustomIcon: false,
     iconPlacement: "right",
-    expandIcon: null,
-    collapseIcon: null,
+    expandedIcon: null,
+    collapsedIcon: null,
     animateIcon: false,
     animateTreeViewContent: false
 };
@@ -127,18 +127,18 @@ describe("TreeView", () => {
 
     const customIconProps: Partial<TreeViewProps> = {
         showCustomIcon: true,
-        expandIcon: { type: "glyph", iconClass: "expand-icon" },
-        collapseIcon: { type: "image", iconUrl: "collapse-image" }
+        expandedIcon: { type: "glyph", iconClass: "expanded-icon" },
+        collapsedIcon: { type: "image", iconUrl: "collapsed-image" }
     };
 
-    function getExpandIconFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
+    function getExpandedIconFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
         return header.findWhere(
-            node => node.type() === "span" && node.hasClass("glyphicon") && node.hasClass("expand-icon")
+            node => node.type() === "span" && node.hasClass("glyphicon") && node.hasClass("expanded-icon")
         );
     }
 
-    function getCollapseImageFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
-        return header.findWhere(node => node.type() === "img" && node.prop("src") === "collapse-image");
+    function getCollapsedImageFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
+        return header.findWhere(node => node.type() === "img" && node.prop("src") === "collapsed-image");
     }
 
     it("shows custom expanded icon accordingly", () => {
@@ -159,8 +159,8 @@ describe("TreeView", () => {
         expect(firstTreeViewBranch).toHaveLength(1);
         expect(firstTreeViewBranch.text()).toContain("First header");
 
-        expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
-        expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+        expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+        expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
     });
 
     it("shows custom close icon accordingly", () => {
@@ -181,8 +181,8 @@ describe("TreeView", () => {
         expect(firstTreeViewBranch).toHaveLength(1);
         expect(firstTreeViewBranch.text()).toContain("First header");
 
-        expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
-        expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+        expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+        expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
     });
 
     it("doesn't show an icon when its child has no nodes", () => {
@@ -220,8 +220,8 @@ describe("TreeView", () => {
                 node.text().includes("Parent treeview")
         );
         expect(parentTreeViewHeader).toHaveLength(1);
-        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
-        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getExpandedIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getCollapsedImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
     });
 
     it("is clickable and shows an icon when its child has nodes", () => {
@@ -262,8 +262,8 @@ describe("TreeView", () => {
         expect(parentTreeViewHeader).toHaveLength(1);
         expect(parentTreeViewHeader.hasClass("widget-tree-view-branch-header-clickable")).toBe(true);
 
-        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
-        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+        expect(getExpandedIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+        expect(getCollapsedImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
     });
 
     it("does not influence the parent if it is not immediately in the chain", () => {
@@ -307,8 +307,8 @@ describe("TreeView", () => {
         expect(parentTreeViewHeader).toHaveLength(1);
         expect(parentTreeViewHeader.hasClass("widget-tree-view-branch-header-clickable")).toBe(true);
 
-        expect(getExpandIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
-        expect(getCollapseImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+        expect(getExpandedIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
+        expect(getCollapsedImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
     });
 
     it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
@@ -432,14 +432,14 @@ describe("TreeView", () => {
             const treeViewBranches = findTreeViewItems(treeView);
             const firstTreeViewBranch = treeViewBranches.at(0);
 
-            expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
-            expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+            expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+            expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
 
             firstTreeViewBranch.simulate("click");
 
             const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
-            expect(getExpandIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
-            expect(getCollapseImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
+            expect(getExpandedIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
+            expect(getCollapsedImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
             expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
         });
 
@@ -459,14 +459,14 @@ describe("TreeView", () => {
             const treeViewBranches = findTreeViewItems(treeView);
             const firstTreeViewBranch = treeViewBranches.at(0);
 
-            expect(getExpandIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
-            expect(getCollapseImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+            expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+            expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
 
             firstTreeViewBranch.simulate("click");
 
             const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
-            expect(getExpandIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
-            expect(getCollapseImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
+            expect(getExpandedIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
+            expect(getCollapsedImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
             expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
         });
     });

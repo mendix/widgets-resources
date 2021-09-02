@@ -48,8 +48,8 @@ export interface TreeViewProps extends Pick<TreeViewContainerProps, "tabIndex"> 
     startExpanded: TreeViewBranchProps["startExpanded"];
     showCustomIcon: boolean;
     iconPlacement: TreeViewBranchProps["iconPlacement"];
-    expandIcon: WebIcon | null;
-    collapseIcon: WebIcon | null;
+    expandedIcon: WebIcon | null;
+    collapsedIcon: WebIcon | null;
     animateIcon: boolean;
     animateTreeViewContent: TreeViewBranchProps["animateTreeViewContent"];
 }
@@ -62,8 +62,8 @@ export function TreeView({
     showCustomIcon,
     startExpanded,
     iconPlacement,
-    expandIcon,
-    collapseIcon,
+    expandedIcon,
+    collapsedIcon,
     tabIndex,
     animateIcon,
     animateTreeViewContent
@@ -78,7 +78,7 @@ export function TreeView({
             const treeViewIsExpanded = treeViewState === TreeViewState.EXPANDED;
             return showCustomIcon ? (
                 <Icon
-                    icon={treeViewIsExpanded ? collapseIcon : expandIcon}
+                    icon={treeViewIsExpanded ? expandedIcon : collapsedIcon}
                     className="widget-tree-view-branch-header-icon"
                 />
             ) : (
@@ -93,7 +93,7 @@ export function TreeView({
                 />
             );
         },
-        [collapseIcon, expandIcon, showCustomIcon, animateIcon]
+        [collapsedIcon, expandedIcon, showCustomIcon, animateIcon]
     );
 
     // Combination of useState + useCallback is necessary here over useRef because it needs to trigger an update in useInformParentContextOfChildNodes

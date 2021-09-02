@@ -57,11 +57,11 @@
                         <enumerationValue key="no">No</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="expandIcon" type="icon" required="false">
+                <property key="expandedIcon" type="icon" required="false">
                     <caption>Expanded icon</caption>
                     <description/>
                 </property>
-                <property key="collapseIcon" type="icon" required="false">
+                <property key="collapsedIcon" type="icon" required="false">
                     <caption>Collapsed icon</caption>
                     <description/>
                 </property>

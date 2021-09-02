@@ -18,8 +18,8 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             ? props.datasource.items?.map(item => mapDataSourceItemToTreeViewObject(item, props)) ?? []
             : null;
 
-    const expandIcon = props.expandIcon?.status === ValueStatus.Available ? props.expandIcon.value : null;
-    const collapseIcon = props.collapseIcon?.status === ValueStatus.Available ? props.collapseIcon.value : null;
+    const expandedIcon = props.expandedIcon?.status === ValueStatus.Available ? props.expandedIcon.value : null;
+    const collapsedIcon = props.collapsedIcon?.status === ValueStatus.Available ? props.collapsedIcon.value : null;
 
     return (
         <TreeViewComponent
@@ -29,10 +29,10 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             items={items}
             isUserDefinedLeafNode={!props.hasChildren}
             startExpanded={props.startExpanded}
-            showCustomIcon={props.advancedMode && (Boolean(props.expandIcon) || Boolean(props.collapseIcon))}
+            showCustomIcon={props.advancedMode && (Boolean(props.expandedIcon) || Boolean(props.collapsedIcon))}
             iconPlacement={props.showIcon}
-            expandIcon={expandIcon}
-            collapseIcon={collapseIcon}
+            expandedIcon={expandedIcon}
+            collapsedIcon={collapsedIcon}
             tabIndex={props.tabIndex}
             animateIcon={props.animate && props.animateIcon}
             animateTreeViewContent={props.animate}
