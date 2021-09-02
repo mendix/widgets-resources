@@ -44,7 +44,7 @@ async function createNMRModule() {
         `git remote set-url origin https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${url.replace(
             "https://",
             ""
-        )}}`
+        )}`
     );
 
     const changelog = await updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name);
