@@ -23,7 +23,7 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "emptyPlaceholder");
     }
 
-    if (values.filterList?.length === 0) {
+    if (values.filterList?.length === 0 && values.sortList?.length === 0) {
         hidePropertyIn(defaultProperties, values, "filtersPlaceholder");
     }
 
@@ -158,6 +158,11 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
 
     return {
         type: "Container",
-        children: [titleHeader, ...(values.filterList.length > 0 ? [filters] : []), content, ...footer]
+        children: [
+            titleHeader,
+            ...(values.filterList.length > 0 || values.sortList.length > 0 ? [filters] : []),
+            content,
+            ...footer
+        ]
     };
 }
