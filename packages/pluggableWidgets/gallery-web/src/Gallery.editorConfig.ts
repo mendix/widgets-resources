@@ -128,7 +128,13 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                         children: [
                             {
                                 type: "Text",
-                                content: `Desktop ${values.desktopItems} Columns, Tablet ${values.tabletItems} Columns, Phone ${values.phoneItems} Columns`,
+                                content: `Desktop ${values.desktopItems} ${getSingularPlural(
+                                    "Column",
+                                    values.desktopItems!
+                                )}, Tablet ${values.tabletItems} ${getSingularPlural(
+                                    "Column",
+                                    values.tabletItems!
+                                )}, Phone ${values.phoneItems} ${getSingularPlural("Column", values.phoneItems!)}`,
                                 fontColor: "#899499"
                             }
                         ]
@@ -165,4 +171,8 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
             ...footer
         ]
     };
+}
+
+function getSingularPlural(word: string, elements: number): string {
+    return elements > 1 ? word + "s" : word;
 }

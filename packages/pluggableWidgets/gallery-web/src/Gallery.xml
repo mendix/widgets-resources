@@ -18,15 +18,15 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Columns">
-                <property key="desktopItems" type="integer" defaultValue="4">
+                <property key="desktopItems" type="integer" defaultValue="1">
                     <caption>Desktop columns</caption>
                     <description />
                 </property>
-                <property key="tabletItems" type="integer" defaultValue="3">
+                <property key="tabletItems" type="integer" defaultValue="1">
                     <caption>Tablet columns</caption>
                     <description />
                 </property>
-                <property key="phoneItems" type="integer" defaultValue="2">
+                <property key="phoneItems" type="integer" defaultValue="1">
                     <caption>Phone columns</caption>
                     <description />
                 </property>
