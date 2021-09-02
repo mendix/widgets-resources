@@ -46,6 +46,7 @@ async function createNMRModule() {
             ""
         )}`
     );
+    await execShellCommand(`gh auth login --with-token ${process.env.GH_PAT}`);
 
     const changelog = await updateChangelogs(nativeWidgetFolders, pkgPath, version, moduleName, name);
     await updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl);
