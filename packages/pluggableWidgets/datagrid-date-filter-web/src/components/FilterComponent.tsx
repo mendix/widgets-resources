@@ -57,8 +57,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     name={props.name}
                     onChange={useCallback(
                         type => {
-                            setType(type);
-                            focusInput();
+                            setType(prev => {
+                                if (prev === type) {
+                                    return prev;
+                                }
+                                focusInput();
+                                return type;
+                            });
                         },
                         [focusInput]
                     )}
