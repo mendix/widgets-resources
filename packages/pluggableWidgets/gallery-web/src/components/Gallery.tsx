@@ -27,7 +27,7 @@ export interface GalleryProps<T> {
 
 export function Gallery<T>(props: GalleryProps<T>): ReactElement {
     const pagination = props.paging ? (
-        <div className="widget-gallery-pagination">
+        <div className="widget-gallery-pagination" role="group">
             <Pagination
                 canNextPage={props.hasMoreItems}
                 canPreviousPage={props.page !== 0}
@@ -42,9 +42,15 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
     ) : null;
 
     return (
-        <div className={classNames("widget-gallery", props.className)} data-focusindex={props.tabIndex || 0}>
+        <div
+            className={classNames("widget-gallery", props.className)}
+            data-focusindex={props.tabIndex || 0}
+            role="list"
+        >
             {props.paginationPosition === "above" && pagination}
-            <div className="widget-gallery-filter">{props.filters}</div>
+            <div className="widget-gallery-filter" role="group">
+                {props.filters}
+            </div>
 
             {props.items.length > 0 && props.itemRenderer && (
                 <InfiniteBody
@@ -57,6 +63,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
                     hasMoreItems={props.hasMoreItems}
                     setPage={props.setPage}
                     isInfinite={!props.paging}
+                    role="group"
                 >
                     {props.items.map(item =>
                         props.itemRenderer((children, className, onClick) => {
@@ -77,7 +84,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
                                               }
                                             : undefined
                                     }
-                                    role={onClick ? "button" : undefined}
+                                    role={onClick ? "button" : "listitem"}
                                     tabIndex={onClick ? 0 : undefined}
                                 >
                                     {children}
@@ -90,7 +97,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
             {(props.items.length === 0 || props.preview) &&
                 props.emptyPlaceholderRenderer &&
                 props.emptyPlaceholderRenderer(children => (
-                    <div className="widget-gallery-empty">
+                    <div className="widget-gallery-empty" role="group">
                         <div className="empty-placeholder">{children}</div>
                     </div>
                 ))}
