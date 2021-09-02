@@ -35,6 +35,8 @@ jobs:
               run: "npm run create-modules:native"
               env:
                   GH_USERNAME: ${{ secrets.GH_USERNAME }}
+                  GH_EMAIL: ${{ secrets.GH_EMAIL }}
+                  GH_NAME: ${{ secrets.GH_NAME }}
                   GH_PAT: ${{ secrets.GH_PAT }}
                   TAG: ${{ steps.variables.outputs.tag }}
             - name: "Check changes and publish package ${{ steps.variables.outputs.tag }}"
