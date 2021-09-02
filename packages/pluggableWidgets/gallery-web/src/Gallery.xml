@@ -12,7 +12,7 @@
                     <caption>Data source</caption>
                     <description/>
                 </property>
-                <property key="content" type="widgets" dataSource="datasource">
+                <property key="content" type="widgets" dataSource="datasource" required="false">
                     <caption>Content placeholder</caption>
                     <description/>
                 </property>
