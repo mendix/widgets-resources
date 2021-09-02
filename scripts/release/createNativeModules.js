@@ -38,8 +38,8 @@ async function createNMRModule() {
         testProject: { githubUrl, branchName },
         repository: { url }
     } = require(pkgPath);
-    await execShellCommand('git config user.name "Native Content Automation"');
-    await execShellCommand('git config user.email "widgets@mendix.com"');
+    await execShellCommand(`git config user.name "${process.env.GH_NAME_NATIVE_AUTOMATION}"`);
+    await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`);
     await execShellCommand(
         `git remote set-url origin https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${url.replace(
             "https://",
