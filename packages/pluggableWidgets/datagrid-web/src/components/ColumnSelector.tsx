@@ -21,7 +21,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
 
     useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
 
-	const label = props.label ?? "Column selector";
+    const label = props.label ?? "Column selector";
 
     const onClick = useCallback(
         (isVisible: boolean, id: string) =>
@@ -108,7 +108,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
         <div aria-label={label} className="th column-selector" role="columnheader" title={label}>
             <div className="column-selector-content">
                 <button
-					aria-label={label}
+                    aria-label={label}
                     ref={buttonRef}
                     className="btn btn-default column-selector-button"
                     onClick={containerClick}

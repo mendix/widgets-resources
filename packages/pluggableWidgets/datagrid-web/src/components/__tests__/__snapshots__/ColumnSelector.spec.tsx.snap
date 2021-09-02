@@ -12,11 +12,10 @@ exports[`Column Selector renders the structure correctly 1`] = `
   >
     <button
       aria-controls="undefined-column-selectors"
-      aria-expanded={false}
-      aria-haspopup={true}
-      className="btn btn-default column-selector-button"
-      onClick={[Function]}
-      onKeyDown={[Function]}
+      aria-expanded="false"
+      aria-haspopup="true"
+      aria-label="Column selector"
+      class="btn btn-default column-selector-button"
     >
       <svg
         aria-hidden="true"

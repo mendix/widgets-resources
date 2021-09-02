@@ -658,6 +658,9 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             class="column-selector-content"
           >
             <button
+              aria-controls="undefined-column-selectors"
+              aria-expanded="false"
+              aria-haspopup="true"
               aria-label="Column selector"
               class="btn btn-default column-selector-button"
             >

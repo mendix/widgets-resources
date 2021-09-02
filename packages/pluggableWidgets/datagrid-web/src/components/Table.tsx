@@ -287,7 +287,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             <ColumnSelector
                                 columns={tableColumns}
                                 hiddenColumns={hiddenColumns}
-								name={props.name}
+                                name={props.name}
                                 setHiddenColumns={setHiddenColumns}
                             />
                         )}
