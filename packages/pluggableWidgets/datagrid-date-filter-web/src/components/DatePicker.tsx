@@ -19,6 +19,7 @@ import { createPortal } from "react-dom";
 interface DatePickerProps {
     adjustable: boolean;
     dateFormat?: string;
+    labelCalendar?: string;
     locale?: string;
     name?: string;
     placeholder?: string;
@@ -94,6 +95,10 @@ export const DatePicker = forwardRef(
                     portalId={id}
                 />
                 <button
+                    aria-controls={id}
+                    aria-expanded={open}
+                    aria-haspopup
+                    aria-label={props.labelCalendar ?? "Show calendar"}
                     ref={buttonRef}
                     className="btn btn-default btn-calendar"
                     onClick={buttonClick}

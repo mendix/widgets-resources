@@ -5,6 +5,8 @@ import ReactDOM from "react-dom";
 
 describe("Filter component", () => {
     beforeAll(() => {
+        jest.spyOn(global.Math, "random").mockReturnValue(0.123456789);
+
         // @ts-ignore
         jest.spyOn(ReactDOM, "createPortal").mockReturnValue((element, node) => {
             return element;

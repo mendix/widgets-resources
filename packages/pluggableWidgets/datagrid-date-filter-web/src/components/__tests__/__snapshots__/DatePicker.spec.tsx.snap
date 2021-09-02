@@ -21,6 +21,10 @@ Array [
     </div>
   </div>,
   <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Show calendar"
     class="btn btn-default btn-calendar"
   >
     <span
@@ -51,6 +55,10 @@ Array [
     </div>
   </div>,
   <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Show calendar"
     class="btn btn-default btn-calendar"
   >
     <span
@@ -81,6 +89,10 @@ Array [
     </div>
   </div>,
   <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Show calendar"
     class="btn btn-default btn-calendar"
   >
     <span
