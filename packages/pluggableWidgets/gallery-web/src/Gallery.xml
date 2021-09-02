@@ -77,8 +77,8 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Filters">
-            <propertyGroup caption="Filters">
+        <propertyGroup caption="Filtering">
+            <propertyGroup caption="Filtering">
                 <property key="filterList" type="object" isList="true" required="false">
                     <caption>Filters</caption>
                     <description />
@@ -107,8 +107,8 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Sort">
-            <propertyGroup caption="Sort">
+        <propertyGroup caption="Sorting">
+            <propertyGroup caption="Sorting">
                 <property key="sortList" type="object" isList="true" required="false">
                     <caption>Sort attributes</caption>
                     <description />
