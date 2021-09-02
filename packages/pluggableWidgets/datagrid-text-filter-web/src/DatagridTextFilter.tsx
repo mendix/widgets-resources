@@ -78,12 +78,14 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
                         name={props.name}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
+                        styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: string, type: DefaultFilterEnum): void => {
                             const conditions = attributes

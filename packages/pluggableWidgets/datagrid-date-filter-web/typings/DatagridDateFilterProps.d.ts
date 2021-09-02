@@ -22,7 +22,7 @@ export interface DatagridDateFilterContainerProps {
 }
 
 export interface DatagridDateFilterPreviewProps {
-    class: string;
+    className: string;
     style: string;
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;

@@ -80,11 +80,13 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                 return (
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
+                        className={props.class}
                         defaultValue={defaultValues ?? props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         name={props.name}
                         options={options}
+                        styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(values: FilterOption[]): void => {
                             const conditions = attributes

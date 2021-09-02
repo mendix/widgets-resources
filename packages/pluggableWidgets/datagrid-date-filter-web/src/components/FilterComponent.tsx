@@ -1,13 +1,15 @@
-import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "@mendix/piw-utils-internal/components/web";
 
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
 import DatePickerComponent from "react-datepicker";
 import { DatePicker } from "./DatePicker";
+import classNames from "classnames";
 
 interface FilterComponentProps {
     adjustable: boolean;
+    className?: string;
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
     dateFormat?: string;
@@ -17,6 +19,7 @@ interface FilterComponentProps {
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
+    styles?: CSSProperties;
     updateFilters?: (value: Date | null, type: DefaultFilterEnum) => void;
 }
 
@@ -42,7 +45,11 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [pickerRef.current]);
 
     return (
-        <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
+        <div
+            className={classNames("filter-container", props.className)}
+            data-focusindex={props.tabIndex ?? 0}
+            style={props.styles}
+        >
             {props.adjustable && (
                 <FilterSelector
                     ariaLabel={props.screenReaderButtonCaption}

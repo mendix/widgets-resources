@@ -96,6 +96,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         defaultValue={defaultFilter?.value ?? props.defaultValue?.value}
                         dateFormat={patterns.date}
@@ -104,6 +105,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
+                        styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
                             const conditions = attributes

@@ -1,4 +1,4 @@
-import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, CSSProperties, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import classNames from "classnames";
 import deepEqual from "deep-equal";
@@ -11,12 +11,14 @@ export interface FilterOption {
 
 interface FilterComponentProps {
     ariaLabel?: string;
+    className?: string;
+    defaultValue?: string;
     emptyOptionCaption?: string;
     multiSelect?: boolean;
     name?: string;
     options: FilterOption[];
     tabIndex?: number;
-    defaultValue?: string;
+    styles?: CSSProperties;
     updateFilters?: (values: FilterOption[]) => void;
 }
 
@@ -190,7 +192,12 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, []);
 
     return (
-        <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
+        <div
+            className={classNames("dropdown-container", props.className)}
+            data-focusindex={props.tabIndex ?? 0}
+            ref={componentRef}
+            style={props.styles}
+        >
             <input
                 value={!showPlaceholder ? valueInput : ""}
                 placeholder={showPlaceholder ? props.emptyOptionCaption : undefined}
