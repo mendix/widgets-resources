@@ -11,6 +11,7 @@ exports[`Number Filter with multiple attributes renders correctly 1`] = `
 >
   <FilterComponent
     adjustable={true}
+    className="filter-test"
     defaultFilter="equal"
     delay={1000}
     name="filter-test"
@@ -18,7 +19,7 @@ exports[`Number Filter with multiple attributes renders correctly 1`] = `
     updateFilters={[Function]}
   >
     <div
-      className="filter-container"
+      className="filter-container filter-test"
       data-focusindex={0}
     >
       <FilterSelector
@@ -94,6 +95,7 @@ exports[`Number Filter with single attribute renders correctly 1`] = `
 >
   <FilterComponent
     adjustable={true}
+    className="filter-test"
     defaultFilter="equal"
     delay={1000}
     name="filter-test"
@@ -101,7 +103,7 @@ exports[`Number Filter with single attribute renders correctly 1`] = `
     updateFilters={[Function]}
   >
     <div
-      className="filter-container"
+      className="filter-container filter-test"
       data-focusindex={0}
     >
       <FilterSelector

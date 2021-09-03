@@ -10,6 +10,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
 >
   <FilterComponent
     adjustable={true}
+    className="filter-test"
     dateFormat="dd/MM/YYYY"
     defaultFilter="equal"
     locale="en"
@@ -18,7 +19,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
     updateFilters={[Function]}
   >
     <div
-      className="filter-container"
+      className="filter-container filter-test"
       data-focusindex={0}
     >
       <FilterSelector
@@ -282,6 +283,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
 >
   <FilterComponent
     adjustable={true}
+    className="filter-test"
     dateFormat="dd/MM/YYYY"
     defaultFilter="equal"
     locale="en"
@@ -290,7 +292,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
     updateFilters={[Function]}
   >
     <div
-      className="filter-container"
+      className="filter-container filter-test"
       data-focusindex={0}
     >
       <FilterSelector
