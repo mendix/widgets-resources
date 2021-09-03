@@ -146,3 +146,12 @@ means:
 
 ## Raising problems/issues
 -   We encourage everyone to open a Support ticket on [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools)
+
+## Troubleshooting
+1. If you are having problems with the GIT hooks, where it says that the command `npm` can not be found, try adding this file to the root of your user folder.
+```bash
+# ~/.huskyrc
+# This loads nvm.sh and sets the correct PATH before running hook
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+```

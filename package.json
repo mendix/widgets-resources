@@ -33,7 +33,8 @@
     "release:web": "npm run release -- --scope '*-web'",
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
-    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
+    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
+    "commit-msg": "commitlint --edit \"$1\""
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -63,7 +64,7 @@
     "es-abstract": "^1.17.7",
     "gulp-change": "^1.0.2",
     "gulp-git": "^2.10.1",
-    "husky": "^4.3.0",
+    "husky": "^7.0.0",
     "identity-obj-proxy": "^3.0.0",
     "jest-canvas-mock": "^2.3.0",
     "lerna": "^3.22.1",
@@ -86,8 +87,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,test}/**/*.{js,jsx,ts,tsx,scss,html}\" && npm run validate-staged-widget-versions",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "pre-commit": "npm run format && npm run validate-staged-widget-versions",
+      "commit-msg": "npm run commit-msg"
     }
   },
   "commitlint": {
