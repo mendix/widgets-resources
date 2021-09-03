@@ -6,9 +6,11 @@
 export interface ActivityIndicatorProps<Style> {
     name: string;
     style: Style[];
+
 }
 
 export interface ActivityIndicatorPreviewProps {
     class: string;
     style: string;
+
 }
