@@ -28,10 +28,10 @@ for (const subCommand of realCommand.split(/&&/g)) {
 
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
-    const prettierCommand = `prettier --config ${join(
+    const prettierCommand = `prettier --config "${join(
         __dirname,
-        "../../../../"
-    )}prettier.config.js "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
+        "../../../../prettier.config.js"
+    )}" "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
     const rollupCommand = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
 
     switch (cmd) {
