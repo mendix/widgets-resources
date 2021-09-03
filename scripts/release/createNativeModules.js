@@ -133,9 +133,7 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
     await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
-    await execShellCommand(`cd ${tmpFolder}`);
-    await setLocalGitCredentials();
-    await execShellCommand("cd -");
+    await setLocalGitCredentials(tmpFolder);
 
     console.log("Copying widgets and js actions..");
     await Promise.all([
@@ -154,10 +152,11 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
     if (!/nothing to commit/i.test(gitOutput)) {
         await execShellCommand(
-            `cd ${tmpFolder} && git add . && git commit -m "Updated native widgets and js actions" && git push`
+            `git add . && git commit -m "Updated native widgets and js actions" && git push`,
+            tmpFolder
         );
     } else {
-        console.warn(`Nothing to commit from repo ${tmpFolder}`);
+        console.warn(`Nothing to commit from repo ${tmpFolder}s`);
     }
 }
 
@@ -185,10 +184,9 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
     console.log(`Module ${moduleName} created successfully.`);
 }
 
-function execShellCommand(cmd) {
+function execShellCommand(cmd, workingDirectory = process.cwd()) {
     return new Promise((resolve, reject) => {
-        const cwd = process.cwd();
-        exec(cmd, { cwd }, (error, stdout, stderr) => {
+        exec(cmd, { cwd: workingDirectory }, (error, stdout, stderr) => {
             if (error) {
                 console.warn(stderr);
                 console.warn(stdout);
@@ -215,7 +213,7 @@ async function getFiles(dir, includeExtension) {
         .filter(file => !includeExtension?.length || (extname(file) && includeExtension?.includes(extname(file))));
 }
 
-async function setLocalGitCredentials() {
-    await execShellCommand(`git config user.name "${process.env.GH_NAME}"`);
-    await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`);
+async function setLocalGitCredentials(workingDirectory) {
+    await execShellCommand(`git config user.name "${process.env.GH_NAME}"`, workingDirectory);
+    await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`, workingDirectory);
 }
