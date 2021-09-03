@@ -1,11 +1,12 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { ActionValue, ValueStatus } from "mendix";
+import { ActionValue, ValueStatus, Option } from "mendix";
 import { Icon } from "mendix/components/native/Icon";
 import { Component, createElement, createRef } from "react";
 import { ActivityIndicator, Platform, View } from "react-native";
 import MapView, { LatLng, Marker as MarkerView } from "react-native-maps";
+import { Big } from "big.js";
 
-import { DefaultZoomLevelEnum, MapsProps } from "../typings/MapsProps";
+import { DefaultZoomLevelEnum, DynamicMarkersType, MapsProps, MarkersType } from "../typings/MapsProps";
 import { ModeledMarker } from "../typings/shared";
 import { defaultMapsStyle, MapsStyle } from "./ui/Styles";
 import { CachedGeocoder } from "./util/CachedGeocoder";
@@ -33,7 +34,6 @@ interface Marker {
     props: ModeledMarker;
     coordinate: LatLng;
 }
-
 export class Maps extends Component<Props, State> {
     readonly state: State = {
         status: Status.LoadingMarkers,
@@ -52,26 +52,27 @@ export class Maps extends Component<Props, State> {
         }
     }
 
-    componentDidUpdate(): void {
-        if (
-            this.state.status === Status.LoadingMarkers &&
-            (!this.props.dynamicMarkers.length ||
-                this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
-        ) {
-            this.parseMarkers();
-        }
-    }
+    componentDidUpdate(prevProps: Props, prevState: State): void {
+        if (this.props !== prevProps) {
+            const markersChanged = didMarkersChange(prevState.markers, this.props.markers, this.props.dynamicMarkers);
 
-    UNSAFE_componentWillReceiveProps(): void {
-        if (this.state.status === Status.CameraReady) {
-            this.parseMarkers();
+            if (
+                (this.state.status === Status.LoadingMarkers ||
+                    (this.state.status === Status.CameraReady && markersChanged)) &&
+                (!this.props.dynamicMarkers.length ||
+                    this.props.dynamicMarkers.every(m => m.markersDS?.status === ValueStatus.Available))
+            ) {
+                // TODO: Only parse new or updated markers. No need to re-parse existing markers
+                // TODO: Check for removed markers and remove them from the state
+                this.parseMarkers();
+            }
         }
     }
 
     render(): JSX.Element {
         return (
             <View style={this.styles.container} testID={this.props.name}>
-                {this.state.status !== Status.LoadingMarkers && (
+                {this.state.status !== Status.LoadingMarkers ? (
                     <MapView
                         ref={this.mapViewRef}
                         provider={this.props.provider === "default" ? null : this.props.provider}
@@ -93,14 +94,14 @@ export class Maps extends Component<Props, State> {
                         onMapReady={this.onMapReadyHandler}
                         onRegionChangeComplete={this.onRegionChangeCompleteHandler}
                     >
-                        {this.state.markers && this.state.markers.map(marker => this.renderMarker(marker))}
+                        {this.state.markers ? this.state.markers.map(marker => this.renderMarker(marker)) : null}
                     </MapView>
-                )}
-                {(this.state.status === Status.LoadingMarkers || this.state.status === Status.LoadingMap) && (
+                ) : null}
+                {this.state.status === Status.LoadingMarkers || this.state.status === Status.LoadingMap ? (
                     <View style={this.styles.loadingOverlay}>
                         <ActivityIndicator color={this.styles.loadingIndicator.color} size="large" />
                     </View>
-                )}
+                ) : null}
             </View>
         );
     }
@@ -145,11 +146,9 @@ export class Maps extends Component<Props, State> {
                     break;
                 case Status.MapReady:
                     this.setState({
-                        status: this.props.provider === "default" ? Status.CameraAlmostReady : Status.CameraReady
+                        status: Status.CameraReady
                     });
                     break;
-                case Status.CameraAlmostReady:
-                    this.setState({ status: Status.CameraReady });
             }
         }
     }
@@ -212,7 +211,7 @@ export class Maps extends Component<Props, State> {
     private async getCenter(): Promise<LatLng> {
         const { fitToMarkers, centerLatitude, centerLongitude, centerAddress } = this.props;
         const center =
-            (centerLatitude && centerLongitude) || centerAddress
+            (isValidCoordinate(centerLatitude?.value) && isValidCoordinate(centerLongitude?.value)) || centerAddress
                 ? await this.parseCoordinate(
                       Number(centerLatitude?.value),
                       Number(centerLongitude?.value),
@@ -226,23 +225,54 @@ export class Maps extends Component<Props, State> {
     }
 
     private parseCoordinate(
-        latitude?: number | undefined,
-        longitude?: number | undefined,
-        address?: string | undefined
+        latitude?: Option<number>,
+        longitude?: Option<number>,
+        address?: Option<string>
     ): Promise<LatLng> {
-        if (latitude && longitude) {
+        if (isValidCoordinate(latitude) && isValidCoordinate(longitude)) {
+            latitude = latitude as number;
+            longitude = longitude as number;
             if (!isValidLatitude(latitude) || !isValidLongitude(longitude)) {
                 throw new Error(`Invalid coordinate provided: (${latitude}, ${longitude})`);
             }
             return Promise.resolve({ latitude, longitude });
-        }
-
-        if (address) {
+        } else if (address) {
             return this.geocoder.geocode(address);
         } else {
-            throw new Error(`No address provided.`);
+            throw new Error(
+                `Address: "${address}", Latitude: "${latitude}", Longitude: "${longitude}". None of these values could be parsed to coordinates.`
+            );
         }
     }
+}
+
+function didMarkersChange(
+    prevMarkers: Option<Marker[]>,
+    newMarkers: MarkersType[],
+    newDynamicMarkers: DynamicMarkersType[]
+): boolean {
+    const markers = newMarkers.flatMap(convertStaticModeledMarker) as ModeledMarker[];
+    const dynamicMarkers = newDynamicMarkers.flatMap(convertDynamicModeledMarker) as ModeledMarker[];
+    const combinedMarkers = [...dynamicMarkers, ...markers];
+
+    return (
+        prevMarkers?.length !== combinedMarkers?.length ||
+        !!combinedMarkers?.filter(
+            (marker: ModeledMarker) =>
+                prevMarkers?.filter((prevMarker: Marker) => {
+                    for (const [key, value] of Object.entries(marker)) {
+                        if (value !== prevMarker.props[key]) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }).length !== prevMarkers.length
+        ).length
+    );
+}
+
+function isValidCoordinate(value: Option<Big | number>): boolean {
+    return /-?\d{1,2}(?:\.\d+)?/.test(`${value}`);
 }
 
 function isValidLatitude(latitude: number): boolean {

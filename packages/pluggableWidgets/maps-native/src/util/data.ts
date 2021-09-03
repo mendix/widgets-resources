@@ -11,7 +11,7 @@ export function convertStaticModeledMarker(marker: MarkersType): ModeledMarker {
         longitude: Number(marker.longitude?.value),
         title: marker.title?.value,
         description: marker.description?.value,
-        onClick: marker.onClick?.execute,
+        onClick: marker.onClick,
         icon: marker.icon?.value,
         iconSize: Number(marker.iconSize),
         iconColor: marker.iconColor
@@ -44,7 +44,7 @@ function fromDatasource(marker: DynamicMarkersType, item: ObjectItem): ModeledMa
         longitude: locationDynamicType === "latlng" && longitude ? Number(longitude.get(item).value) : undefined,
         title: title ? title.get(item).value : "",
         description: description ? description.get(item).value : "",
-        onClick: onClick ? onClick.get(item).execute : undefined,
+        onClick: onClick ? onClick.get(item) : undefined,
         icon: icon ? icon.value : undefined,
         iconSize: iconSize ? Number(iconSize) : undefined,
         iconColor: iconColor ? iconColor : undefined
