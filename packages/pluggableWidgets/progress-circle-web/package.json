@@ -26,6 +26,7 @@
     "start": "cross-env MPKOUTPUT=ProgressCircle.mpk pluggable-widgets-tools start:server",
     "dev": "cross-env MPKOUTPUT=ProgressCircle.mpk pluggable-widgets-tools start:web",
     "build": "cross-env MPKOUTPUT=ProgressCircle.mpk pluggable-widgets-tools build:web",
+    "postbuild": "pluggable-widgets-tools format",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",

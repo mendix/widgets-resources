@@ -22,6 +22,7 @@
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:ts",
     "build": "pluggable-widgets-tools build:ts",
+    "postbuild": "pluggable-widgets-tools format",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",

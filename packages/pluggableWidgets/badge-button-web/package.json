@@ -26,6 +26,7 @@
     "start": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools start:server",
     "dev": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools start:ts",
     "build": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools build:ts",
+    "postbuild": "cross-env MPKOUTPUT=BadgeButton.mpk pluggable-widgets-tools format",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
