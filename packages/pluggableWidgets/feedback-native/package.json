@@ -12,7 +12,7 @@
   "scripts": {
     "start": "pluggable-widgets-tools start:native",
     "build": "pluggable-widgets-tools build:native",
-    "postbuild": "pluggable-widgets-tools format",
+    "format": "pluggable-widgets-tools format",
     "release": "pluggable-widgets-tools release:native",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "version": "npm run release"
