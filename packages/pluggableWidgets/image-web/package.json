@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.5.0",
     "marketplaceId": 65122
   },
   "testProject": {
@@ -30,7 +30,7 @@
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e": "echo \"Skipping image-web e2e tests\"",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"

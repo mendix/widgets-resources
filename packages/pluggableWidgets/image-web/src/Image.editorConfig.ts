@@ -91,16 +91,22 @@ export function getPreview(): StructurePreviewProps | null {
 export function check(values: ImagePreviewProps): Problem[] {
     const errors: Problem[] = [];
 
+    if (values.datasource === "image" && !values.imageObject) {
+        errors.push({
+            property: "imageObject",
+            message: "No image selected."
+        });
+    }
     if (values.datasource === "imageUrl" && !values.imageUrl) {
         errors.push({
             property: "imageUrl",
-            message: "No image link provided"
+            message: "No image link provided."
         });
     }
     if (values.datasource === "icon" && !values.imageIcon) {
         errors.push({
             property: "imageIcon",
-            message: "No icon selected"
+            message: "No icon selected."
         });
     }
 
