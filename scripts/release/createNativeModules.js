@@ -38,8 +38,7 @@ async function createNMRModule() {
         testProject: { githubUrl, branchName },
         repository: { url }
     } = require(pkgPath);
-    await execShellCommand(`git config user.name "${process.env.GH_NAME}"`);
-    await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`);
+    await setLocalGitCredentials();
     await execShellCommand(
         `git remote set-url origin https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${url.replace(
             "https://",
@@ -129,6 +128,7 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
     const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
 
     console.log("Updating NativeComponentsTestProject..");
+    await setLocalGitCredentials();
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(tmpFolder, { recursive: true, force: true });
@@ -210,4 +210,9 @@ async function getFiles(dir, includeExtension) {
     return files
         .flat()
         .filter(file => !includeExtension?.length || (extname(file) && includeExtension?.includes(extname(file))));
+}
+
+async function setLocalGitCredentials() {
+    await execShellCommand(`git config user.name "${process.env.GH_NAME}"`);
+    await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`);
 }
