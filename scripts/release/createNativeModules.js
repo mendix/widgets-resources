@@ -132,7 +132,10 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(tmpFolder, { recursive: true, force: true });
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
+
+    await execShellCommand(`cd ${tmpFolder}`);
     await setLocalGitCredentials();
+    await execShellCommand("cd -");
 
     console.log("Copying widgets and js actions..");
     await Promise.all([
