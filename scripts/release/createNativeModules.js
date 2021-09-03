@@ -112,10 +112,12 @@ async function getUnreleasedChangelogs(changelogFile, version) {
         );
     }
 
-    const d = new Date();
-    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
-    await writeFile(changelogFile, newContent);
+    if (unreleasedChangelogs) {
+        const d = new Date();
+        const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
+        await writeFile(changelogFile, newContent);
+    }
 
     return unreleasedChangelogs;
 }
@@ -217,3 +219,5 @@ async function setLocalGitCredentials(workingDirectory) {
     await execShellCommand(`git config user.name "${process.env.GH_NAME}"`, workingDirectory);
     await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`, workingDirectory);
 }
+
+// TODO: add functionality to bump NMR module version.
