@@ -103,7 +103,7 @@ async function combineWidgetChangelogs(currentFolder) {
 async function getUnreleasedChangelogs(changelogFile, version) {
     const content = await readFile(changelogFile, "utf8");
     const unreleasedChangelogs = content
-        .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
+        .match(/(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\w|\W)*(?=\n(?:## \[\d+\.\d+\.\d+\]))/i)?.[0]
         .trim();
     const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
     if (releasedVersions?.includes(version)) {
