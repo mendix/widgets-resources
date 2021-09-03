@@ -103,7 +103,7 @@ async function combineWidgetChangelogs(currentFolder) {
 async function getUnreleasedChangelogs(changelogFile, version) {
     const content = await readFile(changelogFile, "utf8");
     const unreleasedChangelogs = content
-        .match(/(?<=## \[unreleased\]\n)(\w|\W)*(?=\n## \[\d+\.\d+\.\d+\])/i)?.[0]
+        .match(/(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\w|\W)*(?=\n(?:## \[\d+\.\d+\.\d+\]))/i)?.[0]
         .trim();
     const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
     if (releasedVersions?.includes(version)) {
@@ -112,10 +112,12 @@ async function getUnreleasedChangelogs(changelogFile, version) {
         );
     }
 
-    const d = new Date();
-    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
-    await writeFile(changelogFile, newContent);
+    if (unreleasedChangelogs) {
+        const d = new Date();
+        const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+        const newContent = content.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
+        await writeFile(changelogFile, newContent);
+    }
 
     return unreleasedChangelogs;
 }
@@ -217,3 +219,5 @@ async function setLocalGitCredentials(workingDirectory) {
     await execShellCommand(`git config user.name "${process.env.GH_NAME}"`, workingDirectory);
     await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`, workingDirectory);
 }
+
+// TODO: add functionality to bump NMR module version.
