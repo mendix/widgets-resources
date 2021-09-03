@@ -16,7 +16,7 @@ export interface DropdownSortContainerProps {
 }
 
 export interface DropdownSortPreviewProps {
-    className: string;
+    class: string;
     style: string;
     emptyOptionCaption: string;
     ariaLabel: string;

@@ -61,7 +61,7 @@ export interface GalleryContainerProps {
 }
 
 export interface GalleryPreviewProps {
-    className: string;
+    class: string;
     style: string;
     datasource: {} | { type: string } | null;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };

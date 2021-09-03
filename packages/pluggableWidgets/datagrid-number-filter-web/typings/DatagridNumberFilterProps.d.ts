@@ -24,7 +24,7 @@ export interface DatagridNumberFilterContainerProps {
 }
 
 export interface DatagridNumberFilterPreviewProps {
-    className: string;
+    class: string;
     style: string;
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;

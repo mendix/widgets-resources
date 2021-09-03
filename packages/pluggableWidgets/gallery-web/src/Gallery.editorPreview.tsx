@@ -2,7 +2,11 @@ import { createElement, ReactElement, useCallback } from "react";
 import { GalleryPreviewProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
 
-export function preview(props: GalleryPreviewProps): ReactElement {
+interface PreviewProps extends Omit<GalleryPreviewProps, "class"> {
+    className: string;
+}
+
+export function preview(props: PreviewProps): ReactElement {
     const items = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));
     const caption =
         props.filterList.length > 0

@@ -3,7 +3,11 @@ import { SortComponent } from "./components/SortComponent";
 import { DropdownSortPreviewProps } from "../typings/DropdownSortProps";
 import { parseStyle } from "@mendix/piw-utils-internal";
 
-export function preview(props: DropdownSortPreviewProps): ReactElement {
+interface PreviewProps extends Omit<DropdownSortPreviewProps, "class"> {
+    className: string;
+}
+
+export function preview(props: PreviewProps): ReactElement {
     return (
         <SortComponent
             ariaLabel={props.ariaLabel}
