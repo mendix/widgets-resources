@@ -96,27 +96,28 @@ describe("External video", () => {
 describe("Video aspect ratio", () => {
     it("renders video aspect ratio correctly", () => {
         page.open("p/aspectRatio");
-        browser.setWindowRect(0, 0, 1200, 900);
-        const screenshotElem = $(".mx-name-layoutGrid2");
-        screenshotElem.waitForDisplayed({ timeout: 5000 });
+        const videoElement = $(".mx-name-videoPlayer1");
+        videoElement.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
-        browser.saveElement(screenshotElem, "videoPlayerAspectRatioFirstTab");
-        expect(browser.checkElement(screenshotElem, "videoPlayerAspectRatioFirstTab")).toBeLessThan(1);
+        const aspectRatio = Number(videoElement.getSize("width") / videoElement.getSize("height"));
+        // 16:9
+        expect(aspectRatio).toBeCloseTo(Number(16 / 9), 0.1);
 
         const secondTab = $(".mx-name-tabPage2");
-        const screenshotElem2 = $(".mx-name-layoutGrid3");
+        const videoElement2 = $(".mx-name-videoPlayer3");
         secondTab.click();
-        screenshotElem2.waitForDisplayed({ timeout: 5000 });
+        videoElement2.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
-        browser.saveElement(screenshotElem2, "videoPlayerAspectRatioSecondTab");
-        expect(browser.checkElement(screenshotElem2, "videoPlayerAspectRatioSecondTab")).toBeLessThan(1);
+        const aspectRatio2 = Number(videoElement2.getSize("width") / videoElement2.getSize("height"));
+        // 3:2
+        expect(aspectRatio2).toBeCloseTo(Number(3 / 2), 0.1);
 
         const thirdTab = $(".mx-name-tabPage3");
-        const screenshotElem3 = $(".mx-name-layoutGrid4");
+        const videoElement3 = $(".mx-name-videoPlayer5");
         thirdTab.click();
-        screenshotElem3.waitForDisplayed({ timeout: 5000 });
+        videoElement3.waitForDisplayed({ timeout: 5000 });
         browser.pause(2000);
-        browser.saveElement(screenshotElem3, "videoPlayerAspectRatioThirdTab");
-        expect(browser.checkElement(screenshotElem3, "videoPlayerAspectRatioThirdTab")).toBeLessThan(1);
+        // 1:1
+        expect(videoElement3.getSize("width")).toBe(videoElement3.getSize("height"));
     });
 });
