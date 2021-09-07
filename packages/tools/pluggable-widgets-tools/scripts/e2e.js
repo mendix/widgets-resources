@@ -33,19 +33,14 @@ async function main() {
     const widgetVersion = packageConf?.version;
 
     // Downloading test project
-    if (
-        !process.argv.includes("--no-update-testProject") &&
-        packageConf?.testProject?.githubUrl &&
-        packageConf?.testProject?.branchName
-    ) {
-        await unzipTestProject();
-    } else {
-        const projectMpr = ls(`tests/testProject/*.mpr`).length;
-        if (!projectMpr) {
+    if (process.argv.includes("--update-test-project") || ls(`tests/testProject/*.mpr`).length === 0) {
+        if (!packageConf?.testProject?.githubUrl || !packageConf?.testProject?.branchName) {
             throw new Error(
-                "No project found in tests/testProject folder. Please copy your test project before start e2e tests."
+                'No GitHub test project details provided in the "package.json". Please add a GitHub URL and branch name in the "package.json" to refer to a test project on GitHub.'
             );
         }
+
+        await copyGitHubTestProject();
     }
 
     if (!process.argv.includes("--no-widget-update")) {
@@ -194,7 +189,7 @@ async function getMendixVersion() {
     return mendixVersion;
 }
 
-async function unzipTestProject() {
+async function copyGitHubTestProject() {
     const packageConf = JSON.parse(await readFile("package.json"));
 
     console.log("Copying test project from GitHub repository...");
@@ -230,6 +225,11 @@ async function unzipTestProject() {
         rm("-f", testArchivePath);
     } catch (e) {
         throw new Error("Failed to unzip the test project into tests/testProject", e.message);
+    }
+
+    // verify test project validity
+    if (ls(`tests/testProject/*.mpr`).length === 0) {
+        throw new Error('Invalid test project retrieved from GitHub: "mpr" file is missing.');
     }
 }
 

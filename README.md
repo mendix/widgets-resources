@@ -110,8 +110,8 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 -   Run `npm run pretest:e2e` to initialize Mendix project.
 -   Run `npm run build` on a desired widget folder. For ex: `packages/pluggableWidgets/badge-web`. This will build and copy the mpk to
     each Mendix project's correct widget folder.
--   Open and run the project in `<widgetName>/tests/testProject` with Mendix Studio
--   If you don't want to override your test project use the flag `--no-update-testProject` in test:e2e npm script
+-   Open and run the project in `<widgetName>/tests/testProject` with Mendix Studio.
+-   If you want to override your local test project with a test project from GitHub, execute the `test:e2e` npm script with the following command: `npm run test:e2e -- --update-test-project`.
 
 #### Adding new test project to the repo
 
