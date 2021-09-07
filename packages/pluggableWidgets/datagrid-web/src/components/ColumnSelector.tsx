@@ -10,6 +10,7 @@ export interface ColumnSelectorProps {
     hiddenColumns: string[];
     name?: string;
     setHiddenColumns: Dispatch<SetStateAction<string[]>>;
+    label?: string;
 }
 
 export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
@@ -19,6 +20,8 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const position = usePositionObserver(buttonRef.current, show);
 
     useOnClickOutside([buttonRef, optionsRef], () => setShow(false));
+
+    const label = props.label ?? "Column selector";
 
     const onClick = useCallback(
         (isVisible: boolean, id: string) =>
@@ -102,9 +105,10 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     }, []);
 
     return (
-        <div className="th column-selector">
+        <div aria-label={label} className="th column-selector" role="columnheader" title={label}>
             <div className="column-selector-content">
                 <button
+                    aria-label={label}
                     ref={buttonRef}
                     className="btn btn-default column-selector-button"
                     onClick={containerClick}

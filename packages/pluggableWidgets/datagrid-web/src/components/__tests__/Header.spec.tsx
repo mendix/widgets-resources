@@ -1,11 +1,11 @@
-import { shallow } from "enzyme";
+import { render, shallow } from "enzyme";
 import { createElement } from "react";
 import { Header, HeaderProps } from "../Header";
 import { ColumnResizer } from "../ColumnResizer";
 
 describe("Header", () => {
     it("renders the structure correctly", () => {
-        const component = shallow(<Header {...mockHeaderProps()} />);
+        const component = render(<Header {...mockHeaderProps()} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -15,7 +15,7 @@ describe("Header", () => {
         props.column.canSort = true;
         props.sortable = true;
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -25,7 +25,7 @@ describe("Header", () => {
         props.column.canResize = true;
         props.resizable = true;
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -35,7 +35,7 @@ describe("Header", () => {
         props.column.canDrag = true;
         props.draggable = true;
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -44,7 +44,7 @@ describe("Header", () => {
         const props = mockHeaderProps();
         props.filterable = true;
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -59,7 +59,7 @@ describe("Header", () => {
         );
         props.filterable = true;
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -87,7 +87,7 @@ describe("Header", () => {
         const props = mockHeaderProps();
         props.filterable = true;
 
-        const component = shallow(<Header {...props} className="my-custom-class" />);
+        const component = render(<Header {...props} className="my-custom-class" />);
 
         expect(component).toMatchSnapshot();
     });
@@ -98,7 +98,7 @@ describe("Header", () => {
         props.hidable = true;
         props.preview = true;
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });
@@ -107,7 +107,7 @@ describe("Header", () => {
         const props = mockHeaderProps();
         props.column.header = " ";
 
-        const component = shallow(<Header {...props} />);
+        const component = render(<Header {...props} />);
 
         expect(component).toMatchSnapshot();
     });

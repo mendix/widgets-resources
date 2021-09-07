@@ -170,24 +170,25 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             headerWrapperRenderer={useCallback((_columnIndex: number, header: ReactElement) => header, [])}
             headerFilters={useMemo(
-                () => (
-                    <FilterContext.Provider
-                        value={{
-                            filterDispatcher: prev => {
-                                if (prev.filterType) {
-                                    const [, filterDispatcher] = multipleFilteringState[prev.filterType];
-                                    filterDispatcher(prev);
-                                    setFiltered(true);
-                                }
-                                return prev;
-                            },
-                            multipleAttributes: filterList,
-                            multipleInitialFilters
-                        }}
-                    >
-                        {props.filtersPlaceholder}
-                    </FilterContext.Provider>
-                ),
+                () =>
+                    props.showHeaderFilters ? (
+                        <FilterContext.Provider
+                            value={{
+                                filterDispatcher: prev => {
+                                    if (prev.filterType) {
+                                        const [, filterDispatcher] = multipleFilteringState[prev.filterType];
+                                        filterDispatcher(prev);
+                                        setFiltered(true);
+                                    }
+                                    return prev;
+                                },
+                                multipleAttributes: filterList,
+                                multipleInitialFilters
+                            }}
+                        >
+                            {props.filtersPlaceholder}
+                        </FilterContext.Provider>
+                    ) : null,
                 [FilterContext, customFiltersState, filterList, multipleInitialFilters, props.filtersPlaceholder]
             )}
             name={props.name}

@@ -97,40 +97,56 @@ exports[`Gallery with pagination renders correctly 1`] = `
     class="widget-gallery-pagination"
   >
     <div
+      aria-label="Pagination"
       class="pagination-bar"
+      role="pagination"
     >
       <button
+        aria-label="Go to first page"
         class="btn pagination-button"
         disabled=""
       >
         <span
+          aria-hidden="true"
           class="glyphicon glyphicon-step-backward"
         />
       </button>
       <button
+        aria-label="Go to previous page"
         class="btn pagination-button"
         disabled=""
       >
         <span
+          aria-hidden="true"
           class="glyphicon glyphicon-backward"
         />
       </button>
+      <span
+        class="sr-only sr-only-focusable"
+      >
+        Currently showing 1 to 10 of 20
+      </span>
       <div
+        aria-hidden="true"
         class="paging-status"
       >
         1 to 10 of 20
       </div>
       <button
+        aria-label="Go to next page"
         class="btn pagination-button"
       >
         <span
+          aria-hidden="true"
           class="glyphicon glyphicon-forward"
         />
       </button>
       <button
+        aria-label="Go to last page"
         class="btn pagination-button"
       >
         <span
+          aria-hidden="true"
           class="glyphicon glyphicon-step-forward"
         />
       </button>

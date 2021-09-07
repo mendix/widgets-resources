@@ -254,6 +254,10 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
           </r>
         </r>
         <button
+          aria-controls="datepicker_0.123456789"
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label="Show calendar"
           className="btn btn-default btn-calendar"
           onClick={[Function]}
           onKeyDown={[Function]}
@@ -518,6 +522,10 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
           </r>
         </r>
         <button
+          aria-controls="datepicker_0.123456789"
+          aria-expanded={false}
+          aria-haspopup={true}
+          aria-label="Show calendar"
           className="btn btn-default btn-calendar"
           onClick={[Function]}
           onKeyDown={[Function]}

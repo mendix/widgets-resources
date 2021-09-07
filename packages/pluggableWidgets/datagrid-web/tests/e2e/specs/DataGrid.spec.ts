@@ -108,7 +108,7 @@ describe("datagrid-web", () => {
 
             const columnSelector = page.getElement(".column-selector-button", grid);
             columnSelector.click();
-            const columnItem = page.getElement(".column-selectors>li>label", grid);
+            const columnItem = page.getElement(".column-selectors>li");
             columnItem.click();
 
             expect(column.isDisplayed()).toBeFalsy();

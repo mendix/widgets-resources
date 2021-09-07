@@ -40,6 +40,10 @@ exports[`Filter component renders correctly 1`] = `
     </div>
   </div>
   <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Show calendar"
     class="btn btn-default btn-calendar"
   >
     <span
@@ -73,6 +77,10 @@ exports[`Filter component renders correctly when not adjustable by user 1`] = `
     </div>
   </div>
   <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Show calendar"
     class="btn btn-default btn-calendar"
   >
     <span
@@ -125,6 +133,10 @@ exports[`Filter component renders correctly with aria labels 1`] = `
     </div>
   </div>
   <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="Show calendar"
     class="btn btn-default btn-calendar"
   >
     <span
