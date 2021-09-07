@@ -1,6 +1,7 @@
 import {
     ContainerProps,
     DropZoneProps,
+    hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
@@ -28,8 +29,23 @@ export function getProperties(
     }
 
     if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, [
+                "pagination",
+                "pagingPosition",
+                "showEmptyPlaceholder",
+                "emptyPlaceholder",
+                "itemClass",
+                "filtersPlaceholder",
+                "filterList",
+                "sortList"
+            ]);
+        }
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertyIn(defaultProperties, values, "advanced");
     }
+
     return defaultProperties;
 }
 
