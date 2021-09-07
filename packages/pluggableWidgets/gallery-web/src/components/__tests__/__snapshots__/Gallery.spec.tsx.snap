@@ -122,8 +122,7 @@ exports[`Gallery with pagination renders correctly 1`] = `
         />
       </button>
       <span
-        class="sr-only"
-        tabindex="0"
+        class="sr-only sr-only-focusable"
       >
         Currently showing 1 to 10 of 20
       </span>

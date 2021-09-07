@@ -790,8 +790,7 @@ exports[`Table renders the structure correctly with paging 1`] = `
           />
         </button>
         <span
-          class="sr-only"
-          tabindex="0"
+          class="sr-only sr-only-focusable"
         >
           Currently showing 11 to 20 
         </span>

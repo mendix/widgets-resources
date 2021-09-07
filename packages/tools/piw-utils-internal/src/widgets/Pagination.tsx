@@ -64,7 +64,7 @@ export function Pagination(props: PaginationProps): ReactElement | null {
             >
                 <span aria-hidden className="glyphicon glyphicon-backward" />
             </button>
-            <span className="sr-only" tabIndex={0}>
+            <span className="sr-only sr-only-focusable">
                 {props.labelPagingStatus ?? "Currently showing"} {pagingStatus}
             </span>
             <div aria-hidden className="paging-status">
