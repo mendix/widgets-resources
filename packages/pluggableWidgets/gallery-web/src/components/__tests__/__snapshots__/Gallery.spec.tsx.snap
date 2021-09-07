@@ -4,25 +4,31 @@ exports[`Gallery DOM Structure renders correctly 1`] = `
 <div
   class="widget-gallery"
   data-focusindex="0"
+  role="list"
 >
   <div
     class="widget-gallery-filter"
+    role="group"
   />
   <div
     class="widget-gallery-items widget-gallery-lg-4 widget-gallery-md-3 widget-gallery-sm-2 infinite-loading"
+    role="group"
   >
     <div
       class="widget-gallery-item"
+      role="listitem"
     >
       11
     </div>
     <div
       class="widget-gallery-item"
+      role="listitem"
     >
       22
     </div>
     <div
       class="widget-gallery-item"
+      role="listitem"
     >
       33
     </div>
@@ -34,12 +40,15 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
 <div
   class="widget-gallery"
   data-focusindex="0"
+  role="list"
 >
   <div
     class="widget-gallery-filter"
+    role="group"
   />
   <div
     class="widget-gallery-items widget-gallery-lg-4 widget-gallery-md-3 widget-gallery-sm-2 infinite-loading"
+    role="group"
   >
     <div
       class="widget-gallery-item widget-gallery-clickable"
@@ -70,12 +79,15 @@ exports[`Gallery with empty option renders correctly 1`] = `
 <div
   class="widget-gallery"
   data-focusindex="0"
+  role="list"
 >
   <div
     class="widget-gallery-filter"
+    role="group"
   />
   <div
     class="widget-gallery-empty"
+    role="group"
   >
     <div
       class="empty-placeholder"
@@ -92,9 +104,11 @@ exports[`Gallery with pagination renders correctly 1`] = `
 <div
   class="widget-gallery"
   data-focusindex="0"
+  role="list"
 >
   <div
     class="widget-gallery-pagination"
+    role="group"
   >
     <div
       aria-label="Pagination"
@@ -154,22 +168,27 @@ exports[`Gallery with pagination renders correctly 1`] = `
   </div>
   <div
     class="widget-gallery-filter"
+    role="group"
   />
   <div
     class="widget-gallery-items widget-gallery-lg-4 widget-gallery-md-3 widget-gallery-sm-2"
+    role="group"
   >
     <div
       class="widget-gallery-item"
+      role="listitem"
     >
       11
     </div>
     <div
       class="widget-gallery-item"
+      role="listitem"
     >
       22
     </div>
     <div
       class="widget-gallery-item"
+      role="listitem"
     >
       33
     </div>
