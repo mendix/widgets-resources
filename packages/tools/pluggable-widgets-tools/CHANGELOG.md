@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - We fixed an issue where the e2e test script overrides a local test project by default. To override the existing local test project, supply the following argument when calling the script: `--update-test-project`.
 - We improved error handling for e2e testing.
 
+### Fixed
+- We fixed an issue where optional peer dependencies would cause a build error if not present. 
+
 ## [9.5.1] - 2021-09-02
 
 ### Changed
