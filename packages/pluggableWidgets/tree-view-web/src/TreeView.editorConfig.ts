@@ -89,7 +89,7 @@ export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps 
                               fontSize: 12,
                               bold: true,
                               grow: 100,
-                              content: values.headerCaption || "Header caption"
+                              content: values.headerCaption || "[No header caption configured]"
                           } as TextProps)
                         : ({
                               type: "RowLayout",
