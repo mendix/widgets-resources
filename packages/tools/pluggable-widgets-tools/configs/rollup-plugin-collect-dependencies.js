@@ -151,5 +151,9 @@ async function asyncWhere(array, filter) {
 function isPeerDependencyOptional(name, map = {}) {
     // certain peerDependencies can be optionally available, described in package.json `peerDependencyMeta`.
     // https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependenciesmeta
-    return !!map[name]?.optional;
+    if (map[name]) {
+        return !!map[name].optional;
+    }
+
+    return false;
 }
