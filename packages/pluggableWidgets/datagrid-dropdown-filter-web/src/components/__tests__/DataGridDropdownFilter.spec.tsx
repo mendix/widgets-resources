@@ -2,11 +2,12 @@ import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components
 import { dynamicValue, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import DatagridDropdownFilter from "../../DatagridDropdownFilter";
+import { render } from "@testing-library/react";
 import { mount } from "enzyme";
 import { FilterComponent } from "../FilterComponent";
 
 const commonProps = {
-    class: "filter-test",
+    class: "filter-custom-class",
     tabIndex: 0,
     name: "filter-test"
 };
@@ -44,6 +45,16 @@ describe("Dropdown Filter", () => {
                         value: "enum_value_2"
                     }
                 ]);
+            });
+        });
+
+        describe("DOM structure", () => {
+            it("renders correctly", () => {
+                const { asFragment } = render(
+                    <DatagridDropdownFilter {...commonProps} auto multiSelect={false} filterOptions={[]} />
+                );
+
+                expect(asFragment()).toMatchSnapshot();
             });
         });
 

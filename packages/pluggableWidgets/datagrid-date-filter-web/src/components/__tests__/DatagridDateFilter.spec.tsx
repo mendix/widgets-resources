@@ -1,11 +1,12 @@
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
 import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { mount } from "enzyme";
+import { render } from "@testing-library/react";
 import { createContext, createElement } from "react";
 import DatagridDateFilter from "../../DatagridDateFilter";
 
 const commonProps = {
-    class: "filter-test",
+    class: "filter-custom-class",
     tabIndex: 0,
     name: "filter-test",
     defaultFilter: "equal" as const,
@@ -38,9 +39,9 @@ describe("Date Filter", () => {
         });
 
         it("renders correctly", () => {
-            const filter = mount(<DatagridDateFilter {...commonProps} />);
+            const { asFragment } = render(<DatagridDateFilter {...commonProps} />);
 
-            expect(filter).toMatchSnapshot();
+            expect(asFragment()).toMatchSnapshot();
         });
 
         afterAll(() => {
@@ -71,9 +72,9 @@ describe("Date Filter", () => {
         });
 
         it("renders correctly", () => {
-            const filter = mount(<DatagridDateFilter {...commonProps} />);
+            const { asFragment } = render(<DatagridDateFilter {...commonProps} />);
 
-            expect(filter).toMatchSnapshot();
+            expect(asFragment()).toMatchSnapshot();
         });
 
         afterAll(() => {

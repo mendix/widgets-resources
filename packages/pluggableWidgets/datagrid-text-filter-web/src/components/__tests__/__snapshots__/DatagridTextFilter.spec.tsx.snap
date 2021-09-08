@@ -1,195 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Text Filter with multiple attributes renders correctly 1`] = `
-<DatagridTextFilter
-  adjustable={true}
-  class="filter-test"
-  defaultFilter="equal"
-  delay={1000}
-  name="filter-test"
-  tabIndex={0}
+<div
+  class="filter-container filter-custom-class"
+  data-focusindex="0"
 >
-  <FilterComponent
-    adjustable={true}
-    className="filter-test"
-    defaultFilter="equal"
-    delay={1000}
-    name="filter-test"
-    tabIndex={0}
-    updateFilters={[Function]}
+  <div
+    class="filter-selector"
   >
     <div
-      className="filter-container filter-test"
-      data-focusindex={0}
+      class="filter-selector-content"
     >
-      <FilterSelector
-        defaultFilter="equal"
-        name="filter-test"
-        onChange={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "Contains",
-              "value": "contains",
-            },
-            Object {
-              "label": "Starts with",
-              "value": "startsWith",
-            },
-            Object {
-              "label": "Ends with",
-              "value": "endsWith",
-            },
-            Object {
-              "label": "Greater than",
-              "value": "greater",
-            },
-            Object {
-              "label": "Greater than or equal",
-              "value": "greaterEqual",
-            },
-            Object {
-              "label": "Equal",
-              "value": "equal",
-            },
-            Object {
-              "label": "Not equal",
-              "value": "notEqual",
-            },
-            Object {
-              "label": "Smaller than",
-              "value": "smaller",
-            },
-            Object {
-              "label": "Smaller than or equal",
-              "value": "smallerEqual",
-            },
-          ]
-        }
+      <button
+        aria-controls="filter-test-filter-selectors"
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="btn btn-default filter-selector-button button-icon equal"
       >
-        <div
-          className="filter-selector"
-        >
-          <div
-            className="filter-selector-content"
-          >
-            <button
-              aria-controls="filter-test-filter-selectors"
-              aria-expanded={false}
-              aria-haspopup={true}
-              className="btn btn-default filter-selector-button button-icon equal"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-            >
-               
-            </button>
-          </div>
-        </div>
-      </FilterSelector>
-      <input
-        className="form-control filter-input"
-        onChange={[Function]}
-        type="text"
-        value=""
-      />
+         
+      </button>
     </div>
-  </FilterComponent>
-</DatagridTextFilter>
+  </div>
+  <input
+    class="form-control filter-input"
+    type="text"
+    value=""
+  />
+</div>
 `;
 
 exports[`Text Filter with single attribute renders correctly 1`] = `
-<DatagridTextFilter
-  adjustable={true}
-  class="filter-test"
-  defaultFilter="equal"
-  delay={1000}
-  name="filter-test"
-  tabIndex={0}
+<div
+  class="filter-container filter-custom-class"
+  data-focusindex="0"
 >
-  <FilterComponent
-    adjustable={true}
-    className="filter-test"
-    defaultFilter="equal"
-    delay={1000}
-    name="filter-test"
-    tabIndex={0}
-    updateFilters={[Function]}
+  <div
+    class="filter-selector"
   >
     <div
-      className="filter-container filter-test"
-      data-focusindex={0}
+      class="filter-selector-content"
     >
-      <FilterSelector
-        defaultFilter="equal"
-        name="filter-test"
-        onChange={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "Contains",
-              "value": "contains",
-            },
-            Object {
-              "label": "Starts with",
-              "value": "startsWith",
-            },
-            Object {
-              "label": "Ends with",
-              "value": "endsWith",
-            },
-            Object {
-              "label": "Greater than",
-              "value": "greater",
-            },
-            Object {
-              "label": "Greater than or equal",
-              "value": "greaterEqual",
-            },
-            Object {
-              "label": "Equal",
-              "value": "equal",
-            },
-            Object {
-              "label": "Not equal",
-              "value": "notEqual",
-            },
-            Object {
-              "label": "Smaller than",
-              "value": "smaller",
-            },
-            Object {
-              "label": "Smaller than or equal",
-              "value": "smallerEqual",
-            },
-          ]
-        }
+      <button
+        aria-controls="filter-test-filter-selectors"
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="btn btn-default filter-selector-button button-icon equal"
       >
-        <div
-          className="filter-selector"
-        >
-          <div
-            className="filter-selector-content"
-          >
-            <button
-              aria-controls="filter-test-filter-selectors"
-              aria-expanded={false}
-              aria-haspopup={true}
-              className="btn btn-default filter-selector-button button-icon equal"
-              onClick={[Function]}
-              onKeyDown={[Function]}
-            >
-               
-            </button>
-          </div>
-        </div>
-      </FilterSelector>
-      <input
-        className="form-control filter-input"
-        onChange={[Function]}
-        type="text"
-        value=""
-      />
+         
+      </button>
     </div>
-  </FilterComponent>
-</DatagridTextFilter>
+  </div>
+  <input
+    class="form-control filter-input"
+    type="text"
+    value=""
+  />
+</div>
 `;
