@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.5.3] - 2021-09-09
+
+### Fixed
+- We fixed an issue where optional dependencies would cause a build error if not present. 
+
 ## [9.5.2] - 2021-09-08
 
 ### Changed
