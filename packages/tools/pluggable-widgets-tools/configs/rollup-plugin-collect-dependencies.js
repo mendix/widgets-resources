@@ -62,7 +62,7 @@ export function collectDependencies({ onlyNative, outputDir, widgetName }) {
     };
 }
 
-async function resolvePackage(target, sourceDir) {
+async function resolvePackage(target, sourceDir, optional = false) {
     const targetParts = target.split("/");
     const targetPackage = targetParts[0].startsWith("@") ? `${targetParts[0]}/${targetParts[1]}` : targetParts[0];
     try {
@@ -71,7 +71,8 @@ async function resolvePackage(target, sourceDir) {
         if (
             e.message.includes("Cannot find module") &&
             !/\.((j|t)sx?)|json|(pn|jpe?|sv)g|(tif|gi)f$/g.test(targetPackage) &&
-            !/configs\/jsActions/i.test(__dirname)                                 // Ignore errors about missing package.json in 'jsActions/**/src/*' folders
+            !/configs\/jsActions/i.test(__dirname) && // Ignore errors about missing package.json in 'jsActions/**/src/*' folders
+            !optional // Certain peerDependencies can be optional, ignore throwing an error if an optional peerDependency is considered missing.
         ) {
             throw e;
         }
@@ -98,7 +99,11 @@ async function getTransitiveDependencies(packagePath, isExternal) {
             packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
         );
         for (const dependency of dependencies) {
-            const resolvedPackagePath = await resolvePackage(dependency, nextPath);
+            const resolvedPackagePath = await resolvePackage(
+                dependency,
+                nextPath,
+                isPeerDependencyOptional(dependency, packageJson.peerDependenciesMeta)
+            );
             if (isExternal(dependency) || !resolvedPackagePath) {
                 continue;
             }
@@ -141,4 +146,14 @@ async function writeNativeDependenciesJson(nativeDependencies, outputDir, widget
 
 async function asyncWhere(array, filter) {
     return (await Promise.all(array.map(async el => ((await filter(el)) ? [el] : [])))).flat();
+}
+
+function isPeerDependencyOptional(name, map = {}) {
+    // certain peerDependencies can be optionally available, described in package.json `peerDependencyMeta`.
+    // https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependenciesmeta
+    if (map[name]) {
+        return !!map[name].optional;
+    }
+
+    return false;
 }
