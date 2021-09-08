@@ -44,7 +44,9 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
     return (
         <div className={classNames("widget-gallery", props.className)} data-focusindex={props.tabIndex || 0}>
             {props.paginationPosition === "above" && pagination}
-            <div className="widget-gallery-filter">{props.filters}</div>
+            <div className="widget-gallery-filter" role="section">
+                {props.filters}
+            </div>
 
             {props.items.length > 0 && props.itemRenderer && (
                 <InfiniteBody
@@ -57,6 +59,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
                     hasMoreItems={props.hasMoreItems}
                     setPage={props.setPage}
                     isInfinite={!props.paging}
+                    role="list"
                 >
                     {props.items.map(item =>
                         props.itemRenderer((children, className, onClick) => {
@@ -77,7 +80,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
                                               }
                                             : undefined
                                     }
-                                    role={onClick ? "button" : undefined}
+                                    role={onClick ? "button" : "listitem"}
                                     tabIndex={onClick ? 0 : undefined}
                                 >
                                     {children}
@@ -90,7 +93,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
             {(props.items.length === 0 || props.preview) &&
                 props.emptyPlaceholderRenderer &&
                 props.emptyPlaceholderRenderer(children => (
-                    <div className="widget-gallery-empty">
+                    <div className="widget-gallery-empty" role="section">
                         <div className="empty-placeholder">{children}</div>
                     </div>
                 ))}
