@@ -50,20 +50,23 @@ async function main() {
 
     if (mode === "start") {
         if (process.argv.includes("--validate-sass")) {
-            const watcher = chokidar
-                .watch(join(__dirname, "../src/themesource/{atlas_core,atlas_web_content}/web/**/*.scss"))
-                .on(
-                    "all",
-                    debounce(
-                        () => {
-                            validateSass(mode === "start");
-                        },
-                        500,
-                        { maxWait: 1000 }
-                    )
-                );
+            await new Promise(resolve => {
+                const watcher = chokidar
+                    .watch(join(__dirname, "../src/themesource/{atlas_core,atlas_web_content}/web/**/*.scss"))
+                    .on(
+                        "all",
+                        debounce(
+                            () => {
+                                validateSass(mode === "start");
+                                resolve();
+                            },
+                            500,
+                            { maxWait: 2000 }
+                        )
+                    );
 
-            closeOnSigint(watcher);
+                closeOnSigint(watcher);
+            });
         }
 
         await buildAndCopyAtlas(true, outputDir);
