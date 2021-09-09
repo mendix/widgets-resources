@@ -1,6 +1,5 @@
 const chokidar = require("chokidar");
 const concurrently = require("concurrently");
-const { debounce } = require("lodash");
 const sass = require("sass");
 const { join } = require("path");
 const { rm, mkdir } = require("shelljs");
@@ -57,14 +56,10 @@ async function main() {
                     .watch(join(__dirname, "../src/themesource/{atlas_core,atlas_web_content}/web/**/*.scss"))
                     .on(
                         "all",
-                        debounce(
-                            () => {
-                                validateSass(mode === "start");
-                                resolve();
-                            },
-                            500,
-                            { maxWait: 2000 }
-                        )
+                        debounce(() => {
+                            validateSass(mode === "start");
+                            resolve();
+                        }, 500)
                     );
 
                 closeOnSigint(watcher);
@@ -78,6 +73,18 @@ async function main() {
         }
         await buildAndCopyAtlas(false, outputDir);
     }
+}
+
+function debounce(func, waitFor) {
+    let timeout = null;
+
+    return (...args) => {
+        if (timeout !== null) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        timeout = setTimeout(() => func(...args), waitFor);
+    };
 }
 
 function closeOnSigint(watcher) {
