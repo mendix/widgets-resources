@@ -7,8 +7,8 @@ import { ChartStyle, defaultStyle } from "./ui/Styles";
 import { useSeries } from "./utils/SeriesLoader";
 
 export function PieDoughnutChart(props: PieDoughnutChartProps<ChartStyle>): ReactElement | null {
-    const { series: chartSeries, style, ...rest } = props;
-    const series = useSeries(chartSeries);
+    const { series: chartSeries, style, name, ...rest } = props;
+    const series = useSeries(chartSeries, name);
 
     if (!series) {
         return null;
