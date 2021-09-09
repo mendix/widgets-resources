@@ -14,6 +14,10 @@
     "build": "pluggable-widgets-tools build:native",
     "release": "pluggable-widgets-tools release:native",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "test:e2e:local:ios:debug": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:android:debug": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
     "version": "npm run release"
   },
   "dependencies": {
@@ -24,6 +28,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-star-rating": "^1.0.1",
+    "detox": "^18.20.0",
     "eslint": "^7.20.0"
   }
 }
