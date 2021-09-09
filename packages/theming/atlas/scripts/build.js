@@ -1,4 +1,6 @@
+const chokidar = require("chokidar");
 const concurrently = require("concurrently");
+const sass = require("sass");
 const { join } = require("path");
 const { rm, mkdir } = require("shelljs");
 
@@ -8,7 +10,15 @@ main().catch(e => {
 });
 
 async function main() {
-    const mode = process.argv[2] || "build";
+    let mode = "build";
+
+    if (process.argv.includes("start")) {
+        mode = "start";
+    } else if (process.argv.includes("release")) {
+        mode = "release";
+    }
+
+    const sassValidationEnabled = process.argv.includes("--validate-sass");
 
     let outputDir;
 
@@ -30,8 +40,6 @@ async function main() {
 
         rm("-rf", outputDir);
         console.info(`Ensured the directory ${outputDir} is removed`);
-    } else {
-        throw new Error(`Invalid mode: "${mode}"`);
     }
 
     // when targeting a networked windows drive, the cmds executed by concurrently run into a race condition when
@@ -41,7 +49,82 @@ async function main() {
     mkdir("-p", join(outputDir, "themesource/atlas_web_content"));
     mkdir("-p", join(outputDir, "themesource/atlas_nativemobile_content"));
 
-    await buildAndCopyAtlas(mode === "start", outputDir);
+    if (mode === "start") {
+        if (sassValidationEnabled) {
+            await new Promise(resolve => {
+                const watcher = chokidar
+                    .watch(join(__dirname, "../src/themesource/{atlas_core,atlas_web_content}/web/**/*.scss"))
+                    .on(
+                        "all",
+                        debounce(() => {
+                            validateSass(mode === "start");
+                            resolve();
+                        }, 500)
+                    );
+
+                closeOnSigint(watcher);
+            });
+        }
+
+        await buildAndCopyAtlas(true, outputDir);
+    } else {
+        if (sassValidationEnabled) {
+            validateSass(mode === "start");
+        }
+        await buildAndCopyAtlas(false, outputDir);
+    }
+}
+
+function debounce(func, waitFor) {
+    let timeout = null;
+
+    return (...args) => {
+        if (timeout !== null) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        timeout = setTimeout(() => func(...args), waitFor);
+    };
+}
+
+function closeOnSigint(watcher) {
+    let rl;
+
+    if (process.platform === "win32") {
+        rl = require("readline").createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+
+        rl.on("SIGINT", () => {
+            process.emit("SIGINT");
+        });
+    }
+
+    process.on("SIGINT", () => {
+        if (rl) {
+            rl.close();
+        }
+        watcher.close();
+    });
+}
+
+function validateSass(watchMode) {
+    console.info(`Validating Sass...`);
+
+    try {
+        sass.renderSync({ file: join(__dirname, "../src/themesource/atlas_core/web/main.scss") });
+        sass.renderSync({ file: join(__dirname, "../src/themesource/atlas_web_content/web/main.scss") });
+    } catch (e) {
+        if (watchMode) {
+            console.error(`Sass validation failed: ${e.message}`);
+            return;
+        } else {
+            throw new Error(`Sass validation failed: ${e.message}`);
+        }
+    }
+
+    console.info("Sass validation succeeded");
 }
 
 async function buildAndCopyAtlas(watchMode, destination) {
@@ -65,8 +148,8 @@ async function buildAndCopyAtlas(watchMode, destination) {
                 {
                     name: "public-themesource-core",
                     command: `copy-and-watch ${watchArg} "src/themesource/atlas_core/public/**/*" "${join(
-                      destination,
-                      "themesource/atlas_core/public"
+                        destination,
+                        "themesource/atlas_core/public"
                     )}"`
                 },
                 {
@@ -79,8 +162,8 @@ async function buildAndCopyAtlas(watchMode, destination) {
                 {
                     name: "public-themesource-content",
                     command: `copy-and-watch ${watchArg} "src/themesource/atlas_web_content/public/**/*" "${join(
-                      destination,
-                      "themesource/atlas_web_content/public"
+                        destination,
+                        "themesource/atlas_web_content/public"
                     )}"`
                 },
                 {
@@ -97,16 +180,19 @@ async function buildAndCopyAtlas(watchMode, destination) {
                 {
                     name: "public-themesource-nativecontent",
                     command: `copy-and-watch ${watchArg} "src/themesource/atlas_nativemobile_content/public/**/*" "${join(
-                      destination,
-                      "themesource/atlas_nativemobile_content/public"
+                        destination,
+                        "themesource/atlas_nativemobile_content/public"
                     )}"`
-                },
+                }
             ],
             {
                 killOthers: ["failure"]
             }
         );
-        console.log("Building & copying Atlas has completed successfully");
+
+        if (!watchMode) {
+            console.log("Building & copying Atlas has completed successfully");
+        }
     } catch (commands) {
         const commandInfo = commands.map(command => `{ name: ${command.command.name}, exit code: ${command.exitCode}}`);
         throw new Error(`One or more commands failed:\n${commandInfo.join("\n")}`);

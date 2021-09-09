@@ -34,4 +34,4 @@ jobs:
             - name: "Running Atlas build"
               run: |
                   cd packages/theming/atlas
-                  npm run build
+                  npm run build -- --validate-sass
