@@ -76,8 +76,10 @@ async function main() {
 }
 
 function closeOnSigint(watcher) {
+    let rl;
+
     if (process.platform === "win32") {
-        const rl = require("readline").createInterface({
+        rl = require("readline").createInterface({
             input: process.stdin,
             output: process.stdout
         });
@@ -88,6 +90,7 @@ function closeOnSigint(watcher) {
     }
 
     process.on("SIGINT", () => {
+        rl?.close();
         watcher.close();
     });
 }
