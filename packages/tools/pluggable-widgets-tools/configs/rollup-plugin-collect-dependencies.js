@@ -95,14 +95,19 @@ async function getTransitiveDependencies(packagePath, isExternal) {
         result.add(nextPath);
 
         const packageJson = await readJson(join(nextPath, "package.json"));
-        const dependencies = (packageJson.dependencies ? Object.keys(packageJson.dependencies) : []).concat(
-            packageJson.peerDependencies ? Object.keys(packageJson.peerDependencies) : []
+        const dependencies = Object.keys(packageJson.dependencies || {}).concat(
+            Object.keys(packageJson.peerDependencies || {})
         );
+        const optionalDependencies = Object.keys(packageJson.optionalDependencies || {}); // certain dependencies can be optionally available, described in package.json `optionalDependencies`.
+        const optionalPeerDependencies = Object.entries(packageJson.peerDependenciesMeta || {}) // certain peerDependencies can be optionally available, described in package.json `peerDependencyMeta`.
+            .filter(dependency => !!dependency[1].optional)
+            .map(dependency => dependency[0]);
+
         for (const dependency of dependencies) {
             const resolvedPackagePath = await resolvePackage(
                 dependency,
                 nextPath,
-                isDependencyOptional(dependency, packageJson) || isPeerDependencyOptional(dependency, packageJson)
+                optionalDependencies.includes(dependency) || optionalPeerDependencies.includes(dependency)
             );
             if (isExternal(dependency) || !resolvedPackagePath) {
                 continue;
@@ -146,21 +151,4 @@ async function writeNativeDependenciesJson(nativeDependencies, outputDir, widget
 
 async function asyncWhere(array, filter) {
     return (await Promise.all(array.map(async el => ((await filter(el)) ? [el] : [])))).flat();
-}
-
-function isPeerDependencyOptional(name, packageJson = {}) {
-    // certain peerDependencies can be optionally available, described in package.json `peerDependencyMeta`.
-    // https://docs.npmjs.com/cli/v7/configuring-npm/package-json#peerdependenciesmeta
-    const map = packageJson.peerDependenciesMeta || {};
-    if (map[name]) {
-        return !!map[name].optional;
-    }
-
-    return false;
-}
-
-function isDependencyOptional(name, packageJson = {}) {
-    // certain dependencies can be optionally available, described in package.json `optionalDependencies`.
-    // https://docs.npmjs.com/cli/v7/configuring-npm/package-json#optionaldependencies
-    return Object.prototype.hasOwnProperty.call(packageJson.optionalDependencies || {}, name);
 }
