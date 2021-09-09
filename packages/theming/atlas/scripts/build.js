@@ -19,6 +19,8 @@ async function main() {
         mode = "release";
     }
 
+    const sassValidationEnabled = process.argv.includes("--validate-sass");
+
     let outputDir;
 
     if (mode === "build" || mode === "start") {
@@ -49,7 +51,7 @@ async function main() {
     mkdir("-p", join(outputDir, "themesource/atlas_nativemobile_content"));
 
     if (mode === "start") {
-        if (process.argv.includes("--validate-sass")) {
+        if (sassValidationEnabled) {
             await new Promise(resolve => {
                 const watcher = chokidar
                     .watch(join(__dirname, "../src/themesource/{atlas_core,atlas_web_content}/web/**/*.scss"))
@@ -71,7 +73,7 @@ async function main() {
 
         await buildAndCopyAtlas(true, outputDir);
     } else {
-        if (process.argv.includes("--validate-sass")) {
+        if (sassValidationEnabled) {
             validateSass(mode === "start");
         }
         await buildAndCopyAtlas(false, outputDir);
@@ -93,7 +95,9 @@ function closeOnSigint(watcher) {
     }
 
     process.on("SIGINT", () => {
-        rl?.close();
+        if (rl) {
+            rl.close();
+        }
         watcher.close();
     });
 }
