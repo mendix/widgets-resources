@@ -7,6 +7,7 @@ import {
 import TimelineComponent from "./components/TimelineComponent";
 import { createElement } from "react";
 import { BasicItemType, CustomItemType, ItemType } from "./Timeline";
+import { mapPreviewIconToWebIcon } from "@mendix/piw-utils-internal/components/web";
 
 declare function require(name: string): string;
 
@@ -26,7 +27,7 @@ export function preview(props: TimelinePreviewProps) {
                         : "year"
                 );
                 constructedItem = {
-                    icon: props.icon,
+                    icon: mapPreviewIconToWebIcon(props.icon),
                     title: props.title === String.fromCharCode(160) ? "Title" : props.title,
                     eventDateTime:
                         props.timeIndication === String.fromCharCode(160) ? "Optional Time" : props.timeIndication,
