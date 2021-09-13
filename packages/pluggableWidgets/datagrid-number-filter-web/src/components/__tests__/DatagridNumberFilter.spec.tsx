@@ -91,7 +91,7 @@ describe("Number Filter", () => {
             const filter = mount(<DatagridNumberFilter {...commonProps} />);
 
             expect(filter.find(Alert).text()).toBe(
-                "The attribute type being used for Number filter is not 'Auto number, Decimal, Integer or Long'"
+                "The attribute type being used for Number filter is not 'Autonumber, Decimal, Integer or Long'"
             );
         });
 
@@ -124,7 +124,7 @@ describe("Number Filter", () => {
             const filter = mount(<DatagridNumberFilter {...commonProps} />);
 
             expect(filter.find(Alert).text()).toBe(
-                'To use multiple filters you need to define a filter identification in the properties of Number filter or have a "Auto number, Decimal, Integer or Long" attribute available.'
+                'The Number filter widget can’t be used with the filters options you have selected. It requires a "Autonumber, Decimal, Integer or Long" attribute to be selected.'
             );
         });
 

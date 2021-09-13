@@ -31,8 +31,8 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of Text filter or have
-            a &quot;Hashed string or String&quot; attribute available.
+            The Text filter widget can’t be used with the filters options you have selected. It requires a &quot;Hashed
+            string or String&quot; attribute to be selected.
         </Alert>
     );
 

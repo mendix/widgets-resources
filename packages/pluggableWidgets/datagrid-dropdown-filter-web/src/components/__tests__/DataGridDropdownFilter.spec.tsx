@@ -172,7 +172,7 @@ describe("Dropdown Filter", () => {
             );
 
             expect(filter.find(Alert).text()).toBe(
-                'To use multiple filters you need to define a filter identification in the properties of Drop-down filter or have a "Boolean or Enumeration" attribute available.'
+                'The Drop-down filter widget can’t be used with the filters options you have selected. It requires a "Boolean or Enumeration" attribute to be selected.'
             );
         });
 

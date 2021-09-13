@@ -124,7 +124,7 @@ describe("Text Filter", () => {
             const filter = mount(<DatagridTextFilter {...commonProps} />);
 
             expect(filter.find(Alert).text()).toBe(
-                'To use multiple filters you need to define a filter identification in the properties of Text filter or have a "Hashed string or String" attribute available.'
+                'The Text filter widget can’t be used with the filters options you have selected. It requires a "Hashed string or String" attribute to be selected.'
             );
         });
 
