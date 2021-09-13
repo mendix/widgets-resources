@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.web.treeView.TreeView" needsEntityContext="true" offlineCapable="true"
+<widget id="com.mendix.widget.web.treenode.TreeNode" needsEntityContext="true" offlineCapable="true"
     xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Tree node</name>
     <description>Display a tree view structure</description>
     <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAITSURBVHgB7Zs/S0JRGMYf/0V0x5BwaczADFoCW3SIoCkcnHLvA7Qn9gEaxQ9gH6CpoQZdClouhF5qbZE0mlIytbqnoMgriPffee28P3DwcId7Hs77vud9zrmBDxMoTBCKwwJAccKjA5cPQ5TrA3T63qWGVCyEw40wtEgAsrGsgMq9t5MXXDeHuDCFpoBFgMeuP0XhpQ8ScA6Y9MD53jzcoHI3wKkZXtTgMgjFYQGgOCwAFGdiGdw9e8V/hkNgdMCvBmVpQX4jJLAIcLAW9vzlkotBbMVoLL6AE0usWCyi0Wj8/C8UCkgkEpglOAdAcVgAKA4LAMXhXgAEEEbsid7H7dM7vEJs7vLxMLaXQ3/GSawAMXEvJy8QIpfrViuahAB+WfGdMVY85wAQZN+M1fyqO682yc9wVYBarQbDMDAtRmgFCMUhA1cFqFarsEMvmQXW5QjAGyEojqshkMlkEI1GMS26mQN0yMFVAdLptC1HqGcenOqSDk5JlkFxiuzXSTInQRBAphVPQoAds0NLeWyTC5HFDnMUEjlAiwBHm3OQAecAKA6JEBD3Eo9vFHaErprsCMEP2BEag6s5oN1uo9VqYVq6XXEZ87cMzqwjVCqVYIdvQyQLGfA+AA6w0/tTw1EI5HK5r7gXPyc8axreIAdHAogVIK7FOEXmTXIugyAIO0I+wo4QCCDTEQrwt8OKwwJAcT4BHNKnUGTh4pAAAAAASUVORK5CYII=</icon>
@@ -30,7 +30,7 @@
                 </property>
                 <property key="hasChildren" type="boolean" defaultValue="true">
                     <caption>Has children</caption>
-                    <description>Indicate whether the node has children or is an end node. When set to yes, a composable region becomes avaliable to define the child nodes.</description>
+                    <description>Indicate whether the node has children or is an end node. When set to yes, a composable region becomes available to define the child nodes.</description>
                 </property>
                 <property key="startExpanded" type="boolean" defaultValue="false">
                     <caption>Start expanded</caption>

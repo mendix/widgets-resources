@@ -1,29 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TreeView preserves the DOM structure when collapsed 1`] = `
+exports[`TreeNode preserves the DOM structure when collapsed 1`] = `
 <ul
-  class="widget-tree-view"
+  class="widget-tree-node"
   data-focusindex="0"
   role="tree"
 >
   <li
     aria-expanded="false"
-    class="widget-tree-view-branch"
+    class="widget-tree-node-branch"
     role="treeitem"
     tabindex="0"
   >
     <span
-      class="widget-tree-view-branch-header widget-tree-view-branch-header-clickable"
-      id="11TreeViewBranchHeader"
+      class="widget-tree-node-branch-header widget-tree-node-branch-header-clickable"
+      id="11TreeNodeBranchHeader"
     >
       <span
-        class="widget-tree-view-branch-header-value"
+        class="widget-tree-node-branch-header-value"
       >
         First header
       </span>
       <svg
         aria-hidden="true"
-        class="widget-tree-view-branch-header-icon widget-tree-view-branch-header-icon-collapsed-right"
+        class="widget-tree-node-branch-header-icon widget-tree-node-branch-header-icon-collapsed-right"
         height="16"
         viewBox="0 0 16 16"
         width="16"
@@ -37,22 +37,22 @@ exports[`TreeView preserves the DOM structure when collapsed 1`] = `
   </li>
   <li
     aria-expanded="false"
-    class="widget-tree-view-branch"
+    class="widget-tree-node-branch"
     role="treeitem"
     tabindex="0"
   >
     <span
-      class="widget-tree-view-branch-header widget-tree-view-branch-header-clickable"
-      id="22TreeViewBranchHeader"
+      class="widget-tree-node-branch-header widget-tree-node-branch-header-clickable"
+      id="22TreeNodeBranchHeader"
     >
       <span
-        class="widget-tree-view-branch-header-value"
+        class="widget-tree-node-branch-header-value"
       >
         Second header
       </span>
       <svg
         aria-hidden="true"
-        class="widget-tree-view-branch-header-icon widget-tree-view-branch-header-icon-collapsed-right"
+        class="widget-tree-node-branch-header-icon widget-tree-node-branch-header-icon-collapsed-right"
         height="16"
         viewBox="0 0 16 16"
         width="16"
@@ -66,22 +66,22 @@ exports[`TreeView preserves the DOM structure when collapsed 1`] = `
   </li>
   <li
     aria-expanded="false"
-    class="widget-tree-view-branch"
+    class="widget-tree-node-branch"
     role="treeitem"
     tabindex="0"
   >
     <span
-      class="widget-tree-view-branch-header widget-tree-view-branch-header-clickable"
-      id="33TreeViewBranchHeader"
+      class="widget-tree-node-branch-header widget-tree-node-branch-header-clickable"
+      id="33TreeNodeBranchHeader"
     >
       <span
-        class="widget-tree-view-branch-header-value"
+        class="widget-tree-node-branch-header-value"
       >
         Third header
       </span>
       <svg
         aria-hidden="true"
-        class="widget-tree-view-branch-header-icon widget-tree-view-branch-header-icon-collapsed-right"
+        class="widget-tree-node-branch-header-icon widget-tree-node-branch-header-icon-collapsed-right"
         height="16"
         viewBox="0 0 16 16"
         width="16"
@@ -96,30 +96,30 @@ exports[`TreeView preserves the DOM structure when collapsed 1`] = `
 </ul>
 `;
 
-exports[`TreeView preserves the DOM structure when expanded 1`] = `
+exports[`TreeNode preserves the DOM structure when expanded 1`] = `
 <ul
-  class="widget-tree-view"
+  class="widget-tree-node"
   data-focusindex="0"
   role="tree"
 >
   <li
     aria-expanded="true"
-    class="widget-tree-view-branch"
+    class="widget-tree-node-branch"
     role="treeitem"
     tabindex="0"
   >
     <span
-      class="widget-tree-view-branch-header widget-tree-view-branch-header-clickable"
-      id="11TreeViewBranchHeader"
+      class="widget-tree-node-branch-header widget-tree-node-branch-header-clickable"
+      id="11TreeNodeBranchHeader"
     >
       <span
-        class="widget-tree-view-branch-header-value"
+        class="widget-tree-node-branch-header-value"
       >
         First header
       </span>
       <svg
         aria-hidden="true"
-        class="widget-tree-view-branch-header-icon"
+        class="widget-tree-node-branch-header-icon"
         height="16"
         viewBox="0 0 16 16"
         width="16"
@@ -132,8 +132,8 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
     </span>
     <div
       aria-hidden="false"
-      class="widget-tree-view-body"
-      id="11TreeViewBranchBody"
+      class="widget-tree-node-body"
+      id="11TreeNodeBranchBody"
     >
       <div>
         First content
@@ -142,22 +142,22 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
   </li>
   <li
     aria-expanded="true"
-    class="widget-tree-view-branch"
+    class="widget-tree-node-branch"
     role="treeitem"
     tabindex="0"
   >
     <span
-      class="widget-tree-view-branch-header widget-tree-view-branch-header-clickable"
-      id="22TreeViewBranchHeader"
+      class="widget-tree-node-branch-header widget-tree-node-branch-header-clickable"
+      id="22TreeNodeBranchHeader"
     >
       <span
-        class="widget-tree-view-branch-header-value"
+        class="widget-tree-node-branch-header-value"
       >
         Second header
       </span>
       <svg
         aria-hidden="true"
-        class="widget-tree-view-branch-header-icon"
+        class="widget-tree-node-branch-header-icon"
         height="16"
         viewBox="0 0 16 16"
         width="16"
@@ -170,8 +170,8 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
     </span>
     <div
       aria-hidden="false"
-      class="widget-tree-view-body"
-      id="22TreeViewBranchBody"
+      class="widget-tree-node-body"
+      id="22TreeNodeBranchBody"
     >
       <div>
         Second content
@@ -180,22 +180,22 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
   </li>
   <li
     aria-expanded="true"
-    class="widget-tree-view-branch"
+    class="widget-tree-node-branch"
     role="treeitem"
     tabindex="0"
   >
     <span
-      class="widget-tree-view-branch-header widget-tree-view-branch-header-clickable"
-      id="33TreeViewBranchHeader"
+      class="widget-tree-node-branch-header widget-tree-node-branch-header-clickable"
+      id="33TreeNodeBranchHeader"
     >
       <span
-        class="widget-tree-view-branch-header-value"
+        class="widget-tree-node-branch-header-value"
       >
         Third header
       </span>
       <svg
         aria-hidden="true"
-        class="widget-tree-view-branch-header-icon"
+        class="widget-tree-node-branch-header-icon"
         height="16"
         viewBox="0 0 16 16"
         width="16"
@@ -208,8 +208,8 @@ exports[`TreeView preserves the DOM structure when expanded 1`] = `
     </span>
     <div
       aria-hidden="false"
-      class="widget-tree-view-body"
-      id="33TreeViewBranchBody"
+      class="widget-tree-node-body"
+      id="33TreeNodeBranchBody"
     >
       <div>
         Third content

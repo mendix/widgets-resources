@@ -1,9 +1,9 @@
 import { createElement, ReactElement } from "react";
 import { ObjectItem, ValueStatus } from "mendix";
-import { TreeViewContainerProps } from "../typings/TreeViewProps";
-import { TreeView as TreeViewComponent, TreeViewObject } from "./components/TreeView";
+import { TreeNodeContainerProps } from "../typings/TreeNodeProps";
+import { TreeNode as TreeNodeComponent, TreeNodeObject } from "./components/TreeNode";
 
-function mapDataSourceItemToTreeViewObject(item: ObjectItem, props: TreeViewContainerProps): TreeViewObject {
+function mapDataSourceItemToTreeNodeObject(item: ObjectItem, props: TreeNodeContainerProps): TreeNodeObject {
     return {
         id: item.id,
         value: props.headerType === "text" ? props.headerCaption?.get(item).value : props.headerContent?.get(item),
@@ -11,18 +11,18 @@ function mapDataSourceItemToTreeViewObject(item: ObjectItem, props: TreeViewCont
     };
 }
 
-export function TreeView(props: TreeViewContainerProps): ReactElement {
+export function TreeNode(props: TreeNodeContainerProps): ReactElement {
     // TODO: Handle async states more gracefully?
     const items =
         props.datasource.status === ValueStatus.Available
-            ? props.datasource.items?.map(item => mapDataSourceItemToTreeViewObject(item, props)) ?? []
+            ? props.datasource.items?.map(item => mapDataSourceItemToTreeNodeObject(item, props)) ?? []
             : null;
 
     const expandedIcon = props.expandedIcon?.status === ValueStatus.Available ? props.expandedIcon.value : null;
     const collapsedIcon = props.collapsedIcon?.status === ValueStatus.Available ? props.collapsedIcon.value : null;
 
     return (
-        <TreeViewComponent
+        <TreeNodeComponent
             name={props.name}
             class={props.class}
             style={props.style}
@@ -35,7 +35,7 @@ export function TreeView(props: TreeViewContainerProps): ReactElement {
             collapsedIcon={collapsedIcon}
             tabIndex={props.tabIndex}
             animateIcon={props.animate && props.animateIcon}
-            animateTreeViewContent={props.animate}
+            animateTreeNodeContent={props.animate}
         />
     );
 }

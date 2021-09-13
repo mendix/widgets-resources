@@ -4,15 +4,15 @@ import { HTMLAttributes, mount, ReactWrapper, render as renderEnzyme } from "enz
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom";
-import { TreeView, TreeViewProps } from "../TreeView";
+import { TreeNode, TreeNodeProps } from "../TreeNode";
 
-const items: TreeViewProps["items"] = [
+const items: TreeNodeProps["items"] = [
     { id: "11" as GUID, value: "First header", content: <div>First content</div> },
     { id: "22" as GUID, value: "Second header", content: <div>Second content</div> },
     { id: "33" as GUID, value: "Third header", content: <div>Third content</div> }
 ];
 
-const defaultProps: TreeViewProps = {
+const defaultProps: TreeNodeProps = {
     name: "",
     class: "",
     items: [],
@@ -23,52 +23,52 @@ const defaultProps: TreeViewProps = {
     expandedIcon: null,
     collapsedIcon: null,
     animateIcon: false,
-    animateTreeViewContent: false
+    animateTreeNodeContent: false
 };
 
-describe("TreeView", () => {
+describe("TreeNode", () => {
     it("preserves the DOM structure when collapsed", () => {
-        expect(renderEnzyme(<TreeView {...defaultProps} class="" items={items} />)).toMatchSnapshot();
+        expect(renderEnzyme(<TreeNode {...defaultProps} class="" items={items} />)).toMatchSnapshot();
     });
 
     it("preserves the DOM structure when expanded", () => {
-        expect(renderEnzyme(<TreeView {...defaultProps} class="" items={items} startExpanded />)).toMatchSnapshot();
+        expect(renderEnzyme(<TreeNode {...defaultProps} class="" items={items} startExpanded />)).toMatchSnapshot();
     });
 
     it("shows everything properly when starting expanded", () => {
-        const treeView = mount(
-            <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded />
+        const treeNode = mount(
+            <TreeNode {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded />
         );
 
-        // There is not really another way to properly identify that we're dealing with tree view branches.
-        const treeViewBranches = treeView.find(".widget-tree-view-branch");
-        expect(treeViewBranches).toHaveLength(items.length);
+        // There is not really another way to properly identify that we're dealing with tree node branches.
+        const treeNodeBranches = treeNode.find(".widget-tree-node-branch");
+        expect(treeNodeBranches).toHaveLength(items.length);
 
-        expect(treeViewBranches.at(0).text()).toContain("First header");
-        expect(treeViewBranches.at(1).text()).toContain("Second header");
-        expect(treeViewBranches.at(2).text()).toContain("Third header");
+        expect(treeNodeBranches.at(0).text()).toContain("First header");
+        expect(treeNodeBranches.at(1).text()).toContain("Second header");
+        expect(treeNodeBranches.at(2).text()).toContain("Third header");
 
-        expect(treeViewBranches.at(0).text()).toContain("First content");
-        expect(treeViewBranches.at(1).text()).toContain("Second content");
-        expect(treeViewBranches.at(2).text()).toContain("Third content");
+        expect(treeNodeBranches.at(0).text()).toContain("First content");
+        expect(treeNodeBranches.at(1).text()).toContain("Second content");
+        expect(treeNodeBranches.at(2).text()).toContain("Third content");
     });
 
-    it("does not show the tree view item content when not starting expanded", () => {
-        const treeView = mount(
-            <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
+    it("does not show the tree node item content when not starting expanded", () => {
+        const treeNode = mount(
+            <TreeNode {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
         );
 
-        // There is not really another way to properly identify that we're dealing with tree view branches.
-        const treeViewBranches = treeView.find(".widget-tree-view-branch");
-        expect(treeViewBranches).toHaveLength(items.length);
+        // There is not really another way to properly identify that we're dealing with tree node branches.
+        const treeNodeBranches = treeNode.find(".widget-tree-node-branch");
+        expect(treeNodeBranches).toHaveLength(items.length);
 
-        expect(treeViewBranches.at(0).text()).toContain("First header");
-        expect(treeViewBranches.at(1).text()).toContain("Second header");
-        expect(treeViewBranches.at(2).text()).toContain("Third header");
+        expect(treeNodeBranches.at(0).text()).toContain("First header");
+        expect(treeNodeBranches.at(1).text()).toContain("Second header");
+        expect(treeNodeBranches.at(2).text()).toContain("Third header");
 
-        expect(treeViewBranches.at(0).text()).not.toContain("First content");
-        expect(treeViewBranches.at(1).text()).not.toContain("Second content");
-        expect(treeViewBranches.at(2).text()).not.toContain("Third content");
+        expect(treeNodeBranches.at(0).text()).not.toContain("First content");
+        expect(treeNodeBranches.at(1).text()).not.toContain("Second content");
+        expect(treeNodeBranches.at(2).text()).not.toContain("Third content");
     });
 
     it("handles tree headers properly even if they are composed with widgets", () => {
@@ -76,56 +76,56 @@ describe("TreeView", () => {
             ...items,
             { id: "44" as GUID, value: <div>This is the 44 header</div>, content: <div>Fourth content</div> }
         ];
-        const treeView = mount(
-            <TreeView {...defaultProps} class="" items={newItems} isUserDefinedLeafNode={false} startExpanded />
+        const treeNode = mount(
+            <TreeNode {...defaultProps} class="" items={newItems} isUserDefinedLeafNode={false} startExpanded />
         );
 
-        // There is not really another way to properly identify that we're dealing with tree view branches.
-        const treeViewBranches = treeView.find(".widget-tree-view-branch");
-        expect(treeViewBranches).toHaveLength(newItems.length);
+        // There is not really another way to properly identify that we're dealing with tree node branches.
+        const treeNodeBranches = treeNode.find(".widget-tree-node-branch");
+        expect(treeNodeBranches).toHaveLength(newItems.length);
 
-        expect(treeViewBranches.at(3).html()).toContain("<div>This is the 44 header</div>");
-        expect(treeViewBranches.at(3).text()).toContain("Fourth content");
+        expect(treeNodeBranches.at(3).html()).toContain("<div>This is the 44 header</div>");
+        expect(treeNodeBranches.at(3).text()).toContain("Fourth content");
     });
 
-    function findTreeViewItems(reactWrapper: ReactWrapper<any, any, any>): ReactWrapper<HTMLAttributes, any, any> {
+    function findTreeNodeItems(reactWrapper: ReactWrapper<any, any, any>): ReactWrapper<HTMLAttributes, any, any> {
         return reactWrapper.find('[role="treeitem"]');
     }
 
-    it("shows the tree view headers in the correct order as a treeitem when not defined as a leaf node", () => {
-        const treeView = mount(
-            <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
+    it("shows the tree node headers in the correct order as a treeitem when not defined as a leaf node", () => {
+        const treeNode = mount(
+            <TreeNode {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
         );
 
-        const treeViewHeaders = findTreeViewItems(treeView);
+        const treeNodeHeaders = findTreeNodeItems(treeNode);
 
-        expect(treeViewHeaders).toHaveLength(items.length);
+        expect(treeNodeHeaders).toHaveLength(items.length);
         items.forEach(item => {
-            expect(treeView.text()).toContain(item.value);
+            expect(treeNode.text()).toContain(item.value);
         });
     });
 
-    it("correctly collapses and expands the tree view branch content when clicking on the header", () => {
+    it("correctly collapses and expands the tree node branch content when clicking on the header", () => {
         render(
-            <TreeView {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
+            <TreeNode {...defaultProps} class="" items={items} isUserDefinedLeafNode={false} startExpanded={false} />
         );
 
-        const treeViewItems = screen.getAllByRole("treeitem");
-        expect(treeViewItems).toHaveLength(3);
+        const treeNodeItems = screen.getAllByRole("treeitem");
+        expect(treeNodeItems).toHaveLength(3);
 
         expect(screen.queryByText("Second content")).not.toBeInTheDocument();
 
-        const secondTreeView = treeViewItems[1];
+        const secondTreeNode = treeNodeItems[1];
         // expand
-        userEvent.click(secondTreeView);
+        userEvent.click(secondTreeNode);
         expect(screen.queryByText("Second content")).toBeInTheDocument();
 
         // collapse
-        userEvent.click(secondTreeView);
-        expect(secondTreeView).toHaveAttribute("aria-expanded", "false");
+        userEvent.click(secondTreeNode);
+        expect(secondTreeNode).toHaveAttribute("aria-expanded", "false");
     });
 
-    const customIconProps: Partial<TreeViewProps> = {
+    const customIconProps: Partial<TreeNodeProps> = {
         showCustomIcon: true,
         expandedIcon: { type: "glyph", iconClass: "expanded-icon" },
         collapsedIcon: { type: "image", iconUrl: "collapsed-image" }
@@ -142,8 +142,8 @@ describe("TreeView", () => {
     }
 
     it("shows custom expanded icon accordingly", () => {
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 {...customIconProps}
                 class=""
@@ -153,19 +153,19 @@ describe("TreeView", () => {
             />
         );
 
-        const treeViewBranches = findTreeViewItems(treeView);
-        const firstTreeViewBranch = treeViewBranches.at(0);
+        const treeNodeBranches = findTreeNodeItems(treeNode);
+        const firstTreeNodeBranch = treeNodeBranches.at(0);
 
-        expect(firstTreeViewBranch).toHaveLength(1);
-        expect(firstTreeViewBranch.text()).toContain("First header");
+        expect(firstTreeNodeBranch).toHaveLength(1);
+        expect(firstTreeNodeBranch.text()).toContain("First header");
 
-        expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
-        expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+        expect(getExpandedIconFromBranchHeader(firstTreeNodeBranch)).toHaveLength(0);
+        expect(getCollapsedImageFromBranchHeader(firstTreeNodeBranch)).toHaveLength(1);
     });
 
     it("shows custom close icon accordingly", () => {
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 {...customIconProps}
                 class=""
@@ -175,23 +175,23 @@ describe("TreeView", () => {
             />
         );
 
-        const treeViewBranches = findTreeViewItems(treeView);
-        const firstTreeViewBranch = treeViewBranches.at(0);
+        const treeNodeBranches = findTreeNodeItems(treeNode);
+        const firstTreeNodeBranch = treeNodeBranches.at(0);
 
-        expect(firstTreeViewBranch).toHaveLength(1);
-        expect(firstTreeViewBranch.text()).toContain("First header");
+        expect(firstTreeNodeBranch).toHaveLength(1);
+        expect(firstTreeNodeBranch.text()).toContain("First header");
 
-        expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
-        expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
+        expect(getExpandedIconFromBranchHeader(firstTreeNodeBranch)).toHaveLength(1);
+        expect(getCollapsedImageFromBranchHeader(firstTreeNodeBranch)).toHaveLength(0);
     });
 
     it("doesn't show an icon when its child has no nodes", () => {
-        const nestedItems: TreeViewProps["items"] = [
+        const nestedItems: TreeNodeProps["items"] = [
             {
                 id: "11" as GUID,
                 value: "Parent treeview with a nested treeview that is empty",
                 content: (
-                    <TreeView
+                    <TreeNode
                         {...defaultProps}
                         class=""
                         items={[]}
@@ -202,8 +202,8 @@ describe("TreeView", () => {
             }
         ];
 
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 {...customIconProps}
                 class=""
@@ -213,24 +213,24 @@ describe("TreeView", () => {
             />
         );
 
-        const parentTreeViewHeader = treeView.findWhere(
+        const parentTreeNodeHeader = treeNode.findWhere(
             node =>
                 node.type() === "span" &&
-                node.hasClass("widget-tree-view-branch-header") &&
+                node.hasClass("widget-tree-node-branch-header") &&
                 node.text().includes("Parent treeview")
         );
-        expect(parentTreeViewHeader).toHaveLength(1);
-        expect(getExpandedIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
-        expect(getCollapsedImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(parentTreeNodeHeader).toHaveLength(1);
+        expect(getExpandedIconFromBranchHeader(parentTreeNodeHeader)).toHaveLength(0);
+        expect(getCollapsedImageFromBranchHeader(parentTreeNodeHeader)).toHaveLength(0);
     });
 
     it("is clickable and shows an icon when its child has nodes", () => {
-        const nestedItems: TreeViewProps["items"] = [
+        const nestedItems: TreeNodeProps["items"] = [
             {
                 id: "11" as GUID,
                 value: "Parent treeview with a nested treeview that is filled",
                 content: (
-                    <TreeView
+                    <TreeNode
                         {...defaultProps}
                         class=""
                         items={items}
@@ -241,8 +241,8 @@ describe("TreeView", () => {
             }
         ];
 
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 {...customIconProps}
                 class=""
@@ -252,29 +252,29 @@ describe("TreeView", () => {
             />
         );
 
-        const parentTreeViewHeader = treeView.findWhere(
+        const parentTreeNodeHeader = treeNode.findWhere(
             node =>
                 node.type() === "span" &&
-                node.hasClass("widget-tree-view-branch-header") &&
+                node.hasClass("widget-tree-node-branch-header") &&
                 node.text().includes("Parent treeview")
         );
 
-        expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.hasClass("widget-tree-view-branch-header-clickable")).toBe(true);
+        expect(parentTreeNodeHeader).toHaveLength(1);
+        expect(parentTreeNodeHeader.hasClass("widget-tree-node-branch-header-clickable")).toBe(true);
 
-        expect(getExpandedIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
-        expect(getCollapsedImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getExpandedIconFromBranchHeader(parentTreeNodeHeader)).toHaveLength(1);
+        expect(getCollapsedImageFromBranchHeader(parentTreeNodeHeader)).toHaveLength(0);
     });
 
     it("does not influence the parent if it is not immediately in the chain", () => {
         const RandomOtherWidget = ({ children }: { children: ReactNode }): ReactElement => <div>{children}</div>;
-        const nestedItems: TreeViewProps["items"] = [
+        const nestedItems: TreeNodeProps["items"] = [
             {
                 id: "11" as GUID,
                 value: "Parent treeview with a nested treeview that is empty and wrapped with a random other widget",
                 content: (
                     <RandomOtherWidget>
-                        <TreeView
+                        <TreeNode
                             {...defaultProps}
                             class=""
                             items={[]}
@@ -286,8 +286,8 @@ describe("TreeView", () => {
             }
         ];
 
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 {...customIconProps}
                 class=""
@@ -297,23 +297,23 @@ describe("TreeView", () => {
             />
         );
 
-        const parentTreeViewHeader = treeView.findWhere(
+        const parentTreeNodeHeader = treeNode.findWhere(
             node =>
                 node.type() === "span" &&
-                node.hasClass("widget-tree-view-branch-header") &&
+                node.hasClass("widget-tree-node-branch-header") &&
                 node.text().includes("Parent treeview")
         );
 
-        expect(parentTreeViewHeader).toHaveLength(1);
-        expect(parentTreeViewHeader.hasClass("widget-tree-view-branch-header-clickable")).toBe(true);
+        expect(parentTreeNodeHeader).toHaveLength(1);
+        expect(parentTreeNodeHeader.hasClass("widget-tree-node-branch-header-clickable")).toBe(true);
 
-        expect(getExpandedIconFromBranchHeader(parentTreeViewHeader)).toHaveLength(1);
-        expect(getCollapsedImageFromBranchHeader(parentTreeViewHeader)).toHaveLength(0);
+        expect(getExpandedIconFromBranchHeader(parentTreeNodeHeader)).toHaveLength(1);
+        expect(getCollapsedImageFromBranchHeader(parentTreeNodeHeader)).toHaveLength(0);
     });
 
     it("is treated as a leaf node even if the user does not specify as a leaf but also dont specify content", () => {
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 {...customIconProps}
                 class=""
@@ -323,20 +323,20 @@ describe("TreeView", () => {
             />
         );
 
-        const treeViews = treeView.findWhere(node => node.type() === "li");
+        const treeNodes = treeNode.findWhere(node => node.type() === "li");
 
-        expect(treeViews).toHaveLength(1);
+        expect(treeNodes).toHaveLength(1);
         expect(
-            treeViews
+            treeNodes
                 .at(0)
-                .findWhere(node => node.type() === "span" && node.hasClass("widget-tree-view-branch-header"))
-                .hasClass("widget-tree-view-branch-header-clickable")
+                .findWhere(node => node.type() === "span" && node.hasClass("widget-tree-node-branch-header"))
+                .hasClass("widget-tree-node-branch-header-clickable")
         ).toBe(false);
     });
 
     it("adds a CSS class for the header when the icon animates on toggle", () => {
-        const treeView = mount(
-            <TreeView
+        const treeNode = mount(
+            <TreeNode
                 {...defaultProps}
                 class=""
                 items={items}
@@ -346,21 +346,21 @@ describe("TreeView", () => {
             />
         );
         expect(
-            treeView
-                .find(".widget-tree-view-branch-header")
+            treeNode
+                .find(".widget-tree-node-branch-header")
                 .at(0)
                 .find("svg")
-                .hasClass("widget-tree-view-branch-header-icon-animated")
+                .hasClass("widget-tree-node-branch-header-icon-animated")
         ).toBe(true);
     });
 
     describe("for performance reasons", () => {
-        const itemsWithNestedTreeView: TreeViewProps["items"] = [
+        const itemsWithNestedTreeNode: TreeNodeProps["items"] = [
             {
                 id: "11" as GUID,
                 value: "Parent treeview with a nested treeview that is filled",
                 content: (
-                    <TreeView
+                    <TreeNode
                         {...defaultProps}
                         class=""
                         items={items}
@@ -371,55 +371,55 @@ describe("TreeView", () => {
             }
         ];
 
-        it("expands the nested tree view normally", () => {
-            const treeView = mount(
-                <TreeView
+        it("expands the nested tree node normally", () => {
+            const treeNode = mount(
+                <TreeNode
                     {...defaultProps}
                     class=""
-                    items={itemsWithNestedTreeView}
+                    items={itemsWithNestedTreeNode}
                     isUserDefinedLeafNode={false}
                     startExpanded={false}
                 />
             );
 
-            const treeViewBranches = findTreeViewItems(treeView);
-            expect(treeViewBranches).toHaveLength(1);
-            expect(treeView.text()).not.toContain("First header");
+            const treeNodeBranches = findTreeNodeItems(treeNode);
+            expect(treeNodeBranches).toHaveLength(1);
+            expect(treeNode.text()).not.toContain("First header");
 
-            treeViewBranches.simulate("click");
-            expect(treeView.text()).toContain("First header");
+            treeNodeBranches.simulate("click");
+            expect(treeNode.text()).toContain("First header");
         });
 
         it("collapses the nested treeview through CSS instead of JS after being expanded once", () => {
-            const treeView = mount(
-                <TreeView
+            const treeNode = mount(
+                <TreeNode
                     {...defaultProps}
                     class=""
-                    items={itemsWithNestedTreeView}
+                    items={itemsWithNestedTreeNode}
                     isUserDefinedLeafNode={false}
                     startExpanded={false}
                 />
             );
 
-            const treeViewBranches = findTreeViewItems(treeView);
-            expect(treeViewBranches).toHaveLength(1);
-            expect(treeView.text()).not.toContain("First header");
+            const treeNodeBranches = findTreeNodeItems(treeNode);
+            expect(treeNodeBranches).toHaveLength(1);
+            expect(treeNode.text()).not.toContain("First header");
 
-            treeViewBranches.simulate("click");
-            expect(treeView.text()).toContain("First header");
+            treeNodeBranches.simulate("click");
+            expect(treeNode.text()).toContain("First header");
 
-            treeViewBranches.simulate("click");
-            expect(treeView.text()).toContain("First header");
-            expect(treeView.find(".widget-tree-view-body").hasClass("widget-tree-view-branch-hidden")).toBe(true);
+            treeNodeBranches.simulate("click");
+            expect(treeNode.text()).toContain("First header");
+            expect(treeNode.find(".widget-tree-node-body").hasClass("widget-tree-node-branch-hidden")).toBe(true);
         });
 
         function getLoadingSpinnerFromBranchHeader(header: ReactWrapper<any>): ReactWrapper<any> {
-            return header.findWhere(node => node.type() === "img" && node.hasClass("widget-tree-view-loading-spinner"));
+            return header.findWhere(node => node.type() === "img" && node.hasClass("widget-tree-node-loading-spinner"));
         }
 
         it("shows a loading spinner icon when opening for the first time", () => {
-            const treeView = mount(
-                <TreeView
+            const treeNode = mount(
+                <TreeNode
                     {...defaultProps}
                     {...customIconProps}
                     class=""
@@ -429,42 +429,42 @@ describe("TreeView", () => {
                 />
             );
 
-            const treeViewBranches = findTreeViewItems(treeView);
-            const firstTreeViewBranch = treeViewBranches.at(0);
+            const treeNodeBranches = findTreeNodeItems(treeNode);
+            const firstTreeNodeBranch = treeNodeBranches.at(0);
 
-            expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
-            expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
+            expect(getExpandedIconFromBranchHeader(firstTreeNodeBranch)).toHaveLength(0);
+            expect(getCollapsedImageFromBranchHeader(firstTreeNodeBranch)).toHaveLength(1);
 
-            firstTreeViewBranch.simulate("click");
+            firstTreeNodeBranch.simulate("click");
 
-            const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
-            expect(getExpandedIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
-            expect(getCollapsedImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
-            expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
+            const updatedFirstTreeNodeBranch = findTreeNodeItems(treeNode).at(0);
+            expect(getExpandedIconFromBranchHeader(updatedFirstTreeNodeBranch)).toHaveLength(0);
+            expect(getCollapsedImageFromBranchHeader(updatedFirstTreeNodeBranch)).toHaveLength(0);
+            expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeNodeBranch)).toHaveLength(1);
         });
 
         it("the nested treeview should tell the parent it can change from the loading spinner to the next state", () => {
-            const treeView = mount(
-                <TreeView
+            const treeNode = mount(
+                <TreeNode
                     {...defaultProps}
                     {...customIconProps}
                     class=""
-                    items={itemsWithNestedTreeView}
+                    items={itemsWithNestedTreeNode}
                     isUserDefinedLeafNode={false}
                     startExpanded={false}
                 />
             );
 
-            // There is not really another way to properly identify that we're dealing with tree view branches.
-            const treeViewBranches = findTreeViewItems(treeView);
-            const firstTreeViewBranch = treeViewBranches.at(0);
+            // There is not really another way to properly identify that we're dealing with tree node branches.
+            const treeNodeBranches = findTreeNodeItems(treeNode);
+            const firstTreeViewBranch = treeNodeBranches.at(0);
 
             expect(getExpandedIconFromBranchHeader(firstTreeViewBranch)).toHaveLength(0);
             expect(getCollapsedImageFromBranchHeader(firstTreeViewBranch)).toHaveLength(1);
 
             firstTreeViewBranch.simulate("click");
 
-            const updatedFirstTreeViewBranch = findTreeViewItems(treeView).at(0);
+            const updatedFirstTreeViewBranch = findTreeNodeItems(treeNode).at(0);
             expect(getExpandedIconFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(1);
             expect(getCollapsedImageFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
             expect(getLoadingSpinnerFromBranchHeader(updatedFirstTreeViewBranch)).toHaveLength(0);
@@ -473,13 +473,13 @@ describe("TreeView", () => {
 
     describe("when interacting through the keyboard", () => {
         beforeEach(() => {
-            const treeViewItems = [
+            const treeNodeItems = [
                 { id: "1" as GUID, value: "First header", content: <div>First content</div> },
                 {
                     id: "2" as GUID,
                     value: "Second header",
                     content: (
-                        <TreeView
+                        <TreeNode
                             {...defaultProps}
                             class=""
                             items={[
@@ -508,7 +508,7 @@ describe("TreeView", () => {
                     id: "3" as GUID,
                     value: "Third header",
                     content: (
-                        <TreeView
+                        <TreeNode
                             {...defaultProps}
                             class=""
                             items={[]}
@@ -524,10 +524,10 @@ describe("TreeView", () => {
                 }
             ];
             render(
-                <TreeView
+                <TreeNode
                     {...defaultProps}
                     class=""
-                    items={treeViewItems}
+                    items={treeNodeItems}
                     isUserDefinedLeafNode={false}
                     startExpanded={false}
                 />
@@ -550,10 +550,10 @@ describe("TreeView", () => {
         it("collapses and expands the content when pressing Space and Enter keys", async () => {
             expect(screen.queryByText("First content")).not.toBeInTheDocument();
 
-            const treeViews = getTreeViewItems();
-            expect(treeViews).toHaveLength(4);
-            treeViews.forEach(treeView => {
-                expect(treeView).toHaveAttribute("aria-expanded", "false");
+            const treeNodes = getTreeViewItems();
+            expect(treeNodes).toHaveLength(4);
+            treeNodes.forEach(treeNode => {
+                expect(treeNode).toHaveAttribute("aria-expanded", "false");
             });
 
             focusFirstTreeViewElement();
@@ -565,20 +565,20 @@ describe("TreeView", () => {
 
             await screen.findByText("Second First header");
             expect(screen.queryByText("Second First header")).toBeInTheDocument();
-            expect(treeViews[1]).toHaveAttribute("aria-expanded", "true");
+            expect(treeNodes[1]).toHaveAttribute("aria-expanded", "true");
 
             // collapse
             userEvent.keyboard(" ");
 
-            expect(treeViews[1]).toHaveAttribute("aria-expanded", "false");
+            expect(treeNodes[1]).toHaveAttribute("aria-expanded", "false");
         });
 
-        it("the Home key jumps focus to the first tree view", () => {
-            const treeViewHeaders = getClickableTreeViewHeaders();
-            const treeViews = getTreeViewItems();
-            expect(treeViews).toHaveLength(4);
-            treeViews.forEach(treeView => {
-                expect(treeView).toHaveAttribute("aria-expanded", "false");
+        it("the Home key jumps focus to the first tree node", () => {
+            const treeNodeHeaders = getClickableTreeViewHeaders();
+            const treeNodes = getTreeViewItems();
+            expect(treeNodes).toHaveLength(4);
+            treeNodes.forEach(treeNode => {
+                expect(treeNode).toHaveAttribute("aria-expanded", "false");
             });
 
             focusFirstTreeViewElement();
@@ -586,14 +586,14 @@ describe("TreeView", () => {
             userEvent.tab();
             userEvent.tab();
 
-            expect(treeViewHeaders[2]).toHaveFocus();
+            expect(treeNodeHeaders[2]).toHaveFocus();
 
             userEvent.keyboard("{Home}");
 
-            expect(treeViewHeaders[0]).toHaveFocus();
+            expect(treeNodeHeaders[0]).toHaveFocus();
         });
 
-        it("the End key jumps focus to the last tree view", () => {
+        it("the End key jumps focus to the last tree node", () => {
             const treeViewHeaders = getClickableTreeViewHeaders();
             const treeViews = getTreeViewItems();
             expect(treeViews).toHaveLength(4);
@@ -611,7 +611,7 @@ describe("TreeView", () => {
         });
 
         describe("the ArrowDown key", () => {
-            it("goes to the next tree view element if the current one is collapsed", () => {
+            it("goes to the next tree node element if the current one is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -628,7 +628,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[1]).toHaveFocus();
             });
 
-            it("does not circularly target the first tree view element if the current one is the last", () => {
+            it("does not circularly target the first tree node element if the current one is the last", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -650,7 +650,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[3]).toHaveFocus();
             });
 
-            it("goes to the next nested tree view element if the current one is expanded", () => {
+            it("goes to the next nested tree node element if the current one is expanded", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -680,7 +680,7 @@ describe("TreeView", () => {
         });
 
         describe("the ArrowUp key", () => {
-            it("goes to the previous tree view element if the current one is collapsed", () => {
+            it("goes to the previous tree node element if the current one is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -699,7 +699,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[0]).toHaveFocus();
             });
 
-            it("does not circularly target the last tree view element if the current one is the first", () => {
+            it("does not circularly target the last tree node element if the current one is the first", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -717,7 +717,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[0]).toHaveFocus();
             });
 
-            it("goes to the previous nested tree view element if there are nested elements inbetween", () => {
+            it("goes to the previous nested tree node element if there are nested elements inbetween", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -756,7 +756,7 @@ describe("TreeView", () => {
         });
 
         describe("the ArrowRight key", () => {
-            it("stays at the current tree view if it turns out to be empty", () => {
+            it("stays at the current tree node if it turns out to be empty", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -778,7 +778,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[2]).toHaveFocus();
             });
 
-            it("expands a tree view element if possible", () => {
+            it("expands a tree node element if possible", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -798,7 +798,7 @@ describe("TreeView", () => {
                 expect(getClickableTreeViewHeaders()).not.toHaveLength(4);
             });
 
-            it("targets the first child tree view element if the current one is already expanded", () => {
+            it("targets the first child tree node element if the current one is already expanded", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -844,7 +844,7 @@ describe("TreeView", () => {
                 expect(treeViewHeaders[2]).toHaveFocus();
             });
 
-            it("collapses a tree view element if possible", () => {
+            it("collapses a tree node element if possible", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);
@@ -868,7 +868,7 @@ describe("TreeView", () => {
                 expect(getClickableTreeViewHeaders()).toHaveLength(4);
             });
 
-            it("goes to the parent tree view element if the current one is not top level and is collapsed", () => {
+            it("goes to the parent tree node element if the current one is not top level and is collapsed", () => {
                 const treeViewHeaders = getClickableTreeViewHeaders();
                 const treeViews = getTreeViewItems();
                 expect(treeViews).toHaveLength(4);

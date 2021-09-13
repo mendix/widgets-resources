@@ -1,5 +1,5 @@
 import { EventHandler, SyntheticEvent, useCallback, useMemo } from "react";
-import { TreeViewState } from "../TreeView";
+import { TreeNodeState } from "../TreeNode";
 import { KeyboardHandlerHook, useKeyboardHandler } from "./useKeyboardHandler";
 
 export const enum FocusTargetChange {
@@ -9,33 +9,33 @@ export const enum FocusTargetChange {
     NEXT = "NEXT"
 }
 
-export type TreeViewFocusChangeHandler = (
+export type TreeNodeFocusChangeHandler = (
     targetElement: EventTarget | null,
     focusTargetChange: FocusTargetChange,
     traverseOption?: "HORIZONTAL" | "VERTICAL"
 ) => void;
 
-export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
+export const useTreeNodeFocusChangeHandler = (): TreeNodeFocusChangeHandler => {
     return useCallback((targetElement, focusTargetChange, traverseOption) => {
         if (targetElement && targetElement instanceof Element) {
-            const getTreeViewHeadersInElement = (el: Element | Document | null): HTMLElement[] => {
+            const getTreeNodeHeadersInElement = (el: Element | Document | null): HTMLElement[] => {
                 if (el) {
-                    const allBranches = Array.from(el.querySelectorAll<HTMLElement>("li.widget-tree-view-branch"));
-                    const hiddenBodies = Array.from(el.querySelectorAll(".widget-tree-view-body[aria-hidden=true]"));
+                    const allBranches = Array.from(el.querySelectorAll<HTMLElement>("li.widget-tree-node-branch"));
+                    const hiddenBodies = Array.from(el.querySelectorAll(".widget-tree-node-body[aria-hidden=true]"));
                     return allBranches.filter(node => !hiddenBodies.some(hiddenBody => hiddenBody.contains(node)));
                 }
                 return [];
             };
 
-            const currentTreeViewScope = Array.from(
-                document.body.querySelectorAll(".widget-tree-view[role=tree]")
+            const currentTreeNodeScope = Array.from(
+                document.body.querySelectorAll(".widget-tree-node[role=tree]")
             ).find(element => element.contains(targetElement));
 
-            if (!currentTreeViewScope) {
+            if (!currentTreeNodeScope) {
                 return;
             }
 
-            const targetableBranches = getTreeViewHeadersInElement(currentTreeViewScope);
+            const targetableBranches = getTreeNodeHeadersInElement(currentTreeNodeScope);
 
             const numberOfTargetableBranches = targetableBranches.length;
             if (numberOfTargetableBranches === 0) {
@@ -53,11 +53,11 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
                     break;
                 case FocusTargetChange.PREVIOUS: {
                     if (traverseOption === "VERTICAL") {
-                        const parentTreeViewHeaders = getTreeViewHeadersInElement(document).filter(node =>
+                        const parentTreeNodeHeaders = getTreeNodeHeadersInElement(document).filter(node =>
                             node.lastElementChild?.contains(targetElement)
                         );
-                        if (parentTreeViewHeaders.length > 0) {
-                            parentTreeViewHeaders[parentTreeViewHeaders.length - 1].focus();
+                        if (parentTreeNodeHeaders.length > 0) {
+                            parentTreeNodeHeaders[parentTreeNodeHeaders.length - 1].focus();
                         }
                         return;
                     }
@@ -70,9 +70,9 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
                 }
                 case FocusTargetChange.NEXT: {
                     if (traverseOption === "VERTICAL") {
-                        const childTreeViewHeaders = getTreeViewHeadersInElement(targetElement.lastElementChild);
-                        if (childTreeViewHeaders.length > 0) {
-                            childTreeViewHeaders[0].focus();
+                        const childTreeNodeHeaders = getTreeNodeHeadersInElement(targetElement.lastElementChild);
+                        if (childTreeNodeHeaders.length > 0) {
+                            childTreeNodeHeaders[0].focus();
                         }
                         return;
                     }
@@ -88,44 +88,44 @@ export const useTreeViewFocusChangeHandler = (): TreeViewFocusChangeHandler => {
     }, []);
 };
 
-export const useTreeViewBranchKeyboardHandler = (
-    toggleTreeViewContent: EventHandler<SyntheticEvent<HTMLElement>>,
-    changeFocus: TreeViewFocusChangeHandler,
-    treeViewState: TreeViewState,
+export const useTreeNodeBranchKeyboardHandler = (
+    toggleTreeNodeContent: EventHandler<SyntheticEvent<HTMLElement>>,
+    changeFocus: TreeNodeFocusChangeHandler,
+    treeNodeState: TreeNodeState,
     isActualLeafNode: boolean,
     eventTargetIsNotCurrentBranch: (event: SyntheticEvent<HTMLElement>) => boolean
 ): ReturnType<KeyboardHandlerHook> => {
     const keyHandlers = useMemo<Parameters<KeyboardHandlerHook>[0]>(
         () => ({
-            Enter: toggleTreeViewContent,
-            Space: toggleTreeViewContent,
+            Enter: toggleTreeNodeContent,
+            Space: toggleTreeNodeContent,
             Home: event => changeFocus(event.currentTarget, FocusTargetChange.FIRST),
             End: event => changeFocus(event.currentTarget, FocusTargetChange.LAST),
             ArrowUp: event => changeFocus(event.currentTarget, FocusTargetChange.PREVIOUS, "HORIZONTAL"),
             ArrowDown: event => changeFocus(event.currentTarget, FocusTargetChange.NEXT, "HORIZONTAL"),
             ArrowRight: event => {
                 if (
-                    treeViewState === TreeViewState.COLLAPSED_WITH_CSS ||
-                    treeViewState === TreeViewState.COLLAPSED_WITH_JS
+                    treeNodeState === TreeNodeState.COLLAPSED_WITH_CSS ||
+                    treeNodeState === TreeNodeState.COLLAPSED_WITH_JS
                 ) {
-                    toggleTreeViewContent(event);
-                } else if (treeViewState === TreeViewState.EXPANDED || isActualLeafNode) {
+                    toggleTreeNodeContent(event);
+                } else if (treeNodeState === TreeNodeState.EXPANDED || isActualLeafNode) {
                     changeFocus(event.currentTarget, FocusTargetChange.NEXT, "VERTICAL");
                 }
             },
             ArrowLeft: event => {
                 if (
-                    treeViewState === TreeViewState.COLLAPSED_WITH_CSS ||
-                    treeViewState === TreeViewState.COLLAPSED_WITH_JS ||
+                    treeNodeState === TreeNodeState.COLLAPSED_WITH_CSS ||
+                    treeNodeState === TreeNodeState.COLLAPSED_WITH_JS ||
                     isActualLeafNode
                 ) {
                     changeFocus(event.currentTarget, FocusTargetChange.PREVIOUS, "VERTICAL");
-                } else if (treeViewState === TreeViewState.EXPANDED) {
-                    toggleTreeViewContent(event);
+                } else if (treeNodeState === TreeNodeState.EXPANDED) {
+                    toggleTreeNodeContent(event);
                 }
             }
         }),
-        [toggleTreeViewContent, changeFocus, treeViewState, isActualLeafNode]
+        [toggleTreeNodeContent, changeFocus, treeNodeState, isActualLeafNode]
     );
 
     const keyboardHandler = useKeyboardHandler(keyHandlers);

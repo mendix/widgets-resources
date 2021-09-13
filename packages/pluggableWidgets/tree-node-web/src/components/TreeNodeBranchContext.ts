@@ -1,23 +1,23 @@
 import { createContext, useContext, useEffect } from "react";
 
-export interface TreeViewBranchContextProps {
+export interface TreeNodeBranchContextProps {
     level: number;
     informParentOfChildNodes: (numberOfNodes: number | undefined) => void;
 }
 
-export const TreeViewBranchContext = createContext<TreeViewBranchContextProps>({
+export const TreeNodeBranchContext = createContext<TreeNodeBranchContextProps>({
     level: 0,
     informParentOfChildNodes: () => null
 });
 
 export const useInformParentContextOfChildNodes = (
     nodes: any[] | null,
-    identifyParentIsTreeView: () => boolean
+    identifyParentIsTreeNode: () => boolean
 ): void => {
-    const { level, informParentOfChildNodes } = useContext(TreeViewBranchContext);
+    const { level, informParentOfChildNodes } = useContext(TreeNodeBranchContext);
     useEffect(() => {
-        if (level > 0 && identifyParentIsTreeView()) {
+        if (level > 0 && identifyParentIsTreeNode()) {
             informParentOfChildNodes(nodes?.length);
         }
-    }, [nodes, level, informParentOfChildNodes, identifyParentIsTreeView]);
+    }, [nodes, level, informParentOfChildNodes, identifyParentIsTreeNode]);
 };
