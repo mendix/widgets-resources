@@ -1,10 +1,10 @@
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { GUID, WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
-import { TreeViewPreviewProps } from "../typings/TreeViewProps";
-import { TreeView } from "./components/TreeView";
+import { TreeNodePreviewProps } from "../typings/TreeNodeProps";
+import { TreeNode } from "./components/TreeNode";
 
-function mapIconToWebIcon(icon: TreeViewPreviewProps["expandedIcon"] | TreeViewPreviewProps["collapsedIcon"]): WebIcon {
+function mapIconToWebIcon(icon: TreeNodePreviewProps["expandedIcon"] | TreeNodePreviewProps["collapsedIcon"]): WebIcon {
     if (icon) {
         if (icon.type === "glyph") {
             return {
@@ -27,9 +27,9 @@ function renderTextTemplateWithFallback(textTemplateValue: string, placeholder: 
     return textTemplateValue;
 }
 
-export function preview(props: TreeViewPreviewProps): ReactElement | null {
+export function preview(props: TreeNodePreviewProps): ReactElement | null {
     return (
-        <TreeView
+        <TreeNode
             class={props.class}
             style={parseStyle(props.style)}
             items={[
@@ -57,11 +57,11 @@ export function preview(props: TreeViewPreviewProps): ReactElement | null {
             expandedIcon={mapIconToWebIcon(props.expandedIcon)}
             collapsedIcon={mapIconToWebIcon(props.collapsedIcon)}
             animateIcon={false}
-            animateTreeViewContent={false}
+            animateTreeNodeContent={false}
         />
     );
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/TreeView.scss");
+    return require("./ui/TreeNode.scss");
 }

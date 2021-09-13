@@ -9,12 +9,12 @@ import {
     TextProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
-import { HeaderTypeEnum, TreeViewPreviewProps } from "../typings/TreeViewProps";
+import { HeaderTypeEnum, TreeNodePreviewProps } from "../typings/TreeNodeProps";
 
 import ChevronSVG from "./assets/ChevronStructurePreview.svg";
 
 export function getProperties(
-    values: TreeViewPreviewProps,
+    values: TreeNodePreviewProps,
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
@@ -48,7 +48,7 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps | null {
+export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps | null {
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -69,7 +69,7 @@ export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps 
             }
         ]
     };
-    const treeViewHeader: RowLayoutProps = {
+    const treeNodeHeader: RowLayoutProps = {
         type: "RowLayout",
         backgroundColor: "#F5F5F5",
         borders: true,
@@ -112,7 +112,7 @@ export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps 
         ]
     };
 
-    const getTreeViewContent: () => StructurePreviewProps[] = () =>
+    const getTreeNodeContent: () => StructurePreviewProps[] = () =>
         values.hasChildren
             ? [
                   {
@@ -144,7 +144,7 @@ export function getPreview(values: TreeViewPreviewProps): StructurePreviewProps 
 
     return {
         type: "Container",
-        children: [titleHeader, treeViewHeader, ...getTreeViewContent()]
+        children: [titleHeader, treeNodeHeader, ...getTreeNodeContent()]
     } as ContainerProps;
 }
 

@@ -1,6 +1,6 @@
 {
-  "name": "tree-view-web",
-  "widgetName": "TreeView",
+  "name": "tree-node-web",
+  "widgetName": "TreeNode",
   "version": "1.0.0",
   "description": "A Mendix pluggable widget to display a tree view structure.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
@@ -15,7 +15,7 @@
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
-    "branchName": "tree-view-web"
+    "branchName": "tree-node-web"
   },
   "packagePath": "com.mendix.widget.web",
   "scripts": {

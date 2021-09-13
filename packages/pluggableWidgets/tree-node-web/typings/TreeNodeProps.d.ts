@@ -1,5 +1,5 @@
 /**
- * This file was generated from TreeView.xml
+ * This file was generated from TreeNode.xml
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
@@ -10,7 +10,7 @@ export type HeaderTypeEnum = "text" | "custom";
 
 export type ShowIconEnum = "left" | "right" | "no";
 
-export interface TreeViewContainerProps {
+export interface TreeNodeContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
@@ -30,7 +30,7 @@ export interface TreeViewContainerProps {
     advancedMode: boolean;
 }
 
-export interface TreeViewPreviewProps {
+export interface TreeNodePreviewProps {
     class: string;
     style: string;
     datasource: {} | { type: string } | null;
@@ -42,8 +42,8 @@ export interface TreeViewPreviewProps {
     children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     animate: boolean;
     showIcon: ShowIconEnum;
-    expandedIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
-    collapsedIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    expandedIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    collapsedIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     animateIcon: boolean;
     advancedMode: boolean;
 }
