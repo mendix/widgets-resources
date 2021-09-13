@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { FilterSelector } from "@mendix/piw-utils-internal";
+import { FilterSelector } from "@mendix/piw-utils-internal/components/web";
 
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 

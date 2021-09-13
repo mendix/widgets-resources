@@ -1,5 +1,6 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { debounce, FilterSelector } from "@mendix/piw-utils-internal";
+import { FilterSelector } from "@mendix/piw-utils-internal/components/web";
+import { debounce } from "@mendix/piw-utils-internal";
 
 import { DefaultFilterEnum } from "../../typings/DatagridTextFilterProps";
 import classNames from "classnames";

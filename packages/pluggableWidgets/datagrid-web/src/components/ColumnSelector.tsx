@@ -1,7 +1,7 @@
 import { createElement, Dispatch, ReactElement, SetStateAction, useCallback, useMemo, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal";
+import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import { ColumnProperty } from "./Table";
 import { createPortal } from "react-dom";
 

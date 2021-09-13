@@ -1,5 +1,5 @@
 import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal";
+import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import classNames from "classnames";
 import deepEqual from "deep-equal";
 import { createPortal } from "react-dom";

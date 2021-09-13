@@ -1,6 +1,6 @@
 import { ListAttributeValue } from "mendix";
 import { FilterCondition, FilterExpression, LiteralExpression } from "mendix/filters";
-import { FilterValue } from "@mendix/piw-utils-internal";
+import { FilterValue } from "@mendix/piw-utils-internal/components/web";
 
 declare type SingleFilterCondition = FilterCondition & {
     arg1: FilterExpression;

@@ -1,6 +1,12 @@
 import { Context, createElement, ReactElement, useCallback, useContext, useMemo } from "react";
 import { ListAttributeValue } from "mendix";
-import { Alert, getSortDispatcher, SortContextValue, SortDirection, SortInstruction } from "@mendix/piw-utils-internal";
+import {
+    Alert,
+    getSortDispatcher,
+    SortContextValue,
+    SortDirection,
+    SortInstruction
+} from "@mendix/piw-utils-internal/components/web";
 
 import { DropdownSortContainerProps } from "../typings/DropdownSortProps";
 import { SortComponent, SortOption } from "./components/SortComponent";

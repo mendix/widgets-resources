@@ -1,7 +1,7 @@
 import { createElement, ReactElement } from "react";
 import classNames from "classnames";
 import { WebIcon } from "mendix";
-import { Icon as InternalIcon } from "@mendix/piw-utils-internal";
+import { Icon as InternalIcon } from "@mendix/piw-utils-internal/components/web";
 
 interface IconProps {
     animate?: boolean;

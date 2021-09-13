@@ -1,6 +1,6 @@
 import { DefaultFilterEnum } from "../../typings/DatagridNumberFilterProps";
 import { Big } from "big.js";
-import { FilterValue } from "@mendix/piw-utils-internal";
+import { FilterValue } from "@mendix/piw-utils-internal/components/web";
 
 export type DefaultFilterValue = {
     type: DefaultFilterEnum;

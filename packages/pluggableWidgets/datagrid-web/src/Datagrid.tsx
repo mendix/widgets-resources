@@ -8,10 +8,10 @@ import classNames from "classnames";
 import {
     FilterFunction,
     FilterType,
-    isAvailable,
     useFilterContext,
     useMultipleFiltering
-} from "@mendix/piw-utils-internal";
+} from "@mendix/piw-utils-internal/components/web";
+import { isAvailable } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {

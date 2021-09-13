@@ -1,5 +1,5 @@
 import { createElement, ReactElement, ReactNode } from "react";
-import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal";
+import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/web";
 import classNames from "classnames";
 
 export interface GalleryProps<T> {

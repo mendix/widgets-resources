@@ -9,7 +9,7 @@ import {
     useFilterContext,
     useMultipleFiltering,
     useSortContext
-} from "@mendix/piw-utils-internal";
+} from "@mendix/piw-utils-internal/components/web";
 import { FilterCondition } from "mendix/filters";
 import { extractFilters } from "./utils/filters";
 import { and } from "mendix/filters/builders";

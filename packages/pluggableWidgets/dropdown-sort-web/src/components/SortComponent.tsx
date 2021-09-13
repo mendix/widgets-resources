@@ -1,5 +1,5 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
-import { SortDirection, useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal";
+import { SortDirection, useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
 

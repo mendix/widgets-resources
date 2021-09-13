@@ -1,6 +1,7 @@
 import { createElement, ReactElement, ReactNode, useEffect, useRef } from "react";
 import classNames from "classnames";
-import { Alert, Dimensions, getDimensions } from "@mendix/piw-utils-internal";
+import { Alert } from "@mendix/piw-utils-internal/components/web";
+import { Dimensions, getDimensions } from "@mendix/piw-utils-internal";
 import { useCodeScanner, CodeScannerHookError } from "../hooks/useCodeScanner";
 import { browserSupportsCameraAccess, useMediaStream, MediaStreamHookError } from "../hooks/useMediaStream";
 
