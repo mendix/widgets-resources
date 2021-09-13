@@ -4,8 +4,6 @@ const sass = require("sass");
 const { join } = require("path");
 const { rm, mkdir } = require("shelljs");
 
-const { debounce } = require("@mendix/piw-utils-internal");
-
 main().catch(e => {
     console.error(e);
     process.exit(-1);
@@ -75,6 +73,18 @@ async function main() {
         }
         await buildAndCopyAtlas(false, outputDir);
     }
+}
+
+function debounce(func, waitFor) {
+    let timeout = null;
+
+    return (...args) => {
+        if (timeout !== null) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+        timeout = setTimeout(() => func(...args), waitFor);
+    };
 }
 
 function closeOnSigint(watcher) {

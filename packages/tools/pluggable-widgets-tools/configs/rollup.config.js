@@ -162,6 +162,7 @@ export default async args => {
                 file: join(outDir, `${widgetName}.editorConfig.js`),
                 sourcemap: false
             },
+            external: editorConfigExternal,
             treeshake: { moduleSideEffects: false },
             plugins: [
                 url({ include: ["**/*.svg"], limit: 102400 }), // SVG file size limit of 100 kB
@@ -169,7 +170,8 @@ export default async args => {
                     sourceMaps: false,
                     extensions: webExtensions,
                     transpile: true,
-                    babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] }
+                    babelConfig: { presets: [["@babel/preset-env", { targets: { ie: "11" } }]] },
+                    external: editorConfigExternal
                 })
             ],
             onwarn
@@ -326,9 +328,12 @@ const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.
 
 const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
 
+const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+
 const nativeExternal = [
     /^mendix($|\/)/,
     /^react-native($|\/)/,
+    /^react-dom($|\/)/,
     /^big.js$/,
     /^react($|\/)/,
     /^react-native-gesture-handler($|\/)/,
