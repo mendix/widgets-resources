@@ -1,6 +1,6 @@
 import { parseStyle } from "@mendix/piw-utils-internal";
+import { mapPreviewIconToWebIcon } from "@mendix/piw-utils-internal/components/web";
 import { createElement, ReactElement } from "react";
-import { WebIcon } from "mendix";
 
 import { Accordion } from "./components/Accordion";
 import { useIconGenerator } from "./utils/iconGenerator";
@@ -59,10 +59,9 @@ export function preview(props: PreviewProps): ReactElement {
         dynamicClassName: group.dynamicClass.slice(1, -1) // expression result is surrounded by single quotes
     }));
 
-    // TODO: Remove these when preview typing for `icon` property is aligned properly by PageEditor
-    const icon: WebIcon | null = props.icon as any;
-    const expandIcon: WebIcon | null = props.expandIcon as any;
-    const collapseIcon: WebIcon | null = props.collapseIcon as any;
+    const icon = mapPreviewIconToWebIcon(props.icon);
+    const expandIcon = mapPreviewIconToWebIcon(props.expandIcon);
+    const collapseIcon = mapPreviewIconToWebIcon(props.collapseIcon);
 
     const generateIcon = useIconGenerator(
         props.advancedMode,
