@@ -27,7 +27,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
 
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            The Drop-down filter widget can’t be used with the filters options you have selected. It requires a
+            The Drop-down filter widget can&apos;t be used with the filters options you have selected. It requires a
             &quot;Boolean or Enumeration&quot; attribute to be selected.
         </Alert>
     );

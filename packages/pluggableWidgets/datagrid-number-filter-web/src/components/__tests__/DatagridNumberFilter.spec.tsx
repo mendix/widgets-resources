@@ -124,7 +124,7 @@ describe("Number Filter", () => {
             const filter = mount(<DatagridNumberFilter {...commonProps} />);
 
             expect(filter.find(Alert).text()).toBe(
-                'The Number filter widget can’t be used with the filters options you have selected. It requires a "Autonumber, Decimal, Integer or Long" attribute to be selected.'
+                'The Number filter widget can\'t be used with the filters options you have selected. It requires a "Autonumber, Decimal, Integer or Long" attribute to be selected.'
             );
         });
 

@@ -47,8 +47,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            The Date filter widget can’t be used with the filters options you have selected. It requires a &quot;Date
-            and Time&quot; attribute to be selected.
+            The Date filter widget can&apos;t be used with the filters options you have selected. It requires a
+            &quot;Date and Time&quot; attribute to be selected.
         </Alert>
     );
 

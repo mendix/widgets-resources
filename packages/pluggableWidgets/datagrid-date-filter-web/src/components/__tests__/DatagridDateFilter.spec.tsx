@@ -128,7 +128,7 @@ describe("Date Filter", () => {
             const filter = mount(<DatagridDateFilter {...commonProps} />);
 
             expect(filter.find(Alert).text()).toBe(
-                'The Date filter widget can’t be used with the filters options you have selected. It requires a "Date and Time" attribute to be selected.'
+                'The Date filter widget can\'t be used with the filters options you have selected. It requires a "Date and Time" attribute to be selected.'
             );
         });
 
