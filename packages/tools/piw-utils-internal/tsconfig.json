@@ -3,7 +3,6 @@
     "baseUrl": "./",
     "include": ["./src"],
     "compilerOptions": {
-        "module": "CommonJS",
         "types": ["mendix-client", "big.js", "react-native", "jest"],
         "noImplicitAny": true,
         "noImplicitReturns": true,
