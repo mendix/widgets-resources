@@ -333,7 +333,6 @@ const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)
 const nativeExternal = [
     /^mendix($|\/)/,
     /^react-native($|\/)/,
-    /^react-dom($|\/)/,
     /^big.js$/,
     /^react($|\/)/,
     /^react-native-gesture-handler($|\/)/,
