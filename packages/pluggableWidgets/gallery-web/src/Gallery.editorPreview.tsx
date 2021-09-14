@@ -57,7 +57,3 @@ export function preview(props: PreviewProps): ReactElement {
         />
     );
 }
-
-export function getPreviewCss(): string {
-    return require("./ui/gallery-main.scss");
-}
