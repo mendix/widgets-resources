@@ -5,8 +5,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.3] 2021-9-14 - undefined
+
 ### Fixed
 - We fixed an issue with our widget bundles erroneously including react-dom and thus were very large.
+
+## [1.0.1] BarChart
+
+### Fixed
+- We have fixed the data source consistency check for MX 9.2 and above.
+
+## [1.0.1] LineChart
+
+### Fixed
+- We have fixed the data source consistency check for MX 9.2 and above.
+
+
 
 ## [3.1.0] - 2021-08-26
 ### Notifications widget
