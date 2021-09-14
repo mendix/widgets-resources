@@ -1,7 +1,7 @@
 {
   "name": "rating-web",
   "widgetName": "StarRating",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Displays a rating mechanism with icons",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 54611
   },
   "testProject": {
