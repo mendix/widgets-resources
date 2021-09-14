@@ -13,6 +13,9 @@
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
+  "marketplace": {
+    "minimumMXVersion": "9.6.0"
+  },
   "packagePath": "com.mendix.widget.web",
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
