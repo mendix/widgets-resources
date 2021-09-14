@@ -1,7 +1,7 @@
 {
   "name": "progress-bar-web",
   "widgetName": "ProgressBar",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Displays a progress bar",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 48910
   },
   "testProject": {
