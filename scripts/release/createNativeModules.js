@@ -79,9 +79,6 @@ async function updateChangelogs(nativeWidgetFolders, moduleInfo) {
             await writeToChangelogs(widgetChangelogs, widgetInfo);
         }
     }
-    // let newModuleChangelogs = moduleChangelogs
-    //     ? `## [${moduleInfo.version}] ${moduleInfo.nameWithSpace}\n${moduleChangelogs}\n`
-    //     : "";
     const newModuleChangelogs = nativeWidgetsChangelogs.length
         ? `${moduleChangelogs}\n\n${nativeWidgetsChangelogs.join("\n\n")}`
         : moduleChangelogs;
