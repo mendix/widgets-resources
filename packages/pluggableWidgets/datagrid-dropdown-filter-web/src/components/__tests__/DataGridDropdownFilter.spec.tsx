@@ -1,4 +1,5 @@
-import { Alert, dynamicValue, FilterContextValue, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
+import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
+import { dynamicValue, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import DatagridDropdownFilter from "../../DatagridDropdownFilter";
 import { mount } from "enzyme";

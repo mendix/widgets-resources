@@ -1,4 +1,4 @@
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert } from "@mendix/piw-utils-internal/components/web";
 import { HTMLAttributes, mount, ReactWrapper, shallow } from "enzyme";
 import { createElement, CSSProperties, FunctionComponent } from "react";
 import { ProgressBar, ProgressBarProps } from "../ProgressBar";

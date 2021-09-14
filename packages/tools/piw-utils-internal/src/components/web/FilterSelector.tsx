@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { useOnClickOutside } from "../utils";
+import { useOnClickOutside } from "./utils";
 import { createPortal } from "react-dom";
 import { usePositionObserver } from "./usePositionObserver";
 

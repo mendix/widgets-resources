@@ -5,7 +5,7 @@ import { FilterComponent } from "./components/FilterComponent";
 import { DatagridDateFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 import { registerLocale } from "react-datepicker";
 import * as locales from "date-fns/locale";
-import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal/components/web";
 
 import { changeTimeToMidnight } from "./utils/utils";
 import { addDays } from "date-fns";

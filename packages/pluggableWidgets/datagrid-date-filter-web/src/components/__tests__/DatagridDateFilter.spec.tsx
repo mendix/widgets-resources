@@ -1,4 +1,5 @@
-import { Alert, FilterContextValue, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
+import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
+import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { mount } from "enzyme";
 import { createContext, createElement } from "react";
 import DatagridDateFilter from "../../DatagridDateFilter";

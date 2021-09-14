@@ -1,0 +1,4 @@
+{
+  "main": "../../dist/components/web/index.js",
+  "types": "../../dist/components/web/index.d.ts"
+}

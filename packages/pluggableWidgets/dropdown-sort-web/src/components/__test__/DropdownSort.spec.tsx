@@ -1,4 +1,5 @@
-import { Alert, ListAttributeValueBuilder, SortContextValue, SortInstruction } from "@mendix/piw-utils-internal";
+import { Alert, SortContextValue, SortInstruction } from "@mendix/piw-utils-internal/components/web";
+import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import { DropdownSort } from "../../DropdownSort";
 import { mount } from "enzyme";

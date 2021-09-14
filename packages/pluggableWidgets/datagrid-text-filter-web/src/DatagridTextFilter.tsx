@@ -2,7 +2,7 @@ import { createElement, ReactElement } from "react";
 import { DatagridTextFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal";
+import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal/components/web";
 
 import {
     attribute,

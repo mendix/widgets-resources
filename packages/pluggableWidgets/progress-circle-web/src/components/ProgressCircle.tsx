@@ -1,6 +1,6 @@
 import { createElement, CSSProperties, FunctionComponent, ReactNode, useCallback, useEffect, useState } from "react";
 import classNames from "classnames";
-import { Alert } from "@mendix/piw-utils-internal";
+import { Alert } from "@mendix/piw-utils-internal/components/web";
 import { Circle, CircleOptions } from "progressbar.js";
 import { calculatePercentage } from "../util";
 
