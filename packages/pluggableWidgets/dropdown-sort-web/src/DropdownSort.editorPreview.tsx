@@ -18,7 +18,3 @@ export function preview(props: PreviewProps): ReactElement {
         />
     );
 }
-
-export function getPreviewCss(): string {
-    return require("./ui/dropdown-sort-main.scss");
-}
