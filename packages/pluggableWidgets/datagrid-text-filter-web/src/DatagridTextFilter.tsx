@@ -31,8 +31,8 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of Text filter or have
-            a &quot;Hashed string or String&quot; attribute available.
+            The Text filter widget can&apos;t be used with the filters options you have selected. It requires a
+            &quot;Hashed string or String&quot; attribute to be selected.
         </Alert>
     );
 
@@ -78,12 +78,14 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
                         name={props.name}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
+                        styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: string, type: DefaultFilterEnum): void => {
                             const conditions = attributes

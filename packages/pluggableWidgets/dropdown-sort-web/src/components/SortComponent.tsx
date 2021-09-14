@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { SortDirection, useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import classNames from "classnames";
 import { createPortal } from "react-dom";
@@ -10,12 +10,14 @@ export interface SortOption {
 
 interface SortComponentProps {
     ariaLabel?: string;
+    className?: string;
     defaultDirection?: SortDirection;
     defaultOption?: SortOption;
     emptyOptionCaption?: string;
     name?: string;
     options: SortOption[];
     tabIndex?: number;
+    styles?: CSSProperties;
     updateSort?: (value: SortOption, direction: SortDirection) => void;
 }
 
@@ -105,7 +107,12 @@ export function SortComponent(props: SortComponentProps): ReactElement {
     }, []);
 
     return (
-        <div className="dropdown-container" data-focusindex={props.tabIndex ?? 0} ref={componentRef}>
+        <div
+            className={classNames("dropdown-container", props.className)}
+            data-focusindex={props.tabIndex ?? 0}
+            ref={componentRef}
+            style={props.styles}
+        >
             <div className="dropdown-triggerer-wrapper">
                 <input
                     value={showPlaceholder ? "" : valueInput}

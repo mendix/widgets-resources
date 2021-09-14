@@ -160,7 +160,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
             itemRenderer={useCallback(
                 (renderWrapper, item) =>
                     renderWrapper(
-                        props.content.get(item),
+                        props.content?.get(item),
                         props.itemClass?.get(item)?.value,
                         props.onClick ? props.onClick?.get(item).execute : undefined
                     ),

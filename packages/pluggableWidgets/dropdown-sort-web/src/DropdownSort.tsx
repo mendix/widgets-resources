@@ -65,11 +65,13 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
         <SortComponent
             key={defaultValue?.value ?? "sort-component"}
             ariaLabel={props.ariaLabel?.value}
+            className={props.class}
             defaultDirection={defaultDirection}
             defaultOption={defaultValue}
             emptyOptionCaption={props.emptyOptionCaption?.value}
             name={props.name}
             options={options}
+            styles={props.style}
             tabIndex={props.tabIndex}
             updateSort={updateSort}
         />

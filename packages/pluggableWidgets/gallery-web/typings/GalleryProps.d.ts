@@ -43,8 +43,9 @@ export interface GalleryContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advanced: boolean;
     datasource: ListValue;
-    content: ListWidgetValue;
+    content?: ListWidgetValue;
     desktopItems: number;
     tabletItems: number;
     phoneItems: number;
@@ -63,6 +64,7 @@ export interface GalleryContainerProps {
 export interface GalleryPreviewProps {
     class: string;
     style: string;
+    advanced: boolean;
     datasource: {} | { type: string } | null;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     desktopItems: number | null;

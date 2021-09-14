@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dropdown Filter with single attribute DOM structure renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="dropdown-container filter-custom-class"
+    data-focusindex="0"
+  >
+    <input
+      aria-controls="filter-test-dropdown-list"
+      aria-expanded="false"
+      aria-haspopup="true"
+      class="form-control dropdown-triggerer"
+      value=""
+    />
+  </div>
+</DocumentFragment>
+`;

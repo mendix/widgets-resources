@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useCallback, useEffect, useRef, useState } from "react";
+import { createElement, CSSProperties, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import { FilterSelector } from "@mendix/piw-utils-internal/components/web";
 import { debounce } from "@mendix/piw-utils-internal";
 
@@ -8,6 +8,7 @@ import classNames from "classnames";
 
 interface FilterComponentProps {
     adjustable: boolean;
+    className?: string;
     defaultFilter: DefaultFilterEnum;
     delay: number;
     name?: string;
@@ -15,6 +16,7 @@ interface FilterComponentProps {
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
+    styles?: CSSProperties;
     updateFilters?: (value: Big | undefined, type: DefaultFilterEnum) => void;
     value?: Big;
 }
@@ -48,7 +50,11 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [inputRef]);
 
     return (
-        <div className="filter-container" data-focusindex={props.tabIndex ?? 0}>
+        <div
+            className={classNames("filter-container", props.className)}
+            data-focusindex={props.tabIndex ?? 0}
+            style={props.styles}
+        >
             {props.adjustable && (
                 <FilterSelector
                     ariaLabel={props.screenReaderButtonCaption}
@@ -56,8 +62,13 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     defaultFilter={props.defaultFilter}
                     onChange={useCallback(
                         type => {
-                            setType(type);
-                            focusInput();
+                            setType(prev => {
+                                if (prev === type) {
+                                    return prev;
+                                }
+                                focusInput();
+                                return type;
+                            });
                         },
                         [focusInput]
                     )}

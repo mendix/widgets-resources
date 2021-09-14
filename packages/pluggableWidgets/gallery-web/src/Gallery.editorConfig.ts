@@ -1,6 +1,7 @@
 import {
     ContainerProps,
     DropZoneProps,
+    hidePropertiesIn,
     hidePropertyIn,
     Problem,
     Properties,
@@ -23,13 +24,28 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "emptyPlaceholder");
     }
 
-    if (values.filterList?.length === 0) {
+    if (values.filterList?.length === 0 && values.sortList?.length === 0) {
         hidePropertyIn(defaultProperties, values, "filtersPlaceholder");
     }
 
     if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, [
+                "pagination",
+                "pagingPosition",
+                "showEmptyPlaceholder",
+                "emptyPlaceholder",
+                "itemClass",
+                "filtersPlaceholder",
+                "filterList",
+                "sortList"
+            ]);
+        }
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertyIn(defaultProperties, values, "advanced");
     }
+
     return defaultProperties;
 }
 
@@ -60,11 +76,11 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
     const filterCaption =
         values.filterList.length > 0
             ? values.sortList.length > 0
-                ? "Place filter/sort widget(s) here"
-                : "Place filter widget(s) here"
+                ? "Place filter/sort widgets here"
+                : "Place filter widgets here"
             : values.sortList.length > 0
-            ? "Place sort widget(s) here"
-            : "Place widget(s) here";
+            ? "Place sort widgets here"
+            : "Place widgets here";
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -109,7 +125,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                     {
                         type: "DropZone",
                         property: values.content,
-                        placeholder: "Place widget(s) here"
+                        placeholder: "Gallery item: Place widgets here"
                     } as DropZoneProps
                 ]
             } as RowLayoutProps,
@@ -128,7 +144,13 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                         children: [
                             {
                                 type: "Text",
-                                content: `Desktop ${values.desktopItems} Columns, Tablet ${values.tabletItems} Columns, Phone ${values.phoneItems} Columns`,
+                                content: `Desktop ${values.desktopItems} ${getSingularPlural(
+                                    "Column",
+                                    values.desktopItems!
+                                )}, Tablet ${values.tabletItems} ${getSingularPlural(
+                                    "Column",
+                                    values.tabletItems!
+                                )}, Phone ${values.phoneItems} ${getSingularPlural("Column", values.phoneItems!)}`,
                                 fontColor: "#899499"
                             }
                         ]
@@ -149,7 +171,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                           {
                               type: "DropZone",
                               property: values.emptyPlaceholder,
-                              placeholder: "Empty gallery message: Place widget(s) here"
+                              placeholder: "Empty gallery message: Place widgets here"
                           } as DropZoneProps
                       ]
                   } as RowLayoutProps
@@ -158,6 +180,15 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
 
     return {
         type: "Container",
-        children: [titleHeader, ...(values.filterList.length > 0 ? [filters] : []), content, ...footer]
+        children: [
+            titleHeader,
+            ...(values.filterList.length > 0 || values.sortList.length > 0 ? [filters] : []),
+            content,
+            ...footer
+        ]
     };
+}
+
+function getSingularPlural(word: string, elements: number): string {
+    return elements > 1 ? word + "s" : word;
 }

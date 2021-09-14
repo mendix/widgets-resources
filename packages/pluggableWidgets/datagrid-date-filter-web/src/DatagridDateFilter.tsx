@@ -47,8 +47,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of Date filter or have
-            a &quot;Date and Time&quot; attribute available.
+            The Date filter widget can&apos;t be used with the filters options you have selected. It requires a
+            &quot;Date and Time&quot; attribute to be selected.
         </Alert>
     );
 
@@ -96,6 +96,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         defaultValue={defaultFilter?.value ?? props.defaultValue?.value}
                         dateFormat={patterns.date}
@@ -104,6 +105,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
+                        styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
                             const conditions = attributes
