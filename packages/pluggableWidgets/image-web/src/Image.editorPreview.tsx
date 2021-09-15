@@ -51,7 +51,12 @@ export function preview(props: ImagePreviewProps): ReactElement | null {
             type={props.datasource === "icon" && props.imageIcon?.type === "glyph" ? "icon" : "image"}
             image={image}
             displayAs={props.displayAs}
-            renderAsBackground={false}
+            renderAsBackground={props.datasource !== "icon" && props.isBackgroundImage}
+            backgroundImageContent={
+                <props.children.renderer caption="Place content here">
+                    <div />
+                </props.children.renderer>
+            }
             previewMode
         />
     );
