@@ -1,6 +1,6 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
 
-describe("tree-view-web", () => {
+describe("tree-node-web", () => {
     beforeEach(() => {
         page.open(); // resets page
     });
@@ -8,11 +8,11 @@ describe("tree-view-web", () => {
     describe("capabilities: expand", () => {
         it("expands a node", () => {
             browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeView1");
+            const treeView = page.getWidget("treeNode1");
 
             treeView.waitForDisplayed({ timeout: 5000 });
 
-            const firstNode = page.waitForElement(".mx-name-treeView1 .widget-tree-view-branch-header-value", treeView);
+            const firstNode = page.waitForElement(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
 
             firstNode.click();
             browser.pause(1000);
@@ -23,16 +23,16 @@ describe("tree-view-web", () => {
 
         it("expands multiple nodes", () => {
             browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeView1");
+            const treeView = page.getWidget("treeNode1");
 
             treeView.waitForDisplayed({ timeout: 5000 });
 
-            const treeNode = page.waitForElements(".mx-name-treeView1 .widget-tree-view-branch-header-value", treeView);
+            const treeNode = page.waitForElements(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
 
             treeNode[0].click();
             treeNode[1].click();
 
-            const innerTreeNode = page.waitForElements(".mx-name-treeView2 .widget-tree-view-branch-header-value");
+            const innerTreeNode = page.waitForElements(".mx-name-treeNode2 .widget-tree-node-branch-header-value");
 
             innerTreeNode[4].click();
             browser.pause(1000);
@@ -45,11 +45,11 @@ describe("tree-view-web", () => {
     describe("capabilities: collapse", () => {
         it("collapses a node", () => {
             browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeView1");
+            const treeView = page.getWidget("treeNode1");
 
             treeView.waitForDisplayed({ timeout: 5000 });
 
-            const firstNode = page.waitForElement(".mx-name-treeView1 .widget-tree-view-branch-header-value", treeView);
+            const firstNode = page.waitForElement(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
 
             firstNode.click();
             firstNode.click();
@@ -61,16 +61,16 @@ describe("tree-view-web", () => {
 
         it("collapses multiple nodes", () => {
             browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeView1");
+            const treeView = page.getWidget("treeNode1");
 
             treeView.waitForDisplayed({ timeout: 5000 });
 
-            const treeNode = page.waitForElements(".mx-name-treeView1 .widget-tree-view-branch-header-value", treeView);
+            const treeNode = page.waitForElements(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
 
             treeNode[0].click();
             treeNode[1].click();
 
-            const innerTreeNode = page.waitForElements(".mx-name-treeView2 .widget-tree-view-branch-header-value");
+            const innerTreeNode = page.waitForElements(".mx-name-treeNode2 .widget-tree-node-branch-header-value");
 
             innerTreeNode[4].click();
             innerTreeNode[4].click();
