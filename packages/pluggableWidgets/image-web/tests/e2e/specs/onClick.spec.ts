@@ -1,14 +1,14 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
-import ImageViewer from "../objects/imageViewer.widget";
+import Image from "../objects/imageRender.widget";
 import * as html from "../objects/constants";
 
 describe("Image viewer", () => {
     it("triggers a Microflow on click", () => {
         page.open("p/onClickMicroflow");
 
-        const imageViewer = new ImageViewer("imageViewer1");
-        imageViewer.element.waitForDisplayed();
-        imageViewer.element.click();
+        const imageRender = new Image("imageRender1");
+        imageRender.element.waitForDisplayed();
+        imageRender.element.click();
         page.modalDialog.waitForDisplayed();
 
         expect(page.modalDialog.getText()).toContain("You clicked this image");
@@ -17,9 +17,9 @@ describe("Image viewer", () => {
     it("triggers a Nanoflow on click", () => {
         page.open("p/onClickNanoflow");
 
-        const imageViewer = new ImageViewer("imageViewer1");
-        imageViewer.element.waitForDisplayed();
-        imageViewer.element.click();
+        const imageRender = new Image("imageRender1");
+        imageRender.element.waitForDisplayed();
+        imageRender.element.click();
         page.modalDialog.waitForDisplayed();
 
         expect(page.modalDialog.getText()).toContain(html.dynamicImage);
@@ -28,9 +28,9 @@ describe("Image viewer", () => {
     it("opens a Page on click", () => {
         page.open("p/onClickShowPage");
 
-        const imageViewer = new ImageViewer("imageViewer1");
-        imageViewer.element.waitForDisplayed();
-        imageViewer.element.click();
+        const imageRender = new Image("imageRender1");
+        imageRender.element.waitForDisplayed();
+        imageRender.element.click();
         page.modalDialog.waitForDisplayed();
 
         expect(page.modalDialogHeader.getText()).toBe("GazaLand");
@@ -39,11 +39,11 @@ describe("Image viewer", () => {
     it("shows full screen image on click", () => {
         page.open("p/onClickOpenFullScreen");
 
-        const imageViewer = new ImageViewer("imageViewer1");
-        imageViewer.element.waitForDisplayed();
-        imageViewer.element.click();
-        ImageViewer.lightbox.waitForDisplayed();
+        const imageRender = new Image("imageRender1");
+        imageRender.element.waitForDisplayed();
+        imageRender.element.click();
+        Image.lightbox.waitForDisplayed();
 
-        expect(ImageViewer.lightbox.$("img").getProperty("src")).toContain(html.staticImage);
+        expect(Image.lightbox.$("img").getProperty("src")).toContain(html.staticImage);
     });
 });

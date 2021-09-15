@@ -15,22 +15,22 @@ function getStyle(value: string | number, type: WidthUnitEnum | HeightUnitEnum):
 
     return "";
 }
-export interface ImageViewerWrapperProps {
+export interface ImageWrapperProps {
     className?: string;
     responsive: boolean;
     hasImage: boolean;
     children:
-        | ReactElement<ImageViewerGlyphicon | ImageViewerImage>
-        | [ReactElement<ImageViewerGlyphicon | ImageViewerImage>, ReactElement<LightboxProps> | false];
+        | ReactElement<ImageContentGlyphicon | ImageContentImage>
+        | [ReactElement<ImageContentGlyphicon | ImageContentImage>, ReactElement<LightboxProps> | false];
 }
 
-export interface ImageViewerContentProps {
+export interface ImageContentProps {
     style?: CSSProperties;
     onClick?: ReactEventHandler<HTMLElement>;
     altText?: string;
 }
 
-function Wrapper(props: ImageViewerWrapperProps): ReactElement {
+function Wrapper(props: ImageWrapperProps): ReactElement {
     return (
         <div
             className={classNames(
@@ -45,12 +45,12 @@ function Wrapper(props: ImageViewerWrapperProps): ReactElement {
     );
 }
 
-export interface ImageViewerGlyphicon extends ImageViewerContentProps {
+export interface ImageContentGlyphicon extends ImageContentProps {
     icon: string | undefined;
     size: number;
 }
 
-function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
+function ContentGlyphicon(props: ImageContentGlyphicon): ReactElement {
     const accessibilityProps = props.altText
         ? {
               "aria-label": props.altText,
@@ -70,7 +70,7 @@ function Glyphicon(props: ImageViewerGlyphicon): ReactElement {
     );
 }
 
-export interface ImageViewerImage extends ImageViewerContentProps {
+export interface ImageContentImage extends ImageContentProps {
     image: string | undefined;
     height: number;
     heightUnit: HeightUnitEnum;
@@ -78,7 +78,7 @@ export interface ImageViewerImage extends ImageViewerContentProps {
     widthUnit: WidthUnitEnum;
 }
 
-function Image(props: ImageViewerImage): ReactElement {
+function ContentImage(props: ImageContentImage): ReactElement {
     const onClickProps = getImageContentOnClickProps(props.onClick);
     return (
         <img
@@ -94,7 +94,7 @@ function Image(props: ImageViewerImage): ReactElement {
     );
 }
 
-function getImageContentOnClickProps(onClick: ImageViewerContentProps["onClick"]): HTMLAttributes<HTMLElement> {
+function getImageContentOnClickProps(onClick: ImageContentProps["onClick"]): HTMLAttributes<HTMLElement> {
     if (!onClick) {
         return {};
     }
@@ -110,7 +110,7 @@ function getImageContentOnClickProps(onClick: ImageViewerContentProps["onClick"]
     };
 }
 
-interface BackgroundImageProps extends ImageViewerImage {
+interface BackgroundImageProps extends ImageContentImage {
     className?: string;
     children: ReactNode;
 }
@@ -131,9 +131,9 @@ function BackgroundImage(props: BackgroundImageProps): ReactElement {
     );
 }
 
-export const ImageViewerUi = {
+export const ImageUi = {
     Wrapper,
     BackgroundImage,
-    Glyphicon,
-    Image
+    ContentGlyphicon,
+    ContentImage
 };

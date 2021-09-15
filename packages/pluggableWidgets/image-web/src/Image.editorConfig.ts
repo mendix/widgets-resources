@@ -10,7 +10,7 @@ import {
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { DatasourceEnum, ImagePreviewProps } from "../typings/ImageProps";
-import StructurePreviewImageViewerSvg from "./assets/placeholder.svg";
+import StructurePreviewImageSvg from "./assets/placeholder.svg";
 
 type ImageViewPreviewPropsKey = keyof ImagePreviewProps;
 
@@ -95,7 +95,7 @@ export function getPreview(values: ImagePreviewProps): StructurePreviewProps | n
     if (!values.isBackgroundImage) {
         return {
             type: "Image",
-            document: decodeURIComponent(StructurePreviewImageViewerSvg.replace("data:image/svg+xml,", "")),
+            document: decodeURIComponent(StructurePreviewImageSvg.replace("data:image/svg+xml,", "")),
             height: 100,
             width: 100
         };

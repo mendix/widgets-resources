@@ -2,14 +2,14 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
 import { ImagePreviewProps } from "../typings/ImageProps";
-import { ImageViewer as ImageViewerComponent } from "./components/Image/index";
+import { Image as ImageComponent } from "./components/Image/index";
 
-import ImageViewerPlaceholder from "./assets/placeholder.svg";
+import ImagePlaceholder from "./assets/placeholder.svg";
 
 declare function require(name: string): string;
 
 export function preview(props: ImagePreviewProps): ReactElement | null {
-    let image = ImageViewerPlaceholder;
+    let image = ImagePlaceholder;
     switch (props.datasource) {
         case "image":
             if (props.imageObject?.type === "static") {
@@ -37,7 +37,7 @@ export function preview(props: ImagePreviewProps): ReactElement | null {
     }
 
     return (
-        <ImageViewerComponent
+        <ImageComponent
             class={props.class}
             style={parseStyle(props.style)}
             widthUnit={props.widthUnit}

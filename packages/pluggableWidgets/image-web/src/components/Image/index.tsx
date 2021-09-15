@@ -1,17 +1,17 @@
 import { cloneElement, createElement, CSSProperties, FunctionComponent, ReactNode, useCallback } from "react";
 import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum, DisplayAsEnum } from "../../../typings/ImageProps";
 import { useLightboxState } from "../../utils/lightboxState";
-import { ImageViewerUi, ImageViewerContentProps } from "./ui";
+import { ImageUi, ImageContentProps } from "./ui";
 import { Lightbox, LightboxProps } from "../Lightbox";
 
 import "../../ui/Image.scss";
 
-export type ImageViewerImageProps = {
+export type ImageType = {
     type: "image" | "icon";
     image: string | undefined;
 };
 
-export interface ImageViewerProps extends ImageViewerImageProps {
+export interface ImageProps extends ImageType {
     class: string;
     style?: CSSProperties;
     widthUnit: WidthUnitEnum;
@@ -38,7 +38,7 @@ function processImageLink(imageLink: string | undefined, displayAs: DisplayAsEnu
     return url.href;
 }
 
-export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
+export const Image: FunctionComponent<ImageProps> = ({
     class: className,
     style,
     widthUnit,
@@ -67,7 +67,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         [closeLightbox]
     );
 
-    const onImageClick = useCallback<Exclude<ImageViewerContentProps["onClick"], undefined>>(
+    const onImageClick = useCallback<Exclude<ImageContentProps["onClick"], undefined>>(
         event => {
             event.stopPropagation();
             if (onClickType === "action") {
@@ -80,7 +80,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     );
 
     const hasClickHandler = (onClickType === "action" && onClick) || onClickType === "enlarge";
-    const sharedContentProps: ImageViewerContentProps = {
+    const sharedContentProps: ImageContentProps = {
         style,
         onClick: hasClickHandler ? onImageClick : undefined,
         altText
@@ -88,7 +88,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
 
     const content =
         type === "image" ? (
-            <ImageViewerUi.Image
+            <ImageUi.ContentImage
                 image={processImageLink(image, displayAs)}
                 height={height}
                 heightUnit={heightUnit}
@@ -97,12 +97,12 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                 {...sharedContentProps}
             />
         ) : (
-            <ImageViewerUi.Glyphicon icon={image} size={iconSize} {...sharedContentProps} />
+            <ImageUi.ContentGlyphicon icon={image} size={iconSize} {...sharedContentProps} />
         );
 
     if (renderAsBackground) {
         return (
-            <ImageViewerUi.BackgroundImage
+            <ImageUi.BackgroundImage
                 className={className}
                 style={style}
                 image={image}
@@ -116,12 +116,12 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                 }}
             >
                 {backgroundImageContent}
-            </ImageViewerUi.BackgroundImage>
+            </ImageUi.BackgroundImage>
         );
     }
 
     return (
-        <ImageViewerUi.Wrapper
+        <ImageUi.Wrapper
             className={className}
             responsive={responsive}
             hasImage={image !== undefined && image.length > 0}
@@ -132,6 +132,6 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
                     {type === "image" ? cloneElement(content, { image, onClick: undefined }) : content}
                 </Lightbox>
             )}
-        </ImageViewerUi.Wrapper>
+        </ImageUi.Wrapper>
     );
 };
