@@ -67,6 +67,12 @@ describe("Image", () => {
         expect(render(<Image {...glyphiconProps} />)).toMatchSnapshot();
     });
 
+    it("renders the structure as a background image", () => {
+        expect(
+            render(<Image {...imageProps} renderAsBackground backgroundImageContent={<div>Image content</div>} />)
+        ).toMatchSnapshot();
+    });
+
     describe("when the onClickType is action", () => {
         it("calls the onClick when clicking on an image", () => {
             const onClickMock = jest.fn();
@@ -190,6 +196,33 @@ describe("Image", () => {
 
             expect(allImages.at(0).prop("src")).toContain("thumb=true");
             expect(allImages.at(1).prop("src")).not.toContain("thumb=true");
+        });
+    });
+
+    describe("when showing as a background image", () => {
+        it("shows the content", () => {
+            const imageRender = mount(
+                <Image {...imageProps} renderAsBackground backgroundImageContent={<div>Image content</div>} />
+            );
+            expect(imageRender.text()).toContain("Image content");
+        });
+
+        it("properly handles on click event if configured by the user", () => {
+            const onClickMock = jest.fn();
+            const imageRender = mount(
+                <Image
+                    {...imageProps}
+                    renderAsBackground
+                    backgroundImageContent={<div>Image content</div>}
+                    onClick={onClickMock}
+                    onClickType="action"
+                />
+            );
+            const backgroundImage = imageRender.find(".mx-image-viewer.mx-image-background");
+            expect(backgroundImage).toHaveLength(1);
+
+            backgroundImage.simulate("click");
+            expect(onClickMock).toHaveBeenCalledTimes(1);
         });
     });
 });

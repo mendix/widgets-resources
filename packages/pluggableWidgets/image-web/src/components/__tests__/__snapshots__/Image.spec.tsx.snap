@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Image renders the structure as a background image 1`] = `
+<div
+  class="mx-image-viewer mx-image-background"
+  style="height:300px;width:300px;background-image:url('https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg')"
+>
+  <div>
+    Image content
+  </div>
+</div>
+`;
+
 exports[`Image renders the structure with an icon 1`] = `
 <div
   class="mx-image-viewer mx-image-viewer-responsive"

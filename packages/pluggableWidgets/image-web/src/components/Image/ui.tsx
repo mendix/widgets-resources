@@ -119,6 +119,7 @@ function BackgroundImage(props: BackgroundImageProps): ReactElement {
     return (
         <div
             className={classNames("mx-image-viewer", "mx-image-background", props.className)}
+            onClick={props.onClick}
             style={{
                 ...props.style,
                 height: getStyle(props.height, props.heightUnit),
