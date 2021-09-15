@@ -2,11 +2,12 @@ import { Alert, SortContextValue, SortInstruction } from "@mendix/piw-utils-inte
 import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import { DropdownSort } from "../../DropdownSort";
+import { render } from "@testing-library/react";
 import { mount } from "enzyme";
 import { SortComponent } from "../SortComponent";
 
 const commonProps = {
-    class: "filter-test",
+    class: "filter-custom-class",
     tabIndex: 0,
     name: "filter-test",
     sortOrder: "asc" as const
@@ -55,6 +56,12 @@ describe("Dropdown Filter", () => {
                     value: "attribute2"
                 }
             ]);
+        });
+
+        it("renders correctly", () => {
+            const { asFragment } = render(<DropdownSort {...commonProps} />);
+
+            expect(asFragment()).toMatchSnapshot();
         });
 
         afterAll(() => {

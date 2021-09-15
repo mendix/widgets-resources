@@ -46,7 +46,7 @@ export function getProperties(
         if (column.width !== "manual") {
             hidePropertyIn(defaultProperties, values, "columns", index, "size");
         }
-        if (!values.advanced) {
+        if (platform === "web" && !values.advanced) {
             hideNestedPropertiesIn(defaultProperties, values, "columns", index, [
                 "columnClass",
                 "sortable",
@@ -65,23 +65,7 @@ export function getProperties(
     if (!values.showHeaderFilters) {
         hidePropertyIn(defaultProperties, values, "filterList");
     }
-    if (!values.advanced) {
-        hidePropertiesIn(defaultProperties, values, [
-            "pagination",
-            "pagingPosition",
-            "showEmptyPlaceholder",
-            "rowClass",
-            "columnsSortable",
-            "columnsDraggable",
-            "columnsResizable",
-            "columnsHidable",
-            "configurationAttribute",
-            "onConfigurationChange",
-            "showHeaderFilters",
-            "filterList",
-            "filtersPlaceholder"
-        ]);
-    }
+
     changePropertyIn(
         defaultProperties,
         values,
@@ -112,7 +96,27 @@ export function getProperties(
         "columns"
     );
     if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, [
+                "pagination",
+                "pagingPosition",
+                "showEmptyPlaceholder",
+                "rowClass",
+                "columnsSortable",
+                "columnsDraggable",
+                "columnsResizable",
+                "columnsHidable",
+                "configurationAttribute",
+                "onConfigurationChange",
+                "showHeaderFilters",
+                "filterList",
+                "filtersPlaceholder"
+            ]);
+        }
+
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertyIn(defaultProperties, values, "advanced");
     }
     return defaultProperties;
 }

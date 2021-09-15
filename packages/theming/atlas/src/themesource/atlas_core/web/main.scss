@@ -134,16 +134,6 @@
     @include header();
 }
 
-@import "core/widgets/gallery";
-@if not $exclude-gallery {
-    @include gallery();
-}
-
-@import "core/helpers/gallery";
-@if not $exclude-gallery and not $exclude-gallery-helpers {
-    @include gallery-helpers();
-}
-
 @import "core/widgets/glyphicon";
 @if not $exclude-glyphicon {
     @include glyphicon();
@@ -352,11 +342,6 @@
 @import "core/helpers/accordion";
 @if not $exclude-accordion and not $exclude-accordion-helpers {
     @include accordion-helpers();
-}
-
-@import "core/helpers/tree-node";
-@if not $exclude-tree-node and not $exclude-tree-node-helpers {
-    @include tree-node-helpers();
 }
 
 // Custom widgets

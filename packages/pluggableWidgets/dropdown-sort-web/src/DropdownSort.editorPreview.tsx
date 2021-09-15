@@ -1,17 +1,20 @@
 import { createElement, ReactElement } from "react";
 import { SortComponent } from "./components/SortComponent";
 import { DropdownSortPreviewProps } from "../typings/DropdownSortProps";
+import { parseStyle } from "@mendix/piw-utils-internal";
 
-export function preview(props: DropdownSortPreviewProps): ReactElement {
-    return (
-        <SortComponent
-            options={[{ caption: "optionCaption", value: "option" }]}
-            emptyOptionCaption={props.emptyOptionCaption}
-            ariaLabel={props.ariaLabel}
-        />
-    );
+interface PreviewProps extends Omit<DropdownSortPreviewProps, "class"> {
+    className: string;
 }
 
-export function getPreviewCss(): string {
-    return require("./ui/dropdown-sort-main.scss");
+export function preview(props: PreviewProps): ReactElement {
+    return (
+        <SortComponent
+            ariaLabel={props.ariaLabel}
+            className={props.className}
+            emptyOptionCaption={props.emptyOptionCaption}
+            options={[{ caption: "optionCaption", value: "option" }]}
+            styles={parseStyle(props.style)}
+        />
+    );
 }

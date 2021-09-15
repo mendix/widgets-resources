@@ -5,7 +5,11 @@ import { Table, TableColumn } from "./components/Table";
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { Selectable } from "mendix/preview/Selectable";
 
-export function preview(props: DatagridPreviewProps): ReactElement {
+interface PreviewProps extends Omit<DatagridPreviewProps, "class"> {
+    className: string;
+}
+
+export function preview(props: PreviewProps): ReactElement {
     const data = Array.from({ length: props.pageSize ?? 5 }).map(() => ({}));
     const columns: ColumnsPreviewType[] =
         props.columns.length > 0
@@ -76,7 +80,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                 },
                 [columns]
             )}
-            className={props.class}
+            className={props.className}
             columns={transformColumnProps(columns)}
             columnsDraggable={props.columnsDraggable}
             columnsFilterable={props.columnsFilterable}

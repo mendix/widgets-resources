@@ -2,11 +2,12 @@ import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components
 import { dynamicValue, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import DatagridDropdownFilter from "../../DatagridDropdownFilter";
+import { render } from "@testing-library/react";
 import { mount } from "enzyme";
 import { FilterComponent } from "../FilterComponent";
 
 const commonProps = {
-    class: "filter-test",
+    class: "filter-custom-class",
     tabIndex: 0,
     name: "filter-test"
 };
@@ -44,6 +45,16 @@ describe("Dropdown Filter", () => {
                         value: "enum_value_2"
                     }
                 ]);
+            });
+        });
+
+        describe("DOM structure", () => {
+            it("renders correctly", () => {
+                const { asFragment } = render(
+                    <DatagridDropdownFilter {...commonProps} auto multiSelect={false} filterOptions={[]} />
+                );
+
+                expect(asFragment()).toMatchSnapshot();
             });
         });
 
@@ -161,7 +172,7 @@ describe("Dropdown Filter", () => {
             );
 
             expect(filter.find(Alert).text()).toBe(
-                'To use multiple filters you need to define a filter identification in the properties of Drop-down filter or have a "Boolean or Enumeration" attribute available.'
+                'The Drop-down filter widget can\'t be used with the filters options you have selected. It requires a "Boolean or Enumeration" attribute to be selected.'
             );
         });
 

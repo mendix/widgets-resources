@@ -29,8 +29,8 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
     );
     const alertMessageMultipleFilters = (
         <Alert bootstrapStyle="danger">
-            To use multiple filters you need to define a filter identification in the properties of Number filter or
-            have a &quot;Auto number, Decimal, Integer or Long&quot; attribute available.
+            The Number filter widget can&apos;t be used with the filters options you have selected. It requires a
+            &quot;Autonumber, Decimal, Integer or Long&quot; attribute to be selected.
         </Alert>
     );
 
@@ -76,12 +76,14 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                 return (
                     <FilterComponent
                         adjustable={props.adjustable}
+                        className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
                         name={props.name}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
+                        styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Big | undefined, type: DefaultFilterEnum): void => {
                             const conditions = attributes
@@ -116,7 +118,7 @@ function findAttributesByType(multipleAttributes?: {
 
 function getAttributeTypeErrorMessage(type?: string): string | null {
     return type && !type.match(/AutoNumber|Decimal|Integer|Long/)
-        ? "The attribute type being used for Number filter is not 'Auto number, Decimal, Integer or Long'"
+        ? "The attribute type being used for Number filter is not 'Autonumber, Decimal, Integer or Long'"
         : null;
 }
 

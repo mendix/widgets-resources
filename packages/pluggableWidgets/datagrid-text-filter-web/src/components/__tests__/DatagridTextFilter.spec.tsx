@@ -1,11 +1,11 @@
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
 import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
-import { mount } from "enzyme";
+import { mount, render } from "enzyme";
 import { createContext, createElement } from "react";
 import DatagridTextFilter from "../../DatagridTextFilter";
 
 const commonProps = {
-    class: "filter-test",
+    class: "filter-custom-class",
     tabIndex: 0,
     name: "filter-test",
     defaultFilter: "equal" as const,
@@ -37,7 +37,7 @@ describe("Text Filter", () => {
         });
 
         it("renders correctly", () => {
-            const filter = mount(<DatagridTextFilter {...commonProps} />);
+            const filter = render(<DatagridTextFilter {...commonProps} />);
 
             expect(filter).toMatchSnapshot();
         });
@@ -68,7 +68,7 @@ describe("Text Filter", () => {
         });
 
         it("renders correctly", () => {
-            const filter = mount(<DatagridTextFilter {...commonProps} />);
+            const filter = render(<DatagridTextFilter {...commonProps} />);
 
             expect(filter).toMatchSnapshot();
         });
@@ -124,7 +124,7 @@ describe("Text Filter", () => {
             const filter = mount(<DatagridTextFilter {...commonProps} />);
 
             expect(filter.find(Alert).text()).toBe(
-                'To use multiple filters you need to define a filter identification in the properties of Text filter or have a "Hashed string or String" attribute available.'
+                'The Text filter widget can\'t be used with the filters options you have selected. It requires a "Hashed string or String" attribute to be selected.'
             );
         });
 

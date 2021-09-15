@@ -21,10 +21,7 @@ describe("gallery-web", () => {
             const dropdownSort = page.waitForElement(".mx-name-gallery1 .dropdown-container .form-control", gallery);
 
             dropdownSort.click();
-            const dropdownSortList = page.waitForElement(
-                ".mx-name-gallery1 .dropdown-container .dropdown-list",
-                gallery
-            );
+            const dropdownSortList = page.waitForElement("#drop_downFilter1-dropdown-list");
 
             dropdownSortList.$$("li")[4].click();
             browser.saveElement(gallery, "galleryDropdownSort");

@@ -1,7 +1,6 @@
 import { createElement, ReactElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { GalleryContainerProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
-import "./ui/gallery-main.scss";
 import {
     FilterType,
     SortInstruction,
@@ -160,7 +159,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
             itemRenderer={useCallback(
                 (renderWrapper, item) =>
                     renderWrapper(
-                        props.content.get(item),
+                        props.content?.get(item),
                         props.itemClass?.get(item)?.value,
                         props.onClick ? props.onClick?.get(item).execute : undefined
                     ),

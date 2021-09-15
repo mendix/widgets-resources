@@ -23,7 +23,6 @@ import {
     useInformParentContextOfChildNodes
 } from "./TreeNodeBranchContext";
 
-import "../ui/TreeNode.scss";
 import loadingCircleSvg from "../assets/loading-circle.svg";
 import {
     TreeNodeFocusChangeHandler,
