@@ -1,9 +1,11 @@
 import {
+    DropZoneProps,
     hidePropertiesIn,
     hidePropertyIn,
     moveProperty,
     Problem,
     Properties,
+    RowLayoutProps,
     StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
@@ -46,6 +48,16 @@ export function getProperties(
 ): Properties {
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
 
+    if (values.datasource === "icon") {
+        hidePropertyIn(defaultProperties, values, "isBackgroundImage");
+    }
+
+    if (values.isBackgroundImage) {
+        hidePropertyIn(defaultProperties, values, "alternativeText");
+    } else {
+        hidePropertyIn(defaultProperties, values, "children");
+    }
+
     if (values.datasource !== "image") {
         hidePropertyIn(defaultProperties, values, "defaultImageDynamic");
     }
@@ -79,12 +91,56 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(): StructurePreviewProps | null {
+export function getPreview(values: ImagePreviewProps): StructurePreviewProps | null {
+    if (!values.isBackgroundImage) {
+        return {
+            type: "Image",
+            document: decodeURIComponent(StructurePreviewImageViewerSvg.replace("data:image/svg+xml,", "")),
+            height: 100,
+            width: 100
+        };
+    }
+    const titleHeader: RowLayoutProps = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        backgroundColor: "#daeffb",
+        borders: true,
+        borderWidth: 1,
+        children: [
+            {
+                type: "Container",
+                padding: 4,
+                children: [
+                    {
+                        type: "Text",
+                        content: "Image",
+                        fontColor: "#2074c8"
+                    }
+                ]
+            }
+        ]
+    };
     return {
-        type: "Image",
-        document: decodeURIComponent(StructurePreviewImageViewerSvg.replace("data:image/svg+xml,", "")),
-        height: 100,
-        width: 100
+        type: "Container",
+        children: [
+            titleHeader,
+            {
+                type: "RowLayout",
+                children: [
+                    {
+                        type: "Container",
+                        borders: true,
+                        children: [
+                            {
+                                type: "DropZone",
+                                property: values.children,
+                                placeholder: "Content: Place widgets here"
+                            } as DropZoneProps
+                        ]
+                    }
+                ]
+            } as RowLayoutProps
+        ]
     };
 }
 

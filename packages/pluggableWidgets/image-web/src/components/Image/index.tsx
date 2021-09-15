@@ -1,4 +1,4 @@
-import { cloneElement, createElement, CSSProperties, FunctionComponent, useCallback } from "react";
+import { cloneElement, createElement, CSSProperties, FunctionComponent, ReactNode, useCallback } from "react";
 import { HeightUnitEnum, WidthUnitEnum, OnClickTypeEnum, DisplayAsEnum } from "../../../typings/ImageProps";
 import { useLightboxState } from "../../utils/lightboxState";
 import { ImageViewerUi, ImageViewerContentProps } from "./ui";
@@ -25,6 +25,8 @@ export interface ImageViewerProps extends ImageViewerImageProps {
     altText?: string;
     displayAs: DisplayAsEnum;
     previewMode?: boolean;
+    renderAsBackground: boolean;
+    backgroundImageContent?: ReactNode;
 }
 
 function processImageLink(imageLink: string | undefined, displayAs: DisplayAsEnum): string | undefined {
@@ -51,7 +53,9 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
     image,
     altText,
     displayAs,
-    previewMode
+    previewMode,
+    renderAsBackground,
+    backgroundImageContent
 }) => {
     const { lightboxIsOpen, openLightbox, closeLightbox } = useLightboxState();
 
@@ -95,6 +99,26 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = ({
         ) : (
             <ImageViewerUi.Glyphicon icon={image} size={iconSize} {...sharedContentProps} />
         );
+
+    if (renderAsBackground) {
+        return (
+            <ImageViewerUi.BackgroundImage
+                className={className}
+                style={style}
+                image={image}
+                height={height}
+                heightUnit={heightUnit}
+                width={width}
+                widthUnit={widthUnit}
+                onClick={event => {
+                    event.stopPropagation();
+                    onClick?.();
+                }}
+            >
+                {backgroundImageContent}
+            </ImageViewerUi.BackgroundImage>
+        );
+    }
 
     return (
         <ImageViewerUi.Wrapper

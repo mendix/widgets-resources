@@ -1,4 +1,4 @@
-import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactEventHandler } from "react";
+import { createElement, CSSProperties, HTMLAttributes, ReactElement, ReactEventHandler, ReactNode } from "react";
 import classNames from "classnames";
 import { HeightUnitEnum, WidthUnitEnum } from "../../../typings/ImageProps";
 import { LightboxProps } from "../Lightbox";
@@ -110,8 +110,30 @@ function getImageContentOnClickProps(onClick: ImageViewerContentProps["onClick"]
     };
 }
 
+interface BackgroundImageProps extends ImageViewerImage {
+    className?: string;
+    children: ReactNode;
+}
+
+function BackgroundImage(props: BackgroundImageProps): ReactElement {
+    return (
+        <div
+            className={classNames("mx-image-viewer", "mx-image-background", props.className)}
+            style={{
+                ...props.style,
+                height: getStyle(props.height, props.heightUnit),
+                width: getStyle(props.width, props.widthUnit),
+                backgroundImage: `url('${props.image}')`
+            }}
+        >
+            {props.children}
+        </div>
+    );
+}
+
 export const ImageViewerUi = {
     Wrapper,
+    BackgroundImage,
     Glyphicon,
     Image
 };

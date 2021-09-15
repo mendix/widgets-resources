@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, WebIcon, WebImage } from "mendix";
 
 export type DatasourceEnum = "image" | "imageUrl" | "icon";
@@ -36,16 +36,18 @@ export interface ImageContainerProps {
     iconSize: number;
     displayAs: DisplayAsEnum;
     responsive: boolean;
+    isBackgroundImage: boolean;
+    children?: ReactNode;
 }
 
 export interface ImagePreviewProps {
     class: string;
     style: string;
     datasource: DatasourceEnum;
-    imageObject: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
-    defaultImageDynamic: { type: "static"; imageUrl: string; } | { type: "dynamic"; entity: string; } | null;
+    imageObject: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    defaultImageDynamic: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     imageUrl: string;
-    imageIcon: { type: "glyph"; iconClass: string; } | { type: "image"; imageUrl: string; } | null;
+    imageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     onClickType: OnClickTypeEnum;
     onClick: {} | null;
     alternativeText: string;
@@ -56,4 +58,6 @@ export interface ImagePreviewProps {
     iconSize: number | null;
     displayAs: DisplayAsEnum;
     responsive: boolean;
+    isBackgroundImage: boolean;
+    children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

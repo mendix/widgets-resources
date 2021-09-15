@@ -84,6 +84,8 @@ export const Image: FunctionComponent<ImageContainerProps> = props => {
             image={image}
             altText={altText}
             displayAs={props.displayAs}
+            renderAsBackground={props.datasource !== "icon" && props.isBackgroundImage}
+            backgroundImageContent={props.children}
         />
     );
 };

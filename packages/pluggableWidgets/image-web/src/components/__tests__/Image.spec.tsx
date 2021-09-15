@@ -31,7 +31,9 @@ const imageProps: ImageViewerProps = {
     iconSize: 0,
     responsive: true,
     onClickType: "action",
-    displayAs: "fullImage"
+    displayAs: "fullImage",
+    renderAsBackground: false,
+    backgroundImageContent: null
 };
 
 const glyphiconProps: ImageViewerProps = {
@@ -45,7 +47,9 @@ const glyphiconProps: ImageViewerProps = {
     widthUnit: "pixels",
     responsive: true,
     onClickType: "action",
-    displayAs: "fullImage"
+    displayAs: "fullImage",
+    renderAsBackground: false,
+    backgroundImageContent: null
 };
 
 describe("ImageViewer", () => {

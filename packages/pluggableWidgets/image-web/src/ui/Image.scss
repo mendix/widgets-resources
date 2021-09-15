@@ -42,3 +42,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.mx-image-viewer.mx-image-background {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
