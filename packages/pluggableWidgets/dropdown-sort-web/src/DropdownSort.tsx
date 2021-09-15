@@ -10,7 +10,6 @@ import {
 
 import { DropdownSortContainerProps } from "../typings/DropdownSortProps";
 import { SortComponent, SortOption } from "./components/SortComponent";
-import "./ui/dropdown-sort-main.scss";
 
 export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
     const SortContext = getSortDispatcher() ?? ({} as Context<SortContextValue>);

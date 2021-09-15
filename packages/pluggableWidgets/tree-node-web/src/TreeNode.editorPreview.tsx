@@ -61,7 +61,3 @@ export function preview(props: TreeNodePreviewProps): ReactElement | null {
         />
     );
 }
-
-export function getPreviewCss(): string {
-    return require("./ui/TreeNode.scss");
-}
