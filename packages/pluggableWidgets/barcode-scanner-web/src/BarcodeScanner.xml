@@ -4,8 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Barcode Scanner</name>
     <description>The widget lets you scan a barcode</description>
-    <studioProCategory>TBD</studioProCategory>
-    <studioCategory>TBD</studioCategory>
+    <studioProCategory>Add-on</studioProCategory>
+    <studioCategory>Add-on</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
