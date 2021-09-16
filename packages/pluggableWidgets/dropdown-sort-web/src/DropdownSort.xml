@@ -19,12 +19,12 @@
         <propertyGroup caption="Accessibility">
             <propertyGroup caption="Accessibility">
                 <property key="screenReaderButtonCaption" type="textTemplate" required="false">
-                    <caption>Button caption</caption>
-                    <description />
+                    <caption>Sort order button caption</caption>
+                    <description>Assistive technology will read this upon reaching the sort order button.</description>
                 </property>
                 <property key="screenReaderInputCaption" type="textTemplate" required="false">
                     <caption>Input caption</caption>
-                    <description />
+                    <description>Assistive technology will read this upon reaching the input element.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>

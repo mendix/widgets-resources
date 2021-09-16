@@ -49,8 +49,8 @@
         <propertyGroup caption="Accessibility">
             <propertyGroup caption="Accessibility">
                 <property key="ariaLabel" type="textTemplate" required="false">
-                    <caption>Screen reader caption</caption>
-                    <description />
+                    <caption>Input caption</caption>
+                    <description>Assistive technology will read this upon reaching the input element.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>

@@ -13,6 +13,8 @@ export function preview(props: PreviewProps): ReactElement {
             className={props.className}
             emptyOptionCaption={props.emptyOptionCaption}
             options={[{ caption: "optionCaption", value: "option" }]}
+            screenReaderButtonCaption={props.screenReaderButtonCaption}
+            screenReaderInputCaption={props.screenReaderInputCaption}
             styles={parseStyle(props.style)}
         />
     );

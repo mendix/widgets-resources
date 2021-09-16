@@ -15,6 +15,7 @@ export function preview(props: PreviewProps): ReactElement {
             defaultFilter={props.defaultFilter}
             placeholder={props.placeholder}
             screenReaderButtonCaption={props.screenReaderButtonCaption}
+            screenReaderCalendarCaption={props.screenReaderCalendarCaption}
             screenReaderInputCaption={props.screenReaderInputCaption}
             styles={parseStyle(props.style)}
         />

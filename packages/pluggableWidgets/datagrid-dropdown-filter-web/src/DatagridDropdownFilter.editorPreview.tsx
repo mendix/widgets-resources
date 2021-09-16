@@ -10,6 +10,7 @@ interface PreviewProps extends Omit<DatagridDropdownFilterPreviewProps, "class">
 export function preview(props: PreviewProps): ReactElement {
     return (
         <FilterComponent
+            ariaLabel={props.ariaLabel}
             className={props.className}
             defaultValue={props.defaultValue}
             options={[{ caption: "optionCaption", value: "option" }]}
