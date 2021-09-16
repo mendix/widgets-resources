@@ -43,6 +43,10 @@
                     <caption>Button caption</caption>
                     <description />
                 </property>
+                <property key="screenReaderCalendarCaption" type="textTemplate" required="false">
+                    <caption>Calendar button caption</caption>
+                    <description />
+                </property>
                 <property key="screenReaderInputCaption" type="textTemplate" required="false">
                     <caption>Input caption</caption>
                     <description />

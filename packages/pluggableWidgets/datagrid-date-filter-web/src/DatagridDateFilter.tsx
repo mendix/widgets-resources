@@ -104,6 +104,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         name={props.name}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
+                        screenReaderCalendarCaption={props.screenReaderCalendarCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         styles={props.style}
                         tabIndex={props.tabIndex}
