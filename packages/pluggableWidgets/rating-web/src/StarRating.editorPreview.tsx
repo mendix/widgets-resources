@@ -1,22 +1,26 @@
 import { createElement, ReactElement } from "react";
 import { Rating as RatingComponent } from "./components/Rating";
 import { parseStyle } from "@mendix/piw-utils-internal";
-import { WebIcon } from "mendix";
+import { mapPreviewIconToWebIcon } from "@mendix/piw-utils-internal/components/web";
 import { StarRatingPreviewProps } from "../typings/StarRatingProps";
 import { Icon } from "./components/Icon";
 
-export function preview(props: StarRatingPreviewProps): ReactElement {
-    // TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) and readOnly generation to remove the ts-ignore below
-    // @ts-ignore
+// TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) and readOnly generation when updated.
+interface PreviewProps extends Omit<StarRatingPreviewProps, "class"> {
+    className: string;
+    readOnly?: boolean;
+}
+
+export function preview(props: PreviewProps): ReactElement {
     const { className, readOnly } = props;
 
     const emptyIcon = props.emptyIcon ? (
-        <Icon value={props.emptyIcon as WebIcon} empty />
+        <Icon value={mapPreviewIconToWebIcon(props.emptyIcon)} empty />
     ) : (
         <Icon value={{ type: "glyph", iconClass: "glyphicon-star-empty" }} empty />
     );
     const fullIcon = props.icon ? (
-        <Icon value={props.icon as WebIcon} full />
+        <Icon value={mapPreviewIconToWebIcon(props.icon)} full />
     ) : (
         <Icon value={{ type: "glyph", iconClass: "glyphicon-star" }} full />
     );
