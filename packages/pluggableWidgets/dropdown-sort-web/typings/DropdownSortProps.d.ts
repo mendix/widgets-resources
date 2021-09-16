@@ -12,12 +12,14 @@ export interface DropdownSortContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     emptyOptionCaption?: DynamicValue<string>;
-    ariaLabel?: DynamicValue<string>;
+    screenReaderButtonCaption?: DynamicValue<string>;
+    screenReaderInputCaption?: DynamicValue<string>;
 }
 
 export interface DropdownSortPreviewProps {
     class: string;
     style: string;
     emptyOptionCaption: string;
-    ariaLabel: string;
+    screenReaderButtonCaption: string;
+    screenReaderInputCaption: string;
 }

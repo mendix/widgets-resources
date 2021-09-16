@@ -10,7 +10,6 @@ interface PreviewProps extends Omit<DropdownSortPreviewProps, "class"> {
 export function preview(props: PreviewProps): ReactElement {
     return (
         <SortComponent
-            ariaLabel={props.ariaLabel}
             className={props.className}
             emptyOptionCaption={props.emptyOptionCaption}
             options={[{ caption: "optionCaption", value: "option" }]}

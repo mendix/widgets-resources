@@ -26,8 +26,14 @@ describe("Sort selector", () => {
 
             expect(component).toMatchSnapshot();
         });
-        it("with ariaLabel", () => {
-            const component = render(<SortComponent options={defaultOptions} ariaLabel="my label" />);
+        it("with a11y properties", () => {
+            const component = render(
+                <SortComponent
+                    options={defaultOptions}
+                    screenReaderButtonCaption="my button"
+                    screenReaderInputCaption="my input"
+                />
+            );
 
             expect(component).toMatchSnapshot();
         });
