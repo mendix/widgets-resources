@@ -142,6 +142,22 @@ describe("Table", () => {
 
         expect(component).toMatchSnapshot();
     });
+
+    it("renders the structure correctly with header filters and a11y", () => {
+        const component = render(
+            <Table
+                {...mockTableProps()}
+                headerFilters={
+                    <div className="my-custom-filters">
+                        <span />
+                    </div>
+                }
+                filtersTitle="filter title"
+            />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
 });
 
 function mockTableProps(): TableProps<ObjectItem> {

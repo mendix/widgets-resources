@@ -231,6 +231,14 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Accessibility">
+                <property key="filterSectionTitle" type="textTemplate" required="false">
+                    <caption>Filter section title</caption>
+                    <description>Assistive technology will read this upon reaching a filtering or sorting section.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
         <propertyGroup caption="Advanced">
             <propertyGroup caption="Advanced">
                 <property key="advanced" type="boolean" defaultValue="false">
