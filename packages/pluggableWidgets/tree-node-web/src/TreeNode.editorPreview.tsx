@@ -37,7 +37,7 @@ export function preview(props: TreeNodePreviewProps): ReactElement | null {
             ]}
             isUserDefinedLeafNode={!props.hasChildren}
             startExpanded
-            showCustomIcon={props.advancedMode && (Boolean(props.expandedIcon) || Boolean(props.collapsedIcon))}
+            showCustomIcon={Boolean(props.expandedIcon) || Boolean(props.collapsedIcon)}
             iconPlacement={props.showIcon}
             collapsedIcon={mapPreviewIconToWebIcon(props.collapsedIcon)}
             expandedIcon={mapPreviewIconToWebIcon(props.expandedIcon)}
