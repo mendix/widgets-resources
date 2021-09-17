@@ -16,17 +16,18 @@
                 width: $navsidebar-width-closed !important;
 
                 .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
-                    &.mx-navigationtree-has-items:hover {
-                        ul {
-                            position: absolute;
-                            z-index: 100;
-                            top: 0;
-                            bottom: 0;
-                            left: $sidebar-icon-width;
-                            display: block;
-                            overflow-y: auto;
-                            min-width: auto;
-                            padding: $spacing-small 0;
+                    &.mx-navigationtree-has-items:hover > ul {
+                        position: absolute;
+                        z-index: 100;
+                        top: 0;
+                        bottom: 0;
+                        left: $sidebar-icon-width;
+                        display: block;
+                        min-width: auto;
+                        padding: $spacing-small 0;
+
+                        & > li.mx-navigationtree-has-items:hover > ul {
+                            left: 100%;
                         }
                     }
 
