@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 
+### Changed
+- We renamed the advanced options property to emphasize this property is about the advanced properties' activation.
+- We made some small code improvement.
+
 ## [2.0.3] - 2021-08-04
 
 ## Changed
