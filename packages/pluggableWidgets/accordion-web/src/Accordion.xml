@@ -142,7 +142,7 @@
         </propertyGroup>
         <propertyGroup caption="Advanced">
             <property key="advancedMode" type="boolean" defaultValue="false">
-                <caption>Advanced options</caption>
+                <caption>Enable advanced options</caption>
                 <description/>
             </property>
         </propertyGroup>

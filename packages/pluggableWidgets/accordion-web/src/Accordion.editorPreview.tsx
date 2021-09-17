@@ -64,7 +64,6 @@ export function preview(props: PreviewProps): ReactElement {
     const collapseIcon = mapPreviewIconToWebIcon(props.collapseIcon);
 
     const generateIcon = useIconGenerator(
-        props.advancedMode,
         props.animateIcon,
         {
             data: icon ?? undefined

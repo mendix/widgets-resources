@@ -1,25 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`useIconGenerator returned function returns the default icon when not in advanced mode 1`] = `
-<Icon
-  animate={true}
-/>
-`;
-
-exports[`useIconGenerator returned function with advanced mode returns the collapse icon when expanded 1`] = `
-<Icon
-  animate={false}
-  data={
-    Object {
-      "iconClass": "collapse-icon-class",
-      "type": "glyph",
-    }
-  }
-  loading={false}
-/>
-`;
-
-exports[`useIconGenerator returned function with advanced mode returns the configured icon when icon is animated 1`] = `
+exports[`useIconGenerator returned function returns the icon when icon is animated 1`] = `
 <Icon
   animate={true}
   data={
@@ -32,7 +13,20 @@ exports[`useIconGenerator returned function with advanced mode returns the confi
 />
 `;
 
-exports[`useIconGenerator returned function with advanced mode returns the expand icon when collapsed 1`] = `
+exports[`useIconGenerator returned function without icon animated returns the collapse icon when expanded 1`] = `
+<Icon
+  animate={false}
+  data={
+    Object {
+      "iconClass": "collapse-icon-class",
+      "type": "glyph",
+    }
+  }
+  loading={false}
+/>
+`;
+
+exports[`useIconGenerator returned function without icon animated returns the expand icon when collapsed 1`] = `
 <Icon
   animate={false}
   data={

@@ -5,7 +5,6 @@ import { useIconGenerator } from "../iconGenerator";
 import { ReactElement } from "react";
 
 interface HookProps {
-    advancedMode: AccordionContainerProps["advancedMode"];
     animateIcon: AccordionContainerProps["animateIcon"];
     icon: Omit<IconProps, "animate">;
     expandIcon: Omit<IconProps, "animate">;
@@ -14,7 +13,6 @@ interface HookProps {
 
 describe("useIconGenerator", () => {
     const defaultHookProps: HookProps = {
-        advancedMode: false,
         animateIcon: true,
         icon: { data: { type: "glyph", iconClass: "icon-class" }, loading: false },
         expandIcon: { data: { type: "glyph", iconClass: "expand-icon-class" }, loading: false },
@@ -26,19 +24,11 @@ describe("useIconGenerator", () => {
     ): RenderHookResult<HookProps, (collapsed: boolean) => ReactElement> =>
         renderHook(
             (props: {
-                advancedMode: AccordionContainerProps["advancedMode"];
                 animateIcon: AccordionContainerProps["animateIcon"];
                 icon: Omit<IconProps, "animate">;
                 expandIcon: Omit<IconProps, "animate">;
                 collapseIcon: Omit<IconProps, "animate">;
-            }) =>
-                useIconGenerator(
-                    props.advancedMode,
-                    props.animateIcon,
-                    props.icon,
-                    props.expandIcon,
-                    props.collapseIcon
-                ),
+            }) => useIconGenerator(props.animateIcon, props.icon, props.expandIcon, props.collapseIcon),
             {
                 initialProps
             }
@@ -60,20 +50,15 @@ describe("useIconGenerator", () => {
     });
 
     describe("returned function", () => {
-        it("returns the default icon when not in advanced mode", () => {
+        it("returns the icon when icon is animated", () => {
             const renderedHook = initUseIconGenerator({ ...defaultHookProps });
             expect(renderedHook.result.current(true)).toMatchSnapshot();
         });
 
-        describe("with advanced mode", () => {
-            it("returns the configured icon when icon is animated", () => {
-                const renderedHook = initUseIconGenerator({ ...defaultHookProps, advancedMode: true });
-                expect(renderedHook.result.current(true)).toMatchSnapshot();
-            });
+        describe("without icon animated", () => {
             it("returns the expand icon when collapsed", () => {
                 const renderedHook = initUseIconGenerator({
                     ...defaultHookProps,
-                    advancedMode: true,
                     animateIcon: false
                 });
                 expect(renderedHook.result.current(true)).toMatchSnapshot();
@@ -81,7 +66,6 @@ describe("useIconGenerator", () => {
             it("returns the collapse icon when expanded", () => {
                 const renderedHook = initUseIconGenerator({
                     ...defaultHookProps,
-                    advancedMode: true,
                     animateIcon: false
                 });
                 expect(renderedHook.result.current(false)).toMatchSnapshot();
