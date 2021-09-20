@@ -28,7 +28,9 @@ for (const subCommand of realCommand.split(/&&/g)) {
 
 function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
-    const prettierCommand = 'prettier --config prettier.config.js "{src,tests}/**/*.{js,jsx,ts,tsx}"';
+    const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
+    const prettierConfigPath = existsSync(prettierConfigRootPath) ? prettierConfigRootPath : "prettier.config.js";
+    const prettierCommand = `prettier --config "${prettierConfigPath}" "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
     const rollupCommand = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
 
     switch (cmd) {
