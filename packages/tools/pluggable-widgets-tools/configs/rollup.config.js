@@ -241,7 +241,7 @@ export default async args => {
                   })
                 : null,
             image(),
-            production ? terser() : null,
+            production ? terser(platform === "native" ? { mangle: false } : undefined) : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define
             // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only
