@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- The version of Native Mobile Resources is now stored in `themesource` directory in a file named `.version`. When this module is added to your Mendix project, the `.version` file will appear in `themesource/nativemobileresources` directory. Previously, the version was stored in a constant, seen in Studio Pro's Project Explorer. 
+
 ### Fixed
 - We fixed an issue with our widget bundles erroneously including react-dom and thus were very large.
 

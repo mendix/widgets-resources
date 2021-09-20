@@ -156,7 +156,7 @@ async function bumpVersionInPackageJson(NMRFolder, moduleVersionOld) {
     }
 }
 
-// Update test project with latest changes
+// Update test project with latest changes and update version in themesource
 async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
     const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
     const jsActions = await getFiles(jsActionsPath);
@@ -185,6 +185,10 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
             await copyFile(file, dest);
         })
     ]);
+    await execShellCommand(
+        `echo ${process.env.TAG.split("-v")[1]} > themesource/nativemobileresources/.version`,
+        tmpFolder
+    );
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
     if (!/nothing to commit/i.test(gitOutput)) {
         await execShellCommand(
