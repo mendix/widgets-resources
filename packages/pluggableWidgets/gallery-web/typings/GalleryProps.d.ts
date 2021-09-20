@@ -59,6 +59,8 @@ export interface GalleryContainerProps {
     filterList: FilterListType[];
     filtersPlaceholder?: ReactNode;
     sortList: SortListType[];
+    filterSectionTitle?: DynamicValue<string>;
+    emptyMessageTitle?: DynamicValue<string>;
 }
 
 export interface GalleryPreviewProps {
@@ -80,4 +82,6 @@ export interface GalleryPreviewProps {
     filterList: FilterListPreviewType[];
     filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     sortList: SortListPreviewType[];
+    filterSectionTitle: string;
+    emptyMessageTitle: string;
 }

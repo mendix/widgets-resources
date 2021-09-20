@@ -159,4 +159,20 @@ describe("Gallery", () => {
             expect(gallery).toMatchSnapshot();
         });
     });
+
+    describe("with accessibility properties", () => {
+        it("renders correctly", () => {
+            const gallery = render(
+                <Gallery
+                    {...defaultProps}
+                    items={[]}
+                    filtersTitle="filter title"
+                    emptyMessageTitle="empty message"
+                    emptyPlaceholderRenderer={renderWrapper => renderWrapper(<span>No items found</span>)}
+                />
+            );
+
+            expect(gallery).toMatchSnapshot();
+        });
+    });
 });

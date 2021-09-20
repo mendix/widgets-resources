@@ -73,6 +73,32 @@ exports[`Gallery DOM Structure renders correctly with onclick event 1`] = `
 </div>
 `;
 
+exports[`Gallery with accessibility properties renders correctly 1`] = `
+<div
+  class="widget-gallery"
+  data-focusindex="0"
+>
+  <div
+    aria-label="filter title"
+    class="widget-gallery-filter"
+    role="section"
+  />
+  <div
+    aria-label="empty message"
+    class="widget-gallery-empty"
+    role="section"
+  >
+    <div
+      class="empty-placeholder"
+    >
+      <span>
+        No items found
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Gallery with empty option renders correctly 1`] = `
 <div
   class="widget-gallery"

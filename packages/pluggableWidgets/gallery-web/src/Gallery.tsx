@@ -111,6 +111,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                     props.showEmptyPlaceholder === "custom" ? renderWrapper(props.emptyPlaceholder) : <div />,
                 [props.emptyPlaceholder, props.showEmptyPlaceholder]
             )}
+            emptyMessageTitle={props.emptyMessageTitle?.value}
             filters={useMemo(
                 () =>
                     isSortableFilterable ? (
@@ -154,6 +155,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                     sortList
                 ]
             )}
+            filtersTitle={props.filterSectionTitle?.value}
             hasMoreItems={props.datasource.hasMoreItems ?? false}
             items={props.datasource.items ?? []}
             itemRenderer={useCallback(

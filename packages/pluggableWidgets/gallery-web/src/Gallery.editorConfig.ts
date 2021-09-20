@@ -38,7 +38,9 @@ export function getProperties(
                 "itemClass",
                 "filtersPlaceholder",
                 "filterList",
-                "sortList"
+                "sortList",
+                "emptyMessageTitle",
+                "filterSectionTitle"
             ]);
         }
         transformGroupsIntoTabs(defaultProperties);

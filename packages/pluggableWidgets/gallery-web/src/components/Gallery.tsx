@@ -6,7 +6,9 @@ export interface GalleryProps<T> {
     className?: string;
     desktopItems: number;
     emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
+    emptyMessageTitle?: string;
     filters?: ReactNode;
+    filtersTitle?: string;
     hasMoreItems: boolean;
     items: T[];
     itemRenderer: (
@@ -44,7 +46,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
     return (
         <div className={classNames("widget-gallery", props.className)} data-focusindex={props.tabIndex || 0}>
             {props.paginationPosition === "above" && pagination}
-            <div className="widget-gallery-filter" role="section">
+            <div className="widget-gallery-filter" role="section" aria-label={props.filtersTitle}>
                 {props.filters}
             </div>
 
@@ -93,7 +95,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
             {(props.items.length === 0 || props.preview) &&
                 props.emptyPlaceholderRenderer &&
                 props.emptyPlaceholderRenderer(children => (
-                    <div className="widget-gallery-empty" role="section">
+                    <div className="widget-gallery-empty" role="section" aria-label={props.emptyMessageTitle}>
                         <div className="empty-placeholder">{children}</div>
                     </div>
                 ))}

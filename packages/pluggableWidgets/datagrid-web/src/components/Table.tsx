@@ -39,6 +39,7 @@ export interface TableProps<T> {
     data: T[];
     emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
     filterRenderer: (renderWrapper: (children: ReactNode) => ReactElement, columnIndex: number) => ReactElement;
+    filtersTitle?: string;
     hasMoreItems: boolean;
     headerFilters?: ReactNode;
     headerWrapperRenderer: (columnIndex: number, header: ReactElement) => ReactElement;
@@ -235,7 +236,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     {props.pagingPosition === "top" && pagination}
                 </div>
                 {props.headerFilters && (
-                    <div className="header-filters" role="rowgroup">
+                    <div className="header-filters" role="rowgroup" aria-label={props.filtersTitle}>
                         {props.headerFilters}
                     </div>
                 )}

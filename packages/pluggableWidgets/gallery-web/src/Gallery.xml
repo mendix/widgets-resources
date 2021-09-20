@@ -143,5 +143,17 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
+        <propertyGroup caption="Accessibility">
+            <propertyGroup caption="Accessibility">
+                <property key="filterSectionTitle" type="textTemplate" required="false">
+                    <caption>Filter section title</caption>
+                    <description>Assistive technology will read this upon reaching a filtering or sorting section.</description>
+                </property>
+                <property key="emptyMessageTitle" type="textTemplate" required="false">
+                    <caption>Empty message title</caption>
+                    <description>Assistive technology will read this upon reaching an empty message section.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
     </properties>
 </widget>

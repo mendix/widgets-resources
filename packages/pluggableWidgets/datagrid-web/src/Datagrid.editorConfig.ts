@@ -110,7 +110,8 @@ export function getProperties(
                 "onConfigurationChange",
                 "showHeaderFilters",
                 "filterList",
-                "filtersPlaceholder"
+                "filtersPlaceholder",
+                "filterSectionTitle"
             ]);
         }
 

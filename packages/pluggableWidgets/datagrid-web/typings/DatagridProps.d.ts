@@ -96,6 +96,7 @@ export interface DatagridContainerProps {
     showHeaderFilters: boolean;
     filterList: FilterListType[];
     filtersPlaceholder?: ReactNode;
+    filterSectionTitle?: DynamicValue<string>;
     advanced: boolean;
 }
 
@@ -121,5 +122,6 @@ export interface DatagridPreviewProps {
     showHeaderFilters: boolean;
     filterList: FilterListPreviewType[];
     filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    filterSectionTitle: string;
     advanced: boolean;
 }

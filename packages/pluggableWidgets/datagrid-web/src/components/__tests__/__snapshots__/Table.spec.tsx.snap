@@ -539,6 +539,80 @@ exports[`Table renders the structure correctly with filtering 1`] = `
 </div>
 `;
 
+exports[`Table renders the structure correctly with header filters and a11y 1`] = `
+<div
+  class="test"
+>
+  <div
+    class="table"
+    role="table"
+  >
+    <div
+      class="table-header"
+      role="rowgroup"
+    />
+    <div
+      aria-label="filter title"
+      class="header-filters"
+      role="rowgroup"
+    >
+      <div
+        class="my-custom-filters"
+      >
+        <span />
+      </div>
+    </div>
+    <div
+      class="table-content infinite-loading"
+      role="rowgroup"
+      style="grid-template-columns:1fr"
+    >
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          aria-label="Test"
+          class="th"
+          role="columnheader"
+          style="cursor:unset"
+          title="Test"
+        >
+          <div
+            class="column-container"
+            id="0"
+          >
+            <div
+              class="column-header align-column-left"
+              id="0"
+            >
+              <span>
+                Test
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="tr"
+        role="row"
+      >
+        <div
+          class="td td-borders"
+          role="cell"
+        >
+          Test
+        </div>
+      </div>
+    </div>
+    <div
+      class="table-footer"
+      role="rowgroup"
+    />
+  </div>
+</div>
+`;
+
 exports[`Table renders the structure correctly with header wrapper 1`] = `
 <div
   class="test"
