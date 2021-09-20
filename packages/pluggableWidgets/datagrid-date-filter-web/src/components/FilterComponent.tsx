@@ -17,6 +17,7 @@ interface FilterComponentProps {
     name?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
+    screenReaderCalendarCaption?: string;
     screenReaderInputCaption?: string;
     tabIndex?: number;
     styles?: CSSProperties;
@@ -86,6 +87,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 name={props.name}
                 placeholder={props.placeholder}
                 ref={pickerRef}
+                screenReaderCalendarCaption={props.screenReaderCalendarCaption}
                 screenReaderInputCaption={props.screenReaderInputCaption}
                 setValue={setValue}
                 value={value}

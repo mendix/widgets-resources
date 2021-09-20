@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sort selector renders correctly with ariaLabel 1`] = `
+exports[`Sort selector renders correctly with a11y properties 1`] = `
 <div
   class="dropdown-container"
   data-focusindex="0"
@@ -12,11 +12,12 @@ exports[`Sort selector renders correctly with ariaLabel 1`] = `
       aria-controls="undefined-dropdown-list"
       aria-expanded="false"
       aria-haspopup="true"
-      aria-label="my label"
+      aria-label="my input"
       class="form-control dropdown-triggerer"
       value=""
     />
     <button
+      aria-label="my button"
       class="btn btn-default btn-sort icon-asc"
     />
   </div>

@@ -15,6 +15,8 @@ export function preview(props: PreviewProps): ReactElement {
             defaultFilter={props.defaultFilter}
             delay={props.delay ?? 500}
             placeholder={props.placeholder}
+            screenReaderButtonCaption={props.screenReaderButtonCaption}
+            screenReaderInputCaption={props.screenReaderInputCaption}
             styles={parseStyle(props.style)}
         />
     );

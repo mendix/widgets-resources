@@ -9,7 +9,6 @@ export interface SortOption {
 }
 
 interface SortComponentProps {
-    ariaLabel?: string;
     className?: string;
     defaultDirection?: SortDirection;
     defaultOption?: SortOption;
@@ -17,6 +16,8 @@ interface SortComponentProps {
     name?: string;
     options: SortOption[];
     tabIndex?: number;
+    screenReaderButtonCaption?: string;
+    screenReaderInputCaption?: string;
     styles?: CSSProperties;
     updateSort?: (value: SortOption, direction: SortDirection) => void;
 }
@@ -134,9 +135,10 @@ export function SortComponent(props: SortComponentProps): ReactElement {
                     }}
                     aria-expanded={show}
                     aria-controls={`${props.name}-dropdown-list`}
-                    aria-label={props.ariaLabel}
+                    aria-label={props.screenReaderInputCaption}
                 />
                 <button
+                    aria-label={props.screenReaderButtonCaption}
                     className={classNames("btn btn-default btn-sort", {
                         "icon-asc": direction === "asc",
                         "icon-desc": direction === "desc"

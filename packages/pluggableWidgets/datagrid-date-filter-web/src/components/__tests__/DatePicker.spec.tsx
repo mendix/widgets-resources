@@ -38,6 +38,22 @@ describe("Date picker component", () => {
         expect(component).toMatchSnapshot();
     });
 
+    it("renders correctly with a11y properties", () => {
+        const component = renderEnzyme(
+            <DatePicker
+                adjustable
+                value={null}
+                setValue={jest.fn()}
+                dateFormat="yyyy-MM-dd"
+                locale="pt-BR"
+                screenReaderInputCaption="my input"
+                screenReaderCalendarCaption="my calendar"
+            />
+        );
+
+        expect(component).toMatchSnapshot();
+    });
+
     it("calls for setValue when value changes", async () => {
         const setValue = jest.fn();
         const component = render(

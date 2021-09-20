@@ -68,6 +68,42 @@ Array [
 ]
 `;
 
+exports[`Date picker component renders correctly with a11y properties 1`] = `
+Array [
+  <span
+    class="sr-only"
+    id="undefined-label"
+  >
+    my input
+  </span>,
+  <div
+    class="react-datepicker-wrapper"
+  >
+    <div
+      class="react-datepicker__input-container"
+    >
+      <input
+        aria-labelledby="undefined-label"
+        class="form-control filter-input"
+        type="text"
+        value=""
+      />
+    </div>
+  </div>,
+  <button
+    aria-controls="datepicker_0.123456789"
+    aria-expanded="false"
+    aria-haspopup="true"
+    aria-label="my calendar"
+    class="btn btn-default btn-calendar"
+  >
+    <span
+      class="glyphicon glyphicon-calendar"
+    />
+  </button>,
+]
+`;
+
 exports[`Date picker component renders correctly with different locale and date format 1`] = `
 Array [
   <span
