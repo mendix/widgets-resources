@@ -2,10 +2,29 @@ const { by, cleanup, init, device, element, waitFor } = require("detox");
 const adapter = require("detox/runners/jest/adapter");
 const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");
+const { toMatchImageSnapshot } = require("jest-image-snapshot");
+const path = require("path");
 
 jest.setTimeout(300000);
 jasmine.getEnv().addReporter(adapter);
 jasmine.getEnv().addReporter(specReporter);
+
+expect.extend({
+    toMatchImageSnapshot(screenshot, options = {}) {
+        const { currentTestName } = this;
+        const platform = device.getPlatform();
+        const customSnapshotsDir = path.join(path.resolve("./"), "image-snapshots", platform);
+        const customDiffDir = path.join(path.resolve("./"), "image-snapshots/results", platform);
+
+        return toMatchImageSnapshot.call(this, screenshot, {
+            customDiffConfig: { threshold: 0.15 },
+            customDiffDir,
+            customSnapshotsDir,
+            customSnapshotIdentifier: ({ counter }) => `${currentTestName} ${counter}`,
+            ...options
+        });
+    }
+});
 
 beforeAll(async () => {
     await init(config, { initGlobals: false, launchApp: false });

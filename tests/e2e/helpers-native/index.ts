@@ -1,2 +1,3 @@
 export * from "./Alert";
 export * from "./Helpers";
+export * from "./expectToMatchImageSnapshot";
