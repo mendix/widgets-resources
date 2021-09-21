@@ -271,7 +271,12 @@ export default async args => {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             platform === "native"
-                ? command(() => execSync(`npm run format --prefix ${sourcePath}`, { stdio: "inherit" }))
+                ? command(() =>
+                      execSync(`npx pluggable-widgets-tools format`, {
+                          stdio: "inherit",
+                          input: `--prefix ${sourcePath}`
+                      })
+                  )
                 : null,
             clear({ targets: [outDir, mpkDir] }),
             command([
