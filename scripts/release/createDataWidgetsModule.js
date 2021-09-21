@@ -1,6 +1,7 @@
 const { join } = require("path");
 const { readdir, copyFile, rm } = require("fs/promises");
 const { basename } = require("path");
+const { mkdir } = require("shelljs");
 const {
     setLocalGitCredentials,
     execShellCommand,
@@ -76,6 +77,7 @@ async function updateTestProject(tmpFolder, widgetsFolders, githubUrl) {
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(tmpFolder, { recursive: true, force: true });
+    mkdir("-p", tmpFolder);
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
 
     await setLocalGitCredentials(tmpFolder);
