@@ -63,7 +63,7 @@ export default async args => {
                 },
                 external: webExternal,
                 plugins: [
-                    ...getClientComponentPlugins(),
+                    ...getClientComponentPlugins(platform),
                     url({ include: imagesAndFonts, limit: 100000 }),
                     sass({
                         output: production && outputFormat === "amd",
@@ -111,7 +111,7 @@ export default async args => {
                             }
                         ]
                     }),
-                    ...(i === 0 ? getClientComponentPlugins() : []),
+                    ...(i === 0 ? getClientComponentPlugins(platform) : []),
                     json(),
                     collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
                     ...getCommonPlugins({
@@ -267,7 +267,7 @@ export default async args => {
         ];
     }
 
-    function getClientComponentPlugins() {
+    function getClientComponentPlugins(platform) {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
             platform === "native"
