@@ -270,7 +270,9 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            command(() => execSync(`npm run format --prefix ${sourcePath}`, { stdio: "inherit" })),
+            platform === "native"
+                ? command(() => execSync(`npm run format --prefix ${sourcePath}`, { stdio: "inherit" }))
+                : null,
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
