@@ -25,9 +25,7 @@
   "dependencies": {},
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
-    "chokidar": "^3.5.2",
     "copy-and-watch": "^0.1.5",
-    "concurrently": "^5.3.0",
-    "sass": "^1.28.0"
+    "concurrently": "^5.3.0"
   }
 }
