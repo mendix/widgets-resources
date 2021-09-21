@@ -1,0 +1,109 @@
+.widget-tree-node {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    .widget-tree-node-branch {
+        display: block;
+
+        &:focus-visible {
+            outline: none;
+            & > .widget-tree-node-branch-header {
+                outline: -webkit-focus-ring-color auto 1px;
+                outline: -moz-mac-focusring auto 1px;
+            }
+        }
+    }
+
+    .widget-tree-node-branch-header-clickable {
+        cursor: pointer;
+    }
+
+    .widget-tree-node-branch-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+        padding: 8px 0;
+
+        svg {
+            &.widget-tree-node-branch-header-icon-animated {
+                transition: transform 0.2s ease-in-out 50ms;
+            }
+            &.widget-tree-node-branch-header-icon-collapsed-left {
+                transform: rotate(-90deg);
+            }
+            &.widget-tree-node-branch-header-icon-collapsed-right {
+                transform: rotate(90deg);
+            }
+        }
+
+        .widget-tree-node-loading-spinner {
+            width: 16px;
+            height: 16px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
+
+    .widget-tree-node-branch-header-reversed {
+        flex-direction: row-reverse;
+    }
+
+    .widget-tree-node-branch-header-value {
+        flex: 1;
+        font-size: 16px;
+        margin: 0 8px;
+    }
+
+    .widget-tree-node-body {
+        padding-left: 24px;
+        transition: height 0.2s ease 50ms;
+        overflow: hidden;
+
+        &.widget-tree-node-branch-hidden {
+            display: none;
+        }
+    }
+}
+
+.widget-tree-node-lined-styling {
+    .widget-tree-node .widget-tree-node-body {
+        position: relative;
+
+        &::before {
+            content: "";
+            width: 0px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 7px;
+            border: 1px solid #b6b8be;
+        }
+    }
+
+    .widget-tree-node[role="group"] > .widget-tree-node-branch > .widget-tree-node-branch-header {
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 0;
+            border: 1px solid #b6b8be;
+            top: 50%;
+            left: -16px;
+            transform: translate(0, -50%);
+        }
+    }
+}

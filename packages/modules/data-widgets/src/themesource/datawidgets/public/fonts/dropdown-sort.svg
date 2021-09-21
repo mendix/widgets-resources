@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg">
+<metadata>Copyright (C) 2021 by original authors @ fontello.com</metadata>
+<defs>
+<font id="dropdown-sort" horiz-adv-x="1000" >
+<font-face font-family="dropdown-sort" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="ascending" unicode="&#xe802;" d="M424 206l-87-82v659c0 35-31 67-68 67-37 0-67-32-67-67v-659l-87 82c-26 25-69 25-95 0-27-25-27-65 0-90l202-190c26-25 69-25 95 0l202 190c26 25 26 65 0 90-27 25-69 25-95 0z m268 567h462c42 0 77-34 77-77 0-42-35-77-77-77h-462c-42 0-77 35-77 77 0 43 35 77 77 77z m0-615h154c43 0 77-35 77-77 0-43-34-77-77-77h-154c-42 0-77 34-77 77 0 42 35 77 77 77z m0 307h308c43 0 77-34 77-76 0-43-34-77-77-77h-308c-42 0-77 34-77 77 0 42 35 76 77 76z" horiz-adv-x="1231" />
+
+<glyph glyph-name="descending" unicode="&#xe803;" d="M115 552l87 82 0-659c0-35 30-67 67-67 37 0 68 32 68 67l0 659 87-82c26-25 68-25 95 0 26 25 26 65 0 89l-202 190c-26 25-69 25-95 0l-202-190c-27-24-27-64 0-89 26-25 69-25 95 0z m577 221h154c43 0 77-34 77-77 0-42-34-77-77-77h-154c-42 0-77 35-77 77 0 43 35 77 77 77z m0-615h462c42 0 77-35 77-77 0-43-35-77-77-77h-462c-42 0-77 34-77 77 0 42 35 77 77 77z m0 307h308c43 0 77-34 77-76 0-43-34-77-77-77h-308c-42 0-77 34-77 77 0 42 35 76 77 76z" horiz-adv-x="1231" />
+</font>
+</defs>
+</svg>

@@ -1,0 +1,303 @@
+$background-color: #fff;
+$icon-color: #606671;
+$pagination-button-color: #3b4251;
+$pagination-caption-color: #0a1325;
+$dragging-color-effect: rgba(10, 19, 37, 0.8);
+
+$grid-bg-striped: #fafafb !default;
+$grid-bg-hover: #f5f6f6 !default;
+$spacing-small: 8px !default;
+$spacing-medium: 16px !default;
+$spacing-large: 24px !default;
+$grid-border-color: #ced0d3 !default;
+
+$brand-primary: #264ae5 !default;
+
+.table {
+    position: relative;
+    border-width: 0;
+    background-color: $background-color;
+
+    /* Table Content */
+    .table-content {
+        display: grid;
+        position: relative;
+
+        &.infinite-loading {
+            overflow-y: scroll;
+        }
+    }
+
+    /* Pseudo Row, to target this object please use .tr > .td or .tr > div */
+    .tr {
+        display: contents;
+    }
+
+    /* Column Header */
+    .th {
+        display: flex;
+        align-items: flex-start;
+        font-weight: 600;
+        background-color: $background-color;
+        border-width: 0;
+        border-color: $grid-border-color;
+        padding: $spacing-medium;
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        top: 0;
+
+        /* Clickable column header (Sortable) */
+        .clickable {
+            cursor: pointer;
+        }
+
+        /* Column resizer when column is resizable */
+        .column-resizer {
+            padding: 0 4px;
+            align-self: stretch;
+            cursor: col-resize;
+
+            &:hover .column-resizer-bar {
+                background-color: $brand-primary;
+            }
+            &:active .column-resizer-bar {
+                background-color: $brand-primary;
+            }
+
+            .column-resizer-bar {
+                height: 100%;
+                width: 4px;
+            }
+        }
+
+        /* Content of the column header */
+        .column-container {
+            flex-grow: 1;
+            align-self: stretch;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            /* Styles while dragging another column */
+            &.dragging {
+                border-left: 4px solid $dragging-color-effect;
+            }
+        }
+
+        /* Header text */
+        .column-header {
+            display: flex;
+            flex-grow: 1;
+            align-items: center;
+            margin: 1px;
+
+            span {
+                display: flex;
+                flex-grow: 1;
+            }
+
+            svg {
+                margin-left: 8px;
+                flex-grow: 0;
+                color: $icon-color;
+            }
+
+            &:focus:not(:focus-visible) {
+                outline: none;
+            }
+
+            &:focus-visible {
+                outline: 1px solid $brand-primary;
+            }
+        }
+
+        /* Header filter */
+        .filter {
+            display: flex;
+            margin-top: 4px;
+            input:not([type="checkbox"]) {
+                font-weight: normal;
+                flex-grow: 1;
+                width: 100%;
+            }
+            > .form-group {
+                margin-bottom: 0;
+            }
+            > .form-control {
+                flex: unset;
+                min-width: unset;
+            }
+        }
+    }
+
+    /* Column selector for hidable columns */
+    .column-selector {
+        padding-left: 0;
+        padding-right: 0;
+
+        /* Column content */
+        .column-selector-content {
+            align-self: flex-end;
+
+            /* Button containing the eye icon */
+            .column-selector-button {
+                padding: 8px;
+                margin: 0 8px;
+            }
+
+            /* List of columns to select */
+            .column-selectors {
+                position: absolute;
+                right: 0;
+                margin: 8px;
+                padding: 0 16px;
+                background: $background-color;
+                z-index: 99;
+                border-radius: 3px;
+                border: 1px solid transparent;
+                list-style-type: none;
+                -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+                -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+                box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+
+                li {
+                    display: flex;
+                    align-items: center;
+
+                    label {
+                        margin: 8px;
+                        font-weight: normal;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Column content */
+    .td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: $spacing-medium;
+        border-style: solid;
+        border-width: 0;
+        border-color: $grid-border-color;
+        border-bottom-width: 1px;
+
+        &.td-borders {
+            border-top-width: 1px;
+            border-top-style: solid;
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        > .td-text,
+        * {
+            white-space: normal;
+            word-break: break-all;
+        }
+
+        > .empty-placeholder {
+            width: 100%;
+        }
+    }
+
+    & *:focus {
+        outline: 0;
+    }
+
+    .align-column-left {
+        justify-content: flex-start;
+
+        span {
+            justify-content: flex-start;
+        }
+    }
+
+    .align-column-center {
+        justify-content: center;
+
+        span {
+            justify-content: center;
+        }
+    }
+
+    .align-column-right {
+        justify-content: flex-end;
+
+        span {
+            justify-content: flex-end;
+        }
+    }
+}
+
+.pagination-bar {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+    align-items: baseline;
+    margin: 16px;
+    color: $pagination-caption-color;
+
+    .paging-status {
+        padding: 0 8px 8px;
+    }
+
+    .pagination-button {
+        padding: 6px;
+        color: $pagination-button-color;
+        border-color: transparent;
+        background-color: transparent;
+
+        &:hover {
+            color: $brand-primary;
+            border-color: transparent;
+            background-color: transparent;
+        }
+
+        &:disabled {
+            border-color: transparent;
+            background-color: transparent;
+        }
+
+        &:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        &:focus-visible {
+            outline: 1px solid $brand-primary;
+        }
+    }
+}
+
+/* Column selector for hidable columns outside DG context */
+/* List of columns to select */
+.column-selectors {
+    position: absolute;
+    right: 0;
+    margin: 8px 0;
+    padding: 0 16px;
+    background: $background-color;
+    z-index: 99;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    list-style-type: none;
+    -webkit-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+    -moz-box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+    box-shadow: 0 2px 20px 1px rgba(32, 43, 54, 0.08);
+
+    li {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        label {
+            margin: 8px;
+            font-weight: normal;
+            white-space: nowrap;
+        }
+    }
+}

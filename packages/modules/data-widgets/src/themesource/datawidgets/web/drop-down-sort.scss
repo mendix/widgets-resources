@@ -1,0 +1,48 @@
+/* ==========================================================================
+  Drop-down sort
+
+  Override styles of Drop-down sort widget
+========================================================================== */
+@font-face {
+    font-family: "dropdown-sort";
+    src: url("./fonts/dropdown-sort.eot?46260688");
+    src: url("./fonts/dropdown-sort.eot?46260688#iefix") format("embedded-opentype"),
+        url("./fonts/dropdown-sort.woff2?46260688") format("woff2"),
+        url("./fonts/dropdown-sort.woff?46260688") format("woff"),
+        url("./fonts/dropdown-sort.ttf?46260688") format("truetype"),
+        url("./fonts/dropdown-sort.svg?46260688#dropdown-sort") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.dropdown-triggerer-wrapper {
+    display: flex;
+
+    .dropdown-triggerer {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right-width: 0;
+    }
+
+    .btn-sort {
+        padding: $spacing-small;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+
+        font-family: "dropdown-sort";
+        font-style: normal;
+        font-weight: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+
+        &.icon-asc:before {
+            content: "\e802";
+            margin: 2px;
+        }
+
+        &.icon-desc:before {
+            content: "\e803";
+            margin: 2px;
+        }
+    }
+}

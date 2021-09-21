@@ -1,0 +1,47 @@
+/* ==========================================================================
+   Tree Node
+
+//== Design Properties
+//## Helper classes to change the look and feel of the component
+========================================================================== */
+
+.widget-tree-node-hover {
+    .widget-tree-node-branch:hover > .widget-tree-node-branch-header {
+        background-color: $grid-bg-hover;
+    }
+}
+
+.widget-tree-node-bordered-horizontal {
+    .widget-tree-node-branch > .widget-tree-node-branch-header {
+        border-width: 0;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        border-bottom-color: $grid-border-color;
+    }
+}
+
+.widget-tree-node-bordered-all {
+    border: 1px solid $grid-border-color;
+    border-radius: 8px;
+    overflow: hidden;
+
+    .widget-tree-node-body:not(.widget-tree-node-branch-loading) {
+        border-width: 0;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #ced0d3;
+    }
+    .widget-tree-node-branch:not(:first-of-type) > .widget-tree-node-branch-header {
+        border-width: 0;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: #ced0d3;
+    }
+}
+
+.widget-tree-node-bordered-none {
+    border-width: 0;
+    .widget-tree-node-branch > .widget-tree-node-branch-header {
+        border-width: 0;
+    }
+}

@@ -1,0 +1,307 @@
+$hover-color: #f8f8f8 !default;
+$background-color: #fff !default;
+$selected-color: #dadcde !default;
+$border-color: #ced0d3 !default;
+$arrow: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='15px' height='8px'><polyline id='Line' fill='none' stroke='%23555555' points='0.5 0.5 6 6 11.545361 0.5'></polyline></svg>";
+
+@import "DatePicker";
+
+@font-face {
+    font-family: "datagrid-filters";
+    src: url("./fonts/datagrid-filters.eot");
+    src: url("./fonts/datagrid-filters.eot") format("embedded-opentype"),
+        url("./fonts/datagrid-filters.woff2") format("woff2"), url("./fonts/datagrid-filters.woff") format("woff"),
+        url("./fonts/datagrid-filters.ttf") format("truetype"), url("./fonts/datagrid-filters.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .filter-input {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .btn-calendar {
+        margin-left: 5px; //Review in atlas, the current date picker is also 5px
+    }
+}
+
+.filter-selector {
+    padding-left: 0;
+    padding-right: 0;
+
+    .filter-selector-content {
+        height: 100%;
+        align-self: flex-end;
+
+        .filter-selector-button {
+            padding: 8px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: none;
+            height: 100%;
+
+            &:before {
+                justify-content: center;
+                width: 20px;
+                height: 20px;
+                padding-left: 4px; /* The font has spaces in the right side, so to align in the middle we need this */
+            }
+        }
+
+        .filter-selectors {
+            position: absolute;
+            width: max-content;
+            left: 0;
+            margin: 0 $spacing-small;
+            padding: 0;
+            background: $background-color;
+            z-index: 99;
+            border-radius: 8px;
+            list-style-type: none;
+            box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+            overflow: hidden;
+
+            li {
+                display: flex;
+                align-items: center;
+                font-weight: normal;
+                line-height: 32px;
+                cursor: pointer;
+
+                .filter-label {
+                    padding-right: 8px;
+                }
+
+                &.filter-selected {
+                    background-color: $hover-color;
+                    color: $brand-primary;
+                }
+
+                &:hover,
+                &:focus {
+                    background-color: $hover-color;
+                }
+            }
+        }
+    }
+}
+
+.filter-selectors {
+    padding: 0;
+    background: $background-color;
+    border-radius: 8px;
+    list-style-type: none;
+    box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    overflow: hidden;
+
+    li {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+        line-height: 32px;
+        cursor: pointer;
+
+        .filter-label {
+            padding-right: 8px;
+        }
+
+        &.filter-selected {
+            background-color: $hover-color;
+            color: $brand-primary;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $hover-color;
+        }
+    }
+}
+
+.dropdown-list {
+    padding: 0;
+    background: $background-color;
+    border-radius: 8px;
+    list-style-type: none;
+    box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+    overflow-x: hidden;
+    max-height: 40vh;
+
+    li {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+        min-height: 32px;
+        cursor: pointer;
+        padding: 0 $spacing-small;
+
+        .filter-label {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        &.filter-selected {
+            background-color: $hover-color;
+            color: $brand-primary;
+        }
+
+        &:hover,
+        &:focus {
+            background-color: $hover-color;
+        }
+
+        label {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 8px;
+            font-weight: normal;
+            width: calc(100% - 32px);
+        }
+    }
+}
+
+.dropdown-container {
+    flex: 1;
+
+    .dropdown-triggerer {
+        caret-color: transparent;
+        cursor: pointer;
+
+        background-image: url($arrow);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-position-x: right;
+        background-position-y: center;
+        background-origin: content-box;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    .dropdown-list {
+        position: absolute;
+        width: max-content;
+        left: 0;
+        margin: 0 $spacing-small;
+        padding: 0;
+        background: $background-color;
+        z-index: 99;
+        border-radius: 8px;
+        list-style-type: none;
+        box-shadow: 0 2px 20px 1px rgba(5, 15, 129, 0.05), 0 2px 16px 0 rgba(33, 43, 54, 0.08);
+        overflow-x: hidden;
+        max-height: 40vh;
+
+        li {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            min-height: 32px;
+            cursor: pointer;
+            padding: 0 $spacing-small;
+
+            .filter-label {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            &.filter-selected {
+                background-color: $hover-color;
+                color: $brand-primary;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: $hover-color;
+            }
+
+            label {
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                margin: 8px;
+                font-weight: normal;
+                width: calc(100% - 32px);
+            }
+        }
+    }
+}
+
+/**
+Icons
+ */
+
+.filter-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    margin: 6px 8px;
+    font-family: "datagrid-filters";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "datagrid-filters";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.contains:before {
+    content: "\e808";
+}
+.endsWith:before {
+    content: "\e806";
+}
+.equal:before {
+    content: "\e809";
+}
+.greater:before {
+    content: "\e80a";
+}
+.greaterEqual:before {
+    content: "\e80b";
+}
+.notEqual:before {
+    content: "\e80c";
+}
+.smaller:before {
+    content: "\e80d";
+}
+.smallerEqual:before {
+    content: "\e80e";
+}
+.startsWith:before {
+    content: "\e807";
+}
+
+/**
+* Specific styles for filters inside Data Grid 2
+**/
+div:not(.table-compact) > .table {
+    .th {
+        .filter-selector {
+            .filter-selectors {
+                margin: 0 $spacing-medium;
+            }
+        }
+
+        .dropdown-container {
+            .dropdown-list {
+                margin: 0 $spacing-medium;
+            }
+        }
+    }
+}

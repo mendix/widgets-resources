@@ -28,11 +28,24 @@ jobs:
                   seperator: "-v"
             - name: "Installing dependencies"
               run: npm install
-            - name: "Building widgets and js actions"
+            - name: "Building native widgets and js actions"
               if: contains(steps.scope.outputs._0, '-native')
               run: npm run release:native
-            - name: "Updating Mendix project"
+            - name: "Updating Native Mobile Resources project"
+              if: contains(steps.scope.outputs._0, '-native')
               run: "npm run create-modules:native"
+              env:
+                  GH_USERNAME: ${{ secrets.GH_USERNAME }}
+                  GH_EMAIL: ${{ secrets.GH_EMAIL }}
+                  GH_NAME: ${{ secrets.GH_NAME }}
+                  GH_PAT: ${{ secrets.GH_PAT }}
+                  TAG: ${{ steps.variables.outputs.tag }}
+            - name: "Building data widgets"
+              if: ${{ steps.scope.outputs._0 == 'data-widgets' }}
+              run: npm run release:data-widgets
+            - name: "Updating Data Widgets project"
+              if: ${{ steps.scope.outputs._0 == 'data-widgets' }}
+              run: "npm run create-modules:data-widgets"
               env:
                   GH_USERNAME: ${{ secrets.GH_USERNAME }}
                   GH_EMAIL: ${{ secrets.GH_EMAIL }}

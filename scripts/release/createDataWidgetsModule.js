@@ -18,38 +18,43 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["mobile-resources-native"];
     const moduleName = process.env.TAG.split("-v")[0];
-    if (!modules.includes(moduleName)) {
+    if (moduleName !== "data-widgets") {
         return;
     }
 
-    switch (moduleName) {
-        case "mobile-resources-native":
-            await createNMRModule();
-            break;
-    }
+    await createDataWidgetsModule();
 }
 
-async function createNMRModule() {
-    console.log("Creating the Native Mobile Resource module.");
-    const NMRFolder = join(process.cwd(), "packages/jsActions/mobile-resources-native");
-    const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
+async function createDataWidgetsModule() {
+    console.log("Creating the Data Widgets module.");
+    const widgets = [
+        "datagrid-date-filter-web",
+        "datagrid-dropdown-filter-web",
+        "datagrid-number-filter-web",
+        "datagrid-text-filter-web",
+        "datagrid-web",
+        "dropdown-sort-web",
+        "gallery-web",
+        "tree-node-web"
+    ];
+    const DWFolder = join(process.cwd(), "packages/modules/data-widgets");
+    const tmpFolder = join(process.cwd(), "tmp/data-widgets");
     const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
-    const nativeWidgetFolders = widgetFolders
-        .filter(folder => folder.includes("-native"))
+    const dataWidgetsFolders = widgetFolders
+        .filter(folder => widgets.includes(folder))
         .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
 
-    const moduleInfo = getPackageInfo(NMRFolder);
-    await bumpVersionInPackageJson(NMRFolder, moduleInfo);
+    const moduleInfo = getPackageInfo(DWFolder);
+    await bumpVersionInPackageJson(DWFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
 
-    const changelog = await updateChangelogs(nativeWidgetFolders, moduleInfo);
-    await updateTestProject(tmpFolder, nativeWidgetFolders, moduleInfo.testProjectUrl);
+    const changelog = await updateChangelogs(dataWidgetsFolders, moduleInfo);
+    await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo.testProjectUrl);
 
     console.log("Creating module MPK..");
-    await createMxBuildContainer(tmpFolder, "NativeMobileResources", moduleInfo.minimumMXVersion);
+    await createMxBuildContainer(tmpFolder, "DataWidgets", moduleInfo.minimumMXVersion);
     const mpkOutput = (await getFiles(tmpFolder, [`.mpk`]))[0];
 
     console.log(`Creating Github release for module ${moduleInfo.nameWithSpace}`);
@@ -61,13 +66,13 @@ async function createNMRModule() {
 }
 
 // Update test project with latest changes and update version in themesource
-async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
-    const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
-    const jsActions = await getFiles(jsActionsPath);
+async function updateTestProject(tmpFolder, widgetsFolders, githubUrl) {
+    const stylesPath = join(process.cwd(), "packages/modules/data-widgets/src/themesource");
+    const styles = await getFiles(stylesPath);
     const tmpFolderWidgets = join(tmpFolder, "widgets");
-    const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");
+    const tmpFolderActions = join(tmpFolder, "themesource");
 
-    console.log("Updating NativeComponentsTestProject..");
+    console.log("Updating DataWidgets project..");
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(tmpFolder, { recursive: true, force: true });
@@ -75,30 +80,24 @@ async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
 
     await setLocalGitCredentials(tmpFolder);
 
-    console.log("Copying widgets and js actions..");
+    console.log("Copying widgets and styles..");
     await Promise.all([
-        ...nativeWidgetFolders.map(async folder => {
+        ...widgetsFolders.map(async folder => {
             const src = (await getFiles(folder, [`.mpk`]))[0];
             const dest = join(tmpFolderWidgets, basename(src));
             await rm(dest);
             await copyFile(src, dest);
         }),
-        ...jsActions.map(async file => {
-            const dest = join(tmpFolderActions, file.replace(jsActionsPath, ""));
+        ...styles.map(async file => {
+            const dest = join(tmpFolderActions, file.replace(stylesPath, ""));
             await rm(dest);
             await copyFile(file, dest);
         })
     ]);
-    await execShellCommand(
-        `echo ${process.env.TAG.split("-v")[1]} > themesource/nativemobileresources/.version`,
-        tmpFolder
-    );
+    await execShellCommand(`echo ${process.env.TAG.split("-v")[1]} > themesource/datawidgets/.version`, tmpFolder);
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
     if (!/nothing to commit/i.test(gitOutput)) {
-        await execShellCommand(
-            `git add . && git commit -m "Updated native widgets and js actions" && git push`,
-            tmpFolder
-        );
+        await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
     } else {
         console.warn(`Nothing to commit from repo ${tmpFolder}s`);
     }
