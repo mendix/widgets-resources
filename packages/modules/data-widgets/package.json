@@ -1,7 +1,7 @@
 {
   "name": "data-widgets",
   "moduleName": "Data Widgets",
-  "version": "2.0.0",
+  "version": "0.0.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {
@@ -9,7 +9,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "marketplace": {
-    "minimumMXVersion": "9.6.0.27708",
+    "minimumMXVersion": "9.6.0.27784",
     "marketplaceId": 116540
   },
   "testProject": {
