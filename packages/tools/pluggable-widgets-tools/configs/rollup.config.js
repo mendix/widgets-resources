@@ -33,6 +33,7 @@ import {
     widgetVersion
 } from "./shared";
 import image from "@rollup/plugin-image";
+import { execSync } from "child_process";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
@@ -269,7 +270,7 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            command([`npm run format --prefix ${sourcePath}`]),
+            command(() => execSync(`npm run format --prefix ${sourcePath}`, { stdio: "inherit" })),
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
