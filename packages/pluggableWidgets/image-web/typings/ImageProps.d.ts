@@ -29,6 +29,8 @@ export interface ImageContainerProps {
     onClickType: OnClickTypeEnum;
     onClick?: ActionValue;
     alternativeText?: DynamicValue<string>;
+    isBackgroundImage: boolean;
+    children?: ReactNode;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -36,8 +38,6 @@ export interface ImageContainerProps {
     iconSize: number;
     displayAs: DisplayAsEnum;
     responsive: boolean;
-    isBackgroundImage: boolean;
-    children?: ReactNode;
 }
 
 export interface ImagePreviewProps {
@@ -51,6 +51,8 @@ export interface ImagePreviewProps {
     onClickType: OnClickTypeEnum;
     onClick: {} | null;
     alternativeText: string;
+    isBackgroundImage: boolean;
+    children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
@@ -58,6 +60,4 @@ export interface ImagePreviewProps {
     iconSize: number | null;
     displayAs: DisplayAsEnum;
     responsive: boolean;
-    isBackgroundImage: boolean;
-    children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

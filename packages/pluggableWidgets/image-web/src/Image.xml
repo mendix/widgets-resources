@@ -52,6 +52,16 @@
                     <description>Alternative text of the image for accessibility purposes.</description>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Background">
+                <property key="isBackgroundImage" type="boolean" defaultValue="false">
+                    <caption>Background image</caption>
+                    <description>Whether the image is rendered as a background. More content can be put inside, while design properties will have no effect.</description>
+                </property>
+                <property key="children" type="widgets" required="false">
+                    <caption>Place content here</caption>
+                    <description />
+                </property>
+            </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
                 <systemProperty key="Visibility"/>
@@ -99,14 +109,6 @@
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>
                     <description>Image will never get larger than its original size. It can become smaller.</description>
-                </property>
-                <property key="isBackgroundImage" type="boolean" defaultValue="false">
-                    <caption>Background image</caption>
-                    <description>Whether the image is rendered as a background. More content can be put inside, while design properties will have no effect.</description>
-                </property>
-                <property key="children" type="widgets" required="false">
-                    <caption>Place content here</caption>
-                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
