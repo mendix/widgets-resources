@@ -7,9 +7,9 @@ const {
     getFiles,
     getPackageInfo,
     createMxBuildContainer,
-    bumpVersionInPackageJson,
     updateChangelogs,
-    githubAuthentication
+    githubAuthentication,
+    bumpVersionInPackageJson
 } = require("./module-automation/commons");
 
 main().catch(e => {
@@ -45,8 +45,8 @@ async function createDataWidgetsModule() {
         .filter(folder => widgets.includes(folder))
         .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
 
-    const moduleInfo = getPackageInfo(DWFolder);
-    await bumpVersionInPackageJson(DWFolder, moduleInfo);
+    let moduleInfo = await getPackageInfo(DWFolder);
+    moduleInfo = await bumpVersionInPackageJson(DWFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
 

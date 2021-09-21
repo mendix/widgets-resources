@@ -40,8 +40,8 @@ async function createNMRModule() {
         .filter(folder => folder.includes("-native"))
         .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
 
-    const moduleInfo = getPackageInfo(NMRFolder);
-    await bumpVersionInPackageJson(NMRFolder, moduleInfo);
+    let moduleInfo = await getPackageInfo(NMRFolder);
+    moduleInfo = await bumpVersionInPackageJson(NMRFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
 

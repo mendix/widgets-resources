@@ -3,6 +3,11 @@ const { access, readdir, readFile, writeFile } = require("fs/promises");
 const { exec } = require("child_process");
 const { basename, extname, resolve } = require("path");
 
+const regex = {
+    changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
+    releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g
+};
+
 async function setLocalGitCredentials(workingDirectory) {
     await execShellCommand(`git config user.name "${process.env.GH_NAME}"`, workingDirectory);
     await execShellCommand(`git config user.email "${process.env.GH_EMAIL}"`, workingDirectory);
@@ -27,36 +32,37 @@ function execShellCommand(cmd, workingDirectory = process.cwd()) {
 async function getFiles(dir, includeExtension) {
     const dirents = await readdir(dir, { withFileTypes: true });
     const files = await Promise.all(
-        dirents.map(dirent => {
-            const res = resolve(dir, dirent.name);
-            return dirent.isDirectory() ? getFiles(res, includeExtension) : res;
-        })
+        dirents
+            .filter(dirent => !dirent.name.startsWith("."))
+            .map(dirent => {
+                const res = resolve(dir, dirent.name);
+                return dirent.isDirectory() ? getFiles(res, includeExtension) : res;
+            })
     );
     return files
         .flat()
         .filter(file => !includeExtension?.length || (extname(file) && includeExtension?.includes(extname(file))));
 }
 
-function getPackageInfo(path) {
-    const {
-        name,
-        widgetName,
-        moduleName,
-        version,
-        marketplace: { minimumMXVersion },
-        testProject: { githubUrl, branchName },
-        repository: { url }
-    } = require(`${path}/package.json`);
-    return {
-        nameWithDash: name,
-        nameWithSpace: moduleName ?? widgetName,
-        version,
-        minimumMXVersion,
-        url,
-        testProjectUrl: githubUrl,
-        testProjectBranchName: branchName,
-        changelogPath: `${path}/CHANGELOG.md`
-    };
+async function getPackageInfo(path) {
+    const pkgPath = join(path, `package.json`);
+    try {
+        await access(pkgPath);
+        const { name, widgetName, moduleName, version, marketplace, testProject, repository } = require(pkgPath);
+        return {
+            nameWithDash: name,
+            nameWithSpace: moduleName ?? widgetName,
+            version,
+            minimumMXVersion: marketplace?.minimumMXVersion,
+            url: repository?.url,
+            testProjectUrl: testProject?.githubUrl,
+            testProjectBranchName: testProject?.branchName,
+            changelogPath: `${path}/CHANGELOG.md`
+        };
+    } catch (error) {
+        console.error(`ERROR: Path does not exist: ${pkgPath}`);
+        return null;
+    }
 }
 
 // Create reusable mxbuild image
@@ -84,7 +90,7 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
 }
 
 async function bumpVersionInPackageJson(moduleFolder, moduleInfo) {
-    const moduleVersionNew = process.env.TAG.split("-v")[1];
+    const moduleVersionNew = process.env.TAG?.split("-v")?.[1];
     if (moduleInfo.version === moduleVersionNew) {
         throw new Error(
             `It looks like version ${moduleInfo.version} of "${moduleInfo.nameWithSpace}" has been released already. Did you manually bump the version without releasing? Then you should revert the bump before retrying.`
@@ -95,37 +101,38 @@ async function bumpVersionInPackageJson(moduleFolder, moduleInfo) {
         );
         const pkgPath = join(moduleFolder, "package.json");
         const pkg = require(pkgPath);
-        pkg.version = moduleVersionNew;
-        await writeFile(pkgPath, pkg);
+        moduleInfo.version = pkg.version = moduleVersionNew;
+        await writeFile(pkgPath, JSON.stringify(pkg, null, 2));
     }
+    return moduleInfo;
 }
 
-async function writeToChangelogs(changelogs, changelogPath, version) {
+async function writeToChangelogs(changelogs, { nameWithSpace, changelogPath, version }) {
     const d = new Date();
     const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
-    const newContent = changelogs.replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${date}`);
+    const content = await readFile(changelogPath, "utf8");
+    const oldChangelogs = content.match(regex.changelogs)?.[0].trim();
+    const newContent = content
+        .replace(oldChangelogs, changelogs)
+        .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}`);
     await writeFile(changelogPath, newContent);
 }
 
-async function getUnreleasedChangelogs({ name, version, changelogPath }) {
+async function getUnreleasedChangelogs({ version, changelogPath }) {
     try {
         await access(changelogPath);
         const content = await readFile(changelogPath, "utf8");
-        const changelogs = content.match(/(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i)?.[0].trim();
-        const releasedVersions = content.match(/(?<=## \[)\d+\.\d+\.\d+(?=\])/g);
+        const changelogs = content.match(regex.changelogs)?.[0].trim();
+        const releasedVersions = content.match(regex.releasedVersions);
         if (releasedVersions?.includes(version)) {
             throw new Error(
                 `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
             );
         }
 
-        return changelogs
-            ? `## [${version}] ${name}
-            
-            ${changelogs}\n\n`
-            : "";
+        return changelogs || "";
     } catch (error) {
-        console.warn(`${changelogPath} does not exist.`);
+        console.error(`ERROR: Path does not exist: ${changelogPath}`);
     }
 }
 
@@ -133,23 +140,25 @@ async function getUnreleasedChangelogs({ name, version, changelogPath }) {
 async function updateChangelogs(widgetsFolders, moduleInfo) {
     console.log("Updating changelogs..");
     const moduleChangelogs = await getUnreleasedChangelogs(moduleInfo);
-    let nativeWidgetsChangelogs = "";
+    const nativeWidgetsChangelogs = [];
     for await (const folder of widgetsFolders) {
-        const widgetInfo = getPackageInfo(folder);
+        const widgetInfo = await getPackageInfo(folder);
+        if (!widgetInfo) {
+            continue;
+        }
         const widgetChangelogs = await getUnreleasedChangelogs(widgetInfo);
-        nativeWidgetsChangelogs += changelogs || "";
         if (widgetChangelogs) {
+            nativeWidgetsChangelogs.push(`## [${widgetInfo.version}] ${widgetInfo.nameWithSpace}\n${widgetChangelogs}`);
             console.log(`Writing "${widgetInfo.nameWithSpace}" changelogs to ${widgetInfo.changelogPath}`);
-            await writeToChangelogs(widgetChangelogs, widgetInfo.changelogPath, widgetInfo.version);
+            await writeToChangelogs(widgetChangelogs, widgetInfo);
         }
     }
-    let changelog = moduleChangelogs
-        ? `## [${moduleInfo.version}] ${moduleInfo.nameWithSpace}\n${moduleChangelogs}\n`
-        : "";
-    changelog = nativeWidgetsChangelogs ? `${changelog}\n\n${nativeWidgetsChangelogs}` : changelog;
-    if (changelog) {
+    const newModuleChangelogs = nativeWidgetsChangelogs.length
+        ? `${moduleChangelogs}\n\n${nativeWidgetsChangelogs.join("\n\n")}`
+        : moduleChangelogs;
+    if (newModuleChangelogs) {
         console.log(`Writing "${moduleInfo.nameWithSpace}" changelogs to ${moduleInfo.changelogPath}`);
-        await writeToChangelogs(changelog, moduleInfo.changelogPath, moduleInfo.version);
+        await writeToChangelogs(newModuleChangelogs, moduleInfo);
     }
 
     const changelogBranchName = `${moduleInfo.name}-release-${moduleInfo.version}`;
@@ -160,7 +169,7 @@ async function updateChangelogs(widgetsFolders, moduleInfo) {
         `gh pr create --title "Updating all the changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
     );
     console.log("Created PR for changelog updates.");
-    return changelog;
+    return newModuleChangelogs;
 }
 
 async function githubAuthentication(moduleInfo) {
