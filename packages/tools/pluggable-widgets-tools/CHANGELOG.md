@@ -4,8 +4,14 @@ All notable changes to this tool will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [9.5.4] - 2021-09-21
+
 ### Added
 - We added a feature where the code will be formatted automatically after each build.
+
+### Fixed
+- We fixed an issue with the native release build tooling by disabling code mangling that could cause runtime errors in certain cases.
 
 ## [9.5.3] - 2021-09-09
 
