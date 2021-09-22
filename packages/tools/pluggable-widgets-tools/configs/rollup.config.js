@@ -270,7 +270,7 @@ export default async args => {
     function getClientComponentPlugins(platform) {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            platform === "native"
+            platform === "native" && !args.watch
                 ? command(() =>
                       execSync(`npx pluggable-widgets-tools format`, {
                           stdio: "inherit",
