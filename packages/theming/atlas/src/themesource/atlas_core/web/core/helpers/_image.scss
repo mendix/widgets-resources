@@ -76,27 +76,30 @@
         object-fit: scale-down;
     }
 
-    .img-background-fit-contain {
+    .img-background-fit-contain.mx-image-background {
         background-size: contain;
     }
 
-    .img-background-fit-cover {
+    .img-background-fit-cover.mx-image-background {
         background-size: cover;
     }
 
-    .img-background-fit-auto {
+    .img-background-fit-auto.mx-image-background {
         background-size: auto;
     }
 
-    .img-background-opacity-low {
+    .img-opacity-low img,
+    .img-opacity-low.mx-image-background {
         opacity: 0.3;
     }
 
-    .img-background-opacity-medium {
+    .img-opacity-medium img,
+    .img-opacity-medium.mx-image-background {
         opacity: 0.5;
     }
 
-    .img-background-opacity-high {
+    .img-opacity-high img,
+    .img-opacity-high.mx-image-background {
         opacity: 0.7;
     }
 }

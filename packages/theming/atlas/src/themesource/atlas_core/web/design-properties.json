@@ -1209,6 +1209,44 @@
                     "class": "img-scale-down"
                 }
             ]
+        },
+        {
+            "name": "Opacity",
+            "type": "Dropdown",
+            "description": "Change the opacity of the image.",
+            "options": [
+                {
+                    "name": "Low",
+                    "class": "img-opacity-low"
+                },
+                {
+                    "name": "Medium",
+                    "class": "img-opacity-medium"
+                },
+                {
+                    "name": "High",
+                    "class": "img-opacity-high"
+                }
+            ]
+        },
+        {
+            "name": "Background image fit",
+            "type": "Dropdown",
+            "description": "Change the image fit of the background image.",
+            "options": [
+                {
+                    "name": "Contain",
+                    "class": "img-background-fit-contain"
+                },
+                {
+                    "name": "Cover",
+                    "class": "img-background-fit-cover"
+                },
+                {
+                    "name": "Auto",
+                    "class": "img-background-fit-auto"
+                }
+            ]
         }
     ]
 }
