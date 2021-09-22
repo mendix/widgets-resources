@@ -1,7 +1,6 @@
-const { join } = require("path");
+const { basename, extname, join, resolve } = require("path");
 const { access, readdir, readFile, writeFile } = require("fs/promises");
 const { exec } = require("child_process");
-const { basename, extname, resolve } = require("path");
 
 const regex = {
     changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
@@ -29,7 +28,7 @@ function execShellCommand(cmd, workingDirectory = process.cwd()) {
     });
 }
 
-async function getFiles(dir, includeExtension) {
+async function getFiles(dir, includeExtension = []) {
     const dirents = await readdir(dir, { withFileTypes: true });
     const files = await Promise.all(
         dirents

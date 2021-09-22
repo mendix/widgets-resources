@@ -1,6 +1,5 @@
-const { join } = require("path");
+const { basename, join } = require("path");
 const { readdir, copyFile, rm } = require("fs/promises");
-const { basename } = require("path");
 const { mkdir } = require("shelljs");
 const {
     setLocalGitCredentials,
