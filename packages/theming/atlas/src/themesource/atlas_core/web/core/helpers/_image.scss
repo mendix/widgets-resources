@@ -76,15 +76,15 @@
         object-fit: scale-down;
     }
 
-    .img-background-fit-contain.mx-image-background {
+    .img-contain.mx-image-background {
         background-size: contain;
     }
 
-    .img-background-fit-cover.mx-image-background {
+    .img-cover.mx-image-background {
         background-size: cover;
     }
 
-    .img-background-fit-auto.mx-image-background {
+    .img-auto.mx-image-background {
         background-size: auto;
     }
 

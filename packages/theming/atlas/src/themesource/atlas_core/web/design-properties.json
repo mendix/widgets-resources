@@ -1207,6 +1207,10 @@
                 {
                     "name": "Scale-down",
                     "class": "img-scale-down"
+                },
+                {
+                    "name": "Auto",
+                    "class": "img-auto"
                 }
             ]
         },
@@ -1226,25 +1230,6 @@
                 {
                     "name": "High",
                     "class": "img-opacity-high"
-                }
-            ]
-        },
-        {
-            "name": "Background image fit",
-            "type": "Dropdown",
-            "description": "Change the image fit of the background image.",
-            "options": [
-                {
-                    "name": "Contain",
-                    "class": "img-background-fit-contain"
-                },
-                {
-                    "name": "Cover",
-                    "class": "img-background-fit-cover"
-                },
-                {
-                    "name": "Auto",
-                    "class": "img-background-fit-auto"
                 }
             ]
         }
