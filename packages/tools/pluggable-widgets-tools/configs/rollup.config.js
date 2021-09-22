@@ -33,6 +33,7 @@ import {
     widgetVersion
 } from "./shared";
 import image from "@rollup/plugin-image";
+import { execSync } from "child_process";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
@@ -62,7 +63,7 @@ export default async args => {
                 },
                 external: webExternal,
                 plugins: [
-                    ...getClientComponentPlugins(),
+                    ...getClientComponentPlugins(platform),
                     url({ include: imagesAndFonts, limit: 100000 }),
                     sass({
                         output: production && outputFormat === "amd",
@@ -110,7 +111,7 @@ export default async args => {
                             }
                         ]
                     }),
-                    ...(i === 0 ? getClientComponentPlugins() : []),
+                    ...(i === 0 ? getClientComponentPlugins(platform) : []),
                     json(),
                     collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
                     ...getCommonPlugins({
@@ -266,10 +267,17 @@ export default async args => {
         ];
     }
 
-    function getClientComponentPlugins() {
+    function getClientComponentPlugins(platform) {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            command([`npm run format --prefix ${sourcePath}`]),
+            platform === "native" && !args.watch
+                ? command(() =>
+                      execSync(`npx pluggable-widgets-tools format`, {
+                          stdio: "inherit",
+                          input: `--prefix ${sourcePath}`
+                      })
+                  )
+                : null,
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
