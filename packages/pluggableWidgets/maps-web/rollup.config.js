@@ -1,19 +1,27 @@
-import { join } from "path";
+import { dirname, join } from "path";
 import replace from "rollup-plugin-re";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
+import { terser } from "rollup-plugin-terser";
 
 export default args => {
-    // console.warn(args);
-
     const production = Boolean(args.configProduction);
     const outDir = join(__dirname, "dist/tmp/widgets/com/mendix/shared");
     const result = args.configDefaultConfig;
+    const [jsConfig, mJsConfig] = result;
 
-    result[0].plugins.map(plugin => console.warn(plugin));
-
-    result[0].plugins.splice(
+    // We force the original configuration to replace the library with the local implementation
+    jsConfig.plugins.splice(
+        -1,
+        0,
+        replace({
+            replaces: {
+                "@react-google-maps/api": "../../../../shared/api.js"
+            }
+        })
+    );
+    mJsConfig.plugins.splice(
         -1,
         0,
         replace({
@@ -23,19 +31,25 @@ export default args => {
         })
     );
 
-    // result[0].plugins.map(plugin => console.warn(plugin));
+    // We change the output because maps widget package was wrongly named with uppercase M in the past.
+    jsConfig.output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/Maps/Maps.js");
+    mJsConfig.output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/Maps/Maps.mjs");
 
-    const externals = result[0].external;
+    const externals = jsConfig.external;
 
-    result[0].external = [...externals, /^@react-google-maps($|\/)/, /(^|\/)shared\/api.js$/];
+    // We force the externals to contain the library + the just built api file
+    jsConfig.external = [...externals, /^@react-google-maps($|\/)/, /(^|\/)shared\/api.js$/];
+    mJsConfig.external = [...externals, /^@react-google-maps($|\/)/, /(^|\/)shared\/api.js$/];
+
+    // We add the library bundling (ES output) as the first item for rollup
     result.unshift({
-        input: require.resolve("@react-google-maps/api"),
+        input: join(dirname(require.resolve("@react-google-maps/api")), "reactgooglemapsapi.esm.js"),
         output: {
             format: "amd",
             file: join(outDir, "api.js"),
             sourcemap: false
         },
-        external: [/^react($|\/)/],
+        external: externals,
         plugins: [
             nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] }),
             getBabelInputPlugin({
@@ -45,12 +59,7 @@ export default args => {
                 plugins: ["@babel/plugin-proposal-class-properties"],
                 overrides: [
                     {
-                        test: /node_modules/,
                         plugins: ["@babel/plugin-transform-flow-strip-types", "@babel/plugin-transform-react-jsx"]
-                    },
-                    {
-                        exclude: /node_modules/,
-                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
                     }
                 ]
             }),
@@ -58,7 +67,7 @@ export default args => {
                 extensions: [".js", ".jsx", ".tsx", ".ts"],
                 transformMixedEsModules: true,
                 requireReturnsDefault: "auto",
-                ignore: id => ([/^react($|\/)/] || []).some(value => new RegExp(value).test(id))
+                ignore: id => externals.some(value => new RegExp(value).test(id))
             }),
             getBabelOutputPlugin({
                 sourceMaps: false,
@@ -74,10 +83,9 @@ export default args => {
                         replace: production ? "'production'" : "'development'"
                     }
                 ]
-            })
+            }),
+            production ? terser() : null
         ]
     });
-
-    result[1].output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/Maps/Maps.js");
     return result;
 };
