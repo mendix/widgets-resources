@@ -4,8 +4,8 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
     <name>Pop-up menu</name>
     <description>Displays a set of pre-defined items within the Pop-up menu</description>
-    <studioProCategory>Menu &amp; navigation</studioProCategory>
-    <studioCategory>Menu &amp; Navigation</studioCategory>
+    <studioProCategory>Menus &amp; navigation</studioProCategory>
+    <studioCategory>Menus &amp; Navigation</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
