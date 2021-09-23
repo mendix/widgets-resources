@@ -16,6 +16,10 @@
                 width: $navsidebar-width-closed !important;
 
                 .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
+                    &.mx-navigationtree-has-items a {
+                        white-space: nowrap;
+                    }
+
                     &.mx-navigationtree-has-items:hover > ul {
                         position: absolute;
                         z-index: 100;
