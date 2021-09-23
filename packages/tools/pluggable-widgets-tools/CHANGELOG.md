@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.5.5] - 2021-09-23
+
+### Fixed
+- We reverted the feature introduced in 9.5.4 that automatically formatted each build as this caused builds to stall in certain cases.
+
 ## [9.5.4] - 2021-09-21
 
 ### Added
