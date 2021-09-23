@@ -16,26 +16,9 @@ export default args => {
 
     // We force the original configuration to replace the library with the local implementation
     // Configuration for the main entry point for the client
-    jsConfig.plugins.splice(
-        -1,
-        0,
-        replace({
-            replaces: {
-                // It considers the relative path from the file which the library is being imported
-                "react-plotly.js": "../../../../shared/api.js"
-            }
-        })
-    );
+    replaceReactPlotlyBeforeZipping(jsConfig);
     // Configuration for Modern Client (mJS)
-    mJsConfig.plugins.splice(
-        -1,
-        0,
-        replace({
-            replaces: {
-                "react-plotly.js": "../../../../shared/api.js"
-            }
-        })
-    );
+    replaceReactPlotlyBeforeZipping(mJsConfig);
 
     const externals = jsConfig.external;
 
@@ -91,3 +74,15 @@ export default args => {
     });
     return result;
 };
+
+function replaceReactPlotlyBeforeZipping(config) {
+    config.plugins.splice(
+        -1,
+        0,
+        replace({
+            replaces: {
+                "react-plotly.js": "../../../../shared/api.js"
+            }
+        })
+    );
+}
