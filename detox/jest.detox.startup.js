@@ -4,6 +4,7 @@ const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const path = require("path");
+const { join, resolve } = require("path");
 
 jest.setTimeout(300000);
 jasmine.getEnv().addReporter(adapter);
@@ -13,8 +14,8 @@ expect.extend({
     toMatchImageSnapshot(screenshot, options = {}) {
         const { currentTestName } = this;
         const platform = device.getPlatform();
-        const customSnapshotsDir = path.join(path.resolve("./"), "image-snapshots", platform);
-        const customDiffDir = path.join(path.resolve("./"), "image-snapshots/results", platform);
+        const customSnapshotsDir = join(resolve("./"), "image-snapshots", platform);
+        const customDiffDir = join(resolve("./"), "image-snapshots/results", platform);
 
         return toMatchImageSnapshot.call(this, screenshot, {
             customDiffConfig: { threshold: 0.15 },
