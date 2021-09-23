@@ -39,11 +39,7 @@ async function main() {
     // creating directories. create them here to avoid the error.
     mkdir("-p", join(outputDir, "themesource/datawidgets"));
 
-    if (mode === "start") {
-        await buildAndCopyStyles(true, outputDir, mode);
-    } else {
-        await buildAndCopyStyles(false, outputDir, mode);
-    }
+    await buildAndCopyStyles(mode === "start", outputDir, mode);
 }
 
 async function buildAndCopyStyles(watchMode, destination, mode) {
@@ -97,7 +93,7 @@ async function copyDataWidgets(destination, mode) {
 
     let cwd = process.cwd();
     if (cwd.endsWith("data-widgets")) {
-        cwd = join(process.cwd(), "../../../");
+        cwd = join(cwd, "../../../");
     }
 
     if (mode === "release") {

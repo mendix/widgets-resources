@@ -12,6 +12,8 @@ const {
     bumpVersionInPackageJson
 } = require("./module-automation/commons");
 
+const cwd = process.cwd();
+
 main().catch(e => {
     console.error(e);
     process.exit(-1);
@@ -38,12 +40,12 @@ async function createDataWidgetsModule() {
         "gallery-web",
         "tree-node-web"
     ];
-    const DWFolder = join(process.cwd(), "packages/modules/data-widgets");
-    const tmpFolder = join(process.cwd(), "tmp/data-widgets");
-    const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
+    const DWFolder = join(cwd, "packages/modules/data-widgets");
+    const tmpFolder = join(cwd, "tmp/data-widgets");
+    const widgetFolders = await readdir(join(cwd, "packages/pluggableWidgets"));
     const dataWidgetsFolders = widgetFolders
         .filter(folder => widgets.includes(folder))
-        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
+        .map(folder => join(cwd, "packages/pluggableWidgets", folder));
 
     let moduleInfo = await getPackageInfo(DWFolder);
     moduleInfo = await bumpVersionInPackageJson(DWFolder, moduleInfo);
@@ -67,7 +69,7 @@ async function createDataWidgetsModule() {
 
 // Update test project with latest changes and update version in themesource
 async function updateTestProject(tmpFolder, widgetsFolders, githubUrl) {
-    const stylesPath = join(process.cwd(), "packages/modules/data-widgets/src/themesource");
+    const stylesPath = join(cwd, "packages/modules/data-widgets/src/themesource");
     const styles = await getFiles(stylesPath);
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "themesource");
