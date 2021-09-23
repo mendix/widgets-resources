@@ -7,3 +7,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - We added the possibility to reuse the filter with Gallery and Tree View widget.
+- We added a toolbox category and toolbox tile image for Studio & Studio Pro.

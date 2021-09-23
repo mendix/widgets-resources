@@ -1,7 +1,7 @@
 {
   "name": "accessibility-helper-web",
   "widgetName": "AccessibilityHelper",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Set an attribute to a DOM element",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "author": "Widget Team",
@@ -10,7 +10,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 114803
   },
   "testProject": {

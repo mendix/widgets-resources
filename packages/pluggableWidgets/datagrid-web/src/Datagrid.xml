@@ -2,9 +2,8 @@
 <widget id="com.mendix.widget.web.datagrid.Datagrid" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Data grid 2</name>
     <description/>
-    <studioProCategory>Data</studioProCategory>
-    <studioCategory>Data</studioCategory>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAJxSURBVHgBtVVLjtNAEK22LTR8FkbiALkB4QSTLECzdJTPBsF4TkBygoQTzNwAs4gUKZECG4TYxDcg3MBHMILhM0rcvHLcnrKxBzRKSipXd7/+VNUrdyuC9Pv9ptbapT3LYrEIVa/XaymlVnQYeeKYFiIYwaxLE3wcfgqsXbWaHQP2Fs2gBDWBnXNWHDG45pDkLI6ObXncCFLLJqpYl7ctOrBIDjg9cQlvZBrWrG9Bo0ylcMFw4bQlB3+txsG12E24GWeRHIx+PA/ihJTHnV907+LRtD/E5DFyXEkyONBMMvCJHJeVKQ8gbD4kZZ1y+0hfRhLrdrueZVmvjDPz+TyvuJPlz4ZG1SjSrtL6PU1f5th/k4zNI04Fa5IkjQJGW5c33/XsSGJOaZsJ6SSbYIf4+AbJPK5M1YfOgwJmynt3uBBFSRMpOmbdwivagxQiQC0wwS1u2ygziYFQH+ZN1j1DRIHBni0vPUtZy9RJvhEEB6UUXQsIL/wTtm2Hm83mNbdhQ4ld0VV4pO+kGLhgzK05gDmgAKTFH5FX5DKPYjabRTATqpCw8zCWmOSgHIEPF8YJEnSy/Nam6VkOeJ7nOo6THlh1Nz1dfm/aaSU5EU1fXLtcnCbLTzUkgs35Zl2xwsOhxJgDW9mfSTkrFHIBK1WRnZNT5gBeX/DdwgoOAol96tx/h9S2WX/T3UlhT/NbV70H/BbA+De9BzBB9ibI8ccwqUMOOnE2eE418o8Xj1Pn167lj2R9X8KO89+fVlHdi1Ung8FgvN1uv+B+4qhD2r0ZLJyNJu6qEbBjtNe3etGwQRo5chzDU9dcgtCvxnsz5+DyB3CWF7GOlmx4AAAAAElFTkSuQmCC</icon>
+    <studioProCategory>Data containers</studioProCategory>
+    <studioCategory>Data Containers</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">

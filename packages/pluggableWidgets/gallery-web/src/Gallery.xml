@@ -2,9 +2,8 @@
 <widget id="com.mendix.widget.web.gallery.Gallery" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Gallery</name>
     <description/>
-    <studioProCategory>Data</studioProCategory>
-    <studioCategory>Data</studioCategory>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKLSURBVHgBvVUxbFJRFL0PSKWgCV2YTPhdYaEDc1mMlThIAoR0aNhZusAKnTRMusDamDBB8nEgqWk0dcfw1QSbOPiXDsKCESgR5HnvK4/ygf9tI3qS/9+7j/fuue/ce/kA/xiMXslkUhmPxylYAxhjeqVSOZa2g17kHH/IwfpwbCCQQGYm5w/UXvA0eleTdljlHicMPSfRTd1sTywWyy8GagMT2Jm9+UgdHErbCYNDPNy02rMKNqsfOXCPlW22Ng8hibzaj/2X25zxJgNmeWhlMJy/ulc+0MjPvNSGHAxh2HXyjRcUFzAbaXkGfPLuKhTbLr7DaB9dh3e9xw68hvMni8QGgrPoVheHPM33apc5OngSdV/Zaj+PDsPSXrUHlVgisMzBOuBYXHiIVcFk4lAWEfl0TgPZtvY5OD+oMDp/DfbOl13K4WTrvs66F75Ff4Ykd/fLO3b2q2kWjf3bZ7jzqSZGK4xGo+1araYv3eA0uqFJUtSXU0Klvo9L7/Obb5/lvF4vRFIp8Pv9QHOXyyXO6rounmq1Cu12+2s8Ht/BatIccEM43zylPxrIZDLg8y0pAYqizJ5sNktlSwm/OYFEoVAAjG7mjDAYDChqaLVaUK/XDfsNBHvqpWJoNKxzUYqInx9V1F8VshSLRdMAAoEAdDqd1QRWjWb7fiEajSTq9/szzQlut1vkgvKCxQLpdHo1gVWjUaXhaUEgJQqFQgaJGo2GtUTzYJzjTRza4vpfSSSilCgf0G2CuBYUhIyJRsvlcsKBmUQUQCKRMBLQZ246/vGrRiUYiUSWJOr1eqKKSqUSGHzCLYDap+gS+CgW27rYA0fYcM9vTTBHFJxMJgpGGZRr04g16l74n/gNNw874D7WvLUAAAAASUVORK5CYII=</icon>
+    <studioProCategory>Data containers</studioProCategory>
+    <studioCategory>Data Containers</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Advanced">

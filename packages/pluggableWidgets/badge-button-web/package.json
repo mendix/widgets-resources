@@ -1,7 +1,7 @@
 {
   "name": "badge-button-web",
   "widgetName": "BadgeButton",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Shows a button containing a colored badge or label",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {
@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 52705
   },
   "testProject": {

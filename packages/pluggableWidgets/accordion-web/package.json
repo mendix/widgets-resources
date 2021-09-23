@@ -1,7 +1,7 @@
 {
   "name": "accordion-web",
   "widgetName": "Accordion",
-  "version": "1.1.1",
+  "version": "2.0.0",
   "description": "A Mendix pluggable widget to display expandable list items.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
@@ -14,7 +14,7 @@
     "developmentPort": 3000
   },
   "marketplace": {
-    "minimumMXVersion": "9.0.5",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 117895
   },
   "testProject": {

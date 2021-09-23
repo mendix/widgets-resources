@@ -4,9 +4,8 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Switch</name>
     <description>Toggle a boolean attribute</description>
-    <icon>
-        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAY1BMVEUAAABV1f9VVVViYmJVVVVXV1dXV1dNsvlYWFhVVVVVVVVVVVVVVVVVVVVJsfhIsfhWVlZVVVVJsfhWVlZWVlZJsfhVVVVWVlZVVVVVVVVIsPhVVVVWVlZJsPhWVlZIsPdVVVUhgB8dAAAAH3RSTlMABgwNISMmKzE/VFp1gY+Uqq69vsfV2Nns8vPz+v39w1yAsQAAAP9JREFUeNrtlcsSgjAMRS/I+40IKIrw/19pgzMdKprByYZFzy5Mc2lumxQWi8VyUKK86e8zw71v8gi/SLp5F12Cb3iXeTcXDxvi6/wH13iT/6DvjyoNXDC4QVq9V34oeMv/ax878OtlD2YVVP8zA8KiHYa2CMGSPckHw3/SzOCU47Qwlg6vQOvXZ9HR/uGcJ82ZV6AqOmgicsVHOa0oeR/IyUiHuYoqhONaYOR9qFRKrqNGRSmKyaAAR6pSGh31KgrQmgItOAKV0uuI+sfFYAoM4HCpsyQCJ5VyE5cgNlF8jOKLJL3K4maStrN4oEhHmnSoSse68GGRPm0Wi8VyTF4UHle0saM+KAAAAABJRU5ErkJggg==
-    </icon>
+    <studioProCategory>Input elements</studioProCategory>
+    <studioCategory>Input Elements</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
