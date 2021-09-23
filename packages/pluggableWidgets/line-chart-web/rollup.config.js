@@ -9,7 +9,7 @@ export default args => {
     const production = Boolean(args.configProduction);
     const outDir = join(__dirname, "dist/tmp/widgets/com/mendix/shared");
     const result = args.configDefaultConfig;
-    const [jsConfig, mJsConfig] = result;
+    const [jsConfig, mJsConfig, editorPreviewConfig] = result;
 
     // We define the new library externals for the entry points
     const libraryExternals = [/^react-plotly\.js($|\/)/, /(^|\/)shared\/api.js$/];
@@ -19,12 +19,15 @@ export default args => {
     replaceReactPlotlyBeforeZipping(jsConfig);
     // Configuration for Modern Client (mJS)
     replaceReactPlotlyBeforeZipping(mJsConfig);
+    // Configuration
+    replaceReactPlotlyBeforeZipping(editorPreviewConfig);
 
     const externals = jsConfig.external;
 
     // We force the externals to contain the library + the just built api file
     jsConfig.external = [...externals, ...libraryExternals];
     mJsConfig.external = [...externals, ...libraryExternals];
+    jsConfig.external = [...externals, ...libraryExternals];
 
     // We add the library bundling (ES output) as the first item for rollup
     result.unshift({
