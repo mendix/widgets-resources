@@ -5,7 +5,7 @@
     <name>Switch</name>
     <description>Toggle a boolean attribute</description>
     <studioProCategory>Input elements</studioProCategory>
-    <studioCategory>Input elements</studioCategory>
+    <studioCategory>Input Elements</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">

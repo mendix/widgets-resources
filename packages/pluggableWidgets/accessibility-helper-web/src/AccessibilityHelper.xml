@@ -6,7 +6,7 @@
     <name>Accessibility helper</name>
     <description/>
     <studioProCategory>Input elements</studioProCategory>
-    <studioCategory>Input elements</studioCategory>
+    <studioCategory>Input Elements</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/widgets/accessibility-helper</helpUrl>
         <properties>
         <propertyGroup caption="General">

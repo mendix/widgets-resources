@@ -3,7 +3,7 @@
     <name>Video Player</name>
     <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
     <studioProCategory>Images, videos &amp; files</studioProCategory>
-    <studioCategory>Images, videos &amp; files</studioCategory>
+    <studioCategory>Images, Videos &amp; Files</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
