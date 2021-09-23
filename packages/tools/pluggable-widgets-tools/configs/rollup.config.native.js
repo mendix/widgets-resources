@@ -1,28 +1,24 @@
 import { existsSync, mkdirSync } from "fs";
 import { join, relative } from "path";
-import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
+import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
 import { red, yellow, blue } from "colors";
-import postcss from "postcss";
-import postcssUrl from "postcss-url";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
-import livereload from "rollup-plugin-livereload";
-import sass from "rollup-plugin-sass";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
+import { collectDependencies } from "./rollup-plugin-collect-dependencies";
 import {
     editorConfigEntry,
     isTypescript,
-    previewEntry,
     projectPath,
     sourcePath,
     widgetEntry,
@@ -45,66 +41,42 @@ export default async args => {
 
     const result = [];
 
-    ["amd", "es"].forEach(outputFormat => {
+    ["ios", "android"].forEach((os, i) => {
         result.push({
             input: widgetEntry,
             output: {
-                format: outputFormat,
-                file: join(outDir, `${outWidgetFile}.${outputFormat === "es" ? "mjs" : "js"}`),
-                sourcemap: !production ? "inline" : false
+                format: "es",
+                file: join(outDir, `${outWidgetFile}.${os}.js`),
+                sourcemap: false
             },
-            external: webExternal,
+            external: nativeExternal,
             plugins: [
-                ...getClientComponentPlugins(),
-                url({ include: imagesAndFonts, limit: 100000 }),
-                sass({
-                    output: production && outputFormat === "amd",
-                    insert: !production,
-                    include: /\.(css|sass|scss)$/,
-                    processor
+                replace({
+                    patterns: [
+                        {
+                            test: /\b(?<!\.)Platform.OS\b(?!\s*=[^=])/g,
+                            replace: `"${os}"`
+                        }
+                    ]
                 }),
-                alias({
-                    entries: {
-                        "react-hot-loader/root": join(__dirname, "hot")
-                    }
-                }),
+                ...(i === 0 ? getClientComponentPlugins() : []),
+                json(),
+                collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
                 ...getCommonPlugins({
-                    sourceMaps: !production,
-                    extensions,
-                    transpile: production,
-                    babelConfig: {
-                        presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
-                        allowAllFormats: true
-                    },
-                    external: webExternal
+                    sourceMaps: false,
+                    extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
+                    transpile: false,
+                    external: nativeExternal
                 })
             ],
-            onwarn
+            onwarn: warning => {
+                if (warning.code === "UNUSED_EXTERNAL_IMPORT" && /('|")Platform('|")/.test(warning.message)) {
+                    return;
+                }
+                onwarn(warning);
+            }
         });
     });
-
-    if (previewEntry) {
-        result.push({
-            input: previewEntry,
-            output: {
-                format: "commonjs",
-                file: join(outDir, `${widgetName}.editorPreview.js`),
-                sourcemap: !production ? "inline" : false
-            },
-            external: editorPreviewExternal,
-            plugins: [
-                sass({ output: false, include: /\.(css|sass|scss)$/, processor }),
-                ...getCommonPlugins({
-                    sourceMaps: !production,
-                    extensions,
-                    transpile: production,
-                    babelConfig: { presets: [["@babel/preset-env", { targets: { safari: "12" } }]] },
-                    external: editorPreviewExternal
-                })
-            ],
-            onwarn
-        });
-    }
 
     if (editorConfigEntry) {
         // We target Studio Pro's JS engine that supports only es5 and no source maps
@@ -194,7 +166,7 @@ export default async args => {
                   })
                 : null,
             image(),
-            production ? terser() : null,
+            production ? terser({ mangle: false }) : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define
             // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only
@@ -206,7 +178,7 @@ export default async args => {
                     await zip(outDir, mpkFile);
                     if (!production && projectPath) {
                         const widgetsPath = join(projectPath, "widgets");
-                        const deploymentPath = join(projectPath, `deployment/web/widgets`);
+                        const deploymentPath = join(projectPath, `deployment/native/widgets`);
                         // Create folder if they do not exists or directories were cleaned
                         mkdirSync(widgetsPath, { recursive: true });
                         mkdirSync(deploymentPath, { recursive: true });
@@ -230,8 +202,7 @@ export default async args => {
                         cp(join(sourcePath, `src/${widgetName}.@(tile|icon).png`), outDir);
                     }
                 }
-            ]),
-            args.watch && !production && projectPath ? livereload() : null
+            ])
         ];
     }
 
@@ -256,29 +227,20 @@ export default async args => {
             process.exit(1);
         }
     }
-
-    async function processor(css) {
-        const result = await postcss()
-            .use(postcssUrl({ url: "inline" }))
-            .process(css);
-        return result.css;
-    }
 };
 
-const extensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
-const imagesAndFonts = [
-    "**/*.svg",
-    "**/*.png",
-    "**/*.jp(e)?g",
-    "**/*.gif",
-    "**/*.webp",
-    "**/*.ttf",
-    "**/*.woff(2)?",
-    "**/*.eot"
-];
-
-const webExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/, /^big.js$/];
-
-const editorPreviewExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+const extensions = [".js", ".jsx", ".tsx", ".ts"];
 
 const editorConfigExternal = [/^mendix($|\/)/, /^react($|\/)/, /^react-dom($|\/)/];
+
+const nativeExternal = [
+    /^mendix($|\/)/,
+    /^react-native($|\/)/,
+    /^big.js$/,
+    /^react($|\/)/,
+    /^react-native-gesture-handler($|\/)/,
+    /^react-native-reanimated($|\/)/,
+    /^react-native-svg($|\/)/,
+    /^react-native-vector-icons($|\/)/,
+    /^react-navigation($|\/)/
+];

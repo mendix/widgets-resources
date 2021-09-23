@@ -31,36 +31,37 @@ function getRealCommand(cmd, toolsRoot) {
     const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
     const prettierConfigPath = existsSync(prettierConfigRootPath) ? prettierConfigRootPath : "prettier.config.js";
     const prettierCommand = `prettier --config "${prettierConfigPath}" "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
-    const rollupCommand = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
+    const rollupCommandWeb = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
+    const rollupCommandNative = `rollup --config "${join(toolsRoot, "configs/rollup.config.native.js")}"`;
 
     switch (cmd) {
         case "start:web":
         case "start:server":
         case "dev:js":
         case "dev:ts":
-            return `${rollupCommand} --watch --configPlatform=web`;
+            return `${rollupCommandWeb} --watch`;
         case "start:native":
         case "start:js:native":
         case "start:ts:native":
         case "dev:js:native":
         case "dev:ts:native":
-            return `${rollupCommand} --watch --configPlatform=native`;
+            return `${rollupCommandNative} --watch`;
         case "build:web":
         case "build:js":
         case "build:ts":
-            return `${rollupCommand} --configPlatform=web`;
+            return `${rollupCommandWeb}`;
         case "build:native":
         case "build:js:native":
         case "build:ts:native":
-            return `${rollupCommand} --configPlatform=native`;
+            return `${rollupCommandNative}`;
         case "release:web":
         case "release:js":
         case "release:ts":
-            return `${rollupCommand} --configPlatform=web --configProduction`;
+            return `${rollupCommandWeb} --configProduction`;
         case "release:native":
         case "release:js:native":
         case "release:ts:native":
-            return `${rollupCommand} --configPlatform=native --configProduction`;
+            return `${rollupCommandNative} --configProduction`;
         case "lint":
             return `${prettierCommand} --check && ${eslintCommand}`;
         case "lint:fix":
