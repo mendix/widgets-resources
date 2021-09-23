@@ -5,7 +5,7 @@
     <name>Pop-up menu</name>
     <description>Displays a set of pre-defined items within the Pop-up menu</description>
     <studioProCategory>Menus &amp; navigation</studioProCategory>
-    <studioCategory>Menus &amp; Navigation</studioCategory>
+    <studioCategory>Menus</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
