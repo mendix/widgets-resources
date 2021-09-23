@@ -8,7 +8,7 @@
         <propertyGroup caption="General">
             <propertyGroup caption="Advanced">
                 <property key="advanced" type="boolean" defaultValue="false">
-                    <caption>Advanced</caption>
+                    <caption>Enable advanced options</caption>
                     <description />
                 </property>
             </propertyGroup>
