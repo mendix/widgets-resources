@@ -1,7 +1,6 @@
 import { device } from "detox";
 /* eslint-disable no-unused-vars */
 import { Image, CropOptions } from "image-js";
-import { v4 as uuidv4 } from "uuid";
 
 const RESOLUTION_ANDROID = { width: 1080, height: 2160 };
 const STATUS_BAR_HEIGHT_ANDROID = 90;
@@ -26,7 +25,7 @@ interface SnapshotOptions extends CropOptions {
 }
 
 export async function expectToMatchImageSnapshot(options?: { ios?: SnapshotOptions; android?: SnapshotOptions }) {
-    const screenshotPath: string = (await device.takeScreenshot(uuidv4())) as any;
+    const screenshotPath: string = (await device.takeScreenshot("full-screenshot")) as any;
     const image = crop(await Image.load(screenshotPath), options);
     const imageBuffer = Buffer.from(await (image as any).toBuffer());
     expect(imageBuffer).toMatchImageSnapshot({
