@@ -10,3 +10,6 @@
 **/atlas/**/web/**/* @mendix/web-content
 .gitmodules @mendix/web-content
 scripts/release/createNativeModules.js @mendix/native-content
+packages/tools/pluggable-widgets-tools/configs/rollup.config.js @mendix/web-content
+packages/tools/pluggable-widgets-tools/configs/rollup.config.native.js @mendix/native-content
+packages/tools/pluggable-widgets-tools/configs/rollup-plugin-collect-dependencies.js @mendix/native-content
