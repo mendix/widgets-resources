@@ -8,13 +8,11 @@
     <studioCategory>Data Containers</studioCategory>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="Advanced">
+            <propertyGroup caption="General">
                 <property key="advancedMode" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
                     <description/>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="General">
                 <property key="datasource" type="datasource" isList="true">
                     <caption>Data source</caption>
                     <description/>

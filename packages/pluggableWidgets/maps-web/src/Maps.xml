@@ -10,7 +10,7 @@
     <properties>
         <!-- Data source -->
         <propertyGroup caption="General">
-            <propertyGroup caption="Advanced">
+            <propertyGroup caption="General">
                 <property key="advanced" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
                     <description/>

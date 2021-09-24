@@ -8,13 +8,11 @@
     <studioCategory>Menus</studioCategory>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="Advanced">
+            <propertyGroup caption="General">
                 <property key="advancedMode" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
                     <description />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="General">
                 <property key="menuTrigger" type="widgets" required="false">
                     <caption>The area to open or close the menu.</caption>
                     <description>Responsible for toggling the Pop-up menu.</description>
