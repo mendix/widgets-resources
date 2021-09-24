@@ -30,7 +30,7 @@ function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
     const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
     const prettierConfigPath = existsSync(prettierConfigRootPath) ? prettierConfigRootPath : "prettier.config.js";
-    const prettierCommand = `prettier --config "${prettierConfigPath}" "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
+    const prettierCommand = `prettier --config "${prettierConfigPath}" "{src,typings,tests/e2e}/**/*.{js,jsx,ts,tsx,scss}"`;
     const rollupCommandWeb = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
     const rollupCommandNative = `rollup --config "${join(toolsRoot, "configs/rollup.config.native.js")}"`;
 

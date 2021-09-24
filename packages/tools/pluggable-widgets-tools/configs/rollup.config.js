@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import { existsSync, mkdirSync } from "fs";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
@@ -222,6 +223,13 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
+            command(() => {
+                const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
+                const prettierConfigPath = existsSync(prettierConfigRootPath)
+                    ? prettierConfigRootPath
+                    : "prettier.config.js";
+                execSync(`prettier --write --config "${prettierConfigPath}" "typings/**/**(Props).ts"`);
+            }),
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
