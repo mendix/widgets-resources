@@ -11,7 +11,6 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
     const groups: AccordionGroups | undefined = useMemo(() => translateGroups(props.groups), [props.groups]);
 
     const generateIcon = useIconGenerator(
-        props.advancedMode,
         props.animateIcon,
         { data: props.icon?.value, loading: props.icon?.status === ValueStatus.Loading },
         { data: props.expandIcon?.value, loading: props.expandIcon?.status === ValueStatus.Loading },

@@ -7,6 +7,10 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
+                <property key="advanced" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
+                </property>
                 <property key="datasource" type="datasource" isList="true">
                     <caption>Data source</caption>
                     <description/>
@@ -235,14 +239,6 @@
                 <property key="filterSectionTitle" type="textTemplate" required="false">
                     <caption>Filter section title</caption>
                     <description>Assistive technology will read this upon reaching a filtering or sorting section.</description>
-                </property>
-            </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Advanced">
-            <propertyGroup caption="Advanced">
-                <property key="advanced" type="boolean" defaultValue="false">
-                    <caption>Advanced settings</caption>
-                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

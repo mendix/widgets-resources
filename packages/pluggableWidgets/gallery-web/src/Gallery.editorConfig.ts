@@ -28,24 +28,23 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "filtersPlaceholder");
     }
 
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, [
+            "pagination",
+            "pagingPosition",
+            "showEmptyPlaceholder",
+            "emptyPlaceholder",
+            "itemClass",
+            "filtersPlaceholder",
+            "filterList",
+            "sortList",
+            "emptyMessageTitle",
+            "filterSectionTitle"
+        ]);
+    }
+
     if (platform === "web") {
-        if (!values.advanced) {
-            hidePropertiesIn(defaultProperties, values, [
-                "pagination",
-                "pagingPosition",
-                "showEmptyPlaceholder",
-                "emptyPlaceholder",
-                "itemClass",
-                "filtersPlaceholder",
-                "filterList",
-                "sortList",
-                "emptyMessageTitle",
-                "filterSectionTitle"
-            ]);
-        }
         transformGroupsIntoTabs(defaultProperties);
-    } else {
-        hidePropertyIn(defaultProperties, values, "advanced");
     }
 
     return defaultProperties;

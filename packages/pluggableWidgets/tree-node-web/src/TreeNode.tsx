@@ -29,7 +29,7 @@ export function TreeNode(props: TreeNodeContainerProps): ReactElement {
             items={items}
             isUserDefinedLeafNode={!props.hasChildren}
             startExpanded={props.startExpanded}
-            showCustomIcon={props.advancedMode && (Boolean(props.expandedIcon) || Boolean(props.collapsedIcon))}
+            showCustomIcon={Boolean(props.expandedIcon) || Boolean(props.collapsedIcon)}
             iconPlacement={props.showIcon}
             expandedIcon={expandedIcon}
             collapsedIcon={collapsedIcon}

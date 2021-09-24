@@ -14,9 +14,10 @@ export default function Maps(props: MapsContainerProps): ReactNode {
     const [locations] = useLocationResolver(
         props.markers,
         props.dynamicMarkers,
-        !props.advanced
-            ? props.apiKeyExp?.value ?? props.apiKey
-            : props.geodecodeApiKeyExp?.value ?? props.geodecodeApiKey
+        props.geodecodeApiKeyExp?.value ??
+            (props.geodecodeApiKey || undefined) ??
+            props.apiKeyExp?.value ??
+            props.apiKey
     );
     const [currentLocation, setCurrentLocation] = useState<Marker>();
 
@@ -26,7 +27,7 @@ export default function Maps(props: MapsContainerProps): ReactNode {
                 .then(setCurrentLocation)
                 .catch(e => console.error(e));
         }
-    }, []);
+    }, [props.showCurrentLocation]);
 
     return (
         <MapSwitcher

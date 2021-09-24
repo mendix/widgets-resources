@@ -10,6 +10,10 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
+                <property key="advancedMode" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description/>
+                </property>
                 <property key="groups" type="object" isList="true" required="true">
                     <caption>Groups</caption>
                     <description/>
@@ -139,12 +143,6 @@
                     <description>Animate the icon when the group is collapsing or expanding.</description>
                 </property>
             </propertyGroup>
-        </propertyGroup>
-        <propertyGroup caption="Advanced">
-            <property key="advancedMode" type="boolean" defaultValue="false">
-                <caption>Advanced options</caption>
-                <description/>
-            </property>
         </propertyGroup>
     </properties>
 </widget>

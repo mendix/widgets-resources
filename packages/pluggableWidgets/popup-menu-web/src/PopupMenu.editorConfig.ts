@@ -8,7 +8,8 @@ import {
     RowLayoutProps,
     SelectableProps,
     StructurePreviewProps,
-    TextProps
+    TextProps,
+    transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { BasicItemsPreviewType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
@@ -70,6 +71,11 @@ export function getProperties(
     } else {
         hidePropertyIn(defaultProperties, values, "basicItems");
     }
+
+    if (target === "web") {
+        transformGroupsIntoTabs(defaultProperties);
+    }
+
     return defaultProperties;
 }
 
