@@ -10,5 +10,6 @@ module.exports = deepmerge(base, {
         "no-unused-expressions": "off",
         "@typescript-eslint/no-unused-expressions": "error",
         "no-undef": "off"
-    }
+    },
+    ignorePatterns: ["packages/pluggableWidgets/*/typings"]
 });
