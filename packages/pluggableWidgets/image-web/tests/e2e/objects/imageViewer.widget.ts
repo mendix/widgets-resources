@@ -1,6 +1,6 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
 
-class ImageViewer {
+class Image {
     name: string;
 
     constructor(name: string) {
@@ -32,4 +32,4 @@ class ImageViewer {
     }
 }
 
-export default ImageViewer;
+export default Image;

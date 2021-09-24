@@ -1207,6 +1207,29 @@
                 {
                     "name": "Scale-down",
                     "class": "img-scale-down"
+                },
+                {
+                    "name": "Auto",
+                    "class": "img-auto"
+                }
+            ]
+        },
+        {
+            "name": "Opacity",
+            "type": "Dropdown",
+            "description": "Change the opacity of the image.",
+            "options": [
+                {
+                    "name": "Low",
+                    "class": "img-opacity-low"
+                },
+                {
+                    "name": "Medium",
+                    "class": "img-opacity-medium"
+                },
+                {
+                    "name": "High",
+                    "class": "img-opacity-high"
                 }
             ]
         }

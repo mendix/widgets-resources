@@ -1,7 +1,7 @@
 import { ValueStatus } from "mendix";
 import { createElement, FunctionComponent, useCallback } from "react";
 import { ImageContainerProps } from "../typings/ImageProps";
-import { ImageViewer as ImageViewerComponent, ImageViewerImageProps } from "./components/Image/index";
+import { Image as ImageComponent, ImageType } from "./components/Image/index";
 
 function getImageProps({
     datasource,
@@ -9,8 +9,8 @@ function getImageProps({
     imageObject,
     imageUrl,
     defaultImageDynamic
-}: ImageContainerProps): ImageViewerImageProps {
-    const fallback: ImageViewerImageProps = {
+}: ImageContainerProps): ImageType {
+    const fallback: ImageType = {
         type: "image",
         image: undefined
     };
@@ -69,7 +69,7 @@ export const Image: FunctionComponent<ImageContainerProps> = props => {
     const altText = props.alternativeText?.status === ValueStatus.Available ? props.alternativeText.value : undefined;
 
     return (
-        <ImageViewerComponent
+        <ImageComponent
             class={props.class}
             style={props.style}
             widthUnit={props.widthUnit}
@@ -84,6 +84,8 @@ export const Image: FunctionComponent<ImageContainerProps> = props => {
             image={image}
             altText={altText}
             displayAs={props.displayAs}
+            renderAsBackground={props.datasource !== "icon" && props.isBackgroundImage}
+            backgroundImageContent={props.children}
         />
     );
 };
