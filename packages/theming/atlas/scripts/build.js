@@ -65,14 +65,12 @@ async function main() {
                 closeOnSigint(watcher);
             });
         }
-
-        await buildAndCopyAtlas(true, outputDir);
     } else {
         if (sassValidationEnabled) {
             validateSass(mode === "start");
         }
-        await buildAndCopyAtlas(false, outputDir);
     }
+    await buildAndCopyAtlas(mode === "start", outputDir);
 }
 
 function debounce(func, waitFor) {

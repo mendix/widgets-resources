@@ -1,0 +1,119 @@
+/**
+    Classes for React Date-Picker font-unit and color adjustments
+*/
+$day-color: #555 !default;
+$outside-month-color: #c8c8c8 !default;
+$text-color: #fff !default;
+$border-color: #d7d7d7 !default;
+
+.react-datepicker {
+    font-size: 1em;
+    border: 1px solid $border-color;
+}
+
+.react-datepicker-wrapper {
+    display: flex;
+    flex: 1;
+}
+
+.react-datepicker__input-container {
+    display: flex;
+    flex: 1;
+}
+
+.react-datepicker__header {
+    padding-top: 0.8em;
+    background-color: $background-color;
+    border-color: transparent;
+}
+
+.react-datepicker__header__dropdown {
+    margin: 8px 0 4px 0; //4px due to the header contains 4px already
+}
+
+.react-datepicker__year-dropdown-container {
+    margin-left: 8px;
+}
+
+.react-datepicker__month {
+    margin: 4px 4px 8px 4px; //4px due to the rows already contains 4px each day
+}
+
+.react-datepicker__month-container {
+    font-weight: normal;
+}
+
+.react-datepicker__day-name,
+.react-datepicker__day {
+    width: 2em;
+    line-height: 2em;
+    margin: 4px;
+}
+
+.react-datepicker__day {
+    color: $day-color;
+    border-radius: 50%;
+
+    &:hover {
+        border-radius: 50%;
+        color: $brand-primary;
+        background-color: $hover-color;
+    }
+}
+
+.react-datepicker__day-name {
+    color: $brand-primary;
+    font-weight: bold;
+}
+
+.react-datepicker__day--outside-month {
+    color: $outside-month-color;
+}
+
+.react-datepicker__day--today,
+.react-datepicker__day--keyboard-selected {
+    color: $brand-primary;
+    background-color: $hover-color;
+}
+
+.react-datepicker__day--selected {
+    background-color: $brand-primary;
+    color: $text-color;
+
+    &:hover {
+        border-radius: 50%;
+        background-color: $brand-primary;
+        color: $text-color;
+    }
+}
+
+.react-datepicker__current-month {
+    font-size: 1em;
+    font-weight: normal;
+}
+
+.react-datepicker__navigation {
+    top: 1em;
+    line-height: 1.7em;
+    border: 0.45em solid transparent;
+}
+
+.react-datepicker__navigation--previous {
+    border-right-color: #ccc;
+    left: 8px;
+    border: none;
+}
+
+.react-datepicker__navigation--next {
+    border-left-color: #ccc;
+    right: 8px;
+    border: none;
+}
+
+/**
+Space between the fields and the popup
+ */
+.react-datepicker-popper[data-placement^="bottom"] {
+    margin-top: unset;
+    padding-top: 8px;
+}
