@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync } from "fs";
 import { join, relative } from "path";
+import { exec } from "child_process";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
@@ -35,7 +36,7 @@ const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${
 
 export default async args => {
     const production = Boolean(args.configProduction);
-    if (!production && projectPath) {
+    if (projectPath) {
         console.info(blue(`Project Path: ${projectPath}`));
     }
 
@@ -176,14 +177,14 @@ export default async args => {
                 async () => {
                     mkdirSync(mpkDir, { recursive: true });
                     await zip(outDir, mpkFile);
-                    if (!production && projectPath) {
+                    if (projectPath) {
+                        if (args.watch) {
+                            const deploymentPath = join(projectPath, `deployment/native/widgets`);
+                            mkdirSync(deploymentPath, { recursive: true });
+                            cp("-r", join(outDir, "*"), deploymentPath);
+                        }
                         const widgetsPath = join(projectPath, "widgets");
-                        const deploymentPath = join(projectPath, `deployment/native/widgets`);
-                        // Create folder if they do not exists or directories were cleaned
                         mkdirSync(widgetsPath, { recursive: true });
-                        mkdirSync(deploymentPath, { recursive: true });
-                        // Copy files to deployment and widgets folder
-                        cp("-r", join(outDir, "*"), deploymentPath);
                         cp(mpkFile, widgetsPath);
                     }
                 }
@@ -194,6 +195,7 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
+            execShellCommand(`npx pluggable-widgets-tools format`, sourcePath),
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
@@ -228,6 +230,23 @@ export default async args => {
         }
     }
 };
+
+function execShellCommand(cmd, workingDirectory = process.cwd()) {
+    return new Promise((resolve, reject) => {
+        exec(cmd, { cwd: workingDirectory }, (error, stdout, stderr) => {
+            if (error) {
+                console.warn(stderr);
+                console.warn(stdout);
+                reject(error);
+            }
+            if (stderr) {
+                console.warn(stderr);
+            }
+            console.log(stdout);
+            resolve(stdout);
+        });
+    });
+}
 
 const extensions = [".js", ".jsx", ".tsx", ".ts"];
 
