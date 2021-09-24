@@ -3,7 +3,6 @@ const adapter = require("detox/runners/jest/adapter");
 const specReporter = require("detox/runners/jest/specReporter");
 const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
-const path = require("path");
 const { join, resolve } = require("path");
 
 jest.setTimeout(300000);
