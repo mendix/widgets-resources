@@ -2,8 +2,8 @@
 <widget id="com.mendix.widget.native.floatingactionbutton.FloatingActionButton" supportedPlatform="Native" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Floating action button</name>
     <description>Display a circular floating icon button.</description>
-    <studioProCategory>Undefined</studioProCategory>
-    <studioCategory>Undefined</studioCategory>
+    <studioProCategory>Buttons</studioProCategory>
+    <studioCategory>Buttons</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Button">

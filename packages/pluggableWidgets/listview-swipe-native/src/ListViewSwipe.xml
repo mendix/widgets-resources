@@ -5,8 +5,8 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>List View Swipe</name>
     <description/>
-    <studioProCategory>Undefined</studioProCategory>
-    <studioCategory>Undefined</studioCategory>
+    <studioProCategory>Interactions</studioProCategory>
+    <studioCategory>Interactions</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <property key="content" type="widgets">

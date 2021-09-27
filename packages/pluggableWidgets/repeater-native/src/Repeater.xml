@@ -2,8 +2,8 @@
 <widget id="com.mendix.widget.native.repeater.Repeater" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Repeater</name>
     <description>Iterates over a data source and render a content</description>
-    <studioProCategory>Undefined</studioProCategory>
-    <studioCategory>Undefined</studioCategory>
+    <studioProCategory>Data containers</studioProCategory>
+    <studioCategory>Data containers</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">

@@ -2,8 +2,8 @@
 <widget id="com.mendix.widget.native.webview.WebView" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Web view</name>
     <description>Display an external web page or load custom HTML.</description>
-    <studioProCategory>Undefined</studioProCategory>
-    <studioCategory>Undefined</studioCategory>
+    <studioProCategory>Display</studioProCategory>
+    <studioCategory>Display</studioCategory>
     <properties>
         <propertyGroup caption="Data source">
             <property key="url" type="textTemplate" required="false">

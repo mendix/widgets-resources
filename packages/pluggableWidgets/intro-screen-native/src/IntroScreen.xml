@@ -5,8 +5,8 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Intro screen</name>
     <description />
-    <studioProCategory>Undefined</studioProCategory>
-    <studioCategory>Undefined</studioCategory>
+    <studioProCategory>Display</studioProCategory>
+    <studioCategory>Display</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Content">
