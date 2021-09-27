@@ -3,7 +3,7 @@ name: DG Release Slack Notification
 on:
     push:
         tags:
-            - "data-grid-2-v*"
+            - "data-widgets-v*"
 
 jobs:
     notify:
@@ -16,8 +16,8 @@ jobs:
                   SLACK_CHANNEL: ${{ secrets.SLACK_WORKFLOW_CHANNEL }}
                   SLACK_COLOR: ${{ job.status }}
                   SLACK_ICON: ${{ secrets.WEBCONTENT_BOT_IMAGE }}
-                  SLACK_MESSAGE: "A new version of Data Grid v2 module was released :rocket:. Please update your team's modules/starter apps."
-                  SLACK_TITLE: "New Data Grid v2 release"
+                  SLACK_MESSAGE: "A new version of Data Widgets module was released :rocket:. Please update your team's modules/starter apps."
+                  SLACK_TITLE: "New Data Widgets release"
                   SLACK_USERNAME: ${{ secrets.WEBCONTENT_BOT_NAME }}
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WORKFLOW_WEBHOOK }}
                   SLACK_FOOTER: "Created by Web Content"
