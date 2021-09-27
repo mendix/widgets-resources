@@ -13,7 +13,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
         class="filter-selector-content"
       >
         <button
-          aria-controls="filter-test-filter-selectors"
+          aria-controls="DateFilter1-filter-selectors"
           aria-expanded="false"
           aria-haspopup="true"
           class="btn btn-default filter-selector-button button-icon equal"
@@ -24,7 +24,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
     </div>
     <span
       class="sr-only"
-      id="filter-test-label"
+      id="DateFilter1-label"
     />
     <div
       class="react-datepicker-wrapper"
@@ -33,7 +33,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
         class="react-datepicker__input-container"
       >
         <input
-          aria-labelledby="filter-test-label"
+          aria-labelledby="DateFilter1-label"
           class="form-control filter-input"
           type="text"
           value=""
@@ -68,7 +68,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
         class="filter-selector-content"
       >
         <button
-          aria-controls="filter-test-filter-selectors"
+          aria-controls="DateFilter1-filter-selectors"
           aria-expanded="false"
           aria-haspopup="true"
           class="btn btn-default filter-selector-button button-icon equal"
@@ -79,7 +79,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
     </div>
     <span
       class="sr-only"
-      id="filter-test-label"
+      id="DateFilter1-label"
     />
     <div
       class="react-datepicker-wrapper"
@@ -88,7 +88,7 @@ exports[`Date Filter with single attribute renders correctly 1`] = `
         class="react-datepicker__input-container"
       >
         <input
-          aria-labelledby="filter-test-label"
+          aria-labelledby="DateFilter1-label"
           class="form-control filter-input"
           type="text"
           value=""
