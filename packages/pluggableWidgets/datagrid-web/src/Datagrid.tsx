@@ -8,7 +8,7 @@ import classNames from "classnames";
 import {
     FilterFunction,
     FilterType,
-    getUUID,
+    generateUUID,
     useFilterContext,
     useMultipleFiltering
 } from "@mendix/piw-utils-internal/components/web";
@@ -16,7 +16,7 @@ import { isAvailable } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
-    const id = useRef(`DataGrid${getUUID()}`);
+    const id = useRef(`DataGrid${generateUUID()}`);
 
     const [sortParameters, setSortParameters] = useState<{ columnIndex: number; desc: boolean } | undefined>(undefined);
     const isInfiniteLoad = props.pagination === "virtualScrolling";

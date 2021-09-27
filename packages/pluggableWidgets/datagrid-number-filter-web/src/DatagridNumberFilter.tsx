@@ -2,7 +2,7 @@ import { createElement, ReactElement, useRef } from "react";
 import { DatagridNumberFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridNumberFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert, FilterType, getFilterDispatcher, getUUID } from "@mendix/piw-utils-internal/components/web";
+import { Alert, FilterType, getFilterDispatcher, generateUUID } from "@mendix/piw-utils-internal/components/web";
 import { Big } from "big.js";
 
 import {
@@ -21,7 +21,7 @@ import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
 
 export default function DatagridNumberFilter(props: DatagridNumberFilterContainerProps): ReactElement {
-    const id = useRef(`NumberFilter${getUUID()}`);
+    const id = useRef(`NumberFilter${generateUUID()}`);
 
     const FilterContext = getFilterDispatcher();
     const alertMessage = (

@@ -5,7 +5,7 @@ import { FilterComponent } from "./components/FilterComponent";
 import { DatagridDateFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridDateFilterProps";
 import { registerLocale } from "react-datepicker";
 import * as locales from "date-fns/locale";
-import { Alert, FilterType, getFilterDispatcher, getUUID } from "@mendix/piw-utils-internal/components/web";
+import { Alert, FilterType, getFilterDispatcher, generateUUID } from "@mendix/piw-utils-internal/components/web";
 
 import { changeTimeToMidnight } from "./utils/utils";
 import { addDays } from "date-fns";
@@ -29,7 +29,7 @@ interface Locale {
 }
 
 export default function DatagridDateFilter(props: DatagridDateFilterContainerProps): ReactElement | null {
-    const id = useRef(`DateFilter${getUUID()}`);
+    const id = useRef(`DateFilter${generateUUID()}`);
     const { languageTag = "en-US", patterns } = (window as any).mx.session.getConfig().locale;
 
     const [language] = languageTag.split("-");

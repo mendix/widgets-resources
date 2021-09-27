@@ -1,4 +1,4 @@
-export function getUUID(): number {
+export function generateUUID(): number {
     const UUIDLocation = "com.mendix.widgets.web.UUID";
 
     if (!(window as any)[UUIDLocation]) {
