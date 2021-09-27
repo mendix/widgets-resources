@@ -2,6 +2,7 @@
 
 exports[`Timeline renders correctly with basic props 1`] = `
 <TimelineComponent
+  class="test"
   customVisualization={false}
   data={
     Map {
@@ -24,7 +25,6 @@ exports[`Timeline renders correctly with basic props 1`] = `
     }
   }
   groupEvents={true}
-  name="timeline"
   ungroupedEventsPosition="end"
 />
 `;
