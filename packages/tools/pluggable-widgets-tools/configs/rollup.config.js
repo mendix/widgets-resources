@@ -223,13 +223,15 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            command(() => {
-                const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
-                const prettierConfigPath = existsSync(prettierConfigRootPath)
-                    ? prettierConfigRootPath
-                    : "prettier.config.js";
-                execSync(`prettier --write --config "${prettierConfigPath}" "typings/**/**(Props).ts"`);
-            }),
+            isTypescript
+                ? command(() => {
+                      const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
+                      const prettierConfigPath = existsSync(prettierConfigRootPath)
+                          ? prettierConfigRootPath
+                          : "prettier.config.js";
+                      execSync(`prettier --write --config "${prettierConfigPath}" "typings/**/**(Props).ts"`);
+                  })
+                : null,
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
