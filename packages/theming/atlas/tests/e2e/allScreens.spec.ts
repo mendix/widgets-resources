@@ -20,6 +20,7 @@ const pagesWithTimeout = [
     "/p/alerts",
     "/p/progress-circles",
     "/p/maps",
+    "/p/web-grid",
     "/p/web-dashboard-actioncenter",
     "/p/web-dashboard-transactions",
     "/p/web-detail-timeline",
@@ -39,6 +40,7 @@ describe("Screenshots of the pages for", () => {
                 const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
+                    sprintrFeedbackWidget.waitForDisplayed({ timeout: 15000 });
                     browser.pause(10000);
                 }
 
