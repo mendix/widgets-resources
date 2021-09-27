@@ -5,6 +5,7 @@ import { ImageUi, ImageContentProps } from "./ui";
 import { Lightbox, LightboxProps } from "../Lightbox";
 
 import "../../ui/Image.scss";
+import classNames from "classnames";
 
 export type ImageType = {
     type: "image" | "icon";
@@ -89,7 +90,8 @@ export const Image: FunctionComponent<ImageProps> = ({
     const content =
         type === "image" ? (
             <ImageUi.ContentImage
-                image={processImageLink(image, displayAs)}
+                className={classNames({ "img-thumbnail": displayAs === "thumbnail" })}
+                image={previewMode ? image : processImageLink(image, displayAs)}
                 height={height}
                 heightUnit={heightUnit}
                 width={width}

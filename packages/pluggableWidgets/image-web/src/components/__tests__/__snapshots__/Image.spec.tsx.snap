@@ -27,6 +27,7 @@ exports[`Image renders the structure with an image 1`] = `
   class="mx-image-viewer mx-image-viewer-responsive"
 >
   <img
+    class=""
     src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
     style="height:300px;width:300px"
   />
@@ -38,6 +39,7 @@ exports[`Image renders the structure with an image and percentage dimensions 1`]
   class="mx-image-viewer mx-image-viewer-responsive"
 >
   <img
+    class=""
     src="https://pbs.twimg.com/profile_images/1905729715/llamas_1_.jpg"
     style="height:;width:100%"
   />

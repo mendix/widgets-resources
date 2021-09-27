@@ -76,12 +76,14 @@ export interface ImageContentImage extends ImageContentProps {
     heightUnit: HeightUnitEnum;
     width: number;
     widthUnit: WidthUnitEnum;
+    className?: string;
 }
 
 function ContentImage(props: ImageContentImage): ReactElement {
     const onClickProps = getImageContentOnClickProps(props.onClick);
     return (
         <img
+            className={props.className}
             src={props.image}
             style={{
                 ...props.style,
@@ -111,7 +113,6 @@ function getImageContentOnClickProps(onClick: ImageContentProps["onClick"]): HTM
 }
 
 interface BackgroundImageProps extends ImageContentImage {
-    className?: string;
     children: ReactNode;
 }
 
