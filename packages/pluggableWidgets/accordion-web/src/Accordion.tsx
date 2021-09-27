@@ -1,6 +1,6 @@
 import { createElement, ReactElement, useMemo, useRef } from "react";
 import { ValueStatus } from "mendix";
-import { generateUUID } from "@mendix/piw-utils-internal/dist/components/web";
+import { generateUUID } from "@mendix/piw-utils-internal/components/web";
 
 import { Accordion as AccordionComponent, AccordionGroups } from "./components/Accordion";
 import { Header } from "./components/Header";
