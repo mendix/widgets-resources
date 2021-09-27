@@ -6,7 +6,7 @@ import { usePositionObserver } from "./usePositionObserver";
 
 interface FilterSelectorProps<T> {
     ariaLabel?: string;
-    name?: string;
+    id?: string;
     defaultFilter: T;
     onChange: (value: T) => void;
     options: Array<{ value: T; label: string }>;
@@ -37,7 +37,7 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
     const filterSelectors = createPortal(
         <ul
             ref={filterSelectorsRef}
-            id={`${props.name}-filter-selectors`}
+            id={`${props.id}-filter-selectors`}
             className="filter-selectors"
             role="menu"
             data-focusindex={0}
@@ -88,7 +88,7 @@ export function FilterSelector<T>(props: FilterSelectorProps<T>): ReactElement {
         <div className="filter-selector">
             <div className="filter-selector-content" ref={componentRef}>
                 <button
-                    aria-controls={`${props.name}-filter-selectors`}
+                    aria-controls={`${props.id}-filter-selectors`}
                     aria-expanded={show}
                     aria-haspopup
                     aria-label={props.ariaLabel}

@@ -1,13 +1,15 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useRef } from "react";
 import { DatagridDropdownFilterContainerProps } from "../typings/DatagridDropdownFilterProps";
 import { ValueStatus, ListAttributeValue } from "mendix";
 import { FilterComponent, FilterOption } from "./components/FilterComponent";
-import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal/components/web";
+import { Alert, FilterType, getFilterDispatcher, getUUID } from "@mendix/piw-utils-internal/components/web";
 
 import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
+    const id = useRef(`DropdownFilter${getUUID()}`);
+
     const FilterContext = getFilterDispatcher();
     const isAllOptionsReady = props.filterOptions.every(
         ({ value, caption }) => value.status === ValueStatus.Available && caption.status === ValueStatus.Available
@@ -84,7 +86,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         defaultValue={defaultValues ?? props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
-                        name={props.name}
+                        id={id.current}
                         options={options}
                         styles={props.style}
                         tabIndex={props.tabIndex}

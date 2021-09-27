@@ -15,7 +15,7 @@ interface FilterComponentProps {
     defaultValue?: string;
     emptyOptionCaption?: string;
     multiSelect?: boolean;
-    name?: string;
+    id?: string;
     options: FilterOption[];
     tabIndex?: number;
     styles?: CSSProperties;
@@ -130,7 +130,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     const optionsComponent = createPortal(
         <ul
             ref={optionsRef}
-            id={`${props.name}-dropdown-list`}
+            id={`${props.id}-dropdown-list`}
             className="dropdown-list"
             role="menu"
             data-focusindex={0}
@@ -167,11 +167,11 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     {props.multiSelect ? (
                         <Fragment>
                             <input
-                                id={`${props.name}_checkbox_toggle_${index}`}
+                                id={`${props.id}_checkbox_toggle_${index}`}
                                 type="checkbox"
                                 checked={selectedFilters.includes(option)}
                             />
-                            <label htmlFor={`${props.name}_checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
+                            <label htmlFor={`${props.id}_checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
                                 {option.caption}
                             </label>
                         </Fragment>
@@ -217,7 +217,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     }
                 }}
                 aria-expanded={show}
-                aria-controls={`${props.name}-dropdown-list`}
+                aria-controls={`${props.id}-dropdown-list`}
                 aria-label={props.ariaLabel}
             />
             {show && optionsComponent}

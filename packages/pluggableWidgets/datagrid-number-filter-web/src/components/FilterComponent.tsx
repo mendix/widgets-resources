@@ -11,7 +11,7 @@ interface FilterComponentProps {
     className?: string;
     defaultFilter: DefaultFilterEnum;
     delay: number;
-    name?: string;
+    id?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
     screenReaderInputCaption?: string;
@@ -58,7 +58,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             {props.adjustable && (
                 <FilterSelector
                     ariaLabel={props.screenReaderButtonCaption}
-                    name={props.name}
+                    id={props.id}
                     defaultFilter={props.defaultFilter}
                     onChange={useCallback(
                         type => {

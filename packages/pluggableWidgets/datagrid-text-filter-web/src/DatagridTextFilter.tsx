@@ -1,8 +1,8 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useRef } from "react";
 import { DatagridTextFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal/components/web";
+import { Alert, FilterType, getFilterDispatcher, getUUID } from "@mendix/piw-utils-internal/components/web";
 
 import {
     attribute,
@@ -23,6 +23,8 @@ import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {
+    const id = useRef(`TextFilter${getUUID()}`);
+
     const FilterContext = getFilterDispatcher();
     const alertMessage = (
         <Alert bootstrapStyle="danger">
@@ -81,7 +83,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                         className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
-                        name={props.name}
+                        id={id.current}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}

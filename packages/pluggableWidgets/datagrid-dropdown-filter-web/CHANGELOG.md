@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - We renamed the widget to Number filter.
+- We fixed an issue that breaks accessibility.
 
 ## [1.3.1] - 2021-07-16
 

@@ -1,8 +1,8 @@
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useRef } from "react";
 import { DatagridNumberFilterContainerProps, DefaultFilterEnum } from "../typings/DatagridNumberFilterProps";
 
 import { FilterComponent } from "./components/FilterComponent";
-import { Alert, FilterType, getFilterDispatcher } from "@mendix/piw-utils-internal/components/web";
+import { Alert, FilterType, getFilterDispatcher, getUUID } from "@mendix/piw-utils-internal/components/web";
 import { Big } from "big.js";
 
 import {
@@ -21,6 +21,8 @@ import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
 
 export default function DatagridNumberFilter(props: DatagridNumberFilterContainerProps): ReactElement {
+    const id = useRef(`NumberFilter${getUUID()}`);
+
     const FilterContext = getFilterDispatcher();
     const alertMessage = (
         <Alert bootstrapStyle="danger">
@@ -79,7 +81,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                         className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
-                        name={props.name}
+                        id={props.id}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
