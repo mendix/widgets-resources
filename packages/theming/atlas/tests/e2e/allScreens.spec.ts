@@ -21,7 +21,9 @@ const pagesWithTimeout = [
     "/p/progress-circles",
     "/p/maps",
     "/p/web-dashboard-actioncenter",
-    "/p/web-dashboard-transactions"
+    "/p/web-dashboard-transactions",
+    "/p/web-detail-timeline",
+    "/p/treeviews"
 ];
 
 describe("Screenshots of the pages for", () => {
@@ -37,7 +39,7 @@ describe("Screenshots of the pages for", () => {
                 const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(5000);
+                    browser.pause(10000);
                 }
 
                 browser.saveElement($("#content"), url, {
