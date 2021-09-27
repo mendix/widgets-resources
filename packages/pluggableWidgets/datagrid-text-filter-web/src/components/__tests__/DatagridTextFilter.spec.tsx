@@ -27,6 +27,10 @@ const mxObject = {
 };
 
 describe("Text Filter", () => {
+    afterEach(() => {
+        delete (global as any)["com.mendix.widgets.web.UUID"];
+    });
+
     describe("with single attribute", () => {
         beforeAll(() => {
             (window as any)["com.mendix.widgets.web.filterable.filterContext"] = createContext({
