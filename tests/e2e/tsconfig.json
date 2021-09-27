@@ -1,0 +1,6 @@
+{
+    "extends": "../../packages/tools/pluggable-widgets-tools/configs/tsconfig.base.json",
+    "compilerOptions": {
+        "types": ["jest-image-snapshot"]
+    }
+}

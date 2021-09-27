@@ -18,3 +18,4 @@ mendixProject
 **/screenshot
 **/screenshot-results
 **/tests/testProject
+**/pluggableWidgets/**/artifacts
