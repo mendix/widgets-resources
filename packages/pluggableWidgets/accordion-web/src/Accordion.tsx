@@ -1,5 +1,6 @@
-import { createElement, ReactElement, useMemo } from "react";
+import { createElement, ReactElement, useMemo, useRef } from "react";
 import { ValueStatus } from "mendix";
+import { getUUID } from "@mendix/piw-utils-internal/dist/components/web";
 
 import { Accordion as AccordionComponent, AccordionGroups } from "./components/Accordion";
 import { Header } from "./components/Header";
@@ -8,6 +9,8 @@ import { useIconGenerator } from "./utils/iconGenerator";
 import { AccordionContainerProps, GroupsType } from "../typings/AccordionProps";
 
 export function Accordion(props: AccordionContainerProps): ReactElement | null {
+    const id = useRef(getUUID());
+
     const groups: AccordionGroups | undefined = useMemo(() => translateGroups(props.groups), [props.groups]);
 
     const generateIcon = useIconGenerator(
@@ -23,7 +26,7 @@ export function Accordion(props: AccordionContainerProps): ReactElement | null {
 
     return (
         <AccordionComponent
-            id={props.name}
+            id={`Accordion${id.current}`}
             class={props.class}
             style={props.style}
             tabIndex={props.tabIndex}
