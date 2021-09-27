@@ -23,7 +23,7 @@ async function main() {
     let outputDir;
 
     if (mode === "build" || mode === "start") {
-        const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH; // should be an absolute path.
+        const MX_PROJECT_PATH = process.env.ATLAS_MX_PROJECT_PATH ?? process.env.MX_PROJECT_PATH; // should be an absolute path.
         outputDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
 
         const toRemoveDirs = [

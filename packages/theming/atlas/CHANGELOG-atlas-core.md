@@ -5,8 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Added
-- We added styles, exclusion variables and design properties for Gallery widget.
+### Changed
+- We fixed a problem with the styles of groupbox widget not respecting the header mode element size (Ticket #131119).
 
 ## [3.0.6] - 2021-08-12
 
