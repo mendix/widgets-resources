@@ -6,6 +6,7 @@
     <description/>
     <studioProCategory>Data controls</studioProCategory>
     <studioCategory>Data Controls</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2#7-1-date-filter</helpUrl>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">

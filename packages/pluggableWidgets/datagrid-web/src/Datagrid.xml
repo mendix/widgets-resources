@@ -4,6 +4,7 @@
     <description/>
     <studioProCategory>Data containers</studioProCategory>
     <studioCategory>Data Containers</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2</helpUrl>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
