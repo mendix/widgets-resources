@@ -12,7 +12,7 @@ const screenShotsFolder = join(cwd, "tests/e2e/screenshot-baseline");
 
 // TODO [https://mendix.atlassian.net/browse/WT-3106]: Cannot save big screens due to wdio-image-service/webdriver-image-comparison/canvas failure
 // Need to keep the list until this fixed: https://github.com/wswebcreation/webdriver-image-comparison/issues/60
-const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}"];
+const pagesToSkip = ["/p/chat-fullheight/{Id}", "/p/chat-variants/{Id}", "/p/treeviews"];
 
 // Mostly the pages with progressbar fails since it is not CSS animations for web -_-. So disableCSSAnimation wont work.
 // This ends up having unstable progress circle percentage
@@ -20,8 +20,10 @@ const pagesWithTimeout = [
     "/p/alerts",
     "/p/progress-circles",
     "/p/maps",
+    "/p/web-grid",
     "/p/web-dashboard-actioncenter",
-    "/p/web-dashboard-transactions"
+    "/p/web-dashboard-transactions",
+    "/p/web-detail-timeline"
 ];
 
 describe("Screenshots of the pages for", () => {
@@ -37,7 +39,7 @@ describe("Screenshots of the pages for", () => {
                 const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(5000);
+                    browser.pause(10000);
                 }
 
                 browser.saveElement($("#content"), url, {
