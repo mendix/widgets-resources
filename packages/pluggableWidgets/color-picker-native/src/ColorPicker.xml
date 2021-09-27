@@ -5,8 +5,8 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Color picker</name>
     <description>Pick a color from a circular color input</description>
-    <studioProCategory>Add-ons</studioProCategory>
-    <studioCategory>Add-ons</studioCategory>
+    <studioProCategory>Input elements</studioProCategory>
+    <studioCategory>Input elements</studioCategory>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
