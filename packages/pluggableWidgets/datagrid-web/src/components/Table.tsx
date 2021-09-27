@@ -43,7 +43,7 @@ export interface TableProps<T> {
     hasMoreItems: boolean;
     headerFilters?: ReactNode;
     headerWrapperRenderer: (columnIndex: number, header: ReactElement) => ReactElement;
-    name?: string;
+    id?: string;
     numberOfItems?: number;
     paging: boolean;
     page: number;
@@ -288,7 +288,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                             <ColumnSelector
                                 columns={tableColumns}
                                 hiddenColumns={hiddenColumns}
-                                name={props.name}
+                                id={props.id}
                                 setHiddenColumns={setHiddenColumns}
                             />
                         )}

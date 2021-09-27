@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 export interface ColumnSelectorProps {
     columns: ColumnProperty[];
     hiddenColumns: string[];
-    name?: string;
+    id?: string;
     setHiddenColumns: Dispatch<SetStateAction<string[]>>;
     label?: string;
 }
@@ -41,7 +41,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
     const optionsComponent = createPortal(
         <ul
             ref={optionsRef}
-            id={`${props.name}-column-selectors`}
+            id={`${props.id}-column-selectors`}
             className="column-selectors"
             data-focusindex={0}
             role="menu"
@@ -83,11 +83,11 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
                         <input
                             checked={isVisible}
                             disabled={isVisible && props.columns.length - props.hiddenColumns.length === 1}
-                            id={`${props.name}_checkbox_toggle_${index}`}
+                            id={`${props.id}_checkbox_toggle_${index}`}
                             type="checkbox"
                             tabIndex={-1}
                         />
-                        <label htmlFor={`${props.name}_checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
+                        <label htmlFor={`${props.id}_checkbox_toggle_${index}`} style={{ pointerEvents: "none" }}>
                             {column.header}
                         </label>
                     </li>
@@ -121,7 +121,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
                     }}
                     aria-haspopup
                     aria-expanded={show}
-                    aria-controls={`${props.name}-column-selectors`}
+                    aria-controls={`${props.id}-column-selectors`}
                 >
                     <FontAwesomeIcon icon={faEye} />
                 </button>

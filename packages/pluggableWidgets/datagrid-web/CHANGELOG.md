@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - We fixed the positioning of the filters when virtual scrolling was enabled and there was no data being presented.
 - We renamed the advanced settings property to emphasize this property is about the advanced properties' activation.
+- We fixed an issue that breaks accessibility.
 
 ## [1.2.1] - 2021-07-01
 
