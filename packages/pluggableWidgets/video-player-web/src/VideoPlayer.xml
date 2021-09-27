@@ -4,6 +4,7 @@
     <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
     <studioProCategory>Images, videos &amp; files</studioProCategory>
     <studioCategory>Images, Videos &amp; Files</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/video-player</helpUrl>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">

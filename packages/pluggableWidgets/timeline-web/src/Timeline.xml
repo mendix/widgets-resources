@@ -7,6 +7,7 @@
     <description>Shows vertical timeline with events</description>
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/timeline</helpUrl>
     <properties>
         <propertyGroup caption="Data Source">
             <propertyGroup caption="Data source">

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.custom.badgebutton.BadgeButton" pluginWidget="true" offlineCapable="true"
         xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Badge button</name>
     <description/>
     <studioProCategory>Buttons</studioProCategory>
     <studioCategory>Buttons</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/badge-button</helpUrl>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">

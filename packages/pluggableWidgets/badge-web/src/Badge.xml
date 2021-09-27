@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.badge.Badge" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.custom.badge.Badge" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Badge</name>
     <description />
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/badge</helpUrl>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
