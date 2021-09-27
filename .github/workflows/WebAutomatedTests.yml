@@ -65,18 +65,16 @@ jobs:
             - name: "Fixing files permissions"
               if: failure()
               run: |
-                  sudo find ${{ github.workspace}}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
-                  sudo find ${{ github.workspace}}/packages/theming -type d -exec chmod 755 {} \;
-                  sudo find ${{ github.workspace}}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
-                  sudo find ${{ github.workspace}}/packages/theming -type f -exec chmod 644 {} \;
+                  sudo find ${{ github.workspace }}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
+                  sudo find ${{ github.workspace }}/packages/theming -type d -exec chmod 755 {} \;
+                  sudo find ${{ github.workspace }}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
+                  sudo find ${{ github.workspace }}/packages/theming -type f -exec chmod 644 {} \;
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@v2
               if: failure()
               with:
                   name: test-screenshot-results
                   path: |
-                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/diff/*.png
-                      ${{ github.workspace}}/packages/pluggableWidgets/**/tests/e2e/screenshot-results/TESTFAIL_*.png
-                      ${{ github.workspace}}/packages/theming/**/tests/e2e/screenshot-results/diff/*.png
-                      ${{ github.workspace}}/packages/theming/**/tests/e2e/screenshot-results/TESTFAIL_*.png
+                      ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/diff/**/*.png
+                      ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/TESTFAIL_*.png
                   if-no-files-found: error
