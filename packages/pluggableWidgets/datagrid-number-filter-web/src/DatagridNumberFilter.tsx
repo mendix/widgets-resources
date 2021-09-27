@@ -81,7 +81,7 @@ export default function DatagridNumberFilter(props: DatagridNumberFilterContaine
                         className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
                         delay={props.delay}
-                        id={props.id}
+                        id={id.current}
                         placeholder={props.placeholder?.value}
                         screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
