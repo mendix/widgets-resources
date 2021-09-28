@@ -4,6 +4,7 @@ const { exec } = require("child_process");
 
 const regex = {
     changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
+    changelogsIncludingUnreleased: /## \[unreleased\]\n?((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
     releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g
 };
 
@@ -106,7 +107,7 @@ async function bumpVersionInPackageJson(moduleFolder, moduleInfo) {
     return moduleInfo;
 }
 
-async function writeToChangelogs(changelogs, { nameWithSpace, changelogPath, version }) {
+async function writeToWidgetChangelogs(changelogs, { nameWithSpace, changelogPath, version }) {
     const d = new Date();
     const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
     const content = await readFile(changelogPath, "utf8");
@@ -114,6 +115,18 @@ async function writeToChangelogs(changelogs, { nameWithSpace, changelogPath, ver
     const newContent = content
         .replace(oldChangelogs, changelogs)
         .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}`);
+    await writeFile(changelogPath, newContent);
+}
+
+async function writeToModuleChangelogs(changelogs, { nameWithSpace, changelogPath, version }) {
+    const d = new Date();
+    const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+    const content = await readFile(changelogPath, "utf8");
+    const oldChangelogs = content.match(regex.changelogsIncludingUnreleased)?.[0].trim();
+    const newContent = content.replace(
+        oldChangelogs,
+        `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}${changelogs}`
+    );
     await writeFile(changelogPath, newContent);
 }
 
@@ -149,7 +162,7 @@ async function updateChangelogs(widgetsFolders, moduleInfo) {
         if (widgetChangelogs) {
             nativeWidgetsChangelogs.push(`## [${widgetInfo.version}] ${widgetInfo.nameWithSpace}\n${widgetChangelogs}`);
             console.log(`Writing "${widgetInfo.nameWithSpace}" changelogs to ${widgetInfo.changelogPath}`);
-            await writeToChangelogs(widgetChangelogs, widgetInfo);
+            await writeToWidgetChangelogs(widgetChangelogs, widgetInfo);
         }
     }
     const newModuleChangelogs = nativeWidgetsChangelogs.length
@@ -157,7 +170,7 @@ async function updateChangelogs(widgetsFolders, moduleInfo) {
         : moduleChangelogs;
     if (newModuleChangelogs) {
         console.log(`Writing "${moduleInfo.nameWithSpace}" changelogs to ${moduleInfo.changelogPath}`);
-        await writeToChangelogs(newModuleChangelogs, moduleInfo);
+        await writeToModuleChangelogs(newModuleChangelogs, moduleInfo);
     }
 
     const changelogBranchName = `${moduleInfo.nameWithDash}-release-${moduleInfo.version}`;
