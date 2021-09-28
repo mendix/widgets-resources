@@ -2,9 +2,18 @@
   "name": "nanoflow-actions-native",
   "version": "2.1.0",
   "license": "Apache-2.0",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
   "marketplace": {
     "minimumMXVersion": "9.6.0.27784",
     "marketplaceId": 109515
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/native-mobile-resources",
+    "branchName": "main"
   },
   "scripts": {
     "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nanoflowcommons",
