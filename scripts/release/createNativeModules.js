@@ -34,6 +34,7 @@ async function main() {
 async function createNMRModule() {
     console.log("Creating the Native Mobile Resource module.");
     const NMRFolder = join(process.cwd(), "packages/jsActions/mobile-resources-native");
+    console.log(NMRFolder);
     const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
     const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
     const nativeWidgetFolders = widgetFolders

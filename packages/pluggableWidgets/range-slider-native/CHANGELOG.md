@@ -5,5 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.0] RangeSlider - 2021-9-28
+
 ### Added
  - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
