@@ -1,6 +1,7 @@
 * @mendix/native-content @mendix/web-content
 **/*-native/**/* @mendix/native-content
 **/*-web/**/* @mendix/web-content
+**/data-widgets/**/* @mendix/web-content
 **/nanoflow-actions-hybrid/**/* @mendix/native-content
 **/nanoflow-actions-native/**/* @mendix/native-content
 **/mobile-resources-native/**/* @mendix/native-content
