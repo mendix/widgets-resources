@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Date Filter with multiple attributes renders correctly 1`] = `
+exports[`Date Filter with single instance with multiple attributes renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="filter-container filter-custom-class"
@@ -55,7 +55,7 @@ exports[`Date Filter with multiple attributes renders correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Date Filter with single attribute renders correctly 1`] = `
+exports[`Date Filter with single instance with single attribute renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="filter-container filter-custom-class"

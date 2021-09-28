@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dropdown Filter with single attribute DOM structure renders correctly 1`] = `
+exports[`Dropdown Filter with single instance with single attribute DOM structure renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="dropdown-container filter-custom-class"
