@@ -195,7 +195,7 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            execShellCommand(`npx pluggable-widgets-tools format`, sourcePath),
+            execShellCommand(`npx pluggable-widgets-tools format:custom-paths -- "typings/**/*.ts"`, sourcePath),
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {

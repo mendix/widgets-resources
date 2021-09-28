@@ -30,7 +30,8 @@ function getRealCommand(cmd, toolsRoot) {
     const eslintCommand = "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx src";
     const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
     const prettierConfigPath = existsSync(prettierConfigRootPath) ? prettierConfigRootPath : "prettier.config.js";
-    const prettierCommand = `prettier --config "${prettierConfigPath}" "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
+    const prettierCommandBase = `prettier --config "${prettierConfigPath}"`;
+    const prettierCommand = `${prettierCommandBase} "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
     const rollupCommandWeb = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
     const rollupCommandNative = `rollup --config "${join(toolsRoot, "configs/rollup.config.native.js")}"`;
 
@@ -68,6 +69,8 @@ function getRealCommand(cmd, toolsRoot) {
             return `${prettierCommand} --write && ${eslintCommand} --fix`;
         case "format":
             return `${prettierCommand} --write`;
+        case "format:custom-paths":
+            return `${prettierCommandBase} --write`;
         case "test:unit":
         case "test:unit:web":
             return `jest --projects "${join(toolsRoot, "test-config/jest.config.js")}"`;
