@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text Filter with multiple attributes renders correctly 1`] = `
+exports[`Text Filter with single instance with multiple attributes renders correctly 1`] = `
 <div
   class="filter-container filter-custom-class"
   data-focusindex="0"
@@ -29,7 +29,7 @@ exports[`Text Filter with multiple attributes renders correctly 1`] = `
 </div>
 `;
 
-exports[`Text Filter with single attribute renders correctly 1`] = `
+exports[`Text Filter with single instance with single attribute renders correctly 1`] = `
 <div
   class="filter-container filter-custom-class"
   data-focusindex="0"
