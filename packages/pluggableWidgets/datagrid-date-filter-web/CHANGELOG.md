@@ -5,8 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.0] - 2021-09-28
+
 ### Added
 - We added the possibility to reuse the filter with Gallery.
 - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
 ### Changed
 - We renamed the widget to Date filter.
