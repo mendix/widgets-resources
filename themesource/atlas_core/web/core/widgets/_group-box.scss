@@ -31,6 +31,31 @@
             }
         }
 
+        // Header options
+        > h1.mx-groupbox-header {
+            font-size: $font-size-h1;
+        }
+
+        > h2.mx-groupbox-header {
+            font-size: $font-size-h2;
+        }
+
+        > h3.mx-groupbox-header {
+            font-size: $font-size-h3;
+        }
+
+        > h4.mx-groupbox-header {
+            font-size: $font-size-h4;
+        }
+
+        > h5.mx-groupbox-header {
+            font-size: $font-size-h5;
+        }
+
+        > h6.mx-groupbox-header {
+            font-size: $font-size-h6;
+        }
+
         > .mx-groupbox-body {
             padding: $spacing-small * 1.5 $spacing-medium;
             border-width: 1px;

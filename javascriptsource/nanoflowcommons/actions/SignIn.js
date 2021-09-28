@@ -29,7 +29,7 @@ export async function SignIn(username, password) {
     }
     return new Promise(resolve => {
         const onSuccess = () => resolve(new Big(200));
-        const onError = error => resolve(new Big(error.status));
+        const onError = (error) => resolve(new Big(error.status));
         mx.login(username, password, onSuccess, onError);
     });
 	// END USER CODE

@@ -75,4 +75,31 @@
     .img-scale-down img {
         object-fit: scale-down;
     }
+
+    .img-contain.mx-image-background {
+        background-size: contain;
+    }
+
+    .img-cover.mx-image-background {
+        background-size: cover;
+    }
+
+    .img-auto.mx-image-background {
+        background-size: auto;
+    }
+
+    .img-opacity-low img,
+    .img-opacity-low.mx-image-background {
+        opacity: 0.3;
+    }
+
+    .img-opacity-medium img,
+    .img-opacity-medium.mx-image-background {
+        opacity: 0.5;
+    }
+
+    .img-opacity-high img,
+    .img-opacity-high.mx-image-background {
+        opacity: 0.7;
+    }
 }

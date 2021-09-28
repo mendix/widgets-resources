@@ -3,163 +3,188 @@
 
    Extra styling for responsive layouts
 ========================================================================== */
-$sidebar-icon-height: 52px;
-$sidebar-icon-width: 52px;
+@mixin layout-atlas-responsive() {
+    $sidebar-icon-height: 52px;
+    $sidebar-icon-width: 52px;
 
-.layout-atlas-responsive,
-.layout-atlas-responsive-default {
+    .layout-atlas-responsive,
+    .layout-atlas-responsive-default {
+        @media (min-width: $screen-md) {
+            .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar,
+            .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar,
+            .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar {
+                width: $navsidebar-width-closed !important;
 
-    @media (min-width: $screen-md) {
-        .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar,
-        .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar,
-        .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar {
-            width: $navsidebar-width-closed !important;
+                .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
+                    &.mx-navigationtree-has-items a {
+                        white-space: nowrap;
+                    }
 
-            .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
-                &.mx-navigationtree-has-items:hover {
-                    ul {
+                    &.mx-navigationtree-has-items:hover > ul {
                         position: absolute;
                         z-index: 100;
                         top: 0;
                         bottom: 0;
                         left: $sidebar-icon-width;
                         display: block;
-                        overflow-y: auto;
                         min-width: auto;
                         padding: $spacing-small 0;
+
+                        & > li.mx-navigationtree-has-items:hover > ul {
+                            left: 100%;
+                        }
+                    }
+
+                    &.mx-navigationtree-collapsed,
+                    &.mx-navigationtree-has-items {
+                        ul {
+                            display: none;
+                        }
                     }
                 }
+            }
 
-                &.mx-navigationtree-collapsed,
-                &.mx-navigationtree-has-items {
-                    ul {
-                        display: none;
+            .widget-sidebar:not(.widget-sidebar-expanded) {
+                .mx-navigationtree ul li {
+                    &.mx-navigationtree-has-items:hover {
+                        ul {
+                            position: absolute;
+                            z-index: 100;
+                            top: 0;
+                            bottom: 0;
+                            left: $sidebar-icon-width;
+                            display: block;
+                            overflow-y: auto;
+                            min-width: auto;
+                            padding: $spacing-small 0;
+                        }
                     }
-                }
-            }
-        }
-    }
 
-    .mx-scrollcontainer-slide {
-        &:not(.mx-scrollcontainer-open) > .region-sidebar {
-            overflow: hidden;
-        }
-
-        &.mx-scrollcontainer-open > .region-sidebar {
-            width: $navsidebar-width-open !important;
-
-            & > .mx-scrollcontainer-wrapper {
-                position: relative;
-            }
-        }
-
-        .region-sidebar > .mx-scrollcontainer-wrapper {
-            z-index: 2;
-            left: 0 !important;
-            background-color: inherit;
-        }
-    }
-
-    // Push aside for mobile
-    @media (max-width: $screen-sm-max) {
-        .mx-scrollcontainer-open:not(.mx-scrollcontainer-slide) {
-            width: 1100px;
-        }
-
-        .mx-scrollcontainer-slide .toggle-btn {
-            display: inline-block !important;
-        }
-    }
-
-    // Sidebar
-    .region-sidebar {
-        .toggle-btn {
-            width: $sidebar-icon-width;
-            border-color: transparent;
-            border-radius: 0;
-            background: transparent;
-        }
-
-        .mx-scrollcontainer-wrapper {
-            .toggle-btn-wrapper {
-                display: flex;
-                padding: $spacing-small;
-                align-items: center;
-                min-height: $topbar-minimalheight + 4px;
-                background: $navsidebar-sub-bg;
-            }
-            .toggle-btn {
-                padding: $spacing-medium;
-
-                img {
-                    width: 24px;
-                    height: 24px;
-                }
-            }
-            .toggle-text {
-                color: #fff;
-                font-weight: bold;
-            }
-            & > .mx-navigationtree .navbar-inner > ul > li {
-                & > a {
-                    height: $sidebar-icon-height;
-                    padding: $spacing-small 0;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    // Glyph icon
-                    .glyphicon {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: $sidebar-icon-width;
-                        height: $sidebar-icon-height;
-                        padding: $spacing-small $spacing-medium;
-                        border-radius: $border-radius-default;
+                    &.mx-navigationtree-collapsed,
+                    &.mx-navigationtree-has-items {
+                        ul {
+                            display: none;
+                        }
                     }
                 }
             }
         }
-    }
 
-    // Topbar
-    .region-topbar {
-        padding: 0 $spacing-small;
-    }
-}
+        .mx-scrollcontainer-slide {
+            &:not(.mx-scrollcontainer-open) > .region-sidebar {
+                overflow: hidden;
+            }
 
-// Topbar variant
-.layout-atlas-responsive-topbar {
-    .region-topbar {
-        padding: 0 $spacing-medium;
+            &.mx-scrollcontainer-open > .region-sidebar {
+                width: $navsidebar-width-open !important;
+
+                & > .mx-scrollcontainer-wrapper {
+                    position: relative;
+                }
+            }
+
+            .region-sidebar > .mx-scrollcontainer-wrapper {
+                z-index: 2;
+                left: 0 !important;
+                background-color: inherit;
+            }
+        }
+
+        // Push aside for mobile
         @media (max-width: $screen-sm-max) {
-            padding: 0 $spacing-small;
+            .mx-scrollcontainer-open:not(.mx-scrollcontainer-slide) {
+                width: 1100px;
+            }
+
+            .mx-scrollcontainer-slide .toggle-btn {
+                display: inline-block !important;
+            }
         }
-    }
-}
 
-// All responsive layouts
-.layout-atlas-responsive,
-.layout-atlas-responsive-default,
-.layout-atlas-responsive-topbar {
-    // Topbar
-    .region-topbar {
-        .toggle-btn {
-            display: none;
+        // Sidebar
+        .region-sidebar {
+            .toggle-btn {
+                width: $sidebar-icon-width;
+                border-color: transparent;
+                border-radius: 0;
+                background: transparent;
+            }
 
-            @media (max-width: $screen-sm-max) {
-                display: inline-block;
+            .mx-scrollcontainer-wrapper {
+                .toggle-btn-wrapper {
+                    display: flex;
+                    padding: $spacing-small;
+                    align-items: center;
+                    min-height: $topbar-minimalheight + 4px;
+                    background: $navsidebar-sub-bg;
+                }
+
+                .toggle-btn {
+                    padding: $spacing-medium;
+
+                    img {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                .toggle-text {
+                    color: #fff;
+                    font-weight: bold;
+                }
+
+                & > .mx-navigationtree .navbar-inner > ul > li {
+                    & > a {
+                        height: $sidebar-icon-height;
+                        padding: $spacing-small 0;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        // Glyph icon
+                        .glyphicon {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: $sidebar-icon-width;
+                            height: $sidebar-icon-height;
+                            padding: $spacing-small $spacing-medium;
+                            border-radius: $border-radius-default;
+                        }
+                    }
+                }
+            }
+        }
+
+        // Topbar
+        .region-topbar {
+            padding: 0 $spacing-small;
+
+            .toggle-btn {
+                padding: 0;
+                border-color: transparent;
+                border-radius: 0;
+                background: transparent;
             }
         }
     }
-}
 
-// Fix Safari issue of sidebar disappearing
-.profile-tablet {
-    .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
-        overflow-y: hidden;
+    // Topbar variant
+    .layout-atlas-responsive-topbar {
+        .region-topbar {
+            padding: 0 $spacing-medium;
+            @media (max-width: $screen-sm-max) {
+                padding: 0 $spacing-small;
+            }
+        }
+    }
 
-        .mx-scrollcontainer-wrapper {
-            overflow: visible;
+    // Fix Safari issue of sidebar disappearing
+    .profile-tablet {
+        .mx-scrollcontainer:not(.mx-scrollcontainer-open) > .region-sidebar {
+            overflow-y: hidden;
+
+            .mx-scrollcontainer-wrapper {
+                overflow: visible;
+            }
         }
     }
 }

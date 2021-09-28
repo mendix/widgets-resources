@@ -6,7 +6,7 @@
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
 import { Big } from "big.js";
-import Geolocation from "@react-native-community/geolocation";
+import Geolocation from '@react-native-community/geolocation';
 
 // BEGIN EXTRA CODE
 // END EXTRA CODE
@@ -40,8 +40,7 @@ export async function GetCurrentLocation(timeout, maximumAge, highAccuracy) {
                     const geolocation = mapPositionToMxObject(mxObject, position);
                     resolve(geolocation);
                 },
-                error: () =>
-                    reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"))
+                error: () => reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"))
             });
         }
         function onError(error) {

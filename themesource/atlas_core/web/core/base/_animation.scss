@@ -4,52 +4,53 @@
 // Customizing core files will make updating Atlas much more difficult in the future.
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
+@mixin animations() {
+    @keyframes slideInUp {
+        from {
+            visibility: visible;
+            transform: translate3d(0, 100%, 0);
+        }
 
-@keyframes slideInUp {
-    from {
-        visibility: visible;
-        transform: translate3d(0, 100%, 0);
+        to {
+            transform: translate3d(0, 0, 0);
+        }
     }
 
-    to {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-.animated {
-    animation-duration: 0.4s;
-    animation-fill-mode: both;
-}
-
-.slideInUp {
-    animation-name: slideInUp;
-}
-
-@keyframes slideInDown {
-    from {
-        visibility: visible;
-        transform: translate3d(0, -100%, 0);
+    .animated {
+        animation-duration: 0.4s;
+        animation-fill-mode: both;
     }
 
-    to {
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-.slideInDown {
-    animation-name: slideInDown;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
+    .slideInUp {
+        animation-name: slideInUp;
     }
 
-    to {
-        opacity: 1;
-    }
-}
+    @keyframes slideInDown {
+        from {
+            visibility: visible;
+            transform: translate3d(0, -100%, 0);
+        }
 
-.fadeIn {
-    animation-name: fadeIn;
+        to {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .slideInDown {
+        animation-name: slideInDown;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .fadeIn {
+        animation-name: fadeIn;
+    }
 }
