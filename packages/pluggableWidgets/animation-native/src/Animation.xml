@@ -5,7 +5,8 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Animation</name>
     <description>Container for animating content</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABGdBTUEAALGPC/xhBQAAA0BJREFUeAHtmLGPEkEUxmGJEi2EVgsbK0NCdZ2dJCZ2pwkQEqxOSYhWJmcsKY0kVhoSclcYMQTI6VWanMHwB1wp2EhzxVnQQIkG8Htk97I7MzvMLUdyeG8Twsyb730z89vZZYZQiC8mwASYABNgAkyACTABJsAEmAATYAJMgAkwASbABJgAE7g4BMLrONVCoXBpNBptTqfTzXA4vDGbzW7QPFA+RvnQsqz9WCy2X61W/y6a39oBSKfTDzDRMiZ6Szc5aPrQbLdarc9ana7xLNpyuVxiMpk8xmDuwe+m7XmEAR5EIpGder3eNemnVCpZ3W73FbTbJnqXppxIJF4if+qKnRRXtgJwpy5jkm/QUxGTt056dBXQToOqoP057tQfV5NUhN9rBE87ecenDP8XTsX97QsAgwpns1m6c1tISNhJXQx6t9Fo7OB75jZyl2nyqH/F5647ril/R9t9Pwi07NH+SZNv0vQQ/tLjoASQz+evj8fjD3BN+Ti3o9Hoo1qt9lvVnslk3gLcU1WbXwxA3zWbzWdiO73whsPhT/hpn3kxT6zDvx+Px2+LL0ZpadKdXzB58k6RhrRiR/TMI1YU4wb1op3rkdLbftnJkyF5kJfHHBUJAC17xP3uvDs/ZWvdsZD9wpN8PSJFBQO0KFdsop86MRa0rvKSBoqBbJl2oNIiRm/7QJcqF0t3I5CZIknlJQFAnvPCU1hIIZXW+amTxAYBKRdQ5pscg9yFEpWXCsBCo/9JoAJgtDGxIai0R0sAknKxbI+X8POkqrwkABDterI0FR/tN02Ktgl+B6IAy/ZQjAWtq7wkALTJQQdtg07attYjxUGENkm0wzvVRTm0NRaT6GAjxoLWVV4SAAxkRpscdKKDMN8IkVYcDKD8QKwixg3qFdW5gE516KdvkK+VkAd5iSJpI+MIsFwu7lbYgbDM97ochiLLTFKX2+v1Jji+fkkmk3tYTXTSu4bPFXyo/AtL8iOe+Sd4ZN6TFjHthfNFezAYXIXojlYoN86Pw51OR3pcSer7CMg+5yNCJ0PAW58/RFaB7Sz/ElvF+NiTCTABJsAEmAATYAJMgAkwASbABJgAE2ACTIAJMAEmwATOK4F/LkNXt8iCraQAAAAASUVORK5CYII=</icon>
+    <studioProCategory>Display</studioProCategory>
+    <studioCategory>Display</studioCategory>
     <properties>
         <propertyGroup caption="General">
 

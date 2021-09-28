@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+ 
 ## [2.1.0] - 2021-08-26
 ### Added
 - Handle local notification "On open" actions. Note: local notification's do not handle "On receive" actions, despite being able to configure these in Studio Pro.
