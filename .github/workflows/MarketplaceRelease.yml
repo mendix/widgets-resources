@@ -6,6 +6,7 @@ on:
             - "*-web-v*"
             - "*-native-v*"
             - "*-hybrid-v*"
+            - "data-widgets-v*"
 
 jobs:
     publish_release:
