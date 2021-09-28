@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Dropdown Filter with correct context renders correctly 1`] = `
+exports[`Dropdown Sort with single instance with correct context renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="dropdown-container filter-custom-class"
@@ -10,7 +10,7 @@ exports[`Dropdown Filter with correct context renders correctly 1`] = `
       class="dropdown-triggerer-wrapper"
     >
       <input
-        aria-controls="filter-test-dropdown-list"
+        aria-controls="DropdownSort1-dropdown-list"
         aria-expanded="false"
         aria-haspopup="true"
         class="form-control dropdown-triggerer"
