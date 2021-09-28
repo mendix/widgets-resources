@@ -160,9 +160,9 @@ async function updateChangelogs(widgetsFolders, moduleInfo) {
         await writeToChangelogs(newModuleChangelogs, moduleInfo);
     }
 
-    const changelogBranchName = `${moduleInfo.name}-release-${moduleInfo.version}`;
+    const changelogBranchName = `${moduleInfo.nameWithDash}-release-${moduleInfo.version}`;
     await execShellCommand(
-        `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${moduleInfo.name}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
+        `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${moduleInfo.nameWithDash}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
     );
     await execShellCommand(
         `gh pr create --title "Updating all the changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
