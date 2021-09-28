@@ -13,7 +13,7 @@
     "marketplaceId": 116540
   },
   "testProject": {
-    "githubUrl": "https://github.com/mendix/DataWidgets-module",
+    "url": "https://github.com/mendix/DataWidgets-module",
     "branchName": "main"
   },
   "scripts": {

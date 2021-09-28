@@ -13,7 +13,7 @@
     "marketplaceId": 109513
   },
   "testProject": {
-    "githubUrl": "https://github.com/mendix/native-mobile-resources",
+    "url": "https://github.com/mendix/native-mobile-resources",
     "branchName": "main"
   },
   "scripts": {
