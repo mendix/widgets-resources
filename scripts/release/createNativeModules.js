@@ -55,7 +55,7 @@ async function createNativeMobileResourcesModule() {
     const nativeWidgetsChangelogs = await updateWidgetChangelogs(nativeWidgetFolders);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo, nativeWidgetsChangelogs);
     await commitAndCreatePullRequest(moduleInfo);
-    await updateNativeComponentsTestProject(moduleInfo.testProjectUrl, tmpFolder, nativeWidgetFolders);
+    await updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWidgetFolders);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
@@ -75,7 +75,7 @@ async function createNanoflowCommonsModule() {
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
-    await updateNativeComponentsTestProject(moduleInfo.testProjectUrl, tmpFolder);
+    await updateNativeComponentsTestProject(moduleInfo, tmpFolder);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);

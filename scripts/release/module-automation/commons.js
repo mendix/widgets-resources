@@ -56,7 +56,7 @@ async function getPackageInfo(path, customData) {
             version,
             minimumMXVersion: marketplace?.minimumMXVersion,
             url: repository?.url,
-            testProjectUrl: testProject?.githubUrl,
+            testProjectUrl: testProject?.url,
             testProjectBranchName: testProject?.branchName,
             changelogPath: `${path}/CHANGELOG.md`,
             ...customData
