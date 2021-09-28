@@ -42,6 +42,8 @@ describe("Screenshots of the pages for", () => {
                     browser.pause(10000);
                 }
 
+                $("#content").waitForDisplayed({ timeout: 30000 });
+
                 browser.saveElement($("#content"), url, {
                     removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
                     disableCSSAnimation: true,
