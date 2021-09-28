@@ -5,7 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.2.0] - Unreleased
+## [2.3.0] - 2021-09-28
+
+### Added
+- Added tile images for all the actions.
+
+## [2.2.0] - 2021-08-11
 
 ### Added
 - Added the possibility to customize the picture quality from the "Take a picture" action.
