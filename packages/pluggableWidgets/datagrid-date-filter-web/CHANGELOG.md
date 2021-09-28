@@ -12,4 +12,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 ### Changed
 - We renamed the widget to Date filter.
-- We fixed an issue that breaks accessibility.
+
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
