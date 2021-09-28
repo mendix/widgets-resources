@@ -12,6 +12,8 @@ const {
     githubAuthentication
 } = require("./module-automation/commons");
 
+const repoRootPath = join(__dirname, "../../");
+
 main().catch(e => {
     console.error(e);
     process.exit(-1);
@@ -33,12 +35,12 @@ async function main() {
 
 async function createNMRModule() {
     console.log("Creating the Native Mobile Resource module.");
-    const NMRFolder = join(process.cwd(), "packages/jsActions/mobile-resources-native");
-    const tmpFolder = join(process.cwd(), "tmp/mobile-resources-native");
-    const widgetFolders = await readdir(join(process.cwd(), "packages/pluggableWidgets"));
+    const NMRFolder = join(repoRootPath, "packages/jsActions/mobile-resources-native");
+    const tmpFolder = join(repoRootPath, "tmp/mobile-resources-native");
+    const widgetFolders = await readdir(join(repoRootPath, "packages/pluggableWidgets"));
     const nativeWidgetFolders = widgetFolders
         .filter(folder => folder.includes("-native"))
-        .map(folder => join(process.cwd(), "packages/pluggableWidgets", folder));
+        .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
 
     let moduleInfo = await getPackageInfo(NMRFolder);
     moduleInfo = await bumpVersionInPackageJson(NMRFolder, moduleInfo);
@@ -62,7 +64,7 @@ async function createNMRModule() {
 
 // Update test project with latest changes and update version in themesource
 async function updateTestProject(tmpFolder, nativeWidgetFolders, githubUrl) {
-    const jsActionsPath = join(process.cwd(), "packages/jsActions/mobile-resources-native/dist");
+    const jsActionsPath = join(repoRootPath, "packages/jsActions/mobile-resources-native/dist");
     const jsActions = await getFiles(jsActionsPath);
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "javascriptsource/nativemobileresources/actions");

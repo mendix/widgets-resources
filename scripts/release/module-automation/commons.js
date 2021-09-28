@@ -4,6 +4,7 @@ const { exec } = require("child_process");
 
 const regex = {
     changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
+    changelogsIncludingUnreleased: /## \[unreleased\]\n?((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
     releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g
 };
 
@@ -110,9 +111,9 @@ async function writeToChangelogs(changelogs, { nameWithSpace, changelogPath, ver
     const d = new Date();
     const date = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
     const content = await readFile(changelogPath, "utf8");
-    const oldChangelogs = content.match(regex.changelogs)?.[0].trim();
+    const oldChangelogs = content.match(regex.changelogsIncludingUnreleased)?.[0].trim();
     const newContent = content
-        .replace(oldChangelogs, changelogs)
+        .replace(oldChangelogs, `## [unreleased]${changelogs}`)
         .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}`);
     await writeFile(changelogPath, newContent);
 }
