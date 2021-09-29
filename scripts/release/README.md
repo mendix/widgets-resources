@@ -17,6 +17,7 @@
     - The content should now be released in the MX Marketplace. Double check to verify.
 
 #### Native Modules
+1. Make sure a new widget is used on a page in the module and commit your changes, so it's included in the module when it's exported.
 1. Add a tag to the commit you want to create a release from. The tag should be formatted like ${PackageName}-v${Major}.${Minor}.${Patch}
     - Example: `mobile-resources-native-v3.0.0`
     - Example: `nanoflow-actions-native-v3.0.0`
