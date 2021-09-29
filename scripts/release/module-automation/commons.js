@@ -45,7 +45,7 @@ async function getFiles(dir, includeExtension = []) {
         .filter(file => !includeExtension?.length || (extname(file) && includeExtension?.includes(extname(file))));
 }
 
-async function getPackageInfo(path, customData = {}) {
+async function getPackageInfo(path) {
     const pkgPath = join(path, `package.json`);
     try {
         await access(pkgPath);
@@ -58,8 +58,7 @@ async function getPackageInfo(path, customData = {}) {
             url: repository?.url,
             testProjectUrl: testProject?.githubUrl,
             testProjectBranchName: testProject?.branchName,
-            changelogPath: `${path}/CHANGELOG.md`,
-            ...customData
+            changelogPath: `${path}/CHANGELOG.md`
         };
     } catch (error) {
         console.error(`ERROR: Path does not exist: ${pkgPath}`);

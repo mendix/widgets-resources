@@ -46,10 +46,11 @@ async function createNativeMobileResourcesModule() {
     const nativeWidgetFolders = widgetFolders
         .filter(folder => folder.includes("-native"))
         .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
-    let moduleInfo = await getPackageInfo(moduleFolder, {
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "NativeMobileResources",
         moduleFolderNameInModeler: "nativemobileresources"
-    });
+    };
     moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
@@ -66,10 +67,11 @@ async function createNanoflowCommonsModule() {
     console.log("Creating the Nanoflow Commons module.");
     const moduleFolder = join(repoRootPath, "packages/jsActions", moduleFolderNameInRepo);
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
-    let moduleInfo = await getPackageInfo(moduleFolder, {
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "NanoflowCommons",
         moduleFolderNameInModeler: "nanoflowcommons"
-    });
+    };
     moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);

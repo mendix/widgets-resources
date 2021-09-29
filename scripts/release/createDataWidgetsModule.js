@@ -47,10 +47,11 @@ async function createDataWidgetsModule() {
     const dataWidgetsFolders = widgetFolders
         .filter(folder => widgets.includes(folder))
         .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
-    let moduleInfo = await getPackageInfo(moduleFolder, {
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
         moduleFolderNameInModeler: "data-widgets"
-    });
+    };
     moduleInfo = await bumpVersionInPackageJson(DWFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
