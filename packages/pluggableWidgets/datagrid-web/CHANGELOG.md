@@ -5,12 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.0] - 2021-09-28
+
 ### Added
 - We added new options to allow filtering in multiple attributes. To enable it make sure you have "Show header filters" on.
 - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
-
-### Removed
-- We removed the advanced toggle for Studio Pro (kept for Studio)
 
 ### Changed
 - We fixed the positioning of the filters when virtual scrolling was enabled and there was no data being presented.

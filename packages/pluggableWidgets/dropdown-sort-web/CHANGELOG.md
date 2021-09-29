@@ -5,5 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.0.0] - 2021-09-28
+
 ### Added
 - We added the capability to sort Gallery widget.
