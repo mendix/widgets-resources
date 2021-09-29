@@ -115,7 +115,7 @@ async function writeToWidgetChangelogs(changelogs, { nameWithSpace, changelogPat
     const oldChangelogs = content.match(regex.changelogs)?.[0].trim();
     const newContent = content
         .replace(oldChangelogs, changelogs)
-        .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}`);
+        .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] - ${date}`);
     await writeFile(changelogPath, newContent);
 }
 
