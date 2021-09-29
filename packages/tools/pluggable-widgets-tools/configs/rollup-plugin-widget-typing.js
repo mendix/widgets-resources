@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import { extname, join } from "path";
-import { listDir } from "./shared";
+import { listDir, execShellCommand } from "./shared";
 
 const { transformPackage } = require("../dist/typings-generator");
 
@@ -23,6 +23,10 @@ export function widgetTyping({ sourceDir }) {
             if (!firstRun) {
                 await runTransformation(sourceDir);
             }
+            await execShellCommand(
+                `npx pluggable-widgets-tools format:custom-paths -- "../typings/**/*.ts"`,
+                sourceDir
+            );
             firstRun = false;
         }
     };

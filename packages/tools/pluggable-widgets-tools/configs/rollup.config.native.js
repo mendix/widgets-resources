@@ -1,6 +1,5 @@
 import { existsSync, mkdirSync } from "fs";
 import { join, relative } from "path";
-import { exec } from "child_process";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
@@ -195,7 +194,6 @@ export default async args => {
     function getClientComponentPlugins() {
         return [
             isTypescript ? widgetTyping({ sourceDir: join(sourcePath, "src") }) : null,
-            execShellCommand(`npx pluggable-widgets-tools format:custom-paths -- "typings/**/*.ts"`, sourcePath),
             clear({ targets: [outDir, mpkDir] }),
             command([
                 () => {
@@ -230,23 +228,6 @@ export default async args => {
         }
     }
 };
-
-function execShellCommand(cmd, workingDirectory = process.cwd()) {
-    return new Promise((resolve, reject) => {
-        exec(cmd, { cwd: workingDirectory }, (error, stdout, stderr) => {
-            if (error) {
-                console.warn(stderr);
-                console.warn(stdout);
-                reject(error);
-            }
-            if (stderr) {
-                console.warn(stderr);
-            }
-            console.log(stdout);
-            resolve(stdout);
-        });
-    });
-}
 
 const extensions = [".js", ".jsx", ".tsx", ".ts"];
 

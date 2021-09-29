@@ -1,4 +1,5 @@
 import { existsSync, readdirSync, promises as fs } from "fs";
+import { exec } from "child_process";
 import { join } from "path";
 import { config } from "dotenv";
 
@@ -47,4 +48,21 @@ export const projectPath = [
 
 function escape(str) {
     return str.replace(/([.?*+^$[\]\\(){}|-])/g, "\\$1");
+}
+
+export function execShellCommand(cmd, workingDirectory = process.cwd()) {
+    return new Promise((resolve, reject) => {
+        exec(cmd, { cwd: workingDirectory }, (error, stdout, stderr) => {
+            if (error) {
+                console.warn(stderr);
+                console.warn(stdout);
+                reject(error);
+            }
+            if (stderr) {
+                console.warn(stderr);
+            }
+            console.log(stdout);
+            resolve(stdout);
+        });
+    });
 }
