@@ -6,13 +6,14 @@ const { transformPackage } = require("../dist/typings-generator");
 
 export function widgetTyping({ sourceDir }) {
     let firstRun = true;
+    let filePaths = [];
 
     return {
         name: "widget-typing",
         async options(options) {
             // We have to run transformation before typescript starts its resolution cache =>
             // before the first buildStart starts, because buildStart is a "parallel" hook
-            await runTransformation(sourceDir);
+            filePaths = await runTransformation(sourceDir);
             return options;
         },
         async buildStart() {
@@ -21,10 +22,10 @@ export function widgetTyping({ sourceDir }) {
                 .forEach(path => this.addWatchFile(path));
 
             if (!firstRun) {
-                await runTransformation(sourceDir);
+                filePaths = await runTransformation(sourceDir);
             }
             await execShellCommand(
-                `npx pluggable-widgets-tools format:custom-paths -- "../typings/**/*.ts"`,
+                `npx pluggable-widgets-tools format:custom-paths -- ${filePaths.map(f => `"${f}"`).join(" ")}`,
                 sourceDir
             );
             firstRun = false;
@@ -33,5 +34,5 @@ export function widgetTyping({ sourceDir }) {
 }
 
 async function runTransformation(sourceDir) {
-    await transformPackage(await fs.readFile(join(sourceDir, "package.xml"), { encoding: "utf8" }), sourceDir);
+    return transformPackage(await fs.readFile(join(sourceDir, "package.xml"), { encoding: "utf8" }), sourceDir);
 }

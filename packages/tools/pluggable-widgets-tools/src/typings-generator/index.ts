@@ -8,6 +8,7 @@ import { generateForWidget } from "./generate";
 const { mkdir, readFile, stat, writeFile } = promises;
 
 export async function transformPackage(content: string, basePath: string) {
+    const filePaths = [];
     const contentXml = (await parseStringPromise(content)) as PackageXml;
     if (!contentXml) {
         throw new Error("Empty XML, please check your src folder for file package.xml");
@@ -40,8 +41,11 @@ export async function transformPackage(content: string, basePath: string) {
         }
 
         const resultPath = sourcePath.replace(/(\.xml)?$/, "Props.d.ts");
-        await writeFile(join(resultBasePath, resultPath), generatedContent);
+        const filePath = join(resultBasePath, resultPath);
+        await writeFile(filePath, generatedContent);
+        filePaths.push(filePath);
     }
+    return filePaths;
 }
 
 function toWidgetName(file: string) {
