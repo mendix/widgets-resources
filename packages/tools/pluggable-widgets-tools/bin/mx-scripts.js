@@ -31,7 +31,7 @@ function getRealCommand(cmd, toolsRoot) {
     const prettierConfigRootPath = join(__dirname, "../../../../prettier.config.js");
     const prettierConfigPath = existsSync(prettierConfigRootPath) ? prettierConfigRootPath : "prettier.config.js";
     const prettierCommandBase = `prettier --config "${prettierConfigPath}"`;
-    const prettierCommand = `${prettierCommandBase} "{src,typings,tests}/**/*.{js,jsx,ts,tsx,scss}"`;
+    const prettierCommand = `${prettierCommandBase} "{src,typings,tests/e2e}/**/*.{js,jsx,ts,tsx,scss}"`;
     const rollupCommandWeb = `rollup --config "${join(toolsRoot, "configs/rollup.config.js")}"`;
     const rollupCommandNative = `rollup --config "${join(toolsRoot, "configs/rollup.config.native.js")}"`;
 
@@ -69,7 +69,7 @@ function getRealCommand(cmd, toolsRoot) {
             return `${prettierCommand} --write && ${eslintCommand} --fix`;
         case "format":
             return `${prettierCommand} --write`;
-        case "format:custom-paths":
+        case "format:custom-files":
             return `${prettierCommandBase} --write`;
         case "test:unit":
         case "test:unit:web":
