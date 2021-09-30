@@ -5,6 +5,128 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.0] Native Mobile Resources - 2021-9-28
+
+## [2.0.0] Accordion
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] ActivityIndicator
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] Animation
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] AppEvents
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] BackgroundImage
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] Badge
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] BarChart
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] BarcodeScanner
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] BottomSheet
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] Carousel
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [1.0.0] ColorPicker
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] Feedback
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] FloatingActionButton
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] IntroScreen
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] LineChart
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] ListViewSwipe
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] Maps
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] Notifications
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] PopupMenu
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [4.0.0] ProgressBar
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] ProgressCircle
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] QRCode
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] RangeSlider
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] Rating
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] Repeater
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] SafeAreaView
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] Slider
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [2.0.0] ToggleButtons
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] VideoPlayer
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
+## [3.0.0] WebView
+### Added
+ - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
+
 ## [3.1.4] Native Mobile Resources - 2021-09-21
 
 ### Changed
