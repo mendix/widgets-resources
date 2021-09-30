@@ -6,14 +6,14 @@ const { transformPackage } = require("../dist/typings-generator");
 
 export function widgetTyping({ sourceDir }) {
     let firstRun = true;
-    let filePaths = [];
+    let propsTypingFilePaths = [];
 
     return {
         name: "widget-typing",
         async options(options) {
             // We have to run transformation before typescript starts its resolution cache =>
             // before the first buildStart starts, because buildStart is a "parallel" hook
-            filePaths = await runTransformation(sourceDir);
+            propsTypingFilePaths = await runTransformation(sourceDir);
             return options;
         },
         async buildStart() {
@@ -22,10 +22,10 @@ export function widgetTyping({ sourceDir }) {
                 .forEach(path => this.addWatchFile(path));
 
             if (!firstRun) {
-                filePaths = await runTransformation(sourceDir);
+                propsTypingFilePaths = await runTransformation(sourceDir);
             }
             await execShellCommand(
-                `npx pluggable-widgets-tools format:custom-files -- ${filePaths.map(f => `"${f}"`).join(" ")}`,
+                `npx pluggable-widgets-tools format:custom-files -- ${propsTypingFilePaths.map(f => `"${f}"`).join(" ")}`,
                 sourceDir
             );
             firstRun = false;
