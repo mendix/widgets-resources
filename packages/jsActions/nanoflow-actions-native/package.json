@@ -1,6 +1,6 @@
 {
   "name": "nanoflow-actions-native",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "license": "Apache-2.0",
   "marketplace": {
     "minimumMXVersion": "9.6.0.27784",
