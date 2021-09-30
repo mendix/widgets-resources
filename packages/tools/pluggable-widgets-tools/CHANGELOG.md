@@ -12,6 +12,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
  - We added functionality so that widget TypeScript typings are prettified on creation.
 
+### Changed
+- We improved the formatting script by preventing prettifying MX test projects.
 ## [9.5.5] - 2021-09-23
 
 ### Fixed
