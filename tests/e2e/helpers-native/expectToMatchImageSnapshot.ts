@@ -2,7 +2,7 @@ import { device } from "detox";
 /* eslint-disable no-unused-vars */
 import { Image, CropOptions } from "image-js";
 
-const RESOLUTION_ANDROID = { width: 1080, height: 2160 };
+const RESOLUTION_ANDROID = { width: 1080, height: 2030 };
 const STATUS_BAR_HEIGHT_ANDROID = 90;
 const SCROLLBAR_MARGIN_ANDROID = 18;
 
