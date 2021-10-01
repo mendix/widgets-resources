@@ -80,11 +80,11 @@ export function PieDoughnutChart({
                         data={series.map((_series, index) => {
                             const customLabelStyles = style.slices?.customStyles?.[_series.stylingKey!]?.label;
                             return {
-                            ..._series,
-                            labelStyle: {
+                                ..._series,
+                                labelStyle: {
                                     fill: customLabelStyles?.color ?? normalizedSliceColors[index],
                                     ...customLabelStyles
-                            }
+                                }
                             };
                         })}
                         height={chartDimensions.width}
@@ -96,6 +96,7 @@ export function PieDoughnutChart({
                         // typings are missing `sortOrder`
                         /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
                         // @ts-ignore
+                        sortKey={"y"}
                         sortOrder={sortOrder}
                         innerRadius={
                             presentation === "doughnut"
