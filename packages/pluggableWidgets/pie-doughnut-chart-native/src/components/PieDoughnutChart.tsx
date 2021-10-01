@@ -77,13 +77,16 @@ export function PieDoughnutChart({
                 {chartDimensions ? (
                     <VictoryPie
                         padding={aggregateGridPadding(style.slices)}
-                        data={series.map((_series, index) => ({
+                        data={series.map((_series, index) => {
+                            const customLabelStyles = style.slices?.customStyles?.[_series.stylingKey!]?.label;
+                            return {
                             ..._series,
                             labelStyle: {
-                                fill: normalizedSliceColors[index],
-                                ...style.slices?.customStyles?.[_series.stylingKey!]?.label
+                                    fill: customLabelStyles?.color ?? normalizedSliceColors[index],
+                                    ...customLabelStyles
                             }
-                        }))}
+                            };
+                        })}
                         height={chartDimensions.width}
                         width={chartDimensions.width}
                         style={{

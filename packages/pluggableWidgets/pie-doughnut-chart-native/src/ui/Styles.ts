@@ -2,6 +2,7 @@ import { ViewStyle } from "react-native";
 
 interface LabelStyle {
     // color is the same as slice color
+    color?: string;
     fontFamily?: string;
     fontSize?: number;
     fontStyle?: "normal" | "italic";

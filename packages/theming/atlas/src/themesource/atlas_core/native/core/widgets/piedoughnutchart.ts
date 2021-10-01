@@ -43,6 +43,7 @@ export const com_mendix_widget_native_piedoughnutchart_PieDoughnutChart: PieDoug
                 label: {
                     /*
                     Allowed properties:
+                      -  color (string)
                       -  fontFamily (string)
                       -  fontSize (number)
                       -  fontStyle ("normal" or "italic")
