@@ -1,0 +1,38 @@
+name: Create widget release
+
+on:
+    workflow_dispatch:
+        inputs:
+            widget-name:
+                description: "Widget to release"
+                required: true
+
+jobs:
+    release:
+        name: "Create widget release"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
+              with:
+                  submodules: false
+            - name: "Installing dependencies"
+              run: npm install
+            - name: "Building ${{ github.event.inputs.widget-name }} widget"
+              run: "npm run release -- --scope '${{ steps.scope.outputs._0 }}'"
+            - name: "Getting ${{ github.event.inputs.widget-name }} widget release information"
+              id: releaseinformation
+              run: "npm run information:githubrelease -- --scope '${{ steps.scope.outputs._0 }}'"
+            - name:
+                  "Create draft release for widget ${{ github.event.inputs.widget-name }} version ${{
+                  steps.releaseinformation.version }}"
+              uses: ncipollo/release-action@v1
+              with:
+                  artifacts: ${{ steps.releaseinformation.releaseMpkPath }}
+                  draft: true
+                  name:
+                      "${{ steps.releaseinformation.widgetName }} (Web) - Marketplace Release v${{
+                      steps.releaseinformation.version }}"
+                  tag: "${{ github.event.inputs.widget-name }}-v${{ steps.releaseinformation.version }}"
+                  token: ${{ secrets.GH_PAT }}
