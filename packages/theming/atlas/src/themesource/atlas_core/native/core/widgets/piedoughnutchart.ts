@@ -15,6 +15,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 export const com_mendix_widget_native_piedoughnutchart_PieDoughnutChart: PieDoughnutChartStyle = {
     container: {
         // All ViewStyle properties are allowed
+        flex: 1
     },
     slices: {
         /*
@@ -29,6 +30,7 @@ export const com_mendix_widget_native_piedoughnutchart_PieDoughnutChart: PieDoug
                 -  paddingTop (number)
                 -  paddingVertical (number)
         */
+        padding: 40,
         colorPalette: Object.values(brand)
             .map((color, index, brandColors) => (index === brandColors.length - 1 ? color : `${color};`))
             .join(""),

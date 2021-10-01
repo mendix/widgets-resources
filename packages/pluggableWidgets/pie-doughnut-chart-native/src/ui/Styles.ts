@@ -39,5 +39,8 @@ export interface ChartStyle {
 export const defaultStyle: ChartStyle = {
     container: {
         flex: 1
+    },
+    slices: {
+        padding: 40
     }
 };
