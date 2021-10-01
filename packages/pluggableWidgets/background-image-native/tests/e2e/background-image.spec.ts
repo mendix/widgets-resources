@@ -1,10 +1,12 @@
 import { expectToMatchImageSnapshot, Widget, NativeHomePage, Alert } from "../../../../../tests/e2e";
-import { expect } from "detox";
+import { expect, waitFor, device } from "detox";
 
 describe("Background image", () => {
     beforeEach(async () => {
         await NativeHomePage().goToWidgetsHomePage();
-        await NativeHomePage().gotoBackgroundImagePage();
+
+        const backgroundImagePage = Widget("btnBackgroundImage").getElement();
+        await backgroundImagePage.tap();
     });
 
     it("renders the static images", async () => {
@@ -30,6 +32,9 @@ describe("Background image", () => {
     it("renders the dynamic image", async () => {
         const btnDynamicImage = Widget("btnDynamicImage").getElement();
         await btnDynamicImage.tap();
+
+        const dynamicImage = Widget("dynamicImageText").getElement();
+        await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
 
         await expectToMatchImageSnapshot({
             ios: { removeScrollbar: true },
@@ -84,5 +89,9 @@ describe("Background image", () => {
             ios: { removeScrollbar: true },
             android: { removeScrollbar: true }
         });
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 });
