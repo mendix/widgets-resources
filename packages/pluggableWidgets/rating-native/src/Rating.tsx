@@ -16,7 +16,9 @@ interface State {
 const fullIcon = "glyphicon-star";
 const emptyIcon = "glyphicon-star-empty";
 
-export class Rating extends Component<RatingProps<RatingStyle>, State> {
+export type Props = RatingProps<RatingStyle>;
+
+export class Rating extends Component<Props, State> {
     readonly state: State = {};
 
     private readonly onChangeHandler = this.onChange.bind(this);
@@ -24,7 +26,7 @@ export class Rating extends Component<RatingProps<RatingStyle>, State> {
     private readonly iconStyle: IconStyle;
     private readonly usesGlyphicons: boolean;
 
-    constructor(props: RatingProps<RatingStyle>) {
+    constructor(props: Props) {
         super(props);
 
         const { color, selectedColor, size, iconStyle } = processStyles(this.styles);
