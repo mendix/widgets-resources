@@ -3,7 +3,7 @@ import { Big } from "big.js";
 import { createElement } from "react";
 import { Text } from "react-native";
 import { Bar } from "react-native-progress";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 
 import { ProgressBar, Props } from "../ProgressBar";
 

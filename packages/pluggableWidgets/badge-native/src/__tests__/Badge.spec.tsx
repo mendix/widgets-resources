@@ -1,7 +1,7 @@
 import { actionValue, dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { Platform, Text } from "react-native";
-import { fireEvent, render } from "react-native-testing-library";
+import { fireEvent, render } from "@testing-library/react-native";
 
 import { Badge, Props } from "../Badge";
 

@@ -2,7 +2,7 @@ import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { View } from "react-native";
 import Slider from "react-native-slider";
-import { fireEvent, render, RenderAPI } from "react-native-testing-library";
+import { fireEvent, render, RenderAPI } from "@testing-library/react-native";
 import { ReactTestInstance } from "react-test-renderer";
 import { ColorPicker, Props } from "../ColorPicker";
 

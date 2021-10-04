@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import SignatureScreen from "react-native-signature-canvas";
-import { fireEvent, render } from "react-native-testing-library";
+import { fireEvent, render } from "@testing-library/react-native";
 
 import { Signature, Props } from "../Signature";
 import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";

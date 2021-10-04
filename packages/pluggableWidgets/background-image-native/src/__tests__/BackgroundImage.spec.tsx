@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { Text } from "react-native";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 import { dynamicValue } from "@mendix/piw-utils-internal";
 
 import { BackgroundImage } from "../BackgroundImage";

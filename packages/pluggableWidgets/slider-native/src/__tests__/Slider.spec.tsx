@@ -3,7 +3,7 @@ import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
 import { Text, View } from "react-native";
-import { fireEvent, render, RenderAPI } from "react-native-testing-library";
+import { fireEvent, render, RenderAPI } from "@testing-library/react-native";
 import { ReactTestInstance } from "react-test-renderer";
 
 import { Props, Slider } from "../Slider";

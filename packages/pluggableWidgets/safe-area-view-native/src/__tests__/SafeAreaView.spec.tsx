@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 import { SafeAreaView } from "../SafeAreaView";
 import { SafeAreaViewProps } from "../../typings/SafeAreaViewProps";
 import { SafeAreaViewStyle } from "../ui/Styles";

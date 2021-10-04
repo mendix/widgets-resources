@@ -1,6 +1,6 @@
 import { CarouselProps } from "../../typings/CarouselProps";
 import { CarouselStyle } from "../ui/styles";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 import { createElement } from "react";
 import { Text, View } from "react-native";
 import { buildWidgetValue, ListValueBuilder } from "@mendix/piw-utils-internal";

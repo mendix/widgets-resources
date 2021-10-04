@@ -1,6 +1,6 @@
 import { FloatingActionButtonProps } from "../../typings/FloatingActionButtonProps";
 import { FloatingActionButtonStyle } from "../ui/styles";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 import { createElement } from "react";
 import { FloatingActionButton } from "../FloatingActionButton";
 import { actionValue, dynamicValue } from "@mendix/piw-utils-internal";

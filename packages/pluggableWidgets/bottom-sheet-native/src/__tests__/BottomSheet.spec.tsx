@@ -1,5 +1,5 @@
 import { EditableValueBuilder } from "@mendix/piw-utils-internal";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 import { createElement } from "react";
 import { BottomSheet } from "../BottomSheet";
 import { BottomSheetProps } from "../../typings/BottomSheetProps";

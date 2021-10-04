@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 import { IntroScreen } from "../IntroScreen";
 import { IntroScreenProps } from "../../typings/IntroScreenProps";
 import { IntroScreenStyle } from "../ui/Styles";
