@@ -399,6 +399,12 @@
                     "class": "listview-lg"
                 }
             ]
+        },
+        {
+            "name": "Hide empty",
+            "type": "Toggle",
+            "description": "Hides the 'no items found' in empty lists.",
+            "class": "listview-hide-empty"
         }
     ],
     "DataGrid": [
