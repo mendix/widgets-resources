@@ -59,6 +59,13 @@
         }
     }
 
+    // Hides the 'no items found' text on empty lists
+    .listview-hide-empty.mx-listview {
+        .mx-listview-empty {
+            display: none;
+        }
+    }
+
     // Remove all styling - deprecated
     .listview-stylingless.mx-listview {
         & > ul > li {

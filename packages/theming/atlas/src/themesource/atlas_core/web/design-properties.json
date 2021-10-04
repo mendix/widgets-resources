@@ -399,6 +399,12 @@
                     "class": "listview-lg"
                 }
             ]
+        },
+        {
+            "name": "Show empty",
+            "type": "Toggle",
+            "description": "Shows empty text .",
+            "class": "listview-no-empty"
         }
     ],
     "DataGrid": [
