@@ -22,7 +22,7 @@ describe("timeline-web", () => {
             const button = page.getWidget("basicTimelinePage");
             button.waitForDisplayed();
             button.click();
-            const timeline = page.getElement(".timelineBasic");
+            const timeline = page.getElement(".mx-name-timelineBasic");
             const item = page.getElement(".clickable", timeline);
             item.click();
             const dialog = page.modalDialog;
@@ -42,7 +42,7 @@ describe("timeline-web", () => {
             expect(browser.checkElement(timeline, "timelineCustom")).toEqual(0);
         });
         it("shows a message when event onclick is called", () => {
-            const timeline = page.getElement(".timelineCustom");
+            const timeline = page.getElement(".mx-name-timelineCustom");
             const item = page.getElement(".mx-name-clickMeTitle", timeline);
             item.waitForDisplayed();
             item.click();
