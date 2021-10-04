@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
 ## [2.0.0] - 2021-09-28
 
 ### Added
@@ -13,9 +16,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - We renamed the advanced options property to emphasize this property is about the advanced properties' activation.
 - We made some small code improvement.
-
-### Fixed
-- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
 
 ## [1.1.1] - 2021-08-16
 
