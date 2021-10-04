@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
 ## [2.0.0] - 2021-09-28
 
 ### Added
@@ -14,9 +17,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Changed
 - We fixed the positioning of the filters when virtual scrolling was enabled and there was no data being presented.
 - We renamed the advanced settings property to emphasize this property is about the advanced properties' activation.
-
-### Fixed
-- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
 
 ## [1.2.1] - 2021-07-01
 
