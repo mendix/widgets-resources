@@ -91,7 +91,7 @@
                     color: #ffffff;
                     border-style: none;
                     border-radius: 0;
-                    background-color: mix($brand-primary, #000000, 80%);
+                    background-color: $color-primary-darker;
                 }
             }
         }

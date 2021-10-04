@@ -107,7 +107,7 @@ $default-ios-color: rgb(100, 189, 99);
             }
 
             &.widget-switch-btn-wrapper-primary {
-                @include bootstrap-style-android($brand-primary);
+                background-color: $color-primary-light;
 
                 .widget-switch-btn {
                     background: $brand-primary;

@@ -94,7 +94,7 @@
         .mx-calendar-year-switcher {
             text-align: center;
             margin-top: 10px;
-            color: lighten($brand-primary, 30%);
+            color: $color-primary-light;
 
             span.mx-calendar-year-selected {
                 color: $brand-primary;
