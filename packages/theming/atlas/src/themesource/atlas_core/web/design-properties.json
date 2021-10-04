@@ -173,6 +173,37 @@
             ]
         },
         {
+            "name": "Display",
+            "type": "Dropdown",
+            "description": "The display property of the element.",
+            "options": [
+                {
+                    "name": "Inline",
+                    "class": "d-inline"
+                },
+                {
+                    "name": "Inline block",
+                    "class": "d-inline-block"
+                },
+                {
+                    "name": "Block",
+                    "class": "d-block"
+                },
+                {
+                    "name": "Flex",
+                    "class": "d-flex"
+                },
+                {
+                    "name": "Inline flex",
+                    "class": "d-inline-flex"
+                },
+                {
+                    "name": "Hidden",
+                    "class": "d-none"
+                }
+            ]
+        },
+        {
             "name": "Align self",
             "oldNames": ["Align Self"],
             "type": "Dropdown",
