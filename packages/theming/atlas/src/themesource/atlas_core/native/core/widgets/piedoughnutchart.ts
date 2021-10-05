@@ -31,9 +31,9 @@ export const com_mendix_widget_native_piedoughnutchart_PieDoughnutChart: PieDoug
                 -  paddingVertical (number)
         */
         padding: 40,
-        colorPalette: Object.values(brand)
-            .map((color, index, brandColors) => (index === brandColors.length - 1 ? color : `${color};`))
-            .join(""),
+        colorPalette: Object.entries(brand)
+            .reduce((accumulator, [key, value]) => (key.endsWith("Light") ? accumulator : [...accumulator, value]), [])
+            .join(";"),
         customStyles: {
             your_defined_key: {
                 slice: {
