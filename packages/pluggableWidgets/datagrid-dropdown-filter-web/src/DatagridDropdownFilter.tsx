@@ -6,6 +6,7 @@ import { Alert, FilterType, getFilterDispatcher, generateUUID } from "@mendix/pi
 
 import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
     const id = useRef(`DropdownFilter${generateUUID()}`);
@@ -83,7 +84,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
                         className={props.class}
-                        defaultValue={defaultValues ?? props.defaultValue?.value}
+                        defaultValue={defaultValues ? defaultValues : props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         id={id.current}
@@ -91,6 +92,12 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(values: FilterOption[]): void => {
+                            const valuesString = values.map(v => v.value).join(",");
+                            const attributeCurrentValue = props.valueAttribute?.value ? props.valueAttribute.value : "";
+                            if (valuesString !== attributeCurrentValue) {
+                                props.valueAttribute?.setValue(valuesString);
+                                executeAction(props.onChange);
+                            }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, values))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);
