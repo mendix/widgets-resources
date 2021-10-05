@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text Filter with multiple attributes renders correctly 1`] = `
+exports[`Text Filter with single instance with multiple attributes renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="filter-container filter-custom-class"
@@ -13,7 +13,7 @@ exports[`Text Filter with multiple attributes renders correctly 1`] = `
         class="filter-selector-content"
       >
         <button
-          aria-controls="filter-test-filter-selectors"
+          aria-controls="TextFilter1-filter-selectors"
           aria-expanded="false"
           aria-haspopup="true"
           class="btn btn-default filter-selector-button button-icon equal"
@@ -31,7 +31,7 @@ exports[`Text Filter with multiple attributes renders correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Text Filter with single attribute renders correctly 1`] = `
+exports[`Text Filter with single instance with single attribute renders correctly 1`] = `
 <DocumentFragment>
   <div
     class="filter-container filter-custom-class"
@@ -44,7 +44,7 @@ exports[`Text Filter with single attribute renders correctly 1`] = `
         class="filter-selector-content"
       >
         <button
-          aria-controls="filter-test-filter-selectors"
+          aria-controls="TextFilter1-filter-selectors"
           aria-expanded="false"
           aria-haspopup="true"
           class="btn btn-default filter-selector-button button-icon equal"

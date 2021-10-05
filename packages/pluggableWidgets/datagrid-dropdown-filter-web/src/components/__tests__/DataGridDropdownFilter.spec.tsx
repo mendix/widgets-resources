@@ -64,6 +64,27 @@ describe("Dropdown Filter", () => {
                 });
             });
 
+            it("triggers attribute and onchange action on change filter value", () => {
+                const action = actionValue();
+                const attribute = new EditableValueBuilder<string>().build();
+                render(
+                    <DatagridDropdownFilter
+                        {...commonProps}
+                        auto
+                        multiSelect={false}
+                        filterOptions={[]}
+                        onChange={action}
+                        valueAttribute={attribute}
+                    />
+                );
+
+                fireEvent.click(screen.getByRole("textbox"));
+                fireEvent.click(screen.getAllByRole("menuitem")[2]);
+
+                expect(action.execute).toBeCalledTimes(1);
+                expect(attribute.setValue).toBeCalledWith("enum_value_2");
+            });
+
             afterAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;
             });
@@ -147,27 +168,6 @@ describe("Dropdown Filter", () => {
                     "The attribute type being used for Drop-down filter is not 'Boolean or Enumeration'"
                 );
             });
-
-			it("triggers attribute and onchange action on change filter value", () => {
-            	const action = actionValue();
-            	const attribute = new EditableValueBuilder<string>().build();
-            	render(
-                	<DatagridDropdownFilter
-                    	{...commonProps}
-                    	auto
-                    	multiSelect={false}
-                    	filterOptions={[]}
-                    	onChange={action}
-                    	valueAttribute={attribute}
-                	/>
-            	);
-
-            	fireEvent.click(screen.getByRole("textbox"));
-            	fireEvent.click(screen.getAllByRole("menuitem")[2]);
-
-            	expect(action.execute).toBeCalledTimes(1);
-            	expect(attribute.setValue).toBeCalledWith("enum_value_2");
-        	});
 
             afterAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;

@@ -3,7 +3,6 @@ import { actionValue, EditableValueBuilder, ListAttributeValueBuilder } from "@m
 import { render, fireEvent, screen } from "@testing-library/react";
 import { mount } from "enzyme";
 import { createContext, createElement } from "react";
-import { render as testingLibraryRender } from "@testing-library/react";
 
 import DatagridTextFilter from "../../DatagridTextFilter";
 
@@ -31,33 +30,31 @@ describe("Text Filter", () => {
                     filterDispatcher: jest.fn(),
                     singleAttribute: new ListAttributeValueBuilder().withType("String").withFilterable(true).build()
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders correctly", () => {
-                const filter = render(<DatagridTextFilter {...commonProps} />);
+                const { asFragment } = render(<DatagridTextFilter {...commonProps} />);
 
-                expect(filter).toMatchSnapshot();
+                expect(asFragment()).toMatchSnapshot();
             });
 
-			it("triggers attribute and onchange action on change filter value", () => {
-            	const action = actionValue();
-            	const attribute = new EditableValueBuilder<string>().build();
-            	render(<DatagridTextFilter {...commonProps} onChange={action} valueAttribute={attribute} />);
+            it("triggers attribute and onchange action on change filter value", () => {
+                const action = actionValue();
+                const attribute = new EditableValueBuilder<string>().build();
+                render(<DatagridTextFilter {...commonProps} onChange={action} valueAttribute={attribute} />);
 
-            	fireEvent.change(screen.getByRole("textbox"), { target: { value: "B" } });
+                fireEvent.change(screen.getByRole("textbox"), { target: { value: "B" } });
 
-            	jest.advanceTimersByTime(1000);
+                jest.advanceTimersByTime(1000);
 
-            	expect(action.execute).toBeCalledTimes(1);
-            	expect(attribute.setValue).toBeCalledWith("B");
-        	});
+                expect(action.execute).toBeCalledTimes(1);
+                expect(attribute.setValue).toBeCalledWith("B");
+            });
 
             afterAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;
             });
         });
-    });
 
         describe("with multiple attributes", () => {
             beforeAll(() => {
@@ -76,13 +73,12 @@ describe("Text Filter", () => {
                             .build()
                     }
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders correctly", () => {
-                const filter = render(<DatagridTextFilter {...commonProps} />);
+                const { asFragment } = render(<DatagridTextFilter {...commonProps} />);
 
-                expect(filter).toMatchSnapshot();
+                expect(asFragment()).toMatchSnapshot();
             });
 
             afterAll(() => {
@@ -96,7 +92,6 @@ describe("Text Filter", () => {
                     filterDispatcher: jest.fn(),
                     singleAttribute: new ListAttributeValueBuilder().withType("Decimal").withFilterable(true).build()
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders error message", () => {
@@ -129,7 +124,6 @@ describe("Text Filter", () => {
                             .build()
                     }
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders error message", () => {
@@ -148,7 +142,6 @@ describe("Text Filter", () => {
         describe("with no context", () => {
             beforeAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;
-                (window as any).mx = mxObject;
             });
 
             it("renders error message", () => {
@@ -170,8 +163,8 @@ describe("Text Filter", () => {
         });
 
         it("renders with a unique id", () => {
-            const { asFragment: fragment1 } = testingLibraryRender(<DatagridTextFilter {...commonProps} />);
-            const { asFragment: fragment2 } = testingLibraryRender(<DatagridTextFilter {...commonProps} />);
+            const { asFragment: fragment1 } = render(<DatagridTextFilter {...commonProps} />);
+            const { asFragment: fragment2 } = render(<DatagridTextFilter {...commonProps} />);
 
             expect(fragment1().querySelector("button")?.getAttribute("aria-controls")).not.toBe(
                 fragment2().querySelector("button")?.getAttribute("aria-controls")

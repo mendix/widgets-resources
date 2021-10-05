@@ -50,23 +50,23 @@ describe("Date Filter", () => {
                 expect(asFragment()).toMatchSnapshot();
             });
 
-			it("triggers attribute and onchange action on change filter value", () => {
-            	const action = actionValue();
-            	const attribute = new EditableValueBuilder<Date>().build();
-            	render(
-                	<DatagridDateFilter
-                    	{...commonProps}
-                    	onChange={action}
-                    	valueAttribute={attribute}
-                    	placeholder={dynamicValue("Placeholder")}
-                	/>
-            	);
+            it("triggers attribute and onchange action on change filter value", () => {
+                const action = actionValue();
+                const attribute = new EditableValueBuilder<Date>().build();
+                render(
+                    <DatagridDateFilter
+                        {...commonProps}
+                        onChange={action}
+                        valueAttribute={attribute}
+                        placeholder={dynamicValue("Placeholder")}
+                    />
+                );
 
-            	fireEvent.input(screen.getByPlaceholderText("Placeholder"), { target: { value: "01/12/2020" } });
+                fireEvent.input(screen.getByPlaceholderText("Placeholder"), { target: { value: "01/12/2020" } });
 
-           		expect(action.execute).toBeCalledTimes(1);
-           		expect(attribute.setValue).toBeCalledTimes(1);
-        	});
+                expect(action.execute).toBeCalledTimes(1);
+                expect(attribute.setValue).toBeCalledTimes(1);
+            });
 
             afterAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;
