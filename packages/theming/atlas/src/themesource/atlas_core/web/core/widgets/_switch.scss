@@ -31,7 +31,7 @@ $default-ios-color: rgb(100, 189, 99);
             .widget-switch {
                 .widget-switch-btn-wrapper {
                     &.checked {
-                        @include bootstrap-style-android($brand-variable);
+                        background-color: $brand-variable;
 
                         .widget-switch-btn {
                             background: $brand-variable;
@@ -148,11 +148,11 @@ $default-ios-color: rgb(100, 189, 99);
         }
     }
 
-    @include style("primary", $brand-primary);
-    @include style("secondary", $brand-default);
-    @include style("success", $brand-success);
-    @include style("warning", $brand-warning);
-    @include style("danger", $brand-danger);
+    @include style("primary", $color-primary-light);
+    @include style("secondary", $color-default-light);
+    @include style("success", $color-success-light);
+    @include style("warning", $color-warning-light);
+    @include style("danger", $color-danger-light);
 
     // below is maintained for backwards compatibility prior to Switch 3.0.0.
     div {
