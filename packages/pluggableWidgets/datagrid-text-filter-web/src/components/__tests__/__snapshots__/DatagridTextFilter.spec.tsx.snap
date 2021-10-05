@@ -1,59 +1,63 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Text Filter with single instance with multiple attributes renders correctly 1`] = `
-<div
-  class="filter-container filter-custom-class"
-  data-focusindex="0"
->
+exports[`Text Filter with multiple attributes renders correctly 1`] = `
+<DocumentFragment>
   <div
-    class="filter-selector"
+    class="filter-container filter-custom-class"
+    data-focusindex="0"
   >
     <div
-      class="filter-selector-content"
+      class="filter-selector"
     >
-      <button
-        aria-controls="TextFilter1-filter-selectors"
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="btn btn-default filter-selector-button button-icon equal"
+      <div
+        class="filter-selector-content"
       >
-         
-      </button>
+        <button
+          aria-controls="filter-test-filter-selectors"
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="btn btn-default filter-selector-button button-icon equal"
+        >
+           
+        </button>
+      </div>
     </div>
+    <input
+      class="form-control filter-input"
+      type="text"
+      value=""
+    />
   </div>
-  <input
-    class="form-control filter-input"
-    type="text"
-    value=""
-  />
-</div>
+</DocumentFragment>
 `;
 
-exports[`Text Filter with single instance with single attribute renders correctly 1`] = `
-<div
-  class="filter-container filter-custom-class"
-  data-focusindex="0"
->
+exports[`Text Filter with single attribute renders correctly 1`] = `
+<DocumentFragment>
   <div
-    class="filter-selector"
+    class="filter-container filter-custom-class"
+    data-focusindex="0"
   >
     <div
-      class="filter-selector-content"
+      class="filter-selector"
     >
-      <button
-        aria-controls="TextFilter1-filter-selectors"
-        aria-expanded="false"
-        aria-haspopup="true"
-        class="btn btn-default filter-selector-button button-icon equal"
+      <div
+        class="filter-selector-content"
       >
-         
-      </button>
+        <button
+          aria-controls="filter-test-filter-selectors"
+          aria-expanded="false"
+          aria-haspopup="true"
+          class="btn btn-default filter-selector-button button-icon equal"
+        >
+           
+        </button>
+      </div>
     </div>
+    <input
+      class="form-control filter-input"
+      type="text"
+      value=""
+    />
   </div>
-  <input
-    class="form-control filter-input"
-    type="text"
-    value=""
-  />
-</div>
+</DocumentFragment>
 `;
