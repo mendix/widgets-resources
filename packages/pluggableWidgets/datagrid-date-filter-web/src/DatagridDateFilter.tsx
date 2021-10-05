@@ -8,7 +8,7 @@ import * as locales from "date-fns/locale";
 import { Alert, FilterType, getFilterDispatcher, generateUUID } from "@mendix/piw-utils-internal/components/web";
 
 import { changeTimeToMidnight } from "./utils/utils";
-import { addDays } from "date-fns";
+import { addDays, isEqual } from "date-fns";
 
 import {
     and,
@@ -23,6 +23,7 @@ import {
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 interface Locale {
     [key: string]: object;
@@ -110,6 +111,13 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
+                            if (
+                                (value && props.valueAttribute?.value && !isEqual(props.valueAttribute.value, value)) ||
+                                (value ? value : undefined) !== props.valueAttribute?.value
+                            ) {
+                                props.valueAttribute?.setValue(value ?? undefined);
+                                executeAction(props.onChange);
+                            }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, value, type))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);

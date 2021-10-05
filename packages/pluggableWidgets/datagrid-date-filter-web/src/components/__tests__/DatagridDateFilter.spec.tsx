@@ -1,7 +1,7 @@
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
-import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
+import { actionValue, dynamicValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { mount } from "enzyme";
-import { render } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { createContext, createElement } from "react";
 import DatagridDateFilter from "../../DatagridDateFilter";
 
@@ -10,7 +10,8 @@ const commonProps = {
     tabIndex: 0,
     name: "filter-test",
     defaultFilter: "equal" as const,
-    adjustable: true
+    adjustable: true,
+    advanced: false
 };
 
 const mxObject = {
@@ -19,7 +20,7 @@ const mxObject = {
             locale: {
                 languageTag: "en-US",
                 patterns: {
-                    date: "dd/MM/YYYY"
+                    date: "dd/MM/yyyy"
                 }
             }
         })
@@ -48,6 +49,24 @@ describe("Date Filter", () => {
 
                 expect(asFragment()).toMatchSnapshot();
             });
+
+			it("triggers attribute and onchange action on change filter value", () => {
+            	const action = actionValue();
+            	const attribute = new EditableValueBuilder<Date>().build();
+            	render(
+                	<DatagridDateFilter
+                    	{...commonProps}
+                    	onChange={action}
+                    	valueAttribute={attribute}
+                    	placeholder={dynamicValue("Placeholder")}
+                	/>
+            	);
+
+            	fireEvent.input(screen.getByPlaceholderText("Placeholder"), { target: { value: "01/12/2020" } });
+
+           		expect(action.execute).toBeCalledTimes(1);
+           		expect(attribute.setValue).toBeCalledTimes(1);
+        	});
 
             afterAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;

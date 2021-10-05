@@ -10,6 +10,10 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
+                <property key="advanced" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
+                </property>
                 <property key="defaultValue" type="expression" required="false">
                     <caption>Default value</caption>
                     <description />
@@ -34,6 +38,21 @@
                 <property key="adjustable" type="boolean" defaultValue="true">
                     <caption>Adjustable by user</caption>
                     <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Configurations">
+                <property key="valueAttribute" type="attribute" required="false">
+                    <caption>Value attribute</caption>
+                    <description>Attribute to persist the value of the current filter.</description>
+                    <attributeTypes>
+                        <attributeType name="DateTime"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action" required="false">
+                    <caption>On change</caption>
+                    <description>Action to be triggered when the value or filter changes.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
