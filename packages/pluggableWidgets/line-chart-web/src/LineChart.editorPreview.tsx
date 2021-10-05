@@ -1,6 +1,20 @@
 import { createElement } from "react";
-import { Chart } from "./components/Chart";
+import { LineChart } from "./components/LineChart";
 
 export function preview() {
-    return <Chart xAxis={[1, 2, 3]} yAxis={[2, 6, 3]} title="Fancy example" />;
+    // TODO:
+    return (
+        <LineChart
+            data={[{ x: [], y: [] }]}
+            title="Fancy example"
+            widthUnit={"percentage"}
+            width={0}
+            heightUnit={"pixels"}
+            height={0}
+            showLegend={false}
+            xAxisLabel={undefined}
+            yAxisLabel={undefined}
+            gridLinesMode={"both"}
+        />
+    );
 }

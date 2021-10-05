@@ -28,7 +28,7 @@
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "test": "echo 'Skipping tests'",
+    "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
@@ -42,6 +42,7 @@
     "eslint": "^7.20.0"
   },
   "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "plotly.js": "^2.5.1",
     "react-plotly.js": "^2.5.1"
