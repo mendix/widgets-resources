@@ -39,7 +39,6 @@ export interface TreeNodeObject extends ObjectItem {
 }
 
 export interface TreeNodeProps extends Pick<TreeNodeContainerProps, "tabIndex"> {
-    name?: string;
     class: string;
     style?: CSSProperties;
     items: TreeNodeObject[] | null;

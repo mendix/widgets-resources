@@ -13,7 +13,6 @@ const items: TreeNodeProps["items"] = [
 ];
 
 const defaultProps: TreeNodeProps = {
-    name: "",
     class: "",
     items: [],
     isUserDefinedLeafNode: false,

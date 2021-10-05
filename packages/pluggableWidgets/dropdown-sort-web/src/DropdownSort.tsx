@@ -1,7 +1,8 @@
-import { Context, createElement, ReactElement, useCallback, useContext, useMemo } from "react";
+import { Context, createElement, ReactElement, useCallback, useContext, useMemo, useRef } from "react";
 import { ListAttributeValue } from "mendix";
 import {
     Alert,
+    generateUUID,
     getSortDispatcher,
     SortContextValue,
     SortDirection,
@@ -12,6 +13,8 @@ import { DropdownSortContainerProps } from "../typings/DropdownSortProps";
 import { SortComponent, SortOption } from "./components/SortComponent";
 
 export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
+    const id = useRef(`DropdownSort${generateUUID()}`);
+
     const SortContext = getSortDispatcher() ?? ({} as Context<SortContextValue>);
     const alertMessage = (
         <Alert bootstrapStyle="danger">
@@ -67,7 +70,7 @@ export function DropdownSort(props: DropdownSortContainerProps): ReactElement {
             defaultDirection={defaultDirection}
             defaultOption={defaultValue}
             emptyOptionCaption={props.emptyOptionCaption?.value}
-            name={props.name}
+            id={id.current}
             options={options}
             screenReaderButtonCaption={props.screenReaderButtonCaption?.value}
             screenReaderInputCaption={props.screenReaderInputCaption?.value}

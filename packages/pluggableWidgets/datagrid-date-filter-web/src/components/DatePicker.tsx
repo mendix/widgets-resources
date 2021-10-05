@@ -20,7 +20,7 @@ interface DatePickerProps {
     adjustable: boolean;
     dateFormat?: string;
     locale?: string;
-    name?: string;
+    id?: string;
     placeholder?: string;
     screenReaderCalendarCaption?: string;
     screenReaderInputCaption?: string;
@@ -46,12 +46,12 @@ export const DatePicker = forwardRef(
         return (
             <Fragment>
                 {Portal}
-                <span className="sr-only" id={`${props.name}-label`}>
+                <span className="sr-only" id={`${props.id}-label`}>
                     {props.screenReaderInputCaption}
                 </span>
                 <DatePickerComponent
                     allowSameDay={false}
-                    ariaLabelledBy={`${props.name}-label`}
+                    ariaLabelledBy={`${props.id}-label`}
                     autoFocus={false}
                     className={classNames("form-control", { "filter-input": props.adjustable })}
                     dateFormat={props.dateFormat}

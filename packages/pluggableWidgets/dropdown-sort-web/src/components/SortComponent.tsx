@@ -13,7 +13,7 @@ interface SortComponentProps {
     defaultDirection?: SortDirection;
     defaultOption?: SortOption;
     emptyOptionCaption?: string;
-    name?: string;
+    id?: string;
     options: SortOption[];
     tabIndex?: number;
     screenReaderButtonCaption?: string;
@@ -58,7 +58,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
     const optionsComponent = createPortal(
         <ul
             ref={optionsRef}
-            id={`${props.name}-dropdown-list`}
+            id={`${props.id}-dropdown-list`}
             className="dropdown-list"
             role="menu"
             data-focusindex={0}
@@ -134,7 +134,7 @@ export function SortComponent(props: SortComponentProps): ReactElement {
                         }
                     }}
                     aria-expanded={show}
-                    aria-controls={`${props.name}-dropdown-list`}
+                    aria-controls={`${props.id}-dropdown-list`}
                     aria-label={props.screenReaderInputCaption}
                 />
                 <button

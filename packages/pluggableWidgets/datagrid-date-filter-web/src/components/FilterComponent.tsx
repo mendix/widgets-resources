@@ -14,7 +14,7 @@ interface FilterComponentProps {
     defaultValue?: Date;
     dateFormat?: string;
     locale?: string;
-    name?: string;
+    id?: string;
     placeholder?: string;
     screenReaderButtonCaption?: string;
     screenReaderCalendarCaption?: string;
@@ -55,7 +55,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 <FilterSelector
                     ariaLabel={props.screenReaderButtonCaption}
                     defaultFilter={props.defaultFilter}
-                    name={props.name}
+                    id={props.id}
                     onChange={useCallback(
                         type => {
                             setType(prev => {
@@ -84,7 +84,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 adjustable={props.adjustable}
                 dateFormat={props.dateFormat}
                 locale={props.locale}
-                name={props.name}
+                id={props.id}
                 placeholder={props.placeholder}
                 ref={pickerRef}
                 screenReaderCalendarCaption={props.screenReaderCalendarCaption}

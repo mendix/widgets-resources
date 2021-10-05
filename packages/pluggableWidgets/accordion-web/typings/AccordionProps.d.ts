@@ -55,6 +55,7 @@ export interface AccordionContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advancedMode: boolean;
     groups: GroupsType[];
     collapsible: boolean;
     expandBehavior: ExpandBehaviorEnum;
@@ -64,12 +65,12 @@ export interface AccordionContainerProps {
     expandIcon?: DynamicValue<WebIcon>;
     collapseIcon?: DynamicValue<WebIcon>;
     animateIcon: boolean;
-    advancedMode: boolean;
 }
 
 export interface AccordionPreviewProps {
     class: string;
     style: string;
+    advancedMode: boolean;
     groups: GroupsPreviewType[];
     collapsible: boolean;
     expandBehavior: ExpandBehaviorEnum;
@@ -79,5 +80,4 @@ export interface AccordionPreviewProps {
     expandIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     collapseIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     animateIcon: boolean;
-    advancedMode: boolean;
 }

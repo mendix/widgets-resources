@@ -23,7 +23,6 @@ export function TreeNode(props: TreeNodeContainerProps): ReactElement {
 
     return (
         <TreeNodeComponent
-            name={props.name}
             class={props.class}
             style={props.style}
             items={items}

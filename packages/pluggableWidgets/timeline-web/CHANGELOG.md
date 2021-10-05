@@ -10,3 +10,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - We added a toolbox category and toolbox tile image for Studio & Studio Pro.
 
+### Changed
+- We fixed an issue that causes design properties to not be applied to the widget.
+

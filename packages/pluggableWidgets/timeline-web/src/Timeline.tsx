@@ -68,7 +68,7 @@ export default function Timeline(props: TimelineContainerProps): ReactElement {
 
     return (
         <TimelineComponent
-            name={props.name}
+            class={props.class}
             data={groupedEvents}
             groupEvents={props.groupEvents}
             customVisualization={props.customVisualization}

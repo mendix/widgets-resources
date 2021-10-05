@@ -22,7 +22,7 @@ jest.useFakeTimers();
 describe("Filter selector", () => {
     it("renders correctly", () => {
         const component = shallow(
-            <FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />
+            <FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />
         );
 
         expect(component).toMatchSnapshot();
@@ -32,7 +32,7 @@ describe("Filter selector", () => {
         const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
         const onChange = jest.fn();
         const component = shallow(
-            <FilterSelector defaultFilter="contains" onChange={onChange} name="test" options={options} />
+            <FilterSelector defaultFilter="contains" onChange={onChange} id="test" options={options} />
         );
 
         const button = component.find("button");
@@ -47,7 +47,7 @@ describe("Filter selector", () => {
                 ariaLabel="my label"
                 defaultFilter="contains"
                 onChange={jest.fn()}
-                name="test"
+                id="test"
                 options={options}
             />
         );
@@ -57,7 +57,7 @@ describe("Filter selector", () => {
 
     it("renders correctly with another default filter", () => {
         const component = shallow(
-            <FilterSelector defaultFilter="equal" onChange={jest.fn()} name="test" options={options} />
+            <FilterSelector defaultFilter="equal" onChange={jest.fn()} id="test" options={options} />
         );
 
         expect(component).toMatchSnapshot();
@@ -67,7 +67,7 @@ describe("Filter selector", () => {
         const onClickProps = { preventDefault: jest.fn(), stopPropagation: jest.fn() };
         const onChange = jest.fn();
         const component = shallow(
-            <FilterSelector defaultFilter="contains" onChange={onChange} name="test" options={options} />
+            <FilterSelector defaultFilter="contains" onChange={onChange} id="test" options={options} />
         );
 
         const button = component.find("button");
@@ -88,7 +88,7 @@ describe("Filter selector", () => {
         beforeEach(() => (document.body.innerHTML = ""));
 
         it("changes focused element when pressing filter selector button", () => {
-            render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />);
+            render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />);
 
             expect(document.body).toHaveFocus();
 
@@ -104,7 +104,7 @@ describe("Filter selector", () => {
         });
 
         it("changes focused element back to the button when pressing shift+tab in the first element", () => {
-            render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />);
+            render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />);
 
             expect(document.body).toHaveFocus();
 
@@ -131,7 +131,7 @@ describe("Filter selector", () => {
                 <FilterSelector
                     defaultFilter="contains"
                     onChange={onChange}
-                    name="test"
+                    id="test"
                     options={[
                         { value: "contains", label: "Contains" },
                         { value: "startsWith", label: "Starts with" }
@@ -160,7 +160,7 @@ describe("Filter selector", () => {
         });
 
         it("changes focused element back to the button when pressing escape in any element", () => {
-            render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} name="test" options={options} />);
+            render(<FilterSelector defaultFilter="contains" onChange={jest.fn()} id="test" options={options} />);
 
             expect(document.body).toHaveFocus();
 
