@@ -10,6 +10,10 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
+                <property key="advanced" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
+                </property>
                 <property key="defaultValue" type="expression" required="false">
                     <caption>Default value</caption>
                     <description />
@@ -40,6 +44,24 @@
                 <property key="delay" type="integer" defaultValue="500">
                     <caption>Apply after (ms)</caption>
                     <description>Wait this period before applying then change(s) to the filter</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Configurations">
+                <property key="valueAttribute" type="attribute" required="false">
+                    <caption>Value attribute</caption>
+                    <description>Attribute to persist the value of the current filter.</description>
+                    <attributeTypes>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action" required="false">
+                    <caption>On change</caption>
+                    <description>Action to be triggered when the value or filter changes.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>

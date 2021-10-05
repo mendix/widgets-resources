@@ -5,7 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.0.1] DatagridNumberFilter - 2021-10-7
+### Added
+- We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+
+## [2.0.1] - 2021-10-7
 
 ### Fixed
 - We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
