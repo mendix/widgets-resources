@@ -6,7 +6,7 @@ describe("Image viewer", () => {
     it("triggers a Microflow on click", () => {
         page.open("p/onClickMicroflow");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         imageRender.element.click();
         page.modalDialog.waitForDisplayed();
@@ -17,7 +17,7 @@ describe("Image viewer", () => {
     it("triggers a Nanoflow on click", () => {
         page.open("p/onClickNanoflow");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         imageRender.element.click();
         page.modalDialog.waitForDisplayed();
@@ -28,7 +28,7 @@ describe("Image viewer", () => {
     it("opens a Page on click", () => {
         page.open("p/onClickShowPage");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         imageRender.element.click();
         page.modalDialog.waitForDisplayed();

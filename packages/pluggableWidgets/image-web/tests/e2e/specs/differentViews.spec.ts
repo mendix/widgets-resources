@@ -9,7 +9,7 @@ describe("Image viewer", () => {
         const grid = page.getWidget("index-0");
         grid.click();
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         const content = imageRender.imageSrc;
         expect(content).toContain(html.staticUrl);
@@ -18,7 +18,7 @@ describe("Image viewer", () => {
     it("renders in a list view", () => {
         page.open("p/listView");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         const content = imageRender.imageSrc;
         expect(content).toContain(html.staticUrl);
@@ -27,7 +27,7 @@ describe("Image viewer", () => {
     it("renders in a template grid", () => {
         page.open("p/templateGrid");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         const content = imageRender.imageSrc;
         expect(content).toContain(html.staticUrl);
@@ -38,9 +38,9 @@ describe("Image viewer", () => {
 
         page.getWidget("tabPage2").click();
 
-        const imageRender = new Image("imageRender2");
+        const imageRender = new Image("image2");
         imageRender.element.waitForDisplayed();
-        const content = imageRender.imageSrc;
+        const content = imageRender.imageSrcHidden;
         expect(content).toContain(html.staticUrl);
     });
 });
