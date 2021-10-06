@@ -38,9 +38,9 @@ describe("Image viewer", () => {
 
         page.getWidget("tabPage2").click();
 
-        const imageRender = new Image("image2");
+        const imageRender = new Image("imageTabPage2");
         imageRender.element.waitForDisplayed();
-        const content = imageRender.imageSrcHidden;
+        const content = imageRender.imageSrc;
         expect(content).toContain(html.staticUrl);
     });
 });
