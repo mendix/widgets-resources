@@ -1,6 +1,6 @@
 import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
-import { fireEvent, render, RenderAPI } from "react-native-testing-library";
+import { fireEvent, render, RenderAPI } from "@testing-library/react-native";
 
 import { BarcodeScanner, Props, throttle } from "../BarcodeScanner";
 import { RNCamera } from "./__mocks__/RNCamera";

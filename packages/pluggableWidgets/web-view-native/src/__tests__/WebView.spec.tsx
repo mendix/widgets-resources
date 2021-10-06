@@ -1,6 +1,6 @@
 import { actionValue, dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
-import { fireEvent, render } from "react-native-testing-library";
+import { fireEvent, render } from "@testing-library/react-native";
 import { WebView as RNWebView } from "react-native-webview";
 
 import { Props, WebView } from "../WebView";

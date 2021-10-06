@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { render } from "react-native-testing-library";
+import { render } from "@testing-library/react-native";
 
 import { Legend, LegendProps } from "../Legend";
 import { defaultLineChartStyle } from "../../ui/Styles";

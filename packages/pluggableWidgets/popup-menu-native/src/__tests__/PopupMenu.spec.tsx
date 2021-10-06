@@ -3,7 +3,7 @@ import { PopupMenuStyle } from "../ui/Styles";
 import { Text, TouchableHighlight } from "react-native";
 import { createElement } from "react";
 import { actionValue } from "@mendix/piw-utils-internal";
-import { fireEvent, render } from "react-native-testing-library";
+import { fireEvent, render } from "@testing-library/react-native";
 import { PopupMenu } from "../PopupMenu";
 import { MenuItem } from "react-native-material-menu";
 

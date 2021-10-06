@@ -1,7 +1,7 @@
 import { actionValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { AppStateStatus } from "react-native";
-import { flushMicrotasksQueue, render } from "react-native-testing-library";
+import { flushMicrotasksQueue, render } from "@testing-library/react-native";
 
 import { AppEvents, Props } from "../AppEvents";
 
