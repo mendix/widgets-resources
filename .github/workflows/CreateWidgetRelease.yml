@@ -20,10 +20,10 @@ jobs:
             - name: "Installing dependencies"
               run: npm install
             - name: "Building ${{ github.event.inputs.widget-name }} widget"
-              run: "npm run release -- --scope '${{ steps.scope.outputs._0 }}'"
+              run: "npm run release -- --scope '${{ github.event.inputs.widget-name }}'"
             - name: "Getting ${{ github.event.inputs.widget-name }} widget release information"
               id: releaseinformation
-              run: "npm run information:githubrelease -- --scope '${{ steps.scope.outputs._0 }}'"
+              run: "npm run information:githubrelease -- --scope '${{ github.event.inputs.widget-name }}'"
             - name:
                   "Create draft release for widget ${{ github.event.inputs.widget-name }} version ${{
                   steps.releaseinformation.version }}"
