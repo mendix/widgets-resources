@@ -12,6 +12,7 @@ import {
 import { FilterCondition } from "mendix/filters";
 import { extractFilters } from "./utils/filters";
 import { and } from "mendix/filters/builders";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 export function Gallery(props: GalleryContainerProps): ReactElement {
     const viewStateFilters = useRef<FilterCondition | undefined>(undefined);
@@ -163,7 +164,7 @@ export function Gallery(props: GalleryContainerProps): ReactElement {
                     renderWrapper(
                         props.content?.get(item),
                         props.itemClass?.get(item)?.value,
-                        props.onClick ? props.onClick?.get(item).execute : undefined
+                        props.onClick ? () => executeAction(props.onClick?.get(item)) : undefined
                     ),
                 [props.content, props.itemClass, props.onClick]
             )}
