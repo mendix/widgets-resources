@@ -3,7 +3,6 @@ import { VictoryPie } from "victory-native";
 import { VictoryStyleObject, CallbackArgs, BlockProps } from "victory-core";
 
 import { ChartStyle, SlicesStyle } from "../ui/Styles";
-import { SortOrderEnum } from "../../typings/PieDoughnutChartProps";
 import { Option } from "mendix";
 import { LayoutChangeEvent, View } from "react-native";
 
@@ -13,7 +12,6 @@ const LABEL_STYLE_KEYS = ["fill", "fontFamily", "fontSize", "fontStyle", "fontWe
 
 export interface ChartProps {
     series: DataPoints;
-    sortOrder: SortOrderEnum;
     style: ChartStyle;
     presentation: string;
     showLabels: boolean;
@@ -27,13 +25,7 @@ export interface Slice<X extends string, Y extends number> {
     stylingKey: Option<string>;
 }
 
-export function PieDoughnutChart({
-    presentation,
-    series,
-    sortOrder,
-    style,
-    showLabels
-}: ChartProps): ReactElement | null {
+export function PieDoughnutChart({ presentation, series, style, showLabels }: ChartProps): ReactElement | null {
     // due to the nature of the chart type, we only reply on the width, as the chart is always a square
     const [chartDimensions, setChartDimensions] = useState<{ width: number }>();
     // Chart user-styling may be missing for certain slices. A palette is passed, any missing colours
@@ -93,11 +85,6 @@ export function PieDoughnutChart({
                             labels: { ...createLabelStyleGetters(...LABEL_STYLE_KEYS) }
                         }}
                         labels={({ datum }) => (showLabels ? datum.x : undefined)}
-                        // typings are missing `sortOrder`
-                        /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
-                        // @ts-ignore
-                        sortKey={"y"}
-                        sortOrder={sortOrder}
                         innerRadius={
                             presentation === "doughnut"
                                 ? style.slices?.innerRadius ?? chartDimensions.width / DEFAULT_INNER_RADIUS_RATIO
