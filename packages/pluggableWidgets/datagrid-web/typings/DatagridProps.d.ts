@@ -77,6 +77,7 @@ export interface DatagridContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advanced: boolean;
     datasource: ListValue;
     columns: ColumnsType[];
     columnsFilterable: boolean;
@@ -97,12 +98,12 @@ export interface DatagridContainerProps {
     filterList: FilterListType[];
     filtersPlaceholder?: ReactNode;
     filterSectionTitle?: DynamicValue<string>;
-    advanced: boolean;
 }
 
 export interface DatagridPreviewProps {
     class: string;
     style: string;
+    advanced: boolean;
     datasource: {} | { type: string } | null;
     columns: ColumnsPreviewType[];
     columnsFilterable: boolean;
@@ -123,5 +124,4 @@ export interface DatagridPreviewProps {
     filterList: FilterListPreviewType[];
     filtersPlaceholder: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     filterSectionTitle: string;
-    advanced: boolean;
 }

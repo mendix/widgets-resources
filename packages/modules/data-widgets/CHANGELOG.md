@@ -5,6 +5,35 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.1] Data Widgets - 2021-10-7
+
+## [2.0.1] DatagridDateFilter
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
+## [2.0.1] DatagridDropdownFilter
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
+## [2.0.1] DatagridNumberFilter
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
+## [2.0.1] DatagridTextFilter
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
+## [2.0.1] Datagrid
+### Changed
+- We added a check to prevent actions to be triggered while being executed
+
+### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
+## [1.0.1] Gallery
+### Changed
+- We added a check to prevent actions to be triggered while being executed
+
 ## [2.0.0] - 2021-09-28
 
 ### Added

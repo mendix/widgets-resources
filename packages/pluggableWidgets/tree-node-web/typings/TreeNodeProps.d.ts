@@ -15,6 +15,7 @@ export interface TreeNodeContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advancedMode: boolean;
     datasource: ListValue;
     headerType: HeaderTypeEnum;
     headerContent?: ListWidgetValue;
@@ -27,12 +28,12 @@ export interface TreeNodeContainerProps {
     expandedIcon?: DynamicValue<WebIcon>;
     collapsedIcon?: DynamicValue<WebIcon>;
     animateIcon: boolean;
-    advancedMode: boolean;
 }
 
 export interface TreeNodePreviewProps {
     class: string;
     style: string;
+    advancedMode: boolean;
     datasource: {} | { type: string } | null;
     headerType: HeaderTypeEnum;
     headerContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
@@ -45,5 +46,4 @@ export interface TreeNodePreviewProps {
     expandedIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     collapsedIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     animateIcon: boolean;
-    advancedMode: boolean;
 }
