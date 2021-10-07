@@ -12,7 +12,7 @@ import {
     useFilterContext,
     useMultipleFiltering
 } from "@mendix/piw-utils-internal/components/web";
-import { isAvailable } from "@mendix/piw-utils-internal";
+import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
@@ -124,7 +124,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
                     return renderWrapper(
                         content,
                         classNames(`align-column-${column.alignment}`, column.columnClass?.get(value)?.value),
-                        props.onClick ? props.onClick?.get(value).execute : undefined
+                        props.onClick ? () => executeAction(props.onClick?.get(value)) : undefined
                     );
                 },
                 [props.columns, props.onClick]
