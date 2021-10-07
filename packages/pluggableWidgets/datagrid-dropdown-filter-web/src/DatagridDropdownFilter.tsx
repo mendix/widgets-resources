@@ -6,7 +6,6 @@ import { Alert, FilterType, getFilterDispatcher, generateUUID } from "@mendix/pi
 
 import { attribute, equals, literal, or } from "mendix/filters/builders";
 import { FilterCondition } from "mendix/filters";
-import { executeAction } from "@mendix/piw-utils-internal";
 
 export default function DatagridDropdownFilter(props: DatagridDropdownFilterContainerProps): ReactElement {
     const id = useRef(`DropdownFilter${generateUUID()}`);
@@ -96,7 +95,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                             const attributeCurrentValue = props.valueAttribute?.value || "";
                             if (valuesString !== attributeCurrentValue) {
                                 props.valueAttribute?.setValue(valuesString);
-                                executeAction(props.onChange);
+                                props.onChange?.execute();
                             }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, values))

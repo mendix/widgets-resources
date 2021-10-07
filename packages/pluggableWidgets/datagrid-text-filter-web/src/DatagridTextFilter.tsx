@@ -21,7 +21,6 @@ import {
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
-import { executeAction } from "@mendix/piw-utils-internal";
 
 export default function DatagridTextFilter(props: DatagridTextFilterContainerProps): ReactElement {
     const id = useRef(`TextFilter${generateUUID()}`);
@@ -94,7 +93,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                             const attributeCurrentValue = props.valueAttribute?.value || "";
                             if (value !== attributeCurrentValue) {
                                 props.valueAttribute?.setValue(value);
-                                executeAction(props.onChange);
+                                props.onChange?.execute();
                             }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, value, type))

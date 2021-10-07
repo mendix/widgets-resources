@@ -23,7 +23,6 @@ import {
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
-import { executeAction } from "@mendix/piw-utils-internal";
 
 interface Locale {
     [key: string]: object;
@@ -116,7 +115,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                                 (value || undefined) !== props.valueAttribute?.value
                             ) {
                                 props.valueAttribute?.setValue(value ?? undefined);
-                                executeAction(props.onChange);
+                                props.onChange?.execute();
                             }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, value, type))
