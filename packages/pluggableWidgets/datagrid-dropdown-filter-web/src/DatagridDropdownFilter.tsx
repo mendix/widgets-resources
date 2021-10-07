@@ -93,7 +93,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         tabIndex={props.tabIndex}
                         updateFilters={(values: FilterOption[]): void => {
                             const valuesString = values.map(v => v.value).join(",");
-                            const attributeCurrentValue = props.valueAttribute?.value ? props.valueAttribute.value : "";
+                            const attributeCurrentValue = props.valueAttribute?.value || "";
                             if (valuesString !== attributeCurrentValue) {
                                 props.valueAttribute?.setValue(valuesString);
                                 executeAction(props.onChange);

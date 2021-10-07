@@ -113,7 +113,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
                             if (
                                 (value && props.valueAttribute?.value && !isEqual(props.valueAttribute.value, value)) ||
-                                (value ? value : undefined) !== props.valueAttribute?.value
+                                (value || undefined) !== props.valueAttribute?.value
                             ) {
                                 props.valueAttribute?.setValue(value ?? undefined);
                                 executeAction(props.onChange);

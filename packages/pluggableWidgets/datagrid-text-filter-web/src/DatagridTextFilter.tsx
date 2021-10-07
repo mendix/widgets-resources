@@ -91,7 +91,7 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: string, type: DefaultFilterEnum): void => {
-                            const attributeCurrentValue = props.valueAttribute?.value ? props.valueAttribute.value : "";
+                            const attributeCurrentValue = props.valueAttribute?.value || "";
                             if (value !== attributeCurrentValue) {
                                 props.valueAttribute?.setValue(value);
                                 executeAction(props.onChange);
