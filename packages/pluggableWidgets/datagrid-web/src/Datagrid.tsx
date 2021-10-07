@@ -54,7 +54,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     );
 
     const onConfigurationChange = useCallback(() => {
-        executeAction(props.onConfigurationChange);
+        props.onConfigurationChange?.execute();
     }, [props.onConfigurationChange]);
 
     const customFiltersState = props.columns.map(() => useState<FilterFunction>());
