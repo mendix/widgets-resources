@@ -60,13 +60,6 @@ describe("PieDoughnutChart", () => {
 
             expect(getByTestId("mock").props.labels({ datum: { x: "label1" } })).toEqual("label1");
         });
-
-        it("handles sortOrder", () => {
-            const { getByTestId, toJSON } = render(<PieDoughnutChart {...createProps({ sortOrder: "descending" })} />);
-            fireLayoutEvent(getByTestId("innerView"));
-
-            expect(toJSON()).toMatchSnapshot();
-        });
     });
 
     describe("data", () => {

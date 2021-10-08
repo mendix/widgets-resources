@@ -25,63 +25,12 @@ exports[`PieDoughnutChart configuration basic static props 1`] = `
       labels={[Function]}
       padding={
         Object {
-          "bottom": 0,
-          "left": 0,
-          "right": 0,
-          "top": 0,
+          "bottom": 40,
+          "left": 40,
+          "right": 40,
+          "top": 40,
         }
       }
-      sortOrder="ascending"
-      style={
-        Object {
-          "labels": Object {
-            "fill": [Function],
-            "fontFamily": [Function],
-            "fontSize": [Function],
-            "fontStyle": [Function],
-            "fontWeight": [Function],
-          },
-        }
-      }
-      testID="mock"
-      width={300}
-    />
-  </View>
-</View>
-`;
-
-exports[`PieDoughnutChart configuration handles sortOrder 1`] = `
-<View
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    onLayout={[Function]}
-    style={
-      Object {
-        "alignItems": "center",
-        "justifyContent": "center",
-      }
-    }
-    testID="innerView"
-  >
-    <View
-      colorScale={Array []}
-      data={Array []}
-      height={300}
-      labels={[Function]}
-      padding={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "right": 0,
-          "top": 0,
-        }
-      }
-      sortOrder="descending"
       style={
         Object {
           "labels": Object {
