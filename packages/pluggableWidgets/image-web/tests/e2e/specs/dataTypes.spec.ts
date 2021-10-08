@@ -16,7 +16,7 @@ describe("Image viewer", () => {
     xit("loads an image from a dynamic url association", () => {
         page.open("p/dynamicUrlAssociation");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         const content = imageRender.imageSrc;
         expect(content).toBe(html.dynamicImage);
@@ -27,7 +27,7 @@ describe("Image viewer", () => {
     xit("loads no image when no image url is specified", () => {
         page.open("p/emptyUrl");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         const content = imageRender.imageSrcHidden;
         expect(content).toContain(page.url);
     });
@@ -35,7 +35,7 @@ describe("Image viewer", () => {
     it("loads an image from a static image", () => {
         page.open("p/staticImage");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         const content = imageRender.imageSrc;
         expect(content).toContain(html.staticImage);
@@ -44,7 +44,7 @@ describe("Image viewer", () => {
     it("loads an image from a static URL", () => {
         page.open("p/staticUrl");
 
-        const imageRender = new Image("imageRender1");
+        const imageRender = new Image("image1");
         imageRender.element.waitForDisplayed();
         const content = imageRender.imageSrc;
         expect(content).toBe(html.staticUrl);
