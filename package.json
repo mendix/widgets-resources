@@ -12,6 +12,7 @@
     "prettier": "prettier --config \"./prettier.config.js\" --write \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "format": "pretty-quick --staged --config \"./prettier.config.js\" --pattern \"**/{src,script,typings,test}/**/*.{js,jsx,ts,tsx,scss,html}\"",
     "clean-all-screenshots-mac": "find . -name 'screenshot-baseline' -type d -prune -exec rm -rf '{}' +",
+    "information:githubrelease": "lerna run information:githubrelease",
     "lint": "npm run lint:src && lerna run lint --stream",
     "lint:src": "eslint --config .eslintrc.js --ext .jsx,.js,.ts,.tsx packages/*/*/src --no-error-on-unmatched-pattern",
     "lint:scripts": "eslint --fix --config .eslintrc.js --ext .jsx,.js,.ts,.tsx scripts",
