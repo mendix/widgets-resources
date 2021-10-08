@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export interface FilterOptionsType {
     caption: DynamicValue<string>;
@@ -21,21 +21,27 @@ export interface DatagridDropdownFilterContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advanced: boolean;
     defaultValue?: DynamicValue<string>;
     auto: boolean;
     filterOptions: FilterOptionsType[];
     emptyOptionCaption?: DynamicValue<string>;
     multiSelect: boolean;
+    valueAttribute?: EditableValue<string>;
+    onChange?: ActionValue;
     ariaLabel?: DynamicValue<string>;
 }
 
 export interface DatagridDropdownFilterPreviewProps {
     class: string;
     style: string;
+    advanced: boolean;
     defaultValue: string;
     auto: boolean;
     filterOptions: FilterOptionsPreviewType[];
     emptyOptionCaption: string;
     multiSelect: boolean;
+    valueAttribute: string;
+    onChange: {} | null;
     ariaLabel: string;
 }

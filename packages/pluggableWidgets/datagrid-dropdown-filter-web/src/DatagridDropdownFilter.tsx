@@ -83,7 +83,7 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                     <FilterComponent
                         ariaLabel={props.ariaLabel?.value}
                         className={props.class}
-                        defaultValue={defaultValues ?? props.defaultValue?.value}
+                        defaultValue={defaultValues ? defaultValues : props.defaultValue?.value}
                         emptyOptionCaption={props.emptyOptionCaption?.value}
                         multiSelect={props.multiSelect}
                         id={id.current}
@@ -91,6 +91,12 @@ export default function DatagridDropdownFilter(props: DatagridDropdownFilterCont
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(values: FilterOption[]): void => {
+                            const valuesString = values.map(v => v.value).join(",");
+                            const attributeCurrentValue = props.valueAttribute?.value || "";
+                            if (valuesString !== attributeCurrentValue) {
+                                props.valueAttribute?.setValue(valuesString);
+                                props.onChange?.execute();
+                            }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, values))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);

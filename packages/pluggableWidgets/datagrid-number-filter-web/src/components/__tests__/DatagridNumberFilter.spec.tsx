@@ -1,10 +1,11 @@
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
-import { ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
-import { mount, render } from "enzyme";
+import { actionValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
+import { render, fireEvent, screen } from "@testing-library/react";
+import { mount } from "enzyme";
 import { createContext, createElement } from "react";
-import { render as testingLibraryRender } from "@testing-library/react";
 
 import DatagridNumberFilter from "../../DatagridNumberFilter";
+import { Big } from "big.js";
 
 const commonProps = {
     class: "filter-custom-class",
@@ -12,21 +13,11 @@ const commonProps = {
     name: "filter-test",
     defaultFilter: "equal" as const,
     adjustable: true,
+    advanced: false,
     delay: 1000
 };
 
-const mxObject = {
-    session: {
-        getConfig: () => ({
-            locale: {
-                languageTag: "en-US",
-                patterns: {
-                    date: "dd/MM/YYYY"
-                }
-            }
-        })
-    }
-};
+jest.useFakeTimers();
 
 describe("Number Filter", () => {
     describe("with single instance", () => {
@@ -40,13 +31,25 @@ describe("Number Filter", () => {
                     filterDispatcher: jest.fn(),
                     singleAttribute: new ListAttributeValueBuilder().withType("Long").withFilterable(true).build()
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders correctly", () => {
-                const filter = render(<DatagridNumberFilter {...commonProps} />);
+                const { asFragment } = render(<DatagridNumberFilter {...commonProps} />);
 
-                expect(filter).toMatchSnapshot();
+                expect(asFragment()).toMatchSnapshot();
+            });
+
+            it("triggers attribute and onchange action on change filter value", () => {
+                const action = actionValue();
+                const attribute = new EditableValueBuilder<Big>().build();
+                render(<DatagridNumberFilter {...commonProps} onChange={action} valueAttribute={attribute} />);
+
+                fireEvent.change(screen.getByRole("spinbutton"), { target: { value: "10" } });
+
+                jest.advanceTimersByTime(1000);
+
+                expect(action.execute).toBeCalledTimes(1);
+                expect(attribute.setValue).toBeCalledWith(new Big(10));
             });
 
             afterAll(() => {
@@ -71,13 +74,12 @@ describe("Number Filter", () => {
                             .build()
                     }
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders correctly", () => {
-                const filter = render(<DatagridNumberFilter {...commonProps} />);
+                const { asFragment } = render(<DatagridNumberFilter {...commonProps} />);
 
-                expect(filter).toMatchSnapshot();
+                expect(asFragment()).toMatchSnapshot();
             });
 
             afterAll(() => {
@@ -91,7 +93,6 @@ describe("Number Filter", () => {
                     filterDispatcher: jest.fn(),
                     singleAttribute: new ListAttributeValueBuilder().withType("Boolean").withFilterable(true).build()
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders error message", () => {
@@ -124,7 +125,6 @@ describe("Number Filter", () => {
                             .build()
                     }
                 } as FilterContextValue);
-                (window as any).mx = mxObject;
             });
 
             it("renders error message", () => {
@@ -143,7 +143,6 @@ describe("Number Filter", () => {
         describe("with no context", () => {
             beforeAll(() => {
                 (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;
-                (window as any).mx = mxObject;
             });
 
             it("renders error message", () => {
@@ -162,12 +161,11 @@ describe("Number Filter", () => {
                 filterDispatcher: jest.fn(),
                 singleAttribute: new ListAttributeValueBuilder().withType("Long").withFilterable(true).build()
             } as FilterContextValue);
-            (window as any).mx = mxObject;
         });
 
         it("renders with a unique id", () => {
-            const { asFragment: fragment1 } = testingLibraryRender(<DatagridNumberFilter {...commonProps} />);
-            const { asFragment: fragment2 } = testingLibraryRender(<DatagridNumberFilter {...commonProps} />);
+            const { asFragment: fragment1 } = render(<DatagridNumberFilter {...commonProps} />);
+            const { asFragment: fragment2 } = render(<DatagridNumberFilter {...commonProps} />);
 
             expect(fragment1().querySelector("button")?.getAttribute("aria-controls")).not.toBe(
                 fragment2().querySelector("button")?.getAttribute("aria-controls")

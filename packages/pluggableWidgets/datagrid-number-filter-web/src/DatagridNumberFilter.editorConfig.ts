@@ -3,6 +3,7 @@ import {
     equalsIcon,
     greaterThanEqualIcon,
     greaterThanIcon,
+    hidePropertiesIn,
     hidePropertyIn,
     ImageProps,
     notEqualIcon,
@@ -17,6 +18,9 @@ import { DatagridNumberFilterPreviewProps, DefaultFilterEnum } from "../typings/
 export function getProperties(values: DatagridNumberFilterPreviewProps, defaultProperties: Properties): Properties {
     if (!values.adjustable) {
         hidePropertyIn(defaultProperties, values, "screenReaderButtonCaption");
+    }
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
     }
     return defaultProperties;
 }

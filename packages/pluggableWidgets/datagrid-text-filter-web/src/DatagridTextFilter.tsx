@@ -90,6 +90,11 @@ export default function DatagridTextFilter(props: DatagridTextFilterContainerPro
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         updateFilters={(value: string, type: DefaultFilterEnum): void => {
+                            const attributeCurrentValue = props.valueAttribute?.value || "";
+                            if (value !== attributeCurrentValue) {
+                                props.valueAttribute?.setValue(value);
+                                props.onChange?.execute();
+                            }
                             const conditions = attributes
                                 ?.map(attribute => getFilterCondition(attribute, value, type))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);

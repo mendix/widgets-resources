@@ -2,6 +2,7 @@ import { DatagridDropdownFilterPreviewProps } from "../typings/DatagridDropdownF
 import {
     chevronDownIcon,
     ContainerProps,
+    hidePropertiesIn,
     hidePropertyIn,
     ImageProps,
     Properties,
@@ -12,6 +13,9 @@ import {
 export function getProperties(values: DatagridDropdownFilterPreviewProps, defaultProperties: Properties): Properties {
     if (values.auto) {
         hidePropertyIn(defaultProperties, values, "filterOptions");
+    }
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
     }
     return defaultProperties;
 }

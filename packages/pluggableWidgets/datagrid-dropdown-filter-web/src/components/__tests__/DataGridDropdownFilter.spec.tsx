@@ -1,15 +1,16 @@
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
-import { dynamicValue, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
+import { actionValue, dynamicValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { createContext, createElement } from "react";
 import DatagridDropdownFilter from "../../DatagridDropdownFilter";
-import { render } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import { mount } from "enzyme";
 import { FilterComponent } from "../FilterComponent";
 
 const commonProps = {
     class: "filter-custom-class",
     tabIndex: 0,
-    name: "filter-test"
+    name: "filter-test",
+    advanced: false
 };
 
 describe("Dropdown Filter", () => {
@@ -61,6 +62,27 @@ describe("Dropdown Filter", () => {
 
                     expect(asFragment()).toMatchSnapshot();
                 });
+            });
+
+            it("triggers attribute and onchange action on change filter value", () => {
+                const action = actionValue();
+                const attribute = new EditableValueBuilder<string>().build();
+                render(
+                    <DatagridDropdownFilter
+                        {...commonProps}
+                        auto
+                        multiSelect={false}
+                        filterOptions={[]}
+                        onChange={action}
+                        valueAttribute={attribute}
+                    />
+                );
+
+                fireEvent.click(screen.getByRole("textbox"));
+                fireEvent.click(screen.getAllByRole("menuitem")[2]);
+
+                expect(action.execute).toBeCalledTimes(1);
+                expect(attribute.setValue).toBeCalledWith("enum_value_2");
             });
 
             afterAll(() => {

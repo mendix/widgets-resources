@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { DynamicValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type DefaultFilterEnum =
     | "contains"
@@ -22,11 +22,14 @@ export interface DatagridTextFilterContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advanced: boolean;
     defaultValue?: DynamicValue<string>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
     adjustable: boolean;
     delay: number;
+    valueAttribute?: EditableValue<string>;
+    onChange?: ActionValue;
     screenReaderButtonCaption?: DynamicValue<string>;
     screenReaderInputCaption?: DynamicValue<string>;
 }
@@ -34,11 +37,14 @@ export interface DatagridTextFilterContainerProps {
 export interface DatagridTextFilterPreviewProps {
     class: string;
     style: string;
+    advanced: boolean;
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;
     placeholder: string;
     adjustable: boolean;
     delay: number | null;
+    valueAttribute: string;
+    onChange: {} | null;
     screenReaderButtonCaption: string;
     screenReaderInputCaption: string;
 }
