@@ -29,7 +29,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "semver": "^7.3.2",
-    "yeoman-generator": "^4.12.0"
+    "yeoman-generator": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
