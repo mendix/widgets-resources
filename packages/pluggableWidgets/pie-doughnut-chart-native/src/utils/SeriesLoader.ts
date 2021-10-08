@@ -56,8 +56,9 @@ function loadStaticSeries(series: SeriesType, seriesIndex: number, name: string)
                 );
                 return null;
             }
+
             data.push({
-                x: x.formatter.format(x.value),
+                x: x.displayValue,
                 y: Number(y.value.toString()),
                 stylingKey: series.sliceStylingKey?.get(item).value || undefined
             });
