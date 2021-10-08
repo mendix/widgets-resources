@@ -27,6 +27,7 @@
     "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
+    "information:githubrelease": "node ../../../scripts/release/getWidgetReleaseInformation.js --github-action",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
