@@ -1,5 +1,5 @@
 import { EditableValueBuilder, ListAttributeValueBuilder, ListValueBuilder } from "@mendix/piw-utils-internal";
-import { act, fireEvent, render, Thenable } from "react-native-testing-library";
+import { act, fireEvent, render, Thenable } from "@testing-library/react-native";
 import { ReactTestInstance } from "react-test-renderer";
 import { ObjectItem } from "mendix";
 import { View } from "react-native";
