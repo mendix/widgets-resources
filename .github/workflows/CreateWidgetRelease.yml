@@ -26,13 +26,13 @@ jobs:
               run: "npm run information:githubrelease -- --scope '${{ github.event.inputs.widget-name }}'"
             - name:
                   "Create draft release for widget ${{ github.event.inputs.widget-name }} version ${{
-                  steps.releaseinformation.version }}"
+                  steps.releaseinformation.outputs.version }}"
               uses: ncipollo/release-action@v1
               with:
-                  artifacts: ${{ steps.releaseinformation.releaseMpkPath }}
+                  artifacts: ${{ steps.releaseinformation.outputs.releaseMpkPath }}
                   draft: true
                   name:
-                      "${{ steps.releaseinformation.widgetName }} (Web) - Marketplace Release v${{
-                      steps.releaseinformation.version }}"
-                  tag: "${{ github.event.inputs.widget-name }}-v${{ steps.releaseinformation.version }}"
+                      "${{ steps.releaseinformation.outputs.widgetName }} (Web) - Marketplace Release v${{
+                      steps.releaseinformation.outputs.version }}"
+                  tag: "${{ github.event.inputs.widget-name }}-v${{ steps.releaseinformation.outputs.version }}"
                   token: ${{ secrets.GH_PAT }}
