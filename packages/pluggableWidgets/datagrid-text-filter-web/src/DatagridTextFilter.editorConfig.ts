@@ -18,12 +18,20 @@ import {
 } from "@mendix/piw-utils-internal";
 import { DatagridTextFilterPreviewProps, DefaultFilterEnum } from "../typings/DatagridTextFilterProps";
 
-export function getProperties(values: DatagridTextFilterPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(
+    values: DatagridTextFilterPreviewProps,
+    defaultProperties: Properties,
+    platform: "web" | "desktop"
+): Properties {
     if (!values.adjustable) {
         hidePropertyIn(defaultProperties, values, "screenReaderButtonCaption");
     }
-    if (!values.advanced) {
-        hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
+    if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
+        }
+    } else {
+        hidePropertyIn(defaultProperties, values, "advanced");
     }
     return defaultProperties;
 }

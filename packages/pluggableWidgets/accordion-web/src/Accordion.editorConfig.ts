@@ -23,7 +23,7 @@ export function getProperties(
         if (group.headerRenderMode === "text") {
             hidePropertyIn(defaultProperties, values, "groups", index, "headerContent");
 
-            if (!values.advancedMode) {
+            if (!values.advancedMode && platform === "web") {
                 hidePropertyIn(defaultProperties, values, "groups", index, "headerHeading");
             }
         } else {
@@ -35,7 +35,7 @@ export function getProperties(
             hidePropertyIn(defaultProperties, values, "groups", index, "initiallyCollapsed");
         }
 
-        if (!values.advancedMode || !values.collapsible) {
+        if ((!values.advancedMode && platform === "web") || !values.collapsible) {
             hideNestedPropertiesIn(defaultProperties, values, "groups", index, [
                 "collapsed",
                 "onToggleCollapsed",
@@ -57,17 +57,6 @@ export function getProperties(
         ]);
     }
 
-    if (!values.advancedMode) {
-        hidePropertiesIn(defaultProperties, values, [
-            "animate",
-            "showIcon",
-            "icon",
-            "expandIcon",
-            "collapseIcon",
-            "animateIcon"
-        ]);
-    }
-
     if (values.showIcon === "no") {
         hidePropertiesIn(defaultProperties, values, ["icon", "expandIcon", "collapseIcon", "animateIcon"]);
     }
@@ -79,7 +68,20 @@ export function getProperties(
     }
 
     if (platform === "web") {
+        if (!values.advancedMode) {
+            hidePropertiesIn(defaultProperties, values, [
+                "animate",
+                "showIcon",
+                "icon",
+                "expandIcon",
+                "collapseIcon",
+                "animateIcon"
+            ]);
+        }
+
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertyIn(defaultProperties, values, "advancedMode");
     }
 
     return defaultProperties;
