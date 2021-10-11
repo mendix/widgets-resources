@@ -50,7 +50,7 @@ async function createDataWidgetsModule() {
     let moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
-        moduleFolderNameInModeler: "data-widgets"
+        moduleFolderNameInModeler: "datawidgets"
     };
     moduleInfo = await bumpVersionInPackageJson(DWFolder, moduleInfo);
 
