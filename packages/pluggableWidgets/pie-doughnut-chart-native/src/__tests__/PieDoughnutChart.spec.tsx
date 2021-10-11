@@ -146,6 +146,108 @@ describe("PieDoughnutChart", () => {
 
             expect(mock.props.colorScale).toEqual(["watermelon", "dullgrey", "red", "brightred", "green"]);
         });
+
+        it("should sort data correctly in ascending order", () => {
+            const { getByTestId } = render(
+                <PieDoughnutChart {...createProps({ style, series: setupComplexSeries("ascending") })} />
+            );
+            fireLayoutEvent(getByTestId("innerView"));
+            const mock = getByTestId("mock");
+
+            expect(mock.props.data).toEqual([
+                {
+                    labelStyle: {
+                        fill: "red"
+                    },
+                    x: "Formatted five",
+                    y: 3
+                },
+                {
+                    labelStyle: {
+                        fill: "watermelon",
+                        fontSize: 11
+                    },
+                    stylingKey: "key1",
+                    x: "Formatted one",
+                    y: 8
+                },
+                {
+                    labelStyle: {
+                        fill: "green"
+                    },
+                    stylingKey: "key4",
+                    x: "Formatted four",
+                    y: 11
+                },
+                {
+                    labelStyle: {
+                        fill: "red"
+                    },
+                    x: "Formatted three",
+                    y: 12
+                },
+                {
+                    labelStyle: {
+                        fill: "green"
+                    },
+                    stylingKey: "key2",
+                    x: "Formatted two",
+                    y: 36
+                }
+            ]);
+        });
+
+        it("should sort data correctly in descending order", () => {
+            const { getByTestId } = render(
+                <PieDoughnutChart
+                    {...createProps({ style, sortOrder: "descending", series: setupComplexSeries("descending") })}
+                />
+            );
+            fireLayoutEvent(getByTestId("innerView"));
+            const mock = getByTestId("mock");
+
+            expect(mock.props.data).toEqual([
+                {
+                    labelStyle: {
+                        fill: "red"
+                    },
+                    stylingKey: "key4",
+                    x: "Formatted four",
+                    y: 21
+                },
+                {
+                    labelStyle: {
+                        fill: "green"
+                    },
+                    x: "Formatted five",
+                    y: 18
+                },
+                {
+                    labelStyle: {
+                        fill: "red"
+                    },
+                    stylingKey: "key2",
+                    x: "Formatted two",
+                    y: 5
+                },
+                {
+                    labelStyle: {
+                        fill: "green"
+                    },
+                    x: "Formatted three",
+                    y: 3
+                },
+                {
+                    labelStyle: {
+                        fill: "watermelon",
+                        fontSize: 11
+                    },
+                    stylingKey: "key1",
+                    x: "Formatted one",
+                    y: 1
+                }
+            ]);
+        });
     });
 
     describe("padding", () => {
@@ -288,32 +390,32 @@ function setupBasicSeries(): SeriesType[] {
     ];
 }
 
-function setupComplexSeries(): SeriesType[] {
+function setupComplexSeries(sortOrderToTest?: string): SeriesType[] {
     const xAttribute = new ListAttributeValueBuilder<string>().build();
     const getXAttributeMock = jest.fn();
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("one").build());
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("two").build());
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("three").build());
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("four").build());
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("five").build());
+    const setXAttributeMock = (value: string) =>
+        getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue(value).build());
+    ["one", "two", "three", "four", "five"].forEach(value => setXAttributeMock(value));
     xAttribute.get = getXAttributeMock;
 
     const yAttribute = new ListAttributeValueBuilder<Big>().build();
+    const setYAttributeMock = (value: number) =>
+        getYAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(value)).build());
     const getYAttributeMock = jest.fn();
-    getYAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(3)).build());
-    getYAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(6)).build());
-    getYAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(7)).build());
-    getYAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(12)).build());
-    getYAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(15)).build());
+    if (sortOrderToTest === "ascending") {
+        [8, 36, 12, 11, 3].forEach(value => setYAttributeMock(value));
+    } else if (sortOrderToTest === "descending") {
+        [1, 5, 3, 21, 18, 19].forEach(value => setYAttributeMock(value));
+    } else {
+        [3, 6, 7, 12, 15].forEach(value => setYAttributeMock(value));
+    }
     yAttribute.get = getYAttributeMock;
 
     const sliceStylingKey = new ListAttributeValueBuilder<string>().build();
     const getStylingKeyMock = jest.fn();
-    getStylingKeyMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("key1").build());
-    getStylingKeyMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("key2").build());
-    getStylingKeyMock.mockReturnValueOnce(new EditableValueBuilder<string>().build());
-    getStylingKeyMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue("key4").build());
-    getStylingKeyMock.mockReturnValueOnce(new EditableValueBuilder<string>().build());
+    const setStylingKeyMock = (value: string | undefined) =>
+        getStylingKeyMock.mockReturnValueOnce(new EditableValueBuilder<string>().withValue(value).build());
+    ["key1", "key2", undefined, "key4", undefined].forEach(value => setStylingKeyMock(value));
     sliceStylingKey.get = getStylingKeyMock;
 
     return [
