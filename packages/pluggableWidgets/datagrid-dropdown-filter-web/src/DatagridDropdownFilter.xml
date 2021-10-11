@@ -51,8 +51,8 @@
             </propertyGroup>
             <propertyGroup caption="Configurations">
                 <property key="valueAttribute" type="attribute" required="false">
-                    <caption>Value attribute</caption>
-                    <description>Attribute to persist the value of the current filter.</description>
+                    <caption>Saved attribute</caption>
+                    <description>Attribute used to store the last value of the filter.</description>
                     <attributeTypes>
                         <attributeType name="String"/>
                     </attributeTypes>
