@@ -42,12 +42,25 @@ describe("Background image", () => {
         });
     });
 
+    it("renders the dynamic svg image", async () => {
+        const btnDynamicSvgImage = Widget("btnDynamicSvgImage").getElement();
+        await btnDynamicSvgImage.tap();
+
+        const dynamicImage = Widget("dynamicSvgImageText").getElement();
+        await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
+
+        await expectToMatchImageSnapshot({
+            ios: { removeScrollbar: true },
+            android: { removeScrollbar: true }
+        });
+    });
+
     it("renders the dynamic image with conditional visibility", async () => {
         const btnConditionalBgImage = Widget("btnConditionalBgImage").getElement();
         await btnConditionalBgImage.tap();
 
         const checkboxImage = Widget("checkboxImage").getElement();
-        await checkboxImage.swipe("right");
+        await checkboxImage.tap();
 
         await expectToMatchImageSnapshot({
             ios: { removeScrollbar: true },
