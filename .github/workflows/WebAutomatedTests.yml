@@ -66,8 +66,10 @@ jobs:
               if: failure()
               run: |
                   sudo find ${{ github.workspace }}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
+                  sudo find ${{ github.workspace }}/packages/customWidgets -type d -exec chmod 755 {} \;
                   sudo find ${{ github.workspace }}/packages/theming -type d -exec chmod 755 {} \;
                   sudo find ${{ github.workspace }}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
+                  sudo find ${{ github.workspace }}/packages/customWidgets -type f -exec chmod 644 {} \;
                   sudo find ${{ github.workspace }}/packages/theming -type f -exec chmod 644 {} \;
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@v2
