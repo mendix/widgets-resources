@@ -32,7 +32,7 @@ async function buildAndCopyStyles(destination) {
                     command: `copy-and-watch "${join(
                         repoRoot,
                         "packages/theming/atlas/dist/themesource/atlas_nativemobile_content/**/*"
-                    )}" "${join(destination, "themesource/atlas_nativemobile_content")}"`
+                    )}" "${join(destination, "themesource/atlas_nativemobile_content/")}"`
                 }
             ],
             {
