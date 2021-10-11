@@ -155,7 +155,7 @@ async function updateNativeComponentsTestProjectWithAtlas(moduleInfo, tmpFolder)
         `packages/theming/atlas/dist/themesource/${moduleFolderNameInRepo}`
     );
     const atlasNativeContent = await getFiles(atlasNativeContentPath);
-    const tmpFolderNativeStyles = join(tmpFolder, `themsource/${moduleInfo.moduleFolderNameInModeler}/native`);
+    const tmpFolderNativeStyles = join(tmpFolder, `themsource/${moduleInfo.moduleFolderNameInModeler}`);
 
     console.log("Updating NativeComponentsTestProject..");
     await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
