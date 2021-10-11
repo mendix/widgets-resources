@@ -45,20 +45,26 @@ async function getFiles(dir, includeExtension = []) {
         .filter(file => !includeExtension?.length || (extname(file) && includeExtension?.includes(extname(file))));
 }
 
-async function getPackageInfo(path) {
+async function getPackageInfo(path, moduleFolderNameInRepo, changelogFileName = "CHANGELOG") {
     const pkgPath = join(path, `package.json`);
     try {
         await access(pkgPath);
         const { name, widgetName, moduleName, version, marketplace, testProject, repository } = require(pkgPath);
         return {
+            path,
             nameWithDash: name,
-            nameWithSpace: moduleName ?? widgetName,
+            nameWithSpace:
+                moduleName ??
+                widgetName ??
+                moduleFolderNameInRepo
+                    .replace(/-/g, " ")
+                    .replace(/([^ ][a-z]+)/g, (_, word) => word.charAt(0).toUpperCase() + word.slice(1)),
             version,
             minimumMXVersion: marketplace?.minimumMXVersion,
             url: repository?.url,
             testProjectUrl: testProject?.githubUrl,
             testProjectBranchName: testProject?.branchName,
-            changelogPath: `${path}/CHANGELOG.md`
+            changelogPath: `${path}/${changelogFileName}.md`
         };
     } catch (error) {
         console.error(`ERROR: Path does not exist: ${pkgPath}`);
