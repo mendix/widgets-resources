@@ -7,7 +7,7 @@ const config = {
 
 main().catch(e => {
     console.error(e);
-    process.exit(-1);
+    process.exit();
 });
 
 async function main() {
