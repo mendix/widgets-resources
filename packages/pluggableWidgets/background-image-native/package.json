@@ -16,6 +16,12 @@
     "release": "pluggable-widgets-tools release:native",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:native",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
+    "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
+    "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp",
     "version": "npm run release"
   },
   "dependencies": {
@@ -24,6 +30,7 @@
   "devDependencies": {
     "@mendix/piw-utils-internal": "1.0.0",
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "detox": "^18.20.0",
     "eslint": "^7.20.0"
   }
 }
