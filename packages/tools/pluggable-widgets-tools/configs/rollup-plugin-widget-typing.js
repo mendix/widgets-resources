@@ -25,7 +25,9 @@ export function widgetTyping({ sourceDir }) {
                 propsTypingFilePaths = await runTransformation(sourceDir);
             }
             await execShellCommand(
-                `npx pluggable-widgets-tools format:custom-files -- ${propsTypingFilePaths.map(f => `"${f}"`).join(" ")}`,
+                `npx pluggable-widgets-tools format:custom-files -- ${propsTypingFilePaths
+                    .map(f => `'"${f}"'`)
+                    .join(" ")}`,
                 sourceDir
             );
             firstRun = false;
