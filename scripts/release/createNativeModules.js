@@ -23,7 +23,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["mobile-resources-native", "nanoflow-actions-native"];
+    const modules = ["mobile-resources-native", "nanoflow-actions-native", "atlas-content-native"];
     if (!modules.includes(moduleFolderNameInRepo) || !version) {
         return;
     }
@@ -34,6 +34,9 @@ async function main() {
             break;
         case "nanoflow-actions-native":
             await createNanoflowCommonsModule();
+            break;
+        case "atlas-content-native":
+            await createAtlasNativeContentModule();
             break;
     }
 }
@@ -84,6 +87,26 @@ async function createNanoflowCommonsModule() {
     console.log("Done.");
 }
 
+async function createAtlasNativeContentModule() {
+    console.log("Creating the Atlas Native Content module.");
+    const moduleFolder = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}`);
+    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "Atlas_NativeMobile_Content",
+        moduleFolderNameInModeler: "atlas_nativemobile_content"
+    };
+    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
+    await githubAuthentication(moduleInfo);
+    const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
+    await commitAndCreatePullRequest(moduleInfo);
+    await updateNativeComponentsTestProjectWithAtlas(moduleInfo, tmpFolder);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo);
+    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+    console.log("Done.");
+}
+
 // Update test project with latest changes and update version in themesource
 async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWidgetFolders) {
     const jsActionsPath = join(repoRootPath, `packages/jsActions/${moduleFolderNameInRepo}/dist`);
@@ -120,6 +143,36 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
             `git add . && git commit -m "Updated JS actions ${nativeWidgetFolders ? "and widgets" : ""}" && git push`,
             tmpFolder
         );
+    } else {
+        console.warn(`Nothing to commit from repo ${tmpFolder}`);
+    }
+}
+
+// Update test project with latest changes and update version in themesource
+async function updateNativeComponentsTestProjectWithAtlas(moduleInfo, tmpFolder) {
+    const atlasNativeContentPath = join(
+        repoRootPath,
+        `packages/modules/${moduleFolderNameInRepo}/dist/themesource/${moduleInfo.moduleFolderNameInModeler}`
+    );
+    const atlasNativeContent = await getFiles(atlasNativeContentPath);
+    const tmpFolderNativeStyles = join(tmpFolder, `themesource/${moduleInfo.moduleFolderNameInModeler}`);
+
+    console.log("Updating NativeComponentsTestProject..");
+    await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
+
+    console.log("Copying Native styling files..");
+    await Promise.all([
+        ...atlasNativeContent.map(async file => {
+            const dest = join(tmpFolderNativeStyles, file.replace(atlasNativeContentPath, ""));
+            await rm(dest);
+            await copyFile(file, dest);
+        })
+    ]);
+
+    await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
+    const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
+    if (!/nothing to commit/i.test(gitOutput)) {
+        await execShellCommand(`git add . && git commit -m "Updated Atlas native styling" && git push`, tmpFolder);
     } else {
         console.warn(`Nothing to commit from repo ${tmpFolder}`);
     }

@@ -1,0 +1,29 @@
+{
+  "name": "atlas-content-native",
+  "moduleName": "Atlas NativeMobile Content",
+  "version": "3.0.7",
+  "license": "Apache-2.0",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.6.0.27784",
+    "marketplaceId": 117175
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/native-mobile-resources",
+    "branchName": "main"
+  },
+  "scripts": {
+    "release": "node ./scripts/build.js release",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "copy-and-watch": "^0.1.5",
+    "concurrently": "^5.3.0"
+  }
+}
