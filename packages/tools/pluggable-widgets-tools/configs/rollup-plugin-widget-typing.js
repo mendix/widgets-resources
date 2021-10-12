@@ -1,4 +1,5 @@
 import { promises as fs } from "fs";
+import { platform } from "os";
 import { extname, join } from "path";
 import { listDir, execShellCommand } from "./shared";
 
@@ -26,7 +27,11 @@ export function widgetTyping({ sourceDir }) {
             }
             await execShellCommand(
                 `npx pluggable-widgets-tools format:custom-files -- ${propsTypingFilePaths
-                    .map(f => `'"${f}"'`)
+                    .map(f =>
+                        platform() === "win32"
+                            ? `${f.replace(/(?<=[/\\])([^/\\]* [^/\\]*)(?=[/\\])/g, '"$1"')}`
+                            : `'"${f}"'`
+                    )
                     .join(" ")}`,
                 sourceDir
             );
