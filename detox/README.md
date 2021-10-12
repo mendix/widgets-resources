@@ -46,7 +46,7 @@ To run all the specs(from the root directory of the repository or particular nat
 
 To run one spec file(from the root directory of the repository or particular native-widget): `npm run test:e2e:local:PLATFORM_NAME FILE_NAME.spec.ts`
 
-Debugging(from the root directory of the particular native-widget): `npm run debug:e2e:PLATFORM_NAME`
+Debugging(from the root directory of the particular native-widget): `npm run debug:e2e:local:PLATFORM_NAME`
 
 PLATFORM_NAME = `android` or `ios`
 

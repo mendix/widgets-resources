@@ -18,8 +18,8 @@
     "test": "pluggable-widgets-tools test:unit:native",
     "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
     "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
-    "debug:e2e:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
-    "debug:e2e:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
+    "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
     "version": "npm run release"
   },
   "dependencies": {
