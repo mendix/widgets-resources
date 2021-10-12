@@ -17,8 +17,7 @@ export interface ChartProps {
     showLabels: boolean;
 }
 
-export type DataPoint = Slice<string, number>;
-export type DataPoints = DataPoint[];
+export type DataPoints = Array<Slice<string, number>>;
 
 export interface Slice<X extends string, Y extends number> {
     x: X;
