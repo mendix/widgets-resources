@@ -18,16 +18,6 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    if (!values.advancedMode) {
-        hidePropertiesIn(defaultProperties, values, [
-            "showIcon",
-            "expandedIcon",
-            "collapsedIcon",
-            "animate",
-            "animateIcon"
-        ]);
-    }
-
     if (values.showIcon === "no") {
         hidePropertiesIn(defaultProperties, values, ["expandedIcon", "collapsedIcon"]);
     }
@@ -44,6 +34,18 @@ export function getProperties(
 
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
+
+        if (!values.advancedMode) {
+            hidePropertiesIn(defaultProperties, values, [
+                "showIcon",
+                "expandedIcon",
+                "collapsedIcon",
+                "animate",
+                "animateIcon"
+            ]);
+        }
+    } else {
+        hidePropertyIn(defaultProperties, values, "advancedMode");
     }
     return defaultProperties;
 }

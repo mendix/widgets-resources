@@ -10,12 +10,20 @@ import {
     TextProps
 } from "@mendix/piw-utils-internal";
 
-export function getProperties(values: DatagridDropdownFilterPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(
+    values: DatagridDropdownFilterPreviewProps,
+    defaultProperties: Properties,
+    platform: "web" | "desktop"
+): Properties {
     if (values.auto) {
         hidePropertyIn(defaultProperties, values, "filterOptions");
     }
-    if (!values.advanced) {
-        hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
+    if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
+        }
+    } else {
+        hidePropertyIn(defaultProperties, values, "advanced");
     }
     return defaultProperties;
 }
