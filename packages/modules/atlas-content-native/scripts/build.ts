@@ -1,15 +1,15 @@
-const concurrently = require("concurrently");
-const { join } = require("path");
-const { rm, mkdir } = require("shelljs");
+import concurrently from "concurrently";
+import { join } from "path";
+import { rm, mkdir } from "shelljs";
 
 const repoRoot = join(__dirname, "../../../../");
 
 main().catch(e => {
     console.error(e);
-    process.exit(-1);
+    process.exit();
 });
 
-async function main() {
+async function main(): Promise<void> {
     const outputDir = join(__dirname, "../dist");
 
     rm("-rf", outputDir);
@@ -22,7 +22,7 @@ async function main() {
     await buildAndCopyStyles(outputDir);
 }
 
-async function buildAndCopyStyles(destination) {
+async function buildAndCopyStyles(destination: string): Promise<void> {
     console.info(`Copying styles...`);
     try {
         await concurrently(
@@ -42,7 +42,9 @@ async function buildAndCopyStyles(destination) {
 
         console.log("Copying styles has completed successfully");
     } catch (commands) {
-        const commandInfo = commands.map(command => `{ name: ${command.command.name}, exit code: ${command.exitCode}}`);
+        const commandInfo = commands.map(
+            (command: concurrently.ExitInfos) => `{ name: ${command.command.name}, exit code: ${command.exitCode}}`
+        );
         throw new Error(`One or more commands failed:\n${commandInfo.join("\n")}`);
     }
 }

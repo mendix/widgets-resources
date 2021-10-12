@@ -17,7 +17,7 @@
     "branchName": "main"
   },
   "scripts": {
-    "release": "node ./scripts/build.js release",
+    "release": "npx ts-node ./scripts/build.ts release",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {},
