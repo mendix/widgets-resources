@@ -19,7 +19,7 @@ jobs:
             fail-fast: false
             matrix:
                 # run 3 copies of the current job in parallel
-                containers: [1, 2, 3]
+                containers: [0, 1, 2]
 
         steps:
             - name: "Checking changed files"
@@ -76,7 +76,7 @@ jobs:
               if:
                   github.event_name == 'push' || steps.files.outputs.not_atlas_native_files != '' || (github.event_name
                   == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository)
-              run: CIRCLE_NODE_INDEX=(${{matrix.containers}}-1) npm run test:e2e -- ${{ steps.variables.outputs.arg }}
+              run: CIRCLE_NODE_INDEX=${{ matrix.containers }} npm run test:e2e -- ${{ steps.variables.outputs.arg }}
               env:
                   FORKED:
                       github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
