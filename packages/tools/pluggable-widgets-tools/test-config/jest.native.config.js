@@ -28,7 +28,7 @@ module.exports = {
         "mendix/components/native/Image": join(__dirname, "__mocks__/NativeImage"),
         "mendix/filters/builders": join(__dirname, "__mocks__/FilterBuilders")
     },
-    collectCoverage: true,
+    collectCoverage: !process.env.CI,
     coverageDirectory: "<rootDir>/../dist/coverage"
 };
 
