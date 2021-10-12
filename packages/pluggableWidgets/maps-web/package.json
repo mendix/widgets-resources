@@ -1,7 +1,7 @@
 {
   "name": "maps-web",
   "widgetName": "Maps",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Show locations on Maps",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js && rm tests/testProject/widgets/Maps.mpk",
+    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas && rm -f tests/testProject/widgets/Maps.mpk",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "cross-env MPKOUTPUT=Maps.mpk pluggable-widgets-tools release:web",

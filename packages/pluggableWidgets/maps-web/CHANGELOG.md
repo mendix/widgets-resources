@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
+- We renamed the property `Google maps API Key` to `Geo Location API key`
+- We made the property `Geo Location API key` required when using location based on Address.
+
 ## [3.0.0] - 2021-09-28
 
 ### Added

@@ -153,12 +153,12 @@
                     <returnType type="String"/>
                 </property>
                 <property key="geodecodeApiKey" type="string" required="false">
-                    <caption>Google maps API Key</caption>
-                    <description>If you are not using Google Maps as your map provider, this property becomes optional. If you are using markers based on address, this key is required for those markers to work.</description>
+                    <caption>Geo Location API key</caption>
+                    <description>Used to translate addresses to latitude and longitude. This Api Key should be a Google Geocoding Api Key found in https://developers.google.com/maps/documentation/geocoding/overview</description>
                 </property>
                 <property key="geodecodeApiKeyExp" type="expression" required="false">
-                    <caption>Google maps API Key</caption>
-                    <description>If you are not using Google Maps as your map provider, this property becomes optional. If you are using markers based on address, this key is required for those markers to work.</description>
+                    <caption>Geo Location API key</caption>
+                    <description>Used to translate addresses to latitude and longitude. This Api Key should be a Google Geocoding Api Key found in https://developers.google.com/maps/documentation/geocoding/overview</description>
                     <returnType type="String"/>
                 </property>
                 <property key="showCurrentLocation" type="boolean" defaultValue="false">
