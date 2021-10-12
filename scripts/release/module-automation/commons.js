@@ -1,5 +1,6 @@
 const { basename, extname, join, resolve } = require("path");
-const { access, readdir, readFile, writeFile } = require("fs/promises");
+const { access, readdir, readFile, writeFile, rm } = require("fs/promises");
+const { mkdir } = require("shelljs");
 const { exec } = require("child_process");
 
 const regex = {
@@ -114,7 +115,7 @@ async function writeToWidgetChangelogs(changelogs, { nameWithSpace, changelogPat
     const oldChangelogs = content.match(regex.changelogs)?.[0].trim();
     const newContent = content
         .replace(oldChangelogs, changelogs)
-        .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}`);
+        .replace(`## [Unreleased]`, `## [Unreleased]\n\n## [${version}] - ${date}`);
     await writeFile(changelogPath, newContent);
 }
 
@@ -149,9 +150,19 @@ async function getUnreleasedChangelogs({ version, changelogPath }) {
 }
 
 // Update changelogs and create PR in widget-resources
-async function updateChangelogs(widgetsFolders, moduleInfo) {
-    console.log("Updating changelogs..");
-    const moduleChangelogs = await getUnreleasedChangelogs(moduleInfo);
+async function commitAndCreatePullRequest(moduleInfo) {
+    const changelogBranchName = `${moduleInfo.nameWithDash}-release-${moduleInfo.version}`;
+    await execShellCommand(
+        `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${moduleInfo.nameWithDash}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
+    );
+    await execShellCommand(
+        `gh pr create --title "${moduleInfo.nameWithSpace}: Updating changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
+    );
+    console.log("Created PR for changelog updates.");
+}
+
+async function updateWidgetChangelogs(widgetsFolders) {
+    console.log("Updating widget changelogs..");
     const nativeWidgetsChangelogs = [];
     for await (const folder of widgetsFolders) {
         const widgetInfo = await getPackageInfo(folder);
@@ -165,23 +176,25 @@ async function updateChangelogs(widgetsFolders, moduleInfo) {
             await writeToWidgetChangelogs(widgetChangelogs, widgetInfo);
         }
     }
-    const newModuleChangelogs = nativeWidgetsChangelogs.length
+    return nativeWidgetsChangelogs;
+}
+
+async function updateModuleChangelogs(moduleInfo, nativeWidgetsChangelogs) {
+    console.log("Updating module changelogs..");
+    const moduleChangelogs = await getUnreleasedChangelogs(moduleInfo);
+    const newModuleChangelogs = nativeWidgetsChangelogs?.length
         ? `${moduleChangelogs}\n\n${nativeWidgetsChangelogs.join("\n\n")}`
         : moduleChangelogs;
     if (newModuleChangelogs) {
         console.log(`Writing "${moduleInfo.nameWithSpace}" changelogs to ${moduleInfo.changelogPath}`);
         await writeToModuleChangelogs(newModuleChangelogs, moduleInfo);
     }
-
-    const changelogBranchName = `${moduleInfo.nameWithDash}-release-${moduleInfo.version}`;
-    await execShellCommand(
-        `git checkout -b ${changelogBranchName} && git add . && git commit -m "chore(${moduleInfo.nameWithDash}): update changelogs" && git push --set-upstream origin ${changelogBranchName}`
-    );
-    await execShellCommand(
-        `gh pr create --title "Updating all the changelogs" --body "This is an automated PR." --base master --head ${changelogBranchName}`
-    );
-    console.log("Created PR for changelog updates.");
     return newModuleChangelogs;
+}
+
+async function updateChangelogs(widgetFolders, moduleInfo) {
+    const nativeWidgetsChangelogs = await updateWidgetChangelogs(widgetFolders);
+    return updateModuleChangelogs(moduleInfo, nativeWidgetsChangelogs);
 }
 
 async function githubAuthentication(moduleInfo) {
@@ -195,6 +208,28 @@ async function githubAuthentication(moduleInfo) {
     await execShellCommand(`echo "${process.env.GH_PAT}" | gh auth login --with-token`);
 }
 
+async function cloneRepo(githubUrl, localFolder) {
+    const githubUrlDomain = githubUrl.replace("https://", "");
+    const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
+    await rm(localFolder, { recursive: true, force: true });
+    mkdir("-p", localFolder);
+    await execShellCommand(`git clone ${githubUrlAuthenticated} ${localFolder}`);
+    await setLocalGitCredentials(localFolder);
+}
+
+async function createMPK(tmpFolder, moduleInfo) {
+    console.log("Creating module MPK..");
+    await createMxBuildContainer(tmpFolder, moduleInfo.moduleNameInModeler, moduleInfo.minimumMXVersion);
+    return (await getFiles(tmpFolder, [`.mpk`]))[0];
+}
+
+async function createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput) {
+    console.log(`Creating Github release for module ${moduleInfo.nameWithSpace}`);
+    await execShellCommand(
+        `gh release create --title "${moduleInfo.nameWithSpace} ${moduleInfo.version} - Mendix ${moduleInfo.minimumMXVersion}" --notes "${moduleChangelogs}" "${process.env.TAG}" "${mpkOutput}"`
+    );
+}
+
 module.exports = {
     setLocalGitCredentials,
     execShellCommand,
@@ -203,5 +238,11 @@ module.exports = {
     githubAuthentication,
     createMxBuildContainer,
     bumpVersionInPackageJson,
-    updateChangelogs
+    commitAndCreatePullRequest,
+    updateWidgetChangelogs,
+    updateModuleChangelogs,
+    updateChangelogs,
+    cloneRepo,
+    createMPK,
+    createGithubRelease
 };

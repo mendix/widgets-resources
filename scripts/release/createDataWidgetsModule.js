@@ -1,18 +1,20 @@
 const { basename, join } = require("path");
 const { readdir, copyFile, rm } = require("fs/promises");
-const { mkdir } = require("shelljs");
 const {
-    setLocalGitCredentials,
     execShellCommand,
     getFiles,
     getPackageInfo,
-    createMxBuildContainer,
+    bumpVersionInPackageJson,
+    commitAndCreatePullRequest,
     updateChangelogs,
     githubAuthentication,
-    bumpVersionInPackageJson
+    cloneRepo,
+    createMPK,
+    createGithubRelease
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
+const [moduleFolderNameInRepo, version] = process.env.TAG.split("-v");
 
 main().catch(e => {
     console.error(e);
@@ -20,8 +22,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const moduleName = process.env.TAG.split("-v")[0];
-    if (moduleName !== "data-widgets") {
+    if (!modules.includes(moduleFolderNameInRepo) || !version) {
         return;
     }
 
@@ -46,42 +47,32 @@ async function createDataWidgetsModule() {
     const dataWidgetsFolders = widgetFolders
         .filter(folder => widgets.includes(folder))
         .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
-
-    let moduleInfo = await getPackageInfo(DWFolder);
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "DataWidgets",
+        moduleFolderNameInModeler: "datawidgets"
+    };
     moduleInfo = await bumpVersionInPackageJson(DWFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
-
-    const changelog = await updateChangelogs(dataWidgetsFolders, moduleInfo);
+    const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
+    await commitAndCreatePullRequest(moduleInfo);
     await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo.testProjectUrl);
-
-    console.log("Creating module MPK..");
-    await createMxBuildContainer(tmpFolder, "DataWidgets", moduleInfo.minimumMXVersion);
-    const mpkOutput = (await getFiles(tmpFolder, [`.mpk`]))[0];
-
-    console.log(`Creating Github release for module ${moduleInfo.nameWithSpace}`);
-    await execShellCommand(
-        `gh release create --title "${moduleInfo.nameWithSpace} ${moduleInfo.version} - Mendix ${moduleInfo.minimumMXVersion}" --notes "${changelog}" "${process.env.TAG}" "${mpkOutput}"`
-    );
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo);
+    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
 }
 
 // Update test project with latest changes and update version in themesource
 async function updateTestProject(tmpFolder, widgetsFolders, githubUrl) {
-    const stylesPath = join(repoRootPath, "packages/modules/data-widgets/src/themesource");
+    const stylesPath = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}/src/themesource`);
     const styles = await getFiles(stylesPath);
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "themesource");
 
     console.log("Updating DataWidgets project..");
-    const githubUrlDomain = githubUrl.replace("https://", "");
-    const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
-    await rm(tmpFolder, { recursive: true, force: true });
-    mkdir("-p", tmpFolder);
-    await execShellCommand(`git clone ${githubUrlAuthenticated} ${tmpFolder}`);
-
-    await setLocalGitCredentials(tmpFolder);
+    await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
 
     console.log("Copying widgets and styles..");
     await Promise.all([
@@ -97,7 +88,7 @@ async function updateTestProject(tmpFolder, widgetsFolders, githubUrl) {
             await copyFile(file, dest);
         })
     ]);
-    await execShellCommand(`echo ${process.env.TAG.split("-v")[1]} > themesource/datawidgets/.version`, tmpFolder);
+    await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
     if (!/nothing to commit/i.test(gitOutput)) {
         await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
