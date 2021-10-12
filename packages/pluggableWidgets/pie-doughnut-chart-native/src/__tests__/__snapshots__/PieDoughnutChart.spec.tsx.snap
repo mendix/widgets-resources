@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PieDoughnutChart configuration basic static props 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "justifyContent": "center",
+      }
+    }
+    testID="innerView"
+  >
+    <View
+      colorScale={Array []}
+      data={Array []}
+      height={300}
+      labels={[Function]}
+      padding={
+        Object {
+          "bottom": 40,
+          "left": 40,
+          "right": 40,
+          "top": 40,
+        }
+      }
+      style={
+        Object {
+          "labels": Object {
+            "fill": [Function],
+            "fontFamily": [Function],
+            "fontSize": [Function],
+            "fontStyle": [Function],
+            "fontWeight": [Function],
+          },
+        }
+      }
+      testID="mock"
+      width={300}
+    />
+  </View>
+</View>
+`;

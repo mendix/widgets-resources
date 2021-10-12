@@ -61,6 +61,8 @@ export const excludeMaps = false;
 export const excludeMapsHelpers = false;
 // Page Title
 export const excludePageTitle = false;
+// Pie Doughnut Chart
+export const excludePieDoughnutChart = false;
 // Progress Bar
 export const excludeProgressBar = false;
 export const excludeProgressBarHelpers = false;

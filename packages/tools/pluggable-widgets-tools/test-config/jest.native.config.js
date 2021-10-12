@@ -17,7 +17,7 @@ module.exports = {
     ],
     snapshotSerializers: ["enzyme-to-json/serializer"],
     testMatch: ["<rootDir>/**/*.spec.{js,jsx,ts,tsx}"],
-    transformIgnorePatterns: ["node_modules/(?!.*react-native)"],
+    transformIgnorePatterns: ["node_modules/(?!.*react-native)(?!victory-)"],
     transform: {
         "node_modules.*\\.jsx?$": "react-native/jest/preprocessor.js",
         "\\.tsx?$": "ts-jest",

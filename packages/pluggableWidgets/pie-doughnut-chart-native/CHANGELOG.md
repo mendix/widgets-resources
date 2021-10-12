@@ -5,11 +5,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Changed
-- We updated the native charts color palette so the light brand colors are excluded.
 
-## [3.0.1] - 2021-06-29
-
-### Changed
-
-- We defined the module as UI Resource.

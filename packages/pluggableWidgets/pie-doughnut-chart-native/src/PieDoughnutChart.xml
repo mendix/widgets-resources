@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.piedoughnutchart.PieDoughnutChart" supportedPlatform="Native" offlineCapable="true"
+        pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Pie Doughnut Chart</name>
+    <description>Render a series of data in a Pie or Doughnut chart.</description>
+    <studioProCategory>Charts</studioProCategory>
+    <studioCategory>Charts</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Presentation">
+                <property key="presentation" type="enumeration" defaultValue="pie">
+                    <caption>Presentation</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="pie">Pie</enumerationValue>
+                        <enumerationValue key="doughnut">Doughnut</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Data source">
+                <property key="series" type="object" isList="true">
+                    <caption>Data series</caption>
+                    <description>Add one or more data series.</description>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="dataSource" type="datasource" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for individual series.</description>
+                            </property>
+                            <property key="XAttribute" type="attribute"
+                                      dataSource="dataSource">
+                                <caption>X attribute</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="DateTime"/>
+                                    <attributeType name="String"/>
+                                    <attributeType name="Enum"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="YAttribute" type="attribute"
+                                      dataSource="dataSource">
+                                <caption>Y attribute</caption>
+                                <description/>
+                                <attributeTypes>
+                                    <attributeType name="Decimal"/>
+                                    <attributeType name="Integer"/>
+                                    <attributeType name="Long"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="sliceStylingKey" type="attribute" dataSource="dataSource" required="false">
+                                <caption>Dynamic styling key</caption>
+                                <description>Configure which attribute is used as the key that matches with styling defined in Atlas.</description>
+                                <attributeTypes>
+                                    <attributeType name="String"/>
+                                    <attributeType name="Enum"/>
+                                </attributeTypes>
+
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="sortOrder" type="enumeration" defaultValue="ascending">
+                    <caption>Sort order</caption>
+                    <description>Applicable only to Y attribute values.</description>
+                    <enumerationValues>
+                        <enumerationValue key="ascending">Ascending</enumerationValue>
+                        <enumerationValue key="descending">Descending</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Chart settings">
+                <property key="showLabels" type="boolean" defaultValue="true">
+                    <caption>Show labels</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
