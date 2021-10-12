@@ -22,7 +22,7 @@ main().catch(e => {
 });
 
 async function main() {
-    if (!modules.includes(moduleFolderNameInRepo) || !version) {
+    if (!moduleFolderNameInRepo || !version) {
         return;
     }
 
@@ -57,7 +57,7 @@ async function createDataWidgetsModule() {
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo.testProjectUrl);
+    await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
@@ -65,7 +65,7 @@ async function createDataWidgetsModule() {
 }
 
 // Update test project with latest changes and update version in themesource
-async function updateTestProject(tmpFolder, widgetsFolders, githubUrl) {
+async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
     const stylesPath = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}/src/themesource`);
     const styles = await getFiles(stylesPath);
     const tmpFolderWidgets = join(tmpFolder, "widgets");
