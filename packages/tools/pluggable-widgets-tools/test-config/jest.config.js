@@ -24,6 +24,6 @@ module.exports = {
         "mendix/filters/builders": join(__dirname, "__mocks__/FilterBuilders"),
         "\\.png$": join(__dirname, "assetsTransformer.js")
     },
-    collectCoverage: true,
+    collectCoverage: !process.env.CI,
     coverageDirectory: "<rootDir>/../dist/coverage"
 };
