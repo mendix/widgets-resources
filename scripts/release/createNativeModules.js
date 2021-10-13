@@ -19,7 +19,7 @@ const [moduleFolderNameInRepo, version] = process.env.TAG.split("-v");
 
 main().catch(e => {
     console.error(e);
-    process.exit();
+    process.exit(1);
 });
 
 async function main() {
