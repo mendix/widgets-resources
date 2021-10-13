@@ -1,13 +1,25 @@
-import { createElement, ComponentProps, ReactElement, useCallback, useState, useRef, useLayoutEffect } from "react";
+import {
+    createElement,
+    ReactElement,
+    useCallback,
+    useState,
+    useRef,
+    useLayoutEffect,
+    PropsWithChildren,
+    CSSProperties
+} from "react";
 import classNames from "classnames";
 
-interface InfiniteBodyProps extends ComponentProps<"div"> {
+interface InfiniteBodyProps {
+    className?: string;
     hasMoreItems: boolean;
-    setPage?: (computePage: (prevPage: number) => number) => void;
     isInfinite: boolean;
+    role?: string;
+    setPage?: (computePage: (prevPage: number) => number) => void;
+    style?: CSSProperties;
 }
 
-export function InfiniteBody(props: InfiniteBodyProps): ReactElement {
+export function InfiniteBody(props: PropsWithChildren<InfiniteBodyProps>): ReactElement {
     const [bodySize, setBodySize] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -39,9 +51,9 @@ export function InfiniteBody(props: InfiniteBodyProps): ReactElement {
     return (
         <div
             ref={containerRef}
-            {...props}
             className={classNames(props.className, props.isInfinite ? "infinite-loading" : "")}
             onScroll={props.isInfinite ? trackScrolling : undefined}
+            role={props.role}
             style={props.isInfinite && bodySize > 0 ? { ...props.style, maxHeight: bodySize } : props.style}
         >
             {props.children}
