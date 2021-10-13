@@ -15,9 +15,13 @@ import HereMapsSVG from "./assets/HereMaps.svg";
 export function getProperties(
     values: MapsPreviewProps,
     defaultProperties: Properties,
-    target: "web" | "desktop"
+    platform: "web" | "desktop"
 ): Properties {
-    if (target === "desktop") {
+    const containsAddress =
+        values.markers.some(marker => marker.locationType === "address") ||
+        values.dynamicMarkers.some(marker => marker.locationType === "address");
+
+    if (platform === "desktop") {
         if (values.apiKey) {
             hidePropertyIn(defaultProperties, values, "apiKeyExp");
         } else {
@@ -28,6 +32,8 @@ export function getProperties(
         } else {
             hidePropertyIn(defaultProperties, values, "geodecodeApiKey");
         }
+
+        hidePropertyIn(defaultProperties, values, "advanced");
     } else {
         if (values.apiKeyExp) {
             hidePropertyIn(defaultProperties, values, "apiKey");
@@ -39,15 +45,10 @@ export function getProperties(
         } else {
             hidePropertyIn(defaultProperties, values, "geodecodeApiKeyExp");
         }
-    }
 
-    if (!values.advanced) {
-        hidePropertiesIn(defaultProperties, values, [
-            "mapProvider",
-            "mapStyles",
-            "geodecodeApiKeyExp",
-            "geodecodeApiKey"
-        ]);
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, ["mapProvider", "mapStyles"]);
+        }
     }
 
     values.markers.forEach((f, index) => {
@@ -57,10 +58,11 @@ export function getProperties(
         } else {
             hidePropertyIn(defaultProperties, values, "markers", index, "address");
         }
-        if (!values.advanced) {
+        if (platform === "web" && !values.advanced) {
             hidePropertyIn(defaultProperties, values, "markers", index, "markerStyle");
             hidePropertyIn(defaultProperties, values, "markers", index, "customMarker");
-        } else if (f.markerStyle === "default") {
+        }
+        if (f.markerStyle === "default") {
             hidePropertyIn(defaultProperties, values, "markers", index, "customMarker");
         }
     });
@@ -72,10 +74,11 @@ export function getProperties(
         } else {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "address");
         }
-        if (!values.advanced) {
+        if (platform === "web" && !values.advanced) {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "markerStyleDynamic");
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
-        } else if (f.markerStyleDynamic === "default") {
+        }
+        if (f.markerStyleDynamic === "default") {
             hidePropertyIn(defaultProperties, values, "dynamicMarkers", index, "customMarkerDynamic");
         }
     });
@@ -95,11 +98,18 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "attributionControl");
     }
 
+    if (!containsAddress) {
+        hidePropertiesIn(defaultProperties, values, ["geodecodeApiKey", "geodecodeApiKeyExp"]);
+    }
+
     return defaultProperties;
 }
 
 export function check(values: MapsPreviewProps): Problem[] {
     const errors: Problem[] = [];
+    const containsAddress =
+        values.markers.some(marker => marker.locationType === "address") ||
+        values.dynamicMarkers.some(marker => marker.locationType === "address");
 
     if (values.mapProvider !== "openStreet" && !values.apiKey && !values.apiKeyExp) {
         errors.push({
@@ -107,11 +117,12 @@ export function check(values: MapsPreviewProps): Problem[] {
             message: "To avoid errors during map rendering it's necessary to include an Api Key",
             url: "https://docs.mendix.com/appstore/widgets/maps#1-2-limitations"
         });
-    } else if (values.advanced && !values.geodecodeApiKeyExp && !values.geodecodeApiKey) {
+    }
+
+    if (containsAddress && !values.geodecodeApiKeyExp && !values.geodecodeApiKey) {
         errors.push({
             property: "geodecodeApiKey",
-            severity: "warning",
-            message: "To translate addresses to latitude and longitude a Google API Key is required",
+            message: "To translate addresses to latitude and longitude a Geo Location API key is required",
             url: "https://docs.mendix.com/appstore/widgets/maps#1-2-limitations"
         });
     }
@@ -138,7 +149,7 @@ export function check(values: MapsPreviewProps): Problem[] {
                 });
             }
         }
-        if (values.advanced && marker.markerStyle === "image" && !marker.customMarker) {
+        if (marker.markerStyle === "image" && !marker.customMarker) {
             errors.push({
                 property: `markers/${index + 1}/customMarker`,
                 message: `Custom marker image is required when shape is 'image' for address ${marker.address}`
@@ -175,7 +186,7 @@ export function check(values: MapsPreviewProps): Problem[] {
                 }
             }
         }
-        if (values.advanced && marker.markerStyleDynamic === "image" && !marker.customMarkerDynamic) {
+        if (marker.markerStyleDynamic === "image" && !marker.customMarkerDynamic) {
             errors.push({
                 property: `dynamicMarkers/${index + 1}/customMarkerDynamic`,
                 message: `Custom marker image is required when shape is 'image' for list at position ${index + 1}`
