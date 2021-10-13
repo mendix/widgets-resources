@@ -48,7 +48,7 @@ async function createDataWidgetsModule() {
         .filter(folder => widgets.includes(folder))
         .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     let moduleInfo = {
-        ...(await getPackageInfo(moduleFolder)),
+        ...(await getPackageInfo(DWFolder)),
         moduleNameInModeler: "DataWidgets",
         moduleFolderNameInModeler: "datawidgets"
     };
