@@ -54,7 +54,7 @@ async function createNativeMobileResourcesModule() {
     moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await updateChangelogs(nativeWidgetsChangelogs, moduleInfo);
+    const moduleChangelogs = await updateChangelogs(nativeWidgetFolders, moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWidgetFolders);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo);
