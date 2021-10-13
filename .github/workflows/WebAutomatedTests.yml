@@ -71,10 +71,8 @@ jobs:
             - name: "Fixing files permissions"
               if: failure()
               run: |
-                  sudo find ${{ github.workspace }}/packages/pluggableWidgets -type d -exec chmod 755 {} \;
-                  sudo find ${{ github.workspace }}/packages/theming -type d -exec chmod 755 {} \;
-                  sudo find ${{ github.workspace }}/packages/pluggableWidgets -type f -exec chmod 644 {} \;
-                  sudo find ${{ github.workspace }}/packages/theming -type f -exec chmod 644 {} \;
+                  sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
+                  sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
             - name: "Archive test screenshot diff results"
               uses: actions/upload-artifact@v2
               if: failure()
