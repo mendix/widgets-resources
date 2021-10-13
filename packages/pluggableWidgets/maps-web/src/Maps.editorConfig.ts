@@ -32,6 +32,8 @@ export function getProperties(
         } else {
             hidePropertyIn(defaultProperties, values, "geodecodeApiKey");
         }
+
+        hidePropertyIn(defaultProperties, values, "advanced");
     } else {
         if (values.apiKeyExp) {
             hidePropertyIn(defaultProperties, values, "apiKey");
@@ -43,14 +45,10 @@ export function getProperties(
         } else {
             hidePropertyIn(defaultProperties, values, "geodecodeApiKeyExp");
         }
-    }
 
-    if (platform === "web") {
         if (!values.advanced) {
             hidePropertiesIn(defaultProperties, values, ["mapProvider", "mapStyles"]);
         }
-    } else {
-        hidePropertyIn(defaultProperties, values, "advanced");
     }
 
     values.markers.forEach((f, index) => {
