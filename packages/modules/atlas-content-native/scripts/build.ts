@@ -19,10 +19,10 @@ async function main(): Promise<void> {
     // creating directories. create them here to avoid the error.
     mkdir("-p", join(outputDir, "themesource/atlas_nativemobile_content"));
 
-    await buildAndCopyStyles(outputDir);
+    await copyStyles(outputDir);
 }
 
-async function buildAndCopyStyles(destination: string): Promise<void> {
+async function copyStyles(destination: string): Promise<void> {
     console.info(`Copying styles...`);
     try {
         await concurrently(
