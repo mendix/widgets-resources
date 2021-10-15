@@ -32,6 +32,7 @@ export interface LineChartSeries {
     customLineStyle?: string;
     markerColor: string | undefined;
     lineColor: string | undefined;
+    customSeriesOptions: string;
 }
 
 export function useSeries(series: LinesType[]): LineChartSeries[] | null {
@@ -52,7 +53,7 @@ export function useSeries(series: LinesType[]): LineChartSeries[] | null {
 }
 
 function loadStaticSeries(series: LinesType): LineChartSeries | null {
-    const { interpolation, lineStyle, staticName, dataSet, markerColor, lineColor } = series;
+    const { interpolation, lineStyle, staticName, dataSet, markerColor, lineColor, customSeriesOptions } = series;
 
     if (dataSet !== "static") {
         throw Error("Expected series to be static");
@@ -71,12 +72,13 @@ function loadStaticSeries(series: LinesType): LineChartSeries | null {
         interpolation,
         lineStyle,
         markerColor: markerColor?.value,
-        lineColor: lineColor?.value
+        lineColor: lineColor?.value,
+        customSeriesOptions
     };
 }
 
 function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
-    const { lineStyle, interpolation, dataSet, markerColor, lineColor } = series;
+    const { lineStyle, interpolation, dataSet, markerColor, lineColor, customSeriesOptions } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -103,7 +105,8 @@ function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
                 interpolation,
                 lineStyle,
                 markerColor: markerColor?.value,
-                lineColor: lineColor?.value
+                lineColor: lineColor?.value,
+                customSeriesOptions
             } as LineChartSeries;
         })
         .filter((element): element is LineChartSeries => Boolean(element));

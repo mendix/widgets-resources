@@ -43,8 +43,12 @@
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
+    "ace-builds": "^1.4.13",
     "classnames": "^2.2.6",
+    "fast-json-patch": "^3.1.0",
+    "json-source-map": "^0.6.1",
     "plotly.js": "^2.5.1",
+    "react-ace": "^9.4.4",
     "react-plotly.js": "^2.5.1"
   }
 }

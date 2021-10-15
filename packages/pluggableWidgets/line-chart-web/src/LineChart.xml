@@ -110,6 +110,10 @@
                                     <enumerationValue key="last">Last</enumerationValue>
                                 </enumerationValues>
                             </property>
+                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                                <caption>Custom series options</caption>
+                                <description/>
+                            </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
                             <property key="interpolation" type="enumeration" defaultValue="linear">

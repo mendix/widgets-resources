@@ -19,8 +19,7 @@ export type AggregationTypeEnum =
     | "median"
     | "mode"
     | "first"
-    | "last"
-    | "stddev";
+    | "last";
 
 export type InterpolationEnum = "linear" | "spline";
 
@@ -38,6 +37,7 @@ export interface LinesType {
     staticYAttribute?: ListAttributeValue<Date | Big>;
     dynamicYAttribute?: ListAttributeValue<Date | Big>;
     aggregationType: AggregationTypeEnum;
+    customSeriesOptions: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
@@ -68,6 +68,7 @@ export interface LinesPreviewType {
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
+    customSeriesOptions: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor: string;
@@ -85,7 +86,6 @@ export interface LineChartContainerProps {
     tabIndex?: number;
     lines: LinesType[];
     showLegend: boolean;
-    chartTitle?: DynamicValue<string>;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     developerMode: DeveloperModeEnum;
@@ -104,7 +104,6 @@ export interface LineChartPreviewProps {
     style: string;
     lines: LinesPreviewType[];
     showLegend: boolean;
-    chartTitle: string;
     xAxisLabel: string;
     yAxisLabel: string;
     developerMode: DeveloperModeEnum;

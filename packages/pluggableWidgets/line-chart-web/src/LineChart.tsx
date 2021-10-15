@@ -1,6 +1,7 @@
+import classNames from "classnames";
 import { createElement, ReactElement } from "react";
 import { LineChartContainerProps } from "../typings/LineChartProps";
-import { LineChart as Chart } from "./components/LineChart";
+import { ChartWidget } from "./components/ChartWidget";
 import { useSeries } from "./utils/SeriesLoader";
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
@@ -8,6 +9,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
 
     const data = chartLines?.map(line => ({
         ...line.dataPoints,
+        customSeriesOptions: line.customSeriesOptions,
         type: "scatter" as const,
         mode: line.lineStyle === "line" ? ("lines" as const) : ("lines+markers" as const),
         line: {
@@ -18,7 +20,8 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
     }));
 
     return (
-        <Chart
+        <ChartWidget
+            className={classNames("widget-line-chart", props.class)}
             data={data ?? []}
             width={props.width}
             widthUnit={props.widthUnit}
@@ -28,6 +31,9 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
             gridLinesMode={props.gridLines}
+            showSidebarEditor={props.developerMode === "developer"}
+            customLayout={props.customLayout}
+            customConfig={props.customConfigurations}
         />
     );
 }
