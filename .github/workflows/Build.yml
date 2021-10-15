@@ -1,0 +1,48 @@
+name: Run build
+
+on:
+    push:
+        branches: [master]
+    pull_request:
+        branches: [master]
+
+jobs:
+    test:
+        name: "Build"
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: "Checking changed files"
+              id: files
+              uses: softprops/diffset@v1
+              if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+              with:
+                global_files: |
+                  !{packages/**/*,configs/e2e/*.json,scripts/**/*}
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: "Checking-out code"
+              uses: actions/checkout@v2
+              with:
+                  submodules: false
+            - name: "Fetching master to compare"
+              if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
+              run:
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+            - name: "Defining environment variables"
+              id: variables
+              run:
+                  echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+            - name: "Defining cache"
+              uses: actions/cache@v2
+              env:
+                  cache-name: cache-node-modules
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - name: "Installing dependencies"
+              run: npm install
+            - name: "Running build for development"
+              run: npm run build -- ${{ steps.variables.outputs.arg }}
+            - name: "Running release for production"
+              run: npm run release -- ${{ steps.variables.outputs.arg }}
