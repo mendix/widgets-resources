@@ -25,7 +25,7 @@ RUN apt-get update -qqy && \
         libfontconfig1 && \
 \
     pip3 install -q --upgrade pip && \
-    pip install -q pyyaml httplib2 && \
+    pip install -q pyyaml==5.4.1 httplib2 && \
 \
     echo "Downloading runtime ${MENDIX_VERSION}..." && \
     wget -q https://cdn.mendix.com/runtime/mendix-${MENDIX_VERSION}.tar.gz -O /tmp/runtime.tar.gz && \

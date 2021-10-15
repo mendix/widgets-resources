@@ -18,7 +18,7 @@ module.exports = {
             "<rootDir>/__mocks__/fileMock.js",
         "\\.(css|less|scss|sass)$": "identity-obj-proxy"
     },
-    collectCoverage: true,
+    collectCoverage: !process.env.CI,
     coverageDirectory: `${cwd}/dist/coverage`,
     setupFiles: ["jest-canvas-mock"]
 };
