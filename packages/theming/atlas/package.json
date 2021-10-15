@@ -13,7 +13,7 @@
     "build": "node ./scripts/build.js",
     "start": "node ./scripts/build.js start",
     "pretest:e2e:dev": "node ./scripts/build.js",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",
     "pretest:e2e:chrome": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e:chrome": "BROWSER_DOCKER=selenium/standalone-chrome BROWSER=chrome pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",

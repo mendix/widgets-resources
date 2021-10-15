@@ -34,7 +34,6 @@
     "release:data-widgets": "npm run release -- --scope '{datagrid,dropdown-sort,tree-node,gallery}-*'",
     "release:hybrid": "npm run release -- --scope '*-hybrid'",
     "release:native": "npm run release -- --scope '*-native'",
-    "release:test:e2e": "lerna-parallelism run --ignore @mendix/custom-widgets-utils-internal --stream --concurrency 1 --split 3 release",
     "release:web": "npm run release -- --scope '*-web'",
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "create-modules:data-widgets": "node ./scripts/release/createDataWidgetsModule.js",

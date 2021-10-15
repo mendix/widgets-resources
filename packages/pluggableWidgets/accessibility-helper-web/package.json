@@ -24,7 +24,7 @@
     "build": "pluggable-widgets-tools build:ts",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "pretest:e2e": "node ../../../scripts/test/updateAtlas.js",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:web",

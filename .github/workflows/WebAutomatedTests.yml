@@ -44,7 +44,7 @@ jobs:
             - name: "Defining environment variables"
               id: variables
               run:
-                  echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo '--scope "*-web"'; fi)
+                  echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
@@ -54,8 +54,6 @@ jobs:
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Installing dependencies"
               run: npm install
-            - name: "Building package in production mode"
-              run: CIRCLE_NODE_INDEX=${{ matrix.containers }} npm run release:test:e2e -- ${{ steps.variables.outputs.arg }}
             - name: Login to GitHub Container Registry
               if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
               uses: docker/login-action@v1
