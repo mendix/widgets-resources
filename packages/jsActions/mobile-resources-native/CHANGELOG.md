@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.3.0] Native Mobile Resources - 2021-10-14
+
+## [1.0.0] Pie Doughnut Chart
+### Added
+ - We added this new chart widget to display data in Pie or Doughnut chart representation.
+
 ## [3.2.0] Native Mobile Resources - 2021-9-28
 
 ## [2.0.0] Accordion
