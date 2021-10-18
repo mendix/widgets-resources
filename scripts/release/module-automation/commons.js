@@ -126,7 +126,7 @@ async function writeToModuleChangelogs(changelogs, { nameWithSpace, changelogPat
     const oldChangelogs = content.match(regex.changelogsIncludingUnreleased)?.[0].trim();
     const newContent = content.replace(
         oldChangelogs,
-        `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}${changelogs}`
+        `## [Unreleased]\n\n## [${version}] ${nameWithSpace} - ${date}\n${changelogs}`
     );
     await writeFile(changelogPath, newContent);
 }
