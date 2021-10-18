@@ -16,7 +16,7 @@ main().catch(e => {
 async function main() {
     const widgetScope = process.argv[2];
 
-    if (!widgetScope.endsWith("-web") && !widgetScope.endsWith("-native")) {
+    if (!widgetScope.endsWith("-web")) {
         throw new Error(`${widgetScope} is not a valid widget package.`);
     }
 
