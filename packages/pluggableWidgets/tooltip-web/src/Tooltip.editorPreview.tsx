@@ -12,23 +12,23 @@ interface PreviewProps extends Omit<TooltipPreviewProps, "class"> {
 export const preview = (props: PreviewProps): ReactElement => {
     return (
         <Tooltip
+            class={props.className}
+            htmlMessage={
+                <props.htmlMessage.renderer caption="Place widgets here">
+                    <div />
+                </props.htmlMessage.renderer>
+            }
             trigger={
-                <props.trigger.renderer caption={"Place widgets here"}>
+                <props.trigger.renderer caption="Place widgets here">
                     <div />
                 </props.trigger.renderer>
             }
-            render={props.render}
-            content={
-                <props.content.renderer caption={"Place widgets here"}>
-                    <div />
-                </props.content.renderer>
-            }
-            position={translatePosition(props.position)}
             openOn={props.openOn}
-            tooltipString={props.tooltipString}
-            class={props.className}
-            style={parseStyle(props.style)}
+            position={translatePosition(props.position)}
             preview
+            renderMethod={props.renderMethod}
+            style={parseStyle(props.style)}
+            textMessage={props.textMessage}
         />
     );
 };

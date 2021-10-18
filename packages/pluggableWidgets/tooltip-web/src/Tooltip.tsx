@@ -7,15 +7,15 @@ import "./ui/Tooltip.scss";
 export default function Tooltip(props: TooltipContainerProps): ReactNode {
     return (
         <DisplayTooltip
-            position={translatePosition(props.position)}
-            content={props.content}
             class={props.class}
+            htmlMessage={props.htmlMessage}
             name={props.name}
             openOn={props.openOn}
-            render={props.render}
-            trigger={props.trigger}
-            tooltipString={props.tooltipString?.value}
+            position={translatePosition(props.position)}
+            renderMethod={props.renderMethod}
             style={props.style}
+            trigger={props.trigger}
+            textMessage={props.textMessage?.value}
             tabIndex={props.tabIndex}
         />
     );

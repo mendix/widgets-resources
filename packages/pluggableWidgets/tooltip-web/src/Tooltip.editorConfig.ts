@@ -2,26 +2,25 @@ import { TooltipPreviewProps } from "../typings/TooltipProps";
 import { hidePropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
 
 export function getProperties(values: TooltipPreviewProps, defaultValues: Properties): Properties {
-    if (values.render === "text") {
-        hidePropertiesIn(defaultValues, values, ["content"]);
+    if (values.renderMethod === "text") {
+        hidePropertiesIn(defaultValues, values, ["htmlMessage"]);
     } else {
-        hidePropertiesIn(defaultValues, values, ["tooltipString"]);
+        hidePropertiesIn(defaultValues, values, ["textMessage"]);
     }
     return defaultValues;
 }
 
 export function check(values: TooltipPreviewProps): Problem[] {
     const errors: Problem[] = [];
-    // TODO Send message to Chris for validation
-    if (values.render === "text" && !values.tooltipString) {
+    if (values.renderMethod === "text" && !values.textMessage) {
         errors.push({
-            property: "tooltipString",
+            property: "textMessage",
             message: "For render method Text, a Tooltip message is required"
         });
     }
-    if (values.render === "custom" && values.content?.widgetCount === 0) {
+    if (values.renderMethod === "custom" && values.htmlMessage?.widgetCount === 0) {
         errors.push({
-            property: "content",
+            property: "htmlMessage",
             message: "For render method custom, a Content is required"
         });
     }

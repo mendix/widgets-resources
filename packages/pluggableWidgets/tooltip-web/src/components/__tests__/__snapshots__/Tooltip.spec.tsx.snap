@@ -1,40 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tooltip should render 1`] = `
+exports[`Tooltip render DOM structure 1`] = `
 <DocumentFragment>
   <div
-    class="widget-tooltip-container"
+    class="widget-tooltip widget-tooltip-right"
   >
     <div
       class="widget-tooltip-trigger"
       data-testid="trigger"
-    />
-    <div
-      class="widget-tooltip"
-      role="tooltip"
-      style="position: absolute; left: 0px; top: 0px;"
     >
-      Tooltip text
-      <div
-        class="widget-tooltip-arrow"
-        style="position: absolute;"
-      />
+      Trigger element
     </div>
-  </div>
-</DocumentFragment>
-`;
-
-exports[`Tooltip should render text content if the tooltipString is passed 1`] = `
-<DocumentFragment>
-  <div
-    class="widget-tooltip-container"
-  >
     <div
-      class="widget-tooltip-trigger"
-      data-testid="trigger"
-    />
-    <div
-      class="widget-tooltip"
+      class="widget-tooltip-content"
       role="tooltip"
       style="position: absolute; left: 0px; top: 0px;"
     >

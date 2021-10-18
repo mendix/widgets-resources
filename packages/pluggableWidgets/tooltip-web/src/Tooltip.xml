@@ -17,7 +17,7 @@
                     <caption>Trigger</caption>
                     <description/>
                 </property>
-                <property key="render" type="enumeration" defaultValue="text">
+                <property key="renderMethod" type="enumeration" defaultValue="text">
                     <caption>Render method</caption>
                     <description/>
                     <enumerationValues>
@@ -25,12 +25,12 @@
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="content" type="widgets" required="false">
+                <property key="htmlMessage" type="widgets" required="false">
                     <caption>Content</caption>
                     <description/>
                 </property>
 
-                <property key="tooltipString" type="textTemplate" required="false">
+                <property key="textMessage" type="textTemplate" required="false">
                     <caption>Tooltip</caption>
                     <description/>
                 </property>
@@ -39,18 +39,18 @@
                     <caption>Position</caption>
                     <description/>
                     <enumerationValues>
-                        <enumerationValue key="topStart">Top Start</enumerationValue>
+                        <enumerationValue key="topStart">Top start</enumerationValue>
                         <enumerationValue key="top">Top</enumerationValue>
-                        <enumerationValue key="topEnd">Top End</enumerationValue>
-                        <enumerationValue key="leftStart">Left Start</enumerationValue>
+                        <enumerationValue key="topEnd">Top end</enumerationValue>
+                        <enumerationValue key="leftStart">Left start</enumerationValue>
                         <enumerationValue key="left">Left</enumerationValue>
-                        <enumerationValue key="leftEnd">Left End</enumerationValue>
-                        <enumerationValue key="bottomStart">Bottom Start</enumerationValue>
+                        <enumerationValue key="leftEnd">Left end</enumerationValue>
+                        <enumerationValue key="bottomStart">Bottom start</enumerationValue>
                         <enumerationValue key="bottom">Bottom</enumerationValue>
-                        <enumerationValue key="bottomEnd">Bottom End</enumerationValue>
-                        <enumerationValue key="rightStart">Right Start</enumerationValue>
+                        <enumerationValue key="bottomEnd">Bottom end</enumerationValue>
+                        <enumerationValue key="rightStart">Right start</enumerationValue>
                         <enumerationValue key="right">Right</enumerationValue>
-                        <enumerationValue key="rightEnd">Right End</enumerationValue>
+                        <enumerationValue key="rightEnd">Right end</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="openOn" type="enumeration" defaultValue="hover">

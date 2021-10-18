@@ -1,9 +1,9 @@
 import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, useRef, useState } from "react";
 import { useOnClickOutside } from "@mendix/piw-utils-internal/components/web";
-import { OpenOnEnum, RenderEnum } from "../../typings/TooltipProps";
 import { Placement } from "@popperjs/core/lib/enums";
 import { usePopper } from "react-popper";
 import classNames from "classnames";
+import { OpenOnEnum, RenderMethodEnum } from "../../typings/TooltipProps";
 
 export interface TooltipProps {
     name?: string;
@@ -11,22 +11,22 @@ export interface TooltipProps {
     style?: CSSProperties;
     tabIndex?: number;
     trigger: ReactNode;
-    render: RenderEnum;
-    content: ReactNode;
-    tooltipString?: string;
+    renderMethod: RenderMethodEnum;
+    htmlMessage: ReactNode;
+    textMessage?: string;
     position: Placement;
     openOn: OpenOnEnum;
     preview?: boolean;
 }
 
 export const Tooltip = (props: TooltipProps): ReactElement => {
-    const { trigger, tooltipString, content, openOn, position, preview, render } = props;
+    const { trigger, htmlMessage, textMessage, openOn, position, preview, renderMethod } = props;
     const componentReference = useRef<HTMLDivElement | null>(null);
     const [showTooltip, setShowTooltip] = useState(preview ?? false);
-    const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
+    const [triggerElement, setTriggerElement] = useState<HTMLDivElement | null>(null);
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
     const [arrowElement, setArrowElement] = useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    const { styles, attributes } = usePopper(triggerElement, popperElement, {
         placement: position,
         modifiers: [
             {
@@ -36,64 +36,58 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
                     padding: 5
                 }
             },
-            // TODO should this property be dynamic? Ask Chris!
             { name: "offset", options: { offset: [0, 8] } }
         ]
     });
 
     useOnClickOutside([componentReference], () => setShowTooltip(false));
 
-    const onHover = useCallback((show: boolean) => setShowTooltip(show), []);
-
-    const onClick = useCallback((show: boolean) => setShowTooltip(!show), []);
+    const onShow = useCallback(() => setShowTooltip(true), []);
+    const onHide = useCallback(() => setShowTooltip(false), []);
+    const onToggle = useCallback(() => setShowTooltip(!showTooltip), [showTooltip]);
 
     const renderTrigger = (): ReactElement => {
         let eventContainer;
         switch (openOn) {
             case "click":
                 eventContainer = {
-                    onClick: () => onClick(showTooltip)
+                    onClick: onToggle
                 };
                 break;
             case "hover":
                 eventContainer = {
-                    onMouseEnter: () => onHover(true),
-                    onMouseLeave: () => onHover(false)
+                    onMouseEnter: onShow,
+                    onMouseLeave: onHide
                 };
                 break;
             case "hoverFocus":
                 eventContainer = {
-                    onMouseEnter: () => onHover(true),
-                    onMouseLeave: () => onHover(false),
-                    onFocus: () => onHover(true),
-                    onBlur: () => onHover(false)
+                    onMouseEnter: onShow,
+                    onMouseLeave: onHide,
+                    onFocus: onShow,
+                    onBlur: onHide
                 };
                 break;
         }
         return (
-            <div
-                className={"widget-tooltip-trigger"}
-                data-testid={"trigger"}
-                ref={setReferenceElement}
-                {...eventContainer}
-            >
+            <div className="widget-tooltip-trigger" data-testid="trigger" ref={setTriggerElement} {...eventContainer}>
                 {trigger}
             </div>
         );
     };
 
-    const renderContent = (): ReactNode => {
+    const renderTooltip = (): ReactNode => {
         return showTooltip ? (
             <div
-                className={"widget-tooltip"}
+                className="widget-tooltip-content"
                 ref={setPopperElement}
                 style={styles.popper}
                 {...attributes.popper}
-                role={"tooltip"}
+                role="tooltip"
             >
-                {render === "text" ? tooltipString : content}
+                {renderMethod === "text" ? textMessage : htmlMessage}
                 <div
-                    className={"widget-tooltip-arrow"}
+                    className="widget-tooltip-arrow"
                     ref={setArrowElement}
                     style={styles.arrow}
                     {...attributes.arrow}
@@ -102,9 +96,12 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
         ) : null;
     };
     return (
-        <div className={classNames(props.class, "widget-tooltip-container")} ref={componentReference}>
+        <div
+            className={classNames(props.class, "widget-tooltip", `widget-tooltip-${position}`)}
+            ref={componentReference}
+        >
             {renderTrigger()}
-            {renderContent()}
+            {renderTooltip()}
         </div>
     );
 };

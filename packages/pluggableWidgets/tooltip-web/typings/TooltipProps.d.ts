@@ -6,7 +6,7 @@
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue } from "mendix";
 
-export type RenderEnum = "text" | "custom";
+export type RenderMethodEnum = "text" | "custom";
 
 export type PositionEnum =
     | "topStart"
@@ -30,9 +30,9 @@ export interface TooltipContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     trigger: ReactNode;
-    render: RenderEnum;
-    content?: ReactNode;
-    tooltipString?: DynamicValue<string>;
+    renderMethod: RenderMethodEnum;
+    htmlMessage?: ReactNode;
+    textMessage?: DynamicValue<string>;
     position: PositionEnum;
     openOn: OpenOnEnum;
 }
@@ -41,9 +41,9 @@ export interface TooltipPreviewProps {
     class: string;
     style: string;
     trigger: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
-    render: RenderEnum;
-    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
-    tooltipString: string;
+    renderMethod: RenderMethodEnum;
+    htmlMessage: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    textMessage: string;
     position: PositionEnum;
     openOn: OpenOnEnum;
 }

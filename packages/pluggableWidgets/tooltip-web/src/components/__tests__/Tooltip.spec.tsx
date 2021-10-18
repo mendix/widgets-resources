@@ -9,17 +9,17 @@ describe("Tooltip", () => {
 
     beforeEach(() => {
         defaultTooltipProps = {
-            content: undefined,
-            tooltipString: "Tooltip text",
+            htmlMessage: undefined,
+            textMessage: "Tooltip text",
             position: "right",
             openOn: "click",
-            trigger: "",
-            render: "text",
+            trigger: "Trigger element",
+            renderMethod: "text",
             name: "tooltip"
         };
     });
 
-    it("should render", () => {
+    it("render DOM structure", () => {
         const { asFragment } = render(<Tooltip {...defaultTooltipProps} />);
         const triggerElement = screen.getByTestId("trigger");
         act(() => {
@@ -27,9 +27,9 @@ describe("Tooltip", () => {
         });
         expect(asFragment()).toMatchSnapshot();
     });
-    it("should render and open tooltip onMouseEnter and close onMouseLeave", () => {
-        render(<Tooltip {...defaultTooltipProps} openOn={"hover"} />);
-        const triggerElement = screen.getByTestId("trigger");
+    it("open tooltip onMouseEnter and close onMouseLeave", () => {
+        render(<Tooltip {...defaultTooltipProps} openOn="hover" />);
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
             fireEvent.mouseEnter(triggerElement);
         });
@@ -50,8 +50,8 @@ describe("Tooltip", () => {
         expect(screen.queryByRole("tooltip")).toBeNull();
     });
 
-    it("should render and open tooltip onClick", () => {
-        render(<Tooltip {...defaultTooltipProps} openOn={"click"} />);
+    it("open tooltip onClick", () => {
+        render(<Tooltip {...defaultTooltipProps} openOn="click" />);
         const triggerElement = screen.getByTestId("trigger");
         act(() => {
             fireEvent.click(triggerElement);
@@ -64,9 +64,8 @@ describe("Tooltip", () => {
         expect(screen.queryByRole("tooltip")).toBeNull();
     });
 
-    it("should render and open tooltip onFocus and close onBlur", () => {
-        defaultTooltipProps.openOn = "hoverFocus";
-        render(<Tooltip {...defaultTooltipProps} />);
+    it("open tooltip onFocus and close onBlur", () => {
+        render(<Tooltip {...defaultTooltipProps} openOn="hoverFocus" />);
         const triggerElement = screen.getByTestId("trigger");
         act(() => {
             fireEvent.focus(triggerElement);
@@ -89,23 +88,22 @@ describe("Tooltip", () => {
         expect(screen.queryByRole("tooltip")).toBeNull();
     });
 
-    it("should render text content if the tooltipString is passed", () => {
-        const { asFragment } = render(<Tooltip {...defaultTooltipProps} render={"text"} />);
+    it("render text content if the tooltipString is passed", () => {
+        render(<Tooltip {...defaultTooltipProps} renderMethod="text" />);
         act(() => {
             fireEvent.click(screen.getByTestId("trigger"));
         });
-        expect(screen.queryByRole("tooltip")).toHaveTextContent(defaultTooltipProps.tooltipString as string);
-        expect(asFragment()).toMatchSnapshot();
+        expect(screen.queryByRole("tooltip")).toHaveTextContent(defaultTooltipProps.textMessage as string);
     });
 
-    it("should render HTML if the content is passed", () => {
+    it("render HTML if the content is passed", () => {
         act(() => {
             render(
                 <Tooltip
                     {...defaultTooltipProps}
-                    render={"custom"}
-                    content={<div data-testid={"content"}>Simple Tooltip</div>}
-                    tooltipString={undefined}
+                    renderMethod="custom"
+                    htmlMessage={<div data-testid="content">Simple Tooltip</div>}
+                    textMessage={undefined}
                 />
             );
         });
@@ -116,8 +114,8 @@ describe("Tooltip", () => {
         expect(screen.queryByTestId("content")).toHaveTextContent("Simple Tooltip");
     });
 
-    it("should close onOutsideClick if tooltip is visible", () => {
-        render(<Tooltip {...defaultTooltipProps} openOn={"click"} />);
+    it("close onOutsideClick if tooltip is visible", () => {
+        render(<Tooltip {...defaultTooltipProps} openOn="click" />);
         const triggerElement = screen.getByTestId("trigger");
         act(() => {
             fireEvent.click(triggerElement);
