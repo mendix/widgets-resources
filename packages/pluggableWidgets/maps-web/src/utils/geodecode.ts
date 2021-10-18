@@ -58,7 +58,7 @@ function geocode(address: string, mapToken: string): Promise<LatLng> {
     if (!window.mxGMLocationCache) {
         window.mxGMLocationCache = {};
     }
-    if (window.mxGMLocationCache[address]) {
+    if (address in window.mxGMLocationCache) {
         return window.mxGMLocationCache[address];
     } else {
         return (window.mxGMLocationCache[address] = geocodeQueued(address, mapToken));
