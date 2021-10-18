@@ -1,5 +1,5 @@
-const { basename, join } = require("path");
-const { readdir, copyFile, rm } = require("fs/promises");
+const { basename, dirname, join } = require("path");
+const { copyFile, readdir, readFile, rename, rm, rmdir, mkdir, writeFile } = require("fs/promises");
 const {
     execShellCommand,
     getFiles,
@@ -10,7 +10,9 @@ const {
     githubAuthentication,
     cloneRepo,
     createMPK,
-    createGithubRelease
+    createGithubRelease,
+    zip,
+    unzip
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
@@ -59,9 +61,53 @@ async function createDataWidgetsModule() {
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo);
+
+    await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
+
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
+}
+
+// Unzip the module, copy the widget and update package.xml
+async function exportModuleWithWidgets(projectName, mpkOutput, widgetsFolders) {
+    const projectPath = join(dirname(mpkOutput), projectName, projectName);
+    await mkdir(projectPath, { recursive: true });
+    const widgetEntries = [];
+    const widgetsDestination = join(projectPath, "widgets");
+    // Unzip the mpk
+    await unzip(mpkOutput, projectPath);
+    await rmdir(mpkOutput, { recursive: true });
+    // Copy widgets to widgets folder
+    await mkdir(widgetsDestination, { recursive: true });
+    for await (const folder of widgetsFolders) {
+        const src = (await getFiles(folder, [`.mpk`]))[0];
+        const dest = join(widgetsDestination, basename(src));
+        widgetEntries.push(basename(src));
+        await copyFile(src, dest);
+    }
+    // Add entries to the package.xml
+    const packageXmlFile = join(projectPath, "package.xml");
+    try {
+        const content = (await readFile(packageXmlFile)).toString();
+        if (content) {
+            const filesEntry = "<files>";
+            const filesContent = widgetEntries
+                .map(
+                    mpkFile => `
+      <file path="widgets/${mpkFile}" />`
+                )
+                .join("");
+            const [beginning, end] = content.split(filesEntry);
+            const newContent = `${beginning}${filesEntry}${filesContent}${end}`;
+            await writeFile(packageXmlFile, newContent);
+        }
+    } catch (e) {
+        throw new Error("package.xml not found");
+    }
+    // Re-zip and rename
+    await zip(projectPath, projectName);
+    await rename(`${projectPath}.zip`, mpkOutput);
 }
 
 // Update test project with latest changes and update version in themesource

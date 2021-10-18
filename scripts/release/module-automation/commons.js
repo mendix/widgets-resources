@@ -214,7 +214,7 @@ async function cloneRepo(githubUrl, localFolder) {
     await rm(localFolder, { recursive: true, force: true });
     mkdir("-p", localFolder);
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${localFolder}`);
-    await setLocalGitCredentials(localFolder);
+    // await setLocalGitCredentials(localFolder);
 }
 
 async function createMPK(tmpFolder, moduleInfo) {
@@ -240,6 +240,14 @@ async function createGithubReleaseFrom({ title, body, tag, mpkOutput, isDraft = 
     );
 }
 
+function zip(src, fileName) {
+    return execShellCommand(`cd "${src}" && zip -r ../${fileName} .`);
+}
+
+function unzip(src, dest) {
+    return execShellCommand(`unzip "${src}" -d "${dest}"`);
+}
+
 module.exports = {
     setLocalGitCredentials,
     execShellCommand,
@@ -258,4 +266,6 @@ module.exports = {
     createGithubRelease,
     createGithubReleaseFrom,
     writeToWidgetChangelogs
+    zip,
+    unzip
 };
