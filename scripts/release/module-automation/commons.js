@@ -225,8 +225,18 @@ async function createMPK(tmpFolder, moduleInfo) {
 
 async function createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput) {
     console.log(`Creating Github release for module ${moduleInfo.nameWithSpace}`);
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} ${moduleInfo.version} - Mendix ${moduleInfo.minimumMXVersion}`,
+        body: moduleChangelogs,
+        tag: process.env.TAG,
+        mpkOutput
+    });
+}
+
+async function createGithubReleaseFrom({ title, body, tag, mpkOutput, isDraft = false }) {
+    const draftArgument = isDraft ? "--draft " : "";
     await execShellCommand(
-        `gh release create --title "${moduleInfo.nameWithSpace} ${moduleInfo.version} - Mendix ${moduleInfo.minimumMXVersion}" --notes "${moduleChangelogs}" "${process.env.TAG}" "${mpkOutput}"`
+        `gh release create --title "${title}" --notes "${body}" ${draftArgument}"${tag}" "${mpkOutput}"`
     );
 }
 
@@ -235,6 +245,7 @@ module.exports = {
     execShellCommand,
     getFiles,
     getPackageInfo,
+    getUnreleasedChangelogs,
     githubAuthentication,
     createMxBuildContainer,
     bumpVersionInPackageJson,
@@ -244,5 +255,7 @@ module.exports = {
     updateChangelogs,
     cloneRepo,
     createMPK,
-    createGithubRelease
+    createGithubRelease,
+    createGithubReleaseFrom,
+    writeToWidgetChangelogs
 };

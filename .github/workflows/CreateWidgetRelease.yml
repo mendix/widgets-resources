@@ -21,18 +21,5 @@ jobs:
               run: npm install
             - name: "Building ${{ github.event.inputs.widget-name }} widget"
               run: "npm run release -- --scope '${{ github.event.inputs.widget-name }}'"
-            - name: "Getting ${{ github.event.inputs.widget-name }} widget release information"
-              id: releaseinformation
-              run: "npm run information:githubrelease -- --scope '${{ github.event.inputs.widget-name }}'"
-            - name:
-                  "Create draft release for widget ${{ github.event.inputs.widget-name }} version ${{
-                  steps.releaseinformation.outputs.version }}"
-              uses: ncipollo/release-action@v1
-              with:
-                  artifacts: ${{ steps.releaseinformation.outputs.releaseMpkPath }}
-                  draft: true
-                  name:
-                      "${{ steps.releaseinformation.outputs.widgetName }} (Web) - Marketplace Release v${{
-                      steps.releaseinformation.outputs.version }}"
-                  tag: "${{ github.event.inputs.widget-name }}-v${{ steps.releaseinformation.outputs.version }}"
-                  token: ${{ secrets.GH_PAT }}
+            - name: "Creating ${{ github.event.inputs.widget-name }} widget release"
+              run: "npm run release-github:widget '${{ github.event.inputs.widget-name }}'"
