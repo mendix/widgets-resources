@@ -36,6 +36,7 @@
     "release:hybrid": "npm run release -- --scope '*-hybrid'",
     "release:native": "npm run release -- --scope '*-native'",
     "release:web": "npm run release -- --scope '*-web'",
+    "release-github:widget": "node ./scripts/release/createWidgetRelease.js",
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "create-modules:data-widgets": "node ./scripts/release/createDataWidgetsModule.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
@@ -43,7 +44,6 @@
     "commit-msg": "commitlint --edit \"$1\""
   },
   "devDependencies": {
-    "@actions/core": "^1.6.0",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
