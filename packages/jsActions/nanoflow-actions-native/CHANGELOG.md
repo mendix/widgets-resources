@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed a problem with toggle sidebar action when executed in Native apps.
+
 ## [2.1.0] Nanoflow Commons - 2021-9-28
 
 ### Added
