@@ -63,7 +63,7 @@ async function getWidgetReleaseInformation(widgetScope) {
 
     console.log(`Getting the widget release information for ${widgetName} widget...`);
 
-    if (!name || !widgetName || !version || !version.includes(".") || repository?.url) {
+    if (!name || !widgetName || !version || !version.includes(".") || !repository?.url) {
         throw new Error(`${pkgPath} does not define expected keys.`);
     }
 
