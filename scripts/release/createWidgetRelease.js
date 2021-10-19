@@ -75,7 +75,7 @@ async function getWidgetReleaseInformation(widgetScope) {
     const releaseMpkPath = join(widgetPath, "dist", version, `${mpkName}.mpk`);
     const changelogPath = join(widgetPath, "CHANGELOG.md");
 
-    console.log(`Will look for MPK at ${mpkName} at ${releaseMpkPath}`);
+    console.log(`Will look for MPK ${mpkName} at ${releaseMpkPath}`);
 
     return {
         releaseMpkPath,
