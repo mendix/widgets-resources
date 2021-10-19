@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- We've updated `@rollup/plugin-typescript` dependency to 8.3.0
+- We've updated `typescript` dependency to 4.4.4
+
 ## [9.5.5] - 2021-09-23
 
 ### Fixed

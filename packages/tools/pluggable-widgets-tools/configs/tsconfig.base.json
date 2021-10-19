@@ -20,6 +20,8 @@
         "jsx": "react",
         "jsxFactory": "createElement",
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "useUnknownInCatchVariables": false,
+        "exactOptionalPropertyTypes": false
     }
 }
