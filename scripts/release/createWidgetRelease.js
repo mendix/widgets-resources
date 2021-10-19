@@ -39,7 +39,7 @@ async function main() {
         title: `${widgetName} (Web) - Marketplace Release v${version}`,
         body: JSON.stringify(unreleasedChangelogs),
         tag: `${widgetScope}-v${version}`,
-        mkpOutput: releaseMpkPath,
+        mpkOutput: releaseMpkPath,
         isDraft: true
     });
     console.log("Updating widget CHANGELOG.md...");
@@ -74,8 +74,6 @@ async function getWidgetReleaseInformation(widgetScope) {
     const mpkName = packagePath ? `${packagePath}.${widgetName}` : widgetName;
     const releaseMpkPath = join(widgetPath, "dist", version, `${mpkName}.mpk`);
     const changelogPath = join(widgetPath, "CHANGELOG.md");
-
-    console.log(`Will look for MPK ${mpkName} at ${releaseMpkPath}`);
 
     return {
         releaseMpkPath,
