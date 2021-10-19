@@ -72,10 +72,13 @@ async function getWidgetReleaseInformation(widgetScope) {
     }
 
     const mpkName = packagePath ? `${packagePath}.${widgetName}` : widgetName;
+    const releaseMpkPath = join(widgetPath, "dist", version, `${mpkName}.mpk`);
     const changelogPath = join(widgetPath, "CHANGELOG.md");
 
+    console.log(`Will look for MPK at ${mpkName} at ${releaseMpkPath}`);
+
     return {
-        releaseMpkPath: join(widgetPath, "dist", version, `${mpkName}.mpk`),
+        releaseMpkPath,
         repositoryUrl: repository.url,
         unreleasedChangelogs: await getUnreleasedChangelogs({ version, changelogPath }),
         version,
