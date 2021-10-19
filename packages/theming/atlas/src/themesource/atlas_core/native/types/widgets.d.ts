@@ -651,6 +651,18 @@ export interface SliderType {
     validationMessage?: TextStyle;
 }
 
+// Switch
+export interface SwitchType {
+    container?: ViewStyle;
+    containerDisabled?: ViewStyle;
+    label?: InputLabelType;
+    labelDisabled?: TextStyle;
+    input?: CheckBoxInputType;
+    inputDisabled?: CheckBoxInputType;
+    inputError?: CheckBoxInputType;
+    validationMessage?: TextStyle;
+}
+
 // Tab Container
 export interface TabContainerType {
     container?: ViewStyle;
