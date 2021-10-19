@@ -214,7 +214,7 @@ async function cloneRepo(githubUrl, localFolder) {
     await rm(localFolder, { recursive: true, force: true });
     mkdir("-p", localFolder);
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${localFolder}`);
-    // await setLocalGitCredentials(localFolder);
+    await setLocalGitCredentials(localFolder);
 }
 
 async function createMPK(tmpFolder, moduleInfo) {
@@ -265,7 +265,7 @@ module.exports = {
     createMPK,
     createGithubRelease,
     createGithubReleaseFrom,
-    writeToWidgetChangelogs
+    writeToWidgetChangelogs,
     zip,
     unzip
 };

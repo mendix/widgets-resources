@@ -5,7 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.0.1] Data Widgets - 2021-10-7
+### Changed
+- We removed the Snippet, Example enumeration and version constant from the module.
+
+### Added
+- We added a .version file inside themesource/datawidgets containing the module version.
 
 ## [2.0.1] DatagridDateFilter
 ### Fixed
