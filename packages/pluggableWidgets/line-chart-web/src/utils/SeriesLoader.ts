@@ -1,5 +1,5 @@
 import Big from "big.js";
-import { ObjectItem, ValueStatus } from "mendix";
+import { ObjectItem } from "mendix";
 import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Datum, PlotData } from "plotly.js";
@@ -38,31 +38,14 @@ export function useSeries(series: LinesType[]): LineChartSeries[] | null {
     const [chartSeries, setChartSeries] = useState<LineChartSeries[] | null>(null);
 
     useEffect(() => {
-        const loadedSeries: LineChartSeries[] = [];
-
-        for (const element of series) {
-            if (element.dataSet === "static") {
-                const result = loadStaticSeries(element);
-
-                if (!result) {
-                    setChartSeries(null);
-                    return;
-                }
-
-                loadedSeries.push(result);
-            } else {
-                const result = loadDynamicSeries(element);
-
-                if (!result) {
-                    setChartSeries(null);
-                    return;
-                }
-
-                loadedSeries.push(...result);
-            }
-        }
-
-        setChartSeries(loadedSeries);
+        const loadedSeries = series
+            .map(element => {
+                const singleSeriesLoader = element.dataSet === "static" ? loadStaticSeries : loadDynamicSeries;
+                return singleSeriesLoader(element);
+            })
+            .filter((element): element is LineChartSeries | LineChartSeries[] => Boolean(element))
+            .flat();
+        setChartSeries(loadedSeries.length === 0 ? null : loadedSeries);
     }, [series]);
 
     return chartSeries;
@@ -75,9 +58,7 @@ function loadStaticSeries(series: LinesType): LineChartSeries | null {
         throw Error("Expected series to be static");
     }
 
-    const seriesName = staticName?.status === ValueStatus.Available ? staticName.value : undefined;
-
-    const dataPointsExtraction = extractDataPoints(series, seriesName);
+    const dataPointsExtraction = extractDataPoints(series, staticName?.value);
 
     if (!dataPointsExtraction) {
         return null;
@@ -89,8 +70,8 @@ function loadStaticSeries(series: LinesType): LineChartSeries | null {
         yFormatter: dataPointsExtraction.yFormatter,
         interpolation,
         lineStyle,
-        markerColor: markerColor?.status === ValueStatus.Available ? markerColor.value : undefined,
-        lineColor: lineColor?.status === ValueStatus.Available ? lineColor.value : undefined
+        markerColor: markerColor?.value,
+        lineColor: lineColor?.value
     };
 }
 
@@ -107,25 +88,25 @@ function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
         return null;
     }
 
-    const loadedSeries: LineChartSeries[] = [];
+    const loadedSeries = dataSourceItemGroups
+        .map(itemGroup => {
+            const dataPointsExtraction = extractDataPoints(series, itemGroup.dynamicNameValue, itemGroup.items);
 
-    for (const itemGroup of dataSourceItemGroups) {
-        const dataPointsExtraction = extractDataPoints(series, itemGroup.dynamicNameValue, itemGroup.items);
+            if (!dataPointsExtraction) {
+                return null;
+            }
 
-        if (!dataPointsExtraction) {
-            return null;
-        }
-
-        loadedSeries.push({
-            dataPoints: dataPointsExtraction.dataPoints,
-            xFormatter: dataPointsExtraction.xFormatter,
-            yFormatter: dataPointsExtraction.yFormatter,
-            interpolation,
-            lineStyle,
-            markerColor: markerColor?.status === ValueStatus.Available ? markerColor.value : undefined,
-            lineColor: lineColor?.status === ValueStatus.Available ? lineColor.value : undefined
-        });
-    }
+            return {
+                dataPoints: dataPointsExtraction.dataPoints,
+                xFormatter: dataPointsExtraction.xFormatter,
+                yFormatter: dataPointsExtraction.yFormatter,
+                interpolation,
+                lineStyle,
+                markerColor: markerColor?.value,
+                lineColor: lineColor?.value
+            } as LineChartSeries;
+        })
+        .filter((element): element is LineChartSeries => Boolean(element));
 
     return loadedSeries;
 }
