@@ -137,7 +137,14 @@ describe("Switch", () => {
 
         switchWrapper = mount(<Switch {...props} />);
         expect(switchWrapper.prop("booleanAttribute").validation).toEqual("error");
+
         expect(switchWrapper.exists({ testID: `${name}$alert` })).toEqual(true);
+        expect(
+            switchWrapper
+                .find({ testID: `${name}$alert` })
+                .at(1)
+                .text()
+        ).toEqual("error");
     });
 
     it("with iOS device renders correct property", () => {
