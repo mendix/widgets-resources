@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
-import { background, backgroundDefaults, border, brand, contrast, font, spacing } from "../../variables";
-import { TextBox, TextBoxVertical } from "./textbox";
+import { background, backgroundDefaults, border, brand, font, spacing } from "../../variables";
+import { TextBox } from "./textbox";
 import { SwitchType } from "../../types/widgets";
 /*
 
@@ -54,7 +54,7 @@ export const com_mendix_widget_native_switch_Switch: SwitchType = {
         ...TextBox.inputError,
         thumbColorOn: backgroundDefaults.primaryLight,
         trackColorOn: brand.danger,
-        thumbColorOff: contrast.low,
+        thumbColorOff: "#FFF",
         trackColorOff: brand.danger
     },
     validationMessage: {

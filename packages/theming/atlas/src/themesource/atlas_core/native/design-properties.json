@@ -2394,5 +2394,26 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.native.switch.Switch": [
+        {
+            "name": "Switch style",
+            "type": "Dropdown",
+            "description": "Style of the switch track color.",
+            "options": [
+                {
+                    "name": "Success",
+                    "class": "switchSuccess"
+                },
+                {
+                    "name": "Warning",
+                    "class": "switchWarning"
+                },
+                {
+                    "name": "Danger",
+                    "class": "switchDanger"
+                }
+            ]
+        }
     ]
 }
