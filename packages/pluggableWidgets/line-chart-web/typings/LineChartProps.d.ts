@@ -85,6 +85,7 @@ export interface LineChartContainerProps {
     tabIndex?: number;
     lines: LinesType[];
     showLegend: boolean;
+    chartTitle?: DynamicValue<string>;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     developerMode: DeveloperModeEnum;
@@ -103,6 +104,7 @@ export interface LineChartPreviewProps {
     style: string;
     lines: LinesPreviewType[];
     showLegend: boolean;
+    chartTitle: string;
     xAxisLabel: string;
     yAxisLabel: string;
     developerMode: DeveloperModeEnum;

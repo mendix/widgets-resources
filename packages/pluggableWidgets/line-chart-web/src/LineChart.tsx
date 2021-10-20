@@ -20,7 +20,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
     return (
         <Chart
             data={data ?? []}
-            title="Fancy example"
+            title={props.chartTitle?.value}
             width={props.width}
             widthUnit={props.widthUnit}
             height={props.height}

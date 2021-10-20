@@ -9,7 +9,7 @@ import { getDimensions } from "@mendix/piw-utils-internal";
 
 export interface ChartProps {
     data: Array<Partial<PlotData>>;
-    title: string;
+    title: string | undefined;
     widthUnit: LineChartContainerProps["widthUnit"];
     width: LineChartContainerProps["width"];
     heightUnit: LineChartContainerProps["heightUnit"];
