@@ -7,11 +7,7 @@ import { useSeries } from "./utils/SeriesLoader";
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
     const chartLines = useSeries(props.lines);
 
-    if (!chartLines) {
-        return null;
-    }
-
-    const data = chartLines.map(line => ({
+    const data = chartLines?.map(line => ({
         ...line.dataPoints,
         type: "scatter" as const,
         mode: line.lineStyle === "line" ? ("lines" as const) : ("lines+markers" as const),
@@ -24,7 +20,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
 
     return (
         <Chart
-            data={data}
+            data={data ?? []}
             title="Fancy example"
             width={props.width}
             widthUnit={props.widthUnit}
