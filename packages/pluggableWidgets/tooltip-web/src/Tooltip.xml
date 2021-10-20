@@ -35,33 +35,38 @@
                     <description/>
                 </property>
 
-                <property key="position" type="enumeration" defaultValue="top">
-                    <caption>Position</caption>
-                    <description/>
+                <property key="tooltipPosition" type="enumeration" defaultValue="top">
+                    <caption>Tooltip position</caption>
+                    <description>How to position the tooltip in relation to the trigger element - at the top, to the
+                        left, at the bottom or to the right.
+                    </description>
                     <enumerationValues>
-                        <enumerationValue key="topStart">Top start</enumerationValue>
                         <enumerationValue key="top">Top</enumerationValue>
-                        <enumerationValue key="topEnd">Top end</enumerationValue>
-                        <enumerationValue key="leftStart">Left start</enumerationValue>
                         <enumerationValue key="left">Left</enumerationValue>
-                        <enumerationValue key="leftEnd">Left end</enumerationValue>
-                        <enumerationValue key="bottomStart">Bottom start</enumerationValue>
                         <enumerationValue key="bottom">Bottom</enumerationValue>
-                        <enumerationValue key="bottomEnd">Bottom end</enumerationValue>
-                        <enumerationValue key="rightStart">Right start</enumerationValue>
                         <enumerationValue key="right">Right</enumerationValue>
-                        <enumerationValue key="rightEnd">Right end</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="arrowPosition" type="enumeration" defaultValue="none">
+                    <caption>Arrow position</caption>
+                    <description>How to position the tooltip arrow in relation to the tooltip - at the start, in the
+                        center or at the end.
+                    </description>
+                    <enumerationValues>
+                        <enumerationValue key="start">Start</enumerationValue>
+                        <enumerationValue key="none">Center</enumerationValue>
+                        <enumerationValue key="end">End</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="openOn" type="enumeration" defaultValue="hover">
                     <caption>Open on</caption>
-                    <description>When to show the tooltip. On a mobile device the 'On hover', will be triggered on
-                        touch.
+                    <description>How the tooltip is triggered - click, hover, hover and focus. On mobile device “hover”
+                        will be triggered on touch.
                     </description>
                     <enumerationValues>
                         <enumerationValue key="click">Click</enumerationValue>
                         <enumerationValue key="hover">Hover</enumerationValue>
-                        <enumerationValue key="hoverFocus">Hover &amp; focus</enumerationValue>
+                        <enumerationValue key="hoverFocus">Hover,focus</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>

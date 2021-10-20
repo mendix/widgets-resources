@@ -1,9 +1,9 @@
 import { createElement, CSSProperties, ReactElement, ReactNode, useCallback, useRef, useState } from "react";
 import { useOnClickOutside } from "@mendix/piw-utils-internal/components/web";
-import { Placement } from "@popperjs/core/lib/enums";
 import { usePopper } from "react-popper";
 import classNames from "classnames";
 import { OpenOnEnum, RenderMethodEnum } from "../../typings/TooltipProps";
+import { Placement } from "@popperjs/core/lib/enums";
 
 export interface TooltipProps {
     name?: string;
@@ -36,6 +36,12 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
                     padding: 5
                 }
             },
+            {
+                name: "flip",
+                options: {
+                    fallbackPlacements: ["top", "right"]
+                }
+            },
             { name: "offset", options: { offset: [0, 8] } }
         ]
     });
@@ -44,8 +50,7 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
 
     const onShow = useCallback(() => setShowTooltip(true), []);
     const onHide = useCallback(() => setShowTooltip(false), []);
-    const onToggle = useCallback(() => setShowTooltip(!showTooltip), [showTooltip]);
-
+    const onToggle = useCallback(() => setShowTooltip(showTooltip => !showTooltip), []);
     const renderTrigger = (): ReactElement => {
         let eventContainer;
         switch (openOn) {
@@ -70,7 +75,7 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
                 break;
         }
         return (
-            <div className="widget-tooltip-trigger" data-testid="trigger" ref={setTriggerElement} {...eventContainer}>
+            <div className="widget-tooltip-trigger" ref={setTriggerElement} {...eventContainer}>
                 {trigger}
             </div>
         );
@@ -79,18 +84,18 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
     const renderTooltip = (): ReactNode => {
         return showTooltip ? (
             <div
+                {...attributes.popper}
                 className="widget-tooltip-content"
                 ref={setPopperElement}
                 style={styles.popper}
-                {...attributes.popper}
                 role="tooltip"
             >
                 {renderMethod === "text" ? textMessage : htmlMessage}
                 <div
+                    {...attributes.arrow}
                     className="widget-tooltip-arrow"
                     ref={setArrowElement}
                     style={styles.arrow}
-                    {...attributes.arrow}
                 />
             </div>
         ) : null;

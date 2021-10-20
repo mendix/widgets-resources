@@ -8,19 +8,9 @@ import { DynamicValue } from "mendix";
 
 export type RenderMethodEnum = "text" | "custom";
 
-export type PositionEnum =
-    | "topStart"
-    | "top"
-    | "topEnd"
-    | "leftStart"
-    | "left"
-    | "leftEnd"
-    | "bottomStart"
-    | "bottom"
-    | "bottomEnd"
-    | "rightStart"
-    | "right"
-    | "rightEnd";
+export type TooltipPositionEnum = "top" | "left" | "bottom" | "right";
+
+export type ArrowPositionEnum = "start" | "none" | "end";
 
 export type OpenOnEnum = "click" | "hover" | "hoverFocus";
 
@@ -33,7 +23,8 @@ export interface TooltipContainerProps {
     renderMethod: RenderMethodEnum;
     htmlMessage?: ReactNode;
     textMessage?: DynamicValue<string>;
-    position: PositionEnum;
+    tooltipPosition: TooltipPositionEnum;
+    arrowPosition: ArrowPositionEnum;
     openOn: OpenOnEnum;
 }
 
@@ -44,6 +35,7 @@ export interface TooltipPreviewProps {
     renderMethod: RenderMethodEnum;
     htmlMessage: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     textMessage: string;
-    position: PositionEnum;
+    tooltipPosition: TooltipPositionEnum;
+    arrowPosition: ArrowPositionEnum;
     openOn: OpenOnEnum;
 }

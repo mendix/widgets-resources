@@ -21,13 +21,13 @@ describe("Tooltip", () => {
 
     it("render DOM structure", () => {
         const { asFragment } = render(<Tooltip {...defaultTooltipProps} />);
-        const triggerElement = screen.getByTestId("trigger");
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
             fireEvent.click(triggerElement);
         });
         expect(asFragment()).toMatchSnapshot();
     });
-    it("open tooltip onMouseEnter and close onMouseLeave", () => {
+    it("opens tooltip onMouseEnter and close onMouseLeave", () => {
         render(<Tooltip {...defaultTooltipProps} openOn="hover" />);
         const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
@@ -52,7 +52,7 @@ describe("Tooltip", () => {
 
     it("open tooltip onClick", () => {
         render(<Tooltip {...defaultTooltipProps} openOn="click" />);
-        const triggerElement = screen.getByTestId("trigger");
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
             fireEvent.click(triggerElement);
         });
@@ -66,7 +66,7 @@ describe("Tooltip", () => {
 
     it("open tooltip onFocus and close onBlur", () => {
         render(<Tooltip {...defaultTooltipProps} openOn="hoverFocus" />);
-        const triggerElement = screen.getByTestId("trigger");
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
             fireEvent.focus(triggerElement);
         });
@@ -90,8 +90,9 @@ describe("Tooltip", () => {
 
     it("render text content if the tooltipString is passed", () => {
         render(<Tooltip {...defaultTooltipProps} renderMethod="text" />);
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
-            fireEvent.click(screen.getByTestId("trigger"));
+            fireEvent.click(triggerElement);
         });
         expect(screen.queryByRole("tooltip")).toHaveTextContent(defaultTooltipProps.textMessage as string);
     });
@@ -102,21 +103,21 @@ describe("Tooltip", () => {
                 <Tooltip
                     {...defaultTooltipProps}
                     renderMethod="custom"
-                    htmlMessage={<div data-testid="content">Simple Tooltip</div>}
+                    htmlMessage={<div>Simple Tooltip</div>}
                     textMessage={undefined}
                 />
             );
         });
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
-            fireEvent.click(screen.getByTestId("trigger"));
+            fireEvent.click(triggerElement);
         });
-        expect(screen.queryByTestId("content")).toBeInTheDocument();
-        expect(screen.queryByTestId("content")).toHaveTextContent("Simple Tooltip");
+        expect(screen.queryByText("Simple Tooltip")).toBeInTheDocument();
     });
 
     it("close onOutsideClick if tooltip is visible", () => {
         render(<Tooltip {...defaultTooltipProps} openOn="click" />);
-        const triggerElement = screen.getByTestId("trigger");
+        const triggerElement = screen.getByText(defaultTooltipProps.trigger as string);
         act(() => {
             fireEvent.click(triggerElement);
         });

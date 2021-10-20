@@ -11,7 +11,7 @@ export default function Tooltip(props: TooltipContainerProps): ReactNode {
             htmlMessage={props.htmlMessage}
             name={props.name}
             openOn={props.openOn}
-            position={translatePosition(props.position)}
+            position={translatePosition(props.tooltipPosition, props.arrowPosition)}
             renderMethod={props.renderMethod}
             style={props.style}
             trigger={props.trigger}

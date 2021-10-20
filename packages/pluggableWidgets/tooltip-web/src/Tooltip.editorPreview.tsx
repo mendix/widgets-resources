@@ -24,7 +24,7 @@ export const preview = (props: PreviewProps): ReactElement => {
                 </props.trigger.renderer>
             }
             openOn={props.openOn}
-            position={translatePosition(props.position)}
+            position={translatePosition(props.tooltipPosition, props.arrowPosition)}
             preview
             renderMethod={props.renderMethod}
             style={parseStyle(props.style)}
