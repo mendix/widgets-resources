@@ -108,7 +108,6 @@
                                     <enumerationValue key="mode">Mode</enumerationValue>
                                     <enumerationValue key="first">First</enumerationValue>
                                     <enumerationValue key="last">Last</enumerationValue>
-                                    <enumerationValue key="stddev">Standard deviation</enumerationValue>
                                 </enumerationValues>
                             </property>
                         </propertyGroup>
