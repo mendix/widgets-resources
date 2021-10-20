@@ -6,7 +6,6 @@ export function preview() {
     return (
         <LineChart
             data={[{ x: [], y: [] }]}
-            title="Fancy example"
             widthUnit={"percentage"}
             width={0}
             heightUnit={"pixels"}

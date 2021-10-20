@@ -162,10 +162,6 @@
                     <caption>Show legend</caption>
                     <description />
                 </property>
-                <property key="chartTitle" type="textTemplate" required="false" multiline="false">
-                    <caption>Title</caption>
-                    <description />
-                </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
                     <description />

@@ -9,7 +9,6 @@ import { getDimensions } from "@mendix/piw-utils-internal";
 
 export interface ChartProps {
     data: Array<Partial<PlotData>>;
-    title: string | undefined;
     widthUnit: LineChartContainerProps["widthUnit"];
     width: LineChartContainerProps["width"];
     heightUnit: LineChartContainerProps["heightUnit"];
@@ -22,7 +21,6 @@ export interface ChartProps {
 
 export function LineChart({
     data,
-    title,
     widthUnit,
     width,
     heightUnit,
@@ -49,7 +47,6 @@ export function LineChart({
                 layout={{
                     autosize: true,
                     showlegend: showLegend,
-                    title,
                     xaxis: { title: xAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "vertical" },
                     yaxis: { title: yAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "horizontal" }
                 }}

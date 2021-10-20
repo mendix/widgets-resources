@@ -22,24 +22,18 @@ const defaultProps: ChartProps = {
     height: 0,
     xAxisLabel: undefined,
     yAxisLabel: undefined,
-    title: "",
     showLegend: false,
     gridLinesMode: "both"
 };
 
 describe("LineChart", () => {
-    it("properly sets the charts title", () => {
-        const lineChart = shallow(<LineChart {...defaultProps} title="A beautiful title" />);
-        expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty("title", "A beautiful title");
-    });
-
     it("shows the legend when showLegend is true", () => {
-        const lineChart = shallow(<LineChart {...defaultProps} title="Without legend" showLegend />);
+        const lineChart = shallow(<LineChart {...defaultProps} showLegend />);
         expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty("showlegend", true);
     });
 
     it("shows the legend when showLegend is false", () => {
-        const lineChart = shallow(<LineChart {...defaultProps} title="With legend" showLegend={false} />);
+        const lineChart = shallow(<LineChart {...defaultProps} showLegend={false} />);
         expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty("showlegend", false);
     });
 
