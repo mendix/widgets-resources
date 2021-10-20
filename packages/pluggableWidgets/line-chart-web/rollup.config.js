@@ -12,7 +12,7 @@ export default args => {
     const [jsConfig, mJsConfig] = result;
 
     // We define the new library externals for the entry points
-    const libraryExternals = [/^react-plotly\.js($|\/)/, /(^|\/)shared\/api.js$/];
+    const libraryExternals = [/^react-plotly\.js($|\/)/, /(^|\/)shared\/plotly.js$/];
 
     // We force the original configuration to replace the library with the local implementation
     // Configuration for the main entry point for the client
@@ -32,7 +32,7 @@ export default args => {
         input: require.resolve("react-plotly.js"),
         output: {
             format: "amd",
-            file: join(outDir, "api.js"),
+            file: join(outDir, "plotly.js"),
             sourcemap: false
         },
         external: externals,
@@ -87,7 +87,7 @@ function replaceReactPlotlyBeforeZipping(config) {
         0,
         replace({
             replaces: {
-                "react-plotly.js": "../../../../shared/api.js"
+                "react-plotly.js": "../../../../shared/plotly.js"
             }
         })
     );
