@@ -37,9 +37,12 @@ export function LineChart({
     }, []);
 
     return (
-        <div className={classNames("mx-line-chart")} style={getDimensions({ widthUnit, width, heightUnit, height })}>
+        <div
+            className={classNames("widget-line-chart")}
+            style={getDimensions({ widthUnit, width, heightUnit, height })}
+        >
             <ChartComponent
-                className="react-plotly-chart"
+                className="mx-react-plotly-chart"
                 style={{}}
                 data={data}
                 config={{ responsive: true }}

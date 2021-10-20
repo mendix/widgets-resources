@@ -1,7 +1,7 @@
-.mx-line-chart {
+.widget-line-chart {
     position: relative;
 
-    & .react-plotly-chart {
+    & .mx-react-plotly-chart {
         position: absolute;
         inset: 0;
         width: 100%;
