@@ -1,5 +1,4 @@
 import { createElement, ReactElement } from "react";
-import { ValueStatus } from "mendix";
 import { LineChartContainerProps } from "../typings/LineChartProps";
 import { LineChart as Chart } from "./components/LineChart";
 import { useSeries } from "./utils/SeriesLoader";
@@ -27,8 +26,8 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
             height={props.height}
             heightUnit={props.heightUnit}
             showLegend={props.showLegend}
-            xAxisLabel={props.xAxisLabel?.status === ValueStatus.Available ? props.xAxisLabel.value : undefined}
-            yAxisLabel={props.yAxisLabel?.status === ValueStatus.Available ? props.yAxisLabel.value : undefined}
+            xAxisLabel={props.xAxisLabel?.value}
+            yAxisLabel={props.yAxisLabel?.value}
             gridLinesMode={props.gridLines}
         />
     );
