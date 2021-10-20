@@ -10,18 +10,19 @@ import { SwitchStyle, defaultSwitchStyle, CheckBoxInputType } from "./ui/Styles"
 export type Props = SwitchProps<SwitchStyle>;
 
 export function Switch(props: Props): ReactElement {
-    const { label, labelWidth, labelOrientation, showLabel, name, onClick, dataSource } = props;
+    const { label, labelWidth, labelOrientation, showLabel, name, onChange, booleanAttribute } = props;
     const combinedStyles = flattenStyles(defaultSwitchStyle, props.style);
     const styles = processStyles(combinedStyles);
     const horizontalOrientation = labelOrientation === "horizontal";
-    const editable = !dataSource.readOnly;
-    const hasValidationMessage = false;
-    const onClickCallback = useCallback(() => {
-        if (dataSource && dataSource.status === "available") {
-            dataSource.setValue(!dataSource.value);
+    const editable = !booleanAttribute.readOnly;
+    const hasValidationMessage = !!booleanAttribute.validation;
+    const onChangeCallback = useCallback(() => {
+        if (booleanAttribute && booleanAttribute.status === "available") {
+            booleanAttribute.setValue(!booleanAttribute.value);
         }
-        executeAction(onClick);
-    }, [dataSource, onClick]);
+
+        executeAction(onChange);
+    }, [booleanAttribute, onChange]);
 
     const containerStyles = editable ? styles.container : { ...styles.container, ...styles.containerDisabled };
     const labelStyles = editable ? styles.label : { ...styles.label, ...styles.labelDisabled };
@@ -38,23 +39,38 @@ export function Switch(props: Props): ReactElement {
         : [styles.input, styles.inputDisabled];
 
     return (
-        <View style={[containerStyles, horizontalOrientation ? { flexDirection: "row", alignItems: "center" } : null]}>
+        <View
+            testID={`${name}$wrapper`}
+            style={[containerStyles, horizontalOrientation ? { flexDirection: "row", alignItems: "center" } : null]}
+        >
             {showLabel ? (
-                <Text style={[labelStyles, horizontalOrientation ? { flex: labelWidth } : null]}>{label}</Text>
+                <Text
+                    testID={`${name}$label`}
+                    style={[labelStyles, horizontalOrientation ? { flex: labelWidth } : null]}
+                >
+                    {label}
+                </Text>
             ) : null}
-            <SwitchComponent
-                disabled={!editable}
-                testID={name}
-                style={inputStyle}
-                onValueChange={onClickCallback}
-                value={dataSource.value ?? false}
-                trackColor={{
-                    true: inputProps.trackColorOn,
-                    false: inputProps.trackColorOff
-                }}
-                thumbColor={dataSource.value ? inputProps.thumbColorOn : inputProps.thumbColorOff}
-                {...(Platform.OS === "ios" ? { ios_backgroundColor: inputProps.trackColorOff } : {})}
-            />
+            <View style={horizontalOrientation ? { alignItems: "flex-end" } : null}>
+                <SwitchComponent
+                    disabled={!editable}
+                    testID={name}
+                    style={inputStyle}
+                    onValueChange={editable ? onChangeCallback : undefined}
+                    value={booleanAttribute.value}
+                    trackColor={{
+                        true: inputProps.trackColorOn,
+                        false: inputProps.trackColorOff
+                    }}
+                    thumbColor={booleanAttribute.value ? inputProps.thumbColorOn : inputProps.thumbColorOff}
+                    {...(Platform.OS === "ios" ? { ios_backgroundColor: inputProps.trackColorOff } : {})}
+                />
+                {hasValidationMessage ? (
+                    <Text testID={`${name}$alert`} style={styles.validationMessage}>
+                        {booleanAttribute.validation}
+                    </Text>
+                ) : null}
+            </View>
         </View>
     );
 }

@@ -10,21 +10,21 @@ export type LabelOrientationEnum = "horizontal" | "vertical";
 export interface SwitchProps<Style> {
     name: string;
     style: Style[];
-    dataSource: EditableValue<boolean>;
+    booleanAttribute: EditableValue<boolean>;
+    onChange?: ActionValue;
     showLabel: boolean;
     label: string;
     labelWidth: number;
     labelOrientation: LabelOrientationEnum;
-    onClick?: ActionValue;
 }
 
 export interface SwitchPreviewProps {
     class: string;
     style: string;
-    dataSource: string;
+    booleanAttribute: string;
+    onChange: {} | null;
     showLabel: boolean;
     label: string;
     labelWidth: number | null;
     labelOrientation: LabelOrientationEnum;
-    onClick: {} | null;
 }
