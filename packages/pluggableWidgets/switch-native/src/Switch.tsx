@@ -17,11 +17,10 @@ export function Switch(props: Props): ReactElement {
     const editable = !booleanAttribute.readOnly;
     const hasValidationMessage = !!booleanAttribute.validation;
     const onChangeCallback = useCallback(() => {
-        if (booleanAttribute && booleanAttribute.status === "available") {
+        if (booleanAttribute.status === "available") {
             booleanAttribute.setValue(!booleanAttribute.value);
+            executeAction(onChange);
         }
-
-        executeAction(onChange);
     }, [booleanAttribute, onChange]);
 
     const containerStyles = editable ? styles.container : { ...styles.container, ...styles.containerDisabled };
