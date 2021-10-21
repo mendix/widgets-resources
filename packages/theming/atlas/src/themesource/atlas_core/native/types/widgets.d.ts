@@ -1,4 +1,4 @@
-import { ImageStyle, TextProps, TextStyle, ViewStyle } from "react-native";
+import { ColorValue, ImageStyle, TextProps, TextStyle, ViewStyle } from "react-native";
 
 declare type ActivityIndicatorSizeType = "small" | "large";
 
@@ -136,12 +136,18 @@ export interface CarouselType {
     };
 }
 
-// Checkbox
-interface CheckBoxInputType extends TextStyle {
+// Checkbox (switch render mode)
+interface SwitchInputType extends ViewStyle {
     thumbColorOn?: string;
     thumbColorOff?: string;
     trackColorOn?: string;
     trackColorOff?: string;
+}
+
+// Checkbox (checkbox render mode)
+interface CheckBoxInputType extends ViewStyle {
+    color?: ColorValue;
+    size?: number;
 }
 
 export interface CheckBoxType {
@@ -149,9 +155,12 @@ export interface CheckBoxType {
     containerDisabled?: ViewStyle;
     label?: InputLabelType;
     labelDisabled?: TextStyle;
-    input?: CheckBoxInputType;
-    inputDisabled?: CheckBoxInputType;
-    inputError?: CheckBoxInputType;
+    input?: SwitchInputType;
+    checkboxInput?: CheckBoxInputType;
+    inputDisabled?: SwitchInputType;
+    checkboxInputDisabled?: CheckBoxInputType;
+    inputError?: SwitchInputType;
+    checkboxInputError?: CheckBoxInputType;
     validationMessage?: TextStyle;
 }
 
@@ -234,7 +243,7 @@ export interface FeedbackType {
     title?: TextStyle;
     textAreaInput?: InputType;
     switchLabel?: TextStyle;
-    switchInput?: CheckBoxInputType;
+    switchInput?: SwitchInputType;
     button?: {
         color?: string;
         borderColor?: string;
@@ -657,9 +666,9 @@ export interface SwitchType {
     containerDisabled?: ViewStyle;
     label?: InputLabelType;
     labelDisabled?: TextStyle;
-    input?: CheckBoxInputType;
-    inputDisabled?: CheckBoxInputType;
-    inputError?: CheckBoxInputType;
+    input?: SwitchInputType;
+    inputDisabled?: SwitchInputType;
+    inputError?: SwitchInputType;
     validationMessage?: TextStyle;
 }
 

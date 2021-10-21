@@ -8,6 +8,7 @@ import {
     VariablesBorder,
     VariablesBrand,
     VariablesButton,
+    VariablesCheckbox,
     VariablesContainer,
     VariablesContrast,
     VariablesFloatingActionButton,
@@ -329,6 +330,29 @@ export const navigation: VariablesNavigation = {
         shadowRadius: 10 // Only for iOS
     }
 };
+//
+// Checkbox styles
+export const checkbox: VariablesCheckbox = {
+    checkboxInput: {
+        color: brand.primary,
+        size: 20, // this applies to the icon (tick)
+        backgroundColor: background.primary,
+        borderColor: border.color,
+        borderWidth: border.width,
+        borderRadius: border.radiusSmall,
+        width: 40,
+        height: 40
+    },
+    checkboxInputDisabled: {
+        color: brand.primaryLight,
+        backgroundColor: background.secondary
+    },
+    checkboxInputError: {
+        color: brand.danger,
+        borderColor: brand.danger
+    }
+};
+
 //
 // Container Styles
 export const container: VariablesContainer = {
