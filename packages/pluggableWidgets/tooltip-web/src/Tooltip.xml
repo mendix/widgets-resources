@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.web.tooltip.Tooltip"
-        needsEntityContext="true"
-        pluginWidget="true"
-        offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<widget id="com.mendix.widget.web.tooltip.Tooltip" needsEntityContext="true" pluginWidget="true" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Tooltip</name>
     <description/>
@@ -14,7 +11,7 @@
         <propertyGroup caption="General">
             <propertyGroup caption="General">
                 <property key="trigger" type="widgets">
-                    <caption>Trigger</caption>
+                    <caption>Trigger: place widgets here</caption>
                     <description/>
                 </property>
                 <property key="renderMethod" type="enumeration" defaultValue="text">
@@ -26,7 +23,7 @@
                     </enumerationValues>
                 </property>
                 <property key="htmlMessage" type="widgets" required="false">
-                    <caption>Content</caption>
+                    <caption>Tooltip content: place widgets here</caption>
                     <description/>
                 </property>
 
@@ -37,9 +34,7 @@
 
                 <property key="tooltipPosition" type="enumeration" defaultValue="top">
                     <caption>Tooltip position</caption>
-                    <description>How to position the tooltip in relation to the trigger element - at the top, to the
-                        left, at the bottom or to the right.
-                    </description>
+                    <description>How to position the tooltip in relation to the trigger element - at the top, to the left, at the bottom or to the right.</description>
                     <enumerationValues>
                         <enumerationValue key="top">Top</enumerationValue>
                         <enumerationValue key="left">Left</enumerationValue>
@@ -49,9 +44,7 @@
                 </property>
                 <property key="arrowPosition" type="enumeration" defaultValue="none">
                     <caption>Arrow position</caption>
-                    <description>How to position the tooltip arrow in relation to the tooltip - at the start, in the
-                        center or at the end.
-                    </description>
+                    <description>How to position the tooltip arrow in relation to the tooltip - at the start, in the center or at the end.</description>
                     <enumerationValues>
                         <enumerationValue key="start">Start</enumerationValue>
                         <enumerationValue key="none">Center</enumerationValue>
@@ -60,9 +53,7 @@
                 </property>
                 <property key="openOn" type="enumeration" defaultValue="hover">
                     <caption>Open on</caption>
-                    <description>How the tooltip is triggered - click, hover, hover and focus. On mobile device “hover”
-                        will be triggered on touch.
-                    </description>
+                    <description>How the tooltip is triggered - click, hover, hover and focus. On mobile device “hover” will be triggered on touch.</description>
                     <enumerationValues>
                         <enumerationValue key="click">Click</enumerationValue>
                         <enumerationValue key="hover">Hover</enumerationValue>
