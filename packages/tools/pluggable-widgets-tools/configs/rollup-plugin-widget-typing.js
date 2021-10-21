@@ -28,9 +28,7 @@ export function widgetTyping({ sourceDir }) {
             await execShellCommand(
                 `npx pluggable-widgets-tools format:custom-files -- ${propsTypingFilePaths
                     .map(f =>
-                        platform() === "win32"
-                            ? `${f.replace(/(?<=[/\\])([^/\\]* [^/\\]*)(?=[/\\])/g, '"$1"')}`
-                            : `'"${f}"'`
+                        platform() === "win32" ? duplicatePathSeparators(quoteFoldersWithSpaces(f)) : `'"${f}"'`
                     )
                     .join(" ")}`,
                 sourceDir
@@ -42,4 +40,11 @@ export function widgetTyping({ sourceDir }) {
 
 async function runTransformation(sourceDir) {
     return transformPackage(await fs.readFile(join(sourceDir, "package.xml"), { encoding: "utf8" }), sourceDir);
+}
+
+function duplicatePathSeparators(path) {
+    return path.replace(/(?<=[^/\\])([/\\])(?=[^/\\])/g, "$1$1");
+}
+function quoteFoldersWithSpaces(path) {
+    return path.replace(/(?<=[/\\])([^/\\]* [^/\\]*)(?=[/\\])/g, '"$1"');
 }
