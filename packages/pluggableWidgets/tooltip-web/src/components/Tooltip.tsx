@@ -75,7 +75,7 @@ export const Tooltip = (props: TooltipProps): ReactElement => {
                 break;
         }
         return (
-            <div className="widget-tooltip-trigger" ref={setTriggerElement} {...eventContainer}>
+            <div className="widget-tooltip-trigger" ref={setTriggerElement} {...(preview ? undefined : eventContainer)}>
                 {trigger}
             </div>
         );

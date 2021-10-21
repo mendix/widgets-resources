@@ -66,6 +66,8 @@
         background-color: white;
         padding: 6px;
         z-index: 1;
+        white-space: break-spaces;
+        word-break: break-word;
     }
 
     .widget-tooltip-arrow,
