@@ -15438,6 +15438,24 @@ body[dir=rtl] .mx-header-right {
 .mx-groupbox > .mx-groupbox-header .mx-groupbox-collapse-icon {
   margin-top: 0.1em;
 }
+.mx-groupbox > h1.mx-groupbox-header {
+  font-size: 31px;
+}
+.mx-groupbox > h2.mx-groupbox-header {
+  font-size: 26px;
+}
+.mx-groupbox > h3.mx-groupbox-header {
+  font-size: 24px;
+}
+.mx-groupbox > h4.mx-groupbox-header {
+  font-size: 18px;
+}
+.mx-groupbox > h5.mx-groupbox-header, .mx-groupbox > .mx-groupbox-header.widget-eventTime, .mx-groupbox > .mx-groupbox-header.widget-timeline-title {
+  font-size: 14px;
+}
+.mx-groupbox > h6.mx-groupbox-header {
+  font-size: 12px;
+}
 .mx-groupbox > .mx-groupbox-body {
   padding: 12px 16px;
   border-width: 1px;
@@ -15522,30 +15540,6 @@ body[dir=rtl] .mx-header-right {
 }
 .groupbox-transparent .mx-groupbox-collapse-icon {
   color: #264ae5;
-}
-
-.groupbox-h1 > .mx-groupbox-header {
-  font-size: 31px;
-}
-
-.groupbox-h2 > .mx-groupbox-header {
-  font-size: 26px;
-}
-
-.groupbox-h3 > .mx-groupbox-header {
-  font-size: 24px;
-}
-
-.groupbox-h4 > .mx-groupbox-header {
-  font-size: 18px;
-}
-
-.groupbox-h5 > .mx-groupbox-header {
-  font-size: 14px;
-}
-
-.groupbox-h6 > .mx-groupbox-header {
-  font-size: 12px;
 }
 
 .groupbox-callout > .mx-groupbox-header,
@@ -15686,6 +15680,33 @@ img.img-cover,
 img.img-scale-down,
 .img-scale-down img {
   object-fit: scale-down;
+}
+
+.img-contain.mx-image-background {
+  background-size: contain;
+}
+
+.img-cover.mx-image-background {
+  background-size: cover;
+}
+
+.img-auto.mx-image-background {
+  background-size: auto;
+}
+
+.img-opacity-low img,
+.img-opacity-low.mx-image-background {
+  opacity: 0.3;
+}
+
+.img-opacity-medium img,
+.img-opacity-medium.mx-image-background {
+  opacity: 0.5;
+}
+
+.img-opacity-high img,
+.img-opacity-high.mx-image-background {
+  opacity: 0.7;
 }
 
 /* ==========================================================================
@@ -20926,7 +20947,7 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 }
 .layout-atlas .region-topbar {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   min-height: 48px;
   background-color: #020557;
 }
@@ -21011,21 +21032,36 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 .layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar {
     width: 52px !important;
   }
-  .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul,
-.layout-atlas-responsive .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul,
-.layout-atlas-responsive .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul,
-.layout-atlas-responsive-default .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul,
-.layout-atlas-responsive-default .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul,
-.layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul {
+  .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items a,
+.layout-atlas-responsive .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items a,
+.layout-atlas-responsive .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items a,
+.layout-atlas-responsive-default .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items a,
+.layout-atlas-responsive-default .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items a,
+.layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items a {
+    white-space: nowrap;
+  }
+  .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive-default .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive-default .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul {
     position: absolute;
     z-index: 100;
     top: 0;
     bottom: 0;
     left: 52px;
     display: block;
-    overflow-y: auto;
     min-width: auto;
     padding: 8px 0;
+  }
+  .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive-default .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive-default .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul,
+.layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items:hover > ul > li.mx-navigationtree-has-items:hover > ul {
+    left: 100%;
   }
   .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas-responsive .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul,
 .layout-atlas-responsive .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul,
@@ -21038,6 +21074,23 @@ html div.dj_ios .widget-switch.auto .widget-switch-btn-wrapper.checked.widget-sw
 .layout-atlas-responsive-default .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul,
 .layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-collapsed ul,
 .layout-atlas-responsive-default .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar .mx-scrollcontainer-wrapper > .mx-navigationtree ul li.mx-navigationtree-has-items ul {
+    display: none;
+  }
+  .layout-atlas-responsive .widget-sidebar:not(.widget-sidebar-expanded) .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul,
+.layout-atlas-responsive-default .widget-sidebar:not(.widget-sidebar-expanded) .mx-navigationtree ul li.mx-navigationtree-has-items:hover ul {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    left: 52px;
+    display: block;
+    overflow-y: auto;
+    min-width: auto;
+    padding: 8px 0;
+  }
+  .layout-atlas-responsive .widget-sidebar:not(.widget-sidebar-expanded) .mx-navigationtree ul li.mx-navigationtree-collapsed ul, .layout-atlas-responsive .widget-sidebar:not(.widget-sidebar-expanded) .mx-navigationtree ul li.mx-navigationtree-has-items ul,
+.layout-atlas-responsive-default .widget-sidebar:not(.widget-sidebar-expanded) .mx-navigationtree ul li.mx-navigationtree-collapsed ul,
+.layout-atlas-responsive-default .widget-sidebar:not(.widget-sidebar-expanded) .mx-navigationtree ul li.mx-navigationtree-has-items ul {
     display: none;
   }
 }
