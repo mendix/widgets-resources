@@ -18,7 +18,6 @@
         position: absolute;
         top: 30px;
         right: 30px;
-        width: 120px;
     }
 
     .loginpage-left {
@@ -151,10 +150,6 @@
 
     // Show only on wide screens
     @media screen and (min-width: $screen-xl) {
-        .loginpage-logo {
-            width: 150px;
-        }
-
         .loginpage-left {
             position: relative;
             display: block;
