@@ -19,6 +19,7 @@
   "scripts": {
     "build": "rollup --config ../../../configs/jsactions/rollup.config.js --configProject nanoflowcommons",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "release": "npm run build",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {

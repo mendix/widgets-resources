@@ -86,7 +86,7 @@ async function createModuleMpkInDocker(sourceDir, moduleName, mendixVersion, exc
     await execShellCommand(
         `docker run -t -v ${sourceDir}:/source ` +
             `--rm mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mono /tmp/mxbuild/modeler/mxutil.exe create-module-package ${
-                excludeFilesRegExp ? `--exclude-files=${excludeFilesRegExp}` : ""
+                excludeFilesRegExp ? `--exclude-files="${excludeFilesRegExp}"` : ""
             } /source/${projectFile} ${moduleName}"`
     );
     console.log(`Module ${moduleName} created successfully.`);
