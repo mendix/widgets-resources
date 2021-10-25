@@ -41,12 +41,15 @@ jobs:
                   GH_NAME: ${{ secrets.GH_NAME }}
                   GH_PAT: ${{ secrets.GH_PAT }}
                   TAG: ${{ steps.variables.outputs.tag }}
+            - name: "Building Web modules"
+              if: ${{ startsWith(steps.scope.outputs._0, 'atlas-') && !endsWith(steps.scope.outputs._0, '-native') }}
+              run: "npm run release -- --scope '${{ steps.scope.outputs._0 }}'"
             - name: "Building data widgets"
               if: ${{ steps.scope.outputs._0 == 'data-widgets' }}
               run: npm run release:data-widgets
-            - name: "Updating Data Widgets project"
-              if: ${{ steps.scope.outputs._0 == 'data-widgets' }}
-              run: "npm run create-modules:data-widgets"
+            - name: "Updating Web module project"
+              if: ${{ steps.scope.outputs._0 == 'data-widgets' || (startsWith(steps.scope.outputs._0, 'atlas-') && !endsWith(steps.scope.outputs._0, '-native')) }}
+              run: "npm run create-modules:web"
               env:
                   GH_USERNAME: ${{ secrets.GH_USERNAME }}
                   GH_EMAIL: ${{ secrets.GH_EMAIL }}
