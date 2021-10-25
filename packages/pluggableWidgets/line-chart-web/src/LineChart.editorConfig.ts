@@ -61,8 +61,38 @@ export function getPreview(_values: LineChartPreviewProps): StructurePreviewProp
     return null;
 }
 
-export function check(_values: LineChartPreviewProps): Problem[] {
+export function check(values: LineChartPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
+    values.lines.forEach((line, index) => {
+        if (line.dataSet === "static" && line.staticDataSource) {
+            if (!line.staticXAttribute) {
+                errors.push({
+                    property: `lines/${index + 1}/staticXAttribute`,
+                    message: `Setting a X axis attribute is required.`
+                });
+            }
+            if (!line.staticYAttribute) {
+                errors.push({
+                    property: `lines/${index + 1}/staticYAttribute`,
+                    message: `Setting a Y axis attribute is required.`
+                });
+            }
+        }
+        if (line.dataSet === "dynamic" && line.dynamicDataSource) {
+            if (!line.dynamicXAttribute) {
+                errors.push({
+                    property: `lines/${index + 1}/dynamicXAttribute`,
+                    message: `Setting a X axis attribute is required.`
+                });
+            }
+            if (!line.dynamicYAttribute) {
+                errors.push({
+                    property: `lines/${index + 1}/dynamicYAttribute`,
+                    message: `Setting a Y axis attribute is required.`
+                });
+            }
+        }
+    });
     return errors;
 }
