@@ -67,7 +67,7 @@ async function getPackageInfo(path) {
 }
 
 // Create reusable mxbuild image
-async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
+async function createModuleMpkInDocker(sourceDir, moduleName, mendixVersion, excludeFilesRegExp) {
     const existingImages = (await execShellCommand(`docker image ls -q mxbuild:${mendixVersion}`)).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
@@ -85,7 +85,9 @@ async function createMxBuildContainer(sourceDir, moduleName, mendixVersion) {
     const projectFile = basename((await getFiles(sourceDir, [`.mpr`]))[0]);
     await execShellCommand(
         `docker run -t -v ${sourceDir}:/source ` +
-            `--rm mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mono /tmp/mxbuild/modeler/mxutil.exe create-module-package /source/${projectFile} ${moduleName}"`
+            `--rm mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mono /tmp/mxbuild/modeler/mxutil.exe create-module-package ${
+                excludeFilesRegExp ? `--exclude-files=${excludeFilesRegExp}` : ""
+            } /source/${projectFile} ${moduleName}"`
     );
     console.log(`Module ${moduleName} created successfully.`);
 }
@@ -217,9 +219,14 @@ async function cloneRepo(githubUrl, localFolder) {
     await setLocalGitCredentials(localFolder);
 }
 
-async function createMPK(tmpFolder, moduleInfo) {
+async function createMPK(tmpFolder, moduleInfo, excludeFilesRegExp) {
     console.log("Creating module MPK..");
-    await createMxBuildContainer(tmpFolder, moduleInfo.moduleNameInModeler, moduleInfo.minimumMXVersion);
+    await createModuleMpkInDocker(
+        tmpFolder,
+        moduleInfo.moduleNameInModeler,
+        moduleInfo.minimumMXVersion,
+        excludeFilesRegExp
+    );
     return (await getFiles(tmpFolder, [`.mpk`]))[0];
 }
 
@@ -255,7 +262,7 @@ module.exports = {
     getPackageInfo,
     getUnreleasedChangelogs,
     githubAuthentication,
-    createMxBuildContainer,
+    createModuleMpkInDocker,
     bumpVersionInPackageJson,
     commitAndCreatePullRequest,
     updateWidgetChangelogs,
