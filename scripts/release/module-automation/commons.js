@@ -240,6 +240,14 @@ async function createGithubReleaseFrom({ title, body, tag, mpkOutput, isDraft = 
     );
 }
 
+function zip(src, fileName) {
+    return execShellCommand(`cd "${src}" && zip -r ../${fileName} .`);
+}
+
+function unzip(src, dest) {
+    return execShellCommand(`unzip "${src}" -d "${dest}"`);
+}
+
 module.exports = {
     setLocalGitCredentials,
     execShellCommand,
@@ -257,5 +265,7 @@ module.exports = {
     createMPK,
     createGithubRelease,
     createGithubReleaseFrom,
-    writeToWidgetChangelogs
+    writeToWidgetChangelogs,
+    zip,
+    unzip
 };

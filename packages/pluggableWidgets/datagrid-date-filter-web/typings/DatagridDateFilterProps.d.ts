@@ -19,7 +19,6 @@ export interface DatagridDateFilterContainerProps {
     placeholder?: DynamicValue<string>;
     adjustable: boolean;
     valueAttribute?: EditableValue<Date>;
-    filterAttribute?: EditableValue<string>;
     onChange?: ActionValue;
     screenReaderButtonCaption?: DynamicValue<string>;
     screenReaderCalendarCaption?: DynamicValue<string>;
@@ -35,7 +34,6 @@ export interface DatagridDateFilterPreviewProps {
     placeholder: string;
     adjustable: boolean;
     valueAttribute: string;
-    filterAttribute: string;
     onChange: {} | null;
     screenReaderButtonCaption: string;
     screenReaderCalendarCaption: string;

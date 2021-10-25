@@ -5,33 +5,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [2.0.1] Data Widgets - 2021-10-7
-
-## [2.0.1] DatagridDateFilter
-### Fixed
-- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
-
-## [2.0.1] DatagridDropdownFilter
-### Fixed
-- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
-
-## [2.0.1] DatagridNumberFilter
-### Fixed
-- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
-
-## [2.0.1] DatagridTextFilter
-### Fixed
-- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
-
-## [2.0.1] Datagrid
 ### Changed
+- We removed the Snippet, Example enumeration and version constant from the module.
+
+### Added
+- We added a .version file inside themesource/datawidgets containing the module version.
+
+## [2.0.2] - 2021-10-13
+
+### Filter widgets
+
+#### Added
+- We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+- We added a "Enable advanced options" toggle for Studio users.
+
+### Data Grid 2, Gallery & Tree Node
+
+#### Changed
+- We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
+
+
+## [2.0.1] - 2021-10-07
+
+### Filter widgets
+
+#### Fixed
+- We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
+
+### Data Grid 2
+
+#### Changed
 - We added a check to prevent actions to be triggered while being executed
 
-### Fixed
+#### Fixed
 - We fixed an issue where widgets get duplicate identifiers assigned under certain circumstances which causes inconsistencies in accessibility.
 
-## [1.0.1] Gallery
-### Changed
+### Gallery
+
+#### Changed
 - We added a check to prevent actions to be triggered while being executed
 
 ## [2.0.0] - 2021-09-28
