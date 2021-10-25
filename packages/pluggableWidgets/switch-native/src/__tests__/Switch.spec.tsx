@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
+import { actionValue, EditableValueBuilder, dynamicValue } from "@mendix/piw-utils-internal";
 import { mount, ReactWrapper } from "enzyme";
 import { createElement } from "react";
 
@@ -16,7 +16,7 @@ const createProps = (props?: Partial<Props>): Props => {
     const style = props?.style ?? {};
     const defaultProps: Props = {
         name,
-        label: "Label",
+        label: dynamicValue<string>("Label", false),
         labelWidth,
         labelOrientation: "horizontal",
         showLabel: false,

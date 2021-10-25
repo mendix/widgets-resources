@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type LabelOrientationEnum = "horizontal" | "vertical";
 
@@ -13,7 +13,7 @@ export interface SwitchProps<Style> {
     booleanAttribute: EditableValue<boolean>;
     onChange?: ActionValue;
     showLabel: boolean;
-    label: string;
+    label?: DynamicValue<string>;
     labelWidth: number;
     labelOrientation: LabelOrientationEnum;
 }

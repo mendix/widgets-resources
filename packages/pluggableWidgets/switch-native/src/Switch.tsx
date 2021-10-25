@@ -37,6 +37,8 @@ export function Switch(props: Props): ReactElement {
             : styles.input
         : [styles.input, styles.inputDisabled];
 
+    const labelValue = (label?.status === "available" && label.value) || "";
+
     return (
         <View
             testID={`${name}$wrapper`}
@@ -47,7 +49,7 @@ export function Switch(props: Props): ReactElement {
                     testID={`${name}$label`}
                     style={[labelStyles, horizontalOrientation ? { flex: labelWidth } : null]}
                 >
-                    {label}
+                    {labelValue}
                 </Text>
             ) : null}
             <View style={horizontalOrientation ? { alignItems: "flex-end" } : null}>
