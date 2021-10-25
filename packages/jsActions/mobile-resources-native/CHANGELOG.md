@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We removed some unwanted files from the module.
+
 ## [3.3.0] Native Mobile Resources - 2021-10-14
 
 ## [1.0.0] Pie Doughnut Chart
