@@ -52,7 +52,7 @@ export function Switch(props: Props): ReactElement {
                     {labelValue}
                 </Text>
             ) : null}
-            <View style={horizontalOrientation ? { alignItems: "flex-end" } : null}>
+            <View style={horizontalOrientation ? { alignItems: "flex-end" } : { alignItems: "flex-start" }}>
                 <SwitchComponent
                     disabled={!editable}
                     testID={name}
