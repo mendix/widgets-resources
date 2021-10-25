@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.3.1] Native Mobile Resources - 2021-10-25
 ### Fixed
 - We removed some unwanted files from the module.
 
