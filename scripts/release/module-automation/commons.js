@@ -280,9 +280,9 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
         const content = await readFile(packageXmlFile, "utf8");
         if (content.length) {
             const filesEntry = "</files>";
-            const filesContent = widgetEntries.map(mpkFile => `<file path="widgets/${mpkFile}" />`).join("\n");
+            const filesContent = widgetEntries.map(mpkFile => `<file path="widgets/${mpkFile}" />`).join("\n\t\t\t");
             const [beginning, end] = content.split(filesEntry);
-            const newContent = `${beginning}${filesContent}${filesEntry}${end}`;
+            const newContent = `${beginning}\t${filesContent}\n\t\t${filesEntry}${end}`;
             await writeFile(packageXmlFile, newContent);
         }
     } catch (e) {
