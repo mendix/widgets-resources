@@ -23,7 +23,7 @@ async function main(): Promise<void> {
         const MX_PROJECT_PATH = process.env.MX_PROJECT_PATH; // should be an absolute path.
         outputDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
 
-        const toRemoveDirs = [join(outputDir, "themesource/atlas_web_content")];
+        const toRemoveDirs = [join(outputDir, "themesource/atlas_core")];
         rm("-rf", toRemoveDirs);
         console.info(`Ensured the directories ${toRemoveDirs.join(", ")} are removed from your Mendix project`);
     } else if (mode === "release") {
@@ -36,7 +36,7 @@ async function main(): Promise<void> {
     if (outputDir) {
         // when targeting a networked windows drive, the cmds executed by concurrently run into a race condition when
         // creating directories. create them here to avoid the error.
-        mkdir("-p", join(outputDir, "themesource/atlas_web_content"));
+        mkdir("-p", join(outputDir, "themesource/atlas_core"));
 
         await copyStylesAndAssets(mode === "start", outputDir);
     }
@@ -50,20 +50,32 @@ async function copyStylesAndAssets(watchMode: boolean, destination: string): Pro
         await concurrently(
             [
                 {
-                    name: "web-themesource-content",
+                    name: "web-themesource-core",
                     command: `copy-and-watch ${watchArg} "${join(
                         repoRoot,
                         "packages/theming/atlas",
-                        "src/themesource/atlas_web_content/web/**/*"
-                    )}" "${join(destination, "themesource/atlas_web_content/web")}"`
+                        "src/themesource/atlas_core/web/**/*"
+                    )}" "${join(destination, "themesource/atlas_core/web")}"`
                 },
                 {
-                    name: "public-themesource-content",
+                    name: "public-themesource-core",
                     command: `copy-and-watch ${watchArg} "${join(
                         repoRoot,
                         "packages/theming/atlas",
-                        "src/themesource/atlas_web_content/public/**/*"
-                    )}" "${join(destination, "themesource/atlas_web_content/public")}"`
+                        "src/themesource/atlas_core/public/**/*"
+                    )}" "${join(destination, "themesource/atlas_core/public")}"`
+                },
+                {
+                    name: "native-typescript",
+                    command: `tsc ${watchArg} --project tsconfig-native.json --outDir "${destination}"`
+                },
+                {
+                    name: "native-design-properties-and-manifest",
+                    command: `copy-and-watch ${watchArg} "${join(
+                        repoRoot,
+                        "packages/theming/atlas",
+                        "src/themesource/atlas_core/native/**/*.json"
+                    )}" "${join(destination, "themesource/atlas_core/native")}"`
                 }
             ],
             {

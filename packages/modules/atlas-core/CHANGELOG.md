@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.0.7] - 2021-09-28
+
 ### Changed
 - We fixed a problem with the styles of groupbox widget not respecting the header mode element size (Ticket #131119).
 
@@ -22,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - We added exclusion variables for core styles, layouts and bootstrap.
-  
+
 ### Changed
 - We fixed the styles of links (added cursor pointer).
 - We fixed the sidebar sub menu items when the sidebar is closed.
