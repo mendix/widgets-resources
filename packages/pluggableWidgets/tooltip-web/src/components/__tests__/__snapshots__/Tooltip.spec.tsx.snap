@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip render DOM structure 1`] = `
+<DocumentFragment>
+  <div
+    class="widget-tooltip widget-tooltip-right"
+  >
+    <div
+      class="widget-tooltip-trigger"
+    >
+      Trigger element
+    </div>
+    <div
+      class="widget-tooltip-content"
+      role="tooltip"
+      style="position: absolute; left: 0px; top: 0px;"
+    >
+      Tooltip text
+      <div
+        class="widget-tooltip-arrow"
+        style="position: absolute;"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
