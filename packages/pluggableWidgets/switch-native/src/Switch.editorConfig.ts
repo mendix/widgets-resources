@@ -1,4 +1,4 @@
-import { hidePropertiesIn, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, Problem, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { SwitchPreviewProps } from "../typings/SwitchProps";
 import StructurePreviewSwitchSVG from "./assets/checked.svg";
 
@@ -38,6 +38,19 @@ export function getPreview(values: SwitchPreviewProps): StructurePreviewProps {
               padding: 4,
               children: [label, image]
           };
+}
+
+export function check(values: SwitchPreviewProps): Problem[] {
+    const errors: Problem[] = [];
+
+    if (values.labelWidth! < 0 || values.labelWidth! > 11) {
+        errors.push({
+            property: "labelWidth",
+            message: `The Label width property value cannot be less than 0 or more than 11.`
+        });
+    }
+
+    return errors;
 }
 
 export function getProperties(values: SwitchPreviewProps, defaultProperties: Properties): Properties {
