@@ -13,7 +13,7 @@ export function Switch(props: Props): ReactElement {
     const { label, labelWidth, labelOrientation, showLabel, name, onChange, booleanAttribute } = props;
     const combinedStyles = flattenStyles(defaultSwitchStyle, props.style);
     const styles = processStyles(combinedStyles);
-    const horizontalOrientation = labelOrientation === "horizontal";
+    const horizontalOrientation = showLabel && labelOrientation === "horizontal";
     const editable = !booleanAttribute.readOnly;
     const hasValidationMessage = !!booleanAttribute.validation;
     const onChangeCallback = useCallback(() => {
@@ -37,7 +37,7 @@ export function Switch(props: Props): ReactElement {
             : styles.input
         : [styles.input, styles.inputDisabled];
 
-    const labelValue = (label?.status === "available" && label.value) || "";
+    const labelValue = label?.status === "available" ? label.value : "";
 
     return (
         <View
@@ -52,7 +52,13 @@ export function Switch(props: Props): ReactElement {
                     {labelValue}
                 </Text>
             ) : null}
-            <View style={horizontalOrientation ? { alignItems: "flex-end" } : { alignItems: "flex-start" }}>
+            <View
+                style={
+                    horizontalOrientation
+                        ? { flex: 12 - labelWidth, alignItems: "flex-end" }
+                        : { alignItems: "flex-start" }
+                }
+            >
                 <SwitchComponent
                     disabled={!editable}
                     testID={name}
