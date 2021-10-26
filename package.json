@@ -38,7 +38,7 @@
     "release:web": "npm run release -- --scope '*-web'",
     "release-github:widget": "node ./scripts/release/createWidgetRelease.js",
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
-    "create-modules:data-widgets": "node ./scripts/release/createDataWidgetsModule.js",
+    "create-modules:web": "node ./scripts/release/createWebModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
     "commit-msg": "commitlint --edit \"$1\""

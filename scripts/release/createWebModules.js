@@ -12,11 +12,13 @@ const {
     createMPK,
     createGithubRelease,
     zip,
-    unzip
+    unzip,
+    updateModuleChangelogs
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
 const [moduleFolderNameInRepo, version] = process.env.TAG.split("-v");
+const moduleFolder = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}`);
 
 main().catch(e => {
     console.error(e);
@@ -24,11 +26,19 @@ main().catch(e => {
 });
 
 async function main() {
-    if (!moduleFolderNameInRepo || !version) {
+    const modules = ["data-widgets", "atlas-content-web"];
+    if (!modules.includes(moduleFolderNameInRepo) || !version) {
         return;
     }
 
-    await createDataWidgetsModule();
+    switch (moduleFolderNameInRepo) {
+        case "data-widgets":
+            await createDataWidgetsModule();
+            break;
+        case "atlas-content-web":
+            await createAtlasWebContentModule();
+            break;
+    }
 }
 
 async function createDataWidgetsModule() {
@@ -43,30 +53,64 @@ async function createDataWidgetsModule() {
         "gallery-web",
         "tree-node-web"
     ];
-    const DWFolder = join(repoRootPath, "packages/modules/data-widgets");
     const tmpFolder = join(repoRootPath, "tmp/data-widgets");
     const widgetFolders = await readdir(join(repoRootPath, "packages/pluggableWidgets"));
     const dataWidgetsFolders = widgetFolders
         .filter(folder => widgets.includes(folder))
         .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     let moduleInfo = {
-        ...(await getPackageInfo(DWFolder)),
+        ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
         moduleFolderNameInModeler: "datawidgets"
     };
-    moduleInfo = await bumpVersionInPackageJson(DWFolder, moduleInfo);
+    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
 
     await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
 
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
+}
+
+async function createAtlasWebContentModule() {
+    console.log("Creating the Atlas Web Content module.");
+    const widgets = ["badge-web", "maps-web", "progress-bar-web", "progress-circle-web", "timeline-web"].map(folder =>
+        join(repoRootPath, "packages/pluggableWidgets", folder)
+    );
+    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "Atlas_Web_Content",
+        moduleFolderNameInModeler: "atlas_web_content"
+    };
+    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
+    await githubAuthentication(moduleInfo);
+    const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
+    await commitAndCreatePullRequest(moduleInfo);
+    await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+    console.log("Done.");
+}
+
+async function buildAndCopyWidgets(tmpFolder, widgetsFolders) {
+    console.log("Building and copying widgets..");
+    await Promise.all([
+        ...widgetsFolders.map(async folder => {
+            await execShellCommand("npm run release", folder);
+            const src = (await getFiles(folder, [`.mpk`]))[0];
+            const dest = join(tmpFolder, "widgets", basename(src));
+            await rm(dest, { force: true });
+            await copyFile(src, dest);
+        })
+    ]);
 }
 
 // Unzip the module, copy the widget and update package.xml
@@ -140,5 +184,36 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
         await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
     } else {
         console.warn(`Nothing to commit from repo ${tmpFolder}s`);
+    }
+}
+
+async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets) {
+    const projectPath = join(
+        repoRootPath,
+        `packages/modules/${moduleFolderNameInRepo}/dist/themesource/${moduleInfo.moduleFolderNameInModeler}`
+    );
+    const projectFiles = await getFiles(projectPath);
+    const tmpFolderStyles = join(tmpFolder, `themesource/${moduleInfo.moduleFolderNameInModeler}`);
+
+    console.log(`Updating project from ${moduleInfo.testProjectUrl}..`);
+    await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
+
+    console.log("Copying styling files and assets..");
+    await Promise.all([
+        ...projectFiles.map(async file => {
+            const dest = join(tmpFolderStyles, file.replace(projectPath, ""));
+            await rm(dest);
+            await copyFile(file, dest);
+        })
+    ]);
+
+    await buildAndCopyWidgets(tmpFolder, widgets);
+
+    await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
+    const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
+    if (!/nothing to commit/i.test(gitOutput)) {
+        await execShellCommand("git add . && git commit -m 'Updated Atlas native styling' && git push", tmpFolder);
+    } else {
+        console.warn(`Nothing to commit from repo ${tmpFolder}`);
     }
 }
