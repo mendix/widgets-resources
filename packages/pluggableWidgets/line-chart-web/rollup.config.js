@@ -104,7 +104,8 @@ export default args => {
                 // For now they don't seem related to us and everything still works, so I ignored them.
                 if (
                     warning.loc &&
-                    warning.loc.file.includes("fast-json-patch") &&
+                    (warning.loc.file.includes("fast-json-patch") ||
+                        warning.loc.file.includes("shared/charts/dist/components/Chart.js")) &&
                     warning.code === "THIS_IS_UNDEFINED"
                 ) {
                     return;

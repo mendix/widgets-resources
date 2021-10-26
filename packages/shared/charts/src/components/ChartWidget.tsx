@@ -1,20 +1,11 @@
 import { createElement, ReactElement, useMemo } from "react";
 import { Data, Layout } from "plotly.js";
-import { LineChartPreviewProps } from "../../typings/LineChartProps";
 import classNames from "classnames";
 import { Dimensions, getDimensions } from "@mendix/piw-utils-internal";
 import { getModelerConfigOptions, getModelerLayoutOptions, getModelerSeriesOptions } from "../utils/configs";
 import { Chart, ChartWithPlayground } from "./Chart";
 
 import "../ui/Chart.scss";
-
-interface CustomLayoutProps {
-    showLegend: Layout["showlegend"];
-    xAxisLabel: Layout["xaxis"]["title"];
-    yAxisLabel: Layout["yaxis"]["title"];
-    gridLinesMode: LineChartPreviewProps["gridLines"];
-}
-
 interface CustomLayoutProps {
     showLegend: Layout["showlegend"];
     xAxisLabel: Layout["xaxis"]["title"];

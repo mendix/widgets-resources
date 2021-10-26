@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { createElement, ReactElement } from "react";
+import { ChartWidget } from "@mendix/shared-charts";
 import { LineChartContainerProps } from "../typings/LineChartProps";
-import { ChartWidget } from "./components/ChartWidget";
 import { useSeries } from "./utils/SeriesLoader";
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {

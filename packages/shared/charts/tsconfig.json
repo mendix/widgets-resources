@@ -1,0 +1,14 @@
+{
+    "extends": "@mendix/pluggable-widgets-tools/configs/tsconfig.base",
+    "baseUrl": "./",
+    "include": ["./src", "./typings", "node_modules/@mendix/pluggable-widgets-tools/typings"],
+    "compilerOptions": {
+        "types": ["mendix-client", "big.js", "jest"],
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "baseUrl": "./",
+        "outDir": "./dist",
+        "declaration": true,
+        "sourceMap": false
+    }
+}

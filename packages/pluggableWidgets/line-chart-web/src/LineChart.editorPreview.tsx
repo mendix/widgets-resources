@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { ChartWidget } from "./components/ChartWidget";
+import { ChartWidget } from "@mendix/shared-charts";
 
 export function preview() {
     // TODO:
