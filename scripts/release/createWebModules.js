@@ -26,7 +26,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["data-widgets", "atlas-content-web"];
+    const modules = ["data-widgets", "atlas-content-web", "atlas-core"];
     if (!modules.includes(moduleFolderNameInRepo) || !version) {
         return;
     }
@@ -37,6 +37,9 @@ async function main() {
             break;
         case "atlas-content-web":
             await createAtlasWebContentModule();
+            break;
+        case "atlas-core":
+            await createAtlasCoreModule();
             break;
     }
 }
@@ -88,6 +91,26 @@ async function createAtlasWebContentModule() {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Web_Content",
         moduleFolderNameInModeler: "atlas_web_content"
+    };
+    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
+    await githubAuthentication(moduleInfo);
+    const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
+    await commitAndCreatePullRequest(moduleInfo);
+    await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+    console.log("Done.");
+}
+
+async function createAtlasCoreModule() {
+    console.log("Creating the Atlas Web Content module.");
+    const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
+    let moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "Atlas_Core",
+        moduleFolderNameInModeler: "atlas_core"
     };
     moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
     await githubAuthentication(moduleInfo);
@@ -180,10 +203,10 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
     ]);
     await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
-    if (!/nothing to commit/i.test(gitOutput)) {
-        await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
-    } else {
+    if (/nothing to commit/i.test(gitOutput)) {
         console.warn(`Nothing to commit from repo ${tmpFolder}s`);
+    } else {
+        await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
     }
 }
 
@@ -202,7 +225,7 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
     await Promise.all([
         ...projectFiles.map(async file => {
             const dest = join(tmpFolderStyles, file.replace(projectPath, ""));
-            await rm(dest);
+            await rm(dest, { force: true });
             await copyFile(file, dest);
         })
     ]);
@@ -211,9 +234,9 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
 
     await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
-    if (!/nothing to commit/i.test(gitOutput)) {
-        await execShellCommand("git add . && git commit -m 'Updated Atlas native styling' && git push", tmpFolder);
-    } else {
+    if (/nothing to commit/i.test(gitOutput)) {
         console.warn(`Nothing to commit from repo ${tmpFolder}`);
+    } else {
+        await execShellCommand("git add . && git commit -m 'Updated widgets and styling' && git push", tmpFolder);
     }
 }
