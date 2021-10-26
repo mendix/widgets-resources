@@ -11,7 +11,8 @@ const {
     githubAuthentication,
     cloneRepo,
     createMPK,
-    createGithubRelease
+    createGithubRelease,
+    exportModuleWithWidgets
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
@@ -61,6 +62,7 @@ async function createNativeMobileResourcesModule() {
     await commitAndCreatePullRequest(moduleInfo);
     await updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWidgetFolders);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, nativeWidgetFolders);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");

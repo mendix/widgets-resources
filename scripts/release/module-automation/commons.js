@@ -1,5 +1,5 @@
 const { basename, extname, join, resolve } = require("path");
-const { access, readdir, readFile, writeFile, rm } = require("fs/promises");
+const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir } = require("fs/promises");
 const { mkdir } = require("shelljs");
 const { exec } = require("child_process");
 
@@ -255,6 +255,44 @@ function unzip(src, dest) {
     return execShellCommand(`unzip "${src}" -d "${dest}"`);
 }
 
+// Unzip the module, copy the widget and update package.xml
+async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
+    console.log(`Adding ${widgetsFolders.length} widgets to module ${moduleName}`);
+    const projectPath = mpkOutput.replace(".mpk", "");
+    const packageXmlFile = join(projectPath, "package.xml");
+    const widgetsDestination = join(projectPath, "widgets");
+    const widgetEntries = [];
+    // Unzip the mpk
+    await unzip(mpkOutput, projectPath);
+    await rmdir(mpkOutput, { recursive: true });
+    // Copy widgets to widgets folder
+    await mkdir(widgetsDestination, { recursive: true });
+    for await (const folder of widgetsFolders) {
+        console.log(`Adding ${basename(folder)} to ${moduleName}`);
+        const src = (await getFiles(folder, [`.mpk`]))[0];
+        const fileName = basename(src);
+        const dest = join(widgetsDestination, fileName);
+        widgetEntries.push(fileName);
+        await copyFile(src, dest);
+    }
+    // Add entries to the package.xml
+    try {
+        const content = await readFile(packageXmlFile, "utf8");
+        if (content.length) {
+            const filesEntry = "</files>";
+            const filesContent = widgetEntries.map(mpkFile => `<file path="widgets/${mpkFile}" />`).join("\n");
+            const [beginning, end] = content.split(filesEntry);
+            const newContent = `${beginning}${filesContent}${filesEntry}${end}`;
+            await writeFile(packageXmlFile, newContent);
+        }
+    } catch (e) {
+        throw new Error(`Including widgets in module failed. package.xml of widget ${moduleName} not found`);
+    }
+    // Re-zip and rename
+    await zip(projectPath, moduleName);
+    await rename(`${projectPath}.zip`, mpkOutput);
+}
+
 module.exports = {
     setLocalGitCredentials,
     execShellCommand,
@@ -274,5 +312,6 @@ module.exports = {
     createGithubReleaseFrom,
     writeToWidgetChangelogs,
     zip,
-    unzip
+    unzip,
+    exportModuleWithWidgets
 };
