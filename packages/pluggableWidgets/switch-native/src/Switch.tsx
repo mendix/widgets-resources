@@ -10,7 +10,7 @@ import { SwitchStyle, defaultSwitchStyle, CheckBoxInputType } from "./ui/Styles"
 export type Props = SwitchProps<SwitchStyle>;
 
 export function Switch(props: Props): ReactElement {
-    const { label, labelWidth, labelOrientation, showLabel, name, onChange, booleanAttribute } = props;
+    const { label, labelOrientation, showLabel, name, onChange, booleanAttribute } = props;
     const combinedStyles = flattenStyles(defaultSwitchStyle, props.style);
     const styles = processStyles(combinedStyles);
     const horizontalOrientation = showLabel && labelOrientation === "horizontal";
@@ -45,20 +45,11 @@ export function Switch(props: Props): ReactElement {
             style={[containerStyles, horizontalOrientation ? { flexDirection: "row", alignItems: "center" } : null]}
         >
             {showLabel ? (
-                <Text
-                    testID={`${name}$label`}
-                    style={[labelStyles, horizontalOrientation ? { flex: labelWidth } : null]}
-                >
+                <Text testID={`${name}$label`} style={[labelStyles, horizontalOrientation ? { flex: 1 } : null]}>
                     {labelValue}
                 </Text>
             ) : null}
-            <View
-                style={
-                    horizontalOrientation
-                        ? { flex: 12 - labelWidth, alignItems: "flex-end" }
-                        : { alignItems: "flex-start" }
-                }
-            >
+            <View style={[horizontalOrientation ? { flex: 1, alignItems: "flex-end" } : { alignItems: "flex-start" }]}>
                 <SwitchComponent
                     disabled={!editable}
                     testID={name}

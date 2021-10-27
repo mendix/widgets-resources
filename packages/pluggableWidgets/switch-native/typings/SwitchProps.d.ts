@@ -14,7 +14,6 @@ export interface SwitchProps<Style> {
     onChange?: ActionValue;
     showLabel: boolean;
     label?: DynamicValue<string>;
-    labelWidth: number;
     labelOrientation: LabelOrientationEnum;
 }
 
@@ -25,6 +24,5 @@ export interface SwitchPreviewProps {
     onChange: {} | null;
     showLabel: boolean;
     label: string;
-    labelWidth: number | null;
     labelOrientation: LabelOrientationEnum;
 }

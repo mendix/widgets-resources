@@ -1,4 +1,4 @@
-import { hidePropertiesIn, Problem, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { SwitchPreviewProps } from "../typings/SwitchProps";
 import StructurePreviewSwitchSVG from "./assets/checked.svg";
 
@@ -23,6 +23,7 @@ export function getPreview(values: SwitchPreviewProps): StructurePreviewProps {
         height: 30,
         grow: 8
     };
+    const children = values.showLabel ? [label, image] : [image];
 
     return values.labelOrientation === "horizontal"
         ? {
@@ -30,32 +31,19 @@ export function getPreview(values: SwitchPreviewProps): StructurePreviewProps {
               borders: false,
               padding: 4,
               columnSize: "fixed",
-              children: [label, image]
+              children
           }
         : {
               type: "Container",
               borders: false,
               padding: 4,
-              children: [label, image]
+              children
           };
-}
-
-export function check(values: SwitchPreviewProps): Problem[] {
-    const errors: Problem[] = [];
-
-    if (values.labelWidth! < 0 || values.labelWidth! > 11) {
-        errors.push({
-            property: "labelWidth",
-            message: `The Label width property value cannot be less than 0 or more than 11.`
-        });
-    }
-
-    return errors;
 }
 
 export function getProperties(values: SwitchPreviewProps, defaultProperties: Properties): Properties {
     if (!values.showLabel) {
-        hidePropertiesIn(defaultProperties, values, ["label", "labelWidth", "labelOrientation"]);
+        hidePropertiesIn(defaultProperties, values, ["label", "labelOrientation"]);
     }
 
     return defaultProperties;

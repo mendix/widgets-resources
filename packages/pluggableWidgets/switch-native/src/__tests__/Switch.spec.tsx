@@ -11,13 +11,11 @@ import { defaultSwitchStyle } from "../ui/Styles";
 declare type RWrapper = ReactWrapper<any, Readonly<{}>, React.Component<{}, {}, any>>;
 
 const name = "Switch1";
-const labelWidth = 3;
 const createProps = (props?: Partial<Props>): Props => {
     const style = props?.style ?? {};
     const defaultProps: Props = {
         name,
         label: dynamicValue<string>("Label", false),
-        labelWidth,
         labelOrientation: "horizontal",
         showLabel: false,
         booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build(),
@@ -80,32 +78,10 @@ describe("Switch", () => {
         switchWrapper = mount(<Switch {...props} />);
         expect(
             switchWrapper
-                .find({ testID: `${name}$label` })
-                .at(1)
-                .prop("style")
-        ).toEqual(expect.arrayContaining([{ flex: labelWidth }]));
-        expect(
-            switchWrapper
                 .find({ testID: `${name}$wrapper` })
                 .at(1)
                 .prop("style")
         ).toEqual(expect.arrayContaining([{ flexDirection: "row", alignItems: "center" }]));
-    });
-
-    it("with showLabel true and labelWidth 5, increases label width", () => {
-        const customLabelWidth = 5;
-        const props = createProps({
-            showLabel: true,
-            labelWidth: customLabelWidth
-        });
-
-        switchWrapper = mount(<Switch {...props} />);
-        expect(
-            switchWrapper
-                .find({ testID: `${name}$label` })
-                .at(1)
-                .prop("style")
-        ).toEqual(expect.arrayContaining([{ flex: customLabelWidth }]));
     });
 
     it("with showLabel true and labelOrientation vertical, renders vertical", () => {
@@ -115,12 +91,6 @@ describe("Switch", () => {
         });
 
         switchWrapper = mount(<Switch {...props} />);
-        expect(
-            switchWrapper
-                .find({ testID: `${name}$label` })
-                .at(1)
-                .prop("style")
-        ).toEqual(expect.not.arrayContaining([{ flex: labelWidth }]));
 
         expect(
             switchWrapper

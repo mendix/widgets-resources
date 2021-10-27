@@ -32,10 +32,6 @@
                     <caption>Label</caption>
                     <description/>
                 </property>
-                <property key="labelWidth" type="integer" defaultValue="3">
-                    <caption>Label width</caption>
-                    <description>The weight of the label, which must be a value between 0 and 12</description>
-                </property>
                 <property key="labelOrientation" type="enumeration" defaultValue="horizontal">
                     <caption>Label orientation</caption>
                     <description/>
