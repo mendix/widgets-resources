@@ -135,11 +135,14 @@ export default async args => {
                 overrides: [
                     {
                         test: /node_modules/,
-                        plugins: ["@babel/plugin-transform-flow-strip-types", "@babel/plugin-transform-react-jsx"]
+                        plugins: [
+                            "@babel/plugin-transform-flow-strip-types",
+                            ["@babel/plugin-transform-react-jsx", { runtime: "automatic" }]
+                        ]
                     },
                     {
                         exclude: /node_modules/,
-                        plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
+                        plugins: [["@babel/plugin-transform-react-jsx", { runtime: "automatic" }]]
                     }
                 ]
             }),

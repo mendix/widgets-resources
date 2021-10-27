@@ -15,13 +15,12 @@
         "strict": true,
         "strictFunctionTypes": false,
         "skipLibCheck": true,
-        "noUnusedLocals": true,
+        "noUnusedLocals": false,
         "noUnusedParameters": true,
-        "jsx": "react",
-        "jsxFactory": "createElement",
+        "jsx": "react-jsx",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "useUnknownInCatchVariables": false,
-        "exactOptionalPropertyTypes": false
+        "exactOptionalPropertyTypes": false,
     }
 }

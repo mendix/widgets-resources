@@ -94,6 +94,7 @@
         "react/no-deprecated": "warn",
         "react/jsx-uses-vars": "error",
         "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
 
         "array-callback-return": "error",
         "curly": "error",
