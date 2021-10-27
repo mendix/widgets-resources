@@ -6,8 +6,11 @@ import { Playground, useChartsPlaygroundState } from "./Playground/Playground";
 import { CodeEditor } from "./Playground/CodeEditor";
 import { ifNonEmptyStringElseEmptyObjectString } from "./utils/utils";
 
+type ChartDataType = Partial<Data> & {
+    customSeriesOptions: string | undefined;
+};
 export interface ChartProps {
-    data: Array<Partial<Data> & { customSeriesOptions: string | undefined }>;
+    data: Array<ChartDataType>;
     configOptions: Partial<Config>;
     layoutOptions: Partial<Layout>;
     seriesOptions: Partial<Data>;

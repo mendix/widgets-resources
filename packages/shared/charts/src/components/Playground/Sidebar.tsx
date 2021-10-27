@@ -1,7 +1,6 @@
 import { createElement, ReactElement, ReactNode } from "react";
 import classNames from "classnames";
 
-import "../../ui/Playground.scss";
 import "../../ui/Sidebar.scss";
 import "../../ui/Panel.scss";
 

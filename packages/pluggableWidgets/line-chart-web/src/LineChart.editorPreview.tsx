@@ -18,6 +18,9 @@ export function preview() {
             showSidebarEditor={false}
             customLayout={""}
             customConfig={""}
+            configOptions={{}}
+            layoutOptions={{}}
+            seriesOptions={{}}
         />
     );
 }

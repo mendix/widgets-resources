@@ -27,7 +27,10 @@ const defaultProps: ChartWidgetProps = {
     gridLinesMode: "both",
     customLayout: "",
     showSidebarEditor: false,
-    customConfig: ""
+    customConfig: "",
+    configOptions: {},
+    layoutOptions: {},
+    seriesOptions: {}
 };
 
 describe("LineChart", () => {

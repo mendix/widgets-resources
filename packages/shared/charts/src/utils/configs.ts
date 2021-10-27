@@ -39,33 +39,33 @@ interface SharedConfigs {
     series: Partial<Data>;
 }
 
-const lineChartDefaultLayoutOptions: Partial<Layout> = {
-    xaxis: {
-        zeroline: true,
-        fixedrange: true,
-        gridcolor: "#d7d7d7",
-        zerolinecolor: "#d7d7d7"
-    },
-    yaxis: {
-        fixedrange: true,
-        gridcolor: "#d7d7d7",
-        zeroline: true,
-        zerolinecolor: "#d7d7d7"
-    }
+export const getModelerLayoutOptions = (...customLayouts: Array<Partial<Layout>>): Partial<Layout> => {
+    return deepMerge.all([defaultConfigs.layout, ...customLayouts]);
 };
 
-const lineChartDefaultConfigOptions: Partial<Config> = {
-    responsive: true
+export const getModelerConfigOptions = (...customConfigs: Array<Partial<Config>>): Partial<Config> => {
+    return deepMerge.all([defaultConfigs.configuration, ...customConfigs]);
 };
 
-export const getModelerLayoutOptions = (customLayout: Partial<Layout>): Partial<Layout> => {
-    return deepMerge.all([lineChartDefaultLayoutOptions, defaultConfigs.layout, customLayout]);
+export const getModelerSeriesOptions = (...customSeries: Array<Partial<Data>>): Partial<Data> => {
+    return deepMerge.all([defaultConfigs.series, ...customSeries]);
 };
 
-export const getModelerConfigOptions = (customConfig: Partial<Config>): Partial<Config> => {
-    return deepMerge.all([lineChartDefaultConfigOptions, defaultConfigs.configuration, customConfig]);
-};
+export interface CustomLayoutProps {
+    showLegend: Layout["showlegend"];
+    xAxisLabel: Layout["xaxis"]["title"];
+    yAxisLabel: Layout["yaxis"]["title"];
+    gridLinesMode: "horizontal" | "vertical" | "none" | "both";
+}
 
-export const getModelerSeriesOptions = (customSeries: Partial<Data>): Partial<Data> => {
-    return deepMerge.all([defaultConfigs.series, customSeries]);
-};
+// This is to map Mendix widget properties to react-plotly Layout props
+export const getCustomLayoutOptions = ({
+    showLegend,
+    xAxisLabel,
+    gridLinesMode,
+    yAxisLabel
+}: CustomLayoutProps): Partial<Layout> => ({
+    showlegend: showLegend,
+    xaxis: { title: xAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "vertical" },
+    yaxis: { title: yAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "horizontal" }
+});

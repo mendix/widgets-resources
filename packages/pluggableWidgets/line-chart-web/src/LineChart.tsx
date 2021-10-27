@@ -1,13 +1,32 @@
 import classNames from "classnames";
 import { createElement, ReactElement } from "react";
-import { ChartWidget } from "@mendix/shared-charts";
+import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { LineChartContainerProps } from "../typings/LineChartProps";
 import { useSeries } from "./utils/SeriesLoader";
+
+const lineChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
+    xaxis: {
+        zeroline: true,
+        fixedrange: true,
+        gridcolor: "#d7d7d7",
+        zerolinecolor: "#d7d7d7"
+    },
+    yaxis: {
+        fixedrange: true,
+        gridcolor: "#d7d7d7",
+        zeroline: true,
+        zerolinecolor: "#d7d7d7"
+    }
+};
+const lineChartConfigOptions: ChartWidgetProps["configOptions"] = {
+    responsive: true
+};
+const lineChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
     const chartLines = useSeries(props.lines);
 
-    const data = chartLines?.map(line => ({
+    const data: ChartWidgetProps["data"] | undefined = chartLines?.map(line => ({
         ...line.dataPoints,
         customSeriesOptions: line.customSeriesOptions,
         type: "scatter" as const,
@@ -34,6 +53,9 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
             showSidebarEditor={props.developerMode === "developer"}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
+            layoutOptions={lineChartLayoutOptions}
+            configOptions={lineChartConfigOptions}
+            seriesOptions={lineChartSeriesOptions}
         />
     );
 }

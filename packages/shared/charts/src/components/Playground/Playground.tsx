@@ -16,8 +16,6 @@ import { emptyObjectString, ifNonEmptyStringElseEmptyObjectString } from "../uti
 import { ChartProps } from "../Chart";
 
 import "../../ui/Playground.scss";
-import "../../ui/Sidebar.scss";
-import "../../ui/Panel.scss";
 
 interface PlaygroundProps {
     children: ReactNode;
