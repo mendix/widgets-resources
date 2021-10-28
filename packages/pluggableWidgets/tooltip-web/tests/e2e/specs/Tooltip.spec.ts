@@ -69,6 +69,14 @@ describe("tooltip-web", () => {
             browser.saveElement(screenshotElem, "tooltipPositionBottom");
             expect(browser.checkElement(screenshotElem, "tooltipPositionBottom")).toEqual(0);
         });
+        it("compares with a screenshot baseline and checks if tooltip position is flipped when it doesn't have space on the left", () => {
+            browser.setWindowRect(0, 0, 1200, 900);
+            $(".mx-name-actionButtonFlip").moveTo();
+            const screenshotElem = $(".mx-scrollcontainer-center");
+
+            browser.saveElement(screenshotElem, "tooltipPositionFlipped");
+            expect(browser.checkElement(screenshotElem, "tooltipPositionFlipped")).toEqual(0);
+        });
     });
 
     describe("render method: custom", () => {
