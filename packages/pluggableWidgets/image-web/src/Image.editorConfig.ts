@@ -48,8 +48,13 @@ export function getProperties(
 ): Properties {
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
 
+    if (values.datasource === "image" && (!values.imageObject || values.imageObject?.type === "static")) {
+        hidePropertyIn(defaultProperties, values, "defaultImageDynamic");
+    }
+
     if (values.datasource === "icon") {
         hidePropertyIn(defaultProperties, values, "isBackgroundImage");
+        hidePropertyIn(defaultProperties, values, "responsive");
     }
 
     if (values.isBackgroundImage) {
