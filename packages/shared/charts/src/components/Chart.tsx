@@ -10,7 +10,7 @@ type ChartDataType = Partial<Data> & {
     customSeriesOptions: string | undefined;
 };
 export interface ChartProps {
-    data: Array<ChartDataType>;
+    data: ChartDataType[];
     configOptions: Partial<Config>;
     layoutOptions: Partial<Layout>;
     seriesOptions: Partial<Data>;
