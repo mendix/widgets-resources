@@ -51,7 +51,6 @@ export const com_mendix_widget_native_switch_Switch: SwitchType = {
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        ...TextBox.inputError,
         thumbColorOn: backgroundDefaults.primaryLight,
         trackColorOn: brand.danger,
         thumbColorOff: "#FFF",

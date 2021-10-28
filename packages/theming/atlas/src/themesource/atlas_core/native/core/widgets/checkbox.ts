@@ -1,7 +1,7 @@
-import { Platform } from "react-native";
-import { background, backgroundDefaults, border, brand, contrast, font, spacing, checkbox } from "../../variables";
+import { background, brand, contrast, spacing, checkbox } from "../../variables";
 import { TextBox, TextBoxVertical } from "./textbox";
 import { CheckBoxType } from "../../types/widgets";
+import { com_mendix_widget_native_switch_Switch } from "./switch";
 /*
 
 DISCLAIMER:
@@ -36,27 +36,15 @@ export const CheckBox: CheckBoxType = {
     // the below properties (input, inputDisabled & inputError) are only used when render mode is `switch`
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all ViewStyle properties are allowed
-        backgroundColor: "transparent",
-        marginRight: Platform.select({ android: -3 }),
-        thumbColorOn: backgroundDefaults.primaryLight,
-        trackColorOn: brand.primary,
-        thumbColorOff: "#FFF",
-        trackColorOff: border.color
+        ...com_mendix_widget_native_switch_Switch.input
     },
     inputDisabled: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all ViewStyle properties are allowed
-        thumbColorOn: background.secondary,
-        trackColorOn: font.colorDisabled,
-        thumbColorOff: background.secondary,
-        trackColorOff: border.color
+        ...com_mendix_widget_native_switch_Switch.inputDisabled
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all ViewStyle properties are allowed
-        ...TextBox.inputError,
-        thumbColorOn: backgroundDefaults.primaryLight,
-        trackColorOn: brand.danger,
-        thumbColorOff: contrast.low,
-        trackColorOff: brand.danger
+        ...com_mendix_widget_native_switch_Switch.inputError
     },
     // the below properties (checkboxInput, checkboxInputDisabled & checkboxInputError) are only used when render mode is `checkbox`
     checkboxInput: {
