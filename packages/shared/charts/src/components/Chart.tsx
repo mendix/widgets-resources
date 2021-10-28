@@ -4,7 +4,7 @@ import { Config, Data, Layout } from "plotly.js";
 import deepmerge from "deepmerge";
 import { Playground, useChartsPlaygroundState } from "./Playground/Playground";
 import { CodeEditor } from "./Playground/CodeEditor";
-import { ifNonEmptyStringElseEmptyObjectString } from "./utils/utils";
+import { ifNonEmptyStringElseEmptyObjectString } from "./Playground/utils";
 
 type ChartDataType = Partial<Data> & {
     customSeriesOptions: string | undefined;

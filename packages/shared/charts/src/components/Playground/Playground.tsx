@@ -12,7 +12,7 @@ import {
 } from "react";
 import classNames from "classnames";
 import { Sidebar, SidebarHeader, SidebarHeaderTools, SidebarPanel, Select } from "./Sidebar";
-import { emptyObjectString, ifNonEmptyStringElseEmptyObjectString } from "../utils/utils";
+import { emptyObjectString, ifNonEmptyStringElseEmptyObjectString } from "./utils";
 import { ChartProps } from "../Chart";
 
 import "../../ui/Playground.scss";
