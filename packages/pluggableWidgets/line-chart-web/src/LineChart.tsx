@@ -1,8 +1,7 @@
 import classNames from "classnames";
 import { createElement, ReactElement } from "react";
-import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
+import { ChartWidget, ChartWidgetProps, usePlotChartDataSeries } from "@mendix/shared-charts";
 import { LineChartContainerProps } from "../typings/LineChartProps";
-import { useSeries } from "./utils/SeriesLoader";
 
 const lineChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     xaxis: {
@@ -24,7 +23,7 @@ const lineChartConfigOptions: ChartWidgetProps["configOptions"] = {
 const lineChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
-    const chartLines = useSeries(props.lines, line => ({
+    const chartLines = usePlotChartDataSeries(props.lines, line => ({
         type: "scatter",
         mode: line.lineStyle === "line" ? "lines" : "lines+markers",
         line: {

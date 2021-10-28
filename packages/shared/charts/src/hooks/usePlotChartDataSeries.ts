@@ -1,11 +1,11 @@
 import Big from "big.js";
-import { ObjectItem } from "mendix";
+import { ObjectItem, DynamicValue, ListValue, ListExpressionValue, ListAttributeValue } from "mendix";
 import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Datum, PlotData } from "plotly.js";
-import { LinesType } from "../../typings/LineChartProps";
 
-export type LineChartDataPoints = Pick<PlotData, "x" | "y"> & {
+export type PlotChartDataPoints = Pick<PlotData, "x" | "y"> & {
+    // We want this optional.
     name?: PlotData["name"];
 };
 
@@ -16,17 +16,30 @@ interface DataSourceItemGroup {
     items: ObjectItem[];
 }
 
-export interface LineChartSeries extends LineChartDataPoints {
-    name?: string;
+export interface PlotChartSeries extends PlotChartDataPoints {
     customLineStyle?: string;
     customSeriesOptions: string;
 }
 
-export function useSeries(
-    series: LinesType[],
-    mapSerie: (serie: LinesType) => Partial<PlotData>
-): LineChartSeries[] | null {
-    const [chartSeries, setChartSeries] = useState<LineChartSeries[] | null>(null);
+interface PlotDataSeries {
+    dataSet: "static" | "dynamic";
+    customSeriesOptions: string;
+    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
+    staticDataSource?: ListValue;
+    dynamicDataSource?: ListValue;
+    staticName?: DynamicValue<string>;
+    dynamicName?: ListExpressionValue<string>;
+    staticXAttribute?: ListAttributeValue<Date | Big>;
+    dynamicXAttribute?: ListAttributeValue<Date | Big>;
+    staticYAttribute?: ListAttributeValue<Date | Big>;
+    dynamicYAttribute?: ListAttributeValue<Date | Big>;
+}
+
+export function usePlotChartDataSeries<T extends PlotDataSeries>(
+    series: T[],
+    mapSerie: (serie: T) => Partial<PlotData>
+): PlotChartSeries[] | null {
+    const [chartSeries, setChartSeries] = useState<PlotChartSeries[] | null>(null);
 
     useEffect(() => {
         const loadedSeries = series
@@ -34,7 +47,7 @@ export function useSeries(
                 const singleSeriesLoader = element.dataSet === "static" ? loadStaticSeries : loadDynamicSeries;
                 return singleSeriesLoader(element, mapSerie);
             })
-            .filter((element): element is LineChartSeries | LineChartSeries[] => Boolean(element))
+            .filter((element): element is PlotChartSeries | PlotChartSeries[] => Boolean(element))
             .flat();
         setChartSeries(loadedSeries.length === 0 ? null : loadedSeries);
     }, [series]);
@@ -43,9 +56,9 @@ export function useSeries(
 }
 
 function loadStaticSeries(
-    series: LinesType,
-    mapSerie: (serie: LinesType) => Partial<PlotData>
-): LineChartSeries | null {
+    series: PlotDataSeries,
+    mapSerie: (serie: PlotDataSeries) => Partial<PlotData>
+): PlotChartSeries | null {
     const { staticName, dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "static") {
@@ -66,9 +79,9 @@ function loadStaticSeries(
 }
 
 function loadDynamicSeries(
-    series: LinesType,
-    mapSerie: (serie: LinesType) => Partial<PlotData>
-): LineChartSeries[] | null {
+    series: PlotDataSeries,
+    mapSerie: (serie: PlotDataSeries) => Partial<PlotData>
+): PlotChartSeries[] | null {
     const { dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "dynamic") {
@@ -95,12 +108,12 @@ function loadDynamicSeries(
                 customSeriesOptions
             };
         })
-        .filter((element): element is LineChartSeries => Boolean(element));
+        .filter((element): element is PlotChartSeries => Boolean(element));
 
     return loadedSeries;
 }
 
-function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
+function groupDataSourceItems(series: PlotDataSeries): DataSourceItemGroup[] | null {
     const { dynamicDataSource, dynamicName, groupByAttribute, dataSet } = series;
 
     if (dataSet !== "dynamic") {
@@ -157,10 +170,10 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
 }
 
 function extractDataPoints(
-    series: LinesType,
+    series: PlotDataSeries,
     seriesName: string | undefined,
     dataSourceItems?: ObjectItem[]
-): LineChartDataPoints | null {
+): PlotChartDataPoints | null {
     const xValue = series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
     const yValue = series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
 
