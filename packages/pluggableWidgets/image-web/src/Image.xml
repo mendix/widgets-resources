@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.web.image.Image" needsEntityContext="false" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+<widget id="com.mendix.widget.web.image.Image" needsEntityContext="false" offlineCapable="true"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd"
+        pluginWidget="true">
     <name>Image</name>
     <description>Display an image and enlarge it on click.</description>
     <studioProCategory>Images, videos &amp; files</studioProCategory>
@@ -9,7 +12,7 @@
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
                 <property key="datasource" type="enumeration" defaultValue="image">
-                    <caption>Data source</caption>
+                    <caption>Image type</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="image">Image</enumerationValue>
@@ -18,12 +21,12 @@
                     </enumerationValues>
                 </property>
                 <property key="imageObject" type="image" required="false">
-                    <caption>Image</caption>
+                    <caption>Image source</caption>
                     <description/>
                 </property>
                 <property key="defaultImageDynamic" type="image" required="false">
                     <caption>Default image</caption>
-                    <description/>
+                    <description>This is the image that is displayed if no image is uploaded.</description>
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
                     <caption>Image URL</caption>
@@ -32,6 +35,15 @@
                 <property key="imageIcon" type="icon" required="false">
                     <caption>Icon</caption>
                     <description>The icon image.</description>
+                </property>
+                <property key="isBackgroundImage" type="boolean" defaultValue="false">
+                    <caption>Background image</caption>
+                    <description>Whether the image is rendered as a background. More content can be put inside, while design properties will have no effect.
+                    </description>
+                </property>
+                <property key="children" type="widgets" required="false">
+                    <caption>Place content here</caption>
+                    <description/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
@@ -54,17 +66,7 @@
                     <description>Alternative text of the image for accessibility purposes.</description>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Background">
-                <property key="isBackgroundImage" type="boolean" defaultValue="false">
-                    <caption>Background image</caption>
-                    <description>Whether the image is rendered as a background. More content can be put inside, while design properties will have no effect.</description>
-                </property>
-                <property key="children" type="widgets" required="false">
-                    <caption>Place content here</caption>
-                    <description />
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Common">
+            <propertyGroup caption="Conditional Visibility">
                 <systemProperty key="Name"/>
                 <systemProperty key="Visibility"/>
             </propertyGroup>
@@ -110,7 +112,8 @@
                 </property>
                 <property key="responsive" type="boolean" defaultValue="true">
                     <caption>Responsive</caption>
-                    <description>Image will never get larger than its original size. It can become smaller.</description>
+                    <description>Image will never get larger than its original size. It can become smaller.
+                    </description>
                 </property>
             </propertyGroup>
         </propertyGroup>

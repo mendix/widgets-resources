@@ -26,11 +26,11 @@ export interface ImageContainerProps {
     defaultImageDynamic?: DynamicValue<WebImage>;
     imageUrl?: DynamicValue<string>;
     imageIcon?: DynamicValue<WebIcon>;
+    isBackgroundImage: boolean;
+    children?: ReactNode;
     onClickType: OnClickTypeEnum;
     onClick?: ActionValue;
     alternativeText?: DynamicValue<string>;
-    isBackgroundImage: boolean;
-    children?: ReactNode;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -48,11 +48,11 @@ export interface ImagePreviewProps {
     defaultImageDynamic: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     imageUrl: string;
     imageIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
+    isBackgroundImage: boolean;
+    children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     onClickType: OnClickTypeEnum;
     onClick: {} | null;
     alternativeText: string;
-    isBackgroundImage: boolean;
-    children: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
