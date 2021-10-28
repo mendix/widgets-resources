@@ -22,7 +22,7 @@ export interface GoogleMapsProps extends SharedProps {
 }
 
 export function GoogleMap(props: GoogleMapsProps): ReactElement {
-    const map = useRef<google.maps.Map>();
+    const [map, setMap] = useState<google.maps.Map | undefined>();
     const center = useRef<google.maps.LatLngLiteral>({
         lat: 51.906688,
         lng: 4.48837
@@ -48,7 +48,7 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
     } = props;
 
     useEffect(() => {
-        if (map.current) {
+        if (map) {
             const bounds = new google.maps.LatLngBounds();
             locations
                 .concat(currentLocation ? [currentLocation] : [])
@@ -60,15 +60,16 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                     });
                 });
             if (bounds.isEmpty()) {
+                console.warn("Empty");
                 bounds.extend(center.current);
             }
             if (autoZoom) {
-                map.current.fitBounds(bounds);
+                map.fitBounds(bounds);
             } else {
-                map.current.setCenter(bounds.getCenter());
+                map.setCenter(bounds.getCenter());
             }
         }
-    }, [map.current, locations, currentLocation, autoZoom]);
+    }, [map, locations, currentLocation, autoZoom]);
 
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: mapsToken ?? "",
@@ -98,12 +99,10 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                             styles: getGoogleMapsStyles(mapStyles),
                             zoomControl
                         }}
-                        onLoad={googleMapRef => {
-                            map.current = googleMapRef;
-                        }}
+                        onLoad={setMap}
                         onCenterChanged={() => {
-                            if (map.current) {
-                                center.current = map.current.getCenter().toJSON();
+                            if (map) {
+                                center.current = map.getCenter().toJSON();
                             }
                         }}
                         zoom={autoZoom ? translateZoom("city") : zoomLevel}

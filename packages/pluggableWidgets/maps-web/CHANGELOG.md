@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ### Changed
+- We fixed an issue with auto centering the map based on the locations.
+
+## [3.0.1] - 2021-10-13
+
+### Changed
 - We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
 - We renamed the property `Google maps API Key` to `Geo Location API key`
 - We made the property `Geo Location API key` required when using location based on Address.

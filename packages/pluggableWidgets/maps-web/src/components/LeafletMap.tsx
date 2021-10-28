@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useEffect, useRef } from "react";
+import { createElement, ReactElement, useEffect, useState } from "react";
 import { Map, Marker as MarkerComponent, Popup, TileLayer } from "react-leaflet";
 import classNames from "classnames";
 import { getDimensions } from "@mendix/piw-utils-internal";
@@ -30,7 +30,7 @@ const defaultMarkerIcon = new LeafletIcon({
 });
 
 export function LeafletMap(props: LeafletProps): ReactElement {
-    const map = useRef<Map>();
+    const [map, setMap] = useState<Map | undefined>();
     const center = { lat: 51.906688, lng: 4.48837 };
     const {
         autoZoom,
@@ -48,8 +48,8 @@ export function LeafletMap(props: LeafletProps): ReactElement {
     } = props;
 
     useEffect(() => {
-        if (map.current) {
-            const { leafletElement: mapRef } = map.current;
+        if (map) {
+            const { leafletElement: mapRef } = map;
             const bounds = latLngBounds(
                 locations
                     .concat(currentLocation ? [currentLocation] : [])
@@ -64,7 +64,7 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                 }
             }
         }
-    }, [map.current, locations, currentLocation, autoZoom]);
+    }, [map, locations, currentLocation, autoZoom]);
 
     return (
         <div className={classNames("widget-maps", className)} style={{ ...style, ...getDimensions(props) }}>
@@ -77,8 +77,8 @@ export function LeafletMap(props: LeafletProps): ReactElement {
                     maxZoom={18}
                     minZoom={1}
                     ref={ref => {
-                        if (ref && ref !== map.current) {
-                            map.current = ref;
+                        if (ref && ref !== map) {
+                            setMap(ref);
                         }
                     }}
                     scrollWheelZoom={scrollWheelZoom}
