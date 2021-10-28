@@ -24,24 +24,22 @@ const lineChartConfigOptions: ChartWidgetProps["configOptions"] = {
 const lineChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
-    const chartLines = useSeries(props.lines);
-
-    const data: ChartWidgetProps["data"] | undefined = chartLines?.map(line => ({
-        ...line.dataPoints,
-        customSeriesOptions: line.customSeriesOptions,
-        type: "scatter" as const,
-        mode: line.lineStyle === "line" ? ("lines" as const) : ("lines+markers" as const),
+    const chartLines = useSeries(props.lines, line => ({
+        type: "scatter",
+        mode: line.lineStyle === "line" ? "lines" : "lines+markers",
         line: {
             shape: line.interpolation,
-            color: line.lineColor
+            color: line.lineColor?.value
         },
-        marker: { color: line.markerColor }
+        marker: {
+            color: line.markerColor?.value
+        }
     }));
 
     return (
         <ChartWidget
             className={classNames("widget-line-chart", props.class)}
-            data={data ?? []}
+            data={chartLines ?? []}
             width={props.width}
             widthUnit={props.widthUnit}
             height={props.height}

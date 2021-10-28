@@ -16,33 +16,23 @@ interface DataSourceItemGroup {
     items: ObjectItem[];
 }
 
-interface DataPointsExtraction {
-    dataPoints: LineChartDataPoints;
-    xFormatter?: (xValue: number | Date) => string;
-    yFormatter?: (yValue: number | Date) => string;
-}
-
-export interface LineChartSeries {
-    dataPoints: LineChartDataPoints;
-    xFormatter?: (xValue: number | Date) => string;
-    yFormatter?: (yValue: number | Date) => string;
-    interpolation: PlotData["line"]["shape"];
+export interface LineChartSeries extends LineChartDataPoints {
     name?: string;
-    lineStyle: "line" | "lineWithMarkers" | "custom";
     customLineStyle?: string;
-    markerColor: string | undefined;
-    lineColor: string | undefined;
     customSeriesOptions: string;
 }
 
-export function useSeries(series: LinesType[]): LineChartSeries[] | null {
+export function useSeries(
+    series: LinesType[],
+    mapSerie: (serie: LinesType) => Partial<PlotData>
+): LineChartSeries[] | null {
     const [chartSeries, setChartSeries] = useState<LineChartSeries[] | null>(null);
 
     useEffect(() => {
         const loadedSeries = series
             .map(element => {
                 const singleSeriesLoader = element.dataSet === "static" ? loadStaticSeries : loadDynamicSeries;
-                return singleSeriesLoader(element);
+                return singleSeriesLoader(element, mapSerie);
             })
             .filter((element): element is LineChartSeries | LineChartSeries[] => Boolean(element))
             .flat();
@@ -52,33 +42,34 @@ export function useSeries(series: LinesType[]): LineChartSeries[] | null {
     return chartSeries;
 }
 
-function loadStaticSeries(series: LinesType): LineChartSeries | null {
-    const { interpolation, lineStyle, staticName, dataSet, markerColor, lineColor, customSeriesOptions } = series;
+function loadStaticSeries(
+    series: LinesType,
+    mapSerie: (serie: LinesType) => Partial<PlotData>
+): LineChartSeries | null {
+    const { staticName, dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "static") {
         throw Error("Expected series to be static");
     }
 
-    const dataPointsExtraction = extractDataPoints(series, staticName?.value);
+    const dataPoints = extractDataPoints(series, staticName?.value);
 
-    if (!dataPointsExtraction) {
+    if (!dataPoints) {
         return null;
     }
 
     return {
-        dataPoints: dataPointsExtraction.dataPoints,
-        xFormatter: dataPointsExtraction.xFormatter,
-        yFormatter: dataPointsExtraction.yFormatter,
-        interpolation,
-        lineStyle,
-        markerColor: markerColor?.value,
-        lineColor: lineColor?.value,
+        ...dataPoints,
+        ...mapSerie(series),
         customSeriesOptions
     };
 }
 
-function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
-    const { lineStyle, interpolation, dataSet, markerColor, lineColor, customSeriesOptions } = series;
+function loadDynamicSeries(
+    series: LinesType,
+    mapSerie: (serie: LinesType) => Partial<PlotData>
+): LineChartSeries[] | null {
+    const { dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -92,22 +83,17 @@ function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
 
     const loadedSeries = dataSourceItemGroups
         .map(itemGroup => {
-            const dataPointsExtraction = extractDataPoints(series, itemGroup.dynamicNameValue, itemGroup.items);
+            const dataPoints = extractDataPoints(series, itemGroup.dynamicNameValue, itemGroup.items);
 
-            if (!dataPointsExtraction) {
+            if (!dataPoints) {
                 return null;
             }
 
             return {
-                dataPoints: dataPointsExtraction.dataPoints,
-                xFormatter: dataPointsExtraction.xFormatter,
-                yFormatter: dataPointsExtraction.yFormatter,
-                interpolation,
-                lineStyle,
-                markerColor: markerColor?.value,
-                lineColor: lineColor?.value,
+                ...dataPoints,
+                ...mapSerie(series),
                 customSeriesOptions
-            } as LineChartSeries;
+            };
         })
         .filter((element): element is LineChartSeries => Boolean(element));
 
@@ -174,7 +160,7 @@ function extractDataPoints(
     series: LinesType,
     seriesName: string | undefined,
     dataSourceItems?: ObjectItem[]
-): DataPointsExtraction | null {
+): LineChartDataPoints | null {
     const xValue = series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
     const yValue = series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
 
@@ -187,14 +173,8 @@ function extractDataPoints(
 
         dataSourceItems = dataSource.items;
     }
-
-    const dataPointsExtraction: DataPointsExtraction = {
-        dataPoints: {
-            x: [],
-            y: [],
-            ...(seriesName ? { name: seriesName } : {})
-        }
-    };
+    const xData: Datum[] = [];
+    const yData: Datum[] = [];
 
     for (const item of dataSourceItems) {
         const x = xValue.get(item);
@@ -204,21 +184,13 @@ function extractDataPoints(
             return null;
         }
 
-        if (!dataPointsExtraction.xFormatter && !dataPointsExtraction.yFormatter) {
-            dataPointsExtraction.xFormatter = (xValue: number | Date) =>
-                x.formatter.format(typeof xValue === "number" ? new Big(xValue) : xValue);
-
-            dataPointsExtraction.yFormatter = (yValue: number | Date) =>
-                y.formatter.format(typeof yValue === "number" ? new Big(yValue) : yValue);
-        }
-
-        (dataPointsExtraction.dataPoints.x as Datum[]).push(
-            x.value instanceof Date ? x.value : Number(x.value.toString())
-        );
-        (dataPointsExtraction.dataPoints.y as Datum[]).push(
-            y.value instanceof Date ? y.value : Number(y.value.toString())
-        );
+        xData.push(x.value instanceof Date ? x.value : Number(x.value.toString()));
+        yData.push(y.value instanceof Date ? y.value : Number(y.value.toString()));
     }
 
-    return dataPointsExtraction;
+    return {
+        ...(seriesName ? { name: seriesName } : {}),
+        x: xData,
+        y: yData
+    };
 }
