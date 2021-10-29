@@ -112,7 +112,11 @@ export const ChartWithPlayground = ({
                             onValidate={annotations => changeEditableCodeIsValid(!annotations.length)}
                         />
                     </Playground.Panel>
-                    <Playground.Panel key="modeler" heading="Settings from the Modeler" headingClassName="read-only">
+                    <Playground.Panel
+                        key="modeler"
+                        heading="Settings from the Studio/Studio Pro"
+                        headingClassName="read-only"
+                    >
                         <CodeEditor
                             readOnly
                             value={JSON.stringify(activeModelerCode, null, 2)}
