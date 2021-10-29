@@ -29,8 +29,8 @@
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "pretest:e2e": "echo \"Skipping line-chart-web e2e pretest\"",
-    "test:e2e": "echo \"Skipping line-chart-web e2e tests\"",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
