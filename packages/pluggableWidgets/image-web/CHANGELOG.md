@@ -5,11 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Added
-- We added consistency checks to prevent mistakes in image source
-
 ### Changed
-- We simplified the widget properties
+- We simplified the widget properties.
 
 ## [1.0.0] - 2021-09-28
 
