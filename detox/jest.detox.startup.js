@@ -5,7 +5,6 @@ const config = require("./detox.config");
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 const { join, resolve } = require("path");
 const { execSync } = require("child_process");
-const { ANDROID_DEVICE_TYPE, ANDROID_SDK_VERSION, IOS_SDK_VERSION, IOS_DEVICE_TYPE } = require("./detox.config");
 
 jest.setTimeout(300000);
 jasmine.getEnv().addReporter(adapter);
@@ -18,11 +17,11 @@ expect.extend({
         let type;
         let sdk;
         if (platform === "ios") {
-            type = IOS_DEVICE_TYPE;
-            sdk = IOS_SDK_VERSION;
+            type = config.IOS_DEVICE_TYPE;
+            sdk = config.IOS_SDK_VERSION;
         } else {
-            type = ANDROID_DEVICE_TYPE;
-            sdk = ANDROID_SDK_VERSION;
+            type = config.ANDROID_DEVICE_TYPE;
+            sdk = config.ANDROID_SDK_VERSION;
         }
         const customSnapshotsDir = join(resolve("./"), "e2e", "images", platform, sdk, type);
         const customDiffDir = join(resolve("./"), "e2e", "diffs", platform, sdk, type);

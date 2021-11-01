@@ -1,4 +1,4 @@
-const ANDROID_SDK_VERSION = "31";
+const ANDROID_SDK_VERSION = "30"; // Set to 30 because: https://github.com/wix/Detox/issues/3071
 const ANDROID_DEVICE_TYPE = "pixel";
 const IOS_SDK_VERSION = "15.2";
 const IOS_DEVICE_TYPE = "iPhone 13";

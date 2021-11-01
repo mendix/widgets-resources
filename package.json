@@ -20,6 +20,7 @@
     "lint:detox": "eslint --fix --config .eslintrc.js --ext .jsx,.js,.ts,.tsx detox",
     "lint:configs": "eslint --fix --config .eslintrc.js --ext .jsx,.js,.ts,.tsx configs",
     "test": "lerna run test --ignore @mendix/custom-widgets-utils-internal --stream",
+    "start:native-tests-ci": "node ./scripts/test/e2e-native.js",
     "test:scripts": "lerna run test:scripts --stream",
     "test:scripts:cross-platform": "lerna run test:scripts:cross-platform --stream",
     "test:e2e": "lerna-parallelism run --ignore @mendix/custom-widgets-utils-internal --stream --concurrency 1 --split 3 test:e2e",
@@ -87,7 +88,7 @@
       "@commitlint/config-conventional"
     ]
   },
-  "engines" : {
-    "node" : ">=14"
+  "engines": {
+    "node": ">=14"
   }
 }

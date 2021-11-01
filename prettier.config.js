@@ -5,7 +5,7 @@ module.exports = {
     plugins: [require.resolve("@prettier/plugin-xml")],
     overrides: [
         {
-            files: ["CHANGELOG.md", ".travis.yml"],
+            files: ["CHANGELOG.md"],
             options: {
                 proseWrap: "preserve"
             }
