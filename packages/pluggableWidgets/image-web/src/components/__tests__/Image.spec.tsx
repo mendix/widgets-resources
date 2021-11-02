@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { mount, render } from "enzyme";
-import { Image, ImageProps } from "../Image/index";
+import { Image, ImageProps } from "../Image/Image";
 import { Lightbox } from "../Lightbox";
 import { ModalProps } from "react-overlays/esm/Modal";
 

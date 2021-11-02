@@ -2,7 +2,7 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { WebIcon } from "mendix";
 import { createElement, ReactElement } from "react";
 import { ImagePreviewProps } from "../typings/ImageProps";
-import { Image as ImageComponent } from "./components/Image/index";
+import { Image as ImageComponent } from "./components/Image/Image";
 
 import ImagePlaceholder from "./assets/placeholder.svg";
 
