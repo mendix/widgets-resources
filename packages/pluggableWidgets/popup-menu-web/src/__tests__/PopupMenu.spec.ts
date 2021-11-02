@@ -3,6 +3,7 @@ import { createElement } from "react";
 import { BasicItemsType, CustomItemsType, PopupMenuContainerProps } from "../../typings/PopupMenuProps";
 import { PopupMenu } from "../components/PopupMenu";
 import { actionValue, dynamicValue } from "@mendix/piw-utils-internal";
+import { ValueStatus } from "mendix";
 
 jest.useFakeTimers();
 
@@ -62,6 +63,24 @@ describe("Popup menu", () => {
             expect(basicItemProps.action.execute).toHaveBeenCalledTimes(1);
         });
 
+        it("renders basic items without hidden items", () => {
+            const basicItem: BasicItemsType = {
+                ...basicItemProps,
+                visible: {
+                    value: false,
+                    status: ValueStatus.Available
+                }
+            };
+            const popupMenu = createPopupMenu({
+                ...defaultProps,
+                basicItems: [
+                    basicItem,
+                    { itemType: "divider", caption: dynamicValue("Caption"), styleClass: "defaultStyle" }
+                ]
+            });
+            expect(popupMenu.find(".popupmenu-basic-item")).toHaveLength(0);
+        });
+
         it("renders with style Inverse", () => {
             basicItemProps.styleClass = "inverseStyle";
             const popupMenu = createPopupMenu(defaultProps);
@@ -109,6 +128,21 @@ describe("Popup menu", () => {
             const popupMenu = createPopupMenu(defaultProps);
 
             expect(popupMenu.find(".popupmenu-custom-item")).toHaveLength(1);
+        });
+
+        it("renders custom items without hidden items", () => {
+            const customItem: CustomItemsType = {
+                ...customItemProps,
+                visible: {
+                    value: false,
+                    status: ValueStatus.Available
+                }
+            };
+            const popupMenu = createPopupMenu({
+                ...defaultProps,
+                customItems: [customItem]
+            });
+            expect(popupMenu.find(".popupmenu-custom-item")).toHaveLength(0);
         });
 
         it("triggers action", () => {

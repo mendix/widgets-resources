@@ -41,6 +41,7 @@ export function getProperties(
                 hidePropertyIn(defaultProperties, values, "basicItems", index, "caption");
                 hidePropertyIn(defaultProperties, values, "basicItems", index, "action");
                 hidePropertyIn(defaultProperties, values, "basicItems", index, "styleClass");
+                hidePropertyIn(defaultProperties, values, "basicItems", index, "visible");
             }
             if (item.styleClass === "defaultStyle") {
                 changePropertyIn(

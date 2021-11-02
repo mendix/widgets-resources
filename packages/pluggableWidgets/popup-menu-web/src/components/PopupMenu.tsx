@@ -15,7 +15,7 @@ import { ReactElement, useState, createElement, useCallback, useEffect, useRef }
 import { executeAction } from "@mendix/piw-utils-internal";
 import { ActionValue } from "mendix";
 
-import { PopupMenuContainerProps, PositionEnum } from "../../typings/PopupMenuProps";
+import { PopupMenuContainerProps, PositionEnum, BasicItemsType, CustomItemsType } from "../../typings/PopupMenuProps";
 
 export interface PopupMenuProps extends PopupMenuContainerProps {
     preview?: boolean;
@@ -81,48 +81,59 @@ export function PopupMenu(props: PopupMenuProps): ReactElement {
     );
 }
 
+function checkVisibility(item: BasicItemsType | CustomItemsType): boolean {
+    if (Object.prototype.hasOwnProperty.call(item, "visible")) {
+        return !!item.visible?.value;
+    }
+    return true;
+}
+
 function createMenuOptions(
     props: PopupMenuContainerProps,
     handleOnClickItem: (itemAction?: ActionValue) => void
 ): ReactElement[] {
     if (!props.advancedMode) {
-        return props.basicItems.map((item, index) => {
-            if (item.itemType === "divider") {
-                return <div key={index} className={"popupmenu-basic-divider"} />;
-            } else {
-                const pickedStyle =
-                    item.styleClass !== "defaultStyle"
-                        ? "popupmenu-basic-item-" + item.styleClass.replace("Style", "")
-                        : "";
-                return (
-                    <div
-                        key={index}
-                        className={classNames("popupmenu-basic-item", pickedStyle)}
-                        onClick={e => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            handleOnClickItem(item.action);
-                        }}
-                    >
-                        {item.caption?.value ?? ""}
-                    </div>
-                );
-            }
-        });
+        return props.basicItems
+            .filter(item => checkVisibility(item))
+            .map((item, index) => {
+                if (item.itemType === "divider") {
+                    return <div key={index} className={"popupmenu-basic-divider"} />;
+                } else {
+                    const pickedStyle =
+                        item.styleClass !== "defaultStyle"
+                            ? "popupmenu-basic-item-" + item.styleClass.replace("Style", "")
+                            : "";
+                    return (
+                        <div
+                            key={index}
+                            className={classNames("popupmenu-basic-item", pickedStyle)}
+                            onClick={e => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                handleOnClickItem(item.action);
+                            }}
+                        >
+                            {item.caption?.value ?? ""}
+                        </div>
+                    );
+                }
+            });
     } else {
-        return props.customItems.map((item, index) => (
-            <div
-                key={index}
-                className={"popupmenu-custom-item"}
-                onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    handleOnClickItem(item.action);
-                }}
-            >
-                {item.content}
-            </div>
-        ));
+        return props.customItems
+            .filter(item => checkVisibility(item))
+            .map((item, index) => (
+                <div
+                    key={index}
+                    className={"popupmenu-custom-item"}
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleOnClickItem(item.action);
+                    }}
+                >
+                    {item.content}
+                </div>
+            ));
     }
 }
 
