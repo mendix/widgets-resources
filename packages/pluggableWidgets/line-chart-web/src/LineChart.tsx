@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { createElement, ReactElement } from "react";
-import { ChartWidget, ChartWidgetProps, usePlotChartDataSeries } from "@mendix/shared-charts";
+import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
+import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { LineChartContainerProps } from "../typings/LineChartProps";
 
 const lineChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
