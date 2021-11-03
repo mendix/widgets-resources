@@ -38,21 +38,19 @@ export function getProperties(
         if (line.lineStyle !== "lineWithMarkers") {
             hideNestedPropertiesIn(defaultProperties, values, "lines", index, ["markerColor"]);
         }
-        if (platform === "web") {
-            if (!showAdvancedOptions) {
-                hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
-            }
+        if (!showAdvancedOptions) {
+            hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
         }
     });
 
     if (platform === "web") {
-        if (!showAdvancedOptions) {
-            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations"]);
-        }
+        hidePropertyIn(defaultProperties, values, "developerMode");
 
         transformGroupsIntoTabs(defaultProperties);
     } else {
-        hidePropertyIn(defaultProperties, values, "developerMode");
+        if (!showAdvancedOptions) {
+            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations"]);
+        }
     }
     return defaultProperties;
 }
