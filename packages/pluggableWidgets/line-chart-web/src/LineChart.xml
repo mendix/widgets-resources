@@ -141,14 +141,6 @@
                                 <caption>Marker color</caption>
                                 <description/>
                             </property>
-                            <property key="showAdvancedAppearanceOptions" type="boolean" defaultValue="false">
-                                <caption>Show advanced options</caption>
-                                <description/>
-                            </property>
-                            <property key="customLineStyleOptions" type="string" required="false" multiline="true">
-                                <caption>Custom options</caption>
-                                <description/>
-                            </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
                             <property key="onClickAction" type="action" required="false">
@@ -230,10 +222,6 @@
                         <enumerationValue key="vertical">Vertical</enumerationValue>
                         <enumerationValue key="both">Both</enumerationValue>
                     </enumerationValues>
-                </property>
-                <property key="showAdvancedOptions" type="boolean" defaultValue="false">
-                    <caption>Show advanced options</caption>
-                    <description/>
                 </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>

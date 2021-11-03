@@ -42,8 +42,6 @@ export interface LinesType {
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
     markerColor?: DynamicValue<string>;
-    showAdvancedAppearanceOptions: boolean;
-    customLineStyleOptions: string;
     onClickAction?: ActionValue;
     onClickTooltip?: ActionValue;
 }
@@ -73,8 +71,6 @@ export interface LinesPreviewType {
     lineStyle: LineStyleEnum;
     lineColor: string;
     markerColor: string;
-    showAdvancedAppearanceOptions: boolean;
-    customLineStyleOptions: string;
     onClickAction: {} | null;
     onClickTooltip: {} | null;
 }
@@ -94,7 +90,6 @@ export interface LineChartContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
-    showAdvancedOptions: boolean;
     customLayout: string;
     customConfigurations: string;
 }
@@ -112,7 +107,6 @@ export interface LineChartPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
-    showAdvancedOptions: boolean;
     customLayout: string;
     customConfigurations: string;
 }

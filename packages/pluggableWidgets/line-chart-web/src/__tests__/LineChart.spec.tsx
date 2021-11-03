@@ -29,7 +29,6 @@ describe("The LineChart widget", () => {
                 heightUnit="pixels"
                 height={0}
                 gridLines="none"
-                showAdvancedOptions={false}
                 customLayout=""
                 customConfigurations=""
             />
@@ -92,12 +91,10 @@ function setupBasicSeries(overwriteConfig: Partial<LinesType>): LinesType {
         dataSet: "static",
         customSeriesOptions: overwriteConfig.customSeriesOptions ?? "",
         aggregationType: overwriteConfig.aggregationType ?? "avg",
-        customLineStyleOptions: overwriteConfig.customLineStyleOptions ?? "",
         interpolation: overwriteConfig.interpolation ?? "linear",
         lineStyle: overwriteConfig.lineStyle ?? "line",
         lineColor: overwriteConfig.lineColor ?? undefined,
         markerColor: overwriteConfig.markerColor ?? undefined,
-        showAdvancedAppearanceOptions: true,
         staticDataSource: ListValueBuilder().simple(),
         staticXAttribute: xAttribute,
         staticYAttribute: yAttribute

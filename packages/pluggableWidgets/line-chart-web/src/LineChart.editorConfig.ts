@@ -14,6 +14,8 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
+    const showAdvancedOptions = values.developerMode !== "basic";
+
     values.lines.forEach((line, index) => {
         // Series properties
         if (line.dataSet === "static") {
@@ -37,22 +39,20 @@ export function getProperties(
             hideNestedPropertiesIn(defaultProperties, values, "lines", index, ["markerColor"]);
         }
         if (platform === "web") {
-            if (!line.showAdvancedAppearanceOptions) {
-                hidePropertyIn(defaultProperties, values, "lines", index, "customLineStyleOptions");
+            if (!showAdvancedOptions) {
+                hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
             }
-        } else {
-            hidePropertyIn(defaultProperties, values, "lines", index, "showAdvancedAppearanceOptions");
         }
     });
 
     if (platform === "web") {
-        if (!values.showAdvancedOptions) {
+        if (!showAdvancedOptions) {
             hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations"]);
         }
 
         transformGroupsIntoTabs(defaultProperties);
     } else {
-        hidePropertyIn(defaultProperties, values, "showAdvancedOptions");
+        hidePropertyIn(defaultProperties, values, "developerMode");
     }
     return defaultProperties;
 }
