@@ -47,6 +47,7 @@ export const CodeEditor = ({
             }}
             theme="github"
             value={`${value}\n`}
+            width="100%"
         />
     );
 };
