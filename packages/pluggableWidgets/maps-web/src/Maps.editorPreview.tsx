@@ -1,23 +1,40 @@
-import { createElement, ReactNode, Fragment } from "react";
-import { MapSwitcher } from "./components/MapSwitcher";
-
+import { createElement, ReactNode, Fragment, ReactElement } from "react";
 import { MapsPreviewProps } from "../typings/MapsProps";
-import { Marker } from "../typings/shared";
 import { Alert } from "@mendix/piw-utils-internal/components/web";
-import { parseStyle } from "@mendix/piw-utils-internal";
-import { translateZoom } from "./utils/zoom";
+import GoogleMapsSVG from "./assets/GoogleMaps.svg";
+import MapboxSVG from "./assets/Mapbox.svg";
+import OpenStreetMapSVG from "./assets/OpenStreetMap.svg";
+import HereMapsSVG from "./assets/HereMaps.svg";
 
 declare function require(name: string): string;
 
 export const preview = (props: MapsPreviewProps): ReactNode => {
-    const locations: Marker[] = [
-        {
-            latitude: 51.906688,
-            longitude: 4.48837,
-            title: "Mendix Office Rotterdam",
-            url: ""
+    const renderImagePreview = (): ReactElement => {
+        let image;
+        switch (props.mapProvider) {
+            case "googleMaps":
+                image = GoogleMapsSVG;
+                break;
+            case "mapBox":
+                image = MapboxSVG;
+                break;
+            case "openStreet":
+                image = OpenStreetMapSVG;
+                break;
+            case "hereMaps":
+                image = HereMapsSVG;
+                break;
         }
-    ];
+
+        const style = {
+            backgroundImage: `url("${image}")`,
+            backgroundPosition: "center, center",
+            backgroundSize: "cover",
+            width: "375px",
+            height: "375px"
+        };
+        return <div style={style} />;
+    };
 
     return (
         <Fragment>
@@ -26,29 +43,7 @@ export const preview = (props: MapsPreviewProps): ReactNode => {
                     Provider unavailable without API Key, preview is not possible at the moment
                 </Alert>
             )}
-            <MapSwitcher
-                attributionControl={props.attributionControl}
-                autoZoom={false}
-                className={props.class}
-                currentLocation={locations[0]}
-                fullscreenControl={props.fullScreenControl}
-                height={Number(props.height)}
-                heightUnit={props.heightUnit}
-                locations={locations}
-                mapProvider={props.mapProvider}
-                mapStyles={props.mapStyles}
-                mapTypeControl={props.mapTypeControl}
-                optionDrag={false}
-                optionScroll={false}
-                optionZoomControl={props.optionZoomControl}
-                rotateControl={props.rotateControl}
-                showCurrentLocation={props.showCurrentLocation}
-                streetViewControl={props.optionStreetView}
-                style={parseStyle(props.style)}
-                width={Number(props.width)}
-                widthUnit={props.widthUnit}
-                zoomLevel={props.zoom === "automatic" ? translateZoom("street") : translateZoom(props.zoom)}
-            />
+            {renderImagePreview()}
         </Fragment>
     );
 };
