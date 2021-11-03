@@ -95,6 +95,10 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 
 -   `npm install` on root
 
+### Requirements
+
+-   For this repository you need npm version 6 or below. Version 7 and above are unsupported.
+
 ### For developing native widgets in `packages/pluggableWidgets`:
 
 -   Create a simple Mendix project in Studio
