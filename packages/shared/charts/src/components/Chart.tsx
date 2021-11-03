@@ -34,7 +34,8 @@ export const Chart = ({
 
     useEffect(() => {
         const dataIsLoaded = data.length > 0;
-        // The lib doesn't autosize the chart properly in the beginning, so we manually trigger a refresh once when everything is ready.
+        // The lib doesn't autosize the chart properly in the beginning (even with the `responsive` config),
+        // so we manually trigger a refresh once when everything is ready.
         if (!hasForceUpdatedReactPlotly.current && dataIsLoaded) {
             forceReactPlotlyUpdate();
             hasForceUpdatedReactPlotly.current = true;
