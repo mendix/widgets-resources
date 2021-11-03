@@ -144,16 +144,6 @@ describe("line-chart-web", () => {
     });
 
     describe("dimensions", () => {
-        it("renders with width: percentage (100%) height: percentage of width (75%) and compares with a screenshot baseline", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
-            const screenshotElem = $(".mx-name-containerDimensionPercentage");
-            screenshotElem.waitForDisplayed({ timeout: 5000 });
-            screenshotElem.scrollIntoView();
-
-            browser.saveElement(screenshotElem, "lineChartDimensionPercentage");
-            expect(browser.checkElement(screenshotElem, "lineChartDimensionPercentage")).toEqual(0);
-        });
-
         it("renders with width: pixels (500px) height: pixels (300px) and compares with a screenshot baseline", () => {
             browser.setWindowRect(0, 0, 1200, 900);
             const screenshotElem = $(".mx-name-containerDimensionPixels");
@@ -164,6 +154,36 @@ describe("line-chart-web", () => {
             expect(browser.checkElement(screenshotElem, "lineChartDimensionPixels")).toEqual(0);
         });
 
+        it("renders with width: pixels (500px) height: percentage of width (50%) and compares with a screenshot baseline", () => {
+            browser.setWindowRect(0, 0, 1200, 900);
+            const screenshotElem = $(".mx-name-containerPercentageOfWidth");
+            screenshotElem.waitForDisplayed({ timeout: 5000 });
+            screenshotElem.scrollIntoView();
+
+            browser.saveElement(screenshotElem, "lineChartDimensionPercentageOfWidth");
+            expect(browser.checkElement(screenshotElem, "lineChartDimensionPercentageOfWidth")).toEqual(0);
+        });
+
+        it("renders with width: pixels (500px) height: percentage of parent (50%) and compares with a screenshot baseline", () => {
+            browser.setWindowRect(0, 0, 1200, 900);
+            const screenshotElem = $(".mx-name-containerPixelsPercentageOfParent");
+            screenshotElem.waitForDisplayed({ timeout: 5000 });
+            screenshotElem.scrollIntoView();
+
+            browser.saveElement(screenshotElem, "lineChartDimensionPixelsPercentageOfParent");
+            expect(browser.checkElement(screenshotElem, "lineChartDimensionPixelsPercentageOfParent")).toEqual(0);
+        });
+
+        it("renders with width: percentage (80%) height: pixels (300px) and compares with a screenshot baseline", () => {
+            browser.setWindowRect(0, 0, 1200, 900);
+            const screenshotElem = $(".mx-name-containerPercentagePixels");
+            screenshotElem.waitForDisplayed({ timeout: 5000 });
+            screenshotElem.scrollIntoView();
+
+            browser.saveElement(screenshotElem, "lineChartDimensionPercentagePixels");
+            expect(browser.checkElement(screenshotElem, "lineChartDimensionPercentagePixels")).toEqual(0);
+        });
+
         it("renders with width: percentage (100%) height: percentage of parent (50%) and compares with a screenshot baseline", () => {
             browser.setWindowRect(0, 0, 1200, 900);
             const screenshotElem = $(".mx-name-containerPercentageOfParent");
@@ -172,6 +192,16 @@ describe("line-chart-web", () => {
 
             browser.saveElement(screenshotElem, "lineChartDimensionPercentageOfParent");
             expect(browser.checkElement(screenshotElem, "lineChartDimensionPercentageOfParent")).toEqual(0);
+        });
+        
+        it("renders with width: percentage (100%) height: percentage of width (75%) and compares with a screenshot baseline", () => {
+            browser.setWindowRect(0, 0, 1200, 900);
+            const screenshotElem = $(".mx-name-containerDimensionPercentage");
+            screenshotElem.waitForDisplayed({ timeout: 5000 });
+            screenshotElem.scrollIntoView();
+
+            browser.saveElement(screenshotElem, "lineChartDimensionPercentage");
+            expect(browser.checkElement(screenshotElem, "lineChartDimensionPercentage")).toEqual(0);
         });
     });
 });
