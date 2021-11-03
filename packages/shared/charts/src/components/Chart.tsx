@@ -1,4 +1,4 @@
-import { createElement, Fragment, ReactElement, useCallback, useMemo } from "react";
+import { createElement, Fragment, ReactElement, useEffect, useMemo, useRef } from "react";
 import ReactPlotlyChartComponent from "react-plotly.js";
 import { Config, Data, Layout } from "plotly.js";
 import deepmerge from "deepmerge";
@@ -18,6 +18,10 @@ export interface ChartProps {
     customLayout: string | undefined;
 }
 
+function forceReactPlotlyUpdate(): void {
+    window.dispatchEvent(new Event("resize"));
+}
+
 export const Chart = ({
     data,
     configOptions,
@@ -26,9 +30,16 @@ export const Chart = ({
     customConfig,
     customLayout
 }: ChartProps): ReactElement => {
-    const forceReactPlotlyUpdate = useCallback(() => {
-        window.dispatchEvent(new Event("resize"));
-    }, []);
+    const hasForceUpdatedReactPlotly = useRef(false);
+
+    useEffect(() => {
+        const dataIsLoaded = data.length > 0;
+        // The lib doesn't autosize the chart properly in the beginning, so we manually trigger a refresh once when everything is ready.
+        if (!hasForceUpdatedReactPlotly.current && dataIsLoaded) {
+            forceReactPlotlyUpdate();
+            hasForceUpdatedReactPlotly.current = true;
+        }
+    }, [data]);
 
     const customLayoutOptions = useMemo<Partial<Layout>>(
         () => deepmerge(layoutOptions, JSON.parse(ifNonEmptyStringElseEmptyObjectString(customLayout))),
@@ -59,7 +70,6 @@ export const Chart = ({
             data={customData}
             config={customConfigOptions}
             layout={customLayoutOptions}
-            onInitialized={forceReactPlotlyUpdate}
         />
     );
 };
