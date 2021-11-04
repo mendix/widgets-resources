@@ -1263,6 +1263,43 @@
                     "class": "img-opacity-high"
                 }
             ]
+        }, 
+        {
+            "name": "Align content",
+            "type": "Dropdown",
+            "description": "Align content of the background image left, right or center it. Align elements inside the container as a row or as a column.",
+            "options": [
+                {
+                    "name": "Left align as a row",
+                    "oldNames": ["Left align as row"],
+                    "class": "row-left"
+                },
+                {
+                    "name": "Center align as a row",
+                    "oldNames": ["Center align as row"],
+                    "class": "row-center"
+                },
+                {
+                    "name": "Right align as a row",
+                    "oldNames": ["Right align as row"],
+                    "class": "row-right"
+                },
+                {
+                    "name": "Left align as a column",
+                    "oldNames": ["Left align as column"],
+                    "class": "col-left"
+                },
+                {
+                    "name": "Center align as a column",
+                    "oldNames": ["Center align as column"],
+                    "class": "col-center"
+                },
+                {
+                    "name": "Right align as a column",
+                    "oldNames": ["Right align as column"],
+                    "class": "col-right"
+                }
+            ]
         }
     ]
 }
