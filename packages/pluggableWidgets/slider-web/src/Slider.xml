@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.slider.Slider" pluginWidget="true" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Slider</name>
+    <description>Change a number value using a slider</description>
+    <studioProCategory>Input elements</studioProCategory>
+    <studioCategory>Input Elements</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="valueAttribute" type="attribute">
+                    <caption>Value attribute</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Range">
+                <!-- Minimum Value -->
+                <property key="minValueType" type="enumeration" defaultValue="static">
+                    <caption>Minimum value type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="staticMinimumValue" type="decimal" defaultValue="0">
+                    <caption>Minimum value</caption>
+                    <description />
+                </property>
+                <property key="minAttribute" type="attribute" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionMinimumValue" type="expression" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!-- Minimum Value End -->
+
+                <!-- Maximum Value -->
+                <property key="maxValueType" type="enumeration" defaultValue="static">
+                    <caption>Maximum value type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="staticMaximumValue" type="decimal" defaultValue="100">
+                    <caption>Maximum value</caption>
+                    <description />
+                </property>
+                <property key="maxAttribute" type="attribute" required="false">
+                    <caption>Maximum value</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="expressionMaximumValue" type="expression" required="false">
+                    <caption>Maximum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!-- Maximum Value End -->
+            </propertyGroup>
+            <propertyGroup caption="Markers">
+                <property key="noOfMarkers" type="integer" defaultValue="2">
+                    <caption>Number of markers</caption>
+                    <description>Marker ticks on the slider (visible when larger than 2)</description>
+                </property>
+                <property key="decimalPlaces" type="integer" defaultValue="0">
+                    <caption>Decimal places</caption>
+                    <description>Number of decimal places for marker values</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Steps">
+                <!-- Steps Size -->
+                <property key="stepSizeType" type="enumeration" defaultValue="static">
+                    <caption>Step size type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="stepValue" type="decimal" defaultValue="1">
+                    <caption>Step size</caption>
+                    <description />
+                </property>
+                <property key="stepAttribute" type="attribute" required="false">
+                    <caption>Step size</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="expressionStepSize" type="expression" required="false">
+                    <caption>Step size</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!-- Steps Size End -->
+            </propertyGroup>
+            <propertyGroup caption="Orientation">
+                <property key="orientation" type="enumeration" defaultValue="horizontal">
+                    <caption>Orientation</caption>
+                    <description>If orientation is 'Vertical', make sure that parent or slider itself has fixed height</description>
+                    <enumerationValues>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Tooltip">
+                <property key="showTooltip" type="boolean" defaultValue="true">
+                    <caption>Show tooltip</caption>
+                    <description />
+                </property>
+                <property key="tooltip" type="textTemplate" required="false">
+                    <caption>Tooltip</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Label">
+                <systemProperty key="Label" />
+            </propertyGroup>
+            <propertyGroup caption="Editability">
+                <systemProperty key="Editability"/>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChange" type="action">
+                <caption>On change</caption>
+                <description />
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>

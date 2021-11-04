@@ -1,7 +1,7 @@
 {
   "name": "slider-web",
   "widgetName": "Slider",
-  "version": "1.3.2",
+  "version": "2.0.0",
   "description": "Change a number value using a slider",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {
@@ -14,21 +14,21 @@
   },
   "license": "Apache-2.0",
   "marketplace": {
-    "minimumMXVersion": "7.13.1",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 48786
   },
+  "packagePath": "com.mendix.widget.web",
   "scripts": {
-    "start": "utils-react-widgets start",
-    "dev": "utils-react-widgets dev",
-    "test": "npm run test:unit",
-    "test:unit": "jest --config ../../../scripts/test/jest.web.config.js",
+    "start": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-    "lint:fix": "npm run lint -- --fix",
-    "build": "utils-react-widgets build",
-    "release": "utils-react-widgets release",
+    "release": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "config": {
@@ -36,15 +36,14 @@
     "developmentPort": 3000
   },
   "devDependencies": {
-    "@mendix/custom-widgets-utils-internal": "0.0.1",
-    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@mendix/pluggable-widgets-tools": ">=9.0.0",
     "@types/classnames": "^2.2.6",
     "@types/rc-slider": "^8.6.4",
     "@types/rc-tooltip": "^3.7.1",
-    "eslint": "^7.20.0",
-    "jest": "^26.6.1"
+    "eslint": "^7.20.0"
   },
   "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "rc-slider": "^8.6.6",
     "rc-tooltip": "^3.7.3"

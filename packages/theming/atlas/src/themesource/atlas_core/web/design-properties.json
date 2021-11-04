@@ -1264,5 +1264,31 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.web.slider.Slider": [
+        {
+            "name": "Style",
+            "type": "Dropdown",
+            "description": "The brand style affecting this element's appearance.",
+            "options": [
+                {
+                    "name": "Brand Primary",
+                    "class": "widget-slider-primary"
+                },
+
+                {
+                    "name": "Brand Success",
+                    "class": "widget-slider-success"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "widget-slider-warning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "widget-slider-danger"
+                }
+            ]
+        }
     ]
 }

@@ -1,0 +1,16 @@
+.widget-slider {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 15px;
+    &.widget-slider-vertical {
+        height: 100%;
+    }
+}
+
+.widget-slider-no-value {
+    .rc-slider-track {
+        display: none;
+    }
+}
