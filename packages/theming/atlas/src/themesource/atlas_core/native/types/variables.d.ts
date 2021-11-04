@@ -2,6 +2,9 @@
     Types
 ========================================================================== */
 
+import { ColorValue } from "react-native";
+import { CheckBoxInputType } from "./widgets";
+
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
 declare type TextAlign = "auto" | "left" | "right" | "center" | "justify";
 declare type TextTransform = "none" | "capitalize" | "uppercase" | "lowercase";
@@ -330,6 +333,12 @@ export interface VariablesListView {
 
 export interface VariablesLayoutgrid {
     gutterSize: number;
+}
+
+export interface VariablesCheckbox {
+    checkboxInput: CheckBoxInputType;
+    checkboxInputDisabled: CheckBoxInputType;
+    checkboxInputError: CheckBoxInputType;
 }
 
 // ## Pluggable Widgets

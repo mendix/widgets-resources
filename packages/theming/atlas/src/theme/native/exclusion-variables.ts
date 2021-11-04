@@ -85,6 +85,9 @@ export const excludeSafeAreaView = false;
 // Slider
 export const excludeSlider = false;
 export const excludeSliderHelpers = false;
+// Switch
+export const excludeSwitch = false;
+export const excludeSwitchHelpers = false;
 // Tab Container
 export const excludeTabContainer = false;
 export const excludeTabContainerHelpers = false;

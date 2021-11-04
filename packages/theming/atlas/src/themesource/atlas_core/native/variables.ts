@@ -28,7 +28,8 @@ import {
     VariablesRating,
     VariablesSlider,
     VariablesSpacing,
-    VariablesTabContainer
+    VariablesTabContainer,
+    VariablesCheckbox
 } from "./types/variables";
 //
 //
@@ -455,6 +456,30 @@ let listView: VariablesListView = {
 };
 listView = merge(listView, custom.listView || ({} as any));
 //
+// Checkbox Styles
+let checkbox: VariablesCheckbox = {
+    checkboxInput: {
+        color: brand.primary,
+        size: 20, // this applies to the icon (tick)
+        backgroundColor: background.primary,
+        borderColor: border.color,
+        borderWidth: border.width,
+        borderRadius: border.radiusSmall,
+        width: 40,
+        height: 40
+    },
+    checkboxInputDisabled: {
+        color: brand.primaryLight,
+        backgroundColor: background.secondary
+    },
+    checkboxInputError: {
+        color: brand.danger,
+        borderColor: brand.danger
+    }
+};
+checkbox = merge(checkbox, custom.checkbox || ({} as any));
+
+//
 // Layoutgrid Styles
 let layoutGrid: VariablesLayoutgrid = {
     gutterSize: 16
@@ -644,6 +669,7 @@ export {
     border,
     button,
     contrast,
+    checkbox,
     fontDefaults,
     font,
     input,
