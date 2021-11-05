@@ -14,7 +14,8 @@ export function ListValueBuilder() {
         sortOrder: [],
         filter: undefined,
         setSortOrder: jest.fn(),
-        setFilter: jest.fn()
+        setFilter: jest.fn(),
+        reload: jest.fn()
     };
     return {
         withItems(items: ObjectItem[]): ListValue {
