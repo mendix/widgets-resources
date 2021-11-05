@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "9.5.4",
+  "version": "9.7.0",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
@@ -87,7 +87,7 @@
     "jest-junit": "^13.0.0",
     "jest-react-hooks-shallow": "^1.4.1",
     "jest-svg-transformer": "^1.0.0",
-    "mendix": "^9.5.25874",
+    "mendix": "^9.7.29648",
     "metro-react-native-babel-preset": "~0.63.0",
     "node-fetch": "^2.6.1",
     "postcss": "^8.1.10",

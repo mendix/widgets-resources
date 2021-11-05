@@ -17,7 +17,12 @@ console.log(`Running MX Widgets Tools script ${cmd}...`);
 for (const subCommand of realCommand.split(/&&/g)) {
     const result = spawnSync(subCommand.trim(), [], {
         cwd: process.cwd(),
-        env: { ...process.env, PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}` },
+        env: {
+            ...process.env,
+            PATH: `${process.env.PATH}${delimiter}${findNodeModulesBin()}`,
+            // Hack for Windows using NTFS Filesystem, we cannot add platform specific check otherwise GitBash or other linux based terminal on windows will also fail.
+            Path: `${process.env.Path}${delimiter}${findNodeModulesBin()}`
+        },
         shell: true,
         stdio: "inherit"
     });
