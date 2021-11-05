@@ -7,7 +7,7 @@ export function useOnChangeDebounced(props: SliderContainerProps) {
     const valueObjRef = useRef(props.valueAttribute);
     valueObjRef.current = props.valueAttribute;
 
-    const onChangeEnd = useMemo(() => debounce(() => executeAction(props.onChange), 400), [valueObjRef]);
+    const onChangeEnd = useMemo(() => debounce(() => executeAction(props.onChange), 500), [valueObjRef]);
 
     const onChange = useCallback(
         (value: number) => {

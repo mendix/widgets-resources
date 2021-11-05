@@ -5,7 +5,7 @@
             <widgetFile path="Slider.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/web/slider"/>
+            <file path="com/mendix/widget/custom/slider"/>
         </files>
     </clientModule>
 </package>

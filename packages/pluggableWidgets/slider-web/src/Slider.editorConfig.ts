@@ -92,7 +92,7 @@ const tooltipCheck: CheckFn = values => {
     if (values.showTooltip && values.tooltip === "") {
         return {
             property: "tooltip",
-            message: "Tooltip cannot be empty, please fill tooltip template"
+            message: "Tooltip cannot be empty when 'Show tooltip' is enabled"
         };
     }
 };
@@ -131,7 +131,6 @@ const decimalPlacesCheck: CheckFn = ({ decimalPlaces }) => {
 
 export function check(values: SliderPreviewProps): Problem[] {
     const checkers = [tooltipCheck, minMaxValueCheck, minValueCheck, maxValueCheck, stepSizeCheck, decimalPlacesCheck];
-    const errors = checkers.map(fn => fn(values)).filter((p): p is Problem => !!p);
 
-    return errors;
+    return checkers.map(fn => fn(values)).filter((p): p is Problem => !!p);
 }

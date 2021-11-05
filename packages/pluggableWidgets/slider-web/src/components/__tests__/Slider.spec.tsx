@@ -12,25 +12,25 @@ describe("Slider", () => {
         step: 10
     });
 
-    it("should render horizontal Slider correctly", () => {
+    it("renders horizontal Slider correctly", () => {
         const { asFragment } = render(<Slider {...defaultSliderProps} />);
 
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it("should render vertical Slider correctly", () => {
+    it("renders vertical Slider correctly", () => {
         const { asFragment } = render(<Slider {...defaultSliderProps} vertical />);
 
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it("should render correct value", () => {
+    it("contains correct value", () => {
         render(<Slider {...defaultSliderProps} value={30} />);
         const handle = screen.getByRole("slider");
         expect(handle.getAttribute("aria-valuenow")).toBe("30");
     });
 
-    it("should change value when clicked", () => {
+    it("changes value when clicked", () => {
         const onChange = jest.fn();
 
         const wrapper = mount(<Slider min={0} max={100} step={10} onChange={onChange} />);
@@ -101,7 +101,7 @@ describe("Slider", () => {
         expect(onChange.mock.calls[3][0]).toEqual(-80);
     });
 
-    it("should render markers", () => {
+    it("renders markers correctly", () => {
         const marks = {
             [-100]: "-100",
             [-50]: "-50",

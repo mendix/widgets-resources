@@ -17,7 +17,6 @@ export function getPreviewCss(): string {
 }
 
 export function preview(props: SliderPreviewProps): ReactNode {
-    console.log(props);
     const values = getPreviewValues(props);
     const marks = createMarks({
         min: values.min,
@@ -26,14 +25,11 @@ export function preview(props: SliderPreviewProps): ReactNode {
         decimalPlaces: props.decimalPlaces ?? 2
     });
 
-    // explicitly disable onChange in preview mode
-    const onChange = undefined;
-
     return (
         <Slider
             {...props}
             {...values}
-            onChange={onChange}
+            onChange={undefined}
             marks={marks}
             style={parseStyle(props.style) as CSSProperties}
             vertical={isVertical(props)}

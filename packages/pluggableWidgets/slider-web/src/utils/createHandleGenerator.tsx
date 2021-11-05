@@ -1,9 +1,9 @@
-// Copied from https://github.com/react-component/slider/blob/8.6.6/src/Slider.jsx#L165
 import { createElement } from "react";
 import { SliderContainerProps } from "../../typings/SliderProps";
 import Tooltip from "rc-tooltip";
 import { Handle } from "rc-slider";
 
+// Copied from https://github.com/react-component/slider/blob/8.6.6/src/Slider.jsx#L165
 interface HandleGeneratorProps {
     className: string;
     prefixCls?: string;

@@ -17,7 +17,7 @@
     "minimumMXVersion": "9.6.0",
     "marketplaceId": 48786
   },
-  "packagePath": "com.mendix.widget.web",
+  "packagePath": "com.mendix.widget.custom",
   "scripts": {
     "start": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools start:server",
     "dev": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools start:web",
