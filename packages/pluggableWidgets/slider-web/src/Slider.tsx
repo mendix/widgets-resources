@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, ReactNode } from "react";
 import { SliderContainerProps } from "../typings/SliderProps";
 import { getMinValue } from "./utils/getMinValue";
 import { getMaxValue } from "./utils/getMaxValue";
@@ -12,7 +12,7 @@ import "rc-tooltip/assets/bootstrap.css";
 import "./ui/Slider.scss";
 import { isVertical } from "./utils/isVertical";
 
-export default function Slider(props: SliderContainerProps) {
+export default function Slider(props: SliderContainerProps): ReactNode {
     const { valueAttribute, class: className, style } = props;
     const minValue = getMinValue(props);
     const maxValue = getMaxValue(props);

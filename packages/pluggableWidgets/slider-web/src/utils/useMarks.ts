@@ -4,7 +4,7 @@ import { getMaxValue } from "./getMaxValue";
 import { useMemo } from "react";
 import { createMarks } from "./marks";
 
-export function useMarks(props: SliderContainerProps) {
+export function useMarks(props: SliderContainerProps): ReturnType<typeof createMarks> {
     const { noOfMarkers, decimalPlaces } = props;
     const min = getMinValue(props);
     const max = getMaxValue(props);

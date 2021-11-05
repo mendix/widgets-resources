@@ -1,4 +1,4 @@
-import { createElement, ReactNode, CSSProperties } from "react";
+import { createElement, ReactNode } from "react";
 import { Slider } from "./components/Slider";
 import { SliderPreviewProps as SliderPreviewPropsGenerated } from "../typings/SliderProps";
 import { getPreviewValues } from "./utils/getPreviewValues";
@@ -31,7 +31,7 @@ export function preview(props: SliderPreviewProps): ReactNode {
             {...values}
             onChange={undefined}
             marks={marks}
-            style={parseStyle(props.style) as CSSProperties}
+            style={parseStyle(props.style)}
             vertical={isVertical(props)}
         />
     );

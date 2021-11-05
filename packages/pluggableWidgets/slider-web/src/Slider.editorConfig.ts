@@ -20,11 +20,11 @@ const keysToHideBySizeType: Record<StepSizeTypeEnum, Array<keyof SliderPreviewPr
 };
 
 export function getProperties(values: SliderPreviewProps, defaultProperties: Properties): Properties {
-    hidePropertiesIn(defaultProperties, values, keysToHideByMinValueType[values.minValueType]);
-
-    hidePropertiesIn(defaultProperties, values, keysToHideByMaxValueType[values.maxValueType]);
-
-    hidePropertiesIn(defaultProperties, values, keysToHideBySizeType[values.stepSizeType]);
+    hidePropertiesIn(defaultProperties, values, [
+        ...keysToHideByMinValueType[values.minValueType],
+        ...keysToHideByMaxValueType[values.maxValueType],
+        ...keysToHideBySizeType[values.stepSizeType]
+    ]);
 
     if (!values.showTooltip) {
         hidePropertyIn(defaultProperties, values, "tooltip");
@@ -68,17 +68,13 @@ const maxValueCheck: CheckFn = ({ maxValueType, expressionMaximumValue, maxAttri
 };
 
 const minMaxValueCheck: CheckFn = ({ minValueType, maxValueType, staticMinimumValue, staticMaximumValue }) => {
-    const isPossibleToCheck = minValueType === "static" && maxValueType === "static";
-
-    if (!isPossibleToCheck) {
-        return;
-    }
-
-    if (staticMaximumValue === null || staticMinimumValue === null) {
-        return;
-    }
-
-    if (staticMinimumValue < staticMaximumValue) {
+    if (
+        minValueType !== "static" ||
+        maxValueType !== "static" ||
+        staticMaximumValue === null ||
+        staticMinimumValue === null ||
+        staticMinimumValue < staticMaximumValue
+    ) {
         return;
     }
 
@@ -132,5 +128,5 @@ const decimalPlacesCheck: CheckFn = ({ decimalPlaces }) => {
 export function check(values: SliderPreviewProps): Problem[] {
     const checkers = [tooltipCheck, minMaxValueCheck, minValueCheck, maxValueCheck, stepSizeCheck, decimalPlacesCheck];
 
-    return checkers.map(fn => fn(values)).filter((p): p is Problem => !!p);
+    return checkers.map(checker => checker(values)).filter((p): p is Problem => !!p);
 }

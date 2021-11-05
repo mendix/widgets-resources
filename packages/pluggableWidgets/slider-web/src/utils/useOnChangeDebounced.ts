@@ -1,21 +1,24 @@
 import { Big } from "big.js";
-import { useCallback, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { debounce, executeAction } from "@mendix/piw-utils-internal";
 import { SliderContainerProps } from "../../typings/SliderProps";
 
-export function useOnChangeDebounced(props: SliderContainerProps) {
+type ChangeHandler = (value: number) => void;
+
+type UseOnChangeDebounceReturnType = {
+    onChange: ChangeHandler;
+};
+
+export function useOnChangeDebounced(props: SliderContainerProps): UseOnChangeDebounceReturnType {
     const valueObjRef = useRef(props.valueAttribute);
     valueObjRef.current = props.valueAttribute;
 
-    const onChangeEnd = useMemo(() => debounce(() => executeAction(props.onChange), 500), [valueObjRef]);
+    const onChangeEnd = useMemo(() => debounce(() => executeAction(props.onChange), 500), [props.onChange]);
 
-    const onChange = useCallback(
-        (value: number) => {
+    return {
+        onChange: (value: number) => {
             valueObjRef.current.setValue(new Big(value));
             onChangeEnd();
-        },
-        [valueObjRef, onChangeEnd]
-    );
-
-    return { onChange };
+        }
+    };
 }
