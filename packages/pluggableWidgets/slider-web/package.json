@@ -26,7 +26,7 @@
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e": "echo 'Skipping tests'",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "cross-env MPKOUTPUT=Slider.mpk pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"

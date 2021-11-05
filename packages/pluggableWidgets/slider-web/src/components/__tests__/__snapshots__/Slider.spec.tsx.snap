@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Slider should render horizontal Slider correctly 1`] = `
+exports[`Slider renders horizontal Slider correctly 1`] = `
 <DocumentFragment>
   <div
     class="widget-slider"
@@ -36,7 +36,7 @@ exports[`Slider should render horizontal Slider correctly 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Slider should render markers 1`] = `
+exports[`Slider renders markers correctly 1`] = `
 <DocumentFragment>
   <div
     class="widget-slider"
@@ -124,7 +124,7 @@ exports[`Slider should render markers 1`] = `
 </DocumentFragment>
 `;
 
-exports[`Slider should render vertical Slider correctly 1`] = `
+exports[`Slider renders vertical Slider correctly 1`] = `
 <DocumentFragment>
   <div
     class="widget-slider widget-slider-vertical"
