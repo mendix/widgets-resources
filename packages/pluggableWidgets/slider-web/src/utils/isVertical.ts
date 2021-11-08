@@ -1,5 +1,5 @@
-import { OrientationEnum } from "../../typings/SliderProps";
+import { SliderContainerProps } from "../../typings/SliderProps";
 
-export function isVertical(params: { orientation: OrientationEnum }): boolean {
+export function isVertical(params: Pick<SliderContainerProps, "orientation">): boolean {
     return params.orientation === "vertical";
 }

@@ -36,7 +36,7 @@ export function createHandleGenerator(props: CreateHandleGeneratorParams): Handl
 
     return function handleGenerator(generatorProps: HandleGeneratorProps): JSX.Element {
         const { dragging, index, ...restProps } = generatorProps;
-        const overlay = <div>{tooltip?.value}</div>;
+        const overlay = <div>{tooltip?.value ?? ""}</div>;
 
         return (
             <Tooltip
