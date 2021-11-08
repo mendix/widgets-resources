@@ -130,7 +130,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Tooltip">
-                <property key="showTooltip" type="boolean" defaultValue="true">
+                <property key="showTooltip" type="boolean" defaultValue="false">
                     <caption>Show tooltip</caption>
                     <description />
                 </property>

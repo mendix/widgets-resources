@@ -142,5 +142,5 @@ const decimalPlacesCheck: CheckFn = ({ decimalPlaces }) => {
 export function check(values: SliderPreviewProps): Problem[] {
     const checkers = [tooltipCheck, minMaxValueCheck, minValueCheck, maxValueCheck, stepSizeCheck, decimalPlacesCheck];
 
-    return checkers.map(checker => checker(values)).filter((p): p is Problem => !!p);
+    return checkers.map(checker => checker(values)).filter((problem): problem is Problem => !!problem);
 }
