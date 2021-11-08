@@ -1,15 +1,24 @@
-import { SliderContainerProps } from "../../typings/SliderProps";
+import { StepSizeTypeEnum } from "../../typings/SliderProps";
+import { DynamicValue, EditableValue } from "mendix";
+import Big from "big.js";
 
-export function getStepValue(props: SliderContainerProps): number {
-    switch (props.stepSizeType) {
+type GetStepValueParams = {
+    stepSizeType: StepSizeTypeEnum;
+    stepValue: Big;
+    stepAttribute?: EditableValue<Big>;
+    expressionStepSize?: DynamicValue<Big>;
+};
+
+export function getStepValue(params: GetStepValueParams): number {
+    switch (params.stepSizeType) {
         case "static": {
-            return Number(props.stepValue);
+            return Number(params.stepValue);
         }
         case "dynamic": {
-            return Number(props.stepAttribute?.value ?? 1);
+            return Number(params.stepAttribute?.value ?? 1);
         }
         case "expression": {
-            return Number(props.expressionStepSize?.value ?? 1);
+            return Number(params.expressionStepSize?.value ?? 1);
         }
     }
 }

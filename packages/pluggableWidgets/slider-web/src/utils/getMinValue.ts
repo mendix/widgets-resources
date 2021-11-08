@@ -1,15 +1,24 @@
-import { SliderContainerProps } from "../../typings/SliderProps";
+import { MinValueTypeEnum } from "../../typings/SliderProps";
+import { DynamicValue, EditableValue } from "mendix";
+import Big from "big.js";
 
-export function getMinValue(props: SliderContainerProps): number {
-    switch (props.minValueType) {
+type GetMinValueParams = {
+    minValueType: MinValueTypeEnum;
+    staticMinimumValue: Big;
+    minAttribute?: EditableValue<Big>;
+    expressionMinimumValue?: DynamicValue<Big>;
+};
+
+export function getMinValue(params: GetMinValueParams): number {
+    switch (params.minValueType) {
         case "static": {
-            return Number(props.staticMinimumValue);
+            return Number(params.staticMinimumValue);
         }
         case "dynamic": {
-            return Number(props.minAttribute?.value ?? 0);
+            return Number(params.minAttribute?.value ?? 0);
         }
         case "expression": {
-            return Number(props.expressionMinimumValue?.value ?? 0);
+            return Number(params.expressionMinimumValue?.value ?? 0);
         }
     }
 }

@@ -1,15 +1,24 @@
-import { SliderContainerProps } from "../../typings/SliderProps";
+import { MaxValueTypeEnum } from "../../typings/SliderProps";
+import { DynamicValue, EditableValue } from "mendix";
+import Big from "big.js";
 
-export function getMaxValue(props: SliderContainerProps): number {
-    switch (props.maxValueType) {
+type GetMaxValueParams = {
+    maxValueType: MaxValueTypeEnum;
+    staticMaximumValue: Big;
+    maxAttribute?: EditableValue<Big>;
+    expressionMaximumValue?: DynamicValue<Big>;
+};
+
+export function getMaxValue(params: GetMaxValueParams): number {
+    switch (params.maxValueType) {
         case "static": {
-            return Number(props.staticMaximumValue);
+            return Number(params.staticMaximumValue);
         }
         case "dynamic": {
-            return Number(props.maxAttribute?.value ?? 100);
+            return Number(params.maxAttribute?.value ?? 100);
         }
         case "expression": {
-            return Number(props.expressionMaximumValue?.value ?? 100);
+            return Number(params.expressionMaximumValue?.value ?? 100);
         }
     }
 }

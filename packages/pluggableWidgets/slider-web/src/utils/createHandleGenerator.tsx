@@ -1,7 +1,7 @@
 import { createElement } from "react";
-import { SliderContainerProps } from "../../typings/SliderProps";
 import Tooltip from "rc-tooltip";
 import { Handle } from "rc-slider";
+import { DynamicValue } from "mendix";
 
 // Copied from https://github.com/react-component/slider/blob/8.6.6/src/Slider.jsx#L165
 interface HandleGeneratorProps {
@@ -22,7 +22,12 @@ interface HandleGeneratorProps {
 
 type HandleGenerator = (props: HandleGeneratorProps) => JSX.Element;
 
-export function createHandleGenerator(props: SliderContainerProps): HandleGenerator | undefined {
+type CreateHandleGeneratorParams = {
+    showTooltip: boolean;
+    tooltip?: DynamicValue<string>;
+};
+
+export function createHandleGenerator(props: CreateHandleGeneratorParams): HandleGenerator | undefined {
     const { tooltip, showTooltip } = props;
 
     if (!showTooltip) {

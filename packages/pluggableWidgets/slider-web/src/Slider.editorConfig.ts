@@ -1,4 +1,10 @@
-import { hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties,
+    transformGroupsIntoTabs
+} from "@mendix/piw-utils-internal";
 import { MaxValueTypeEnum, MinValueTypeEnum, SliderPreviewProps, StepSizeTypeEnum } from "../typings/SliderProps";
 
 const keysToHideByMinValueType: Record<MinValueTypeEnum, Array<keyof SliderPreviewProps>> = {
@@ -19,7 +25,11 @@ const keysToHideBySizeType: Record<StepSizeTypeEnum, Array<keyof SliderPreviewPr
     expression: ["stepValue", "stepAttribute"]
 };
 
-export function getProperties(values: SliderPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(
+    values: SliderPreviewProps,
+    defaultProperties: Properties,
+    platform: "web" | "desktop"
+): Properties {
     hidePropertiesIn(defaultProperties, values, [
         ...keysToHideByMinValueType[values.minValueType],
         ...keysToHideByMaxValueType[values.maxValueType],
@@ -28,6 +38,10 @@ export function getProperties(values: SliderPreviewProps, defaultProperties: Pro
 
     if (!values.showTooltip) {
         hidePropertyIn(defaultProperties, values, "tooltip");
+    }
+
+    if (platform === "web") {
+        transformGroupsIntoTabs(defaultProperties);
     }
 
     return defaultProperties;
