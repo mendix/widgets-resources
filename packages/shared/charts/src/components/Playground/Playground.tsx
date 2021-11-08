@@ -75,40 +75,38 @@ function convertJSToJSON(value: string): string {
 
 type PlaygroundView = "layout" | "config" | string;
 
+function createEmptySeriesArray(size: number): string[] {
+    return new Array(size).fill(emptyObjectString);
+}
+
 export const useChartsPlaygroundState = ({
     data,
     customConfig,
     customLayout
 }: ChartsPlaygroundState): {
-    activeView: PlaygroundView;
     activeEditableCode: string;
+    activeView: PlaygroundView;
     changeActiveView: Dispatch<SetStateAction<PlaygroundView>>;
     changeEditableCode: (value: string) => void;
     changeEditableCodeIsValid: (isValid: boolean) => void;
+    editedConfig: NonNullable<ChartProps["customConfig"]>;
     editedData: ChartProps["data"];
+    editedLayout: NonNullable<ChartProps["customLayout"]>;
 } => {
     const [activeView, setActiveView] = useState<PlaygroundView>("layout");
 
     const [editableConfig, setEditableConfig] = useState(ifNonEmptyStringElseEmptyObjectString(customConfig));
     const [editableLayout, setEditableLayout] = useState(ifNonEmptyStringElseEmptyObjectString(customLayout));
-    const [editableSeries, setEditableSeries] = useState(emptyObjectString);
+    const [editableSeries, setEditableSeries] = useState(createEmptySeriesArray(data.length));
 
     const editableCodeUpdateTimeoutId = useRef<number | null>(null);
     const editableCodeIsValid = useRef(false);
 
     useEffect(() => {
-        setEditableConfig(ifNonEmptyStringElseEmptyObjectString(customConfig));
-        setEditableLayout(ifNonEmptyStringElseEmptyObjectString(customLayout));
-        let newEditableSeries = emptyObjectString;
-        if (activeView !== "layout" && activeView !== "config") {
-            const index = parseInt(activeView, 10);
-            const { customSeriesOptions } = data[index];
-            if (customSeriesOptions && customSeriesOptions !== "") {
-                newEditableSeries = customSeriesOptions;
-            }
+        if (data.length !== editableSeries.length) {
+            setEditableSeries(createEmptySeriesArray(data.length));
         }
-        setEditableSeries(newEditableSeries);
-    }, [activeView, customConfig, customLayout, data]);
+    }, [data.length, editableSeries.length]);
 
     const changeEditableCode = useCallback(
         (value: string) => {
@@ -128,7 +126,10 @@ export const useChartsPlaygroundState = ({
                             setEditableConfig(newCode);
                             break;
                         default:
-                            setEditableSeries(newCode);
+                            const playgroundIndex = parseInt(activeView, 10);
+                            setEditableSeries(oldSettings =>
+                                oldSettings.map((oldCode, index) => (index === playgroundIndex ? newCode : oldCode))
+                            );
                             break;
                     }
                 } catch {
@@ -143,21 +144,14 @@ export const useChartsPlaygroundState = ({
         editableCodeIsValid.current = isValid;
     }, []);
 
-    const editedData = useMemo(() => {
-        if (activeView === "layout" || activeView === "config") {
-            return data;
-        }
-        return data.map((serie, index) => {
-            const playgroundIndex = parseInt(activeView, 10);
-            if (index === playgroundIndex) {
-                return {
-                    ...serie,
-                    customSeriesOptions: editableSeries
-                };
-            }
-            return serie;
-        });
-    }, [activeView, data, editableSeries]);
+    const editedData = useMemo(
+        () =>
+            data.map((serie, index) => ({
+                ...serie,
+                customSeriesOptions: editableSeries[index]
+            })),
+        [data, editableSeries]
+    );
 
     const activeEditableCode = useMemo(() => {
         if (activeView === "layout") {
@@ -166,15 +160,17 @@ export const useChartsPlaygroundState = ({
         if (activeView === "config") {
             return editableConfig;
         }
-        return editableSeries;
+        return editableSeries[parseInt(activeView, 10)];
     }, [activeView, editableConfig, editableLayout, editableSeries]);
 
     return {
-        activeView,
         activeEditableCode,
+        activeView,
         changeActiveView: setActiveView,
+        changeEditableCode,
         changeEditableCodeIsValid,
+        editedConfig: editableConfig,
         editedData,
-        changeEditableCode
+        editedLayout: editableLayout
     };
 };

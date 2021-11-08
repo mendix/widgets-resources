@@ -86,12 +86,14 @@ export const ChartWithPlayground = ({
     customConfig
 }: ChartProps): ReactElement => {
     const {
-        activeView,
         activeEditableCode,
+        activeView,
         changeActiveView,
         changeEditableCode,
         changeEditableCodeIsValid,
-        editedData
+        editedConfig,
+        editedData,
+        editedLayout
     } = useChartsPlaygroundState({
         data,
         customConfig,
@@ -156,9 +158,9 @@ export const ChartWithPlayground = ({
             <Chart
                 data={editedData}
                 layoutOptions={layoutOptions}
-                customLayout={activeView === "layout" ? activeEditableCode : customLayout}
+                customLayout={editedLayout}
                 configOptions={configOptions}
-                customConfig={activeView === "config" ? activeEditableCode : customConfig}
+                customConfig={editedConfig}
                 seriesOptions={seriesOptions}
             />
         </Playground.Wrapper>
