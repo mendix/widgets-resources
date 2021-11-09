@@ -6,8 +6,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-## [3.0.1] - 2021-11-01
-
 ### Changed
 - Changed the default value for the video data source to dynamic
 
