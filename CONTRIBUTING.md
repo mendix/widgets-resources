@@ -2,14 +2,14 @@
 
 ## Prerequisites
 
--   [Node.js](https://nodejs.org) version 10.3.0 or later
+-   [Node.js](https://nodejs.org) version 14
 
 ## Getting started
 
 1. Clone this repository
 
 ```sh
-$ git clone --recursive https://github.com/mendix/widgets-resources.git
+$ git clone https://github.com/mendix/widgets-resources.git
 $ cd widgets-resources
 ```
 
