@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Datum, PlotData } from "plotly.js";
 
-export type PlotChartDataPoints = Pick<PlotData, "x" | "y"> & {
+export type PlotChartDataPoints = {
+    x: Array<NonNullable<Datum>>;
+    y: Array<NonNullable<Datum>>;
     // We want this optional.
     name?: PlotData["name"];
 };
@@ -35,9 +37,11 @@ interface PlotDataSeries {
     dynamicYAttribute?: ListAttributeValue<Date | Big | string>;
 }
 
+type SeriesMapper<T> = (serie: T, dataPoints: PlotChartDataPoints) => Partial<PlotData>;
+
 export function usePlotChartDataSeries<T extends PlotDataSeries>(
     series: T[],
-    mapSerie: (serie: T) => Partial<PlotData>
+    mapSerie: SeriesMapper<T>
 ): PlotChartSeries[] | null {
     const [chartSeries, setChartSeries] = useState<PlotChartSeries[] | null>(null);
 
@@ -50,15 +54,12 @@ export function usePlotChartDataSeries<T extends PlotDataSeries>(
             .filter((element): element is PlotChartSeries | PlotChartSeries[] => Boolean(element))
             .flat();
         setChartSeries(loadedSeries.length === 0 ? null : loadedSeries);
-    }, [series]);
+    }, [series, mapSerie]);
 
     return chartSeries;
 }
 
-function loadStaticSeries(
-    series: PlotDataSeries,
-    mapSerie: (serie: PlotDataSeries) => Partial<PlotData>
-): PlotChartSeries | null {
+function loadStaticSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDataSeries>): PlotChartSeries | null {
     const { staticName, dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "static") {
@@ -72,16 +73,13 @@ function loadStaticSeries(
     }
 
     return {
+        ...mapSerie(series, dataPoints),
         ...dataPoints,
-        ...mapSerie(series),
         customSeriesOptions
     };
 }
 
-function loadDynamicSeries(
-    series: PlotDataSeries,
-    mapSerie: (serie: PlotDataSeries) => Partial<PlotData>
-): PlotChartSeries[] | null {
+function loadDynamicSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDataSeries>): PlotChartSeries[] | null {
     const { dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "dynamic") {
@@ -103,8 +101,8 @@ function loadDynamicSeries(
             }
 
             return {
+                ...mapSerie(series, dataPoints),
                 ...dataPoints,
-                ...mapSerie(series),
                 customSeriesOptions
             };
         })
@@ -186,8 +184,8 @@ function extractDataPoints(
 
         dataSourceItems = dataSource.items;
     }
-    const xData: Datum[] = [];
-    const yData: Datum[] = [];
+    const xData: PlotChartDataPoints["x"] = [];
+    const yData: PlotChartDataPoints["y"] = [];
 
     for (const item of dataSourceItems) {
         const x = xValue.get(item);

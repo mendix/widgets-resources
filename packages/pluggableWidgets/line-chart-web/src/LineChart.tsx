@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useCallback } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { LineChartContainerProps } from "../typings/LineChartProps";
@@ -24,17 +24,43 @@ const lineChartConfigOptions: ChartWidgetProps["configOptions"] = {
 const lineChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
-    const chartLines = usePlotChartDataSeries(props.lines, line => ({
-        type: "scatter",
-        mode: line.lineStyle === "line" ? "lines" : "lines+markers",
-        line: {
-            shape: line.interpolation,
-            color: line.lineColor?.value
-        },
-        marker: {
-            color: line.markerColor?.value
-        }
-    }));
+    const chartLines = usePlotChartDataSeries(
+        props.lines,
+        useCallback(
+            (line, dataPoints) => ({
+                type: "scatter",
+                mode: line.lineStyle === "line" ? "lines" : "lines+markers",
+                line: {
+                    shape: line.interpolation,
+                    color: line.lineColor?.value
+                },
+                marker: {
+                    color: line.markerColor?.value
+                },
+                transforms:
+                    line.aggregationType === "none"
+                        ? undefined
+                        : [
+                              {
+                                  type: "aggregate",
+                                  groups: dataPoints.x.map(dataPoint =>
+                                      typeof dataPoint === "string" || typeof dataPoint === "number"
+                                          ? dataPoint.toLocaleString()
+                                          : dataPoint.toLocaleDateString()
+                                  ),
+                                  aggregations: [
+                                      {
+                                          target: "y",
+                                          func: line.aggregationType,
+                                          enabled: true
+                                      }
+                                  ]
+                              }
+                          ]
+            }),
+            []
+        )
+    );
 
     return (
         <ChartWidget
