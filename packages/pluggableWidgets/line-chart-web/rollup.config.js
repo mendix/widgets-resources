@@ -4,6 +4,8 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
+import command from "rollup-plugin-command";
+import { cp } from "shelljs";
 
 export default args => {
     const production = Boolean(args.configProduction);
@@ -66,7 +68,16 @@ export default args => {
                 }
             ]
         }),
-        production ? terser() : null
+        production ? terser() : null,
+        command([
+            () => {
+                const workerFilePath = join(
+                    __dirname,
+                    `../../../node_modules/ace-builds/src-min-noconflict/worker-json.js`
+                );
+                cp(workerFilePath, outDir);
+            }
+        ])
     ];
     // We add the library bundling (ES output) as the first item for rollup
     result.unshift(
