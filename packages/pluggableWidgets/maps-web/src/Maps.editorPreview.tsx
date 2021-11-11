@@ -1,7 +1,7 @@
 import { createElement, ReactNode, Fragment, ReactElement } from "react";
 import { MapsPreviewProps } from "../typings/MapsProps";
 import { Alert } from "@mendix/piw-utils-internal/components/web";
-import GoogleMapSvg from "./assets/googlemaps_large.svg";
+import GoogleMapSvg from "./assets/GoogleMapsDesign.svg";
 
 declare function require(name: string): string;
 
