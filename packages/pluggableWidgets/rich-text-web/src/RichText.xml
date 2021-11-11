@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <widget id="com.mendix.widget.web.richtext.RichText" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Rich Text</name>
     <description>Rich inline or toolbar text editing</description>
     <icon>
@@ -18,8 +18,7 @@
                 </property>
                 <property key="sanitizeContent" type="boolean" defaultValue="true">
                     <caption>Sanitize content</caption>
-                    <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before displaying.
-                        WARNING disabling this option is a security risk for XSS attacks
+                    <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before displaying.WARNING disabling this option is a security risk for XSS attacks
                     </description>
                 </property>
             </propertyGroup>
@@ -41,14 +40,7 @@
                         <enumerationValue key="custom">Custom</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="editable" type="enumeration" defaultValue="default">
-                    <caption>Editable</caption>
-                    <description>The default option is based on the page settings and the attribute's write access</description>
-                    <enumerationValues>
-                        <enumerationValue key="default">Default</enumerationValue>
-                        <enumerationValue key="never">Never</enumerationValue>
-                    </enumerationValues>
-                </property>
+                <systemProperty key="Editability"/>
                 <property key="readOnlyStyle" type="enumeration" defaultValue="text">
                     <caption>Read-only style</caption>
                     <description/>
@@ -102,11 +94,11 @@
                 </property>
 
             </propertyGroup>
-<!--            <propertyGroup caption="Toolbars"/>-->
-<!--            <propertyGroup caption="Dimensions"/>-->
-<!--            <propertyGroup caption="Behavior"/>-->
-<!--            <propertyGroup caption="Images"/>-->
-<!--            <propertyGroup caption="Advanced"/>-->
+            <!--            <propertyGroup caption="Toolbars"/>-->
+            <!--            <propertyGroup caption="Dimensions"/>-->
+            <!--            <propertyGroup caption="Behavior"/>-->
+            <!--            <propertyGroup caption="Images"/>-->
+            <!--            <propertyGroup caption="Advanced"/>-->
             <propertyGroup caption="Events">
                 <property key="tabAction" type="enumeration" defaultValue="indent">
                     <caption>Tab key behavior</caption>
@@ -116,16 +108,10 @@
                         <enumerationValue key="changeFocus">Focus next</enumerationValue>
                     </enumerationValues>
                 </property>
-<!--                <property key="onChangeMicroflow" type="action" required="false">-->
-<!--                    <caption>On change microflow</caption>-->
-<!--                    <description>Microflow will be triggered when focus is lost and the content has changed</description>-->
-<!--                    <returnType type="Void"/>-->
-<!--                </property>-->
-<!--                <property key="onChangeNanoflow" type="action" required="false">-->
-<!--                    <caption>On change nanoflow</caption>-->
-<!--                    <description>Nanoflow will be triggered when focus is lost and the content has changed</description>-->
-<!--                    <returnType type="Void"/>-->
-<!--                </property>-->
+                <property key="action" type="action">
+                    <caption>On change</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
     </properties>

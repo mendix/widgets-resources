@@ -14,22 +14,21 @@
   },
   "license": "Apache-2.0",
   "marketplace": {
-    "minimumMXVersion": "7.13.1",
+    "minimumMXVersion": "9.6.0",
     "marketplaceId": 74889
   },
-  "packagePath": "com.mendix.widget.web",
+  "packagePath": "com.mendix.widget.custom",
   "scripts": {
-    "start": "pluggable-widgets-tools start:server",
-    "dev": "pluggable-widgets-tools start:web",
-    "build": "pluggable-widgets-tools build:web",
+    "start": "cross-env MPKOUTPUT=RichText.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=RichText.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=RichText.mpk pluggable-widgets-tools build:web",
     "format": "pluggable-widgets-tools format",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
-    "test:unit": "jest --config ../../../scripts/test/jest.web.config.js",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
-    "release": " pluggable-widgets-tools release:web",
+    "release": "cross-env MPKOUTPUT=RichText.mpk pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "config": {
@@ -41,8 +40,8 @@
     "@types/classnames": "^2.2.6",
     "@types/sanitize-html": "^1.18.2",
     "@types/ckeditor4": "^4.16.1",
-    "eslint": "^7.20.0",
-    "jest": "^26.6.1"
+    "cross-env": "^7.0.2",
+    "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",

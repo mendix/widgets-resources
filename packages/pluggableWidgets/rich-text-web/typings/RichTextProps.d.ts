@@ -4,13 +4,11 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { EditableValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 
 export type ThemeEnum = "snow" | "bubble";
 
 export type EditorOptionEnum = "basic" | "extended" | "custom";
-
-export type EditableEnum = "default" | "never";
 
 export type ReadOnlyStyleEnum = "text" | "bordered" | "borderedToolbar";
 
@@ -55,12 +53,12 @@ export interface RichTextContainerProps {
     sanitizeContent: boolean;
     theme: ThemeEnum;
     editorOption: EditorOptionEnum;
-    editable: EditableEnum;
     readOnlyStyle: ReadOnlyStyleEnum;
     minNumberOfLines: number;
     maxNumberOfLines: number;
     customOptions: CustomOptionsType[];
     tabAction: TabActionEnum;
+    action?: ActionValue;
 }
 
 export interface RichTextPreviewProps {
@@ -70,10 +68,10 @@ export interface RichTextPreviewProps {
     sanitizeContent: boolean;
     theme: ThemeEnum;
     editorOption: EditorOptionEnum;
-    editable: EditableEnum;
     readOnlyStyle: ReadOnlyStyleEnum;
     minNumberOfLines: number | null;
     maxNumberOfLines: number | null;
     customOptions: CustomOptionsPreviewType[];
     tabAction: TabActionEnum;
+    action: {} | null;
 }
