@@ -11,12 +11,16 @@ import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import "./ui/Slider.scss";
 import { isVertical } from "./utils/isVertical";
+import { getStyleProp } from "./utils/getStyleProp";
 
 export default function Slider(props: SliderContainerProps): ReactNode {
     const {
         valueAttribute,
         class: className,
-        style,
+        style: styleProp,
+        orientation,
+        heightUnit,
+        height,
         minValueType,
         minAttribute,
         expressionMinimumValue,
@@ -68,11 +72,12 @@ export default function Slider(props: SliderContainerProps): ReactNode {
     });
     const handle = createHandleGenerator({ tooltip, showTooltip, tooltipType });
     const { onChange } = useOnChangeDebounced({ valueAttribute, onChange: onChangeProp });
+    const style = getStyleProp({ orientation, style: styleProp, height, heightUnit });
 
     return (
         <SliderComponent
             className={className}
-            style={style}
+            rootStyle={style}
             vertical={isVertical(props)}
             value={valueAttribute.value?.toNumber()}
             min={minValue}

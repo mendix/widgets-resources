@@ -78,16 +78,6 @@
                 </property>
                 <!-- Maximum Value End -->
             </propertyGroup>
-            <propertyGroup caption="Markers">
-                <property key="noOfMarkers" type="integer" defaultValue="2">
-                    <caption>Number of markers</caption>
-                    <description>Marker ticks on the slider (visible when larger than 2)</description>
-                </property>
-                <property key="decimalPlaces" type="integer" defaultValue="0">
-                    <caption>Decimal places</caption>
-                    <description>Number of decimal places for marker values</description>
-                </property>
-            </propertyGroup>
             <propertyGroup caption="Steps">
                 <!-- Steps Size -->
                 <property key="stepSizeType" type="enumeration" defaultValue="static">
@@ -119,16 +109,6 @@
                 </property>
                 <!-- Steps Size End -->
             </propertyGroup>
-            <propertyGroup caption="Orientation">
-                <property key="orientation" type="enumeration" defaultValue="horizontal">
-                    <caption>Orientation</caption>
-                    <description>If orientation is 'Vertical', make sure that parent or slider itself has fixed height</description>
-                    <enumerationValues>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                    </enumerationValues>
-                </property>
-            </propertyGroup>
             <propertyGroup caption="Tooltip">
                 <property key="showTooltip" type="boolean" defaultValue="true">
                     <caption>Show tooltip</caption>
@@ -155,6 +135,40 @@
             </propertyGroup>
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Track">
+            <propertyGroup caption="Markers">
+                <property key="noOfMarkers" type="integer" defaultValue="2">
+                    <caption>Number of markers</caption>
+                    <description>Marker ticks on the slider (visible when larger than 2)</description>
+                </property>
+                <property key="decimalPlaces" type="integer" defaultValue="0">
+                    <caption>Decimal places</caption>
+                    <description>Number of decimal places for marker values</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Orientation">
+                <property key="orientation" type="enumeration" defaultValue="horizontal">
+                    <caption>Orientation</caption>
+                    <description>If orientation is 'Vertical', make sure that parent or slider itself has fixed height</description>
+                    <enumerationValues>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="100">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">

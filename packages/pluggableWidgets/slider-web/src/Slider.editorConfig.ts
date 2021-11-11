@@ -42,6 +42,10 @@ export function getProperties(
         hidePropertyIn(defaultProperties, values, "tooltip");
     }
 
+    if (values.orientation === "horizontal") {
+        hidePropertiesIn(defaultProperties, values, ["heightUnit", "height"]);
+    }
+
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }

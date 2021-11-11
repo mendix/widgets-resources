@@ -13,9 +13,11 @@ export type MaxValueTypeEnum = "static" | "dynamic" | "expression";
 
 export type StepSizeTypeEnum = "static" | "dynamic" | "expression";
 
+export type TooltipTypeEnum = "value" | "customText";
+
 export type OrientationEnum = "horizontal" | "vertical";
 
-export type TooltipTypeEnum = "value" | "customText";
+export type HeightUnitEnum = "percentage" | "pixels";
 
 export interface SliderContainerProps {
     name: string;
@@ -32,16 +34,18 @@ export interface SliderContainerProps {
     staticMaximumValue: Big;
     maxAttribute?: EditableValue<Big>;
     expressionMaximumValue?: DynamicValue<Big>;
-    noOfMarkers: number;
-    decimalPlaces: number;
     stepSizeType: StepSizeTypeEnum;
     stepValue: Big;
     stepAttribute?: EditableValue<Big>;
     expressionStepSize?: DynamicValue<Big>;
-    orientation: OrientationEnum;
     showTooltip: boolean;
     tooltipType: TooltipTypeEnum;
     tooltip?: DynamicValue<string>;
+    noOfMarkers: number;
+    decimalPlaces: number;
+    orientation: OrientationEnum;
+    heightUnit: HeightUnitEnum;
+    height: number;
     onChange?: ActionValue;
 }
 
@@ -57,15 +61,17 @@ export interface SliderPreviewProps {
     staticMaximumValue: number | null;
     maxAttribute: string;
     expressionMaximumValue: string;
-    noOfMarkers: number | null;
-    decimalPlaces: number | null;
     stepSizeType: StepSizeTypeEnum;
     stepValue: number | null;
     stepAttribute: string;
     expressionStepSize: string;
-    orientation: OrientationEnum;
     showTooltip: boolean;
     tooltipType: TooltipTypeEnum;
     tooltip: string;
+    noOfMarkers: number | null;
+    decimalPlaces: number | null;
+    orientation: OrientationEnum;
+    heightUnit: HeightUnitEnum;
+    height: number | null;
     onChange: {} | null;
 }

@@ -5,6 +5,7 @@ import { getPreviewValues } from "./utils/getPreviewValues";
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { createMarks } from "./utils/marks";
 import { isVertical } from "./utils/isVertical";
+import { getStyleProp } from "./utils/getStyleProp";
 
 interface SliderPreviewProps extends Omit<SliderPreviewPropsGenerated, "class"> {
     className?: string;
@@ -24,14 +25,21 @@ export function preview(props: SliderPreviewProps): ReactNode {
         numberOfMarks: props.noOfMarkers ?? 2,
         decimalPlaces: props.decimalPlaces ?? 2
     });
+    const style = getStyleProp({
+        orientation: props.orientation,
+        style: parseStyle(props.style),
+        height: props.height ?? 100,
+        heightUnit: props.heightUnit
+    });
 
     return (
         <Slider
             {...props}
             {...values}
             onChange={undefined}
+            style={undefined}
             marks={marks}
-            style={parseStyle(props.style)}
+            rootStyle={style}
             vertical={isVertical(props)}
         />
     );

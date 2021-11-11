@@ -1265,7 +1265,7 @@
             ]
         }
     ],
-    "com.mendix.widget.web.slider.Slider": [
+    "com.mendix.widget.custom.slider.Slider": [
         {
             "name": "Style",
             "type": "Dropdown",
