@@ -25,10 +25,12 @@ type HandleGenerator = (props: HandleGeneratorProps) => JSX.Element;
 type CreateHandleGeneratorParams = {
     showTooltip: boolean;
     tooltip?: DynamicValue<string>;
+    tooltipType: "value" | "customText";
 };
 
 export function createHandleGenerator(props: CreateHandleGeneratorParams): HandleGenerator | undefined {
-    const { tooltip, showTooltip } = props;
+    const { tooltip, showTooltip, tooltipType } = props;
+    const isCustomText = tooltipType === "customText";
 
     if (!showTooltip) {
         return;
@@ -41,7 +43,7 @@ export function createHandleGenerator(props: CreateHandleGeneratorParams): Handl
         return (
             <Tooltip
                 prefixCls="rc-slider-tooltip"
-                overlay={overlay}
+                overlay={isCustomText ? overlay : restProps.value}
                 trigger={["hover", "click", "focus"]}
                 visible={dragging}
                 placement="top"

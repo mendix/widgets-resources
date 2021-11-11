@@ -130,9 +130,17 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Tooltip">
-                <property key="showTooltip" type="boolean" defaultValue="false">
+                <property key="showTooltip" type="boolean" defaultValue="true">
                     <caption>Show tooltip</caption>
                     <description />
+                </property>
+                <property key="tooltipType" type="enumeration" defaultValue="value">
+                    <caption>Tooltip type</caption>
+                    <description>By default tooltip shows current value. Choose 'Custom' to create your own template.</description>
+                    <enumerationValues>
+                        <enumerationValue key="value">Value</enumerationValue>
+                        <enumerationValue key="customText">Custom</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="tooltip" type="textTemplate" required="false">
                     <caption>Tooltip</caption>

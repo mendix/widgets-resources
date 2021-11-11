@@ -37,6 +37,8 @@ export function getProperties(
     ]);
 
     if (!values.showTooltip) {
+        hidePropertiesIn(defaultProperties, values, ["tooltip", "tooltipType"]);
+    } else if (values.tooltipType === "value") {
         hidePropertyIn(defaultProperties, values, "tooltip");
     }
 
@@ -99,10 +101,10 @@ const minMaxValueCheck: CheckFn = ({ minValueType, maxValueType, staticMinimumVa
 };
 
 const tooltipCheck: CheckFn = values => {
-    if (values.showTooltip && values.tooltip === "") {
+    if (values.showTooltip && values.tooltipType === "customText" && values.tooltip === "") {
         return {
             property: "tooltip",
-            message: "Tooltip cannot be empty when 'Show tooltip' is enabled"
+            message: "'Tooltip' cannot be empty when 'Custom' type is chosen"
         };
     }
 };

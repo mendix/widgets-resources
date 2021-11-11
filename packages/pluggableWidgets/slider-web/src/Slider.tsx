@@ -33,6 +33,7 @@ export default function Slider(props: SliderContainerProps): ReactNode {
         decimalPlaces,
         tooltip,
         showTooltip,
+        tooltipType,
         onChange: onChangeProp
     } = props;
     const minValue = getMinValue({
@@ -65,7 +66,7 @@ export default function Slider(props: SliderContainerProps): ReactNode {
         maxAttribute,
         expressionMaximumValue
     });
-    const handle = createHandleGenerator({ tooltip, showTooltip });
+    const handle = createHandleGenerator({ tooltip, showTooltip, tooltipType });
     const { onChange } = useOnChangeDebounced({ valueAttribute, onChange: onChangeProp });
 
     return (

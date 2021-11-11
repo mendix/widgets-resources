@@ -15,6 +15,8 @@ export type StepSizeTypeEnum = "static" | "dynamic" | "expression";
 
 export type OrientationEnum = "horizontal" | "vertical";
 
+export type TooltipTypeEnum = "value" | "customText";
+
 export interface SliderContainerProps {
     name: string;
     class: string;
@@ -38,6 +40,7 @@ export interface SliderContainerProps {
     expressionStepSize?: DynamicValue<Big>;
     orientation: OrientationEnum;
     showTooltip: boolean;
+    tooltipType: TooltipTypeEnum;
     tooltip?: DynamicValue<string>;
     onChange?: ActionValue;
 }
@@ -62,6 +65,7 @@ export interface SliderPreviewProps {
     expressionStepSize: string;
     orientation: OrientationEnum;
     showTooltip: boolean;
+    tooltipType: TooltipTypeEnum;
     tooltip: string;
     onChange: {} | null;
 }
