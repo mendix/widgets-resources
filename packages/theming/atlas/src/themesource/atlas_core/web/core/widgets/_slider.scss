@@ -5,6 +5,33 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+@mixin sliderColorVariant($colorMain) {
+    .rc-slider-track {
+        background-color: $colorMain;
+    }
+
+    .rc-slider-handle:focus {
+        border-color: $colorMain;
+        box-shadow: 0 0 0 5px lighten($colorMain, 25%);
+        outline: none;
+    }
+
+    .rc-slider-handle-click-focused:focus {
+        border-color: lighten($colorMain, 25%);
+        box-shadow: unset;
+    }
+
+    .rc-slider-dot-active,
+    .rc-slider-handle:hover {
+        border-color: $colorMain;
+    }
+
+    .rc-slider-handle:active {
+        border-color: $colorMain;
+        box-shadow: 0 0 5px $colorMain;
+    }
+}
+
 @mixin slider() {
     /* ==========================================================================
        Slider
@@ -16,8 +43,7 @@
         margin-bottom: 16px;
         padding: 5px 10px;
 
-        .rc-slider-handle,
-        .rc-slider-dot-active {
+        .rc-slider-handle {
             border-color: $brand-default;
         }
 
@@ -25,32 +51,22 @@
             padding-bottom: 25px;
         }
 
-        .rc-slider-track {
-            background-color: $brand-primary;
-        }
+        @include sliderColorVariant($brand-primary);
     }
 
     .widget-slider-primary {
-        .rc-slider-track {
-            background-color: $brand-primary;
-        }
+        @include sliderColorVariant($brand-primary);
     }
 
     .widget-slider-success {
-        .rc-slider-track {
-            background-color: $brand-success;
-        }
+        @include sliderColorVariant($brand-success);
     }
 
     .widget-slider-warning {
-        .rc-slider-track {
-            background-color: $brand-warning;
-        }
+        @include sliderColorVariant($brand-warning);
     }
 
     .widget-slider-danger {
-        .rc-slider-track {
-            background-color: $brand-danger;
-        }
+        @include sliderColorVariant($brand-danger);
     }
 }
