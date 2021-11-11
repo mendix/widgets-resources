@@ -10,7 +10,7 @@ export interface CreateMarksParams {
 }
 
 export function isParamsValidToCalcMarks(params: CreateMarksParams): boolean {
-    return params.numberOfMarks >= 2 && params.min < params.max;
+    return params.numberOfMarks > 0 && params.min < params.max;
 }
 
 export function createMarks(params: CreateMarksParams): Marks | undefined {
@@ -20,9 +20,9 @@ export function createMarks(params: CreateMarksParams): Marks | undefined {
 
     const marks: Marks = {};
     const { numberOfMarks, decimalPlaces, min, max } = params;
-    const interval = (max - min) / (numberOfMarks - 1);
+    const interval = (max - min) / numberOfMarks;
 
-    for (let i = 0; i < numberOfMarks; i++) {
+    for (let i = 0; i <= numberOfMarks; i++) {
         const value = parseFloat((min + i * interval).toFixed(decimalPlaces));
         marks[value] = value.toString();
     }
