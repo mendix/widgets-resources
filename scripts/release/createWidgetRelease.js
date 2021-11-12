@@ -38,7 +38,7 @@ async function main() {
     console.log("Creating Github release...");
     await createGithubReleaseFrom({
         title: `${widgetName} (Web) - Marketplace Release v${version}`,
-        body: JSON.stringify(unreleasedChangelogs),
+        body: unreleasedChangelogs.replace(/"/g, "'"),
         tag: `${widgetScope}-v${version}`,
         mpkOutput: releaseMpkPath,
         isDraft: true
