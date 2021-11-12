@@ -4,6 +4,9 @@
 import { Maps, Props } from "../Maps";
 import { mount } from "enzyme";
 import { dynamicValue } from "@mendix/piw-utils-internal";
+import { Big } from "big.js";
+import { createElement } from "react";
+import { waitFor } from "@testing-library/react-native";
 
 describe("", () => {
     let defaultProps: Props;
@@ -42,15 +45,12 @@ describe("", () => {
                 iconColor: "red"
             }
         ];
-        const wrapper = mount(<Maps {...defaultProps} />);
-        // wrapper.setState({ status: "mapReady" });
-        await new Promise(resolve => {
-            setTimeout(resolve, 5000);
-        });
 
-        wrapper.update();
-        console.log(wrapper.state.status);
-        // wrapper.find("MarkerView")
-        expect(wrapper).toMatchSnapshot();
+        const wrapper = await mount(<Maps {...defaultProps} />);
+
+        await waitFor(() => {
+            wrapper.update();
+            expect(wrapper).toMatchSnapshot();
+        });
     });
 });
