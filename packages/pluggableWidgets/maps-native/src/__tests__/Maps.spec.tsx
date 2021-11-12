@@ -28,14 +28,16 @@ describe("", () => {
     it("renders", async () => {
         defaultProps.markers = [
             {
-                locationType: "address",
-                address: dynamicValue<string>("Tokyo", false),
+                locationType: "latlng", // Tokyo
+                latitude: dynamicValue(new Big(35.6895), false),
+                longitude: dynamicValue(new Big(139.6917), false),
                 iconSize: 1,
                 iconColor: "red"
             },
             {
-                locationType: "address",
-                address: dynamicValue<string>("Amsterdam", false),
+                locationType: "latlng", // Amsterdam
+                latitude: dynamicValue(new Big(52.3702), false),
+                longitude: dynamicValue(new Big(4.8952), false),
                 iconSize: 1,
                 iconColor: "red"
             }
