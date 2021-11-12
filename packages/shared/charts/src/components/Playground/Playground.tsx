@@ -11,11 +11,13 @@ import {
     useState
 } from "react";
 import classNames from "classnames";
+import { Alert, useOnClickOutside } from "@mendix/piw-utils-internal/components/web";
 import { Sidebar, SidebarHeader, SidebarHeaderTools, SidebarPanel, Select } from "./Sidebar";
 import { emptyObjectString, ifNonEmptyStringElseEmptyObjectString } from "./utils";
 import { ChartProps } from "../Chart";
 
 import "../../ui/Playground.scss";
+import infoIconSvg from "../../assets/information-circle.svg";
 
 interface PlaygroundProps {
     children: ReactNode;
@@ -39,7 +41,7 @@ const Wrapper = ({ children, renderPanels, renderSidebarHeaderTools }: Playgroun
                     {renderSidebarHeaderTools}
                 </SidebarHeader>
                 <div className="sidebar-content-body">
-                    {/* TODO: Tooltip */}
+                    <SidebarContentTooltip />
                     {renderPanels}
                 </div>
             </Sidebar>
@@ -50,6 +52,45 @@ const Wrapper = ({ children, renderPanels, renderSidebarHeaderTools }: Playgroun
             </div>
             {children}
         </div>
+    );
+};
+
+const SidebarContentTooltip = (): ReactElement => {
+    const [tooltipIsOpen, setTooltipIsOpen] = useState(false);
+    const tooltipTriggerRef = useRef<HTMLButtonElement | null>(null);
+    const tooltipRef = useRef<HTMLDivElement | null>(null);
+
+    useOnClickOutside(tooltipRef, () => setTooltipIsOpen(false));
+
+    return (
+        <button className="info-tooltip" ref={tooltipTriggerRef} onClick={() => setTooltipIsOpen(true)}>
+            <img src={infoIconSvg} className="info-tooltip-icon" alt="Show inline editor information" />
+            {tooltipIsOpen ? (
+                <div
+                    ref={tooltipRef}
+                    className="info-tooltip-info"
+                    style={{
+                        width:
+                            tooltipTriggerRef.current && tooltipTriggerRef.current.parentElement
+                                ? tooltipTriggerRef.current.parentElement.clientWidth * 0.9
+                                : "auto"
+                    }}
+                >
+                    <Alert bootstrapStyle="info" className="info-tooltip-info-content">
+                        <p>
+                            <strong>Changes made in this editor are only for preview purposes.</strong>
+                        </p>
+                        <p>The JSON can be copied and pasted into the widgets properties in the desktop modeler</p>
+                        <p>
+                            Check out the chart options here:{" "}
+                            <a href="https://plot.ly/javascript/reference/" target="_blank" rel="noreferrer">
+                                https://plot.ly/javascript/reference/
+                            </a>
+                        </p>
+                    </Alert>
+                </div>
+            ) : null}
+        </button>
     );
 };
 
