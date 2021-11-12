@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 1`] = `
+<Maps
+  defaultZoomLevel="city"
+  dynamicMarkers={Array []}
+  fitToMarkers={true}
+  interactive={true}
+  mapType="standard"
+  markers={
+    Array [
+      Object {
+        "address": Object {
+          "status": "available",
+          "value": "Tokyo",
+        },
+        "iconColor": "red",
+        "iconSize": 1,
+        "locationType": "address",
+      },
+      Object {
+        "address": Object {
+          "status": "available",
+          "value": "Amsterdam",
+        },
+        "iconColor": "red",
+        "iconSize": 1,
+        "locationType": "address",
+      },
+    ]
+  }
+  maxZoomLevel="streets"
+  minZoomLevel="city"
+  name="maps-test"
+  provider="default"
+  showsUserLocation={false}
+  style={Array []}
+>
+  <Component
+    style={
+      Object {
+        "minHeight": 50,
+      }
+    }
+    testID="maps-test"
+  >
+    <View
+      style={
+        Object {
+          "minHeight": 50,
+        }
+      }
+      testID="maps-test"
+    >
+      <MapView
+        cacheEnabled={false}
+        liteMode={false}
+        mapPadding={
+          Object {
+            "bottom": 48,
+            "left": 48,
+            "right": 48,
+            "top": 48,
+          }
+        }
+        mapType="standard"
+        maxZoomLevel={15}
+        minZoomLevel={3}
+        onMapReady={[Function]}
+        onRegionChangeComplete={[Function]}
+        pitchEnabled={false}
+        provider={null}
+        rotateEnabled={true}
+        scrollEnabled={true}
+        showsMyLocationButton={false}
+        showsPointsOfInterest={false}
+        showsTraffic={false}
+        showsUserLocation={false}
+        style={
+          Object {
+            "alignSelf": "stretch",
+            "flex": 1,
+          }
+        }
+        zoomEnabled={true}
+      >
+        <AIRMap
+          cacheEnabled={false}
+          handlePanDrag={false}
+          initialRegion={null}
+          liteMode={false}
+          mapPadding={
+            Object {
+              "bottom": 48,
+              "left": 48,
+              "right": 48,
+              "top": 48,
+            }
+          }
+          mapType="standard"
+          maxZoomLevel={15}
+          minZoomLevel={3}
+          onChange={[Function]}
+          onLayout={[Function]}
+          onMapReady={[Function]}
+          onMarkerPress={[Function]}
+          onRegionChangeComplete={[Function]}
+          pitchEnabled={false}
+          provider={null}
+          region={null}
+          rotateEnabled={true}
+          scrollEnabled={true}
+          showsMyLocationButton={false}
+          showsPointsOfInterest={false}
+          showsTraffic={false}
+          showsUserLocation={false}
+          style={
+            Object {
+              "alignSelf": "stretch",
+              "flex": 1,
+            }
+          }
+          zoomEnabled={true}
+        >
+          <AIRMap
+            cacheEnabled={false}
+            handlePanDrag={false}
+            initialRegion={null}
+            liteMode={false}
+            mapPadding={
+              Object {
+                "bottom": 48,
+                "left": 48,
+                "right": 48,
+                "top": 48,
+              }
+            }
+            mapType="standard"
+            maxZoomLevel={15}
+            minZoomLevel={3}
+            onChange={[Function]}
+            onLayout={[Function]}
+            onMapReady={[Function]}
+            onMarkerPress={[Function]}
+            onRegionChangeComplete={[Function]}
+            pitchEnabled={false}
+            provider={null}
+            region={null}
+            rotateEnabled={true}
+            scrollEnabled={true}
+            showsMyLocationButton={false}
+            showsPointsOfInterest={false}
+            showsTraffic={false}
+            showsUserLocation={false}
+            style={
+              Object {
+                "alignSelf": "stretch",
+                "flex": 1,
+              }
+            }
+            zoomEnabled={true}
+          />
+        </AIRMap>
+      </MapView>
+    </View>
+  </Component>
+</Maps>
+`;

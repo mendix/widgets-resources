@@ -9,6 +9,7 @@ describe("Zoom level check", () => {
             class: "",
             style: "",
             markers: [],
+            dynamicMarkers: [],
             fitToMarkers: true,
             centerAddress: "",
             centerLatitude: "",

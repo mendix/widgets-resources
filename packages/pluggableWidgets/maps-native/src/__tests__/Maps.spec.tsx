@@ -1,6 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
 import { Maps, Props } from "../Maps";
-import { render } from "react-native-testing-library";
-import { createElement } from "react";
+import { mount } from "enzyme";
+import { dynamicValue } from "@mendix/piw-utils-internal";
 
 describe("", () => {
     let defaultProps: Props;
@@ -10,6 +13,7 @@ describe("", () => {
             name: "maps-test",
             style: [],
             markers: [],
+            dynamicMarkers: [],
             fitToMarkers: true,
             defaultZoomLevel: "city",
             minZoomLevel: "city",
@@ -21,8 +25,30 @@ describe("", () => {
         };
     });
 
-    it("renders", () => {
-        const component = render(<Maps {...defaultProps} />);
-        expect(component.toJSON()).toMatchSnapshot("");
+    it("renders", async () => {
+        defaultProps.markers = [
+            {
+                locationType: "address",
+                address: dynamicValue<string>("Tokyo", false),
+                iconSize: 1,
+                iconColor: "red"
+            },
+            {
+                locationType: "address",
+                address: dynamicValue<string>("Amsterdam", false),
+                iconSize: 1,
+                iconColor: "red"
+            }
+        ];
+        const wrapper = mount(<Maps {...defaultProps} />);
+        // wrapper.setState({ status: "mapReady" });
+        await new Promise(resolve => {
+            setTimeout(resolve, 5000);
+        });
+
+        wrapper.update();
+        console.log(wrapper.state.status);
+        // wrapper.find("MarkerView")
+        expect(wrapper).toMatchSnapshot();
     });
 });
