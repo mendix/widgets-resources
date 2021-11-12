@@ -10,22 +10,30 @@ exports[`renders 1`] = `
   markers={
     Array [
       Object {
-        "address": Object {
-          "status": "available",
-          "value": "Tokyo",
-        },
         "iconColor": "red",
         "iconSize": 1,
-        "locationType": "address",
+        "latitude": Object {
+          "status": "available",
+          "value": "35.6895",
+        },
+        "locationType": "latlng",
+        "longitude": Object {
+          "status": "available",
+          "value": "139.6917",
+        },
       },
       Object {
-        "address": Object {
-          "status": "available",
-          "value": "Amsterdam",
-        },
         "iconColor": "red",
         "iconSize": 1,
-        "locationType": "address",
+        "latitude": Object {
+          "status": "available",
+          "value": "52.3702",
+        },
+        "locationType": "latlng",
+        "longitude": Object {
+          "status": "available",
+          "value": "4.8952",
+        },
       },
     ]
   }
@@ -159,9 +167,169 @@ exports[`renders 1`] = `
               }
             }
             zoomEnabled={true}
-          />
+          >
+            <MapMarker
+              coordinate={
+                Object {
+                  "latitude": 35.6895,
+                  "longitude": 139.6917,
+                }
+              }
+              key="map_marker_0"
+              onPress={[Function]}
+              opacity={1}
+              pinColor="red"
+              stopPropagation={false}
+            >
+              <AIRMapMarker
+                coordinate={
+                  Object {
+                    "latitude": 35.6895,
+                    "longitude": 139.6917,
+                  }
+                }
+                onPress={[Function]}
+                opacity={1}
+                pinColor="red"
+                stopPropagation={false}
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                      "position": "absolute",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <AIRMapMarker
+                  coordinate={
+                    Object {
+                      "latitude": 35.6895,
+                      "longitude": 139.6917,
+                    }
+                  }
+                  onPress={[Function]}
+                  opacity={1}
+                  pinColor="red"
+                  stopPropagation={false}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "position": "absolute",
+                      },
+                      undefined,
+                    ]
+                  }
+                />
+              </AIRMapMarker>
+            </MapMarker>
+            <MapMarker
+              coordinate={
+                Object {
+                  "latitude": 52.3702,
+                  "longitude": 4.8952,
+                }
+              }
+              key="map_marker_1"
+              onPress={[Function]}
+              opacity={1}
+              pinColor="red"
+              stopPropagation={false}
+            >
+              <AIRMapMarker
+                coordinate={
+                  Object {
+                    "latitude": 52.3702,
+                    "longitude": 4.8952,
+                  }
+                }
+                onPress={[Function]}
+                opacity={1}
+                pinColor="red"
+                stopPropagation={false}
+                style={
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                      "position": "absolute",
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <AIRMapMarker
+                  coordinate={
+                    Object {
+                      "latitude": 52.3702,
+                      "longitude": 4.8952,
+                    }
+                  }
+                  onPress={[Function]}
+                  opacity={1}
+                  pinColor="red"
+                  stopPropagation={false}
+                  style={
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "position": "absolute",
+                      },
+                      undefined,
+                    ]
+                  }
+                />
+              </AIRMapMarker>
+            </MapMarker>
+          </AIRMap>
         </AIRMap>
       </MapView>
+      <Component
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#fafafa",
+            "bottom": 0,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+            "zIndex": 99,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#fafafa",
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+              "zIndex": 99,
+            }
+          }
+        >
+          <Component
+            animating={true}
+            color="#999999"
+            hidesWhenStopped={true}
+            size="large"
+          >
+            <ActivityIndicator
+              animating={true}
+              color="#999999"
+              hidesWhenStopped={true}
+              size="large"
+            />
+          </Component>
+        </View>
+      </Component>
     </View>
   </Component>
 </Maps>
