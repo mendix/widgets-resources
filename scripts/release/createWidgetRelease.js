@@ -1,5 +1,6 @@
 const { readdir } = require("fs/promises");
 const { join } = require("path");
+const { ls } = require("shelljs");
 const {
     getUnreleasedChangelogs,
     writeToWidgetChangelogs,
@@ -59,7 +60,7 @@ async function getWidgetReleaseInformation(widgetScope) {
 
     const widgetPath = join(pluggableWidgetsFolder, widgetScope);
     const pkgPath = join(widgetPath, "package.json");
-    const { name, widgetName, version, packagePath, repository } = require(pkgPath);
+    const { name, widgetName, version, repository } = require(pkgPath);
 
     console.log(`Getting the widget release information for ${widgetName} widget...`);
 
@@ -71,12 +72,17 @@ async function getWidgetReleaseInformation(widgetScope) {
         throw new Error(`${pkgPath} version is not defined correctly.`);
     }
 
-    const mpkName = packagePath ? `${packagePath}.${widgetName}` : widgetName;
-    const releaseMpkPath = join(widgetPath, "dist", version, `${mpkName}.mpk`);
+    const mpkFile = ls(join(widgetPath, "dist", "**/*.mpk")).toString();
+
+    if (!mpkFile) {
+        throw new Error("MPK file not found");
+    }
+
+    console.log(`MPK path: ${mpkFile}`);
     const changelogPath = join(widgetPath, "CHANGELOG.md");
 
     return {
-        releaseMpkPath,
+        releaseMpkPath: mpkFile,
         repositoryUrl: repository.url,
         unreleasedChangelogs: await getUnreleasedChangelogs({ version, changelogPath }),
         version,
