@@ -26,7 +26,8 @@ async function main() {
         repositoryUrl,
         unreleasedChangelogs,
         version,
-        widgetName
+        widgetName,
+        changelogPath
     } = await getWidgetReleaseInformation(widgetScope);
 
     if (!unreleasedChangelogs) {
@@ -86,6 +87,7 @@ async function getWidgetReleaseInformation(widgetScope) {
         repositoryUrl: repository.url,
         unreleasedChangelogs: await getUnreleasedChangelogs({ version, changelogPath }),
         version,
-        widgetName
+        widgetName,
+        changelogPath
     };
 }
