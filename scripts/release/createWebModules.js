@@ -4,19 +4,18 @@ const {
     execShellCommand,
     getFiles,
     getPackageInfo,
-    bumpVersionInPackageJson,
     commitAndCreatePullRequest,
     updateChangelogs,
     githubAuthentication,
     cloneRepo,
     createMPK,
-    createGithubRelease,
+    createGithubReleaseFrom,
     exportModuleWithWidgets,
     updateModuleChangelogs
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
-const [moduleFolderNameInRepo, version] = process.env.TAG.split("-v");
+const moduleFolderNameInRepo = process.argv[2];
 const moduleFolder = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}`);
 
 main().catch(e => {
@@ -25,8 +24,8 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["data-widgets", "atlas-content-web", "atlas-core"];
-    if (!modules.includes(moduleFolderNameInRepo) || !version) {
+    const modules = ["data-widgets", "atlas-web-content", "atlas-core"];
+    if (!modules.includes(moduleFolderNameInRepo)) {
         return;
     }
 
@@ -34,7 +33,7 @@ async function main() {
         case "data-widgets":
             await createDataWidgetsModule();
             break;
-        case "atlas-content-web":
+        case "atlas-web-content":
             await createAtlasWebContentModule();
             break;
         case "atlas-core":
@@ -60,12 +59,11 @@ async function createDataWidgetsModule() {
     const dataWidgetsFolders = widgetFolders
         .filter(folder => widgets.includes(folder))
         .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
-    let moduleInfo = {
+    const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
         moduleFolderNameInModeler: "datawidgets"
     };
-    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
 
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
@@ -75,7 +73,13 @@ async function createDataWidgetsModule() {
 
     await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
 
-    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
+        body: moduleChangelogs.replace(/"/g, "'"),
+        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
+        mpkOutput,
+        isDraft: true
+    });
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
 }
@@ -86,18 +90,23 @@ async function createAtlasWebContentModule() {
         join(repoRootPath, "packages/pluggableWidgets", folder)
     );
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
-    let moduleInfo = {
+    const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Web_Content",
         moduleFolderNameInModeler: "atlas_web_content"
     };
-    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
-    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
+        body: moduleChangelogs.replace(/"/g, "'"),
+        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
+        mpkOutput,
+        isDraft: true
+    });
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
 }
@@ -106,18 +115,23 @@ async function createAtlasCoreModule() {
     console.log("Creating the Atlas Web Content module.");
     const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
-    let moduleInfo = {
+    const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Core",
         moduleFolderNameInModeler: "atlas_core"
     };
-    moduleInfo = await bumpVersionInPackageJson(moduleFolder, moduleInfo);
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
-    await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
+        body: moduleChangelogs.replace(/"/g, "'"),
+        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
+        mpkOutput,
+        isDraft: true
+    });
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
 }
@@ -159,7 +173,10 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
             await copyFile(file, dest);
         })
     ]);
-    await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
+    await execShellCommand(
+        `echo ${moduleInfo.version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`,
+        tmpFolder
+    );
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
     if (/nothing to commit/i.test(gitOutput)) {
         console.warn(`Nothing to commit from repo ${tmpFolder}s`);
@@ -190,7 +207,10 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
 
     await buildAndCopyWidgets(tmpFolder, widgets);
 
-    await execShellCommand(`echo ${version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`, tmpFolder);
+    await execShellCommand(
+        `echo ${moduleInfo.version} > themesource/${moduleInfo.moduleFolderNameInModeler}/.version`,
+        tmpFolder
+    );
     const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
     if (/nothing to commit/i.test(gitOutput)) {
         console.warn(`Nothing to commit from repo ${tmpFolder}`);
