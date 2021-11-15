@@ -1,6 +1,5 @@
 const { basename, extname, join, resolve } = require("path");
-const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir } = require("fs/promises");
-const { mkdir } = require("shelljs");
+const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir } = require("fs/promises");
 const { exec } = require("child_process");
 
 const regex = {
@@ -214,7 +213,7 @@ async function cloneRepo(githubUrl, localFolder) {
     const githubUrlDomain = githubUrl.replace("https://", "");
     const githubUrlAuthenticated = `https://${process.env.GH_USERNAME}:${process.env.GH_PAT}@${githubUrlDomain}`;
     await rm(localFolder, { recursive: true, force: true });
-    mkdir("-p", localFolder);
+    await mkdir(localFolder, { recursive: true });
     await execShellCommand(`git clone ${githubUrlAuthenticated} ${localFolder}`);
     await setLocalGitCredentials(localFolder);
 }
