@@ -5,11 +5,40 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Changed
-- We removed the Snippet, Example enumeration and version constant from the module.
+## [2.0.2] Data Widgets - 2021-11-15
+undefined
 
+## [2.1.0] DatagridDateFilter
 ### Added
-- We added a .version file inside themesource/datawidgets containing the module version.
+- We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+- We added a "Enable advanced options" toggle for Studio users.
+
+## [2.1.0] DatagridDropdownFilter
+### Added
+- We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+- We added a "Enable advanced options" toggle for Studio users.
+
+## [2.1.0] DatagridNumberFilter
+### Added
+- We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+- We added a "Enable advanced options" toggle for Studio users.
+
+## [2.1.0] DatagridTextFilter
+### Added
+- We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
+- We added a "Enable advanced options" toggle for Studio users.
+
+## [2.0.2] Datagrid
+### Changed
+- We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
+
+## [1.0.2] Gallery
+### Changed
+- We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
+
+## [1.0.1] TreeNode
+### Changed
+- We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
 
 ## [2.0.2] - 2021-10-13
 
