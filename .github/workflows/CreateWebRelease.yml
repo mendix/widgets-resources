@@ -19,8 +19,7 @@ jobs:
                   submodules: false
             - name: "Installing dependencies"
               run: npm install
-            - name: "Building ${{ github.event.inputs.widget-name }} widget"
-              if: ${{ endsWith(github.event.inputs.widget-name, '-web') }}
+            - name: "Building ${{ github.event.inputs.widget-name }}"
               run: "npm run release -- --scope '${{ github.event.inputs.widget-name }}'"
             - name: "Creating ${{ github.event.inputs.widget-name }} widget release"
               if: ${{ endsWith(github.event.inputs.widget-name, '-web') }}
