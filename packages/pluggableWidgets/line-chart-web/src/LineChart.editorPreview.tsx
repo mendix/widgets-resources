@@ -1,11 +1,12 @@
 import { createElement } from "react";
-import { LineChart } from "./components/LineChart";
+import { ChartWidget } from "@mendix/shared-charts";
 
 export function preview() {
     // TODO:
     return (
-        <LineChart
-            data={[{ x: [], y: [] }]}
+        <ChartWidget
+            className="widget-chart-line"
+            data={[{ x: [], y: [], customSeriesOptions: "" }]}
             widthUnit={"percentage"}
             width={0}
             heightUnit={"pixels"}
@@ -14,6 +15,12 @@ export function preview() {
             xAxisLabel={undefined}
             yAxisLabel={undefined}
             gridLinesMode={"both"}
+            showSidebarEditor={false}
+            customLayout={""}
+            customConfig={""}
+            configOptions={{}}
+            layoutOptions={{}}
+            seriesOptions={{}}
         />
     );
 }

@@ -1,11 +1,11 @@
 import Big from "big.js";
-import { ObjectItem } from "mendix";
+import { ObjectItem, DynamicValue, ListValue, ListExpressionValue, ListAttributeValue } from "mendix";
 import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Datum, PlotData } from "plotly.js";
-import { LinesType } from "../../typings/LineChartProps";
 
-export type LineChartDataPoints = Pick<PlotData, "x" | "y"> & {
+export type PlotChartDataPoints = Pick<PlotData, "x" | "y"> & {
+    // We want this optional.
     name?: PlotData["name"];
 };
 
@@ -16,34 +16,38 @@ interface DataSourceItemGroup {
     items: ObjectItem[];
 }
 
-interface DataPointsExtraction {
-    dataPoints: LineChartDataPoints;
-    xFormatter?: (xValue: number | Date) => string;
-    yFormatter?: (yValue: number | Date) => string;
-}
-
-export interface LineChartSeries {
-    dataPoints: LineChartDataPoints;
-    xFormatter?: (xValue: number | Date) => string;
-    yFormatter?: (yValue: number | Date) => string;
-    interpolation: PlotData["line"]["shape"];
-    name?: string;
-    lineStyle: "line" | "lineWithMarkers" | "custom";
+export interface PlotChartSeries extends PlotChartDataPoints {
     customLineStyle?: string;
-    markerColor: string | undefined;
-    lineColor: string | undefined;
+    customSeriesOptions: string;
 }
 
-export function useSeries(series: LinesType[]): LineChartSeries[] | null {
-    const [chartSeries, setChartSeries] = useState<LineChartSeries[] | null>(null);
+interface PlotDataSeries {
+    dataSet: "static" | "dynamic";
+    customSeriesOptions: string;
+    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
+    staticDataSource?: ListValue;
+    dynamicDataSource?: ListValue;
+    staticName?: DynamicValue<string>;
+    dynamicName?: ListExpressionValue<string>;
+    staticXAttribute?: ListAttributeValue<Date | Big>;
+    dynamicXAttribute?: ListAttributeValue<Date | Big>;
+    staticYAttribute?: ListAttributeValue<Date | Big>;
+    dynamicYAttribute?: ListAttributeValue<Date | Big>;
+}
+
+export function usePlotChartDataSeries<T extends PlotDataSeries>(
+    series: T[],
+    mapSerie: (serie: T) => Partial<PlotData>
+): PlotChartSeries[] | null {
+    const [chartSeries, setChartSeries] = useState<PlotChartSeries[] | null>(null);
 
     useEffect(() => {
         const loadedSeries = series
             .map(element => {
                 const singleSeriesLoader = element.dataSet === "static" ? loadStaticSeries : loadDynamicSeries;
-                return singleSeriesLoader(element);
+                return singleSeriesLoader(element, mapSerie);
             })
-            .filter((element): element is LineChartSeries | LineChartSeries[] => Boolean(element))
+            .filter((element): element is PlotChartSeries | PlotChartSeries[] => Boolean(element))
             .flat();
         setChartSeries(loadedSeries.length === 0 ? null : loadedSeries);
     }, [series]);
@@ -51,32 +55,34 @@ export function useSeries(series: LinesType[]): LineChartSeries[] | null {
     return chartSeries;
 }
 
-function loadStaticSeries(series: LinesType): LineChartSeries | null {
-    const { interpolation, lineStyle, staticName, dataSet, markerColor, lineColor } = series;
+function loadStaticSeries(
+    series: PlotDataSeries,
+    mapSerie: (serie: PlotDataSeries) => Partial<PlotData>
+): PlotChartSeries | null {
+    const { staticName, dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "static") {
         throw Error("Expected series to be static");
     }
 
-    const dataPointsExtraction = extractDataPoints(series, staticName?.value);
+    const dataPoints = extractDataPoints(series, staticName?.value);
 
-    if (!dataPointsExtraction) {
+    if (!dataPoints) {
         return null;
     }
 
     return {
-        dataPoints: dataPointsExtraction.dataPoints,
-        xFormatter: dataPointsExtraction.xFormatter,
-        yFormatter: dataPointsExtraction.yFormatter,
-        interpolation,
-        lineStyle,
-        markerColor: markerColor?.value,
-        lineColor: lineColor?.value
+        ...dataPoints,
+        ...mapSerie(series),
+        customSeriesOptions
     };
 }
 
-function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
-    const { lineStyle, interpolation, dataSet, markerColor, lineColor } = series;
+function loadDynamicSeries(
+    series: PlotDataSeries,
+    mapSerie: (serie: PlotDataSeries) => Partial<PlotData>
+): PlotChartSeries[] | null {
+    const { dataSet, customSeriesOptions } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -90,28 +96,24 @@ function loadDynamicSeries(series: LinesType): LineChartSeries[] | null {
 
     const loadedSeries = dataSourceItemGroups
         .map(itemGroup => {
-            const dataPointsExtraction = extractDataPoints(series, itemGroup.dynamicNameValue, itemGroup.items);
+            const dataPoints = extractDataPoints(series, itemGroup.dynamicNameValue, itemGroup.items);
 
-            if (!dataPointsExtraction) {
+            if (!dataPoints) {
                 return null;
             }
 
             return {
-                dataPoints: dataPointsExtraction.dataPoints,
-                xFormatter: dataPointsExtraction.xFormatter,
-                yFormatter: dataPointsExtraction.yFormatter,
-                interpolation,
-                lineStyle,
-                markerColor: markerColor?.value,
-                lineColor: lineColor?.value
-            } as LineChartSeries;
+                ...dataPoints,
+                ...mapSerie(series),
+                customSeriesOptions
+            };
         })
-        .filter((element): element is LineChartSeries => Boolean(element));
+        .filter((element): element is PlotChartSeries => Boolean(element));
 
     return loadedSeries;
 }
 
-function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
+function groupDataSourceItems(series: PlotDataSeries): DataSourceItemGroup[] | null {
     const { dynamicDataSource, dynamicName, groupByAttribute, dataSet } = series;
 
     if (dataSet !== "dynamic") {
@@ -168,10 +170,10 @@ function groupDataSourceItems(series: LinesType): DataSourceItemGroup[] | null {
 }
 
 function extractDataPoints(
-    series: LinesType,
+    series: PlotDataSeries,
     seriesName: string | undefined,
     dataSourceItems?: ObjectItem[]
-): DataPointsExtraction | null {
+): PlotChartDataPoints | null {
     const xValue = series.dataSet === "static" ? ensure(series.staticXAttribute) : ensure(series.dynamicXAttribute);
     const yValue = series.dataSet === "static" ? ensure(series.staticYAttribute) : ensure(series.dynamicYAttribute);
 
@@ -184,14 +186,8 @@ function extractDataPoints(
 
         dataSourceItems = dataSource.items;
     }
-
-    const dataPointsExtraction: DataPointsExtraction = {
-        dataPoints: {
-            x: [],
-            y: [],
-            ...(seriesName ? { name: seriesName } : {})
-        }
-    };
+    const xData: Datum[] = [];
+    const yData: Datum[] = [];
 
     for (const item of dataSourceItems) {
         const x = xValue.get(item);
@@ -201,21 +197,13 @@ function extractDataPoints(
             return null;
         }
 
-        if (!dataPointsExtraction.xFormatter && !dataPointsExtraction.yFormatter) {
-            dataPointsExtraction.xFormatter = (xValue: number | Date) =>
-                x.formatter.format(typeof xValue === "number" ? new Big(xValue) : xValue);
-
-            dataPointsExtraction.yFormatter = (yValue: number | Date) =>
-                y.formatter.format(typeof yValue === "number" ? new Big(yValue) : yValue);
-        }
-
-        (dataPointsExtraction.dataPoints.x as Datum[]).push(
-            x.value instanceof Date ? x.value : Number(x.value.toString())
-        );
-        (dataPointsExtraction.dataPoints.y as Datum[]).push(
-            y.value instanceof Date ? y.value : Number(y.value.toString())
-        );
+        xData.push(x.value instanceof Date ? x.value : Number(x.value.toString()));
+        yData.push(y.value instanceof Date ? y.value : Number(y.value.toString()));
     }
 
-    return dataPointsExtraction;
+    return {
+        ...(seriesName ? { name: seriesName } : {}),
+        x: xData,
+        y: yData
+    };
 }

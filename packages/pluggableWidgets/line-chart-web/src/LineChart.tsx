@@ -1,25 +1,45 @@
+import classNames from "classnames";
 import { createElement, ReactElement } from "react";
+import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
+import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { LineChartContainerProps } from "../typings/LineChartProps";
-import { LineChart as Chart } from "./components/LineChart";
-import { useSeries } from "./utils/SeriesLoader";
+
+const lineChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
+    xaxis: {
+        zeroline: true,
+        fixedrange: true,
+        gridcolor: "#d7d7d7",
+        zerolinecolor: "#d7d7d7"
+    },
+    yaxis: {
+        fixedrange: true,
+        gridcolor: "#d7d7d7",
+        zeroline: true,
+        zerolinecolor: "#d7d7d7"
+    }
+};
+const lineChartConfigOptions: ChartWidgetProps["configOptions"] = {
+    responsive: true
+};
+const lineChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
-    const chartLines = useSeries(props.lines);
-
-    const data = chartLines?.map(line => ({
-        ...line.dataPoints,
-        type: "scatter" as const,
-        mode: line.lineStyle === "line" ? ("lines" as const) : ("lines+markers" as const),
+    const chartLines = usePlotChartDataSeries(props.lines, line => ({
+        type: "scatter",
+        mode: line.lineStyle === "line" ? "lines" : "lines+markers",
         line: {
             shape: line.interpolation,
-            color: line.lineColor
+            color: line.lineColor?.value
         },
-        marker: { color: line.markerColor }
+        marker: {
+            color: line.markerColor?.value
+        }
     }));
 
     return (
-        <Chart
-            data={data ?? []}
+        <ChartWidget
+            className={classNames("widget-line-chart", props.class)}
+            data={chartLines ?? []}
             width={props.width}
             widthUnit={props.widthUnit}
             height={props.height}
@@ -28,6 +48,12 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
             gridLinesMode={props.gridLines}
+            showSidebarEditor={props.developerMode === "developer"}
+            customLayout={props.customLayout}
+            customConfig={props.customConfigurations}
+            layoutOptions={lineChartLayoutOptions}
+            configOptions={lineChartConfigOptions}
+            seriesOptions={lineChartSeriesOptions}
         />
     );
 }

@@ -1,0 +1,92 @@
+.widget-sidebar {
+    color: #5e5e5e;
+    background: #fff;
+    border: 1px solid #d2d6de;
+    position: fixed;
+    padding-top: 0;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    height: 100%;
+    min-height: 400px;
+    overflow-x: hidden;
+    z-index: 1010;
+    -webkit-transition: right 0.3s ease-in-out;
+    -o-transition: right 0.3s ease-in-out;
+    transition: right 0.3s ease-in-out;
+
+    &.widget-sidebar-open {
+        right: 0;
+
+        .overlay {
+            visibility: visible;
+        }
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .sidebar-content {
+        height: 100%;
+        position: relative;
+
+        .sidebar-content-header {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            background: #f5f5f5;
+
+            .close-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100%;
+                width: 100%;
+
+                .removeIcon {
+                    height: 24px;
+                    width: 24px;
+                }
+            }
+
+            select {
+                &.form-control {
+                    option {
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .widget-sidebar {
+        padding-top: 0;
+
+        &.widget-sidebar-open {
+            width: 100%;
+        }
+    }
+}
+
+.replaced-config {
+    position: absolute;
+
+    &:after {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 1px;
+        background: #000;
+        content: "";
+        width: 100%;
+        display: block;
+    }
+}

@@ -19,8 +19,7 @@ export type AggregationTypeEnum =
     | "median"
     | "mode"
     | "first"
-    | "last"
-    | "stddev";
+    | "last";
 
 export type InterpolationEnum = "linear" | "spline";
 
@@ -38,12 +37,11 @@ export interface LinesType {
     staticYAttribute?: ListAttributeValue<Date | Big>;
     dynamicYAttribute?: ListAttributeValue<Date | Big>;
     aggregationType: AggregationTypeEnum;
+    customSeriesOptions: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
     markerColor?: DynamicValue<string>;
-    showAdvancedAppearanceOptions: boolean;
-    customLineStyleOptions: string;
     onClickAction?: ActionValue;
     onClickTooltip?: ActionValue;
 }
@@ -68,12 +66,11 @@ export interface LinesPreviewType {
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
+    customSeriesOptions: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor: string;
     markerColor: string;
-    showAdvancedAppearanceOptions: boolean;
-    customLineStyleOptions: string;
     onClickAction: {} | null;
     onClickTooltip: {} | null;
 }
@@ -85,7 +82,6 @@ export interface LineChartContainerProps {
     tabIndex?: number;
     lines: LinesType[];
     showLegend: boolean;
-    chartTitle?: DynamicValue<string>;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     developerMode: DeveloperModeEnum;
@@ -94,7 +90,6 @@ export interface LineChartContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
-    showAdvancedOptions: boolean;
     customLayout: string;
     customConfigurations: string;
 }
@@ -104,7 +99,6 @@ export interface LineChartPreviewProps {
     style: string;
     lines: LinesPreviewType[];
     showLegend: boolean;
-    chartTitle: string;
     xAxisLabel: string;
     yAxisLabel: string;
     developerMode: DeveloperModeEnum;
@@ -113,7 +107,6 @@ export interface LineChartPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
-    showAdvancedOptions: boolean;
     customLayout: string;
     customConfigurations: string;
 }

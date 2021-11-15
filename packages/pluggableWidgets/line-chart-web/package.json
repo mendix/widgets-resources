@@ -38,13 +38,11 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
-    "@types/react-plotly.js": "^2.5.0",
     "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
-    "classnames": "^2.2.6",
-    "plotly.js": "^2.5.1",
-    "react-plotly.js": "^2.5.1"
+    "@mendix/shared-charts": "^1.0.0",
+    "classnames": "^2.2.6"
   }
 }
