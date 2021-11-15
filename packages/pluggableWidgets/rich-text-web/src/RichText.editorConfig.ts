@@ -1,23 +1,53 @@
-import { Problem, Properties } from "@mendix/piw-utils-internal";
+import { Problem, Properties, hidePropertiesIn } from "@mendix/piw-utils-internal";
 import { RichTextPreviewProps } from "../typings/RichTextProps";
 
-export function getProperties(_values: RichTextPreviewProps, defaultValues: Properties): Properties {
-    return defaultValues;
+export function getProperties(values: RichTextPreviewProps, defaultProperties: Properties): Properties {
+    if (!values.advancedMode) {
+        hidePropertiesIn(defaultProperties, values, [
+            "maxChars",
+            "wordCount",
+            "advancedContentFilter",
+            "codeHighlight"
+        ]);
+    }
+    if (values.preset !== "custom") {
+        hidePropertiesIn(defaultProperties, values, [
+            "toolsGroup",
+            "toolbarConfig",
+            "separatorGroup",
+            "stylesGroup",
+            "basicStylesGroup",
+            "clipboardGroup",
+            "colorsGroup",
+            "documentGroup",
+            "editingGroup",
+            "formsGroup",
+            "linksGroup",
+            "paragraphGroup",
+            "othersGroup",
+            "separator2Group"
+        ]);
+    }
+    if (values.toolbarConfig === "advanced") {
+        hidePropertiesIn(defaultProperties, values, [
+            "toolsGroup",
+            "separatorGroup",
+            "stylesGroup",
+            "basicStylesGroup",
+            "clipboardGroup",
+            "colorsGroup",
+            "documentGroup",
+            "editingGroup",
+            "formsGroup",
+            "linksGroup",
+            "paragraphGroup",
+            "othersGroup",
+            "separator2Group"
+        ]);
+    }
+    return defaultProperties;
 }
 
-export function check(values: RichTextPreviewProps): Problem[] {
-    const errors: Problem[] = [];
-    if (values.minNumberOfLines! < 0) {
-        errors.push({
-            property: "minNumberOfLines",
-            message: "The minimum number of lines must not be less than 0"
-        });
-    }
-    if (values.maxNumberOfLines! < 0) {
-        errors.push({
-            property: "maxNumberOfLines",
-            message: "The maximum number of lines must not be less than 0"
-        });
-    }
-    return errors;
+export function check(_values: RichTextPreviewProps): Problem[] {
+    return [];
 }

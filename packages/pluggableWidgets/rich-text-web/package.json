@@ -40,6 +40,7 @@
     "@types/classnames": "^2.2.6",
     "@types/sanitize-html": "^1.18.2",
     "@types/ckeditor4": "^4.16.1",
+    "@types/ckeditor": "^4.9.10",
     "cross-env": "^7.0.2",
     "eslint": "^7.20.0"
   },

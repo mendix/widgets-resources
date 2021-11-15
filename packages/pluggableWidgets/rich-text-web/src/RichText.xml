@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.richtext.RichText" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/"
+<widget id="com.mendix.widget.custom.richtext.RichText" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Rich Text</name>
     <description>Rich inline or toolbar text editing</description>
@@ -21,23 +21,12 @@
                     <description>The strict sanitize rules will remove all unsupported HTML tags and attributes before displaying.WARNING disabling this option is a security risk for XSS attacks
                     </description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Appearance">
-                <property key="theme" type="enumeration" defaultValue="snow">
-                    <caption>Show as</caption>
+                <property key="editorType" type="enumeration" defaultValue="classic">
+                    <caption>Editor theme</caption>
                     <description>Display the editor formatting options in a toolbar or a bubble when text is selected</description>
                     <enumerationValues>
-                        <enumerationValue key="snow">Toolbar</enumerationValue>
-                        <enumerationValue key="bubble">Bubble</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="editorOption" type="enumeration" defaultValue="basic">
-                    <caption>Text formatting options</caption>
-                    <description>Formatting options shown in the toolbar or bubble. More options can be set in the 'Custom options'</description>
-                    <enumerationValues>
-                        <enumerationValue key="basic">Basic</enumerationValue>
-                        <enumerationValue key="extended">Extended</enumerationValue>
-                        <enumerationValue key="custom">Custom</enumerationValue>
+                        <enumerationValue key="classic">Classic</enumerationValue>
+                        <enumerationValue key="inline">Inline</enumerationValue>
                     </enumerationValues>
                 </property>
                 <systemProperty key="Editability"/>
@@ -50,69 +39,241 @@
                         <enumerationValue key="borderedToolbar">Bordered toolbar</enumerationValue>
                     </enumerationValues>
                 </property>
-
-                <property key="minNumberOfLines" type="integer" defaultValue="10">
-                    <caption>Minimum number of lines</caption>
-                    <description>When set to 0, the minimum number of lines won't be set</description>
-                </property>
-                <property key="maxNumberOfLines" type="integer" defaultValue="10">
-                    <caption>Maximum number of lines</caption>
-                    <description>When greater that the minimum, the input will auto grow, until the specified lines are reached. When set to 0, the maximum number of lines won't be set</description>
-                </property>
-                <property key="customOptions" type="object" isList="true" required="false">
-                    <caption>Formatting options</caption>
-                    <description>Options when the 'Text formatting options' is set to 'Custom'</description>
-                    <properties>
-                        <property key="option" type="enumeration" defaultValue="bold">
-                            <caption>Options</caption>
-                            <category>General</category>
-                            <description>Use the spacer to group the options</description>
-                            <enumerationValues>
-                                <enumerationValue key="bold">Bold</enumerationValue>
-                                <enumerationValue key="italic">Italic</enumerationValue>
-                                <enumerationValue key="underline">Underline</enumerationValue>
-                                <enumerationValue key="strike">Strike</enumerationValue>
-                                <enumerationValue key="link">Link</enumerationValue>
-                                <enumerationValue key="headings">Headings</enumerationValue>
-                                <enumerationValue key="orderedList">Ordered list</enumerationValue>
-                                <enumerationValue key="bulletList">Bullet list</enumerationValue>
-                                <enumerationValue key="blockQuote">Block quote</enumerationValue>
-                                <enumerationValue key="codeBlock">Code block</enumerationValue>
-                                <enumerationValue key="subScript">Subscript</enumerationValue>
-                                <enumerationValue key="superScript">Superscript</enumerationValue>
-                                <enumerationValue key="indent">Indent</enumerationValue>
-                                <enumerationValue key="outdent">Outdent</enumerationValue>
-                                <enumerationValue key="direction">Direction</enumerationValue>
-                                <enumerationValue key="textColor">Text color</enumerationValue>
-                                <enumerationValue key="fillColor">Fill color</enumerationValue>
-                                <enumerationValue key="align">Align</enumerationValue>
-                                <enumerationValue key="clean">Clear formatting</enumerationValue>
-                                <enumerationValue key="spacer">-- Spacer --</enumerationValue>
-                            </enumerationValues>
-                        </property>
-                    </properties>
-                </property>
-
-            </propertyGroup>
-            <!--            <propertyGroup caption="Toolbars"/>-->
-            <!--            <propertyGroup caption="Dimensions"/>-->
-            <!--            <propertyGroup caption="Behavior"/>-->
-            <!--            <propertyGroup caption="Images"/>-->
-            <!--            <propertyGroup caption="Advanced"/>-->
-            <propertyGroup caption="Events">
-                <property key="tabAction" type="enumeration" defaultValue="indent">
-                    <caption>Tab key behavior</caption>
-                    <description>Press 'Tab' to indent text or to move focus to the next element</description>
-                    <enumerationValues>
-                        <enumerationValue key="indent">Indent</enumerationValue>
-                        <enumerationValue key="changeFocus">Focus next</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="action" type="action">
-                    <caption>On change</caption>
+                <property key="advancedMode" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
                     <description/>
                 </property>
             </propertyGroup>
+
+        </propertyGroup>
+        <propertyGroup caption="Toolbars">
+            <propertyGroup caption="Toolbars">
+                <property key="preset" type="enumeration" defaultValue="basic">
+                    <caption>Presets</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="standard">Standard</enumerationValue>
+                        <enumerationValue key="full">Full</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="toolbarConfig" type="enumeration" defaultValue="basic">
+                    <caption>Toolbar group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="advanced">Advanced</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="documentGroup" type="enumeration" defaultValue="yes">
+                    <caption>Document Group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="clipboardGroup" type="enumeration" defaultValue="yes">
+                    <caption>Clipboard Group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="editingGroup" type="enumeration" defaultValue="yes">
+                    <caption>Editing Group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="formsGroup" type="enumeration" defaultValue="yes">
+                    <caption>Forms group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="separatorGroup" type="enumeration" defaultValue="yes">
+                    <caption>Separator group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="basicStylesGroup" type="enumeration" defaultValue="yes">
+                    <caption>Basic style group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="paragraphGroup" type="enumeration" defaultValue="yes">
+                    <caption>Paragraph group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="linksGroup" type="enumeration" defaultValue="yes">
+                    <caption>Links group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="separator2Group" type="enumeration" defaultValue="yes">
+                    <caption>Separator 2 group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="stylesGroup" type="enumeration" defaultValue="yes">
+                    <caption>Styles group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="colorsGroup" type="enumeration" defaultValue="yes">
+                    <caption>Colors group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="toolsGroup" type="enumeration" defaultValue="yes">
+                    <caption>Tools group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="othersGroup" type="enumeration" defaultValue="yes">
+                    <caption>Others group</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="yes">Yes</enumerationValue>
+                        <enumerationValue key="no">No</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Dimensions">
+            <propertyGroup caption="Dimensions">
+                <property key="widthUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Width unit</caption>
+                    <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="width" type="integer" defaultValue="100">
+                    <caption>Width</caption>
+                    <description/>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="75">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onKeyPress" type="action">
+                <caption>On key press</caption>
+                <description/>
+            </property>
+            <property key="onChange" type="action">
+                <caption>On change</caption>
+                <description/>
+            </property>
+            <property key="enterMode" type="enumeration" defaultValue="paragraph">
+                <caption>Enter mode</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="paragraph">Paragraph</enumerationValue>
+                    <enumerationValue key="breakLines">Break lines</enumerationValue>
+                    <enumerationValue key="blocks">Blocks</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="shiftEnterMode" type="enumeration" defaultValue="paragraph">
+                <caption>Shift enter mode</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="paragraph">Paragraph</enumerationValue>
+                    <enumerationValue key="breakLines">Break lines</enumerationValue>
+                    <enumerationValue key="blocks">Blocks</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="autoParagraph" type="enumeration" defaultValue="yes">
+                <caption>Auto paragraph</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="yes">Yes</enumerationValue>
+                    <enumerationValue key="no">No</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="spellChecker" type="enumeration" defaultValue="yes">
+                <caption>Spell checker</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="yes">Yes</enumerationValue>
+                    <enumerationValue key="no">No</enumerationValue>
+                </enumerationValues>
+            </property>
+        </propertyGroup>
+        <propertyGroup caption="Advanced">
+            <property key="codeHighlight" type="enumeration" defaultValue="no">
+                <caption>Enable code highlight</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="yes">Yes</enumerationValue>
+                    <enumerationValue key="no">No</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="wordCount" type="enumeration" defaultValue="no">
+                <caption>Word count</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="yes">Yes</enumerationValue>
+                    <enumerationValue key="no">No</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="maxChars" type="integer" defaultValue="0">
+                <caption>Maximum characters</caption>
+                <description/>
+            </property>
+            <property key="advancedContentFilter" type="enumeration" defaultValue="no">
+                <caption>Advanced content filter</caption>
+                <description/>
+                <enumerationValues>
+                    <enumerationValue key="yes">Yes</enumerationValue>
+                    <enumerationValue key="no">No</enumerationValue>
+                </enumerationValues>
+            </property>
         </propertyGroup>
     </properties>
 </widget>
