@@ -1,15 +1,15 @@
-name: Create widget release
+name: Create web release
 
 on:
     workflow_dispatch:
         inputs:
             widget-name:
-                description: "Widget to release"
+                description: "Web Widget/Module to release"
                 required: true
 
 jobs:
     release:
-        name: "Create widget release"
+        name: "Create web widget/module release"
         runs-on: ubuntu-latest
 
         steps:
@@ -20,9 +20,19 @@ jobs:
             - name: "Installing dependencies"
               run: npm install
             - name: "Building ${{ github.event.inputs.widget-name }} widget"
+              if: ${{ endsWith(github.event.inputs.widget-name, '-web') }}
               run: "npm run release -- --scope '${{ github.event.inputs.widget-name }}'"
             - name: "Creating ${{ github.event.inputs.widget-name }} widget release"
+              if: ${{ endsWith(github.event.inputs.widget-name, '-web') }}
               run: "npm run release-github:widget '${{ github.event.inputs.widget-name }}'"
+              env:
+                  GH_USERNAME: ${{ secrets.GH_USERNAME }}
+                  GH_EMAIL: ${{ secrets.GH_EMAIL }}
+                  GH_NAME: ${{ secrets.GH_NAME }}
+                  GH_PAT: ${{ secrets.GH_PAT }}
+            - name: "Creating ${{ github.event.inputs.widget-name }} module release"
+              if: ${{ !endsWith(github.event.inputs.widget-name, '-web')) }}
+              run: "npm run create-modules:web '${{ github.event.inputs.widget-name }}'"
               env:
                   GH_USERNAME: ${{ secrets.GH_USERNAME }}
                   GH_EMAIL: ${{ secrets.GH_EMAIL }}
