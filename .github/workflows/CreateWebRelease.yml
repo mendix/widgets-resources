@@ -31,7 +31,7 @@ jobs:
                   GH_NAME: ${{ secrets.GH_NAME }}
                   GH_PAT: ${{ secrets.GH_PAT }}
             - name: "Creating ${{ github.event.inputs.widget-name }} module release"
-              if: ${{ !endsWith(github.event.inputs.widget-name, '-web')) }}
+              if: ${{ !endsWith(github.event.inputs.widget-name, '-web') }}
               run: "npm run create-modules:web '${{ github.event.inputs.widget-name }}'"
               env:
                   GH_USERNAME: ${{ secrets.GH_USERNAME }}
