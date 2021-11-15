@@ -68,15 +68,7 @@ async function getPackageInfo(path) {
 
 // Create reusable mxbuild image
 async function createModuleMpkInDocker(sourceDir, moduleName, mendixVersion, excludeFilesRegExp) {
-    const ghcr = process.env.CI ? "ghcr.io/mendix/widgets-resources/" : "";
-
-    if (ghcr) {
-        console.log(`Pulling mxbuild:${mendixVersion} docker image from Github Container Registry...`);
-        await execShellCommand(`docker pull ${ghcr}mxbuild:${mendixVersion}`);
-    }
-    const existingImages = (await execShellCommand(`docker image ls -q ${ghcr}mxbuild:${mendixVersion}`))
-        .toString()
-        .trim();
+    const existingImages = (await execShellCommand(`docker image ls -q mxbuild:${mendixVersion}`)).toString().trim();
     if (!existingImages) {
         console.log(`Creating new mxbuild docker image...`);
         await execShellCommand(
