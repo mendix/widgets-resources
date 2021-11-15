@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.2] - 2021-10-13
+
 ### Added
 - We added the possibility to store the filter value in an attribute and trigger an onChange event on every filter change.
 - We added a "Enable advanced options" toggle for Studio users.

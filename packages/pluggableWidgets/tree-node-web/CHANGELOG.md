@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.0.1] - 2021-10-13
+
 ### Changed
 - We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
 
