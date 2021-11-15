@@ -11,9 +11,7 @@ jobs:
     release:
         name: "Create web widget/module release"
         runs-on: ubuntu-latest
-        permissions:
-          packages: read
-          contents: read
+
         steps:
             - name: "Checking-out code"
               uses: actions/checkout@v2

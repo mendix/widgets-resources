@@ -11,9 +11,7 @@ jobs:
     publish_release:
         name: "Marketplace Release"
         runs-on: ubuntu-latest
-        permissions:
-          packages: read
-          contents: read
+
         steps:
             - name: "Checking-out code"
               uses: actions/checkout@v2
