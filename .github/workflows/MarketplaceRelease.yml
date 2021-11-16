@@ -6,6 +6,9 @@ on:
             - "*-web-v*"
             - "*-native-v*"
             - "*-hybrid-v*"
+            - "data-widgets-v*"
+            - "atlas-core-v*"
+            - "atlas-web-*-v*"
 
 jobs:
     publish_release:
