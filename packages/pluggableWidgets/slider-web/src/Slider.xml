@@ -141,7 +141,7 @@
             <propertyGroup caption="Markers">
                 <property key="noOfMarkers" type="integer" defaultValue="2">
                     <caption>Number of markers</caption>
-                    <description>Marker ticks on the slider (visible when larger than 2)</description>
+                    <description>Marker ticks on the slider (hidden if value is 0)</description>
                 </property>
                 <property key="decimalPlaces" type="integer" defaultValue="0">
                     <caption>Decimal places</caption>

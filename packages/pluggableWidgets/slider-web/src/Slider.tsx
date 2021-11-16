@@ -76,6 +76,7 @@ export default function Slider(props: SliderContainerProps): ReactNode {
 
     return (
         <SliderComponent
+            disabled={valueAttribute.readOnly}
             className={className}
             rootStyle={style}
             vertical={isVertical(props)}
