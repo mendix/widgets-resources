@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.3] - 2021-11-16
+
 ### Fixed
 - We fixed an issue causing a content inside rows to be re-rendered while using sorting or filtering.
 
