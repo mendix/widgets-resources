@@ -1,7 +1,7 @@
 import { render } from "enzyme";
 import { createElement } from "react";
 import { Table, TableProps } from "../Table";
-import { ObjectItem } from "mendix";
+import { ObjectItem, GUID } from "mendix";
 
 describe("Table", () => {
     it("renders the structure correctly", () => {
@@ -191,6 +191,6 @@ function mockTableProps(): TableProps<ObjectItem> {
         filterRenderer: () => <input type="text" value="dummy" />,
         cellRenderer: (renderWrapper, _, columnIndex) => renderWrapper(columns[columnIndex].header),
         headerWrapperRenderer: (_index, header) => header,
-        data: [{ id: "123456" as any }]
+        data: [{ id: "123456" as GUID }]
     };
 }

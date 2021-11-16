@@ -13,7 +13,7 @@ import { Header } from "./Header";
 import { AlignmentEnum, ColumnsPreviewType, WidthEnum } from "../../typings/DatagridProps";
 import { Big } from "big.js";
 import classNames from "classnames";
-import { EditableValue } from "mendix";
+import { EditableValue, ObjectItem } from "mendix";
 import { SortingRule, useSettings } from "../utils/settings";
 import { ColumnResizer } from "./ColumnResizer";
 import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/web";
@@ -23,7 +23,7 @@ export type TableColumn = Omit<
     "attribute" | "columnClass" | "content" | "dynamicText" | "filter" | "showContentAs"
 >;
 
-export interface TableProps<T> {
+export interface TableProps<T extends ObjectItem> {
     cellRenderer: (
         renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
         value: T,
@@ -77,7 +77,7 @@ export interface ColumnProperty {
     weight: number;
 }
 
-export function Table<T>(props: TableProps<T>): ReactElement {
+export function Table<T extends ObjectItem>(props: TableProps<T>): ReactElement {
     const isInfinite = !props.paging;
     const [isDragging, setIsDragging] = useState(false);
     const [dragOver, setDragOver] = useState("");
@@ -162,7 +162,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                       (children, className, onClick) => {
                           return (
                               <div
-                                  key={`row_${rowIndex}_cell_${column.id}`}
+                                  key={`row_${value.id}_cell_${column.id}`}
                                   className={classNames("td", { "td-borders": rowIndex === 0 }, className, {
                                       clickable: !!onClick,
                                       "hidden-column-preview": props.preview && props.columnsHidable && column.hidden
@@ -296,7 +296,7 @@ export function Table<T>(props: TableProps<T>): ReactElement {
                     {rows.map((row, rowIndex) => {
                         return (
                             <div
-                                key={`row_${rowIndex}`}
+                                key={`row_${row.item.id}`}
                                 className={classNames("tr", props.rowClass?.(row.item))}
                                 role="row"
                             >

@@ -35,13 +35,14 @@ describe("datagrid-web", () => {
             const grid = page.getWidget("datagrid1");
             const column = page.waitForElement(".column-header*=First Name", grid);
             const icon = page.waitForElement("svg", column);
-            const items = page.waitForElements(".td", grid);
 
             expect(icon.getAttribute("data-icon")).toContain("arrows-alt-v");
 
             column.click();
 
             expect(icon.getAttribute("data-icon")).toContain("long-arrow-alt-up");
+
+            const items = page.waitForElements(".td", grid);
 
             expect(datagrid.getAllRows(items)).toEqual([
                 "10",
@@ -63,11 +64,12 @@ describe("datagrid-web", () => {
             const grid = page.getWidget("datagrid1");
             const column = page.getElement(".column-header*=First Name", grid);
             const icon = page.getElement("svg", column);
-            const items = page.getElements(".td", grid);
             column.click();
             column.click();
 
             expect(icon.getAttribute("data-icon")).toContain("long-arrow-alt-down");
+
+            const items = page.getElements(".td", grid);
 
             expect(datagrid.getAllRows(items)).toEqual([
                 "12",

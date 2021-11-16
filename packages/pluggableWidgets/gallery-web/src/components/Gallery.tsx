@@ -1,8 +1,9 @@
 import { createElement, ReactElement, ReactNode } from "react";
 import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/web";
+import { ObjectItem } from "mendix";
 import classNames from "classnames";
 
-export interface GalleryProps<T> {
+export interface GalleryProps<T extends ObjectItem> {
     className?: string;
     desktopItems: number;
     emptyPlaceholderRenderer?: (renderWrapper: (children: ReactNode) => ReactElement) => ReactElement;
@@ -27,7 +28,7 @@ export interface GalleryProps<T> {
     tabIndex?: number;
 }
 
-export function Gallery<T>(props: GalleryProps<T>): ReactElement {
+export function Gallery<T extends ObjectItem>(props: GalleryProps<T>): ReactElement {
     const pagination = props.paging ? (
         <div className="widget-gallery-pagination">
             <Pagination
@@ -67,7 +68,7 @@ export function Gallery<T>(props: GalleryProps<T>): ReactElement {
                         props.itemRenderer((children, className, onClick) => {
                             return (
                                 <div
-                                    key={`item_${item}`}
+                                    key={`item_${item.id}`}
                                     className={classNames("widget-gallery-item", className, {
                                         "widget-gallery-clickable": !!onClick
                                     })}

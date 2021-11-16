@@ -1,6 +1,7 @@
 import { createElement } from "react";
 import { mount, render, shallow } from "enzyme";
 import { Gallery, GalleryProps } from "../Gallery";
+import { ObjectItem, GUID } from "mendix";
 
 const itemWrapperFunction = ({
     onClick,
@@ -8,9 +9,9 @@ const itemWrapperFunction = ({
 }: {
     onClick?: () => void;
     customClass?: string;
-}): GalleryProps<string>["itemRenderer"] => (wrapper, item) => wrapper(item, customClass, onClick);
+}): GalleryProps<ObjectItem>["itemRenderer"] => (wrapper, item) => wrapper(item.id, customClass, onClick);
 
-const defaultProps: GalleryProps<string> = {
+const defaultProps: GalleryProps<ObjectItem> = {
     hasMoreItems: false,
     page: 0,
     pageSize: 10,
@@ -19,7 +20,7 @@ const defaultProps: GalleryProps<string> = {
     tabletItems: 3,
     desktopItems: 4,
     className: "",
-    items: ["11", "22", "33"],
+    items: [{ id: "11" as GUID }, { id: "22" as GUID }, { id: "33" as GUID }],
     itemRenderer: itemWrapperFunction({})
 };
 
