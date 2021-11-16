@@ -5,6 +5,7 @@ import { RichTextContainerProps } from "../typings/RichTextProps";
 export default function RichText(props: RichTextContainerProps): ReactNode {
     return (
         <RichTextComponent
+            advancedGroup={props.advancedGroup}
             name={props.name}
             class={props.class}
             stringAttribute={props.stringAttribute}
@@ -39,6 +40,8 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             wordCount={props.wordCount}
             maxChars={props.maxChars}
             advancedContentFilter={props.advancedContentFilter}
+            allowedContent={props.allowedContent}
+            disallowedContent={props.disallowedContent}
         />
     );
 }

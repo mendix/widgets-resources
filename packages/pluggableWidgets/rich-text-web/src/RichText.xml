@@ -44,7 +44,6 @@
                     <description/>
                 </property>
             </propertyGroup>
-
         </propertyGroup>
         <propertyGroup caption="Toolbars">
             <propertyGroup caption="Toolbars">
@@ -170,6 +169,10 @@
                         <enumerationValue key="no">No</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="advancedGroup" type="string" required="false" multiline="true">
+                    <caption>Advanced groups</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Dimensions">
@@ -266,14 +269,23 @@
                 <caption>Maximum characters</caption>
                 <description/>
             </property>
-            <property key="advancedContentFilter" type="enumeration" defaultValue="no">
+            <property key="advancedContentFilter" type="enumeration" defaultValue="auto">
                 <caption>Advanced content filter</caption>
                 <description/>
                 <enumerationValues>
-                    <enumerationValue key="yes">Yes</enumerationValue>
-                    <enumerationValue key="no">No</enumerationValue>
+                    <enumerationValue key="auto">Auto</enumerationValue>
+                    <enumerationValue key="custom">Custom</enumerationValue>
                 </enumerationValues>
             </property>
+            <property key="allowedContent" type="string" required="false" multiline="true">
+                <caption>Allowed content</caption>
+                <description/>
+            </property>
+            <property key="disallowedContent" type="string" required="false" multiline="true">
+                <caption>Disallowed content</caption>
+                <description/>
+            </property>
+
         </propertyGroup>
     </properties>
 </widget>

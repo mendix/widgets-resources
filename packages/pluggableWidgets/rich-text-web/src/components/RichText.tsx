@@ -1,6 +1,8 @@
 import { createElement, ReactElement, useState } from "react";
 import { useCKEditor, CKEditorConfig } from "ckeditor4-react";
-import { RichTextContainerProps, EnterModeEnum, ShiftEnterModeEnum } from "../../typings/RichTextProps";
+import { getDimensions } from "@mendix/piw-utils-internal";
+import classNames from "classnames";
+import { RichTextContainerProps } from "../../typings/RichTextProps";
 import {
     getToolbarGroupByName,
     defineEnterMode,
@@ -14,18 +16,8 @@ export const RichText = (props: RichTextContainerProps): ReactElement => {
     const { stringAttribute, editorType, preset } = props;
     const editorUrl: string | null = getPreset(preset);
 
-    const setEnterMode = (
-        enterMode: EnterModeEnum,
-        shiftEnterMode: ShiftEnterModeEnum
-    ): { enterMode: any; shiftEnterMode: any } => {
-        return {
-            enterMode: defineEnterMode(enterMode),
-            shiftEnterMode: defineEnterMode(shiftEnterMode)
-        };
-    };
-
     const setToolBarGroups = (props: RichTextContainerProps): any => {
-        const { toolbarConfig } = props;
+        const { toolbarConfig, advancedGroup } = props;
         let toolbar: CKEditorConfig = [];
         if (toolbarConfig === "basic") {
             AVAILABLE_GROUPS.forEach((groupName: GroupType) => {
@@ -38,29 +30,32 @@ export const RichText = (props: RichTextContainerProps): ReactElement => {
                 }
             });
         } else if (toolbarConfig === "advanced") {
-            toolbar = [
-                ["Source", "-", "NewPage", "Preview", "-", "Templates"],
-                ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"],
-                "/",
-                ["Bold", "Italic"]
-            ];
+            try {
+                const parsedAdvancedGroup = JSON.parse(advancedGroup);
+                toolbar = [parsedAdvancedGroup];
+            } catch (e) {
+                toolbar = [];
+            }
         }
         return toolbar;
     };
 
-    const renderCKEditorNode = (): any => {
+    const defineConfigurations = (): CKEditorConfig => {
         const { toolbarConfig, spellChecker, enterMode, shiftEnterMode } = props;
         const config: CKEditorConfig = {
-            ...setEnterMode(enterMode, shiftEnterMode)
+            enterMode: defineEnterMode(enterMode),
+            shiftEnterMode: defineEnterMode(shiftEnterMode)
         };
-        const toolbar = setToolBarGroups(props);
         if (spellChecker) {
             config.disableNativeSpellChecker = false;
         }
-        if (toolbarConfig === "basic") {
-            config.toolbarGroups = toolbar;
-        } else {
-            config.toolbar = toolbar;
+        if (!editorUrl) {
+            const toolbar = setToolBarGroups(props);
+            if (toolbarConfig === "basic") {
+                config.toolbarGroups = toolbar;
+            } else {
+                config.toolbar = toolbar;
+            }
         }
         return config;
     };
@@ -68,14 +63,13 @@ export const RichText = (props: RichTextContainerProps): ReactElement => {
     useCKEditor({
         editorUrl,
         element,
-        config: renderCKEditorNode(),
+        config: defineConfigurations(),
         type: editorType,
-        initContent: stringAttribute.value,
-        subscribeTo: ["customEvent", "anotherCustomEvent"]
+        initContent: stringAttribute.value
     });
 
     return (
-        <div className={props.class}>
+        <div className={classNames(props.class, "widget-rich-text")} style={{ ...getDimensions(props) }}>
             <div ref={setElement} />
         </div>
     );

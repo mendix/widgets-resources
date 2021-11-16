@@ -56,7 +56,7 @@ export type CodeHighlightEnum = "yes" | "no";
 
 export type WordCountEnum = "yes" | "no";
 
-export type AdvancedContentFilterEnum = "yes" | "no";
+export type AdvancedContentFilterEnum = "auto" | "custom";
 
 export interface RichTextContainerProps {
     name: string;
@@ -83,6 +83,7 @@ export interface RichTextContainerProps {
     colorsGroup: ColorsGroupEnum;
     toolsGroup: ToolsGroupEnum;
     othersGroup: OthersGroupEnum;
+    advancedGroup: string;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -97,6 +98,8 @@ export interface RichTextContainerProps {
     wordCount: WordCountEnum;
     maxChars: number;
     advancedContentFilter: AdvancedContentFilterEnum;
+    allowedContent: string;
+    disallowedContent: string;
 }
 
 export interface RichTextPreviewProps {
@@ -122,6 +125,7 @@ export interface RichTextPreviewProps {
     colorsGroup: ColorsGroupEnum;
     toolsGroup: ToolsGroupEnum;
     othersGroup: OthersGroupEnum;
+    advancedGroup: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
@@ -136,4 +140,6 @@ export interface RichTextPreviewProps {
     wordCount: WordCountEnum;
     maxChars: number | null;
     advancedContentFilter: AdvancedContentFilterEnum;
+    allowedContent: string;
+    disallowedContent: string;
 }

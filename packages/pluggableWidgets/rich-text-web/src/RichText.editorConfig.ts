@@ -7,8 +7,13 @@ export function getProperties(values: RichTextPreviewProps, defaultProperties: P
             "maxChars",
             "wordCount",
             "advancedContentFilter",
-            "codeHighlight"
+            "codeHighlight",
+            "allowedContent",
+            "disallowedContent"
         ]);
+    }
+    if (values.advancedMode && values.advancedContentFilter === "auto") {
+        hidePropertiesIn(defaultProperties, values, ["allowedContent", "disallowedContent"]);
     }
     if (values.preset !== "custom") {
         hidePropertiesIn(defaultProperties, values, [
@@ -25,8 +30,12 @@ export function getProperties(values: RichTextPreviewProps, defaultProperties: P
             "linksGroup",
             "paragraphGroup",
             "othersGroup",
-            "separator2Group"
+            "separator2Group",
+            "advancedGroup"
         ]);
+    }
+    if (values.toolbarConfig === "basic") {
+        hidePropertiesIn(defaultProperties, values, ["advancedGroup"]);
     }
     if (values.toolbarConfig === "advanced") {
         hidePropertiesIn(defaultProperties, values, [
