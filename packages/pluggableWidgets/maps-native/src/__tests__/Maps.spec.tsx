@@ -46,7 +46,7 @@ describe("", () => {
             }
         ];
 
-        const wrapper = await mount(<Maps {...defaultProps} />);
+        const wrapper = mount(<Maps {...defaultProps} />);
 
         await waitFor(() => {
             wrapper.update();
