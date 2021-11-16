@@ -1,33 +1,12 @@
-@import "variables";
-
 .widget-range-slider {
-    padding: 5px 10px;
-    margin-bottom: 15px;
+    padding: 4px 8px;
+    margin-bottom: 16px;
 
-    .rc-slider-handle,
-    .rc-slider-dot-active {
-        border: 2px solid;
-
-        &:active {
-            box-shadow: none;
-        }
+    .rc-slider-disabled {
+        background-color: initial;
     }
 
-    .rc-slider {
-        &.rc-slider-with-marks {
-            padding-bottom: 25px;
-        }
-
-        &.rc-slider-disabled {
-            background-color: transparent;
-        }
+    &.widget-range-slider-vertical {
+        height: 100%;
     }
 }
-
-.widget-range-slider-no-value {
-    .rc-slider-track {
-        display: none;
-    }
-}
-
-@import "range-slider-theme";

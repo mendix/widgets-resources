@@ -1,113 +1,202 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.custom.RangeSlider.RangeSlider" pluginWidget="true" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Range Slider</name>
     <description>Change range of values using a slider</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAoRJREFUeAHtmU9qwkAUxk02qdAeQPAGvYV00XYhpaAuKt0oPVSpm5IuVCilC+tCvIU3EHqAFqwb0/dsApk/iXkjFKJfNpM388375v0ykZhUKjhAAARAAARAAARAAARAAARAAARAAARAAASOi4DnWm4URd71+0+f5vfo9JzzeF60oGYwaZ48eRRw374H+3Q6nT61Pcq19aF2QfkHw+Fwbx8nALfTqLZar0NaVMNWIC1uXg2C7uul92kbL9rX7XZra/IhvdWH+ucB+YRh6OzjF11MouMrklc86xhMrHECHOfwdhTPsgZreE0cuBxiALzts658egGsiW+RdHfhc972JM668uk8jVib7it8LgZAmfleLHpItEpOAlh4rkSrmFAgBpD84OmJbLFEa5mf/OBZhowuiVaZLAZAd/ipkiE3kGiNRAKfikSrGDkAUOaXPgCA0l/CPQvADtgTYOmnG09Q9FBxtdlsHqmyuq26r7tnW3dm39nLfebYPw8sfd9/oP8PH2lf4xbIKz49sYTn9bg2ZekGAGX0CAIDAG8Tqnt5gLVvbwG9LuM3QBfo8eXbSvQ/f3pTFXuwZ6vVEvmMx2MnH2MH6AUfegwAh36Fd9WHHbCL0KGPO+wA77s4FInWyCrwqUi0ipEYQPzqW0mSFUi0lhz8ir3oIdEqOcUAaPZAyZAfSLRKJn7vr3TkBBKtnkb88EAvIOmDyHrGb331ZOmYvw1MmsEFtaIHmiQH+7Tb7RnFuT40Ph+NRs4+4h3ABfFHDy4wWaze8liscSqe87EPf/Sg00wfHmMNa3mOyyHeAYnJ304o/6expB60IAACIAACIAACIAACIAACIAACIAACIAACx0LgF7FjzreN3sQFAAAAAElFTkSuQmCC</icon>
+    <studioProCategory>Input elements</studioProCategory>
+    <studioCategory>Input Elements</studioCategory>
     <properties>
-        <property key="minAttribute" type="attribute" required="false">
-            <caption>Range minimum attribute</caption>
-            <category>Data source</category>
-            <description>Holds the minimum slider value (when empty the 'Default minimum value' is used)</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="maxAttribute" type="attribute" required="false">
-            <caption>Range maximum attribute</caption>
-            <category>Data source</category>
-            <description>Holds the maximum slider value (when empty the 'Default maximum value' is used)</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="lowerBoundAttribute" required="false" type="attribute">
-            <caption>Selected minimum attribute</caption>
-            <category>Data source</category>
-            <description>The lower bound value on the slider</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="upperBoundAttribute" required="false" type="attribute">
-            <caption>Selected maximum attribute</caption>
-            <category>Data source</category>
-            <description>The upper bound value on the slider</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="staticMinimumValue" type="integer" defaultValue="0">
-            <caption>Default minimum value</caption>
-            <category>Data source</category>
-            <description>The minimum slider value (when not provided through 'Range minimum attribute')</description>
-        </property>
-        <property key="staticMaximumValue" type="integer" defaultValue="100">
-            <caption>Default maximum value</caption>
-            <category>Data source</category>
-            <description>The maximum slider value (when not provided through 'Range maximum attribute')</description>
-        </property>
-        <property key="onChangeMicroflow" type="microflow" required="false">
-            <caption>On change microflow</caption>
-            <category>Events</category>
-            <description>Called when the slider is clicked or changed</description>
-            <returnType type="Void"/>
-        </property>
-        <property key="onChangeNanoflow" type="nanoflow" required="false">
-            <caption>On change nanoflow</caption>
-            <category>Events</category>
-            <description>Called when the slider is clicked or changed</description>
-            <returnType type="Void" />
-        </property>
-        <property key="noOfMarkers" type="integer" defaultValue="2">
-            <caption>Number of Markers</caption>
-            <category>Appearance</category>
-            <description>Marker ticks on the slider (visible when larger than 2)</description>
-        </property>
-        <property key="tooltipText" type="string" required="false" defaultValue="{1}">
-            <caption>Tooltip text</caption>
-            <category>Appearance</category>
-            <description>Text to show when hovering over the slider value. Leave this empty to disable the tooltip. Use {1} as a replacement for the current value of the slider</description>
-        </property>
-        <property key="stepAttribute" type="attribute" required="false">
-            <caption>Step size attribute</caption>
-            <category>Appearance</category>
-            <description>Holds the interval between two selectable points (when empty the 'Default step size' is used)</description>
-            <attributeTypes>
-                <attributeType name="Integer"/>
-                <attributeType name="Long"/>
-                <attributeType name="Decimal"/>
-            </attributeTypes>
-        </property>
-        <property key="stepValue" type="integer" defaultValue="1">
-            <caption>Default step size</caption>
-            <category>Appearance</category>
-            <description>The interval between two selectable points (when not provided through 'Step size attribute')</description>
-        </property>
-        <property key="decimalPlaces" type="integer" defaultValue="1">
-            <caption>Decimal places</caption>
-            <category>Appearance</category>
-            <description>Number of decimal places for marker values</description>
-        </property>
-        <property key="bootstrapStyle" type="enumeration" defaultValue="primary">
-            <caption>Slider style</caption>
-            <category>Appearance</category>
-            <description>Color to apply to the range slider</description>
-            <enumerationValues>
-                <enumerationValue key="primary">Primary</enumerationValue>
-                <enumerationValue key="inverse">Inverse</enumerationValue>
-                <enumerationValue key="info">Info</enumerationValue>
-                <enumerationValue key="success">Success</enumerationValue>
-                <enumerationValue key="warning">Warning</enumerationValue>
-                <enumerationValue key="danger">Danger</enumerationValue>
-            </enumerationValues>
-        </property>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="lowerBoundAttribute" type="attribute">
+                    <caption>Lower bound attribute</caption>
+                    <description>The lower bound value on the slider</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="upperBoundAttribute" type="attribute">
+                    <caption>Upper bound attribute</caption>
+                    <description>The upper bound value on the slider</description>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Range">
+                <!-- Minimum Value -->
+                <property key="minValueType" type="enumeration" defaultValue="static">
+                    <caption>Minimum value type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="staticMinimumValue" type="decimal" defaultValue="0">
+                    <caption>Minimum value</caption>
+                    <description />
+                </property>
+                <property key="minAttribute" type="attribute" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="expressionMinimumValue" type="expression" required="false">
+                    <caption>Minimum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!-- Minimum Value End -->
+
+                <!-- Maximum Value -->
+                <property key="maxValueType" type="enumeration" defaultValue="static">
+                    <caption>Maximum value type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="staticMaximumValue" type="decimal" defaultValue="100">
+                    <caption>Maximum value</caption>
+                    <description />
+                </property>
+                <property key="maxAttribute" type="attribute" required="false">
+                    <caption>Maximum value</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="expressionMaximumValue" type="expression" required="false">
+                    <caption>Maximum value</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!-- Maximum Value End -->
+            </propertyGroup>
+            <propertyGroup caption="Steps">
+                <!-- Steps Size -->
+                <property key="stepSizeType" type="enumeration" defaultValue="static">
+                    <caption>Step size type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="static">Static</enumerationValue>
+                        <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                        <enumerationValue key="expression">Expression</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="stepValue" type="decimal" defaultValue="1">
+                    <caption>Step size</caption>
+                    <description />
+                </property>
+                <property key="stepAttribute" type="attribute" required="false">
+                    <caption>Step size</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Integer"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Decimal"/>
+                    </attributeTypes>
+                </property>
+                <property key="expressionStepSize" type="expression" required="false">
+                    <caption>Step size</caption>
+                    <description />
+                    <returnType type="Decimal" />
+                </property>
+                <!-- Steps Size End -->
+            </propertyGroup>
+            <propertyGroup caption="Tooltip">
+                <property key="showTooltip" type="boolean" defaultValue="true">
+                    <caption>Show tooltip</caption>
+                    <description />
+                </property>
+                <property key="tooltipTypeLower" type="enumeration" defaultValue="value">
+                    <caption>Lower bound tooltip type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="value">Value</enumerationValue>
+                        <enumerationValue key="customText">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="tooltipLower" type="textTemplate" required="false">
+                    <caption>Tooltip</caption>
+                    <description />
+                </property>
+                <property key="tooltipTypeUpper" type="enumeration" defaultValue="value">
+                    <caption>Upper bound tooltip type</caption>
+                    <description>By default tooltip shows current value. Choose 'Custom' to create your own template.</description>
+                    <enumerationValues>
+                        <enumerationValue key="value">Value</enumerationValue>
+                        <enumerationValue key="customText">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="tooltipUpper" type="textTemplate" required="false">
+                    <caption>Tooltip</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Label">
+                <systemProperty key="Label" />
+            </propertyGroup>
+            <propertyGroup caption="Editability">
+                <systemProperty key="Editability"/>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Track">
+            <propertyGroup caption="Markers">
+                <property key="noOfMarkers" type="integer" defaultValue="1">
+                    <caption>Number of markers</caption>
+                    <description>Marker ticks on the slider (visible when larger than 0)</description>
+                </property>
+                <property key="decimalPlaces" type="integer" defaultValue="0">
+                    <caption>Decimal places</caption>
+                    <description>Number of decimal places for marker values</description>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Orientation">
+                <property key="orientation" type="enumeration" defaultValue="horizontal">
+                    <caption>Orientation</caption>
+                    <description>If orientation is 'Vertical', make sure that parent or slider itself has fixed height</description>
+                    <enumerationValues>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="100">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onChange" type="action">
+                <caption>On change</caption>
+                <description />
+            </property>
+        </propertyGroup>
     </properties>
 </widget>
