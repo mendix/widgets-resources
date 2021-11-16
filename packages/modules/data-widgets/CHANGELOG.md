@@ -5,11 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### Changed
-- We removed the Snippet, Example enumeration and version constant from the module.
+## [2.0.2] Data Widgets - 2021-11-16
+undefined
 
-### Added
-- We added a .version file inside themesource/datawidgets containing the module version.
+## [2.0.3] Datagrid
+### Fixed
+- We fixed an issue causing a content inside rows to be re-rendered while using sorting or filtering.
+
+## [1.0.3] Gallery
+### Fixed
+- We fixed an issue causing a content inside rows to be re-rendered while using filtering.
+-
 
 ## [2.0.2] - 2021-10-13
 
