@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ### Changed
+- We changed map rendering method on **Design mode**. Now, instead of rendering actual map it will render regular svg for all type of maps.
+
+## [3.0.2] - 2021-10-28
+
+### Changed
 - We fixed an issue with auto centering the map based on the locations.
 
 ## [3.0.1] - 2021-10-13
