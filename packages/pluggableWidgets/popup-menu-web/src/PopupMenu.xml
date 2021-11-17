@@ -36,6 +36,12 @@
                             <category>General</category>
                             <description/>
                         </property>
+                        <property key="visible" type="expression" defaultValue="true" required="false">
+                            <caption>Visible</caption>
+                            <category>General</category>
+                            <description/>
+                            <returnType type="Boolean"/>
+                        </property>
                         <property key="action" type="action" required="false">
                             <caption>On click action</caption>
                             <category>General</category>
@@ -65,6 +71,12 @@
                             <caption>Content</caption>
                             <category>General</category>
                             <description/>
+                        </property>
+                        <property key="visible" type="expression" defaultValue="true" required="false">
+                            <caption>Visible</caption>
+                            <category>General</category>
+                            <description/>
+                            <returnType type="Boolean"/>
                         </property>
                         <property key="action" type="action" required="false">
                             <caption>On click action</caption>

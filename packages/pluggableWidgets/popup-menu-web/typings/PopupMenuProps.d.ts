@@ -20,12 +20,14 @@ export type StyleClassEnum =
 export interface BasicItemsType {
     itemType: ItemTypeEnum;
     caption?: DynamicValue<string>;
+    visible?: DynamicValue<boolean>;
     action?: ActionValue;
     styleClass: StyleClassEnum;
 }
 
 export interface CustomItemsType {
     content: ReactNode;
+    visible?: DynamicValue<boolean>;
     action?: ActionValue;
 }
 
@@ -36,12 +38,14 @@ export type PositionEnum = "left" | "right" | "top" | "bottom";
 export interface BasicItemsPreviewType {
     itemType: ItemTypeEnum;
     caption: string;
+    visible: string;
     action: {} | null;
     styleClass: StyleClassEnum;
 }
 
 export interface CustomItemsPreviewType {
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    visible: string;
     action: {} | null;
 }
 
@@ -50,23 +54,23 @@ export interface PopupMenuContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advancedMode: boolean;
     menuTrigger?: ReactNode;
     basicItems: BasicItemsType[];
     customItems: CustomItemsType[];
     trigger: TriggerEnum;
     position: PositionEnum;
-    advancedMode: boolean;
     menuToggle: boolean;
 }
 
 export interface PopupMenuPreviewProps {
     class: string;
     style: string;
+    advancedMode: boolean;
     menuTrigger: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     basicItems: BasicItemsPreviewType[];
     customItems: CustomItemsPreviewType[];
     trigger: TriggerEnum;
     position: PositionEnum;
-    advancedMode: boolean;
     menuToggle: boolean;
 }
