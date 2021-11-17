@@ -171,10 +171,6 @@ export class Maps extends Component<Props, State> {
             return;
         }
 
-        console.log("About to set state");
-        console.log(`status ${this.state.status}`);
-        console.log(JSON.stringify(parsedMarkers));
-
         this.setState(
             {
                 // eslint-disable-next-line react/no-access-state-in-setstate
