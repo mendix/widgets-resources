@@ -10,6 +10,7 @@ describe("line-chart-web", () => {
             browser.setWindowRect(0, 0, 1200, 900);
             const screenshotElem = $(".mx-name-containerBasic");
             screenshotElem.waitForDisplayed({ timeout: 10000 });
+            browser.pause(1000);
 
             browser.saveElement(screenshotElem, "lineChartLineBasic");
             expect(browser.checkElement(screenshotElem, "lineChartLineBasic")).toEqual(0);
