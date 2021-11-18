@@ -35,7 +35,6 @@ export function preview(props: SliderPreviewProps): ReactNode {
 
     return (
         <Slider
-            {...props}
             {...values}
             onChange={undefined}
             style={undefined}
