@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.0.3] - 2021-11-18
+
 ### Changed
 - We changed map rendering method on **Design mode**. Now, instead of rendering actual map it will render regular svg for all type of maps.
 
