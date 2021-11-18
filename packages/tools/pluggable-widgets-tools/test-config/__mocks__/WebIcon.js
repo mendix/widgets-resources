@@ -1,3 +1,5 @@
 import { createElement } from "react";
 
-export const Icon = () => createElement("img", { src: "mocked/web/icon" });
+module.exports = {
+    Icon: () => createElement("img", { src: "mocked/web/icon" })
+};
