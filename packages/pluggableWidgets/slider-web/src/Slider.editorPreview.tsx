@@ -9,6 +9,7 @@ import { getStyleProp } from "./utils/getStyleProp";
 
 interface SliderPreviewProps extends Omit<SliderPreviewPropsGenerated, "class"> {
     className?: string;
+    readOnly?: boolean;
 }
 
 export function getPreviewCss(): string {
@@ -41,6 +42,7 @@ export function preview(props: SliderPreviewProps): ReactNode {
             marks={marks}
             rootStyle={style}
             vertical={isVertical(props)}
+            disabled={props.readOnly}
         />
     );
 }
