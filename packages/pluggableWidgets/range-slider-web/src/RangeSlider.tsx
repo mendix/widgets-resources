@@ -1,33 +1,102 @@
 import { ReactNode, createElement } from "react";
 import { RangeSliderContainerProps } from "../typings/RangeSliderProps";
-import { Range, RangeProps } from "./components/Range";
+import { Range } from "./components/Range";
 import { createHandleGenerator } from "./utils/createHandleGenerator";
-import { Big } from "big.js";
 import { useMarks } from "./utils/useMarks";
 import "rc-slider/assets/index.css";
 import "rc-tooltip/assets/bootstrap.css";
 import "./ui/RangeSlider.scss";
+import { getMinValue } from "./utils/getMinValue";
+import { getMaxValue } from "./utils/getMaxValue";
+import { getStepValue } from "./utils/getStepValue";
+import { getStyleProp } from "./utils/getStyleProp";
+import { useOnChangeDebounced } from "./utils/useOnChangeDebounced";
+import { isVertical } from "./utils/isVertical";
 
 export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
-    const { lowerBoundAttribute, upperBoundAttribute } = props;
+    const {
+        lowerBoundAttribute,
+        upperBoundAttribute,
+        onChange: onChangeProp,
+        style: styleProp,
+        orientation,
+        heightUnit,
+        height,
+        minValueType,
+        minAttribute,
+        expressionMinimumValue,
+        staticMinimumValue,
+        stepSizeType,
+        stepValue,
+        stepAttribute,
+        expressionStepSize,
+        maxValueType,
+        staticMaximumValue,
+        maxAttribute,
+        expressionMaximumValue,
+        noOfMarkers,
+        decimalPlaces,
+        tooltipLower,
+        tooltipUpper,
+        showTooltip,
+        tooltipTypeLower,
+        tooltipTypeUpper
+    } = props;
     const lowerValue = lowerBoundAttribute?.value?.toNumber() ?? 0;
     const upperValue = upperBoundAttribute?.value?.toNumber() ?? 0;
     const value = [lowerValue, upperValue];
-    const onChange: RangeProps["onChange"] = ([lower, upper]) => {
-        lowerBoundAttribute?.setValue(new Big(lower));
-        upperBoundAttribute?.setValue(new Big(upper));
-    };
-    const marks = useMarks(props);
+    const minValue = getMinValue({
+        minValueType,
+        staticMinimumValue,
+        minAttribute,
+        expressionMinimumValue
+    });
+    const maxValue = getMaxValue({
+        maxValueType,
+        staticMaximumValue,
+        maxAttribute,
+        expressionMaximumValue
+    });
+    const step = getStepValue({
+        stepSizeType,
+        stepValue,
+        stepAttribute,
+        expressionStepSize
+    });
+    const marks = useMarks({
+        noOfMarkers,
+        decimalPlaces,
+        minValueType,
+        staticMinimumValue,
+        minAttribute,
+        expressionMinimumValue,
+        maxValueType,
+        staticMaximumValue,
+        maxAttribute,
+        expressionMaximumValue
+    });
+    const { onChange } = useOnChangeDebounced({ lowerBoundAttribute, upperBoundAttribute, onChange: onChangeProp });
+    const style = getStyleProp({ orientation, style: styleProp, height, heightUnit });
 
     return (
         <div className="widget-range-slider">
             <Range
+                disabled={lowerBoundAttribute.readOnly || upperBoundAttribute.readOnly}
+                rootStyle={style}
+                vertical={isVertical(props)}
+                step={step}
+                onChange={onChange}
                 value={value}
                 marks={marks}
-                onChange={onChange}
-                min={0}
-                max={360}
-                handle={createHandleGenerator(props)}
+                min={minValue}
+                max={maxValue}
+                handle={createHandleGenerator({
+                    tooltipLower,
+                    tooltipUpper,
+                    showTooltip,
+                    tooltipTypeLower,
+                    tooltipTypeUpper
+                })}
             />
         </div>
     );
