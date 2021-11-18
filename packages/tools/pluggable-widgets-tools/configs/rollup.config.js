@@ -3,18 +3,19 @@ import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
+import image from "@rollup/plugin-image";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
 import { red, yellow, blue } from "colors";
-import postcss from "postcss";
+import postcssImport from "postcss-import";
 import postcssUrl from "postcss-url";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
 import livereload from "rollup-plugin-livereload";
-import sass from "rollup-plugin-sass";
+import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
@@ -30,7 +31,6 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
-import image from "@rollup/plugin-image";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
@@ -57,11 +57,14 @@ export default async args => {
             plugins: [
                 ...getClientComponentPlugins(),
                 url({ include: imagesAndFonts, limit: 100000 }),
-                sass({
-                    output: production && outputFormat === "amd",
-                    insert: !production,
-                    include: /\.(css|sass|scss)$/,
-                    processor
+                postcss({
+                    extensions: [".css", ".sass", ".scss"],
+                    extract: production && outputFormat === "amd",
+                    inject: !production,
+                    minimize: production,
+                    plugins: [postcssImport(), postcssUrl({ url: "inline" })],
+                    sourceMap: !production ? "inline" : false,
+                    use: ["sass"]
                 }),
                 alias({
                     entries: {
@@ -93,7 +96,15 @@ export default async args => {
             },
             external: editorPreviewExternal,
             plugins: [
-                sass({ output: false, include: /\.(css|sass|scss)$/, processor }),
+                postcss({
+                    extensions: [".css", ".sass", ".scss"],
+                    extract: false,
+                    inject: true,
+                    minimize: production,
+                    plugins: [postcssImport(), postcssUrl({ url: "inline" })],
+                    sourceMap: !production ? "inline" : false,
+                    use: ["sass"]
+                }),
                 ...getCommonPlugins({
                     sourceMaps: !production,
                     extensions,
@@ -256,16 +267,9 @@ export default async args => {
             process.exit(1);
         }
     }
-
-    async function processor(css) {
-        const result = await postcss()
-            .use(postcssUrl({ url: "inline" }))
-            .process(css);
-        return result.css;
-    }
 };
 
-const extensions = [".js", ".jsx", ".tsx", ".ts", ".css", ".scss", ".sass"];
+const extensions = [".js", ".jsx", ".tsx", ".ts"];
 const imagesAndFonts = [
     "**/*.svg",
     "**/*.png",
