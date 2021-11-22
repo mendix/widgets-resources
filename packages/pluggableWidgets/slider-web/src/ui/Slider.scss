@@ -1,0 +1,12 @@
+.widget-slider {
+    padding: 4px 8px;
+    margin-bottom: 16px;
+
+    .rc-slider-disabled {
+        background-color: initial;
+    }
+
+    &.widget-slider-vertical {
+        height: 100%;
+    }
+}

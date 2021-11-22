@@ -5,6 +5,8 @@
 // To customize any core styling, copy the part you want to customize to styles/web/sass/app/ so the core styling is overwritten.
 //
 
+@import "../helpers/slider-color-variant";
+
 @mixin slider() {
     /* ==========================================================================
        Slider
@@ -16,20 +18,14 @@
         margin-bottom: 16px;
         padding: 5px 10px;
 
-        .rc-slider-handle,
-        .rc-slider-dot-active {
-            border-color: #dddddd;
+        .rc-slider-handle {
+            border-color: $brand-default;
         }
 
         .rc-slider.rc-slider-with-marks {
             padding-bottom: 25px;
         }
 
-        &.has-error {
-            .rc-slider-track,
-            .rc-slider-rail {
-                background-color: $brand-danger;
-            }
-        }
+        @include slider-color-variant($brand-primary);
     }
 }

@@ -1,0 +1,28 @@
+@mixin slider-color-variant($color) {
+    .rc-slider:not(.rc-slider-disabled) {
+        .rc-slider-track {
+            background-color: $color;
+        }
+
+        .rc-slider-handle:focus {
+            border-color: $color;
+            box-shadow: 0 0 0 5px lighten($color, 25%);
+            outline: none;
+        }
+
+        .rc-slider-handle-click-focused:focus {
+            border-color: lighten($color, 25%);
+            box-shadow: unset;
+        }
+
+        .rc-slider-dot-active,
+        .rc-slider-handle:hover {
+            border-color: $color;
+        }
+
+        .rc-slider-handle:active {
+            border-color: $color;
+            box-shadow: 0 0 5px $color;
+        }
+    }
+}
