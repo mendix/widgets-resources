@@ -13,7 +13,7 @@ import { CachedGeocoder } from "./util/CachedGeocoder";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { convertDynamicModeledMarker, convertStaticModeledMarker } from "./util/data";
 
-type Props = MapsProps<MapsStyle>;
+export type Props = MapsProps<MapsStyle>;
 
 interface State {
     status: Status;
@@ -46,13 +46,13 @@ export class Maps extends Component<Props, State> {
     private readonly mapViewRef = createRef<MapView>();
     private readonly geocoder = new CachedGeocoder();
 
-    componentDidMount(): void {
+    async componentDidMount(): Promise<void> {
         if (!this.props.dynamicMarkers.length) {
-            this.parseMarkers();
+            await this.parseMarkers();
         }
     }
 
-    componentDidUpdate(prevProps: Props, prevState: State): void {
+    async componentDidUpdate(prevProps: Props, prevState: State): Promise<void> {
         if (this.props !== prevProps) {
             const markersChanged = didMarkersChange(prevState.markers, this.props.markers, this.props.dynamicMarkers);
 
@@ -64,7 +64,7 @@ export class Maps extends Component<Props, State> {
             ) {
                 // TODO: Only parse new or updated markers. No need to re-parse existing markers
                 // TODO: Check for removed markers and remove them from the state
-                this.parseMarkers();
+                await this.parseMarkers();
             }
         }
     }
@@ -133,7 +133,7 @@ export class Maps extends Component<Props, State> {
         this.onRegionChangeComplete();
     }
 
-    private onRegionChangeComplete(): void {
+    private async onRegionChangeComplete(): Promise<void> {
         if (Platform.OS === "android" && this.state.status === Status.MapReady) {
             this.setState({ status: Status.CameraReady });
         }
@@ -142,7 +142,7 @@ export class Maps extends Component<Props, State> {
             switch (this.state.status) {
                 case Status.LoadingMap:
                     this.setState({ status: Status.MapReady });
-                    this.updateCamera(false);
+                    await this.updateCamera(false);
                     break;
                 case Status.MapReady:
                     this.setState({
@@ -177,9 +177,9 @@ export class Maps extends Component<Props, State> {
                 status: this.state.status === Status.LoadingMarkers ? Status.LoadingMap : this.state.status,
                 markers: parsedMarkers as Marker[]
             },
-            () => {
+            async () => {
                 if (this.state.status === Status.CameraReady) {
-                    this.updateCamera(true);
+                    await this.updateCamera(true);
                 }
             }
         );
