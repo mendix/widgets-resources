@@ -1,0 +1,48 @@
+{
+  "name": "bar-chart-web",
+  "widgetName": "BarChart",
+  "version": "1.0.0",
+  "description": "Shows difference between the data points for one or more categories.",
+  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.6.0",
+    "marketplaceId": 0
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "bar-chart-web"
+  },
+  "packagePath": "com.mendix.widget.web",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
+    "build": "pluggable-widgets-tools build:ts",
+    "format": "pluggable-widgets-tools format",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "pretest:e2e": "NODE_OPTIONS=--max_old_space_size=4096 npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release": "pluggable-widgets-tools release:web",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "@types/classnames": "^2.2.6",
+    "eslint": "^7.20.0"
+  },
+  "dependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix/shared-charts": "^1.0.0",
+    "classnames": "^2.2.6"
+  }
+}

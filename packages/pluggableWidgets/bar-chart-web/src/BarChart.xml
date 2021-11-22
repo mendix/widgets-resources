@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.web.BarChart.BarChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    <name>Bar chart</name>
+    <description>Create a bar chart</description>
+    <studioProCategory>Charts</studioProCategory>
+    <studioCategory>Charts</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="lines" type="object" isList="true">
+                    <caption>Series</caption>
+                    <description/>
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="dataSet" type="enumeration" defaultValue="static">
+                                <caption>Data set</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="static">Static</enumerationValue>
+                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="staticDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for a single line.</description>
+                            </property>
+                            <property key="dynamicDataSource" type="datasource" required="false" isList="true">
+                                <caption>Data source</caption>
+                                <description>Data points for all lines which will be divided into single lines based on the Group by attribute value.</description>
+                            </property>
+                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Group by</caption>
+                                <description>Data points within the same group form one line.</description>
+                                <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="HashString" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                </attributeTypes>
+                            </property>
+                            <property key="staticName" type="textTemplate" required="false" multiline="false">
+                                <caption>Series name</caption>
+                                <description>The line name displayed in the legend.</description>
+                            </property>
+                            <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Series name</caption>
+                                <description>The line name displayed in the legend.</description>
+                            </property>
+                            <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>X axis attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>X axis attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>Y axis attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Y axis attribute</caption>
+                                <description />
+                                <attributeTypes>
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
+                                </attributeTypes>
+                            </property>
+                            <property key="aggregationType" type="enumeration" defaultValue="none">
+                                <caption>Aggregation type</caption>
+                                <description>Defines how data is aggregated when multiple Y values are available for a single X value</description>
+                                <enumerationValues>
+                                    <enumerationValue key="none">None</enumerationValue>
+                                    <enumerationValue key="count">Count</enumerationValue>
+                                    <enumerationValue key="sum">Sum</enumerationValue>
+                                    <enumerationValue key="avg">Average</enumerationValue>
+                                    <enumerationValue key="min">Minimum</enumerationValue>
+                                    <enumerationValue key="max">Maximum</enumerationValue>
+                                    <enumerationValue key="median">Median</enumerationValue>
+                                    <enumerationValue key="mode">Mode</enumerationValue>
+                                    <enumerationValue key="first">First</enumerationValue>
+                                    <enumerationValue key="last">Last</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                                <caption>Custom series options</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Appearance">
+                            <property key="interpolation" type="enumeration" defaultValue="linear">
+                                <caption>Interpolation</caption>
+                                <description />
+                                <enumerationValues>
+                                    <enumerationValue key="linear">Linear</enumerationValue>
+                                    <enumerationValue key="spline">Curved</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="lineStyle" type="enumeration" defaultValue="line">
+                                <caption>Line style</caption>
+                                <description/>
+                                <enumerationValues>
+                                    <enumerationValue key="line">Line</enumerationValue>
+                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
+                                    <enumerationValue key="custom">Custom</enumerationValue>
+                                </enumerationValues>
+                            </property>
+                            <property key="lineColor" type="textTemplate" required="false" multiline="false">
+                                <caption>Line color</caption>
+                                <description/>
+                            </property>
+                            <property key="markerColor" type="textTemplate" required="false" multiline="false">
+                                <caption>Marker color</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Events">
+                            <property key="onClickAction" type="action" required="false">
+                                <caption>On click action</caption>
+                                <description/>
+                            </property>
+                            <property key="onClickTooltip" type="action" required="false">
+                                <caption>Tooltip</caption>
+                                <description/>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="showLegend" type="boolean" defaultValue="true"   >
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
+                    <description />
+                </property>
+                <property key="barmode" type="enumeration" defaultValue="group">
+                    <caption>Bar format</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="group">Grouped</enumerationValue>
+                        <enumerationValue key="stack">Stacked</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="gridLines" type="enumeration" defaultValue="none">
+                    <caption>Grid lines</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="both">Both</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Dimensions">
+                <property key="widthUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Width unit</caption>
+                    <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="width" type="integer" defaultValue="100">
+                    <caption>Width</caption>
+                    <description/>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="75">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility" />
+                <systemProperty key="TabIndex" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
