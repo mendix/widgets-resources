@@ -1,7 +1,7 @@
 import { red, yellow } from "colors";
 import fg from "fast-glob";
 import { existsSync, mkdirSync } from "fs";
-import { basename, dirname, join, relative } from "path";
+import { basename, dirname, join, relative, sep, posix } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
