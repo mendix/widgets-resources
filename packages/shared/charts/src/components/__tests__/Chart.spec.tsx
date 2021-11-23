@@ -30,7 +30,8 @@ const defaultProps: ChartWidgetProps = {
     customConfig: "",
     configOptions: {},
     layoutOptions: {},
-    seriesOptions: {}
+    seriesOptions: {},
+    type: "LineChart"
 };
 
 describe("LineChart", () => {

@@ -21,6 +21,7 @@ export function preview() {
             configOptions={{}}
             layoutOptions={{}}
             seriesOptions={{}}
+            type="LineChart"
         />
     );
 }

@@ -64,6 +64,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
 
     return (
         <ChartWidget
+            type="LineChart"
             className={classNames("widget-line-chart", props.class)}
             data={chartLines ?? []}
             width={props.width}

@@ -2,11 +2,13 @@ import { createElement, ReactElement, useMemo } from "react";
 import classNames from "classnames";
 import { Dimensions, getDimensions } from "@mendix/piw-utils-internal";
 import {
+    ChartTypeEnum,
     CustomLayoutProps,
     getCustomLayoutOptions,
     getModelerConfigOptions,
     getModelerLayoutOptions,
-    getModelerSeriesOptions
+    getModelerSeriesOptions,
+    useThemeFolderConfigs
 } from "../utils/configs";
 import { Chart, ChartProps, ChartWithPlayground } from "./Chart";
 
@@ -15,6 +17,7 @@ import "../ui/Chart.scss";
 export interface ChartWidgetProps extends CustomLayoutProps, Dimensions, ChartProps {
     className: string;
     showSidebarEditor: boolean;
+    type: ChartTypeEnum;
 }
 
 export const ChartWidget = ({
@@ -33,19 +36,29 @@ export const ChartWidget = ({
     customConfig,
     layoutOptions,
     configOptions,
-    seriesOptions
+    seriesOptions,
+    type
 }: ChartWidgetProps): ReactElement => {
+    const themeFolderConfigs = useThemeFolderConfigs(type);
+
     const initialLayoutOptions = useMemo(
         () =>
             getModelerLayoutOptions(
                 getCustomLayoutOptions({ showLegend, xAxisLabel, gridLinesMode, yAxisLabel }),
-                layoutOptions
+                layoutOptions,
+                themeFolderConfigs.layout
             ),
-        [showLegend, xAxisLabel, gridLinesMode, yAxisLabel]
+        [showLegend, xAxisLabel, gridLinesMode, yAxisLabel, layoutOptions, themeFolderConfigs.layout]
     );
 
-    const initialConfigOptions = useMemo(() => getModelerConfigOptions(configOptions), []);
-    const initialSeriesOptions = useMemo(() => getModelerSeriesOptions(seriesOptions), []);
+    const initialConfigOptions = useMemo(
+        () => getModelerConfigOptions(configOptions, themeFolderConfigs.configuration),
+        [configOptions, themeFolderConfigs.configuration]
+    );
+    const initialSeriesOptions = useMemo(() => getModelerSeriesOptions(seriesOptions, themeFolderConfigs.series), [
+        seriesOptions,
+        themeFolderConfigs.series
+    ]);
 
     const LineChartWrapperComponent = showSidebarEditor ? ChartWithPlayground : Chart;
 
