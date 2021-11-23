@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.BarChart.BarChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+
+<widget id="com.mendix.widget.custom.BarChart.BarChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Bar chart</name>
     <description>Create a bar chart</description>
     <studioProCategory>Charts</studioProCategory>
@@ -7,9 +8,29 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="lines" type="object" isList="true">
-                    <caption>Series</caption>
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
+                    <description />
+                </property>
+                <property key="barmode" type="enumeration" defaultValue="group">
+                    <caption>Bar format</caption>
                     <description/>
+                    <enumerationValues>
+                        <enumerationValue key="group">Grouped</enumerationValue>
+                        <enumerationValue key="stack">Stacked</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="series" type="object" isList="true">
+                    <caption>Data source</caption>
+                    <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
@@ -54,6 +75,7 @@
                                 <caption>X axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -65,6 +87,7 @@
                                 <caption>X axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -76,6 +99,7 @@
                                 <caption>Y axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -87,6 +111,7 @@
                                 <caption>Y axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -154,37 +179,23 @@
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="showLegend" type="boolean" defaultValue="true"   >
-                    <caption>Show legend</caption>
-                    <description />
-                </property>
-                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
-                    <caption>X axis label</caption>
-                    <description />
-                </property>
-                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
-                    <caption>Y axis label</caption>
-                    <description />
-                </property>
-                <property key="barmode" type="enumeration" defaultValue="group">
-                    <caption>Bar format</caption>
+                <property key="developerMode" type="enumeration" defaultValue="basic">
+                    <caption>Developer mode</caption>
                     <description/>
                     <enumerationValues>
-                        <enumerationValue key="group">Grouped</enumerationValue>
-                        <enumerationValue key="stack">Stacked</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="gridLines" type="enumeration" defaultValue="none">
-                    <caption>Grid lines</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="none">None</enumerationValue>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                        <enumerationValue key="both">Both</enumerationValue>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="advanced">Advanced</enumerationValue>
+                        <enumerationValue key="developer">Developer</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+                <systemProperty key="Visibility" />
+                <systemProperty key="TabIndex" />
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">
                 <property key="widthUnit" type="enumeration" defaultValue="percentage">
                     <caption>Width unit</caption>
@@ -212,10 +223,27 @@
                     <description/>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="Visibility" />
-                <systemProperty key="TabIndex" />
+        </propertyGroup>
+        <propertyGroup caption="Theme">
+            <propertyGroup caption="Theme">
+                <property key="gridLines" type="enumeration" defaultValue="none">
+                    <caption>Grid lines</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="both">Both</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="customLayout" type="string" required="false" multiline="true">
+                    <caption>Custom layout</caption>
+                    <description/>
+                </property>
+                <property key="customConfigurations" type="string" required="false" multiline="true">
+                    <caption>Custom configurations</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
     </properties>

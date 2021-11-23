@@ -29,10 +29,10 @@ interface PlotDataSeries {
     dynamicDataSource?: ListValue;
     staticName?: DynamicValue<string>;
     dynamicName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | Big>;
-    dynamicXAttribute?: ListAttributeValue<Date | Big>;
-    staticYAttribute?: ListAttributeValue<Date | Big>;
-    dynamicYAttribute?: ListAttributeValue<Date | Big>;
+    staticXAttribute?: ListAttributeValue<Date | Big | string>;
+    dynamicXAttribute?: ListAttributeValue<Date | Big | string>;
+    staticYAttribute?: ListAttributeValue<Date | Big | string>;
+    dynamicYAttribute?: ListAttributeValue<Date | Big | string>;
 }
 
 export function usePlotChartDataSeries<T extends PlotDataSeries>(
@@ -197,8 +197,8 @@ function extractDataPoints(
             return null;
         }
 
-        xData.push(x.value instanceof Date ? x.value : Number(x.value.toString()));
-        yData.push(y.value instanceof Date ? y.value : Number(y.value.toString()));
+        xData.push(x.value instanceof Big ? Number(x.value.toString()) : x.value);
+        yData.push(y.value instanceof Big ? Number(y.value.toString()) : y.value);
     }
 
     return {

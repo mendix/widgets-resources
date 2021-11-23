@@ -7,6 +7,8 @@ import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
 
+export type BarmodeEnum = "group" | "stack";
+
 export type DataSetEnum = "static" | "dynamic";
 
 export type AggregationTypeEnum =
@@ -25,17 +27,17 @@ export type InterpolationEnum = "linear" | "spline";
 
 export type LineStyleEnum = "line" | "lineWithMarkers" | "custom";
 
-export interface LinesType {
+export interface SeriesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticName?: DynamicValue<string>;
     dynamicName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | Big>;
-    dynamicXAttribute?: ListAttributeValue<Date | Big>;
-    staticYAttribute?: ListAttributeValue<Date | Big>;
-    dynamicYAttribute?: ListAttributeValue<Date | Big>;
+    staticXAttribute?: ListAttributeValue<string | Date | Big>;
+    dynamicXAttribute?: ListAttributeValue<string | Date | Big>;
+    staticYAttribute?: ListAttributeValue<string | Date | Big>;
+    dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
     customSeriesOptions: string;
     interpolation: InterpolationEnum;
@@ -46,15 +48,15 @@ export interface LinesType {
     onClickTooltip?: ActionValue;
 }
 
-export type BarmodeEnum = "group" | "stack";
-
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
+export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
 
-export interface LinesPreviewType {
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
+
+export interface SeriesPreviewType {
     dataSet: DataSetEnum;
     staticDataSource: {} | { type: string } | null;
     dynamicDataSource: {} | { type: string } | null;
@@ -80,29 +82,35 @@ export interface BarChartContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    lines: LinesType[];
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     barmode: BarmodeEnum;
-    gridLines: GridLinesEnum;
+    series: SeriesType[];
+    developerMode: DeveloperModeEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
+    gridLines: GridLinesEnum;
+    customLayout: string;
+    customConfigurations: string;
 }
 
 export interface BarChartPreviewProps {
     class: string;
     style: string;
-    lines: LinesPreviewType[];
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
     barmode: BarmodeEnum;
-    gridLines: GridLinesEnum;
+    series: SeriesPreviewType[];
+    developerMode: DeveloperModeEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
+    gridLines: GridLinesEnum;
+    customLayout: string;
+    customConfigurations: string;
 }
