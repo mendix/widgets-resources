@@ -1,10 +1,4 @@
-import {
-    hidePropertiesIn,
-    hidePropertyIn,
-    // Problem,
-    Properties,
-    transformGroupsIntoTabs
-} from "@mendix/piw-utils-internal";
+import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
 import {
     MaxValueTypeEnum,
     MinValueTypeEnum,

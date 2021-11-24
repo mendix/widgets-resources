@@ -1,13 +1,18 @@
 import { createElement, CSSProperties } from "react";
-import { Range as RcRange, RangeProps as RcRangeProps } from "rc-slider";
+import { Range, RangeProps } from "rc-slider";
 import classNames from "classnames";
 
-export interface RangeProps extends RcRangeProps {
+export interface RangeSliderProps extends RangeProps {
     classNameSlider?: string;
     rootStyle?: CSSProperties;
 }
 
-export const Range = ({ className, classNameSlider, rootStyle, ...rcRangeProps }: RangeProps): JSX.Element => (
+export const RangeSlider = ({
+    className,
+    classNameSlider,
+    rootStyle,
+    ...rcRangeProps
+}: RangeSliderProps): JSX.Element => (
     <div
         style={rootStyle}
         className={classNames(
@@ -18,6 +23,6 @@ export const Range = ({ className, classNameSlider, rootStyle, ...rcRangeProps }
             className
         )}
     >
-        <RcRange className={classNameSlider} {...rcRangeProps} />
+        <Range className={classNameSlider} {...rcRangeProps} />
     </div>
 );

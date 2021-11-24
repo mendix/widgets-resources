@@ -1,45 +1,45 @@
 import { createElement } from "react";
 import { render, cleanup, screen } from "@testing-library/react";
-import { Range, RangeProps } from "../Range";
+import { RangeSlider, RangeSliderProps } from "../RangeSlider";
 import { mount } from "enzyme";
 
-describe("Range", () => {
+describe("RangeSlider", () => {
     afterEach(cleanup);
-    const defaultProps = Object.freeze<RangeProps>({
+    const defaultProps = Object.freeze<RangeSliderProps>({
         min: -100,
         max: 100,
         step: 10,
         value: [-25, 25]
     });
 
-    it("renders horizontal Range correctly", () => {
-        const { asFragment } = render(<Range {...defaultProps} />);
+    it("renders horizontal RangeSlider correctly", () => {
+        const { asFragment } = render(<RangeSlider {...defaultProps} />);
 
         expect(asFragment()).toMatchSnapshot();
     });
 
-    it("renders vertical Range correctly", () => {
-        const { asFragment } = render(<Range {...defaultProps} vertical />);
+    it("renders vertical RangeSlider correctly", () => {
+        const { asFragment } = render(<RangeSlider {...defaultProps} vertical />);
 
         expect(asFragment()).toMatchSnapshot();
     });
 
     it("contains correct values", () => {
-        render(<Range {...defaultProps} step={1} value={[-33, 16]} />);
+        render(<RangeSlider {...defaultProps} step={1} value={[-33, 16]} />);
         const [lower, upper] = screen.getAllByRole("slider");
         expect(lower.getAttribute("aria-valuenow")).toBe("-33");
         expect(upper.getAttribute("aria-valuenow")).toBe("16");
     });
 
     it("align values to the closest step, with step = 10", () => {
-        render(<Range {...defaultProps} step={10} value={[-21, 24]} />);
+        render(<RangeSlider {...defaultProps} step={10} value={[-21, 24]} />);
         const [lower, upper] = screen.getAllByRole("slider");
         expect(lower.getAttribute("aria-valuenow")).toBe("-20");
         expect(upper.getAttribute("aria-valuenow")).toBe("20");
     });
 
     it("align values to the closest step, with step = 2", () => {
-        render(<Range {...defaultProps} step={2} value={[-13, 21]} />);
+        render(<RangeSlider {...defaultProps} step={2} value={[-13, 21]} />);
         const [lower, upper] = screen.getAllByRole("slider");
         expect(lower.getAttribute("aria-valuenow")).toBe("-12");
         expect(upper.getAttribute("aria-valuenow")).toBe("22");
@@ -48,7 +48,7 @@ describe("Range", () => {
     it("changes value when clicked", () => {
         const onChange = jest.fn();
 
-        const wrapper = mount(<Range min={0} max={100} step={10} onChange={onChange} />);
+        const wrapper = mount(<RangeSlider min={0} max={100} step={10} onChange={onChange} />);
 
         const sliderRoot = wrapper.find("div.rc-slider").first();
 
@@ -99,7 +99,7 @@ describe("Range", () => {
             100: "100"
         };
 
-        const { asFragment } = render(<Range {...defaultProps} marks={marks} />);
+        const { asFragment } = render(<RangeSlider {...defaultProps} marks={marks} />);
         expect(asFragment()).toMatchSnapshot();
 
         for (const label of Object.values(marks)) {

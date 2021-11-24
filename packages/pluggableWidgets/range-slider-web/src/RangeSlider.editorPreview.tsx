@@ -1,6 +1,6 @@
 import { createElement, ReactNode } from "react";
 import { RangeSliderPreviewProps as RangeSliderPreviewPropsGenerated } from "../typings/RangeSliderProps";
-import { Range } from "./components/Range";
+import { RangeSlider } from "./components/RangeSlider";
 import { createMarks } from "./utils/marks";
 import { getPreviewValues } from "./utils/getPreviewValues";
 import { getStyleProp } from "./utils/getStyleProp";
@@ -36,7 +36,7 @@ export function preview(props: RangeSliderPreviewProps): ReactNode {
     });
 
     return (
-        <Range
+        <RangeSlider
             value={value}
             marks={marks}
             min={min}

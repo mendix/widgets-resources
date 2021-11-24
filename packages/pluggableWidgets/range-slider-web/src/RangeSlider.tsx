@@ -1,6 +1,6 @@
-import { ReactNode, createElement } from "react";
+import { ReactNode, createElement, useMemo } from "react";
 import { RangeSliderContainerProps } from "../typings/RangeSliderProps";
-import { Range } from "./components/Range";
+import { RangeSlider as RangeSliderComponent } from "./components/RangeSlider";
 import { createHandleGenerator } from "./utils/createHandleGenerator";
 import { useMarks } from "./utils/useMarks";
 import "rc-slider/assets/index.css";
@@ -17,6 +17,7 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
     const {
         lowerBoundAttribute,
         upperBoundAttribute,
+        class: className,
         onChange: onChangeProp,
         style: styleProp,
         orientation,
@@ -44,7 +45,7 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
     } = props;
     const lowerValue = lowerBoundAttribute?.value?.toNumber() ?? 0;
     const upperValue = upperBoundAttribute?.value?.toNumber() ?? 0;
-    const value = [lowerValue, upperValue];
+    const value = useMemo(() => [lowerValue, upperValue], [lowerValue, upperValue]);
     const minValue = getMinValue({
         minValueType,
         staticMinimumValue,
@@ -79,25 +80,24 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
     const style = getStyleProp({ orientation, style: styleProp, height, heightUnit });
 
     return (
-        <div className="widget-range-slider">
-            <Range
-                disabled={lowerBoundAttribute.readOnly || upperBoundAttribute.readOnly}
-                rootStyle={style}
-                vertical={isVertical(props)}
-                step={step}
-                onChange={onChange}
-                value={value}
-                marks={marks}
-                min={minValue}
-                max={maxValue}
-                handle={createHandleGenerator({
-                    tooltipLower,
-                    tooltipUpper,
-                    showTooltip,
-                    tooltipTypeLower,
-                    tooltipTypeUpper
-                })}
-            />
-        </div>
+        <RangeSliderComponent
+            className={className}
+            disabled={lowerBoundAttribute.readOnly || upperBoundAttribute.readOnly}
+            rootStyle={style}
+            vertical={isVertical(props)}
+            step={step}
+            onChange={onChange}
+            value={value}
+            marks={marks}
+            min={minValue}
+            max={maxValue}
+            handle={createHandleGenerator({
+                tooltipLower,
+                tooltipUpper,
+                showTooltip,
+                tooltipTypeLower,
+                tooltipTypeUpper
+            })}
+        />
     );
 }
