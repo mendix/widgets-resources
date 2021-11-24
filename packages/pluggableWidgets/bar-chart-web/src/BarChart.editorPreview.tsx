@@ -1,7 +1,7 @@
-import { createElement } from "react";
+import { createElement, ReactNode } from "react";
 import { ChartWidget } from "@mendix/shared-charts";
 
-export function preview() {
+export function preview(): ReactNode {
     // TODO:
     return (
         <ChartWidget
