@@ -46,8 +46,14 @@ describe("FloatingActionButton", () => {
         };
     });
 
-    it("renders floating action button", () => {
+    it("renders correct props without secondary buttons", () => {
         const component = render(<FloatingActionButton {...defaultProps} />);
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
+    it("renders correct props with secondary buttons", () => {
+        const component = render(<FloatingActionButton {...defaultProps} secondaryButtons={secondaryButtons} />);
 
         expect(component.toJSON()).toMatchSnapshot();
     });
@@ -137,5 +143,19 @@ describe("FloatingActionButton", () => {
 
         fireEvent(getByTestId("FloatingAction"), "onPress");
         await findByText(secondaryButtons[2].caption.value as string);
+    });
+
+    describe("vertical position", () => {
+        it("renders position top correctly", () => {
+            defaultProps.verticalPosition = "top";
+            const { toJSON } = render(<FloatingActionButton {...defaultProps} />);
+
+            expect(toJSON()).toMatchSnapshot();
+        });
+
+        it("renders position bottom correctly", () => {
+            const { toJSON } = render(<FloatingActionButton {...defaultProps} />);
+            expect(toJSON()).toMatchSnapshot();
+        });
     });
 });
