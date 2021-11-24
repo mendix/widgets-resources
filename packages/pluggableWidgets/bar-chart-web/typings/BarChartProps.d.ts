@@ -23,10 +23,6 @@ export type AggregationTypeEnum =
     | "first"
     | "last";
 
-export type InterpolationEnum = "linear" | "spline";
-
-export type LineStyleEnum = "line" | "lineWithMarkers" | "custom";
-
 export interface SeriesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
@@ -40,10 +36,7 @@ export interface SeriesType {
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
     customSeriesOptions: string;
-    interpolation: InterpolationEnum;
-    lineStyle: LineStyleEnum;
-    lineColor?: DynamicValue<string>;
-    markerColor?: DynamicValue<string>;
+    barColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
     onClickTooltip?: ActionValue;
 }
@@ -69,10 +62,7 @@ export interface SeriesPreviewType {
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
     customSeriesOptions: string;
-    interpolation: InterpolationEnum;
-    lineStyle: LineStyleEnum;
-    lineColor: string;
-    markerColor: string;
+    barColor: string;
     onClickAction: {} | null;
     onClickTooltip: {} | null;
 }

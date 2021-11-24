@@ -31,9 +31,12 @@ export function BarChart(props: BarChartContainerProps): ReactElement | null {
         barmode: props.barmode
     };
 
-    const series = usePlotChartDataSeries(props.series, () => ({
+    const series = usePlotChartDataSeries(props.series, dataSeries => ({
         type: "bar",
-        orientation: "v"
+        orientation: "h",
+        marker: {
+            color: dataSeries.barColor?.value
+        }
     }));
 
     return (
