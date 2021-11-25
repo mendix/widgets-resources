@@ -27,7 +27,6 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Range">
-                <!-- Minimum Value -->
                 <property key="minValueType" type="enumeration" defaultValue="static">
                     <caption>Minimum value type</caption>
                     <description />
@@ -55,9 +54,6 @@
                     <description />
                     <returnType type="Decimal" />
                 </property>
-                <!-- Minimum Value End -->
-
-                <!-- Maximum Value -->
                 <property key="maxValueType" type="enumeration" defaultValue="static">
                     <caption>Maximum value type</caption>
                     <description />
@@ -85,10 +81,8 @@
                     <description />
                     <returnType type="Decimal" />
                 </property>
-                <!-- Maximum Value End -->
             </propertyGroup>
             <propertyGroup caption="Steps">
-                <!-- Steps Size -->
                 <property key="stepSizeType" type="enumeration" defaultValue="static">
                     <caption>Step size type</caption>
                     <description />
@@ -116,7 +110,6 @@
                     <description />
                     <returnType type="Decimal" />
                 </property>
-                <!-- Steps Size End -->
             </propertyGroup>
             <propertyGroup caption="Tooltip">
                 <property key="showTooltip" type="boolean" defaultValue="true">
@@ -125,7 +118,7 @@
                 </property>
                 <property key="tooltipTypeLower" type="enumeration" defaultValue="value">
                     <caption>Lower bound tooltip type</caption>
-                    <description />
+                    <description>By default tooltip shows current value. Choose 'Custom' to create your own template.</description>
                     <enumerationValues>
                         <enumerationValue key="value">Value</enumerationValue>
                         <enumerationValue key="customText">Custom</enumerationValue>

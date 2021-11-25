@@ -1,23 +1,13 @@
 import { createElement } from "react";
 import Tooltip from "rc-tooltip";
-import { Handle } from "rc-slider";
+import { Handle, HandleProps } from "rc-slider";
 import { DynamicValue } from "mendix";
 
 // Copied from https://github.com/react-component/slider/blob/8.6.6/src/Slider.jsx#L165
-interface HandleGeneratorProps {
-    className: string;
-    prefixCls?: string;
-    vertical: boolean;
-    offset: number;
+interface HandleGeneratorProps extends HandleProps {
     value: number;
     dragging?: boolean;
-    disabled?: boolean;
-    min?: number;
-    max?: number;
     index: number;
-    tabIndex?: number;
-    style?: React.CSSProperties;
-    ref?: React.Ref<any>;
 }
 
 type HandleGenerator = (props: HandleGeneratorProps) => JSX.Element;
