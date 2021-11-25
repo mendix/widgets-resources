@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useMemo } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { BarChartContainerProps } from "../typings/BarChartProps";
@@ -15,7 +15,8 @@ const barChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
         fixedrange: true,
         gridcolor: "#d7d7d7",
         zeroline: true,
-        zerolinecolor: "#d7d7d7"
+        zerolinecolor: "#d7d7d7",
+        rangemode: "tozero"
     }
 };
 
@@ -23,13 +24,18 @@ const barChartConfigOptions: ChartWidgetProps["configOptions"] = {
     responsive: true
 };
 
-const barChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
+const barChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
+    type: "bar"
+};
 
 export function BarChart(props: BarChartContainerProps): ReactElement | null {
-    const layoutOptions = {
-        ...barChartLayoutOptions,
-        barmode: props.barmode
-    };
+    const layoutOptions = useMemo(
+        () => ({
+            ...barChartLayoutOptions,
+            barmode: props.barmode
+        }),
+        [props.barmode]
+    );
 
     const series = usePlotChartDataSeries(props.series, dataSeries => ({
         type: "bar",
