@@ -18,7 +18,7 @@
             </propertyGroup>
             <propertyGroup caption="Markers">
                 <property key="markers" type="object" isList="true" required="false">
-                    <caption>Static markers</caption>
+                    <caption>Marker</caption>
                     <description>A list of static locations on the map.</description>
                     <properties>
                         <propertyGroup caption="Locations">
@@ -72,7 +72,7 @@
                     </properties>
                 </property>
                 <property key="dynamicMarkers" type="object" isList="true" required="false">
-                    <caption>Dynamic markers</caption>
+                    <caption>Marker list</caption>
                     <description>A list of markers showing dynamic locations on the map.</description>
                     <properties>
                         <propertyGroup caption="Locations">
@@ -145,11 +145,11 @@
             <propertyGroup caption="Configurations">
                 <property key="apiKey" type="string" required="false">
                     <caption>API Key</caption>
-                    <description>API Key for usage of the map through the selected provider.</description>
+                    <description>API Key for usage of the map through the selected provider.Google Maps - https://developers.google.com/maps/documentation/javascript/get-api-key Map Box - https://docs.mapbox.com/help/getting-started/access-tokens/ Here Maps - https://developer.here.com/tutorials/getting-here-credentials/</description>
                 </property>
                 <property key="apiKeyExp" type="expression" required="false">
                     <caption>API Key</caption>
-                    <description>API Key for usage of the map through the selected provider.</description>
+                    <description>API Key for usage of the map through the selected provider.Google Maps - https://developers.google.com/maps/documentation/javascript/get-api-key Map Box - https://docs.mapbox.com/help/getting-started/access-tokens/ Here Maps - https://developer.here.com/tutorials/getting-here-credentials/</description>
                     <returnType type="String"/>
                 </property>
                 <property key="geodecodeApiKey" type="string" required="false">
