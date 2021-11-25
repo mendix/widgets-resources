@@ -1,7 +1,12 @@
 import { createElement, ReactElement } from "react";
-import { RichText } from "./components/RichText";
-import { RichTextContainerProps } from "../typings/RichTextProps";
+import { RichTextPreviewProps } from "../typings/RichTextProps";
+interface PreviewProps extends Omit<RichTextPreviewProps, "class"> {
+    className: string;
+    readOnly: boolean;
+    name: string;
+}
 
-export const preview = (props: RichTextContainerProps): ReactElement => {
-    return <RichText {...props} />;
+export const preview = (props: PreviewProps): ReactElement => {
+    console.log(props);
+    return <div>Editor Preview</div>;
 };

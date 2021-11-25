@@ -4,9 +4,11 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type EditorTypeEnum = "classic" | "inline";
+
+export type ShowLabelEnum = "yes" | "no";
 
 export type ReadOnlyStyleEnum = "text" | "bordered" | "borderedToolbar";
 
@@ -40,6 +42,81 @@ export type ToolsGroupEnum = "yes" | "no";
 
 export type OthersGroupEnum = "yes" | "no";
 
+export type CtItemTypeEnum =
+    | "seperator"
+    | "About"
+    | "Anchor"
+    | "BGColor"
+    | "Blockquote"
+    | "Bold"
+    | "BulletedList"
+    | "Button"
+    | "Checkbox"
+    | "CodeSnippet"
+    | "Copy"
+    | "CreateDiv"
+    | "Cut"
+    | "Find"
+    | "Flash"
+    | "Font"
+    | "FontSize"
+    | "Form"
+    | "Format"
+    | "HiddenField"
+    | "HorizontalRule"
+    | "Iframe"
+    | "Image"
+    | "ImageButton"
+    | "Indent"
+    | "Italic"
+    | "JustifyBlock"
+    | "JustifyCenter"
+    | "JustifyLeft"
+    | "JustifyRight"
+    | "Language"
+    | "Link"
+    | "Maximize"
+    | "mendixlink"
+    | "NewPage"
+    | "NumberedList"
+    | "Outdent"
+    | "PageBreak"
+    | "Paste"
+    | "PasteFromWord"
+    | "PasteText"
+    | "Preview"
+    | "Print"
+    | "Radio"
+    | "Redo"
+    | "RemoveFormat"
+    | "Replace"
+    | "Scayt"
+    | "Select"
+    | "SelectAll"
+    | "ShowBlocks"
+    | "Smiley"
+    | "Source"
+    | "SpecialChar"
+    | "Strike"
+    | "Styles"
+    | "Subscript"
+    | "Superscript"
+    | "Table"
+    | "Templates"
+    | "BidiLtr"
+    | "BidiRtl"
+    | "TextColor"
+    | "TextField"
+    | "Textarea"
+    | "Underline"
+    | "Undo"
+    | "Unlink";
+
+export interface AdvancedGroupType {
+    ctItemType: CtItemTypeEnum;
+    ctItemToolbar: string;
+}
+
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
@@ -58,16 +135,23 @@ export type WordCountEnum = "yes" | "no";
 
 export type AdvancedContentFilterEnum = "auto" | "custom";
 
+export interface AdvancedGroupPreviewType {
+    ctItemType: CtItemTypeEnum;
+    ctItemToolbar: string;
+}
+
 export interface RichTextContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    advancedMode: boolean;
+    editorType: EditorTypeEnum;
     stringAttribute: EditableValue<string>;
     sanitizeContent: boolean;
-    editorType: EditorTypeEnum;
+    showLabel: ShowLabelEnum;
+    labelMessage?: DynamicValue<string>;
     readOnlyStyle: ReadOnlyStyleEnum;
-    advancedMode: boolean;
     preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
     documentGroup: DocumentGroupEnum;
@@ -83,7 +167,7 @@ export interface RichTextContainerProps {
     colorsGroup: ColorsGroupEnum;
     toolsGroup: ToolsGroupEnum;
     othersGroup: OthersGroupEnum;
-    advancedGroup: string;
+    advancedGroup: AdvancedGroupType[];
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -105,11 +189,13 @@ export interface RichTextContainerProps {
 export interface RichTextPreviewProps {
     class: string;
     style: string;
+    advancedMode: boolean;
+    editorType: EditorTypeEnum;
     stringAttribute: string;
     sanitizeContent: boolean;
-    editorType: EditorTypeEnum;
+    showLabel: ShowLabelEnum;
+    labelMessage: string;
     readOnlyStyle: ReadOnlyStyleEnum;
-    advancedMode: boolean;
     preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
     documentGroup: DocumentGroupEnum;
@@ -125,7 +211,7 @@ export interface RichTextPreviewProps {
     colorsGroup: ColorsGroupEnum;
     toolsGroup: ToolsGroupEnum;
     othersGroup: OthersGroupEnum;
-    advancedGroup: string;
+    advancedGroup: AdvancedGroupPreviewType[];
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;

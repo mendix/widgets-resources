@@ -48,6 +48,8 @@
     "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "sanitize-html": "^2.0.0",
-    "ckeditor4-react": "^2.0.1"
+    "ckeditor4-react": "^2.0.1",
+    "ckeditor4": "^4.17.1",
+    "ckeditor4-integrations-common": "^1.0.0"
   }
 }

@@ -1,47 +1,60 @@
-import { ReactNode, createElement } from "react";
+import { ReactNode, createElement, useCallback } from "react";
 import { RichText as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
+import { generateUUID } from "@mendix/piw-utils-internal/dist/components/web";
+import { getToolbarGroupByName, GroupType } from "./utils/ckeditorConfigs";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
+    const id = generateUUID();
+    const onChangeFn = useCallback(
+        (value: string) => {
+            props.stringAttribute.setValue(value);
+        },
+        [props.stringAttribute]
+    );
+    const toolbarGroup = () => {
+        const groupKeys = Object.keys(props).filter((key: string) => (key.includes("Group") ? key : null));
+        const { toolbarConfig, advancedGroup } = props;
+        if (toolbarConfig === "basic") {
+            return groupKeys
+                .filter((groupName: GroupType) => props[groupName] === "yes")
+                .map((groupName: GroupType) => {
+                    return groupName.includes("separator")
+                        ? "/"
+                        : getToolbarGroupByName(groupName.replace("Group", "").toLowerCase());
+                });
+        } else if (toolbarConfig === "advanced") {
+            return advancedGroup.map(group => [group.ctItemType !== "seperator" ? group.ctItemType : "-"]);
+        }
+    };
+    const plugins = [];
+    if (props.advancedMode) {
+        if (props.codeHighlight) {
+            plugins.push("codesnippet");
+        }
+        if (props.wordCount) {
+            plugins.push("wordcount");
+        }
+    }
+    console.log("prop", props);
     return (
         <RichTextComponent
+            id={`RichText-${id}`}
             advancedGroup={props.advancedGroup}
             name={props.name}
             class={props.class}
-            stringAttribute={props.stringAttribute}
-            sanitizeContent={props.sanitizeContent}
             editorType={props.editorType}
             readOnlyStyle={props.readOnlyStyle}
-            advancedMode={props.advancedMode}
+            readOnly={props.stringAttribute.readOnly}
             preset={props.preset}
-            toolbarConfig={props.toolbarConfig}
-            documentGroup={props.documentGroup}
-            clipboardGroup={props.clipboardGroup}
-            editingGroup={props.editingGroup}
-            formsGroup={props.formsGroup}
-            separatorGroup={props.separatorGroup}
-            basicStylesGroup={props.basicStylesGroup}
-            paragraphGroup={props.paragraphGroup}
-            linksGroup={props.linksGroup}
-            separator2Group={props.separator2Group}
-            stylesGroup={props.stylesGroup}
-            colorsGroup={props.colorsGroup}
-            toolsGroup={props.toolsGroup}
-            othersGroup={props.othersGroup}
-            widthUnit={props.widthUnit}
-            width={props.width}
-            heightUnit={props.heightUnit}
-            height={props.height}
             enterMode={props.enterMode}
             shiftEnterMode={props.shiftEnterMode}
-            autoParagraph={props.autoParagraph}
             spellChecker={props.spellChecker}
-            codeHighlight={props.codeHighlight}
-            wordCount={props.wordCount}
-            maxChars={props.maxChars}
-            advancedContentFilter={props.advancedContentFilter}
-            allowedContent={props.allowedContent}
-            disallowedContent={props.disallowedContent}
+            toolbarConfig={props.toolbarConfig}
+            toolbarGroup={toolbarGroup()}
+            plugins={plugins}
+            value={props.stringAttribute.value}
+            onChange={onChangeFn}
         />
     );
 }

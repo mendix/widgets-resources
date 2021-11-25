@@ -1,23 +1,35 @@
+import { CKEditorConfig } from "ckeditor4-react";
 import { PresetEnum } from "../../typings/RichTextProps";
-const TOOLBAR_CONFIGS: any = [
-    { name: "document", groups: ["mode", "document", "doctools"] },
-    { name: "clipboard", groups: ["clipboard", "undo"] },
-    { name: "editing", groups: ["find", "selection", "spellchecker"] },
-    { name: "forms" },
-    { name: "basicstyles", groups: ["basicstyles", "cleanup"] },
-    { name: "paragraph", groups: ["list", "indent", "blocks", "align", "bidi"] },
-    { name: "links" },
-    { name: "insert" },
-    { name: "styles" },
-    { name: "colors" },
-    { name: "tools" },
-    { name: "others" },
-    { name: "about" }
-];
-export const AVAILABLE_GROUPS: string[] = TOOLBAR_CONFIGS.map((group: any) => group.name);
+import { SET_PRESET, TOOLBAR_GROUP, ToolbarGroup } from "./ckeditorPresets";
 
-export function getToolbarGroupByName(name: string): { name: string; groups: string[] } {
-    return TOOLBAR_CONFIGS.find((group: any) => group.name === name);
+interface Plugins {
+    codesnippet: any;
+    wordcount?: any;
+}
+
+const PLUGIN_CONFIGS: Plugins = {
+    codesnippet: {
+        included: true,
+        toolbarName: "CodeSnippet",
+        extraPlugins: "codesnippet",
+        config: {
+            codeSnippet_theme: "idea"
+            // codeSnippet_languages: { javascript: "JavaScript", php: "PHP" }
+        }
+    }
+    // wordcount: {
+    //     included: false,
+    //     toolbarName: "WordCount",
+    //     extraPlugins: "wordcount",
+    //     config: {
+    //         showWordCount: true,
+    //         showCharCount: true
+    //     }
+    // }
+};
+
+export function getToolbarGroupByName(name: string): ToolbarGroup | undefined | string {
+    return TOOLBAR_GROUP.find((group: any) => group.name === name);
 }
 
 export function defineEnterMode(type: string): number {
@@ -33,19 +45,36 @@ export function defineEnterMode(type: string): number {
     }
 }
 
-export function getPreset(type: PresetEnum): string | null {
+export function getPreset(type: PresetEnum): CKEditorConfig | null {
     switch (type) {
         case "standard":
-            return "https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js";
+            return SET_PRESET("standard");
         case "basic":
-            return "https://cdn.ckeditor.com/4.16.2/basic/ckeditor.js";
+            return SET_PRESET("basic");
         case "full":
-            return "https://cdn.ckeditor.com/4.16.2/full/ckeditor.js";
+            return {};
         case "custom":
             return null;
-        default:
-            return "https://cdn.ckeditor.com/4.16.2/basic/ckeditor.js";
     }
+}
+
+export function addPlugin(name: keyof Plugins, ckeditorConfig: CKEditorConfig) {
+    const plugin = PLUGIN_CONFIGS[name];
+    if (plugin) {
+        const { config } = ckeditorConfig;
+        if (config.toolbarGroups) {
+            config.extraPlugins = config.extraPlugins
+                ? config.extraPlugins + `,${plugin.extraPlugins}`
+                : plugin.extraPlugins;
+            config.toolbarGroups.forEach((group: ToolbarGroup) => {
+                if (group.name === "insert") {
+                    group.groups?.push(plugin.extraPlugins);
+                }
+            });
+            Object.assign(config, plugin.config);
+        }
+    }
+    return ckeditorConfig;
 }
 
 export type GroupType =
