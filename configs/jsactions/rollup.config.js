@@ -1,7 +1,7 @@
 import { red, yellow } from "colors";
 import fg from "fast-glob";
 import { existsSync, mkdirSync } from "fs";
-import { basename, dirname, join, relative } from "path";
+import { basename, dirname, join, relative, sep, posix } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
@@ -16,7 +16,8 @@ const cwd = process.cwd();
 export default async args => {
     const jsActionTargetFolder = `javascriptsource/${args.configProject ?? "nativemobileresources"}/actions`;
     const result = [];
-    const files = await fg([join(cwd, "src", "**/*.ts")]);
+    const posixPath = join(cwd, "src", "**/*.ts").split(sep).join(posix.sep); // Always use forward slashes
+    const files = await fg([posixPath]); // fast-glob only works with forward slashes
     const outDir = join(cwd, "dist");
     const isWeb = args.configEnv === "web";
 
