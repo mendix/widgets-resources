@@ -1,5 +1,14 @@
 import { TooltipPreviewProps } from "../typings/TooltipProps";
-import { hidePropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    hidePropertiesIn,
+    Problem,
+    Properties,
+    StructurePreviewProps,
+    DropZoneProps,
+    RowLayoutProps,
+    ContainerProps,
+    TextProps
+} from "@mendix/piw-utils-internal";
 
 export function getProperties(values: TooltipPreviewProps, defaultValues: Properties): Properties {
     if (values.renderMethod === "text") {
@@ -25,4 +34,63 @@ export function check(values: TooltipPreviewProps): Problem[] {
         });
     }
     return errors;
+}
+
+export function getPreview(values: TooltipPreviewProps): StructurePreviewProps | null {
+    const titleHeader: RowLayoutProps = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        backgroundColor: "#B4C1C7",
+        borders: true,
+        borderWidth: 1,
+        children: [
+            {
+                type: "Container",
+                children: [
+                    {
+                        type: "Text",
+                        content: "Tooltip",
+                        fontColor: "#0A1324",
+                        fontSize: 12
+                    } as TextProps
+                ]
+            } as ContainerProps
+        ]
+    };
+    const triggerContent = {
+        type: "RowLayout",
+        columnSize: "grow",
+        borders: true,
+        children: [
+            {
+                type: "DropZone",
+                property: values.trigger,
+                placeholder: "Place filter widget(s) here"
+            } as DropZoneProps
+        ]
+    } as RowLayoutProps;
+    const messageContent = {
+        type: "RowLayout",
+        columnSize: "grow",
+        borders: true,
+        backgroundColor: "#F5F5F5",
+        children: [
+            values.renderMethod === "text"
+                ? ({
+                      type: "Text",
+                      content: values.textMessage,
+                      fontSize: 14,
+                      fontColor: "#6B707B"
+                  } as TextProps)
+                : ({
+                      type: "DropZone",
+                      property: values.htmlMessage,
+                      placeholder: "Place your message here"
+                  } as DropZoneProps)
+        ]
+    } as RowLayoutProps;
+    return {
+        type: "Container",
+        children: [titleHeader, messageContent, triggerContent]
+    } as ContainerProps;
 }
