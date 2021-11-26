@@ -32,7 +32,6 @@ export default args => {
     // We force the externals to contain the library + the just built api file
     jsConfig.external = [...externals, ...libraryExternals];
     mJsConfig.external = [...externals, ...libraryExternals];
-    jsConfig.external = [...externals, ...libraryExternals];
 
     const plugins = [
         nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] }),
