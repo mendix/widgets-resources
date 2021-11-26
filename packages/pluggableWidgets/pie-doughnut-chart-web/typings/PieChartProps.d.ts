@@ -7,106 +7,68 @@ import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
 
-export type DataSetEnum = "static" | "dynamic";
+export type ChartFormatEnum = "pie" | "doughnut";
 
-export type AggregationTypeEnum =
-    | "none"
-    | "count"
-    | "sum"
-    | "avg"
-    | "min"
-    | "max"
-    | "median"
-    | "mode"
-    | "first"
-    | "last";
-
-export type InterpolationEnum = "linear" | "spline";
-
-export type LineStyleEnum = "line" | "lineWithMarkers" | "custom";
-
-export interface LinesType {
-    dataSet: DataSetEnum;
-    staticDataSource?: ListValue;
-    dynamicDataSource?: ListValue;
-    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
-    staticName?: DynamicValue<string>;
-    dynamicName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | Big>;
-    dynamicXAttribute?: ListAttributeValue<Date | Big>;
-    staticYAttribute?: ListAttributeValue<Date | Big>;
-    dynamicYAttribute?: ListAttributeValue<Date | Big>;
-    aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
-    interpolation: InterpolationEnum;
-    lineStyle: LineStyleEnum;
-    lineColor?: DynamicValue<string>;
-    markerColor?: DynamicValue<string>;
-    onClickAction?: ActionValue;
-    onClickTooltip?: ActionValue;
-}
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
+
+export type SeriesSortOrderEnum = "asc" | "desc";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
-
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
-
-export interface LinesPreviewType {
-    dataSet: DataSetEnum;
-    staticDataSource: {} | { type: string } | null;
-    dynamicDataSource: {} | { type: string } | null;
-    groupByAttribute: string;
-    staticName: string;
-    dynamicName: string;
-    staticXAttribute: string;
-    dynamicXAttribute: string;
-    staticYAttribute: string;
-    dynamicYAttribute: string;
-    aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
-    interpolation: InterpolationEnum;
-    lineStyle: LineStyleEnum;
-    lineColor: string;
-    markerColor: string;
-    onClickAction: {} | null;
-    onClickTooltip: {} | null;
-}
 
 export interface PieChartContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    lines: LinesType[];
-    showLegend: boolean;
+    chartFormat: ChartFormatEnum;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
+    showLegend: boolean;
+    gridLines: GridLinesEnum;
     developerMode: DeveloperModeEnum;
+    seriesDataSource: ListValue;
+    seriesName: ListExpressionValue<string>;
+    seriesValueAttribute: ListAttributeValue<Big>;
+    seriesSortAttribute?: ListAttributeValue<string | boolean | Date | Big>;
+    seriesSortOrder: SeriesSortOrderEnum;
+    seriesColorAttribute?: ListAttributeValue<string>;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    gridLines: GridLinesEnum;
+    onClickAction?: ActionValue;
+    onClickTooltip?: ActionValue;
     customLayout: string;
     customConfigurations: string;
+    customSeriesOptions: string;
 }
 
 export interface PieChartPreviewProps {
     class: string;
     style: string;
-    lines: LinesPreviewType[];
-    showLegend: boolean;
+    chartFormat: ChartFormatEnum;
     xAxisLabel: string;
     yAxisLabel: string;
+    showLegend: boolean;
+    gridLines: GridLinesEnum;
     developerMode: DeveloperModeEnum;
+    seriesDataSource: {} | { type: string } | null;
+    seriesName: string;
+    seriesValueAttribute: string;
+    seriesSortAttribute: string;
+    seriesSortOrder: SeriesSortOrderEnum;
+    seriesColorAttribute: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    gridLines: GridLinesEnum;
+    onClickAction: {} | null;
+    onClickTooltip: {} | null;
     customLayout: string;
     customConfigurations: string;
+    customSeriesOptions: string;
 }

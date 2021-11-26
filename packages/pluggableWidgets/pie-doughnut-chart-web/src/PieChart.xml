@@ -7,156 +7,13 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="lines" type="object" isList="true">
-                    <caption>Data source</caption>
-                    <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
-                    <properties>
-                        <propertyGroup caption="General">
-                            <property key="dataSet" type="enumeration" defaultValue="static">
-                                <caption>Data set</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="static">Static</enumerationValue>
-                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="staticDataSource" type="datasource" required="false" isList="true">
-                                <caption>Data source</caption>
-                                <description>Data points for a single line.</description>
-                            </property>
-                            <property key="dynamicDataSource" type="datasource" required="false" isList="true">
-                                <caption>Data source</caption>
-                                <description>Data points for all lines which will be divided into single lines based on the Group by attribute value.</description>
-                            </property>
-                            <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
-                                <caption>Group by</caption>
-                                <description>Data points within the same group form one line.</description>
-                                <attributeTypes>
-                                    <attributeType name="String" />
-                                    <attributeType name="Boolean" />
-                                    <attributeType name="DateTime" />
-                                    <attributeType name="Decimal" />
-                                    <attributeType name="Enum" />
-                                    <attributeType name="HashString" />
-                                    <attributeType name="Integer" />
-                                    <attributeType name="Long" />
-                                </attributeTypes>
-                            </property>
-                            <property key="staticName" type="textTemplate" required="false" multiline="false">
-                                <caption>Series name</caption>
-                                <description>The line name displayed in the legend.</description>
-                            </property>
-                            <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
-                                <caption>Series name</caption>
-                                <description>The line name displayed in the legend.</description>
-                            </property>
-                            <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
-                                <caption>X axis attribute</caption>
-                                <description />
-                                <attributeTypes>
-                                    <attributeType name="DateTime" />
-                                    <attributeType name="Decimal" />
-                                    <attributeType name="Integer" />
-                                    <attributeType name="Long" />
-                                    <attributeType name="AutoNumber" />
-                                </attributeTypes>
-                            </property>
-                            <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
-                                <caption>X axis attribute</caption>
-                                <description />
-                                <attributeTypes>
-                                    <attributeType name="DateTime" />
-                                    <attributeType name="Decimal" />
-                                    <attributeType name="Integer" />
-                                    <attributeType name="Long" />
-                                    <attributeType name="AutoNumber" />
-                                </attributeTypes>
-                            </property>
-                            <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
-                                <caption>Y axis attribute</caption>
-                                <description />
-                                <attributeTypes>
-                                    <attributeType name="DateTime" />
-                                    <attributeType name="Decimal" />
-                                    <attributeType name="Integer" />
-                                    <attributeType name="Long" />
-                                    <attributeType name="AutoNumber" />
-                                </attributeTypes>
-                            </property>
-                            <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
-                                <caption>Y axis attribute</caption>
-                                <description />
-                                <attributeTypes>
-                                    <attributeType name="DateTime" />
-                                    <attributeType name="Decimal" />
-                                    <attributeType name="Integer" />
-                                    <attributeType name="Long" />
-                                    <attributeType name="AutoNumber" />
-                                </attributeTypes>
-                            </property>
-                            <property key="aggregationType" type="enumeration" defaultValue="none">
-                                <caption>Aggregation type</caption>
-                                <description>Defines how data is aggregated when multiple Y values are available for a single X value</description>
-                                <enumerationValues>
-                                    <enumerationValue key="none">None</enumerationValue>
-                                    <enumerationValue key="count">Count</enumerationValue>
-                                    <enumerationValue key="sum">Sum</enumerationValue>
-                                    <enumerationValue key="avg">Average</enumerationValue>
-                                    <enumerationValue key="min">Minimum</enumerationValue>
-                                    <enumerationValue key="max">Maximum</enumerationValue>
-                                    <enumerationValue key="median">Median</enumerationValue>
-                                    <enumerationValue key="mode">Mode</enumerationValue>
-                                    <enumerationValue key="first">First</enumerationValue>
-                                    <enumerationValue key="last">Last</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
-                                <caption>Custom series options</caption>
-                                <description/>
-                            </property>
-                        </propertyGroup>
-                        <propertyGroup caption="Appearance">
-                            <property key="interpolation" type="enumeration" defaultValue="linear">
-                                <caption>Interpolation</caption>
-                                <description />
-                                <enumerationValues>
-                                    <enumerationValue key="linear">Linear</enumerationValue>
-                                    <enumerationValue key="spline">Curved</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="lineStyle" type="enumeration" defaultValue="line">
-                                <caption>Line style</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="line">Line</enumerationValue>
-                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
-                                    <enumerationValue key="custom">Custom</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="lineColor" type="textTemplate" required="false" multiline="false">
-                                <caption>Line color</caption>
-                                <description/>
-                            </property>
-                            <property key="markerColor" type="textTemplate" required="false" multiline="false">
-                                <caption>Marker color</caption>
-                                <description/>
-                            </property>
-                        </propertyGroup>
-                        <propertyGroup caption="Events">
-                            <property key="onClickAction" type="action" required="false">
-                                <caption>On click action</caption>
-                                <description/>
-                            </property>
-                            <property key="onClickTooltip" type="action" required="false">
-                                <caption>Tooltip</caption>
-                                <description/>
-                            </property>
-                        </propertyGroup>
-                    </properties>
-                </property>
-                <property key="showLegend" type="boolean" defaultValue="true">
-                    <caption>Show legend</caption>
-                    <description />
+                <property key="chartFormat" type="enumeration" defaultValue="pie">
+                    <caption>Chart format</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="pie">Pie</enumerationValue>
+                        <enumerationValue key="doughnut">Doughnut</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
@@ -166,14 +23,78 @@
                     <caption>Y axis label</caption>
                     <description />
                 </property>
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="gridLines" type="enumeration" defaultValue="none">
+                    <caption>Grid lines</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="both">Both</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
-                    <caption>Developer mode</caption>
+                    <caption>Mode</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="advanced">Advanced</enumerationValue>
                         <enumerationValue key="developer">Developer</enumerationValue>
                     </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Series">
+                <property key="seriesDataSource" type="datasource" required="true" isList="true">
+                    <caption>Data source</caption>
+                    <description />
+                </property>
+                <property key="seriesName" type="textTemplate" required="true" multiline="false" dataSource="seriesDataSource">
+                    <caption>Series name</caption>
+                    <description />
+                </property>
+                <property key="seriesValueAttribute" type="attribute" required="true" dataSource="seriesDataSource">
+                    <caption>Value attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Decimal" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="seriesSortAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Sort attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Boolean" />
+                        <attributeType name="DateTime" />
+                        <attributeType name="Decimal" />
+                        <attributeType name="Enum" />
+                        <attributeType name="HashString" />
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                    </attributeTypes>
+                </property>
+                <property key="seriesSortOrder" type="enumeration" defaultValue="asc">
+                    <caption>Sort order</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="asc">Ascending</enumerationValue>
+                        <enumerationValue key="desc">Descending</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="seriesColorAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Color attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Enum" />
+                        <attributeType name="HashString" />
+                    </attributeTypes>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
@@ -211,24 +132,30 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Theme">
-            <propertyGroup caption="Theme">
-                <property key="gridLines" type="enumeration" defaultValue="none">
-                    <caption>Grid lines</caption>
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="onClickAction" type="action" required="false">
+                    <caption>On click action</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="none">None</enumerationValue>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                        <enumerationValue key="both">Both</enumerationValue>
-                    </enumerationValues>
                 </property>
+                <property key="onClickTooltip" type="action" required="false">
+                    <caption>Tooltip</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Advanced">
+            <propertyGroup caption="Advanced">
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>
                     <description/>
                 </property>
                 <property key="customConfigurations" type="string" required="false" multiline="true">
                     <caption>Custom configurations</caption>
+                    <description/>
+                </property>
+                <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                    <caption>Custom series options</caption>
                     <description/>
                 </property>
             </propertyGroup>

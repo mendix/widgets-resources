@@ -43,6 +43,7 @@
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
     "@mendix/shared-charts": "^1.0.0",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "date-fns": "^2.16.1"
   }
 }

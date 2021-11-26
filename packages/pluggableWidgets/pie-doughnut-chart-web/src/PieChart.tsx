@@ -1,39 +1,48 @@
 import classNames from "classnames";
-import { createElement, ReactElement, useCallback } from "react";
+import { createElement, ReactElement } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
-import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { PieChartContainerProps } from "../typings/PieChartProps";
+import { usePieChartDataSeries } from "./hooks/data";
 
 const pieChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
-    xaxis: {
-        zeroline: true,
-        fixedrange: true,
-        gridcolor: "#d7d7d7",
-        zerolinecolor: "#d7d7d7"
+    font: {
+        color: "#FFF",
+        size: 12
     },
-    yaxis: {
-        fixedrange: true,
-        gridcolor: "#d7d7d7",
-        zeroline: true,
-        zerolinecolor: "#d7d7d7"
+    legend: {
+        font: {
+            family: "Open Sans",
+            size: 14,
+            color: "#555"
+        }
     }
 };
 const pieChartConfigOptions: ChartWidgetProps["configOptions"] = {
     responsive: true
 };
-const pieChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
+const pieChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
+    type: "pie",
+    hoverinfo: "none",
+    sort: false
+};
 
 export function PieChart(props: PieChartContainerProps): ReactElement | null {
-    const chartLines = usePlotChartDataSeries(
-        props.lines,
-        useCallback(() => ({ type: "pie" }), [])
-    );
+    const pieChartData = usePieChartDataSeries({
+        chartFormat: props.chartFormat,
+        customSeriesOptions: props.customSeriesOptions,
+        seriesColorAttribute: props.seriesColorAttribute,
+        seriesDataSource: props.seriesDataSource,
+        seriesName: props.seriesName,
+        seriesSortAttribute: props.seriesSortAttribute,
+        seriesSortOrder: props.seriesSortOrder,
+        seriesValueAttribute: props.seriesValueAttribute
+    });
 
     return (
         <ChartWidget
             type="PieChart"
-            className={classNames("widget-line-chart", props.class)}
-            data={chartLines ?? []}
+            className={classNames("widget-pie-chart", props.class)}
+            data={pieChartData}
             width={props.width}
             widthUnit={props.widthUnit}
             height={props.height}
