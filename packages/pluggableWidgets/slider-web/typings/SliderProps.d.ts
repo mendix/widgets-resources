@@ -25,6 +25,7 @@ export interface SliderContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     id: string;
+    advanced: boolean;
     valueAttribute: EditableValue<Big>;
     minValueType: MinValueTypeEnum;
     staticMinimumValue: Big;
@@ -52,6 +53,7 @@ export interface SliderContainerProps {
 export interface SliderPreviewProps {
     class: string;
     style: string;
+    advanced: boolean;
     valueAttribute: string;
     minValueType: MinValueTypeEnum;
     staticMinimumValue: number | null;

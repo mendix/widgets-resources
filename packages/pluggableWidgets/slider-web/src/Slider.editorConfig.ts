@@ -25,6 +25,21 @@ const keysToHideBySizeType: Record<StepSizeTypeEnum, Array<keyof SliderPreviewPr
     expression: ["stepValue", "stepAttribute"]
 };
 
+const advancedOptionKeys: Array<keyof SliderPreviewProps> = [
+    "stepSizeType",
+    "stepValue",
+    "stepAttribute",
+    "expressionStepSize",
+    "showTooltip",
+    "tooltipType",
+    "tooltip",
+    "noOfMarkers",
+    "decimalPlaces",
+    "orientation",
+    "heightUnit",
+    "height"
+];
+
 export function getProperties(
     values: SliderPreviewProps,
     defaultProperties: Properties,
@@ -44,6 +59,10 @@ export function getProperties(
 
     if (values.orientation === "horizontal") {
         hidePropertiesIn(defaultProperties, values, ["heightUnit", "height"]);
+    }
+
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, advancedOptionKeys);
     }
 
     if (platform === "web") {
