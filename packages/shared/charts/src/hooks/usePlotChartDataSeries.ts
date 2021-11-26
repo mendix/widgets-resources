@@ -205,3 +205,31 @@ function extractDataPoints(
         y: yData
     };
 }
+
+type AggregationTypeEnum = "none" | "count" | "sum" | "avg" | "min" | "max" | "median" | "mode" | "first" | "last";
+
+export function getPlotChartDataTransforms(
+    aggregationType: AggregationTypeEnum,
+    dataPoints: PlotChartDataPoints
+): PlotData["transforms"] {
+    if (aggregationType === "none") {
+        return [];
+    }
+    return [
+        {
+            type: "aggregate",
+            groups: dataPoints.x.map(dataPoint =>
+                typeof dataPoint === "string" || typeof dataPoint === "number"
+                    ? dataPoint.toLocaleString()
+                    : dataPoint.toLocaleDateString()
+            ),
+            aggregations: [
+                {
+                    target: "y",
+                    func: aggregationType,
+                    enabled: true
+                }
+            ]
+        }
+    ];
+}

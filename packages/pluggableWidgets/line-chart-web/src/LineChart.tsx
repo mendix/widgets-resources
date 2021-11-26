@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { createElement, ReactElement, useCallback } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
-import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
+import { getPlotChartDataTransforms, usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { LineChartContainerProps } from "../typings/LineChartProps";
 
 const lineChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
@@ -37,26 +37,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
                 marker: {
                     color: line.markerColor?.value
                 },
-                transforms:
-                    line.aggregationType === "none"
-                        ? undefined
-                        : [
-                              {
-                                  type: "aggregate",
-                                  groups: dataPoints.x.map(dataPoint =>
-                                      typeof dataPoint === "string" || typeof dataPoint === "number"
-                                          ? dataPoint.toLocaleString()
-                                          : dataPoint.toLocaleDateString()
-                                  ),
-                                  aggregations: [
-                                      {
-                                          target: "y",
-                                          func: line.aggregationType,
-                                          enabled: true
-                                      }
-                                  ]
-                              }
-                          ]
+                transforms: getPlotChartDataTransforms(line.aggregationType, dataPoints)
             }),
             []
         )
