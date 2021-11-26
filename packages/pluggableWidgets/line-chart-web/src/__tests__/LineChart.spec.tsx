@@ -77,7 +77,7 @@ describe("The LineChart widget", () => {
         const lineChart = renderLineChart([{ aggregationType: "none" }, { aggregationType: "avg" }]);
         const data = lineChart.find(ChartWidget).prop("data");
         expect(data).toHaveLength(2);
-        expect(data[0]).toHaveProperty("transforms", undefined);
+        expect(data[0]).toHaveProperty("transforms", []);
         expect(data[1]).toHaveProperty("transforms", [
             {
                 type: "aggregate",
