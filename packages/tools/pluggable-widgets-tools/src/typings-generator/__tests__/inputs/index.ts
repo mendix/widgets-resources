@@ -353,7 +353,6 @@ export const contentGroupNative = `<?xml version="1.0" encoding="utf-8"?>
             </property>
         </propertyGroup>
         <propertyGroup caption="System Properties">
-            <systemProperty key="Label"></systemProperty>
             <systemProperty key="TabIndex"></systemProperty>
         </propertyGroup>
     </properties>

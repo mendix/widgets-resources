@@ -21,14 +21,18 @@ export function generateClientTypes(
 ${generateClientTypeBody(properties, true, results, resolveProp)}
 }`
             : `export interface ${widgetName}ContainerProps {
-    name: string;
+    name: string;${
+        !isLabeled
+            ? `
     class: string;
-    style?: CSSProperties;
+    style?: CSSProperties;`
+            : ""
+    }
     tabIndex?: number;${
         isLabeled
             ? `
     id: string;`
-            : ``
+            : ""
     }
 ${generateClientTypeBody(properties, false, results, resolveProp)}
 }`

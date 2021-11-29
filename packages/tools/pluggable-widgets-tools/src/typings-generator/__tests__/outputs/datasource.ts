@@ -3,7 +3,7 @@ export const datasourceWebOutput = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, CSSProperties } from "react";
+import { ComponentType } from "react";
 import { ActionValue, EditableValue, ListValue, ListActionValue, ListAttributeValue, ListExpressionValue, ListWidgetValue } from "mendix";
 import { Big } from "big.js";
 
@@ -31,8 +31,6 @@ export interface DatasourcePropertiesPreviewType {
 
 export interface MyWidgetContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     contentSource: ListValue;
@@ -53,10 +51,7 @@ export interface MyWidgetContainerProps {
 }
 
 export interface MyWidgetPreviewProps {
-    className: string;
     readOnly: boolean;
-    style?: string;
-    styleObject?: CSSProperties;
     contentSource: {} | { type: string } | null;
     optionalSource: {} | { type: string } | null;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };

@@ -45,9 +45,9 @@ export interface MyWidgetProps<Style> {
 
 export interface MyWidgetPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     valueAttribute: string;
     mywidgetValue: string;
     valueExpression: string;
@@ -113,9 +113,9 @@ export interface MyWidgetContainerProps {
 
 export interface MyWidgetPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     valueAttribute: string;
     mywidgetValue: string;
     valueExpression: string;
@@ -137,7 +137,6 @@ export const webResultGroup = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
 import { Big } from "big.js";
 
@@ -161,8 +160,6 @@ export interface ActionsPreviewType {
 
 export interface MyWidgetContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     valueAttribute?: EditableValue<string | Big>;
@@ -181,10 +178,7 @@ export interface MyWidgetContainerProps {
 }
 
 export interface MyWidgetPreviewProps {
-    className: string;
     readOnly: boolean;
-    style?: string;
-    styleObject?: CSSProperties;
     valueAttribute: string;
     mywidgetValue: string;
     valueExpression: string;

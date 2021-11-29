@@ -34,7 +34,7 @@ export function generateForWidget(widgetXml: WidgetXml, widgetName: string) {
     const systemProperties = extractSystemProperties(propElements).filter(prop => prop?.$?.key);
 
     const clientTypes = generateClientTypes(widgetName, properties, systemProperties, isNative);
-    const modelerTypes = generatePreviewTypes(widgetName, properties);
+    const modelerTypes = generatePreviewTypes(widgetName, properties, systemProperties);
 
     const generatedTypesCode = clientTypes
         .slice(0, clientTypes.length - 1) // all client auxiliary types
