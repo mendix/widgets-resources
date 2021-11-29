@@ -17,8 +17,10 @@ export interface BadgeButtonContainerProps {
 }
 
 export interface BadgeButtonPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     label: string;
     value: string;
     onClickEvent: {} | null;
