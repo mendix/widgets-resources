@@ -4,6 +4,8 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
 import { terser } from "rollup-plugin-terser";
+import command from "rollup-plugin-command";
+import { cp } from "shelljs";
 
 export default args => {
     const production = Boolean(args.configProduction);
