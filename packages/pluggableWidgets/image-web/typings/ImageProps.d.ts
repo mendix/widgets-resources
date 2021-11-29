@@ -41,8 +41,10 @@ export interface ImageContainerProps {
 }
 
 export interface ImagePreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     datasource: DatasourceEnum;
     imageObject: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     defaultImageDynamic: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;

@@ -38,7 +38,7 @@ export function preview(props: ImagePreviewProps): ReactElement | null {
 
     return (
         <ImageComponent
-            class={props.class}
+            class={props.className}
             style={parseStyle(props.style)}
             widthUnit={props.widthUnit}
             width={props.width ?? 100}
