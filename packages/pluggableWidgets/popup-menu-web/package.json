@@ -1,7 +1,7 @@
 {
   "name": "popup-menu-web",
   "widgetName": "PopupMenu",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {

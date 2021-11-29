@@ -64,8 +64,10 @@ export interface PopupMenuContainerProps {
 }
 
 export interface PopupMenuPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     advancedMode: boolean;
     menuTrigger: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     basicItems: BasicItemsPreviewType[];

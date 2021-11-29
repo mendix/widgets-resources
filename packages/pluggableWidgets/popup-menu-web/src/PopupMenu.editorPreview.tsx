@@ -38,6 +38,7 @@ export function preview(props: PopupMenuPreviewProps) {
     return (
         <PopupMenuComponent
             {...props}
+            class={props.className}
             basicItems={basicItems}
             customItems={customItems}
             menuTrigger={
