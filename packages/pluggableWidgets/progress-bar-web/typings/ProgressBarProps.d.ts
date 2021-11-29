@@ -34,8 +34,10 @@ export interface ProgressBarContainerProps {
 }
 
 export interface ProgressBarPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     type: TypeEnum;
     staticCurrentValue: number | null;
     dynamicCurrentValue: string;
