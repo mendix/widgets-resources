@@ -3,11 +3,7 @@ import { GalleryPreviewProps } from "../typings/GalleryProps";
 import { Gallery as GalleryComponent } from "./components/Gallery";
 import { ObjectItem, GUID } from "mendix";
 
-interface PreviewProps extends Omit<GalleryPreviewProps, "class"> {
-    className: string;
-}
-
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: GalleryPreviewProps): ReactElement {
     const items: ObjectItem[] = Array.from({ length: props.pageSize ?? 5 }).map((_, index) => ({
         id: String(index) as GUID
     }));

@@ -3,11 +3,7 @@ import { DatagridDropdownFilterPreviewProps } from "../typings/DatagridDropdownF
 import { FilterComponent } from "./components/FilterComponent";
 import { parseStyle } from "@mendix/piw-utils-internal";
 
-interface PreviewProps extends Omit<DatagridDropdownFilterPreviewProps, "class"> {
-    className: string;
-}
-
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: DatagridDropdownFilterPreviewProps): ReactElement {
     return (
         <FilterComponent
             ariaLabel={props.ariaLabel}

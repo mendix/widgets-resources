@@ -17,8 +17,10 @@ export interface DropdownSortContainerProps {
 }
 
 export interface DropdownSortPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     emptyOptionCaption: string;
     screenReaderButtonCaption: string;
     screenReaderInputCaption: string;

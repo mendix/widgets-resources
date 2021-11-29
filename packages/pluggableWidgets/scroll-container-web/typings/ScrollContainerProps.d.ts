@@ -20,8 +20,10 @@ export interface ScrollContainerContainerProps {
 }
 
 export interface ScrollContainerPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     widthType: WidthTypeEnum;
     widthPixels: number | null;
     widthPercentage: number | null;

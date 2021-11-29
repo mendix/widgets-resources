@@ -5,13 +5,7 @@ import { mapPreviewIconToWebIcon } from "@mendix/piw-utils-internal/components/w
 import { StarRatingPreviewProps } from "../typings/StarRatingProps";
 import { Icon } from "./components/Icon";
 
-// TODO: The widget generator is out of sync with Studio Pro design mode. Change PIW preview props typing (class -> className) and readOnly generation when updated.
-interface PreviewProps extends Omit<StarRatingPreviewProps, "class"> {
-    className: string;
-    readOnly?: boolean;
-}
-
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: StarRatingPreviewProps): ReactElement {
     const { className, readOnly } = props;
 
     const emptyIcon = props.emptyIcon ? (

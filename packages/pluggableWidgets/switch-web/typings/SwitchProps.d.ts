@@ -17,8 +17,10 @@ export interface SwitchContainerProps {
 }
 
 export interface SwitchPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     booleanAttribute: string;
     action: {} | null;
 }

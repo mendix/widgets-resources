@@ -4,10 +4,6 @@ import { Alert } from "@mendix/piw-utils-internal/components/web";
 import GoogleMapSvg from "./assets/GoogleMapsDesign.svg";
 import { parseStyle } from "@mendix/piw-utils-internal";
 
-interface PreviewProps extends Omit<MapsPreviewProps, "class"> {
-    className: string;
-}
-
 declare function require(name: string): string;
 
 const imagePreviewStyles = {
@@ -19,7 +15,7 @@ const imagePreviewStyles = {
     height: "375px"
 };
 
-export const preview = (props: PreviewProps): ReactNode => {
+export const preview = (props: MapsPreviewProps): ReactNode => {
     return (
         <div className={props.className} style={parseStyle(props.style)}>
             {(props.mapProvider === "mapBox" || props.mapProvider === "hereMaps") && (

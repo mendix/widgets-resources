@@ -101,8 +101,10 @@ export interface DatagridContainerProps {
 }
 
 export interface DatagridPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     advanced: boolean;
     datasource: {} | { type: string } | null;
     columns: ColumnsPreviewType[];

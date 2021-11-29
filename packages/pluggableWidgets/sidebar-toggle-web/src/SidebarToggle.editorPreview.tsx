@@ -9,7 +9,7 @@ export function preview(props: SidebarTogglePreviewProps): ReactElement | null {
     return (
         <Toggle
             caption={props.caption}
-            className={props.class}
+            className={props.className}
             icon={mapPreviewIconToWebIcon(props.icon)}
             render={props.renderMode}
             role={props.role}

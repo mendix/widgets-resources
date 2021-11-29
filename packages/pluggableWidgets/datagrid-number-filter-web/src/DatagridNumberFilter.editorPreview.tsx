@@ -3,11 +3,7 @@ import { DatagridNumberFilterPreviewProps } from "../typings/DatagridNumberFilte
 import { FilterComponent } from "./components/FilterComponent";
 import { parseStyle } from "@mendix/piw-utils-internal";
 
-interface PreviewProps extends Omit<DatagridNumberFilterPreviewProps, "class"> {
-    className: string;
-}
-
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: DatagridNumberFilterPreviewProps): ReactElement {
     return (
         <FilterComponent
             adjustable={props.adjustable}

@@ -5,11 +5,7 @@ import { SidebarPreviewProps } from "../typings/SidebarProps";
 import { Sidebar as SidebarComponent } from "./components/Sidebar";
 import { getWidth } from "./utils/utils";
 
-interface PreviewProps extends Omit<SidebarPreviewProps, "class"> {
-    className: string;
-}
-
-export function preview(props: PreviewProps): ReactElement | null {
+export function preview(props: SidebarPreviewProps): ReactElement | null {
     const width = getWidth(props.widthUnit, props.widthValue ?? 0);
     const collapsedWidth = getWidth(props.collapsedWidthUnit, props.collapsedWidthValue ?? 0);
     const expandedWidth = getWidth(props.expandedWidthUnit, props.expandedWidthValue ?? 0);

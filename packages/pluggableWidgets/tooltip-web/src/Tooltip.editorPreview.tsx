@@ -5,11 +5,7 @@ import { TooltipPreviewProps } from "../typings/TooltipProps";
 import { translatePosition } from "./utils";
 import { parseStyle } from "@mendix/piw-utils-internal";
 
-interface PreviewProps extends Omit<TooltipPreviewProps, "class"> {
-    className: string;
-}
-
-export const preview = (props: PreviewProps): ReactElement => {
+export const preview = (props: TooltipPreviewProps): ReactElement => {
     return (
         <Tooltip
             class={props.className}

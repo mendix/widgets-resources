@@ -48,8 +48,10 @@ export interface TimelineContainerProps {
 }
 
 export interface TimelinePreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     data: {} | { type: string } | null;
     title: string;
     description: string;

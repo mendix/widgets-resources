@@ -3,16 +3,11 @@ import { ScrollContainerPreviewProps } from "../typings/ScrollContainerProps";
 import { ScrollContainer as ScrollContainerComponent } from "./components/ScrollContainer";
 import { parseStyle } from "@mendix/piw-utils-internal";
 
-// This interface is necessary to overcome incorrect exposure of class names with the "className" prop. In the future they will be exposed with a "class" prop (Jira Issue PAG-1317).
-interface PreviewProps extends Omit<ScrollContainerPreviewProps, "class"> {
-    className: string;
-}
-
 export function getPreviewCss(): string {
     return require("./ui/scroll-container.scss");
 }
 
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: ScrollContainerPreviewProps): ReactElement {
     return (
         <ScrollContainerComponent
             className={props.className}
