@@ -13,7 +13,7 @@ export class preview extends Component<VideoPlayerPreviewProps, {}> {
     render(): JSX.Element {
         return (
             <SizeContainer
-                className={classNames("video-player-container", this.props.class)}
+                className={classNames("video-player-container", this.props.className)}
                 style={parseStyle(this.props.style)}
                 widthUnit={this.props.widthUnit}
                 width={this.props.width ?? 0}
