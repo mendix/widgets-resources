@@ -37,6 +37,24 @@ export function check(values: TooltipPreviewProps): Problem[] {
 }
 
 export function getPreview(values: TooltipPreviewProps): StructurePreviewProps | null {
+    const centerLayout = (props: TextProps | DropZoneProps) => {
+        return {
+            type: "RowLayout",
+            grow: 1,
+            children: [
+                {
+                    type: "Text",
+                    content: ""
+                } as TextProps,
+                props,
+                {
+                    type: "Text",
+                    content: ""
+                } as TextProps
+            ]
+        } as RowLayoutProps;
+    };
+
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
@@ -57,36 +75,40 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
             } as ContainerProps
         ]
     };
-    const triggerContent = {
-        type: "RowLayout",
-        columnSize: "grow",
-        borders: true,
-        children: [
-            {
-                type: "DropZone",
-                property: values.trigger,
-                placeholder: "Place filter widget(s) here"
-            } as DropZoneProps
-        ]
-    } as RowLayoutProps;
     const messageContent = {
         type: "RowLayout",
         columnSize: "grow",
         borders: true,
         backgroundColor: "#F5F5F5",
         children: [
-            values.renderMethod === "text"
-                ? ({
-                      type: "Text",
-                      content: values.textMessage,
-                      fontSize: 14,
-                      fontColor: "#6B707B"
-                  } as TextProps)
-                : ({
-                      type: "DropZone",
-                      property: values.htmlMessage,
-                      placeholder: "Place your message here"
-                  } as DropZoneProps)
+            centerLayout(
+                values.renderMethod === "text"
+                    ? ({
+                          type: "Text",
+                          content: values.textMessage,
+                          fontSize: 14,
+                          fontColor: "#6B707B",
+                          grow: 1
+                      } as TextProps)
+                    : ({
+                          type: "DropZone",
+                          property: values.htmlMessage,
+                          placeholder: "Place your message here",
+                          grow: 1
+                      } as DropZoneProps)
+            )
+        ]
+    } as RowLayoutProps;
+    const triggerContent = {
+        type: "RowLayout",
+        columnSize: "grow",
+        borders: true,
+        children: [
+            centerLayout({
+                type: "DropZone",
+                property: values.trigger,
+                placeholder: "Place filter widget(s) here"
+            } as DropZoneProps)
         ]
     } as RowLayoutProps;
     return {
