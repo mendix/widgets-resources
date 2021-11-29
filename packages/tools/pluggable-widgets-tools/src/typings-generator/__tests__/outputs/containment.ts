@@ -17,8 +17,10 @@ export interface MyWidgetContainerProps {
 }
 
 export interface MyWidgetPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     description: string;
     action: {} | null;

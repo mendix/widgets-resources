@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed the typing generation for `editorPreview` files.
+
+## [9.7.1] - 2021-11-18
+
 ### Added
 - We added minification of CSS files inside generated widget MPKs (using `npm run release`).
 

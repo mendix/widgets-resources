@@ -4,8 +4,10 @@ import { capitalizeFirstLetter, extractProperties } from "./helpers";
 export function generatePreviewTypes(widgetName: string, properties: Property[]): string[] {
     const results = Array.of<string>();
     results.push(`export interface ${widgetName}PreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
 ${generatePreviewTypeBody(properties, results)}
 }`);
     return results;
