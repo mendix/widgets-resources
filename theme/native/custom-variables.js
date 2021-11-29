@@ -299,6 +299,28 @@ export const navigation = {
     }
 };
 //
+// Checkbox styles
+export const checkbox = {
+    checkboxInput: {
+        color: brand.primary,
+        size: 20,
+        backgroundColor: background.primary,
+        borderColor: border.color,
+        borderWidth: border.width,
+        borderRadius: border.radiusSmall,
+        width: 40,
+        height: 40
+    },
+    checkboxInputDisabled: {
+        color: brand.primaryLight,
+        backgroundColor: background.secondary
+    },
+    checkboxInputError: {
+        color: brand.danger,
+        borderColor: brand.danger
+    }
+};
+//
 // Container Styles
 export const container = {
     containerDisabled: {
