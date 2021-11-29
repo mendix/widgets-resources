@@ -25,8 +25,10 @@ export interface BarcodeScannerContainerProps {
 }
 
 export interface BarcodeScannerPreviewProps {
-    class: string;
-    style: string;
+    className: string;
+    readOnly: boolean;
+    style?: string;
+    styleObject?: CSSProperties;
     datasource: string;
     showMask: boolean;
     onDetect: {} | null;
