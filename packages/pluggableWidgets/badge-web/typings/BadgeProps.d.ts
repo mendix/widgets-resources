@@ -20,9 +20,9 @@ export interface BadgeContainerProps {
 
 export interface BadgePreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     type: TypeEnum;
     value: string;
     onClick: {} | null;

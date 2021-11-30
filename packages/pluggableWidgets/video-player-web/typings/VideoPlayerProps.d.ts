@@ -37,9 +37,9 @@ export interface VideoPlayerContainerProps {
 
 export interface VideoPlayerPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     type: TypeEnum;
     urlExpression: string;
     posterExpression: string;

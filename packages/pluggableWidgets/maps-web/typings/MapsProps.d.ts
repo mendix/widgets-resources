@@ -101,9 +101,9 @@ export interface MapsContainerProps {
 
 export interface MapsPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     advanced: boolean;
     markers: MarkersPreviewType[];
     dynamicMarkers: DynamicMarkersPreviewType[];

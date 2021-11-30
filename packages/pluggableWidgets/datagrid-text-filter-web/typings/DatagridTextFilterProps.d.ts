@@ -36,9 +36,9 @@ export interface DatagridTextFilterContainerProps {
 
 export interface DatagridTextFilterPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     advanced: boolean;
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;

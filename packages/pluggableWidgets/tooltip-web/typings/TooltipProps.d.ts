@@ -30,9 +30,9 @@ export interface TooltipContainerProps {
 
 export interface TooltipPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     trigger: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     renderMethod: RenderMethodEnum;
     htmlMessage: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };

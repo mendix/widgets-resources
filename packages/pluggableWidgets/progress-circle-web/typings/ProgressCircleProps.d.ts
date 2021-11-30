@@ -35,9 +35,9 @@ export interface ProgressCircleContainerProps {
 
 export interface ProgressCirclePreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     type: TypeEnum;
     staticCurrentValue: number | null;
     dynamicCurrentValue: string;

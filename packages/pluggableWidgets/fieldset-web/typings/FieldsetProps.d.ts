@@ -17,9 +17,9 @@ export interface FieldsetContainerProps {
 
 export interface FieldsetPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     legend: string;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
 }

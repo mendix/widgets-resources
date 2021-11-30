@@ -49,9 +49,9 @@ export interface TimelineContainerProps {
 
 export interface TimelinePreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     data: {} | { type: string } | null;
     title: string;
     description: string;

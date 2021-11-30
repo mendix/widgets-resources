@@ -21,9 +21,9 @@ export interface ScrollContainerContainerProps {
 
 export interface ScrollContainerPreviewProps {
     className: string;
-    readOnly: boolean;
-    style?: string;
+    style: string;
     styleObject?: CSSProperties;
+    readOnly: boolean;
     widthType: WidthTypeEnum;
     widthPixels: number | null;
     widthPercentage: number | null;
