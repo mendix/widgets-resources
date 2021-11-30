@@ -2,7 +2,7 @@ import { MapsPreviewProps } from "../../typings/MapsProps";
 import { check } from "../Maps.editorConfig";
 
 describe("Zoom level check", () => {
-    let mapsPreviewProps: Omit<MapsPreviewProps, "class" | "style">;
+    let mapsPreviewProps: Omit<MapsPreviewProps, "className" | "style" | "readOnly">;
 
     beforeEach(() => {
         mapsPreviewProps = {
