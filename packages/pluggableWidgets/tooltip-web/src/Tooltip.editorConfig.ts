@@ -39,10 +39,11 @@ export function check(values: TooltipPreviewProps): Problem[] {
 }
 
 export function getPreview(values: TooltipPreviewProps): StructurePreviewProps | null {
-    const centerLayout = (props: TextProps | DropZoneProps) => {
-        return {
+    const centerLayout = (props: TextProps | DropZoneProps) =>
+        ({
             type: "RowLayout",
             columnSize: "grow",
+            padding: 0,
             children: [
                 {
                     type: "Container",
@@ -60,8 +61,7 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
                     children: []
                 } as ContainerProps
             ]
-        } as RowLayoutProps;
-    };
+        } as RowLayoutProps);
 
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
@@ -72,6 +72,7 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
         children: [
             {
                 type: "Container",
+                padding: 6,
                 grow: 0,
                 children: [
                     {
@@ -84,6 +85,7 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
             },
             {
                 type: "Container",
+                padding: 6,
                 children: [
                     {
                         type: "Text",
@@ -100,29 +102,38 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
         columnSize: "grow",
         borders: true,
         backgroundColor: "#F5F5F5",
+        padding: 0,
         children: [
-            values.renderMethod === "text"
-                ? centerLayout({
-                      type: "Text",
-                      content: values.textMessage ? values.textMessage : "Place your tooltip message",
-                      fontSize: 14,
-                      fontColor: "#6B707B",
-                      bold: !!values.textMessage
-                  } as TextProps)
-                : ({
-                      type: "DropZone",
-                      property: values.htmlMessage,
-                      placeholder: "Place your tooltip widget"
-                  } as DropZoneProps)
+            {
+                type: "Container",
+                padding: 6,
+                children: [
+                    values.renderMethod === "text"
+                        ? centerLayout({
+                              type: "Text",
+                              content: values.textMessage ? values.textMessage : "Place your tooltip message",
+                              fontSize: 14,
+                              fontColor: "#000000",
+                              bold: !!values.textMessage
+                          } as TextProps)
+                        : ({
+                              type: "DropZone",
+                              property: values.htmlMessage,
+                              placeholder: "Place your tooltip widget"
+                          } as DropZoneProps)
+                ]
+            }
         ]
     } as RowLayoutProps;
     const triggerContent = {
         type: "DropZone",
         property: values.trigger,
-        placeholder: "Place widget(s) here"
+        placeholder: "Place widget(s) here",
+        grow: 1
     } as DropZoneProps;
     return {
         type: "Container",
+        borders: true,
         children: [titleHeader, messageContent, triggerContent]
     } as ContainerProps;
 }
