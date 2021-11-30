@@ -16,10 +16,7 @@ describe("Rating", () => {
     });
 
     it("renders correctly", async () => {
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     afterAll(async () => {

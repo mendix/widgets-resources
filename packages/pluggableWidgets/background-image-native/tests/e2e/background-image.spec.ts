@@ -13,20 +13,14 @@ describe("Background image", () => {
         const btnStaticImages = Widget("btnStaticImages").getElement();
         await btnStaticImages.tap();
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the static svg images", async () => {
         const btnStaticSvgImages = Widget("btnStaticSvgImages").getElement();
         await btnStaticSvgImages.tap();
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the dynamic image", async () => {
@@ -36,10 +30,7 @@ describe("Background image", () => {
         const dynamicImage = Widget("dynamicImageText").getElement();
         await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the dynamic svg image", async () => {
@@ -49,10 +40,7 @@ describe("Background image", () => {
         const dynamicImage = Widget("dynamicSvgImageText").getElement();
         await waitFor(dynamicImage).toBeVisible().withTimeout(2000);
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the dynamic image with conditional visibility", async () => {
@@ -62,10 +50,7 @@ describe("Background image", () => {
         const checkboxImage = Widget("checkboxImage").getElement();
         await checkboxImage.tap();
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the background image with clickable container", async () => {
@@ -78,30 +63,21 @@ describe("Background image", () => {
         await expect(Alert().getMessage("Container clicked!")).toBeVisible();
         await Alert().confirm();
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the nested background image", async () => {
         const btnConditionalBgImage = Widget("btnNestedBgImage").getElement();
         await btnConditionalBgImage.tap();
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders the background image in a layout grid", async () => {
         const btnConditionalBgImage = Widget("btnLayoutGridBgImage").getElement();
         await btnConditionalBgImage.tap();
 
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     afterAll(async () => {

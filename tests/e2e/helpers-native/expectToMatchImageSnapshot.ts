@@ -34,7 +34,13 @@ export async function expectToMatchImageSnapshot(options?: { ios?: SnapshotOptio
     });
 }
 
-function crop(image: Image, options?: { ios?: SnapshotOptions; android?: SnapshotOptions }) {
+function crop(
+    image: Image,
+    options: { ios?: SnapshotOptions; android?: SnapshotOptions } = {
+        ios: { removeScrollbar: true },
+        android: { removeScrollbar: true }
+    }
+) {
     let cropOptions = { x: 0, y: 0, width: 0, height: 0 };
     if (device.getPlatform() === "ios") {
         cropOptions = {

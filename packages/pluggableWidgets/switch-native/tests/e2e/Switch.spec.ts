@@ -12,18 +12,12 @@ describe("Switch", () => {
     });
 
     it("renders correctly when false", async () => {
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("renders correctly when true", async () => {
         await Widget("switch1").getElement().tap();
-        await expectToMatchImageSnapshot({
-            ios: { removeScrollbar: true },
-            android: { removeScrollbar: true }
-        });
+        await expectToMatchImageSnapshot();
     });
 
     it("triggers configured event", async () => {

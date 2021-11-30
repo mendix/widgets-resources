@@ -64,7 +64,7 @@ export class FloatingActionButton extends Component<FloatingActionButtonProps<Fl
         const style = isActive ? { transform: [{ rotate: "-180deg" }] } : {};
 
         return (
-            <View style={[style, this.styles.buttonIconContainer]}>
+            <View testID={"FloatingAction$IconView"} style={[style, this.styles.buttonIconContainer]}>
                 <Icon icon={source} size={this.styles.buttonIcon.size} color={this.styles.buttonIcon.color} />
             </View>
         );
