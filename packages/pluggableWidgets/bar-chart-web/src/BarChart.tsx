@@ -1,9 +1,8 @@
 import classNames from "classnames";
 import { createElement, ReactElement, useCallback, useMemo } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
-import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
+import { usePlotChartDataSeries, getPlotChartDataTransforms } from "@mendix/shared-charts/hooks";
 import { BarChartContainerProps } from "../typings/BarChartProps";
-import { getPlotChartDataTransforms } from "@mendix/shared-charts/dist/hooks/usePlotChartDataSeries";
 
 const barChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     xaxis: {

@@ -1,0 +1,3 @@
+{
+  "main": "../dist/rollup/index.js"
+}

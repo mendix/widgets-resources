@@ -8,7 +8,7 @@
   "scripts": {
     "start": "tsc --watch",
     "prebuild": "rimraf ./dist",
-    "build": "tsc && copy-and-watch 'src/**/*.{scss,svg}' 'dist/'",
+    "build": "tsc && copy-and-watch 'src/**/*.{scss,svg,js}' 'dist/'",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "prepare": "npm run build",
     "test": "pluggable-widgets-tools test:unit:web"
