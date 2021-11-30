@@ -54,6 +54,8 @@
                                 <caption>X axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -65,6 +67,8 @@
                                 <caption>X axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -76,6 +80,8 @@
                                 <caption>Y axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -87,6 +93,8 @@
                                 <caption>Y axis attribute</caption>
                                 <description />
                                 <attributeTypes>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />

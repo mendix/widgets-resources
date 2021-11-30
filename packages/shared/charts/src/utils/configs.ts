@@ -1,5 +1,7 @@
 import { Config, Data, Layout } from "plotly.js";
 import deepMerge from "deepmerge";
+import { useEffect, useState } from "react";
+import { fetchThemeFolderConfigFile } from "./themeFolderConfig";
 
 export const defaultConfigs: SharedConfigs = {
     layout: {
@@ -69,3 +71,55 @@ export const getCustomLayoutOptions = ({
     xaxis: { title: xAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "vertical" },
     yaxis: { title: yAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "horizontal" }
 });
+
+export type ChartTypeEnum =
+    | "LineChart"
+    | "AreaChart"
+    | "BubbleChart"
+    | "TimeSeries"
+    | "ColumnChart"
+    | "BarChart"
+    | "PieChart"
+    | "HeatMap";
+
+function showThemeFolderConfigWarning(msg: string): void {
+    console.warn(`Error in theme folder configuration file: ${msg}`);
+}
+
+export const useThemeFolderConfigs = (chartType: ChartTypeEnum): SharedConfigs => {
+    const [themeFolderConfigs, setThemeFolderConfigs] = useState<SharedConfigs>({
+        layout: {},
+        configuration: {},
+        series: {}
+    });
+
+    useEffect(() => {
+        async function fetchThemeFolderConfigs(): Promise<void> {
+            try {
+                const folderConfigs = await fetchThemeFolderConfigFile();
+                if (folderConfigs === undefined || folderConfigs === null) {
+                    // This means that no theme folder config file was found, but we don't know whether that was intended, so ignore it.
+                    return;
+                }
+                if (!(folderConfigs instanceof Object)) {
+                    showThemeFolderConfigWarning("invalid json object");
+                    return;
+                }
+                if (!folderConfigs.layout && !folderConfigs.configuration && !folderConfigs.charts) {
+                    showThemeFolderConfigWarning("no 'layout', 'configuration', or 'charts' property found");
+                    return;
+                }
+                setThemeFolderConfigs(oldConfigs => ({
+                    configuration: folderConfigs.configuration || oldConfigs.configuration,
+                    layout: folderConfigs.layout || oldConfigs.layout,
+                    series: folderConfigs.charts?.[chartType] || oldConfigs.series
+                }));
+            } catch (e) {
+                showThemeFolderConfigWarning(e);
+            }
+        }
+        fetchThemeFolderConfigs();
+    }, [chartType]);
+
+    return themeFolderConfigs;
+};

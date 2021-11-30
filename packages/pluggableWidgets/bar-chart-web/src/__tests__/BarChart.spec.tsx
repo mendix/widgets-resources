@@ -37,18 +37,38 @@ describe("The BarChart widget", () => {
     }
 
     it("visualizes data as a bar chart", () => {
-        const lineChart = renderBarChart([{}]);
-        const data = lineChart.find(ChartWidget).prop("data");
+        const barChart = renderBarChart([{}]);
+        const data = barChart.find(ChartWidget).prop("data");
         expect(data).toHaveLength(1);
         expect(data[0]).toHaveProperty("type", "bar");
     });
 
     it("sets the bar color on the data series based on the barColor value", () => {
-        const lineChart = renderBarChart([{ barColor: dynamicValue("red") }, { barColor: undefined }]);
-        const data = lineChart.find(ChartWidget).prop("data");
+        const barChart = renderBarChart([{ barColor: dynamicValue("red") }, { barColor: undefined }]);
+        const data = barChart.find(ChartWidget).prop("data");
         expect(data).toHaveLength(2);
         expect(data[0]).toHaveProperty("marker.color", "red");
         expect(data[1]).toHaveProperty("marker.color", undefined);
+    });
+
+    it("sets the appropriate transforms on the data series based on the aggregation type", () => {
+        const barChart = renderBarChart([{ aggregationType: "none" }, { aggregationType: "avg" }]);
+        const data = barChart.find(ChartWidget).prop("data");
+        expect(data).toHaveLength(2);
+        expect(data[0]).toHaveProperty("transforms", []);
+        expect(data[1]).toHaveProperty("transforms", [
+            {
+                type: "aggregate",
+                groups: ["1", "2"],
+                aggregations: [
+                    {
+                        target: "y",
+                        enabled: true,
+                        func: "avg"
+                    }
+                ]
+            }
+        ]);
     });
 });
 

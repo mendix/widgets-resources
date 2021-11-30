@@ -21,6 +21,7 @@ export function preview(): ReactNode {
             configOptions={{}}
             layoutOptions={{}}
             seriesOptions={{}}
+            type="BarChart"
         />
     );
 }

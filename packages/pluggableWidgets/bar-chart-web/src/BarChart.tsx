@@ -1,8 +1,9 @@
 import classNames from "classnames";
-import { createElement, ReactElement, useMemo } from "react";
+import { createElement, ReactElement, useCallback, useMemo } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { BarChartContainerProps } from "../typings/BarChartProps";
+import { getPlotChartDataTransforms } from "@mendix/shared-charts/dist/hooks/usePlotChartDataSeries";
 
 const barChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     xaxis: {
@@ -37,16 +38,24 @@ export function BarChart(props: BarChartContainerProps): ReactElement | null {
         [props.barmode]
     );
 
-    const series = usePlotChartDataSeries(props.series, dataSeries => ({
-        type: "bar",
-        orientation: "h",
-        marker: {
-            color: dataSeries.barColor?.value
-        }
-    }));
+    const series = usePlotChartDataSeries(
+        props.series,
+        useCallback(
+            (dataSeries, dataPoints) => ({
+                type: "bar",
+                orientation: "h",
+                marker: {
+                    color: dataSeries.barColor?.value
+                },
+                transforms: getPlotChartDataTransforms(dataSeries.aggregationType, dataPoints)
+            }),
+            []
+        )
+    );
 
     return (
         <ChartWidget
+            type="BarChart"
             className={classNames("widget-bar-chart", props.class)}
             data={series ?? []}
             width={props.width}
