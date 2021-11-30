@@ -44,6 +44,8 @@ jobs:
               run: npm install
             - name: "Running build for development"
               run: npm run build -- ${{ steps.variables.outputs.arg }}
+              env:
+                NODE_OPTIONS: --max_old_space_size=4096
             - name: "Running release for production"
               run: npm run release -- ${{ steps.variables.outputs.arg }}
               env:
