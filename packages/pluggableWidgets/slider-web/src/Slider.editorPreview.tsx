@@ -2,7 +2,6 @@ import { createElement, ReactNode } from "react";
 import { Slider } from "./components/Slider";
 import { SliderPreviewProps } from "../typings/SliderProps";
 import { getPreviewValues } from "./utils/getPreviewValues";
-import { parseStyle } from "@mendix/piw-utils-internal";
 import { createMarks } from "./utils/marks";
 import { isVertical } from "./utils/isVertical";
 import { getStyleProp } from "./utils/getStyleProp";
@@ -21,7 +20,6 @@ export function preview(props: SliderPreviewProps): ReactNode {
     });
     const style = getStyleProp({
         orientation: props.orientation,
-        style: parseStyle(props.style),
         height: props.height ?? 100,
         heightUnit: props.heightUnit
     });
