@@ -173,10 +173,12 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">
-            <property key="onChange" type="action">
-                <caption>On change</caption>
-                <description />
-            </property>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action">
+                    <caption>On change</caption>
+                    <description />
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
