@@ -7,8 +7,10 @@ import {
     DropZoneProps,
     RowLayoutProps,
     ContainerProps,
-    TextProps
+    TextProps,
+    ImageProps
 } from "@mendix/piw-utils-internal";
+import TooltipIcon from "./assets/tooltip_icon.svg";
 
 export function getProperties(values: TooltipPreviewProps, defaultValues: Properties): Properties {
     if (values.renderMethod === "text") {
@@ -40,28 +42,46 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
     const centerLayout = (props: TextProps | DropZoneProps) => {
         return {
             type: "RowLayout",
-            grow: 1,
+            columnSize: "grow",
             children: [
                 {
-                    type: "Text",
-                    content: ""
-                } as TextProps,
-                props,
+                    type: "Container",
+                    grow: 99,
+                    children: []
+                } as ContainerProps,
                 {
-                    type: "Text",
-                    content: ""
-                } as TextProps
+                    type: "Container",
+                    grow: 1,
+                    children: [props]
+                },
+                {
+                    type: "Container",
+                    grow: 99,
+                    children: []
+                } as ContainerProps
             ]
         } as RowLayoutProps;
     };
 
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
-        columnSize: "fixed",
+        columnSize: "grow",
         backgroundColor: "#B4C1C7",
         borders: true,
         borderWidth: 1,
         children: [
+            {
+                type: "Container",
+                grow: 0,
+                children: [
+                    {
+                        type: "Image",
+                        document: decodeURIComponent(TooltipIcon.replace("data:image/svg+xml,", "")),
+                        height: 24,
+                        width: 24
+                    } as ImageProps
+                ]
+            },
             {
                 type: "Container",
                 children: [
@@ -72,7 +92,7 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
                         fontSize: 12
                     } as TextProps
                 ]
-            } as ContainerProps
+            }
         ]
     };
     const messageContent = {
@@ -81,36 +101,26 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
         borders: true,
         backgroundColor: "#F5F5F5",
         children: [
-            centerLayout(
-                values.renderMethod === "text"
-                    ? ({
-                          type: "Text",
-                          content: values.textMessage,
-                          fontSize: 14,
-                          fontColor: "#6B707B",
-                          grow: 1
-                      } as TextProps)
-                    : ({
-                          type: "DropZone",
-                          property: values.htmlMessage,
-                          placeholder: "Place your message here",
-                          grow: 1
-                      } as DropZoneProps)
-            )
+            values.renderMethod === "text"
+                ? centerLayout({
+                      type: "Text",
+                      content: values.textMessage ? values.textMessage : "Place your tooltip message",
+                      fontSize: 14,
+                      fontColor: "#6B707B",
+                      bold: !!values.textMessage
+                  } as TextProps)
+                : ({
+                      type: "DropZone",
+                      property: values.htmlMessage,
+                      placeholder: "Place your tooltip widget"
+                  } as DropZoneProps)
         ]
     } as RowLayoutProps;
     const triggerContent = {
-        type: "RowLayout",
-        columnSize: "grow",
-        borders: true,
-        children: [
-            centerLayout({
-                type: "DropZone",
-                property: values.trigger,
-                placeholder: "Place filter widget(s) here"
-            } as DropZoneProps)
-        ]
-    } as RowLayoutProps;
+        type: "DropZone",
+        property: values.trigger,
+        placeholder: "Place widget(s) here"
+    } as DropZoneProps;
     return {
         type: "Container",
         children: [titleHeader, messageContent, triggerContent]
