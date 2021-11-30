@@ -1,0 +1,28 @@
+.widget-rich-text {
+    &.editor-text {
+        .cke {
+            border: none;
+        }
+
+        .cke_top,
+        .cke_bottom {
+            background: inherit;
+            display: none;
+        }
+    }
+
+    &.editor-bordered {
+        .cke {
+            border: 1px solid #d1d1d1;
+        }
+
+        .cke_top,
+        .cke_bottom {
+            background: inherit;
+            display: none;
+        }
+    }
+
+    &.editor-borderedToolbar {
+    }
+}

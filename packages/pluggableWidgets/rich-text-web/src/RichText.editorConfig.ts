@@ -45,6 +45,10 @@ export function getProperties(values: RichTextPreviewProps, defaultProperties: P
     if (values.toolbarConfig === "advanced") {
         hidePropertiesIn(defaultProperties, values, toolbarGroups);
     }
+
+    if (values.wordCount === "no") {
+        hidePropertiesIn(defaultProperties, values, ["maxChars"]);
+    }
     return defaultProperties;
 }
 

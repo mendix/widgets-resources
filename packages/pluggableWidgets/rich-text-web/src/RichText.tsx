@@ -3,6 +3,7 @@ import { RichText as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
 import { generateUUID } from "@mendix/piw-utils-internal/dist/components/web";
 import { getToolbarGroupByName, GroupType } from "./utils/ckeditorConfigs";
+import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
     const id = generateUUID();
@@ -36,11 +37,21 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             plugins.push("wordcount");
         }
     }
-    console.log("prop", props);
+    if (props.advancedContentFilter === "custom") {
+    }
     return (
         <RichTextComponent
             id={`RichText-${id}`}
             advancedGroup={props.advancedGroup}
+            advancedContentFilter={
+                props.advancedContentFilter === "custom"
+                    ? {
+                          allowedContent: props.allowedContent,
+                          disallowedContent: props.disallowedContent
+                      }
+                    : null
+            }
+            sanitizeContent={props.sanitizeContent}
             name={props.name}
             class={props.class}
             editorType={props.editorType}
@@ -55,6 +66,13 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             plugins={plugins}
             value={props.stringAttribute.value}
             onChange={onChangeFn}
+            label={props.labelMessage?.value}
+            dimensions={{
+                width: props.width,
+                widthUnit: props.widthUnit,
+                height: props.height,
+                heightUnit: props.heightUnit
+            }}
         />
     );
 }

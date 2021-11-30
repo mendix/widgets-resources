@@ -58,21 +58,13 @@ export function getPreset(type: PresetEnum): CKEditorConfig | null {
     }
 }
 
-export function addPlugin(name: keyof Plugins, ckeditorConfig: CKEditorConfig) {
-    const plugin = PLUGIN_CONFIGS[name];
+export function addPlugin(name: string, ckeditorConfig: CKEditorConfig) {
+    const plugin = PLUGIN_CONFIGS[name as keyof Plugins];
     if (plugin) {
         const { config } = ckeditorConfig;
-        if (config.toolbarGroups) {
-            config.extraPlugins = config.extraPlugins
-                ? config.extraPlugins + `,${plugin.extraPlugins}`
-                : plugin.extraPlugins;
-            config.toolbarGroups.forEach((group: ToolbarGroup) => {
-                if (group.name === "insert") {
-                    group.groups?.push(plugin.extraPlugins);
-                }
-            });
-            Object.assign(config, plugin.config);
-        }
+        config.extraPlugins = config.extraPlugins
+            ? config.extraPlugins + `,${plugin.extraPlugins}`
+            : plugin.extraPlugins;
     }
     return ckeditorConfig;
 }
