@@ -2,12 +2,10 @@ import { MapsPreviewProps } from "../../typings/MapsProps";
 import { check } from "../Maps.editorConfig";
 
 describe("Zoom level check", () => {
-    let mapsPreviewProps: MapsPreviewProps;
+    let mapsPreviewProps: Omit<MapsPreviewProps, "class" | "style">;
 
     beforeEach(() => {
         mapsPreviewProps = {
-            class: "",
-            style: "",
             markers: [],
             dynamicMarkers: [],
             fitToMarkers: true,
