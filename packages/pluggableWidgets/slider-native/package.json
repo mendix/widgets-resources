@@ -14,6 +14,12 @@
     "build": "pluggable-widgets-tools build:native",
     "format": "pluggable-widgets-tools format",
     "release": "pluggable-widgets-tools release:native",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
+    "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
+    "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp",
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:native",
     "version": "npm run release"
@@ -26,6 +32,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/ptomasroos__react-native-multi-slider": "^0.0.1",
-    "eslint": "^7.20.0"
+    "eslint": "^7.20.0",
+    "detox": "^18.20.0"
   }
 }

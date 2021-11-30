@@ -1,10 +1,10 @@
 import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
 import { Text, View } from "react-native";
 import { fireEvent, render, RenderAPI } from "@testing-library/react-native";
 import { ReactTestInstance } from "react-test-renderer";
+import { ValueStatus } from "mendix";
 
 import { Props, Slider } from "../Slider";
 
@@ -32,21 +32,51 @@ describe("Slider", () => {
         const component = render(
             <Slider {...defaultProps} valueAttribute={new EditableValueBuilder<Big>().isLoading().build()} />
         );
-        expect(component.UNSAFE_queryByType(Text)).toBeNull();
+        expect(component.queryByTestId(`${defaultProps.name}-validation-message`)).toBeNull();
     });
 
     it("renders an error when the minimum is greater than the maximum", () => {
         const component = render(<Slider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The minimum value can not be greater than the maximum value."
-        );
+        expect(component.queryByText("The minimum value can not be greater than the maximum value.")).not.toBeNull();
     });
 
     it("renders an error when the step size is negative", () => {
         const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The step size can not be zero or less than zero."
+        expect(component.queryByText("The step size can not be zero or less than zero.")).not.toBeNull();
+    });
+
+    it("renders an error when the step size is empty", () => {
+        const component = render(
+            <Slider {...defaultProps} stepSize={{ status: ValueStatus.Unavailable, value: undefined }} />
         );
+        expect(component.queryByText("No step size provided.")).not.toBeNull();
+    });
+
+    it("renders an error when the minimum is empty", () => {
+        const component = render(
+            <Slider {...defaultProps} minimumValue={{ status: ValueStatus.Unavailable, value: undefined }} />
+        );
+        expect(component.queryByText("No minimum value provided.")).not.toBeNull();
+    });
+
+    it("renders an error when the maximum is empty", () => {
+        const component = render(
+            <Slider {...defaultProps} maximumValue={{ status: ValueStatus.Unavailable, value: undefined }} />
+        );
+        expect(component.queryByText("No maximum value provided.")).not.toBeNull();
+    });
+
+    it("renders an error when the minimum is equal to the maximum", () => {
+        const component = render(
+            <Slider
+                {...defaultProps}
+                valueAttribute={new EditableValueBuilder<Big>().withValue(new Big(10)).build()}
+                minimumValue={dynamicValue(new Big(10))}
+                maximumValue={dynamicValue(new Big(10))}
+            />
+        );
+        console.log(component.UNSAFE_getByType(Text));
+        expect(component.queryByText("The minimum value can not be equal to the maximum value.")).not.toBeNull();
     });
 
     it("renders an error when the value is less than the minimum", () => {
@@ -56,9 +86,7 @@ describe("Slider", () => {
                 valueAttribute={new EditableValueBuilder<Big>().withValue(new Big(-50)).build()}
             />
         );
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The current value can not be less than the minimum value."
-        );
+        expect(component.queryByText("The current value can not be less than the minimum value.")).not.toBeNull();
     });
 
     it("renders an error when the value is greater than the maximum", () => {
@@ -68,9 +96,7 @@ describe("Slider", () => {
                 valueAttribute={new EditableValueBuilder<Big>().withValue(new Big(300)).build()}
             />
         );
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The current value can not be greater than the maximum value."
-        );
+        expect(component.queryByText("The current value can not be greater than the maximum value.")).not.toBeNull();
     });
 
     it("renders with the width of the parent view", () => {
@@ -92,20 +118,20 @@ describe("Slider", () => {
                 ]}
             />
         );
-        fireEvent(component.UNSAFE_getByType(View), "layout", { nativeEvent: { layout: { width: 100 } } });
-        expect(component.UNSAFE_getByType(MultiSlider).props.sliderLength).toBe(100);
+        fireEvent(component.getByTestId("slider-test"), "layout", { nativeEvent: { layout: { width: 100 } } });
+        expect(component.getByTestId("slider-test").findByProps({ sliderLength: 100 })).not.toBeNull();
     });
 
     it("renders a validation message", () => {
         const value = new EditableValueBuilder<Big>().withValidation("Invalid").build();
         const component = render(<Slider {...defaultProps} valueAttribute={value} />);
 
-        expect(component.getByText("Invalid")).toBeDefined();
+        expect(component.queryByText("Invalid")).not.toBeNull();
     });
 
     it("handles an invalid step size", () => {
         const component = render(<Slider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.UNSAFE_getByType(MultiSlider).props.step).toBe(1);
+        expect(component.getByTestId("slider-test").findByProps({ step: 1 })).not.toBeNull();
     });
 
     it("changes the value when swiping", () => {
@@ -137,7 +163,10 @@ describe("Slider", () => {
 });
 
 function getHandle(component: RenderAPI): ReactTestInstance {
-    return component.UNSAFE_getAllByType(View).filter(instance => instance.props.onMoveShouldSetResponder)[0];
+    return component
+        .getByTestId("slider-test")
+        .findAllByType(View)
+        .filter(instance => instance.props.onMoveShouldSetResponder)[0];
 }
 
 function responderMove(dx: number): any {
