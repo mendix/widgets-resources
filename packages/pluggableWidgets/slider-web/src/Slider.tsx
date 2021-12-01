@@ -7,8 +7,6 @@ import { useMarks } from "./utils/useMarks";
 import { createHandleGenerator } from "./utils/createHandleGenerator";
 import { useOnChangeDebounced } from "./utils/useOnChangeDebounced";
 import { Slider as SliderComponent } from "./components/Slider";
-import "rc-slider/assets/index.css";
-import "rc-tooltip/assets/bootstrap.css";
 import "./ui/Slider.scss";
 import { isVertical } from "./utils/isVertical";
 import { getStyleProp } from "./utils/getStyleProp";

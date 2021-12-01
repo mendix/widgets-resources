@@ -13,9 +13,7 @@ interface SliderPreviewProps extends Omit<SliderPreviewPropsGenerated, "class"> 
 }
 
 export function getPreviewCss(): string {
-    return (
-        require("rc-slider/assets/index.css") + require("rc-tooltip/assets/bootstrap.css") + require("./ui/Slider.scss")
-    );
+    return require("./ui/Slider.scss");
 }
 
 export function preview(props: SliderPreviewProps): ReactNode {

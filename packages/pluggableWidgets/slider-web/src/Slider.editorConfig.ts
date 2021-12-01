@@ -25,6 +25,23 @@ const keysToHideBySizeType: Record<StepSizeTypeEnum, Array<keyof SliderPreviewPr
     expression: ["stepValue", "stepAttribute"]
 };
 
+const webOnlyKeys: Array<keyof SliderPreviewProps> = ["advanced"];
+
+export const advancedOptionKeys: Array<keyof SliderPreviewProps> = [
+    "stepSizeType",
+    "stepValue",
+    "stepAttribute",
+    "expressionStepSize",
+    "showTooltip",
+    "tooltipType",
+    "tooltip",
+    "noOfMarkers",
+    "decimalPlaces",
+    "orientation",
+    "heightUnit",
+    "height"
+];
+
 export function getProperties(
     values: SliderPreviewProps,
     defaultProperties: Properties,
@@ -47,7 +64,12 @@ export function getProperties(
     }
 
     if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, advancedOptionKeys);
+        }
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertiesIn(defaultProperties, values, webOnlyKeys);
     }
 
     return defaultProperties;
