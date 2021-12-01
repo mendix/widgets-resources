@@ -80,7 +80,6 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Steps">
-                <!-- Steps Size -->
                 <property key="stepSizeType" type="enumeration" defaultValue="static">
                     <caption>Step size type</caption>
                     <description />
@@ -108,7 +107,6 @@
                     <description>Value to be added or subtracted on each step the slider makes. Must be greater than zero, and max - min should be evenly divisible by the step value.</description>
                     <returnType type="Decimal" />
                 </property>
-                <!-- Steps Size End -->
             </propertyGroup>
             <propertyGroup caption="Tooltip">
                 <property key="showTooltip" type="boolean" defaultValue="true">
