@@ -66,7 +66,7 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "grow",
-        backgroundColor: "#B4C1C7",
+        backgroundColor: "#E7E7E9",
         borders: true,
         borderWidth: 1,
         children: [
