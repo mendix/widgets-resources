@@ -66,11 +66,31 @@ describe("The LineChart widget", () => {
     });
 
     it("sets the marker color on the data series based on the markerColor value", () => {
-        const lineChart = renderLineChart([{ markerColor: undefined }, { lineColor: dynamicValue("blue") }]);
+        const lineChart = renderLineChart([{ markerColor: undefined }, { markerColor: dynamicValue("blue") }]);
         const data = lineChart.find(ChartWidget).prop("data");
         expect(data).toHaveLength(2);
-        expect(data[0]).toHaveProperty("line.color", undefined);
-        expect(data[1]).toHaveProperty("line.color", "blue");
+        expect(data[0]).toHaveProperty("marker.color", undefined);
+        expect(data[1]).toHaveProperty("marker.color", "blue");
+    });
+
+    it("sets the appropriate transforms on the data series based on the aggregation type", () => {
+        const lineChart = renderLineChart([{ aggregationType: "none" }, { aggregationType: "avg" }]);
+        const data = lineChart.find(ChartWidget).prop("data");
+        expect(data).toHaveLength(2);
+        expect(data[0]).toHaveProperty("transforms", []);
+        expect(data[1]).toHaveProperty("transforms", [
+            {
+                type: "aggregate",
+                groups: ["1", "2"],
+                aggregations: [
+                    {
+                        target: "y",
+                        enabled: true,
+                        func: "avg"
+                    }
+                ]
+            }
+        ]);
     });
 });
 

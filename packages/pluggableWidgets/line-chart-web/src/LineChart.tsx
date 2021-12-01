@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useCallback } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
-import { usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
+import { getPlotChartDataTransforms, usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { LineChartContainerProps } from "../typings/LineChartProps";
 
 const lineChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
@@ -24,20 +24,28 @@ const lineChartConfigOptions: ChartWidgetProps["configOptions"] = {
 const lineChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
 export function LineChart(props: LineChartContainerProps): ReactElement | null {
-    const chartLines = usePlotChartDataSeries(props.lines, line => ({
-        type: "scatter",
-        mode: line.lineStyle === "line" ? "lines" : "lines+markers",
-        line: {
-            shape: line.interpolation,
-            color: line.lineColor?.value
-        },
-        marker: {
-            color: line.markerColor?.value
-        }
-    }));
+    const chartLines = usePlotChartDataSeries(
+        props.lines,
+        useCallback(
+            (line, dataPoints) => ({
+                type: "scatter",
+                mode: line.lineStyle === "line" ? "lines" : "lines+markers",
+                line: {
+                    shape: line.interpolation,
+                    color: line.lineColor?.value
+                },
+                marker: {
+                    color: line.markerColor?.value
+                },
+                transforms: getPlotChartDataTransforms(line.aggregationType, dataPoints)
+            }),
+            []
+        )
+    );
 
     return (
         <ChartWidget
+            type="LineChart"
             className={classNames("widget-line-chart", props.class)}
             data={chartLines ?? []}
             width={props.width}

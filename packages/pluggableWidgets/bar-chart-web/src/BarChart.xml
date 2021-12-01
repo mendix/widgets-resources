@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.LineChart.LineChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
-    <name>Line chart</name>
-    <description>Create a line chart</description>
+
+<widget id="com.mendix.widget.custom.BarChart.BarChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    <name>Bar chart</name>
+    <description>Create a bar chart</description>
     <studioProCategory>Charts</studioProCategory>
     <studioCategory>Charts</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/charts#2-4-bar-chart</helpUrl>
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="General">
-                <property key="lines" type="object" isList="true">
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>X axis label</caption>
+                    <description />
+                </property>
+                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
+                    <caption>Y axis label</caption>
+                    <description />
+                </property>
+                <property key="barmode" type="enumeration" defaultValue="group">
+                    <caption>Bar format</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="group">Grouped</enumerationValue>
+                        <enumerationValue key="stack">Stacked</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="series" type="object" isList="true">
                     <caption>Data source</caption>
                     <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
                     <properties>
@@ -55,7 +77,6 @@
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="String" />
-                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -68,7 +89,6 @@
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="String" />
-                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -81,7 +101,6 @@
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="String" />
-                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -94,7 +113,6 @@
                                 <description />
                                 <attributeTypes>
                                     <attributeType name="String" />
-                                    <attributeType name="Enum" />
                                     <attributeType name="DateTime" />
                                     <attributeType name="Decimal" />
                                     <attributeType name="Integer" />
@@ -124,30 +142,9 @@
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
-                            <property key="interpolation" type="enumeration" defaultValue="linear">
-                                <caption>Interpolation</caption>
-                                <description />
-                                <enumerationValues>
-                                    <enumerationValue key="linear">Linear</enumerationValue>
-                                    <enumerationValue key="spline">Curved</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="lineStyle" type="enumeration" defaultValue="line">
-                                <caption>Line style</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="line">Line</enumerationValue>
-                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
-                                    <enumerationValue key="custom">Custom</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="lineColor" type="textTemplate" required="false" multiline="false">
-                                <caption>Line color</caption>
-                                <description/>
-                            </property>
-                            <property key="markerColor" type="textTemplate" required="false" multiline="false">
-                                <caption>Marker color</caption>
-                                <description/>
+                            <property key="barColor" type="textTemplate" required="false" multiline="false">
+                                <caption>Bar color</caption>
+                                <description>Color of the bar e.g. green, #00FF00, rgb(0,255,0)</description>
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
@@ -161,18 +158,6 @@
                             </property>
                         </propertyGroup>
                     </properties>
-                </property>
-                <property key="showLegend" type="boolean" defaultValue="true">
-                    <caption>Show legend</caption>
-                    <description />
-                </property>
-                <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
-                    <caption>X axis label</caption>
-                    <description />
-                </property>
-                <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
-                    <caption>Y axis label</caption>
-                    <description />
                 </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
                     <caption>Developer mode</caption>

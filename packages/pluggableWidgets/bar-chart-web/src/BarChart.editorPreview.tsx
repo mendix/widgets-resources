@@ -1,16 +1,16 @@
-import { createElement } from "react";
+import { createElement, ReactNode } from "react";
 import { ChartWidget } from "@mendix/shared-charts";
 
-export function preview() {
+export function preview(): ReactNode {
     // TODO:
     return (
         <ChartWidget
-            className="widget-chart-line"
+            className="widget-bar-chart"
             data={[{ x: [], y: [], customSeriesOptions: "" }]}
-            widthUnit={"percentage"}
-            width={0}
+            widthUnit={"pixels"}
+            width={700}
             heightUnit={"pixels"}
-            height={0}
+            height={450}
             showLegend={false}
             xAxisLabel={undefined}
             yAxisLabel={undefined}
@@ -21,7 +21,7 @@ export function preview() {
             configOptions={{}}
             layoutOptions={{}}
             seriesOptions={{}}
-            type="LineChart"
+            type="BarChart"
         />
     );
 }

@@ -1,8 +1,8 @@
 {
-  "name": "line-chart-web",
-  "widgetName": "LineChart",
+  "name": "bar-chart-web",
+  "widgetName": "BarChart",
   "version": "1.0.0",
-  "description": "Shows data in a line format graph.",
+  "description": "Shows difference between the data points for one or more categories.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
@@ -19,7 +19,7 @@
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",
-    "branchName": "line-chart-web"
+    "branchName": "bar-chart-web"
   },
   "packagePath": "com.mendix.widget.custom",
   "scripts": {
@@ -30,7 +30,7 @@
     "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
     "test": "pluggable-widgets-tools test:unit:web",
     "pretest:e2e": "NODE_OPTIONS=--max_old_space_size=4096 npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web",
+    "test:e2e": "echo 'Skipping tests'",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "pluggable-widgets-tools release:web",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"

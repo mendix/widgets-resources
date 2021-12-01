@@ -102,9 +102,9 @@ export default args => {
         }
     );
 
-    // We change the output because LineChart widget package was wrongly named with uppercase L in the past.
-    jsConfig.output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/LineChart/LineChart.js");
-    mJsConfig.output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/LineChart/LineChart.mjs");
+    // We change the output because BarChart widget package was wrongly named with uppercase L in the past.
+    jsConfig.output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/BarChart/BarChart.js");
+    mJsConfig.output.file = join(__dirname, "dist/tmp/widgets/com/mendix/widget/custom/BarChart/BarChart.mjs");
 
     result.forEach(config => {
         const onwarn = config.onwarn;
