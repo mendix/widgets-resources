@@ -33,5 +33,5 @@ export const preview = (props: PreviewProps): ReactNode => {
 };
 
 export function getPreviewCss(): string {
-    return require("leaflet/dist/leaflet.css") + require("./ui/Maps.css") + require("./ui/GoogleMapsPreview.css");
+    return require("./ui/Maps.css");
 }
