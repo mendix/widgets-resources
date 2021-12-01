@@ -114,6 +114,10 @@
                                 <description />
                                 <returnType type="String"/>
                             </property>
+                            <property key="wrapText" type="boolean" defaultValue="false">
+                                <caption>Wrap text</caption>
+                                <description />
+                            </property>
                         </propertyGroup>
                     </properties>
                 </property>

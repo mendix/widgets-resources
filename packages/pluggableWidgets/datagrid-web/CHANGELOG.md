@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added a property to wrap texts in the columns.
+
 ## [2.0.3] - 2021-11-16
 
 ### Fixed
