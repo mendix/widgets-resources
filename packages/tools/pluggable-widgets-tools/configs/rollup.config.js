@@ -14,6 +14,7 @@ import postcssUrl from "postcss-url";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
+import license from "rollup-plugin-license";
 import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
@@ -79,7 +80,8 @@ export default async args => {
                         presets: [["@babel/preset-env", { targets: { safari: "12" } }]],
                         allowAllFormats: true
                     },
-                    external: webExternal
+                    external: webExternal,
+                    licenses: production && outputFormat === "amd"
                 })
             ],
             onwarn
@@ -206,6 +208,16 @@ export default async args => {
                 : null,
             image(),
             production ? terser() : null,
+            config.licenses
+                ? license({
+                      thirdParty: {
+                          includePrivate: true,
+                          output: {
+                              file: join(outDir, "dependencies.txt")
+                          }
+                      }
+                  })
+                : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define
             // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only

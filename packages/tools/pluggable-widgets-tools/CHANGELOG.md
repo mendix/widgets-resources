@@ -8,6 +8,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - We fixed the typing generation for `editorPreview` files.
 
+### Added
+- We added a file containing all the dependencies licenses (dependencies.txt) in the release phase of a widget.
+
+### Changed
+- We updated mendix library dependency.
+
 ## [9.7.1] - 2021-11-18
 
 ### Added
