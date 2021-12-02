@@ -20,14 +20,6 @@ export const BackgroundImage: FunctionComponent<BackgroundImageProps> = props =>
     const [dimensions, setDimensions] = useState<DimensionsType>();
     const { source, initialDimensions, children, opacity, styles, name } = props;
     const [svgProps] = extractStyles(styles.image as ImageStyle, ["width", "height"]);
-    const wrapperDimensions = useCallback(
-        () =>
-            dimensions?.width && dimensions?.height
-                ? { width: dimensions?.width ?? svgProps?.width, height: dimensions?.height ?? svgProps?.height }
-                : { width: "100%", height: "100%" },
-        [dimensions, svgProps]
-    );
-
     const onLayoutSetDimensionsCallback = useCallback(
         ({ nativeEvent: { layout } }: LayoutChangeEvent) =>
             onLayoutSetDimensions(layout.width, layout.height, setDimensions, initialDimensions),
@@ -38,7 +30,12 @@ export const BackgroundImage: FunctionComponent<BackgroundImageProps> = props =>
         <View
             testID={`${name}$ImageBackgroundView`}
             onLayout={!dimensions?.width || !dimensions?.height ? onLayoutSetDimensionsCallback : undefined}
-            style={[wrapperDimensions(), styles.container]}
+            style={[
+                dimensions?.width && dimensions?.height
+                    ? { width: dimensions?.width ?? svgProps?.width, height: dimensions?.height ?? svgProps?.height }
+                    : { width: "100%", height: "100%" },
+                styles.container
+            ]}
         >
             <View
                 style={{

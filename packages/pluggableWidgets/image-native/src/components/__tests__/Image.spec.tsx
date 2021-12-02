@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { Text } from "react-native";
-import { fireEvent, render, waitFor } from "react-native-testing-library";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { NativeIcon, NativeImage } from "mendix";
 import { Style } from "@mendix/piw-native-utils-internal";
 import { Image } from "../../Image";
