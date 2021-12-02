@@ -175,7 +175,7 @@
                     <description />
                 </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
-                    <caption>Developer mode</caption>
+                    <caption>Mode</caption>
                     <description/>
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>

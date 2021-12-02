@@ -32,10 +32,10 @@ export interface LinesType {
     groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticName?: DynamicValue<string>;
     dynamicName?: ListExpressionValue<string>;
-    staticXAttribute?: ListAttributeValue<Date | Big>;
-    dynamicXAttribute?: ListAttributeValue<Date | Big>;
-    staticYAttribute?: ListAttributeValue<Date | Big>;
-    dynamicYAttribute?: ListAttributeValue<Date | Big>;
+    staticXAttribute?: ListAttributeValue<string | Date | Big>;
+    dynamicXAttribute?: ListAttributeValue<string | Date | Big>;
+    staticYAttribute?: ListAttributeValue<string | Date | Big>;
+    dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
     customSeriesOptions: string;
     interpolation: InterpolationEnum;
