@@ -8,7 +8,7 @@ import {
 } from "@mendix/piw-utils-internal";
 import Big from "big.js";
 import { mount, ReactWrapper } from "enzyme";
-import { SeriesType } from "../../typings/ColumnChartProps";
+import { ColumnChartContainerProps, SeriesType } from "../../typings/ColumnChartProps";
 import { ColumnChart } from "../ColumnChart";
 
 jest.mock("@mendix/shared-charts", () => ({
@@ -16,7 +16,10 @@ jest.mock("@mendix/shared-charts", () => ({
 }));
 
 describe("The ColumnChart widget", () => {
-    function renderColumnChart(configs: Array<Partial<SeriesType>>): ReactWrapper {
+    function renderColumnChart(
+        configs: Array<Partial<SeriesType>>,
+        chartProps?: Partial<ColumnChartContainerProps>
+    ): ReactWrapper {
         return mount(
             <ColumnChart
                 name="column-chart-test"
@@ -32,15 +35,16 @@ describe("The ColumnChart widget", () => {
                 gridLines="none"
                 customLayout=""
                 customConfigurations=""
+                {...chartProps}
             />
         );
     }
 
     it("visualizes data as a bar chart", () => {
         const columnChart = renderColumnChart([{}]);
-        const data = columnChart.find(ChartWidget).prop("data");
-        expect(data).toHaveLength(1);
-        expect(data[0]).toHaveProperty("type", "bar");
+        const seriesOptions = columnChart.find(ChartWidget).prop("seriesOptions");
+        expect(seriesOptions).toHaveProperty("type", "bar");
+        expect(seriesOptions).toHaveProperty("orientation", "v");
     });
 
     it("sets the bar color on the data series based on the barColor value", () => {
@@ -69,6 +73,12 @@ describe("The ColumnChart widget", () => {
                 ]
             }
         ]);
+    });
+
+    it("sets the appropriate barmode on the layout based on the barmode type", () => {
+        const columnChart = renderColumnChart([], { barmode: "stack" });
+        const layoutOptions = columnChart.find(ChartWidget).prop("layoutOptions");
+        expect(layoutOptions).toHaveProperty("barmode", "stack");
     });
 });
 

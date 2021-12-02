@@ -6,10 +6,10 @@ import { ColumnChartContainerProps } from "../typings/ColumnChartProps";
 
 const columnChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     xaxis: {
-        zeroline: true,
         fixedrange: true,
         gridcolor: "#d7d7d7",
-        zerolinecolor: "#d7d7d7"
+        zeroline: false,
+        zerolinecolor: undefined
     },
     yaxis: {
         fixedrange: true,
@@ -25,7 +25,8 @@ const columnChartConfigOptions: ChartWidgetProps["configOptions"] = {
 };
 
 const columnChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
-    type: "bar"
+    type: "bar",
+    orientation: "v"
 };
 
 export function ColumnChart(props: ColumnChartContainerProps): ReactElement | null {
@@ -41,8 +42,6 @@ export function ColumnChart(props: ColumnChartContainerProps): ReactElement | nu
         props.series,
         useCallback(
             (dataSeries, dataPoints) => ({
-                type: "bar",
-                orientation: "h",
                 marker: {
                     color: dataSeries.barColor?.value
                 },
