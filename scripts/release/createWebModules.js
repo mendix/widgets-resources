@@ -67,6 +67,11 @@ async function createDataWidgetsModule() {
 
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
+    if (!moduleChangelogs) {
+        throw new Error(
+            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
+        );
+    }
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
@@ -89,39 +94,36 @@ async function createAtlasWebContentModule() {
     const widgets = ["badge-web", "maps-web", "progress-bar-web", "progress-circle-web", "timeline-web"].map(folder =>
         join(repoRootPath, "packages/pluggableWidgets", folder)
     );
-    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Web_Content",
         moduleFolderNameInModeler: "atlas_web_content"
     };
-    await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
-    await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
-    await createGithubReleaseFrom({
-        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
-        body: moduleChangelogs.replace(/"/g, "'"),
-        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
-        mpkOutput,
-        isDraft: true
-    });
-    await execShellCommand(`rm -rf ${tmpFolder}`);
+    await commonActions(moduleInfo, widgets);
     console.log("Done.");
 }
 
 async function createAtlasCoreModule() {
     console.log("Creating the Atlas Web Content module.");
     const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
-    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "Atlas_Core",
         moduleFolderNameInModeler: "atlas_core"
     };
+    await commonActions(moduleInfo, widgets);
+    console.log("Done.");
+}
+
+async function commonActions(moduleInfo, widgets) {
+    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
+    if (!moduleChangelogs) {
+        throw new Error(
+            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
+        );
+    }
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
@@ -133,7 +135,6 @@ async function createAtlasCoreModule() {
         isDraft: true
     });
     await execShellCommand(`rm -rf ${tmpFolder}`);
-    console.log("Done.");
 }
 
 async function buildAndCopyWidgets(tmpFolder, widgetsFolders) {
