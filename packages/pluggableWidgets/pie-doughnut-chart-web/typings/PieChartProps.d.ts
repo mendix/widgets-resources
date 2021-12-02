@@ -9,8 +9,6 @@ import { Big } from "big.js";
 
 export type ChartFormatEnum = "pie" | "doughnut";
 
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
-
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
 export type SeriesSortOrderEnum = "asc" | "desc";
@@ -28,7 +26,6 @@ export interface PieChartContainerProps {
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     showLegend: boolean;
-    gridLines: GridLinesEnum;
     developerMode: DeveloperModeEnum;
     seriesDataSource: ListValue;
     seriesName: ListExpressionValue<string>;
@@ -54,7 +51,6 @@ export interface PieChartPreviewProps {
     xAxisLabel: string;
     yAxisLabel: string;
     showLegend: boolean;
-    gridLines: GridLinesEnum;
     developerMode: DeveloperModeEnum;
     seriesDataSource: {} | { type: string } | null;
     seriesName: string;

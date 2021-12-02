@@ -50,7 +50,8 @@ export function PieChart(props: PieChartContainerProps): ReactElement | null {
             showLegend={props.showLegend}
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
-            gridLinesMode={props.gridLines}
+            // Pie chart can't have grid lines
+            gridLinesMode="none"
             showSidebarEditor={props.developerMode === "developer"}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}

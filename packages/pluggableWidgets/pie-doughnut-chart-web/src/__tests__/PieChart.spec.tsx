@@ -29,7 +29,6 @@ describe("The PieChart widget", () => {
                 width={0}
                 heightUnit="pixels"
                 height={0}
-                gridLines="none"
                 customLayout=""
                 customConfigurations=""
                 customSeriesOptions=""

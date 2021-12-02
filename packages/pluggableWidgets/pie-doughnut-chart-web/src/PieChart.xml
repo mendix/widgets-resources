@@ -27,16 +27,6 @@
                     <caption>Show legend</caption>
                     <description />
                 </property>
-                <property key="gridLines" type="enumeration" defaultValue="none">
-                    <caption>Grid lines</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="none">None</enumerationValue>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                        <enumerationValue key="both">Both</enumerationValue>
-                    </enumerationValues>
-                </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
                     <caption>Mode</caption>
                     <description/>
