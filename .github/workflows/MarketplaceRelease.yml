@@ -29,6 +29,10 @@ jobs:
               with:
                   msg: "${{ steps.variables.outputs.tag }}"
                   seperator: "-v"
+            - name: "Defining node version"
+              uses: actions/setup-node@v2
+              with:
+                  node-version-file: '.nvmrc'
             - name: "Installing dependencies"
               run: npm install
             - name: "Building native widgets and js actions"

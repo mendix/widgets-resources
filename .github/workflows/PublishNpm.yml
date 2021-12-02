@@ -19,6 +19,10 @@ jobs:
       - name: "Defining Environment Variables"
         id: variables
         run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
+      - name: "Defining node version"
+        uses: actions/setup-node@v2
+        with:
+            node-version-file: '.nvmrc'
       - name: "Installing dependencies"
         run: npm install
       - name: "Targeting Pluggable Widgets Tools"
