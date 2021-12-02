@@ -40,6 +40,10 @@ jobs:
               with:
                   path: ~/.npm
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+            - name: "Defining node version"
+              uses: actions/setup-node@v1
+              with:
+                  node-version-file: '.nvmrc'
             - name: "Installing dependencies"
               run: npm install
             - name: "Running build for development"
