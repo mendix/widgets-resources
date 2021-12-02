@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- We changed property captions for **static** and **dynamic** markers.
+- We added additional description of how to use **API key**.
+
 ## [3.0.3] - 2021-11-18
 
 ### Changed
