@@ -14,9 +14,7 @@ import { bigJsImportReplacer } from "./rollup-plugin-bigjs-import-replacer";
 const cwd = process.cwd();
 
 export default async args => {
-    const projectFolder =
-        args.configProject !== undefined && args.configProject !== null ? args.configProject : "nativemobileresources";
-    const jsActionTargetFolder = `javascriptsource/${projectFolder}/actions`;
+    const jsActionTargetFolder = `javascriptsource/${args.configProject ?? "nativemobileresources"}/actions`;
     const result = [];
     const posixPath = join(cwd, "src", "**/*.ts").split(sep).join(posix.sep); // Always use forward slashes
     const files = await fg([posixPath]); // fast-glob only works with forward slashes
