@@ -143,7 +143,8 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                   hidable: "no",
                   size: 1,
                   sortable: false,
-                  alignment: "left"
+                  alignment: "left",
+                  wrapText: false
               }
           ];
     const columns: RowLayoutProps = {

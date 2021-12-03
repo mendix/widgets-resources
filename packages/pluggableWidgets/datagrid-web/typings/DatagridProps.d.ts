@@ -39,6 +39,7 @@ export interface ColumnsType {
     size: number;
     alignment: AlignmentEnum;
     columnClass?: ListExpressionValue<string>;
+    wrapText: boolean;
 }
 
 export type PaginationEnum = "buttons" | "virtualScrolling";
@@ -66,6 +67,7 @@ export interface ColumnsPreviewType {
     size: number | null;
     alignment: AlignmentEnum;
     columnClass: string;
+    wrapText: boolean;
 }
 
 export interface FilterListPreviewType {

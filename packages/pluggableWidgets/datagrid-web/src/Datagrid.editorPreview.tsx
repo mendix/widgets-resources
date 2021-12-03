@@ -5,6 +5,7 @@ import { Table, TableColumn } from "./components/Table";
 import { parseStyle } from "@mendix/piw-utils-internal";
 import { Selectable } from "mendix/preview/Selectable";
 import { ObjectItem, GUID } from "mendix";
+import classNames from "classnames";
 
 export function preview(props: DatagridPreviewProps): ReactElement {
     const data: ObjectItem[] = Array.from({ length: props.pageSize ?? 5 }).map((_, index) => ({
@@ -28,7 +29,8 @@ export function preview(props: DatagridPreviewProps): ReactElement {
                       hidable: "no",
                       size: 1,
                       sortable: false,
-                      alignment: "left"
+                      alignment: "left",
+                      wrapText: false
                   }
               ];
 
@@ -53,7 +55,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             cellRenderer={useCallback(
                 (renderWrapper, _, columnIndex) => {
                     const column = columns[columnIndex];
-                    const className = column.alignment ? `align-column-${column.alignment}` : "";
+                    const className = classNames(`align-column-${column.alignment}`, { "wrap-text": column.wrapText });
                     let content;
                     switch (column.showContentAs) {
                         case "attribute":

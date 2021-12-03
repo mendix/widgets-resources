@@ -57,7 +57,8 @@ describe("Table", () => {
                 hidable: "no" as const,
                 width: "autoFill" as const,
                 size: 1,
-                alignment: "left" as const
+                alignment: "left" as const,
+                wrapText: false
             }
         ];
         const component = render(<Table {...mockTableProps()} columnsFilterable columns={columns} />);
@@ -83,7 +84,8 @@ describe("Table", () => {
                 hidable: "no" as const,
                 width: "autoFill" as const,
                 size: 1,
-                alignment: "center" as const
+                alignment: "center" as const,
+                wrapText: false
             },
             {
                 header: "Test 2",
@@ -93,7 +95,8 @@ describe("Table", () => {
                 hidable: "no" as const,
                 width: "autoFill" as const,
                 size: 1,
-                alignment: "right" as const
+                alignment: "right" as const,
+                wrapText: false
             }
         ];
 
@@ -124,7 +127,8 @@ describe("Table", () => {
                 hidable: "no" as const,
                 width: "autoFill" as const,
                 size: 1,
-                alignment: "center" as const
+                alignment: "center" as const,
+                wrapText: false
             }
         ];
         const component = render(<Table {...mockTableProps()} preview columns={columns} />);
@@ -170,7 +174,8 @@ function mockTableProps(): TableProps<ObjectItem> {
             hidable: "no" as const,
             width: "autoFill" as const,
             size: 1,
-            alignment: "left" as const
+            alignment: "left" as const,
+            wrapText: false
         }
     ];
     return {
