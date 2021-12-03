@@ -5,7 +5,7 @@ import { PopupMenu as PopupMenuComponent } from "./components/PopupMenu";
 import { BasicItemsType, CustomItemsType, PopupMenuPreviewProps } from "../typings/PopupMenuProps";
 
 export function getPreviewCss(): string {
-    return require("./ui/PopupMenu.scss") + require("./ui/PopupMenuPreview.scss");
+    return require("./ui/PopupMenuPreview.scss");
 }
 
 export function preview(props: PopupMenuPreviewProps) {

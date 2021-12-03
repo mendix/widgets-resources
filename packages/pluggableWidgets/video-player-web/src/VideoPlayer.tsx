@@ -5,7 +5,7 @@ import { SizeContainer } from "./components/SizeContainer";
 import { Video } from "./components/Video";
 import { VideoPlayerContainerProps } from "../typings/VideoPlayerProps";
 
-import "./ui/VideoPlayer.css";
+import "./ui/VideoPlayer.scss";
 
 export default class VideoPlayer extends Component<VideoPlayerContainerProps> {
     render(): JSX.Element {

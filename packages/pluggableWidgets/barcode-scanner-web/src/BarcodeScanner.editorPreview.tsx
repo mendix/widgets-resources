@@ -21,5 +21,5 @@ export function preview(props: BarcodeScannerPreviewProps): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/BarcodeScanner.scss") + require("./ui/BarcodeScannerPreview.scss");
+    return require("./ui/BarcodeScannerPreview.scss");
 }
