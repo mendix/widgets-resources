@@ -29,8 +29,10 @@ export interface SidebarContainerProps {
 }
 
 export interface SidebarPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     contents: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     toggleMode: ToggleModeEnum;
     widthUnit: WidthUnitEnum;

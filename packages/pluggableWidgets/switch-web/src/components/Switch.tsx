@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { Alert } from "@mendix/piw-utils-internal/components/web";
 import { SwitchContainerProps } from "../../typings/SwitchProps";
 
-export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" | "style" | "tabIndex"> {
+export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "tabIndex"> {
     onClick?: (event: MouseEvent<HTMLDivElement>) => void;
     onKeyDown?: (event: KeyboardEvent<HTMLDivElement>) => void;
     isChecked: boolean;
@@ -13,7 +13,7 @@ export interface SwitchProps extends Pick<SwitchContainerProps, "id" | "class" |
 
 export default function Switch(props: SwitchProps) {
     return (
-        <div className={classNames("widget-switch", props.class)} style={props.style}>
+        <div className="widget-switch">
             <div
                 id={props.id}
                 className={classNames("widget-switch-btn-wrapper", "widget-switch-btn-wrapper-default", {

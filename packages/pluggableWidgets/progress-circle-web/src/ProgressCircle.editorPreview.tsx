@@ -33,7 +33,7 @@ export function preview(props: ProgressCirclePreviewProps): ReactElement {
 
     return (
         <ProgressCircle
-            class={props.class}
+            class={props.className}
             style={parseStyle(props.style)}
             currentValue={currentValue}
             minValue={minValue}

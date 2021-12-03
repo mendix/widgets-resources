@@ -21,8 +21,10 @@ export interface StarRatingContainerProps {
 }
 
 export interface StarRatingPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     rateAttribute: string;
     emptyIcon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;

@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, NativeIcon, ListActionValue, ListAttributeValue } from "mendix";
 import { Big } from "big.js";
 
@@ -93,8 +94,10 @@ export interface MapsProps<Style> {
 }
 
 export interface MapsPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     markers: MarkersPreviewType[];
     dynamicMarkers: DynamicMarkersPreviewType[];
     fitToMarkers: boolean;

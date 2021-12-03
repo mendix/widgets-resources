@@ -7,16 +7,11 @@ import { useIconGenerator } from "./utils/iconGenerator";
 
 import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 
-// This interface is necessary to overcome incorrect exposure of class names with the "className" prop. In the future they will be exposed with a "class" prop (Jira Issue PAG-1317).
-interface PreviewProps extends Omit<AccordionPreviewProps, "class"> {
-    className: string;
-}
-
 export function getPreviewCss(): string {
     return require("./ui/accordion-main.scss");
 }
 
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: AccordionPreviewProps): ReactElement {
     const style = parseStyle(props.style);
 
     const groups =

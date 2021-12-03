@@ -10,14 +10,12 @@ import { Switch } from "../Switch";
 describe("Switch", () => {
     let switchWrapper: ReactWrapper<SwitchContainerProps, any>;
     let switchComponent: ReactWrapper<SwitchProps, any>;
-    let switchComponentWrapper: ReactWrapper<any, any>;
     let switchButtonWrapper: ReactWrapper<any, any>;
     let switchButton: ReactWrapper<any, any>;
     let alert: ReactWrapper<AlertProps, any>;
     const createAndFindElements = (props: SwitchContainerProps): void => {
         switchWrapper = mount(<Switch {...props} />);
         switchComponent = switchWrapper.find(SwitchComponent);
-        switchComponentWrapper = switchComponent.find(".widget-switch");
         switchButtonWrapper = switchComponent.find(".widget-switch-btn-wrapper");
         switchButton = switchComponent.find(".widget-switch-btn");
         alert = switchComponent.find(Alert);
@@ -25,8 +23,6 @@ describe("Switch", () => {
     const createProps = (props?: Partial<SwitchContainerProps>): SwitchContainerProps => {
         const defaultProps: SwitchContainerProps = {
             name: "switch",
-            class: "company-switch-widget",
-            style: { color: "red" },
             tabIndex: 0,
             id: "com.mendix.widgets.custom.switch1",
             booleanAttribute: new EditableValueBuilder<boolean>().withValue(false).build(),
@@ -96,17 +92,6 @@ describe("Switch", () => {
         expect(switchButtonWrapper.props()["aria-checked"]).toBe(true);
         expect(switchButton.hasClass("left")).toBe(false);
         expect(switchButton.hasClass("right")).toBe(true);
-    });
-
-    it("with iOS device style renders correct class", () => {
-        createAndFindElements(createProps({ class: "iOS" }));
-        expect(switchComponentWrapper.hasClass("iOS")).toBe(true);
-    });
-
-    it("with android device style renders correct class", () => {
-        createAndFindElements(createProps({ class: "android" }));
-
-        expect(switchComponentWrapper.hasClass("android")).toBe(true);
     });
 
     it("with tabIndex passed renders correctly", () => {

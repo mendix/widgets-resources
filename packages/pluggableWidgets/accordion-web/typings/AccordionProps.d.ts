@@ -68,8 +68,10 @@ export interface AccordionContainerProps {
 }
 
 export interface AccordionPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     advancedMode: boolean;
     groups: GroupsPreviewType[];
     collapsible: boolean;

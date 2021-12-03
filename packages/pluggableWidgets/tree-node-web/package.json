@@ -1,7 +1,7 @@
 {
   "name": "tree-node-web",
   "widgetName": "TreeNode",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Mendix pluggable widget to display a tree view structure.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",

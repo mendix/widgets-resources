@@ -15,7 +15,7 @@ function renderTextTemplateWithFallback(textTemplateValue: string, placeholder: 
 export function preview(props: TreeNodePreviewProps): ReactElement | null {
     return (
         <TreeNode
-            class={props.class}
+            class={props.className}
             style={parseStyle(props.style)}
             items={[
                 {

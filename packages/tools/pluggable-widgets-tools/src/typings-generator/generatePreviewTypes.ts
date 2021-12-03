@@ -1,11 +1,23 @@
-import { Property } from "./WidgetXml";
+import { Property, SystemProperty } from "./WidgetXml";
 import { capitalizeFirstLetter, extractProperties } from "./helpers";
 
-export function generatePreviewTypes(widgetName: string, properties: Property[]): string[] {
+export function generatePreviewTypes(
+    widgetName: string,
+    properties: Property[],
+    systemProperties: SystemProperty[]
+): string[] {
     const results = Array.of<string>();
-    results.push(`export interface ${widgetName}PreviewProps {
-    class: string;
+    const isLabeled = systemProperties.some(p => p.$.key === "Label");
+
+    results.push(`export interface ${widgetName}PreviewProps {${
+        !isLabeled
+            ? `
+    className: string;
     style: string;
+    styleObject?: CSSProperties;`
+            : ""
+    }
+    readOnly: boolean;
 ${generatePreviewTypeBody(properties, results)}
 }`);
     return results;

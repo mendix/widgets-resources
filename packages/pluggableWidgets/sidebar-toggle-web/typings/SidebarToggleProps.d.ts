@@ -33,8 +33,10 @@ export interface SidebarToggleContainerProps {
 }
 
 export interface SidebarTogglePreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     caption: string;
     tooltip: string;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;

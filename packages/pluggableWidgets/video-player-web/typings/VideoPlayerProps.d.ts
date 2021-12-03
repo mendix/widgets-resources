@@ -36,8 +36,10 @@ export interface VideoPlayerContainerProps {
 }
 
 export interface VideoPlayerPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     type: TypeEnum;
     urlExpression: string;
     posterExpression: string;

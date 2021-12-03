@@ -33,8 +33,10 @@ export interface DatagridDropdownFilterContainerProps {
 }
 
 export interface DatagridDropdownFilterPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     advanced: boolean;
     defaultValue: string;
     auto: boolean;

@@ -41,8 +41,6 @@ export function Switch(props: SwitchContainerProps) {
             editable={editable}
             validation={props.booleanAttribute.validation}
             id={props.id}
-            class={props.class}
-            style={props.style}
             tabIndex={props.tabIndex}
         />
     );

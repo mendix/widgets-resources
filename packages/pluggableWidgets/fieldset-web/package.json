@@ -1,7 +1,7 @@
 {
   "name": "fieldset-web",
   "widgetName": "Fieldset",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A container to group several controls within a web form",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "repository": {

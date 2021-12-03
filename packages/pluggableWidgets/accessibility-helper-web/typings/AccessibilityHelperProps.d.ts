@@ -35,8 +35,10 @@ export interface AccessibilityHelperContainerProps {
 }
 
 export interface AccessibilityHelperPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     targetSelector: string;
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     attributesList: AttributesListPreviewType[];

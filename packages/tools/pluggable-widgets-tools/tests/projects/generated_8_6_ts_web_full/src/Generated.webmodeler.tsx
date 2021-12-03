@@ -24,7 +24,7 @@ export class preview extends Component<GeneratedPreviewProps> {
         return {
             type: props.generatedType,
             bootstrapStyle: props.bootstrapStyle,
-            className: props.class,
+            className: props.className, // BREAKING CHANGE OF 9.0
             clickable: false,
             style: undefined, // BREAKING CHANGE 8.9 props.styleObject,
             defaultValue: props.generatedValue ? props.generatedValue : "",

@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- We've updated the editorPreview files for web projects with correct properties.
+
 ## [9.0.2] - 2021-05-20
 
 ### Removed

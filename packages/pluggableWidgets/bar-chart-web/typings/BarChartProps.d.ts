@@ -88,8 +88,10 @@ export interface BarChartContainerProps {
 }
 
 export interface BarChartPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;

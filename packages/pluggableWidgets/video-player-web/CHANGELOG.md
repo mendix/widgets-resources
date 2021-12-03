@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed an issue that causes design properties and styles to not be applied to the widget in Design mode & Studio.
+
 ## [3.0.1] - 2021-11-17
 
 ### Changed

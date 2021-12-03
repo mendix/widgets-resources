@@ -31,8 +31,10 @@ export interface TreeNodeContainerProps {
 }
 
 export interface TreeNodePreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     advancedMode: boolean;
     datasource: {} | { type: string } | null;
     headerType: HeaderTypeEnum;

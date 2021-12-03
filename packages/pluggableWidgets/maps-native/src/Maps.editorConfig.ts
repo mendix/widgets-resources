@@ -74,7 +74,7 @@ export function getProperties(values: MapsPreviewProps, defaultProperties: Prope
     return defaultProperties;
 }
 
-export function check(values: MapsPreviewProps): Problem[] {
+export function check(values: Omit<MapsPreviewProps, "className" | "style" | "readOnly">): Problem[] {
     const errors: Problem[] = [];
     const zoomLevels = ["world", "continent", "country", "city", "town", "streets", "building"];
     const defaultZoomLevelIndex = zoomLevels.indexOf(values.defaultZoomLevel);

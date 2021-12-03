@@ -32,7 +32,7 @@ export function preview(props: ProgressBarPreviewProps): ReactElement {
     const { currentValue, minValue, maxValue } = getProgressBarValues();
     return (
         <ProgressBar
-            class={props.class}
+            class={props.className}
             style={parseStyle(props.style)}
             currentValue={currentValue}
             minValue={minValue}

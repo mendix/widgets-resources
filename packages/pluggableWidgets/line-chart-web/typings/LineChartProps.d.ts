@@ -95,8 +95,10 @@ export interface LineChartContainerProps {
 }
 
 export interface LineChartPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     lines: LinesPreviewType[];
     showLegend: boolean;
     xAxisLabel: string;

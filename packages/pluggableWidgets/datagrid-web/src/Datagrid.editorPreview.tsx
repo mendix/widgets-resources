@@ -6,11 +6,7 @@ import { parseStyle } from "@mendix/piw-utils-internal";
 import { Selectable } from "mendix/preview/Selectable";
 import { ObjectItem, GUID } from "mendix";
 
-interface PreviewProps extends Omit<DatagridPreviewProps, "class"> {
-    className: string;
-}
-
-export function preview(props: PreviewProps): ReactElement {
+export function preview(props: DatagridPreviewProps): ReactElement {
     const data: ObjectItem[] = Array.from({ length: props.pageSize ?? 5 }).map((_, index) => ({
         id: String(index) as GUID
     }));

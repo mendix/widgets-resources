@@ -27,8 +27,10 @@ export interface DatagridNumberFilterContainerProps {
 }
 
 export interface DatagridNumberFilterPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     advanced: boolean;
     defaultValue: string;
     defaultFilter: DefaultFilterEnum;

@@ -5,7 +5,7 @@ import { Fieldset } from "./components/Fieldset";
 import { FieldsetPreviewProps } from "../typings/FieldsetProps";
 
 export function preview(props: FieldsetPreviewProps): ReactElement {
-    const { class: className, legend } = props;
+    const { className, legend } = props;
     const style = parseStyle(props.style);
     const ContentRenderer = props.content.renderer;
 

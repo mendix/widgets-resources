@@ -3,6 +3,7 @@ export const nativeResult = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, NativeImage } from "mendix";
 import { Big } from "big.js";
 
@@ -43,8 +44,10 @@ export interface MyWidgetProps<Style> {
 }
 
 export interface MyWidgetPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     valueAttribute: string;
     mywidgetValue: string;
     valueExpression: string;
@@ -109,8 +112,10 @@ export interface MyWidgetContainerProps {
 }
 
 export interface MyWidgetPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     valueAttribute: string;
     mywidgetValue: string;
     valueExpression: string;
@@ -132,7 +137,6 @@ export const webResultGroup = `/**
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, FileValue, WebImage } from "mendix";
 import { Big } from "big.js";
 
@@ -156,8 +160,6 @@ export interface ActionsPreviewType {
 
 export interface MyWidgetContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     valueAttribute?: EditableValue<string | Big>;
@@ -176,8 +178,7 @@ export interface MyWidgetContainerProps {
 }
 
 export interface MyWidgetPreviewProps {
-    class: string;
-    style: string;
+    readOnly: boolean;
     valueAttribute: string;
     mywidgetValue: string;
     valueExpression: string;

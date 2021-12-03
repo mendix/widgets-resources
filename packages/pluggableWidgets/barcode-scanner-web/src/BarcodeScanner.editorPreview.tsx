@@ -8,7 +8,7 @@ export function preview(props: BarcodeScannerPreviewProps): ReactElement {
     return (
         <BarcodeScannerOverlay
             showMask={props.showMask}
-            class={props.class}
+            class={props.className}
             heightUnit={props.heightUnit}
             widthUnit={props.widthUnit}
             // These are set by default values in widget properties.
@@ -21,5 +21,5 @@ export function preview(props: BarcodeScannerPreviewProps): ReactElement {
 }
 
 export function getPreviewCss(): string {
-    return require("./ui/BarcodeScanner.scss") + require("./ui/BarcodeScannerPreview.scss");
+    return require("./ui/BarcodeScannerPreview.scss");
 }
