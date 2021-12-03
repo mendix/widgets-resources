@@ -315,7 +315,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     };
 
-    private setCustomViews = () => {
+    private setCustomViews = (): Container.ViewOptions => {
         return this.props.customViews.reduce(
             (accumulator: Container.ViewOptions, customView: Container.CustomViews) => {
                 if (customView.customView === "agenda") {
@@ -429,7 +429,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         await this.loadEvents(this.props.mxObject);
     };
 
-    private handleOnClickEvent = (eventInfo: Container.EventInfo) => {
+    private handleOnClickEvent = (eventInfo: Container.EventInfo): void => {
         mx.data.get({
             guid: eventInfo.guid,
             callback: this.executeEventAction,
@@ -437,14 +437,14 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         });
     };
 
-    private executeEventAction = (mxObject: MxObject) => {
+    private executeEventAction = (mxObject: MxObject): void => {
         const { onClickEvent, onClickMicroflow, mxform, onClickNanoflow } = this.props;
         if (mxObject) {
             this.executeAction(mxObject, onClickEvent, onClickMicroflow, mxform, onClickNanoflow);
         }
     };
 
-    private onClickSlot = (slotInfo: Container.EventInfo) => {
+    private onClickSlot = (slotInfo: Container.EventInfo): void => {
         const { start, end, slots } = slotInfo;
         mx.data.create({
             entity: this.props.eventEntity,
@@ -477,7 +477,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         this.executeAction(mxObject, onCreate, onCreateMicroflow, mxform, onCreateNanoflow);
     }
 
-    private handleOnChangeEvent = (eventInfo: Container.EventInfo) => {
+    private handleOnChangeEvent = (eventInfo: Container.EventInfo): void => {
         const { events } = this.state;
         const eventPosition = events.findIndex(value => value.guid === eventInfo.event.guid);
         if (eventPosition === -1) {
@@ -506,7 +506,7 @@ export default class CalendarContainer extends Component<Container.CalendarConta
         }
     };
 
-    private executeOnDropAction = (mxObject: MxObject) => {
+    private executeOnDropAction = (mxObject: MxObject): void => {
         const { onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow } = this.props;
         if (mxObject && mxObject.getGuid()) {
             this.executeAction(mxObject, onChangeEvent, onChangeMicroflow, mxform, onChangeNanoflow);
