@@ -8,7 +8,7 @@
         "version": {
             "ignoreChanges": ["*.md"],
             "message": "chore: release",
-            "allowBranch": "master"
+            "allowBranch": "masters"
         }
     }
 }
