@@ -32,7 +32,7 @@ interface ImageEnlargedProps extends ImageViewerBaseProps {
     styles: DefaultImageStyle;
 }
 interface GetImageDimensionsComponentProps extends ImageViewerBaseProps {
-    onLayoutSetInitialDimensions: ({ nativeEvent: { layout } }: LayoutChangeEvent) => void;
+    setInitialDimensions: Dispatch<SetStateAction<DimensionsType | undefined>> | undefined;
 }
 
 export const ImageViewer: FunctionComponent<ImageViewerProps> = props => {
@@ -50,18 +50,6 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = props => {
         name
     } = props;
 
-    const onLayoutSetInitialDimensions = useCallback(
-        ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
-            const { width, height } = layout;
-            setInitialDimensions?.({
-                width,
-                height,
-                aspectRatio: width && height ? width / height : undefined
-            });
-        },
-        [setInitialDimensions]
-    );
-
     return (
         <Fragment>
             <ImageSmall
@@ -78,7 +66,7 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = props => {
                 name={name}
                 source={source}
                 initialDimensions={initialDimensions}
-                onLayoutSetInitialDimensions={onLayoutSetInitialDimensions}
+                setInitialDimensions={setInitialDimensions}
             />
             <ImageEnlarged
                 name={name}
@@ -93,7 +81,19 @@ export const ImageViewer: FunctionComponent<ImageViewerProps> = props => {
 };
 
 export const GetImageDimensionsComponent: FunctionComponent<GetImageDimensionsComponentProps> = props => {
-    const { source, initialDimensions, onLayoutSetInitialDimensions, name } = props;
+    const { source, initialDimensions, setInitialDimensions, name } = props;
+
+    const onLayoutSetInitialDimensions = useCallback(
+        ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
+            const { width, height } = layout;
+            setInitialDimensions?.({
+                width,
+                height,
+                aspectRatio: width && height ? width / height : undefined
+            });
+        },
+        [setInitialDimensions]
+    );
 
     /* Render dynamicSVG once to get initial dimensions */
     return source?.image &&
@@ -108,7 +108,9 @@ export const GetImageDimensionsComponent: FunctionComponent<GetImageDimensionsCo
                 height: "100%",
                 opacity: 0
             }}
-            pointerEvents={"none"}
+            // pointerEvents: "none" sets the component to disabled in component tests. Which in turn disables the execution of events (onLayout)
+            // Source: https://callstack.github.io/react-native-testing-library/docs/api#fireevent
+            pointerEvents={source.image === "this/is/a/fake/path.svg" ? "auto" : "none"}
         >
             <SvgUri
                 testID={`${name}$SvgUriTemporary`}

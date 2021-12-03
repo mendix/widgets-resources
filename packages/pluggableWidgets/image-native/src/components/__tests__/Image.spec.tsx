@@ -10,18 +10,6 @@ import { parse, SvgAst } from "react-native-svg";
 import svgXml from "./svgXml";
 import { GlyphIcon } from "../fonts/font";
 
-global.fetch = jest.fn(() =>
-    Promise.resolve({
-        ...global.fetch.prototype,
-        url: "",
-        ok: true,
-        status: 200,
-        statusText: "OK",
-        redirected: false,
-        json: () => Promise.resolve("FetchResponse"),
-        text: () => svgXml
-    })
-);
 jest.mock("react-native-svg/lib/commonjs/xml", () => {
     const original = jest.requireActual("react-native-svg/lib/commonjs/xml");
     return {
