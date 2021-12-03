@@ -8,7 +8,6 @@ const advancedModeItems: Array<keyof RichTextPreviewProps> = [
     "spellChecker",
     "codeHighlight",
     "maxChars",
-    "wordCount",
     "advancedContentFilter",
     "allowedContent",
     "disallowedContent"
@@ -46,7 +45,7 @@ export function getProperties(values: RichTextPreviewProps, defaultProperties: P
         hidePropertiesIn(defaultProperties, values, toolbarGroups);
     }
 
-    if (values.wordCount === "no") {
+    if (!values.wordCount) {
         hidePropertiesIn(defaultProperties, values, ["maxChars"]);
     }
     return defaultProperties;

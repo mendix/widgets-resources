@@ -1,16 +1,15 @@
-import { ReactNode, createElement, useCallback } from "react";
+import { ReactNode, createElement, useCallback, useMemo } from "react";
 import { RichText as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
 import { generateUUID } from "@mendix/piw-utils-internal/dist/components/web";
 import { getToolbarGroupByName, GroupType } from "./utils/ckeditorConfigs";
 import "./ui/RichText.scss";
+import { debounce } from "@mendix/piw-utils-internal";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
-    const id = generateUUID();
+    const id = useMemo(() => generateUUID(), []);
     const onChangeFn = useCallback(
-        (value: string) => {
-            props.stringAttribute.setValue(value);
-        },
+        debounce((value: string) => props.stringAttribute.setValue(value), 500),
         [props.stringAttribute]
     );
     const toolbarGroup = () => {
@@ -18,7 +17,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
         const { toolbarConfig, advancedGroup } = props;
         if (toolbarConfig === "basic") {
             return groupKeys
-                .filter((groupName: GroupType) => props[groupName] === "yes")
+                .filter((groupName: GroupType) => props[groupName])
                 .map((groupName: GroupType) => {
                     return groupName.includes("separator")
                         ? "/"
@@ -33,11 +32,6 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
         if (props.codeHighlight) {
             plugins.push("codesnippet");
         }
-        if (props.wordCount) {
-            plugins.push("wordcount");
-        }
-    }
-    if (props.advancedContentFilter === "custom") {
     }
     return (
         <RichTextComponent
@@ -65,8 +59,9 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             toolbarGroup={toolbarGroup()}
             plugins={plugins}
             value={props.stringAttribute.value}
-            onChange={onChangeFn}
-            label={props.labelMessage?.value}
+            onValueChange={onChangeFn}
+            onKeyPress={props.onKeyPress?.execute}
+            onKeyChange={props.onChange?.execute}
             dimensions={{
                 width: props.width,
                 widthUnit: props.widthUnit,

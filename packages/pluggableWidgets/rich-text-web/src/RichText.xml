@@ -37,18 +37,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Label">
-                <property key="showLabel" type="enumeration" defaultValue="no">
-                    <caption>Show label</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="labelMessage" type="textTemplate" required="false">
-                    <caption>Label caption</caption>
-                    <description/>
-                </property>
+                <systemProperty key="Label"/>
             </propertyGroup>
             <propertyGroup caption="Editability">
                 <systemProperty key="Editability"/>
@@ -86,109 +75,57 @@
                         <enumerationValue key="advanced">Advanced</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="documentGroup" type="enumeration" defaultValue="yes">
+                <property key="documentGroup" type="boolean" defaultValue="true">
                     <caption>Document Group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="clipboardGroup" type="enumeration" defaultValue="yes">
+                <property key="clipboardGroup" type="boolean" defaultValue="true">
                     <caption>Clipboard Group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="editingGroup" type="enumeration" defaultValue="yes">
+                <property key="editingGroup" type="boolean" defaultValue="true">
                     <caption>Editing Group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="formsGroup" type="enumeration" defaultValue="yes">
+                <property key="formsGroup" type="boolean" defaultValue="true">
                     <caption>Forms group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="separatorGroup" type="enumeration" defaultValue="yes">
+                <property key="separatorGroup" type="boolean" defaultValue="true">
                     <caption>Separator group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="basicStylesGroup" type="enumeration" defaultValue="yes">
+                <property key="basicStylesGroup" type="boolean" defaultValue="true">
                     <caption>Basic style group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="paragraphGroup" type="enumeration" defaultValue="yes">
+                <property key="paragraphGroup" type="boolean" defaultValue="true">
                     <caption>Paragraph group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="linksGroup" type="enumeration" defaultValue="yes">
+                <property key="linksGroup" type="boolean" defaultValue="true">
                     <caption>Links group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="separator2Group" type="enumeration" defaultValue="yes">
+                <property key="separator2Group" type="boolean" defaultValue="true">
                     <caption>Separator 2 group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="stylesGroup" type="enumeration" defaultValue="yes">
+                <property key="stylesGroup" type="boolean" defaultValue="true">
                     <caption>Styles group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="colorsGroup" type="enumeration" defaultValue="yes">
+                <property key="colorsGroup" type="boolean" defaultValue="true">
                     <caption>Colors group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="toolsGroup" type="enumeration" defaultValue="yes">
+                <property key="toolsGroup" type="boolean" defaultValue="true">
                     <caption>Tools group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
-                <property key="othersGroup" type="enumeration" defaultValue="yes">
+                <property key="othersGroup" type="boolean" defaultValue="true">
                     <caption>Others group</caption>
                     <description/>
-                    <enumerationValues>
-                        <enumerationValue key="yes">Yes</enumerationValue>
-                        <enumerationValue key="no">No</enumerationValue>
-                    </enumerationValues>
                 </property>
                 <property key="advancedGroup" type="object" isList="true" required="false">
                     <caption>Advanced groups</caption>
@@ -337,37 +274,21 @@
                     <enumerationValue key="blocks">Blocks</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="autoParagraph" type="enumeration" defaultValue="yes">
+            <property key="autoParagraph" type="boolean" defaultValue="true">
                 <caption>Auto paragraph</caption>
                 <description/>
-                <enumerationValues>
-                    <enumerationValue key="yes">Yes</enumerationValue>
-                    <enumerationValue key="no">No</enumerationValue>
-                </enumerationValues>
             </property>
-            <property key="spellChecker" type="enumeration" defaultValue="yes">
+            <property key="spellChecker" type="boolean" defaultValue="true">
                 <caption>Spell checker</caption>
                 <description/>
-                <enumerationValues>
-                    <enumerationValue key="yes">Yes</enumerationValue>
-                    <enumerationValue key="no">No</enumerationValue>
-                </enumerationValues>
             </property>
-            <property key="codeHighlight" type="enumeration" defaultValue="no">
+            <property key="codeHighlight" type="boolean" defaultValue="false">
                 <caption>Enable code highlight</caption>
                 <description/>
-                <enumerationValues>
-                    <enumerationValue key="yes">Yes</enumerationValue>
-                    <enumerationValue key="no">No</enumerationValue>
-                </enumerationValues>
             </property>
-            <property key="wordCount" type="enumeration" defaultValue="no">
+            <property key="wordCount" type="boolean" defaultValue="false">
                 <caption>Word count</caption>
                 <description/>
-                <enumerationValues>
-                    <enumerationValue key="yes">Yes</enumerationValue>
-                    <enumerationValue key="no">No</enumerationValue>
-                </enumerationValues>
             </property>
             <property key="maxChars" type="integer" defaultValue="0">
                 <caption>Maximum characters</caption>

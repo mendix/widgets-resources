@@ -1,15 +1,15 @@
-import { createElement, ReactElement, useState, useEffect, useMemo } from "react";
-import { CKEditorHookProps, CKEditorType, CKEditorConfig } from "ckeditor4-react";
+import { createElement, ReactElement, useState, useMemo, useEffect } from "react";
+import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
-import { defineEnterMode, getPreset, addPlugin } from "../utils/ckeditorConfigs";
+import { defineEnterMode, getPreset } from "../utils/ckeditorConfigs";
+import sanitizeHtml from "sanitize-html";
 import classNames from "classnames";
 import {
     ReadOnlyStyleEnum,
     PresetEnum,
     ToolbarConfigEnum,
     EnterModeEnum,
-    ShiftEnterModeEnum,
-    SpellCheckerEnum
+    ShiftEnterModeEnum
 } from "../../typings/RichTextProps";
 import { MainEditor } from "./MainEditor";
 
@@ -17,30 +17,31 @@ interface RichTextProps {
     id?: string;
     name: string;
     class: string;
-    preset: PresetEnum;
-    editorType: CKEditorType;
     readOnly: boolean;
-    readOnlyStyle: ReadOnlyStyleEnum;
+    spellChecker: boolean;
+    sanitizeContent?: boolean;
     value: any;
-    onChange?: (value: string) => void;
-    toolbarConfig: ToolbarConfigEnum;
-    spellChecker: SpellCheckerEnum;
-    enterMode?: EnterModeEnum;
-    shiftEnterMode?: ShiftEnterModeEnum;
     advancedGroup: any;
     toolbarGroup: any;
     plugins?: string[];
-    label?: string | undefined;
+    readOnlyStyle: ReadOnlyStyleEnum;
+    toolbarConfig: ToolbarConfigEnum;
+    enterMode?: EnterModeEnum;
+    shiftEnterMode?: ShiftEnterModeEnum;
+    preset: PresetEnum;
+    editorType: CKEditorType;
     dimensions?: Dimensions;
     advancedContentFilter?: { allowedContent: string; disallowedContent: string } | null;
-    sanitizeContent?: boolean;
+    onValueChange?: (value: string) => void;
+    onKeyChange?: () => void;
+    onKeyPress?: () => void;
 }
 
 export const RichText = (props: RichTextProps): ReactElement => {
     const {
         editorType,
         preset,
-        plugins,
+        // plugins,
         enterMode,
         shiftEnterMode,
         value,
@@ -57,16 +58,32 @@ export const RichText = (props: RichTextProps): ReactElement => {
           };
     const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<any>>({
         element,
+        // editorUrl: "/widgets/ckeditor/ckeditor.js",
         type: editorType,
         config: {
             width,
             height,
             enterMode: defineEnterMode(enterMode || ""),
             shiftEnterMode: defineEnterMode(shiftEnterMode || ""),
-            disableNativeSpellChecker: props.spellChecker === "no"
+            disableNativeSpellChecker: props.spellChecker
         },
         initContent: value,
-        subscribeTo: ["instanceReady", "beforeLoad", "loaded"]
+        dispatchEvent: ({ type, payload }) => {
+            if (type === CKEditorEventAction.change) {
+                const value = payload.editor.getData() as string;
+                if (props.onKeyChange) {
+                    props.onKeyChange();
+                }
+                if (props.onKeyPress) {
+                    props.onKeyPress();
+                }
+                if (props?.onValueChange) {
+                    const content = props.sanitizeContent ? sanitizeHtml(value) : value;
+                    props?.onValueChange(content);
+                }
+            }
+        },
+        subscribeTo: ["change"]
     });
     const editorPreset: CKEditorConfig | null = getPreset(preset);
     const key = useMemo(() => Date.now(), [ckeditorConfig]);
@@ -80,6 +97,7 @@ export const RichText = (props: RichTextProps): ReactElement => {
             }
             return config;
         } else {
+            console.log("editorPreset", editorPreset);
             return editorPreset;
         }
     };
@@ -89,8 +107,12 @@ export const RichText = (props: RichTextProps): ReactElement => {
             config.allowedContent = advancedContentFilter.allowedContent;
             config.disallowedContent = advancedContentFilter.disallowedContent;
         }
+        // if (plugins?.length) {
+        //     plugins.forEach(plugin => addPlugin(plugin, ckeditorConfig));
+        // }
         setCkeditorConfig({
             ...ckeditorConfig,
+            initContent: value,
             element,
             config: {
                 ...ckeditorConfig.config,
@@ -99,12 +121,7 @@ export const RichText = (props: RichTextProps): ReactElement => {
             }
         });
     }, [props]);
-    useEffect(() => {
-        if (plugins?.length) {
-            plugins.forEach(plugin => addPlugin(plugin, ckeditorConfig));
-            setCkeditorConfig(ckeditorConfig);
-        }
-    }, [ckeditorConfig]);
+    console.log(ckeditorConfig);
     return (
         <div className={classNames(props.class, "widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}>
             <div id={props.id} ref={setElement} />

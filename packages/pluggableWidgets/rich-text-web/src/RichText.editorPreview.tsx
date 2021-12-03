@@ -11,7 +11,6 @@ interface PreviewProps extends Omit<RichTextPreviewProps, "class"> {
 export const preview = (props: PreviewProps): ReactElement => {
     return (
         <RichText
-            label={props.labelMessage}
             readOnly={props.readOnly}
             plugins={[]}
             value={"Editor Preview"}
@@ -19,7 +18,7 @@ export const preview = (props: PreviewProps): ReactElement => {
             name={props.name}
             toolbarGroup={[]}
             advancedGroup={null}
-            spellChecker={"no"}
+            spellChecker={false}
             class={props.className}
             editorType={props.editorType}
             preset={props.preset}

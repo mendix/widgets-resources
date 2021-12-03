@@ -4,43 +4,15 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, EditableValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
 
 export type EditorTypeEnum = "classic" | "inline";
-
-export type ShowLabelEnum = "yes" | "no";
 
 export type ReadOnlyStyleEnum = "text" | "bordered" | "borderedToolbar";
 
 export type PresetEnum = "basic" | "standard" | "full" | "custom";
 
 export type ToolbarConfigEnum = "basic" | "advanced";
-
-export type DocumentGroupEnum = "yes" | "no";
-
-export type ClipboardGroupEnum = "yes" | "no";
-
-export type EditingGroupEnum = "yes" | "no";
-
-export type FormsGroupEnum = "yes" | "no";
-
-export type SeparatorGroupEnum = "yes" | "no";
-
-export type BasicStylesGroupEnum = "yes" | "no";
-
-export type ParagraphGroupEnum = "yes" | "no";
-
-export type LinksGroupEnum = "yes" | "no";
-
-export type Separator2GroupEnum = "yes" | "no";
-
-export type StylesGroupEnum = "yes" | "no";
-
-export type ColorsGroupEnum = "yes" | "no";
-
-export type ToolsGroupEnum = "yes" | "no";
-
-export type OthersGroupEnum = "yes" | "no";
 
 export type CtItemTypeEnum =
     | "seperator"
@@ -125,14 +97,6 @@ export type EnterModeEnum = "paragraph" | "breakLines" | "blocks";
 
 export type ShiftEnterModeEnum = "paragraph" | "breakLines" | "blocks";
 
-export type AutoParagraphEnum = "yes" | "no";
-
-export type SpellCheckerEnum = "yes" | "no";
-
-export type CodeHighlightEnum = "yes" | "no";
-
-export type WordCountEnum = "yes" | "no";
-
 export type AdvancedContentFilterEnum = "auto" | "custom";
 
 export interface AdvancedGroupPreviewType {
@@ -145,28 +109,27 @@ export interface RichTextContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
+    id: string;
     advancedMode: boolean;
     editorType: EditorTypeEnum;
     stringAttribute: EditableValue<string>;
     sanitizeContent: boolean;
-    showLabel: ShowLabelEnum;
-    labelMessage?: DynamicValue<string>;
     readOnlyStyle: ReadOnlyStyleEnum;
     preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
-    documentGroup: DocumentGroupEnum;
-    clipboardGroup: ClipboardGroupEnum;
-    editingGroup: EditingGroupEnum;
-    formsGroup: FormsGroupEnum;
-    separatorGroup: SeparatorGroupEnum;
-    basicStylesGroup: BasicStylesGroupEnum;
-    paragraphGroup: ParagraphGroupEnum;
-    linksGroup: LinksGroupEnum;
-    separator2Group: Separator2GroupEnum;
-    stylesGroup: StylesGroupEnum;
-    colorsGroup: ColorsGroupEnum;
-    toolsGroup: ToolsGroupEnum;
-    othersGroup: OthersGroupEnum;
+    documentGroup: boolean;
+    clipboardGroup: boolean;
+    editingGroup: boolean;
+    formsGroup: boolean;
+    separatorGroup: boolean;
+    basicStylesGroup: boolean;
+    paragraphGroup: boolean;
+    linksGroup: boolean;
+    separator2Group: boolean;
+    stylesGroup: boolean;
+    colorsGroup: boolean;
+    toolsGroup: boolean;
+    othersGroup: boolean;
     advancedGroup: AdvancedGroupType[];
     widthUnit: WidthUnitEnum;
     width: number;
@@ -176,10 +139,10 @@ export interface RichTextContainerProps {
     onChange?: ActionValue;
     enterMode: EnterModeEnum;
     shiftEnterMode: ShiftEnterModeEnum;
-    autoParagraph: AutoParagraphEnum;
-    spellChecker: SpellCheckerEnum;
-    codeHighlight: CodeHighlightEnum;
-    wordCount: WordCountEnum;
+    autoParagraph: boolean;
+    spellChecker: boolean;
+    codeHighlight: boolean;
+    wordCount: boolean;
     maxChars: number;
     advancedContentFilter: AdvancedContentFilterEnum;
     allowedContent: string;
@@ -193,24 +156,22 @@ export interface RichTextPreviewProps {
     editorType: EditorTypeEnum;
     stringAttribute: string;
     sanitizeContent: boolean;
-    showLabel: ShowLabelEnum;
-    labelMessage: string;
     readOnlyStyle: ReadOnlyStyleEnum;
     preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
-    documentGroup: DocumentGroupEnum;
-    clipboardGroup: ClipboardGroupEnum;
-    editingGroup: EditingGroupEnum;
-    formsGroup: FormsGroupEnum;
-    separatorGroup: SeparatorGroupEnum;
-    basicStylesGroup: BasicStylesGroupEnum;
-    paragraphGroup: ParagraphGroupEnum;
-    linksGroup: LinksGroupEnum;
-    separator2Group: Separator2GroupEnum;
-    stylesGroup: StylesGroupEnum;
-    colorsGroup: ColorsGroupEnum;
-    toolsGroup: ToolsGroupEnum;
-    othersGroup: OthersGroupEnum;
+    documentGroup: boolean;
+    clipboardGroup: boolean;
+    editingGroup: boolean;
+    formsGroup: boolean;
+    separatorGroup: boolean;
+    basicStylesGroup: boolean;
+    paragraphGroup: boolean;
+    linksGroup: boolean;
+    separator2Group: boolean;
+    stylesGroup: boolean;
+    colorsGroup: boolean;
+    toolsGroup: boolean;
+    othersGroup: boolean;
     advancedGroup: AdvancedGroupPreviewType[];
     widthUnit: WidthUnitEnum;
     width: number | null;
@@ -220,10 +181,10 @@ export interface RichTextPreviewProps {
     onChange: {} | null;
     enterMode: EnterModeEnum;
     shiftEnterMode: ShiftEnterModeEnum;
-    autoParagraph: AutoParagraphEnum;
-    spellChecker: SpellCheckerEnum;
-    codeHighlight: CodeHighlightEnum;
-    wordCount: WordCountEnum;
+    autoParagraph: boolean;
+    spellChecker: boolean;
+    codeHighlight: boolean;
+    wordCount: boolean;
     maxChars: number | null;
     advancedContentFilter: AdvancedContentFilterEnum;
     allowedContent: string;

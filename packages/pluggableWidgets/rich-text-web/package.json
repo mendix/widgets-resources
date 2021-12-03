@@ -40,16 +40,15 @@
     "@types/classnames": "^2.2.6",
     "@types/sanitize-html": "^1.18.2",
     "@types/ckeditor4": "^4.16.1",
-    "@types/ckeditor": "^4.9.10",
+    "@rollup/plugin-json": "^4.1.0",
     "cross-env": "^7.0.2",
     "eslint": "^7.20.0"
   },
   "dependencies": {
     "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
-    "sanitize-html": "^2.0.0",
-    "ckeditor4-react": "^2.0.1",
-    "ckeditor4": "^4.17.1",
-    "ckeditor4-integrations-common": "^1.0.0"
+    "sanitize-html": "^2.6.0",
+    "ckeditor4-react": "^2.1.0",
+    "ckeditor4": "^4.17.1"
   }
 }

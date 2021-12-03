@@ -52,7 +52,7 @@ export function getPreset(type: PresetEnum): CKEditorConfig | null {
         case "basic":
             return SET_PRESET("basic");
         case "full":
-            return {};
+            return SET_PRESET("full");
         case "custom":
             return null;
     }
@@ -62,9 +62,17 @@ export function addPlugin(name: string, ckeditorConfig: CKEditorConfig) {
     const plugin = PLUGIN_CONFIGS[name as keyof Plugins];
     if (plugin) {
         const { config } = ckeditorConfig;
-        config.extraPlugins = config.extraPlugins
-            ? config.extraPlugins + `,${plugin.extraPlugins}`
-            : plugin.extraPlugins;
+        if (plugin === "codesnippet" && !config.plugins.includes(plugin)) {
+            config.plugins =
+                config.plugins && !config.plugins.includes(plugin)
+                    ? config.plugins + `,${plugin.extraPlugins}`
+                    : plugin.extraPlugins;
+            config.skin = "mono-list";
+        }
+        // if (config.toolbar) {
+        //     config.toolbar.push(["CodeSnippet"]);
+        //     console.log("plugin", config);
+        // }
     }
     return ckeditorConfig;
 }
