@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RichText render DOM structure 1`] = `
+<DocumentFragment>
+  <div
+    class="widget-rich-text"
+    style="width: 100%; height: auto;"
+  >
+    <div />
+  </div>
+</DocumentFragment>
+`;

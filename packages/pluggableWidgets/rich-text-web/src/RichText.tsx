@@ -1,30 +1,26 @@
-import { ReactNode, createElement, useCallback, useMemo } from "react";
-import { RichText as RichTextComponent } from "./components/RichText";
+import { ReactNode, createElement, useCallback } from "react";
+import { RichTextEditor as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
-import { generateUUID } from "@mendix/piw-utils-internal/dist/components/web";
-import { getToolbarGroupByName, GroupType } from "./utils/ckeditorConfigs";
-import "./ui/RichText.scss";
+import { GroupType } from "./utils/ckeditorPresets";
 import { debounce } from "@mendix/piw-utils-internal";
+import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
-    const id = useMemo(() => generateUUID(), []);
     const onChangeFn = useCallback(
         debounce((value: string) => props.stringAttribute.setValue(value), 500),
         [props.stringAttribute]
     );
-    const toolbarGroup = () => {
+    const toolbarGroup = (): string[] | undefined => {
         const groupKeys = Object.keys(props).filter((key: string) => (key.includes("Group") ? key : null));
-        const { toolbarConfig, advancedGroup } = props;
+        const { toolbarConfig, advancedConfig } = props;
         if (toolbarConfig === "basic") {
             return groupKeys
                 .filter((groupName: GroupType) => props[groupName])
-                .map((groupName: GroupType) => {
-                    return groupName.includes("separator")
-                        ? "/"
-                        : getToolbarGroupByName(groupName.replace("Group", "").toLowerCase());
-                });
+                .map((groupName: GroupType) =>
+                    groupName.includes("separator") ? "/" : groupName.replace("Group", "").toLowerCase()
+                );
         } else if (toolbarConfig === "advanced") {
-            return advancedGroup.map(group => [group.ctItemType !== "seperator" ? group.ctItemType : "-"]);
+            return advancedConfig.map(group => (group.ctItemType !== "seperator" ? group.ctItemType : "-"));
         }
     };
     const plugins = [];
@@ -35,8 +31,8 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
     }
     return (
         <RichTextComponent
-            id={`RichText-${id}`}
-            advancedGroup={props.advancedGroup}
+            autoParagraph={props.autoParagraph}
+            advancedConfig={props.advancedConfig}
             advancedContentFilter={
                 props.advancedContentFilter === "custom"
                     ? {
@@ -58,7 +54,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             toolbarConfig={props.toolbarConfig}
             toolbarGroup={toolbarGroup()}
             plugins={plugins}
-            value={props.stringAttribute.value}
+            value={props.stringAttribute.value as string}
             onValueChange={onChangeFn}
             onKeyPress={props.onKeyPress?.execute}
             onKeyChange={props.onChange?.execute}

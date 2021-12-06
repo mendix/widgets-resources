@@ -4,28 +4,16 @@ import { SET_PRESET, TOOLBAR_GROUP, ToolbarGroup } from "./ckeditorPresets";
 
 interface Plugins {
     codesnippet: any;
-    wordcount?: any;
 }
 
 const PLUGIN_CONFIGS: Plugins = {
     codesnippet: {
-        included: true,
-        toolbarName: "CodeSnippet",
         extraPlugins: "codesnippet",
+        name: "CodeSnippet",
         config: {
             codeSnippet_theme: "idea"
-            // codeSnippet_languages: { javascript: "JavaScript", php: "PHP" }
         }
     }
-    // wordcount: {
-    //     included: false,
-    //     toolbarName: "WordCount",
-    //     extraPlugins: "wordcount",
-    //     config: {
-    //         showWordCount: true,
-    //         showCharCount: true
-    //     }
-    // }
 };
 
 export function getToolbarGroupByName(name: string): ToolbarGroup | undefined | string {
@@ -58,34 +46,14 @@ export function getPreset(type: PresetEnum): CKEditorConfig | null {
     }
 }
 
-export function addPlugin(name: string, ckeditorConfig: CKEditorConfig) {
+export function addPlugin(name: string, config: CKEditorConfig): CKEditorConfig {
     const plugin = PLUGIN_CONFIGS[name as keyof Plugins];
-    if (plugin) {
-        const { config } = ckeditorConfig;
-        if (plugin === "codesnippet" && !config.plugins.includes(plugin)) {
-            config.plugins =
-                config.plugins && !config.plugins.includes(plugin)
-                    ? config.plugins + `,${plugin.extraPlugins}`
-                    : plugin.extraPlugins;
-            config.skin = "mono-list";
+    if (plugin && config) {
+        if (config.extraPlugins && !config.extraPlugins.includes(plugin.extraPlugins)) {
+            config.extraPlugins += `,${plugin.extraPlugins}`;
+        } else {
+            config.extraPlugins = plugin.extraPlugins;
         }
-        // if (config.toolbar) {
-        //     config.toolbar.push(["CodeSnippet"]);
-        //     console.log("plugin", config);
-        // }
     }
-    return ckeditorConfig;
+    return config;
 }
-
-export type GroupType =
-    | "documentGroup"
-    | "formsGroup"
-    | "editingGroup"
-    | "clipboardGroup"
-    | "basicStylesGroup"
-    | "paragraphGroup"
-    | "linksGroup"
-    | "colorsGroup"
-    | "toolsGroup"
-    | "othersGroup"
-    | "stylesGroup";

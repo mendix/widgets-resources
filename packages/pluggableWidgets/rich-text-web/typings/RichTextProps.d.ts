@@ -84,7 +84,7 @@ export type CtItemTypeEnum =
     | "Undo"
     | "Unlink";
 
-export interface AdvancedGroupType {
+export interface AdvancedConfigType {
     ctItemType: CtItemTypeEnum;
     ctItemToolbar: string;
 }
@@ -99,7 +99,7 @@ export type ShiftEnterModeEnum = "paragraph" | "breakLines" | "blocks";
 
 export type AdvancedContentFilterEnum = "auto" | "custom";
 
-export interface AdvancedGroupPreviewType {
+export interface AdvancedConfigPreviewType {
     ctItemType: CtItemTypeEnum;
     ctItemToolbar: string;
 }
@@ -130,7 +130,7 @@ export interface RichTextContainerProps {
     colorsGroup: boolean;
     toolsGroup: boolean;
     othersGroup: boolean;
-    advancedGroup: AdvancedGroupType[];
+    advancedConfig: AdvancedConfigType[];
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -172,7 +172,7 @@ export interface RichTextPreviewProps {
     colorsGroup: boolean;
     toolsGroup: boolean;
     othersGroup: boolean;
-    advancedGroup: AdvancedGroupPreviewType[];
+    advancedConfig: AdvancedConfigPreviewType[];
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;

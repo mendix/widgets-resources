@@ -10,7 +10,8 @@ const advancedModeItems: Array<keyof RichTextPreviewProps> = [
     "maxChars",
     "advancedContentFilter",
     "allowedContent",
-    "disallowedContent"
+    "disallowedContent",
+    "wordCount"
 ];
 const toolbarGroups: Array<keyof RichTextPreviewProps> = [
     "toolsGroup",
@@ -36,10 +37,10 @@ export function getProperties(values: RichTextPreviewProps, defaultProperties: P
         hidePropertiesIn(defaultProperties, values, ["allowedContent", "disallowedContent"]);
     }
     if (values.preset !== "custom") {
-        hidePropertiesIn(defaultProperties, values, toolbarGroups.concat(["toolbarConfig", "advancedGroup"]));
+        hidePropertiesIn(defaultProperties, values, toolbarGroups.concat(["toolbarConfig", "advancedConfig"]));
     }
     if (values.toolbarConfig === "basic") {
-        hidePropertiesIn(defaultProperties, values, ["advancedGroup"]);
+        hidePropertiesIn(defaultProperties, values, ["advancedConfig"]);
     }
     if (values.toolbarConfig === "advanced") {
         hidePropertiesIn(defaultProperties, values, toolbarGroups);

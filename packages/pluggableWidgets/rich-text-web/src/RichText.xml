@@ -127,7 +127,7 @@
                     <caption>Others group</caption>
                     <description/>
                 </property>
-                <property key="advancedGroup" type="object" isList="true" required="false">
+                <property key="advancedConfig" type="object" isList="true" required="false">
                     <caption>Advanced groups</caption>
                     <description/>
                     <properties>

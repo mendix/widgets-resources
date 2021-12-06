@@ -1,7 +1,7 @@
 import { createElement, ReactElement, useState, useMemo, useEffect } from "react";
 import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
-import { defineEnterMode, getPreset } from "../utils/ckeditorConfigs";
+import { defineEnterMode, getPreset, addPlugin } from "../utils/ckeditorConfigs";
 import sanitizeHtml from "sanitize-html";
 import classNames from "classnames";
 import {
@@ -9,19 +9,21 @@ import {
     PresetEnum,
     ToolbarConfigEnum,
     EnterModeEnum,
-    ShiftEnterModeEnum
+    ShiftEnterModeEnum,
+    AdvancedConfigType
 } from "../../typings/RichTextProps";
 import { MainEditor } from "./MainEditor";
+import { SET_ADVANCED } from "../utils/ckeditorPresets";
 
-interface RichTextProps {
-    id?: string;
+export interface RichTextProps {
+    autoParagraph: boolean;
     name: string;
     class: string;
     readOnly: boolean;
     spellChecker: boolean;
     sanitizeContent?: boolean;
-    value: any;
-    advancedGroup: any;
+    value: string;
+    advancedConfig: AdvancedConfigType[] | null;
     toolbarGroup: any;
     plugins?: string[];
     readOnlyStyle: ReadOnlyStyleEnum;
@@ -37,11 +39,11 @@ interface RichTextProps {
     onKeyPress?: () => void;
 }
 
-export const RichText = (props: RichTextProps): ReactElement => {
+export const RichTextEditor = (props: RichTextProps): ReactElement => {
     const {
         editorType,
         preset,
-        // plugins,
+        plugins,
         enterMode,
         shiftEnterMode,
         value,
@@ -61,11 +63,15 @@ export const RichText = (props: RichTextProps): ReactElement => {
         // editorUrl: "/widgets/ckeditor/ckeditor.js",
         type: editorType,
         config: {
+            autoGrow_minHeight: 300,
+            toolbarCanCollapse: true,
+            autoGrow_onStartup: true,
             width,
             height,
             enterMode: defineEnterMode(enterMode || ""),
             shiftEnterMode: defineEnterMode(shiftEnterMode || ""),
-            disableNativeSpellChecker: props.spellChecker
+            autoParagraph: props.autoParagraph,
+            disableNativeSpellChecker: !props.spellChecker
         },
         initContent: value,
         dispatchEvent: ({ type, payload }) => {
@@ -87,44 +93,40 @@ export const RichText = (props: RichTextProps): ReactElement => {
     });
     const editorPreset: CKEditorConfig | null = getPreset(preset);
     const key = useMemo(() => Date.now(), [ckeditorConfig]);
-    const setToolbar = (config: CKEditorConfig) => {
+    const setToolbar = (): CKEditorConfig => {
         if (!editorPreset) {
-            const { toolbarConfig, toolbarGroup } = props;
-            if (toolbarConfig === "basic") {
-                config.toolbarGroups = toolbarGroup;
-            } else {
-                config.toolbar = [...toolbarGroup];
-            }
-            return config;
+            const { toolbarGroup, toolbarConfig } = props;
+            return SET_ADVANCED(toolbarGroup, toolbarConfig === "basic");
         } else {
-            console.log("editorPreset", editorPreset);
             return editorPreset;
         }
     };
     useEffect(() => {
-        const config = setToolbar({});
+        const config = setToolbar();
+        if (plugins?.length) {
+            plugins.forEach(plugin => addPlugin(plugin, config));
+        }
         if (advancedContentFilter) {
             config.allowedContent = advancedContentFilter.allowedContent;
             config.disallowedContent = advancedContentFilter.disallowedContent;
         }
-        // if (plugins?.length) {
-        //     plugins.forEach(plugin => addPlugin(plugin, ckeditorConfig));
-        // }
+
         setCkeditorConfig({
             ...ckeditorConfig,
             initContent: value,
             element,
             config: {
                 ...ckeditorConfig.config,
-                ...config,
-                readOnly
+                ...config
             }
         });
     }, [props]);
-    console.log(ckeditorConfig);
     return (
-        <div className={classNames(props.class, "widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}>
-            <div id={props.id} ref={setElement} />
+        <div
+            className={classNames(props.class, "widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}
+            style={{ width, height }}
+        >
+            <div ref={setElement} />
             <MainEditor config={ckeditorConfig} key={key} />
         </div>
     );
