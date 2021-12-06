@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.0] Data Widgets - 2021-12-3
+
+
+## [2.1.0] Datagrid
+### Added
+- We added a property to wrap texts in the columns.
+
+## [1.0.2] TreeNode
+### Fixed
+- We fixed an issue that causes design properties and styles to not be applied to the widget in Design mode & Studio.
+
 ## [2.0.3] Data Widgets - 2021-11-16
 ### Changed
 - We removed the Snippet, Example enumeration and version constant from the module.
