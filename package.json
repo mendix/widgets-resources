@@ -40,8 +40,7 @@
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "create-modules:web": "node ./scripts/release/createWebModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
-    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
-    "commit-msg": "commitlint --edit \"$1\""
+    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
@@ -97,12 +96,6 @@
     "scheduler": "^0.20.1",
     "ts-node": "^9.0.0",
     "zip-folder": "^1.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && npm run validate-staged-widget-versions",
-      "commit-msg": "npm run commit-msg"
-    }
   },
   "commitlint": {
     "extends": [
