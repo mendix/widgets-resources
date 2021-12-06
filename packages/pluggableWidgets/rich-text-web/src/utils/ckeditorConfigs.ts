@@ -33,7 +33,7 @@ export function defineEnterMode(type: string): number {
     }
 }
 
-export function getPreset(type: PresetEnum): CKEditorConfig | null {
+export function getPreset(type: PresetEnum): CKEditorConfig {
     switch (type) {
         case "standard":
             return SET_PRESET("standard");
@@ -41,8 +41,8 @@ export function getPreset(type: PresetEnum): CKEditorConfig | null {
             return SET_PRESET("basic");
         case "full":
             return SET_PRESET("full");
-        case "custom":
-            return null;
+        default:
+            return SET_PRESET("basic");
     }
 }
 

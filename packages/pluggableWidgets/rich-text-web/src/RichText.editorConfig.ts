@@ -4,7 +4,6 @@ import { RichTextPreviewProps } from "../typings/RichTextProps";
 const advancedModeItems: Array<keyof RichTextPreviewProps> = [
     "enterMode",
     "shiftEnterMode",
-    "autoParagraph",
     "spellChecker",
     "codeHighlight",
     "maxChars",

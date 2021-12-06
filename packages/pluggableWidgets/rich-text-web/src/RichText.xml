@@ -274,10 +274,6 @@
                     <enumerationValue key="blocks">Blocks</enumerationValue>
                 </enumerationValues>
             </property>
-            <property key="autoParagraph" type="boolean" defaultValue="true">
-                <caption>Auto paragraph</caption>
-                <description/>
-            </property>
             <property key="spellChecker" type="boolean" defaultValue="true">
                 <caption>Spell checker</caption>
                 <description/>

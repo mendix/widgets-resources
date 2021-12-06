@@ -1,8 +1,10 @@
 import { ReactNode, createElement, useCallback } from "react";
 import { RichTextEditor as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
-import { GroupType } from "./utils/ckeditorPresets";
+import { GroupType, SET_CUSTOM } from "./utils/ckeditorPresets";
 import { debounce } from "@mendix/piw-utils-internal";
+import { getPreset } from "./utils/ckeditorConfigs";
+import { CKEditorConfig } from "ckeditor4-react";
 import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
@@ -10,17 +12,24 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
         debounce((value: string) => props.stringAttribute.setValue(value), 500),
         [props.stringAttribute]
     );
-    const toolbarGroup = (): string[] | undefined => {
-        const groupKeys = Object.keys(props).filter((key: string) => (key.includes("Group") ? key : null));
-        const { toolbarConfig, advancedConfig } = props;
-        if (toolbarConfig === "basic") {
-            return groupKeys
-                .filter((groupName: GroupType) => props[groupName])
-                .map((groupName: GroupType) =>
-                    groupName.includes("separator") ? "/" : groupName.replace("Group", "").toLowerCase()
-                );
-        } else if (toolbarConfig === "advanced") {
-            return advancedConfig.map(group => (group.ctItemType !== "seperator" ? group.ctItemType : "-"));
+    const defineToolbar = (): CKEditorConfig => {
+        const { advancedConfig, toolbarConfig, preset } = props;
+        if (preset !== "custom") {
+            return getPreset(preset);
+        } else {
+            const groupKeys = Object.keys(props).filter((key: string) => (key.includes("Group") ? key : null));
+            let groupItems = [];
+            if (toolbarConfig === "basic") {
+                groupItems = groupKeys
+                    .filter((groupName: GroupType) => props[groupName])
+                    .map((groupName: GroupType) =>
+                        groupName.includes("separator") ? "/" : groupName.replace("Group", "").toLowerCase()
+                    );
+            } else {
+                groupItems = advancedConfig.map(group => (group.ctItemType !== "seperator" ? group.ctItemType : "-"));
+            }
+
+            return SET_CUSTOM(groupItems, toolbarConfig === "basic");
         }
     };
     const plugins = [];
@@ -31,7 +40,6 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
     }
     return (
         <RichTextComponent
-            autoParagraph={props.autoParagraph}
             advancedConfig={props.advancedConfig}
             advancedContentFilter={
                 props.advancedContentFilter === "custom"
@@ -47,12 +55,10 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             editorType={props.editorType}
             readOnlyStyle={props.readOnlyStyle}
             readOnly={props.stringAttribute.readOnly}
-            preset={props.preset}
             enterMode={props.enterMode}
             shiftEnterMode={props.shiftEnterMode}
             spellChecker={props.spellChecker}
-            toolbarConfig={props.toolbarConfig}
-            toolbarGroup={toolbarGroup()}
+            toolbar={defineToolbar()}
             plugins={plugins}
             value={props.stringAttribute.value as string}
             onValueChange={onChangeFn}

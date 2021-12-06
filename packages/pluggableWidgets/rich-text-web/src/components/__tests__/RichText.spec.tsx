@@ -2,6 +2,7 @@ import { createElement } from "react";
 import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { RichTextEditor, RichTextProps } from "../RichText";
+import { getPreset } from "../../utils/ckeditorConfigs";
 
 describe("RichText", () => {
     let defaultRichTextProps: RichTextProps;
@@ -21,16 +22,13 @@ describe("RichText", () => {
             advancedContentFilter: null,
             readOnly: false,
             name: "RichText",
-            preset: "basic",
-            toolbarGroup: [],
             spellChecker: false,
             class: "",
             readOnlyStyle: "text",
-            autoParagraph: false,
             editorType: "classic",
             enterMode: "paragraph",
             shiftEnterMode: "paragraph",
-            toolbarConfig: "basic"
+            toolbar: getPreset("basic")
         };
     });
     it("render DOM structure", () => {

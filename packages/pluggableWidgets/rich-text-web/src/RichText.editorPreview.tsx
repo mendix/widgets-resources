@@ -1,6 +1,7 @@
 import { createElement, ReactElement } from "react";
 import { RichTextPreviewProps } from "../typings/RichTextProps";
 import { RichTextEditor } from "./components/RichText";
+import { getPreset } from "./utils/ckeditorConfigs";
 
 interface PreviewProps extends Omit<RichTextPreviewProps, "class"> {
     className: string;
@@ -11,20 +12,17 @@ interface PreviewProps extends Omit<RichTextPreviewProps, "class"> {
 export const preview = (props: PreviewProps): ReactElement => {
     return (
         <RichTextEditor
-            autoParagraph={props.autoParagraph}
             readOnly={props.readOnly}
             plugins={[]}
             value={"Editor Preview"}
             advancedContentFilter={null}
             name={props.name}
-            toolbarGroup={[]}
+            toolbar={getPreset("basic")}
             advancedConfig={null}
             spellChecker={false}
             class={props.className}
             editorType={props.editorType}
-            preset={props.preset}
             readOnlyStyle={props.readOnlyStyle}
-            toolbarConfig={props.toolbarConfig}
         />
     );
 };

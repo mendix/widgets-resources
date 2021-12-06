@@ -123,7 +123,7 @@ function SET_PRESET(type: "basic" | "standard" | "full"): CKEditorConfig {
     return config;
 }
 
-function SET_ADVANCED(groups: string[], withGroupNames = true): CKEditorConfig {
+function SET_CUSTOM(groups: string[], withGroupNames = true): CKEditorConfig {
     if (withGroupNames) {
         const toolbar: Array<ToolbarItems | string> = [];
         groups.forEach(groupName => {
@@ -153,4 +153,4 @@ function SET_ADVANCED(groups: string[], withGroupNames = true): CKEditorConfig {
     }
 }
 
-export { TOOLBAR_GROUP, SET_PRESET, SET_ADVANCED };
+export { TOOLBAR_GROUP, SET_PRESET, SET_CUSTOM };

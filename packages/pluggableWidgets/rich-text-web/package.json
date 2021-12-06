@@ -36,6 +36,7 @@
     "developmentPort": 3000
   },
   "devDependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/classnames": "^2.2.6",
     "@types/sanitize-html": "^1.18.2",
@@ -45,7 +46,6 @@
     "eslint": "^7.20.0"
   },
   "dependencies": {
-    "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "sanitize-html": "^2.6.0",
     "ckeditor4-react": "^2.1.0",

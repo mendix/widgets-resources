@@ -1,22 +1,13 @@
 import { createElement, ReactElement, useState, useMemo, useEffect } from "react";
 import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
-import { defineEnterMode, getPreset, addPlugin } from "../utils/ckeditorConfigs";
+import { defineEnterMode, addPlugin } from "../utils/ckeditorConfigs";
 import sanitizeHtml from "sanitize-html";
 import classNames from "classnames";
-import {
-    ReadOnlyStyleEnum,
-    PresetEnum,
-    ToolbarConfigEnum,
-    EnterModeEnum,
-    ShiftEnterModeEnum,
-    AdvancedConfigType
-} from "../../typings/RichTextProps";
+import { ReadOnlyStyleEnum, EnterModeEnum, ShiftEnterModeEnum, AdvancedConfigType } from "../../typings/RichTextProps";
 import { MainEditor } from "./MainEditor";
-import { SET_ADVANCED } from "../utils/ckeditorPresets";
 
 export interface RichTextProps {
-    autoParagraph: boolean;
     name: string;
     class: string;
     readOnly: boolean;
@@ -24,13 +15,11 @@ export interface RichTextProps {
     sanitizeContent?: boolean;
     value: string;
     advancedConfig: AdvancedConfigType[] | null;
-    toolbarGroup: any;
     plugins?: string[];
     readOnlyStyle: ReadOnlyStyleEnum;
-    toolbarConfig: ToolbarConfigEnum;
+    toolbar: CKEditorConfig;
     enterMode?: EnterModeEnum;
     shiftEnterMode?: ShiftEnterModeEnum;
-    preset: PresetEnum;
     editorType: CKEditorType;
     dimensions?: Dimensions;
     advancedContentFilter?: { allowedContent: string; disallowedContent: string } | null;
@@ -42,7 +31,6 @@ export interface RichTextProps {
 export const RichTextEditor = (props: RichTextProps): ReactElement => {
     const {
         editorType,
-        preset,
         plugins,
         enterMode,
         shiftEnterMode,
@@ -70,7 +58,6 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
             height,
             enterMode: defineEnterMode(enterMode || ""),
             shiftEnterMode: defineEnterMode(shiftEnterMode || ""),
-            autoParagraph: props.autoParagraph,
             disableNativeSpellChecker: !props.spellChecker
         },
         initContent: value,
@@ -91,18 +78,9 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
         },
         subscribeTo: ["change"]
     });
-    const editorPreset: CKEditorConfig | null = getPreset(preset);
     const key = useMemo(() => Date.now(), [ckeditorConfig]);
-    const setToolbar = (): CKEditorConfig => {
-        if (!editorPreset) {
-            const { toolbarGroup, toolbarConfig } = props;
-            return SET_ADVANCED(toolbarGroup, toolbarConfig === "basic");
-        } else {
-            return editorPreset;
-        }
-    };
     useEffect(() => {
-        const config = setToolbar();
+        const config = { ...props.toolbar };
         if (plugins?.length) {
             plugins.forEach(plugin => addPlugin(plugin, config));
         }

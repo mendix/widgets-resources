@@ -139,7 +139,6 @@ export interface RichTextContainerProps {
     onChange?: ActionValue;
     enterMode: EnterModeEnum;
     shiftEnterMode: ShiftEnterModeEnum;
-    autoParagraph: boolean;
     spellChecker: boolean;
     codeHighlight: boolean;
     wordCount: boolean;
@@ -181,7 +180,6 @@ export interface RichTextPreviewProps {
     onChange: {} | null;
     enterMode: EnterModeEnum;
     shiftEnterMode: ShiftEnterModeEnum;
-    autoParagraph: boolean;
     spellChecker: boolean;
     codeHighlight: boolean;
     wordCount: boolean;
