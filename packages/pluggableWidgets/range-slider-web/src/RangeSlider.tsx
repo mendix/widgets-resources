@@ -17,9 +17,7 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
     const {
         lowerBoundAttribute,
         upperBoundAttribute,
-        class: className,
         onChange: onChangeProp,
-        style: styleProp,
         orientation,
         heightUnit,
         height,
@@ -77,11 +75,10 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
         expressionMaximumValue
     });
     const { onChange } = useOnChangeDebounced({ lowerBoundAttribute, upperBoundAttribute, onChange: onChangeProp });
-    const style = getStyleProp({ orientation, style: styleProp, height, heightUnit });
+    const style = getStyleProp({ orientation, height, heightUnit });
 
     return (
         <RangeSliderComponent
-            className={className}
             disabled={lowerBoundAttribute.readOnly || upperBoundAttribute.readOnly}
             rootStyle={style}
             vertical={isVertical(props)}

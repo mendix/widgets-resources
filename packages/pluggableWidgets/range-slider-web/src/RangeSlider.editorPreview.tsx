@@ -1,22 +1,13 @@
 import { createElement, ReactNode } from "react";
-import { RangeSliderPreviewProps as RangeSliderPreviewPropsGenerated } from "../typings/RangeSliderProps";
+import { RangeSliderPreviewProps } from "../typings/RangeSliderProps";
 import { RangeSlider } from "./components/RangeSlider";
 import { createMarks } from "./utils/marks";
 import { getPreviewValues } from "./utils/getPreviewValues";
 import { getStyleProp } from "./utils/getStyleProp";
 import { isVertical } from "./utils/isVertical";
-import { parseStyle } from "@mendix/piw-utils-internal";
-
-interface RangeSliderPreviewProps extends Omit<RangeSliderPreviewPropsGenerated, "class"> {
-    className?: string;
-}
 
 export function getPreviewCss(): string {
-    return (
-        require("rc-slider/assets/index.css") +
-        require("rc-tooltip/assets/bootstrap.css") +
-        require("./ui/RangeSlider.scss")
-    );
+    return require("./ui/RangeSlider.scss");
 }
 
 export function preview(props: RangeSliderPreviewProps): ReactNode {
@@ -30,13 +21,13 @@ export function preview(props: RangeSliderPreviewProps): ReactNode {
 
     const style = getStyleProp({
         orientation: props.orientation,
-        style: parseStyle(props.style),
         height: props.height ?? 100,
         heightUnit: props.heightUnit
     });
 
     return (
         <RangeSlider
+            disabled={props.readOnly}
             value={value}
             marks={marks}
             min={min}
