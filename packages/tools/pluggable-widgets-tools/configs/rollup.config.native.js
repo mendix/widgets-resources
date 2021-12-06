@@ -2,6 +2,7 @@ import { existsSync, mkdirSync } from "fs";
 import { join, relative } from "path";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
 import commonjs from "@rollup/plugin-commonjs";
+import image from "@rollup/plugin-image";
 import json from "@rollup/plugin-json";
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
@@ -11,6 +12,7 @@ import { red, yellow, blue } from "colors";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
+import license from "rollup-plugin-license";
 import { terser } from "rollup-plugin-terser";
 import { cp } from "shelljs";
 import { zip } from "zip-a-folder";
@@ -26,7 +28,6 @@ import {
     widgetPackage,
     widgetVersion
 } from "./shared";
-import image from "@rollup/plugin-image";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
 const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
@@ -66,7 +67,8 @@ export default async args => {
                     sourceMaps: false,
                     extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
                     transpile: false,
-                    external: nativeExternal
+                    external: nativeExternal,
+                    licenses: production && i === 0
                 })
             ],
             onwarn: warning => {
@@ -167,6 +169,16 @@ export default async args => {
                 : null,
             image(),
             production ? terser({ mangle: false }) : null,
+            config.licenses
+                ? license({
+                      thirdParty: {
+                          includePrivate: true,
+                          output: {
+                              file: join(outDir, "dependencies.txt")
+                          }
+                      }
+                  })
+                : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define
             // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only
