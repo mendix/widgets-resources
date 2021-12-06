@@ -32,7 +32,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "@types/react-native-star-rating": "^1.0.1",
-    "detox": "^18.20.0",
+    "detox": "^19.1.0",
     "eslint": "^7.20.0"
   }
 }

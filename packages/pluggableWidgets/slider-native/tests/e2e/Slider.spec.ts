@@ -1,25 +1,24 @@
-import { expect, device } from "detox";
-import { Widget, expectToMatchImageSnapshot, NativeHomePage, Alert } from "../../../../../tests/e2e";
+import { device } from "detox";
+import { Widget, expectToMatchImageSnapshot, NativeHomePage } from "../../../../../tests/e2e";
 
 describe("Slider", () => {
     beforeEach(async () => {
         await NativeHomePage().goToWidgetsHomePage();
-        const button = Widget("btnSliderActionButton").getElement();
+        const button = Widget("btnSlider").getElement();
         await button.tap();
     });
 
-    fit("renders correct initial appearance", async () => {
+    it("renders correct initial appearance", async () => {
+        await Widget("scrollContainerSlider").getElement().scrollTo("bottom");
         await expectToMatchImageSnapshot();
     });
 
-    it("triggers action after sliding value", async () => {
-        await Widget("sliderOnChange").getElement().adjustSliderToPosition(23);
-        await expect(Alert().getMessage("Value changed: 23")).toBeVisible();
-        await Alert().confirm();
-    });
-
     it("renders correctly after setting value", async () => {
-        await Widget("textBoxSliderMin").getElement().replaceText("100");
+        const input = Widget("textBoxSliderMin").getElement();
+        await input.clearText();
+        await input.typeText("100\n");
+
+        await Widget("scrollContainerSlider").getElement().scrollTo("bottom");
         await expectToMatchImageSnapshot();
     });
 
