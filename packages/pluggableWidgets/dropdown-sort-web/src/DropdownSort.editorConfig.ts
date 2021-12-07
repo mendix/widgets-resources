@@ -1,5 +1,6 @@
 import {
     chevronDownIcon,
+    chevronDownIconDark,
     ContainerProps,
     ImageProps,
     StructurePreviewProps,
@@ -8,8 +9,9 @@ import {
 import { DropdownSortPreviewProps } from "../typings/DropdownSortProps";
 
 import AscIcon from "./assets/asc.svg";
+import AscIconDark from "./assets/asc-dark.svg";
 
-export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewProps => {
+export const getPreview = (values: DropdownSortPreviewProps, isDarkMode: boolean): StructurePreviewProps => {
     return {
         type: "RowLayout",
         borders: true,
@@ -20,7 +22,7 @@ export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewPr
             {
                 type: "RowLayout",
                 columnSize: "grow",
-                backgroundColor: "#FFFFFF",
+                backgroundColor: isDarkMode ? "#313131" : "#FFFFFF",
                 children: [
                     {
                         type: "Container",
@@ -28,7 +30,13 @@ export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewPr
                         children: [
                             {
                                 type: "Text",
-                                fontColor: values.emptyOptionCaption ? "#BBBBBB" : "#FFF",
+                                fontColor: values.emptyOptionCaption
+                                    ? isDarkMode
+                                        ? "#A4A4A4"
+                                        : "#BBBBBB"
+                                    : isDarkMode
+                                    ? "#313131"
+                                    : "#FFF",
                                 italic: true,
                                 content: values.emptyOptionCaption ? values.emptyOptionCaption : "Sample"
                             } as TextProps
@@ -42,7 +50,7 @@ export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewPr
                         children: [
                             {
                                 type: "Image",
-                                document: chevronDownIcon
+                                document: isDarkMode ? chevronDownIconDark : chevronDownIcon
                             } as ImageProps
                         ]
                     } as ContainerProps
@@ -56,15 +64,24 @@ export const getPreview = (values: DropdownSortPreviewProps): StructurePreviewPr
             } as ContainerProps,
             {
                 type: "Container",
-                padding: 10,
                 grow: 0,
+                backgroundColor: isDarkMode ? "#313131" : "#FFFFFF",
                 children: [
                     {
-                        type: "Image",
-                        document: decodeURIComponent(AscIcon.replace("data:image/svg+xml,", ""))
-                    } as ImageProps
+                        type: "Container",
+                        padding: 10,
+                        grow: 0,
+                        children: [
+                            {
+                                type: "Image",
+                                document: decodeURIComponent(
+                                    (isDarkMode ? AscIconDark : AscIcon).replace("data:image/svg+xml,", "")
+                                )
+                            } as ImageProps
+                        ]
+                    } as ContainerProps
                 ]
-            } as ContainerProps
+            }
         ]
     };
 };
