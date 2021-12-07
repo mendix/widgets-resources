@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added support for dark icons (`widgetName`.icon.dark.png and `widgetName`.tile.dark.png).
+
+## [9.8.0] - 2021-12-07
+
 ### Fixed
 - We fixed the typing generation for `editorPreview` files.
 
