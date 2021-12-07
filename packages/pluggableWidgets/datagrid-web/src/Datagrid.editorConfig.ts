@@ -124,7 +124,7 @@ export function getProperties(
     return defaultProperties;
 }
 
-export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps => {
+export const getPreview = (values: DatagridPreviewProps, isDarkMode: boolean): StructurePreviewProps => {
     const hasColumns = values.columns && values.columns.length > 0;
     const columnProps: ColumnsPreviewType[] = hasColumns
         ? values.columns
@@ -156,7 +156,12 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                     type: "Container",
                     borders: true,
                     grow: column.width === "manual" && column.size ? column.size : 1,
-                    backgroundColor: values.columnsHidable && column.hidable === "hidden" ? "#F5F5F5" : undefined,
+                    backgroundColor:
+                        values.columnsHidable && column.hidable === "hidden"
+                            ? isDarkMode
+                                ? "#3E3E3E"
+                                : "#F5F5F5"
+                            : undefined,
                     children: [
                         column.showContentAs === "customContent"
                             ? {
@@ -186,7 +191,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        backgroundColor: "#daeffb",
+        backgroundColor: isDarkMode ? "#3B5C8F" : "#DAEFFB",
         borders: true,
         borderWidth: 1,
         children: [
@@ -197,7 +202,7 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                     {
                         type: "Text",
                         content: "Data grid 2",
-                        fontColor: "#2074c8"
+                        fontColor: isDarkMode ? "#6DB1FE" : "#2074C8"
                     }
                 ]
             }
@@ -229,7 +234,13 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                             ? column.size
                             : 1
                         : undefined,
-                backgroundColor: isColumnHidden ? "#DCDCDC" : "#F5F5F5",
+                backgroundColor: isColumnHidden
+                    ? isDarkMode
+                        ? "#4F4F4F"
+                        : "#DCDCDC"
+                    : isDarkMode
+                    ? "#3E3E3E"
+                    : "#F5F5F5",
                 children: [
                     {
                         type: "Container",
@@ -240,7 +251,15 @@ export const getPreview = (values: DatagridPreviewProps): StructurePreviewProps 
                                 bold: true,
                                 fontSize: 10,
                                 content: column.header ? column.header : "Header",
-                                fontColor: column.header ? undefined : isColumnHidden ? "#DCDCDC" : "#F5F5F5"
+                                fontColor: column.header
+                                    ? undefined
+                                    : isColumnHidden
+                                    ? isDarkMode
+                                        ? "#4F4F4F"
+                                        : "#DCDCDC"
+                                    : isDarkMode
+                                    ? "#3E3E3E"
+                                    : "#F5F5F5"
                             }
                         ]
                     },
