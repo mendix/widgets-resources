@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added icons for dark mode.
+- We added dark mode to Structure mode preview.
+
 ## [1.0.3] - 2021-11-16
 
 ### Fixed
