@@ -12,6 +12,7 @@ import {
 import { HeaderTypeEnum, TreeNodePreviewProps } from "../typings/TreeNodeProps";
 
 import ChevronSVG from "./assets/ChevronStructurePreview.svg";
+import ChevronSVGDark from "./assets/ChevronStructurePreviewDark.svg";
 
 export function getProperties(
     values: TreeNodePreviewProps,
@@ -50,11 +51,11 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps | null {
+export function getPreview(values: TreeNodePreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        backgroundColor: "#daeffb",
+        backgroundColor: isDarkMode ? "#3B5C8F" : "#DAEFFB",
         borders: true,
         borderWidth: 1,
         children: [
@@ -65,7 +66,7 @@ export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps 
                     {
                         type: "Text",
                         content: "Tree node",
-                        fontColor: "#2074c8"
+                        fontColor: isDarkMode ? "#6DB1FE" : "#2074C8"
                     }
                 ]
             }
@@ -73,7 +74,7 @@ export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps 
     };
     const treeNodeHeader: RowLayoutProps = {
         type: "RowLayout",
-        backgroundColor: "#F5F5F5",
+        backgroundColor: isDarkMode ? "#3E3E3E" : "#F5F5F5",
         borders: true,
         borderWidth: 1,
         children: [
@@ -83,7 +84,7 @@ export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps 
                 padding: 4,
                 children: [
                     ...(values.showIcon === "left" && values.hasChildren
-                        ? [getChevronIconPreview(values.headerType)]
+                        ? [getChevronIconPreview(values.headerType, isDarkMode)]
                         : []),
                     values.headerType === "text"
                         ? ({
@@ -96,7 +97,7 @@ export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps 
                         : ({
                               type: "RowLayout",
                               borders: true,
-                              backgroundColor: "#F8F8F8",
+                              backgroundColor: isDarkMode ? "#4F4F4F" : "#F8F8F8",
                               children: [
                                   {
                                       type: "DropZone",
@@ -107,7 +108,7 @@ export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps 
                           } as RowLayoutProps),
 
                     ...(values.showIcon === "right" && values.hasChildren
-                        ? [getChevronIconPreview(values.headerType)]
+                        ? [getChevronIconPreview(values.headerType, isDarkMode)]
                         : [])
                 ]
             }
@@ -150,7 +151,7 @@ export function getPreview(values: TreeNodePreviewProps): StructurePreviewProps 
     } as ContainerProps;
 }
 
-function getChevronIconPreview(headerType: HeaderTypeEnum): ContainerProps {
+function getChevronIconPreview(headerType: HeaderTypeEnum, isDarkMode: boolean): ContainerProps {
     return {
         type: "Container",
         grow: 1,
@@ -158,7 +159,9 @@ function getChevronIconPreview(headerType: HeaderTypeEnum): ContainerProps {
         children: [
             {
                 type: "Image",
-                document: decodeURIComponent(ChevronSVG.replace("data:image/svg+xml,", "")),
+                document: decodeURIComponent(
+                    (isDarkMode ? ChevronSVGDark : ChevronSVG).replace("data:image/svg+xml,", "")
+                ),
                 width: 14
             }
         ]
