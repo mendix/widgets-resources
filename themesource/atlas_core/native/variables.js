@@ -425,6 +425,29 @@ let listView = {
 };
 listView = merge(listView, custom.listView || {});
 //
+// Checkbox Styles
+let checkbox = {
+    checkboxInput: {
+        color: brand.primary,
+        size: 20,
+        backgroundColor: background.primary,
+        borderColor: border.color,
+        borderWidth: border.width,
+        borderRadius: border.radiusSmall,
+        width: 40,
+        height: 40
+    },
+    checkboxInputDisabled: {
+        color: brand.primaryLight,
+        backgroundColor: background.secondary
+    },
+    checkboxInputError: {
+        color: brand.danger,
+        borderColor: brand.danger
+    }
+};
+checkbox = merge(checkbox, custom.checkbox || {});
+//
 // Layoutgrid Styles
 let layoutGrid = {
     gutterSize: 16
@@ -606,4 +629,4 @@ let slider = {
 slider = merge(slider, custom.slider || {});
 //
 export * from "../../../theme/native/custom-variables";
-export { accordion, brand, backgroundDefaults, background, border, button, contrast, fontDefaults, font, input, image, layoutGrid, listView, navigation, spacing, container, tabContainer, badge, floatingActionButton, introScreen, listViewSwipe, progressBar, progressCircle, slider, rating };
+export { accordion, brand, backgroundDefaults, background, border, button, contrast, checkbox, fontDefaults, font, input, image, layoutGrid, listView, navigation, spacing, container, tabContainer, badge, floatingActionButton, introScreen, listViewSwipe, progressBar, progressCircle, slider, rating };

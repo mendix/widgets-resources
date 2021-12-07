@@ -113,9 +113,9 @@ export const com_mendix_widget_native_barchart_BarChart = {
                 -  barsOffset (number)
 
         */
-        barColorPalette: Object.values(brand)
-            .map((color, index, brandColors) => (index === brandColors.length - 1 ? color : `${color};`))
-            .join(""),
+        barColorPalette: Object.entries(brand)
+            .reduce((accumulator, [key, value]) => (key.endsWith("Light") ? accumulator : [...accumulator, value]), [])
+            .join(";"),
         barsOffset: 20,
         customBarStyles: {
             your_static_or_dynamic_attribute_value: {

@@ -113,9 +113,9 @@ export const com_mendix_widget_native_linechart_LineChart = {
             Allowed properties:
               -  lineColorPalette (string with array of colors separated by ';')
         */
-        lineColorPalette: Object.values(brand)
-            .map((color, index, brandColors) => (index === brandColors.length - 1 ? color : `${color};`))
-            .join(""),
+        lineColorPalette: Object.entries(brand)
+            .reduce((accumulator, [key, value]) => (key.endsWith("Light") ? accumulator : [...accumulator, value]), [])
+            .join(";"),
         customLineStyles: {
             any_custom_line_style_name: {
                 line: {
