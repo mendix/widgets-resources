@@ -1,11 +1,23 @@
 import { ImageProps, Problem, RowLayoutProps } from "@mendix/piw-utils-internal";
 import StructurePreviewRatingFilledSVG from "./assets/StructurePreviewRatingFilled.svg";
+import StructurePreviewRatingFilledSVGDark from "./assets/StructurePreviewRatingFilled-dark.svg";
 import StructurePreviewRatingEmptySVG from "./assets/StructurePreviewRatingEmpty.svg";
+import StructurePreviewRatingEmptySVGDark from "./assets/StructurePreviewRatingEmpty-dark.svg";
 import { StarRatingPreviewProps } from "../typings/StarRatingProps";
 
-export const getPreview = (props: StarRatingPreviewProps): RowLayoutProps => {
-    const ratingFilledSVG = decodeURIComponent(StructurePreviewRatingFilledSVG.replace("data:image/svg+xml,", ""));
-    const ratingEmptySVG = decodeURIComponent(StructurePreviewRatingEmptySVG.replace("data:image/svg+xml,", ""));
+export const getPreview = (props: StarRatingPreviewProps, isDarkMode: boolean): RowLayoutProps => {
+    const ratingFilledSVG = decodeURIComponent(
+        (isDarkMode ? StructurePreviewRatingFilledSVGDark : StructurePreviewRatingFilledSVG).replace(
+            "data:image/svg+xml,",
+            ""
+        )
+    );
+    const ratingEmptySVG = decodeURIComponent(
+        (isDarkMode ? StructurePreviewRatingEmptySVGDark : StructurePreviewRatingEmptySVG).replace(
+            "data:image/svg+xml,",
+            ""
+        )
+    );
     return {
         type: "RowLayout",
         borders: false,
