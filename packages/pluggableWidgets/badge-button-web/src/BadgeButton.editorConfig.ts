@@ -1,7 +1,7 @@
 import { BadgeButtonPreviewProps } from "../typings/BadgeButtonProps";
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 
-export function getPreview(values: BadgeButtonPreviewProps): StructurePreviewProps {
+export function getPreview(values: BadgeButtonPreviewProps, isDarkMode: boolean): StructurePreviewProps {
     return {
         type: "RowLayout",
         columnSize: "grow",
@@ -38,7 +38,7 @@ export function getPreview(values: BadgeButtonPreviewProps): StructurePreviewPro
                                             {
                                                 type: "Text",
                                                 content: values.value,
-                                                fontColor: "#264AE5",
+                                                fontColor: isDarkMode ? "#579BF9" : "#264AE5",
                                                 bold: true,
                                                 fontSize: 8
                                             }
@@ -52,7 +52,7 @@ export function getPreview(values: BadgeButtonPreviewProps): StructurePreviewPro
                         ]
                     }
                 ],
-                backgroundColor: "#264AE5",
+                backgroundColor: isDarkMode ? "#579BF9" : "#264AE5",
                 borderRadius: 4
             },
             {
