@@ -38,7 +38,7 @@ export function check(values: AccessibilityHelperPreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: AccessibilityHelperPreviewProps): StructurePreviewProps | null {
+export function getPreview(values: AccessibilityHelperPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     return {
         type: "Container",
         borders: true,
@@ -46,7 +46,7 @@ export function getPreview(values: AccessibilityHelperPreviewProps): StructurePr
         children: [
             {
                 type: "RowLayout",
-                backgroundColor: values.content.widgetCount > 0 ? undefined : "#F8F8F8",
+                backgroundColor: values.content.widgetCount > 0 ? undefined : isDarkMode ? "#3E3E3E" : "#F5F5F5",
                 children: [
                     {
                         type: "DropZone",
