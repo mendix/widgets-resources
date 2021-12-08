@@ -31,7 +31,7 @@
                 </property>
                 <property key="series" type="object" isList="true">
                     <caption>Data source</caption>
-                    <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
+                    <description>Add one or more columns. The order influences how columns overlay one another: the first column (from the top) is drawn lowest and other columns are drawn on top of it.</description>
                     <properties>
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
@@ -44,15 +44,15 @@
                             </property>
                             <property key="staticDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
-                                <description>Data points for a single line.</description>
+                                <description>Data points for a single column.</description>
                             </property>
                             <property key="dynamicDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
-                                <description>Data points for all lines which will be divided into single lines based on the Group by attribute value.</description>
+                                <description>Data points for all columns which will be divided into single columns based on the Group by attribute value.</description>
                             </property>
                             <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
-                                <description>Data points within the same group form one line.</description>
+                                <description>Data points within the same group form one column.</description>
                                 <attributeTypes>
                                     <attributeType name="String" />
                                     <attributeType name="Boolean" />
@@ -66,11 +66,11 @@
                             </property>
                             <property key="staticName" type="textTemplate" required="false" multiline="false">
                                 <caption>Series name</caption>
-                                <description>The line name displayed in the legend.</description>
+                                <description>The column name displayed in the legend.</description>
                             </property>
                             <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
                                 <caption>Series name</caption>
-                                <description>The line name displayed in the legend.</description>
+                                <description>The column name displayed in the legend.</description>
                             </property>
                             <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>X axis attribute</caption>
@@ -144,7 +144,7 @@
                         <propertyGroup caption="Appearance">
                             <property key="barColor" type="textTemplate" required="false" multiline="false">
                                 <caption>Bar color</caption>
-                                <description>Color of the bar e.g. green, #00FF00, rgb(0,255,0)</description>
+                                <description>Color of the column e.g. green, #00FF00, rgb(0,255,0)</description>
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
