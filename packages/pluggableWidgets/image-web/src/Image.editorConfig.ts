@@ -11,6 +11,7 @@ import {
 } from "@mendix/piw-utils-internal";
 import { DatasourceEnum, ImagePreviewProps } from "../typings/ImageProps";
 import StructurePreviewImageSvg from "./assets/placeholder.svg";
+import StructurePreviewImageSvgDark from "./assets/placeholder-dark.svg";
 
 type ImageViewPreviewPropsKey = keyof ImagePreviewProps;
 
@@ -96,11 +97,16 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(values: ImagePreviewProps): StructurePreviewProps | null {
+export function getPreview(values: ImagePreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     if (!values.isBackgroundImage) {
         return {
             type: "Image",
-            document: decodeURIComponent(StructurePreviewImageSvg.replace("data:image/svg+xml,", "")),
+            document: decodeURIComponent(
+                (isDarkMode ? StructurePreviewImageSvgDark : StructurePreviewImageSvg).replace(
+                    "data:image/svg+xml,",
+                    ""
+                )
+            ),
             height: 100,
             width: 100
         };
@@ -108,7 +114,7 @@ export function getPreview(values: ImagePreviewProps): StructurePreviewProps | n
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        backgroundColor: "#daeffb",
+        backgroundColor: isDarkMode ? "#3B5C8F" : "#DAEFFB",
         borders: true,
         borderWidth: 1,
         children: [
@@ -119,7 +125,7 @@ export function getPreview(values: ImagePreviewProps): StructurePreviewProps | n
                     {
                         type: "Text",
                         content: "Image",
-                        fontColor: "#2074c8"
+                        fontColor: isDarkMode ? "#6DB1FE" : "#2074C8"
                     }
                 ]
             }
