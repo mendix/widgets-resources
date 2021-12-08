@@ -3,9 +3,12 @@ import {
     hidePropertyIn,
     Problem,
     Properties,
+    StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { MaxValueTypeEnum, MinValueTypeEnum, SliderPreviewProps, StepSizeTypeEnum } from "../typings/SliderProps";
+import StructurePreviewSvg from "./assets/structure-preview.svg";
+import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";
 
 const keysToHideByMinValueType: Record<MinValueTypeEnum, Array<keyof SliderPreviewProps>> = {
     static: ["minAttribute", "expressionMinimumValue"],
@@ -171,4 +174,15 @@ export function check(values: SliderPreviewProps): Problem[] {
     const checkers = [tooltipCheck, minMaxValueCheck, minValueCheck, maxValueCheck, stepSizeCheck, decimalPlacesCheck];
 
     return checkers.map(checker => checker(values)).filter((problem): problem is Problem => !!problem);
+}
+
+export function getPreview(_: SliderPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    return {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? StructurePreviewSvgDark : StructurePreviewSvg).replace("data:image/svg+xml,", "")
+        ),
+        height: 28,
+        width: 300
+    };
 }
