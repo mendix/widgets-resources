@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added icons for dark mode.
+- We added dark mode to Structure mode preview.
+
 ### Changed
 - We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.
 
