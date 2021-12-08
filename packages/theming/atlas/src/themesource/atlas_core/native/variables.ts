@@ -515,7 +515,8 @@ let floatingActionButton: VariablesFloatingActionButton = {
         fontSize: font.sizeSmall
     },
     secondaryButtonCaptionContainer: {
-        backgroundColor: background.primary
+        backgroundColor: background.primary,
+        borderColor: custom.darkMode ? background.primary : "#eee"
     }
 };
 floatingActionButton = merge(floatingActionButton, custom.floatingActionButton || ({} as any));

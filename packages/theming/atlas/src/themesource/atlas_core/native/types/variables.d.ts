@@ -2,7 +2,6 @@
     Types
 ========================================================================== */
 
-import { ColorValue } from "react-native";
 import { CheckBoxInputType } from "./widgets";
 
 declare type FontWeight = "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900";
@@ -415,6 +414,7 @@ export interface VariablesFloatingActionButton {
     };
     secondaryButtonCaptionContainer: {
         backgroundColor: string;
+        borderColor: string;
     };
 }
 

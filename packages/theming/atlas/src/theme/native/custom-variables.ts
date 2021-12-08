@@ -500,7 +500,8 @@ export const floatingActionButton: VariablesFloatingActionButton = {
         fontSize: font.sizeSmall
     },
     secondaryButtonCaptionContainer: {
-        backgroundColor: background.primary
+        backgroundColor: background.primary,
+        borderColor: darkMode ? background.primary : "#eee"
     }
 };
 //
