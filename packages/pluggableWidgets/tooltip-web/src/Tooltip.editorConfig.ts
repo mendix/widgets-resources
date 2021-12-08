@@ -7,10 +7,8 @@ import {
     DropZoneProps,
     RowLayoutProps,
     ContainerProps,
-    TextProps,
-    ImageProps
+    TextProps
 } from "@mendix/piw-utils-internal";
-import TooltipIcon from "./assets/tooltip_icon.svg";
 
 export function getProperties(values: TooltipPreviewProps, defaultValues: Properties): Properties {
     if (values.renderMethod === "text") {
@@ -38,7 +36,7 @@ export function check(values: TooltipPreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: TooltipPreviewProps): StructurePreviewProps | null {
+export function getPreview(values: TooltipPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     const centerLayout = (props: TextProps | DropZoneProps) =>
         ({
             type: "RowLayout",
@@ -66,32 +64,18 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "grow",
-        backgroundColor: "#E7E7E9",
+        backgroundColor: isDarkMode ? "#454545" : "#E7E7E9",
         borders: true,
         borderWidth: 1,
         children: [
             {
                 type: "Container",
-                padding: 6,
-                grow: 0,
-                children: [
-                    {
-                        type: "Image",
-                        document: decodeURIComponent(TooltipIcon.replace("data:image/svg+xml,", "")),
-                        height: 24,
-                        width: 24
-                    } as ImageProps
-                ]
-            },
-            {
-                type: "Container",
-                padding: 6,
+                padding: 4,
                 children: [
                     {
                         type: "Text",
                         content: "Tooltip",
-                        fontColor: "#0A1324",
-                        fontSize: 12
+                        fontColor: isDarkMode ? "#DEDEDE" : "#0A1324"
                     } as TextProps
                 ]
             }
@@ -101,7 +85,6 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
         type: "RowLayout",
         columnSize: "grow",
         borders: true,
-        backgroundColor: "#F5F5F5",
         padding: 0,
         children: [
             {
@@ -112,8 +95,14 @@ export function getPreview(values: TooltipPreviewProps): StructurePreviewProps |
                         ? centerLayout({
                               type: "Text",
                               content: values.textMessage ? values.textMessage : "Place your tooltip message",
-                              fontSize: 14,
-                              fontColor: "#000000",
+                              fontSize: values.textMessage ? 14 : undefined,
+                              fontColor: values.textMessage
+                                  ? isDarkMode
+                                      ? "#DEDEDE"
+                                      : "#000000"
+                                  : isDarkMode
+                                  ? "#A4A4A4"
+                                  : "#6B707B",
                               bold: !!values.textMessage
                           } as TextProps)
                         : ({
