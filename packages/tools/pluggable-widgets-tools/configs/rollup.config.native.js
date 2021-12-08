@@ -252,6 +252,7 @@ const nativeExternal = [
     /^react($|\/)/,
     /^react-native-gesture-handler($|\/)/,
     /^react-native-reanimated($|\/)/,
+    /^react-native-fast-image($|\/)/,
     /^react-native-svg($|\/)/,
     /^react-native-vector-icons($|\/)/,
     /^react-navigation($|\/)/
