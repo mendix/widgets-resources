@@ -3,7 +3,7 @@ import { RichTextEditor as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
 import { GroupType, SET_CUSTOM } from "./utils/ckeditorPresets";
 import { debounce } from "@mendix/piw-utils-internal";
-import { getPreset } from "./utils/ckeditorConfigs";
+import { getPreset, defineAdvancedGroups } from "./utils/ckeditorConfigs";
 import { CKEditorConfig } from "ckeditor4-react";
 import "./ui/RichText.scss";
 
@@ -18,7 +18,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             return getPreset(preset);
         } else {
             const groupKeys = Object.keys(props).filter((key: string) => (key.includes("Group") ? key : null));
-            let groupItems = [];
+            let groupItems: any[];
             if (toolbarConfig === "basic") {
                 groupItems = groupKeys
                     .filter((groupName: GroupType) => props[groupName])
@@ -26,7 +26,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
                         groupName.includes("separator") ? "/" : groupName.replace("Group", "").toLowerCase()
                     );
             } else {
-                groupItems = advancedConfig.map(group => (group.ctItemType !== "seperator" ? group.ctItemType : "-"));
+                groupItems = defineAdvancedGroups(advancedConfig);
             }
 
             return SET_CUSTOM(groupItems, toolbarConfig === "basic");

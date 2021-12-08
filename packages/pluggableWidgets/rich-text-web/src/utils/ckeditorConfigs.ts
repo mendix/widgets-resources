@@ -1,5 +1,5 @@
 import { CKEditorConfig } from "ckeditor4-react";
-import { PresetEnum } from "../../typings/RichTextProps";
+import { PresetEnum, AdvancedConfigType } from "../../typings/RichTextProps";
 import { SET_PRESET, TOOLBAR_GROUP, ToolbarGroup } from "./ckeditorPresets";
 
 interface Plugins {
@@ -56,4 +56,27 @@ export function addPlugin(name: string, config: CKEditorConfig): CKEditorConfig 
         }
     }
     return config;
+}
+
+export function defineAdvancedGroups(items: AdvancedConfigType[]) {
+    const toolbarObj: any = {};
+    for (const i in items) {
+        const item = items[i];
+        const id = item.ctItemToolbar;
+        const type = item.ctItemType !== "seperator" ? item.ctItemType : "-";
+
+        if (!toolbarObj[id]) {
+            toolbarObj[id] = [];
+        }
+        toolbarObj[id].push(type);
+    }
+    const keys: any = Object.keys(toolbarObj);
+    const toolbarArray: any = [];
+    for (const j in keys) {
+        toolbarArray.push({
+            name: keys[j],
+            items: toolbarObj[keys[j]]
+        });
+    }
+    return toolbarArray;
 }

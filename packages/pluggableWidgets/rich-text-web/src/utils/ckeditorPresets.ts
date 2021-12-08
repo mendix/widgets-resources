@@ -143,12 +143,7 @@ function SET_CUSTOM(groups: string[], withGroupNames = true): CKEditorConfig {
         return {
             extraPlugins:
                 "save,templates,newpage,print,exportpdf,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
-            toolbar: [
-                {
-                    name: "other",
-                    items: [...groups]
-                }
-            ]
+            toolbar: groups
         };
     }
 }

@@ -104,7 +104,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
             className={classNames(props.class, "widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}
             style={{ width, height }}
         >
-            <div ref={setElement} />
+            <div ref={setElement} id={props.name} />
             <MainEditor config={ckeditorConfig} key={key} />
         </div>
     );
