@@ -104,7 +104,7 @@ async function createAtlasWebContentModule() {
 }
 
 async function createAtlasCoreModule() {
-    console.log("Creating the Atlas Web Content module.");
+    console.log("Creating the Atlas Web Core module.");
     const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
