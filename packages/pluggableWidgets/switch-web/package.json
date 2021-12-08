@@ -1,7 +1,7 @@
 {
   "name": "switch-web",
   "widgetName": "Switch",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Toggle a boolean attribute",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
