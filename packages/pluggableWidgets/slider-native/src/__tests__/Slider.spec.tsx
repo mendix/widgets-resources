@@ -1,14 +1,15 @@
 import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { Big } from "big.js";
 import { createElement } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { fireEvent, render, RenderAPI } from "@testing-library/react-native";
 import { ReactTestInstance } from "react-test-renderer";
-import { ValueStatus } from "mendix";
+import { ValueStatus, DynamicValue } from "mendix";
 
 import { Props, Slider } from "../Slider";
 
 describe("Slider", () => {
+    const noValue: DynamicValue<Big> = { status: ValueStatus.Unavailable, value: undefined };
     let defaultProps: Props;
 
     beforeEach(() => {
@@ -46,36 +47,30 @@ describe("Slider", () => {
     });
 
     it("renders an error when the step size is empty", () => {
-        const component = render(
-            <Slider {...defaultProps} stepSize={{ status: ValueStatus.Unavailable, value: undefined }} />
-        );
+        const component = render(<Slider {...defaultProps} stepSize={noValue} />);
         expect(component.queryByText("No step size provided.")).not.toBeNull();
     });
 
     it("renders an error when the minimum is empty", () => {
-        const component = render(
-            <Slider {...defaultProps} minimumValue={{ status: ValueStatus.Unavailable, value: undefined }} />
-        );
+        const component = render(<Slider {...defaultProps} minimumValue={noValue} />);
         expect(component.queryByText("No minimum value provided.")).not.toBeNull();
     });
 
     it("renders an error when the maximum is empty", () => {
-        const component = render(
-            <Slider {...defaultProps} maximumValue={{ status: ValueStatus.Unavailable, value: undefined }} />
-        );
+        const component = render(<Slider {...defaultProps} maximumValue={noValue} />);
         expect(component.queryByText("No maximum value provided.")).not.toBeNull();
     });
 
     it("renders an error when the minimum is equal to the maximum", () => {
+        const value = new Big(10);
         const component = render(
             <Slider
                 {...defaultProps}
-                valueAttribute={new EditableValueBuilder<Big>().withValue(new Big(10)).build()}
-                minimumValue={dynamicValue(new Big(10))}
-                maximumValue={dynamicValue(new Big(10))}
+                valueAttribute={new EditableValueBuilder<Big>().withValue(value).build()}
+                minimumValue={dynamicValue(value)}
+                maximumValue={dynamicValue(value)}
             />
         );
-        console.log(component.UNSAFE_getByType(Text));
         expect(component.queryByText("The minimum value can not be equal to the maximum value.")).not.toBeNull();
     });
 
