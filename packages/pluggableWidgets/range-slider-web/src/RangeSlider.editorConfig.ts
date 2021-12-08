@@ -1,10 +1,18 @@
-import { hidePropertiesIn, hidePropertyIn, Properties, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import {
+    hidePropertiesIn,
+    hidePropertyIn,
+    Properties,
+    StructurePreviewProps,
+    transformGroupsIntoTabs
+} from "@mendix/piw-utils-internal";
 import {
     MaxValueTypeEnum,
     MinValueTypeEnum,
     RangeSliderPreviewProps,
     StepSizeTypeEnum
 } from "../typings/RangeSliderProps";
+import StructurePreviewSvg from "./assets/structure-preview.svg";
+import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";
 
 const keysToHideByMinValueType: Record<MinValueTypeEnum, Array<keyof RangeSliderPreviewProps>> = {
     static: ["minAttribute", "expressionMinimumValue"],
@@ -59,4 +67,15 @@ export function getProperties(
     }
 
     return defaultProperties;
+}
+
+export function getPreview(_: RangeSliderPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    return {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? StructurePreviewSvgDark : StructurePreviewSvg).replace("data:image/svg+xml,", "")
+        ),
+        height: 28,
+        width: 300
+    };
 }
