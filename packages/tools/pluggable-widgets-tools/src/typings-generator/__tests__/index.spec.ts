@@ -19,6 +19,8 @@ import { extractProperties, extractSystemProperties } from "../helpers";
 import { WidgetXml } from "../WidgetXml";
 import { content, contentGroup, contentGroupNative, contentNative } from "./inputs";
 import { nativeResult, webResult, webResultGroup } from "./outputs";
+import { attributeLinkedActionInput } from "./inputs/atribute-linked-action";
+import { attributeLinkedActionOutput } from "./outputs/atribute-linked-action";
 
 describe("Generating tests", () => {
     it("Generates a parsed typing from XML for native", () => {
@@ -109,6 +111,11 @@ describe("Generating tests", () => {
     it("Generates a parsed typing from XML for native using datasource", () => {
         const newContent = generateNativeTypesFor(datasourceInputNative);
         expect(newContent).toBe(datasourceNativeOutput);
+    });
+
+    it("Generates a parsed typing from XML for widget with attribute linked action", () => {
+        const newContent = generateFullTypesFor(attributeLinkedActionInput);
+        expect(newContent).toBe(attributeLinkedActionOutput);
     });
 });
 

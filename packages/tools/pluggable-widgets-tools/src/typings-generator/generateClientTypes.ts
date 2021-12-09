@@ -46,6 +46,10 @@ function generateClientTypeBody(
     generatedTypes: string[],
     resolveProp: (key: string) => Property | undefined
 ) {
+    function actionIsLinkedInAnAttribute(key: string): boolean {
+        return properties.some(prop => prop.$.type === "attribute" && prop.$.onChange === key);
+    }
+
     return properties
         .map(prop => {
             const isOptional =
@@ -53,6 +57,11 @@ function generateClientTypeBody(
                 ((prop.$.required === "false" && prop.$.type !== "object") ||
                     prop.$.type === "action" ||
                     (prop.$.dataSource && resolveProp(prop.$.dataSource)?.$.required === "false"));
+
+            if (prop.$.type === "action" && actionIsLinkedInAnAttribute(prop.$.key)) {
+                return undefined;
+            }
+
             return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(
                 prop,
                 isNative,
@@ -60,6 +69,7 @@ function generateClientTypeBody(
                 resolveProp
             )};`;
         })
+        .filter(Boolean)
         .join("\n");
 }
 
