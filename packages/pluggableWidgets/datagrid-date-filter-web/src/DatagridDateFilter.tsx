@@ -30,7 +30,7 @@ interface Locale {
 
 export default function DatagridDateFilter(props: DatagridDateFilterContainerProps): ReactElement | null {
     const id = useRef(`DateFilter${generateUUID()}`);
-    const { languageTag = "en-US", patterns } = (window as any).mx.session.getConfig().locale;
+    const { languageTag = "en-US", patterns } = window.mx.session.getConfig().locale;
 
     const [language] = languageTag.split("-");
     const languageTagWithoutDash = languageTag.replace("-", "");

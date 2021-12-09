@@ -35,6 +35,7 @@ export const DatePicker = forwardRef(
         const portalRef = useRef<HTMLDivElement>(null);
         const id = useMemo(() => `datepicker_` + Math.random(), []);
         const Portal = createPortal(<div ref={portalRef} id={id} style={{ position: "fixed" }} />, document.body);
+        const calendarStartDay = window.mx.session.getConfig().locale.firstDayOfWeek;
 
         const buttonClick = useCallback(() => {
             setOpen(open => !open);
@@ -59,6 +60,7 @@ export const DatePicker = forwardRef(
                     dropdownMode="select"
                     enableTabLoop
                     locale={props.locale}
+                    calendarStartDay={calendarStartDay}
                     onChange={date => {
                         if (isDate(date) && isValid(date)) {
                             props.setValue(date as Date);
@@ -91,7 +93,7 @@ export const DatePicker = forwardRef(
                     showPopperArrow={false}
                     showYearDropdown
                     strictParsing
-                    useWeekdaysShort
+                    useWeekdaysShort={false}
                     portalId={id}
                 />
                 <button
