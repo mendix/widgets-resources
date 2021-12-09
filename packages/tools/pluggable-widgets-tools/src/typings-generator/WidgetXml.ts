@@ -37,6 +37,7 @@ export interface Property {
             | "file"
             | "datasource"
             | "attribute"
+            | "association"
             | "expression"
             | "enumeration"
             | "object"
