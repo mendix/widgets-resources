@@ -5,7 +5,6 @@
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
 import {
-    ActionValue,
     DynamicValue,
     EditableValue,
     ListValue,
@@ -95,7 +94,6 @@ export interface DatagridContainerProps {
     columnsDraggable: boolean;
     columnsHidable: boolean;
     configurationAttribute?: EditableValue<string>;
-    onConfigurationChange?: ActionValue;
     showHeaderFilters: boolean;
     filterList: FilterListType[];
     filtersPlaceholder?: ReactNode;
