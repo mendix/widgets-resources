@@ -10,13 +10,13 @@ import {
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 
-import { AccordionContainerProps, AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
+import { AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 
 import ChevronSVG from "./assets/ChevronStructurePreview.svg";
 import ChevronSVGDark from "./assets/ChevronStructurePreviewDark.svg";
 
 export function getProperties(
-    values: AccordionContainerProps,
+    values: AccordionPreviewProps,
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
