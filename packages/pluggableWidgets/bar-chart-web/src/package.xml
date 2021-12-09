@@ -5,7 +5,7 @@
             <widgetFile path="BarChart.xml"/>
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/" />
+            <file path="com/mendix/widget/custom/barchart" />
         </files>
     </clientModule>
 </package>
