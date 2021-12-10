@@ -155,8 +155,12 @@
                                 <caption>On click action</caption>
                                 <description/>
                             </property>
-                            <property key="onClickTooltip" type="action" required="false">
-                                <caption>Tooltip</caption>
+                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
+                                <caption>Tooltip hover text</caption>
+                                <description/>
+                            </property>
+                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Tooltip hover text</caption>
                                 <description/>
                             </property>
                         </propertyGroup>

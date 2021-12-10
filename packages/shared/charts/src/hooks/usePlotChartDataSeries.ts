@@ -1,12 +1,16 @@
 import Big from "big.js";
-import { ObjectItem, DynamicValue, ListValue, ListExpressionValue, ListAttributeValue } from "mendix";
+import { ObjectItem, DynamicValue, ListValue, ListExpressionValue, ListAttributeValue, ActionValue } from "mendix";
 import { useEffect, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { Datum, PlotData } from "plotly.js";
+import { executeAction } from "@mendix/piw-utils-internal";
+import { MendixChartDataProps } from "src/components/Chart";
 
-export type PlotChartDataPoints = {
+type PlotChartDataPoints = {
     x: Array<NonNullable<Datum>>;
     y: Array<NonNullable<Datum>>;
+    text: Array<string | undefined>;
+    hoverinfo: PlotData["hoverinfo"];
     // We want this optional.
     name?: PlotData["name"];
 };
@@ -18,14 +22,11 @@ interface DataSourceItemGroup {
     items: ObjectItem[];
 }
 
-export interface PlotChartSeries extends PlotChartDataPoints {
-    customLineStyle?: string;
-    customSeriesOptions: string;
-}
+export type PlotChartSeries = PlotChartDataPoints & MendixChartDataProps;
 
 interface PlotDataSeries {
     dataSet: "static" | "dynamic";
-    customSeriesOptions: string;
+    customSeriesOptions: string | undefined;
     groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
@@ -35,6 +36,9 @@ interface PlotDataSeries {
     dynamicXAttribute?: ListAttributeValue<Date | Big | string>;
     staticYAttribute?: ListAttributeValue<Date | Big | string>;
     dynamicYAttribute?: ListAttributeValue<Date | Big | string>;
+    onClickAction?: ActionValue;
+    staticTooltipHoverText?: ListExpressionValue<string>;
+    dynamicTooltipHoverText?: ListExpressionValue<string>;
 }
 
 type SeriesMapper<T> = (serie: T, dataPoints: PlotChartDataPoints) => Partial<PlotData>;
@@ -59,8 +63,16 @@ export function usePlotChartDataSeries<T extends PlotDataSeries>(
     return chartSeries;
 }
 
+function createActionHandlers({
+    onClickAction
+}: Pick<PlotDataSeries, "onClickAction">): Pick<PlotChartSeries, "onClick"> {
+    return {
+        onClick: onClickAction ? () => executeAction(onClickAction) : undefined
+    };
+}
+
 function loadStaticSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDataSeries>): PlotChartSeries | null {
-    const { staticName, dataSet, customSeriesOptions } = series;
+    const { staticName, dataSet, customSeriesOptions, onClickAction } = series;
 
     if (dataSet !== "static") {
         throw Error("Expected series to be static");
@@ -73,6 +85,7 @@ function loadStaticSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDat
     }
 
     return {
+        ...createActionHandlers({ onClickAction }),
         ...mapSerie(series, dataPoints),
         ...dataPoints,
         customSeriesOptions
@@ -80,7 +93,7 @@ function loadStaticSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDat
 }
 
 function loadDynamicSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDataSeries>): PlotChartSeries[] | null {
-    const { dataSet, customSeriesOptions } = series;
+    const { dataSet, customSeriesOptions, onClickAction } = series;
 
     if (dataSet !== "dynamic") {
         throw Error("Expected series to be dynamic");
@@ -101,6 +114,7 @@ function loadDynamicSeries(series: PlotDataSeries, mapSerie: SeriesMapper<PlotDa
             }
 
             return {
+                ...createActionHandlers({ onClickAction }),
                 ...mapSerie(series, dataPoints),
                 ...dataPoints,
                 customSeriesOptions
@@ -186,6 +200,7 @@ function extractDataPoints(
     }
     const xData: PlotChartDataPoints["x"] = [];
     const yData: PlotChartDataPoints["y"] = [];
+    const textData: PlotChartDataPoints["text"] = [];
 
     for (const item of dataSourceItems) {
         const x = xValue.get(item);
@@ -197,12 +212,18 @@ function extractDataPoints(
 
         xData.push(x.value instanceof Big ? Number(x.value.toString()) : x.value);
         yData.push(y.value instanceof Big ? Number(y.value.toString()) : y.value);
+
+        const tooltipHoverTextSource =
+            series.dataSet === "dynamic" ? series.dynamicTooltipHoverText : series.staticTooltipHoverText;
+        textData.push(tooltipHoverTextSource?.get(item).value);
     }
 
     return {
         ...(seriesName ? { name: seriesName } : {}),
         x: xData,
-        y: yData
+        y: yData,
+        text: textData,
+        hoverinfo: textData.some(text => text !== undefined && text !== "") ? "text" : "none"
     };
 }
 

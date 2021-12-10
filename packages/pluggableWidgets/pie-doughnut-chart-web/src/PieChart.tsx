@@ -23,7 +23,8 @@ const pieChartConfigOptions: ChartWidgetProps["configOptions"] = {
 const pieChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
     type: "pie",
     hoverinfo: "none",
-    sort: false
+    sort: false,
+    textinfo: "percent"
 };
 
 export function PieChart(props: PieChartContainerProps): ReactElement | null {
@@ -35,7 +36,9 @@ export function PieChart(props: PieChartContainerProps): ReactElement | null {
         seriesName: props.seriesName,
         seriesSortAttribute: props.seriesSortAttribute,
         seriesSortOrder: props.seriesSortOrder,
-        seriesValueAttribute: props.seriesValueAttribute
+        seriesValueAttribute: props.seriesValueAttribute,
+        onClickAction: props.onClickAction,
+        tooltipHoverText: props.tooltipHoverText
     });
 
     return (

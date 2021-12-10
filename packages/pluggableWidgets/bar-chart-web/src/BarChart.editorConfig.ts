@@ -22,6 +22,7 @@ export function getProperties(
                 "dynamicXAttribute",
                 "dynamicYAttribute",
                 "dynamicName",
+                "dynamicTooltipHoverText",
                 "groupByAttribute"
             ]);
         } else {
@@ -29,7 +30,8 @@ export function getProperties(
                 "staticDataSource",
                 "staticXAttribute",
                 "staticYAttribute",
-                "staticName"
+                "staticName",
+                "staticTooltipHoverText"
             ]);
         }
 

@@ -38,7 +38,8 @@ export interface SeriesType {
     customSeriesOptions: string;
     barColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
-    onClickTooltip?: ActionValue;
+    staticTooltipHoverText?: ListExpressionValue<string>;
+    dynamicTooltipHoverText?: ListExpressionValue<string>;
 }
 
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
@@ -64,7 +65,8 @@ export interface SeriesPreviewType {
     customSeriesOptions: string;
     barColor: string;
     onClickAction: {} | null;
-    onClickTooltip: {} | null;
+    staticTooltipHoverText: string;
+    dynamicTooltipHoverText: string;
 }
 
 export interface BarChartContainerProps {

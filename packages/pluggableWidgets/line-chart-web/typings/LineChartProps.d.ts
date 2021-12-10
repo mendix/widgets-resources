@@ -9,17 +9,7 @@ import { Big } from "big.js";
 
 export type DataSetEnum = "static" | "dynamic";
 
-export type AggregationTypeEnum =
-    | "none"
-    | "count"
-    | "sum"
-    | "avg"
-    | "min"
-    | "max"
-    | "median"
-    | "mode"
-    | "first"
-    | "last";
+export type AggregationTypeEnum = "none" | "count" | "sum" | "avg" | "min" | "max" | "median" | "mode" | "first" | "last";
 
 export type InterpolationEnum = "linear" | "spline";
 
@@ -43,7 +33,8 @@ export interface LinesType {
     lineColor?: DynamicValue<string>;
     markerColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
-    onClickTooltip?: ActionValue;
+    staticTooltipHoverText?: ListExpressionValue<string>;
+    dynamicTooltipHoverText?: ListExpressionValue<string>;
 }
 
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
@@ -72,7 +63,8 @@ export interface LinesPreviewType {
     lineColor: string;
     markerColor: string;
     onClickAction: {} | null;
-    onClickTooltip: {} | null;
+    staticTooltipHoverText: string;
+    dynamicTooltipHoverText: string;
 }
 
 export interface LineChartContainerProps {

@@ -1,14 +1,17 @@
-import { createElement, Fragment, ReactElement, useEffect, useMemo, useRef } from "react";
-import ReactPlotlyChartComponent from "react-plotly.js";
-import { Config, Data, Layout } from "plotly.js";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useMemo, useRef } from "react";
+import ReactPlotlyChartComponent, { PlotParams } from "react-plotly.js";
+import { Config, Data, Layout, PlotMouseEvent } from "plotly.js";
 import deepmerge from "deepmerge";
 import { Playground, useChartsPlaygroundState } from "./Playground/Playground";
 import { CodeEditor } from "./Playground/CodeEditor";
 import { ifNonEmptyStringElseEmptyObjectString } from "./Playground/utils";
 
-type ChartDataType = Partial<Data> & {
+export interface MendixChartDataProps {
     customSeriesOptions: string | undefined;
-};
+    onClick?: () => void;
+}
+
+type ChartDataType = Partial<Data> & MendixChartDataProps;
 export interface ChartProps {
     data: ChartDataType[];
     configOptions: Partial<Config>;
@@ -56,12 +59,26 @@ export const Chart = ({
         () =>
             data.map(({ customSeriesOptions, ...serie }) =>
                 deepmerge.all([
-                    serie,
                     seriesOptions,
+                    serie,
                     JSON.parse(ifNonEmptyStringElseEmptyObjectString(customSeriesOptions))
                 ])
             ),
         [data, seriesOptions]
+    );
+
+    const handleChartClick = useCallback<NonNullable<PlotParams["onClick"]>>(
+        event => {
+            getUniqueSeriesIndices(event).forEach(seriesIndex => {
+                if (seriesIndex < data.length) {
+                    const seriesOnClick = data[seriesIndex].onClick;
+                    if (seriesOnClick) {
+                        seriesOnClick();
+                    }
+                }
+            });
+        },
+        [data]
     );
 
     return (
@@ -71,9 +88,15 @@ export const Chart = ({
             data={customData}
             config={customConfigOptions}
             layout={customLayoutOptions}
+            onClick={handleChartClick}
         />
     );
 };
+
+function getUniqueSeriesIndices(event: PlotMouseEvent): number[] {
+    const clickedSeriesIndices = event.points.map(point => point.curveNumber);
+    return Array.from(new Set(clickedSeriesIndices));
+}
 
 const irrelevantSeriesKeys = ["x", "y", "z", "customSeriesOptions"];
 
