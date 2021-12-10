@@ -4,12 +4,12 @@ module.exports = {
     apps: {
         "ios.developerapp": {
             type: "ios.app",
-            binaryPath: process.env.TEST_NATIVE_APP_IOS
+            binaryPath: `${__dirname}/apps/DeveloperApp.app`
         },
         "android.developerapp": {
             type: "android.apk",
-            binaryPath: process.env.TEST_NATIVE_APP_ANDROID,
-            testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY
+            binaryPath: `${__dirname}/apps/app-debug.apk`,
+            testBinaryPath: `${__dirname}/apps/app-debug-androidTest.apk`
         }
     },
     devices: {
