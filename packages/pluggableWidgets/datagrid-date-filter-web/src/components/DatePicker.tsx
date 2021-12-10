@@ -26,6 +26,7 @@ interface DatePickerProps {
     screenReaderInputCaption?: string;
     setValue: Dispatch<SetStateAction<Date | null>>;
     value: Date | null;
+    calendarStartDay?: number;
 }
 
 export const DatePicker = forwardRef(
@@ -59,6 +60,7 @@ export const DatePicker = forwardRef(
                     dropdownMode="select"
                     enableTabLoop
                     locale={props.locale}
+                    calendarStartDay={props.calendarStartDay}
                     onChange={date => {
                         if (isDate(date) && isValid(date)) {
                             props.setValue(date as Date);
@@ -91,7 +93,7 @@ export const DatePicker = forwardRef(
                     showPopperArrow={false}
                     showYearDropdown
                     strictParsing
-                    useWeekdaysShort
+                    useWeekdaysShort={false}
                     portalId={id}
                 />
                 <button

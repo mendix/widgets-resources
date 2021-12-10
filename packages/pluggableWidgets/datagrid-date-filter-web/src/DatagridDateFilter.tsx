@@ -30,7 +30,7 @@ interface Locale {
 
 export default function DatagridDateFilter(props: DatagridDateFilterContainerProps): ReactElement | null {
     const id = useRef(`DateFilter${generateUUID()}`);
-    const { languageTag = "en-US", patterns } = (window as any).mx.session.getConfig().locale;
+    const { languageTag = "en-US", patterns, firstDayOfWeek } = window.mx.session.getConfig().locale;
 
     const [language] = languageTag.split("-");
     const languageTagWithoutDash = languageTag.replace("-", "");
@@ -109,6 +109,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         screenReaderInputCaption={props.screenReaderInputCaption?.value}
                         styles={props.style}
                         tabIndex={props.tabIndex}
+                        calendarStartDay={firstDayOfWeek}
                         updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
                             if (
                                 (value && props.valueAttribute?.value && !isEqual(props.valueAttribute.value, value)) ||

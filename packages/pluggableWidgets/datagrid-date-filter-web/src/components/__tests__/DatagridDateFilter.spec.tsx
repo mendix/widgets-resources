@@ -1,9 +1,29 @@
 import { Alert, FilterContextValue } from "@mendix/piw-utils-internal/components/web";
 import { actionValue, dynamicValue, EditableValueBuilder, ListAttributeValueBuilder } from "@mendix/piw-utils-internal";
 import { mount } from "enzyme";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, act } from "@testing-library/react";
 import { createContext, createElement } from "react";
 import DatagridDateFilter from "../../DatagridDateFilter";
+import { MXGlobalObject, MXSessionConfig } from "../../../typings/global";
+
+function createMXObjectMock(code: string, langTag: string, firstDayOfWeek = 0): MXGlobalObject {
+    return {
+        session: {
+            getConfig: (): MXSessionConfig => ({
+                locale: {
+                    code,
+                    firstDayOfWeek,
+                    languageTag: langTag,
+                    patterns: {
+                        date: "d.M.y",
+                        datetime: "d.M.y H.mm",
+                        time: "H.mm"
+                    }
+                }
+            })
+        }
+    };
+}
 
 const commonProps = {
     class: "filter-custom-class",
@@ -198,6 +218,81 @@ describe("Date Filter", () => {
         afterAll(() => {
             (window as any)["com.mendix.widgets.web.filterable.filterContext"] = undefined;
             delete (global as any)["com.mendix.widgets.web.UUID"];
+        });
+    });
+
+    describe("with session config", () => {
+        let oldMxObject: MXGlobalObject;
+        beforeEach(() => {
+            (window as any)["com.mendix.widgets.web.filterable.filterContext"] = createContext({
+                filterDispatcher: jest.fn(),
+                singleAttribute: new ListAttributeValueBuilder().withType("DateTime").withFilterable(true).build()
+            } as FilterContextValue);
+            oldMxObject = window.mx;
+        });
+
+        it("has correct short week days for en-US", async () => {
+            window.mx = createMXObjectMock("en_US", "en-US");
+            render(<DatagridDateFilter {...commonProps} defaultValue={dynamicValue(new Date("2021-12-10"))} />);
+
+            const open = screen.getByLabelText("Show calendar");
+            await act(async () => {
+                fireEvent.click(open);
+            });
+            const header = screen.getByText(/december 2021/gi).parentElement?.lastChild;
+            expect(header?.textContent).toEqual("SuMoTuWeThFrSa");
+        });
+
+        it("has correct short week days for en-US and starts week at Monday", async () => {
+            window.mx = createMXObjectMock("en_US", "en-US", 1);
+            render(<DatagridDateFilter {...commonProps} defaultValue={dynamicValue(new Date("2021-12-10"))} />);
+
+            const open = screen.getByLabelText("Show calendar");
+            await act(async () => {
+                fireEvent.click(open);
+            });
+            const header = screen.getByText(/december 2021/gi).parentElement?.lastChild;
+            expect(header?.textContent).toEqual("MoTuWeThFrSaSu");
+        });
+
+        it("has correct short week days for pt-Br", async () => {
+            window.mx = createMXObjectMock("pt_BR", "pt-BR");
+            render(<DatagridDateFilter {...commonProps} defaultValue={dynamicValue(new Date("2021-12-10"))} />);
+
+            const open = screen.getByLabelText("Show calendar");
+            await act(async () => {
+                fireEvent.click(open);
+            });
+            const header = screen.getByText(/dezembro 2021/gi).parentElement?.lastChild;
+            expect(header?.textContent).toEqual("domsegterquaquisexsab");
+        });
+
+        it("has correct short week days for fi-FI and starts on monday", async () => {
+            window.mx = createMXObjectMock("fi_FI", "fi-FI", 1);
+            render(<DatagridDateFilter {...commonProps} defaultValue={dynamicValue(new Date("2021-12-10"))} />);
+
+            const open = screen.getByLabelText("Show calendar");
+            await act(async () => {
+                fireEvent.click(open);
+            });
+            const header = screen.getByText(/joulukuu 2021/gi).parentElement?.lastChild;
+            expect(header?.textContent).toEqual("matiketopelasu");
+        });
+
+        it("has correct short week days for fi-FI", async () => {
+            window.mx = createMXObjectMock("fi_FI", "fi-FI");
+            render(<DatagridDateFilter {...commonProps} defaultValue={dynamicValue(new Date("2021-12-10"))} />);
+
+            const open = screen.getByLabelText("Show calendar");
+            await act(async () => {
+                fireEvent.click(open);
+            });
+            const header = screen.getByText(/joulukuu 2021/gi).parentElement?.lastChild;
+            expect(header?.textContent).toEqual("sumatiketopela");
+        });
+
+        afterEach(() => {
+            window.mx = oldMxObject;
         });
     });
 });

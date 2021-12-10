@@ -49,8 +49,6 @@ export interface SliderContainerProps {
 
 export interface SliderPreviewProps {
     readOnly: boolean;
-    style?: string;
-    styleObject?: CSSProperties;
     advanced: boolean;
     valueAttribute: string;
     minValueType: MinValueTypeEnum;
