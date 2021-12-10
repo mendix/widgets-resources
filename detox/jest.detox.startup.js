@@ -37,7 +37,7 @@ beforeAll(async () => {
             detoxURLBlacklistRegex: ".*firestore.*"
         },
         // JS actions
-        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES" }
+        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES", notifications: "YES" }
     });
 
     if (device.getPlatform() === "ios") {
