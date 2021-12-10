@@ -1,5 +1,5 @@
-import { device } from "detox";
-import { Widget, expectToMatchImageSnapshot, NativeHomePage } from "../../../../../tests/e2e";
+import { device, by, element } from "detox";
+import { Alert, Widget, expectToMatchImageSnapshot, NativeHomePage } from "../../../../../tests/e2e";
 
 describe("Slider", () => {
     beforeEach(async () => {
@@ -20,6 +20,12 @@ describe("Slider", () => {
 
         await Widget("scrollContainerSlider").getElement().scrollTo("bottom");
         await expectToMatchImageSnapshot();
+    });
+
+    it("should trigger an action after adjusting slider", async () => {
+        await element(by.id("sliderOnChange$marker")).swipe("right", "fast", 1);
+        Alert().getMessage("Value changed: 100");
+        await Alert().confirm();
     });
 
     afterAll(async () => {
