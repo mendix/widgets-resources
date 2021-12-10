@@ -26,6 +26,7 @@ interface DatePickerProps {
     screenReaderInputCaption?: string;
     setValue: Dispatch<SetStateAction<Date | null>>;
     value: Date | null;
+    calendarStartDay?: number;
 }
 
 export const DatePicker = forwardRef(
@@ -35,7 +36,6 @@ export const DatePicker = forwardRef(
         const portalRef = useRef<HTMLDivElement>(null);
         const id = useMemo(() => `datepicker_` + Math.random(), []);
         const Portal = createPortal(<div ref={portalRef} id={id} style={{ position: "fixed" }} />, document.body);
-        const calendarStartDay = window.mx.session.getConfig().locale.firstDayOfWeek;
 
         const buttonClick = useCallback(() => {
             setOpen(open => !open);
@@ -60,7 +60,7 @@ export const DatePicker = forwardRef(
                     dropdownMode="select"
                     enableTabLoop
                     locale={props.locale}
-                    calendarStartDay={calendarStartDay}
+                    calendarStartDay={props.calendarStartDay}
                     onChange={date => {
                         if (isDate(date) && isValid(date)) {
                             props.setValue(date as Date);

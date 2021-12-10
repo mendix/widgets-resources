@@ -9,6 +9,7 @@ import classNames from "classnames";
 
 interface FilterComponentProps {
     adjustable: boolean;
+    calendarStartDay?: number;
     className?: string;
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
@@ -82,6 +83,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
             )}
             <DatePicker
                 adjustable={props.adjustable}
+                calendarStartDay={props.calendarStartDay}
                 dateFormat={props.dateFormat}
                 locale={props.locale}
                 id={props.id}
