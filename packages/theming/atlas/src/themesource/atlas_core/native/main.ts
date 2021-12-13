@@ -74,6 +74,10 @@ import * as helpersTypography from "./core/helpers/typography";
 import * as widgetsVideoPlayer from "./core/widgets/videoplayer";
 import * as widgetsWebView from "./core/widgets/webview";
 import * as helperClasses from "./core/helpers/helperclasses";
+import * as radioButtons from "./core/widgets/radiobuttons";
+import * as helperRadioButtons from "./core/helpers/radiobuttons";
+import * as widgetsRadioButton from "./core/widgets/radiobutton";
+import * as helpersRadioButton from "./core/helpers/radiobutton";
 //
 //
 // ================================= CUSTOM =================================\\
@@ -158,6 +162,10 @@ module.exports = [
     !exclusionVariables.excludeVideoPlayer ? widgetsVideoPlayer : {},
     !exclusionVariables.excludeWebView ? widgetsWebView : {},
     !exclusionVariables.excludeHelpers ? helperClasses : {},
+    !exclusionVariables.excludeRadioButtons ? radioButtons : {},
+    !exclusionVariables.excludeRadioButtons && !exclusionVariables.excludeRadioButtonsHelper ? helperRadioButtons : {},
+    !exclusionVariables.excludeRadioButton ? widgetsRadioButton : {},
+    !exclusionVariables.excludeRadioButton ? helpersRadioButton : {},
     layout,
     page
 ].reduce((merged, object) => ({ ...merged, ...object }), {});

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.radiobuttons.RadioButtons" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Radio Buttons</name>
+    <description/>
+    <icon/>
+    <properties>
+    <propertyGroup caption='General'>
+        <propertyGroup caption="Data Source">
+            <property key="enum" type="attribute" >
+                    <caption>Select an enum</caption>
+                    <description>Select radio button options</description>
+                    <attributeTypes>
+                        <attributeType name="Enum"/>
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Formatting">
+                <property key="orientation" type="enumeration" defaultValue="vertical">
+                    <caption>Orientation</caption>
+                    <description>Options orientation</description>
+                    <enumerationValues>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action" required="false">
+                    <caption>On change</caption>
+                    <description/>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Editability">
+                <systemProperty key="Editability"/>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

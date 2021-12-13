@@ -1,0 +1,336 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio buttons render disabled radio buttons correctly 1`] = `
+<View
+  testID="radio-buttons-test"
+>
+  <View
+    style={
+      Array [
+        undefined,
+        false,
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          Object {
+            "opacity": 0.3,
+          },
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {},
+          ]
+        }
+      >
+        <View
+          style={Object {}}
+        />
+      </View>
+      <Text
+        style={Object {}}
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          Object {
+            "opacity": 0.3,
+          },
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {},
+          ]
+        }
+      />
+      <Text
+        style={Object {}}
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+  <Text
+    style={Object {}}
+  />
+</View>
+`;
+
+exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
+<View
+  testID="radio-buttons-test"
+>
+  <View
+    style={
+      Array [
+        undefined,
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "flexWrap": "wrap",
+        },
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          false,
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          style={Object {}}
+        />
+      </View>
+      <Text
+        style={Object {}}
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          false,
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            false,
+          ]
+        }
+      />
+      <Text
+        style={Object {}}
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+  <Text
+    style={Object {}}
+  />
+</View>
+`;
+
+exports[`Radio buttons render vertical radio buttons correctly 1`] = `
+<View
+  testID="radio-buttons-test"
+>
+  <View
+    style={
+      Array [
+        undefined,
+        false,
+      ]
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          false,
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          style={Object {}}
+        />
+      </View>
+      <Text
+        style={Object {}}
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+          false,
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            false,
+          ]
+        }
+      />
+      <Text
+        style={Object {}}
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+  <Text
+    style={Object {}}
+  />
+</View>
+`;
+
+exports[`Radio buttons works correctly without options 1`] = `
+<View
+  testID="radio-buttons-test"
+>
+  <View
+    style={
+      Array [
+        undefined,
+        false,
+      ]
+    }
+  />
+  <Text
+    style={Object {}}
+  />
+</View>
+`;
