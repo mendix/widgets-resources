@@ -58,6 +58,10 @@
                                 <caption>Caption</caption>
                                 <description/>
                             </property>
+                            <property key="tooltip" type="textTemplate" required="false">
+                                <caption>Tooltip</caption>
+                                <description />
+                            </property>
                             <property key="filter" type="widgets" required="false">
                                 <caption>Filter</caption>
                                 <description/>

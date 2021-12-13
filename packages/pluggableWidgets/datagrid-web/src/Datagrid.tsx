@@ -107,12 +107,22 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
             cellRenderer={useCallback(
                 (renderWrapper, value, columnIndex) => {
                     const column = props.columns[columnIndex];
+                    const title = column.tooltip && isAvailable(column.tooltip) ? column.tooltip.value : undefined;
+                    // const title = (column.tooltip && isAvailable(column.tooltip) && column.tooltip.value) || "";
                     let content;
 
                     if (column.showContentAs === "attribute") {
-                        content = <span className="td-text">{column.attribute?.get(value)?.displayValue ?? ""}</span>;
+                        content = (
+                            <span title={title} className="td-text">
+                                {column.attribute?.get(value)?.displayValue ?? ""}
+                            </span>
+                        );
                     } else if (column.showContentAs === "dynamicText") {
-                        content = <span className="td-text">{column.dynamicText?.get(value)?.value ?? ""}</span>;
+                        content = (
+                            <span title={title} className="td-text">
+                                {column.dynamicText?.get(value)?.value ?? ""}
+                            </span>
+                        );
                     } else {
                         content = column.content?.get(value);
                     }

@@ -17,6 +17,7 @@ export function preview(props: DatagridPreviewProps): ReactElement {
             : [
                   {
                       header: "Column",
+                      tooltip: "",
                       attribute: "[No attribute selected]",
                       width: "autoFill",
                       columnClass: "",

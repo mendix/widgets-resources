@@ -20,7 +20,7 @@ import { InfiniteBody, Pagination } from "@mendix/piw-utils-internal/components/
 
 export type TableColumn = Omit<
     ColumnsPreviewType,
-    "attribute" | "columnClass" | "content" | "dynamicText" | "filter" | "showContentAs"
+    "attribute" | "columnClass" | "content" | "dynamicText" | "filter" | "showContentAs" | "tooltip"
 >;
 
 export interface TableProps<T extends ObjectItem> {

@@ -131,6 +131,7 @@ export const getPreview = (values: DatagridPreviewProps, isDarkMode: boolean): S
         : [
               {
                   header: "Column",
+                  tooltip: "",
                   attribute: "",
                   width: "autoFit",
                   columnClass: "",
