@@ -22,7 +22,7 @@ module.exports = {
         android: {
             type: "android.emulator",
             device: {
-                avdName: "EMULATOR_API_30"
+                avdName: "NATIVE_CONTENT_EMULATOR"
             }
         }
     },
