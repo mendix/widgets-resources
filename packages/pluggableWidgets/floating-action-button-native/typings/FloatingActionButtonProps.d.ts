@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, NativeIcon } from "mendix";
 
 export type HorizontalPositionEnum = "left" | "center" | "right";
@@ -33,8 +34,10 @@ export interface FloatingActionButtonProps<Style> {
 }
 
 export interface FloatingActionButtonPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     icon: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     iconActive: { type: "glyph"; iconClass: string } | { type: "image"; imageUrl: string } | null;
     horizontalPosition: HorizontalPositionEnum;

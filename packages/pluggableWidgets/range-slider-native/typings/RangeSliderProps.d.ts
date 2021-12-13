@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
 import { Big } from "big.js";
 
@@ -21,8 +22,10 @@ export interface RangeSliderProps<Style> {
 }
 
 export interface RangeSliderPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     lowerValueAttribute: string;
     upperValueAttribute: string;
     editable: EditableEnum;

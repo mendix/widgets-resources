@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue } from "mendix";
 
 export type RenderModeEnum = "basic" | "custom";
@@ -46,8 +46,10 @@ export interface PopupMenuProps<Style> {
 }
 
 export interface PopupMenuPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     menuTriggerer: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     renderMode: RenderModeEnum;
     basicItems: BasicItemsPreviewType[];

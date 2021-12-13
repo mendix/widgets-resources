@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeIcon } from "mendix";
 import { Big } from "big.js";
 
@@ -47,8 +47,10 @@ export interface IntroScreenProps<Style> {
 }
 
 export interface IntroScreenPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     slides: SlidesPreviewType[];
     showMode: ShowModeEnum;
     buttonPattern: ButtonPatternEnum;

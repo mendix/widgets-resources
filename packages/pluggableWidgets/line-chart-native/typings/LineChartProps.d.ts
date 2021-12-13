@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
 
@@ -60,8 +61,10 @@ export interface LineChartProps<Style> {
 }
 
 export interface LineChartPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     lines: LinesPreviewType[];
     showLegend: boolean;
     xAxisLabel: string;

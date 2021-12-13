@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export interface SignatureProps<Style> {
@@ -18,8 +19,10 @@ export interface SignatureProps<Style> {
 }
 
 export interface SignaturePreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     imageAttribute: string;
     buttonCaptionClear: string;
     buttonCaptionSave: string;

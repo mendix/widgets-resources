@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export type EditableEnum = "default" | "never";
@@ -16,8 +17,10 @@ export interface ToggleButtonsProps<Style> {
 }
 
 export interface ToggleButtonsPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     enum: string;
     editable: EditableEnum;
     onChange: {} | null;
