@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.1] - 2021-12-10
+
 ### Fixed
 - We fixed an issue with week start day not respecting current app settings (Ticket #136173).
 
