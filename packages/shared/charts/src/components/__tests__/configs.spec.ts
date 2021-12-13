@@ -15,7 +15,7 @@ describe("The useThemeFolderConfigs hook", () => {
 
     it("returns empty configs if no theme folder config file is found", () => {
         configFileSpy.mockResolvedValue(null);
-        const { result } = renderHook(() => useThemeFolderConfigs("LineChart"));
+        const { result } = renderHook(() => useThemeFolderConfigs("LineChart", true));
         expect(result.current).toEqual({ layout: {}, configuration: {}, series: {} });
     });
 
@@ -31,7 +31,7 @@ describe("The useThemeFolderConfigs hook", () => {
                 }
             }
         });
-        const { result, waitForNextUpdate } = renderHook(() => useThemeFolderConfigs("LineChart"));
+        const { result, waitForNextUpdate } = renderHook(() => useThemeFolderConfigs("LineChart", true));
         await waitForNextUpdate();
         expect(result.current).toEqual({
             layout: { font: { size: 20 } },
@@ -61,7 +61,7 @@ describe("The useThemeFolderConfigs hook", () => {
                 }
             }
         });
-        const { result, waitForNextUpdate } = renderHook(() => useThemeFolderConfigs("BarChart"));
+        const { result, waitForNextUpdate } = renderHook(() => useThemeFolderConfigs("BarChart", true));
         await waitForNextUpdate();
         expect(result.current).toEqual({
             layout: { font: { size: 20 } },
@@ -72,5 +72,10 @@ describe("The useThemeFolderConfigs hook", () => {
                 }
             }
         });
+    });
+
+    it("does not load the theme folder configs if disabled", () => {
+        renderHook(() => useThemeFolderConfigs("BarChart", false));
+        expect(configFileSpy).not.toHaveBeenCalled();
     });
 });

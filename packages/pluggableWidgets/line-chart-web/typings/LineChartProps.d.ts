@@ -82,6 +82,7 @@ export interface LineChartContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
 }
@@ -101,6 +102,7 @@ export interface LineChartPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
 }

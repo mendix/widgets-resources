@@ -31,7 +31,8 @@ const defaultProps: ChartWidgetProps = {
     configOptions: {},
     layoutOptions: {},
     seriesOptions: {},
-    type: "LineChart"
+    type: "LineChart",
+    enableThemeConfig: false
 };
 
 describe("LineChart", () => {

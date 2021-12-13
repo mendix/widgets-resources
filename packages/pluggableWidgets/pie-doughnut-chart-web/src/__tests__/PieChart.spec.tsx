@@ -36,6 +36,7 @@ describe("The PieChart widget", () => {
                 seriesDataSource={ListValueBuilder().simple()}
                 seriesName={buildListExpression("name")}
                 seriesValueAttribute={new ListAttributeValueBuilder<Big>().build()}
+                enableThemeConfig={false}
                 {...setupBasicAttributes()}
                 {...props}
             />

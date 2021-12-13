@@ -85,6 +85,7 @@ export interface BarChartContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
 }
@@ -105,6 +106,7 @@ export interface BarChartPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
 }

@@ -136,6 +136,10 @@
         </propertyGroup>
         <propertyGroup caption="Advanced">
             <propertyGroup caption="Advanced">
+                <property key="enableThemeConfig" type="boolean" defaultValue="false">
+                    <caption>Enable theme folder config loading</caption>
+                    <description/>
+                </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>
                     <description/>

@@ -46,7 +46,7 @@ export function getProperties(
         transformGroupsIntoTabs(defaultProperties);
     } else {
         if (!showAdvancedOptions) {
-            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations"]);
+            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations", "enableThemeConfig"]);
         }
     }
 

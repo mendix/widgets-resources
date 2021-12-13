@@ -24,7 +24,8 @@ export function getProperties(
             hidePropertiesIn(defaultProperties, values, [
                 "customLayout",
                 "customConfigurations",
-                "customSeriesOptions"
+                "customSeriesOptions",
+                "enableThemeConfig"
             ]);
         }
     }

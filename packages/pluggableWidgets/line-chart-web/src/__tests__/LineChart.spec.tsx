@@ -31,6 +31,7 @@ describe("The LineChart widget", () => {
                 gridLines="none"
                 customLayout=""
                 customConfigurations=""
+                enableThemeConfig={false}
             />
         );
     }

@@ -85,6 +85,7 @@ export interface ColumnChartContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
 }
@@ -105,6 +106,7 @@ export interface ColumnChartPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
 }

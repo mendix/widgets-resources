@@ -61,6 +61,7 @@ export function PieChart(props: PieChartContainerProps): ReactElement | null {
             layoutOptions={pieChartLayoutOptions}
             configOptions={pieChartConfigOptions}
             seriesOptions={pieChartSeriesOptions}
+            enableThemeConfig={props.enableThemeConfig}
         />
     );
 }

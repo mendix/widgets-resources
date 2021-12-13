@@ -35,6 +35,7 @@ describe("The ColumnChart widget", () => {
                 gridLines="none"
                 customLayout=""
                 customConfigurations=""
+                enableThemeConfig={false}
                 {...chartProps}
             />
         );

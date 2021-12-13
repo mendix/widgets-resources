@@ -39,6 +39,7 @@ export interface PieChartContainerProps {
     height: number;
     onClickAction?: ActionValue;
     tooltipHoverText?: ListExpressionValue<string>;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
     customSeriesOptions: string;
@@ -66,6 +67,7 @@ export interface PieChartPreviewProps {
     height: number | null;
     onClickAction: {} | null;
     tooltipHoverText: string;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
     customSeriesOptions: string;

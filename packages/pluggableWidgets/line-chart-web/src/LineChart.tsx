@@ -62,6 +62,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
             layoutOptions={lineChartLayoutOptions}
             configOptions={lineChartConfigOptions}
             seriesOptions={lineChartSeriesOptions}
+            enableThemeConfig={props.enableThemeConfig}
         />
     );
 }
