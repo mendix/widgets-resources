@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue } from "mendix";
 
 export type TimerTypeEnum = "once" | "interval";
@@ -24,8 +25,10 @@ export interface AppEventsProps<Style> {
 }
 
 export interface AppEventsPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     onLoadAction: {} | null;
     onUnloadAction: {} | null;
     onResumeAction: {} | null;

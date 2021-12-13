@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeImage } from "mendix";
 import { Big } from "big.js";
 
@@ -34,8 +35,10 @@ export interface RatingProps<Style> {
 }
 
 export interface RatingPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     ratingAttribute: string;
     emptyIcon: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     icon: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;

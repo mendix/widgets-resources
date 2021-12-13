@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { DynamicValue } from "mendix";
 
 export interface VideoPlayerProps<Style> {
@@ -17,8 +18,10 @@ export interface VideoPlayerProps<Style> {
 }
 
 export interface VideoPlayerPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     videoUrl: string;
     autoStart: boolean;
     muted: boolean;

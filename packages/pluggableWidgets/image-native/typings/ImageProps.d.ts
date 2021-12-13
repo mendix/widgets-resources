@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, NativeIcon, NativeImage } from "mendix";
 
 export type DatasourceEnum = "image" | "imageUrl" | "icon";
@@ -38,8 +38,10 @@ export interface ImageProps<Style> {
 }
 
 export interface ImagePreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     datasource: DatasourceEnum;
     imageObject: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     defaultImageDynamic: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;

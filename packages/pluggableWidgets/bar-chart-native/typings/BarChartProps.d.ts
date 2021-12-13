@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
 
@@ -55,8 +56,10 @@ export interface BarChartProps<Style> {
 }
 
 export interface BarChartPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     presentation: PresentationEnum;
     barSeries: BarSeriesPreviewType[];
     sortOrder: SortOrderEnum;

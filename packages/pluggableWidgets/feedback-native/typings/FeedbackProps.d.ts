@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { DynamicValue, NativeImage } from "mendix";
 
 export interface FeedbackProps<Style> {
@@ -14,8 +15,10 @@ export interface FeedbackProps<Style> {
 }
 
 export interface FeedbackPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     sprintrapp: string;
     allowScreenshot: boolean;
     logo: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;

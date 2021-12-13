@@ -3,6 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
+import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export type FormatEnum = "hex" | "hsl" | "hsv" | "rgb";
@@ -20,8 +21,10 @@ export interface ColorPickerProps<Style> {
 }
 
 export interface ColorPickerPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     color: string;
     format: FormatEnum;
     showPreview: boolean;

@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { ActionValue, DynamicValue, EditableValue, NativeIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
@@ -54,8 +54,10 @@ export interface AccordionProps<Style> {
 }
 
 export interface AccordionPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     groups: GroupsPreviewType[];
     collapsible: boolean;
     collapseBehavior: CollapseBehaviorEnum;

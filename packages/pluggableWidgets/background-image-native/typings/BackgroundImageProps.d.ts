@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType, ReactNode } from "react";
+import { ComponentType, CSSProperties, ReactNode } from "react";
 import { DynamicValue, NativeImage } from "mendix";
 import { Big } from "big.js";
 
@@ -19,8 +19,10 @@ export interface BackgroundImageProps<Style> {
 }
 
 export interface BackgroundImagePreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     image: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
     resizeMode: ResizeModeEnum;
     opacity: number | null;
