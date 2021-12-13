@@ -2,6 +2,9 @@
 # If you are getting any errors regarding XMLschemas, check here:
 # https://stackoverflow.com/questions/46402772/failed-to-install-android-sdk-java-lang-noclassdeffounderror-javax-xml-bind-a
 
+# pull app repo
+
+
 ANDROID_VERSION=31
 
 echo "Checking Android prerequisites"

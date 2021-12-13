@@ -40,7 +40,11 @@
     "create-modules:native": "node ./scripts/release/createNativeModules.js",
     "create-modules:web": "node ./scripts/release/createWebModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
-    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js"
+    "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
+    "commit-msg": "commitlint --edit \"$1\"",
+    "setup-mobile": "npm run setup-android && npm run setup-ios",
+    "setup-android": "./detox/setup-android.sh",
+    "setup-ios": "./detox/setup-ios.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
@@ -60,7 +64,7 @@
     "@types/react": "~17.0.1",
     "@types/react-dom": "~17.0.1",
     "@types/react-native": "~0.63.30",
-    "@types/react-native-vector-icons": "^6.4.9",
+    "@types/react-native-vector-icons": "^6.4.6",
     "@types/react-test-renderer": "~17.0.1",
     "@types/xml2js": "^0.4.5",
     "cross-env": "^7.0.2",
@@ -85,6 +89,12 @@
     "recursive-copy": "^2.0.11",
     "ts-node": "^9.0.0",
     "zip-folder": "^1.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run validate-staged-widget-versions",
+      "commit-msg": "npm run commit-msg"
+    }
   },
   "commitlint": {
     "extends": [

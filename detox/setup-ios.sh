@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# pull app repo
+
+
 echo "Checking iOS prerequisites"
 if [[ $OSTYPE != 'darwin'* ]] &> /dev/null
 then
