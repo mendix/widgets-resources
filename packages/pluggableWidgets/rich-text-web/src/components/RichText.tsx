@@ -48,6 +48,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
           };
     const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<any>>({
         element,
+        // TODO To be defined with Rollup config, until then it will make cdn requests
         // editorUrl: "/widgets/ckeditor/ckeditor.js",
         type: editorType,
         config: {
