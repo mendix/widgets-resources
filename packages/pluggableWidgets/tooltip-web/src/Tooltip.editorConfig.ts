@@ -64,7 +64,7 @@ export function getPreview(values: TooltipPreviewProps, isDarkMode: boolean): St
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "grow",
-        backgroundColor: isDarkMode ? "#454545" : "#E7E7E9",
+        backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
         borders: true,
         borderWidth: 1,
         children: [
@@ -75,7 +75,7 @@ export function getPreview(values: TooltipPreviewProps, isDarkMode: boolean): St
                     {
                         type: "Text",
                         content: "Tooltip",
-                        fontColor: isDarkMode ? "#DEDEDE" : "#0A1324"
+                        fontColor: isDarkMode ? "#DEDEDE" : "#6B707B"
                     } as TextProps
                 ]
             }

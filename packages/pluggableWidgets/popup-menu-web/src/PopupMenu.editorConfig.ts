@@ -117,7 +117,7 @@ export function getPreview(values: PopupMenuPreviewProps, isDarkMode: boolean): 
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        backgroundColor: isDarkMode ? "#4F4F4F" : "#DAEFFB",
+        backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
         borders: true,
         borderWidth: 1,
         children: [
@@ -128,7 +128,7 @@ export function getPreview(values: PopupMenuPreviewProps, isDarkMode: boolean): 
                     {
                         type: "Text",
                         content: "Pop-up menu",
-                        fontColor: isDarkMode ? "#DEDEDE" : "#2074C8"
+                        fontColor: isDarkMode ? "#DEDEDE" : "#6B707B"
                     }
                 ]
             }
