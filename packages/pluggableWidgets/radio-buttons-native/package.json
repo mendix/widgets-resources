@@ -8,9 +8,6 @@
     "engines": {
         "node": ">=12"
     },
-    "config": {
-        "projectPath": "../..//"
-    },
     "packagePath": "mendix",
     "scripts": {
         "start": "pluggable-widgets-tools start:native",
