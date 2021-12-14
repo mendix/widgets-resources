@@ -43,8 +43,8 @@
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
     "commit-msg": "commitlint --edit \"$1\"",
     "setup-mobile": "npm run setup-android && npm run setup-ios",
-    "setup-android": "./detox/setup-android.sh",
-    "setup-ios": "./detox/setup-ios.sh"
+    "setup-android": "node ./detox/scripts/setup-android.js",
+    "setup-ios": "node ./detox/scripts/setup-ios.js"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",

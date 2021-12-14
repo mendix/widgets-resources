@@ -1,4 +1,7 @@
-module.exports = {
+exports.ANDROID_SDK_VERSION = 31;
+exports.IOS_SDK_VERSION = 15;
+
+exports = {
     "test-runner": "npx jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
     apps: {
@@ -16,13 +19,14 @@ module.exports = {
         ios: {
             type: "ios.simulator",
             device: {
-                type: "iPhone 12 Pro Max"
+                type: "iPhone 13 Pro Max",
+                os: `iOS ${this.IOS_SDK_VERSION}`
             }
         },
         android: {
             type: "android.emulator",
             device: {
-                avdName: "NATIVE_CONTENT_EMULATOR"
+                avdName: `EMULATOR_NATIVE_${this.ANDROID_SDK_VERSION}`
             }
         }
     },

@@ -10,8 +10,7 @@ node_modules
 mxproject
 coverage
 
-detox/ios/NativeComponents.app
-detox/ios/nativeTemplate.app
+detox/apps
 detox/*.log
 **/results
 mendixProject
