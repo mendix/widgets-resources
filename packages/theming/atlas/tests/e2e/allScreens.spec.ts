@@ -40,10 +40,10 @@ describe("Screenshots of the pages for", () => {
                 const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(20000);
+                    browser.pause(10000);
                 }
 
-                $("#content").waitForDisplayed({ timeout: 30000 });
+                $(".mx-placeholder").waitForDisplayed({ timeout: 30000 });
 
                 browser.saveElement($("#content"), url, {
                     removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
