@@ -32,6 +32,8 @@
     "react-plotly.js": "^2.5.1"
   },
   "files": [
-    "dist"
+    "dist",
+    "hooks",
+    "rollup"
   ]
 }
