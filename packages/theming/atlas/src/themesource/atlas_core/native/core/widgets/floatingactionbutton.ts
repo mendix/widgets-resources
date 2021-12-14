@@ -69,6 +69,7 @@ export const com_mendix_widget_native_floatingactionbutton_FloatingActionButton:
     secondaryButtonCaptionContainer: {
         // All ViewStyle properties are allowed
         backgroundColor: floatingActionButton.secondaryButtonCaptionContainer.backgroundColor,
+        borderColor: floatingActionButton.secondaryButtonCaptionContainer.borderColor,
         marginHorizontal: 5,
         elevation: 2,
         shadowOpacity: 0.3,

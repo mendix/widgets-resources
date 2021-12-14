@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We corrected the border styling for the Floating Action Button native widget when in Dark Mode.
+
 ## [3.0.8] Atlas Core - 2021-12-3
 ### Added
 - We added a design property to align the content of the image widget.
