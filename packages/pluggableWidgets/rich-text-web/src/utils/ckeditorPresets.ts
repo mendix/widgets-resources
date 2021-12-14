@@ -40,7 +40,10 @@ const TOOLBAR_GROUP: ToolbarGroup[] = [
 ];
 
 const TOOLBAR_ITEMS: ToolbarItems[] = [
-    { name: "document", items: ["Source", "-", "Save", "NewPage", "ExportPdf", "Preview", "Print", "-", "Templates"] },
+    {
+        name: "document",
+        items: ["Source", "-", "Save", "NewPage" /* "ExportPdf"*/, "Preview", "Print", "-", "Templates"]
+    },
     { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
     { name: "editing", items: ["Find", "Replace", "-", "SelectAll", "-", "Scayt"] },
     {
@@ -114,8 +117,9 @@ function SET_PRESET(type: "basic" | "standard" | "full"): CKEditorConfig {
             toolbarGroup.splice(6, 0, "/");
             config.toolbarGroups = toolbarGroup;
             config.removeButtons = "";
+            /* temporary removed exportpdf*/
             config.extraPlugins =
-                "save,templates,newpage,print,exportpdf,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks";
+                "save,templates,newpage,print,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks";
             break;
         default:
             config.toolbarGroups = [...TOOLBAR_GROUP];
@@ -140,9 +144,10 @@ function SET_CUSTOM(groups: string[], withGroupNames = true): CKEditorConfig {
             toolbar
         };
     } else {
+        /* temporary removed exportpdf*/
         return {
             extraPlugins:
-                "save,templates,newpage,print,exportpdf,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
+                "save,templates,newpage,print,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
             toolbar: groups
         };
     }
