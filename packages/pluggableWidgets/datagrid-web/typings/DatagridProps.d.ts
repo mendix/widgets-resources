@@ -29,7 +29,7 @@ export interface ColumnsType {
     content?: ListWidgetValue;
     dynamicText?: ListExpressionValue<string>;
     header?: DynamicValue<string>;
-    tooltip?: DynamicValue<string>;
+    tooltip?: ListExpressionValue<string>;
     filter?: ReactNode;
     sortable: boolean;
     resizable: boolean;

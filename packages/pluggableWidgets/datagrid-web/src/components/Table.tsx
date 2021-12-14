@@ -23,12 +23,14 @@ export type TableColumn = Omit<
     "attribute" | "columnClass" | "content" | "dynamicText" | "filter" | "showContentAs" | "tooltip"
 >;
 
+export type CellRenderer<T extends ObjectItem = ObjectItem> = (
+    renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
+    value: T,
+    columnIndex: number
+) => ReactElement;
+
 export interface TableProps<T extends ObjectItem> {
-    cellRenderer: (
-        renderWrapper: (children: ReactNode, className?: string, onClick?: () => void) => ReactElement,
-        value: T,
-        columnIndex: number
-    ) => ReactElement;
+    cellRenderer: CellRenderer<T>;
     className: string;
     columns: TableColumn[];
     columnsFilterable: boolean;

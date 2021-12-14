@@ -58,7 +58,7 @@
                                 <caption>Caption</caption>
                                 <description/>
                             </property>
-                            <property key="tooltip" type="textTemplate" required="false">
+                            <property key="tooltip" type="textTemplate" required="false" dataSource="../datasource">
                                 <caption>Tooltip</caption>
                                 <description />
                             </property>
