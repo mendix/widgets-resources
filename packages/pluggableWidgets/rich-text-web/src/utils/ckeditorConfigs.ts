@@ -1,6 +1,6 @@
 import { CKEditorConfig } from "ckeditor4-react";
 import { PresetEnum, AdvancedConfigType } from "../../typings/RichTextProps";
-import { SET_PRESET, TOOLBAR_GROUP, ToolbarGroup } from "./ckeditorPresets";
+import { SET_PRESET, TOOLBAR_GROUP, ToolbarGroup, ToolbarItems } from "./ckeditorPresets";
 
 interface Plugins {
     codesnippet: any;
@@ -17,7 +17,7 @@ const PLUGIN_CONFIGS: Plugins = {
 };
 
 export function getToolbarGroupByName(name: string): ToolbarGroup | undefined | string {
-    return TOOLBAR_GROUP.find((group: any) => group.name === name);
+    return TOOLBAR_GROUP.find((group: ToolbarGroup) => group.name === name);
 }
 
 export function defineEnterMode(type: string): number {
@@ -58,10 +58,9 @@ export function addPlugin(name: string, config: CKEditorConfig): CKEditorConfig 
     return config;
 }
 
-export function defineAdvancedGroups(items: AdvancedConfigType[]) {
+export function defineAdvancedGroups(items: AdvancedConfigType[]): ToolbarItems[] {
     const toolbarObj: any = {};
-    for (const i in items) {
-        const item = items[i];
+    items.forEach(item => {
         const id = item.ctItemToolbar;
         const type = item.ctItemType !== "seperator" ? item.ctItemType : "-";
 
@@ -69,14 +68,15 @@ export function defineAdvancedGroups(items: AdvancedConfigType[]) {
             toolbarObj[id] = [];
         }
         toolbarObj[id].push(type);
-    }
+    });
+
     const keys: any = Object.keys(toolbarObj);
     const toolbarArray: any = [];
-    for (const j in keys) {
+    keys.forEach((key: string) => {
         toolbarArray.push({
-            name: keys[j],
-            items: toolbarObj[keys[j]]
+            name: key,
+            items: toolbarObj[key]
         });
-    }
+    });
     return toolbarArray;
 }
