@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library";
+import { BarcodeFormat, BrowserMultiFormatReader, DecodeHintType } from "@zxing/library/cjs";
 
 const hints = new Map();
 // RSS_Expanded is not production ready yet.
