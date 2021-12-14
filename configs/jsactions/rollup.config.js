@@ -139,7 +139,8 @@ const nativeExternal = [
     /^react-native-reanimated(\/|$)/,
     /^react-native-svg(\/|$)/,
     /^react-native-vector-icons(\/|$)/,
-    /^react-navigation(\/|$)/
+    /^react-navigation(\/|$)/,
+    /^react-native-device-info(\/|$)/
 ];
 
 // These libraries are being used silently by @react-native-community/cameraroll and @react-native-community/geolocation and both dont have these libs as a peer or dependency
