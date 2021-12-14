@@ -40,7 +40,7 @@ describe("Screenshots of the pages for", () => {
                 const chartBar = $(".modebar");
 
                 if (pagesWithTimeout.includes(url)) {
-                    browser.pause(10000);
+                    browser.pause(20000);
                 }
 
                 $("#content").waitForDisplayed({ timeout: 30000 });
