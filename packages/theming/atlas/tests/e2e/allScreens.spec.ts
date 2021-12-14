@@ -23,7 +23,8 @@ const pagesWithTimeout = [
     "/p/web-grid",
     "/p/web-dashboard-actioncenter",
     "/p/web-dashboard-transactions",
-    "/p/web-detail-timeline"
+    "/p/web-detail-timeline",
+    "/p/range-sliders"
 ];
 
 describe("Screenshots of the pages for", () => {
@@ -42,7 +43,7 @@ describe("Screenshots of the pages for", () => {
                     browser.pause(10000);
                 }
 
-                $("#content").waitForDisplayed({ timeout: 30000 });
+                $(".mx-placeholder").waitForDisplayed({ timeout: 30000 });
 
                 browser.saveElement($("#content"), url, {
                     removeElements: [sprintrFeedbackWidget, mapsWidget, chartBar],
