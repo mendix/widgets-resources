@@ -23,7 +23,8 @@ const pagesWithTimeout = [
     "/p/web-grid",
     "/p/web-dashboard-actioncenter",
     "/p/web-dashboard-transactions",
-    "/p/web-detail-timeline"
+    "/p/web-detail-timeline",
+    "/p/range-sliders"
 ];
 
 describe("Screenshots of the pages for", () => {
