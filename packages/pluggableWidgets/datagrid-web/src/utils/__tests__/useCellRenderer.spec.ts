@@ -13,7 +13,6 @@ import { ColumnsType } from "../../../typings/DatagridProps";
 const col: ColumnsType = {
     showContentAs: "attribute",
     header: dynamicValue("Test"),
-    // content: buildWidgetValue("Jupiter"),
     sortable: false,
     resizable: false,
     draggable: false,
