@@ -52,17 +52,7 @@ const TOOLBAR_ITEMS: ToolbarItems[] = [
     },
     {
         name: "basicstyles",
-        items: [
-            "Bold",
-            "Italic",
-            "Underline",
-            "Strike",
-            "Subscript",
-            "Superscript",
-            "-",
-            "CopyFormatting",
-            "RemoveFormat"
-        ]
+        items: ["Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript"]
     },
     {
         name: "paragraph",
@@ -117,9 +107,9 @@ function SET_PRESET(type: "basic" | "standard" | "full"): CKEditorConfig {
             toolbarGroup.splice(6, 0, "/");
             config.toolbarGroups = toolbarGroup;
             config.removeButtons = "";
-            /* temporary removed exportpdf*/
+            /* temporary removed exportpdf, copyformatting*/
             config.extraPlugins =
-                "save,templates,newpage,print,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks";
+                "save,templates,newpage,print,forms,find,selectall,div,divarea,justify,bidi,language,font,colorbutton,showblocks";
             break;
         default:
             config.toolbarGroups = [...TOOLBAR_GROUP];
@@ -144,10 +134,10 @@ function SET_CUSTOM(groups: string[], withGroupNames = true): CKEditorConfig {
             toolbar
         };
     } else {
-        /* temporary removed exportpdf*/
+        /* temporary removed exportpdf,copyformatting*/
         return {
             extraPlugins:
-                "save,templates,newpage,print,forms,find,selectall,copyformatting,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
+                "save,templates,newpage,print,forms,find,selectall,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
             toolbar: groups
         };
     }

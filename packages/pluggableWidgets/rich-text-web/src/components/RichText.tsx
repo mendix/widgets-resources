@@ -9,7 +9,6 @@ import { MainEditor } from "./MainEditor";
 
 export interface RichTextProps {
     name: string;
-    class: string;
     readOnly: boolean;
     spellChecker: boolean;
     sanitizeContent?: boolean;
@@ -101,7 +100,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
     }, [props]);
     return (
         <div
-            className={classNames(props.class, "widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}
+            className={classNames("widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}
             style={{ width, height }}
         >
             <div ref={setElement} id={props.name} />

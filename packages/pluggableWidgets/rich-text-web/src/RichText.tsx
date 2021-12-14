@@ -51,7 +51,6 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             }
             sanitizeContent={props.sanitizeContent}
             name={props.name}
-            class={props.class}
             editorType={props.editorType}
             readOnlyStyle={props.readOnlyStyle}
             readOnly={props.stringAttribute.readOnly}

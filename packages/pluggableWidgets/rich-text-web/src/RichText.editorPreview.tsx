@@ -3,8 +3,7 @@ import { RichTextPreviewProps } from "../typings/RichTextProps";
 import { RichTextEditor } from "./components/RichText";
 import { getPreset } from "./utils/ckeditorConfigs";
 
-interface PreviewProps extends Omit<RichTextPreviewProps, "class"> {
-    className: string;
+interface PreviewProps extends Omit<RichTextPreviewProps, "readOnly"> {
     readOnly: boolean;
     name: string;
 }
@@ -20,7 +19,6 @@ export const preview = (props: PreviewProps): ReactElement => {
             toolbar={getPreset("basic")}
             advancedConfig={null}
             spellChecker={false}
-            class={props.className}
             editorType={props.editorType}
             readOnlyStyle={props.readOnlyStyle}
         />

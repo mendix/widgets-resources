@@ -13,11 +13,13 @@ export default args => {
         if (index === 0) {
             config.plugins.push(copyCKEditorDirToDist(outDir));
         }
+
         /* Need to replace icon path from bundled js files, it's step 0 and 1, 
         tried to find much safer comparison but there are no uniqueness, so the best idea is to replace the path by index */
-        if (index === 0 || index === 1) {
+        /* if (index === 0 || index === 1) {
             config.plugins.push(replaceIconPath());
-        }
+        }*/
+
         /* this step is required by sanitize-html library */
         config.plugins.push(json());
         return { ...config };
@@ -47,6 +49,7 @@ function copyCKEditorDirToDist(outDir) {
                     "**/ckeditor.js",
                     "**/config.js",
                     "**/styles.js",
+                    "**/contents.css",
                     "**/README.md",
                     "**/SECURITY.md",
                     "!**/samples/**/*.*"

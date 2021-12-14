@@ -23,7 +23,6 @@ describe("RichText", () => {
             readOnly: false,
             name: "RichText",
             spellChecker: false,
-            class: "",
             readOnlyStyle: "text",
             editorType: "classic",
             enterMode: "paragraph",

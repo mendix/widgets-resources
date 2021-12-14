@@ -3,7 +3,6 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { CSSProperties } from "react";
 import { ActionValue, EditableValue } from "mendix";
 
 export type EditorTypeEnum = "classic" | "inline";
@@ -106,8 +105,6 @@ export interface AdvancedConfigPreviewType {
 
 export interface RichTextContainerProps {
     name: string;
-    class: string;
-    style?: CSSProperties;
     tabIndex?: number;
     id: string;
     advancedMode: boolean;
@@ -141,16 +138,13 @@ export interface RichTextContainerProps {
     shiftEnterMode: ShiftEnterModeEnum;
     spellChecker: boolean;
     codeHighlight: boolean;
-    wordCount: boolean;
-    maxChars: number;
     advancedContentFilter: AdvancedContentFilterEnum;
     allowedContent: string;
     disallowedContent: string;
 }
 
 export interface RichTextPreviewProps {
-    class: string;
-    style: string;
+    readOnly: boolean;
     advancedMode: boolean;
     editorType: EditorTypeEnum;
     stringAttribute: string;
@@ -182,8 +176,6 @@ export interface RichTextPreviewProps {
     shiftEnterMode: ShiftEnterModeEnum;
     spellChecker: boolean;
     codeHighlight: boolean;
-    wordCount: boolean;
-    maxChars: number | null;
     advancedContentFilter: AdvancedContentFilterEnum;
     allowedContent: string;
     disallowedContent: string;

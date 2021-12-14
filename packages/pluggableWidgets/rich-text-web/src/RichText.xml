@@ -282,14 +282,6 @@
                 <caption>Enable code highlight</caption>
                 <description/>
             </property>
-            <property key="wordCount" type="boolean" defaultValue="false">
-                <caption>Word count</caption>
-                <description/>
-            </property>
-            <property key="maxChars" type="integer" defaultValue="0">
-                <caption>Maximum characters</caption>
-                <description/>
-            </property>
             <property key="advancedContentFilter" type="enumeration" defaultValue="auto">
                 <caption>Advanced content filter</caption>
                 <description/>
