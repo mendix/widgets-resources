@@ -120,7 +120,7 @@ export default async args => {
             filter: [
                 "**/*.*",
                 "{license,LICENSE}",
-                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,.bin,demo,docs,test,jest,example*}/**/*",
                 "!**/*.{config,setup}.*",
                 "!**/*.{podspec,flow}"
             ]
