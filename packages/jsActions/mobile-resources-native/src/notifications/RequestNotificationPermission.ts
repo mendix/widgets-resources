@@ -23,7 +23,7 @@ export async function RequestNotificationPermission(): Promise<boolean> {
     return messaging()
         .requestPermission()
         .then(() =>
-            Platform.OS === "ios"
+            Platform.OS === "ios" && !messaging().isDeviceRegisteredForRemoteMessages
                 ? messaging()
                       .registerDeviceForRemoteMessages()
                       .then(() => true)
