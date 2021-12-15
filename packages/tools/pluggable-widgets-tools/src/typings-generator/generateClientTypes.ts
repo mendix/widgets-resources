@@ -40,16 +40,24 @@ ${generateClientTypeBody(properties, false, results, resolveProp)}
     return results;
 }
 
+function actionIsLinkedInAnAttribute(key: string, properties: Property[]): boolean {
+    return properties.some(prop => {
+        if (prop.$.type === "attribute" && prop.$.onChange === key) {
+            return true;
+        }
+        if (prop.$.type === "object" && prop.properties && prop.properties.length > 0) {
+            return prop.properties.some(prop => actionIsLinkedInAnAttribute(`../${key}`, extractProperties(prop)));
+        }
+        return false;
+    });
+}
+
 function generateClientTypeBody(
     properties: Property[],
     isNative: boolean,
     generatedTypes: string[],
     resolveProp: (key: string) => Property | undefined
 ) {
-    function actionIsLinkedInAnAttribute(key: string): boolean {
-        return properties.some(prop => prop.$.type === "attribute" && prop.$.onChange === key);
-    }
-
     return properties
         .map(prop => {
             const isOptional =
@@ -58,7 +66,7 @@ function generateClientTypeBody(
                     prop.$.type === "action" ||
                     (prop.$.dataSource && resolveProp(prop.$.dataSource)?.$.required === "false"));
 
-            if (prop.$.type === "action" && actionIsLinkedInAnAttribute(prop.$.key)) {
+            if (prop.$.type === "action" && actionIsLinkedInAnAttribute(prop.$.key, properties)) {
                 return undefined;
             }
 

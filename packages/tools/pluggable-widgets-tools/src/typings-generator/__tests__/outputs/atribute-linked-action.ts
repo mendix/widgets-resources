@@ -18,3 +18,37 @@ export interface MyWidgetPreviewProps {
     onToggleCollapsed: {} | null;
 }
 `;
+
+export const attributeNestedLinkedActionOutput = `/**
+ * This file was generated from MyWidget.xml
+ * WARNING: All changes made to this file will be overwritten
+ * @author Mendix UI Content Team
+ */
+import { ActionValue, EditableValue } from "mendix";
+
+export interface DatasourcePropertiesType {
+    collapsedFirst?: EditableValue<boolean>;
+    collapsedSecond?: EditableValue<boolean>;
+    onToggleCollapsedSecond?: ActionValue;
+}
+
+export interface DatasourcePropertiesPreviewType {
+    collapsedFirst: string;
+    onToggleCollapsed: {} | null;
+    collapsedSecond: string;
+    onToggleCollapsedSecond: {} | null;
+}
+
+export interface MyWidgetContainerProps {
+    name: string;
+    tabIndex?: number;
+    id: string;
+    datasourceProperties: DatasourcePropertiesType[];
+}
+
+export interface MyWidgetPreviewProps {
+    readOnly: boolean;
+    onToggleCollapsed: {} | null;
+    datasourceProperties: DatasourcePropertiesPreviewType[];
+}
+`;
