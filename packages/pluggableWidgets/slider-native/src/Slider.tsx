@@ -85,7 +85,9 @@ export function Slider(props: Props): ReactElement {
             />
             {!validProps && <Text style={styles.validationMessage}>{validationMessages.join("\n")}</Text>}
             {props.valueAttribute.validation && (
-                <Text style={styles.validationMessage}>{props.valueAttribute.validation}</Text>
+                <Text style={styles.validationMessage} testID={`${props.name}-validation-message`}>
+                    {props.valueAttribute.validation}
+                </Text>
             )}
         </View>
     );

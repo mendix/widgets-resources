@@ -37,7 +37,7 @@ beforeAll(async () => {
             detoxURLBlacklistRegex: ".*firestore.*"
         },
         // JS actions
-        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES" }
+        permissions: { faceid: "YES", location: "inuse", camera: "YES", photos: "YES", notifications: "YES" }
     });
 
     if (device.getPlatform() === "ios") {
@@ -45,8 +45,8 @@ beforeAll(async () => {
     }
     await waitFor(element(by.id("$screen")).atIndex(0))
         .toBeVisible()
-        .withTimeout(20000);
-}, 120000);
+        .withTimeout(180000);
+}, 360000);
 
 beforeEach(async () => {
     await adapter.beforeEach();
