@@ -40,13 +40,15 @@ ${generateClientTypeBody(properties, false, results, resolveProp)}
     return results;
 }
 
-function actionIsLinkedInAnAttribute(key: string, properties: Property[]): boolean {
+function actionIsLinkedInAnAttribute(propertyPath: string, properties: Property[]): boolean {
     return properties.some(prop => {
-        if (prop.$.type === "attribute" && prop.$.onChange === key) {
+        if (prop.$.type === "attribute" && prop.$.onChange === propertyPath) {
             return true;
         }
         if (prop.$.type === "object" && prop.properties && prop.properties.length > 0) {
-            return prop.properties.some(prop => actionIsLinkedInAnAttribute(`../${key}`, extractProperties(prop)));
+            return prop.properties.some(prop =>
+                actionIsLinkedInAnAttribute(`../${propertyPath}`, extractProperties(prop))
+            );
         }
         return false;
     });
