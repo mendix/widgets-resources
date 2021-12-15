@@ -13,6 +13,7 @@ import {
 import { AccordionContainerProps, AccordionPreviewProps, GroupsPreviewType } from "../typings/AccordionProps";
 
 import ChevronSVG from "./assets/ChevronStructurePreview.svg";
+import ChevronSVGDark from "./assets/ChevronStructurePreviewDark.svg";
 
 export function getProperties(
     values: AccordionContainerProps,
@@ -104,7 +105,7 @@ export function check(values: AccordionPreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: AccordionPreviewProps): StructurePreviewProps | null {
+export function getPreview(values: AccordionPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     const groups =
         values.groups.length > 0
             ? values.groups
@@ -128,7 +129,7 @@ export function getPreview(values: AccordionPreviewProps): StructurePreviewProps
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        backgroundColor: "#daeffb",
+        backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
         borders: true,
         borderWidth: 1,
         children: [
@@ -139,7 +140,7 @@ export function getPreview(values: AccordionPreviewProps): StructurePreviewProps
                     {
                         type: "Text",
                         content: "Accordion",
-                        fontColor: "#2074c8"
+                        fontColor: isDarkMode ? "#DEDEDE" : "#6B707B"
                     }
                 ]
             }
@@ -161,7 +162,8 @@ export function getPreview(values: AccordionPreviewProps): StructurePreviewProps
                         headerTextIconPadding,
                         headerTextFontSize,
                         index,
-                        values.groups.length === 0
+                        values.groups.length === 0,
+                        isDarkMode
                     )
                 ];
             }, [])
@@ -175,7 +177,8 @@ function getGroupPreview(
     headerTextIconPadding: number,
     headerTextFontSize: number,
     index: number,
-    groupsEmpty: boolean
+    groupsEmpty: boolean,
+    isDarkMode: boolean
 ): StructurePreviewProps {
     const content = {
         type: "Container",
@@ -190,7 +193,7 @@ function getGroupPreview(
                         columnSize: "grow",
                         children: [
                             ...(values.collapsible && values.showIcon === "left"
-                                ? [getIconPreview(group, headerTextIconPadding)]
+                                ? [getIconPreview(group, headerTextIconPadding, isDarkMode)]
                                 : []),
                             {
                                 type: "Container",
@@ -212,7 +215,7 @@ function getGroupPreview(
                                 ]
                             },
                             ...(values.collapsible && values.showIcon === "right"
-                                ? [getIconPreview(group, headerTextIconPadding)]
+                                ? [getIconPreview(group, headerTextIconPadding, isDarkMode)]
                                 : [])
                         ]
                     }
@@ -259,14 +262,16 @@ function getGroupPreview(
           };
 }
 
-function getIconPreview(group: GroupsPreviewType, headerTextIconPadding: number): ContainerProps {
+function getIconPreview(group: GroupsPreviewType, headerTextIconPadding: number, isDarkMode: boolean): ContainerProps {
     return {
         type: "Container",
         padding: group.headerRenderMode === "text" ? headerTextIconPadding : 21,
         children: [
             {
                 type: "Image",
-                document: decodeURIComponent(ChevronSVG.replace("data:image/svg+xml,", "")),
+                document: decodeURIComponent(
+                    (isDarkMode ? ChevronSVGDark : ChevronSVG).replace("data:image/svg+xml,", "")
+                ),
                 width: 14
             }
         ]

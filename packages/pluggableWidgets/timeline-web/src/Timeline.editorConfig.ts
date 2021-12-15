@@ -7,6 +7,7 @@ import {
 } from "@mendix/piw-utils-internal";
 import { TimelinePreviewProps } from "../typings/TimelineProps";
 import lineAndDotSVG from "./assets/lineAndDot.svg";
+import lineAndDotSVGDark from "./assets/lineAndDot-dark.svg";
 import { getHeaderOption, GroupHeaderConfig } from "./utils/utils";
 
 export function getProperties(values: TimelinePreviewProps, defaultProperties: Properties): Properties {
@@ -75,7 +76,7 @@ export function check(values: TimelinePreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: TimelinePreviewProps): StructurePreviewProps | null {
+export function getPreview(values: TimelinePreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     if (values.customVisualization) {
         return null;
     }
@@ -114,18 +115,20 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
                 ],
                 columnSize: "grow"
             },
-            buildRow(values),
-            buildRow(values)
+            buildRow(values, isDarkMode),
+            buildRow(values, isDarkMode)
         ]
     };
 
-    function buildRow(values: TimelinePreviewProps): StructurePreviewProps {
+    function buildRow(values: TimelinePreviewProps, isDarkMode: boolean): StructurePreviewProps {
         return {
             type: "RowLayout",
             children: [
                 {
                     type: "Image",
-                    document: decodeURIComponent(lineAndDotSVG.replace("data:image/svg+xml,", "")),
+                    document: decodeURIComponent(
+                        (isDarkMode ? lineAndDotSVGDark : lineAndDotSVG).replace("data:image/svg+xml,", "")
+                    ),
                     width: 65,
                     grow: 0
                 },
@@ -138,7 +141,11 @@ export function getPreview(values: TimelinePreviewProps): StructurePreviewProps 
                             children: [
                                 { type: "Text", content: values.title || "Title", bold: true },
                                 { type: "Text", content: "", grow: 3 },
-                                { type: "Text", content: values.timeIndication || "Time", fontColor: "#264AE5" }
+                                {
+                                    type: "Text",
+                                    content: values.timeIndication || "Time",
+                                    fontColor: isDarkMode ? "#8AC4FF" : "#264AE5"
+                                }
                             ]
                         },
                         { type: "Container", children: [], padding: 4 },

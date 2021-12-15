@@ -1,7 +1,7 @@
 {
   "name": "tooltip-web",
   "widgetName": "Tooltip",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shows a value inside a colored tooltip or label",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
@@ -15,7 +15,7 @@
   },
   "marketplace": {
     "minimumMXVersion": "9.6.0",
-    "marketplaceId": 0
+    "marketplaceId": 119160
   },
   "testProject": {
     "githubUrl": "https://github.com/mendix/testProjects",

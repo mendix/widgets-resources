@@ -1,6 +1,7 @@
 import { DatagridDropdownFilterPreviewProps } from "../typings/DatagridDropdownFilterProps";
 import {
     chevronDownIcon,
+    chevronDownIconDark,
     ContainerProps,
     hidePropertiesIn,
     hidePropertyIn,
@@ -28,7 +29,7 @@ export function getProperties(
     return defaultProperties;
 }
 
-export const getPreview = (values: DatagridDropdownFilterPreviewProps): StructurePreviewProps => {
+export const getPreview = (values: DatagridDropdownFilterPreviewProps, isDarkMode: boolean): StructurePreviewProps => {
     return {
         type: "RowLayout",
         borders: true,
@@ -39,7 +40,7 @@ export const getPreview = (values: DatagridDropdownFilterPreviewProps): Structur
             {
                 type: "RowLayout",
                 columnSize: "grow",
-                backgroundColor: "#FFFFFF",
+                backgroundColor: isDarkMode ? "#313131" : "#FFFFFF",
                 children: [
                     {
                         type: "Container",
@@ -47,7 +48,13 @@ export const getPreview = (values: DatagridDropdownFilterPreviewProps): Structur
                         children: [
                             {
                                 type: "Text",
-                                fontColor: values.emptyOptionCaption ? "#BBBBBB" : "#FFF",
+                                fontColor: values.emptyOptionCaption
+                                    ? isDarkMode
+                                        ? "#A4A4A4"
+                                        : "#BBBBBB"
+                                    : isDarkMode
+                                    ? "#313131"
+                                    : "#FFF",
                                 italic: true,
                                 content: values.emptyOptionCaption ? values.emptyOptionCaption : "Sample"
                             } as TextProps
@@ -61,7 +68,7 @@ export const getPreview = (values: DatagridDropdownFilterPreviewProps): Structur
                         children: [
                             {
                                 type: "Image",
-                                document: chevronDownIcon
+                                document: isDarkMode ? chevronDownIconDark : chevronDownIcon
                             } as ImageProps
                         ]
                     } as ContainerProps

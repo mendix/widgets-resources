@@ -109,17 +109,40 @@ export function check(values: PopupMenuPreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps | null {
+export function getPreview(values: PopupMenuPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     if (values.advancedMode) {
         return null;
     }
 
-    return {
-        type: "Container",
+    const titleHeader: RowLayoutProps = {
+        type: "RowLayout",
+        columnSize: "fixed",
+        backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
+        borders: true,
+        borderWidth: 1,
         children: [
             {
                 type: "Container",
-                backgroundColor: values.menuTrigger.widgetCount === 0 ? "#F5F5F5" : undefined,
+                padding: 4,
+                children: [
+                    {
+                        type: "Text",
+                        content: "Pop-up menu",
+                        fontColor: isDarkMode ? "#DEDEDE" : "#6B707B"
+                    }
+                ]
+            }
+        ]
+    };
+
+    return {
+        type: "Container",
+        children: [
+            titleHeader,
+            {
+                type: "Container",
+                backgroundColor:
+                    values.menuTrigger.widgetCount === 0 ? (isDarkMode ? undefined : "#F5F5F5") : undefined,
                 children: [
                     {
                         type: "DropZone",
@@ -159,7 +182,14 @@ export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps
             item =>
                 ({
                     type: "Container",
-                    backgroundColor: item.itemType === "divider" ? "#ced0d3" : "#fff",
+                    backgroundColor:
+                        item.itemType === "divider"
+                            ? isDarkMode
+                                ? "#848484"
+                                : "#ced0d3"
+                            : isDarkMode
+                            ? "#313131"
+                            : "#fff",
                     children: [
                         {
                             type: "Selectable",
@@ -170,7 +200,7 @@ export function getPreview(values: PopupMenuPreviewProps): StructurePreviewProps
                                 children: [
                                     {
                                         type: "Text",
-                                        fontColor: "#555555",
+                                        fontColor: isDarkMode ? "#DEDEDE" : "#555555",
                                         content: item.caption
                                     } as TextProps
                                 ]

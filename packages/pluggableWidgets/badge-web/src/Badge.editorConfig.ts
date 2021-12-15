@@ -1,7 +1,7 @@
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { BadgePreviewProps } from "../typings/BadgeProps";
 
-export function getPreview(values: BadgePreviewProps): StructurePreviewProps {
+export function getPreview(values: BadgePreviewProps, isDarkMode: boolean): StructurePreviewProps {
     return {
         type: "RowLayout",
         columnSize: "grow",
@@ -23,7 +23,7 @@ export function getPreview(values: BadgePreviewProps): StructurePreviewProps {
                         padding: values.value ? 8 : 18
                     }
                 ],
-                backgroundColor: "#264AE5",
+                backgroundColor: isDarkMode ? "#579BF9" : "#264AE5",
                 borderRadius: values.type === "badge" ? 22 : 8
             },
             { type: "Container", grow: 2 }

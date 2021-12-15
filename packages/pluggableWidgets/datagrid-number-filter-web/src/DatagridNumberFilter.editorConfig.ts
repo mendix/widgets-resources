@@ -1,15 +1,21 @@
 import {
     ContainerProps,
     equalsIcon,
+    equalsIconDark,
     greaterThanEqualIcon,
+    greaterThanEqualIconDark,
     greaterThanIcon,
+    greaterThanIconDark,
     hidePropertiesIn,
     hidePropertyIn,
     ImageProps,
     notEqualIcon,
+    notEqualIconDark,
     Properties,
     smallerThanEqualIcon,
+    smallerThanEqualIconDark,
     smallerThanIcon,
+    smallerThanIconDark,
     StructurePreviewProps,
     TextProps
 } from "@mendix/piw-utils-internal";
@@ -33,7 +39,7 @@ export function getProperties(
     return defaultProperties;
 }
 
-export const getPreview = (values: DatagridNumberFilterPreviewProps): StructurePreviewProps => {
+export const getPreview = (values: DatagridNumberFilterPreviewProps, isDarkMode: boolean): StructurePreviewProps => {
     const adjustableByUserContainer = values.adjustable
         ? [
               {
@@ -43,7 +49,7 @@ export const getPreview = (values: DatagridNumberFilterPreviewProps): StructureP
                   children: [
                       {
                           type: "Image",
-                          document: getSvgContent(values.defaultFilter)
+                          document: getSvgContent(values.defaultFilter, isDarkMode)
                       } as ImageProps
                   ]
               } as ContainerProps,
@@ -65,7 +71,7 @@ export const getPreview = (values: DatagridNumberFilterPreviewProps): StructureP
             {
                 type: "RowLayout",
                 columnSize: "grow",
-                backgroundColor: "#FFFFFF",
+                backgroundColor: isDarkMode ? "#313131" : "#FFFFFF",
                 children: [
                     ...adjustableByUserContainer,
                     {
@@ -74,7 +80,13 @@ export const getPreview = (values: DatagridNumberFilterPreviewProps): StructureP
                         children: [
                             {
                                 type: "Text",
-                                fontColor: values.placeholder ? "#BBBBBB" : "#FFF",
+                                fontColor: values.placeholder
+                                    ? isDarkMode
+                                        ? "#A4A4A4"
+                                        : "#BBBBBB"
+                                    : isDarkMode
+                                    ? "#313131"
+                                    : "#FFF",
                                 italic: true,
                                 content: values.placeholder ? values.placeholder : "Sample"
                             } as TextProps
@@ -87,19 +99,19 @@ export const getPreview = (values: DatagridNumberFilterPreviewProps): StructureP
     };
 };
 
-function getSvgContent(type: DefaultFilterEnum): string {
+function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
     switch (type) {
         case "equal":
-            return equalsIcon;
+            return isDarkMode ? equalsIconDark : equalsIcon;
         case "notEqual":
-            return notEqualIcon;
+            return isDarkMode ? notEqualIconDark : notEqualIcon;
         case "greater":
-            return greaterThanIcon;
+            return isDarkMode ? greaterThanIconDark : greaterThanIcon;
         case "greaterEqual":
-            return greaterThanEqualIcon;
+            return isDarkMode ? greaterThanEqualIconDark : greaterThanEqualIcon;
         case "smaller":
-            return smallerThanIcon;
+            return isDarkMode ? smallerThanIconDark : smallerThanIcon;
         case "smallerEqual":
-            return smallerThanEqualIcon;
+            return isDarkMode ? smallerThanEqualIconDark : smallerThanEqualIcon;
     }
 }

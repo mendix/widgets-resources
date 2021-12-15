@@ -36,10 +36,10 @@
                     <caption>Tooltip position</caption>
                     <description>How to position the tooltip in relation to the trigger element - at the top, to the left, at the bottom or to the right.</description>
                     <enumerationValues>
-                        <enumerationValue key="top">Top</enumerationValue>
                         <enumerationValue key="left">Left</enumerationValue>
-                        <enumerationValue key="bottom">Bottom</enumerationValue>
                         <enumerationValue key="right">Right</enumerationValue>
+                        <enumerationValue key="top">Top</enumerationValue>
+                        <enumerationValue key="bottom">Bottom</enumerationValue>
                     </enumerationValues>
                 </property>
                 <property key="arrowPosition" type="enumeration" defaultValue="none">

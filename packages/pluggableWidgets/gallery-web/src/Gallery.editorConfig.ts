@@ -75,7 +75,7 @@ export function check(values: GalleryPreviewProps): Problem[] {
     return errors;
 }
 
-export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
+export function getPreview(values: GalleryPreviewProps, isDarkMode: boolean): StructurePreviewProps {
     const filterCaption =
         values.filterList.length > 0
             ? values.sortList.length > 0
@@ -87,7 +87,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
     const titleHeader: RowLayoutProps = {
         type: "RowLayout",
         columnSize: "fixed",
-        backgroundColor: "#daeffb",
+        backgroundColor: isDarkMode ? "#3B5C8F" : "#DAEFFB",
         borders: true,
         borderWidth: 1,
         children: [
@@ -98,7 +98,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                     {
                         type: "Text",
                         content: "Gallery",
-                        fontColor: "#2074c8"
+                        fontColor: isDarkMode ? "#6DB1FE" : "#2074C8"
                     }
                 ]
             }
@@ -154,7 +154,7 @@ export function getPreview(values: GalleryPreviewProps): StructurePreviewProps {
                                     "Column",
                                     values.tabletItems!
                                 )}, Phone ${values.phoneItems} ${getSingularPlural("Column", values.phoneItems!)}`,
-                                fontColor: "#899499"
+                                fontColor: isDarkMode ? "#DEDEDE" : "#899499"
                             }
                         ]
                     }

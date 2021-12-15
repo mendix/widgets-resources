@@ -250,7 +250,7 @@ export default async args => {
                 () => {
                     cp(join(sourcePath, "src/**/*.xml"), outDir);
                     if (existsSync(`src/${widgetName}.icon.png`) || existsSync(`src/${widgetName}.tile.png`)) {
-                        cp(join(sourcePath, `src/${widgetName}.@(tile|icon).png`), outDir);
+                        cp(join(sourcePath, `src/${widgetName}.@(tile|icon)?(.dark).png`), outDir);
                     }
                 }
             ]),
