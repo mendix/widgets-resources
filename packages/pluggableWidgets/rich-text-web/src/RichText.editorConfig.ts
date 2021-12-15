@@ -1,4 +1,10 @@
-import { Problem, Properties, hidePropertiesIn } from "@mendix/piw-utils-internal";
+import {
+    Problem,
+    Properties,
+    hidePropertiesIn,
+    transformGroupsIntoTabs,
+    hidePropertyIn
+} from "@mendix/piw-utils-internal";
 import { RichTextPreviewProps } from "../typings/RichTextProps";
 
 const advancedModeItems: Array<keyof RichTextPreviewProps> = [
@@ -26,13 +32,11 @@ const toolbarGroups: Array<keyof RichTextPreviewProps> = [
     "separator2Group"
 ];
 
-export function getProperties(values: RichTextPreviewProps, defaultProperties: Properties): Properties {
-    if (!values.advancedMode) {
-        hidePropertiesIn(defaultProperties, values, advancedModeItems);
-    }
-    if (values.advancedMode && values.advancedContentFilter === "auto") {
-        hidePropertiesIn(defaultProperties, values, ["allowedContent", "disallowedContent"]);
-    }
+export function getProperties(
+    values: RichTextPreviewProps,
+    defaultProperties: Properties,
+    platform: "web" | "desktop"
+): Properties {
     if (values.preset !== "custom") {
         hidePropertiesIn(defaultProperties, values, toolbarGroups.concat(["toolbarConfig", "advancedConfig"]));
     }
@@ -42,7 +46,17 @@ export function getProperties(values: RichTextPreviewProps, defaultProperties: P
     if (values.toolbarConfig === "advanced") {
         hidePropertiesIn(defaultProperties, values, toolbarGroups);
     }
-
+    if (values.advancedContentFilter === "auto") {
+        hidePropertiesIn(defaultProperties, values, ["allowedContent", "disallowedContent"]);
+    }
+    if (platform === "web") {
+        transformGroupsIntoTabs(defaultProperties);
+        hidePropertyIn(defaultProperties, values, "advancedMode");
+    } else {
+        if (!values.advancedMode) {
+            hidePropertiesIn(defaultProperties, values, advancedModeItems);
+        }
+    }
     return defaultProperties;
 }
 

@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - We added a lot of cool features such as code highlight, allow-disallow content filtering, customizable toolbar, general toolbar presets (**Basic**, **Advanced**, **Full**).
 - We added read only style modes.
 - We added editor style mode **(Toolbar | Inline)**.
+
 ### Changed
 - We changed the core library for Rich Text. Moved from Quill to CKEditor4.
 

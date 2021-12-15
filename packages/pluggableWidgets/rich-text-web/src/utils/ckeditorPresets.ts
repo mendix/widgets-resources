@@ -84,7 +84,7 @@ const TOOLBAR_ITEMS: ToolbarItems[] = [
     { name: "about", items: ["About"] }
 ];
 
-function SET_PRESET(type: "basic" | "standard" | "full"): CKEditorConfig {
+function createPreset(type: "basic" | "standard" | "full"): CKEditorConfig {
     const config: CKEditorConfig = {};
     let toolbarGroup: Array<ToolbarGroup | string> = [];
     switch (type) {
@@ -117,7 +117,7 @@ function SET_PRESET(type: "basic" | "standard" | "full"): CKEditorConfig {
     return config;
 }
 
-function SET_CUSTOM(groups: string[], withGroupNames = true): CKEditorConfig {
+function createCustomToolbar(groups: string[] | ToolbarItems[], withGroupNames = true): CKEditorConfig {
     if (withGroupNames) {
         const toolbar: Array<ToolbarItems | string> = [];
         groups.forEach(groupName => {
@@ -143,4 +143,4 @@ function SET_CUSTOM(groups: string[], withGroupNames = true): CKEditorConfig {
     }
 }
 
-export { TOOLBAR_GROUP, SET_PRESET, SET_CUSTOM };
+export { TOOLBAR_GROUP, createPreset, createCustomToolbar };

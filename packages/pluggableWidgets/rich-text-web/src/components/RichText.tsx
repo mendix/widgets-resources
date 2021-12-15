@@ -1,7 +1,7 @@
-import { createElement, ReactElement, useState, useMemo, useEffect } from "react";
+import { createElement, ReactElement, useState, useEffect } from "react";
 import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
-import { defineEnterMode, addPlugin } from "../utils/ckeditorConfigs";
+import { defineEnterMode, addPlugin, PluginName } from "../utils/ckeditorConfigs";
 import sanitizeHtml from "sanitize-html";
 import classNames from "classnames";
 import { ReadOnlyStyleEnum, EnterModeEnum, ShiftEnterModeEnum, AdvancedConfigType } from "../../typings/RichTextProps";
@@ -45,7 +45,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
               width: "100%",
               height: "100%"
           };
-    const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<any>>({
+    const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<"change">>({
         element,
         editorUrl: "/widgets/ckeditor/ckeditor.js",
         type: editorType,
@@ -77,11 +77,11 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
         },
         subscribeTo: ["change"]
     });
-    const key = useMemo(() => Date.now(), [ckeditorConfig]);
+    const key = Date.now();
     useEffect(() => {
         const config = { ...props.toolbar };
         if (plugins?.length) {
-            plugins.forEach(plugin => addPlugin(plugin, config));
+            plugins.forEach((plugin: PluginName) => addPlugin(plugin, config));
         }
         if (advancedContentFilter) {
             config.allowedContent = advancedContentFilter.allowedContent;

@@ -1,13 +1,15 @@
 import { ReactNode, createElement, useCallback } from "react";
 import { RichTextEditor as RichTextComponent } from "./components/RichText";
 import { RichTextContainerProps } from "../typings/RichTextProps";
-import { GroupType, SET_CUSTOM } from "./utils/ckeditorPresets";
-import { debounce } from "@mendix/piw-utils-internal";
+import { GroupType, createCustomToolbar, ToolbarItems } from "./utils/ckeditorPresets";
+import { debounce, executeAction } from "@mendix/piw-utils-internal";
 import { getPreset, defineAdvancedGroups } from "./utils/ckeditorConfigs";
 import { CKEditorConfig } from "ckeditor4-react";
 import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
+    const onKeyChange = useCallback(() => executeAction(props.onChange), [props.onChange]);
+    const onKeyPress = useCallback(() => executeAction(props.onKeyPress), [props.onKeyPress]);
     const onChangeFn = useCallback(
         debounce((value: string) => props.stringAttribute.setValue(value), 500),
         [props.stringAttribute]
@@ -18,7 +20,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             return getPreset(preset);
         } else {
             const groupKeys = Object.keys(props).filter((key: string) => (key.includes("Group") ? key : null));
-            let groupItems: any[];
+            let groupItems: ToolbarItems[] | string[];
             if (toolbarConfig === "basic") {
                 groupItems = groupKeys
                     .filter((groupName: GroupType) => props[groupName])
@@ -29,14 +31,12 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
                 groupItems = defineAdvancedGroups(advancedConfig);
             }
 
-            return SET_CUSTOM(groupItems, toolbarConfig === "basic");
+            return createCustomToolbar(groupItems, toolbarConfig === "basic");
         }
     };
     const plugins = [];
-    if (props.advancedMode) {
-        if (props.codeHighlight) {
-            plugins.push("codesnippet");
-        }
+    if (props.codeHighlight) {
+        plugins.push("codesnippet");
     }
     return (
         <RichTextComponent
@@ -61,8 +61,8 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             plugins={plugins}
             value={props.stringAttribute.value as string}
             onValueChange={onChangeFn}
-            onKeyPress={props.onKeyPress?.execute}
-            onKeyChange={props.onChange?.execute}
+            onKeyPress={onKeyPress}
+            onKeyChange={onKeyChange}
             dimensions={{
                 width: props.width,
                 widthUnit: props.widthUnit,

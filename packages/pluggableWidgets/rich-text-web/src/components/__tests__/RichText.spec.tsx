@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 import { RichTextEditor, RichTextProps } from "../RichText";
 import { CKEditorConfig } from "ckeditor4-react";
 import { getPreset, defineEnterMode, getToolbarGroupByName, defineAdvancedGroups } from "../../utils/ckeditorConfigs";
-import { mount } from "enzyme";
+import { mount, ReactWrapper } from "enzyme";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
 import { TOOLBAR_GROUP, ToolbarGroup } from "../../utils/ckeditorPresets";
 import { AdvancedConfigType } from "../../../typings/RichTextProps";
@@ -31,7 +31,7 @@ describe("RichText", () => {
         toolbar: getPreset("basic")
     };
 
-    function renderRichText(props = defaultRichTextProps) {
+    function renderRichText(props = defaultRichTextProps): ReactWrapper {
         return mount(<RichTextEditor {...props} />);
     }
 

@@ -1,12 +1,10 @@
 import { CKEditorConfig } from "ckeditor4-react";
-import { PresetEnum, AdvancedConfigType } from "../../typings/RichTextProps";
-import { SET_PRESET, TOOLBAR_GROUP, ToolbarGroup, ToolbarItems } from "./ckeditorPresets";
+import { PresetEnum, AdvancedConfigType, CtItemTypeEnum } from "../../typings/RichTextProps";
+import { createPreset, TOOLBAR_GROUP, ToolbarGroup, ToolbarItems } from "./ckeditorPresets";
 
-interface Plugins {
-    codesnippet: any;
-}
+export type PluginName = "codesnippet";
 
-const PLUGIN_CONFIGS: Plugins = {
+const PLUGIN_CONFIGS = {
     codesnippet: {
         extraPlugins: "codesnippet",
         name: "CodeSnippet",
@@ -16,7 +14,7 @@ const PLUGIN_CONFIGS: Plugins = {
     }
 };
 
-export function getToolbarGroupByName(name: string): ToolbarGroup | undefined | string {
+export function getToolbarGroupByName(name: string): ToolbarGroup | undefined {
     return TOOLBAR_GROUP.find((group: ToolbarGroup) => group.name === name);
 }
 
@@ -36,18 +34,18 @@ export function defineEnterMode(type: string): number {
 export function getPreset(type: PresetEnum): CKEditorConfig {
     switch (type) {
         case "standard":
-            return SET_PRESET("standard");
+            return createPreset("standard");
         case "basic":
-            return SET_PRESET("basic");
+            return createPreset("basic");
         case "full":
-            return SET_PRESET("full");
+            return createPreset("full");
         default:
-            return SET_PRESET("basic");
+            return createPreset("basic");
     }
 }
 
-export function addPlugin(name: string, config: CKEditorConfig): CKEditorConfig {
-    const plugin = PLUGIN_CONFIGS[name as keyof Plugins];
+export function addPlugin(name: PluginName, config: CKEditorConfig): CKEditorConfig {
+    const plugin = PLUGIN_CONFIGS[name];
     if (plugin && config) {
         if (config.extraPlugins && !config.extraPlugins.includes(plugin.extraPlugins)) {
             config.extraPlugins += `,${plugin.extraPlugins}`;
@@ -59,7 +57,9 @@ export function addPlugin(name: string, config: CKEditorConfig): CKEditorConfig 
 }
 
 export function defineAdvancedGroups(items: AdvancedConfigType[]): ToolbarItems[] {
-    const toolbarObj: any = {};
+    const toolbarObj: {
+        [key: string]: Array<CtItemTypeEnum | "-">;
+    } = {};
     items.forEach(item => {
         const id = item.ctItemToolbar;
         const type = item.ctItemType !== "seperator" ? item.ctItemType : "-";
@@ -70,13 +70,13 @@ export function defineAdvancedGroups(items: AdvancedConfigType[]): ToolbarItems[
         toolbarObj[id].push(type);
     });
 
-    const keys: any = Object.keys(toolbarObj);
-    const toolbarArray: any = [];
-    keys.forEach((key: string) => {
+    const keys: string[] = Object.keys(toolbarObj);
+    const toolbarArray: ToolbarItems[] = [];
+    keys.forEach((key: string) =>
         toolbarArray.push({
             name: key,
             items: toolbarObj[key]
-        });
-    });
+        })
+    );
     return toolbarArray;
 }
