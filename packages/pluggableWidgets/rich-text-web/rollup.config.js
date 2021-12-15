@@ -43,9 +43,7 @@ function copyCKEditorDirToDist(outDir) {
                     "**/config.js",
                     "**/styles.js",
                     "**/contents.css",
-                    "**/LICENSE.md",
-                    // we don't need samples, cause it's useless in our case and it breaks styles in general
-                    "!**/samples/**/*.*"
+                    "**/LICENSE.md"
                 ]
             });
         }

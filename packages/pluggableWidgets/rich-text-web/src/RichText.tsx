@@ -59,7 +59,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
             spellChecker={props.spellChecker}
             toolbar={defineToolbar()}
             plugins={plugins}
-            value={props.stringAttribute.value as string}
+            value={props.stringAttribute.value}
             onValueChange={onChangeFn}
             onKeyPress={onKeyPress}
             onKeyChange={onKeyChange}

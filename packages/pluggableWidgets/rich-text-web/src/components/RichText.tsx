@@ -1,4 +1,4 @@
-import { createElement, ReactElement, useState, useEffect } from "react";
+import { createElement, ReactElement, useState, useEffect, useMemo } from "react";
 import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
 import { defineEnterMode, addPlugin, PluginName } from "../utils/ckeditorConfigs";
@@ -12,7 +12,7 @@ export interface RichTextProps {
     readOnly: boolean;
     spellChecker: boolean;
     sanitizeContent?: boolean;
-    value: string;
+    value: string | undefined;
     advancedConfig: AdvancedConfigType[] | null;
     plugins?: string[];
     readOnlyStyle: ReadOnlyStyleEnum;
@@ -57,12 +57,13 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
             height,
             enterMode: defineEnterMode(enterMode || ""),
             shiftEnterMode: defineEnterMode(shiftEnterMode || ""),
-            disableNativeSpellChecker: !props.spellChecker
+            disableNativeSpellChecker: !props.spellChecker,
+            readOnly: props.readOnly
         },
         initContent: value,
         dispatchEvent: ({ type, payload }) => {
             if (type === CKEditorEventAction.change) {
-                const value = payload.editor.getData() as string;
+                const value = payload.editor.getData();
                 if (props.onKeyChange) {
                     props.onKeyChange();
                 }
@@ -77,7 +78,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
         },
         subscribeTo: ["change"]
     });
-    const key = Date.now();
+    const key = useMemo(() => Date.now(), [ckeditorConfig]);
     useEffect(() => {
         const config = { ...props.toolbar };
         if (plugins?.length) {
@@ -94,7 +95,8 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
             element,
             config: {
                 ...ckeditorConfig.config,
-                ...config
+                ...config,
+                readOnly: props.readOnly
             }
         });
     }, [props]);
