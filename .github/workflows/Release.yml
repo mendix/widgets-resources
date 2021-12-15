@@ -58,4 +58,4 @@ jobs:
             - name: "Running release for production"
               run: npm run release -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
               env:
-                NODE_OPTIONS: --max_old_space_size=4096
+                NODE_OPTIONS: --max_old_space_size=8192
