@@ -49,6 +49,10 @@ export const attributeNestedLinkedActionInput = `<?xml version="1.0" encoding="u
                             <caption>On change</caption>
                             <description />
                         </property>
+                        <property key="onToggleCollapsedFirstGroup" type="action">
+                            <caption>On change</caption>
+                            <description />
+                        </property>
                     </propertyGroup>
                     <propertyGroup caption="PropertiesSecond">
                         <property key="collapsedSecond" type="attribute" required="false" onChange="../onToggleCollapsed">
@@ -61,6 +65,13 @@ export const attributeNestedLinkedActionInput = `<?xml version="1.0" encoding="u
                         <property key="onToggleCollapsedSecond" type="action">
                             <caption>On change</caption>
                             <description />
+                        </property>
+                        <property key="collapsedSecondGroup" type="attribute" required="false" onChange="onToggleCollapsedFirstGroup">
+                            <caption>Collapsed</caption>
+                            <description />
+                            <attributeTypes>
+                                <attributeType name="Boolean"/>
+                            </attributeTypes>
                         </property>
                     </propertyGroup>
                  </properties>

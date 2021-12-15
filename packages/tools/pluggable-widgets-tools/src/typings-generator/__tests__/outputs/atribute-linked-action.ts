@@ -30,13 +30,16 @@ export interface DatasourcePropertiesType {
     collapsedFirst?: EditableValue<boolean>;
     collapsedSecond?: EditableValue<boolean>;
     onToggleCollapsedSecond?: ActionValue;
+    collapsedSecondGroup?: EditableValue<boolean>;
 }
 
 export interface DatasourcePropertiesPreviewType {
     collapsedFirst: string;
     onToggleCollapsed: {} | null;
+    onToggleCollapsedFirstGroup: {} | null;
     collapsedSecond: string;
     onToggleCollapsedSecond: {} | null;
+    collapsedSecondGroup: string;
 }
 
 export interface MyWidgetContainerProps {
