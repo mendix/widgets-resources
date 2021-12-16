@@ -118,7 +118,7 @@ async function copyDataWidgets(destination, mode) {
             cp(mpkPathsToCopy, join(__dirname, "../dist/widgets"));
         }
     } else {
-        execSync(`MX_PROJECT_PATH=${destination} npm run build:data-widgets`, {
+        execSync(`npx cross-env MX_PROJECT_PATH=${destination} npm run build:data-widgets`, {
             stdio: "inherit",
             cwd
         });

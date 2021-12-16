@@ -1,4 +1,4 @@
-name: Run build
+name: Run release
 
 on:
     push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
     test:
-        name: "Build (${{ matrix.os }})"
+        name: "Release (${{ matrix.os }})"
         runs-on: ${{ matrix.os }}
         strategy:
           matrix:
@@ -55,7 +55,7 @@ jobs:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"
               run: npm install
-            - name: "Running build for development"
-              run: npm run build -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
+            - name: "Running release for production"
+              run: npm run release -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}
               env:
                 NODE_OPTIONS: --max_old_space_size=8192
