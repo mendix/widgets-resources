@@ -50,7 +50,6 @@ export interface TableProps<T extends ObjectItem> {
     pageSize: number;
     pagingPosition: string;
     preview?: boolean;
-    onSettingsChange?: () => void;
     rowClass?: (value: T) => string;
     setPage?: (computePage: (prevPage: number) => number) => void;
     setSortParameters?: (sort?: { columnIndex: number; desc: boolean }) => void;
@@ -96,7 +95,6 @@ export function Table<T extends ObjectItem>(props: TableProps<T>): ReactElement 
 
     const { updateSettings } = useSettings(
         props.settings,
-        props.onSettingsChange,
         props.columns,
         columnOrder,
         setColumnOrder,

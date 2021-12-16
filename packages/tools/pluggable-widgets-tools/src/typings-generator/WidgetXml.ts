@@ -46,6 +46,7 @@ export interface Property {
         required?: string;
         isDefault?: string;
         dataSource?: string;
+        onChange?: string;
     };
     caption?: string[];
     category?: string[];

@@ -44,7 +44,6 @@ export function createSettings(
 
 export function useSettings(
     settings: Option<EditableValue<string>>,
-    onSettingsChange: Option<() => void>,
     columns: TableColumn[],
     columnOrder: string[],
     setColumnOrder: Dispatch<SetStateAction<string[]>>,
@@ -124,11 +123,10 @@ export function useSettings(
             );
             if (previousLoadedSettings.current !== newSettings && settings.value !== newSettings) {
                 settings.setValue(newSettings);
-                onSettingsChange?.();
                 previousLoadedSettings.current = newSettings;
             }
         }
-    }, [settings, columnOrder, hiddenColumns, sortBy, widths, filteredColumns, onSettingsChange]);
+    }, [settings, columnOrder, hiddenColumns, sortBy, widths, filteredColumns]);
 
     return { updateSettings };
 }

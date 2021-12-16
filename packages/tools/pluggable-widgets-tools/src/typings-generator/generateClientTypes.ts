@@ -40,6 +40,20 @@ ${generateClientTypeBody(properties, false, results, resolveProp)}
     return results;
 }
 
+function actionIsLinkedInAnAttribute(propertyPath: string, properties: Property[]): boolean {
+    return properties.some(prop => {
+        if (prop.$.type === "attribute" && prop.$.onChange === propertyPath) {
+            return true;
+        }
+        if (prop.$.type === "object" && prop.properties && prop.properties.length > 0) {
+            return prop.properties.some(prop =>
+                actionIsLinkedInAnAttribute(`../${propertyPath}`, extractProperties(prop))
+            );
+        }
+        return false;
+    });
+}
+
 function generateClientTypeBody(
     properties: Property[],
     isNative: boolean,
@@ -53,6 +67,11 @@ function generateClientTypeBody(
                 ((prop.$.required === "false" && prop.$.type !== "object") ||
                     prop.$.type === "action" ||
                     (prop.$.dataSource && resolveProp(prop.$.dataSource)?.$.required === "false"));
+
+            if (prop.$.type === "action" && actionIsLinkedInAnAttribute(prop.$.key, properties)) {
+                return undefined;
+            }
+
             return `    ${prop.$.key}${isOptional ? "?" : ""}: ${toClientPropType(
                 prop,
                 isNative,
@@ -60,6 +79,7 @@ function generateClientTypeBody(
                 resolveProp
             )};`;
         })
+        .filter(Boolean)
         .join("\n");
 }
 

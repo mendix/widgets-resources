@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { ComponentType, CSSProperties, ReactNode } from "react";
-import { ActionValue, DynamicValue, EditableValue, WebIcon } from "mendix";
+import { DynamicValue, EditableValue, WebIcon } from "mendix";
 
 export type HeaderRenderModeEnum = "text" | "custom";
 
@@ -29,7 +29,6 @@ export interface GroupsType {
     initialCollapsedState: InitialCollapsedStateEnum;
     initiallyCollapsed: DynamicValue<boolean>;
     collapsed?: EditableValue<boolean>;
-    onToggleCollapsed?: ActionValue;
 }
 
 export type ExpandBehaviorEnum = "singleExpanded" | "multipleExpanded";

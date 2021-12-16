@@ -17,7 +17,6 @@ describe("useSettings Hook", () => {
         renderHook(() =>
             useSettings(
                 props.settings,
-                props.onSettingsChange,
                 props.columns,
                 props.columnOrder,
                 props.setColumnOrder,
@@ -73,7 +72,6 @@ describe("useSettings Hook", () => {
         renderHook(() =>
             useSettings(
                 settings,
-                props.onSettingsChange,
                 columns,
                 props.columnOrder,
                 props.setColumnOrder,
@@ -96,7 +94,6 @@ describe("useSettings Hook", () => {
         const props = mockProperties();
         const { result, rerender } = renderUseSettingsHook(props);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
 
         jest.advanceTimersByTime(100);
 
@@ -121,14 +118,12 @@ describe("useSettings Hook", () => {
                 }
             ])
         );
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
     });
 
     it("doesnt change the settings when same properties are applied", () => {
         const props = mockProperties();
         const initialProps = {
             settings: props.settings,
-            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -142,18 +137,15 @@ describe("useSettings Hook", () => {
 
         const { result, rerender } = renderUseSettingsHook(initialProps);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
         rerender(initialProps);
         result.current.updateSettings();
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
     });
 
     it("doesnt change the hooks when same properties are applied", () => {
         const props = mockProperties();
         const initialProps = {
             settings: props.settings,
-            onSettingsChange: props.onSettingsChange,
             columns: props.columns,
             columnOrder: ["0"],
             setColumnOrder: props.setColumnOrder,
@@ -172,7 +164,6 @@ describe("useSettings Hook", () => {
         expect(props.setSortBy).toHaveBeenCalledTimes(1);
         expect(props.setWidths).toHaveBeenCalledTimes(1);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
 
         rerender({ ...initialProps });
         act(() => {
@@ -184,7 +175,6 @@ describe("useSettings Hook", () => {
         expect(props.setSortBy).toHaveBeenCalledTimes(1);
         expect(props.setWidths).toHaveBeenCalledTimes(1);
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
     });
 
     it("applies changes to settings when receiving external changes", () => {
@@ -194,7 +184,6 @@ describe("useSettings Hook", () => {
         const { rerender, result } = renderUseSettingsHook(props);
         // Remains uncalled
         expect(props.settings.setValue).toHaveBeenCalledTimes(0);
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(0);
 
         rerender({ ...props, sortBy: [{ id: "0", desc: false }] });
         act(() => {
@@ -207,7 +196,6 @@ describe("useSettings Hook", () => {
         expect(props.settings.setValue).toHaveBeenCalledWith(
             JSON.stringify([{ column: "Column 1", sort: true, sortMethod: "asc", hidden: false, order: 0 }])
         );
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(1);
 
         rerender({ ...props, sortBy: [{ id: "0", desc: true }] });
         act(() => {
@@ -218,13 +206,11 @@ describe("useSettings Hook", () => {
         expect(props.settings.setValue).toHaveBeenCalledWith(
             JSON.stringify([{ column: "Column 1", sort: true, sortMethod: "desc", hidden: false, order: 0 }])
         );
-        expect(props.onSettingsChange).toHaveBeenCalledTimes(2);
     });
 });
 //
 function renderUseSettingsHook(initialProps: {
     settings: EditableValue<string>;
-    onSettingsChange: () => void;
     hiddenColumns: any[];
     columnOrder: string[];
     columns: any;
@@ -238,7 +224,6 @@ function renderUseSettingsHook(initialProps: {
     return renderHook(
         ({
             settings,
-            onSettingsChange,
             columns,
             columnOrder,
             setColumnOrder,
@@ -251,7 +236,6 @@ function renderUseSettingsHook(initialProps: {
         }) =>
             useSettings(
                 settings,
-                onSettingsChange,
                 columns,
                 columnOrder,
                 setColumnOrder,
@@ -284,7 +268,6 @@ function mockProperties(): any {
                 ])
             )
             .build(),
-        onSettingsChange: jest.fn(),
         columns: [
             {
                 header: "Column 1",
