@@ -4,8 +4,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Barcode Scanner</name>
     <description>The widget lets you scan a barcode</description>
-    <studioProCategory>Add-ons</studioProCategory>
-    <studioCategory>Add-ons</studioCategory>
+    <studioProCategory>Images, videos &amp; files</studioProCategory>
+    <studioCategory>Images, Videos &amp; Files</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/widgets/barcode-scanner</helpUrl>
     <properties>
         <propertyGroup caption="General">

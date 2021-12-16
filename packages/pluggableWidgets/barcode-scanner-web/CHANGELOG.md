@@ -9,6 +9,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - We added dark mode to Structure mode preview.
 
+### Changed
+- We changed the widget's toolbox category from "Add-ons" to "Images, videos & files".
+
 ## [2.0.1] - 2021-12-3
 
 ### Fixed
