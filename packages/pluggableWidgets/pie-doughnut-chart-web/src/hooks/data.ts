@@ -78,11 +78,11 @@ export const usePieChartDataSeries = ({
                 customSeriesOptions,
                 hole: chartFormat === "pie" ? 0 : 0.4,
                 labels: pieChartData.map(({ itemName }) => itemName ?? null),
-                text: pieChartData.map(({ itemHoverText }) => itemHoverText ?? null),
                 values: pieChartData.map(({ itemValue }) => itemValue ?? 0),
                 marker: {
                     colors: pieChartData.map(({ itemColor }) => itemColor)
                 },
+                hovertext: pieChartData.map(({ itemHoverText }) => itemHoverText ?? ""),
                 hoverinfo: pieChartData.some(({ itemHoverText }) => itemHoverText !== undefined && itemHoverText !== "")
                     ? "text"
                     : "none",

@@ -9,7 +9,7 @@ import { MendixChartDataProps } from "src/components/Chart";
 type PlotChartDataPoints = {
     x: Array<NonNullable<Datum>>;
     y: Array<NonNullable<Datum>>;
-    text: Array<string | undefined>;
+    hovertext: Array<string | undefined>;
     hoverinfo: PlotData["hoverinfo"];
     // We want this optional.
     name?: PlotData["name"];
@@ -200,7 +200,7 @@ function extractDataPoints(
     }
     const xData: PlotChartDataPoints["x"] = [];
     const yData: PlotChartDataPoints["y"] = [];
-    const textData: PlotChartDataPoints["text"] = [];
+    const hoverTextData: PlotChartDataPoints["hovertext"] = [];
 
     for (const item of dataSourceItems) {
         const x = xValue.get(item);
@@ -215,15 +215,15 @@ function extractDataPoints(
 
         const tooltipHoverTextSource =
             series.dataSet === "dynamic" ? series.dynamicTooltipHoverText : series.staticTooltipHoverText;
-        textData.push(tooltipHoverTextSource?.get(item).value);
+        hoverTextData.push(tooltipHoverTextSource?.get(item).value);
     }
 
     return {
         ...(seriesName ? { name: seriesName } : {}),
         x: xData,
         y: yData,
-        text: textData,
-        hoverinfo: textData.some(text => text !== undefined && text !== "") ? "text" : "none"
+        hovertext: hoverTextData,
+        hoverinfo: hoverTextData.some(text => text !== undefined && text !== "") ? "text" : "none"
     };
 }
 
