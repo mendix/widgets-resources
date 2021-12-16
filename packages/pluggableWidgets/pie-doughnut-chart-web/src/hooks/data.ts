@@ -5,6 +5,7 @@ import Big from "big.js";
 import { compareAsc } from "date-fns";
 import { PieChartContainerProps } from "../../typings/PieChartProps";
 import { ChartProps } from "@mendix/shared-charts/dist/components/Chart";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 type PieChartDataSeriesHooks = Pick<
     PieChartContainerProps,
@@ -16,6 +17,8 @@ type PieChartDataSeriesHooks = Pick<
     | "seriesSortAttribute"
     | "seriesSortOrder"
     | "seriesValueAttribute"
+    | "onClickAction"
+    | "tooltipHoverText"
 >;
 
 type LocalPieChartData = {
@@ -23,6 +26,7 @@ type LocalPieChartData = {
     itemValue: number | undefined;
     itemColor: string | undefined;
     itemSortValue: string | boolean | Date | Big | undefined;
+    itemHoverText: string | undefined;
 };
 
 export const usePieChartDataSeries = ({
@@ -33,7 +37,9 @@ export const usePieChartDataSeries = ({
     seriesName,
     seriesSortAttribute,
     seriesSortOrder,
-    seriesValueAttribute
+    seriesValueAttribute,
+    onClickAction,
+    tooltipHoverText
 }: PieChartDataSeriesHooks): ChartProps["data"] => {
     const [pieChartData, setPieChartData] = useState<LocalPieChartData[]>([]);
 
@@ -43,7 +49,8 @@ export const usePieChartDataSeries = ({
                 itemName: seriesName.get(dataSourceItem).value,
                 itemValue: ensure(seriesValueAttribute).get(dataSourceItem).value?.toNumber(),
                 itemColor: seriesColorAttribute?.get(dataSourceItem).value,
-                itemSortValue: seriesSortAttribute?.get(dataSourceItem).value
+                itemSortValue: seriesSortAttribute?.get(dataSourceItem).value,
+                itemHoverText: tooltipHoverText?.get(dataSourceItem).value
             }));
             if (seriesSortAttribute) {
                 dataSourceItems.sort(seriesSortAttributeCompareFn);
@@ -59,8 +66,11 @@ export const usePieChartDataSeries = ({
         seriesName,
         seriesSortAttribute,
         seriesSortOrder,
-        seriesValueAttribute
+        seriesValueAttribute,
+        tooltipHoverText
     ]);
+
+    const onClick = useMemo(() => (onClickAction ? () => executeAction(onClickAction) : undefined), [onClickAction]);
 
     return useMemo<ChartProps["data"]>(
         () => [
@@ -68,13 +78,18 @@ export const usePieChartDataSeries = ({
                 customSeriesOptions,
                 hole: chartFormat === "pie" ? 0 : 0.4,
                 labels: pieChartData.map(({ itemName }) => itemName ?? null),
-                values: pieChartData.map(({ itemValue }) => itemValue ?? null),
+                values: pieChartData.map(({ itemValue }) => itemValue ?? 0),
                 marker: {
                     colors: pieChartData.map(({ itemColor }) => itemColor)
-                }
+                },
+                hovertext: pieChartData.map(({ itemHoverText }) => itemHoverText ?? ""),
+                hoverinfo: pieChartData.some(({ itemHoverText }) => itemHoverText !== undefined && itemHoverText !== "")
+                    ? "text"
+                    : "none",
+                onClick
             }
         ],
-        [pieChartData, customSeriesOptions, chartFormat]
+        [customSeriesOptions, chartFormat, pieChartData, onClick]
     );
 };
 

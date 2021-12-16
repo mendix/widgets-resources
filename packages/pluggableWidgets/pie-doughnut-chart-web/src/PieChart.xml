@@ -128,14 +128,18 @@
                     <caption>On click action</caption>
                     <description/>
                 </property>
-                <property key="onClickTooltip" type="action" required="false">
-                    <caption>Tooltip</caption>
+                <property key="tooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="seriesDataSource">
+                    <caption>Tooltip hover text</caption>
                     <description/>
                 </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Advanced">
             <propertyGroup caption="Advanced">
+                <property key="enableThemeConfig" type="boolean" defaultValue="false">
+                    <caption>Enable theme folder config loading</caption>
+                    <description/>
+                </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>
                     <description/>

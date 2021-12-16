@@ -18,6 +18,7 @@ export interface ChartWidgetProps extends CustomLayoutProps, Dimensions, ChartPr
     className: string;
     showSidebarEditor: boolean;
     type: ChartTypeEnum;
+    enableThemeConfig: boolean;
 }
 
 export const ChartWidget = ({
@@ -37,9 +38,10 @@ export const ChartWidget = ({
     layoutOptions,
     configOptions,
     seriesOptions,
-    type
+    type,
+    enableThemeConfig
 }: ChartWidgetProps): ReactElement => {
-    const themeFolderConfigs = useThemeFolderConfigs(type);
+    const themeFolderConfigs = useThemeFolderConfigs(type, enableThemeConfig);
 
     const initialLayoutOptions = useMemo(
         () =>

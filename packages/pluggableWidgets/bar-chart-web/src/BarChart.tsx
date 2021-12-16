@@ -71,6 +71,7 @@ export function BarChart(props: BarChartContainerProps): ReactElement | null {
             layoutOptions={layoutOptions}
             configOptions={barChartConfigOptions}
             seriesOptions={barChartSeriesOptions}
+            enableThemeConfig={props.enableThemeConfig}
         />
     );
 }

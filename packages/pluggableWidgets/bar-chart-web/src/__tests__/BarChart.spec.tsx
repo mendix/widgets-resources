@@ -32,6 +32,7 @@ describe("The BarChart widget", () => {
                 gridLines="none"
                 customLayout=""
                 customConfigurations=""
+                enableThemeConfig={false}
             />
         );
     }

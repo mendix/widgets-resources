@@ -155,8 +155,12 @@
                                 <caption>On click action</caption>
                                 <description/>
                             </property>
-                            <property key="onClickTooltip" type="action" required="false">
-                                <caption>Tooltip</caption>
+                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
+                                <caption>Tooltip hover text</caption>
+                                <description/>
+                            </property>
+                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Tooltip hover text</caption>
                                 <description/>
                             </property>
                         </propertyGroup>
@@ -230,6 +234,10 @@
                         <enumerationValue key="vertical">Vertical</enumerationValue>
                         <enumerationValue key="both">Both</enumerationValue>
                     </enumerationValues>
+                </property>
+                <property key="enableThemeConfig" type="boolean" defaultValue="false">
+                    <caption>Enable theme folder config loading</caption>
+                    <description/>
                 </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>

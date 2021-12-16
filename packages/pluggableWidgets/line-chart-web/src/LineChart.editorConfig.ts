@@ -24,6 +24,7 @@ export function getProperties(
                 "dynamicXAttribute",
                 "dynamicYAttribute",
                 "dynamicName",
+                "dynamicTooltipHoverText",
                 "groupByAttribute"
             ]);
         } else {
@@ -31,7 +32,8 @@ export function getProperties(
                 "staticDataSource",
                 "staticXAttribute",
                 "staticYAttribute",
-                "staticName"
+                "staticName",
+                "staticTooltipHoverText"
             ]);
         }
         // Line styles
@@ -49,7 +51,7 @@ export function getProperties(
         transformGroupsIntoTabs(defaultProperties);
     } else {
         if (!showAdvancedOptions) {
-            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations"]);
+            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations", "enableThemeConfig"]);
         }
     }
     return defaultProperties;

@@ -38,15 +38,18 @@ export interface PieChartContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     onClickAction?: ActionValue;
-    onClickTooltip?: ActionValue;
+    tooltipHoverText?: ListExpressionValue<string>;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
     customSeriesOptions: string;
 }
 
 export interface PieChartPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     chartFormat: ChartFormatEnum;
     xAxisLabel: string;
     yAxisLabel: string;
@@ -63,7 +66,8 @@ export interface PieChartPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     onClickAction: {} | null;
-    onClickTooltip: {} | null;
+    tooltipHoverText: string;
+    enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
     customSeriesOptions: string;

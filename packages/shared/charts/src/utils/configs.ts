@@ -86,7 +86,7 @@ function showThemeFolderConfigWarning(msg: string): void {
     console.warn(`Error in theme folder configuration file: ${msg}`);
 }
 
-export const useThemeFolderConfigs = (chartType: ChartTypeEnum): SharedConfigs => {
+export const useThemeFolderConfigs = (chartType: ChartTypeEnum, enabled: boolean): SharedConfigs => {
     const [themeFolderConfigs, setThemeFolderConfigs] = useState<SharedConfigs>({
         layout: {},
         configuration: {},
@@ -118,8 +118,10 @@ export const useThemeFolderConfigs = (chartType: ChartTypeEnum): SharedConfigs =
                 showThemeFolderConfigWarning(e);
             }
         }
-        fetchThemeFolderConfigs();
-    }, [chartType]);
+        if (enabled) {
+            fetchThemeFolderConfigs();
+        }
+    }, [chartType, enabled]);
 
     return themeFolderConfigs;
 };

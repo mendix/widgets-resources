@@ -35,7 +35,9 @@ export function PieChart(props: PieChartContainerProps): ReactElement | null {
         seriesName: props.seriesName,
         seriesSortAttribute: props.seriesSortAttribute,
         seriesSortOrder: props.seriesSortOrder,
-        seriesValueAttribute: props.seriesValueAttribute
+        seriesValueAttribute: props.seriesValueAttribute,
+        onClickAction: props.onClickAction,
+        tooltipHoverText: props.tooltipHoverText
     });
 
     return (
@@ -58,6 +60,7 @@ export function PieChart(props: PieChartContainerProps): ReactElement | null {
             layoutOptions={pieChartLayoutOptions}
             configOptions={pieChartConfigOptions}
             seriesOptions={pieChartSeriesOptions}
+            enableThemeConfig={props.enableThemeConfig}
         />
     );
 }

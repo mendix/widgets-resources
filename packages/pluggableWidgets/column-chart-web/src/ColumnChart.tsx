@@ -70,6 +70,7 @@ export function ColumnChart(props: ColumnChartContainerProps): ReactElement | nu
             layoutOptions={layoutOptions}
             configOptions={columnChartConfigOptions}
             seriesOptions={columnChartSeriesOptions}
+            enableThemeConfig={props.enableThemeConfig}
         />
     );
 }
