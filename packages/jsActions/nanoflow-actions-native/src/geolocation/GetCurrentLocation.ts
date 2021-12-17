@@ -84,8 +84,8 @@ export async function GetCurrentLocation(
             if (position.coords.heading != null && position.coords.heading !== -1) {
                 mxObject.set("Heading", new Big(position.coords.heading.toFixed(8)));
             }
-            if (position.coords.speed != null) {
-                mxObject.set("AltitudeAccuracy", new Big(position.coords.speed.toFixed(8)));
+            if (position.coords.speed != null && position.coords.speed !== -1) {
+                mxObject.set("Speed", new Big(position.coords.speed.toFixed(8)));
             }
             return mxObject;
         }
