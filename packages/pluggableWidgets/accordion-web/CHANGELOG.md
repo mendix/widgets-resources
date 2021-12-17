@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
 
 ### Changed
 - We made the "Enable advanced options" available only for Studio users, keeping all the advanced features available by default in Studio Pro.

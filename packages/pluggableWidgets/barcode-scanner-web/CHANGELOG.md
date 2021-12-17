@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added dark icons for Tile and List view.
+
 ## [2.1.0] - 2021-12-16
 
 ### Added
