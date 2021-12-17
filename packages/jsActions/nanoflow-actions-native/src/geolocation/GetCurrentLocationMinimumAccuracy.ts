@@ -41,12 +41,15 @@ export async function GetCurrentLocationMinimumAccuracy(
     return new Promise((resolve, reject) => {
         const options = getOptions();
 
-        // This ensures the browser will not ignore the maximumAge https://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt/31916631#31916631
-        navigator.geolocation.getCurrentPosition(
-            () => {},
-            () => {},
-            {}
-        );
+        // This action is only required while running in PWA or hybrid.
+        if (navigator && (!navigator.product || navigator.product !== "ReactNative")) {
+            // This ensures the browser will not ignore the maximumAge https://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt/31916631#31916631
+            navigator.geolocation.getCurrentPosition(
+                () => {},
+                () => {},
+                {}
+            );
+        }
         const watchId: number = navigator.geolocation.watchPosition(onSuccess, onError, options);
         const timeStart = Date.now();
         let lastAccruedPosition: GeolocationResponse;
