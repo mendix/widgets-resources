@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
 
 ## [3.0.0] - 2021-09-28
 
