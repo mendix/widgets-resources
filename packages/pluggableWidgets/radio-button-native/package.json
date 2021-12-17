@@ -1,0 +1,28 @@
+{
+    "name": "radio-button-native",
+    "widgetName": "RadioButton",
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/mendix/widgets-resources.git"
+    },
+    "config": {},
+    "packagePath": "com.mendix.widget.native",
+    "scripts": {
+        "start": "pluggable-widgets-tools start:native",
+        "build": "pluggable-widgets-tools build:native",
+        "test": "pluggable-widgets-tools test:unit:native",
+        "lint": "pluggable-widgets-tools lint",
+        "lint:fix": "pluggable-widgets-tools lint:fix",
+        "prerelease": "npm run lint",
+        "release": "pluggable-widgets-tools release:native"
+    },
+    "devDependencies": {
+        "@mendix/pluggable-widgets-tools": ">=8.9.2"
+    },
+    "dependencies": {
+      "@mendix/piw-native-utils-internal":"^1.0.0",
+      "@mendix/piw-utils-internal": "^1.0.0"
+    }
+}

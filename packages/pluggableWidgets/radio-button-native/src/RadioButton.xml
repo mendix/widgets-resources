@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<widget id="com.mendix.widget.native.radiobutton.RadioButton"
+        pluginWidget="true"
+        needsEntityContext="true"
+        offlineCapable="true"
+        supportedPlatform="Native"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Radio Button</name>
+    <description>My widget description</description>
+    <studioProCategory>Input elements</studioProCategory>
+    <studioCategory>Input elements</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="orientation" type="enumeration" defaultValue="horizontal">
+                    <caption>Orientation</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Data source">
+                <property key="enum" type="attribute">
+                    <caption>Value</caption>
+                    <description/>
+                    <attributeTypes>
+                        <attributeType name="Enum" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+
+            <propertyGroup caption="Editiability">
+                <systemProperty key="Editability"/>
+            </propertyGroup>
+
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility"/>
+            </propertyGroup>
+
+            <propertyGroup caption="Common">
+                <systemProperty key="Name"/>
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <propertyGroup caption="Events">
+                <property key="onChangeAction" type="action" required="false">
+                  <caption>On Change</caption>
+                  <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>

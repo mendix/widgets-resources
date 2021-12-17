@@ -734,3 +734,15 @@ export interface WebViewType {
     errorContainer?: ViewStyle;
     errorText?: TextStyle;
 }
+
+// Radio Button
+export interface RadioButtonType {
+    container: ViewStyle;
+    horizontalContainer: ViewStyle;
+    radioButtonContainer: ViewStyle;
+    caption: TextStyle;
+    disabledCaption: TextStyle;
+    activeCircleRadioButton: ViewStyle;
+    defaultCircleRadioButton: ViewStyle;
+    disabledCircleRadioButton: ViewStyle;
+}
