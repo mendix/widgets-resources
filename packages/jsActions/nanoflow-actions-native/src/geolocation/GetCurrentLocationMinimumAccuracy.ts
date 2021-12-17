@@ -12,7 +12,7 @@ import Geolocation, {
 } from "@react-native-community/geolocation";
 
 /**
- * This action retrieves the current geographical position of a user/device.
+ * This action retrieves the current geographical position of a user/device with a minimum accuracy as parameter. If a position is not acquired with minimum accuracy within a specific timeout it will retrieve the last most precise location.
  *
  * Since this can compromise privacy, the position is not available unless the user approves it. The web browser will request the permission at the first time the location is requested. When denied by the user it will not prompt a second time.
  *
@@ -23,12 +23,14 @@ import Geolocation, {
  * @param {Big} timeout - The maximum length of time (in milliseconds) the device is allowed to take in order to return a location. If empty, there is no timeout.
  * @param {Big} maximumAge - The maximum age (in milliseconds) of a possible cached position that is acceptable to return. If set to 0, it means that the device cannot use a cached position and must attempt to retrieve the real current position. By default the device will always return a cached position regardless of its age.
  * @param {boolean} highAccuracy - Use a higher accuracy method to determine the current location. Setting this to false saves battery life.
+ * @param {Big} minimumAccuracy - The minimum accuracy to be received in meters. Less amount of meters, more precise is the location.
  * @returns {Promise.<MxObject>}
  */
-export async function GetCurrentLocation(
+export async function GetCurrentLocationMinimumAccuracy(
     timeout?: Big,
     maximumAge?: Big,
-    highAccuracy?: boolean
+    highAccuracy?: boolean,
+    minimumAccuracy?: number
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
@@ -38,18 +40,45 @@ export async function GetCurrentLocation(
 
     return new Promise((resolve, reject) => {
         const options = getOptions();
-        navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
 
-        function onSuccess(position: GeolocationResponse): void {
+        // This action is only required while running in PWA or hybrid.
+        if (navigator && (!navigator.product || navigator.product !== "ReactNative")) {
+            // This ensures the browser will not ignore the maximumAge https://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt/31916631#31916631
+            navigator.geolocation.getCurrentPosition(
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                () => {},
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
+                () => {},
+                {}
+            );
+        }
+        const watchId: number = navigator.geolocation.watchPosition(onSuccess, onError, options);
+        const timeStart = Date.now();
+        let lastAccruedPosition: GeolocationResponse;
+
+        function createGeolocationObject(position: GeolocationResponse): void {
             mx.data.create({
                 entity: "NanoflowCommons.Geolocation",
-                callback: mxObject => {
-                    const geolocation = mapPositionToMxObject(mxObject, position);
-                    resolve(geolocation);
-                },
+                callback: mxObject => resolve(mapPositionToMxObject(mxObject, position)),
                 error: () =>
                     reject(new Error("Could not create 'NanoflowCommons.Geolocation' object to store location"))
             });
+        }
+
+        function onSuccess(position: GeolocationResponse): void {
+            if (watchId && (!minimumAccuracy || minimumAccuracy >= position.coords.accuracy)) {
+                navigator.geolocation.clearWatch(watchId);
+                createGeolocationObject(position);
+            } else {
+                if (!lastAccruedPosition || position.coords.accuracy < lastAccruedPosition.coords.accuracy) {
+                    lastAccruedPosition = position;
+                }
+                const timeDiff = Date.now() - timeStart;
+                if (!timeout || timeout.lte(timeDiff)) {
+                    navigator.geolocation.clearWatch(watchId);
+                    createGeolocationObject(lastAccruedPosition);
+                }
+            }
         }
 
         function onError(error: GeolocationError): void {

@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We introduce a new `Get current location with minimum accuracy` action to acquire more precise locations.
+
+### Fixed
+- We fixed a bug where the `Speed` was not being defined while using `Get current location` action. 
+
 ## [2.1.2] Nanoflow Commons - 2021-10-25
 ### Fixed
 - We fixed a problem with toggle sidebar action when executed in Native apps.
