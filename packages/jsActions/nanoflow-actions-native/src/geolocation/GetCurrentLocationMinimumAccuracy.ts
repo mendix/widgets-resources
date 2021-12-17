@@ -45,7 +45,9 @@ export async function GetCurrentLocationMinimumAccuracy(
         if (navigator && (!navigator.product || navigator.product !== "ReactNative")) {
             // This ensures the browser will not ignore the maximumAge https://stackoverflow.com/questions/3397585/navigator-geolocation-getcurrentposition-sometimes-works-sometimes-doesnt/31916631#31916631
             navigator.geolocation.getCurrentPosition(
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
                 () => {},
+                // eslint-disable-next-line @typescript-eslint/no-empty-function
                 () => {},
                 {}
             );
