@@ -106,8 +106,8 @@ describe("Datagrid useCellRenderer hook", () => {
         });
 
         const renderWrapper = jest.fn(x => x);
-        result.current(renderWrapper, { id: "333" as GUID }, 0);
+        const output = result.current(renderWrapper, { id: "333" as GUID }, 0);
         expect(renderWrapper).toBeCalled();
-        expect(renderWrapper.mock.calls[0][0]).toEqual("custom content");
+        expect(output).toEqual("custom content");
     });
 });
