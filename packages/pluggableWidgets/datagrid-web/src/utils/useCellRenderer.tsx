@@ -10,9 +10,9 @@ interface CellRendererHookProps {
     onClick?: ListActionValue;
 }
 
-export function useCellRenderer(props: CellRendererHookProps): CellRenderer {
+export function useCellRenderer({ onClick, columns }: CellRendererHookProps): CellRenderer {
     const renderer: CellRenderer = (renderWrapper, value, columnIndex) => {
-        const column = props.columns[columnIndex];
+        const column = columns[columnIndex];
         const title = column.tooltip && column.tooltip.get(value)?.value;
         let content;
 
@@ -37,9 +37,9 @@ export function useCellRenderer(props: CellRendererHookProps): CellRenderer {
             classNames(`align-column-${column.alignment}`, column.columnClass?.get(value)?.value, {
                 "wrap-text": column.wrapText
             }),
-            props.onClick ? () => executeAction(props.onClick?.get(value)) : undefined
+            onClick ? () => executeAction(onClick?.get(value)) : undefined
         );
     };
 
-    return useCallback(renderer, [props.columns, props.onClick]);
+    return useCallback(renderer, [columns, onClick]);
 }
