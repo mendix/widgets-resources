@@ -2415,5 +2415,54 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.native.radiobuttons.RadioButtons": [
+        {
+            "name": "Color",
+            "type": "Dropdown",
+            "description": "Change the color of radio button.",
+            "options": [
+                {
+                    "name": "Primary",
+                    "class": "radioPrimary"
+                },
+                {
+                    "name": "Info",
+                    "class": "radioInfo"
+                },
+                {
+                    "name": "Danger",
+                    "class": "radioDanger"
+                },
+                {
+                    "name": "Warning",
+                    "class": "radioWarning"
+                },
+                {
+                    "name": "Success",
+                    "class": "radioSuccess"
+                },
+                {
+                    "name": "Danger Light",
+                    "class": "radioDangerLight"
+                },
+                {
+                    "name": "Primary Light",
+                    "class": "radioPrimaryLight"
+                },
+                {
+                    "name": "Info Light",
+                    "class": "radioInfoLight"
+                },
+                {
+                    "name": "Success Light",
+                    "class": "radioSuccessLight"
+                },
+                {
+                    "name": "Warning Light",
+                    "class": "radioWarningLight"
+                }
+            ]
+        }
     ]
 }

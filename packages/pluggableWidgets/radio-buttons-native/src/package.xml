@@ -5,7 +5,7 @@
             <widgetFile path="RadioButtons.xml"/>
         </widgetFiles>
         <files>
-            <file path="mendix/radiobuttons"/>
+            <file path="com/mendix/widget/native/radiobuttons"/>
         </files>
     </clientModule>
 </package>

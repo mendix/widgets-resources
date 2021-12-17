@@ -4,12 +4,16 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { EditableValue } from "mendix";
+import { ActionValue, EditableValue } from "mendix";
+
+export type OrientationEnum = "vertical" | "horizontal";
 
 export interface RadioButtonsProps<Style> {
     name: string;
     style: Style[];
     enum: EditableValue<string>;
+    orientation: OrientationEnum;
+    onChange?: ActionValue;
 }
 
 export interface RadioButtonsPreviewProps {
@@ -18,4 +22,6 @@ export interface RadioButtonsPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     enum: string;
+    orientation: OrientationEnum;
+    onChange: {} | null;
 }

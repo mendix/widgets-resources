@@ -1,30 +1,27 @@
-import { Component, ReactNode, createElement } from "react";
-import { Text, View } from "react-native";
-
-// import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
-
-import { RadioItemCustomStyle } from "../RadioButtons";
-import { styles } from "../ui/RadioButton.styles";
+import { createElement, ReactElement } from "react";
+import { Pressable, Text, View } from "react-native";
+import { RadioButtonsStyle } from "../ui/Styles";
 
 export interface RadioButtonProps {
     title: string;
     active: boolean;
-    style?: RadioItemCustomStyle;
+    onSelect: (value: string) => void;
+    styles: RadioButtonsStyle;
+    name: string;
+    disabled: boolean;
 }
 
-// const defaultStyle: RadioItemCustomStyle = {
-//     buttonContainerStyle: {},
-//     itemContainerStyle: {},
-//     textStyle: {}
-// };
-
-export class RadioButton extends Component<RadioButtonProps> {
-    render(): ReactNode {
-        return (
-            <View>
-                <Text>{this.props.title}</Text>
-                <View style={[styles.circularBtnStyle, this.props.active && styles.activeBtnStyle]} />
+export function RadioButton({ active, onSelect, title, styles, name, disabled }: RadioButtonProps): ReactElement {
+    return (
+        <Pressable
+            style={[styles.radioItemContainerStyle, disabled && styles.radioItemContainerDisabledStyle]}
+            onPress={() => onSelect(name)}
+            testID={`radio-button-${name}`}
+        >
+            <View style={[styles.circularBtnStyle, disabled && styles.circularBtnDisabledStyle]}>
+                {active && <View style={styles.activeBtnStyle} />}
             </View>
-        );
-    }
+            <Text style={styles.radioItemTitleStyle}>{title}</Text>
+        </Pressable>
+    );
 }

@@ -8,9 +8,9 @@
     <icon/>
     <properties>
         <propertyGroup caption="Options">
-           <property key="enum" type="attribute">
+           <property key="enum" type="attribute" >
                 <caption>Select an enum</caption>
-                <description>Progress new desc</description>
+                <description>Select radio button options</description>
                 <attributeTypes>
                     <attributeType name="Enum"/>
 	            </attributeTypes>
