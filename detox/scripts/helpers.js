@@ -26,7 +26,7 @@ async function downloadFile(url) {
 
 function execCommand(command, ignoreErrorContaining) {
     try {
-        execSync(command, { stdio: "ignore" });
+        execSync(command);
     } catch (error) {
         if (!error.message.includes(ignoreErrorContaining)) {
             throw new Error(error);

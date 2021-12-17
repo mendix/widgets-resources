@@ -13,8 +13,8 @@ expect.extend({
     toMatchImageSnapshot(screenshot, options = {}) {
         const { currentTestName } = this;
         const platform = device.getPlatform();
-        const customSnapshotsDir = join(resolve("./"), "image-snapshots", platform);
-        const customDiffDir = join(resolve("./"), "image-snapshots/results", platform);
+        const customSnapshotsDir = join(resolve("./"), "image-snapshots", platform, device.name);
+        const customDiffDir = join(resolve("./"), "image-snapshots/results", platform, device.name);
 
         return toMatchImageSnapshot.call(this, screenshot, {
             customDiffConfig: { threshold: 0.15 },

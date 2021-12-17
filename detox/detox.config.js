@@ -1,7 +1,13 @@
-exports.ANDROID_SDK_VERSION = 31;
-exports.IOS_SDK_VERSION = 15;
+const ANDROID_SDK_VERSION = 31;
+const ANDROID_DEVICE_TYPE = "pixel";
+const IOS_SDK_VERSION = 15;
+const IOS_DEVICE_TYPE = "iPhone 13 Pro Max";
 
-exports = {
+module.exports = {
+    ANDROID_SDK_VERSION,
+    ANDROID_DEVICE_TYPE,
+    IOS_SDK_VERSION,
+    IOS_DEVICE_TYPE,
     "test-runner": "npx jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
     apps: {
@@ -19,14 +25,14 @@ exports = {
         ios: {
             type: "ios.simulator",
             device: {
-                type: "iPhone 13 Pro Max",
-                os: `iOS ${this.IOS_SDK_VERSION}`
+                type: IOS_DEVICE_TYPE,
+                os: `iOS ${IOS_SDK_VERSION}`
             }
         },
         android: {
             type: "android.emulator",
             device: {
-                avdName: `EMULATOR_NATIVE_${this.ANDROID_SDK_VERSION}`
+                avdName: `NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION}`
             }
         }
     },
