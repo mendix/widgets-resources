@@ -117,19 +117,13 @@ function createPreset(type: "basic" | "standard" | "full"): CKEditorConfig {
     return config;
 }
 
-function createCustomToolbar(groups: string[] | ToolbarItems[], withGroupNames = true): CKEditorConfig {
+function createCustomToolbar(groups: (string | ToolbarItems)[], withGroupNames = true): CKEditorConfig {
     if (withGroupNames) {
-        const toolbar: Array<ToolbarItems | string> = [];
-        groups.forEach(groupName => {
-            if (groupName === "/") {
-                toolbar.push(groupName);
-            } else {
-                const item = TOOLBAR_ITEMS.find(item => item.name === groupName);
-                if (item) {
-                    toolbar.push(item);
-                }
-            }
-        });
+        const toolbar = groups
+            .map((groupName: string) =>
+                groupName === "/" ? groupName : TOOLBAR_ITEMS.find(item => item.name === groupName)
+            )
+            .filter(item => item);
         return {
             toolbar
         };

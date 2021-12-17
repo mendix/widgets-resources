@@ -15,7 +15,7 @@ export default args => {
 
         /* this step is required by sanitize-html library */
         config.plugins.push(json());
-        return { ...config };
+        return config;
     });
 };
 
@@ -42,8 +42,7 @@ function copyCKEditorDirToDist(outDir) {
                     "**/ckeditor.js",
                     "**/config.js",
                     "**/styles.js",
-                    "**/contents.css",
-                    "**/LICENSE.md"
+                    "**/contents.css"
                 ]
             });
         }

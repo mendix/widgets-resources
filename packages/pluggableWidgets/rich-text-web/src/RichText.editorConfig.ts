@@ -1,10 +1,4 @@
-import {
-    Problem,
-    Properties,
-    hidePropertiesIn,
-    transformGroupsIntoTabs,
-    hidePropertyIn
-} from "@mendix/piw-utils-internal";
+import { Properties, hidePropertiesIn, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
 import { RichTextPreviewProps } from "../typings/RichTextProps";
 
 const advancedModeItems: Array<keyof RichTextPreviewProps> = [
@@ -51,15 +45,10 @@ export function getProperties(
     }
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
-        hidePropertyIn(defaultProperties, values, "advancedMode");
     } else {
         if (!values.advancedMode) {
             hidePropertiesIn(defaultProperties, values, advancedModeItems);
         }
     }
     return defaultProperties;
-}
-
-export function check(_values: RichTextPreviewProps): Problem[] {
-    return [];
 }
