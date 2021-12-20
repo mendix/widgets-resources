@@ -1,4 +1,4 @@
-import { Properties, hidePropertiesIn, transformGroupsIntoTabs } from "@mendix/piw-utils-internal";
+import { Properties, hidePropertiesIn, transformGroupsIntoTabs, hidePropertyIn } from "@mendix/piw-utils-internal";
 import { RichTextPreviewProps } from "../typings/RichTextProps";
 
 const advancedModeItems: Array<keyof RichTextPreviewProps> = [
@@ -46,6 +46,7 @@ export function getProperties(
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     } else {
+        hidePropertyIn(defaultProperties, values, "advancedMode");
         if (!values.advancedMode) {
             hidePropertiesIn(defaultProperties, values, advancedModeItems);
         }

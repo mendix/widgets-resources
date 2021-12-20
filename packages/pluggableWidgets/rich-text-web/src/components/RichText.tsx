@@ -47,7 +47,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
           };
     const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<"change">>({
         element,
-        editorUrl: "/widgets/ckeditor/ckeditor.js",
+        editorUrl: `${window.mx.remoteUrl}widgets/ckeditor/ckeditor.js`,
         type: editorType,
         config: {
             autoGrow_minHeight: 300,
@@ -106,7 +106,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
             style={{ width, height }}
         >
             <div ref={setElement} id={props.name} />
-            <MainEditor config={ckeditorConfig} key={key} />
+            <MainEditor key={key} config={ckeditorConfig} />
         </div>
     );
 };

@@ -9,6 +9,9 @@ import { TOOLBAR_GROUP, ToolbarGroup } from "../../utils/ckeditorPresets";
 import { AdvancedConfigType } from "../../../typings/RichTextProps";
 
 describe("RichText", () => {
+    window.mx = {
+        remoteUrl: ""
+    };
     const defaultRichTextProps: RichTextProps = {
         advancedConfig: null,
         dimensions: {

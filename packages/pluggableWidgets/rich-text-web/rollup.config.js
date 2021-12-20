@@ -1,4 +1,4 @@
-import { join, extname } from "path";
+import { join, extname, dirname } from "path";
 import json from "@rollup/plugin-json";
 import command from "rollup-plugin-command";
 import copy from "recursive-copy";
@@ -22,7 +22,7 @@ export default args => {
 function copyCKEditorDirToDist(outDir) {
     return command([
         async () => {
-            return copy("../../../node_modules/ckeditor4/", outDir, {
+            return copy(dirname(require.resolve("ckeditor4")), outDir, {
                 transform: src => {
                     /* we need to empty every single css inside the folder to avoid duplicate bundling,
                      because even if the file is not imported anywhere it will be compiled inside RichText.js and RichText.mjs */

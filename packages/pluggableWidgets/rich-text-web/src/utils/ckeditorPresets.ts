@@ -107,7 +107,7 @@ function createPreset(type: "basic" | "standard" | "full"): CKEditorConfig {
             toolbarGroup.splice(6, 0, "/");
             config.toolbarGroups = toolbarGroup;
             config.removeButtons = "";
-            /* temporary removed exportpdf, copyformatting*/
+            /* TODO temporary removed exportpdf*/
             config.extraPlugins =
                 "save,templates,newpage,print,forms,find,selectall,div,divarea,justify,bidi,language,font,colorbutton,showblocks";
             break;
@@ -117,18 +117,16 @@ function createPreset(type: "basic" | "standard" | "full"): CKEditorConfig {
     return config;
 }
 
-function createCustomToolbar(groups: (string | ToolbarItems)[], withGroupNames = true): CKEditorConfig {
+function createCustomToolbar(groups: Array<string | ToolbarItems>, withGroupNames = true): CKEditorConfig {
     if (withGroupNames) {
-        const toolbar = groups
-            .map((groupName: string) =>
-                groupName === "/" ? groupName : TOOLBAR_ITEMS.find(item => item.name === groupName)
-            )
-            .filter(item => item);
         return {
-            toolbar
+            toolbar: groups
+                .map((groupName: string) =>
+                    groupName === "/" ? groupName : TOOLBAR_ITEMS.find(item => item.name === groupName)
+                )
+                .filter(item => item)
         };
     } else {
-        /* temporary removed exportpdf,copyformatting*/
         return {
             extraPlugins:
                 "save,templates,newpage,print,forms,find,selectall,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
