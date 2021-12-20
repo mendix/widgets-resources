@@ -1,5 +1,5 @@
 import { background, border, font, spacing } from "../../variables";
-import { RadioButtonType } from "../../types/widgets";
+import { RadioButtonStyle } from "../../types/widgets";
 
 export const RADIO_BUTTON_SIZE: number = 20;
 
@@ -15,7 +15,7 @@ To customize any core styling, copy the part you want to customize to styles/nat
 
     Default Class For Mendix Radio Button Widget
 ========================================================================== */
-export const com_mendix_widget_native_radiobutton_RadioButton: RadioButtonType = {
+export const com_mendix_widget_native_radiobutton_RadioButton: RadioButtonStyle = {
     container: {},
     horizontalContainer: {},
     radioButtonContainer: {},

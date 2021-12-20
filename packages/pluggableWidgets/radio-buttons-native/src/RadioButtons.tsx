@@ -1,29 +1,50 @@
-import { ReactNode, createElement } from "react";
-import { TextStyle, View, ViewStyle } from "react-native";
+import { createElement, useCallback, ReactElement } from "react";
+import { Text, View } from "react-native";
 
-import { Style } from "@mendix/pluggable-widgets-tools";
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
+import { executeAction } from "@mendix/piw-utils-internal";
 
 import { RadioButton } from "./components/RadioButton";
 import { RadioButtonsProps } from "../typings/RadioButtonsProps";
+import { defaultRadioButtonsStyle, RadioButtonsStyle } from "./ui/Styles";
 
-export interface RadioItemCustomStyle extends Style {
-    itemContainerStyle: ViewStyle;
-    textStyle: TextStyle;
-    buttonContainerStyle: ViewStyle;
-}
+export type props = RadioButtonsProps<RadioButtonsStyle>;
 
-export interface CustomStyle extends Style {
-    container: ViewStyle;
-    itemStyle: RadioItemCustomStyle;
-}
+export function RadioButtons({
+    enum: { setValue, universe, value = universe?.[0], formatter, readOnly, validation },
+    orientation,
+    style,
+    onChange,
+    name
+}: props): ReactElement {
+    const styles = mergeNativeStyles(defaultRadioButtonsStyle, style);
+    const onSelect = useCallback(
+        (selectedValue: string) => {
+            if (selectedValue === value) {
+                return;
+            }
+            setValue(selectedValue);
+            executeAction(onChange);
+        },
+        [onChange, setValue, value]
+    );
 
-// const defaultStyle: style = {};
-
-export function RadioButtons(props: RadioButtonsProps<CustomStyle>): ReactNode {
-    console.error(props);
-    // const styles = mergeNativeStyles(defaultStyle, props.style);
-
-    return <View>
-    {props.enum.universe?.map((title)=><RadioButton active={props.enum.displayValue===title} title={title} />)}
-    </View>;
+    return (
+        <View testID={name}>
+            <View style={[styles.containerStyle, orientation === "horizontal" && styles.containerHorizontal]}>
+                {universe?.map(name => (
+                    <RadioButton
+                        key={name}
+                        active={value === name}
+                        onSelect={onSelect}
+                        title={formatter.format(name)}
+                        styles={styles}
+                        name={name}
+                        disabled={readOnly}
+                    />
+                ))}
+            </View>
+            <Text style={styles.validationMessage}>{validation}</Text>
+        </View>
+    );
 }
