@@ -29,6 +29,7 @@ export interface ColumnsType {
     content?: ListWidgetValue;
     dynamicText?: ListExpressionValue<string>;
     header?: DynamicValue<string>;
+    tooltip?: ListExpressionValue<string>;
     filter?: ReactNode;
     sortable: boolean;
     resizable: boolean;
@@ -57,6 +58,7 @@ export interface ColumnsPreviewType {
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dynamicText: string;
     header: string;
+    tooltip: string;
     filter: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     sortable: boolean;
     resizable: boolean;

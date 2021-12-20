@@ -28,6 +28,9 @@ export function getProperties(
         if (column.showContentAs !== "customContent") {
             hidePropertyIn(defaultProperties, values, "columns", index, "content");
         }
+        if (column.showContentAs === "customContent") {
+            hidePropertyIn(defaultProperties, values, "columns", index, "tooltip");
+        }
         if (!values.columnsSortable) {
             hidePropertyIn(defaultProperties, values, "columns", index, "sortable");
         }
@@ -131,6 +134,7 @@ export const getPreview = (values: DatagridPreviewProps, isDarkMode: boolean): S
         : [
               {
                   header: "Column",
+                  tooltip: "",
                   attribute: "",
                   width: "autoFit",
                   columnClass: "",

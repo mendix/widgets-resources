@@ -4,7 +4,6 @@ import { FilterCondition } from "mendix/filters";
 import { and } from "mendix/filters/builders";
 
 import { Table, TableColumn } from "./components/Table";
-import classNames from "classnames";
 import {
     FilterFunction,
     FilterType,
@@ -12,8 +11,9 @@ import {
     useFilterContext,
     useMultipleFiltering
 } from "@mendix/piw-utils-internal/components/web";
-import { executeAction, isAvailable } from "@mendix/piw-utils-internal";
+import { isAvailable } from "@mendix/piw-utils-internal";
 import { extractFilters } from "./utils/filters";
+import { useCellRenderer } from "./utils/useCellRenderer";
 
 export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const id = useRef(`DataGrid${generateUUID()}`);
@@ -27,6 +27,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
     const [filtered, setFiltered] = useState(false);
     const multipleFilteringState = useMultipleFiltering();
     const { FilterContext } = useFilterContext();
+    const cellRenderer = useCellRenderer({ columns: props.columns, onClick: props.onClick });
 
     useEffect(() => {
         props.datasource.requestTotalCount(true);
@@ -104,29 +105,7 @@ export default function Datagrid(props: DatagridContainerProps): ReactElement {
 
     return (
         <Table
-            cellRenderer={useCallback(
-                (renderWrapper, value, columnIndex) => {
-                    const column = props.columns[columnIndex];
-                    let content;
-
-                    if (column.showContentAs === "attribute") {
-                        content = <span className="td-text">{column.attribute?.get(value)?.displayValue ?? ""}</span>;
-                    } else if (column.showContentAs === "dynamicText") {
-                        content = <span className="td-text">{column.dynamicText?.get(value)?.value ?? ""}</span>;
-                    } else {
-                        content = column.content?.get(value);
-                    }
-
-                    return renderWrapper(
-                        content,
-                        classNames(`align-column-${column.alignment}`, column.columnClass?.get(value)?.value, {
-                            "wrap-text": column.wrapText
-                        }),
-                        props.onClick ? () => executeAction(props.onClick?.get(value)) : undefined
-                    );
-                },
-                [props.columns, props.onClick]
-            )}
+            cellRenderer={cellRenderer}
             className={props.class}
             columns={columns}
             columnsDraggable={props.columnsDraggable}
