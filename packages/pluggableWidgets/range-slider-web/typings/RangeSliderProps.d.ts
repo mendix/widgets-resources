@@ -43,6 +43,7 @@ export interface RangeSliderContainerProps {
     tooltipLower?: DynamicValue<string>;
     tooltipTypeUpper: TooltipTypeUpperEnum;
     tooltipUpper?: DynamicValue<string>;
+    tooltipAlwaysVisible: boolean;
     noOfMarkers: number;
     decimalPlaces: number;
     orientation: OrientationEnum;
@@ -72,6 +73,7 @@ export interface RangeSliderPreviewProps {
     tooltipLower: string;
     tooltipTypeUpper: TooltipTypeUpperEnum;
     tooltipUpper: string;
+    tooltipAlwaysVisible: boolean;
     noOfMarkers: number | null;
     decimalPlaces: number | null;
     orientation: OrientationEnum;

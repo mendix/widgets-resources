@@ -1,23 +1,14 @@
-import { createElement } from "react";
+import { createElement, Ref } from "react";
 import Tooltip from "rc-tooltip";
-import { Handle } from "rc-slider";
+import { Handle, HandleProps } from "rc-slider";
 import { DynamicValue } from "mendix";
 
-// Copied from https://github.com/react-component/slider/blob/8.6.6/src/Slider.jsx#L165
-interface HandleGeneratorProps {
-    className: string;
+interface HandleGeneratorProps extends HandleProps {
     prefixCls?: string;
-    vertical: boolean;
-    offset: number;
     value: number;
     dragging?: boolean;
-    disabled?: boolean;
-    min?: number;
-    max?: number;
     index: number;
-    tabIndex?: number;
-    style?: React.CSSProperties;
-    ref?: React.Ref<any>;
+    ref?: Ref<any>;
 }
 
 type HandleGenerator = (props: HandleGeneratorProps) => JSX.Element;
@@ -26,10 +17,11 @@ type CreateHandleGeneratorParams = {
     showTooltip: boolean;
     tooltip?: DynamicValue<string>;
     tooltipType: "value" | "customText";
+    tooltipAlwaysVisible: boolean;
 };
 
 export function createHandleGenerator(props: CreateHandleGeneratorParams): HandleGenerator | undefined {
-    const { tooltip, showTooltip, tooltipType } = props;
+    const { tooltip, showTooltip, tooltipType, tooltipAlwaysVisible } = props;
     const isCustomText = tooltipType === "customText";
 
     if (!showTooltip) {
@@ -42,10 +34,11 @@ export function createHandleGenerator(props: CreateHandleGeneratorParams): Handl
 
         return (
             <Tooltip
+                defaultVisible
                 prefixCls="rc-slider-tooltip"
                 overlay={isCustomText ? overlay : restProps.value}
                 trigger={["hover", "click", "focus"]}
-                visible={dragging}
+                visible={tooltipAlwaysVisible || dragging}
                 placement="top"
                 mouseLeaveDelay={0}
                 key={index}

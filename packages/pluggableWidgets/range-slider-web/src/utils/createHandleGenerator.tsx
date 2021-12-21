@@ -3,7 +3,6 @@ import Tooltip from "rc-tooltip";
 import { Handle, HandleProps } from "rc-slider";
 import { DynamicValue } from "mendix";
 
-// Copied from https://github.com/react-component/slider/blob/8.6.6/src/Slider.jsx#L165
 interface HandleGeneratorProps extends HandleProps {
     value: number;
     dragging?: boolean;
@@ -18,10 +17,11 @@ type CreateHandleGeneratorParams = {
     tooltipUpper?: DynamicValue<string>;
     tooltipTypeLower: "value" | "customText";
     tooltipTypeUpper: "value" | "customText";
+    tooltipAlwaysVisible: boolean;
 };
 
 export function createHandleGenerator(props: CreateHandleGeneratorParams): HandleGenerator | undefined {
-    const { tooltipLower, tooltipUpper, showTooltip, tooltipTypeLower, tooltipTypeUpper } = props;
+    const { tooltipLower, tooltipUpper, showTooltip, tooltipTypeLower, tooltipTypeUpper, tooltipAlwaysVisible } = props;
     const tooltipTypeCheck = [tooltipTypeLower === "customText", tooltipTypeUpper === "customText"];
     const tooltipValue = [tooltipLower, tooltipUpper];
 
@@ -38,7 +38,7 @@ export function createHandleGenerator(props: CreateHandleGeneratorParams): Handl
                 prefixCls="rc-slider-tooltip"
                 overlay={isCustomText ? <div>{tooltipValue[index]?.value ?? ""}</div> : restProps.value}
                 trigger={["hover", "click", "focus"]}
-                visible={dragging}
+                visible={tooltipAlwaysVisible || dragging}
                 placement="top"
                 mouseLeaveDelay={0}
                 key={index}

@@ -39,6 +39,7 @@ export interface SliderContainerProps {
     showTooltip: boolean;
     tooltipType: TooltipTypeEnum;
     tooltip?: DynamicValue<string>;
+    tooltipAlwaysVisible: boolean;
     noOfMarkers: number;
     decimalPlaces: number;
     orientation: OrientationEnum;
@@ -66,6 +67,7 @@ export interface SliderPreviewProps {
     showTooltip: boolean;
     tooltipType: TooltipTypeEnum;
     tooltip: string;
+    tooltipAlwaysVisible: boolean;
     noOfMarkers: number | null;
     decimalPlaces: number | null;
     orientation: OrientationEnum;

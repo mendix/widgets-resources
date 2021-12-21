@@ -140,6 +140,10 @@
                     <caption>Tooltip</caption>
                     <description />
                 </property>
+                <property key="tooltipAlwaysVisible" type="boolean" defaultValue="false">
+                    <caption>Tooltip always visible</caption>
+                    <description>When enabled tooltip is always visible to the user</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Label">
                 <systemProperty key="Label" />
