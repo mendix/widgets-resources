@@ -10,7 +10,8 @@ import { Slider as SliderComponent } from "./components/Slider";
 import "./ui/Slider.scss";
 import { isVertical } from "./utils/isVertical";
 import { getStyleProp } from "./utils/getStyleProp";
-import { useScheduleUpdateOnce, isAvailable } from "@mendix/piw-utils-internal";
+import { useScheduleUpdateOnce } from "@mendix/piw-utils-internal";
+import { ValueStatus } from "mendix";
 
 export default function Slider(props: SliderContainerProps): ReactNode {
     const {
@@ -71,7 +72,7 @@ export default function Slider(props: SliderContainerProps): ReactNode {
     const handle = createHandleGenerator({ tooltip, showTooltip, tooltipType, tooltipAlwaysVisible });
     const { onChange } = useOnChangeDebounced({ valueAttribute, onChange: onChangeProp });
     const style = getStyleProp({ orientation, height, heightUnit });
-    useScheduleUpdateOnce(() => isAvailable(valueAttribute));
+    useScheduleUpdateOnce(() => valueAttribute.status === ValueStatus.Available);
 
     return (
         <SliderComponent

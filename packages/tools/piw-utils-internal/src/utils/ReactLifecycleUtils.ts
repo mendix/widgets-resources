@@ -1,15 +1,13 @@
-import { useReducer, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export function useScheduleUpdateOnce(predicate: () => boolean): void {
-    const [, forceUpdate] = useReducer(n => n + 1, 0);
-    const isCalled = useRef(false);
+    const [isCalled, setIsCalled] = useState(false);
 
-    if (isCalled.current) {
-        return;
-    }
+    const condition = predicate();
 
-    if (predicate()) {
-        isCalled.current = true;
-        setTimeout(forceUpdate, 0);
-    }
+    useEffect(() => {
+        if (!isCalled && condition) {
+            setTimeout(() => setIsCalled(true), 0);
+        }
+    }, [condition]);
 }
