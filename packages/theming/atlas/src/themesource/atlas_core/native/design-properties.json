@@ -2416,65 +2416,6 @@
             ]
         }
     ],
-    "com.mendix.widget.native.radiobutton.RadioButton": [
-        {
-            "name": "Radio button color",
-            "type": "Dropdown",
-            "description": "Change the radio button color.",
-            "options": [
-                {
-                    "name": "Brand Primary",
-                    "class": "radioButtonPrimary"
-                },
-                {
-                    "name": "Brand Success",
-                    "class": "radioButtonSuccess"
-                },
-                {
-                    "name": "Brand Warning",
-                    "class": "radioButtonWarning"
-                },
-                {
-                    "name": "Brand Danger",
-                    "class": "radioButtonDanger"
-                },
-                {
-                    "name": "Brand Info",
-                    "class": "radioButtonInfo"
-                }
-            ]
-        },
-        {
-            "name": "Radio button size",
-            "type": "Dropdown",
-            "description": "Change the radio button size.",
-            "options": [
-                {
-                    "name": "Small",
-                    "class": "radioButtonSmall"
-                },
-                {
-                    "name": "Large",
-                    "class": "radioButtonLarge"
-                }
-            ]
-        },
-        {
-            "name": "Weight",
-            "type": "Dropdown",
-            "description": "Emphasize the text with a heavier or lighter font weight",
-            "options": [
-                {
-                    "name": "Light",
-                    "class": "radioButtonLabelLight"
-                },
-                {
-                    "name": "Bold",
-                    "class": "radioButtonLabelBold"
-                }
-            ]
-        }
-    ],
     "com.mendix.widget.native.radiobuttons.RadioButtons": [
         {
             "name": "Radio button color",

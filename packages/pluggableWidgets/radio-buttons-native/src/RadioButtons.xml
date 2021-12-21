@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.radiobuttons.RadioButtons" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
+<widget id="com.mendix.widget.native.radiobuttons.RadioButtons"
+        pluginWidget="true"
+        needsEntityContext="true"
+        offlineCapable="true"
         supportedPlatform="Native"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.mendix.com/widget/1.0/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Radio Buttons</name>
     <description/>
+    <studioProCategory>Input elements</studioProCategory>
+    <studioCategory>Input elements</studioCategory>
     <icon/>
     <properties>
     <propertyGroup caption='General'>
@@ -26,9 +32,15 @@
                         <enumerationValue key="horizontal">Horizontal</enumerationValue>
                     </enumerationValues>
                 </property>
-                <property key="label" type="string" required="false">
+            </propertyGroup>
+            <propertyGroup caption="Label">
+                <property key="label" type="textTemplate" required="false">
                     <caption>Label</caption>
-                    <description>Radio buttons label</description>
+                    <description/>
+                </property>
+                <property key="showLabel" type="boolean" defaultValue="false">
+                    <caption>Show label</caption>
+                    <description/>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">

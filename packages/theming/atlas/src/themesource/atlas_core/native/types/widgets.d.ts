@@ -745,15 +745,3 @@ export interface RadioButtonsStyle {
     radioButtonItemTitleStyle?: TextStyle;
     validationMessage?: TextStyle;
 }
-
-// Radio Button
-export interface RadioButtonType {
-    container: ViewStyle;
-    horizontalContainer: ViewStyle;
-    radioButtonContainer: ViewStyle;
-    caption: TextStyle;
-    disabledCaption: TextStyle;
-    activeCircleRadioButton: ViewStyle;
-    defaultCircleRadioButton: ViewStyle;
-    disabledCircleRadioButton: ViewStyle;
-}

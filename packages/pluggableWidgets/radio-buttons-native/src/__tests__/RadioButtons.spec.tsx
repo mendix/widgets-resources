@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { actionValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
+import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
 import { RadioButtons, props } from "../RadioButtons";
 import { fireEvent, render } from "@testing-library/react-native";
 
@@ -21,7 +21,8 @@ describe("Radio buttons", () => {
             orientation: "vertical",
             style: [],
             onChange: actionValue(),
-            label: "radio buttons test"
+            label: dynamicValue<string>("Label", false),
+            showLabel: true
         };
     });
     it("render vertical radio buttons correctly", () => {
@@ -33,8 +34,21 @@ describe("Radio buttons", () => {
         const component = render(<RadioButtons {...defaultProps} orientation="horizontal" />);
         expect(component.toJSON()).toMatchSnapshot();
     });
+    it("render correctly with show label false", () => {
+        const component = render(<RadioButtons {...defaultProps} showLabel={false} />);
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+    it("render correctly without label", () => {
+        const component = render(<RadioButtons {...defaultProps} label={undefined} />);
+        expect(component.toJSON()).toMatchSnapshot();
+    });
     it("works correctly without options", () => {
         defaultProps.enum = new EditableValueBuilder<string>().build();
+        const component = render(<RadioButtons {...defaultProps} />);
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+    it("shows validations correctly", () => {
+        defaultProps.enum = new EditableValueBuilder<string>().withValidation("error message").build();
         const component = render(<RadioButtons {...defaultProps} />);
         expect(component.toJSON()).toMatchSnapshot();
     });

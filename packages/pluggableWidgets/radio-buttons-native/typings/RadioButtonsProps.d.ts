@@ -4,7 +4,7 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type OrientationEnum = "vertical" | "horizontal";
 
@@ -13,7 +13,8 @@ export interface RadioButtonsProps<Style> {
     style: Style[];
     enum: EditableValue<string>;
     orientation: OrientationEnum;
-    label: string;
+    label?: DynamicValue<string>;
+    showLabel: boolean;
     onChange?: ActionValue;
 }
 
@@ -25,5 +26,6 @@ export interface RadioButtonsPreviewProps {
     enum: string;
     orientation: OrientationEnum;
     label: string;
+    showLabel: boolean;
     onChange: {} | null;
 }

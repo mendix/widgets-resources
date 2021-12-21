@@ -16,7 +16,8 @@ export function RadioButtons({
     style,
     onChange,
     name,
-    label
+    label,
+    showLabel
 }: props): ReactElement {
     const styles = mergeNativeStyles(defaultRadioButtonsStyle, style);
     const onSelect = useCallback(
@@ -32,7 +33,7 @@ export function RadioButtons({
 
     return (
         <View testID={name}>
-            {label && <Text style={styles.labelTextStyle}>{label}</Text>}
+            {showLabel && <Text style={styles.labelTextStyle}>{label?.value}</Text>}
             <View style={orientation === "horizontal" && styles.containerHorizontal}>
                 {universe?.map(name => (
                     <RadioButton
