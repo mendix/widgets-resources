@@ -3,6 +3,7 @@ const { rmSync } = require("fs");
 const { promisify } = require("util");
 const { join } = require("path");
 const { downloadFile, execCommand } = require("./helpers");
+// const { IOS_DEVICE_TYPE, IOS_SDK_VERSION } = require("../detox.config");
 
 main().catch(e => {
     console.error(e);
@@ -29,6 +30,11 @@ async function main() {
 
     console.log("Installing simutils...");
     execCommand("brew tap wix/brew && brew install applesimutils");
+
+    // console.log("Creating iOS simulator...");
+    // const name = `NATIVE_${IOS_DEVICE_TYPE}_${IOS_SDK_VERSION}`;
+    // execCommand(`xcrun simctl delete '${name}'`, `Invalid device: ${name}`);
+    // execCommand(`xcrun simctl create '${name}' '${IOS_DEVICE_TYPE}' 'iOS${IOS_SDK_VERSION}'`);
 
     console.log("Done!");
 }

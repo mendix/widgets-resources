@@ -1,7 +1,7 @@
-const ANDROID_SDK_VERSION = 31;
+const ANDROID_SDK_VERSION = "31";
 const ANDROID_DEVICE_TYPE = "pixel";
-const IOS_SDK_VERSION = 15;
-const IOS_DEVICE_TYPE = "iPhone 13 Pro Max";
+const IOS_SDK_VERSION = "15.2";
+const IOS_DEVICE_TYPE = "iPhone 13";
 
 module.exports = {
     ANDROID_SDK_VERSION,
@@ -27,6 +27,7 @@ module.exports = {
             device: {
                 type: IOS_DEVICE_TYPE,
                 os: `iOS ${IOS_SDK_VERSION}`
+                // name: `NATIVE_${IOS_DEVICE_TYPE}_${IOS_SDK_VERSION}`
             }
         },
         android: {
@@ -34,6 +35,7 @@ module.exports = {
             device: {
                 avdName: `NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION}`
             }
+            // bootArgs: "-skin 1080x1920"
         }
     },
     configurations: {
