@@ -43,7 +43,8 @@
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
     "setup-mobile": "npm run setup-android && npm run setup-ios",
     "setup-android": "node ./detox/scripts/setup-android.js",
-    "setup-ios": "node ./detox/scripts/setup-ios.js"
+    "setup-ios": "node ./detox/scripts/setup-ios.js",
+    "data:widgets": "ts-node --project ./scripts/tsconfig.json ./scripts/data/PublishWidgetData.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
