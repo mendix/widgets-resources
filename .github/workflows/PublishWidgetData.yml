@@ -6,27 +6,16 @@ jobs:
   publish-data:
     runs-on: ubuntu-latest
     steps:
-      - name: "Checking-out code"
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           submodules: false
-      - name: "Defining cache"
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-      - name: "Defining node version"
-        uses: actions/setup-node@v2
+      - uses: actions/setup-node@v2
         with:
           node-version-file: '.nvmrc'
-      - name: "Install and build"
-        run: |
-          npm install
-          npm run data:widgets
-      - name: "Create pull request"
-        uses: peter-evans/create-pull-request@v3
+          cache: 'npm'
+      - run: npm install
+      - run: npm run data:widgets
+      - uses: peter-evans/create-pull-request@v3
         with:
           branch: build/update-widgets-data
           delete-branch: true
