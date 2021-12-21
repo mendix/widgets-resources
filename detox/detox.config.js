@@ -27,7 +27,6 @@ module.exports = {
             device: {
                 type: IOS_DEVICE_TYPE,
                 os: `iOS ${IOS_SDK_VERSION}`
-                // name: `NATIVE_${IOS_DEVICE_TYPE}_${IOS_SDK_VERSION}`
             }
         },
         android: {
@@ -35,7 +34,6 @@ module.exports = {
             device: {
                 avdName: `NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION}`
             }
-            // bootArgs: "-skin 1080x1920"
         }
     },
     configurations: {
