@@ -12,6 +12,8 @@ import { getStepValue } from "./utils/getStepValue";
 import { getStyleProp } from "./utils/getStyleProp";
 import { useOnChangeDebounced } from "./utils/useOnChangeDebounced";
 import { isVertical } from "./utils/isVertical";
+import { useScheduleUpdateOnce } from "@mendix/piw-utils-internal";
+import { ValueStatus } from "mendix";
 
 export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
     const {
@@ -39,7 +41,8 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
         tooltipUpper,
         showTooltip,
         tooltipTypeLower,
-        tooltipTypeUpper
+        tooltipTypeUpper,
+        tooltipAlwaysVisible
     } = props;
     const lowerValue = lowerBoundAttribute?.value?.toNumber() ?? 0;
     const upperValue = upperBoundAttribute?.value?.toNumber() ?? 0;
@@ -76,9 +79,11 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
     });
     const { onChange } = useOnChangeDebounced({ lowerBoundAttribute, upperBoundAttribute, onChange: onChangeProp });
     const style = getStyleProp({ orientation, height, heightUnit });
+    useScheduleUpdateOnce(() => lowerBoundAttribute.status === ValueStatus.Available);
 
     return (
         <RangeSliderComponent
+            allowCross={false}
             disabled={lowerBoundAttribute.readOnly || upperBoundAttribute.readOnly}
             rootStyle={style}
             vertical={isVertical(props)}
@@ -93,7 +98,8 @@ export function RangeSlider(props: RangeSliderContainerProps): ReactNode {
                 tooltipUpper,
                 showTooltip,
                 tooltipTypeLower,
-                tooltipTypeUpper
+                tooltipTypeUpper,
+                tooltipAlwaysVisible
             })}
         />
     );
