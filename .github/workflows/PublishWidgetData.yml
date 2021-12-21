@@ -30,7 +30,7 @@ jobs:
         with:
           branch: build/update-widgets-data
           delete-branch: true
-          commit-message: 'chore: Update widgets data file'
+          commit-message: 'chore: update widgets data file'
           title: 'chore: Update widgets data file'
           draft: false
           add-paths: 'data/widgets.json'
