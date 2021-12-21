@@ -1,0 +1,25 @@
+name: Publish widget data
+on:
+  schedule:
+    - cron: '0 2 * * *' # run at 2 AM UTC
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@v2
+        with:
+          submodules: false
+      - name: Install and Build
+        run: |
+          npm ci
+          npm run data:widgets
+      - name: "Create pull request"
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: build/widgets-data
+          delete-branch: true
+          commit-message: 'chore: Update widgets data file'
+          title: 'chore: Update widgets data file'
+          draft: false
+          add-paths: 'data/widgets.json'
