@@ -10,122 +10,94 @@ To customize any core styling, copy the part you want to customize to styles/nat
 import { brand } from "../../../../../theme/native/custom-variables";
 import { RadioButtonsStyle } from "../../types/widgets";
 
-export const radioPrimary: RadioButtonsStyle = {
-    circularBtnStyle: {
+// Radio buttons properties
+export const radioButtonsPrimary: RadioButtonsStyle = {
+    circularButtonStyle: {
         borderColor: brand.primary
     },
-    activeBtnStyle: {
+    activeButtonStyle: {
         backgroundColor: brand.primary
     },
-    radioItemTitleStyle: {
+    radioButtonItemTitleStyle: {
         color: brand.primary
     }
 };
 
-export const radioInfo: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.info
-    },
-    activeBtnStyle: {
-        backgroundColor: brand.info
-    },
-    radioItemTitleStyle: {
-        color: brand.info
-    }
-};
-
-export const radioDanger: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.danger
-    },
-    activeBtnStyle: {
-        backgroundColor: brand.danger
-    },
-    radioItemTitleStyle: {
-        color: brand.danger
-    }
-};
-
-export const radioDangerLight: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.dangerLight
-    },
-    activeBtnStyle: {
-        backgroundColor: brand.dangerLight
-    },
-    radioItemTitleStyle: {
-        color: brand.dangerLight
-    }
-};
-
-export const radioInfoLight: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.infoLight
-    },
-    activeBtnStyle: {
-        backgroundColor: brand.infoLight
-    },
-    radioItemTitleStyle: {
-        color: brand.infoLight
-    }
-};
-
-export const radioPrimaryLight: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.primaryLight
-    },
-    activeBtnStyle: {
-        backgroundColor: brand.primaryLight
-    },
-    radioItemTitleStyle: {
-        color: brand.primaryLight
-    }
-};
-
-export const radioSuccess: RadioButtonsStyle = {
-    circularBtnStyle: {
+export const radioButtonsSuccess: RadioButtonsStyle = {
+    circularButtonStyle: {
         borderColor: brand.success
     },
-    activeBtnStyle: {
+    activeButtonStyle: {
         backgroundColor: brand.success
     },
-    radioItemTitleStyle: {
+    radioButtonItemTitleStyle: {
         color: brand.success
     }
 };
 
-export const radioSuccessLight: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.successLight
-    },
-    activeBtnStyle: {
-        backgroundColor: brand.successLight
-    },
-    radioItemTitleStyle: {
-        color: brand.successLight
-    }
-};
-
-export const radioWarning: RadioButtonsStyle = {
-    circularBtnStyle: {
+export const radioButtonsWarning: RadioButtonsStyle = {
+    circularButtonStyle: {
         borderColor: brand.warning
     },
-    activeBtnStyle: {
+    activeButtonStyle: {
         backgroundColor: brand.warning
     },
-    radioItemTitleStyle: {
+    radioButtonItemTitleStyle: {
         color: brand.warning
     }
 };
 
-export const radioWarningLight: RadioButtonsStyle = {
-    circularBtnStyle: {
-        borderColor: brand.warningLight
+export const radioButtonsDanger: RadioButtonsStyle = {
+    circularButtonStyle: {
+        borderColor: brand.danger
     },
-    activeBtnStyle: {
-        backgroundColor: brand.warningLight
+    activeButtonStyle: {
+        backgroundColor: brand.danger
     },
-    radioItemTitleStyle: {
-        color: brand.warningLight
+    radioButtonItemTitleStyle: {
+        color: brand.danger
+    }
+};
+
+export const radioButtonsInfo: RadioButtonsStyle = {
+    circularButtonStyle: {
+        borderColor: brand.info
+    },
+    activeButtonStyle: {
+        backgroundColor: brand.info
+    },
+    radioButtonItemTitleStyle: {
+        color: brand.info
+    }
+};
+
+// Radio buttons label properties
+export const radioButtonsLabelPrimary: RadioButtonsStyle = {
+    labelTextStyle: {
+        color: brand.primary
+    }
+};
+
+export const radioButtonsLabelSuccess: RadioButtonsStyle = {
+    labelTextStyle: {
+        color: brand.success
+    }
+};
+
+export const radioButtonsLabelWarning: RadioButtonsStyle = {
+    labelTextStyle: {
+        color: brand.warning
+    }
+};
+
+export const radioButtonsLabelDanger: RadioButtonsStyle = {
+    labelTextStyle: {
+        color: brand.danger
+    }
+};
+
+export const radioButtonsLabelInfo: RadioButtonsStyle = {
+    labelTextStyle: {
+        color: brand.info
     }
 };

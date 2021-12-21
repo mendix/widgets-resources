@@ -1,6 +1,7 @@
 import { createElement, ReactElement } from "react";
 import { Pressable, Text, View } from "react-native";
 import { RadioButtonsStyle } from "../ui/Styles";
+import { OrientationEnum } from "../../typings/RadioButtonsProps";
 
 export interface RadioButtonProps {
     title: string;
@@ -9,19 +10,32 @@ export interface RadioButtonProps {
     styles: RadioButtonsStyle;
     name: string;
     disabled: boolean;
+    orientation: OrientationEnum;
 }
 
-export function RadioButton({ active, onSelect, title, styles, name, disabled }: RadioButtonProps): ReactElement {
+export function RadioButton({
+    active,
+    onSelect,
+    title,
+    styles,
+    name,
+    disabled,
+    orientation
+}: RadioButtonProps): ReactElement {
     return (
         <Pressable
-            style={[styles.radioItemContainerStyle, disabled && styles.radioItemContainerDisabledStyle]}
+            style={[
+                styles.radioButtonItemContainerStyle,
+                orientation === "horizontal" && styles.radioButtonItemContainerHorizontalStyle,
+                disabled && styles.radioButtonItemContainerDisabledStyle
+            ]}
             onPress={() => onSelect(name)}
             testID={`radio-button-${name}`}
         >
-            <View style={[styles.circularBtnStyle, disabled && styles.circularBtnDisabledStyle]}>
-                {active && <View style={styles.activeBtnStyle} />}
+            <View style={[styles.circularButtonStyle, disabled && styles.circularBtnDisabledStyle]}>
+                {active && <View style={styles.activeButtonStyle} />}
             </View>
-            <Text style={styles.radioItemTitleStyle}>{title}</Text>
+            <Text style={styles.radioButtonItemTitleStyle}>{title}</Text>
         </Pressable>
     );
 }

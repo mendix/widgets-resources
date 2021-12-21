@@ -11,27 +11,29 @@ import { defaultRadioButtonsStyle, RadioButtonsStyle } from "./ui/Styles";
 export type props = RadioButtonsProps<RadioButtonsStyle>;
 
 export function RadioButtons({
-    enum: { setValue, universe, value = universe?.[0], formatter, readOnly, validation },
+    enum: { setValue, universe, value, formatter, readOnly, validation },
     orientation,
     style,
     onChange,
-    name
+    name,
+    label
 }: props): ReactElement {
     const styles = mergeNativeStyles(defaultRadioButtonsStyle, style);
     const onSelect = useCallback(
         (selectedValue: string) => {
-            if (selectedValue === value) {
+            if (selectedValue === value || readOnly) {
                 return;
             }
             setValue(selectedValue);
             executeAction(onChange);
         },
-        [onChange, setValue, value]
+        [onChange, readOnly, setValue, value]
     );
 
     return (
         <View testID={name}>
-            <View style={[styles.containerStyle, orientation === "horizontal" && styles.containerHorizontal]}>
+            {label && <Text style={styles.labelTextStyle}>{label}</Text>}
+            <View style={orientation === "horizontal" && styles.containerHorizontal}>
                 {universe?.map(name => (
                     <RadioButton
                         key={name}
@@ -41,10 +43,11 @@ export function RadioButtons({
                         styles={styles}
                         name={name}
                         disabled={readOnly}
+                        orientation={orientation}
                     />
                 ))}
             </View>
-            <Text style={styles.validationMessage}>{validation}</Text>
+            {validation && <Text style={styles.validationMessage}>{validation}</Text>}
         </View>
     );
 }

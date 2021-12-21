@@ -13,6 +13,7 @@ export interface RadioButtonsProps<Style> {
     style: Style[];
     enum: EditableValue<string>;
     orientation: OrientationEnum;
+    label: string;
     onChange?: ActionValue;
 }
 
@@ -23,5 +24,6 @@ export interface RadioButtonsPreviewProps {
     readOnly: boolean;
     enum: string;
     orientation: OrientationEnum;
+    label: string;
     onChange: {} | null;
 }

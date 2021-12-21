@@ -2,35 +2,40 @@ import { Style } from "@mendix/piw-native-utils-internal";
 import { TextStyle, ViewStyle } from "react-native";
 
 export interface RadioButtonsStyle extends Style {
-    container: ViewStyle;
     containerHorizontal: ViewStyle;
-    radioItemContainerStyle: ViewStyle;
-    radioItemContainerDisabledStyle: ViewStyle;
-    circularBtnStyle: ViewStyle;
-    activeBtnStyle: ViewStyle;
-    radioItemTitleStyle: TextStyle;
+    labelTextStyle: TextStyle;
+    radioButtonItemContainerStyle: ViewStyle;
+    radioButtonItemContainerDisabledStyle: ViewStyle;
+    radioButtonItemContainerHorizontalStyle: ViewStyle;
+    circularButtonStyle: ViewStyle;
+    activeButtonStyle: ViewStyle;
+    radioButtonItemTitleStyle: TextStyle;
     validationMessage: TextStyle;
 }
 
 export const defaultRadioButtonsStyle: RadioButtonsStyle = {
-    container: {},
     containerHorizontal: {
         flexDirection: "row",
         alignItems: "center",
         flexWrap: "wrap"
     },
-    radioItemContainerStyle: {
+    radioButtonItemContainerStyle: {
         flexDirection: "row",
         alignItems: "center"
     },
-    circularBtnStyle: {
+    radioButtonItemContainerHorizontalStyle: {
+        marginBottom: 0
+    },
+    radioButtonItemContainerDisabledStyle: {
+        opacity: 0.5
+    },
+    circularButtonStyle: {
+        borderWidth: 1,
         justifyContent: "center",
         alignItems: "center"
     },
-    activeBtnStyle: {},
-    radioItemTitleStyle: {},
-    radioItemTitleDisabledStyle: {},
-    circularBtnDisabledStyle: {},
-    radioItemContainerDisabledStyle: { opacity: 0.3 },
+    labelTextStyle: {},
+    activeButtonStyle: {},
+    radioButtonItemTitleStyle: {},
     validationMessage: {}
 };

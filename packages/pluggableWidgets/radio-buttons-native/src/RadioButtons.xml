@@ -26,6 +26,10 @@
                         <enumerationValue key="horizontal">Horizontal</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="label" type="string" required="false">
+                    <caption>Label</caption>
+                    <description>Radio buttons label</description>
+                </property>
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onChange" type="action" required="false">

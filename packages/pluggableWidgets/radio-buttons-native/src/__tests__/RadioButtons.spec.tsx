@@ -20,7 +20,8 @@ describe("Radio buttons", () => {
             name: "radio-buttons-test",
             orientation: "vertical",
             style: [],
-            onChange: actionValue()
+            onChange: actionValue(),
+            label: "radio buttons test"
         };
     });
     it("render vertical radio buttons correctly", () => {
