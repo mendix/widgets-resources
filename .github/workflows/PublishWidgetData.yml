@@ -2,6 +2,7 @@ name: Publish widget data
 on:
   schedule:
     - cron: '0 2 * * *' # run at 2 AM UTC
+  push:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
