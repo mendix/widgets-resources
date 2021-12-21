@@ -1,12 +1,7 @@
 # Running local detox tests
 
-To be able to run detox tests you need the following pieces:
-
--   2 Apks for android (in the `detox/apps` folder)
--   IPA for ios (in the `detox/apps` folder)
--   Emulator android (run `detox/apps/setup-android.sh` script)
--   Emulator iOS (run `detox/apps/setup-ios.sh` script)
--   Actual detox tests (in `packages/pluggableWidgets/<widget-name>-native`)
+The devices that will be run on are defined in the top of the `detox/detox.config.js` file.
+To prepare your environment for running the e2e tests (or when you changed the devices in the config file), first run `npm run setup-mobile` from the root of this package.
 
 ### Run or debug the tests:
 
