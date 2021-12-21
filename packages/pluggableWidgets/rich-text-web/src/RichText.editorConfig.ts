@@ -45,11 +45,11 @@ export function getProperties(
     }
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
-    } else {
-        hidePropertyIn(defaultProperties, values, "advancedMode");
         if (!values.advancedMode) {
             hidePropertiesIn(defaultProperties, values, advancedModeItems);
         }
+    } else {
+        hidePropertyIn(defaultProperties, values, "advancedMode");
     }
     return defaultProperties;
 }
