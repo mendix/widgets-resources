@@ -1,6 +1,10 @@
-import * as fs from "fs";
-import { join, dirname } from "path";
+import { promises as fs } from "fs";
+import { dirname, join } from "path";
 import { FileReadError, PatternNotFoundError } from "./errors";
+import { promisify } from "util";
+import { exec } from "child_process";
+
+const execAsync = promisify(exec);
 
 const patterns = {
     widgetFileName: new RegExp('<widgetFile path="(.*\\.xml)"\\s*/>'),
@@ -10,71 +14,78 @@ const patterns = {
     supportedPlatform: new RegExp(`supportedPlatform="(.+?)"`)
 };
 
-const result = ["packages/pluggableWidgets", "packages/customWidgets"]
-    .reduce<string[]>(
-        (result, packageRoot) => [
-            ...result,
-            ...fs
-                .readdirSync(packageRoot)
-                .filter(path => !path.startsWith("."))
-                .map(dir => join(packageRoot, dir))
-        ],
-        []
-    )
-    .map(packagePath => {
-        try {
-            const { widgetFileName } = extractTextFromFile(packagePath, "src/package.xml", {
-                widgetFileName: [patterns.widgetFileName]
-            });
+main().catch(e => {
+    console.error(e);
+    process.exit(1);
+});
 
-            const { id, pluginWidget, offlineCapable, supportedPlatform } = extractTextFromFile(
-                packagePath,
-                `src/${widgetFileName}`,
-                {
-                    id: [patterns.id],
-                    pluginWidget: [patterns.pluginWidget, false],
-                    offlineCapable: [patterns.offlineCapable, false],
-                    supportedPlatform: [patterns.supportedPlatform, false]
+async function main(): Promise<void> {
+    const { stdout: lernaPackages } = await execAsync("npx lerna ls --json --all");
+    const locations: string[] = JSON.parse(lernaPackages.trim()).map(lernaPackage => lernaPackage.location);
+
+    const packages = await Promise.all(
+        locations
+            .filter(location => location.match(/(pluggable|custom)Widgets/))
+            .map(async packagePath => {
+                try {
+                    const { widgetFileName } = await extractTextFromFile(packagePath, "src/package.xml", {
+                        widgetFileName: [patterns.widgetFileName]
+                    });
+
+                    const { id, pluginWidget, offlineCapable, supportedPlatform } = await extractTextFromFile(
+                        packagePath,
+                        `src/${widgetFileName}`,
+                        {
+                            id: [patterns.id],
+                            pluginWidget: [patterns.pluginWidget, false],
+                            offlineCapable: [patterns.offlineCapable, false],
+                            supportedPlatform: [patterns.supportedPlatform, false]
+                        }
+                    );
+
+                    return {
+                        id,
+                        pluginWidget: pluginWidget === "true",
+                        offlineCapable: offlineCapable === "true",
+                        supportedPlatform: supportedPlatform ?? "Web"
+                    };
+                } catch (e) {
+                    if (e instanceof Error && (e.name === "FileReadError" || e.name === "ValueNotFoundError")) {
+                        console.warn(e.message);
+                        return undefined;
+                    }
+                    throw e;
                 }
-            );
+            })
+    );
 
-            return {
-                id,
-                pluginWidget: pluginWidget === "true",
-                offlineCapable: offlineCapable === "true",
-                supportedPlatform: supportedPlatform ?? "Web"
-            };
-        } catch (e) {
-            if (e instanceof Error && (e.name === "FileReadError" || e.name === "ValueNotFoundError")) {
-                console.warn(e.message);
-                return undefined;
-            }
-            throw e;
-        }
-    })
-    .filter(isDefined);
+    const result = packages.filter(isDefined);
 
-writeFile("data/widgets.json", JSON.stringify(result, null, "\t"));
+    await writeFile("data/widgets.json", JSON.stringify(result, null, "\t"));
+}
 
 function isDefined<T>(val: T | undefined | null): val is T {
     return val !== undefined && val !== null;
 }
 
-function readPackageFile(packagePath: string, filePath: string): string {
+async function readPackageFile(packagePath: string, filePath: string): Promise<string> {
     try {
         const fullPath = join(packagePath, filePath);
-        return fs.readFileSync(fullPath).toString();
+        const fileBuffer = await fs.readFile(fullPath);
+        return fileBuffer.toString();
     } catch (e) {
         throw new FileReadError(packagePath, filePath);
     }
 }
 
-function writeFile(path: string, content: string): void {
+async function writeFile(path: string, content: string): Promise<void> {
     const dir = dirname(path);
-    if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
+    try {
+        await fs.access(dir);
+    } catch (_) {
+        await fs.mkdir(dir, { recursive: true });
     }
-    fs.writeFileSync(path, content, { flag: "w+" });
+    await fs.writeFile(path, content, { flag: "w+" });
 }
 
 type Patterns = { [key: string]: [RegExp, boolean?] }; // boolean indicates if value is required or not
@@ -83,8 +94,12 @@ type Values<P extends Patterns> = {
     [key in keyof P]: P[key][1] extends true | undefined ? string : string | undefined;
 };
 
-function extractTextFromFile<P extends Patterns>(packagePath: string, filePath: string, patterns: P): Values<P> {
-    const content = readPackageFile(packagePath, filePath);
+async function extractTextFromFile<P extends Patterns>(
+    packagePath: string,
+    filePath: string,
+    patterns: P
+): Promise<Values<P>> {
+    const content = await readPackageFile(packagePath, filePath);
     return Object.entries(patterns).reduce<Values<P>>((result, [key, [pattern, required = true]]) => {
         const [, value] = content.match(pattern) ?? [];
         if (!value) {
