@@ -1,7 +1,12 @@
 name: Publish widget data
 on:
-  schedule:
-    - cron: '0 2 * * *' # run at 2 AM UTC
+  push:
+    branches:
+      - master
+    paths:
+      - packages/pluggableWidgets/**/*
+      - packages/customWidgets/**/*
+      - scripts/data/**/*
 jobs:
   publish-data:
     runs-on: ubuntu-latest
