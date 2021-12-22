@@ -21,7 +21,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm install
-      - run: npm run data:widgets
+      - run: npm run update:widgets-data]
       - uses: peter-evans/create-pull-request@v3
         with:
           branch: build/update-widgets-data

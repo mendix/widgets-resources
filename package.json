@@ -44,7 +44,7 @@
     "setup-mobile": "npm run setup-android && npm run setup-ios",
     "setup-android": "node ./detox/scripts/setup-android.js",
     "setup-ios": "node ./detox/scripts/setup-ios.js",
-    "data:widgets": "ts-node --project ./scripts/tsconfig.json ./scripts/data/PublishWidgetData.ts"
+    "update:widgets-data": "ts-node --project ./scripts/tsconfig.json scripts/data/updateWidgetsData.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
