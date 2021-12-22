@@ -2,6 +2,14 @@ import * as fs from "fs";
 import { join, dirname } from "path";
 import { FileReadError, PatternNotFoundError } from "./errors";
 
+const patterns = {
+    widgetFileName: new RegExp('<widgetFile path="(.*\\.xml)"\\s*/>'),
+    id: new RegExp(`id="(.+?)"`),
+    pluginWidget: new RegExp(`pluginWidget="(.+?)"`),
+    offlineCapable: new RegExp(`offlineCapable="(.+?)"`),
+    supportedPlatform: new RegExp(`supportedPlatform="(.+?)"`)
+};
+
 const result = ["packages/pluggableWidgets", "packages/customWidgets"]
     .reduce<string[]>(
         (result, packageRoot) => [
@@ -16,17 +24,17 @@ const result = ["packages/pluggableWidgets", "packages/customWidgets"]
     .map(packagePath => {
         try {
             const { widgetFileName } = extractTextFromFile(packagePath, "src/package.xml", {
-                widgetFileName: [new RegExp('<widgetFile path="(.*\\.xml)"\\s*/>')]
+                widgetFileName: [patterns.widgetFileName]
             });
 
             const { id, pluginWidget, offlineCapable, supportedPlatform } = extractTextFromFile(
                 packagePath,
                 `src/${widgetFileName}`,
                 {
-                    id: [new RegExp(`id="(.+?)"`)],
-                    pluginWidget: [new RegExp(`pluginWidget="(.+?)"`), false],
-                    offlineCapable: [new RegExp(`offlineCapable="(.+?)"`), false],
-                    supportedPlatform: [new RegExp(`supportedPlatform="(.+?)"`), false]
+                    id: [patterns.id],
+                    pluginWidget: [patterns.pluginWidget, false],
+                    offlineCapable: [patterns.offlineCapable, false],
+                    supportedPlatform: [patterns.supportedPlatform, false]
                 }
             );
 
@@ -77,7 +85,7 @@ type Values<P extends Patterns> = {
 
 function extractTextFromFile<P extends Patterns>(packagePath: string, filePath: string, patterns: P): Values<P> {
     const content = readPackageFile(packagePath, filePath);
-    return Object.entries(patterns).reduce((result, [key, [pattern, required = true]]) => {
+    return Object.entries(patterns).reduce<Values<P>>((result, [key, [pattern, required = true]]) => {
         const [, value] = content.match(pattern) ?? [];
         if (!value) {
             if (required) {
