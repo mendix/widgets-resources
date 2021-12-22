@@ -41,7 +41,6 @@
     "create-modules:web": "node ./scripts/release/createWebModules.js",
     "version": "ts-node --project ./scripts/tsconfig.json ./scripts/release/BumpVersion.ts",
     "validate-staged-widget-versions": "node scripts/validation/validate-versions-staged-files.js",
-    "commit-msg": "commitlint --edit \"$1\"",
     "setup-mobile": "npm run setup-android && npm run setup-ios",
     "setup-android": "node ./detox/scripts/setup-android.js",
     "setup-ios": "node ./detox/scripts/setup-ios.js"
@@ -60,12 +59,12 @@
     "@types/jest-image-snapshot": "^4.3.1",
     "@types/mime": "^2.0.3",
     "@types/node": "^14.14.6",
+    "@types/shelljs": "^0.8.9",
     "@types/react": "~17.0.1",
     "@types/react-dom": "~17.0.1",
     "@types/react-native": "~0.63.30",
-    "@types/react-native-vector-icons": "^6.4.6",
+    "@types/react-native-vector-icons": "^6.4.9",
     "@types/react-test-renderer": "~17.0.1",
-    "@types/shelljs": "^0.8.9",
     "@types/xml2js": "^0.4.5",
     "cross-env": "^7.0.2",
     "deepmerge": "^4.2.2",
@@ -89,12 +88,6 @@
     "recursive-copy": "^2.0.11",
     "ts-node": "^9.0.0",
     "zip-folder": "^1.0.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && npm run validate-staged-widget-versions",
-      "commit-msg": "npm run commit-msg"
-    }
   },
   "commitlint": {
     "extends": [

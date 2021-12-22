@@ -1,5 +1,14 @@
 # Running local detox tests
 
+### Required software
+
+-   Android studio
+-   Xcode
+-   Node 14
+-   Java 8
+
+### Setup emulators
+
 The devices that will be run on are defined in the top of the `detox/detox.config.js` file.
 To prepare your environment for running the e2e tests (or when you changed the devices in the config file), first run `npm run setup-mobile` from the root of this package.
 

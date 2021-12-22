@@ -3,7 +3,6 @@ const { rmSync } = require("fs");
 const { promisify } = require("util");
 const { join } = require("path");
 const { downloadFile, execCommand } = require("./helpers");
-// const { IOS_DEVICE_TYPE, IOS_SDK_VERSION } = require("../detox.config");
 
 main().catch(e => {
     console.error(e);
