@@ -25,6 +25,7 @@ export interface RichTextProps {
     onValueChange?: (value: string) => void;
     onKeyChange?: () => void;
     onKeyPress?: () => void;
+    tabIndex: number | undefined;
 }
 
 export const RichTextEditor = (props: RichTextProps): ReactElement => {
@@ -55,6 +56,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
             autoGrow_onStartup: true,
             width,
             height,
+            tabIndex: props.tabIndex,
             enterMode: defineEnterMode(enterMode || ""),
             shiftEnterMode: defineEnterMode(shiftEnterMode || ""),
             disableNativeSpellChecker: !props.spellChecker,

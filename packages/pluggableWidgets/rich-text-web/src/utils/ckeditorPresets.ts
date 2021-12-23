@@ -129,7 +129,7 @@ function createCustomToolbar(groups: Array<string | ToolbarItems>, withGroupName
     } else {
         return {
             extraPlugins:
-                "save,templates,newpage,print,forms,find,selectall,div,divarea,justify,bidi,language,font,colorbutton,showblocks",
+                "save,templates,newpage,print,forms,find,selectall,div,divarea,justify,bidi,language,font,colorbutton,showblocks,smiley",
             toolbar: groups
         };
     }

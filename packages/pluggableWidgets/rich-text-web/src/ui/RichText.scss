@@ -1,15 +1,18 @@
-@use "~ckeditor4/skins/moono-lisa/editor.css";
 @use "~ckeditor4/plugins/tableselection/styles/tableselection.css";
 @use "~ckeditor4/plugins/dialog/styles/dialog.css" as dialog;
 @use "~ckeditor4/plugins/scayt/dialogs/dialog.css" as scaytDialog;
 @use "~ckeditor4/plugins/scayt/skins/moono-lisa/scayt.css";
+@use "~ckeditor4/plugins/autocomplete/skins/default.css" as autocomplete;
+@use "~ckeditor4/plugins/balloonpanel/skins/moono-lisa/balloonpanel.css";
+@use "~ckeditor4/plugins/balloontoolbar/skins/moono-lisa/balloontoolbar.css";
+@use "~ckeditor4/plugins/codesnippet/lib/highlight/styles/idea.css";
+@use "~ckeditor4/plugins/colordialog/dialogs/colordialog.css";
+@use "~ckeditor4/plugins/emoji/skins/default.css" as emoji;
+@use "~ckeditor4/plugins/preview/styles/screen.css";
+@use "~ckeditor4/plugins/wsc/skins/moono-lisa/wsc.css";
+@use "~ckeditor4/plugins/copyformatting/styles/copyformatting.css";
 
 .widget-rich-text {
-    .cke,
-    .cke_chrome {
-        visibility: visible;
-    }
-
     &.editor-text {
         .cke {
             border: none;

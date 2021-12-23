@@ -69,6 +69,7 @@ export default function RichText(props: RichTextContainerProps): ReactNode {
                 height: props.height,
                 heightUnit: props.heightUnit
             }}
+            tabIndex={props.tabIndex}
         />
     );
 }

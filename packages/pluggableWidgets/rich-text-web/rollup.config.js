@@ -1,4 +1,4 @@
-import { join, extname, dirname } from "path";
+import { join, extname, dirname, basename } from "path";
 import json from "@rollup/plugin-json";
 import command from "rollup-plugin-command";
 import copy from "recursive-copy";
@@ -24,9 +24,13 @@ function copyCKEditorDirToDist(outDir) {
         async () => {
             return copy(dirname(require.resolve("ckeditor4")), outDir, {
                 transform: src => {
-                    /* we need to empty every single css inside the folder to avoid duplicate bundling,
+                    /* we need to empty every single css (excluding editor and dialog) inside the folder to avoid duplicate bundling,
                      because even if the file is not imported anywhere it will be compiled inside RichText.js and RichText.mjs */
-                    if (extname(src) === ".css") {
+                    /* we need editor and dialog because it's required for loading styles on iframe elements (basically every dropdown,popup items from toolbar) */
+                    if (
+                        extname(src) === ".css" &&
+                        !(basename(src) === "editor.css" || basename(src) === "dialog.css")
+                    ) {
                         return through((chunk, enc, done) => done(null, ""));
                     }
                 },

@@ -4,6 +4,7 @@ import { RichTextEditor, RichTextProps } from "../RichText";
 import { CKEditorConfig } from "ckeditor4-react";
 import { getPreset, defineEnterMode, getToolbarGroupByName, defineAdvancedGroups } from "../../utils/ckeditorConfigs";
 import { mount, ReactWrapper } from "enzyme";
+import renderer from "react-test-renderer";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
 import { TOOLBAR_GROUP, ToolbarGroup } from "../../utils/ckeditorPresets";
 import { AdvancedConfigType } from "../../../typings/RichTextProps";
@@ -31,12 +32,18 @@ describe("RichText", () => {
         editorType: "classic",
         enterMode: "paragraph",
         shiftEnterMode: "paragraph",
-        toolbar: getPreset("basic")
+        toolbar: getPreset("basic"),
+        tabIndex: 1
     };
 
     function renderRichText(props = defaultRichTextProps): ReactWrapper {
         return mount(<RichTextEditor {...props} />);
     }
+
+    it("render DOM structure", () => {
+        const richText = renderer.create(<RichTextEditor {...defaultRichTextProps} />).toJSON();
+        expect(richText).toMatchSnapshot();
+    });
 
     it("renders dom elements with correct props", () => {
         const richText = renderRichText();
