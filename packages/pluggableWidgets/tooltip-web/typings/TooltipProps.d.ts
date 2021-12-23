@@ -8,7 +8,7 @@ import { DynamicValue } from "mendix";
 
 export type RenderMethodEnum = "text" | "custom";
 
-export type TooltipPositionEnum = "top" | "left" | "bottom" | "right";
+export type TooltipPositionEnum = "left" | "right" | "top" | "bottom";
 
 export type ArrowPositionEnum = "start" | "none" | "end";
 

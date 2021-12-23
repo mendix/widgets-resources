@@ -7,6 +7,8 @@ to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.0] - 2021-12-23
+
 ### Added
 - We added dark mode to Structure mode preview.
 - We added dark icons for Tile and List view.
