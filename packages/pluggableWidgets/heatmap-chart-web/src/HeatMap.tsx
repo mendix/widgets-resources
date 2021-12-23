@@ -6,15 +6,22 @@ import { useHeatMapDataSeries } from "./hooks/data";
 
 const heatmapChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     font: {
-        color: "#FFF",
+        color: "#555",
         size: 12
     },
     legend: {
         font: {
             family: "Open Sans",
-            size: 14,
-            color: "#555"
+            size: 14
         }
+    },
+    xaxis: {
+        fixedrange: true,
+        ticks: ""
+    },
+    yaxis: {
+        fixedrange: true,
+        ticks: ""
     }
 };
 const heatmapChartConfigOptions: ChartWidgetProps["configOptions"] = {
@@ -22,20 +29,30 @@ const heatmapChartConfigOptions: ChartWidgetProps["configOptions"] = {
 };
 const heatmapChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
     type: "heatmap",
-    hoverinfo: "none"
+    hoverinfo: "none",
+    xgap: 1,
+    ygap: 1,
+    colorbar: {
+        y: 1,
+        yanchor: "top",
+        ypad: 0,
+        xpad: 5,
+        outlinecolor: "#9ba492"
+    }
 };
 
 export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
     const heatmapChartData = useHeatMapDataSeries({
         customSeriesOptions: props.customSeriesOptions,
-        seriesColorAttribute: props.seriesColorAttribute,
+        onClickAction: props.onClickAction,
+        scaleColors: props.scaleColors,
         seriesDataSource: props.seriesDataSource,
         seriesName: props.seriesName,
-        seriesSortAttribute: props.seriesSortAttribute,
-        seriesSortOrder: props.seriesSortOrder,
         seriesValueAttribute: props.seriesValueAttribute,
-        onClickAction: props.onClickAction,
-        tooltipHoverText: props.tooltipHoverText
+        showScale: props.showScale,
+        tooltipHoverText: props.tooltipHoverText,
+        xAttribute: props.xAttribute,
+        yAttribute: props.yAttribute
     });
 
     return (

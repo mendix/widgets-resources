@@ -1,43 +1,48 @@
 import { ValueStatus } from "mendix";
 import { useEffect, useMemo, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
-import Big from "big.js";
-import { compareAsc } from "date-fns";
 import { HeatMapContainerProps } from "../../typings/HeatMapProps";
 import { ChartProps } from "@mendix/shared-charts/dist/components/Chart";
 import { executeAction } from "@mendix/piw-utils-internal";
+import Big from "big.js";
 
 type HeatMapDataSeriesHooks = Pick<
     HeatMapContainerProps,
     | "customSeriesOptions"
-    | "seriesColorAttribute"
+    | "onClickAction"
+    | "scaleColors"
     | "seriesDataSource"
     | "seriesName"
-    | "seriesSortAttribute"
-    | "seriesSortOrder"
     | "seriesValueAttribute"
-    | "onClickAction"
+    | "showScale"
     | "tooltipHoverText"
+    | "xAttribute"
+    | "yAttribute"
 >;
 
 type LocalHeatMapData = {
     itemName: string | undefined;
     itemValue: number | undefined;
-    itemColor: string | undefined;
-    itemSortValue: string | boolean | Date | Big | undefined;
     itemHoverText: string | undefined;
+    itemXAttribute: string | number | Date | undefined;
+    itemYAttribute: string | number | Date | undefined;
 };
+
+function getUniqueValues<T>(values: T[]): T[] {
+    return Array.from(new Set(values));
+}
 
 export const useHeatMapDataSeries = ({
     customSeriesOptions,
-    seriesColorAttribute,
+    onClickAction,
+    scaleColors,
     seriesDataSource,
     seriesName,
-    seriesSortAttribute,
-    seriesSortOrder,
     seriesValueAttribute,
-    onClickAction,
-    tooltipHoverText
+    showScale,
+    tooltipHoverText,
+    xAttribute,
+    yAttribute
 }: HeatMapDataSeriesHooks): ChartProps["data"] => {
     const [heatmapChartData, setHeatMapData] = useState<LocalHeatMapData[]>([]);
 
@@ -46,81 +51,66 @@ export const useHeatMapDataSeries = ({
             const dataSourceItems = seriesDataSource.items.map(dataSourceItem => ({
                 itemName: seriesName.get(dataSourceItem).value,
                 itemValue: ensure(seriesValueAttribute).get(dataSourceItem).value?.toNumber(),
-                itemColor: seriesColorAttribute?.get(dataSourceItem).value,
-                itemSortValue: seriesSortAttribute?.get(dataSourceItem).value,
-                itemHoverText: tooltipHoverText?.get(dataSourceItem).value
+                itemHoverText: tooltipHoverText?.get(dataSourceItem).value,
+                itemXAttribute: formatValueAttribute(xAttribute?.get(dataSourceItem).value),
+                itemYAttribute: formatValueAttribute(yAttribute?.get(dataSourceItem).value)
             }));
-            if (seriesSortAttribute) {
-                dataSourceItems.sort(seriesSortAttributeCompareFn);
-                if (seriesSortOrder === "desc") {
-                    dataSourceItems.reverse();
-                }
-            }
             setHeatMapData(dataSourceItems);
         }
-    }, [
-        seriesColorAttribute,
-        seriesDataSource,
-        seriesName,
-        seriesSortAttribute,
-        seriesSortOrder,
-        seriesValueAttribute,
-        tooltipHoverText
-    ]);
+    }, [seriesDataSource, seriesName, seriesValueAttribute, tooltipHoverText, xAttribute, yAttribute]);
 
     const onClick = useMemo(() => (onClickAction ? () => executeAction(onClickAction) : undefined), [onClickAction]);
 
-    return useMemo<ChartProps["data"]>(
-        () => [
+    return useMemo<ChartProps["data"]>(() => {
+        const uniqueHorizontalValues = getUniqueValues(heatmapChartData.map(({ itemXAttribute }) => itemXAttribute));
+        const uniqueVerticalValues = getUniqueValues(heatmapChartData.map(({ itemYAttribute }) => itemYAttribute));
+        const heatmapValues = uniqueVerticalValues.map(yValue =>
+            uniqueHorizontalValues
+                .map(xValue =>
+                    heatmapChartData.find(
+                        ({ itemXAttribute, itemYAttribute }) => itemXAttribute === xValue && itemYAttribute === yValue
+                    )
+                )
+                .map(localDataPoint => localDataPoint?.itemValue ?? null)
+        );
+        return [
             {
+                colorscale: processColorScale(scaleColors),
                 customSeriesOptions,
-                hole: 0,
-                labels: heatmapChartData.map(({ itemName }) => itemName ?? null),
-                values: heatmapChartData.map(({ itemValue }) => itemValue ?? 0),
-                marker: {
-                    colors: heatmapChartData.map(({ itemColor }) => itemColor)
-                },
-                hovertext: heatmapChartData.map(({ itemHoverText }) => itemHoverText ?? ""),
                 hoverinfo: heatmapChartData.some(
                     ({ itemHoverText }) => itemHoverText !== undefined && itemHoverText !== ""
                 )
                     ? "text"
                     : "none",
-                onClick
+                hovertext: heatmapChartData.map(({ itemHoverText }) => itemHoverText ?? ""),
+                labels: heatmapChartData.map(({ itemName }) => itemName ?? null),
+                onClick,
+                showscale: showScale,
+                x: uniqueHorizontalValues.map(value => value?.toLocaleString()),
+                y: uniqueVerticalValues.map(value => value?.toLocaleString()),
+                z: heatmapValues
             }
-        ],
-        [customSeriesOptions, heatmapChartData, onClick]
-    );
+        ];
+    }, [customSeriesOptions, heatmapChartData, onClick, scaleColors, showScale]);
 };
 
-function seriesSortAttributeCompareFn(
-    { itemSortValue: firstItemSortValue }: LocalHeatMapData,
-    { itemSortValue: secondItemSortValue }: LocalHeatMapData
-): number {
-    // Handle undefined case separately so TypeScript can infer types in later clauses.
-    if (firstItemSortValue === undefined || secondItemSortValue === undefined) {
-        if (firstItemSortValue === secondItemSortValue) {
-            return 0;
+function processColorScale(scaleColors: HeatMapContainerProps["scaleColors"]): Array<[number, string]> {
+    return scaleColors.length > 1
+        ? scaleColors
+              .sort((colour1, colour2) => colour1.valuePercentage - colour2.valuePercentage)
+              .map(colors => [Math.abs(colors.valuePercentage / 100), colors.colour])
+        : [
+              [0, "#17347B"],
+              [0.5, "#0595DB"],
+              [1, "#76CA02"]
+          ];
+}
+
+function formatValueAttribute(value: string | Big | Date | undefined): string | number | Date | undefined {
+    if (value) {
+        if (value instanceof Big) {
+            return value.toNumber();
         }
-        return firstItemSortValue === undefined ? 1 : -1;
     }
-    // Different types shouldn't happen and aren't comparable.
-    if (typeof firstItemSortValue !== typeof secondItemSortValue) {
-        return 0;
-    }
-    // Check the types exhaustively from both vars so TypeScript properly infers the types.
-    if (
-        typeof firstItemSortValue === "string" ||
-        typeof secondItemSortValue === "string" ||
-        typeof firstItemSortValue === "boolean" ||
-        typeof secondItemSortValue === "boolean"
-    ) {
-        return firstItemSortValue.toString().localeCompare(secondItemSortValue.toString());
-    }
-    if (firstItemSortValue instanceof Date || secondItemSortValue instanceof Date) {
-        // @ts-expect-error Based on the unequal comparison earlier, both of these are Date.
-        return compareAsc(firstItemSortValue, secondItemSortValue);
-    }
-    // Latest remaining type is `Big`.
-    return firstItemSortValue.minus(secondItemSortValue).toNumber();
+    return value;
 }

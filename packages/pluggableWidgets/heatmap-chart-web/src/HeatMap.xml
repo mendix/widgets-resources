@@ -38,6 +38,22 @@
                     <caption>Series name</caption>
                     <description />
                 </property>
+                <property key="xAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>X axis attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Enum" />
+                    </attributeTypes>
+                </property>
+                <property key="yAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Y axis attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String" />
+                        <attributeType name="Enum" />
+                    </attributeTypes>
+                </property>
                 <property key="seriesValueAttribute" type="attribute" required="true" dataSource="seriesDataSource">
                     <caption>Value attribute</caption>
                     <description />
@@ -47,42 +63,35 @@
                         <attributeType name="Long" />
                     </attributeTypes>
                 </property>
-                <property key="seriesSortAttribute" type="attribute" required="false" dataSource="seriesDataSource">
-                    <caption>Sort attribute</caption>
-                    <description />
-                    <attributeTypes>
-                        <attributeType name="String" />
-                        <attributeType name="Boolean" />
-                        <attributeType name="DateTime" />
-                        <attributeType name="Decimal" />
-                        <attributeType name="Enum" />
-                        <attributeType name="HashString" />
-                        <attributeType name="Integer" />
-                        <attributeType name="Long" />
-                    </attributeTypes>
-                </property>
-                <property key="seriesSortOrder" type="enumeration" defaultValue="asc">
-                    <caption>Sort order</caption>
-                    <description/>
-                    <enumerationValues>
-                        <enumerationValue key="asc">Ascending</enumerationValue>
-                        <enumerationValue key="desc">Descending</enumerationValue>
-                    </enumerationValues>
-                </property>
-                <property key="seriesColorAttribute" type="attribute" required="false" dataSource="seriesDataSource">
-                    <caption>Color attribute</caption>
-                    <description />
-                    <attributeTypes>
-                        <attributeType name="String" />
-                        <attributeType name="Enum" />
-                        <attributeType name="HashString" />
-                    </attributeTypes>
-                </property>
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name"/>
                 <systemProperty key="Visibility" />
                 <systemProperty key="TabIndex" />
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Scale">
+            <propertyGroup caption="Scale">
+                <property key="scaleColors" type="object" isList="true" required="false">
+                    <caption>Colors</caption>
+                    <description>The percentages with the colors that should be applied. At least two values needs to be specified, else the default colors are used.</description>
+                    <properties>
+                        <propertyGroup caption="Scale">
+                            <property key="valuePercentage" type="integer" defaultValue="0">
+                                <caption>Percentage</caption>
+                                <description>The percentage at which the color should be applied. This value must be between 0 and 100</description>
+                            </property>
+                            <property key="colour" type="string" >
+                                <caption>Color</caption>
+                                <description>The CSS value e.g. blue, #48B0F7 or rgb(0,0,0)</description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="showScale" type="boolean" defaultValue="true">
+                    <caption>Show scale</caption>
+                    <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Dimensions">

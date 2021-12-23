@@ -9,11 +9,19 @@ import { Big } from "big.js";
 
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
-export type SeriesSortOrderEnum = "asc" | "desc";
+export interface ScaleColorsType {
+    valuePercentage: number;
+    colour: string;
+}
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
+export interface ScaleColorsPreviewType {
+    valuePercentage: number | null;
+    colour: string;
+}
 
 export interface HeatMapContainerProps {
     name: string;
@@ -26,10 +34,11 @@ export interface HeatMapContainerProps {
     developerMode: DeveloperModeEnum;
     seriesDataSource: ListValue;
     seriesName: ListExpressionValue<string>;
+    xAttribute?: ListAttributeValue<string>;
+    yAttribute?: ListAttributeValue<string>;
     seriesValueAttribute: ListAttributeValue<Big>;
-    seriesSortAttribute?: ListAttributeValue<string | boolean | Date | Big>;
-    seriesSortOrder: SeriesSortOrderEnum;
-    seriesColorAttribute?: ListAttributeValue<string>;
+    scaleColors: ScaleColorsType[];
+    showScale: boolean;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -53,10 +62,11 @@ export interface HeatMapPreviewProps {
     developerMode: DeveloperModeEnum;
     seriesDataSource: {} | { type: string } | null;
     seriesName: string;
+    xAttribute: string;
+    yAttribute: string;
     seriesValueAttribute: string;
-    seriesSortAttribute: string;
-    seriesSortOrder: SeriesSortOrderEnum;
-    seriesColorAttribute: string;
+    scaleColors: ScaleColorsPreviewType[];
+    showScale: boolean;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;

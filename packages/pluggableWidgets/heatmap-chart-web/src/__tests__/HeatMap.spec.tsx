@@ -31,11 +31,12 @@ describe("The HeatMap widget", () => {
                 customLayout=""
                 customConfigurations=""
                 customSeriesOptions=""
-                seriesSortOrder="asc"
                 seriesDataSource={ListValueBuilder().simple()}
                 seriesName={buildListExpression("name")}
                 seriesValueAttribute={new ListAttributeValueBuilder<Big>().build()}
                 enableThemeConfig={false}
+                scaleColors={[]}
+                showScale
                 {...setupBasicAttributes()}
                 {...props}
             />
@@ -55,13 +56,6 @@ describe("The HeatMap widget", () => {
         expect(data[0]).toHaveProperty("hole", 0.4);
     });
 
-    it("sets proper marker color on the data series based on seriesColorAttribute", () => {
-        const heatmapChart = renderHeatMap({});
-        const data = heatmapChart.find(ChartWidget).prop("data");
-        expect(data).toHaveLength(1);
-        expect(data[0]).toHaveProperty("marker.colors", ["red", "blue"]);
-    });
-
     it("sets proper label values on the data series based on seriesName", () => {
         const heatmapChart = renderHeatMap({});
         const data = heatmapChart.find(ChartWidget).prop("data");
@@ -74,38 +68,6 @@ describe("The HeatMap widget", () => {
         const data = heatmapChart.find(ChartWidget).prop("data");
         expect(data).toHaveLength(1);
         expect(data[0]).toHaveProperty("values", [1, 2]);
-    });
-
-    describe("sorts the relevant properties in the data series based on seriesSortAttribute", () => {
-        it("in ascending order", () => {
-            const seriesSortAttribute = new ListAttributeValueBuilder().build();
-            seriesSortAttribute.get = jest
-                .fn()
-                .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(20)).build())
-                .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(15)).build());
-
-            const heatmapChart = renderHeatMap({ seriesSortAttribute });
-            const data = heatmapChart.find(ChartWidget).prop("data");
-            expect(data).toHaveLength(1);
-            expect(data[0]).toHaveProperty("values", [2, 1]);
-            expect(data[0]).toHaveProperty("labels", ["second series", "first series"]);
-            expect(data[0]).toHaveProperty("marker.colors", ["blue", "red"]);
-        });
-
-        it("in descending order", () => {
-            const seriesSortAttribute = new ListAttributeValueBuilder().build();
-            seriesSortAttribute.get = jest
-                .fn()
-                .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(20)).build())
-                .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(15)).build());
-
-            const heatmapChart = renderHeatMap({ seriesSortAttribute, seriesSortOrder: "desc" });
-            const data = heatmapChart.find(ChartWidget).prop("data");
-            expect(data).toHaveLength(1);
-            expect(data[0]).toHaveProperty("values", [1, 2]);
-            expect(data[0]).toHaveProperty("labels", ["first series", "second series"]);
-            expect(data[0]).toHaveProperty("marker.colors", ["red", "blue"]);
-        });
     });
 });
 
@@ -124,14 +86,7 @@ function setupBasicAttributes(): Partial<HeatMapContainerProps> {
         .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(1)).build())
         .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(2)).build());
 
-    const seriesColorAttribute = new ListAttributeValueBuilder<string>().build();
-    seriesColorAttribute.get = jest
-        .fn()
-        .mockReturnValueOnce(new EditableValueBuilder<string>().withValue("red").build())
-        .mockReturnValueOnce(new EditableValueBuilder<string>().withValue("blue").build());
-
     return {
-        seriesColorAttribute,
         seriesDataSource,
         seriesName,
         seriesValueAttribute
