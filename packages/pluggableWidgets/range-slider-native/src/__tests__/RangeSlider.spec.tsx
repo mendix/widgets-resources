@@ -1,14 +1,14 @@
 import { actionValue, dynamicValue, EditableValueBuilder } from "@mendix/piw-utils-internal";
-import MultiSlider from "@ptomasroos/react-native-multi-slider";
 import { Big } from "big.js";
 import { createElement } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { fireEvent, render, RenderAPI } from "@testing-library/react-native";
 import { ReactTestInstance } from "react-test-renderer";
-
+import { ValueStatus, DynamicValue } from "mendix";
 import { Props, RangeSlider } from "../RangeSlider";
 
 describe("RangeSlider", () => {
+    const noValue: DynamicValue<Big> = { status: ValueStatus.Unavailable, value: undefined };
     let defaultProps: Props;
 
     beforeEach(() => {
@@ -33,19 +33,32 @@ describe("RangeSlider", () => {
         const component = render(
             <RangeSlider {...defaultProps} lowerValueAttribute={new EditableValueBuilder<Big>().isLoading().build()} />
         );
-        expect(component.UNSAFE_queryByType(Text)).toBeNull();
+        expect(component.queryByTestId(`${defaultProps.name}-validation-message`)).toBeNull();
+    });
+
+    it("renders an error when no minimum value is provided", () => {
+        const component = render(<RangeSlider {...defaultProps} minimumValue={noValue} />);
+        expect(component.queryByText("No minimum value provided.")).not.toBeNull();
+    });
+
+    it("renders an error when no maximum value is provided", () => {
+        const component = render(<RangeSlider {...defaultProps} maximumValue={noValue} />);
+        expect(component.queryByText("No maximum value provided.")).not.toBeNull();
+    });
+
+    it("renders an error when no step size is provided", () => {
+        const component = render(<RangeSlider {...defaultProps} stepSize={noValue} />);
+        expect(component.queryByText("No step size provided.")).not.toBeNull();
     });
 
     it("renders an error when the minimum is greater than the maximum", () => {
         const component = render(<RangeSlider {...defaultProps} minimumValue={dynamicValue(new Big(300))} />);
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The minimum value must be less than the maximum value."
-        );
+        expect(component.queryByText("The minimum value must be less than the maximum value.")).not.toBeNull();
     });
 
     it("renders an error when the step size is negative", () => {
         const component = render(<RangeSlider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.UNSAFE_getByType(Text).props.children).toBe("The step size must be greater than zero.");
+        expect(component.queryByText("The step size must be greater than zero.")).not.toBeNull();
     });
 
     it("renders an error when the lower value is less than the minimum", () => {
@@ -55,9 +68,9 @@ describe("RangeSlider", () => {
                 lowerValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(-50)).build()}
             />
         );
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The lower value must be equal or greater than the minimum value."
-        );
+        expect(
+            component.queryByText("The lower value must be equal or greater than the minimum value.")
+        ).not.toBeNull();
     });
 
     it("renders an error when the lower value is greater than the maximum", () => {
@@ -67,9 +80,7 @@ describe("RangeSlider", () => {
                 lowerValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(300)).build()}
             />
         );
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The lower value must be less than the maximum value."
-        );
+        expect(component.queryByText("The lower value must be less than the maximum value.")).not.toBeNull();
     });
 
     it("renders an error when the upper value is less than the minimum", () => {
@@ -79,9 +90,7 @@ describe("RangeSlider", () => {
                 upperValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(-50)).build()}
             />
         );
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The upper value bust be greater than the minimum value."
-        );
+        expect(component.queryByText("The upper value bust be greater than the minimum value.")).not.toBeNull();
     });
 
     it("renders an error when the upper value is greater than the maximum", () => {
@@ -91,9 +100,7 @@ describe("RangeSlider", () => {
                 upperValueAttribute={new EditableValueBuilder<Big>().withValue(new Big(300)).build()}
             />
         );
-        expect(component.UNSAFE_getByType(Text).props.children).toBe(
-            "The upper value must be equal or less than the maximum value."
-        );
+        expect(component.queryByText("The upper value must be equal or less than the maximum value.")).not.toBeNull();
     });
 
     it("renders with the width of the parent view", () => {
@@ -115,8 +122,8 @@ describe("RangeSlider", () => {
                 ]}
             />
         );
-        fireEvent(component.UNSAFE_getByType(View), "layout", { nativeEvent: { layout: { width: 100 } } });
-        expect(component.UNSAFE_getByType(MultiSlider).props.sliderLength).toBe(100);
+        fireEvent(component.getByTestId("range-slider-test"), "layout", { nativeEvent: { layout: { width: 100 } } });
+        expect(component.getByTestId("range-slider-test").findByProps({ sliderLength: 100 })).not.toBeNull();
     });
 
     it("renders a validation message", () => {
@@ -130,7 +137,7 @@ describe("RangeSlider", () => {
 
     it("handles an invalid step size", () => {
         const component = render(<RangeSlider {...defaultProps} stepSize={dynamicValue(new Big(-10))} />);
-        expect(component.UNSAFE_getByType(MultiSlider).props.step).toBe(1);
+        expect(component.getByTestId("range-slider-test").findByProps({ step: 1 })).not.toBeNull();
     });
 
     it("changes the lower value when swiping", () => {
