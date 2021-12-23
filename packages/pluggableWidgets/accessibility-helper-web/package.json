@@ -5,6 +5,10 @@
   "description": "Set an attribute to a DOM element",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "author": "Widget Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
   "config": {
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
