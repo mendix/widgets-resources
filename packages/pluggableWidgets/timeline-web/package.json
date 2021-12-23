@@ -5,6 +5,10 @@
   "description": "Shows timeline",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "author": "Mendix",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
   "config": {
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
