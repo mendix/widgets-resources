@@ -5,6 +5,51 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.2.0] Data Widgets - 2021-12-23
+
+
+## [2.2.0] DatagridDateFilter
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [2.2.0] DatagridDropdownFilter
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [2.2.0] DatagridNumberFilter
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [2.2.0] DatagridTextFilter
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [2.2.0] Datagrid
+### Added
+
+- We added "Tooltip" property for column, which allow you to control text that will be seen when hovering cell.
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [1.1.0] DropdownSort
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [1.1.0] Gallery
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
+## [1.1.0] TreeNode
+### Added
+- We added dark mode to Structure mode preview.
+- We added dark icons for Tile and List view.
+
 ## [2.1.1] Data Widgets - 2021-12-10
 
 
