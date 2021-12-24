@@ -4,6 +4,10 @@ interface Size {
     width: number;
     height: number;
 }
+interface Position {
+    x: number;
+    y: number;
+}
 
 interface Attributes {
     width?: number;
@@ -30,7 +34,7 @@ const units: { [unit: string]: number } = {
 };
 
 function parseLength(len: string) {
-    const m = /([0-9.]+)([a-z]*)/.exec(len);
+    const m = /(-?[0-9.]+)([a-z]*)/.exec(len);
     if (!m || !m[1]) {
         return undefined;
     }
@@ -41,8 +45,21 @@ function parseLength(len: string) {
 function parseViewbox(viewbox: string): Size {
     const bounds = viewbox.split(" ");
     return {
-        height: parseLength(ensure(bounds[3]))!,
-        width: parseLength(ensure(bounds[2]))!
+        width: parseLength(ensure(bounds[2]))!,
+        height: parseLength(ensure(bounds[3]))!
+    };
+}
+
+export function getPositionFromSVG(xml: string): Position {
+    const root = extractorRegExps.root.exec(xml);
+    const viewbox = extractorRegExps.viewbox.exec(root?.[0] as string);
+    if (!viewbox?.[2]) {
+        throw new Error("Can't parse the SVG position because the viewbox attribute does not exist.");
+    }
+    const bounds = viewbox[2].split(" ");
+    return {
+        x: parseLength(ensure(bounds[0]))!,
+        y: parseLength(ensure(bounds[1]))!
     };
 }
 
@@ -52,8 +69,8 @@ function parseAttributes(root: string): Attributes {
     const viewbox = extractorRegExps.viewbox.exec(root);
     return {
         height: height?.[2] ? parseLength(height[2]) : undefined,
-        viewbox: viewbox?.[2] ? parseViewbox(viewbox[2]) : undefined,
-        width: width?.[2] ? parseLength(width[2]) : undefined
+        width: width?.[2] ? parseLength(width[2]) : undefined,
+        viewbox: viewbox?.[2] ? parseViewbox(viewbox[2]) : undefined
     };
 }
 function calculateByViewbox(attrs: Attributes, viewbox: Size): Size {
