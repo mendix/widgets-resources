@@ -1,28 +1,38 @@
+const ANDROID_SDK_VERSION = "31";
+const ANDROID_DEVICE_TYPE = "pixel";
+const IOS_SDK_VERSION = "15.2";
+const IOS_DEVICE_TYPE = "iPhone 13";
+
 module.exports = {
+    ANDROID_SDK_VERSION,
+    ANDROID_DEVICE_TYPE,
+    IOS_SDK_VERSION,
+    IOS_DEVICE_TYPE,
     "test-runner": "npx jest",
     "runner-config": `${__dirname}/jest.detox.config.js`,
     apps: {
         "ios.developerapp": {
             type: "ios.app",
-            binaryPath: process.env.TEST_NATIVE_APP_IOS
+            binaryPath: `${__dirname}/apps/DeveloperApp.app`
         },
         "android.developerapp": {
             type: "android.apk",
-            binaryPath: process.env.TEST_NATIVE_APP_ANDROID,
-            testBinaryPath: process.env.TEST_NATIVE_APP_ANDROID_TEST_BINARY
+            binaryPath: `${__dirname}/apps/app-debug.apk`,
+            testBinaryPath: `${__dirname}/apps/app-debug-androidTest.apk`
         }
     },
     devices: {
         ios: {
             type: "ios.simulator",
             device: {
-                type: "iPhone 12 Pro Max"
+                type: IOS_DEVICE_TYPE,
+                os: `iOS ${IOS_SDK_VERSION}`
             }
         },
         android: {
             type: "android.emulator",
             device: {
-                avdName: "EMULATOR_API_30"
+                avdName: `NATIVE_${ANDROID_DEVICE_TYPE}_${ANDROID_SDK_VERSION}`
             }
         }
     },

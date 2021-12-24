@@ -3,7 +3,7 @@ module.exports = {
     reporters: ["detox/runners/jest/streamlineReporter"],
     rootDir: process.cwd(),
     setupFilesAfterEnv: [`${__dirname}/jest.detox.startup.js`],
-    testMatch: ["<rootDir>/**/e2e/*.spec.{js,jsx,ts,tsx}"],
+    testMatch: ["<rootDir>/e2e/specs/**/*.spec.{js,jsx,ts,tsx}"],
     testPathIgnorePatterns: ["<rootDir>/dist", "<rootDir>/node_modules"],
     testEnvironment: "node",
     verbose: true,

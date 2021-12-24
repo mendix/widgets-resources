@@ -10,6 +10,7 @@
 **/atlas/**/native/**/* @mendix/native-content
 **/atlas/**/web/**/* @mendix/web-content
 **/shared/** @mendix/web-content
+**/detox/**/* @mendix/native-content
 scripts/release/createNativeModules.js @mendix/native-content
 scripts/release/createWebModules.js @mendix/web-content
 packages/tools/pluggable-widgets-tools/configs/rollup.config.js @mendix/web-content
