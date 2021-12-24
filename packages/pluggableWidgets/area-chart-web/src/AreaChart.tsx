@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { createElement, ReactNode, useCallback } from "react";
+import { createElement, ReactElement, useCallback } from "react";
 import { AreaChartContainerProps, SeriesType } from "../typings/AreaChartProps";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { getPlotChartDataTransforms, SeriesMapper, usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
@@ -24,7 +24,7 @@ const areaChartConfigOptions: ChartWidgetProps["configOptions"] = {
 };
 const areaChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {};
 
-export function AreaChart(props: AreaChartContainerProps): ReactNode {
+export function AreaChart(props: AreaChartContainerProps): ReactElement {
     const mapSeries = useCallback<SeriesMapper<SeriesType>>(
         (line, dataPoints) => ({
             type: "scatter",
@@ -32,7 +32,8 @@ export function AreaChart(props: AreaChartContainerProps): ReactNode {
             fillcolor: line.fillcolor?.value,
             mode: line.lineStyle === "line" ? "lines" : "lines+markers",
             line: {
-                shape: line.interpolation
+                shape: line.interpolation,
+                color: line.lineColor?.value
             },
             marker: {
                 color: line.markerColor?.value
