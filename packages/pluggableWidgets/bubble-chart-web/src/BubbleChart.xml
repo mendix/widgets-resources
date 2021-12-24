@@ -123,14 +123,32 @@
                                 <caption>Custom series options</caption>
                                 <description/>
                             </property>
+
+                            <property key="staticSizeAttribute" type="attribute" required="false" dataSource="staticDataSource">
+                                <caption>Bubble size attribute</caption>
+                                <description>The value determines the bubble size</description>
+                                <attributeTypes>
+                                    <attributeType name="Decimal"/>
+                                    <attributeType name="Long"/>
+                                    <attributeType name="Integer"/>
+                                </attributeTypes>
+                            </property>
+                            <property key="dynamicSizeAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
+                                <caption>Bubble size attribute</caption>
+                                <description>The value determines the bubble size</description>
+                                <attributeTypes>
+                                    <attributeType name="Decimal"/>
+                                    <attributeType name="Long"/>
+                                    <attributeType name="Integer"/>
+                                </attributeTypes>
+                            </property>
                             <property key="autosize" type="boolean" defaultValue="true">
                                 <caption>Auto size</caption>
                                 <description/>
                             </property>
                             <property key="sizeref" type="integer" defaultValue="10">
                                 <caption>Size percentage</caption>
-                                <description>When 'Auto bubble size' is true, the largest bubble will have the specified percentage of the chart. When 'Auto bubble size' is false, the bubble size is the pixel value of the 'Bubble size attribute'
-                                    multiplied by the specified percentage.
+                                <description>When 'Auto bubble size' is true, the largest bubble will have the specified percentage of the chart. When 'Auto bubble size' is false, the bubble size is the pixel value of the 'Bubble size attribute' multiplied by the specified percentage.
                                 </description>
                             </property>
                         </propertyGroup>

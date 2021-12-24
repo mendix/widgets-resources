@@ -1,23 +1,6 @@
 import { LinesType } from "../../typings/BubbleChartProps";
 import { Dimensions } from "@mendix/piw-utils-internal";
 
-const getRandomNumbers = (count: number, rangeMax: number, rangeMin = 0): number[] => {
-    const numbers: number[] = [];
-    for (let i = 0; i < count; i++) {
-        numbers.push(Math.round(Math.random() * (rangeMax - rangeMin + 1) + rangeMin));
-    }
-
-    return numbers;
-};
-
-export function getSampleTraces() {
-    return {
-        x: ["Sample 1", "Sample 2", "Sample 3", "Sample 4"],
-        y: getRandomNumbers(4, 100),
-        marker: { size: getRandomNumbers(4, 100, 20) }
-    };
-}
-
 export const getMarkerSizeReference = (props: LinesType, markerSize: number[], dimensions?: Dimensions): number => {
     if (props.autosize) {
         const width = dimensions ? dimensions.width : 0;
@@ -41,17 +24,11 @@ export const getMarkerSizeReference = (props: LinesType, markerSize: number[], d
     return 1;
 };
 
-export const calculateBubbleSize = (series: LinesType[], scatterData: any[]) => {
-    return scatterData.map((data, index) => {
-        const sizeref = series.length ? getMarkerSizeReference(series[index], data.marker.size as number[]) : 1;
-        // Temporary remove custom data, as it contains mx objects with circular reference.
-        const customdata = data.customdata;
-        delete data.customdata;
-
-        return {
-            ...data,
-            ...customdata,
-            marker: { sizemode: "diameter", sizeref }
-        };
-    });
+export const calculateSizeRef = (
+    series: LinesType,
+    marker: { size: number[] },
+    dimensions?: Dimensions
+): { sizemode: any; sizeref: any } => {
+    const sizeref = getMarkerSizeReference(series, marker.size, dimensions);
+    return { sizemode: "diameter", sizeref };
 };

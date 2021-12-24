@@ -23,6 +23,7 @@ export function getProperties(
                 "dynamicDataSource",
                 "dynamicXAttribute",
                 "dynamicYAttribute",
+                "dynamicSizeAttribute",
                 "dynamicName",
                 "dynamicTooltipHoverText",
                 "groupByAttribute"
@@ -32,6 +33,7 @@ export function getProperties(
                 "staticDataSource",
                 "staticXAttribute",
                 "staticYAttribute",
+                "staticSizeAttribute",
                 "staticName",
                 "staticTooltipHoverText"
             ]);
@@ -42,6 +44,9 @@ export function getProperties(
         }
         if (!showAdvancedOptions) {
             hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
+        }
+        if (line.autosize) {
+            hidePropertyIn(defaultProperties, values, "lines", index, "sizeref");
         }
     });
 
@@ -54,9 +59,6 @@ export function getProperties(
             hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations", "enableThemeConfig"]);
         }
     }
-    // if (values.) {
-    //     hidePropertiesIn(defaultProperties, values, ["sizeref"]);
-    // }
     return defaultProperties;
 }
 
@@ -80,6 +82,12 @@ export function check(values: BubbleChartPreviewProps): Problem[] {
                     message: `Setting a Y axis attribute is required.`
                 });
             }
+            if (!line.staticSizeAttribute) {
+                errors.push({
+                    property: `lines/${index + 1}/staticSizeAttribute`,
+                    message: `Setting a size attribute is required.`
+                });
+            }
         }
         if (line.dataSet === "dynamic" && line.dynamicDataSource) {
             if (!line.dynamicXAttribute) {
@@ -92,6 +100,12 @@ export function check(values: BubbleChartPreviewProps): Problem[] {
                 errors.push({
                     property: `lines/${index + 1}/dynamicYAttribute`,
                     message: `Setting a Y axis attribute is required.`
+                });
+            }
+            if (!line.dynamicSizeAttribute) {
+                errors.push({
+                    property: `lines/${index + 1}/dynamicSizeAttribute`,
+                    message: `Setting a size attribute is required.`
                 });
             }
         }

@@ -38,6 +38,8 @@ export interface LinesType {
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
     customSeriesOptions: string;
+    staticSizeAttribute?: ListAttributeValue<Big>;
+    dynamicSizeAttribute?: ListAttributeValue<Big>;
     autosize: boolean;
     sizeref: number;
     interpolation: InterpolationEnum;
@@ -70,6 +72,8 @@ export interface LinesPreviewType {
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
     customSeriesOptions: string;
+    staticSizeAttribute: string;
+    dynamicSizeAttribute: string;
     autosize: boolean;
     sizeref: number | null;
     interpolation: InterpolationEnum;
