@@ -54,6 +54,7 @@ export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
 
     const updatedSvgPropsCallback = useCallback(
         () => ({
+            ...(!/\sfill=(['"])([#(),.a-z0-9]*)\1/g.test(image as string) ? { color: "#000" } : {}), // Make sure color is set if the svg does not contain "fill" attribute.
             ...svgProps,
             width,
             height,

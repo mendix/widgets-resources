@@ -18,6 +18,8 @@ export const defaultImageStyle: DefaultImageStyle = {
         justifyContent: "center"
     },
     image: {
+        minHeight: 8,
+        minWidth: 8,
         maxWidth: "100%",
         maxHeight: "100%"
     },
