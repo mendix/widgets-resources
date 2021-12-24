@@ -21,10 +21,6 @@ export type AggregationTypeEnum =
     | "first"
     | "last";
 
-export type InterpolationEnum = "linear" | "spline";
-
-export type LineStyleEnum = "line" | "lineWithMarkers" | "custom";
-
 export interface LinesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
@@ -42,9 +38,6 @@ export interface LinesType {
     dynamicSizeAttribute?: ListAttributeValue<Big>;
     autosize: boolean;
     sizeref: number;
-    interpolation: InterpolationEnum;
-    lineStyle: LineStyleEnum;
-    lineColor?: DynamicValue<string>;
     markerColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
     staticTooltipHoverText?: ListExpressionValue<string>;
@@ -76,9 +69,6 @@ export interface LinesPreviewType {
     dynamicSizeAttribute: string;
     autosize: boolean;
     sizeref: number | null;
-    interpolation: InterpolationEnum;
-    lineStyle: LineStyleEnum;
-    lineColor: string;
     markerColor: string;
     onClickAction: {} | null;
     staticTooltipHoverText: string;

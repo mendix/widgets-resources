@@ -66,10 +66,6 @@ export function BubbleChart(props: BubbleChartContainerProps): ReactElement {
             return {
                 type: "scatter",
                 mode: "markers",
-                line: {
-                    shape: line.interpolation,
-                    color: line.lineColor?.value
-                },
                 marker: {
                     color: line.markerColor?.value,
                     symbol: ["circle"],

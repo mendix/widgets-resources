@@ -147,33 +147,12 @@
                                 <description/>
                             </property>
                             <property key="sizeref" type="integer" defaultValue="10">
-                                <caption>Size percentage</caption>
+                                <caption>Size ref</caption>
                                 <description>When 'Auto bubble size' is true, the largest bubble will have the specified percentage of the chart. When 'Auto bubble size' is false, the bubble size is the pixel value of the 'Bubble size attribute' multiplied by the specified percentage.
                                 </description>
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
-                            <property key="interpolation" type="enumeration" defaultValue="linear">
-                                <caption>Interpolation</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="linear">Linear</enumerationValue>
-                                    <enumerationValue key="spline">Curved</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="lineStyle" type="enumeration" defaultValue="line">
-                                <caption>Line style</caption>
-                                <description/>
-                                <enumerationValues>
-                                    <enumerationValue key="line">Line</enumerationValue>
-                                    <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
-                                    <enumerationValue key="custom">Custom</enumerationValue>
-                                </enumerationValues>
-                            </property>
-                            <property key="lineColor" type="textTemplate" required="false" multiline="false">
-                                <caption>Line color</caption>
-                                <description/>
-                            </property>
                             <property key="markerColor" type="textTemplate" required="false" multiline="false">
                                 <caption>Marker color</caption>
                                 <description/>

@@ -38,10 +38,6 @@ export function getProperties(
                 "staticTooltipHoverText"
             ]);
         }
-        // Line styles
-        if (line.lineStyle !== "lineWithMarkers") {
-            hideNestedPropertiesIn(defaultProperties, values, "lines", index, ["markerColor"]);
-        }
         if (!showAdvancedOptions) {
             hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
         }
