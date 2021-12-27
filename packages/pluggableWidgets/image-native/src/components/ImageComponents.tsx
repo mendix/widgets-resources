@@ -128,7 +128,9 @@ export const ImageSmall: FunctionComponent<ImageSmallProps> = props => {
     const { source, initialDimensions, customWidth, customHeight, iconSize, onClick, styles, name } = props;
     const [dimensions, setDimensions] = useState<DimensionsType>();
     const [svgProps] = extractStyles(styles.image as ImageStyle, ["width", "height"]);
-    const dimensionsNotSet = source.type !== "icon" && (!dimensions?.width || !dimensions?.height);
+    const dimensionsNotSet =
+        source.type !== "icon" &&
+        ((!dimensions?.width && !svgProps?.width) || (!dimensions?.height && !svgProps?.height));
     const onLayoutSetDimensionsCallback = useCallback(
         ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
             onLayoutSetDimensions(
@@ -196,7 +198,8 @@ export const ImageEnlarged: FunctionComponent<ImageEnlargedProps> = props => {
                 testID={`${name}$ImageEnlargedPressable`}
                 onPress={() => setEnlarged(false)}
                 onLayout={
-                    source.type !== "icon" && (!dimensions?.width || !dimensions?.height)
+                    source.type !== "icon" &&
+                    ((!dimensions?.width && !svgProps?.width) || (!dimensions?.height && !svgProps?.height))
                         ? onLayoutSetDimensionsCallback
                         : undefined
                 }

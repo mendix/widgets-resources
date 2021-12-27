@@ -29,11 +29,16 @@ export const BackgroundImage: FunctionComponent<BackgroundImageProps> = props =>
     return (
         <View
             testID={`${name}$ImageBackgroundView`}
-            onLayout={!dimensions?.width || !dimensions?.height ? onLayoutSetDimensionsCallback : undefined}
+            onLayout={
+                (!dimensions?.width && !svgProps?.width) || (!dimensions?.height && !svgProps?.height)
+                    ? onLayoutSetDimensionsCallback
+                    : undefined
+            }
             style={[
-                dimensions?.width && dimensions?.height
-                    ? { width: svgProps?.width ?? dimensions?.width, height: svgProps?.height ?? dimensions?.height }
-                    : { width: "100%", height: "100%" },
+                {
+                    width: svgProps?.width ?? dimensions?.width ?? "100%",
+                    height: svgProps?.height ?? dimensions?.height ?? "100%"
+                },
                 styles.container
             ]}
         >
