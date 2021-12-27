@@ -120,7 +120,7 @@ export default async args => {
             filter: [
                 "**/*.*",
                 "{license,LICENSE}",
-                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,docs,jest,example*}/**/*",
+                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,.bin,demo,docs,test,jest,example*}/**/*",
                 "!**/*.{config,setup}.*",
                 "!**/*.{podspec,flow}"
             ]
@@ -139,7 +139,8 @@ const nativeExternal = [
     /^react-native-reanimated(\/|$)/,
     /^react-native-svg(\/|$)/,
     /^react-native-vector-icons(\/|$)/,
-    /^react-navigation(\/|$)/
+    /^react-navigation(\/|$)/,
+    /^react-native-device-info(\/|$)/
 ];
 
 // These libraries are being used silently by @react-native-community/cameraroll and @react-native-community/geolocation and both dont have these libs as a peer or dependency
