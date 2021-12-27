@@ -30,7 +30,7 @@ function filterDataSourceProperties(sourceProperty: DatasourceEnum): ImageViewPr
 export function getProperties(values: ImagePreviewProps, defaultProperties: Properties): Properties {
     hidePropertiesIn(defaultProperties, values, filterDataSourceProperties(values.datasource));
 
-    if (values.isBackgroundImage) {
+    if (values.isBackgroundImage || values.imageIcon?.type === "glyph") {
         hidePropertiesIn(defaultProperties, values, [
             "widthUnit",
             "heightUnit",
@@ -45,15 +45,6 @@ export function getProperties(values: ImagePreviewProps, defaultProperties: Prop
 
     if (values.datasource === "icon") {
         hidePropertyIn(defaultProperties, values, "isBackgroundImage");
-    }
-    if (values.imageIcon?.type === "glyph") {
-        hidePropertiesIn(defaultProperties, values, [
-            "widthUnit",
-            "heightUnit",
-            "customWidth",
-            "customHeight",
-            "onClickType"
-        ]);
     }
     if (values.imageIcon?.type !== "glyph") {
         hidePropertyIn(defaultProperties, values, "iconSize");
@@ -149,6 +140,19 @@ export function check(values: ImagePreviewProps): Problem[] {
         errors.push({
             property: "imageIcon",
             message: "No icon selected"
+        });
+    }
+
+    if (values.customWidth && values.customWidth < 1) {
+        errors.push({
+            property: "customWidth",
+            message: "Width can not be smaller than 1"
+        });
+    }
+    if (values.customHeight && values.customHeight < 1) {
+        errors.push({
+            property: "customHeight",
+            message: "Height can not be smaller than 1"
         });
     }
 
