@@ -157,8 +157,8 @@ export const ImageSmall: FunctionComponent<ImageSmallProps> = props => {
                 {...source}
                 name={name}
                 iconSize={iconSize}
-                width={(dimensions?.width ?? svgProps?.width) as number}
-                height={(dimensions?.height ?? svgProps?.height) as number}
+                width={(svgProps?.width ?? dimensions?.width) as number}
+                height={(svgProps?.height ?? dimensions?.height) as number}
                 initialDimensions={initialDimensions}
                 styles={styles.image}
             />
@@ -206,8 +206,8 @@ export const ImageEnlarged: FunctionComponent<ImageEnlargedProps> = props => {
                     <ImageIconSVG
                         {...source}
                         name={name}
-                        width={(dimensions?.width ?? svgProps?.width) as number}
-                        height={(dimensions?.height ?? svgProps?.height) as number}
+                        width={(svgProps?.width ?? dimensions?.width) as number}
+                        height={(svgProps?.height ?? dimensions?.height) as number}
                         initialDimensions={initialDimensions}
                         styles={styles.image}
                     />
