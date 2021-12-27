@@ -80,9 +80,7 @@ export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
     if (image && initialDimensions?.width && initialDimensions?.height) {
         if (type === "staticSVG") {
             // Make sure X / Y of viewbox is taken into account to align the SVG content correctly.
-            const svgXYPosition = getPositionFromSVG(image as string);
-            const x = svgXYPosition.x ?? 0;
-            const y = svgXYPosition.y ?? 0;
+            const { x, y } = getPositionFromSVG(image as string);
             return (
                 <SvgXml
                     testID={`${name}$SvgXml`}

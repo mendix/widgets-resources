@@ -54,7 +54,7 @@ export function getPositionFromSVG(xml: string): Position {
     const root = extractorRegExps.root.exec(xml);
     const viewbox = extractorRegExps.viewbox.exec(root?.[0] as string);
     if (!viewbox?.[2]) {
-        throw new Error("Can't parse the SVG position because the viewbox attribute does not exist.");
+        return { x: 0, y: 0 };
     }
     const bounds = viewbox[2].split(" ");
     return {
