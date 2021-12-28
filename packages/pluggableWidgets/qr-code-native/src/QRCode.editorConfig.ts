@@ -1,7 +1,8 @@
 import { RowLayoutProps } from "@mendix/piw-utils-internal";
 import StructurePreviewQRCodeSVG from "./assets/StructurePreviewQRCode.svg";
+import StructurePreviewQRCodeDarkSVG from "./assets/StructurePreviewQRCodeDark.svg";
 
-export const getPreview = (): RowLayoutProps => ({
+export const getPreview = (_: undefined, isDarkMode: boolean): RowLayoutProps => ({
     type: "RowLayout",
     borders: false,
     padding: 8,
@@ -9,7 +10,9 @@ export const getPreview = (): RowLayoutProps => ({
     children: [
         {
             type: "Image",
-            document: decodeURIComponent(StructurePreviewQRCodeSVG.replace("data:image/svg+xml,", "")),
+            document: isDarkMode
+                ? decodeURIComponent(StructurePreviewQRCodeDarkSVG.replace("data:image/svg+xml,", ""))
+                : decodeURIComponent(StructurePreviewQRCodeSVG.replace("data:image/svg+xml,", "")),
             width: 48,
             height: 48
         }
