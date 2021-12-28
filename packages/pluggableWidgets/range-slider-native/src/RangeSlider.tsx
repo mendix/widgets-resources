@@ -104,7 +104,9 @@ export function RangeSlider(props: Props): ReactElement {
                 <Text style={styles.validationMessage}>{props.upperValueAttribute.validation}</Text>
             )}
             {validationMessages.length > 0 && (
-                <Text style={styles.validationMessage}>{validationMessages.join("\n")}</Text>
+                <Text style={styles.validationMessage} testID={`${props.name}-validation-messages`}>
+                    {validationMessages.join("\n")}
+                </Text>
             )}
         </View>
     );
