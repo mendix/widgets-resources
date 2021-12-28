@@ -1,0 +1,32 @@
+name: Publish widget data
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - packages/pluggableWidgets/**/package.json
+      - packages/customWidgets/**/package.json
+      - packages/pluggableWidgets/**/src/*.xml
+      - packages/customWidgets/**/src/*.xml
+      - scripts/data/**/*
+jobs:
+  publish-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+      - uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm install
+      - run: npm run update:widgets-overview
+      - uses: peter-evans/create-pull-request@v3
+        with:
+          branch: build/update-widgets-data
+          delete-branch: true
+          commit-message: 'chore: update widgets data file'
+          title: 'chore: Update widgets data file'
+          draft: false
+          add-paths: 'data/widgets.json'
