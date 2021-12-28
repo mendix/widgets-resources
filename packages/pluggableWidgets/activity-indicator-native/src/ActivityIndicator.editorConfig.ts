@@ -13,8 +13,7 @@ export const getPreview = (): RowLayoutProps => ({
                 StructurePreviewActivityIndicatorPrimarySVG.replace("data:image/svg+xml,", "")
             ),
             width: 24,
-            height: 24,
-            padding: 8
+            height: 24
         }
     ]
 });
