@@ -143,13 +143,13 @@ export function check(values: ImagePreviewProps): Problem[] {
         });
     }
 
-    if (values.customWidth && values.customWidth < 1) {
+    if (values.customWidth! < 1) {
         errors.push({
             property: "customWidth",
             message: "Width can not be smaller than 1"
         });
     }
-    if (values.customHeight && values.customHeight < 1) {
+    if (values.customHeight! < 1) {
         errors.push({
             property: "customHeight",
             message: "Height can not be smaller than 1"
