@@ -36,7 +36,8 @@ export function getProperties(values: ImagePreviewProps, defaultProperties: Prop
             "heightUnit",
             "customWidth",
             "customHeight",
-            "onClickType"
+            "onClickType",
+            "onClick"
         ]);
     }
     if (!values.isBackgroundImage) {
