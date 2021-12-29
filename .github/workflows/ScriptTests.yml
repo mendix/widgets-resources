@@ -26,7 +26,7 @@ jobs:
               if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
               with:
                 global_files: |
-                  !{packages/**/*,configs/e2e/*.json,scripts/**/*}
+                  !{packages/**/*,configs/e2e/*.json,scripts/**/*,data/**/*}
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"

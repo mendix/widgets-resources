@@ -22,7 +22,8 @@ jobs:
           cache: 'npm'
       - run: npm install
       - run: npm run update:widgets-overview
-      - uses: peter-evans/create-pull-request@v3
+      - id: cpr
+        uses: peter-evans/create-pull-request@v3
         with:
           branch: build/update-widgets-data
           delete-branch: true
@@ -30,3 +31,8 @@ jobs:
           title: 'chore: Update widgets data file'
           draft: false
           add-paths: 'data/widgets.json'
+      - if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v1
+        with:
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
