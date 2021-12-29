@@ -28,6 +28,7 @@ exports[`Widget Dynamic Image SVG renders the structure 1`] = `
     align="xMidYMid"
     bbHeight={9999}
     bbWidth={9999}
+    color={4278190080}
     focusable={false}
     height={9999}
     id="Layer_1"
@@ -45,8 +46,11 @@ exports[`Widget Dynamic Image SVG renders the structure 1`] = `
             "aspectRatio": 1,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
         Object {
@@ -60,6 +64,7 @@ exports[`Widget Dynamic Image SVG renders the structure 1`] = `
       ]
     }
     testID="Image1$SvgUri"
+    tintColor={4278190080}
     uri="this/is/a/fake/path.svg"
     vbHeight={9999}
     vbWidth={9999}
@@ -292,6 +297,7 @@ Array [
       align="xMidYMid"
       bbHeight={9999}
       bbWidth={9999}
+      color={4278190080}
       focusable={false}
       height={9999}
       id="Layer_1"
@@ -309,8 +315,11 @@ Array [
               "aspectRatio": 1,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
           Object {
@@ -324,6 +333,7 @@ Array [
         ]
       }
       testID="Image1$SvgUri"
+      tintColor={4278190080}
       uri="this/is/a/fake/path.svg"
       vbHeight={9999}
       vbWidth={9999}
@@ -472,11 +482,18 @@ Array [
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": 9999,
+            "width": 9999,
+          }
+        }
       >
         <RNSVGSvgView
           align="xMidYMid"
           bbHeight={9999}
           bbWidth={9999}
+          color={4278190080}
           focusable={false}
           height={9999}
           id="Layer_1"
@@ -494,8 +511,11 @@ Array [
                   "aspectRatio": 1,
                 },
                 Object {
+                  "flexGrow": 1,
                   "maxHeight": "100%",
                   "maxWidth": "100%",
+                  "minHeight": 8,
+                  "minWidth": 8,
                 },
               ],
               Object {
@@ -509,6 +529,7 @@ Array [
             ]
           }
           testID="Image1$SvgUri"
+          tintColor={4278190080}
           uri="this/is/a/fake/path.svg"
           vbHeight={9999}
           vbWidth={9999}
@@ -638,6 +659,7 @@ exports[`Widget Dynamic Image SVG renders the structure with custom height 1`] =
     align="xMidYMid"
     bbHeight={100}
     bbWidth={100}
+    color={4278190080}
     focusable={false}
     height={100}
     id="Layer_1"
@@ -655,8 +677,11 @@ exports[`Widget Dynamic Image SVG renders the structure with custom height 1`] =
             "aspectRatio": 1,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
         Object {
@@ -670,6 +695,7 @@ exports[`Widget Dynamic Image SVG renders the structure with custom height 1`] =
       ]
     }
     testID="Image1$SvgUri"
+    tintColor={4278190080}
     uri="this/is/a/fake/path.svg"
     vbHeight={9999}
     vbWidth={9999}
@@ -796,6 +822,7 @@ exports[`Widget Dynamic Image SVG renders the structure with custom width 1`] = 
     align="xMidYMid"
     bbHeight={100}
     bbWidth={100}
+    color={4278190080}
     focusable={false}
     height={100}
     id="Layer_1"
@@ -813,8 +840,11 @@ exports[`Widget Dynamic Image SVG renders the structure with custom width 1`] = 
             "aspectRatio": 1,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
         Object {
@@ -828,6 +858,7 @@ exports[`Widget Dynamic Image SVG renders the structure with custom width 1`] = 
       ]
     }
     testID="Image1$SvgUri"
+    tintColor={4278190080}
     uri="this/is/a/fake/path.svg"
     vbHeight={9999}
     vbWidth={9999}
@@ -965,8 +996,11 @@ exports[`Widget Dynamic Image renders the structure 1`] = `
             "width": 2222,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -1038,8 +1072,11 @@ exports[`Widget Dynamic Image renders the structure as a background image 1`] = 
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -1115,8 +1152,11 @@ exports[`Widget Dynamic Image renders the structure as a background image with 5
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -1192,8 +1232,11 @@ exports[`Widget Dynamic Image renders the structure as a background image with a
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -1269,8 +1312,11 @@ Array [
             },
             Object {},
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -1349,6 +1395,12 @@ Array [
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": 1111,
+            "width": 2222,
+          }
+        }
       >
         <View
           style={
@@ -1365,8 +1417,11 @@ Array [
                   "width": 2222,
                 },
                 Object {
+                  "flexGrow": 1,
                   "maxHeight": "100%",
                   "maxWidth": "100%",
+                  "minHeight": 8,
+                  "minWidth": 8,
                 },
               ],
             ]
@@ -1437,8 +1492,11 @@ exports[`Widget Dynamic Image renders the structure with custom height 1`] = `
             "width": 200,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -1506,8 +1564,11 @@ exports[`Widget Dynamic Image renders the structure with custom width 1`] = `
             "width": 100,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -1626,8 +1687,11 @@ exports[`Widget Icon type: image/staticImage renders the structure 1`] = `
             "width": 2222,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -1696,8 +1760,11 @@ Array [
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -1776,6 +1843,12 @@ Array [
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": 1111,
+            "width": 2222,
+          }
+        }
       >
         <View
           style={
@@ -1792,8 +1865,11 @@ Array [
                   "width": 2222,
                 },
                 Object {
+                  "flexGrow": 1,
                   "maxHeight": "100%",
                   "maxWidth": "100%",
+                  "minHeight": 8,
+                  "minWidth": 8,
                 },
               ],
             ]
@@ -1864,9 +1940,12 @@ exports[`Widget Icon type: image/staticImage sets the correct styles 1`] = `
             "width": 2222,
           },
           Object {
+            "flexGrow": 1,
             "left": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -1923,6 +2002,7 @@ exports[`Widget Static Image SVG renders the structure 1`] = `
     align="xMidYMid"
     bbHeight={15}
     bbWidth={15}
+    color={4278190080}
     focusable={false}
     height={15}
     id="Layer_1"
@@ -1940,8 +2020,11 @@ exports[`Widget Static Image SVG renders the structure 1`] = `
             "aspectRatio": 1,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
         Object {
@@ -1955,6 +2038,7 @@ exports[`Widget Static Image SVG renders the structure 1`] = `
       ]
     }
     testID="Image1$SvgXml"
+    tintColor={4278190080}
     vbHeight={15}
     vbWidth={15}
     version={1.1}
@@ -2089,6 +2173,7 @@ exports[`Widget Static Image SVG renders the structure as a background image 1`]
       align="xMidYMid"
       bbHeight={15}
       bbWidth={15}
+      color={4278190080}
       focusable={false}
       height={15}
       id="Layer_1"
@@ -2106,8 +2191,11 @@ exports[`Widget Static Image SVG renders the structure as a background image 1`]
               "aspectRatio": 1,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
           Object {
@@ -2121,6 +2209,7 @@ exports[`Widget Static Image SVG renders the structure as a background image 1`]
         ]
       }
       testID="Image1$SvgXml"
+      tintColor={4278190080}
       vbHeight={15}
       vbWidth={15}
       version={1.1}
@@ -2259,6 +2348,7 @@ exports[`Widget Static Image SVG renders the structure as a background image wit
       align="xMidYMid"
       bbHeight={15}
       bbWidth={15}
+      color={4278190080}
       focusable={false}
       height={15}
       id="Layer_1"
@@ -2276,8 +2366,11 @@ exports[`Widget Static Image SVG renders the structure as a background image wit
               "aspectRatio": 1,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
           Object {
@@ -2291,6 +2384,7 @@ exports[`Widget Static Image SVG renders the structure as a background image wit
         ]
       }
       testID="Image1$SvgXml"
+      tintColor={4278190080}
       vbHeight={15}
       vbWidth={15}
       version={1.1}
@@ -2429,6 +2523,7 @@ exports[`Widget Static Image SVG renders the structure as a background image wit
       align="xMidYMid"
       bbHeight={15}
       bbWidth={15}
+      color={4278190080}
       focusable={false}
       height={15}
       id="Layer_1"
@@ -2446,8 +2541,11 @@ exports[`Widget Static Image SVG renders the structure as a background image wit
               "aspectRatio": 1,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
           Object {
@@ -2461,6 +2559,7 @@ exports[`Widget Static Image SVG renders the structure as a background image wit
         ]
       }
       testID="Image1$SvgXml"
+      tintColor={4278190080}
       vbHeight={15}
       vbWidth={15}
       version={1.1}
@@ -2600,6 +2699,7 @@ Array [
   >
     <RNSVGSvgView
       align="xMidYMid"
+      color={4278190080}
       focusable={false}
       id="Layer_1"
       meetOrSlice={0}
@@ -2616,8 +2716,11 @@ Array [
               "aspectRatio": 1,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
           Object {
@@ -2627,6 +2730,7 @@ Array [
         ]
       }
       testID="Image1$SvgXml"
+      tintColor={4278190080}
       vbHeight={15}
       vbWidth={15}
       version={1.1}
@@ -2778,11 +2882,18 @@ Array [
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": 15,
+            "width": 15,
+          }
+        }
       >
         <RNSVGSvgView
           align="xMidYMid"
           bbHeight={15}
           bbWidth={15}
+          color={4278190080}
           focusable={false}
           height={15}
           id="Layer_1"
@@ -2800,8 +2911,11 @@ Array [
                   "aspectRatio": 1,
                 },
                 Object {
+                  "flexGrow": 1,
                   "maxHeight": "100%",
                   "maxWidth": "100%",
+                  "minHeight": 8,
+                  "minWidth": 8,
                 },
               ],
               Object {
@@ -2815,6 +2929,7 @@ Array [
             ]
           }
           testID="Image1$SvgXml"
+          tintColor={4278190080}
           vbHeight={15}
           vbWidth={15}
           version={1.1}
@@ -2948,6 +3063,7 @@ exports[`Widget Static Image SVG renders the structure with custom height 1`] = 
     align="xMidYMid"
     bbHeight={15}
     bbWidth={15}
+    color={4278190080}
     focusable={false}
     height={15}
     id="Layer_1"
@@ -2965,8 +3081,11 @@ exports[`Widget Static Image SVG renders the structure with custom height 1`] = 
             "aspectRatio": 1,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
         Object {
@@ -2980,6 +3099,7 @@ exports[`Widget Static Image SVG renders the structure with custom height 1`] = 
       ]
     }
     testID="Image1$SvgXml"
+    tintColor={4278190080}
     vbHeight={15}
     vbWidth={15}
     version={1.1}
@@ -3110,6 +3230,7 @@ exports[`Widget Static Image SVG renders the structure with custom width 1`] = `
     align="xMidYMid"
     bbHeight={15}
     bbWidth={15}
+    color={4278190080}
     focusable={false}
     height={15}
     id="Layer_1"
@@ -3127,8 +3248,11 @@ exports[`Widget Static Image SVG renders the structure with custom width 1`] = `
             "aspectRatio": 1,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
         Object {
@@ -3142,6 +3266,7 @@ exports[`Widget Static Image SVG renders the structure with custom width 1`] = `
       ]
     }
     testID="Image1$SvgXml"
+    tintColor={4278190080}
     vbHeight={15}
     vbWidth={15}
     version={1.1}
@@ -3283,8 +3408,11 @@ exports[`Widget Static Image renders the structure 1`] = `
             "width": 2222,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -3356,8 +3484,11 @@ exports[`Widget Static Image renders the structure as a background image 1`] = `
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -3433,8 +3564,11 @@ exports[`Widget Static Image renders the structure as a background image with 50
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -3510,8 +3644,11 @@ exports[`Widget Static Image renders the structure as a background image with a 
               "width": 2222,
             },
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -3587,8 +3724,11 @@ Array [
             },
             Object {},
             Object {
+              "flexGrow": 1,
               "maxHeight": "100%",
               "maxWidth": "100%",
+              "minHeight": 8,
+              "minWidth": 8,
             },
           ],
         ]
@@ -3667,6 +3807,12 @@ Array [
         onResponderTerminate={[Function]}
         onResponderTerminationRequest={[Function]}
         onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "height": 1111,
+            "width": 2222,
+          }
+        }
       >
         <View
           style={
@@ -3683,8 +3829,11 @@ Array [
                   "width": 2222,
                 },
                 Object {
+                  "flexGrow": 1,
                   "maxHeight": "100%",
                   "maxWidth": "100%",
+                  "minHeight": 8,
+                  "minWidth": 8,
                 },
               ],
             ]
@@ -3755,8 +3904,11 @@ exports[`Widget Static Image renders the structure with custom height 1`] = `
             "width": 200,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]
@@ -3824,8 +3976,11 @@ exports[`Widget Static Image renders the structure with custom width 1`] = `
             "width": 100,
           },
           Object {
+            "flexGrow": 1,
             "maxHeight": "100%",
             "maxWidth": "100%",
+            "minHeight": 8,
+            "minWidth": 8,
           },
         ],
       ]

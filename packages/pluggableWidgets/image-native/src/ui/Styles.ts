@@ -18,6 +18,9 @@ export const defaultImageStyle: DefaultImageStyle = {
         justifyContent: "center"
     },
     image: {
+        flexGrow: 1, // This is required to prevent blurry images on Android
+        minHeight: 8,
+        minWidth: 8,
         maxWidth: "100%",
         maxHeight: "100%"
     },

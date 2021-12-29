@@ -6,6 +6,7 @@ import { extractStyles } from "@mendix/pluggable-widgets-tools";
 import { CustomImageProps, GlyphIcon } from "../utils/imageUtils";
 import { GlyphIcon as GlyphIconComponent } from "./fonts/font";
 import { ResizeModeEnum } from "../../typings/ImageProps";
+import { getPositionFromSVG } from "../utils/svgUtils";
 
 export interface DimensionsType {
     width?: number;
@@ -54,15 +55,12 @@ export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
 
     const updatedSvgPropsCallback = useCallback(
         () => ({
+            ...(!/\sfill=(['"])([#(),.a-z0-9]*)\1/g.test(image as string) ? { color: "#000" } : {}), // Make sure color is set if the svg does not contain "fill" attribute.
             ...svgProps,
             width,
-            height,
-            viewBox:
-                initialDimensions?.width && initialDimensions?.height
-                    ? `0 0 ${initialDimensions.width} ${initialDimensions.height}`
-                    : undefined
+            height
         }),
-        [width, height, svgProps, initialDimensions]
+        [width, height, svgProps, image]
     );
 
     if (image && (type === "staticImage" || type === "dynamicImage")) {
@@ -81,11 +79,18 @@ export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
     }
     if (image && initialDimensions?.width && initialDimensions?.height) {
         if (type === "staticSVG") {
+            // Make sure X / Y of viewbox is taken into account to align the SVG content correctly.
+            const { x, y } = getPositionFromSVG(image as string);
             return (
                 <SvgXml
                     testID={`${name}$SvgXml`}
                     xml={image as string}
                     {...updatedSvgPropsCallback()}
+                    viewBox={
+                        initialDimensions?.width && initialDimensions?.height
+                            ? `${x} ${y} ${initialDimensions.width} ${initialDimensions.height}`
+                            : undefined
+                    }
                     style={[
                         initialDimensions?.aspectRatio
                             ? { aspectRatio: +initialDimensions.aspectRatio?.toFixed(2) }
@@ -100,6 +105,11 @@ export const ImageIconSVG: FunctionComponent<ImageIconSVGProps> = props => {
                     testID={`${name}$SvgUri`}
                     uri={image as string}
                     {...updatedSvgPropsCallback()}
+                    viewBox={
+                        initialDimensions?.width && initialDimensions?.height
+                            ? `0 0 ${initialDimensions.width} ${initialDimensions.height}`
+                            : undefined
+                    }
                     style={[
                         initialDimensions?.aspectRatio
                             ? { aspectRatio: +initialDimensions.aspectRatio?.toFixed(2) }

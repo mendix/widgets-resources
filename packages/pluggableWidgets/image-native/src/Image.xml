@@ -66,7 +66,7 @@
                 </property>
                 <property key="customWidth" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description>If width and height are both configured in points, the widget will use the smallest value to calculate the other, so the widget will keep the correct aspect ratio.</description>
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="auto">
                     <caption>Height unit</caption>
@@ -78,7 +78,7 @@
                 </property>
                 <property key="customHeight" type="integer" defaultValue="100">
                     <caption>Height</caption>
-                    <description/>
+                    <description>If width and height are both configured in points, the widget will use the smallest value to calculate the other, so the widget will keep the correct aspect ratio.</description>
                 </property>
                 <property key="iconSize" type="integer" defaultValue="16">
                     <caption>Size</caption>

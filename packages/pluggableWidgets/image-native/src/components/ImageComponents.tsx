@@ -128,7 +128,9 @@ export const ImageSmall: FunctionComponent<ImageSmallProps> = props => {
     const { source, initialDimensions, customWidth, customHeight, iconSize, onClick, styles, name } = props;
     const [dimensions, setDimensions] = useState<DimensionsType>();
     const [svgProps] = extractStyles(styles.image as ImageStyle, ["width", "height"]);
-    const dimensionsNotSet = source.type !== "icon" && (!dimensions?.width || !dimensions?.height);
+    const dimensionsNotSet =
+        source.type !== "icon" &&
+        ((!dimensions?.width && !svgProps?.width) || (!dimensions?.height && !svgProps?.height));
     const onLayoutSetDimensionsCallback = useCallback(
         ({ nativeEvent: { layout } }: LayoutChangeEvent) => {
             onLayoutSetDimensions(
@@ -157,8 +159,8 @@ export const ImageSmall: FunctionComponent<ImageSmallProps> = props => {
                 {...source}
                 name={name}
                 iconSize={iconSize}
-                width={(dimensions?.width ?? svgProps?.width) as number}
-                height={(dimensions?.height ?? svgProps?.height) as number}
+                width={(svgProps?.width ?? dimensions?.width) as number}
+                height={(svgProps?.height ?? dimensions?.height) as number}
                 initialDimensions={initialDimensions}
                 styles={styles.image}
             />
@@ -196,18 +198,27 @@ export const ImageEnlarged: FunctionComponent<ImageEnlargedProps> = props => {
                 testID={`${name}$ImageEnlargedPressable`}
                 onPress={() => setEnlarged(false)}
                 onLayout={
-                    source.type !== "icon" && (!dimensions?.width || !dimensions?.height)
+                    source.type !== "icon" &&
+                    ((!dimensions?.width && !svgProps?.width) || (!dimensions?.height && !svgProps?.height))
                         ? onLayoutSetDimensionsCallback
                         : undefined
                 }
                 style={styles.backdrop}
             >
-                <Pressable onPress={null}>
+                <Pressable
+                    onPress={null}
+                    style={{
+                        // The child (FastImage) needs "flexGrow: 1" so images on Android are not blurry.
+                        // Therefore we explicitly have to set width / height here to prevent the image from taking up the whole screen, which in turn prevents the user from closing the modal (bc parent Pressable will not be clickable).
+                        width: (svgProps?.width ?? dimensions?.width) as number,
+                        height: (svgProps?.height ?? dimensions?.height) as number
+                    }}
+                >
                     <ImageIconSVG
                         {...source}
                         name={name}
-                        width={(dimensions?.width ?? svgProps?.width) as number}
-                        height={(dimensions?.height ?? svgProps?.height) as number}
+                        width={(svgProps?.width ?? dimensions?.width) as number}
+                        height={(svgProps?.height ?? dimensions?.height) as number}
                         initialDimensions={initialDimensions}
                         styles={styles.image}
                     />
