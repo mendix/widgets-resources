@@ -173,8 +173,8 @@
             ]
         },
         {
-            "name": "Align self",
-            "oldNames": ["Align Self"],
+            "name": "Move to",
+            "oldNames": ["Align self"],
             "type": "Dropdown",
             "description": "Float the element to the left or to the right.",
             "options": [
