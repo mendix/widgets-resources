@@ -24,22 +24,6 @@
                     "name": "Outer large",
                     "oldNames": ["Large"],
                     "class": "spacing-outer-top-large"
-                },
-                {
-                    "name": "Inner none",
-                    "class": "spacing-inner-top-none"
-                },
-                {
-                    "name": "Inner small",
-                    "class": "spacing-inner-top"
-                },
-                {
-                    "name": "Inner medium",
-                    "class": "spacing-inner-top-medium"
-                },
-                {
-                    "name": "Inner large",
-                    "class": "spacing-inner-top-large"
                 }
             ]
         },
@@ -67,22 +51,6 @@
                     "name": "Outer large",
                     "oldNames": ["Large"],
                     "class": "spacing-outer-bottom-large"
-                },
-                {
-                    "name": "Inner none",
-                    "class": "spacing-inner-bottom-none"
-                },
-                {
-                    "name": "Inner small",
-                    "class": "spacing-inner-bottom"
-                },
-                {
-                    "name": "Inner medium",
-                    "class": "spacing-inner-bottom-medium"
-                },
-                {
-                    "name": "Inner large",
-                    "class": "spacing-inner-bottom-large"
                 }
             ]
         },
@@ -110,22 +78,6 @@
                     "name": "Outer large",
                     "oldNames": ["Large"],
                     "class": "spacing-outer-left-large"
-                },
-                {
-                    "name": "Inner none",
-                    "class": "spacing-inner-left-none"
-                },
-                {
-                    "name": "Inner small",
-                    "class": "spacing-inner-left"
-                },
-                {
-                    "name": "Inner medium",
-                    "class": "spacing-inner-left-medium"
-                },
-                {
-                    "name": "Inner large",
-                    "class": "spacing-inner-left-large"
                 }
             ]
         },
@@ -153,22 +105,98 @@
                     "name": "Outer large",
                     "oldNames": ["Large"],
                     "class": "spacing-outer-right-large"
+                }
+            ]
+        },
+        {
+            "name": "Inner spacing top",
+            "type": "Dropdown",
+            "description": "The top spacing within this element.",
+            "options": [
+                {
+                    "name": "None",
+                    "class": "spacing-inner-top-none"
                 },
                 {
-                    "name": "Inner none",
+                    "name": "Small",
+                    "class": "spacing-inner-top"
+                },
+                {
+                    "name": "Medium",
+                    "class": "spacing-inner-top-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "spacing-inner-top-large"
+                }
+            ]
+        },
+        {
+            "name": "Inner spacing right",
+            "type": "Dropdown",
+            "description": "The right spacing within this element.",
+            "options": [
+                {
+                    "name": "None",
                     "class": "spacing-inner-right-none"
                 },
                 {
-                    "name": "Inner small",
+                    "name": "Small",
                     "class": "spacing-inner-right"
                 },
                 {
-                    "name": "Inner medium",
+                    "name": "Medium",
                     "class": "spacing-inner-right-medium"
                 },
                 {
-                    "name": "Inner large",
+                    "name": "Large",
                     "class": "spacing-inner-right-large"
+                }
+            ]
+        },
+        {
+            "name": "Inner spacing bottom",
+            "type": "Dropdown",
+            "description": "The bottom spacing within this element.",
+            "options": [
+                {
+                    "name": "None",
+                    "class": "spacing-inner-bottom-none"
+                },
+                {
+                    "name": "Small",
+                    "class": "spacing-inner-bottom"
+                },
+                {
+                    "name": "Medium",
+                    "class": "spacing-inner-bottom-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "spacing-inner-bottom-large"
+                }
+            ]
+        },
+        {
+            "name": "Inner spacing left",
+            "type": "Dropdown",
+            "description": "The left spacing within this element.",
+            "options": [
+                {
+                    "name": "None",
+                    "class": "spacing-inner-left-none"
+                },
+                {
+                    "name": "Small",
+                    "class": "spacing-inner-left"
+                },
+                {
+                    "name": "Medium",
+                    "class": "spacing-inner-left-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "spacing-inner-left-large"
                 }
             ]
         },
@@ -208,6 +236,12 @@
             "type": "Toggle",
             "description": "Hide element on desktop.",
             "class": "hide-desktop"
+        },
+        {
+            "name": "Width 100",
+            "type": "Toggle",
+            "description": "full width",
+            "class": "w-100"
         }
     ],
     "DivContainer": [
