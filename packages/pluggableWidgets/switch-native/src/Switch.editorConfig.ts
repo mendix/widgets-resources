@@ -1,8 +1,9 @@
 import { hidePropertiesIn, Properties, StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { SwitchPreviewProps } from "../typings/SwitchProps";
 import StructurePreviewSwitchSVG from "./assets/checked.svg";
+import StructurePreviewSwitchDarkSVG from "./assets/checked-dark.svg";
 
-export function getPreview(values: SwitchPreviewProps): StructurePreviewProps {
+export function getPreview(values: SwitchPreviewProps, isDarkMode: boolean): StructurePreviewProps {
     const label: StructurePreviewProps = {
         type: "Container",
         borders: false,
@@ -18,7 +19,9 @@ export function getPreview(values: SwitchPreviewProps): StructurePreviewProps {
     };
     const image: StructurePreviewProps = {
         type: "Image",
-        document: decodeURIComponent(StructurePreviewSwitchSVG.replace("data:image/svg+xml,", "")),
+        document: decodeURIComponent(
+            (isDarkMode ? StructurePreviewSwitchDarkSVG : StructurePreviewSwitchSVG).replace("data:image/svg+xml,", "")
+        ),
         width: 80,
         height: 30,
         grow: 8
