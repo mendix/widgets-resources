@@ -74,9 +74,12 @@ export function getPreview(values: ImagePreviewProps, isDarkMode: boolean): Stru
     if (!values.isBackgroundImage) {
         return {
             type: "Image",
-            document: isDarkMode
-                ? decodeURIComponent(StructurePreviewImageDarkSvg.replace("data:image/svg+xml,", ""))
-                : decodeURIComponent(StructurePreviewImageSvg.replace("data:image/svg+xml,", "")),
+            document: decodeURIComponent(
+                (isDarkMode ? StructurePreviewImageDarkSvg : StructurePreviewImageSvg).replace(
+                    "data:image/svg+xml,",
+                    ""
+                )
+            ),
             height: 100,
             width: 100
         };
