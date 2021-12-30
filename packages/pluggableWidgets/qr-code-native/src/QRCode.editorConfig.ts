@@ -10,9 +10,12 @@ export const getPreview = (_: undefined, isDarkMode: boolean): RowLayoutProps =>
     children: [
         {
             type: "Image",
-            document: isDarkMode
-                ? decodeURIComponent(StructurePreviewQRCodeDarkSVG.replace("data:image/svg+xml,", ""))
-                : decodeURIComponent(StructurePreviewQRCodeSVG.replace("data:image/svg+xml,", "")),
+            document: decodeURIComponent(
+                (isDarkMode ? StructurePreviewQRCodeDarkSVG : StructurePreviewQRCodeSVG).replace(
+                    "data:image/svg+xml,",
+                    ""
+                )
+            ),
             width: 48,
             height: 48
         }
