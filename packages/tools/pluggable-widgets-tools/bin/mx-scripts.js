@@ -86,6 +86,8 @@ function getRealCommand(cmd, toolsRoot) {
             return `cross-env DEBUG=true wdio "${join(toolsRoot, "test-config/wdio.conf.js")}"`;
         case "test:e2e:web":
             return `node "${join(toolsRoot, "scripts/e2e.js")}" $@`;
+        case "test:e2e:web:cypress":
+            return `node "${join(toolsRoot, "scripts/e2e.cypress.js")}" $@`;
         case "start:js":
         case "start:ts":
             return "echo This command has no effect, use pluggable-widgets-tools start:web instead!";

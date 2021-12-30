@@ -1,0 +1,5 @@
+{
+  "baseUrl": "http://localhost:8080",
+  "screenshotsFolder": "cypress/snapshots",
+  "video": false
+}
