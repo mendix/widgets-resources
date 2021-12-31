@@ -14,7 +14,7 @@ const swipeContentContainer = (property: ReactNode, isDarkMode: boolean): Contai
     ]
 });
 
-export function getPreview(values: ListViewSwipeProps<any>, isDarkMode: true): RowLayoutProps {
+export function getPreview(values: ListViewSwipeProps<any>, isDarkMode: boolean): RowLayoutProps {
     const children: StructurePreviewProps[] = [
         {
             type: "Container",

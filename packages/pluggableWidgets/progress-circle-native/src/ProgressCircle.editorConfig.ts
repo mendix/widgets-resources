@@ -1,8 +1,9 @@
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import StructurePreviewSvg from "./assets/structure-preview.svg";
 import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";
+import { ProgressCirclePreviewProps } from "../typings/ProgressCircleProps";
 
-export function getPreview(_: undefined, isDarkMode: boolean): StructurePreviewProps | null {
+export function getPreview(_: ProgressCirclePreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
     return {
         type: "Image",
         document: decodeURIComponent(
