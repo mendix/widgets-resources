@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.AreaChart.AreaChart" needsEntityContext="true" offlineCapable="false" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+<widget id="com.mendix.widget.custom.AreaChart.AreaChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Area chart</name>
     <description>Create an area chart</description>
     <studioProCategory>Charts</studioProCategory>
@@ -197,60 +197,60 @@
                 <systemProperty key="Visibility" />
                 <systemProperty key="TabIndex" />
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Dimensions">
             <propertyGroup caption="Dimensions">
-                <propertyGroup caption="Dimensions">
-                    <property key="widthUnit" type="enumeration" defaultValue="percentage">
-                        <caption>Width unit</caption>
-                        <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
-                        <enumerationValues>
-                            <enumerationValue key="percentage">Percentage</enumerationValue>
-                            <enumerationValue key="pixels">Pixels</enumerationValue>
-                        </enumerationValues>
-                    </property>
-                    <property key="width" type="integer" defaultValue="100">
-                        <caption>Width</caption>
-                        <description/>
-                    </property>
-                    <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
-                        <caption>Height unit</caption>
-                        <description/>
-                        <enumerationValues>
-                            <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
-                            <enumerationValue key="pixels">Pixels</enumerationValue>
-                            <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
-                        </enumerationValues>
-                    </property>
-                    <property key="height" type="integer" defaultValue="75">
-                        <caption>Height</caption>
-                        <description/>
-                    </property>
-                </propertyGroup>
+                <property key="widthUnit" type="enumeration" defaultValue="percentage">
+                    <caption>Width unit</caption>
+                    <description>Percentage: portion of parent size. Pixels: absolute amount of pixels.</description>
+                    <enumerationValues>
+                        <enumerationValue key="percentage">Percentage</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="width" type="integer" defaultValue="100">
+                    <caption>Width</caption>
+                    <description/>
+                </property>
+                <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
+                    <caption>Height unit</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
+                        <enumerationValue key="pixels">Pixels</enumerationValue>
+                        <enumerationValue key="percentageOfParent">Percentage of parent</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="height" type="integer" defaultValue="75">
+                    <caption>Height</caption>
+                    <description/>
+                </property>
             </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Theme">
             <propertyGroup caption="Theme">
-                <propertyGroup caption="Theme">
-                    <property key="gridLines" type="enumeration" defaultValue="none">
-                        <caption>Grid lines</caption>
-                        <description/>
-                        <enumerationValues>
-                            <enumerationValue key="none">None</enumerationValue>
-                            <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                            <enumerationValue key="vertical">Vertical</enumerationValue>
-                            <enumerationValue key="both">Both</enumerationValue>
-                        </enumerationValues>
-                    </property>
-                    <property key="enableThemeConfig" type="boolean" defaultValue="false">
-                        <caption>Enable theme folder config loading</caption>
-                        <description/>
-                    </property>
-                    <property key="customLayout" type="string" required="false" multiline="true">
-                        <caption>Custom layout</caption>
-                        <description/>
-                    </property>
-                    <property key="customConfigurations" type="string" required="false" multiline="true">
-                        <caption>Custom configurations</caption>
-                        <description/>
-                    </property>
-                </propertyGroup>
+                <property key="gridLines" type="enumeration" defaultValue="none">
+                    <caption>Grid lines</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="both">Both</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="enableThemeConfig" type="boolean" defaultValue="false">
+                    <caption>Enable theme folder config loading</caption>
+                    <description/>
+                </property>
+                <property key="customLayout" type="string" required="false" multiline="true">
+                    <caption>Custom layout</caption>
+                    <description/>
+                </property>
+                <property key="customConfigurations" type="string" required="false" multiline="true">
+                  <caption>Custom configurations</caption>
+                  <description/>
+                </property>
             </propertyGroup>
         </propertyGroup>
     </properties>
