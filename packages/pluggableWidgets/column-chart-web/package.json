@@ -3,7 +3,7 @@
   "widgetName": "ColumnChart",
   "version": "1.0.0",
   "description": "Showsdata in a column format graph.",
-  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
