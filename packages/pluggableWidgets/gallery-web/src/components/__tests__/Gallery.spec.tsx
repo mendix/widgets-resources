@@ -3,13 +3,16 @@ import { mount, render, shallow } from "enzyme";
 import { Gallery, GalleryProps } from "../Gallery";
 import { ObjectItem, GUID } from "mendix";
 
-const itemWrapperFunction = ({
-    onClick,
-    customClass
-}: {
-    onClick?: () => void;
-    customClass?: string;
-}): GalleryProps<ObjectItem>["itemRenderer"] => (wrapper, item) => wrapper(item.id, customClass, onClick);
+const itemWrapperFunction =
+    ({
+        onClick,
+        customClass
+    }: {
+        onClick?: () => void;
+        customClass?: string;
+    }): GalleryProps<ObjectItem>["itemRenderer"] =>
+    (wrapper, item) =>
+        wrapper(item.id, customClass, onClick);
 
 const defaultProps: GalleryProps<ObjectItem> = {
     hasMoreItems: false,

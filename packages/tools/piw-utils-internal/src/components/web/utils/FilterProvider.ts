@@ -34,7 +34,7 @@ export function useFilterContext(): { FilterContext: Context<FilterContextValue>
         return { FilterContext: globalFilterContext };
     }
 
-    const FilterContext = createContext((undefined as any) as FilterContextValue);
+    const FilterContext = createContext(undefined as any as FilterContextValue);
 
     (window as any)["com.mendix.widgets.web.filterable.filterContext"] = FilterContext;
     return { FilterContext };

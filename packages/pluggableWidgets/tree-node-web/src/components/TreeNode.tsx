@@ -203,12 +203,8 @@ function TreeNodeBranch(props: TreeNodeBranchProps): ReactElement {
     const treeNodeBranchRef = useRef<HTMLLIElement>(null);
 
     const { hasNestedTreeNode } = useTreeNodeLazyLoading(treeNodeBranchBody);
-    const {
-        isAnimating,
-        captureElementHeight,
-        animateTreeNodeContent,
-        cleanupAnimation
-    } = useAnimatedTreeNodeContentHeight(treeNodeBranchBody);
+    const { isAnimating, captureElementHeight, animateTreeNodeContent, cleanupAnimation } =
+        useAnimatedTreeNodeContentHeight(treeNodeBranchBody);
 
     useLayoutEffect(() => {
         if (props.animateTreeNodeContent && treeNodeState !== TreeNodeState.LOADING) {

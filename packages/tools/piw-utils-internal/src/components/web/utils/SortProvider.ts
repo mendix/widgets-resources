@@ -27,7 +27,7 @@ export function useSortContext(): { SortContext: Context<SortContextValue> } {
         return { SortContext: globalSortContext };
     }
 
-    const SortContext = createContext((undefined as any) as SortContextValue);
+    const SortContext = createContext(undefined as any as SortContextValue);
 
     (window as any)["com.mendix.widgets.web.sortable.sortContext"] = SortContext;
     return { SortContext };

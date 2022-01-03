@@ -50,7 +50,7 @@ export function preview(props: AccordionPreviewProps): ReactElement {
                 <div />
             </group.content.renderer>
         ),
-        visible: (group.visible as unknown) as boolean,
+        visible: group.visible as unknown as boolean,
         dynamicClassName: group.dynamicClass.slice(1, -1) // expression result is surrounded by single quotes
     }));
 

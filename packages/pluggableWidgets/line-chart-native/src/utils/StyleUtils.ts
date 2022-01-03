@@ -63,15 +63,8 @@ export function aggregateGridPadding(gridStyle?: LineChartGridStyle): VictoryCom
         return;
     }
 
-    const {
-        padding,
-        paddingHorizontal,
-        paddingVertical,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
-        paddingLeft
-    } = gridStyle;
+    const { padding, paddingHorizontal, paddingVertical, paddingTop, paddingRight, paddingBottom, paddingLeft } =
+        gridStyle;
 
     return {
         top: paddingTop ?? paddingVertical ?? padding,

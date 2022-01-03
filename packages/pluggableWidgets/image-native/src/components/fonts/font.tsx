@@ -20,11 +20,8 @@ export const preloadIcons = (iconNames: string[]): Promise<ImageSourcesCache> =>
         iconNames.reduce(buildImageCache(imageSources), {})
     );
 
-const buildImageCache = (imageSources: Icon[]) => (
-    imageSourcesCache: ImageSourcesCache,
-    iconName: string,
-    index: number
-) => {
-    imageSourcesCache[iconName] = ensure(imageSources[index]);
-    return imageSourcesCache;
-};
+const buildImageCache =
+    (imageSources: Icon[]) => (imageSourcesCache: ImageSourcesCache, iconName: string, index: number) => {
+        imageSourcesCache[iconName] = ensure(imageSources[index]);
+        return imageSourcesCache;
+    };

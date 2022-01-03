@@ -28,9 +28,10 @@ export function Slider(props: Props): ReactElement {
         []
     );
 
-    const customMarker = () => (markerProps: MarkerProps): JSX.Element => (
-        <Marker {...markerProps} testID={`${props.name}$marker`} />
-    );
+    const customMarker =
+        () =>
+        (markerProps: MarkerProps): JSX.Element =>
+            <Marker {...markerProps} testID={`${props.name}$marker`} />;
 
     const onLayout = useCallback((event: LayoutChangeEvent): void => {
         setWidth(event.nativeEvent.layout.width);
