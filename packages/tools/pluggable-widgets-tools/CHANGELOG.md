@@ -7,9 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Fixed
 - We fixed the typing generation for actions that are referenced by the `onChange` of an attribute.
+- We fixed prettier configurations for `jsxBracketSameLine`.
 
 ### Added
 - We added support for dark icons (`widgetName`.icon.dark.png and `widgetName`.tile.dark.png).
+
+### Changed
+- We changed `wdio-image-comparison-service` from `devDependencies` to `dependencies`.
+- We updated typescript and prettier versions.
 
 ## [9.8.0] - 2021-12-07
 
