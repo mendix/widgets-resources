@@ -2,7 +2,6 @@ import { createElement } from "react";
 import { ChartWidget } from "@mendix/shared-charts";
 import {
     dynamicValue,
-    // dynamicValue,
     EditableValueBuilder,
     ListAttributeValueBuilder,
     ListValueBuilder

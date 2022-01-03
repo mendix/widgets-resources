@@ -3,7 +3,6 @@ import { createElement, ReactElement, useCallback } from "react";
 import { AreaChartContainerProps, SeriesType } from "../typings/AreaChartProps";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { getPlotChartDataTransforms, SeriesMapper, usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
-// import { getPlotChartDataTransforms, usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 
 const areaChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     xaxis: {
