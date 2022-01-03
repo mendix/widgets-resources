@@ -43,11 +43,24 @@ async function main(): Promise<void> {
                         }
                     );
 
+                    const hasPreview = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files => files.some(path => path.endsWith(".editorConfig.ts")));
+                    const hasTileIcons = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files => files.some(path => path.endsWith(".tile.png")));
+                    const hasDarkModeIcons = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files => files.some(path => path.endsWith(".dark.png")));
+
                     return {
                         id,
                         pluginWidget: pluginWidget === "true",
                         offlineCapable: offlineCapable === "true",
-                        supportedPlatform: supportedPlatform ?? "Web"
+                        supportedPlatform: supportedPlatform ?? "Web",
+                        hasPreview,
+                        hasTileIcons,
+                        hasDarkModeIcons
                     };
                 } catch (e) {
                     if (e instanceof Error && (e.name === "FileReadError" || e.name === "ValueNotFoundError")) {
