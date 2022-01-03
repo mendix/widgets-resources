@@ -57,7 +57,7 @@ async function main(): Promise<void> {
                         id,
                         pluginWidget: pluginWidget === "true",
                         offlineCapable: offlineCapable === "true",
-                        supportedPlatform: supportedPlatform ?? "Web",
+                        supportedPlatform: supportedPlatform?.toLowerCase() ?? "web",
                         hasPreview,
                         hasTileIcons,
                         hasDarkModeIcons
