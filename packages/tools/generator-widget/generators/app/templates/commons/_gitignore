@@ -1,5 +1,20 @@
-dist/
-node_modules/
 <%- projectIgnorePath %>/
-*.log
+.DS_Store
+.idea
+.vscode
+dist
+node_modules
 .env
+*.log
+*.bak
+*.launch
+mxproject
+coverage
+
+**/results
+mendixProject
+**/e2e/diffs
+**/screenshot
+**/screenshot-results
+**/tests/testProject
+**/artifacts

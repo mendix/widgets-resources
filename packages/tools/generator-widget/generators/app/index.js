@@ -7,6 +7,9 @@ const text = require("./lib/text.js");
 
 const widgetSrcFolder = "src/components/";
 
+// Extends the prototype as install actions was removed from yeoman-generator
+Generator.prototype = Object.assign(Generator.prototype, require("yeoman-generator/lib/actions/install"));
+
 class MxGenerator extends Generator {
     constructor(args, opts) {
         super(args, opts);
@@ -114,24 +117,28 @@ class MxGenerator extends Generator {
 
         const tempSampleSuffix = this.widget.isPlatformWeb ? "Sample" : "";
 
+        // Copy main entrypoint
+        this._copyTemplate(
+            `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
+            `src/${this.widget.name}.${fileExtension}`
+        );
+
+        // Copy editorConfig file
+        this._copyTemplate(
+            `${this.widget.templateSourcePath}src/WidgetName.editorConfig.${this.widget.fileExtension}.ejs`,
+            `src/${this.widget.name}.editorConfig.${this.widget.fileExtension}`
+        );
+
         // web & native
         if (this.widget.usesEmptyTemplate) {
             this._copyTemplate(
                 `${this.widget.templateSourcePath}${widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}.ejs`,
                 `${widgetSrcFolder}HelloWorld${tempSampleSuffix}.${fileExtension}`
             );
-            this._copyTemplate(
-                `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
-                `src/${this.widget.name}.${fileExtension}`
-            );
         } else {
             this._copyTemplate(
                 `${this.widget.templateSourcePath}${widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}.ejs`,
                 `${widgetSrcFolder}Badge${tempSampleSuffix}.${fileExtension}`
-            );
-            this._copyTemplate(
-                `${this.widget.templateSourcePath}src/WidgetName.${fileExtension}.ejs`,
-                `src/${this.widget.name}.${fileExtension}`
             );
         }
 
