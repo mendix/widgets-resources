@@ -5,6 +5,6 @@ import { <%- name %>ContainerProps } from "../typings/<%- name %>Props";
 
 import "./ui/<%- name %>.css";
 
-export default function <%- name %>({ sampleText }: <%- name %>ContainerProps): ReactElement | null {
+export function <%- name %>({ sampleText }: <%- name %>ContainerProps): ReactElement {
     return <HelloWorldSample sampleText={sampleText ? sampleText : "World"} />;
 }

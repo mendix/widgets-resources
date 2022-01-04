@@ -17,7 +17,7 @@ const defaultStyle: CustomStyle = {
     }
 };
 
-export function HelloWorld({ name, style }: HelloWorldProps): ReactElement | null {
+export function HelloWorld({ name, style }: HelloWorldProps): ReactElement {
     const styles = mergeNativeStyles(defaultStyle, style);
     return (
         <View style={styles.container}>

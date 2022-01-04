@@ -2,9 +2,7 @@ import { ReactElement, createElement } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
 import { <%- name %>PreviewProps } from "../typings/<%- name %>Props";
 
-declare function require(name: string): string;
-
-export function preview({ sampleText }: <%- name %>PreviewProps): ReactElement | null {
+export function preview({ sampleText }: <%- name %>PreviewProps): ReactElement {
     return <HelloWorldSample sampleText={sampleText} />;
 }
 

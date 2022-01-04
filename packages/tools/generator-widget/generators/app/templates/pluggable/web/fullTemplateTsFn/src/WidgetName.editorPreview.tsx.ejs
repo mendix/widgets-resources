@@ -5,8 +5,6 @@ import { parseInlineStyle } from "@mendix/pluggable-widgets-tools";
 import { BadgeSample, BadgeSampleProps } from "./components/BadgeSample";
 import { <%- name %>PreviewProps } from "../typings/<%- name %>Props";
 
-declare function require(name: string): string;
-
 function parentInline(node?: HTMLElement | null): void {
     // Temporary fix, the web modeler add a containing div, to render inline we need to change it.
     if (node && node.parentElement && node.parentElement.parentElement) {
@@ -26,7 +24,7 @@ function transformProps(props: <%- name %>PreviewProps): BadgeSampleProps {
     };
 }
 
-export function preview(props: <%- name %>PreviewProps): ReactElement | null {
+export function preview(props: <%- name %>PreviewProps): ReactElement {
     return (
         <div ref={parentInline}>
             <BadgeSample {...transformProps(props)}></BadgeSample>

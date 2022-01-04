@@ -11,6 +11,6 @@ export interface CustomStyle extends Style {
     label: TextStyle;
 }
 
-export function <%- name %>({ style, yourName }: <%- name %>Props<CustomStyle>): ReactElement | null {
+export function <%- name %>({ style, yourName }: <%- name %>Props<CustomStyle>): ReactElement {
     return <HelloWorld name={yourName} style={style} />;
 }

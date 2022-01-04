@@ -1,24 +1,25 @@
-import { createElement } from "react";
+import { createElement, useCallback } from "react";
 
 import { BadgeSample } from "./components/BadgeSample";
 import "./ui/<%- name %>.css";
 
-export default function <%- name %>(props) {
-    const onClick = () => {
-        if (props.onClickAction && props.onClickAction.canExecute) {
-            props.onClickAction.execute();
+export function <%- name %>(props) {
+    const { <%- packageName %>Type, <%- packageName %>Value, valueAttribute, onClickAction, style, bootstrapStyle } = props;
+    const onClickHandler = useCallback(() => {
+        if (onClickAction && onClickAction.canExecute) {
+            onClickAction.execute();
         }
-    };
+    }, [onClickAction]);
 
     return (
         <BadgeSample
-            type={props.<%- packageName %>Type}
-            bootstrapStyle={props.bootstrapStyle}
+            type={<%- packageName %>Type}
+            bootstrapStyle={bootstrapStyle}
             className={props.class}
-            clickable={!!props.onClickAction}
-            defaultValue={props.<%- packageName %>Value ? props.<%- packageName %>Value : ""}
-            onClickAction={onClick}
-            style={props.style}
-            value={props.valueAttribute ? props.valueAttribute.displayValue : ""} />
+            clickable={!!onClickAction}
+            defaultValue={<%- packageName %>Value ? <%- packageName %>Value : ""}
+            onClickAction={onClickHandler}
+            style={style}
+            value={valueAttribute ? valueAttribute.displayValue : ""} />
     );
 }

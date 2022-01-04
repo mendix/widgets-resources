@@ -11,13 +11,13 @@ export interface BadgeProps {
     onClick: () => void;
 }
 
-export function Badge(props: BadgeProps): ReactElement | null {
-    const styles = mergeNativeStyles(defaultBadgeStyle, props.style);
+export function Badge({ value, style, onClick }: BadgeProps): ReactElement {
+    const styles = mergeNativeStyles(defaultBadgeStyle, style);
 
     const Touchable: ElementType = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
     const renderContent = (): ReactElement => {
-        const text = <Text style={styles.label}>{props.value}</Text>;
+        const text = <Text style={styles.label}>{value}</Text>;
 
         if (Platform.OS === "android") {
             return <View style={styles.badge}>{text}</View>;
@@ -28,7 +28,7 @@ export function Badge(props: BadgeProps): ReactElement | null {
 
     return (
         <View style={styles.container}>
-            <Touchable style={styles.badge} onPress={props.onClick} useForeground={true}>
+            <Touchable style={styles.badge} onPress={onClick} useForeground={true}>
                 {renderContent()}
             </Touchable>
         </View>

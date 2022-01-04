@@ -2,15 +2,18 @@ import { createElement } from "react";
 import classNames from "classnames";
 
 export function BadgeSample(props) {
+    const { type, defaultValue, className, style, value, bootstrapStyle, clickable, onClickAction, getRef } = props;
     return (
         <span
-            className={classNames("widget-<%- packageName %>", props.type, props.className, {
-                [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
-                "widget-<%- packageName %>-clickable": props.clickable
+            className={classNames("widget-jsf", type, className, {
+                [`label-${bootstrapStyle}`]: !!bootstrapStyle,
+                "widget-jsf-clickable": clickable
             })}
-            onClick={props.onClickAction}
-            ref={props.getRef}
-            style={props.style}
-        >{props.value || props.defaultValue}</span>
+            onClick={onClickAction}
+            ref={getRef}
+            style={style}
+        >
+            {value || defaultValue}
+        </span>
     );
 }

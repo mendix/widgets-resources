@@ -1,4 +1,4 @@
-import { FunctionComponent, createElement } from "react";
+import { Component, ReactNode, createElement } from "react";
 import classNames from "classnames";
 
 export interface AlertProps {
@@ -7,9 +7,10 @@ export interface AlertProps {
     bootstrapStyle: "default" | "primary" | "success" | "info" | "inverse" | "warning" | "danger";
 }
 
-export const Alert: FunctionComponent<AlertProps> = (props) =>
-    props.message
-        ? (<div className={classNames(`alert alert-${props.bootstrapStyle}`, props.className)}>{props.message}</div>)
-        : null;
-
-Alert.displayName = "Alert";
+export class Alert extends Component<AlertProps> {
+    render(): ReactNode {
+        return this.props.message
+            ? (<div className={classNames(`alert alert-${this.props.bootstrapStyle}`, this.props.className)}>{this.props.message}</div>)
+            : null;
+    }
+}
