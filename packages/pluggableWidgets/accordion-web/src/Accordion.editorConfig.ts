@@ -91,8 +91,9 @@ export function getProperties(
 export function check(values: AccordionPreviewProps): Problem[] {
     const errors: Problem[] = [];
 
-    const amountOfGroupsStartingExpanded = values.groups.filter(group => group.initialCollapsedState === "expanded")
-        .length;
+    const amountOfGroupsStartingExpanded = values.groups.filter(
+        group => group.initialCollapsedState === "expanded"
+    ).length;
 
     if (values.expandBehavior === "singleExpanded" && amountOfGroupsStartingExpanded > 1) {
         errors.push({
@@ -278,9 +279,10 @@ function getIconPreview(group: GroupsPreviewType, headerTextIconPadding: number,
     };
 }
 
-function getHeaderTextPreviewDetails(
-    group: GroupsPreviewType
-): { headerTextFontSize: number; headerTextIconPadding: number } {
+function getHeaderTextPreviewDetails(group: GroupsPreviewType): {
+    headerTextFontSize: number;
+    headerTextIconPadding: number;
+} {
     let headerTextFontSize = 0;
     let headerTextIconPadding = 0;
 

@@ -57,10 +57,10 @@ export const ChartWidget = ({
         () => getModelerConfigOptions(configOptions, themeFolderConfigs.configuration),
         [configOptions, themeFolderConfigs.configuration]
     );
-    const initialSeriesOptions = useMemo(() => getModelerSeriesOptions(seriesOptions, themeFolderConfigs.series), [
-        seriesOptions,
-        themeFolderConfigs.series
-    ]);
+    const initialSeriesOptions = useMemo(
+        () => getModelerSeriesOptions(seriesOptions, themeFolderConfigs.series),
+        [seriesOptions, themeFolderConfigs.series]
+    );
 
     const LineChartWrapperComponent = showSidebarEditor ? ChartWithPlayground : Chart;
 

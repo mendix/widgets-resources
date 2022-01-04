@@ -6,7 +6,7 @@ const { join } = require("path");
 const { ls, mkdir, rm, tempdir } = require("shelljs");
 const kill = require("tree-kill");
 const { promisify } = require("util");
-const { run: runYeoman } = require("yeoman-test");
+const YeomanTest = require("yeoman-test");
 
 const LIMIT_TESTS = !!process.env.LIMIT_TESTS;
 const PARALLELISM = 4;
@@ -151,11 +151,13 @@ async function main() {
                 let generatedWidget;
                 const release = await yeomanMutex.acquire(); // yeoman generator is no re-entrable :(
                 try {
-                    generatedWidget = await runYeoman(require.resolve("@mendix/generator-widget/generators/app"))
-                        .inTmpDir()
-                        .withPrompts(promptAnswers)
-                        .withArguments("Generated")
-                        .toPromise();
+                    generatedWidget = (
+                        await YeomanTest.run(require.resolve("@mendix/generator-widget/generators/app"))
+                            .inTmpDir()
+                            .withPrompts(promptAnswers)
+                            .withArguments("Generated")
+                            .toPromise()
+                    ).cwd;
                 } finally {
                     release();
                 }

@@ -80,15 +80,8 @@ export function aggregateGridPadding(gridStyle?: BarChartGridStyle): VictoryComm
         return;
     }
 
-    const {
-        padding,
-        paddingHorizontal,
-        paddingVertical,
-        paddingTop,
-        paddingRight,
-        paddingBottom,
-        paddingLeft
-    } = gridStyle;
+    const { padding, paddingHorizontal, paddingVertical, paddingTop, paddingRight, paddingBottom, paddingLeft } =
+        gridStyle;
 
     return {
         top: paddingTop ?? paddingVertical ?? padding,

@@ -5,10 +5,7 @@ import { ActionValue, EditableValue } from "mendix";
 
 type ChangeHandler = (value: number) => void;
 
-type UseOnChangeDebounceHook = (params: {
-    valueAttribute: EditableValue<Big>;
-    onChange?: ActionValue;
-}) => {
+type UseOnChangeDebounceHook = (params: { valueAttribute: EditableValue<Big>; onChange?: ActionValue }) => {
     onChange: ChangeHandler;
 };
 

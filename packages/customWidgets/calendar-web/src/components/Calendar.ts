@@ -139,8 +139,10 @@ class Calendar extends Component<CalendarProps, State> {
     }
 
     private renderCalendar(): ReactNode {
-        const wrapToolbar = (injectedProps: HOCToolbarProps): Function => (toolbarProps: Container.ToolbarProps) =>
-            createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
+        const wrapToolbar =
+            (injectedProps: HOCToolbarProps): Function =>
+            (toolbarProps: Container.ToolbarProps) =>
+                createElement(CustomToolbar as any, { ...injectedProps, ...toolbarProps });
 
         const props = {
             localizer,

@@ -31,7 +31,7 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "copyright",
             message: "Add a copyright",
-            default: "© Mendix Technology BV 2021. All rights reserved.",
+            default: "© Mendix Technology BV 2022. All rights reserved.",
             store: true
         },
         {

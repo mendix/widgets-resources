@@ -6,7 +6,7 @@
   "singleQuote": false,
   "printWidth": 120,
   "bracketSpacing": true,
-  "jsxBracketSameLine": false,
+  "bracketSameLine": false,
   "arrowParens": "avoid",
   "proseWrap": "always"
 }

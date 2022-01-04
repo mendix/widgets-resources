@@ -8,37 +8,36 @@
   "engines": {
     "node": ">=12"
   },
+  "license": "<%- license %>",
   "config": {
     "projectPath": "<%- projectPath %>/",
     "mendixHost": "http://localhost:8080",
-    "developmentPort": "3000"
+    "developmentPort": 3000
   },
   "packagePath": "<%- packagePath %>",
   "scripts": {
-    "start": "pluggable-widgets-tools start:web",
+    "start": "pluggable-widgets-tools start:server",
+    "dev": "pluggable-widgets-tools start:web",
     "build": "pluggable-widgets-tools build:web",
     "lint": "pluggable-widgets-tools lint",
     "lint:fix": "pluggable-widgets-tools lint:fix",<% if (hasUnitTests) { %>
     "test": "pluggable-widgets-tools test:unit:web --no-cache --ci<% if (hasE2eTests) { %> && npm run test:e2e<% } %>",
     "test:unit": "pluggable-widgets-tools test:unit:web --coverage",<% } %><% if (hasE2eTests) { %>
-    "test:e2e": "pluggable-widgets-tools test:e2e --url \"https://badge.mxapps.io\"",
-    "test:e2e:dev": "pluggable-widgets-tools test:e2e --debug",<% } %>
+    "test:e2e": "pluggable-widgets-tools test:e2e --url \"https://mywidget.mxapps.io\"",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",<% } %>
     "prerelease": "npm run lint",
     "release": "pluggable-widgets-tools release:web"
   },
-  "license": "<%- license %>",
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^9.0.0"<% if (isLanguageTS) { %>,
-    "@types/big.js": "^6.0.2",
-    "@types/classnames": "^2.2.4",<% if (hasUnitTests || hasE2eTests) { %>
+    "@types/big.js": "^6.0.2",<% if (hasUnitTests || hasE2eTests) { %>
     "@types/enzyme": "^3.10.8",
     "@types/enzyme-adapter-react-16": "^1.0.6",<% } %><% if (hasE2eTests) { %>
     "@types/jasmine": "^3.6.9",<% } %><% if (hasUnitTests) { %>
     "@types/jest": "^26.0.22",<% } %>
     "@types/react": "~17.0.1",
     "@types/react-dom": "~17.0.1"<% if (hasUnitTests) { %>,
-    "@types/react-test-renderer": "~17.0.1"<% } %><% if (hasE2eTests) { %>,
-    "@types/webdriverio": "^5.0.0"<% } %><% } %>
+    "@types/react-test-renderer": "~17.0.1"<% } %><% } %>
   },
   "dependencies": {
     "classnames": "^2.2.6"

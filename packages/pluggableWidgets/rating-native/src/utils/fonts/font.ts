@@ -26,11 +26,9 @@ export const preloadIcons = async (icons: IconConfiguration[]): Promise<ImageSou
         icons.reduce(buildImageCache(imageSources), {})
     );
 
-const buildImageCache: Function = (imageSources: Icon[]) => (
-    imageSourcesCache: ImageSourcesCache,
-    iconConfiguration: IconConfiguration,
-    index: number
-): ImageSourcesCache => {
-    imageSourcesCache[iconConfiguration.name] = imageSources[index];
-    return imageSourcesCache;
-};
+const buildImageCache: Function =
+    (imageSources: Icon[]) =>
+    (imageSourcesCache: ImageSourcesCache, iconConfiguration: IconConfiguration, index: number): ImageSourcesCache => {
+        imageSourcesCache[iconConfiguration.name] = imageSources[index];
+        return imageSourcesCache;
+    };
