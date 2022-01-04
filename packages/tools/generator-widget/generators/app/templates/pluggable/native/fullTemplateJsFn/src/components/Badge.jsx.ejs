@@ -1,4 +1,4 @@
-import { createElement } from "react";
+import { createElement, useMemo } from "react";
 import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 
 import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
@@ -10,7 +10,7 @@ export function Badge({ value, style, onClick }) {
 
     const Touchable = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
 
-    const renderContent = () => {
+    const renderContent = useMemo(() => {
         const text = <Text style={styles.label}>{value}</Text>;
 
         if (Platform.OS === "android") {
@@ -18,12 +18,12 @@ export function Badge({ value, style, onClick }) {
         }
 
         return text;
-    };
+    }, [styles, value]);
 
     return (
         <View style={styles.container}>
             <Touchable style={styles.badge} onPress={onClick} useForeground={true}>
-                {renderContent()}
+                {renderContent}
             </Touchable>
         </View>
     );
