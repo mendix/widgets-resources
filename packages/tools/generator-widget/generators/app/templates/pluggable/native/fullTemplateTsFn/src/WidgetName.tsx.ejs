@@ -1,0 +1,23 @@
+import { ReactElement, createElement } from "react";
+
+import { Badge } from "./components/Badge";
+import { BadgeStyle } from "./ui/styles";
+import { <%- name %>Props } from "../typings/<%- name %>Props";
+
+export function <%- name %>(props: <%- name %>Props<BadgeStyle>): ReactElement | null {
+    const onClickHandler = (): void => {
+        const { onClick } = props;
+
+        if (onClick && onClick.canExecute && !onClick.isExecuting) {
+            onClick.execute();
+        }
+    };
+
+    return (
+        <Badge
+            style={props.style}
+            onClick={onClickHandler}
+            value={props.value?.displayValue || "Default"}
+        />
+    );
+}

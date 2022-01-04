@@ -1,0 +1,16 @@
+import { createElement } from "react";
+import classNames from "classnames";
+
+export function BadgeSample(props) {
+    return (
+        <span
+            className={classNames("widget-<%- packageName %>", props.type, props.className, {
+                [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
+                "widget-<%- packageName %>-clickable": props.clickable
+            })}
+            onClick={props.onClickAction}
+            ref={props.getRef}
+            style={props.style}
+        >{props.value || props.defaultValue}</span>
+    );
+}

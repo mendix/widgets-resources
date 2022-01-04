@@ -1,0 +1,37 @@
+import { ReactElement, createElement, ElementType } from "react";
+import { Platform, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
+
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
+
+import { BadgeStyle, defaultBadgeStyle } from "../ui/styles";
+
+export interface BadgeProps {
+    value: string;
+    style: BadgeStyle[];
+    onClick: () => void;
+}
+
+export function Badge(props: BadgeProps): ReactElement | null {
+    const styles = mergeNativeStyles(defaultBadgeStyle, props.style);
+
+    const Touchable: ElementType = Platform.OS === "android" ? TouchableNativeFeedback : TouchableOpacity;
+
+    const renderContent = (): ReactElement => {
+        const text = <Text style={styles.label}>{props.value}</Text>;
+
+        if (Platform.OS === "android") {
+            return <View style={styles.badge}>{text}</View>;
+        }
+
+        return text;
+    };
+
+    return (
+        <View style={styles.container}>
+            <Touchable style={styles.badge} onPress={props.onClick} useForeground={true}>
+                {renderContent()}
+            </Touchable>
+        </View>
+    );
+
+}

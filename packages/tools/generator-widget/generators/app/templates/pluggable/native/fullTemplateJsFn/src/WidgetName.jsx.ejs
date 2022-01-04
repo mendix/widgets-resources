@@ -1,0 +1,21 @@
+import { createElement } from "react";
+
+import { Badge } from "./components/Badge";
+
+export function <%- name %>(props) {
+    const onClickHandler = () => {
+        const { onClick } = props;
+
+        if (onClick && onClick.canExecute && !onClick.isExecuting) {
+            onClick.execute();
+        }
+    };
+
+    return (
+        <Badge
+            style={props.style}
+            onClick={onClickHandler}
+            value={props.value?.displayValue || "Default"}
+        />
+    );
+}

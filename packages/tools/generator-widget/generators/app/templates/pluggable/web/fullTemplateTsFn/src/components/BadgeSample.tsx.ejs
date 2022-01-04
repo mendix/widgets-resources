@@ -1,0 +1,30 @@
+import { ReactElement, createElement } from "react";
+import classNames from "classnames";
+
+export interface BadgeSampleProps {
+    type: "badge" | "label";
+    defaultValue?: string;
+    className?: string;
+    style?: object;
+    value?: string;
+    bootstrapStyle?: BootstrapStyle;
+    clickable?: boolean;
+    onClickAction?: () => void;
+    getRef?: (node: HTMLElement) => void;
+}
+
+export type BootstrapStyle = "default" | "info" | "inverse" | "primary" | "danger" | "success" | "warning";
+
+export function BadgeSample(props: BadgeSampleProps): ReactElement | null {
+    return (
+        <span
+            className={classNames("widget-<%- packageName %>", props.type, props.className, {
+                [`label-${props.bootstrapStyle}`]: !!props.bootstrapStyle,
+                "widget-<%- packageName %>-clickable": props.clickable
+            })}
+            onClick={props.onClickAction}
+            ref={props.getRef}
+            style={props.style}
+        >{props.value || props.defaultValue}</span>
+    );
+}
