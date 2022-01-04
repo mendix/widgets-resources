@@ -8,6 +8,9 @@ import { CKEditorConfig } from "ckeditor4-react";
 import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
+    if (props.stringAttribute.status !== "available") {
+        return null;
+    }
     const onKeyChange = useCallback(() => executeAction(props.onChange), [props.onChange]);
     const onKeyPress = useCallback(() => executeAction(props.onKeyPress), [props.onKeyPress]);
     const onChangeFn = useCallback(
