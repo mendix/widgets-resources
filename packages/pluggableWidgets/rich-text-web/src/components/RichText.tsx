@@ -101,7 +101,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
                 readOnly: props.readOnly
             }
         });
-    }, [element]);
+    }, [element, value]);
     return (
         <div
             className={classNames("widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}

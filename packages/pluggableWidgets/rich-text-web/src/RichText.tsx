@@ -5,11 +5,12 @@ import { GroupType, createCustomToolbar, ToolbarItems } from "./utils/ckeditorPr
 import { debounce, executeAction } from "@mendix/piw-utils-internal";
 import { getPreset, defineAdvancedGroups } from "./utils/ckeditorConfigs";
 import { CKEditorConfig } from "ckeditor4-react";
+import loadingCircleSvg from "./ui/loading-circle.svg";
 import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
     if (props.stringAttribute.status !== "available") {
-        return null;
+        return <img src={loadingCircleSvg} className="widget-rich-text-loading-spinner" alt="" aria-hidden />;
     }
     const onKeyChange = useCallback(() => executeAction(props.onChange), [props.onChange]);
     const onKeyPress = useCallback(() => executeAction(props.onKeyPress), [props.onKeyPress]);
