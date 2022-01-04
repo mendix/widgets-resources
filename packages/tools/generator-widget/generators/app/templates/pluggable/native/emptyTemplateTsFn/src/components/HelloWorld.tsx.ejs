@@ -1,4 +1,4 @@
-import { FC, createElement } from "react";
+import { ReactElement, createElement } from "react";
 import { Text, View } from "react-native";
 
 import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
@@ -17,11 +17,11 @@ const defaultStyle: CustomStyle = {
     }
 };
 
-export const HelloWorld: FC<HelloWorldProps> = ({ name, style }) => {
+export function HelloWorld({ name, style }: HelloWorldProps): ReactElement | null {
     const styles = mergeNativeStyles(defaultStyle, style);
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Hello {name || "World"}</Text>
         </View>
     );
-};
+}

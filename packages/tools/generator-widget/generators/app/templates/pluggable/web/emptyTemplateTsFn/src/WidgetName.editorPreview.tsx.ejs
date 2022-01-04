@@ -1,12 +1,12 @@
-import { FC, createElement } from "react";
+import { ReactElement, createElement } from "react";
 import { HelloWorldSample } from "./components/HelloWorldSample";
 import { <%- name %>PreviewProps } from "../typings/<%- name %>Props";
 
 declare function require(name: string): string;
 
-export const preview: FC<<%- name %>PreviewProps> = ({ sampleText }) => {
+export function preview({ sampleText }: <%- name %>PreviewProps): ReactElement | null {
     return <HelloWorldSample sampleText={sampleText} />;
-};
+}
 
 export function getPreviewCss(): string {
     return require("./ui/<%- name %>.css");

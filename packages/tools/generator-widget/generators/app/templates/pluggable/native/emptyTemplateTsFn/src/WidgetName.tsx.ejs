@@ -1,4 +1,4 @@
-import { FC, createElement } from "react";
+import { ReactElement, createElement } from "react";
 import { TextStyle, ViewStyle } from "react-native";
 
 import { Style } from "@mendix/pluggable-widgets-tools";
@@ -11,6 +11,6 @@ export interface CustomStyle extends Style {
     label: TextStyle;
 }
 
-export const <%- name %>: FC<<%- name %>Props<CustomStyle>> = ({ style, yourName }) => {
+export function <%- name %>({ style, yourName }: <%- name %>Props<CustomStyle>): ReactElement | null {
     return <HelloWorld name={yourName} style={style} />;
-};
+}
