@@ -28,7 +28,7 @@ export const calculateSizeRef = (
     series: LinesType,
     marker: { size: number[] },
     dimensions?: Dimensions
-): { sizemode: any; sizeref: any } => {
+): { sizemode: "diameter" | "area"; sizeref: number | undefined } => {
     const sizeref = getMarkerSizeReference(series, marker.size, dimensions);
     return { sizemode: "diameter", sizeref };
 };
