@@ -41,7 +41,7 @@ interface PlotDataSeries {
     dynamicTooltipHoverText?: ListExpressionValue<string>;
 }
 
-type SeriesMapper<T> = (serie: T, dataPoints: PlotChartDataPoints) => Partial<PlotData>;
+export type SeriesMapper<T> = (serie: T, dataPoints: PlotChartDataPoints) => Partial<PlotData>;
 
 export function usePlotChartDataSeries<T extends PlotDataSeries>(
     series: T[],
