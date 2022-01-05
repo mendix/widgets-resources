@@ -5,9 +5,9 @@ export function BadgeSample(props) {
     const { type, defaultValue, className, style, value, bootstrapStyle, clickable, onClickAction, getRef } = props;
     return (
         <span
-            className={classNames("widget-jsf", type, className, {
+            className={classNames("widget-<%- packageName %>", type, className, {
                 [`label-${bootstrapStyle}`]: !!bootstrapStyle,
-                "widget-jsf-clickable": clickable
+                "widget-<%- packageName %>-clickable": clickable
             })}
             onClick={onClickAction}
             ref={getRef}
