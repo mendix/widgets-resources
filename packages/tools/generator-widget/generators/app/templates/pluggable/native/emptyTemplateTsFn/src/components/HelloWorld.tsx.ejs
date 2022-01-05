@@ -1,0 +1,27 @@
+import { FC, createElement } from "react";
+import { Text, View } from "react-native";
+
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
+
+import { CustomStyle } from "../<%- name %>";
+
+export interface HelloWorldProps {
+    name?: string;
+    style: CustomStyle[];
+}
+
+const defaultStyle: CustomStyle = {
+    container: { },
+    label: {
+        color: "#F6BB42"
+    }
+};
+
+export const HelloWorld: FC<HelloWorldProps> = ({ name, style }) => {
+    const styles = mergeNativeStyles(defaultStyle, style);
+    return (
+        <View style={styles.container}>
+            <Text style={styles.label}>Hello {name || "World"}</Text>
+        </View>
+    );
+};

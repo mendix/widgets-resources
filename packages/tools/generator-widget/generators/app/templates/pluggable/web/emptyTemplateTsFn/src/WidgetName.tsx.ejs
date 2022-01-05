@@ -1,0 +1,12 @@
+import { FC, createElement } from "react";
+import { HelloWorldSample } from "./components/HelloWorldSample";
+
+import { <%- name %>ContainerProps } from "../typings/<%- name %>Props";
+
+import "./ui/<%- name %>.css";
+
+const <%- name %>: FC<<%- name %>ContainerProps> = ({ sampleText }) => {
+    return <HelloWorldSample sampleText={sampleText ? sampleText : "World"} />;
+};
+
+export default <%- name %>;

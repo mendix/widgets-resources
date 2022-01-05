@@ -23,6 +23,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - We've updated the version of yeoman-generator to 5.4.2.
 - We've updated the configurations for tsconfig in web widgets.
 - We've updated the npm tasks and template classes for web widgets.
+- You can now choose between generating class or function components.
 
 ## [9.0.2] - 2021-05-20
 

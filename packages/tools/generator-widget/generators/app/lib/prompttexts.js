@@ -116,6 +116,24 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             ],
             default: "full",
             store: true
+        },
+        {
+            when: response => response.boilerplate === "empty",
+            type: "list",
+            name: "programmingStyle",
+            message: "Which type of components do you want to use?",
+            choices: [
+                {
+                    name: "Class Components",
+                    value: "class"
+                },
+                {
+                    name: "Function Components",
+                    value: "function"
+                }
+            ],
+            default: "class",
+            store: true
         }
     ];
 }

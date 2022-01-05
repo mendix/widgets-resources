@@ -1,0 +1,9 @@
+import { FC, createElement } from "react";
+
+export interface HelloWorldSampleProps {
+    sampleText?: string;
+}
+
+export const HelloWorldSample: FC<HelloWorldSampleProps> = ({ sampleText }) => {
+    return <div className="widget-hello-world">Hello {sampleText}</div>;
+};
