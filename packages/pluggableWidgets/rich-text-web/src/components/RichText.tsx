@@ -29,16 +29,8 @@ export interface RichTextProps {
 }
 
 export const RichTextEditor = (props: RichTextProps): ReactElement => {
-    const {
-        editorType,
-        plugins,
-        enterMode,
-        shiftEnterMode,
-        value,
-        readOnly,
-        readOnlyStyle,
-        advancedContentFilter
-    } = props;
+    const { editorType, plugins, enterMode, shiftEnterMode, value, readOnly, readOnlyStyle, advancedContentFilter } =
+        props;
     const [element, setElement] = useState<HTMLElement | null>(null);
     const { width, height } = props.dimensions
         ? getDimensions({ ...props.dimensions })
