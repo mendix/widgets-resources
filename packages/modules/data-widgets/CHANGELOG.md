@@ -5,6 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed the z-index of filters and column selector while using popup layouts.
+
+### Changed
+- We changed style variables to use `!default` to allow value overriding with Atlas.
+
 ## [2.2.0] Data Widgets - 2021-12-23
 
 
