@@ -43,9 +43,12 @@ async function main(): Promise<void> {
                         }
                     );
 
-                    const hasPreview = await fs
+                    const hasStructurePreview = await fs
                         .readdir(join(packagePath, "src"))
                         .then(files => files.some(path => path.endsWith(".editorConfig.ts")));
+                    const hasDesignModePreview = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files => files.some(path => path.endsWith(".editorPreview.tsx")));
                     const hasTileIcons = await fs
                         .readdir(join(packagePath, "src"))
                         .then(files => files.some(path => path.endsWith(".tile.png")));
@@ -58,7 +61,8 @@ async function main(): Promise<void> {
                         pluginWidget: pluginWidget === "true",
                         offlineCapable: offlineCapable === "true",
                         supportedPlatform: supportedPlatform?.toLowerCase() ?? "web",
-                        hasPreview,
+                        hasStructurePreview,
+                        hasDesignModePreview,
                         hasTileIcons,
                         hasDarkModeIcons
                     };
