@@ -1,11 +1,11 @@
-import { ReactElement, createElement } from "react";
+import { ReactElement, CSSProperties, createElement } from "react";
 import classNames from "classnames";
 
 export interface BadgeSampleProps {
     type: "badge" | "label";
     defaultValue?: string;
     className?: string;
-    style?: object;
+    style?: CSSProperties;
     value?: string;
     bootstrapStyle?: BootstrapStyle;
     clickable?: boolean;
