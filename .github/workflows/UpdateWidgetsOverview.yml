@@ -24,9 +24,8 @@ jobs:
       - run: npm run update:widgets-overview
       - id: cpr
         uses: peter-evans/create-pull-request@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with:
+          token: ${{ secrets.GH_PAT }}
           branch: build/update-widgets-data
           delete-branch: true
           commit-message: 'chore: update widgets data file'
@@ -35,8 +34,7 @@ jobs:
           add-paths: 'data/widgets.json'
       - if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         with:
+          token: ${{ secrets.GH_PAT }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: rebase
