@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
 import { FileReadError, PatternNotFoundError } from "./errors";
 import { promisify } from "util";
 import { exec } from "child_process";
@@ -87,7 +87,7 @@ async function main(): Promise<void> {
 
     const result = packages.filter(isDefined);
 
-    await writeFile("data/widgets.json", JSON.stringify(result, null, "\t"));
+    await writeFile(resolve(__dirname, "../../data/widgets.json"), JSON.stringify(result, null, "\t"));
 }
 
 function isDefined<T>(val: T | undefined | null): val is T {
