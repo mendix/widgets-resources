@@ -3,6 +3,7 @@ import { dirname, join } from "path";
 import { FileReadError, PatternNotFoundError } from "./errors";
 import { promisify } from "util";
 import { exec } from "child_process";
+import ts from "typescript";
 
 const execAsync = promisify(exec);
 
@@ -45,10 +46,18 @@ async function main(): Promise<void> {
 
                     const hasStructurePreview = await fs
                         .readdir(join(packagePath, "src"))
-                        .then(files => files.some(path => path.endsWith(".editorConfig.ts")));
+                        .then(files =>
+                            files
+                                .filter(path => path.match(/.*\.editorConfig\.[jt]sx?/))
+                                .some(path => moduleExports(join(packagePath, "src", path), "getPreview"))
+                        );
                     const hasDesignModePreview = await fs
                         .readdir(join(packagePath, "src"))
-                        .then(files => files.some(path => path.endsWith(".editorPreview.tsx")));
+                        .then(files =>
+                            files
+                                .filter(path => path.match(/.*\.editorPreview\.[jt]sx?$/))
+                                .some(path => moduleExports(join(packagePath, "src", path), "preview"))
+                        );
                     const hasTileIcons = await fs
                         .readdir(join(packagePath, "src"))
                         .then(files => files.some(path => path.endsWith(".tile.png")));
@@ -127,4 +136,14 @@ async function extractTextFromFile<P extends Patterns>(
         }
         return value ? { ...result, [key]: value } : result;
     }, {} as Values<P>);
+}
+
+function moduleExports(fileName: string, exportName: string): boolean {
+    const program = ts.createProgram([fileName], {});
+    const sourceFile = program.getSourceFile(fileName);
+    if (sourceFile) {
+        const fileSymbol = program.getTypeChecker().getSymbolAtLocation(sourceFile);
+        return fileSymbol?.exports?.get(ts.escapeLeadingUnderscores(exportName)) !== undefined;
+    }
+    return false;
 }
