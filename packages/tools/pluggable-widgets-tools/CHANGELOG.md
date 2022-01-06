@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added `@prettier/plugin-xml` plugin to fix xml code format and check for xml errors.
+
+## [9.9.0] - 2022-01-04
+
 ### Fixed
 - We fixed the typing generation for actions that are referenced by the `onChange` of an attribute.
 - We fixed prettier configurations for `jsxBracketSameLine`.
