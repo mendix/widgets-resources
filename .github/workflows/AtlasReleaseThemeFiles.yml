@@ -46,11 +46,9 @@ jobs:
                   source: "packages/theming/atlas/src/theme/web/*"
                   target: "packages/theming/atlas/dist/theme/web/"
             - name: "Create ZIP"
-              uses: papeloto/action-zip@v1
+              uses: montudor/action-zip@v1
               with:
-                  files: packages/theming/atlas/dist/theme/
-                  recursive: true
-                  dest: atlasui-theme-files.zip
+                  args: zip -qq -r atlasui-theme-files.zip packages/theming/atlas/dist/theme/
             - name: "Release Atlas Theme Files"
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
