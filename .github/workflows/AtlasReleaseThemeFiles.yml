@@ -41,16 +41,14 @@ jobs:
               run: |
                   mkdir -p packages/theming/atlas/dist/theme/web/
             - name: "Copy theme web folder to dist"
-              uses: canastro/copy-file-action@master
+              uses: canastro/copy-file-action@6bae380f8f61d936bfe053fbedce1663beb3f2c1
               with:
                   source: "packages/theming/atlas/src/theme/web/*"
                   target: "packages/theming/atlas/dist/theme/web/"
             - name: "Create ZIP"
-              uses: papeloto/action-zip@v1
+              uses: montudor/action-zip@0852c26906e00f8a315c704958823928d8018b28
               with:
-                  files: packages/theming/atlas/dist/theme/
-                  recursive: true
-                  dest: atlasui-theme-files.zip
+                  args: zip -qq -r atlasui-theme-files.zip packages/theming/atlas/dist/theme/
             - name: "Release Atlas Theme Files"
               uses: "marvinpinto/action-automatic-releases@latest"
               with:
