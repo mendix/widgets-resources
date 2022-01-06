@@ -3,7 +3,7 @@
   "widgetName": "Signature",
   "version": "1.0.5",
   "description": "A signature pad for capturing signatures",
-  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
     "type": "git",
     "url": "https://github.com/mendix/widgets-resources.git"

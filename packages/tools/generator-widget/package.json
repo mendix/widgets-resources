@@ -3,7 +3,7 @@
   "version": "9.1.0",
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
-  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages/tools/generator-widget",
   "main": "app/index.js",
   "repository": {

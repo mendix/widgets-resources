@@ -3,7 +3,7 @@
   "widgetName": "Accordion",
   "version": "2.1.0",
   "description": "A Mendix pluggable widget to display expandable list items.",
-  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
