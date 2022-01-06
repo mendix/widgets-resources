@@ -5,11 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.2.1] Data Widgets - 2022-1-6
 ### Fixed
 - We fixed the z-index of filters and column selector while using popup layouts.
 
 ### Changed
 - We changed style variables to use `!default` to allow value overriding with Atlas.
+
+## [2.2.1] DatagridDateFilter
+### Added
+- We added a class `date-filter-container` to the main container for the date picker calendar.
+
+## [2.2.1] Datagrid
+### Changed
+- We changed the icons from front-awesome to be pure SVG.
 
 ## [2.2.0] Data Widgets - 2021-12-23
 
