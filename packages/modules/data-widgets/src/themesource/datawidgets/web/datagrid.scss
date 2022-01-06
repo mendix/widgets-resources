@@ -1,5 +1,6 @@
 $background-color: #fff !default;
 $icon-color: #606671 !default;
+$icon-size: 14px !default;
 $pagination-button-color: #3b4251 !default;
 $pagination-caption-color: #0a1325 !default;
 $dragging-color-effect: rgba(10, 19, 37, 0.8) !default;
@@ -100,6 +101,7 @@ $brand-primary: #264ae5 !default;
                 margin-left: 8px;
                 flex-grow: 0;
                 color: $icon-color;
+                height: $icon-size;
             }
 
             &:focus:not(:focus-visible) {
@@ -143,6 +145,10 @@ $brand-primary: #264ae5 !default;
             .column-selector-button {
                 padding: 8px;
                 margin: 0 8px;
+
+                svg {
+                    width: $icon-size;
+                }
             }
 
             /* List of columns to select */

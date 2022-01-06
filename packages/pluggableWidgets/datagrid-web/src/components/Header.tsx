@@ -10,8 +10,9 @@ import {
     HTMLAttributes
 } from "react";
 import classNames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLongArrowAltDown, faLongArrowAltUp, faArrowsAltV } from "@fortawesome/free-solid-svg-icons";
+import { FaLongArrowAltDown } from "./icons/FaLongArrowAltDown";
+import { FaLongArrowAltUp } from "./icons/FaLongArrowAltUp";
+import { FaArrowsAltV } from "./icons/FaArrowsAltV";
 import { ColumnProperty } from "./Table";
 import { ColumnResizerProps } from "./ColumnResizer";
 import { SortingRule } from "../utils/settings";
@@ -51,13 +52,17 @@ export function Header(props: HeaderProps): ReactElement {
     const isSorted = sortProperties && sortProperties.id === props.column.id;
     const isSortedDesc = isSorted && sortProperties.desc;
 
-    const sortIcon = canSort
-        ? isSorted
-            ? isSortedDesc
-                ? faLongArrowAltDown
-                : faLongArrowAltUp
-            : faArrowsAltV
-        : undefined;
+    const sortIcon = canSort ? (
+        isSorted ? (
+            isSortedDesc ? (
+                <FaLongArrowAltDown />
+            ) : (
+                <FaLongArrowAltUp />
+            )
+        ) : (
+            <FaArrowsAltV />
+        )
+    ) : null;
 
     const caption = props.column.header.trim();
 
@@ -116,7 +121,7 @@ export function Header(props: HeaderProps): ReactElement {
                     {...(canSort ? sortProps : undefined)}
                 >
                     <span>{caption.length > 0 ? caption : "\u00a0"}</span>
-                    {sortIcon && <FontAwesomeIcon aria-hidden icon={sortIcon} />}
+                    {sortIcon}
                 </div>
                 {props.filterable && props.column.customFilter ? props.column.customFilter : null}
             </div>
