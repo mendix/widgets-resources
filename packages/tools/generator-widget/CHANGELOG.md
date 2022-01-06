@@ -6,11 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### added
+
+- We added `@prettier/plugin-xml` plugin to fix xml code format and check for xml errors.
+
+## [9.1.0] - 2022-01-04
+
 ### Added
+
 - We've added missing functions in editorPreview files.
 - We've added editorConfig file for widgets.
 
 ### Changed
+
 - We've updated the editorPreview files for web projects with correct properties.
 - We've updated the version of yeoman-generator to 5.4.2.
 - We've updated the configurations for tsconfig in web widgets.

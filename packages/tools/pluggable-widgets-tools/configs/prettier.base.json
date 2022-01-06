@@ -8,5 +8,7 @@
   "bracketSpacing": true,
   "bracketSameLine": false,
   "arrowParens": "avoid",
-  "proseWrap": "always"
+  "proseWrap": "always",
+  "xmlSelfClosingSpace": true,
+  "xmlWhitespaceSensitivity": "ignore"
 }

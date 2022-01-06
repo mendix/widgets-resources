@@ -2,6 +2,7 @@ const base = require("./packages/tools/pluggable-widgets-tools/configs/prettier.
 
 module.exports = {
     ...base,
+    plugins: [require.resolve("@prettier/plugin-xml")],
     overrides: [
         {
             files: ["CHANGELOG.md", ".travis.yml"],
