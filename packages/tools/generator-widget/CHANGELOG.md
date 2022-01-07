@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.2.0] - 2022-01-07
+
 ### Added
 
 - We added `@prettier/plugin-xml` plugin to fix xml code format and check for xml errors.
