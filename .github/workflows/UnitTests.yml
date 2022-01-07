@@ -14,7 +14,7 @@ jobs:
         steps:
             - name: "Checking changed files"
               id: files
-              uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6
+              uses: softprops/diffset@3aeca0719d5043522e155012d3c9f7470fdd2dc6 # v1
               if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
               with:
                 global_files: |
@@ -22,7 +22,7 @@ jobs:
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
                   submodules: false
             - name: "Fetching master to compare"
@@ -34,14 +34,14 @@ jobs:
               run:
                   echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
             - name: "Defining cache"
-              uses: actions/cache@v2
+              uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
                   cache-name: cache-node-modules
               with:
                   path: ~/.npm
                   key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Defining node version"
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"

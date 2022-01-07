@@ -1,0 +1,23 @@
+name: Ensure SHA pinned actions
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/*.yml"
+  pull_request:
+    branches: [master]
+    paths:
+      -  ".github/workflows/*.yml"
+
+jobs:
+  harden_security:
+    name: Check SHA in GH Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checking-out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+      - name: "Ensure SHA pinned actions"
+        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@0b552a197e44b819629237e065d781f5ca691460 # v1.1.1
