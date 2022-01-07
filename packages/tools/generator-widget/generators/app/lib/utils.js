@@ -17,7 +17,7 @@ function getWidgetDetails(answers) {
         fileExtension: answers.programmingLanguage === "javascript" ? "js" : "ts",
         templateSourcePath: `pluggable/${answers.platform}/${answers.boilerplate}Template${
             answers.programmingLanguage === "javascript" ? "Js" : "Ts"
-        }/`
+        }${answers.programmingStyle === "function" ? "Fn" : ""}/`
     };
 }
 

@@ -6,9 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
-### added
+### Added
 
 - We added `@prettier/plugin-xml` plugin to fix xml code format and check for xml errors.
+- You can now choose between generating class or function components.
 
 ## [9.1.0] - 2022-01-04
 

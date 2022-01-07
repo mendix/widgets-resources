@@ -85,6 +85,23 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
         },
         {
             type: "list",
+            name: "programmingStyle",
+            message: "Which type of components do you want to use?",
+            choices: [
+                {
+                    name: "Class Components",
+                    value: "class"
+                },
+                {
+                    name: "Function Components",
+                    value: "function"
+                }
+            ],
+            default: "class",
+            store: true
+        },
+        {
+            type: "list",
             name: "platform",
             message: "Which type of widget are you developing?",
             choices: [
