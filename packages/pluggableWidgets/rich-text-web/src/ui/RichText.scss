@@ -1,0 +1,54 @@
+@use "~ckeditor4/plugins/tableselection/styles/tableselection.css";
+@use "~ckeditor4/plugins/dialog/styles/dialog.css" as dialog;
+@use "~ckeditor4/plugins/scayt/dialogs/dialog.css" as scaytDialog;
+@use "~ckeditor4/plugins/scayt/skins/moono-lisa/scayt.css";
+@use "~ckeditor4/plugins/autocomplete/skins/default.css" as autocomplete;
+@use "~ckeditor4/plugins/balloonpanel/skins/moono-lisa/balloonpanel.css";
+@use "~ckeditor4/plugins/balloontoolbar/skins/moono-lisa/balloontoolbar.css";
+@use "~ckeditor4/plugins/codesnippet/lib/highlight/styles/idea.css";
+@use "~ckeditor4/plugins/colordialog/dialogs/colordialog.css";
+@use "~ckeditor4/plugins/emoji/skins/default.css" as emoji;
+@use "~ckeditor4/plugins/preview/styles/screen.css";
+@use "~ckeditor4/plugins/wsc/skins/moono-lisa/wsc.css";
+@use "~ckeditor4/plugins/copyformatting/styles/copyformatting.css";
+
+.widget-rich-text {
+    &.editor-text {
+        .cke {
+            border: none;
+        }
+
+        .cke_top,
+        .cke_bottom {
+            background: inherit;
+            display: none;
+        }
+    }
+
+    &.editor-bordered {
+        .cke {
+            border: 1px solid #d1d1d1;
+        }
+
+        .cke_top,
+        .cke_bottom {
+            background: inherit;
+            display: none;
+        }
+    }
+}
+
+.widget-rich-text-loading-spinner {
+    width: 16px;
+    height: 16px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
