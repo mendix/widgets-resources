@@ -3,7 +3,7 @@ import { dirname, join, resolve } from "path";
 import { FileReadError, PatternNotFoundError } from "./errors";
 import { promisify } from "util";
 import { exec } from "child_process";
-import ts from "typescript";
+import { createProgram, escapeLeadingUnderscores } from "typescript";
 
 const execAsync = promisify(exec);
 
@@ -139,11 +139,11 @@ async function extractTextFromFile<P extends Patterns>(
 }
 
 function moduleExports(fileName: string, exportName: string): boolean {
-    const program = ts.createProgram([fileName], {});
+    const program = createProgram([fileName], {});
     const sourceFile = program.getSourceFile(fileName);
     if (sourceFile) {
         const fileSymbol = program.getTypeChecker().getSymbolAtLocation(sourceFile);
-        return fileSymbol?.exports?.get(ts.escapeLeadingUnderscores(exportName)) !== undefined;
+        return fileSymbol?.exports?.get(escapeLeadingUnderscores(exportName)) !== undefined;
     }
     return false;
 }
