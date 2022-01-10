@@ -4,45 +4,49 @@
 			"latestVersion": "1.0.13",
 			"widgetFileName": "Calendar.xml",
 			"id": "com.mendix.widget.custom.calendar.Calendar",
+			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": false,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.4.3",
 			"widgetFileName": "Carousel.xml",
 			"id": "com.mendix.widget.custom.carousel.Carousel",
+			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": false,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.1.4",
 			"widgetFileName": "ColorPicker.xml",
 			"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
+			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": false,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.5",
 			"widgetFileName": "Signature.xml",
 			"id": "com.mendix.widget.custom.signature.Signature",
+			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": false,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.1.0",
@@ -51,10 +55,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/accessibility-helper-web/src/AccessibilityHelper.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -63,10 +68,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/accordion-native/src/Accordion.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.1.0",
@@ -75,10 +81,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/accordion-web/src/Accordion.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/accordion-web/src/Accordion.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -87,10 +95,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/activity-indicator-native/src/ActivityIndicator.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -99,10 +108,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/animation-native/src/Animation.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -111,10 +121,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -123,10 +133,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/area-chart-web/src/AreaChart.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/area-chart-web/src/AreaChart.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -135,10 +147,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -147,10 +159,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/badge-button-web/src/BadgeButton.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/badge-button-web/src/BadgeButton.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -159,10 +173,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -171,10 +185,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/badge-web/src/Badge.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/badge-web/src/Badge.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -183,10 +199,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/bar-chart-native/src/BarChart.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -195,10 +212,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/bar-chart-web/src/BarChart.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/bar-chart-web/src/BarChart.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -207,10 +226,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.2.0",
@@ -219,10 +238,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/barcode-scanner-web/src/BarcodeScanner.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/barcode-scanner-web/src/BarcodeScanner.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -231,10 +252,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/bottom-sheet-native/src/BottomSheet.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -243,10 +265,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/bubble-chart-web/src/BubbleChart.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/bubble-chart-web/src/BubbleChart.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -255,10 +279,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -267,10 +291,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -279,10 +303,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/column-chart-web/src/ColumnChart.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/column-chart-web/src/ColumnChart.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.2.1",
@@ -291,10 +317,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/datagrid-date-filter-web/src/DatagridDateFilter.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/datagrid-date-filter-web/src/DatagridDateFilter.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.2.1",
@@ -303,10 +331,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/datagrid-dropdown-filter-web/src/DatagridDropdownFilter.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/datagrid-dropdown-filter-web/src/DatagridDropdownFilter.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.2.0",
@@ -315,10 +345,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/datagrid-number-filter-web/src/DatagridNumberFilter.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/datagrid-number-filter-web/src/DatagridNumberFilter.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.2.0",
@@ -327,10 +359,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/datagrid-text-filter-web/src/DatagridTextFilter.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/datagrid-text-filter-web/src/DatagridTextFilter.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.2.2",
@@ -339,10 +373,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/datagrid-web/src/Datagrid.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/datagrid-web/src/Datagrid.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "1.1.0",
@@ -351,10 +387,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/dropdown-sort-web/src/DropdownSort.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/dropdown-sort-web/src/DropdownSort.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -363,10 +401,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -375,10 +413,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/fieldset-web/src/Fieldset.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/fieldset-web/src/Fieldset.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -387,10 +427,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/floating-action-button-native/src/FloatingActionButton.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.1.0",
@@ -399,10 +440,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/gallery-web/src/Gallery.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/gallery-web/src/Gallery.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -411,10 +454,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/image-native/src/Image.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.2.0",
@@ -423,10 +467,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/image-web/src/Image.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/image-web/src/Image.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -435,10 +481,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -447,10 +493,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/line-chart-native/src/LineChart.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -459,10 +506,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/line-chart-web/src/LineChart.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/line-chart-web/src/LineChart.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -471,10 +520,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/listview-swipe-native/src/ListViewSwipe.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -483,10 +533,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/maps-native/src/Maps.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -495,10 +546,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/maps-web/src/Maps.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/maps-web/src/Maps.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -507,10 +560,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -519,10 +572,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/pie-doughnut-chart-native/src/PieDoughnutChart.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -531,10 +585,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/pie-doughnut-chart-web/src/PieChart.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/pie-doughnut-chart-web/src/PieChart.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -543,10 +599,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/popup-menu-native/src/PopupMenu.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.2.1",
@@ -555,10 +612,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/popup-menu-web/src/PopupMenu.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/popup-menu-web/src/PopupMenu.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "4.0.0",
@@ -567,10 +626,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -579,10 +638,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/progress-bar-web/src/ProgressBar.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/progress-bar-web/src/ProgressBar.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -591,10 +652,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -603,10 +664,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/progress-circle-web/src/ProgressCircle.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/progress-circle-web/src/ProgressCircle.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -615,10 +678,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/qr-code-native/src/QRCode.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -627,10 +691,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/radio-buttons-native/src/RadioButtons.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -639,10 +704,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -651,10 +716,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/range-slider-web/src/RangeSlider.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/range-slider-web/src/RangeSlider.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -663,10 +730,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/rating-native/src/Rating.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -675,10 +743,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/rating-web/src/StarRating.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/rating-web/src/StarRating.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -687,10 +757,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -699,10 +769,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/rich-text-web/src/RichText.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/rich-text-web/src/RichText.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -711,10 +783,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -723,10 +795,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/scroll-container-web/src/ScrollContainer.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/scroll-container-web/src/ScrollContainer.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -735,10 +809,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/sidebar-toggle-web/src/SidebarToggle.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/sidebar-toggle-web/src/SidebarToggle.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -747,10 +823,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/sidebar-web/src/Sidebar.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/sidebar-web/src/Sidebar.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": false
+			"hasDarkModeIcons": false,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.1",
@@ -759,10 +837,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -771,10 +849,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -783,10 +861,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/slider-web/src/Slider.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/slider-web/src/Slider.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "1.0.0",
@@ -795,10 +875,11 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": false,
+			"editorConfigPath": "packages/pluggableWidgets/switch-native/src/Switch.editorConfig.ts",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "4.1.0",
@@ -807,10 +888,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/switch-web/src/Switch.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/switch-web/src/Switch.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -819,10 +902,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/timeline-web/src/Timeline.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/timeline-web/src/Timeline.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "2.0.0",
@@ -831,10 +916,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "1.1.0",
@@ -843,10 +928,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/tooltip-web/src/Tooltip.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/tooltip-web/src/Tooltip.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "1.1.0",
@@ -855,10 +942,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/tree-node-web/src/TreeNode.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/tree-node-web/src/TreeNode.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -867,10 +956,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		},
 		{
 			"latestVersion": "3.1.0",
@@ -879,10 +968,12 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
-			"hasStructurePreview": true,
-			"hasDesignModePreview": true,
+			"editorConfigPath": "packages/pluggableWidgets/video-player-web/src/VideoPlayer.editorConfig.ts",
+			"editorPreviewPath": "packages/pluggableWidgets/video-player-web/src/VideoPlayer.editorPreview.tsx",
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": true,
+			"hasDesignModePreview": true
 		},
 		{
 			"latestVersion": "3.0.0",
@@ -891,10 +982,10 @@
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
-			"hasStructurePreview": false,
-			"hasDesignModePreview": false,
 			"hasTileIcons": true,
-			"hasDarkModeIcons": true
+			"hasDarkModeIcons": true,
+			"hasStructurePreview": false,
+			"hasDesignModePreview": false
 		}
 	]
 }
