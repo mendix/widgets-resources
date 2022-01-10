@@ -1,9 +1,9 @@
 {
 	"widgets": [
 		{
-			"id": "com.mendix.widget.custom.calendar.Calendar",
 			"latestVersion": "1.0.13",
-			"pluginWidget": false,
+			"widgetFileName": "Calendar.xml",
+			"id": "com.mendix.widget.custom.calendar.Calendar",
 			"offlineCapable": true,
 			"supportedPlatform": "web",
 			"hasStructurePreview": false,
@@ -12,9 +12,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
-			"id": "com.mendix.widget.custom.carousel.Carousel",
 			"latestVersion": "1.4.3",
-			"pluginWidget": false,
+			"widgetFileName": "Carousel.xml",
+			"id": "com.mendix.widget.custom.carousel.Carousel",
 			"offlineCapable": true,
 			"supportedPlatform": "web",
 			"hasStructurePreview": false,
@@ -23,9 +23,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
-			"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
 			"latestVersion": "1.1.4",
-			"pluginWidget": false,
+			"widgetFileName": "ColorPicker.xml",
+			"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
 			"offlineCapable": true,
 			"supportedPlatform": "web",
 			"hasStructurePreview": false,
@@ -34,9 +34,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
-			"id": "com.mendix.widget.custom.signature.Signature",
 			"latestVersion": "1.0.5",
-			"pluginWidget": false,
+			"widgetFileName": "Signature.xml",
+			"id": "com.mendix.widget.custom.signature.Signature",
 			"offlineCapable": true,
 			"supportedPlatform": "web",
 			"hasStructurePreview": false,
@@ -45,8 +45,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
+			"latestVersion": "2.1.0",
+			"widgetFileName": "AccessibilityHelper.xml",
 			"id": "com.mendix.widget.web.accessibilityhelper.AccessibilityHelper",
-			"latestVersion": "2.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -56,8 +57,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Accordion.xml",
 			"id": "com.mendix.widget.native.accordion.Accordion",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -67,8 +69,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.web.accordion.Accordion",
 			"latestVersion": "2.1.0",
+			"widgetFileName": "Accordion.xml",
+			"id": "com.mendix.widget.web.accordion.Accordion",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -78,8 +81,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "ActivityIndicator.xml",
 			"id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -89,8 +93,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "Animation.xml",
 			"id": "com.mendix.widget.native.animation.Animation",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -100,8 +105,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "AppEvents.xml",
 			"id": "com.mendix.widget.native.appevents.AppEvents",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -111,8 +117,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "AreaChart.xml",
 			"id": "com.mendix.widget.custom.AreaChart.AreaChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -122,8 +129,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "BackgroundImage.xml",
 			"id": "com.mendix.widget.native.backgroundimage.BackgroundImage",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -133,8 +141,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "BadgeButton.xml",
 			"id": "com.mendix.widget.custom.badgebutton.BadgeButton",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -144,8 +153,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Badge.xml",
 			"id": "com.mendix.widget.native.badge.Badge",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -155,8 +165,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "Badge.xml",
 			"id": "com.mendix.widget.custom.badge.Badge",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -166,8 +177,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "BarChart.xml",
 			"id": "com.mendix.widget.native.barchart.BarChart",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -177,8 +189,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "BarChart.xml",
 			"id": "com.mendix.widget.custom.BarChart.BarChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -188,8 +201,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "BarcodeScanner.xml",
 			"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -199,8 +213,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.2.0",
+			"widgetFileName": "BarcodeScanner.xml",
 			"id": "com.mendix.widget.web.barcodescanner.BarcodeScanner",
-			"latestVersion": "2.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -210,8 +225,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "BottomSheet.xml",
 			"id": "com.mendix.widget.native.bottomsheet.BottomSheet",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -221,8 +237,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "BubbleChart.xml",
 			"id": "com.mendix.widget.custom.BubbleChart.BubbleChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -232,8 +249,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Carousel.xml",
 			"id": "com.mendix.widget.native.carousel.Carousel",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -243,8 +261,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "ColorPicker.xml",
 			"id": "com.mendix.widget.native.colorpicker.ColorPicker",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -254,8 +273,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "ColumnChart.xml",
 			"id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -265,8 +285,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.2.1",
+			"widgetFileName": "DatagridDateFilter.xml",
 			"id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
-			"latestVersion": "2.2.1",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -276,8 +297,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.2.1",
+			"widgetFileName": "DatagridDropdownFilter.xml",
 			"id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
-			"latestVersion": "2.2.1",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -287,8 +309,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.2.0",
+			"widgetFileName": "DatagridNumberFilter.xml",
 			"id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
-			"latestVersion": "2.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -298,8 +321,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.2.0",
+			"widgetFileName": "DatagridTextFilter.xml",
 			"id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
-			"latestVersion": "2.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -309,8 +333,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.web.datagrid.Datagrid",
 			"latestVersion": "2.2.2",
+			"widgetFileName": "Datagrid.xml",
+			"id": "com.mendix.widget.web.datagrid.Datagrid",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -320,8 +345,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.1.0",
+			"widgetFileName": "DropdownSort.xml",
 			"id": "com.mendix.widget.web.dropdownsort.DropdownSort",
-			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -331,8 +357,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "Feedback.xml",
 			"id": "com.mendix.widget.native.feedback.Feedback",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -342,8 +369,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "Fieldset.xml",
 			"id": "com.mendix.widget.web.fieldset.Fieldset",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -353,8 +381,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "FloatingActionButton.xml",
 			"id": "com.mendix.widget.native.floatingactionbutton.FloatingActionButton",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -364,8 +393,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.1.0",
+			"widgetFileName": "Gallery.xml",
 			"id": "com.mendix.widget.web.gallery.Gallery",
-			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -375,8 +405,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "Image.xml",
 			"id": "com.mendix.widget.native.image.Image",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -386,8 +417,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.web.image.Image",
 			"latestVersion": "1.2.0",
+			"widgetFileName": "Image.xml",
+			"id": "com.mendix.widget.web.image.Image",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -397,8 +429,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "IntroScreen.xml",
 			"id": "com.mendix.widget.native.introscreen.IntroScreen",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -408,8 +441,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "LineChart.xml",
 			"id": "com.mendix.widget.native.linechart.LineChart",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -419,8 +453,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "LineChart.xml",
 			"id": "com.mendix.widget.custom.LineChart.LineChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -430,8 +465,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "ListViewSwipe.xml",
 			"id": "com.mendix.widget.native.listviewswipe.ListViewSwipe",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -441,8 +477,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "Maps.xml",
 			"id": "com.mendix.widget.native.maps.Maps",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -452,8 +489,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "Maps.xml",
 			"id": "com.mendix.widget.custom.Maps.Maps",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -463,8 +501,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "Notifications.xml",
 			"id": "com.mendix.widget.native.notifications.Notifications",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -474,8 +513,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "PieDoughnutChart.xml",
 			"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -485,8 +525,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "PieChart.xml",
 			"id": "com.mendix.widget.custom.PieChart.PieChart",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -496,8 +537,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "PopupMenu.xml",
 			"id": "com.mendix.widget.native.popupmenu.PopupMenu",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -507,8 +549,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.web.popupmenu.PopupMenu",
 			"latestVersion": "3.2.1",
+			"widgetFileName": "PopupMenu.xml",
+			"id": "com.mendix.widget.web.popupmenu.PopupMenu",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -518,8 +561,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.native.progressbar.ProgressBar",
 			"latestVersion": "4.0.0",
+			"widgetFileName": "ProgressBar.xml",
+			"id": "com.mendix.widget.native.progressbar.ProgressBar",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -529,8 +573,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "ProgressBar.xml",
 			"id": "com.mendix.widget.custom.progressbar.ProgressBar",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -540,8 +585,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "ProgressCircle.xml",
 			"id": "com.mendix.widget.native.progresscircle.ProgressCircle",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -551,8 +597,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "ProgressCircle.xml",
 			"id": "com.mendix.widget.custom.progresscircle.ProgressCircle",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -562,8 +609,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.0.0",
+			"widgetFileName": "QRCode.xml",
 			"id": "com.mendix.widget.native.qrcode.QRCode",
-			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -573,8 +621,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "RadioButtons.xml",
 			"id": "com.mendix.widget.native.radiobuttons.RadioButtons",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -584,8 +633,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "RangeSlider.xml",
 			"id": "com.mendix.widget.native.rangeslider.RangeSlider",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -595,8 +645,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "RangeSlider.xml",
 			"id": "com.mendix.widget.custom.RangeSlider.RangeSlider",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -606,8 +657,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Rating.xml",
 			"id": "com.mendix.widget.native.rating.Rating",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -617,8 +669,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "StarRating.xml",
 			"id": "com.mendix.widget.custom.starrating.StarRating",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -628,8 +681,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Repeater.xml",
 			"id": "com.mendix.widget.native.repeater.Repeater",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -639,8 +693,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "RichText.xml",
 			"id": "com.mendix.widget.custom.richtext.RichText",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -650,8 +705,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "SafeAreaView.xml",
 			"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -661,8 +717,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "ScrollContainer.xml",
 			"id": "com.mendix.widget.web.scrollcontainer.ScrollContainer",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -672,8 +729,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "SidebarToggle.xml",
 			"id": "com.mendix.widget.web.sidebartoggle.SidebarToggle",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -683,8 +741,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
+			"latestVersion": "1.0.0",
+			"widgetFileName": "Sidebar.xml",
 			"id": "com.mendix.widget.web.sidebar.Sidebar",
-			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -694,8 +753,9 @@
 			"hasDarkModeIcons": false
 		},
 		{
-			"id": "com.mendix.widget.native.signature.Signature",
 			"latestVersion": "2.0.1",
+			"widgetFileName": "Signature.xml",
+			"id": "com.mendix.widget.native.signature.Signature",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -705,8 +765,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Slider.xml",
 			"id": "com.mendix.widget.native.slider.Slider",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -716,8 +777,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "2.0.0",
+			"widgetFileName": "Slider.xml",
 			"id": "com.mendix.widget.custom.slider.Slider",
-			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -727,8 +789,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.native.switch.Switch",
 			"latestVersion": "1.0.0",
+			"widgetFileName": "Switch.xml",
+			"id": "com.mendix.widget.native.switch.Switch",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -738,8 +801,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.custom.switch.Switch",
 			"latestVersion": "4.1.0",
+			"widgetFileName": "Switch.xml",
+			"id": "com.mendix.widget.custom.switch.Switch",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -749,8 +813,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "3.1.0",
+			"widgetFileName": "Timeline.xml",
 			"id": "com.mendix.widget.web.timeline.Timeline",
-			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -760,8 +825,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
 			"latestVersion": "2.0.0",
+			"widgetFileName": "ToggleButtons.xml",
+			"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -771,8 +837,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.1.0",
+			"widgetFileName": "Tooltip.xml",
 			"id": "com.mendix.widget.web.tooltip.Tooltip",
-			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -782,8 +849,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
+			"latestVersion": "1.1.0",
+			"widgetFileName": "TreeNode.xml",
 			"id": "com.mendix.widget.web.treenode.TreeNode",
-			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -793,8 +861,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
 			"latestVersion": "3.0.0",
+			"widgetFileName": "VideoPlayer.xml",
+			"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -804,8 +873,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.web.videoplayer.VideoPlayer",
 			"latestVersion": "3.1.0",
+			"widgetFileName": "VideoPlayer.xml",
+			"id": "com.mendix.widget.web.videoplayer.VideoPlayer",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -815,8 +885,9 @@
 			"hasDarkModeIcons": true
 		},
 		{
-			"id": "com.mendix.widget.native.webview.WebView",
 			"latestVersion": "3.0.0",
+			"widgetFileName": "WebView.xml",
+			"id": "com.mendix.widget.native.webview.WebView",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",

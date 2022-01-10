@@ -7,7 +7,7 @@ export class FileReadError extends Error {
     }
 }
 
-export class PatternNotFoundError extends Error {
+export class XmlValueNotFoundError extends Error {
     constructor(packagePath: string, filePath: string, value: string) {
         super(`Could not find required pattern ${value} in ${join(packagePath, filePath)}`);
         this.name = "PatternNotFoundError";

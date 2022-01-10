@@ -1,9 +1,11 @@
 import { promises as fs } from "fs";
 import { dirname, join, resolve } from "path";
-import { FileReadError, PatternNotFoundError, UnsupportedPlatformError } from "./errors";
+import { FileReadError, XmlValueNotFoundError, UnsupportedPlatformError } from "./errors";
 import { promisify } from "util";
 import { exec } from "child_process";
 import { createProgram, escapeLeadingUnderscores } from "typescript";
+import glob from "glob";
+import { XMLParser } from "fast-xml-parser";
 
 const execAsync = promisify(exec);
 
@@ -27,19 +29,11 @@ type WidgetData = {
     hasDarkModeIcons: boolean;
 };
 
-type Patterns = { [key: string]: [RegExp, boolean?, ((value: string) => string)?] }; // boolean indicates if value is required or not
-// eslint-disable-next-line no-unused-vars
+type Patterns = { [key: string]: [(doc: any) => any, boolean?] }; // boolean indicates if value is required or not
 type Values<P extends Patterns> = {
-    [key in keyof P]: P[key][1] extends true | undefined ? string : string | undefined;
-};
-
-const patterns = {
-    widgetFileName: /<widgetFile path="(.*\.xml)"\s*\/>/,
-    id: /id="(.+?)"/,
-    latestVersion: /<clientModule.*version="(.+?)"/,
-    pluginWidget: /pluginWidget="(.+?)"/,
-    offlineCapable: /offlineCapable="(.+?)"/,
-    supportedPlatform: /supportedPlatform="(.+?)"/
+    [key in keyof P]: P[key][1] extends true | undefined
+        ? NonNullable<ReturnType<P[key][0]>>
+        : ReturnType<P[key][0]> | undefined;
 };
 
 const OUTPUT_PATH = resolve(__dirname, "../../data/content.json");
@@ -56,83 +50,71 @@ async function main(): Promise<void> {
 }
 
 async function summarizeWidgets(): Promise<WidgetData[]> {
-    const { stdout: lernaPackages } = await execAsync("npx lerna ls --json --all");
-    const locations: string[] = JSON.parse(lernaPackages.trim()).map(lernaPackage => lernaPackage.location);
+    const locations = await getLernaPackages(/(pluggable|custom)Widgets/);
 
     const packages = await Promise.all(
-        locations
-            .filter(location => location.match(/(pluggable|custom)Widgets/))
-            .map(async packagePath => {
-                try {
-                    return summarizeWidget(packagePath);
-                } catch (e) {
-                    if (e instanceof Error && (e.name === "FileReadError" || e.name === "ValueNotFoundError")) {
-                        console.warn(e.message);
-                        return undefined;
-                    } else {
-                        throw e;
-                    }
+        locations.map(async packagePath => {
+            try {
+                return summarizeWidget(packagePath);
+            } catch (e) {
+                if (e instanceof Error && (e.name === FileReadError.name || e.name === XmlValueNotFoundError.name)) {
+                    console.warn(e.message);
+                    return undefined;
+                } else {
+                    throw e;
                 }
-            })
+            }
+        })
     );
 
     return packages.filter(isDefined);
 }
 
 async function summarizeWidget(packagePath: string): Promise<WidgetData> {
-    const { widgetFileName, latestVersion } = await extractTextFromFile(packagePath, "src/package.xml", {
-        widgetFileName: [patterns.widgetFileName],
-        latestVersion: [patterns.latestVersion]
+    const packageXmlValues = await extractFromXml(packagePath, "src/package.xml", {
+        latestVersion: [xml => xml.package.clientModule["@_version"]],
+        widgetFileName: [xml => xml.package.clientModule.widgetFiles.widgetFile[0]["@_path"]]
     });
 
-    const {
-        id,
-        pluginWidget,
-        offlineCapable,
-        supportedPlatform = "web"
-    } = await extractTextFromFile(packagePath, `src/${widgetFileName}`, {
-        id: [patterns.id],
-        pluginWidget: [patterns.pluginWidget, false],
-        offlineCapable: [patterns.offlineCapable, false],
-        supportedPlatform: [patterns.supportedPlatform, false, value => value.toLowerCase()]
-    });
+    const { supportedPlatform, ...widgetXmlValues } = await extractFromXml(
+        packagePath,
+        `src/${packageXmlValues.widgetFileName}`,
+        {
+            id: [xml => xml.widget["@_id"]],
+            pluginWidget: [xml => xml.widget["@_pluginWidget"] === "true"],
+            offlineCapable: [xml => xml.widget["@_offlineCapable"] === "true"],
+            supportedPlatform: [xml => xml.widget["@_supportedPlatform"]?.toLowerCase() ?? "web"]
+        }
+    );
 
     if (!isEnum(SupportedPlatform)(supportedPlatform)) {
         throw new UnsupportedPlatformError(packagePath, supportedPlatform);
     }
 
-    const hasStructurePreview = await fs
-        .readdir(join(packagePath, "src"))
-        .then(files =>
-            files
-                .filter(path => path.match(/.*\.editorConfig\.[jt]sx?/))
-                .some(path => moduleExports(join(packagePath, "src", path), "getPreview"))
-        );
-    const hasDesignModePreview = await fs
-        .readdir(join(packagePath, "src"))
-        .then(files =>
-            files
-                .filter(path => path.match(/.*\.editorPreview\.[jt]sx?$/))
-                .some(path => moduleExports(join(packagePath, "src", path), "preview"))
-        );
-    const hasTileIcons = await fs
-        .readdir(join(packagePath, "src"))
-        .then(files => files.some(path => path.endsWith(".tile.png")));
-    const hasDarkModeIcons = await fs
-        .readdir(join(packagePath, "src"))
-        .then(files => files.some(path => path.endsWith(".dark.png")));
+    const hasStructurePreview = await withGlob(`${packagePath}/src/*.editorConfig.{js,jsx,ts,tsx}`, matches =>
+        matches.some(path => moduleExports(path, "getPreview"))
+    );
+    const hasDesignModePreview = await withGlob(`${packagePath}/src/*.editorPreview.{js,jsx,ts,tsx}`, matches =>
+        matches.some(path => moduleExports(path, "preview"))
+    );
+    const hasTileIcons = await withGlob(`${packagePath}/src/*.tile.png`, matches => matches.length > 0);
+    const hasDarkModeIcons = await withGlob(`${packagePath}/src/*.dark.png`, matches => matches.length > 0);
 
     return {
-        id,
-        latestVersion,
-        pluginWidget: pluginWidget === "true",
-        offlineCapable: offlineCapable === "true",
+        ...packageXmlValues,
+        ...widgetXmlValues,
         supportedPlatform,
         hasStructurePreview,
         hasDesignModePreview,
         hasTileIcons,
         hasDarkModeIcons
     };
+}
+
+async function getLernaPackages(filter?: RegExp): Promise<string[]> {
+    const { stdout: lernaPackages } = await execAsync("npx lerna ls --json --all");
+    const locations: string[] = JSON.parse(lernaPackages.trim()).map(lernaPackage => lernaPackage.location);
+    return locations.filter(location => (filter ? location.match(filter) : location));
 }
 
 async function readPackageFile(packagePath: string, filePath: string): Promise<string> {
@@ -155,21 +137,28 @@ async function writeFile(path: string, content: string): Promise<void> {
     await fs.writeFile(path, content, { flag: "w+" });
 }
 
-async function extractTextFromFile<P extends Patterns>(
+async function extractFromXml<P extends Patterns>(
     packagePath: string,
     filePath: string,
     patterns: P
 ): Promise<Values<P>> {
+    const alwaysArray = ["package.clientModule.widgetFiles.widgetFile"];
+
     const content = await readPackageFile(packagePath, filePath);
-    return Object.entries(patterns).reduce<Values<P>>((result, [key, [pattern, required = true, processFn]]) => {
-        const [, value] = content.match(pattern) ?? [];
-        if (!value) {
-            if (required) {
-                throw new PatternNotFoundError(packagePath, filePath, key);
-            }
-            console.warn(`Could not find pattern ${pattern} in ${join(packagePath, filePath)}`);
+    const xmlParser = new XMLParser({
+        ignoreAttributes: false,
+        isArray: (_, jpath) => alwaysArray.indexOf(jpath) !== -1
+    });
+    const xml = xmlParser.parse(content);
+
+    return Object.entries(patterns).reduce<Values<P>>((result, [key, [fn, required = true]]) => {
+        const value = fn(xml);
+        if (value === undefined && required) {
+            throw new XmlValueNotFoundError(packagePath, filePath, key);
+        } else if (value === undefined && !required) {
+            console.warn(`Could not find pattern ${key} in ${join(packagePath, filePath)}`);
         }
-        return value ? { ...result, [key]: processFn ? processFn(value) : value } : result;
+        return value ? { ...result, [key]: value } : result;
     }, {} as Values<P>);
 }
 
@@ -183,6 +172,14 @@ function moduleExports(fileName: string, exportName: string): boolean {
     return false;
 }
 
+async function withGlob<T>(pattern: string, cb: (matches: string[]) => T | Promise<T>): Promise<T> {
+    return new Promise((resolve, reject) =>
+        glob(pattern, (error, matches) => {
+            error ? reject(error) : resolve(cb(matches));
+        })
+    );
+}
+
 // Type guards
 
 function isDefined<T>(val: T | undefined | null): val is T {
@@ -190,13 +187,7 @@ function isDefined<T>(val: T | undefined | null): val is T {
 }
 
 function isEnum<T>(e: T): (token: unknown) => token is T[keyof T] {
-    const keys = Object.keys(e).filter(k => {
-        return !/^\d/.test(k);
-    });
-    const values = keys.map(k => {
-        return (e as any)[k];
-    });
-    return (token: unknown): token is T[keyof T] => {
-        return values.includes(token);
-    };
+    const keys = Object.keys(e).filter(k => !/^\d/.test(k));
+    const values = keys.map(k => (e as any)[k]);
+    return (token: unknown): token is T[keyof T] => values.includes(token);
 }
