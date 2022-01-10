@@ -2,6 +2,7 @@
 	"widgets": [
 		{
 			"id": "com.mendix.widget.custom.calendar.Calendar",
+			"latestVersion": "1.0.13",
 			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -12,6 +13,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.carousel.Carousel",
+			"latestVersion": "1.4.3",
 			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -22,6 +24,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
+			"latestVersion": "1.1.4",
 			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -32,6 +35,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.signature.Signature",
+			"latestVersion": "1.0.5",
 			"pluginWidget": false,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -42,6 +46,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.accessibilityhelper.AccessibilityHelper",
+			"latestVersion": "2.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -52,6 +57,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.accordion.Accordion",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -62,6 +68,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.accordion.Accordion",
+			"latestVersion": "2.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -72,6 +79,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -82,6 +90,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.animation.Animation",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -92,6 +101,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.appevents.AppEvents",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -102,6 +112,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.AreaChart.AreaChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -112,6 +123,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.backgroundimage.BackgroundImage",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -122,6 +134,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.badgebutton.BadgeButton",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -132,6 +145,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.badge.Badge",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -142,6 +156,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.badge.Badge",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -152,6 +167,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.barchart.BarChart",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -162,6 +178,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.BarChart.BarChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -172,6 +189,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -182,6 +200,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.barcodescanner.BarcodeScanner",
+			"latestVersion": "2.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -192,6 +211,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.bottomsheet.BottomSheet",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -202,6 +222,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.BubbleChart.BubbleChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -212,6 +233,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.carousel.Carousel",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -222,6 +244,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.colorpicker.ColorPicker",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -232,6 +255,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -242,6 +266,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
+			"latestVersion": "2.2.1",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -252,6 +277,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
+			"latestVersion": "2.2.1",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -262,6 +288,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
+			"latestVersion": "2.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -272,6 +299,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
+			"latestVersion": "2.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -282,6 +310,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.datagrid.Datagrid",
+			"latestVersion": "2.2.2",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -292,6 +321,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.dropdownsort.DropdownSort",
+			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -302,6 +332,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.feedback.Feedback",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -312,6 +343,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.fieldset.Fieldset",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -322,6 +354,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.floatingactionbutton.FloatingActionButton",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -332,6 +365,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.gallery.Gallery",
+			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -342,6 +376,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.image.Image",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -352,6 +387,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.image.Image",
+			"latestVersion": "1.2.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -362,6 +398,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.introscreen.IntroScreen",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -372,6 +409,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.linechart.LineChart",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -382,6 +420,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.LineChart.LineChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -392,6 +431,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.listviewswipe.ListViewSwipe",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -402,6 +442,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.maps.Maps",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -412,6 +453,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.Maps.Maps",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -422,6 +464,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.notifications.Notifications",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -432,6 +475,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -442,6 +486,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.PieChart.PieChart",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -452,6 +497,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.popupmenu.PopupMenu",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -462,6 +508,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.popupmenu.PopupMenu",
+			"latestVersion": "3.2.1",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -472,6 +519,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.progressbar.ProgressBar",
+			"latestVersion": "4.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -482,6 +530,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.progressbar.ProgressBar",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -492,6 +541,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.progresscircle.ProgressCircle",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -502,6 +552,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.progresscircle.ProgressCircle",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -512,6 +563,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.qrcode.QRCode",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -522,6 +574,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.radiobuttons.RadioButtons",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -532,6 +585,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.rangeslider.RangeSlider",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -542,6 +596,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.RangeSlider.RangeSlider",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -552,6 +607,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.rating.Rating",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -562,6 +618,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.starrating.StarRating",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -572,6 +629,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.repeater.Repeater",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -582,6 +640,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.richtext.RichText",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -592,6 +651,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -602,6 +662,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.scrollcontainer.ScrollContainer",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -612,6 +673,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.sidebartoggle.SidebarToggle",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -622,6 +684,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.sidebar.Sidebar",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -632,6 +695,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.signature.Signature",
+			"latestVersion": "2.0.1",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -642,6 +706,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.slider.Slider",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -652,6 +717,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.slider.Slider",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -662,6 +728,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.switch.Switch",
+			"latestVersion": "1.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -672,6 +739,7 @@
 		},
 		{
 			"id": "com.mendix.widget.custom.switch.Switch",
+			"latestVersion": "4.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -682,6 +750,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.timeline.Timeline",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -692,6 +761,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
+			"latestVersion": "2.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -702,6 +772,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.tooltip.Tooltip",
+			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -712,6 +783,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.treenode.TreeNode",
+			"latestVersion": "1.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -722,6 +794,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",
@@ -732,6 +805,7 @@
 		},
 		{
 			"id": "com.mendix.widget.web.videoplayer.VideoPlayer",
+			"latestVersion": "3.1.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "web",
@@ -742,6 +816,7 @@
 		},
 		{
 			"id": "com.mendix.widget.native.webview.WebView",
+			"latestVersion": "3.0.0",
 			"pluginWidget": true,
 			"offlineCapable": true,
 			"supportedPlatform": "native",

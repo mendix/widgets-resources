@@ -17,6 +17,7 @@ enum SupportedPlatform {
 
 type WidgetData = {
     id: string;
+    latestVersion: string;
     pluginWidget: boolean;
     offlineCapable: boolean;
     supportedPlatform: SupportedPlatform;
@@ -33,11 +34,12 @@ type Values<P extends Patterns> = {
 };
 
 const patterns = {
-    widgetFileName: new RegExp('<widgetFile path="(.*\\.xml)"\\s*/>'),
-    id: new RegExp(`id="(.+?)"`),
-    pluginWidget: new RegExp(`pluginWidget="(.+?)"`),
-    offlineCapable: new RegExp(`offlineCapable="(.+?)"`),
-    supportedPlatform: new RegExp(`supportedPlatform="(.+?)"`)
+    widgetFileName: /<widgetFile path="(.*\.xml)"\s*\/>/,
+    id: /id="(.+?)"/,
+    latestVersion: /<clientModule.*version="(.+?)"/,
+    pluginWidget: /pluginWidget="(.+?)"/,
+    offlineCapable: /offlineCapable="(.+?)"/,
+    supportedPlatform: /supportedPlatform="(.+?)"/
 };
 
 const OUTPUT_PATH = resolve(__dirname, "../../data/content.json");
@@ -78,8 +80,9 @@ async function summarizeWidgets(): Promise<WidgetData[]> {
 }
 
 async function summarizeWidget(packagePath: string): Promise<WidgetData> {
-    const { widgetFileName } = await extractTextFromFile(packagePath, "src/package.xml", {
-        widgetFileName: [patterns.widgetFileName]
+    const { widgetFileName, latestVersion } = await extractTextFromFile(packagePath, "src/package.xml", {
+        widgetFileName: [patterns.widgetFileName],
+        latestVersion: [patterns.latestVersion]
     });
 
     const {
@@ -121,6 +124,7 @@ async function summarizeWidget(packagePath: string): Promise<WidgetData> {
 
     return {
         id,
+        latestVersion,
         pluginWidget: pluginWidget === "true",
         offlineCapable: offlineCapable === "true",
         supportedPlatform,
