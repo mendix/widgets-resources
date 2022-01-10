@@ -8,7 +8,7 @@ import { nodeResolve } from "@rollup/plugin-node-resolve";
 import replace from "rollup-plugin-re";
 import typescript from "@rollup/plugin-typescript";
 import url from "@rollup/plugin-url";
-import { red, yellow, blue } from "colors";
+import { red, yellow, blue } from "ansi-colors";
 import loadConfigFile from "rollup/dist/loadConfigFile";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
