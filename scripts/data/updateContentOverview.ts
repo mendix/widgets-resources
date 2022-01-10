@@ -40,6 +40,8 @@ const patterns = {
     supportedPlatform: new RegExp(`supportedPlatform="(.+?)"`)
 };
 
+const OUTPUT_PATH = resolve(__dirname, "../../data/content.json");
+
 main().catch(e => {
     console.error(e);
     process.exit(1);
@@ -48,7 +50,7 @@ main().catch(e => {
 async function main(): Promise<void> {
     const widgets = await summarizeWidgets();
 
-    await writeFile(resolve(__dirname, "../../data/widgets.json"), JSON.stringify({ widgets }, null, "\t"));
+    await writeFile(OUTPUT_PATH, JSON.stringify({ widgets }, null, "\t"));
 }
 
 async function summarizeWidgets(): Promise<WidgetData[]> {

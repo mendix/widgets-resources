@@ -21,17 +21,17 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm install
-      - run: npm run update:widgets-overview
+      - run: npm run update:content-overview
       - id: cpr
         uses: peter-evans/create-pull-request@dcd5fd746d53dd8de555c0f10bca6c35628be47a # v3
         with:
           token: ${{ secrets.GH_PAT }}
           branch: build/update-widgets-data
           delete-branch: true
-          commit-message: 'chore: update widgets data file'
-          title: 'chore: Update widgets data file'
+          commit-message: 'chore: update content data file'
+          title: 'chore: Update content data file'
           draft: false
-          add-paths: 'data/widgets.json'
+          add-paths: 'data/content.json'
       - if: steps.cpr.outputs.pull-request-operation == 'created'
         uses: peter-evans/enable-pull-request-automerge@d2ede5636b3febc92809259995e643565e675aab # v1
         with:
