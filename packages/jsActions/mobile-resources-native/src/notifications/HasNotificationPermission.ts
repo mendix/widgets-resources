@@ -20,7 +20,7 @@ export async function HasNotificationPermission(): Promise<boolean> {
     }
 
     return NativeModules.RNFBMessagingModule.hasPermission().then((authStatus: number) => {
-        if (authStatus) {
+        if (authStatus && authStatus > 0) {
             return Promise.resolve(true);
         } else {
             return Promise.resolve(false);
