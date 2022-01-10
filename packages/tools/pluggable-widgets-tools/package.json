@@ -1,6 +1,6 @@
 {
   "name": "@mendix/pluggable-widgets-tools",
-  "version": "9.9.1",
+  "version": "9.9.2",
   "description": "Mendix Pluggable Widgets Tools",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
@@ -65,7 +65,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.1",
     "big.js": "^6.0.2",
-    "colors": "^1.4.0",
+    "colors": "1.4.0",
     "concurrently": "^6.0.0",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
@@ -136,5 +136,11 @@
     "test": "npm run test:src && cross-env LIMIT_TESTS=true npm run test:scripts",
     "test:src": "jest",
     "test:scripts": "npm run prepare && node tests/commands.js"
+  },
+  "overrides": {
+    "colors": "1.4.0"
+  },
+  "resolutions": {
+    "colors": "1.4.0"
   }
 }
