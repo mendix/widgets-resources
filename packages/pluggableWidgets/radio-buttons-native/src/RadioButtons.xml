@@ -40,6 +40,12 @@
             <propertyGroup caption="Editability">
                 <systemProperty key="Editability" />
             </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+            </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">
             <propertyGroup caption="Events">

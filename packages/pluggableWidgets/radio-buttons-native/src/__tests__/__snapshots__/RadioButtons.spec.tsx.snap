@@ -2,6 +2,7 @@
 
 exports[`Radio buttons render correctly with show label false 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <View
@@ -24,6 +25,7 @@ exports[`Radio buttons render correctly with show label false 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           false,
@@ -36,19 +38,37 @@ exports[`Radio buttons render correctly with show label false 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       >
         <View
-          style={Object {}}
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
         />
       </View>
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted firstItem
       </Text>
@@ -70,6 +90,7 @@ exports[`Radio buttons render correctly with show label false 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           false,
@@ -82,15 +103,26 @@ exports[`Radio buttons render correctly with show label false 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       />
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted secondItem
       </Text>
@@ -101,10 +133,18 @@ exports[`Radio buttons render correctly with show label false 1`] = `
 
 exports[`Radio buttons render correctly without label 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
   />
   <View
     style={false}
@@ -126,6 +166,7 @@ exports[`Radio buttons render correctly without label 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           false,
@@ -138,19 +179,37 @@ exports[`Radio buttons render correctly without label 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       >
         <View
-          style={Object {}}
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
         />
       </View>
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted firstItem
       </Text>
@@ -172,6 +231,7 @@ exports[`Radio buttons render correctly without label 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           false,
@@ -184,15 +244,26 @@ exports[`Radio buttons render correctly without label 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       />
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted secondItem
       </Text>
@@ -203,10 +274,18 @@ exports[`Radio buttons render correctly without label 1`] = `
 
 exports[`Radio buttons render disabled radio buttons correctly 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
   >
     Label
   </Text>
@@ -230,6 +309,7 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           Object {
@@ -244,15 +324,26 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             undefined,
           ]
         }
       />
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted firstItem
       </Text>
@@ -274,6 +365,7 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           Object {
@@ -288,15 +380,26 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             undefined,
           ]
         }
       />
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted secondItem
       </Text>
@@ -307,10 +410,18 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
 
 exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
   >
     Label
   </Text>
@@ -340,9 +451,11 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           Object {
             "marginBottom": 0,
+            "marginEnd": 8,
           },
           false,
         ]
@@ -354,19 +467,37 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       >
         <View
-          style={Object {}}
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
         />
       </View>
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted firstItem
       </Text>
@@ -388,9 +519,11 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           Object {
             "marginBottom": 0,
+            "marginEnd": 8,
           },
           false,
         ]
@@ -402,15 +535,26 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       />
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted secondItem
       </Text>
@@ -421,10 +565,18 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
 
 exports[`Radio buttons render vertical radio buttons correctly 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
   >
     Label
   </Text>
@@ -448,6 +600,7 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           false,
@@ -460,19 +613,37 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       >
         <View
-          style={Object {}}
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
         />
       </View>
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted firstItem
       </Text>
@@ -494,6 +665,7 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
           Object {
             "alignItems": "center",
             "flexDirection": "row",
+            "marginBottom": 8,
           },
           false,
           false,
@@ -506,15 +678,26 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
           Array [
             Object {
               "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
               "borderWidth": 1,
+              "height": 16,
               "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
             },
             false,
           ]
         }
       />
       <Text
-        style={Object {}}
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
       >
         Formatted secondItem
       </Text>
@@ -525,10 +708,18 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
 
 exports[`Radio buttons shows validations correctly 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
   >
     Label
   </Text>
@@ -536,7 +727,12 @@ exports[`Radio buttons shows validations correctly 1`] = `
     style={false}
   />
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#E33F4E",
+        "fontSize": 12,
+      }
+    }
   >
     error message
   </Text>
@@ -545,10 +741,18 @@ exports[`Radio buttons shows validations correctly 1`] = `
 
 exports[`Radio buttons works correctly without options 1`] = `
 <View
+  style={Object {}}
   testID="radio-buttons-test"
 >
   <Text
-    style={Object {}}
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
   >
     Label
   </Text>
