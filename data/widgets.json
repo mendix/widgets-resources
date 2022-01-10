@@ -18,12 +18,6 @@
 		"supportedPlatform": "Web"
 	},
 	{
-		"id": "com.mendix.widget.custom.richtext.RichText",
-		"pluginWidget": false,
-		"offlineCapable": true,
-		"supportedPlatform": "Web"
-	},
-	{
 		"id": "com.mendix.widget.custom.signature.Signature",
 		"pluginWidget": false,
 		"offlineCapable": true,
@@ -340,6 +334,12 @@
 		"pluginWidget": true,
 		"offlineCapable": true,
 		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.richtext.RichText",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
 	},
 	{
 		"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
