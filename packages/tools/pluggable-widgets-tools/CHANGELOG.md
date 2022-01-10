@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.6.2] - 2022-01-10
+
+### Fixed
+- We fixed `colors` dependency version to 1.4.0.
+
 ## [9.6.1] - 2021-11-18
 
 ### Added
