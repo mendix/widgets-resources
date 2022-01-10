@@ -11,10 +11,10 @@ export type OrientationEnum = "vertical" | "horizontal";
 export interface RadioButtonsProps<Style> {
     name: string;
     style: Style[];
-    enum: EditableValue<string>;
     orientation: OrientationEnum;
-    label?: DynamicValue<string>;
+    enum: EditableValue<string>;
     showLabel: boolean;
+    label?: DynamicValue<string>;
     onChange?: ActionValue;
 }
 
@@ -23,9 +23,9 @@ export interface RadioButtonsPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    enum: string;
     orientation: OrientationEnum;
-    label: string;
+    enum: string;
     showLabel: boolean;
+    label: string;
     onChange: {} | null;
 }

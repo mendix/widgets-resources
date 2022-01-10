@@ -8,10 +8,10 @@ To customize any core styling, copy the part you want to customize to styles/nat
 */
 
 import { brand } from "../../../../../theme/native/custom-variables";
-import { RadioButtonsStyle } from "../../types/widgets";
+import { RadioButtonsItemStyle, RadioButtonsLabelStyle } from "../../types/widgets";
 
 // Radio buttons properties
-export const radioButtonsPrimary: RadioButtonsStyle = {
+export const radioButtonsPrimary: RadioButtonsItemStyle = {
     circularButtonStyle: {
         borderColor: brand.primary
     },
@@ -23,7 +23,7 @@ export const radioButtonsPrimary: RadioButtonsStyle = {
     }
 };
 
-export const radioButtonsSuccess: RadioButtonsStyle = {
+export const radioButtonsSuccess: RadioButtonsItemStyle = {
     circularButtonStyle: {
         borderColor: brand.success
     },
@@ -35,7 +35,7 @@ export const radioButtonsSuccess: RadioButtonsStyle = {
     }
 };
 
-export const radioButtonsWarning: RadioButtonsStyle = {
+export const radioButtonsWarning: RadioButtonsItemStyle = {
     circularButtonStyle: {
         borderColor: brand.warning
     },
@@ -47,7 +47,7 @@ export const radioButtonsWarning: RadioButtonsStyle = {
     }
 };
 
-export const radioButtonsDanger: RadioButtonsStyle = {
+export const radioButtonsDanger: RadioButtonsItemStyle = {
     circularButtonStyle: {
         borderColor: brand.danger
     },
@@ -59,7 +59,7 @@ export const radioButtonsDanger: RadioButtonsStyle = {
     }
 };
 
-export const radioButtonsInfo: RadioButtonsStyle = {
+export const radioButtonsInfo: RadioButtonsItemStyle = {
     circularButtonStyle: {
         borderColor: brand.info
     },
@@ -72,31 +72,31 @@ export const radioButtonsInfo: RadioButtonsStyle = {
 };
 
 // Radio buttons label properties
-export const radioButtonsLabelPrimary: RadioButtonsStyle = {
+export const radioButtonsLabelPrimary: RadioButtonsLabelStyle = {
     labelTextStyle: {
         color: brand.primary
     }
 };
 
-export const radioButtonsLabelSuccess: RadioButtonsStyle = {
+export const radioButtonsLabelSuccess: RadioButtonsLabelStyle = {
     labelTextStyle: {
         color: brand.success
     }
 };
 
-export const radioButtonsLabelWarning: RadioButtonsStyle = {
+export const radioButtonsLabelWarning: RadioButtonsLabelStyle = {
     labelTextStyle: {
         color: brand.warning
     }
 };
 
-export const radioButtonsLabelDanger: RadioButtonsStyle = {
+export const radioButtonsLabelDanger: RadioButtonsLabelStyle = {
     labelTextStyle: {
         color: brand.danger
     }
 };
 
-export const radioButtonsLabelInfo: RadioButtonsStyle = {
+export const radioButtonsLabelInfo: RadioButtonsLabelStyle = {
     labelTextStyle: {
         color: brand.info
     }

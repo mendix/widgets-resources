@@ -32,7 +32,7 @@ export function RadioButtons({
     );
 
     return (
-        <View testID={name}>
+        <View testID={name} style={styles.container}>
             {showLabel && <Text style={styles.labelTextStyle}>{label?.value}</Text>}
             <View style={orientation === "horizontal" && styles.containerHorizontal}>
                 {universe?.map(name => (

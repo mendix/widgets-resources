@@ -1,5 +1,5 @@
-import { border, brand, font, spacing } from "../../variables";
-import { RadioButtonsStyle } from "../../types/widgets";
+import { radioButtons } from "../../variables";
+import { RadioButtonsStyles } from "../../types/widgets";
 /*
 
 DISCLAIMER:
@@ -13,42 +13,38 @@ To customize any core styling, copy the part you want to customize to styles/nat
     Default Class For Mendix RadioButtons Widget
 ========================================================================== */
 
-const RADIO_BUTTON_OUTER_CIRCLE_SIZE = 16;
-const RADIO_BUTTON_INNER_CIRCLE_SIZE = 8;
-
-export const com_mendix_widget_native_radiobuttons_RadioButtons: RadioButtonsStyle = {
+export const com_mendix_widget_native_radiobuttons_RadioButtons: RadioButtonsStyles = {
     labelTextStyle: {
-        color: font.colorTitle,
-        fontSize: font.sizeSmall,
-        lineHeight: font.lineHeightSmall,
-        marginBottom: spacing.small
+        // All TextStyle properties are allowed
+        ...radioButtons.labelTextStyle
     },
     radioButtonItemContainerStyle: {
-        marginBottom: spacing.small
+        // All ViewStyle properties are allowed
+        ...radioButtons.radioButtonItemContainerStyle
     },
     radioButtonItemContainerHorizontalStyle: {
-        marginEnd: spacing.small
+        // All ViewStyle properties are allowed
+        ...radioButtons.radioButtonItemContainerHorizontalStyle
     },
     circularButtonStyle: {
-        width: RADIO_BUTTON_OUTER_CIRCLE_SIZE,
-        height: RADIO_BUTTON_OUTER_CIRCLE_SIZE,
-        borderRadius: RADIO_BUTTON_OUTER_CIRCLE_SIZE / 2,
-        borderColor: border.color,
-        marginEnd: spacing.smaller
+        // All ViewStyle properties are allowed
+        ...radioButtons.circularButtonStyle
     },
     activeButtonStyle: {
-        width: RADIO_BUTTON_INNER_CIRCLE_SIZE,
-        height: RADIO_BUTTON_INNER_CIRCLE_SIZE,
-        borderRadius: RADIO_BUTTON_INNER_CIRCLE_SIZE / 2,
-        backgroundColor: brand.primary
+        // All ViewStyle properties are allowed
+        ...radioButtons.activeButtonStyle
+    },
+    radioButtonItemContainerDisabledStyle: {
+        // In case radio buttons is not selectable
+        // All ViewStyle properties are allowed
+        ...radioButtons.radioButtonItemContainerDisabledStyle
     },
     radioButtonItemTitleStyle: {
-        color: font.colorTitle,
-        fontSize: font.sizeSmall,
-        lineHeight: font.lineHeightSmall
+        // All TextStyle properties are allowed
+        ...radioButtons.radioButtonItemTitleStyle
     },
     validationMessage: {
-        color: brand.danger,
-        fontSize: font.sizeSmall
+        // All TextStyle properties are allowed
+        ...radioButtons.validationMessage
     }
 };

@@ -6,14 +6,17 @@ import lightUnselectedRadioIcon from "./assets/radioButton_unselected_light.svg"
 import darkUnselectedRadioIcon from "./assets/radioButton_unselected_dark.svg";
 
 export function getPreview(values: RadioButtonsPreviewProps, isDark: boolean): StructurePreviewProps {
+    const EditableFontColor = isDark ? "#D6D6D6" : "#0A1324";
+    const readOnlyFontColor = "#9DA1A8";
+    const fontColor = values.readOnly ? readOnlyFontColor : EditableFontColor;
     const radioButtonLabel: StructurePreviewProps = {
         type: "Container",
         borders: false,
         children: [
             {
                 type: "Text",
-                content: values.label !== "" ? values.label : "Label",
-                fontColor: isDark ? "#D6D6D6" : "#0A1324"
+                content: values.label,
+                fontColor
             },
             {
                 type: "Container",
@@ -41,7 +44,7 @@ export function getPreview(values: RadioButtonsPreviewProps, isDark: boolean): S
     const radioButtonItemLabel: StructurePreviewProps = {
         type: "Text",
         content: values.enum !== "" ? values.enum : "[No attribute selected]",
-        fontColor: isDark ? "#D6D6D6" : "#0A1324"
+        fontColor
     };
 
     const generateRadioButtonItem = (enumValue: string): StructurePreviewProps[] => {

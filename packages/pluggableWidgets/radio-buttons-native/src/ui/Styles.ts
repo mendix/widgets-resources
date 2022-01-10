@@ -2,6 +2,7 @@ import { Style } from "@mendix/piw-native-utils-internal";
 import { TextStyle, ViewStyle } from "react-native";
 
 export interface RadioButtonsStyle extends Style {
+    container: ViewStyle;
     containerHorizontal: ViewStyle;
     labelTextStyle: TextStyle;
     radioButtonItemContainerStyle: ViewStyle;
@@ -14,6 +15,7 @@ export interface RadioButtonsStyle extends Style {
 }
 
 export const defaultRadioButtonsStyle: RadioButtonsStyle = {
+    container: {},
     containerHorizontal: {
         flexDirection: "row",
         alignItems: "center",
@@ -21,10 +23,12 @@ export const defaultRadioButtonsStyle: RadioButtonsStyle = {
     },
     radioButtonItemContainerStyle: {
         flexDirection: "row",
-        alignItems: "center"
+        alignItems: "center",
+        marginBottom: 8
     },
     radioButtonItemContainerHorizontalStyle: {
-        marginBottom: 0
+        marginBottom: 0,
+        marginEnd: 8
     },
     radioButtonItemContainerDisabledStyle: {
         opacity: 0.5
@@ -32,10 +36,33 @@ export const defaultRadioButtonsStyle: RadioButtonsStyle = {
     circularButtonStyle: {
         borderWidth: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        width: 16,
+        height: 16,
+        borderRadius: 8,
+        borderColor: "#CED0D3",
+        marginEnd: 4
     },
-    labelTextStyle: {},
-    activeButtonStyle: {},
-    radioButtonItemTitleStyle: {},
-    validationMessage: {}
+    labelTextStyle: {
+        color: "#0A1326",
+        fontSize: 12,
+        lineHeight: 18,
+        marginBottom: 8
+    },
+
+    activeButtonStyle: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: "#264AE5"
+    },
+    radioButtonItemTitleStyle: {
+        color: "#0A1326",
+        fontSize: 12,
+        lineHeight: 18
+    },
+    validationMessage: {
+        color: "#E33F4E",
+        fontSize: 12
+    }
 };
