@@ -93,7 +93,7 @@ async function main() {
     }
 
     // Build testProject via mxbuild
-    const projectFile = ls("tests/testProject/*.mpr").toString();
+    const projectFile = ls("tests/testProject/!*.mpr").toString();
     execSync(
         `docker run -t -v ${process.cwd()}:/source ` +
             `--rm ${ghcr}mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +
@@ -105,7 +105,7 @@ async function main() {
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
     const runtimeContainerId = execSync(
-        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
+        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source --name runtime -p ${freePort}:8080 ` +
             `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
             `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
     )
@@ -117,7 +117,7 @@ async function main() {
         try {
             const response = await fetch(`http://${ip}:${freePort}`);
             if (response.ok) {
-                break;
+                attempts = 0;
             }
         } catch (e) {
             console.log(`Could not reach http://${ip}:${freePort}, trying again...`);
@@ -127,13 +127,13 @@ async function main() {
 
     try {
         if (attempts === 0) {
-            throw new Error("Runtime didn't start in time, existing now...");
+            throw new Error("Runtime didn't start in time, exiting now...");
         }
+        // Spin up cypress docker machine and run the test specs
         execSync(
-            `DISPLAY=$IP:0 docker run -it -v $PWD:/e2e -w /e2e -e DISPLAY --entrypoint cypress cypress/included:8.7.0 open --project . --config baseUrl=http://host.docker.internal:${3000}`
-        )
-            .toString()
-            .trim();
+            `docker run -t -v $PWD:/e2e -w /e2e --name cypress cypress/included:8.4.0 --browser chrome --config baseUrl=http://host.docker.internal:${freePort}`,
+            { stdio: "inherit" }
+        );
     } catch (e) {
         try {
             execSync(`docker logs ${runtimeContainerId}`, { stdio: "inherit" });
@@ -142,7 +142,7 @@ async function main() {
         throw e;
     } finally {
         execSync(`docker rm -f ${runtimeContainerId}`);
-        // execSync(`docker rm -f ${cypressContainerId}`);
+        execSync(`docker rm -f cypress`);
     }
 }
 
