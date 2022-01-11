@@ -19,10 +19,15 @@ enum SupportedPlatform {
 
 type WidgetData = {
     id: string;
+    name: string;
+    description: string;
+    clientModuleName: string;
     latestVersion: string;
-    pluginWidget: boolean;
+    isPluginWidget: boolean;
     offlineCapable: boolean;
     supportedPlatform: SupportedPlatform;
+    studioCategory?: string;
+    studioProCategory?: string;
     editorConfigPath?: string;
     editorPreviewPath?: string;
     hasStructureModePreview?: boolean;
@@ -52,7 +57,6 @@ async function main(): Promise<void> {
 
 async function summarizeWidgets(): Promise<WidgetData[]> {
     const locations = await getLernaPackages(/(pluggable|custom)Widgets/);
-
     const widgets = await Promise.all(locations.map(async packagePath => summarizeWidget(packagePath)));
 
     const program = createProgram(
@@ -77,7 +81,8 @@ async function summarizeWidgets(): Promise<WidgetData[]> {
 async function summarizeWidget(packagePath: string): Promise<WidgetData> {
     const packageXmlValues = await extractFromXml(createParserForPackageXml(), packagePath, "src/package.xml", {
         latestVersion: xml => xml.package.clientModule["@_version"],
-        widgetFileName: xml => xml.package.clientModule.widgetFiles.widgetFile[0]["@_path"]
+        widgetFileName: xml => xml.package.clientModule.widgetFiles.widgetFile[0]["@_path"], // We assume that there is only one widget per clientModule
+        clientModuleName: xml => xml.package.clientModule["@_name"]
     });
 
     const { supportedPlatform, ...widgetXmlValues } = await extractFromXml(
@@ -86,7 +91,11 @@ async function summarizeWidget(packagePath: string): Promise<WidgetData> {
         `src/${packageXmlValues.widgetFileName}`,
         {
             id: xml => xml.widget["@_id"],
-            pluginWidget: xml => xml.widget["@_pluginWidget"] === "true",
+            name: xml => xml.widget.name,
+            description: xml => xml.widget.description,
+            studioCategory: xml => xml.widget.studioCategory,
+            studioProCategory: xml => xml.widget.studioProCategory,
+            isPluginWidget: xml => xml.widget["@_pluginWidget"] === "true",
             offlineCapable: xml => xml.widget["@_offlineCapable"] === "true",
             supportedPlatform: xml => xml.widget["@_supportedPlatform"]?.toLowerCase() ?? "web"
         }
@@ -96,10 +105,10 @@ async function summarizeWidget(packagePath: string): Promise<WidgetData> {
         throw new UnsupportedPlatformError(packagePath, supportedPlatform);
     }
 
-    const structureModePreviewPath = await withGlob(`${packagePath}/src/*.editorConfig.{js,jsx,ts,tsx}`, matches =>
+    const editorConfigPath = await withGlob(`${packagePath}/src/*.editorConfig.{js,jsx,ts,tsx}`, matches =>
         matches[0] ? relative(ROOT_PATH, matches[0]) : undefined
     );
-    const designModePreviewPath = await withGlob(`${packagePath}/src/*.editorPreview.{js,jsx,ts,tsx}`, matches =>
+    const editorPreviewPath = await withGlob(`${packagePath}/src/*.editorPreview.{js,jsx,ts,tsx}`, matches =>
         matches[0] ? relative(ROOT_PATH, matches[0]) : undefined
     );
 
@@ -110,8 +119,8 @@ async function summarizeWidget(packagePath: string): Promise<WidgetData> {
         ...packageXmlValues,
         ...widgetXmlValues,
         supportedPlatform,
-        editorConfigPath: structureModePreviewPath,
-        editorPreviewPath: designModePreviewPath,
+        editorConfigPath,
+        editorPreviewPath,
         hasTileIcons,
         hasDarkModeIcons
     };
