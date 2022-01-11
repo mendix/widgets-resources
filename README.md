@@ -93,7 +93,7 @@ See [CONTRIBUTING.md](https://github.com/mendix/widgets-resources/blob/master/CO
 
 ## Developing
 
-In order to use our mono repo, please make sure you are using [Node.JS v14](https://nodejs.org/download/release/latest-v14.x/) and NPM v6 (Use `npm i -g npm@latest-6`).
+In order to use our mono repo, please make sure you are using [Node.JS v14](https://nodejs.org/download/release/latest-v14.x/) and NPM v6 (Use `npm i -g npm@latest-6`) or latest versions.
 
 As we are using node-gyp in our dependencies, please make sure to install the requirements for this library according to your OS.
 - [Windows](https://github.com/nodejs/node-gyp#on-windows)
@@ -101,10 +101,6 @@ As we are using node-gyp in our dependencies, please make sure to install the re
 - [Linux/Unix](https://github.com/nodejs/node-gyp#on-unix)
 
 - Execute `npm install` on root
-
-### Requirements
-
--   For this repository you need npm version 6 or below. Version 7 and above are unsupported.
 
 ### For developing native widgets in `packages/pluggableWidgets`:
 
