@@ -2415,5 +2415,61 @@
                 }
             ]
         }
+    ],
+    "com.mendix.widget.native.radiobuttons.RadioButtons": [
+        {
+            "name": "Radio button color",
+            "type": "Dropdown",
+            "description": "Change the color of radio button.",
+            "options": [
+                {
+                    "name": "Brand Primary",
+                    "class": "radioButtonsPrimary"
+                },
+                {
+                    "name": "Brand Success",
+                    "class": "radioButtonsSuccess"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "radioButtonsWarning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "radioButtonsDanger"
+                },
+                {
+                    "name": "Brand Info",
+                    "class": "radioButtonsInfo"
+                }
+            ]
+        },
+        {
+            "name": "Radio button label color",
+            "type": "Dropdown",
+            "description": "Change the color of label.",
+            "options": [
+                {
+                    "name": "Brand Primary",
+                    "class": "radioButtonsLabelPrimary"
+                },
+                {
+                    "name": "Brand Success",
+                    "class": "radioButtonsLabelSuccess"
+                },
+                {
+                    "name": "Brand Warning",
+                    "class": "radioButtonsLabelWarning"
+                },
+                {
+                    "name": "Brand Danger",
+                    "class": "radioButtonsLabelDanger"
+                },
+                {
+                    "name": "Brand Info",
+                    "class": "radioButtonsLabelInfo"
+                }
+            ]
+        }
     ]
 }

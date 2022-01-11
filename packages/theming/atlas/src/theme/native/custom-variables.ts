@@ -25,7 +25,8 @@ import {
     VariablesRating,
     VariablesSlider,
     VariablesSpacing,
-    VariablesTabContainer
+    VariablesTabContainer,
+    VariablesRadioButtons
 } from "../../themesource/atlas_core/native/types/variables";
 import "./exclusion-variables";
 /*
@@ -638,3 +639,45 @@ export const slider: VariablesSlider = {
         backgroundColor: background.secondary
     }
 };
+
+// Radio buttons styles
+export const radioButtons: VariablesRadioButtons = {
+    labelTextStyle: {
+        color: font.colorTitle,
+        fontSize: font.sizeSmall,
+        lineHeight: font.lineHeightSmall,
+        marginBottom: spacing.small
+    },
+    radioButtonItemContainerStyle: {
+        marginBottom: spacing.small
+    },
+    radioButtonItemContainerDisabledStyle: {
+        opacity: 0.5
+    },
+    radioButtonItemContainerHorizontalStyle: {
+        marginEnd: spacing.small
+    },
+    circularButtonStyle: {
+        width: 16,
+        height: 16,
+        borderRadius: 8,
+        borderColor: border.color,
+        marginEnd: spacing.smaller
+    },
+    activeButtonStyle: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: brand.primary
+    },
+    radioButtonItemTitleStyle: {
+        color: font.colorTitle,
+        fontSize: font.sizeSmall,
+        lineHeight: font.lineHeightSmall
+    },
+    validationMessage: {
+        color: brand.danger,
+        fontSize: font.sizeSmall
+    }
+};
+//

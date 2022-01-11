@@ -545,3 +545,43 @@ export interface VariablesSlider {
         backgroundColor: string;
     };
 }
+
+export interface VariablesRadioButtons {
+    labelTextStyle: {
+        color: string;
+        fontSize: number;
+        lineHeight: number;
+        marginBottom: number;
+    };
+    radioButtonItemContainerStyle: {
+        marginBottom: number;
+    };
+    radioButtonItemContainerDisabledStyle: {
+        opacity: number;
+    };
+    radioButtonItemContainerHorizontalStyle: {
+        marginEnd: number;
+    };
+    circularButtonStyle: {
+        width: number;
+        height: number;
+        borderRadius: number;
+        borderColor: string;
+        marginEnd: number;
+    };
+    activeButtonStyle: {
+        width: number;
+        height: number;
+        borderRadius: number;
+        backgroundColor: string;
+    };
+    radioButtonItemTitleStyle: {
+        color: string;
+        fontSize: number;
+        lineHeight: number;
+    };
+    validationMessage: {
+        color: string;
+        fontSize: number;
+    };
+}

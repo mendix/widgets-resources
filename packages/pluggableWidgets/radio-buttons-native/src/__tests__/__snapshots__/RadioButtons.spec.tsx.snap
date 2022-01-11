@@ -1,0 +1,763 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio buttons render correctly with show label false 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <View
+    style={false}
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          false,
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          false,
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Radio buttons render correctly without label 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
+  />
+  <View
+    style={false}
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          false,
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          false,
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Radio buttons render disabled radio buttons correctly 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
+  >
+    Label
+  </Text>
+  <View
+    style={false}
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          Object {
+            "opacity": 0.5,
+          },
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            undefined,
+          ]
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          Object {
+            "opacity": 0.5,
+          },
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            undefined,
+          ]
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
+  >
+    Label
+  </Text>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "flexWrap": "wrap",
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          Object {
+            "marginBottom": 0,
+            "marginEnd": 8,
+          },
+          false,
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          Object {
+            "marginBottom": 0,
+            "marginEnd": 8,
+          },
+          false,
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Radio buttons render vertical radio buttons correctly 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
+  >
+    Label
+  </Text>
+  <View
+    style={false}
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          false,
+        ]
+      }
+      testID="radio-button-firstItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "#264AE5",
+              "borderRadius": 4,
+              "height": 8,
+              "width": 8,
+            }
+          }
+        />
+      </View>
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted firstItem
+      </Text>
+    </View>
+    <View
+      accessible={true}
+      focusable={true}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 8,
+          },
+          false,
+          false,
+        ]
+      }
+      testID="radio-button-secondItem"
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "borderColor": "#CED0D3",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 16,
+              "justifyContent": "center",
+              "marginEnd": 4,
+              "width": 16,
+            },
+            false,
+          ]
+        }
+      />
+      <Text
+        style={
+          Object {
+            "color": "#0A1326",
+            "fontSize": 12,
+            "lineHeight": 18,
+          }
+        }
+      >
+        Formatted secondItem
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Radio buttons shows validations correctly 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
+  >
+    Label
+  </Text>
+  <View
+    style={false}
+  />
+  <Text
+    style={
+      Object {
+        "color": "#E33F4E",
+        "fontSize": 12,
+      }
+    }
+  >
+    error message
+  </Text>
+</View>
+`;
+
+exports[`Radio buttons works correctly without options 1`] = `
+<View
+  style={Object {}}
+  testID="radio-buttons-test"
+>
+  <Text
+    style={
+      Object {
+        "color": "#0A1326",
+        "fontSize": 12,
+        "lineHeight": 18,
+        "marginBottom": 8,
+      }
+    }
+  >
+    Label
+  </Text>
+  <View
+    style={false}
+  />
+</View>
+`;
