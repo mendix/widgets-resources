@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added resolutions for `react`, `react-dom` and `react-native` in order to be compatible with node 15+ and npm 7+.
+
 ## [9.9.3] - 2022-01-10
 
 ### Changed
