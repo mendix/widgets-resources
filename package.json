@@ -30,7 +30,6 @@
     "build:data-widgets": "npm run build -- --scope '{datagrid,dropdown-sort,tree-node,gallery}-*'",
     "build:native": "npm run build -- --scope '*-native'",
     "build:web": "npm run build -- --scope '*-web'",
-    "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
     "release": "lerna run release --ignore @mendix/custom-widgets-utils-internal",
     "release:marketplace": "lerna run release:marketplace",
     "release:data-widgets": "npm run release -- --scope '{datagrid,dropdown-sort,tree-node,gallery}-*'",
