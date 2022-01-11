@@ -93,7 +93,7 @@ async function main() {
     }
 
     // Build testProject via mxbuild
-    const projectFile = ls("tests/testProject/!*.mpr").toString();
+    const projectFile = ls("tests/testProject/*.mpr").toString();
     execSync(
         `docker run -t -v ${process.cwd()}:/source ` +
             `--rm ${ghcr}mxbuild:${mendixVersion} bash -c "mx update-widgets --loose-version-check /source/${projectFile} && mxbuild ` +

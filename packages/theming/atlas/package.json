@@ -20,7 +20,7 @@
     "test:e2e:chrome": "BROWSER_DOCKER=selenium/standalone-chrome BROWSER=chrome pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",
     "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "test:e2e:cypress:local": "npx cypress run --browser chrome",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress --no-widget-update",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress --no-widget-update --remove-atlas-files",
     "release": "node ./scripts/build.js release",
     "release-ts": "tsc"
   },
