@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.9.3] - 2022-01-10
+
+### Changed
+- We changed usage of `colors` to `ansi-colors`.
+
+## [9.9.2] - 2022-01-10
+
 ### Fixed
 - We fixed `colors` dependency version to 1.4.0.
 
