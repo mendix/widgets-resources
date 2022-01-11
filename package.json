@@ -29,7 +29,6 @@
     "build": "lerna run build --ignore '{@mendix/custom-widgets-utils-internal,@mendix/shared-charts}'",
     "build:native": "npm run build -- --scope '*-native'",
     "build:web": "npm run build -- --scope '*-web'",
-    "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
     "release": "lerna run release --ignore '{@mendix/custom-widgets-utils-internal,@mendix/shared-charts}'",
     "release:marketplace": "lerna run release:marketplace",
     "release:hybrid": "npm run release -- --scope '*-hybrid'",
