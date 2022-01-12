@@ -3,6 +3,7 @@
 exports[`Widget Dynamic Image SVG renders the structure 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -272,6 +273,7 @@ exports[`Widget Dynamic Image SVG renders the structure inside a modal 1`] = `
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -449,6 +451,7 @@ Array [
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -472,6 +475,7 @@ Array [
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onBlur={[Function]}
         onClick={[Function]}
@@ -634,6 +638,7 @@ Array [
 exports[`Widget Dynamic Image SVG renders the structure with custom height 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -797,6 +802,7 @@ exports[`Widget Dynamic Image SVG renders the structure with custom height 1`] =
 exports[`Widget Dynamic Image SVG renders the structure with custom width 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -960,6 +966,7 @@ exports[`Widget Dynamic Image SVG renders the structure with custom width 1`] = 
 exports[`Widget Dynamic Image renders the structure 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -1273,6 +1280,7 @@ exports[`Widget Dynamic Image renders the structure inside a modal 1`] = `
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -1362,6 +1370,7 @@ Array [
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1385,6 +1394,7 @@ Array [
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1456,6 +1466,7 @@ Array [
 exports[`Widget Dynamic Image renders the structure with custom height 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -1528,6 +1539,7 @@ exports[`Widget Dynamic Image renders the structure with custom height 1`] = `
 exports[`Widget Dynamic Image renders the structure with custom width 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -1600,6 +1612,7 @@ exports[`Widget Dynamic Image renders the structure with custom width 1`] = `
 exports[`Widget Icon type: icon/glyph renders the structure with an icon and default color 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -1651,6 +1664,7 @@ exports[`Widget Icon type: icon/glyph renders the structure with an icon and def
 exports[`Widget Icon type: image/staticImage renders the structure 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -1724,6 +1738,7 @@ exports[`Widget Icon type: image/staticImage renders the structure inside a moda
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -1810,6 +1825,7 @@ Array [
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1833,6 +1849,7 @@ Array [
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onBlur={[Function]}
         onClick={[Function]}
@@ -1904,6 +1921,7 @@ Array [
 exports[`Widget Icon type: image/staticImage sets the correct styles 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -1977,6 +1995,7 @@ exports[`Widget Icon type: image/staticImage sets the correct styles 1`] = `
 exports[`Widget Static Image SVG renders the structure 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -2670,6 +2689,7 @@ exports[`Widget Static Image SVG renders the structure inside a modal 1`] = `
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -2849,6 +2869,7 @@ Array [
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -2872,6 +2893,7 @@ Array [
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onBlur={[Function]}
         onClick={[Function]}
@@ -3038,6 +3060,7 @@ Array [
 exports[`Widget Static Image SVG renders the structure with custom height 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -3205,6 +3228,7 @@ exports[`Widget Static Image SVG renders the structure with custom height 1`] = 
 exports[`Widget Static Image SVG renders the structure with custom width 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -3372,6 +3396,7 @@ exports[`Widget Static Image SVG renders the structure with custom width 1`] = `
 exports[`Widget Static Image renders the structure 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -3685,6 +3710,7 @@ exports[`Widget Static Image renders the structure inside a modal 1`] = `
 Array [
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -3774,6 +3800,7 @@ Array [
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -3797,6 +3824,7 @@ Array [
     >
       <View
         accessible={true}
+        collapsable={false}
         focusable={true}
         onBlur={[Function]}
         onClick={[Function]}
@@ -3868,6 +3896,7 @@ Array [
 exports[`Widget Static Image renders the structure with custom height 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
@@ -3940,6 +3969,7 @@ exports[`Widget Static Image renders the structure with custom height 1`] = `
 exports[`Widget Static Image renders the structure with custom width 1`] = `
 <View
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
