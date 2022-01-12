@@ -6,7 +6,7 @@ exports[`Timeline hides the timeline header 1`] = `
 >
   <div
     className="timeline-date"
-    key="Sun May 29 1453"
+    key="Sat May 28 1453"
   >
     <div
       className="widget-timeline-events-wrapper widget-timeline-no-divider"
@@ -109,13 +109,13 @@ exports[`Timeline renders timeline with basic configuration 1`] = `
 >
   <div
     className="timeline-date"
-    key="Sun May 29 1453"
+    key="Sat May 28 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Sun May 29 1453
+        Sat May 28 1453
       </span>
     </div>
     <div
@@ -219,7 +219,7 @@ exports[`Timeline renders timeline with custom configuration  1`] = `
 >
   <div
     className="timeline-date"
-    key="Mon May 30 1453"
+    key="Sun May 29 1453"
   >
     <div
       className="widget-timeline-date-header"
@@ -312,13 +312,13 @@ exports[`Timeline with action set change style when hovered 1`] = `
 >
   <div
     className="timeline-date"
-    key="Sun May 29 1453"
+    key="Sat May 28 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Sun May 29 1453
+        Sat May 28 1453
       </span>
     </div>
     <div
@@ -415,13 +415,13 @@ exports[`Timeline with action set change style when hovered 1`] = `
   </div>
   <div
     className="timeline-date"
-    key="Mon May 30 1453"
+    key="Sun May 29 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Mon May 30 1453
+        Sun May 29 1453
       </span>
     </div>
     <div
@@ -485,13 +485,13 @@ exports[`Timeline with action set renders with clickable styles 1`] = `
 >
   <div
     className="timeline-date"
-    key="Sun May 29 1453"
+    key="Sat May 28 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Sun May 29 1453
+        Sat May 28 1453
       </span>
     </div>
     <div
@@ -588,13 +588,13 @@ exports[`Timeline with action set renders with clickable styles 1`] = `
   </div>
   <div
     className="timeline-date"
-    key="Mon May 30 1453"
+    key="Sun May 29 1453"
   >
     <div
       className="widget-timeline-date-header"
     >
       <span>
-        Mon May 30 1453
+        Sun May 29 1453
       </span>
     </div>
     <div

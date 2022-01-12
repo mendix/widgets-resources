@@ -20,6 +20,7 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -114,6 +115,7 @@ exports[`Accordion in collapsible & multi expanded group mode renders correctly 
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -215,6 +217,7 @@ exports[`Accordion in collapsible & single expanded group mode hides the first a
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -316,6 +319,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -410,6 +414,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -511,6 +516,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -607,6 +613,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -710,6 +717,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -786,6 +794,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the accor
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -869,6 +878,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -963,6 +973,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1064,6 +1075,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1158,6 +1170,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1259,6 +1272,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -1353,6 +1367,7 @@ exports[`Accordion in collapsible & single expanded group mode renders the first
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
