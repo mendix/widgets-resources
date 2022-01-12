@@ -29,7 +29,7 @@ exports[`Intro Screen renders 1`] = `
         data={
           Array [
             Object {
-              "content": <Component />,
+              "content": <View />,
               "name": "Page 1",
             },
           ]
@@ -205,7 +205,7 @@ exports[`Intro Screen renders with 1 bottom button 1`] = `
         data={
           Array [
             Object {
-              "content": <Component />,
+              "content": <View />,
               "name": "Page 1",
             },
           ]
@@ -395,7 +395,7 @@ exports[`Intro Screen renders with 2 bottom button 1`] = `
         data={
           Array [
             Object {
-              "content": <Component />,
+              "content": <View />,
               "name": "Page 1",
             },
           ]
@@ -585,7 +585,7 @@ exports[`Intro Screen renders with active slide attribute 1`] = `
         data={
           Array [
             Object {
-              "content": <Component />,
+              "content": <View />,
               "name": "Page 1",
             },
           ]
@@ -761,7 +761,7 @@ exports[`Intro Screen renders with async storage identifier 1`] = `
         data={
           Array [
             Object {
-              "content": <Component />,
+              "content": <View />,
               "name": "Page 1",
             },
           ]

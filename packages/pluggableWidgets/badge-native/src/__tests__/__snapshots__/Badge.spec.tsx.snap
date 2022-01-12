@@ -104,6 +104,7 @@ exports[`Badge with on click action Android renders touchables 1`] = `
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}
@@ -147,6 +148,7 @@ exports[`Badge with on click action iOS renders touchables 1`] = `
 >
   <View
     accessible={true}
+    collapsable={false}
     focusable={true}
     onBlur={[Function]}
     onClick={[Function]}

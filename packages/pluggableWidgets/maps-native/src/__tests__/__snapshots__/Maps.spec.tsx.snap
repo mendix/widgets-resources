@@ -44,7 +44,7 @@ exports[`renders 1`] = `
   showsUserLocation={false}
   style={Array []}
 >
-  <Component
+  <View
     style={
       Object {
         "minHeight": 50,
@@ -285,7 +285,7 @@ exports[`renders 1`] = `
           </AIRMap>
         </AIRMap>
       </MapView>
-      <Component
+      <View
         style={
           Object {
             "alignItems": "center",
@@ -315,7 +315,7 @@ exports[`renders 1`] = `
             }
           }
         >
-          <Component
+          <ActivityIndicator
             animating={true}
             color="#999999"
             hidesWhenStopped={true}
@@ -327,10 +327,10 @@ exports[`renders 1`] = `
               hidesWhenStopped={true}
               size="large"
             />
-          </Component>
+          </ActivityIndicator>
         </View>
-      </Component>
+      </View>
     </View>
-  </Component>
+  </View>
 </Maps>
 `;
