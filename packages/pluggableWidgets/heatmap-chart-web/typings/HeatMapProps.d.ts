@@ -9,6 +9,10 @@ import { Big } from "big.js";
 
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
+export type HorizontalSortOrderEnum = "asc" | "desc";
+
+export type VerticalSortOrderEnum = "asc" | "desc";
+
 export interface ScaleColorsType {
     valuePercentage: number;
     colour: string;
@@ -34,8 +38,12 @@ export interface HeatMapContainerProps {
     developerMode: DeveloperModeEnum;
     seriesDataSource: ListValue;
     seriesName: ListExpressionValue<string>;
-    xAttribute?: ListAttributeValue<string>;
-    yAttribute?: ListAttributeValue<string>;
+    horizontalAxisAttribute?: ListAttributeValue<string>;
+    horizontalSortAttribute?: ListAttributeValue<Big | string | Date>;
+    horizontalSortOrder: HorizontalSortOrderEnum;
+    verticalAxisAttribute?: ListAttributeValue<string>;
+    verticalSortAttribute?: ListAttributeValue<Big | string | Date>;
+    verticalSortOrder: VerticalSortOrderEnum;
     seriesValueAttribute: ListAttributeValue<Big>;
     scaleColors: ScaleColorsType[];
     showScale: boolean;
@@ -62,8 +70,12 @@ export interface HeatMapPreviewProps {
     developerMode: DeveloperModeEnum;
     seriesDataSource: {} | { type: string } | null;
     seriesName: string;
-    xAttribute: string;
-    yAttribute: string;
+    horizontalAxisAttribute: string;
+    horizontalSortAttribute: string;
+    horizontalSortOrder: HorizontalSortOrderEnum;
+    verticalAxisAttribute: string;
+    verticalSortAttribute: string;
+    verticalSortOrder: VerticalSortOrderEnum;
     seriesValueAttribute: string;
     scaleColors: ScaleColorsPreviewType[];
     showScale: boolean;

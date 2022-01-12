@@ -38,12 +38,16 @@ const heatmapChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
         ypad: 0,
         xpad: 5,
         outlinecolor: "#9ba492"
-    }
+    },
+    connectgaps: false
 };
 
 export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
     const heatmapChartData = useHeatMapDataSeries({
         customSeriesOptions: props.customSeriesOptions,
+        horizontalAxisAttribute: props.horizontalAxisAttribute,
+        horizontalSortAttribute: props.horizontalSortAttribute,
+        horizontalSortOrder: props.horizontalSortOrder,
         onClickAction: props.onClickAction,
         scaleColors: props.scaleColors,
         seriesDataSource: props.seriesDataSource,
@@ -51,8 +55,9 @@ export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
         seriesValueAttribute: props.seriesValueAttribute,
         showScale: props.showScale,
         tooltipHoverText: props.tooltipHoverText,
-        xAttribute: props.xAttribute,
-        yAttribute: props.yAttribute
+        verticalAxisAttribute: props.verticalAxisAttribute,
+        verticalSortAttribute: props.verticalSortAttribute,
+        verticalSortOrder: props.verticalSortOrder
     });
 
     return (

@@ -38,21 +38,61 @@
                     <caption>Series name</caption>
                     <description />
                 </property>
-                <property key="xAttribute" type="attribute" required="false" dataSource="seriesDataSource">
-                    <caption>X axis attribute</caption>
+                <property key="horizontalAxisAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Horizontal axis attribute</caption>
                     <description />
                     <attributeTypes>
                         <attributeType name="String" />
                         <attributeType name="Enum" />
                     </attributeTypes>
                 </property>
-                <property key="yAttribute" type="attribute" required="false" dataSource="seriesDataSource">
-                    <caption>Y axis attribute</caption>
+                <property key="horizontalSortAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Horizontal sort attribute</caption>
+                    <description>Attribute to use for sorting the data. Sorting can only be used when data source is ‘Database’.  For data source ‘Microflow’, the sorting should be done within the microflow.</description>
+                    <attributeTypes>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="String"/>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="DateTime"/>
+                    </attributeTypes>
+                </property>
+                <property key="horizontalSortOrder" type="enumeration" defaultValue="asc">
+                    <caption>Horizontal sort order</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="asc">Ascending</enumerationValue>
+                        <enumerationValue key="desc">Descending</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="verticalAxisAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Vertical axis attribute</caption>
                     <description />
                     <attributeTypes>
                         <attributeType name="String" />
                         <attributeType name="Enum" />
                     </attributeTypes>
+                </property>
+                <property key="verticalSortAttribute" type="attribute" required="false" dataSource="seriesDataSource">
+                    <caption>Vertical sort attribute</caption>
+                    <description>Attribute to use for sorting the data. Sorting can only be used when data source is ‘Database’.  For data source ‘Microflow’, the sorting should be done within the microflow.</description>
+                    <attributeTypes>
+                        <attributeType name="Decimal"/>
+                        <attributeType name="Long"/>
+                        <attributeType name="Integer"/>
+                        <attributeType name="String"/>
+                        <attributeType name="AutoNumber"/>
+                        <attributeType name="DateTime"/>
+                    </attributeTypes>
+                </property>
+                <property key="verticalSortOrder" type="enumeration" defaultValue="asc">
+                    <caption>Vertical sort order</caption>
+                    <description/>
+                    <enumerationValues>
+                        <enumerationValue key="asc">Ascending</enumerationValue>
+                        <enumerationValue key="desc">Descending</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="seriesValueAttribute" type="attribute" required="true" dataSource="seriesDataSource">
                     <caption>Value attribute</caption>

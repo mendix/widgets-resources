@@ -3,12 +3,15 @@ import { useEffect, useMemo, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { HeatMapContainerProps } from "../../typings/HeatMapProps";
 import { ChartProps } from "@mendix/shared-charts/dist/components/Chart";
-import { executeAction } from "@mendix/piw-utils-internal";
+import { executeAction, valueAttributeCompareFn } from "@mendix/piw-utils-internal";
 import Big from "big.js";
 
 type HeatMapDataSeriesHooks = Pick<
     HeatMapContainerProps,
     | "customSeriesOptions"
+    | "horizontalAxisAttribute"
+    | "horizontalSortAttribute"
+    | "horizontalSortOrder"
     | "onClickAction"
     | "scaleColors"
     | "seriesDataSource"
@@ -16,24 +19,36 @@ type HeatMapDataSeriesHooks = Pick<
     | "seriesValueAttribute"
     | "showScale"
     | "tooltipHoverText"
-    | "xAttribute"
-    | "yAttribute"
+    | "verticalAxisAttribute"
+    | "verticalSortAttribute"
+    | "verticalSortOrder"
 >;
 
+type AttributeValue = string | number | Date | undefined;
+
 type LocalHeatMapData = {
-    itemName: string | undefined;
-    itemValue: number | undefined;
-    itemHoverText: string | undefined;
-    itemXAttribute: string | number | Date | undefined;
-    itemYAttribute: string | number | Date | undefined;
+    name: string | undefined;
+    value: number | undefined;
+    hoverText: string | undefined;
+    horizontalAxisValue: AttributeValue;
+    verticalAxisValue: AttributeValue;
+    horizontalSortValue: string | Big | Date | undefined;
+    verticalSortValue: string | Big | Date | undefined;
 };
 
 function getUniqueValues<T>(values: T[]): T[] {
     return Array.from(new Set(values));
 }
 
+function invertCompareValue(compareValue: number): number {
+    return 0 - compareValue;
+}
+
 export const useHeatMapDataSeries = ({
     customSeriesOptions,
+    horizontalAxisAttribute,
+    horizontalSortAttribute,
+    horizontalSortOrder,
     onClickAction,
     scaleColors,
     seriesDataSource,
@@ -41,57 +56,102 @@ export const useHeatMapDataSeries = ({
     seriesValueAttribute,
     showScale,
     tooltipHoverText,
-    xAttribute,
-    yAttribute
+    verticalAxisAttribute,
+    verticalSortAttribute,
+    verticalSortOrder
 }: HeatMapDataSeriesHooks): ChartProps["data"] => {
     const [heatmapChartData, setHeatMapData] = useState<LocalHeatMapData[]>([]);
 
     useEffect(() => {
         if (seriesDataSource.status === ValueStatus.Available && seriesDataSource.items) {
             const dataSourceItems = seriesDataSource.items.map(dataSourceItem => ({
-                itemName: seriesName.get(dataSourceItem).value,
-                itemValue: ensure(seriesValueAttribute).get(dataSourceItem).value?.toNumber(),
-                itemHoverText: tooltipHoverText?.get(dataSourceItem).value,
-                itemXAttribute: formatValueAttribute(xAttribute?.get(dataSourceItem).value),
-                itemYAttribute: formatValueAttribute(yAttribute?.get(dataSourceItem).value)
+                name: seriesName.get(dataSourceItem).value,
+                value: ensure(seriesValueAttribute).get(dataSourceItem).value?.toNumber(),
+                hoverText: tooltipHoverText?.get(dataSourceItem).value,
+                horizontalAxisValue: formatValueAttribute(horizontalAxisAttribute?.get(dataSourceItem).value),
+                horizontalSortValue: horizontalSortAttribute?.get(dataSourceItem).value,
+                verticalAxisValue: formatValueAttribute(verticalAxisAttribute?.get(dataSourceItem).value),
+                verticalSortValue: verticalSortAttribute?.get(dataSourceItem).value
             }));
             setHeatMapData(dataSourceItems);
         }
-    }, [seriesDataSource, seriesName, seriesValueAttribute, tooltipHoverText, xAttribute, yAttribute]);
+    }, [
+        seriesDataSource,
+        seriesName,
+        seriesValueAttribute,
+        tooltipHoverText,
+        horizontalAxisAttribute,
+        verticalAxisAttribute,
+        horizontalSortAttribute,
+        verticalSortAttribute
+    ]);
 
     const onClick = useMemo(() => (onClickAction ? () => executeAction(onClickAction) : undefined), [onClickAction]);
 
     return useMemo<ChartProps["data"]>(() => {
-        const uniqueHorizontalValues = getUniqueValues(heatmapChartData.map(({ itemXAttribute }) => itemXAttribute));
-        const uniqueVerticalValues = getUniqueValues(heatmapChartData.map(({ itemYAttribute }) => itemYAttribute));
-        const heatmapValues = uniqueVerticalValues.map(yValue =>
-            uniqueHorizontalValues
+        // `Array.reverse` mutates, so we make a copy.
+        const copiedData = [...heatmapChartData];
+
+        if (verticalSortAttribute) {
+            copiedData.sort((firstValue, secondValue) => {
+                const compareValue = valueAttributeCompareFn(
+                    firstValue.verticalSortValue,
+                    secondValue.verticalSortValue
+                );
+                return verticalSortOrder === "desc" ? invertCompareValue(compareValue) : compareValue;
+            });
+        }
+        const verticalValues = getUniqueValues(copiedData.map(({ verticalAxisValue }) => verticalAxisValue));
+
+        if (horizontalSortAttribute) {
+            copiedData.sort((firstValue, secondValue) => {
+                const compareValue = valueAttributeCompareFn(
+                    firstValue.horizontalSortValue,
+                    secondValue.horizontalSortValue
+                );
+                return horizontalSortOrder === "desc" ? invertCompareValue(compareValue) : compareValue;
+            });
+        }
+        const horizontalValues = getUniqueValues(copiedData.map(({ horizontalAxisValue }) => horizontalAxisValue));
+
+        const heatmapValues = verticalValues.map(yValue =>
+            horizontalValues
                 .map(xValue =>
-                    heatmapChartData.find(
-                        ({ itemXAttribute, itemYAttribute }) => itemXAttribute === xValue && itemYAttribute === yValue
+                    copiedData.find(
+                        ({ horizontalAxisValue, verticalAxisValue }) =>
+                            horizontalAxisValue === xValue && verticalAxisValue === yValue
                     )
                 )
-                .map(localDataPoint => localDataPoint?.itemValue ?? null)
+                .map(localDataPoint => localDataPoint?.value ?? null)
         );
+
         return [
             {
                 colorscale: processColorScale(scaleColors),
                 customSeriesOptions,
-                hoverinfo: heatmapChartData.some(
-                    ({ itemHoverText }) => itemHoverText !== undefined && itemHoverText !== ""
-                )
+                hoverinfo: heatmapChartData.some(({ hoverText }) => hoverText !== undefined && hoverText !== "")
                     ? "text"
                     : "none",
-                hovertext: heatmapChartData.map(({ itemHoverText }) => itemHoverText ?? ""),
-                labels: heatmapChartData.map(({ itemName }) => itemName ?? null),
+                hovertext: heatmapChartData.map(({ hoverText }) => hoverText ?? ""),
+                labels: heatmapChartData.map(({ name }) => name ?? null),
                 onClick,
                 showscale: showScale,
-                x: uniqueHorizontalValues.map(value => value?.toLocaleString()),
-                y: uniqueVerticalValues.map(value => value?.toLocaleString()),
+                x: horizontalValues.map(value => value?.toLocaleString()),
+                y: verticalValues.map(value => value?.toLocaleString()),
                 z: heatmapValues
             }
         ];
-    }, [customSeriesOptions, heatmapChartData, onClick, scaleColors, showScale]);
+    }, [
+        customSeriesOptions,
+        heatmapChartData,
+        horizontalSortAttribute,
+        horizontalSortOrder,
+        onClick,
+        scaleColors,
+        showScale,
+        verticalSortAttribute,
+        verticalSortOrder
+    ]);
 };
 
 function processColorScale(scaleColors: HeatMapContainerProps["scaleColors"]): Array<[number, string]> {
@@ -106,7 +166,7 @@ function processColorScale(scaleColors: HeatMapContainerProps["scaleColors"]): A
           ];
 }
 
-function formatValueAttribute(value: string | Big | Date | undefined): string | number | Date | undefined {
+function formatValueAttribute(value: string | Big | Date | undefined): AttributeValue {
     if (value) {
         if (value instanceof Big) {
             return value.toNumber();
