@@ -1516,5 +1516,389 @@
 				}
 			]
 		}
+	],
+	"jsActionPackages": [
+		{
+			"name": "Native Mobile Resources",
+			"version": "3.3.1",
+			"jsActions": [
+				{
+					"name": "BiometricAuthentication",
+					"group": "authentication"
+				},
+				{
+					"name": "IsBiometricAuthenticationSupported",
+					"group": "authentication"
+				},
+				{
+					"name": "SaveToPictureLibrary",
+					"group": "camera"
+				},
+				{
+					"name": "TakePicture",
+					"group": "camera"
+				},
+				{
+					"name": "TakePictureAdvanced",
+					"group": "camera"
+				},
+				{
+					"name": "GetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "SetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "ParseUrlToObject",
+					"group": "deeplink"
+				},
+				{
+					"name": "RegisterDeepLink",
+					"group": "deeplink"
+				},
+				{
+					"name": "IsCellularConnection",
+					"group": "network"
+				},
+				{
+					"name": "IsConnected",
+					"group": "network"
+				},
+				{
+					"name": "IsWifiConnection",
+					"group": "network"
+				},
+				{
+					"name": "CancelAllScheduledNotifications",
+					"group": "notifications"
+				},
+				{
+					"name": "CancelScheduledNotification",
+					"group": "notifications"
+				},
+				{
+					"name": "ClearAllDeliveredNotifications",
+					"group": "notifications"
+				},
+				{
+					"name": "DisplayNotification",
+					"group": "notifications"
+				},
+				{
+					"name": "GetPushNotificationToken",
+					"group": "notifications"
+				},
+				{
+					"name": "HasNotificationPermission",
+					"group": "notifications"
+				},
+				{
+					"name": "RequestNotificationPermission",
+					"group": "notifications"
+				},
+				{
+					"name": "ScheduleNotification",
+					"group": "notifications"
+				},
+				{
+					"name": "SetBadgeNumber",
+					"group": "notifications"
+				},
+				{
+					"name": "ChangeStatusBar",
+					"group": "platform"
+				},
+				{
+					"name": "GetDeviceInfo",
+					"group": "platform"
+				},
+				{
+					"name": "HideKeyboard",
+					"group": "platform"
+				},
+				{
+					"name": "OpenInAppBrowser",
+					"group": "platform"
+				},
+				{
+					"name": "PlaySound",
+					"group": "platform"
+				},
+				{
+					"name": "Vibrate",
+					"group": "platform"
+				}
+			]
+		},
+		{
+			"version": "1.0.0",
+			"jsActions": [
+				{
+					"name": "BiometricAuthentication",
+					"group": "authentication"
+				},
+				{
+					"name": "IsBiometricAuthenticationSupported",
+					"group": "authentication"
+				},
+				{
+					"name": "OpenCalendar",
+					"group": "calendar"
+				},
+				{
+					"name": "SaveCalendarEvent",
+					"group": "calendar"
+				},
+				{
+					"name": "ScanBarcode",
+					"group": "camera"
+				},
+				{
+					"name": "TakePicture",
+					"group": "camera"
+				},
+				{
+					"name": "GetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "SetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "SaveContact",
+					"group": "contacts"
+				},
+				{
+					"name": "SearchContacts",
+					"group": "contacts"
+				},
+				{
+					"name": "SelectContact",
+					"group": "contacts"
+				},
+				{
+					"name": "GetDeviceInfo",
+					"group": "mobile"
+				},
+				{
+					"name": "Vibrate",
+					"group": "mobile"
+				},
+				{
+					"name": "IsCellularConnection",
+					"group": "network"
+				},
+				{
+					"name": "IsConnected",
+					"group": "network"
+				},
+				{
+					"name": "IsWifiConnection",
+					"group": "network"
+				},
+				{
+					"name": "cordova-clipboard.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-android-fingerprint-auth.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-calendar.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-camera.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-contacts.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-device.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-touch-id.d",
+					"group": "types"
+				},
+				{
+					"name": "phonegap-plugin-barcodescanner.d",
+					"group": "types"
+				}
+			]
+		},
+		{
+			"name": "Nanoflow Commons",
+			"version": "2.1.2",
+			"jsActions": [
+				{
+					"name": "HideProgress",
+					"group": "client"
+				},
+				{
+					"name": "RefreshEntity",
+					"group": "client"
+				},
+				{
+					"name": "RefreshObject",
+					"group": "client"
+				},
+				{
+					"name": "ShowConfirmation",
+					"group": "client"
+				},
+				{
+					"name": "ShowProgress",
+					"group": "client"
+				},
+				{
+					"name": "SignIn",
+					"group": "client"
+				},
+				{
+					"name": "SignOut",
+					"group": "client"
+				},
+				{
+					"name": "ToggleSidebar",
+					"group": "client"
+				},
+				{
+					"name": "CallPhoneNumber",
+					"group": "external"
+				},
+				{
+					"name": "DraftEmail",
+					"group": "external"
+				},
+				{
+					"name": "NavigateTo",
+					"group": "external"
+				},
+				{
+					"name": "OpenMap",
+					"group": "external"
+				},
+				{
+					"name": "OpenURL",
+					"group": "external"
+				},
+				{
+					"name": "SendTextMessage",
+					"group": "external"
+				},
+				{
+					"name": "Share",
+					"group": "external"
+				},
+				{
+					"name": "Geocode",
+					"group": "geolocation"
+				},
+				{
+					"name": "GetCurrentLocation",
+					"group": "geolocation"
+				},
+				{
+					"name": "GetCurrentLocationMinimumAccuracy",
+					"group": "geolocation"
+				},
+				{
+					"name": "RequestLocationPermission",
+					"group": "geolocation"
+				},
+				{
+					"name": "ReverseGeocode",
+					"group": "geolocation"
+				},
+				{
+					"name": "GetStorageItemObject",
+					"group": "local-storage"
+				},
+				{
+					"name": "GetStorageItemObjectList",
+					"group": "local-storage"
+				},
+				{
+					"name": "GetStorageItemString",
+					"group": "local-storage"
+				},
+				{
+					"name": "RemoveStorageItem",
+					"group": "local-storage"
+				},
+				{
+					"name": "SetStorageItemObject",
+					"group": "local-storage"
+				},
+				{
+					"name": "SetStorageItemObjectList",
+					"group": "local-storage"
+				},
+				{
+					"name": "SetStorageItemString",
+					"group": "local-storage"
+				},
+				{
+					"name": "StorageItemExists",
+					"group": "local-storage"
+				},
+				{
+					"name": "GenerateUniqueID",
+					"group": "other"
+				},
+				{
+					"name": "GetGuid",
+					"group": "other"
+				},
+				{
+					"name": "GetObjectByGuid",
+					"group": "other"
+				},
+				{
+					"name": "GetPlatform",
+					"group": "other"
+				},
+				{
+					"name": "Wait",
+					"group": "other"
+				}
+			]
+		},
+		{
+			"version": "2.2.0",
+			"jsActions": [
+				{
+					"name": "FocusHelper",
+					"group": "."
+				},
+				{
+					"name": "FocusNext",
+					"group": "."
+				},
+				{
+					"name": "FocusPrevious",
+					"group": "."
+				},
+				{
+					"name": "ScrollTo",
+					"group": "."
+				},
+				{
+					"name": "SetFocus",
+					"group": "."
+				},
+				{
+					"name": "TakePicture",
+					"group": "."
+				}
+			]
+		}
 	]
 }

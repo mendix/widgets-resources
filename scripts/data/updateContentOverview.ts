@@ -2,8 +2,9 @@ import { resolve } from "path";
 import { promisify } from "util";
 import { exec } from "child_process";
 import { Analyzer } from "./lib/analyzer";
-import { WidgetPackage } from "./lib/widgetPackage";
 import { isDefined, writeFile } from "./lib/util";
+import { WidgetPackage } from "./lib/widgetPackage";
+import { JSActionPackage } from "./lib/jsActionPackage";
 
 const execAsync = promisify(exec);
 
@@ -16,9 +17,10 @@ main().catch(e => {
 
 async function main(): Promise<void> {
     const widgetSourceFiles: string[] = [];
-    const locations = await getLernaPackages(/(pluggable|custom)Widgets/);
+
+    const widgetLocations = await getLernaPackages(/(pluggable|custom)Widgets/);
     const widgetPackages = await Promise.all(
-        locations.map(packagePath =>
+        widgetLocations.map(packagePath =>
             WidgetPackage.load(packagePath, widget =>
                 widgetSourceFiles.push(...Object.values(widget.getConfig()).filter(isDefined))
             )
@@ -27,7 +29,13 @@ async function main(): Promise<void> {
 
     const analyzer = new Analyzer(widgetSourceFiles);
 
-    const output = { widgetPackages: widgetPackages.map(widgetPackage => widgetPackage.export(analyzer)) };
+    const jsActionLocation = await getLernaPackages(/jsActions/);
+    const jsActionPackages = await Promise.all(jsActionLocation.map(packagePath => JSActionPackage.load(packagePath)));
+
+    const output = {
+        widgetPackages: widgetPackages.map(widgetPackage => widgetPackage.export(analyzer)),
+        jsActionPackages: jsActionPackages.map(jsActionPackage => jsActionPackage.export())
+    };
 
     await writeFile(OUTPUT_PATH, JSON.stringify(output, null, "\t"));
 }

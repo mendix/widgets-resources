@@ -15,7 +15,7 @@ export class WidgetPackage {
     }
 
     static async load(packagePath: string, onWidgetLoad?: (widget: Widget) => void): Promise<WidgetPackage> {
-        const { widgetFileNames, ...packageXmlValues } = await WidgetXmlParser.forPackageXml().extractFromXml(
+        const { widgetFileNames, ...packageXmlValues } = await WidgetXmlParser.forPackageXml().extract(
             join(packagePath, "src", "package.xml"),
             {
                 name: xml => xml.package.clientModule["@_name"] as string,
@@ -25,15 +25,14 @@ export class WidgetPackage {
             }
         );
 
-        return new WidgetPackage({
-            ...packageXmlValues,
-            widgets: await Promise.all(
-                widgetFileNames.map(async widgetFileName => {
-                    const widget = await Widget.load(packagePath, widgetFileName);
-                    if (onWidgetLoad) onWidgetLoad(widget);
-                    return widget;
-                })
-            )
-        });
+        const widgets = await Promise.all(
+            widgetFileNames.map(async widgetFileName => {
+                const widget = await Widget.load(packagePath, widgetFileName);
+                if (onWidgetLoad) onWidgetLoad(widget);
+                return widget;
+            })
+        );
+
+        return new WidgetPackage({ ...packageXmlValues, widgets });
     }
 }

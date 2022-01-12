@@ -70,7 +70,7 @@ export class Widget {
     static async load(packagePath: string, widgetFileName: string): Promise<Widget> {
         const internalName = basename(widgetFileName, extname(widgetFileName));
 
-        const { supportedPlatform, ...widgetXmlValues } = await WidgetXmlParser.forWidgetXml().extractFromXml(
+        const { supportedPlatform, ...widgetXmlValues } = await WidgetXmlParser.forWidgetXml().extract(
             join(packagePath, "src", widgetFileName),
             {
                 id: xml => xml.widget["@_id"],

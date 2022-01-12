@@ -9,7 +9,7 @@ type Values<P extends Patterns> = {
 export class WidgetXmlParser {
     constructor(private parser: XMLParser) {}
 
-    async extractFromXml<P extends Patterns>(path: string, patterns: P): Promise<Values<P>> {
+    async extract<P extends Patterns>(path: string, patterns: P): Promise<Values<P>> {
         const xml = this.parser.parse(await readFile(path));
 
         return Object.entries(patterns).reduce<Values<P>>((result, [key, extractor]) => {
