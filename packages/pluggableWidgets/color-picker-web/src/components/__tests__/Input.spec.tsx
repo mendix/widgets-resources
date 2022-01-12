@@ -8,7 +8,8 @@ describe("Input", () => {
         shallow(createElement(Input, props, children));
     const inputProps: InputProps = {
         color: "#000000",
-        disabled: false
+        disabled: false,
+        children: null
     };
     const inputChildren = createElement("div", {}, createElement("button"));
 

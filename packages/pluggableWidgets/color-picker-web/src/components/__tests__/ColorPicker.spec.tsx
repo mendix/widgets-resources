@@ -11,11 +11,14 @@ describe("ColorPicker", () => {
     const colorPickerProps: ColorPickerProps = {
         color: "#000000",
         disabled: false,
-        displayColorPicker: false,
         defaultColors: [],
+        format: "hex",
         mode: "popover",
         type: "sketch",
-        onChange: jasmine.createSpy("onClick")
+        onChange: jasmine.createSpy("onClick"),
+        onChangeComplete: jasmine.createSpy("onClick"),
+        id: "color-picker",
+        name: "color picker"
     };
 
     it("renders the structure correctly", () => {
@@ -25,9 +28,7 @@ describe("ColorPicker", () => {
     });
 
     it("that is disabled renders with the structure", () => {
-        const colorPickerComponent = renderColorPicker(colorPickerProps);
-        colorPickerComponent.setProps({ displayColorPicker: true, disabled: true });
-
+        const colorPickerComponent = renderColorPicker({ ...colorPickerProps, disabled: true });
         expect(colorPickerComponent).toMatchSnapshot();
     });
 
@@ -42,106 +43,107 @@ describe("ColorPicker", () => {
     });
 
     it("should handle on change event", () => {
-        const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-        colorPickerComponent.setProps({ type: "block", mode: "inline" });
-
+        const colorPickerComponent = fullRenderColorPicker({
+            ...colorPickerProps,
+            type: "block",
+            mode: "inline",
+            defaultColors: [{ color: "#F47373" }]
+        });
         const colorElement = colorPickerComponent.find("[title='#F47373']");
         colorElement.simulate("click");
 
-        expect(colorPickerProps.onChange).toHaveBeenCalled();
+        expect(colorPickerProps.onChangeComplete).toHaveBeenCalled();
     });
 
     describe("renders a picker of type", () => {
         it("sketch", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "sketch" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".sketch-picker")).toHaveLength(1);
         });
 
         it("chrome", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "chrome", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "chrome" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".chrome-picker")).toHaveLength(1);
         });
 
         it("block", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "block", displayColorPicker: true });
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "block" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
 
             expect(colorPickerComponent.find(".block-picker")).toHaveLength(1);
         });
 
         it("github", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "github", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "github" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".github-picker")).toHaveLength(1);
         });
 
         it("twitter", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "twitter", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "twitter" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".twitter-picker")).toHaveLength(1);
         });
 
         it("circle", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "circle", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "circle" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".circle-picker")).toHaveLength(1);
         });
 
         it("hue", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "hue", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "hue" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".hue-picker")).toHaveLength(1);
         });
 
         it("slider", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "slider", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "slider" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".slider-picker")).toHaveLength(1);
         });
 
         it("compact", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "compact", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "compact" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".compact-picker")).toHaveLength(1);
         });
 
         it("material", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "material", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "material" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".material-picker")).toHaveLength(1);
         });
 
         it("swatches", () => {
-            const colorPickerComponent = fullRenderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ type: "swatches", displayColorPicker: true });
-
+            const colorPickerComponent = fullRenderColorPicker({ ...colorPickerProps, type: "swatches" });
+            const colorElement = colorPickerComponent.find("button");
+            colorElement.simulate("click");
             expect(colorPickerComponent.find(".swatches-picker")).toHaveLength(1);
         });
     });
 
     describe("with a mode as", () => {
         it("popover or input renders with the structure", () => {
-            const colorPickerComponent = renderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ displayColorPicker: true });
+            const colorPickerComponent = renderColorPicker({ ...colorPickerProps, mode: "popover" });
 
             expect(colorPickerComponent).toMatchSnapshot();
         });
 
         it("inline renders with the structure", () => {
-            const colorPickerComponent = renderColorPicker(colorPickerProps);
-            colorPickerComponent.setProps({ mode: "inline" });
-
+            const colorPickerComponent = renderColorPicker({ ...colorPickerProps, mode: "inline" });
             expect(colorPickerComponent).toMatchSnapshot();
         });
     });

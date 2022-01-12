@@ -1,5 +1,9 @@
 .widget-color-picker-picker {
     flex: 1;
+}
+
+.widget-color-picker {
+    flex: 1;
 
     [class*="-picker"] {
         font-family: inherit !important;
