@@ -7,7 +7,7 @@ describe("Screenshots of the pages for", () => {
     urls.forEach(url => {
         it(`matches snapshot for the page ${url}`, () => {
             cy.visit(url);
-            cy.wait(1000);
+            cy.wait(2000);
             cy.matchImageSnapshot(`baseline/${url}-${browserName}`);
         });
     });
