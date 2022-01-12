@@ -95,11 +95,11 @@
     "postcss-import": "^14.0.2",
     "postcss-url": "^10.1.0",
     "prettier": "^2.5.1",
-    "react": "~17.0.2",
-    "react-dom": "~17.0.2",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "react-hot-loader": "^4.13.0",
-    "react-native": "0.63.3",
-    "react-test-renderer": "~17.0.2",
+    "react-native": "0.64.2",
+    "react-test-renderer": "17.0.1",
     "recursive-copy": "^2.0.11",
     "resolve": "^1.19.0",
     "rollup": "~2.66.1",
@@ -140,13 +140,9 @@
     "test:scripts": "npm run prepare && node tests/commands.js"
   },
   "overrides": {
-    "colors": "1.4.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "colors": "1.4.0"
   },
   "resolutions": {
-    "colors": "1.4.0",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "colors": "1.4.0"
   }
 }
