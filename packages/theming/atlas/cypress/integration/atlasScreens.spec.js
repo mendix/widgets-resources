@@ -5,10 +5,10 @@ describe("Screenshots of the pages for", () => {
     const browserName = Cypress.browser.name;
 
     urls.forEach(url => {
-        it(`matches snapshot for the page ${url}`, () => {
+        it(`matches snapshot for the page ${url.replace("/p/", "")}`, () => {
             cy.visit(url);
             cy.wait(2000);
-            cy.matchImageSnapshot(`baseline/${url}-${browserName}`);
+            cy.matchImageSnapshot(`baseline/${url.replace("/p/", "")}-${browserName}`);
         });
     });
 });
