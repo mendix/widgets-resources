@@ -1,32 +1,32 @@
-import { device, by, element } from "detox";
-import { Alert, Widget, expectToMatchImageSnapshot, NativeHomePage } from "../../../../../tests/e2e";
+import { expectToMatchScreenshot, tapBottomBarItem, tapMenuItem } from "../../../../../detox/src/helpers";
+import { alert } from "../../../../../detox/src/Alert";
+import { expect } from "detox";
 
 describe("Slider", () => {
     beforeEach(async () => {
-        await NativeHomePage().goToWidgetsHomePage();
-        const button = Widget("btnRangeSlider").getElement();
-        await button.tap();
+        await tapBottomBarItem("Widgets");
+        await tapMenuItem("Range slider");
     });
 
     it("renders correct initial appearance", async () => {
-        await Widget("scrollContainerRangeSlider").getElement().scrollTo("bottom");
-        await expectToMatchImageSnapshot();
+        await element(by.id("scrollContainerRangeSlider")).scrollTo("bottom");
+        await expectToMatchScreenshot();
     });
 
     it("renders correctly after setting value", async () => {
-        const input = Widget("textBoxRangeSliderLower").getElement();
+        const input = element(by.id("textBoxRangeSliderLower"));
         await input.clearText();
         await input.typeText("5\n");
 
-        await Widget("scrollContainerRangeSlider").getElement().scrollTo("bottom");
-        await expectToMatchImageSnapshot();
+        await element(by.id("scrollContainerRangeSlider")).scrollTo("bottom");
+        await expectToMatchScreenshot();
     });
 
     it("should trigger an action after adjusting slider", async () => {
-        await Widget("scrollContainerRangeSlider").getElement().scrollTo("bottom");
+        await element(by.id("scrollContainerRangeSlider")).scrollTo("bottom");
         await element(by.id("rangeSliderOnChange$leftMarker")).swipe("left", "fast", 1);
-        Alert().getMessage("Lower: 2\nUpper: 75");
-        await Alert().confirm();
+        await expect(alert.messageElement).toHaveText("Lower: 2\nUpper: 75");
+        await alert.confirm();
     });
 
     afterAll(async () => {

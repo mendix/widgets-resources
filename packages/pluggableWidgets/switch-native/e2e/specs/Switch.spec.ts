@@ -1,28 +1,23 @@
-import { expect, device, waitFor, element, by } from "detox";
-import { Widget, expectToMatchImageSnapshot, Alert } from "../../../../../tests/e2e";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { alert } from "../../../../../detox/src/Alert";
 
 describe("Switch", () => {
     beforeAll(async () => {
-        await waitFor(element(by.id("SwitchWidgetHome")))
-            .toBeVisible()
-            .whileElement(by.id("scrollContainer1"))
-            .scroll(200, "down");
-
-        await Widget("SwitchWidgetHome").getElement().tap();
+        await tapMenuItem("Switch");
     });
 
     it("renders correctly when false", async () => {
-        await expectToMatchImageSnapshot();
+        await expectToMatchScreenshot();
     });
 
     it("renders correctly when true", async () => {
-        await Widget("switch1").getElement().tap();
-        await expectToMatchImageSnapshot();
+        await element(by.id("switch1")).tap();
+        await expectToMatchScreenshot();
     });
 
     it("triggers configured event", async () => {
-        await Widget("switch2").getElement().tap();
-        await expect(Alert().getMessage("Action has been triggered!")).toBeVisible();
+        await element(by.id("switch2")).tap();
+        expect(await alert.getMessage()).toEqual("Action has been triggered!");
     });
 
     // todo: NC-546 follow appdev convention, by using detox/jest setup and reload the device after each test.

@@ -1,31 +1,31 @@
-import { device, by, element } from "detox";
-import { Alert, Widget, expectToMatchImageSnapshot, NativeHomePage } from "../../../../../tests/e2e";
+import { expectToMatchScreenshot, tapBottomBarItem, tapMenuItem } from "../../../../../detox/src/helpers";
+import { alert } from "../../../../../detox/src/Alert";
+import { expect } from "detox";
 
 describe("Slider", () => {
     beforeEach(async () => {
-        await NativeHomePage().goToWidgetsHomePage();
-        const button = Widget("btnSlider").getElement();
-        await button.tap();
+        await tapBottomBarItem("Widgets");
+        await tapMenuItem("Slider");
     });
 
     it("renders correct initial appearance", async () => {
-        await Widget("scrollContainerSlider").getElement().scrollTo("bottom");
-        await expectToMatchImageSnapshot();
+        await element(by.id("scrollContainerSlider")).scrollTo("bottom");
+        await expectToMatchScreenshot();
     });
 
     it("renders correctly after setting value", async () => {
-        const input = Widget("textBoxSliderMin").getElement();
+        const input = element(by.id("textBoxSliderMin"));
         await input.clearText();
         await input.typeText("100\n");
 
-        await Widget("scrollContainerSlider").getElement().scrollTo("bottom");
-        await expectToMatchImageSnapshot();
+        await element(by.id("scrollContainerSlider")).scrollTo("bottom");
+        await expectToMatchScreenshot();
     });
 
     it("should trigger an action after adjusting slider", async () => {
         await element(by.id("sliderOnChange$marker")).swipe("right", "fast", 1);
-        Alert().getMessage("Value changed: 100");
-        await Alert().confirm();
+        await expect(alert.messageElement).toHaveText("Value changed: 100");
+        await alert.confirm();
     });
 
     afterAll(async () => {
