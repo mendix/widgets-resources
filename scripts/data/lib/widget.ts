@@ -27,6 +27,7 @@ export class Widget {
             id: string;
             name: string;
             description: string;
+            docsUrl: string;
             studioCategory: string;
             studioProCategory: string;
             isPluginWidget: boolean;
@@ -42,8 +43,8 @@ export class Widget {
 
         return {
             ...other,
-            hasStructurePreview: this.hasStructurePreview(analyzer),
-            hasDesignPreview: this.hasDesignPreview(analyzer),
+            hasStructureModePreview: this.hasStructureModePreview(analyzer),
+            hasDesignModePreview: this.hasDesignModePreview(analyzer),
             hasAllTileIcons: this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
             hasAllDarkIcons:
                 this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined
@@ -54,13 +55,13 @@ export class Widget {
         return this.properties.config;
     }
 
-    private hasStructurePreview(analyzer: Analyzer): boolean {
+    private hasStructureModePreview(analyzer: Analyzer): boolean {
         return this.properties.config.editorConfig
             ? analyzer.moduleExports(this.properties.config.editorConfig, "getPreview")
             : false;
     }
 
-    private hasDesignPreview(analyzer: Analyzer): boolean {
+    private hasDesignModePreview(analyzer: Analyzer): boolean {
         return this.properties.config.editorPreview
             ? analyzer.moduleExports(this.properties.config.editorPreview, "preview")
             : false;
@@ -75,6 +76,7 @@ export class Widget {
                 id: xml => xml.widget["@_id"],
                 name: xml => xml.widget.name,
                 description: xml => xml.widget.description,
+                docsUrl: xml => xml.widget.helpUrl,
                 studioCategory: xml => xml.widget.studioCategory,
                 studioProCategory: xml => xml.widget.studioProCategory,
                 isPluginWidget: xml => xml.widget["@_pluginWidget"] === "true",
