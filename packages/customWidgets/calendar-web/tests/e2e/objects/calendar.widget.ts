@@ -7,39 +7,39 @@ class Calendar {
         this.name = name;
     }
 
-    get element(): WebdriverIO.Element {
+    getElement(): Promise<WebdriverIO.Element> {
         return page.getWidget(this.name);
     }
 
-    get monthView(): WebdriverIO.Element {
+    getMonthView(): Promise<WebdriverIO.Element> {
         return $(`.mx-name-${this.name} .rbc-month-view`);
     }
-    get label(): WebdriverIO.Element {
+    getLabel(): Promise<WebdriverIO.Element> {
         return $(`.mx-name-${this.name} .calendar-label`);
     }
 
-    get dayViewButton(): WebdriverIO.Element {
-        return this.element.$(".btn.btn-default.toolbar-btn-day");
+    async getDayViewButton(): Promise<WebdriverIO.Element> {
+        return (await this.getElement()).$(".btn.btn-default.toolbar-btn-day");
     }
 
-    get weekViewButton(): WebdriverIO.Element {
-        return this.element.$(".btn.btn-default.toolbar-btn-week");
+    async getWeekViewButton(): Promise<WebdriverIO.Element> {
+        return (await this.getElement()).$(".btn.btn-default.toolbar-btn-week");
     }
 
-    get daysDisplayed(): number {
-        return this.element.$$(".rbc-header").length;
+    async getDaysDisplayed(): Promise<number> {
+        return (await (await this.getElement()).$$(".rbc-header")).length;
     }
 
-    get event(): WebdriverIO.Element {
+    getEvent(): Promise<WebdriverIO.Element> {
         return $(`.mx-name-${this.name} .rbc-event-content`);
     }
 
-    static get errorAlert(): WebdriverIO.Element {
-        return $(".alert.alert-danger.widget-calendar-alert");
+    getCalendarSlot(): Promise<WebdriverIO.Element> {
+        return $(`.mx-name-${this.name} .rbc-day-bg`);
     }
 
-    get calendarSlot(): WebdriverIO.Element {
-        return $(`.mx-name-${this.name} .rbc-day-bg`);
+    static getErrorAlert(): Promise<WebdriverIO.Element> {
+        return $(".alert.alert-danger.widget-calendar-alert");
     }
 }
 

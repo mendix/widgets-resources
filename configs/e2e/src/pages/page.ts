@@ -1,59 +1,59 @@
 class Page {
-    get url(): string {
+    get url(): Promise<string> {
         return browser.getUrl();
     }
 
-    open(url = ""): void {
-        browser.url("/" + url);
+    async open(url = ""): Promise<void> {
+        await browser.url("/" + url);
     }
 
-    getElement(selector: string, parent?: WebdriverIO.Element): WebdriverIO.Element {
+    getElement(selector: string, parent?: WebdriverIO.Element): Promise<WebdriverIO.Element> {
         return parent ? parent.$(selector) : $(selector);
     }
 
-    getElements(selector: string, parent?: WebdriverIO.Element): WebdriverIO.ElementArray {
+    getElements(selector: string, parent?: WebdriverIO.Element): Promise<WebdriverIO.ElementArray> {
         return parent ? parent.$$(selector) : $$(selector);
     }
 
-    existing(selector: string): boolean {
-        return this.getElement(selector).isExisting();
+    async existing(selector: string): Promise<boolean> {
+        return (await this.getElement(selector)).isExisting();
     }
 
-    waitForElement(selector: string, parent?: WebdriverIO.Element): WebdriverIO.Element {
-        const element = this.getElement(selector, parent);
-        element.waitForDisplayed();
+    async waitForElement(selector: string, parent?: WebdriverIO.Element): Promise<WebdriverIO.Element> {
+        const element = await this.getElement(selector, parent);
+        await element.waitForDisplayed();
         return element;
     }
 
-    waitForElements(selector: string, parent?: WebdriverIO.Element): WebdriverIO.Element[] {
-        this.getElement(selector, parent).waitForDisplayed();
+    async waitForElements(selector: string, parent?: WebdriverIO.Element): Promise<WebdriverIO.Element[]> {
+        await (await this.getElement(selector, parent)).waitForDisplayed();
         return this.getElements(selector, parent);
     }
 
-    getWidget(widgetName: string): WebdriverIO.Element {
+    getWidget(widgetName: string): Promise<WebdriverIO.Element> {
         return this.waitForElement(`.mx-name-${widgetName}`);
     }
 
-    getWidgets(widgetName: string): WebdriverIO.Element[] {
+    getWidgets(widgetName: string): Promise<WebdriverIO.Element[]> {
         return this.waitForElements(`.mx-name-${widgetName}`);
     }
 
-    headerElement(pageTitle = "pageTitle1"): WebdriverIO.Element {
-        const title = this.getWidget(pageTitle);
-        title.waitForDisplayed();
+    async headerElement(pageTitle = "pageTitle1"): Promise<WebdriverIO.Element> {
+        const title = await this.getWidget(pageTitle);
+        await title.waitForDisplayed();
         return title;
     }
 
-    header(pageTitle = "pageTitle1"): string {
-        return this.headerElement(pageTitle).getText();
+    async header(pageTitle = "pageTitle1"): Promise<string> {
+        return (await this.headerElement(pageTitle)).getText();
     }
 
-    get modalDialog(): WebdriverIO.Element {
+    get modalDialog(): Promise<WebdriverIO.Element> {
         return $(".modal-dialog");
     }
 
-    get modalDialogHeader(): WebdriverIO.Element {
-        return this.modalDialog.$("#mxui_widget_Window_0_caption");
+    async getModalDialogHeader(): Promise<WebdriverIO.Element> {
+        return (await this.modalDialog).$("#mxui_widget_Window_0_caption");
     }
 }
 

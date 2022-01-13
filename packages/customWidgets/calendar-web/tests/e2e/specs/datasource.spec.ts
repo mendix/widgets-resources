@@ -2,47 +2,47 @@ import page from "../../../../../../configs/e2e/src/pages/page";
 import Calendar from "../objects/calendar.widget";
 
 describe("Calendar", () => {
-    it("should render with a context datasource", () => {
-        page.open("p/datasourceContext");
+    it("should render with a context datasource", async () => {
+        await page.open("p/datasourceContext");
 
         const calendar = new Calendar("calendar1");
 
-        calendar.element.waitForExist();
-        calendar.monthView.waitForExist();
+        await (await calendar.getElement()).waitForExist();
+        await (await calendar.getMonthView()).waitForExist();
 
-        expect(calendar.monthView.isExisting).toBeTruthy();
+        expect(await (await calendar.getMonthView()).isExisting).toBeTruthy();
     });
 
-    it("should render with a xpath datasource", () => {
-        page.open();
+    it("should render with a xpath datasource", async () => {
+        await page.open();
 
         const calendar = new Calendar("calendar1");
 
-        calendar.element.waitForExist();
-        calendar.monthView.waitForExist();
+        await (await calendar.getElement()).waitForExist();
+        await (await calendar.getMonthView()).waitForExist();
 
-        expect(calendar.monthView.isExisting).toBeTruthy();
+        expect(await (await calendar.getMonthView()).isExisting).toBeTruthy();
     });
 
-    it("should render with a microflow datasource", () => {
-        page.open("p/datasourceMicroflow");
+    it("should render with a microflow datasource", async () => {
+        await page.open("p/datasourceMicroflow");
 
         const calendar = new Calendar("calendar1");
 
-        calendar.element.waitForExist();
-        calendar.monthView.waitForExist();
+        await (await calendar.getElement()).waitForExist();
+        await (await calendar.getMonthView()).waitForExist();
 
-        expect(calendar.monthView.isExisting).toBeTruthy();
+        expect(await (await calendar.getMonthView()).isExisting).toBeTruthy();
     });
 
-    it("should render with a nanoflow datasource", () => {
-        page.open("p/datasourceNanoflow");
+    it("should render with a nanoflow datasource", async () => {
+        await page.open("p/datasourceNanoflow");
 
         const calendar = new Calendar("calendar1");
 
-        calendar.element.waitForExist();
-        calendar.monthView.waitForExist();
+        await (await calendar.getElement()).waitForExist();
+        await (await calendar.getMonthView()).waitForExist();
 
-        expect(calendar.monthView.isExisting).toBeTruthy();
+        expect(await (await calendar.getMonthView()).isExisting).toBeTruthy();
     });
 });
