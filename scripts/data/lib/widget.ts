@@ -97,10 +97,10 @@ export class Widget {
                 editorPreview: await firstWithGlob(`${packagePath}/src/${internalName}.editorPreview.{js,jsx,ts,tsx}`)
             },
             icons: {
-                icon: await firstWithGlob(`${packagePath}/src/${internalName}.icon.{jpg,jpeg,png}`),
-                iconDark: await firstWithGlob(`${packagePath}/src/${internalName}.icon.dark.{jpg,jpeg,png}`),
-                tile: await firstWithGlob(`${packagePath}/src/${internalName}.tile.{jpg,jpeg,png}`),
-                tileDark: await firstWithGlob(`${packagePath}/src/${internalName}.tile.dark.{jpg,jpeg,png}`)
+                icon: await firstWithGlob(`${packagePath}/src/${internalName}.icon.png`),
+                iconDark: await firstWithGlob(`${packagePath}/src/${internalName}.icon.dark.png`),
+                tile: await firstWithGlob(`${packagePath}/src/${internalName}.tile.png`),
+                tileDark: await firstWithGlob(`${packagePath}/src/${internalName}.tile.dark.png`)
             }
         });
     }
