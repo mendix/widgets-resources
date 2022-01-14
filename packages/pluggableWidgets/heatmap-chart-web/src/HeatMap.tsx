@@ -1,8 +1,11 @@
 import classNames from "classnames";
-import { createElement, ReactElement } from "react";
+import { createElement, ReactElement, useMemo } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { HeatMapContainerProps } from "../typings/HeatMapProps";
 import { useHeatMapDataSeries } from "./hooks/data";
+import { createHeatMapAnnotation } from "./utils/annotation";
+
+type HeatMapAnnotation = ReturnType<typeof createHeatMapAnnotation>;
 
 const heatmapChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     font: {
@@ -54,11 +57,35 @@ export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
         seriesName: props.seriesName,
         seriesValueAttribute: props.seriesValueAttribute,
         showScale: props.showScale,
+        smoothColor: props.smoothColor,
         tooltipHoverText: props.tooltipHoverText,
         verticalAxisAttribute: props.verticalAxisAttribute,
         verticalSortAttribute: props.verticalSortAttribute,
         verticalSortOrder: props.verticalSortOrder
     });
+
+    const heatmapChartLayout = useMemo<ChartWidgetProps["layoutOptions"]>(
+        () => ({
+            ...heatmapChartLayoutOptions,
+            annotations: props.showValues
+                ? heatmapChartData[0].z.reduce<HeatMapAnnotation[]>(
+                      (prev, curr, yIndex) => [
+                          ...prev,
+                          ...curr.map((value, xIndex) =>
+                              createHeatMapAnnotation(
+                                  heatmapChartData[0].x[xIndex],
+                                  heatmapChartData[0].y[yIndex],
+                                  value?.toLocaleString(),
+                                  props.valuesColor
+                              )
+                          )
+                      ],
+                      []
+                  )
+                : []
+        }),
+        [heatmapChartData, props.showValues, props.valuesColor]
+    );
 
     return (
         <ChartWidget
@@ -76,7 +103,7 @@ export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
             showSidebarEditor={props.developerMode === "developer"}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
-            layoutOptions={heatmapChartLayoutOptions}
+            layoutOptions={heatmapChartLayout}
             configOptions={heatmapChartConfigOptions}
             seriesOptions={heatmapChartSeriesOptions}
             enableThemeConfig={props.enableThemeConfig}

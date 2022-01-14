@@ -2,7 +2,7 @@ import { ValueStatus } from "mendix";
 import { useEffect, useMemo, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import { HeatMapContainerProps } from "../../typings/HeatMapProps";
-import { ChartProps } from "@mendix/shared-charts/dist/components/Chart";
+import { ChartWidgetProps } from "@mendix/shared-charts";
 import { executeAction, valueAttributeCompareFn } from "@mendix/piw-utils-internal";
 import Big from "big.js";
 
@@ -18,6 +18,7 @@ type HeatMapDataSeriesHooks = Pick<
     | "seriesName"
     | "seriesValueAttribute"
     | "showScale"
+    | "smoothColor"
     | "tooltipHoverText"
     | "verticalAxisAttribute"
     | "verticalSortAttribute"
@@ -44,6 +45,14 @@ function invertCompareValue(compareValue: number): number {
     return 0 - compareValue;
 }
 
+type HeatMapHookData = Array<
+    ChartWidgetProps["data"][number] & {
+        x: Array<string | undefined>;
+        y: Array<string | undefined>;
+        z: Array<Array<number | null>>;
+    }
+>;
+
 export const useHeatMapDataSeries = ({
     customSeriesOptions,
     horizontalAxisAttribute,
@@ -55,11 +64,12 @@ export const useHeatMapDataSeries = ({
     seriesName,
     seriesValueAttribute,
     showScale,
+    smoothColor,
     tooltipHoverText,
     verticalAxisAttribute,
     verticalSortAttribute,
     verticalSortOrder
-}: HeatMapDataSeriesHooks): ChartProps["data"] => {
+}: HeatMapDataSeriesHooks): HeatMapHookData => {
     const [heatmapChartData, setHeatMapData] = useState<LocalHeatMapData[]>([]);
 
     useEffect(() => {
@@ -88,7 +98,7 @@ export const useHeatMapDataSeries = ({
 
     const onClick = useMemo(() => (onClickAction ? () => executeAction(onClickAction) : undefined), [onClickAction]);
 
-    return useMemo<ChartProps["data"]>(() => {
+    return useMemo<HeatMapHookData>(() => {
         // `Array.reverse` mutates, so we make a copy.
         const copiedData = [...heatmapChartData];
 
@@ -138,7 +148,8 @@ export const useHeatMapDataSeries = ({
                 showscale: showScale,
                 x: horizontalValues.map(value => value?.toLocaleString()),
                 y: verticalValues.map(value => value?.toLocaleString()),
-                z: heatmapValues
+                z: heatmapValues,
+                zsmooth: smoothColor ? "best" : false
             }
         ];
     }, [
@@ -149,6 +160,7 @@ export const useHeatMapDataSeries = ({
         onClick,
         scaleColors,
         showScale,
+        smoothColor,
         verticalSortAttribute,
         verticalSortOrder
     ]);

@@ -47,6 +47,9 @@ export interface HeatMapContainerProps {
     seriesValueAttribute: ListAttributeValue<Big>;
     scaleColors: ScaleColorsType[];
     showScale: boolean;
+    smoothColor: boolean;
+    showValues: boolean;
+    valuesColor: string;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
@@ -79,6 +82,9 @@ export interface HeatMapPreviewProps {
     seriesValueAttribute: string;
     scaleColors: ScaleColorsPreviewType[];
     showScale: boolean;
+    smoothColor: boolean;
+    showValues: boolean;
+    valuesColor: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;

@@ -39,6 +39,9 @@ describe("The HeatMap widget", () => {
                 showScale
                 horizontalSortOrder="asc"
                 verticalSortOrder="asc"
+                smoothColor={false}
+                showValues={false}
+                valuesColor=""
                 {...setupBasicAttributes()}
                 {...props}
             />
