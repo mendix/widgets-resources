@@ -3,12 +3,12 @@ import { Widget, expectToMatchImageSnapshot, Alert } from "../../../../../tests/
 
 describe("Radio Buttons", () => {
     beforeAll(async () => {
-        await waitFor(element(by.id("RadioButtonsBtn")))
+        await waitFor(element(by.id("btnRadioButtons")))
             .toBeVisible()
             .whileElement(by.id("scrollContainer1"))
             .scroll(200, "down");
 
-        await Widget("RadioButtonsBtn").getElement().tap();
+        await Widget("btnRadioButtons").getElement().tap();
     });
 
     it("renders correct initial appearance", async () => {
