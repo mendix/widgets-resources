@@ -1,41 +1,36 @@
 {
-    "name": "radio-buttons-native",
-    "widgetName": "RadioButtons",
-    "version": "1.0.0",
-    "description": "My widget description",
-    "copyright": "2020 Mendix Technology BV",
-    "author": "Ahmed",
-    "engines": {
-        "node": ">=12"
-    },
-    "config": {},
-    "packagePath": "com.mendix.widget.native",
-    "scripts": {
-        "start": "pluggable-widgets-tools start:native",
-        "build": "pluggable-widgets-tools build:native",
-        "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
-        "lint:fix": "pluggable-widgets-tools lint:fix",
-        "prerelease": "npm run lint",
-        "release": "pluggable-widgets-tools release:native",
-        "test": "pluggable-widgets-tools test:unit:native",
-        "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
-        "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
-        "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
-        "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
-        "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
-        "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp"
-    },
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/Ahmed/radio-buttons-native/issues"
-    },
-    "devDependencies": {
-        "@mendix/pluggable-widgets-tools": ">=8.9.2",
-        "eslint": "^7.20.0",
-        "detox": "^19.2.0"
-    },
-    "dependencies": {
-        "@mendix/piw-native-utils-internal": "^1.0.0",
-        "@mendix/piw-utils-internal": "^1.0.0"
-    }
+  "name": "radio-buttons-native",
+  "widgetName": "RadioButtons",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "config": {},
+  "packagePath": "com.mendix.widget.native",
+  "scripts": {
+    "start": "pluggable-widgets-tools start:native",
+    "build": "pluggable-widgets-tools build:native",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "lint:fix": "pluggable-widgets-tools lint:fix",
+    "prerelease": "npm run lint",
+    "release": "pluggable-widgets-tools release:native",
+    "test": "pluggable-widgets-tools test:unit:native",
+    "test:e2e:local:android": "detox test --configuration android.emulator.developerapp",
+    "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
+    "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
+    "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
+    "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp"
+  },
+  "dependencies": {
+    "@mendix/piw-native-utils-internal": "^1.0.0",
+    "@mendix/piw-utils-internal": "^1.0.0"
+  },
+  "devDependencies": {
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "eslint": "^7.20.0",
+    "detox": "^19.2.0"
+  }
 }
