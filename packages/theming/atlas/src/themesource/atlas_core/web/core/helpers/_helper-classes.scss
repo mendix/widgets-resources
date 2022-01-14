@@ -145,25 +145,6 @@
         justify-content: flex-end #{$important-helpers-value};
     }
 
-    .row-space-around {
-        display: flex #{$important-helpers-value};
-        align-items: center #{$important-helpers-value};
-        flex-flow: row #{$important-helpers-value};
-        justify-content: space-around #{$important-helpers-value};
-    }
-    .row-space-between {
-        display: flex #{$important-helpers-value};
-        align-items: center #{$important-helpers-value};
-        flex-flow: row #{$important-helpers-value};
-        justify-content: space-between #{$important-helpers-value};
-    }
-    .row-space-evenly {
-        display: flex #{$important-helpers-value};
-        align-items: center #{$important-helpers-value};
-        flex-flow: row #{$important-helpers-value};
-        justify-content: space-evenly #{$important-helpers-value};
-    }
-
     .col-left {
         display: flex #{$important-helpers-value};
         align-items: flex-start #{$important-helpers-value};

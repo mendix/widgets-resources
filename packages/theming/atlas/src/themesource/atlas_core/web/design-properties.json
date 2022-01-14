@@ -232,18 +232,6 @@
                     "class": "row-right"
                 },
                 {
-                    "name": "Space-around align as a row",
-                    "class": "row-space-around"
-                },
-                {
-                    "name": "Space-between align as a row",
-                    "class": "row-space-between"
-                },
-                {
-                    "name": "Space-evenly align as a row",
-                    "class": "row-space-evenly"
-                },
-                {
                     "name": "Left align as a column",
                     "oldNames": ["Left align as column"],
                     "class": "col-left"
