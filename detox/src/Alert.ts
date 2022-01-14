@@ -1,33 +1,46 @@
-class Alert {
-    private typeMatcher: Detox.NativeMatcher;
-    private messageMatcher: Detox.NativeMatcher;
-    private okButtonMatcher: Detox.NativeMatcher;
+import { by, element, device } from "detox";
 
-    constructor() {
-        let rootMatcher: Detox.NativeMatcher;
-        if (device.getPlatform() === "ios") {
-            rootMatcher = by.type("_UIAlertControllerView");
-            this.typeMatcher = rootMatcher.withDescendant(by.type(""));
-            this.messageMatcher = rootMatcher.withDescendant(by.type(""));
-        } else {
-            rootMatcher = by.type("com.android.internal.widget.AlertDialogLayout");
-            this.typeMatcher = rootMatcher.withDescendant(by.type("com.android.internal.widget.DialogTitle"));
-            this.messageMatcher = rootMatcher.withDescendant(by.type("com.android.internal.widget.AppCompatTextView"));
+export function Alert() {
+    const iosRootMatcher = by.type("_UIAlertControllerView");
+    const androidRootMatcher = by.type("com.android.internal.widget.AlertDialogLayout");
+    const iosTextMatcher = by
+        .type("UILabel")
+        .withAncestor(by.type("_UIInterfaceActionGroupHeaderScrollView"))
+        .withAncestor(iosRootMatcher);
+    const iosOkButton = by
+        .text("OK")
+        .withAncestor(by.type("_UIAlertControllerActionView"))
+        .withAncestor(iosRootMatcher);
+    const androidTitleMatcher = by.type("com.android.internal.widget.DialogTitle").withAncestor(androidRootMatcher);
+    const androidTextMatcher = by.type("androidx.appcompat.widget.AppCompatTextView").withAncestor(androidRootMatcher);
+    const androidOkButton = by
+        .text("OK")
+        .withAncestor(by.type("com.android.internal.widget.ButtonBarLayout"))
+        .withAncestor(androidRootMatcher);
+
+    return {
+        get typeElement(): Detox.NativeElement {
+            if (device.getPlatform() === "ios") {
+                return element(iosTextMatcher).atIndex(0);
+            } else {
+                return element(androidTitleMatcher).atIndex(0);
+            }
+        },
+
+        get messageElement(): Detox.NativeElement {
+            if (device.getPlatform() === "ios") {
+                return element(iosTextMatcher).atIndex(1);
+            } else {
+                return element(androidTextMatcher).atIndex(0);
+            }
+        },
+
+        async confirm(): Promise<void> {
+            if (device.getPlatform() === "ios") {
+                await element(iosOkButton).atIndex(0).tap();
+            } else {
+                await element(androidOkButton).atIndex(0).tap();
+            }
         }
-        this.okButtonMatcher = rootMatcher.withDescendant(by.text("OK"));
-    }
-
-    get typeElement(): Detox.IndexableNativeElement {
-        return element(this.typeMatcher);
-    }
-
-    get messageElement(): Detox.IndexableNativeElement {
-        return element(this.messageMatcher);
-    }
-
-    async confirm(): Promise<void> {
-        await element(this.okButtonMatcher).tap();
-    }
+    };
 }
-
-export const alert = new Alert();

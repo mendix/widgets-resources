@@ -1,6 +1,6 @@
+import { expect, by, element, device } from "detox";
 import { expectToMatchScreenshot, tapBottomBarItem, tapMenuItem } from "../../../../../detox/src/helpers";
-import { alert } from "../../../../../detox/src/Alert";
-import { expect } from "detox";
+import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Slider", () => {
     beforeEach(async () => {
@@ -24,8 +24,8 @@ describe("Slider", () => {
 
     it("should trigger an action after adjusting slider", async () => {
         await element(by.id("sliderOnChange$marker")).swipe("right", "fast", 1);
-        await expect(alert.messageElement).toHaveText("Value changed: 100");
-        await alert.confirm();
+        await expect(Alert().messageElement).toHaveText("Value changed: 100");
+        await Alert().confirm();
     });
 
     afterAll(async () => {

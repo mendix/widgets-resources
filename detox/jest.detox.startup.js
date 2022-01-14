@@ -40,7 +40,7 @@ expect.extend({
 });
 
 beforeAll(async () => {
-    await init(config, { initGlobals: true, launchApp: false });
+    await init(config, { initGlobals: false, launchApp: false });
 
     await device.launchApp({
         newInstance: true,

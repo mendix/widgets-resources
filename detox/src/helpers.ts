@@ -1,6 +1,9 @@
+import { by, element, device, waitFor } from "detox";
 import { readFileSync } from "fs";
 
-export async function expectToMatchScreenshot(element?: Detox.IndexableNativeElement): Promise<void> {
+export async function expectToMatchScreenshot(
+    element?: Detox.IndexableNativeElement | Detox.NativeElement
+): Promise<void> {
     let screenshotPath: string;
     if (element) {
         screenshotPath = await element.takeScreenshot("screenshot");
