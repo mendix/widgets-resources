@@ -2,6 +2,8 @@ import { join } from "path";
 import { Widget } from "./widget";
 import { Analyzer } from "./analyzer";
 import { WidgetXmlParser } from "./widgetXmlParser";
+import { XMLParser } from "fast-xml-parser";
+import { z } from "zod";
 
 export class WidgetPackage {
     constructor(private properties: { name: string; version: string; widgets: Widget[] }) {}
@@ -15,13 +17,12 @@ export class WidgetPackage {
     }
 
     static async load(packagePath: string, onWidgetLoad?: (widget: Widget) => void): Promise<WidgetPackage> {
-        const { widgetFileNames, ...packageXmlValues } = await WidgetXmlParser.forPackageXml().extract(
+        const { widgetFileNames, ...packageXmlValues } = await WidgetPackage.createPackageXmlParser().extract(
             join(packagePath, "src", "package.xml"),
             {
-                name: xml => xml.package.clientModule["@_name"] as string,
-                version: xml => xml.package.clientModule["@_version"] as string,
-                widgetFileNames: xml =>
-                    xml.package.clientModule.widgetFiles.widgetFile.map(x => x["@_path"]) as string[]
+                name: xml => xml.package.clientModule["@_name"],
+                version: xml => xml.package.clientModule["@_version"],
+                widgetFileNames: xml => xml.package.clientModule.widgetFiles.widgetFile.map(x => x["@_path"])
             }
         );
 
@@ -34,5 +35,30 @@ export class WidgetPackage {
         );
 
         return new WidgetPackage({ ...packageXmlValues, widgets });
+    }
+
+    private static createPackageXmlParser() {
+        const alwaysArray = ["package.clientModule.widgetFiles.widgetFile"];
+        return new WidgetXmlParser(
+            new XMLParser({
+                ignoreAttributes: false,
+                isArray: (_, jPath) => alwaysArray.indexOf(jPath) !== -1
+            }),
+            z.object({
+                package: z.object({
+                    clientModule: z.object({
+                        "@_name": z.string(),
+                        "@_version": z.string(),
+                        widgetFiles: z.object({
+                            widgetFile: z.array(
+                                z.object({
+                                    "@_path": z.string()
+                                })
+                            )
+                        })
+                    })
+                })
+            })
+        );
     }
 }

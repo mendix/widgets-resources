@@ -1519,7 +1519,7 @@
 	],
 	"jsActionPackages": [
 		{
-			"name": "Native Mobile Resources",
+			"name": "mobile-resources-native",
 			"version": "3.3.1",
 			"jsActions": [
 				{
@@ -1633,6 +1633,7 @@
 			]
 		},
 		{
+			"name": "nanoflow-actions-hybrid",
 			"version": "1.0.0",
 			"jsActions": [
 				{
@@ -1734,7 +1735,7 @@
 			]
 		},
 		{
-			"name": "Nanoflow Commons",
+			"name": "nanoflow-actions-native",
 			"version": "2.1.2",
 			"jsActions": [
 				{
@@ -1872,6 +1873,7 @@
 			]
 		},
 		{
+			"name": "nanoflow-actions-web",
 			"version": "2.2.0",
 			"jsActions": [
 				{

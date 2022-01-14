@@ -2,6 +2,8 @@ import { basename, extname, join } from "path";
 import { Analyzer } from "./analyzer";
 import { WidgetXmlParser } from "./widgetXmlParser";
 import { firstWithGlob, isEnumValue } from "./util";
+import { XMLParser } from "fast-xml-parser";
+import { z } from "zod";
 
 enum SupportedPlatform {
     WEB = "web",
@@ -70,7 +72,7 @@ export class Widget {
     static async load(packagePath: string, widgetFileName: string): Promise<Widget> {
         const internalName = basename(widgetFileName, extname(widgetFileName));
 
-        const { supportedPlatform, ...widgetXmlValues } = await WidgetXmlParser.forWidgetXml().extract(
+        const { supportedPlatform, ...widgetXmlValues } = await Widget.createWidgetXmlParser().extract(
             join(packagePath, "src", widgetFileName),
             {
                 id: xml => xml.widget["@_id"],
@@ -79,9 +81,9 @@ export class Widget {
                 docsUrl: xml => xml.widget.helpUrl,
                 studioCategory: xml => xml.widget.studioCategory,
                 studioProCategory: xml => xml.widget.studioProCategory,
-                isPluginWidget: xml => xml.widget["@_pluginWidget"] === "true",
-                offlineCapable: xml => xml.widget["@_offlineCapable"] === "true",
-                supportedPlatform: xml => xml.widget["@_supportedPlatform"]?.toLowerCase() ?? "web"
+                isPluginWidget: xml => xml.widget["@_pluginWidget"] ?? false,
+                offlineCapable: xml => xml.widget["@_offlineCapable"] ?? false,
+                supportedPlatform: xml => xml.widget["@_supportedPlatform"] ?? "web"
             }
         );
 
@@ -103,6 +105,36 @@ export class Widget {
                 tileDark: await firstWithGlob(`${packagePath}/src/${internalName}.tile.dark.png`)
             }
         });
+    }
+
+    private static createWidgetXmlParser() {
+        return new WidgetXmlParser(
+            new XMLParser({
+                ignoreAttributes: false
+            }),
+            z.object({
+                widget: z.object({
+                    "@_id": z.string(),
+                    name: z.string(),
+                    description: z.string(),
+                    helpUrl: z.string().optional(),
+                    studioCategory: z.string().optional(),
+                    studioProCategory: z.string().optional(),
+                    "@_pluginWidget": z
+                        .string()
+                        .transform(value => value === "true")
+                        .optional(),
+                    "@_offlineCapable": z
+                        .string()
+                        .transform(value => value === "true")
+                        .optional(),
+                    "@_supportedPlatform": z
+                        .string()
+                        .transform(value => value.toLowerCase())
+                        .optional()
+                })
+            })
+        );
     }
 }
 
