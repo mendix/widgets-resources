@@ -18,6 +18,19 @@ describe("Repeater", () => {
         expect(component.toJSON()).toMatchSnapshot();
     });
 
+    it("renders correctly with empty list", () => {
+        const component = render(
+            <Repeater
+                name="test-repeater"
+                style={[{ container: {} }]}
+                datasource={ListValueBuilder().withAmountOfItems(0)}
+                content={buildWidgetValue(<Text>Item</Text>)}
+            />
+        );
+
+        expect(component.toJSON()).toMatchSnapshot();
+    });
+
     it("renders correctly with custom styles", () => {
         const component = render(
             <Repeater

@@ -2,11 +2,9 @@ import { KeyboardEvent, KeyboardEventHandler, useCallback } from "react";
 
 type KeyboardKey = "Enter" | "Space" | "Home" | "End" | "ArrowUp" | "ArrowDown" | "ArrowRight" | "ArrowLeft";
 
-export type KeyboardHandlerHook = (
-    keyHandlers: {
-        [key in KeyboardKey]?: (event: KeyboardEvent<HTMLElement>) => void;
-    }
-) => KeyboardEventHandler<HTMLElement>;
+export type KeyboardHandlerHook = (keyHandlers: {
+    [key in KeyboardKey]?: (event: KeyboardEvent<HTMLElement>) => void;
+}) => KeyboardEventHandler<HTMLElement>;
 
 const alternativeKeysMap: { [key in KeyboardKey]?: string[] } = {
     ArrowDown: ["ArrowDown", "Down"],

@@ -31,7 +31,7 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "copyright",
             message: "Add a copyright",
-            default: "© Mendix Technology BV 2021. All rights reserved.",
+            default: "© Mendix Technology BV 2022. All rights reserved.",
             store: true
         },
         {
@@ -81,6 +81,23 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
                 }
             ],
             default: "javascript",
+            store: true
+        },
+        {
+            type: "list",
+            name: "programmingStyle",
+            message: "Which type of components do you want to use?",
+            choices: [
+                {
+                    name: "Class Components",
+                    value: "class"
+                },
+                {
+                    name: "Function Components",
+                    value: "function"
+                }
+            ],
+            default: "class",
             store: true
         },
         {

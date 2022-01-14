@@ -16,7 +16,7 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "eslint": "^7.20.0",
-    "typescript": "^4.4.4",
+    "typescript": "^4.5.4",
     "rimraf": "^2.7.1"
   },
   "files": [

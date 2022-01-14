@@ -1,8 +1,9 @@
 import { promises as fs } from "fs";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
 import { FileReadError, PatternNotFoundError } from "./errors";
 import { promisify } from "util";
 import { exec } from "child_process";
+import { createProgram, escapeLeadingUnderscores } from "typescript";
 
 const execAsync = promisify(exec);
 
@@ -43,11 +44,36 @@ async function main(): Promise<void> {
                         }
                     );
 
+                    const hasStructurePreview = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files =>
+                            files
+                                .filter(path => path.match(/.*\.editorConfig\.[jt]sx?/))
+                                .some(path => moduleExports(join(packagePath, "src", path), "getPreview"))
+                        );
+                    const hasDesignModePreview = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files =>
+                            files
+                                .filter(path => path.match(/.*\.editorPreview\.[jt]sx?$/))
+                                .some(path => moduleExports(join(packagePath, "src", path), "preview"))
+                        );
+                    const hasTileIcons = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files => files.some(path => path.endsWith(".tile.png")));
+                    const hasDarkModeIcons = await fs
+                        .readdir(join(packagePath, "src"))
+                        .then(files => files.some(path => path.endsWith(".dark.png")));
+
                     return {
                         id,
                         pluginWidget: pluginWidget === "true",
                         offlineCapable: offlineCapable === "true",
-                        supportedPlatform: supportedPlatform ?? "Web"
+                        supportedPlatform: supportedPlatform?.toLowerCase() ?? "web",
+                        hasStructurePreview,
+                        hasDesignModePreview,
+                        hasTileIcons,
+                        hasDarkModeIcons
                     };
                 } catch (e) {
                     if (e instanceof Error && (e.name === "FileReadError" || e.name === "ValueNotFoundError")) {
@@ -61,7 +87,7 @@ async function main(): Promise<void> {
 
     const result = packages.filter(isDefined);
 
-    await writeFile("data/widgets.json", JSON.stringify(result, null, "\t"));
+    await writeFile(resolve(__dirname, "../../data/widgets.json"), JSON.stringify(result, null, "\t"));
 }
 
 function isDefined<T>(val: T | undefined | null): val is T {
@@ -110,4 +136,14 @@ async function extractTextFromFile<P extends Patterns>(
         }
         return value ? { ...result, [key]: value } : result;
     }, {} as Values<P>);
+}
+
+function moduleExports(fileName: string, exportName: string): boolean {
+    const program = createProgram([fileName], {});
+    const sourceFile = program.getSourceFile(fileName);
+    if (sourceFile) {
+        const fileSymbol = program.getTypeChecker().getSymbolAtLocation(sourceFile);
+        return fileSymbol?.exports?.get(escapeLeadingUnderscores(exportName)) !== undefined;
+    }
+    return false;
 }

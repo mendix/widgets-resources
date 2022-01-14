@@ -5,7 +5,7 @@ import { <%- name %>ContainerProps } from "../typings/<%- name %>Props";
 
 import "./ui/<%- name %>.css";
 
-export default class <%- name %> extends Component<<%- name %>ContainerProps> {
+export class <%- name %> extends Component<<%- name %>ContainerProps> {
     render(): ReactNode {
         return <HelloWorldSample sampleText={this.props.sampleText ? this.props.sampleText : "World"} />;
     }

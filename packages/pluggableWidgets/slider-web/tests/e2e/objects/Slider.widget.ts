@@ -1,7 +1,7 @@
 import page from "../../../../../../configs/e2e/src/pages/page";
 
 export enum SliderStyleColor {
-    Default = "#abe2fb",
+    Default = "#264ae5",
     Primary = "#264ae5",
     Success = "#3cb33d",
     Info = "#0086d9",

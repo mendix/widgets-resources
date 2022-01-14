@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.2.1] - 2022-1-6
+
+### Added
+- We added a class `date-filter-container` to the main container for the date picker calendar.
+
 ## [2.2.0] - 2021-12-23
 
 ### Added

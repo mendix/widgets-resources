@@ -1,0 +1,11 @@
+import { ReactElement, createElement } from "react";
+import { HelloWorldSample } from "./components/HelloWorldSample";
+import { <%- name %>PreviewProps } from "../typings/<%- name %>Props";
+
+export function preview({ sampleText }: <%- name %>PreviewProps): ReactElement {
+    return <HelloWorldSample sampleText={sampleText} />;
+}
+
+export function getPreviewCss(): string {
+    return require("./ui/<%- name %>.css");
+}

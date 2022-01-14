@@ -1,0 +1,440 @@
+[
+	{
+		"id": "com.mendix.widget.custom.calendar.Calendar",
+		"pluginWidget": false,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.custom.carousel.Carousel",
+		"pluginWidget": false,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
+		"pluginWidget": false,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.custom.signature.Signature",
+		"pluginWidget": false,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.accessibilityhelper.AccessibilityHelper",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.accordion.Accordion",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.accordion.Accordion",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.animation.Animation",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.appevents.AppEvents",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.AreaChart.AreaChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.backgroundimage.BackgroundImage",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.badgebutton.BadgeButton",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.badge.Badge",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.badge.Badge",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.barchart.BarChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.BarChart.BarChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.barcodescanner.BarcodeScanner",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.bottomsheet.BottomSheet",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.carousel.Carousel",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.colorpicker.ColorPicker",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.datagrid.Datagrid",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.dropdownsort.DropdownSort",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.feedback.Feedback",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.fieldset.Fieldset",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.floatingactionbutton.FloatingActionButton",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.gallery.Gallery",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.image.Image",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.image.Image",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.introscreen.IntroScreen",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.linechart.LineChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.LineChart.LineChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.listviewswipe.ListViewSwipe",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.maps.Maps",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.Maps.Maps",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.notifications.Notifications",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.PieChart.PieChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.popupmenu.PopupMenu",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.popupmenu.PopupMenu",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.progressbar.ProgressBar",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.progressbar.ProgressBar",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.progresscircle.ProgressCircle",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.progresscircle.ProgressCircle",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.qrcode.QRCode",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.rangeslider.RangeSlider",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.RangeSlider.RangeSlider",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.rating.Rating",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.starrating.StarRating",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.repeater.Repeater",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.richtext.RichText",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.scrollcontainer.ScrollContainer",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.sidebartoggle.SidebarToggle",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.sidebar.Sidebar",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.signature.Signature",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.native.slider.Slider",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.slider.Slider",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.switch.Switch",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.custom.switch.Switch",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.timeline.Timeline",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.tooltip.Tooltip",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.web.treenode.TreeNode",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	},
+	{
+		"id": "com.mendix.widget.web.videoplayer.VideoPlayer",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Web"
+	},
+	{
+		"id": "com.mendix.widget.native.webview.WebView",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "Native"
+	}
+]

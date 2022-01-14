@@ -47,3 +47,5 @@ exports[`Repeater renders correctly with custom styles 1`] = `
   </Text>
 </View>
 `;
+
+exports[`Repeater renders correctly with empty list 1`] = `<View />`;

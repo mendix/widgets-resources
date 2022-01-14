@@ -26,15 +26,16 @@ export function RangeSlider(props: Props): ReactElement {
     const enabledOne = editable && lowerValue !== undefined && !props.lowerValueAttribute.readOnly;
     const enabledTwo = editable && upperValue !== undefined && !props.upperValueAttribute.readOnly;
 
-    const customMarker: Function = (markerEnabled: boolean, testID: string) => (
-        markerProps: MarkerProps
-    ): JSX.Element => (
-        <Marker
-            {...markerProps}
-            markerStyle={markerEnabled ? markerProps.markerStyle : styles.markerDisabled}
-            testID={`${props.name}$${testID}`}
-        />
-    );
+    const customMarker: Function =
+        (markerEnabled: boolean, testID: string) =>
+        (markerProps: MarkerProps): JSX.Element =>
+            (
+                <Marker
+                    {...markerProps}
+                    markerStyle={markerEnabled ? markerProps.markerStyle : styles.markerDisabled}
+                    testID={`${props.name}$${testID}`}
+                />
+            );
 
     const onLayout = useCallback((event: LayoutChangeEvent): void => {
         setWidth(event.nativeEvent.layout.width);

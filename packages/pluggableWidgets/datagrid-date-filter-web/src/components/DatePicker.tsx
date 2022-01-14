@@ -35,7 +35,10 @@ export const DatePicker = forwardRef(
         const buttonRef = useRef<HTMLButtonElement>(null);
         const portalRef = useRef<HTMLDivElement>(null);
         const id = useMemo(() => `datepicker_` + Math.random(), []);
-        const Portal = createPortal(<div ref={portalRef} id={id} style={{ position: "fixed" }} />, document.body);
+        const Portal = createPortal(
+            <div ref={portalRef} id={id} className="date-filter-container" style={{ position: "fixed" }} />,
+            document.body
+        );
 
         const buttonClick = useCallback(() => {
             setOpen(open => !open);

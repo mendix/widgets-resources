@@ -25,7 +25,7 @@ describe("Slider widget", () => {
             expect(sliderWidget.getRoot().getAttribute("class")).toContain("rc-slider-disabled");
             expect(sliderWidget.getMinimumMarker().label.getText()).toBe("0");
             expect(sliderWidget.getMaximumMarker().label.getText()).toBe("100");
-            expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 50%;");
+            expect(sliderWidget.getHandle().getAttribute("style")).toContain("left: 0%;");
             expect(sliderWidget.getHandle().getCSSProperty("cursor").value).toBe("not-allowed");
             sliderWidget.waitForTrackDisplayed(true);
         });
@@ -106,19 +106,17 @@ describe("Slider widget", () => {
             expect(markers[3].label.getText()).toBe("6.7");
         });
 
-        // === Enable when bug is fixed (WT-2439) ===
+        it("updates decimal values", () => {
+            page.open("p/decimal-values");
 
-        // it("updates decimal values", () => {
-        //     page.open("p/decimal-values");
+            const sliderWidget = new SliderWidget("slider");
+            const textValueWidget = page.getWidget("textValue");
 
-        //     const sliderWidget = new SliderWidget("slider");
-        //     const textValueWidget = page.getWidget("textValue");
+            expect(textValueWidget.getText()).toContain("5.5");
 
-        //     expect(textValueWidget.getText()).toContain("5.5");
-
-        //     sliderWidget.dragHandleToMaximum();
-        //     expect(textValueWidget.getText()).toContain("20.5");
-        // });
+            sliderWidget.dragHandleToMaximum();
+            expect(textValueWidget.getText()).toContain("20.5");
+        });
 
         it("updates long values", () => {
             page.open("p/long-values");
@@ -189,18 +187,6 @@ describe("Slider widget", () => {
                     SliderStyleColor.Primary
                 );
             });
-            it("renders with info style", () => {
-                const sliderWidget = new SliderWidget("sliderInfo");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
-                    SliderStyleColor.Info
-                );
-            });
-            it("renders with inverse style", () => {
-                const sliderWidget = new SliderWidget("sliderInverse");
-                expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
-                    SliderStyleColor.Inverse
-                );
-            });
             it("renders with success style", () => {
                 const sliderWidget = new SliderWidget("sliderSuccess");
                 expect(sliderWidget.getTrack().getCSSProperty("background-color").parsed.hex).toBe(
@@ -239,14 +225,11 @@ describe("Slider widget", () => {
 
             const sliderWidget = new SliderWidget("slider");
 
-            sliderWidget.waitForTooltipExist(true);
-
             sliderWidget.getHandle().moveTo();
             sliderWidget.waitForTooltipExist();
             expect(sliderWidget.getTooltipValue()).toBe("Slider");
 
             page.getWidget("textTitle").moveTo();
-            sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
             page.getWidget("textTitle").moveTo();
@@ -259,89 +242,16 @@ describe("Slider widget", () => {
 
             const sliderWidget = new SliderWidget("slider");
 
-            sliderWidget.waitForTooltipExist(true);
-
             sliderWidget.getHandle().moveTo();
             sliderWidget.waitForTooltipExist();
-            expect(sliderWidget.getTooltipValue()).toBe("10");
+            expect(sliderWidget.getTooltipValue()).toBe("10.00");
 
             page.getWidget("textTitle").moveTo();
-            sliderWidget.waitForTooltipDisplayed(true);
 
             sliderWidget.dragHandleToMaximum();
             page.getWidget("textTitle").moveTo();
             sliderWidget.getHandle().moveTo();
-            expect(sliderWidget.getTooltipValue()).toBe("20");
-        });
-
-        it("renders when no slider value is set", () => {
-            page.open("p/tooltip-with-unset-slider-value");
-
-            const sliderWidget = new SliderWidget("slider");
-
-            sliderWidget.waitForTooltipExist(true);
-
-            sliderWidget.getHandle().moveTo();
-            sliderWidget.waitForTooltipExist();
-            expect(sliderWidget.getTooltipValue()).toBe("--");
-
-            page.getWidget("textTitle").moveTo();
-            sliderWidget.waitForTooltipDisplayed(true);
-
-            sliderWidget.dragHandleToMaximum();
-            page.getWidget("textTitle").moveTo();
-            sliderWidget.getHandle().moveTo();
-            expect(sliderWidget.getTooltipValue()).toBe("20");
-        });
-    });
-
-    describe("Alert message", () => {
-        it("warns when the minimum value is greater than the maximum value", () => {
-            page.open("p/min-greater-than-max");
-
-            const sliderWidget = new SliderWidget("slider");
-
-            expect(sliderWidget.getAlertMessage().getText()).toBe(
-                "Minimum value 30 should be less than or equal to the maximum value 20"
-            );
-        });
-
-        it("warns when the value is higher than the maximum value", () => {
-            page.open("p/value-greater-than-max");
-
-            const sliderWidget = new SliderWidget("slider");
-
-            expect(sliderWidget.getAlertMessage().getText()).toBe(
-                "Value 20 should be equal or less than the maximum 10"
-            );
-        });
-
-        it("warns when the value is lower than the minimum value", () => {
-            page.open("p/value-less-than-min");
-
-            const sliderWidget = new SliderWidget("slider");
-
-            expect(sliderWidget.getAlertMessage().getText()).toBe(
-                "Value 2 should be equal or greater than the minimum 10"
-            );
-        });
-
-        it("warns about an invalid step size value", () => {
-            page.open("p/invalid-step-value");
-
-            const sliderWidget = new SliderWidget("slider");
-
-            expect(sliderWidget.getAlertMessage().getText()).toBe(
-                "Step value is invalid: max - min (20 - 2) should be evenly divisible by the step value 5"
-            );
-        });
-
-        it("warns about an invalid step size value of 0", () => {
-            page.open("p/step-value-less-than-zero");
-
-            const sliderWidget = new SliderWidget("slider");
-
-            expect(sliderWidget.getAlertMessage().getText()).toBe("Step value -2 should be greater than 0");
+            expect(sliderWidget.getTooltipValue()).toBe("20.00");
         });
     });
 });

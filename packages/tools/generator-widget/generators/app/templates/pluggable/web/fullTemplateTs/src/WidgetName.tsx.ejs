@@ -4,7 +4,7 @@ import { <%- name %>ContainerProps } from "../typings/<%- name %>Props";
 import { BadgeSample } from "./components/BadgeSample";
 import "./ui/<%- name %>.css";
 
-export default class <%- name %> extends Component<<%- name %>ContainerProps> {
+export class <%- name %> extends Component<<%- name %>ContainerProps> {
     private readonly onClickHandler = this.onClick.bind(this);
 
     render(): ReactNode {

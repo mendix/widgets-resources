@@ -192,7 +192,7 @@ exports[`Header renders the structure correctly when sortable 1`] = `
       </span>
       <svg
         aria-hidden="true"
-        class="svg-inline--fa fa-arrows-alt-v fa-w-8 "
+        class="svg-inline--fa fa-arrows-alt-v fa-w-8"
         data-icon="arrows-alt-v"
         data-prefix="fas"
         focusable="false"

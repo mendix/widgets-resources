@@ -740,7 +740,7 @@ exports[`Table renders the structure correctly with hiding 1`] = `
             >
               <svg
                 aria-hidden="true"
-                class="svg-inline--fa fa-eye fa-w-18 "
+                class="svg-inline--fa fa-eye fa-w-18"
                 data-icon="eye"
                 data-prefix="far"
                 focusable="false"

@@ -8,7 +8,7 @@ class RangeSlider {
     }
 
     get element(): WebdriverIO.Element {
-        return page.waitForElement(`.widget-range-slider.mx-name-${this.name}`);
+        return page.waitForElement(`.mx-name-${this.name} .widget-range-slider`);
     }
 
     get minValueText(): string {

@@ -17,20 +17,20 @@ jobs:
 
         steps:
             - name: "Checking-out code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
               with:
                   submodules: false
             - name: "Defining Environment Variables"
               id: variables
               run: echo "::set-output name=tag::$(git tag --points-at HEAD)"
             - name: "Defining lerna scope"
-              uses: jungwinter/split@v1
+              uses: jungwinter/split@c185fe95439c136a8788b7f700bd5275920d7109 # v1
               id: scope
               with:
                   msg: "${{ steps.variables.outputs.tag }}"
                   seperator: "-v"
             - name: "Defining node version"
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
                   node-version-file: '.nvmrc'
             - name: "Installing dependencies"
@@ -55,7 +55,7 @@ jobs:
                   TAG: ${{ steps.variables.outputs.tag }}
             - name: "Send slack msg on failure"
               if: ${{ failure() }}
-              uses: rtCamp/action-slack-notify@v2
+              uses: rtCamp/action-slack-notify@12e36fc18b0689399306c2e0b3e0f2978b7f1ee7 # v2
               env:
                   SLACK_CHANNEL: ${{ secrets.SLACK_MULTIXP_CHANNEL }}
                   SLACK_COLOR: ${{ job.status }}

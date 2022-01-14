@@ -1,6 +1,5 @@
 import { createElement, Dispatch, ReactElement, SetStateAction, useCallback, useMemo, useRef, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { FaEye } from "./icons/FaEye";
 import { useOnClickOutside, usePositionObserver } from "@mendix/piw-utils-internal/components/web";
 import { ColumnProperty } from "./Table";
 import { createPortal } from "react-dom";
@@ -123,7 +122,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
                     aria-expanded={show}
                     aria-controls={`${props.id}-column-selectors`}
                 >
-                    <FontAwesomeIcon icon={faEye} />
+                    <FaEye />
                 </button>
             </div>
             {show && optionsComponent}

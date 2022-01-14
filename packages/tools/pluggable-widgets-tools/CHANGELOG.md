@@ -5,11 +5,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.9.3] - 2022-01-10
+
+### Changed
+- We changed usage of `colors` to `ansi-colors`.
+
+## [9.9.2] - 2022-01-10
+
+### Fixed
+- We fixed `colors` dependency version to 1.4.0.
+
+## [9.9.1] - 2022-01-07
+
+### Added
+- We added `@prettier/plugin-xml` plugin to fix xml code format and check for xml errors.
+
+## [9.9.0] - 2022-01-04
+
 ### Fixed
 - We fixed the typing generation for actions that are referenced by the `onChange` of an attribute.
+- We fixed prettier configurations for `jsxBracketSameLine`.
 
 ### Added
 - We added support for dark icons (`widgetName`.icon.dark.png and `widgetName`.tile.dark.png).
+
+### Changed
+- We changed `wdio-image-comparison-service` from `devDependencies` to `dependencies`.
+- We updated typescript and prettier versions.
 
 ## [9.8.0] - 2021-12-07
 

@@ -1,9 +1,9 @@
 {
   "name": "@mendix/generator-widget",
-  "version": "9.0.3",
+  "version": "9.2.0",
   "description": "Mendix Pluggable Widgets Generator",
   "license": "Apache-2.0",
-  "copyright": "© Mendix Technology BV 2021. All rights reserved.",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "homepage": "https://github.com/mendix/widgets-resources/tree/master/packages/tools/generator-widget",
   "main": "app/index.js",
   "repository": {
@@ -27,14 +27,15 @@
     "node": ">=12"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.2",
     "semver": "^7.3.2",
-    "yeoman-generator": "^4.12.0"
+    "yeoman-environment": "^3.8.1",
+    "yeoman-generator": "^5.4.2"
   },
   "devDependencies": {
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.5.1"
   }
 }
