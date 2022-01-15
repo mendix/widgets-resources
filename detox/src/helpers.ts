@@ -1,9 +1,8 @@
 import { by, element, device, waitFor } from "detox";
 import { readFileSync } from "fs";
+import "../jest.detox.startup";
 
-export async function expectToMatchScreenshot(
-    element?: Detox.IndexableNativeElement | Detox.NativeElement
-): Promise<void> {
+export async function expectToMatchScreenshot(element?: Detox.NativeElement): Promise<void> {
     let screenshotPath: string;
     if (element) {
         screenshotPath = await element.takeScreenshot("screenshot");
@@ -11,6 +10,12 @@ export async function expectToMatchScreenshot(
         screenshotPath = await device.takeScreenshot("screenshot");
     }
     expect(readFileSync(screenshotPath)).toMatchImageSnapshot();
+}
+
+export async function setText(element: Detox.NativeElement, text: string) {
+    await element.clearText();
+    await element.typeText(text);
+    await element.tapReturnKey();
 }
 
 export async function tapBottomBarItem(caption: "Widgets" | "Actions" | "Commons" | "Deep Link"): Promise<void> {

@@ -3,14 +3,14 @@ import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/h
 
 describe("Repeater", () => {
     beforeAll(async () => {
-        tapMenuItem("Repeater");
-    });
-
-    it("renders the default repeater", async () => {
-        await expectToMatchScreenshot();
+        await tapMenuItem("Repeater");
     });
 
     afterAll(async () => {
         await device.reloadReactNative();
+    });
+
+    it("renders the default repeater", async () => {
+        await expectToMatchScreenshot();
     });
 });

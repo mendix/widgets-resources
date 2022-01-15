@@ -1,19 +1,19 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by } from "detox";
 
 describe("Rating", () => {
     beforeAll(async () => {
         await tapMenuItem("Rating");
-
-        const textBox = element(by.id("textBoxRating"));
-        await textBox.clearText();
-        await textBox.typeText("3\n");
-    });
-
-    it("renders correctly", async () => {
-        await expectToMatchScreenshot();
     });
 
     afterAll(async () => {
         await device.reloadReactNative();
+    });
+
+    it("renders correctly after change", async () => {
+        const textBox = element(by.id("textBoxRating"));
+        await setText(textBox, "3");
+
+        await expectToMatchScreenshot();
     });
 });

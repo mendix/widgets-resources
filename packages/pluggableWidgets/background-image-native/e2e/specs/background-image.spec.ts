@@ -1,11 +1,14 @@
-import { expectToMatchScreenshot, tapBottomBarItem, tapMenuItem } from "../../../../../detox/src/helpers";
-import { alert } from "../../../../../detox/src/Alert";
-import { expect } from "detox";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { Alert } from "../../../../../detox/src/Alert";
+import { expect, element, by, waitFor } from "detox";
 
 describe("Background image", () => {
     beforeEach(async () => {
-        await tapBottomBarItem("Actions");
         await tapMenuItem("Background image");
+    });
+
+    afterEach(async () => {
+        await device.reloadReactNative();
     });
 
     it("renders the static images", async () => {
@@ -52,19 +55,6 @@ describe("Background image", () => {
         await expectToMatchScreenshot();
     });
 
-    it("renders the background image with clickable container", async () => {
-        const btnConditionalBgImage = element(by.id("btnClickableBgImage"));
-        await btnConditionalBgImage.tap();
-
-        const clickableContainer = element(by.id("clickableContainer"));
-        await clickableContainer.tap();
-
-        await expect(alert.messageElement).toHaveText("Container clicked!");
-        await alert.confirm();
-
-        await expectToMatchScreenshot();
-    });
-
     it("renders the nested background image", async () => {
         const btnConditionalBgImage = element(by.id("btnNestedBgImage"));
         await btnConditionalBgImage.tap();
@@ -79,7 +69,15 @@ describe("Background image", () => {
         await expectToMatchScreenshot();
     });
 
-    afterAll(async () => {
-        await device.reloadReactNative();
+    it("renders the background image with clickable container", async () => {
+        const btnConditionalBgImage = element(by.id("btnClickableBgImage"));
+        await btnConditionalBgImage.tap();
+        await expectToMatchScreenshot();
+
+        const clickableContainer = element(by.id("clickableContainer"));
+        await clickableContainer.tap();
+
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Container clicked!");
     });
 });

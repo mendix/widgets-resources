@@ -1,11 +1,14 @@
-import { expect } from "detox";
-import { expectToMatchScreenshot, tapBottomBarItem, tapMenuItem } from "../../../../../detox/src/helpers";
-import { alert } from "../../../../../detox/src/Alert";
+import { expect, element, by } from "detox";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Popup menu", () => {
     beforeEach(async () => {
-        await tapBottomBarItem("Actions");
-        await tapMenuItem("Popup Menu");
+        await tapMenuItem("PopupMenu");
+    });
+
+    afterEach(async () => {
+        await device.reloadReactNative();
     });
 
     it("has a basic menu with an action", async () => {
@@ -13,8 +16,8 @@ describe("Popup menu", () => {
         await expectToMatchScreenshot();
 
         await element(by.text("Alert")).tap();
+        const alert = Alert();
         await expect(alert.messageElement).toHaveText("beep boop");
-        await alert.confirm();
     });
 
     it("has a custom menu with an action", async () => {
@@ -22,11 +25,7 @@ describe("Popup menu", () => {
         await expectToMatchScreenshot();
 
         await element(by.text("Alert")).tap();
+        const alert = Alert();
         await expect(alert.messageElement).toHaveText("beep boop");
-        await alert.confirm();
-    });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
     });
 });

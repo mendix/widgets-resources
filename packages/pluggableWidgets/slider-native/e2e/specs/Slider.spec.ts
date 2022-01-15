@@ -1,11 +1,14 @@
 import { expect, by, element, device } from "detox";
-import { expectToMatchScreenshot, tapBottomBarItem, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Slider", () => {
     beforeEach(async () => {
-        await tapBottomBarItem("Widgets");
         await tapMenuItem("Slider");
+    });
+
+    afterEach(async () => {
+        await device.reloadReactNative();
     });
 
     it("renders correct initial appearance", async () => {
@@ -15,8 +18,7 @@ describe("Slider", () => {
 
     it("renders correctly after setting value", async () => {
         const input = element(by.id("textBoxSliderMin"));
-        await input.clearText();
-        await input.typeText("100\n");
+        await setText(input, "100");
 
         await element(by.id("scrollContainerSlider")).scrollTo("bottom");
         await expectToMatchScreenshot();
@@ -24,11 +26,7 @@ describe("Slider", () => {
 
     it("should trigger an action after adjusting slider", async () => {
         await element(by.id("sliderOnChange$marker")).swipe("right", "fast", 1);
-        await expect(Alert().messageElement).toHaveText("Value changed: 100");
-        await Alert().confirm();
-    });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Value changed: 100");
     });
 });

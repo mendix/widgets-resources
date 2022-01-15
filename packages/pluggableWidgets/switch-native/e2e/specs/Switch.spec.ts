@@ -1,27 +1,35 @@
 import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
-import { alert } from "../../../../../detox/src/Alert";
+import { Alert } from "../../../../../detox/src/Alert";
+import { expect, device, by, element } from "detox";
 
 describe("Switch", () => {
     beforeAll(async () => {
         await tapMenuItem("Switch");
     });
 
+    afterAll(async () => {
+        await device.reloadReactNative();
+    });
+
     it("renders correctly when false", async () => {
-        await expectToMatchScreenshot();
+        const switchElement = element(by.id("switch1"));
+        await expectToMatchScreenshot(switchElement);
     });
 
     it("renders correctly when true", async () => {
-        await element(by.id("switch1")).tap();
-        await expectToMatchScreenshot();
+        const switchElement = element(by.id("switch1"));
+        await switchElement.tap();
+        await expectToMatchScreenshot(switchElement);
+    });
+
+    it("renders custom style", async () => {
+        const switchElement = element(by.id("switch2"));
+        await expectToMatchScreenshot(switchElement);
     });
 
     it("triggers configured event", async () => {
         await element(by.id("switch2")).tap();
-        expect(await alert.getMessage()).toEqual("Action has been triggered!");
-    });
-
-    // todo: NC-546 follow appdev convention, by using detox/jest setup and reload the device after each test.
-    afterAll(async () => {
-        await device.reloadReactNative();
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Action has been triggered!");
     });
 });
