@@ -8,7 +8,7 @@ describe("Progress Circle", () => {
         await tapMenuItem("Progress circle");
 
         const textBox = element(by.id("textBoxProgressCircleValue"));
-        await setText(textBox, "75");
+        await setText(textBox, percentage);
     });
 
     afterAll(async () => {
