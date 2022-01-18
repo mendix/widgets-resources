@@ -53,6 +53,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                     ellipsizeMode={styles.basic?.itemStyle?.ellipsizeMode as any}
                     style={styles.basic?.container as any}
                     {...getRippleColor(styles.basic?.itemStyle?.rippleColor)}
+                    testID={`${props.name}_basic-item`}
                 >
                     {item.caption}
                 </MenuItem>
@@ -65,6 +66,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
                 style={styles.custom?.container}
                 onPress={() => handlePress(item.action)}
                 {...getRippleColor(styles.custom?.itemStyle?.rippleColor)}
+                testID={`${props.name}_custom-item`}
             >
                 {Platform.OS === "android" ? (
                     <View style={styles.custom?.container}>{item.content}</View>
@@ -81,7 +83,7 @@ export function PopupMenu(props: PopupMenuProps<PopupMenuStyle>): ReactElement {
             ref={menuRef}
             style={styles?.container as any}
             button={
-                <TouchableButton onPress={showMenu}>
+                <TouchableButton onPress={showMenu} testID={`${props.name}_trigger`}>
                     <View pointerEvents="box-only" style={styles.buttonContainer}>
                         {props.menuTriggerer}
                     </View>

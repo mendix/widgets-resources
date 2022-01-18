@@ -1,35 +1,29 @@
-import { device, by, element } from "detox";
-import { Alert, Widget, expectToMatchImageSnapshot, NativeHomePage } from "../../../../../tests/e2e";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { Alert } from "../../../../../detox/src/Alert";
+import { expect, element, by } from "detox";
 
 describe("Slider", () => {
     beforeEach(async () => {
-        await NativeHomePage().goToWidgetsHomePage();
-        const button = Widget("btnRangeSlider").getElement();
-        await button.tap();
+        await tapMenuItem("Range slider");
     });
 
-    it("renders correct initial appearance", async () => {
-        await Widget("scrollContainerRangeSlider").getElement().scrollTo("bottom");
-        await expectToMatchImageSnapshot();
+    afterEach(async () => {
+        await device.reloadReactNative();
     });
 
     it("renders correctly after setting value", async () => {
-        const input = Widget("textBoxRangeSliderLower").getElement();
-        await input.clearText();
-        await input.typeText("5\n");
+        const input = element(by.id("textBoxRangeSliderLower"));
+        await setText(input, "5");
+        await element(by.id("scrollContainerRangeSlider")).scrollTo("bottom");
 
-        await Widget("scrollContainerRangeSlider").getElement().scrollTo("bottom");
-        await expectToMatchImageSnapshot();
+        await expectToMatchScreenshot();
     });
 
     it("should trigger an action after adjusting slider", async () => {
-        await Widget("scrollContainerRangeSlider").getElement().scrollTo("bottom");
+        await element(by.id("scrollContainerRangeSlider")).scrollTo("bottom");
         await element(by.id("rangeSliderOnChange$leftMarker")).swipe("left", "fast", 1);
-        Alert().getMessage("Lower: 2\nUpper: 75");
-        await Alert().confirm();
-    });
 
-    afterAll(async () => {
-        await device.reloadReactNative();
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Lower: 2\nUpper: 75");
     });
 });

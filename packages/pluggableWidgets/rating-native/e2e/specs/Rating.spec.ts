@@ -1,25 +1,19 @@
-import { device, waitFor } from "detox";
-import { Widget, expectToMatchImageSnapshot } from "../../../../../tests/e2e";
+import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by } from "detox";
 
 describe("Rating", () => {
     beforeAll(async () => {
-        const ratingWidgetHome = Widget("btnRating").getElement();
-        await ratingWidgetHome.tap();
-
-        const labelNormal = Widget("textNormal").getElement();
-        const textBox = Widget("textBoxRating").getElement();
-        await waitFor(textBox).toBeVisible().withTimeout(10000);
-        await textBox.tap();
-        await textBox.clearText();
-        await textBox.typeText("3");
-        await labelNormal.tap();
-    });
-
-    it("renders correctly", async () => {
-        await expectToMatchImageSnapshot();
+        await tapMenuItem("Rating");
     });
 
     afterAll(async () => {
         await device.reloadReactNative();
+    });
+
+    it("renders correctly after change", async () => {
+        const textBox = element(by.id("textBoxRating"));
+        await setText(textBox, "3");
+
+        await expectToMatchScreenshot();
     });
 });

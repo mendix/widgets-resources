@@ -1,32 +1,35 @@
-import { expect, device, waitFor, element, by } from "detox";
-import { Widget, expectToMatchImageSnapshot, Alert } from "../../../../../tests/e2e";
+import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { Alert } from "../../../../../detox/src/Alert";
+import { expect, device, by, element } from "detox";
 
 describe("Switch", () => {
     beforeAll(async () => {
-        await waitFor(element(by.id("SwitchWidgetHome")))
-            .toBeVisible()
-            .whileElement(by.id("scrollContainer1"))
-            .scroll(200, "down");
+        await tapMenuItem("Switch");
+    });
 
-        await Widget("SwitchWidgetHome").getElement().tap();
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 
     it("renders correctly when false", async () => {
-        await expectToMatchImageSnapshot();
+        const switchElement = element(by.id("switch1"));
+        await expectToMatchScreenshot(switchElement);
     });
 
     it("renders correctly when true", async () => {
-        await Widget("switch1").getElement().tap();
-        await expectToMatchImageSnapshot();
+        const switchElement = element(by.id("switch1"));
+        await switchElement.tap();
+        await expectToMatchScreenshot(switchElement);
+    });
+
+    it("renders custom style", async () => {
+        const switchElement = element(by.id("switch2"));
+        await expectToMatchScreenshot(switchElement);
     });
 
     it("triggers configured event", async () => {
-        await Widget("switch2").getElement().tap();
-        await expect(Alert().getMessage("Action has been triggered!")).toBeVisible();
-    });
-
-    // todo: NC-546 follow appdev convention, by using detox/jest setup and reload the device after each test.
-    afterAll(async () => {
-        await device.reloadReactNative();
+        await element(by.id("switch2")).tap();
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Action has been triggered!");
     });
 });

@@ -1,50 +1,35 @@
-import { device, expect, waitFor } from "detox";
-import { Widget } from "../../../../../tests/e2e";
+import { expect, device, by, element } from "detox";
+import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Progress Bar", () => {
     beforeAll(async () => {
-        const progressBarWidget = Widget("btnProgressBar").getElement();
-        await progressBarWidget.tap();
+        await tapMenuItem("Progress bar");
 
-        const textBox = Widget("textBoxProgressBarValue").getElement();
-        await waitFor(textBox).toBeVisible().withTimeout(10000);
-        await textBox.tap();
-        await textBox.clearText();
-        await textBox.typeText("75");
-    });
-
-    it("renders the progress bar with dynamic values", async () => {
-        const progressBarId = Widget("progressBarDynamic");
-        const progressBar = progressBarId.getElement();
-
-        await expect(progressBar).toBeVisible();
-        await progressBar.tap();
-    });
-
-    it("renders the progress bar with static values", async () => {
-        const progressBarId = Widget("progressBarStatic");
-        const progressBar = progressBarId.getElement();
-
-        await expect(progressBar).toBeVisible();
-        await progressBar.tap();
-    });
-
-    it("does not render the progress bar with visibility set as false", async () => {
-        const progressBarId = Widget("progressBarNoVisibility");
-        const progressBar = progressBarId.getElement();
-
-        await expect(progressBar).not.toBeVisible();
-    });
-
-    it("renders the progress bar with custom style as Success", async () => {
-        const progressBarId = Widget("progressBarSuccess");
-        const progressBar = progressBarId.getElement();
-
-        await expect(progressBar).toBeVisible();
-        await progressBar.tap();
+        const textBox = element(by.id("textBoxProgressBarValue"));
+        await setText(textBox, "75");
     });
 
     afterAll(async () => {
         await device.reloadReactNative();
+    });
+
+    it("renders the progress bar with dynamic values", async () => {
+        const progressBar = element(by.id("progressBarDynamic"));
+        await expect(progressBar).toBeVisible();
+    });
+
+    it("renders the progress bar with static values", async () => {
+        const progressBar = element(by.id("progressBarStatic"));
+        await expect(progressBar).toBeVisible();
+    });
+
+    it("does not render the progress bar with visibility set as false", async () => {
+        const progressBar = element(by.id("progressBarNoVisibility"));
+        await expect(progressBar).not.toBeVisible();
+    });
+
+    it("renders the progress bar with custom style as Success", async () => {
+        const progressBar = element(by.id("progressBarSuccess"));
+        await expect(progressBar).toBeVisible();
     });
 });

@@ -1,22 +1,22 @@
-import { device, expect, waitFor } from "detox";
-import { Widget, Alert } from "../../../../../tests/e2e";
+import { Alert } from "../../../../../detox/src/Alert";
+import { expect, element, by } from "detox";
+import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Badge", () => {
     beforeAll(async () => {
-        const badgeWidgetHome = Widget("btnBadge").getElement();
-        await badgeWidgetHome.tap();
+        await tapMenuItem("Badge");
 
-        const textBox = Widget("textBoxBadge").getElement();
-        await waitFor(textBox).toBeVisible().withTimeout(10000);
-        await textBox.tap();
-        await textBox.clearText();
-        await textBox.typeText("Detox");
+        const textBox = element(by.id("textBoxBadge"));
+        await setText(textBox, "Detox");
+    });
+
+    afterAll(async () => {
+        await device.reloadReactNative();
     });
 
     it("renders the normal badge", async () => {
-        const badgeNormal = Widget("badgeNormal");
-        const badge = badgeNormal.getElement();
-        const badgeText = badgeNormal.getCaption();
+        const badge = element(by.id("badgeNormal"));
+        const badgeText = element(by.id("badgeNormal$caption"));
 
         await expect(badge).toBeVisible();
         await badge.tap();
@@ -26,27 +26,20 @@ describe("Badge", () => {
     });
 
     it("does not render the badge with visibility set as false", async () => {
-        const badge = Widget("badgeNoVisibility").getElement();
+        const badge = element(by.id("badgeNoVisibility"));
 
         await expect(badge).not.toBeVisible();
     });
 
     it("renders the badge with actions", async () => {
-        const badgeAction = Widget("badgeAction");
-        const badge = badgeAction.getElement();
-        const badgeText = badgeAction.getCaption();
-
+        const badge = element(by.id("badgeAction"));
+        const badgeText = element(by.id("badgeAction$caption"));
         await expect(badge).toBeVisible();
-        await badge.tap();
-
-        await expect(Alert().getMessage("Action test: Detox")).toBeVisible();
-        await Alert().confirm();
-
         await expect(badgeText).toBeVisible();
         await expect(badgeText).toHaveText("Detox");
-    });
 
-    afterAll(async () => {
-        await device.reloadReactNative();
+        await badge.tap();
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Action test: Detox");
     });
 });
