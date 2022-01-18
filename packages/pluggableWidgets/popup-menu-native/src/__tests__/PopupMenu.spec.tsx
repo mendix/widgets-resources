@@ -1,11 +1,12 @@
 import { PopupMenuProps } from "../../typings/PopupMenuProps";
 import { PopupMenuStyle } from "../ui/Styles";
-import { Text } from "react-native";
+import { Modal, Text, View } from "react-native";
 import { createElement } from "react";
 import { actionValue } from "@mendix/piw-utils-internal";
-import { fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render, within } from "@testing-library/react-native";
 import { PopupMenu } from "../PopupMenu";
 import { MenuDivider } from "react-native-material-menu";
+import { ReactTestInstance } from "react-test-renderer";
 
 let dummyActionValue: any;
 let defaultProps: PopupMenuProps<PopupMenuStyle>;
@@ -47,7 +48,7 @@ describe("Popup menu", () => {
             const dividers = component.UNSAFE_queryAllByType(MenuDivider);
             const customItems = component.queryAllByTestId(customItemTestId);
             expect(basicItems).toHaveLength(1);
-            expect(basicItems[0].children).toEqual("yolo");
+            expect(within(basicItems[0]).getByText("yolo")).not.toBeNull();
             expect(dividers).toHaveLength(1);
             expect(customItems).toHaveLength(0);
         });
@@ -72,7 +73,7 @@ describe("Popup menu", () => {
                 }
             ];
             const component = render(<PopupMenu {...defaultProps} style={customStyle} />);
-            expect(component).toMatchSnapshot();
+            expect(component.getByTestId(basicItemTestId).findByProps({ color: "green" })).not.toBeNull();
         });
     });
 
@@ -90,7 +91,7 @@ describe("Popup menu", () => {
             expect(basicItems).toHaveLength(0);
             expect(dividers).toHaveLength(0);
             expect(customItems).toHaveLength(1);
-            expect(customItems[0].children).toEqual("yolo");
+            expect(within(customItems[0]).getByText("Yolo")).not.toBeNull();
         });
 
         it("triggers action", () => {
@@ -109,7 +110,11 @@ describe("Popup menu", () => {
                 }
             ];
             const component = render(<PopupMenu {...defaultProps} style={customStyle} />);
-            expect(component).toMatchSnapshot();
+            const modal = component.UNSAFE_getByType(Modal);
+            const firstView = within(modal).UNSAFE_getByType(View);
+            const secondView = within(firstView.children[0] as ReactTestInstance).UNSAFE_getByType(View);
+            expect(secondView.props.style.backgroundColor).toEqual("yellow");
+            expect(within(secondView).getByText("Yolo")).not.toBeNull();
         });
     });
 });
