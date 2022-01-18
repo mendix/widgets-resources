@@ -1,4 +1,4 @@
-import React, { createElement, ReactElement, useEffect, useState, useCallback } from "react";
+import { createElement, ReactElement, useEffect, useState, useCallback } from "react";
 import { Alert } from "@mendix/piw-utils-internal/components/web";
 import { ModeEnum, TypeEnum, DefaultColorsType, FormatEnum } from "../../typings/ColorPickerProps";
 import {
@@ -56,15 +56,20 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
     const { type, mode, disabled, defaultColors, color, format, invalidFormatMessage } = props;
     const colorElement = getColorPicker(type);
     const [hidden, setHidden] = useState(mode !== "inline");
-    const [config, setConfig] = useState<ColorPickerConfigProps>({});
-    const [currentColor, setCurrentColor] = useState<string>(color || defaultColor[format]);
+    const [currentColor, setCurrentColor] = useState<string>(color);
     const [alertMessage, setAlertMessage] = useState<string | undefined>();
 
-    const validateColor = (color: string): void => {
-        const validFormat = validateColorFormat(color, format);
+    const submitColor = (color: string): void => {
+        setCurrentColor(color);
+        props.onChangeComplete(color);
+    };
+
+    const validateColor = (colorValue: string): void => {
+        const validFormat = validateColorFormat(colorValue, format);
         const alertMessage = validFormat ? invalidFormatMessage?.replace(/\{1}/, validFormat) : undefined;
         setAlertMessage(alertMessage);
     };
+
     const onToggle = useCallback(
         (hide: boolean): void => {
             if (!disabled && mode !== "inline") {
@@ -77,32 +82,44 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         (color: ColorState): void => {
             if (color && !disabled) {
                 const finalColor = parseColor(color, format);
-                setCurrentColor(finalColor);
-                props.onChangeComplete(finalColor);
+                submitColor(finalColor);
             }
         },
-        [disabled, format, props]
+        [disabled, format]
     );
 
-    const onInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-        const value = event.target.value;
-        validateColor(color);
-        setCurrentColor(value);
-        props.onChangeComplete(value);
-    };
-
     const renderInput = (): ReactElement => {
+        const colorValue = currentColor || color;
         return (
-            <Input color={color} disabled={disabled} onKeyUp={onToggle} onChange={onInputChange}>
+            <Input
+                color={colorValue}
+                disabled={disabled}
+                onKeyUp={onToggle}
+                onChange={({ target }) => submitColor(target.value)}
+            >
                 {renderButton()}
             </Input>
         );
     };
     const renderButton = (): ReactElement => {
-        return <Button mode={mode} hidden={hidden} disabled={disabled} onClick={onToggle} color={color} />;
+        return <Button mode={mode} disabled={disabled} onClick={() => onToggle(!hidden)} color={color} />;
     };
     const renderColorPicker = (): ReactElement => {
+        const isTriangleAvailable = type === "github" || type === "block" || type === "twitter";
         const supportPopover = mode !== "inline" && type !== "hue" && type !== "slider";
+        const colors = defaultColors.map(color => color.color);
+        const config = {
+            color: color || defaultColor[format],
+            colors: defaultColors.length > 0 && type !== "swatches" ? colors : undefined,
+            onChangeComplete: props.onChange,
+            presetColors: defaultColors.length > 0 ? colors : undefined,
+            disableAlpha: format !== "rgba",
+            disabled,
+            displayColorPicker: hidden,
+            onChange: onColorValueUpdate,
+            close: () => onToggle(true),
+            ...(isTriangleAvailable && { triangle: "hide" })
+        };
         return (
             <div
                 className={classNames({
@@ -120,23 +137,8 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
     };
 
     useEffect(() => {
-        const colors = defaultColors.map(color => color.color);
-        const isTriangleAvailable = type === "github" || type === "block" || type === "twitter";
-        const config = {
-            color: currentColor,
-            colors: defaultColors.length > 0 && type !== "swatches" ? colors : undefined,
-            onChangeComplete: props.onChange,
-            presetColors: defaultColors.length > 0 ? colors : undefined,
-            disableAlpha: format !== "rgba",
-            disabled,
-            displayColorPicker: hidden,
-            close: () => onToggle(true),
-            onChange: onColorValueUpdate,
-            ...(isTriangleAvailable && { triangle: "hide" })
-        };
-        setConfig(config);
         validateColor(color);
-    }, [currentColor, hidden, disabled, format, type, defaultColors, mode]);
+    }, [color]);
     return (
         <div
             className={classNames("widget-color-picker widget-color-picker-picker", {
@@ -145,8 +147,8 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         >
             {mode === "input" && renderInput()}
             {mode === "popover" && renderButton()}
-            {hidden && !disabled ? null : renderColorPicker()}
-            {alertMessage && <Alert bootstrapStyle="danger">{alertMessage}</Alert>}
+            {hidden || disabled ? null : renderColorPicker()}
+            {alertMessage ? <Alert bootstrapStyle="danger">{alertMessage}</Alert> : null}
         </div>
     );
 };

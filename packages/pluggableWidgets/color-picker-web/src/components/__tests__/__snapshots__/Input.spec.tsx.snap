@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input render DOM structure 1`] = `
+<DocumentFragment>
+  <div
+    class="widget-color-picker-input-container"
+  >
+    <input
+      class="form-control"
+      type="text"
+      value="#000000"
+    />
+  </div>
+</DocumentFragment>
+`;

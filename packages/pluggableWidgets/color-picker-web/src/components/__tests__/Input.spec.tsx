@@ -1,18 +1,28 @@
 import { shallow, ShallowWrapper } from "enzyme";
-import { ReactChild, createElement } from "react";
+import { createElement, ReactElement } from "react";
+import { render } from "@testing-library/react";
 
 import { Input, InputProps } from "../Input";
 
 describe("Input", () => {
-    const renderInput = (props: InputProps, children: ReactChild): ShallowWrapper<InputProps, any> =>
-        shallow(createElement(Input, props, children));
+    const renderInput = (props: InputProps, children: ReactElement): ShallowWrapper<InputProps, any> =>
+        shallow(<Input {...props}>{children}</Input>);
     const inputProps: InputProps = {
         color: "#000000",
         disabled: false,
-        children: null
+        children: null,
+        onChange: jest.fn()
     };
-    const inputChildren = createElement("div", {}, createElement("button"));
+    const inputChildren = (
+        <div>
+            <button />
+        </div>
+    );
 
+    it("render DOM structure", () => {
+        const { asFragment } = render(<Input {...inputProps} />);
+        expect(asFragment()).toMatchSnapshot();
+    });
     it("renders the structure correctly", () => {
         const inputComponent = renderInput(inputProps, inputChildren);
 
@@ -24,7 +34,8 @@ describe("Input", () => {
                     className: "form-control",
                     disabled: inputProps.disabled,
                     type: "text",
-                    value: inputProps.color
+                    value: inputProps.color,
+                    onChange: inputProps.onChange
                 }),
                 inputChildren
             )

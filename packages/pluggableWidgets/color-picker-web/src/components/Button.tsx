@@ -5,13 +5,12 @@ import { ModeEnum } from "../../typings/ColorPickerProps";
 export interface ButtonProps {
     color: string;
     mode: ModeEnum;
-    onClick: (hide: boolean) => void;
+    onClick: () => void;
     disabled: boolean;
-    hidden: boolean;
 }
 
 export const Button = (props: ButtonProps): ReactElement => {
-    const { mode, disabled, onClick, hidden, color } = props;
+    const { mode, disabled, onClick, color } = props;
     return (
         <button
             className={classNames("btn", {
@@ -19,7 +18,7 @@ export const Button = (props: ButtonProps): ReactElement => {
                 hidden: mode === "inline",
                 disabled
             })}
-            onClick={() => onClick(!hidden)}
+            onClick={onClick}
         >
             <div
                 className={mode === "input" ? "widget-color-picker-input-inner" : "widget-color-picker-inner"}

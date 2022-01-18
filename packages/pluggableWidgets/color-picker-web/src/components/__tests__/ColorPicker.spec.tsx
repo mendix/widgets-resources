@@ -1,13 +1,12 @@
-import { mount, ReactWrapper, shallow, ShallowWrapper } from "enzyme";
 import { createElement } from "react";
-
+import { mount, ReactWrapper, shallow, ShallowWrapper } from "enzyme";
 import { ColorPicker, ColorPickerProps } from "../ColorPicker";
 
 describe("ColorPicker", () => {
     const renderColorPicker = (props: ColorPickerProps): ShallowWrapper<ColorPickerProps, any> =>
-        shallow(createElement(ColorPicker, props));
+        shallow(<ColorPicker {...props} />);
     const fullRenderColorPicker = (props: ColorPickerProps): ReactWrapper<ColorPickerProps, any> =>
-        mount(createElement(ColorPicker, props));
+        mount(<ColorPicker {...props} />);
     const colorPickerProps: ColorPickerProps = {
         color: "#000000",
         disabled: false,
@@ -15,8 +14,8 @@ describe("ColorPicker", () => {
         format: "hex",
         mode: "popover",
         type: "sketch",
-        onChange: jasmine.createSpy("onClick"),
-        onChangeComplete: jasmine.createSpy("onClick"),
+        onChange: jest.fn(),
+        onChangeComplete: jest.fn(),
         id: "color-picker",
         name: "color picker"
     };
@@ -51,7 +50,6 @@ describe("ColorPicker", () => {
         });
         const colorElement = colorPickerComponent.find("[title='#F47373']");
         colorElement.simulate("click");
-
         expect(colorPickerProps.onChangeComplete).toHaveBeenCalled();
     });
 
