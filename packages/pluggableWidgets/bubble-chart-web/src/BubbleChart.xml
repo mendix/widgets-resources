@@ -143,12 +143,12 @@
                                 </attributeTypes>
                             </property>
                             <property key="autosize" type="boolean" defaultValue="true">
-                                <caption>Auto size</caption>
+                                <caption>Auto scale</caption>
                                 <description/>
                             </property>
                             <property key="sizeref" type="integer" defaultValue="10">
-                                <caption>Size ref</caption>
-                                <description>When 'Auto bubble size' is true, the largest bubble will have the specified percentage of the chart. When 'Auto bubble size' is false, the bubble size is the pixel value of the 'Bubble size attribute' multiplied by the specified percentage.
+                                <caption>Scale factor</caption>
+                                <description>When “Auto scale” is set to false, use the scale factor to determine the rendered size of the bubble, it will multiply the value of “bubble size” by this factor.
                                 </description>
                             </property>
                         </propertyGroup>
