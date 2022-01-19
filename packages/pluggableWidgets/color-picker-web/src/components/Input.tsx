@@ -1,7 +1,7 @@
 import React, { createElement, ReactElement, KeyboardEvent } from "react";
 
 export interface InputProps {
-    color: string;
+    color: string | undefined;
     disabled: boolean;
     children: ReactElement | null;
     onKeyUp?: (hide?: boolean) => void;

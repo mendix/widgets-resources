@@ -28,7 +28,7 @@ export interface ColorPickerProps {
     onChangeComplete: (value: string) => void;
     mode: ModeEnum;
     type: TypeEnum;
-    color: string;
+    color: string | undefined;
     defaultColors: DefaultColorsType[];
     format: FormatEnum;
     disabled: boolean;
@@ -56,7 +56,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
     const { type, mode, disabled, defaultColors, color, format, invalidFormatMessage } = props;
     const colorElement = getColorPicker(type);
     const [hidden, setHidden] = useState(mode !== "inline");
-    const [currentColor, setCurrentColor] = useState<string>(color);
+    const [currentColor, setCurrentColor] = useState<string | undefined>(color);
     const [alertMessage, setAlertMessage] = useState<string | undefined>();
 
     const submitColor = (color: string): void => {
@@ -70,7 +70,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         setAlertMessage(alertMessage);
     };
 
-    const onToggle = useCallback(
+    const setColorPickerHidden = useCallback(
         (hide: boolean): void => {
             if (!disabled && mode !== "inline") {
                 setHidden(hide);
@@ -94,7 +94,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
             <Input
                 color={colorValue}
                 disabled={disabled}
-                onKeyUp={onToggle}
+                onKeyUp={setColorPickerHidden}
                 onChange={({ target }) => submitColor(target.value)}
             >
                 {renderButton()}
@@ -102,7 +102,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         );
     };
     const renderButton = (): ReactElement => {
-        return <Button mode={mode} disabled={disabled} onClick={() => onToggle(!hidden)} color={color} />;
+        return <Button mode={mode} disabled={disabled} onClick={() => setColorPickerHidden(!hidden)} color={color} />;
     };
     const renderColorPicker = (): ReactElement => {
         const isTriangleAvailable = type === "github" || type === "block" || type === "twitter";
@@ -117,7 +117,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
             disabled,
             displayColorPicker: hidden,
             onChange: onColorValueUpdate,
-            close: () => onToggle(true),
+            close: () => setColorPickerHidden(true),
             ...(isTriangleAvailable && { triangle: "hide" })
         };
         return (
@@ -128,7 +128,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
                 })}
             >
                 {mode !== "inline" ? (
-                    <div className={"widget-color-picker-cover"} onClick={() => onToggle(true)} />
+                    <div className={"widget-color-picker-cover"} onClick={() => setColorPickerHidden(true)} />
                 ) : null}
                 {disabled ? <div className={"widget-color-picker-overlay"} /> : null}
                 {createElement(colorElement, { ...config })}
@@ -137,7 +137,9 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
     };
 
     useEffect(() => {
-        validateColor(color);
+        if (color) {
+            validateColor(color);
+        }
     }, [color]);
     return (
         <div

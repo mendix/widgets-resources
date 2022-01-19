@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { ModeEnum } from "../../typings/ColorPickerProps";
 
 export interface ButtonProps {
-    color: string;
+    color: string | undefined;
     mode: ModeEnum;
     onClick: () => void;
     disabled: boolean;

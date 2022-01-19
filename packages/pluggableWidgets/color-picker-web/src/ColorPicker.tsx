@@ -13,7 +13,7 @@ export function ColorPicker(props: ColorPickerContainerProps): ReactNode {
         <ColorPickerComponent
             id={id}
             name={name}
-            color={colorAttribute.value as string}
+            color={colorAttribute.value}
             onChange={onChangeFn}
             onChangeComplete={onChangeComplete}
             tabIndex={tabIndex}
