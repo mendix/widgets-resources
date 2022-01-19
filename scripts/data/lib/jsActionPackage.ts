@@ -1,12 +1,8 @@
 import { join, relative } from "path";
 import { JSAction } from "./jsAction";
-import { readFile, withGlob } from "./util";
+import { withGlob } from "./util";
 import { z } from "zod";
-
-const packageJsonSchema = z.object({
-    name: z.string(),
-    version: z.string()
-});
+import { JsonExtractor } from "./parsers/JsonExtractor";
 
 export class JSActionPackage {
     constructor(private properties: { name: string; version: string; jsActions: JSAction[] }) {}
@@ -20,9 +16,10 @@ export class JSActionPackage {
     }
 
     static async load(packagePath: string): Promise<JSActionPackage> {
-        const { name, version } = packageJsonSchema.parse(
-            JSON.parse(await readFile(join(packagePath, "package.json")))
-        );
+        const { name, version } = await this.packageJsonExtractor.extract(join(packagePath, "package.json"), {
+            name: json => json.name,
+            version: json => json.version
+        });
 
         const jsActionPaths = await withGlob(`${packagePath}/src/**/*.{js,ts}`, matches => matches);
         const jsActions = await Promise.all(
@@ -33,4 +30,11 @@ export class JSActionPackage {
 
         return new JSActionPackage({ name, version, jsActions });
     }
+
+    private static packageJsonExtractor = new JsonExtractor(
+        z.object({
+            name: z.string(),
+            version: z.string()
+        })
+    );
 }

@@ -1,6 +1,6 @@
 import { basename, extname, join } from "path";
 import { Analyzer } from "./analyzer";
-import { WidgetXmlParser } from "./widgetXmlParser";
+import { XmlExtractor } from "./parsers/XmlExtractor";
 import { firstWithGlob, isEnumValue } from "./util";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
@@ -72,7 +72,7 @@ export class Widget {
     static async load(packagePath: string, widgetFileName: string): Promise<Widget> {
         const internalName = basename(widgetFileName, extname(widgetFileName));
 
-        const { supportedPlatform, ...widgetXmlValues } = await Widget.createWidgetXmlParser().extract(
+        const { supportedPlatform, ...widgetXmlValues } = await this.widgetXmlExtractor.extract(
             join(packagePath, "src", widgetFileName),
             {
                 id: xml => xml.widget["@_id"],
@@ -107,35 +107,33 @@ export class Widget {
         });
     }
 
-    private static createWidgetXmlParser() {
-        return new WidgetXmlParser(
-            new XMLParser({
-                ignoreAttributes: false
-            }),
-            z.object({
-                widget: z.object({
-                    "@_id": z.string(),
-                    name: z.string(),
-                    description: z.string(),
-                    helpUrl: z.string().optional(),
-                    studioCategory: z.string().optional(),
-                    studioProCategory: z.string().optional(),
-                    "@_pluginWidget": z
-                        .string()
-                        .transform(value => value === "true")
-                        .optional(),
-                    "@_offlineCapable": z
-                        .string()
-                        .transform(value => value === "true")
-                        .optional(),
-                    "@_supportedPlatform": z
-                        .string()
-                        .transform(value => value.toLowerCase())
-                        .optional()
-                })
+    private static widgetXmlExtractor = new XmlExtractor(
+        new XMLParser({
+            ignoreAttributes: false
+        }),
+        z.object({
+            widget: z.object({
+                "@_id": z.string(),
+                name: z.string(),
+                description: z.string(),
+                helpUrl: z.string().optional(),
+                studioCategory: z.string().optional(),
+                studioProCategory: z.string().optional(),
+                "@_pluginWidget": z
+                    .string()
+                    .transform(value => value === "true")
+                    .optional(),
+                "@_offlineCapable": z
+                    .string()
+                    .transform(value => value === "true")
+                    .optional(),
+                "@_supportedPlatform": z
+                    .string()
+                    .transform(value => value.toLowerCase())
+                    .optional()
             })
-        );
-    }
+        })
+    );
 }
 
 class UnsupportedPlatformError extends Error {

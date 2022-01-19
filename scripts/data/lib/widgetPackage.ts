@@ -1,7 +1,7 @@
 import { join } from "path";
 import { Widget } from "./widget";
 import { Analyzer } from "./analyzer";
-import { WidgetXmlParser } from "./widgetXmlParser";
+import { XmlExtractor } from "./parsers/XmlExtractor";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
 
@@ -17,7 +17,7 @@ export class WidgetPackage {
     }
 
     static async load(packagePath: string, onWidgetLoad?: (widget: Widget) => void): Promise<WidgetPackage> {
-        const { widgetFileNames, ...packageXmlValues } = await WidgetPackage.createPackageXmlParser().extract(
+        const { widgetFileNames, ...packageXmlValues } = await this.packageXmlExtractor.extract(
             join(packagePath, "src", "package.xml"),
             {
                 name: xml => xml.package.clientModule["@_name"],
@@ -37,28 +37,25 @@ export class WidgetPackage {
         return new WidgetPackage({ ...packageXmlValues, widgets });
     }
 
-    private static createPackageXmlParser() {
-        const alwaysArray = ["package.clientModule.widgetFiles.widgetFile"];
-        return new WidgetXmlParser(
-            new XMLParser({
-                ignoreAttributes: false,
-                isArray: (_, jPath) => alwaysArray.indexOf(jPath) !== -1
-            }),
-            z.object({
-                package: z.object({
-                    clientModule: z.object({
-                        "@_name": z.string(),
-                        "@_version": z.string(),
-                        widgetFiles: z.object({
-                            widgetFile: z.array(
-                                z.object({
-                                    "@_path": z.string()
-                                })
-                            )
-                        })
+    private static packageXmlExtractor = new XmlExtractor(
+        new XMLParser({
+            ignoreAttributes: false,
+            isArray: (_, jPath) => ["package.clientModule.widgetFiles.widgetFile"].indexOf(jPath) !== -1
+        }),
+        z.object({
+            package: z.object({
+                clientModule: z.object({
+                    "@_name": z.string(),
+                    "@_version": z.string(),
+                    widgetFiles: z.object({
+                        widgetFile: z.array(
+                            z.object({
+                                "@_path": z.string()
+                            })
+                        )
                     })
                 })
             })
-        );
-    }
+        })
+    );
 }
