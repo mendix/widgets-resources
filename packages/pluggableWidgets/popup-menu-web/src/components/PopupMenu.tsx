@@ -155,8 +155,10 @@ function correctPosition(element: HTMLElement, position: PositionEnum): void {
         do {
             if (isBehindElement(element, node, 3) && isElementVisibleByUser(dynamicDocument, dynamicWindow, node)) {
                 return unBlockAbsoluteElement(element, boundingRect, node.getBoundingClientRect(), position);
-            } else {
+            } else if (node.parentElement) {
                 node = node.parentElement as HTMLElement;
+            } else {
+                break;
             }
         } while (node.parentElement);
     }
