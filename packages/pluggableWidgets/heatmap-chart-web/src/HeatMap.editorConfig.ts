@@ -15,6 +15,10 @@ export function getProperties(
 ): Properties {
     const showAdvancedOptions = values.developerMode !== "basic";
 
+    if (!values.showValues) {
+        hidePropertyIn(defaultProperties, values, "valuesColor");
+    }
+
     if (platform === "web") {
         hidePropertyIn(defaultProperties, values, "developerMode");
 
