@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget
+    id="com.mendix.widget.web.labelselector.LabelSelector"
+    pluginWidget="true"
+    needsEntityContext="true"
+    supportedPlatform="Web"
+    offlineCapable="true"
+    xmlns="http://www.mendix.com/widget/1.0/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd"
+>
+    <name>Pluggable Label Selector</name>
+    <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
+    <studioProCategory>Images, videos &amp; files</studioProCategory>
+    <studioCategory>Images, Videos &amp; Files</studioCategory>
+    <helpUrl>https://docs.mendix.com/appstore/widgets/video-player</helpUrl>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="tagAssoc" type="datasource" required="true" isList="true">
+                    <caption>Label Object</caption>
+                    <description>
+                        Select the entity in which the label data is stored here. This property defines the reference
+                        between the context object and the label object.
+                    </description>
+                </property>
+                <property key="tafgAssoc" type="association" required="true" universeDataSource="tagAssoc">
+                    <caption>Label</caption>
+                    <description />
+                </property>
+                <property key="tagAttrib" type="attribute" required="true" dataSource="tagAssoc">
+                    <caption>Caption Attribute</caption>
+                    <description>
+                        The caption attribute of the label object, in which the user input is stored.
+                    </description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="colorAttrib" type="attribute" required="false" dataSource="tagAssoc">
+                    <caption>Color Attribute</caption>
+                    <description>The color attribute of the label object</description>
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
