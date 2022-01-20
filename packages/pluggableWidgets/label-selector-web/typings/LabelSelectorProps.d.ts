@@ -11,8 +11,8 @@ export interface LabelSelectorContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    tagAssoc: ListValue;
-    tafgAssoc: any;
+    ds: ListValue;
+    labelAssoc: any;
     tagAttrib: ListAttributeValue<string>;
     colorAttrib?: ListAttributeValue<string>;
 }
@@ -22,8 +22,8 @@ export interface LabelSelectorPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    tagAssoc: {} | { type: string } | null;
-    tafgAssoc: any;
+    ds: {} | { type: string } | null;
+    labelAssoc: any;
     tagAttrib: string;
     colorAttrib: string;
 }
