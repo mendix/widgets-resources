@@ -132,7 +132,7 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
             ...nativeWidgetFolders.map(async folder => {
                 const src = (await getFiles(folder, [`.mpk`]))[0];
                 const dest = join(tmpFolder, "widgets", basename(src));
-                await rm(dest);
+                await rm(dest, { force: true });
                 await copyFile(src, dest);
             })
         ]);
