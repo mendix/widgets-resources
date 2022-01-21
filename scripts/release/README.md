@@ -27,6 +27,7 @@
 1. Add a tag to the commit you want to create a release from. The tag should be formatted like ${PackageName}-v${Major}.${Minor}.${Patch}
     - Example: `mobile-resources-native-v3.0.0`
     - Example: `nanoflow-actions-native-v3.0.0`
+1. The minimumMXVersion should match the Mendix project version.
 1. That's it! 
     - The content should now be released in GitHub.
     - The content should now be released in the MX Marketplace. Double check to verify.
