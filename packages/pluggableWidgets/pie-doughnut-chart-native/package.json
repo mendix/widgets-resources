@@ -1,7 +1,7 @@
 {
   "name": "pie-doughnut-chart-native",
   "widgetName": "PieDoughnutChart",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {

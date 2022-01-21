@@ -23,6 +23,7 @@
 
 #### Native Modules
 1. Make sure a new widget is used on a page in the module and commit your changes, so it's included in the module when it's exported.
+1. Make sure each changed widget has an appropriate change to it's package.json (version bump) and changelog.
 1. Add a tag to the commit you want to create a release from. The tag should be formatted like ${PackageName}-v${Major}.${Minor}.${Patch}
     - Example: `mobile-resources-native-v3.0.0`
     - Example: `nanoflow-actions-native-v3.0.0`
