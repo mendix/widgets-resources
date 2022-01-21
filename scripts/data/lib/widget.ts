@@ -46,7 +46,7 @@ export class Widget {
         return {
             ...other,
             hasStructureModePreview: this.hasStructureModePreview(analyzer),
-            hasDesignModePreview: this.hasDesignModePreview(analyzer),
+            ...(other.supportedPlatform === "web" ? { hasDesignModePreview: this.hasDesignModePreview(analyzer) } : {}),
             hasAllTileIcons: this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
             hasAllDarkIcons:
                 this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined

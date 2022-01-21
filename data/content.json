@@ -107,7 +107,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -148,7 +147,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -168,7 +166,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -188,7 +185,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -228,7 +224,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -269,7 +264,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -310,7 +304,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -351,7 +344,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -392,7 +384,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -432,7 +423,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -452,7 +442,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -619,7 +608,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -660,7 +648,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -701,7 +688,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -742,7 +728,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -762,7 +747,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -802,7 +786,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -822,7 +805,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -863,7 +845,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -883,7 +864,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -923,7 +903,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -964,7 +943,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1005,7 +983,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1046,7 +1023,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1066,7 +1042,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1086,7 +1061,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1126,7 +1100,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1167,7 +1140,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1207,7 +1179,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1285,7 +1256,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1305,7 +1275,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1345,7 +1314,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": true,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1407,7 +1375,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1469,7 +1436,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1510,7 +1476,6 @@
 					"offlineCapable": true,
 					"supportedPlatform": "native",
 					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
