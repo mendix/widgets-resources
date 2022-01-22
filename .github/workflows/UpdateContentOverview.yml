@@ -4,10 +4,7 @@ on:
     branches:
       - master
     paths:
-      - packages/pluggableWidgets/**/package.json
-      - packages/customWidgets/**/package.json
-      - packages/pluggableWidgets/**/src/*.xml
-      - packages/customWidgets/**/src/*.xml
+      - packages/**/*
       - scripts/data/**/*
 jobs:
   publish-data:
