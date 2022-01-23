@@ -42,7 +42,7 @@
     "setup-mobile": "npm run setup-android && npm run setup-ios",
     "setup-android": "node ./detox/scripts/setup-android.js",
     "setup-ios": "node ./detox/scripts/setup-ios.js",
-    "update:content-overview": "ts-node --project ./scripts/tsconfig.json scripts/data/updateContentOverview.ts"
+    "update:content-overview": "ts-node --project ./scripts/tsconfig.json scripts/data/generator/index.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",

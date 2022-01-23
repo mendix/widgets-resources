@@ -1,8 +1,8 @@
 import { join, relative } from "path";
 import { JSAction } from "./jsAction";
-import { withGlob } from "./util";
+import { withGlob } from "../util";
 import { z } from "zod";
-import { JsonExtractor } from "./parsers/JsonExtractor";
+import { JsonExtractor } from "../parsers/JsonExtractor";
 
 export class JSActionPackage {
     constructor(private properties: { name: string; version: string; jsActions: JSAction[] }) {}

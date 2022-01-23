@@ -1,7 +1,7 @@
 import { basename, extname, join } from "path";
-import { Analyzer } from "./analyzer";
-import { XmlExtractor } from "./parsers/XmlExtractor";
-import { firstWithGlob, isEnumValue } from "./util";
+import { Analyzer } from "../analyzer";
+import { XmlExtractor } from "../parsers/XmlExtractor";
+import { firstWithGlob, isEnumValue } from "../util";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
 

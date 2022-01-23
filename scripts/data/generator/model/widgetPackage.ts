@@ -1,7 +1,7 @@
 import { join } from "path";
 import { Widget } from "./widget";
-import { Analyzer } from "./analyzer";
-import { XmlExtractor } from "./parsers/XmlExtractor";
+import { Analyzer } from "../analyzer";
+import { XmlExtractor } from "../parsers/XmlExtractor";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
 
