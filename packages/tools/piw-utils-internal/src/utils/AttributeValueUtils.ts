@@ -3,6 +3,10 @@ import { compareAsc } from "date-fns";
 
 type AttributeValue = string | boolean | Date | Big | undefined;
 
+/**
+ * Comparison function for sorting items of type `AttributeValue`. Please note that in order to use
+ * this function, you HAVE to include `date-fns` as a dependency in your widget package.json.
+ */
 export function valueAttributeCompareFn(
     firstItemSortValue: AttributeValue,
     secondItemSortValue: AttributeValue
