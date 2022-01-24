@@ -1,15 +1,45 @@
-import React, { createElement, ReactElement, useState } from "react";
+import React, { createElement, ReactElement, useMemo, useState } from "react";
 import classNames from "classnames";
 import { LabelSelectorContainerProps } from "../typings/LabelSelectorProps";
 
 import "./ui/LabelSelector.scss";
 
+function escapeForRegExp(string: string): string {
+    return string.replace(/[-\\^$*+?.()|[\]{}]/g, "\\$&");
+}
+
+function matchPartial(string: string): RegExp {
+    return new RegExp(`(?:^|\\s)${escapeForRegExp(string)}`, "i");
+}
+
 export function LabelSelector(props: LabelSelectorContainerProps): ReactElement | null {
     const [isFocused, setIsFocused] = useState(false);
+    const [query, setQuery] = useState("");
+    const [userTriggeredItems, setUserTriggeredItems] = useState(false);
 
     const activeItem = props.labelAssoc?.value;
     const items = props.ds.items ?? [];
-    const x = true;
+
+    const itemValues = items.map(item => ({
+        objectItem: item,
+        caption: props.tagAttrib.get(item).value
+    }));
+
+    const queryRegex = useMemo(() => matchPartial(query), [query]);
+
+    const filteredItemValues =
+        query.length > 0
+            ? itemValues.filter(
+                  itemValue =>
+                      itemValue.caption !== undefined &&
+                      itemValue.caption !== null &&
+                      queryRegex.test(itemValue.caption)
+              )
+            : itemValues;
+
+    const hasMatchingItems = filteredItemValues.length > 0;
+    const shouldShowItems = query !== "" || userTriggeredItems;
+
     return (
         <React.Fragment>
             <select onChange={e => props.labelAssoc.setValue(items.find(item => item.id === e.target.value))}>
@@ -31,23 +61,35 @@ export function LabelSelector(props: LabelSelectorContainerProps): ReactElement 
                         <input
                             type="text"
                             autoComplete="off"
+                            value={query}
+                            // @ts-expect-error Value exists
+                            onInput={e => setQuery(e.target.value)}
                             onFocus={() => setIsFocused(true)}
-                            onBlur={() => setIsFocused(false)}
+                            onBlur={() => {
+                                // setIsFocused(false);
+                                // setUserTriggeredItems(false);
+                            }}
+                            onKeyDown={e => {
+                                if ((e.key === "Down" || e.key === "ArrowDown") && !userTriggeredItems) {
+                                    setUserTriggeredItems(true);
+                                }
+                            }}
                         />
                     </li>
-                    {isFocused || x ? (
+                    {isFocused && shouldShowItems && hasMatchingItems ? (
                         <div>
                             <ul role="listbox">
-                                {props.ds.items?.map(item => (
+                                {filteredItemValues.map(({ objectItem, caption }) => (
                                     <li
-                                        key={item.id}
+                                        key={objectItem.id}
                                         role="option"
                                         onClick={e => {
                                             e.preventDefault();
-                                            props.labelAssoc.setValue(item);
+                                            props.labelAssoc.setValue(objectItem);
+                                            setUserTriggeredItems(false);
                                         }}
                                     >
-                                        {props.tagAttrib.get(item).value}
+                                        {caption}
                                     </li>
                                 ))}
                             </ul>
