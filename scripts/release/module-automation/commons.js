@@ -265,7 +265,7 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
     await unzip(mpkOutput, projectPath);
     await rmdir(mpkOutput, { recursive: true });
     // Copy widgets to widgets folder
-    await mkdir(widgetsDestination, { recursive: true });
+    await mkdir(widgetsDestination, { recursive: true, mode: 711 }); // https://chmodcommand.com/chmod-711/
     for await (const folder of widgetsFolders) {
         console.log(`Adding ${basename(folder)} to ${moduleName}`);
         const src = (await getFiles(folder, [`.mpk`]))[0];
@@ -285,7 +285,7 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
             await writeFile(packageXmlFile, newContent);
         }
     } catch (e) {
-        throw new Error(`Including widgets in module failed. package.xml of widget ${moduleName} not found`);
+        throw new Error(`Including widgets in module failed. package.xml of widget/module ${moduleName} not found`);
     }
     // Re-zip and rename
     await zip(projectPath, moduleName);
