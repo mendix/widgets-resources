@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.0.9] Atlas Core - 2022-1-24
 ### Fixed
 - We corrected the border styling for the Floating Action Button native widget when in Dark Mode.
 
