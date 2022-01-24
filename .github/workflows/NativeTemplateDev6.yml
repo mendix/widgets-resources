@@ -1,9 +1,12 @@
-name: '[Android] Custom Dev App CI'
+name: 'Custom Native Template Dev build'
 
 on:
+  workflow_dispatch:
   schedule: 
     - cron: '0 0 * * *'
-  workflow_dispatch:
+
+env:
+  EXTRA_DEPENDENCIES: '{"dependencies": {"react-native-inappbrowser-reborn": "3.4.0"}}'
 
 jobs:
   build:
@@ -20,11 +23,15 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-      - name: actions/setup-node
+      - name: Setup node
         uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 #v2.5.1
         with:
-          node-version: "14.18.3"
-      - name: npm install
+          node-version: '14.18.3'
+      - name: Setup extra dependencies
+        uses: smarki/modify-package-dependencies@e53345cf2995abc32203c920bec609606fa94f52 #0.5.0
+        with: 
+          extra-dependencies: '${{env.EXTRA_DEPENDENCIES}}'
+      - name: NPM install
         uses: Jaid/action-npm-install@9483da054882538350947c4147de4c8adbf0d597 #v1.2.4
         with:
           packageManager: npm
