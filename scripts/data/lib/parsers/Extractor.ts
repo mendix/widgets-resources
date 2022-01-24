@@ -9,8 +9,8 @@ export abstract class Extractor<Z extends ZodTypeAny> {
     protected constructor(protected schema?: Z) {}
 
     async extract<P extends Patterns<z.infer<Z>>>(path: string, patterns: P): Promise<Values<z.infer<Z>, P>> {
-        const _data = await this.getData(path);
-        const data = this.schema?.parse(_data) ?? _data;
+        const rawData = await this.getData(path);
+        const data = this.schema?.parse(rawData) ?? rawData;
 
         return Object.entries(patterns).reduce<Values<z.infer<Z>, P>>((result, [key, extractor]) => {
             const value = extractor(data);
