@@ -10,25 +10,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out Native Template from release/6.2.0
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 #v2.4.0
         with: 
           repository: 'mendix/native-template'
           ref: 'release/6.2.0'
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
+      - name: Set up JDK 11
+        uses: actions/setup-java@f0bb91606209742fe3ea40199be2f3ef195ecabf #v2.5.0
         with:
-          java-version: 1.8
+          distribution: 'temurin'
+          java-version: '11'
+      - name: actions/setup-node
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 #v2.5.1
+        with:
+          node-version: "14.18.3"
       - name: npm install
-        uses: Jaid/action-npm-install@v1.2.4
+        uses: Jaid/action-npm-install@9483da054882538350947c4147de4c8adbf0d597 #v1.2.4
         with:
           packageManager: npm
-      - name: Add NDK 21.0.6113669
-        run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
+      - name: Setup NDK 21.0.6113669
+        uses: nttld/setup-ndk@b2abc75192ee2a1ec118c8238fd86dec6d96dc43 #v1.0.6
+        with:
+          ndk-version: r21e
       - name: Build with Gradle
         run: ./gradlew assembleDevDebug
         working-directory: ./android
       - name: Archive apk
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 #v2.3.1
         with:
           name: native-template-6-dev-apk
           path: android/app/build/outputs/apk/dev/debug/app-dev-debug.apk
