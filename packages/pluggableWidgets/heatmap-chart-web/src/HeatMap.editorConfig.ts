@@ -1,7 +1,6 @@
 import {
     hidePropertiesIn,
     hidePropertyIn,
-    Problem,
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs
