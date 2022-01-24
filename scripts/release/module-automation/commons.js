@@ -265,7 +265,7 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
     await unzip(mpkOutput, projectPath);
     await rmdir(mpkOutput, { recursive: true });
     // Copy widgets to widgets folder
-    await mkdir(widgetsDestination, { recursive: true, mode: 711 }); // https://chmodcommand.com/chmod-711/
+    await mkdir(widgetsDestination, { recursive: true });
     for await (const folder of widgetsFolders) {
         console.log(`Adding ${basename(folder)} to ${moduleName}`);
         const src = (await getFiles(folder, [`.mpk`]))[0];
