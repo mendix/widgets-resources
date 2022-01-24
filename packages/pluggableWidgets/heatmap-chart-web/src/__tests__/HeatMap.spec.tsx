@@ -55,6 +55,15 @@ describe("The HeatMap widget", () => {
         expect(data).toHaveProperty("type", "heatmap");
     });
 
+    it("visualizes a heatmap chart properly even if there is no data", () => {
+        expect(() =>
+            renderHeatMap({
+                seriesDataSource: ListValueBuilder().withItems([]),
+                showValues: true
+            })
+        ).not.toThrow();
+    });
+
     it("sets proper label values on the data series based on seriesName", () => {
         const heatmapChart = renderHeatMap({});
         const data = heatmapChart.find(ChartWidget).prop("data");

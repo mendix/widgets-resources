@@ -39,9 +39,3 @@ export function getProperties(
 export function getPreview(_values: HeatMapPreviewProps): StructurePreviewProps | null {
     return null;
 }
-
-export function check(_values: HeatMapPreviewProps): Problem[] {
-    const errors: Problem[] = [];
-
-    return errors;
-}

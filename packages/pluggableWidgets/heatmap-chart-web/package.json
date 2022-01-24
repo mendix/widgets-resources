@@ -1,7 +1,7 @@
 {
   "name": "heatmap-chart-web",
   "widgetName": "HeatMap",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Shows data in a heatmap format graph.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
