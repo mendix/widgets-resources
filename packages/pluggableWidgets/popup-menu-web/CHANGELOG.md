@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.1] - 2022-1-19
+
 ### Fixed
 - We fixed an issue while showing the popup items using Firefox on Windows (Ticket #139529).
 
