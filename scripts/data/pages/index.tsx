@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import { Col, Container, Nav, Row, Tab } from "react-bootstrap";
 import { WidgetsGrid } from "../components/WidgetsGrid";
 import { z } from "zod";
 import { OutputSchema } from "../schema";
+import { Container, Nav, Row, Tab } from "react-bootstrap";
 
 type Props = {
     data: z.infer<typeof OutputSchema>;
@@ -11,10 +11,12 @@ type Props = {
 const Home: NextPage<Props> = props => {
     return (
         <Container className="vh-100" fluid>
-            <Row className="h-100">
-                <Col className="h-100">
+            <div className="d-flex flex-column h-100">
+                <Row>
                     <h1>Content Overview</h1>
-                    <Tab.Container defaultActiveKey="widgets">
+                </Row>
+                <Tab.Container defaultActiveKey="widgets">
+                    <Row>
                         <Nav variant="tabs" className="nav-fill">
                             <Nav.Item>
                                 <Nav.Link eventKey="widgets">Widgets</Nav.Link>
@@ -23,15 +25,17 @@ const Home: NextPage<Props> = props => {
                                 <Nav.Link eventKey="jsActions">JS Actions</Nav.Link>
                             </Nav.Item>
                         </Nav>
+                    </Row>
+                    <Row className="flex-grow-1">
                         <Tab.Content className="h-100">
                             <Tab.Pane eventKey="widgets" className="h-100">
                                 <WidgetsGrid data={props.data.widgetPackages} />
                             </Tab.Pane>
                             <Tab.Pane eventKey="jsActions" className="h-100" />
                         </Tab.Content>
-                    </Tab.Container>
-                </Col>
-            </Row>
+                    </Row>
+                </Tab.Container>
+            </div>
         </Container>
     );
 };
