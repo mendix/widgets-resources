@@ -6,16 +6,17 @@ export function preview(props: ColorPickerPreviewProps): ReactNode {
     return (
         <ColorPicker
             format={"hex"}
-            onChangeComplete={() => undefined}
+            onColorChange={() => undefined}
             onChange={() => undefined}
             tabIndex={undefined}
             color={"#dedede"}
             disabled={props.readOnly}
             mode={props.mode}
             type={props.type}
+            defaultColors={props.defaultColors}
             name={"mx-color-picker"}
-            defaultColors={[]}
             id={"colorPicker"}
+            invalidFormatMessage={props.invalidFormatMessage}
         />
     );
 }

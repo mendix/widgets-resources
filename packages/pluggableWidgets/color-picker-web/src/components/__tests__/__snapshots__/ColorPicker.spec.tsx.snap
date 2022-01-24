@@ -46,7 +46,7 @@ exports[`ColorPicker with a mode as inline renders with the structure 1`] = `
       disabled={false}
       displayColorPicker={false}
       onChange={[Function]}
-      onChangeComplete={[MockFunction]}
+      onChangeComplete={[Function]}
       presetColors={
         Array [
           "#D0021B",

@@ -15,7 +15,7 @@ describe("ColorPicker", () => {
         mode: "popover",
         type: "sketch",
         onChange: jest.fn(),
-        onChangeComplete: jest.fn(),
+        onColorChange: jest.fn(),
         id: "color-picker",
         name: "color picker"
     };
@@ -50,7 +50,7 @@ describe("ColorPicker", () => {
         });
         const colorElement = colorPickerComponent.find("[title='#F47373']");
         colorElement.simulate("click");
-        expect(colorPickerProps.onChangeComplete).toHaveBeenCalled();
+        expect(colorPickerProps.onColorChange).toHaveBeenCalled();
     });
 
     describe("renders a picker of type", () => {

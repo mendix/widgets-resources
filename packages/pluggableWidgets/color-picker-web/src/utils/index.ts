@@ -51,7 +51,7 @@ export const validateColorFormat = (color: string, colorFormat: FormatEnum): str
         /^rgba\((0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0|255|25[0-4]|2[0-4]\d|1\d\d|0?\d?\d),(0?\.\d*|0|1(\.0)?)\)$/;
     let format = "";
     if (color && colorFormat === "hex" && !hexRegExp.test(color.toLowerCase())) {
-        format = "'#0d0' or '#d0d0d0'";
+        format = "'#0d0', '#d0d0d0'";
     } else if (color && colorFormat === "rgb" && !rgbRegExp.test(color.toLowerCase())) {
         format = "'rgb(115,159,159)'";
     } else if (color && colorFormat === "rgba" && !rgbaRegExp.test(color.toLowerCase())) {
@@ -60,8 +60,12 @@ export const validateColorFormat = (color: string, colorFormat: FormatEnum): str
     return format;
 };
 
+export function logError(message: string, style?: string, error?: any): void {
+    console.error(message, style, error);
+}
+
 export function validateProps(props: ColorPickerProps): string {
-    const { type, defaultColors, invalidFormatMessage, format } = props;
+    const { type, defaultColors, invalidFormatMessage, format, id } = props;
     const message: string[] = [];
     const supportDefaultColors =
         type === "block" || type === "sketch" || type === "circle" || type === "compact" || type === "twitter";
@@ -69,10 +73,15 @@ export function validateProps(props: ColorPickerProps): string {
         defaultColors.forEach(color => {
             const validFormat = validateColorFormat(color.color, format);
             if (validFormat) {
-                message.push(`${color.color}, ${invalidFormatMessage?.replace(/\{1}/, validFormat)}`);
+                message.push(`${color.color}, ${invalidFormatMessage?.replaceAll(":colors:", validFormat)}`);
             }
         });
     }
 
+    if (message.length) {
+        const errorMessage = `Configuration error in widget ${id}: ${message.join(", ")}`;
+        logError(errorMessage);
+        return errorMessage;
+    }
     return message.join(", ");
 }

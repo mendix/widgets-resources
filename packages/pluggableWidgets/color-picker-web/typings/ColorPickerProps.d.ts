@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ActionValue, EditableValue } from "mendix";
+import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
 export type FormatEnum = "hex" | "rgb" | "rgba";
 
@@ -39,7 +39,7 @@ export interface ColorPickerContainerProps {
     mode: ModeEnum;
     type: TypeEnum;
     defaultColors: DefaultColorsType[];
-    invalidFormatMessage: string;
+    invalidFormatMessage?: DynamicValue<string>;
     onChange?: ActionValue;
 }
 

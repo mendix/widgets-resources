@@ -16,7 +16,7 @@ import {
     CompactPickerProps
 } from "react-color";
 import classNames from "classnames";
-import { getColorPicker, parseColor, validateColorFormat } from "../utils";
+import { getColorPicker, parseColor, validateColorFormat, validateProps } from "../utils";
 import { Input } from "./Input";
 import { Button } from "./Button";
 
@@ -25,14 +25,14 @@ export interface ColorPickerProps {
     name: string;
     tabIndex?: number | undefined;
     onChange: () => void;
-    onChangeComplete: (value: string) => void;
+    onColorChange: (value: string) => void;
     mode: ModeEnum;
     type: TypeEnum;
     color: string | undefined;
     defaultColors: DefaultColorsType[];
     format: FormatEnum;
     disabled: boolean;
-    invalidFormatMessage?: string;
+    invalidFormatMessage?: string | undefined;
 }
 
 export type ColorPickerConfigProps =
@@ -61,13 +61,14 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
 
     const submitColor = (color: string): void => {
         setCurrentColor(color);
-        props.onChangeComplete(color);
+        props.onColorChange(color);
     };
 
     const validateColor = (colorValue: string): void => {
-        const validFormat = validateColorFormat(colorValue, format);
-        const alertMessage = validFormat ? invalidFormatMessage?.replace(/\{1}/, validFormat) : undefined;
-        setAlertMessage(alertMessage);
+        const message = validateColorFormat(colorValue, format);
+        const validProps = validateProps(props);
+        const alertMessage = message ? invalidFormatMessage?.replaceAll(":colors:", message) : undefined;
+        setAlertMessage(validProps || alertMessage);
     };
 
     const setColorPickerHidden = useCallback(
@@ -95,11 +96,19 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
                 color={colorValue}
                 disabled={disabled}
                 onKeyUp={setColorPickerHidden}
-                onChange={({ target }) => submitColor(target.value)}
+                onChange={({ target }) => {
+                    submitColor(target.value);
+                    props.onChange();
+                }}
             >
                 {renderButton()}
             </Input>
         );
+    };
+    const onChangeComplete = (color: ColorState): void => {
+        if (currentColor !== parseColor(color, format)) {
+            props.onChange();
+        }
     };
     const renderButton = (): ReactElement => {
         return <Button mode={mode} disabled={disabled} onClick={() => setColorPickerHidden(!hidden)} color={color} />;
@@ -111,7 +120,8 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         const config = {
             color: color || defaultColor[format],
             colors: defaultColors.length > 0 && type !== "swatches" ? colors : undefined,
-            onChangeComplete: props.onChange,
+            // onChangeComplete: debounce(() => props.onChange(), 500),
+            onChangeComplete,
             presetColors: defaultColors.length > 0 ? colors : undefined,
             disableAlpha: format !== "rgba",
             disabled,
@@ -144,13 +154,18 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
     return (
         <div
             className={classNames("widget-color-picker widget-color-picker-picker", {
-                "widget-color-picker-disabled": disabled
+                "widget-color-picker-disabled": disabled,
+                "has-error": !!alertMessage
             })}
         >
             {mode === "input" && renderInput()}
             {mode === "popover" && renderButton()}
             {hidden || disabled ? null : renderColorPicker()}
-            {alertMessage ? <Alert bootstrapStyle="danger">{alertMessage}</Alert> : null}
+            {alertMessage ? (
+                <Alert bootstrapStyle="danger" className={"widget-color-picker-alert has-error"}>
+                    {alertMessage}
+                </Alert>
+            ) : null}
         </div>
     );
 };

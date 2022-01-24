@@ -6,7 +6,7 @@
     offlineCapable="true"
     xmlns="http://www.mendix.com/widget/1.0/"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd"
+    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd"
 >
     <name>Color picker</name>
     <description>Pick a color from color input</description>
@@ -17,9 +17,7 @@
             <propertyGroup caption="Data source">
                 <property key="colorAttribute" type="attribute">
                     <caption>Color attribute</caption>
-                    <description>
-                        Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or
-                        rgba(195,226,226,1).Non-code color values such as 'red' are not supported
+                    <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1).Non-code color values such as 'red' are not supported
                     </description>
                     <attributeTypes>
                         <attributeType name="String" />
@@ -71,9 +69,7 @@
             </property>
             <property key="defaultColors" type="object" isList="true" required="false">
                 <caption>Default colors</caption>
-                <description>
-                    The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch', 'Circle',
-                    'Compact' or 'Twitter'
+                <description>The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'
                 </description>
                 <properties>
                     <property key="color" type="string">
@@ -85,11 +81,15 @@
             </property>
         </propertyGroup>
         <propertyGroup caption="Validation">
-            <property key="invalidFormatMessage" type="string" required="false" multiline="true">
+            <property key="invalidFormatMessage" type="textTemplate" required="false">
                 <caption>Invalid format message</caption>
-                <description>
-                    Message shown when the user provides a wrong input, {1} will be replaced by a sample format
+                <description>Message shown when the user provides a wrong input, :colors: will be replaced by a sample format
                 </description>
+                <translations>
+                    <translation lang="en_US">Invalid format, color value should be of format like :colors:
+                    </translation>
+                    <translation lang="nl_NL">De opgeven kleur code is incorrect, voorbeeld :colors:</translation>
+                </translations>
             </property>
         </propertyGroup>
 
