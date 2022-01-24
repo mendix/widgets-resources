@@ -17,7 +17,7 @@
             <propertyGroup caption="Data source">
                 <property key="colorAttribute" type="attribute">
                     <caption>Color attribute</caption>
-                    <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1).Non-code color values such as 'red' are not supported
+                    <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported
                     </description>
                     <attributeTypes>
                         <attributeType name="String" />

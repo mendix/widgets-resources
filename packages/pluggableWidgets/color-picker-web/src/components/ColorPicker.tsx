@@ -120,7 +120,6 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         const config = {
             color: color || defaultColor[format],
             colors: defaultColors.length > 0 && type !== "swatches" ? colors : undefined,
-            // onChangeComplete: debounce(() => props.onChange(), 500),
             onChangeComplete,
             presetColors: defaultColors.length > 0 ? colors : undefined,
             disableAlpha: format !== "rgba",
