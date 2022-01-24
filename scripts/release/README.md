@@ -25,7 +25,7 @@
 1. Make sure a new widget is used on a page in the module and commit your changes, so it's included in the module when it's exported (Note: I'm not convinced this is necessary anymore. Someone please verify).
 1. Make sure each changed widget has an appropriate change to it's `package.json` & `package.xml` (version bump) and changelog before releasing.
 1. Each widget or module's `minimumMXVersion` (in package.json) should match the Mendix project (`NativeComponentsTestProject`) Studio Pro version.
-1. Add a tag to the commit you want to create a release from. The tag should be formatted like ${PackageName}-v${Major}.${Minor}.${Patch}. Push this tag to GitHub, this will trigger a GitHub action.
+1. Add a tag to the commit you want to create a release from. The tag should be formatted like ${PackageName}-v${Major}.${Minor}.${Patch}. The automation script uses the version part to bump the module's `package.json` version. Push this tag to GitHub, this will trigger a GitHub action.
     - Example: `mobile-resources-native-v3.0.0`
     - Example: `nanoflow-actions-native-v3.0.0`
 1. That's it! 
