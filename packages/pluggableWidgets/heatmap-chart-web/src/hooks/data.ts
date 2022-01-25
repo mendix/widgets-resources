@@ -15,7 +15,6 @@ type HeatMapDataSeriesHooks = Pick<
     | "onClickAction"
     | "scaleColors"
     | "seriesDataSource"
-    | "seriesName"
     | "seriesValueAttribute"
     | "showScale"
     | "smoothColor"
@@ -28,7 +27,6 @@ type HeatMapDataSeriesHooks = Pick<
 type AttributeValue = string | number | Date | undefined;
 
 type LocalHeatMapData = {
-    name: string | undefined;
     value: number | undefined;
     hoverText: string | undefined;
     horizontalAxisValue: AttributeValue;
@@ -61,7 +59,6 @@ export const useHeatMapDataSeries = ({
     onClickAction,
     scaleColors,
     seriesDataSource,
-    seriesName,
     seriesValueAttribute,
     showScale,
     smoothColor,
@@ -75,7 +72,6 @@ export const useHeatMapDataSeries = ({
     useEffect(() => {
         if (seriesDataSource.status === ValueStatus.Available && seriesDataSource.items) {
             const dataSourceItems = seriesDataSource.items.map(dataSourceItem => ({
-                name: seriesName.get(dataSourceItem).value,
                 value: ensure(seriesValueAttribute).get(dataSourceItem).value?.toNumber(),
                 hoverText: tooltipHoverText?.get(dataSourceItem).value,
                 horizontalAxisValue: formatValueAttribute(horizontalAxisAttribute?.get(dataSourceItem).value),
@@ -87,7 +83,6 @@ export const useHeatMapDataSeries = ({
         }
     }, [
         seriesDataSource,
-        seriesName,
         seriesValueAttribute,
         tooltipHoverText,
         horizontalAxisAttribute,
@@ -143,7 +138,6 @@ export const useHeatMapDataSeries = ({
                     ? "text"
                     : "none",
                 hovertext: heatmapChartData.map(({ hoverText }) => hoverText ?? ""),
-                labels: heatmapChartData.map(({ name }) => name ?? null),
                 onClick,
                 showscale: showScale,
                 x: horizontalValues.map(value => value?.toLocaleString()),

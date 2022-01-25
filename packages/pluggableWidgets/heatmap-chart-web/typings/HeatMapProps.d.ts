@@ -37,7 +37,6 @@ export interface HeatMapContainerProps {
     showLegend: boolean;
     developerMode: DeveloperModeEnum;
     seriesDataSource: ListValue;
-    seriesName: ListExpressionValue<string>;
     horizontalAxisAttribute?: ListAttributeValue<string>;
     horizontalSortAttribute?: ListAttributeValue<Big | string | Date>;
     horizontalSortOrder: HorizontalSortOrderEnum;
@@ -72,7 +71,6 @@ export interface HeatMapPreviewProps {
     showLegend: boolean;
     developerMode: DeveloperModeEnum;
     seriesDataSource: {} | { type: string } | null;
-    seriesName: string;
     horizontalAxisAttribute: string;
     horizontalSortAttribute: string;
     horizontalSortOrder: HorizontalSortOrderEnum;

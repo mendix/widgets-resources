@@ -54,7 +54,6 @@ export function HeatMap(props: HeatMapContainerProps): ReactElement | null {
         onClickAction: props.onClickAction,
         scaleColors: props.scaleColors,
         seriesDataSource: props.seriesDataSource,
-        seriesName: props.seriesName,
         seriesValueAttribute: props.seriesValueAttribute,
         showScale: props.showScale,
         smoothColor: props.smoothColor,

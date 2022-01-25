@@ -1,12 +1,6 @@
 import { createElement } from "react";
 import { ChartWidget } from "@mendix/shared-charts";
-import {
-    buildListExpression,
-    dynamicValue,
-    EditableValueBuilder,
-    ListAttributeValueBuilder,
-    ListValueBuilder
-} from "@mendix/piw-utils-internal";
+import { EditableValueBuilder, ListAttributeValueBuilder, ListValueBuilder } from "@mendix/piw-utils-internal";
 import { mount, ReactWrapper } from "enzyme";
 import { HeatMap } from "../HeatMap";
 import Big from "big.js";
@@ -33,7 +27,6 @@ describe("The HeatMap widget", () => {
                 customConfigurations=""
                 customSeriesOptions=""
                 seriesDataSource={ListValueBuilder().simple()}
-                seriesName={buildListExpression("name")}
                 seriesValueAttribute={new ListAttributeValueBuilder<Big>().build()}
                 enableThemeConfig={false}
                 scaleColors={[]}
@@ -62,26 +55,6 @@ describe("The HeatMap widget", () => {
                 showValues: true
             })
         ).not.toThrow();
-    });
-
-    it("sets proper label values on the data series based on seriesName", () => {
-        const heatmapChart = renderHeatMap({});
-        const data = heatmapChart.find(ChartWidget).prop("data");
-        expect(data).toHaveLength(1);
-        expect(data[0]).toHaveProperty("labels", [
-            "item 0",
-            "item 1",
-            "item 2",
-            "item 3",
-            "item 4",
-            "item 5",
-            "item 6",
-            "item 7",
-            "item 8",
-            "item 9",
-            "item 10",
-            "item 11"
-        ]);
     });
 
     it("has a default colorscale", () => {
@@ -205,12 +178,6 @@ function setupBasicAttributes(): Partial<HeatMapContainerProps> {
         allItems.map((_value, index) => ({ id: index.toString() } as ObjectItem))
     );
 
-    const seriesName = buildListExpression("name");
-    seriesName.get = allItems.reduce<jest.Mock>(
-        (prev, _curr, index) => prev.mockReturnValueOnce(dynamicValue(`item ${index}`)),
-        jest.fn()
-    );
-
     const seriesValueAttribute = new ListAttributeValueBuilder<Big>().build();
     seriesValueAttribute.get = allItems.reduce<jest.Mock>(
         (prev, _curr, index) =>
@@ -238,7 +205,6 @@ function setupBasicAttributes(): Partial<HeatMapContainerProps> {
 
     return {
         seriesDataSource,
-        seriesName,
         seriesValueAttribute,
         horizontalAxisAttribute,
         verticalAxisAttribute

@@ -41,16 +41,6 @@
                     <caption>Data source</caption>
                     <description />
                 </property>
-                <property
-                    key="seriesName"
-                    type="textTemplate"
-                    required="true"
-                    multiline="false"
-                    dataSource="seriesDataSource"
-                >
-                    <caption>Series name</caption>
-                    <description />
-                </property>
                 <property key="horizontalAxisAttribute" type="attribute" required="false" dataSource="seriesDataSource">
                     <caption>Horizontal axis attribute</caption>
                     <description />
