@@ -12,6 +12,10 @@ const heatmapChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
         color: "#555",
         size: 12
     },
+    margin: {
+        l: 80,
+        pad: 0
+    },
     legend: {
         font: {
             family: "Open Sans",
@@ -24,7 +28,10 @@ const heatmapChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
     },
     yaxis: {
         fixedrange: true,
-        ticks: ""
+        ticks: "",
+        title: {
+            standoff: 5
+        }
     }
 };
 const heatmapChartConfigOptions: ChartWidgetProps["configOptions"] = {
