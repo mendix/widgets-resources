@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [4.1.0] - 2022-1-24
+
 ### Added
 - Dark theme icons for Tile and List view.
 
