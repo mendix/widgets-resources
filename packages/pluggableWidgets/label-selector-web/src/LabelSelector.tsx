@@ -1,4 +1,4 @@
-import React, { createElement, ReactElement, useMemo, useState } from "react";
+import { createElement, ReactElement, useMemo, useState } from "react";
 import classNames from "classnames";
 import { LabelSelectorContainerProps } from "../typings/LabelSelectorProps";
 
@@ -41,62 +41,66 @@ export function LabelSelector(props: LabelSelectorContainerProps): ReactElement 
     const shouldShowItems = query !== "" || userTriggeredItems;
 
     return (
-        <React.Fragment>
-            <select onChange={e => props.labelAssoc.setValue(items.find(item => item.id === e.target.value))}>
-                {items.map(item => (
-                    <option key={item.id} value={item.id} selected={item.id === props.labelAssoc?.value?.id}>
-                        {props.tagAttrib.get(item).value}
-                    </option>
-                ))}
-            </select>
-            <div className="widget-label-selector">
-                <ul className="label-selector-container">
-                    {activeItem ? (
-                        <li className={classNames("label-item", "label-item-editable")} key={activeItem?.id}>
-                            <span>{props.tagAttrib.get(activeItem).value}</span>
-                            <button>X</button>
-                        </li>
-                    ) : null}
-                    <li className={classNames("label-item", "label-item-new")}>
-                        <input
-                            type="text"
-                            autoComplete="off"
-                            value={query}
-                            // @ts-expect-error Value exists
-                            onInput={e => setQuery(e.target.value)}
-                            onFocus={() => setIsFocused(true)}
-                            onBlur={() => {
-                                // setIsFocused(false);
-                                // setUserTriggeredItems(false);
-                            }}
-                            onKeyDown={e => {
-                                if ((e.key === "Down" || e.key === "ArrowDown") && !userTriggeredItems) {
-                                    setUserTriggeredItems(true);
-                                }
-                            }}
-                        />
+        // <React.Fragment>
+        //     <select onChange={e => props.labelAssoc.setValue(items.find(item => item.id === e.target.value))}>
+        //         {items.map(item => (
+        //             <option key={item.id} value={item.id} selected={item.id === props.labelAssoc?.value?.id}>
+        //                 {props.tagAttrib.get(item).value}
+        //             </option>
+        //         ))}
+        //     </select>
+        <div className="widget-label-selector">
+            <ul className="label-selector-container">
+                {activeItem ? (
+                    <li className={classNames("label-item", "label-item-editable")} key={activeItem?.id}>
+                        <span>{props.tagAttrib.get(activeItem).value}</span>
+                        <button onClick={() => props.labelAssoc.setValue(undefined)}>X</button>
                     </li>
-                    {isFocused && shouldShowItems && hasMatchingItems ? (
-                        <div>
-                            <ul role="listbox">
-                                {filteredItemValues.map(({ objectItem, caption }) => (
-                                    <li
-                                        key={objectItem.id}
-                                        role="option"
-                                        onClick={e => {
-                                            e.preventDefault();
-                                            props.labelAssoc.setValue(objectItem);
-                                            setUserTriggeredItems(false);
-                                        }}
-                                    >
-                                        {caption}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ) : null}
-                </ul>
-            </div>
-        </React.Fragment>
+                ) : null}
+                <li className={classNames("label-item", "label-item-new")}>
+                    <input
+                        type="text"
+                        autoComplete="off"
+                        value={query}
+                        disabled={Boolean(activeItem)}
+                        // @ts-expect-error Value exists
+                        onInput={e => setQuery(e.target.value)}
+                        onFocus={() => setIsFocused(true)}
+                        onBlur={e => {
+                            setIsFocused(false);
+                            console.log(e.relatedTarget);
+                            // setUserTriggeredItems(false);
+                        }}
+                        onKeyDown={e => {
+                            if ((e.key === "Down" || e.key === "ArrowDown") && !userTriggeredItems) {
+                                setUserTriggeredItems(true);
+                            }
+                        }}
+                    />
+                </li>
+                {isFocused && shouldShowItems && hasMatchingItems ? (
+                    <div>
+                        <ul role="listbox">
+                            {filteredItemValues.map(({ objectItem, caption }) => (
+                                <li
+                                    key={objectItem.id}
+                                    role="option"
+                                    onClick={() => {
+                                        // e.preventDefault();
+                                        props.labelAssoc.setValue(objectItem);
+                                        setQuery("");
+                                        setIsFocused(false);
+                                        setUserTriggeredItems(false);
+                                    }}
+                                >
+                                    {caption}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ) : null}
+            </ul>
+        </div>
+        // </React.Fragment>
     );
 }
