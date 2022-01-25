@@ -21,6 +21,12 @@ module.exports = {
             options: {
                 proseWrap: "preserve"
             }
+        },
+        {
+            files: "*.xml",
+            options: {
+                printWidth: 500
+            }
         }
-    ],
+    ]
 };
