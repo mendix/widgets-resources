@@ -77,7 +77,7 @@
 		"hasStructurePreview": true,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.native.animation.Animation",
@@ -97,7 +97,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.custom.AreaChart.AreaChart",
@@ -197,7 +197,17 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
+	},
+	{
+		"id": "com.mendix.widget.custom.BubbleChart.BubbleChart",
+		"pluginWidget": true,
+		"offlineCapable": true,
+		"supportedPlatform": "web",
+		"hasStructurePreview": true,
+		"hasDesignModePreview": true,
+		"hasTileIcons": true,
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.native.carousel.Carousel",
@@ -207,7 +217,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.native.colorpicker.ColorPicker",
@@ -217,7 +227,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
@@ -297,7 +307,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.web.fieldset.Fieldset",
@@ -417,7 +427,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
@@ -587,7 +597,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.web.scrollcontainer.ScrollContainer",
@@ -626,8 +636,8 @@
 		"supportedPlatform": "native",
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
-		"hasTileIcons": false,
-		"hasDarkModeIcons": false
+		"hasTileIcons": true,
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.native.slider.Slider",
@@ -687,7 +697,7 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	},
 	{
 		"id": "com.mendix.widget.web.tooltip.Tooltip",
@@ -737,6 +747,6 @@
 		"hasStructurePreview": false,
 		"hasDesignModePreview": false,
 		"hasTileIcons": true,
-		"hasDarkModeIcons": false
+		"hasDarkModeIcons": true
 	}
 ]
