@@ -61,10 +61,7 @@
                 </property>
                 <property key="horizontalSortAttribute" type="attribute" required="false" dataSource="seriesDataSource">
                     <caption>Horizontal sort attribute</caption>
-                    <description>
-                        Attribute to use for sorting the data. Sorting can only be used when data source is ‘Database’.
-                        For data source ‘Microflow’, the sorting should be done within the microflow.
-                    </description>
+                    <description>Attribute to use for sorting the data. Sorting can only be used when data source is ‘Database’. For data source ‘Microflow’, the sorting should be done within the microflow.</description>
                     <attributeTypes>
                         <attributeType name="Decimal" />
                         <attributeType name="Long" />
@@ -92,10 +89,7 @@
                 </property>
                 <property key="verticalSortAttribute" type="attribute" required="false" dataSource="seriesDataSource">
                     <caption>Vertical sort attribute</caption>
-                    <description>
-                        Attribute to use for sorting the data. Sorting can only be used when data source is ‘Database’.
-                        For data source ‘Microflow’, the sorting should be done within the microflow.
-                    </description>
+                    <description>Attribute to use for sorting the data. Sorting can only be used when data source is ‘Database’. For data source ‘Microflow’, the sorting should be done within the microflow.</description>
                     <attributeTypes>
                         <attributeType name="Decimal" />
                         <attributeType name="Long" />
@@ -128,18 +122,12 @@
             <propertyGroup caption="Scale">
                 <property key="scaleColors" type="object" isList="true" required="false">
                     <caption>Colors</caption>
-                    <description>
-                        The percentages with the colors that should be applied. At least two values needs to be
-                        specified, else the default colors are used.
-                    </description>
+                    <description>The percentages with the colors that should be applied. At least two values needs to be specified, else the default colors are used.</description>
                     <properties>
                         <propertyGroup caption="Scale">
                             <property key="valuePercentage" type="integer" defaultValue="0">
                                 <caption>Percentage</caption>
-                                <description>
-                                    The percentage at which the color should be applied. This value must be between 0
-                                    and 100
-                                </description>
+                                <description>The percentage at which the color should be applied. This value must be between 0 and 100.</description>
                             </property>
                             <property key="colour" type="string">
                                 <caption>Color</caption>
