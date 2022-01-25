@@ -112,7 +112,7 @@
             <propertyGroup caption="Scale">
                 <property key="scaleColors" type="object" isList="true" required="false">
                     <caption>Colors</caption>
-                    <description>The percentages with the colors that should be applied. At least two values needs to be specified, else the default colors are used.</description>
+                    <description>The percentages with the colors that should be applied. At least two values needs to be specified, for 0% and 100%, else the default colors are used.</description>
                     <properties>
                         <propertyGroup caption="Scale">
                             <property key="valuePercentage" type="integer" defaultValue="0">
