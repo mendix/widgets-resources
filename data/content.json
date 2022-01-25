@@ -95,7 +95,7 @@
 		},
 		{
 			"name": "Accordion",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.accordion.Accordion",
@@ -135,7 +135,7 @@
 		},
 		{
 			"name": "ActivityIndicator",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
@@ -154,7 +154,7 @@
 		},
 		{
 			"name": "Animation",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.animation.Animation",
@@ -173,7 +173,7 @@
 		},
 		{
 			"name": "AppEvents",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.appevents.AppEvents",
@@ -212,7 +212,7 @@
 		},
 		{
 			"name": "BackgroundImage",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.backgroundimage.BackgroundImage",
@@ -252,7 +252,7 @@
 		},
 		{
 			"name": "Badge",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.badge.Badge",
@@ -292,7 +292,7 @@
 		},
 		{
 			"name": "BarChart",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.barchart.BarChart",
@@ -332,7 +332,7 @@
 		},
 		{
 			"name": "BarcodeScanner",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
@@ -372,7 +372,7 @@
 		},
 		{
 			"name": "BottomSheet",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.bottomsheet.BottomSheet",
@@ -411,7 +411,7 @@
 		},
 		{
 			"name": "Carousel",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.carousel.Carousel",
@@ -430,7 +430,7 @@
 		},
 		{
 			"name": "ColorPicker",
-			"version": "1.0.0",
+			"version": "1.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.colorpicker.ColorPicker",
@@ -596,7 +596,7 @@
 		},
 		{
 			"name": "Feedback",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.feedback.Feedback",
@@ -636,7 +636,7 @@
 		},
 		{
 			"name": "FloatingActionButton",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.floatingactionbutton.FloatingActionButton",
@@ -716,7 +716,7 @@
 		},
 		{
 			"name": "IntroScreen",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.introscreen.IntroScreen",
@@ -735,7 +735,7 @@
 		},
 		{
 			"name": "LineChart",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.linechart.LineChart",
@@ -774,7 +774,7 @@
 		},
 		{
 			"name": "ListViewSwipe",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.listviewswipe.ListViewSwipe",
@@ -793,7 +793,7 @@
 		},
 		{
 			"name": "Maps",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.maps.Maps",
@@ -833,7 +833,7 @@
 		},
 		{
 			"name": "Notifications",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.notifications.Notifications",
@@ -852,7 +852,7 @@
 		},
 		{
 			"name": "PieDoughnutChart",
-			"version": "1.0.0",
+			"version": "1.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
@@ -891,7 +891,7 @@
 		},
 		{
 			"name": "PopupMenu",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.popupmenu.PopupMenu",
@@ -931,7 +931,7 @@
 		},
 		{
 			"name": "ProgressBar",
-			"version": "4.0.0",
+			"version": "4.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.progressbar.ProgressBar",
@@ -971,7 +971,7 @@
 		},
 		{
 			"name": "ProgressCircle",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.progresscircle.ProgressCircle",
@@ -1011,7 +1011,7 @@
 		},
 		{
 			"name": "QRCode",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.qrcode.QRCode",
@@ -1049,7 +1049,7 @@
 		},
 		{
 			"name": "RangeSlider",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.rangeslider.RangeSlider",
@@ -1088,7 +1088,7 @@
 		},
 		{
 			"name": "Rating",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.rating.Rating",
@@ -1128,7 +1128,7 @@
 		},
 		{
 			"name": "Repeater",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.repeater.Repeater",
@@ -1167,7 +1167,7 @@
 		},
 		{
 			"name": "SafeAreaView",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
@@ -1246,7 +1246,7 @@
 		},
 		{
 			"name": "Signature",
-			"version": "2.0.1",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.signature.Signature",
@@ -1263,7 +1263,7 @@
 		},
 		{
 			"name": "Slider",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.slider.Slider",
@@ -1363,7 +1363,7 @@
 		},
 		{
 			"name": "ToggleButtons",
-			"version": "2.0.0",
+			"version": "2.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
@@ -1424,7 +1424,7 @@
 		},
 		{
 			"name": "VideoPlayer",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
@@ -1464,7 +1464,7 @@
 		},
 		{
 			"name": "WebView",
-			"version": "3.0.0",
+			"version": "3.1.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.webview.WebView",
@@ -1485,7 +1485,7 @@
 	"jsActionPackages": [
 		{
 			"name": "mobile-resources-native",
-			"version": "3.3.1",
+			"version": "3.4.0",
 			"jsActions": [
 				{
 					"name": "BiometricAuthentication",
