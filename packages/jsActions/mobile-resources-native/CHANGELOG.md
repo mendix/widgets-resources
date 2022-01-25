@@ -7,7 +7,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [3.4.0] Native Mobile Resources - 2022-1-24
 
-
 ## [2.1.0] Accordion
 ### Added
 - Dark theme icons for Tile and List view.
@@ -60,7 +59,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Dark theme icons for Tile and List view.
 
-## [1.1.0] Image
+## [1.0.0] Image
 ### Added
 - We introduced the widget
 
@@ -128,7 +127,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - Dark theme icons for Tile and List view.
 
-## [1.1.0] Switch
+## [1.0.0] Switch
 ### Added
  - We added this widget.
 
@@ -143,6 +142,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [3.1.0] WebView
 ### Added
 - Dark theme icons for Tile and List view.
+
+## [1.0.0] Radio Buttons
+### Added
+- We introduced this widget.
 
 ## [3.3.1] Native Mobile Resources - 2021-10-25
 ### Fixed
