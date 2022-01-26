@@ -159,7 +159,7 @@ export const ColorPicker = (props: ColorPickerProps): ReactElement => {
         >
             {mode === "input" && renderInput()}
             {mode === "popover" && renderButton()}
-            {hidden || disabled ? null : renderColorPicker()}
+            {hidden || (mode !== "inline" && disabled) ? null : renderColorPicker()}
             {alertMessage ? (
                 <Alert bootstrapStyle="danger" className={"widget-color-picker-alert has-error"}>
                     {alertMessage}
