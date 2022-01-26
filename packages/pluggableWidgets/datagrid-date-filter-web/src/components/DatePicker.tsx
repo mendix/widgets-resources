@@ -47,6 +47,13 @@ export const DatePicker = forwardRef(
             }, 10);
         }, []);
 
+        const dateFormats = props.dateFormat ? [props.dateFormat] : undefined;
+        // Check is date format only contains short versions of day and month
+        if (!!props.dateFormat && /(?<![dm])([dm])(?!\1)/.test(props.dateFormat)) {
+            // Replace with full patterns d -> dd, M -> MM
+            dateFormats?.push(props.dateFormat.replaceAll(/(?<!d)d(?!d)|(?<!M)M(?!M)/g, m => m + m));
+        }
+
         return (
             <Fragment>
                 {Portal}
@@ -54,11 +61,12 @@ export const DatePicker = forwardRef(
                     {props.screenReaderInputCaption}
                 </span>
                 <DatePickerComponent
+                    adjustDateOnChange
                     allowSameDay={false}
                     ariaLabelledBy={`${props.id}-label`}
                     autoFocus={false}
                     className={classNames("form-control", { "filter-input": props.adjustable })}
-                    dateFormat={props.dateFormat}
+                    dateFormat={dateFormats}
                     disabledKeyboardNavigation={false}
                     dropdownMode="select"
                     enableTabLoop

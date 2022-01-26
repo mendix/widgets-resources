@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed an issue with locale date format when typing it manually.
+
 ## [2.2.1] - 2022-1-6
 
 ### Added
