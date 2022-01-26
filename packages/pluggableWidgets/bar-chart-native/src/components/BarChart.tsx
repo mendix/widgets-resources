@@ -10,6 +10,7 @@ import { Legend } from "./Legend";
 import { aggregateGridPadding, mapToAxisStyle, mapToGridStyle, mapToBarStyles } from "../utils/StyleUtils";
 
 export interface BarChartProps {
+    name: string;
     series: BarChartSeries[];
     sortOrder: SortOrderEnum;
     style: BarChartStyle;
@@ -46,6 +47,7 @@ export interface BarDataPoint<X extends number | Date | string, Y extends number
 }
 
 export function BarChart({
+    name,
     presentation,
     series,
     showLabels,
@@ -199,7 +201,7 @@ export function BarChart({
     );
 
     return (
-        <View style={style.container}>
+        <View style={style.container} testID={name}>
             {dataTypesResult instanceof Error ? (
                 <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (

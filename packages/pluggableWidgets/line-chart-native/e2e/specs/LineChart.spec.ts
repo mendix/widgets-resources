@@ -1,9 +1,9 @@
 import { element, by, device } from "detox";
 import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
 
-describe("Bar chart", () => {
+describe("Line chart", () => {
     beforeAll(async () => {
-        await tapMenuItem("Bar chart");
+        await tapMenuItem("Line chart");
     });
 
     afterAll(async () => {
@@ -11,7 +11,7 @@ describe("Bar chart", () => {
     });
 
     it("renders correctly", async () => {
-        const barChart = element(by.id("barChart"));
+        const barChart = element(by.id("lineChart"));
         await expectToMatchScreenshot(barChart);
     });
 });

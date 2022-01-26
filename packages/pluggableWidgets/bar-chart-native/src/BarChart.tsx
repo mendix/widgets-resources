@@ -21,6 +21,7 @@ export function BarChart(props: BarChartProps<BarChartStyle>): ReactElement | nu
 
     return (
         <BarChartComponent
+            name={name}
             series={series}
             style={styles}
             xAxisLabel={xAxisLabel?.value}
