@@ -2,7 +2,7 @@ import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
 import { Component, createElement } from "react";
-import StarRating from "react-native-star-rating";
+import StarRating from "./lib/StarRating";
 import { Big } from "big.js";
 
 import { RatingProps } from "../typings/RatingProps";
@@ -61,6 +61,7 @@ export class Rating extends Component<Props, State> {
 
         return (
             <StarRating
+                // @ts-ignore
                 maxStars={this.props.maximumValue}
                 rating={Math.round(Number(this.props.ratingAttribute.value))}
                 disabled={disabled}
