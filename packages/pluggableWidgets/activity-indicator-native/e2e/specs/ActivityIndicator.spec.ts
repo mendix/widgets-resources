@@ -1,5 +1,5 @@
 import { tapMenuItem } from "../../../../../detox/src/helpers";
-import { expect, element, by } from "detox";
+import { expect, element, by, device } from "detox";
 
 describe("Activity Indicator", () => {
     beforeAll(async () => {

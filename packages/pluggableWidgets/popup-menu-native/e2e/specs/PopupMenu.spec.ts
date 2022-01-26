@@ -1,4 +1,4 @@
-import { expect, element, by } from "detox";
+import { expect, element, by, device } from "detox";
 import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 
