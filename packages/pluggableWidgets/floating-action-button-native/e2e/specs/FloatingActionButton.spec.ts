@@ -1,6 +1,6 @@
 import { Alert } from "../../../../../detox/src/Alert";
 import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
-import { expect, element, by } from "detox";
+import { expect, element, by, device } from "detox";
 
 describe("Badge", () => {
     beforeEach(async () => {

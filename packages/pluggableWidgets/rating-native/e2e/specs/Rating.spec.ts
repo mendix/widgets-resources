@@ -1,5 +1,5 @@
 import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
-import { element, by } from "detox";
+import { element, by, device } from "detox";
 
 describe("Rating", () => {
     beforeAll(async () => {
