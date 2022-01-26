@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { join, resolve } = require("path");
 const cwd = process.cwd();
-const xmlParser = require("fast-xml-parser");
+const { XMLParser, XMLValidator } = require("fast-xml-parser");
 
 // For every module mx exports a folder, and in that folder we have bunch of xml's
 // which might contain an URL field
@@ -76,10 +76,12 @@ function* getFilePaths(dir) {
 
 function pageUrls(folder) {
     const pageUrls = [];
+    const xmlParser = new XMLParser({ ignoreAttributes: false });
+    const xmlValidator = new XMLValidator();
     for (const filePath of getFilePaths(folder)) {
         const file = fs.readFileSync(filePath, { encoding: "utf8" });
-        if (xmlParser.validate(file) === true) {
-            const jsonObj = xmlParser.parse(file, { ignoreAttributes: false });
+        if (xmlValidator.validate(file) === true) {
+            const jsonObj = xmlParser.parse(file);
             const url = jsonObj["m:page"]?.["@_url"];
             if (url) {
                 pageUrls.push(url);
