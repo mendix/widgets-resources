@@ -24,6 +24,7 @@ export function LineChart(props: LineChartProps<LineChartStyle>): ReactElement |
 
     return (
         <LineChartComponent
+            name={name}
             lines={chartLines}
             style={styles}
             showLegend={showLegend}
