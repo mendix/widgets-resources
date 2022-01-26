@@ -1,0 +1,1871 @@
+{
+	"widgetPackages": [
+		{
+			"name": "Calendar2",
+			"version": "1.0.13",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.calendar.Calendar",
+					"name": "Calendar",
+					"description": "Display and manage calendar events",
+					"isPluginWidget": false,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": false,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "Carousel",
+			"version": "1.4.3",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.carousel.Carousel",
+					"name": "Carousel",
+					"description": "Carousel displaying images",
+					"isPluginWidget": false,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": false,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "ColorPicker",
+			"version": "1.1.4",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
+					"name": "Color picker",
+					"description": "Pick a color from color input",
+					"isPluginWidget": false,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": false,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "Signature",
+			"version": "1.0.5",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.signature.Signature",
+					"name": "Signature",
+					"description": "A signature pad for capturing signatures",
+					"isPluginWidget": false,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": false,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "AccessibilityHelper",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.accessibilityhelper.AccessibilityHelper",
+					"name": "Accessibility helper",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/accessibility-helper",
+					"studioCategory": "Input Elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Accordion",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.accordion.Accordion",
+					"name": "Accordion",
+					"description": "Toggle the display of sections of content",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Accordion",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.accordion.Accordion",
+					"name": "Accordion",
+					"description": "Toggle the display of sections of content.",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/accordion",
+					"studioCategory": "Structure",
+					"studioProCategory": "Structure",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ActivityIndicator",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
+					"name": "Activity indicator",
+					"description": "Display a circular loading indicator.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Animation",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.animation.Animation",
+					"name": "Animation",
+					"description": "Container for animating content",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "AppEvents",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.appevents.AppEvents",
+					"name": "App events",
+					"description": "Trigger actions based on load, network status and timer events.",
+					"studioCategory": "Device features",
+					"studioProCategory": "Device features",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "AreaChart",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.AreaChart.AreaChart",
+					"name": "Area chart",
+					"description": "Create an area chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "BackgroundImage",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.backgroundimage.BackgroundImage",
+					"name": "Background image",
+					"description": "",
+					"studioCategory": "Images, videos & files",
+					"studioProCategory": "Images, videos & files",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "BadgeButton",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.badgebutton.BadgeButton",
+					"name": "Badge button",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/badge-button",
+					"studioCategory": "Buttons",
+					"studioProCategory": "Buttons",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Badge",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.badge.Badge",
+					"name": "Badge",
+					"description": "Display text or a value as a badge.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Badge",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.badge.Badge",
+					"name": "Badge",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/badge",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "BarChart",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.barchart.BarChart",
+					"name": "Bar chart",
+					"description": "",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "BarChart",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.BarChart.BarChart",
+					"name": "Bar chart",
+					"description": "Create a bar chart",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/charts#2-4-bar-chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "BarcodeScanner",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
+					"name": "Barcode scanner",
+					"description": "Scan barcode and QR code values.",
+					"studioCategory": "Device features",
+					"studioProCategory": "Device features",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Barcode Scanner",
+			"version": "2.2.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.barcodescanner.BarcodeScanner",
+					"name": "Barcode Scanner",
+					"description": "The widget lets you scan a barcode",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/barcode-scanner",
+					"studioCategory": "Images, Videos & Files",
+					"studioProCategory": "Images, videos & files",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "BottomSheet",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.bottomsheet.BottomSheet",
+					"name": "Bottom sheet",
+					"description": "",
+					"studioCategory": "Structure",
+					"studioProCategory": "Structure",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "BubbleChart",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.BubbleChart.BubbleChart",
+					"name": "Bubble chart",
+					"description": "Create a bubble chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Carousel",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.carousel.Carousel",
+					"name": "Carousel",
+					"description": "",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ColorPicker",
+			"version": "1.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.colorpicker.ColorPicker",
+					"name": "Color picker",
+					"description": "Pick a color from a circular color input",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ColumnChart",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
+					"name": "Column chart",
+					"description": "Create a column chart",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/charts#2-3-column-chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "DatagridDateFilter",
+			"version": "2.2.1",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
+					"name": "Date filter",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-1-date-filter",
+					"studioCategory": "Data Controls",
+					"studioProCategory": "Data controls",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "DatagridDropdownFilter",
+			"version": "2.2.1",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
+					"name": "Drop-down filter",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-2-drop-down-filter",
+					"studioCategory": "Data Controls",
+					"studioProCategory": "Data controls",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "DatagridNumberFilter",
+			"version": "2.2.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
+					"name": "Number filter",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-3-number-filter",
+					"studioCategory": "Data Controls",
+					"studioProCategory": "Data controls",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "DatagridTextFilter",
+			"version": "2.2.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
+					"name": "Text filter",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-4-text-filter",
+					"studioCategory": "Data Controls",
+					"studioProCategory": "Data controls",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Datagrid",
+			"version": "2.2.2",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.datagrid.Datagrid",
+					"name": "Data grid 2",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2",
+					"studioCategory": "Data Containers",
+					"studioProCategory": "Data containers",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "DropdownSort",
+			"version": "1.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.dropdownsort.DropdownSort",
+					"name": "Drop-down sort",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/gallery#4-1-drop-down-sort",
+					"studioCategory": "Data Controls",
+					"studioProCategory": "Data controls",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Feedback",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.feedback.Feedback",
+					"name": "Feedback",
+					"description": "Allow users to submit feedback directly into the app project.",
+					"studioCategory": "Add-ons",
+					"studioProCategory": "Add-ons",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Fieldset",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.fieldset.Fieldset",
+					"name": "Fieldset",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/fieldset",
+					"studioCategory": "Input Elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "FloatingActionButton",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.floatingactionbutton.FloatingActionButton",
+					"name": "Floating action button",
+					"description": "Display a circular floating icon button.",
+					"studioCategory": "Buttons",
+					"studioProCategory": "Buttons",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Gallery",
+			"version": "1.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.gallery.Gallery",
+					"name": "Gallery",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/gallery",
+					"studioCategory": "Data Containers",
+					"studioProCategory": "Data containers",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.image.Image",
+					"name": "Image",
+					"description": "Display an image and enlarge it on click.",
+					"studioCategory": "Images, videos & files",
+					"studioProCategory": "Images, videos & files",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"version": "1.2.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.image.Image",
+					"name": "Image",
+					"description": "Display an image and enlarge it on click.",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/image",
+					"studioCategory": "Images, Videos & Files",
+					"studioProCategory": "Images, videos & files",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "IntroScreen",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.introscreen.IntroScreen",
+					"name": "Intro screen",
+					"description": "",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "LineChart",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.linechart.LineChart",
+					"name": "Line chart",
+					"description": "",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "LineChart",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.LineChart.LineChart",
+					"name": "Line chart",
+					"description": "Create a line chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ListViewSwipe",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.listviewswipe.ListViewSwipe",
+					"name": "List View Swipe",
+					"description": "",
+					"studioCategory": "Interactions",
+					"studioProCategory": "Interactions",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Maps",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.maps.Maps",
+					"name": "Maps",
+					"description": "Show locations on an interactive map.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Maps",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.Maps.Maps",
+					"name": "Maps",
+					"description": "Custom description please",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/maps",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Notifications",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.notifications.Notifications",
+					"name": "Notifications",
+					"description": "Trigger actions based on incoming notifications.",
+					"studioCategory": "Device features",
+					"studioProCategory": "Device features",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "PieDoughnutChart",
+			"version": "1.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
+					"name": "Pie Doughnut Chart",
+					"description": "Render a series of data in a Pie or Doughnut chart.",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "PieChart",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.PieChart.PieChart",
+					"name": "Pie chart",
+					"description": "Renders a pie or doughnut chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "PopupMenu",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.popupmenu.PopupMenu",
+					"name": "Pop-up menu",
+					"description": "Displays a set of pre-defined items within pop up menu",
+					"studioCategory": "Menus & navigation",
+					"studioProCategory": "Menus & navigation",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "PopupMenu",
+			"version": "3.2.1",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.popupmenu.PopupMenu",
+					"name": "Pop-up menu",
+					"description": "Displays a set of pre-defined items within the Pop-up menu",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/popup-menu",
+					"studioCategory": "Menus",
+					"studioProCategory": "Menus & navigation",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ProgressBar",
+			"version": "4.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.progressbar.ProgressBar",
+					"name": "Progress bar",
+					"description": "Display progress in a horizontal bar.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Progress Bar",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.progressbar.ProgressBar",
+					"name": "Progress Bar",
+					"description": "The widget lets you display a percentage as a bar",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/progress-bar",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ProgressCircle",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.progresscircle.ProgressCircle",
+					"name": "Progress circle",
+					"description": "Display progress in a circle with enclosed text.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ProgressCircle",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.progresscircle.ProgressCircle",
+					"name": "Progress circle",
+					"description": "Displays a progress in a circle",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/progress-circle",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "QRCode",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.qrcode.QRCode",
+					"name": "QR code",
+					"description": "Display a QR code based on a value.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "RadioButtons",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.radiobuttons.RadioButtons",
+					"name": "Radio Buttons",
+					"description": "",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "RangeSlider",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.rangeslider.RangeSlider",
+					"name": "Range slider",
+					"description": "Change a range of values using a slider.",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "RangeSlider",
+			"version": "2.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.RangeSlider.RangeSlider",
+					"name": "Range Slider",
+					"description": "Change range of values using a slider",
+					"studioCategory": "Input Elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Rating",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.rating.Rating",
+					"name": "Rating",
+					"description": "Give a rating by selecting stars.",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "StarRating",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.starrating.StarRating",
+					"name": "Rating",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/rating",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Repeater",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.repeater.Repeater",
+					"name": "Repeater",
+					"description": "Iterates over a data source and render a content",
+					"studioCategory": "Data containers",
+					"studioProCategory": "Data containers",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "RichText",
+			"version": "2.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.richtext.RichText",
+					"name": "Rich Text",
+					"description": "Rich inline or toolbar text editing",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "SafeAreaView",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
+					"name": "Safe area view",
+					"description": "",
+					"studioCategory": "Structure",
+					"studioProCategory": "Structure",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ScrollContainer",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.scrollcontainer.ScrollContainer",
+					"name": "Scroll container",
+					"description": "Displays a scrollable container",
+					"studioCategory": "Layout",
+					"studioProCategory": "Layout",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "Sidebar",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.sidebartoggle.SidebarToggle",
+					"name": "Sidebar toggle",
+					"description": "Toggles the sidebar.",
+					"studioCategory": "Layout",
+					"studioProCategory": "Layout",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "Sidebar",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.sidebar.Sidebar",
+					"name": "Sidebar",
+					"description": "Display sidebar content conditionally.",
+					"studioCategory": "Layout",
+					"studioProCategory": "Layout",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
+				}
+			]
+		},
+		{
+			"name": "Signature",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.signature.Signature",
+					"name": "Signature",
+					"description": "Display signature.",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Slider",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.slider.Slider",
+					"name": "Slider",
+					"description": "Change a numeric value using a slider.",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Slider",
+			"version": "2.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.slider.Slider",
+					"name": "Slider",
+					"description": "Change a number value using a slider",
+					"studioCategory": "Input Elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Switch",
+			"version": "1.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.switch.Switch",
+					"name": "Switch",
+					"description": "Toggle a boolean attribute.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Switch",
+			"version": "4.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.switch.Switch",
+					"name": "Switch",
+					"description": "Toggle a boolean attribute",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/switch",
+					"studioCategory": "Input Elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Timeline",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.timeline.Timeline",
+					"name": "Timeline",
+					"description": "Shows vertical timeline with events",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/timeline",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "ToggleButtons",
+			"version": "2.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
+					"name": "Toggle buttons",
+					"description": "Change an enumeration value using a group of buttons.",
+					"studioCategory": "Input elements",
+					"studioProCategory": "Input elements",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "Tooltip",
+			"version": "1.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.tooltip.Tooltip",
+					"name": "Tooltip",
+					"description": "",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/tooltip",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "TreeNode",
+			"version": "1.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.treenode.TreeNode",
+					"name": "Tree node",
+					"description": "Display a tree view structure",
+					"docsUrl": "https://docs.mendix.com/appstore/modules/tree-node",
+					"studioCategory": "Data Containers",
+					"studioProCategory": "Data containers",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "VideoPlayer",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
+					"name": "Video player",
+					"description": "Play a video loaded from a URL.",
+					"studioCategory": "Images, videos & files",
+					"studioProCategory": "Images, videos & files",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "VideoPlayer",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.web.videoplayer.VideoPlayer",
+					"name": "Video Player",
+					"description": "Shows a video from YouTube, Vimeo, Dailymotion and Mp4",
+					"docsUrl": "https://docs.mendix.com/appstore/widgets/video-player",
+					"studioCategory": "Images, Videos & Files",
+					"studioProCategory": "Images, videos & files",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "WebView",
+			"version": "3.1.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.native.webview.WebView",
+					"name": "Web view",
+					"description": "Display an external web page or load custom HTML.",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "native",
+					"hasStructureModePreview": false,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		}
+	],
+	"jsActionPackages": [
+		{
+			"name": "mobile-resources-native",
+			"version": "3.4.0",
+			"jsActions": [
+				{
+					"name": "BiometricAuthentication",
+					"group": "authentication"
+				},
+				{
+					"name": "IsBiometricAuthenticationSupported",
+					"group": "authentication"
+				},
+				{
+					"name": "SaveToPictureLibrary",
+					"group": "camera"
+				},
+				{
+					"name": "TakePicture",
+					"group": "camera"
+				},
+				{
+					"name": "TakePictureAdvanced",
+					"group": "camera"
+				},
+				{
+					"name": "GetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "SetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "ParseUrlToObject",
+					"group": "deeplink"
+				},
+				{
+					"name": "RegisterDeepLink",
+					"group": "deeplink"
+				},
+				{
+					"name": "IsCellularConnection",
+					"group": "network"
+				},
+				{
+					"name": "IsConnected",
+					"group": "network"
+				},
+				{
+					"name": "IsWifiConnection",
+					"group": "network"
+				},
+				{
+					"name": "CancelAllScheduledNotifications",
+					"group": "notifications"
+				},
+				{
+					"name": "CancelScheduledNotification",
+					"group": "notifications"
+				},
+				{
+					"name": "ClearAllDeliveredNotifications",
+					"group": "notifications"
+				},
+				{
+					"name": "DisplayNotification",
+					"group": "notifications"
+				},
+				{
+					"name": "GetPushNotificationToken",
+					"group": "notifications"
+				},
+				{
+					"name": "HasNotificationPermission",
+					"group": "notifications"
+				},
+				{
+					"name": "RequestNotificationPermission",
+					"group": "notifications"
+				},
+				{
+					"name": "ScheduleNotification",
+					"group": "notifications"
+				},
+				{
+					"name": "SetBadgeNumber",
+					"group": "notifications"
+				},
+				{
+					"name": "ChangeStatusBar",
+					"group": "platform"
+				},
+				{
+					"name": "GetDeviceInfo",
+					"group": "platform"
+				},
+				{
+					"name": "HideKeyboard",
+					"group": "platform"
+				},
+				{
+					"name": "OpenInAppBrowser",
+					"group": "platform"
+				},
+				{
+					"name": "PlaySound",
+					"group": "platform"
+				},
+				{
+					"name": "Vibrate",
+					"group": "platform"
+				}
+			]
+		},
+		{
+			"name": "nanoflow-actions-hybrid",
+			"version": "1.0.0",
+			"jsActions": [
+				{
+					"name": "BiometricAuthentication",
+					"group": "authentication"
+				},
+				{
+					"name": "IsBiometricAuthenticationSupported",
+					"group": "authentication"
+				},
+				{
+					"name": "OpenCalendar",
+					"group": "calendar"
+				},
+				{
+					"name": "SaveCalendarEvent",
+					"group": "calendar"
+				},
+				{
+					"name": "ScanBarcode",
+					"group": "camera"
+				},
+				{
+					"name": "TakePicture",
+					"group": "camera"
+				},
+				{
+					"name": "GetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "SetClipboardContent",
+					"group": "clipboard"
+				},
+				{
+					"name": "SaveContact",
+					"group": "contacts"
+				},
+				{
+					"name": "SearchContacts",
+					"group": "contacts"
+				},
+				{
+					"name": "SelectContact",
+					"group": "contacts"
+				},
+				{
+					"name": "GetDeviceInfo",
+					"group": "mobile"
+				},
+				{
+					"name": "Vibrate",
+					"group": "mobile"
+				},
+				{
+					"name": "IsCellularConnection",
+					"group": "network"
+				},
+				{
+					"name": "IsConnected",
+					"group": "network"
+				},
+				{
+					"name": "IsWifiConnection",
+					"group": "network"
+				},
+				{
+					"name": "cordova-clipboard.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-android-fingerprint-auth.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-calendar.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-camera.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-contacts.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-device.d",
+					"group": "types"
+				},
+				{
+					"name": "cordova-plugin-touch-id.d",
+					"group": "types"
+				},
+				{
+					"name": "phonegap-plugin-barcodescanner.d",
+					"group": "types"
+				}
+			]
+		},
+		{
+			"name": "nanoflow-actions-native",
+			"version": "2.1.2",
+			"jsActions": [
+				{
+					"name": "HideProgress",
+					"group": "client"
+				},
+				{
+					"name": "RefreshEntity",
+					"group": "client"
+				},
+				{
+					"name": "RefreshObject",
+					"group": "client"
+				},
+				{
+					"name": "ShowConfirmation",
+					"group": "client"
+				},
+				{
+					"name": "ShowProgress",
+					"group": "client"
+				},
+				{
+					"name": "SignIn",
+					"group": "client"
+				},
+				{
+					"name": "SignOut",
+					"group": "client"
+				},
+				{
+					"name": "ToggleSidebar",
+					"group": "client"
+				},
+				{
+					"name": "CallPhoneNumber",
+					"group": "external"
+				},
+				{
+					"name": "DraftEmail",
+					"group": "external"
+				},
+				{
+					"name": "NavigateTo",
+					"group": "external"
+				},
+				{
+					"name": "OpenMap",
+					"group": "external"
+				},
+				{
+					"name": "OpenURL",
+					"group": "external"
+				},
+				{
+					"name": "SendTextMessage",
+					"group": "external"
+				},
+				{
+					"name": "Share",
+					"group": "external"
+				},
+				{
+					"name": "Geocode",
+					"group": "geolocation"
+				},
+				{
+					"name": "GetCurrentLocation",
+					"group": "geolocation"
+				},
+				{
+					"name": "GetCurrentLocationMinimumAccuracy",
+					"group": "geolocation"
+				},
+				{
+					"name": "RequestLocationPermission",
+					"group": "geolocation"
+				},
+				{
+					"name": "ReverseGeocode",
+					"group": "geolocation"
+				},
+				{
+					"name": "GetStorageItemObject",
+					"group": "local-storage"
+				},
+				{
+					"name": "GetStorageItemObjectList",
+					"group": "local-storage"
+				},
+				{
+					"name": "GetStorageItemString",
+					"group": "local-storage"
+				},
+				{
+					"name": "RemoveStorageItem",
+					"group": "local-storage"
+				},
+				{
+					"name": "SetStorageItemObject",
+					"group": "local-storage"
+				},
+				{
+					"name": "SetStorageItemObjectList",
+					"group": "local-storage"
+				},
+				{
+					"name": "SetStorageItemString",
+					"group": "local-storage"
+				},
+				{
+					"name": "StorageItemExists",
+					"group": "local-storage"
+				},
+				{
+					"name": "GenerateUniqueID",
+					"group": "other"
+				},
+				{
+					"name": "GetGuid",
+					"group": "other"
+				},
+				{
+					"name": "GetObjectByGuid",
+					"group": "other"
+				},
+				{
+					"name": "GetPlatform",
+					"group": "other"
+				},
+				{
+					"name": "Wait",
+					"group": "other"
+				}
+			]
+		},
+		{
+			"name": "nanoflow-actions-web",
+			"version": "2.2.0",
+			"jsActions": [
+				{
+					"name": "FocusHelper",
+					"group": "."
+				},
+				{
+					"name": "FocusNext",
+					"group": "."
+				},
+				{
+					"name": "FocusPrevious",
+					"group": "."
+				},
+				{
+					"name": "ScrollTo",
+					"group": "."
+				},
+				{
+					"name": "SetFocus",
+					"group": "."
+				},
+				{
+					"name": "TakePicture",
+					"group": "."
+				}
+			]
+		}
+	]
+}
