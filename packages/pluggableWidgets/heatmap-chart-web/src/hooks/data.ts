@@ -43,13 +43,13 @@ function invertCompareValue(compareValue: number): number {
     return 0 - compareValue;
 }
 
-type HeatMapHookData = Array<
+type HeatMapHookData = [
     ChartWidgetProps["data"][number] & {
         x: Array<string | undefined>;
         y: Array<string | undefined>;
         z: Array<Array<number | null>>;
     }
->;
+];
 
 export const useHeatMapDataSeries = ({
     customSeriesOptions,
@@ -119,25 +119,31 @@ export const useHeatMapDataSeries = ({
         }
         const horizontalValues = getUniqueValues(copiedData.map(({ horizontalAxisValue }) => horizontalAxisValue));
 
-        const heatmapValues = verticalValues.map(yValue =>
-            horizontalValues
-                .map(xValue =>
-                    copiedData.find(
-                        ({ horizontalAxisValue, verticalAxisValue }) =>
-                            horizontalAxisValue === xValue && verticalAxisValue === yValue
-                    )
+        const heatmapMatrix = verticalValues.map(yValue =>
+            horizontalValues.map(xValue =>
+                copiedData.find(
+                    ({ horizontalAxisValue, verticalAxisValue }) =>
+                        horizontalAxisValue === xValue && verticalAxisValue === yValue
                 )
-                .map(localDataPoint => localDataPoint?.value ?? null)
+            )
+        );
+
+        const heatmapValues = heatmapMatrix.map(horizontalAxis =>
+            horizontalAxis.map(localDataPoint => localDataPoint?.value ?? null)
+        );
+
+        // @ts-expect-error Plotly's typing indicates that this can only be a string | string[], but that doesn't work.
+        // We're also dealing with a matrix here as it's a heatmap, so we need a matrix for the hovertext too.
+        const hoverTextValues: HeatMapHookData["0"]["hovertext"] = heatmapMatrix.map(horizontalAxis =>
+            horizontalAxis.map(localDataPoint => localDataPoint?.hoverText ?? "")
         );
 
         return [
             {
                 colorscale: processColorScale(scaleColors),
                 customSeriesOptions,
-                hoverinfo: heatmapChartData.some(({ hoverText }) => hoverText !== undefined && hoverText !== "")
-                    ? "text"
-                    : "none",
-                hovertext: heatmapChartData.map(({ hoverText }) => hoverText ?? ""),
+                hoverinfo: tooltipHoverText ? "text" : "none",
+                hovertext: hoverTextValues,
                 onClick,
                 showscale: showScale,
                 x: horizontalValues.map(value => value?.toLocaleString()),
@@ -155,6 +161,7 @@ export const useHeatMapDataSeries = ({
         scaleColors,
         showScale,
         smoothColor,
+        tooltipHoverText,
         verticalSortAttribute,
         verticalSortOrder
     ]);
