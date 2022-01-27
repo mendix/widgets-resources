@@ -1,11 +1,8 @@
 // this file has been copied from https://github.com/djchie/react-native-star-rating here since the original library
 // has an outdated dependency (RN-vector-icons) that we now managed here in this widget.
-// it is originally a JS file, hence the following nocheck.
-// @ts-nocheck
 import { Component, createElement } from "react";
-import { Image, StyleSheet, ViewPropTypes } from "react-native";
-import PropTypes from "prop-types";
-import { createIconSetFromIcoMoon } from "react-native-vector-icons";
+import { Image, StyleSheet, GestureResponderEvent, ImageStyle, ImageURISource } from "react-native";
+import type { StarRatingProps } from "react-native-star-rating";
 
 import Button from "react-native-button";
 import EntypoIcons from "react-native-vector-icons/Entypo";
@@ -20,7 +17,9 @@ import OcticonsIcons from "react-native-vector-icons/Octicons";
 import ZocialIcons from "react-native-vector-icons/Zocial";
 import SimpleLineIconsIcons from "react-native-vector-icons/SimpleLineIcons";
 
-const iconSets = {
+declare type Option<T> = T | undefined;
+
+export const iconSets = {
     Entypo: EntypoIcons,
     EvilIcons: EvilIconsIcons,
     Feather: FeatherIcons,
@@ -34,36 +33,33 @@ const iconSets = {
     SimpleLineIcons: SimpleLineIconsIcons
 };
 
-const propTypes = {
-    buttonStyle: ViewPropTypes.style,
-    disabled: PropTypes.bool.isRequired,
-    halfStarEnabled: PropTypes.bool.isRequired,
-    icoMoonJson: PropTypes.string,
-    iconSet: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    reversed: PropTypes.bool.isRequired,
-    starColor: PropTypes.string.isRequired,
-    starIconName: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]).isRequired,
-    starSize: PropTypes.number.isRequired,
-    activeOpacity: PropTypes.number.isRequired,
-    starStyle: ViewPropTypes.style,
-    onStarButtonPress: PropTypes.func.isRequired
-};
+interface Props
+    extends Pick<
+        StarRatingProps,
+        "activeOpacity" | "buttonStyle" | "disabled" | "halfStarEnabled" | "iconSet" | "reversed" | "starStyle"
+    > {
+    starSize: number;
+    rating: number;
+    iconSet: keyof typeof iconSets;
+    onStarButtonPress: (rating: number) => void;
+    starColor: Option<string>;
+    starIconName: Option<string | ImageURISource>;
+}
 
 const defaultProps = {
     buttonStyle: {},
-    icoMoonJson: undefined,
     starStyle: {}
-};
+} as Partial<Props>;
 
-class StarButton extends Component {
-    constructor(props) {
+class StarButton extends Component<Props> {
+    static defaultProps: Partial<Props>;
+    constructor(props: Props) {
         super(props);
 
         this.onButtonPress = this.onButtonPress.bind(this);
     }
 
-    onButtonPress(event) {
+    onButtonPress(event: GestureResponderEvent) {
         const { halfStarEnabled, starSize, rating, onStarButtonPress } = this.props;
 
         let addition = 0;
@@ -77,10 +73,7 @@ class StarButton extends Component {
     }
 
     iconSetFromProps() {
-        const { icoMoonJson, iconSet } = this.props;
-        if (icoMoonJson) {
-            return createIconSetFromIcoMoon(icoMoonJson);
-        }
+        const { iconSet } = this.props;
 
         return iconSets[iconSet];
     }
@@ -98,16 +91,16 @@ class StarButton extends Component {
                 }
             ],
             ...StyleSheet.flatten(starStyle)
-        };
+        } as ImageStyle;
 
         if (typeof starIconName === "string") {
             iconElement = <Icon name={starIconName} size={starSize} color={starColor} style={newStarStyle} />;
-        } else {
+        } else if (starIconName) {
             const imageStyle = {
                 width: starSize,
                 height: starSize,
                 resizeMode: "contain"
-            };
+            } as ImageStyle;
 
             const iconStyles = [imageStyle, newStarStyle];
 
@@ -133,7 +126,6 @@ class StarButton extends Component {
     }
 }
 
-StarButton.propTypes = propTypes;
 StarButton.defaultProps = defaultProps;
 
 export default StarButton;

@@ -1,13 +1,11 @@
 // this file has been copied from https://github.com/djchie/react-native-star-rating here since the original library
-// has an outdated dependency (RN-vector-icons) that we now managed here in this widget.
-// it is originally a JS file, hence the following nocheck.
-// @ts-nocheck
-import { Component, createElement } from "react";
-import { View, ViewPropTypes, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
-import { View as AnimatableView } from "react-native-animatable";
+// has an outdated dependency (react-native-vector-icons) that we now managed here in this widget.
+import { ClassicComponent, Component, createElement } from "react";
+import { View, StyleSheet, ViewStyle, ViewProps } from "react-native";
+import { AnimatableProperties, View as AnimatableView } from "react-native-animatable";
+import type { StarRatingProps } from "react-native-star-rating";
 
-import StarButton from "./StarButton";
+import StarButton, { iconSets } from "./StarButton";
 
 const ANIMATION_TYPES = [
     "bounce",
@@ -20,31 +18,10 @@ const ANIMATION_TYPES = [
     "swing",
     "tada",
     "wobble"
-];
+] as const;
 
-const propTypes = {
-    activeOpacity: PropTypes.number,
-    animation: PropTypes.oneOf(ANIMATION_TYPES),
-    buttonStyle: ViewPropTypes.style,
-    containerStyle: ViewPropTypes.style,
-    disabled: PropTypes.bool,
-    emptyStar: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
-    emptyStarColor: PropTypes.string,
-    fullStar: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
-    fullStarColor: PropTypes.string,
-    halfStar: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
-    halfStarColor: PropTypes.string,
-    halfStarEnabled: PropTypes.bool,
-    // eslint-disable-next-line react/forbid-prop-types
-    icoMoonJson: PropTypes.object,
-    iconSet: PropTypes.string,
-    maxStars: PropTypes.number,
-    rating: PropTypes.number,
-    reversed: PropTypes.bool,
-    starSize: PropTypes.number,
-    starStyle: ViewPropTypes.style,
-    selectedStar: PropTypes.func
-};
+const DEFAULT_RATING = 0;
+const DEFAULT_MAX_RATING = 5;
 
 const defaultProps = {
     activeOpacity: 0.2,
@@ -59,28 +36,34 @@ const defaultProps = {
     halfStar: "star-half-o",
     halfStarColor: undefined,
     halfStarEnabled: false,
-    icoMoonJson: undefined,
     iconSet: "FontAwesome",
-    maxStars: 5,
-    rating: 0,
+    maxStars: DEFAULT_MAX_RATING,
+    rating: DEFAULT_RATING,
     reversed: false,
     starSize: 40,
     starStyle: {},
     selectedStar: () => {}
 };
 
-class StarRating extends Component {
-    constructor(props) {
+interface Props extends StarRatingProps {
+    iconSet: keyof typeof iconSets;
+}
+
+class StarRating extends Component<Props> {
+    starRef: Array<ClassicComponent<AnimatableProperties<ViewStyle> & ViewProps, any> | null>;
+    static defaultProps: typeof defaultProps;
+
+    constructor(props: Props) {
         super(props);
 
         this.starRef = [];
         this.onStarButtonPress = this.onStarButtonPress.bind(this);
     }
 
-    onStarButtonPress(rating) {
+    onStarButtonPress(rating: number) {
         const { selectedStar } = this.props;
 
-        selectedStar(rating);
+        selectedStar && selectedStar(rating);
     }
 
     render() {
@@ -97,7 +80,6 @@ class StarRating extends Component {
             halfStar,
             halfStarColor,
             halfStarEnabled,
-            icoMoonJson,
             iconSet,
             maxStars,
             rating,
@@ -110,13 +92,13 @@ class StarRating extends Component {
             flexDirection: reversed ? "row-reverse" : "row",
             justifyContent: "space-between",
             ...StyleSheet.flatten(containerStyle)
-        };
+        } as ViewStyle;
 
         // Round rating down to nearest .5 star
-        let starsLeft = Math.round(rating * 2) / 2;
+        let starsLeft = Math.round((rating ?? DEFAULT_RATING) * 2) / 2;
         const starButtons = [];
 
-        for (let i = 0; i < maxStars; i++) {
+        for (let i = 0; i < (maxStars ?? DEFAULT_MAX_RATING); i++) {
             let starIconName = emptyStar;
             let finalStarColor = emptyStarColor;
 
@@ -144,15 +126,19 @@ class StarRating extends Component {
                         buttonStyle={buttonStyle}
                         disabled={disabled}
                         halfStarEnabled={halfStarEnabled}
-                        icoMoonJson={icoMoonJson}
                         iconSet={iconSet}
-                        onStarButtonPress={event => {
+                        onStarButtonPress={(rating: number) => {
                             if (animation && ANIMATION_TYPES.includes(animation)) {
                                 for (let s = 0; s <= i; s++) {
-                                    this.starRef[s][animation](1000 + s * 200);
+                                    const component = this.starRef[s];
+                                    if (component) {
+                                        // not sure how to correctly access prop using key
+                                        // @ts-ignore
+                                        component[animation](1000 + s * 200);
+                                    }
                                 }
                             }
-                            this.onStarButtonPress(event);
+                            this.onStarButtonPress(rating);
                         }}
                         rating={i + 1}
                         reversed={reversed}
@@ -176,7 +162,6 @@ class StarRating extends Component {
     }
 }
 
-StarRating.propTypes = propTypes;
 StarRating.defaultProps = defaultProps;
 
 export default StarRating;

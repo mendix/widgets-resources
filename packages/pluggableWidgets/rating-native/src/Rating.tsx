@@ -39,7 +39,6 @@ export class Rating extends Component<Props, State> {
 
         this.usesGlyphicons = !props.icon || !props.icon.value || !props.emptyIcon || !props.emptyIcon.value;
         if (this.usesGlyphicons) {
-            // tslint:disable-next-line:no-floating-promises
             preloadIcons(iconConfigurations).then(imageSourceCache => this.setState({ imageSourceCache }));
         }
     }
@@ -50,7 +49,7 @@ export class Rating extends Component<Props, State> {
         }
 
         const ratingProps = {
-            activeOpacity: 1, // Waiting PR to merge properties in JSX https://github.com/DefinitelyTyped/DefinitelyTyped/pull/34397
+            activeOpacity: 1,
             ...(this.props.animation !== "none" ? { animation: this.props.animation } : {})
         };
 
@@ -61,7 +60,6 @@ export class Rating extends Component<Props, State> {
 
         return (
             <StarRating
-                // @ts-ignore
                 maxStars={this.props.maximumValue}
                 rating={Math.round(Number(this.props.ratingAttribute.value))}
                 disabled={disabled}
