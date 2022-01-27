@@ -6,6 +6,11 @@ on:
     paths:
       - packages/**/*
       - scripts/data/**/*
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/data/**/*
 jobs:
   publish-data:
     runs-on: ubuntu-latest
@@ -23,7 +28,13 @@ jobs:
         run: npm install
       - name: "Exporting data"
         run: npm run update:content-overview
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: content.json
+          path: data/content.json
       - name: "Creating pull request"
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         id: cpr
         uses: peter-evans/create-pull-request@dcd5fd746d53dd8de555c0f10bca6c35628be47a # v3
         with:
