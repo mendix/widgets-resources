@@ -34,7 +34,8 @@
     "@mendix/piw-utils-internal": "^1.0.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.24.0",
-    "react-datepicker": "^4.6.0"
+    "react-datepicker": "^4.6.0",
+    "string.prototype.replaceall": "^1.0.6"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",

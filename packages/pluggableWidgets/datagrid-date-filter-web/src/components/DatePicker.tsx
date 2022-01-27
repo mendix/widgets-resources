@@ -15,6 +15,7 @@ import DatePickerComponent from "react-datepicker";
 import classNames from "classnames";
 import { isDate, isValid } from "date-fns";
 import { createPortal } from "react-dom";
+import replaceAllInserter from "string.prototype.replaceall";
 
 interface DatePickerProps {
     adjustable: boolean;
@@ -28,6 +29,8 @@ interface DatePickerProps {
     value: Date | null;
     calendarStartDay?: number;
 }
+
+replaceAllInserter.shim();
 
 export const DatePicker = forwardRef(
     (props: DatePickerProps, ref: MutableRefObject<DatePickerComponent> | null): ReactElement => {
