@@ -1,7 +1,7 @@
 // this file has been copied from https://github.com/djchie/react-native-star-rating here since the original library
 // has an outdated dependency (RN-vector-icons) that we now managed here in this widget.
 import { Component, createElement } from "react";
-import { Image, StyleSheet, GestureResponderEvent, ImageStyle, ImageURISource } from "react-native";
+import { GestureResponderEvent, Image, ImageStyle, ImageURISource, StyleSheet } from "react-native";
 import type { StarRatingProps } from "react-native-star-rating";
 
 import Button from "react-native-button";
@@ -73,17 +73,12 @@ class StarButton extends Component<Props> {
     }
 
     iconSetFromProps() {
-        const { iconSet } = this.props;
-
-        return iconSets[iconSet];
+        return iconSets[this.props.iconSet];
     }
 
     renderIcon() {
         const { reversed, starColor, starIconName, starSize, starStyle } = this.props;
-
         const Icon = this.iconSetFromProps();
-        let iconElement;
-
         const newStarStyle = {
             transform: [
                 {
@@ -93,21 +88,21 @@ class StarButton extends Component<Props> {
             ...StyleSheet.flatten(starStyle)
         } as ImageStyle;
 
-        if (typeof starIconName === "string") {
-            iconElement = <Icon name={starIconName} size={starSize} color={starColor} style={newStarStyle} />;
-        } else if (starIconName) {
-            const imageStyle = {
-                width: starSize,
-                height: starSize,
-                resizeMode: "contain"
-            } as ImageStyle;
-
-            const iconStyles = [imageStyle, newStarStyle];
-
-            iconElement = <Image source={starIconName} style={iconStyles} />;
-        }
-
-        return iconElement;
+        return typeof starIconName === "string" ? (
+            <Icon name={starIconName} size={starSize} color={starColor} style={newStarStyle} />
+        ) : starIconName ? (
+            <Image
+                source={starIconName}
+                style={[
+                    {
+                        width: starSize,
+                        height: starSize,
+                        resizeMode: "contain"
+                    } as ImageStyle,
+                    newStarStyle
+                ]}
+            />
+        ) : null;
     }
 
     render() {

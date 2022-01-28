@@ -22,6 +22,8 @@ const ANIMATION_TYPES = [
 
 const DEFAULT_RATING = 0;
 const DEFAULT_MAX_RATING = 5;
+const MILLISECONDS_IN_SECOND = 1000;
+const ANIMATION_DELAY_MS = 200;
 
 const defaultProps = {
     activeOpacity: 0.2,
@@ -61,11 +63,7 @@ class StarRating extends Component<Props> {
     }
 
     onStarButtonPress(rating: number) {
-        const { selectedStar } = this.props;
-
-        if (selectedStar) {
-            selectedStar(rating);
-        }
+        this.props.selectedStar?.(rating);
     }
 
     render() {
@@ -96,7 +94,6 @@ class StarRating extends Component<Props> {
             ...StyleSheet.flatten(containerStyle)
         } as ViewStyle;
 
-        // Round rating down to nearest .5 star
         let starsLeft = Math.round((rating ?? DEFAULT_RATING) * 2) / 2;
         const starButtons = [];
 
@@ -109,20 +106,11 @@ class StarRating extends Component<Props> {
                 finalStarColor = fullStarColor;
             } else if (starsLeft === 0.5) {
                 starIconName = halfStar;
-                if (halfStarColor) {
-                    finalStarColor = halfStarColor;
-                } else {
-                    finalStarColor = fullStarColor;
-                }
+                finalStarColor = halfStarColor || fullStarColor;
             }
 
             const starButtonElement = (
-                <AnimatableView
-                    key={i}
-                    ref={node => {
-                        this.starRef.push(node);
-                    }}
-                >
+                <AnimatableView key={i} ref={node => (this.starRef[i] = node)}>
                     <StarButton
                         activeOpacity={activeOpacity}
                         buttonStyle={buttonStyle}
@@ -133,9 +121,10 @@ class StarRating extends Component<Props> {
                             if (animation && ANIMATION_TYPES.includes(animation)) {
                                 for (let s = 0; s <= i; s++) {
                                     const component = this.starRef[s];
-                                    if (component) {
-                                        component[animation as keyof typeof component](1000 + s * 200);
-                                    }
+
+                                    component?.[animation as keyof typeof component](
+                                        MILLISECONDS_IN_SECOND + s * ANIMATION_DELAY_MS
+                                    );
                                 }
                             }
                             this.onStarButtonPress(rating);
