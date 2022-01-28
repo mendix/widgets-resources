@@ -134,9 +134,7 @@ class StarRating extends Component<Props> {
                                 for (let s = 0; s <= i; s++) {
                                     const component = this.starRef[s];
                                     if (component) {
-                                        // not sure how to correctly access prop using key
-                                        // @ts-ignore
-                                        component[animation](1000 + s * 200);
+                                        component[animation as keyof typeof component](1000 + s * 200);
                                     }
                                 }
                             }
