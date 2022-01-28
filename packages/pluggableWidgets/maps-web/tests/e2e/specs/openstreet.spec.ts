@@ -2,6 +2,21 @@ import page from "../pages/page";
 import mapPage from "../pages/baseMap.page";
 
 describe("OpenStreet Maps", () => {
+    describe("rendering", () => {
+        beforeAll(() => {
+            page.open("p/osm-static");
+        });
+
+        it("compares with a screenshot baseline and checks if basemap is correct", () => {
+            browser.setWindowRect(0, 0, 1200, 900);
+            const screenshotElem = $(".widget-maps");
+            screenshotElem.waitForDisplayed({ timeout: 5000 });
+            browser.pause(3000);
+            browser.saveElement(screenshotElem, "osmMaps");
+            expect(browser.checkElement(screenshotElem, "osmMaps")).toEqual(0);
+        });
+    });
+
     describe("mixed rendering", () => {
         beforeAll(() => {
             page.open("p/osm");
