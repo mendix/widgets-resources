@@ -68,8 +68,14 @@ export const getCustomLayoutOptions = ({
     yAxisLabel
 }: CustomLayoutProps): Partial<Layout> => ({
     showlegend: showLegend,
-    xaxis: { title: xAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "vertical" },
-    yaxis: { title: yAxisLabel, showgrid: gridLinesMode === "both" || gridLinesMode === "horizontal" }
+    xaxis: {
+        title: { text: xAxisLabel } as Layout["xaxis"]["title"],
+        showgrid: gridLinesMode === "both" || gridLinesMode === "vertical"
+    },
+    yaxis: {
+        title: { text: yAxisLabel } as Layout["yaxis"]["title"],
+        showgrid: gridLinesMode === "both" || gridLinesMode === "horizontal"
+    }
 });
 
 export type ChartTypeEnum =
