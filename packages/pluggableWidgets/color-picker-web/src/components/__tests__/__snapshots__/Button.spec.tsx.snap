@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button render DOM structure 1`] = `
+<DocumentFragment>
+  <button
+    class="btn"
+  >
+    <div
+      class="widget-color-picker-inner"
+      style="background: rgb(0, 0, 0);"
+    />
+  </button>
+</DocumentFragment>
+`;
