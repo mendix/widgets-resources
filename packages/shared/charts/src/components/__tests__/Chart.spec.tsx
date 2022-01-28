@@ -48,18 +48,16 @@ describe("LineChart", () => {
 
     it("properly sets the X axis title", () => {
         const lineChart = mount(<ChartWidget {...defaultProps} xAxisLabel="This is the X axis title" />);
-        expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty(
-            "xaxis.title",
-            "This is the X axis title"
-        );
+        expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty("xaxis.title", {
+            text: "This is the X axis title"
+        });
     });
 
     it("properly sets the Y axis title", () => {
         const lineChart = mount(<ChartWidget {...defaultProps} yAxisLabel="This is the Y axis title" />);
-        expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty(
-            "yaxis.title",
-            "This is the Y axis title"
-        );
+        expect(lineChart.find(ReactPlotlyChart).prop("layout")).toHaveProperty("yaxis.title", {
+            text: "This is the Y axis title"
+        });
     });
 
     describe("properly sets the properties for the gridlines", () => {
