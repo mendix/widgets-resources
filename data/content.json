@@ -37,24 +37,6 @@
 			]
 		},
 		{
-			"name": "ColorPicker",
-			"version": "1.1.4",
-			"widgets": [
-				{
-					"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
-					"name": "Color picker",
-					"description": "Pick a color from color input",
-					"isPluginWidget": false,
-					"offlineCapable": true,
-					"supportedPlatform": "web",
-					"hasStructureModePreview": false,
-					"hasDesignModePreview": false,
-					"hasAllTileIcons": false,
-					"hasAllDarkIcons": false
-				}
-			]
-		},
-		{
 			"name": "Signature",
 			"version": "1.0.5",
 			"widgets": [
@@ -448,6 +430,26 @@
 			]
 		},
 		{
+			"name": "ColorPicker",
+			"version": "2.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
+					"name": "Color picker",
+					"description": "Pick a color from color input",
+					"studioCategory": "Display",
+					"studioProCategory": "Display",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": false,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": true,
+					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
 			"name": "ColumnChart",
 			"version": "1.0.0",
 			"widgets": [
@@ -470,7 +472,7 @@
 		},
 		{
 			"name": "DatagridDateFilter",
-			"version": "2.2.1",
+			"version": "2.2.2",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
@@ -671,6 +673,26 @@
 					"hasDesignModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
+				}
+			]
+		},
+		{
+			"name": "HeatMap",
+			"version": "3.0.0",
+			"widgets": [
+				{
+					"id": "com.mendix.widget.custom.HeatMap.HeatMap",
+					"name": "Heat map",
+					"description": "Renders a heatmap chart",
+					"studioCategory": "Charts",
+					"studioProCategory": "Charts",
+					"isPluginWidget": true,
+					"offlineCapable": true,
+					"supportedPlatform": "web",
+					"hasStructureModePreview": true,
+					"hasDesignModePreview": true,
+					"hasAllTileIcons": false,
+					"hasAllDarkIcons": false
 				}
 			]
 		},
