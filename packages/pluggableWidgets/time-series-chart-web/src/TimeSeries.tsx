@@ -64,7 +64,7 @@ export function TimeSeries(props: TimeSeriesContainerProps): ReactElement | null
                 marker: {
                     color: line.markerColor?.value
                 },
-                transform: getPlotChartDataTransforms(line.aggregationType, dataPoints)
+                transforms: getPlotChartDataTransforms(line.aggregationType, dataPoints)
             }),
             []
         )
