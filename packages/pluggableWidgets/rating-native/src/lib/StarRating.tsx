@@ -42,7 +42,7 @@ const defaultProps = {
     reversed: false,
     starSize: 40,
     starStyle: {},
-    selectedStar: () => {}
+    selectedStar: undefined
 };
 
 interface Props extends StarRatingProps {
@@ -50,8 +50,8 @@ interface Props extends StarRatingProps {
 }
 
 class StarRating extends Component<Props> {
-    starRef: Array<ClassicComponent<AnimatableProperties<ViewStyle> & ViewProps, any> | null>;
     static defaultProps: typeof defaultProps;
+    starRef: Array<ClassicComponent<AnimatableProperties<ViewStyle> & ViewProps, any> | null>;
 
     constructor(props: Props) {
         super(props);
@@ -63,7 +63,9 @@ class StarRating extends Component<Props> {
     onStarButtonPress(rating: number) {
         const { selectedStar } = this.props;
 
-        selectedStar && selectedStar(rating);
+        if (selectedStar) {
+            selectedStar(rating);
+        }
     }
 
     render() {
