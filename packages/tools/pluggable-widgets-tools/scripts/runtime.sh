@@ -11,3 +11,4 @@ while true
 do
   tail -f /dev/null & wait ${!}
 done
+echo "Runtime container exiting now"
