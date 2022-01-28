@@ -42,10 +42,14 @@ export interface LinesType {
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
     markerColor?: DynamicValue<string>;
+    enableFillArea: boolean;
+    fillColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
     staticTooltipHoverText?: ListExpressionValue<string>;
     dynamicTooltipHoverText?: ListExpressionValue<string>;
 }
+
+export type YAxisRangeModeEnum = "normal" | "tozero" | "nonnegative";
 
 export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
@@ -72,6 +76,8 @@ export interface LinesPreviewType {
     lineStyle: LineStyleEnum;
     lineColor: string;
     markerColor: string;
+    enableFillArea: boolean;
+    fillColor: string;
     onClickAction: {} | null;
     staticTooltipHoverText: string;
     dynamicTooltipHoverText: string;
@@ -86,12 +92,14 @@ export interface TimeSeriesContainerProps {
     showLegend: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
+    yAxisRangeMode: YAxisRangeModeEnum;
     developerMode: DeveloperModeEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
+    showRangeSlider: boolean;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
@@ -106,12 +114,14 @@ export interface TimeSeriesPreviewProps {
     showLegend: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
+    yAxisRangeMode: YAxisRangeModeEnum;
     developerMode: DeveloperModeEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
+    showRangeSlider: boolean;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;

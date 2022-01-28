@@ -39,6 +39,9 @@ export function getProperties(
         if (line.lineStyle !== "lineWithMarkers") {
             hideNestedPropertiesIn(defaultProperties, values, "lines", index, ["markerColor"]);
         }
+        if (!line.enableFillArea) {
+            hideNestedPropertiesIn(defaultProperties, values, "lines", index, ["fillColor"]);
+        }
         if (!showAdvancedOptions) {
             hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
         }

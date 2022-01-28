@@ -1,10 +1,13 @@
 import classNames from "classnames";
-import { createElement, ReactElement, useCallback } from "react";
+import { createElement, ReactElement, useCallback, useMemo } from "react";
 import { ChartWidget, ChartWidgetProps } from "@mendix/shared-charts";
 import { getPlotChartDataTransforms, usePlotChartDataSeries } from "@mendix/shared-charts/hooks";
 import { TimeSeriesContainerProps } from "../typings/TimeSeriesProps";
 
-const timeSeriesChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
+const createTimeSeriesChartLayoutOptions = (
+    showRangeSlider: TimeSeriesContainerProps["showRangeSlider"],
+    yAxisRangeMode: TimeSeriesContainerProps["yAxisRangeMode"]
+): ChartWidgetProps["layoutOptions"] => ({
     font: {
         color: "#555",
         size: 12
@@ -23,7 +26,7 @@ const timeSeriesChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
         zerolinecolor: "#d7d7d7",
         zeroline: true,
         rangeslider: {
-            visible: true,
+            visible: showRangeSlider,
             borderwidth: 1,
             bordercolor: "#d7d7d7"
         }
@@ -32,9 +35,10 @@ const timeSeriesChartLayoutOptions: ChartWidgetProps["layoutOptions"] = {
         fixedrange: true,
         gridcolor: "#d7d7d7",
         zeroline: true,
-        zerolinecolor: "#d7d7d7"
+        zerolinecolor: "#d7d7d7",
+        rangemode: yAxisRangeMode || "tozero"
     }
-};
+});
 
 const timeSeriesChartConfigOptions: ChartWidgetProps["configOptions"] = {
     responsive: true
@@ -51,6 +55,8 @@ export function TimeSeries(props: TimeSeriesContainerProps): ReactElement | null
         useCallback(
             (line, dataPoints) => ({
                 mode: line.lineStyle === "line" ? "lines" : "lines+markers",
+                fill: line.enableFillArea ? "tonexty" : "none",
+                fillcolor: line.fillColor?.value,
                 line: {
                     shape: line.interpolation,
                     color: line.lineColor?.value
@@ -62,6 +68,11 @@ export function TimeSeries(props: TimeSeriesContainerProps): ReactElement | null
             }),
             []
         )
+    );
+
+    const timeSeriesLayout = useMemo<ChartWidgetProps["layoutOptions"]>(
+        () => createTimeSeriesChartLayoutOptions(props.showRangeSlider, props.yAxisRangeMode),
+        [props.showRangeSlider, props.yAxisRangeMode]
     );
 
     return (
@@ -80,7 +91,7 @@ export function TimeSeries(props: TimeSeriesContainerProps): ReactElement | null
             showSidebarEditor={props.developerMode === "developer"}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
-            layoutOptions={timeSeriesChartLayoutOptions}
+            layoutOptions={timeSeriesLayout}
             configOptions={timeSeriesChartConfigOptions}
             seriesOptions={timeSeriesChartSeriesOptions}
             enableThemeConfig={props.enableThemeConfig}

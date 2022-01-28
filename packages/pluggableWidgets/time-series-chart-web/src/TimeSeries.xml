@@ -138,6 +138,14 @@
                                 <caption>Marker color</caption>
                                 <description />
                             </property>
+                            <property key="enableFillArea" type="boolean" defaultValue="true">
+                                <caption>Fill area</caption>
+                                <description>Fill area between data point and x-axis</description>
+                            </property>
+                            <property key="fillColor" type="textTemplate" required="false" multiline="false">
+                                <caption>Area color</caption>
+                                <description>By default, the border color with transparency is used</description>
+                            </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
                             <property key="onClickAction" type="action" required="false">
@@ -166,6 +174,15 @@
                 <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>Y axis label</caption>
                     <description />
+                </property>
+                <property key="yAxisRangeMode" type="enumeration" defaultValue="tozero">
+                    <caption>Y-axis range mode</caption>
+                    <description>Controls the y-axis range. "From zero" starts the y-axis from zero. "Auto" sets the range based on the plotted values. "Non-negative" only shows a range of positive values. If the series "Fill area" property is set to "yes", the range mode is set to "From zero" by default.</description>
+                    <enumerationValues>
+                        <enumerationValue key="normal">Auto</enumerationValue>
+                        <enumerationValue key="tozero">From zero</enumerationValue>
+                        <enumerationValue key="nonnegative">Non-negative</enumerationValue>
+                    </enumerationValues>
                 </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
                     <caption>Mode</caption>
@@ -223,6 +240,10 @@
                         <enumerationValue key="vertical">Vertical</enumerationValue>
                         <enumerationValue key="both">Both</enumerationValue>
                     </enumerationValues>
+                </property>
+                <property key="showRangeSlider" type="boolean" defaultValue="true">
+                    <caption>Show range slider</caption>
+                    <description />
                 </property>
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
