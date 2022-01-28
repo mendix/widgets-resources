@@ -1,7 +1,7 @@
 {
   "name": "time-series-chart-web",
-  "widgetName": "TimeSeriesChart",
-  "version": "1.0.0",
+  "widgetName": "TimeSeries",
+  "version": "3.0.0",
   "description": "Shows data changes over period of time.",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "license": "Apache-2.0",

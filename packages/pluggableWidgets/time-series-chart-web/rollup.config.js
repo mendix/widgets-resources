@@ -1,3 +1,3 @@
 import { sharedChardConfig } from "@mendix/shared-charts/rollup";
 
-export default args => sharedChardConfig(args, "TimeSeriesChart");
+export default args => sharedChardConfig(args, "TimeSeries");
