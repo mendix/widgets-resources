@@ -16,3 +16,20 @@
     }
 }
 
+.iconsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 100%;
+
+    .iconContainer {
+        flex: 1;
+        height: 100%;
+
+        .icon {
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}
+

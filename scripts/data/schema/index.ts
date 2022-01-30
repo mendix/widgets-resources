@@ -1,6 +1,26 @@
 import { z } from "zod";
 import { SupportedPlatform } from "../generator/model/widget";
 
+export const IconSchema = z.object({
+    name: z.string(),
+    image: z.string()
+});
+
+export const IconsSchema = z.object({
+    icon: IconSchema.optional(),
+    iconDark: IconSchema.optional(),
+    tile: IconSchema.optional(),
+    tileDark: IconSchema.optional()
+});
+
+export const RequirementsSchema = z.object({
+    isPluginWidget: z.boolean(),
+    hasStructureModePreview: z.boolean(),
+    hasDesignModePreview: z.boolean().optional(),
+    hasAllTileIcons: z.boolean(),
+    hasAllDarkIcons: z.boolean()
+});
+
 export const WidgetSchema = z.object({
     id: z.string(),
     name: z.string(),
@@ -10,13 +30,8 @@ export const WidgetSchema = z.object({
     offlineCapable: z.boolean(),
     studioCategory: z.string().optional(),
     studioProCategory: z.string().optional(),
-    requirements: z.object({
-        isPluginWidget: z.boolean(),
-        hasStructureModePreview: z.boolean(),
-        hasDesignModePreview: z.boolean().optional(),
-        hasAllTileIcons: z.boolean(),
-        hasAllDarkIcons: z.boolean()
-    })
+    requirements: RequirementsSchema,
+    icons: IconsSchema
 });
 
 export const WidgetPackageSchema = z.object({

@@ -1,4 +1,5 @@
-import { basename, extname, join } from "path";
+import { basename, extname, join, relative } from "path";
+import { promises as fs } from "fs";
 import { Analyzer } from "../analyzer";
 import { XmlExtractor } from "../parsers/XmlExtractor";
 import { firstWithGlob, isEnumValue } from "../util";
@@ -12,12 +13,18 @@ export enum SupportedPlatform {
     BOTH = "both"
 }
 
-interface Icons {
-    icon: string | undefined;
-    iconDark: string | undefined;
-    tile: string | undefined;
-    tileDark: string | undefined;
-}
+type Icon = {
+    name: string;
+    path: string;
+    image: string;
+};
+
+type Icons = {
+    icon?: Icon;
+    iconDark?: Icon;
+    tile?: Icon;
+    tileDark?: Icon;
+};
 
 interface Config {
     editorConfig: string | undefined;
@@ -56,7 +63,11 @@ export class Widget {
                     this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
                 hasAllDarkIcons:
                     this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined
-            }
+            },
+            icons: Object.entries(icons).reduce(
+                (result, [key, icon]) => (icon ? { ...result, [key]: { name: icon.name, image: icon.image } } : result),
+                {}
+            )
         };
     }
 
@@ -106,12 +117,29 @@ export class Widget {
                 editorPreview: await firstWithGlob(`${packagePath}/src/${internalName}.editorPreview.{js,jsx,ts,tsx}`)
             },
             icons: {
-                icon: await firstWithGlob(`${packagePath}/src/${internalName}.icon.png`),
-                iconDark: await firstWithGlob(`${packagePath}/src/${internalName}.icon.dark.png`),
-                tile: await firstWithGlob(`${packagePath}/src/${internalName}.tile.png`),
-                tileDark: await firstWithGlob(`${packagePath}/src/${internalName}.tile.dark.png`)
+                icon: await this.loadIcon(packagePath, internalName, "icon", false),
+                iconDark: await this.loadIcon(packagePath, internalName, "icon", true),
+                tile: await this.loadIcon(packagePath, internalName, "tile", false),
+                tileDark: await this.loadIcon(packagePath, internalName, "tile", true)
             }
         });
+    }
+
+    private static async loadIcon(
+        packagePath: string,
+        widgetName: string,
+        type: "icon" | "tile",
+        dark: boolean
+    ): Promise<Icon | undefined> {
+        const name = `${widgetName}.${type}${dark ? ".dark" : ""}`;
+        const path = await firstWithGlob(`${packagePath}/src/${name}.png`);
+        return path
+            ? {
+                  name,
+                  path: relative(packagePath, path),
+                  image: await fs.readFile(path, { encoding: "base64" })
+              }
+            : undefined;
     }
 
     private static widgetXmlExtractor = new XmlExtractor(

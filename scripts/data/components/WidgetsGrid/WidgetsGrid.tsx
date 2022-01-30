@@ -1,7 +1,7 @@
 import ReactDataGrid, { Column, SortDirection } from "react-data-grid";
 import { FunctionComponent, useCallback, useState } from "react";
 import { z } from "zod";
-import { WidgetPackageSchema, WidgetSchema } from "../../schema";
+import { IconsSchema, WidgetPackageSchema, WidgetSchema } from "../../schema";
 import styles from "./WidgetsGrid.module.scss";
 
 type Row = Pick<z.infer<typeof WidgetPackageSchema>, "version"> &
@@ -12,7 +12,7 @@ type GridColumn = Column<Row>;
 const enum ColumnWidth {
     SMALL = 100,
     MEDIUM = 150,
-    LARGE = 300
+    LARGE = 200
 }
 
 const columns: GridColumn[] = [
@@ -66,6 +66,12 @@ const columns: GridColumn[] = [
         name: "Dark icons?",
         width: ColumnWidth.MEDIUM,
         formatter: props => booleanFormatter(props.row.hasAllDarkIcons)
+    },
+    {
+        key: "icons",
+        name: "Icons",
+        width: ColumnWidth.LARGE,
+        formatter: props => iconsFormatter(props.row.icons)
     }
 ];
 
@@ -131,6 +137,25 @@ function booleanFormatter(value?: boolean) {
     return <div className={`${styles.boolean} ${className}`}>{text}</div>;
 }
 
+function iconsFormatter(icons: z.infer<typeof IconsSchema>) {
+    const types: (keyof z.infer<typeof IconsSchema>)[] = ["icon", "iconDark", "tile", "tileDark"];
+
+    return (
+        <div className={styles.iconsContainer}>
+            {types.map(type => {
+                const icon = icons[type];
+                return (
+                    <div className={styles.iconContainer}>
+                        {icon ? (
+                            <img className={styles.icon} src={`data:image/png;base64, ${icon.image}`} alt={icon.name} />
+                        ) : null}
+                    </div>
+                );
+            })}
+        </div>
+    );
+}
+
 function isColumnKey(key: string): key is keyof Row {
     return columns.map(column => column.key).includes(key);
 }
@@ -156,6 +181,8 @@ function compareRows(a: Row, b: Row, column: keyof Row): number {
             } else {
                 return a[column] ? -1 : 1;
             }
+        case "icons":
+            return 0;
         default:
             throw new Error(`unsupported sortColumn: "${column}"`);
     }
