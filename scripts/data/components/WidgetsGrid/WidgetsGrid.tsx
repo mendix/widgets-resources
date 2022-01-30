@@ -1,10 +1,12 @@
 import ReactDataGrid, { Column, SortDirection } from "react-data-grid";
 import { FunctionComponent, useCallback, useState } from "react";
 import { z } from "zod";
-import { WidgetPackageSchema, WidgetSchema } from "../schema";
+import { WidgetPackageSchema, WidgetSchema } from "../../schema";
 import styles from "./WidgetsGrid.module.scss";
 
-type Row = Pick<z.infer<typeof WidgetPackageSchema>, "version"> & z.infer<typeof WidgetSchema>;
+type Row = Pick<z.infer<typeof WidgetPackageSchema>, "version"> &
+    Omit<z.infer<typeof WidgetSchema>, "requirements"> &
+    z.infer<typeof WidgetSchema>["requirements"];
 type GridColumn = Column<Row>;
 
 const enum ColumnWidth {
@@ -67,7 +69,10 @@ type Props = { data: Array<z.infer<typeof WidgetPackageSchema>> };
 export const WidgetsGrid: FunctionComponent<Props> = ({ data }) => {
     const [rows, setRows] = useState(
         data.flatMap(widgetPackage =>
-            widgetPackage.widgets.map(widget => ({ version: widgetPackage.version, ...widget }))
+            widgetPackage.widgets.map(widget => {
+                const { requirements, ...rest } = widget;
+                return { version: widgetPackage.version, ...requirements, ...rest };
+            })
         )
     );
 

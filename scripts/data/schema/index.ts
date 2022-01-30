@@ -27,7 +27,8 @@ export const WidgetPackageSchema = z.object({
 
 export const JSActionSchema = z.object({
     name: z.string(),
-    group: z.string()
+    group: z.string(),
+    requirements: z.object({})
 });
 
 export const JSActionPackageSchema = z.object({

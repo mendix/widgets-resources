@@ -6,7 +6,10 @@ export class JSAction {
     constructor(private properties: { name: string; group: string }) {}
 
     export(): z.infer<typeof JSActionSchema> {
-        return this.properties;
+        return {
+            ...this.properties,
+            requirements: {}
+        };
     }
 
     static async load(packagePath: string, jsActionPath: string): Promise<JSAction> {

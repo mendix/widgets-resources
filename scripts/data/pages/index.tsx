@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
-import { WidgetsGrid } from "../components/WidgetsGrid";
+import { WidgetsGrid } from "../components/WidgetsGrid/WidgetsGrid";
 import { z } from "zod";
 import { OutputSchema } from "../schema";
 import { Container, Nav, Row, Tab } from "react-bootstrap";
+import { JSActionsGrid } from "../components/JSActionsGrid/JSActionsGrid";
 
 type Props = {
     data: z.infer<typeof OutputSchema>;
@@ -31,7 +32,9 @@ const Home: NextPage<Props> = props => {
                             <Tab.Pane eventKey="widgets" className="h-100">
                                 <WidgetsGrid data={props.data.widgetPackages} />
                             </Tab.Pane>
-                            <Tab.Pane eventKey="jsActions" className="h-100" />
+                            <Tab.Pane eventKey="jsActions" className="h-100">
+                                <JSActionsGrid data={props.data.jsActionPackages} />
+                            </Tab.Pane>
                         </Tab.Content>
                     </Row>
                 </Tab.Container>
