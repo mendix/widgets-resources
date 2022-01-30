@@ -1,9 +1,11 @@
 import { basename, dirname, extname, join, relative } from "path";
+import { z } from "zod";
+import { JSActionSchema } from "../../schema";
 
 export class JSAction {
     constructor(private properties: { name: string; group: string }) {}
 
-    export(): object {
+    export(): z.infer<typeof JSActionSchema> {
         return this.properties;
     }
 

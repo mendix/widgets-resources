@@ -4,11 +4,12 @@ import { Analyzer } from "../analyzer";
 import { XmlExtractor } from "../parsers/XmlExtractor";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
+import { WidgetPackageSchema } from "../../schema";
 
 export class WidgetPackage {
     constructor(private properties: { name: string; version: string; widgets: Widget[] }) {}
 
-    export(analyzer: Analyzer): object {
+    export(analyzer: Analyzer): z.infer<typeof WidgetPackageSchema> {
         return {
             name: this.properties.name,
             version: this.properties.version,

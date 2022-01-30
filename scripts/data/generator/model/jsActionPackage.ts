@@ -3,11 +3,12 @@ import { JSAction } from "./jsAction";
 import { withGlob } from "../util";
 import { z } from "zod";
 import { JsonExtractor } from "../parsers/JsonExtractor";
+import { JSActionPackageSchema } from "../../schema";
 
 export class JSActionPackage {
     constructor(private properties: { name: string; version: string; jsActions: JSAction[] }) {}
 
-    export(): object {
+    export(): z.infer<typeof JSActionPackageSchema> {
         return {
             name: this.properties.name,
             version: this.properties.version,

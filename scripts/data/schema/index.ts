@@ -1,19 +1,22 @@
 import { z } from "zod";
+import { SupportedPlatform } from "../generator/model/widget";
 
 export const WidgetSchema = z.object({
     id: z.string(),
     name: z.string(),
     description: z.string(),
     docsUrl: z.string().optional(),
+    supportedPlatform: z.nativeEnum(SupportedPlatform),
+    offlineCapable: z.boolean(),
     studioCategory: z.string().optional(),
     studioProCategory: z.string().optional(),
-    isPluginWidget: z.boolean(),
-    offlineCapable: z.boolean(),
-    supportedPlatform: z.enum(["web", "native"]),
-    hasStructureModePreview: z.boolean(),
-    hasDesignModePreview: z.boolean().optional(),
-    hasAllTileIcons: z.boolean(),
-    hasAllDarkIcons: z.boolean()
+    requirements: z.object({
+        isPluginWidget: z.boolean(),
+        hasStructureModePreview: z.boolean(),
+        hasDesignModePreview: z.boolean().optional(),
+        hasAllTileIcons: z.boolean(),
+        hasAllDarkIcons: z.boolean()
+    })
 });
 
 export const WidgetPackageSchema = z.object({

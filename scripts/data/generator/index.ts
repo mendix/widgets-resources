@@ -39,7 +39,7 @@ export async function generateData(): Promise<z.infer<typeof OutputSchema>> {
     const jsActionLocation = await getLernaPackages(/jsActions/);
     const jsActionPackages = await Promise.all(jsActionLocation.map(packagePath => JSActionPackage.load(packagePath)));
 
-    const output = {
+    const output: z.infer<typeof OutputSchema> = {
         widgetPackages: widgetPackages.map(widgetPackage => widgetPackage.export(analyzer)),
         jsActionPackages: jsActionPackages.map(jsActionPackage => jsActionPackage.export())
     };

@@ -4,8 +4,9 @@ import { XmlExtractor } from "../parsers/XmlExtractor";
 import { firstWithGlob, isEnumValue } from "../util";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
+import { WidgetSchema } from "../../schema";
 
-enum SupportedPlatform {
+export enum SupportedPlatform {
     WEB = "web",
     NATIVE = "native",
     BOTH = "both"
@@ -40,16 +41,22 @@ export class Widget {
         }
     ) {}
 
-    export(analyzer: Analyzer): object {
-        const { config, icons, ...other } = this.properties;
+    export(analyzer: Analyzer): z.infer<typeof WidgetSchema> {
+        const { isPluginWidget, config, icons, ...other } = this.properties;
 
         return {
             ...other,
-            hasStructureModePreview: this.hasStructureModePreview(analyzer),
-            ...(other.supportedPlatform === "web" ? { hasDesignModePreview: this.hasDesignModePreview(analyzer) } : {}),
-            hasAllTileIcons: this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
-            hasAllDarkIcons:
-                this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined
+            requirements: {
+                isPluginWidget,
+                hasStructureModePreview: this.hasStructureModePreview(analyzer),
+                ...(other.supportedPlatform === "web"
+                    ? { hasDesignModePreview: this.hasDesignModePreview(analyzer) }
+                    : {}),
+                hasAllTileIcons:
+                    this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
+                hasAllDarkIcons:
+                    this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined
+            }
         };
     }
 
