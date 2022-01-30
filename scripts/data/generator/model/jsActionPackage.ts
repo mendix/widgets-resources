@@ -12,7 +12,7 @@ export class JSActionPackage {
         return {
             name: this.properties.name,
             version: this.properties.version,
-            jsActions: this.properties.jsActions.map(widget => widget.export())
+            items: this.properties.jsActions.map(widget => widget.export())
         };
     }
 
@@ -22,7 +22,9 @@ export class JSActionPackage {
             version: json => json.version
         });
 
-        const jsActionPaths = await withGlob(`${packagePath}/src/**/*.{js,ts}`, matches => matches);
+        const jsActionPaths = await withGlob(`${packagePath}/src/**/*.{js,ts}`, matches =>
+            matches.filter(match => !match.includes(".d."))
+        );
         const jsActions = await Promise.all(
             jsActionPaths.map(
                 async jsActionPath => await JSAction.load(packagePath, relative(packagePath, jsActionPath))

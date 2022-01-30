@@ -1,25 +1,27 @@
 import ReactDataGrid, { Column, SortDirection } from "react-data-grid";
-import { FunctionComponent, useCallback, useState } from "react";
-import { z } from "zod";
-import { IconsSchema, WidgetPackageSchema, WidgetSchema } from "../../schema";
-import styles from "./WidgetsGrid.module.scss";
+import { FunctionComponent, useCallback, useMemo, useState } from "react";
+import styles from "./ContentGrid.module.scss";
+import { Row } from "../../pages";
 
-type Row = Pick<z.infer<typeof WidgetPackageSchema>, "version"> &
-    Omit<z.infer<typeof WidgetSchema>, "requirements"> &
-    z.infer<typeof WidgetSchema>["requirements"];
 type GridColumn = Column<Row>;
 
 const enum ColumnWidth {
     SMALL = 100,
     MEDIUM = 150,
-    LARGE = 200
+    LARGE = 200,
+    EXTRA_LARGE = 300
 }
 
 const columns: GridColumn[] = [
     {
         key: "name",
         name: "Name",
-        width: ColumnWidth.LARGE
+        width: ColumnWidth.EXTRA_LARGE
+    },
+    {
+        key: "type",
+        name: "Type",
+        width: ColumnWidth.SMALL
     },
     {
         key: "version",
@@ -71,22 +73,13 @@ const columns: GridColumn[] = [
         key: "icons",
         name: "Icons",
         width: ColumnWidth.LARGE,
-        formatter: props => iconsFormatter(props.row.icons)
+        formatter: props => (props.row.icons ? iconsFormatter(props.row.icons) : null)
     }
 ];
 
-type Props = { data: Array<z.infer<typeof WidgetPackageSchema>> };
+type Props = { rows: Row[] };
 
-export const WidgetsGrid: FunctionComponent<Props> = ({ data }) => {
-    const [rows, setRows] = useState(
-        data.flatMap(widgetPackage =>
-            widgetPackage.widgets.map(widget => {
-                const { requirements, ...rest } = widget;
-                return { version: widgetPackage.version, ...requirements, ...rest };
-            })
-        )
-    );
-
+export const ContentGrid: FunctionComponent<Props> = ({ rows }) => {
     const rowKeyGetter = useCallback((row: Row) => row.id, []);
 
     const [sortColumn, setSortColumn] = useState<keyof Row>("name");
@@ -99,23 +92,24 @@ export const WidgetsGrid: FunctionComponent<Props> = ({ data }) => {
 
         setSortColumn(column);
         setSortDirection(direction);
-
-        setRows(
-            rows.sort((a, b) =>
-                direction === "ASC"
-                    ? compareRows(a, b, column)
-                    : direction === "DESC"
-                    ? compareRows(a, b, column) * -1
-                    : 0
-            )
-        );
     }, []);
+
+    const sortedRows = useMemo(() => {
+        const sortedRows = [...rows];
+        return sortedRows.sort((a, b) =>
+            sortDirection === "ASC"
+                ? compareRows(a, b, sortColumn)
+                : sortDirection === "DESC"
+                ? compareRows(a, b, sortColumn) * -1
+                : 0
+        );
+    }, [rows, sortColumn, sortDirection]);
 
     return isServer() ? null : (
         <ReactDataGrid
             className={`rdg-light ${styles.grid}`}
             columns={columns}
-            rows={rows}
+            rows={sortedRows}
             defaultColumnOptions={{
                 sortable: true,
                 resizable: true
@@ -137,15 +131,18 @@ function booleanFormatter(value?: boolean) {
     return <div className={`${styles.boolean} ${className}`}>{text}</div>;
 }
 
-function iconsFormatter(icons: z.infer<typeof IconsSchema>) {
-    const types: (keyof z.infer<typeof IconsSchema>)[] = ["icon", "iconDark", "tile", "tileDark"];
+function iconsFormatter(icons: Row["icons"]) {
+    if (icons === undefined) {
+        return null;
+    }
+    const types: (keyof typeof icons)[] = ["icon", "iconDark", "tile", "tileDark"];
 
     return (
         <div className={styles.iconsContainer}>
             {types.map(type => {
                 const icon = icons[type];
                 return (
-                    <div className={styles.iconContainer}>
+                    <div key={type} className={styles.iconContainer}>
                         {icon ? (
                             <img className={styles.icon} src={`data:image/png;base64, ${icon.image}`} alt={icon.name} />
                         ) : null}
@@ -163,9 +160,18 @@ function isColumnKey(key: string): key is keyof Row {
 function compareRows(a: Row, b: Row, column: keyof Row): number {
     switch (column) {
         case "name":
+        case "type":
         case "version":
         case "supportedPlatform":
-            return a[column].localeCompare(b[column]);
+            const valueA = a[column];
+            const valueB = b[column];
+            return valueA === undefined && valueB === undefined
+                ? 0
+                : valueA === undefined
+                ? 1
+                : valueB === undefined
+                ? -1
+                : valueA.localeCompare(valueB);
         case "offlineCapable":
         case "isPluginWidget":
         case "hasStructureModePreview":

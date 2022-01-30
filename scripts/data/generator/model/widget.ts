@@ -6,12 +6,7 @@ import { firstWithGlob, isEnumValue } from "../util";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
 import { WidgetSchema } from "../../schema";
-
-export enum SupportedPlatform {
-    WEB = "web",
-    NATIVE = "native",
-    BOTH = "both"
-}
+import { SupportedPlatform } from "../../supportedPlatform";
 
 type Icon = {
     name: string;

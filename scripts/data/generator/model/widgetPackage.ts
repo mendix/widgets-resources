@@ -13,7 +13,7 @@ export class WidgetPackage {
         return {
             name: this.properties.name,
             version: this.properties.version,
-            widgets: this.properties.widgets.map(widget => widget.export(analyzer))
+            items: this.properties.widgets.map(widget => widget.export(analyzer))
         };
     }
 

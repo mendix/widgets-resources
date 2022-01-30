@@ -1,43 +1,59 @@
 import type { NextPage } from "next";
-import { WidgetsGrid } from "../components/WidgetsGrid/WidgetsGrid";
+import { ContentGrid } from "../components/ContentGrid/ContentGrid";
 import { z } from "zod";
-import { OutputSchema } from "../schema";
-import { Container, Nav, Row, Tab } from "react-bootstrap";
-import { JSActionsGrid } from "../components/JSActionsGrid/JSActionsGrid";
+import {
+    ContentPackageSchema,
+    ContentSchema,
+    JSActionSchema,
+    OutputSchema,
+    WidgetRequirementsSchema,
+    WidgetSchema
+} from "../schema";
+import { Container, Row } from "react-bootstrap";
+import { useMemo } from "react";
 
 type Props = {
     data: z.infer<typeof OutputSchema>;
 };
 
+export type Row = Partial<Omit<z.infer<typeof WidgetSchema>, "requirements">> &
+    Partial<z.infer<typeof JSActionSchema>> &
+    Partial<z.infer<typeof WidgetRequirementsSchema>> &
+    Pick<z.infer<typeof ContentPackageSchema>, "version"> &
+    z.infer<typeof ContentSchema> & { type: "widget" | "jsAction" };
+
 const Home: NextPage<Props> = props => {
+    const rows = useMemo<Row[]>(
+        () => [
+            ...props.data.jsActionPackages.flatMap<Row>(jsActionPackage =>
+                jsActionPackage.items.map(jsAction => ({
+                    ...jsAction,
+                    type: "jsAction",
+                    version: jsActionPackage.version
+                }))
+            ),
+            ...props.data.widgetPackages.flatMap<Row>(widgetPackage =>
+                widgetPackage.items.map(widget => {
+                    const { requirements, ...rest } = widget;
+                    return {
+                        ...rest,
+                        ...requirements,
+                        type: "widget",
+                        version: widgetPackage.version
+                    };
+                })
+            )
+        ],
+        [props.data]
+    );
+
     return (
         <Container className="vh-100" fluid>
             <div className="d-flex flex-column h-100">
                 <Row>
                     <h1>Content Overview</h1>
                 </Row>
-                <Tab.Container defaultActiveKey="widgets">
-                    <Row>
-                        <Nav variant="tabs" className="nav-fill">
-                            <Nav.Item>
-                                <Nav.Link eventKey="widgets">Widgets</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="jsActions">JS Actions</Nav.Link>
-                            </Nav.Item>
-                        </Nav>
-                    </Row>
-                    <Row className="flex-grow-1">
-                        <Tab.Content className="h-100">
-                            <Tab.Pane eventKey="widgets" className="h-100">
-                                <WidgetsGrid data={props.data.widgetPackages} />
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="jsActions" className="h-100">
-                                <JSActionsGrid data={props.data.jsActionPackages} />
-                            </Tab.Pane>
-                        </Tab.Content>
-                    </Row>
-                </Tab.Container>
+                <ContentGrid rows={rows} />
             </div>
         </Container>
     );
@@ -46,11 +62,9 @@ const Home: NextPage<Props> = props => {
 export default Home;
 
 export async function getStaticProps() {
-    // @ts-ignore
-    const data = await import("../../../data/content.json");
     return {
         props: {
-            data: OutputSchema.parse(data)
+            data: OutputSchema.parse(await import("../../../data/content.json"))
         }
     };
 }

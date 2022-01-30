@@ -3,7 +3,7 @@
 		{
 			"name": "Calendar2",
 			"version": "1.0.13",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.calendar.Calendar",
 					"name": "Calendar",
@@ -24,7 +24,7 @@
 		{
 			"name": "Signature",
 			"version": "1.0.5",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.signature.Signature",
 					"name": "Signature",
@@ -45,16 +45,16 @@
 		{
 			"name": "AccessibilityHelper",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.accessibilityhelper.AccessibilityHelper",
 					"name": "Accessibility helper",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/accessibility-helper",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Input Elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -86,15 +86,15 @@
 		{
 			"name": "Accordion",
 			"version": "2.1.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.accordion.Accordion",
 					"name": "Accordion",
 					"description": "Toggle the display of sections of content",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -125,16 +125,16 @@
 		{
 			"name": "Accordion",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.accordion.Accordion",
 					"name": "Accordion",
 					"description": "Toggle the display of sections of content.",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/accordion",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Structure",
 					"studioProCategory": "Structure",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -166,15 +166,15 @@
 		{
 			"name": "ActivityIndicator",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.activityindicator.ActivityIndicator",
 					"name": "Activity indicator",
 					"description": "Display a circular loading indicator.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -205,15 +205,15 @@
 		{
 			"name": "Animation",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.animation.Animation",
 					"name": "Animation",
 					"description": "Container for animating content",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -244,15 +244,15 @@
 		{
 			"name": "AppEvents",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.appevents.AppEvents",
 					"name": "App events",
 					"description": "Trigger actions based on load, network status and timer events.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Device features",
 					"studioProCategory": "Device features",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -283,15 +283,15 @@
 		{
 			"name": "AreaChart",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.AreaChart.AreaChart",
 					"name": "Area chart",
 					"description": "Create an area chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -315,15 +315,15 @@
 		{
 			"name": "BackgroundImage",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.backgroundimage.BackgroundImage",
 					"name": "Background image",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Images, videos & files",
 					"studioProCategory": "Images, videos & files",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -354,16 +354,16 @@
 		{
 			"name": "BadgeButton",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.badgebutton.BadgeButton",
 					"name": "Badge button",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/badge-button",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Buttons",
 					"studioProCategory": "Buttons",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -395,15 +395,15 @@
 		{
 			"name": "Badge",
 			"version": "2.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.badge.Badge",
 					"name": "Badge",
 					"description": "Display text or a value as a badge.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -434,16 +434,16 @@
 		{
 			"name": "Badge",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.badge.Badge",
 					"name": "Badge",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/badge",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -475,15 +475,15 @@
 		{
 			"name": "BarChart",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.barchart.BarChart",
 					"name": "Bar chart",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -514,16 +514,16 @@
 		{
 			"name": "BarChart",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.BarChart.BarChart",
 					"name": "Bar chart",
 					"description": "Create a bar chart",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/charts#2-4-bar-chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -555,15 +555,15 @@
 		{
 			"name": "BarcodeScanner",
 			"version": "3.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
 					"name": "Barcode scanner",
 					"description": "Scan barcode and QR code values.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Device features",
 					"studioProCategory": "Device features",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -594,16 +594,16 @@
 		{
 			"name": "Barcode Scanner",
 			"version": "2.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.barcodescanner.BarcodeScanner",
 					"name": "Barcode Scanner",
 					"description": "The widget lets you scan a barcode",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/barcode-scanner",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Images, Videos & Files",
 					"studioProCategory": "Images, videos & files",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -635,15 +635,15 @@
 		{
 			"name": "BottomSheet",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.bottomsheet.BottomSheet",
 					"name": "Bottom sheet",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Structure",
 					"studioProCategory": "Structure",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -674,15 +674,15 @@
 		{
 			"name": "BubbleChart",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.BubbleChart.BubbleChart",
 					"name": "Bubble chart",
 					"description": "Create a bubble chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -714,15 +714,15 @@
 		{
 			"name": "Carousel",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.carousel.Carousel",
 					"name": "Carousel",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -753,15 +753,15 @@
 		{
 			"name": "Carousel",
 			"version": "2.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.carousel.Carousel",
 					"name": "Carousel",
 					"description": "Carousel displaying images",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -793,15 +793,15 @@
 		{
 			"name": "ColorPicker",
 			"version": "1.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.colorpicker.ColorPicker",
 					"name": "Color picker",
 					"description": "Pick a color from a circular color input",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -832,15 +832,15 @@
 		{
 			"name": "ColorPicker",
 			"version": "2.0.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
 					"name": "Color picker",
 					"description": "Pick a color from color input",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -872,16 +872,16 @@
 		{
 			"name": "ColumnChart",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.ColumnChart.ColumnChart",
 					"name": "Column chart",
 					"description": "Create a column chart",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/charts#2-3-column-chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -913,16 +913,16 @@
 		{
 			"name": "DatagridDateFilter",
 			"version": "2.3.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.datagriddatefilter.DatagridDateFilter",
 					"name": "Date filter",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-1-date-filter",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Controls",
 					"studioProCategory": "Data controls",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -954,16 +954,16 @@
 		{
 			"name": "DatagridDropdownFilter",
 			"version": "2.2.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter",
 					"name": "Drop-down filter",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-2-drop-down-filter",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Controls",
 					"studioProCategory": "Data controls",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -995,16 +995,16 @@
 		{
 			"name": "DatagridNumberFilter",
 			"version": "2.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.datagridnumberfilter.DatagridNumberFilter",
 					"name": "Number filter",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-3-number-filter",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Controls",
 					"studioProCategory": "Data controls",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1036,16 +1036,16 @@
 		{
 			"name": "DatagridTextFilter",
 			"version": "2.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.datagridtextfilter.DatagridTextFilter",
 					"name": "Text filter",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2#7-4-text-filter",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Controls",
 					"studioProCategory": "Data controls",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1077,16 +1077,16 @@
 		{
 			"name": "Datagrid",
 			"version": "2.2.2",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.datagrid.Datagrid",
 					"name": "Data grid 2",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/data-grid-2",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Containers",
 					"studioProCategory": "Data containers",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1118,16 +1118,16 @@
 		{
 			"name": "DropdownSort",
 			"version": "1.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.dropdownsort.DropdownSort",
 					"name": "Drop-down sort",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/gallery#4-1-drop-down-sort",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Controls",
 					"studioProCategory": "Data controls",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1159,15 +1159,15 @@
 		{
 			"name": "Feedback",
 			"version": "3.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.feedback.Feedback",
 					"name": "Feedback",
 					"description": "Allow users to submit feedback directly into the app project.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Add-ons",
 					"studioProCategory": "Add-ons",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -1198,16 +1198,16 @@
 		{
 			"name": "Fieldset",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.fieldset.Fieldset",
 					"name": "Fieldset",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/fieldset",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Input Elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1239,15 +1239,15 @@
 		{
 			"name": "FloatingActionButton",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.floatingactionbutton.FloatingActionButton",
 					"name": "Floating action button",
 					"description": "Display a circular floating icon button.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Buttons",
 					"studioProCategory": "Buttons",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1278,16 +1278,16 @@
 		{
 			"name": "Gallery",
 			"version": "1.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.gallery.Gallery",
 					"name": "Gallery",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/gallery",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Containers",
 					"studioProCategory": "Data containers",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1319,15 +1319,15 @@
 		{
 			"name": "HeatMap",
 			"version": "3.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.HeatMap.HeatMap",
 					"name": "Heat map",
 					"description": "Renders a heatmap chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1351,15 +1351,15 @@
 		{
 			"name": "Image",
 			"version": "1.0.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.image.Image",
 					"name": "Image",
 					"description": "Display an image and enlarge it on click.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Images, videos & files",
 					"studioProCategory": "Images, videos & files",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1390,16 +1390,16 @@
 		{
 			"name": "Image",
 			"version": "1.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.image.Image",
 					"name": "Image",
 					"description": "Display an image and enlarge it on click.",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/image",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Images, Videos & Files",
 					"studioProCategory": "Images, videos & files",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1431,15 +1431,15 @@
 		{
 			"name": "IntroScreen",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.introscreen.IntroScreen",
 					"name": "Intro screen",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -1470,15 +1470,15 @@
 		{
 			"name": "LineChart",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.linechart.LineChart",
 					"name": "Line chart",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -1509,15 +1509,15 @@
 		{
 			"name": "LineChart",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.LineChart.LineChart",
 					"name": "Line chart",
 					"description": "Create a line chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1549,15 +1549,15 @@
 		{
 			"name": "ListViewSwipe",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.listviewswipe.ListViewSwipe",
 					"name": "List View Swipe",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Interactions",
 					"studioProCategory": "Interactions",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1588,15 +1588,15 @@
 		{
 			"name": "Maps",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.maps.Maps",
 					"name": "Maps",
 					"description": "Show locations on an interactive map.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1627,16 +1627,16 @@
 		{
 			"name": "Maps",
 			"version": "3.1.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.Maps.Maps",
 					"name": "Maps",
 					"description": "Custom description please",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/maps",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1668,15 +1668,15 @@
 		{
 			"name": "Notifications",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.notifications.Notifications",
 					"name": "Notifications",
 					"description": "Trigger actions based on incoming notifications.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Device features",
 					"studioProCategory": "Device features",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -1707,15 +1707,15 @@
 		{
 			"name": "PieDoughnutChart",
 			"version": "1.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.piedoughnutchart.PieDoughnutChart",
 					"name": "Pie Doughnut Chart",
 					"description": "Render a series of data in a Pie or Doughnut chart.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1746,15 +1746,15 @@
 		{
 			"name": "PieChart",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.PieChart.PieChart",
 					"name": "Pie chart",
 					"description": "Renders a pie or doughnut chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1786,15 +1786,15 @@
 		{
 			"name": "PopupMenu",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.popupmenu.PopupMenu",
 					"name": "Pop-up menu",
 					"description": "Displays a set of pre-defined items within pop up menu",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Menus & navigation",
 					"studioProCategory": "Menus & navigation",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -1825,16 +1825,16 @@
 		{
 			"name": "PopupMenu",
 			"version": "3.2.2",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.popupmenu.PopupMenu",
 					"name": "Pop-up menu",
 					"description": "Displays a set of pre-defined items within the Pop-up menu",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/popup-menu",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Menus",
 					"studioProCategory": "Menus & navigation",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1866,15 +1866,15 @@
 		{
 			"name": "ProgressBar",
 			"version": "4.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.progressbar.ProgressBar",
 					"name": "Progress bar",
 					"description": "Display progress in a horizontal bar.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1905,16 +1905,16 @@
 		{
 			"name": "Progress Bar",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.progressbar.ProgressBar",
 					"name": "Progress Bar",
 					"description": "The widget lets you display a percentage as a bar",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/progress-bar",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1946,15 +1946,15 @@
 		{
 			"name": "ProgressCircle",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.progresscircle.ProgressCircle",
 					"name": "Progress circle",
 					"description": "Display progress in a circle with enclosed text.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -1985,16 +1985,16 @@
 		{
 			"name": "ProgressCircle",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.progresscircle.ProgressCircle",
 					"name": "Progress circle",
 					"description": "Displays a progress in a circle",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/progress-circle",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2026,15 +2026,15 @@
 		{
 			"name": "QRCode",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.qrcode.QRCode",
 					"name": "QR code",
 					"description": "Display a QR code based on a value.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2065,15 +2065,15 @@
 		{
 			"name": "RadioButtons",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.radiobuttons.RadioButtons",
 					"name": "Radio Buttons",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2104,15 +2104,15 @@
 		{
 			"name": "RangeSlider",
 			"version": "2.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.rangeslider.RangeSlider",
 					"name": "Range slider",
 					"description": "Change a range of values using a slider.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2143,15 +2143,15 @@
 		{
 			"name": "RangeSlider",
 			"version": "2.0.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.RangeSlider.RangeSlider",
 					"name": "Range Slider",
 					"description": "Change range of values using a slider",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Input Elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2183,15 +2183,15 @@
 		{
 			"name": "Rating",
 			"version": "2.1.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.rating.Rating",
 					"name": "Rating",
 					"description": "Give a rating by selecting stars.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2222,16 +2222,16 @@
 		{
 			"name": "StarRating",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.starrating.StarRating",
 					"name": "Rating",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/rating",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2263,15 +2263,15 @@
 		{
 			"name": "Repeater",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.repeater.Repeater",
 					"name": "Repeater",
 					"description": "Iterates over a data source and render a content",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Data containers",
 					"studioProCategory": "Data containers",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -2302,15 +2302,15 @@
 		{
 			"name": "RichText",
 			"version": "2.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.richtext.RichText",
 					"name": "Rich Text",
 					"description": "Rich inline or toolbar text editing",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Input Elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2342,15 +2342,15 @@
 		{
 			"name": "SafeAreaView",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.safeareaview.SafeAreaView",
 					"name": "Safe area view",
 					"description": "",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Structure",
 					"studioProCategory": "Structure",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -2381,15 +2381,15 @@
 		{
 			"name": "ScrollContainer",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.scrollcontainer.ScrollContainer",
 					"name": "Scroll container",
 					"description": "Displays a scrollable container",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Layout",
 					"studioProCategory": "Layout",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -2413,15 +2413,15 @@
 		{
 			"name": "Sidebar",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.sidebartoggle.SidebarToggle",
 					"name": "Sidebar toggle",
 					"description": "Toggles the sidebar.",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Layout",
 					"studioProCategory": "Layout",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2445,15 +2445,15 @@
 		{
 			"name": "Sidebar",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.sidebar.Sidebar",
 					"name": "Sidebar",
 					"description": "Display sidebar content conditionally.",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Layout",
 					"studioProCategory": "Layout",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2477,7 +2477,7 @@
 		{
 			"name": "Signature",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.signature.Signature",
 					"name": "Signature",
@@ -2514,15 +2514,15 @@
 		{
 			"name": "Slider",
 			"version": "2.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.slider.Slider",
 					"name": "Slider",
 					"description": "Change a numeric value using a slider.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2553,15 +2553,15 @@
 		{
 			"name": "Slider",
 			"version": "2.0.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.slider.Slider",
 					"name": "Slider",
 					"description": "Change a number value using a slider",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Input Elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2593,15 +2593,15 @@
 		{
 			"name": "Switch",
 			"version": "1.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.switch.Switch",
 					"name": "Switch",
 					"description": "Toggle a boolean attribute.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2632,16 +2632,16 @@
 		{
 			"name": "Switch",
 			"version": "4.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.switch.Switch",
 					"name": "Switch",
 					"description": "Toggle a boolean attribute",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/switch",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Input Elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2673,16 +2673,16 @@
 		{
 			"name": "TimeSeries",
 			"version": "3.0.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.custom.TimeSeries.TimeSeries",
 					"name": "Time series",
 					"description": "Create a time series chart",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/time-series-chart",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Charts",
 					"studioProCategory": "Charts",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -2706,16 +2706,16 @@
 		{
 			"name": "Timeline",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.timeline.Timeline",
 					"name": "Timeline",
 					"description": "Shows vertical timeline with events",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/timeline",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2747,15 +2747,15 @@
 		{
 			"name": "ToggleButtons",
 			"version": "2.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.togglebuttons.ToggleButtons",
 					"name": "Toggle buttons",
 					"description": "Change an enumeration value using a group of buttons.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Input elements",
 					"studioProCategory": "Input elements",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -2786,16 +2786,16 @@
 		{
 			"name": "Tooltip",
 			"version": "1.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.tooltip.Tooltip",
 					"name": "Tooltip",
 					"description": "",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/tooltip",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2827,16 +2827,16 @@
 		{
 			"name": "TreeNode",
 			"version": "1.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.treenode.TreeNode",
 					"name": "Tree node",
 					"description": "Display a tree view structure",
 					"docsUrl": "https://docs.mendix.com/appstore/modules/tree-node",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Data Containers",
 					"studioProCategory": "Data containers",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2868,15 +2868,15 @@
 		{
 			"name": "VideoPlayer",
 			"version": "3.2.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
 					"name": "Video player",
 					"description": "Play a video loaded from a URL.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Images, videos & files",
 					"studioProCategory": "Images, videos & files",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2907,16 +2907,16 @@
 		{
 			"name": "VideoPlayer",
 			"version": "3.1.0",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.web.videoplayer.VideoPlayer",
 					"name": "Video Player",
 					"description": "Shows a video from YouTube, Vimeo, Dailymotion and Mp4",
 					"docsUrl": "https://docs.mendix.com/appstore/widgets/video-player",
-					"supportedPlatform": "web",
-					"offlineCapable": true,
 					"studioCategory": "Images, Videos & Files",
 					"studioProCategory": "Images, videos & files",
+					"supportedPlatform": "web",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": true,
@@ -2948,15 +2948,15 @@
 		{
 			"name": "WebView",
 			"version": "3.1.1",
-			"widgets": [
+			"items": [
 				{
 					"id": "com.mendix.widget.native.webview.WebView",
 					"name": "Web view",
 					"description": "Display an external web page or load custom HTML.",
-					"supportedPlatform": "native",
-					"offlineCapable": true,
 					"studioCategory": "Display",
 					"studioProCategory": "Display",
+					"supportedPlatform": "native",
+					"offlineCapable": true,
 					"requirements": {
 						"isPluginWidget": true,
 						"hasStructureModePreview": false,
@@ -2989,474 +2989,434 @@
 		{
 			"name": "mobile-resources-native",
 			"version": "3.5.0",
-			"jsActions": [
+			"items": [
 				{
+					"id": "mobile-resources-native/authentication/BiometricAuthentication",
 					"name": "BiometricAuthentication",
-					"group": "authentication",
-					"requirements": {}
+					"group": "authentication"
 				},
 				{
+					"id": "mobile-resources-native/authentication/IsBiometricAuthenticationSupported",
 					"name": "IsBiometricAuthenticationSupported",
-					"group": "authentication",
-					"requirements": {}
+					"group": "authentication"
 				},
 				{
+					"id": "mobile-resources-native/camera/SaveToPictureLibrary",
 					"name": "SaveToPictureLibrary",
-					"group": "camera",
-					"requirements": {}
+					"group": "camera"
 				},
 				{
+					"id": "mobile-resources-native/camera/TakePicture",
 					"name": "TakePicture",
-					"group": "camera",
-					"requirements": {}
+					"group": "camera"
 				},
 				{
+					"id": "mobile-resources-native/camera/TakePictureAdvanced",
 					"name": "TakePictureAdvanced",
-					"group": "camera",
-					"requirements": {}
+					"group": "camera"
 				},
 				{
+					"id": "mobile-resources-native/clipboard/GetClipboardContent",
 					"name": "GetClipboardContent",
-					"group": "clipboard",
-					"requirements": {}
+					"group": "clipboard"
 				},
 				{
+					"id": "mobile-resources-native/clipboard/SetClipboardContent",
 					"name": "SetClipboardContent",
-					"group": "clipboard",
-					"requirements": {}
+					"group": "clipboard"
 				},
 				{
+					"id": "mobile-resources-native/deeplink/ParseUrlToObject",
 					"name": "ParseUrlToObject",
-					"group": "deeplink",
-					"requirements": {}
+					"group": "deeplink"
 				},
 				{
+					"id": "mobile-resources-native/deeplink/RegisterDeepLink",
 					"name": "RegisterDeepLink",
-					"group": "deeplink",
-					"requirements": {}
+					"group": "deeplink"
 				},
 				{
+					"id": "mobile-resources-native/network/IsCellularConnection",
 					"name": "IsCellularConnection",
-					"group": "network",
-					"requirements": {}
+					"group": "network"
 				},
 				{
+					"id": "mobile-resources-native/network/IsConnected",
 					"name": "IsConnected",
-					"group": "network",
-					"requirements": {}
+					"group": "network"
 				},
 				{
+					"id": "mobile-resources-native/network/IsWifiConnection",
 					"name": "IsWifiConnection",
-					"group": "network",
-					"requirements": {}
+					"group": "network"
 				},
 				{
+					"id": "mobile-resources-native/notifications/CancelAllScheduledNotifications",
 					"name": "CancelAllScheduledNotifications",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/CancelScheduledNotification",
 					"name": "CancelScheduledNotification",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/ClearAllDeliveredNotifications",
 					"name": "ClearAllDeliveredNotifications",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/DisplayNotification",
 					"name": "DisplayNotification",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/GetPushNotificationToken",
 					"name": "GetPushNotificationToken",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/HasNotificationPermission",
 					"name": "HasNotificationPermission",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/RequestNotificationPermission",
 					"name": "RequestNotificationPermission",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/ScheduleNotification",
 					"name": "ScheduleNotification",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/notifications/SetBadgeNumber",
 					"name": "SetBadgeNumber",
-					"group": "notifications",
-					"requirements": {}
+					"group": "notifications"
 				},
 				{
+					"id": "mobile-resources-native/platform/ChangeStatusBar",
 					"name": "ChangeStatusBar",
-					"group": "platform",
-					"requirements": {}
+					"group": "platform"
 				},
 				{
+					"id": "mobile-resources-native/platform/GetDeviceInfo",
 					"name": "GetDeviceInfo",
-					"group": "platform",
-					"requirements": {}
+					"group": "platform"
 				},
 				{
+					"id": "mobile-resources-native/platform/HideKeyboard",
 					"name": "HideKeyboard",
-					"group": "platform",
-					"requirements": {}
+					"group": "platform"
 				},
 				{
+					"id": "mobile-resources-native/platform/OpenInAppBrowser",
 					"name": "OpenInAppBrowser",
-					"group": "platform",
-					"requirements": {}
+					"group": "platform"
 				},
 				{
+					"id": "mobile-resources-native/platform/PlaySound",
 					"name": "PlaySound",
-					"group": "platform",
-					"requirements": {}
+					"group": "platform"
 				},
 				{
+					"id": "mobile-resources-native/platform/Vibrate",
 					"name": "Vibrate",
-					"group": "platform",
-					"requirements": {}
+					"group": "platform"
 				}
 			]
 		},
 		{
 			"name": "nanoflow-actions-hybrid",
 			"version": "1.0.0",
-			"jsActions": [
+			"items": [
 				{
+					"id": "nanoflow-actions-hybrid/authentication/BiometricAuthentication",
 					"name": "BiometricAuthentication",
-					"group": "authentication",
-					"requirements": {}
+					"group": "authentication"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/authentication/IsBiometricAuthenticationSupported",
 					"name": "IsBiometricAuthenticationSupported",
-					"group": "authentication",
-					"requirements": {}
+					"group": "authentication"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/calendar/OpenCalendar",
 					"name": "OpenCalendar",
-					"group": "calendar",
-					"requirements": {}
+					"group": "calendar"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/calendar/SaveCalendarEvent",
 					"name": "SaveCalendarEvent",
-					"group": "calendar",
-					"requirements": {}
+					"group": "calendar"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/camera/ScanBarcode",
 					"name": "ScanBarcode",
-					"group": "camera",
-					"requirements": {}
+					"group": "camera"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/camera/TakePicture",
 					"name": "TakePicture",
-					"group": "camera",
-					"requirements": {}
+					"group": "camera"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/clipboard/GetClipboardContent",
 					"name": "GetClipboardContent",
-					"group": "clipboard",
-					"requirements": {}
+					"group": "clipboard"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/clipboard/SetClipboardContent",
 					"name": "SetClipboardContent",
-					"group": "clipboard",
-					"requirements": {}
+					"group": "clipboard"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/contacts/SaveContact",
 					"name": "SaveContact",
-					"group": "contacts",
-					"requirements": {}
+					"group": "contacts"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/contacts/SearchContacts",
 					"name": "SearchContacts",
-					"group": "contacts",
-					"requirements": {}
+					"group": "contacts"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/contacts/SelectContact",
 					"name": "SelectContact",
-					"group": "contacts",
-					"requirements": {}
+					"group": "contacts"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/mobile/GetDeviceInfo",
 					"name": "GetDeviceInfo",
-					"group": "mobile",
-					"requirements": {}
+					"group": "mobile"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/mobile/Vibrate",
 					"name": "Vibrate",
-					"group": "mobile",
-					"requirements": {}
+					"group": "mobile"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/network/IsCellularConnection",
 					"name": "IsCellularConnection",
-					"group": "network",
-					"requirements": {}
+					"group": "network"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/network/IsConnected",
 					"name": "IsConnected",
-					"group": "network",
-					"requirements": {}
+					"group": "network"
 				},
 				{
+					"id": "nanoflow-actions-hybrid/network/IsWifiConnection",
 					"name": "IsWifiConnection",
-					"group": "network",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-clipboard.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-plugin-android-fingerprint-auth.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-plugin-calendar.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-plugin-camera.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-plugin-contacts.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-plugin-device.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "cordova-plugin-touch-id.d",
-					"group": "types",
-					"requirements": {}
-				},
-				{
-					"name": "phonegap-plugin-barcodescanner.d",
-					"group": "types",
-					"requirements": {}
+					"group": "network"
 				}
 			]
 		},
 		{
 			"name": "nanoflow-actions-native",
 			"version": "2.2.0",
-			"jsActions": [
+			"items": [
 				{
+					"id": "nanoflow-actions-native/client/HideProgress",
 					"name": "HideProgress",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/RefreshEntity",
 					"name": "RefreshEntity",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/RefreshObject",
 					"name": "RefreshObject",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/ShowConfirmation",
 					"name": "ShowConfirmation",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/ShowProgress",
 					"name": "ShowProgress",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/SignIn",
 					"name": "SignIn",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/SignOut",
 					"name": "SignOut",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/client/ToggleSidebar",
 					"name": "ToggleSidebar",
-					"group": "client",
-					"requirements": {}
+					"group": "client"
 				},
 				{
+					"id": "nanoflow-actions-native/external/CallPhoneNumber",
 					"name": "CallPhoneNumber",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/external/DraftEmail",
 					"name": "DraftEmail",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/external/NavigateTo",
 					"name": "NavigateTo",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/external/OpenMap",
 					"name": "OpenMap",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/external/OpenURL",
 					"name": "OpenURL",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/external/SendTextMessage",
 					"name": "SendTextMessage",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/external/Share",
 					"name": "Share",
-					"group": "external",
-					"requirements": {}
+					"group": "external"
 				},
 				{
+					"id": "nanoflow-actions-native/geolocation/Geocode",
 					"name": "Geocode",
-					"group": "geolocation",
-					"requirements": {}
+					"group": "geolocation"
 				},
 				{
+					"id": "nanoflow-actions-native/geolocation/GetCurrentLocation",
 					"name": "GetCurrentLocation",
-					"group": "geolocation",
-					"requirements": {}
+					"group": "geolocation"
 				},
 				{
+					"id": "nanoflow-actions-native/geolocation/GetCurrentLocationMinimumAccuracy",
 					"name": "GetCurrentLocationMinimumAccuracy",
-					"group": "geolocation",
-					"requirements": {}
+					"group": "geolocation"
 				},
 				{
+					"id": "nanoflow-actions-native/geolocation/RequestLocationPermission",
 					"name": "RequestLocationPermission",
-					"group": "geolocation",
-					"requirements": {}
+					"group": "geolocation"
 				},
 				{
+					"id": "nanoflow-actions-native/geolocation/ReverseGeocode",
 					"name": "ReverseGeocode",
-					"group": "geolocation",
-					"requirements": {}
+					"group": "geolocation"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/GetStorageItemObject",
 					"name": "GetStorageItemObject",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/GetStorageItemObjectList",
 					"name": "GetStorageItemObjectList",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/GetStorageItemString",
 					"name": "GetStorageItemString",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/RemoveStorageItem",
 					"name": "RemoveStorageItem",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/SetStorageItemObject",
 					"name": "SetStorageItemObject",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/SetStorageItemObjectList",
 					"name": "SetStorageItemObjectList",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/SetStorageItemString",
 					"name": "SetStorageItemString",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/local-storage/StorageItemExists",
 					"name": "StorageItemExists",
-					"group": "local-storage",
-					"requirements": {}
+					"group": "local-storage"
 				},
 				{
+					"id": "nanoflow-actions-native/other/GenerateUniqueID",
 					"name": "GenerateUniqueID",
-					"group": "other",
-					"requirements": {}
+					"group": "other"
 				},
 				{
+					"id": "nanoflow-actions-native/other/GetGuid",
 					"name": "GetGuid",
-					"group": "other",
-					"requirements": {}
+					"group": "other"
 				},
 				{
+					"id": "nanoflow-actions-native/other/GetObjectByGuid",
 					"name": "GetObjectByGuid",
-					"group": "other",
-					"requirements": {}
+					"group": "other"
 				},
 				{
+					"id": "nanoflow-actions-native/other/GetPlatform",
 					"name": "GetPlatform",
-					"group": "other",
-					"requirements": {}
+					"group": "other"
 				},
 				{
+					"id": "nanoflow-actions-native/other/Wait",
 					"name": "Wait",
-					"group": "other",
-					"requirements": {}
+					"group": "other"
 				}
 			]
 		},
 		{
 			"name": "nanoflow-actions-web",
 			"version": "2.2.0",
-			"jsActions": [
+			"items": [
 				{
+					"id": "nanoflow-actions-web/./FocusHelper",
 					"name": "FocusHelper",
-					"group": ".",
-					"requirements": {}
+					"group": "."
 				},
 				{
+					"id": "nanoflow-actions-web/./FocusNext",
 					"name": "FocusNext",
-					"group": ".",
-					"requirements": {}
+					"group": "."
 				},
 				{
+					"id": "nanoflow-actions-web/./FocusPrevious",
 					"name": "FocusPrevious",
-					"group": ".",
-					"requirements": {}
+					"group": "."
 				},
 				{
+					"id": "nanoflow-actions-web/./ScrollTo",
 					"name": "ScrollTo",
-					"group": ".",
-					"requirements": {}
+					"group": "."
 				},
 				{
+					"id": "nanoflow-actions-web/./SetFocus",
 					"name": "SetFocus",
-					"group": ".",
-					"requirements": {}
+					"group": "."
 				},
 				{
+					"id": "nanoflow-actions-web/./TakePicture",
 					"name": "TakePicture",
-					"group": ".",
-					"requirements": {}
+					"group": "."
 				}
 			]
 		}

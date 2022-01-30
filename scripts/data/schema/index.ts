@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SupportedPlatform } from "../generator/model/widget";
+import { SupportedPlatform } from "../supportedPlatform";
 
 export const IconSchema = z.object({
     name: z.string(),
@@ -13,7 +13,7 @@ export const IconsSchema = z.object({
     tileDark: IconSchema.optional()
 });
 
-export const RequirementsSchema = z.object({
+export const WidgetRequirementsSchema = z.object({
     isPluginWidget: z.boolean(),
     hasStructureModePreview: z.boolean(),
     hasDesignModePreview: z.boolean().optional(),
@@ -21,35 +21,37 @@ export const RequirementsSchema = z.object({
     hasAllDarkIcons: z.boolean()
 });
 
-export const WidgetSchema = z.object({
+export const ContentSchema = z.object({
     id: z.string(),
-    name: z.string(),
+    name: z.string()
+});
+
+export const WidgetSchema = ContentSchema.extend({
     description: z.string(),
     docsUrl: z.string().optional(),
-    supportedPlatform: z.nativeEnum(SupportedPlatform),
-    offlineCapable: z.boolean(),
     studioCategory: z.string().optional(),
     studioProCategory: z.string().optional(),
-    requirements: RequirementsSchema,
+    supportedPlatform: z.nativeEnum(SupportedPlatform),
+    offlineCapable: z.boolean(),
+    requirements: WidgetRequirementsSchema,
     icons: IconsSchema
 });
 
-export const WidgetPackageSchema = z.object({
-    name: z.string(),
-    version: z.string(),
-    widgets: z.array(WidgetSchema)
+export const JSActionSchema = ContentSchema.extend({
+    group: z.string()
 });
 
-export const JSActionSchema = z.object({
+export const ContentPackageSchema = z.object({
     name: z.string(),
-    group: z.string(),
-    requirements: z.object({})
+    version: z.string()
 });
 
-export const JSActionPackageSchema = z.object({
-    name: z.string(),
-    version: z.string(),
-    jsActions: z.array(JSActionSchema)
+export const WidgetPackageSchema = ContentPackageSchema.extend({
+    items: z.array(WidgetSchema)
+});
+
+export const JSActionPackageSchema = ContentPackageSchema.extend({
+    items: z.array(JSActionSchema)
 });
 
 export const OutputSchema = z.object({
