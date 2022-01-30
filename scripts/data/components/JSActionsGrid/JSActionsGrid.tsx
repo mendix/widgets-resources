@@ -22,6 +22,11 @@ const columns: GridColumn[] = [
         width: ColumnWidth.LARGE
     },
     {
+        key: "version",
+        name: "Version",
+        width: ColumnWidth.SMALL
+    },
+    {
         key: "group",
         name: "Group",
         width: ColumnWidth.MEDIUM
@@ -90,6 +95,7 @@ function isColumnKey(key: string): key is keyof Row {
 function compareRows(a: Row, b: Row, column: keyof Row): number {
     switch (column) {
         case "name":
+        case "version":
         case "group":
             return a[column].localeCompare(b[column]);
         default:
