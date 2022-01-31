@@ -6,7 +6,8 @@ import { useLocationResolver } from "./utils/geodecode";
 import { getCurrentUserLocation } from "./utils/location";
 import { Marker } from "../typings/shared";
 import { translateZoom } from "./utils/zoom";
-import "./ui/Maps.css";
+import "leaflet/dist/leaflet.css";
+import "./ui/Maps.scss";
 
 export default function Maps(props: MapsContainerProps): ReactNode {
     const [locations] = useLocationResolver(
