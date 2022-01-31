@@ -4,7 +4,7 @@ function isElementBlockedTop(dynamicWindow: Window, srcRect: DOMRect, blockingRe
     return (
         srcRect.top < blockingRect.bottom &&
         srcRect.bottom >= blockingRect.bottom &&
-        srcRect.y + srcRect.height < dynamicWindow.innerHeight
+        srcRect.y + srcRect.height < dynamicWindow.document.documentElement.clientHeight
     );
 }
 
@@ -174,13 +174,19 @@ export function isElementVisibleByUser(
     if (elementCenter.x < 0) {
         return false;
     }
-    if (elementCenter.x > (dynamicDocument.documentElement.clientWidth || dynamicWindow.innerWidth)) {
+    if (
+        elementCenter.x >
+        (dynamicDocument.documentElement.clientWidth || dynamicWindow.document.documentElement.clientWidth)
+    ) {
         return false;
     }
     if (elementCenter.y < 0) {
         return false;
     }
-    if (elementCenter.y > (dynamicDocument.documentElement.clientHeight || dynamicWindow.innerHeight)) {
+    if (
+        elementCenter.y >
+        (dynamicDocument.documentElement.clientHeight || dynamicWindow.document.documentElement.clientHeight)
+    ) {
         return false;
     }
     let pointContainer: Element | null = dynamicDocument.elementFromPoint(elementCenter.x, elementCenter.y);
@@ -200,8 +206,8 @@ export function isElementPartiallyOffScreen(dynamicWindow: Window, rect: DOMRect
     return (
         rect.x < 0 ||
         rect.y < 0 ||
-        rect.x + rect.width > dynamicWindow.innerWidth ||
-        rect.y + rect.height > dynamicWindow.innerHeight
+        rect.x + rect.width > dynamicWindow.document.documentElement.clientWidth ||
+        rect.y + rect.height > dynamicWindow.document.documentElement.clientHeight
     );
 }
 
@@ -220,17 +226,18 @@ export function moveAbsoluteElementOnScreen(
         element.style.top = topValue + "px";
         boundingRect.y += topValue;
     }
-    if (boundingRect.x + boundingRect.width > dynamicWindow.innerWidth) {
+    if (boundingRect.x + boundingRect.width > dynamicWindow.document.documentElement.clientWidth) {
         const rightValue = Math.round(
-            getPixelValueAsNumber(element, "right") + (boundingRect.x + boundingRect.width - dynamicWindow.innerWidth)
+            getPixelValueAsNumber(element, "right") +
+                (boundingRect.x + boundingRect.width - dynamicWindow.document.documentElement.clientWidth)
         );
         element.style.right = rightValue + "px";
         boundingRect.x -= rightValue;
     }
-    if (boundingRect.y + boundingRect.height > dynamicWindow.innerHeight) {
+    if (boundingRect.y + boundingRect.height > dynamicWindow.document.documentElement.clientHeight) {
         const bottomValue = Math.round(
             getPixelValueAsNumber(element, "bottom") +
-                (boundingRect.y + boundingRect.height - dynamicWindow.innerHeight)
+                (boundingRect.y + boundingRect.height - dynamicWindow.document.documentElement.clientHeight)
         );
         element.style.top = "unset"; // Unset top defined in PopupMenu.scss
         element.style.bottom = bottomValue + "px";
