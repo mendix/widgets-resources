@@ -13,6 +13,11 @@ export const IconsSchema = z.object({
     tileDark: IconSchema.optional()
 });
 
+export const TestsSchema = z.object({
+    hasUnitTests: z.boolean(),
+    hasE2ETests: z.boolean()
+});
+
 export const WidgetRequirementsSchema = z.object({
     isPluginWidget: z.boolean(),
     hasStructureModePreview: z.boolean(),
@@ -34,7 +39,8 @@ export const WidgetSchema = ContentSchema.extend({
     supportedPlatform: z.nativeEnum(SupportedPlatform),
     offlineCapable: z.boolean(),
     requirements: WidgetRequirementsSchema,
-    icons: IconsSchema
+    icons: IconsSchema,
+    tests: TestsSchema
 });
 
 export const JSActionSchema = ContentSchema.extend({

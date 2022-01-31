@@ -46,6 +46,18 @@ const columns: GridColumn[] = [
         formatter: props => booleanFormatter(props.row.isPluginWidget)
     },
     {
+        key: "hasUnitTests",
+        name: "Unit tests?",
+        width: ColumnWidth.MEDIUM,
+        formatter: props => booleanFormatter(props.row.hasUnitTests)
+    },
+    {
+        key: "hasE2ETests",
+        name: "E2E tests?",
+        width: ColumnWidth.MEDIUM,
+        formatter: props => booleanFormatter(props.row.hasE2ETests)
+    },
+    {
         key: "hasStructureModePreview",
         name: "Structure preview?",
         width: ColumnWidth.MEDIUM,
@@ -178,6 +190,8 @@ function compareRows(a: Row, b: Row, column: keyof Row): number {
         case "hasDesignModePreview":
         case "hasAllTileIcons":
         case "hasAllDarkIcons":
+        case "hasUnitTests":
+        case "hasE2ETests":
             if (a[column] === b[column]) {
                 return 0;
             } else if (a[column] === undefined) {

@@ -6,6 +6,7 @@ import {
     ContentSchema,
     JSActionSchema,
     OutputSchema,
+    TestsSchema,
     WidgetRequirementsSchema,
     WidgetSchema
 } from "../schema";
@@ -16,9 +17,10 @@ type Props = {
     data: z.infer<typeof OutputSchema>;
 };
 
-export type Row = Partial<Omit<z.infer<typeof WidgetSchema>, "requirements">> &
+export type Row = Partial<Omit<z.infer<typeof WidgetSchema>, "requirements" | "tests">> &
     Partial<z.infer<typeof JSActionSchema>> &
     Partial<z.infer<typeof WidgetRequirementsSchema>> &
+    Partial<z.infer<typeof TestsSchema>> &
     Pick<z.infer<typeof ContentPackageSchema>, "version"> &
     z.infer<typeof ContentSchema> & { type: "widget" | "jsAction" };
 
@@ -34,10 +36,11 @@ const Home: NextPage<Props> = props => {
             ),
             ...props.data.widgetPackages.flatMap<Row>(widgetPackage =>
                 widgetPackage.items.map(widget => {
-                    const { requirements, ...rest } = widget;
+                    const { requirements, tests, ...rest } = widget;
                     return {
                         ...rest,
                         ...requirements,
+                        ...tests,
                         type: "widget",
                         version: widgetPackage.version
                     };

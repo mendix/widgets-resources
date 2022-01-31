@@ -2,7 +2,7 @@ import { basename, extname, join, relative } from "path";
 import { promises as fs } from "fs";
 import { Analyzer } from "../analyzer";
 import { XmlExtractor } from "../parsers/XmlExtractor";
-import { firstWithGlob, isEnumValue } from "../util";
+import { firstWithGlob, isEnumValue, withGlob } from "../util";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
 import { WidgetSchema } from "../../schema";
@@ -26,6 +26,11 @@ interface Config {
     editorPreview: string | undefined;
 }
 
+interface Tests {
+    hasUnitTests: boolean;
+    hasE2ETests: boolean;
+}
+
 export class Widget {
     constructor(
         private properties: {
@@ -40,6 +45,7 @@ export class Widget {
             supportedPlatform: SupportedPlatform;
             config: Config;
             icons: Icons;
+            tests: Tests;
         }
     ) {}
 
@@ -104,6 +110,15 @@ export class Widget {
             throw new UnsupportedPlatformError(packagePath, supportedPlatform);
         }
 
+        const hasUnitTests = await withGlob(
+            `${packagePath}/src/**/__tests__/**/*.spec.{js,jsx,ts,tsx}`,
+            matches => matches.length > 0
+        );
+        const hasE2ETests = await withGlob(
+            `${packagePath}/tests/**/*.spec.{js,jsx,ts,tsx}`,
+            matches => matches.length > 0
+        );
+
         return new Widget({
             ...widgetXmlValues,
             supportedPlatform,
@@ -116,6 +131,10 @@ export class Widget {
                 iconDark: await this.loadIcon(packagePath, internalName, "icon", true),
                 tile: await this.loadIcon(packagePath, internalName, "tile", false),
                 tileDark: await this.loadIcon(packagePath, internalName, "tile", true)
+            },
+            tests: {
+                hasUnitTests,
+                hasE2ETests
             }
         });
     }
