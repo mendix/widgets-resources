@@ -157,6 +157,26 @@ describe("AppEvents", () => {
             connectionChangeHandler!({ isConnected: false });
             expect(onOnlineAction.execute).toHaveBeenCalledTimes(0);
         });
+
+        it("unsubscribes from connectivity events when the app is in the background", async () => {
+            const onOnlineAction = actionValue();
+            render(<AppEvents {...defaultProps} onOnlineAction={onOnlineAction} />);
+            await flushMicrotasksQueue();
+            appStateChangeHandler!("active");
+            expect(connectionChangeHandler).toBeDefined();
+            appStateChangeHandler!("background");
+            expect(connectionChangeHandler).toBeUndefined();
+        });
+
+        it("subscribes to connectivity events when the app is resumed", async () => {
+            const onOnlineAction = actionValue();
+            render(<AppEvents {...defaultProps} onOnlineAction={onOnlineAction} />);
+            await flushMicrotasksQueue();
+            appStateChangeHandler!("background");
+            expect(connectionChangeHandler).toBeUndefined();
+            appStateChangeHandler!("active");
+            expect(connectionChangeHandler).toBeDefined();
+        });
     });
 
     describe("with on timeout action", () => {
@@ -218,6 +238,27 @@ describe("AppEvents", () => {
 
             jest.advanceTimersByTime(30000);
             expect(onTimeoutAction.execute).not.toHaveBeenCalled();
+        });
+
+        it("unsubscribes timers when the app goes to the background", () => {
+            const onTimeoutAction = actionValue(true, false);
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} timerType={"interval"} />);
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(1);
+            appStateChangeHandler!("background");
+            jest.advanceTimersByTime(60000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(1);
+        });
+
+        it("reschedules timers when the app comes to the foreground", () => {
+            const onTimeoutAction = actionValue(true, false);
+            render(<AppEvents {...defaultProps} onTimeoutAction={onTimeoutAction} timerType={"interval"} />);
+            appStateChangeHandler!("background");
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(0);
+            appStateChangeHandler!("active");
+            jest.advanceTimersByTime(30000);
+            expect(onTimeoutAction.execute).toHaveBeenCalledTimes(1);
         });
     });
 });
