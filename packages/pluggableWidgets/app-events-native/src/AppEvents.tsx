@@ -20,26 +20,26 @@ export class AppEvents extends Component<Props> {
     private onLoadTriggered = false;
     private timeoutHandle?: any;
     private unsubscribeNetworkEventListener?: NetInfoSubscription;
+    private scheduleTimer?: typeof setTimeout | typeof setInterval;
+    private clearTimer?: typeof clearTimeout | typeof clearInterval;
 
-    async componentDidMount(): Promise<void> {
-        if (this.props.onResumeAction) {
-            AppState.addEventListener("change", this.onAppStateChangeHandler);
-        }
+    componentDidMount(): void {
+        this.scheduleTimer = this.props.timerType === "once" ? setTimeout : setInterval;
+        this.clearTimer = this.props.timerType === "once" ? clearTimeout : clearInterval;
 
-        if (this.props.onTimeoutAction) {
-            const schedule = this.props.timerType === "once" ? setTimeout : setInterval;
-            this.timeoutHandle = schedule(() => executeAction(this.props.onTimeoutAction), this.props.delayTime * 1000);
-        }
+        AppState.addEventListener("change", this.onAppStateChangeHandler);
 
-        if (this.props.onOnlineAction || this.props.onOfflineAction) {
-            this.isConnected = (await NetInfo.fetch()).isConnected;
-            this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
-        }
+        this.scheduleOnTimeOutEvent();
 
         if (!this.onLoadTriggered && this.props.onLoadAction?.canExecute) {
             this.onLoadTriggered = true;
             executeAction(this.props.onLoadAction);
         }
+
+        // Not awaited on purposes. The NetInfo request might take a long time to complete.
+        // Aside as this is an async event to be called; there's no particular value
+        // in blocking until done. If noteworthy it will fire an event.
+        this.subscribeToNetworkStatus();
     }
 
     componentWillUnmount(): void {
@@ -56,8 +56,7 @@ export class AppEvents extends Component<Props> {
         }
 
         if (this.props.onTimeoutAction && this.timeoutHandle != null) {
-            const clear = this.props.timerType === "once" ? clearTimeout : clearInterval;
-            clear(this.timeoutHandle);
+            this.clearTimer?.(this.timeoutHandle);
         }
     }
 
@@ -69,10 +68,22 @@ export class AppEvents extends Component<Props> {
         if (this.appState === nextAppState) {
             return;
         }
+        if (nextAppState === "active") {
+            this.scheduleOnTimeOutEvent();
+            // The app was paused in a particular state.
+            // Skipping updating isConnected state and expect the network listener
+            // to trigger if the state actually changed since the pause event.
+            this.subscribeToNetworkStatus(false);
 
-        if (nextAppState === "active" && isPastTimeout(this.lastOnResume, this.props.onResumeTimeout)) {
-            executeAction(this.props.onResumeAction);
-            this.lastOnResume = Date.now();
+            if (isPastTimeout(this.lastOnResume, this.props.onResumeTimeout)) {
+                executeAction(this.props.onResumeAction);
+                this.lastOnResume = Date.now();
+            }
+        }
+
+        if (nextAppState === "background") {
+            this.unsubscribeFromNetworkStatus();
+            this.unscheduleOnTimeoutEvent();
         }
 
         this.appState = nextAppState;
@@ -94,6 +105,37 @@ export class AppEvents extends Component<Props> {
         }
 
         this.isConnected = nextState.isConnected;
+    }
+
+    private async subscribeToNetworkStatus(updateIsConnectedState = true): Promise<void> {
+        this.unsubscribeFromNetworkStatus();
+        if (this.props.onOnlineAction || this.props.onOfflineAction) {
+            if (updateIsConnectedState) {
+                this.isConnected = (await NetInfo.fetch()).isConnected;
+            }
+            this.unsubscribeNetworkEventListener = NetInfo.addEventListener(this.onConnectionChangeHandler);
+        }
+    }
+
+    private unsubscribeFromNetworkStatus(): void {
+        this.unsubscribeNetworkEventListener?.();
+    }
+
+    private scheduleOnTimeOutEvent(): void {
+        this.unscheduleOnTimeoutEvent();
+        if (this.props.onTimeoutAction) {
+            this.timeoutHandle = this.scheduleTimer?.(
+                () => executeAction(this.props.onTimeoutAction),
+                this.props.delayTime * 1000
+            );
+        }
+    }
+
+    private unscheduleOnTimeoutEvent(): void {
+        if (this.timeoutHandle) {
+            this.clearTimer?.(this.timeoutHandle);
+        }
+        this.timeoutHandle = null;
     }
 }
 
