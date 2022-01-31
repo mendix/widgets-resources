@@ -99,6 +99,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         adjustable={props.adjustable}
                         className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
+                        defaultEndDate={defaultFilter?.endDate ?? props.defaultEndDate?.value}
+                        defaultStartDate={defaultFilter?.startDate ?? props.defaultStartDate?.value}
                         defaultValue={defaultFilter?.value ?? props.defaultValue?.value}
                         dateFormat={patterns.date}
                         locale={language}
@@ -110,16 +112,45 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         calendarStartDay={firstDayOfWeek}
-                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
-                            if (
+                        updateFilters={(
+                            value: Date | null,
+                            rangeValues: [Date | null, Date | null] | null,
+                            type: DefaultFilterEnum
+                        ): void => {
+                            if (type === "between") {
+                                const [startDate, endDate] = rangeValues ?? [];
+                                let shouldExecuteOnChange = false;
+                                if (
+                                    (startDate &&
+                                        props.startDateAttribute?.value &&
+                                        !isEqual(props.startDateAttribute.value, startDate)) ||
+                                    (startDate || undefined) !== props.startDateAttribute?.value
+                                ) {
+                                    props.startDateAttribute?.setValue(startDate ?? undefined);
+                                    shouldExecuteOnChange = true;
+                                }
+                                if (
+                                    (endDate &&
+                                        props.endDateAttribute?.value &&
+                                        !isEqual(props.endDateAttribute.value, endDate)) ||
+                                    (endDate || undefined) !== props.endDateAttribute?.value
+                                ) {
+                                    props.endDateAttribute?.setValue(endDate ?? undefined);
+                                    shouldExecuteOnChange = true;
+                                }
+                                if (shouldExecuteOnChange) {
+                                    props.onChange?.execute();
+                                }
+                            } else if (
                                 (value && props.valueAttribute?.value && !isEqual(props.valueAttribute.value, value)) ||
                                 (value || undefined) !== props.valueAttribute?.value
                             ) {
                                 props.valueAttribute?.setValue(value ?? undefined);
                                 props.onChange?.execute();
                             }
+
                             const conditions = attributes
-                                ?.map(attribute => getFilterCondition(attribute, value, type))
+                                ?.map(attribute => getFilterCondition(attribute, value, rangeValues, type))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
                                 getFilterCondition: () =>
@@ -154,38 +185,52 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
 function getFilterCondition(
     listAttribute: ListAttributeValue,
     value: Date | null,
+    rangeValues: [Date | null, Date | null] | null,
     type: DefaultFilterEnum
 ): FilterCondition | undefined {
-    if (!listAttribute || !listAttribute.filterable || !value) {
+    if (
+        !listAttribute ||
+        !listAttribute.filterable ||
+        (type !== "between" && !value) ||
+        (type === "between" && (!rangeValues || !rangeValues[0] || !rangeValues[1]))
+    ) {
         return undefined;
     }
 
     const filterAttribute = attribute(listAttribute.id);
-    const dateValue = changeTimeToMidnight(value);
+    const dateValue = value && changeTimeToMidnight(value);
     switch (type) {
+        case "between":
+            // >= Start day at midnight and <= End day at 23:59:59:999
+            const startDate = changeTimeToMidnight(rangeValues![0]!);
+            const endDate = changeTimeToMidnight(rangeValues![1]!);
+            return and(
+                greaterThanOrEqual(filterAttribute, literal(startDate)),
+                lessThanOrEqual(filterAttribute, literal(new Date(addDays(endDate, 1).getTime() - 1)))
+            );
         case "greater":
             // > Day +1 at midnight -1ms
-            return greaterThan(filterAttribute, literal(new Date(addDays(dateValue, 1).getTime() - 1)));
+            return greaterThan(filterAttribute, literal(new Date(addDays(dateValue!, 1).getTime() - 1)));
         case "greaterEqual":
             // >= day at midnight
-            return greaterThanOrEqual(filterAttribute, literal(dateValue));
+            return greaterThanOrEqual(filterAttribute, literal(dateValue!));
         case "equal":
             // >= day at midnight and < day +1 midnight
             return and(
-                greaterThanOrEqual(filterAttribute, literal(dateValue)),
-                lessThan(filterAttribute, literal(addDays(dateValue, 1)))
+                greaterThanOrEqual(filterAttribute, literal(dateValue!)),
+                lessThan(filterAttribute, literal(addDays(dateValue!, 1)))
             );
         case "notEqual":
             // < day at midnight or >= day +1 at midnight
             return or(
-                lessThan(filterAttribute, literal(dateValue)),
-                greaterThanOrEqual(filterAttribute, literal(addDays(dateValue, 1)))
+                lessThan(filterAttribute, literal(dateValue!)),
+                greaterThanOrEqual(filterAttribute, literal(addDays(dateValue!, 1)))
             );
         case "smaller":
             // < day at midnight
-            return lessThan(filterAttribute, literal(dateValue));
+            return lessThan(filterAttribute, literal(dateValue!));
         case "smallerEqual":
             // <= day +1 at midnight -1ms
-            return lessThanOrEqual(filterAttribute, literal(new Date(addDays(dateValue, 1).getTime() - 1)));
+            return lessThanOrEqual(filterAttribute, literal(new Date(addDays(dateValue!, 1).getTime() - 1)));
     }
 }

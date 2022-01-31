@@ -20,9 +20,12 @@ import replaceAllInserter from "string.prototype.replaceall";
 interface DatePickerProps {
     adjustable: boolean;
     dateFormat?: string;
+    enableRange?: boolean;
     locale?: string;
     id?: string;
     placeholder?: string;
+    setRangeValues?: Dispatch<SetStateAction<[Date | null, Date | null] | null>>;
+    rangeValues?: [Date | null, Date | null] | null;
     screenReaderCalendarCaption?: string;
     screenReaderInputCaption?: string;
     setValue: Dispatch<SetStateAction<Date | null>>;
@@ -64,31 +67,39 @@ export const DatePicker = forwardRef(
                     {props.screenReaderInputCaption}
                 </span>
                 <DatePickerComponent
-                    adjustDateOnChange
                     allowSameDay={false}
                     ariaLabelledBy={`${props.id}-label`}
                     autoFocus={false}
+                    calendarStartDay={props.calendarStartDay}
                     className={classNames("form-control", { "filter-input": props.adjustable })}
                     dateFormat={dateFormats}
                     disabledKeyboardNavigation={false}
                     dropdownMode="select"
                     enableTabLoop
+                    endDate={props.enableRange ? props.rangeValues?.[1] : undefined}
+                    isClearable={props.enableRange}
                     locale={props.locale}
-                    calendarStartDay={props.calendarStartDay}
                     onChange={date => {
-                        if (isDate(date) && isValid(date)) {
-                            props.setValue(date as Date);
-                        } else {
+                        if (Array.isArray(date)) {
+                            const [startDate, endDate] = date;
+                            props.setRangeValues?.([startDate, endDate]);
                             props.setValue(null);
+                        } else {
+                            if (isDate(date) && isValid(date)) {
+                                props.setValue(date as Date);
+                            } else {
+                                props.setValue(null);
+                            }
+                            props.setRangeValues?.(null);
                         }
                     }}
-                    open={open}
                     onClickOutside={event => {
                         if (!buttonRef.current || buttonRef.current.contains(event.target as Node)) {
                             return;
                         }
                         setOpen(false);
                     }}
+                    open={open}
                     placeholderText={props.placeholder}
                     popperPlacement="bottom-end"
                     popperModifiers={[
@@ -99,16 +110,19 @@ export const DatePicker = forwardRef(
                             }
                         }
                     ]}
+                    portalId={id}
                     preventOpenOnFocus
+                    readOnly={props.enableRange}
                     ref={ref}
-                    selected={props.value}
+                    startDate={props.enableRange ? props.rangeValues?.[0] : undefined}
+                    selected={props.enableRange ? undefined : props.value}
+                    selectsRange={props.enableRange}
                     shouldCloseOnSelect={false}
                     showMonthDropdown
                     showPopperArrow={false}
                     showYearDropdown
                     strictParsing
                     useWeekdaysShort={false}
-                    portalId={id}
                 />
                 <button
                     aria-controls={id}

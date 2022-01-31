@@ -6,7 +6,14 @@
 import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, EditableValue } from "mendix";
 
-export type DefaultFilterEnum = "greater" | "greaterEqual" | "equal" | "notEqual" | "smaller" | "smallerEqual";
+export type DefaultFilterEnum =
+    | "between"
+    | "greater"
+    | "greaterEqual"
+    | "equal"
+    | "notEqual"
+    | "smaller"
+    | "smallerEqual";
 
 export interface DatagridDateFilterContainerProps {
     name: string;
@@ -15,10 +22,14 @@ export interface DatagridDateFilterContainerProps {
     tabIndex?: number;
     advanced: boolean;
     defaultValue?: DynamicValue<Date>;
+    defaultStartDate?: DynamicValue<Date>;
+    defaultEndDate?: DynamicValue<Date>;
     defaultFilter: DefaultFilterEnum;
     placeholder?: DynamicValue<string>;
     adjustable: boolean;
     valueAttribute?: EditableValue<Date>;
+    startDateAttribute?: EditableValue<Date>;
+    endDateAttribute?: EditableValue<Date>;
     onChange?: ActionValue;
     screenReaderButtonCaption?: DynamicValue<string>;
     screenReaderCalendarCaption?: DynamicValue<string>;
@@ -32,10 +43,14 @@ export interface DatagridDateFilterPreviewProps {
     readOnly: boolean;
     advanced: boolean;
     defaultValue: string;
+    defaultStartDate: string;
+    defaultEndDate: string;
     defaultFilter: DefaultFilterEnum;
     placeholder: string;
     adjustable: boolean;
     valueAttribute: string;
+    startDateAttribute: string;
+    endDateAttribute: string;
     onChange: {} | null;
     screenReaderButtonCaption: string;
     screenReaderCalendarCaption: string;

@@ -50,7 +50,8 @@ $border-color: #d7d7d7 !default;
     margin: 4px;
 }
 
-.react-datepicker__day {
+.react-datepicker__day,
+.react-datepicker__day--in-range {
     color: $day-color;
     border-radius: 50%;
 
@@ -76,7 +77,10 @@ $border-color: #d7d7d7 !default;
     background-color: $hover-color;
 }
 
-.react-datepicker__day--selected {
+.react-datepicker__day--selected,
+.react-datepicker__day--in-range,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
     background-color: $brand-primary;
     color: $text-color;
 
@@ -85,6 +89,10 @@ $border-color: #d7d7d7 !default;
         background-color: $brand-primary;
         color: $text-color;
     }
+}
+
+.react-datepicker__close-icon::after {
+    background-color: $brand-primary;
 }
 
 .react-datepicker__current-month {

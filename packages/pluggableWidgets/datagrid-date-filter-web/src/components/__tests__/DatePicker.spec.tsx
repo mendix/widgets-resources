@@ -71,4 +71,27 @@ describe("Date picker component", () => {
 
         expect(setValue).toBeCalledTimes(1);
     });
+
+    it("calls for setRangeValues when value changes", async () => {
+        const setRangeValues = jest.fn();
+        const component = render(
+            <DatePicker
+                adjustable
+                value={null}
+                setValue={jest.fn()}
+                setRangeValues={setRangeValues}
+                dateFormat="dd/MM/yyyy"
+                enableRange
+                locale="nl-NL"
+                placeholder="Placeholder"
+            />
+        );
+
+        fireEvent.change(component.getByPlaceholderText("Placeholder"), {
+            // Trick to trigger events (Should be dd/MM/yyyy - dd/MM/yyyy) but the library does not validate values coming from the input. That's why it is readonly when running on the browser.
+            target: { value: "01/12/2020" }
+        });
+
+        expect(setRangeValues).toBeCalledTimes(1);
+    });
 });

@@ -13,6 +13,8 @@ interface FilterComponentProps {
     className?: string;
     defaultFilter: DefaultFilterEnum;
     defaultValue?: Date;
+    defaultStartDate?: Date;
+    defaultEndDate?: Date;
     dateFormat?: string;
     locale?: string;
     id?: string;
@@ -22,12 +24,21 @@ interface FilterComponentProps {
     screenReaderInputCaption?: string;
     tabIndex?: number;
     styles?: CSSProperties;
-    updateFilters?: (value: Date | null, type: DefaultFilterEnum) => void;
+    updateFilters?: (
+        value: Date | null,
+        rangeValues: [Date | null, Date | null] | null,
+        type: DefaultFilterEnum
+    ) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
     const [value, setValue] = useState<Date | null>(null);
+    const [rangeValues, setRangeValues] = useState<[Date | null, Date | null] | null>(
+        props.defaultStartDate || props.defaultEndDate
+            ? [props.defaultStartDate ?? null, props.defaultEndDate ?? null]
+            : null
+    );
     const pickerRef = useRef<DatePickerComponent | null>(null);
 
     useEffect(() => {
@@ -37,8 +48,14 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
     }, [props.defaultValue]);
 
     useEffect(() => {
-        props.updateFilters?.(value, type);
-    }, [value, type]);
+        if (props.defaultStartDate || props.defaultEndDate) {
+            setRangeValues([props.defaultStartDate ?? null, props.defaultEndDate ?? null]);
+        }
+    }, [props.defaultStartDate, props.defaultEndDate]);
+
+    useEffect(() => {
+        props.updateFilters?.(value, rangeValues, type);
+    }, [value, rangeValues, type]);
 
     const focusInput = useCallback(() => {
         if (pickerRef.current) {
@@ -71,6 +88,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                     )}
                     options={
                         [
+                            { value: "between", label: "Between" },
                             { value: "greater", label: "Greater than" },
                             { value: "greaterEqual", label: "Greater than or equal" },
                             { value: "equal", label: "Equal" },
@@ -85,12 +103,15 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
                 adjustable={props.adjustable}
                 calendarStartDay={props.calendarStartDay}
                 dateFormat={props.dateFormat}
+                enableRange={type === "between"}
                 locale={props.locale}
                 id={props.id}
                 placeholder={props.placeholder}
+                rangeValues={rangeValues}
                 ref={pickerRef}
                 screenReaderCalendarCaption={props.screenReaderCalendarCaption}
                 screenReaderInputCaption={props.screenReaderInputCaption}
+                setRangeValues={setRangeValues}
                 setValue={setValue}
                 value={value}
             />

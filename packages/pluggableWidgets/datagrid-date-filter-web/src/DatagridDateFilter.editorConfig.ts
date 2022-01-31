@@ -31,6 +31,16 @@ export function getProperties(
     if (!values.adjustable) {
         hidePropertyIn(defaultProperties, values, "screenReaderButtonCaption");
     }
+    if (values.defaultFilter !== "between") {
+        hidePropertiesIn(defaultProperties, values, [
+            "defaultStartDate",
+            "defaultEndDate",
+            "startDateAttribute",
+            "endDateAttribute"
+        ]);
+    } else {
+        hidePropertiesIn(defaultProperties, values, ["defaultValue", "valueAttribute"]);
+    }
     if (platform === "web") {
         if (!values.advanced) {
             hidePropertiesIn(defaultProperties, values, ["onChange", "valueAttribute"]);
@@ -120,6 +130,8 @@ export const getPreview = (values: DatagridDateFilterPreviewProps, isDarkMode: b
 
 function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
     switch (type) {
+        // TODO: Add proper icons
+        case "between":
         case "equal":
             return isDarkMode ? equalsIconDark : equalsIcon;
         case "notEqual":

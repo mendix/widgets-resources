@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added the possibility to apply filter between dates.
+
 ### Fixed
 - We fixed an issue with locale date format when typing it manually.
 
