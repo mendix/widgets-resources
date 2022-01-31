@@ -25,14 +25,20 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - name: "Installing dependencies"
-        run: npm install
+        run: npm ci
       - name: "Exporting data"
-        run: npm run update:content-overview
+        run: npm run content-overview:data
       - name: Archive production artifacts
         uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
         with:
           name: content.json
           path: data/content.json
+      - name: "Set env variable"
+        run: echo "BASEPATH=/$GITHUB_REF_NAME" >> $GITHUB_ENV
+      - name: "Creating overview"
+        run: |
+          npm run content-overview:site:build
+          npm run content-overview:site:export
       - name: "Creating pull request"
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         id: cpr
@@ -52,3 +58,11 @@ jobs:
           token: ${{ secrets.GH_PAT }}
           pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
           merge-method: merge
+      - name: "Setting AWS credentials"
+        uses: aws-actions/configure-aws-credentials@05b148adc31e091bafbaf404f745055d4d3bc9d2 # v1.6.1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_CONTENT_DATA_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_CONTENT_DATA_SECRET }}
+          aws-region: eu-central-1
+      - name: "Uploading to S3"
+        run: aws s3 sync scripts/data/out s3://widgetresources-data/$GITHUB_REF_NAME/
