@@ -26,7 +26,7 @@ export async function tapMenuItem(caption: string): Promise<void> {
     await waitFor(element(by.text(caption)))
         .toBeVisible()
         .whileElement(by.id("scrollContainer"))
-        .scroll(100, "down");
+        .scroll(200, "down");
 
     await element(by.text(caption)).tap();
 }
