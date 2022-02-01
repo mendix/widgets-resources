@@ -1,0 +1,40 @@
+.widget-radio-buttons {
+    [data-radio-input][aria-disabled="true"]::before,
+    [data-mendix-radio][aria-disabled="true"] {
+        cursor: not-allowed;
+    }
+
+    &[data-mendix-radio-group].inline {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        [data-mendix-radio] {
+            margin: 0 20px 0 0;
+        }
+    }
+
+    [data-mendix-radio-group] [data-mendix-radio]:last-child {
+        margin-bottom: 0;
+    }
+
+    [data-mendix-radio] {
+        display: flex;
+        align-items: center;
+        margin-top: 0;
+        padding-top: 7px;
+    }
+
+    input[type="radio"] {
+        margin-left: 0px;
+        margin-right: 8px;
+
+        & + label {
+            margin-left: 8px;
+        }
+
+        & + label {
+            padding-left: 0px;
+        }
+    }
+}
