@@ -13,7 +13,7 @@ describe("Here Maps", () => {
             screenshotElem.waitForDisplayed({ timeout: 5000 });
             browser.pause(3000);
             browser.saveElement(screenshotElem, "hereMaps");
-            expect(browser.checkElement(screenshotElem, "hereMaps")).toEqual(0);
+            expect(browser.checkElement(screenshotElem, "hereMaps")).toBeLessThan(0.5);
         });
     });
 
