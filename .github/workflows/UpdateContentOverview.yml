@@ -65,4 +65,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_CONTENT_DATA_SECRET }}
           aws-region: eu-central-1
       - name: "Uploading to S3"
-        run: aws s3 sync scripts/data/out s3://widgetresources-data/$GITHUB_REF_NAME/
+        run: |
+          aws s3 sync scripts/data/out s3://widgetresources-data/$GITHUB_REF_NAME/
+          echo https://widgetresources-data.s3.eu-central-1.amazonaws.com/$GITHUB_REF_NAME/index.html
