@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.RadioButtons.RadioButtons" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+    <name>Radio buttons</name>
+    <description>Create a line chart</description>
+    <studioProCategory>Charts</studioProCategory>
+    <studioCategory>Charts</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="dataSourceType" type="enumeration" defaultValue="attribute">
+                    <caption>Data source type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="attribute">Attribute</enumerationValue>
+                        <enumerationValue key="association">Association</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="ds" type="datasource" required="true" isList="true">
+                    <caption>Data source</caption>
+                    <description />
+                </property>
+                <property key="content" type="widgets" dataSource="ds" required="false">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+                <property key="dsAttribute" type="attribute" required="false">
+                    <caption>Datasource attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Enum" />
+                        <attributeType name="Boolean" />
+                    </attributeTypes>
+                </property>
+                <property key="dsAssociation" type="association" required="false" universeDataSource="ds">
+                    <caption>Datasource association</caption>
+                    <description />
+                </property>
+                <property key="labelAttrib" type="attribute" required="false" dataSource="ds">
+                    <caption>Label attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="String" />
+                    </attributeTypes>
+                </property>
+                <property key="orientation" type="enumeration" defaultValue="horizontal">
+                    <caption>Orientation</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                    </enumerationValues>
+                </property>
+                <property key="enableAutoOptions" type="boolean" defaultValue="false">
+                    <caption>Automatic options</caption>
+                    <description>Create options based on the enumeration values and captions</description>
+                </property>
+                <property key="options" type="object" isList="true" required="false">
+                    <caption>Options</caption>
+                    <description />
+                    <properties>
+                        <propertyGroup caption="General">
+                            <property key="caption" type="textTemplate">
+                                <caption>Caption</caption>
+                                <description />
+                            </property>
+                            <property key="value" type="expression">
+                                <caption>Value</caption>
+                                <description />
+                                <returnType type="String" />
+                            </property>
+                            <property key="optionContent" type="widgets" required="false">
+                                <caption>Content</caption>
+                                <description />
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="isEditable" type="boolean" defaultValue="true">
+                    <caption>Editable</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action" required="false">
+                    <caption>On change</caption>
+                    <description>Action to be triggered when the value or filter changes.</description>
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
