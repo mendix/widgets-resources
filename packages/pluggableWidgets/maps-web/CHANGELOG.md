@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.1] - 2022-1-31
+
 ### Fixed
 - We fixed the styles of maps using Open Street Maps provider which cause the screen to be puzzled. (Ticket #140400)
 
