@@ -308,6 +308,25 @@
                     "class": "background-dark"
                 }
             ]
+        },
+        {
+            "name": "Add shadow",
+            "type": "Dropdown",
+            "description": "Add a shadow to this element",
+            "options": [
+                {
+                    "name": "Small",
+                    "class": "shadow-small"
+                },
+                {
+                    "name": "Medium",
+                    "class": "shadow-medium"
+                },
+                {
+                    "name": "Large",
+                    "class": "shadow-large"
+                }
+            ]
         }
     ],
     "Button": [
