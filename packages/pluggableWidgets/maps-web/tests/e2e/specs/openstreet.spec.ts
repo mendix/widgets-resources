@@ -13,7 +13,7 @@ describe("OpenStreet Maps", () => {
             screenshotElem.waitForDisplayed({ timeout: 5000 });
             browser.pause(3000);
             browser.saveElement(screenshotElem, "osmMaps");
-            expect(browser.checkElement(screenshotElem, "osmMaps")).toEqual(0);
+            expect(browser.checkElement(screenshotElem, "osmMaps")).toBeLessThan(0.5);
         });
     });
 
