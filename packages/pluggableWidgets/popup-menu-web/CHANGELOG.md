@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.2.2] - 2022-2-1
+
 ### Fixed
 - We fixed an issue with the popup menu going off the screen when placed on the edge of the page using Firefox on Windows.
 
