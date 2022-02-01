@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carousel renders correctly 1`] = `
+<div
+  className="widget-carousel"
+>
+  <div
+    className="swiper-container"
+  >
+    <div
+      className="swiper-button-prev"
+    />
+    <div
+      className="swiper-button-next"
+    />
+    <div
+      className="swiper-pagination"
+    />
+    <div
+      className="swiper-wrapper"
+    />
+  </div>
+</div>
+`;
+
+exports[`Carousel renders correctly without navigation 1`] = `
+<div
+  className="widget-carousel"
+>
+  <div
+    className="swiper-container"
+  >
+    <div
+      className="swiper-pagination"
+    />
+    <div
+      className="swiper-wrapper"
+    />
+  </div>
+</div>
+`;
+
+exports[`Carousel renders correctly without pagination 1`] = `
+<div
+  className="widget-carousel"
+>
+  <div
+    className="swiper-container"
+  >
+    <div
+      className="swiper-button-prev"
+    />
+    <div
+      className="swiper-button-next"
+    />
+    <div
+      className="swiper-wrapper"
+    />
+  </div>
+</div>
+`;
