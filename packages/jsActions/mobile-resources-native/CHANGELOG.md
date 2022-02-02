@@ -5,8 +5,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.4.1] Native Mobile Resources - 2022-2-2
 ### Fixed
 - Rating and Image widgets have been updated.
+
+## [1.0.1] Image
+### Fixed
+- The version of a react-native-vector-icons now matches that which is included in Native Template.
+
+## [2.1.1] Rating
+### Fixed
+- The widget has been refactored and now includes a version of react-native-vector-icons that matches Native Template.
 
 ## [3.4.0] Native Mobile Resources - 2022-1-24
 
