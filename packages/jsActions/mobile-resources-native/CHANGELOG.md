@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- Rating and Image widgets have been updated.
+
 ## [3.4.0] Native Mobile Resources - 2022-1-24
 
 ## [2.1.0] Accordion

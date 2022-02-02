@@ -2,7 +2,7 @@ import { flattenStyles } from "@mendix/piw-native-utils-internal";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { ValueStatus } from "mendix";
 import { Component, createElement } from "react";
-import StarRating from "react-native-star-rating";
+import StarRating from "./lib/StarRating";
 import { Big } from "big.js";
 
 import { RatingProps } from "../typings/RatingProps";
@@ -39,7 +39,6 @@ export class Rating extends Component<Props, State> {
 
         this.usesGlyphicons = !props.icon || !props.icon.value || !props.emptyIcon || !props.emptyIcon.value;
         if (this.usesGlyphicons) {
-            // tslint:disable-next-line:no-floating-promises
             preloadIcons(iconConfigurations).then(imageSourceCache => this.setState({ imageSourceCache }));
         }
     }
@@ -50,7 +49,7 @@ export class Rating extends Component<Props, State> {
         }
 
         const ratingProps = {
-            activeOpacity: 1, // Waiting PR to merge properties in JSX https://github.com/DefinitelyTyped/DefinitelyTyped/pull/34397
+            activeOpacity: 1,
             ...(this.props.animation !== "none" ? { animation: this.props.animation } : {})
         };
 
