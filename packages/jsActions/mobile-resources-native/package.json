@@ -44,6 +44,6 @@
     "@types/url-parse": "^1.4.3",
     "@types/react-native-push-notification": "^5.0.5",
     "rimraf": "^2.7.1",
-    "rollup": "^2.56.2"
+    "rollup": "~2.66.1"
   }
 }

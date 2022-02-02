@@ -31,6 +31,6 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
     "eslint": "^7.20.0",
-    "rollup": "^2.56.2"
+    "rollup": "~2.66.1"
   }
 }
