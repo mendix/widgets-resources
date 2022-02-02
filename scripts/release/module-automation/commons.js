@@ -1,5 +1,17 @@
 const { basename, extname, join, resolve } = require("path");
-const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir, stat } = require("fs/promises");
+const {
+    access,
+    readdir,
+    copyFile,
+    readFile,
+    writeFile,
+    rename,
+    rm,
+    rmdir,
+    mkdir,
+    stat,
+    chmod
+} = require("fs/promises");
 const { exec } = require("child_process");
 
 const regex = {
@@ -275,7 +287,9 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
         console.log(`Mode of ${basename(src)} copied from ${src}: ${unixFilePermissions((await stat(src)).mode)}`);
         try {
             console.log(`Mode of ${dest}: ${unixFilePermissions((await stat(dest)).mode)}`);
-        } catch (e) {
+            // explicitly set the dest mode, in certain scenarios the file is read only
+            await chmod(dest, 0o644);
+        } catch (_) {
             console.log(`Destination ${dest} doesnt exist`);
         }
         await copyFile(src, dest);
