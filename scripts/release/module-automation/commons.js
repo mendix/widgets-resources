@@ -1,17 +1,5 @@
 const { basename, extname, join, resolve } = require("path");
-const {
-    access,
-    readdir,
-    copyFile,
-    readFile,
-    writeFile,
-    rename,
-    rm,
-    rmdir,
-    mkdir,
-    stat,
-    chmod
-} = require("fs/promises");
+const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir, chmod } = require("fs/promises");
 const { exec } = require("child_process");
 
 const regex = {
@@ -284,14 +272,11 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
         const fileName = basename(src);
         const dest = join(widgetsDestination, fileName);
         widgetEntries.push(fileName);
-        console.log(`Mode of ${basename(src)} copied from ${src}: ${unixFilePermissions((await stat(src)).mode)}`);
         try {
-            console.log(`Mode of ${dest}: ${unixFilePermissions((await stat(dest)).mode)}`);
             // explicitly set the dest mode, in certain scenarios the file is read only
+            // https://chmodcommand.com/chmod-644/
             await chmod(dest, 0o644);
-        } catch (_) {
-            console.log(`Destination ${dest} doesnt exist`);
-        }
+        } catch (_) {}
         await copyFile(src, dest);
     }
     // Add entries to the package.xml
@@ -334,7 +319,3 @@ module.exports = {
     unzip,
     exportModuleWithWidgets
 };
-
-function unixFilePermissions(mode) {
-    return "0" + (mode & parseInt("777", 8)).toString(8);
-}
