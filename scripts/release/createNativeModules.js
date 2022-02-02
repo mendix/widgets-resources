@@ -1,5 +1,5 @@
 const { basename, join } = require("path");
-const { readdir, copyFile, rm } = require("fs/promises");
+const { readdir, copyFile, rm, stat } = require("fs/promises");
 const {
     execShellCommand,
     getFiles,
@@ -134,6 +134,7 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
                 const dest = join(tmpFolder, "widgets", basename(src));
                 await rm(dest, { force: true });
                 await copyFile(src, dest);
+                console.log(`Mode of ${dest}: ${unixFilePermissions((await stat(dest)).mode)}`);
             })
         ]);
     }
@@ -178,4 +179,8 @@ async function updateNativeComponentsTestProjectWithAtlas(moduleInfo, tmpFolder)
     } else {
         console.warn(`Nothing to commit from repo ${tmpFolder}`);
     }
+}
+
+function unixFilePermissions(mode) {
+    return "0" + (mode & parseInt("777", 8)).toString(8);
 }
