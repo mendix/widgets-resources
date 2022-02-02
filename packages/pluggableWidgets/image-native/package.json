@@ -1,7 +1,7 @@
 {
   "name": "image-native",
   "widgetName": "Image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Display an image and enlarge it on click",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "license": "Apache-2.0",
