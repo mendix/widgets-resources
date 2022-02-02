@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.0] Atlas Core - 2022-2-2
 ### Added
 - We added design properties to add shadows in containers. Thanks Ronnie van Doorn.
 
