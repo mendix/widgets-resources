@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [9.10.0] - 2022-02-02
+
+### Changed
+- We updated mendix library to 9.10.36429
+
+### Fixed
+- We bumped the version of rollup to 2.66.1 to fix a problem introduced in v2.67.0 causing builds to fail on Windows machines.
+
 ## [9.9.3] - 2022-01-10
 
 ### Changed

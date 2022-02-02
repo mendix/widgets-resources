@@ -19,6 +19,6 @@
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=9.0.3",
     "rimraf": "^2.7.1",
-    "rollup": "^2.56.2"
+    "rollup": "~2.66.1"
   }
 }
