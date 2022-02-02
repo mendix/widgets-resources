@@ -169,6 +169,18 @@ $navtopbar-sub-color: #aaa !default;
 $navtopbar-sub-color-hover: $brand-primary !default;
 $navtopbar-sub-color-active: $brand-primary !default;
 
+
+//== Cards
+// Shadow color
+$shadow-color-border: rgba($gray-primary, 0.5);
+$shadow-color: rgba($gray-primary, 0.66);
+
+//Shadow size
+$shadow-small: 0 2px 4px 0;
+$shadow-medium: 0 5px 7px 0;
+$shadow-large: 0 8px 10px 0;
+
+
 //## Used in layouts/base
 $navtopbar-border-color: $topbar-border-color !default;
 

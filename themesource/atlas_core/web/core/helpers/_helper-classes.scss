@@ -166,6 +166,29 @@
         justify-content: center #{$important-helpers-value};
     }
 
+    .shadow-small {
+        box-shadow: $shadow-small $shadow-color;
+        margin-bottom: 5px;
+        border-width: 1px #{$important-helpers-value};
+        border-style: solid;
+        border-color: $shadow-color-border;
+    }
+    .shadow-medium {
+        box-shadow: $shadow-medium $shadow-color;
+        margin-bottom: 15px;
+        border-width: 1px #{$important-helpers-value};
+        border-style: solid;
+        border-color: $shadow-color-border;
+    }
+
+    .shadow-large {
+        box-shadow: $shadow-large $shadow-color;
+        margin-bottom: 25px;
+        border-width: 1px #{$important-helpers-value};
+        border-style: solid;
+        border-color: $shadow-color-border;
+    }
+
     // Media
     @media (max-width: $screen-sm-max) {
         .hide-phone {
