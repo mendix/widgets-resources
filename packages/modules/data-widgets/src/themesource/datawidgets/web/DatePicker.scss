@@ -2,6 +2,8 @@
     Classes for React Date-Picker font-unit and color adjustments
 */
 $day-color: #555 !default;
+$day-range-color: #000 !default;
+$day-range-background: #eaeaea !default;
 $outside-month-color: #c8c8c8 !default;
 $text-color: #fff !default;
 $border-color: #d7d7d7 !default;
@@ -71,21 +73,32 @@ $border-color: #d7d7d7 !default;
     color: $outside-month-color;
 }
 
-.react-datepicker__day--today,
+.react-datepicker__day--today:not(.react-datepicker__day--in-range),
 .react-datepicker__day--keyboard-selected {
     color: $brand-primary;
     background-color: $hover-color;
 }
 
 .react-datepicker__day--selected,
-.react-datepicker__day--in-range,
-.react-datepicker__day--in-selecting-range,
-.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
+.react-datepicker__day--range-start,
+.react-datepicker__day--range-end,
+.react-datepicker__day--in-selecting-range.react-datepicker__day--selecting-range-start {
     background-color: $brand-primary;
     color: $text-color;
 
     &:hover {
         border-radius: 50%;
+        background-color: $brand-primary;
+        color: $text-color;
+    }
+}
+
+.react-datepicker__day--in-range:not(.react-datepicker__day--range-start, .react-datepicker__day--range-end),
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range, .react-datepicker__day--selecting-range-start) {
+    background-color: $day-range-background;
+    color: $day-range-color;
+
+    &:hover {
         background-color: $brand-primary;
         color: $text-color;
     }
