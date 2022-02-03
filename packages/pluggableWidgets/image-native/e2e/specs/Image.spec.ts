@@ -28,6 +28,13 @@ describe("Image", () => {
         await expectToMatchScreenshot();
     });
 
+    it("renders the image with icon", async () => {
+        const btnImageIcon = element(by.id("btnImageIcon"));
+        await btnImageIcon.tap();
+
+        await expectToMatchScreenshot();
+    });
+
     it("renders the image with URL", async () => {
         const btnImageUrl = element(by.id("btnImageUrl"));
         await btnImageUrl.tap();
@@ -40,12 +47,5 @@ describe("Image", () => {
         const alert = Alert();
         await expect(alert.messageElement).toHaveText("Image clicked!");
         await alert.confirm();
-    });
-
-    it("renders the image with icon", async () => {
-        const btnImageIcon = element(by.id("btnImageIcon"));
-        await btnImageIcon.tap();
-
-        await expectToMatchScreenshot();
     });
 });
