@@ -698,7 +698,7 @@
 		},
 		{
 			"name": "Image",
-			"version": "1.0.0",
+			"version": "1.0.1",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.image.Image",
@@ -834,7 +834,7 @@
 		},
 		{
 			"name": "Maps",
-			"version": "3.1.0",
+			"version": "3.1.1",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.custom.Maps.Maps",
@@ -932,7 +932,7 @@
 		},
 		{
 			"name": "PopupMenu",
-			"version": "3.2.1",
+			"version": "3.2.2",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.web.popupmenu.PopupMenu",
@@ -1004,7 +1004,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1110,7 +1110,7 @@
 		},
 		{
 			"name": "Rating",
-			"version": "2.1.0",
+			"version": "2.1.1",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.rating.Rating",
