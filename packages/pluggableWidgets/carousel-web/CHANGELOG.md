@@ -9,5 +9,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - We added new properties such as *autoplay*, *animation*, *pagination*, *navigation*, *infinite loop*, *delay*.
 
 ### Changed
+- We changed the widget to a pluggable widget.
 - We changed the library for Carousel widget to use Swiper.
 - We changed the data source selection, now you can put your preferred widget inside carousel content.

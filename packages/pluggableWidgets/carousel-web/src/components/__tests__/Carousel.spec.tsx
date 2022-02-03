@@ -1,12 +1,14 @@
-import { createElement } from "react";
+import { createElement, ReactNode, ReactElement } from "react";
 import { Carousel, CarouselProps } from "../Carousel";
 import { ObjectItem } from "mendix";
 import renderer from "react-test-renderer";
 
-const itemWrapperFunction = (): CarouselProps<ObjectItem>["itemRenderer"] => (wrapper, item) => wrapper(item.id);
+const itemWrapperFunction = () => (wrapper: (children: ReactNode) => ReactElement, item: ObjectItem) =>
+    wrapper(item.id);
 
 describe("Carousel", () => {
-    const defaultCarouselProps: CarouselProps<ObjectItem> = {
+    const defaultCarouselProps: CarouselProps = {
+        className: "",
         items: [],
         pagination: true,
         animation: true,
@@ -14,7 +16,6 @@ describe("Carousel", () => {
         delay: 3000,
         loop: true,
         navigation: true,
-        tabIndex: undefined,
         onClick: () => jest.fn(),
         itemRenderer: itemWrapperFunction
     };
