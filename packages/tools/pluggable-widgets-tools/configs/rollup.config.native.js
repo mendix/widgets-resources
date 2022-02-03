@@ -122,7 +122,8 @@ export default async args => {
                       noEmitOnError: !args.watch,
                       sourceMap: config.sourceMaps,
                       inlineSources: config.sourceMaps,
-                      target: "es2019" // we transpile the result with babel anyway, see below
+                      target: "es2019", // we transpile the result with babel anyway, see below
+                      exclude: ["**/__tests__/**/*"]
                   })
                 : null,
             // Babel can transpile source JS and resulting JS, hence are input/output plugins. The good
