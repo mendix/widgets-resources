@@ -167,6 +167,10 @@
                     <caption>Show legend</caption>
                     <description />
                 </property>
+                <property key="showRangeSlider" type="boolean" defaultValue="true">
+                    <caption>Show range slider</caption>
+                    <description />
+                </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
                     <description />
@@ -240,10 +244,6 @@
                         <enumerationValue key="vertical">Vertical</enumerationValue>
                         <enumerationValue key="both">Both</enumerationValue>
                     </enumerationValues>
-                </property>
-                <property key="showRangeSlider" type="boolean" defaultValue="true">
-                    <caption>Show range slider</caption>
-                    <description />
                 </property>
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>

@@ -90,6 +90,7 @@ export interface TimeSeriesContainerProps {
     tabIndex?: number;
     lines: LinesType[];
     showLegend: boolean;
+    showRangeSlider: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     yAxisRangeMode: YAxisRangeModeEnum;
@@ -99,7 +100,6 @@ export interface TimeSeriesContainerProps {
     heightUnit: HeightUnitEnum;
     height: number;
     gridLines: GridLinesEnum;
-    showRangeSlider: boolean;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
@@ -112,6 +112,7 @@ export interface TimeSeriesPreviewProps {
     readOnly: boolean;
     lines: LinesPreviewType[];
     showLegend: boolean;
+    showRangeSlider: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
     yAxisRangeMode: YAxisRangeModeEnum;
@@ -121,7 +122,6 @@ export interface TimeSeriesPreviewProps {
     heightUnit: HeightUnitEnum;
     height: number | null;
     gridLines: GridLinesEnum;
-    showRangeSlider: boolean;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
