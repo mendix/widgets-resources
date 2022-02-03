@@ -2,10 +2,10 @@ import { StructurePreviewProps, RowLayoutProps, ContainerProps } from "@mendix/p
 import { ReactNode } from "react";
 import { ListViewSwipeProps } from "../typings/ListViewSwipeProps";
 
-const swipeContentContainer = (property: ReactNode): ContainerProps => ({
+const swipeContentContainer = (property: ReactNode, isDarkMode: boolean): ContainerProps => ({
     type: "Container",
     borders: true,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: isDarkMode ? "#4F4F4F" : "#F5F5F5",
     children: [
         {
             type: "DropZone",
@@ -14,7 +14,7 @@ const swipeContentContainer = (property: ReactNode): ContainerProps => ({
     ]
 });
 
-export function getPreview(values: ListViewSwipeProps<any>): RowLayoutProps {
+export function getPreview(values: ListViewSwipeProps<any>, isDarkMode: boolean): RowLayoutProps {
     const children: StructurePreviewProps[] = [
         {
             type: "Container",
@@ -30,10 +30,10 @@ export function getPreview(values: ListViewSwipeProps<any>): RowLayoutProps {
     ];
 
     if (values.leftRenderMode !== "disabled") {
-        children.unshift(swipeContentContainer(values.left));
+        children.unshift(swipeContentContainer(values.left, isDarkMode));
     }
     if (values.rightRenderMode !== "disabled") {
-        children.push(swipeContentContainer(values.right));
+        children.push(swipeContentContainer(values.right, isDarkMode));
     }
 
     return {
