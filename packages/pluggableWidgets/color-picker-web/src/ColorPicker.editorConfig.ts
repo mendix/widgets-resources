@@ -35,8 +35,7 @@ export const getPreview = (values: ColorPickerPreviewProps, isDarkMode: boolean)
             document: decodeURIComponent(
                 (isDarkMode ? StructurePreviewSvgDark : StructurePreviewSvg).replace("data:image/svg+xml,", "")
             ),
-            height: 245,
-            width: 204
+            height: 250
         };
     }
 

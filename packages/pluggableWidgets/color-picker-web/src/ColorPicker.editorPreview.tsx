@@ -9,7 +9,7 @@ export function preview(props: ColorPickerPreviewProps): ReactNode {
             onColorChange={() => undefined}
             onChange={() => undefined}
             tabIndex={undefined}
-            color={"#dedede"}
+            color={"#3A65E5"}
             disabled={props.readOnly}
             mode={props.mode}
             type={props.type}
