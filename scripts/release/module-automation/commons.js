@@ -2,7 +2,7 @@ const { basename, extname, join, resolve } = require("path");
 const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir, chmod } = require("fs/promises");
 const { exec } = require("child_process");
 
-export const regex = {
+const regex = {
     changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
     changelogsIncludingUnreleased: /## \[unreleased\]\n?((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
     releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g,
@@ -318,5 +318,6 @@ module.exports = {
     writeToWidgetChangelogs,
     zip,
     unzip,
-    exportModuleWithWidgets
+    exportModuleWithWidgets,
+    regex
 };
