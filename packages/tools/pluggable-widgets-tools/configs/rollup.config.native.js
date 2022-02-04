@@ -36,6 +36,8 @@ const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${
 
 export default async args => {
     const production = Boolean(args.configProduction);
+    const watch = Boolean(args.watch);
+
     if (!production && projectPath) {
         console.info(blue(`Project Path: ${projectPath}`));
     }
@@ -64,6 +66,7 @@ export default async args => {
                 json(),
                 collectDependencies({ outputDir: outDir, onlyNative: true, widgetName }),
                 ...getCommonPlugins({
+                    writeBundle: i === 1 && !editorConfigEntry,
                     sourceMaps: false,
                     extensions: [`.${os}.js`, ".native.js", ".js", ".jsx", ".ts", ".tsx"],
                     transpile: false,
@@ -94,6 +97,7 @@ export default async args => {
             plugins: [
                 url({ include: ["**/*.svg"], limit: 102400 }), // SVG file size limit of 100 kB
                 ...getCommonPlugins({
+                    writeBundle: true,
                     sourceMaps: false,
                     extensions,
                     transpile: true,
@@ -184,22 +188,24 @@ export default async args => {
             // (since rollup processes configs sequentially). But in watch mode rollup re-bundles only
             // configs affected by a change => we cannot know in advance which one will be "the last".
             // So we run the same logic for all configs, letting the last one win.
-            command([
-                async () => {
-                    mkdirSync(mpkDir, { recursive: true });
-                    await zip(outDir, mpkFile);
-                    if (!production && projectPath) {
-                        const widgetsPath = join(projectPath, "widgets");
-                        const deploymentPath = join(projectPath, `deployment/native/widgets`);
-                        // Create folder if they do not exists or directories were cleaned
-                        mkdirSync(widgetsPath, { recursive: true });
-                        mkdirSync(deploymentPath, { recursive: true });
-                        // Copy files to deployment and widgets folder
-                        cp("-r", join(outDir, "*"), deploymentPath);
-                        cp(mpkFile, widgetsPath);
+            config.writeBundle || watch
+                ? command([
+                    async () => {
+                        mkdirSync(mpkDir, { recursive: true });
+                        await zip(outDir, mpkFile);
+                        if (!production && projectPath) {
+                            const widgetsPath = join(projectPath, "widgets");
+                            const deploymentPath = join(projectPath, `deployment/native/widgets`);
+                            // Create folder if they do not exists or directories were cleaned
+                            mkdirSync(widgetsPath, { recursive: true });
+                            mkdirSync(deploymentPath, { recursive: true });
+                            // Copy files to deployment and widgets folder
+                            cp("-r", join(outDir, "*"), deploymentPath);
+                            cp(mpkFile, widgetsPath);
+                        }
                     }
-                }
-            ])
+                  ])
+                : null
         ];
     }
 
