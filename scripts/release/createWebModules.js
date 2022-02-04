@@ -74,7 +74,7 @@ async function createDataWidgetsModule() {
     }
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, "^(resources|userlib)/.*");
 
     await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
 
@@ -126,7 +126,7 @@ async function commonActions(moduleInfo, widgets) {
     }
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, "^(resources|userlib)/.*");
     await createGithubReleaseFrom({
         title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
         body: moduleChangelogs.replace(/"/g, "'"),
