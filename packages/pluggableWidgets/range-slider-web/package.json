@@ -1,7 +1,7 @@
 {
   "name": "range-slider-web",
   "widgetName": "RangeSlider",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Change a range of values on a slider",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {

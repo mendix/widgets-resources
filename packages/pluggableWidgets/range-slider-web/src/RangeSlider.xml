@@ -11,22 +11,22 @@
                     <caption>Lower bound attribute</caption>
                     <description>The lower bound value on the slider</description>
                     <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
                 <property key="upperBoundAttribute" type="attribute">
                     <caption>Upper bound attribute</caption>
                     <description>The upper bound value on the slider</description>
                     <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
             </propertyGroup>
-            <propertyGroup caption="Range">
+            <propertyGroup caption="General">
                 <property key="minValueType" type="enumeration" defaultValue="static">
                     <caption>Minimum value type</caption>
                     <description />
@@ -69,11 +69,11 @@
                 </property>
                 <property key="maxAttribute" type="attribute" required="false">
                     <caption>Maximum value</caption>
-                    <description/>
+                    <description />
                     <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
                 <property key="expressionMaximumValue" type="expression" required="false">
@@ -81,8 +81,6 @@
                     <description />
                     <returnType type="Decimal" />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Steps">
                 <property key="stepSizeType" type="enumeration" defaultValue="static">
                     <caption>Step size type</caption>
                     <description />
@@ -98,11 +96,11 @@
                 </property>
                 <property key="stepAttribute" type="attribute" required="false">
                     <caption>Step size</caption>
-                    <description/>
+                    <description />
                     <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
                 <property key="expressionStepSize" type="expression" required="false">
@@ -110,8 +108,6 @@
                     <description />
                     <returnType type="Decimal" />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Tooltip">
                 <property key="showTooltip" type="boolean" defaultValue="true">
                     <caption>Show tooltip</caption>
                     <description />
@@ -144,19 +140,17 @@
                     <caption>Tooltip always visible</caption>
                     <description>When enabled tooltip is always visible to the user</description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Label">
                 <systemProperty key="Label" />
             </propertyGroup>
             <propertyGroup caption="Editability">
-                <systemProperty key="Editability"/>
+                <systemProperty key="Editability" />
             </propertyGroup>
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Track">
-            <propertyGroup caption="Markers">
+            <propertyGroup caption="Track">
                 <property key="noOfMarkers" type="integer" defaultValue="1">
                     <caption>Number of markers</caption>
                     <description>Marker ticks on the slider (visible when larger than 0)</description>
@@ -165,8 +159,6 @@
                     <caption>Decimal places</caption>
                     <description>Number of decimal places for marker values</description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Orientation">
                 <property key="orientation" type="enumeration" defaultValue="horizontal">
                     <caption>Orientation</caption>
                     <description>If orientation is 'Vertical', make sure that parent or slider itself has fixed height</description>
@@ -177,7 +169,7 @@
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentage">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -185,15 +177,17 @@
                 </property>
                 <property key="height" type="integer" defaultValue="100">
                     <caption>Height</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">
-            <property key="onChange" type="action">
-                <caption>On change</caption>
-                <description />
-            </property>
+            <propertyGroup caption="Events">
+                <property key="onChange" type="action">
+                    <caption>On change</caption>
+                    <description />
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
