@@ -28,5 +28,17 @@ export async function tapMenuItem(caption: string): Promise<void> {
         .whileElement(by.id("scrollContainer"))
         .scroll(200, "down");
 
+    if (device.getPlatform() === "android") {
+        const bottomBarItem = await element(by.id("bottomBarItem$Widgets"));
+        const attributes = (await bottomBarItem.getAttributes()) as Detox.AndroidElementAttributes;
+        try {
+            await element(by.id("scrollContainer")).scroll(attributes.height, "down");
+        } catch (e) {
+            if (e.message !== "Test Failed: View is already at the scrolling edge") {
+                throw e;
+            }
+        }
+    }
+
     await element(by.text(caption)).tap();
 }
