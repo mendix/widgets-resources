@@ -1,4 +1,4 @@
-import { createElement, ReactNode, ReactElement } from "react";
+import { createElement, ReactNode, ReactElement, useEffect } from "react";
 import { ObjectItem } from "mendix";
 import classNames from "classnames";
 import Swiper, { SwiperOptions, Navigation, Pagination, EffectFade, Autoplay } from "swiper";
@@ -32,7 +32,7 @@ export function Carousel(props: CarouselProps): ReactElement {
         itemRenderer,
         onClick
     } = props;
-    Swiper.use([Navigation, Pagination, EffectFade, Autoplay]);
+    useEffect(() => Swiper.use([Navigation, Pagination, EffectFade, Autoplay]), []);
     const options: SwiperOptions = {
         slidesPerView: 1,
         centeredSlides: true,
@@ -49,8 +49,8 @@ export function Carousel(props: CarouselProps): ReactElement {
         <div className={classNames(className, "widget-carousel")} tabIndex={tabIndex}>
             <SwiperReact {...options} onClick={onClick}>
                 {itemRenderer &&
-                    items?.map((item: ObjectItem, key: number) =>
-                        itemRenderer((children: ReactNode) => <SwiperSlide key={key}>{children}</SwiperSlide>, item)
+                    items?.map((item: ObjectItem) =>
+                        itemRenderer((children: ReactNode) => <SwiperSlide key={item.id}>{children}</SwiperSlide>, item)
                     )}
             </SwiperReact>
         </div>
