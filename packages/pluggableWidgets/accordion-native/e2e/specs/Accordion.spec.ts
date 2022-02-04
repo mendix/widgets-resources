@@ -2,7 +2,7 @@ import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/h
 import { expect, element, by, device } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
-describe("Activity Indicator", () => {
+describe("Accordion", () => {
     beforeEach(async () => {
         await tapMenuItem("Accordion");
     });
