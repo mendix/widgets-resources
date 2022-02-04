@@ -12,7 +12,8 @@ const {
     cloneRepo,
     createMPK,
     createGithubRelease,
-    exportModuleWithWidgets
+    exportModuleWithWidgets,
+    regex
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
@@ -61,7 +62,7 @@ async function createNativeMobileResourcesModule() {
     const moduleChangelogs = await updateChangelogs(nativeWidgetFolders, moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWidgetFolders);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, "^(resources|userlib)/.*");
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
     await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, nativeWidgetFolders);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
@@ -83,7 +84,7 @@ async function createNanoflowCommonsModule() {
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateNativeComponentsTestProject(moduleInfo, tmpFolder);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, "^(resources|userlib)/.*");
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
@@ -103,7 +104,7 @@ async function createAtlasNativeContentModule() {
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
     await commitAndCreatePullRequest(moduleInfo);
     await updateNativeComponentsTestProjectWithAtlas(moduleInfo, tmpFolder);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, "^(resources|userlib)/.*");
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
     await createGithubRelease(moduleInfo, moduleChangelogs, mpkOutput);
     await execShellCommand(`rm -rf ${tmpFolder}`);
     console.log("Done.");
