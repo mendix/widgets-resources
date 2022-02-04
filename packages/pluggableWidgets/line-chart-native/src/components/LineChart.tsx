@@ -16,6 +16,7 @@ import {
 } from "../utils/StyleUtils";
 
 export interface LineChartProps {
+    name: string;
     lines: LineChartSeries[];
     style: LineChartStyle;
     showLegend: boolean;
@@ -187,7 +188,7 @@ export function LineChart(props: LineChartProps): ReactElement | null {
     );
 
     return (
-        <View style={style.container}>
+        <View style={style.container} testID={props.name}>
             {dataTypesResult instanceof Error ? (
                 <Text style={style.errorMessage}>{dataTypesResult.message}</Text>
             ) : (

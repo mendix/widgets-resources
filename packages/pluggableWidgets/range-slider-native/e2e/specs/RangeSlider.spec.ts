@@ -1,6 +1,6 @@
 import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by } from "detox";
+import { expect, element, by, device } from "detox";
 
 describe("Slider", () => {
     beforeEach(async () => {

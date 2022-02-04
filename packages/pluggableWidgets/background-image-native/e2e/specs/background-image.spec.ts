@@ -1,6 +1,6 @@
 import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by, waitFor } from "detox";
+import { expect, element, by, waitFor, device } from "detox";
 
 describe("Background image", () => {
     beforeEach(async () => {

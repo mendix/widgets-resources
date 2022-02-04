@@ -1,5 +1,5 @@
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by } from "detox";
+import { expect, element, by, device } from "detox";
 import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Badge", () => {
