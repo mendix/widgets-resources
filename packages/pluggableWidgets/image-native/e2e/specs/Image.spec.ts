@@ -12,14 +12,14 @@ describe("Image", () => {
     });
 
     it("renders the static image", async () => {
-        const btnImageStatic = element(by.id("btnImageStatic"));
+        const btnImageStatic = element(by.text("Image static"));
         await btnImageStatic.tap();
 
         await expectToMatchScreenshot();
     });
 
     it("renders the dynamic image", async () => {
-        const btnImageDynamic = element(by.id("btnImageDynamic"));
+        const btnImageDynamic = element(by.text("Image dynamic"));
         await btnImageDynamic.tap();
 
         const dynamicImage = element(by.id("dynamicImageText"));
@@ -29,14 +29,14 @@ describe("Image", () => {
     });
 
     it("renders the image with icon", async () => {
-        const btnImageIcon = element(by.id("btnImageIcon"));
+        const btnImageIcon = element(by.text("Image icon"));
         await btnImageIcon.tap();
 
         await expectToMatchScreenshot();
     });
 
     it("renders the image with URL", async () => {
-        const btnImageUrl = element(by.id("btnImageUrl"));
+        const btnImageUrl = element(by.text("Image url"));
         await btnImageUrl.tap();
 
         await expectToMatchScreenshot();
@@ -46,6 +46,5 @@ describe("Image", () => {
 
         const alert = Alert();
         await expect(alert.messageElement).toHaveText("Image clicked!");
-        await alert.confirm();
     });
 });
