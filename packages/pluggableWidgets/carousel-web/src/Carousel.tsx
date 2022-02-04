@@ -1,22 +1,15 @@
-import { createElement, ReactNode, useEffect, useState, useCallback, ReactElement } from "react";
+import { createElement, ReactNode, useCallback, ReactElement } from "react";
 import { ValueStatus } from "mendix";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { CarouselContainerProps } from "../typings/CarouselProps";
 import { Carousel as CarouselComponent } from "./components/Carousel";
 import loadingCircleSvg from "./ui/loading-circle.svg";
-import "./ui/Carousel.scss";
 import classNames from "classnames";
+import "./ui/Carousel.scss";
 
 export function Carousel(props: CarouselContainerProps): ReactNode {
     const { dataSource, content, showPagination, loop, tabIndex, navigation, animation, delay, autoplay } = props;
-    const [loading, setLoading] = useState(true);
     const onClick = useCallback(() => executeAction(props.onClickAction), [props.onClickAction]);
-    useEffect(() => {
-        if (dataSource?.status === ValueStatus.Available) {
-            setLoading(false);
-        }
-    }, [dataSource]);
-
     const itemRenderer = useCallback((renderWrapper, item) => renderWrapper(content?.get(item)), [content]);
     const renderCarousel = (): ReactElement => {
         return (
@@ -42,5 +35,5 @@ export function Carousel(props: CarouselContainerProps): ReactNode {
             </div>
         );
     };
-    return loading ? renderLoading() : renderCarousel();
+    return dataSource?.status !== ValueStatus.Available ? renderLoading() : renderCarousel();
 }
