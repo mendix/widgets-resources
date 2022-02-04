@@ -2,10 +2,11 @@ const { basename, extname, join, resolve } = require("path");
 const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir, chmod } = require("fs/promises");
 const { exec } = require("child_process");
 
-const regex = {
+export const regex = {
     changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
     changelogsIncludingUnreleased: /## \[unreleased\]\n?((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
-    releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g
+    releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g,
+    excludeFiles: "^(resources|userlib)/.*"
 };
 
 async function setLocalGitCredentials(workingDirectory) {

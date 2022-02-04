@@ -11,7 +11,8 @@ const {
     createMPK,
     createGithubReleaseFrom,
     exportModuleWithWidgets,
-    updateModuleChangelogs
+    updateModuleChangelogs,
+    regex
 } = require("./module-automation/commons");
 
 const repoRootPath = join(__dirname, "../../");
@@ -74,7 +75,7 @@ async function createDataWidgetsModule() {
     }
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
 
     await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
 
@@ -126,7 +127,7 @@ async function commonActions(moduleInfo, widgets) {
     }
     await commitAndCreatePullRequest(moduleInfo);
     await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, `(resources|userlib)[\\/]`);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
     await createGithubReleaseFrom({
         title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
         body: moduleChangelogs.replace(/"/g, "'"),
