@@ -149,6 +149,7 @@ means:
 ## Manually releasing Native Mobile Resources (NMR)
 
 Note: for an automated approach (preferred), see `scripts/release/README.md`.
+Note: this applies to NMR for latest Studio Pro (currently 9.X) 
 
 - With correct node version (see `.nvmrc`) in repo root, run `lerna clean -y && npm i`.
 - Ensure your current git branch includes all changes intended to be released.
@@ -169,7 +170,9 @@ Note: for an automated approach (preferred), see `scripts/release/README.md`.
   - By aggregating the widgets' changelogs and the `mobile-resources-native` package's changelog, you can create detailed release notes.
 - Create a Mendix Marketplace release and add the exported `.mpk`; follow the release-wizard, ensuring each field is correct.
   - Make sure the target Mendix version is correct.
-  - Most of the time you just need to update the module's version, attach a `.mpk` and add release notes. 
+  - Most of the time you just need to update the module's version, attach a `.mpk` and add release notes.
+
+To release NMR for Studio Pro 8.X, most of the steps are the same, except take note of: `https://paper.dropbox.com/doc/Native-Content-Wiki--Bbd0Jfqo9nAEbmkpowVg5n3bAg-3h3CBZeVHXw8dJ1IY9xhJ#:uid=742445305119695634661853&h2=Update-NativeComponentsTestPro`.  
 
 ## Raising problems/issues
 -   We encourage everyone to open a Support ticket on [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools)
