@@ -20,6 +20,8 @@
     "test:e2e:local:ios": "detox test --configuration ios.simulator.developerapp",
     "debug:e2e:local:android": "detox test --record-logs all -l trace --configuration android.emulator.developerapp",
     "debug:e2e:local:ios": "detox test --record-logs all -l trace --configuration ios.simulator.developerapp",
+    "test:e2e:android:update-snapshot": "detox test --updateSnapshot --configuration android.emulator.developerapp",
+    "test:e2e:ios:update-snapshot": "detox test --updateSnapshot --configuration ios.simulator.developerapp",
     "version": "npm run release",
     "postversion": "..\"/../../node_modules/.bin/ts-node\" ../../../scripts/release/UpdateGithubRelease.ts --project ../../../scripts/tsconfig.json"
   },
