@@ -7,8 +7,8 @@ describe("Screenshots of the pages for", () => {
     urls.forEach(url => {
         it(`matches snapshot for the page ${url.replace("/p/", "")}`, () => {
             cy.visit(url);
-            cy.wait(2000);
-            cy.compareSnapshot(`baseline/${url.replace("/p/", "")}-${browserName}`, 0.1);
+            cy.wait(1000);
+            cy.compareSnapshot(`${url.replace("/p/", "")}-${browserName}`, 0.1);
         });
     });
 });
