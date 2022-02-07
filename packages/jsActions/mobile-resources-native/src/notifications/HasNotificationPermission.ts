@@ -15,12 +15,21 @@ export async function HasNotificationPermission(): Promise<boolean> {
     // BEGIN USER CODE
     // Documentation https://rnfirebase.io/docs/v5.x.x/notifications/receiving-notifications
 
+    const enum permissionStatus {
+        NotDetermined = -1,
+        Denied = 0,
+        Authorized = 1,
+        Provisional = 2
+    }
+
+    const allowedAuthorizationStatuses = [permissionStatus.Authorized, permissionStatus.Provisional];
+
     if (NativeModules && !NativeModules.RNFBMessagingModule) {
         return Promise.reject(new Error("Firebase module is not available in your app"));
     }
 
     return NativeModules.RNFBMessagingModule.hasPermission().then((authStatus: number) => {
-        if (authStatus) {
+        if (allowedAuthorizationStatuses.includes(authStatus)) {
             return Promise.resolve(true);
         } else {
             return Promise.resolve(false);

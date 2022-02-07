@@ -4,6 +4,8 @@ All notable changes to this widget will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- We updated the `HasNotificationPermission` action to prevent an incorrect result when permission was not yet requested on iOS. This is due to a change in the hasPermission method in react-native-firebase.
 
 ## [3.4.2] Native Mobile Resources - 2022-2-7
 
