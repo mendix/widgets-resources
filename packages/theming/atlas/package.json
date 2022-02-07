@@ -16,7 +16,7 @@
     "pretest:e2e:collect": "node ./scripts/atlasCollectPages.js",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress --no-widget-update --remove-atlas-files",
-    "test:e2e:cypress:local": "npx cypress open --browser chrome",
+    "test:e2e:cypress:local": "npx cypress open --browser chrome --config-file ../../../configs/e2e/cypress/cypress.json",
     "test:e2e:wdio": "pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",
     "test:e2e:wdio:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "pretest:e2e:chrome": "node ../../../scripts/test/updateAtlas.js --latest-atlas",

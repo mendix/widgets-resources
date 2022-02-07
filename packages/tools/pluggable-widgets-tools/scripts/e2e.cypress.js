@@ -105,7 +105,7 @@ async function main() {
     // Spin up the runtime and run testProject
     const freePort = await findFreePort(3000);
     const runtimeContainerId = execSync(
-        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source --name runtime -p ${freePort}:8080 ` +
+        `docker run -td -v ${process.cwd()}:/source -v ${__dirname}:/shared:ro -w /source -p ${freePort}:8080 ` +
             `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
             `--rm ${ghcr}mxruntime:${mendixVersion} /shared/runtime.sh`
     )
@@ -129,10 +129,15 @@ async function main() {
         if (attempts === 0) {
             throw new Error("Runtime didn't start in time, exiting now...");
         }
-        const REPO_ROOT = execSync(`git rev-parse --show-toplevel`).toString().trim().concat("/node_modules");
+        const REPO_ROOT = execSync(`git rev-parse --show-toplevel`).toString().trim();
         // Spin up cypress docker machine and run the test specs
         execSync(
-            `docker run -t -v $PWD:/e2e -v ${REPO_ROOT}:/e2e/node_modules:ro -w /e2e --name cypress cypress/included:9.4.1 --browser chrome --config baseUrl=http://${ip}:${freePort}`,
+            "docker run -t " +
+                `-v ${REPO_ROOT}:/source ` +
+                `-v ${REPO_ROOT}/node_modules:/source/node_modules:ro ` +
+                "-w /e2e --name cypress cypress/included:9.4.1 " +
+                `--browser chrome --config baseUrl=http://${ip}:${freePort},video=true ` +
+                `--config-file false --project ${process.cwd().replace(REPO_ROOT, "/source")}`,
             { stdio: "inherit" }
         );
     } catch (e) {
