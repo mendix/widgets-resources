@@ -19,3 +19,8 @@ mendixProject
 **/screenshot-results
 **/tests/testProject
 **/pluggableWidgets/**/artifacts
+**/cypress/videos
+**/cypress/screenshots
+**/cypress/cypress-visual-report
+**/cypress/cypress-visual-screenshots/comparison
+**/cypress/cypress-visual-screenshots/diff

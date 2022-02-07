@@ -84,4 +84,5 @@ jobs:
                       ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/diff/**/*.png
                       ${{ github.workspace }}/packages/**/tests/e2e/screenshot-results/TESTFAIL_*.png
                       ${{ github.workspace }}/packages/**/cypress/cypress-visual-screenshots/diff/*.png
+                      ${{ github.workspace }}/packages/**/cypress/videos/*.mp4
                   if-no-files-found: error
