@@ -13,15 +13,18 @@ export type Props = AccordionProps<AccordionStyle>;
 export function Accordion(props: Props): ReactElement | null {
     const styles = flattenStyles(defaultAccordionStyle, props.style);
     const [expandedGroups, setExpandedGroups] = useState<number[]>(
-        props.groups.reduce(
-            (acc, group, index): number[] =>
-                !props.collapsible || group.groupCollapsed === "groupStartExpanded"
-                    ? props.collapseBehavior === "singleExpanded"
-                        ? [index]
-                        : [...acc, index]
-                    : acc,
-            []
-        )
+        props.groups.reduce((acc, group, index): number[] => {
+            if (!props.collapsible) {
+                return [...acc, index];
+            }
+            if (group.groupCollapsed === "groupStartExpanded") {
+                if (props.collapseBehavior === "singleExpanded") {
+                    return [index];
+                }
+                return [...acc, index];
+            }
+            return acc;
+        }, [])
     );
 
     const collapseGroup = useCallback((index: number): void => {
@@ -75,7 +78,7 @@ export function Accordion(props: Props): ReactElement | null {
     }, [props.groups]);
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} testID={props.name}>
             {props.groups.map(
                 (group, index): ReactElement => (
                     <AccordionGroup
