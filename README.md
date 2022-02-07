@@ -146,14 +146,30 @@ means:
 -   Then every time `npm run build` is run, the code piece between `// BEGIN USER CODE` and `// END USER CODE` will be
     changed. After you close and open the JSAction in Studiom changes will be picked up automatically.
 
-## Releasing Native Mobile Resources
+## Manually releasing Native Mobile Resources (NMR)
 
--   Bump the version of the necessary widget by running `npm run version your-widget-name desired-version`
--   Create draft tag in github repo which will also create release mpk for the necessary widget `npm run publish your-widget-name`
--   Add notes to your draft
--   Update the necessary widgets to the Mendix `Native Mobile Resources` app and push the changes
--   Export the module, include every dependency
--   Create a manual tag for the exported module "Native Mobile Resources - AppStore release vx.x.x" and add the Exported Module as asset
+Note: for an automated approach (preferred), see `scripts/release/README.md`.
+
+- With correct node version (see `.nvmrc`) in repo root, run `lerna clean -y && npm i`.
+- Ensure your current git branch includes all changes intended to be released.
+  - Including updates to widgets' changelogs and semver version in `package.json` and `package.xml`.
+- Build all widgets in release mode; in root of repo run `npm run release:native`.
+- Copy each widgets' `.mpk` to the NMR project's `/widgets` directory, overriding any existing `.mpk`s.
+- (conditional) If the widget is new, it needs to be listed on the NMR project page `NativeModileResources._WidgetExport`.
+  - Configure the widget with basic minimum requirements (e.g. datasource), enough to avoid any project errors.
+- Ensure monorepo's `mobile-resources-native` package has correct changelog and `package.json` version.
+- cd to `packages/jsActions/mobile-resources-native` and run `npm run release`.
+- Delete contents of NMR project's `javascriptsource/nativemobileresources/actions`.
+- Copy-and-paste files and folders inside monorepo `packages/jsActions/mobile-resources-native/dist/` to NMR project's `javascriptsource/nativemobileresources/actions/`.
+- Update the version in NMR project's `themesource/nativemobileresources/.version`.
+- Commit any changes to NMR project and push using git.
+- Export the NMR project's module called "NativeMobileResources"; right-click the module then "export module package".
+  - Exclude everything inside `userlib/` and `resources/`.
+- Create a GitHub release (see previous releases for example release notes and title, etc.) and add the exported `.mpk`.
+  - By aggregating the widgets' changelogs and the `mobile-resources-native` package's changelog, you can create detailed release notes.
+- Create a Mendix Marketplace release and add the exported `.mpk`; follow the release-wizard, ensuring each field is correct.
+  - Make sure the target Mendix version is correct.
+  - Most of the time you just need to update the module's version, attach a `.mpk` and add release notes. 
 
 ## Raising problems/issues
 -   We encourage everyone to open a Support ticket on [Mendix Support](https://support.mendix.com) in case of problems with widgets or scaffolding tools (Pluggable Widgets Generator or Pluggable Widgets Tools)
