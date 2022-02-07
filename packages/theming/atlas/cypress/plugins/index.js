@@ -1,8 +1,8 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-const { addMatchImageSnapshotPlugin } = require("cypress-image-snapshot/plugin");
+const getCompareSnapshotsPlugin = require("cypress-image-diff-js/dist/plugin");
 
 module.exports = (on, config) => {
-    addMatchImageSnapshotPlugin(on, config);
+    getCompareSnapshotsPlugin(on, config);
 };

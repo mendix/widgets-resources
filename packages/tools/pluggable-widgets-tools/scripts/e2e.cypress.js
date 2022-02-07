@@ -132,7 +132,7 @@ async function main() {
         const REPO_ROOT = execSync(`git rev-parse --show-toplevel`).toString().trim().concat("/node_modules");
         // Spin up cypress docker machine and run the test specs
         execSync(
-            `docker run -t -v $PWD:/e2e -v ${REPO_ROOT}:/e2e/node_modules:ro -w /e2e --name cypress cypress/included:8.7.0 --browser chrome --config baseUrl=http://${ip}:${freePort}`,
+            `docker run -t -v $PWD:/e2e -v ${REPO_ROOT}:/e2e/node_modules:ro -w /e2e --name cypress cypress/included:9.4.1 --browser chrome --config baseUrl=http://${ip}:${freePort}`,
             { stdio: "inherit" }
         );
     } catch (e) {
@@ -230,7 +230,9 @@ async function getTestProject(repository, branch) {
 
     try {
         await promisify(pipeline)(
-            (await fetch(`${repository}/archive/refs/heads/${branch}.zip`)).body,
+            (
+                await fetch(`${repository}/archive/refs/heads/${branch}.zip`)
+            ).body,
             createWriteStream(downloadedArchivePath)
         );
         return downloadedArchivePath;
