@@ -1,5 +1,5 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-import datagrid from "../../../../datagrid-web/tests/e2e/objects/datagrid.widget";
+import page from "../../../../../configs/e2e/src/pages/page";
+import datagrid from "../../../datagrid-web/tests/e2e/objects/datagrid.widget";
 
 describe("datagrid-dropdown-filter-web", () => {
     beforeEach(() => {
