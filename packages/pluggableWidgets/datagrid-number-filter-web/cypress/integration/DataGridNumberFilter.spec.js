@@ -1,28 +1,14 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-import datagrid from "../objects/datagrid.widget";
-
 describe("datagrid-number-filter-web", () => {
     beforeEach(() => {
-        page.open(); // resets page
+        cy.visit("/"); // resets page
     });
 
     describe("number filtering", () => {
         it("shows correct result", () => {
-            const grid = page.getWidget("datagrid1");
-            const input = page.waitForElement(".filter-input", grid);
-            input.waitForEnabled();
-            input.setValue("12");
-            grid.waitUntil(
-                () => {
-                    return datagrid.getAllRows(page.getElements(".mx-name-datagrid1 .td")).length !== 12;
-                },
-                {
-                    timeout: 3000,
-                    timeoutMsg: "expected result to be different after 3s"
-                }
-            );
-            const items = page.getElements(".td", grid);
-            expect(datagrid.getAllRows(items)).toEqual(["12", "test3", "test3", ""]);
+            cy.get(".mx-name-datagrid1").find(".filter-input").type("12", { force: true });
+
+            cy.wait(1000);
+            cy.get(".mx-name-datagrid1 .td").should("have.text", "12test3test3");
         });
     });
 });
