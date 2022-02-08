@@ -1,78 +1,73 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-import badgeButtonWidget from "../objects/badgeButton.widget";
 describe("BadgeButton on click", () => {
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
+        });
+    };
+
     describe("call microflow", () => {
-        beforeAll(() => {
-            page.open("p/events");
+        beforeEach(() => {
+            cy.visit("p/events");
         });
 
+        afterEach(() => cleanMendixSession());
+
         it("displays a dialog", () => {
-            const badgeButton = new badgeButtonWidget("badgeButtonCallMicroflow");
-
-            badgeButton.element.waitForDisplayed();
-            badgeButton.element.click();
-
-            const dialog = page.waitForElement(".mx-dialog-body");
-            expect(dialog.getText()).toEqual("Microflow Successfully Called With badge New");
+            cy.get(".mx-name-badgeButtonCallMicroflow").should("be.visible");
+            cy.get(".mx-name-badgeButtonCallMicroflow").click();
+            cy.get(".mx-dialog-body").should("have.text", "Microflow Successfully Called With badge New");
         });
     });
 
     describe("call nanoflow", () => {
-        beforeAll(() => {
-            page.open("p/events");
+        beforeEach(() => {
+            cy.visit("p/events");
         });
 
+        afterEach(() => cleanMendixSession());
+
         it("displays a dialog", () => {
-            const badgeButton = new badgeButtonWidget("badgeButtonCallNanoflow");
-
-            badgeButton.element.waitForDisplayed();
-            badgeButton.element.click();
-
-            const dialog = page.waitForElement(".mx-dialog-body");
-            expect(dialog.getText()).toEqual("Nanoflow called");
+            cy.get(".mx-name-badgeButtonCallNanoflow").should("be.visible");
+            cy.get(".mx-name-badgeButtonCallNanoflow").click();
+            cy.get(".mx-dialog-body").should("have.text", "Nanoflow called");
         });
     });
 
     describe("open page", () => {
         beforeEach(() => {
-            page.open("p/events");
+            cy.visit("p/events");
         });
 
+        afterEach(() => cleanMendixSession());
+
         it("opens a page", () => {
-            const badgeButton = new badgeButtonWidget("badgeButtonShowPage");
-
-            badgeButton.element.waitForDisplayed();
-            badgeButton.element.click();
-
-            const header = page.header();
-            expect(header).toBe("ClickedPage");
+            cy.get(".mx-name-badgeButtonShowPage").should("be.visible");
+            cy.get(".mx-name-badgeButtonShowPage").click();
+            cy.get(".mx-name-pageTitle1").should("have.text", "ClickedPage");
         });
 
         it("opens modal popup page", () => {
-            const badgeButton = new badgeButtonWidget("badgeButtonShowPopupPage");
-
-            badgeButton.element.waitForDisplayed();
-            badgeButton.element.click();
-
-            const header = page.header();
-            expect(header).toBe("Events");
-
+            cy.get(".mx-name-badgeButtonShowPopupPage").should("be.visible");
+            cy.get(".mx-name-badgeButtonShowPopupPage").click();
+            cy.get(".mx-name-pageTitle1").should("contain.text", "ModalPopupPage");
         });
     });
 
     describe("close page", () => {
         beforeEach(() => {
-            page.open("p/events");
+            cy.visit("p/events");
         });
 
+        afterEach(() => cleanMendixSession());
+
         it("closes a page", () => {
-            page.getWidget("openClosePage").click();
-            const badgeButton = new badgeButtonWidget("badgeButtonClosePage");
-
-            badgeButton.element.waitForDisplayed();
-            badgeButton.element.click();
-
-            browser.waitUntil(() => page.header() === "Events", { timeout: 3000 });
+            cy.get(".mx-name-openClosePage").should("be.visible");
+            cy.get(".mx-name-openClosePage").click();
+            cy.wait(1000);
+            cy.get(".mx-name-badgeButtonClosePage").should("be.visible");
+            cy.get(".mx-name-badgeButtonClosePage").click();
+            cy.get(".mx-name-pageTitle1").should("have.text", "Events");
         });
     });
 });

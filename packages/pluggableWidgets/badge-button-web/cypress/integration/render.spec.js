@@ -1,37 +1,35 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-import badgeButtonWidget from "../objects/badgeButton.widget";
-
 describe("BadgeButton", () => {
-    beforeAll(() => {
-        page.open();
+    const browserName = Cypress.browser.name;
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
+        });
+    };
+
+    beforeEach(() => {
+        cy.visit("/");
     });
 
-    it("displays correctly dynamic data", () => {
-        const badgeButton = new badgeButtonWidget("badgeButtonDynamic");
+    afterEach(() => cleanMendixSession());
 
-        badgeButton.element.waitForDisplayed();
-        expect(badgeButton.getText()).toEqual("Button");
-        expect(badgeButton.getBadgeText()).toEqual("New");
+    it("displays correctly dynamic data", () => {
+        cy.get(".mx-name-badgeButtonDynamic").should("be.visible");
+        cy.get(".mx-name-badgeButtonDynamic").find(".widget-badge-button-text").should("contain.text", "Button");
+        cy.get(".mx-name-badgeButtonDynamic").find(".badge").should("contain.text", "New");
     });
 
     it("updates text value", () => {
-        const textInput = page.getWidget("textBox1");
-        textInput.$(".form-control").setValue("\uE003\uE003\uE003"); // Chrome is not clearing value before set new value (https://github.com/webdriverio/webdriverio/issues/3024)
-        textInput.$(".form-control").setValue("Newer");
-        textInput.$(".control-label").click();
-
-        const badgeButton = new badgeButtonWidget("badgeButtonDynamic");
-
-        badgeButton.element.waitForDisplayed();
-        expect(badgeButton.getText()).toEqual("Button");
-        expect(badgeButton.getBadgeText()).toEqual("Newer");
+        cy.get(".mx-name-textBox1 input").type("\uE003\uE003\uE003", { force: true }); // Chrome is not clearing value before set new value
+        cy.get(".mx-name-textBox1 input").type("Newer", { force: true });
+        cy.get(".mx-name-textBox1").find(".control-label").click();
+        cy.get(".mx-name-badgeButtonDynamic").should("be.visible");
+        cy.get(".mx-name-badgeButtonDynamic").find(".widget-badge-button-text").should("contain.text", "Button");
+        cy.get(".mx-name-badgeButtonDynamic").find(".badge").should("contain.text", "Newer");
     });
 
     it("compares with a screenshot baseline and checks if all badge buttons elements are rendered as expected", () => {
-        browser.setWindowRect(0, 0, 1200, 900);
-        const screenshotElem = $(".mx-name-table1");
-        screenshotElem.waitForDisplayed({ timeout: 5000 });
-        browser.saveElement(screenshotElem, "badgeButtonPageContent");
-        expect(browser.checkElement(screenshotElem, "badgeButtonPageContent")).toEqual(0);
+        cy.get(".mx-name-badgeButtonDynamic").should("be.visible");
+        cy.compareSnapshot(`badgeButtonPageContent-${browserName}`, 0.1);
     });
 });
