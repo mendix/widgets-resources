@@ -1,5 +1,5 @@
-import { expect, device, by, element } from "detox";
-import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, by, element } from "detox";
+import { resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Progress Bar", () => {
     beforeAll(async () => {
@@ -10,7 +10,7 @@ describe("Progress Bar", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders the progress bar with dynamic values", async () => {

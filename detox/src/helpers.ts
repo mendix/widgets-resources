@@ -1,4 +1,4 @@
-import { by, element, device, waitFor } from "detox";
+import { by, element, device } from "detox";
 import { readFileSync } from "fs";
 import "../jest.detox.startup";
 
@@ -12,7 +12,7 @@ export async function expectToMatchScreenshot(element?: Detox.NativeElement): Pr
     expect(readFileSync(screenshotPath)).toMatchImageSnapshot();
 }
 
-export async function setText(element: Detox.NativeElement, text: string) {
+export async function setText(element: Detox.NativeElement, text: string): Promise<void> {
     await element.clearText();
     await element.typeText(text);
     await element.tapReturnKey();
@@ -23,22 +23,16 @@ export async function tapBottomBarItem(caption: "Widgets" | "Actions" | "Commons
 }
 
 export async function tapMenuItem(caption: string): Promise<void> {
-    await waitFor(element(by.text(caption)))
-        .toBeVisible()
-        .whileElement(by.id("scrollContainer"))
-        .scroll(200, "down");
-
-    if (device.getPlatform() === "android") {
-        const bottomBarItem = await element(by.id("bottomBarItem$Widgets"));
-        const attributes = (await bottomBarItem.getAttributes()) as Detox.AndroidElementAttributes;
-        try {
-            await element(by.id("scrollContainer")).scroll(attributes.height, "down");
-        } catch (e) {
-            if (e.message !== "Test Failed: View is already at the scrolling edge") {
-                throw e;
-            }
-        }
-    }
-
+    const firstLetter = caption.split("")[0].toUpperCase();
+    await element(by.text(firstLetter)).atIndex(0).tap();
     await element(by.text(caption)).tap();
+}
+
+export async function resetDevice(): Promise<void> {
+    if (device.getPlatform() === "ios") {
+        await device.reloadReactNative();
+    } else {
+        await device.terminateApp();
+        await device.launchApp();
+    }
 }

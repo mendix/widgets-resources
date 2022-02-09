@@ -1,13 +1,13 @@
-import { tapMenuItem } from "../../../../../detox/src/helpers";
-import { expect, element, by, device } from "detox";
+import { resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
 
-describe("Activity Indicator", () => {
+describe("Activity indicator", () => {
     beforeAll(async () => {
-        await tapMenuItem("Activity Indicator");
+        await tapMenuItem("Activity indicator");
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders the default indicator", async () => {

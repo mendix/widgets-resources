@@ -1,31 +1,22 @@
-import { expect, device, waitFor, element, by } from "detox";
-import { Widget, expectToMatchImageSnapshot, Alert } from "../../../../../tests/e2e";
+import { expect, element, by } from "detox";
+import { Alert } from "../../../../../detox/src/Alert";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Radio Buttons", () => {
-    beforeAll(async () => {
-        await waitFor(element(by.id("btnRadioButtons")))
-            .toBeVisible()
-            .whileElement(by.id("scrollContainer1"))
-            .scroll(200, "down");
-
-        await Widget("btnRadioButtons").getElement().tap();
+    beforeEach(async () => {
+        await tapMenuItem("Radio buttons");
     });
 
-    it("renders correct initial appearance", async () => {
-        await expectToMatchImageSnapshot();
+    it("should call on change when selected option changes", async () => {
+        await expectToMatchScreenshot();
+        await element(by.text("Option 1")).tap();
+        const alert = Alert();
+        await expect(alert.messageElement).toHaveText("Option_1");
+        await alert.confirm();
+        await expectToMatchScreenshot(element(by.id("radioButtonsVertical")));
     });
 
-    it("call on change when selected option changed", async () => {
-        await Widget("radio-button-Option_1").getElement().tap();
-        await expect(Alert().getMessage("Option_1")).toBeVisible();
-        await Alert().confirm();
-    });
-
-    it("renders correctly when option changed", async () => {
-        await expectToMatchImageSnapshot();
-    });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
+    afterEach(async () => {
+        await resetDevice();
     });
 });

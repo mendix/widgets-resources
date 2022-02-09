@@ -1,5 +1,5 @@
-import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
-import { element, by, device } from "detox";
+import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by } from "detox";
 
 describe("Rating", () => {
     beforeAll(async () => {
@@ -7,7 +7,7 @@ describe("Rating", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correctly after change", async () => {

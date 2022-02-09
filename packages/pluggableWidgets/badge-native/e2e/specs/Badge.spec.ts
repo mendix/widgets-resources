@@ -1,6 +1,6 @@
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by, device } from "detox";
-import { setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
+import { resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Badge", () => {
     beforeAll(async () => {
@@ -11,7 +11,7 @@ describe("Badge", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders the normal badge", async () => {

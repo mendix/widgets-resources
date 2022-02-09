@@ -1,5 +1,5 @@
-import { element, by, device } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by } from "detox";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Line chart", () => {
     beforeAll(async () => {
@@ -7,7 +7,7 @@ describe("Line chart", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correctly", async () => {

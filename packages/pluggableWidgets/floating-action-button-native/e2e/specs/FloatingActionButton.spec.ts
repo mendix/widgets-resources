@@ -1,6 +1,6 @@
 import { Alert } from "../../../../../detox/src/Alert";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
-import { expect, element, by, device } from "detox";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
 
 describe("Badge", () => {
     beforeEach(async () => {
@@ -8,7 +8,7 @@ describe("Badge", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correct initial appearance", async () => {

@@ -1,6 +1,6 @@
-import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by, device } from "detox";
+import { expect, element, by } from "detox";
 
 describe("Slider", () => {
     beforeEach(async () => {
@@ -8,7 +8,7 @@ describe("Slider", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correctly after setting value", async () => {
