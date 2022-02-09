@@ -122,8 +122,15 @@ describe("The TimeSeries widget", () => {
 function setupBasicSeries(overwriteConfig: Partial<LinesType>): LinesType {
     const xAttribute = new ListAttributeValueBuilder<Date>().build();
     const getXAttributeMock = jest.fn();
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Date>().withValue(new Date("2022-01-01")).build());
-    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Date>().withValue(new Date("2022-01-02")).build());
+
+    const firstDate = new Date("2022-01-01");
+    jest.spyOn(firstDate, "toLocaleDateString").mockReturnValue("01/01/2022");
+    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Date>().withValue(firstDate).build());
+
+    const secondDate = new Date("2022-01-02");
+    jest.spyOn(secondDate, "toLocaleDateString").mockReturnValue("02/01/2022");
+    getXAttributeMock.mockReturnValueOnce(new EditableValueBuilder<Date>().withValue(secondDate).build());
+
     xAttribute.get = getXAttributeMock;
 
     const yAttribute = new ListAttributeValueBuilder<Big>().build();
