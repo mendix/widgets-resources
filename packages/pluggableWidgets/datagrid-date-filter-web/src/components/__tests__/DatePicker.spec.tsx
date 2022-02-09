@@ -16,7 +16,7 @@ describe("Date picker component", () => {
 
     it("renders correctly", () => {
         const component = renderEnzyme(
-            <DatePicker adjustable value={null} setValue={jest.fn()} dateFormat="dd/MM/yyyy" locale="nl-NL" />
+            <DatePicker adjustable setValue={jest.fn()} dateFormat="dd/MM/yyyy" locale="nl-NL" />
         );
 
         expect(component).toMatchSnapshot();
@@ -24,7 +24,7 @@ describe("Date picker component", () => {
 
     it("renders correctly when is not adjustable", () => {
         const component = renderEnzyme(
-            <DatePicker adjustable={false} value={null} setValue={jest.fn()} dateFormat="dd/MM/yyyy" locale="nl-NL" />
+            <DatePicker adjustable={false} setValue={jest.fn()} dateFormat="dd/MM/yyyy" locale="nl-NL" />
         );
 
         expect(component).toMatchSnapshot();
@@ -32,7 +32,7 @@ describe("Date picker component", () => {
 
     it("renders correctly with different locale and date format", () => {
         const component = renderEnzyme(
-            <DatePicker adjustable={false} value={null} setValue={jest.fn()} dateFormat="yyyy-MM-dd" locale="pt-BR" />
+            <DatePicker adjustable={false} setValue={jest.fn()} dateFormat="yyyy-MM-dd" locale="pt-BR" />
         );
 
         expect(component).toMatchSnapshot();
@@ -42,7 +42,6 @@ describe("Date picker component", () => {
         const component = renderEnzyme(
             <DatePicker
                 adjustable
-                value={null}
                 setValue={jest.fn()}
                 dateFormat="yyyy-MM-dd"
                 locale="pt-BR"
@@ -59,7 +58,6 @@ describe("Date picker component", () => {
         const component = render(
             <DatePicker
                 adjustable
-                value={null}
                 setValue={setValue}
                 dateFormat="dd/MM/yyyy"
                 locale="nl-NL"
@@ -77,7 +75,6 @@ describe("Date picker component", () => {
         const component = render(
             <DatePicker
                 adjustable
-                value={null}
                 setValue={jest.fn()}
                 setRangeValues={setRangeValues}
                 dateFormat="dd/MM/yyyy"

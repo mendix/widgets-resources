@@ -24,20 +24,14 @@ interface FilterComponentProps {
     screenReaderInputCaption?: string;
     tabIndex?: number;
     styles?: CSSProperties;
-    updateFilters?: (
-        value: Date | null,
-        rangeValues: [Date | null, Date | null] | null,
-        type: DefaultFilterEnum
-    ) => void;
+    updateFilters?: (value: Date | undefined, rangeValues: Array<Date | undefined>, type: DefaultFilterEnum) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
-    const [value, setValue] = useState<Date | null>(null);
-    const [rangeValues, setRangeValues] = useState<[Date | null, Date | null] | null>(
-        props.defaultStartDate || props.defaultEndDate
-            ? [props.defaultStartDate ?? null, props.defaultEndDate ?? null]
-            : null
+    const [value, setValue] = useState<Date | undefined>(undefined);
+    const [rangeValues, setRangeValues] = useState<Array<Date | undefined>>(
+        props.defaultStartDate || props.defaultEndDate ? [props.defaultStartDate, props.defaultEndDate] : []
     );
     const pickerRef = useRef<DatePickerComponent | null>(null);
 
@@ -49,7 +43,7 @@ export function FilterComponent(props: FilterComponentProps): ReactElement {
 
     useEffect(() => {
         if (props.defaultStartDate || props.defaultEndDate) {
-            setRangeValues([props.defaultStartDate ?? null, props.defaultEndDate ?? null]);
+            setRangeValues([props.defaultStartDate, props.defaultEndDate]);
         }
     }, [props.defaultStartDate, props.defaultEndDate]);
 

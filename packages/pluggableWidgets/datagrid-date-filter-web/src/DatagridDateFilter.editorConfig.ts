@@ -1,4 +1,6 @@
 import {
+    betweenIcon,
+    betweenIconDark,
     ContainerProps,
     datePickerIcon,
     datePickerIconDark,
@@ -130,8 +132,8 @@ export const getPreview = (values: DatagridDateFilterPreviewProps, isDarkMode: b
 
 function getSvgContent(type: DefaultFilterEnum, isDarkMode: boolean): string {
     switch (type) {
-        // TODO: Add proper icons
         case "between":
+            return isDarkMode ? betweenIconDark : betweenIcon;
         case "equal":
             return isDarkMode ? equalsIconDark : equalsIcon;
         case "notEqual":

@@ -24,12 +24,12 @@ interface DatePickerProps {
     locale?: string;
     id?: string;
     placeholder?: string;
-    setRangeValues?: Dispatch<SetStateAction<[Date | null, Date | null] | null>>;
-    rangeValues?: [Date | null, Date | null] | null;
+    setRangeValues?: Dispatch<SetStateAction<Array<Date | undefined>>>;
+    rangeValues?: Array<Date | undefined>;
     screenReaderCalendarCaption?: string;
     screenReaderInputCaption?: string;
-    setValue: Dispatch<SetStateAction<Date | null>>;
-    value: Date | null;
+    setValue: Dispatch<SetStateAction<Date | undefined>>;
+    value?: Date;
     calendarStartDay?: number;
 }
 
@@ -82,15 +82,15 @@ export const DatePicker = forwardRef(
                     onChange={date => {
                         if (Array.isArray(date)) {
                             const [startDate, endDate] = date;
-                            props.setRangeValues?.([startDate, endDate]);
-                            props.setValue(null);
+                            props.setRangeValues?.([startDate ?? undefined, endDate ?? undefined]);
+                            props.setValue(undefined);
                         } else {
                             if (isDate(date) && isValid(date)) {
                                 props.setValue(date as Date);
                             } else {
-                                props.setValue(null);
+                                props.setValue(undefined);
                             }
-                            props.setRangeValues?.(null);
+                            props.setRangeValues?.([]);
                         }
                     }}
                     onClickOutside={event => {
