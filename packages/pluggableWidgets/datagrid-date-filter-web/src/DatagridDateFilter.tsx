@@ -23,6 +23,7 @@ import {
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
+import { RangeDateValue } from "./components/DatePicker";
 
 interface Locale {
     [key: string]: object;
@@ -114,7 +115,7 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         calendarStartDay={firstDayOfWeek}
                         updateFilters={(
                             value: Date | undefined,
-                            rangeValues: Array<Date | undefined>,
+                            rangeValues: RangeDateValue,
                             type: DefaultFilterEnum
                         ): void => {
                             if (type === "between") {
@@ -185,7 +186,7 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
 function getFilterCondition(
     listAttribute: ListAttributeValue,
     value: Date | undefined,
-    rangeValues: Array<Date | undefined>,
+    rangeValues: RangeDateValue,
     type: DefaultFilterEnum
 ): FilterCondition | undefined {
     if (

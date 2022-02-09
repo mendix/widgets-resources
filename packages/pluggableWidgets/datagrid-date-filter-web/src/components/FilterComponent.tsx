@@ -4,7 +4,7 @@ import { FilterSelector } from "@mendix/piw-utils-internal/components/web";
 import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
 import DatePickerComponent from "react-datepicker";
-import { DatePicker } from "./DatePicker";
+import { DatePicker, RangeDateValue } from "./DatePicker";
 import classNames from "classnames";
 
 interface FilterComponentProps {
@@ -24,15 +24,13 @@ interface FilterComponentProps {
     screenReaderInputCaption?: string;
     tabIndex?: number;
     styles?: CSSProperties;
-    updateFilters?: (value: Date | undefined, rangeValues: Array<Date | undefined>, type: DefaultFilterEnum) => void;
+    updateFilters?: (value: Date | undefined, rangeValues: RangeDateValue, type: DefaultFilterEnum) => void;
 }
 
 export function FilterComponent(props: FilterComponentProps): ReactElement {
     const [type, setType] = useState<DefaultFilterEnum>(props.defaultFilter);
     const [value, setValue] = useState<Date | undefined>(undefined);
-    const [rangeValues, setRangeValues] = useState<Array<Date | undefined>>(
-        props.defaultStartDate || props.defaultEndDate ? [props.defaultStartDate, props.defaultEndDate] : []
-    );
+    const [rangeValues, setRangeValues] = useState<RangeDateValue>([props.defaultStartDate, props.defaultEndDate]);
     const pickerRef = useRef<DatePickerComponent | null>(null);
 
     useEffect(() => {

@@ -17,6 +17,8 @@ import { isDate, isValid } from "date-fns";
 import { createPortal } from "react-dom";
 import replaceAllInserter from "string.prototype.replaceall";
 
+export type RangeDateValue = [Date | undefined, Date | undefined];
+
 interface DatePickerProps {
     adjustable: boolean;
     dateFormat?: string;
@@ -24,8 +26,8 @@ interface DatePickerProps {
     locale?: string;
     id?: string;
     placeholder?: string;
-    setRangeValues?: Dispatch<SetStateAction<Array<Date | undefined>>>;
-    rangeValues?: Array<Date | undefined>;
+    setRangeValues?: Dispatch<SetStateAction<RangeDateValue>>;
+    rangeValues?: RangeDateValue;
     screenReaderCalendarCaption?: string;
     screenReaderInputCaption?: string;
     setValue: Dispatch<SetStateAction<Date | undefined>>;
@@ -90,7 +92,7 @@ export const DatePicker = forwardRef(
                             } else {
                                 props.setValue(undefined);
                             }
-                            props.setRangeValues?.([]);
+                            props.setRangeValues?.([undefined, undefined]);
                         }
                     }}
                     onClickOutside={event => {
