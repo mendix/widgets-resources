@@ -18,7 +18,7 @@ export function preview(props: CarouselPreviewProps): ReactNode {
                 {
                     id: "1" as GUID,
                     content: (
-                        <props.content.renderer caption="Carousel item: Place widgets here">
+                        <props.content.renderer caption="Carousel item content">
                             <div />
                         </props.content.renderer>
                     )
