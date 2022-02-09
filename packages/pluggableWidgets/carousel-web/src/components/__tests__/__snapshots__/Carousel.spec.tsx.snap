@@ -18,7 +18,26 @@ exports[`Carousel renders correctly 1`] = `
     />
     <div
       className="swiper-wrapper"
-    />
+    >
+      <div
+        className="swiper-slide swiper-slide-duplicate"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+      <div
+        className="swiper-slide"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+      <div
+        className="swiper-slide swiper-slide-duplicate"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -35,7 +54,26 @@ exports[`Carousel renders correctly without navigation 1`] = `
     />
     <div
       className="swiper-wrapper"
-    />
+    >
+      <div
+        className="swiper-slide swiper-slide-duplicate"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+      <div
+        className="swiper-slide"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+      <div
+        className="swiper-slide swiper-slide-duplicate"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+    </div>
   </div>
 </div>
 `;
@@ -55,7 +93,26 @@ exports[`Carousel renders correctly without pagination 1`] = `
     />
     <div
       className="swiper-wrapper"
-    />
+    >
+      <div
+        className="swiper-slide swiper-slide-duplicate"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+      <div
+        className="swiper-slide"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+      <div
+        className="swiper-slide swiper-slide-duplicate"
+        data-swiper-slide-index={0}
+      >
+        <div />
+      </div>
+    </div>
   </div>
 </div>
 `;

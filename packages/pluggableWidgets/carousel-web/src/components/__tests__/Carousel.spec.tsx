@@ -1,23 +1,19 @@
-import { createElement, ReactNode, ReactElement } from "react";
+import { createElement } from "react";
 import { Carousel, CarouselProps } from "../Carousel";
-import { ObjectItem } from "mendix";
 import renderer from "react-test-renderer";
-
-const itemWrapperFunction = () => (wrapper: (children: ReactNode) => ReactElement, item: ObjectItem) =>
-    wrapper(item.id);
+import { GUID } from "mendix";
 
 describe("Carousel", () => {
     const defaultCarouselProps: CarouselProps = {
         className: "",
-        items: [],
+        items: [{ id: "1" as GUID, content: <div /> }],
         pagination: true,
         animation: true,
         autoplay: true,
         delay: 3000,
         loop: true,
         navigation: true,
-        onClick: () => jest.fn(),
-        itemRenderer: itemWrapperFunction
+        onClick: () => jest.fn()
     };
 
     it("renders correctly", () => {

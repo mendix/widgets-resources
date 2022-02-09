@@ -1,16 +1,19 @@
-import { createElement, ReactNode, useCallback, ReactElement } from "react";
-import { ValueStatus } from "mendix";
+import { createElement, ReactNode, useCallback, ReactElement, useEffect } from "react";
+import { ValueStatus, GUID, ObjectItem } from "mendix";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { CarouselContainerProps } from "../typings/CarouselProps";
 import { Carousel as CarouselComponent } from "./components/Carousel";
 import loadingCircleSvg from "./ui/loading-circle.svg";
 import classNames from "classnames";
 import "./ui/Carousel.scss";
+import Swiper, { Navigation, Pagination, EffectFade, Autoplay } from "swiper";
 
 export function Carousel(props: CarouselContainerProps): ReactNode {
-    const { dataSource, content, showPagination, loop, tabIndex, navigation, animation, delay, autoplay } = props;
+    const { showPagination, loop, tabIndex, navigation, animation, delay, autoplay } = props;
     const onClick = useCallback(() => executeAction(props.onClickAction), [props.onClickAction]);
-    const itemRenderer = useCallback((renderWrapper, item) => renderWrapper(content?.get(item)), [content]);
+
+    useEffect(() => Swiper.use([Navigation, Pagination, EffectFade, Autoplay]), []);
+
     const renderCarousel = (): ReactElement => {
         return (
             <CarouselComponent
@@ -22,8 +25,12 @@ export function Carousel(props: CarouselContainerProps): ReactNode {
                 autoplay={autoplay}
                 delay={delay}
                 navigation={navigation}
-                itemRenderer={itemRenderer}
-                items={dataSource?.items ?? []}
+                items={
+                    props.dataSource?.items?.map((item: ObjectItem) => ({
+                        id: item.id as GUID,
+                        content: props.content?.get(item)
+                    })) ?? []
+                }
                 onClick={onClick}
             />
         );
@@ -35,5 +42,6 @@ export function Carousel(props: CarouselContainerProps): ReactNode {
             </div>
         );
     };
-    return dataSource?.status !== ValueStatus.Available ? renderLoading() : renderCarousel();
+
+    return props.dataSource?.status !== ValueStatus.Available ? renderLoading() : renderCarousel();
 }

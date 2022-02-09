@@ -1,7 +1,7 @@
-import { createElement, ReactNode, ReactElement, useEffect } from "react";
-import { ObjectItem } from "mendix";
+import { createElement, ReactNode, ReactElement } from "react";
+import { GUID } from "mendix";
 import classNames from "classnames";
-import Swiper, { SwiperOptions, Navigation, Pagination, EffectFade, Autoplay } from "swiper";
+import { SwiperOptions } from "swiper";
 import { Swiper as SwiperReact, SwiperSlide } from "swiper/react";
 
 export interface CarouselProps {
@@ -13,26 +13,13 @@ export interface CarouselProps {
     navigation: boolean;
     className: string;
     tabIndex?: number | undefined;
-    onClick: () => void;
-    items: ObjectItem[];
-    itemRenderer: (renderWrapper: (children: ReactNode) => ReactElement, item: ObjectItem) => ReactNode;
+    onClick?: () => void;
+    items: Array<{ id: GUID; content?: ReactNode }>;
 }
 
 export function Carousel(props: CarouselProps): ReactElement {
-    const {
-        items,
-        pagination,
-        loop,
-        animation,
-        autoplay,
-        delay,
-        navigation,
-        className,
-        tabIndex,
-        itemRenderer,
-        onClick
-    } = props;
-    useEffect(() => Swiper.use([Navigation, Pagination, EffectFade, Autoplay]), []);
+    const { items, pagination, loop, animation, autoplay, delay, navigation, className, tabIndex, onClick } = props;
+
     const options: SwiperOptions = {
         slidesPerView: 1,
         centeredSlides: true,
@@ -48,10 +35,9 @@ export function Carousel(props: CarouselProps): ReactElement {
     return (
         <div className={classNames(className, "widget-carousel")} tabIndex={tabIndex}>
             <SwiperReact {...options} onClick={onClick}>
-                {itemRenderer &&
-                    items?.map((item: ObjectItem) =>
-                        itemRenderer((children: ReactNode) => <SwiperSlide key={item.id}>{children}</SwiperSlide>, item)
-                    )}
+                {items?.map(item => (
+                    <SwiperSlide key={item.id}>{item.content}</SwiperSlide>
+                ))}
             </SwiperReact>
         </div>
     );
