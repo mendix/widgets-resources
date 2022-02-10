@@ -3,7 +3,9 @@ import { DefaultFilterEnum } from "../../typings/DatagridDateFilterProps";
 
 export type DefaultFilterValue = {
     type: DefaultFilterEnum;
-    value: Date;
+    value?: Date;
+    startDate?: Date;
+    endDate?: Date;
 };
 
 export function translateFilters(filters?: FilterValue[]): DefaultFilterValue | undefined {
@@ -36,6 +38,12 @@ export function translateFilters(filters?: FilterValue[]): DefaultFilterValue | 
                 type = "equal";
             } else if (filterStart.type === "<" && filterEnd.type === ">=") {
                 type = "notEqual";
+            } else if (filterStart.type === ">=" && filterEnd.type === "<=") {
+                return {
+                    type: "between",
+                    startDate: filterStart.value,
+                    endDate: filterEnd.value
+                };
             }
             return {
                 type,

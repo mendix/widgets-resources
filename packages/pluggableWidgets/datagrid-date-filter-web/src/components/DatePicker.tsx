@@ -17,16 +17,21 @@ import { isDate, isValid } from "date-fns";
 import { createPortal } from "react-dom";
 import replaceAllInserter from "string.prototype.replaceall";
 
+export type RangeDateValue = [Date | undefined, Date | undefined];
+
 interface DatePickerProps {
     adjustable: boolean;
     dateFormat?: string;
+    enableRange?: boolean;
     locale?: string;
     id?: string;
     placeholder?: string;
+    setRangeValues?: Dispatch<SetStateAction<RangeDateValue>>;
+    rangeValues?: RangeDateValue;
     screenReaderCalendarCaption?: string;
     screenReaderInputCaption?: string;
-    setValue: Dispatch<SetStateAction<Date | null>>;
-    value: Date | null;
+    setValue: Dispatch<SetStateAction<Date | undefined>>;
+    value?: Date;
     calendarStartDay?: number;
 }
 
@@ -64,31 +69,40 @@ export const DatePicker = forwardRef(
                     {props.screenReaderInputCaption}
                 </span>
                 <DatePickerComponent
-                    adjustDateOnChange
                     allowSameDay={false}
                     ariaLabelledBy={`${props.id}-label`}
                     autoFocus={false}
+                    calendarStartDay={props.calendarStartDay}
                     className={classNames("form-control", { "filter-input": props.adjustable })}
                     dateFormat={dateFormats}
                     disabledKeyboardNavigation={false}
                     dropdownMode="select"
                     enableTabLoop
+                    endDate={props.enableRange ? props.rangeValues?.[1] : undefined}
+                    isClearable={props.enableRange}
                     locale={props.locale}
-                    calendarStartDay={props.calendarStartDay}
                     onChange={date => {
-                        if (isDate(date) && isValid(date)) {
-                            props.setValue(date as Date);
+                        if (Array.isArray(date)) {
+                            const [startDate, endDate] = date;
+                            props.setRangeValues?.([startDate ?? undefined, endDate ?? undefined]);
+                            props.setValue(undefined);
                         } else {
-                            props.setValue(null);
+                            if (isDate(date) && isValid(date)) {
+                                props.setValue(date as Date);
+                            } else {
+                                props.setValue(undefined);
+                            }
+                            props.setRangeValues?.([undefined, undefined]);
                         }
                     }}
-                    open={open}
                     onClickOutside={event => {
                         if (!buttonRef.current || buttonRef.current.contains(event.target as Node)) {
                             return;
                         }
                         setOpen(false);
                     }}
+                    open={open}
+                    onInputClick={() => setOpen(true)}
                     placeholderText={props.placeholder}
                     popperPlacement="bottom-end"
                     popperModifiers={[
@@ -99,16 +113,19 @@ export const DatePicker = forwardRef(
                             }
                         }
                     ]}
+                    portalId={id}
                     preventOpenOnFocus
+                    readOnly={props.enableRange}
                     ref={ref}
-                    selected={props.value}
+                    startDate={props.enableRange ? props.rangeValues?.[0] : undefined}
+                    selected={props.enableRange ? undefined : props.value}
+                    selectsRange={props.enableRange}
                     shouldCloseOnSelect={false}
                     showMonthDropdown
                     showPopperArrow={false}
                     showYearDropdown
                     strictParsing
                     useWeekdaysShort={false}
-                    portalId={id}
                 />
                 <button
                     aria-controls={id}

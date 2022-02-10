@@ -23,6 +23,7 @@ import {
 import { FilterCondition } from "mendix/filters";
 import { ListAttributeValue } from "mendix";
 import { translateFilters } from "./utils/filters";
+import { RangeDateValue } from "./components/DatePicker";
 
 interface Locale {
     [key: string]: object;
@@ -99,6 +100,8 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         adjustable={props.adjustable}
                         className={props.class}
                         defaultFilter={defaultFilter?.type ?? props.defaultFilter}
+                        defaultEndDate={defaultFilter?.endDate ?? props.defaultEndDate?.value}
+                        defaultStartDate={defaultFilter?.startDate ?? props.defaultStartDate?.value}
                         defaultValue={defaultFilter?.value ?? props.defaultValue?.value}
                         dateFormat={patterns.date}
                         locale={language}
@@ -110,16 +113,45 @@ export default function DatagridDateFilter(props: DatagridDateFilterContainerPro
                         styles={props.style}
                         tabIndex={props.tabIndex}
                         calendarStartDay={firstDayOfWeek}
-                        updateFilters={(value: Date | null, type: DefaultFilterEnum): void => {
-                            if (
+                        updateFilters={(
+                            value: Date | undefined,
+                            rangeValues: RangeDateValue,
+                            type: DefaultFilterEnum
+                        ): void => {
+                            if (type === "between") {
+                                const [startDate, endDate] = rangeValues;
+                                let shouldExecuteOnChange = false;
+                                if (
+                                    (startDate &&
+                                        props.startDateAttribute?.value &&
+                                        !isEqual(props.startDateAttribute.value, startDate)) ||
+                                    startDate !== props.startDateAttribute?.value
+                                ) {
+                                    props.startDateAttribute?.setValue(startDate);
+                                    shouldExecuteOnChange = true;
+                                }
+                                if (
+                                    (endDate &&
+                                        props.endDateAttribute?.value &&
+                                        !isEqual(props.endDateAttribute.value, endDate)) ||
+                                    endDate !== props.endDateAttribute?.value
+                                ) {
+                                    props.endDateAttribute?.setValue(endDate);
+                                    shouldExecuteOnChange = true;
+                                }
+                                if (shouldExecuteOnChange) {
+                                    props.onChange?.execute();
+                                }
+                            } else if (
                                 (value && props.valueAttribute?.value && !isEqual(props.valueAttribute.value, value)) ||
-                                (value || undefined) !== props.valueAttribute?.value
+                                value !== props.valueAttribute?.value
                             ) {
-                                props.valueAttribute?.setValue(value ?? undefined);
+                                props.valueAttribute?.setValue(value);
                                 props.onChange?.execute();
                             }
+
                             const conditions = attributes
-                                ?.map(attribute => getFilterCondition(attribute, value, type))
+                                ?.map(attribute => getFilterCondition(attribute, value, rangeValues, type))
                                 .filter((filter): filter is FilterCondition => filter !== undefined);
                             filterDispatcher({
                                 getFilterCondition: () =>
@@ -153,15 +185,31 @@ function getAttributeTypeErrorMessage(type?: string): string | null {
 
 function getFilterCondition(
     listAttribute: ListAttributeValue,
-    value: Date | null,
+    value: Date | undefined,
+    rangeValues: RangeDateValue,
     type: DefaultFilterEnum
 ): FilterCondition | undefined {
-    if (!listAttribute || !listAttribute.filterable || !value) {
+    if (
+        !listAttribute ||
+        !listAttribute.filterable ||
+        (type !== "between" && !value) ||
+        (type === "between" && (!rangeValues || !rangeValues[0] || !rangeValues[1]))
+    ) {
         return undefined;
     }
 
     const filterAttribute = attribute(listAttribute.id);
-    const dateValue = changeTimeToMidnight(value);
+
+    if (type === "between") {
+        const startDate = changeTimeToMidnight(rangeValues![0]!);
+        const endDate = changeTimeToMidnight(rangeValues![1]!);
+        return and(
+            greaterThanOrEqual(filterAttribute, literal(startDate)),
+            lessThanOrEqual(filterAttribute, literal(new Date(addDays(endDate, 1).getTime() - 1)))
+        );
+    }
+
+    const dateValue = changeTimeToMidnight(value!);
     switch (type) {
         case "greater":
             // > Day +1 at midnight -1ms
