@@ -1,97 +1,84 @@
-import page from "../pages/page";
-import mapPage from "../pages/baseMap.page";
-
 describe("Here Maps", () => {
+    const browserName = Cypress.browser.name;
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
+        });
+    };
+
+    afterEach(() => cleanMendixSession());
+
     describe("rendering", () => {
-        beforeAll(() => {
-            page.open("p/here-static");
+        beforeEach(() => {
+            cy.visit("p/here-static");
         });
 
         it("compares with a screenshot baseline and checks if basemap is correct", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
-            const screenshotElem = $(".widget-maps");
-            screenshotElem.waitForDisplayed({ timeout: 5000 });
-            browser.pause(3000);
-            browser.saveElement(screenshotElem, "hereMaps");
-            expect(browser.checkElement(screenshotElem, "hereMaps")).toBeLessThan(1);
+            cy.get(".widget-maps").should("be.visible");
+            cy.get(".widget-maps").wait(3000).compareSnapshot(`hereMaps-${browserName}`, 0.5);
         });
     });
 
     describe("mixed rendering", () => {
-        beforeAll(() => {
-            page.open("p/here");
+        beforeEach(() => {
+            cy.visit("p/here");
         });
 
         it("checks the rendering", () => {
-            mapPage.leafletMap.waitForDisplayed();
-
-            expect(mapPage.leafletMap).toBeDefined();
+            cy.get(".widget-leaflet-maps").should("be.visible");
         });
 
-        xit("check the number of locations", () => {
-            mapPage.leafletMap.waitForDisplayed();
-
-            const markers = mapPage.leafletMarkers;
-
-            expect(markers.length).toBe(3);
+        it("check the number of locations", () => {
+            cy.get(".widget-leaflet-maps").should("be.visible");
+            cy.wait(1000);
+            cy.get(".leaflet-marker-icon").should("have.length", 3);
         });
     });
 
     describe("static locations", () => {
-        beforeAll(() => {
-            page.open("p/here-static");
+        beforeEach(() => {
+            cy.visit("p/here-static");
         });
 
         it("checks the rendering", () => {
-            mapPage.leafletMap.waitForDisplayed();
-
-            expect(mapPage.leafletMap).toBeDefined();
+            cy.get(".widget-leaflet-maps").should("be.visible");
         });
 
         it("check the number of locations", () => {
-            mapPage.leafletMap.waitForDisplayed();
-
-            const markers = mapPage.leafletMarkers;
-
-            expect(markers.length).toBe(1);
+            cy.get(".widget-leaflet-maps").should("be.visible");
+            cy.wait(1000);
+            cy.get(".leaflet-marker-icon").should("have.length", 1);
         });
     });
 
     describe("datasource locations", () => {
-        beforeAll(() => {
-            page.open("p/here-datasource");
+        beforeEach(() => {
+            cy.visit("p/here-datasource");
         });
 
         it("checks the rendering", () => {
-            mapPage.leafletMap.waitForDisplayed();
-
-            expect(mapPage.leafletMap).toBeDefined();
+            cy.get(".widget-leaflet-maps").should("be.visible");
         });
 
         it("check the number of locations", () => {
-            mapPage.leafletMap.waitForDisplayed();
-
-            const markers = mapPage.leafletMarkers;
-
-            expect(markers.length).toBe(2);
+            cy.get(".widget-leaflet-maps").should("be.visible");
+            cy.wait(1000);
+            cy.get(".leaflet-marker-icon").should("have.length", 2);
         });
     });
 
     describe("on click", () => {
-        beforeAll(() => {
-            page.open("p/here-onclick");
+        beforeEach(() => {
+            cy.visit("p/here-onclick");
         });
 
         it("should click on first marker", () => {
-            mapPage.leafletMap.waitForDisplayed();
-            const marker = mapPage.leafletFirstMarker;
-            marker.waitForDisplayed();
-
-            browser.execute(e => e.click(), marker);
-
-            mapPage.dialog.waitForDisplayed();
-
-            expect(mapPage.dialog.getText()).toBe("Clicked on static marker");
+            cy.get(".widget-leaflet-maps").should("be.visible");
+            cy.wait(1000);
+            cy.get(".leaflet-marker-icon").first().click({ force: true });
+            cy.wait(1000);
+            cy.get(".modal-body.mx-dialog-body").should("be.visible").should("have.text", "Clicked on static marker");
         });
     });
 });

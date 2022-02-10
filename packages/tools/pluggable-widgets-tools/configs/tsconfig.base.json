@@ -5,7 +5,7 @@
         "module": "esnext",
         "target": "es6",
         "lib": ["esnext", "dom"],
-        "types": ["jest", "node"],
+        "types": ["jest", "node", "cypress"],
         "moduleResolution": "node",
         "declaration": false,
         "noLib": false,
