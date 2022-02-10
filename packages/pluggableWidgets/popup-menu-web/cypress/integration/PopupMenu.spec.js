@@ -1,8 +1,8 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
+import page from "../../../../../configs/e2e/src/pages/page";
 
 describe("Popup-menu-web", () => {
     beforeEach(() => {
-        page.open(); // resets page
+        cy.visit("/"); // resets page
     });
 
     describe("using basic option", () => {
@@ -17,6 +17,7 @@ describe("Popup-menu-web", () => {
             expect(browser.checkElement(popupmenu, "popUpMenuTopLeft", { removeElements: [sprintrFeedback] })).toEqual(
                 0
             );
+            cy.get(".widget-maps").wait(3000).compareSnapshot(`googleMaps-${browserName}`, 0.5);
         });
         it("compares with a screenshot baseline and checks if popupmenu is rendered in the left position", () => {
             browser.setWindowRect(0, 0, 1200, 900);
