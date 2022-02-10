@@ -149,7 +149,7 @@ export const Radio = ({ label, children, disabled, index, onChange }: RadioProps
                 disabled={disabled}
                 id={radioId}
                 onBlur={() => setFocus(false)}
-                onClick={() => onChange(index)}
+                onChange={() => onChange(index)}
                 onFocus={() => setFocus(true)}
                 onKeyDown={handleKeyDown}
                 tabIndex={(currentIndex === index || (currentIndex === -1 && isFirstItem)) && !disabled ? 0 : -1}
