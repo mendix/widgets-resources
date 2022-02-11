@@ -1,55 +1,41 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-
 describe("timeline-web", () => {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-    beforeAll(() => {
-        page.open();
+    const browserName = Cypress.browser.name;
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
+        });
+    };
+
+    beforeEach(() => {
+        cy.visit("/"); // resets page
     });
+
+    afterEach(() => cleanMendixSession());
 
     describe("option: basic", () => {
         it("compares with a screenshot baseline and checks if all timeline elements are rendered as expected", () => {
-            browser.setWindowRect(0, 0, 1290, 900);
-            const button = page.getWidget("basicTimelinePage");
-            button.waitForDisplayed({ timeout: 5000 });
-            button.click();
-            const timeline = page.getWidget("timelineGrids");
-            browser.saveElement(timeline, "timelineBasic");
-
-            expect(browser.checkElement(timeline, "timelineBasic")).toEqual(0);
+            cy.get(".mx-name-basicTimelinePage").click();
+            cy.wait(1000);
+            cy.get(".mx-name-timelineGrids").compareSnapshot(`timelineBasic-${browserName}`, 0.1);
         });
         it("shows a message when event onclick is called", () => {
-            page.open();
-            const button = page.getWidget("basicTimelinePage");
-            button.waitForDisplayed();
-            button.click();
-            const timeline = page.getElement(".mx-name-timelineBasic");
-            const item = page.getElement(".clickable", timeline);
-            item.click();
-            const dialog = page.modalDialog;
-            dialog.waitForDisplayed();
-
-            expect(dialog.getText()).toContain("Event called");
+            cy.get(".mx-name-basicTimelinePage").click();
+            cy.wait(1000);
+            cy.get(".mx-name-timelineBasic .clickable").first().click();
+            cy.wait(1000);
+            cy.get(".modal-dialog .modal-body").should("be.visible").and("contain.text", "Event called");
         });
     });
     describe("option: custom", () => {
         it("compares with a screenshot baseline and checks if all custom timeline elements are rendered as expected", () => {
-            page.open();
-            browser.setWindowRect(0, 0, 1290, 1200);
-            const timeline = page.getWidget("customTimelineLayoutGrid");
-            timeline.waitForDisplayed();
-            browser.saveElement(timeline, "timelineCustom");
-
-            expect(browser.checkElement(timeline, "timelineCustom")).toEqual(0);
+            cy.get(".mx-name-customTimelineLayoutGrid").should("be.visible");
+            cy.get(".mx-name-customTimelineLayoutGrid").compareSnapshot(`timelineCustom-${browserName}`, 0.1);
         });
         it("shows a message when event onclick is called", () => {
-            const timeline = page.getElement(".mx-name-timelineCustom");
-            const item = page.getElement(".mx-name-clickMeTitle", timeline);
-            item.waitForDisplayed();
-            item.click();
-            const dialog = page.modalDialog;
-            dialog.waitForDisplayed();
-
-            expect(dialog.getText()).toContain("Event called");
+            cy.get(".mx-name-timelineCustom .mx-name-clickMeTitle").first().click();
+            cy.wait(1000);
+            cy.get(".modal-dialog .modal-body").should("be.visible").and("contain.text", "Event called");
         });
     });
 });
