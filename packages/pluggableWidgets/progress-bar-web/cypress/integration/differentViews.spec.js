@@ -47,10 +47,6 @@ describe("Progress Bar", () => {
     it("renders in a template grid", () => {
         cy.visit("p/templateGrid");
 
-        // cy.get(".mx-name-textBox1").then(element => {
-        //     const textBoxContent = element.text();
-        //     cy.get(".widget-progress-bar.mx-name-progressBar1 .progress-bar").should("have.text", textBoxContent);
-        // });
         cy.get(".mx-name-textBox1 .form-control-static").then(element => {
             const textBoxContent = element.text();
             cy.get(".widget-progress-bar.mx-name-progressBar1 .progress-bar").should("have.text", textBoxContent);
