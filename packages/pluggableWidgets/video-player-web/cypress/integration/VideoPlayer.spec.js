@@ -1,123 +1,147 @@
-import gridpage from "../pages/grid.page";
-import tabpage from "../pages/tab.page";
-import errorpage from "../pages/error.page";
-import page from "../../../../../../configs/e2e/src/pages/page";
+describe("Video Player", () => {
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
+        });
+    };
 
-describe("Grid page", () => {
-    it("renders youtube video", () => {
-        gridpage.open();
-        gridpage.youtube.waitForDisplayed();
-        const youtubePlayer = gridpage.youtube.getHTML();
+    afterEach(() => cleanMendixSession());
 
-        expect(youtubePlayer).toContain('class="widget-video-player-iframe"');
-        expect(youtubePlayer).toContain('src="https://www.youtube.com');
-        expect(youtubePlayer).toContain("&amp;autoplay=1");
-        expect(youtubePlayer).toContain("&amp;controls=0");
-        expect(youtubePlayer).toContain("&amp;muted=0");
-        expect(youtubePlayer).toContain("&amp;loop=0");
+    before(() => {
+        Cypress.on("uncaught:exception", err => !err.message.includes("ResizeObserver loop limit exceeded"));
     });
 
-    it("renders vimeo video", () => {
-        gridpage.vimeo.waitForDisplayed();
-        const youtubePlayer = gridpage.vimeo.getHTML();
+    describe("Grid page", () => {
+        it("renders youtube video", () => {
+            cy.visit("/p/grid");
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayer1.size-box iframe")
+                .should("be.visible")
+                .and("have.class", "widget-video-player-iframe")
+                .invoke("attr", "src")
+                .should("contain", "youtube.com")
+                .and("contain", "autoplay=1")
+                .and("contain", "controls=0")
+                .and("contain", "muted=0")
+                .and("contain", "loop=0");
+        });
 
-        expect(youtubePlayer).toContain('class="widget-video-player-iframe"');
-        expect(youtubePlayer).toContain('src="https://player.vimeo.com');
-        expect(youtubePlayer).toContain("&amp;autoplay=1");
-        expect(youtubePlayer).toContain("&amp;muted=0");
-        expect(youtubePlayer).toContain("&amp;loop=0");
-    });
-});
-
-describe("Tab page", () => {
-    it("renders youtube video", () => {
-        tabpage.open();
-        tabpage.youtubeTab.waitForDisplayed();
-        tabpage.youtubeTab.click();
-        tabpage.youtube.waitForDisplayed();
-        const youtubePlayer = tabpage.youtube.getHTML();
-
-        expect(youtubePlayer).toContain('class="widget-video-player-iframe"');
-        expect(youtubePlayer).toContain('src="https://www.youtube.com');
-    });
-
-    it("renders vimeo video", () => {
-        tabpage.vimeoTab.waitForDisplayed();
-        tabpage.vimeoTab.click();
-        tabpage.vimeo.waitForDisplayed();
-        const vimeoPlayer = tabpage.vimeo.getHTML();
-
-        expect(vimeoPlayer).toContain('class="widget-video-player-iframe"');
-        expect(vimeoPlayer).toContain('src="https://player.vimeo.com');
+        it("renders vimeo video", () => {
+            cy.visit("/p/grid");
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayer2.size-box iframe")
+                .should("be.visible")
+                .and("have.class", "widget-video-player-iframe")
+                .invoke("attr", "src")
+                .should("contain", "vimeo.com")
+                .and("contain", "autoplay=1")
+                .and("contain", "muted=0")
+                .and("contain", "loop=0");
+        });
     });
 
-    it("renders dailymotion video", () => {
-        tabpage.dailymotionTab.waitForDisplayed();
-        tabpage.dailymotionTab.click();
-        tabpage.dailymotion.waitForDisplayed();
-        const dailymotionPlayer = tabpage.dailymotion.getHTML();
+    describe("Tab page", () => {
+        it("renders youtube video", () => {
+            cy.visit("/p/tabs");
+            cy.get(".mx-name-tabPage1").should("be.visible").click();
+            cy.wait(1000);
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayer1.size-box iframe")
+                .should("be.visible")
+                .and("have.class", "widget-video-player-iframe")
+                .invoke("attr", "src")
+                .should("contain", "youtube.com");
+        });
 
-        expect(dailymotionPlayer).toContain('class="widget-video-player-iframe"');
-        expect(dailymotionPlayer).toContain('src="https://www.dailymotion.com');
+        it("renders vimeo video", () => {
+            cy.visit("/p/tabs");
+            cy.get(".mx-name-tabPage5").should("be.visible").click();
+            cy.wait(1000);
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayer5.size-box iframe")
+                .should("be.visible")
+                .and("have.class", "widget-video-player-iframe")
+                .invoke("attr", "src")
+                .should("contain", "vimeo.com");
+        });
+
+        it("renders dailymotion video", () => {
+            cy.visit("/p/tabs");
+            cy.get(".mx-name-tabPage4").should("be.visible").click();
+            cy.wait(1000);
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayer4.size-box iframe")
+                .should("be.visible")
+                .and("have.class", "widget-video-player-iframe")
+                .invoke("attr", "src")
+                .should("contain", "dailymotion.com");
+        });
+
+        it("renders html5 video", () => {
+            cy.visit("/p/tabs");
+            cy.get(".mx-name-tabPage3").should("be.visible").click();
+            cy.wait(1000);
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayer3.size-box video")
+                .should("be.visible")
+                .and("have.class", "widget-video-player-html5")
+                .find("source")
+                .first()
+                .invoke("attr", "src")
+                .should("contain", "file_example_MP4_640_3MG.mp4");
+        });
     });
 
-    it("renders html5 video", () => {
-        tabpage.html5Tab.waitForDisplayed();
-        tabpage.html5Tab.click();
-        tabpage.html5.waitForDisplayed();
-        const html5Player = tabpage.html5.getHTML();
-
-        expect(html5Player).toContain('class="widget-video-player-html5"');
-        expect(html5Player).toContain("<source src=");
-        expect(html5Player).toContain("file_example_MP4_640_3MG.mp4");
+    describe("Error page", () => {
+        it("renders no content div", () => {
+            cy.visit("/p/errors");
+            cy.get(".widget-video-player.widget-video-player-container.mx-name-videoPlayerNoContent.size-box video")
+                .find("source")
+                .should("not.be.visible");
+        });
     });
-});
 
-describe("Error page", () => {
-    it("renders no content div", () => {
-        errorpage.open();
-        errorpage.noContent.waitForDisplayed();
-        const playerError = errorpage.noContent.getHTML();
-        expect(playerError).not.toBeNull();
+    describe("External video", () => {
+        it("renders a poster", () => {
+            cy.visit("p/external");
+
+            cy.get(".widget-video-player")
+                .wait(3000)
+                .compareSnapshot(`videoPlayerExternalPoster-${Cypress.browser.name}`, 0.15);
+        });
     });
-});
 
-describe("External video", () => {
-    it("renders a poster", () => {
-        page.open("p/external");
-        browser.setWindowRect(0, 0, 1200, 900);
-        const screenshotElem = $(".widget-video-player");
-        screenshotElem.waitForDisplayed({ timeout: 5000 });
-        browser.saveElement(screenshotElem, "videoPlayerExternalPoster");
-        expect(browser.checkElement(screenshotElem, "videoPlayerExternalPoster")).toBeLessThan(0.15);
-    });
-});
+    describe("Video aspect ratio", () => {
+        it("renders video aspect ratio correctly", () => {
+            cy.visit("p/aspectRatio");
 
-describe("Video aspect ratio", () => {
-    it("renders video aspect ratio correctly", () => {
-        page.open("p/aspectRatio");
-        const videoElement = $(".mx-name-videoPlayer1");
-        videoElement.waitForDisplayed({ timeout: 5000 });
-        browser.pause(2000);
-        const aspectRatio = Number(videoElement.getSize("width") / videoElement.getSize("height"));
-        // 16:9
-        expect(aspectRatio).toBeCloseTo(Number(16 / 9), 0.1);
+            cy.get(".mx-name-videoPlayer1").should("be.visible");
+            cy.wait(2000);
+            cy.get(".mx-name-videoPlayer1").then(el => {
+                const [videoElement] = el;
+                const { width, height } = videoElement.getBoundingClientRect();
+                const aspectRatio = Number(width / height);
+                // eslint-disable-next-line jest/valid-expect
+                expect(aspectRatio).to.be.closeTo(16 / 9, 0.1);
+            });
 
-        const secondTab = $(".mx-name-tabPage2");
-        const videoElement2 = $(".mx-name-videoPlayer3");
-        secondTab.click();
-        videoElement2.waitForDisplayed({ timeout: 5000 });
-        browser.pause(2000);
-        const aspectRatio2 = Number(videoElement2.getSize("width") / videoElement2.getSize("height"));
-        // 3:2
-        expect(aspectRatio2).toBeCloseTo(Number(3 / 2), 0.1);
+            cy.get(".mx-name-tabPage2").should("be.visible").click();
+            cy.wait(1000);
+            cy.get(".mx-name-videoPlayer3").should("be.visible");
+            cy.wait(2000);
+            cy.get(".mx-name-videoPlayer3").then(el => {
+                const [videoElement] = el;
+                const { width, height } = videoElement.getBoundingClientRect();
+                const aspectRatio = Number(width / height);
+                // eslint-disable-next-line jest/valid-expect
+                expect(aspectRatio).to.be.closeTo(3 / 2, 0.1);
+            });
 
-        const thirdTab = $(".mx-name-tabPage3");
-        const videoElement3 = $(".mx-name-videoPlayer5");
-        thirdTab.click();
-        videoElement3.waitForDisplayed({ timeout: 5000 });
-        browser.pause(2000);
-        // 1:1
-        expect(videoElement3.getSize("width")).toBe(videoElement3.getSize("height"));
+            cy.get(".mx-name-tabPage3").should("be.visible").click();
+            cy.wait(1000);
+            cy.get(".mx-name-videoPlayer5").should("be.visible");
+            cy.wait(2000);
+            cy.get(".mx-name-videoPlayer5").then(el => {
+                const [videoElement] = el;
+                const { width, height } = videoElement.getBoundingClientRect();
+                // eslint-disable-next-line jest/valid-expect
+                expect(width).to.be.equal(height);
+            });
+        });
     });
 });
