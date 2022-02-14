@@ -1,85 +1,51 @@
-import page from "../../../../../../configs/e2e/src/pages/page";
-
 describe("tree-node-web", () => {
+    const browserName = Cypress.browser.name;
+    const cleanMendixSession = () => {
+        cy.window().then(window => {
+            // Cypress opens a new session for every test, so it exceeds mendix license limit of 5 sessions, we need to logout after each test.
+            window.mx.session.logout();
+        });
+    };
+
     beforeEach(() => {
-        page.open(); // resets page
+        cy.visit("/");
     });
+
+    afterEach(() => cleanMendixSession());
+
+    function getTreeNodeHeaders() {
+        return cy.get(".mx-name-treeNode1 .widget-tree-node-branch-header-value");
+    }
 
     describe("capabilities: expand", () => {
         it("expands a node", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeNode1");
-
-            treeView.waitForDisplayed({ timeout: 5000 });
-
-            const firstNode = page.waitForElement(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
-
-            firstNode.click();
-            browser.pause(1000);
-            browser.saveElement(treeView, "treeViewExpanded");
-
-            expect(browser.checkElement(treeView, "treeViewExpanded")).toEqual(0);
+            getTreeNodeHeaders().first().click();
+            cy.get(".mx-name-treeNode1").wait(1000).compareSnapshot(`treeNodeExpanded-${browserName}`, 0.1);
         });
 
         it("expands multiple nodes", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeNode1");
-
-            treeView.waitForDisplayed({ timeout: 5000 });
-
-            const treeNode = page.waitForElements(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
-
-            treeNode[0].click();
-            treeNode[1].click();
-
-            const innerTreeNode = page.waitForElements(".mx-name-treeNode2 .widget-tree-node-branch-header-value");
-
-            innerTreeNode[4].click();
-            browser.pause(1000);
-            browser.saveElement(treeView, "treeViewMultipleExpanded");
-
-            expect(browser.checkElement(treeView, "treeViewMultipleExpanded")).toEqual(0);
+            getTreeNodeHeaders().eq(1).click();
+            getTreeNodeHeaders().first().click();
+            cy.get(".mx-name-treeNode1").wait(1000).compareSnapshot(`treeNodeMultipleExpanded-${browserName}`, 0.1);
         });
     });
 
     describe("capabilities: collapse", () => {
         it("collapses a node", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeNode1");
-
-            treeView.waitForDisplayed({ timeout: 5000 });
-
-            const firstNode = page.waitForElement(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
-
-            firstNode.click();
-            firstNode.click();
-            browser.pause(1000);
-            browser.saveElement(treeView, "treeViewCollapsed");
-
-            expect(browser.checkElement(treeView, "treeViewCollapsed")).toEqual(0);
+            getTreeNodeHeaders().first().click();
+            getTreeNodeHeaders().first().click();
+            cy.get(".mx-name-treeNode1").wait(1000).compareSnapshot(`treeNodeCollapsed-${browserName}`, 0.1);
         });
 
         it("collapses multiple nodes", () => {
-            browser.setWindowRect(0, 0, 1200, 900);
-            const treeView = page.getWidget("treeNode1");
-
-            treeView.waitForDisplayed({ timeout: 5000 });
-
-            const treeNode = page.waitForElements(".mx-name-treeNode1 .widget-tree-node-branch-header-value", treeView);
-
-            treeNode[0].click();
-            treeNode[1].click();
-
-            const innerTreeNode = page.waitForElements(".mx-name-treeNode2 .widget-tree-node-branch-header-value");
-
-            innerTreeNode[4].click();
-            innerTreeNode[4].click();
-            treeNode[1].click();
-            treeNode[0].click();
-            browser.pause(1000);
-            browser.saveElement(treeView, "treeViewMultipleCollapsed");
-
-            expect(browser.checkElement(treeView, "treeViewMultipleCollapsed")).toEqual(0);
+            getTreeNodeHeaders().eq(1).click();
+            getTreeNodeHeaders().first().click();
+            getTreeNodeHeaders().eq(11).click();
+            getTreeNodeHeaders().eq(11).click();
+            getTreeNodeHeaders().first().click();
+            // Second header has become the 5th cuz first header was opened and introduces 3 headers.
+            getTreeNodeHeaders().eq(4).click();
+            cy.get(".mx-name-treeNode1").wait(1000).compareSnapshot(`treeNodeMultipleCollapsed-${browserName}`, 0.1);
         });
     });
 });
