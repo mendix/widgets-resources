@@ -6,7 +6,7 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    if (!values.autoplay && !values.loop) {
+    if (!values.autoplay) {
         hidePropertiesIn(defaultProperties, values, ["delay"]);
     }
     if (platform === "web") {
