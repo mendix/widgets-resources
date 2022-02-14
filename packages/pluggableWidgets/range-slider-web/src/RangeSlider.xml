@@ -27,6 +27,10 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="General">
+                <property key="advanced" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
+                </property>
                 <property key="minValueType" type="enumeration" defaultValue="static">
                     <caption>Minimum value type</caption>
                     <description />

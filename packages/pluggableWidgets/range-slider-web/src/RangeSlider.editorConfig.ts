@@ -32,6 +32,26 @@ const keysToHideBySizeType: Record<StepSizeTypeEnum, Array<keyof RangeSliderPrev
     expression: ["stepValue", "stepAttribute"]
 };
 
+const keysToHideOnDesktop: Array<keyof RangeSliderPreviewProps> = ["advanced"];
+
+export const advancedOptionKeys: Array<keyof RangeSliderPreviewProps> = [
+    "stepSizeType",
+    "stepValue",
+    "stepAttribute",
+    "expressionStepSize",
+    "showTooltip",
+    "tooltipTypeLower",
+    "tooltipLower",
+    "tooltipTypeUpper",
+    "tooltipUpper",
+    "tooltipAlwaysVisible",
+    "noOfMarkers",
+    "decimalPlaces",
+    "orientation",
+    "height",
+    "heightUnit"
+];
+
 export function getProperties(
     values: RangeSliderPreviewProps,
     defaultProperties: Properties,
@@ -63,7 +83,12 @@ export function getProperties(
     }
 
     if (platform === "web") {
+        if (!values.advanced) {
+            hidePropertiesIn(defaultProperties, values, advancedOptionKeys);
+        }
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertiesIn(defaultProperties, values, keysToHideOnDesktop);
     }
 
     return defaultProperties;
