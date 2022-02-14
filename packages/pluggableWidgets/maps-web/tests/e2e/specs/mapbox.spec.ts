@@ -13,7 +13,7 @@ describe("Mapbox Maps", () => {
             screenshotElem.waitForDisplayed({ timeout: 5000 });
             browser.pause(3000);
             browser.saveElement(screenshotElem, "mapboxMaps");
-            expect(browser.checkElement(screenshotElem, "mapboxMaps")).toBeLessThan(0.5);
+            expect(browser.checkElement(screenshotElem, "mapboxMaps")).toBeLessThan(1);
         });
     });
 

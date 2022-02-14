@@ -13,7 +13,7 @@ describe("Google Maps", () => {
             screenshotElem.waitForDisplayed({ timeout: 5000 });
             browser.pause(3000);
             browser.saveElement(screenshotElem, "googleMaps");
-            expect(browser.checkElement(screenshotElem, "googleMaps")).toBeLessThan(0.5);
+            expect(browser.checkElement(screenshotElem, "googleMaps")).toBeLessThan(1);
         });
     });
 
