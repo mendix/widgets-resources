@@ -1,5 +1,5 @@
 import { flattenStyles } from "@mendix/piw-native-utils-internal";
-import { createElement, ReactElement, useEffect, useRef, useState, Fragment } from "react";
+import { createElement, ReactElement, useEffect, useRef, useState, Fragment, useCallback } from "react";
 import {
     ActivityIndicator,
     Platform,
@@ -55,29 +55,30 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
 
     useEffect(() => {
         if (props.showControls) {
-            handleShowControls(true);
+            showControlsHandler();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [fullScreen]);
+    }, [fullScreen, props.showControls]);
 
-    function handleShowControls(setShown?: boolean): void {
+    function showControlsHandler(): void {
+        clearTimeout(timeoutRef.current as NodeJS.Timeout);
+
+        setShowControls(true);
+        timeoutRef.current = global.setTimeout(() => {
+            setShowControls(false);
+        }, 5000);
+    }
+
+    const onVideoPressHandler = useCallback((): void => {
         if (!props.showControls) {
             return;
         }
-
-        if (timeoutRef.current) {
-            clearTimeout(timeoutRef.current as NodeJS.Timeout);
-        }
-
-        if (!showControls || setShown) {
-            setShowControls(true);
-            timeoutRef.current = global.setTimeout(() => {
-                setShowControls(false);
-            }, 5000);
+        if (!showControls) {
+            showControlsHandler();
         } else {
+            clearTimeout(timeoutRef.current as NodeJS.Timeout);
             setShowControls(false);
         }
-    }
+    }, [props.showControls, showControls]);
 
     function fullScreenHandler(isFullScreen: boolean): void {
         setFullScreen(isFullScreen);
@@ -91,17 +92,14 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         repeat: props.loop,
         controls: props.showControls,
         onLoadStart: () => setStatus(StatusEnum.LOADING),
-        onError: () => {
-            setStatus(StatusEnum.ERROR);
-        },
+        onError: () => setStatus(StatusEnum.ERROR),
         useTextureView: false,
         resizeMode: props.aspectRatio ? "contain" : "stretch",
-        onProgress: ({ currentTime }: OnProgressData) => {
-            setCurrentPlayTime(currentTime);
-        }
+        onProgress: ({ currentTime }: OnProgressData) => setCurrentPlayTime(currentTime)
     };
 
     const isAndroid = Platform.OS === "android";
+    const errorText = status === StatusEnum.ERROR && <Text style={styles.errorMessage}>The video failed to load</Text>;
 
     return (
         <Fragment>
@@ -109,11 +107,10 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                 <Modal
                     isVisible={fullScreen}
                     style={styles.fullScreenVideoPlayer}
-                    onBackButtonPress={() => {
-                        fullScreenHandler(false);
-                    }}
+                    onBackButtonPress={() => fullScreenHandler(false)}
+                    testID="fullscreen-modal"
                 >
-                    <TouchableWithoutFeedback onPress={() => handleShowControls()}>
+                    <TouchableWithoutFeedback onPress={onVideoPressHandler} testID="fullscreen-overlay">
                         <Video
                             {...videoProps}
                             ref={fullScreenPlayerRef}
@@ -123,6 +120,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                                 setVideoAspectRatio(data.naturalSize.width / data.naturalSize.height);
                                 fullScreenPlayerRef.current?.seek(currentPlayTime);
                             }}
+                            testID={`${props.name}-fullscreen`}
                             style={styles.fullScreenVideoStyle}
                         />
                     </TouchableWithoutFeedback>
@@ -132,6 +130,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                             onPress={() => {
                                 fullScreenHandler(false);
                             }}
+                            testID="btn-fullscreen-exit"
                         >
                             <Icon name="fullscreen-exit" color="white" size={22} />
                         </TouchableOpacity>
@@ -143,16 +142,14 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                             style={styles.fullScreenActivityIndicatorStyle}
                         />
                     )}
-                    {status === StatusEnum.ERROR && (
-                        <Text style={styles.errorMessage}>The video failed to load :(</Text>
-                    )}
+                    {errorText}
                 </Modal>
             )}
             <View style={styles.container}>
                 {status === StatusEnum.LOADING && <ActivityIndicator color={styles.indicator.color} size="large" />}
-                {status === StatusEnum.ERROR && <Text style={styles.errorMessage}>The video failed to load :(</Text>}
+                {errorText}
                 {!fullScreen && (
-                    <TouchableWithoutFeedback style={styles.container} onPress={() => handleShowControls()}>
+                    <TouchableWithoutFeedback style={styles.container} onPress={onVideoPressHandler}>
                         <Video
                             {...videoProps}
                             paused={!props.autoStart && !currentPlayTime}
@@ -163,9 +160,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                             }}
                             ref={playerRef}
                             style={status !== StatusEnum.READY ? { height: 0 } : styles.video}
-                            onProgress={({ currentTime }) => {
-                                setCurrentPlayTime(currentTime);
-                            }}
+                            onProgress={({ currentTime }) => setCurrentPlayTime(currentTime)}
                         />
                     </TouchableWithoutFeedback>
                 )}
@@ -175,6 +170,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                             fullScreenHandler(true);
                         }}
                         style={styles.controlBtnContainerStyle}
+                        testID="btn-fullscreen"
                     >
                         <Icon name="fullscreen" color="white" size={22} />
                     </TouchableOpacity>

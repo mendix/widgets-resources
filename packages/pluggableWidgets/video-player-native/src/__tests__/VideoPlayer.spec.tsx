@@ -1,7 +1,7 @@
 import { dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
-import { Text, View } from "react-native";
-import { fireEvent, render } from "@testing-library/react-native";
+import { Modal, Text, View } from "react-native";
+import { fireEvent, render, waitFor } from "@testing-library/react-native";
 import { VideoProperties } from "react-native-video";
 
 import { VideoPlayer } from "../VideoPlayer";
@@ -12,7 +12,6 @@ jest.mock("react-native-video", () => "Video");
 
 describe("VideoPlayer", () => {
     let defaultProps: VideoPlayerProps<VideoStyle>;
-
     beforeEach(() => {
         defaultProps = {
             name: "video-player-test",
@@ -83,6 +82,28 @@ describe("VideoPlayer", () => {
         fireEvent(component.getByTestId("video-player-test"), "error");
 
         expect(component.UNSAFE_getByType(Text).props.style).toEqual({ color: "white" });
-        expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load :(");
+        expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load");
+    });
+
+    describe("VideoPlayerAndroid", () => {
+        beforeAll(() => {
+            jest.mock("react-native/Libraries/Utilities/Platform", () => ({
+                OS: "android",
+                select: jest.fn(dict => dict.android)
+            }));
+        });
+        it("render video with controls", () => {
+            const component = render(<VideoPlayer {...defaultProps} />);
+            expect(component).toMatchSnapshot();
+        });
+
+        it("show fullscreen when press fullscreen icon-- android", async () => {
+            const component = render(<VideoPlayer {...defaultProps} />);
+            const fullScreenBtn = component.getByTestId("btn-fullscreen");
+            fireEvent.press(fullScreenBtn);
+            await waitFor(() => component.getByTestId("btn-fullscreen-exit"));
+            const modal = component.UNSAFE_getByType(Modal);
+            expect(modal.props.visible).toBe(true);
+        });
     });
 });
