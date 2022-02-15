@@ -13,11 +13,21 @@ exports[`VideoPlayer hides the loading indicator after load 1`] = `
   }
 >
   <Video
+    accessible={true}
     controls={true}
+    focusable={true}
     muted={false}
+    onClick={[Function]}
     onError={[Function]}
     onLoad={[Function]}
     onLoadStart={[Function]}
+    onProgress={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     paused={true}
     repeat={false}
     resizeMode="stretch"
@@ -50,11 +60,21 @@ exports[`VideoPlayer load a video and calculate the aspect ratio 1`] = `
   }
 >
   <Video
+    accessible={true}
     controls={true}
+    focusable={true}
     muted={false}
+    onClick={[Function]}
     onError={[Function]}
     onLoad={[Function]}
     onLoadStart={[Function]}
+    onProgress={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     paused={true}
     repeat={false}
     resizeMode="contain"
@@ -89,11 +109,21 @@ exports[`VideoPlayer renders a loading indicator 1`] = `
   }
 >
   <Video
+    accessible={true}
     controls={true}
+    focusable={true}
     muted={false}
+    onClick={[Function]}
     onError={[Function]}
     onLoad={[Function]}
     onLoadStart={[Function]}
+    onProgress={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     paused={true}
     repeat={false}
     resizeMode="stretch"
@@ -132,11 +162,21 @@ exports[`VideoPlayer shows the loading indicator if the source changes 1`] = `
     size="large"
   />
   <Video
+    accessible={true}
     controls={true}
+    focusable={true}
     muted={false}
+    onClick={[Function]}
     onError={[Function]}
     onLoad={[Function]}
     onLoadStart={[Function]}
+    onProgress={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     paused={true}
     repeat={false}
     resizeMode="stretch"
