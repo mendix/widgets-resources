@@ -10,9 +10,10 @@ export interface RichTextSettings {
     sanitizeContent?: boolean;
 }
 
-interface RichTextEditorProps {
+export interface RichTextEditorProps {
     value: string;
     editorSettings: RichTextSettings;
+    name?: string;
     onChange?: (value: string) => void;
     onKeyPress?: () => void;
     readOnlyStyle?: ReadOnlyStyleEnum;
@@ -20,6 +21,7 @@ interface RichTextEditorProps {
 
 export function RichTextEditor({
     value,
+    name,
     editorSettings,
     onChange,
     onKeyPress,
@@ -67,9 +69,9 @@ export function RichTextEditor({
     return (
         <div
             className={classNames("widget-rich-text", readOnlyStyle && `editor-${readOnlyStyle}`)}
-            style={{ width: editorSettings.config?.width }}
+            style={{ width: editorSettings.config?.width, height: editorSettings.config?.height }}
         >
-            <div ref={setElement} style={status !== "ready" ? { visibility: "hidden" } : undefined} />
+            <div id={name} ref={setElement} style={status !== "ready" ? { visibility: "hidden" } : undefined} />
         </div>
     );
 }

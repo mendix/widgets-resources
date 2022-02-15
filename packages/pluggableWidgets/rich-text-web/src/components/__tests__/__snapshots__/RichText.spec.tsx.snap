@@ -2,16 +2,21 @@
 
 exports[`RichText render DOM structure 1`] = `
 <div
-  className="widget-rich-text"
+  className="widget-rich-text editor-text"
   style={
     Object {
-      "height": "auto",
-      "width": "100%",
+      "height": "320px",
+      "width": "480px",
     }
   }
 >
   <div
     id="RichText_Div"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
   />
 </div>
 `;

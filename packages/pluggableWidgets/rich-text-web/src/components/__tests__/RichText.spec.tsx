@@ -1,39 +1,43 @@
 import { createElement } from "react";
 import "@testing-library/jest-dom";
-import { RichTextEditor, RichTextProps } from "../RichText";
-import { CKEditorConfig } from "ckeditor4-react";
+import { RichTextEditor, RichTextEditorProps } from "../RichText";
 import { getPreset, defineEnterMode, getToolbarGroupByName, defineAdvancedGroups } from "../../utils/ckeditorConfigs";
 import { mount, ReactWrapper } from "enzyme";
 import renderer from "react-test-renderer";
-import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
 import { TOOLBAR_GROUP, ToolbarGroup } from "../../utils/ckeditorPresets";
 import { AdvancedConfigType } from "../../../typings/RichTextProps";
+
+declare global {
+    interface Window {
+        CKEDITOR: any;
+    }
+}
 
 describe("RichText", () => {
     window.mx = {
         remoteUrl: ""
     };
-    const defaultRichTextProps: RichTextProps = {
-        advancedConfig: null,
-        dimensions: {
-            width: 100,
-            height: 100,
-            heightUnit: "percentageOfWidth",
-            widthUnit: "percentage"
-        },
-        plugins: [],
+    const defaultRichTextProps: RichTextEditorProps = {
         value: "Simple Text",
-        sanitizeContent: false,
-        advancedContentFilter: null,
-        readOnly: false,
         name: "RichText_Div",
-        spellChecker: false,
         readOnlyStyle: "text",
-        editorType: "classic",
-        enterMode: "paragraph",
-        shiftEnterMode: "paragraph",
-        toolbar: getPreset("basic"),
-        tabIndex: 1
+        editorSettings: {
+            sanitizeContent: false,
+            type: "classic",
+            config: {
+                advancedConfig: null,
+                width: "480px",
+                height: "320px",
+                plugins: [],
+                advancedContentFilter: null,
+                readOnly: false,
+                spellChecker: false,
+                enterMode: "paragraph",
+                shiftEnterMode: "paragraph",
+                toolbar: getPreset("basic"),
+                tabIndex: 1
+            }
+        }
     };
 
     function renderRichText(props = defaultRichTextProps): ReactWrapper {
@@ -54,32 +58,10 @@ describe("RichText", () => {
         expect(richTextElement?.getElements().length).toBeGreaterThan(0);
 
         const styleProps = richTextElement.getElements()[0].props.style;
-        const dimensions = getDimensions(defaultRichTextProps.dimensions as Dimensions);
-        expect(styleProps.width).toEqual(dimensions.width);
-        expect(styleProps.height).toEqual(dimensions.height);
+        expect(styleProps.width).toEqual(defaultRichTextProps.editorSettings.config!.width);
+        expect(styleProps.height).toEqual(defaultRichTextProps.editorSettings.config!.height);
 
         expect(richText.find(`.editor-${defaultRichTextProps.readOnlyStyle}`)).toEqual({});
-    });
-
-    it("renders MainEditor component with correct props", () => {
-        const richText = renderRichText();
-        const mainEditor = richText.find("MainEditor");
-        expect(mainEditor).toBeDefined();
-        const props = mainEditor.props() as CKEditorConfig;
-        const dimensions = getDimensions(defaultRichTextProps.dimensions as Dimensions);
-        const toolbar = getPreset("basic");
-        expect(props.config.initContent).toEqual(defaultRichTextProps.value);
-        expect(props.config.config).toMatchObject({
-            autoGrow_minHeight: 300,
-            toolbarCanCollapse: true,
-            autoGrow_onStartup: true,
-            width: dimensions.width,
-            height: dimensions.height,
-            enterMode: 1,
-            shiftEnterMode: 1,
-            disableNativeSpellChecker: !defaultRichTextProps.spellChecker,
-            ...toolbar
-        });
     });
 
     it("renders editor in read only mode with specified style", () => {
