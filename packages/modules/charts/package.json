@@ -1,0 +1,31 @@
+{
+  "name": "charts",
+  "moduleName": "Charts",
+  "version": "3.0.0",
+  "license": "Apache-2.0",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.6.0.27784",
+    "marketplaceId": 105695
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/Charts-module",
+    "branchName": "main"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "start": "node ./scripts/build.js start",
+    "release": "node ./scripts/build.js release",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix/pluggable-widgets-tools": ">=8.9.2",
+    "cross-env": "^7.0.2"
+  }
+}
