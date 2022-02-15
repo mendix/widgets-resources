@@ -21,7 +21,7 @@ const mapProps: ConfigReducer = (config, props) => {
 
 mapProps.getDeps = props => [props.tabIndex, props.stringAttribute.readOnly, props.spellChecker];
 
-const editorWidth: ConfigReducer = (config, props) => {
+const editorDimensions: ConfigReducer = (config, props) => {
     const { width, height } = getDimensions(props);
     config.width = width;
     config.height = height;
@@ -29,7 +29,7 @@ const editorWidth: ConfigReducer = (config, props) => {
     return config;
 };
 
-editorWidth.getDeps = props => [props.width, props.widthUnit, props.height, props.heightUnit];
+editorDimensions.getDeps = props => [props.width, props.widthUnit, props.height, props.heightUnit];
 
 const contentFilter: ConfigReducer = (config, props) => {
     if (props.advancedContentFilter === "custom") {
@@ -75,7 +75,7 @@ const toolbar: ConfigReducer = (config, props) => {
 
 toolbar.getDeps = props => [props.advancedConfig, props.toolbarConfig, props.preset];
 
-const configReducers = [mapProps, editorWidth, toolbar, plugins, contentFilter];
+const configReducers = [mapProps, editorDimensions, toolbar, plugins, contentFilter];
 
 function createConfig(props: RichTextContainerProps): CKEditorConfig {
     const initConfig: CKEditorConfig = {
