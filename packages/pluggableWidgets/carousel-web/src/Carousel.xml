@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.carousel.Carousel" pluginWidget="true" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+    <name>Carousel</name>
+    <description>Carousel displaying images</description>
+    <studioProCategory>Display</studioProCategory>
+    <studioCategory>Display</studioCategory>
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="Data Source">
+                <property key="dataSource" type="datasource" isList="true" required="false">
+                    <caption>Data source</caption>
+                    <description />
+                </property>
+                <property key="content" type="widgets" dataSource="dataSource" required="false">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Display">
+                <property key="showPagination" type="boolean" defaultValue="true">
+                    <caption>Pagination</caption>
+                    <description />
+                </property>
+                <property key="navigation" type="boolean" defaultValue="true">
+                    <caption>Navigation controls</caption>
+                    <description />
+                </property>
+                <property key="autoplay" type="boolean" defaultValue="true">
+                    <caption>Auto play</caption>
+                    <description />
+                </property>
+                <property key="delay" type="integer" defaultValue="1000">
+                    <caption>Delay</caption>
+                    <description>The amount of time to delay between automatically cycling an item (ms)</description>
+                </property>
+                <property key="loop" type="boolean" defaultValue="true">
+                    <caption>Infinite loop</caption>
+                    <description />
+                </property>
+                <property key="animation" type="boolean" defaultValue="true">
+                    <caption>Animation</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Events">
+                <property key="onClickAction" type="action" required="false">
+                    <caption>On click action</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+        </propertyGroup>
+    </properties>
+</widget>
