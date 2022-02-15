@@ -4,7 +4,7 @@ export const associationInput = `<?xml version="1.0" encoding="utf-8"?>
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <properties>
         <propertyGroup caption="General">
-            <property key="reference" type="association" universeDataSource="optionsSource">
+            <property key="reference" type="association" selectableObjects="optionsSource">
                 <caption>Reference</caption>
                 <description/>
             </property>
@@ -29,7 +29,7 @@ export const associationInputNative = `<?xml version="1.0" encoding="utf-8"?>
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../xsd/widget.xsd">
     <properties>
         <propertyGroup caption="General">
-            <property key="reference" type="association" universeDataSource="optionsSource">
+            <property key="reference" type="association" selectableObjects="optionsSource">
                 <caption>Reference</caption>
                 <description/>
             </property>
