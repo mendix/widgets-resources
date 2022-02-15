@@ -31,18 +31,19 @@ const keysToHideBySizeType: Record<StepSizeTypeEnum, Array<keyof SliderPreviewPr
 const webOnlyKeys: Array<keyof SliderPreviewProps> = ["advanced"];
 
 export const advancedOptionKeys: Array<keyof SliderPreviewProps> = [
+    "decimalPlaces",
+    "expressionStepSize",
+    "height",
+    "heightUnit",
+    "noOfMarkers",
+    "orientation",
+    "showTooltip",
+    "stepAttribute",
     "stepSizeType",
     "stepValue",
-    "stepAttribute",
-    "expressionStepSize",
-    "showTooltip",
-    "tooltipType",
     "tooltip",
-    "noOfMarkers",
-    "decimalPlaces",
-    "orientation",
-    "heightUnit",
-    "height"
+    "tooltipAlwaysVisible",
+    "tooltipType"
 ];
 
 export function getProperties(
