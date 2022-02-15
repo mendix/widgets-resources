@@ -1,106 +1,75 @@
-import { createElement, ReactElement, useState, useEffect, useMemo } from "react";
-import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
-import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
-import { defineEnterMode, addPlugin, PluginName } from "../utils/ckeditorConfigs";
+import { createElement, useState, useRef, useEffect, ReactElement } from "react";
+import { CKEditorType, CKEditorConfig, CKEditorEventAction, useCKEditor } from "ckeditor4-react";
 import sanitizeHtml from "sanitize-html";
 import classNames from "classnames";
-import { ReadOnlyStyleEnum, EnterModeEnum, ShiftEnterModeEnum, AdvancedConfigType } from "../../typings/RichTextProps";
-import { MainEditor } from "./MainEditor";
+import { ReadOnlyStyleEnum } from "../../typings/RichTextProps";
 
-export interface RichTextProps {
-    name: string;
-    readOnly: boolean;
-    spellChecker: boolean;
+export interface RichTextSettings {
+    config?: CKEditorConfig | null;
+    type?: CKEditorType | null;
     sanitizeContent?: boolean;
-    value: string | undefined;
-    advancedConfig: AdvancedConfigType[] | null;
-    plugins?: string[];
-    readOnlyStyle: ReadOnlyStyleEnum;
-    toolbar: CKEditorConfig;
-    enterMode?: EnterModeEnum;
-    shiftEnterMode?: ShiftEnterModeEnum;
-    editorType: CKEditorType;
-    dimensions?: Dimensions;
-    advancedContentFilter?: { allowedContent: string; disallowedContent: string } | null;
-    onValueChange?: (value: string) => void;
-    onKeyChange?: () => void;
-    onKeyPress?: () => void;
-    tabIndex: number | undefined;
 }
 
-export const RichTextEditor = (props: RichTextProps): ReactElement => {
-    const { editorType, plugins, enterMode, shiftEnterMode, value, readOnly, readOnlyStyle, advancedContentFilter } =
-        props;
-    const [element, setElement] = useState<HTMLElement | null>(null);
-    const { width, height } = props.dimensions
-        ? getDimensions({ ...props.dimensions })
-        : {
-              width: "100%",
-              height: "100%"
-          };
-    const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<"change">>({
+interface RichTextEditorProps {
+    value: string;
+    editorSettings: RichTextSettings;
+    onChange?: (value: string) => void;
+    onKeyPress?: () => void;
+    readOnlyStyle?: ReadOnlyStyleEnum;
+}
+
+export function RichTextEditor({
+    value,
+    editorSettings,
+    onChange,
+    onKeyPress,
+    readOnlyStyle
+}: RichTextEditorProps): ReactElement {
+    const localEditorValueRef = useRef(value);
+    // Use `useState` rather than `useRef` in order to trigger re-render.
+    const [element, setElement] = useState<null | HTMLElement>(null);
+
+    const { editor, status } = useCKEditor({
+        ...editorSettings,
         element,
         editorUrl: `${window.mx.remoteUrl}widgets/ckeditor/ckeditor.js`,
-        type: editorType,
-        config: {
-            autoGrow_minHeight: 300,
-            toolbarCanCollapse: true,
-            autoGrow_onStartup: true,
-            width,
-            height,
-            tabIndex: props.tabIndex,
-            enterMode: defineEnterMode(enterMode || ""),
-            shiftEnterMode: defineEnterMode(shiftEnterMode || ""),
-            disableNativeSpellChecker: !props.spellChecker,
-            readOnly: props.readOnly
-        },
         initContent: value,
         dispatchEvent: ({ type, payload }) => {
-            if (type === CKEditorEventAction.change) {
-                const value = payload.editor.getData();
-                if (props.onKeyChange) {
-                    props.onKeyChange();
+            if (type === CKEditorEventAction.key) {
+                if (onKeyPress) {
+                    onKeyPress();
                 }
-                if (props.onKeyPress) {
-                    props.onKeyPress();
-                }
-                if (props?.onValueChange) {
-                    const content = props.sanitizeContent ? sanitizeHtml(value) : value;
-                    props?.onValueChange(content);
+            }
+
+            if (onChange && type === CKEditorEventAction.change) {
+                const valueRaw = payload.editor.getData();
+                const value = editorSettings.sanitizeContent ? sanitizeHtml(valueRaw) : valueRaw;
+
+                localEditorValueRef.current = value;
+
+                if (onChange) {
+                    onChange(value);
                 }
             }
         },
-        subscribeTo: ["change"]
+        subscribeTo: ["change", "key"]
     });
-    const key = useMemo(() => Date.now(), [ckeditorConfig]);
-    useEffect(() => {
-        const config = { ...props.toolbar };
-        if (plugins?.length) {
-            plugins.forEach((plugin: PluginName) => addPlugin(plugin, config));
-        }
-        if (advancedContentFilter) {
-            config.allowedContent = advancedContentFilter.allowedContent;
-            config.disallowedContent = advancedContentFilter.disallowedContent;
-        }
 
-        setCkeditorConfig({
-            ...ckeditorConfig,
-            initContent: value,
-            element,
-            config: {
-                ...ckeditorConfig.config,
-                ...config,
-                readOnly: props.readOnly
+    useEffect(() => {
+        if (editor) {
+            if (localEditorValueRef.current !== value) {
+                editor.setData(value);
+                localEditorValueRef.current = value;
             }
-        });
-    }, [element, value]);
+        }
+    }, [editor, localEditorValueRef, value]);
+
     return (
         <div
-            className={classNames("widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}
-            style={{ width, height }}
+            className={classNames("widget-rich-text", readOnlyStyle && `editor-${readOnlyStyle}`)}
+            style={{ width: editorSettings.config?.width }}
         >
-            <div ref={setElement} id={props.name} />
-            <MainEditor key={key} config={ckeditorConfig} />
+            <div ref={setElement} style={status !== "ready" ? { visibility: "hidden" } : undefined} />
         </div>
     );
-};
+}
