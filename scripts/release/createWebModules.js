@@ -26,6 +26,7 @@ main().catch(e => {
 
 async function main() {
     const modules = ["data-widgets", "atlas-web-content", "atlas-core"];
+    const modules = ["data-widgets", "atlas-web-content", "atlas-core", "web-actions", "charts"];
     if (!modules.includes(moduleFolderNameInRepo)) {
         return;
     }
@@ -39,6 +40,9 @@ async function main() {
             break;
         case "atlas-core":
             await createAtlasCoreModule();
+            break;
+        case "charts":
+            await createChartsModule();
             break;
     }
 }
@@ -116,7 +120,52 @@ async function createAtlasCoreModule() {
     console.log("Done.");
 }
 
-async function commonActions(moduleInfo, widgets) {
+async function createChartsModule() {
+    console.log("Creating the Charts module.");
+    const widgets = [
+        "area-chart-web",
+        "bar-chart-web",
+        "bubble-chart-web",
+        "column-chart-web",
+        "heatmap-chart-web",
+        "line-chart-web",
+        "pie-doughnut-chart-web",
+        "time-series-chart-web"
+    ].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    const moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "Charts",
+        moduleFolderNameInModeler: "charts"
+    };
+    const tmpFolder = join(repoRootPath, "tmp/charts");
+
+    await githubAuthentication(moduleInfo);
+    const moduleChangelogs = await updateChangelogs(widgets, moduleInfo);
+    if (!moduleChangelogs) {
+        throw new Error(
+            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
+        );
+    }
+    await commitAndCreatePullRequest(moduleInfo);
+    await updateTestProject(tmpFolder, widgets, moduleInfo);
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
+
+    await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, widgets);
+
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
+        body: moduleChangelogs.replace(/"/g, "'"),
+        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
+        mpkOutput,
+        isDraft: true
+    });
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+    console.log("Done.");
+}
+    console.log("Done.");
+}
+
+async function commonActions(moduleInfo, widgets = []) {
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
@@ -158,7 +207,7 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "themesource");
 
-    console.log("Updating DataWidgets project..");
+    console.log("Updating project..");
     await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
 
     console.log("Copying widgets and styles..");
@@ -166,12 +215,13 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
         ...widgetsFolders.map(async folder => {
             const src = (await getFiles(folder, [`.mpk`]))[0];
             const dest = join(tmpFolderWidgets, basename(src));
-            await rm(dest);
+            await rm(dest, { force: true });
             await copyFile(src, dest);
         }),
         ...styles.map(async file => {
             const dest = join(tmpFolderActions, file.replace(stylesPath, ""));
-            await rm(dest);
+            await rm(dest, { force: true });
+            await mkdir(dest.replace(basename(dest), ""), { recursive: true });
             await copyFile(file, dest);
         })
     ]);
@@ -203,6 +253,7 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
         ...projectFiles.map(async file => {
             const dest = join(tmpFolderStyles, file.replace(projectPath, ""));
             await rm(dest, { force: true });
+            await mkdir(dest.replace(basename(dest), ""), { recursive: true });
             await copyFile(file, dest);
         })
     ]);
