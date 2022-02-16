@@ -38,7 +38,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
               width: "100%",
               height: "100%"
           };
-    const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<"change">>({
+    const [ckeditorConfig, setCkeditorConfig] = useState<CKEditorHookProps<"change" | "key">>({
         element,
         editorUrl: `${window.mx.remoteUrl}widgets/ckeditor/ckeditor.js`,
         type: editorType,
@@ -56,13 +56,15 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
         },
         initContent: value,
         dispatchEvent: ({ type, payload }) => {
+            if (type === CKEditorEventAction.key) {
+                if (props.onKeyPress) {
+                    props.onKeyPress();
+                }
+            }
             if (type === CKEditorEventAction.change) {
                 const value = payload.editor.getData();
                 if (props.onKeyChange) {
                     props.onKeyChange();
-                }
-                if (props.onKeyPress) {
-                    props.onKeyPress();
                 }
                 if (props?.onValueChange) {
                     const content = props.sanitizeContent ? sanitizeHtml(value) : value;
@@ -70,7 +72,7 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
                 }
             }
         },
-        subscribeTo: ["change"]
+        subscribeTo: ["change", "key"]
     });
     const key = useMemo(() => Date.now(), [ckeditorConfig]);
     useEffect(() => {
