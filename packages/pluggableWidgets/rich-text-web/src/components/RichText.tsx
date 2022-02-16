@@ -87,33 +87,29 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
         },
         subscribeTo: ["change", "key"]
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const key = useMemo(() => Date.now(), [ckeditorConfig]);
-    useEffect(
-        () => {
-            const config = { ...props.toolbar };
-            if (plugins?.length) {
-                plugins.forEach((plugin: PluginName) => addPlugin(plugin, config));
-            }
-            if (advancedContentFilter) {
-                config.allowedContent = advancedContentFilter.allowedContent;
-                config.disallowedContent = advancedContentFilter.disallowedContent;
-            }
 
-            setCkeditorConfig({
-                ...ckeditorConfig,
-                initContent: value,
-                element,
-                config: {
-                    ...ckeditorConfig.config,
-                    ...config,
-                    readOnly: props.readOnly
-                }
-            });
-        },
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        [element]
-    );
+    const key = useMemo(() => Date.now(), [ckeditorConfig]);
+    useEffect(() => {
+        const config = { ...props.toolbar };
+        if (plugins?.length) {
+            plugins.forEach((plugin: PluginName) => addPlugin(plugin, config));
+        }
+        if (advancedContentFilter) {
+            config.allowedContent = advancedContentFilter.allowedContent;
+            config.disallowedContent = advancedContentFilter.disallowedContent;
+        }
+
+        setCkeditorConfig({
+            ...ckeditorConfig,
+            initContent: value,
+            element,
+            config: {
+                ...ckeditorConfig.config,
+                ...config,
+                readOnly: props.readOnly
+            }
+        });
+    }, [element]);
 
     useEffect(() => {
         const editor = editorInstanceRef.current;

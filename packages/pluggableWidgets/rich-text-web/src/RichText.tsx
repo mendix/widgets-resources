@@ -11,7 +11,6 @@ import "./ui/RichText.scss";
 export default function RichText(props: RichTextContainerProps): ReactNode {
     const onKeyChange = useCallback(() => executeAction(props.onChange), [props.onChange]);
     const onKeyPress = useCallback(() => executeAction(props.onKeyPress), [props.onKeyPress]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const onChangeFn = useCallback(
         debounce((value: string) => props.stringAttribute.setValue(value), 500),
         [props.stringAttribute]
