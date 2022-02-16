@@ -53,20 +53,18 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         setStyles(alteredStyles);
     }, [props.style, props.aspectRatio, videoAspectRatio]);
 
+    const showControlsHandler = useCallback((): void => {
+        clearTimeout(timeoutRef.current as NodeJS.Timeout);
+
+        setShowControls(true);
+        timeoutRef.current = global.setTimeout(() => setShowControls(false), 5000);
+    }, []);
+
     useEffect(() => {
         if (props.showControls) {
             showControlsHandler();
         }
-    }, [fullScreen, props.showControls]);
-
-    function showControlsHandler(): void {
-        clearTimeout(timeoutRef.current as NodeJS.Timeout);
-
-        setShowControls(true);
-        timeoutRef.current = global.setTimeout(() => {
-            setShowControls(false);
-        }, 5000);
-    }
+    }, [fullScreen, props.showControls, showControlsHandler]);
 
     const onVideoPressHandler = useCallback((): void => {
         if (!props.showControls) {
@@ -78,7 +76,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
             clearTimeout(timeoutRef.current as NodeJS.Timeout);
             setShowControls(false);
         }
-    }, [props.showControls, showControls]);
+    }, [props.showControls, showControls, showControlsHandler]);
 
     function fullScreenHandler(isFullScreen: boolean): void {
         setFullScreen(isFullScreen);
@@ -127,9 +125,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                     {showControls && (
                         <TouchableOpacity
                             style={styles.controlBtnContainerStyle}
-                            onPress={() => {
-                                fullScreenHandler(false);
-                            }}
+                            onPress={() => fullScreenHandler(false)}
                             testID="btn-fullscreen-exit"
                         >
                             <Icon name="fullscreen-exit" color="white" size={22} />
@@ -160,15 +156,12 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                             }}
                             ref={playerRef}
                             style={status !== StatusEnum.READY ? { height: 0 } : styles.video}
-                            onProgress={({ currentTime }) => setCurrentPlayTime(currentTime)}
                         />
                     </TouchableWithoutFeedback>
                 )}
                 {isAndroid && showControls && (
                     <TouchableOpacity
-                        onPress={() => {
-                            fullScreenHandler(true);
-                        }}
+                        onPress={() => fullScreenHandler(true)}
                         style={styles.controlBtnContainerStyle}
                         testID="btn-fullscreen"
                     >
