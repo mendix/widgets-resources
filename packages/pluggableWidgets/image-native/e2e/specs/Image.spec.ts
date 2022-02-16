@@ -1,5 +1,5 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
-import { element, by, waitFor, expect, device } from "detox";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by, waitFor, expect } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Image", () => {
@@ -8,7 +8,7 @@ describe("Image", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders the static image", async () => {

@@ -1,6 +1,6 @@
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by, device } from "detox";
-import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
+import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Color picker", () => {
     beforeEach(async () => {
@@ -8,7 +8,7 @@ describe("Color picker", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correctly after change", async () => {

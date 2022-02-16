@@ -1,5 +1,5 @@
-import { expect, element, by, device } from "detox";
-import { expectToMatchScreenshot, setText, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
+import { expectToMatchScreenshot, resetDevice, setText, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Progress Circle", () => {
     const percentage = "75";
@@ -12,7 +12,7 @@ describe("Progress Circle", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correctly", async () => {

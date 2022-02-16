@@ -1,5 +1,5 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
-import { expect, element, by, device } from "detox";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Accordion", () => {
@@ -8,7 +8,7 @@ describe("Accordion", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("should render custom icons correctly", async () => {

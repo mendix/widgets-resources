@@ -1,6 +1,6 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, element, by, waitFor, device } from "detox";
+import { expect, element, by, waitFor } from "detox";
 
 describe("Background image", () => {
     beforeEach(async () => {
@@ -8,7 +8,7 @@ describe("Background image", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders the static images", async () => {

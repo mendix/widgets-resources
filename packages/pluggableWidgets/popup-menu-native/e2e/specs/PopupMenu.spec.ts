@@ -1,14 +1,14 @@
-import { expect, element, by, device } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
 
 describe("Popup menu", () => {
     beforeEach(async () => {
-        await tapMenuItem("PopupMenu");
+        await tapMenuItem("Popup menu");
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("has a basic menu with an action", async () => {

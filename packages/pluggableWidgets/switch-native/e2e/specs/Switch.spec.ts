@@ -1,6 +1,6 @@
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 import { Alert } from "../../../../../detox/src/Alert";
-import { expect, device, by, element } from "detox";
+import { expect, by, element } from "detox";
 
 describe("Switch", () => {
     beforeAll(async () => {
@@ -8,7 +8,7 @@ describe("Switch", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders correctly when false", async () => {

@@ -1,5 +1,5 @@
-import { element, by, device, waitFor } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { element, by, waitFor } from "detox";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Pie-doughnut chart", () => {
     beforeEach(async () => {
@@ -7,7 +7,7 @@ describe("Pie-doughnut chart", () => {
     });
 
     afterEach(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders pie chart correctly", async () => {

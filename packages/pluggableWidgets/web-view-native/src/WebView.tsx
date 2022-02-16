@@ -21,16 +21,15 @@ export class WebView extends Component<Props> {
 
         if (!uri && !html) {
             return (
-                <View style={this.styles.errorContainer}>
+                <View style={this.styles.errorContainer} testID={this.props.name}>
                     <Text style={this.styles.errorText}>No URL or content was provided.</Text>
                 </View>
             );
         }
 
         return (
-            <View style={this.styles.container}>
+            <View style={this.styles.container} testID={this.props.name}>
                 <RNWebView
-                    testID={this.props.name}
                     source={html ? { html } : { uri: uri! }}
                     style={{
                         width: "100%",
@@ -43,8 +42,10 @@ export class WebView extends Component<Props> {
                     }}
                     userAgent={this.props.userAgent}
                     onShouldStartLoadWithRequest={({ url }) => {
+                        const sanitizedUrl = WebView.sanitize(url);
                         const openExternally =
-                            this.props.openLinksExternally && (html ? url.slice(0, 4) === "http" : url !== uri);
+                            this.props.openLinksExternally &&
+                            (html ? sanitizedUrl.startsWith("http") : uri && sanitizedUrl !== WebView.sanitize(uri));
                         if (openExternally) {
                             Linking.openURL(url);
                             return false;
@@ -67,5 +68,9 @@ export class WebView extends Component<Props> {
     private onMessage(input: string): void {
         this.props.onMessageInput?.setTextValue(input);
         executeAction(this.props.onMessage);
+    }
+
+    private static sanitize(url: string): string {
+        return url.toLowerCase().replace(/\/$/, "");
     }
 }

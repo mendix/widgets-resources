@@ -1,5 +1,4 @@
-import { device } from "detox";
-import { expectToMatchScreenshot, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expectToMatchScreenshot, resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
 
 describe("Repeater", () => {
     beforeAll(async () => {
@@ -7,7 +6,7 @@ describe("Repeater", () => {
     });
 
     afterAll(async () => {
-        await device.reloadReactNative();
+        await resetDevice();
     });
 
     it("renders the default repeater", async () => {
