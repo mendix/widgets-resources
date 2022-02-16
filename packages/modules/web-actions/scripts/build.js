@@ -32,7 +32,7 @@ async function main() {
         console.info(`Ensured the directory ${outputDir} is removed`);
     }
 
-    console.info(`Building & copying styles...`);
+    console.info(`Building & copying files...`);
     try {
         await copyWebActions(outputDir, mode);
         console.log("Building & copying styles has completed successfully");
@@ -49,7 +49,7 @@ async function copyWebActions(destination, mode) {
     }
 
     if (mode === "release") {
-        execSync(`npm run release -- --scope 'nanoflow-actions-web'`, {
+        execSync(`npm run build -- --scope 'nanoflow-actions-web'`, {
             stdio: "inherit",
             cwd
         });
