@@ -27,10 +27,7 @@ function copyCKEditorDirToDist(outDir) {
                     /* we need to empty every single css (excluding editor and dialog) inside the folder to avoid duplicate bundling,
                      because even if the file is not imported anywhere it will be compiled inside RichText.js and RichText.mjs */
                     /* we need editor and dialog because it's required for loading styles on iframe elements (basically every dropdown,popup items from toolbar) */
-                    if (
-                        extname(src) === ".css" &&
-                        !(basename(src) === "editor.css" || basename(src) === "dialog.css")
-                    ) {
+                    if (extname(src) === ".css" && !/(editor(_gecko)?|dialog).css/gi.test(basename(src))) {
                         return through((chunk, enc, done) => done(null, ""));
                     }
                 },
