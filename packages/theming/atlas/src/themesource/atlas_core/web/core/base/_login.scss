@@ -18,6 +18,10 @@
         position: absolute;
         top: 30px;
         right: 30px;
+
+        & > svg {
+            width: 120px;
+        }
     }
 
     .loginpage-left {
@@ -166,6 +170,12 @@
                 left / cover no-repeat url("./resources/work-do-more.jpeg");
             -webkit-clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
             clip-path: polygon(0% 0%, 100% 0, 100% 50%, 100% 100%, 0% 100%);
+        }
+
+        .loginpage-logo {
+            & > svg {
+                width: 150px;
+            }
         }
 
         .loginpage-formwrapper {
