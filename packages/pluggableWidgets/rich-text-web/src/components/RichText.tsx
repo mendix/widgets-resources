@@ -1,5 +1,11 @@
-import { createElement, ReactElement, useState, useEffect, useMemo } from "react";
-import { CKEditorHookProps, CKEditorType, CKEditorConfig, CKEditorEventAction } from "ckeditor4-react";
+import { createElement, ReactElement, useState, useEffect, useMemo, useRef, useCallback } from "react";
+import {
+    CKEditorHookProps,
+    CKEditorType,
+    CKEditorConfig,
+    CKEditorEventAction,
+    CKEditorInstance
+} from "ckeditor4-react";
 import { getDimensions, Dimensions } from "@mendix/piw-utils-internal";
 import { defineEnterMode, addPlugin, PluginName } from "../utils/ckeditorConfigs";
 import sanitizeHtml from "sanitize-html";
@@ -32,6 +38,12 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
     const { editorType, plugins, enterMode, shiftEnterMode, value, readOnly, readOnlyStyle, advancedContentFilter } =
         props;
     const [element, setElement] = useState<HTMLElement | null>(null);
+    const localEditorValueRef = useRef("");
+    const editorInstanceRef = useRef<null | CKEditorInstance>(null);
+    const editorRefCallback = useCallback(
+        (editor: null | CKEditorInstance) => (editorInstanceRef.current = editor),
+        []
+    );
     const { width, height } = props.dimensions
         ? getDimensions({ ...props.dimensions })
         : {
@@ -68,41 +80,58 @@ export const RichTextEditor = (props: RichTextProps): ReactElement => {
                 }
                 if (props?.onValueChange) {
                     const content = props.sanitizeContent ? sanitizeHtml(value) : value;
+                    localEditorValueRef.current = content;
                     props?.onValueChange(content);
                 }
             }
         },
         subscribeTo: ["change", "key"]
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const key = useMemo(() => Date.now(), [ckeditorConfig]);
-    useEffect(() => {
-        const config = { ...props.toolbar };
-        if (plugins?.length) {
-            plugins.forEach((plugin: PluginName) => addPlugin(plugin, config));
-        }
-        if (advancedContentFilter) {
-            config.allowedContent = advancedContentFilter.allowedContent;
-            config.disallowedContent = advancedContentFilter.disallowedContent;
-        }
-
-        setCkeditorConfig({
-            ...ckeditorConfig,
-            initContent: value,
-            element,
-            config: {
-                ...ckeditorConfig.config,
-                ...config,
-                readOnly: props.readOnly
+    useEffect(
+        () => {
+            const config = { ...props.toolbar };
+            if (plugins?.length) {
+                plugins.forEach((plugin: PluginName) => addPlugin(plugin, config));
             }
-        });
-    }, [element, value]);
+            if (advancedContentFilter) {
+                config.allowedContent = advancedContentFilter.allowedContent;
+                config.disallowedContent = advancedContentFilter.disallowedContent;
+            }
+
+            setCkeditorConfig({
+                ...ckeditorConfig,
+                initContent: value,
+                element,
+                config: {
+                    ...ckeditorConfig.config,
+                    ...config,
+                    readOnly: props.readOnly
+                }
+            });
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [element]
+    );
+
+    useEffect(() => {
+        const editor = editorInstanceRef.current;
+        if (editor) {
+            if (localEditorValueRef.current !== value) {
+                editor.setData(value);
+                localEditorValueRef.current = value ?? "";
+            }
+        }
+    }, [value]);
+
     return (
         <div
             className={classNames("widget-rich-text", `${readOnly ? `editor-${readOnlyStyle}` : ""}`)}
             style={{ width, height }}
         >
             <div ref={setElement} id={props.name} />
-            <MainEditor key={key} config={ckeditorConfig} />
+            <MainEditor key={key} config={ckeditorConfig} editorRef={editorRefCallback} />
         </div>
     );
 };

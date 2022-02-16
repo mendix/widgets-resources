@@ -9,15 +9,18 @@ import loadingCircleSvg from "./ui/loading-circle.svg";
 import "./ui/RichText.scss";
 
 export default function RichText(props: RichTextContainerProps): ReactNode {
-    if (props.stringAttribute.status !== "available") {
-        return <img src={loadingCircleSvg} className="widget-rich-text-loading-spinner" alt="" aria-hidden />;
-    }
     const onKeyChange = useCallback(() => executeAction(props.onChange), [props.onChange]);
     const onKeyPress = useCallback(() => executeAction(props.onKeyPress), [props.onKeyPress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const onChangeFn = useCallback(
         debounce((value: string) => props.stringAttribute.setValue(value), 500),
         [props.stringAttribute]
     );
+
+    if (props.stringAttribute.status !== "available") {
+        return <img src={loadingCircleSvg} className="widget-rich-text-loading-spinner" alt="" aria-hidden />;
+    }
+
     const defineToolbar = (): CKEditorConfig => {
         const { advancedConfig, toolbarConfig, preset } = props;
         if (preset !== "custom") {
