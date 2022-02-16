@@ -1,5 +1,5 @@
 const { basename, join } = require("path");
-const { copyFile, readdir, rm } = require("fs/promises");
+const { mkdir, copyFile, rm } = require("fs/promises");
 const {
     execShellCommand,
     getFiles,
@@ -25,7 +25,6 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["data-widgets", "atlas-web-content", "atlas-core"];
     const modules = ["data-widgets", "atlas-web-content", "atlas-core", "web-actions", "charts"];
     if (!modules.includes(moduleFolderNameInRepo)) {
         return;
@@ -44,6 +43,9 @@ async function main() {
         case "charts":
             await createChartsModule();
             break;
+        case "web-actions":
+            await createWebActionsModule();
+            break;
     }
 }
 
@@ -58,39 +60,14 @@ async function createDataWidgetsModule() {
         "dropdown-sort-web",
         "gallery-web",
         "tree-node-web"
-    ];
-    const tmpFolder = join(repoRootPath, "tmp/data-widgets");
-    const widgetFolders = await readdir(join(repoRootPath, "packages/pluggableWidgets"));
-    const dataWidgetsFolders = widgetFolders
-        .filter(folder => widgets.includes(folder))
-        .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    ].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
         moduleFolderNameInModeler: "datawidgets"
     };
 
-    await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
-    if (!moduleChangelogs) {
-        throw new Error(
-            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
-        );
-    }
-    await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
-
-    await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
-
-    await createGithubReleaseFrom({
-        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
-        body: moduleChangelogs.replace(/"/g, "'"),
-        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
-        mpkOutput,
-        isDraft: true
-    });
-    await execShellCommand(`rm -rf ${tmpFolder}`);
+    await commonActions(moduleInfo, widgets, true, true);
     console.log("Done.");
 }
 
@@ -137,35 +114,18 @@ async function createChartsModule() {
         moduleNameInModeler: "Charts",
         moduleFolderNameInModeler: "charts"
     };
-    const tmpFolder = join(repoRootPath, "tmp/charts");
-
-    await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await updateChangelogs(widgets, moduleInfo);
-    if (!moduleChangelogs) {
-        throw new Error(
-            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
-        );
-    }
-    await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProject(tmpFolder, widgets, moduleInfo);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
-
-    await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, widgets);
-
-    await createGithubReleaseFrom({
-        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
-        body: moduleChangelogs.replace(/"/g, "'"),
-        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
-        mpkOutput,
-        isDraft: true
-    });
-    await execShellCommand(`rm -rf ${tmpFolder}`);
-    console.log("Done.");
-}
+    await commonActions(moduleInfo, widgets, true, true);
     console.log("Done.");
 }
 
-async function commonActions(moduleInfo, widgets = []) {
+async function createWebActionsModule() {
+    console.log("Creating the Web Actions module.");
+    const moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "WebActions",
+        moduleFolderNameInModeler: "webactions"
+    };
+
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
@@ -175,8 +135,41 @@ async function commonActions(moduleInfo, widgets = []) {
         );
     }
     await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    await updateTestProjectWithJavascript(tmpFolder, moduleInfo);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
+
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
+        body: moduleChangelogs.replace(/"/g, "'"),
+        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
+        mpkOutput,
+        isDraft: true
+    });
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+
+    console.log("Done.");
+}
+
+async function commonActions(moduleInfo, widgets = [], exportWithoutSnippet = false, updateWidgetsChangelogs = false) {
+    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
+    await githubAuthentication(moduleInfo);
+    const moduleChangelogs = await (updateWidgetsChangelogs ? updateChangelogs : updateModuleChangelogs)(moduleInfo);
+    if (!moduleChangelogs) {
+        throw new Error(
+            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
+        );
+    }
+    await commitAndCreatePullRequest(moduleInfo);
+    if (exportWithoutSnippet) {
+        await updateTestProject(tmpFolder, widgets, moduleInfo);
+    } else {
+        await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    }
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
+
+    if (exportWithoutSnippet) {
+        await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, widgets);
+    }
     await createGithubReleaseFrom({
         title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
         body: moduleChangelogs.replace(/"/g, "'"),
@@ -269,5 +262,34 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
         console.warn(`Nothing to commit from repo ${tmpFolder}`);
     } else {
         await execShellCommand("git add . && git commit -m 'Updated widgets and styling' && git push", tmpFolder);
+    }
+}
+
+async function updateTestProjectWithJavascript(tmpFolder, moduleInfo) {
+    const javascriptFiles = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}/dist/javascriptsource`);
+    const files = await getFiles(javascriptFiles);
+    const tmpFolderJs = join(tmpFolder, "javascriptsource");
+
+    console.log("Updating project..");
+    await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
+
+    console.log("Copying javascript files..");
+    await Promise.all([
+        ...files.map(async file => {
+            const dest = join(tmpFolderJs, file.replace(javascriptFiles, ""));
+            await rm(dest, { force: true });
+            await mkdir(dest.replace(basename(dest), ""), { recursive: true });
+            await copyFile(file, dest);
+        })
+    ]);
+    await execShellCommand(
+        `echo ${moduleInfo.version} > javascriptsource/${moduleInfo.moduleFolderNameInModeler}/.version`,
+        tmpFolder
+    );
+    const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
+    if (/nothing to commit/i.test(gitOutput)) {
+        console.warn(`Nothing to commit from repo ${tmpFolder}s`);
+    } else {
+        await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
     }
 }
