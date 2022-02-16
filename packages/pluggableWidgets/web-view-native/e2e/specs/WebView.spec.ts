@@ -68,16 +68,14 @@ describe("Web view", () => {
             await waitForAndCloseOnLoadAlert();
 
             await element(by.id("webViewExternal")).tap({ x: 3, y: 3 });
-            await new Promise(res => {
-                setTimeout(res, timeout);
-            });
+            await new Promise(res => setTimeout(res, timeout));
             await expectToMatchScreenshot();
         }
     });
 });
 
 async function waitForAndCloseOnLoadAlert(): Promise<void> {
-    const secondAlert = Alert();
-    await waitFor(secondAlert.messageElement).toHaveText("URL loaded").withTimeout(timeout);
-    await Alert().confirm();
+    const alert = Alert();
+    await waitFor(alert.messageElement).toHaveText("URL loaded").withTimeout(timeout);
+    await alert.confirm();
 }

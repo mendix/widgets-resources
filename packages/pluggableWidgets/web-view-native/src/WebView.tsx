@@ -42,11 +42,10 @@ export class WebView extends Component<Props> {
                     }}
                     userAgent={this.props.userAgent}
                     onShouldStartLoadWithRequest={({ url }) => {
+                        const sanitizedUrl = WebView.sanitize(url);
                         const openExternally =
                             this.props.openLinksExternally &&
-                            (html
-                                ? WebView.sanitize(url).startsWith("http")
-                                : uri && WebView.sanitize(url) !== WebView.sanitize(uri));
+                            (html ? sanitizedUrl.startsWith("http") : uri && sanitizedUrl !== WebView.sanitize(uri));
                         if (openExternally) {
                             Linking.openURL(url);
                             return false;
