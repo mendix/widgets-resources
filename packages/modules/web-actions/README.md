@@ -1,4 +1,4 @@
-# Atlas Web Content module automation
+# Web Actions module automation
 
 This is the package being used to automate the release of Atlas Web Content module.
 

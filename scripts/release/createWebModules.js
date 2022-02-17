@@ -67,7 +67,7 @@ async function createDataWidgetsModule() {
         moduleFolderNameInModeler: "datawidgets"
     };
 
-    await commonActions(moduleInfo, widgets, true, true);
+    await commonActions(moduleInfo, widgets, false, "WIDGETS");
     console.log("Done.");
 }
 
@@ -114,7 +114,7 @@ async function createChartsModule() {
         moduleNameInModeler: "Charts",
         moduleFolderNameInModeler: "charts"
     };
-    await commonActions(moduleInfo, widgets, true, true);
+    await commonActions(moduleInfo, widgets, false, "WIDGETS");
     console.log("Done.");
 }
 
@@ -150,24 +150,26 @@ async function createWebActionsModule() {
     console.log("Done.");
 }
 
-async function commonActions(moduleInfo, widgets = [], exportWithoutSnippet = false, updateWidgetsChangelogs = false) {
+async function commonActions(moduleInfo, widgets = [], exportWithSnippet = true, changeLogScope = "MODULE") {
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await (updateWidgetsChangelogs ? updateChangelogs : updateModuleChangelogs)(moduleInfo);
+    const moduleChangelogs = await (changeLogScope === "WIDGETS" ? updateChangelogs : updateModuleChangelogs)(
+        moduleInfo
+    );
     if (!moduleChangelogs) {
         throw new Error(
             `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
         );
     }
     await commitAndCreatePullRequest(moduleInfo);
-    if (exportWithoutSnippet) {
-        await updateTestProject(tmpFolder, widgets, moduleInfo);
-    } else {
+    if (exportWithSnippet) {
         await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    } else {
+        await updateTestProject(tmpFolder, widgets, moduleInfo);
     }
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
 
-    if (exportWithoutSnippet) {
+    if (!exportWithSnippet) {
         await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, widgets);
     }
     await createGithubReleaseFrom({

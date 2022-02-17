@@ -1,4 +1,4 @@
-# Data Widgets module automation
+# Charts module automation
 
 This is the package being used to automate the release of Data Widgets module.
 
