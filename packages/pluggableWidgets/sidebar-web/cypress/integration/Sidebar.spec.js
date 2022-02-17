@@ -14,56 +14,56 @@ describe("sidebar-web", () => {
 
     describe("toggle mode: none", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-1 > span").click();
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarNone-${browserName}`, 0.1);
         });
     });
 
     describe("toggle mode: push aside", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-2 > span").click();
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarPushAside-${browserName}`, 0.1);
         });
     });
 
     describe("toggle mode: shrink collapsed", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-3 > span").click();
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarShrinkCollapsed-${browserName}`, 0.1);
         });
     });
 
     describe("toggle mode: shrink expanded", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-4 > span").click();
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarShrinkExpanded-${browserName}`, 0.1);
         });
     });
 
     describe("toggle mode: slider over", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-5 > span").click();
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarSlideOver-${browserName}`, 0.1);
         });
     });
     describe("multiple sidebars", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-6 > span").click();
             cy.get(".mx-name-sidebarToggle1").click();
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarMultiple-${browserName}`, 0.1);
         });
     });
     describe("targeted sidebar", () => {
         it("compares with a screenshot baseline and checks if it's rendered as expected", () => {
-            cy.get(".mx-page").should("be.visible");
             cy.get(".mx-name-navigationTree3-7 > span").click();
-            cy.get(".mx-name-actionButton1").click({force: true});
+            cy.get(".mx-name-actionButton1").click({ force: true });
+            cy.wait(2000);
             cy.compareSnapshot(`sidebarTargeted-${browserName}`, 0.1);
         });
     });
