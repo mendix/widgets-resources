@@ -7,7 +7,8 @@ describe("gallery-web", () => {
 
     describe("capabilities: sorting", () => {
         it("applies the default sort order from the data source option", () => {
-            cy.wait(2000);
+            cy.wait(3000);
+            cy.get(".mx-name-gallery1").should("be.visible");
             cy.get(".mx-name-gallery1").compareSnapshot(`galleryContent-${browserName}`, 0.1);
         });
 
