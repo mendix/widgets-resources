@@ -48,6 +48,13 @@ jobs:
               id: variablesLinux
               run: |
                   echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+            - name: "Defining cache"
+              uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
+              env:
+                cache-name: cache-node-modules
+              with:
+                path: ~/.npm
+                key: ${{ runner.os }}-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Defining node version"
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
