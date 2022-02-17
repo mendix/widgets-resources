@@ -9,6 +9,10 @@ export type EditorTypeEnum = "classic" | "inline";
 
 export type ReadOnlyStyleEnum = "text" | "bordered" | "borderedToolbar";
 
+export type WidthUnitEnum = "percentage" | "pixels";
+
+export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
+
 export type PresetEnum = "basic" | "standard" | "full" | "custom";
 
 export type ToolbarConfigEnum = "basic" | "advanced";
@@ -88,10 +92,6 @@ export interface AdvancedConfigType {
     ctItemToolbar: string;
 }
 
-export type WidthUnitEnum = "percentage" | "pixels";
-
-export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
-
 export type EnterModeEnum = "paragraph" | "breakLines" | "blocks";
 
 export type ShiftEnterModeEnum = "paragraph" | "breakLines" | "blocks";
@@ -107,11 +107,15 @@ export interface RichTextContainerProps {
     name: string;
     tabIndex?: number;
     id: string;
-    advancedMode: boolean;
-    editorType: EditorTypeEnum;
     stringAttribute: EditableValue<string>;
     sanitizeContent: boolean;
+    advancedMode: boolean;
+    editorType: EditorTypeEnum;
     readOnlyStyle: ReadOnlyStyleEnum;
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
     preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
     documentGroup: boolean;
@@ -128,10 +132,6 @@ export interface RichTextContainerProps {
     toolsGroup: boolean;
     othersGroup: boolean;
     advancedConfig: AdvancedConfigType[];
-    widthUnit: WidthUnitEnum;
-    width: number;
-    heightUnit: HeightUnitEnum;
-    height: number;
     onKeyPress?: ActionValue;
     onChange?: ActionValue;
     enterMode: EnterModeEnum;
@@ -145,11 +145,15 @@ export interface RichTextContainerProps {
 
 export interface RichTextPreviewProps {
     readOnly: boolean;
-    advancedMode: boolean;
-    editorType: EditorTypeEnum;
     stringAttribute: string;
     sanitizeContent: boolean;
+    advancedMode: boolean;
+    editorType: EditorTypeEnum;
     readOnlyStyle: ReadOnlyStyleEnum;
+    widthUnit: WidthUnitEnum;
+    width: number | null;
+    heightUnit: HeightUnitEnum;
+    height: number | null;
     preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
     documentGroup: boolean;
@@ -166,10 +170,6 @@ export interface RichTextPreviewProps {
     toolsGroup: boolean;
     othersGroup: boolean;
     advancedConfig: AdvancedConfigPreviewType[];
-    widthUnit: WidthUnitEnum;
-    width: number | null;
-    heightUnit: HeightUnitEnum;
-    height: number | null;
     onKeyPress: {} | null;
     onChange: {} | null;
     enterMode: EnterModeEnum;
