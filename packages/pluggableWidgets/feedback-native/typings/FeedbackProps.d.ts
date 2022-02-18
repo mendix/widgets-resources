@@ -6,12 +6,15 @@
 import { CSSProperties } from "react";
 import { DynamicValue, NativeImage } from "mendix";
 
+export type PositionEnum = "top" | "middle" | "bottom";
+
 export interface FeedbackProps<Style> {
     name: string;
     style: Style[];
     sprintrapp: string;
     allowScreenshot: boolean;
     logo?: DynamicValue<NativeImage>;
+    position: PositionEnum;
 }
 
 export interface FeedbackPreviewProps {
@@ -22,4 +25,5 @@ export interface FeedbackPreviewProps {
     sprintrapp: string;
     allowScreenshot: boolean;
     logo: { type: "static"; imageUrl: string } | { type: "dynamic"; entity: string } | null;
+    position: PositionEnum;
 }
