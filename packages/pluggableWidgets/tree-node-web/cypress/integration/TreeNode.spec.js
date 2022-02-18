@@ -40,9 +40,11 @@ describe("tree-node-web", () => {
         it("collapses multiple nodes", () => {
             getTreeNodeHeaders().eq(1).click();
             getTreeNodeHeaders().first().click();
+            cy.wait(500);
             getTreeNodeHeaders().eq(11).click();
             getTreeNodeHeaders().eq(11).click();
             getTreeNodeHeaders().first().click();
+            cy.wait(500);
             // Second header has become the 5th cuz first header was opened and introduces 3 headers.
             getTreeNodeHeaders().eq(4).click();
             cy.get(".mx-name-treeNode1").wait(1000).compareSnapshot(`treeNodeMultipleCollapsed-${browserName}`, 0.1);
