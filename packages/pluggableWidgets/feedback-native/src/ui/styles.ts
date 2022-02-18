@@ -9,8 +9,19 @@ export const floatingButtonContainer: ViewStyle = {
     position: "absolute",
     right: 0,
     top: 0,
-    marginTop: Dimensions.get("window").height / 2 - 100,
     zIndex: 9999
+};
+
+export const floatingButtonPositionTop: ViewStyle = {
+    marginTop: Dimensions.get("window").height * 0.25 - 100
+};
+
+export const floatingButtonPositionMiddle: ViewStyle = {
+    marginTop: Dimensions.get("window").height * 0.5 - 100
+};
+
+export const floatingButtonPositionBottom: ViewStyle = {
+    marginTop: Dimensions.get("window").height * 0.75 - 100
 };
 
 export const imageStyle: ImageStyle = {
