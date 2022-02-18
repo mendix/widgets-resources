@@ -7,13 +7,13 @@ import { ActionValue, EditableValue } from "mendix";
 
 export type EditorTypeEnum = "classic" | "inline";
 
+export type PresetEnum = "basic" | "standard" | "full" | "custom";
+
 export type ReadOnlyStyleEnum = "text" | "bordered" | "borderedToolbar";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
-
-export type PresetEnum = "basic" | "standard" | "full" | "custom";
 
 export type ToolbarConfigEnum = "basic" | "advanced";
 
@@ -111,12 +111,12 @@ export interface RichTextContainerProps {
     sanitizeContent: boolean;
     advancedMode: boolean;
     editorType: EditorTypeEnum;
+    preset: PresetEnum;
     readOnlyStyle: ReadOnlyStyleEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
     documentGroup: boolean;
     clipboardGroup: boolean;
@@ -149,12 +149,12 @@ export interface RichTextPreviewProps {
     sanitizeContent: boolean;
     advancedMode: boolean;
     editorType: EditorTypeEnum;
+    preset: PresetEnum;
     readOnlyStyle: ReadOnlyStyleEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    preset: PresetEnum;
     toolbarConfig: ToolbarConfigEnum;
     documentGroup: boolean;
     clipboardGroup: boolean;

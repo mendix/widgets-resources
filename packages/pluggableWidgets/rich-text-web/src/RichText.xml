@@ -32,6 +32,17 @@
                         <enumerationValue key="inline">Inline</enumerationValue>
                     </enumerationValues>
                 </property>
+                <property key="preset" type="enumeration" defaultValue="basic">
+                    <!-- For why this caption have name Toolbar check WC-1010 -->
+                    <caption>Toolbar</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="basic">Basic</enumerationValue>
+                        <enumerationValue key="standard">Standard</enumerationValue>
+                        <enumerationValue key="full">Full</enumerationValue>
+                        <enumerationValue key="custom">Custom</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <systemProperty key="Label" />
             </propertyGroup>
             <propertyGroup caption="Editability">
@@ -79,18 +90,8 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Toolbars">
-            <propertyGroup caption="Toolbars">
-                <property key="preset" type="enumeration" defaultValue="basic">
-                    <caption>Presets</caption>
-                    <description />
-                    <enumerationValues>
-                        <enumerationValue key="basic">Basic</enumerationValue>
-                        <enumerationValue key="standard">Standard</enumerationValue>
-                        <enumerationValue key="full">Full</enumerationValue>
-                        <enumerationValue key="custom">Custom</enumerationValue>
-                    </enumerationValues>
-                </property>
+        <propertyGroup caption="Custom toolbar">
+            <propertyGroup caption="Custom toolbar">
                 <property key="toolbarConfig" type="enumeration" defaultValue="basic">
                     <caption>Toolbar group</caption>
                     <description />
