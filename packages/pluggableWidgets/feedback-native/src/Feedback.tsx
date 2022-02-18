@@ -9,7 +9,8 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
+    ViewStyle
 } from "react-native";
 import Dialog from "react-native-dialog";
 import { captureScreen } from "react-native-view-shot";
@@ -21,6 +22,9 @@ import {
     defaultFeedbackStyle,
     FeedbackStyle,
     floatingButtonContainer,
+    floatingButtonPositionTop,
+    floatingButtonPositionMiddle,
+    floatingButtonPositionBottom,
     imageStyle,
     processStyles,
     switchContainer
@@ -74,8 +78,25 @@ export class Feedback extends Component<FeedbackProps<FeedbackStyle>, State> {
     }
 
     private renderFloatingButton(): JSX.Element | null {
+        let floatingButtonContainerMergedStyle: ViewStyle = {};
+
+        switch (this.props.position) {
+            case "top":
+                floatingButtonContainerMergedStyle = { ...floatingButtonPositionTop };
+                break;
+            case "bottom":
+                floatingButtonContainerMergedStyle = { ...floatingButtonPositionBottom };
+                break;
+            case "middle":
+            default:
+                floatingButtonContainerMergedStyle = { ...floatingButtonPositionMiddle };
+                break;
+        }
         return this.state.status === "initial" ? (
-            <View style={floatingButtonContainer} testID={`${this.props.name}$button`}>
+            <View
+                style={[floatingButtonContainer, floatingButtonContainerMergedStyle]}
+                testID={`${this.props.name}$button`}
+            >
                 <View style={this.styles.floatingButton}>
                     <TouchableOpacity onPress={this.onFeedbackButtonPressHandler}>
                         {this.props.logo && this.props.logo.value ? (
