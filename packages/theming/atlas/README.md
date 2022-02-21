@@ -55,7 +55,7 @@ Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more
         │       ├── core
         │       │   ├── _legacy
         │       │   │   ├── bootstrap
-        │       │   │   │   └── *.scss 
+        │       │   │   │   └── *.scss
         │       │   │   └── _mxui.scss
         │       │   ├── base
         │       │   │   ├── mixins
@@ -74,22 +74,22 @@ Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more
         │       ├── _variables.scss
         │       ├── design-properties.json
         │       └── main.scss
-        │ 
+        │
         ├── atlas_nativemobile_content
         │   └── native
-        │       ├── buildingblocks 
+        │       ├── buildingblocks
         │       │   └── *.ts
-        │       ├── pagetemplates 
-        │       │   └── *.ts 
-        │       └── main.ts 
+        │       ├── pagetemplates
+        │       │   └── *.ts
+        │       └── main.ts
         │
         └── atlas_web_content
             └── web
-                ├── buildingblocks 
+                ├── buildingblocks
                 │   └── *.scss
-                ├── pagetemplates 
-                │   └── *.scss 
-                └── main.scss 
+                ├── pagetemplates
+                │   └── *.scss
+                └── main.scss
 ```
 
 ## Overview
@@ -102,7 +102,7 @@ Extra platform-specific styles can be found in the other 2 modules. These 2 modu
 Building blocks are created with Widgets. For example cards or headers are building blocks. A building block could be an image, a title, and a button, assembled together into one UI block.
 Page Templates are created with Building Blocks and Widgets. Page Templates are an example of how a page could look.
 
-In a Mendix project the styles from these modules can be found in the `themesource` folder. 
+In a Mendix project the styles from these modules can be found in the `themesource` folder.
 
 ### `theme` directory
 
@@ -117,7 +117,7 @@ Run `npm install` in the root of this repository (`mendix/widgets-resources`) to
 
 ### Production
 
-Run `npm run build` in this folder (`widget-resources/packages/theming/atlas`) to build and output assets to `dist/theme` &  `dist/themesource`.
+Run `npm run build` in this folder (`widget-resources/packages/theming/atlas`) to build and output assets to `dist/theme` & `dist/themesource`.
 
 ### Development
 

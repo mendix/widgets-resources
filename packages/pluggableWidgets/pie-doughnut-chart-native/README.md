@@ -11,7 +11,7 @@ The pie/doughnut chart widget renders a dataset as a pie or doughnut chart (depe
     1. Select a data source.
     1. Configure a X and Y attribute.
     1. Optionally configure a dynamic styling key.
-    
+
 1. Select which sort order is preferable for your data sets (default: "Ascending").
 1. Select whether slices should have labels for X-axis values (default: "Yes").
 1. Run the Mendix application to check out the chart.
