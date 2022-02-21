@@ -4,7 +4,7 @@ import { VideoPlayerPreviewProps } from "../typings/VideoPlayerProps";
 import StructurePreviewWithControlsSVG from "./assets/structure-preview-video-with-controls.svg";
 import StructurePreviewWithoutControlsSVG from "./assets/structure-preview-video-without-controls.svg";
 
-export function getPreview(values: VideoPlayerPreviewProps): StructurePreviewProps | null {
+export function getPreview(values: VideoPlayerPreviewProps): StructurePreviewProps {
     const image = values.showControls ? StructurePreviewWithControlsSVG : StructurePreviewWithoutControlsSVG;
     return {
         type: "Image",
