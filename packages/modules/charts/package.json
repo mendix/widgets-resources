@@ -1,7 +1,7 @@
 {
-  "name": "data-widgets",
-  "moduleName": "Data Widgets",
-  "version": "2.3.0",
+  "name": "charts",
+  "moduleName": "Charts",
+  "version": "3.0.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
@@ -10,22 +10,19 @@
   },
   "marketplace": {
     "minimumMXVersion": "9.6.0.27784",
-    "marketplaceId": 116540
+    "marketplaceId": 105695
   },
   "testProject": {
-    "githubUrl": "https://github.com/mendix/DataWidgets-module",
+    "githubUrl": "https://github.com/mendix/Charts-module",
     "branchName": "main"
   },
   "scripts": {
     "build": "node ./scripts/build.js",
-    "start": "node ./scripts/build.js start",
     "release": "node ./scripts/build.js release",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {},
   "devDependencies": {
-    "copy-and-watch": "^0.1.5",
-    "concurrently": "^6.0.0",
     "cross-env": "^7.0.2"
   }
 }

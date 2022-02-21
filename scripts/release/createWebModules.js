@@ -1,5 +1,5 @@
 const { basename, join } = require("path");
-const { copyFile, readdir, rm } = require("fs/promises");
+const { mkdir, copyFile, rm } = require("fs/promises");
 const {
     execShellCommand,
     getFiles,
@@ -25,7 +25,7 @@ main().catch(e => {
 });
 
 async function main() {
-    const modules = ["data-widgets", "atlas-web-content", "atlas-core"];
+    const modules = ["data-widgets", "atlas-web-content", "atlas-core", "web-actions", "charts"];
     if (!modules.includes(moduleFolderNameInRepo)) {
         return;
     }
@@ -39,6 +39,12 @@ async function main() {
             break;
         case "atlas-core":
             await createAtlasCoreModule();
+            break;
+        case "charts":
+            await createChartsModule();
+            break;
+        case "web-actions":
+            await createWebActionsModule();
             break;
     }
 }
@@ -54,39 +60,14 @@ async function createDataWidgetsModule() {
         "dropdown-sort-web",
         "gallery-web",
         "tree-node-web"
-    ];
-    const tmpFolder = join(repoRootPath, "tmp/data-widgets");
-    const widgetFolders = await readdir(join(repoRootPath, "packages/pluggableWidgets"));
-    const dataWidgetsFolders = widgetFolders
-        .filter(folder => widgets.includes(folder))
-        .map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    ].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
         moduleNameInModeler: "DataWidgets",
         moduleFolderNameInModeler: "datawidgets"
     };
 
-    await githubAuthentication(moduleInfo);
-    const moduleChangelogs = await updateChangelogs(dataWidgetsFolders, moduleInfo);
-    if (!moduleChangelogs) {
-        throw new Error(
-            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
-        );
-    }
-    await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProject(tmpFolder, dataWidgetsFolders, moduleInfo);
-    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
-
-    await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, dataWidgetsFolders);
-
-    await createGithubReleaseFrom({
-        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
-        body: moduleChangelogs.replace(/"/g, "'"),
-        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
-        mpkOutput,
-        isDraft: true
-    });
-    await execShellCommand(`rm -rf ${tmpFolder}`);
+    await commonActions(moduleInfo, widgets, false, "WIDGETS");
     console.log("Done.");
 }
 
@@ -116,7 +97,35 @@ async function createAtlasCoreModule() {
     console.log("Done.");
 }
 
-async function commonActions(moduleInfo, widgets) {
+async function createChartsModule() {
+    console.log("Creating the Charts module.");
+    const widgets = [
+        "area-chart-web",
+        "bar-chart-web",
+        "bubble-chart-web",
+        "column-chart-web",
+        "heatmap-chart-web",
+        "line-chart-web",
+        "pie-doughnut-chart-web",
+        "time-series-chart-web"
+    ].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
+    const moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "Charts",
+        moduleFolderNameInModeler: "charts"
+    };
+    await commonActions(moduleInfo, widgets, false, "WIDGETS");
+    console.log("Done.");
+}
+
+async function createWebActionsModule() {
+    console.log("Creating the Web Actions module.");
+    const moduleInfo = {
+        ...(await getPackageInfo(moduleFolder)),
+        moduleNameInModeler: "WebActions",
+        moduleFolderNameInModeler: "webactions"
+    };
+
     const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
     await githubAuthentication(moduleInfo);
     const moduleChangelogs = await updateModuleChangelogs(moduleInfo);
@@ -126,8 +135,43 @@ async function commonActions(moduleInfo, widgets) {
         );
     }
     await commitAndCreatePullRequest(moduleInfo);
-    await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    await updateTestProjectWithJavascript(tmpFolder, moduleInfo);
     const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
+
+    await createGithubReleaseFrom({
+        title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
+        body: moduleChangelogs.replace(/"/g, "'"),
+        tag: `${moduleFolderNameInRepo}-v${moduleInfo.version}`,
+        mpkOutput,
+        isDraft: true
+    });
+    await execShellCommand(`rm -rf ${tmpFolder}`);
+
+    console.log("Done.");
+}
+
+async function commonActions(moduleInfo, widgets = [], exportWithSnippet = true, changeLogScope = "MODULE") {
+    const tmpFolder = join(repoRootPath, "tmp", moduleFolderNameInRepo);
+    await githubAuthentication(moduleInfo);
+    const moduleChangelogs = await (changeLogScope === "WIDGETS" ? updateChangelogs : updateModuleChangelogs)(
+        moduleInfo
+    );
+    if (!moduleChangelogs) {
+        throw new Error(
+            `No unreleased changes found in the CHANGELOG.md for ${moduleInfo.nameWithSpace} ${moduleInfo.version}.`
+        );
+    }
+    await commitAndCreatePullRequest(moduleInfo);
+    if (exportWithSnippet) {
+        await updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widgets);
+    } else {
+        await updateTestProject(tmpFolder, widgets, moduleInfo);
+    }
+    const mpkOutput = await createMPK(tmpFolder, moduleInfo, regex.excludeFiles);
+
+    if (!exportWithSnippet) {
+        await exportModuleWithWidgets(moduleInfo.moduleNameInModeler, mpkOutput, widgets);
+    }
     await createGithubReleaseFrom({
         title: `${moduleInfo.nameWithSpace} - Marketplace Release v${moduleInfo.version}`,
         body: moduleChangelogs.replace(/"/g, "'"),
@@ -158,7 +202,7 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
     const tmpFolderWidgets = join(tmpFolder, "widgets");
     const tmpFolderActions = join(tmpFolder, "themesource");
 
-    console.log("Updating DataWidgets project..");
+    console.log("Updating project..");
     await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
 
     console.log("Copying widgets and styles..");
@@ -166,12 +210,13 @@ async function updateTestProject(tmpFolder, widgetsFolders, moduleInfo) {
         ...widgetsFolders.map(async folder => {
             const src = (await getFiles(folder, [`.mpk`]))[0];
             const dest = join(tmpFolderWidgets, basename(src));
-            await rm(dest);
+            await rm(dest, { force: true });
             await copyFile(src, dest);
         }),
         ...styles.map(async file => {
             const dest = join(tmpFolderActions, file.replace(stylesPath, ""));
-            await rm(dest);
+            await rm(dest, { force: true });
+            await mkdir(dest.replace(basename(dest), ""), { recursive: true });
             await copyFile(file, dest);
         })
     ]);
@@ -203,6 +248,7 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
         ...projectFiles.map(async file => {
             const dest = join(tmpFolderStyles, file.replace(projectPath, ""));
             await rm(dest, { force: true });
+            await mkdir(dest.replace(basename(dest), ""), { recursive: true });
             await copyFile(file, dest);
         })
     ]);
@@ -218,5 +264,34 @@ async function updateTestProjectWithWidgetsAndAtlas(moduleInfo, tmpFolder, widge
         console.warn(`Nothing to commit from repo ${tmpFolder}`);
     } else {
         await execShellCommand("git add . && git commit -m 'Updated widgets and styling' && git push", tmpFolder);
+    }
+}
+
+async function updateTestProjectWithJavascript(tmpFolder, moduleInfo) {
+    const javascriptFiles = join(repoRootPath, `packages/modules/${moduleFolderNameInRepo}/dist/javascriptsource`);
+    const files = await getFiles(javascriptFiles);
+    const tmpFolderJs = join(tmpFolder, "javascriptsource");
+
+    console.log("Updating project..");
+    await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
+
+    console.log("Copying javascript files..");
+    await Promise.all([
+        ...files.map(async file => {
+            const dest = join(tmpFolderJs, file.replace(javascriptFiles, ""));
+            await rm(dest, { force: true });
+            await mkdir(dest.replace(basename(dest), ""), { recursive: true });
+            await copyFile(file, dest);
+        })
+    ]);
+    await execShellCommand(
+        `echo ${moduleInfo.version} > javascriptsource/${moduleInfo.moduleFolderNameInModeler}/.version`,
+        tmpFolder
+    );
+    const gitOutput = await execShellCommand(`cd ${tmpFolder} && git status`);
+    if (/nothing to commit/i.test(gitOutput)) {
+        console.warn(`Nothing to commit from repo ${tmpFolder}s`);
+    } else {
+        await execShellCommand(`git add . && git commit -m "Updated widgets and styles" && git push`, tmpFolder);
     }
 }
