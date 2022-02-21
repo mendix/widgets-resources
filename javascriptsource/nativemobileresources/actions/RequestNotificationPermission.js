@@ -15,7 +15,7 @@ async function RequestNotificationPermission() {
     }
     return messaging()
         .requestPermission()
-        .then(() => Platform.OS === "ios"
+        .then(() => Platform.OS === "ios" && !messaging().isDeviceRegisteredForRemoteMessages
         ? messaging()
             .registerDeviceForRemoteMessages()
             .then(() => true)
