@@ -67,7 +67,7 @@ async function copyChartsWidgets(destination, mode) {
     }
 
     if (mode === "release") {
-        execSync(`npm run release -- --scope '*-chart-web'`, {
+        execSync(`npm run release -- --scope '*-chart-web' --concurrency 1`, {
             stdio: "inherit",
             cwd
         });
@@ -88,9 +88,12 @@ async function copyChartsWidgets(destination, mode) {
             cp(mpkPathsToCopy, join(__dirname, "../dist/widgets"));
         }
     } else {
-        execSync(`npx cross-env MX_PROJECT_PATH=${destination} npm run build -- --scope '*-chart-web'`, {
-            stdio: "inherit",
-            cwd
-        });
+        execSync(
+            `npx cross-env MX_PROJECT_PATH=${destination} npm run build -- --scope '*-chart-web' --concurrency 1`,
+            {
+                stdio: "inherit",
+                cwd
+            }
+        );
     }
 }
