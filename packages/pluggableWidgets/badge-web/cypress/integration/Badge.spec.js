@@ -7,7 +7,8 @@ describe("badge-web", () => {
 
     describe("type: badge", () => {
         it("compares with a screenshot baseline and checks if all badges elements are rendered as expected", () => {
-            cy.wait(2000);
+            cy.wait(3000);
+            cy.get(".mx-name-table1").should("be.visible");
             cy.get(".mx-name-table1").compareSnapshot(`badgePageContent-${browserName}`, 0.1);
         });
         it("changes caption when attribute value is changed", () => {
