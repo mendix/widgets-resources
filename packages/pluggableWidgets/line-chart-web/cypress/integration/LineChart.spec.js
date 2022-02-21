@@ -7,7 +7,7 @@ describe("line-chart-web", () => {
 
     describe("line style", () => {
         it("renders basic line chart and compares with a screenshot baseline", () => {
-            cy.wait(3000);
+            cy.wait(5000);
             cy.get(".mx-name-containerBasic").should("be.visible");
             cy.get(".mx-name-containerBasic").compareSnapshot(`lineChartLineBasic-${browserName}`, 0.1);
         });
