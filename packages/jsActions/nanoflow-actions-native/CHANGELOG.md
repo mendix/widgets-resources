@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Added
 - We introduce a new `Get current location with minimum accuracy` action to acquire more precise locations.
+- Dark theme icons for JS Actions
+
 
 ### Fixed
 - We fixed a bug where the `Speed` was not being defined while using `Get current location` action.
