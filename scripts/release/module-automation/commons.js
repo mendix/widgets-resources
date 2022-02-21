@@ -141,13 +141,13 @@ async function getUnreleasedChangelogs({ version, changelogPath }) {
         const releasedVersions = content.match(regex.releasedVersions);
         if (releasedVersions?.includes(version)) {
             throw new Error(
-                `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
+                `It looks like version ${version} from package.json is already released. Did you forget to bump the version? Path: ${changelogPath}`
             );
         }
 
         return changelogs || "";
     } catch (error) {
-        console.error(`ERROR: Path does not exist: ${changelogPath}`);
+        console.error(error.message);
     }
 }
 
