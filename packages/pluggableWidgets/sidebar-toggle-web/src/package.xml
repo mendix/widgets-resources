@@ -2,10 +2,10 @@
 <package xmlns="http://www.mendix.com/package/1.0/">
     <clientModule name="Sidebar" version="1.0.0" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
-            <widgetFile path="SidebarToggle.xml"/>
+            <widgetFile path="SidebarToggle.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/web/sidebartoggle"/>
+            <file path="com/mendix/widget/web/sidebartoggle" />
         </files>
     </clientModule>
 </package>

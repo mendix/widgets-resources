@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.timeline.Timeline" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.timeline.Timeline" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Timeline</name>
     <description>Shows vertical timeline with events</description>
     <studioProCategory>Display</studioProCategory>
@@ -13,15 +10,15 @@
             <propertyGroup caption="Data source">
                 <property key="data" type="datasource" isList="true">
                     <caption>Data source</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="title" type="textTemplate" dataSource="data" required="false">
                     <caption>Title</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="description" type="textTemplate" dataSource="data" required="false">
                     <caption>Description</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="timeIndication" type="textTemplate" dataSource="data" required="false">
                     <caption>Time Indication</caption>
@@ -47,7 +44,7 @@
                     <caption>Group Attribute</caption>
                     <description>Will be used for grouping events, as a group header value. If events have no date time value, use "Unscheduled events placement" to control rendering.</description>
                     <attributeTypes>
-                        <attributeType name="DateTime"/>
+                        <attributeType name="DateTime" />
                     </attributeTypes>
                 </property>
                 <property key="groupByKey" type="enumeration" defaultValue="day">
@@ -70,7 +67,7 @@
                 </property>
                 <property key="groupByMonthOptions" type="enumeration" defaultValue="month">
                     <caption>Format</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="month">Month</enumerationValue>
                         <enumerationValue key="monthYear">Month &amp; year</enumerationValue>
@@ -112,7 +109,7 @@
         <propertyGroup caption="Events">
             <property key="onClick" type="action" dataSource="data" required="false">
                 <caption>On click</caption>
-                <description/>
+                <description />
             </property>
         </propertyGroup>
     </properties>

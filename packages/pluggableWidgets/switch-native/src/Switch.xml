@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.switch.Switch" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true"
-        pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.switch.Switch" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Switch</name>
     <description>Toggle a boolean attribute.</description>
     <studioProCategory>Display</studioProCategory>
@@ -11,30 +9,30 @@
             <propertyGroup caption="Data source">
                 <property key="booleanAttribute" type="attribute">
                     <caption>Attribute</caption>
-                    <description/>
+                    <description />
                     <attributeTypes>
-                        <attributeType name="Boolean"/>
+                        <attributeType name="Boolean" />
                     </attributeTypes>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onChange" type="action" required="false">
                     <caption>On change</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Label">
                 <property key="showLabel" type="boolean" defaultValue="false">
                     <caption>Show label</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="label" type="textTemplate" required="false">
                     <caption>Label</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="labelOrientation" type="enumeration" defaultValue="horizontal">
                     <caption>Label orientation</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="horizontal">Horizontal</enumerationValue>
                         <enumerationValue key="vertical">Vertical</enumerationValue>
@@ -42,13 +40,13 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Editability">
-                <systemProperty key="Editability"/>
+                <systemProperty key="Editability" />
             </propertyGroup>
             <propertyGroup caption="Visibility">
-                <systemProperty key="Visibility"/>
+                <systemProperty key="Visibility" />
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
     </properties>

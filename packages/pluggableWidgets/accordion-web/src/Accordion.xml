@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.accordion.Accordion" needsEntityContext="true" offlineCapable="true"
-        pluginWidget="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.accordion.Accordion" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Accordion</name>
     <description>Toggle the display of sections of content.</description>
     <studioProCategory>Structure</studioProCategory>
@@ -13,16 +10,16 @@
             <propertyGroup caption="General">
                 <property key="advancedMode" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="groups" type="object" isList="true" required="true">
                     <caption>Groups</caption>
-                    <description/>
+                    <description />
                     <properties>
                         <propertyGroup caption="General">
                             <property key="headerRenderMode" type="enumeration" defaultValue="text">
                                 <caption>Header</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="text">Text</enumerationValue>
                                     <enumerationValue key="custom">Custom</enumerationValue>
@@ -30,7 +27,7 @@
                             </property>
                             <property key="headerText" type="textTemplate">
                                 <caption>Text</caption>
-                                <description/>
+                                <description />
                                 <translations>
                                     <translation lang="en_US">Header</translation>
                                     <translation lang="nl_NL">Koptekst</translation>
@@ -50,21 +47,21 @@
                             </property>
                             <property key="headerContent" type="widgets" required="false">
                                 <caption>Header</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="content" type="widgets" required="false">
                                 <caption>Content</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="visible" type="expression" defaultValue="true">
                                 <caption>Visible</caption>
-                                <description/>
-                                <returnType type="Boolean"/>
+                                <description />
+                                <returnType type="Boolean" />
                             </property>
                             <property key="dynamicClass" type="expression" required="false">
                                 <caption>Dynamic class</caption>
-                                <description/>
-                                <returnType type="String"/>
+                                <description />
+                                <returnType type="String" />
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="State">
@@ -79,14 +76,14 @@
                             </property>
                             <property key="initiallyCollapsed" type="expression" defaultValue="true">
                                 <caption>Start as collapsed</caption>
-                                <description/>
-                                <returnType type="Boolean"/>
+                                <description />
+                                <returnType type="Boolean" />
                             </property>
                             <property key="collapsed" type="attribute" required="false" onChange="onToggleCollapsed">
                                 <caption>Collapsed</caption>
                                 <description>Determines whether the group is collapsed or expanded. The 'Start as' properties override the attribute value for the initial state.</description>
                                 <attributeTypes>
-                                    <attributeType name="Boolean"/>
+                                    <attributeType name="Boolean" />
                                 </attributeTypes>
                             </property>
                             <property key="onToggleCollapsed" type="action">
@@ -100,7 +97,7 @@
             <propertyGroup caption="Behavior">
                 <property key="collapsible" type="boolean" defaultValue="true">
                     <caption>Collapsible</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="expandBehavior" type="enumeration" defaultValue="singleExpanded">
                     <caption>Expanded groups</caption>
@@ -112,7 +109,7 @@
                 </property>
                 <property key="animate" type="boolean" defaultValue="true">
                     <caption>Animate</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -120,7 +117,7 @@
             <propertyGroup caption="Icon">
                 <property key="showIcon" type="enumeration" defaultValue="right">
                     <caption>Show icon</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="right">Right</enumerationValue>
                         <enumerationValue key="left">Left</enumerationValue>
@@ -129,15 +126,15 @@
                 </property>
                 <property key="icon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="expandIcon" type="icon" required="false">
                     <caption>Expand icon</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="collapseIcon" type="icon" required="false">
                     <caption>Collapse icon</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="animateIcon" type="boolean" defaultValue="true">
                     <caption>Animate icon</caption>

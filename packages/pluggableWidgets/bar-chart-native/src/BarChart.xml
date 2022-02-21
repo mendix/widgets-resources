@@ -24,7 +24,7 @@
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
                                 <caption>Data set</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="static">Static</enumerationValue>
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
@@ -69,8 +69,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
@@ -82,9 +82,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                             <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
@@ -96,9 +95,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
@@ -110,8 +108,8 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                     <attributeType name="AutoNumber" />
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
                                 </attributeTypes>
                             </property>
                         </propertyGroup>
@@ -134,7 +132,7 @@
                     <caption>Sort order</caption>
                     <description>Applicable only to X axis attributes.</description>
                     <enumerationValues>
-                        <enumerationValue key="ascending" >Ascending</enumerationValue>
+                        <enumerationValue key="ascending">Ascending</enumerationValue>
                         <enumerationValue key="descending">Descending</enumerationValue>
                     </enumerationValues>
                 </property>
@@ -158,7 +156,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
                 <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>

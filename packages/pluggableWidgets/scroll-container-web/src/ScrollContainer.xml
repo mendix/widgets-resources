@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.scrollcontainer.ScrollContainer" needsEntityContext="true" offlineCapable="true"
-        pluginWidget="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.scrollcontainer.ScrollContainer" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Scroll container</name>
     <description>Displays a scrollable container</description>
     <studioProCategory>Layout</studioProCategory>
@@ -12,7 +9,7 @@
             <propertyGroup caption="Width">
                 <property key="widthType" type="enumeration" defaultValue="full">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="full">Full width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>

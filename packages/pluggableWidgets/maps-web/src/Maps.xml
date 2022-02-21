@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.Maps.Maps" pluginWidget="true" offlineCapable="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.Maps.Maps" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Maps</name>
     <description>Custom description please</description>
     <studioProCategory>Display</studioProCategory>
@@ -13,7 +11,7 @@
             <propertyGroup caption="General">
                 <property key="advanced" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Markers">
@@ -25,7 +23,7 @@
                             <propertyGroup caption="Location">
                                 <property key="locationType" type="enumeration" defaultValue="address">
                                     <caption>Location</caption>
-                                    <description/>
+                                    <description />
                                     <enumerationValues>
                                         <enumerationValue key="address">Based on address</enumerationValue>
                                         <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
@@ -51,13 +49,13 @@
                             <propertyGroup caption="Events">
                                 <property key="onClick" type="action" required="false">
                                     <caption>On click</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Visualization">
                                 <property key="markerStyle" type="enumeration" defaultValue="default">
                                     <caption>Marker style</caption>
-                                    <description/>
+                                    <description />
                                     <enumerationValues>
                                         <enumerationValue key="default">Default</enumerationValue>
                                         <enumerationValue key="image">Image</enumerationValue>
@@ -79,11 +77,11 @@
                             <propertyGroup caption="Location">
                                 <property key="markersDS" type="datasource" isList="true" required="false">
                                     <caption>Data source</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                                 <property key="locationType" type="enumeration" defaultValue="address">
                                     <caption>Location</caption>
-                                    <description/>
+                                    <description />
                                     <enumerationValues>
                                         <enumerationValue key="address">Based on address</enumerationValue>
                                         <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
@@ -93,41 +91,41 @@
                                     <caption>Address</caption>
                                     <description>Address containing (a subset of) street, number, zipcode, city and country.</description>
                                     <attributeTypes>
-                                        <attributeType name="String"/>
+                                        <attributeType name="String" />
                                     </attributeTypes>
                                 </property>
                                 <property key="latitude" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Latitude</caption>
                                     <description>Decimal number from -90.0 to 90.0.</description>
                                     <attributeTypes>
-                                        <attributeType name="Decimal"/>
+                                        <attributeType name="Decimal" />
                                     </attributeTypes>
                                 </property>
                                 <property key="longitude" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Longitude</caption>
                                     <description>Decimal number from -180.0 to 180.0.</description>
                                     <attributeTypes>
-                                        <attributeType name="Decimal"/>
+                                        <attributeType name="Decimal" />
                                     </attributeTypes>
                                 </property>
                                 <property key="title" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Title</caption>
                                     <description>Title displayed when clicking the marker.</description>
                                     <attributeTypes>
-                                        <attributeType name="String"/>
+                                        <attributeType name="String" />
                                     </attributeTypes>
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Events">
                                 <property key="onClickAttribute" type="action" dataSource="markersDS" required="false">
                                     <caption>On click</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Visualization">
                                 <property key="markerStyleDynamic" type="enumeration" defaultValue="default">
                                     <caption>Marker style</caption>
-                                    <description/>
+                                    <description />
                                     <enumerationValues>
                                         <enumerationValue key="default">Default</enumerationValue>
                                         <enumerationValue key="image">Image</enumerationValue>
@@ -150,7 +148,7 @@
                 <property key="apiKeyExp" type="expression" required="false">
                     <caption>API Key</caption>
                     <description>API Key for usage of the map through the selected provider.Google Maps - https://developers.google.com/maps/documentation/javascript/get-api-key Map Box - https://docs.mapbox.com/help/getting-started/access-tokens/ Here Maps - https://developer.here.com/tutorials/getting-here-credentials/</description>
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
                 <property key="geodecodeApiKey" type="string" required="false">
                     <caption>Geo location API key</caption>
@@ -159,7 +157,7 @@
                 <property key="geodecodeApiKeyExp" type="expression" required="false">
                     <caption>Geo location API key</caption>
                     <description>Used to translate addresses to latitude and longitude. This API Key should be a Google Geocoding API Key found in https://developers.google.com/maps/documentation/geocoding/overview</description>
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
                 <property key="showCurrentLocation" type="boolean" defaultValue="false">
                     <caption>Show current location marker</caption>
@@ -195,11 +193,11 @@
                 </property>
                 <property key="fullScreenControl" type="boolean" defaultValue="true">
                     <caption>Full screen</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="rotateControl" type="boolean" defaultValue="true">
                     <caption>Rotate</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -215,11 +213,11 @@
                 </property>
                 <property key="width" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -228,11 +226,11 @@
                 </property>
                 <property key="height" type="integer" defaultValue="75">
                     <caption>Height</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="zoom" type="enumeration" defaultValue="automatic">
                     <caption>Zoom level</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="automatic">Automatic</enumerationValue>
                         <enumerationValue key="world">World</enumerationValue>
@@ -248,7 +246,7 @@
             <propertyGroup caption="General">
                 <property key="mapProvider" type="enumeration" defaultValue="googleMaps">
                     <caption>Map provider</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="googleMaps">Google Maps</enumerationValue>
                         <enumerationValue key="openStreet">Open street</enumerationValue>

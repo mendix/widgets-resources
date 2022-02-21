@@ -19,7 +19,7 @@
                     <caption>Trigger attribute</caption>
                     <description>Defines if the modal bottom sheet is visible or not. Initially this value should be false. When set to true, the bottom sheet will be shown. When the bottom sheet is hidden, the trigger attribute value is set to false.</description>
                     <attributeTypes>
-                        <attributeType name="Boolean"/>
+                        <attributeType name="Boolean" />
                     </attributeTypes>
                 </property>
                 <property key="modalRendering" type="enumeration" defaultValue="basic">
@@ -87,7 +87,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
                 <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>

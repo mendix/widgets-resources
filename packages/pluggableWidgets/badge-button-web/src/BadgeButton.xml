@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.badgebutton.BadgeButton" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.badgebutton.BadgeButton" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Badge button</name>
-    <description/>
+    <description />
     <studioProCategory>Buttons</studioProCategory>
     <studioCategory>Buttons</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/widgets/badge-button</helpUrl>
@@ -12,7 +10,7 @@
             <propertyGroup caption="General">
                 <property key="label" type="textTemplate" required="false">
                     <caption>Caption</caption>
-                    <description/>
+                    <description />
                     <translations>
                         <translation lang="en_US">Button</translation>
                         <translation lang="nl_NL">Knop</translation>
@@ -22,21 +20,21 @@
             <propertyGroup caption="Badge">
                 <property key="value" type="textTemplate" required="false">
                     <caption>Value</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Visibility">
-                <systemProperty key="Visibility"/>
+                <systemProperty key="Visibility" />
             </propertyGroup>
             <propertyGroup caption="Events">
                 <property key="onClickEvent" type="action" required="false">
                     <caption>On click</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="TabIndex"/>
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
             </propertyGroup>
         </propertyGroup>
     </properties>

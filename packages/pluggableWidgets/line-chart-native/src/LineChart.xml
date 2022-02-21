@@ -14,7 +14,7 @@
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
                                 <caption>Data set</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="static">Static</enumerationValue>
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
@@ -152,7 +152,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
                 <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>

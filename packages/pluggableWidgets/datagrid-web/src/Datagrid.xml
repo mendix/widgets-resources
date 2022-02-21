@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.web.datagrid.Datagrid" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Data grid 2</name>
-    <description/>
+    <description />
     <studioProCategory>Data containers</studioProCategory>
     <studioCategory>Data Containers</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2</helpUrl>
@@ -14,18 +14,18 @@
                 </property>
                 <property key="datasource" type="datasource" isList="true">
                     <caption>Data source</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Columns">
                 <property key="columns" type="object" isList="true">
                     <caption>Columns</caption>
-                    <description/>
+                    <description />
                     <properties>
                         <propertyGroup caption="General">
                             <property key="showContentAs" type="enumeration" defaultValue="attribute">
                                 <caption>Show</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="attribute">Attribute</enumerationValue>
                                     <enumerationValue key="dynamicText">Dynamic text</enumerationValue>
@@ -36,27 +36,27 @@
                                 <caption>Attribute</caption>
                                 <description>Attribute is required if the column can be sorted or filtered</description>
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="AutoNumber"/>
-                                    <attributeType name="Boolean"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
                             <property key="content" type="widgets" dataSource="../datasource" required="false">
                                 <caption>Custom content</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="dynamicText" type="textTemplate" dataSource="../datasource" required="false">
                                 <caption>Dynamic text</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="header" type="textTemplate" required="false">
                                 <caption>Caption</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="tooltip" type="textTemplate" required="false" dataSource="../datasource">
                                 <caption>Tooltip</caption>
@@ -64,25 +64,25 @@
                             </property>
                             <property key="filter" type="widgets" required="false">
                                 <caption>Filter</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Column capabilities">
                             <property key="sortable" type="boolean" defaultValue="true">
                                 <caption>Can sort</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="resizable" type="boolean" defaultValue="true">
                                 <caption>Can resize</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="draggable" type="boolean" defaultValue="true">
                                 <caption>Can reorder</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="hidable" type="enumeration" defaultValue="yes">
                                 <caption>Can hide</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="yes">Yes</enumerationValue>
                                     <enumerationValue key="hidden">Yes, hidden by default</enumerationValue>
@@ -116,7 +116,7 @@
                             <property key="columnClass" type="expression" required="false" dataSource="../datasource">
                                 <caption>Dynamic cell class</caption>
                                 <description />
-                                <returnType type="String"/>
+                                <returnType type="String" />
                             </property>
                             <property key="wrapText" type="boolean" defaultValue="false">
                                 <caption>Wrap text</caption>
@@ -127,17 +127,17 @@
                 </property>
                 <property key="columnsFilterable" type="boolean" defaultValue="true">
                     <caption>Show column filters</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Rows">
                 <property key="pageSize" type="integer" defaultValue="20">
                     <caption>Page size</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="pagination" type="enumeration" defaultValue="buttons">
                     <caption>Pagination</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="buttons">Paging buttons</enumerationValue>
                         <enumerationValue key="virtualScrolling">Virtual scrolling</enumerationValue>
@@ -145,7 +145,7 @@
                 </property>
                 <property key="pagingPosition" type="enumeration" defaultValue="bottom">
                     <caption>Position of paging buttons</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="bottom">Below grid</enumerationValue>
                         <enumerationValue key="top">Above grid</enumerationValue>
@@ -153,7 +153,7 @@
                 </property>
                 <property key="showEmptyPlaceholder" type="enumeration" defaultValue="none">
                     <caption>Empty list message</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
@@ -161,12 +161,12 @@
                 </property>
                 <property key="emptyPlaceholder" type="widgets" required="false">
                     <caption>Empty placeholder</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="rowClass" type="expression" required="false" dataSource="datasource">
                     <caption>Dynamic row class</caption>
                     <description />
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
@@ -205,7 +205,7 @@
                 </property>
                 <property key="onConfigurationChange" type="action">
                     <caption>On change</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -224,14 +224,14 @@
                                 <caption>Filter attribute</caption>
                                 <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="AutoNumber"/>
-                                    <attributeType name="Boolean"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
                         </propertyGroup>
@@ -239,7 +239,7 @@
                 </property>
                 <property key="filtersPlaceholder" type="widgets" required="false">
                     <caption>Filters placeholder</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.datagridtextfilter.DatagridTextFilter" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.datagridtextfilter.DatagridTextFilter" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Text filter</name>
-    <description/>
+    <description />
     <studioProCategory>Data controls</studioProCategory>
     <studioCategory>Data Controls</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2#7-4-text-filter</helpUrl>
@@ -19,7 +17,7 @@
                     <description />
                     <returnType type="String" />
                 </property>
-                <property key="defaultFilter" type="enumeration"  defaultValue="contains">
+                <property key="defaultFilter" type="enumeration" defaultValue="contains">
                     <caption>Default filter</caption>
                     <description />
                     <enumerationValues>
@@ -54,8 +52,8 @@
                     <caption>Saved attribute</caption>
                     <description>Attribute used to store the last value of the filter.</description>
                     <attributeTypes>
-                        <attributeType name="String"/>
-                        <attributeType name="HashString"/>
+                        <attributeType name="String" />
+                        <attributeType name="HashString" />
                     </attributeTypes>
                 </property>
             </propertyGroup>

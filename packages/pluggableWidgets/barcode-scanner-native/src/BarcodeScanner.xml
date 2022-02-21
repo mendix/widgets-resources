@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.native.barcodescanner.BarcodeScanner" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Barcode scanner</name>
     <description>Scan barcode and QR code values.</description>
@@ -11,7 +11,7 @@
                     <caption>Barcode</caption>
                     <description>The attribute that will receive the scanned barcode value.</description>
                     <attributeTypes>
-                        <attributeType name="String"/>
+                        <attributeType name="String" />
                     </attributeTypes>
                 </property>
             </propertyGroup>
@@ -28,11 +28,11 @@
             <propertyGroup caption="Events">
                 <property key="onDetect" type="action" required="false">
                     <caption>On detect</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
     </properties>

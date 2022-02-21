@@ -10,7 +10,7 @@
                 <property key="videoUrl" type="expression" required="true">
                     <caption>Video URL</caption>
                     <description>URL of the MP4 video file that is played.</description>
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Behavior">
@@ -38,7 +38,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
     </properties>

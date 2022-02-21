@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.sidebar.Sidebar" needsEntityContext="true" offlineCapable="true"
-        pluginWidget="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.sidebar.Sidebar" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Sidebar</name>
     <description>Display sidebar content conditionally.</description>
     <studioProCategory>Layout</studioProCategory>
@@ -12,19 +9,17 @@
             <propertyGroup caption="General">
                 <property key="contents" type="widgets" required="false">
                     <caption>Sidebar contents</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="toggleMode" type="enumeration" defaultValue="push">
                     <caption>Toggle mode</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="push">Push content aside</enumerationValue>
                         <enumerationValue key="slideOver">Slide over content</enumerationValue>
-                        <enumerationValue key="startExpandedShrink">Shrink content (initially expanded)
-                        </enumerationValue>
-                        <enumerationValue key="startCollapsedShrink">Shrink content (initially collapsed)
-                        </enumerationValue>
+                        <enumerationValue key="startExpandedShrink">Shrink content (initially expanded)</enumerationValue>
+                        <enumerationValue key="startCollapsedShrink">Shrink content (initially collapsed)</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
@@ -39,7 +34,7 @@
                 </property>
                 <property key="widthValue" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="expandedWidthUnit" type="enumeration" defaultValue="pixels">
                     <caption>Expanded width unit</caption>
@@ -51,7 +46,7 @@
                 </property>
                 <property key="expandedWidthValue" type="integer" defaultValue="100">
                     <caption>Expanded width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="collapsedWidthUnit" type="enumeration" defaultValue="pixels">
                     <caption>Collapsed width unit</caption>
@@ -63,7 +58,7 @@
                 </property>
                 <property key="collapsedWidthValue" type="integer" defaultValue="100">
                     <caption>Collapsed width</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.native.introscreen.IntroScreen" supportedPlatform="Native" offlineCapable="true"
-        pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.native.introscreen.IntroScreen" supportedPlatform="Native" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Intro screen</name>
     <description />
     <studioProCategory>Display</studioProCategory>
@@ -21,7 +18,7 @@
                             </property>
                             <property key="content" type="widgets">
                                 <caption>Content</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                     </properties>
@@ -47,7 +44,7 @@
                 </property>
                 <property key="slideIndicators" type="enumeration" defaultValue="between">
                     <caption>Show indicator</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="between">Between buttons</enumerationValue>
                         <enumerationValue key="above">Above buttons</enumerationValue>
@@ -65,48 +62,48 @@
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Visibility" />
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Buttons">
             <propertyGroup caption="Skip button">
                 <property key="skipCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="skipIcon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Previous button">
                 <property key="previousCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="previousIcon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Next button">
                 <property key="nextCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="nextIcon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Done button">
                 <property key="doneCaption" type="textTemplate" required="false">
                     <caption>Caption</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="doneIcon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

@@ -2,12 +2,14 @@
 <widget id="com.mendix.widget.custom.calendar.Calendar" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Calendar</name>
     <description>Display and manage calendar events</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA69JREFUeAHtWs1uEzEQtjeRKBISBw5wKD9vAVc4QFcgVA4hZyRoX6OvQUHiHOVABUKBC1zpYyCCgEMOIKQGKV0zs1qn3l27tnftrUO8UhV7djw/n2fGP11C4hMRiAisMwK0qfPD4TDNsmwfxm8qZEyTJNkZjUYTxXsjsm89iZEVEiaN8zhis+CRjDYn+dbTGAB00MANEx6dGBMZJjxSPW0AkApcNWKtBhjknNTH8XicyxoMBkzK4IjYQo+0JtUiwCDnHLnSuRhpTaoBAGY1zqfOXbJXWPNNBoC92BUe0dfZznOuymea66rxVXmqfls9uvExAlTI29J1SNvKU/G71rP2EdAGgKlqlgS6CY/ALm2ayDDhkQpvDAAedEDiaYrzjYdUqwXRt56+hS0l1uKUd7VE9NDxradxBHjw9UxERgDOBPaAlGprgOt1NyDfc1NiCoQ2I13bs/YRoK0BbU9zXc9oVZ+uhq19BEQAqiGzbn1tDWgLyN4n1j/88/cOOyYDSllKGFkkfbr77sHGB5SdvpmnJGP7cJVcu6+T6Yar5y/ieBmPDc0LAKLTn3/NH4FBl9AoVlyYZwv2HLo3kGbjPLKDiOul8Uhs8TgHAGf08Pf8FTh7WWUXOsHfQdto5jl/8dur9Bt33RdBxl6c5nxjS4WBjND3QrdV03kEgPOZxKIZ0PI0qL6DnJ7yKMD2ZPt86Y4B0wnS6Ic4nvbIuCqnad95BNCE7lJKvoFB3wmhL2mP3rt1ceOK0sCE7qDj+EegXeXDAgo0EbzZzQvnPlb5mvadR8Dk4QZ+D1DKayRsHRxJbSz4S7MuMtKMPIYIER76eu82XQiEVk3nEdDKmspgDP+MsW2R7DL8UW7QAPgO/+ABwM2TOPtQU5yGP8p2XgPKBpv35DvCcvbDNuhpenC0hcWyqB3mChSc4aSA4XY4XzKBV+GPNTkcAKxNdzMgHACK/YDOLdV+QTdO9T6YGiDuB9K387vsmOWnxcLwGW6mXK7/HJBwIoBbBL9dVH+uLjgAcPMDEOARevm43vwsBUMjOAC62PyIAHirAfJ1/UQ1nA3yRZ4XNb6udxn+aI2/CGi8rrP7JzDB3s/h0VeUy9v+AOAaLH/hKL28T4D2T5dHX5kp/gBouq5T+gwM/ZrfKVD6xMfSJwLhrQaI67qoUNcuxl3T8bl67y8CXFnoWU4EwDPAwYvX1gDdf1eD91BjYEwBCUBTCe1/IdV8q0WAwZeZqwqGky9XV9X5aHdEICIgR+AfGqgwglFLPQMAAAAASUVORK5CYII=</icon>
+    <icon>
+        iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAA69JREFUeAHtWs1uEzEQtjeRKBISBw5wKD9vAVc4QFcgVA4hZyRoX6OvQUHiHOVABUKBC1zpYyCCgEMOIKQGKV0zs1qn3l27tnftrUO8UhV7djw/n2fGP11C4hMRiAisMwK0qfPD4TDNsmwfxm8qZEyTJNkZjUYTxXsjsm89iZEVEiaN8zhis+CRjDYn+dbTGAB00MANEx6dGBMZJjxSPW0AkApcNWKtBhjknNTH8XicyxoMBkzK4IjYQo+0JtUiwCDnHLnSuRhpTaoBAGY1zqfOXbJXWPNNBoC92BUe0dfZznOuymea66rxVXmqfls9uvExAlTI29J1SNvKU/G71rP2EdAGgKlqlgS6CY/ALm2ayDDhkQpvDAAedEDiaYrzjYdUqwXRt56+hS0l1uKUd7VE9NDxradxBHjw9UxERgDOBPaAlGprgOt1NyDfc1NiCoQ2I13bs/YRoK0BbU9zXc9oVZ+uhq19BEQAqiGzbn1tDWgLyN4n1j/88/cOOyYDSllKGFkkfbr77sHGB5SdvpmnJGP7cJVcu6+T6Yar5y/ieBmPDc0LAKLTn3/NH4FBl9AoVlyYZwv2HLo3kGbjPLKDiOul8Uhs8TgHAGf08Pf8FTh7WWUXOsHfQdto5jl/8dur9Bt33RdBxl6c5nxjS4WBjND3QrdV03kEgPOZxKIZ0PI0qL6DnJ7yKMD2ZPt86Y4B0wnS6Ic4nvbIuCqnad95BNCE7lJKvoFB3wmhL2mP3rt1ceOK0sCE7qDj+EegXeXDAgo0EbzZzQvnPlb5mvadR8Dk4QZ+D1DKayRsHRxJbSz4S7MuMtKMPIYIER76eu82XQiEVk3nEdDKmspgDP+MsW2R7DL8UW7QAPgO/+ABwM2TOPtQU5yGP8p2XgPKBpv35DvCcvbDNuhpenC0hcWyqB3mChSc4aSA4XY4XzKBV+GPNTkcAKxNdzMgHACK/YDOLdV+QTdO9T6YGiDuB9K387vsmOWnxcLwGW6mXK7/HJBwIoBbBL9dVH+uLjgAcPMDEOARevm43vwsBUMjOAC62PyIAHirAfJ1/UQ1nA3yRZ4XNb6udxn+aI2/CGi8rrP7JzDB3s/h0VeUy9v+AOAaLH/hKL28T4D2T5dHX5kp/gBouq5T+gwM/ZrfKVD6xMfSJwLhrQaI67qoUNcuxl3T8bl67y8CXFnoWU4EwDPAwYvX1gDdf1eD91BjYEwBCUBTCe1/IdV8q0WAwZeZqwqGky9XV9X5aHdEICIgR+AfGqgwglFLPQMAAAAASUVORK5CYII=
+    </icon>
     <properties>
         <property key="dataSource" type="enumeration" defaultValue="context">
             <caption>Data source</caption>
             <category>Data source</category>
-            <description/>
+            <description />
             <enumerationValues>
                 <enumerationValue key="context">Context</enumerationValue>
                 <enumerationValue key="XPath">Database</enumerationValue>
@@ -28,45 +30,45 @@
         <property key="dataSourceMicroflow" type="microflow" required="false">
             <caption>Microflow</caption>
             <category>Data source</category>
-            <description/>
-            <returnType type="Object" isList="true" entityProperty="eventEntity"/>
+            <description />
+            <returnType type="Object" isList="true" entityProperty="eventEntity" />
         </property>
         <property key="dataSourceNanoflow" type="nanoflow" required="false">
             <caption>Nanoflow</caption>
             <category>Data source</category>
-            <description/>
-            <returnType type="Object" isList="true" entityProperty="eventEntity"/>
+            <description />
+            <returnType type="Object" isList="true" entityProperty="eventEntity" />
         </property>
         <property key="titleAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Title attribute</caption>
             <category>Data source</category>
-            <description/>
+            <description />
             <attributeTypes>
-                <attributeType name="String"/>
+                <attributeType name="String" />
             </attributeTypes>
         </property>
         <property key="allDayAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>All day attribute</caption>
             <category>Data source</category>
-            <description/>
+            <description />
             <attributeTypes>
-                <attributeType name="Boolean"/>
+                <attributeType name="Boolean" />
             </attributeTypes>
         </property>
         <property key="startAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>Start attribute</caption>
             <category>Data source</category>
-            <description/>
+            <description />
             <attributeTypes>
-                <attributeType name="DateTime"/>
+                <attributeType name="DateTime" />
             </attributeTypes>
         </property>
         <property key="endAttribute" type="attribute" entityProperty="eventEntity" required="false">
             <caption>End attribute</caption>
             <category>Data source</category>
-            <description/>
+            <description />
             <attributeTypes>
-                <attributeType name="DateTime"/>
+                <attributeType name="DateTime" />
             </attributeTypes>
         </property>
         <property key="eventColor" type="attribute" entityProperty="eventEntity" required="false">
@@ -88,7 +90,7 @@
             <category>Data source</category>
             <description>The date on which the calendar view starts, will be updated with `Refresh data source` before the view changes</description>
             <attributeTypes>
-                <attributeType name="DateTime"/>
+                <attributeType name="DateTime" />
             </attributeTypes>
         </property>
         <property key="viewEndAttribute" type="attribute" required="false" allowNonPersistableEntities="true">
@@ -96,7 +98,7 @@
             <category>Data source</category>
             <description>The date on which the calendar view ends, will be updated with `Refresh data source` before the view changes</description>
             <attributeTypes>
-                <attributeType name="DateTime"/>
+                <attributeType name="DateTime" />
             </attributeTypes>
         </property>
         <property key="view" type="enumeration" defaultValue="standard">
@@ -125,18 +127,18 @@
             <category>View</category>
             <description>The start date that should be shown in the view</description>
             <attributeTypes>
-                <attributeType name="DateTime"/>
+                <attributeType name="DateTime" />
             </attributeTypes>
         </property>
         <property key="customViews" type="object" isList="true" required="false">
             <caption>Custom top bar views</caption>
             <category>View</category>
-            <description/>
+            <description />
             <properties>
                 <property key="customView" type="enumeration" defaultValue="month">
                     <caption>Item</caption>
                     <category>Appearance</category>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="previous">Previous button</enumerationValue>
                         <enumerationValue key="today">Today button</enumerationValue>
@@ -152,7 +154,7 @@
                 <property key="position" type="enumeration" defaultValue="left">
                     <caption>Position</caption>
                     <category>Appearance</category>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="left">Left</enumerationValue>
                         <enumerationValue key="center">Center</enumerationValue>
@@ -167,7 +169,7 @@
                 <property key="renderMode" type="enumeration" defaultValue="button">
                     <caption>Render mode</caption>
                     <category>Appearance</category>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="button">Button</enumerationValue>
                         <enumerationValue key="link">Link</enumerationValue>
@@ -176,12 +178,12 @@
                 <property key="buttonToolTip" type="translatableString" required="false">
                     <caption>Button tooltip</caption>
                     <category>Appearance</category>
-                    <description/>
+                    <description />
                 </property>
                 <property key="buttonStyle" type="enumeration" defaultValue="default">
                     <caption>Button style</caption>
                     <category>Appearance</category>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="default">Default</enumerationValue>
                         <enumerationValue key="primary">Primary</enumerationValue>
@@ -265,7 +267,7 @@
         <property key="editable" type="enumeration" defaultValue="default">
             <caption>Editable</caption>
             <category>View</category>
-            <description/>
+            <description />
             <enumerationValues>
                 <enumerationValue key="default">Default</enumerationValue>
                 <enumerationValue key="never">Never</enumerationValue>
@@ -274,7 +276,7 @@
         <property key="enableCreate" type="boolean" defaultValue="true">
             <caption>Enable create</caption>
             <category>View</category>
-            <description/>
+            <description />
         </property>
         <property key="onClickEvent" type="enumeration" defaultValue="doNothing">
             <caption>On click</caption>
@@ -289,13 +291,13 @@
         <property key="onClickMicroflow" type="microflow" required="false" entityProperty="eventEntity">
             <caption>On click microflow</caption>
             <category>Events</category>
-            <description/>
+            <description />
             <returnType type="Void" />
         </property>
         <property key="onClickNanoflow" type="nanoflow" required="false" entityProperty="eventEntity">
             <caption>On click nanoflow</caption>
             <category>Events</category>
-            <description/>
+            <description />
             <returnType type="Void" />
         </property>
         <property key="onCreate" type="enumeration" defaultValue="doNothing">
@@ -316,13 +318,13 @@
         <property key="onCreateMicroflow" type="microflow" required="false" entityProperty="eventEntity">
             <caption>On create microflow</caption>
             <category>Events</category>
-            <description/>
+            <description />
             <returnType type="Void" />
         </property>
         <property key="onCreateNanoflow" type="nanoflow" required="false" entityProperty="eventEntity">
             <caption>On create nanoflow</caption>
             <category>Events</category>
-            <description/>
+            <description />
             <returnType type="Void" />
         </property>
         <property key="onChangeEvent" type="enumeration" defaultValue="doNothing">
@@ -338,19 +340,19 @@
         <property key="onChangeMicroflow" type="microflow" required="false" entityProperty="eventEntity">
             <caption>On change microflow</caption>
             <category>Events</category>
-            <description/>
+            <description />
             <returnType type="Void" />
         </property>
         <property key="onChangeNanoflow" type="nanoflow" required="false" entityProperty="eventEntity">
             <caption>On change nanoflow</caption>
             <category>Events</category>
-            <description/>
+            <description />
             <returnType type="Void" />
         </property>
         <property key="widthUnit" type="enumeration" defaultValue="percentage">
             <caption>Width unit</caption>
             <category>Size</category>
-            <description/>
+            <description />
             <enumerationValues>
                 <enumerationValue key="percentage">Percentage</enumerationValue>
                 <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -359,7 +361,7 @@
         <property key="width" type="integer" defaultValue="100">
             <caption>Width</caption>
             <category>Size</category>
-            <description/>
+            <description />
         </property>
         <property key="heightUnit" type="enumeration" defaultValue="pixels">
             <caption>Height unit</caption>
@@ -374,7 +376,7 @@
         <property key="height" type="integer" defaultValue="580">
             <caption>Height</caption>
             <category>Size</category>
-            <description/>
+            <description />
         </property>
     </properties>
 </widget>

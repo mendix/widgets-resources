@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.web.tooltip.Tooltip" needsEntityContext="true" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.web.tooltip.Tooltip" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Tooltip</name>
-    <description/>
+    <description />
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/widgets/tooltip</helpUrl>
@@ -12,11 +10,11 @@
             <propertyGroup caption="General">
                 <property key="trigger" type="widgets">
                     <caption>Trigger: place widgets here</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="renderMethod" type="enumeration" defaultValue="text">
                     <caption>Render method</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="text">Text</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
@@ -24,12 +22,12 @@
                 </property>
                 <property key="htmlMessage" type="widgets" required="false">
                     <caption>Tooltip content: place widgets here</caption>
-                    <description/>
+                    <description />
                 </property>
 
                 <property key="textMessage" type="textTemplate" required="false">
                     <caption>Tooltip</caption>
-                    <description/>
+                    <description />
                 </property>
 
                 <property key="tooltipPosition" type="enumeration" defaultValue="top">

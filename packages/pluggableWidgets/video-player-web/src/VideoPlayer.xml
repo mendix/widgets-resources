@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.web.videoplayer.VideoPlayer" pluginWidget="true" needsEntityContext="true" supportedPlatform="Web" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Video Player</name>
     <description>Shows a video from YouTube, Vimeo, Dailymotion and Mp4</description>
@@ -19,12 +19,12 @@
                 <property key="urlExpression" type="expression" required="false">
                     <caption>Video URL</caption>
                     <description>The web address of the video: YouTube, Vimeo, Dailymotion or MP4.</description>
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
                 <property key="posterExpression" type="expression" required="false">
                     <caption>Poster URL</caption>
                     <description>The web address of the poster image. A poster image is a custom preview image that will be shown in the player until the user starts the video.</description>
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
                 <property key="videoUrl" type="textTemplate" required="false">
                     <caption>Video URL</caption>
@@ -36,8 +36,8 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="TabIndex"/>
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Controls">
@@ -56,8 +56,7 @@
                 </property>
                 <property key="loop" type="boolean" defaultValue="false">
                     <caption>Loop</caption>
-                    <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.
-                    </description>
+                    <description>Loop the video after it finishes. Available for YouTube, Vimeo, and external videos.</description>
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -73,7 +72,7 @@
                 </property>
                 <property key="width" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="aspectRatio">
                     <caption>Height unit</caption>

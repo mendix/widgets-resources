@@ -18,11 +18,11 @@
         <propertyGroup caption="Events">
             <property key="onLoad" type="action" required="false">
                 <caption>On load</caption>
-                <description/>
+                <description />
             </property>
             <property key="onError" type="action" required="false">
                 <caption>On error</caption>
-                <description/>
+                <description />
             </property>
         </propertyGroup>
         <propertyGroup caption="Callback">
@@ -34,7 +34,7 @@
                 <caption>Message attribute</caption>
                 <description>The attribute where the input message will be stored. This can be used to read the input in the onMessage event.</description>
                 <attributeTypes>
-                    <attributeType name="String"/>
+                    <attributeType name="String" />
                 </attributeTypes>
             </property>
         </propertyGroup>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.web.treenode.TreeNode" needsEntityContext="true" offlineCapable="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+<widget id="com.mendix.widget.web.treenode.TreeNode" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Tree node</name>
     <description>Display a tree view structure</description>
     <studioProCategory>Data containers</studioProCategory>
@@ -12,11 +10,11 @@
             <propertyGroup caption="General">
                 <property key="advancedMode" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="datasource" type="datasource" isList="true">
                     <caption>Data source</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="headerType" type="enumeration" defaultValue="text">
                     <caption>Header type</caption>
@@ -28,11 +26,11 @@
                 </property>
                 <property key="headerContent" type="widgets" dataSource="datasource" required="false">
                     <caption>Header</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="headerCaption" type="textTemplate" dataSource="datasource" required="false">
                     <caption>Header caption</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="hasChildren" type="boolean" defaultValue="true">
                     <caption>Has children</caption>
@@ -40,7 +38,7 @@
                 </property>
                 <property key="startExpanded" type="boolean" defaultValue="false">
                     <caption>Start expanded</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="children" type="widgets" dataSource="datasource" required="false">
                     <caption>Place other Tree nodes here</caption>
@@ -48,7 +46,7 @@
                 </property>
                 <property key="animate" type="boolean" defaultValue="true">
                     <caption>Animate</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -56,7 +54,7 @@
             <propertyGroup caption="Icon">
                 <property key="showIcon" type="enumeration" defaultValue="left">
                     <caption>Show icon</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="left">Left</enumerationValue>
                         <enumerationValue key="right">Right</enumerationValue>
@@ -65,11 +63,11 @@
                 </property>
                 <property key="expandedIcon" type="icon" required="false">
                     <caption>Expanded icon</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="collapsedIcon" type="icon" required="false">
                     <caption>Collapsed icon</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="animateIcon" type="boolean" defaultValue="true">
                     <caption>Animate icon</caption>

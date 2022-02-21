@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.native.activityindicator.ActivityIndicator" supportedPlatform="Native" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Activity indicator</name>
     <description>Display a circular loading indicator.</description>
@@ -6,7 +6,7 @@
     <studioCategory>Display</studioCategory>
     <properties>
         <propertyGroup caption="Common">
-            <systemProperty key="Name"/>
+            <systemProperty key="Name" />
         </propertyGroup>
     </properties>
 </widget>

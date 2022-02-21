@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.listviewswipe.ListViewSwipe" supportedPlatform="Native" needsEntityContext="true"
-        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.listviewswipe.ListViewSwipe" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>List View Swipe</name>
-    <description/>
+    <description />
     <studioProCategory>Interactions</studioProCategory>
     <studioCategory>Interactions</studioCategory>
     <properties>
@@ -18,7 +15,7 @@
             <propertyGroup caption="Swipe">
                 <property key="left" type="widgets" required="false">
                     <caption>Left background</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="leftRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>
@@ -40,10 +37,10 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Right to Left">
-         <propertyGroup caption="Swipe">
+            <propertyGroup caption="Swipe">
                 <property key="right" type="widgets" required="false">
                     <caption>Right background</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="rightRenderMode" type="enumeration" defaultValue="disabled">
                     <caption>Pattern</caption>

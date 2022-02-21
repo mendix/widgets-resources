@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.web.accessibilityhelper.AccessibilityHelper" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Web"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.web.accessibilityhelper.AccessibilityHelper" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Web" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Accessibility helper</name>
-    <description/>
+    <description />
     <studioProCategory>Input elements</studioProCategory>
     <studioCategory>Input Elements</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/widgets/accessibility-helper</helpUrl>
@@ -16,7 +13,7 @@
             </property>
             <property key="content" type="widgets">
                 <caption>Content</caption>
-                <description/>
+                <description />
             </property>
             <property key="attributesList" type="object" isList="true" required="false">
                 <caption>HTML Attributes</caption>
@@ -30,7 +27,7 @@
                     <property key="valueSourceType" type="enumeration" defaultValue="text">
                         <caption>Source type</caption>
                         <category>General</category>
-                        <description/>
+                        <description />
                         <enumerationValues>
                             <enumerationValue key="text">Text</enumerationValue>
                             <enumerationValue key="expression">Expression</enumerationValue>
@@ -39,13 +36,13 @@
                     <property key="valueExpression" type="expression" required="false">
                         <caption>Expression value</caption>
                         <category>General</category>
-                        <description/>
+                        <description />
                         <returnType type="String" />
                     </property>
                     <property key="valueText" type="textTemplate" required="false">
                         <caption>Text value</caption>
                         <category>General</category>
-                        <description/>
+                        <description />
                     </property>
                     <property key="attributeCondition" type="expression" defaultValue="true">
                         <caption>Condition</caption>

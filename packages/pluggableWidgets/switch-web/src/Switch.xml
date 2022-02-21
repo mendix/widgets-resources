@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true" pluginWidget="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.switch.Switch" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Switch</name>
     <description>Toggle a boolean attribute</description>
     <studioProCategory>Input elements</studioProCategory>
@@ -14,7 +12,7 @@
                     <caption>Boolean attribute</caption>
                     <description>Attribute to toggle</description>
                     <attributeTypes>
-                        <attributeType name="Boolean"/>
+                        <attributeType name="Boolean" />
                     </attributeTypes>
                 </property>
             </propertyGroup>
@@ -26,8 +24,8 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Common">
-            <systemProperty key="Label"/>
-            <systemProperty key="Editability"/>
-    </propertyGroup>
+            <systemProperty key="Label" />
+            <systemProperty key="Editability" />
+        </propertyGroup>
     </properties>
 </widget>

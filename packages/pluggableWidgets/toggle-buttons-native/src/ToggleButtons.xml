@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.native.togglebuttons.ToggleButtons" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Toggle buttons</name>
     <description>Change an enumeration value using a group of buttons.</description>
@@ -9,16 +9,16 @@
             <propertyGroup caption="Data source">
                 <property key="enum" type="attribute">
                     <caption>Value</caption>
-                    <description/>
+                    <description />
                     <attributeTypes>
-                        <attributeType name="Enum"/>
+                        <attributeType name="Enum" />
                     </attributeTypes>
                 </property>
             </propertyGroup>
             <propertyGroup caption="Editability">
                 <property key="editable" type="enumeration" defaultValue="default">
                     <caption>Editable</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="default">Default</enumerationValue>
                         <enumerationValue key="never">Never</enumerationValue>
@@ -28,11 +28,11 @@
             <propertyGroup caption="Events">
                 <property key="onChange" type="action" required="false">
                     <caption>On change</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
     </properties>

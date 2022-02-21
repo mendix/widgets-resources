@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.native.floatingactionbutton.FloatingActionButton" supportedPlatform="Native" needsEntityContext="false" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Floating action button</name>
     <description>Display a circular floating icon button.</description>
@@ -9,7 +9,7 @@
             <propertyGroup caption="Button">
                 <property key="icon" type="icon" required="false">
                     <caption>Icon</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="iconActive" type="icon" required="false">
                     <caption>Secondary icon</caption>
@@ -19,7 +19,7 @@
             <propertyGroup caption="Position">
                 <property key="horizontalPosition" type="enumeration" defaultValue="right">
                     <caption>Horizontal</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="left">Left</enumerationValue>
                         <enumerationValue key="center">Center</enumerationValue>
@@ -28,7 +28,7 @@
                 </property>
                 <property key="verticalPosition" type="enumeration" defaultValue="bottom">
                     <caption>Vertical</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="top">Top</enumerationValue>
                         <enumerationValue key="bottom">Bottom</enumerationValue>
@@ -42,7 +42,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Secondary buttons">
@@ -53,15 +53,15 @@
                     <propertyGroup caption="Button">
                         <property key="icon" type="icon">
                             <caption>Icon</caption>
-                            <description/>
+                            <description />
                         </property>
                         <property key="caption" type="textTemplate" required="false">
                             <caption>Caption</caption>
-                            <description/>
+                            <description />
                         </property>
                         <property key="onClick" type="action">
                             <caption>On click</caption>
-                            <description/>
+                            <description />
                         </property>
                     </propertyGroup>
                 </properties>

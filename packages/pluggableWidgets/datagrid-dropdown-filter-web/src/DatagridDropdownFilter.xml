@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.datagriddropdownfilter.DatagridDropdownFilter" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Drop-down filter</name>
-    <description/>
+    <description />
     <studioProCategory>Data controls</studioProCategory>
     <studioCategory>Data Controls</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2#7-2-drop-down-filter</helpUrl>
@@ -25,18 +23,18 @@
                 </property>
                 <property key="filterOptions" type="object" isList="true" required="false">
                     <caption>Options</caption>
-                    <description/>
+                    <description />
                     <properties>
                         <property key="caption" type="textTemplate">
                             <caption>Caption</caption>
                             <category>General</category>
-                            <description/>
+                            <description />
                         </property>
                         <property key="value" type="expression">
                             <caption>Value</caption>
                             <category>General</category>
-                            <description/>
-                            <returnType type="String"/>
+                            <description />
+                            <returnType type="String" />
                         </property>
                     </properties>
                 </property>
@@ -54,7 +52,7 @@
                     <caption>Saved attribute</caption>
                     <description>Attribute used to store the last value of the filter.</description>
                     <attributeTypes>
-                        <attributeType name="String"/>
+                        <attributeType name="String" />
                     </attributeTypes>
                 </property>
             </propertyGroup>

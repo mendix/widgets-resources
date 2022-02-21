@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.native.animation.Animation" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Native"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.native.animation.Animation" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Native" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Animation</name>
     <description>Container for animating content</description>
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
     <properties>
         <propertyGroup caption="General">
-
             <propertyGroup caption="Content">
                 <property key="content" type="widgets" required="true">
                     <caption>Content</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
 
@@ -29,7 +25,7 @@
                 </property>
                 <property key="animationIn" type="enumeration" defaultValue="fadeIn">
                     <caption>Entry animation</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="bounceIn">Bounce</enumerationValue>
@@ -59,7 +55,7 @@
                 </property>
                 <property key="animationAttention" type="enumeration" defaultValue="none">
                     <caption>Attention animation</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="bounce">Bounce</enumerationValue>
@@ -75,7 +71,7 @@
                 </property>
                 <property key="animationOut" type="enumeration" defaultValue="none">
                     <caption>Exit animation</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="bounceOut">Bounce</enumerationValue>
@@ -108,16 +104,16 @@
             <propertyGroup caption="Timing">
                 <property key="duration" type="integer" defaultValue="200">
                     <caption>Duration (ms)</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="delay" type="integer" defaultValue="0">
                     <caption>Delay (ms)</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
 
             <propertyGroup caption="Condition">
-                <systemProperty key="Visibility"/>
+                <systemProperty key="Visibility" />
                 <property key="condition" type="expression" required="false">
                     <caption>Expression</caption>
                     <description>The animation will start after it becomes visible while also obeying its timing delay. For already-visible content, an expression can be used to start the animation.</description>
@@ -127,7 +123,6 @@
         </propertyGroup>
 
         <propertyGroup caption="Advanced">
-
             <propertyGroup caption="Animation">
                 <property key="easing" type="enumeration" defaultValue="ease">
                     <caption>Easing</caption>
@@ -186,9 +181,8 @@
             </propertyGroup>
 
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
-
     </properties>
 </widget>

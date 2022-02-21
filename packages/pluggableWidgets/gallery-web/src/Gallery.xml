@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.web.gallery.Gallery" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Gallery</name>
-    <description/>
+    <description />
     <studioProCategory>Data containers</studioProCategory>
     <studioCategory>Data Containers</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/modules/gallery</helpUrl>
@@ -14,11 +14,11 @@
                 </property>
                 <property key="datasource" type="datasource" isList="true">
                     <caption>Data source</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="content" type="widgets" dataSource="datasource" required="false">
                     <caption>Content placeholder</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Columns">
@@ -42,7 +42,7 @@
                 </property>
                 <property key="pagination" type="enumeration" defaultValue="buttons">
                     <caption>Pagination</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="buttons">Paging buttons</enumerationValue>
                         <enumerationValue key="virtualScrolling">Virtual scrolling</enumerationValue>
@@ -50,7 +50,7 @@
                 </property>
                 <property key="pagingPosition" type="enumeration" defaultValue="below">
                     <caption>Position of paging buttons</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="below">Below grid</enumerationValue>
                         <enumerationValue key="above">Above grid</enumerationValue>
@@ -58,7 +58,7 @@
                 </property>
                 <property key="showEmptyPlaceholder" type="enumeration" defaultValue="none">
                     <caption>Empty message</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="custom">Custom</enumerationValue>
@@ -66,12 +66,12 @@
                 </property>
                 <property key="emptyPlaceholder" type="widgets" required="false">
                     <caption>Empty placeholder</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="itemClass" type="expression" required="false" dataSource="datasource">
                     <caption>Dynamic item class</caption>
                     <description />
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Events">
@@ -92,14 +92,14 @@
                                 <caption>Filter attribute</caption>
                                 <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="AutoNumber"/>
-                                    <attributeType name="Boolean"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
                         </propertyGroup>
@@ -107,7 +107,7 @@
                 </property>
                 <property key="filtersPlaceholder" type="widgets" required="false">
                     <caption>Filters placeholder</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -122,14 +122,14 @@
                                 <caption>Attribute</caption>
                                 <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="AutoNumber"/>
-                                    <attributeType name="Boolean"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="AutoNumber" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
                             <property key="caption" type="textTemplate">

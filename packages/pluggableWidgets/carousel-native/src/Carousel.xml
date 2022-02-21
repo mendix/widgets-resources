@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget id="com.mendix.widget.native.carousel.Carousel" pluginWidget="true" needsEntityContext="true" offlineCapable="true"
-        supportedPlatform="Native"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+<widget id="com.mendix.widget.native.carousel.Carousel" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Native" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Carousel</name>
-    <description/>
+    <description />
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
     <properties>
@@ -12,11 +9,11 @@
             <propertyGroup caption="Data source">
                 <property key="contentSource" type="datasource" isList="true">
                     <caption>Source</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="content" type="widgets" dataSource="contentSource">
                     <caption>Content</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Display">
@@ -41,19 +38,19 @@
                     </enumerationValues>
                 </property>
             </propertyGroup>
-<!--            Library has a bug with loops-->
-<!--            https://github.com/archriss/react-native-snap-carousel/issues/653 - -->
-<!--            https://github.com/archriss/react-native-snap-carousel/issues/608-->
-<!--            Also not working properly with Mobx-->
-<!--            <propertyGroup caption="Behavior">-->
-<!--                <property key="loop" type="boolean" defaultValue="false">-->
-<!--                    <caption>Loop</caption>-->
-<!--                    <description>After the last item the carousel continues to the first item.</description>-->
-<!--                </property>-->
-<!--            </propertyGroup>-->
+            <!--            Library has a bug with loops-->
+            <!--            https://github.com/archriss/react-native-snap-carousel/issues/653 - -->
+            <!--            https://github.com/archriss/react-native-snap-carousel/issues/608-->
+            <!--            Also not working properly with Mobx-->
+            <!--            <propertyGroup caption="Behavior">-->
+            <!--                <property key="loop" type="boolean" defaultValue="false">-->
+            <!--                    <caption>Loop</caption>-->
+            <!--                    <description>After the last item the carousel continues to the first item.</description>-->
+            <!--                </property>-->
+            <!--            </propertyGroup>-->
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="Visibility"/>
+                <systemProperty key="Name" />
+                <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>
     </properties>

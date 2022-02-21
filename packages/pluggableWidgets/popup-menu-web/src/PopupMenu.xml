@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.popupmenu.PopupMenu" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.popupmenu.PopupMenu" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Pop-up menu</name>
     <description>Displays a set of pre-defined items within the Pop-up menu</description>
     <studioProCategory>Menus &amp; navigation</studioProCategory>
@@ -25,7 +23,7 @@
                         <property key="itemType" type="enumeration" defaultValue="item">
                             <caption>Item type</caption>
                             <category>General</category>
-                            <description/>
+                            <description />
                             <enumerationValues>
                                 <enumerationValue key="item">Button</enumerationValue>
                                 <enumerationValue key="divider">Divider</enumerationValue>
@@ -34,18 +32,18 @@
                         <property key="caption" type="textTemplate" required="false">
                             <caption>Caption</caption>
                             <category>General</category>
-                            <description/>
+                            <description />
                         </property>
                         <property key="visible" type="expression" defaultValue="true" required="false">
                             <caption>Visible</caption>
                             <category>General</category>
-                            <description/>
-                            <returnType type="Boolean"/>
+                            <description />
+                            <returnType type="Boolean" />
                         </property>
                         <property key="action" type="action" required="false">
                             <caption>On click action</caption>
                             <category>General</category>
-                            <description/>
+                            <description />
                         </property>
                         <property key="styleClass" type="enumeration" defaultValue="defaultStyle">
                             <caption>Style</caption>
@@ -70,24 +68,24 @@
                         <property key="content" type="widgets">
                             <caption>Content</caption>
                             <category>General</category>
-                            <description/>
+                            <description />
                         </property>
                         <property key="visible" type="expression" defaultValue="true" required="false">
                             <caption>Visible</caption>
                             <category>General</category>
-                            <description/>
-                            <returnType type="Boolean"/>
+                            <description />
+                            <returnType type="Boolean" />
                         </property>
                         <property key="action" type="action" required="false">
                             <caption>On click action</caption>
                             <category>General</category>
-                            <description/>
+                            <description />
                         </property>
                     </properties>
                 </property>
                 <property key="trigger" type="enumeration" defaultValue="onclick">
                     <caption>Open on</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="onclick">Click</enumerationValue>
                         <enumerationValue key="onhover">Hover</enumerationValue>

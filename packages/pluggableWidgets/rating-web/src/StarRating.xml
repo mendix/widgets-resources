@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.starrating.StarRating" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Rating</name>
-    <description/>
+    <description />
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/widgets/rating</helpUrl>
@@ -9,20 +9,20 @@
         <propertyGroup caption="General">
             <property key="rateAttribute" type="attribute">
                 <caption>Attribute</caption>
-                <description/>
+                <description />
                 <attributeTypes>
-                    <attributeType name="Integer"/>
-                    <attributeType name="Long"/>
-                    <attributeType name="Decimal"/>
+                    <attributeType name="Integer" />
+                    <attributeType name="Long" />
+                    <attributeType name="Decimal" />
                 </attributeTypes>
             </property>
             <property key="emptyIcon" type="icon" required="false">
                 <caption>Empty icon</caption>
-                <description/>
+                <description />
             </property>
             <property key="icon" type="icon" required="false">
                 <caption>Selected icon</caption>
-                <description/>
+                <description />
             </property>
             <property key="maximumStars" type="integer" defaultValue="5">
                 <caption>Amount</caption>
@@ -30,18 +30,18 @@
             </property>
             <property key="animation" type="boolean" defaultValue="true">
                 <caption>Animation</caption>
-                <description/>
+                <description />
             </property>
         </propertyGroup>
         <propertyGroup caption="Events">
             <property key="onChange" type="action" required="false">
                 <caption>On change</caption>
-                <description/>
+                <description />
             </property>
         </propertyGroup>
         <propertyGroup caption="Common">
-            <systemProperty key="Name"/>
-            <systemProperty key="Editability"/>
+            <systemProperty key="Name" />
+            <systemProperty key="Editability" />
             <systemProperty key="Visibility" />
             <systemProperty key="TabIndex" />
         </propertyGroup>

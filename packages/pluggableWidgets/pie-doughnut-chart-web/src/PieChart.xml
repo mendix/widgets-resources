@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.PieChart.PieChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Pie chart</name>
     <description>Renders a pie or doughnut chart</description>
@@ -9,7 +9,7 @@
             <propertyGroup caption="General">
                 <property key="chartFormat" type="enumeration" defaultValue="pie">
                     <caption>Chart format</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="pie">Pie</enumerationValue>
                         <enumerationValue key="doughnut">Doughnut</enumerationValue>
@@ -29,7 +29,7 @@
                 </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
                     <caption>Mode</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="advanced">Advanced</enumerationValue>
@@ -71,7 +71,7 @@
                 </property>
                 <property key="seriesSortOrder" type="enumeration" defaultValue="asc">
                     <caption>Sort order</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="asc">Ascending</enumerationValue>
                         <enumerationValue key="desc">Descending</enumerationValue>
@@ -88,7 +88,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
                 <systemProperty key="Visibility" />
                 <systemProperty key="TabIndex" />
             </propertyGroup>
@@ -105,11 +105,11 @@
                 </property>
                 <property key="width" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -118,7 +118,7 @@
                 </property>
                 <property key="height" type="integer" defaultValue="75">
                     <caption>Height</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -126,11 +126,11 @@
             <propertyGroup caption="Events">
                 <property key="onClickAction" type="action" required="false">
                     <caption>On click action</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="tooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="seriesDataSource">
                     <caption>Tooltip hover text</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -138,19 +138,19 @@
             <propertyGroup caption="Advanced">
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customConfigurations" type="string" required="false" multiline="true">
                     <caption>Custom configurations</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customSeriesOptions" type="string" required="false" multiline="true">
                     <caption>Custom series options</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

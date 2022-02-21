@@ -9,7 +9,7 @@
             <propertyGroup caption="Data source">
                 <property key="datasource" type="enumeration" defaultValue="image">
                     <caption>Data source</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="image">Image</enumerationValue>
                         <enumerationValue key="imageUrl">Image URL</enumerationValue>
@@ -18,11 +18,11 @@
                 </property>
                 <property key="imageObject" type="image" required="false">
                     <caption>Image</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="defaultImageDynamic" type="image" required="false">
                     <caption>Default image</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="imageUrl" type="textTemplate" required="false">
                     <caption>Image URL</caption>
@@ -52,13 +52,13 @@
                 </property>
                 <property key="opacity" type="integer" defaultValue="100">
                     <caption>Opacity</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Dimensions">
                 <property key="widthUnit" type="enumeration" defaultValue="auto">
                     <caption>Width unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="auto">Auto</enumerationValue>
                         <enumerationValue key="points">Points</enumerationValue>
@@ -70,7 +70,7 @@
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="auto">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="auto">Auto</enumerationValue>
                         <enumerationValue key="points">Points</enumerationValue>
@@ -82,14 +82,14 @@
                 </property>
                 <property key="iconSize" type="integer" defaultValue="16">
                     <caption>Size</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Events">
             <property key="onClickType" type="enumeration" defaultValue="action">
                 <caption>On click type</caption>
-                <description/>
+                <description />
                 <enumerationValues>
                     <enumerationValue key="action">Action</enumerationValue>
                     <enumerationValue key="enlarge">Enlarge</enumerationValue>
@@ -97,12 +97,12 @@
             </property>
             <property key="onClick" type="action" required="false">
                 <caption>On click</caption>
-                <description/>
+                <description />
             </property>
         </propertyGroup>
         <propertyGroup caption="Common">
-            <systemProperty key="Name"/>
-            <systemProperty key="Visibility"/>
+            <systemProperty key="Name" />
+            <systemProperty key="Visibility" />
         </propertyGroup>
     </properties>
 </widget>

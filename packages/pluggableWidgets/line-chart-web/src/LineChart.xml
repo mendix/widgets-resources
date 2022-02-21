@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.LineChart.LineChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Line chart</name>
     <description>Create a line chart</description>
@@ -14,7 +14,7 @@
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
                                 <caption>Data set</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="static">Static</enumerationValue>
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
@@ -120,7 +120,7 @@
                             </property>
                             <property key="customSeriesOptions" type="string" required="false" multiline="true">
                                 <caption>Custom series options</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
@@ -134,7 +134,7 @@
                             </property>
                             <property key="lineStyle" type="enumeration" defaultValue="line">
                                 <caption>Line style</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="line">Line</enumerationValue>
                                     <enumerationValue key="lineWithMarkers">Line with markers</enumerationValue>
@@ -143,25 +143,25 @@
                             </property>
                             <property key="lineColor" type="textTemplate" required="false" multiline="false">
                                 <caption>Line color</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="markerColor" type="textTemplate" required="false" multiline="false">
                                 <caption>Marker color</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
                             <property key="onClickAction" type="action" required="false">
                                 <caption>On click action</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
                                 <caption>Tooltip hover text</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
                                 <caption>Tooltip hover text</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                     </properties>
@@ -180,7 +180,7 @@
                 </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
                     <caption>Mode</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="advanced">Advanced</enumerationValue>
@@ -189,7 +189,7 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
                 <systemProperty key="Visibility" />
                 <systemProperty key="TabIndex" />
             </propertyGroup>
@@ -206,11 +206,11 @@
                 </property>
                 <property key="width" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -219,7 +219,7 @@
                 </property>
                 <property key="height" type="integer" defaultValue="75">
                     <caption>Height</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -227,7 +227,7 @@
             <propertyGroup caption="Theme">
                 <property key="gridLines" type="enumeration" defaultValue="none">
                     <caption>Grid lines</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="horizontal">Horizontal</enumerationValue>
@@ -237,15 +237,15 @@
                 </property>
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customConfigurations" type="string" required="false" multiline="true">
                     <caption>Custom configurations</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

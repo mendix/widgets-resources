@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.custom.badge.Badge" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Badge</name>
     <description />
@@ -36,7 +36,7 @@
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name" />
-                <systemProperty key="TabIndex"/>
+                <systemProperty key="TabIndex" />
             </propertyGroup>
         </propertyGroup>
     </properties>

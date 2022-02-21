@@ -2,10 +2,10 @@
 <package xmlns="http://www.mendix.com/package/1.0/">
     <clientModule name="BadgeButton" version="3.1.0" xmlns="http://www.mendix.com/clientModule/1.0/">
         <widgetFiles>
-            <widgetFile path="BadgeButton.xml"/>
+            <widgetFile path="BadgeButton.xml" />
         </widgetFiles>
         <files>
-            <file path="com/mendix/widget/custom/badgebutton/"/>
+            <file path="com/mendix/widget/custom/badgebutton/" />
         </files>
     </clientModule>
 </package>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <widget id="com.mendix.widget.native.progresscircle.ProgressCircle" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Progress circle</name>
     <description>Display progress in a circle with enclosed text.</description>
@@ -10,23 +10,23 @@
                 <property key="progressValue" type="expression" defaultValue="0">
                     <caption>Current value</caption>
                     <description>The current progress value.</description>
-                    <returnType type="Decimal"/>
+                    <returnType type="Decimal" />
                 </property>
                 <property key="minimumValue" type="expression" defaultValue="0">
                     <caption>Minimum value</caption>
                     <description>The lowest possible progress value.</description>
-                    <returnType type="Decimal"/>
+                    <returnType type="Decimal" />
                 </property>
                 <property key="maximumValue" type="expression" defaultValue="100">
                     <caption>Maximum value</caption>
                     <description>The highest possible progress value.</description>
-                    <returnType type="Decimal"/>
+                    <returnType type="Decimal" />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Circle">
                 <property key="circleText" type="enumeration" defaultValue="percentage">
                     <caption>Text</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
                         <enumerationValue key="customText">Custom</enumerationValue>
@@ -35,11 +35,11 @@
                 </property>
                 <property key="customText" type="textTemplate" required="false">
                     <caption>Custom text</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
     </properties>

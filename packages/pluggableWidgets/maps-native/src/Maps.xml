@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.maps.Maps" supportedPlatform="Native" needsEntityContext="true"
-        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.maps.Maps" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Maps</name>
     <description>Show locations on an interactive map.</description>
     <studioProCategory>Display</studioProCategory>
@@ -18,11 +15,10 @@
                             <propertyGroup caption="Location">
                                 <property key="locationType" type="enumeration" defaultValue="address">
                                     <caption>Location</caption>
-                                    <description/>
+                                    <description />
                                     <enumerationValues>
                                         <enumerationValue key="address">Based on address</enumerationValue>
-                                        <enumerationValue key="latlng">Based on latitude and longitude
-                                        </enumerationValue>
+                                        <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
                                     </enumerationValues>
                                 </property>
                                 <property key="address" type="textTemplate" required="false">
@@ -32,12 +28,12 @@
                                 <property key="latitude" type="expression" required="false">
                                     <caption>Latitude</caption>
                                     <description>Decimal number from -90.0 to 90.0.</description>
-                                    <returnType type="Decimal"/>
+                                    <returnType type="Decimal" />
                                 </property>
                                 <property key="longitude" type="expression" required="false">
                                     <caption>Longitude</caption>
                                     <description>Decimal number from -180.0 to 180.0.</description>
-                                    <returnType type="Decimal"/>
+                                    <returnType type="Decimal" />
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Callout box">
@@ -53,7 +49,7 @@
                             <propertyGroup caption="Events">
                                 <property key="onClick" type="action" required="false">
                                     <caption>On click</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                             </propertyGroup>
                         </propertyGroup>
@@ -61,11 +57,11 @@
                             <propertyGroup caption="Custom icon">
                                 <property key="icon" type="icon" required="false">
                                     <caption>Icon</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                                 <property key="iconSize" type="integer" defaultValue="32">
                                     <caption>Size</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Color">
@@ -85,38 +81,35 @@
                             <propertyGroup caption="Location">
                                 <property key="markersDS" type="datasource" isList="true" required="false">
                                     <caption>Data source</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                                 <property key="locationDynamicType" type="enumeration" defaultValue="address">
                                     <caption>Location</caption>
-                                    <description/>
+                                    <description />
                                     <enumerationValues>
                                         <enumerationValue key="address">Based on address</enumerationValue>
                                         <enumerationValue key="latlng">Based on latitude and longitude</enumerationValue>
                                     </enumerationValues>
                                 </property>
-                                <property key="address" type="attribute" dataSource="markersDS"
-                                          required="false">
+                                <property key="address" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Address</caption>
                                     <description>Address containing (a subset of) street, number, zipcode, city and country.</description>
                                     <attributeTypes>
-                                        <attributeType name="String"/>
+                                        <attributeType name="String" />
                                     </attributeTypes>
                                 </property>
-                                <property key="latitude" type="attribute" dataSource="markersDS"
-                                          required="false">
+                                <property key="latitude" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Latitude</caption>
                                     <description>Decimal number from -90.0 to 90.0.</description>
                                     <attributeTypes>
-                                        <attributeType name="Decimal"/>
+                                        <attributeType name="Decimal" />
                                     </attributeTypes>
                                 </property>
-                                <property key="longitude" type="attribute" dataSource="markersDS"
-                                          required="false">
+                                <property key="longitude" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Longitude</caption>
                                     <description>Decimal number from -180.0 to 180.0.</description>
                                     <attributeTypes>
-                                        <attributeType name="Decimal"/>
+                                        <attributeType name="Decimal" />
                                     </attributeTypes>
                                 </property>
                             </propertyGroup>
@@ -125,21 +118,21 @@
                                     <caption>Title</caption>
                                     <description>Title displayed when clicking the marker.</description>
                                     <attributeTypes>
-                                        <attributeType name="String"/>
+                                        <attributeType name="String" />
                                     </attributeTypes>
                                 </property>
                                 <property key="description" type="attribute" dataSource="markersDS" required="false">
                                     <caption>Description</caption>
                                     <description>Description displayed when clicking the marker.</description>
                                     <attributeTypes>
-                                        <attributeType name="String"/>
+                                        <attributeType name="String" />
                                     </attributeTypes>
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Events">
                                 <property key="onClick" type="action" dataSource="markersDS" required="false">
                                     <caption>On click</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                             </propertyGroup>
                         </propertyGroup>
@@ -147,11 +140,11 @@
                             <propertyGroup caption="Custom icon">
                                 <property key="icon" type="icon" required="false">
                                     <caption>Icon</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                                 <property key="iconSize" type="integer" defaultValue="32">
                                     <caption>Size</caption>
-                                    <description/>
+                                    <description />
                                 </property>
                             </propertyGroup>
                             <propertyGroup caption="Color">
@@ -176,17 +169,17 @@
                 <property key="centerAddress" type="expression" required="false">
                     <caption>Address</caption>
                     <description>When latitude and longitude are provided, the address is ignored.</description>
-                    <returnType type="String"/>
+                    <returnType type="String" />
                 </property>
                 <property key="centerLatitude" type="expression" required="false">
                     <caption>Latitude</caption>
-                    <description/>
-                    <returnType type="Decimal"/>
+                    <description />
+                    <returnType type="Decimal" />
                 </property>
                 <property key="centerLongitude" type="expression" required="false">
                     <caption>Longitude</caption>
-                    <description/>
-                    <returnType type="Decimal"/>
+                    <description />
+                    <returnType type="Decimal" />
                 </property>
             </propertyGroup>
             <propertyGroup caption="Zoom">
@@ -205,7 +198,7 @@
                 </property>
                 <property key="minZoomLevel" type="enumeration" defaultValue="world">
                     <caption>Minimum</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="world">World</enumerationValue>
                         <enumerationValue key="continent">Landmass/continent</enumerationValue>
@@ -218,7 +211,7 @@
                 </property>
                 <property key="maxZoomLevel" type="enumeration" defaultValue="building">
                     <caption>Maximum</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="world">World</enumerationValue>
                         <enumerationValue key="continent">Landmass/continent</enumerationValue>
@@ -234,7 +227,7 @@
         <propertyGroup caption="Map">
             <property key="mapType" type="enumeration" defaultValue="standard">
                 <caption>Type</caption>
-                <description/>
+                <description />
                 <enumerationValues>
                     <enumerationValue key="standard">Standard</enumerationValue>
                     <enumerationValue key="satellite">Satellite</enumerationValue>

@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.native.colorpicker.ColorPicker" supportedPlatform="Native" needsEntityContext="true"
-        offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.colorpicker.ColorPicker" supportedPlatform="Native" needsEntityContext="true" offlineCapable="true" pluginWidget="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../node_modules/mendix/custom_widget.xsd">
     <name>Color picker</name>
     <description>Pick a color from a circular color input</description>
     <studioProCategory>Input elements</studioProCategory>
@@ -14,7 +11,7 @@
                     <caption>Color</caption>
                     <description>Attribute containing a valid color like #d0d0d0, red, rgba(255,255,255,0).</description>
                     <attributeTypes>
-                        <attributeType name="String"/>
+                        <attributeType name="String" />
                     </attributeTypes>
                 </property>
                 <property key="format" type="enumeration" defaultValue="hex">
@@ -55,7 +52,7 @@
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Visibility" />
-                <systemProperty key="Name"/>
+                <systemProperty key="Name" />
             </propertyGroup>
         </propertyGroup>
     </properties>
