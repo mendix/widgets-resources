@@ -1,7 +1,7 @@
 {
   "name": "line-chart-web",
   "widgetName": "LineChart",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Shows data in a line format graph.",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "license": "Apache-2.0",
