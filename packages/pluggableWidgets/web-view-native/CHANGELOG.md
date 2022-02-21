@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.1] - 2022-2-21
+
 ### Fixed
 
 -   Fixed 'Open links externally' behavior. Webview no longer directly opens externally when this option is selected and url contains unexpected capitals (in http(s) part) or does not end with a slash.

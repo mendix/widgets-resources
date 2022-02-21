@@ -4,11 +4,61 @@ All notable changes to this widget will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.5.0] Native Mobile Resources - 2022-2-21
 ### Fixed
 - We updated the `HasNotificationPermission` action to prevent an incorrect result when permission was not yet requested on iOS. This is due to a change in the hasPermission method in react-native-firebase.
 
 ### Added
 - Dark theme icons for JS Actions
+
+## [2.1.1] Accordion
+### Fixed
+- All accordion groups will now be expanded when the widget is configured as non-collapsible.
+
+## [2.2.0] Badge
+### Added
+
+-   Structure mode preview
+
+## [3.2.0] BarcodeScanner
+### Added
+
+-   Structure mode preview
+
+## [1.2.0] ColorPicker
+### Added
+
+-   Structure mode preview
+
+## [4.2.0] ProgressBar
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] RangeSlider
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] Slider
+### Added
+
+-   Structure mode preview
+
+## [3.2.0] VideoPlayer
+### Added
+
+-   Structure mode preview
+
+## [3.1.1] WebView
+### Fixed
+
+-   Fixed 'Open links externally' behavior. Webview no longer directly opens externally when this option is selected and url contains unexpected capitals (in http(s) part) or does not end with a slash.
+
+### Added
+
+-   More test ids
 
 ## [3.4.2] Native Mobile Resources - 2022-2-7
 

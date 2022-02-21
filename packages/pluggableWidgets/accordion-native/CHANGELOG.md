@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.1] - 2022-2-21
+
 ### Fixed
 - All accordion groups will now be expanded when the widget is configured as non-collapsible.
 
