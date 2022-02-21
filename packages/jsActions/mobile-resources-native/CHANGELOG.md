@@ -7,6 +7,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Fixed
 - We updated the `HasNotificationPermission` action to prevent an incorrect result when permission was not yet requested on iOS. This is due to a change in the hasPermission method in react-native-firebase.
 
+### Added
+- Dark theme icons for JS Actions
+
 ## [3.4.2] Native Mobile Resources - 2022-2-7
 
 ### Fixed
