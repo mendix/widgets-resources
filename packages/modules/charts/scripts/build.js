@@ -12,15 +12,13 @@ main().catch(e => {
 async function main() {
     let mode = "build";
 
-    if (process.argv.includes("start")) {
-        mode = "start";
-    } else if (process.argv.includes("release")) {
+    if (process.argv.includes("release")) {
         mode = "release";
     }
 
     let outputDir;
 
-    if (mode === "build" || mode === "start") {
+    if (mode === "build") {
         const MX_PROJECT_PATH = process.env.MX_PROJECT_PATH; // should be an absolute path.
         outputDir = MX_PROJECT_PATH ? MX_PROJECT_PATH : join(__dirname, "../tests/testProject");
 
@@ -64,7 +62,7 @@ async function copyChartsWidgets(destination, mode) {
     ];
 
     let cwd = process.cwd();
-    if (cwd.endsWith("charts-web")) {
+    if (cwd.endsWith("charts")) {
         cwd = join(cwd, "../../../");
     }
 
