@@ -10,86 +10,83 @@
     .layout-atlas-responsive,
     .layout-atlas-responsive-default {
         @media (min-width: $screen-md) {
-            .mx-scrollcontainer-middle {
-                position: relative;
-                .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar,
-                .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar,
-                .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar {
-                    width: $navsidebar-width-closed !important;
+            .mx-scrollcontainer-shrink:not(.mx-scrollcontainer-open) > .region-sidebar,
+            .mx-scrollcontainer-push:not(.mx-scrollcontainer-open) > .region-sidebar,
+            .mx-scrollcontainer-slide:not(.mx-scrollcontainer-open) > .region-sidebar {
+                width: $navsidebar-width-closed !important;
 
-                    .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
-                        &.mx-navigationtree-has-items a {
-                            white-space: nowrap;
+                .mx-scrollcontainer-wrapper > .mx-navigationtree ul li {
+                    &.mx-navigationtree-has-items a {
+                        white-space: nowrap;
+                    }
+
+                    &.mx-navigationtree-has-items:hover > ul {
+                        position: absolute;
+                        z-index: 100;
+                        top: $topbar-minimalheight;
+                        bottom: 0;
+                        left: $sidebar-icon-width;
+                        display: block;
+                        min-width: auto;
+                        padding: $spacing-small 0;
+
+                        & > li.mx-navigationtree-has-items:hover > ul {
+                            left: 100%;
                         }
+                    }
 
-                        &.mx-navigationtree-has-items:hover > ul {
+                    &.mx-navigationtree-collapsed,
+                    &.mx-navigationtree-has-items {
+                        ul {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .widget-sidebar:not(.widget-sidebar-expanded) {
+                .mx-navigationtree ul li {
+                    &.mx-navigationtree-has-items:hover {
+                        ul {
                             position: absolute;
                             z-index: 100;
                             top: 0;
                             bottom: 0;
                             left: $sidebar-icon-width;
                             display: block;
+                            overflow-y: auto;
                             min-width: auto;
                             padding: $spacing-small 0;
-
-                            & > li.mx-navigationtree-has-items:hover > ul {
-                                left: 100%;
-                            }
-                        }
-
-                        &.mx-navigationtree-collapsed,
-                        &.mx-navigationtree-has-items {
-                            ul {
-                                display: none;
-                            }
                         }
                     }
-                }
 
-                .widget-sidebar:not(.widget-sidebar-expanded) {
-                    .mx-navigationtree ul li {
-                        &.mx-navigationtree-has-items:hover {
-                            ul {
-                                position: absolute;
-                                z-index: 100;
-                                top: 0;
-                                bottom: 0;
-                                left: $sidebar-icon-width;
-                                display: block;
-                                overflow-y: auto;
-                                min-width: auto;
-                                padding: $spacing-small 0;
-                            }
-                        }
-
-                        &.mx-navigationtree-collapsed,
-                        &.mx-navigationtree-has-items {
-                            ul {
-                                display: none;
-                            }
+                    &.mx-navigationtree-collapsed,
+                    &.mx-navigationtree-has-items {
+                        ul {
+                            display: none;
                         }
                     }
                 }
             }
+        }
 
-            .mx-scrollcontainer-slide {
-                &:not(.mx-scrollcontainer-open) > .region-sidebar {
-                    overflow: hidden;
+        .mx-scrollcontainer-slide {
+            &:not(.mx-scrollcontainer-open) > .region-sidebar {
+                overflow: hidden;
+            }
+
+            &.mx-scrollcontainer-open > .region-sidebar {
+                width: $navsidebar-width-open !important;
+
+                & > .mx-scrollcontainer-wrapper {
+                    position: relative;
                 }
+            }
 
-                &.mx-scrollcontainer-open > .region-sidebar {
-                    width: $navsidebar-width-open !important;
-
-                    & > .mx-scrollcontainer-wrapper {
-                        position: relative;
-                    }
-                }
-
-                .region-sidebar > .mx-scrollcontainer-wrapper {
-                    z-index: 2;
-                    left: 0 !important;
-                    background-color: inherit;
-                }
+            .region-sidebar > .mx-scrollcontainer-wrapper {
+                z-index: 2;
+                left: 0 !important;
+                background-color: inherit;
             }
         }
 
