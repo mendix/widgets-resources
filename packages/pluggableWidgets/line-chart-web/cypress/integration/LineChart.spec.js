@@ -6,10 +6,10 @@ describe("line-chart-web", () => {
     });
 
     describe("line style", () => {
-        it("renders basic line chart and compares with a screenshot baseline", () => {
+        it("renders basic line chart and compares with a screenshot baseline", { retries: 3 }, () => {
             cy.wait(5000);
-            cy.get(".mx-name-containerBasic").should("be.visible");
-            cy.get(".mx-name-containerBasic").compareSnapshot(`lineChartLineBasic-${browserName}`, 0.1);
+            cy.get(".mx-name-containerBasic", { timeout: 10000 }).should("be.visible");
+            cy.get(".mx-name-containerBasic").compareSnapshot(`lineChartLineBasic-${browserName}`, 0.5);
         });
 
         it("renders line with markers and compares with a screenshot baseline", () => {
