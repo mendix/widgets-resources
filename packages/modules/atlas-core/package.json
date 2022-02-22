@@ -17,8 +17,8 @@
     "branchName": "main"
   },
   "scripts": {
-    "build": "ts-node ./scripts/build.ts build",
-    "release": "ts-node ./scripts/build.ts release",
+    "build:module": "ts-node ./scripts/build.ts build",
+    "release:module": "ts-node ./scripts/build.ts release",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {},

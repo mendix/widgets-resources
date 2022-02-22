@@ -17,9 +17,9 @@
     "branchName": "main"
   },
   "scripts": {
-    "build": "node ./scripts/build.js",
+    "build:module": "node ./scripts/build.js",
     "start": "node ./scripts/build.js start",
-    "release": "node ./scripts/build.js release",
+    "release:module": "node ./scripts/build.js release",
     "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
   },
   "dependencies": {},
