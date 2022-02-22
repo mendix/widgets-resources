@@ -142,8 +142,8 @@
                 text-align: center;
 
                 & > a {
-                    width: ($spacing-medium * 2) + 1;
-                    height: ($spacing-medium * 2) + 1;
+                    width: calc((#{$spacing-medium} * 2) + 1px);
+                    height: calc((#{$spacing-medium} * 2) + 1px);
                     margin: auto;
                     padding: 0;
                     text-align: center;
