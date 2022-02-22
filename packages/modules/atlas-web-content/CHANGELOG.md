@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- Added support for setting variables using relative length CSS units.
+
 ## [3.0.6] - 2021-09-28
 
 ### Changed

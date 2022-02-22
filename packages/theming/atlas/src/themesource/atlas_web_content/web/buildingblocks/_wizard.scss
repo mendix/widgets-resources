@@ -57,7 +57,7 @@
 //Wizard arrow
 .wizard-arrow .wizard-step {
     height: $wizard-step-height;
-    margin-left: 0 - ($wizard-step-height / 2);
+    margin-left: calc(0px - (#{$wizard-step-height} / 2));
     padding-left: ($wizard-step-height / 2);
     background-color: $wizard-default-bg;
     justify-content: flex-start;
@@ -67,14 +67,14 @@
         position: absolute;
         z-index: 1;
         left: 100%;
-        margin-left: 0 - (($wizard-step-height / 2) - 1);
+        margin-left: calc(0px - ((#{$wizard-step-height} / 2) - 1px));
         content: " ";
         border-style: solid;
         border-color: transparent;
     }
     &::after {
         top: 0;
-        border-width: (($wizard-step-height / 2) - 1);
+        border-width: calc((#{$wizard-step-height} / 2) - 1px);
         border-left-color: $wizard-default-bg;
     }
     &::before {
