@@ -71,25 +71,25 @@
                     }
                 }
             }
-        }
 
-        .mx-scrollcontainer-slide {
-            &:not(.mx-scrollcontainer-open) > .region-sidebar {
-                overflow: hidden;
-            }
-
-            &.mx-scrollcontainer-open > .region-sidebar {
-                width: $navsidebar-width-open !important;
-
-                & > .mx-scrollcontainer-wrapper {
-                    position: relative;
+            .mx-scrollcontainer-slide {
+                &:not(.mx-scrollcontainer-open) > .region-sidebar {
+                    overflow: hidden;
                 }
-            }
 
-            .region-sidebar > .mx-scrollcontainer-wrapper {
-                z-index: 2;
-                left: 0 !important;
-                background-color: inherit;
+                &.mx-scrollcontainer-open > .region-sidebar {
+                    width: $navsidebar-width-open !important;
+
+                    & > .mx-scrollcontainer-wrapper {
+                        position: relative;
+                    }
+                }
+
+                .region-sidebar > .mx-scrollcontainer-wrapper {
+                    z-index: 2;
+                    left: 0 !important;
+                    background-color: inherit;
+                }
             }
         }
 
