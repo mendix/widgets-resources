@@ -23,7 +23,7 @@
                     &.mx-navigationtree-has-items:hover > ul {
                         position: absolute;
                         z-index: 100;
-                        top: 0;
+                        top: $topbar-minimalheight;
                         bottom: 0;
                         left: $sidebar-icon-width;
                         display: block;
