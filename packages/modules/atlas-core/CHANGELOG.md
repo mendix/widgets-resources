@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.1.1] Atlas Core - 2022-2-18
 ### Fixed
 - We fixed an issue with logo covering the whole login page when opening in firefox (Ticket 141170).
 
