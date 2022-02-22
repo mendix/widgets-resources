@@ -38,7 +38,7 @@ export const defaultVideoStyle: VideoStyle = {
     },
     controlBtnContainerStyle: {
         position: "absolute",
-        top: 10,
+        top: "10%",
         right: 10,
         padding: 2,
         backgroundColor: "rgba(0,0,0,0.5)",

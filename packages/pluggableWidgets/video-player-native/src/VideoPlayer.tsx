@@ -7,9 +7,11 @@ import {
     Text,
     TouchableOpacity,
     TouchableWithoutFeedback,
-    View
+    View,
+    Appearance
 } from "react-native";
 import Video, { OnProgressData, VideoProperties } from "react-native-video";
+import { hideNavigationBar, showNavigationBar } from "react-native-navigation-bar-color";
 import Modal from "react-native-modal";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
@@ -80,7 +82,13 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
 
     function fullScreenHandler(isFullScreen: boolean): void {
         setFullScreen(isFullScreen);
-        StatusBar.setHidden(isFullScreen);
+        if (isFullScreen) {
+            hideNavigationBar();
+        } else {
+            showNavigationBar();
+            const isDark = Appearance.getColorScheme() === "dark";
+            StatusBar.setBarStyle(isDark ? "light-content" : "dark-content");
+        }
     }
 
     const videoProps: VideoProperties = {
@@ -107,6 +115,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                     style={styles.fullScreenVideoPlayer}
                     onBackButtonPress={() => fullScreenHandler(false)}
                     testID="fullscreen-modal"
+                    statusBarTranslucent
                 >
                     <TouchableWithoutFeedback onPress={onVideoPressHandler} testID="fullscreen-overlay">
                         <Video
