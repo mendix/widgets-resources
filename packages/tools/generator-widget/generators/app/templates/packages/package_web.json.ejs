@@ -2,7 +2,7 @@
   "name": "<%- packageName %>",
   "widgetName": "<%- name %>",
   "version": "<%- version %>",
-  "description": "<%- description %>",
+  "description": "<%- description.replace(/["]/gi, '\\"') %>",
   "copyright": "<%- copyright %>",
   "author": "<%- author %>",
   "engines": {

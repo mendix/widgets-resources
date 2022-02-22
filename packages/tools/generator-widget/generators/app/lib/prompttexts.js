@@ -6,7 +6,7 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "name",
             validate: input => {
-                if (/^([a-zA-Z]+)$/.test(input)) {
+                if (/^([a-zA-Z-]+)$/.test(input)) {
                     return true;
                 }
                 return "Your widget name can only contain one or more letters (a-z & A-Z). Please provide a valid name";
@@ -18,28 +18,52 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "description",
             message: "Enter a description for your widget",
-            default: "My widget description"
+            default: "My widget description",
+            validate: input => {
+                if (/^[\w\s!?.'"-]+$/gi.test(input)) {
+                    return true;
+                }
+                return "Your widget description can only contain one or more letters, quotes or punctuation marks. Please provide a valid description";
+            }
         },
         {
             type: "input",
             name: "organization",
             message: "Organization name",
             default: "Mendix",
-            store: true
+            store: true,
+            validate: input => {
+                if (/^[^"]+$/gi.test(input)) {
+                    return true;
+                }
+                return "Double quotes not allowed, please remove quotes from your answer";
+            }
         },
         {
             type: "input",
             name: "copyright",
             message: "Add a copyright",
             default: "© Mendix Technology BV 2022. All rights reserved.",
-            store: true
+            store: true,
+            validate: input => {
+                if (/^[^"]+$/gi.test(input)) {
+                    return true;
+                }
+                return "Double quotes not allowed, please remove quotes from your answer";
+            }
         },
         {
             type: "input",
             name: "license",
             message: "Add a license",
             default: "Apache-2.0",
-            store: true
+            store: true,
+            validate: input => {
+                if (/^[^"]+$/gi.test(input)) {
+                    return true;
+                }
+                return "Double quotes not allowed, please remove quotes from your answer";
+            }
         },
         {
             type: "input",
@@ -58,13 +82,25 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             name: "author",
             message: "Author",
             default: "John",
-            store: true
+            store: true,
+            validate: input => {
+                if (/^[^"]+$/gi.test(input)) {
+                    return true;
+                }
+                return "Double quotes not allowed, please remove quotes from your answer";
+            }
         },
         {
             type: "input",
             name: "projectPath",
             message: "Mendix project path",
-            default: mxProjectDir ? mxProjectDir : "./tests/testProject"
+            default: mxProjectDir ? mxProjectDir : "./tests/testProject",
+            validate: input => {
+                if (/^[^"]+$/gi.test(input)) {
+                    return true;
+                }
+                return "Double quotes not allowed, please remove quotes from your answer";
+            }
         },
         {
             type: "list",
