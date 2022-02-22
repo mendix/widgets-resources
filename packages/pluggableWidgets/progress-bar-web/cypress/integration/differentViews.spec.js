@@ -46,10 +46,14 @@ describe("Progress Bar", () => {
 
     it("renders in a template grid", () => {
         cy.visit("p/templateGrid");
+        cy.wait(1000);
 
         cy.get(".mx-name-textBox1 .form-control-static").then(element => {
             const textBoxContent = element.text();
-            cy.get(".widget-progress-bar.mx-name-progressBar1 .progress-bar").should("have.text", textBoxContent);
+            cy.get(".widget-progress-bar.mx-name-progressBar1 .progress-bar", { timeout: 10000 }).should(
+                "have.text",
+                textBoxContent
+            );
         });
     });
 
