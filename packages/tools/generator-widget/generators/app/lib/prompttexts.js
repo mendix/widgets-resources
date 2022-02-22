@@ -18,52 +18,28 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             type: "input",
             name: "description",
             message: "Enter a description for your widget",
-            default: "My widget description",
-            validate: input => {
-                if (/^[\w\s!?.'"-]+$/gi.test(input)) {
-                    return true;
-                }
-                return "Your widget description can only contain one or more letters, quotes or punctuation marks. Please provide a valid description";
-            }
+            default: "My widget description"
         },
         {
             type: "input",
             name: "organization",
             message: "Organization name",
             default: "Mendix",
-            store: true,
-            validate: input => {
-                if (/^[^"]+$/gi.test(input)) {
-                    return true;
-                }
-                return "Double quotes not allowed, please remove quotes from your answer";
-            }
+            store: true
         },
         {
             type: "input",
             name: "copyright",
             message: "Add a copyright",
             default: "© Mendix Technology BV 2022. All rights reserved.",
-            store: true,
-            validate: input => {
-                if (/^[^"]+$/gi.test(input)) {
-                    return true;
-                }
-                return "Double quotes not allowed, please remove quotes from your answer";
-            }
+            store: true
         },
         {
             type: "input",
             name: "license",
             message: "Add a license",
             default: "Apache-2.0",
-            store: true,
-            validate: input => {
-                if (/^[^"]+$/gi.test(input)) {
-                    return true;
-                }
-                return "Double quotes not allowed, please remove quotes from your answer";
-            }
+            store: true
         },
         {
             type: "input",
@@ -82,25 +58,13 @@ function promptWidgetProperties(mxProjectDir, widgetName) {
             name: "author",
             message: "Author",
             default: "John",
-            store: true,
-            validate: input => {
-                if (/^[^"]+$/gi.test(input)) {
-                    return true;
-                }
-                return "Double quotes not allowed, please remove quotes from your answer";
-            }
+            store: true
         },
         {
             type: "input",
             name: "projectPath",
             message: "Mendix project path",
-            default: mxProjectDir ? mxProjectDir : "./tests/testProject",
-            validate: input => {
-                if (/^[^"]+$/gi.test(input)) {
-                    return true;
-                }
-                return "Double quotes not allowed, please remove quotes from your answer";
-            }
+            default: mxProjectDir ? mxProjectDir : "./tests/testProject"
         },
         {
             type: "list",

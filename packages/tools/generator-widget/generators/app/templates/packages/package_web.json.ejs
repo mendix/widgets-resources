@@ -2,19 +2,19 @@
   "name": "<%- packageName %>",
   "widgetName": "<%- name %>",
   "version": "<%- version %>",
-  "description": "<%- description.replace(/["]/gi, '\\"') %>",
-  "copyright": "<%- copyright %>",
-  "author": "<%- author %>",
+  "description": <%- JSON.stringify(description) %>,
+  "copyright": <%- JSON.stringify(copyright) %>,
+  "author": <%- JSON.stringify(author) %>,
   "engines": {
     "node": ">=12"
   },
-  "license": "<%- license %>",
+  "license": <%- JSON.stringify(license) %>,
   "config": {
-    "projectPath": "<%- projectPath %>/",
+    "projectPath": <%- JSON.stringify(projectPath + '/') %>,
     "mendixHost": "http://localhost:8080",
     "developmentPort": 3000
   },
-  "packagePath": "<%- packagePath %>",
+  "packagePath": <%- JSON.stringify(packagePath) %>,
   "scripts": {
     "start": "pluggable-widgets-tools start:server",
     "dev": "pluggable-widgets-tools start:web",
