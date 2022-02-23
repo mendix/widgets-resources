@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Changed
+- Submenu on the navsidebar desktop now opens on the same height as the main menu
+
 ### Fixed
 - We corrected the border styling for the Floating Action Button native widget when in Dark Mode.
 
