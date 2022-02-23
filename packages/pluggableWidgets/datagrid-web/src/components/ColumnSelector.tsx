@@ -83,6 +83,7 @@ export function ColumnSelector(props: ColumnSelectorProps): ReactElement {
                             checked={isVisible}
                             disabled={isVisible && props.columns.length - props.hiddenColumns.length === 1}
                             id={`${props.id}_checkbox_toggle_${index}`}
+                            style={{ pointerEvents: "none" }}
                             type="checkbox"
                             tabIndex={-1}
                         />

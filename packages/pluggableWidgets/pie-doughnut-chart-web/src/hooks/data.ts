@@ -2,10 +2,9 @@ import { ValueStatus } from "mendix";
 import { useEffect, useMemo, useState } from "react";
 import { ensure } from "@mendix/pluggable-widgets-tools";
 import Big from "big.js";
-import { compareAsc } from "date-fns";
 import { PieChartContainerProps } from "../../typings/PieChartProps";
 import { ChartProps } from "@mendix/shared-charts/dist/components/Chart";
-import { executeAction } from "@mendix/piw-utils-internal";
+import { executeAction, valueAttributeCompareFn } from "@mendix/piw-utils-internal";
 
 type PieChartDataSeriesHooks = Pick<
     PieChartContainerProps,
@@ -53,7 +52,9 @@ export const usePieChartDataSeries = ({
                 itemHoverText: tooltipHoverText?.get(dataSourceItem).value
             }));
             if (seriesSortAttribute) {
-                dataSourceItems.sort(seriesSortAttributeCompareFn);
+                dataSourceItems.sort(({ itemSortValue: firstItemSortValue }, { itemSortValue: secondItemSortValue }) =>
+                    valueAttributeCompareFn(firstItemSortValue, secondItemSortValue)
+                );
                 if (seriesSortOrder === "desc") {
                     dataSourceItems.reverse();
                 }
@@ -92,35 +93,3 @@ export const usePieChartDataSeries = ({
         [customSeriesOptions, chartFormat, pieChartData, onClick]
     );
 };
-
-function seriesSortAttributeCompareFn(
-    { itemSortValue: firstItemSortValue }: LocalPieChartData,
-    { itemSortValue: secondItemSortValue }: LocalPieChartData
-): number {
-    // Handle undefined case separately so TypeScript can infer types in later clauses.
-    if (firstItemSortValue === undefined || secondItemSortValue === undefined) {
-        if (firstItemSortValue === secondItemSortValue) {
-            return 0;
-        }
-        return firstItemSortValue === undefined ? 1 : -1;
-    }
-    // Different types shouldn't happen and aren't comparable.
-    if (typeof firstItemSortValue !== typeof secondItemSortValue) {
-        return 0;
-    }
-    // Check the types exhaustively from both vars so TypeScript properly infers the types.
-    if (
-        typeof firstItemSortValue === "string" ||
-        typeof secondItemSortValue === "string" ||
-        typeof firstItemSortValue === "boolean" ||
-        typeof secondItemSortValue === "boolean"
-    ) {
-        return firstItemSortValue.toString().localeCompare(secondItemSortValue.toString());
-    }
-    if (firstItemSortValue instanceof Date || secondItemSortValue instanceof Date) {
-        // @ts-expect-error Based on the unequal comparison earlier, both of these are Date.
-        return compareAsc(firstItemSortValue, secondItemSortValue);
-    }
-    // Latest remaining type is `Big`.
-    return firstItemSortValue.minus(secondItemSortValue).toNumber();
-}

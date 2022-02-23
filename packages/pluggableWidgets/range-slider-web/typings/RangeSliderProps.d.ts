@@ -26,6 +26,7 @@ export interface RangeSliderContainerProps {
     id: string;
     lowerBoundAttribute: EditableValue<Big>;
     upperBoundAttribute: EditableValue<Big>;
+    advanced: boolean;
     minValueType: MinValueTypeEnum;
     staticMinimumValue: Big;
     minAttribute?: EditableValue<Big>;
@@ -56,6 +57,7 @@ export interface RangeSliderPreviewProps {
     readOnly: boolean;
     lowerBoundAttribute: string;
     upperBoundAttribute: string;
+    advanced: boolean;
     minValueType: MinValueTypeEnum;
     staticMinimumValue: number | null;
     minAttribute: string;

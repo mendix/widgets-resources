@@ -1,7 +1,7 @@
 import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { AnimationProps } from "../typings/AnimationProps";
 
-export function getPreview(values: AnimationProps<any>): StructurePreviewProps {
+export function getPreview(values: AnimationProps<any>, isDarkMode: boolean): StructurePreviewProps {
     const prettifyText = (text: string) => text.replace(/([A-Z])/g, " $1").toLowerCase();
     const animationType =
         values.animationType === "in" ? "Entrance" : values.animationType === "attention" ? "Attention" : "Exit";
@@ -17,17 +17,25 @@ export function getPreview(values: AnimationProps<any>): StructurePreviewProps {
 
     return {
         type: "Container",
-        borders: false,
+        borders: true,
         children: [
             {
                 type: "Container",
-                padding: 4,
                 borders: false,
+                backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
                 children: [
                     {
-                        type: "Text",
-                        bold: true,
-                        content
+                        type: "Container",
+                        borders: false,
+                        padding: 4,
+                        children: [
+                            {
+                                type: "Text",
+                                bold: true,
+                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                content
+                            }
+                        ]
                     }
                 ]
             },

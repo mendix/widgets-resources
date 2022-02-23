@@ -1,6 +1,6 @@
 {
   "name": "@mendix/atlas-ui",
-  "version": "3.0.9",
+  "version": "3.1.1",
   "description": "Mendix Atlas UI is the foundation of making beautiful apps with Mendix. For more information about the framework go to https://atlas.mendix.com.",
   "testProject": {
     "githubUrl": "https://github.com/mendix/Atlas-Design-System",
@@ -13,11 +13,14 @@
     "build": "node ./scripts/build.js",
     "start": "node ./scripts/build.js start",
     "pretest:e2e:dev": "node ./scripts/build.js",
+    "pretest:e2e:collect": "node ./scripts/atlasCollectPages.js",
     "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
-    "test:e2e": "pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",
+    "test:e2e": "pluggable-widgets-tools test:e2e:web:cypress --no-widget-update --remove-atlas-files",
+    "test:e2e:cypress:local": "npx cypress open --browser chrome",
+    "test:e2e:wdio": "pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",
+    "test:e2e:wdio:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "pretest:e2e:chrome": "node ../../../scripts/test/updateAtlas.js --latest-atlas",
     "test:e2e:chrome": "BROWSER_DOCKER=selenium/standalone-chrome BROWSER=chrome pluggable-widgets-tools test:e2e:web --no-widget-update --remove-atlas-files",
-    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
     "release": "node ./scripts/build.js release",
     "release-ts": "tsc"
   },
@@ -32,8 +35,9 @@
     "chokidar": "^3.5.2",
     "copy-and-watch": "^0.1.5",
     "cross-env": "^7.0.2",
-    "concurrently": "^6.0.0",
     "fast-xml-parser": "^3.17.5",
+    "concurrently": "^6.0.0",
+    "fast-xml-parser": "^4.0.1",
     "sass": "^1.43.4",
     "typescript": "^4.5.4"
   },

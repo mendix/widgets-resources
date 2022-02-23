@@ -1,0 +1,54 @@
+name: Publish widget data
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - packages/**/*
+      - scripts/data/**/*
+  pull_request:
+    branches:
+      - master
+    paths:
+      - scripts/data/**/*
+jobs:
+  publish-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checking out code"
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+        with:
+          submodules: false
+      - name: "Setting up node"
+        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - name: "Installing dependencies"
+        run: npm install
+      - name: "Exporting data"
+        run: npm run update:content-overview
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+        with:
+          name: content.json
+          path: data/content.json
+      - name: "Creating pull request"
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        id: cpr
+        uses: peter-evans/create-pull-request@dcd5fd746d53dd8de555c0f10bca6c35628be47a # v3
+        with:
+          token: ${{ secrets.GH_PAT }}
+          branch: build/update-widgets-data
+          delete-branch: true
+          commit-message: 'chore: update content data file'
+          title: 'chore: Update content data file'
+          draft: false
+          add-paths: 'data/content.json'
+      - name: "Enabling auto-merge for pull-request, if new"
+        if: steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@d2ede5636b3febc92809259995e643565e675aab # v1
+        with:
+          token: ${{ secrets.GH_PAT }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: merge

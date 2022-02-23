@@ -50,6 +50,7 @@ function toPreviewPropType(prop: Property, generatedTypes: string[]): string {
             // { type: string } is included here due to an incorrect API output before 9.2 (PAG-1400)
             return "{} | { type: string } | null";
         case "attribute":
+        case "association":
         case "expression":
             return "string";
         case "enumeration":

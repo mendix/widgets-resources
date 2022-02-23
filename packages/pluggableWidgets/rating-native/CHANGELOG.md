@@ -5,8 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.1] - 2022-2-2
+
+### Fixed
+- The widget has been refactored and now includes a version of react-native-vector-icons that matches Native Template. 
+
+## [2.1.0] - 2022-1-24
+
 ### Added
 - Dark theme icons for Tile and List view.
+- We added dark mode to structure mode preview.
 
 ## [2.0.0] - 2021-9-28
 

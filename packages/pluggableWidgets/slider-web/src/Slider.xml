@@ -6,24 +6,22 @@
     <studioCategory>Input Elements</studioCategory>
     <properties>
         <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
+                <property key="valueAttribute" type="attribute">
+                    <caption>Value attribute</caption>
+                    <description />
+                    <attributeTypes>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
+                    </attributeTypes>
+                </property>
+            </propertyGroup>
             <propertyGroup caption="General">
                 <property key="advanced" type="boolean" defaultValue="false">
                     <caption>Enable advanced options</caption>
                     <description />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Data source">
-                <property key="valueAttribute" type="attribute">
-                    <caption>Value attribute</caption>
-                    <description/>
-                    <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
-                    </attributeTypes>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Range">
                 <property key="minValueType" type="enumeration" defaultValue="static">
                     <caption>Minimum value type</caption>
                     <description />
@@ -68,9 +66,9 @@
                     <caption>Maximum value</caption>
                     <description>The maximum value of the slider.</description>
                     <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
                 <property key="expressionMaximumValue" type="expression" required="false">
@@ -78,8 +76,6 @@
                     <description>The maximum value of the slider.</description>
                     <returnType type="Decimal" />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Steps">
                 <property key="stepSizeType" type="enumeration" defaultValue="static">
                     <caption>Step size type</caption>
                     <description />
@@ -97,9 +93,9 @@
                     <caption>Step size</caption>
                     <description>Value to be added or subtracted on each step the slider makes. Must be greater than zero, and max - min should be evenly divisible by the step value.</description>
                     <attributeTypes>
-                        <attributeType name="Integer"/>
-                        <attributeType name="Long"/>
-                        <attributeType name="Decimal"/>
+                        <attributeType name="Integer" />
+                        <attributeType name="Long" />
+                        <attributeType name="Decimal" />
                     </attributeTypes>
                 </property>
                 <property key="expressionStepSize" type="expression" required="false">
@@ -107,8 +103,6 @@
                     <description>Value to be added or subtracted on each step the slider makes. Must be greater than zero, and max - min should be evenly divisible by the step value.</description>
                     <returnType type="Decimal" />
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Tooltip">
                 <property key="showTooltip" type="boolean" defaultValue="true">
                     <caption>Show tooltip</caption>
                     <description />
@@ -129,19 +123,17 @@
                     <caption>Tooltip always visible</caption>
                     <description>When enabled tooltip is always visible to the user</description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Label">
                 <systemProperty key="Label" />
             </propertyGroup>
             <propertyGroup caption="Editability">
-                <systemProperty key="Editability"/>
+                <systemProperty key="Editability" />
             </propertyGroup>
             <propertyGroup caption="Visibility">
                 <systemProperty key="Visibility" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Track">
-            <propertyGroup caption="Markers">
+            <propertyGroup caption="Track">
                 <property key="noOfMarkers" type="integer" defaultValue="2">
                     <caption>Number of markers</caption>
                     <description>The number of marker ticks that appear along the slider’s track. (Visible when larger than 0)</description>
@@ -150,8 +142,6 @@
                     <caption>Decimal places</caption>
                     <description>Number of decimal places for marker values</description>
                 </property>
-            </propertyGroup>
-            <propertyGroup caption="Orientation">
                 <property key="orientation" type="enumeration" defaultValue="horizontal">
                     <caption>Orientation</caption>
                     <description>The orientation of the slider. If ‘Vertical’, make sure to set the either the height of the parent or slider to a fixed height.</description>
@@ -162,7 +152,7 @@
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentage">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentage">Percentage</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -170,7 +160,7 @@
                 </property>
                 <property key="height" type="integer" defaultValue="100">
                     <caption>Height</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>

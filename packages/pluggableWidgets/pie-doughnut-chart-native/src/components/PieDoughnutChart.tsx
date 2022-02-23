@@ -11,6 +11,7 @@ const DEFAULT_SLICE_COLOUR = "black";
 const LABEL_STYLE_KEYS = ["fill", "fontFamily", "fontSize", "fontStyle", "fontWeight"];
 
 export interface ChartProps {
+    name: string;
     series: DataPoints;
     style: ChartStyle;
     presentation: string;
@@ -25,7 +26,7 @@ export interface Slice<X extends string, Y extends number> {
     stylingKey: Option<string>;
 }
 
-export function PieDoughnutChart({ presentation, series, style, showLabels }: ChartProps): ReactElement | null {
+export function PieDoughnutChart({ name, presentation, series, style, showLabels }: ChartProps): ReactElement | null {
     // due to the nature of the chart type, we only reply on the width, as the chart is always a square
     const [chartDimensions, setChartDimensions] = useState<{ width: number }>();
     // Chart user-styling may be missing for certain slices. A palette is passed, any missing colours
@@ -60,7 +61,7 @@ export function PieDoughnutChart({ presentation, series, style, showLabels }: Ch
     );
 
     return (
-        <View style={{ ...style.container }}>
+        <View style={{ ...style.container }} testID={name}>
             <View
                 onLayout={updateChartDimensions}
                 style={{ justifyContent: "center", alignItems: "center" }}

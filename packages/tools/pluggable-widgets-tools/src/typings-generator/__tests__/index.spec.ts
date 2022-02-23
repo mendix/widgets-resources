@@ -21,6 +21,8 @@ import { content, contentGroup, contentGroupNative, contentNative } from "./inpu
 import { nativeResult, webResult, webResultGroup } from "./outputs";
 import { attributeLinkedActionInput, attributeNestedLinkedActionInput } from "./inputs/atribute-linked-action";
 import { attributeLinkedActionOutput, attributeNestedLinkedActionOutput } from "./outputs/atribute-linked-action";
+import { associationInput, associationInputNative } from "./inputs/association";
+import { associationNativeOutput, associationWebOutput } from "./outputs/association";
 
 describe("Generating tests", () => {
     it("Generates a parsed typing from XML for native", () => {
@@ -121,6 +123,16 @@ describe("Generating tests", () => {
     it("Generates a parsed typing from XML for widget with attribute nested linked action", () => {
         const newContent = generateFullTypesFor(attributeNestedLinkedActionInput);
         expect(newContent).toBe(attributeNestedLinkedActionOutput);
+    });
+
+    it("Generates a parsed typing from XML for web using association", () => {
+        const newContent = generateFullTypesFor(associationInput);
+        expect(newContent).toBe(associationWebOutput);
+    });
+
+    it("Generates a parsed typing from XML for native using association", () => {
+        const newContent = generateNativeTypesFor(associationInputNative);
+        expect(newContent).toBe(associationNativeOutput);
     });
 });
 

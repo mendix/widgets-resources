@@ -6,5 +6,9 @@ echo "Starting runtime..."
 printf "c\nc\n" | m2ee -c /shared/m2ee.yml --yolo start
 echo "Starting runtime done!"
 
-while :; do sleep 15; done
+# keep docker container alive
+while true
+do
+  tail -f /dev/null & wait ${!}
+done
 echo "Runtime container exiting now"

@@ -16,6 +16,7 @@ export function PieDoughnutChart(props: PieDoughnutChartProps<ChartStyle>): Reac
 
     return (
         <PieDoughnutChartComponent
+            name={name}
             series={series
                 .flatMap(_series => _series.slices)
                 .sort((a, b) => (sortOrder === "ascending" ? a.y - b.y : b.y - a.y))}

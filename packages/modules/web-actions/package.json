@@ -1,0 +1,28 @@
+{
+  "name": "web-actions",
+  "moduleName": "Web Actions",
+  "version": "2.4.0",
+  "license": "Apache-2.0",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "marketplace": {
+    "minimumMXVersion": "9.10.0.36429",
+    "marketplaceId": 114337
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/Web-Actions",
+    "branchName": "main"
+  },
+  "scripts": {
+    "build": "node ./scripts/build.js",
+    "release": "node ./scripts/build.js release",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.2"
+  }
+}

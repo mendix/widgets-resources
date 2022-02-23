@@ -1,6 +1,9 @@
 import concurrently from "concurrently";
 import { join } from "path";
-import { rm, mkdir } from "shelljs";
+import { cp, rm, mkdir } from "shelljs";
+import { execSync } from "child_process";
+import { existsSync } from "fs";
+import { readdir } from "fs/promises";
 
 const repoRoot = join(__dirname, "../../../../");
 
@@ -39,6 +42,43 @@ async function main(): Promise<void> {
         mkdir("-p", join(outputDir, "themesource/atlas_core"));
 
         await copyStylesAndAssets(mode === "start", outputDir);
+    }
+
+    await buildAndCopyWidgets(mode, ["feedback-native"], outputDir);
+}
+
+async function buildAndCopyWidgets(command = "build", widgets: string[] = [], destination?: string) {
+    let cwd = process.cwd();
+    if (cwd.endsWith("atlas-core")) {
+        cwd = join(cwd, "../../../");
+    }
+    execSync(
+        `${
+            command !== "release" && destination ? `npx cross-env MX_PROJECT_PATH=${destination} ` : ""
+        }npm run ${command} -- --scope '${
+            widgets.length > 1 ? `{${widgets.join(",")}}` : widgets.join("")
+        }' --include-dependencies`,
+        {
+            stdio: "inherit",
+            cwd
+        }
+    );
+    if (command === "release") {
+        const pluggableWidgetsFolderPath = join(cwd, "packages/pluggableWidgets");
+        const mpkPathsToCopy = [];
+        for await (const widget of widgets) {
+            const version = require(join(pluggableWidgetsFolderPath, widget, "package.json")).version;
+            const widgetDistPath = join(pluggableWidgetsFolderPath, widget, "dist", version);
+            const distExists = existsSync(widgetDistPath);
+
+            if (distExists) {
+                mpkPathsToCopy.push(...(await readdir(widgetDistPath)).map(name => join(widgetDistPath, name)));
+            }
+        }
+        if (mpkPathsToCopy.length > 0) {
+            mkdir("-p", join(__dirname, "../dist/widgets"));
+            cp(mpkPathsToCopy, join(__dirname, "../dist/widgets"));
+        }
     }
 }
 

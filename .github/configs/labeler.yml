@@ -1,0 +1,29 @@
+Atlas:
+  - packages/**/*atlas*/**/*
+documentation:
+  - all: ["*.md"]
+Cross-Platform:
+  - packages/tools/pluggable-widgets-tools/**/*
+  - packages/tools/generator/**/*
+  - packages/modules/atlas-core/**/*
+  - .github/**/*
+  - .husky/**/*
+  - data/**/*
+  - scripts/**/*
+Hybrid:
+  - packages/jsActions/*-hybrid/**/*
+Native:
+  - packages/**/*-native*/**/*
+  - packages/**/*_native*/**/*
+  - detox/**/*
+Web:
+  - packages/**/*-web*/**/*
+  - packages/shared/charts/**/*
+  - packages/**/*_web*/**/*
+  - packages/modules/data-widgets/**/*
+  - configs/e2e/**/*
+PWA:
+  - packages/**/barcode-scanner-web/**/*
+  - packages/**/nanoflow-actions-web/**/*
+test:
+  - all: ["*.spec.*"]

@@ -1,7 +1,7 @@
 {
   "name": "mobile-resources-native",
   "moduleName": "Native Mobile Resources",
-  "version": "3.3.1",
+  "version": "3.5.0",
   "license": "Apache-2.0",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {
@@ -9,7 +9,7 @@
     "url": "https://github.com/mendix/widgets-resources.git"
   },
   "marketplace": {
-    "minimumMXVersion": "9.6.0.27784",
+    "minimumMXVersion": "9.10.0.36429",
     "marketplaceId": 109513
   },
   "testProject": {
@@ -44,6 +44,6 @@
     "@types/url-parse": "^1.4.3",
     "@types/react-native-push-notification": "^5.0.5",
     "rimraf": "^2.7.1",
-    "rollup": "^2.56.2"
+    "rollup": "~2.66.1"
   }
 }

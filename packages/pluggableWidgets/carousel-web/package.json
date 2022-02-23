@@ -1,0 +1,51 @@
+{
+  "name": "carousel-web",
+  "widgetName": "Carousel",
+  "version": "2.0.0",
+  "description": "Displays images in a carousel",
+  "copyright": "© Mendix Technology BV 2022. All rights reserved.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mendix/widgets-resources.git"
+  },
+  "testProject": {
+    "githubUrl": "https://github.com/mendix/testProjects",
+    "branchName": "carousel-web"
+  },
+  "license": "Apache-2.0",
+  "marketplace": {
+    "minimumMXVersion": "9.6.0",
+    "marketplaceId": 47784
+  },
+  "packagePath": "com.mendix.widget.custom",
+  "scripts": {
+    "start": "cross-env MPKOUTPUT=Carousel.mpk pluggable-widgets-tools start:server",
+    "dev": "cross-env MPKOUTPUT=Carousel.mpk pluggable-widgets-tools start:web",
+    "build": "cross-env MPKOUTPUT=Carousel.mpk pluggable-widgets-tools build:web",
+    "format": "pluggable-widgets-tools format",
+    "lint": "eslint --config ../../../.eslintrc.js --ext .jsx,.js,.ts,.tsx src/",
+    "test": "pluggable-widgets-tools test:unit:web",
+    "release": "cross-env MPKOUTPUT=Carousel.mpk pluggable-widgets-tools release:web",
+    "pretest:e2e": "npm run release && node ../../../scripts/test/updateAtlas.js --latest-atlas",
+    "test:e2e": "echo 'Skipping tests'",
+    "test:e2e:dev": "pluggable-widgets-tools test:e2e:web:dev",
+    "release:marketplace": "node ../../../scripts/release/marketplaceRelease.js"
+  },
+  "config": {
+    "mendixHost": "http://localhost:8080",
+    "developmentPort": 3000
+  },
+  "devDependencies": {
+    "@mendix/piw-utils-internal": "^1.0.0",
+    "@mendix/pluggable-widgets-tools": ">=9.0.0",
+    "@types/classnames": "^2.2.6",
+    "@types/swiper": "^6.0.0",
+    "eslint": "^7.20.0",
+    "jest": "^26.6.1",
+    "cross-env": "^7.0.2"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "swiper": "~6.8.4"
+  }
+}

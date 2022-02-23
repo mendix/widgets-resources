@@ -60,7 +60,6 @@ export function GoogleMap(props: GoogleMapsProps): ReactElement {
                     });
                 });
             if (bounds.isEmpty()) {
-                console.warn("Empty");
                 bounds.extend(center.current);
             }
             if (autoZoom) {

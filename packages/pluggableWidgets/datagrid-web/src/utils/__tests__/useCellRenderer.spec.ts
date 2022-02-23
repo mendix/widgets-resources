@@ -71,8 +71,8 @@ describe("Datagrid useCellRenderer hook", () => {
         const wrapperB = jest.fn(x => x);
         const outputA = resultA.current(wrapperA, { id: "111" as GUID }, 0);
         const outputB = resultB.current(wrapperB, { id: "112" as GUID }, 0);
-        expect(outputA.props.title).toBeUndefined();
-        expect(outputB.props.title).toBeUndefined();
+        expect(outputA.props.title).toBe("");
+        expect(outputB.props.title).toBe("");
     });
 
     it("adds title when column has dynamicText as datasource", () => {

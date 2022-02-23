@@ -1,0 +1,65 @@
+.widget-google-maps-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.alert.alert-danger.widget-google-maps-alert {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+.widget-google-maps-wrapper > div {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.widget-maps {
+    position: relative;
+}
+
+.widget-google-maps {
+    width: 100%;
+    height: 100%;
+}
+
+/**
+Leaflet maps
+ */
+.widget-leaflet-maps-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.widget-leaflet-maps {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.widget-leaflet-maps-alert.leaflet-control {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+}
+
+.custom-leaflet-map-icon-marker {
+    /* Since we're moving the icon with translate, the clickable surface area would mismatch meaning users
+    could click next to the icon and still trigger the tooltip on click. Instead, we just get rid of this
+    hitbox by resetting the height and width and only use the actual icon as a hitbox. */
+    height: 0px !important;
+    width: 0px !important;
+    /* Leaflet does some tweaking based on their own assumptions. But they are wrong, we are correct. So we override them. */
+    margin-left: inherit !important;
+    margin-top: inherit !important;
+}
+
+.custom-leaflet-map-icon-marker-icon {
+    transform: translate(-50%, -50%);
+}

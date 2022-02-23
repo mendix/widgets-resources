@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.web.datagriddatefilter.DatagridDateFilter" pluginWidget="true" offlineCapable="true"
-        xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.web.datagriddatefilter.DatagridDateFilter" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Date filter</name>
-    <description/>
+    <description />
     <studioProCategory>Data controls</studioProCategory>
     <studioCategory>Data Controls</studioCategory>
     <helpUrl>https://docs.mendix.com/appstore/modules/data-grid-2#7-1-date-filter</helpUrl>
@@ -19,10 +17,21 @@
                     <description />
                     <returnType type="DateTime" />
                 </property>
+                <property key="defaultStartDate" type="expression" required="false">
+                    <caption>Default start date</caption>
+                    <description />
+                    <returnType type="DateTime" />
+                </property>
+                <property key="defaultEndDate" type="expression" required="false">
+                    <caption>Default end date</caption>
+                    <description />
+                    <returnType type="DateTime" />
+                </property>
                 <property key="defaultFilter" type="enumeration" defaultValue="equal">
                     <caption>Default filter</caption>
                     <description />
                     <enumerationValues>
+                        <enumerationValue key="between">Between</enumerationValue>
                         <enumerationValue key="greater">Greater than</enumerationValue>
                         <enumerationValue key="greaterEqual">Greater than or equal</enumerationValue>
                         <enumerationValue key="equal">Equal</enumerationValue>
@@ -45,7 +54,21 @@
                     <caption>Saved attribute</caption>
                     <description>Attribute used to store the last value of the filter.</description>
                     <attributeTypes>
-                        <attributeType name="DateTime"/>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="startDateAttribute" type="attribute" required="false">
+                    <caption>Saved start date attribute</caption>
+                    <description>Attribute used to store the last value of the start date filter.</description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
+                    </attributeTypes>
+                </property>
+                <property key="endDateAttribute" type="attribute" required="false">
+                    <caption>Saved end date attribute</caption>
+                    <description>Attribute used to store the last value of the end date filter.</description>
+                    <attributeTypes>
+                        <attributeType name="DateTime" />
                     </attributeTypes>
                 </property>
             </propertyGroup>

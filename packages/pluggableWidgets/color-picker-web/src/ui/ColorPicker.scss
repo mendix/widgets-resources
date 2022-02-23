@@ -1,0 +1,129 @@
+.widget-color-picker-picker {
+    flex: 1;
+}
+
+.widget-color-picker {
+    flex: 1;
+
+    [class*="-picker"] {
+        font-family: inherit !important;
+    }
+
+    .sketch-picker,
+    .compact-picker {
+        input {
+            width: 100% !important;
+        }
+    }
+
+    .material-picker {
+        height: auto !important;
+        width: 130px !important;
+    }
+
+    .block-picker {
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 2px, rgba(0, 0, 0, 0.3) 0px 4px 8px !important;
+    }
+
+    &.widget-color-picker-disabled {
+        position: relative;
+    }
+
+    .widget-color-picker-overlay {
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.5);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .circle-picker > span {
+        margin: 8px;
+    }
+
+    .circle-picker > span > div {
+        margin: 0 !important;
+    }
+
+    .circle-picker {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px;
+        background: rgb(255, 255, 255);
+        padding: 14px 0 14px 14px;
+        margin-bottom: 0px !important;
+    }
+
+    .widget-color-picker-no-popover {
+        .hue-horizontal {
+            margin-top: 10px;
+        }
+    }
+
+    .widget-color-picker-alert {
+        margin-top: 10px;
+    }
+
+    .slider-picker:nth-child(2) {
+        position: relative;
+    }
+}
+
+.widget-color-picker-inner {
+    width: 36px;
+    height: 14px;
+    border-radius: 2px;
+}
+
+.widget-color-picker-popover {
+    margin-top: 3px;
+    position: absolute;
+    z-index: 2;
+}
+
+.widget-color-picker-input-inner {
+    width: 15px;
+    height: 15px;
+    border-radius: 2px;
+    cursor: pointer;
+    border: 1px solid #e7e7e9;
+}
+
+.widget-color-picker-input {
+    &.btn {
+        margin-left: 5px;
+    }
+}
+
+.widget-color-picker.has-error .btn {
+    border-color: #a94442;
+}
+
+.widget-color-picker-input-container {
+    display: flex;
+
+    .form-group {
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+}
+
+.widget-color-picker-cover {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.modal-content.mx-window-content {
+    .widget-color-picker .widget-color-picker-popover {
+        position: fixed;
+    }
+}
+
+.modal-body.mx-window-body {
+    .widget-color-picker .widget-color-picker-popover {
+        position: fixed;
+    }
+}

@@ -5,5 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [1.0.1] - 2022-2-2
+
+### Fixed
+- The version of a react-native-vector-icons now matches that which is included in Native Template.
+
+## [1.0.0] - 2022-1-24
+
 ### Added
 - We introduced the widget

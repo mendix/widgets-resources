@@ -1,11 +1,12 @@
 const { basename, extname, join, resolve } = require("path");
-const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir } = require("fs/promises");
+const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir, chmod } = require("fs/promises");
 const { exec } = require("child_process");
 
 const regex = {
     changelogs: /(?<=## \[unreleased\]\n)((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
     changelogsIncludingUnreleased: /## \[unreleased\]\n?((?!## \[\d+\.\d+\.\d+\])\W|\w)*/i,
-    releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g
+    releasedVersions: /(?<=## \[)\d+\.\d+\.\d+(?=\])/g,
+    excludeFiles: "^(resources|userlib)/.*"
 };
 
 async function setLocalGitCredentials(workingDirectory) {
@@ -140,13 +141,13 @@ async function getUnreleasedChangelogs({ version, changelogPath }) {
         const releasedVersions = content.match(regex.releasedVersions);
         if (releasedVersions?.includes(version)) {
             throw new Error(
-                `It looks like version ${version} from package.json is already released. Did you forget to bump the version?`
+                `It looks like version ${version} from package.json is already released. Did you forget to bump the version? Path: ${changelogPath}`
             );
         }
 
         return changelogs || "";
     } catch (error) {
-        console.error(`ERROR: Path does not exist: ${changelogPath}`);
+        console.error(error.message);
     }
 }
 
@@ -272,6 +273,11 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
         const fileName = basename(src);
         const dest = join(widgetsDestination, fileName);
         widgetEntries.push(fileName);
+        try {
+            // explicitly set the dest mode, in certain scenarios the file is read only
+            // https://chmodcommand.com/chmod-644/
+            await chmod(dest, 0o644);
+        } catch (_) {}
         await copyFile(src, dest);
     }
     // Add entries to the package.xml
@@ -285,7 +291,7 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
             await writeFile(packageXmlFile, newContent);
         }
     } catch (e) {
-        throw new Error(`Including widgets in module failed. package.xml of widget ${moduleName} not found`);
+        throw new Error(`Including widgets in module failed. package.xml of widget/module ${moduleName} not found`);
     }
     // Re-zip and rename
     await zip(projectPath, moduleName);
@@ -312,5 +318,6 @@ module.exports = {
     writeToWidgetChangelogs,
     zip,
     unzip,
-    exportModuleWithWidgets
+    exportModuleWithWidgets,
+    regex
 };

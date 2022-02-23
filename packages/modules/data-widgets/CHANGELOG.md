@@ -5,6 +5,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.3.0] Data Widgets - 2022-2-10
+
+
+## [2.3.0] DatagridDateFilter
+### Added
+- We added the possibility to apply filter between dates.
+
+### Fixed
+- We fixed an issue with locale date format when typing it manually.
+
+## [2.2.2] Data Widgets - 2022-1-19
+
+
+## [2.2.1] DatagridDropdownFilter
+### Fixed
+- We fixed an issue when selecting an invalid value for an attribute was cleaning the filter if used in Gallery or Data grid 2 header. Now it will match the correct attribute and apply the filter anyway (Ticket #138870).
+
+## [2.2.2] Datagrid
+### Fixed
+- We fixed an issue with column selector on Windows machines (Ticket #139234).
+
 ## [2.2.1] Data Widgets - 2022-1-6
 ### Fixed
 - We fixed the z-index of filters and column selector while using popup layouts.

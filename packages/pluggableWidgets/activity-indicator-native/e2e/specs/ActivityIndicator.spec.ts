@@ -1,28 +1,27 @@
-import { device, expect } from "detox";
-import { Widget } from "../../../../../tests/e2e";
+import { resetDevice, tapMenuItem } from "../../../../../detox/src/helpers";
+import { expect, element, by } from "detox";
 
-describe("Activity Indicator", () => {
+describe("Activity indicator", () => {
     beforeAll(async () => {
-        const activityIndicatorWidget = Widget("btnActivityIndicator").getElement();
-        await activityIndicatorWidget.tap();
+        await tapMenuItem("Activity indicator");
+    });
+
+    afterAll(async () => {
+        await resetDevice();
     });
 
     it("renders the default indicator", async () => {
-        const activityIndicator = Widget("activityIndicatorDefault").getElement();
+        const activityIndicator = element(by.id("activityIndicatorDefault"));
         await expect(activityIndicator).toBeVisible();
     });
 
     it("does not render the activity indicator with visibility set as false", async () => {
-        const activityIndicator = Widget("activityIndicatorNoVisibility").getElement();
+        const activityIndicator = element(by.id("activityIndicatorNoVisibility"));
         await expect(activityIndicator).not.toBeVisible();
     });
 
     it("renders the custom indicator", async () => {
-        const activityIndicator = Widget("activityIndicatorCustomStyle").getElement();
+        const activityIndicator = element(by.id("activityIndicatorCustomStyle"));
         await expect(activityIndicator).toBeVisible();
-    });
-
-    afterAll(async () => {
-        await device.reloadReactNative();
     });
 });

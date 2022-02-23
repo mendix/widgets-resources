@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.1.0] - 2022-1-24
+
+### Added
+- Dark theme icons for Tile and List view.
+
+### Fixed
+- We fixed incorrectly defined a value in the image props.
+
 ## [2.0.0] - 2021-9-28
 
 ### Added

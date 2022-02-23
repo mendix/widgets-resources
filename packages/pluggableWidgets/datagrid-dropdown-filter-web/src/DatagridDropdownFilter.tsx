@@ -157,24 +157,16 @@ function getFilterCondition(
     const { id, type } = listAttribute;
     const filterAttribute = attribute(id);
 
-    if (
-        values.some(
-            filterOption => !listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type))
-        )
-    ) {
-        return undefined;
+    const filters = values
+        .filter(filterOption => listAttribute.universe?.includes(checkValue(filterOption.value, listAttribute.type)))
+        .map(filter => equals(filterAttribute, literal(checkValue(filter.value, type))));
+
+    if (filters.length > 1) {
+        return or(...filters);
     }
 
-    if (values.length > 1) {
-        return or(...values.map(filter => equals(filterAttribute, literal(checkValue(filter.value, type)))));
-    }
-
-    const [filterValue] = values;
-    if (filterValue.value) {
-        return equals(filterAttribute, literal(checkValue(filterValue.value, type)));
-    }
-
-    return undefined;
+    const [filterValue] = filters;
+    return filterValue;
 }
 
 function checkValue(value: string, type: string): boolean | string {

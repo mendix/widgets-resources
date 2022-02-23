@@ -5,6 +5,216 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.5.0] Native Mobile Resources - 2022-2-21
+### Fixed
+- We updated the `HasNotificationPermission` action to prevent an incorrect result when permission was not yet requested on iOS. This is due to a change in the hasPermission method in react-native-firebase.
+
+### Added
+- Dark theme icons for JS Actions
+
+## [2.1.1] Accordion
+### Fixed
+- All accordion groups will now be expanded when the widget is configured as non-collapsible.
+
+## [2.2.0] Badge
+### Added
+
+-   Structure mode preview
+
+## [3.2.0] BarcodeScanner
+### Added
+
+-   Structure mode preview
+
+## [1.2.0] ColorPicker
+### Added
+
+-   Structure mode preview
+
+## [4.2.0] ProgressBar
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] RangeSlider
+### Added
+
+-   Structure mode preview
+
+## [2.2.0] Slider
+### Added
+
+-   Structure mode preview
+
+## [3.2.0] VideoPlayer
+### Added
+
+-   Structure mode preview
+
+## [3.1.1] WebView
+### Fixed
+
+-   Fixed 'Open links externally' behavior. Webview no longer directly opens externally when this option is selected and url contains unexpected capitals (in http(s) part) or does not end with a slash.
+
+### Added
+
+-   More test ids
+
+## [3.4.2] Native Mobile Resources - 2022-2-7
+
+### Fixed
+- Rating and Image widgets have been updated.
+
+## [1.0.1] Image
+### Fixed
+- The version of a react-native-vector-icons now matches that which is included in Native Template.
+
+## [2.1.1] Rating
+### Fixed
+- The widget has been refactored and now includes a version of react-native-vector-icons that matches Native Template.
+
+## [3.4.0] Native Mobile Resources - 2022-1-24
+
+## [2.1.0] Accordion
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] ActivityIndicator
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] Animation
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] AppEvents
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] BackgroundImage
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] Badge
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] BarChart
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] BarcodeScanner
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] BottomSheet
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] Carousel
+### Added
+- Update light and dark theme icons for Tile and List view.
+
+## [1.1.0] ColorPicker
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] Feedback
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] FloatingActionButton
+### Added
+- Dark theme icons for Tile and List view.
+
+## [1.0.0] Image
+### Added
+- We introduced the widget
+
+## [3.1.0] IntroScreen
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] LineChart
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] ListViewSwipe
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] Maps
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] Notifications
+### Added
+- Dark theme icons for Tile and List view.
+
+## [1.1.0] PieDoughnutChart
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] PopupMenu
+### Added
+- Dark theme icons for Tile and List view.
+
+## [4.1.0] ProgressBar
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] ProgressCircle
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] QRCode
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] RangeSlider
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] Rating
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] Repeater
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] SafeAreaView
+### Added
+- Dark theme icons for Tile and List view.
+
+## [2.1.0] Signature
+### Added
+- Light and dark theme icons for Tile and List view.
+
+## [2.1.0] Slider
+### Added
+- Dark theme icons for Tile and List view.
+
+## [1.0.0] Switch
+### Added
+ - We added this widget.
+
+## [2.1.0] ToggleButtons
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] VideoPlayer
+### Added
+- Dark theme icons for Tile and List view.
+
+## [3.1.0] WebView
+### Added
+- Dark theme icons for Tile and List view.
+
+## [1.0.0] Radio Buttons
+### Added
+- We introduced this widget.
+
 ## [3.3.1] Native Mobile Resources - 2021-10-25
 ### Fixed
 - We removed some unwanted files from the module.

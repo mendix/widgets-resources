@@ -122,6 +122,8 @@ function toClientPropType(
             return prop.$.dataSource
                 ? `ListAttributeValue<${uniqueTypes.join(" | ")}>`
                 : `EditableValue<${uniqueTypes.join(" | ")}>`;
+        case "association":
+            return "ModifiableValue<ObjectItem>";
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
                 throw new Error("[XML] Expression property requires returnType element");
