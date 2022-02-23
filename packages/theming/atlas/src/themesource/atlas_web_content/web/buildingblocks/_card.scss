@@ -4,8 +4,8 @@
 ========================================================================== */
 .card {
     border: 0;
-    border-radius: $border-radius-default;
-    background-color: #ffffff;
+    border-radius: $card-border-radius;
+    background-color: $card-bg;
     overflow: hidden;
     position: relative;
     padding: $spacing-large;
