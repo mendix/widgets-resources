@@ -12,10 +12,10 @@ jobs:
         runs-on: ${{ matrix.os }}
         strategy:
             matrix:
-                node: [14]
+                node: [16]
                 os: [windows-latest, ubuntu-latest]
                 include:
-                    - node: 12
+                    - node: 14
                       os: ubuntu-latest
                       experimental: true
 
@@ -50,20 +50,23 @@ jobs:
             - name: "Defining cache"
               uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
               env:
-                  cache-name: cache-node-modules
+                cache-name: cache-node-modules
               with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                path: ~/.npm
+                key: ${{ runner.os }}-${{ matrix.node }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
             - name: "Defining node version"
               uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
               with:
                   node-version: ${{ matrix.node }}
+            - name: "Removing package-lock and installing dependencies"
+              if: matrix.node == '14'
+              # Because lerna doesn't handle nicely the lower version of node we need to remove the package-lock https://github.com/lerna/lerna/issues/2832
+              run: rm -f package-lock.json && npm install
             - name: "Installing dependencies"
+              if: matrix.node != '14'
               run: npm install
             - name: Increase number of watchers
               if: startsWith(matrix.os, 'ubuntu')
               run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
             - name: "Running PIW-Tools commands tests"
-              run:
-                  npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg
-                  }}
+              run: npm run test:scripts -- ${{ steps.variablesLinux.outputs.arg }} ${{ steps.variablesWindows.outputs.arg }}

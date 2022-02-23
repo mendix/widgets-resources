@@ -29,7 +29,6 @@
     "build": "lerna run build --ignore '{@mendix/custom-widgets-utils-internal,@mendix/shared-charts}'",
     "build:native": "npm run build -- --scope '*-native'",
     "build:web": "npm run build -- --scope '*-web'",
-    "publish": "ts-node --project ./scripts/tsconfig.json ./scripts/release/Release.ts",
     "release": "lerna run release --ignore '{@mendix/custom-widgets-utils-internal,@mendix/shared-charts}'",
     "release:marketplace": "lerna run release:marketplace",
     "release:hybrid": "npm run release -- --scope '*-hybrid'",
@@ -53,12 +52,11 @@
     "@types/big.js": "^6.0.0",
     "@types/concurrently": "^6.3.0",
     "@types/enzyme": "^3.10.8",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/jasmine": "^3.6.0",
     "@types/jest": "^26.0.24",
     "@types/jest-image-snapshot": "^4.3.1",
     "@types/mime": "^2.0.3",
-    "@types/node": "^14.14.6",
+    "@types/node": "^16.11.19",
     "@types/react": "~17.0.1",
     "@types/react-dom": "~17.0.1",
     "@types/react-native": "~0.63.30",
@@ -78,21 +76,18 @@
     "lerna-parallelism": "^0.3.0",
     "lint-staged": "^10.5.0",
     "mendix-client": "^7.15.8",
-    "node-fetch": "^2.6.1",
-    "node-ip": "^0.1.2",
     "prettier": "^2.5.1",
     "pretty-quick": "^3.1.0",
-    "react": "~17.0.1",
-    "react-native": "0.63.3",
-    "react-test-renderer": "~17.0.1",
     "recursive-copy": "^2.0.11",
-    "ts-node": "^9.0.0",
-    "zip-folder": "^1.0.0"
+    "ts-node": "^9.0.0"
   },
   "commitlint": {
     "extends": [
       "@commitlint/config-lerna-scopes",
       "@commitlint/config-conventional"
     ]
+  },
+  "engines" : {
+    "node" : ">=14"
   }
 }

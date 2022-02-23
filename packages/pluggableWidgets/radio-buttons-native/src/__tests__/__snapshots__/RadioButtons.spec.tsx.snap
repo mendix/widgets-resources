@@ -10,6 +10,7 @@ exports[`Radio buttons render correctly with show label false 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -75,6 +76,7 @@ exports[`Radio buttons render correctly with show label false 1`] = `
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -151,6 +153,7 @@ exports[`Radio buttons render correctly without label 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -216,6 +219,7 @@ exports[`Radio buttons render correctly without label 1`] = `
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -294,6 +298,7 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -350,6 +355,7 @@ exports[`Radio buttons render disabled radio buttons correctly 1`] = `
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -436,6 +442,7 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -504,6 +511,7 @@ exports[`Radio buttons render horizontal radio buttons correctly 1`] = `
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -585,6 +593,7 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -650,6 +659,7 @@ exports[`Radio buttons render vertical radio buttons correctly 1`] = `
     </View>
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}

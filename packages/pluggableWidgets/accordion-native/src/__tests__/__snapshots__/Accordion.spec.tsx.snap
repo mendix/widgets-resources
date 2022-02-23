@@ -21,6 +21,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}
@@ -115,6 +116,7 @@ exports[`Accordion in collapsible & single expanded group mode renders correctly
   >
     <View
       accessible={true}
+      collapsable={false}
       focusable={true}
       onBlur={[Function]}
       onClick={[Function]}

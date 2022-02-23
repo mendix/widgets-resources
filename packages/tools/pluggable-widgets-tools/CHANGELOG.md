@@ -5,6 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Added
+- We added compatibility with node 15+ and npm 7+.
+- We added resolutions for `react`, `react-dom` and `react-native` in order to be compatible with node 15+ and npm 7+.
+
+### Changed
+- We updated version of `@wdio` and `react-native` libraries.
+
+### Removed
+- We removed `@wdio/sync` from our dependency. 
+
+## BREAKING CHANGES
+WebDriverIO has deprecated its sync version while using node 16. E2e tests needs to be migrated to [async/await](https://webdriver.io/docs/sync-vs-async/) when using node 16 or manually add the dependency if not.
+
 ## [9.10.0] - 2022-02-02
 
 ### Changed

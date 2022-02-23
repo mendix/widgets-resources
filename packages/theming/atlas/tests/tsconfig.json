@@ -1,9 +1,0 @@
-{
-    "extends": "../../../../configs/e2e/tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "rootDir": "./"
-    },
-    "include": ["*.spec.ts"],
-    "exclude": ["../../node_modules", "../../../../node_modules"]
-}
