@@ -97,7 +97,7 @@ async function copyDataWidgets(destination, mode) {
     }
 
     if (mode === "release") {
-        execSync(`npm run release:data-widgets`, {
+        execSync(`npm run release -- --scope '{datagrid,dropdown-sort,tree-node,gallery}-*' --include-dependencies`, {
             stdio: "inherit",
             cwd
         });
@@ -118,9 +118,12 @@ async function copyDataWidgets(destination, mode) {
             cp(mpkPathsToCopy, join(__dirname, "../dist/widgets"));
         }
     } else {
-        execSync(`npx cross-env MX_PROJECT_PATH=${destination} npm run build:data-widgets`, {
-            stdio: "inherit",
-            cwd
-        });
+        execSync(
+            `npx cross-env MX_PROJECT_PATH=${destination} npm run build -- --scope '{datagrid,dropdown-sort,tree-node,gallery}-*' --include-dependencies`,
+            {
+                stdio: "inherit",
+                cwd
+            }
+        );
     }
 }
