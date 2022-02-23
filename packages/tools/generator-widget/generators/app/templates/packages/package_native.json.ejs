@@ -2,17 +2,17 @@
   "name": "<%- packageName %>",
   "widgetName": "<%- name %>",
   "version": "<%- version %>",
-  "description": "<%- description %>",
-  "copyright": "<%- copyright %>",
-  "author": "<%- author %>",
+  "description": <%- JSON.stringify(description) %>,
+  "copyright": <%- JSON.stringify(copyright) %>,
+  "author": <%- JSON.stringify(author) %>,
   "engines": {
     "node": ">=12"
   },
-  "license": "<%- license %>",
+  "license": <%- JSON.stringify(license) %>,
   "config": {
-    "projectPath": "<%- projectPath %>/"
+    "projectPath": <%- JSON.stringify(projectPath) %>
   },
-  "packagePath": "<%- packagePath %>",
+  "packagePath": <%- JSON.stringify(packagePath) %>,
   "scripts": {
     "start": "pluggable-widgets-tools start:native",
     "build": "pluggable-widgets-tools build:native",
@@ -26,9 +26,6 @@
   "jest-junit": {
     "output": "./dist/testresults/TESTS-Jest.xml"
   },<% } %>
-  "bugs": {
-    "url": "https://github.com/<%- author %>/<%- packageName %>/issues"
-  },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^9.0.0"<% if (isLanguageTS) { %>,
     "@types/big.js": "^6.0.2",<% if (hasUnitTests) { %>
