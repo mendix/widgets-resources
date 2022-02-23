@@ -65,7 +65,7 @@
             background-color: transparent;
 
             tbody tr {
-                &:nth-of-type(odd) {
+                &:nth-of-type(even) {
                     background-color: transparent;
                 }
 

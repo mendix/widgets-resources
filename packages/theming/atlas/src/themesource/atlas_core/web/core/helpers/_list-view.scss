@@ -45,7 +45,7 @@
 
     // List items striped
     .listview-striped.mx-listview {
-        & > ul > li:nth-child(2n + 1) {
+        & > ul > li:nth-child(even) {
             background-color: $grid-bg-striped;
         }
     }
