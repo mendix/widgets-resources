@@ -8,7 +8,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 - We added compatibility with node 15+ and npm 7+.
 - We added resolutions for `react`, `react-dom` and `react-native` in order to be compatible with node 15+ and npm 7+.
-- We added typing generation support for association widget properties.
 
 ### Changed
 - We updated version of `@wdio` and `react-native` libraries.
