@@ -14,6 +14,7 @@ const {
     updateModuleChangelogs,
     regex
 } = require("./module-automation/commons");
+const { execSync } = require("child_process");
 
 const repoRootPath = join(__dirname, "../../");
 const moduleFolderNameInRepo = process.argv[2];
@@ -51,6 +52,10 @@ async function main() {
 
 async function createDataWidgetsModule() {
     console.log("Creating the Data Widgets module.");
+    execSync("npm run release:module", {
+        stdio: "inherit",
+        cwd: join(repoRootPath, "packages/modules", "data-widgets")
+    });
     const widgets = [
         "datagrid-date-filter-web",
         "datagrid-dropdown-filter-web",
@@ -73,6 +78,10 @@ async function createDataWidgetsModule() {
 
 async function createAtlasWebContentModule() {
     console.log("Creating the Atlas Web Content module.");
+    execSync("npm run release:module", {
+        stdio: "inherit",
+        cwd: join(repoRootPath, "packages/modules", "atlas-web-content")
+    });
     const widgets = ["badge-web", "maps-web", "progress-bar-web", "progress-circle-web", "timeline-web"].map(folder =>
         join(repoRootPath, "packages/pluggableWidgets", folder)
     );
@@ -87,6 +96,7 @@ async function createAtlasWebContentModule() {
 
 async function createAtlasCoreModule() {
     console.log("Creating the Atlas Core module.");
+    execSync("npm run release:module", { stdio: "inherit", cwd: join(repoRootPath, "packages/modules", "atlas-core") });
     const widgets = ["feedback-native"].map(folder => join(repoRootPath, "packages/pluggableWidgets", folder));
     const moduleInfo = {
         ...(await getPackageInfo(moduleFolder)),
@@ -99,6 +109,7 @@ async function createAtlasCoreModule() {
 
 async function createChartsModule() {
     console.log("Creating the Charts module.");
+    execSync("npm run release:module", { stdio: "inherit", cwd: join(repoRootPath, "packages/modules", "charts") });
     const widgets = [
         "area-chart-web",
         "bar-chart-web",
