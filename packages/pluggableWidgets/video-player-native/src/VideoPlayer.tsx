@@ -8,11 +8,11 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback,
     View,
-    Appearance
+    Appearance,
+    Modal
 } from "react-native";
 import Video, { OnProgressData, VideoProperties } from "react-native-video";
 import { hideNavigationBar, showNavigationBar } from "react-native-navigation-bar-color";
-import Modal from "react-native-modal";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
@@ -111,9 +111,9 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         <Fragment>
             {isAndroid && (
                 <Modal
-                    isVisible={fullScreen}
+                    visible={fullScreen}
                     style={styles.fullScreenVideoPlayer}
-                    onBackButtonPress={() => fullScreenHandler(false)}
+                    onRequestClose={() => fullScreenHandler(false)}
                     testID="fullscreen-modal"
                     statusBarTranslucent
                 >
