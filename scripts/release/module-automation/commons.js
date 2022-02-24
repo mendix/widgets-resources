@@ -1,5 +1,5 @@
 const { basename, extname, join, resolve } = require("path");
-const { access, readdir, copyFile, readFile, writeFile, rename, rm, rmdir, mkdir, chmod } = require("fs/promises");
+const { access, readdir, copyFile, readFile, writeFile, rename, rm, mkdir, chmod } = require("fs/promises");
 const { exec } = require("child_process");
 
 const regex = {
@@ -264,7 +264,7 @@ async function exportModuleWithWidgets(moduleName, mpkOutput, widgetsFolders) {
     const widgetEntries = [];
     // Unzip the mpk
     await unzip(mpkOutput, projectPath);
-    await rmdir(mpkOutput, { recursive: true });
+    await rm(mpkOutput, { recursive: true, force: true });
     // Copy widgets to widgets folder
     await mkdir(widgetsDestination, { recursive: true });
     for await (const folder of widgetsFolders) {
