@@ -112,42 +112,43 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
             {isAndroid && (
                 <Modal
                     visible={fullScreen}
-                    style={styles.fullScreenVideoPlayer}
                     onRequestClose={() => fullScreenHandler(false)}
                     testID="fullscreen-modal"
                     statusBarTranslucent
                 >
-                    <TouchableWithoutFeedback onPress={onVideoPressHandler} testID="fullscreen-overlay">
-                        <Video
-                            {...videoProps}
-                            ref={fullScreenPlayerRef}
-                            paused={false}
-                            onLoad={data => {
-                                setStatus(StatusEnum.READY);
-                                setVideoAspectRatio(data.naturalSize.width / data.naturalSize.height);
-                                fullScreenPlayerRef.current?.seek(currentPlayTime);
-                            }}
-                            testID={`${props.name}-fullscreen`}
-                            style={styles.fullScreenVideoStyle}
-                        />
-                    </TouchableWithoutFeedback>
-                    {showControls && (
-                        <TouchableOpacity
-                            style={styles.controlBtnContainerStyle}
-                            onPress={() => fullScreenHandler(false)}
-                            testID="btn-fullscreen-exit"
-                        >
-                            <Icon name="fullscreen-exit" color="white" size={22} />
-                        </TouchableOpacity>
-                    )}
-                    {status === StatusEnum.LOADING && (
-                        <ActivityIndicator
-                            color={styles.indicator.color}
-                            size="large"
-                            style={styles.fullScreenActivityIndicatorStyle}
-                        />
-                    )}
-                    {errorText}
+                    <View style={styles.fullScreenVideoPlayer}>
+                        <TouchableWithoutFeedback onPress={onVideoPressHandler} testID="fullscreen-overlay">
+                            <Video
+                                {...videoProps}
+                                ref={fullScreenPlayerRef}
+                                paused={false}
+                                onLoad={data => {
+                                    setStatus(StatusEnum.READY);
+                                    setVideoAspectRatio(data.naturalSize.width / data.naturalSize.height);
+                                    fullScreenPlayerRef.current?.seek(currentPlayTime);
+                                }}
+                                testID={`${props.name}-fullscreen`}
+                                style={styles.fullScreenVideoStyle}
+                            />
+                        </TouchableWithoutFeedback>
+                        {showControls && (
+                            <TouchableOpacity
+                                style={styles.controlBtnContainerStyle}
+                                onPress={() => fullScreenHandler(false)}
+                                testID="btn-fullscreen-exit"
+                            >
+                                <Icon name="fullscreen-exit" color="white" size={22} />
+                            </TouchableOpacity>
+                        )}
+                        {status === StatusEnum.LOADING && (
+                            <ActivityIndicator
+                                color={styles.indicator.color}
+                                size="large"
+                                style={styles.fullScreenActivityIndicatorStyle}
+                            />
+                        )}
+                        {errorText}
+                    </View>
                 </Modal>
             )}
             <View style={styles.container}>
