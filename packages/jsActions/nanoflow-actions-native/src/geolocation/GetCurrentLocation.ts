@@ -8,15 +8,19 @@ import { Big } from "big.js";
 import Geolocation, {
     GeolocationError,
     GeolocationOptions,
-    GeolocationResponse
+    GeolocationResponse,
+    GeolocationStatic
 } from "@react-native-community/geolocation";
+
+import type { Platform, NativeModules } from "react-native";
+import type { GeoError, GeoPosition, GeoOptions } from "../../typings/Geolocation";
 
 /**
  * This action retrieves the current geographical position of a user/device.
  *
  * Since this can compromise privacy, the position is not available unless the user approves it. The web browser will request the permission at the first time the location is requested. When denied by the user it will not prompt a second time.
  *
- * On hybrid and native platforms the permission can be requested with the `RequestLocationPermission` action.
+ * On hybrid and native platforms the permission should be requested with the `RequestLocationPermission` action.
  *
  * Best practices:
  * https://developers.google.com/web/fundamentals/native-hardware/user-location/
@@ -32,15 +36,38 @@ export async function GetCurrentLocation(
 ): Promise<mendix.lib.MxObject> {
     // BEGIN USER CODE
 
-    if (navigator && navigator.product === "ReactNative" && !navigator.geolocation) {
-        (navigator.geolocation as any) = Geolocation;
+    let reactNativeModule: { NativeModules: typeof NativeModules; Platform: typeof Platform } | undefined;
+    let geolocationModule:
+        | Geolocation
+        | GeolocationStatic
+        | typeof import("react-native-geolocation-service")
+        | undefined;
+
+    if (navigator && navigator.product === "ReactNative") {
+        reactNativeModule = require("react-native");
+
+        if (!reactNativeModule) {
+            return Promise.reject(new Error("React Native module could not be found"));
+        }
+
+        if (reactNativeModule.NativeModules.RNFusedLocation) {
+            geolocationModule = (await import("react-native-geolocation-service")).default;
+        } else if (reactNativeModule.NativeModules.RNCGeolocation) {
+            geolocationModule = Geolocation;
+        } else {
+            return Promise.reject(new Error("Geolocation module could not be found"));
+        }
+    } else if (navigator && navigator.geolocation) {
+        geolocationModule = navigator.geolocation;
+    } else {
+        return Promise.reject(new Error("Geolocation module could not be found"));
     }
 
     return new Promise((resolve, reject) => {
         const options = getOptions();
-        navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+        geolocationModule?.getCurrentPosition(onSuccess, onError, options);
 
-        function onSuccess(position: GeolocationResponse): void {
+        function onSuccess(position: GeolocationResponse | GeoPosition): void {
             mx.data.create({
                 entity: "NanoflowCommons.Geolocation",
                 callback: mxObject => {
@@ -52,13 +79,24 @@ export async function GetCurrentLocation(
             });
         }
 
-        function onError(error: GeolocationError): void {
+        function onError(error: GeolocationError | GeoError): void {
             return reject(new Error(error.message));
         }
 
-        function getOptions(): GeolocationOptions {
-            const timeoutNumber = timeout && Number(timeout.toString());
+        function getOptions(): GeolocationOptions | GeoOptions {
+            let timeoutNumber = timeout && Number(timeout.toString());
             const maximumAgeNumber = maximumAge && Number(maximumAge.toString());
+
+            // If the timeout is 0 or undefined (empty), it causes a crash on iOS.
+            // If the timeout is undefined (empty); we set timeout to 30 sec (default timeout)
+            // If the timeout is 0; we set timeout to 1 hour (no timeout)
+            if (reactNativeModule?.Platform.OS === "ios") {
+                if (timeoutNumber === undefined) {
+                    timeoutNumber = 30000;
+                } else if (timeoutNumber === 0) {
+                    timeoutNumber = 3600000;
+                }
+            }
 
             return {
                 timeout: timeoutNumber,
@@ -69,7 +107,7 @@ export async function GetCurrentLocation(
 
         function mapPositionToMxObject(
             mxObject: mendix.lib.MxObject,
-            position: GeolocationResponse
+            position: GeolocationResponse | GeoPosition
         ): mendix.lib.MxObject {
             mxObject.set("Timestamp", new Date(position.timestamp));
             mxObject.set("Latitude", new Big(position.coords.latitude.toFixed(8)));
