@@ -1,7 +1,7 @@
 {
   "name": "color-picker-web",
   "widgetName": "ColorPicker",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Change a color using a color input",
   "copyright": "© Mendix Technology BV 2022. All rights reserved.",
   "repository": {

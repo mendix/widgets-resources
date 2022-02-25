@@ -1,76 +1,62 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<widget
-    id="com.mendix.widget.custom.colorpicker.ColorPicker"
-    needsEntityContext="true"
-    pluginWidget="true"
-    offlineCapable="true"
-    xmlns="http://www.mendix.com/widget/1.0/"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd"
->
+<widget id="com.mendix.widget.custom.colorpicker.ColorPicker" needsEntityContext="true" pluginWidget="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd">
     <name>Color picker</name>
     <description>Pick a color from color input</description>
     <studioProCategory>Display</studioProCategory>
     <studioCategory>Display</studioCategory>
     <properties>
-        <propertyGroup caption="General">
-            <propertyGroup caption="Data source">
-                <property key="colorAttribute" type="attribute">
-                    <caption>Color attribute</caption>
-                    <description>Attribute containing a valid color like #d0d0d0, rgb(115,159,159) or rgba(195,226,226,1). Non-code color values such as 'red' are not supported
-                    </description>
-                    <attributeTypes>
-                        <attributeType name="String" />
-                    </attributeTypes>
-                </property>
-                <property key="format" type="enumeration" defaultValue="hex">
-                    <caption>Color format</caption>
-                    <description>The output formatting of the selected color</description>
-                    <enumerationValues>
-                        <enumerationValue key="hex">HEX</enumerationValue>
-                        <enumerationValue key="rgb">RGB</enumerationValue>
-                        <enumerationValue key="rgba">RBGA</enumerationValue>
-                    </enumerationValues>
-                </property>
-            </propertyGroup>
-            <propertyGroup caption="Label">
-                <systemProperty key="Label" />
-            </propertyGroup>
-            <propertyGroup caption="Editability">
-                <systemProperty key="Editability" />
-            </propertyGroup>
+        <propertyGroup caption="Data source">
+            <property key="colorAttribute" type="attribute">
+                <caption>Color attribute</caption>
+                <description>The attribute containing a valid color, supported color formats are hexadecimal, rgb and rgba. Non-color formats such as ‘red’ are not supported.</description>
+                <attributeTypes>
+                    <attributeType name="String" />
+                </attributeTypes>
+            </property>
         </propertyGroup>
-        <propertyGroup caption="Appearance">
-            <property key="mode" type="enumeration" defaultValue="input">
-                <caption>Mode</caption>
+        <propertyGroup caption="General">
+            <property key="advanced" type="boolean" defaultValue="false">
+                <caption>Enable advanced options</caption>
                 <description />
+            </property>
+            <property key="mode" type="enumeration" defaultValue="popover">
+                <caption>Display mode</caption>
+                <description>The presentation of the color picker</description>
                 <enumerationValues>
-                    <enumerationValue key="input">Input box</enumerationValue>
                     <enumerationValue key="popover">Button</enumerationValue>
+                    <enumerationValue key="input">Input box</enumerationValue>
                     <enumerationValue key="inline">Inline</enumerationValue>
                 </enumerationValues>
             </property>
             <property key="type" type="enumeration" defaultValue="sketch">
                 <caption>Picker type</caption>
-                <description />
+                <description>The various different styles, for how the color picker should look when clicked.</description>
                 <enumerationValues>
-                    <enumerationValue key="sketch">Sketch</enumerationValue>
-                    <enumerationValue key="chrome">Chrome</enumerationValue>
                     <enumerationValue key="block">Block</enumerationValue>
-                    <enumerationValue key="github">Github</enumerationValue>
-                    <enumerationValue key="twitter">Twitter</enumerationValue>
+                    <enumerationValue key="chrome">Chrome</enumerationValue>
                     <enumerationValue key="circle">Circle</enumerationValue>
-                    <enumerationValue key="hue">Hue</enumerationValue>
-                    <enumerationValue key="slider">Slider</enumerationValue>
                     <enumerationValue key="compact">Compact</enumerationValue>
+                    <enumerationValue key="github">Github</enumerationValue>
+                    <enumerationValue key="hue">Hue</enumerationValue>
                     <enumerationValue key="material">Material</enumerationValue>
+                    <enumerationValue key="sketch">Sketch</enumerationValue>
+                    <enumerationValue key="slider">Slider</enumerationValue>
                     <enumerationValue key="swatches">Swatches</enumerationValue>
+                    <enumerationValue key="twitter">Twitter</enumerationValue>
+                </enumerationValues>
+            </property>
+            <property key="format" type="enumeration" defaultValue="hex">
+                <caption>Color format</caption>
+                <description>The format that which the selected color will be saved as.</description>
+                <enumerationValues>
+                    <enumerationValue key="hex">HEX</enumerationValue>
+                    <enumerationValue key="rgb">RGB</enumerationValue>
+                    <enumerationValue key="rgba">RBGA</enumerationValue>
                 </enumerationValues>
             </property>
             <property key="defaultColors" type="object" isList="true" required="false">
                 <caption>Default colors</caption>
-                <description>The list of predefined colors. This can only be used with picker type: 'Block', 'Sketch', 'Circle', 'Compact' or 'Twitter'
-                </description>
+                <description>This is a list of pre-defined colors used within the color picker.</description>
                 <properties>
                     <property key="color" type="string">
                         <caption>Color</caption>
@@ -79,25 +65,27 @@
                     </property>
                 </properties>
             </property>
-        </propertyGroup>
-        <propertyGroup caption="Validation">
+            <systemProperty key="Label" />
             <property key="invalidFormatMessage" type="textTemplate" required="false">
                 <caption>Invalid format message</caption>
-                <description>Message shown when the user provides a wrong input, :colors: will be replaced by a sample format
-                </description>
+                <description>Message shown when the user provides a wrong input, :colors: will be replaced by a sample format.</description>
                 <translations>
-                    <translation lang="en_US">Invalid format, color value should be of format like :colors:
-                    </translation>
+                    <translation lang="en_US">Invalid format, color value should be of format like :colors:</translation>
                     <translation lang="nl_NL">De opgeven kleur code is incorrect, voorbeeld :colors:</translation>
                 </translations>
             </property>
         </propertyGroup>
-
+        <propertyGroup caption="Editability">
+            <systemProperty key="Editability" />
+        </propertyGroup>
         <propertyGroup caption="Events">
             <property key="onChange" type="action">
                 <caption>On change</caption>
                 <description />
             </property>
+        </propertyGroup>
+        <propertyGroup caption="Visibility">
+            <systemProperty key="Visibility" />
         </propertyGroup>
     </properties>
 </widget>

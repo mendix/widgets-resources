@@ -5,17 +5,30 @@ import {
     RowLayoutProps,
     StructurePreviewProps,
     TextProps,
-    transformGroupsIntoTabs
+    transformGroupsIntoTabs,
+    hidePropertiesIn,
+    hidePropertyIn
 } from "@mendix/piw-utils-internal";
 import { ColorPickerPreviewProps } from "../typings/ColorPickerProps";
 import StructurePreviewSvg from "./assets/structure-preview.svg";
 import StructurePreviewSvgDark from "./assets/structure-preview-dark.svg";
 
+const defaultColorTypes = ["block", "sketch", "circle", "compact", "twitter"];
+
 export function getProperties(
-    __values: ColorPickerPreviewProps,
+    values: ColorPickerPreviewProps,
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
+    if (!values.advanced) {
+        hidePropertiesIn(defaultProperties, values, ["type", "defaultColors", "format"]);
+    }
+    if (values.mode === "inline") {
+        hidePropertyIn(defaultProperties, values, "invalidFormatMessage");
+    }
+    if (!defaultColorTypes.includes(values.type)) {
+        hidePropertyIn(defaultProperties, values, "defaultColors");
+    }
     if (platform === "web") {
         transformGroupsIntoTabs(defaultProperties);
     }
