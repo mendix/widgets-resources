@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ### Changed
 - We updated version of `@wdio` and `react-native` libraries.
+- We changed `eslint-plugin-react` to version `7.28.0` in order to fix this [issue](https://github.com/yannickcr/eslint-plugin-react/issues/3215).
 
 ### Removed
 - We removed `@wdio/sync` from our dependency. 
