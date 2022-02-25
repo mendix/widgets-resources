@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.0.0] - 2022-2-25
+
 ### Added
 - We added a lot of cool features such as code highlight, allow-disallow content filtering, customizable toolbar, general toolbar presets (**Basic**, **Advanced**, **Full**).
 - We added read only style modes.
