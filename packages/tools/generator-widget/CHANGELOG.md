@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed an issue with generator producing invalid package.json file when user provides answers that has double quotes. (Ticket 142686) 
+
 ## [9.2.0] - 2022-01-07
 
 ### Added
