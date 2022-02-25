@@ -169,7 +169,6 @@ $navtopbar-sub-color: #aaa !default;
 $navtopbar-sub-color-hover: $brand-primary !default;
 $navtopbar-sub-color-active: $brand-primary !default;
 
-
 //== Cards
 // Shadow color
 $shadow-color-border: rgba($gray-primary, 0.5);
@@ -179,7 +178,6 @@ $shadow-color: rgba($gray-primary, 0.66);
 $shadow-small: 0 2px 4px 0;
 $shadow-medium: 0 5px 7px 0;
 $shadow-large: 0 8px 10px 0;
-
 
 //## Used in layouts/base
 $navtopbar-border-color: $topbar-border-color !default;
@@ -635,10 +633,10 @@ $screen-lg: 992px !default;
 $screen-xl: 1200px !default;
 
 // So media queries don't overlap when required, provide a maximum (used for max-width)
-$screen-xs-max: ($screen-sm - 1) !default;
-$screen-sm-max: ($screen-md - 1) !default;
-$screen-md-max: ($screen-lg - 1) !default;
-$screen-lg-max: ($screen-xl - 1) !default;
+$screen-xs-max: calc(#{$screen-sm} - 1px) !default;
+$screen-sm-max: calc(#{$screen-md} - 1px) !default;
+$screen-md-max: calc(#{$screen-lg} - 1px) !default;
+$screen-lg-max: calc(#{$screen-xl} - 1px) !default;
 
 //== Settings
 //## Enable or disable your desired framework features
