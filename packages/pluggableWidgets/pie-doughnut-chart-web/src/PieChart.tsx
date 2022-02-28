@@ -28,7 +28,7 @@ const pieChartSeriesOptions: ChartWidgetProps["seriesOptions"] = {
 
 export function PieChart(props: PieChartContainerProps): ReactElement | null {
     const pieChartData = usePieChartDataSeries({
-        chartFormat: props.chartFormat,
+        holeRadius: props.holeRadius,
         customSeriesOptions: props.customSeriesOptions,
         seriesColorAttribute: props.seriesColorAttribute,
         seriesDataSource: props.seriesDataSource,
@@ -50,11 +50,11 @@ export function PieChart(props: PieChartContainerProps): ReactElement | null {
             height={props.height}
             heightUnit={props.heightUnit}
             showLegend={props.showLegend}
-            xAxisLabel={props.xAxisLabel?.value}
-            yAxisLabel={props.yAxisLabel?.value}
+            xAxisLabel={undefined}
+            yAxisLabel={undefined}
             // Pie chart can't have grid lines
             gridLinesMode="none"
-            showSidebarEditor={props.developerMode === "developer"}
+            showSidebarEditor={props.enableDeveloperMode}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
             layoutOptions={pieChartLayoutOptions}

@@ -4,12 +4,8 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
-import { ActionValue, DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
+import { ActionValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
-
-export type ChartFormatEnum = "pie" | "doughnut";
-
-export type DeveloperModeEnum = "basic" | "advanced" | "developer";
 
 export type SeriesSortOrderEnum = "asc" | "desc";
 
@@ -22,23 +18,22 @@ export interface PieChartContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    chartFormat: ChartFormatEnum;
-    xAxisLabel?: DynamicValue<string>;
-    yAxisLabel?: DynamicValue<string>;
-    showLegend: boolean;
-    developerMode: DeveloperModeEnum;
     seriesDataSource: ListValue;
     seriesName: ListExpressionValue<string>;
     seriesValueAttribute: ListAttributeValue<Big>;
     seriesSortAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     seriesSortOrder: SeriesSortOrderEnum;
-    seriesColorAttribute?: ListAttributeValue<string>;
+    seriesColorAttribute?: ListExpressionValue<string>;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
+    showLegend: boolean;
+    holeRadius: number;
+    tooltipHoverText?: ListExpressionValue<string>;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
     onClickAction?: ActionValue;
-    tooltipHoverText?: ListExpressionValue<string>;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
@@ -50,23 +45,22 @@ export interface PieChartPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    chartFormat: ChartFormatEnum;
-    xAxisLabel: string;
-    yAxisLabel: string;
-    showLegend: boolean;
-    developerMode: DeveloperModeEnum;
     seriesDataSource: {} | { type: string } | null;
     seriesName: string;
     seriesValueAttribute: string;
     seriesSortAttribute: string;
     seriesSortOrder: SeriesSortOrderEnum;
     seriesColorAttribute: string;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
+    showLegend: boolean;
+    holeRadius: number | null;
+    tooltipHoverText: string;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
     onClickAction: {} | null;
-    tooltipHoverText: string;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
