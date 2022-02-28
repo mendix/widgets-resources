@@ -4,13 +4,22 @@
  * @author Mendix UI Content Team
  */
 import { CSSProperties } from "react";
+import { DynamicValue, FileValue } from "mendix";
+
+export type WidthUnitEnum = "percentage" | "pixels";
+
+export type HeightUnitEnum = "pixels" | "percentage";
 
 export interface DocumentViewerContainerProps {
     name: string;
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    sampleText: string;
+    file?: DynamicValue<FileValue>;
+    widthUnit: WidthUnitEnum;
+    width: number;
+    heightUnit: HeightUnitEnum;
+    height: number;
 }
 
 export interface DocumentViewerPreviewProps {
@@ -18,5 +27,9 @@ export interface DocumentViewerPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    sampleText: string;
+    file: string;
+    widthUnit: WidthUnitEnum;
+    width: number | null;
+    heightUnit: HeightUnitEnum;
+    height: number | null;
 }
