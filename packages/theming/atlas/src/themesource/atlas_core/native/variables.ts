@@ -663,7 +663,6 @@ let slider: VariablesSlider = {
 };
 slider = merge(slider, custom.slider || ({} as any));
 //
-
 // Radio Buttons
 let radioButtons: VariablesRadioButtons = {
     labelTextStyle: {
@@ -706,7 +705,6 @@ let radioButtons: VariablesRadioButtons = {
 };
 radioButtons = merge(radioButtons, custom.radioButtons || ({} as any));
 //
-
 // Background Gradient
 let backgroundGradient: VariableBackgroundGradient = {
     container: {}

@@ -1,16 +1,13 @@
 import { ReactElement, createElement } from "react";
-import { Pressable, StyleSheet, ViewStyle } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 
 import { executeAction } from "@mendix/piw-utils-internal";
-import { Style, mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
+import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
-import defaultStyle from "./ui/Styles";
+import defaultStyle, { CustomStyle } from "./ui/Styles";
 
 import { BackgroundGradientProps } from "../typings/BackgroundGradientProps";
-export interface CustomStyle extends Style {
-    container: ViewStyle;
-}
 
 export type props = BackgroundGradientProps<CustomStyle>;
 

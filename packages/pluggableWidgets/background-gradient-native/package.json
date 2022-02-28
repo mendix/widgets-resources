@@ -26,9 +26,7 @@
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": "^9.0.0",
-    "@types/big.js": "^6.0.0",
-    "@types/react": "~17.0.1",
-    "@types/react-native": "~0.63.30",
+    "eslint": "^7.20.0",
     "detox": "^19.2.0"
   },
   "dependencies": {
