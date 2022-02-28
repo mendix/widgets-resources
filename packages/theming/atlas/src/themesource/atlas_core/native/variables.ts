@@ -30,7 +30,8 @@ import {
     VariablesSpacing,
     VariablesTabContainer,
     VariablesCheckbox,
-    VariablesRadioButtons
+    VariablesRadioButtons,
+    VariableBackgroundGradient
 } from "./types/variables";
 //
 //
@@ -706,6 +707,13 @@ let radioButtons: VariablesRadioButtons = {
 radioButtons = merge(radioButtons, custom.radioButtons || ({} as any));
 //
 
+// Background Gradient
+let backgroundGradient: VariableBackgroundGradient = {
+    container: {}
+};
+
+backgroundGradient = merge(backgroundGradient, custom.backgroundGradient || ({} as any));
+
 export * from "../../../theme/native/custom-variables";
 export {
     accordion,
@@ -734,5 +742,6 @@ export {
     progressCircle,
     slider,
     rating,
-    radioButtons
+    radioButtons,
+    backgroundGradient
 };

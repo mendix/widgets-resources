@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.native.backgroundgradient.BackgroundGradient" pluginWidget="true" needsEntityContext="true" offlineCapable="true" supportedPlatform="Native" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
+    <name>Background Gradient</name>
+    <description />
+    <studioProCategory>Structure</studioProCategory>
+    <studioCategory>Structure</studioCategory>
+    <icon />
+    <properties>
+        <propertyGroup caption="General">
+            <propertyGroup caption="General">
+                <property key="colorList" type="object" isList="true" required="true">
+                    <caption>Color List</caption>
+                    <description />
+                    <properties>
+                        <propertyGroup caption="Colors Item">
+                            <property key="color" type="string">
+                                <caption>Color</caption>
+                                <description>Valid color value format: #d0d0d0, rgb(115,155,155), or rgba(195,226,226,0.5)</description>
+                            </property>
+                            <property key="offset" type="decimal" defaultValue="0.0">
+                                <caption>Offseet</caption>
+                                <description>Where the gradient ends - Should be between 0 and 1</description>
+                            </property>
+                        </propertyGroup>
+                    </properties>
+                </property>
+                <property key="angle" type="integer" defaultValue="0">
+                    <caption>Angle</caption>
+                    <description>For angled gradient effect</description>
+                </property>
+                <property key="opacity" type="decimal" defaultValue="1.0">
+                    <caption>Opacity</caption>
+                    <description>Should be between 0 and 1</description>
+                </property>
+                <property key="content" type="widgets">
+                    <caption>Content</caption>
+                    <description />
+                </property>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
+            </propertyGroup>
+            <propertyGroup caption="Common">
+                <systemProperty key="Name" />
+            </propertyGroup>
+        </propertyGroup>
+        <propertyGroup caption="Events">
+            <property key="onClick" type="action" required="false">
+                <caption>On click</caption>
+                <description />
+            </property>
+        </propertyGroup>
+    </properties>
+</widget>
