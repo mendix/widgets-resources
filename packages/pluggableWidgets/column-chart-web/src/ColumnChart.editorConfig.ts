@@ -34,7 +34,7 @@ export function getProperties(
             ]);
         }
 
-        if (!values.advancedOptions) {
+        if (!values.advancedOptions && platform === "web") {
             hidePropertyIn(defaultProperties, values, "series", index, "customSeriesOptions");
         }
     });
