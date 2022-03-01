@@ -64,7 +64,7 @@ export function ColumnChart(props: ColumnChartContainerProps): ReactElement | nu
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
             gridLinesMode={props.gridLines}
-            showSidebarEditor={props.developerMode === "developer"}
+            showSidebarEditor={props.developerMode}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
             layoutOptions={layoutOptions}
