@@ -101,7 +101,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         onError: () => setStatus(StatusEnum.ERROR),
         useTextureView: false,
         resizeMode: props.aspectRatio ? "contain" : "stretch",
-        onProgress: ({ currentTime }: OnProgressData) => setCurrentPlayTime(currentTime)
+        onProgress: ({ currentTime }: OnProgressData) => currentTime && setCurrentPlayTime(currentTime)
     };
 
     const isAndroid = Platform.OS === "android";

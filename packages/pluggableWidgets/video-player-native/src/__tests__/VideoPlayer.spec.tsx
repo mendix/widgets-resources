@@ -9,6 +9,10 @@ import { VideoPlayerProps } from "../../typings/VideoPlayerProps";
 import { VideoStyle } from "../ui/Styles";
 
 jest.mock("react-native-video", () => "Video");
+jest.mock("react-native-navigation-bar-color", () => ({
+    hideNavigationBar: jest.fn(),
+    showNavigationBar: jest.fn()
+}));
 
 describe("VideoPlayer", () => {
     let defaultProps: VideoPlayerProps<VideoStyle>;
@@ -94,6 +98,10 @@ describe("VideoPlayer", () => {
         });
         it("render video with controls", () => {
             const component = render(<VideoPlayer {...defaultProps} />);
+            expect(component).toMatchSnapshot();
+        });
+        it("render video without controls if showControls is set to false", () => {
+            const component = render(<VideoPlayer {...defaultProps} showControls={false} />);
             expect(component).toMatchSnapshot();
         });
 
