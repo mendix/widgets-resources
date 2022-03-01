@@ -130,15 +130,15 @@
                                 <description>Color of the column e.g. green, #00FF00, rgb(0,255,0)</description>
                             </property>
                         </propertyGroup>
-                        <propertyGroup caption="Advanced">
-                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
-                                <caption>Custom series options</caption>
-                                <description />
-                            </property>
-                        </propertyGroup>
                         <propertyGroup caption="Events">
                             <property key="onClickAction" type="action" required="false">
                                 <caption>On click action</caption>
+                                <description />
+                            </property>
+                        </propertyGroup>
+                        <propertyGroup caption="Advanced">
+                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                                <caption>Custom series options</caption>
                                 <description />
                             </property>
                         </propertyGroup>

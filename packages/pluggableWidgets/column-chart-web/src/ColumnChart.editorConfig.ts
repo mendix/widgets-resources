@@ -40,10 +40,6 @@ export function getProperties(
     });
 
     if (platform === "web") {
-        hidePropertyIn(defaultProperties, values, "developerMode");
-
-        transformGroupsIntoTabs(defaultProperties);
-    } else {
         if (!values.advancedOptions) {
             hidePropertiesIn(defaultProperties, values, [
                 "customLayout",
@@ -52,6 +48,8 @@ export function getProperties(
                 "developerMode"
             ]);
         }
+
+        transformGroupsIntoTabs(defaultProperties);
     }
 
     return defaultProperties;
