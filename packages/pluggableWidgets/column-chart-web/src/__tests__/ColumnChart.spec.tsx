@@ -27,7 +27,7 @@ describe("The ColumnChart widget", () => {
                 barmode="group"
                 series={configs.map(setupBasicSeries)}
                 showLegend={false}
-                developerMode="basic"
+                developerMode={false}
                 widthUnit="percentage"
                 width={0}
                 heightUnit="pixels"
@@ -36,6 +36,7 @@ describe("The ColumnChart widget", () => {
                 customLayout=""
                 customConfigurations=""
                 enableThemeConfig={false}
+                advancedOptions={false}
                 {...chartProps}
             />
         );
