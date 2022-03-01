@@ -50,6 +50,8 @@ export function getProperties(
         }
 
         transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertiesIn(defaultProperties, values, ["advancedOptions"]);
     }
 
     return defaultProperties;
