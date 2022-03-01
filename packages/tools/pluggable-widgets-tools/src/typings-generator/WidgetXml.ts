@@ -53,6 +53,7 @@ export interface Property {
     category?: string[];
     description?: string[];
     attributeTypes?: AttributeTypes[];
+    associationTypes?: AssociationTypes[];
     returnType?: ReturnType[];
     properties?: Properties[];
     enumerationValues?: Enumeration[];
@@ -66,6 +67,16 @@ export interface AttributeType {
 
 export interface AttributeTypes {
     attributeType: AttributeType[];
+}
+
+export interface AssociationType {
+    $: {
+        name: string;
+    };
+}
+
+export interface AssociationTypes {
+    associationType: AssociationType[];
 }
 
 export interface ReturnType {

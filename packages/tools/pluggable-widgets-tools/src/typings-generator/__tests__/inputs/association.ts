@@ -7,6 +7,9 @@ export const associationInput = `<?xml version="1.0" encoding="utf-8"?>
             <property key="reference" type="association" selectableObjects="optionsSource">
                 <caption>Reference</caption>
                 <description/>
+                <associationTypes>
+                    <associationType name="Reference"/>
+                </associationTypes>
             </property>
              <property key="optionsSource" type="datasource" isList="true" required="false">
                 <caption>Universe Data source</caption>
@@ -32,6 +35,9 @@ export const associationInputNative = `<?xml version="1.0" encoding="utf-8"?>
             <property key="reference" type="association" selectableObjects="optionsSource">
                 <caption>Reference</caption>
                 <description/>
+                <associationTypes>
+                    <associationType name="Reference"/>
+                </associationTypes>
             </property>
              <property key="optionsSource" type="datasource" isList="true" required="false">
                 <caption>Universe Data source</caption>
