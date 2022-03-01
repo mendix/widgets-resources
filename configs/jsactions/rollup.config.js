@@ -1,7 +1,7 @@
 import { red, yellow } from "colors";
 import fg from "fast-glob";
-import { existsSync, mkdirSync } from "fs";
-import { basename, dirname, join, relative, sep, posix } from "path";
+import { mkdirSync } from "fs";
+import { basename, dirname, join, posix, relative, sep } from "path";
 import copy from "recursive-copy";
 import clear from "rollup-plugin-clear";
 import command from "rollup-plugin-command";
@@ -31,6 +31,8 @@ export default async args => {
         allowSyntheticDefaultImports: true
     });
 
+    const copyAsync = promisify(copy);
+
     files.forEach((file, i) => {
         const fileInput = relative(cwd, file);
         const fileOutput = basename(file, ".ts");
@@ -58,14 +60,25 @@ export default async args => {
                     ? command([
                           async () => {
                               if (!isWeb) {
-                                  await Promise.all(
-                                      clientDependencies.map(async dependency => {
-                                          await copyJsModule(
-                                              dirname(require.resolve(`${dependency}/package.json`)),
-                                              join(join(outDir, "node_modules"), dependency)
-                                          );
-                                      })
-                                  );
+                                  if (args.configProject === "nativemobileresources") {
+                                      // todo: whats concerning, is that fbjs is being installed in monorepo node_modules via something that ISNT a js action dependency...
+                                      // `fbjs/lib/invariant` is being used silently by @react-native-community/cameraroll; it is not listed as a dependency not peerDependency.
+                                      // https://github.dev/react-native-cameraroll/react-native-cameraroll/blob/7c269a837d095a2cb5f4ce13b54ab3060455b17f/js/CameraRoll.js#L14
+                                      const path = join(outDir, "node_modules", "fbjs", "lib");
+                                      mkdirSync(path, { recursive: true });
+                                      await copyAsync(
+                                          join(dirname(require.resolve("fbjs")), "lib", "invariant.js"),
+                                          join(path, "invariant.js")
+                                      );
+                                  } else if (args.configProject === "nanoflowcommons") {
+                                      // todo: whats concerning, is that invariant is being installed in monorepo node_modules via something that ISNT a js action dependency...
+                                      // `invariant` is being used silently by @react-native-community/geolocation; it is not listed as a dependency not peerDependency.
+                                      // https://github.dev/react-native-geolocation/react-native-geolocation/blob/1786929f2be581da91082ff857c2393da5e597b3/js/implementation.native.js#L13
+                                      await copyAsync(
+                                          dirname(require.resolve("invariant")),
+                                          join(outDir, "node_modules", "invariant")
+                                      );
+                                  }
                               }
 
                               const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
@@ -111,21 +124,6 @@ export default async args => {
             process.exit(1);
         }
     }
-
-    async function copyJsModule(from, to) {
-        if (existsSync(join(to, "package.json"))) {
-            return;
-        }
-        return promisify(copy)(from, to, {
-            filter: [
-                "**/*.*",
-                "{license,LICENSE}",
-                "!**/{android,ios,windows,mac,jest,github,gradle,__*__,.bin,demo,docs,test,jest,example*}/**/*",
-                "!**/*.{config,setup}.*",
-                "!**/*.{podspec,flow}"
-            ]
-        });
-    }
 };
 
 const nativeExternal = [
@@ -142,6 +140,3 @@ const nativeExternal = [
     /^react-navigation(\/|$)/,
     /^react-native-device-info(\/|$)/
 ];
-
-// These libraries are being used silently by @react-native-community/cameraroll and @react-native-community/geolocation and both dont have these libs as a peer or dependency
-const clientDependencies = ["fbjs", "invariant"];
