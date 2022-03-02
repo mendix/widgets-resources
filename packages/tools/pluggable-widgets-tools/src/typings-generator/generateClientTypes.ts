@@ -123,6 +123,9 @@ function toClientPropType(
                 ? `ListAttributeValue<${uniqueTypes.join(" | ")}>`
                 : `EditableValue<${uniqueTypes.join(" | ")}>`;
         case "association":
+            if (!prop.associationTypes?.length) {
+                throw new Error("[XML] Association property requires associationTypes element");
+            }
             return "ModifiableValue<ObjectItem>";
         case "expression":
             if (!prop.returnType || prop.returnType.length === 0) {
