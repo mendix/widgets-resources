@@ -220,8 +220,8 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Theme">
-            <propertyGroup caption="Theme">
+        <propertyGroup caption="Advanced">
+            <propertyGroup caption="Advanced">
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
                     <description />
