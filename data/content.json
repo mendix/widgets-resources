@@ -216,7 +216,7 @@
 		},
 		{
 			"name": "Badge",
-			"version": "2.1.0",
+			"version": "2.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.badge.Badge",
@@ -227,7 +227,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -296,7 +296,7 @@
 		},
 		{
 			"name": "BarcodeScanner",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.barcodescanner.BarcodeScanner",
@@ -307,7 +307,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -414,7 +414,7 @@
 		},
 		{
 			"name": "ColorPicker",
-			"version": "1.1.0",
+			"version": "1.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.colorpicker.ColorPicker",
@@ -425,7 +425,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -433,7 +433,7 @@
 		},
 		{
 			"name": "ColorPicker",
-			"version": "2.0.0",
+			"version": "2.0.1",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.custom.colorpicker.ColorPicker",
@@ -955,7 +955,7 @@
 		},
 		{
 			"name": "ProgressBar",
-			"version": "4.1.0",
+			"version": "4.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.progressbar.ProgressBar",
@@ -966,7 +966,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1073,7 +1073,7 @@
 		},
 		{
 			"name": "RangeSlider",
-			"version": "2.1.0",
+			"version": "2.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.rangeslider.RangeSlider",
@@ -1084,7 +1084,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1177,8 +1177,8 @@
 					"id": "com.mendix.widget.custom.richtext.RichText",
 					"name": "Rich Text",
 					"description": "Rich inline or toolbar text editing",
-					"studioCategory": "Display",
-					"studioProCategory": "Display",
+					"studioCategory": "Input Elements",
+					"studioProCategory": "Input elements",
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "web",
@@ -1287,7 +1287,7 @@
 		},
 		{
 			"name": "Slider",
-			"version": "2.1.0",
+			"version": "2.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.slider.Slider",
@@ -1298,7 +1298,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1469,7 +1469,7 @@
 		},
 		{
 			"name": "VideoPlayer",
-			"version": "3.1.0",
+			"version": "3.2.0",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.videoplayer.VideoPlayer",
@@ -1480,7 +1480,7 @@
 					"isPluginWidget": true,
 					"offlineCapable": true,
 					"supportedPlatform": "native",
-					"hasStructureModePreview": false,
+					"hasStructureModePreview": true,
 					"hasAllTileIcons": true,
 					"hasAllDarkIcons": true
 				}
@@ -1509,7 +1509,7 @@
 		},
 		{
 			"name": "WebView",
-			"version": "3.1.0",
+			"version": "3.1.1",
 			"widgets": [
 				{
 					"id": "com.mendix.widget.native.webview.WebView",
@@ -1530,7 +1530,7 @@
 	"jsActionPackages": [
 		{
 			"name": "mobile-resources-native",
-			"version": "3.4.2",
+			"version": "3.5.0",
 			"jsActions": [
 				{
 					"name": "BiometricAuthentication",
@@ -1746,7 +1746,7 @@
 		},
 		{
 			"name": "nanoflow-actions-native",
-			"version": "2.1.2",
+			"version": "2.2.0",
 			"jsActions": [
 				{
 					"name": "HideProgress",
