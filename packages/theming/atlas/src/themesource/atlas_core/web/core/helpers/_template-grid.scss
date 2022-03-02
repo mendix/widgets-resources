@@ -37,8 +37,8 @@
 
     // Striped
     .templategrid-striped.mx-templategrid {
-        .mx-templategrid-row:nth-child(odd) .mx-templategrid-item {
-            background-color: #f9f9f9;
+        .mx-templategrid-row:nth-child(even) .mx-templategrid-item {
+            background-color: $grid-bg-striped;
         }
     }
 
