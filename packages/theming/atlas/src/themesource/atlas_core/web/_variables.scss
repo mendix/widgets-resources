@@ -170,6 +170,8 @@ $navtopbar-sub-color-hover: $brand-primary !default;
 $navtopbar-sub-color-active: $brand-primary !default;
 
 //== Cards
+$card-bg: $bg-color-secondary;
+$card-border-radius: $border-radius-default;
 // Shadow color
 $shadow-color-border: rgba($gray-primary, 0.5);
 $shadow-color: rgba($gray-primary, 0.66);
