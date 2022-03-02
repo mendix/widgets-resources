@@ -22,9 +22,10 @@ describe("The PieChart widget", () => {
             <PieChart
                 name="line-chart-test"
                 class="line-chart-class"
-                chartFormat="pie"
+                holeRadius={0}
                 showLegend={false}
-                developerMode="basic"
+                enableAdvancedOptions={false}
+                enableDeveloperMode={false}
                 widthUnit="percentage"
                 width={0}
                 heightUnit="pixels"
@@ -50,7 +51,7 @@ describe("The PieChart widget", () => {
     });
 
     it("sets the hole prop on the data series based on the chartFormat value", () => {
-        const pieChart = renderPieChart({ chartFormat: "doughnut" });
+        const pieChart = renderPieChart({ holeRadius: 40 });
         const data = pieChart.find(ChartWidget).prop("data");
         expect(data).toHaveLength(1);
         expect(data[0]).toHaveProperty("hole", 0.4);
@@ -125,11 +126,11 @@ function setupBasicAttributes(): Partial<PieChartContainerProps> {
         .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(1)).build())
         .mockReturnValueOnce(new EditableValueBuilder<Big>().withValue(new Big(2)).build());
 
-    const seriesColorAttribute = new ListAttributeValueBuilder<string>().build();
+    const seriesColorAttribute = buildListExpression("color");
     seriesColorAttribute.get = jest
         .fn()
-        .mockReturnValueOnce(new EditableValueBuilder<string>().withValue("red").build())
-        .mockReturnValueOnce(new EditableValueBuilder<string>().withValue("blue").build());
+        .mockReturnValueOnce(dynamicValue("red"))
+        .mockReturnValueOnce(dynamicValue("blue"));
 
     return {
         seriesColorAttribute,

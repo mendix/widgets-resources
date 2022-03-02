@@ -8,15 +8,15 @@ import { executeAction, valueAttributeCompareFn } from "@mendix/piw-utils-intern
 
 type PieChartDataSeriesHooks = Pick<
     PieChartContainerProps,
-    | "chartFormat"
     | "customSeriesOptions"
+    | "holeRadius"
+    | "onClickAction"
     | "seriesColorAttribute"
     | "seriesDataSource"
     | "seriesName"
     | "seriesSortAttribute"
     | "seriesSortOrder"
     | "seriesValueAttribute"
-    | "onClickAction"
     | "tooltipHoverText"
 >;
 
@@ -29,7 +29,7 @@ type LocalPieChartData = {
 };
 
 export const usePieChartDataSeries = ({
-    chartFormat,
+    holeRadius,
     customSeriesOptions,
     seriesColorAttribute,
     seriesDataSource,
@@ -77,7 +77,7 @@ export const usePieChartDataSeries = ({
         () => [
             {
                 customSeriesOptions,
-                hole: chartFormat === "pie" ? 0 : 0.4,
+                hole: holeRadius / 100,
                 labels: pieChartData.map(({ itemName }) => itemName ?? null),
                 values: pieChartData.map(({ itemValue }) => itemValue ?? 0),
                 marker: {
@@ -90,6 +90,6 @@ export const usePieChartDataSeries = ({
                 onClick
             }
         ],
-        [customSeriesOptions, chartFormat, pieChartData, onClick]
+        [customSeriesOptions, holeRadius, pieChartData, onClick]
     );
 };

@@ -13,21 +13,20 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    const showAdvancedOptions = values.developerMode !== "basic";
-
     if (platform === "web") {
-        hidePropertyIn(defaultProperties, values, "developerMode");
-
-        transformGroupsIntoTabs(defaultProperties);
-    } else {
-        if (!showAdvancedOptions) {
+        if (!values.enableAdvancedOptions) {
             hidePropertiesIn(defaultProperties, values, [
                 "customLayout",
                 "customConfigurations",
                 "customSeriesOptions",
-                "enableThemeConfig"
+                "enableThemeConfig",
+                "enableDeveloperMode"
             ]);
         }
+
+        transformGroupsIntoTabs(defaultProperties);
+    } else {
+        hidePropertyIn(defaultProperties, values, "enableAdvancedOptions");
     }
     return defaultProperties;
 }
