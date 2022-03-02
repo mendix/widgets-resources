@@ -1,57 +1,57 @@
+import { StructurePreviewProps } from "@mendix/piw-utils-internal";
 import { BackgroundGradientPreviewProps } from "../typings/BackgroundGradientProps";
+import iconLight from "./assets/backgroundGradient_light.svg";
+import iconDark from "./assets/backgroundGradient_dark.svg";
 
-type Properties = PropertyGroup[];
-
-type PropertyGroup = {
-    caption: string;
-    propertyGroups?: PropertyGroup[];
-    properties?: Property[];
-};
-
-type Property = {
-    key: string;
-    caption: string;
-    description?: string;
-    objectHeaders?: string[]; // used for customizing object grids
-    objects?: ObjectProperties[];
-    properties?: Properties[];
-};
-
-type Problem = {
-    property?: string; // key of the property, at which the problem exists
-    severity?: "error" | "warning" | "deprecation"; // default = "error"
-    message: string; // description of the problem
-    studioMessage?: string; // studio-specific message, defaults to message
-    url?: string; // link with more information about the problem
-    studioUrl?: string; // studio-specific link
-};
-
-type ObjectProperties = {
-    properties: PropertyGroup[];
-    captions?: string[]; // used for customizing object grids
-};
-
-export function getProperties(_values: BackgroundGradientPreviewProps, defaultProperties: Properties): Properties {
-    // Do the values manipulation here to control the visibility of properties in Studio and Studio Pro conditionally.
-    /* Example
-    if (values.myProperty === "custom") {
-        delete defaultProperties.properties.myOtherProperty;
-    }
-    */
-    return defaultProperties;
-}
-
-export function check(_values: BackgroundGradientPreviewProps): Problem[] {
-    const errors: Problem[] = [];
-    // Add errors to the above array to throw errors in Studio and Studio Pro.
-    /* Example
-    if (values.myProperty !== "custom") {
-        errors.push({
-            property: `myProperty`,
-            message: `The value of 'myProperty' is different of 'custom'.`,
-            url: "https://github.com/myrepo/mywidget"
-        });
-    }
-    */
-    return errors;
-}
+export const getPreview = (values: BackgroundGradientPreviewProps, isDarkMode: boolean): StructurePreviewProps => ({
+    type: "Container",
+    borders: true,
+    children: [
+        {
+            type: "RowLayout",
+            columnSize: "grow",
+            borders: true,
+            padding: 0,
+            backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
+            children: [
+                {
+                    type: "Container",
+                    children: [
+                        {
+                            type: "RowLayout",
+                            columnSize: "grow",
+                            children: [
+                                {
+                                    type: "Container",
+                                    padding: 5,
+                                    children: [
+                                        {
+                                            type: "Image",
+                                            document: decodeURIComponent(
+                                                (isDarkMode ? iconDark : iconLight).replace("data:image/svg+xml,", "")
+                                            ),
+                                            width: 16,
+                                            height: 16
+                                        }
+                                    ]
+                                },
+                                {
+                                    type: "Text",
+                                    fontSize: 12,
+                                    fontColor: "#6B707B",
+                                    content: "Gradient Background"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                { type: "Container", grow: 2 }
+            ]
+        },
+        {
+            type: "DropZone",
+            property: values.content as object,
+            placeholder: "Configure your background gradient ( Content )"
+        }
+    ]
+});
