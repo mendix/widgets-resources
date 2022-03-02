@@ -17,8 +17,8 @@
                                 <caption>Data set</caption>
                                 <description />
                                 <enumerationValues>
-                                    <enumerationValue key="static">Single</enumerationValue>
-                                    <enumerationValue key="dynamic">Multiple</enumerationValue>
+                                    <enumerationValue key="static">Single series</enumerationValue>
+                                    <enumerationValue key="dynamic">Multiple series</enumerationValue>
                                 </enumerationValues>
                             </property>
                             <property key="staticDataSource" type="datasource" required="false" isList="true">
@@ -107,10 +107,12 @@
                                     <enumerationValue key="last">Last</enumerationValue>
                                 </enumerationValues>
                             </property>
-                        </propertyGroup>
-                        <propertyGroup caption="Advanced">
-                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
-                                <caption>Custom series options</caption>
+                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
+                                <caption>Tooltip hover text</caption>
+                                <description />
+                            </property>
+                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Tooltip hover text</caption>
                                 <description />
                             </property>
                         </propertyGroup>
@@ -154,12 +156,10 @@
                                 <caption>On click action</caption>
                                 <description />
                             </property>
-                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
-                                <caption>Tooltip hover text</caption>
-                                <description />
-                            </property>
-                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
-                                <caption>Tooltip hover text</caption>
+                        </propertyGroup>
+                        <propertyGroup caption="Advanced">
+                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                                <caption>Custom series options</caption>
                                 <description />
                             </property>
                         </propertyGroup>
