@@ -7,8 +7,6 @@ import { CSSProperties } from "react";
 import { ActionValue, DynamicValue, ListValue, ListAttributeValue, ListExpressionValue } from "mendix";
 import { Big } from "big.js";
 
-export type BarmodeEnum = "group" | "stack";
-
 export type DataSetEnum = "static" | "dynamic";
 
 export type AggregationTypeEnum =
@@ -35,20 +33,20 @@ export interface SeriesType {
     staticYAttribute?: ListAttributeValue<string | Date | Big>;
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
-    barColor?: DynamicValue<string>;
-    onClickAction?: ActionValue;
     staticTooltipHoverText?: ListExpressionValue<string>;
     dynamicTooltipHoverText?: ListExpressionValue<string>;
+    barColor?: DynamicValue<string>;
+    onClickAction?: ActionValue;
+    customSeriesOptions: string;
 }
 
-export type DeveloperModeEnum = "basic" | "advanced" | "developer";
+export type BarmodeEnum = "group" | "stack";
+
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
-
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export interface SeriesPreviewType {
     dataSet: DataSetEnum;
@@ -62,11 +60,11 @@ export interface SeriesPreviewType {
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
-    barColor: string;
-    onClickAction: {} | null;
     staticTooltipHoverText: string;
     dynamicTooltipHoverText: string;
+    barColor: string;
+    onClickAction: {} | null;
+    customSeriesOptions: string;
 }
 
 export interface BarChartContainerProps {
@@ -74,17 +72,18 @@ export interface BarChartContainerProps {
     class: string;
     style?: CSSProperties;
     tabIndex?: number;
-    showLegend: boolean;
+    series: SeriesType[];
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
     barmode: BarmodeEnum;
-    series: SeriesType[];
-    developerMode: DeveloperModeEnum;
+    showLegend: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
@@ -95,17 +94,18 @@ export interface BarChartPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
-    showLegend: boolean;
+    series: SeriesPreviewType[];
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
     barmode: BarmodeEnum;
-    series: SeriesPreviewType[];
-    developerMode: DeveloperModeEnum;
+    showLegend: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;

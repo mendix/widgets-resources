@@ -56,7 +56,7 @@ export function LineChart(props: LineChartContainerProps): ReactElement | null {
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
             gridLinesMode={props.gridLines}
-            showSidebarEditor={props.developerMode === "developer"}
+            showSidebarEditor={props.enableDeveloperMode}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
             layoutOptions={lineChartLayoutOptions}

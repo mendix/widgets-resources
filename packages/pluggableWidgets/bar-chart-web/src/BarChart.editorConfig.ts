@@ -14,7 +14,6 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    const showAdvancedOptions = values.developerMode !== "basic";
     values.series.forEach((dataSeries, index) => {
         if (dataSeries.dataSet === "static") {
             hideNestedPropertiesIn(defaultProperties, values, "series", index, [
@@ -35,19 +34,24 @@ export function getProperties(
             ]);
         }
 
-        if (!showAdvancedOptions) {
+        if (!values.enableAdvancedOptions && platform === "web") {
             hidePropertyIn(defaultProperties, values, "series", index, "customSeriesOptions");
         }
     });
 
     if (platform === "web") {
-        hidePropertyIn(defaultProperties, values, "developerMode");
+        if (!values.enableAdvancedOptions) {
+            hidePropertiesIn(defaultProperties, values, [
+                "customLayout",
+                "customConfigurations",
+                "enableThemeConfig",
+                "enableDeveloperMode"
+            ]);
+        }
 
         transformGroupsIntoTabs(defaultProperties);
     } else {
-        if (!showAdvancedOptions) {
-            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations", "enableThemeConfig"]);
-        }
+        hidePropertyIn(defaultProperties, values, "enableAdvancedOptions");
     }
 
     return defaultProperties;
