@@ -170,6 +170,8 @@ $navtopbar-sub-color-hover: $brand-primary !default;
 $navtopbar-sub-color-active: $brand-primary !default;
 
 //== Cards
+$card-bg: $bg-color-secondary;
+$card-border-radius: $border-radius-default;
 // Shadow color
 $shadow-color-border: rgba($gray-primary, 0.5);
 $shadow-color: rgba($gray-primary, 0.66);
@@ -309,7 +311,7 @@ $color-danger-dark: mix($brand-danger, black, 70%) !default;
 $color-danger-light: mix($brand-danger, white, 20%) !default;
 $color-danger-lighter: mix($brand-danger, white, 10%) !default;
 
-$brand-gradient: linear-gradient(to right top, #264ae5, #2239c5, #1b29a6, #111988, #03096c) !default;
+$brand-gradient: linear-gradient(to right top, $color-primary-lighter, $color-primary-light, $brand-primary, $color-primary-dark, $color-primary-darker) !default;
 
 //== Grids
 //## Used for Datagrid, Templategrid, Listview & Tables (see components folder)
