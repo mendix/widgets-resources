@@ -20,6 +20,7 @@ interface IPushNotification {
     data: ActionData & {
         actionIdentifier?: string;
         userInteraction?: number;
+        messageId: string;
     }; // iOS
 }
 
@@ -38,9 +39,14 @@ interface Notification {
 export function Notifications(props: NotificationsProps<undefined>): null {
     const listeners = useRef<Array<() => void>>([]);
     const [loadNotifications, setLoadNotifications] = useState(false);
+    const [knownIds] = useState(new Set<string>());
 
     const handleNotification = useCallback(
-        (notification: Notification, getHandler: (action: ActionsType) => Option<ActionValue>): void => {
+        (
+            id: string | undefined,
+            notification: Notification,
+            getHandler: (action: ActionsType) => Option<ActionValue>
+        ): void => {
             const body: string = notification.body ?? "";
             const title: string = notification.title ?? "";
             const subtitle: string = notification.subTitle ?? "";
@@ -49,6 +55,17 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             if (actions.length === 0) {
                 return;
             }
+
+            if (id !== undefined) {
+                if (knownIds.has(id)) {
+                    console.debug(`Not executing handleNotification for ${id}, has been executed before`);
+                    return;
+                } else {
+                    console.debug(`Executing handleNotification for ${id}`);
+                    knownIds.add(id);
+                }
+            }
+
             props.guid?.setValue(notification.data?.guid);
             props.title?.setValue(title);
             props.subtitle?.setValue(subtitle);
@@ -57,7 +74,7 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
             actions.forEach(action => executeAction(getHandler(action)));
         },
-        [props.actions, props.guid, props.title, props.subtitle, props.body, props.action]
+        [props.actions, props.guid, props.title, props.subtitle, props.body, props.action, knownIds]
     );
 
     const remoteMessageHandlerHelpers = (
@@ -70,9 +87,10 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
     const onReceive = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
-            const { notification, data } = message;
+            const { messageId, notification, data } = message;
             if (notification) {
                 handleNotification(
+                    messageId,
                     {
                         data,
                         ...remoteMessageHandlerHelpers(notification)
@@ -86,9 +104,10 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
     const onOpen = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
-            const { notification, data } = message;
+            const { messageId, notification, data } = message;
             if (notification) {
                 handleNotification(
+                    messageId,
                     {
                         data,
                         ...remoteMessageHandlerHelpers(notification)
@@ -109,7 +128,16 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error - see comment top top of file
                 onNotification(notification: IPushNotification) {
+                    let messageId = "";
+                    if ("google.message_id" in notification.data) {
+                        messageId = notification.data["google.message_id"];
+                    }
+                    if ("gcm.message_id" in notification.data) {
+                        messageId = notification.data["gcm.message_id"];
+                    }
+
                     handleNotification(
+                        messageId,
                         {
                             data: notification.data,
                             title: notification.title,
