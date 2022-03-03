@@ -81,20 +81,12 @@ export default async args => {
                                   }
                               }
 
-                              const destinationFolder = join(cwd, "tests/testProject/", jsActionTargetFolder);
-                              const destinations = [
-                                  destinationFolder,
-                                  ...[
-                                      process.env.MX_PROJECT_PATH
-                                          ? join(process.env.MX_PROJECT_PATH, jsActionTargetFolder)
-                                          : undefined
-                                  ]
-                              ];
-
-                              destinations.filter(Boolean).forEach(destination => {
+                              // this is helpful to copy the files and folders to a test project path for dev/testing purposes.
+                              if (process.env.MX_PROJECT_PATH) {
+                                  const destination = join(process.env.MX_PROJECT_PATH, jsActionTargetFolder);
                                   mkdirSync(destination, { recursive: true });
                                   copy(outDir, destination, { filter: ["**/*"], overwrite: true });
-                              });
+                              }
                           }
                       ])
                     : null
