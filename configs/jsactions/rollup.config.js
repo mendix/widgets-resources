@@ -61,7 +61,6 @@ export default async args => {
                           async () => {
                               if (!isWeb) {
                                   if (args.configProject === "nativemobileresources") {
-                                      // todo: whats concerning, is that fbjs is being installed in monorepo node_modules via something that ISNT a js action dependency...
                                       // `fbjs/lib/invariant` is being used silently by @react-native-community/cameraroll; it is not listed as a dependency not peerDependency.
                                       // https://github.dev/react-native-cameraroll/react-native-cameraroll/blob/7c269a837d095a2cb5f4ce13b54ab3060455b17f/js/CameraRoll.js#L14
                                       const path = join(outDir, "node_modules", "fbjs", "lib");
@@ -71,7 +70,6 @@ export default async args => {
                                           join(path, "invariant.js")
                                       );
                                   } else if (args.configProject === "nanoflowcommons") {
-                                      // todo: whats concerning, is that invariant is being installed in monorepo node_modules via something that ISNT a js action dependency...
                                       // `invariant` is being used silently by @react-native-community/geolocation; it is not listed as a dependency not peerDependency.
                                       // https://github.dev/react-native-geolocation/react-native-geolocation/blob/1786929f2be581da91082ff857c2393da5e597b3/js/implementation.native.js#L13
                                       await copyAsync(
