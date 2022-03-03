@@ -2,6 +2,7 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 import PushNotification from "react-native-push-notification";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Platform } from "react-native";
 import { ActionValue, ValueStatus, Option } from "mendix";
 import "@react-native-firebase/app";
 
@@ -18,10 +19,11 @@ interface IPushNotification {
     channelId?: string;
     foreground: boolean;
     data: ActionData & {
-        actionIdentifier?: string;
-        userInteraction?: number;
-        messageId: string;
-    }; // iOS
+        actionIdentifier?: string; // iOS
+        userInteraction?: number; // iOS
+        "gcm.message_id"?: string; // iOS
+        "google.message_id"?: string; // Android
+    };
 }
 
 interface ActionData {
@@ -128,13 +130,10 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error - see comment top top of file
                 onNotification(notification: IPushNotification) {
-                    let messageId = "";
-                    if ("google.message_id" in notification.data) {
-                        messageId = notification.data["google.message_id"];
-                    }
-                    if ("gcm.message_id" in notification.data) {
-                        messageId = notification.data["gcm.message_id"];
-                    }
+                    const messageId =
+                        Platform.OS === "ios"
+                            ? notification.data["gcm.message_id"]
+                            : notification.data["google.message_id"];
 
                     handleNotification(
                         messageId,
