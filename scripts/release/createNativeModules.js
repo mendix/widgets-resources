@@ -116,25 +116,30 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
     const jsActions = await getFiles(jsActionsPath);
     const tmpFolderActions = join(tmpFolder, `javascriptsource/${moduleInfo.moduleFolderNameInModeler}/actions`);
 
-    console.log("Updating NativeComponentsTestProject..");
+    console.log("Updating NativeComponentsTestProject...");
     await cloneRepo(moduleInfo.testProjectUrl, tmpFolder);
 
-    console.log("Copying JS actions..");
+    console.log("Deleting existing JS Actions from test project...");
+    await rm(tmpFolderActions, { force: true, recursive: true }); // this is useful to avoid retaining stale dependencies in the test project.
+    await mkdir(tmpFolderActions);
+    console.log("Copying widget resources JS actions into test project...");
     await Promise.all([
         ...jsActions.map(async file => {
             const dest = join(tmpFolderActions, file.replace(jsActionsPath, ""));
-            await rm(dest, { force: true });
             await mkdir(dirname(dest), { recursive: true });
             await copyFile(file, dest);
         })
     ]);
     if (nativeWidgetFolders) {
-        console.log("Copying widgets..");
+        console.log("Deleting existing widgets from test project...");
+        const widgetsDir = join(tmpFolder, "widgets");
+        await rm(widgetsDir, { force: true, recursive: true }); // this is useful to avoid retaining stale widgets in the test project.
+        await mkdir(widgetsDir);
+        console.log("Copying widget resources widgets into test project...");
         await Promise.all([
             ...nativeWidgetFolders.map(async folder => {
                 const src = (await getFiles(folder, [`.mpk`]))[0];
-                const dest = join(tmpFolder, "widgets", basename(src));
-                await rm(dest, { force: true });
+                const dest = join(widgetsDir, basename(src));
                 await copyFile(src, dest);
             })
         ]);
