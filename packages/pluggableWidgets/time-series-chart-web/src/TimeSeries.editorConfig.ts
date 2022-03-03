@@ -51,7 +51,8 @@ export function getProperties(
                 "customLayout",
                 "customConfigurations",
                 "enableThemeConfig",
-                "enableDeveloperMode"
+                "enableDeveloperMode",
+                "yAxisRangeMode"
             ]);
         }
 

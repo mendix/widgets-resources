@@ -37,7 +37,8 @@ export interface LinesType {
     staticYAttribute?: ListAttributeValue<string | Date | Big>;
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
+    staticTooltipHoverText?: ListExpressionValue<string>;
+    dynamicTooltipHoverText?: ListExpressionValue<string>;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
@@ -45,8 +46,7 @@ export interface LinesType {
     enableFillArea: boolean;
     fillColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
-    staticTooltipHoverText?: ListExpressionValue<string>;
-    dynamicTooltipHoverText?: ListExpressionValue<string>;
+    customSeriesOptions: string;
 }
 
 export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
@@ -69,7 +69,8 @@ export interface LinesPreviewType {
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
+    staticTooltipHoverText: string;
+    dynamicTooltipHoverText: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor: string;
@@ -77,8 +78,7 @@ export interface LinesPreviewType {
     enableFillArea: boolean;
     fillColor: string;
     onClickAction: {} | null;
-    staticTooltipHoverText: string;
-    dynamicTooltipHoverText: string;
+    customSeriesOptions: string;
 }
 
 export interface TimeSeriesContainerProps {

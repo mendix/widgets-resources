@@ -238,27 +238,29 @@
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Advanced">
-            <property key="enableThemeConfig" type="boolean" defaultValue="false">
-                <caption>Enable theme folder config loading</caption>
-                <description />
-            </property>
-            <property key="customLayout" type="string" required="false" multiline="true">
-                <caption>Custom layout</caption>
-                <description />
-            </property>
-            <property key="customConfigurations" type="string" required="false" multiline="true">
-                <caption>Custom configurations</caption>
-                <description />
-            </property>
-            <property key="yAxisRangeMode" type="enumeration" defaultValue="tozero">
-                <caption>Y-axis range mode</caption>
-                <description>Controls the y-axis range. "From zero" starts the y-axis from zero. "Auto" sets the range based on the plotted values. "Non-negative" only shows a range of positive values. If the series "Fill area" property is set to "yes", the range mode is set to "From zero" by default.</description>
-                <enumerationValues>
-                    <enumerationValue key="normal">Auto</enumerationValue>
-                    <enumerationValue key="tozero">From zero</enumerationValue>
-                    <enumerationValue key="nonnegative">Non-negative</enumerationValue>
-                </enumerationValues>
-            </property>
+            <propertyGroup caption="Advanced">
+                <property key="enableThemeConfig" type="boolean" defaultValue="false">
+                    <caption>Enable theme folder config loading</caption>
+                    <description />
+                </property>
+                <property key="customLayout" type="string" required="false" multiline="true">
+                    <caption>Custom layout</caption>
+                    <description />
+                </property>
+                <property key="customConfigurations" type="string" required="false" multiline="true">
+                    <caption>Custom configurations</caption>
+                    <description />
+                </property>
+                <property key="yAxisRangeMode" type="enumeration" defaultValue="tozero">
+                    <caption>Y-axis range mode</caption>
+                    <description>Controls the y-axis range. "From zero" starts the y-axis from zero. "Auto" sets the range based on the plotted values. "Non-negative" only shows a range of positive values. If the series "Fill area" property is set to "yes", the range mode is set to "From zero" by default.</description>
+                    <enumerationValues>
+                        <enumerationValue key="normal">Auto</enumerationValue>
+                        <enumerationValue key="tozero">From zero</enumerationValue>
+                        <enumerationValue key="nonnegative">Non-negative</enumerationValue>
+                    </enumerationValues>
+                </property>
+            </propertyGroup>
         </propertyGroup>
     </properties>
 </widget>
