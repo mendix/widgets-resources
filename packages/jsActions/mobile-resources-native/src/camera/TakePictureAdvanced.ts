@@ -59,7 +59,7 @@ export async function TakePictureAdvanced(
 
     // V3 dropped the feature of providing an action sheet so users can decide on which action to take, camera or library.
     const nativeVersionMajor = NativeModules.ImagePickerManager.showImagePicker ? 2 : 4;
-    const RNPermissions = nativeVersionMajor === 4 ? require("react-native-permissions") : null;
+    const RNPermissions = nativeVersionMajor === 4 ? (await import("react-native-permissions")).default : null;
     const resultObject = await createMxObject("NativeMobileResources.ImageMetaData");
 
     try {
@@ -228,9 +228,9 @@ export async function TakePictureAdvanced(
         let requestResult: string;
 
         async function requestAndroidPermission(): Promise<string> {
-            requestResult = await RNPermissions.request(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
+            requestResult = await RNPermissions!.request(RNPermissions!.PERMISSIONS.ANDROID.CAMERA);
 
-            if (requestResult === RNPermissions.RESULTS.DENIED) {
+            if (requestResult === RNPermissions!.RESULTS.DENIED) {
                 // re-enter request flow. note, if a request is denied twice, result = blocked.
                 requestResult = await requestAndroidPermission();
             }
@@ -239,16 +239,16 @@ export async function TakePictureAdvanced(
         }
 
         // https://github.com/zoontek/react-native-permissions#android-flow
-        const statusResult = await RNPermissions.check(RNPermissions.PERMISSIONS.ANDROID.CAMERA);
+        const statusResult = await RNPermissions!.check(RNPermissions!.PERMISSIONS.ANDROID.CAMERA);
 
         switch (statusResult) {
-            case RNPermissions.RESULTS.UNAVAILABLE:
+            case RNPermissions!.RESULTS.UNAVAILABLE:
                 throw new Error("The camera is unavailable.");
-            case RNPermissions.RESULTS.BLOCKED:
+            case RNPermissions!.RESULTS.BLOCKED:
                 throw new Error("Camera access for this app is currently blocked.");
-            case RNPermissions.RESULTS.DENIED:
+            case RNPermissions!.RESULTS.DENIED:
                 requestResult = await requestAndroidPermission();
-                if (requestResult === RNPermissions.RESULTS.BLOCKED) {
+                if (requestResult === RNPermissions!.RESULTS.BLOCKED) {
                     throw new Error("Camera access for this app is currently blocked.");
                 }
                 break;
