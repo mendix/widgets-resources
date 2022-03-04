@@ -7,9 +7,9 @@
     <helpUrl>https://docs.mendix.com/appstore/widgets/time-series-chart</helpUrl>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
                 <property key="lines" type="object" isList="true">
-                    <caption>Data source</caption>
+                    <caption>Series</caption>
                     <description>Add one or more series. The order of series influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
                     <properties>
                         <propertyGroup caption="General">
@@ -17,8 +17,8 @@
                                 <caption>Data set</caption>
                                 <description />
                                 <enumerationValues>
-                                    <enumerationValue key="static">Static</enumerationValue>
-                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                    <enumerationValue key="static">Single series</enumerationValue>
+                                    <enumerationValue key="dynamic">Multiple series</enumerationValue>
                                 </enumerationValues>
                             </property>
                             <property key="staticDataSource" type="datasource" required="false" isList="true">
@@ -28,6 +28,14 @@
                             <property key="dynamicDataSource" type="datasource" required="false" isList="true">
                                 <caption>Data source</caption>
                                 <description>Data points for all lines which will be divided into single lines based on the Group by attribute value.</description>
+                            </property>
+                            <property key="staticName" type="textTemplate" required="false" multiline="false">
+                                <caption>Series name</caption>
+                                <description>The line name displayed in the legend.</description>
+                            </property>
+                            <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Series name</caption>
+                                <description>The line name displayed in the legend.</description>
                             </property>
                             <property key="groupByAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Group by</caption>
@@ -42,14 +50,6 @@
                                     <attributeType name="Integer" />
                                     <attributeType name="Long" />
                                 </attributeTypes>
-                            </property>
-                            <property key="staticName" type="textTemplate" required="false" multiline="false">
-                                <caption>Series name</caption>
-                                <description>The line name displayed in the legend.</description>
-                            </property>
-                            <property key="dynamicName" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
-                                <caption>Series name</caption>
-                                <description>The line name displayed in the legend.</description>
                             </property>
                             <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>X axis attribute</caption>
@@ -92,7 +92,7 @@
                                 </attributeTypes>
                             </property>
                             <property key="aggregationType" type="enumeration" defaultValue="none">
-                                <caption>Aggregation type</caption>
+                                <caption>Aggregation function</caption>
                                 <description>Defines how data is aggregated when multiple Y values are available for a single X value</description>
                                 <enumerationValues>
                                     <enumerationValue key="none">None</enumerationValue>
@@ -107,8 +107,12 @@
                                     <enumerationValue key="last">Last</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
-                                <caption>Custom series options</caption>
+                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
+                                <caption>Tooltip hover text</caption>
+                                <description />
+                            </property>
+                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Tooltip hover text</caption>
                                 <description />
                             </property>
                         </propertyGroup>
@@ -152,24 +156,14 @@
                                 <caption>On click action</caption>
                                 <description />
                             </property>
-                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
-                                <caption>Tooltip hover text</caption>
-                                <description />
-                            </property>
-                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
-                                <caption>Tooltip hover text</caption>
+                        </propertyGroup>
+                        <propertyGroup caption="Advanced">
+                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                                <caption>Custom series options</caption>
                                 <description />
                             </property>
                         </propertyGroup>
                     </properties>
-                </property>
-                <property key="showLegend" type="boolean" defaultValue="true">
-                    <caption>Show legend</caption>
-                    <description />
-                </property>
-                <property key="showRangeSlider" type="boolean" defaultValue="true">
-                    <caption>Show range slider</caption>
-                    <description />
                 </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
@@ -179,22 +173,32 @@
                     <caption>Y axis label</caption>
                     <description />
                 </property>
-                <property key="yAxisRangeMode" type="enumeration" defaultValue="tozero">
-                    <caption>Y-axis range mode</caption>
-                    <description>Controls the y-axis range. "From zero" starts the y-axis from zero. "Auto" sets the range based on the plotted values. "Non-negative" only shows a range of positive values. If the series "Fill area" property is set to "yes", the range mode is set to "From zero" by default.</description>
-                    <enumerationValues>
-                        <enumerationValue key="normal">Auto</enumerationValue>
-                        <enumerationValue key="tozero">From zero</enumerationValue>
-                        <enumerationValue key="nonnegative">Non-negative</enumerationValue>
-                    </enumerationValues>
+            </propertyGroup>
+            <propertyGroup caption="General">
+                <property key="enableAdvancedOptions" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
                 </property>
-                <property key="developerMode" type="enumeration" defaultValue="basic">
-                    <caption>Mode</caption>
+                <property key="enableDeveloperMode" type="boolean" defaultValue="false">
+                    <caption>Enable developer mode</caption>
+                    <description />
+                </property>
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="showRangeSlider" type="boolean" defaultValue="true">
+                    <caption>Show range slider</caption>
+                    <description />
+                </property>
+                <property key="gridLines" type="enumeration" defaultValue="none">
+                    <caption>Grid lines</caption>
                     <description />
                     <enumerationValues>
-                        <enumerationValue key="basic">Basic</enumerationValue>
-                        <enumerationValue key="advanced">Advanced</enumerationValue>
-                        <enumerationValue key="developer">Developer</enumerationValue>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="both">Both</enumerationValue>
                     </enumerationValues>
                 </property>
             </propertyGroup>
@@ -233,18 +237,8 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Theme">
-            <propertyGroup caption="Theme">
-                <property key="gridLines" type="enumeration" defaultValue="none">
-                    <caption>Grid lines</caption>
-                    <description />
-                    <enumerationValues>
-                        <enumerationValue key="none">None</enumerationValue>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                        <enumerationValue key="both">Both</enumerationValue>
-                    </enumerationValues>
-                </property>
+        <propertyGroup caption="Advanced">
+            <propertyGroup caption="Advanced">
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
                     <description />
@@ -256,6 +250,15 @@
                 <property key="customConfigurations" type="string" required="false" multiline="true">
                     <caption>Custom configurations</caption>
                     <description />
+                </property>
+                <property key="yAxisRangeMode" type="enumeration" defaultValue="tozero">
+                    <caption>Y-axis range mode</caption>
+                    <description>Controls the y-axis range. "From zero" starts the y-axis from zero. "Auto" sets the range based on the plotted values. "Non-negative" only shows a range of positive values. If the series "Fill area" property is set to "yes", the range mode is set to "From zero" by default.</description>
+                    <enumerationValues>
+                        <enumerationValue key="normal">Auto</enumerationValue>
+                        <enumerationValue key="tozero">From zero</enumerationValue>
+                        <enumerationValue key="nonnegative">Non-negative</enumerationValue>
+                    </enumerationValues>
                 </property>
             </propertyGroup>
         </propertyGroup>

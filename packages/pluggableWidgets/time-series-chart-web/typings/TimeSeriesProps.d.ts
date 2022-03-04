@@ -29,15 +29,16 @@ export interface LinesType {
     dataSet: DataSetEnum;
     staticDataSource?: ListValue;
     dynamicDataSource?: ListValue;
-    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticName?: DynamicValue<string>;
     dynamicName?: ListExpressionValue<string>;
+    groupByAttribute?: ListAttributeValue<string | boolean | Date | Big>;
     staticXAttribute?: ListAttributeValue<Date>;
     dynamicXAttribute?: ListAttributeValue<Date>;
     staticYAttribute?: ListAttributeValue<string | Date | Big>;
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
+    staticTooltipHoverText?: ListExpressionValue<string>;
+    dynamicTooltipHoverText?: ListExpressionValue<string>;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
@@ -45,33 +46,31 @@ export interface LinesType {
     enableFillArea: boolean;
     fillColor?: DynamicValue<string>;
     onClickAction?: ActionValue;
-    staticTooltipHoverText?: ListExpressionValue<string>;
-    dynamicTooltipHoverText?: ListExpressionValue<string>;
+    customSeriesOptions: string;
 }
 
-export type YAxisRangeModeEnum = "normal" | "tozero" | "nonnegative";
-
-export type DeveloperModeEnum = "basic" | "advanced" | "developer";
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
 
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
+export type YAxisRangeModeEnum = "normal" | "tozero" | "nonnegative";
 
 export interface LinesPreviewType {
     dataSet: DataSetEnum;
     staticDataSource: {} | { type: string } | null;
     dynamicDataSource: {} | { type: string } | null;
-    groupByAttribute: string;
     staticName: string;
     dynamicName: string;
+    groupByAttribute: string;
     staticXAttribute: string;
     dynamicXAttribute: string;
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
+    staticTooltipHoverText: string;
+    dynamicTooltipHoverText: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor: string;
@@ -79,8 +78,7 @@ export interface LinesPreviewType {
     enableFillArea: boolean;
     fillColor: string;
     onClickAction: {} | null;
-    staticTooltipHoverText: string;
-    dynamicTooltipHoverText: string;
+    customSeriesOptions: string;
 }
 
 export interface TimeSeriesContainerProps {
@@ -89,20 +87,21 @@ export interface TimeSeriesContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     lines: LinesType[];
-    showLegend: boolean;
-    showRangeSlider: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
-    yAxisRangeMode: YAxisRangeModeEnum;
-    developerMode: DeveloperModeEnum;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
+    showLegend: boolean;
+    showRangeSlider: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
+    yAxisRangeMode: YAxisRangeModeEnum;
 }
 
 export interface TimeSeriesPreviewProps {
@@ -111,18 +110,19 @@ export interface TimeSeriesPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     lines: LinesPreviewType[];
-    showLegend: boolean;
-    showRangeSlider: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
-    yAxisRangeMode: YAxisRangeModeEnum;
-    developerMode: DeveloperModeEnum;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
+    showLegend: boolean;
+    showRangeSlider: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
+    yAxisRangeMode: YAxisRangeModeEnum;
 }

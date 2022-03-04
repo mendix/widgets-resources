@@ -88,7 +88,7 @@ export function TimeSeries(props: TimeSeriesContainerProps): ReactElement | null
             xAxisLabel={props.xAxisLabel?.value}
             yAxisLabel={props.yAxisLabel?.value}
             gridLinesMode={props.gridLines}
-            showSidebarEditor={props.developerMode === "developer"}
+            showSidebarEditor={props.enableDeveloperMode}
             customLayout={props.customLayout}
             customConfig={props.customConfigurations}
             layoutOptions={timeSeriesLayout}

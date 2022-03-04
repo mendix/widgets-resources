@@ -13,8 +13,6 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    const showAdvancedOptions = values.developerMode !== "basic";
-
     values.lines.forEach((line, index) => {
         // Series properties
         if (line.dataSet === "static") {
@@ -42,19 +40,25 @@ export function getProperties(
         if (!line.enableFillArea) {
             hideNestedPropertiesIn(defaultProperties, values, "lines", index, ["fillColor"]);
         }
-        if (!showAdvancedOptions) {
+        if (!values.enableAdvancedOptions && platform === "web") {
             hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
         }
     });
 
     if (platform === "web") {
-        hidePropertyIn(defaultProperties, values, "developerMode");
+        if (!values.enableAdvancedOptions) {
+            hidePropertiesIn(defaultProperties, values, [
+                "customLayout",
+                "customConfigurations",
+                "enableThemeConfig",
+                "enableDeveloperMode",
+                "yAxisRangeMode"
+            ]);
+        }
 
         transformGroupsIntoTabs(defaultProperties);
     } else {
-        if (!showAdvancedOptions) {
-            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations", "enableThemeConfig"]);
-        }
+        hidePropertyIn(defaultProperties, values, "enableAdvancedOptions");
     }
     return defaultProperties;
 }
