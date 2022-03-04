@@ -104,12 +104,15 @@ async function getTransitiveDependencies(packagePath, isExternal) {
             .map(dependency => dependency[0]);
 
         for (const dependency of dependencies) {
+            if (isExternal(dependency)) {
+                continue;
+            }
             const resolvedPackagePath = await resolvePackage(
                 dependency,
                 nextPath,
                 optionalDependencies.includes(dependency) || optionalPeerDependencies.includes(dependency)
             );
-            if (isExternal(dependency) || !resolvedPackagePath) {
+            if (!resolvedPackagePath) {
                 continue;
             }
             queue.push(resolvedPackagePath);
