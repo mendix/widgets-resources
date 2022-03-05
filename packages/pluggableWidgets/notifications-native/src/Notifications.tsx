@@ -41,13 +41,12 @@ interface Notification {
 export function Notifications(props: NotificationsProps<undefined>): null {
     const listeners = useRef<Array<() => void>>([]);
     const [loadNotifications, setLoadNotifications] = useState(false);
-    const [knownIds] = useState(new Set<string>());
-
+    const knownIds = useRef(new Set<string>());
     const handleNotification = useCallback(
         (
-            id: string | undefined,
             notification: Notification,
-            getHandler: (action: ActionsType) => Option<ActionValue>
+            getHandler: (action: ActionsType) => Option<ActionValue>,
+            id: string | undefined
         ): void => {
             const body: string = notification.body ?? "";
             const title: string = notification.title ?? "";
@@ -59,12 +58,10 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             }
 
             if (id !== undefined) {
-                if (knownIds.has(id)) {
-                    console.debug(`Not executing handleNotification for ${id}, has been executed before`);
+                if (knownIds.current.has(id)) {
                     return;
                 } else {
-                    console.debug(`Executing handleNotification for ${id}`);
-                    knownIds.add(id);
+                    knownIds.current.add(id);
                 }
             }
 
@@ -76,7 +73,7 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
             actions.forEach(action => executeAction(getHandler(action)));
         },
-        [props.actions, props.guid, props.title, props.subtitle, props.body, props.action, knownIds]
+        [props.actions, props.guid, props.title, props.subtitle, props.body, props.action]
     );
 
     const remoteMessageHandlerHelpers = (
@@ -92,12 +89,12 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             const { messageId, notification, data } = message;
             if (notification) {
                 handleNotification(
-                    messageId,
                     {
                         data,
                         ...remoteMessageHandlerHelpers(notification)
                     },
-                    action => action.onReceive
+                    action => action.onReceive,
+                    messageId
                 );
             }
         },
@@ -109,12 +106,12 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             const { messageId, notification, data } = message;
             if (notification) {
                 handleNotification(
-                    messageId,
                     {
                         data,
                         ...remoteMessageHandlerHelpers(notification)
                     },
-                    action => action.onOpen
+                    action => action.onOpen,
+                    messageId
                 );
             }
         },
@@ -130,20 +127,16 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error - see comment top top of file
                 onNotification(notification: IPushNotification) {
-                    const messageId =
-                        Platform.OS === "ios"
-                            ? notification.data["gcm.message_id"]
-                            : notification.data["google.message_id"];
-
+                    const messageId = notification.data[Platform.OS === "ios" ? "gcm.message_id" : "google.message_id"];
                     handleNotification(
-                        messageId,
                         {
                             data: notification.data,
                             title: notification.title,
                             body: notification.message,
                             subTitle: notification.subText
                         },
-                        action => action.onOpen
+                        action => action.onOpen,
+                        messageId
                     );
                 }
             });
