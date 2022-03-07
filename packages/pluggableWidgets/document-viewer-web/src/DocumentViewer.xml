@@ -7,8 +7,20 @@
     <properties>
         <propertyGroup caption="General">
             <propertyGroup caption="Data source">
+                <property key="dataSourceType" type="enumeration" defaultValue="file">
+                    <caption>Type</caption>
+                    <description />
+                    <enumerationValues>
+                        <enumerationValue key="file">File</enumerationValue>
+                        <enumerationValue key="uri">URI</enumerationValue>
+                    </enumerationValues>
+                </property>
                 <property key="file" type="file" required="false">
                     <caption>File Entity</caption>
+                    <description />
+                </property>
+                <property key="uri" type="string" required="false">
+                    <caption>URI</caption>
                     <description />
                 </property>
             </propertyGroup>

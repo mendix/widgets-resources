@@ -19,8 +19,16 @@ type UseFileUrlHookResult =
           error: string;
       };
 
-export function useFileURL({ file }: DocumentViewerContainerProps): UseFileUrlHookResult {
+export function useFileURL({ file, dataSourceType, uri }: DocumentViewerContainerProps): UseFileUrlHookResult {
     return useMemo(() => {
+        if (dataSourceType === "uri") {
+            return {
+                loading: false,
+                data: uri,
+                error: null
+            };
+        }
+
         if (file?.status !== ValueStatus.Available) {
             return {
                 loading: true,
@@ -48,5 +56,5 @@ export function useFileURL({ file }: DocumentViewerContainerProps): UseFileUrlHo
             data: `${url}`,
             error: null
         };
-    }, [file]);
+    }, [file, dataSourceType, uri]);
 }

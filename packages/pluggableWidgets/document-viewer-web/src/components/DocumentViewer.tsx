@@ -13,7 +13,7 @@ export function DocumentViewer({ className, src, rootStyle, tabIndex }: Document
         <div className={classnames("mx-document-viewer", className)} style={rootStyle} tabIndex={tabIndex}>
             <object data={src} type="application/pdf">
                 <p>
-                    We having issues with preview o the current file. Please download the file to view it:&nbsp;
+                    We having issues with preview of the current file. Please download the file to view it:&nbsp;
                     <a href={src}>Download</a>
                 </p>
             </object>

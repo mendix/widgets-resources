@@ -1,16 +1,27 @@
 import { DocumentViewerPreviewProps } from "../typings/DocumentViewerProps";
-import { Problem, Properties } from "@mendix/piw-utils-internal";
+import { hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
 
-export function getProperties(_values: DocumentViewerPreviewProps, defaultProperties: Properties): Properties {
+export function getProperties(props: DocumentViewerPreviewProps, defaultProperties: Properties): Properties {
+    hidePropertyIn(defaultProperties, props, props.dataSourceType === "file" ? "uri" : "file");
+
     return defaultProperties;
 }
 
 export function check(props: DocumentViewerPreviewProps): Problem[] {
-    if (!props.file) {
+    if (props.dataSourceType === "file" && !props.file) {
         return [
             {
                 property: "file",
                 message: "Missing value for 'File Entity' property"
+            }
+        ];
+    }
+
+    if (props.dataSourceType === "uri" && !props.uri) {
+        return [
+            {
+                property: "uri",
+                message: "Missing value for 'URI' property"
             }
         ];
     }
