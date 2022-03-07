@@ -6,10 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ## [Unreleased]
 
 ### Fixed
+
 - We fixed the timeout error while getting the current location.
+- We fixed a timeout issue while getting the current location with minimum accuracy.
 
 ### Breaking
-- Get current location/iOS: We changed the library that uses [android.location API](https://developer.android.com/reference/android/location/package-summary), to the new library that uses the [Google Location Services API](https://developer.android.com/training/location/). Regarding this change, you should use `Request location permission` action before using `Get current location` action.
+
+- iOS: We changed the library that uses [android.location API](https://developer.android.com/reference/android/location/package-summary), to the new library that uses the [Google Location Services API](https://developer.android.com/training/location/). Regarding this change, you should use `Request location permission` action before using `Get current location` and `Get current location with minimum accuracy` action.
+- Get current location with minimum accuracy: For good user experience, disable the nanoflow during action using property `Disabled during action` if you’re using `Call a nanoflow button` to run JS Action `Get current location with minimum accuracy`.
 
 ## [2.2.0] Nanoflow Commons - 2022-2-21
 ### Added
