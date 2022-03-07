@@ -1,7 +1,10 @@
 import ReactDataGrid, { Column, SortDirection } from "react-data-grid";
 import { FunctionComponent, useCallback, useMemo, useState } from "react";
+import Image, { ImageLoaderProps } from "next/image";
 import styles from "./ContentGrid.module.scss";
 import { Row } from "../../pages";
+
+const customLoader = ({ src }: ImageLoaderProps) => src;
 
 type GridColumn = Column<Row>;
 
@@ -156,7 +159,13 @@ function iconsFormatter(icons: Row["icons"]) {
                 return (
                     <div key={type} className={styles.iconContainer}>
                         {icon ? (
-                            <img className={styles.icon} src={`data:image/png;base64, ${icon.image}`} alt={icon.name} />
+                            <Image
+                                className={styles.icon}
+                                src={`data:image/png;base64, ${icon.image}`}
+                                alt={icon.name}
+                                layout="fill"
+                                loader={customLoader}
+                            />
                         ) : null}
                     </div>
                 );
