@@ -147,7 +147,7 @@ function iconsFormatter(icons: Row["icons"]) {
     if (icons === undefined) {
         return null;
     }
-    const types: (keyof typeof icons)[] = ["icon", "iconDark", "tile", "tileDark"];
+    const types: Array<keyof typeof icons> = ["icon", "iconDark", "tile", "tileDark"];
 
     return (
         <div className={styles.iconsContainer}>
