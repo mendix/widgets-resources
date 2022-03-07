@@ -2,6 +2,7 @@ import messaging, { FirebaseMessagingTypes } from "@react-native-firebase/messag
 import PushNotification from "react-native-push-notification";
 import { executeAction } from "@mendix/piw-utils-internal";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Platform } from "react-native";
 import { ActionValue, ValueStatus, Option } from "mendix";
 import "@react-native-firebase/app";
 
@@ -18,9 +19,11 @@ interface IPushNotification {
     channelId?: string;
     foreground: boolean;
     data: ActionData & {
-        actionIdentifier?: string;
-        userInteraction?: number;
-    }; // iOS
+        actionIdentifier?: string; // iOS
+        userInteraction?: number; // iOS
+        "gcm.message_id"?: string; // iOS
+        "google.message_id"?: string; // Android
+    };
 }
 
 interface ActionData {
@@ -38,9 +41,13 @@ interface Notification {
 export function Notifications(props: NotificationsProps<undefined>): null {
     const listeners = useRef<Array<() => void>>([]);
     const [loadNotifications, setLoadNotifications] = useState(false);
-
+    const knownIds = useRef(new Set<string>());
     const handleNotification = useCallback(
-        (notification: Notification, getHandler: (action: ActionsType) => Option<ActionValue>): void => {
+        (
+            notification: Notification,
+            getHandler: (action: ActionsType) => Option<ActionValue>,
+            id: string | undefined
+        ): void => {
             const body: string = notification.body ?? "";
             const title: string = notification.title ?? "";
             const subtitle: string = notification.subTitle ?? "";
@@ -49,6 +56,15 @@ export function Notifications(props: NotificationsProps<undefined>): null {
             if (actions.length === 0) {
                 return;
             }
+
+            if (id !== undefined) {
+                if (knownIds.current.has(id)) {
+                    return;
+                } else {
+                    knownIds.current.add(id);
+                }
+            }
+
             props.guid?.setValue(notification.data?.guid);
             props.title?.setValue(title);
             props.subtitle?.setValue(subtitle);
@@ -70,14 +86,15 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
     const onReceive = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
-            const { notification, data } = message;
+            const { messageId, notification, data } = message;
             if (notification) {
                 handleNotification(
                     {
                         data,
                         ...remoteMessageHandlerHelpers(notification)
                     },
-                    action => action.onReceive
+                    action => action.onReceive,
+                    messageId
                 );
             }
         },
@@ -86,14 +103,15 @@ export function Notifications(props: NotificationsProps<undefined>): null {
 
     const onOpen = useCallback(
         (message: FirebaseMessagingTypes.RemoteMessage): void => {
-            const { notification, data } = message;
+            const { messageId, notification, data } = message;
             if (notification) {
                 handleNotification(
                     {
                         data,
                         ...remoteMessageHandlerHelpers(notification)
                     },
-                    action => action.onOpen
+                    action => action.onOpen,
+                    messageId
                 );
             }
         },
@@ -109,6 +127,7 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-expect-error - see comment top top of file
                 onNotification(notification: IPushNotification) {
+                    const messageId = notification.data[Platform.OS === "ios" ? "gcm.message_id" : "google.message_id"];
                     handleNotification(
                         {
                             data: notification.data,
@@ -116,7 +135,8 @@ export function Notifications(props: NotificationsProps<undefined>): null {
                             body: notification.message,
                             subTitle: notification.subText
                         },
-                        action => action.onOpen
+                        action => action.onOpen,
+                        messageId
                     );
                 }
             });
