@@ -5,19 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+- We fixed the timeout error while getting the current location.
+
+### Breaking
+- Get current location/iOS: We changed the library that uses [android.location API](https://developer.android.com/reference/android/location/package-summary), to the new library that uses the [Google Location Services API](https://developer.android.com/training/location/). Regarding this change, you should use `Request location permission` action before using `Get current location` action.
+
 ## [2.2.0] Nanoflow Commons - 2022-2-21
 ### Added
 - We introduce a new `Get current location with minimum accuracy` action to acquire more precise locations.
 - Dark theme icons for JS Actions
 
-
 ### Fixed
 - We fixed a bug where the `Speed` was not being defined while using `Get current location` action.
 - We removed some unwanted files from the module.
-- We fixed the timeout error while getting the current location.
-
-### Breaking
-- Get current location/iOS: We changed the library that uses [android.location API](https://developer.android.com/reference/android/location/package-summary), to the new library that uses the [Google Location Services API](https://developer.android.com/training/location/). Regarding this change, you should use `Request location permission` action before using `Get current location` action.
 
 ## [2.1.2] Nanoflow Commons - 2021-10-25
 ### Fixed
