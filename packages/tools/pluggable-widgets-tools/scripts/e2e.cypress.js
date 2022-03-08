@@ -135,7 +135,7 @@ async function main() {
             "docker run -t " +
                 `-v ${REPO_ROOT}:/source ` +
                 `-v ${REPO_ROOT}/node_modules:/source/node_modules:ro ` +
-                "-w /e2e --name cypress cypress/included:9.4.1 " +
+                "-w /e2e --name cypress cypress/included:9.5.1 " +
                 `--browser chrome --config baseUrl=http://${ip}:${freePort},video=true,videoUploadOnPasses=false ` +
                 `--config-file false --project ${process.cwd().replace(REPO_ROOT, "/source")}`,
             { stdio: "inherit" }
