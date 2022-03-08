@@ -123,7 +123,7 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
     await Promise.all([
         ...jsActions.map(async file => {
             const dest = join(tmpFolderActions, file.replace(jsActionsPath, ""));
-            await rm(dest);
+            await rm(dest, { force: true });
             await copyFile(file, dest);
         })
     ]);
