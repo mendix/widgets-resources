@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [2.3.0] Nanoflow Commons - 2022-3-9
 ### Fixed
 
 - We fixed the timeout error while getting the current location.
