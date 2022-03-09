@@ -22,6 +22,8 @@ import type { GeoError, GeoPosition, GeoOptions } from "../../typings/Geolocatio
  *
  * On hybrid and native platforms the permission should be requested with the `RequestLocationPermission` action.
  *
+ * For good user experience, disable the nanoflow during action using property `Disabled during action` if you’re using `Call a nanoflow button` to run JS Action `Get current location with minimum accuracy`.
+ *
  * Best practices:
  * https://developers.google.com/web/fundamentals/native-hardware/user-location/
  * @param {Big} timeout - The maximum length of time (in milliseconds) the device is allowed to take in order to return a location. If empty, there is no timeout.
@@ -84,8 +86,8 @@ export async function GetCurrentLocationMinimumAccuracy(
             );
         }
 
+        const timeoutId = setTimeout(onTimeout, Number(timeout));
         const watchId: number = geolocationModule.watchPosition(onSuccess, onError, options);
-        const timeStart = Date.now();
         let lastAccruedPosition: GeolocationResponse | GeoPosition;
 
         function createGeolocationObject(position: GeolocationResponse | GeoPosition): void {
@@ -97,18 +99,24 @@ export async function GetCurrentLocationMinimumAccuracy(
             });
         }
 
+        function onTimeout(): void {
+            geolocationModule?.clearWatch(watchId);
+
+            if (lastAccruedPosition) {
+                createGeolocationObject(lastAccruedPosition);
+            } else {
+                reject(new Error("Timeout expired"));
+            }
+        }
+
         function onSuccess(position: GeolocationResponse | GeoPosition): void {
-            if (watchId && (!minimumAccuracy || minimumAccuracy >= position.coords.accuracy)) {
+            if (!minimumAccuracy || Number(minimumAccuracy) >= position.coords.accuracy) {
+                clearTimeout(timeoutId);
                 geolocationModule?.clearWatch(watchId);
                 createGeolocationObject(position);
             } else {
                 if (!lastAccruedPosition || position.coords.accuracy < lastAccruedPosition.coords.accuracy) {
                     lastAccruedPosition = position;
-                }
-                const timeDiff = Date.now() - timeStart;
-                if (!timeout || timeout.lte(timeDiff)) {
-                    geolocationModule?.clearWatch(watchId);
-                    createGeolocationObject(lastAccruedPosition);
                 }
             }
         }
