@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+## [3.5.1] Native Mobile Resources - 2022-3-9
+
+
+## [3.2.0] Feedback
+### Changed
+
+-   We have updated the feedback API
+
+## [3.1.1] Notifications
+### Fixed
+- We fixed the 'On open' action being triggered twice when tapping a notification while the app was in a background or quit state.
+
 ## [3.5.0] Native Mobile Resources - 2022-2-21
 ### Fixed
 - We updated the `HasNotificationPermission` action to prevent an incorrect result when permission was not yet requested on iOS. This is due to a change in the hasPermission method in react-native-firebase.
