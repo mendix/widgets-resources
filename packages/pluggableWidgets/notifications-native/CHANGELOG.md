@@ -4,6 +4,8 @@ All notable changes to this widget will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.1.1] - 2022-3-9
 ### Fixed
 - We fixed the 'On open' action being triggered twice when tapping a notification while the app was in a background or quit state.
 
