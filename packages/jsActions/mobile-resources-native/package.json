@@ -37,7 +37,7 @@
     "react-native-touch-id": "4.4.1",
     "url-parse": "^1.4.7",
     "react-native-permissions": "3.0.4",
-    "fbjs": "^3.0.4"
+    "fbjs": "3.0.4"
   },
   "devDependencies": {
     "@mendix/pluggable-widgets-tools": ">=8.9.2",
