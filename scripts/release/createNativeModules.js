@@ -1,5 +1,5 @@
-const { basename, join } = require("path");
-const { readdir, copyFile, rm } = require("fs/promises");
+const { basename, join, dirname } = require("path");
+const { readdir, copyFile, rm, mkdir } = require("fs/promises");
 const {
     execShellCommand,
     getFiles,
@@ -124,6 +124,7 @@ async function updateNativeComponentsTestProject(moduleInfo, tmpFolder, nativeWi
         ...jsActions.map(async file => {
             const dest = join(tmpFolderActions, file.replace(jsActionsPath, ""));
             await rm(dest, { force: true });
+            await mkdir(dirname(dest), { recursive: true });
             await copyFile(file, dest);
         })
     ]);
