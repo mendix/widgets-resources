@@ -115,7 +115,7 @@
                     display: flex;
                     padding: $spacing-small;
                     align-items: center;
-                    min-height: $topbar-minimalheight + 4px;
+                    min-height: calc(#{$topbar-minimalheight} + 4px);
                     background: $navsidebar-sub-bg;
                 }
 

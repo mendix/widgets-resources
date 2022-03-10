@@ -47,12 +47,12 @@
     .widget-badge.badge:empty {
         display: initial;
         /* Fix padding to stay round */
-        padding: $spacing-smaller ($spacing-small + 2px);
+        padding: $spacing-smaller calc(#{$spacing-small} + 2px);
     }
 
     .widget-badge.label:empty {
         display: initial;
         /* Fix padding to stay square */
-        padding: $spacing-smaller ($spacing-small + 2px);
+        padding: $spacing-smaller calc(#{$spacing-small} + 2px);
     }
 }

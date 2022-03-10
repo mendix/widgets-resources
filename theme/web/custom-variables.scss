@@ -618,10 +618,10 @@ $screen-lg: 992px;
 $screen-xl: 1200px;
 
 // So media queries don't overlap when required, provide a maximum (used for max-width)
-$screen-xs-max: ($screen-sm - 1);
-$screen-sm-max: ($screen-md - 1);
-$screen-md-max: ($screen-lg - 1);
-$screen-lg-max: ($screen-xl - 1);
+$screen-xs-max: calc(#{$screen-sm} - 1px);
+$screen-sm-max: calc(#{$screen-md} - 1px);
+$screen-md-max: calc(#{$screen-lg} - 1px);
+$screen-lg-max: calc(#{$screen-xl} - 1px);
 
 //== Settings
 //## Enable or disable your desired framework features
