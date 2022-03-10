@@ -1,13 +1,19 @@
 import {
+    ContainerProps,
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
+    ImageProps,
     Problem,
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { AreaChartPreviewProps } from "../typings/AreaChartProps";
+import AreaChartLightSvg from "./assets/AreaChart.light.svg";
+import AreaChartDarkSvg from "./assets/AreaChart.dark.svg";
+import AreaChartLegendLightSvg from "./assets/AreaChart-legend.light.svg";
+import AreaChartLegendDarkSvg from "./assets/AreaChart-legend.dark.svg";
 
 export function getProperties(
     values: AreaChartPreviewProps,
@@ -58,8 +64,34 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(_values: AreaChartPreviewProps): StructurePreviewProps | null {
-    return null;
+export function getPreview(values: AreaChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const chartImage = {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? AreaChartDarkSvg : AreaChartLightSvg).replace("data:image/svg+xml,", "")
+        ),
+        width: 375
+    } as ImageProps;
+
+    const legendImage = {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? AreaChartLegendDarkSvg : AreaChartLegendLightSvg).replace("data:image/svg+xml,", "")
+        ),
+        width: 85
+    } as ImageProps;
+
+    const filler = {
+        type: "Container",
+        grow: 1,
+        children: []
+    } as ContainerProps;
+
+    return {
+        type: "RowLayout",
+        columnSize: "fixed",
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+    };
 }
 
 export function check(values: AreaChartPreviewProps): Problem[] {
