@@ -26,9 +26,7 @@ async function main() {
     mv(`${testsDir}/Native-Mobile-Resources-main`, testProjectDir);
     rm("-f", testArchivePath);
 
-    const output = execSync("npx lerna list --json --since origin/master --scope '*-native'", {
-        stdio: "inherit"
-    });
+    const output = execSync("npx lerna list --json --since origin/master --scope '*-native'");
     const packages = JSON.parse(output);
 
     execSync("npx lerna run release --since origin/master --scope '*-native'", { stdio: "inherit" });
@@ -116,25 +114,12 @@ async function main() {
         );
 
         // wait until metro bundler is alive
-        let metroRequestAttempts = 60;
-        for (; metroRequestAttempts > 0; --metroRequestAttempts) {
-            try {
-                const response = await fetch(`http://localhost:8083/status`);
-                if (response.ok) {
-                    break;
-                }
-            } catch (e) {
-                console.log(`Could not reach Metro, trying again...`);
-            }
-            await new Promise(resolve => setTimeout(resolve, 3000));
-        }
-
-        if (metroRequestAttempts === 0) {
+        if ((await tryReach("http://localhost:8083/status", "Could not reach Metro, trying again...")) === 0) {
             throw new Error("Metro bundler did not start in time...");
         }
         console.log("Metro started.");
-
         console.log("Preheating bundler for Android dev=false minify=true");
+
         await Promise.race([
             fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
             new Promise((_, reject) =>
@@ -153,22 +138,10 @@ async function main() {
             .trim();
 
         // wait until runtime is alive
-        let attempts = 60;
-        for (; attempts > 0; --attempts) {
-            try {
-                const response = await fetch(`http://localhost:8083`);
-                if (response.ok) {
-                    break;
-                }
-            } catch (e) {
-                console.log(`Could not reach http://localhost:8083, trying again...`);
-            }
-            await new Promise(resolve => setTimeout(resolve, 3000));
-        }
-
-        if (attempts === 0) {
+        if ((await tryReach("http://localhost:8083", "Could not reach http://localhost:8083, trying again...")) === 0) {
             throw new Error("Runtime didn't start in time, existing now...");
         }
+
         const changedPackages = packages.map(package => package.name).join(",");
         console.log("Setup for android...");
         execSync("npm run setup-android");
@@ -245,4 +218,20 @@ async function getMendixVersion() {
     }
 
     return mendixVersion;
+}
+
+async function tryReach(url, errorMessage) {
+    let attempts = 60;
+    for (; attempts > 0; --attempts) {
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                break;
+            }
+        } catch (e) {
+            console.log(errorMessage);
+        }
+        await new Promise(resolve => setTimeout(resolve, 3000));
+    }
+    return attempts;
 }
