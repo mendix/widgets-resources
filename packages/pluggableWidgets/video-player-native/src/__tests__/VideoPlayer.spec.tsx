@@ -1,7 +1,7 @@
 import { dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
 import { Modal, Text, View } from "react-native";
-import { fireEvent, render, waitFor } from "@testing-library/react-native";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import { VideoProperties } from "react-native-video";
 
 import { VideoPlayer } from "../VideoPlayer";
@@ -9,9 +9,9 @@ import { VideoPlayerProps } from "../../typings/VideoPlayerProps";
 import { VideoStyle } from "../ui/Styles";
 
 jest.mock("react-native-video", () => "Video");
-jest.mock("react-native-navigation-bar-color", () => ({
-    hideNavigationBar: jest.fn(),
-    showNavigationBar: jest.fn()
+jest.mock("react-native-system-navigation-bar", () => ({
+    navigationHide: jest.fn(),
+    navigationShow: jest.fn()
 }));
 
 describe("VideoPlayer", () => {
@@ -105,13 +105,17 @@ describe("VideoPlayer", () => {
             expect(component).toMatchSnapshot();
         });
 
-        it("show fullscreen when press fullscreen icon-- android", async () => {
+        it("show fullscreen when press fullscreen icon-- android", () => {
             const component = render(<VideoPlayer {...defaultProps} />);
             const fullScreenBtn = component.getByTestId("btn-fullscreen");
-            fireEvent.press(fullScreenBtn);
-            await waitFor(() => component.getByTestId("btn-fullscreen-exit"));
-            const modal = component.UNSAFE_getByType(Modal);
-            expect(modal.props.visible).toBe(true);
+            act(async () => {
+                fireEvent.press(fullScreenBtn);
+                await waitFor(() => {
+                    component.getByTestId("btn-fullscreen-exit");
+                    const modal = component.UNSAFE_getByType(Modal);
+                    expect(modal.props.visible).toBe(true);
+                });
+            });
         });
     });
 });

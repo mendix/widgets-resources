@@ -9,10 +9,10 @@ import {
     TouchableWithoutFeedback,
     View,
     Appearance,
-    Modal
+    Modal,
+    NativeModules
 } from "react-native";
 import Video, { OnProgressData, VideoProperties } from "react-native-video";
-import { hideNavigationBar, showNavigationBar } from "react-native-navigation-bar-color";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { VideoPlayerProps } from "../typings/VideoPlayerProps";
 import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
@@ -29,7 +29,6 @@ const enum StatusEnum {
 export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
     const [styles, setStyles] = useState(flattenStyles(defaultVideoStyle, props.style));
     const timeoutRef = useRef<NodeJS.Timeout>();
-
     const playerRef = useRef<Video>(null);
     const fullScreenPlayerRef = useRef<Video>(null);
     const [status, setStatus] = useState(StatusEnum.NOT_READY);
@@ -66,6 +65,9 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         if (props.showControls) {
             showControlsHandler();
         }
+        return () => {
+            clearTimeout(timeoutRef.current as NodeJS.Timeout);
+        };
     }, [fullScreen, props.showControls, showControlsHandler]);
 
     const onVideoPressHandler = useCallback((): void => {
@@ -80,14 +82,21 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         }
     }, [props.showControls, showControls, showControlsHandler]);
 
-    function fullScreenHandler(isFullScreen: boolean): void {
+    async function fullScreenHandler(isFullScreen: boolean): Promise<void> {
         setFullScreen(isFullScreen);
-        if (isFullScreen) {
-            hideNavigationBar();
-        } else {
-            showNavigationBar();
-            const isDark = Appearance.getColorScheme() === "dark";
-            StatusBar.setBarStyle(isDark ? "light-content" : "dark-content");
+        const { NavigationBar } = NativeModules;
+        if (NavigationBar) {
+            const SystemNavigationBar = (await import("react-native-system-navigation-bar")).default;
+
+            if (isFullScreen) {
+                SystemNavigationBar.navigationHide();
+                StatusBar.setHidden(true);
+            } else {
+                SystemNavigationBar.navigationShow();
+                StatusBar.setHidden(false);
+                const isDark = Appearance.getColorScheme() === "dark";
+                StatusBar.setBarStyle(isDark ? "light-content" : "dark-content");
+            }
         }
     }
 
