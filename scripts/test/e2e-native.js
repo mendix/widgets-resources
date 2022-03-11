@@ -13,42 +13,38 @@ main().catch(e => {
     process.exit(-1);
 });
 
-// todo: add all docker run inside a try finally, cleanup.
-// not sure of docker container lifecycles in github actions environment
 async function main() {
     const mendixVersion = await getMendixVersion();
-    const ip = nodeIp.address();
     const ghcr = process.env.CI && process.env.FORKED !== "true" ? "ghcr.io/mendix/widgets-resources/" : "";
 
     const testArchivePath = await getTestProject("https://github.com/mendix/Native-Mobile-Resources", "main");
     const root = process.cwd();
-    const projectsRoot = join(root, "tests");
-    const projectDir = join(root, "tests/testProject");
-    try {
-        mkdir("-p", projectsRoot);
-        execSync(`unzip -o ${testArchivePath} -d ${projectsRoot}`);
-        mv(`${projectsRoot}/Native-Mobile-Resources-main`, projectDir);
-        rm("-f", testArchivePath);
-    } catch (e) {
-        throw new Error("Failed to unzip the test project into testProject", e.message);
-    }
+    const testsDir = join(root, "tests");
+    const testProjectDir = join(testsDir, "testProject");
 
-    const output = execSync("npx lerna list --json --since origin/master --loglevel silent --scope '*-native'");
+    mkdir("-p", testsDir);
+    execSync(`unzip -o ${testArchivePath} -d ${testsDir}`);
+    mv(`${testsDir}/Native-Mobile-Resources-main`, testProjectDir);
+    rm("-f", testArchivePath);
+
+    const output = execSync("npx lerna list --json --since origin/master --loglevel silent --scope '*-native'", {
+        stdio: "inherit"
+    });
     const packages = JSON.parse(output);
 
-    execSync("npx lerna run release --since origin/master --scope '*-native'");
+    execSync("npx lerna run release --since origin/master --scope '*-native'", { stdio: "inherit" });
 
     packages.forEach(({ name, location }) => {
         if (["mobile-resources-native", "nanoflow-actions-native"].includes(name)) {
             // for js actions
             const path = name === "mobile-resources-native" ? "nativemobileresources" : "nanoflowcommons";
-            const jsActionsPath = `${projectDir}/javascriptsource/${path}/actions`;
+            const jsActionsPath = `${testProjectDir}/javascriptsource/${path}/actions`;
             rm("-rf", jsActionsPath);
             cp("-r", `${location}/dist`, jsActionsPath);
         } else {
             // for widgets
             // this is acceptable if there's one built version.
-            cp(`${location}/dist/**/*.mpk`, `${projectDir}/widgets`);
+            cp(`${location}/dist/**/*.mpk`, `${testProjectDir}/widgets`);
         }
     });
 
