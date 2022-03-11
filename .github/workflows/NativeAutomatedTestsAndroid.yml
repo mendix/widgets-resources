@@ -33,11 +33,9 @@ jobs:
                     submodules: false
             -   name: "Fetching master to compare"
                 if:
-                    github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name !=
-                    github.repository
+                    github.event_name == 'pull_request'
                 run:
-                    git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
-                    }}:refs/remotes/origin/${{ github.base_ref }}
+                    git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
             # - name: "Defining environment variables"
             #   id: variables
             #   run:
