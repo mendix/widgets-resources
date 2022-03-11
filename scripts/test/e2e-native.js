@@ -118,15 +118,15 @@ async function main() {
             throw new Error("Metro bundler did not start in time...");
         }
         console.log("Metro started.");
-        console.log("Preheating bundler for Android dev=false minify=true");
+        // console.log("Preheating bundler for Android dev=false minify=true");
 
-        await Promise.race([
-            fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
-            new Promise((_, reject) =>
-                setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000)
-            )
-        ]);
-        console.log("Preheating done!");
+        // await Promise.race([
+        //     fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+        //     new Promise((_, reject) =>
+        //         setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000)
+        //     )
+        // ]);
+        // console.log("Preheating done!");
 
         // Spin up the runtime and run testProject
         runtimeContainerId = execSync(
@@ -163,8 +163,8 @@ async function main() {
         }
         throw e;
     } finally {
-        execSync(`docker rm -f ${runtimeContainerId}`);
         execSync(`docker rm -f ${mxbuildContainerId}`);
+        execSync(`docker rm -f ${runtimeContainerId}`);
     }
 }
 
