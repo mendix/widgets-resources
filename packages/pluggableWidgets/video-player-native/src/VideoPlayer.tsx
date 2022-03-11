@@ -79,7 +79,6 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
     }, [props.showControls, showControls, showControlsHandler]);
 
     function fullScreenHandler(isFullScreen: boolean): void {
-        console.debug("isFullScreen", isFullScreen)
         setFullScreen(isFullScreen);
         if(isFullScreen){
             SystemNavigationBar.navigationHide()
