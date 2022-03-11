@@ -1,14 +1,10 @@
 name: Run native automated end-to-end tests for Android
 
 on:
-    workflow_dispatch
-    # push:
-    #     branches: [master]
-    #     paths: "packages/pluggableWidgets/*-native/**/*"
+    workflow_dispatch:
 
-    # pull_request:
-    #     branches: [master]
-    #     paths: "packages/pluggableWidgets/*-native/**/*"
+    pull_request:
+        branches: [ master ]
 
 jobs:
     native_automated_tests_android:
@@ -31,47 +27,47 @@ jobs:
             #               !packages/theming/atlas/src/**/native/**
             #       env:
             #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            - name: "Checking-out code"
-              uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
-              with:
-                  submodules: false
-            - name: "Fetching master to compare"
-              if:
-                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name !=
-                  github.repository
-              run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
-                  }}:refs/remotes/origin/${{ github.base_ref }}
+            -   name: "Checking-out code"
+                uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2
+                with:
+                    submodules: false
+            -   name: "Fetching master to compare"
+                if:
+                    github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name !=
+                    github.repository
+                run:
+                    git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                    }}:refs/remotes/origin/${{ github.base_ref }}
             # - name: "Defining environment variables"
             #   id: variables
             #   run:
             #       echo ::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{
             #       github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo
             #       ''; fi)
-            - name: "Defining cache"
-              uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
-              env:
-                  cache-name: cache-node-modules
-              with:
-                  path: ~/.npm
-                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
-            - name: "Defining node version"
-              uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
-              with:
-                  node-version-file: ".nvmrc"
-            - name: "Installing dependencies"
-              run: npm install
-            - name: Login to GitHub Container Registry
-              if:
-                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
-                  github.repository
-              uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
-              with:
-                  registry: ghcr.io
-                  username: ${{ github.actor }}
-                  password: ${{ secrets.GITHUB_TOKEN }}
-            - name: "Start Mendix Environment and run tests"
-              run: npm run start:native-tests-ci
+            -   name: "Defining cache"
+                uses: actions/cache@937d24475381cd9c75ae6db12cb4e79714b926ed # v2
+                env:
+                    cache-name: cache-node-modules
+                with:
+                    path: ~/.npm
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+            -   name: "Defining node version"
+                uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561 # v2
+                with:
+                    node-version-file: ".nvmrc"
+            -   name: "Installing dependencies"
+                run: npm install
+            -   name: Login to GitHub Container Registry
+                if:
+                    github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                    github.repository
+                uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
+                with:
+                    registry: ghcr.io
+                    username: ${{ github.actor }}
+                    password: ${{ secrets.GITHUB_TOKEN }}
+            -   name: "Start Mendix Environment and run tests"
+                run: npm run start:native-tests-ci
             # - name: "Executing E2E tests"
             #   if:
             #       github.event_name == 'push' || (github.event_name == 'pull_request' &&
@@ -86,11 +82,11 @@ jobs:
             #   run: |
             #       sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
             #       sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
-            - name: "Archive test screenshot diff results"
-              uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
-              if: failure()
-              with:
-                  name: test-screenshot-results
-                  path: |
-                      ${{ github.workspace }}/packages/**/e2e/images/diffs/**/*.png
-                  if-no-files-found: error
+            -   name: "Archive test screenshot diff results"
+                uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
+                if: failure()
+                with:
+                    name: test-screenshot-results
+                    path: |
+                        ${{ github.workspace }}/packages/**/e2e/images/diffs/**/*.png
+                    if-no-files-found: error
