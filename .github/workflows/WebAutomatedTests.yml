@@ -16,10 +16,10 @@ jobs:
               id: files
               uses: softprops/diffset@v1
               with:
-                global_files: |
-                  !packages/**/*
+                  global_files: |
+                      !packages/**/*
               env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - name: "Checking-out code"
               uses: actions/checkout@v2
               with:
@@ -27,22 +27,25 @@ jobs:
             - name: "Fetching master to compare"
               if: github.event_name == 'pull_request' && steps.files.outputs.global_files == ''
               run:
-                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref }}:refs/remotes/origin/${{ github.base_ref }}
+                  git fetch --no-tags --prune --depth=1 origin +refs/heads/${{ github.base_ref
+                  }}:refs/remotes/origin/${{ github.base_ref }}
             - name: "Defining environment variables"
               id: variables
               run:
-                  echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{ github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo ''; fi)"
+                  echo "::set-output name=arg::$(if [ "${{ steps.files.outputs.global_files }}" = "" ] && ${{
+                  github.event_name == 'pull_request' }}; then echo '--since origin/${{ github.base_ref }}'; else echo
+                  ''; fi)"
             - name: "Defining cache"
               uses: actions/cache@v2
               env:
                   cache-name: cache-node-modules
               with:
                   path: ~/.npm
-                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                  key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
             - name: "Defining node version"
               uses: actions/setup-node@v2
               with:
-                  node-version-file: '.nvmrc'
+                  node-version-file: ".nvmrc"
             - name: "Installing dependencies"
               run: npm install
             - name: "Building package in production mode"
@@ -59,5 +62,7 @@ jobs:
               if: failure()
               with:
                   name: test-screenshot-results
-                  path: ${{ github.workspace}}/packages/{pluggableWidgets|theming}/**/tests/e2e/screenshot-results/diff/*.png
+                  path:
+                      ${{
+                      github.workspace}}/packages/{pluggableWidgets|theming}/**/tests/e2e/screenshot-results/diff/*.png
                   if-no-files-found: error
