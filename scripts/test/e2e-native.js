@@ -6,7 +6,6 @@ const { pipeline } = require("stream");
 const { promisify } = require("util");
 const { createWriteStream } = require("fs");
 const { tmpdir } = require("os");
-const nodeIp = require("ip");
 
 main().catch(e => {
     console.error(e);
@@ -27,7 +26,7 @@ async function main() {
     mv(`${testsDir}/Native-Mobile-Resources-main`, testProjectDir);
     rm("-f", testArchivePath);
 
-    const output = execSync("npx lerna list --json --since origin/master --loglevel silent --scope '*-native'", {
+    const output = execSync("npx lerna list --json --since origin/master --scope '*-native'", {
         stdio: "inherit"
     });
     const packages = JSON.parse(output);
