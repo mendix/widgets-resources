@@ -6,20 +6,20 @@
 .controlgroup {
     .btn,
     .btn-group {
-        margin-right: $spacing-small;
+        margin-inline-end: $spacing-small;
         margin-bottom: $spacing-small;
 
         &:last-child {
-            margin-right: 0;
+            margin-inline-end: 0;
         }
         .btn {
-            margin-right: 0;
+            margin-inline-end: 0;
             margin-bottom: 0;
         }
     }
     .btn-group {
         .btn + .btn {
-            margin-left: -1px;
+            margin-inline-start: -1px;
         }
     }
 }

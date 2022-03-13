@@ -42,12 +42,15 @@
 
         .mx-listview-loadMore {
             position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
+            inset-block-start: 0;
+            inset-inline-end: 0;
+            inset-inline-start: 0;
             display: block;
             width: 50%;
-            margin: 15px auto;
+            margin-block-start: 15px;
+            margin-block-end: 15px;
+            margin-inline-start:auto ;
+            margin-inline-end: auto;
             color: #ffffff;
             background-color: $brand-primary;
             box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.05);
@@ -60,7 +63,10 @@
 }
 
 .chat-avatar {
-    margin: 0 20px 0 0;
+    margin-block-start: 0;
+    margin-inline-end: 20px;
+    margin-block-end: 0;
+    margin-inline-start: 0;
     border-radius: 50%;
 }
 
@@ -79,15 +85,15 @@
 
     &::after {
         position: absolute;
-        top: 10px;
-        right: 100%;
+        inset-block-start: 10px;
+        inset-inline-end: 100%;
         width: 0;
         height: 0;
         content: "";
         border: 10px solid transparent;
-        border-top: 0;
-        border-right-color: $bg-color;
-        border-left: 0;
+        border-block-start: 0;
+        border-inline-end-color: $bg-color;
+        border-inline-start: 0;
     }
 }
 
@@ -111,7 +117,7 @@
 
     .chat-textbox {
         flex: 1;
-        margin-right: $spacing-large;
+        margin-inline-end: $spacing-large;
         margin-bottom: 0;
 
         .form-control {
@@ -126,18 +132,21 @@
     justify-content: flex-end;
 
     .chat-avatar {
-        margin: 0 0 0 20px;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 20px;
+        margin-inline-end: 0;
     }
 
     .chat-message-balloon {
         background-color: $color-primary-lighter;
 
         &::after {
-            left: 100%;
+            inset-inline-start: 100%;
             border: 10px solid transparent;
-            border-top: 0;
-            border-right: 0;
-            border-left-color: $color-primary-lighter;
+            border-block-start: 0;
+            border-inline-end: 0;
+            border-inline-start-color: $color-primary-lighter;
         }
     }
 

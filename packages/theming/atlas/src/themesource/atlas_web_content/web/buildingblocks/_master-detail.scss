@@ -6,7 +6,7 @@
 .masterdetail {
     background: #fff;
     .masterdetail-master {
-        border-right: 1px solid $border-color-default;
+        border-inline-end: 1px solid $border-color-default;
     }
     .masterdetail-detail {
         padding: $spacing-large;
