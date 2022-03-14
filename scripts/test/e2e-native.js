@@ -1,7 +1,7 @@
 const { execSync } = require("child_process");
 const fetch = require("node-fetch");
 const { join } = require("path");
-const { cat, mkdir, rm, mv } = require("shelljs");
+const { cat, mkdir, rm, mv, cp } = require("shelljs");
 const { pipeline } = require("stream");
 const { promisify } = require("util");
 const { createWriteStream } = require("fs");
