@@ -53,7 +53,7 @@ describe("VideoPlayer", () => {
         fireEvent(component.getByTestId("video-player-test"), "load", { naturalSize: { width: 640, height: 360 } });
 
         expect(component.toJSON()).toMatchSnapshot();
-        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", aspectRatio: 16/9 });
+        expect(component.getByTestId("video-player-test").props.style).toEqual({ width: "100%", aspectRatio: 16 / 9 });
     });
 
     it("shows the loading indicator if the source changes", () => {
