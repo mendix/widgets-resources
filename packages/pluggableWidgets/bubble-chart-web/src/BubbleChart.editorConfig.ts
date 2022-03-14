@@ -1,13 +1,19 @@
 import {
+    ContainerProps,
     hideNestedPropertiesIn,
     hidePropertiesIn,
     hidePropertyIn,
+    ImageProps,
     Problem,
     Properties,
     StructurePreviewProps,
     transformGroupsIntoTabs
 } from "@mendix/piw-utils-internal";
 import { BubbleChartPreviewProps } from "../typings/BubbleChartProps";
+import BubbleChartLightSvg from "./assets/BubbleChart.light.svg";
+import BubbleChartDarkSvg from "./assets/BubbleChart.dark.svg";
+import BubbleChartLegendLightSvg from "./assets/BubbleChart-legend.light.svg";
+import BubbleChartLegendDarkSvg from "./assets/BubbleChart-legend.dark.svg";
 
 export function getProperties(
     values: BubbleChartPreviewProps,
@@ -61,8 +67,34 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(_values: BubbleChartPreviewProps): StructurePreviewProps | null {
-    return null;
+export function getPreview(values: BubbleChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const chartImage = {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? BubbleChartDarkSvg : BubbleChartLightSvg).replace("data:image/svg+xml,", "")
+        ),
+        width: 375
+    } as ImageProps;
+
+    const legendImage = {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? BubbleChartLegendDarkSvg : BubbleChartLegendLightSvg).replace("data:image/svg+xml,", "")
+        ),
+        width: 85
+    } as ImageProps;
+
+    const filler = {
+        type: "Container",
+        grow: 1,
+        children: []
+    } as ContainerProps;
+
+    return {
+        type: "RowLayout",
+        columnSize: "fixed",
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+    };
 }
 
 export function check(values: BubbleChartPreviewProps): Problem[] {
