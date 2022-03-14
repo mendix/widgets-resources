@@ -1,7 +1,7 @@
 {
   "name": "area-chart-web",
   "widgetName": "AreaChart",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "An area chart displays a solid color between the traces of a graph.",
   "copyright": "© Mendix Technology BV 2021. All rights reserved.",
   "license": "Apache-2.0",
