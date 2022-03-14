@@ -65,6 +65,10 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         if (props.showControls) {
             showControlsHandler();
         }
+
+        return ()=>{
+            clearTimeout(timeoutRef.current)
+        }
     }, [fullScreen, props.showControls, showControlsHandler]);
 
     const onVideoPressHandler = useCallback((): void => {

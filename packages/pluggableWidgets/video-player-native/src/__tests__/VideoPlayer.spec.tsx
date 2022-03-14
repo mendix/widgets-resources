@@ -24,7 +24,7 @@ describe("VideoPlayer", () => {
             autoStart: false,
             muted: false,
             loop: false,
-            showControls: true,
+            showControls: false,
             aspectRatio: false
         };
     });
@@ -43,7 +43,7 @@ describe("VideoPlayer", () => {
         expect(props.paused).toBe(true);
         expect(props.muted).toBe(false);
         expect(props.repeat).toBe(false);
-        expect(props.controls).toBe(true);
+        expect(props.controls).toBe(false);
         expect(props.style).toEqual({ height: 0 });
     });
 
@@ -87,22 +87,5 @@ describe("VideoPlayer", () => {
 
         expect(component.UNSAFE_getByType(Text).props.style).toEqual({ color: "white" });
         expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load");
-    });
-
-    describe("VideoPlayerAndroid", () => {
-        beforeAll(() => {
-            jest.mock("react-native/Libraries/Utilities/Platform", () => ({
-                OS: "android",
-                select: jest.fn(dict => dict.android)
-            }));
-        });
-        it("render video with controls", () => {
-            const component = render(<VideoPlayer {...defaultProps} />);
-            expect(component).toMatchSnapshot();
-        });
-        it("render video without controls if showControls is set to false", () => {
-            const component = render(<VideoPlayer {...defaultProps} showControls={false} />);
-            expect(component).toMatchSnapshot();
-        });
     });
 });
