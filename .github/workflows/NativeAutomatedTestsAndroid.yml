@@ -64,22 +64,24 @@ jobs:
                     registry: ghcr.io
                     username: ${{ github.actor }}
                     password: ${{ secrets.GITHUB_TOKEN }}
+            -   name: Setup Android SDK
+                uses: android-actions/setup-android@3404b45d4c43e74e30dcad1a47fb89a0573f5a7e
             -   name: "Start Mendix Environment and run tests"
                 run: npm run start:native-tests-ci
-            # - name: "Executing E2E tests"
-            #   if:
-            #       github.event_name == 'push' || (github.event_name == 'pull_request' &&
-            #       github.event.pull_request.head.repo.full_name != github.repository)
-            #   run: npm run test:e2e -- --since origin/${{ github.base_ref }}
-            # env:
-            #     FORKED:
-            #         github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
-            #         github.repository
-            # - name: "Fixing files permissions"
-            #   if: failure()
-            #   run: |
-            #       sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
-            #       sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
+                  # - name: "Executing E2E tests"
+                  #   if:
+                  #       github.event_name == 'push' || (github.event_name == 'pull_request' &&
+                  #       github.event.pull_request.head.repo.full_name != github.repository)
+                  #   run: npm run test:e2e -- --since origin/${{ github.base_ref }}
+                  # env:
+                  #     FORKED:
+                  #         github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
+                  #         github.repository
+                  # - name: "Fixing files permissions"
+                  #   if: failure()
+                #   run: |
+                #       sudo find ${{ github.workspace }}/packages/* -type d -exec chmod 755 {} \;
+                #       sudo find ${{ github.workspace }}/packages/* -type f -exec chmod 644 {} \;
             -   name: "Archive test screenshot diff results"
                 uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # v2
                 if: failure()
