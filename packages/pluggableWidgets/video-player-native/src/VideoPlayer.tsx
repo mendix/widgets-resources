@@ -1,20 +1,21 @@
-import {flattenStyles} from "@mendix/piw-native-utils-internal";
-import {createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState} from "react";
+import { flattenStyles } from "@mendix/piw-native-utils-internal";
+import { createElement, Fragment, ReactElement, useCallback, useEffect, useRef, useState } from "react";
 import {
     ActivityIndicator,
     Modal,
-    Platform, StatusBar,
+    Platform,
+    StatusBar,
     Text,
     TouchableOpacity,
     TouchableWithoutFeedback,
     View
 } from "react-native";
-import Video, {OnProgressData, VideoProperties} from "react-native-video";
+import Video, { OnProgressData, VideoProperties } from "react-native-video";
 import SystemNavigationBar from "react-native-system-navigation-bar";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import {VideoPlayerProps} from "../typings/VideoPlayerProps";
-import {defaultVideoStyle, VideoStyle} from "./ui/Styles";
-import {isAvailable} from "@mendix/piw-utils-internal";
+import { VideoPlayerProps } from "../typings/VideoPlayerProps";
+import { defaultVideoStyle, VideoStyle } from "./ui/Styles";
+import { isAvailable } from "@mendix/piw-utils-internal";
 import deepmerge from "deepmerge";
 
 const enum StatusEnum {
@@ -80,17 +81,17 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
 
     function fullScreenHandler(isFullScreen: boolean): void {
         setFullScreen(isFullScreen);
-        if(isFullScreen){
-            SystemNavigationBar.navigationHide()
+        if (isFullScreen) {
+            SystemNavigationBar.navigationHide();
         } else {
-            SystemNavigationBar.navigationShow()
+            SystemNavigationBar.navigationShow();
         }
-        StatusBar.setHidden(isFullScreen)
+        StatusBar.setHidden(isFullScreen);
     }
 
     const videoProps: VideoProperties = {
         testID: props.name,
-        source: {uri: isAvailable(props.videoUrl) ? props.videoUrl.value : undefined},
+        source: { uri: isAvailable(props.videoUrl) ? props.videoUrl.value : undefined },
         muted: props.muted,
         repeat: props.loop,
         controls: props.showControls,
@@ -98,7 +99,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
         onError: () => setStatus(StatusEnum.ERROR),
         useTextureView: false,
         resizeMode: props.aspectRatio ? "contain" : "stretch",
-        onProgress: ({currentTime}: OnProgressData) => currentTime && setCurrentPlayTime(currentTime)
+        onProgress: ({ currentTime }: OnProgressData) => currentTime && setCurrentPlayTime(currentTime)
     };
 
     const isAndroid = Platform.OS === "android";
@@ -107,10 +108,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
     return (
         <Fragment>
             {isAndroid && (
-                <Modal
-                    visible={fullScreen}
-                    onRequestClose={() => fullScreenHandler(false)}
-                >
+                <Modal visible={fullScreen} onRequestClose={() => fullScreenHandler(false)}>
                     <View style={styles.fullScreenVideoPlayer}>
                         <TouchableWithoutFeedback onPress={onVideoPressHandler} testID="fullscreen-overlay">
                             <Video
@@ -132,7 +130,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                                 onPress={() => fullScreenHandler(false)}
                                 testID="btn-fullscreen-exit"
                             >
-                                <Icon name="fullscreen-exit" color="white" size={22}/>
+                                <Icon name="fullscreen-exit" color="white" size={22} />
                             </TouchableOpacity>
                         )}
                         {status === StatusEnum.LOADING && (
@@ -147,7 +145,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                 </Modal>
             )}
             <View style={styles.container}>
-                {status === StatusEnum.LOADING && <ActivityIndicator color={styles.indicator.color} size="large"/>}
+                {status === StatusEnum.LOADING && <ActivityIndicator color={styles.indicator.color} size="large" />}
                 {errorText}
                 {!fullScreen && (
                     <TouchableWithoutFeedback style={styles.container} onPress={onVideoPressHandler}>
@@ -160,10 +158,13 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                                 playerRef.current?.seek(currentPlayTime);
                             }}
                             ref={playerRef}
-                            style={status !== StatusEnum.READY ? {height: 0} : {
-                                width: '100%',
-                                aspectRatio: videoAspectRatio && 16 / 9
-                            }
+                            style={
+                                status !== StatusEnum.READY
+                                    ? { height: 0 }
+                                    : {
+                                          width: "100%",
+                                          aspectRatio: videoAspectRatio && 16 / 9
+                                      }
                             }
                         />
                     </TouchableWithoutFeedback>
@@ -174,7 +175,7 @@ export function VideoPlayer(props: VideoPlayerProps<VideoStyle>): ReactElement {
                         style={styles.controlBtnContainerStyle}
                         testID="btn-fullscreen"
                     >
-                        <Icon name="fullscreen" color="white" size={22}/>
+                        <Icon name="fullscreen" color="white" size={22} />
                     </TouchableOpacity>
                 )}
             </View>
