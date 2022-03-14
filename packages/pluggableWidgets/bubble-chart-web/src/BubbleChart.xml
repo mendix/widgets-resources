@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<widget id="com.mendix.widget.custom.BubbleChart.BubbleChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="com.mendix.widget.custom.BubbleChart.BubbleChart" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../../../../node_modules/mendix/custom_widget.xsd" pluginWidget="true">
     <name>Bubble chart</name>
     <description>Create a bubble chart</description>
     <studioProCategory>Charts</studioProCategory>
@@ -15,7 +14,7 @@
                         <propertyGroup caption="General">
                             <property key="dataSet" type="enumeration" defaultValue="static">
                                 <caption>Data set</caption>
-                                <description/>
+                                <description />
                                 <enumerationValues>
                                     <enumerationValue key="static">Static</enumerationValue>
                                     <enumerationValue key="dynamic">Dynamic</enumerationValue>
@@ -33,14 +32,14 @@
                                 <caption>Group by</caption>
                                 <description>Data points within the same group form one line.</description>
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="Boolean"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="HashString"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Boolean" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="HashString" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
                                 </attributeTypes>
                             </property>
                             <property key="staticName" type="textTemplate" required="false" multiline="false">
@@ -53,54 +52,54 @@
                             </property>
                             <property key="staticXAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>X axis attribute</caption>
-                                <description/>
+                                <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
-                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicXAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>X axis attribute</caption>
-                                <description/>
+                                <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
-                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="staticYAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>Y axis attribute</caption>
-                                <description/>
+                                <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
-                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicYAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Y axis attribute</caption>
-                                <description/>
+                                <description />
                                 <attributeTypes>
-                                    <attributeType name="String"/>
-                                    <attributeType name="Enum"/>
-                                    <attributeType name="DateTime"/>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Integer"/>
-                                    <attributeType name="Long"/>
-                                    <attributeType name="AutoNumber"/>
+                                    <attributeType name="String" />
+                                    <attributeType name="Enum" />
+                                    <attributeType name="DateTime" />
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Integer" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="AutoNumber" />
                                 </attributeTypes>
                             </property>
                             <property key="aggregationType" type="enumeration" defaultValue="none">
@@ -121,74 +120,73 @@
                             </property>
                             <property key="customSeriesOptions" type="string" required="false" multiline="true">
                                 <caption>Custom series options</caption>
-                                <description/>
+                                <description />
                             </property>
 
                             <property key="staticSizeAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>Bubble size attribute</caption>
                                 <description>The value determines the bubble size</description>
                                 <attributeTypes>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Long"/>
-                                    <attributeType name="Integer"/>
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="Integer" />
                                 </attributeTypes>
                             </property>
                             <property key="dynamicSizeAttribute" type="attribute" required="false" dataSource="dynamicDataSource">
                                 <caption>Bubble size attribute</caption>
                                 <description>The value determines the bubble size</description>
                                 <attributeTypes>
-                                    <attributeType name="Decimal"/>
-                                    <attributeType name="Long"/>
-                                    <attributeType name="Integer"/>
+                                    <attributeType name="Decimal" />
+                                    <attributeType name="Long" />
+                                    <attributeType name="Integer" />
                                 </attributeTypes>
                             </property>
                             <property key="autosize" type="boolean" defaultValue="true">
                                 <caption>Auto scale</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="sizeref" type="integer" defaultValue="10">
                                 <caption>Scale factor</caption>
-                                <description>When “Auto scale” is set to false, use the scale factor to determine the rendered size of the bubble, it will multiply the value of “bubble size” by this factor.
-                                </description>
+                                <description>When “Auto scale” is set to false, use the scale factor to determine the rendered size of the bubble, it will multiply the value of “bubble size” by this factor.</description>
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
                             <property key="markerColor" type="textTemplate" required="false" multiline="false">
                                 <caption>Marker color</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                         <propertyGroup caption="Events">
                             <property key="onClickAction" type="action" required="false">
                                 <caption>On click action</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
                                 <caption>Tooltip hover text</caption>
-                                <description/>
+                                <description />
                             </property>
                             <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
                                 <caption>Tooltip hover text</caption>
-                                <description/>
+                                <description />
                             </property>
                         </propertyGroup>
                     </properties>
                 </property>
                 <property key="showLegend" type="boolean" defaultValue="true">
                     <caption>Show legend</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>X axis label</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="yAxisLabel" type="textTemplate" required="false" multiline="false">
                     <caption>Y axis label</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="developerMode" type="enumeration" defaultValue="basic">
                     <caption>Mode</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="basic">Basic</enumerationValue>
                         <enumerationValue key="advanced">Advanced</enumerationValue>
@@ -197,9 +195,8 @@
                 </property>
             </propertyGroup>
             <propertyGroup caption="Common">
-                <systemProperty key="Name"/>
-                <systemProperty key="Visibility"/>
-                <systemProperty key="TabIndex"/>
+                <systemProperty key="Name" />
+                <systemProperty key="TabIndex" />
             </propertyGroup>
         </propertyGroup>
         <propertyGroup caption="Dimensions">
@@ -214,11 +211,11 @@
                 </property>
                 <property key="width" type="integer" defaultValue="100">
                     <caption>Width</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="heightUnit" type="enumeration" defaultValue="percentageOfWidth">
                     <caption>Height unit</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="percentageOfWidth">Percentage of width</enumerationValue>
                         <enumerationValue key="pixels">Pixels</enumerationValue>
@@ -227,7 +224,7 @@
                 </property>
                 <property key="height" type="integer" defaultValue="75">
                     <caption>Height</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
@@ -235,7 +232,7 @@
             <propertyGroup caption="Theme">
                 <property key="gridLines" type="enumeration" defaultValue="none">
                     <caption>Grid lines</caption>
-                    <description/>
+                    <description />
                     <enumerationValues>
                         <enumerationValue key="none">None</enumerationValue>
                         <enumerationValue key="horizontal">Horizontal</enumerationValue>
@@ -245,15 +242,15 @@
                 </property>
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customLayout" type="string" required="false" multiline="true">
                     <caption>Custom layout</caption>
-                    <description/>
+                    <description />
                 </property>
                 <property key="customConfigurations" type="string" required="false" multiline="true">
                     <caption>Custom configurations</caption>
-                    <description/>
+                    <description />
                 </property>
             </propertyGroup>
         </propertyGroup>
