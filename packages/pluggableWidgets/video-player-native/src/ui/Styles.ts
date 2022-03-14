@@ -1,5 +1,5 @@
 import { Style } from "@mendix/piw-native-utils-internal";
-import {TextStyle, ViewStyle} from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 
 export interface VideoStyle extends Style {
     container: ViewStyle;
@@ -10,7 +10,7 @@ export interface VideoStyle extends Style {
     errorMessage: TextStyle;
     fullScreenVideoPlayer: ViewStyle;
     controlBtnContainerStyle: ViewStyle;
-    fullScreenVideoStyle:  ViewStyle;
+    fullScreenVideoStyle: ViewStyle;
     fullScreenActivityIndicatorStyle: ViewStyle;
 }
 
@@ -18,7 +18,7 @@ export const defaultVideoStyle: VideoStyle = {
     container: {
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "black",
+        backgroundColor: "black"
     },
     indicator: {
         color: "white"
@@ -54,4 +54,3 @@ export const defaultVideoStyle: VideoStyle = {
         alignSelf: "center"
     }
 };
-
