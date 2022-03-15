@@ -1,17 +1,18 @@
 import { join, relative } from "path";
 import { JSAction } from "./jsAction";
-import { withGlob } from "./util";
+import { withGlob } from "../util";
 import { z } from "zod";
-import { JsonExtractor } from "./parsers/JsonExtractor";
+import { JsonExtractor } from "../parsers/JsonExtractor";
+import { JSActionPackageSchema } from "../../schema";
 
 export class JSActionPackage {
     constructor(private properties: { name: string; version: string; jsActions: JSAction[] }) {}
 
-    export(): object {
+    export(): z.infer<typeof JSActionPackageSchema> {
         return {
             name: this.properties.name,
             version: this.properties.version,
-            jsActions: this.properties.jsActions.map(widget => widget.export())
+            items: this.properties.jsActions.map(widget => widget.export())
         };
     }
 
@@ -21,7 +22,9 @@ export class JSActionPackage {
             version: json => json.version
         });
 
-        const jsActionPaths = await withGlob(`${packagePath}/src/**/*.{js,ts}`, matches => matches);
+        const jsActionPaths = await withGlob(`${packagePath}/src/**/*.{js,ts}`, matches =>
+            matches.filter(match => !match.includes(".d."))
+        );
         const jsActions = await Promise.all(
             jsActionPaths.map(
                 async jsActionPath => await JSAction.load(packagePath, relative(packagePath, jsActionPath))

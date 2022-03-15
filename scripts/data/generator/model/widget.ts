@@ -1,26 +1,34 @@
-import { basename, extname, join } from "path";
-import { Analyzer } from "./analyzer";
-import { XmlExtractor } from "./parsers/XmlExtractor";
-import { firstWithGlob, isEnumValue } from "./util";
+import { basename, extname, join, relative } from "path";
+import { promises as fs } from "fs";
+import { Analyzer } from "../analyzer";
+import { XmlExtractor } from "../parsers/XmlExtractor";
+import { firstWithGlob, isEnumValue, withGlob } from "../util";
 import { XMLParser } from "fast-xml-parser";
 import { z } from "zod";
+import { WidgetSchema } from "../../schema";
+import { SupportedPlatform } from "../../supportedPlatform";
 
-enum SupportedPlatform {
-    WEB = "web",
-    NATIVE = "native",
-    BOTH = "both"
-}
+type Icon = {
+    name: string;
+    path: string;
+    image: string;
+};
 
-interface Icons {
-    icon: string | undefined;
-    iconDark: string | undefined;
-    tile: string | undefined;
-    tileDark: string | undefined;
-}
+type Icons = {
+    icon?: Icon;
+    iconDark?: Icon;
+    tile?: Icon;
+    tileDark?: Icon;
+};
 
 interface Config {
     editorConfig: string | undefined;
     editorPreview: string | undefined;
+}
+
+interface Tests {
+    hasUnitTests: boolean;
+    hasE2ETests: boolean;
 }
 
 export class Widget {
@@ -37,19 +45,30 @@ export class Widget {
             supportedPlatform: SupportedPlatform;
             config: Config;
             icons: Icons;
+            tests: Tests;
         }
     ) {}
 
-    export(analyzer: Analyzer): object {
-        const { config, icons, ...other } = this.properties;
+    export(analyzer: Analyzer): z.infer<typeof WidgetSchema> {
+        const { isPluginWidget, config, icons, ...other } = this.properties;
 
         return {
             ...other,
-            hasStructureModePreview: this.hasStructureModePreview(analyzer),
-            ...(other.supportedPlatform === "web" ? { hasDesignModePreview: this.hasDesignModePreview(analyzer) } : {}),
-            hasAllTileIcons: this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
-            hasAllDarkIcons:
-                this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined
+            requirements: {
+                isPluginWidget,
+                hasStructureModePreview: this.hasStructureModePreview(analyzer),
+                ...(other.supportedPlatform === "web"
+                    ? { hasDesignModePreview: this.hasDesignModePreview(analyzer) }
+                    : {}),
+                hasAllTileIcons:
+                    this.properties.icons.tile !== undefined && this.properties.icons.tileDark !== undefined,
+                hasAllDarkIcons:
+                    this.properties.icons.iconDark !== undefined && this.properties.icons.tileDark !== undefined
+            },
+            icons: Object.entries(icons).reduce(
+                (result, [key, icon]) => (icon ? { ...result, [key]: { name: icon.name, image: icon.image } } : result),
+                {}
+            )
         };
     }
 
@@ -91,6 +110,15 @@ export class Widget {
             throw new UnsupportedPlatformError(packagePath, supportedPlatform);
         }
 
+        const hasUnitTests = await withGlob(
+            `${packagePath}/src/**/__tests__/**/*.spec.{js,jsx,ts,tsx}`,
+            matches => matches.length > 0
+        );
+        const hasE2ETests = await withGlob(
+            `${packagePath}/tests/**/*.spec.{js,jsx,ts,tsx}`,
+            matches => matches.length > 0
+        );
+
         return new Widget({
             ...widgetXmlValues,
             supportedPlatform,
@@ -99,12 +127,33 @@ export class Widget {
                 editorPreview: await firstWithGlob(`${packagePath}/src/${internalName}.editorPreview.{js,jsx,ts,tsx}`)
             },
             icons: {
-                icon: await firstWithGlob(`${packagePath}/src/${internalName}.icon.png`),
-                iconDark: await firstWithGlob(`${packagePath}/src/${internalName}.icon.dark.png`),
-                tile: await firstWithGlob(`${packagePath}/src/${internalName}.tile.png`),
-                tileDark: await firstWithGlob(`${packagePath}/src/${internalName}.tile.dark.png`)
+                icon: await this.loadIcon(packagePath, internalName, "icon", false),
+                iconDark: await this.loadIcon(packagePath, internalName, "icon", true),
+                tile: await this.loadIcon(packagePath, internalName, "tile", false),
+                tileDark: await this.loadIcon(packagePath, internalName, "tile", true)
+            },
+            tests: {
+                hasUnitTests,
+                hasE2ETests
             }
         });
+    }
+
+    private static async loadIcon(
+        packagePath: string,
+        widgetName: string,
+        type: "icon" | "tile",
+        dark: boolean
+    ): Promise<Icon | undefined> {
+        const name = `${widgetName}.${type}${dark ? ".dark" : ""}`;
+        const path = await firstWithGlob(`${packagePath}/src/${name}.png`);
+        return path
+            ? {
+                  name,
+                  path: relative(packagePath, path),
+                  image: await fs.readFile(path, { encoding: "base64" })
+              }
+            : undefined;
     }
 
     private static widgetXmlExtractor = new XmlExtractor(

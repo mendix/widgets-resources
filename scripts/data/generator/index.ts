@@ -1,21 +1,28 @@
 import { resolve } from "path";
 import { promisify } from "util";
 import { exec } from "child_process";
-import { Analyzer } from "./lib/analyzer";
-import { isDefined, writeFile } from "./lib/util";
-import { WidgetPackage } from "./lib/widgetPackage";
-import { JSActionPackage } from "./lib/jsActionPackage";
+import { Analyzer } from "./analyzer";
+import { isDefined, writeFile } from "./util";
+import { WidgetPackage } from "./model/widgetPackage";
+import { JSActionPackage } from "./model/jsActionPackage";
+import { OutputSchema } from "../schema";
+import { z } from "zod";
 
 const execAsync = promisify(exec);
 
-const OUTPUT_PATH = resolve(__dirname, "../../data/content.json");
+const WORKING_DIR = resolve(__dirname, "../../../");
+const OUTPUT_PATH = resolve(WORKING_DIR, "data/content.json");
 
-main().catch(e => {
-    console.error(e);
-    process.exit(1);
-});
+generateData()
+    .then(data => writeFile(OUTPUT_PATH, JSON.stringify(data, null, "\t")))
+    .catch(e => {
+        console.error(e);
+        process.exit(1);
+    });
 
-async function main(): Promise<void> {
+export async function generateData(): Promise<z.infer<typeof OutputSchema>> {
+    process.chdir(WORKING_DIR);
+
     const widgetSourceFiles: string[] = [];
 
     const widgetLocations = await getLernaPackages(/(pluggable|custom)Widgets/);
@@ -32,16 +39,16 @@ async function main(): Promise<void> {
     const jsActionLocation = await getLernaPackages(/jsActions/);
     const jsActionPackages = await Promise.all(jsActionLocation.map(packagePath => JSActionPackage.load(packagePath)));
 
-    const output = {
+    const output: z.infer<typeof OutputSchema> = {
         widgetPackages: widgetPackages.map(widgetPackage => widgetPackage.export(analyzer)),
         jsActionPackages: jsActionPackages.map(jsActionPackage => jsActionPackage.export())
     };
 
-    await writeFile(OUTPUT_PATH, JSON.stringify(output, null, "\t"));
+    return OutputSchema.parse(output);
 }
 
 async function getLernaPackages(filter?: RegExp): Promise<string[]> {
     const { stdout: lernaPackages } = await execAsync("npx lerna ls --json --all");
-    const locations: string[] = JSON.parse(lernaPackages.trim()).map(lernaPackage => lernaPackage.location);
+    const locations: string[] = JSON.parse(lernaPackages.trim()).map((lernaPackage: any) => lernaPackage.location);
     return locations.filter(location => (filter ? location.match(filter) : location));
 }

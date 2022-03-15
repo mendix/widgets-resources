@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import { dirname } from "path";
-import glob from "glob";
+import { glob } from "glob";
 
 export async function writeFile(path: string, content: string): Promise<void> {
     const dir = dirname(path);

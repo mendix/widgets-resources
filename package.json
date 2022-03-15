@@ -43,7 +43,10 @@
     "setup-mobile": "npm run setup-android && npm run setup-ios",
     "setup-android": "node ./detox/scripts/setup-android.js",
     "setup-ios": "node ./detox/scripts/setup-ios.js",
-    "update:content-overview": "ts-node --project ./scripts/tsconfig.json scripts/data/updateContentOverview.ts"
+    "content-overview:data": "lerna run generate-data --scope data",
+    "content-overview:site:build": "lerna run build --scope data",
+    "content-overview:site:export": "lerna run export --scope data"
+
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
