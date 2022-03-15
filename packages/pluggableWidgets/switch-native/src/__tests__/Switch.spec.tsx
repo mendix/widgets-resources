@@ -122,7 +122,7 @@ describe("Switch", () => {
         const props = createProps();
 
         switchWrapper = mount(<Switch {...props} />);
-        expect(getSwitchComponent().props()).toEqual(expect.objectContaining({ ios_backgroundColor: undefined }));
+        expect(getSwitchComponent().props()).toEqual(expect.objectContaining({ ios_backgroundColor: "#CED0D3" }));
     });
 
     it("with android device renders property", () => {

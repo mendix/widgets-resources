@@ -40,13 +40,25 @@ export const defaultSwitchStyle: SwitchStyle = {
     },
     input: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
-        marginRight: Platform.select({ android: -3 })
+        marginRight: Platform.select({ android: -3 }),
+        thumbColorOn: "#F3F5FF",
+        trackColorOn: "#264AE5",
+        thumbColorOff: "#FFF",
+        trackColorOff: "#CED0D3"
     },
     inputDisabled: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
+        thumbColorOn: "#F8F8F8",
+        trackColorOn: "#9DA1A8",
+        thumbColorOff: "#F8F8F8",
+        trackColorOff: "#CED0D3"
     },
     inputError: {
         // thumbColorOn, thumbColorOff, trackColorOn, trackColorOff and all TextStyle properties are allowed
+        thumbColorOn: "#F3F5FF",
+        trackColorOn: "#E33F4E",
+        thumbColorOff: "#FFF",
+        trackColorOff: "#E33F4E"
     },
     validationMessage: {
         // All TextStyle properties are allowed
