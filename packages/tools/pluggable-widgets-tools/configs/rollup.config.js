@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync } from "fs";
+import { existsSync, mkdirSync, open, writeFile, close } from "fs";
 import { join, relative } from "path";
 import alias from "@rollup/plugin-alias";
 import { getBabelInputPlugin, getBabelOutputPlugin } from "@rollup/plugin-babel";
@@ -18,9 +18,12 @@ import license from "rollup-plugin-license";
 import livereload from "rollup-plugin-livereload";
 import postcss from "rollup-plugin-postcss";
 import { terser } from "rollup-plugin-terser";
-import { cp } from "shelljs";
+import { cp, mkdir } from "shelljs";
 import { zip } from "zip-a-folder";
 import { widgetTyping } from "./rollup-plugin-widget-typing";
+import mime from "mime-types";
+import crypto from "crypto";
+
 import {
     editorConfigEntry,
     isTypescript,
@@ -34,7 +37,10 @@ import {
 } from "./shared";
 
 const outDir = join(sourcePath, "/dist/tmp/widgets/");
-const outWidgetFile = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase(), `${widgetName}`);
+const outPackageDir = join(widgetPackage.replace(/\./g, "/"), widgetName.toLowerCase());
+const absoluteOutPackageDir = join(outDir, outPackageDir);
+const outWidgetFile = join(outPackageDir, `${widgetName}`);
+
 const mpkDir = join(sourcePath, "dist", widgetVersion);
 const mpkFile = join(mpkDir, process.env.MPKOUTPUT ? process.env.MPKOUTPUT : `${widgetPackage}.${widgetName}.mpk`);
 
@@ -45,6 +51,37 @@ export default async args => {
     }
 
     const result = [];
+
+    console.log(absoluteOutPackageDir);
+
+    function custom(asset, _dir, { assetsPath }) {
+        const { url } = asset;
+        if (url.startsWith("data:")) {
+            const [, mimeType, data] = url.match(/data:([^;]*).*;base64,(.*)/);
+            let extension = mime.extension(mimeType);
+            // Only add extension if we mimeType has associated extension
+            extension = extension ? `.${extension}` : "";
+            const fileHash = crypto.createHash("md5").update(data).digest("hex");
+            const filename = `${fileHash}${extension}`;
+            const filePath = join(absoluteOutPackageDir, filename);
+
+            mkdir("-p", absoluteOutPackageDir);
+
+            writeFile(filePath, data, "base64", err => {
+                if (err) {
+                    if (err.code === "EEXIST") {
+                        return;
+                    }
+
+                    throw err;
+                }
+            });
+            console.log(mimeType, filename);
+            return `/${filename}`;
+        }
+
+        return asset.url;
+    }
 
     ["amd", "es"].forEach(outputFormat => {
         result.push({
@@ -63,7 +100,11 @@ export default async args => {
                     extract: production && outputFormat === "amd",
                     inject: !production,
                     minimize: production,
-                    plugins: [postcssImport(), postcssUrl({ url: "inline" })],
+                    plugins: [
+                        postcssImport(),
+                        postcssUrl({ url: "copy", assetsPath: absoluteOutPackageDir }),
+                        postcssUrl({ url: custom, assetsPath: absoluteOutPackageDir })
+                    ],
                     sourceMap: !production ? "inline" : false,
                     use: ["sass"]
                 }),
