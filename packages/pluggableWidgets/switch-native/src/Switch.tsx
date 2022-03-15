@@ -53,7 +53,7 @@ export function Switch(props: Props): ReactElement {
                 <SwitchComponent
                     disabled={!editable}
                     testID={name}
-                    style={inputStyle}
+                    style={{ ...inputStyle, backgroundColor: undefined }} // Adding default background color to fix bug in RN. TODO: Undo change with RN 0.68
                     onValueChange={editable ? onChangeCallback : undefined}
                     value={booleanAttribute.value}
                     trackColor={{
