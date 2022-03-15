@@ -118,17 +118,17 @@ async function main() {
             throw new Error("Metro bundler did not start in time...");
         }
         console.log("Metro started.");
-        // console.log("Preheating bundler for Android dev=false minify=true");
 
-        // await Promise.race([
-        //     fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
-        //     new Promise((_, reject) =>
-        //         setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000)
-        //     )
-        // ]);
-        // console.log("Preheating done!");
+        console.log("Preheating bundler for Android dev=false minify=true");
+        await Promise.race([
+            fetch("http://localhost:8083/index.bundle?platform=android&dev=false&minify=true"),
+            new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("Preheating call timed out!")), 10 * 60 * 1000)
+            )
+        ]);
+        console.log("Preheating done!");
 
-        // Spin up the runtime and run testProject
+        // Spin up the runtime and run the testProject
         runtimeContainerId = execSync(
             `docker run -td -v ${root}:/source -v ${scriptsPath}:/shared:ro -w /source -p 8080:8080 ` +
                 `-e MENDIX_VERSION=${mendixVersion} --entrypoint /bin/bash ` +
@@ -150,6 +150,9 @@ async function main() {
         // execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{${changedPackages},}'`);
         execSync(`npx lerna run test:e2e:local:android --stream --concurrency 1 --scope '{bar-chart-native,}'`);
     } catch (e) {
+        execSync(`cat /Users/runner/work/widgets-resources/tests/testProject/deployment/log/native_packager_log.txt`, {
+            stdio: "inherit"
+        });
         try {
             execSync(`docker logs ${mxbuildContainerId}`, { stdio: "inherit" });
             execSync(
