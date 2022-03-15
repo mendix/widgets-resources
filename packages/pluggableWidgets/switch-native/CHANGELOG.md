@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- We fixed the `Illegal Cast Exception` issue caused by React Native 0.66 upgrade.
+- We added default thumb and track color.
+
 ## [1.0.0] - 2022-1-24
 
 ### Added
