@@ -1,4 +1,84 @@
-import { changePropertyIn, hidePropertiesIn, hidePropertyIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import {
+    StructurePreviewProps,
+    ContainerProps,
+    changePropertyIn,
+    hidePropertiesIn,
+    hidePropertyIn,
+    Problem,
+    Properties
+} from "@mendix/piw-utils-internal";
+
+import { BottomSheetPreviewProps } from "../typings/BottomSheetProps";
+
+export function getPreview(values: BottomSheetPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    const content: ContainerProps = {
+        type: "Container",
+        children: []
+    };
+
+    if (values.type === "modal") {
+        if (values.modalRendering === "custom") {
+            content.children = [
+                {
+                    type: "DropZone",
+                    property: values.largeContent as object,
+                    placeholder: "Content"
+                }
+            ];
+        }
+    } else {
+        content.children = [
+            {
+                type: "DropZone",
+                property: values.smallContent as object,
+                placeholder: "Always visible"
+            },
+            {
+                type: "DropZone",
+                property: values.largeContent as object,
+                placeholder: "Visible on first drag"
+            }
+        ];
+
+        if (values.showFullscreenContent) {
+            content.children = [
+                ...content.children,
+                {
+                    type: "DropZone",
+                    property: values.fullscreenContent as object,
+                    placeholder: "Visible on drag to top of screen"
+                }
+            ];
+        }
+    }
+
+    return {
+        type: "Container",
+        borders: true,
+        children: [
+            {
+                type: "Container",
+                borders: false,
+                backgroundColor: isDarkMode ? "#454545" : "#F5F5F5",
+                children: [
+                    {
+                        type: "Container",
+                        borders: false,
+                        padding: 4,
+                        children: [
+                            {
+                                type: "Text",
+                                fontColor: isDarkMode ? "#DEDEDE" : "#0A1324",
+                                content: "Bottom Sheet"
+                            }
+                        ]
+                    }
+                ]
+            },
+            content
+        ]
+    };
+}
 
 export function getProperties(values: any, defaultProperties: Properties): Properties {
     if (values.type === "modal") {
