@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DocumentViewer renders correctly the structure 1`] = `
+<div
+  className="mx-document-viewer"
+>
+  <object
+    data="http://localhost/sample.pdf"
+    type="application/pdf"
+  >
+    <p>
+      We having issues with preview of the current file. Please download the file to view it: 
+      <a
+        href="http://localhost/sample.pdf"
+      >
+        Download
+      </a>
+    </p>
+  </object>
+</div>
+`;
