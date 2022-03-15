@@ -54,11 +54,8 @@ jobs:
               with:
                   node-version-file: ".nvmrc"
             - name: Install docker
-              run: brew install docker && open --hide --background -a Docker
+              uses: docker-practice/actions-setup-docker@51fd5009666ea5e3382fe125abf5d73d31386b59
             - name: Login to GitHub Container Registry
-              if:
-                  github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name ==
-                  github.repository
               uses: docker/login-action@42d299face0c5c43a0487c477f595ac9cf22f1a7 # v1.12.0
               with:
                   registry: ghcr.io
