@@ -6,7 +6,7 @@
     <studioCategory>Charts</studioCategory>
     <properties>
         <propertyGroup caption="General">
-            <propertyGroup caption="General">
+            <propertyGroup caption="Data source">
                 <property key="lines" type="object" isList="true">
                     <caption>Data source</caption>
                     <description>Add one or more lines. The order influences how lines overlay one another: the first line (from the top) is drawn lowest and other lines are drawn on top of it.</description>
@@ -16,8 +16,8 @@
                                 <caption>Data set</caption>
                                 <description />
                                 <enumerationValues>
-                                    <enumerationValue key="static">Static</enumerationValue>
-                                    <enumerationValue key="dynamic">Dynamic</enumerationValue>
+                                    <enumerationValue key="static">Single series</enumerationValue>
+                                    <enumerationValue key="dynamic">Multiple series</enumerationValue>
                                 </enumerationValues>
                             </property>
                             <property key="staticDataSource" type="datasource" required="false" isList="true">
@@ -103,7 +103,7 @@
                                 </attributeTypes>
                             </property>
                             <property key="aggregationType" type="enumeration" defaultValue="none">
-                                <caption>Aggregation type</caption>
+                                <caption>Aggregation function</caption>
                                 <description>Defines how data is aggregated when multiple Y values are available for a single X value</description>
                                 <enumerationValues>
                                     <enumerationValue key="none">None</enumerationValue>
@@ -118,11 +118,6 @@
                                     <enumerationValue key="last">Last</enumerationValue>
                                 </enumerationValues>
                             </property>
-                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
-                                <caption>Custom series options</caption>
-                                <description />
-                            </property>
-
                             <property key="staticSizeAttribute" type="attribute" required="false" dataSource="staticDataSource">
                                 <caption>Bubble size attribute</caption>
                                 <description>The value determines the bubble size</description>
@@ -149,6 +144,14 @@
                                 <caption>Scale factor</caption>
                                 <description>When “Auto scale” is set to false, use the scale factor to determine the rendered size of the bubble, it will multiply the value of “bubble size” by this factor.</description>
                             </property>
+                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
+                                <caption>Tooltip hover text</caption>
+                                <description />
+                            </property>
+                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
+                                <caption>Tooltip hover text</caption>
+                                <description />
+                            </property>
                         </propertyGroup>
                         <propertyGroup caption="Appearance">
                             <property key="markerColor" type="textTemplate" required="false" multiline="false">
@@ -161,19 +164,23 @@
                                 <caption>On click action</caption>
                                 <description />
                             </property>
-                            <property key="staticTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="staticDataSource">
-                                <caption>Tooltip hover text</caption>
-                                <description />
-                            </property>
-                            <property key="dynamicTooltipHoverText" type="textTemplate" required="false" multiline="false" dataSource="dynamicDataSource">
-                                <caption>Tooltip hover text</caption>
+                        </propertyGroup>
+                        <propertyGroup caption="Advanced">
+                            <property key="customSeriesOptions" type="string" required="false" multiline="true">
+                                <caption>Custom series options</caption>
                                 <description />
                             </property>
                         </propertyGroup>
                     </properties>
                 </property>
-                <property key="showLegend" type="boolean" defaultValue="true">
-                    <caption>Show legend</caption>
+            </propertyGroup>
+            <propertyGroup caption="General">
+                <property key="enableAdvancedOptions" type="boolean" defaultValue="false">
+                    <caption>Enable advanced options</caption>
+                    <description />
+                </property>
+                <property key="enableDeveloperMode" type="boolean" defaultValue="false">
+                    <caption>Enable developer mode</caption>
                     <description />
                 </property>
                 <property key="xAxisLabel" type="textTemplate" required="false" multiline="false">
@@ -184,15 +191,23 @@
                     <caption>Y axis label</caption>
                     <description />
                 </property>
-                <property key="developerMode" type="enumeration" defaultValue="basic">
-                    <caption>Mode</caption>
+                <property key="showLegend" type="boolean" defaultValue="true">
+                    <caption>Show legend</caption>
+                    <description />
+                </property>
+                <property key="gridLines" type="enumeration" defaultValue="none">
+                    <caption>Grid lines</caption>
                     <description />
                     <enumerationValues>
-                        <enumerationValue key="basic">Basic</enumerationValue>
-                        <enumerationValue key="advanced">Advanced</enumerationValue>
-                        <enumerationValue key="developer">Developer</enumerationValue>
+                        <enumerationValue key="none">None</enumerationValue>
+                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
+                        <enumerationValue key="vertical">Vertical</enumerationValue>
+                        <enumerationValue key="both">Both</enumerationValue>
                     </enumerationValues>
                 </property>
+            </propertyGroup>
+            <propertyGroup caption="Visibility">
+                <systemProperty key="Visibility" />
             </propertyGroup>
             <propertyGroup caption="Common">
                 <systemProperty key="Name" />
@@ -228,18 +243,8 @@
                 </property>
             </propertyGroup>
         </propertyGroup>
-        <propertyGroup caption="Theme">
-            <propertyGroup caption="Theme">
-                <property key="gridLines" type="enumeration" defaultValue="none">
-                    <caption>Grid lines</caption>
-                    <description />
-                    <enumerationValues>
-                        <enumerationValue key="none">None</enumerationValue>
-                        <enumerationValue key="horizontal">Horizontal</enumerationValue>
-                        <enumerationValue key="vertical">Vertical</enumerationValue>
-                        <enumerationValue key="both">Both</enumerationValue>
-                    </enumerationValues>
-                </property>
+        <propertyGroup caption="Advanced">
+            <propertyGroup caption="Advanced">
                 <property key="enableThemeConfig" type="boolean" defaultValue="false">
                     <caption>Enable theme folder config loading</caption>
                     <description />

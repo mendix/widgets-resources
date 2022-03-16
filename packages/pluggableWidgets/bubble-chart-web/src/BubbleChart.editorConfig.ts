@@ -14,8 +14,6 @@ export function getProperties(
     defaultProperties: Properties,
     platform: "web" | "desktop"
 ): Properties {
-    const showAdvancedOptions = values.developerMode !== "basic";
-
     values.lines.forEach((line, index) => {
         // Series properties
         if (line.dataSet === "static") {
@@ -38,7 +36,7 @@ export function getProperties(
                 "staticTooltipHoverText"
             ]);
         }
-        if (!showAdvancedOptions) {
+        if (!values.enableAdvancedOptions && platform === "web") {
             hidePropertyIn(defaultProperties, values, "lines", index, "customSeriesOptions");
         }
         if (line.autosize) {
@@ -47,13 +45,16 @@ export function getProperties(
     });
 
     if (platform === "web") {
-        hidePropertyIn(defaultProperties, values, "developerMode");
+        hidePropertiesIn(defaultProperties, values, [
+            "customLayout",
+            "customConfigurations",
+            "enableThemeConfig",
+            "enableDeveloperMode"
+        ]);
 
         transformGroupsIntoTabs(defaultProperties);
     } else {
-        if (!showAdvancedOptions) {
-            hidePropertiesIn(defaultProperties, values, ["customLayout", "customConfigurations", "enableThemeConfig"]);
-        }
+        hidePropertyIn(defaultProperties, values, "enableAdvancedOptions");
     }
     return defaultProperties;
 }
