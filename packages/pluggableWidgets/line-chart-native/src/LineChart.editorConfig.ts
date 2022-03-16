@@ -1,6 +1,18 @@
-import { hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps, hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
+
+import lineChartSvgDark from "./assets/LineChart.dark.svg";
+import lineChartSvgLight from "./assets/LineChart.light.svg";
 
 import { LineChartPreviewProps } from "../typings/LineChartProps";
+
+export function getPreview(_: LineChartPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    return {
+        type: "Image",
+        document: decodeURIComponent(
+            (isDarkMode ? lineChartSvgDark : lineChartSvgLight).replace("data:image/svg+xml,", "")
+        )
+    };
+}
 
 export function getProperties(values: LineChartPreviewProps, defaultProperties: Properties): Properties {
     values.lines.forEach((lines, index) => {
