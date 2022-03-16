@@ -1,6 +1,27 @@
-import { hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
+import { StructurePreviewProps, hideNestedPropertiesIn, Problem, Properties } from "@mendix/piw-utils-internal";
+
+import barChartGroupedSvgDark from "./assets/BarChart.Grouped.dark.svg";
+import barChartGroupedSvgLight from "./assets/BarChart.Grouped.light.svg";
+import barChartStackedSvgDark from "./assets/BarChart.Stacked.dark.svg";
+import barChartStackedSvgLight from "./assets/BarChart.Stacked.light.svg";
 
 import { BarChartPreviewProps } from "../typings/BarChartProps";
+
+export function getPreview(values: BarChartPreviewProps, isDarkMode: boolean): StructurePreviewProps {
+    return {
+        type: "Image",
+        document: decodeURIComponent(
+            (values.presentation === "grouped"
+                ? isDarkMode
+                    ? barChartGroupedSvgDark
+                    : barChartGroupedSvgLight
+                : isDarkMode
+                ? barChartStackedSvgDark
+                : barChartStackedSvgLight
+            ).replace("data:image/svg+xml,", "")
+        )
+    };
+}
 
 export function getProperties(values: BarChartPreviewProps, defaultProperties: Properties): Properties {
     values.barSeries.forEach((series, index) => {
