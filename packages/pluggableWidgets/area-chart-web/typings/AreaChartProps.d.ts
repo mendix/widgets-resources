@@ -37,24 +37,22 @@ export interface SeriesType {
     staticYAttribute?: ListAttributeValue<string | Date | Big>;
     dynamicYAttribute?: ListAttributeValue<string | Date | Big>;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
+    staticTooltipHoverText?: ListExpressionValue<string>;
+    dynamicTooltipHoverText?: ListExpressionValue<string>;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor?: DynamicValue<string>;
     markerColor?: DynamicValue<string>;
     fillcolor?: DynamicValue<string>;
     onClickAction?: ActionValue;
-    staticTooltipHoverText?: ListExpressionValue<string>;
-    dynamicTooltipHoverText?: ListExpressionValue<string>;
+    customSeriesOptions: string;
 }
 
-export type DeveloperModeEnum = "basic" | "advanced" | "developer";
+export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export type WidthUnitEnum = "percentage" | "pixels";
 
 export type HeightUnitEnum = "percentageOfWidth" | "pixels" | "percentageOfParent";
-
-export type GridLinesEnum = "none" | "horizontal" | "vertical" | "both";
 
 export interface SeriesPreviewType {
     dataSet: DataSetEnum;
@@ -68,15 +66,15 @@ export interface SeriesPreviewType {
     staticYAttribute: string;
     dynamicYAttribute: string;
     aggregationType: AggregationTypeEnum;
-    customSeriesOptions: string;
+    staticTooltipHoverText: string;
+    dynamicTooltipHoverText: string;
     interpolation: InterpolationEnum;
     lineStyle: LineStyleEnum;
     lineColor: string;
     markerColor: string;
     fillcolor: string;
     onClickAction: {} | null;
-    staticTooltipHoverText: string;
-    dynamicTooltipHoverText: string;
+    customSeriesOptions: string;
 }
 
 export interface AreaChartContainerProps {
@@ -85,15 +83,16 @@ export interface AreaChartContainerProps {
     style?: CSSProperties;
     tabIndex?: number;
     series: SeriesType[];
-    showLegend: boolean;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
     xAxisLabel?: DynamicValue<string>;
     yAxisLabel?: DynamicValue<string>;
-    developerMode: DeveloperModeEnum;
+    showLegend: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number;
     heightUnit: HeightUnitEnum;
     height: number;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
@@ -105,15 +104,16 @@ export interface AreaChartPreviewProps {
     styleObject?: CSSProperties;
     readOnly: boolean;
     series: SeriesPreviewType[];
-    showLegend: boolean;
+    enableAdvancedOptions: boolean;
+    enableDeveloperMode: boolean;
     xAxisLabel: string;
     yAxisLabel: string;
-    developerMode: DeveloperModeEnum;
+    showLegend: boolean;
+    gridLines: GridLinesEnum;
     widthUnit: WidthUnitEnum;
     width: number | null;
     heightUnit: HeightUnitEnum;
     height: number | null;
-    gridLines: GridLinesEnum;
     enableThemeConfig: boolean;
     customLayout: string;
     customConfigurations: string;
