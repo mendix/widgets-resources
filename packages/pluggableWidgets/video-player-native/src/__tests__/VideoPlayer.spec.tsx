@@ -1,7 +1,7 @@
 import { dynamicValue } from "@mendix/piw-utils-internal";
 import { createElement } from "react";
-import { Text, View } from "react-native";
-import { fireEvent, render } from "react-native-testing-library";
+import { Modal, Text, View } from "react-native";
+import { act, fireEvent, render, waitFor } from "@testing-library/react-native";
 import { VideoProperties } from "react-native-video";
 
 import { VideoPlayer } from "../VideoPlayer";
@@ -24,7 +24,7 @@ describe("VideoPlayer", () => {
             autoStart: false,
             muted: false,
             loop: false,
-            showControls: false,
+            showControls: true,
             aspectRatio: false
         };
     });
@@ -43,7 +43,7 @@ describe("VideoPlayer", () => {
         expect(props.paused).toBe(true);
         expect(props.muted).toBe(false);
         expect(props.repeat).toBe(false);
-        expect(props.controls).toBe(false);
+        expect(props.controls).toBe(true);
         expect(props.style).toEqual({ height: 0 });
     });
 
@@ -87,5 +87,35 @@ describe("VideoPlayer", () => {
 
         expect(component.UNSAFE_getByType(Text).props.style).toEqual({ color: "white" });
         expect(component.UNSAFE_getByType(Text).props.children).toEqual("The video failed to load");
+    });
+
+    describe("VideoPlayerAndroid", () => {
+        beforeAll(() => {
+            jest.mock("react-native/Libraries/Utilities/Platform", () => ({
+                OS: "android",
+                select: jest.fn(dict => dict.android)
+            }));
+        });
+        it("render video with controls", () => {
+            const component = render(<VideoPlayer {...defaultProps} />);
+            expect(component).toMatchSnapshot();
+        });
+        it("render video without controls if showControls is set to false", () => {
+            const component = render(<VideoPlayer {...defaultProps} showControls={false} />);
+            expect(component).toMatchSnapshot();
+        });
+
+        it("show fullscreen when press fullscreen icon-- android", async () => {
+            const component = render(<VideoPlayer {...defaultProps} />);
+            const fullScreenBtn = component.getByTestId("btn-fullscreen");
+            await act(async () => {
+                fireEvent.press(fullScreenBtn);
+                await waitFor(() => {
+                    component.getByTestId("btn-fullscreen-exit");
+                    const modal = component.UNSAFE_getByType(Modal);
+                    expect(modal.props.visible).toBe(true);
+                });
+            });
+        });
     });
 });
