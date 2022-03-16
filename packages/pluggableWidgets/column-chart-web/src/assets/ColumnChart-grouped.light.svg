@@ -1,0 +1,24 @@
+<svg width="275" height="225" viewBox="0 0 275 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="1" y1="0.5" x2="275" y2="0.5" stroke="#D9DBDD"/>
+<line x1="1" y1="32.4286" x2="275" y2="32.4286" stroke="#D9DBDD"/>
+<line x1="1" y1="64.3571" x2="275" y2="64.3571" stroke="#D9DBDD"/>
+<line x1="1" y1="96.2857" x2="275" y2="96.2857" stroke="#D9DBDD"/>
+<line x1="1" y1="128.214" x2="275" y2="128.214" stroke="#D9DBDD"/>
+<line x1="1" y1="160.143" x2="275" y2="160.143" stroke="#D9DBDD"/>
+<line x1="1" y1="192.071" x2="275" y2="192.071" stroke="#D9DBDD"/>
+<line x1="1" y1="224" x2="275" y2="224" stroke="#D9DBDD"/>
+<line x1="0.5" y1="224.5" x2="0.5" stroke="#D9DBDD"/>
+<line x1="274.5" y1="224.5" x2="274.5" stroke="#D9DBDD"/>
+<rect width="58.5" height="64" transform="matrix(-1 0 0 1 67.5 33)" fill="#2DBAFC"/>
+<rect width="58.5" height="75" transform="matrix(-1 0 0 1 67.5 98)" fill="#F2B42A"/>
+<rect width="58.5" height="50" transform="matrix(-1 0 0 1 67.5 174)" fill="#264AE5"/>
+<rect width="58.5" height="75" transform="matrix(-1 0 0 1 134 72)" fill="#2DBAFC"/>
+<rect width="58.5" height="25" transform="matrix(-1 0 0 1 134 148)" fill="#F2B42A"/>
+<rect width="58.5" height="50" transform="matrix(-1 0 0 1 134 174)" fill="#264AE5"/>
+<rect width="58.5" height="65" transform="matrix(-1 0 0 1 200.5 17)" fill="#2DBAFC"/>
+<rect width="58.5" height="50" transform="matrix(-1 0 0 1 200.5 83)" fill="#F2B42A"/>
+<rect width="58.5" height="90" transform="matrix(-1 0 0 1 200.5 134)" fill="#264AE5"/>
+<rect width="58.5" height="75" transform="matrix(-1 0 0 1 267 7)" fill="#2DBAFC"/>
+<rect width="58.5" height="100" transform="matrix(-1 0 0 1 267 83)" fill="#F2B42A"/>
+<rect width="58.5" height="40" transform="matrix(-1 0 0 1 267 184)" fill="#264AE5"/>
+</svg>

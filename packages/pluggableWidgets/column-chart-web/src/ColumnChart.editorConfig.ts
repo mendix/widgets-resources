@@ -1,4 +1,4 @@
-import { ColumnChartPreviewProps } from "../typings/ColumnChartProps";
+import { ColumnChartPreviewProps, BarmodeEnum } from "../typings/ColumnChartProps";
 import {
     hideNestedPropertiesIn,
     hidePropertiesIn,
@@ -6,8 +6,20 @@ import {
     Problem,
     Properties,
     StructurePreviewProps,
-    transformGroupsIntoTabs
+    transformGroupsIntoTabs,
+    ImageProps,
+    ContainerProps
 } from "@mendix/piw-utils-internal";
+
+import ColumnChartGroupedDark from "./assets/ColumnChart-grouped.dark.svg";
+import ColumnChartGroupedLight from "./assets/ColumnChart-grouped.light.svg";
+import ColumnChartGroupedLegendDark from "./assets/ColumnChart-grouped-legend.dark.svg";
+import ColumnChartGroupedLegendLight from "./assets/ColumnChart-grouped-legend.light.svg";
+
+import ColumnChartStackedDark from "./assets/ColumnChart-stacked.dark.svg";
+import ColumnChartStackedLight from "./assets/ColumnChart-stacked.light.svg";
+import ColumnChartStackedLegendDark from "./assets/ColumnChart-stacked-legend.dark.svg";
+import ColumnChartStackedLegendLight from "./assets/ColumnChart-stacked-legend.light.svg";
 
 export function getProperties(
     values: ColumnChartPreviewProps,
@@ -57,8 +69,46 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(_values: ColumnChartPreviewProps): StructurePreviewProps | null {
-    return null;
+export function getPreview(values: ColumnChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const items = {
+        group: {
+            dark: { structure: ColumnChartGroupedDark, legend: ColumnChartGroupedLegendDark },
+            light: { structure: ColumnChartGroupedLight, legend: ColumnChartGroupedLegendLight }
+        },
+        stack: {
+            dark: { structure: ColumnChartStackedDark, legend: ColumnChartStackedLegendDark },
+            light: { structure: ColumnChartStackedLight, legend: ColumnChartStackedLegendLight }
+        }
+    };
+
+    const getImage = (barMode: BarmodeEnum, type: "structure" | "legend") => {
+        const colorMode = isDarkMode ? "dark" : "light";
+        return items[barMode][colorMode][type];
+    };
+
+    const chartImage = {
+        type: "Image",
+        document: decodeURIComponent(getImage(values.barmode, "structure").replace("data:image/svg+xml,", "")),
+        width: 375
+    } as ImageProps;
+
+    const legendImage = {
+        type: "Image",
+        document: decodeURIComponent(getImage(values.barmode, "legend").replace("data:image/svg+xml,", "")),
+        width: 85
+    } as ImageProps;
+
+    const filler = {
+        type: "Container",
+        grow: 1,
+        children: []
+    } as ContainerProps;
+
+    return {
+        type: "RowLayout",
+        columnSize: "fixed",
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+    };
 }
 
 export function check(values: ColumnChartPreviewProps): Problem[] {
