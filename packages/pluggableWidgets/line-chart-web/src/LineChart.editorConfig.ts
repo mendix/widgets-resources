@@ -5,9 +5,16 @@ import {
     Problem,
     Properties,
     StructurePreviewProps,
-    transformGroupsIntoTabs
+    transformGroupsIntoTabs,
+    ImageProps,
+    ContainerProps
 } from "@mendix/piw-utils-internal";
 import { LineChartPreviewProps } from "../typings/LineChartProps";
+
+import LineChartDark from "./assets/LineChart.dark.svg";
+import LineChartLight from "./assets/LineChart.light.svg";
+import LineChartLegendDark from "./assets/LineChart-legend.dark.svg";
+import LineChartLegendLight from "./assets/LineChart-legend.light.svg";
 
 export function getProperties(
     values: LineChartPreviewProps,
@@ -60,8 +67,40 @@ export function getProperties(
     return defaultProperties;
 }
 
-export function getPreview(_values: LineChartPreviewProps): StructurePreviewProps | null {
-    return null;
+export function getPreview(values: LineChartPreviewProps, isDarkMode: boolean): StructurePreviewProps | null {
+    const items = {
+        dark: { structure: LineChartDark, legend: LineChartLegendDark },
+        light: { structure: LineChartLight, legend: LineChartLegendLight }
+    };
+
+    const getImage = (type: "structure" | "legend") => {
+        const colorMode = isDarkMode ? "dark" : "light";
+        return items[colorMode][type];
+    };
+
+    const chartImage = {
+        type: "Image",
+        document: decodeURIComponent(getImage("structure").replace("data:image/svg+xml,", "")),
+        width: 375
+    } as ImageProps;
+
+    const legendImage = {
+        type: "Image",
+        document: decodeURIComponent(getImage("legend").replace("data:image/svg+xml,", "")),
+        width: 57
+    } as ImageProps;
+
+    const filler = {
+        type: "Container",
+        grow: 1,
+        children: []
+    } as ContainerProps;
+
+    return {
+        type: "RowLayout",
+        columnSize: "fixed",
+        children: values.showLegend ? [chartImage, legendImage, filler] : [chartImage, filler]
+    };
 }
 
 export function check(values: LineChartPreviewProps): Problem[] {
